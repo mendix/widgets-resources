@@ -1,0 +1,45 @@
+/*
+* Mendix Documentation
+* Special styles for presenting components
+*/
+
+
+/*
+* Alerts
+*
+* Default Bootstrap Alert boxes. Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages
+*/
+
+.alert {
+	@include border-radius(4px);
+	margin-top: 0; // want to align it with padding of a page
+	padding: 15px;
+	border: 0;
+}
+.alert-bordered {
+	border: 1px solid;
+}
+.alert-success { 
+	border-color: $color-alert-border-success;
+	background-color: $color-alert-bg-success; 
+	color: $color-alert-text-success;
+}
+.alert-info { 
+	border-color: $color-alert-border-info;
+	background-color: $color-alert-bg-info;	
+	color: $color-alert-text-info; 
+}
+.alert-warning { 
+	border-color: $color-alert-border-warning; 
+	background-color: $color-alert-bg-warning;
+	color: $color-alert-text-warning;
+}
+.alert-danger { 
+	border-color: $color-alert-border-danger;
+	background-color: $color-alert-bg-danger; 
+	color: $color-alert-text-danger;
+}
+.has-error .alert {
+	margin-top: 8px;
+	margin-bottom: 0;
+}

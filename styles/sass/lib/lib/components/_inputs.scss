@@ -1,0 +1,99 @@
+/*
+* Mendix Documentation
+* Special styles for presenting components
+*/
+
+
+/*
+* Inputs
+*
+* Default input fields
+*/
+.form-control {
+	@include box-shadow(none);
+	@include transition(border-color ease-in-out .15s,box-shadow ease-in-out .15s);
+	display: block;
+	padding: 7px 8px;
+	width: 100%;
+	height: $input-height;
+	border: 1px solid $color-input-border;
+	border-radius: 4px;
+	background-color: $color-input-bg;
+	background-image: none;
+	color: $color-input-text;
+	vertical-align: middle;
+	font-size: $font-size-base;
+	line-height: $line-height-base;
+}
+.form-control:focus {
+	border-color: $color-input-border-focus;
+	background-color: $color-input-bg-focus;
+	outline: 0;
+}
+textarea.form-control {
+	height: auto;
+}
+.form-control-static {
+	overflow:  hidden;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	margin-bottom: 0;
+}
+/* Not editable textarea, textarea will be rendered as a label */
+.mx-textarea label {
+	height: auto;
+}
+/* Input and textarea get properly aligned */
+.form-group div[class*='textBox'] > label,
+.form-group div[class*='textArea'] > label,
+.form-group div[class*='datePicker'] > label {
+	@extend .form-control-static;
+}
+
+
+/*
+* Inputs Readonly
+*
+* Default input fields
+*/
+.readonly-input {
+	@extend .form-control;
+	height: auto;
+	min-height: 33px;
+	background-color: $color-input-bg-disabled !important;
+	label { 
+		padding: 0 !important;
+	}
+	textarea {
+		display: none;
+	}
+}
+.readonly-input-alert label {
+	color: $color-danger;
+}
+/* Needed for IE8, IE8 doesn't respect border-box and min-height */
+.dj_ie8 .readonly-input {
+	min-height: auto;
+}
+
+
+/*
+* Inputs File Upload
+*
+* Default input fields
+*/
+.mx-fileinput {
+	.mx-wrapped-label {
+		display: inline-block;
+		width: 200px;
+	}
+	/* File input widget hover fix */
+	.mx-wrapped-form {
+		.mx-wrapped-input {
+			cursor: pointer;
+		}
+		.mx-fileinput-upload-button:hover {
+			background-color: $color-btn-bg-default;
+		}
+	}
+}

@@ -1,0 +1,37 @@
+/*
+* Mendix Documentation
+* Special styles for presenting profilecard building block
+*/
+
+
+/*
+* Dashboard Card
+*
+* 
+*/
+
+.dashboardcard {
+	padding: 20px;
+	margin: 0 0 40px 0;
+	border: 1px solid $color-border-default;
+	background-color: #FFF;
+	border-radius: 3px;
+}
+.dashboardcard-title {
+	margin-top: 0;
+}
+.dashboardcard-subtitle {
+	font-size: 14px;
+	color: $color-text-black-secondary;
+	margin-bottom: 10px;
+}
+.dashboardcard-link {
+	font-size: $font-size-small;
+}
+
+@media only screen and (max-width: 960px) {
+	.dashboardcard {
+		padding: 10px;
+		margin: 0 0 20px 0;
+	}
+}

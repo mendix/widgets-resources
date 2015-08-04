@@ -1,0 +1,221 @@
+/*
+* Mendix Documentation
+* Special styles for presenting components
+*/
+
+
+/*
+* Buttons
+*
+* Default Bootstrap and Mendix Buttons
+*/
+
+.btn,
+.mx-button {
+
+    /* MXID / Bootstrap values for when used in non-mendix apps */
+    display: inline-block;
+    margin-bottom: 0;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+
+    @include font(normal);
+    @include border-radius(4px);
+    @include transition-property(all);
+    @include transition-duration(0.2s);
+    @include transition-timing-function(ease-in-out);
+    @include box-shadow(none);
+    padding: round(0.6 * $font-size-base) round(1 * $font-size-base);
+    background-color: $color-btn-bg-default;
+    color: $color-btn-text-default;
+    text-shadow: none;
+    font-size: $font-btn-size;
+    text-transform: $font-btn-transform;
+    line-height: $line-height-base;
+
+    &:hover,
+    &:focus,
+    &:active {
+        @include box-shadow(none);
+        outline: none;
+    }
+}
+
+// Mendix button link
+.mx-link {
+    padding: 0;
+    color: $color-link;
+
+    a {
+        color: inherit;
+    }
+}
+
+// Images in buttons
+.btn,
+.mx-button,
+.mx-link {
+    img {
+        margin-top: -1px;
+        //height: auto; // MXUI override who set the height on 16px default
+        height: $font-size-base + 4px;
+    }
+}
+
+// IE 8 only (mxui overwrites)
+.dj_ie8 .mx-link {
+    margin-right: 0;
+    white-space: normal;
+}
+
+
+/*
+* Buttons Alternate Style
+*
+* 
+*/
+.btn-default {
+    @include button-variant($color-btn-text-default, $color-btn-bg-default, $color-btn-border-default);
+}
+.btn-primary {
+    @include button-variant($color-btn-text-primary, $color-btn-bg-primary, $color-btn-border-primary);
+}
+.btn-inverse {
+    @include button-variant($color-btn-text-inverse, $color-btn-bg-inverse, $color-btn-border-inverse);
+    &:hover,
+    &:focus,
+    &:active,
+    &.active,
+    .open > &.dropdown-toggle {
+        background-color: lighten($color-btn-bg-inverse, 10%);
+        border-color: lighten($color-btn-bg-inverse, 10%);
+    }
+}
+// Success appears as green
+.btn-success {
+    @include button-variant($color-btn-text-success, $color-btn-bg-success, $color-btn-border-success);
+}
+// Info appears as blue-green
+.btn-info {
+    @include button-variant($color-btn-text-info, $color-btn-bg-info, $color-btn-border-info);
+}
+// Warning appears as orange
+.btn-warning {
+    @include button-variant($color-btn-text-warning, $color-btn-bg-warning, $color-btn-border-warning);
+}
+// Danger and error appear as red
+.btn-danger {
+    @include button-variant($color-btn-text-danger, $color-btn-bg-danger, $color-btn-border-danger);
+}
+.btn-white {
+    @include button-variant($color-btn-text-white, $color-btn-bg-white, $color-btn-border-white);
+}
+// Button as link but with padding 
+.btn-link {
+    border: 0;
+    background-color: transparent;
+    color: $color-link;
+
+    &:hover {
+        background-color: transparent;
+        color: $color-link-hover;
+    }
+}
+/* Buttons appear disabled */
+.btn-disabled {
+    @include opacity(.65);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+// Transparent
+.btn-transparent,
+.btn-transparent:hover,
+.btn-transparent:focus {
+    border-style: none;
+    background-color: transparent;
+}
+
+
+/*
+* Buttons Sizes
+*
+* Combined with Bootstrap
+*/
+.btn-lg {
+    font-size: $font-size-large;
+    padding: round(0.6 * $font-size-large) round(1 * $font-size-large);  // only for buttons
+    img {
+        height: $font-size-base + 4px;
+    }
+}
+.btn-sm {
+    font-size: $font-size-small;
+    padding: round(0.6 * $font-size-small) round(1 * $font-size-small); 
+    img {
+        height: $font-size-small + 4px;
+    }
+}
+
+
+/*
+* Buttons Image
+*
+* Specific styling for images in buttons
+*/
+.btn-image {
+    padding: 0;
+    border-style: none;
+    background-color: transparent;
+    vertical-align: middle; 
+
+    img {
+        height: auto; // Image set height
+        display: block; // or else the button doesn't get a width 
+    }
+
+    &:hover,
+    &:focus {
+        background-color: transparent;
+    }
+}
+
+
+/*
+* Buttons Position
+*
+* 
+*/
+.btn-right {
+    float: right;
+}
+.btn-left {
+    float: left;
+}
+
+
+/*
+* Buttons Attached
+*
+* Helper classes for buttons spacing
+*/
+.btn-attached-right {
+    margin-left: 5px;
+}
+.btn-attached-left {
+    margin-right: 5px;
+}
+.btn-attached-bottom {
+    margin-top: 5px;
+}
+.btn-attached-top {
+    margin-bottom: 5px;
+}

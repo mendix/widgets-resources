@@ -1,0 +1,71 @@
+/*
+* Mendix Documentation
+* Special styles for presenting mobile components
+*/
+
+
+/*
+* Header
+*
+* Default Mendix Header for Mobile 
+*/
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+	.mx-header .mx-header-right { right: 63px !important; }
+}
+
+body .mx-header {
+	padding: 0;
+	height: $m-height-header;
+	color: $m-color-header-text;
+	border-bottom: 1px solid $color-border-default;
+	background-color: $m-color-header-bg;
+	display: table;
+	width: 100%;
+
+	.mx-header-center {
+		display: table-cell;
+		width: 100%;
+		text-align: center;
+	}
+	.mx-header-left,
+	.mx-header-right {	
+		display: table;	
+		width: 25%;
+		top: 0;
+		position: absolute;
+		padding: 0 8px;
+		height: $m-height-header;
+		.mx-placeholder {
+			display: table-cell;
+			vertical-align: middle;
+		}		
+	}
+
+	.mx-header-left {	
+		left: 0;
+		text-align: left;
+	}
+	.mx-header-right {	
+		right: 0;
+		text-align: right;
+	}
+	.mx-link {
+		color: $m-color-header-link;
+	}
+
+	// Header Title
+	.mx-title {
+		margin: 0;
+		color: $m-color-header-text;
+		font-size: 16px;
+		line-height: 44px;
+	
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.btn-image.glyphicon {
+		font-size: 21px;
+ 	}
+}

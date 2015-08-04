@@ -1,0 +1,59 @@
+/*
+* Mendix Documentation
+* Special styles for presenting components
+*/
+
+
+/*
+* Navigation List
+*
+* Default Mendix Navigation List Widget
+*/
+.mx-navigationlist {
+	padding: 0;
+	margin: 0;
+	
+	.mx-navigationlist-item {
+		padding: 10px;
+		&:hover {
+			background-color: #FFF!important;
+		}
+	}
+}
+
+
+/*
+* Navigation List Hover
+*
+* Default Mendix Navigation List Widget with hover
+*/
+.navigationlist-hover.mx-navigationlist {
+	.mx-navigationlist-item {
+		&:hover,
+		&:active {
+			background-color: $color-grid-bg-hover !important;
+		}
+	}
+}
+
+
+/*
+* Navigation List Lined
+*
+* Default Mendix Navigation List Widget border top between navigation list items
+*/
+.navigationlist-lined.mx-navigationlist {
+	.mx-navigationlist-item {
+		border-top: 1px solid $color-grid-border;
+		border-right: none;
+		border-left: none;
+
+		&:first-child {
+			@include border-radius(0);
+		}
+		&:last-child {
+			@include border-radius(0);
+			border-bottom: 1px solid $color-grid-border;
+		}
+	}
+}

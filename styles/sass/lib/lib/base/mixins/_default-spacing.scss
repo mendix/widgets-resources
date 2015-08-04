@@ -1,0 +1,79 @@
+@mixin default-spacing ($type: padding, $direction: all, $device: responsive) {
+	@if $device == responsive {
+		@if $direction == all {
+			@media (max-width: $screen-xs-max){
+				#{$type}: $m-default-spacing;
+			}
+			@media (min-width: $screen-sm) {
+				#{$type}: $t-default-spacing;
+			}
+			@media (min-width: $screen-md) {
+				#{$type}: $default-spacing;
+			}
+		} @else if $direction == top {
+			@media (max-width: $screen-xs-max){
+				#{$type}-top: $m-default-spacing-bottom;
+			}
+			@media (min-width: $screen-sm) {
+				#{$type}-top: $t-default-spacing-top;
+			}
+			@media (min-width: $screen-md) {
+				#{$type}-top: $default-spacing-top;
+			}
+		} @else if $direction == right {
+			@media (max-width: $screen-xs-max){
+				#{$type}-right: $m-default-spacing-right;
+			}
+			@media (min-width: $screen-sm) {
+				#{$type}-right: $t-default-spacing-right;
+			}
+			@media (min-width: $screen-md) {
+				#{$type}-right: $default-spacing-right;
+			}
+		} @else if $direction == bottom {
+			@media (max-width: $screen-xs-max){
+				#{$type}-bottom: $m-default-spacing-bottom;
+			}
+			@media (min-width: $screen-sm) {
+				#{$type}-bottom: $t-default-spacing-bottom;
+			}
+			@media (min-width: $screen-md) {
+				#{$type}-bottom: $default-spacing-bottom;
+			}
+		} @else if $direction == left {
+			@media (max-width: $screen-xs-max){
+				#{$type}-left: $m-default-spacing-left;
+			}
+			@media (min-width: $screen-sm) {
+				#{$type}-left: $t-default-spacing-left;
+			}
+			@media (min-width: $screen-md) {
+				#{$type}-left: $default-spacing-left;
+			}
+		}
+	} @else if $device == tablet {
+		@if $direction == all {
+		#{$type}: $t-default-spacing;
+		} @else if $direction == top {
+			#{$type}-top: $t-default-spacing-bottom;
+		} @else if $direction == right {
+			#{$type}-right: $t-default-spacing-right;
+		} @else if $direction == bottom {
+			#{$type}-bottom: $t-default-spacing-bottom;
+		} @else if $direction == left {
+			#{$type}-left: $t-default-spacing-left;
+		}
+	} @else if $device == mobile {
+		@if $direction == all {
+		#{$type}: $m-default-spacing;
+		} @else if $direction == top {
+			#{$type}-top: $m-default-spacing-bottom;
+		} @else if $direction == right {
+			#{$type}-right: $m-default-spacing-right;
+		} @else if $direction == bottom {
+			#{$type}-bottom: $m-default-spacing-bottom;
+		} @else if $direction == left {
+			#{$type}-left: $m-default-spacing-left;
+		}
+	}
+}

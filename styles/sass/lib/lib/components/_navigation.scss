@@ -1,0 +1,404 @@
+/*
+* Mendix Documentation
+* Special styles for presenting components
+*/
+
+
+/*
+* Navigation
+*
+* Default Mendix Navigation Bar
+*/
+.mx-navbar {
+	@include border-radius(0);
+	margin: 0;
+	border-style: none;
+	background-color: $color-navtopbar-bg;
+
+	ul.nav { 
+
+		margin: 0; // weird -margin if screen gets small (bootstrap)
+		/* Navigation item */
+		> li.mx-navbar-item > a {
+			@include font(normal);
+			@include border-radius(0);
+			padding: 15px 20px;
+			color: $color-navtopbar-text;
+			font-size: $font-navtopbar-size;
+			vertical-align: middle;
+
+			/* Dropdown arrow */
+			.caret {
+				border-top-color: $color-navtopbar-text;
+				border-bottom-color: $color-navtopbar-text;
+			}
+
+			&:hover,
+			&:focus,
+			&.active {
+				background-color: $color-navtopbar-bg-hover;
+				color: $color-navtopbar-text-hover;
+				text-decoration: none;
+
+				.caret {
+					border-top-color: $color-navtopbar-text-active;
+					border-bottom-color: $color-navtopbar-text-active;
+				}
+			}
+			&.active {
+            	color: $color-navtopbar-text-active;
+            	background-color: $color-navtopbar-bg-active;
+            }
+
+			/* Dropdown */
+			.mx-navbar-submenu:before {
+				position: absolute;
+				top: -9px;
+				left: 15px;
+				width: 0;
+				height: 0;
+				border-width: 0 9px 9px 9px;
+				border-style: solid;
+				border-color: transparent transparent $color-navtopbar-border transparent;
+				content: "";
+				transform: rotate(360deg);
+				-webkit-transform: rotate(360deg);
+			}
+
+			// Image
+			img {
+				width: 20px; // Default size (so it looks good)
+				height: auto;
+			}
+
+			.glyphicon {
+					vertical-align: middle;
+					font-size: $font-navtopbar-glyph-size;
+					top: -1px;
+				}
+		}
+
+		/* When hovering or the dropdown is open */
+		> .mx-navbar-item > a:hover, 
+		> .mx-navbar-item > a:focus,
+		> .mx-navbar-item.active a,
+		> .mx-navbar-item.open > a, 
+		> .mx-navbar-item.open > a:hover, 
+		> .mx-navbar-item.open > a:focus {
+			background-color: $color-navtopbar-bg-hover;
+			color: $color-navtopbar-text-hover;
+			text-decoration: none;
+
+			.caret {
+				border-top-color: $color-navtopbar-text-hover;
+				border-bottom-color: $color-navtopbar-text-hover;
+			}
+		}
+		> .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
+			background-color: $color-navtopbar-sub-bg-active;
+			color: $color-navtopbar-sub-text-active;
+
+			.caret {
+				border-top-color: $color-navtopbar-sub-text-active;
+				border-bottom-color: $color-navtopbar-sub-text-active;
+			}
+        }
+	}
+
+	@media (max-width: $screen-sm) {
+		ul.nav > li.mx-navbar-item > a {
+			padding: 10px 20px;
+		}
+		.mx-navbar-item.open .dropdown-menu {
+			background-color: $color-navtopbar-sub-bg;
+			border-radius: 0;
+			padding: 0;
+			
+			> li.mx-navbar-subitem > a {
+				@include font(normal);
+				padding: 10px 20px;
+				border-radius: 0;
+				color: $color-navtopbar-sub-text;
+				font-size: $font-navtopbar-sub-size;
+
+				&:hover,
+				&:focus {
+					color: $color-navtopbar-sub-text-hover;
+					background-color: $color-navtopbar-sub-bg-hover;
+				}
+
+				&.active {
+					color: $color-navtopbar-sub-text-active;
+					background-color: $color-navtopbar-sub-bg-active;
+				}
+			}
+		}
+	}
+
+	/* remove focus */
+	&:focus {
+		outline: 0;
+	}
+}
+
+
+/*
+* Navigation
+*
+* Default Mendix Navigation Tree
+*/
+.mx-navigationtree {
+	background-color: $color-navsidebar-bg;
+
+	/* Every navigation item */
+	.navbar-inner ul {
+		margin: 0;
+		padding-left: 0;
+
+		li {
+			padding: 0;
+			border-style: none;
+
+			a {
+				@include font(normal);
+				display: block;
+				padding: 15px 20px 15px 16px;
+				border-bottom: 1px solid $color-navsidebar-border;
+				border-radius: 0;
+				color: $color-navsidebar-text;
+				text-shadow: none;
+				font-size: $font-navsidebar-size;
+				vertical-align: middle;
+				background-color: $color-navsidebar-bg;
+				border-left: 4px solid transparent;
+
+				.caret {
+					border-top-color: $color-navsidebar-text;
+					border-bottom-color: $color-navsidebar-text;
+				}
+
+				img {
+					margin-right: 4px;
+					width: 20px; // Default size (so it looks good)
+					height: auto;
+				}
+
+				.glyphicon {
+					vertical-align: middle;
+					font-size: $font-navsidebar-glyph-size;
+					top: -1px;
+				}
+			}
+
+			a:hover,
+			a:focus,
+			a.active {
+				background-color: $color-navsidebar-bg-hover;
+				color: $color-navsidebar-text-hover;
+				text-decoration: none;
+
+				.caret {
+					border-top-color: $color-navsidebar-text-active;
+					border-bottom-color: $color-navsidebar-text-active;
+				}
+			}
+
+            a.active {
+            	border-left-color: $color-navsidebar-text-active;
+            	color: $color-navsidebar-text-active;
+            	background-color: $color-navsidebar-bg-active;
+            }
+		}
+	}
+
+	/* Sub navigation item specific */
+	li.mx-navigationtree-has-items {
+		> ul {
+			margin: 0;
+			padding-left: 0;
+			background-color: $color-navsidebar-sub-bg;
+
+			li {
+				margin: 0;
+				padding: 0;
+				a {
+					@include font(normal);
+					color: $color-navsidebar-sub-text;
+					font-size: $font-navsidebar-sub-size;
+					background-color: $color-navsidebar-sub-bg;
+					padding: 12px 20px 12px 25px;
+					border: 0;
+
+					&:hover,
+					&:focus,
+					&.active {
+						color: $color-navsidebar-sub-text-hover;
+						background-color: $color-navsidebar-sub-bg-hover;
+					}
+					&.active {
+		            	border: 0;
+		            	color: $color-navsidebar-sub-text-active;
+		            	background-color: $color-navsidebar-sub-bg-active;
+		            }
+				}
+			}
+		}
+	}
+
+	/* remove focus */
+	&:focus {
+		outline: 0;
+	}
+}
+
+
+/* Content Centerd text and icons */
+
+.mx-navigationtree.nav-content-center-text-icons {
+	.navbar-inner ul {
+		a {
+			text-align: center;
+			.glyphicon {
+				display: block;
+  				margin-bottom: 5px;
+			}
+		}
+	}
+}
+
+/* Content Centerd icons only */
+
+.mx-navigationtree.nav-content-center {
+	.navbar-inner ul {
+		a {
+			text-align: center;
+			.glyphicon {
+
+			}
+		}
+	}
+}
+
+
+/*
+* Navigation
+*
+* Default Mendix Simple Menu Bar
+*/
+.mx-menubar {
+	padding: 0;
+	background-color: $color-navsidebar-bg;
+	ul.mx-menubar-list {
+		width: 100%;
+		height: 50px;
+		table-layout: fixed;
+		li.mx-menubar-item {
+			margin: 0;
+			width: 100%%;
+			display: inline-block;
+			a {
+				@include font(normal);
+				border-radius: 0;
+				color: $color-navsidebar-text;
+				font-size: $font-navsidebar-sub-size;
+				padding: 0 8px;
+				text-align: center;
+				line-height: 50px;
+				overflow: hidden;
+				display: block;
+				vertical-align: middle;
+
+				.glyphicon {
+					vertical-align: middle;
+					font-size: $font-navsidebar-glyph-size;
+					top: -1px;
+				}
+			}
+			a:hover,
+			a:focus,			
+			&:hover a,
+			&:focus a,
+			&.active a {
+				background-color: $color-navsidebar-bg-hover;
+				color: $color-navsidebar-text-hover;
+				text-decoration: none;
+			}
+			&.active a {
+            	color: $color-navsidebar-text-active;
+            	background-color: $color-navsidebar-bg-active;
+            }
+		}
+	}
+
+	/* Two menu items */
+	&.menubar-col-6 ul.mx-menubar-list li.mx-menubar-item {
+		width: 50%;
+	}
+	/* Three menu items */
+	&.menubar-col-4 ul.mx-menubar-list li.mx-menubar-item {
+		width: 33%;
+	}
+	/* Four menu items */
+	&.menubar-col-3 ul.mx-menubar-list li.mx-menubar-item {
+		width: 25%;
+	}
+	/* Five menu items */
+	&.menubar-col-2 ul.mx-menubar-list li.mx-menubar-item {
+		width: 20%;
+	}
+
+	/* remove focus */
+	&:focus {
+		outline: 0;
+	}
+}
+
+/* text and icons centerd */
+.mx-menubar.bottom-nav-text-icons {
+	ul.mx-menubar-list {
+		li.mx-menubar-item {
+			a {
+				line-height: normal;
+		  		padding: 8px 8px 6px 8px;
+				.glyphicon {
+					display: block;
+		  			font-size: 18px;
+		  			margin-bottom: 4px;
+				}
+			}
+		}
+	}
+
+}
+/* Vertical variation specifics */
+.mx-menubar-vertical {
+	background-color: $color-navtopbar-bg;
+	ul.mx-menubar-list {
+		li.mx-menubar-item {
+			a {
+				color: $color-navtopbar-text;
+				font-size: $font-navtopbar-size;
+				border-bottom: 1px solid $color-navtopbar-border;
+
+				.glyphicon {
+					vertical-align: middle;
+					font-size: $font-navtopbar-glyph-size;
+					top: -1px;
+				}
+
+				&:hover,
+				&:focus,
+				&.active {
+					background-color: $color-navtopbar-bg-hover;
+					color: $color-navtopbar-text-hover;
+					text-decoration: none;
+				}
+				&.active {
+	            	color: $color-navtopbar-text-active;
+	            	background-color: $color-navtopbar-bg-active;
+	            }
+			}
+		}
+	}
+}
+

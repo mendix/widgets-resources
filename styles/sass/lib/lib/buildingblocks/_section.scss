@@ -1,0 +1,28 @@
+/*
+* Mendix Documentation
+* Special styles for presenting profilecard building block
+*/
+
+
+/*
+* Section
+*
+* Arrange spacing
+*/
+
+.section {
+	padding: $m-padding-section;
+
+	@media (min-width: $screen-sm) {
+		padding: $t-padding-section;
+	}
+	@media (min-width: $screen-md) {
+		padding: $padding-section;
+	}
+}
+.profile-phone .section {
+	padding: $m-padding-section;
+}
+.profile-tablet .section {
+	padding: $t-padding-section;
+}

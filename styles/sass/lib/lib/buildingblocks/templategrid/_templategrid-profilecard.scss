@@ -1,0 +1,48 @@
+/*
+* Mendix Documentation
+* Special styles for presenting profilecard building block
+*/
+
+
+/*
+* Templategrid Profile Card
+*
+* Profile card styled for templategrid
+*/
+
+.templategrid-profilecard {
+	padding: 20px;
+	border: 1px solid $color-border-default;
+	background-color: #FFF;
+	border-radius: 3px;
+	.templategrid-profilecard-contentwrapper {
+		width: auto;
+	}
+	.templategrid-profilecard-imgwrapper {
+		width: 150px;
+	}
+	.templategrid-profilecard-contentwrapper,
+	.templategrid-profilecard-imgwrapper {
+		display: table-cell;
+		vertical-align: middle;
+	}
+	.templategrid-profilecard-btn {
+		display: block;
+		margin-top: 10px;
+	}
+	.templategrid-profilecard-img {
+		@include border-radius (50%);
+		margin-right: 40px;
+		padding: 4px;
+		border: 2px solid $color-border-default;
+		background-color: #FFF;
+	}
+	.templategrid-profilecard-title {
+		font-size: $font-size-h3;
+		margin-bottom: 0;
+		margin-top: 0;
+	}
+	.templategrid-profilecard-subtitle {
+		color: $color-text-black-secondary;
+	}
+}

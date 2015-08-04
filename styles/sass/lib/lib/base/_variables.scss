@@ -1,0 +1,565 @@
+//== Step 1: 
+//
+//## To get the quickest changes in your theme adjust the basic theme colors defined below.
+
+// Theme Colors
+$color-default: 						#DDD !default;	
+$color-primary: 						#59C2E6 !default;	
+$color-inverse: 						#3D3F41 !default; 
+$color-info: 							#8AD4ED !default;
+$color-success: 						#8CC152 !default;
+$color-warning: 						#F6BB42 !default;
+$color-danger: 							#D9534F !default;
+
+// Gray shades
+$gray-darker:							#222 !default;
+$gray-dark:								#333 !default;
+$gray:									#555 !default;
+$gray-light:							#999 !default;
+$gray-primary:							#DDD !default;
+$gray-lighter:							#eee !default;
+
+// Basic Text colors
+$color-text-black:			            #000 !default;
+$color-text-white:			            #FFF !default;
+
+
+
+//== Step 2: 
+//
+//## Settings for some of the most global styles.
+
+//== Background settings
+// Background color for `<body>` also used as utility class.
+$color-layout-bg:						#FFF !default;
+// Background color for specefic pages like the dashboard also used as utility class.
+$color-layout-bg-secondary:				#EFF4F7 !default;
+
+//== Layout settings
+// Topbar 
+$color-topbar-bg: 						#FFF !default;
+$minimalheight-topbar:					80px !default;
+// Sidebar 
+$color-sidebar-bg: 						$color-inverse !default;
+// Mobile header
+$m-height-header:						44px !default;
+// Background Color
+$m-color-header-bg: 					#FFF !default;
+
+
+//== Basic text settings
+// Base font color and size on '<body>'.
+$font-size-base:        				14px !default;
+$font-color-base:						$color-text-black !default;
+
+// Button Text Size
+$font-btn-size:							12px !default;
+$font-btn-transform:					uppercase !default;
+
+// Global Link Color
+$color-link:            				$color-primary !default;
+$color-link-hover:      				darken($color-link, 15%) !default;
+
+
+//== Global widget settings
+// The default border color used by all widgets.
+$color-border-default:					$gray-primary !default;
+
+
+
+//== Step 3: 
+//
+//## Advanced layout options
+
+$default-spacing-top:					35px !default;
+$default-spacing-right:					40px !default;
+$default-spacing-bottom:				35px !default;
+$default-spacing-left:					40px !default;
+
+$m-default-spacing-top:					10px !default;
+$m-default-spacing-right:				15px !default;
+$m-default-spacing-bottom:				10px !default;
+$m-default-spacing-left:				15px !default;
+
+$t-default-spacing-top:					20px !default;
+$t-default-spacing-right:				30px !default;
+$t-default-spacing-bottom:				20px !default;
+$t-default-spacing-left:				30px !default;
+
+
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+// Font Family					
+$font-family-base:						false !default;//"Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-light:						false !default;//"Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-semibold:					false !default;//"Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-bold:						false !default;//"Helvetica Neue", Helvetica, Arial, sans-serif !default;
+
+// Font Weight
+$font-weight-light:						100 !default;
+$font-weight-normal:					normal !default; 		
+$font-weight-semibold:					500 !default;
+$font-weight-bold:						bold !default; 
+
+$font-weight-headers:					$font-weight-normal !default;
+
+// Font Size
+$font-size-large:       				ceil($font-size-base * 1.25) !default; // ~18px
+$font-size-small:        				ceil($font-size-base * 0.85) !default; // ~12px
+
+// Font Size Header
+$font-size-h1:          				31px !default;
+$font-size-h2:          				26px !default;
+$font-size-h3:          				20px !default;
+$font-size-h4:          				16px !default;
+$font-size-h5:          				$font-size-base !default;
+$font-size-h6:          				11px !default;
+
+// Line Height
+$line-height-base:      				1.428571429 !default;
+
+
+
+//== Color variations
+//
+//## 
+// Text Colors
+$color-text-black-secondary:            lighten($color-text-black, 40%) !default;
+$color-text-black-disabled:				rgba($color-text-black, .26) !default;
+$color-text-black-hint:                 rgba($color-text-black, .26) !default;
+
+$color-text-white-secondary:            rgba($color-text-white, .7) !default;
+$color-text-white-disabled:             rgba($color-text-white,	.3) !default;
+$color-text-white-hint:                 rgba($color-text-white,	.3) !default;
+
+// Color Variations
+$color-default-darker: 					shade($color-default,40) !default;	
+$color-default-dark: 					shade($color-default,26) !default;	
+$color-default-light: 					tint($color-default,40) !default;	
+$color-default-lighter: 				tint($color-default,80) !default;	
+
+$color-inverse-darker: 					shade($color-inverse,40) !default;	
+$color-inverse-dark: 					shade($color-inverse,26) !default;	
+$color-inverse-light: 					tint($color-inverse,40) !default;	
+$color-inverse-lighter: 				tint($color-inverse,80) !default;	
+
+$color-primary-darker: 					shade($color-primary,40) !default;	
+$color-primary-dark: 					shade($color-primary,26) !default;	
+$color-primary-light: 					tint($color-primary,40) !default;	
+$color-primary-lighter: 				tint($color-primary,80) !default;	
+
+$color-info-darker: 					shade($color-info,40) !default;	
+$color-info-dark: 						shade($color-info,26) !default;	
+$color-info-light: 						tint($color-info,40) !default;	
+$color-info-lighter: 					tint($color-info,80) !default;	
+
+$color-success-darker: 					shade($color-success,40) !default;	
+$color-success-dark: 					shade($color-success,26) !default;	
+$color-success-light: 					tint($color-success,40) !default;	
+$color-success-lighter: 				tint($color-success,80) !default;	
+
+$color-warning-darker: 					shade($color-warning,40) !default;	
+$color-warning-dark: 					shade($color-warning,26) !default;	
+$color-warning-light: 					tint($color-warning,40) !default;	
+$color-warning-lighter: 				tint($color-warning,80) !default;	
+
+$color-danger-darker: 					shade($color-danger,40) !default;	
+$color-danger-dark: 					shade($color-danger,26) !default;	
+$color-danger-light: 					tint($color-danger,40) !default;	
+$color-danger-lighter: 					tint($color-danger,80) !default;
+
+
+
+//== Forms
+//
+//##
+
+// Label  
+$color-label:							$color-text-black-secondary !default;		
+$font-weight-label:						$font-weight-normal !default;			 
+
+// Input Color
+$color-input-bg:						#FFF !default;
+$color-input-bg-focus:					#FFF !default;
+$color-input-bg-disabled:				$gray-lighter !default;
+$color-input-text: 						$font-color-base !default;
+$color-input-text-focus:				$color-input-text !default;
+$color-input-text-disabled:				$color-input-text !default;
+$color-input-placeholder-text:			$gray-light !default;
+$color-input-border:					$color-border-default !default;
+$color-input-border-focus:				$color-primary !default;	
+
+// Input Height
+$input-height:							33px !default;
+
+
+
+//== Alerts
+//
+//##
+
+// Background Color
+$color-alert-bg-info: 					$color-info-lighter !default;
+$color-alert-bg-success: 				$color-success-lighter !default;
+$color-alert-bg-warning: 				$color-warning-lighter !default;
+$color-alert-bg-danger: 				$color-danger-lighter !default;
+
+// Text Color
+$color-alert-text-info: 				$color-info-darker !default;
+$color-alert-text-success: 				$color-success-darker !default;
+$color-alert-text-warning: 				$color-warning-darker !default;
+$color-alert-text-danger: 				$color-danger-darker !default;
+
+// Border Color
+$color-alert-border-info: 				$color-info-dark !default;
+$color-alert-border-success: 			$color-success-dark !default;
+$color-alert-border-warning: 			$color-warning-dark !default;
+$color-alert-border-danger: 			$color-danger-dark !default;
+
+
+
+//== Buttons
+//
+//## For each buttons, define text, background and border color.
+
+// Background Color
+$color-btn-bg-default: 					$color-default !default;	
+$color-btn-bg-inverse: 					$color-inverse !default;	
+$color-btn-bg-primary: 					$color-primary !default; 
+$color-btn-bg-info: 					$color-info !default; 
+$color-btn-bg-success: 					$color-success !default; 
+$color-btn-bg-warning: 					$color-warning !default;
+$color-btn-bg-danger: 					$color-danger !default; 	
+$color-btn-bg-white: 					#FFF !default; 
+
+// Text Color
+$color-btn-text-default: 				$color-text-black !default;
+$color-btn-text-inverse: 				#FFF !default;
+$color-btn-text-primary: 				#FFF !default;
+$color-btn-text-info: 					#FFF !default;
+$color-btn-text-success: 				#FFF !default;
+$color-btn-text-warning: 				#FFF !default;
+$color-btn-text-danger: 				#FFF !default;
+$color-btn-text-white: 					$color-text-black !default; 
+
+// Border Color
+$color-btn-border-default: 				$color-default !default;
+$color-btn-border-inverse: 				$color-inverse !default;
+$color-btn-border-primary: 				$color-primary !default;
+$color-btn-border-info: 				$color-info !default;
+$color-btn-border-success: 				$color-success !default;
+$color-btn-border-warning: 				$color-warning !default;
+$color-btn-border-danger: 				$color-danger !default;
+$color-btn-border-white: 				#FFF !default; 
+
+
+
+//== Dataview
+//
+//##
+
+// Colors
+$color-dataview-controls-bg: 			transparent !default;
+$color-dataview-controls-border: 		$color-border-default !default;
+$color-dataview-emptymessage-bg:		$color-layout-bg !default;
+$color-dataview-emptymessage-text:		$font-color-base !default;
+
+
+
+//== Grids
+//
+//##
+
+// Paging Color
+$color-grid-paging-bg:					transparent !default;
+$color-grid-paging-bg-hover:			transparent !default;
+$color-grid-paging-border:				transparent !default;
+$color-grid-paging-border-hover:		transparent !default;
+$color-grid-paging-text: 				$gray-light !default;
+$color-grid-paging-text-hover:			$color-primary !default;
+
+// Border Color
+$color-grid-border: 					$color-border-default !default;
+
+// Background Color
+$color-grid-bg:							#FFF !default;
+$color-grid-bg-header:					transparent !default; // Grid Headers
+$color-grid-bg-hover: 					shade($color-primary-lighter,3) !default;
+$color-grid-bg-selected: 				$color-primary !default;	
+$color-grid-bg-selected-hover: 			shade($color-primary-lighter,3) !default;
+$color-grid-text-selected:				$font-color-base !default;
+
+// Striped 
+$color-grid-bg-striped: 				lighten($color-grid-border,5) !default;
+
+// Footer
+$color-grid-footer-bg: 					$gray-primary !default;
+
+
+
+//== Groupbox
+//
+//##
+
+// Background Color
+$color-groupbox-default: 				$color-default !default;
+$color-groupbox-inverse: 				$color-inverse !default; 
+$color-groupbox-primary: 				$color-primary !default; 
+$color-groupbox-info: 					$color-info !default;
+$color-groupbox-success: 				$color-success !default; 
+$color-groupbox-warning: 				$color-warning !default;
+$color-groupbox-danger: 				$color-danger !default; 	
+$color-groupbox-white: 					#FFF !default;
+
+// Text Color
+$color-groupbox-text-default: 			$color-text-black !default;
+$color-groupbox-text-inverse: 			$color-text-white !default;
+$color-groupbox-text-primary: 			$color-text-white !default;
+$color-groupbox-text-info: 				$color-text-white !default;
+$color-groupbox-text-success: 			$color-text-white !default;
+$color-groupbox-text-warning: 			$color-text-white !default;
+$color-groupbox-text-danger: 			$color-text-white !default;
+$color-groupbox-text-white: 			$font-color-base !default;
+
+
+
+//== Callout (groupbox) Colors
+//
+//##
+
+// Text and Border Color
+$color-callout-info:					$color-info !default;
+$color-callout-success:					$color-success !default;
+$color-callout-warning:					$color-warning !default;
+$color-callout-danger:					$color-danger !default;
+
+// Background Color
+$color-callout-bg-info:					$color-info-lighter !default; 
+$color-callout-bg-success:				$color-success-lighter !default; 
+$color-callout-bg-warning:				$color-warning-lighter !default; 
+$color-callout-bg-danger:				$color-danger-lighter !default;
+
+
+
+//== Labels
+//
+//##
+
+// Background Color
+$color-label-bg-default: 				$color-default !default;
+$color-label-bg-primary: 				$color-primary !default; 
+$color-label-bg-info: 					$color-info !default; 
+$color-label-bg-success: 				$color-success !default; 
+$color-label-bg-warning: 				$color-warning !default;
+$color-label-bg-danger: 				$color-danger !default; 	
+
+// Text Color
+$color-label-text-default: 				$color-text-black !default;
+$color-label-text-primary: 				#FFF !default;
+$color-label-text-info: 				#FFF !default;
+$color-label-text-success: 				#FFF !default;
+$color-label-text-warning: 				#FFF !default;
+$color-label-text-danger: 				#FFF !default;
+
+// Border Color
+$color-label-border-default: 			$color-default !default;
+$color-label-border-primary: 			$color-primary !default;
+$color-label-border-info: 				$color-info !default;
+$color-label-border-success: 			$color-success !default;
+$color-label-border-warning: 			$color-warning !default;
+$color-label-border-danger: 			$color-danger !default;
+
+
+
+
+
+//== Navs
+//
+//##
+
+// Navigation Text Sizes
+$font-navsidebar-size:					$font-size-base !default;
+$font-navtopbar-size:					$font-size-base !default;
+$font-navsidebar-sub-size:				$font-size-small !default;
+$font-navtopbar-sub-size:				$font-size-small !default;
+
+$font-navsidebar-glyph-size:			1.2em !default;
+$font-navtopbar-glyph-size:				1.2em !default;
+
+// Navigation sidebar
+$color-navsidebar-bg: 					$color-sidebar-bg !default;
+$color-navsidebar-bg-hover:				lighten($color-navsidebar-bg, 4) !default;
+$color-navsidebar-bg-active:            lighten($color-navsidebar-bg, 8) !default;
+$color-navsidebar-text:					$color-text-white !default;
+$color-navsidebar-text-hover:			$color-primary !default;
+$color-navsidebar-text-active:			$color-primary !default;
+
+$color-navsidebar-sub-bg: 				darken($color-navsidebar-bg, 4) !default;
+$color-navsidebar-sub-bg-hover:			$color-navsidebar-sub-bg !default;
+$color-navsidebar-sub-bg-active:		$color-navsidebar-sub-bg !default;
+$color-navsidebar-sub-text:				#AAA !default;
+$color-navsidebar-sub-text-hover:		$color-primary !default;
+$color-navsidebar-sub-text-active:		$color-primary !default;
+
+$color-navsidebar-border:				$color-navsidebar-bg-hover !default;
+
+// Navigation topbar
+$color-navtopbar-bg: 					$color-topbar-bg !default;
+$color-navtopbar-bg-hover:				darken($color-navtopbar-bg, 4) !default;
+$color-navtopbar-bg-active:            	darken($color-navtopbar-bg, 8) !default;
+$color-navtopbar-text:					$color-text-black !default;
+$color-navtopbar-text-hover:			$color-primary !default;
+$color-navtopbar-text-active:			$color-primary !default;
+
+$color-navtopbar-sub-bg: 				lighten($color-navtopbar-bg, 4) !default;
+$color-navtopbar-sub-bg-hover: 			$color-navtopbar-sub-bg !default;
+$color-navtopbar-sub-bg-active: 		$color-navtopbar-sub-bg !default;
+$color-navtopbar-sub-text:				$color-text-black-secondary !default;
+$color-navtopbar-sub-text-hover:		$color-primary !default;
+$color-navtopbar-sub-text-active:		$color-primary !default;
+
+$color-navtopbar-border:				$color-navtopbar-bg-hover !default;
+
+
+
+
+
+//== Tabs
+//
+//##
+
+// Text Color
+$color-tab-text-active: 				$color-text-black !default;
+$color-tab-text: 						$color-text-black-secondary !default;
+$color-tab-lined-text-active:			$color-primary !default;
+
+// Border Color
+$color-tab-border:						$color-border-default !default;	
+$color-tab-lined-border:				$color-primary !default;	
+
+// Background Color
+$color-tab-bg-hover: 					lighten($color-tab-border,5) !default;
+$color-tab-bg-active:					$color-primary !default;
+
+
+
+
+
+//== Modals
+//
+//##
+
+// Background Color
+$color-modal-header-bg: 				transparent !default;
+
+// Border Color
+$color-modal-header-border: 			$color-border-default !default;
+
+// Text Color
+$color-modal-header-text: 				$font-color-base !default;
+
+
+
+
+
+//== Layouts
+//
+//##
+
+// Scroll container / layout container default padding (if you are using bootstrap containers use a minimal of 15px)
+$padding-layoutcontainer-base:			0px !default; 
+$m-padding-layoutcontainer-base:		0px !default;
+$t-padding-layoutcontainer-base:		0px !default; 
+
+// Combined spacing 
+$default-spacing:						$default-spacing-top $default-spacing-right $default-spacing-bottom $default-spacing-left !default;
+$m-default-spacing:						$m-default-spacing-top $m-default-spacing-right $m-default-spacing-bottom $m-default-spacing-left !default;
+$t-default-spacing:						$t-default-spacing-top $t-default-spacing-right $t-default-spacing-bottom $t-default-spacing-left !default;
+
+
+
+
+
+//== Tables
+//
+//##
+
+// Default Table Spacing
+$padding-table-cell-top:				8px !default;					
+$padding-table-cell-bottom:				8px !default;					
+$padding-table-cell-left:				8px !default;					
+$padding-table-cell-right:				8px !default;			
+
+
+
+
+
+//== Media queries breakpoints
+//
+//## Define the breakpoints at which your layout will change, adapting to different screen sizes.
+
+// Extra small screen / phone Deprecated `$screen-xs` as of v3.0.1
+$screen-xs:                  480px !default;
+// Deprecated `$screen-xs-min` as of v3.2.0
+$screen-xs-min:              $screen-xs !default;
+// Deprecated `$screen-phone` as of v3.0.1
+$screen-phone:               $screen-xs-min !default;
+
+// Small screen / tablet Deprecated `$screen-sm` as of v3.0.1
+$screen-sm:                  768px !default;
+$screen-sm-min:              $screen-sm !default;
+// Deprecated `$screen-tablet` as of v3.0.1
+$screen-tablet:              $screen-sm-min !default;
+
+// Medium screen / desktop Deprecated `$screen-md` as of v3.0.1
+$screen-md:                  992px !default;
+$screen-md-min:              $screen-md !default;
+// Deprecated `$screen-desktop` as of v3.0.1
+$screen-desktop:             $screen-md-min !default;
+
+// Large screen / wide desktop Deprecated `$screen-lg` as of v3.0.1
+$screen-lg:                  1200px !default;
+$screen-lg-min:              $screen-lg !default;
+// Deprecated `$screen-lg-desktop` as of v3.0.1
+$screen-lg-desktop:          $screen-lg-min !default;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max:              ($screen-sm-min - 1) !default;
+$screen-sm-max:              ($screen-md-min - 1) !default;
+$screen-md-max:              ($screen-lg-min - 1) !default;
+
+
+
+
+
+//== Mobile
+//
+//##				
+
+// Text Color
+$m-color-header-text: 					$font-color-base !default;
+
+// Header Link Color
+$m-color-header-link:					$color-link !default;
+
+
+
+//== Mobile Tabs
+//
+//##
+
+// Text Color
+$m-color-tab-text: 						#FFF !default;
+$m-color-tab-text-active: 				#000 !default;
+
+// Background Color
+$m-color-tab-bg:						$color-primary !default;
+$m-color-tab-bg-hover: 					lighten($color-tab-border,5) !default;
+$m-color-tab-bg-active:					darken($m-color-tab-bg, 15) !default;	
+
+// Border Color
+$m-color-tab-border:					darken($m-color-tab-bg, 15) !default;
+$m-color-tab-border-active:				darken($m-color-tab-bg, 15) !default;

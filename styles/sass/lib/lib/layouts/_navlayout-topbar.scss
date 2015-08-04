@@ -1,0 +1,27 @@
+/*
+* Navigation Layout Topbar
+*
+* Specific topbar styling
+*/
+
+.navlayout-topbar {
+	.region-topbar {
+		/* Reset Layout Grid spacing */
+		.container-fluid {
+			 padding: 0 20px;
+		}
+		.mx-navbar {
+			float: left;
+			background-color: transparent;
+			@media (max-width: $screen-sm) {
+				float: none;
+				clear: both;
+			}
+			ul.nav { 
+				> li.mx-navbar-item > a {
+					padding: 30px;
+				}
+			}
+		}
+	}
+}

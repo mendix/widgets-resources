@@ -1,0 +1,57 @@
+/*
+* Mendix Documentation
+* Special styles for presenting profilecard building block
+*/
+
+
+/*
+* Profile Card
+*
+* 
+*/
+
+.profilecard {
+	display: table;
+	width: 100%;
+	margin-bottom: 20px;
+	.profilecard-contentwrapper {
+		width: auto;
+	}
+	.profilecard-imgwrapper {
+		width: 150px;
+	}
+	.profilecard-actionwrapper {
+		width: auto;
+		text-align: right;
+	}
+	.profilecard-contentwrapper,
+	.profilecard-imgwrapper,
+	.profilecard-actionwrapper {
+		display: table-cell;
+		vertical-align: middle;
+	}
+}
+.profilecard-btn {
+	display: inline-block;
+	width: 150px;
+	margin-left: 5px;
+	margin-bottom: 5px;
+}
+.profilecard-img {
+	@include border-radius (50%);
+	margin-right: 40px;
+	padding: 4px;
+	border: 2px solid $color-border-default;
+	background-color: #FFF;
+}
+.profilecard-title {
+	font-size: $font-size-h3;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+.profilecard-subtitle {
+	color: $color-text-black-secondary;
+}
+.pageheader .profilecard {
+	margin-bottom: 0;
+}

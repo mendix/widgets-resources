@@ -1,0 +1,285 @@
+/*
+* Mendix Documentation
+* Special styles for presenting components
+*/
+
+
+/*
+* Groupbox
+*
+* Default Mendix Groupboxes
+*/
+.mx-groupbox {
+	> .mx-groupbox-header {
+		@include border-radius(0);
+		@include font(bold);
+		margin: 0;
+		background: $color-groupbox-default;
+		color: $color-groupbox-text-default;
+		font-size: $font-size-h4;
+		border-style: solid;
+		border-width: 1px 1px 0 1px;
+		border-color: $color-groupbox-default;
+
+		.mx-groupbox-collapse-icon {
+			margin-top: 0.1em;
+		}
+	}
+	> .mx-groupbox-body {
+		@include border-radius(0);
+    	padding: 10px 15px;
+    	border-color: $color-groupbox-default;
+    	background-color: #FFF;
+		border-style: solid;
+		border-width: 1px;
+
+  	}
+  	.mx-groupbox-header + .mx-groupbox-body {
+  		@include border-radius(0);
+		border-top: none;
+	}
+
+	&.collapsed > .mx-groupbox-header {
+		@include border-radius(0);
+	}
+}
+
+
+/*
+* Alternate Groupbox
+*
+* Different kind of Groupbox styling
+*/
+.mx-groupbox {
+
+	// Stylingless has no stlying or padding (used for wrapper)
+	&.groupbox-stylingless  {
+		> .mx-groupbox-header {
+			@include border-radius(0);
+			padding: 0;
+			border-style: none;
+			background-color: transparent;
+		}
+		> .mx-groupbox-body {
+			@include border-radius(0);
+	    	padding: 0;
+	    	border-style: none;
+	    	background-color: transparent;
+	  	}
+	}
+
+	// Border radius
+	&.groupbox-border-radius {
+		> .mx-groupbox-header {
+			@include border-radius(3px 3px 0 0 !important);
+		}
+		> .mx-groupbox-body {
+			@include border-radius(3px !important);
+	  	}
+	  	.mx-groupbox-header + .mx-groupbox-body {
+			@include border-radius(0 0 3px 3px !important);
+	  	}
+	}
+	&.groupbox-borderless {
+		> .mx-groupbox-body {
+			border: 0 !important;
+	  	}
+	}
+	&.groupbox-border-top {
+		> .mx-groupbox-header {
+			border-style: none;
+			border-top-style: solid !important
+		}
+		> .mx-groupbox-body {
+			border-style: none;
+			border-top-style: solid !important
+	  	}
+	  	.mx-groupbox-header + .mx-groupbox-body {
+	  		border-top-style: none !important;
+	  	}
+	}
+	&.groupbox-border-right {
+		> .mx-groupbox-header {
+			border-style: none;
+			border-right-style: solid !important
+		}
+		> .mx-groupbox-body {
+			border-style: none;
+			border-right-style: solid !important
+	  	}
+	}
+	&.groupbox-border-bottom {
+		> .mx-groupbox-header {
+			border-style: none;
+		}
+		> .mx-groupbox-body {
+			border-style: none;
+			border-bottom-style: solid !important
+	  	}
+	}
+	&.groupbox-border-left {
+		> .mx-groupbox-header {
+			border-style: none;
+			border-left-style: solid !important
+		}
+		> .mx-groupbox-body {
+			border-style: none;
+			border-left-style: solid !important
+	  	}
+	}
+}
+
+
+/*
+* Groupbox Colors
+*
+* 
+*/
+.mx-groupbox  {
+	// Color variations 
+	&.groupbox-default {
+		 @include groupbox-variant($color-groupbox-text-default, $color-groupbox-default);
+	}
+	&.groupbox-primary {
+		@include groupbox-variant($color-groupbox-text-primary, $color-groupbox-primary);
+	}
+	&.groupbox-inverse {
+		@include groupbox-variant($color-groupbox-text-inverse, $color-groupbox-inverse);
+	}
+	// Success appears as green
+	&.groupbox-success {
+		@include groupbox-variant($color-groupbox-text-success, $color-groupbox-success);
+	}
+	// Info appears as blue-green
+	&.groupbox-info {
+		@include groupbox-variant($color-groupbox-text-info, $color-groupbox-info);
+	}
+	// Warning appears as orange
+	&.groupbox-warning {
+		@include groupbox-variant($color-groupbox-text-warning, $color-groupbox-warning);
+	}
+	// Danger and error appear as red
+	&.groupbox-danger {
+		@include groupbox-variant($color-groupbox-text-danger, $color-groupbox-danger);
+	}
+	// white appears as full white	
+	&.groupbox-white {
+		@include groupbox-variant($color-groupbox-text-white, $color-groupbox-white);
+	}
+	&.groupbox-transparent  {
+		background-color: transparent;
+		> .mx-groupbox-header {
+			border-style: none;
+			background-color: transparent;
+		}
+		> .mx-groupbox-body {
+			border-style: none;
+    		background-color: transparent;
+  		}
+	}
+}
+
+
+/*
+* Groupbox Spacing
+*
+* 
+*/
+.mx-groupbox {
+
+	&.groupbox-sideless  {
+		> .mx-groupbox-header {
+			padding-right: 0;
+			padding-left: 0;
+		}
+		> .mx-groupbox-body {
+			padding-right: 0;
+			padding-left: 0;
+	  	}
+	}
+
+	&.groupbox-bodyless  {
+		> .mx-groupbox-header {
+
+		}
+		> .mx-groupbox-body {
+			padding: 0;
+	  	}
+	}
+}
+
+
+/*
+* Groupbox Headers
+*
+* Alternate header sizes for groupbox
+*/
+.mx-groupbox {	
+	&.groupbox-h1 > .mx-groupbox-header { font-size: $font-size-h1; } 
+	&.groupbox-h2 > .mx-groupbox-header { font-size: $font-size-h2; }
+	&.groupbox-h3 > .mx-groupbox-header { font-size: $font-size-h3; }
+	&.groupbox-h4 > .mx-groupbox-header { font-size: $font-size-h4; }
+	&.groupbox-h5 > .mx-groupbox-header { font-size: $font-size-h5; }
+	&.groupbox-h6 > .mx-groupbox-header { font-size: $font-size-h6; }
+}
+
+
+/*
+* Groupbox Callouts
+*
+* Default Mendix Groupboxes rendered as (Bootstrap) callouts
+*/
+.mx-groupbox {	
+	&.groupbox-callout {
+		> .mx-groupbox-header, 
+		> .mx-groupbox-body {
+	    	border: 0;
+	    	//border-left-width: 3px;
+			//border-left-style: solid;
+			//border-left-color: transparent;
+	  	}
+	  	.mx-groupbox-header + .mx-groupbox-body {
+	  		padding-top: 0;
+	  	}
+	}
+	&.groupbox-callout-info {
+		> .mx-groupbox-header, 
+		> .mx-groupbox-body {
+			//border-left-color: $color-callout-info;
+			background-color: $color-callout-bg-info;
+		}
+		> .mx-groupbox-header {
+			color: $color-callout-info;
+		}
+	}
+	&.groupbox-callout-success {
+		> .mx-groupbox-header, 
+		> .mx-groupbox-body {
+			//border-left-color: $color-callout-success;
+			background-color: $color-callout-bg-success;
+		}
+		> .mx-groupbox-header {
+			color: $color-callout-success;
+		}
+	}
+	&.groupbox-callout-warning {
+		> .mx-groupbox-header, 
+		> .mx-groupbox-body {
+			//border-left-color: $color-callout-warning;
+			background-color: $color-callout-bg-warning;
+		}
+		> .mx-groupbox-header {
+			color: $color-callout-warning;
+		}
+	}
+	&.groupbox-callout-danger {
+		> .mx-groupbox-header, 
+		> .mx-groupbox-body {
+			//border-left-color: $color-callout-danger;
+			background-color: $color-callout-bg-danger;
+		}
+		> .mx-groupbox-header {
+			color: $color-callout-danger;
+		}
+	}
+}

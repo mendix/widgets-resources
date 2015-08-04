@@ -1,0 +1,52 @@
+/*
+* Mendix Documentation
+* Special styles for presenting profilecard building block
+*/
+
+
+/*
+* Dashboard Stats
+*
+* Used in dashboard
+*/
+
+.dashboardstat {
+	margin: 30px 0;
+
+	@media (max-width: $screen-md) {
+		margin: 10px 0;
+	}
+
+	.dashboardstat-left,
+	.dashboardstat-right {
+		display: table-cell;
+		vertical-align: top;
+	}
+}
+.dashboardstat-icon {
+	font-size: 30px;
+	padding: 8px 14px;
+	margin: 5px 10px 0 0;
+
+	@media (max-width: $screen-md) {
+		font-size: 20px;
+	}
+}
+.dashboardstat-title {
+	font-size: 18px;
+	color: $gray-light;
+	text-transform: uppercase;
+
+	@media (max-width: $screen-md) {
+		font-size: 13px;
+	}
+}
+.dashboardstat-number {
+	font-size: 72px;
+	line-height: 1em;
+	color: $color-text-black;
+
+	@media (max-width: $screen-md) {
+		font-size: 30px;
+	}
+}

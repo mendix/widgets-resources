@@ -1,0 +1,78 @@
+/*
+* Mendix Documentation
+* Special styles for presenting profilecard building block
+*/
+
+
+/*
+* Wizard
+*
+* 
+*/
+
+.wizard {
+	position: relative;
+	margin: auto;
+	.row:before {
+		left: 0;
+		top: 40px;
+		bottom: 0;
+		position: absolute;
+		content: " ";
+		width: 100%;
+		height: 1px;
+		background-color: #ccc;
+	}
+	.row {
+		position: relative;
+		width: 100%;
+		display: table;
+		margin: auto;
+	}
+}
+.wizard-step {
+	text-align: center;
+	display: table-cell;
+    vertical-align: middle;
+    float: none;
+}
+.wizard-step-number {
+	@include font(bold);
+	@include border-radius(50%);
+	font-size: 20px;
+	width: 72px;
+	height: 72px;
+	color: $gray-primary;
+	border: 2px solid $color-border-default;
+	background-color: #FFF;
+
+	// Labels and buttons
+	line-height: 3.5em;
+	padding: 0;
+}
+.wizard-step-number-active {
+	color: #FFF;
+	border-color: $color-primary;
+	background-color: $color-primary;
+}
+.wizard-step-number-visited {
+	color: $color-primary;
+	border-color: $color-primary;	
+	background-color: #FFF;
+}
+.wizard-step-title {
+	display: block;
+  	margin-top: 10px;
+}
+
+.profile-phone .wizard {
+	.row:before {
+		top: 20px;
+	}
+	.wizard-step-number {
+		width: 40px;
+		height: 40px;
+		line-height: 2em;
+		font-size: 16px;
+	}
+}

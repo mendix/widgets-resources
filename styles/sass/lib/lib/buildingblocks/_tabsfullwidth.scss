@@ -1,0 +1,25 @@
+/*
+* Mendix Documentation
+* Special styles for presenting profilecard building block
+*/
+
+
+/*
+* Tabs full width
+*
+* 
+*/
+
+.tabsfullwidth {
+	background-color: $color-layout-bg-secondary;
+	> .mx-tabcontainer-tabs {
+		margin-bottom: 0;
+
+		@media (min-width: $screen-sm) {
+			padding: 0 40px;
+		}
+	}
+	> .mx-tabcontainer-content {
+		background-color: #FFF;
+	}
+}

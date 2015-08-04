@@ -1,0 +1,291 @@
+/*
+* Mendix Documentation
+* Special styles for presenting components
+*/
+
+
+/*
+* Dijit Widgets
+*
+* Default Dojo Dijit Widgets
+*/
+
+
+/*
+ * Dijit Calendar Widget
+ *
+ * Used in dataviews
+ */
+.dijitCalendarContainer {
+	/* (must be higher than popup z-index) */
+	z-index: 10010 !important;
+	background-color: #eff0f2;
+
+	tr {
+		th {
+			background-color: #26323D;
+			color: #FFF;
+			text-align: center;
+		}
+		th,
+		td {
+			padding: 6px;
+			text-align: center;
+		}
+		td .dijitCalendarDateLabel {
+			color: $font-color-base;
+		}
+		tfoot h3 {
+			margin: 0;
+			padding: 0;
+			font-size: inherit;
+		}
+	}
+
+	.dijitCalendarMonthLabel {
+		@include font(bold);
+	}
+	.dijitButtonNode {
+		border: 0;
+	}
+	.dijitCalendarArrow {
+		cursor: pointer;
+	}
+	.dijitCalendarSelectedDate,
+	.dijitCalendarSelectedDate:hover {
+		@include border-radius(10px);
+		background: $color-primary;
+		color: #FFF;
+	}
+	.dijitCalendarHoveredDate,
+	.dijitCalendarPreviousYearHover,
+	.dijitCalendarNextYearHover,
+	.dijitCalendarMonthLabelHover {
+		@include border-radius(10px);
+		background-color: #dbdcdd;
+	}
+	.dijitCalendarYearContainer td {
+		@include font(bold);
+		@include border-bottom-radius(3px);
+		border-top: 1px solid $color-border-default;
+		text-align: center;
+	}
+	.dijitCalendarMonthContainer th:first-child {
+		@include border-top-left-radius(3px);
+	}
+	.dijitCalendarMonthContainer th:last-child {
+		@include border-top-right-radius(3px);
+	}
+}
+
+.dijitCalendarMonthMenuPopup {
+	@include border-radius(3px);
+	/* (must be higher than popup z-index) */
+	z-index: 10020 !important;
+	padding: 3px 4px;
+	background-color: #26323D;
+	.dijitCalendarMonthMenu {
+		border-style: none;
+		background: none;
+		.dijitCalendarMonthLabel {
+			padding: 2px 0;
+			color: #FFF;
+			&:hover,
+			&:focus {
+				color: #4280cb;
+			}
+		}
+	}
+}
+
+.dj_rtl {
+	.dijitCalendarContainer {
+	 	.dijitCalendarMonthContainer {
+	 		th {
+
+	 			&:first-child {
+	 				@include border-top-left-radius(0px);
+	 				@include border-top-right-radius(3px);	
+	 			}
+	 			&:last-child {
+	 				@include border-top-left-radius(3px);
+	 				@include border-top-right-radius(0px);
+	 			}
+	 		}
+	 	}
+	}
+}
+
+
+/*
+ * Dijit Tooltip Widget
+ *
+ * Default tooltip used for Mendix widgets
+ */
+.mx-tooltip {
+	.dijitTooltipContainer {
+		@include border-radius(4px);
+		@include box-shadow(0 6px 12px rgba(0,0,0,0.175));
+
+		border-width: 1px;
+		border-color: $gray-light;
+		background: #FFF;
+
+		.mx-tooltip-content {
+			padding: 10px;
+		}
+		.form-group {
+			margin-bottom: 5px;
+		}
+	}
+
+	.dijitTooltipConnector {
+		margin-left: -10px;
+		width: 0;
+		height: 0;
+		border-width: 10px 10px 10px 0;
+		border-style: solid;
+		border-color: transparent;
+		border-right-color: $gray-light;
+	}
+}
+
+
+/*
+ * Dijit Border Container
+ *
+ * Used in Mendix as split pane containers
+ */
+.dijitBorderContainer {
+    padding: 5px;
+    background-color: #fcfcfc;
+
+    .dijitSplitterV,
+	.dijitGutterV {
+		width: 5px;
+		border: 0;
+		background: #fcfcfc;
+	}
+	.dijitSplitterH,
+	.dijitGutterH {
+		height: 5px;
+		border: 0;
+		background: #fcfcfc;
+	}
+	.dijitSplitterH {
+		.dijitSplitterThumb {
+			top: 2px;
+			width: 19px;
+			height: 1px;
+			background: #B0B0B0;
+		}
+	}
+	.dijitSplitterV {
+		.dijitSplitterThumb {
+			left: 2px;
+			width: 1px;
+			height: 19px;
+			background: #B0B0B0;
+		}
+	}
+	.dijitSplitContainer-child, 
+	.dijitBorderContainer-child {
+	    border: 1px solid #ccc;
+	}
+	.dijitBorderContainer-dijitTabContainerTop, 
+	.dijitBorderContainer-dijitTabContainerBottom, 
+	.dijitBorderContainer-dijitTabContainerLeft,
+	.dijitBorderContainer-dijitTabContainerRight {
+	    border: none;
+	}
+	.dijitBorderContainer-dijitBorderContainer {
+	    padding: 0;
+	    border: none;
+	}
+	.dijitSplitterActive {
+		@include opacity(0.6);
+		
+		margin: 0;
+		background-color: #aaa;
+		background-image: none;
+		font-size: 1px;
+	}
+	.dijitSplitContainer-dijitContentPane,
+	.dijitBorderContainer-dijitContentPane {
+		padding: 5px;
+		background-color: #fff;
+	}
+}
+
+
+/*
+ * Dijit Menu Popup
+ *
+ * Used in datepickers and calendar widgets
+ */
+.dijitMenuPopup {
+	margin-top: 10px;
+    .dijitMenu {
+        @include border-radius(3px);
+        display: block;
+        margin-top: 0; // No top margin because there is no parent with margin bottom
+        padding: 12px 10px;
+        background: $color-inverse;
+        width: 200px !important;
+
+        &:after {
+            position: absolute;
+            bottom: 100%;
+            left: 20px;
+            margin-left: -10px;
+            width: 0px;
+            height: 0px;
+            border: medium solid transparent;
+            border-width: 10px;
+            border-bottom-color: $color-inverse;
+            content: " ";
+            pointer-events: none;
+        }
+
+        // Menu item
+        .dijitMenuItem {
+            background: transparent;
+            .dijitMenuItemLabel {
+                @include border-radius(3px);
+                padding: 10px;
+                color: #FFF;
+                width: 180px !important;
+                display: block;
+				overflow: hidden;
+				text-overflow: ellipsis;
+            }
+            // Hover
+            &.dijitMenuItemHover {
+                background: none;
+                .dijitMenuItemLabel {  
+                    background: $color-primary;
+                }
+            }
+        }
+
+        // New label
+        .tg_newlabelmenuitem {
+            .dijitMenuItemLabel {
+                @include font(bold);
+            }
+        }
+
+        // Seperator
+        .dijitMenuSeparator {
+            td {
+                padding: 0;
+                border-bottom-width: 3px;
+            }
+            .dijitMenuSeparatorIconCell {
+                > div {
+                    margin: 0; //override dijit styling
+                }
+            }
+        }   
+    }
+}

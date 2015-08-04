@@ -1,0 +1,26 @@
+@mixin font($weight: "normal") {
+
+	$weight: unquote($weight);
+	$weight: quote($weight);
+	@if $weight == normal {
+		@if($font-family-base) {
+			font-family: $font-family-base; 
+		}
+		font-weight: $font-weight-normal;
+	} @else if $weight == "light" {
+		@if($font-family-light) {
+			font-family: $font-family-light; 
+		}
+		font-weight: $font-weight-light;
+	} @else if $weight == "semibold" {
+		@if($font-family-semibold) {
+			font-family: $font-family-semibold; 
+		}
+		font-weight: $font-weight-semibold;
+	} @else if $weight == "bold" {
+		@if($font-family-bold) {
+			font-family: $font-family-bold; 
+		}
+		font-weight: $font-weight-bold;
+	}
+}

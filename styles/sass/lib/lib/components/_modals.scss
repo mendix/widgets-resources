@@ -1,0 +1,121 @@
+/*
+* Mendix Documentation
+* Special styles for presenting components
+*/
+
+
+/*
+* Modals
+*
+* Default Mendix Modals. Modals are streamlined, but flexible, dialog prompts with the minimum required functionality and smart defaults
+*/
+.modal-dialog {
+	
+	.modal-content {
+		@include box-shadow(0 2px 4px rgba(0,0,0,.2));
+		@include border-radius(4px);
+		border: 1px solid $color-border-default;
+		border: 1px solid rgba(0,0,0,0);
+
+		.modal-header {
+			@include border-radius(0); // Because of the class .mx-window-active in mxui.css
+			padding: 15px 20px;
+			background-color: $color-modal-header-bg;
+			border-bottom-color: $color-modal-header-border;
+			h4 {
+				@include font(bold);
+				color: $color-modal-header-text;
+				font-size: 16px;
+				margin: 0;
+			}
+			.close {
+				@include opacity(1);
+				color: $color-modal-header-text;
+				text-shadow: none;
+				margin-top: -3px;
+			}
+		}
+		.modal-body {
+			padding: 20px;
+		}
+		.modal-footer {
+			padding: 20px;
+			margin-top: 0;
+			border-style: none;
+			text-align: left;
+		}
+	}
+}
+
+
+/*
+* Modals
+*
+* Default Mendix Modal
+*/
+.mx-window {
+
+	// If popup direct child is a dataview it gets the class mx-window-view
+	&.mx-window-view .mx-window-body {
+		padding: 0;
+
+		// Dataview in popup
+		> .mx-dataview > .mx-dataview-content, 
+		> .mx-placeholder > .mx-dataview > .mx-dataview-content {
+			padding: 20px;
+		}
+		> .mx-dataview > .mx-dataview-controls, 
+		> .mx-placeholder > .mx-dataview > .mx-dataview-controls {
+			padding: 20px;
+			border-style: none;
+			text-align: left;
+			margin: 0;
+		}
+	}
+	.mx-dataview-controls {
+		padding-bottom: 0;
+	}
+	.mx-layoutgrid {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+
+
+/*
+* Modals
+*
+* Default Mendix Login Modal
+*/
+.mx-login {
+	.modal-body {
+		padding: 0 15px;
+	}
+	.modal-content {
+		input {
+			@include box-shadow(0);
+			padding: 12px 12px;
+			height: 56px;
+			border: 1px solid #EEE;
+			background: #eee;
+			font-size: 16px;
+
+			&:focus {
+				border-color: #66afe9;
+			}
+		}
+	}
+	.modal-header,
+	.modal-footer {
+		border: 0;
+	}
+	button {
+		font-size: 16px;
+	}
+	h4 {
+		color: #aaa;
+		font-weight: $font-weight-bold;
+		font-size: 20px;
+	}
+}

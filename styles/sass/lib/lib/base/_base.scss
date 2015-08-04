@@ -1,0 +1,48 @@
+/*
+* Base
+*
+* Default settings
+*/
+
+body {
+	@include font(normal);
+	color: $font-color-base;
+	font-size: $font-size-base;
+	line-height: $line-height-base;
+	background-color: $color-layout-bg;
+}
+a {
+	color: $color-link;
+	-webkit-transition: 0.25s;
+	-moz-transition: 0.25s;
+	-o-transition: 0.25s;
+	transition: 0.25s;
+	-webkit-backface-visibility: hidden;
+}
+a:hover {
+	text-decoration: underline;
+	color: $color-link-hover;
+}
+// Address `outline` inconsistency between Chrome and other browsers.
+a:focus {
+  outline: thin dotted; 
+}
+// Improve readability when focused and also mouse hovered in all browsers
+a:active, 
+a:hover {
+  outline: 0;
+}
+// Removes large blue border in chrome on focus and active states 
+input:focus, 
+button:focus,
+.mx-link:focus {
+  outline: 0; 
+}
+// Removes large blue border for tabindexes from widgets
+div[tabindex] {
+	outline: 0; 
+}
+/* Adding max-width: 100% for labels fixes wrapping for IE8 - this is fixed in the new bootstrap version */
+label {
+	max-width: 100%;
+}

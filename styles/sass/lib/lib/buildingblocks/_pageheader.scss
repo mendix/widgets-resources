@@ -1,0 +1,28 @@
+/*
+* Mendix Documentation
+* Special styles for presenting profilecard building block
+*/
+
+
+/*
+* Page Header
+*
+* 
+*/
+
+.pageheader {
+	border-bottom: 2px solid $color-border-default;
+	@include default-spacing($type: margin, $direction: bottom, $device: responsive);
+}
+.pageheader.pageheader-fullwidth {
+	background-color: $color-layout-bg-secondary;
+	border-bottom: 1px solid $color-border-default;
+	margin-bottom: 0;
+}
+.pageheader-title {
+	margin-bottom: 0;
+	margin-top: 0;
+}
+.pageheader-subtitle {
+	color: $color-text-black-secondary;
+}

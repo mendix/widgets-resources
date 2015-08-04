@@ -1,0 +1,22 @@
+/*
+* Mendix Documentation
+* Special styles for presenting profilecard building block
+*/
+
+
+/*
+* Form Block
+*
+* Used in default forms
+*/
+
+.formblock {
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+.formblock-header {
+	color: $color-primary;
+	border-bottom: 1px solid $color-border-default;
+	padding-bottom: 5px;
+	margin-bottom: 15px;
+}

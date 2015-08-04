@@ -1,0 +1,74 @@
+/*
+* Mendix Documentation
+* Special styles for presenting components
+*/
+
+
+/*
+* Grid
+*
+* Default Mendix Grid
+*/
+.mx-grid {
+	@include border-radius(0);
+	padding: 0px;
+	border: 0;
+	// margin: 0 0 35px 0;
+
+	.mx-grid-controlbar {
+		margin: 10px 0;
+		/* Paging */
+		.mx-grid-pagingbar {
+
+			/* Buttons */
+			.mx-button {
+				padding: 6px;
+				background-color: $color-grid-paging-bg;
+				color: $color-grid-paging-text;
+				border-color: $color-grid-paging-border;
+
+				&:hover {
+					background-color: $color-grid-paging-bg-hover;
+					color: $color-grid-paging-text-hover;
+					border-color: $color-grid-paging-border-hover;
+				}
+
+				&.disabled, 
+				&[disabled] {
+					@include opacity(0.4);
+				}
+			}
+
+			/* Text Paging .. to .. to .. */
+			.mx-grid-paging-status {
+				padding: 0 8px 8px;
+			}
+		}
+	}
+
+	.mx-grid-searchbar {
+		margin: 10px 0;
+		.mx-grid-search-item {
+			.mx-grid-search-label {
+				vertical-align: middle;
+				label { padding-top: 5px; }
+			}
+			.mx-grid-search-input {
+				.form-control {
+					height: 28px;
+					font-size: 11px;
+				}
+				.mx-button {
+					height: 28px;
+					padding-top: 2px;
+					padding-bottom: 2px;
+				}
+			}
+		}
+	}
+}
+
+/* Remove default border from grid inside a Mendix Dataview */
+.mx-dataview .mx-grid {
+	border: 0;
+}

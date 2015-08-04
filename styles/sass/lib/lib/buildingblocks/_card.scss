@@ -1,0 +1,89 @@
+/*
+* Mendix Documentation
+* Special styles for presenting profilecard building block
+*/
+
+
+/*
+* Card
+*
+* 
+*/
+
+.card {
+	padding: 20px;
+	margin: 0 0 30px 0;
+	border: 1px solid $color-border-default;
+	background-color: #FFF;
+	border-radius: 3px;
+
+	@media only screen and (max-width: 1024px) {
+		padding: 10px;
+	}
+}
+.card-maps {
+	padding: 0;
+}
+
+/* Title + button + border below title and button */
+.card-header-action {
+	overflow: hidden;
+	margin-bottom: 20px;
+	.card-title {
+		float: left;
+	}
+	.btn {
+		float: right;
+	}
+}
+.card-details {
+	padding: 10px;
+}
+.card-title {
+	margin-top: 0;
+
+	@media only screen and (max-width: 1024px) {
+		font-size: 18px;
+	}
+}
+.card-subtitle {
+	font-size: 14px;
+	color: $color-text-black-secondary;
+	margin-bottom: 10px;
+}
+.card-annotation {
+	text-transform: uppercase;
+	letter-spacing: 8px;
+	padding-bottom: 10px;
+}
+.card-icon {
+	border-radius: 50%;
+	margin: 30px auto;
+	width: 125px;
+	height: 125px;
+
+	@media (max-width: $screen-md) {
+		width: 75px;
+  		height: 75px;
+	}
+
+	.glyphicon {
+		font-size: 60px;
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+
+		@media (max-width: $screen-md) {
+			font-size: 28px;
+		}
+	}
+}
+.card-image {
+	margin: 30px auto;
+}
+.card-user-image {
+	border: 4px solid #FFF;
+}
+.card-link {
+	font-size: $font-size-small;
+}

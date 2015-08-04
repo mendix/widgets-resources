@@ -1,0 +1,24 @@
+/*
+* Mendix Documentation
+* Special styles for presenting profilecard building block
+*/
+
+
+/*
+* Profile Header
+*
+* 
+*/
+
+.profileheader {
+	margin: 20px 0;
+
+	.profileheader-content {
+		padding: 0 10px;
+	}
+
+	.profileheader-image {
+		display: block;
+		margin: auto auto 10px auto;
+	}
+}

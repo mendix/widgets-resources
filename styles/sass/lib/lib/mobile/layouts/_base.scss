@@ -1,0 +1,18 @@
+/*
+* Mendix Documentation
+* Special styles for presenting mobile components
+*/
+
+
+/*
+* Layout
+*
+* Default Mendix Layout 
+*/
+.profile-phone {
+	.region-topbar {
+		min-height: $m-height-header;
+		background-color: $m-color-header-bg;
+		border: 0;
+	}
+}

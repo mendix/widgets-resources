@@ -1,0 +1,70 @@
+/*
+* Mendix Documentation
+* Special styles for presenting mobile components
+*/
+
+
+/*
+* Tabcontainer
+*
+* Default Mendix Tabcontainer for Mobile 
+*/
+.profile-phone,
+.profile-tablet {
+	.mx-tabcontainer-tabs {
+		margin: 0;
+		padding: 0;
+		border-color: transparent;
+		background-color: $m-color-tab-bg;
+		text-align: center;
+
+		li {
+			display: table-cell;
+			float: none;
+			margin: 0;
+			width: 1%;
+			a {
+				@include box-shadow(none);
+				@include border-radius(0);
+				margin: 0;
+				padding: 15px 0;
+				border-style: none;
+				color: $m-color-tab-text;
+				font-weight: normal;
+				font-size: 11px;
+				text-transform: uppercase;
+
+				&:hover,
+				&:focus,
+				&.active {
+					color: #000 !important;
+					border-style: none;
+					background-color: transparent;
+				}
+			}
+			&:first-child a {
+				
+			}
+			&:last-child a {
+				
+			}
+			&.active a {
+				color: $m-color-tab-text-active;
+				border-style: none !important;
+  				background-color: transparent !important;
+  				@include css-arrow(bottom, 5px, 5px, #FFF, #FFF, 0);
+
+  				&:after,
+  				&:before {
+  					-webkit-transform: rotate(180deg);
+  				}
+  				&:after {
+  					top: 80%;
+  				}
+  				&:before {
+  					top: 75%;
+  				}
+			}
+		}
+	}
+}

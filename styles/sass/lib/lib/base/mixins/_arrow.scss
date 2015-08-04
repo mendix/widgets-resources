@@ -1,0 +1,110 @@
+//  CSS - ARROW 
+//  A mixin to create a arrow to a side of a box
+//  
+//    *dont forget to put position relative on the wrapper
+//  
+//    @include css-arrow($position, $height, $width, $bg-color, $arrow-color,  $arrow-border-width)
+//    
+//    Inputs:
+//    - position: top, bottom, left, right;
+//    - height
+//    - width
+//    - color of background
+//    - color of border
+//    - border width
+/////////////////////////////////////////////////////////////////
+@mixin css-arrow($position: "top", $height: 10px, $width: 10px, $bg-color: #AAA, $arrow-color: #CCC,  $arrow-border-width: 0px) {    
+    $position: unquote($position);
+    $position: quote($position);
+    position: relative;
+
+    &:after, &:before {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border: solid transparent;
+        border-color: transparent;
+        content: " ";
+        pointer-events: none;
+    }
+
+    @if $position == "top" {   
+        &:after, &:before {
+            bottom: 100%;
+        }
+
+        &:after {
+            left: 50%;
+            margin-left: ($width - $width - $width);
+            border-width: $height $width;
+            border-bottom-color: $bg-color;
+        }
+        
+        &:before {
+            left: 50%;
+            margin-left: ($width - $width - $width - $arrow-border-width);
+            border-width: $height + 1 $width + $arrow-border-width;
+            border-bottom-color: $arrow-color;
+        }
+    } 
+
+    @if $position == "right" {   
+        &:after, &:before {
+            left: 100%;
+        }
+
+        &:after {
+            top: 50%;
+            margin-top: ($width - $width - $width);
+            border-width: $height $width;
+            border-left-color: $bg-color;
+        }
+        
+        &:before {
+            top: 50%;
+            margin-top: ($width - $width - $width - $arrow-border-width);
+            border-width: $height + 1 $width + $arrow-border-width;
+            border-left-color: $arrow-color;
+        }
+    } 
+
+    @if $position == "bottom" {   
+        &:after, &:before {
+            top: 100%;
+        }
+
+        &:after {
+            left: 50%;
+            margin-left: ($width - $width - $width);
+            border-width: $height $width;
+            border-top-color: $bg-color;
+        }
+        
+        &:before {
+            left: 50%;
+            margin-left: ($width - $width - $width - $arrow-border-width);
+            border-width: $height + 1 $width + $arrow-border-width;
+            border-top-color: $arrow-color;
+        }
+    } 
+
+    @if $position == "left" { 
+        &:after, &:before {
+            right: 100%;
+        }  
+
+        &:after {
+            top: 50%;
+            margin-top: ($width - $width - $width);
+            border-width: $height $width;
+            border-right-color: $bg-color;
+        }
+        
+        &:before {
+            top: 50%;
+            margin-top: ($width - $width - $width - $arrow-border-width);
+            border-width: $height + 1 $width + $arrow-border-width;
+            border-right-color: $arrow-color;
+        }
+    } 
+}

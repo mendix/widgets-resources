@@ -1,0 +1,30 @@
+/*
+* Mendix Documentation
+* Special styles for presenting profilecard building block
+*/
+
+
+/*
+* Section Header
+*
+* 
+*/
+
+.sectionheader {
+	margin-bottom: 20px;
+	border-bottom: 1px solid $color-border-default;
+	padding-bottom: 10px;
+}
+.sectionheader-title {
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+.sectionheader-subtitle {
+	color: $color-text-black-secondary;
+	margin-bottom: 10px;
+}
+.sectionheader-avatar {
+	padding: 4px;
+	border: 2px solid $color-border-default;
+	background-color: #FFF;
+}

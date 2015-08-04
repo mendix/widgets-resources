@@ -1,0 +1,40 @@
+/*
+* Mendix Documentation
+* Special styles for presenting components
+*/
+
+
+/*
+* Images
+*
+* Default Mendix Image Widgets
+*/
+img.img-rounded,
+.img-rounded img {
+	@include border-radius (6px);
+}
+img.img-thumbnail,
+.img-thumbnail img {
+	@include border-radius (4px);
+	@include transition-property(all);
+	@include transition-timing-function(ease-in-out);
+	@include transition-duration(2s);
+	display: inline-block;
+	height: auto;
+	max-width: 100%;
+	padding: 4px;
+	line-height: $line-height-base;
+	background-color: #fff;
+	border: 1px solid $color-default;
+}
+img.img-circle,
+.img-circle img {
+	@include border-radius (50%);
+}
+img.img-auto,
+.img-auto img {
+	width: auto !important;
+	height: auto !important;
+	max-width: 100% !important;
+	max-height: 100% !important;
+}

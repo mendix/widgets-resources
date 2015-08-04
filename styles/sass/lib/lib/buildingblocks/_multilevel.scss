@@ -1,0 +1,93 @@
+/*
+* Mendix Documentation
+* Special styles for presenting profilecard building block
+*/
+
+
+/*
+* Multilevel
+*
+* 
+*/
+
+.multilevel-tabs .mx-tabcontainer-tabs {
+	margin-bottom: 10px;
+}
+.multilevel-list {
+	@extend .listview-lined;
+	@extend .listview-hover;
+	.mx-listview-list {
+		border-left: 1px solid $gray-lighter;
+		border-right: 1px solid $gray-lighter;
+		.mx-listview-item {
+			padding: 10px;
+  			border-color: $gray-lighter;
+  			border-left: 4px solid $gray-lighter;
+  			border-right: none;
+  			border-radius: 0;
+  			-webkit-transition: all .2s;
+			-o-transition: all .2s;
+			transition: all .2s;
+
+  			&:first-child {
+				@include border-radius(0);
+			}
+			&:last-child {
+				@include border-radius(0);
+			}
+  			&.selected {
+  				border-left: 4px solid $color-primary;
+  				background-color: $gray-lighter !important;
+  			}
+  		}
+	}
+}
+.multilevel-title {
+
+}
+.multilevel-subtitle {
+	color: $gray;
+}
+.multilevel-message-header {
+	color: $gray;
+	margin-bottom: 10px;
+	border-bottom: 1px solid $gray-primary;
+}
+.multilevel-message-header-title {
+	font-size: $font-size-h2;
+}
+.multilevel-message-header-subtitle {
+	font-size: $font-size-h4;
+	margin-bottom: 10px;
+}
+.multilevel-message-text {
+	margin: 10px 0;
+}
+.multilevel-grid {
+	 @extend .datagrid-hover;
+	 @extend .datagrid-fullsearch;
+	 @extend .datagrid-transparent;
+
+	.mx-datagrid-head-table th {
+		border-style: none;
+	}
+	.mx-datagrid-body-table {
+		border-left: 1px solid #ddd;
+		border-right: 1px solid #ddd;
+		border-bottom: 1px solid #ddd;
+		.mx-datagrid-body tr {
+			td {
+				border-color: $gray-lighter;
+	  			border-left: 4px solid $gray-lighter;
+	  			-webkit-transition: all .2s;
+				-o-transition: all .2s;
+				transition: all .2s;
+			}
+			&.selected td,
+			&.selected:hover td {
+				border-left: 4px solid $color-primary;
+				background-color: $gray-lighter !important;
+			}
+		}
+	}
+}

@@ -1,0 +1,175 @@
+/*
+* Mendix Documentation
+* Special styles for presenting components
+*/
+
+
+/*
+* Tab Container
+*
+* Default Mendix Tab Container Widget. Tab containers are used to show information categorized into multiple tab pages. This can be very useful if the amount of information that has to be displayed is larger than the amount of space on the screen
+*/
+.mx-tabcontainer {
+	.mx-tabcontainer-tabs {
+		margin-bottom: 20px;
+		border-color: $color-tab-border;
+		> li > a {
+			@include font(normal);
+			@include transition-property(all);
+            @include transition-duration(0.2s);
+            @include transition-timing-function(ease-in-out);
+			margin-right: 0;
+			color: $color-tab-text;
+
+			&:hover,
+			&:focus {
+				background-color: $color-tab-bg-hover;
+			}
+		}
+
+		> li.active > a,
+		> li.active > a:hover,
+		> li.active > a:focus  {
+			border: 1px solid $color-tab-border;
+			border-bottom-color: transparent;
+			background-color: #FFF;
+			color: $color-tab-text-active;
+		}
+	}
+	.mx-tabcontainer-content {
+
+	}
+}
+
+
+/*
+* Tab Container
+*
+* Default Mendix Tab Container Widget rendered as Pills
+*/
+.tab-pills.mx-tabcontainer {
+	.mx-tabcontainer-tabs {
+		border: 0;
+		> li > a {
+			@include border-radius(4px);
+			margin-right: 2px;
+			border: 1px solid $color-tab-border;
+			color: $color-tab-text;
+
+			&:hover,
+			&:focus {
+				background-color: $color-tab-bg-hover;
+			}
+		}
+
+		> li.active > a,
+		> li.active > a:hover,
+		> li.active > a:focus  {
+			background-color: $color-tab-bg-active;
+			color: #FFF;
+			border-color: $color-tab-bg-active;
+		}
+	}
+}
+
+
+/*
+* Tab Container
+*
+* Default Mendix Tab Container Widget rendered with tabs rendered without background
+*/
+.tab-lined.mx-tabcontainer {
+	.mx-tabcontainer-tabs {
+        border-width: 3px;
+
+        li {
+            margin-bottom: -3px;
+            margin-right: 30px;
+
+            > a {
+                padding: 10px 0;
+                border: 0;
+                border-style: solid;
+                border-color: transparent;
+                border-bottom-width: 3px;
+				border-radius: 0;
+				color: $color-tab-text;
+
+                &:hover, 
+                &:focus {
+                	border: 0;
+                    border-color: transparent;
+                    background: transparent;
+                    color: $color-tab-text;
+                }
+
+            }
+
+            &.active > a,
+            &.active > a:hover, 
+            &.active > a:focus  {
+            	border: 0;
+                border-bottom: 3px solid $color-tab-lined-border;
+                background-color: transparent;
+                color: $color-tab-lined-text-active;
+            }
+        }
+    }
+}
+
+
+/*
+* Tab Container
+*
+* Default Mendix Tab Container Widget rendered as justified
+*/
+.tab-justified.mx-tabcontainer {
+	.mx-tabcontainer-tabs {
+		width: 100%;
+		border-bottom: 0;
+
+		> li {
+			display: table-cell;	
+			float: none;
+			margin: 0;
+			width: 1%;
+			@media (max-width: 768px) {
+				display: block;
+				width: 100%;
+			}	
+			> a {
+				border-bottom: 1px solid $color-tab-border;
+				text-align: center;
+			}
+		
+		}
+		> li.active > a {
+			@include border-radius(4px);
+			border-bottom-color: transparent;
+
+			@media (max-width: 768px) {
+				border-bottom-color: $color-tab-border;
+			}
+		}
+	}
+}
+
+
+/*
+* Tab Container
+*
+* Default Mendix Tab Container Widget rendered with borders
+*/
+.tab-bordered.mx-tabcontainer {
+	.mx-tabcontainer-tabs {
+		margin: 0;
+	}
+
+	.mx-tabcontainer-content {
+		padding: 10px;
+		border-width: 0 1px 1px 1px;
+		border-style: solid;
+		border-color: $color-tab-border;
+		background-color: #FFF;
+	}
+}

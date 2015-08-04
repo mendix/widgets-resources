@@ -1,0 +1,125 @@
+/*
+* Regions
+*
+* Used for navigation layouts
+*/
+
+.region-topbar {
+	min-height: $minimalheight-topbar;
+	border-bottom: 1px solid $color-border-default;
+	background-color: $color-navtopbar-bg;
+	> .mx-layoutcontainer-wrapper {
+		padding: 0;
+	}
+
+	.toggle-btn {
+		font-size: 16px;
+		float: left;
+		margin: 20px 15px 0 0;
+	}
+	
+	// SSO widgets
+	.navbar-right {
+		min-height: $minimalheight-topbar;
+		.mx-appswitcher-button-placeholder,
+		.mx-profilemenu-button-placeholder  {
+			display: inline-block;
+			border-left: 1px solid $color-border-default;
+			width: $minimalheight-topbar;
+			height: $minimalheight-topbar;
+			position: relative;
+			float: left;
+			iframe {
+				width: 48px;
+				height: 48px;
+
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				margin: auto auto;
+			}
+		
+		}
+		.mx-profilemenu-button-placeholder {
+			margin-right: 10px;
+		}
+		@media (max-width: 768px) {
+			display: none;
+		}
+	}
+}
+.region-sidebar {
+	background-color: $color-navsidebar-bg;
+	> .mx-layoutcontainer-wrapper {
+		padding: 0;
+	}
+}
+.region-content {
+	padding: 0; // for if region-content is on a col so you dont get scollbar
+	> .mx-layoutcontainer-wrapper {
+		padding: 0;
+	}
+	> .mx-placeholder,
+	> .mx-layoutcontainer-wrapper .mx-placeholder {
+		
+		// Fake orginal container styling on the first container on the page
+		.mx-layoutgrid-fixed {
+			max-width: 1170px;
+			margin: auto
+		}
+	}
+}
+.region-footer {
+	> .mx-layoutcontainer-wrapper {
+		padding: 0;
+	}
+}
+.layout-sidebar-responsive {
+	.region-sidebar-fixed {
+		display: none;
+		@extend .region-sidebar;
+		@media (min-width: 768px) {
+		  position: fixed;
+		  left: 0;
+		  z-index: 10;
+		  display: block;
+		  overflow-x: hidden;
+		  overflow-y: auto;
+		  height: 100%;
+		  padding: 0;
+		}
+	}
+	.mx-scrollcontainer-open {
+		@media (min-width: 768px) {
+			left: -200px !important;
+		}
+	}
+}
+
+/*
+* Navbar Brand
+*
+* Used to style your app brand and logo
+*/
+
+.navbar-brand {
+	display: block;
+	min-height: 80px;
+	float: left;
+	padding: 22px 0;
+	img {
+		height: 37px;
+		display: inline-block;
+	}
+	a {
+		font-size: 20px;
+		color: $color-text-black;
+
+		&:hover,
+		&:focus {
+			text-decoration: none;
+		}
+	}
+}

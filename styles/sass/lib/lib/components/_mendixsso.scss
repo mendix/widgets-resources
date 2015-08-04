@@ -1,0 +1,33 @@
+/*
+* Mendix Documentation
+* Special styles for presenting components
+*/
+.mx-appswitcher-button-placeholder,
+.mx-profilemenu-button-placeholder  {
+	display: inline-block;
+	iframe {
+		width: 48px;
+		height: 48px;
+	}
+}
+
+/*
+* Mendix App Switcher Button
+*
+* 
+*/
+.mx-appswitcher-button-placeholder {
+	iframe {
+	}
+}
+
+/*
+* Mendix Profile Menu Button
+*
+* 
+*/
+.mx-profilemenu-button-placeholder {
+	iframe {
+	}
+}
+

@@ -1,0 +1,37 @@
+/*
+* Mendix Documentation
+* Special styles for presenting profilecard building block
+*/
+
+
+/*
+* Master Detail Listview
+*
+* 
+*/
+
+.masterdetail-listview {
+	background-color: $color-layout-bg-secondary;
+	height: 100%;
+	.mx-listview {
+		height: 100%;
+		margin: 0;
+		// Fix for v-center, mxui gives the content a display table-cell that breaks everything
+		.mx-listview-content {
+			display: block;
+		}
+	
+		.mx-listview-item {
+			background-color: transparent;
+
+			&.selected {
+				color: #FFF;
+				
+				&:hover,
+				&:active {
+					background-color: $color-grid-bg-selected !important;
+				}
+			}
+		}
+	}
+}

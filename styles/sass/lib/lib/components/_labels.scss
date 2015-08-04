@@ -1,0 +1,47 @@
+/*
+* Mendix Documentation
+* Special styles for presenting components
+*/
+
+
+/*
+* Labels
+*
+* Default labels combined with Bootstrap labels
+*/
+.label {
+	@include border-radius(.25em);
+	@include font(bold); 
+	display: inline;
+	padding: .2em .6em .3em !important;
+	color: #fff;
+	vertical-align: baseline;
+	text-align: center;
+	white-space: nowrap; 
+	font-size: 100%;
+	line-height: 1;
+}
+.label-default { 
+	background-color: $color-label-bg-default; 
+	color: $color-label-text-default;
+}
+.label-primary { 
+	background-color: $color-label-bg-primary; 
+	color: $color-label-text-primary;
+}
+.label-success { 
+	background-color: $color-label-bg-success; 
+	color: $color-label-text-success;
+}
+.label-info { 
+	background-color: $color-label-bg-info; 
+	color: $color-label-text-info;
+}
+.label-warning { 
+	background-color: $color-label-bg-warning; 
+	color: $color-label-text-warning;
+}
+.label-danger { 
+	background-color: $color-label-bg-danger; 
+	color: $color-label-text-danger;
+}
