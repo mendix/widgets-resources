@@ -1,5 +1,10 @@
-// Modules and Variables
-@import "base/all";
+@import "compass";
+@import "../custom/custom-variables";
+
+// Base
+@import "base/variables";
+@import "base/mixins";
+@import "base/reset";
 @import "base/base";
 
 // Components
