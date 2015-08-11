@@ -19,6 +19,11 @@
 		width: auto;
 	}
 
+	// Fix for mxui, gives the content a display table-cell that breaks everything (no 100% width)
+	.mx-listview-content {
+		display: block;
+	}
+
 	/* Load more button */
 	> .mx-button {
 		width: 100%;

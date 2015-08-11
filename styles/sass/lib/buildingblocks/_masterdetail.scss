@@ -16,11 +16,6 @@
 	.mx-listview {
 		height: 100%;
 		margin: 0;
-		// Fix for v-center, mxui gives the content a display table-cell that breaks everything
-		.mx-listview-content {
-			display: block;
-		}
-	
 		.mx-listview-item {
 			background-color: transparent;
 
