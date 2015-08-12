@@ -1,14 +1,8 @@
-/*
-* Mendix Documentation
-* Special styles for presenting components
-*/
+/* ==========================================================================
+   Groupbox
 
-
-/*
-* Groupbox
-*
-* Default Mendix Groupboxes
-*/
+   Default Mendix Groupboxes
+========================================================================== */
 .mx-groupbox {
 	> .mx-groupbox-header {
 		@include border-radius(0);
@@ -45,11 +39,11 @@
 }
 
 
-/*
-* Alternate Groupbox
-*
-* Different kind of Groupbox styling
-*/
+/* ==========================================================================
+   Groupbox Callouts
+
+   Default Mendix Groupboxes rendered as (Bootstrap) callouts
+========================================================================== */
 .mx-groupbox {
 
 	// Stylingless has no stlying or padding (used for wrapper)
@@ -130,11 +124,9 @@
 }
 
 
-/*
-* Groupbox Colors
-*
-* 
-*/
+/* ==========================================================================
+   Groupbox Colors
+========================================================================== */
 .mx-groupbox  {
 	// Color variations 
 	&.groupbox-default {
@@ -180,11 +172,9 @@
 }
 
 
-/*
-* Groupbox Spacing
-*
-* 
-*/
+/* ==========================================================================
+   Groupbox Spacing
+========================================================================== */
 .mx-groupbox {
 
 	&.groupbox-sideless  {
@@ -209,11 +199,9 @@
 }
 
 
-/*
-* Groupbox Headers
-*
-* Alternate header sizes for groupbox
-*/
+/* ==========================================================================
+   Groupbox Headers
+========================================================================== */
 .mx-groupbox {	
 	&.groupbox-h1 > .mx-groupbox-header { font-size: $font-size-h1; } 
 	&.groupbox-h2 > .mx-groupbox-header { font-size: $font-size-h2; }
@@ -224,11 +212,9 @@
 }
 
 
-/*
-* Groupbox Callouts
-*
-* Default Mendix Groupboxes rendered as (Bootstrap) callouts
-*/
+/* ==========================================================================
+   Groupbox Callouts
+========================================================================== */
 .mx-groupbox {	
 	&.groupbox-callout {
 		> .mx-groupbox-header, 

@@ -1,14 +1,8 @@
-/*
-* Mendix Documentation
-* Special styles for presenting components
-*/
+/* ==========================================================================
+   Images
 
-
-/*
-* Images
-*
-* Default Mendix Image Widgets
-*/
+   Default Mendix Image Widgets
+========================================================================== */
 img.img-rounded,
 .img-rounded img {
 	@include border-radius (6px);

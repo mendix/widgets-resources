@@ -1,15 +1,8 @@
-/*
-* Mendix Documentation
-* Special styles for presenting components
-*/
+/* ==========================================================================
+   Buttons
 
-
-/*
-* Buttons
-*
-* Default Bootstrap and Mendix Buttons
-*/
-
+   Default Bootstrap and Mendix Buttons
+========================================================================== */
 .btn,
 .mx-button {
 
@@ -78,11 +71,7 @@
 }
 
 
-/*
-* Buttons Alternate Style
-*
-* 
-*/
+// Buttons Alternate Style
 .btn-default {
     @include button-variant($color-btn-text-default, $color-btn-bg-default, $color-btn-border-default);
 }
@@ -144,12 +133,7 @@
     background-color: transparent;
 }
 
-
-/*
-* Buttons Sizes
-*
-* Combined with Bootstrap
-*/
+// Buttons Sizes
 .btn-lg {
     font-size: $font-size-large;
     padding: round(0.6 * $font-size-large) round(1 * $font-size-large);  // only for buttons
@@ -166,11 +150,7 @@
 }
 
 
-/*
-* Buttons Image
-*
-* Specific styling for images in buttons
-*/
+/* Buttons Image */
 .btn-image {
     padding: 0;
     border-style: none;
@@ -189,11 +169,7 @@
 }
 
 
-/*
-* Buttons Position
-*
-* 
-*/
+/* Buttons Position */
 .btn-right {
     float: right;
 }
@@ -201,12 +177,7 @@
     float: left;
 }
 
-
-/*
-* Buttons Attached
-*
-* Helper classes for buttons spacing
-*/
+/* Buttons Attached */
 .btn-attached-right {
     margin-left: 5px;
 }

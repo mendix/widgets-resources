@@ -1,19 +1,12 @@
-/*
-* Mendix Documentation
-* Special styles for presenting components
-*/
+/* ==========================================================================
+   Grid
 
-
-/*
-* Grid
-*
-* Default Mendix Grid
-*/
+   Default Mendix Grid
+========================================================================== */
 .mx-grid {
 	@include border-radius(0);
 	padding: 0px;
 	border: 0;
-	// margin: 0 0 35px 0;
 
 	.mx-grid-controlbar {
 		margin: 10px 0;

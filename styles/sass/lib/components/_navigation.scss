@@ -1,14 +1,8 @@
-/*
-* Mendix Documentation
-* Special styles for presenting components
-*/
+/* ==========================================================================
+   Navigation
 
-
-/*
-* Navigation
-*
-* Default Mendix Navigation Bar
-*/
+   Default Mendix Navigation Bar
+========================================================================== */
 .mx-navbar {
 	@include border-radius(0);
 	margin: 0;
@@ -142,11 +136,11 @@
 }
 
 
-/*
-* Navigation
-*
-* Default Mendix Navigation Tree
-*/
+/* ==========================================================================
+   Navigation
+
+   Default Mendix Navigation Tree
+========================================================================== */
 .mx-navigationtree {
 	background-color: $color-navsidebar-bg;
 
@@ -280,11 +274,11 @@
 }
 
 
-/*
-* Navigation
-*
-* Default Mendix Simple Menu Bar
-*/
+/* ==========================================================================
+   Navigation
+
+   Default Mendix Simple Menu Bar
+========================================================================== */
 .mx-menubar {
 	padding: 0;
 	background-color: $color-navsidebar-bg;
@@ -370,6 +364,7 @@
 	}
 
 }
+
 /* Vertical variation specifics */
 .mx-menubar-vertical {
 	background-color: $color-navtopbar-bg;

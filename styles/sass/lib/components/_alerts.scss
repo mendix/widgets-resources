@@ -1,15 +1,8 @@
-/*
-* Mendix Documentation
-* Special styles for presenting components
-*/
+/* ==========================================================================
+   Alerts
 
-
-/*
-* Alerts
-*
-* Default Bootstrap Alert boxes. Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages
-*/
-
+   Default Bootstrap Alert boxes. Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages
+========================================================================== */
 .alert {
 	@include border-radius(4px);
 	margin-top: 0; // want to align it with padding of a page

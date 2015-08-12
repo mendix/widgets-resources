@@ -1,14 +1,6 @@
-/*
-* Mendix Documentation
-* Special styles for presenting components
-*/
-
-
-/*
-* Inputs
-*
-* Default input fields
-*/
+/* ==========================================================================
+   Inputs
+========================================================================== */
 .form-control {
 	@include box-shadow(none);
 	@include transition(border-color ease-in-out .15s,box-shadow ease-in-out .15s);
@@ -51,11 +43,9 @@ textarea.form-control {
 }
 
 
-/*
-* Inputs Readonly
-*
-* Default input fields
-*/
+/* ==========================================================================
+   Inputs Readonly
+========================================================================== */
 .readonly-input {
 	@extend .form-control;
 	height: auto;
@@ -77,11 +67,9 @@ textarea.form-control {
 }
 
 
-/*
-* Inputs File Upload
-*
-* Default input fields
-*/
+/* ==========================================================================
+   Inputs File Upload
+========================================================================== */
 .mx-fileinput {
 	.mx-wrapped-label {
 		display: inline-block;

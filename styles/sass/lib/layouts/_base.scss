@@ -1,9 +1,8 @@
-/*
-* Regions
-*
-* Used for navigation layouts
-*/
+/* ==========================================================================
+   Regions
 
+   Used for navigation layouts
+========================================================================== */
 .region-topbar {
 	min-height: $minimalheight-topbar;
 	border-bottom: 1px solid $color-border-default;
@@ -98,12 +97,11 @@
 	}
 }
 
-/*
-* Navbar Brand
-*
-* Used to style your app brand and logo
-*/
+/* ==========================================================================
+   Navbar Brand
 
+   Used to style your app brand and logo
+========================================================================== */
 .navbar-brand {
 	display: block;
 	min-height: 80px;

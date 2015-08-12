@@ -1,14 +1,8 @@
-/*
-* Mendix Documentation
-* Special styles for presenting components
-*/
+/* ==========================================================================
+   Dataview
 
-
-/*
-* Dataview
-*
-* Default Mendix Dataview Widget. The data view is used for showing the contents of exactly one object
-*/
+   Default Mendix Dataview Widget. The data view is used for showing the contents of exactly one object
+========================================================================== */
 .mx-dataview {
 
 	/* Control bar */
@@ -41,6 +35,3 @@
         color:	$color-dataview-emptymessage-text;
     }
 }
-
-
-

@@ -1,14 +1,8 @@
-/*
-* Mendix Documentation
-* Special styles for presenting components
-*/
+/* ==========================================================================
+   Labels
 
-
-/*
-* Labels
-*
-* Default labels combined with Bootstrap labels
-*/
+   Default labels combined with Bootstrap labels
+========================================================================== */
 .label {
 	@include border-radius(.25em);
 	@include font(bold); 

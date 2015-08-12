@@ -1,14 +1,8 @@
-/*
-* Mendix Documentation
-* Special styles for presenting components
-*/
+/* ==========================================================================
+   Templategrid
 
-
-/*
-* Templategrid
-*
-* Default Mendix Templategrid Widget. The template grid shows a list of objects in a tile view. For example, a template grid can show a list of products. The template grid has a lot in common with the data grid. The main difference is that the objects are shown in templates (a sort of small data view) instead of rows
-*/
+   Default Mendix Templategrid Widget. The template grid shows a list of objects in a tile view. For example, a template grid can show a list of products. The template grid has a lot in common with the data grid. The main difference is that the objects are shown in templates (a sort of small data view) instead of rows
+========================================================================== */
 .mx-templategrid {
 	.mx-templategrid-content-wrapper {
 		table-layout: fixed;
@@ -35,11 +29,11 @@
 }	
 
 
-/*
-* Templategrid Hover
-*
-* Default Mendix Templategrid Widget Hover
-*/
+/* ==========================================================================
+   Templategrid Hover
+
+   Default Mendix Templategrid Widget Hover
+========================================================================== */
 .templategrid-hover.mx-templategrid {
 	.mx-templategrid-item {
 		&:hover {
@@ -56,11 +50,11 @@
 }
 
 
-/*
-* Templategrid Selectable
-*
-* Default Mendix Templategrid Widget with selection enabled
-*/
+/* ==========================================================================
+   Templategrid Selectable
+
+   Default Mendix Templategrid Widget with selection enabled
+========================================================================== */
 .templategrid-selectable.mx-templategrid {
 	.mx-templategrid-item {
 		cursor: pointer;
@@ -68,11 +62,11 @@
 }
 
 
-/*
-* Templategrid Lined
-*
-* Default Mendix Templategrid Widget with borders between items
-*/
+/* ==========================================================================
+   Templategrid Lined
+
+   Default Mendix Templategrid Widget with borders between items
+========================================================================== */
 .templategrid-lined.mx-templategrid {
 	.mx-grid-content {
 		border-top-style: solid;
@@ -88,12 +82,11 @@
 }
 
 
+/* ==========================================================================
+   Templategrid Striped
 
-/*
-* Templategrid
-*
-* Default Mendix Templategrid Widget with background in items
-*/
+  Default Mendix Templategrid Widget with background between items
+========================================================================== */
 .templategrid-striped.mx-templategrid {
 	.mx-templategrid-row:nth-child(odd) .mx-templategrid-item {
 		background-color: #f9f9f9;
@@ -101,11 +94,11 @@
 }
 
 
-/*
-* Templategrid Stylingless
-*
-* Default Mendix Templategrid Widget without styling
-*/
+/* ==========================================================================
+   Templategrid Stylingless
+
+  Default Mendix Templategrid Widget without styling
+========================================================================== */
 .templategrid-stylingless.mx-templategrid {
 	.mx-templategrid-item {
 		background-color: transparent;
@@ -127,11 +120,11 @@
 }		
 
 
-/*
-* Templategrid Transparent
-*
-* Default Mendix Templategrid Widget without background and padding in items
-*/
+/* ==========================================================================
+   Templategrid Transparent
+
+  Default Mendix Templategrid Widget without background and padding in items
+========================================================================== */
 .templategrid-transparent.mx-templategrid {
 	.mx-templategrid-item {
 		background-color: transparent;
