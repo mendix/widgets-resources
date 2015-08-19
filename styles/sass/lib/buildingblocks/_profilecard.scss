@@ -29,7 +29,7 @@
 	margin-bottom: 5px;
 }
 .profilecard-img {
-	@include border-radius (50%);
+	border-radius: 50%;
 	margin-right: 40px;
 	padding: 4px;
 	border: 2px solid $color-border-default;

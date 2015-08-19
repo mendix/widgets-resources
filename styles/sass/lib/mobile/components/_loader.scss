@@ -17,8 +17,8 @@
 		max-width: 100%;
 		top: 0;
 		.modal-content {
-			@include border-radius(0);
-			@include box-shadow(none);
+			border-radius: 0;
+			box-shadow:	none;
 			height: 100%;
 			border-style: none;
 		    background: none;
@@ -36,7 +36,7 @@
 			margin: 0;
 		}
 		.mx-progress-item {
-			@include border-radius(12px);
+			border-radius: 12px;
 			position: relative;
 			padding: 0;
 			width: 12px;
@@ -49,7 +49,7 @@
 			background: none;
 
 			&:before {
-				@include border-radius(12px);
+				border-radius: 12px;
 				content: "";
 				position: absolute;
 				top: 0px;
@@ -60,7 +60,7 @@
 				animation: loader10g 1.5s ease-in-out infinite;
 			}
 			&:after {
-				@include border-radius(12px);
+				border-radius: 12px;
 				content: "";
 				position: absolute;
 				top: 0px;

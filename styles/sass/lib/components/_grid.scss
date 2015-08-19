@@ -4,7 +4,7 @@
    Default Mendix Grid
 ========================================================================== */
 .mx-grid {
-	@include border-radius(0);
+	border-radius: 0;
 	padding: 0px;
 	border: 0;
 
@@ -28,7 +28,8 @@
 
 				&.disabled, 
 				&[disabled] {
-					@include opacity(0.4);
+					opacity: 0.4;
+					filter: alpha(opacity=40); /* For IE8 and earlier */
 				}
 			}
 

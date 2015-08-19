@@ -4,7 +4,7 @@
    Default Bootstrap Alert boxes. Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages
 ========================================================================== */
 .alert {
-	@include border-radius(4px);
+	border-radius: 4px;
 	margin-top: 0; // want to align it with padding of a page
 	padding: 15px;
 	border: 0;

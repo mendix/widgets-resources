@@ -5,8 +5,8 @@
 ========================================================================== */
 .mx-groupbox {
 	> .mx-groupbox-header {
-		@include border-radius(0);
 		@include font(bold);
+		border-radius: 0;
 		margin: 0;
 		background: $color-groupbox-default;
 		color: $color-groupbox-text-default;
@@ -20,7 +20,7 @@
 		}
 	}
 	> .mx-groupbox-body {
-		@include border-radius(0);
+		border-radius: 0;
     	padding: 10px 15px;
     	border-color: $color-groupbox-default;
     	background-color: #FFF;
@@ -29,12 +29,12 @@
 
   	}
   	.mx-groupbox-header + .mx-groupbox-body {
-  		@include border-radius(0);
+  		border-radius: 0;
 		border-top: none;
 	}
 
 	&.collapsed > .mx-groupbox-header {
-		@include border-radius(0);
+		border-radius: 0;
 	}
 }
 
@@ -49,13 +49,13 @@
 	// Stylingless has no stlying or padding (used for wrapper)
 	&.groupbox-stylingless  {
 		> .mx-groupbox-header {
-			@include border-radius(0);
+			border-radius: 0;
 			padding: 0;
 			border-style: none;
 			background-color: transparent;
 		}
 		> .mx-groupbox-body {
-			@include border-radius(0);
+			border-radius: 0;
 	    	padding: 0;
 	    	border-style: none;
 	    	background-color: transparent;
@@ -65,13 +65,13 @@
 	// Border radius
 	&.groupbox-border-radius {
 		> .mx-groupbox-header {
-			@include border-radius(3px 3px 0 0 !important);
+			border-radius: 3px 3px 0 0 !important;
 		}
 		> .mx-groupbox-body {
-			@include border-radius(3px !important);
+			border-radius: 3px !important;
 	  	}
 	  	.mx-groupbox-header + .mx-groupbox-body {
-			@include border-radius(0 0 3px 3px !important);
+			border-radius: 0 0 3px 3px !important;
 	  	}
 	}
 	&.groupbox-borderless {
@@ -220,9 +220,6 @@
 		> .mx-groupbox-header, 
 		> .mx-groupbox-body {
 	    	border: 0;
-	    	//border-left-width: 3px;
-			//border-left-style: solid;
-			//border-left-color: transparent;
 	  	}
 	  	.mx-groupbox-header + .mx-groupbox-body {
 	  		padding-top: 0;
@@ -231,7 +228,6 @@
 	&.groupbox-callout-info {
 		> .mx-groupbox-header, 
 		> .mx-groupbox-body {
-			//border-left-color: $color-callout-info;
 			background-color: $color-callout-bg-info;
 		}
 		> .mx-groupbox-header {
@@ -241,7 +237,6 @@
 	&.groupbox-callout-success {
 		> .mx-groupbox-header, 
 		> .mx-groupbox-body {
-			//border-left-color: $color-callout-success;
 			background-color: $color-callout-bg-success;
 		}
 		> .mx-groupbox-header {
@@ -251,7 +246,6 @@
 	&.groupbox-callout-warning {
 		> .mx-groupbox-header, 
 		> .mx-groupbox-body {
-			//border-left-color: $color-callout-warning;
 			background-color: $color-callout-bg-warning;
 		}
 		> .mx-groupbox-header {
@@ -261,7 +255,6 @@
 	&.groupbox-callout-danger {
 		> .mx-groupbox-header, 
 		> .mx-groupbox-body {
-			//border-left-color: $color-callout-danger;
 			background-color: $color-callout-bg-danger;
 		}
 		> .mx-groupbox-header {

@@ -31,7 +31,7 @@
 }
 .wizard-step-number {
 	@include font(bold);
-	@include border-radius(50%);
+	border-radius: 50%;
 	font-size: 20px;
 	width: 72px;
 	height: 72px;

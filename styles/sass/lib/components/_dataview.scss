@@ -7,7 +7,7 @@
 
 	/* Control bar */
 	.mx-dataview-controls {
-		@include border-radius(0);
+		border-radius: 0;
 		// Needed to clear the bootstrap columns (get float: left)
 		clear: both;
 		margin-top: 10px;

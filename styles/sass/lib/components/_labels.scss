@@ -4,8 +4,8 @@
    Default labels combined with Bootstrap labels
 ========================================================================== */
 .label {
-	@include border-radius(.25em);
 	@include font(bold); 
+	border-radius: .25em;
 	display: inline;
 	padding: .2em .6em .3em !important;
 	color: #fff;

@@ -53,7 +53,7 @@
 	}
 	.dijitCalendarSelectedDate,
 	.dijitCalendarSelectedDate:hover {
-		@include border-radius(10px);
+		border-radius: 10px;
 		background: $color-primary;
 		color: #FFF;
 	}
@@ -61,25 +61,25 @@
 	.dijitCalendarPreviousYearHover,
 	.dijitCalendarNextYearHover,
 	.dijitCalendarMonthLabelHover {
-		@include border-radius(10px);
+		border-radius: 10px;
 		background-color: #dbdcdd;
 	}
 	.dijitCalendarYearContainer td {
 		@include font(bold);
-		@include border-bottom-radius(3px);
+		border-bottom-radius: 3px;
 		border-top: 1px solid $color-border-default;
 		text-align: center;
 	}
 	.dijitCalendarMonthContainer th:first-child {
-		@include border-top-left-radius(3px);
+		border-top-left-radius: 3px;
 	}
 	.dijitCalendarMonthContainer th:last-child {
-		@include border-top-right-radius(3px);
+		border-top-right-radius: 3px;
 	}
 }
 
 .dijitCalendarMonthMenuPopup {
-	@include border-radius(3px);
+	border-radius: 3px;
 	/* (must be higher than popup z-index) */
 	z-index: 10020 !important;
 	padding: 3px 4px;
@@ -104,12 +104,12 @@
 	 		th {
 
 	 			&:first-child {
-	 				@include border-top-left-radius(0px);
-	 				@include border-top-right-radius(3px);	
+	 				border-top-left-radius: 0px;
+	 				border-top-right-radius: 3px;	
 	 			}
 	 			&:last-child {
-	 				@include border-top-left-radius(3px);
-	 				@include border-top-right-radius(0px);
+	 				border-top-left-radius: 3px;
+	 				border-top-right-radius: 0px;
 	 			}
 	 		}
 	 	}
@@ -124,8 +124,8 @@
  */
 .mx-tooltip {
 	.dijitTooltipContainer {
-		@include border-radius(4px);
-		@include box-shadow(0 6px 12px rgba(0,0,0,0.175));
+		border-radius: 4px;
+		box-shadow:	0 6px 12px rgba(0,0,0,0.175);
 
 		border-width: 1px;
 		border-color: $gray-light;
@@ -203,7 +203,8 @@
 	    border: none;
 	}
 	.dijitSplitterActive {
-		@include opacity(0.6);
+		opacity: 0.6;
+		filter: alpha(opacity=60); /* For IE8 and earlier */
 		
 		margin: 0;
 		background-color: #aaa;
@@ -226,7 +227,7 @@
 .dijitMenuPopup {
 	margin-top: 10px;
     .dijitMenu {
-        @include border-radius(3px);
+        border-radius: 3px;
         display: block;
         margin-top: 0; // No top margin because there is no parent with margin bottom
         padding: 12px 10px;
@@ -251,7 +252,7 @@
         .dijitMenuItem {
             background: transparent;
             .dijitMenuItemLabel {
-                @include border-radius(3px);
+                border-radius: 3px;
                 padding: 10px;
                 color: #FFF;
                 width: 180px !important;
