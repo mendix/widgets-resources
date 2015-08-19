@@ -2,8 +2,12 @@
    Inputs
 ========================================================================== */
 .form-control {
-	@include box-shadow(none);
-	@include transition(border-color ease-in-out .15s,box-shadow ease-in-out .15s);
+	-moz-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+
+	box-shadow:	none;
 	display: block;
 	padding: 7px 8px;
 	width: 100%;

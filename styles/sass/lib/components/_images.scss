@@ -5,14 +5,16 @@
 ========================================================================== */
 img.img-rounded,
 .img-rounded img {
-	@include border-radius (6px);
+	border-radius: 6px;
 }
 img.img-thumbnail,
 .img-thumbnail img {
-	@include border-radius (4px);
-	@include transition-property(all);
-	@include transition-timing-function(ease-in-out);
-	@include transition-duration(2s);
+	-moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+
+	border-radius: 4px;
 	display: inline-block;
 	height: auto;
 	max-width: 100%;
@@ -23,7 +25,7 @@ img.img-thumbnail,
 }
 img.img-circle,
 .img-circle img {
-	@include border-radius (50%);
+	border-radius: 50%;
 }
 img.img-auto,
 .img-auto img {

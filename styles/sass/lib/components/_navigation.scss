@@ -4,7 +4,7 @@
    Default Mendix Navigation Bar
 ========================================================================== */
 .mx-navbar {
-	@include border-radius(0);
+	border-radius: 0;
 	margin: 0;
 	border-style: none;
 	background-color: $color-navtopbar-bg;
@@ -15,7 +15,7 @@
 		/* Navigation item */
 		> li.mx-navbar-item > a {
 			@include font(normal);
-			@include border-radius(0);
+			border-radius: 0;
 			padding: 15px 20px;
 			color: $color-navtopbar-text;
 			font-size: $font-navtopbar-size;

@@ -24,7 +24,7 @@
 			/* Search Field */
 			.mx-listview-search-input {
 				input {
-					@include box-shadow(none);
+					box-shadow:	none;
 					padding: 0;
 					border-style: none;
 					background-color: $gray-lighter;
@@ -35,10 +35,10 @@
 		.mx-list {
 			.mx-listview-item {
 				&:first-child {
-					@include border-radius(0);
+					border-radius: 0;
 				}
 				&:last-child {
-					@include border-radius(0);
+					border-radius: 0;
 				}
 			}
 		}

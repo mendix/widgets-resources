@@ -24,8 +24,8 @@
 			margin: 0;
 			width: 1%;
 			a {
-				@include box-shadow(none);
-				@include border-radius(0);
+				border-radius: 0;
+				box-shadow:	none;
 				margin: 0;
 				padding: 15px 0;
 				border-style: none;

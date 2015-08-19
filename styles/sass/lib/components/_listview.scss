@@ -77,10 +77,10 @@
 		border-left: none;
 
 		&:first-child {
-			@include border-radius(0);
+			border-radius: 0;
 		}
 		&:last-child {
-			@include border-radius(0);
+			border-radius: 0;
 			border-bottom: 1px solid $color-grid-border;
 		}
 	}
@@ -106,7 +106,7 @@
 ========================================================================== */
 .listview-seperated.mx-listview {
 	.mx-listview-item {
-		@include border-radius(4px);
+		border-radius: 4px;
 		margin-bottom: 10px;
 		border-style: solid;
 	}
