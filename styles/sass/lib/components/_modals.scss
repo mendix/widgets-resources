@@ -8,8 +8,8 @@
 	.modal-content {
 		border-radius: 4px;
 		box-shadow:	0 2px 4px rgba(0,0,0,.2);
-		border: 1px solid $color-border-default;
-		border: 1px solid rgba(0,0,0,0);
+		border: 1px solid $color-modal-header-border;
+		//border: 1px solid rgba(0,0,0,0);
 
 		.modal-header {
 			border-radius: 0; // Because of the class .mx-window-active in mxui.css
