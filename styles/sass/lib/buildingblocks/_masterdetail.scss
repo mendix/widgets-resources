@@ -12,6 +12,9 @@
 
 			&.selected {
 				color: #FFF;
+				.mx-link {
+					color: #FFF;
+				}
 				
 				&:hover,
 				&:active {
