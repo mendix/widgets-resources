@@ -41,15 +41,6 @@ body .mx-header {
 			vertical-align: middle;
 		}		
 	}
-
-	.mx-header-left {	
-		left: 0;
-		text-align: left;
-	}
-	.mx-header-right {	
-		right: 0;
-		text-align: right;
-	}
 	.mx-link {
 		color: $m-color-header-link;
 	}
@@ -72,4 +63,15 @@ body .mx-header {
 	.btn-image.glyphicon {
 		font-size: 21px;
  	}
+}
+
+body[dir="ltr"] .mx-header-left, 
+body[dir="rtl"] .mx-header-right {
+	left: 0;
+	text-align: left;
+}
+body[dir="rtl"] .mx-header-left, 
+body[dir="ltr"] .mx-header-right {
+	right: 0;
+	text-align: right;
 }
