@@ -67,10 +67,13 @@
 		background-color: #dbdcdd;
 	}
 	.dijitCalendarYearContainer td {
-		@include font(bold);
-		border-bottom-radius: 3px;
 		border-top: 1px solid $color-border-default;
 		text-align: center;
+		color: #000;
+		.dijitCalendarSelectedYear {
+			@include font(bold);
+			text-decoration: underline;
+		}
 	}
 	.dijitCalendarMonthContainer th:first-child {
 		border-top-left-radius: 3px;
