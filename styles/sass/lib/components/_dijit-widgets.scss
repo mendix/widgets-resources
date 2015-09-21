@@ -33,7 +33,7 @@
 			text-align: center;
 		}
 		td .dijitCalendarDateLabel {
-			color: $font-color-base;
+			color: #000;
 		}
 		tfoot h3 {
 			margin: 0;
@@ -55,7 +55,9 @@
 	.dijitCalendarSelectedDate:hover {
 		border-radius: 10px;
 		background: $color-primary;
-		color: #FFF;
+		.dijitCalendarDateLabel {
+			color: #fff;
+		}
 	}
 	.dijitCalendarHoveredDate,
 	.dijitCalendarPreviousYearHover,
