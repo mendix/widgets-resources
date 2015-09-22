@@ -1,0 +1,22 @@
+/* ==========================================================================
+   Action Block
+========================================================================== */
+.actionblock {
+	@include font(bold);
+	padding: 20px 0;
+	margin: 10px 0;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
+	span {
+		display: block;
+		margin: auto auto 20px auto;
+		font-size: 72px;
+	}
+	img {
+		height: 72px;
+		display: block;
+		margin: auto auto 20px auto;
+	}
+}
