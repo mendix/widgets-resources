@@ -41,6 +41,7 @@
 /* Vertical Align Elements in a bootstrap row, add class on row */
 .v-center {
   display: table;
+  width: 100%;
 	div[class*='col-'] {
 		display: table-cell;
     	vertical-align: middle;
