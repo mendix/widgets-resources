@@ -76,13 +76,14 @@
 		padding: 0;
 	}
 }
+
 .layout-sidebar-responsive {
 	.region-sidebar-fixed {
 		display: none;
 		@extend .region-sidebar;
 		@media (min-width: 768px) {
 		  position: fixed;
-		  left: 0;
+		  //eft: 0;
 		  z-index: 10;
 		  display: block;
 		  overflow-x: hidden;
@@ -97,7 +98,16 @@
 		}
 	}
 }
-
+body[dir="rtl"] {
+	@media (min-width: 768px) {
+	  right: 0;
+	}
+}
+body[dir="ltr"] {
+	@media (min-width: 768px) {
+	  left: 0;
+	}
+}
 /* ==========================================================================
    Navbar Brand
 
