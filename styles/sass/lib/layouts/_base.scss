@@ -83,7 +83,6 @@
 		@extend .region-sidebar;
 		@media (min-width: 768px) {
 		  position: fixed;
-		  //eft: 0;
 		  z-index: 10;
 		  display: block;
 		  overflow-x: hidden;
@@ -98,12 +97,12 @@
 		}
 	}
 }
-body[dir="rtl"] {
+body[dir="rtl"] .layout-sidebar-responsive .region-sidebar-fixed {
 	@media (min-width: 768px) {
 	  right: 0;
 	}
 }
-body[dir="ltr"] {
+body[dir="ltr"] .layout-sidebar-responsive .region-sidebar-fixed {
 	@media (min-width: 768px) {
 	  left: 0;
 	}
