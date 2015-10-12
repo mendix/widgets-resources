@@ -90,12 +90,36 @@
     padding: 14px 20px 14px 30px;
     position: relative;
     background: $gray-lighter;
+ 
+	&:after, 
+	&:before {
+		position: absolute;
+        width: 0;
+        height: 0;
+        border: solid transparent;
+        border-color: transparent;
+        content: " ";
+        pointer-events: none;
+		left: 100%;
+	}
+	&:before {
+	    top: 50%;
+	    margin-top: -25px;
+	    border-width: 25px 15px;
+	    border-left-color: $gray-primary;
+	}
+	&:after {
+	    top: 50%;
+	    margin-top: -24px;
+	    border-width: 24px 14px;
+	    border-left-color: $gray-lighter;
+	}
 }
 .wizard-progress-step-active {
-	background-color: $background-primary-lighter;
+	background-color: $color-primary-lighter;
 
-	.wizard-step-chevron:before {
-  		border-left: 14px solid $background-primary-lighter;
+	&:after {
+		border-left-color: $color-primary-lighter;
 	}
 }
 .wizard-progress-number {
@@ -111,27 +135,6 @@
 }
 .wizard-progress-title {
 	color: $color-primary;
-}
-.wizard-step-chevron {
-	border: 24px solid transparent;
-    border-left: 14px solid $gray-primary;
-    border-right: 0;
-    display: block;
-    position: absolute;
-    right: -14px;
-    top: 0;
-    z-index: 1;
-    
-    &:before {
-	    border: 24px solid transparent;
-	    border-left: 14px solid $gray-lighter;
-	    border-right: 0;
-	    content: "";
-	    display: block;
-	    position: absolute;
-	    right: 1px;
-	    top: -24px;
-	}
 }
 .wizard-step-content {
 	padding: 10px 20px;
