@@ -7,7 +7,7 @@
 	border-radius: 0;
 	margin: 0;
 	border-style: none;
-	background-color: $color-navtopbar-bg;
+	background-color: $navtopbar-bg-color;
 
 	ul.nav { 
 
@@ -17,31 +17,31 @@
 			@include font(normal);
 			border-radius: 0;
 			padding: 15px 20px;
-			color: $color-navtopbar-text;
-			font-size: $font-navtopbar-size;
+			color: $navtopbar-text-color;
+			font-size: $navtopbar-font-size;
 			vertical-align: middle;
 
 			/* Dropdown arrow */
 			.caret {
-				border-top-color: $color-navtopbar-text;
-				border-bottom-color: $color-navtopbar-text;
+				border-top-color: $navtopbar-text-color;
+				border-bottom-color: $navtopbar-text-color;
 			}
 
 			&:hover,
 			&:focus,
 			&.active {
-				background-color: $color-navtopbar-bg-hover;
-				color: $color-navtopbar-text-hover;
+				background-color: $navtopbar-bg-hover-color;
+				color: $navtopbar-text-hover-color;
 				text-decoration: none;
 
 				.caret {
-					border-top-color: $color-navtopbar-text-active;
-					border-bottom-color: $color-navtopbar-text-active;
+					border-top-color: $navtopbar-text-active-color;
+					border-bottom-color: $navtopbar-text-active-color;
 				}
 			}
 			&.active {
-            	color: $color-navtopbar-text-active;
-            	background-color: $color-navtopbar-bg-active;
+            	color: $navtopbar-text-active-color;
+            	background-color: $navtopbar-bg-active-color;
             }
 
 			/* Dropdown */
@@ -53,7 +53,7 @@
 				height: 0;
 				border-width: 0 9px 9px 9px;
 				border-style: solid;
-				border-color: transparent transparent $color-navtopbar-border transparent;
+				border-color: transparent transparent $navtopbar-border-color transparent;
 				content: "";
 				transform: rotate(360deg);
 				-webkit-transform: rotate(360deg);
@@ -67,7 +67,7 @@
 
 			.glyphicon {
 					vertical-align: middle;
-					font-size: $font-navtopbar-glyph-size;
+					font-size: $navtopbar-glyph-size;
 					top: -1px;
 				}
 		}
@@ -79,22 +79,22 @@
 		> .mx-navbar-item.open > a, 
 		> .mx-navbar-item.open > a:hover, 
 		> .mx-navbar-item.open > a:focus {
-			background-color: $color-navtopbar-bg-hover;
-			color: $color-navtopbar-text-hover;
+			background-color: $navtopbar-bg-hover-color;
+			color: $navtopbar-text-hover-color;
 			text-decoration: none;
 
 			.caret {
-				border-top-color: $color-navtopbar-text-hover;
-				border-bottom-color: $color-navtopbar-text-hover;
+				border-top-color: $navtopbar-text-hover-color;
+				border-bottom-color: $navtopbar-text-hover-color;
 			}
 		}
 		> .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
-			background-color: $color-navtopbar-sub-bg-active;
-			color: $color-navtopbar-sub-text-active;
+			background-color: $navtopbar-sub-bg-active-color;
+			color: $navtopbar-sub-text-active-color;
 
 			.caret {
-				border-top-color: $color-navtopbar-sub-text-active;
-				border-bottom-color: $color-navtopbar-sub-text-active;
+				border-top-color: $navtopbar-sub-text-active-color;
+				border-bottom-color: $navtopbar-sub-text-active-color;
 			}
         }
 	}
@@ -104,7 +104,7 @@
 			padding: 10px 20px;
 		}
 		.mx-navbar-item.open .dropdown-menu {
-			background-color: $color-navtopbar-sub-bg;
+			background-color: $navtopbar-sub-bg-color;
 			border-radius: 0;
 			padding: 0;
 			
@@ -112,18 +112,18 @@
 				@include font(normal);
 				padding: 10px 20px;
 				border-radius: 0;
-				color: $color-navtopbar-sub-text;
-				font-size: $font-navtopbar-sub-size;
+				color: $navtopbar-sub-text-color;
+				font-size: $navtopbar-sub-font-size;
 
 				&:hover,
 				&:focus {
-					color: $color-navtopbar-sub-text-hover;
-					background-color: $color-navtopbar-sub-bg-hover;
+					color: $navtopbar-sub-text-hover-color;
+					background-color: $navtopbar-sub-bg-hover-color;
 				}
 
 				&.active {
-					color: $color-navtopbar-sub-text-active;
-					background-color: $color-navtopbar-sub-bg-active;
+					color: $navtopbar-sub-text-active-color;
+					background-color: $navtopbar-sub-bg-active-color;
 				}
 			}
 		}
@@ -142,7 +142,7 @@
    Default Mendix Navigation Tree
 ========================================================================== */
 .mx-navigationtree {
-	background-color: $color-navsidebar-bg;
+	background-color: $navsidebar-bg-color;
 
 	/* Every navigation item */
 	.navbar-inner ul {
@@ -157,29 +157,29 @@
 				@include font(normal);
 				display: block;
 				padding: 15px 20px 15px 16px;
-				border-bottom: 1px solid $color-navsidebar-border;
+				border-bottom: 1px solid $navsidebar-border-color;
 				border-radius: 0;
-				color: $color-navsidebar-text;
+				color: $navsidebar-text-color;
 				text-shadow: none;
-				font-size: $font-navsidebar-size;
+				font-size: $navsidebar-font-size;
 				vertical-align: middle;
-				background-color: $color-navsidebar-bg;
+				background-color: $navsidebar-bg-color;
 				border-left: 4px solid transparent;
 
 				.caret {
-					border-top-color: $color-navsidebar-text;
-					border-bottom-color: $color-navsidebar-text;
+					border-top-color: $navsidebar-text-color;
+					border-bottom-color: $navsidebar-text-color;
 				}
 
 				img {
 					margin-right: 4px;
-					width: 20px; // Default size (so it looks good)
+					width: 20px; // Default size
 					height: auto;
 				}
 
 				.glyphicon {
 					vertical-align: middle;
-					font-size: $font-navsidebar-glyph-size;
+					font-size: $navsidebar-glyph-size;
 					top: -1px;
 				}
 			}
@@ -187,20 +187,20 @@
 			a:hover,
 			a:focus,
 			a.active {
-				background-color: $color-navsidebar-bg-hover;
-				color: $color-navsidebar-text-hover;
+				background-color: $navsidebar-bg-hover-color;
+				color: $navsidebar-text-hover-color;
 				text-decoration: none;
 
 				.caret {
-					border-top-color: $color-navsidebar-text-active;
-					border-bottom-color: $color-navsidebar-text-active;
+					border-top-color: $navsidebar-text-active-color;
+					border-bottom-color: $navsidebar-text-active-color;
 				}
 			}
 
             a.active {
-            	border-left-color: $color-navsidebar-text-active;
-            	color: $color-navsidebar-text-active;
-            	background-color: $color-navsidebar-bg-active;
+            	border-left-color: $navsidebar-text-active-color;
+            	color: $navsidebar-text-active-color;
+            	background-color: $navsidebar-bg-active-color;
             }
 		}
 	}
@@ -210,29 +210,29 @@
 		> ul {
 			margin: 0;
 			padding-left: 0;
-			background-color: $color-navsidebar-sub-bg;
+			background-color: $navsidebar-sub-bg-color;
 
 			li {
 				margin: 0;
 				padding: 0;
 				a {
 					@include font(normal);
-					color: $color-navsidebar-sub-text;
-					font-size: $font-navsidebar-sub-size;
-					background-color: $color-navsidebar-sub-bg;
+					color: $navsidebar-sub-text-color;
+					font-size: $navsidebar-sub-font-size;
+					background-color: $navsidebar-sub-bg-color;
 					padding: 12px 20px 12px 25px;
 					border: 0;
 
 					&:hover,
 					&:focus,
 					&.active {
-						color: $color-navsidebar-sub-text-hover;
-						background-color: $color-navsidebar-sub-bg-hover;
+						color: $navsidebar-sub-text-hover-color;
+						background-color: $navsidebar-sub-bg-hover-color;
 					}
 					&.active {
 		            	border: 0;
-		            	color: $color-navsidebar-sub-text-active;
-		            	background-color: $color-navsidebar-sub-bg-active;
+		            	color: $navsidebar-sub-text-active-color;
+		            	background-color: $navsidebar-sub-bg-active-color;
 		            }
 				}
 			}
@@ -281,7 +281,7 @@
 ========================================================================== */
 .mx-menubar {
 	padding: 0;
-	background-color: $color-navsidebar-bg;
+	background-color: $navsidebar-bg-color;
 	ul.mx-menubar-list {
 		width: 100%;
 		height: 50px;
@@ -293,8 +293,8 @@
 			a {
 				@include font(normal);
 				border-radius: 0;
-				color: $color-navsidebar-text;
-				font-size: $font-navsidebar-sub-size;
+				color: $navsidebar-text-color;
+				font-size: $navsidebar-sub-font-size;
 				padding: 0 8px;
 				text-align: center;
 				line-height: 50px;
@@ -304,7 +304,7 @@
 
 				.glyphicon {
 					vertical-align: middle;
-					font-size: $font-navsidebar-glyph-size;
+					font-size: $navsidebar-glyph-size;
 					top: -1px;
 				}
 			}
@@ -313,13 +313,13 @@
 			&:hover a,
 			&:focus a,
 			&.active a {
-				background-color: $color-navsidebar-bg-hover;
-				color: $color-navsidebar-text-hover;
+				background-color: $navsidebar-bg-hover-color;
+				color: $navsidebar-text-hover-color;
 				text-decoration: none;
 			}
 			&.active a {
-            	color: $color-navsidebar-text-active;
-            	background-color: $color-navsidebar-bg-active;
+            	color: $navsidebar-text-active-color;
+            	background-color: $navsidebar-bg-active-color;
             }
 		}
 	}
@@ -367,30 +367,30 @@
 
 /* Vertical variation specifics */
 .mx-menubar-vertical {
-	background-color: $color-navtopbar-bg;
+	background-color: $navtopbar-bg-color;
 	ul.mx-menubar-list {
 		li.mx-menubar-item {
 			a {
-				color: $color-navtopbar-text;
-				font-size: $font-navtopbar-size;
-				border-bottom: 1px solid $color-navtopbar-border;
+				color: $navtopbar-text-color;
+				font-size: $navtopbar-font-size;
+				border-bottom: 1px solid $navtopbar-border-color;
 
 				.glyphicon {
 					vertical-align: middle;
-					font-size: $font-navtopbar-glyph-size;
+					font-size: $navtopbar-glyph-size;
 					top: -1px;
 				}
 
 				&:hover,
 				&:focus,
 				&.active {
-					background-color: $color-navtopbar-bg-hover;
-					color: $color-navtopbar-text-hover;
+					background-color: $navtopbar-bg-hover-color;
+					color: $navtopbar-text-hover-color;
 					text-decoration: none;
 				}
 				&.active {
-	            	color: $color-navtopbar-text-active;
-	            	background-color: $color-navtopbar-bg-active;
+	            	color: $navtopbar-text-active-color;
+	            	background-color: $navtopbar-bg-active-color;
 	            }
 			}
 		}

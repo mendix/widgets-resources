@@ -1,15 +1,15 @@
 /* ==========================================================================
    Form
 
-   To extend the default form
+   To extend the default Bootstrap form
 ========================================================================== */
 .form {
 	
 }
 .form-group .control-label {
 	margin-bottom: 5px;
-	color: $color-label;	
-	font-weight: $font-weight-label;	
+	color: $form-label-color;	
+	font-weight: $form-label-weight;	
 }
 .form-footer {
 	border-top: 1px solid $gray-lighter;
