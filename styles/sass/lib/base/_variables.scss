@@ -30,7 +30,7 @@ $topbar-minimalheight:                  80px !default;
 // Sidebar 
 $sidebar-bg-color:                      $color-inverse !default;
 
-// Navbar Brand Name / For your company, product, or project name (used in /layouts/base/)
+// Navbar Brand Name / For your company, product, or project name (used in layouts/base/)
 $navbar-brand-name:                     #000 !default;
 
 // Background Colors
@@ -60,7 +60,7 @@ $link-hover-color:                      darken($link-color, 15%) !default;
 
 
 //== Typography
-//## Change your font family, weight, line-height, headings and more
+//## Change your font family, weight, line-height, headings and more (used in components/typography)
 
 // Font Family / False = fallback from Bootstrap (Helvetica Neue)
 $font-family-base:                      false !default;//"Helvetica Neue", Helvetica, Arial, sans-serif !default;
@@ -114,7 +114,7 @@ $default-border-color:                  $gray-primary !default;
 
 
 //== Navigation
-//## Used in /components/navigation
+//## Used in components/navigation
 
 // Navigation Sidebar
 $navsidebar-font-size:                  $font-size-base !default;
@@ -162,7 +162,7 @@ $navtopbar-border-color:                $navtopbar-bg-hover-color !default;
 
 
 //== Form
-//## Used in /components/inputs
+//## Used in components/inputs
 
 // Form Label  
 $form-label-color:                      #666 !default;        
@@ -184,7 +184,7 @@ $form-input-border-focus-color:         $color-primary !default;
 
 
 //== Buttons
-//## Define background-color, border-color and text. Used in /components/buttons
+//## Define background-color, border-color and text. Used in components/buttons
 
 // Button Text Size
 $btn-font-size:                         12px !default;
@@ -231,7 +231,7 @@ $btn-text-color-danger:                 #FFF !default;
 */
 
 //== Color variations
-//## 
+//## These variations are used to support several other variables and components
 
 // Basic Text colors
 $color-text-black:                      #000 !default;
@@ -283,7 +283,7 @@ $color-danger-lighter:                  tint($color-danger,80) !default;
 
 
 //== Grids
-//## Used for Datagrid, Templategrid, Listview & Tables
+//## Used for Datagrid, Templategrid, Listview & Tables (see components folder)
 
 // Default Border Colors
 $grid-border-color:                     $default-border-color !default;
@@ -314,7 +314,7 @@ $grid-paging-text-hover-color:          $color-primary !default;
 
 
 //== Tabs
-//##
+//## Default variables for Tab Container Widget (used in components/tabcontainer)
 
 // Text Color
 $tabs-text-color:                       $color-text-black-secondary !default;
@@ -333,7 +333,7 @@ $tabs-bg-active-color:                  $color-primary !default;
 
 
 //== Modals
-//## Default Mendix Modal, Blocking Modal and Login Modal
+//## Default Mendix Modal, Blocking Modal and Login Modal (used in components/modals)
 
 // Background Color
 $modal-header-bg-color:                 transparent !default;
@@ -348,8 +348,7 @@ $modal-header-text-color:               $font-base-color !default;
 
 
 //== Dataview
-//
-//##
+//## Default variables for Dataview Widget (used in components/dataview)
 
 // Controls
 $color-dataview-controls-bg:            transparent !default;
@@ -363,7 +362,7 @@ $color-dataview-emptymessage-text:      $font-base-color !default;
 
 
 //== Alerts
-//##
+//## Default Bootstrap alerts, not a widget in the Modeler (used in components/alerts)
 
 // Background Color
 $alert-bg-color-info:                   $color-info-lighter !default;
@@ -387,7 +386,7 @@ $alert-border-color-danger:             $color-danger-dark !default;
 
 
 //== Labels
-//##
+//## Default Bootstrap Labels, not a widget in the Modeler (used in components/labels)
 
 // Background Color
 $label-bg-color-default:                $color-default !default;
@@ -417,7 +416,7 @@ $label-text-color-danger:               #FFF !default;
 
 
 //== Groupbox
-//##
+//## Default variables for Groupbox Widget (used in components/groupbox)
 
 // Background Color
 $groupbox-bg-color-default:             $color-default !default;
@@ -443,7 +442,7 @@ $groupbox-text-color-white:             $font-base-color !default;
 
 
 //== Callout (groupbox) Colors
-//##
+//## Extended variables for Groupbox Widget (used in components/groupbox)
 
 // Text and Border Color
 $callout-color-info:                    $color-info !default;
@@ -461,10 +460,10 @@ $callout-bg-color-danger:               $color-danger-lighter !default;
 
 
 //== Mobile
-//## Specific mobile widgets and components
+//## 
 
 //== Mobile Header
-//##
+//## Specific mobile widgets and components (used in mobile/components/mx-header)
 
 // Height
 $m-header-height:                       44px !default;
@@ -482,7 +481,7 @@ $m-header-link-color:                   $link-color !default;
 
 
 //== Mobile Tabs
-//##
+//## Specific mobile widgets and components (used in mobile/components/tabcontainer)
 
 // Text Color
 $m-tabs-text-color:                     #FFF !default;
@@ -501,7 +500,7 @@ $m-tabs-border-active-color:            darken($m-tabs-bg-color, 15) !default;
 
 
 //== Layout Spacing
-//## Advanced layout options
+//## Advanced layout options (used in base/mixins/default-spacing)
 
 $default-spacing-top:                   35px !default;
 $default-spacing-right:                 40px !default;
@@ -537,7 +536,7 @@ $t-default-spacing:                     $t-default-spacing-top $t-default-spacin
 
 
 //== Tables
-//## Table spacing options
+//## Table spacing options (used in components/tables)
 
 $padding-table-cell-top:                8px !default;                    
 $padding-table-cell-bottom:             8px !default;                    
