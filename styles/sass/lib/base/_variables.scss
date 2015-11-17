@@ -12,23 +12,23 @@
 
 
 //== Step 1: Brand Colors
-$color-default:                         #DDDDDD !default;    
-$color-primary:                         #59C2E6 !default;    
-$color-inverse:                         #3D3F41 !default; 
-$color-info:                            #8AD4ED !default;
-$color-success:                         #8CC152 !default;
-$color-warning:                         #F6BB42 !default;
-$color-danger:                          #D9534F !default;
+$brand-default:                         #DDDDDD !default;    
+$brand-primary:                         #59C2E6 !default;    
+$brand-inverse:                         #3D3F41 !default; 
+$brand-info:                            #8AD4ED !default;
+$brand-success:                         #8CC152 !default;
+$brand-warning:                         #F6BB42 !default;
+$brand-danger:                          #D9534F !default;
 
 
 //== Step 2: UI Customization
 
 // Topbar 
-$topbar-bg-color:                       #FFF !default;
+$topbar-bg:                             #FFF !default;
 $topbar-minimalheight:                  80px !default;
 
 // Sidebar 
-$sidebar-bg-color:                      $color-inverse !default;
+$sidebar-bg:                            $brand-inverse !default;
 
 // Navbar Brand Name / For your company, product, or project name (used in layouts/base/)
 $navbar-brand-name:                     #000 !default;
@@ -43,7 +43,7 @@ $font-base-size:                        14px !default;
 $font-base-color:                       #000 !default;
 
 // Default Link Color
-$link-color:                            $color-primary !default;
+$link-color:                            $brand-primary !default;
 $link-hover-color:                      darken($link-color, 15%) !default;
 
 
@@ -72,7 +72,7 @@ $font-family-bold:                      false !default;//"Helvetica Neue", Helve
 $font-size-large:                       ceil($font-base-size * 1.25) !default; // ~18px
 $font-size-small:                       ceil($font-base-size * 0.85) !default; // ~12px
 
-// Font Weight
+// Font Weights
 $font-weight-light:                     100 !default;
 $font-weight-normal:                    normal !default;         
 $font-weight-semibold:                  500 !default;
@@ -121,42 +121,42 @@ $navsidebar-font-size:                  $font-size-base !default;
 $navsidebar-sub-font-size:              $font-size-small !default;
 $navsidebar-glyph-size:                 1.2em !default; // For glyphicons that you can select in the Mendix Modeler
 
-$navsidebar-bg-color:                   $sidebar-bg-color !default;
-$navsidebar-bg-hover-color:             lighten($navsidebar-bg-color, 4) !default;
-$navsidebar-bg-active-color:            lighten($navsidebar-bg-color, 8) !default;
-$navsidebar-text-color:                 #FFF !default;
-$navsidebar-text-hover-color:           $color-primary !default;
-$navsidebar-text-active-color:          $color-primary !default;
+$navsidebar-bg:                         $sidebar-bg !default;
+$navsidebar-bg-hover:                   lighten($navsidebar-bg, 4) !default;
+$navsidebar-bg-active:                  lighten($navsidebar-bg, 8) !default;
+$navsidebar-color:                      #FFF !default;
+$navsidebar-color-hover:                $brand-primary !default;
+$navsidebar-color-active:               $brand-primary !default;
 
-$navsidebar-sub-bg-color:               darken($navsidebar-bg-color, 4) !default;
-$navsidebar-sub-bg-hover-color:         $navsidebar-sub-bg-color !default;
-$navsidebar-sub-bg-active-color:        $navsidebar-sub-bg-color !default;
-$navsidebar-sub-text-color:             #AAA !default;
-$navsidebar-sub-text-hover-color:       $color-primary !default;
-$navsidebar-sub-text-active-color:      $color-primary !default;
+$navsidebar-sub-bg:                     darken($navsidebar-bg, 4) !default;
+$navsidebar-sub-bg-hover:               $navsidebar-sub-bg !default;
+$navsidebar-sub-bg-active:              $navsidebar-sub-bg !default;
+$navsidebar-sub-color:                  #AAA !default;
+$navsidebar-sub-color-hover:            $brand-primary !default;
+$navsidebar-sub-color-active:           $brand-primary !default;
 
-$navsidebar-border-color:               $navsidebar-bg-hover-color !default;
+$navsidebar-border-color:               $navsidebar-bg-hover !default;
 
 // Navigation topbar
 $navtopbar-font-size:                   $font-size-base !default;
 $navtopbar-sub-font-size:               $font-size-small !default;
 $navtopbar-glyph-size:                  1.2em !default; // For glyphicons that you can select in the Mendix Modeler
 
-$navtopbar-bg-color:                    $topbar-bg-color !default;
-$navtopbar-bg-hover-color:              darken($navtopbar-bg-color, 4) !default;
-$navtopbar-bg-active-color:             darken($navtopbar-bg-color, 8) !default;
-$navtopbar-text-color:                  #AAA !default;
-$navtopbar-text-hover-color:            $color-primary !default;
-$navtopbar-text-active-color:           $color-primary !default;
+$navtopbar-bg:                          $topbar-bg !default;
+$navtopbar-bg-hover:                    darken($navtopbar-bg, 4) !default;
+$navtopbar-bg-active:                   darken($navtopbar-bg, 8) !default;
+$navtopbar-color:                       #AAA !default;
+$navtopbar-color-hover:                 $brand-primary !default;
+$navtopbar-color-active:                $brand-primary !default;
 
-$navtopbar-sub-bg-color:                lighten($navtopbar-bg-color, 4) !default;
-$navtopbar-sub-bg-hover-color:          $navtopbar-sub-bg-color !default;
-$navtopbar-sub-bg-active-color:         $navtopbar-sub-bg-color !default;
-$navtopbar-sub-text-color:              #AAA !default;
-$navtopbar-sub-text-hover-color:        $color-primary !default;
-$navtopbar-sub-text-active-color:       $color-primary !default;
+$navtopbar-sub-bg:                      lighten($navtopbar-bg, 4) !default;
+$navtopbar-sub-bg-hover:                $navtopbar-sub-bg !default;
+$navtopbar-sub-bg-active:               $navtopbar-sub-bg !default;
+$navtopbar-sub-color:                   #AAA !default;
+$navtopbar-sub-color-hover:             $brand-primary !default;
+$navtopbar-sub-color-active:            $brand-primary !default;
 
-$navtopbar-border-color:                $navtopbar-bg-hover-color !default;
+$navtopbar-border-color:                $navtopbar-bg-hover !default;
 
 
 
@@ -170,15 +170,15 @@ $form-label-weight:                     $font-weight-normal !default;
 
 // Form Input
 $form-input-height:                     33px !default;
-$form-input-bg-color:                   #FFF !default;
-$form-input-bg-focus-color:             #FFF !default;
-$form-input-bg-disabled-color:          $gray-lighter !default;
-$form-input-text-color:                 $font-base-color !default;
-$form-input-text-focus-color:           $form-input-text-color !default;
-$form-input-text-disabled-color:        $form-input-text-color !default;
-$form-input-placeholder-text-color:     $gray-light !default;
+$form-input-bg:                         #FFF !default;
+$form-input-bg-focus:                   #FFF !default;
+$form-input-bg-disabled:                $gray-lighter !default;
+$form-input-color:                      $font-base-color !default;
+$form-input-focus-color:                $form-input-color !default;
+$form-input-disabled-color:             $form-input-color !default;
+$form-input-placeholder-color:          $gray-light !default;
 $form-input-border-color:               $default-border-color !default;
-$form-input-border-focus-color:         $color-primary !default;    
+$form-input-border-focus-color:         $brand-primary !default;    
 
 
 
@@ -190,34 +190,31 @@ $form-input-border-focus-color:         $color-primary !default;
 $btn-font-size:                         12px !default;
 
 // Button Background Color
-$btn-bg-color-default:                  $color-default !default;
-$btn-bg-color-inverse:                  $color-inverse !default;
-$btn-bg-color-primary:                  $color-primary !default;
-$btn-bg-color-info:                     $color-info !default;
-$btn-bg-color-success:                  $color-success !default;
-$btn-bg-color-warning:                  $color-warning !default;
-$btn-bg-color-danger:                   $color-danger !default;
-// $btn-bg-color-white:                 #FFF !default;
+$btn-default-bg:                        $brand-default !default;
+$btn-inverse-bg:                        $brand-inverse !default;
+$btn-primary-bg:                        $brand-primary !default;
+$btn-info-bg:                           $brand-info !default;
+$btn-success-bg:                        $brand-success !default;
+$btn-warning-bg:                        $brand-warning !default;
+$btn-danger-bg:                         $brand-danger !default;
 
 // Button Border Color
-$btn-border-color-default:              $color-default !default;
-$btn-border-color-inverse:              $color-inverse !default;
-$btn-border-color-primary:              $color-primary !default;
-$btn-border-color-info:                 $color-info !default;
-$btn-border-color-success:              $color-success !default;
-$btn-border-color-warning:              $color-warning !default;
-$btn-border-color-danger:               $color-danger !default;
-// $btn-color-border-white:             #FFF !default; 
+$btn-default-border-color:              $brand-default !default;
+$btn-inverse-border-color:              $brand-inverse !default;
+$btn-primary-border-color:              $brand-primary !default;
+$btn-info-border-color:                 $brand-info !default;
+$btn-success-border-color:              $brand-success !default;
+$btn-warning-border-color:              $brand-warning !default;
+$btn-danger-border-color:               $brand-danger !default;
 
 // Button Text Color
-$btn-text-color-default:                $font-base-color !default;
-$btn-text-color-inverse:                #FFF !default;
-$btn-text-color-primary:                #FFF !default;
-$btn-text-color-info:                   #FFF !default;
-$btn-text-color-success:                #FFF !default;
-$btn-text-color-warning:                #FFF !default;
-$btn-text-color-danger:                 #FFF !default;
-// $color-btn-text-white:               $color-text-black !default;
+$btn-default-color:                     $font-base-color !default;
+$btn-inverse-color:                     #FFF !default;
+$btn-primary-color:                     #FFF !default;
+$btn-info-color:                        #FFF !default;
+$btn-success-color:                     #FFF !default;
+$btn-warning-color:                     #FFF !default;
+$btn-danger-color:                      #FFF !default;
 
 
 
@@ -244,40 +241,40 @@ $color-text-white-secondary:            rgba($color-text-white, .7) !default;
 $color-text-white-disabled:             rgba($color-text-white, .3) !default;
 $color-text-white-hint:                 rgba($color-text-white, .3) !default;
 
-$color-default-darker:                  shade($color-default,40) !default;    
-$color-default-dark:                    shade($color-default,26) !default;    
-$color-default-light:                   tint($color-default,40) !default;    
-$color-default-lighter:                 tint($color-default,80) !default;    
+$color-default-darker:                  shade($brand-default,40) !default;    
+$color-default-dark:                    shade($brand-default,26) !default;    
+$color-default-light:                   tint($brand-default,40) !default;    
+$color-default-lighter:                 tint($brand-default,80) !default;    
 
-$color-inverse-darker:                  shade($color-inverse,40) !default;    
-$color-inverse-dark:                    shade($color-inverse,26) !default;    
-$color-inverse-light:                   tint($color-inverse,40) !default;    
-$color-inverse-lighter:                 tint($color-inverse,80) !default;    
+$color-inverse-darker:                  shade($brand-inverse,40) !default;    
+$color-inverse-dark:                    shade($brand-inverse,26) !default;    
+$color-inverse-light:                   tint($brand-inverse,40) !default;    
+$color-inverse-lighter:                 tint($brand-inverse,80) !default;    
 
-$color-primary-darker:                  shade($color-primary,40) !default;    
-$color-primary-dark:                    shade($color-primary,26) !default;    
-$color-primary-light:                   tint($color-primary,40) !default;    
-$color-primary-lighter:                 tint($color-primary,80) !default;    
+$color-primary-darker:                  shade($brand-primary,40) !default;    
+$color-primary-dark:                    shade($brand-primary,26) !default;    
+$color-primary-light:                   tint($brand-primary,40) !default;    
+$color-primary-lighter:                 tint($brand-primary,80) !default;    
 
-$color-info-darker:                     shade($color-info,40) !default;    
-$color-info-dark:                       shade($color-info,26) !default;    
-$color-info-light:                      tint($color-info,40) !default;    
-$color-info-lighter:                    tint($color-info,80) !default;    
+$color-info-darker:                     shade($brand-info,40) !default;    
+$color-info-dark:                       shade($brand-info,26) !default;    
+$color-info-light:                      tint($brand-info,40) !default;    
+$color-info-lighter:                    tint($brand-info,80) !default;    
 
-$color-success-darker:                  shade($color-success,40) !default;    
-$color-success-dark:                    shade($color-success,26) !default;    
-$color-success-light:                   tint($color-success,40) !default;    
-$color-success-lighter:                 tint($color-success,80) !default;    
+$color-success-darker:                  shade($brand-success,40) !default;    
+$color-success-dark:                    shade($brand-success,26) !default;    
+$color-success-light:                   tint($brand-success,40) !default;    
+$color-success-lighter:                 tint($brand-success,80) !default;    
 
-$color-warning-darker:                  shade($color-warning,40) !default;    
-$color-warning-dark:                    shade($color-warning,26) !default;    
-$color-warning-light:                   tint($color-warning,40) !default;    
-$color-warning-lighter:                 tint($color-warning,80) !default;    
+$color-warning-darker:                  shade($brand-warning,40) !default;    
+$color-warning-dark:                    shade($brand-warning,26) !default;    
+$color-warning-light:                   tint($brand-warning,40) !default;    
+$color-warning-lighter:                 tint($brand-warning,80) !default;    
 
-$color-danger-darker:                   shade($color-danger,40) !default;    
-$color-danger-dark:                     shade($color-danger,26) !default;    
-$color-danger-light:                    tint($color-danger,40) !default;    
-$color-danger-lighter:                  tint($color-danger,80) !default;
+$color-danger-darker:                   shade($brand-danger,40) !default;    
+$color-danger-dark:                     shade($brand-danger,26) !default;    
+$color-danger-light:                    tint($brand-danger,40) !default;    
+$color-danger-lighter:                  tint($brand-danger,80) !default;
 
 
 
@@ -289,26 +286,28 @@ $color-danger-lighter:                  tint($color-danger,80) !default;
 $grid-border-color:                     $default-border-color !default;
 
 // Background Colors
-$grid-bg-color:                         #FFF !default;
-$grid-bg-header-color:                  transparent !default; // Grid Headers
-$grid-bg-hover-color:                   shade($color-primary-lighter,3) !default;
-$grid-bg-selected-color:                $color-primary !default;    
-$grid-bg-selected-hover-color:          shade($color-primary-lighter,3) !default;
-$grid-text-selected-color:              $font-base-color !default;
+$grid-bg:                               #FFF !default;
+$grid-bg-header:                        transparent !default; // Grid Headers
+$grid-bg-hover:                         shade($color-primary-lighter,3) !default;
+$grid-bg-selected:                      $brand-primary !default;    
+$grid-bg-selected-hover:                shade($color-primary-lighter,3) !default;
 
 // Striped Background Color
-$grid-bg-striped-color:                 lighten($grid-border-color,5) !default;
+$grid-bg-striped:                       lighten($grid-border-color,5) !default;
 
 // Background Footer Color
-$grid-footer-bg-color:                  $gray-primary !default;
+$grid-footer-bg:                        $gray-primary !default;
+
+// Text Color
+$grid-selected-color:                   $font-base-color !default;
 
 // Paging Colors
-$grid-paging-bg-color:                  transparent !default;
-$grid-paging-bg-hover-color:            transparent !default;
+$grid-paging-bg:                        transparent !default;
+$grid-paging-bg-hover:                  transparent !default;
 $grid-paging-border-color:              transparent !default;
-$grid-paging-border-hover-color:        transparent !default;
-$grid-paging-text-color:                $gray-light !default;
-$grid-paging-text-hover-color:          $color-primary !default;
+$grid-paging-border-color-hover:        transparent !default;
+$grid-paging-color:                     $gray-light !default;
+$grid-paging-color-hover:               $brand-primary !default;
 
 
 
@@ -317,17 +316,17 @@ $grid-paging-text-hover-color:          $color-primary !default;
 //## Default variables for Tab Container Widget (used in components/tabcontainer)
 
 // Text Color
-$tabs-text-color:                       $color-text-black-secondary !default;
-$tabs-text-active-color:                $color-text-black !default;
-$tabs-lined-text-active-color:          $color-primary !default;
+$tabs-color:                            $color-text-black-secondary !default;
+$tabs-color-active:                     $color-text-black !default;
+$tabs-lined-color-active:               $brand-primary !default;
 
 // Border Color
 $tabs-border-color:                     $default-border-color !default;    
-$tabs-lined-border-color:               $color-primary !default;    
+$tabs-lined-border-color:               $brand-primary !default;    
 
 // Background Color
-$tabs-bg-hover-color:                   lighten($tabs-border-color,5) !default;
-$tabs-bg-active-color:                  $color-primary !default;
+$tabs-bg-hover:                         lighten($tabs-border-color,5) !default;
+$tabs-bg-active:                        $brand-primary !default;
 
 
 
@@ -336,13 +335,13 @@ $tabs-bg-active-color:                  $color-primary !default;
 //## Default Mendix Modal, Blocking Modal and Login Modal (used in components/modals)
 
 // Background Color
-$modal-header-bg-color:                 transparent !default;
+$modal-header-bg:                       transparent !default;
 
 // Border Color
 $modal-header-border-color:             $default-border-color !default;
 
 // Text Color
-$modal-header-text-color:               $font-base-color !default;
+$modal-header-color:                    $font-base-color !default;
 
 
 
@@ -351,12 +350,12 @@ $modal-header-text-color:               $font-base-color !default;
 //## Default variables for Dataview Widget (used in components/dataview)
 
 // Controls
-$color-dataview-controls-bg:            transparent !default;
-$color-dataview-controls-border:        $default-border-color !default;
+$dataview-controls-bg:                  transparent !default;
+$dataview-controls-border-color:        $default-border-color !default;
 
 // Empty Message
-$color-dataview-emptymessage-bg:        $bg-color !default;
-$color-dataview-emptymessage-text:      $font-base-color !default;
+$dataview-emptymessage-bg:              $bg-color !default;
+$dataview-emptymessage-color:           $font-base-color !default;
 
 
 
@@ -365,22 +364,22 @@ $color-dataview-emptymessage-text:      $font-base-color !default;
 //## Default Bootstrap alerts, not a widget in the Modeler (used in components/alerts)
 
 // Background Color
-$alert-bg-color-info:                   $color-info-lighter !default;
-$alert-bg-color-success:                $color-success-lighter !default;
-$alert-bg-color-warning:                $color-warning-lighter !default;
-$alert-bg-color-danger:                 $color-danger-lighter !default;
+$alert-info-bg:                         $color-info-lighter !default;
+$alert-success-bg:                      $color-success-lighter !default;
+$alert-warning-bg:                      $color-warning-lighter !default;
+$alert-danger-bg:                       $color-danger-lighter !default;
 
 // Text Color
-$alert-text-color-info:                 $color-info-darker !default;
-$alert-text-color-success:              $color-success-darker !default;
-$alert-text-color-warning:              $color-warning-darker !default;
-$alert-text-color-danger:               $color-danger-darker !default;
+$alert-info-color:                      $color-info-darker !default;
+$alert-success-color:                   $color-success-darker !default;
+$alert-warning-color:                   $color-warning-darker !default;
+$alert-danger-color:                    $color-danger-darker !default;
 
 // Border Color
-$alert-border-color-info:               $color-info-dark !default;
-$alert-border-color-success:            $color-success-dark !default;
-$alert-border-color-warning:            $color-warning-dark !default;
-$alert-border-color-danger:             $color-danger-dark !default;
+$alert-info-border-color:               $color-info-dark !default;
+$alert-success-border-color:            $color-success-dark !default;
+$alert-warning-border-color:            $color-warning-dark !default;
+$alert-danger-border-color:             $color-danger-dark !default;
 
 
 
@@ -389,28 +388,28 @@ $alert-border-color-danger:             $color-danger-dark !default;
 //## Default Bootstrap Labels, not a widget in the Modeler (used in components/labels)
 
 // Background Color
-$label-bg-color-default:                $color-default !default;
-$label-bg-color-primary:                $color-primary !default; 
-$label-bg-color-info:                   $color-info !default; 
-$label-bg-color-success:                $color-success !default; 
-$label-bg-color-warning:                $color-warning !default;
-$label-bg-color-danger:                 $color-danger !default;     
+$label-default-bg:                      $brand-default !default;
+$label-primary-bg:                      $brand-primary !default; 
+$label-info-bg:                         $brand-info !default; 
+$label-success-bg:                      $brand-success !default; 
+$label-warning-bg:                      $brand-warning !default;
+$label-danger-bg:                       $brand-danger !default;     
 
 // Border Color
-$label-border-color-default:            $color-default !default;
-$label-border-color-primary:            $color-primary !default;
-$label-border-color-info:               $color-info !default;
-$label-border-color-success:            $color-success !default;
-$label-border-color-warning:            $color-warning !default;
-$label-border-color-danger:             $color-danger !default;
+$label-default-border-color:            $brand-default !default;
+$label-primary-border-color:            $brand-primary !default;
+$label-info-border-color:               $brand-info !default;
+$label-success-border-color:            $brand-success !default;
+$label-warning-border-color:            $brand-warning !default;
+$label-danger-border-color:             $brand-danger !default;
 
 // Text Color
-$label-text-color-default:              $font-base-color !default;
-$label-text-color-primary:              #FFF !default;
-$label-text-color-info:                 #FFF !default;
-$label-text-color-success:              #FFF !default;
-$label-text-color-warning:              #FFF !default;
-$label-text-color-danger:               #FFF !default;
+$label-default-color:                   $font-base-color !default;
+$label-primary-color:                   #FFF !default;
+$label-info-color:                      #FFF !default;
+$label-success-color:                   #FFF !default;
+$label-warning-color:                   #FFF !default;
+$label-danger-color:                    #FFF !default;
 
 
 
@@ -419,24 +418,24 @@ $label-text-color-danger:               #FFF !default;
 //## Default variables for Groupbox Widget (used in components/groupbox)
 
 // Background Color
-$groupbox-bg-color-default:             $color-default !default;
-$groupbox-bg-color-inverse:             $color-inverse !default; 
-$groupbox-bg-color-primary:             $color-primary !default; 
-$groupbox-bg-color-info:                $color-info !default;
-$groupbox-bg-color-success:             $color-success !default; 
-$groupbox-bg-color-warning:             $color-warning !default;
-$groupbox-bg-color-danger:              $color-danger !default;     
-$groupbox-bg-color-white:               #FFF !default;
+$groupbox-default-bg:                   $brand-default !default;
+$groupbox-inverse-bg:                   $brand-inverse !default; 
+$groupbox-primary-bg:                   $brand-primary !default; 
+$groupbox-info-bg:                      $brand-info !default;
+$groupbox-success-bg:                   $brand-success !default; 
+$groupbox-warning-bg:                   $brand-warning !default;
+$groupbox-danger-bg:                    $brand-danger !default;     
+$groupbox-white-bg:                     #FFF !default;
 
 // Text Color
-$groupbox-text-color-default:           $color-text-black !default;
-$groupbox-text-color-inverse:           $color-text-white !default;
-$groupbox-text-color-primary:           $color-text-white !default;
-$groupbox-text-color-info:              $color-text-white !default;
-$groupbox-text-color-success:           $color-text-white !default;
-$groupbox-text-color-warning:           $color-text-white !default;
-$groupbox-text-color-danger:            $color-text-white !default;
-$groupbox-text-color-white:             $font-base-color !default;
+$groupbox-default-color:                $color-text-black !default;
+$groupbox-inverse-color:                $color-text-white !default;
+$groupbox-primary-color:                $color-text-white !default;
+$groupbox-info-color:                   $color-text-white !default;
+$groupbox-success-color:                $color-text-white !default;
+$groupbox-warning-color:                $color-text-white !default;
+$groupbox-danger-color:                 $color-text-white !default;
+$groupbox-white-color:                  $font-base-color !default;
 
 
 
@@ -445,16 +444,16 @@ $groupbox-text-color-white:             $font-base-color !default;
 //## Extended variables for Groupbox Widget (used in components/groupbox)
 
 // Text and Border Color
-$callout-color-info:                    $color-info !default;
-$callout-color-success:                 $color-success !default;
-$callout-color-warning:                 $color-warning !default;
-$callout-color-danger:                  $color-danger !default;
+$callout-info-color:                    $brand-info !default;
+$callout-success-color:                 $brand-success !default;
+$callout-warning-color:                 $brand-warning !default;
+$callout-danger-color:                  $brand-danger !default;
 
 // Background Color
-$callout-bg-color-info:                 $color-info-lighter !default; 
-$callout-bg-color-success:              $color-success-lighter !default; 
-$callout-bg-color-warning:              $color-warning-lighter !default; 
-$callout-bg-color-danger:               $color-danger-lighter !default;
+$callout-info-bg:                       $color-info-lighter !default; 
+$callout-success-bg:                    $color-success-lighter !default; 
+$callout-warning-bg:                    $color-warning-lighter !default; 
+$callout-danger-bg:                     $color-danger-lighter !default;
 
 
 
@@ -469,10 +468,10 @@ $callout-bg-color-danger:               $color-danger-lighter !default;
 $m-header-height:                       44px !default;
 
 // Background Color
-$m-header-bg-color:                     #FFF !default;
+$m-header-bg:                           #FFF !default;
 
 // Text Color
-$m-header-text-color:                   $font-base-color !default;
+$m-header-color:                        $font-base-color !default;
 
 // Link Color
 $m-header-link-color:                   $link-color !default;
@@ -484,17 +483,17 @@ $m-header-link-color:                   $link-color !default;
 //## Specific mobile widgets and components (used in mobile/components/tabcontainer)
 
 // Text Color
-$m-tabs-text-color:                     #FFF !default;
-$m-tabs-text-active-color:              #000 !default;
+$m-tabs-color:                          #FFF !default;
+$m-tabs-color-active:                   #000 !default;
 
 // Background Color
-$m-tabs-bg-color:                       $color-primary !default;
-$m-tabs-bg-hover-color:                 lighten($tabs-border-color,5) !default;
-$m-tabs-bg-active-color:                darken($m-tabs-bg-color, 15) !default;    
+$m-tabs-bg:                             $brand-primary !default;
+$m-tabs-bg-color-hover:                 lighten($tabs-border-color,5) !default;
+$m-tabs-bg-color-active:                darken($m-tabs-bg, 15) !default;    
 
 // Border Color
-$m-tabs-border-color:                   darken($m-tabs-bg-color, 15) !default;
-$m-tabs-border-active-color:            darken($m-tabs-bg-color, 15) !default;
+$m-tabs-border-color:                   darken($m-tabs-bg, 15) !default;
+$m-tabs-border-color-active:            darken($m-tabs-bg, 15) !default;
 
 
 

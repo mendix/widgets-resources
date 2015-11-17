@@ -13,11 +13,11 @@
 		.modal-header {
 			border-radius: 0; // Because of the class .mx-window-active in mxui.css
 			padding: 15px 20px;
-			background-color: $modal-header-bg-color;
+			background-color: $modal-header-bg;
 			border-bottom-color: $modal-header-border-color;
 			h4 {
 				@include font(bold);
-				color: $modal-header-text-color;
+				color: $modal-header-color;
 				font-size: 16px;
 				margin: 0;
 			}
@@ -25,7 +25,7 @@
 				opacity: 1;
 				filter: alpha(opacity=100); /* For IE8 and earlier */
 
-				color: $modal-header-text-color;
+				color: $modal-header-color;
 				text-shadow: none;
 				margin-top: -3px;
 			}

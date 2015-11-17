@@ -7,7 +7,7 @@
 	border-radius: 0;
 	margin: 0;
 	border-style: none;
-	background-color: $navtopbar-bg-color;
+	background-color: $navtopbar-bg;
 
 	ul.nav { 
 
@@ -17,31 +17,31 @@
 			@include font(normal);
 			border-radius: 0;
 			padding: 15px 20px;
-			color: $navtopbar-text-color;
+			color: $navtopbar-color;
 			font-size: $navtopbar-font-size;
 			vertical-align: middle;
 
 			/* Dropdown arrow */
 			.caret {
-				border-top-color: $navtopbar-text-color;
-				border-bottom-color: $navtopbar-text-color;
+				border-top-color: $navtopbar-color;
+				border-bottom-color: $navtopbar-color;
 			}
 
 			&:hover,
 			&:focus,
 			&.active {
-				background-color: $navtopbar-bg-hover-color;
-				color: $navtopbar-text-hover-color;
+				background-color: $navtopbar-bg-hover;
+				color: $navtopbar-color-hover;
 				text-decoration: none;
 
 				.caret {
-					border-top-color: $navtopbar-text-active-color;
-					border-bottom-color: $navtopbar-text-active-color;
+					border-top-color: $navtopbar-color-active;
+					border-bottom-color: $navtopbar-color-active;
 				}
 			}
 			&.active {
-            	color: $navtopbar-text-active-color;
-            	background-color: $navtopbar-bg-active-color;
+            	color: $navtopbar-color-active;
+            	background-color: $navtopbar-bg-active;
             }
 
 			/* Dropdown */
@@ -79,22 +79,22 @@
 		> .mx-navbar-item.open > a, 
 		> .mx-navbar-item.open > a:hover, 
 		> .mx-navbar-item.open > a:focus {
-			background-color: $navtopbar-bg-hover-color;
-			color: $navtopbar-text-hover-color;
+			background-color: $navtopbar-bg-hover;
+			color: $navtopbar-color-hover;
 			text-decoration: none;
 
 			.caret {
-				border-top-color: $navtopbar-text-hover-color;
-				border-bottom-color: $navtopbar-text-hover-color;
+				border-top-color: $navtopbar-color-hover;
+				border-bottom-color: $navtopbar-color-hover;
 			}
 		}
 		> .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
-			background-color: $navtopbar-sub-bg-active-color;
-			color: $navtopbar-sub-text-active-color;
+			background-color: $navtopbar-sub-bg-active;
+			color: $navtopbar-sub-color-active;
 
 			.caret {
-				border-top-color: $navtopbar-sub-text-active-color;
-				border-bottom-color: $navtopbar-sub-text-active-color;
+				border-top-color: $navtopbar-sub-color-active;
+				border-bottom-color: $navtopbar-sub-color-active;
 			}
         }
 	}
@@ -104,7 +104,7 @@
 			padding: 10px 20px;
 		}
 		.mx-navbar-item.open .dropdown-menu {
-			background-color: $navtopbar-sub-bg-color;
+			background-color: $navtopbar-sub-bg;
 			border-radius: 0;
 			padding: 0;
 			
@@ -112,18 +112,18 @@
 				@include font(normal);
 				padding: 10px 20px;
 				border-radius: 0;
-				color: $navtopbar-sub-text-color;
+				color: $navtopbar-sub-color;
 				font-size: $navtopbar-sub-font-size;
 
 				&:hover,
 				&:focus {
-					color: $navtopbar-sub-text-hover-color;
-					background-color: $navtopbar-sub-bg-hover-color;
+					color: $navtopbar-sub-color-hover;
+					background-color: $navtopbar-sub-bg-hover;
 				}
 
 				&.active {
-					color: $navtopbar-sub-text-active-color;
-					background-color: $navtopbar-sub-bg-active-color;
+					color: $navtopbar-sub-color-active;
+					background-color: $navtopbar-sub-bg-active;
 				}
 			}
 		}
@@ -142,7 +142,7 @@
    Default Mendix Navigation Tree
 ========================================================================== */
 .mx-navigationtree {
-	background-color: $navsidebar-bg-color;
+	background-color: $navsidebar-bg;
 
 	/* Every navigation item */
 	.navbar-inner ul {
@@ -159,16 +159,16 @@
 				padding: 15px 20px 15px 16px;
 				border-bottom: 1px solid $navsidebar-border-color;
 				border-radius: 0;
-				color: $navsidebar-text-color;
+				color: $navsidebar-color;
 				text-shadow: none;
 				font-size: $navsidebar-font-size;
 				vertical-align: middle;
-				background-color: $navsidebar-bg-color;
+				background-color: $navsidebar-bg;
 				border-left: 4px solid transparent;
 
 				.caret {
-					border-top-color: $navsidebar-text-color;
-					border-bottom-color: $navsidebar-text-color;
+					border-top-color: $navsidebar-color;
+					border-bottom-color: $navsidebar-color;
 				}
 
 				img {
@@ -187,20 +187,20 @@
 			a:hover,
 			a:focus,
 			a.active {
-				background-color: $navsidebar-bg-hover-color;
-				color: $navsidebar-text-hover-color;
+				background-color: $navsidebar-bg-hover;
+				color: $navsidebar-color-hover;
 				text-decoration: none;
 
 				.caret {
-					border-top-color: $navsidebar-text-active-color;
-					border-bottom-color: $navsidebar-text-active-color;
+					border-top-color: $navsidebar-color-active;
+					border-bottom-color: $navsidebar-color-active;
 				}
 			}
 
             a.active {
-            	border-left-color: $navsidebar-text-active-color;
-            	color: $navsidebar-text-active-color;
-            	background-color: $navsidebar-bg-active-color;
+            	border-left-color: $navsidebar-color-active;
+            	color: $navsidebar-color-active;
+            	background-color: $navsidebar-bg-active;
             }
 		}
 	}
@@ -210,29 +210,29 @@
 		> ul {
 			margin: 0;
 			padding-left: 0;
-			background-color: $navsidebar-sub-bg-color;
+			background-color: $navsidebar-sub-bg;
 
 			li {
 				margin: 0;
 				padding: 0;
 				a {
 					@include font(normal);
-					color: $navsidebar-sub-text-color;
+					color: $navsidebar-sub-color;
 					font-size: $navsidebar-sub-font-size;
-					background-color: $navsidebar-sub-bg-color;
+					background-color: $navsidebar-sub-bg;
 					padding: 12px 20px 12px 25px;
 					border: 0;
 
 					&:hover,
 					&:focus,
 					&.active {
-						color: $navsidebar-sub-text-hover-color;
-						background-color: $navsidebar-sub-bg-hover-color;
+						color: $navsidebar-sub-color-hover;
+						background-color: $navsidebar-sub-bg-hover;
 					}
 					&.active {
 		            	border: 0;
-		            	color: $navsidebar-sub-text-active-color;
-		            	background-color: $navsidebar-sub-bg-active-color;
+		            	color: $navsidebar-sub-color-active;
+		            	background-color: $navsidebar-sub-bg-active;
 		            }
 				}
 			}
@@ -281,7 +281,7 @@
 ========================================================================== */
 .mx-menubar {
 	padding: 0;
-	background-color: $navsidebar-bg-color;
+	background-color: $navsidebar-bg;
 	ul.mx-menubar-list {
 		width: 100%;
 		height: 50px;
@@ -293,7 +293,7 @@
 			a {
 				@include font(normal);
 				border-radius: 0;
-				color: $navsidebar-text-color;
+				color: $navsidebar-color;
 				font-size: $navsidebar-sub-font-size;
 				padding: 0 8px;
 				text-align: center;
@@ -313,13 +313,13 @@
 			&:hover a,
 			&:focus a,
 			&.active a {
-				background-color: $navsidebar-bg-hover-color;
-				color: $navsidebar-text-hover-color;
+				background-color: $navsidebar-bg-hover;
+				color: $navsidebar-color-hover;
 				text-decoration: none;
 			}
 			&.active a {
-            	color: $navsidebar-text-active-color;
-            	background-color: $navsidebar-bg-active-color;
+            	color: $navsidebar-color-active;
+            	background-color: $navsidebar-bg-active;
             }
 		}
 	}
@@ -367,11 +367,11 @@
 
 /* Vertical variation specifics */
 .mx-menubar-vertical {
-	background-color: $navtopbar-bg-color;
+	background-color: $navtopbar-bg;
 	ul.mx-menubar-list {
 		li.mx-menubar-item {
 			a {
-				color: $navtopbar-text-color;
+				color: $navtopbar-color;
 				font-size: $navtopbar-font-size;
 				border-bottom: 1px solid $navtopbar-border-color;
 
@@ -384,13 +384,13 @@
 				&:hover,
 				&:focus,
 				&.active {
-					background-color: $navtopbar-bg-hover-color;
-					color: $navtopbar-text-hover-color;
+					background-color: $navtopbar-bg-hover;
+					color: $navtopbar-color-hover;
 					text-decoration: none;
 				}
 				&.active {
-	            	color: $navtopbar-text-active-color;
-	            	background-color: $navtopbar-bg-active-color;
+	            	color: $navtopbar-color-active;
+	            	background-color: $navtopbar-bg-active;
 	            }
 			}
 		}

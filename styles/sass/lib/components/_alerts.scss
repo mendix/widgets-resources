@@ -13,24 +13,24 @@
 	border: 1px solid;
 }
 .alert-success { 
-	border-color: $alert-border-color-success;
-	background-color: $alert-bg-color-success; 
-	color: $alert-text-color-success;
+	border-color: $alert-success-border-color;
+	background-color: $alert-success-bg;
+	color: $alert-success-color;
 }
 .alert-info { 
-	border-color: $alert-border-color-info;
-	background-color: $alert-bg-color-info;	
-	color: $alert-text-color-info; 
+	border-color: $alert-info-border-color;
+	background-color: $alert-info-bg;
+	color: $alert-info-color;
 }
 .alert-warning { 
-	border-color: $alert-border-color-warning; 
-	background-color: $alert-bg-color-warning;
-	color: $alert-text-color-warning;
+	border-color: $alert-warning-border-color; 
+	background-color: $alert-warning-bg;
+	color: $alert-warning-color;
 }
 .alert-danger { 
-	border-color: $alert-border-color-danger;
-	background-color: $alert-bg-color-danger; 
-	color: $alert-text-color-danger;
+	border-color: $alert-danger-border-color;
+	background-color: $alert-danger-bg; 
+	color: $alert-danger-color;
 }
 .has-error .alert {
 	margin-top: 8px;

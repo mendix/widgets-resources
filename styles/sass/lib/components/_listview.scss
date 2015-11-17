@@ -21,20 +21,20 @@
 		margin: 0;
 	}
 	.mx-listview-item {
-		background-color: $grid-bg-color;
+		background-color: $grid-bg;
 		padding: 10px 0;
 		&:hover {
-			background-color: $grid-bg-color;
+			background-color: $grid-bg;
 		}
 		&.selected {
-			background-color: $grid-bg-selected-color !important;
+			background-color: $grid-bg-selected !important;
 
 			&:hover {
-				background-color: $grid-bg-selected-hover-color !important;
+				background-color: $grid-bg-selected-hover !important;
 			}
 		}
 		&:nth-child(2n+1) {
-			background-color: $grid-bg-color;
+			background-color: $grid-bg;
 		}
 	}
 
@@ -54,7 +54,7 @@
 	.mx-listview-item {
 		&:hover,
 		&:active {
-			background-color: $grid-bg-hover-color !important;
+			background-color: $grid-bg-hover !important;
 		}
 	}
 }
@@ -89,7 +89,7 @@
 ========================================================================== */
 .listview-striped.mx-listview {
 	.mx-listview-item:nth-child(2n+1) {
-		background-color: $grid-bg-striped-color;
+		background-color: $grid-bg-striped;
 	}
 }
 

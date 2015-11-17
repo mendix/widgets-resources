@@ -16,14 +16,14 @@
 			/* Buttons */
 			.mx-button {
 				padding: 6px;
-				background-color: $grid-paging-bg-color;
-				color: $grid-paging-text-color;
+				background-color: $grid-paging-bg;
+				color: $grid-paging-color;
 				border-color: $grid-paging-border-color;
 
 				&:hover {
-					background-color: $grid-paging-bg-hover-color;
-					color: $grid-paging-text-hover-color;
-					border-color: $grid-paging-border-hover-color;
+					background-color: $grid-paging-bg-hover;
+					color: $grid-paging-color-hover;
+					border-color: $grid-paging-border-color-hover;
 				}
 
 				&.disabled, 

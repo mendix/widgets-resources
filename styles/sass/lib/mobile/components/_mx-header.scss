@@ -17,9 +17,9 @@
 body .mx-header {
 	padding: 0;
 	height: $m-header-height;
-	color: $m-header-text-color;
+	color: $m-header-color;
 	border-bottom: 1px solid $color-border-default;
-	background-color: $m-header-bg-color;
+	background-color: $m-header-bg;
 	display: table;
 	width: 100%;
 
@@ -52,7 +52,7 @@ body .mx-header {
 	// Header Title
 	.mx-title {
 		margin: 0;
-		color: $m-header-text-color;
+		color: $m-header-color;
 		font-size: 16px;
 		line-height: 44px;
 	

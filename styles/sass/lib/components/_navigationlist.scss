@@ -13,24 +13,24 @@
 		border-bottom: 1px solid $navsidebar-border-color;
 		border-top: none;
 		border-radius: 0;
-		background-color: $navsidebar-bg-color;
+		background-color: $navsidebar-bg;
 		label {
 			@include font(normal);
-			color: $navsidebar-text-color;
+			color: $navsidebar-color;
 			font-size: $navsidebar-font-size;
 		}
 		&:hover,
 		&:focus,
 		&.active {
-			background-color: $navsidebar-bg-hover-color;
+			background-color: $navsidebar-bg-hover;
 			label {
-				color: $navsidebar-text-hover-color;
+				color: $navsidebar-color-hover;
 			}
 		}
 		&.active {
-           	border-left-color: $navsidebar-text-active-color;
-           	color: $navsidebar-text-active-color;
-           	background-color: $navsidebar-bg-active-color;
+           	border-left-color: $navsidebar-color-active;
+           	color: $navsidebar-color-active;
+           	background-color: $navsidebar-bg-active;
         }
 	}
 }

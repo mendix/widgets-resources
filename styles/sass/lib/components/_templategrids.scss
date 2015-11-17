@@ -8,7 +8,7 @@
 		table-layout: fixed;
 	}
 	.mx-templategrid-item {
-		background-color: $grid-bg-color;
+		background-color: $grid-bg;
 		padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
 		cursor: default;
 
@@ -16,7 +16,7 @@
 			background-color: transparent;
 		}
 		&.selected {
-			background-color: $grid-bg-selected-color !important;
+			background-color: $grid-bg-selected !important;
 		}
 	}
 	.mx-layoutgrid {
@@ -34,13 +34,13 @@
 .templategrid-hover.mx-templategrid {
 	.mx-templategrid-item {
 		&:hover {
-			background-color: $grid-bg-hover-color !important;
+			background-color: $grid-bg-hover !important;
 		}
 		&.selected {
-			background-color: $grid-bg-selected-color !important;
+			background-color: $grid-bg-selected !important;
 
 			&:hover {
-				background-color: $grid-bg-selected-hover-color !important;
+				background-color: $grid-bg-selected-hover !important;
 			}
 		}
 	}

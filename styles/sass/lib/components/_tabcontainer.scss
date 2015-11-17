@@ -17,11 +17,11 @@
 			transition: all .2s ease-in-out;
 
 			margin-right: 0;
-			color: $tabs-text-color;
+			color: $tabs-color;
 			
 			&:hover,
 			&:focus {
-				background-color: $tabs-bg-hover-color;
+				background-color: $tabs-bg-hover;
 			}
 		}
 
@@ -31,7 +31,7 @@
 			border: 1px solid $tabs-border-color;
 			border-bottom-color: transparent;
 			background-color: #FFF;
-			color: $tabs-text-active-color;
+			color: $tabs-color-active;
 		}
 	}
 	.mx-tabcontainer-content {
@@ -52,20 +52,20 @@
 			border-radius: 4px;
 			margin-right: 2px;
 			border: 1px solid $tabs-border-color;
-			color: $tabs-text-color;
+			color: $tabs-color;
 
 			&:hover,
 			&:focus {
-				background-color: $tabs-bg-hover-color;
+				background-color: $tabs-bg-hover;
 			}
 		}
 
 		> li.active > a,
 		> li.active > a:hover,
 		> li.active > a:focus  {
-			background-color: $tabs-bg-active-color;
+			background-color: $tabs-bg-active;
 			color: #FFF;
-			border-color: $tabs-bg-active-color;
+			border-color: $tabs-bg-active;
 		}
 	}
 }
@@ -91,14 +91,14 @@
                 border-color: transparent;
                 border-bottom-width: 3px;
 				border-radius: 0;
-				color: $tabs-text-color;
+				color: $tabs-color;
 
                 &:hover, 
                 &:focus {
                 	border: 0;
                     border-color: transparent;
                     background: transparent;
-                    color: $tabs-text-color;
+                    color: $tabs-color;
                 }
 
             }
@@ -109,7 +109,7 @@
             	border: 0;
                 border-bottom: 3px solid $tabs-lined-border-color;
                 background-color: transparent;
-                color: $tabs-lined-text-active-color;
+                color: $tabs-lined-color-active;
             }
         }
     }
