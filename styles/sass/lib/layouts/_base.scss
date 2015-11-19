@@ -5,7 +5,7 @@
 ========================================================================== */
 .region-topbar {
 	min-height: $topbar-minimalheight;
-	border-bottom: 1px solid $color-border-default;
+	border-bottom: 1px solid $default-border-color;
 	background-color: $navtopbar-bg;
 	> .mx-layoutcontainer-wrapper {
 		padding: 0;
@@ -23,7 +23,7 @@
 		.mx-appswitcher-button-placeholder,
 		.mx-profilemenu-button-placeholder  {
 			display: inline-block;
-			border-left: 1px solid $color-border-default;
+			border-left: 1px solid $default-border-color;
 			width: $topbar-minimalheight;
 			height: $topbar-minimalheight;
 			position: relative;

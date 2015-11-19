@@ -72,9 +72,6 @@ $font-family-bold:                      false !default;//"Helvetica Neue", Helve
 $font-size-large:                       ceil($font-base-size * 1.25) !default; // ~18px
 $font-size-small:                       ceil($font-base-size * 0.85) !default; // ~12px
 
-// Font Color
-$font-base-color:						#000 !default;
-
 // Font Weights
 $font-weight-light:                     100 !default;
 $font-weight-normal:                    normal !default;         
@@ -123,7 +120,7 @@ $default-border-color:                  $gray-primary !default;
 //## Used in components/navigation
 
 // Navigation Sidebar
-$navsidebar-font-size:                  $font-size-base !default;
+$navsidebar-font-size:                  $font-base-size !default;
 $navsidebar-sub-font-size:              $font-size-small !default;
 $navsidebar-glyph-size:                 1.2em !default; // For glyphicons that you can select in the Mendix Modeler
 
@@ -144,7 +141,7 @@ $navsidebar-sub-color-active:           $brand-primary !default;
 $navsidebar-border-color:               $navsidebar-bg-hover !default;
 
 // Navigation topbar
-$navtopbar-font-size:                   $font-size-base !default;
+$navtopbar-font-size:                   $font-base-size !default;
 $navtopbar-sub-font-size:               $font-size-small !default;
 $navtopbar-glyph-size:                  1.2em !default; // For glyphicons that you can select in the Mendix Modeler
 

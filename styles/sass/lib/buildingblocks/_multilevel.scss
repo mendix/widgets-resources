@@ -27,14 +27,14 @@
 				border-radius: 0;
 			}
   			&.selected {
-  				border-left: 4px solid $color-primary;
+  				border-left: 4px solid $brand-primary;
   				background-color: $gray-lighter !important;
   			}
   		}
 	}
 }
 .multilevel-title {
-
+	font-weight: bold;
 }
 .multilevel-subtitle {
 	color: $gray;
@@ -76,7 +76,7 @@
 			}
 			&.selected td,
 			&.selected:hover td {
-				border-left: 4px solid $color-primary;
+				border-left: 4px solid $brand-primary;
 				background-color: $gray-lighter !important;
 			}
 		}

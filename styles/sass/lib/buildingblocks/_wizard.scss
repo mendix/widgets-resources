@@ -36,7 +36,7 @@
 	width: 72px;
 	height: 72px;
 	color: $gray-primary;
-	border: 2px solid $color-border-default;
+	border: 2px solid $default-border-color;
 	background-color: #FFF;
 
 	// Labels and buttons
@@ -45,12 +45,12 @@
 }
 .wizard-step-number-active {
 	color: #FFF;
-	border-color: $color-primary;
-	background-color: $color-primary;
+	border-color: $brand-primary;
+	background-color: $brand-primary;
 }
 .wizard-step-number-visited {
-	color: $color-primary;
-	border-color: $color-primary;	
+	color: $brand-primary;
+	border-color: $brand-primary;	
 	background-color: #FFF;
 }
 .wizard-step-title {
@@ -134,7 +134,7 @@
     border-radius: 10px;
 }
 .wizard-progress-title {
-	color: $color-primary;
+	color: $brand-primary;
 }
 .wizard-step-content {
 	padding: 10px 20px;

@@ -3,7 +3,7 @@
 ========================================================================== */
 .sectionheader {
 	margin-bottom: 20px;
-	border-bottom: 1px solid $color-border-default;
+	border-bottom: 1px solid $default-border-color;
 	padding-bottom: 10px;
 }
 .sectionheader-title {
@@ -16,6 +16,6 @@
 }
 .sectionheader-avatar {
 	padding: 4px;
-	border: 2px solid $color-border-default;
+	border: 2px solid $default-border-color;
 	background-color: #FFF;
 }

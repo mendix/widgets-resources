@@ -1,0 +1,25 @@
+/* ==========================================================================
+   Special styles for presenting Page Template Dashboard
+========================================================================== */
+.page-dashboard {
+	background-color: $bg-color-secondary;
+	.chartjs-node {
+		margin-top: 30px;
+	}
+}
+.page-dashboard-default {
+	.card {
+		min-height: 345px;
+	}
+}
+.page-dashboard-mytasks {
+	.card {
+		min-height: 320px;
+	}
+}
+.page-dashboard-actions {
+
+}
+.page-dashboard-actions-tasks {
+
+}

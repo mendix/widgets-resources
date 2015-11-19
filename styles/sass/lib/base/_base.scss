@@ -5,13 +5,13 @@
 ========================================================================== */
 body {
 	@include font(normal);
-	color: $font-color-base;
-	font-size: $font-size-base;
+	color: $font-base-color;
+	font-size: $font-base-size;
 	line-height: $line-height-base;
-	background-color: $color-layout-bg;
+	background-color: $bg-color;
 }
 a {
-	color: $color-link;
+	color: $link-color;
 	-webkit-transition: 0.25s;
 	-moz-transition: 0.25s;
 	-o-transition: 0.25s;
@@ -20,7 +20,7 @@ a {
 }
 a:hover {
 	text-decoration: underline;
-	color: $color-link-hover;
+	color: $link-hover-color;
 }
 // Address `outline` inconsistency between Chrome and other browsers.
 a:focus {

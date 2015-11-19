@@ -30,7 +30,7 @@
 
     border-radius: 4px;
     box-shadow: none;
-    padding: round(0.6 * $font-size-base) round(1 * $font-size-base);
+    padding: round(0.6 * $font-base-size) round(1 * $font-base-size);
     background-color: $btn-default-bg;
     color: $btn-default-color;
     text-shadow: none;
@@ -62,7 +62,7 @@
     img {
         margin-top: -1px;
         //height: auto; // MXUI override who set the height on 16px default
-        height: $font-size-base + 4px;
+        height: $font-base-size + 4px;
     }
 }
 
@@ -139,7 +139,7 @@
     font-size: $font-size-large;
     padding: round(0.6 * $font-size-large) round(1 * $font-size-large);  // only for buttons
     img {
-        height: $font-size-base + 4px;
+        height: $font-base-size + 4px;
     }
 }
 .btn-sm {
