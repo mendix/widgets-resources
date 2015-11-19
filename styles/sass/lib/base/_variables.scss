@@ -72,6 +72,9 @@ $font-family-bold:                      false !default;//"Helvetica Neue", Helve
 $font-size-large:                       ceil($font-base-size * 1.25) !default; // ~18px
 $font-size-small:                       ceil($font-base-size * 0.85) !default; // ~12px
 
+// Font Color
+$font-base-color:						#000 !default;
+
 // Font Weights
 $font-weight-light:                     100 !default;
 $font-weight-normal:                    normal !default;         
@@ -80,13 +83,16 @@ $font-weight-bold:                      bold !default;
 
 $font-weight-headers:                   $font-weight-normal !default;
 
-// Font Size Header
+// Font Header Size
 $font-size-h1:                          31px !default;
 $font-size-h2:                          26px !default;
 $font-size-h3:                          20px !default;
 $font-size-h4:                          16px !default;
 $font-size-h5:                          $font-base-size !default;
 $font-size-h6:                          11px !default;
+
+// Font Header Color
+$font-color-headers:					$font-base-color !default;
 
 // Line Height
 $line-height-base:                      1.428571429 !default;
@@ -241,6 +247,7 @@ $color-text-white-secondary:            rgba($color-text-white, .7) !default;
 $color-text-white-disabled:             rgba($color-text-white, .3) !default;
 $color-text-white-hint:                 rgba($color-text-white, .3) !default;
 
+// Color variations
 $color-default-darker:                  shade($brand-default,40) !default;    
 $color-default-dark:                    shade($brand-default,26) !default;    
 $color-default-light:                   tint($brand-default,40) !default;    
