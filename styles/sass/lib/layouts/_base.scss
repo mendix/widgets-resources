@@ -115,7 +115,7 @@ body[dir="ltr"] .layout-sidebar-responsive .region-sidebar-fixed {
 ========================================================================== */
 .navbar-brand {
 	display: block;
-	min-height: 80px;
+	min-height: $topbar-minimalheight;
 	float: left;
 	padding: 22px 0;
 	img {
