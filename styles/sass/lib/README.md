@@ -1,5 +1,4 @@
 # Mendix UI Framework
-#### Theme Silver Linings 
 This is the library for the Mendix UI Framework to quickly create a beautiful app with Mendix. This library acts as a submodule for the default Mendix themes that can be found [here](https://ux.mendix.com/).
 
 ### Theme folder structure
