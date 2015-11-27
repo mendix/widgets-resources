@@ -117,7 +117,8 @@ body[dir="ltr"] .layout-sidebar-responsive .region-sidebar-fixed {
 	display: block;
 	min-height: $topbar-minimalheight;
 	float: left;
-	padding: 22px 0;
+	padding: 0;
+	line-height: $topbar-minimalheight;
 	img {
 		height: 37px;
 		display: inline-block;
