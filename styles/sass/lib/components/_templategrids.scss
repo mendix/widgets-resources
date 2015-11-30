@@ -8,7 +8,7 @@
 		table-layout: fixed;
 	}
 	.mx-templategrid-item {
-		background-color: $color-grid-bg;
+		background-color: $grid-bg;
 		padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
 		cursor: default;
 
@@ -16,7 +16,7 @@
 			background-color: transparent;
 		}
 		&.selected {
-			background-color: $color-grid-bg-selected !important;
+			background-color: $grid-bg-selected !important;
 		}
 	}
 	.mx-layoutgrid {
@@ -34,13 +34,13 @@
 .templategrid-hover.mx-templategrid {
 	.mx-templategrid-item {
 		&:hover {
-			background-color: $color-grid-bg-hover !important;
+			background-color: $grid-bg-hover !important;
 		}
 		&.selected {
-			background-color: $color-grid-bg-selected !important;
+			background-color: $grid-bg-selected !important;
 
 			&:hover {
-				background-color: $color-grid-bg-selected-hover !important;
+				background-color: $grid-bg-selected-hover !important;
 			}
 		}
 	}
@@ -67,14 +67,14 @@
 .templategrid-lined.mx-templategrid {
 	.mx-grid-content {
 		border-top-style: solid;
-		border-top-color: $color-grid-border;
+		border-top-color: $grid-border-color;
 		border-top-width: 2px;
 	}
 	.mx-templategrid-item {
 		border-left: none;
 		border-right: none;
-		border-top: 1px solid $color-grid-border;
-		border-bottom: 1px solid $color-grid-border;
+		border-top: 1px solid $grid-border-color;
+		border-bottom: 1px solid $grid-border-color;
 	}
 }
 

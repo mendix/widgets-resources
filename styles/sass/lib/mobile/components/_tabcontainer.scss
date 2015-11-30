@@ -15,7 +15,7 @@
 		margin: 0;
 		padding: 0;
 		border-color: transparent;
-		background-color: $m-color-tab-bg;
+		background-color: $m-tabs-bg;
 		text-align: center;
 
 		li {
@@ -29,7 +29,7 @@
 				margin: 0;
 				padding: 15px 0;
 				border-style: none;
-				color: $m-color-tab-text;
+				color: $m-tabs-color;
 				font-weight: normal;
 				font-size: 11px;
 				text-transform: uppercase;
@@ -49,7 +49,7 @@
 				
 			}
 			&.active a {
-				color: $m-color-tab-text-active;
+				color: $m-tabs-color-active;
 				border-style: none !important;
   				background-color: transparent !important;
   				@include css-arrow(bottom, 5px, 5px, #FFF, #FFF, 0);

@@ -27,14 +27,16 @@
 				border-radius: 0;
 			}
   			&.selected {
-  				border-left: 4px solid $color-primary;
+  				border-left: 4px solid $brand-primary;
   				background-color: $gray-lighter !important;
   			}
   		}
 	}
 }
 .multilevel-title {
-
+	label {
+		font-weight: bold;
+	}
 }
 .multilevel-subtitle {
 	color: $gray;
@@ -63,9 +65,9 @@
 		border-style: none;
 	}
 	.mx-datagrid-body-table {
-		border-left: 1px solid #ddd;
-		border-right: 1px solid #ddd;
-		border-bottom: 1px solid #ddd;
+		border-left: 1px solid $default-border-color;
+		border-right: 1px solid $default-border-color;
+		border-bottom: 1px solid $default-border-color;
 		.mx-datagrid-body tr {
 			td {
 				border-color: $gray-lighter;
@@ -76,7 +78,7 @@
 			}
 			&.selected td,
 			&.selected:hover td {
-				border-left: 4px solid $color-primary;
+				border-left: 4px solid $brand-primary;
 				background-color: $gray-lighter !important;
 			}
 		}

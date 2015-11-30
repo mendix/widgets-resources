@@ -30,12 +30,11 @@
 
     border-radius: 4px;
     box-shadow: none;
-    padding: round(0.6 * $font-size-base) round(1 * $font-size-base);
-    background-color: $color-btn-bg-default;
-    color: $color-btn-text-default;
+    padding: round(0.6 * $font-base-size) round(1 * $font-base-size);
+    background-color: $btn-default-bg;
+    color: $btn-default-color;
     text-shadow: none;
-    font-size: $font-btn-size;
-    text-transform: $font-btn-transform;
+    font-size: $btn-font-size;
     line-height: $line-height-base;
 
     &:hover,
@@ -49,7 +48,7 @@
 // Mendix button link
 .mx-link {
     padding: 0;
-    color: $color-link;
+    color: $link-color;
 
     a {
         color: inherit;
@@ -63,7 +62,7 @@
     img {
         margin-top: -1px;
         //height: auto; // MXUI override who set the height on 16px default
-        height: $font-size-base + 4px;
+        height: $font-base-size + 4px;
     }
 }
 
@@ -76,50 +75,47 @@
 
 // Buttons Alternate Style
 .btn-default {
-    @include button-variant($color-btn-text-default, $color-btn-bg-default, $color-btn-border-default);
+    @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border-color);
 }
 .btn-primary {
-    @include button-variant($color-btn-text-primary, $color-btn-bg-primary, $color-btn-border-primary);
+    @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border-color);
 }
 .btn-inverse {
-    @include button-variant($color-btn-text-inverse, $color-btn-bg-inverse, $color-btn-border-inverse);
+    @include button-variant($btn-inverse-color, $btn-inverse-bg, $btn-inverse-border-color);
     &:hover,
     &:focus,
     &:active,
     &.active,
     .open > &.dropdown-toggle {
-        background-color: lighten($color-btn-bg-inverse, 10%);
-        border-color: lighten($color-btn-bg-inverse, 10%);
+        background-color: lighten($btn-inverse-bg, 10%);
+        border-color: lighten($btn-inverse-bg, 10%);
     }
 }
 // Success appears as green
 .btn-success {
-    @include button-variant($color-btn-text-success, $color-btn-bg-success, $color-btn-border-success);
+    @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border-color);
 }
 // Info appears as blue-green
 .btn-info {
-    @include button-variant($color-btn-text-info, $color-btn-bg-info, $color-btn-border-info);
+    @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border-color);
 }
 // Warning appears as orange
 .btn-warning {
-    @include button-variant($color-btn-text-warning, $color-btn-bg-warning, $color-btn-border-warning);
+    @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border-color);
 }
 // Danger and error appear as red
 .btn-danger {
-    @include button-variant($color-btn-text-danger, $color-btn-bg-danger, $color-btn-border-danger);
-}
-.btn-white {
-    @include button-variant($color-btn-text-white, $color-btn-bg-white, $color-btn-border-white);
+    @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border-color);
 }
 // Button as link but with padding 
 .btn-link {
     border: 0;
     background-color: transparent;
-    color: $color-link;
+    color: $link-color;
 
     &:hover {
         background-color: transparent;
-        color: $color-link-hover;
+        color: $link-hover-color;
     }
 }
 /* Buttons appear disabled */
@@ -143,7 +139,7 @@
     font-size: $font-size-large;
     padding: round(0.6 * $font-size-large) round(1 * $font-size-large);  // only for buttons
     img {
-        height: $font-size-base + 4px;
+        height: $font-base-size + 4px;
     }
 }
 .btn-sm {

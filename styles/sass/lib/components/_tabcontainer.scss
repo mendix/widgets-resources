@@ -7,7 +7,7 @@
 .mx-tabcontainer {
 	.mx-tabcontainer-tabs {
 		margin-bottom: 20px;
-		border-color: $color-tab-border;
+		border-color: $tabs-border-color;
 		> li > a {
 			@include font(normal);
 
@@ -17,21 +17,21 @@
 			transition: all .2s ease-in-out;
 
 			margin-right: 0;
-			color: $color-tab-text;
+			color: $tabs-color;
 			
 			&:hover,
 			&:focus {
-				background-color: $color-tab-bg-hover;
+				background-color: $tabs-bg-hover;
 			}
 		}
 
 		> li.active > a,
 		> li.active > a:hover,
 		> li.active > a:focus  {
-			border: 1px solid $color-tab-border;
+			border: 1px solid $tabs-border-color;
 			border-bottom-color: transparent;
 			background-color: #FFF;
-			color: $color-tab-text-active;
+			color: $tabs-color-active;
 		}
 	}
 	.mx-tabcontainer-content {
@@ -51,21 +51,21 @@
 		> li > a {
 			border-radius: 4px;
 			margin-right: 2px;
-			border: 1px solid $color-tab-border;
-			color: $color-tab-text;
+			border: 1px solid $tabs-border-color;
+			color: $tabs-color;
 
 			&:hover,
 			&:focus {
-				background-color: $color-tab-bg-hover;
+				background-color: $tabs-bg-hover;
 			}
 		}
 
 		> li.active > a,
 		> li.active > a:hover,
 		> li.active > a:focus  {
-			background-color: $color-tab-bg-active;
+			background-color: $tabs-bg-active;
 			color: #FFF;
-			border-color: $color-tab-bg-active;
+			border-color: $tabs-bg-active;
 		}
 	}
 }
@@ -91,14 +91,14 @@
                 border-color: transparent;
                 border-bottom-width: 3px;
 				border-radius: 0;
-				color: $color-tab-text;
+				color: $tabs-color;
 
                 &:hover, 
                 &:focus {
                 	border: 0;
                     border-color: transparent;
                     background: transparent;
-                    color: $color-tab-text;
+                    color: $tabs-color;
                 }
 
             }
@@ -107,9 +107,9 @@
             &.active > a:hover, 
             &.active > a:focus  {
             	border: 0;
-                border-bottom: 3px solid $color-tab-lined-border;
+                border-bottom: 3px solid $tabs-lined-border-color;
                 background-color: transparent;
-                color: $color-tab-lined-text-active;
+                color: $tabs-lined-color-active;
             }
         }
     }
@@ -136,7 +136,7 @@
 				width: 100%;
 			}	
 			> a {
-				border-bottom: 1px solid $color-tab-border;
+				border-bottom: 1px solid $tabs-border-color;
 				text-align: center;
 			}
 		
@@ -146,7 +146,7 @@
 			border-bottom-color: transparent;
 
 			@media (max-width: 768px) {
-				border-bottom-color: $color-tab-border;
+				border-bottom-color: $tabs-border-color;
 			}
 		}
 	}
@@ -167,7 +167,7 @@
 		padding: 10px;
 		border-width: 0 1px 1px 1px;
 		border-style: solid;
-		border-color: $color-tab-border;
+		border-color: $tabs-border-color;
 		background-color: #FFF;
 	}
 }

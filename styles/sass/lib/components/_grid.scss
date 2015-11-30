@@ -1,7 +1,7 @@
 /* ==========================================================================
    Grid
 
-   Default Mendix Grid
+   Default Mendix Grid (used for Mendix Datagrid)
 ========================================================================== */
 .mx-grid {
 	border-radius: 0;
@@ -16,14 +16,14 @@
 			/* Buttons */
 			.mx-button {
 				padding: 6px;
-				background-color: $color-grid-paging-bg;
-				color: $color-grid-paging-text;
-				border-color: $color-grid-paging-border;
+				background-color: $grid-paging-bg;
+				color: $grid-paging-color;
+				border-color: $grid-paging-border-color;
 
 				&:hover {
-					background-color: $color-grid-paging-bg-hover;
-					color: $color-grid-paging-text-hover;
-					border-color: $color-grid-paging-border-hover;
+					background-color: $grid-paging-bg-hover;
+					color: $grid-paging-color-hover;
+					border-color: $grid-paging-border-color-hover;
 				}
 
 				&.disabled, 

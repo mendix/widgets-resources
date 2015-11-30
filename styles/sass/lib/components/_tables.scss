@@ -15,8 +15,8 @@ table.mx-table {
 				padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
 				* { 
 					@include font(bold); 
-					color: $color-label;
-					font-weight: $font-weight-label;
+					color: $form-label-color;
+					font-weight: $form-label-weight;
 				}
 				> label { 
 					padding-top: 7px;
@@ -81,7 +81,7 @@ table.table-lined.mx-table {
 			> td {
 				border-width: 1px 0;
 				border-style: solid;
-				border-color: $color-grid-border;
+				border-color: $grid-border-color;
 			}
 		}
 	}
@@ -105,7 +105,7 @@ table.table-bordered.mx-table {
 			> td {
 				border-width: 1px;
 				border-style: solid;
-				border-color: $color-grid-border;
+				border-color: $grid-border-color;
 			}
 		}
 	}

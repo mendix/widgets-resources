@@ -2,7 +2,7 @@
    Master Detail Listview
 ========================================================================== */
 .masterdetail-listview {
-	background-color: $color-layout-bg-secondary;
+	background-color: $bg-color-secondary;
 	.mx-listview {
 		height: 100%;
 		margin: 0;
@@ -17,7 +17,7 @@
 				
 				&:hover,
 				&:active {
-					background-color: $color-grid-bg-selected !important;
+					background-color: $grid-bg-selected !important;
 				}
 			}
 		}

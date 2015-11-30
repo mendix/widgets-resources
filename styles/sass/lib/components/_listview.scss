@@ -21,20 +21,20 @@
 		margin: 0;
 	}
 	.mx-listview-item {
-		background-color: $color-grid-bg;
+		background-color: $grid-bg;
 		padding: 10px 0;
 		&:hover {
-			background-color: $color-grid-bg;
+			background-color: $grid-bg;
 		}
 		&.selected {
-			background-color: $color-grid-bg-selected !important;
+			background-color: $grid-bg-selected !important;
 
 			&:hover {
-				background-color: $color-grid-bg-selected-hover !important;
+				background-color: $grid-bg-selected-hover !important;
 			}
 		}
 		&:nth-child(2n+1) {
-			background-color: $color-grid-bg;
+			background-color: $grid-bg;
 		}
 	}
 
@@ -54,7 +54,7 @@
 	.mx-listview-item {
 		&:hover,
 		&:active {
-			background-color: $color-grid-bg-hover !important;
+			background-color: $grid-bg-hover !important;
 		}
 	}
 }
@@ -67,7 +67,7 @@
 ========================================================================== */
 .listview-lined.mx-listview {
 	.mx-listview-item {
-		border-top: 1px solid $color-grid-border;
+		border-top: 1px solid $grid-border-color;
 		border-right: none;
 		border-left: none;
 
@@ -76,7 +76,7 @@
 		}
 		&:last-child {
 			border-radius: 0;
-			border-bottom: 1px solid $color-grid-border;
+			border-bottom: 1px solid $grid-border-color;
 		}
 	}
 }
@@ -89,7 +89,7 @@
 ========================================================================== */
 .listview-striped.mx-listview {
 	.mx-listview-item:nth-child(2n+1) {
-		background-color: $color-grid-bg-striped;
+		background-color: $grid-bg-striped;
 	}
 }
 

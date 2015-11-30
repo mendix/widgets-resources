@@ -11,19 +11,19 @@
 	display: block;
 	padding: 7px 8px;
 	width: 100%;
-	height: $input-height;
-	border: 1px solid $color-input-border;
+	height: $form-input-height;
+	border: 1px solid $form-input-border-color;
 	border-radius: 4px;
-	background-color: $color-input-bg;
+	background-color: $form-input-bg;
 	background-image: none;
-	color: $color-input-text;
+	color: $form-input-color;
 	vertical-align: middle;
-	font-size: $font-size-base;
+	font-size: $font-base-size;
 	line-height: $line-height-base;
 }
 .form-control:focus {
-	border-color: $color-input-border-focus;
-	background-color: $color-input-bg-focus;
+	border-color: $form-input-border-focus-color;
+	background-color: $form-input-bg-focus;
 	outline: 0;
 }
 textarea.form-control {
@@ -54,7 +54,7 @@ textarea.form-control {
 	@extend .form-control;
 	height: auto;
 	min-height: 33px;
-	background-color: $color-input-bg-disabled !important;
+	background-color: $form-input-bg-disabled !important;
 	label { 
 		padding: 0 !important;
 	}
@@ -63,7 +63,7 @@ textarea.form-control {
 	}
 }
 .readonly-input-alert label {
-	color: $color-danger;
+	color: $brand-danger;
 }
 /* Needed for IE8, IE8 doesn't respect border-box and min-height */
 .dj_ie8 .readonly-input {
@@ -85,7 +85,7 @@ textarea.form-control {
 			cursor: pointer;
 		}
 		.mx-fileinput-upload-button:hover {
-			background-color: $color-btn-bg-default;
+			background-color: $btn-default-bg;
 		}
 	}
 }

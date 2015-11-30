@@ -8,12 +8,12 @@
 		@include font(bold);
 		border-radius: 0;
 		margin: 0;
-		background: $color-groupbox-default;
-		color: $color-groupbox-text-default;
+		background: $groupbox-default-bg;
+		color: $groupbox-default-color;
 		font-size: $font-size-h4;
 		border-style: solid;
 		border-width: 1px 1px 0 1px;
-		border-color: $color-groupbox-default;
+		border-color: $groupbox-default-bg;
 
 		.mx-groupbox-collapse-icon {
 			margin-top: 0.1em;
@@ -22,7 +22,7 @@
 	> .mx-groupbox-body {
 		border-radius: 0;
     	padding: 10px 15px;
-    	border-color: $color-groupbox-default;
+    	border-color: $groupbox-default-bg;
     	background-color: #FFF;
 		border-style: solid;
 		border-width: 1px;
@@ -130,33 +130,33 @@
 .mx-groupbox  {
 	// Color variations 
 	&.groupbox-default {
-		 @include groupbox-variant($color-groupbox-text-default, $color-groupbox-default);
+		 @include groupbox-variant($groupbox-default-color, $groupbox-default-bg);
 	}
 	&.groupbox-primary {
-		@include groupbox-variant($color-groupbox-text-primary, $color-groupbox-primary);
+		@include groupbox-variant($groupbox-primary-color, $groupbox-primary-bg);
 	}
 	&.groupbox-inverse {
-		@include groupbox-variant($color-groupbox-text-inverse, $color-groupbox-inverse);
+		@include groupbox-variant($groupbox-inverse-color, $groupbox-inverse-bg);
 	}
 	// Success appears as green
 	&.groupbox-success {
-		@include groupbox-variant($color-groupbox-text-success, $color-groupbox-success);
+		@include groupbox-variant($groupbox-success-color, $groupbox-success-bg);
 	}
 	// Info appears as blue-green
 	&.groupbox-info {
-		@include groupbox-variant($color-groupbox-text-info, $color-groupbox-info);
+		@include groupbox-variant($groupbox-info-color, $groupbox-info-bg);
 	}
 	// Warning appears as orange
 	&.groupbox-warning {
-		@include groupbox-variant($color-groupbox-text-warning, $color-groupbox-warning);
+		@include groupbox-variant($groupbox-warning-color, $groupbox-warning-bg);
 	}
 	// Danger and error appear as red
 	&.groupbox-danger {
-		@include groupbox-variant($color-groupbox-text-danger, $color-groupbox-danger);
+		@include groupbox-variant($groupbox-danger-color, $groupbox-danger-bg);
 	}
 	// white appears as full white	
 	&.groupbox-white {
-		@include groupbox-variant($color-groupbox-text-white, $color-groupbox-white);
+		@include groupbox-variant($groupbox-white-color, $groupbox-white-bg);
 	}
 	&.groupbox-transparent  {
 		background-color: transparent;
@@ -228,37 +228,37 @@
 	&.groupbox-callout-info {
 		> .mx-groupbox-header, 
 		> .mx-groupbox-body {
-			background-color: $color-callout-bg-info;
+			background-color: $callout-info-bg;
 		}
 		> .mx-groupbox-header {
-			color: $color-callout-info;
+			color: $callout-info-color;
 		}
 	}
 	&.groupbox-callout-success {
 		> .mx-groupbox-header, 
 		> .mx-groupbox-body {
-			background-color: $color-callout-bg-success;
+			background-color: $callout-success-bg;
 		}
 		> .mx-groupbox-header {
-			color: $color-callout-success;
+			color: $callout-success-color;
 		}
 	}
 	&.groupbox-callout-warning {
 		> .mx-groupbox-header, 
 		> .mx-groupbox-body {
-			background-color: $color-callout-bg-warning;
+			background-color: $callout-warning-bg;
 		}
 		> .mx-groupbox-header {
-			color: $color-callout-warning;
+			color: $callout-warning-color;
 		}
 	}
 	&.groupbox-callout-danger {
 		> .mx-groupbox-header, 
 		> .mx-groupbox-body {
-			background-color: $color-callout-bg-danger;
+			background-color: $callout-danger-bg;
 		}
 		> .mx-groupbox-header {
-			color: $color-callout-danger;
+			color: $callout-danger-color;
 		}
 	}
 }

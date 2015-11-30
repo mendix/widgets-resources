@@ -4,9 +4,9 @@
    Used for navigation layouts
 ========================================================================== */
 .region-topbar {
-	min-height: $minimalheight-topbar;
-	border-bottom: 1px solid $color-border-default;
-	background-color: $color-navtopbar-bg;
+	min-height: $topbar-minimalheight;
+	border-bottom: 1px solid $default-border-color;
+	background-color: $navtopbar-bg;
 	> .mx-layoutcontainer-wrapper {
 		padding: 0;
 	}
@@ -19,13 +19,13 @@
 	
 	// SSO widgets
 	.navbar-right {
-		min-height: $minimalheight-topbar;
+		min-height: $topbar-minimalheight;
 		.mx-appswitcher-button-placeholder,
 		.mx-profilemenu-button-placeholder  {
 			display: inline-block;
-			border-left: 1px solid $color-border-default;
-			width: $minimalheight-topbar;
-			height: $minimalheight-topbar;
+			border-left: 1px solid $default-border-color;
+			width: $topbar-minimalheight;
+			height: $topbar-minimalheight;
 			position: relative;
 			float: left;
 			iframe {
@@ -51,7 +51,7 @@
 }
 .region-sidebar,
 .region-sidebar-fixed {
-	background-color: $color-navsidebar-bg;
+	background-color: $navsidebar-bg;
 	> .mx-layoutcontainer-wrapper {
 		padding: 0;
 	}
@@ -107,23 +107,25 @@ body[dir="ltr"] .layout-sidebar-responsive .region-sidebar-fixed {
 	  left: 0;
 	}
 }
+
 /* ==========================================================================
    Navbar Brand
 
-   Used to style your app brand and logo
+   For your company, product, or project name
 ========================================================================== */
 .navbar-brand {
 	display: block;
-	min-height: 80px;
+	min-height: $topbar-minimalheight;
 	float: left;
-	padding: 22px 0;
+	padding: 0;
+	line-height: $topbar-minimalheight;
 	img {
 		height: 37px;
 		display: inline-block;
 	}
 	a {
 		font-size: 20px;
-		color: $color-text-black;
+		color: $navbar-brand-name;
 
 		&:hover,
 		&:focus {

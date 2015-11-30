@@ -2,12 +2,12 @@
    Page Header
 ========================================================================== */
 .pageheader {
-	border-bottom: 2px solid $color-border-default;
+	border-bottom: 2px solid $default-border-color;
 	@include default-spacing($type: margin, $direction: bottom, $device: responsive);
 }
 .pageheader.pageheader-fullwidth {
-	background-color: $color-layout-bg-secondary;
-	border-bottom: 1px solid $color-border-default;
+	background-color: $bg-color-secondary;
+	border-bottom: 1px solid $default-border-color;
 	margin-bottom: 0;
 }
 .pageheader-title {

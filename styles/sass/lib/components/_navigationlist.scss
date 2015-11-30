@@ -10,49 +10,27 @@
 	.mx-navigationlist-item {
 		padding: 15px 20px 15px 16px;
 		border-left: 4px solid transparent;
-		border-bottom: 1px solid $color-navsidebar-border;
+		border-bottom: 1px solid $navsidebar-border-color;
 		border-top: none;
 		border-radius: 0;
-		background-color: $color-navsidebar-bg;
+		background-color: $navsidebar-bg;
 		label {
 			@include font(normal);
-			color: $color-navsidebar-text;
-			font-size: $font-navsidebar-size;
+			color: $navsidebar-color;
+			font-size: $navsidebar-font-size;
 		}
 		&:hover,
 		&:focus,
 		&.active {
-			background-color: $color-navsidebar-bg-hover;
+			background-color: $navsidebar-bg-hover;
 			label {
-				color: $color-navsidebar-text-hover;
+				color: $navsidebar-color-hover;
 			}
 		}
 		&.active {
-           	border-left-color: $color-navsidebar-text-active;
-           	color: $color-navsidebar-text-active;
-           	background-color: $color-navsidebar-bg-active;
+           	border-left-color: $navsidebar-color-active;
+           	color: $navsidebar-color-active;
+           	background-color: $navsidebar-bg-active;
         }
 	}
 }
-
-
-// /* ==========================================================================
-//    Navigation List Lined
-
-//    Default Mendix Navigation List Widget border top between navigation list items
-// ========================================================================== */
-// .navigationlist-lined.mx-navigationlist {
-// 	.mx-navigationlist-item {
-// 		border-top: 1px solid $color-grid-border;
-// 		border-right: none;
-// 		border-left: none;
-
-// 		&:first-child {
-// 			border-radius: 0;
-// 		}
-// 		&:last-child {
-// 			border-radius: 0;
-// 			border-bottom: 1px solid $color-grid-border;
-// 		}
-// 	}
-// }

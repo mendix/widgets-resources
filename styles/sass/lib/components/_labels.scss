@@ -16,26 +16,26 @@
 	line-height: 1;
 }
 .label-default { 
-	background-color: $color-label-bg-default; 
-	color: $color-label-text-default;
+	background-color: $label-default-bg; 
+	color: $label-default-color;
 }
 .label-primary { 
-	background-color: $color-label-bg-primary; 
-	color: $color-label-text-primary;
+	background-color: $label-primary-bg; 
+	color: $label-primary-color;
 }
 .label-success { 
-	background-color: $color-label-bg-success; 
-	color: $color-label-text-success;
+	background-color: $label-success-bg; 
+	color: $label-success-color;
 }
 .label-info { 
-	background-color: $color-label-bg-info; 
-	color: $color-label-text-info;
+	background-color: $label-info-bg; 
+	color: $label-info-color;
 }
 .label-warning { 
-	background-color: $color-label-bg-warning; 
-	color: $color-label-text-warning;
+	background-color: $label-warning-bg; 
+	color: $label-warning-color;
 }
 .label-danger { 
-	background-color: $color-label-bg-danger; 
-	color: $color-label-text-danger;
+	background-color: $label-danger-bg; 
+	color: $label-danger-color;
 }

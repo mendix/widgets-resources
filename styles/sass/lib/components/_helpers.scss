@@ -32,7 +32,7 @@
 }
 .form-disabled p {
 	@extend .form-control;
-	background-color: $color-input-bg-disabled !important;
+	background-color: $form-input-bg-disabled !important;
 }
 .padding-bottom-none {
 	padding-bottom: 0

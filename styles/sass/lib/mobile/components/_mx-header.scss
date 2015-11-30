@@ -16,10 +16,10 @@
 
 body .mx-header {
 	padding: 0;
-	height: $m-height-header;
-	color: $m-color-header-text;
-	border-bottom: 1px solid $color-border-default;
-	background-color: $m-color-header-bg;
+	height: $m-header-height;
+	color: $m-header-color;
+	border-bottom: 1px solid $default-border-color;
+	background-color: $m-header-bg;
 	display: table;
 	width: 100%;
 
@@ -35,14 +35,14 @@ body .mx-header {
 		top: 0;
 		position: absolute;
 		padding: 0 8px;
-		height: $m-height-header;
+		height: $m-header-height;
 		.mx-placeholder {
 			display: table-cell;
 			vertical-align: middle;
 		}		
 	}
 	.mx-link {
-		color: $m-color-header-link;
+		color: $m-header-link-color;
 	}
 	.mx-sidebartoggle {
 		font-size: 24px;
@@ -52,7 +52,7 @@ body .mx-header {
 	// Header Title
 	.mx-title {
 		margin: 0;
-		color: $m-color-header-text;
+		color: $m-header-color;
 		font-size: 16px;
 		line-height: 44px;
 	

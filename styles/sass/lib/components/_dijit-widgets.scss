@@ -54,7 +54,7 @@
 	.dijitCalendarSelectedDate,
 	.dijitCalendarSelectedDate:hover {
 		border-radius: 10px;
-		background: $color-primary;
+		background: $brand-primary;
 		.dijitCalendarDateLabel {
 			color: #fff;
 		}
@@ -67,7 +67,7 @@
 		background-color: #dbdcdd;
 	}
 	.dijitCalendarYearContainer td {
-		border-top: 1px solid $color-border-default;
+		border-top: 1px solid $default-border-color;
 		text-align: center;
 		color: #000;
 		.dijitCalendarSelectedYear {
@@ -236,7 +236,7 @@
         display: block;
         margin-top: 0; // No top margin because there is no parent with margin bottom
         padding: 12px 10px;
-        background: $color-inverse;
+        background: $brand-inverse;
         width: 200px !important;
 
         &:after {
@@ -248,7 +248,7 @@
             height: 0px;
             border: medium solid transparent;
             border-width: 10px;
-            border-bottom-color: $color-inverse;
+            border-bottom-color: $brand-inverse;
             content: " ";
             pointer-events: none;
         }
@@ -269,7 +269,7 @@
             &.dijitMenuItemHover {
                 background: none;
                 .dijitMenuItemLabel {  
-                    background: $color-primary;
+                    background: $brand-primary;
                 }
             }
         }
