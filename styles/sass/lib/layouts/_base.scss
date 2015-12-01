@@ -14,12 +14,16 @@
 	.toggle-btn {
 		font-size: 16px;
 		float: left;
-		margin: 20px 15px 0 0;
+		margin: -20px 15px 0 0;
+		transform: translateY($topbar-minimalheight / 2);
 	}
-	
+	.navbar-header {
+		width: 100%;
+	}
 	// SSO widgets
 	.navbar-right {
 		min-height: $topbar-minimalheight;
+		max-width: 100%;
 		.mx-appswitcher-button-placeholder,
 		.mx-profilemenu-button-placeholder  {
 			display: inline-block;
@@ -28,6 +32,7 @@
 			height: $topbar-minimalheight;
 			position: relative;
 			float: left;
+			max-width: 50%;
 			iframe {
 				width: 48px;
 				height: 48px;
@@ -40,9 +45,6 @@
 				margin: auto auto;
 			}
 		
-		}
-		.mx-profilemenu-button-placeholder {
-			margin-right: 10px;
 		}
 		@media (max-width: 768px) {
 			display: none;

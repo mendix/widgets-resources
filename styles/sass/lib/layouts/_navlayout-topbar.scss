@@ -18,7 +18,8 @@
 			}
 			ul.nav { 
 				> li.mx-navbar-item > a {
-					padding: 30px;
+					padding: 0 30px;
+					line-height: $topbar-minimalheight;
 				}
 			}
 		}
