@@ -3,12 +3,17 @@
 
    Default settings
 ========================================================================== */
+html {
+	height: 100%;
+}
 body {
 	@include font(normal);
 	color: $font-base-color;
 	font-size: $font-base-size;
 	line-height: $line-height-base;
 	background-color: $bg-color;
+
+	min-height: 100%;
 }
 a {
 	color: $link-color;
