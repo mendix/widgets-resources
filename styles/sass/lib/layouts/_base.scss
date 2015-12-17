@@ -121,10 +121,26 @@ body[dir="ltr"] .layout-sidebar-responsive .region-sidebar-fixed {
 	float: left;
 	padding: 0;
 	line-height: $topbar-minimalheight;
-	img {
-		height: 37px;
-		display: inline-block;
+
+	@if $brand-logo != null {
+		img {
+    		display: none;
+    	}
+    	&:before {
+    		content: "";
+    		background-image: url($brand-logo);
+    		background-size: contain;
+    		display: inline-block;
+ 			width: 40px;
+ 			height: 40px;
+    	}
+	} @else {
+		img {
+			height: 37px;
+			display: inline-block;
+		}
 	}
+
 	a {
 		font-size: 20px;
 		color: $navbar-brand-name;
