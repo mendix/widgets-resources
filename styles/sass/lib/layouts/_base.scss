@@ -127,17 +127,21 @@ body[dir="ltr"] .layout-sidebar-responsive .region-sidebar-fixed {
     		display: none;
     	}
     	&:before {
-    		content: "";
+		    content: "";
+		    display: inline-block;
+		    width: $brand-logo-width;
+		    height: $brand-logo-height;
+		    vertical-align: middle;
     		background-image: url($brand-logo);
     		background-size: contain;
-    		display: inline-block;
- 			width: 40px;
- 			height: 40px;
+    		background-repeat: no-repeat;
     	}
 	} @else {
 		img {
-			height: 37px;
+			height: $brand-logo-height;
+			width: auto;
 			display: inline-block;
+			vertical-align: middle;
 		}
 	}
 
