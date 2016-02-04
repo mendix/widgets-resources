@@ -159,7 +159,8 @@ $navtopbar-sub-color:                   #AAA !default;
 $navtopbar-sub-color-hover:             $brand-primary !default;
 $navtopbar-sub-color-active:            $brand-primary !default;
 
-$navtopbar-border-color:                $navtopbar-bg-hover !default;
+//## Used in layouts/base
+$navtopbar-border-color:                $default-border-color !default;
 
 
 

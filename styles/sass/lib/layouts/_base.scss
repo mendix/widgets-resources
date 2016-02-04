@@ -5,7 +5,7 @@
 ========================================================================== */
 .region-topbar {
 	min-height: $topbar-minimalheight;
-	border-bottom: 1px solid $default-border-color;
+	border-bottom: 1px solid $navtopbar-border-color;
 	background-color: $navtopbar-bg;
 	> .mx-layoutcontainer-wrapper {
 		padding: 0;
