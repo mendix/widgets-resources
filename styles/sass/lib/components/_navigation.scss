@@ -397,3 +397,12 @@
 	}
 }
 
+/* Horizontal variation specifics */
+.mx-menubar-horizontal {
+	ul.mx-menubar-list {
+		li.mx-menubar-item {
+			width: auto;
+		}
+	}
+}
+
