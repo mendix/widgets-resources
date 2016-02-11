@@ -16,10 +16,14 @@
 		.mx-listview-searchbar {
 			padding: 10px;
 			margin-bottom: 0;
+			position: relative;
 
 			/* Reset Search Button */
 			button {
-				display: none;
+				//display: none;
+				position: absolute;
+				right: 10px;
+				background: none;
 			}
 			/* Search Field */
 			.mx-listview-search-input {
