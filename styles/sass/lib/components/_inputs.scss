@@ -64,6 +64,13 @@ textarea.form-control {
 .form-group div[class*='datePicker'] > label {
 	@extend .form-control-static;
 }
+.form-group {
+	margin-bottom: $form-group-margin-bottom;
+	[class*='col-'] {
+		padding-left: $form-group-gutter;
+		padding-right: $form-group-gutter;
+	}
+}
 .form-group-sm {
 	.form-control {
 		@extend .form-control-sm;
@@ -82,6 +89,9 @@ textarea.form-control {
 }
 
 .form-horizontal {
+	.form-group {
+
+	}
 	@media (min-width: $screen-sm){
 		.form-group-sm .control-label {		
 			padding-top: 6px;
