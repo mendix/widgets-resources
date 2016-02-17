@@ -58,6 +58,12 @@ textarea.form-control {
 .mx-textarea label {
 	height: auto;
 }
+
+
+
+/* ==========================================================================
+   Group with label and input
+========================================================================== */
 /* Input and textarea get properly aligned */
 .form-group div[class*='textBox'] > label,
 .form-group div[class*='textArea'] > label,
@@ -87,11 +93,7 @@ textarea.form-control {
 		font-size: $font-size-large;
 	}
 }
-
 .form-horizontal {
-	.form-group {
-
-	}
 	@media (min-width: $screen-sm){
 		.form-group-sm .control-label {		
 			padding-top: 6px;
@@ -101,6 +103,29 @@ textarea.form-control {
 		}
 	}
 }
+
+
+
+/* ==========================================================================
+   Helper classes for on dataview / forms
+========================================================================== */
+.form-sm {
+	.form-control {
+		@extend .form-control-sm;
+	}
+	.control-label {
+		font-size: $font-size-small;
+	}
+}
+.form-lg {
+	.form-control {
+		@extend .form-control-lg;
+	}
+	.control-label {
+		font-size: $font-size-large;
+	}
+}
+
 
 
 /* ==========================================================================
