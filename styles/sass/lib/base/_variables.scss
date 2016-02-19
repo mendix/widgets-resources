@@ -174,10 +174,10 @@ $form-label-size:                       $font-base-size  !default;
 $form-label-weight:                     $font-weight-normal !default;             
 
 // Form Input dimensions
-// $form-input-height:                     33px !default;
-$form-input-padding-y:                  7px !default;
+$form-input-height:                     auto !default;
+$form-input-padding-y:                  6px !default;
 $form-input-padding-x:                  8px !default;
-$form-input-font-size:                  $font-base-size !default;
+$form-input-font-size:                  $form-label-size !default;
 $form-input-line-height:                $line-height-base !default;
 $form-input-border-radius:              4px !default;
 
