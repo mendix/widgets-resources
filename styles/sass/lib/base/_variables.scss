@@ -170,10 +170,18 @@ $navtopbar-border-color:                $default-border-color !default;
 
 // Form Label  
 $form-label-color:                      #666 !default;        
+$form-label-size:                       $font-base-size !default;        
 $form-label-weight:                     $font-weight-normal !default;             
 
-// Form Input
-$form-input-height:                     33px !default;
+// Form Input dimensions
+$form-input-height:                     auto !default;
+$form-input-padding-y:                  6px !default;
+$form-input-padding-x:                  8px !default;
+$form-input-font-size:                  $form-label-size !default;
+$form-input-line-height:                $line-height-base !default;
+$form-input-border-radius:              4px !default;
+
+// Form Input styling
 $form-input-bg:                         #FFF !default;
 $form-input-bg-focus:                   #FFF !default;
 $form-input-bg-disabled:                $gray-lighter !default;
@@ -183,6 +191,10 @@ $form-input-disabled-color:             $form-input-color !default;
 $form-input-placeholder-color:          $gray-light !default;
 $form-input-border-color:               $default-border-color !default;
 $form-input-border-focus-color:         $brand-primary !default;    
+
+// Form Group
+$form-group-margin-bottom:              15px !default;
+$form-group-gutter:                     15px !default;
 
 
 
