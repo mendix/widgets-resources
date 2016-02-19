@@ -17,10 +17,7 @@
 	background-color: $form-input-bg;
 	background-image: none;
 	color: $form-input-color;
-	vertical-align: middle;
-	// font-size: $font-base-size;
 	font-size: $form-input-font-size;
-	// line-height: $line-height-base;
 	line-height: $form-input-line-height;
 }
 .form-control:focus {
@@ -30,22 +27,6 @@
 }
 textarea.form-control {
 	height: auto;
-}
-
-/* Form control sizing */
-.form-control-sm > .form-control {
-	height: $form-input-height-sm;
-	padding: $form-input-padding-y-sm $form-input-padding-x-sm;
-	font-size: $form-input-font-size-sm;
-	line-height: $form-input-line-height-sm;
-	border-radius: $form-input-border-radius-sm;
-}
-.form-control-lg > .form-control {
-	height: $form-input-height-lg;
-	padding: $form-input-padding-y-lg $form-input-padding-x-lg;
-	font-size: $form-input-font-size-lg;
-	line-height: $form-input-line-height-lg;
-	border-radius: $form-input-border-radius-lg;
 }
 
 .form-control-static {
@@ -77,54 +58,6 @@ textarea.form-control {
 		padding-right: $form-group-gutter;
 	}
 }
-.form-group-sm {
-	.form-control {
-		@extend .form-control-sm;
-	}
-	.control-label {
-		font-size: $font-size-small;
-	}
-}
-.form-group-lg {
-	.form-control {
-		@extend .form-control-lg;
-	}
-	.control-label {
-		font-size: $font-size-large;
-	}
-}
-.form-horizontal {
-	@media (min-width: $screen-sm){
-		.form-group-sm .control-label {		
-			padding-top: 6px;
-		}		
-		.form-group-lg .control-label {		
-			padding-top: 11px;
-		}
-	}
-}
-
-
-
-/* ==========================================================================
-   Helper classes for on dataview / forms
-========================================================================== */
-.form-sm {
-	.form-control {
-		@extend .form-control-sm;
-	}
-	.control-label {
-		font-size: $font-size-small;
-	}
-}
-.form-lg {
-	.form-control {
-		@extend .form-control-lg;
-	}
-	.control-label {
-		font-size: $font-size-large;
-	}
-}
 
 
 
@@ -150,6 +83,7 @@ textarea.form-control {
 .dj_ie8 .readonly-input {
 	min-height: auto;
 }
+
 
 
 /* ==========================================================================
