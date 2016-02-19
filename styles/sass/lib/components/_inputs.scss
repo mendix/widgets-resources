@@ -69,6 +69,7 @@ textarea.form-control {
 .form-horizontal {
 	@media (min-width: $screen-sm){
 		.control-label {
+			line-height: $form-input-line-height;
 			padding-top: $form-input-padding-y;
 			padding-bottom: $form-input-padding-y;
 		}
