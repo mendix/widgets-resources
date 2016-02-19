@@ -170,10 +170,11 @@ $navtopbar-border-color:                $default-border-color !default;
 
 // Form Label  
 $form-label-color:                      #666 !default;        
+$form-label-size:                       $font-base-size  !default;        
 $form-label-weight:                     $font-weight-normal !default;             
 
 // Form Input dimensions
-$form-input-height:                     33px !default;
+// $form-input-height:                     33px !default;
 $form-input-padding-y:                  7px !default;
 $form-input-padding-x:                  8px !default;
 $form-input-font-size:                  $font-base-size !default;

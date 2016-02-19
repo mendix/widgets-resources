@@ -11,7 +11,7 @@
 	display: block;
 	padding: $form-input-padding-y $form-input-padding-x;
 	width: 100%;
-	height: $form-input-height;
+	height: auto;
 	border: 1px solid $form-input-border-color;
 	border-radius: $form-input-border-radius;
 	background-color: $form-input-bg;
@@ -31,8 +31,10 @@ textarea.form-control {
 
 .form-control-static {
 	overflow: hidden;
-	padding-top: 7px;
-	padding-bottom: 7px;
+	padding-top: $form-input-padding-y;
+	padding-bottom: $form-input-padding-y;
+	// padding-top: 7px;
+	// padding-bottom: 7px;
 	margin-bottom: 0;
 }
 /* Not editable textarea, textarea will be rendered as a label */
@@ -58,8 +60,19 @@ textarea.form-control {
 		padding-right: $form-group-gutter;
 	}
 }
-
-
+.form-group .control-label {
+	color: $form-label-color;	
+	font-size: $form-label-size;
+	font-weight: $form-label-weight;	
+}
+.form-horizontal {
+	@media (min-width: $screen-sm){
+		.control-label {
+			padding-top: $form-input-padding-y;
+			padding-bottom: $form-input-padding-y;
+		}
+	}
+}
 
 /* ==========================================================================
    Inputs Readonly
