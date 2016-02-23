@@ -63,7 +63,7 @@
 		.mx-datagrid-foot {
 
 			> tr > th {
-				padding: 1px;
+				padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
 				background-color: $grid-footer-bg; 
 				border-width: 0;
 			}
@@ -71,6 +71,8 @@
 			> tr > td {
 				background-color: $grid-bg;
 				border-width: 0;
+				font-weight: bold;
+				padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
 			}
 		}
 
@@ -132,7 +134,6 @@
 	}
 	.mx-datagrid-foot {
 		> tr > th {
-			padding: 1px;
 			background-color: $grid-footer-bg; 
 			border-width: 0;
 		}
