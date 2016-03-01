@@ -135,6 +135,7 @@ body[dir="ltr"] .layout-sidebar-responsive .region-sidebar-fixed {
     		background-image: url($brand-logo);
     		background-size: contain;
     		background-repeat: no-repeat;
+    		background-position: center center;
     	}
 	} @else {
 		img {
