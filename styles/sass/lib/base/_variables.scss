@@ -64,6 +64,8 @@ $link-hover-color:                      darken($link-color, 15%) !default;
 
 //== Typography
 //## Change your font family, weight, line-height, headings and more (used in components/typography)
+$font-family-import:                    false !default;
+@import url($font-family-import);
 
 // Font Family / False = fallback from Bootstrap (Helvetica Neue)
 $font-family-base:                      false !default;//"Helvetica Neue", Helvetica, Arial, sans-serif !default;
