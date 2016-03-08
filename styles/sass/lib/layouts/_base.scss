@@ -121,10 +121,33 @@ body[dir="ltr"] .layout-sidebar-responsive .region-sidebar-fixed {
 	float: left;
 	padding: 0;
 	line-height: $topbar-minimalheight;
-	img {
-		height: 37px;
-		display: inline-block;
+
+	@if $brand-logo != false {
+		img {
+    		display: none;
+    	}
+    	&:before {
+		    content: "";
+		    display: inline-block;
+		    width: $brand-logo-width;
+		    height: $brand-logo-height;
+		    vertical-align: middle;
+    		background-image: url($brand-logo);
+    		background-size: contain;
+    		background-repeat: no-repeat;
+    		background-position: center center;
+    		margin-top: -5px;
+    		margin-right: 5px;
+    	}
+	} @else {
+		img {
+			height: $brand-logo-height;
+			width: auto;
+			display: inline-block;
+			vertical-align: middle;
+		}
 	}
+
 	a {
 		font-size: 20px;
 		color: $navbar-brand-name;
