@@ -350,6 +350,7 @@ $tabs-border-color:                     $default-border-color !default;
 $tabs-lined-border-color:               $brand-primary !default;    
 
 // Background Color
+$tabs-bg:                               #FFF !default;
 $tabs-bg-hover:                         lighten($tabs-border-color,5) !default;
 $tabs-bg-active:                        $brand-primary !default;
 
