@@ -76,31 +76,6 @@ textarea.form-control {
 	}
 }
 
-/* ==========================================================================
-   Inputs Readonly
-========================================================================== */
-// Deprecated (should not be needed anymore with new form groups)
-
-// .readonly-input {
-// 	@extend .form-control;
-// 	height: auto;
-// 	min-height: 33px;
-// 	background-color: $form-input-bg-disabled !important;
-// 	label { 
-// 		padding: 0 !important;
-// 	}
-// 	textarea {
-// 		display: none;
-// 	}
-// }
-// .readonly-input-alert label {
-// 	color: $brand-danger;
-// }
-// /* Needed for IE8, IE8 doesn't respect border-box and min-height */
-// .dj_ie8 .readonly-input {
-// 	min-height: auto;
-// }
-
 
 
 /* ==========================================================================
