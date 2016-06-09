@@ -66,9 +66,11 @@ $link-hover-color:                      darken($link-color, 15%) !default;
 //== Typography
 //## Change your font family, weight, line-height, headings and more (used in components/typography)
 
-// Font Family Import 
+// Font Family Import (Used for google font plugin in theme creater https://ux.mendix.com/theme-creator.html)
 $font-family-import:                    false !default;
-@import url($font-family-import);
+@if $font-family-import != false { // Only import, if the import is set
+    @import url($font-family-import);
+}
 
 // Font Family / False = fallback from Bootstrap (Helvetica Neue)
 $font-family-base:                      false !default;//"Helvetica Neue", Helvetica, Arial, sans-serif !default;
