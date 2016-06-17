@@ -496,7 +496,7 @@ $callout-danger-bg:                     $color-danger-lighter !default;
 $m-header-height:                       44px !default;
 
 // Background Color
-$m-header-bg:                           #FFF !default;
+$m-header-bg:                           $topbar-bg !default;
 
 // Text Color
 $m-header-color:                        $font-base-color !default;
