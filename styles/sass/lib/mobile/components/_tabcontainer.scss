@@ -1,70 +1,84 @@
-/*
-* Mendix Documentation
-* Special styles for presenting mobile components
-*/
+/* ==========================================================================
+   Tabcontainer
 
+   Default Mendix Tabcontainer for Mobile 
+========================================================================== */
+.profile-phone {
+    .mx-tabcontainer {
+        .mx-tabcontainer-tabs {
+            margin: 10px;
+        }
+    }
+}
 
-/*
-* Tabcontainer
-*
-* Default Mendix Tabcontainer for Mobile 
-*/
 .profile-phone,
 .profile-tablet {
-	.mx-tabcontainer-tabs {
-		margin: 0;
-		padding: 0;
-		border-color: transparent;
-		background-color: $m-tabs-bg;
-		text-align: center;
+    .mx-tabcontainer {
+        .mx-tabcontainer-tabs {
+            
+        }
+        .mx-listview .mx-listview-searchbar {
+            padding-top: 0;
+        }
+    }
 
-		li {
-			display: table-cell;
-			float: none;
-			margin: 0;
-			width: 1%;
-			a {
-				border-radius: 0;
-				box-shadow:	none;
-				margin: 0;
-				padding: 15px 0;
-				border-style: none;
-				color: $m-tabs-color;
-				font-weight: normal;
-				font-size: 11px;
-				text-transform: uppercase;
 
-				&:hover,
-				&:focus,
-				&.active {
-					color: #000 !important;
-					border-style: none;
-					background-color: transparent;
-				}
-			}
-			&:first-child a {
-				
-			}
-			&:last-child a {
-				
-			}
-			&.active a {
-				color: $m-tabs-color-active;
-				border-style: none !important;
-  				background-color: transparent !important;
-  				@include css-arrow(bottom, 5px, 5px, #FFF, #FFF, 0);
+    .tab-pills.mx-tabcontainer {
+        .mx-tabcontainer-tabs {
+            > li { 
+                display: table-cell;
+                float: none;
+                margin: 0;
+                width: 1%;
+                text-align: center;
+            }
+        }
+    }
+    .tab-full.mx-tabcontainer {
+        .mx-tabcontainer-tabs {
+            margin: 0 0 10px 0;
+            border-color: transparent;
+            background-color: $m-tabs-bg;
+            text-align: center;
 
-  				&:after,
-  				&:before {
-  					-webkit-transform: rotate(180deg);
-  				}
-  				&:after {
-  					top: 80%;
-  				}
-  				&:before {
-  					top: 75%;
-  				}
-			}
-		}
-	}
+            li {
+                display: table-cell;
+                float: none;
+                margin: 0;
+                width: 1%;
+                a {
+                    padding: 15px 0;
+                    border-style: none;
+                    color: $m-tabs-color;
+                    font-weight: normal;
+                    font-size: 11px;
+                    text-transform: uppercase;
+
+                    &:hover,
+                    &:focus {
+                        color: $m-tabs-color-active;
+                        border-style: none;
+                        background-color: transparent;
+                    }
+                }
+
+                &.active a {
+                    color: $m-tabs-color-active;
+                    background-color: transparent;
+                    @include css-arrow(bottom, 5px, 5px, #FFF, #FFF, 0);
+
+                    &:after,
+                    &:before {
+                        -webkit-transform: rotate(180deg);
+                    }
+                    &:after {
+                        top: 80%;
+                    }
+                    &:before {
+                        top: 75%;
+                    }
+                }
+            }
+        }
+    }
 }

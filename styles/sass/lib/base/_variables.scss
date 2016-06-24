@@ -516,8 +516,8 @@ $m-tabs-color-active:                   #000 !default;
 
 // Background Color
 $m-tabs-bg:                             $brand-primary !default;
-$m-tabs-bg-color-hover:                 lighten($tabs-border-color,5) !default;
-$m-tabs-bg-color-active:                darken($m-tabs-bg, 15) !default;    
+$m-tabs-bg-color-hover:                 $tabs-bg-hover !default;
+$m-tabs-bg-color-active:                $tabs-bg-active !default;    
 
 // Border Color
 $m-tabs-border-color:                   darken($m-tabs-bg, 15) !default;
