@@ -27,15 +27,12 @@
 
 		> li.active > a,
 		> li.active > a:hover,
-		> li.active > a:focus  {
+		> li.active > a:focus {
 			border: 1px solid $tabs-border-color;
 			border-bottom-color: transparent;
 			background-color: $tabs-bg;
 			color: $tabs-color-active;
 		}
-	}
-	.mx-tabcontainer-content {
-
 	}
 }
 
@@ -62,7 +59,7 @@
 
 		> li.active > a,
 		> li.active > a:hover,
-		> li.active > a:focus  {
+		> li.active > a:focus {
 			background-color: $tabs-bg-active;
 			color: #FFF;
 			border-color: $tabs-bg-active;
@@ -105,7 +102,7 @@
 
             &.active > a,
             &.active > a:hover, 
-            &.active > a:focus  {
+            &.active > a:focus {
             	border: 0;
                 border-bottom: 3px solid $tabs-lined-border-color;
                 background-color: transparent;
@@ -171,3 +168,55 @@
 		background-color: #FFF;
 	}
 }
+
+
+/* ==========================================================================
+   Tab Container Mobile
+
+   Default Mendix Tab Container Widget rendered for mobile use
+========================================================================== */
+.tab-mobile.mx-tabcontainer {
+        .mx-tabcontainer-tabs {
+            margin: 0 0 10px 0 !important;
+            border-color: transparent;
+            background-color: $brand-primary;
+            text-align: center;
+
+            li {
+                display: table-cell;
+                float: none;
+                margin: 0;
+                width: 1%;
+                a {
+                    padding: 15px 0;
+                    border-style: none;
+                    color: #FFF;
+                    font-weight: normal;
+                    font-size: 11px;
+                    text-transform: uppercase;
+                    &:hover,
+                    &:focus {
+                        color: $tabs-color-active;
+                        border-style: none;
+                        background-color: transparent;
+                    }
+                }
+
+                &.active a {
+                    color: $tabs-color-active;
+                    background-color: transparent;
+                    @include css-arrow(bottom, 5px, 5px, #FFF, #FFF, 0);
+                    &:after,
+                    &:before {
+                        -webkit-transform: rotate(180deg);
+                    }
+                    &:after {
+                        top: 80%;
+                    }
+                    &:before {
+                        top: 75%;
+                    }
+                }
+            }
+        }
+    }
