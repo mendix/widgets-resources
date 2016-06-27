@@ -14,14 +14,10 @@
 .profile-phone,
 .profile-tablet {
     .mx-tabcontainer {
-        .mx-tabcontainer-tabs {
-            
-        }
         .mx-listview .mx-listview-searchbar {
             padding-top: 0;
         }
     }
-
 
     .tab-pills.mx-tabcontainer {
         .mx-tabcontainer-tabs {
@@ -31,53 +27,6 @@
                 margin: 0;
                 width: 1%;
                 text-align: center;
-            }
-        }
-    }
-    .tab-full.mx-tabcontainer {
-        .mx-tabcontainer-tabs {
-            margin: 0 0 10px 0;
-            border-color: transparent;
-            background-color: $m-tabs-bg;
-            text-align: center;
-
-            li {
-                display: table-cell;
-                float: none;
-                margin: 0;
-                width: 1%;
-                a {
-                    padding: 15px 0;
-                    border-style: none;
-                    color: $m-tabs-color;
-                    font-weight: normal;
-                    font-size: 11px;
-                    text-transform: uppercase;
-
-                    &:hover,
-                    &:focus {
-                        color: $m-tabs-color-active;
-                        border-style: none;
-                        background-color: transparent;
-                    }
-                }
-
-                &.active a {
-                    color: $m-tabs-color-active;
-                    background-color: transparent;
-                    @include css-arrow(bottom, 5px, 5px, #FFF, #FFF, 0);
-
-                    &:after,
-                    &:before {
-                        -webkit-transform: rotate(180deg);
-                    }
-                    &:after {
-                        top: 80%;
-                    }
-                    &:before {
-                        top: 75%;
-                    }
-                }
             }
         }
     }
