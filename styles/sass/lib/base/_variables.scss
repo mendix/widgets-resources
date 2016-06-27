@@ -507,25 +507,6 @@ $m-header-link-color:                   $link-color !default;
 
 
 
-//== Mobile Tabs
-//## Specific mobile widgets and components (used in mobile/components/tabcontainer)
-
-// Text Color
-$m-tabs-color:                          #FFF !default;
-$m-tabs-color-active:                   #000 !default;
-
-// Background Color
-$m-tabs-bg:                             $brand-primary !default;
-$m-tabs-bg-color-hover:                 $tabs-bg-hover !default;
-$m-tabs-bg-color-active:                $tabs-bg-active !default;    
-
-// Border Color
-$m-tabs-border-color:                   darken($m-tabs-bg, 15) !default;
-$m-tabs-border-color-active:            darken($m-tabs-bg, 15) !default;
-
-
-
-
 //== Layout Spacing
 //## Advanced layout options (used in base/mixins/default-spacing)
 
