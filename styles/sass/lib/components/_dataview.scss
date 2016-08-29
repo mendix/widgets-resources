@@ -18,6 +18,10 @@
 		/* Buttons */
 		.mx-button {
 			margin-bottom: 0;
+            margin-right: 0.3em;
+            &:last-child {
+                margin-right: 0;
+            }
 		}
 	}
 
