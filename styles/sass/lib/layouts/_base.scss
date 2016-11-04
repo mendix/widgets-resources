@@ -84,13 +84,14 @@
 		display: none;
 		@extend .region-sidebar;
 		@media (min-width: 768px) {
-		  position: fixed;
-		  z-index: 10;
-		  display: block;
-		  overflow-x: hidden;
-		  overflow-y: auto;
-		  height: 100%;
-		  padding: 0;
+			position: fixed;
+			top: $topbar-minimalheight;
+			bottom: 0;
+			z-index: 10;
+			display: block;
+			overflow-x: hidden;
+			overflow-y: auto;
+			padding: 0;
 		}
 	}
 	.mx-scrollcontainer-open {
