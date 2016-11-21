@@ -1,0 +1,26 @@
+.widget-carousel {
+    position: relative
+}
+
+.widget-carousel-item-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden
+}
+
+.widget-carousel-item-wrapper .widget-carousel-item {
+    position: relative;
+    display: none;
+}
+
+.widget-carousel-item-wrapper .widget-carousel-item img {
+    line-height: 1;
+    min-width: 100%;
+    max-width: 100%;
+    height: auto
+}
+
+.widget-carousel-item-wrapper .active {
+    display: block;
+    left: 0
+}
