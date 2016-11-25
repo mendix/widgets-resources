@@ -3,7 +3,7 @@ import { DOM, createElement } from "react";
 
 import { ValidationAlert } from "../ValidationAlert";
 
-describe("Slider", () => {
+describe("ValidationAlert", () => {
 
     let alert: ShallowWrapper<any, any>;
     const message = "This is an error";
@@ -14,11 +14,11 @@ describe("Slider", () => {
 
     it("renders structure correctly", () => {
         expect(alert).toBeElement(
-            DOM.div({ className: "alert alert-danger mx-validation-message" }, message)
+            DOM.div({ className: "alert alert-danger widget-validation-message" }, message)
         );
     });
 
     it("has the expected css classes", () => {
-        expect(alert.hasClass("alert alert-danger mx-validation-message")).toBe(true);
+        expect(alert.hasClass("alert alert-danger widget-validation-message")).toBe(true);
     });
 });

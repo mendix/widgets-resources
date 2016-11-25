@@ -4,4 +4,4 @@ interface AlertProps {
     message: string;
 }
 export const ValidationAlert = (props: AlertProps) =>
-    DOM.div({ className: "alert alert-danger mx-validation-message" }, props.message);
+    DOM.div({ className: "alert alert-danger widget-validation-message" }, props.message);
