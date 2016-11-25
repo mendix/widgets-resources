@@ -8,8 +8,8 @@ label {
 	padding-top: 0; 
 }
 .mx-title {
-	font-weight: $font-weight-headers;
-	color: $font-base-color;
+	font-weight: $font-weight-header;
+	color: $font-weight-header;
 	font-size: $font-size-h1;
 }
 h1, .h1, .h1 > * { font-size: $font-size-h1; } 
@@ -22,7 +22,7 @@ h6, .h6, .h6 > * { font-size: $font-size-h6; }
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-weight: $font-weight-headers;
-	color: $font-color-headers;
+	color: $font-color-header;
 	line-height: 1.3;
 }
 
@@ -71,29 +71,14 @@ h1, h2, h3, h4, h5, h6,
 
    Text Colors
 ========================================================================== */
-// Gray shades
-.text-gray-darker 	{	color: $gray-darker; 	}				
-.text-gray-dark 	{	color: $gray-dark; 		}
-.text-gray 			{	color: $gray;			}
-.text-gray-light	{	color: $gray-light;		}
-.text-gray-primary	{	color: $gray-primary;	}
-.text-gray-lighter	{	color: $gray-lighter;	}	
-	 				 
 // Colors
-.text-default, .text-default:hover	{	color: $color-text-black; }
+.text-default, .text-default:hover	{	color: $font-base-color; }
 .text-primary, .text-primary:hover	{	color: $brand-primary;	}
 .text-info, .text-info:hover		{	color: $brand-info;		}
 .text-success, .text-success:hover	{	color: $brand-success;	}
 .text-warning, .text-warning:hover	{	color: $brand-warning;	}
 .text-danger, .text-danger:hover	{	color: $brand-danger;	}
 
-// Text colors
-.text-black 						{	color: $color-text-black;	}
-.text-black-secondary				{	color: $color-text-black-secondary; }
-.text-black-disabled 				{	color: $color-text-black-disabled; 	}
-.text-black-hint 					{	color: $color-text-black-hint; 		}
-
-.text-white 						{	color: $color-text-white; 	}
-.text-white-secondary				{	color: $color-text-white-secondary; }
-.text-white-disabled 				{	color: $color-text-white-disabled; 	}
-.text-white-hint 					{	color: $color-text-white-hint; 		}
+// Text styles
+.text-color-header { 	color: $font-color-header;	}
+.text-color-detail { 	color: $font-color-detail; 	}

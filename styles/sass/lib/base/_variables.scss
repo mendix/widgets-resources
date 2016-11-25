@@ -44,7 +44,7 @@ $bg-color-secondary:                    #EFF4F7 !default;
 
 // Default Font Size & Color
 $font-base-size:                        14px !default;
-$font-base-color:                       #000 !default;
+$font-base-color:                       #222 !default;
 
 // Default Link Color
 $link-color:                            $brand-primary !default;
@@ -61,6 +61,19 @@ $link-hover-color:                      darken($link-color, 15%) !default;
 // ██║  ██║██████╔╝ ╚████╔╝ ██║  ██║██║ ╚████║╚██████╗███████╗██████╔╝
 // ╚═╝  ╚═╝╚═════╝   ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝╚══════╝╚═════╝ 
 //
+
+
+//== Gray Shades
+//## Different gray shades to be used for our variables and components
+$gray-darker:                           #222 !default;
+$gray-dark:                             #333 !default;
+$gray:                                  #555 !default;
+$gray-light:                            #999 !default;
+$gray-primary:                          #DDD !default;
+$gray-lighter:                          #eee !default;
+
+
+
 
 
 //== Typography
@@ -88,7 +101,7 @@ $font-weight-normal:                    normal !default;
 $font-weight-semibold:                  500 !default;
 $font-weight-bold:                      bold !default; 
 
-$font-weight-headers:                   $font-weight-normal !default;
+$font-weight-header:                   $font-weight-normal !default;
 
 // Font Header Size
 $font-size-h1:                          31px !default;
@@ -99,22 +112,12 @@ $font-size-h5:                          $font-base-size !default;
 $font-size-h6:                          11px !default;
 
 // Font Header Color
-$font-color-headers:					$font-base-color !default;
+$font-color-header:				        #000 !default;
+$font-color-detail:                     $gray;
 
 // Line Height
 $line-height-base:                      1.428571429 !default;
 
-
-
-
-//== Gray Shades
-//## Different gray shades to be used for our variables and components
-$gray-darker:                           #222 !default;
-$gray-dark:                             #333 !default;
-$gray:                                  #555 !default;
-$gray-light:                            #999 !default;
-$gray-primary:                          #DDD !default;
-$gray-lighter:                          #eee !default;
 
 
 
@@ -257,15 +260,15 @@ $btn-danger-color:                      #FFF !default;
 //## These variations are used to support several other variables and components
 
 // Basic Text colors
-$color-text-black:                      #000 !default;
+/*$font-base-color:                      #000 !default;
 $color-text-white:                      #FFF !default;
-$color-text-black-secondary:            lighten($color-text-black, 40%) !default;
-$color-text-black-disabled:             rgba($color-text-black, .26) !default;
-$color-text-black-hint:                 rgba($color-text-black, .26) !default;
+$font-color-detail:            lighten($font-base-color, 40%) !default;
+$font-base-color-disabled:             rgba($font-base-color, .26) !default;
+$font-base-color-hint:                 rgba($font-base-color, .26) !default;
 
 $color-text-white-secondary:            rgba($color-text-white, .7) !default;
 $color-text-white-disabled:             rgba($color-text-white, .3) !default;
-$color-text-white-hint:                 rgba($color-text-white, .3) !default;
+$color-text-white-hint:                 rgba($color-text-white, .3) !default;*/
 
 // Color variations
 $color-default-darker:                  shade($brand-default,40) !default;    
@@ -343,8 +346,8 @@ $grid-paging-color-hover:               $brand-primary !default;
 //## Default variables for Tab Container Widget (used in components/tabcontainer)
 
 // Text Color
-$tabs-color:                            $color-text-black-secondary !default;
-$tabs-color-active:                     $color-text-black !default;
+$tabs-color:                            $font-color-detail !default;
+$tabs-color-active:                     $font-base-color !default;
 $tabs-lined-color-active:               $brand-primary !default;
 
 // Border Color
@@ -456,13 +459,13 @@ $groupbox-danger-bg:                    $brand-danger !default;
 $groupbox-white-bg:                     #FFF !default;
 
 // Text Color
-$groupbox-default-color:                $color-text-black !default;
-$groupbox-inverse-color:                $color-text-white !default;
-$groupbox-primary-color:                $color-text-white !default;
-$groupbox-info-color:                   $color-text-white !default;
-$groupbox-success-color:                $color-text-white !default;
-$groupbox-warning-color:                $color-text-white !default;
-$groupbox-danger-color:                 $color-text-white !default;
+$groupbox-default-color:                $font-base-color !default;
+$groupbox-inverse-color:                #FFF !default;
+$groupbox-primary-color:                #FFF !default;
+$groupbox-info-color:                   #FFF !default;
+$groupbox-success-color:                #FFF !default;
+$groupbox-warning-color:                #FFF !default;
+$groupbox-danger-color:                 #FFF !default;
 $groupbox-white-color:                  $font-base-color !default;
 
 
