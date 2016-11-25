@@ -1,0 +1,93 @@
+@checkedColor: #4EC054;
+@uncheckedColor: #F1F1F1;
+@disabledCheckedColor: #F1F1F1;
+@disabledUncheckedColor: #FFF;
+
+.mx-toggle {
+    display: none;
+
+    // add default box-sizing for this scope
+    &,
+    &:after,
+    &:before,
+    & *,
+    & *:after,
+    & *:before,
+    & + .mx-toggle-btn {
+        box-sizing: border-box;
+        &::selection {
+            background: none;
+        }
+    }
+
+    + .mx-toggle-btn {
+        background: @disabledUncheckedColor;
+        border-radius: 2em;
+        padding: 2px;
+        transition: all .4s ease;
+        border: 1px solid #e8eae9;
+        outline: 0;
+        display: block;
+        width: 5em;
+        height: 2.6em;
+        position: relative;
+        cursor: default;
+        user-select: none;
+        &:after,
+        &:before {
+            position: relative;
+            display: block;
+            content: "";
+            width: 50%;
+            height: 100%;
+        }
+
+        &:after {
+            left: 0;
+            border-radius: 2em;
+            background: #fbfbfb;
+            transition: left .3s cubic-bezier(0.175, 0.885, 0.320, 1.275), padding .3s ease, margin .3s ease;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 4px 0 rgba(0, 0, 0, .08);
+        }
+
+        &:hover:after {
+            will-change: padding;
+        }
+
+        &:before {
+            display: none;
+        }
+
+        &:active {
+            box-shadow: inset 0 0 0 2em #e8eae9;
+            &:after {
+                padding-right: .8em;
+            }
+        }
+
+        &.enabled {
+            background: @uncheckedColor;
+            cursor: pointer;
+        }
+    }
+
+    &:checked + .mx-toggle-btn:after {
+        left: 50%;
+    }
+
+    &:checked + .mx-toggle-btn {
+        background: @disabledCheckedColor;
+        &:active {
+            box-shadow: none;
+            &:after {
+                margin-left: -.8em;
+            }
+        }
+    }
+
+    &.enabled {
+        &:checked + .mx-toggle-btn {
+            background: @checkedColor;
+        }
+    }
+}
