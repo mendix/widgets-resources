@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget id="com.mendix.widget.BooleanSlider.BooleanSlider" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../../xsd/widget.xsd">
     <name>BooleanSlider</name>
-    <description>Switch between two states.</description>
+    <description>Switch between two states</description>
     <icon/>
     <properties>
         <property key="booleanAttribute" type="attribute" required="true">
@@ -9,14 +9,14 @@
             <category>Data</category>
             <description>Attribute to toggle</description>
             <attributeTypes>
-                <attributeType name="Boolean" />
+                <attributeType name="Boolean"/>
             </attributeTypes>
         </property>
         <property key="onChangeMicroflow" type="microflow" required="false">
             <caption>On change microflow</caption>
             <category>Behavior</category>
             <description>Microflow to trigger when button is toggled</description>
-            <returnType type="Void" />
+            <returnType type="Void"/>
         </property>
     </properties>
 </widget>
