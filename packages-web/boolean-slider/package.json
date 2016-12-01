@@ -1,18 +1,18 @@
 {
   "name": "booleanslider",
   "version": "0.1.0",
-  "description": "Switch between two states.",
+  "description": "Switch between the two boolean states.",
   "scripts": {
     "pretest": "tsc",
-    "test": "karma start && node tests/remap.js"
+    "test": "karma start --single-run && node tests/remap.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/edwinmp/BooleanSlider"
+    "url": "https://github.com/mendixlabs/boolean-slider"
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/edwinmp/BooleanSlider/issues"
+    "url": "https://github.com/mendixlabs/boolean-slider/issues"
   },
   "devDependencies": {
     "@types/big.js": "0.0.31",
@@ -47,8 +47,6 @@
     "karma-remap-istanbul": "^0.2.1",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.8.0",
-    "less": "^2.7.1",
-    "less-loader": "^2.2.3",
     "mendix-client": "git+https://github.com/FlockOfBirds/Mendix-client-typing.git",
     "react-addons-test-utils": "~15.3.2",
     "remap-istanbul": "^0.6.4",
