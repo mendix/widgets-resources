@@ -17,8 +17,8 @@ describe("Slider", () => {
             widgetId: "slider"
         };
         slider = shallow(createElement(Slider, sliderProps));
-        checkbox = slider.find("input.widget-toggle");
-        label = slider.find("label.widget-toggle-btn");
+        checkbox = slider.find("input.widget-boolean-slider-checkbox");
+        label = slider.find("label.widget-boolean-slider-btn");
     });
 
     it("renders structure correctly", () => {
@@ -28,11 +28,11 @@ describe("Slider", () => {
         expect(slider.childAt(1).type()).toBe("label");
 
         expect(checkbox.props().type).toBe("checkbox");
-        expect(checkbox.props().id).toBe("widget-toggle-" + sliderProps.widgetId);
+        expect(checkbox.props().id).toBe("widget-boolean-slider-" + sliderProps.widgetId);
         expect(checkbox.hasClass("enabled")).toBe(true);
         expect(checkbox.props().checked).toBe(true);
 
-        expect(label.props().htmlFor).toBe("widget-toggle-" + sliderProps.widgetId);
+        expect(label.props().htmlFor).toBe("widget-boolean-slider-" + sliderProps.widgetId);
         expect(label.hasClass("enabled")).toBe(true);
         expect(typeof label.props().onClick).toBe("function");
     });
@@ -49,13 +49,13 @@ describe("Slider", () => {
                 onClick: () => {
                     sliderProps.isChecked = false;
                     slider.setProps(sliderProps);
-                    checkbox = slider.find("input.widget-toggle");
+                    checkbox = slider.find("input.widget-boolean-slider-checkbox");
                 },
                 widgetId: "slider"
             };
             slider = shallow(createElement(Slider, sliderProps));
-            checkbox = slider.find("input.widget-toggle");
-            label = slider.find("label.widget-toggle-btn");
+            checkbox = slider.find("input.widget-boolean-slider-checkbox");
+            label = slider.find("label.widget-boolean-slider-btn");
         });
 
         it("renders a checkbox that is also checked", () => {
@@ -77,13 +77,13 @@ describe("Slider", () => {
                 onClick: () => {
                     sliderProps.isChecked = true;
                     slider.setProps(sliderProps);
-                    checkbox = slider.find("input.widget-toggle");
+                    checkbox = slider.find("input.widget-boolean-slider-checkbox");
                 },
                 widgetId: "slider"
             };
             slider = shallow(createElement(Slider, sliderProps));
-            checkbox = slider.find("input.widget-toggle");
-            label = slider.find("label.widget-toggle-btn");
+            checkbox = slider.find("input.widget-boolean-slider-checkbox");
+            label = slider.find("label.widget-boolean-slider-btn");
         });
 
         it("renders a checkbox that is also unchecked", () => {
@@ -105,13 +105,13 @@ describe("Slider", () => {
                 onClick: () => {
                     sliderProps.isChecked = !sliderProps.isChecked;
                     slider.setProps(sliderProps);
-                    checkbox = slider.find("input.widget-toggle");
+                    checkbox = slider.find("input.widget-boolean-slider-checkbox");
                 },
                 widgetId: "slider"
             };
             slider = shallow(createElement(Slider, sliderProps));
-            checkbox = slider.find("input.widget-toggle");
-            label = slider.find("label.widget-toggle-btn");
+            checkbox = slider.find("input.widget-boolean-slider-checkbox");
+            label = slider.find("label.widget-boolean-slider-btn");
         });
 
         it("has the class enabled", () => {
@@ -139,7 +139,7 @@ describe("Slider", () => {
                     widgetId: "slider"
                 };
                 slider = shallow(createElement(Slider, sliderProps));
-                checkbox = slider.find("input.widget-toggle");
+                checkbox = slider.find("input.widget-boolean-slider-checkbox");
             });
 
             it("renders a checkbox that is also unchecked", () => {
@@ -156,13 +156,13 @@ describe("Slider", () => {
                 onClick: () => {
                     sliderProps.isChecked = !sliderProps.isChecked;
                     slider.setProps(sliderProps);
-                    checkbox = slider.find("input.widget-toggle");
+                    checkbox = slider.find("input.widget-boolean-slider-checkbox");
                 },
                 widgetId: "slider"
             };
             slider = shallow(createElement(Slider, sliderProps));
-            checkbox = slider.find("input.widget-toggle");
-            label = slider.find("label.widget-toggle-btn");
+            checkbox = slider.find("input.widget-boolean-slider-checkbox");
+            label = slider.find("label.widget-boolean-slider-btn");
         });
 
         it("does not have the class enabled", () => {
@@ -190,7 +190,7 @@ describe("Slider", () => {
                     widgetId: "slider"
                 };
                 slider = shallow(createElement(Slider, sliderProps));
-                checkbox = slider.find("input.widget-toggle");
+                checkbox = slider.find("input.widget-boolean-slider-checkbox");
             });
 
             it("renders a checkbox that is also unchecked", () => {
@@ -211,7 +211,7 @@ describe("Slider", () => {
                 widgetId: "slider"
             };
             slider = shallow(createElement(Slider, sliderProps, errorNode));
-            checkbox = slider.find("input.widget-toggle");
+            checkbox = slider.find("input.widget-boolean-slider-checkbox");
         });
 
         it("has the class has-error", () => {
@@ -235,7 +235,7 @@ describe("Slider", () => {
                 widgetId: "slider"
             };
             slider = shallow(createElement(Slider, sliderProps, errorNode));
-            checkbox = slider.find("input.widget-toggle");
+            checkbox = slider.find("input.widget-boolean-slider-checkbox");
         });
 
         it("does not have the class has-error", () => {

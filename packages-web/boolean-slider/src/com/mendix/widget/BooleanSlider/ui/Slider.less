@@ -3,7 +3,7 @@
 @disabledCheckedColor: #F1F1F1;
 @disabledUncheckedColor: #FFF;
 
-.widget-toggle {
+.widget-boolean-slider-checkbox {
     display: none;
 
     // add default box-sizing for this scope
@@ -13,14 +13,14 @@
     & *,
     & *:after,
     & *:before,
-    & + .widget-toggle-btn {
+    & + .widget-boolean-slider-btn {
         box-sizing: border-box;
         &::selection {
             background: none;
         }
     }
 
-    + .widget-toggle-btn {
+    + .widget-boolean-slider-btn {
         background: @disabledUncheckedColor;
         border-radius: 2em;
         padding: 2px;
@@ -71,11 +71,11 @@
         }
     }
 
-    &:checked + .widget-toggle-btn:after {
+    &:checked + .widget-boolean-slider-btn:after {
         left: 50%;
     }
 
-    &:checked + .widget-toggle-btn {
+    &:checked + .widget-boolean-slider-btn {
         background: @disabledCheckedColor;
         &:active {
             box-shadow: none;
@@ -86,7 +86,7 @@
     }
 
     &.enabled {
-        &:checked + .widget-toggle-btn {
+        &:checked + .widget-boolean-slider-btn {
             background: @checkedColor;
         }
     }
