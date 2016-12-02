@@ -1,10 +1,11 @@
 import * as dojoDeclare from "dojo/_base/declare";
 import * as WidgetBase from "mxui/widget/_WidgetBase";
 
-import { Slider } from "./components/Slider";
-import { ValidationAlert } from "./components/ValidationAlert";
 import { createElement } from "react";
 import { render, unmountComponentAtNode } from "react-dom";
+
+import { Slider } from "./components/Slider";
+import { ValidationAlert } from "./components/ValidationAlert";
 
 class BooleanSlider extends WidgetBase {
     // Properties from Mendix modeler
@@ -12,7 +13,6 @@ class BooleanSlider extends WidgetBase {
     onChangeMicroflow: string;
 
     private contextObject: mendix.lib.MxObject;
-    private alertMessage: string;
 
     update(contextObject: mendix.lib.MxObject, callback: Function) {
         this.contextObject = contextObject;
@@ -22,18 +22,17 @@ class BooleanSlider extends WidgetBase {
         callback();
     }
 
-    updateRendering() {
-        if (this.contextObject) {
-            render(createElement(Slider, {
-                enabled: !this.readOnly && !this.contextObject.isReadonlyAttr(this.booleanAttribute),
-                hasError: !!this.alertMessage,
-                isChecked: this.contextObject.get(this.booleanAttribute) as boolean,
-                onClick: (value: boolean) => this.handleToggle(value),
+    updateRendering(alertMessage?: string) {
+        const contextObject = this.contextObject;
+        render(createElement(Slider, {
+                enabled: !this.readOnly && (contextObject && !contextObject.isReadonlyAttr(this.booleanAttribute)),
+                hasError: !!alertMessage,
+                isChecked: !!contextObject && contextObject.get(this.booleanAttribute) as boolean,
+                onClick: contextObject ? (value: boolean) => this.handleToggle(value) : null,
                 widgetId: this.id
             },
-            this.alertMessage ? createElement(ValidationAlert, { message: this.alertMessage }) : null
-            ), this.domNode);
-        }
+            alertMessage ? createElement(ValidationAlert, { message: alertMessage }) : null
+        ), this.domNode);
     }
 
     uninitialize() {
@@ -47,24 +46,31 @@ class BooleanSlider extends WidgetBase {
         this.executeAction(this.onChangeMicroflow, [ this.contextObject.getGuid() ]);
     }
 
+    private executeAction(actionname: string, guids: string[]) {
+        if (actionname) {
+            window.mx.ui.action(actionname, {
+                error: (error: Error) =>
+                    window.mx.ui.error(`An error occurred while executing microflow: ${error.message}`, true),
+                params: {
+                    applyto: "selection",
+                    guids
+                }
+            });
+        }
+    }
+
     private resetSubscriptions() {
         this.unsubscribeAll();
 
         if (this.contextObject) {
             this.subscribe({
-                callback: () => {
-                    this.alertMessage = null;
-                    this.updateRendering();
-                },
+                callback: () => this.updateRendering(),
                 guid: this.contextObject.getGuid()
             });
 
             this.subscribe({
                 attr: this.booleanAttribute,
-                callback: () => {
-                    this.alertMessage = null;
-                    this.updateRendering();
-                },
+                callback: () => this.updateRendering(),
                 guid: this.contextObject.getGuid()
             });
 
@@ -79,23 +85,7 @@ class BooleanSlider extends WidgetBase {
     private handleValidations(validations: mendix.lib.ObjectValidation[]) {
         const validationMessage = validations[0].getErrorReason(this.booleanAttribute);
         if (validationMessage) {
-            this.alertMessage = validationMessage;
-            this.updateRendering();
-        }
-    }
-
-    private executeAction(actionname: string, guids: string[]) {
-        if (actionname) {
-            window.mx.data.action({
-                error: (error: Error) =>
-                    window.mx.ui.error("An error occurred while executing microflow: " + error.message, true),
-                origin: this.mxform,
-                params: {
-                    applyto: "selection",
-                    actionname,
-                    guids
-                }
-            });
+            this.updateRendering(validationMessage);
         }
     }
 }
