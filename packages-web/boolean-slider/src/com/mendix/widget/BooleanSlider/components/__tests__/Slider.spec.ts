@@ -8,6 +8,12 @@ describe("Slider", () => {
     let sliderProps: SliderProps;
     let checkbox: ShallowWrapper<any, any>;
     let label: ShallowWrapper<any, any>;
+    const errorNode = DOM.div(null, "This is an error");
+    const createElements = (sliderProps: SliderProps, errorNode?: React.DOMElement<any, any>) => {
+        slider = shallow(createElement(Slider, sliderProps, errorNode));
+        checkbox = slider.find(".widget-boolean-slider-checkbox");
+        label = slider.find(".widget-boolean-slider-btn");
+    };
 
     beforeEach(() => {
         sliderProps = {
@@ -16,9 +22,7 @@ describe("Slider", () => {
             onClick: () => { console.log("clicked"); },
             widgetId: "slider"
         };
-        slider = shallow(createElement(Slider, sliderProps));
-        checkbox = slider.find("input.widget-boolean-slider-checkbox");
-        label = slider.find("label.widget-boolean-slider-btn");
+        createElements(sliderProps);
     });
 
     it("renders structure correctly", () => {
@@ -53,9 +57,7 @@ describe("Slider", () => {
                 },
                 widgetId: "slider"
             };
-            slider = shallow(createElement(Slider, sliderProps));
-            checkbox = slider.find("input.widget-boolean-slider-checkbox");
-            label = slider.find("label.widget-boolean-slider-btn");
+            createElements(sliderProps);
         });
 
         it("renders a checkbox that is also checked", () => {
@@ -81,9 +83,7 @@ describe("Slider", () => {
                 },
                 widgetId: "slider"
             };
-            slider = shallow(createElement(Slider, sliderProps));
-            checkbox = slider.find("input.widget-boolean-slider-checkbox");
-            label = slider.find("label.widget-boolean-slider-btn");
+            createElements(sliderProps);
         });
 
         it("renders a checkbox that is also unchecked", () => {
@@ -109,9 +109,7 @@ describe("Slider", () => {
                 },
                 widgetId: "slider"
             };
-            slider = shallow(createElement(Slider, sliderProps));
-            checkbox = slider.find("input.widget-boolean-slider-checkbox");
-            label = slider.find("label.widget-boolean-slider-btn");
+            createElements(sliderProps);
         });
 
         it("has the class enabled", () => {
@@ -138,8 +136,7 @@ describe("Slider", () => {
                     onClick: () => { console.log("clicked"); },
                     widgetId: "slider"
                 };
-                slider = shallow(createElement(Slider, sliderProps));
-                checkbox = slider.find("input.widget-boolean-slider-checkbox");
+                createElements(sliderProps);
             });
 
             it("renders a checkbox that is also unchecked", () => {
@@ -160,9 +157,7 @@ describe("Slider", () => {
                 },
                 widgetId: "slider"
             };
-            slider = shallow(createElement(Slider, sliderProps));
-            checkbox = slider.find("input.widget-boolean-slider-checkbox");
-            label = slider.find("label.widget-boolean-slider-btn");
+            createElements(sliderProps);
         });
 
         it("does not have the class enabled", () => {
@@ -189,8 +184,7 @@ describe("Slider", () => {
                     onClick: () => { console.log("clicked"); },
                     widgetId: "slider"
                 };
-                slider = shallow(createElement(Slider, sliderProps));
-                checkbox = slider.find("input.widget-boolean-slider-checkbox");
+                createElements(sliderProps);
             });
 
             it("renders a checkbox that is also unchecked", () => {
@@ -200,8 +194,6 @@ describe("Slider", () => {
     });
 
     describe("that has an error", () => {
-        const errorNode = DOM.div(null, "This is an error");
-
         beforeEach(() => {
             sliderProps = {
                 enabled: false,
@@ -210,8 +202,7 @@ describe("Slider", () => {
                 onClick: () => { console.log("clicked"); },
                 widgetId: "slider"
             };
-            slider = shallow(createElement(Slider, sliderProps, errorNode));
-            checkbox = slider.find("input.widget-boolean-slider-checkbox");
+            createElements(sliderProps, errorNode);
         });
 
         it("has the class has-error", () => {
@@ -224,8 +215,6 @@ describe("Slider", () => {
     });
 
     describe("that has no error", () => {
-        const errorNode = DOM.div(null, "This is an error");
-
         beforeEach(() => {
             sliderProps = {
                 enabled: false,
@@ -234,8 +223,7 @@ describe("Slider", () => {
                 onClick: () => { console.log("clicked"); },
                 widgetId: "slider"
             };
-            slider = shallow(createElement(Slider, sliderProps, errorNode));
-            checkbox = slider.find("input.widget-boolean-slider-checkbox");
+            createElements(sliderProps, errorNode);
         });
 
         it("does not have the class has-error", () => {
