@@ -20,7 +20,8 @@ module.exports = {
         loaders: [
             { test: /\.ts$/, loader: "ts-loader" },
             { test: /\.json$/, loader: "json" },
-            { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") }
+            { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
+            { test: /\.less$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader") }
         ],
         postLoaders: [ {
             test: /\.ts$/,
