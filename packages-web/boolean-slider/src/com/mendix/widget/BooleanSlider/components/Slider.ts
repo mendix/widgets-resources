@@ -15,14 +15,14 @@ export const Slider = (props: SliderProps) =>
     DOM.div({ className: classNames("widget-boolean-slider", { "has-error": props.hasError }) },
         DOM.input({
             checked: props.isChecked,
-            className: classNames("widget-toggle", { enabled: props.enabled }),
-            id: "widget-toggle-" + props.widgetId,
+            className: classNames("widget-boolean-slider-checkbox", { enabled: props.enabled }),
+            id: "widget-boolean-slider-" + props.widgetId,
             readOnly: true,
             type: "checkbox"
         }),
         DOM.label({
-            className: classNames("widget-toggle-btn", { enabled: props.enabled }),
-            htmlFor: "widget-toggle-" + props.widgetId,
+            className: classNames("widget-boolean-slider-btn", { enabled: props.enabled }),
+            htmlFor: "widget-boolean-slider-" + props.widgetId,
             onClick: props.enabled ? () => props.onClick(!props.isChecked) : null
         }),
         props.hasError ? props.children : null
