@@ -14,11 +14,11 @@ describe("ValidationAlert", () => {
 
     it("renders structure correctly", () => {
         expect(alert).toBeElement(
-            DOM.div({ className: "alert alert-danger widget-validation-message" }, message)
+            DOM.div({ className: "alert alert-danger widget-boolean-slider-validation-message" }, message)
         );
     });
 
     it("has the expected css classes", () => {
-        expect(alert.hasClass("alert alert-danger widget-validation-message")).toBe(true);
+        expect(alert.hasClass("alert alert-danger widget-boolean-slider-validation-message")).toBe(true);
     });
 });
