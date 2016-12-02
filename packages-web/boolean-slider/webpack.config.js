@@ -21,7 +21,7 @@ module.exports = {
             { test: /\.ts$/, loader: "ts-loader" },
             { test: /\.json$/, loader: "json" },
             { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
-            { test: /\.less$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader") }
+            { test: /\.sass$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader") }
         ],
         postLoaders: [ {
             test: /\.ts$/,

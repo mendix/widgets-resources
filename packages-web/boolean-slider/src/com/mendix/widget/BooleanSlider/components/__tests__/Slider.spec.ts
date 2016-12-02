@@ -9,8 +9,8 @@ describe("Slider", () => {
     let checkbox: ShallowWrapper<any, any>;
     let label: ShallowWrapper<any, any>;
     const errorNode = DOM.div(null, "This is an error");
-    const createElements = (sliderProps: SliderProps, errorNode?: React.DOMElement<any, any>) => {
-        slider = shallow(createElement(Slider, sliderProps, errorNode));
+    const createAndFindElements = (props: SliderProps, alert?: React.DOMElement<any, any>) => {
+        slider = shallow(createElement(Slider, props, alert));
         checkbox = slider.find(".widget-boolean-slider-checkbox");
         label = slider.find(".widget-boolean-slider-btn");
     };
@@ -22,7 +22,7 @@ describe("Slider", () => {
             onClick: () => { console.log("clicked"); },
             widgetId: "slider"
         };
-        createElements(sliderProps);
+        createAndFindElements(sliderProps);
     });
 
     it("renders structure correctly", () => {
@@ -41,10 +41,6 @@ describe("Slider", () => {
         expect(typeof label.props().onClick).toBe("function");
     });
 
-    it("has the class widget-boolean-slider", () => {
-        expect(slider.hasClass("widget-boolean-slider")).toBe(true);
-    });
-
     describe("that is checked", () => {
         beforeEach(() => {
             sliderProps = {
@@ -57,7 +53,7 @@ describe("Slider", () => {
                 },
                 widgetId: "slider"
             };
-            createElements(sliderProps);
+            createAndFindElements(sliderProps);
         });
 
         it("renders a checkbox that is also checked", () => {
@@ -83,7 +79,7 @@ describe("Slider", () => {
                 },
                 widgetId: "slider"
             };
-            createElements(sliderProps);
+            createAndFindElements(sliderProps);
         });
 
         it("renders a checkbox that is also unchecked", () => {
@@ -109,7 +105,7 @@ describe("Slider", () => {
                 },
                 widgetId: "slider"
             };
-            createElements(sliderProps);
+            createAndFindElements(sliderProps);
         });
 
         it("has the class enabled", () => {
@@ -136,7 +132,7 @@ describe("Slider", () => {
                     onClick: () => { console.log("clicked"); },
                     widgetId: "slider"
                 };
-                createElements(sliderProps);
+                createAndFindElements(sliderProps);
             });
 
             it("renders a checkbox that is also unchecked", () => {
@@ -157,7 +153,7 @@ describe("Slider", () => {
                 },
                 widgetId: "slider"
             };
-            createElements(sliderProps);
+            createAndFindElements(sliderProps);
         });
 
         it("does not have the class enabled", () => {
@@ -184,7 +180,7 @@ describe("Slider", () => {
                     onClick: () => { console.log("clicked"); },
                     widgetId: "slider"
                 };
-                createElements(sliderProps);
+                createAndFindElements(sliderProps);
             });
 
             it("renders a checkbox that is also unchecked", () => {
@@ -202,7 +198,7 @@ describe("Slider", () => {
                 onClick: () => { console.log("clicked"); },
                 widgetId: "slider"
             };
-            createElements(sliderProps, errorNode);
+            createAndFindElements(sliderProps, errorNode);
         });
 
         it("has the class has-error", () => {
@@ -223,7 +219,7 @@ describe("Slider", () => {
                 onClick: () => { console.log("clicked"); },
                 widgetId: "slider"
             };
-            createElements(sliderProps, errorNode);
+            createAndFindElements(sliderProps, errorNode);
         });
 
         it("does not have the class has-error", () => {

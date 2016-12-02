@@ -2,7 +2,6 @@
 Switch between the two boolean states (true/false).
 
 ## Features
-* Click to toggle
 * Deactivate when attribute or context is read-only
 * Execute a microflow when the state is changed
 

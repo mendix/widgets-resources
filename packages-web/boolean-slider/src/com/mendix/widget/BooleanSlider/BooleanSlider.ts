@@ -93,7 +93,7 @@ class BooleanSlider extends WidgetBase {
 // Declare widget prototype the Dojo way
 // Thanks to https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/dojo/README.md
 // tslint:disable : only-arrow-functions
-dojoDeclare("com.mendix.widget.BooleanSlider.BooleanSlider", [ WidgetBase ], function (Source: any) {
+dojoDeclare("com.mendix.widget.BooleanSlider.BooleanSlider", [ WidgetBase ], function(Source: any) {
     let result: any = {};
     for (let property in Source.prototype) {
         if (property !== "constructor" && Source.prototype.hasOwnProperty(property)) {
@@ -101,4 +101,4 @@ dojoDeclare("com.mendix.widget.BooleanSlider.BooleanSlider", [ WidgetBase ], fun
         }
     }
     return result;
-} (BooleanSlider));
+}(BooleanSlider));
