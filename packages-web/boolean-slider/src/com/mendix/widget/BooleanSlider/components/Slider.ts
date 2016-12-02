@@ -1,9 +1,10 @@
-import "../ui/Slider.less";
+// tslint:disable ordered-imports
+import { DOM } from "react";
 import * as classNames from "classnames";
-import { DOM, ReactNode } from "react";
+
+import "../ui/Slider.sass";
 
 export interface SliderProps {
-    children?: ReactNode;
     widgetId: string;
     isChecked: boolean;
     enabled: boolean;
@@ -11,7 +12,7 @@ export interface SliderProps {
     onClick(checked: boolean): void;
 }
 
-export const Slider = (props: SliderProps) =>
+export const Slider = (props: SliderProps & { children?: React.ReactNode }) =>
     DOM.div({ className: classNames("widget-boolean-slider", { "has-error": props.hasError }) },
         DOM.input({
             checked: props.isChecked,
