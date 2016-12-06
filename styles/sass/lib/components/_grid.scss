@@ -25,12 +25,6 @@
 					color: $grid-paging-color-hover;
 					border-color: $grid-paging-border-color-hover;
 				}
-
-				&.disabled, 
-				&[disabled] {
-					opacity: 0.4;
-					filter: alpha(opacity=40); /* For IE8 and earlier */
-				}
 			}
 
 			/* Text Paging .. to .. to .. */
