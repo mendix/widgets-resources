@@ -245,6 +245,17 @@ $btn-success-color:                     #FFF !default;
 $btn-warning-color:                     #FFF !default;
 $btn-danger-color:                      #FFF !default;
 
+// Button Background Color
+$btn-default-bg-hover:                  mix($brand-default, black, 80%) !default;
+$btn-inverse-bg-hover:                  mix($brand-inverse, white, 80%) !default;
+$btn-primary-bg-hover:                  mix($brand-primary, black, 80%) !default;
+$btn-info-bg-hover:                     mix($brand-info, black, 80%) !default;
+$btn-success-bg-hover:                  mix($brand-success, black, 80%) !default;
+$btn-warning-bg-hover:                  mix($brand-warning, black, 80%) !default;
+$btn-danger-bg-hover:                   mix($brand-danger, black, 80%) !default;
+
+
+
 
 
 //
@@ -260,38 +271,38 @@ $btn-danger-color:                      #FFF !default;
 //## These variations are used to support several other variables and components
 
 // Color variations
-$color-default-darker:                  mix($brand-default,black, 60%) !default;
-$color-default-dark:                    mix($brand-default,black, 70%) !default;
+$color-default-darker:                  mix($brand-default, black, 60%) !default;
+$color-default-dark:                    mix($brand-default, black, 70%) !default;
 $color-default-light:                   mix($brand-default, white, 60%) !default;
 $color-default-lighter:                 mix($brand-default, white, 20%) !default;
 
-$color-inverse-darker:                  mix($brand-inverse,black, 60%) !default;    
-$color-inverse-dark:                    mix($brand-inverse,black, 70%) !default;
+$color-inverse-darker:                  mix($brand-inverse, black, 60%) !default;    
+$color-inverse-dark:                    mix($brand-inverse, black, 70%) !default;
 $color-inverse-light:                   mix($brand-inverse, white, 60%) !default;
 $color-inverse-lighter:                 mix($brand-inverse, white, 20%) !default;
 
-$color-primary-darker:                  mix($brand-primary,black, 60%) !default;    
-$color-primary-dark:                    mix($brand-primary,black, 70%) !default;
+$color-primary-darker:                  mix($brand-primary, black, 60%) !default;    
+$color-primary-dark:                    mix($brand-primary, black, 70%) !default;
 $color-primary-light:                   mix($brand-primary, white, 60%) !default;
 $color-primary-lighter:                 mix($brand-primary, white, 20%) !default;
 
-$color-info-darker:                     mix($brand-info,black, 60%) !default;  
-$color-info-dark:                       mix($brand-info,black, 70%) !default;
+$color-info-darker:                     mix($brand-info, black, 60%) !default;  
+$color-info-dark:                       mix($brand-info, black, 70%) !default;
 $color-info-light:                      mix($brand-info, white, 60%) !default;
 $color-info-lighter:                    mix($brand-info, white, 20%) !default;
 
-$color-success-darker:                  mix($brand-success,black, 60%) !default;
-$color-success-dark:                    mix($brand-success,black, 70%) !default;
+$color-success-darker:                  mix($brand-success, black, 60%) !default;
+$color-success-dark:                    mix($brand-success, black, 70%) !default;
 $color-success-light:                   mix($brand-success, white, 60%) !default;
 $color-success-lighter:                 mix($brand-success, white, 20%) !default;  
 
-$color-warning-darker:                  mix($brand-warning,black, 60%) !default;   
-$color-warning-dark:                    mix($brand-warning,black, 70%) !default;
+$color-warning-darker:                  mix($brand-warning, black, 60%) !default;   
+$color-warning-dark:                    mix($brand-warning, black, 70%) !default;
 $color-warning-light:                   mix($brand-warning, white, 60%) !default;
 $color-warning-lighter:                 mix($brand-warning, white, 20%) !default;
 
-$color-danger-darker:                   mix($brand-danger,black, 60%) !default;   
-$color-danger-dark:                     mix($brand-danger,black, 70%) !default;
+$color-danger-darker:                   mix($brand-danger, black, 60%) !default;   
+$color-danger-dark:                     mix($brand-danger, black, 70%) !default;
 $color-danger-light:                    mix($brand-danger, white, 60%) !default;
 $color-danger-lighter:                  mix($brand-danger, white, 20%) !default;
 

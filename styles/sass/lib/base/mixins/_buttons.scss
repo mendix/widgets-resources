@@ -1,15 +1,16 @@
-@mixin button-variant($color, $background, $border) {
+@mixin button-variant($color, $background, $border, $hover) {
   border-color: $border;
   background-color: $background;
   color: $color;
+  hover: $hover;
 
   &:hover,
   &:focus,
   &:active,
   &.active,
   .open > &.dropdown-toggle {
-    border-color: darken($border, 10%);
-    background-color: darken($background, 10%);
+    border-color: $hover;
+    background-color: $hover;
     color: $color;
   }
   &:active,

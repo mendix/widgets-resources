@@ -75,37 +75,29 @@
 
 // Buttons Alternate Style
 .btn-default {
-    @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border-color);
+    @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border-color, $btn-default-bg-hover);
 }
 .btn-primary {
-    @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border-color);
+    @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border-color, $btn-primary-bg-hover);
 }
 .btn-inverse {
-    @include button-variant($btn-inverse-color, $btn-inverse-bg, $btn-inverse-border-color);
-    &:hover,
-    &:focus,
-    &:active,
-    &.active,
-    .open > &.dropdown-toggle {
-        background-color: lighten($btn-inverse-bg, 10%);
-        border-color: lighten($btn-inverse-bg, 10%);
-    }
+    @include button-variant($btn-inverse-color, $btn-inverse-bg, $btn-inverse-border-color, $btn-inverse-bg-hover);
 }
 // Success appears as green
 .btn-success {
-    @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border-color);
+    @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border-color, $btn-success-bg-hover);
 }
 // Info appears as blue-green
 .btn-info {
-    @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border-color);
+    @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border-color, $btn-info-bg-hover);
 }
 // Warning appears as orange
 .btn-warning {
-    @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border-color);
+    @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border-color, $btn-warning-bg-hover);
 }
 // Danger and error appear as red
 .btn-danger {
-    @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border-color);
+    @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border-color, $btn-danger-bg-hover);
 }
 // Button as link but with padding 
 .btn-link {
