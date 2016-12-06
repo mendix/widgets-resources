@@ -259,52 +259,41 @@ $btn-danger-color:                      #FFF !default;
 //== Color variations
 //## These variations are used to support several other variables and components
 
-// Basic Text colors
-/*$font-base-color:                      #000 !default;
-$color-text-white:                      #FFF !default;
-$font-color-detail:            lighten($font-base-color, 40%) !default;
-$font-base-color-disabled:             rgba($font-base-color, .26) !default;
-$font-base-color-hint:                 rgba($font-base-color, .26) !default;
-
-$color-text-white-secondary:            rgba($color-text-white, .7) !default;
-$color-text-white-disabled:             rgba($color-text-white, .3) !default;
-$color-text-white-hint:                 rgba($color-text-white, .3) !default;*/
-
 // Color variations
-$color-default-darker:                  shade($brand-default,40) !default;    
-$color-default-dark:                    shade($brand-default,26) !default;    
-$color-default-light:                   tint($brand-default,40) !default;    
-$color-default-lighter:                 tint($brand-default,80) !default;    
+$color-default-darker:                  mix($brand-default,black, 60%) !default;
+$color-default-dark:                    mix($brand-default,black, 70%) !default;
+$color-default-light:                   mix($brand-default, white, 60%) !default;
+$color-default-lighter:                 mix($brand-default, white, 20%) !default;
 
-$color-inverse-darker:                  shade($brand-inverse,40) !default;    
-$color-inverse-dark:                    shade($brand-inverse,26) !default;    
-$color-inverse-light:                   tint($brand-inverse,40) !default;    
-$color-inverse-lighter:                 tint($brand-inverse,80) !default;    
+$color-inverse-darker:                  mix($brand-inverse,black, 60%) !default;    
+$color-inverse-dark:                    mix($brand-inverse,black, 70%) !default;
+$color-inverse-light:                   mix($brand-inverse, white, 60%) !default;
+$color-inverse-lighter:                 mix($brand-inverse, white, 20%) !default;
 
-$color-primary-darker:                  shade($brand-primary,40) !default;    
-$color-primary-dark:                    shade($brand-primary,26) !default;    
-$color-primary-light:                   tint($brand-primary,40) !default;    
-$color-primary-lighter:                 tint($brand-primary,80) !default;    
+$color-primary-darker:                  mix($brand-primary,black, 60%) !default;    
+$color-primary-dark:                    mix($brand-primary,black, 70%) !default;
+$color-primary-light:                   mix($brand-primary, white, 60%) !default;
+$color-primary-lighter:                 mix($brand-primary, white, 20%) !default;
 
-$color-info-darker:                     shade($brand-info,40) !default;    
-$color-info-dark:                       shade($brand-info,26) !default;    
-$color-info-light:                      tint($brand-info,40) !default;    
-$color-info-lighter:                    tint($brand-info,80) !default;    
+$color-info-darker:                     mix($brand-info,black, 60%) !default;  
+$color-info-dark:                       mix($brand-info,black, 70%) !default;
+$color-info-light:                      mix($brand-info, white, 60%) !default;
+$color-info-lighter:                    mix($brand-info, white, 20%) !default;
 
-$color-success-darker:                  shade($brand-success,40) !default;    
-$color-success-dark:                    shade($brand-success,26) !default;    
-$color-success-light:                   tint($brand-success,40) !default;    
-$color-success-lighter:                 tint($brand-success,80) !default;    
+$color-success-darker:                  mix($brand-success,black, 60%) !default;
+$color-success-dark:                    mix($brand-success,black, 70%) !default;
+$color-success-light:                   mix($brand-success, white, 60%) !default;
+$color-success-lighter:                 mix($brand-success, white, 20%) !default;  
 
-$color-warning-darker:                  shade($brand-warning,40) !default;    
-$color-warning-dark:                    shade($brand-warning,26) !default;    
-$color-warning-light:                   tint($brand-warning,40) !default;    
-$color-warning-lighter:                 tint($brand-warning,80) !default;    
+$color-warning-darker:                  mix($brand-warning,black, 60%) !default;   
+$color-warning-dark:                    mix($brand-warning,black, 70%) !default;
+$color-warning-light:                   mix($brand-warning, white, 60%) !default;
+$color-warning-lighter:                 mix($brand-warning, white, 20%) !default;
 
-$color-danger-darker:                   shade($brand-danger,40) !default;    
-$color-danger-dark:                     shade($brand-danger,26) !default;    
-$color-danger-light:                    tint($brand-danger,40) !default;    
-$color-danger-lighter:                  tint($brand-danger,80) !default;
+$color-danger-darker:                   mix($brand-danger,black, 60%) !default;   
+$color-danger-dark:                     mix($brand-danger,black, 70%) !default;
+$color-danger-light:                    mix($brand-danger, white, 60%) !default;
+$color-danger-lighter:                  mix($brand-danger, white, 20%) !default;
 
 
 

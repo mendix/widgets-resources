@@ -9,7 +9,7 @@ label {
 }
 .mx-title {
 	font-weight: $font-weight-header;
-	color: $font-weight-header;
+	color: $font-color-header;
 	font-size: $font-size-h1;
 }
 h1, .h1, .h1 > * { font-size: $font-size-h1; } 
@@ -21,7 +21,7 @@ h6, .h6, .h6 > * { font-size: $font-size-h6; }
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-	font-weight: $font-weight-headers;
+	font-weight: $font-weight-header;
 	color: $font-color-header;
 	line-height: 1.3;
 }
