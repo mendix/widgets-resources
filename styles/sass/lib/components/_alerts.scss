@@ -3,36 +3,43 @@
 
    Default Bootstrap Alert boxes. Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages
 ========================================================================== */
+
 .alert {
-	border-radius: 4px;
-	margin-top: 0; // want to align it with padding of a page
-	padding: 15px;
-	border: 0;
+    margin-top: 0; // want to align it with padding of a page
+    padding: 15px;
+    border: 0;
+    border-radius: 4px;
 }
+
 .alert-bordered {
-	border: 1px solid;
+    border: 1px solid;
 }
-.alert-success { 
-	border-color: $alert-success-border-color;
-	background-color: $alert-success-bg;
-	color: $alert-success-color;
+
+.alert-success {
+    color: $alert-success-color;
+    border-color: $alert-success-border-color;
+    background-color: $alert-success-bg;
 }
-.alert-info { 
-	border-color: $alert-info-border-color;
-	background-color: $alert-info-bg;
-	color: $alert-info-color;
+
+.alert-info {
+    color: $alert-info-color;
+    border-color: $alert-info-border-color;
+    background-color: $alert-info-bg;
 }
-.alert-warning { 
-	border-color: $alert-warning-border-color; 
-	background-color: $alert-warning-bg;
-	color: $alert-warning-color;
+
+.alert-warning {
+    color: $alert-warning-color;
+    border-color: $alert-warning-border-color;
+    background-color: $alert-warning-bg;
 }
-.alert-danger { 
-	border-color: $alert-danger-border-color;
-	background-color: $alert-danger-bg; 
-	color: $alert-danger-color;
+
+.alert-danger {
+    color: $alert-danger-color;
+    border-color: $alert-danger-border-color;
+    background-color: $alert-danger-bg;
 }
+
 .has-error .alert {
-	margin-top: 8px;
-	margin-bottom: 0;
+    margin-top: 8px;
+    margin-bottom: 0;
 }

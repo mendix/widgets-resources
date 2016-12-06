@@ -3,39 +3,46 @@
 
    Default labels combined with Bootstrap labels
 ========================================================================== */
+
 .label {
-	@include font(bold); 
-	border-radius: .25em;
-	display: inline;
-	padding: .2em .6em .3em !important;
-	color: #fff;
-	vertical-align: baseline;
-	text-align: center;
-	white-space: nowrap; 
-	font-size: 100%;
-	line-height: 1;
+    @include font(bold);
+    border-radius: .25em;
+    display: inline;
+    padding: .2em .6em .3em !important;
+    color: #fff;
+    vertical-align: baseline;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 100%;
+    line-height: 1;
 }
-.label-default { 
-	background-color: $label-default-bg; 
-	color: $label-default-color;
+
+.label-default {
+    background-color: $label-default-bg;
+    color: $label-default-color;
 }
-.label-primary { 
-	background-color: $label-primary-bg; 
-	color: $label-primary-color;
+
+.label-primary {
+    background-color: $label-primary-bg;
+    color: $label-primary-color;
 }
-.label-success { 
-	background-color: $label-success-bg; 
-	color: $label-success-color;
+
+.label-success {
+    background-color: $label-success-bg;
+    color: $label-success-color;
 }
-.label-info { 
-	background-color: $label-info-bg; 
-	color: $label-info-color;
+
+.label-info {
+    background-color: $label-info-bg;
+    color: $label-info-color;
 }
-.label-warning { 
-	background-color: $label-warning-bg; 
-	color: $label-warning-color;
+
+.label-warning {
+    background-color: $label-warning-bg;
+    color: $label-warning-color;
 }
-.label-danger { 
-	background-color: $label-danger-bg; 
-	color: $label-danger-color;
+
+.label-danger {
+    background-color: $label-danger-bg;
+    color: $label-danger-color;
 }

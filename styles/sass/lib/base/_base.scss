@@ -3,56 +3,64 @@
 
    Default settings
 ========================================================================== */
-html {
-	height: 100%;
-}
-body {
-	@include font(normal);
-	color: $font-base-color;
-	font-size: $font-base-size;
-	line-height: $line-height-base;
-	background-color: $bg-color;
 
-	min-height: 100%;
+html {
+    height: 100%;
 }
+
+body {
+    min-height: 100%;
+    font-size: $font-base-size;
+    line-height: $line-height-base;
+    color: $font-base-color;
+    background-color: $bg-color;
+    @include font(normal);
+}
+
 a {
-	color: $link-color;
-	-webkit-transition: 0.25s;
-	-moz-transition: 0.25s;
-	-o-transition: 0.25s;
-	transition: 0.25s;
-	-webkit-backface-visibility: hidden;
+    -webkit-transition: .25s;
+    -moz-transition: .25s;
+    -o-transition: .25s;
+    transition: .25s;
+    color: $link-color;
+    -webkit-backface-visibility: hidden;
 }
+
 a:hover {
-	text-decoration: underline;
-	color: $link-hover-color;
+    color: $link-hover-color;
+    text-decoration: underline;
 }
+
 // Address `outline` inconsistency between Chrome and other browsers.
 a:focus {
-  outline: thin dotted; 
+    outline: thin dotted;
 }
+
 // Improve readability when focused and also mouse hovered in all browsers
-a:active, 
+a:active,
 a:hover {
-  outline: 0;
+    outline: 0;
 }
+
 // Removes large blue border in chrome on focus and active states 
-input:focus, 
+input:focus,
 button:focus,
 .mx-link:focus {
-  outline: 0; 
+    outline: 0;
 }
+
 // Removes large blue border for tabindexes from widgets
 div[tabindex] {
-	outline: 0; 
+    outline: 0;
 }
+
 // Disabled State 
 .disabled,
 [disabled] {
-    pointer-events: none;
     cursor: not-allowed;
-    filter: alpha(opacity=65);
+    pointer-events: none;
+    opacity: .65;
     -webkit-box-shadow: none;
     box-shadow: none;
-    opacity: .65;
+    filter: alpha(opacity=65);
 }

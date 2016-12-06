@@ -1,98 +1,107 @@
 /* ==========================================================================
    Inputs
 ========================================================================== */
-.form-control {
-	-moz-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 
-	box-shadow:	none;
-	display: block;
-	padding: $form-input-padding-y $form-input-padding-x;
-	width: 100%;
-	height: $form-input-height;
-	border: 1px solid $form-input-border-color;
-	border-radius: $form-input-border-radius;
-	background-color: $form-input-bg;
-	background-image: none;
-	color: $form-input-color;
-	font-size: $form-input-font-size;
-	line-height: $form-input-line-height;
+.form-control {
+    -moz-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    box-shadow: none;
+    display: block;
+    padding: $form-input-padding-y $form-input-padding-x;
+    width: 100%;
+    height: $form-input-height;
+    border: 1px solid $form-input-border-color;
+    border-radius: $form-input-border-radius;
+    background-color: $form-input-bg;
+    background-image: none;
+    color: $form-input-color;
+    font-size: $form-input-font-size;
+    line-height: $form-input-line-height;
 }
+
 .form-control:focus {
-	border-color: $form-input-border-focus-color;
-	background-color: $form-input-bg-focus;
-	outline: 0;
+    border-color: $form-input-border-focus-color;
+    background-color: $form-input-bg-focus;
+    outline: 0;
 }
+
 textarea.form-control {
-	height: auto;
+    height: auto;
 }
 
 .form-control-static {
-	overflow: hidden;
-	min-height: auto;
-	
-	padding-top: $form-input-padding-y;
-	padding-bottom: $form-input-padding-y;
-	font-size: $form-input-font-size;
-	line-height: $form-input-line-height;
-}
-/* Not editable textarea, textarea will be rendered as a label */
-.mx-textarea label {
-	height: auto;
+    overflow: hidden;
+    min-height: auto;
+    padding-top: $form-input-padding-y;
+    padding-bottom: $form-input-padding-y;
+    font-size: $form-input-font-size;
+    line-height: $form-input-line-height;
 }
 
+
+/* Not editable textarea, textarea will be rendered as a label */
+
+.mx-textarea label {
+    height: auto;
+}
 
 
 /* ==========================================================================
    Group with label and input
 ========================================================================== */
+
+
 /* Input and textarea get properly aligned */
-.form-group div[class*='textBox'] > label,
-.form-group div[class*='textArea'] > label,
-.form-group div[class*='datePicker'] > label {
-	@extend .form-control-static;
-}
-.form-group {
-	margin-bottom: $form-group-margin-bottom;
-	[class*='col-'] {
-		padding-left: $form-group-gutter;
-		padding-right: $form-group-gutter;
-	}
-}
-.form-group .control-label {
-	color: $form-label-color;	
-	font-size: $form-label-size;
-	font-weight: $form-label-weight;	
-}
-.form-horizontal {
-	@media (min-width: $screen-sm){
-		.control-label {
-			line-height: $form-input-line-height;
-			padding-top: $form-input-padding-y;
-			padding-bottom: $form-input-padding-y;
-		}
-	}
+
+.form-group div[class*='textBox']>label,
+.form-group div[class*='textArea']>label,
+.form-group div[class*='datePicker']>label {
+    @extend .form-control-static;
 }
 
+.form-group {
+    margin-bottom: $form-group-margin-bottom;
+    [class*='col-'] {
+        padding-left: $form-group-gutter;
+        padding-right: $form-group-gutter;
+    }
+}
+
+.form-group .control-label {
+    color: $form-label-color;
+    font-size: $form-label-size;
+    font-weight: $form-label-weight;
+}
+
+.form-horizontal {
+    @media (min-width: $screen-sm) {
+        .control-label {
+            line-height: $form-input-line-height;
+            padding-top: $form-input-padding-y;
+            padding-bottom: $form-input-padding-y;
+        }
+    }
+}
 
 
 /* ==========================================================================
    Inputs File Upload
 ========================================================================== */
+
 .mx-fileinput {
-	.mx-wrapped-label {
-		display: inline-block;
-		width: 200px;
-	}
-	/* File input widget hover fix */
-	.mx-wrapped-form {
-		.mx-wrapped-input {
-			cursor: pointer;
-		}
-		.mx-fileinput-upload-button:hover {
-			background-color: $btn-default-bg;
-		}
-	}
+    .mx-wrapped-label {
+        display: inline-block;
+        width: 200px;
+    }
+    /* File input widget hover fix */
+    .mx-wrapped-form {
+        .mx-wrapped-input {
+            cursor: pointer;
+        }
+        .mx-fileinput-upload-button:hover {
+            background-color: $btn-default-bg;
+        }
+    }
 }

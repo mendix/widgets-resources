@@ -3,45 +3,42 @@
 
    Default Mendix Listview Widget. The list view shows a list of objects arranged vertically. Each object is shown using a template
 ========================================================================== */
+
 .mx-listview {
-	/* Remove widget padding */
-	padding: 0;
-
-	/* Clear search button (overrides load more button stying) */
-	.mx-button.mx-listview-clear-button {
-		width: auto;
-	}
-
-	/* Load more button */
-	> .mx-button {
-		width: 100%;
-		margin: 10px auto
-	}
-	.mx-listview-list {
-		margin: 0;
-	}
-	.mx-listview-item {
-		background-color: $grid-bg;
-		padding: 10px 0;
-		&:hover {
-			background-color: $grid-bg;
-		}
-		&.selected {
-			background-color: $grid-bg-selected !important;
-
-			&:hover {
-				background-color: $grid-bg-selected-hover !important;
-			}
-		}
-		&:nth-child(2n+1) {
-			background-color: $grid-bg;
-		}
-	}
-
-	.mx-layoutgrid {
-		padding-top: 0 !important;
-		padding-bottom: 0 !important;
-	}
+    /* Remove widget padding */
+    padding: 0;
+    /* Clear search button (overrides load more button stying) */
+    .mx-button.mx-listview-clear-button {
+        width: auto;
+    }
+    /* Load more button */
+    >.mx-button {
+        width: 100%;
+        margin: 10px auto
+    }
+    .mx-listview-list {
+        margin: 0;
+    }
+    .mx-listview-item {
+        background-color: $grid-bg;
+        padding: 10px 0;
+        &:hover {
+            background-color: $grid-bg;
+        }
+        &.selected {
+            background-color: $grid-bg-selected !important;
+            &:hover {
+                background-color: $grid-bg-selected-hover !important;
+            }
+        }
+        &:nth-child(2n+1) {
+            background-color: $grid-bg;
+        }
+    }
+    .mx-layoutgrid {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
 }
 
 
@@ -50,13 +47,14 @@
 
    Default Mendix Listview Widget with hover
 ========================================================================== */
+
 .listview-hover.mx-listview {
-	.mx-listview-item {
-		&:hover,
-		&:active {
-			background-color: $grid-bg-hover !important;
-		}
-	}
+    .mx-listview-item {
+        &:hover,
+        &:active {
+            background-color: $grid-bg-hover !important;
+        }
+    }
 }
 
 
@@ -65,20 +63,20 @@
 
    Default Mendix Listview Widget with only border bottom in listview item
 ========================================================================== */
-.listview-lined.mx-listview {
-	.mx-listview-item {
-		border-top: 1px solid $grid-border-color;
-		border-right: none;
-		border-left: none;
 
-		&:first-child {
-			border-radius: 0;
-		}
-		&:last-child {
-			border-radius: 0;
-			border-bottom: 1px solid $grid-border-color;
-		}
-	}
+.listview-lined.mx-listview {
+    .mx-listview-item {
+        border-top: 1px solid $grid-border-color;
+        border-right: none;
+        border-left: none;
+        &:first-child {
+            border-radius: 0;
+        }
+        &:last-child {
+            border-radius: 0;
+            border-bottom: 1px solid $grid-border-color;
+        }
+    }
 }
 
 
@@ -87,10 +85,11 @@
 
    Default Mendix Listview Widget with striped listview items
 ========================================================================== */
+
 .listview-striped.mx-listview {
-	.mx-listview-item:nth-child(2n+1) {
-		background-color: $grid-bg-striped;
-	}
+    .mx-listview-item:nth-child(2n+1) {
+        background-color: $grid-bg-striped;
+    }
 }
 
 
@@ -99,12 +98,13 @@
 
    Default Mendix Listview Widget with listview items seperated
 ========================================================================== */
+
 .listview-seperated.mx-listview {
-	.mx-listview-item {
-		border-radius: 4px;
-		margin-bottom: 10px;
-		border-style: solid;
-	}
+    .mx-listview-item {
+        border-radius: 4px;
+        margin-bottom: 10px;
+        border-style: solid;
+    }
 }
 
 
@@ -113,23 +113,21 @@
 
    Default Mendix Listview Widget with listview items seperated
 ========================================================================== */
-.listview-stylingless.mx-listview {
-	.mx-listview-item {
-		background-color: transparent;
-		border: 0;
-		padding: 0;
-		cursor: default;
-		
-		&:hover {
-			background-color: transparent;
-		}
-		&.selected {
-			background-color: transparent !important;
 
-			&:hover {
-				background-color: transparent !important;
-			}
-		}
-	}
-}	
-	
+.listview-stylingless.mx-listview {
+    .mx-listview-item {
+        background-color: transparent;
+        border: 0;
+        padding: 0;
+        cursor: default;
+        &:hover {
+            background-color: transparent;
+        }
+        &.selected {
+            background-color: transparent !important;
+            &:hover {
+                background-color: transparent !important;
+            }
+        }
+    }
+}
