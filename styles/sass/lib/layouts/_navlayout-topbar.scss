@@ -12,7 +12,7 @@
 		.mx-navbar {
 			float: left;
 			background-color: transparent;
-			@media (max-width: $screen-sm) {
+			@media (max-width: $screen-xs-max) {
 				float: none;
 				clear: both;
 			}
