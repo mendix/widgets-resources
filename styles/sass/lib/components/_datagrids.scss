@@ -72,13 +72,10 @@
     }
 }
 
-
-/* ==========================================================================
-   Datagrid Striped
-
-   Default Mendix Datagrid Widget with striped rows
-========================================================================== */
-
+//== Design Properties
+//## Helper classes to change the look and feel of the component
+//-------------------------------------------------------------------------------------------------------------------//
+// Striped style
 .datagrid-striped.mx-datagrid {
     .mx-datagrid-head-table {
         th {
@@ -86,7 +83,6 @@
         }
     }
     .mx-datagrid-body-table {
-        /* Body */
         .mx-datagrid-body tr {
             td {
                 border-top-width: 0;
@@ -98,13 +94,7 @@
     }
 }
 
-
-/* ==========================================================================
-   Datagrid Bordered
-
-   Default Mendix Datagrid Widget with borders
-========================================================================== */
-
+// Bordered style
 .datagrid-bordered.mx-datagrid {
     .mx-datagrid-head-table {
         th {
@@ -131,56 +121,7 @@
     }
 }
 
-
-/* ==========================================================================
-   Datagrid Hover
-
-   Default Mendix Datagrid Widget with hover
-========================================================================== */
-
-.datagrid-hover.mx-datagrid {
-    .mx-datagrid-body-table {
-        // Body
-        .mx-datagrid-body tr {
-            &:hover td {
-                background-color: $grid-bg-hover !important;
-            }
-            &.selected:hover td {
-                background-color: $grid-bg-selected-hover !important;
-            }
-        }
-    }
-}
-
-
-/* ==========================================================================
-   Datagrid Large
-
-   Default Mendix Datagrid Widget with large rows
-========================================================================== */
-
-.datagrid-large.mx-datagrid {
-    .mx-datagrid-head-table {
-        .mx-datagrid-head-wrapper {
-            padding: 15px 10px;
-        }
-    }
-    .mx-datagrid-body-table {
-        .mx-datagrid-body tr {
-            td {
-                padding: 15px 10px;
-            }
-        }
-    }
-}
-
-
-/* ==========================================================================
-   Datagrid Transparent
-
-   Default Mendix Datagrid Widget with transparent background for row and cells
-========================================================================== */
-
+// Transparent style so you can see the background
 .datagrid-transparent.mx-datagrid {
     .mx-datagrid-head-table {
         background-color: transparent;
@@ -197,14 +138,53 @@
     }
 }
 
+// Hover style activated
+.datagrid-hover.mx-datagrid {
+    .mx-datagrid-body-table {
+        .mx-datagrid-body tr {
+            &:hover td {
+                background-color: $grid-bg-hover !important;
+            }
+            &.selected:hover td {
+                background-color: $grid-bg-selected-hover !important;
+            }
+        }
+    }
+}
 
-/* ==========================================================================
-   Datagrid Full Search
+// Datagrid Row Sizes
+.datagrid-large.mx-datagrid {
+    .mx-datagrid-head-table {
+        .mx-datagrid-head-wrapper {
+            padding: ($padding-table-cell-top * 2) ($padding-table-cell-right * 2) ($padding-table-cell-bottom * 2) ($padding-table-cell-left * 2);
+        }
+    }
+    .mx-datagrid-body-table {
+        .mx-datagrid-body tr {
+            td {
+                padding: ($padding-table-cell-top * 2) ($padding-table-cell-right * 2) ($padding-table-cell-bottom * 2) ($padding-table-cell-left * 2);
+            }
+        }
+    }
+}
+.datagrid-small.mx-datagrid {
+    .mx-datagrid-head-table {
+        .mx-datagrid-head-wrapper {
+            padding: ($padding-table-cell-top / 2) ($padding-table-cell-right / 2) ($padding-table-cell-bottom / 2) ($padding-table-cell-left / 2);
+        }
+    }
+    .mx-datagrid-body-table {
+        .mx-datagrid-body tr {
+            td {
+                padding: ($padding-table-cell-top / 2) ($padding-table-cell-right / 2) ($padding-table-cell-bottom / 2) ($padding-table-cell-left / 2);
+            }
+        }
+    }
+}
 
-   Default Mendix Datagrid Widget with adjusted search field. Only 1 search field is allowed
-========================================================================== */
-
-.mx-grid.datagrid-fullsearch {
+// Datagrid Full Search
+// Default Mendix Datagrid Widget with adjusted search field. Only 1 search field is allowed
+.datagrid-fullsearch.mx-grid {
     .mx-grid-search-button {
         @extend .btn-primary;
     }

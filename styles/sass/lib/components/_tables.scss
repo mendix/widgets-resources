@@ -8,6 +8,15 @@ th {
     @include font(bold);
 }
 
+html body .mx-page table.mx-table {
+    th,
+    td {
+        &.nopadding {
+            padding: 0;
+        }
+    }
+}
+
 table.mx-table {
     >tbody {
         /* Table row */
@@ -38,9 +47,7 @@ table.mx-table {
     }
 }
 
-
-/* Default Mendix Table Widget inside TemplateGrid */
-
+// Default Mendix Table Widget inside TemplateGrid
 .mx-templategrid table.mx-table {
     >tbody {
         >tr {
@@ -52,9 +59,7 @@ table.mx-table {
     }
 }
 
-
-/* Default Mendix Table Widget inside Listview */
-
+// Default Mendix Table Widget inside Listview 
 .mx-list table.mx-table {
     >tbody {
         >tr {
@@ -66,13 +71,10 @@ table.mx-table {
     }
 }
 
-
-/* ==========================================================================
-   Tables Lined
-	
-   Default Mendix Table Widget with borders top and bottom
-========================================================================== */
-
+//== Design Properties
+//## Helper classes to change the look and feel of the component
+//-------------------------------------------------------------------------------------------------------------------//
+// Lined
 table.table-lined.mx-table {
     >tbody {
         // Table row
@@ -89,13 +91,7 @@ table.table-lined.mx-table {
     }
 }
 
-
-/* ==========================================================================
-   Tables Bordered
-	
-   Default Mendix Table Widget with borders
-========================================================================== */
-
+// Bordered
 table.table-bordered.mx-table {
     >tbody {
         // Table row
@@ -112,13 +108,7 @@ table.table-bordered.mx-table {
     }
 }
 
-
-/* ==========================================================================
-   Tables Compact
-	
-   Default Mendix Table Widget with less spacing in table cells
-========================================================================== */
-
+// Makes table compact
 table.table-compact.mx-table {
     >tbody {
         // Table row
@@ -134,13 +124,7 @@ table.table-compact.mx-table {
     }
 }
 
-
-/* ==========================================================================
-   Tables Sideless
-	
-   Default Mendix Table Widget inside TemplateGrid
-========================================================================== */
-
+// Remove padding on sides
 table.table-sideless.mx-table {
     >tbody {
         // Table row
@@ -159,13 +143,7 @@ table.table-sideless.mx-table {
     }
 }
 
-
-/* ==========================================================================
-   Tables Spaceless
-	
-   Default Mendix Table Widget without padding
-========================================================================== */
-
+// Remove all padding
 table.table-spaceless.mx-table {
     >tbody {
         // Table row
@@ -180,13 +158,8 @@ table.table-spaceless.mx-table {
     }
 }
 
-
-/* ==========================================================================
-   Tables Vertical
-	
-   Default Mendix Table Widget vertical aligned 
-========================================================================== */
-
+// Tables Vertical
+// Will remove unwanted paddings
 table.table-vertical.mx-table {
     >tbody {
         // Table row
@@ -205,13 +178,7 @@ table.table-vertical.mx-table {
     }
 }
 
-
-/* ==========================================================================
-   Tables Vertical Middle
-	
-   Default Mendix Table Widget vertical aligned middle
-========================================================================== */
-
+// Align content in middle
 table.table-align-vertical-middle.mx-table {
     >tbody {
         // Table row
@@ -226,13 +193,7 @@ table.table-align-vertical-middle.mx-table {
     }
 }
 
-
-/* ==========================================================================
-   Tables Compact
-	
-   Default Mendix Table Widget without padding and margin
-========================================================================== */
-
+// Compact labels
 table.table-label-compact.mx-table {
     >tbody {
         // Table row
@@ -255,27 +216,10 @@ table.table-label-compact.mx-table {
     }
 }
 
-html body .mx-page table.mx-table {
-    th,
-    td {
-        &.nopadding {
-            padding: 0;
-        }
-    }
-}
-
-
-/* ==========================================================================
-   Tables Row Sizes
-========================================================================== */
-
 $height-row-s: 55px;
 $height-row-m: 70px;
 $height-row-l: 120px;
-
-/*  Small rows
-	========================================================================== */
-
+// Small rows
 table.table-row-s.mx-table {
     >tbody {
         // Table row
@@ -290,10 +234,7 @@ table.table-row-s.mx-table {
     }
 }
 
-
-/*  Medium rows
-	========================================================================== */
-
+// Medium rows
 table.table-row-m.mx-table {
     >tbody {
         // Table row
@@ -308,10 +249,7 @@ table.table-row-m.mx-table {
     }
 }
 
-
-/*  Large rows
-	========================================================================== */
-
+// Large rows
 table.table-row-l.mx-table {
     >tbody {
         // Table row
@@ -326,10 +264,7 @@ table.table-row-l.mx-table {
     }
 }
 
-
-/*	Table Fixed
-   ========================================================================== */
-
+// Makes the columns fixed
 table.table-fixed {
     table-layout: fixed;
 }

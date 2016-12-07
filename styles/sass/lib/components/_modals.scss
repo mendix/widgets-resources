@@ -41,9 +41,7 @@
     }
 }
 
-
-/* Default Mendix Window Modal */
-
+// Default Mendix Window Modal
 .mx-window {
     // If popup direct child is a dataview it gets the class mx-window-view
     &.mx-window-view .mx-window-body {
@@ -70,9 +68,7 @@
     }
 }
 
-
-/* Default Mendix Login Modal */
-
+// Login modal
 .mx-login {
     .modal-body {
         padding: 0 15px;

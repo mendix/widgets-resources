@@ -41,29 +41,10 @@
     }
 }
 
-
-/* ==========================================================================
-   Listview Hover
-
-   Default Mendix Listview Widget with hover
-========================================================================== */
-
-.listview-hover.mx-listview {
-    .mx-listview-item {
-        &:hover,
-        &:active {
-            background-color: $grid-bg-hover !important;
-        }
-    }
-}
-
-
-/* ==========================================================================
-   Listview Lined
-
-   Default Mendix Listview Widget with only border bottom in listview item
-========================================================================== */
-
+//== Design Properties
+//## Helper classes to change the look and feel of the component
+//-------------------------------------------------------------------------------------------------------------------//
+// Lined
 .listview-lined.mx-listview {
     .mx-listview-item {
         border-top: 1px solid $grid-border-color;
@@ -79,26 +60,14 @@
     }
 }
 
-
-/* ==========================================================================
-   Listview Striped
-
-   Default Mendix Listview Widget with striped listview items
-========================================================================== */
-
+// Striped
 .listview-striped.mx-listview {
     .mx-listview-item:nth-child(2n+1) {
         background-color: $grid-bg-striped;
     }
 }
 
-
-/* ==========================================================================
-   Listview Seperated
-
-   Default Mendix Listview Widget with listview items seperated
-========================================================================== */
-
+// Items as seperated blocks
 .listview-seperated.mx-listview {
     .mx-listview-item {
         border-radius: 4px;
@@ -107,13 +76,17 @@
     }
 }
 
+// Hover style activated
+.listview-hover.mx-listview {
+    .mx-listview-item {
+        &:hover,
+        &:active {
+            background-color: $grid-bg-hover !important;
+        }
+    }
+}
 
-/* ==========================================================================
-   Listview Stylingless
-
-   Default Mendix Listview Widget with listview items seperated
-========================================================================== */
-
+// Remove all styling
 .listview-stylingless.mx-listview {
     .mx-listview-item {
         background-color: transparent;

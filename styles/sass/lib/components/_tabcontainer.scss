@@ -33,13 +33,10 @@
     }
 }
 
-
-/* ==========================================================================
-   Tab Container Pills
-
-   Default Mendix Tab Container Widget rendered as Pills
-========================================================================== */
-
+//== Design Properties
+//## Helper classes to change the look and feel of the component
+//-------------------------------------------------------------------------------------------------------------------//
+// Style as pills
 .tab-pills.mx-tabcontainer {
     .mx-tabcontainer-tabs {
         border: 0;
@@ -63,13 +60,7 @@
     }
 }
 
-
-/* ==========================================================================
-   Tab Container Lined
-
-   Default Mendix Tab Container Widget rendered with tabs rendered without background
-========================================================================== */
-
+// Style with lines
 .tab-lined.mx-tabcontainer {
     .mx-tabcontainer-tabs {
         border-width: 3px;
@@ -104,13 +95,8 @@
     }
 }
 
-
-/* ==========================================================================
-   Tab Container Justified
-
-   Default Mendix Tab Container Widget rendered as justified
-========================================================================== */
-
+// Justified style
+// Lets your tabs take 100% of the width
 .tab-justified.mx-tabcontainer {
     .mx-tabcontainer-tabs {
         width: 100%;
@@ -139,13 +125,7 @@
     }
 }
 
-
-/* ==========================================================================
-   Tab Container Bordered
-
-   Default Mendix Tab Container Widget rendered with borders
-========================================================================== */
-
+// Bordered
 .tab-bordered.mx-tabcontainer {
     .mx-tabcontainer-tabs {
         margin: 0;
@@ -159,13 +139,7 @@
     }
 }
 
-
-/* ==========================================================================
-   Tab Container Mobile
-
-   Default Mendix Tab Container Widget rendered for mobile use
-========================================================================== */
-
+// Tab Styling Specific for mobile
 .tab-mobile.mx-tabcontainer {
     .mx-tabcontainer-tabs {
         margin: 0 0 10px 0 !important;

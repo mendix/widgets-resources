@@ -65,7 +65,10 @@
     white-space: normal;
 }
 
-// Buttons Alternate Style
+//== Design Properties
+//## Helper classes to change the look and feel of the component
+//-------------------------------------------------------------------------------------------------------------------//
+// Color variations 
 .btn-default {
     @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border-color, $btn-default-bg-hover);
 }
@@ -94,6 +97,14 @@
     @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border-color, $btn-danger-bg-hover);
 }
 
+// Transparent (button with no background just text)
+.btn-transparent,
+.btn-transparent:hover,
+.btn-transparent:focus {
+    border-style: none;
+    background-color: transparent;
+}
+
 // Button as link but with padding 
 .btn-link {
     color: $link-color;
@@ -103,14 +114,6 @@
         color: $link-hover-color;
         background-color: transparent;
     }
-}
-
-// Transparent
-.btn-transparent,
-.btn-transparent:hover,
-.btn-transparent:focus {
-    border-style: none;
-    background-color: transparent;
 }
 
 // Buttons Sizes
