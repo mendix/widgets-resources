@@ -38,7 +38,7 @@ $disabledUncheckedColor: #FFF
             content: ""
             width: 50%
             height: 100%
-        
+
 
         &:after
             left: 0
@@ -46,11 +46,11 @@ $disabledUncheckedColor: #FFF
             background: #fbfbfb
             transition: left .3s cubic-bezier(0.175, 0.885, 0.320, 1.275), padding .3s ease, margin .3s ease
             box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 4px 0 rgba(0, 0, 0, .08)
-        
+
 
         &:hover:after
             will-change: padding
-        
+
 
         &:before
             display: none
@@ -58,11 +58,17 @@ $disabledUncheckedColor: #FFF
         &:active
             box-shadow: inset 0 0 0 2em #e8eae9
             &:after
-                padding-right: .8em
+                width: 60%
 
         &.enabled
             background: $uncheckedColor
             cursor: pointer
+        
+        &.no-slider
+            &:after
+                display: none
+            &:active
+                box-shadow: none
 
     &:checked + .widget-boolean-slider-btn:after 
         left: 50%
@@ -72,8 +78,9 @@ $disabledUncheckedColor: #FFF
         background: $disabledCheckedColor
         &:active
             box-shadow: none
-            &:after 
-                margin-left: -.8em
+            &:after
+                left: 40%
+                width: 60%
 
     &.enabled
         &:checked + .widget-boolean-slider-btn 
