@@ -29,6 +29,7 @@ class BooleanSlider extends WidgetBase {
                 hasError: !!alertMessage,
                 isChecked: !!contextObject && contextObject.get(this.booleanAttribute) as boolean,
                 onClick: contextObject ? (value: boolean) => this.handleToggle(value) : null,
+                showSlider: !!contextObject,
                 widgetId: this.id
             },
             alertMessage ? createElement(ValidationAlert, { message: alertMessage }) : null

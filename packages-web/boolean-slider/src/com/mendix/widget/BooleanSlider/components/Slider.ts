@@ -9,6 +9,7 @@ export interface SliderProps {
     isChecked: boolean;
     enabled: boolean;
     hasError?: boolean;
+    showSlider?: boolean;
     onClick(checked: boolean): void;
 }
 
@@ -22,7 +23,10 @@ export const Slider = (props: SliderProps & { children?: React.ReactNode }) =>
             type: "checkbox"
         }),
         DOM.label({
-            className: classNames("widget-boolean-slider-btn", { enabled: props.enabled }),
+            className: classNames("widget-boolean-slider-btn", {
+                enabled: props.enabled,
+                "no-slider": !props.showSlider
+            }),
             htmlFor: "widget-boolean-slider-" + props.widgetId,
             onClick: props.enabled ? () => props.onClick(!props.isChecked) : null
         }),
