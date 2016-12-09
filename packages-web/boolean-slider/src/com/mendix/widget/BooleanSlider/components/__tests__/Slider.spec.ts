@@ -19,8 +19,7 @@ describe("Slider", () => {
         sliderProps = {
             enabled: true,
             isChecked: true,
-            onClick: () => { console.log("clicked"); },
-            widgetId: "slider"
+            onClick: () => { console.log("clicked"); }
         };
         createAndFindElements(sliderProps);
     });
@@ -29,14 +28,12 @@ describe("Slider", () => {
         // toBeElement & toMatchStructure were returning unexpected errors
         expect(slider.children().length).toBe(2);
         expect(slider.children().first().type()).toBe("input");
-        expect(slider.childAt(1).type()).toBe("label");
+        expect(slider.childAt(1).type()).toBe("div");
 
         expect(checkbox.props().type).toBe("checkbox");
-        expect(checkbox.props().id).toBe("widget-boolean-slider-" + sliderProps.widgetId);
         expect(checkbox.hasClass("enabled")).toBe(true);
         expect(checkbox.props().checked).toBe(true);
 
-        expect(label.props().htmlFor).toBe("widget-boolean-slider-" + sliderProps.widgetId);
         expect(label.hasClass("enabled")).toBe(true);
         expect(typeof label.props().onClick).toBe("function");
     });
@@ -50,8 +47,7 @@ describe("Slider", () => {
                     sliderProps.isChecked = false;
                     slider.setProps(sliderProps);
                     checkbox = slider.find("input.widget-boolean-slider-checkbox");
-                },
-                widgetId: "slider"
+                }
             };
             createAndFindElements(sliderProps);
         });
@@ -76,8 +72,7 @@ describe("Slider", () => {
                     sliderProps.isChecked = true;
                     slider.setProps(sliderProps);
                     checkbox = slider.find("input.widget-boolean-slider-checkbox");
-                },
-                widgetId: "slider"
+                }
             };
             createAndFindElements(sliderProps);
         });
@@ -102,8 +97,7 @@ describe("Slider", () => {
                     sliderProps.isChecked = !sliderProps.isChecked;
                     slider.setProps(sliderProps);
                     checkbox = slider.find("input.widget-boolean-slider-checkbox");
-                },
-                widgetId: "slider"
+                }
             };
             createAndFindElements(sliderProps);
         });
@@ -129,8 +123,7 @@ describe("Slider", () => {
                     enabled: true,
                     hasError: false,
                     isChecked: false,
-                    onClick: () => { console.log("clicked"); },
-                    widgetId: "slider"
+                    onClick: () => { console.log("clicked"); }
                 };
                 createAndFindElements(sliderProps);
             });
@@ -150,8 +143,7 @@ describe("Slider", () => {
                     sliderProps.isChecked = !sliderProps.isChecked;
                     slider.setProps(sliderProps);
                     checkbox = slider.find("input.widget-boolean-slider-checkbox");
-                },
-                widgetId: "slider"
+                }
             };
             createAndFindElements(sliderProps);
         });
@@ -177,8 +169,7 @@ describe("Slider", () => {
                     enabled: false,
                     hasError: false,
                     isChecked: false,
-                    onClick: () => { console.log("clicked"); },
-                    widgetId: "slider"
+                    onClick: () => { console.log("clicked"); }
                 };
                 createAndFindElements(sliderProps);
             });
@@ -195,8 +186,7 @@ describe("Slider", () => {
                 enabled: false,
                 hasError: true,
                 isChecked: false,
-                onClick: () => { console.log("clicked"); },
-                widgetId: "slider"
+                onClick: () => { console.log("clicked"); }
             };
             createAndFindElements(sliderProps, errorNode);
         });
@@ -216,8 +206,7 @@ describe("Slider", () => {
                 enabled: false,
                 hasError: false,
                 isChecked: false,
-                onClick: () => { console.log("clicked"); },
-                widgetId: "slider"
+                onClick: () => { console.log("clicked"); }
             };
             createAndFindElements(sliderProps, errorNode);
         });
