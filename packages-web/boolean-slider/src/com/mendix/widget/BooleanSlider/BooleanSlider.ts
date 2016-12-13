@@ -14,31 +14,31 @@ class BooleanSlider extends WidgetBase {
 
     private contextObject: mendix.lib.MxObject;
 
-    update(contextObject: mendix.lib.MxObject, callback: Function) {
+    update(contextObject: mendix.lib.MxObject, callback?: Function) {
         this.contextObject = contextObject;
         this.resetSubscriptions();
         this.updateRendering();
 
-        callback();
+        if (callback) { callback(); }
     }
 
-    updateRendering(alertMessage?: string) {
+    uninitialize(): boolean {
+        unmountComponentAtNode(this.domNode);
+
+        return true;
+    }
+
+    private updateRendering(alertMessage?: string) {
         const contextObject = this.contextObject;
         render(createElement(Slider, {
                 enabled: !this.readOnly && (contextObject && !contextObject.isReadonlyAttr(this.booleanAttribute)),
                 hasError: !!alertMessage,
-                isChecked: !!contextObject && contextObject.get(this.booleanAttribute) as boolean,
+                isChecked: contextObject && contextObject.get(this.booleanAttribute) as boolean,
                 onClick: contextObject ? (value: boolean) => this.handleToggle(value) : null,
-                showSlider: !!contextObject,
+                showSlider: !!contextObject
             },
             alertMessage ? createElement(ValidationAlert, { message: alertMessage }) : null
         ), this.domNode);
-    }
-
-    uninitialize() {
-        unmountComponentAtNode(this.domNode);
-
-        return true;
     }
 
     private handleToggle(value: boolean) {

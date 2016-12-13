@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget id="com.mendix.widget.BooleanSlider.BooleanSlider" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../../xsd/widget.xsd">
-    <name>BooleanSlider</name>
-    <description>Switch between the two boolean states</description>
+    <name>Boolean slider</name>
+    <description>Toggle a boolean attribute</description>
     <icon/>
     <properties>
         <property key="booleanAttribute" type="attribute" required="true">

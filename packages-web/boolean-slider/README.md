@@ -1,9 +1,9 @@
 # Boolean Slider
-Switch between the two boolean states (true/false).
+Toggle a boolean attribute.
 
 ## Features
 * Deactivate when attribute or context is read-only
-* Execute a microflow when the state is changed
+* Execute a microflow when toggled
 
 ## Dependencies
 Mendix 6.
