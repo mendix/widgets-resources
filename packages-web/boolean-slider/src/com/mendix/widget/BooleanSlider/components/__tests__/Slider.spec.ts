@@ -15,168 +15,123 @@ describe("Slider", () => {
         label = slider.find(".widget-boolean-slider-btn");
     };
 
-    beforeEach(() => {
-        sliderProps = {
+    it("should render the full slider structure", () => {
+        createAndFindElements({
             enabled: true,
-            isChecked: true,
-            onClick: () => { console.log("clicked"); }
-        };
-        createAndFindElements(sliderProps);
-    });
+            isChecked: true
+        });
 
-    it("renders structure correctly", () => {
-        // toBeElement & toMatchStructure were returning unexpected errors
-        expect(slider.children().length).toBe(2);
-        expect(slider.children().first().type()).toBe("input");
-        expect(slider.childAt(1).type()).toBe("div");
-
-        expect(checkbox.props().type).toBe("checkbox");
-        expect(checkbox.hasClass("enabled")).toBe(true);
-        expect(checkbox.props().checked).toBe(true);
-
-        expect(label.hasClass("enabled")).toBe(true);
-        expect(typeof label.props().onClick).toBe("function");
+        expect(slider).toBeElement(
+            DOM.div({ className: "widget-boolean-slider" },
+                DOM.input({
+                    checked: true,
+                    className: "widget-boolean-slider-checkbox enabled",
+                    readOnly: true,
+                    type: "checkbox"
+                }),
+                DOM.div({
+                    className: "widget-boolean-slider-btn enabled",
+                    onClick: jasmine.any(Function) as any
+                })
+            )
+        );
     });
 
     describe("that is checked", () => {
-        beforeEach(() => {
-            sliderProps = {
+        it("should render a checked checkbox", () => {
+            createAndFindElements({
                 enabled: true,
-                isChecked: true,
-                onClick: () => {
-                    sliderProps.isChecked = false;
-                    slider.setProps(sliderProps);
-                    checkbox = slider.find("input.widget-boolean-slider-checkbox");
-                }
-            };
-            createAndFindElements(sliderProps);
-        });
+                isChecked: true
+            });
 
-        it("renders a checkbox that is also checked", () => {
             expect(checkbox.props().checked).toBe(true);
-        });
-
-        it("gets unchecked when clicked", () => {
-            label.simulate("click");
-
-            expect(checkbox.props().checked).toBe(false);
         });
     });
 
     describe("that is unchecked", () => {
-        beforeEach(() => {
-            sliderProps = {
+        it("should renders an unchecked checkbox", () => { // should render a toggle that is switched on 
+            createAndFindElements({
                 enabled: true,
-                isChecked: false,
-                onClick: () => {
-                    sliderProps.isChecked = true;
-                    slider.setProps(sliderProps);
-                    checkbox = slider.find("input.widget-boolean-slider-checkbox");
-                }
-            };
-            createAndFindElements(sliderProps);
-        });
+                isChecked: false
+            });
 
-        it("renders a checkbox that is also unchecked", () => {
             expect(checkbox.props().checked).toBe(false);
-        });
-
-        it("can be checked when clicked", () => {
-            label.simulate("click");
-
-            expect(checkbox.props().checked).toBe(true);
         });
     });
 
     describe("that is enabled", () => {
-        beforeEach(() => {
-            sliderProps = {
+        it("should have the enabled class", () => {
+            createAndFindElements({
                 enabled: true,
-                isChecked: true,
-                onClick: () => {
-                    sliderProps.isChecked = !sliderProps.isChecked;
-                    slider.setProps(sliderProps);
-                    checkbox = slider.find("input.widget-boolean-slider-checkbox");
-                }
-            };
-            createAndFindElements(sliderProps);
-        });
+                isChecked: true
+            });
 
-        it("has the class enabled", () => {
             expect(checkbox.hasClass("enabled")).toBe(true);
             expect(label.hasClass("enabled")).toBe(true);
         });
 
-        it("is toggled when clicked", () => {
-            label.simulate("click");
-
-            expect(checkbox.props().checked).toBe(false);
-
-            label.simulate("click");
-
-            expect(checkbox.props().checked).toBe(true);
-        });
-
-        describe("and unchecked", () => {
-            beforeEach(() => {
-                sliderProps = {
-                    enabled: true,
-                    hasError: false,
-                    isChecked: false,
-                    onClick: () => { console.log("clicked"); }
-                };
-                createAndFindElements(sliderProps);
+        it("should handle click event", () => {
+            const onClick = jasmine.createSpy("onClick");
+            createAndFindElements({
+                enabled: true,
+                isChecked: true,
+                onClick
             });
 
-            it("renders a checkbox that is also unchecked", () => {
-                expect(checkbox.props().checked).toBe(false);
-            });
+            label.simulate("click");
+
+            expect(onClick).toHaveBeenCalledTimes(1);
         });
     });
 
     describe("that is disabled", () => {
-        beforeEach(() => {
-            sliderProps = {
+        it("should not have the enabled class", () => {
+            createAndFindElements({
                 enabled: false,
-                isChecked: true,
-                onClick: () => {
-                    sliderProps.isChecked = !sliderProps.isChecked;
-                    slider.setProps(sliderProps);
-                    checkbox = slider.find("input.widget-boolean-slider-checkbox");
-                }
-            };
-            createAndFindElements(sliderProps);
-        });
+                isChecked: true
+            });
 
-        it("does not have the class enabled", () => {
             expect(checkbox.hasClass("enabled")).toBe(false);
             expect(label.hasClass("enabled")).toBe(false);
         });
 
-        it("is not toggled when clicked", () => {
+        it("should not handle a click event", () => {
+            const onClick = jasmine.createSpy("onClick");
+            createAndFindElements({
+                enabled: false,
+                isChecked: true,
+                onClick
+            });
+
             label.simulate("click");
 
-            expect(checkbox.props().checked).toBe(true);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+    });
 
-            label.simulate("click");
+    describe("without an slider", () => {
+        it("should have the no slider class", () => {
+            createAndFindElements({
+                enabled: true,
+                isChecked: true,
+                showSlider: false
+            });
 
-            expect(checkbox.props().checked).toBe(true);
+            expect(label).toHaveClass("no-slider");
         });
 
-        describe("and unchecked", () => {
-            beforeEach(() => {
-                sliderProps = {
-                    enabled: false,
-                    hasError: false,
-                    isChecked: false,
-                    onClick: () => { console.log("clicked"); }
-                };
-                createAndFindElements(sliderProps);
+        it("should not handle a click event", () => {
+            const onClick = jasmine.createSpy("onClick");
+            createAndFindElements({
+                enabled: true,
+                isChecked: true,
+                showSlider: false,
+                onClick
             });
 
-            it("renders a checkbox that is also unchecked", () => {
-                expect(checkbox.props().checked).toBe(false);
-            });
+            label.simulate("click");
+
+            expect(onClick).not.toHaveBeenCalled();
         });
     });
 
@@ -185,17 +140,16 @@ describe("Slider", () => {
             sliderProps = {
                 enabled: false,
                 hasError: true,
-                isChecked: false,
-                onClick: () => { console.log("clicked"); }
+                isChecked: false
             };
             createAndFindElements(sliderProps, errorNode);
         });
 
-        it("has the class has-error", () => {
+        it("should have the class has-error", () => {
             expect(slider.hasClass("has-error")).toBe(true);
         });
 
-        it("shows the supplied error", () => {
+        it("should show the supplied error", () => {
             expect(slider.childAt(2)).toBeElement(errorNode);
         });
     });
@@ -211,11 +165,11 @@ describe("Slider", () => {
             createAndFindElements(sliderProps, errorNode);
         });
 
-        it("does not have the class has-error", () => {
+        it("should not have the class has-error", () => {
             expect(slider.hasClass("has-error")).toBe(false);
         });
 
-        it("does not show any error", () => {
+        it("should not show any error message", () => {
             expect(slider.childAt(2).type()).toBe(null);
         });
     });
