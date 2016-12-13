@@ -17,8 +17,8 @@ describe("Slider", () => {
 
     it("should render the full slider structure", () => {
         createAndFindElements({
-            enabled: true,
-            isChecked: true
+            isChecked: true,
+            status: "enabled"
         });
 
         expect(slider).toBeElement(
@@ -37,22 +37,22 @@ describe("Slider", () => {
         );
     });
 
-    describe("that is checked", () => {
-        it("should render a checked checkbox", () => {
+    describe("that is true", () => {
+        it("should be checked", () => {
             createAndFindElements({
-                enabled: true,
-                isChecked: true
+                isChecked: true,
+                status: "enabled"
             });
 
             expect(checkbox.props().checked).toBe(true);
         });
     });
 
-    describe("that is unchecked", () => {
-        it("should renders an unchecked checkbox", () => { // should render a toggle that is switched on 
+    describe("that is false", () => {
+        it("should be unchecked", () => {
             createAndFindElements({
-                enabled: true,
-                isChecked: false
+                isChecked: false,
+                status: "enabled"
             });
 
             expect(checkbox.props().checked).toBe(false);
@@ -62,8 +62,8 @@ describe("Slider", () => {
     describe("that is enabled", () => {
         it("should have the enabled class", () => {
             createAndFindElements({
-                enabled: true,
-                isChecked: true
+                isChecked: true,
+                status: "enabled"
             });
 
             expect(checkbox.hasClass("enabled")).toBe(true);
@@ -73,21 +73,21 @@ describe("Slider", () => {
         it("should handle click event", () => {
             const onClick = jasmine.createSpy("onClick");
             createAndFindElements({
-                enabled: true,
                 isChecked: true,
-                onClick
+                onClick,
+                status: "enabled"
             });
 
             label.simulate("click");
 
-            expect(onClick).toHaveBeenCalledTimes(1);
+            expect(onClick).toHaveBeenCalled();
         });
     });
 
     describe("that is disabled", () => {
         it("should not have the enabled class", () => {
             createAndFindElements({
-                enabled: false,
+                status: "disabled",
                 isChecked: true
             });
 
@@ -98,7 +98,7 @@ describe("Slider", () => {
         it("should not handle a click event", () => {
             const onClick = jasmine.createSpy("onClick");
             createAndFindElements({
-                enabled: false,
+                status: "disabled",
                 isChecked: true,
                 onClick
             });
@@ -109,12 +109,11 @@ describe("Slider", () => {
         });
     });
 
-    describe("without an slider", () => {
-        it("should have the no slider class", () => {
+    describe("without a context", () => {
+        it("should have the no-slider class", () => {
             createAndFindElements({
-                enabled: true,
-                isChecked: true,
-                showSlider: false
+                isChecked: false,
+                status: "no-context"
             });
 
             expect(label).toHaveClass("no-slider");
@@ -123,10 +122,9 @@ describe("Slider", () => {
         it("should not handle a click event", () => {
             const onClick = jasmine.createSpy("onClick");
             createAndFindElements({
-                enabled: true,
                 isChecked: true,
-                showSlider: false,
-                onClick
+                onClick,
+                status: "no-context"
             });
 
             label.simulate("click");
@@ -138,7 +136,7 @@ describe("Slider", () => {
     describe("that has an error", () => {
         beforeEach(() => {
             sliderProps = {
-                enabled: false,
+                status: "enabled",
                 hasError: true,
                 isChecked: false
             };
@@ -157,7 +155,7 @@ describe("Slider", () => {
     describe("that has no error", () => {
         beforeEach(() => {
             sliderProps = {
-                enabled: false,
+                status: "enabled",
                 hasError: false,
                 isChecked: false,
                 onClick: () => { console.log("clicked"); }

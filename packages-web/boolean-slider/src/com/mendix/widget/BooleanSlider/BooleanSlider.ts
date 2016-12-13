@@ -4,7 +4,7 @@ import * as WidgetBase from "mxui/widget/_WidgetBase";
 import { createElement } from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 
-import { Slider } from "./components/Slider";
+import { Slider, SliderStatus } from "./components/Slider";
 import { ValidationAlert } from "./components/ValidationAlert";
 
 class BooleanSlider extends WidgetBase {
@@ -19,7 +19,7 @@ class BooleanSlider extends WidgetBase {
         this.resetSubscriptions();
         this.updateRendering();
 
-        if (callback) { callback(); }
+        if (callback) callback();
     }
 
     uninitialize(): boolean {
@@ -30,12 +30,15 @@ class BooleanSlider extends WidgetBase {
 
     private updateRendering(alertMessage?: string) {
         const contextObject = this.contextObject;
+        const status: SliderStatus = contextObject
+            ? !this.readOnly && !contextObject.isReadonlyAttr(this.booleanAttribute) ? "enabled" : "disabled"
+            : "no-context";
+
         render(createElement(Slider, {
-                enabled: !this.readOnly && (contextObject && !contextObject.isReadonlyAttr(this.booleanAttribute)),
                 hasError: !!alertMessage,
-                isChecked: contextObject && contextObject.get(this.booleanAttribute) as boolean,
-                onClick: contextObject ? (value: boolean) => this.handleToggle(value) : null,
-                showSlider: !!contextObject
+                isChecked: !!(contextObject && contextObject.get(this.booleanAttribute)),
+                onClick: (value: boolean) => this.handleToggle(value),
+                status
             },
             alertMessage ? createElement(ValidationAlert, { message: alertMessage }) : null
         ), this.domNode);
@@ -49,7 +52,7 @@ class BooleanSlider extends WidgetBase {
     private executeAction(actionname: string, guids: string[]) {
         if (actionname) {
             window.mx.ui.action(actionname, {
-                error: (error: Error) =>
+                error: error =>
                     window.mx.ui.error(`An error occurred while executing microflow: ${error.message}`, true),
                 params: {
                     applyto: "selection",
@@ -75,7 +78,7 @@ class BooleanSlider extends WidgetBase {
             });
 
             this.subscribe({
-                callback: (validations: mendix.lib.ObjectValidation[]) => this.handleValidations(validations),
+                callback: validations => this.handleValidations(validations),
                 guid: this.contextObject.getGuid(),
                 val: true
             });
