@@ -1,4 +1,3 @@
-// tslint:disable ordered-imports
 import { DOM } from "react";
 import * as classNames from "classnames";
 
@@ -7,9 +6,9 @@ import "../ui/Slider.sass";
 export interface SliderProps {
     isChecked: boolean;
     enabled: boolean;
-    hasError?: boolean;
-    showSlider?: boolean;
-    onClick(checked: boolean): void;
+    hasError: boolean;
+    showSlider: boolean;
+    onClick?: (checked: boolean) => void;
 }
 
 export const Slider = (props: SliderProps & { children?: React.ReactNode }) =>

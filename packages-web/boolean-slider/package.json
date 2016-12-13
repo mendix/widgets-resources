@@ -1,7 +1,7 @@
 {
   "name": "booleanslider",
   "version": "0.1.0",
-  "description": "Switch between the two boolean states.",
+  "description": "Toggle a boolean attribute.",
   "scripts": {
     "pretest": "tsc",
     "test": "karma start --single-run && node tests/remap.js"
@@ -51,6 +51,7 @@
     "node-sass": "^3.13.0",
     "react-addons-test-utils": "~15.3.2",
     "remap-istanbul": "^0.6.4",
+    "sass-loader": "^4.0.2",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
     "ts-loader": "^0.9.4",
