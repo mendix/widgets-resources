@@ -1,24 +1,43 @@
 /* ==========================================================================
    Page Header
 ========================================================================== */
-.pageheader {
-	border-bottom: 2px solid $default-border-color;
-	@include default-spacing($type: margin, $direction: bottom, $device: responsive);
-}
-.pageheader.pageheader-fullwidth {
-	background-color: $bg-color-secondary;
-	border-bottom: 1px solid $default-border-color;
-	margin-bottom: 0;
-}
-.profile-tablet {
-    .pageheader.pageheader-fullwidth {
-        border-style: none;
+
+.pageheader,
+.pageheader-fullwidth {
+    border-bottom: 2px solid $default-border-color;
+    @include default-spacing($type: margin, $direction: bottom, $device: responsive);
+    @include override-text-properties($color: $header-text-color);
+    .pageheader-title {
+        color: $header-text-color;
+    }
+    .pageheader-subtitle {
+        color: $header-text-color-detail;
+    }
+    select.form-control {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        padding-right: 30px;
+        $arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15px' height='8px'><polyline id='Line' fill='none' stroke='#{$header-text-color}' points='0.5 0.5 6 6 11.545361 0.5'></polyline></svg>";
+        background-image: url($arrow);
+        background-repeat: no-repeat;
+        background-position: calc(100% - #{$form-input-padding-x}) center;
     }
 }
+
+// Elements
 .pageheader-title {
-	margin-bottom: 0;
-	margin-top: 0;
+    margin-bottom: 0;
+    margin-top: 0;
 }
-.pageheader-subtitle {
-	color: $font-color-detail;
+
+.pageheader-subtitle {}
+
+.pageheader-footer {
+	@include default-spacing($type: margin, $direction: top, $device: responsive);
+}
+// Variation
+.pageheader-fullwidth {
+    background-color: $header-bg-color;
+    border-bottom: 1px solid $default-border-color;
+    margin-bottom: 0;
 }

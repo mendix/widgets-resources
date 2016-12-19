@@ -4,8 +4,7 @@
    Used in default forms
 ========================================================================== */
 .formblock {
-	margin-bottom: 20px;
-	margin-top: 20px;
+	@include default-spacing($type: margin, $direction: bottom, $device: responsive);
 }
 .formblock-header {
 	color: $brand-primary;

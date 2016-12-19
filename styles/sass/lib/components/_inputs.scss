@@ -9,6 +9,7 @@
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    -webkit-box-shadow: none;
     box-shadow: none;
     display: block;
     padding: $form-input-padding-y $form-input-padding-x;
@@ -21,9 +22,14 @@
     color: $form-input-color;
     font-size: $form-input-font-size;
     line-height: $form-input-line-height;
+    @if $form-input-style==lined {
+        @extend .form-control-lined;
+    }
 }
 
 .form-control:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
     border-color: $form-input-border-focus-color;
     background-color: $form-input-bg-focus;
     outline: 0;
@@ -31,6 +37,27 @@
 
 textarea.form-control {
     height: auto;
+}
+
+select.form-control {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    padding-right: 30px;
+    $arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15px' height='8px'><polyline id='Line' fill='none' stroke='#{$form-input-color}' points='0.5 0.5 6 6 11.545361 0.5'></polyline></svg>";
+    background-image: url($arrow);
+    background-repeat: no-repeat;
+    background-position: calc(100% - #{$form-input-padding-x}) center;
+}
+
+// Lined
+.form-control-lined {
+    border: 0;
+    background-color: transparent;
+    border-radius: 0;
+    border-bottom: 1px solid $form-input-border-color;
+    &:focus {
+        background-color: transparent;
+    }
 }
 
 // Read only fom control class

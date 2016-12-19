@@ -19,7 +19,7 @@
             background-color: $grid-bg-header;
         }
         .mx-datagrid-head-wrapper {
-            padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
+            padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
             vertical-align: middle;
             .mx-datagrid-head-caption {
                 white-space: normal;
@@ -31,7 +31,7 @@
         /* Table Body */
         .mx-datagrid-body tr {
             td {
-                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
+                padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
                 vertical-align: middle;
                 border-width: 0;
                 border-color: $grid-border-color;
@@ -55,12 +55,12 @@
         /* Table Footer */
         .mx-datagrid-foot {
             >tr>th {
-                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
+                padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
                 border-width: 0;
                 background-color: $grid-footer-bg;
             }
             >tr>td {
-                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
+                padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
                 font-weight: bold;
                 border-width: 0;
                 background-color: $grid-bg;
@@ -153,30 +153,31 @@
 }
 
 // Datagrid Row Sizes
-.datagrid-large.mx-datagrid {
+.datagrid-lg.mx-datagrid {
     .mx-datagrid-head-table {
         .mx-datagrid-head-wrapper {
-            padding: ($padding-table-cell-top * 2) ($padding-table-cell-right * 2) ($padding-table-cell-bottom * 2) ($padding-table-cell-left * 2);
+            padding: ($grid-padding-top * 2) ($grid-padding-right * 2) ($grid-padding-bottom * 2) ($grid-padding-left * 2);
         }
     }
     .mx-datagrid-body-table {
         .mx-datagrid-body tr {
             td {
-                padding: ($padding-table-cell-top * 2) ($padding-table-cell-right * 2) ($padding-table-cell-bottom * 2) ($padding-table-cell-left * 2);
+                padding: ($grid-padding-top * 2) ($grid-padding-right * 2) ($grid-padding-bottom * 2) ($grid-padding-left * 2);
             }
         }
     }
 }
-.datagrid-small.mx-datagrid {
+
+.datagrid-sm.mx-datagrid {
     .mx-datagrid-head-table {
         .mx-datagrid-head-wrapper {
-            padding: ($padding-table-cell-top / 2) ($padding-table-cell-right / 2) ($padding-table-cell-bottom / 2) ($padding-table-cell-left / 2);
+            padding: ($grid-padding-top / 2) ($grid-padding-right / 2) ($grid-padding-bottom / 2) ($grid-padding-left / 2);
         }
     }
     .mx-datagrid-body-table {
         .mx-datagrid-body tr {
             td {
-                padding: ($padding-table-cell-top / 2) ($padding-table-cell-right / 2) ($padding-table-cell-bottom / 2) ($padding-table-cell-left / 2);
+                padding: ($grid-padding-top / 2) ($grid-padding-right / 2) ($grid-padding-bottom / 2) (grid-padding-left/ 2);
             }
         }
     }

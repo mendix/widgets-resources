@@ -1,28 +1,41 @@
 /* ==========================================================================
    Dashboard Card
 ========================================================================== */
-.dashboardcard {
-	padding: 20px;
-	margin: 0 0 40px 0;
-	border: 1px solid $default-border-color;
-	background-color: #FFF;
-	border-radius: 3px;
-}
-.dashboardcard-title {
-	margin-top: 0;
-}
-.dashboardcard-subtitle {
-	font-size: 14px;
-	color: $font-color-detail;
-	margin-bottom: 10px;
-}
-.dashboardcard-link {
-	font-size: $font-size-small;
-}
 
-@media only screen and (max-width: 960px) {
-	.dashboardcard {
-		padding: 10px;
-		margin: 0 0 20px 0;
-	}
+.dashboardcard {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border: 1px solid $default-border-color;
+    border-radius: 3px;
+    background: #fff;
+    color: $font-base-color !important;
+    -webkit-box-shadow: 0 10px 16px -8px rgba(0, 0, 0, .16);
+    -moz-box-shadow: 0 10px 16px -8px rgba(0, 0, 0, .16);
+    box-shadow: 0 10px 16px -8px rgba(0, 0, 0, .16);
+    @include default-spacing($type: padding, $direction: all, $device: responsive);
+    @include default-spacing($type: margin, $direction: bottom, $device: responsive);
+    @include font(bold);
+    img,
+    &.btn>span {
+        display: block;
+        margin: 10px auto 20px auto;
+    }
+    img {
+        height: 72px;
+    }
+    &.btn {
+        background: #fff;
+        >span {
+            font-size: 72px;
+        }
+        &:hover,
+        &focus {
+            border-color: $font-base-color;
+            background-color: #FFF;
+        }
+    }
 }

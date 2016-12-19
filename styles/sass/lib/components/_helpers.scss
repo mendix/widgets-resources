@@ -47,15 +47,32 @@
     padding-bottom: 0
 }
 
+.no-margin {
+    margin: 0;
+}
 
-// Vertical Align Elements in a bootstrap row, add class on row 
+// Vertical Align Elements in a bootstrap grid (place on container)
 .v-center {
     display: table;
     width: 100%;
+    &:before,
+    &:after {
+        display: none;
+    }
+    .row {
+        display: table-row;
+    }
     div[class*='col-'] {
         display: table-cell;
         vertical-align: middle;
         float: none;
+
+        &:first-child {
+            padding-left: 0;
+        }
+        &:last-child {
+            padding-right: 0;
+        }
     }
 }
 
@@ -76,6 +93,7 @@
     display: table-cell;
 }
 
+// Align options
 .align-top {
     vertical-align: top;
 }

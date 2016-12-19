@@ -1,0 +1,25 @@
+.hotelheader {
+    border-bottom: 15px solid $brand-primary;
+    background-color: $header-bg-color;
+    @include override-text-properties($color: $header-text-color);
+    select.form-control {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        padding-right: 30px;
+        $arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15px' height='8px'><polyline id='Line' fill='none' stroke='#{$header-text-color}' points='0.5 0.5 6 6 11.545361 0.5'></polyline></svg>";
+        background-image: url($arrow);
+        background-repeat: no-repeat;
+        background-position: calc(100% - #{$form-input-padding-x}) center;
+    }
+    .hotelheader-title {
+        color: $header-text-color;
+    }
+}
+
+.hotelheader-footer {
+    @include default-spacing($type: margin, $direction: bottom, $device: responsive);
+    .btn,
+    .form-control {
+        margin-bottom: 15px;  
+    }
+}

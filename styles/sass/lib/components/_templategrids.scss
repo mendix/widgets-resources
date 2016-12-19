@@ -10,7 +10,7 @@
     }
     .mx-templategrid-item {
         background-color: $grid-bg;
-        padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
+        padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
         cursor: default;
         &:hover {
             background-color: transparent;
@@ -96,5 +96,18 @@
     .mx-templategrid-item {
         background-color: transparent;
         border: 0;
+    }
+}
+
+// Templategrid Row Sizes
+.templategrid-lg.mx-templategrid {
+    .mx-templategrid-item {
+        padding: ($grid-padding-top * 2) ($grid-padding-right * 2) ($grid-padding-bottom * 2) ($grid-padding-left * 2);
+    }
+}
+
+.templategrid-sm.mx-templategrid {
+    .mx-templategrid-item {
+        padding: ($grid-padding-top / 2) ($grid-padding-right / 2) ($grid-padding-bottom / 2) ($grid-padding-left / 2);
     }
 }

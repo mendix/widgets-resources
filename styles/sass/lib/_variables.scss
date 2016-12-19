@@ -11,6 +11,16 @@
 //
 
 
+//== Gray Shades
+//## Different gray shades to be used for our variables and components
+$gray-darker:                           #222 !default;
+$gray-dark:                             #333 !default;
+$gray:                                  #555 !default;
+$gray-light:                            #999 !default;
+$gray-primary:                          #DDD !default;
+$gray-lighter:                          #eee !default;
+
+
 //== Step 1: Brand Colors
 $brand-default:                         #DDDDDD !default;    
 $brand-primary:                         #59C2E6 !default;    
@@ -27,9 +37,13 @@ $brand-logo-width:						40px !default; // Only used for CSS brand logo
 
 //== Step 2: UI Customization
 
+// Global Border Color
+$default-border-color:                  $gray-primary !default;
+
 // Topbar 
 $topbar-bg:                             #FFF !default;
 $topbar-minimalheight:                  80px !default;
+$topbar-border-color:                   $default-border-color !default;
 
 // Sidebar 
 $sidebar-bg:                            $brand-inverse !default;
@@ -53,6 +67,7 @@ $link-hover-color:                      darken($link-color, 15%) !default;
 
 
 
+
 //
 //  █████╗ ██████╗ ██╗   ██╗ █████╗ ███╗   ██╗ ██████╗███████╗██████╗ 
 // ██╔══██╗██╔══██╗██║   ██║██╔══██╗████╗  ██║██╔════╝██╔════╝██╔══██╗
@@ -61,19 +76,6 @@ $link-hover-color:                      darken($link-color, 15%) !default;
 // ██║  ██║██████╔╝ ╚████╔╝ ██║  ██║██║ ╚████║╚██████╗███████╗██████╔╝
 // ╚═╝  ╚═╝╚═════╝   ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝╚══════╝╚═════╝ 
 //
-
-
-//== Gray Shades
-//## Different gray shades to be used for our variables and components
-$gray-darker:                           #222 !default;
-$gray-dark:                             #333 !default;
-$gray:                                  #555 !default;
-$gray-light:                            #999 !default;
-$gray-primary:                          #DDD !default;
-$gray-lighter:                          #eee !default;
-
-
-
 
 
 //== Typography
@@ -113,18 +115,15 @@ $font-size-h6:                          11px !default;
 
 // Font Header Color
 $font-color-header:				        #000 !default;
-$font-color-detail:                     $gray;
+$font-color-detail:                     $gray !default;
 
 // Line Height
 $line-height-base:                      1.428571429 !default;
 
+// Spacing
+$font-header-margin:					10px 0 20px 0 !default;
 
 
-
-
-//== Global Border Color
-// The default border color used by Datagrid, Listview, Tables, Dataview, Modals and more
-$default-border-color:                  $gray-primary !default;
 
 
 
@@ -173,13 +172,16 @@ $navtopbar-sub-color-hover:             $brand-primary !default;
 $navtopbar-sub-color-active:            $brand-primary !default;
 
 //## Used in layouts/base
-$navtopbar-border-color:                $default-border-color !default;
+$navtopbar-border-color:                $topbar-border-color !default;
 
 
 
 
 //== Form
 //## Used in components/inputs
+
+// Values that can be used default | lined 
+$form-input-style:                      default !default;
 
 // Form Label  
 $form-label-color:                      #666 !default;        
@@ -214,6 +216,10 @@ $form-group-gutter:                     15px !default;
 
 //== Buttons
 //## Define background-color, border-color and text. Used in components/buttons
+
+// Default button style 
+$btn-bordered:                          false !default; // Default value false, set to true if you want this effect
+$btn-border-radius:                     4px !default; 
 
 // Button Text Size
 $btn-font-size:                         12px !default;
@@ -253,6 +259,16 @@ $btn-info-bg-hover:                     mix($brand-info, black, 80%) !default;
 $btn-success-bg-hover:                  mix($brand-success, black, 80%) !default;
 $btn-warning-bg-hover:                  mix($brand-warning, black, 80%) !default;
 $btn-danger-bg-hover:                   mix($brand-danger, black, 80%) !default;
+
+
+
+
+
+//== Header blocks
+//## Define look and feel over multible building blocks that serve as header
+$header-bg-color:                       $topbar-bg !default;           
+$header-text-color:                     #FFF !default;
+$header-text-color-detail:              $font-color-detail !default;
 
 
 
@@ -314,6 +330,12 @@ $color-danger-lighter:                  mix($brand-danger, white, 20%) !default;
 
 // Default Border Colors
 $grid-border-color:                     $default-border-color !default;
+
+// Spacing
+$grid-padding-top:                      10px !default;                   
+$grid-padding-right:                    10px !default;    
+$grid-padding-bottom:                   10px !default;    
+$grid-padding-left:                     10px !default;    
 
 // Background Colors
 $grid-bg:                               #FFF !default;
@@ -486,26 +508,6 @@ $callout-success-bg:                    $color-success-lighter !default;
 $callout-warning-bg:                    $color-warning-lighter !default; 
 $callout-danger-bg:                     $color-danger-lighter !default;
 
-
-
-
-//== Mobile
-//## 
-
-//== Mobile Header
-//## Specific mobile widgets and components (used in mobile/components/mx-header)
-
-// Height
-$m-header-height:                       44px !default;
-
-// Background Color
-$m-header-bg:                           $topbar-bg !default;
-
-// Text Color
-$m-header-color:                        $font-base-color !default;
-
-// Link Color
-$m-header-link-color:                   $link-color !default;
 
 
 

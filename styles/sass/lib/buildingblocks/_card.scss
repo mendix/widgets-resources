@@ -78,3 +78,9 @@
 .card-link {
 	font-size: $font-size-small;
 }
+
+// variaton 
+.card-spaceless {
+	@extend .card;
+	padding: 0;
+}

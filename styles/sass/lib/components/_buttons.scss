@@ -26,7 +26,7 @@
     vertical-align: middle;
     white-space: nowrap;
     border: 1px solid transparent;
-    border-radius: 4px;
+    border-radius: $btn-border-radius;
     background-color: $btn-default-bg;
     background-image: none;
     box-shadow: none;
@@ -36,6 +36,10 @@
     &:active {
         outline: none;
         box-shadow: none;
+    }
+    
+    @if $btn-bordered != false {
+        @extend .btn-bordered;
     }
 }
 
@@ -69,7 +73,7 @@
 //## Helper classes to change the look and feel of the component
 //-------------------------------------------------------------------------------------------------------------------//
 // Color variations 
-.btn-default {
+.btn, .btn-default {
     @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border-color, $btn-default-bg-hover);
 }
 
@@ -173,4 +177,12 @@
 
 .btn-attached-top {
     margin-bottom: 5px;
+}
+
+// Align icon
+.btn-icon-right {
+    > span {
+        float: right;
+        margin-left: 5px;
+    }
 }

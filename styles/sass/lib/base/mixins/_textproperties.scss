@@ -1,0 +1,8 @@
+@mixin override-text-properties ($color: inherit) {
+    label,
+    .mx-title,
+    .mx-text,   
+    .form-control {
+         color: $color;
+    }
+}
