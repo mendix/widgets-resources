@@ -23,16 +23,16 @@ $gray-lighter:                          #eee !default;
 
 //== Step 1: Brand Colors
 $brand-default:                         #DDDDDD !default;    
-$brand-primary:                         #59C2E6 !default;    
-$brand-inverse:                         #3D3F41 !default; 
-$brand-info:                            #8AD4ED !default;
-$brand-success:                         #8CC152 !default;
-$brand-warning:                         #F6BB42 !default;
-$brand-danger:                          #D9534F !default;
+$brand-primary:                         #0595DB !default;    
+$brand-inverse:                         #252C36 !default; 
+$brand-info:                            #48B0F7 !default;
+$brand-success:                         #76CA02 !default;
+$brand-warning:                         #f99b1d !default;
+$brand-danger:                          #ed1c24 !default;
 
 $brand-logo:							false !default;
-$brand-logo-height:						40px !default;
-$brand-logo-width:						40px !default; // Only used for CSS brand logo
+$brand-logo-height:						26px !default;
+$brand-logo-width:						26px !default; // Only used for CSS brand logo
 
 
 //== Step 2: UI Customization
@@ -41,24 +41,24 @@ $brand-logo-width:						40px !default; // Only used for CSS brand logo
 $default-border-color:                  $gray-primary !default;
 
 // Topbar 
-$topbar-bg:                             #FFF !default;
-$topbar-minimalheight:                  80px !default;
-$topbar-border-color:                   $default-border-color !default;
+$topbar-bg:                             $brand-primary !default;
+$topbar-minimalheight:                  60px !default;
+$topbar-border-color:                   transparent !default;
 
 // Sidebar 
 $sidebar-bg:                            $brand-inverse !default;
 
 // Navbar Brand Name / For your company, product, or project name (used in layouts/base/)
-$navbar-brand-name:                     #000 !default;
+$navbar-brand-name:                     #FFF !default;
 
 // Background Colors
 $bg-color:                              #FFF !default;
 // Background color that is used for specific page templates background 
-$bg-color-secondary:                    #EFF4F7 !default;
+$bg-color-secondary:                    #F8F8F8 !default;
 
 // Default Font Size & Color
 $font-base-size:                        14px !default;
-$font-base-color:                       #222 !default;
+$font-base-color:                       #555 !default;
 
 // Default Link Color
 $link-color:                            $brand-primary !default;
@@ -108,8 +108,8 @@ $font-weight-header:                   $font-weight-normal !default;
 // Font Header Size
 $font-size-h1:                          31px !default;
 $font-size-h2:                          26px !default;
-$font-size-h3:                          20px !default;
-$font-size-h4:                          16px !default;
+$font-size-h3:                          24px !default;
+$font-size-h4:                          18px !default;
 $font-size-h5:                          $font-base-size !default;
 $font-size-h6:                          11px !default;
 
@@ -160,16 +160,16 @@ $navtopbar-glyph-size:                  1.2em !default; // For glyphicons that y
 $navtopbar-bg:                          $topbar-bg !default;
 $navtopbar-bg-hover:                    darken($navtopbar-bg, 4) !default;
 $navtopbar-bg-active:                   darken($navtopbar-bg, 8) !default;
-$navtopbar-color:                       #AAA !default;
-$navtopbar-color-hover:                 $brand-primary !default;
-$navtopbar-color-active:                $brand-primary !default;
+$navtopbar-color:                       #FFF !default;
+$navtopbar-color-hover:                 #FFF !default;
+$navtopbar-color-active:                #FFF !default;
 
 $navtopbar-sub-bg:                      lighten($navtopbar-bg, 4) !default;
 $navtopbar-sub-bg-hover:                $navtopbar-sub-bg !default;
 $navtopbar-sub-bg-active:               $navtopbar-sub-bg !default;
 $navtopbar-sub-color:                   #AAA !default;
 $navtopbar-sub-color-hover:             $brand-primary !default;
-$navtopbar-sub-color-active:            $brand-primary !default;
+$navtopbar-sub-color-active:            #FFF !default;
 
 //## Used in layouts/base
 $navtopbar-border-color:                $topbar-border-color !default;
@@ -190,8 +190,8 @@ $form-label-weight:                     $font-weight-normal !default;
 
 // Form Input dimensions
 $form-input-height:                     auto !default;
-$form-input-padding-y:                  6px !default;
-$form-input-padding-x:                  8px !default;
+$form-input-padding-y:                  8px !default;
+$form-input-padding-x:                  10px !default;
 $form-input-font-size:                  $form-label-size !default;
 $form-input-line-height:                $line-height-base !default;
 $form-input-border-radius:              4px !default;
@@ -268,7 +268,7 @@ $btn-danger-bg-hover:                   mix($brand-danger, black, 80%) !default;
 //## Define look and feel over multible building blocks that serve as header
 $header-bg-color:                       $topbar-bg !default;           
 $header-text-color:                     #FFF !default;
-$header-text-color-detail:              $font-color-detail !default;
+$header-text-color-detail:              rgba(0,0,0, 0.2) !default;
 
 
 
