@@ -114,7 +114,8 @@ $font-size-h5:                          $font-base-size !default;
 $font-size-h6:                          11px !default;
 
 // Font Header Color
-$font-color-header:				        #000 !default;
+$font-color-headers:				    #000 !default;// Used by theme customizer
+$font-color-header:				        $font-color-headers !default;
 $font-color-detail:                     $gray !default;
 
 // Line Height
