@@ -3,6 +3,7 @@ Displays images in a carousel.
 
 ## Features
 * Set static images in the Modeler
+* Navigate to the next or the previous image
 
 ## Dependencies
 Mendix 6.
