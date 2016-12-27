@@ -1,23 +1,22 @@
 var webpackConfig = require("./webpack.config");
 Object.assign(webpackConfig, {
     debug: true,
-    devtool: "inline-source-map"
+    devtool: "inline-source-map",
+    externals: webpackConfig.externals.concat([
+        "react/lib/ExecutionEnvironment",
+        "react/lib/ReactContext",
+        "react/addons",
+        "jsdom"
+    ])
 });
-
-webpackConfig.externals.push("react/lib/ExecutionEnvironment");
-webpackConfig.externals.push("react/lib/ReactContext");
-webpackConfig.externals.push("react/addons");
-webpackConfig.externals.push("jsdom");
 
 module.exports = function(config) {
     config.set({
         basePath: "",
         frameworks: [ "jasmine" ],
-
         files: [
             { pattern: "src/**/*.ts", watched: true, included: false, served: false },
             { pattern: "tests/**/*.ts", watched: true, included: false, served: false },
-
             "tests/test-index.js"
         ],
         exclude: [],

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <package xmlns="http://www.mendix.com/package/1.0/">
-	<clientModule name="Carousel" version="0.1.0" xmlns="http://www.mendix.com/clientModule/1.0/">
-		<widgetFiles>
-			<widgetFile path="com/mendix/widget/carousel/Carousel.xml"/>
-		</widgetFiles>
-		<files>
-			<file path="com/mendix/widget/carousel"/>
-		</files>
-	</clientModule>
+    <clientModule name="Carousel" version="0.2.0" xmlns="http://www.mendix.com/clientModule/1.0/">
+        <widgetFiles>
+            <widgetFile path="com/mendix/widget/carousel/Carousel.xml"/>
+        </widgetFiles>
+        <files>
+            <file path="com/mendix/widget/carousel"/>
+        </files>
+    </clientModule>
 </package>

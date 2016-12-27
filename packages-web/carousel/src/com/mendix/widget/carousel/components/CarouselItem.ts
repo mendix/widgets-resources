@@ -1,5 +1,5 @@
-import * as classNames from "classnames";
 import { DOM } from "react";
+import * as classNames from "classnames";
 
 export interface CarouselItemProps {
     url: string;

@@ -13,12 +13,15 @@ module.exports = {
         library: "com.mendix.widget.carousel.Carousel"
     },
     resolve: {
-        extensions: [ "", ".ts", ".js", ".json" ]
+        extensions: [ "", ".ts", ".js", ".json" ],
+        alias: {
+            "tests": path.resolve(__dirname, "./tests")
+        }
     },
     errorDetails: true,
     module: {
         loaders: [
-            { test: /\.ts?$/, loader: "ts-loader" },
+            { test: /\.ts$/, loader: "ts-loader" },
             { test: /\.json$/, loader: "json" },
             { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") }
         ],

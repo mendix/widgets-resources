@@ -10,17 +10,15 @@
         "no-arg": true,
         "no-bitwise": true,
         "no-conditional-assignment": true,
-        "no-console": [true],
+        "no-console": [ true ],
         "no-debugger": true,
-        "no-duplicate-key": true,
         "no-duplicate-variable": true,
         "no-eval": true,
-        "no-inferrable-types": true,
+        "no-inferrable-types": [ true ],
         "no-internal-module": true,
         "no-shadowed-variable": true,
         "no-switch-case-fall-through": true,
         "no-trailing-whitespace": true,
-        "no-unreachable": true,
         "no-unused-expression": true,
         "no-var-keyword": true,
         "one-line": [
@@ -53,8 +51,8 @@
             "check-separator",
             "check-type"
         ],
-        "interface-name": [ false, "always-prefix" ],        
-        "no-multi-spaces": [true],
+        "interface-name": [ false, "always-prefix" ],
+        "no-multi-spaces": [ true ],
         "no-extra-semi": true,
         "no-irregular-whitespace": true,
         "no-duplicate-case": true,
@@ -77,6 +75,18 @@
         ],
         "object-curly-spacing": [ true, "always" ],
         "trailing-comma": [ true, { "multiline": "never", "singleline": "never" } ],
-        "member-access": false
+        "member-access": false,
+        "ordered-imports": [
+            true,
+            {
+                "import-sources-order": "any",
+                "named-imports-order": "lowercase-last"
+            }
+        ]
+    },
+    "jsRules": {
+        "trailing-comma": [ false ],
+        "object-literal-sort-keys": false,
+        "array-bracket-spacing": [ true, "always" ]
     }
 }
