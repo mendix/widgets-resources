@@ -1,0 +1,66 @@
+{
+  "name": "star-rating",
+  "version": "0.0.1",
+  "description": "star-rating",
+  "scripts": {
+    "pretest": "tsc",
+    "test": "karma start --single-run && node tests/remap.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendixlabs/star-rating"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/mendixlabs/star-rating/issues"
+  },
+  "devDependencies": {
+    "@types/big.js": "0.0.31",
+    "@types/classnames": "0.0.31",
+    "@types/core-js": "^0.9.34",
+    "@types/dojo": "^1.9.35",
+    "@types/enzyme": "^2.4.36",
+    "@types/jasmine": "^2.5.35",
+    "@types/karma": "^0.13.33",
+    "@types/react": "^0.14.37",
+    "@types/react-dom": "^0.14.17",
+    "copy-webpack-plugin": "^3.0.1",
+    "css-loader": "^0.25.0",
+    "enzyme": "^2.5.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "grunt": "1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-compress": "^1.2.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-newer": "^1.1.1",
+    "grunt-webpack": "^1.0.18",
+    "istanbul": "^0.4.3",
+    "istanbul-instrumenter-loader": "^1.2.0",
+    "jasmine": "^2.5.2",
+    "json-loader": "^0.5.4",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-remap-istanbul": "^0.2.1",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.8.0",
+    "mendix-client": "git+https://github.com/FlockOfBirds/Mendix-client-typing.git",
+    "react-addons-test-utils": "~15.3.2",
+    "remap-istanbul": "^0.6.4",
+    "source-map-loader": "^0.1.5",
+    "style-loader": "^0.13.1",
+    "ts-loader": "^0.9.4",
+    "tslint-eslint-rules": "^2.1.0",
+    "typescript": "^2.0.7",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "react": "~15.3.2",
+    "react-dom": "~15.3.2"
+  }
+}

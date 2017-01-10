@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.StarRating.StarRating" needsEntityContext="false" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../../xsd/widget.xsd">
+    <name>StarRating</name>
+    <description>StarRating description</description>
+    <icon/>
+    <properties>
+        <property key="staticImages" type="object" isList="true" required="false">
+            <caption>Images</caption>
+            <category>Images</category>
+            <description/>
+            <properties>
+                <property key="url" type="image" required="true">
+                    <caption>Image</caption>
+                    <category>Image</category>
+                    <description>Image to add to the StarRating</description>
+                </property>
+            </properties>
+        </property>
+    </properties>
+</widget>

@@ -1,0 +1,94 @@
+.widget-carousel {
+    position: relative
+}
+
+.widget-carousel-item-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden
+}
+
+.widget-carousel-item-wrapper .widget-carousel-item {
+    position: relative;
+    display: none;
+}
+
+.widget-carousel-item-wrapper .widget-carousel-item img {
+    line-height: 1;
+    min-width: 100%;
+    max-width: 100%;
+    height: auto
+}
+
+.widget-carousel-item-wrapper .active {
+    display: block;
+    left: 0
+}
+
+.widget-carousel-control {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 15%;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+    opacity: .5
+}
+
+.widget-carousel-control.left {
+    background: linear-gradient(to right, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%) repeat-x;
+}
+
+.widget-carousel-control.right {
+    right: 0;
+    left: auto;
+    background: linear-gradient(to right, rgba(0, 0, 0, .0001) 0%, rgba(0, 0, 0, .5) 100%) repeat-x;
+}
+
+.widget-carousel-control:focus,
+.widget-carousel-control:hover {
+    color: #fff;
+    text-decoration: none;
+    filter: alpha(opacity=90);
+    outline: none;
+    opacity: .9
+}
+
+.widget-carousel-control .glyphicon-chevron-left,
+.widget-carousel-control .glyphicon-chevron-right {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    display: inline-block
+}
+
+.widget-carousel-control .glyphicon-chevron-left {
+    left: 50%;
+    margin-left: -10px
+}
+
+.widget-carousel-control .glyphicon-chevron-right {
+    right: 50%;
+    margin-right: -10px
+}
+
+@media screen and (min-width: 768px) {
+    .widget-carousel-control .glyphicon-chevron-left,
+    .widget-carousel-control .glyphicon-chevron-right {
+        width:30px;
+        height: 30px;
+        margin-top: -15px;
+        font-size: 30px
+    }
+
+    .widget-carousel-control .glyphicon-chevron-left {
+        margin-left: -15px
+    }
+
+    .widget-carousel-control .glyphicon-chevron-right {
+        margin-right: -15px
+    }
+}
