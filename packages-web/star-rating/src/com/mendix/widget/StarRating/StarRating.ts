@@ -14,6 +14,7 @@ class StarRating extends WidgetBase {
     private rates: string;
     private users: string;
     private isCampaign: boolean;
+
     private campaignReference: string;
     private userReference: string;
 
@@ -60,8 +61,9 @@ class StarRating extends WidgetBase {
             onChange: (rate: number) => this.submitData(rate)
         };
     }
+
     private getRate(): number {
-        if(!this.isCampaign) {
+        if(this.isCampaign) {
             const sum = this.mxData.reduce((a, b) => {
                 return a + Number(b.get(this.rateAttribute))
                 },0);
@@ -72,6 +74,7 @@ class StarRating extends WidgetBase {
         }
     }
 
+    // TODO: Adding validation
     private hasValidConfig() {
         return true;
     }
@@ -91,25 +94,16 @@ class StarRating extends WidgetBase {
             },
             xpath
         });
-
     }
-    // create a rate using mxobject.create, in the callback , 
-    // assign its attrRating attribute parameter rate, 
-    // assign it a the campaign (currentObject, on attribute campaigns)
-    // assign it a user (current session user)
-    // commit the newly created rate using mxobject.commit
-    private submitData(rate: number) {
 
+    private submitData(rate: number) {
         const createCallback = (newRateMX: mendix.lib.MxObject)=> {
-            window.logger.debug(`created mendix object`, newRateMX);
             newRateMX.set(this.rateAttribute, rate);
             newRateMX.addReference(this.campaignReference, this.contextObject.getGuid());
             newRateMX.addReference(this.userReference, window.mx.session.getUserId())
             // assign user and campaign.
             this.commitData(newRateMX,()=>{});
         };
-
-        const commitCallback = ()=>{};
         this.createData(this.rates, createCallback);
     }
 
@@ -124,6 +118,7 @@ class StarRating extends WidgetBase {
             mxobj
         });
     }
+
     private createData(entity: string, callback: (obj: mendix.lib.MxObject)=> void) {
         window.mx.data.create({
             callback,
