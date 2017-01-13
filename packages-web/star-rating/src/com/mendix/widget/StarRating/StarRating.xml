@@ -1,20 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.StarRating.StarRating" needsEntityContext="false" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../../xsd/widget.xsd">
+<widget id="com.mendix.widget.StarRating.StarRating" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../../xsd/widget.xsd">
     <name>StarRating</name>
     <description>StarRating description</description>
     <icon/>
     <properties>
-        <property key="staticImages" type="object" isList="true" required="false">
-            <caption>Images</caption>
-            <category>Images</category>
-            <description/>
-            <properties>
-                <property key="url" type="image" required="true">
-                    <caption>Image</caption>
-                    <category>Image</category>
-                    <description>Image to add to the StarRating</description>
-                </property>
-            </properties>
+        <property key="isCampaign" type="boolean" defaultValue="false">
+            <caption>Show campaign total</caption>
+            <category>Display</category>
+            <description>Should the widget show single rating or for a campaign</description>
         </property>
+
+        <property key="rates" type="entity">
+            <caption>Rating</caption>
+            <category>Data Source</category>
+            <description>The rate entity to use</description>
+        </property>
+
+        <property key="rateAttribute" type="attribute" entityProperty="rates">
+            <caption>Rating Value</caption>
+            <category>Data Source</category>
+            <description/>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+            </attributeTypes>
+        </property>
+
+        <property key="campaigns" type="entity" pathType="reference" isPath="yes" entityProperty="rates">
+            <caption>Campaign</caption>
+            <category>Data Source</category>
+            <description>The campaign entity to use</description>
+        </property>
+
+        <property key="users" type="entity" pathType="reference" isPath="yes" entityProperty="rates">
+            <caption>User's entity</caption>
+            <category>Data Source</category>
+            <description>The user entity to use</description>
+        </property>
+
+
     </properties>
 </widget>
