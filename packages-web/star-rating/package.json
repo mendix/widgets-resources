@@ -4,7 +4,7 @@
   "description": "star-rating",
   "scripts": {
     "pretest": "tsc",
-    "test": "karma start --single-run && node tests/remap.js"
+    "test": "karma start --single-run --instrumenter && node tests/remap.js"
   },
   "repository": {
     "type": "git",
@@ -49,7 +49,6 @@
     "karma-webpack": "^1.8.0",
     "mendix-client": "git+https://github.com/FlockOfBirds/Mendix-client-typing.git",
     "react-addons-test-utils": "~15.3.2",
-    "react-rating": "^0.6.3",
     "remap-istanbul": "^0.6.4",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
@@ -62,6 +61,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "react": "~15.3.2",
-    "react-dom": "~15.3.2"
+    "react-dom": "~15.3.2",
+    "react-rating": "^0.6.3"
   }
 }
