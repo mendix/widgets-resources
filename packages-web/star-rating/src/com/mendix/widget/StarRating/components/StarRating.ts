@@ -2,16 +2,13 @@ import { Component, DOM, createElement } from "react";
 
 import * as Rating from "react-rating";
 
-import * as classNames from "classnames";
-
 export interface StarRatingProps {
     maxStars?: string;
     fullColor?: string;
     emptyColor?: string;
     activeRate?: number;
-    onClick?: () => void;
-    onMouseMove?: () => void;
-    onChange?: (rate: number) => void;
+    onClick?: () => void; //TODO for microflow, and page
+    onChange?: (rate: number) => void; //TODO for microflow, and page
     isCampaign?: boolean;
     data?:any;
     isReadOnly?: boolean;
