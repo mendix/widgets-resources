@@ -7,7 +7,7 @@
     "comment-format": [ true, "check-space" ],
     "eofline": true,
     "indent": [ true, "spaces" ],
-    "interface-name": [ true, "always-prefix" ],
+    "interface-name": [ true, "never-prefix" ],
     // "linebreak-style": [ true, "LF" ],
     "member-ordering": [ true, "variables-before-functions", { "order": "statics-first" } ],
     "new-parens": true,

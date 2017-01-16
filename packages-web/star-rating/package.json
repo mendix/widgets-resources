@@ -54,7 +54,7 @@
     "style-loader": "^0.13.1",
     "ts-loader": "^0.9.4",
     "tslint": "^4.3.1",
-    "tslint-eslint-rules": "^2.1.0",
+    "tslint-eslint-rules": "^3.2.3",
     "typescript": "^2.0.7",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
