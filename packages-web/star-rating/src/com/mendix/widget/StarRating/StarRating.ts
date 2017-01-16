@@ -4,7 +4,7 @@ import * as WidgetBase from "mxui/widget/_WidgetBase";
 import { createElement } from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 
-import { StarRating as RatingComponent, StarRatingProps as props } from "./components/StarRating"
+import { StarRating as RatingComponent, StarRatingProps as props } from "./components/StarRating";
 
 
 class StarRating extends WidgetBase {
@@ -28,7 +28,7 @@ class StarRating extends WidgetBase {
 
     update(object: mendix.lib.MxObject, callback: Function) {
         this.contextObject = object;
-        if(this.hasValidConfig) { 
+        if (this.hasValidConfig) {
             this.updateData(() => {
                     this.updateRendering();
                     callback();
@@ -40,10 +40,10 @@ class StarRating extends WidgetBase {
     }
 
     updateRendering() {
-        render(createElement(RatingComponent, this.getProps()),this.domNode);
+        render(createElement(RatingComponent, this.getProps()), this.domNode);
     }
 
-    private updateData (callback: Function) {
+    private updateData(callback: Function) {
         const xpath = `//${this.rates}[${this.campaignReference}='${this.contextObject.getGuid()}']`;
         const dataCallback = (objects: mendix.lib.MxObject[]) => {
             this.mxData = objects;
@@ -54,23 +54,26 @@ class StarRating extends WidgetBase {
     }
 
     private getProps(): props {
-        return { 
-            data: this.mxData,
+        return {
             activeRate: this.getRate(),
+            data: this.mxData,
             isReadOnly: this.isCampaign, // || this.currentUser is not voteOwner
             onChange: (rate: number) => this.submitData(rate)
         };
     }
 
     private getRate(): number {
-        if(this.isCampaign) {
+        if (!this.mxData.length) {
+            return 0.0;
+        }
+        if (this.isCampaign) {
             const sum = this.mxData.reduce((a, b) => {
-                return a + Number(b.get(this.rateAttribute))
-                },0);
-            //round-off to nearest 0.5. its buggy, should only return a whole number when rate is above that number
-            return Math.round((sum/this.mxData.length)*2)/2; 
+                return a + Number(b.get(this.rateAttribute));
+                }, 0);
+            // round-off to nearest 0.5. its buggy, should only return a whole number when rate is above that number
+            return Math.round((sum / this.mxData.length) * 2) / 2;
         } else {
-            return Math.round(Number(this.mxData[0].get(this.rateAttribute))*2)/2;
+            return Math.round(Number(this.mxData[0].get(this.rateAttribute)) * 2) / 2;
         }
     }
 
@@ -88,7 +91,7 @@ class StarRating extends WidgetBase {
             callback,
             error: (error) => {
                 window.logger.error(`${this.id} .fetchData ${xpath}
-                    : An error occurred while retrieving data:`, error);
+                : An error occurred while retrieving data:`, error);
                 window.mx.ui.error(`Error while retrieving data`);
                 callback([]);
             },
@@ -97,17 +100,17 @@ class StarRating extends WidgetBase {
     }
 
     private submitData(rate: number) {
-        const createCallback = (newRateMX: mendix.lib.MxObject)=> {
+        const createCallback = (newRateMX: mendix.lib.MxObject) => {
             newRateMX.set(this.rateAttribute, rate);
             newRateMX.addReference(this.campaignReference, this.contextObject.getGuid());
-            newRateMX.addReference(this.userReference, window.mx.session.getUserId())
+            newRateMX.addReference(this.userReference, window.mx.session.getUserId());
             // assign user and campaign.
-            this.commitData(newRateMX,()=>{});
+            this.commitData(newRateMX, () => {});
         };
         this.createData(this.rates, createCallback);
     }
 
-    private commitData(mxobj:mendix.lib.MxObject, callback: ()=> void) {
+    private commitData(mxobj: mendix.lib.MxObject, callback: () => void) {
         window.mx.data.commit({
             callback,
             error: (error) => {
@@ -119,7 +122,7 @@ class StarRating extends WidgetBase {
         });
     }
 
-    private createData(entity: string, callback: (obj: mendix.lib.MxObject)=> void) {
+    private createData(entity: string, callback: (obj: mendix.lib.MxObject) => void) {
         window.mx.data.create({
             callback,
             entity,
@@ -132,7 +135,7 @@ class StarRating extends WidgetBase {
     }
 
     uninitialize(): boolean {
-        unmountComponentAtNode(this.domNode)  ;
+        unmountComponentAtNode(this.domNode);
         return true;
     }
 }

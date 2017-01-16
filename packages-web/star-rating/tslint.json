@@ -3,24 +3,35 @@
   "extends": "tslint:latest",
   "rules": {
     "class-name": true,
+    "curly": true,
     "comment-format": [ true, "check-space" ],
     "eofline": true,
     "indent": [ true, "spaces" ],
-    "member-ordering": [ true, "variables-before-functions" ],
+    "interface-name": [ true, "always-prefix" ],
+    // "linebreak-style": [ true, "LF" ],
+    "member-ordering": [ true, "variables-before-functions", { "order": "statics-first" } ],
+    "new-parens": true,
     "no-arg": true,
     "no-bitwise": true,
     "no-conditional-assignment": true,
     "no-console": [ true ],
     "no-debugger": true,
+    "no-default-export": true,
     "no-duplicate-variable": true,
+    "no-empty": true,
     "no-eval": true,
-    "no-inferrable-types": [ true ],
-    "no-internal-module": true,
+    "no-inferrable-types": [ true, "ignore-params" ],
+    "no-namespace": [ true, "allow-declarations" ],
+    "no-invalid-this": [ true, "check-function-in-method" ],
+    "no-reference": true,
     "no-shadowed-variable": true,
-    "no-switch-case-fall-through": true,
+    "no-string-literal": true,
     "no-trailing-whitespace": true,
+    "no-unsafe-finally": true,
     "no-unused-expression": true,
+    "no-unused-new": true,
     "no-var-keyword": true,
+    "object-literal-shorthand": true,
     "one-line": [
       true,
       "check-catch",
@@ -29,11 +40,18 @@
       "check-open-brace",
       "check-whitespace"
     ],
+    "one-variable-per-declaration": [ true ],
+    "ordered-imports": [
+      true,
+      { "import-sources-order": "lowercase-last" }
+    ],
+    "prefer-for-of": true,
     "quotemark": [ true, "double" ],
     "semicolon": [ true, "always" ],
     "triple-equals": [ true, "allow-null-check" ],
     "typedef-whitespace": [
-      true, {
+      true,
+      {
         "call-signature": "nospace",
         "index-signature": "nospace",
         "parameter": "nospace",
@@ -51,7 +69,6 @@
       "check-separator",
       "check-type"
     ],
-    "interface-name": [ false, "always-prefix" ],
     "no-multi-spaces": [ true ],
     "no-extra-semi": true,
     "no-irregular-whitespace": true,
@@ -69,19 +86,18 @@
     "block-spacing": [ true, "always" ],
     "brace-style": [
       true,
-      "1tbs", 
+      "1tbs",
       { "allowSingleLine": true }
     ],
     "object-curly-spacing": [ true, "always" ],
-    "trailing-comma": [ true, { "multiline": "never", "singleline": "never" } ],
-    "member-access": false,
-    "ordered-imports": [
+    "trailing-comma": [
       true,
       {
-        "import-sources-order": "any",
-        "named-imports-order": "lowercase-last"
+        "multiline": "never",
+        "singleline": "never"
       }
-    ]
+    ],
+    "member-access": false
   },
   "jsRules": {
     "trailing-comma": [ false ],
