@@ -5,19 +5,19 @@
     <icon/>    <!--TODO: Missing Icon-->
     <!--TODO: Change descriptions, captions to appropriate wording-->
     <properties>
-        <property key="isCampaign" type="boolean" defaultValue="false">
+        <property key="showTotal" type="boolean" defaultValue="false">
             <caption>Show total rating</caption>
             <category>Display</category>
             <description>Should the widget show single rating or for a campaign</description>
         </property>
 
-        <property key="rates" type="entity">
+        <property key="rateEntity" type="entity">
             <caption>Rating</caption>
             <category>Data Source</category>
             <description>The rate entity to use</description>
         </property>
 
-        <property key="rateAttribute" type="attribute" entityProperty="rates">
+        <property key="rateAttribute" type="attribute" entityProperty="rateEntity">
             <caption>Rating Value</caption>
             <category>Data Source</category>
             <description/>
@@ -27,13 +27,13 @@
             </attributeTypes>
         </property>
 
-        <property key="campaigns" type="entity" pathType="reference" isPath="yes" entityProperty="rates">
+        <property key="campaignEntity" type="entity" pathType="reference" isPath="yes" entityProperty="rateEntity">
             <caption>Campaign</caption>
             <category>Data Source</category>
             <description>The campaign entity to use</description>
         </property>
 
-        <property key="users" type="entity" pathType="reference" isPath="yes" entityProperty="rates">
+        <property key="userEntity" type="entity" pathType="reference" isPath="yes" entityProperty="rateEntity">
             <caption>User's entity</caption>
             <category>Data Source</category>
             <description>The user entity to use</description>

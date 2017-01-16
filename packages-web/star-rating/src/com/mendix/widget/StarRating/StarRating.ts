@@ -10,10 +10,10 @@ import { StarRating as RatingComponent, StarRatingProps as props } from "./compo
 class StarRating extends WidgetBase {
     // Properties from Mendix modeler
     private rateAttribute: string;
-    private campaigns: string;
-    private rates: string;
-    private users: string;
-    private isCampaign: boolean;
+    private campaignEntity: string;
+    private rateEntity: string;
+    private userEntity: string;
+    private showTotal: boolean;
 
     private campaignReference: string;
     private userReference: string;
@@ -22,8 +22,8 @@ class StarRating extends WidgetBase {
     private mxData: mendix.lib.MxObject[];
 
     postCreate() {
-        this.campaignReference = this.campaigns.split("/")[0];
-        this.userReference = this.users.split("/")[0];
+        this.campaignReference = this.campaignEntity.split("/")[0];
+        this.userReference = this.userEntity.split("/")[0];
     }
 
     update(object: mendix.lib.MxObject, callback: Function) {
@@ -44,33 +44,34 @@ class StarRating extends WidgetBase {
     }
 
     private updateData(callback: Function) {
-        const xpath = `//${this.rates}[${this.campaignReference}='${this.contextObject.getGuid()}']`;
-        const dataCallback = (objects: mendix.lib.MxObject[]) => {
-            this.mxData = objects;
+        if (this.contextObject) {
+            const xpath = `//${this.rateEntity}[${this.campaignReference}='${this.contextObject.getGuid()}']`;
+            const dataCallback = (objects: mendix.lib.MxObject[]) => {
+                this.mxData = objects;
+                callback();
+            };
+            this.fetchData(xpath, dataCallback);
+        } else {
+            this.mxData = [];
             callback();
-        };
-
-        this.fetchData(xpath, dataCallback);
+        }
     }
 
     private getProps(): props {
         return {
-            activeRate: this.getRate(),
+            activeRate: this.mxData.length ? this.getRate() : 0.0,
             data: this.mxData,
-            isReadOnly: this.isCampaign, // || this.currentUser is not voteOwner
+            isReadOnly: this.contextObject ? this.showTotal : true, // || this.currentUser is not voteOwner
             onChange: (rate: number) => this.submitData(rate)
         };
     }
 
     private getRate(): number {
-        if (!this.mxData.length) {
-            return 0.0;
-        }
-        if (this.isCampaign) {
+        if (this.showTotal) {
             const sum = this.mxData.reduce((a, b) => {
                 return a + Number(b.get(this.rateAttribute));
                 }, 0);
-            // round-off to nearest 0.5. its buggy, should only return a whole number when rate is above that number
+            // round-off to nearest 0.5 is buggy, should only return a whole number when rate is above that number
             return Math.round((sum / this.mxData.length) * 2) / 2;
         } else {
             return Math.round(Number(this.mxData[0].get(this.rateAttribute)) * 2) / 2;
@@ -107,7 +108,7 @@ class StarRating extends WidgetBase {
             // assign user and campaign.
             this.commitData(newRateMX, () => {});
         };
-        this.createData(this.rates, createCallback);
+        this.createData(this.rateEntity, createCallback);
     }
 
     private commitData(mxobj: mendix.lib.MxObject, callback: () => void) {
