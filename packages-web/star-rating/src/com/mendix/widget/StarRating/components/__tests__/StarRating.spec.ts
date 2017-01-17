@@ -7,25 +7,30 @@ import { StarRating, StarRatingProps } from "../StarRating";
 
 describe("StarRating", () => {
     const renderStarRating = (props: StarRatingProps) => shallow(createElement(StarRating, props));
+    const fullColor = "#0000FF";
+    const emptyColor = "#FFFFFF";
+    const maxStars = "6";
+    const activeRate = 2;
+    const isReadOnly = true;
+    const empty = "glyphicon glyphicon-star-empty custom custom-empty";
+    const full = "glyphicon glyphicon-star custom custom-full";
 
     it("renders the structure correctly", () => {
-        const starRating = renderStarRating({ fullColor: "#0000FF", emptyColor: "#FFFFFF" });
+        const starRating = renderStarRating({ fullColor, emptyColor });
 
         expect(starRating).toBeElement(
             createElement(Rating, {
-                empty: "glyphicon glyphicon-star-empty custom custom-empty",
-                fractions: 2,
-                full: "glyphicon glyphicon-star custom custom-full"
+                empty,
+                fractions: activeRate,
+                full
             })
         );
     });
 
-    it("creates a rating", () => {
-        //
-    });
-
     it("sets the rating value", () => {
-        //
+        const starRating = renderStarRating({ fullColor, emptyColor, activeRate, maxStars, isReadOnly }).find(Rating);
+
+        expect(starRating.prop("initialRate")).toBe(activeRate);
     });
 
     it("updates the rating value when the values are changed", () => {
