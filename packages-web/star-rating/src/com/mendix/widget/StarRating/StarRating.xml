@@ -5,10 +5,14 @@
     <icon/>    <!--TODO: Missing Icon-->
     <!--TODO: Change descriptions, captions to appropriate wording-->
     <properties>
-        <property key="showTotal" type="boolean" defaultValue="false">
-            <caption>Show total rating</caption>
+        <property key="rateType" type="enumeration" defaultValue="single">
+            <caption>Rate type</caption>
             <category>Display</category>
-            <description>Should the widget show single rating or for a campaign</description>
+            <description>Render as an overall rate (shows average rate) or a single rate</description>
+            <enumerationValues>
+                <enumerationValue key="single">Single</enumerationValue>
+                <enumerationValue key="overall">Overall average</enumerationValue>
+            </enumerationValues>
         </property>
 
         <property key="rateEntity" type="entity">
