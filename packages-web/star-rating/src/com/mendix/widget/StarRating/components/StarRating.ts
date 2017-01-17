@@ -3,7 +3,7 @@ import { Component, createElement, DOM } from "react";
 import * as Rating from "react-rating";
 
 export interface StarRatingProps {
-    maxStars?: string;
+    maxStars?: number;
     fullColor?: string;
     emptyColor?: string;
     activeRate?: number;
@@ -23,7 +23,10 @@ export class StarRating extends Component<StarRatingProps, {}> {
             full: "glyphicon glyphicon-star custom custom-full",
             initialRate: this.props.activeRate,
             onChange: this.props.onChange,
-            readonly: this.props.isReadOnly
+            readonly: this.props.isReadOnly,
+            start: 0,
+            step: 1,
+            stop: 5
         });
     }
 }

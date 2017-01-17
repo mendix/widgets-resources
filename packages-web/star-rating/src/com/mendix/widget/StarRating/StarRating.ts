@@ -13,7 +13,8 @@ class StarRating extends WidgetBase {
     private campaignEntity: string;
     private rateEntity: string;
     private userEntity: string;
-    private showTotal: boolean;
+    private rateType: "overall" | "single";
+    private ownerReference: string;
 
     private campaignReference: string;
     private userReference: string;
@@ -23,12 +24,15 @@ class StarRating extends WidgetBase {
 
     postCreate() {
         this.campaignReference = this.campaignEntity.split("/")[0];
+        this.campaignEntity = this.campaignEntity.split("/")[1];
         this.userReference = this.userEntity.split("/")[0];
+        this.userEntity = this.userEntity.split("/")[1];
+        this.ownerReference = "System.owner";
     }
 
     update(object: mendix.lib.MxObject, callback: Function) {
         this.contextObject = object;
-        if (this.hasValidConfig) {
+        if (this.hasValidConfig()) {
             this.updateData(() => {
                     this.updateRendering();
                     callback();
@@ -45,7 +49,10 @@ class StarRating extends WidgetBase {
 
     private updateData(callback: Function) {
         if (this.contextObject) {
-            const xpath = `//${this.rateEntity}[${this.campaignReference}='${this.contextObject.getGuid()}']`;
+            const xpath = this.rateType === "overall"
+            ? `//${this.rateEntity}[${this.campaignReference}='${this.contextObject.getGuid()}']`
+            : `//${this.rateEntity}[id='${this.contextObject.getGuid()}']`;
+
             const dataCallback = (objects: mendix.lib.MxObject[]) => {
                 this.mxData = objects;
                 callback();
@@ -58,16 +65,21 @@ class StarRating extends WidgetBase {
     }
 
     private getProps(): props {
+        const write = this.rateType === "single"
+            && (this.mxData[0].get(this.ownerReference) === window.mx.session.getUserId()
+                || this.mxData[0].get(this.userReference) === window.mx.session.getUserId());
+
         return {
             activeRate: this.mxData.length ? this.getRate() : 0.0,
             data: this.mxData,
-            isReadOnly: this.contextObject ? this.showTotal : true, // || this.currentUser is not voteOwner
+            isReadOnly: !write,
             onChange: (rate: number) => this.submitData(rate)
         };
     }
 
+
     private getRate(): number {
-        if (this.showTotal) {
+        if (this.rateType === "overall") {
             const sum = this.mxData.reduce((a, b) => {
                 return a + Number(b.get(this.rateAttribute));
                 }, 0);
@@ -80,7 +92,28 @@ class StarRating extends WidgetBase {
 
     // TODO: Adding validation
     private hasValidConfig() {
-        return true;
+        let errorMessage: string[] = [];
+        let invalid: boolean;
+
+        invalid = (this.rateType === "overall") && this.contextObject.getEntity() !== this.campaignEntity;
+        if (invalid) {
+            errorMessage.push(" - For rate type 'Overall', the contextObject be campaign entity");
+        }
+        invalid = (this.rateType === "single") && this.contextObject.getEntity() !== this.rateEntity;
+        if (invalid) {
+            errorMessage.push(` - For rate type 'Single', the contextObject be rate entity '${this.rateEntity}'`);
+        }
+        invalid = this.rateType === "single" && !(this.contextObject.isReference(this.ownerReference)
+                || this.contextObject.isReference(this.userReference));
+        if (invalid) {
+            errorMessage.push(` - Context object has no User / Owner association to it`);
+        }
+
+        if (errorMessage.length) {
+            errorMessage.unshift("Configuration Error: ");
+            window.mx.ui.error(errorMessage.join("\n"));
+        }
+        return !errorMessage.length;
     }
 
     private resetSubscriptions() {
@@ -101,17 +134,25 @@ class StarRating extends WidgetBase {
     }
 
     private submitData(rate: number) {
-        const createCallback = (newRateMX: mendix.lib.MxObject) => {
-            newRateMX.set(this.rateAttribute, rate);
-            newRateMX.addReference(this.campaignReference, this.contextObject.getGuid());
-            newRateMX.addReference(this.userReference, window.mx.session.getUserId());
+        const mxRate = this.mxData[0];
+        const createCallback = (mxRateNew: mendix.lib.MxObject) => {
+            mxRateNew.set(this.rateAttribute, rate);
+            mxRateNew.addReference(this.campaignReference, this.contextObject.getGuid());
+            mxRateNew.addReference(this.userReference, window.mx.session.getUserId());
             // assign user and campaign.
-            this.commitData(newRateMX, () => {});
+            this.commitData(mxRateNew);
         };
-        this.createData(this.rateEntity, createCallback);
+
+        if (mxRate) {
+            mxRate.set(this.rateAttribute, rate);
+            this.commitData(mxRate);
+        } else {
+            this.createData(this.rateEntity, createCallback);
+        }
     }
 
-    private commitData(mxobj: mendix.lib.MxObject, callback: () => void) {
+    private commitData(mxobj: mendix.lib.MxObject, callbackFunction?: () => void) {
+        const callback = callbackFunction || (() => {});
         window.mx.data.commit({
             callback,
             error: (error) => {
