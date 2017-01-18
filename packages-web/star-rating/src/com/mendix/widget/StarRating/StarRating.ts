@@ -12,31 +12,27 @@ class StarRating extends WidgetBase {
     private rateAttribute: string;
     private campaignEntity: string;
     private rateEntity: string;
-    private userEntity: string;
     private rateType: "overall" | "single";
     private ownerReference: string;
+    private onChangeMicroflow: string;
+    private averageAttribute: string;
 
     private campaignReference: string;
-    private userReference: string;
 
     private contextObject: mendix.lib.MxObject;
-    private mxData: mendix.lib.MxObject[];
+
 
     postCreate() {
         this.campaignReference = this.campaignEntity.split("/")[0];
         this.campaignEntity = this.campaignEntity.split("/")[1];
-        this.userReference = this.userEntity.split("/")[0];
-        this.userEntity = this.userEntity.split("/")[1];
         this.ownerReference = "System.owner";
     }
 
     update(object: mendix.lib.MxObject, callback: Function) {
         this.contextObject = object;
         if (this.hasValidConfig()) {
-            this.updateData(() => {
-                    this.updateRendering();
-                    callback();
-                });
+            this.updateRendering();
+            callback();
         } else {
             callback();
         }
@@ -47,47 +43,33 @@ class StarRating extends WidgetBase {
         render(createElement(RatingComponent, this.getProps()), this.domNode);
     }
 
-    private updateData(callback: Function) {
-        if (this.contextObject) {
-            const xpath = this.rateType === "overall"
-            ? `//${this.rateEntity}[${this.campaignReference}='${this.contextObject.getGuid()}']`
-            : `//${this.rateEntity}[id='${this.contextObject.getGuid()}']`;
-
-            const dataCallback = (objects: mendix.lib.MxObject[]) => {
-                this.mxData = objects;
-                callback();
-            };
-            this.fetchData(xpath, dataCallback);
-        } else {
-            this.mxData = [];
-            callback();
-        }
-    }
-
     private getProps(): props {
-        const write = this.rateType === "single"
-            && (this.mxData[0].get(this.ownerReference) === window.mx.session.getUserId()
-                || this.mxData[0].get(this.userReference) === window.mx.session.getUserId());
-
+        const isReadOnly = !(this.rateType === "single"
+            && this.contextObject.get(this.ownerReference) === window.mx.session.getUserId());
         return {
-            activeRate: this.mxData.length ? this.getRate() : 0.0,
-            data: this.mxData,
-            isReadOnly: !write,
+            activeRate: this.contextObject ? this.getRate() : 0.0,
+            isReadOnly,
             onChange: (rate: number) => this.submitData(rate)
         };
     }
 
-
     private getRate(): number {
         if (this.rateType === "overall") {
-            const sum = this.mxData.reduce((a, b) => {
-                return a + Number(b.get(this.rateAttribute));
-                }, 0);
-            // round-off to nearest 0.5 is buggy, should only return a whole number when rate is above that number
-            return Math.round((sum / this.mxData.length) * 2) / 2;
+            return Math.round(Number(this.contextObject.get(this.averageAttribute)) * 2) / 2;
         } else {
-            return Math.round(Number(this.mxData[0].get(this.rateAttribute)) * 2) / 2;
+            return Math.round(Number(this.contextObject.get(this.rateAttribute)) * 2) / 2;
         }
+    }
+
+    private executeCommitMicroflow(mendixObject: mendix.lib.MxObject) {
+        window.mx.ui.action(this.onChangeMicroflow, {
+            error: (error: Error) =>
+                window.mx.ui.error(`Error while executing microflow: ${this.onChangeMicroflow}: ${error.message}`),
+            params: {
+                applyto: "selection",
+                guids: [ mendixObject.getGuid() ]
+            }
+        });
     }
 
     // TODO: Adding validation
@@ -95,6 +77,9 @@ class StarRating extends WidgetBase {
         let errorMessage: string[] = [];
         let invalid: boolean;
 
+        if (!this.contextObject) {
+            return true; // incase there's no contextObject
+        }
         invalid = (this.rateType === "overall") && this.contextObject.getEntity() !== this.campaignEntity;
         if (invalid) {
             errorMessage.push(" - For rate type 'Overall', the contextObject be campaign entity");
@@ -103,8 +88,7 @@ class StarRating extends WidgetBase {
         if (invalid) {
             errorMessage.push(` - For rate type 'Single', the contextObject be rate entity '${this.rateEntity}'`);
         }
-        invalid = this.rateType === "single" && !(this.contextObject.isReference(this.ownerReference)
-                || this.contextObject.isReference(this.userReference));
+        invalid = this.rateType === "single" && !this.contextObject.isReference(this.ownerReference);
         if (invalid) {
             errorMessage.push(` - Context object has no User / Owner association to it`);
         }
@@ -118,50 +102,55 @@ class StarRating extends WidgetBase {
 
     private resetSubscriptions() {
         this.unsubscribeAll();
-    }
-
-    private fetchData(xpath: string, callback: Function) {
-        window.mx.data.get({
-            callback,
-            error: (error) => {
-                window.logger.error(`${this.id} .fetchData ${xpath}
-                : An error occurred while retrieving data:`, error);
-                window.mx.ui.error(`Error while retrieving data`);
-                callback([]);
-            },
-            xpath
-        });
+        if (this.contextObject) {
+            this.subscribe({
+                callback: () => this.updateRendering(),
+                guid: this.contextObject.getGuid()
+            });
+            this.subscribe({
+                attr: this.rateAttribute,
+                callback: () => this.updateRendering(),
+                guid: this.contextObject.getGuid()
+            });
+            this.subscribe({
+                attr: this.averageAttribute,
+                callback: () => this.updateRendering(),
+                guid: this.contextObject.getGuid()
+            });
+        }
     }
 
     private submitData(rate: number) {
-        const mxRate = this.mxData[0];
         const createCallback = (mxRateNew: mendix.lib.MxObject) => {
             mxRateNew.set(this.rateAttribute, rate);
             mxRateNew.addReference(this.campaignReference, this.contextObject.getGuid());
-            mxRateNew.addReference(this.userReference, window.mx.session.getUserId());
             // assign user and campaign.
             this.commitData(mxRateNew);
         };
 
-        if (mxRate) {
-            mxRate.set(this.rateAttribute, rate);
-            this.commitData(mxRate);
+        if (this.contextObject) {
+            this.contextObject.set(this.rateAttribute, rate);
+            this.commitData(this.contextObject);
         } else {
             this.createData(this.rateEntity, createCallback);
         }
     }
 
-    private commitData(mxobj: mendix.lib.MxObject, callbackFunction?: () => void) {
+    private commitData(mxRate: mendix.lib.MxObject, callbackFunction?: () => void) {
         const callback = callbackFunction || (() => {});
-        window.mx.data.commit({
+        if (this.onChangeMicroflow) {
+            this.executeCommitMicroflow(mxRate);
+        } else {
+            window.mx.data.commit({
             callback,
             error: (error) => {
-                window.logger.error(`${this.id} .committing ${mxobj.getGuid()}
+                window.logger.error(`${this.id} .committing ${mxRate.getGuid()}
                     : An error occurred while retrieving data:`, error);
                 window.mx.ui.error(`An error occurred while committing data`);
             },
-            mxobj
+            mxobj: mxRate
         });
+        }
     }
 
     private createData(entity: string, callback: (obj: mendix.lib.MxObject) => void) {
