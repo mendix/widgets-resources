@@ -9,7 +9,7 @@ describe("StarRating", () => {
     const renderStarRating = (props: StarRatingProps) => shallow(createElement(StarRating, props));
     const fullColor = "#0000FF";
     const emptyColor = "#FFFFFF";
-    const maxStars = "6";
+    const maxStars = 6;
     const activeRate = 2;
     const isReadOnly = true;
     const empty = "glyphicon glyphicon-star-empty custom custom-empty";

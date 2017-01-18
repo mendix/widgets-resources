@@ -10,8 +10,10 @@ export interface StarRatingProps {
     onClick?: () => void; // TODO for microflow, and page
     onChange?: (rate: number) => void; // TODO for microflow, and page
     isCampaign?: boolean;
-    data?: any;
     isReadOnly?: boolean;
+    start?: number;
+    step?: number;
+    stop?: number;
 }
 
 export class StarRating extends Component<StarRatingProps, {}> {
@@ -24,9 +26,9 @@ export class StarRating extends Component<StarRatingProps, {}> {
             initialRate: this.props.activeRate,
             onChange: this.props.onChange,
             readonly: this.props.isReadOnly,
-            start: 0,
-            step: 1,
-            stop: 5
+            start: this.props.start,
+            step: this.props.step,
+            stop: this.props.maxStars
         });
     }
 }
