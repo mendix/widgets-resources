@@ -13,9 +13,10 @@ module.exports = {
         library: "com.mendix.widget.StarRating.StarRating"
     },
     resolve: {
-        extensions: [ "", ".ts", ".js", ".json" ],
+        extensions: [ "", ".ts", ".js", ".jsx", ".json" ],
         alias: {
-            "tests": path.resolve(__dirname, "./tests")
+            "tests": path.resolve(__dirname, "./tests"),
+            "react-rating": path.resolve(__dirname, "./node_modules/react-rating/src/react-rating.js")
         }
     },
     errorDetails: true,
@@ -23,7 +24,8 @@ module.exports = {
         loaders: [
             { test: /\.ts$/, loader: "ts-loader" },
             { test: /\.json$/, loader: "json" },
-            { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") }
+            { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
+            { test: /\.jsx?$/, loader: "babel-loader" }
         ]
     },
     devtool: "source-map",
