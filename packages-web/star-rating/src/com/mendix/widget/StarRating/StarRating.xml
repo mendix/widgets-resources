@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget id="com.mendix.widget.StarRating.StarRating" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../../xsd/widget.xsd">
     <name>StarRating</name>
-    <description>Rate using stars</description>
-    <icon/>    <!--TODO: Missing Icon-->
-    <!--TODO: Change descriptions, captions to appropriate wording-->
+    <description>This widget lets you record votes for the object.</description>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAANkE3LLa
+        AgAAAkxJREFUeJyVkttLUwEcxz/n7OLm5tzcxHlhXjLDsUg0xYweeurF8M1kkaiJ
+        L0Jv9T9UFERGEA578EENzMqXCkGwgU8qgRuIYtOpXZyXM912djmnl4wSJ/h9/H0v
+        /H5ffnAKWusM3rY6g/c0zWkQpl52zU298M4BwpndNXZto7wxrcgro0qNncZsOjEb
+        0dN+rVdfckHQF5cJPa3VvWddwB7yv4qo8oqq7nxSQ+PtEcB+klB746K5rbyiqiRH
+        r7PY7TZrnslkrakodLs8lwuQ1uAwjKvSUfDhfv740mo8ED1U9yJRYU9OCVJoN70p
+        3LrieOjzPX1gqr0DxIA4ZCTYXYPYOkSXYX8BYosgSSCJIJg43Etx9/XWI81iODb1
+        dnxyvcF1eLXMfT6X6C/YD0F8E6QAbM9AZBb2IhAVQGtldikdaR0I35tezjzWAGwf
+        KPOjb/x+ZzpQf8njdAryNkT88PMzRAOQSEDKiKIrZehLasE78K1zU1LfAWiOykjC
+        +vuZ1cnavO/XPVXbxYQ/QuIHyBmQDWByMTqfN9/5fPFmUmHxb4nHSt0oygmLbHyF
+        WALSGkgZIGmETIqiXEUENv41/PcHZTY8Dc4DNzsZSFnA2gC2esiY4CBBQ1HSXWbD
+        kzWgqVLXYtEadIiFbMkupetJaKjz2crQllioYDZg0cd1TZW5LVm/Z9CbP6YOn1NH
+        +kuC5Q6x42he7hA7RvpLg+pwtTp42zqWzW+Z6LMEu5uNPsB1Au/qbjb6Jvryg4Dl
+        pABznpaW42cdg/hHYz4a/Ablkdwn65WLsgAAAABJRU5ErkJggg==
+    </icon>
     <properties>
-    <!--split into two widgets one for overallAverage, another-->
         <property key="rateType" type="enumeration" defaultValue="single">
             <caption>Rate type</caption>
             <category>Display</category>
@@ -51,6 +64,21 @@
             <description>Microflow to be executed during commit (Optional). Note: It overwrites automatic commits</description>
             <returnType type="Void" />
         </property>
+        <!--<property key="maximumStars" type="integer" defaultValue="5">
+            <caption>Maximum stars</caption>
+            <category>Configuration</category>
+            <description>Number of stars on the widget</description>
+        </property>
+        <property key="step" type="integer" defaultValue="1">
+            <caption>Step</caption>
+            <category>Configuration</category>
+            <description>Value / weight of a star</description>
+        </property>
+        <property key="fractions" type="integer" defaultValue="1">
+            <caption>Fraction</caption>
+            <category>Configuration</category>
+            <description>Make a star divisible by this value</description>
+        </property>-->
 
     </properties>
 </widget>

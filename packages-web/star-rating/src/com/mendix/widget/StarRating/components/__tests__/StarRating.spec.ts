@@ -1,3 +1,5 @@
+// TODO: Improve the tests using root StarRatings
+
 import { shallow } from "enzyme";
 import { DOM, createElement } from "react";
 

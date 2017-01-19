@@ -3,9 +3,7 @@ import * as WidgetBase from "mxui/widget/_WidgetBase";
 
 import { createElement } from "react";
 import { render, unmountComponentAtNode } from "react-dom";
-
-import { StarRating as RatingComponent, StarRatingProps as props } from "./components/StarRating";
-
+import * as Rating from "react-rating";
 
 class StarRating extends WidgetBase {
     // Properties from Mendix modeler
@@ -16,9 +14,11 @@ class StarRating extends WidgetBase {
     private ownerReference: string;
     private onChangeMicroflow: string;
     private averageAttribute: string;
+    private step: number;
+    private maximumStars: number;
+    private fractions: number;
 
     private campaignReference: string;
-
     private contextObject: mendix.lib.MxObject;
 
 
@@ -26,6 +26,9 @@ class StarRating extends WidgetBase {
         this.campaignReference = this.campaignEntity.split("/")[0];
         this.campaignEntity = this.campaignEntity.split("/")[1];
         this.ownerReference = "System.owner";
+        this.fractions = 2;
+        this.step = 1;
+        this.maximumStars = 5;
     }
 
     update(object: mendix.lib.MxObject, callback: Function) {
@@ -40,24 +43,27 @@ class StarRating extends WidgetBase {
     }
 
     updateRendering() {
-        render(createElement(RatingComponent, this.getProps()), this.domNode);
-    }
-
-    private getProps(): props {
         const isReadOnly = !(this.rateType === "single"
             && this.contextObject.get(this.ownerReference) === window.mx.session.getUserId());
-        return {
-            activeRate: this.contextObject ? this.getRate() : 0.0,
-            isReadOnly,
-            onChange: (rate: number) => this.submitData(rate)
-        };
+
+        render(createElement(Rating, {
+            empty: "glyphicon glyphicon-star-empty custom custom-empty",
+            fractions: this.fractions,
+            full: "glyphicon glyphicon-star custom custom-full",
+            initialRate: this.contextObject ? this.getRate() : 0.0,
+            onChange: (rate: number) => this.submitData(rate),
+            readonly: isReadOnly,
+            start: 0,
+            step: this.step,
+            stop: this.maximumStars
+        }), this.domNode);
     }
 
     private getRate(): number {
         if (this.rateType === "overall") {
-            return Math.round(Number(this.contextObject.get(this.averageAttribute)) * 2) / 2;
+            return Math.round(Number(this.contextObject.get(this.averageAttribute)) * this.fractions) / this.fractions;
         } else {
-            return Math.round(Number(this.contextObject.get(this.rateAttribute)) * 2) / 2;
+            return Math.round(Number(this.contextObject.get(this.rateAttribute)) * this.fractions) / this.fractions;
         }
     }
 
