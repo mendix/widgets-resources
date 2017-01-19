@@ -17,6 +17,7 @@ class StarRating extends WidgetBase {
     private step: number;
     private maximumStars: number;
     private fractions: number;
+    private start: number;
 
     private campaignReference: string;
     private contextObject: mendix.lib.MxObject;
@@ -26,9 +27,12 @@ class StarRating extends WidgetBase {
         this.campaignReference = this.campaignEntity.split("/")[0];
         this.campaignEntity = this.campaignEntity.split("/")[1];
         this.ownerReference = "System.owner";
+
+        // Smart defaults
         this.fractions = 2;
         this.step = 1;
         this.maximumStars = 5;
+        this.start = 0;
     }
 
     update(object: mendix.lib.MxObject, callback: Function) {
@@ -47,13 +51,13 @@ class StarRating extends WidgetBase {
             && this.contextObject.get(this.ownerReference) === window.mx.session.getUserId());
 
         render(createElement(Rating, {
-            empty: "glyphicon glyphicon-star-empty custom custom-empty",
+            empty: "glyphicon glyphicon-star-empty widget-starrating widget-starrating-empty",
             fractions: this.fractions,
-            full: "glyphicon glyphicon-star custom custom-full",
+            full: "glyphicon glyphicon-star widget-starrating widget-starrating-full",
             initialRate: this.contextObject ? this.getRate() : 0.0,
             onChange: (rate: number) => this.submitData(rate),
             readonly: isReadOnly,
-            start: 0,
+            start: this.start,
             step: this.step,
             stop: this.maximumStars
         }), this.domNode);
@@ -142,8 +146,8 @@ class StarRating extends WidgetBase {
         }
     }
 
-    private commitData(mxRate: mendix.lib.MxObject, callbackFunction?: () => void) {
-        const callback = callbackFunction || (() => {});
+    private commitData(mxRate: mendix.lib.MxObject) {
+        const callback = (() => {});
         if (this.onChangeMicroflow) {
             this.executeCommitMicroflow(mxRate);
         } else {
@@ -152,7 +156,7 @@ class StarRating extends WidgetBase {
             error: (error) => {
                 window.logger.error(`${this.id} .committing ${mxRate.getGuid()}
                     : An error occurred while retrieving data:`, error);
-                window.mx.ui.error(`An error occurred while committing data`);
+                window.mx.ui.error(`An error occurred while saving your rate`);
             },
             mxobj: mxRate
         });
