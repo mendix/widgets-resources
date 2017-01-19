@@ -1,3 +1,5 @@
+// TODO: Remove this file or use it for later to improve the widget
+
 import { Component, createElement, DOM } from "react";
 
 import * as Rating from "react-rating";
@@ -7,8 +9,7 @@ export interface StarRatingProps {
     fullColor?: string;
     emptyColor?: string;
     activeRate?: number;
-    onClick?: () => void; // TODO for microflow, and page
-    onChange?: (rate: number) => void; // TODO for microflow, and page
+    onChange?: (rate: number) => void;
     isCampaign?: boolean;
     isReadOnly?: boolean;
     start?: number;

@@ -1,7 +1,7 @@
 {
   "name": "star-rating",
   "version": "0.1.0",
-  "description": "star-rating",
+  "description": "star rating",
   "scripts": {
     "pretest": "tsc",
     "test": "karma start --single-run --instrumenter && node tests/remap.js"
