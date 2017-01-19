@@ -1,9 +1,9 @@
-.custom {
+.widget-starrating {
     font-size: 30px;
 }
-.custom-empty {
+.widget-starrating-empty {
     color:#ccc;
 }
-.custom-full {
+.widget-starrating-full {
     color: yellow;
 }
