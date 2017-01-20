@@ -3,7 +3,8 @@ import * as WidgetBase from "mxui/widget/_WidgetBase";
 
 import { createElement } from "react";
 import { render, unmountComponentAtNode } from "react-dom";
-import * as Rating from "react-rating";
+
+import { StarRating as RatingComponent } from "./components/StarRating";
 
 class StarRating extends WidgetBase {
     // Properties from Mendix modeler
@@ -27,8 +28,6 @@ class StarRating extends WidgetBase {
         this.campaignReference = this.campaignEntity.split("/")[0];
         this.campaignEntity = this.campaignEntity.split("/")[1];
         this.ownerReference = "System.owner";
-
-        // Smart defaults
         this.fractions = 2;
         this.step = 1;
         this.maximumStars = 5;
@@ -47,27 +46,35 @@ class StarRating extends WidgetBase {
     }
 
     updateRendering() {
-        const isReadOnly = !(this.rateType === "single"
-            && this.contextObject.get(this.ownerReference) === window.mx.session.getUserId());
+        render(createElement(RatingComponent, this.getProps()), this.domNode);
+    }
 
-        render(createElement(Rating, {
-            empty: "glyphicon glyphicon-star-empty widget-starrating widget-starrating-empty",
+    private getProps() {
+        const isReadOnly = !(this.contextObject && this.rateType === "single"
+            && this.contextObject.get(this.ownerReference) === window.mx.session.getUserId());
+        return {
             fractions: this.fractions,
-            full: "glyphicon glyphicon-star widget-starrating widget-starrating-full",
-            initialRate: this.contextObject ? this.getRate() : 0.0,
+            initialRate: this.getRate(),
             onChange: (rate: number) => this.submitData(rate),
-            readonly: isReadOnly,
+            isReadOnly,
             start: this.start,
             step: this.step,
             stop: this.maximumStars
-        }), this.domNode);
+        };
     }
 
     private getRate(): number {
-        if (this.rateType === "overall") {
-            return Math.round(Number(this.contextObject.get(this.averageAttribute)) * this.fractions) / this.fractions;
-        } else {
-            return Math.round(Number(this.contextObject.get(this.rateAttribute)) * this.fractions) / this.fractions;
+        const maximumValue = this.step * this.maximumStars;
+        const rate = !this.contextObject ? 0.0 : this.rateType === "overall"
+            ? this.contextObject.get(this.averageAttribute) as number
+            : this.contextObject.get(this.rateAttribute) as number;
+        return rate;
+    }
+
+    private submitData(rate: number) {
+        this.contextObject.set(this.rateAttribute, rate);
+        if (this.onChangeMicroflow) {
+            this.executeCommitMicroflow(this.contextObject);
         }
     }
 
@@ -82,7 +89,6 @@ class StarRating extends WidgetBase {
         });
     }
 
-    // TODO: Adding validation
     private hasValidConfig() {
         let errorMessage: string[] = [];
         let invalid: boolean;
@@ -128,51 +134,6 @@ class StarRating extends WidgetBase {
                 guid: this.contextObject.getGuid()
             });
         }
-    }
-
-    private submitData(rate: number) {
-        const createCallback = (mxRateNew: mendix.lib.MxObject) => {
-            mxRateNew.set(this.rateAttribute, rate);
-            mxRateNew.addReference(this.campaignReference, this.contextObject.getGuid());
-            // assign user and campaign.
-            this.commitData(mxRateNew);
-        };
-
-        if (this.contextObject) {
-            this.contextObject.set(this.rateAttribute, rate);
-            this.commitData(this.contextObject);
-        } else {
-            this.createData(this.rateEntity, createCallback);
-        }
-    }
-
-    private commitData(mxRate: mendix.lib.MxObject) {
-        const callback = (() => {});
-        if (this.onChangeMicroflow) {
-            this.executeCommitMicroflow(mxRate);
-        } else {
-            window.mx.data.commit({
-            callback,
-            error: (error) => {
-                window.logger.error(`${this.id} .committing ${mxRate.getGuid()}
-                    : An error occurred while retrieving data:`, error);
-                window.mx.ui.error(`An error occurred while saving your rate`);
-            },
-            mxobj: mxRate
-        });
-        }
-    }
-
-    private createData(entity: string, callback: (obj: mendix.lib.MxObject) => void) {
-        window.mx.data.create({
-            callback,
-            entity,
-            error: (error) => {
-                window.logger.error(`${this.id} .createData
-                    : An error occurred while retrieving data:`, error);
-                window.mx.ui.error(`An error occurred while creating data`);
-            }
-        });
     }
 
     uninitialize(): boolean {

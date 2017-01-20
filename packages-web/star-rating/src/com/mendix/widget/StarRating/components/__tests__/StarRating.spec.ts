@@ -1,7 +1,7 @@
 // TODO: Improve the tests using root StarRatings
 
 import { shallow } from "enzyme";
-import { DOM, createElement } from "react";
+import { createElement, DOM } from "react";
 
 import * as Rating from "react-rating";
 
@@ -11,8 +11,8 @@ describe("StarRating", () => {
     const renderStarRating = (props: StarRatingProps) => shallow(createElement(StarRating, props));
     const fullColor = "#0000FF";
     const emptyColor = "#FFFFFF";
-    const maxStars = 6;
-    const activeRate = 2;
+    const maximumStars = 6;
+    const initialRate = 2;
     const isReadOnly = true;
     const empty = "glyphicon glyphicon-star-empty custom custom-empty";
     const full = "glyphicon glyphicon-star custom custom-full";
@@ -23,16 +23,17 @@ describe("StarRating", () => {
         expect(starRating).toBeElement(
             createElement(Rating, {
                 empty,
-                fractions: activeRate,
+                fractions: initialRate,
                 full
             })
         );
     });
 
     it("sets the rating value", () => {
-        const starRating = renderStarRating({ fullColor, emptyColor, activeRate, maxStars, isReadOnly }).find(Rating);
+        const starRating = renderStarRating({ fullColor, emptyColor, initialRate, maximumStars, isReadOnly })
+            .find(Rating);
 
-        expect(starRating.prop("initialRate")).toBe(activeRate);
+        expect(starRating.prop("initialRate")).toBe(initialRate);
     });
 
     it("updates the rating value when the values are changed", () => {
