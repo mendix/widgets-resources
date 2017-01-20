@@ -54,7 +54,6 @@
             <category>Data Source</category>
             <description>Attribute where the average is saved</description>
             <attributeTypes>
-            <!-- decimal only half stars are selectable-->
                 <attributeType name="Decimal"/>
             </attributeTypes>
         </property>
@@ -64,21 +63,5 @@
             <description>Microflow to be executed during commit (Optional). Note: It overwrites automatic commits</description>
             <returnType type="Void" />
         </property>
-        <!--<property key="maximumStars" type="integer" defaultValue="5">
-            <caption>Maximum stars</caption>
-            <category>Configuration</category>
-            <description>Number of stars on the widget</description>
-        </property>
-        <property key="step" type="integer" defaultValue="1">
-            <caption>Step</caption>
-            <category>Configuration</category>
-            <description>Value / weight of a star</description>
-        </property>
-        <property key="fractions" type="integer" defaultValue="1">
-            <caption>Fraction</caption>
-            <category>Configuration</category>
-            <description>Make a star divisible by this value</description>
-        </property>-->
-
     </properties>
 </widget>
