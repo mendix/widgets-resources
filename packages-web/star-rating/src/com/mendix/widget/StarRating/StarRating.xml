@@ -28,19 +28,16 @@
                 <enumerationValue key="overall">Overall rate</enumerationValue>
             </enumerationValues>
         </property>
-
         <property key="rateEntity" type="entity">
             <caption>Rating</caption>
             <category>Data Source</category>
             <description>The rate entity to use</description>
         </property>
-
         <property key="rateAttribute" type="attribute" entityProperty="rateEntity">
             <caption>Rating Value</caption>
             <category>Data Source</category>
             <description/>
             <attributeTypes>
-            <!-- decimal only half stars are selectable-->
                 <attributeType name="Decimal"/>
             </attributeTypes>
         </property>

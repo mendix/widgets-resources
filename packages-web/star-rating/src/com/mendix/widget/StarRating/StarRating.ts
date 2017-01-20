@@ -50,8 +50,9 @@ class StarRating extends WidgetBase {
     }
 
     private getProps() {
-        const isReadOnly = !(this.contextObject && this.rateType === "single"
-            && this.contextObject.get(this.ownerReference) === window.mx.session.getUserId());
+        const isReadOnly = this.readOnly || !(this.contextObject && this.rateType === "single"
+        && this.contextObject.get(this.ownerReference) === window.mx.session.getUserId());
+
         return {
             fractions: this.fractions,
             initialRate: this.getRate(),
