@@ -1,5 +1,5 @@
-# star-rating
-star-rating.
+# Star rating
+This widget lets users rate an object from 1 to 5.
 
 ## Features
 * Star rating

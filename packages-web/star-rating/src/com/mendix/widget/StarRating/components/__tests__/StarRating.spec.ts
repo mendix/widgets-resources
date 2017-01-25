@@ -6,12 +6,12 @@ import { createElement, DOM } from "react";
 import * as Rating from "react-rating";
 
 import { StarRating, StarRatingProps } from "../StarRating";
-//import { RateProps } from "react-rating";
+
 
 describe("StarRating", () => {
     const renderStarRating = (props: StarRatingProps) => shallow(createElement(StarRating, props));
 
-    let starProps: StarRatingProps = {
+    const starProps: StarRatingProps = {
         fractions: 1,
         initialRate: 3,
         isReadOnly: true,

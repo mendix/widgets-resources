@@ -1,6 +1,4 @@
-// TODO: Remove this file or use it for later to improve the widget
-
-import { ClassAttributes, Component, createElement } from "react";
+import { Component, createElement } from "react";
 
 import * as Rating from "react-rating";
 
@@ -21,15 +19,16 @@ export interface StarRatingProps {
 
 export class StarRating extends Component<StarRatingProps, {}> {
     private fractions: number;
+
     render() {
-        this.fractions = (this.props.rateType === "overall") ? this.props.fractions : 1;
+        this.fractions = this.props.rateType === "overall" ? this.props.fractions : 1;
         return createElement(Rating, {
-            empty: "glyphicon glyphicon-star-empty widget-starrating widget-starrating-empty",
+            empty: "glyphicon glyphicon-star-empty widget-star-rating widget-star-rating-empty",
             fractions: this.fractions,
-            full: "glyphicon glyphicon-star widget-starrating widget-starrating-full",
+            full: "glyphicon glyphicon-star widget-star-rating widget-star-rating-full",
             initialRate: this.getRate(),
             onChange: this.props.onChange,
-            placeholder: "glyphicon glyphicon-star widget-starrating widget-starrating-placeholder",
+            placeholder: "glyphicon glyphicon-star widget-star-rating widget-star-rating-placeholder",
             readonly: this.props.isReadOnly,
             start: this.props.start,
             step: this.props.step,

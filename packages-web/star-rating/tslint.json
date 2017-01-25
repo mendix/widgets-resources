@@ -97,7 +97,8 @@
         "singleline": "never"
       }
     ],
-    "member-access": false
+    "member-access": false,
+    "no-unused-variable": [true, "react"]
   },
   "jsRules": {
     "trailing-comma": [ false ],

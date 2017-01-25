@@ -1,12 +1,12 @@
-.widget-starrating {
+.widget-star-rating {
     font-size: 30px;
 }
-.widget-starrating-empty {
+.widget-star-rating-empty {
     color:#ccc;
 }
-.widget-starrating-full {
+.widget-star-rating-full {
     color: #ffa611;
 }
-.widget-starrating-placeholder {
+.widget-star-rating-placeholder {
     color: #e02016;
 }

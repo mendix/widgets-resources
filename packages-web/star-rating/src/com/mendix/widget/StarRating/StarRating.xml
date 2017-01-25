@@ -29,35 +29,35 @@
             </enumerationValues>
         </property>
         <property key="rateEntity" type="entity">
-            <caption>Rating</caption>
-            <category>Data Source</category>
+            <caption>Rating entity</caption>
+            <category>Data source</category>
             <description>The rate entity to use</description>
         </property>
         <property key="rateAttribute" type="attribute" entityProperty="rateEntity">
-            <caption>Rating Value</caption>
-            <category>Data Source</category>
+            <caption>Rating attribute</caption>
+            <category>Data source</category>
             <description/>
             <attributeTypes>
-                <attributeType name="Decimal"/>
+                <attributeType name="Integer"/>
             </attributeTypes>
         </property>
         <property key="campaignEntity" type="entity" pathType="reference" isPath="yes" entityProperty="rateEntity">
-            <caption>Campaign</caption>
-            <category>Data Source</category>
-            <description>The campaign entity to use</description>
+            <caption>Campaign entity</caption>
+            <category>Data source</category>
+            <description>The entity containing items to be rated</description>
         </property>
         <property key="averageAttribute" type="attribute" entityProperty="campaignEntity">
             <caption>Average attribute</caption>
-            <category>Data Source</category>
+            <category>Data source</category>
             <description>Attribute where the average is saved</description>
             <attributeTypes>
                 <attributeType name="Decimal"/>
             </attributeTypes>
         </property>
         <property key="onChangeMicroflow" type="microflow" required="false">
-            <caption>Commit microflow</caption>
+            <caption>On change microflow</caption>
             <category>Behaviour</category>
-            <description>Microflow to be executed during commit (Optional). Note: It overwrites automatic commits</description>
+            <description>Microflow to be executed when the rating is changed</description>
             <returnType type="Void" />
         </property>
     </properties>
