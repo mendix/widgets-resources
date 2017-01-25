@@ -58,6 +58,7 @@ class StarRating extends WidgetBase {
             initialRate: this.getRate(),
             onChange: (rate: number) => this.submitData(rate),
             isReadOnly,
+            rateType: this.rateType,
             start: this.start,
             step: this.step,
             stop: this.maximumStars
