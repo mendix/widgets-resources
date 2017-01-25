@@ -15,14 +15,13 @@ class StarRating extends WidgetBase {
     private ownerReference: string;
     private onChangeMicroflow: string;
     private averageAttribute: string;
+
     private step: number;
     private maximumStars: number;
     private fractions: number;
     private start: number;
-
     private campaignReference: string;
     private contextObject: mendix.lib.MxObject;
-
 
     postCreate() {
         this.campaignReference = this.campaignEntity.split("/")[0];
@@ -34,24 +33,31 @@ class StarRating extends WidgetBase {
         this.start = 0;
     }
 
-    update(object: mendix.lib.MxObject, callback: Function) {
+    update(object: mendix.lib.MxObject, callback?: Function) {
         this.contextObject = object;
         if (this.hasValidConfig()) {
             this.updateRendering();
-            callback();
-        } else {
-            callback();
         }
         this.resetSubscriptions();
+
+        if (callback) {
+            callback();
+        }
     }
 
     updateRendering() {
         render(createElement(RatingComponent, this.getProps()), this.domNode);
     }
 
+    uninitialize(): boolean {
+        unmountComponentAtNode(this.domNode);
+
+        return true;
+    }
+
     private getProps() {
         const isReadOnly = this.readOnly || !(this.contextObject && this.rateType === "single"
-        && this.contextObject.get(this.ownerReference) === window.mx.session.getUserId());
+            && this.contextObject.get(this.ownerReference) === window.mx.session.getUserId());
 
         return {
             fractions: this.fractions,
@@ -66,21 +72,22 @@ class StarRating extends WidgetBase {
     }
 
     private getRate(): number {
-        const maximumValue = this.step * this.maximumStars;
-        const rate = !this.contextObject ? 0.0 : this.rateType === "overall"
-            ? this.contextObject.get(this.averageAttribute) as number
-            : this.contextObject.get(this.rateAttribute) as number;
-        return rate;
+        if (this.contextObject) {
+            return this.rateType === "overall"
+                ? this.contextObject.get(this.averageAttribute) as number
+                : this.contextObject.get(this.rateAttribute) as number;
+        }
+        return 0;
     }
 
     private submitData(rate: number) {
         this.contextObject.set(this.rateAttribute, rate);
         if (this.onChangeMicroflow) {
-            this.executeCommitMicroflow(this.contextObject);
+            this.executeMicroflow(this.contextObject);
         }
     }
 
-    private executeCommitMicroflow(mendixObject: mendix.lib.MxObject) {
+    private executeMicroflow(mendixObject: mendix.lib.MxObject) {
         window.mx.ui.action(this.onChangeMicroflow, {
             error: (error: Error) =>
                 window.mx.ui.error(`Error while executing microflow: ${this.onChangeMicroflow}: ${error.message}`),
@@ -92,28 +99,24 @@ class StarRating extends WidgetBase {
     }
 
     private hasValidConfig() {
-        let errorMessage: string[] = [];
-        let invalid: boolean;
+        const errorMessage: string[] = [];
 
         if (!this.contextObject) {
             return true; // incase there's no contextObject
         }
-        invalid = (this.rateType === "overall") && this.contextObject.getEntity() !== this.campaignEntity;
-        if (invalid) {
+        if ((this.rateType === "overall") && this.contextObject.getEntity() !== this.campaignEntity) {
             errorMessage.push(" - For rate type 'Overall', the contextObject be campaign entity");
         }
-        invalid = (this.rateType === "single") && this.contextObject.getEntity() !== this.rateEntity;
-        if (invalid) {
+        if ((this.rateType === "single") && this.contextObject.getEntity() !== this.rateEntity) {
             errorMessage.push(` - For rate type 'Single', the contextObject be rate entity '${this.rateEntity}'`);
         }
-        invalid = this.rateType === "single" && !this.contextObject.isReference(this.ownerReference);
-        if (invalid) {
+        if (this.rateType === "single" && !this.contextObject.isReference(this.ownerReference)) {
             errorMessage.push(` - Context object has no User / Owner association to it`);
         }
 
         if (errorMessage.length) {
             errorMessage.unshift("Configuration Error: ");
-            window.mx.ui.error(errorMessage.join("\n"));
+            window.mx.ui.error(errorMessage.join("\n")); // TODO: Alert component
         }
         return !errorMessage.length;
     }
@@ -137,19 +140,14 @@ class StarRating extends WidgetBase {
             });
         }
     }
-
-    uninitialize(): boolean {
-        unmountComponentAtNode(this.domNode);
-        return true;
-    }
 }
 
 // Declare widget prototype the Dojo way
 // Thanks to https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/dojo/README.md
 // tslint:disable : only-arrow-functions
 dojoDeclare("com.mendix.widget.StarRating.StarRating", [ WidgetBase ], function(Source: any) {
-    let result: any = {};
-    for (let property in Source.prototype) {
+    const result: any = {};
+    for (const property in Source.prototype) {
         if (property !== "constructor" && Source.prototype.hasOwnProperty(property)) {
             result[property] = Source.prototype[property];
         }
