@@ -45,11 +45,11 @@ module.exports = function(config) {
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: true,
-        browsers: [ "Chrome" ], 
+        browsers: [ "Chrome" ],
         singleRun: false,
         concurrency: Infinity,
         coverageReporter: {
-            dir: "./dist/testresults", 
+            dir: "./dist/testresults",
             reporters: [
                 { type: "json", subdir: ".", file: "coverage.json" },
                 { type: "text" }
