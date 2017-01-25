@@ -6,116 +6,54 @@ import { createElement, DOM } from "react";
 import * as Rating from "react-rating";
 
 import { StarRating, StarRatingProps } from "../StarRating";
+//import { RateProps } from "react-rating";
 
 describe("StarRating", () => {
     const renderStarRating = (props: StarRatingProps) => shallow(createElement(StarRating, props));
-    const fullColor = "#0000FF";
-    const emptyColor = "#FFFFFF";
-    const maximumStars = 6;
-    const initialRate = 2;
-    const isReadOnly = true;
-    const empty = "glyphicon glyphicon-star-empty custom custom-empty";
-    const full = "glyphicon glyphicon-star custom custom-full";
+
+    let starProps: StarRatingProps = {
+        fractions: 1,
+        initialRate: 3,
+        isReadOnly: true,
+        rateType: "single",
+        start: 0,
+        step: 1,
+        stop: 5
+    };
 
     it("renders the structure correctly", () => {
-        const starRating = renderStarRating({ fullColor, emptyColor });
+        const starRating = renderStarRating(starProps);
 
-        expect(starRating).toBeElement(
-            createElement(Rating, {
-                empty,
-                fractions: initialRate,
-                full
-            })
-        );
+        expect(starRating.get(0).props.full)
+            .toBe("glyphicon glyphicon-star widget-starrating widget-starrating-full");
+        expect(starRating.get(0).props.empty)
+            .toBe("glyphicon glyphicon-star-empty widget-starrating widget-starrating-empty");
+        expect(starRating.get(0).props.placeholder)
+            .toBe("glyphicon glyphicon-star widget-starrating widget-starrating-placeholder");
+        expect(starRating.get(0).props.readonly).toBe(true);
+        expect(starRating.get(0).props.initialRate).toBe(3);
     });
 
-    it("sets the rating value", () => {
-        const starRating = renderStarRating({ fullColor, emptyColor, initialRate, maximumStars, isReadOnly })
-            .find(Rating);
+    it("receives an onChange function", () => {
+        const onChangeSpy = jasmine.createSpy("onChange");
+        const onClickSpy = jasmine.createSpy("onClick");
+        starProps.onChange = onChangeSpy;
 
-        expect(starRating.prop("initialRate")).toBe(initialRate);
-    });
+        const starRating = renderStarRating(starProps);
 
-    it("updates the rating value when the values are changed", () => {
-        //
-    });
-
-    describe("should render as readonly", () => {
-        it("when show total is false", () => {
-            //
-        });
-
-        it("when user is not vote owner", () => {
-            //
-        });
+        expect(starRating.get(0).props.onChange).toBe(onChangeSpy);
+        expect(starRating.get(0).props.onClick).toBe(onClickSpy);
 
     });
 
-    describe("with step", () => {
-        it("not specified renders empty ui", () => {
-            //
-        });
+    describe("single", () => {
+        it("should render with whole numbers not fraction", () => {
+            starProps.rateType = "single";
+            starProps.fractions = 2;
 
-        it("stop  equal or less than 0 shows invalid", () => {
-            //
-        });
+            const starRating = renderStarRating(starProps).find(Rating);
 
-        it("less than 0 show empty ui", () => {
-            //
-        });
-
-        it("greater than the maximum show maximum", () => {
-            //
-        });
-    });
-
-    describe("color", () => {
-        it("should be red color is red", () => {
-            // Fix me
-        });
-
-        it("should not be red when color not red", () => {
-            // Fix me
-        });
-    });
-
-    describe("symbol", () => {
-        it("should be star if set style is star", () => {
-            // Fix me
-        });
-
-        it("should not be star if set style is not star", () => {
-            // Fix me
-        });
-    });
-
-    describe("with an onClick microflow set", () => {
-        it("executes the microflow when a rating is clicked", () => {
-            //
-        });
-
-        it("microflow selected it shows an error in configuration", () => {
-            //
-        });
-
-        it("invalid microflow shows an error when a rating is clicked", () => {
-            //
-        });
-    });
-
-    describe("with an onClick show page set", () => {
-        it("opens the page when a rating is clicked", () => {
-            //
-        });
-
-        it("without a page selected it shows an error in configuration", () => {
-            //
-        });
-    });
-
-    describe("without a on click", () => {
-        it("should not respond on user click", () => {
-            //
+            expect(starRating.get(0).props.fraction).toBe(1);
         });
     });
 
