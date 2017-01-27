@@ -38,6 +38,7 @@
             <category>Data source</category>
             <description/>
             <attributeTypes>
+                <attributeType name="Decimal"/>
                 <attributeType name="Integer"/>
             </attributeTypes>
         </property>
