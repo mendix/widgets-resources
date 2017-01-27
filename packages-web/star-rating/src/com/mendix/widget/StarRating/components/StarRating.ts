@@ -4,44 +4,31 @@ import * as Rating from "react-rating";
 import { Alert } from "./Alert";
 
 export interface StarRatingProps {
-    campaignEntity?: string;
+    campaignEntity: string;
     contextObject?: mendix.lib.MxObject;
-    fractions?: number;
     initialRate?: number;
     onChangeMicroflow?: string;
-    placeholder?: string;
-    readOnly?: boolean;
-    start?: number;
-    step?: number;
-    stop?: number;
-    rateType?: "single" | "overall";
-    rateEntity?: string;
-    rateAttribute?: string;
-    averageAttribute?: string;
+    readOnly: boolean;
+    rateType: "single" | "overall";
+    rateEntity: string;
+    rateAttribute: string;
+    averageAttribute: string;
 }
 
 export class StarRating extends Component<StarRatingProps, {}> {
-    static defaultProps: StarRatingProps = {
-        fractions: 2,
-        start: 0,
-        step: 1,
-        stop: 5
-    };
-    private fractions: number;
-    private contextObject: mendix.lib.MxObject;
+
+    private fractions: number = 1;
+    private contextObject: mendix.lib.MxObject | undefined;
     private rateType: string;
     private campaignEntity: string;
     private ownerReference: string = "System.owner";
     private errorMessage: string;
+    private start: number;
+    private step: number;
+    private stop: number;
 
-    componentDidMount() {
-       // this.campaignEntity = this.props.campaignEntity.split("/")[1];
-    }
     render() {
-        this.fractions = this.props.fractions;
-        this.contextObject = this.props.contextObject;
-        this.rateType = this.props.rateType;
-        this.campaignEntity = this.props.campaignEntity.split("/")[1];
+        this.setProperties();
         if (this.hasValidConfig(this.props)) {
             this.fractions = this.rateType === "overall" ? this.fractions : 1;
             const readonly = this.props.readOnly || !(this.contextObject && this.rateType === "single"
@@ -54,14 +41,23 @@ export class StarRating extends Component<StarRatingProps, {}> {
                 onChange:  (rate: number) => this.submitData(rate),
                 placeholder: "glyphicon glyphicon-star widget-star-rating widget-star-rating-placeholder",
                 readonly,
-                start: this.props.start,
-                step: this.props.step,
-                stop: this.props.stop
+                start: this.start,
+                step: this.step,
+                stop: this.stop
             });
         } else {
             // should return alert component
             return createElement(Alert, { message: this.errorMessage });
         }
+    }
+    private setProperties() {
+        this.contextObject = this.props.contextObject ? this.props.contextObject : undefined;
+        this.rateType = this.props.rateType;
+        this.campaignEntity = this.props.campaignEntity.split("/")[1];
+        this.fractions = 2;
+        this.start = 0;
+        this.step = 1;
+        this.stop = 5;
     }
 
     private getRate() {
@@ -71,11 +67,11 @@ export class StarRating extends Component<StarRatingProps, {}> {
                 : this.contextObject.get(this.props.rateAttribute) as number
             : 0 ;
 
-        const maximumValue = this.props.step * this.props.stop;
+        const maximumValue = this.step * this.stop;
         if (initialRate > maximumValue) {
             return maximumValue;
-        } else if (initialRate < this.props.start) {
-            return this.props.start;
+        } else if (initialRate < this.start) {
+            return this.start;
         } else {
             // This helps to round off to the nearest fraction.
             // eg fraction 2 or 0.5, rounds off a rate 1.4 to 1.5 
@@ -84,9 +80,11 @@ export class StarRating extends Component<StarRatingProps, {}> {
     }
 
     private submitData(rate: number) {
-        this.contextObject.set(this.props.rateAttribute, rate);
-        if (this.props.onChangeMicroflow) {
-            this.executeMicroflow(this.contextObject.getGuid(), this.props.onChangeMicroflow);
+        if (this.contextObject) {
+            this.contextObject.set(this.props.rateAttribute, rate);
+            if (this.props.onChangeMicroflow) {
+                this.executeMicroflow(this.contextObject.getGuid(), this.props.onChangeMicroflow);
+            }
         }
     }
 

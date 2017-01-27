@@ -20,7 +20,7 @@ class StarRating extends WidgetBase {
 
     update(object: mendix.lib.MxObject, callback?: Function) {
         this.contextObject = object;
-        render(createElement(RatingComponent, this.getProps()), this.domNode);
+        this.updateRendering();
         this.resetSubscriptions();
         if (callback) {
             callback();
@@ -42,12 +42,12 @@ class StarRating extends WidgetBase {
             averageAttribute: this.averageAttribute,
             campaignEntity: this.campaignEntity,
             contextObject: this.contextObject,
-            isReadOnly: this.readOnly,
             onChangeMicroflow: this.onChangeMicroflow,
             ownerReference: this.ownerReference,
             rateAttribute: this.rateAttribute,
             rateEntity: this.rateEntity,
-            rateType: this.rateType
+            rateType: this.rateType,
+            readOnly: this.readOnly
         };
     }
 
