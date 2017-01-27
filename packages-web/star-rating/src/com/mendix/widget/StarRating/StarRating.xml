@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget id="com.mendix.widget.StarRating.StarRating" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../../xsd/widget.xsd">
     <name>StarRating</name>
-    <description>This widget lets you record votes for the object.</description>
+    <description>This widget lets users rate an object from 1 to 5..</description>
     <icon>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAANkE3LLa
         AgAAAkxJREFUeJyVkttLUwEcxz/n7OLm5tzcxHlhXjLDsUg0xYweeurF8M1kkaiJ
@@ -22,21 +22,21 @@
         <property key="rateType" type="enumeration" defaultValue="single">
             <caption>Rate type</caption>
             <category>Display</category>
-            <description>Render as an overall rate (shows average rate) or a single rate</description>
+            <description>Render as average or a single rate</description>
             <enumerationValues>
                 <enumerationValue key="single">Single</enumerationValue>
-                <enumerationValue key="overall">Overall rate</enumerationValue>
+                <enumerationValue key="average">Average</enumerationValue>
             </enumerationValues>
         </property>
         <property key="rateEntity" type="entity">
             <caption>Rating entity</caption>
             <category>Data source</category>
-            <description>The rate entity to use</description>
+            <description>The entity where rates are stored</description>
         </property>
         <property key="rateAttribute" type="attribute" entityProperty="rateEntity">
             <caption>Rating attribute</caption>
             <category>Data source</category>
-            <description/>
+            <description>The attribute containing rate values</description>
             <attributeTypes>
                 <attributeType name="Decimal"/>
                 <attributeType name="Integer"/>
@@ -45,12 +45,12 @@
         <property key="campaignEntity" type="entity" pathType="reference" isPath="yes" entityProperty="rateEntity">
             <caption>Campaign entity</caption>
             <category>Data source</category>
-            <description>The entity containing items to be rated</description>
+            <description>The entity containing items which are to be rated</description>
         </property>
         <property key="averageAttribute" type="attribute" entityProperty="campaignEntity">
             <caption>Average attribute</caption>
             <category>Data source</category>
-            <description>Attribute where the average is saved</description>
+            <description>Attribute where the average rate is saved</description>
             <attributeTypes>
                 <attributeType name="Decimal"/>
             </attributeTypes>
@@ -58,7 +58,7 @@
         <property key="onChangeMicroflow" type="microflow" required="false">
             <caption>On change microflow</caption>
             <category>Behaviour</category>
-            <description>Microflow to be executed when the rating is changed</description>
+            <description>Microflow to be executed when the rate is changed</description>
             <returnType type="Void" />
         </property>
     </properties>

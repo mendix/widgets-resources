@@ -2,13 +2,15 @@
 This widget lets users rate an object from 1 to 5.
 
 ## Features
-* Star rating
+* Can only rate with full star
+* Supports half stars when rendering average rate
+* Execute a microflow when the rate is changed
 
 ## Dependencies
 Mendix 6.
 
 ## Demo project
-http://star-rating.mxapps.io
+http://rating100.mxapps.io
 
 ## Issues
 Please report issues at https://github.com/mendixlabs/star-rating/issues.
