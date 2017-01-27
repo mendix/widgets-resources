@@ -1,4 +1,5 @@
 var webpackConfig = require("./webpack.config");
+const path = require("path");
 Object.assign(webpackConfig, {
     debug: true,
     devtool: "inline-source-map",
@@ -11,19 +12,33 @@ Object.assign(webpackConfig, {
 });
 
 module.exports = function(config) {
+    if (config.codeCoverage) {
+        console.log("With instrumenter");
+        Object.assign(webpackConfig, {
+            module: Object.assign(webpackConfig.module, {
+                postLoaders: [{
+                    test: /\.ts$/,
+                    loader: "istanbul-instrumenter",
+                    include: path.resolve(__dirname, "src"),
+                    exclude: /\.(spec)\.ts$/
+                }]
+            })
+        });
+    }
+
     config.set({
         basePath: "",
         frameworks: [ "jasmine" ],
         files: [
-            { pattern: "src/**/*.ts", watched: false, included: false, served: false },
-            { pattern: "tests/**/*.ts", watched: false, included: false, served: false },
+            { pattern: "src/**/*.ts", watched: true, included: false, served: false },
+            { pattern: "tests/**/*.ts", watched: true, included: false, served: false },
             "tests/test-index.js"
         ],
         exclude: [],
         preprocessors: { "tests/test-index.js": [ "webpack", "sourcemap" ] },
         webpack: webpackConfig,
         webpackServer: { noInfo: true },
-        reporters: [ "progress", "kjhtml", "coverage" ],
+        reporters: [ "progress", config.codeCoverage ? "coverage": "kjhtml" ],
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
@@ -32,7 +47,7 @@ module.exports = function(config) {
         singleRun: false,
         concurrency: Infinity,
         coverageReporter: {
-            dir: "./dist/testresults", 
+            dir: "./dist/testresults",
             reporters: [
                 { type: "json", subdir: ".", file: "coverage.json" },
                 { type: "text" }
