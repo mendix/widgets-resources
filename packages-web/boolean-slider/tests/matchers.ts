@@ -1,4 +1,3 @@
-/* tslint:disable */
 import { ReactChild } from "react";
 import { ShallowWrapper } from "enzyme";
 import { findDifference, toElementStructure } from "./helpers/structureMatcher";
@@ -14,41 +13,39 @@ function compareTrees(actual: any, expected: ReactChild, strict: boolean) {
 
 function toBeElement() {
     return {
-        compare: function(actual: ReactChild, expected: ReactChild) {
-            return compareTrees(actual, expected, true);
-        }
+        compare: (actual: ReactChild, expected: ReactChild) =>
+            compareTrees(actual, expected, true)
     };
 }
 
 function toMatchStructure() {
     return {
-        compare: function(actual: HTMLElement, expected: ReactChild) {
-            return compareTrees(actual, expected, false);
-        }
+        compare: (actual: HTMLElement, expected: ReactChild) =>
+            compareTrees(actual, expected, false)
     };
 }
 
 function toHaveClass() {
     return {
-        compare: function(actual: HTMLElement | ShallowWrapper<any, any>, expected: string) {
+        compare: (actual: HTMLElement | ShallowWrapper<any, any>, expected: string) => {
             const actualClasses = actual instanceof HTMLElement
                 ? actual.className
                 : actual.prop("className");
             if (actualClasses.trim().split(/\s+/).indexOf(expected) === -1) {
                 return {
-                    pass: false,
-                    message: `Expected element to have class ${expected} but it has ${actualClasses}`
+                    message: `Expected element to have class ${expected} but it has ${actualClasses}`,
+                    pass: false
                 };
             } else {
                 return {
-                    pass: true,
-                    message: `Expected element not to have class ${expected}`
+                    message: `Expected element not to have class ${expected}`,
+                    pass: true
                 };
             }
         }
     };
 }
 
-beforeEach(function() {
-    jasmine.addMatchers({ toBeElement, toMatchStructure, toHaveClass });
-});
+beforeEach(() =>
+    jasmine.addMatchers({ toBeElement, toMatchStructure, toHaveClass })
+);
