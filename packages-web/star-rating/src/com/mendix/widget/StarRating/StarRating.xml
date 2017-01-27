@@ -22,7 +22,7 @@
         <property key="rateType" type="enumeration" defaultValue="single">
             <caption>Rate type</caption>
             <category>Display</category>
-            <description>Render as average or a single rate</description>
+            <description>Render as single or a average rate</description>
             <enumerationValues>
                 <enumerationValue key="single">Single</enumerationValue>
                 <enumerationValue key="average">Average</enumerationValue>

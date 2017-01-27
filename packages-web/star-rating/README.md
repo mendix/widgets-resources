@@ -10,7 +10,7 @@ This widget lets users rate an object from 1 to 5.
 Mendix 6.
 
 ## Demo project
-http://rating100.mxapps.io
+https://rating100.mxapps.io
 
 ## Issues
 Please report issues at https://github.com/mendixlabs/star-rating/issues.
