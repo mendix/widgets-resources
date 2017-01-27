@@ -11,7 +11,7 @@ class StarRating extends WidgetBase {
     private rateAttribute: string;
     private campaignEntity: string;
     private rateEntity: string;
-    private rateType: "overall" | "single";
+    private rateType: "average" | "single";
     private ownerReference: string;
     private onChangeMicroflow: string;
     private averageAttribute: string;
