@@ -4,7 +4,7 @@
   "description": "Toggle a boolean attribute.",
   "scripts": {
     "pretest": "tsc",
-    "test": "karma start --single-run && node tests/remap.js"
+    "test": "karma start --single-run --codeCoverage && node tests/remap.js"
   },
   "repository": {
     "type": "git",
