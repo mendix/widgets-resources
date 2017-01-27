@@ -6,7 +6,7 @@
         "comment-format": [ true, "check-space" ],
         "eofline": true,
         "indent": [ true, "spaces" ],
-        "member-ordering": [ true, { "order": "statics-first" } ],
+        "member-ordering": [ true, "variables-before-functions" ],
         "no-arg": true,
         "no-bitwise": true,
         "no-conditional-assignment": true,
@@ -83,7 +83,11 @@
                 "named-imports-order": "lowercase-last"
             }
         ],
-        "object-literal-key-quotes": [ true, "as-needed" ],
-        "object-literal-shorthand": true
+        "curly": false
+    },
+    "jsRules": {
+        "trailing-comma": [ false ],
+        "object-literal-sort-keys": false,
+        "array-bracket-spacing": [ true, "always" ]
     }
 }

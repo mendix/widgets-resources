@@ -2,24 +2,26 @@ import { ShallowWrapper, shallow } from "enzyme";
 import { DOM, createElement } from "react";
 
 import { Slider, SliderProps } from "../Slider";
+import { Alert } from "../Alert";
 
 describe("Slider", () => {
     let slider: ShallowWrapper<SliderProps, any>;
-    let sliderProps: SliderProps;
     let checkbox: ShallowWrapper<any, any>;
     let label: ShallowWrapper<any, any>;
-    const errorNode = DOM.div(null, "This is an error");
-    const createAndFindElements = (props: SliderProps, alert?: React.DOMElement<any, any>) => {
-        slider = shallow(createElement(Slider, props, alert));
+    const createAndFindElements = (props: SliderProps) => {
+        slider = shallow(createElement(Slider, props));
         checkbox = slider.find(".widget-boolean-slider-checkbox");
         label = slider.find(".widget-boolean-slider-btn");
     };
+    const createProps = (props: Partial<SliderProps>): SliderProps => {
+        props.onClick = jasmine.createSpy("onClick");
+        props.isChecked = typeof props.isChecked !== "undefined" ? props.isChecked : true;
+        props.status = props.status || "enabled";
+        return props as SliderProps;
+    };
 
     it("should render the full slider structure", () => {
-        createAndFindElements({
-            isChecked: true,
-            status: "enabled"
-        });
+        createAndFindElements(createProps({}));
 
         expect(slider).toBeElement(
             DOM.div({ className: "widget-boolean-slider" },
@@ -39,10 +41,7 @@ describe("Slider", () => {
 
     describe("that is true", () => {
         it("should be checked", () => {
-            createAndFindElements({
-                isChecked: true,
-                status: "enabled"
-            });
+            createAndFindElements(createProps({}));
 
             expect(checkbox.props().checked).toBe(true);
         });
@@ -50,10 +49,7 @@ describe("Slider", () => {
 
     describe("that is false", () => {
         it("should be unchecked", () => {
-            createAndFindElements({
-                isChecked: false,
-                status: "enabled"
-            });
+            createAndFindElements(createProps({ isChecked: false }));
 
             expect(checkbox.props().checked).toBe(false);
         });
@@ -61,114 +57,83 @@ describe("Slider", () => {
 
     describe("that is enabled", () => {
         it("should have the enabled class", () => {
-            createAndFindElements({
-                isChecked: true,
-                status: "enabled"
-            });
+            createAndFindElements(createProps({}));
 
             expect(checkbox.hasClass("enabled")).toBe(true);
             expect(label.hasClass("enabled")).toBe(true);
         });
 
         it("should handle click event", () => {
-            const onClick = jasmine.createSpy("onClick");
-            createAndFindElements({
-                isChecked: true,
-                onClick,
-                status: "enabled"
-            });
+            const props = createProps({});
+            createAndFindElements(props);
 
             label.simulate("click");
 
-            expect(onClick).toHaveBeenCalled();
+            expect(props.onClick).toHaveBeenCalled();
         });
     });
 
     describe("that is disabled", () => {
         it("should not have the enabled class", () => {
-            createAndFindElements({
-                status: "disabled",
-                isChecked: true
-            });
+            createAndFindElements(createProps({ status: "disabled" }));
 
             expect(checkbox.hasClass("enabled")).toBe(false);
             expect(label.hasClass("enabled")).toBe(false);
         });
 
         it("should not handle a click event", () => {
-            const onClick = jasmine.createSpy("onClick");
-            createAndFindElements({
-                status: "disabled",
-                isChecked: true,
-                onClick
-            });
+            const props = createProps({ status: "disabled" });
+            createAndFindElements(props);
 
             label.simulate("click");
 
-            expect(onClick).not.toHaveBeenCalled();
+            expect(props.onClick).not.toHaveBeenCalled();
         });
     });
 
     describe("without a context", () => {
         it("should have the no-slider class", () => {
-            createAndFindElements({
+            createAndFindElements(createProps({
                 isChecked: false,
                 status: "no-context"
-            });
+            }));
 
             expect(label).toHaveClass("no-slider");
         });
 
         it("should not handle a click event", () => {
-            const onClick = jasmine.createSpy("onClick");
-            createAndFindElements({
-                isChecked: true,
-                onClick,
-                status: "no-context"
-            });
+            const props = createProps({ status: "no-context" });
+            createAndFindElements(props);
 
             label.simulate("click");
 
-            expect(onClick).not.toHaveBeenCalled();
+            expect(props.onClick).not.toHaveBeenCalled();
         });
     });
 
     describe("that has an error", () => {
-        beforeEach(() => {
-            sliderProps = {
-                status: "enabled",
-                hasError: true,
+        it("should render the structure with an error alert", () => {
+            const props = createProps({
+                alertMessage: "This is an error",
                 isChecked: false
-            };
-            createAndFindElements(sliderProps, errorNode);
-        });
+            });
+            createAndFindElements(props);
 
-        it("should have the class has-error", () => {
-            expect(slider.hasClass("has-error")).toBe(true);
-        });
-
-        it("should show the supplied error", () => {
-            expect(slider.childAt(2)).toBeElement(errorNode);
-        });
-    });
-
-    describe("that has no error", () => {
-        beforeEach(() => {
-            sliderProps = {
-                status: "enabled",
-                hasError: false,
-                isChecked: false,
-                onClick: () => { console.log("clicked"); }
-            };
-            createAndFindElements(sliderProps, errorNode);
-        });
-
-        it("should not have the class has-error", () => {
-            expect(slider.hasClass("has-error")).toBe(false);
-        });
-
-        it("should not show any error message", () => {
-            expect(slider.childAt(2).type()).toBe(null);
+            expect(slider).toBeElement(
+                DOM.div({ className: "widget-boolean-slider has-error" },
+                    DOM.input({
+                        checked: false,
+                        className: "widget-boolean-slider-checkbox enabled",
+                        readOnly: true,
+                        type: "checkbox"
+                    }),
+                    DOM.div({
+                        className: "widget-boolean-slider-btn enabled",
+                        onClick: jasmine.any(Function) as any
+                    }),
+                    createElement(Alert, { message: props.alertMessage })
+                )
+            );
         });
     });
 });

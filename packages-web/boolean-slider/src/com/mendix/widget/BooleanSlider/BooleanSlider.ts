@@ -5,7 +5,6 @@ import { createElement } from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 
 import { Slider, SliderStatus } from "./components/Slider";
-import { ValidationAlert } from "./components/ValidationAlert";
 
 class BooleanSlider extends WidgetBase {
     // Properties from Mendix modeler
@@ -29,34 +28,31 @@ class BooleanSlider extends WidgetBase {
     }
 
     private updateRendering(alertMessage?: string) {
-        const contextObject = this.contextObject;
-        const status: SliderStatus = contextObject
-            ? !this.readOnly && !contextObject.isReadonlyAttr(this.booleanAttribute) ? "enabled" : "disabled"
+        const status: SliderStatus = this.contextObject
+            ? !this.readOnly && !this.contextObject.isReadonlyAttr(this.booleanAttribute) ? "enabled" : "disabled"
             : "no-context";
 
         render(createElement(Slider, {
-                hasError: !!alertMessage,
-                isChecked: !!(contextObject && contextObject.get(this.booleanAttribute)),
-                onClick: (value: boolean) => this.handleToggle(value),
-                status
-            },
-            alertMessage ? createElement(ValidationAlert, { message: alertMessage }) : null
-        ), this.domNode);
+            alertMessage,
+            isChecked: this.contextObject && this.contextObject.get(this.booleanAttribute) as boolean,
+            onClick: () => this.handleToggle(),
+            status
+        }), this.domNode);
     }
 
-    private handleToggle(value: boolean) {
-        this.contextObject.set(this.booleanAttribute, value);
-        this.executeAction(this.onChangeMicroflow, [ this.contextObject.getGuid() ]);
+    private handleToggle() {
+        this.contextObject.set(this.booleanAttribute, !this.contextObject.get(this.booleanAttribute));
+        this.executeAction(this.onChangeMicroflow, this.contextObject.getGuid());
     }
 
-    private executeAction(actionname: string, guids: string[]) {
+    private executeAction(actionname: string, guid: string) {
         if (actionname) {
             window.mx.ui.action(actionname, {
-                error: error =>
-                    window.mx.ui.error(`An error occurred while executing microflow: ${error.message}`, true),
+                error: (error: Error) =>
+                    this.updateRendering(`An error occurred while executing microflow: ${error.message}`),
                 params: {
                     applyto: "selection",
-                    guids
+                    guids: [ guid ]
                 }
             });
         }
@@ -78,7 +74,7 @@ class BooleanSlider extends WidgetBase {
             });
 
             this.subscribe({
-                callback: validations => this.handleValidations(validations),
+                callback: (validations) => this.handleValidations(validations),
                 guid: this.contextObject.getGuid(),
                 val: true
             });
@@ -97,8 +93,8 @@ class BooleanSlider extends WidgetBase {
 // Thanks to https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/dojo/README.md
 // tslint:disable : only-arrow-functions
 dojoDeclare("com.mendix.widget.BooleanSlider.BooleanSlider", [ WidgetBase ], function(Source: any) {
-    let result: any = {};
-    for (let property in Source.prototype) {
+    const result: any = {};
+    for (const property in Source.prototype) {
         if (property !== "constructor" && Source.prototype.hasOwnProperty(property)) {
             result[property] = Source.prototype[property];
         }
