@@ -4,7 +4,7 @@
   "description": "This widget lets users rate an object from 1 to 5",
   "scripts": {
     "pretest": "tsc",
-    "test": "karma start --single-run --instrumenter && node tests/remap.js"
+    "test": "karma start --codeCoverage && node tests/remap.js"
   },
   "repository": {
     "type": "git",
@@ -77,6 +77,6 @@
     "classnames": "^2.2.5",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-rating": "git+https://github.com/FlockOfBirds/react-rating.git"
+    "react-rating": "^0.6.5"
   }
 }
