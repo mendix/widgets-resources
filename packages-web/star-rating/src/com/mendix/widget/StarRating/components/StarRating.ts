@@ -85,7 +85,7 @@ export class StarRating extends Component<StarRatingProps, StarRatingState> {
             return this.start;
         } else {
             // This helps to round off to the nearest fraction.
-            // eg fraction 2 or 0.5, rounds off a rate 1.4 to 1.5
+            // eg fraction 2 or 0.5, rounds off a rate 1.4 to 1.5, 1.2 to 1.0
             return Math.round(initialRate * this.fractions) / this.fractions;
         }
     }
