@@ -58,16 +58,13 @@ class StarRating extends WidgetBase {
                 callback: () => this.updateRendering(),
                 guid: this.contextObject.getGuid()
             });
-            this.subscribe({
-                attr: this.rateAttribute,
-                callback: () => this.updateRendering(),
-                guid: this.contextObject.getGuid()
-            });
-            this.subscribe({
-                attr: this.averageAttribute,
-                callback: () => this.updateRendering(),
-                guid: this.contextObject.getGuid()
-            });
+            [ this.rateAttribute, this.averageAttribute ].forEach(
+                (attribute) => this.subscribe({
+                    attr: attribute,
+                    callback: () => this.updateRendering(),
+                    guid: this.contextObject.getGuid()
+                })
+            );
         }
     }
 }
