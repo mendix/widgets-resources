@@ -20,13 +20,11 @@ export interface StarRatingState {
 }
 
 export class StarRating extends Component<StarRatingProps, StarRatingState> {
-
     private fractions = 1;
     private contextObject: mendix.lib.MxObject | undefined;
     private rateType: string;
     private campaignEntity: string;
     private ownerReference = "System.owner";
-    private errorMessage: string;
     private start: number;
     private step: number;
     private stop: number;
@@ -34,9 +32,17 @@ export class StarRating extends Component<StarRatingProps, StarRatingState> {
     constructor(props: StarRatingProps) {
         super(props);
         this.state = { errorMessage: "" };
+        this.fractions = 2;
+        this.start = 0;
+        this.step = 1;
+        this.stop = 5;
     }
+
     render() {
-        this.setProperties();
+        this.contextObject = this.props.contextObject || undefined;
+        this.rateType = this.props.rateType;
+        this.campaignEntity = this.props.campaignEntity.split("/")[1];
+
         if (this.hasValidConfig(this.props)) {
             this.fractions = this.rateType === "average" ? this.fractions : 1;
             const readonly = this.props.readOnly || !(this.contextObject && this.rateType === "single"
@@ -55,23 +61,16 @@ export class StarRating extends Component<StarRatingProps, StarRatingState> {
                     step: this.step,
                     stop: this.stop
                 }),
-                this.state.errorMessage ? createElement(Alert, { message: this.state.errorMessage }) : undefined);
+                createElement(Alert, { message: this.state.errorMessage }));
         } else {
-            // should return alert component
             return createElement(Alert, { message: this.state.errorMessage });
         }
     }
-    private setProperties() {
-        this.contextObject = this.props.contextObject ? this.props.contextObject : undefined;
-        this.rateType = this.props.rateType;
-        this.campaignEntity = this.props.campaignEntity.split("/")[1];
-        this.fractions = 2;
-        this.start = 0;
-        this.step = 1;
-        this.stop = 5;
-    }
 
     private getRate() {
+        // The contextObject entityType for "average" is different from that of "single"
+        // InitialRate for rateType "average" comes from averageAttribute on campaignEntity
+        // InitialRate for rateType "single" comes from rateAttribute on rateEntity
         const initialRate = this.contextObject
             ? this.props.rateType === "average"
                 ? this.contextObject.get(this.props.averageAttribute) as number
@@ -114,7 +113,7 @@ export class StarRating extends Component<StarRatingProps, StarRatingState> {
         const errorMessage: string[] = [];
 
         if (!this.contextObject) {
-            return true; // incase there's no contextObject
+            return true;
         }
         if ((this.rateType === "average") && this.contextObject.getEntity() !== this.campaignEntity) {
             errorMessage.push(" - For rate type 'average', the contextObject should be campaign entity");
@@ -128,7 +127,7 @@ export class StarRating extends Component<StarRatingProps, StarRatingState> {
 
         if (errorMessage.length) {
             errorMessage.unshift("Configuration Error: ");
-            this.errorMessage = errorMessage.join("\n");
+            this.state.errorMessage = errorMessage.join("\n");
         }
         return !errorMessage.length;
     }
