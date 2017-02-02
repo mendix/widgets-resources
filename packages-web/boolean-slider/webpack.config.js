@@ -11,15 +11,19 @@ module.exports = {
         libraryTarget:  "umd"
     },
     resolve: {
-        extensions: [ "", ".ts", ".js", ".json" ]
+        extensions: [ ".ts", ".js", ".json" ]
     },
-    errorDetails: true,
     module: {
-        loaders: [
-            { test: /\.ts$/, loader: "ts-loader" },
-            { test: /\.json$/, loader: "json" },
-            { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
-            { test: /\.sass$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader") }
+        rules: [
+            { test: /\.ts$/, use: "ts-loader" },
+            { test: /\.css$/, loader: ExtractTextPlugin.extract({
+                fallbackLoader: "style-loader",
+                loader: "css-loader"
+            }) },
+            { test: /\.sass$/, loader: ExtractTextPlugin.extract({
+                fallbackLoader:"style-loader",
+                loader: "css-loader!sass-loader"}
+            ) }
         ]
     },
     devtool: "source-map",
@@ -31,7 +35,11 @@ module.exports = {
         ], {
             copyUnmodified: true
         }),
-        new ExtractTextPlugin("./src/com/mendix/widget/BooleanSlider/ui/BooleanSlider.css")
-    ],
-    watch: true
+        new ExtractTextPlugin({
+            filename: "./src/com/mendix/widget/BooleanSlider/ui/BooleanSlider.css"
+        }),
+        new webpack.LoaderOptionsPlugin({
+            debug: true
+        })
+    ]
 };
