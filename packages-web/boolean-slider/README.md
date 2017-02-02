@@ -8,6 +8,9 @@ Toggle a boolean attribute.
 ## Dependencies
 Mendix 6.
 
+## Usage
+Used on both the web and mobile as a more aesthetic alternative to a checkbox.
+
 ## Demo project
 http://booleansliderwidge.mxapps.io
 
