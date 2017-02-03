@@ -28,8 +28,11 @@ class BooleanSlider extends WidgetBase {
     }
 
     private updateRendering(alertMessage?: string) {
+        const enabled = !this.readOnly
+            && this.contextObject
+            && !this.contextObject.isReadonlyAttr(this.booleanAttribute);
         const status: SliderStatus = this.contextObject
-            ? !this.readOnly && !this.contextObject.isReadonlyAttr(this.booleanAttribute) ? "enabled" : "disabled"
+            ? enabled ? "enabled" : "disabled"
             : "no-context";
 
         render(createElement(Slider, {
@@ -48,7 +51,7 @@ class BooleanSlider extends WidgetBase {
     private executeAction(actionname: string, guid: string) {
         if (actionname) {
             window.mx.ui.action(actionname, {
-                error: (error: Error) =>
+                error: (error) =>
                     this.updateRendering(`An error occurred while executing microflow: ${error.message}`),
                 params: {
                     applyto: "selection",
@@ -83,9 +86,7 @@ class BooleanSlider extends WidgetBase {
 
     private handleValidations(validations: mendix.lib.ObjectValidation[]) {
         const validationMessage = validations[0].getErrorReason(this.booleanAttribute);
-        if (validationMessage) {
-            this.updateRendering(validationMessage);
-        }
+        if (validationMessage) this.updateRendering(validationMessage);
     }
 }
 

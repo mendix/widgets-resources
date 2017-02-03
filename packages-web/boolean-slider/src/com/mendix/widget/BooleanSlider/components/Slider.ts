@@ -29,5 +29,5 @@ export const Slider: StatelessComponent<SliderProps> = (props) =>
             }),
             onClick: props.status === "enabled" ? props.onClick : undefined
         }),
-        props.alertMessage ? createElement(Alert, { message: props.alertMessage }) : null
+        createElement(Alert, { message: props.alertMessage })
     );

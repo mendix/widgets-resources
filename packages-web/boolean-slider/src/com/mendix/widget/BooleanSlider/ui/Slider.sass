@@ -5,7 +5,6 @@ $disabledUncheckedColor: #FFF
 
 .widget-boolean-slider-checkbox
     display: none
-
     // add default box-sizing for this scope
     &,
     &:after,
@@ -39,7 +38,6 @@ $disabledUncheckedColor: #FFF
             width: 50%
             height: 100%
 
-
         &:after
             left: 0
             border-radius: 2em
@@ -47,10 +45,8 @@ $disabledUncheckedColor: #FFF
             transition: left .3s cubic-bezier(0.175, 0.885, 0.320, 1.275), padding .3s ease, margin .3s ease
             box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 4px 0 rgba(0, 0, 0, .08)
 
-
         &:hover:after
             will-change: padding
-
 
         &:before
             display: none
@@ -72,7 +68,6 @@ $disabledUncheckedColor: #FFF
 
     &:checked + .widget-boolean-slider-btn:after 
         left: 50%
-    
 
     &:checked + .widget-boolean-slider-btn
         background: $disabledCheckedColor

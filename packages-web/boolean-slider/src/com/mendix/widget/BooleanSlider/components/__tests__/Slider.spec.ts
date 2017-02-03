@@ -34,7 +34,8 @@ describe("Slider", () => {
                 DOM.div({
                     className: "widget-boolean-slider-btn enabled",
                     onClick: jasmine.any(Function) as any
-                })
+                }),
+                createElement(Alert)
             )
         );
     });
