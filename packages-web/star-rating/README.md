@@ -1,9 +1,10 @@
 # Star rating
-This widget lets users rate an object from 1 to 5.
+This widget lets users rate an object with stars from 1 to 5.
 
 ## Features
-* Can only rate with full star
-* Supports half stars when rendering average rate
+* Rate an object with stars
+* Display average rating
+* Display rating in whole and half stars
 * Execute a microflow when the rate is changed
 
 ## Dependencies
