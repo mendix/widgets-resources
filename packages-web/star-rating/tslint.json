@@ -8,7 +8,6 @@
     "eofline": true,
     "indent": [ true, "spaces" ],
     "interface-name": [ true, "never-prefix" ],
-    // "linebreak-style": [ true, "LF" ],
     "member-ordering": [ true, "variables-before-functions", { "order": "statics-first" } ],
     "new-parens": true,
     "no-arg": true,
@@ -98,7 +97,8 @@
       }
     ],
     "member-access": false,
-    "no-unused-variable": [true, "react"]
+    "no-unused-variable": [true, "react"],
+    "arrow-parens": false
   },
   "jsRules": {
     "trailing-comma": [ false ],
