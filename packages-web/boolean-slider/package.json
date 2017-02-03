@@ -1,7 +1,7 @@
 {
   "name": "booleanslider",
   "version": "0.1.0",
-  "description": "Toggle a boolean attribute.",
+  "description": "Toggle a boolean attribute",
   "scripts": {
     "pretest": "tsc",
     "test": "karma start --single-run --codeCoverage && node tests/remap.js"
@@ -24,11 +24,13 @@
     "@types/karma": "^0.13.33",
     "@types/react": "^15.0.6",
     "@types/react-dom": "^0.14.22",
+    "check-dependencies": "^1.0.1",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
     "enzyme": "^2.7.1",
     "extract-text-webpack-plugin": "^2.0.0-rc.2",
     "grunt": "1.0.1",
+    "grunt-check-dependencies": "^1.0.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-compress": "^1.4.1",
     "grunt-contrib-copy": "^1.0.0",
