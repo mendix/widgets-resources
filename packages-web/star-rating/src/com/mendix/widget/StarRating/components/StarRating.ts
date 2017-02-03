@@ -9,7 +9,7 @@ export interface StarRatingProps {
     onRateMicroflow?: string;
     ownerGUID?: string;
     readOnly: boolean;
-    rateType: "single" | "average";
+    rateType: "rating" | "average";
     configurationError?: string;
 }
 
@@ -39,7 +39,7 @@ export class StarRating extends Component<StarRatingProps, StarRatingState> {
 
         if (!this.props.configurationError) {
             this.fractions = this.rateType === "average" ? this.fractions : 1;
-            const readonly = this.props.readOnly || this.rateType === "average" || !(this.rateType === "single"
+            const readonly = this.props.readOnly || this.rateType === "average" || !(this.rateType === "rating"
                 && this.props.ownerGUID === window.mx.session.getUserId());
 
             return DOM.div({ className: "widget-starrating" },
