@@ -19,7 +19,7 @@
         pABznpaW42cdg/hHYz4a/Ablkdwn65WLsgAAAABJRU5ErkJggg==
     </icon>
     <properties>
-        <property key="rateType" type="enumeration" defaultValue="single">
+        <property key="rateType" type="enumeration" defaultValue="rating">
             <caption>Rate type</caption>
             <category>Display</category>
             <description>Render for rating or average</description>
