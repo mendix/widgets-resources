@@ -12,16 +12,18 @@ class StarRating extends WidgetBase {
     private campaignEntity: string;
     private rateEntity: string;
     private rateType: "average" | "single";
-    private ownerReference: string;
     private onChangeMicroflow: string;
     private averageAttribute: string;
 
     private contextObject: mendix.lib.MxObject;
+    private ownerReference: string;
 
     update(object: mendix.lib.MxObject, callback?: Function) {
         this.contextObject = object;
+        this.ownerReference = "System.owner";
         this.updateRendering();
         this.resetSubscriptions();
+
         if (callback) {
             callback();
         }
@@ -38,17 +40,62 @@ class StarRating extends WidgetBase {
     }
 
     private getProps() {
+        // The contextObject entityType for "average" is different from that of "single"
+        // InitialRate for rateType "average" comes from averageAttribute on campaignEntity
+        // InitialRate for rateType "single" comes from rateAttribute on rateEntity
+        const initialRate = this.contextObject
+            ? this.rateType === "average"
+                ? this.contextObject.get(this.averageAttribute) as number
+                : this.contextObject.get(this.rateAttribute) as number
+            : 0 ;
+
         return {
-            averageAttribute: this.averageAttribute,
-            campaignEntity: this.campaignEntity,
-            contextObject: this.contextObject,
-            onChangeMicroflow: this.onChangeMicroflow,
-            ownerReference: this.ownerReference,
-            rateAttribute: this.rateAttribute,
-            rateEntity: this.rateEntity,
+            configurationError: this.hasValidConfiguration(),
+            initialRate,
+            handleOnChange: this.onChangeMicroflow && this.submitData.bind(this),
+            onRateMicroflow: this.onChangeMicroflow,
+            ownerGUID: this.contextObject.get(this.ownerReference) as string,
             rateType: this.rateType,
             readOnly: this.readOnly
         };
+    }
+
+    private hasValidConfiguration(): string | undefined {
+        const errorMessage: string[] = [];
+        if (this.contextObject) {
+            if ((this.rateType === "average") && this.contextObject.getEntity() !== this.campaignEntity.split("/")[1]) {
+                errorMessage.push(" - For rate type 'average', the contextObject should be campaign entity");
+            }
+            if ((this.rateType === "single") && this.contextObject.getEntity() !== this.rateEntity) {
+                errorMessage.push(` - For rate type 'Single', the contextObject be rate entity '${this.rateEntity}'`);
+            }
+            if (this.rateType === "single" && !this.contextObject.isReference(this.ownerReference)) {
+                errorMessage.push(` - Context object has no User / Owner association to it`);
+            }
+            if (errorMessage.length) {
+                errorMessage.unshift("Configuration Error: ");
+            }
+        }
+        return errorMessage.length ? errorMessage.join("\n") : undefined;
+    }
+
+    private submitData(rate: number, microflowError: (error: Error) => void) {
+        if (this.contextObject) {
+            this.contextObject.set(this.rateAttribute, rate);
+            if (this.onChangeMicroflow) {
+                this.executeMicroflow(this.contextObject.getGuid(), this.onChangeMicroflow, microflowError);
+            }
+        }
+    }
+
+    private executeMicroflow(mendixGUID: string, microflow: string, error: (error: Error) => void) {
+        window.mx.ui.action(microflow, {
+            error,
+            params: {
+                applyto: "selection",
+                guids: [ mendixGUID ]
+            }
+        });
     }
 
     private resetSubscriptions() {
@@ -58,8 +105,7 @@ class StarRating extends WidgetBase {
                 callback: () => this.updateRendering(),
                 guid: this.contextObject.getGuid()
             });
-            [ this.rateAttribute, this.averageAttribute ].forEach(
-                (attribute) => this.subscribe({
+            [ this.rateAttribute, this.averageAttribute ].forEach(attribute => this.subscribe({
                     attr: attribute,
                     callback: () => this.updateRendering(),
                     guid: this.contextObject.getGuid()
