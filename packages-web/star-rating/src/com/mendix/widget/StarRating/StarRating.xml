@@ -22,9 +22,9 @@
         <property key="rateType" type="enumeration" defaultValue="single">
             <caption>Rate type</caption>
             <category>Display</category>
-            <description>Render as single or a average rate</description>
+            <description>Render for rating or average</description>
             <enumerationValues>
-                <enumerationValue key="single">Single</enumerationValue>
+                <enumerationValue key="rating">Rating</enumerationValue>
                 <enumerationValue key="average">Average</enumerationValue>
             </enumerationValues>
         </property>
@@ -50,7 +50,7 @@
         <property key="averageAttribute" type="attribute" entityProperty="campaignEntity">
             <caption>Average attribute</caption>
             <category>Data source</category>
-            <description>Attribute where the average rate is saved</description>
+            <description>Attribute containing the average rate</description>
             <attributeTypes>
                 <attributeType name="Decimal"/>
             </attributeTypes>

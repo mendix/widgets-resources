@@ -11,7 +11,7 @@ class StarRating extends WidgetBase {
     private rateAttribute: string;
     private campaignEntity: string;
     private rateEntity: string;
-    private rateType: "average" | "single";
+    private rateType: "average" | "rating";
     private onChangeMicroflow: string;
     private averageAttribute: string;
 
@@ -40,9 +40,9 @@ class StarRating extends WidgetBase {
     }
 
     private getProps() {
-        // The contextObject entityType for "average" is different from that of "single"
+        // The contextObject entityType for "average" is different from that of "rating"
         // InitialRate for rateType "average" comes from averageAttribute on campaignEntity
-        // InitialRate for rateType "single" comes from rateAttribute on rateEntity
+        // InitialRate for rateType "rating" comes from rateAttribute on rateEntity
         const initialRate = this.contextObject
             ? this.rateType === "average"
                 ? this.contextObject.get(this.averageAttribute) as number
@@ -66,10 +66,10 @@ class StarRating extends WidgetBase {
             if ((this.rateType === "average") && this.contextObject.getEntity() !== this.campaignEntity.split("/")[1]) {
                 errorMessage.push(" - For rate type 'average', the contextObject should be campaign entity");
             }
-            if ((this.rateType === "single") && this.contextObject.getEntity() !== this.rateEntity) {
+            if ((this.rateType === "rating") && this.contextObject.getEntity() !== this.rateEntity) {
                 errorMessage.push(` - For rate type 'Single', the contextObject be rate entity '${this.rateEntity}'`);
             }
-            if (this.rateType === "single" && !this.contextObject.isReference(this.ownerReference)) {
+            if (this.rateType === "rating" && !this.contextObject.isReference(this.ownerReference)) {
                 errorMessage.push(` - Context object has no User / Owner association to it`);
             }
             if (errorMessage.length) {
