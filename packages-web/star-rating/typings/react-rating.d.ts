@@ -1,5 +1,5 @@
 
-declare module 'react-rating' {
+declare module "react-rating" {
 
     interface RateProps {
         start?: number,
@@ -13,11 +13,14 @@ declare module 'react-rating' {
         readonly?: boolean,
         quiet?: boolean,
         fractions?: number,
-        onChange?: Function,
-        onClick?: Function,
-        onRate?: Function
+        // Called when the selected rate is changed.
+        onChange?: (rate: number) => void,
+        // Called when a rate is clicked.
+        onClick?: (rate: number, e: Event) => void,
+        // Called when a rate is entered or left. When a rate is left it is called with undefined.
+        onRate?:  (rate: number) => void
     }
-    declare var Rating: React.ComponentClass<RateProps>;
+    var Rating: React.ComponentClass<RateProps>;
 
     export = Rating
 }

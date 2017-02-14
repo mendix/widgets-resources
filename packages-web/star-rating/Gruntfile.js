@@ -70,14 +70,17 @@ module.exports = function (grunt) {
         webpack: {
             renderer: webpackConfig
         },
+
         clean: {
             build: [
                 "./dist/" + pkg.version + "/" + pkg.name + "/*",
                 "./dist/tmp/**/*",
+                "./dist/testresults/**/*",
                 "./dist/MxTestProject/deployment/web/widgets/" + pkg.name + "/*",
                 "./dist/MxTestProject/widgets/" + pkg.name + ".mpk"
             ]
         },
+
         checkDependencies: {
             this: {}
         }
