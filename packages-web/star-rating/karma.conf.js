@@ -12,7 +12,7 @@ Object.assign(webpackConfig, {
 });
 
 module.exports = function(config) {
-    if(config.codeCoverage) {
+    if (config.codeCoverage) {
         Object.assign(webpackConfig, {
             module: Object.assign(webpackConfig.module, {
                 postLoaders: [ {

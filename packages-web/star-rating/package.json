@@ -1,7 +1,7 @@
 {
   "name": "star-rating",
   "version": "0.1.0",
-  "description": "This widget lets users rate an object from 1 to 5",
+  "description": "This widget is used for rating using stars",
   "scripts": {
     "pretest": "tsc",
     "test": "karma start --single-run --codeCoverage && node tests/remap.js"
@@ -46,6 +46,7 @@
     "grunt-contrib-compress": "^1.2.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-check-dependencies": "^1.0.0",
     "grunt-newer": "^1.1.1",
     "grunt-webpack": "^1.0.18",
     "istanbul": "^0.4.3",
@@ -74,7 +75,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "grunt-check-dependencies": "^1.0.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-rating": "^0.6.5"
