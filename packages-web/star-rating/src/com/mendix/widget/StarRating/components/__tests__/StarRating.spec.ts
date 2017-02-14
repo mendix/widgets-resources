@@ -19,18 +19,17 @@ describe("StarRating", () => {
     });
 
     it("should render with a rating structure", () => {
-
         const starRating = renderStarRating(starProps);
 
         expect(starRating).toBeElement(
-            DOM.div({ className: "widget-starrating" },
+            DOM.div({ className: "widget-star-rating" },
                 createElement(Rating, {
-                    empty: "glyphicon glyphicon-star-empty widget-star-rating widget-star-rating-empty",
+                    empty: "glyphicon glyphicon-star-empty widget-star-rating-empty widget-star-rating-font",
                     fractions: 1,
-                    full: "glyphicon glyphicon-star widget-star-rating widget-star-rating-full",
+                    full: "glyphicon glyphicon-star widget-star-rating-full widget-star-rating-font",
                     initialRate: 2,
-                    onChange: jasmine.any(Function),
-                    placeholder: "glyphicon glyphicon-star widget-star-rating widget-star-rating-placeholder",
+                    onChange: jasmine.any(Function) as any,
+                    placeholder: "glyphicon glyphicon-star widget-star-rating-placeholder widget-star-rating-font",
                     readonly: starProps.readOnly,
                     start: 0,
                     step: 1,
@@ -68,6 +67,16 @@ describe("StarRating", () => {
         const starRating = renderStarRating(starProps).find(Rating);
 
         expect(starRating.props().initialRate).toEqual(5);
+    });
+
+    it("should render alert", () => {
+        starProps.configurationError = "missing microflow";
+
+        const starRating = renderStarRating(starProps);
+
+        expect(starRating).toBeElement(
+            DOM.div({ className: "widget-star-rating" },
+                    createElement(Alert, { message: starProps.configurationError })));
     });
 
 });
