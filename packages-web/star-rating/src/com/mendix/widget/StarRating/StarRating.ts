@@ -18,7 +18,7 @@ class StarRating extends WidgetBase {
     private contextObject: mendix.lib.MxObject;
     private ownerReference: string;
 
-    update(object: mendix.lib.MxObject, callback?: Function) {
+    update(object: mendix.lib.MxObject, callback?: () => void) {
         this.contextObject = object;
         this.ownerReference = "System.owner";
         this.updateRendering();
@@ -30,7 +30,7 @@ class StarRating extends WidgetBase {
     }
 
     updateRendering() {
-        render(createElement(RatingComponent, this.getProps()), this.domNode);
+            render(createElement(RatingComponent, this.getProps()), this.domNode);
     }
 
     uninitialize(): boolean {
@@ -54,13 +54,13 @@ class StarRating extends WidgetBase {
             initialRate,
             handleOnChange: this.onChangeMicroflow && this.submitData.bind(this),
             onRateMicroflow: this.onChangeMicroflow,
-            ownerGUID: this.contextObject.get(this.ownerReference) as string,
+            ownerGuid: this.contextObject ? this.contextObject.get(this.ownerReference) as string : undefined,
             rateType: this.rateType,
             readOnly: this.readOnly
         };
     }
 
-    private hasValidConfiguration(): string | undefined {
+    private hasValidConfiguration(): string {
         const errorMessage: string[] = [];
         if (this.contextObject) {
             if ((this.rateType === "average") && this.contextObject.getEntity() !== this.campaignEntity.split("/")[1]) {
@@ -76,7 +76,7 @@ class StarRating extends WidgetBase {
                 errorMessage.unshift("Configuration Error: ");
             }
         }
-        return errorMessage.length ? errorMessage.join("\n") : undefined;
+        return errorMessage.join("\n");
     }
 
     private submitData(rate: number, microflowError: (error: Error) => void) {
@@ -88,12 +88,12 @@ class StarRating extends WidgetBase {
         }
     }
 
-    private executeMicroflow(mendixGUID: string, microflow: string, error: (error: Error) => void) {
+    private executeMicroflow(mendixGuid: string, microflow: string, error: (error: Error) => void) {
         window.mx.ui.action(microflow, {
             error,
             params: {
                 applyto: "selection",
-                guids: [ mendixGUID ]
+                guids: [ mendixGuid ]
             }
         });
     }

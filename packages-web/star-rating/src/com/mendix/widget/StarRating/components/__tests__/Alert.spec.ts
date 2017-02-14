@@ -13,7 +13,7 @@ describe("Alert", () => {
         );
     });
 
-    it("should not render anything", () => {
+    it("without message should not render anything", () => {
         const renderAlert = shallow(createElement(Alert));
 
         expect(renderAlert).toBeNull;

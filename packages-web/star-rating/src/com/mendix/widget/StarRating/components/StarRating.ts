@@ -7,7 +7,7 @@ export interface StarRatingProps {
     initialRate?: number;
     handleOnChange?: Function;
     onRateMicroflow?: string;
-    ownerGUID?: string;
+    ownerGuid?: string;
     readOnly: boolean;
     rateType: "rating" | "average";
     configurationError?: string;
@@ -19,7 +19,6 @@ export interface StarRatingState {
 
 export class StarRating extends Component<StarRatingProps, StarRatingState> {
     private fractions: number;
-    private rateType: string;
     private start: number;
     private step: number;
     private stop: number;
@@ -35,21 +34,21 @@ export class StarRating extends Component<StarRatingProps, StarRatingState> {
         this.start = 0;
         this.step = 1;
         this.stop = 5;
-        this.rateType = this.props.rateType;
+        const rateType = this.props.rateType;
 
         if (!this.props.configurationError) {
-            this.fractions = this.rateType === "average" ? this.fractions : 1;
-            const readonly = this.props.readOnly || this.rateType === "average" || !(this.rateType === "rating"
-                && this.props.ownerGUID === window.mx.session.getUserId());
+            this.fractions = rateType === "average" ? this.fractions : 1;
+            const readonly = this.props.readOnly || rateType === "average" || !(rateType === "rating"
+                && this.props.ownerGuid === window.mx.session.getUserId());
 
-            return DOM.div({ className: "widget-starrating" },
+            return DOM.div({ className: "widget-star-rating" },
                 createElement(Rating, {
-                    empty: "glyphicon glyphicon-star-empty widget-star-rating widget-star-rating-empty",
+                    empty: "glyphicon glyphicon-star-empty widget-star-rating-empty widget-star-rating-font",
                     fractions: this.fractions,
-                    full: "glyphicon glyphicon-star widget-star-rating widget-star-rating-full",
+                    full: "glyphicon glyphicon-star widget-star-rating-full widget-star-rating-font",
                     initialRate: this.getRate(),
                     onChange: this.props.handleOnChange ? (rate: number) => this.onRate(rate) : undefined,
-                    placeholder: "glyphicon glyphicon-star widget-star-rating widget-star-rating-placeholder",
+                    placeholder: "glyphicon glyphicon-star widget-star-rating-placeholder widget-star-rating-font",
                     readonly,
                     start: this.start,
                     step: this.step,
@@ -57,7 +56,8 @@ export class StarRating extends Component<StarRatingProps, StarRatingState> {
                 }),
                 createElement(Alert, { message: this.state.errorMessage }));
         } else {
-            return createElement(Alert, { message: this.props.configurationError });
+            return DOM.div({ className: "widget-star-rating" },
+                createElement(Alert, { message: this.props.configurationError }));
         }
     }
 
@@ -74,10 +74,11 @@ export class StarRating extends Component<StarRatingProps, StarRatingState> {
             return Math.round(initialRate * this.fractions) / this.fractions;
         }
     }
+
     private onRate(rate: number) {
         if (this.props.handleOnChange) {
             const microflow = this.props.onRateMicroflow;
-            this.props.handleOnChange(rate, (error: Error) => { // this function is bound to the component's context
+            this.props.handleOnChange(rate, (error: Error) => {
                 this.setState({ errorMessage: `Error while executing microflow: ${microflow}: ${error.message}` });
             });
         }
