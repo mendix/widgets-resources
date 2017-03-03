@@ -52,7 +52,7 @@ class StarRating extends WidgetBase {
         return {
             configurationError: this.hasValidConfiguration(),
             initialRate,
-            handleOnChange: this.onChangeMicroflow && this.submitData.bind(this),
+            handleOnChange: this.submitData.bind(this),
             onRateMicroflow: this.onChangeMicroflow,
             ownerGuid: this.contextObject ? this.contextObject.get(this.ownerReference) as string : undefined,
             rateType: this.rateType,
@@ -67,7 +67,7 @@ class StarRating extends WidgetBase {
                 errorMessage.push(" - For rate type 'average', the contextObject should be campaign entity");
             }
             if ((this.rateType === "rating") && this.contextObject.getEntity() !== this.rateEntity) {
-                errorMessage.push(` - For rate type 'Single', the contextObject be rate entity '${this.rateEntity}'`);
+                errorMessage.push(` - For rate type 'Rating', the contextObject be rate entity '${this.rateEntity}'`);
             }
             if (this.rateType === "rating" && !this.contextObject.isReference(this.ownerReference)) {
                 errorMessage.push(` - Context object has no User / Owner association to it`);
