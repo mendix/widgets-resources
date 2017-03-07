@@ -4,7 +4,7 @@ import { DOM, createElement } from "react";
 import { Alert } from "../Alert";
 
 describe("Alert", () => {
-    const renderAlert = (message?: string) => shallow(createElement(Alert, { message }));
+    const renderAlert = (message?: string) => shallow(createElement(Alert as any, { message }));
 
     it("renders structure correctly", () => {
         const message = "This is an error";

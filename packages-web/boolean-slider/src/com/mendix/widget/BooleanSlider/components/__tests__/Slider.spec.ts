@@ -132,7 +132,7 @@ describe("Slider", () => {
                         className: "widget-boolean-slider-btn enabled",
                         onClick: jasmine.any(Function) as any
                     }),
-                    createElement(Alert, { message: props.alertMessage })
+                    createElement(Alert as any, { message: props.alertMessage })
                 )
             );
         });
