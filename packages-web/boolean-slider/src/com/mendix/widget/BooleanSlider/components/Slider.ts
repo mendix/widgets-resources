@@ -1,4 +1,4 @@
-import { DOM, StatelessComponent, createElement } from "react";
+import { DOM, createElement } from "react";
 import * as classNames from "classnames";
 
 import { Alert } from "./Alert";
@@ -14,7 +14,7 @@ export interface SliderProps {
 
 export type SliderStatus = "enabled" | "disabled" | "no-context";
 
-export const Slider: StatelessComponent<SliderProps> = (props) =>
+export const Slider = (props: SliderProps) =>
     DOM.div({ className: classNames("widget-boolean-slider", { "has-error": !!props.alertMessage }) },
         DOM.input({
             checked: props.isChecked,
