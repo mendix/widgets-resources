@@ -8,6 +8,7 @@ import BooleanSliderContainer from "./components/BooleanSliderContainer";
 
 class BooleanSlider extends WidgetBase {
     // Properties from Mendix modeler
+    label: string;
     booleanAttribute: string;
     onChangeMicroflow: string;
 
@@ -28,6 +29,7 @@ class BooleanSlider extends WidgetBase {
             booleanAttribute: this.booleanAttribute,
             contextObject,
             onChangeMicroflow: this.onChangeMicroflow,
+            label: this.label,
             readOnly: this.readOnly
         }), this.domNode);
     }

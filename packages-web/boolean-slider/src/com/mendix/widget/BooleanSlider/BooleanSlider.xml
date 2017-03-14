@@ -12,6 +12,11 @@
                 <attributeType name="Boolean"/>
             </attributeTypes>
         </property>
+        <property key="label" type="string" required="false">
+            <caption>Label</caption>
+            <category>Data</category>
+            <description/>
+        </property>
         <property key="onChangeMicroflow" type="microflow" required="false">
             <caption>On change microflow</caption>
             <category>Behavior</category>

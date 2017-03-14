@@ -1,11 +1,13 @@
 import { Component, createElement } from "react";
 
 import { Slider, SliderStatus } from "./Slider";
+import { Label } from "./Label";
 
 interface BooleanSliderContainerProps {
     booleanAttribute: string;
     contextObject: mendix.lib.MxObject;
     onChangeMicroflow: string;
+    label?: string;
     readOnly: boolean;
 }
 
@@ -38,6 +40,13 @@ class BooleanSliderContainer extends Component<BooleanSliderContainerProps, Bool
     }
 
     render() {
+        if (this.props.label) {
+            return createElement(Label as any, { label: this.props.label }, this.renderSlider());
+        }
+        return this.renderSlider();
+    }
+
+    private renderSlider() {
         const enabled = !this.props.readOnly
             && this.props.contextObject
             && !this.props.contextObject.isReadonlyAttr(this.props.booleanAttribute);
