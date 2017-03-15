@@ -2,9 +2,7 @@ import { shallow } from "enzyme";
 import { createElement, DOM } from "react";
 
 import * as Rating from "react-rating";
-import { Alert } from "../Alert";
 import { StarRating, StarRatingProps } from "../StarRating";
-
 
 describe("StarRating", () => {
     let starProps: StarRatingProps;
@@ -34,8 +32,7 @@ describe("StarRating", () => {
                     start: 0,
                     step: 1,
                     stop: 5
-                }),
-                createElement(Alert)
+                })
             )
         );
     });
@@ -68,15 +65,4 @@ describe("StarRating", () => {
 
         expect(starRating.props().initialRate).toEqual(5);
     });
-
-    it("should render alert", () => {
-        starProps.configurationError = "missing microflow";
-
-        const starRating = renderStarRating(starProps);
-
-        expect(starRating).toBeElement(
-            DOM.div({ className: "widget-star-rating" },
-                    createElement(Alert, { message: starProps.configurationError })));
-    });
-
 });

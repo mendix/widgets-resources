@@ -4,7 +4,7 @@ import * as WidgetBase from "mxui/widget/_WidgetBase";
 import { createElement } from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 
-import { StarRating as RatingComponent } from "./components/StarRating";
+import StarRatingContainer from "./components/StarRatingContainer";
 
 class StarRating extends WidgetBase {
     // Properties from Mendix modeler
@@ -15,103 +15,31 @@ class StarRating extends WidgetBase {
     private onChangeMicroflow: string;
     private averageAttribute: string;
 
-    private contextObject: mendix.lib.MxObject;
-    private ownerReference: string;
-
-    update(object: mendix.lib.MxObject, callback?: () => void) {
-        this.contextObject = object;
-        this.ownerReference = "System.owner";
-        this.updateRendering();
-        this.resetSubscriptions();
+    update(contextObject: mendix.lib.MxObject, callback?: () => void) {
+        this.updateRendering(contextObject);
 
         if (callback) {
             callback();
         }
     }
 
-    updateRendering() {
-            render(createElement(RatingComponent, this.getProps()), this.domNode);
+    updateRendering(contextObject: mendix.lib.MxObject) {
+        render(createElement(StarRatingContainer, {
+            averageAttribute: this.averageAttribute,
+            campaignEntity: this.campaignEntity,
+            contextObject,
+            onChangeMicroflow: this.onChangeMicroflow,
+            rateAttribute: this.rateAttribute,
+            rateEntity: this.rateEntity,
+            rateType: this.rateType,
+            readOnly: this.readOnly
+        }), this.domNode);
     }
 
     uninitialize(): boolean {
         unmountComponentAtNode(this.domNode);
 
         return true;
-    }
-
-    private getProps() {
-        // The contextObject entityType for "average" is different from that of "rating"
-        // InitialRate for rateType "average" comes from averageAttribute on campaignEntity
-        // InitialRate for rateType "rating" comes from rateAttribute on rateEntity
-        const initialRate = this.contextObject
-            ? this.rateType === "average"
-                ? this.contextObject.get(this.averageAttribute) as number
-                : this.contextObject.get(this.rateAttribute) as number
-            : 0 ;
-
-        return {
-            configurationError: this.hasValidConfiguration(),
-            initialRate,
-            handleOnChange: this.submitData.bind(this),
-            onRateMicroflow: this.onChangeMicroflow,
-            ownerGuid: this.contextObject ? this.contextObject.get(this.ownerReference) as string : undefined,
-            rateType: this.rateType,
-            readOnly: this.readOnly
-        };
-    }
-
-    private hasValidConfiguration(): string {
-        const errorMessage: string[] = [];
-        if (this.contextObject) {
-            if ((this.rateType === "average") && this.contextObject.getEntity() !== this.campaignEntity.split("/")[1]) {
-                errorMessage.push(" - For rate type 'average', the contextObject should be campaign entity");
-            }
-            if ((this.rateType === "rating") && this.contextObject.getEntity() !== this.rateEntity) {
-                errorMessage.push(` - For rate type 'Rating', the contextObject be rate entity '${this.rateEntity}'`);
-            }
-            if (this.rateType === "rating" && !this.contextObject.isReference(this.ownerReference)) {
-                errorMessage.push(` - Context object has no User / Owner association to it`);
-            }
-            if (errorMessage.length) {
-                errorMessage.unshift("Configuration Error: ");
-            }
-        }
-        return errorMessage.join("\n");
-    }
-
-    private submitData(rate: number, microflowError: (error: Error) => void) {
-        if (this.contextObject) {
-            this.contextObject.set(this.rateAttribute, rate);
-            if (this.onChangeMicroflow) {
-                this.executeMicroflow(this.contextObject.getGuid(), this.onChangeMicroflow, microflowError);
-            }
-        }
-    }
-
-    private executeMicroflow(mendixGuid: string, microflow: string, error: (error: Error) => void) {
-        window.mx.ui.action(microflow, {
-            error,
-            params: {
-                applyto: "selection",
-                guids: [ mendixGuid ]
-            }
-        });
-    }
-
-    private resetSubscriptions() {
-        this.unsubscribeAll();
-        if (this.contextObject) {
-            this.subscribe({
-                callback: () => this.updateRendering(),
-                guid: this.contextObject.getGuid()
-            });
-            [ this.rateAttribute, this.averageAttribute ].forEach(attribute => this.subscribe({
-                    attr: attribute,
-                    callback: () => this.updateRendering(),
-                    guid: this.contextObject.getGuid()
-                })
-            );
-        }
     }
 }
 
