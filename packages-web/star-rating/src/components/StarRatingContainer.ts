@@ -10,7 +10,7 @@ interface StarRatingContainerProps {
     rateType: "average" | "rating";
     onChangeMicroflow: string;
     averageAttribute: string;
-    contextObject: mendix.lib.MxObject;
+    mxObject: mendix.lib.MxObject;
     readOnly: boolean;
 }
 
@@ -35,8 +35,8 @@ class StarRatingContainer extends Component<StarRatingContainerProps, { alertMes
                 handleOnChange: this.handleOnChange,
                 initialRate: this.state.initialRate,
                 onChangeMicroflow: this.props.onChangeMicroflow,
-                ownerGuid: this.props.contextObject
-                    ? this.props.contextObject.get(this.ownerReference) as string
+                ownerGuid: this.props.mxObject
+                    ? this.props.mxObject.get(this.ownerReference) as string
                     : undefined,
                 rateType: this.props.rateType,
                 readOnly: this.props.readOnly
@@ -45,8 +45,8 @@ class StarRatingContainer extends Component<StarRatingContainerProps, { alertMes
     }
 
     componentWillReceiveProps(nextProps: StarRatingContainerProps) {
-        this.subscribe(nextProps.contextObject);
-        this.fetchData(nextProps.contextObject);
+        this.subscribe(nextProps.mxObject);
+        this.fetchData(nextProps.mxObject);
     }
 
     componentWillUnmount() {
@@ -54,10 +54,10 @@ class StarRatingContainer extends Component<StarRatingContainerProps, { alertMes
     }
 
     private handleOnChange(rate: number) {
-        if (this.props.contextObject) {
-            this.props.contextObject.set(this.props.rateAttribute, rate);
+        if (this.props.mxObject) {
+            this.props.mxObject.set(this.props.rateAttribute, rate);
             if (this.props.onChangeMicroflow) {
-                this.executeMicroflow(this.props.contextObject.getGuid(), this.props.onChangeMicroflow);
+                this.executeMicroflow(this.props.mxObject.getGuid(), this.props.onChangeMicroflow);
             }
         }
     }
@@ -77,16 +77,16 @@ class StarRatingContainer extends Component<StarRatingContainerProps, { alertMes
 
     private validateProps(): string {
         const errorMessage: string[] = [];
-        if (this.props.contextObject) {
+        if (this.props.mxObject) {
             // tslint:disable-next-line:max-line-length
-            if ((this.props.rateType === "average") && this.props.contextObject.getEntity() !== this.props.campaignEntity.split("/")[1]) {
+            if ((this.props.rateType === "average") && this.props.mxObject.getEntity() !== this.props.campaignEntity.split("/")[1]) {
                 errorMessage.push(" - For rate type 'average', the contextObject should be campaign entity");
             }
-            if ((this.props.rateType === "rating") && this.props.contextObject.getEntity() !== this.props.rateEntity) {
+            if ((this.props.rateType === "rating") && this.props.mxObject.getEntity() !== this.props.rateEntity) {
                 // tslint:disable-next-line:max-line-length
                 errorMessage.push(` - For rate type 'Rating', the contextObject be rate entity '${this.props.rateEntity}'`);
             }
-            if (this.props.rateType === "rating" && !this.props.contextObject.isReference(this.ownerReference)) {
+            if (this.props.rateType === "rating" && !this.props.mxObject.isReference(this.ownerReference)) {
                 errorMessage.push(` - Context object has no User / Owner association to it`);
             }
             if (errorMessage.length) {

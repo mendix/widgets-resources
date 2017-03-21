@@ -4,10 +4,10 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-    entry: "./src/com/mendix/widget/StarRating/StarRating.ts",
+    entry: "./src/components/StarRatingContainer.ts",
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
-        filename: "src/com/mendix/widget/StarRating/StarRating.js",
+        filename: "src/com/mendix/widget/custom/StarRating/StarRating.js",
         libraryTarget:  "umd",
         umdNamedDefine: true,
         library: "com.mendix.widget.StarRating.StarRating"
@@ -29,7 +29,7 @@ module.exports = {
         ]
     },
     devtool: "source-map",
-    externals: [ "mxui/widget/_WidgetBase", "dojo/_base/declare" ],
+    externals: [ "react", "react-dom" ],
     plugins: [
         new CopyWebpackPlugin([
             { from: "src/**/*.js" },

@@ -1,6 +1,6 @@
 {
   "name": "star-rating",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "This widget is used for rating using stars",
   "scripts": {
     "pretest": "tsc",
@@ -61,8 +61,10 @@
     "karma-remap-istanbul": "^0.4.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.1",
-    "mendix-client": "git+https://github.com/FlockOfBirds/Mendix-client-typing.git",
+    "mendix-client": "git+https://github.com/FlockOfBirds/Mendix-client-typing.git",    
+    "react": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
+    "react-dom": "^15.3.2",
     "remap-istanbul": "^0.8.4",
     "source-map-loader": "^0.1.6",
     "style-loader": "^0.13.1",
@@ -75,8 +77,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
     "react-rating": "^0.6.5"
   }
 }
