@@ -1,13 +1,14 @@
 import { Component, createElement } from "react";
 
 import { Slider, SliderStatus } from "./Slider";
-import { Label } from "./Label";
+import { Label, LabelOrientation } from "./Label";
 
 interface BooleanSliderContainerProps {
     booleanAttribute: string;
     contextObject: mendix.lib.MxObject;
     onChangeMicroflow: string;
     label?: string;
+    orientation: LabelOrientation;
     readOnly: boolean;
 }
 
@@ -41,7 +42,10 @@ class BooleanSliderContainer extends Component<BooleanSliderContainerProps, Bool
 
     render() {
         if (this.props.label) {
-            return createElement(Label as any, { label: this.props.label }, this.renderSlider());
+            return createElement(Label as any, {
+                label: this.props.label,
+                orientation: this.props.orientation
+            }, this.renderSlider());
         }
         return this.renderSlider();
     }
