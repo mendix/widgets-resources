@@ -4,6 +4,20 @@
     <description>Toggle a boolean attribute</description>
     <icon/>
     <properties>
+        <property key="label" type="string" required="false">
+            <caption>Label</caption>
+            <category>Display</category>
+            <description/>
+        </property>
+        <property key="orientation" type="enumeration" defaultValue="horizontal">
+            <caption>Orientation</caption>
+            <category>Display</category>
+            <description>Determines placement of the label in relation to the slider</description>
+            <enumerationValues>
+                <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                <enumerationValue key="vertical">Vertical</enumerationValue>
+            </enumerationValues>
+        </property>
         <property key="booleanAttribute" type="attribute" required="true">
             <caption>Boolean attribute</caption>
             <category>Data</category>
@@ -11,11 +25,6 @@
             <attributeTypes>
                 <attributeType name="Boolean"/>
             </attributeTypes>
-        </property>
-        <property key="label" type="string" required="false">
-            <caption>Label</caption>
-            <category>Data</category>
-            <description/>
         </property>
         <property key="onChangeMicroflow" type="microflow" required="false">
             <caption>On change microflow</caption>

@@ -17,12 +17,12 @@ module.exports = {
         rules: [
             { test: /\.ts$/, use: "ts-loader" },
             { test: /\.css$/, loader: ExtractTextPlugin.extract({
-                fallbackLoader: "style-loader",
-                loader: "css-loader"
+                fallback: "style-loader",
+                use: "css-loader"
             }) },
             { test: /\.sass$/, loader: ExtractTextPlugin.extract({
-                fallbackLoader:"style-loader",
-                loader: "css-loader!sass-loader"}
+                fallback:"style-loader",
+                use: "css-loader!sass-loader"}
             ) }
         ]
     },

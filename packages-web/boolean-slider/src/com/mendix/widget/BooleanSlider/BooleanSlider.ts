@@ -5,11 +5,13 @@ import { createElement } from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 
 import BooleanSliderContainer from "./components/BooleanSliderContainer";
+import { LabelOrientation } from "./components/Label";
 
 class BooleanSlider extends WidgetBase {
     // Properties from Mendix modeler
     label: string;
     booleanAttribute: string;
+    orientation: LabelOrientation;
     onChangeMicroflow: string;
 
     update(contextObject: mendix.lib.MxObject, callback?: () => void) {
@@ -28,8 +30,9 @@ class BooleanSlider extends WidgetBase {
         render(createElement(BooleanSliderContainer, {
             booleanAttribute: this.booleanAttribute,
             contextObject,
-            onChangeMicroflow: this.onChangeMicroflow,
             label: this.label,
+            onChangeMicroflow: this.onChangeMicroflow,
+            orientation: this.orientation,
             readOnly: this.readOnly
         }), this.domNode);
     }

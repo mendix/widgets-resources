@@ -1,16 +1,23 @@
-import { DOM, StatelessComponent } from "react";
+import { DOM, SFC } from "react";
+import * as classNames from "classnames";
 
 interface LabelProps {
     className?: string;
     label: string;
     weight: number;
-    orientation?: "horizontal" | "vertical";
+    orientation?: LabelOrientation;
 }
 
-const Label: StatelessComponent<LabelProps> = (props) =>
+type LabelOrientation = "horizontal" | "vertical";
+
+const Label: SFC<LabelProps> = (props) =>
     DOM.div({ className: "form-group" },
-        DOM.label({ className: `control-label col-sm-${props.weight}` }, props.label),
-        DOM.div({ className: `col-sm-${12 - props.weight}` }, props.children)
+        DOM.label({
+            className: classNames("control-label", { [`col-sm-${props.weight}`]: props.orientation === "horizontal" })
+        }, props.label),
+        DOM.div({
+            className: classNames({ [`col-sm-${12 - props.weight}`]: props.orientation === "horizontal" })
+        }, props.children)
     );
 
 Label.defaultProps = {
@@ -18,4 +25,4 @@ Label.defaultProps = {
     weight: 6
 };
 
-export { Label, LabelProps };
+export { Label, LabelProps, LabelOrientation };
