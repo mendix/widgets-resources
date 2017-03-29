@@ -5,8 +5,8 @@ import * as Rating from "react-rating";
 import "../ui/StarRating.css";
 
 export interface StarRatingProps {
-    initialRate?: number;
-    handleOnChange?: (rate: number) => void;
+    initialRate: number;
+    handleOnChange: (rate: number) => void;
     ownerGuid?: string;
     readOnly: boolean;
     rateType: "rating" | "average";
@@ -27,10 +27,6 @@ export class StarRating extends Component<StarRatingProps, {}> {
         this.stop = 5;
     }
 
-    componentWillReceiveProps(nextProps: StarRatingProps) {
-        this.setState({ initialRate: this.getRate(nextProps) });
-    }
-
     render() {
         const rateType = this.props.rateType;
         const readonly = this.props.readOnly || rateType === "average" || !(rateType === "rating"
@@ -42,7 +38,7 @@ export class StarRating extends Component<StarRatingProps, {}> {
                 fractions: this.fractions,
                 full: "glyphicon glyphicon-star widget-star-rating-full widget-star-rating-font",
                 initialRate: this.getRate(this.props),
-                onChange: this.props.handleOnChange ? (rate: number) => this.onRate(rate) : undefined,
+                onChange: (rate: number) => this.props.handleOnChange(rate),
                 placeholder: "glyphicon glyphicon-star widget-star-rating-placeholder widget-star-rating-font",
                 readonly,
                 start: this.start,
@@ -53,23 +49,13 @@ export class StarRating extends Component<StarRatingProps, {}> {
 
     private getRate(props: StarRatingProps) {
         const maximumValue = this.step * this.stop;
-        if (props.initialRate) {
-            if (props.initialRate > maximumValue) {
-                return maximumValue;
-            } else if (props.initialRate < this.start) {
-                return this.start;
-            }
-            // This helps to round off to the nearest fraction.
-            // eg fraction 2 or 0.5, rounds off a rate 1.4 to 1.5, 1.2 to 1.0
-            return Math.round(props.initialRate * this.fractions) / this.fractions;
+        if (props.initialRate > maximumValue) {
+            return maximumValue;
+        } else if (props.initialRate < this.start) {
+            return this.start;
         }
-
-        return 0;
-    }
-
-    private onRate(rate: number) {
-        if (this.props.handleOnChange) {
-            this.props.handleOnChange(rate);
-        }
+        // This helps to round off to the nearest fraction.
+        // eg fraction 2 or 0.5, rounds off a rate 1.4 to 1.5, 1.2 to 1.0
+        return Math.round(props.initialRate * this.fractions) / this.fractions;
     }
 }
