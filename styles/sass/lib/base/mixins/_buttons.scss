@@ -29,8 +29,11 @@
             background-color: $background;
         }
     }
+    // Button bordered
     &.btn-bordered {
-        color: $border;
+        @if $color != $btn-default-color {
+            color: $border;
+        }
         background-color: transparent;
         &:hover,
         &:focus,
@@ -40,6 +43,19 @@
             color: $color;
             border-color: $border;
             background-color: $background;
+        }
+    }
+    // Button as link
+    &.btn-link {
+        @if $color != $btn-default-color {
+            color: $background;
+        }
+        border-color: transparent;
+        background-color: transparent;
+        text-decoration: none;
+        &:hover {
+            border-color: $btn-link-bg-hover;
+            background-color: $btn-link-bg-hover;
         }
     }
 }

@@ -8,7 +8,7 @@
 .mx-button {
     display: inline-block;
     margin-bottom: 0;
-    padding: round(.6 * $font-base-size) round(1 * $font-base-size);
+    padding: 0.5em 1em;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -101,28 +101,9 @@
     @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border-color, $btn-danger-bg-hover);
 }
 
-// Transparent (button with no background just text)
-.btn-transparent,
-.btn-transparent:hover,
-.btn-transparent:focus {
-    border-style: none;
-    background-color: transparent;
-}
-
-// Button as link but with padding 
-.btn-link {
-    color: $link-color;
-    border: 0;
-    background-color: transparent;
-    &:hover {
-        color: $link-hover-color;
-        background-color: transparent;
-    }
-}
 
 // Buttons Sizes
 .btn-lg {
-    padding: round(.6 * $font-size-large) round(1 * $font-size-large); // only for buttons
     font-size: $font-size-large;
     img {
         height: $font-base-size + 4px;
@@ -130,7 +111,6 @@
 }
 
 .btn-sm {
-    padding: round(.6 * $font-size-small) round(1 * $font-size-small);
     font-size: $font-size-small;
     img {
         height: $font-size-small + 4px;
