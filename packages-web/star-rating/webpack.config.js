@@ -8,9 +8,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
         filename: "src/com/mendix/widget/custom/StarRating/StarRating.js",
-        libraryTarget:  "umd",
-        umdNamedDefine: true,
-        library: "com.mendix.widget.StarRating.StarRating"
+        libraryTarget:  "umd"
     },
     resolve: {
         extensions: [ "", ".ts", ".js", ".jsx", ".json" ],
@@ -38,7 +36,8 @@ module.exports = {
         ], {
             copyUnmodified: true
         }),
-        new ExtractTextPlugin("./src/com/mendix/widget/StarRating/ui/StarRating.css")
+        new ExtractTextPlugin("./src/com/mendix/widget/custom/StarRating/ui/StarRating.css")
+
     ],
     watch: true
 };

@@ -25,6 +25,7 @@ class StarRatingContainer extends Component<StarRatingContainerProps, { alertMes
         this.ownerReference = "System.owner";
         this.state = { alertMessage: this.validateProps(), initialRate: 0 };
         this.handleOnChange = this.handleOnChange.bind(this);
+        this.subscribe(this.props.mxObject);
     }
 
     render() {
@@ -34,7 +35,6 @@ class StarRatingContainer extends Component<StarRatingContainerProps, { alertMes
             return createElement(StarRating, {
                 handleOnChange: this.handleOnChange,
                 initialRate: this.state.initialRate,
-                onChangeMicroflow: this.props.onChangeMicroflow,
                 ownerGuid: this.props.mxObject
                     ? this.props.mxObject.get(this.ownerReference) as string
                     : undefined,
@@ -49,30 +49,35 @@ class StarRatingContainer extends Component<StarRatingContainerProps, { alertMes
         this.fetchData(nextProps.mxObject);
     }
 
+     componentDidMount() {
+        if (!this.state.alertMessage) {
+            this.fetchData(this.props.mxObject);
+        }
+    }
+
     componentWillUnmount() {
         this.unSubscribe();
     }
 
     private handleOnChange(rate: number) {
-        if (this.props.mxObject) {
-            this.props.mxObject.set(this.props.rateAttribute, rate);
-            if (this.props.onChangeMicroflow) {
-                this.executeMicroflow(this.props.mxObject.getGuid(), this.props.onChangeMicroflow);
+        const { mxObject, onChangeMicroflow, rateAttribute } = this.props;
+        const context = new mendix.lib.MxContext();
+        context.setContext(mxObject.getEntity(), mxObject.getGuid());
+
+        if (mxObject) {
+            mxObject.set(rateAttribute, rate);
+            if (onChangeMicroflow) {
+                window.mx.ui.action(onChangeMicroflow, {
+                    context,
+                    // tslint:disable-next-line:max-line-length
+                    error: (error) => window.mx.ui.error(`Error while executing microflow: ${onChangeMicroflow}: ${error.message}`),
+                    params: {
+                        applyto: "selection",
+                        guids: [ mxObject.getGuid() ]
+                    }
+                });
             }
         }
-    }
-
-    private executeMicroflow(mendixGuid: string, microflow: string) {
-        window.mx.ui.action(microflow, {
-            error: error =>
-                this.setState({
-                    alertMessage: `An error occurred while executing microflow: ${error} `
-                }),
-            params: {
-                applyto: "selection",
-                guids: [ mendixGuid ]
-            }
-        });
     }
 
     private validateProps(): string {

@@ -58,7 +58,7 @@
         </property>
         <property key="onChangeMicroflow" type="microflow" required="false">
             <caption>On change microflow</caption>
-            <category>Behaviour</category>
+            <category>Behavior</category>
             <description>Microflow to be executed when the rate is changed</description>
             <returnType type="Void" />
         </property>
