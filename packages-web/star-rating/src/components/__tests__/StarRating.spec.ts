@@ -2,14 +2,19 @@ import { shallow } from "enzyme";
 import { createElement, DOM } from "react";
 
 import * as Rating from "react-rating";
+
+import { mockMx } from "tests/mocks/Mendix";
 import { StarRating, StarRatingProps } from "../StarRating";
 
 describe("StarRating", () => {
+    const mxOriginal: mx.mx = window.mx;
     let starProps: StarRatingProps;
     const renderStarRating = (props: StarRatingProps) => shallow(createElement(StarRating, props));
 
-    beforeEach(() => {
+    beforeAll(() => {
+        window.mx = mockMx;
         starProps = {
+            handleOnChange: jasmine.createSpy("onChange"),
             initialRate: 2,
             rateType: "rating",
             readOnly: true
@@ -65,4 +70,25 @@ describe("StarRating", () => {
 
         expect(starRating.props().initialRate).toEqual(5);
     });
+
+    it("with onChange function should respond to change event", () => {
+        const ratingProps: StarRatingProps = {
+            handleOnChange: jasmine.createSpy("onChange"),
+            initialRate: 2,
+            ownerGuid: "fakeGuid",
+            rateType: "rating",
+            readOnly: false
+        };
+        const onChange = ratingProps.handleOnChange = jasmine.createSpy("onChange");
+        const star_rating = renderStarRating(ratingProps);
+
+        star_rating.simulate("click");
+
+        expect(onChange).toHaveBeenCalledTimes(1);
+    });
+
+    afterAll(() => {
+        window.mx = mxOriginal;
+    });
+
 });

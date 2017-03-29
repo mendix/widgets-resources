@@ -80,7 +80,19 @@ class MxContextMock implements mendix.lib.MxContext {
     setTrackId(guid: string): void { }
     setTrackEntity(entity: string): void { }
     setTrackObject(obj: mendix.lib.MxObject): void { }
+    setContext(entity: string, guid: string): void { }
+
 }
+
+class MxSessionMock implements mx.session {
+    constructor() { }
+    getUserId(): string { return "fakeGuid"; }
+    getCSRFToken(): string { return "fakeCSRFToken"; }
+    getUserAttribute(attr: string): string { return "fakeUserAttribute"; }
+    getUserClass(): string { return "fakeUserClass"; }
+    getUserName(): string { return "fakeUserName"; }
+}
+
 
 class MxObjectMock implements mendix.lib.MxObject {
     addReference(attr: string, guid: string | number): boolean { return false; }
@@ -121,6 +133,7 @@ class MxObjectMock implements mendix.lib.MxObject {
 
 let mxMockObject =  MxMock.prototype;
 mxMockObject.ui = MxUiMock.prototype;
+mxMockObject.session = MxSessionMock.prototype;
 
 export const mockMx = mxMockObject;
 export const mockMendix = {
