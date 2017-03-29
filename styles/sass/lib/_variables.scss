@@ -88,14 +88,14 @@ $font-family-import:                    false !default;
 }
 
 // Font Family / False = fallback from Bootstrap (Helvetica Neue)
-$font-family-base:                      false !default;//"Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-light:                     false !default;//"Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-semibold:                  false !default;//"Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-bold:                      false !default;//"Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-base:                      false !default;
+$font-family-light:                     false !default;
+$font-family-semibold:                  false !default;
+$font-family-bold:                      false !default;
 
 // Font Size
-$font-size-large:                       ceil($font-base-size * 1.25) !default; // ~18px
-$font-size-small:                       ceil($font-base-size * 0.85) !default; // ~12px
+$font-size-large:                       16px !default;
+$font-size-small:                       11px !default;
 
 // Font Weights
 $font-weight-light:                     100 !default;
@@ -219,11 +219,9 @@ $form-group-gutter:                     15px !default;
 //## Define background-color, border-color and text. Used in components/buttons
 
 // Default button style 
+$btn-font-size:                         14px !default;
 $btn-bordered:                          false !default; // Default value false, set to true if you want this effect
-$btn-border-radius:                     4px !default; 
-
-// Button Text Size
-$btn-font-size:                         12px !default;
+$btn-border-radius:                     3px !default; 
 
 // Button Background Color
 $btn-default-bg:                        $brand-default !default;
@@ -260,7 +258,7 @@ $btn-info-bg-hover:                     mix($brand-info, black, 80%) !default;
 $btn-success-bg-hover:                  mix($brand-success, black, 80%) !default;
 $btn-warning-bg-hover:                  mix($brand-warning, black, 80%) !default;
 $btn-danger-bg-hover:                   mix($brand-danger, black, 80%) !default;
-
+$btn-link-bg-hover:                     $gray-lighter;
 
 
 
