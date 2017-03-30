@@ -532,11 +532,6 @@ $t-default-spacing-left:                30px !default;
 //== Layouts
 //##
 
-// Scroll container / layout container default padding
-$padding-layoutcontainer-base:          0px !default; 
-$m-padding-layoutcontainer-base:        0px !default;
-$t-padding-layoutcontainer-base:        0px !default; 
-
 // Combined spacing 
 $default-spacing:                       $default-spacing-top $default-spacing-right $default-spacing-bottom $default-spacing-left !default;
 $m-default-spacing:                     $m-default-spacing-top $m-default-spacing-right $m-default-spacing-bottom $m-default-spacing-left !default;
