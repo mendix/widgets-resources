@@ -61,7 +61,7 @@
             }
             >tr>td {
                 padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
-                font-weight: bold;
+                font-weight: $font-weight-bold;
                 border-width: 0;
                 background-color: $grid-bg;
             }

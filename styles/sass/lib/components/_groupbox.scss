@@ -6,30 +6,30 @@
 
 .mx-groupbox {
     >.mx-groupbox-header {
-        @include font(bold);
-        border-radius: 0;
-        margin: 0;
-        background: $groupbox-default-bg;
-        color: $groupbox-default-color;
         font-size: $font-size-h4;
-        border-style: solid;
+        font-weight: bold;
+        margin: 0;
+        color: $groupbox-default-color;
         border-width: 1px 1px 0 1px;
+        border-style: solid;
         border-color: $groupbox-default-bg;
+        border-radius: 0;
+        background: $groupbox-default-bg;
         .mx-groupbox-collapse-icon {
-            margin-top: 0.1em;
+            margin-top: .1em;
         }
     }
     >.mx-groupbox-body {
-        border-radius: 0;
         padding: 10px 15px;
-        border-color: $groupbox-default-bg;
-        background-color: #FFF;
-        border-style: solid;
         border-width: 1px;
+        border-style: solid;
+        border-color: $groupbox-default-bg;
+        border-radius: 0;
+        background-color: #fff;
     }
     .mx-groupbox-header+.mx-groupbox-body {
-        border-radius: 0;
         border-top: none;
+        border-radius: 0;
     }
     &.collapsed>.mx-groupbox-header {
         border-radius: 0;
@@ -42,15 +42,15 @@
 // Stylingless has no stlying or padding (used for wrapper)
 .groupbox-stylingless {
     >.mx-groupbox-header {
-        border-radius: 0;
         padding: 0;
         border-style: none;
+        border-radius: 0;
         background-color: transparent;
     }
     >.mx-groupbox-body {
-        border-radius: 0;
         padding: 0;
         border-style: none;
+        border-radius: 0;
         background-color: transparent;
     }
 }
@@ -77,11 +77,11 @@
 .groupbox-border-top {
     >.mx-groupbox-header {
         border-style: none;
-        border-top-style: solid !important
+        border-top-style: solid !important;
     }
     >.mx-groupbox-body {
         border-style: none;
-        border-top-style: solid !important
+        border-top-style: solid !important;
     }
     .mx-groupbox-header+.mx-groupbox-body {
         border-top-style: none !important;
@@ -91,11 +91,11 @@
 .groupbox-border-right {
     >.mx-groupbox-header {
         border-style: none;
-        border-right-style: solid !important
+        border-right-style: solid !important;
     }
     >.mx-groupbox-body {
         border-style: none;
-        border-right-style: solid !important
+        border-right-style: solid !important;
     }
 }
 
@@ -105,18 +105,18 @@
     }
     >.mx-groupbox-body {
         border-style: none;
-        border-bottom-style: solid !important
+        border-bottom-style: solid !important;
     }
 }
 
 .groupbox-border-left {
     >.mx-groupbox-header {
         border-style: none;
-        border-left-style: solid !important
+        border-left-style: solid !important;
     }
     >.mx-groupbox-body {
         border-style: none;
-        border-left-style: solid !important
+        border-left-style: solid !important;
     }
 }
 
@@ -184,7 +184,6 @@
 }
 
 .groupbox-bodyless {
-    >.mx-groupbox-header {}
     >.mx-groupbox-body {
         padding: 0;
     }

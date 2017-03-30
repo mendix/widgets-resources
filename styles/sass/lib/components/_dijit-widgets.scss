@@ -23,9 +23,9 @@
     background-color: #eff0f2;
     tr {
         th {
-            background-color: #26323D;
-            color: #FFF;
             text-align: center;
+            color: #fff;
+            background-color: #26323d;
         }
         th,
         td {
@@ -36,13 +36,13 @@
             color: #000;
         }
         tfoot h3 {
+            font-size: inherit;
             margin: 0;
             padding: 0;
-            font-size: inherit;
         }
     }
     .dijitCalendarMonthLabel {
-        @include font(bold);
+        font-weight: $font-weight-bold;
     }
     .dijitButtonNode {
         border: 0;
@@ -66,12 +66,12 @@
         background-color: #dbdcdd;
     }
     .dijitCalendarYearContainer td {
-        border-top: 1px solid $default-border-color;
         text-align: center;
         color: #000;
+        border-top: 1px solid $default-border-color;
         .dijitCalendarSelectedYear {
-            @include font(bold);
             text-decoration: underline;
+            font-weight: $font-weight-bold;
         }
     }
     .dijitCalendarMonthContainer th:first-child {
@@ -83,17 +83,17 @@
 }
 
 .dijitCalendarMonthMenuPopup {
-    border-radius: 3px;
     /* (must be higher than popup z-index) */
     z-index: 10020 !important;
     padding: 3px 4px;
-    background-color: #26323D;
+    border-radius: 3px;
+    background-color: #26323d;
     .dijitCalendarMonthMenu {
         border-style: none;
         background: none;
         .dijitCalendarMonthLabel {
             padding: 2px 0;
-            color: #FFF;
+            color: #fff;
             &:hover,
             &:focus {
                 color: #4280cb;
@@ -107,12 +107,12 @@
         .dijitCalendarMonthContainer {
             th {
                 &:first-child {
-                    border-top-left-radius: 0px;
+                    border-top-left-radius: 0;
                     border-top-right-radius: 3px;
                 }
                 &:last-child {
                     border-top-left-radius: 3px;
-                    border-top-right-radius: 0px;
+                    border-top-right-radius: 0;
                 }
             }
         }
@@ -128,11 +128,11 @@
 
 .mx-tooltip {
     .dijitTooltipContainer {
-        border-radius: 4px;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
         border-width: 1px;
         border-color: $gray-light;
-        background: #FFF;
+        border-radius: 4px;
+        background: #fff;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
         .mx-tooltip-content {
             padding: 10px;
         }
@@ -141,9 +141,9 @@
         }
     }
     .dijitTooltipConnector {
-        margin-left: -10px;
         width: 0;
         height: 0;
+        margin-left: -10px;
         border-width: 10px 10px 10px 0;
         border-style: solid;
         border-color: transparent;
@@ -178,7 +178,7 @@
             top: 2px;
             width: 19px;
             height: 1px;
-            background: #B0B0B0;
+            background: #b0b0b0;
         }
     }
     .dijitSplitterV {
@@ -186,7 +186,7 @@
             left: 2px;
             width: 1px;
             height: 19px;
-            background: #B0B0B0;
+            background: #b0b0b0;
         }
     }
     .dijitSplitContainer-child,
@@ -204,13 +204,13 @@
         border: none;
     }
     .dijitSplitterActive {
-        opacity: 0.6;
-        filter: alpha(opacity=60);
+        font-size: 1px;
         /* For IE8 and earlier */
         margin: 0;
+        opacity: .6;
         background-color: #aaa;
         background-image: none;
-        font-size: 1px;
+        filter: alpha(opacity=60);
     }
     .dijitSplitContainer-dijitContentPane,
     .dijitBorderContainer-dijitContentPane {
@@ -229,36 +229,36 @@
 .dijitMenuPopup {
     margin-top: 10px;
     .dijitMenu {
-        border-radius: 3px;
         display: block;
+        width: 200px !important;
         margin-top: 0; // No top margin because there is no parent with margin bottom
         padding: 12px 10px;
+        border-radius: 3px;
         background: $brand-inverse;
-        width: 200px !important;
         &:after {
             position: absolute;
             bottom: 100%;
             left: 20px;
+            width: 0;
+            height: 0;
             margin-left: -10px;
-            width: 0px;
-            height: 0px;
+            content: ' ';
+            pointer-events: none;
             border: medium solid transparent;
             border-width: 10px;
             border-bottom-color: $brand-inverse;
-            content: " ";
-            pointer-events: none;
         }
         // Menu item
         .dijitMenuItem {
             background: transparent;
             .dijitMenuItemLabel {
-                border-radius: 3px;
-                padding: 10px;
-                color: #FFF;
-                width: 180px !important;
                 display: block;
                 overflow: hidden;
+                width: 180px !important;
+                padding: 10px;
                 text-overflow: ellipsis;
+                color: #fff;
+                border-radius: 3px;
             }
             // Hover
             &.dijitMenuItemHover {
@@ -271,7 +271,7 @@
         // New label
         .tg_newlabelmenuitem {
             .dijitMenuItemLabel {
-                @include font(bold);
+                font-weight: $font-weight-bold;
             }
         }
         // Seperator

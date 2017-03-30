@@ -10,12 +10,12 @@
         margin-bottom: 20px;
         border-color: $tabs-border-color;
         >li>a {
-            @include font(normal);
+            font-weight: $font-weight-normal;
+            margin-right: 0;
+            -webkit-transition: all .2s ease-in-out;
             -moz-transition: all .2s ease-in-out;
             -o-transition: all .2s ease-in-out;
-            -webkit-transition: all .2s ease-in-out;
             transition: all .2s ease-in-out;
-            margin-right: 0;
             color: $tabs-color;
             &:hover,
             &:focus {
@@ -25,10 +25,10 @@
         >li.active>a,
         >li.active>a:hover,
         >li.active>a:focus {
+            color: $tabs-color-active;
             border: 1px solid $tabs-border-color;
             border-bottom-color: transparent;
             background-color: $tabs-bg;
-            color: $tabs-color-active;
         }
     }
 }
@@ -41,10 +41,10 @@
     .mx-tabcontainer-tabs {
         border: 0;
         >li>a {
-            border-radius: 4px;
             margin-right: 2px;
-            border: 1px solid $tabs-border-color;
             color: $tabs-color;
+            border: 1px solid $tabs-border-color;
+            border-radius: 4px;
             &:hover,
             &:focus {
                 background-color: $tabs-bg-hover;
@@ -53,9 +53,9 @@
         >li.active>a,
         >li.active>a:hover,
         >li.active>a:focus {
-            background-color: $tabs-bg-active;
-            color: #FFF;
+            color: #fff;
             border-color: $tabs-bg-active;
+            background-color: $tabs-bg-active;
         }
     }
 }
@@ -65,31 +65,31 @@
     .mx-tabcontainer-tabs {
         border-width: 3px;
         li {
-            margin-bottom: -3px;
             margin-right: 30px;
+            margin-bottom: -3px;
             >a {
                 padding: 10px 0;
+                color: $tabs-color;
                 border: 0;
                 border-style: solid;
                 border-color: transparent;
                 border-bottom-width: 3px;
                 border-radius: 0;
-                color: $tabs-color;
                 &:hover,
                 &:focus {
+                    color: $tabs-color;
                     border: 0;
                     border-color: transparent;
                     background: transparent;
-                    color: $tabs-color;
                 }
             }
             &.active>a,
             &.active>a:hover,
             &.active>a:focus {
+                color: $tabs-lined-color-active;
                 border: 0;
                 border-bottom: 3px solid $tabs-lined-border-color;
                 background-color: transparent;
-                color: $tabs-lined-color-active;
             }
         }
     }
@@ -104,20 +104,20 @@
         >li {
             display: table-cell;
             float: none;
-            margin: 0;
             width: 1%;
+            margin: 0;
             @media (max-width: $screen-xs-max) {
                 display: block;
                 width: 100%;
             }
             >a {
-                border-bottom: 1px solid $tabs-border-color;
                 text-align: center;
+                border-bottom: 1px solid $tabs-border-color;
             }
         }
         >li.active>a {
-            border-radius: 4px;
             border-bottom-color: transparent;
+            border-radius: 4px;
             @media (max-width: $screen-xs-max) {
                 border-bottom-color: $tabs-border-color;
             }
@@ -135,7 +135,7 @@
         border-width: 0 1px 1px 1px;
         border-style: solid;
         border-color: $tabs-border-color;
-        background-color: #FFF;
+        background-color: #fff;
     }
 }
 
@@ -143,21 +143,21 @@
 .tab-mobile.mx-tabcontainer {
     .mx-tabcontainer-tabs {
         margin: 0 0 10px 0 !important;
+        text-align: center;
         border-color: transparent;
         background-color: $brand-primary;
-        text-align: center;
         li {
             display: table-cell;
             float: none;
-            margin: 0;
             width: 1%;
+            margin: 0;
             a {
-                padding: 15px 0;
-                border-style: none;
-                color: #FFF;
-                font-weight: normal;
                 font-size: 11px;
+                font-weight: $font-weight-normal;
+                padding: 15px 0;
                 text-transform: uppercase;
+                color: #fff;
+                border-style: none;
                 &:hover,
                 &:focus {
                     color: $tabs-color-active;
@@ -168,7 +168,7 @@
             &.active a {
                 color: $tabs-color-active;
                 background-color: transparent;
-                @include css-arrow(bottom, 5px, 5px, #FFF, #FFF, 0);
+                @include css-arrow(bottom, 5px, 5px, #fff, #fff, 0);
                 &:after,
                 &:before {
                     -webkit-transform: rotate(180deg);

@@ -89,9 +89,6 @@ $font-family-import:                    false !default;
 
 // Font Family / False = fallback from Bootstrap (Helvetica Neue)
 $font-family-base:                      false !default;
-$font-family-light:                     false !default;
-$font-family-semibold:                  false !default;
-$font-family-bold:                      false !default;
 
 // Font Size
 $font-size-large:                       16px !default;
@@ -103,7 +100,7 @@ $font-weight-normal:                    normal !default;
 $font-weight-semibold:                  500 !default;
 $font-weight-bold:                      bold !default; 
 
-$font-weight-header:                   $font-weight-normal !default;
+$font-weight-header:                    $font-weight-normal !default;
 
 // Font Header Size
 $font-size-h1:                          31px !default;

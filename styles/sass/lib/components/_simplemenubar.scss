@@ -12,24 +12,24 @@
         min-height: 50px;
         table-layout: fixed;
         li.mx-menubar-item {
-            margin: 0;
-            width: 100%;
             display: inline-block;
+            width: 100%;
+            margin: 0;
             a {
-                @include font(normal);
-                border-radius: 0;
-                color: $navsidebar-color;
                 font-size: $navsidebar-sub-font-size;
+                font-weight: $font-weight-normal;
+                line-height: 50px;
+                display: block;
+                overflow: hidden;
                 padding: 0 8px;
                 text-align: center;
-                line-height: 50px;
-                overflow: hidden;
-                display: block;
                 vertical-align: middle;
+                color: $navsidebar-color;
+                border-radius: 0;
                 .glyphicon {
-                    vertical-align: middle;
                     font-size: $navsidebar-glyph-size;
                     top: -1px;
+                    vertical-align: middle;
                 }
             }
             a:hover,
@@ -37,9 +37,9 @@
             &:hover a,
             &:focus a,
             &.active a {
-                background-color: $navsidebar-bg-hover;
-                color: $navsidebar-color-hover;
                 text-decoration: none;
+                color: $navsidebar-color-hover;
+                background-color: $navsidebar-bg-hover;
             }
             &.active a {
                 color: $navsidebar-color-active;
@@ -75,20 +75,20 @@
     ul.mx-menubar-list {
         li.mx-menubar-item {
             a {
-                color: $navtopbar-color;
                 font-size: $navtopbar-font-size;
+                color: $navtopbar-color;
                 border-bottom: 1px solid $navtopbar-border-color;
                 .glyphicon {
-                    vertical-align: middle;
                     font-size: $navtopbar-glyph-size;
                     top: -1px;
+                    vertical-align: middle;
                 }
                 &:hover,
                 &:focus,
                 &.active {
-                    background-color: $navtopbar-bg-hover;
-                    color: $navtopbar-color-hover;
                     text-decoration: none;
+                    color: $navtopbar-color-hover;
+                    background-color: $navtopbar-bg-hover;
                 }
                 &.active {
                     color: $navtopbar-color-active;
@@ -119,8 +119,8 @@
                 line-height: normal;
                 padding: 8px 8px 6px 8px;
                 .glyphicon {
-                    display: block;
                     font-size: 18px;
+                    display: block;
                     margin-bottom: 4px;
                 }
             }

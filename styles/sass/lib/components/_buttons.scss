@@ -8,7 +8,7 @@
 .mx-button {
     display: inline-block;
     margin-bottom: 0;
-    padding: 0.5em 1em;
+    padding: 0.6em 1em;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -30,7 +30,6 @@
     background-color: $btn-default-bg;
     background-image: none;
     box-shadow: none;
-    @include font(normal);
     &:hover,
     &:focus,
     &:active {

@@ -5,19 +5,19 @@
 ========================================================================== */
 
 .mx-navigationlist {
-    padding: 0;
     margin: 0;
+    padding: 0;
     .mx-navigationlist-item {
         padding: 15px 20px 15px 16px;
-        border-left: 4px solid transparent;
-        border-bottom: 1px solid $navsidebar-border-color;
         border-top: none;
+        border-bottom: 1px solid $navsidebar-border-color;
+        border-left: 4px solid transparent;
         border-radius: 0;
         background-color: $navsidebar-bg;
         label {
-            @include font(normal);
-            color: $navsidebar-color;
             font-size: $navsidebar-font-size;
+            font-weight: $font-weight-normal;
+            color: $navsidebar-color;
         }
         &:hover,
         &:focus,
@@ -28,8 +28,8 @@
             }
         }
         &.active {
-            border-left-color: $navsidebar-color-active;
             color: $navsidebar-color-active;
+            border-left-color: $navsidebar-color-active;
             background-color: $navsidebar-bg-active;
         }
     }

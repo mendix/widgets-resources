@@ -14,46 +14,46 @@
             padding: 0;
             border-style: none;
             a {
-                @include font(normal);
+                font-size: $navsidebar-font-size;
+                font-weight: $font-weight-normal;
                 display: block;
                 padding: 15px 20px 15px 16px;
-                border-bottom: 1px solid $navsidebar-border-color;
-                border-radius: 0;
-                color: $navsidebar-color;
-                text-shadow: none;
-                font-size: $navsidebar-font-size;
                 vertical-align: middle;
-                background-color: $navsidebar-bg;
+                color: $navsidebar-color;
+                border-bottom: 1px solid $navsidebar-border-color;
                 border-left: 4px solid transparent;
+                border-radius: 0;
+                background-color: $navsidebar-bg;
+                text-shadow: none;
                 .caret {
                     border-top-color: $navsidebar-color;
                     border-bottom-color: $navsidebar-color;
                 }
                 img {
-                    margin-right: 4px;
                     width: 20px; // Default size
                     height: auto;
+                    margin-right: 4px;
                 }
                 .glyphicon {
-                    vertical-align: middle;
                     font-size: $navsidebar-glyph-size;
                     top: -1px;
+                    vertical-align: middle;
                 }
             }
             a:hover,
             a:focus,
             a.active {
-                background-color: $navsidebar-bg-hover;
-                color: $navsidebar-color-hover;
                 text-decoration: none;
+                color: $navsidebar-color-hover;
+                background-color: $navsidebar-bg-hover;
                 .caret {
                     border-top-color: $navsidebar-color-active;
                     border-bottom-color: $navsidebar-color-active;
                 }
             }
             a.active {
-                border-left-color: $navsidebar-color-active;
                 color: $navsidebar-color-active;
+                border-left-color: $navsidebar-color-active;
                 background-color: $navsidebar-bg-active;
             }
         }
@@ -68,12 +68,12 @@
                 margin: 0;
                 padding: 0;
                 a {
-                    @include font(normal);
-                    color: $navsidebar-sub-color;
                     font-size: $navsidebar-sub-font-size;
-                    background-color: $navsidebar-sub-bg;
+                    font-weight: $font-weight-normal;
                     padding: 12px 20px 12px 25px;
+                    color: $navsidebar-sub-color;
                     border: 0;
+                    background-color: $navsidebar-sub-bg;
                     &:hover,
                     &:focus,
                     &.active {
@@ -81,8 +81,8 @@
                         background-color: $navsidebar-sub-bg-hover;
                     }
                     &.active {
-                        border: 0;
                         color: $navsidebar-sub-color-active;
+                        border: 0;
                         background-color: $navsidebar-sub-bg-active;
                     }
                 }
@@ -116,7 +116,6 @@
     .navbar-inner ul {
         a {
             text-align: center;
-            .glyphicon {}
         }
     }
 }

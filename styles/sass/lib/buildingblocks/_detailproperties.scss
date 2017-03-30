@@ -1,6 +1,6 @@
 .hotel-details-left {
     h2 {
-        font-weight: 700;
+        font-weight: $font-weight-bold;
         font-size: 3em;
         color: #484848;
         margin: 0;
@@ -11,7 +11,6 @@
         }
         span {
             display: inline-block;
-            font-weight: 0.8em;
             color: #d2d2d2;
             margin-right: 5px;
         }

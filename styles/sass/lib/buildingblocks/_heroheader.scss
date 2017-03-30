@@ -29,14 +29,14 @@
                 text-align: center;
                 color: #fff;
                 font-size: 3em;
-                font-weight: 300;
+                font-weight: $font-weight-semibold;
                 margin: 0;
             }
             .sub-detail-header {
                 text-align: center;
                 color: #fff;
                 font-size: 1.2em;
-                font-weight: 300;
+                font-weight: $font-weight-semibold;
                 display: inline-block;
                 margin: 10px auto 40px auto;
             }
@@ -60,21 +60,19 @@
                         margin: 20px 20px 0px 30px;
                         display: inline-block;
                         color: #b1aaaa;
-                        font-weight: 300;
+                        font-weight: $font-weight-semibold;
                     }
                     .detail-price {
                         color: #000;
-                        font-weight: 700;
+                        font-weight: $font-weight-bold;
                         font-size: 2.1em;
-                        /* display: inline-block; */
-                        /* float: left; */
                         margin: 0;
                         margin: 0px 10px 20px 30px;
                     }
                 }
                 .detail-location {
                     color: #000;
-                    font-weight: 300;
+                    font-weight: $font-weight-semibold;
                     font-size: 0.9em;
                     line-height: 1.77em;
                     margin: 0;
@@ -89,7 +87,7 @@
                     .detail-rooms-left {
                         /* line-height: 1em; */
                         margin: 0;
-                        font-weight: 300;
+                        font-weight: $font-weight-semibold;
                         font-size: 1em;
                         color: #b1aaaa;
                         display: block;
@@ -97,7 +95,7 @@
                     }
                     .rooms {
                         color: #404040;
-                        font-weight: 700;
+                        font-weight: $font-weight-bold;
                         display: block;
                         margin: 0;
                         font-size: 2.1em;

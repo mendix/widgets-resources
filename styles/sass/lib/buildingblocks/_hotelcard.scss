@@ -65,7 +65,7 @@
 
 .hotelcard-product {
     @extend .hotelcard;
-    webkit-box-shadow: 0px 1px 7px -1px rgba(0, 0, 0, 0.26);
+    -webkit-box-shadow: 0px 1px 7px -1px rgba(0, 0, 0, 0.26);
     -moz-box-shadow: 0px 1px 7px -1px rgba(0, 0, 0, 0.26);
     box-shadow: 0px 1px 7px -1px rgba(0, 0, 0, 0.26);
     border-top: 0;
@@ -81,7 +81,7 @@
             .product-price {
                 margin-left: 10px;
                 font-size: 1.4em;
-                font-weight: 300;
+                font-weight: $font-weight-semibold;
                 z-index: 1;
                 color: #fff;
                 float: left;
@@ -90,7 +90,7 @@
             .product-location {
                 margin-left: 10px;
                 font-size: 1em;
-                font-weight: 300;
+                font-weight: $font-weight-semibold;
                 z-index: 1;
                 color: #fff;
                 float: left;
@@ -103,7 +103,7 @@
         position: relative;
         .product-offers-name {
             font-size: 1.4em;
-            font-weight: 400;
+            font-weight: $font-weight-semibold;
             color: #fff;
             top: 50%;
             display: block;
@@ -117,7 +117,7 @@
         .product-offers-rooms {
             margin: auto;
             font-size: 1em;
-            font-weight: 400;
+            font-weight: $font-weight-semibold;
             color: #fff;
             top: 50%;
             display: block;

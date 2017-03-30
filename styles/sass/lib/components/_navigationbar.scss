@@ -5,20 +5,20 @@
 ========================================================================== */
 
 .mx-navbar {
-    border-radius: 0;
     margin: 0;
     border-style: none;
+    border-radius: 0;
     background-color: $navtopbar-bg;
     ul.nav {
         margin: 0; // weird -margin if screen gets small (bootstrap)
         /* Navigation item */
         >li.mx-navbar-item>a {
-            @include font(normal);
-            border-radius: 0;
-            padding: 15px 20px;
-            color: $navtopbar-color;
             font-size: $navtopbar-font-size;
+            font-weight: $font-weight-normal;
+            padding: 15px 20px;
             vertical-align: middle;
+            color: $navtopbar-color;
+            border-radius: 0;
             /* Dropdown arrow */
             .caret {
                 border-top-color: $navtopbar-color;
@@ -27,9 +27,9 @@
             &:hover,
             &:focus,
             &.active {
-                background-color: $navtopbar-bg-hover;
-                color: $navtopbar-color-hover;
                 text-decoration: none;
+                color: $navtopbar-color-hover;
+                background-color: $navtopbar-bg-hover;
                 .caret {
                     border-top-color: $navtopbar-color-active;
                     border-bottom-color: $navtopbar-color-active;
@@ -46,12 +46,12 @@
                 left: 15px;
                 width: 0;
                 height: 0;
+                content: '';
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
                 border-width: 0 9px 9px 9px;
                 border-style: solid;
                 border-color: transparent transparent $navtopbar-border-color transparent;
-                content: "";
-                transform: rotate(360deg);
-                -webkit-transform: rotate(360deg);
             }
             // Image
             img {
@@ -59,9 +59,9 @@
                 height: auto;
             }
             .glyphicon {
-                vertical-align: middle;
                 font-size: $navtopbar-glyph-size;
                 top: -1px;
+                vertical-align: middle;
             }
         }
         /* When hovering or the dropdown is open */
@@ -71,17 +71,17 @@
         >.mx-navbar-item.open>a,
         >.mx-navbar-item.open>a:hover,
         >.mx-navbar-item.open>a:focus {
-            background-color: $navtopbar-bg-hover;
-            color: $navtopbar-color-hover;
             text-decoration: none;
+            color: $navtopbar-color-hover;
+            background-color: $navtopbar-bg-hover;
             .caret {
                 border-top-color: $navtopbar-color-hover;
                 border-bottom-color: $navtopbar-color-hover;
             }
         }
         >.mx-navbar-item.open .dropdown-menu>li.mx-navbar-subitem.active a {
-            background-color: $navtopbar-sub-bg-active;
             color: $navtopbar-sub-color-active;
+            background-color: $navtopbar-sub-bg-active;
             .caret {
                 border-top-color: $navtopbar-sub-color-active;
                 border-bottom-color: $navtopbar-sub-color-active;
@@ -93,15 +93,15 @@
             padding: 10px 20px;
         }
         .mx-navbar-item.open .dropdown-menu {
-            background-color: $navtopbar-sub-bg;
-            border-radius: 0;
             padding: 0;
+            border-radius: 0;
+            background-color: $navtopbar-sub-bg;
             >li.mx-navbar-subitem>a {
-                @include font(normal);
-                padding: 10px 20px;
-                border-radius: 0;
-                color: $navtopbar-sub-color;
                 font-size: $navtopbar-sub-font-size;
+                font-weight: $font-weight-normal;
+                padding: 10px 20px;
+                color: $navtopbar-sub-color;
+                border-radius: 0;
                 &:hover,
                 &:focus {
                     color: $navtopbar-sub-color-hover;

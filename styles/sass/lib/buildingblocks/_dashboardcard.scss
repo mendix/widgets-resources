@@ -3,23 +3,23 @@
 ========================================================================== */
 
 .dashboardcard {
+    font-size: $font-size-h3;
+    font-weight: $font-weight-bold;
     display: block;
     overflow: hidden;
     width: 100%;
     text-align: center;
-    font-size: $font-size-h3;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: $font-base-color !important;
     border: 1px solid $default-border-color;
     border-radius: 3px;
     background: #fff;
-    color: $font-base-color !important;
     -webkit-box-shadow: 0 10px 16px -8px rgba(0, 0, 0, .16);
     -moz-box-shadow: 0 10px 16px -8px rgba(0, 0, 0, .16);
     box-shadow: 0 10px 16px -8px rgba(0, 0, 0, .16);
     @include default-spacing($type: padding, $direction: all, $device: responsive);
     @include default-spacing($type: margin, $direction: bottom, $device: responsive);
-    @include font(bold);
     img,
     &.btn>span {
         display: block;
@@ -36,7 +36,7 @@
         &:hover,
         &focus {
             border-color: $font-base-color;
-            background-color: #FFF;
+            background-color: #fff;
         }
     }
 }

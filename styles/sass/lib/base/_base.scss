@@ -14,7 +14,7 @@ body {
     line-height: $line-height-base;
     color: $font-base-color;
     background-color: $bg-color;
-    @include font(normal);
+    font-weight: $font-weight-normal;
 }
 
 a {

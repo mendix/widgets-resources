@@ -6,37 +6,37 @@
 
 .modal-dialog {
     .modal-content {
+        border: 1px solid $modal-header-border-color;
         border-radius: 4px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
-        border: 1px solid $modal-header-border-color;
         .modal-header {
-            border-radius: 0; // Because of the class .mx-window-active in mxui.css
             padding: 15px 20px;
-            background-color: $modal-header-bg;
             border-bottom-color: $modal-header-border-color;
+            border-radius: 0; // Because of the class .mx-window-active in mxui.css
+            background-color: $modal-header-bg;
             h4 {
-                @include font(bold);
-                color: $modal-header-color;
                 font-size: 16px;
+                font-weight: $font-weight-bold;
                 margin: 0;
+                color: $modal-header-color;
             }
             .close {
+                margin-top: -3px;
                 opacity: 1;
-                filter: alpha(opacity=100);
                 /* For IE8 and earlier */
                 color: $modal-header-color;
                 text-shadow: none;
-                margin-top: -3px;
+                filter: alpha(opacity=100);
             }
         }
         .modal-body {
             padding: 20px;
         }
         .modal-footer {
-            padding: 20px;
             margin-top: 0;
-            border-style: none;
+            padding: 20px;
             text-align: left;
+            border-style: none;
         }
     }
 }
@@ -53,18 +53,18 @@
         }
         >.mx-dataview>.mx-dataview-controls,
         >.mx-placeholder>.mx-dataview>.mx-dataview-controls {
-            padding: 20px;
-            border-style: none;
-            text-align: left;
             margin: 0;
+            padding: 20px;
+            text-align: left;
+            border-style: none;
         }
     }
     .mx-dataview-controls {
         padding-bottom: 0;
     }
     .mx-layoutgrid {
-        padding-left: 0;
         padding-right: 0;
+        padding-left: 0;
     }
 }
 
@@ -75,12 +75,12 @@
     }
     .modal-content {
         input {
-            box-shadow: none;
-            padding: 12px 12px;
-            height: 56px;
-            border: 1px solid #EEE;
-            background: #eee;
             font-size: 16px;
+            height: 56px;
+            padding: 12px 12px;
+            border: 1px solid #eee;
+            background: #eee;
+            box-shadow: none;
             &:focus {
                 border-color: #66afe9;
             }
@@ -94,8 +94,8 @@
         font-size: 16px;
     }
     h4 {
-        color: #aaa;
-        font-weight: $font-weight-bold;
         font-size: 20px;
+        font-weight: $font-weight-bold;
+        color: #aaa;
     }
 }

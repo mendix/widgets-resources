@@ -8,7 +8,7 @@
         @include override-text-properties($color: $header-text-color);
         .asset-type {
             font-size: 11px;
-            font-weight: bold;
+            font-weight: $font-weight-bold;
             float: right;
             margin-top: -4px;
             padding: 5px 10px;

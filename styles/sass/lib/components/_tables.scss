@@ -5,7 +5,7 @@
 ========================================================================== */
 
 th {
-    @include font(bold);
+    font-weight: $font-weight-bold;
 }
 
 html body .mx-page table.mx-table {
@@ -25,7 +25,7 @@ table.mx-table {
             >th {
                 padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
                 * {
-                    @include font(bold);
+                    font-weight: $font-weight-bold;
                     color: $form-label-color;
                     font-weight: $form-label-weight;
                 }
