@@ -4,6 +4,26 @@
    Used for navigation layouts
 ========================================================================== */
 
+// Basic styling Layout grid (scroll container)
+.mx-layoutcontainer {
+    .mx-layoutcontainer-wrapper {
+        padding: 0;
+        // Convert width to max-width when in scroll container to make sure you dont get scrollbars
+        .mx-layoutgrid-fixed {
+            width: auto;
+            @media (min-width: $screen-sm) {
+                max-width: 750px;
+            }
+            @media (min-width: $screen-md) {
+                max-width: 970px;
+            }
+            @media (min-width: $screen-lg) {
+                max-width: 1170px;
+            }
+        }
+    }
+}
+
 .region-topbar {
     min-height: $topbar-minimalheight;
     border-bottom: 1px solid $navtopbar-border-color;
@@ -70,17 +90,6 @@
 
 .region-content {
     padding: 0; // for if region-content is on a col so you dont get scollbar
-    >.mx-layoutcontainer-wrapper {
-        padding: 0;
-    }
-    >.mx-placeholder,
-    >.mx-layoutcontainer-wrapper .mx-placeholder {
-        // Fake orginal container styling on the first container on the page
-        .mx-layoutgrid-fixed {
-            max-width: 1170px;
-            margin: auto
-        }
-    }
 }
 
 .region-footer {
