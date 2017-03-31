@@ -82,7 +82,9 @@
                 "import-sources-order": "any",
                 "named-imports-order": "lowercase-last"
             }
-        ]
+        ],
+        "curly": false,
+        "arrow-parens": false
     },
     "jsRules": {
         "trailing-comma": [ false ],
