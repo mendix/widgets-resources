@@ -12,7 +12,8 @@
         padding: 0;
         // Convert width to max-width when in scroll container to make sure you dont get scrollbars
         .mx-layoutgrid-fixed {
-            width: auto;
+            width: 100%;
+            margin: auto;
             @media (min-width: $screen-sm) {
                 max-width: 750px;
             }
