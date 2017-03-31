@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.custom.carousel.Carousel" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
+    <name>Carousel</name>
+    <description>Carousel displaying images</description>
+    <icon/>
+    <properties>
+        <property key="dataSource" type="enumeration" defaultValue="static">
+            <caption>Data source</caption>
+            <category>Data source</category>
+            <description>Where the images should be retrieved from</description>
+            <enumerationValues>
+                <enumerationValue key="static">Static</enumerationValue>
+                <enumerationValue key="XPath">XPath</enumerationValue>
+                <enumerationValue key="microflow">Microflow</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="staticImages" type="object" isList="true" required="false">
+            <caption>Static images</caption>
+            <category>Data source</category>
+            <description/>
+            <properties>
+                <property key="url" type="image">
+                    <caption>Image</caption>
+                    <category>Image</category>
+                    <description>Image to add to the carousel</description>
+                </property>
+                <property key="onClickMicroflow" type="microflow" required="false">
+                    <caption>Microflow</caption>
+                    <category>On click action</category>
+                    <description>Microflow to call when the image is clicked</description>
+                    <returnType type="Void" />
+                </property>
+                <property key="onClickForm" type="form" required="false">
+                    <caption>Page</caption>
+                    <category>On click action</category>
+                    <description>Page to open when the image is clicked</description>
+                </property>
+            </properties>
+        </property>
+        <property key="imagesEntity" type="entity" required="false">
+            <caption>Images entity</caption>
+            <category>Data source</category>
+            <description>The entity from which the images will be retrieved. Should extend System.Image or provide a url attribute.</description>
+        </property>
+        <property key="entityConstraint" type="entityConstraint" entityProperty="imagesEntity" required="false">
+            <caption>XPath</caption>
+            <category>Data source</category>
+            <description>Constraint on the images entity</description>
+        </property>
+        <property key="dataSourceMicroflow" type="microflow" required="false">
+            <caption>Microflow</caption>
+            <category>Data source</category>
+            <description>Returns the images to display</description>
+            <returnType type="Object" entityProperty="imagesEntity" isList="true"/>
+        </property>
+        <property key="urlAttribute" type="attribute" required="false" entityProperty="imagesEntity">
+            <caption>URL attribute</caption>
+            <category>Data source</category>
+            <description>The attribute holding the image urls. Overwrites url generation from System.Image</description>
+            <attributeTypes>
+                <attributeType name="String"/>
+            </attributeTypes>
+        </property>
+        <property key="onClickOptions" type="enumeration" defaultValue="doNothing">
+            <caption>On click</caption>
+            <category>Behavior</category>
+            <description>The action to take when an image is clicked (Does not apply to static images)</description>
+            <enumerationValues>
+                <enumerationValue key="doNothing">Do nothing</enumerationValue>
+                <enumerationValue key="callMicroflow">Call microflow</enumerationValue>
+                <enumerationValue key="showPage">Show page</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="onClickMicroflow" type="microflow" required="false" entityProperty="imagesEntity">
+            <caption>On click microflow</caption>
+            <category>Behavior</category>
+            <description>The microflow to call when an image is clicked</description>
+            <returnType type="Void"/>
+        </property>
+        <property key="onClickForm" type="form" required="false">
+            <caption>On click page</caption>
+            <category>Behavior</category>
+            <description>The page to open when an image is clicked</description>
+        </property>
+    </properties>
+</widget>

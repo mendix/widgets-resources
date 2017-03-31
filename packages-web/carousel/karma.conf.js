@@ -1,16 +1,30 @@
-var webpackConfig = require("./webpack.config");
+let webpackConfig = require("./webpack.config");
+const path = require("path");
 Object.assign(webpackConfig, {
-    debug: true,
     devtool: "inline-source-map",
-    externals: webpackConfig.externals.concat([
+    externals: [
         "react/lib/ExecutionEnvironment",
         "react/lib/ReactContext",
         "react/addons",
         "jsdom"
-    ])
+    ]
 });
 
 module.exports = function(config) {
+    if (config.codeCoverage) {
+        Object.assign(webpackConfig, {
+            module: Object.assign(webpackConfig.module, {
+                rules: webpackConfig.module.rules.concat([ {
+                    test: /\.ts$/,
+                    enforce: "post",
+                    loader: "istanbul-instrumenter-loader",
+                    include: path.resolve(__dirname, "src"),
+                    exclude: /\.(spec)\.ts$/
+                } ])
+            })
+        });
+    }
+
     config.set({
         basePath: "",
         frameworks: [ "jasmine" ],
@@ -23,7 +37,7 @@ module.exports = function(config) {
         preprocessors: { "tests/test-index.js": [ "webpack", "sourcemap" ] },
         webpack: webpackConfig,
         webpackServer: { noInfo: true },
-        reporters: [ "progress", "kjhtml", "coverage" ],
+        reporters: [ "progress", config.codeCoverage ? "coverage" : "kjhtml" ],
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
@@ -32,7 +46,7 @@ module.exports = function(config) {
         singleRun: false,
         concurrency: Infinity,
         coverageReporter: {
-            dir: "./dist/testresults", 
+            dir: "./dist/testresults",
             reporters: [
                 { type: "json", subdir: ".", file: "coverage.json" },
                 { type: "text" }

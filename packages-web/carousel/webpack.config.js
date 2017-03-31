@@ -4,44 +4,40 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-    entry: "./src/com/mendix/widget/carousel/Carousel.ts",
+    entry: "./src/components/CarouselContainer.ts",
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
-        filename: "src/com/mendix/widget/carousel/Carousel.js",
-        libraryTarget:  "umd",
-        umdNamedDefine: true,
-        library: "com.mendix.widget.carousel.Carousel"
+        filename: "src/com/mendix/widget/custom/carousel/Carousel.js",
+        libraryTarget: "umd"
     },
     resolve: {
-        extensions: [ "", ".ts", ".js", ".json" ],
+        extensions: [ ".ts", ".js", ".json" ],
         alias: {
             "tests": path.resolve(__dirname, "./tests")
         }
     },
-    errorDetails: true,
     module: {
-        loaders: [
-            { test: /\.ts$/, loader: "ts-loader" },
-            { test: /\.json$/, loader: "json" },
-            { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") }
-        ],
-        postLoaders: [ {
-            test: /\.ts$/,
-            loader: "istanbul-instrumenter",
-            include: path.resolve(__dirname, "src"),
-            exclude: /\.(spec)\.ts$/
-        } ]
+        rules: [
+            { test: /\.ts$/, use: "ts-loader" },
+            { test: /\.css$/, loader: ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: "css-loader"
+            }) }
+        ]
     },
     devtool: "source-map",
-    externals: [ "mxui/widget/_WidgetBase", "dojo/_base/declare" ],
+    externals: [ "react", "react-dom" ],
     plugins: [
         new CopyWebpackPlugin([
             { from: "src/**/*.js" },
-            { from: "src/**/*.xml" }
+            { from: "src/**/*.xml" },
+            { from: "assets/Preview.png", to: "src/Preview.png"}
         ], {
             copyUnmodified: true
         }),
-        new ExtractTextPlugin("./src/com/mendix/widget/carousel/ui/Carousel.css")
-    ],
-    watch: true
+        new ExtractTextPlugin({ filename: "./src/com/mendix/widget/custom/carousel/ui/Carousel.css" }),
+        new webpack.LoaderOptionsPlugin({
+            debug: true
+        })
+    ]
 };
