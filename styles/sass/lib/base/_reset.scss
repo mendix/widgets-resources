@@ -28,10 +28,10 @@
 }
 
 .mx-scrollcontainer .mx-placeholder {
-    .mx-layoutgrid:first-child {
-        padding-top: 0;
-        padding-bottom: 0;
+    .mx-layoutgrid {
         @include default-spacing($type: padding, $direction: all, $device: responsive);
+        padding-top: 0;
+        padding-bottom: 0; 
         &:first-child {
             @include default-spacing($type: padding, $direction: top, $device: responsive);
         }
