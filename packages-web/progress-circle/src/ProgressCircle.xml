@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.custom.progresscircle.ProgressCircle" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
+    <name>Progress circle</name>
+    <description>Displays a progress in a circle</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTM0A1t6AAABY0lEQVQ4T6WTvy8EURDHtxCulFCQnCO5QicaqpPrr9pGI+QKjdDQUUk0q9L4Ec0RocDS6a+6lfgXrnMbGnLFKlzs3vp+14y82zg/4iWfZN68N9+dmZ1nxXGc4HlePzgGsYm1h0OD6ZNmvXzVGNU4DS6AhgQFwAE2yC64/pR9/ugUz55uMwdhmyIDh61w9uJhORHAJX5Zg6tgTNXTzLt+YfwoaKoIM6GApl39KijN4vV9Jl95CbQcCmjaXb+cZu7SL/XuRx99EQFHD7F2QAtwMwwmwauwpPdmTp/vTAFbgifAtl4SnwtGxA7Vz8aaAlm5sAUqwrr43jQI6wbkaPPvdBPYAH1gFxTBrwS0hFWwIvYmKIEaGBTfp1i6hKSJWDkQAW4i8ZVBW3xrKsDBMgU6fiPWkNqGr0dtDpROJQX+PEg6jTpI/xtlHvBh0MEDpsb62CR2+sfHpOpUS1JiXd/Q+Zxj6x3u72eCF5jDPgAAAABJRU5ErkJggg==</icon>
+    <properties>
+        <property key="textSize" type="enumeration" defaultValue="medium">
+            <caption>Text size</caption>
+            <category>Display</category>
+            <description>Size of the progress text</description>
+            <enumerationValues>
+                <enumerationValue key="small">Small</enumerationValue>
+                <enumerationValue key="medium">Medium</enumerationValue>
+                <enumerationValue key="large">Large</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="animate" type="boolean" defaultValue="true">
+            <caption>Animate</caption>
+            <category>Display</category>
+            <description>Animates when the progress circle is loaded and updated</description>
+        </property>
+        <property key="progressAttribute" type="attribute">
+            <caption>Progress attribute</caption>
+            <category>Data</category>
+            <description>Holds the progress value</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Decimal"/>
+                <attributeType name="Long"/>
+            </attributeTypes>
+        </property>
+        <property key="maximumValueAttribute" type="attribute" required="false">
+            <caption>Maximum value attribute</caption>
+            <category>Data</category>
+            <description>Holds the highest progress value which must be greater than 0. If not set, maximum value defaults to 100</description>
+            <attributeTypes>
+                <attributeType name="Integer" />
+                <attributeType name="Decimal" />
+                <attributeType name="Long" />
+            </attributeTypes>
+        </property>
+        <property key="onClickEvent" type="enumeration" defaultValue="doNothing">
+            <caption>On click</caption>
+            <category>Events</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="doNothing">Do nothing</enumerationValue>
+                <enumerationValue key="showPage">Show a page</enumerationValue>
+                <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="microflow" type="microflow" required="false">
+            <caption>Microflow</caption>
+            <category>Events</category>
+            <description>The microflow that will be executed on click</description>
+            <returnType type="Void" />
+        </property>
+        <property key="page" type="form" required="false">
+            <caption>Page</caption>
+            <category>Events</category>
+            <description>The page that will be opened on click</description>
+        </property>
+    </properties>
+</widget>
