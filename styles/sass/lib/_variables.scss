@@ -39,7 +39,7 @@ $brand-logo-width:						26px !default; // Only used for CSS brand logo
 
 // Global Border Color
 $border-color-default:                  $gray-primary !default;
-$default-border-color:                  $border-color-default !default; // Backwards compatible with theme creator
+$default-border-color:                  $border-color-default !default; // Backwards compatible with v1
 
 // Topbar 
 $topbar-bg:                             $brand-primary !default;
@@ -59,7 +59,11 @@ $bg-color-secondary:                    #F8F8F8 !default;
 
 // Default Font Size & Color
 $font-size-default:                        14px !default;
+$font-base-size:                           $font-size-default !default; // Backwards compatible with v1
+
 $font-color-default:                       #555 !default;
+$font-base-color:                          $font-color-default !default; // Backwards compatible with v1
+
 
 // Default Link Color
 $link-color:                            $brand-primary !default;
@@ -120,7 +124,7 @@ $font-header-margin:					10px 0 20px 0 !default;
 
 // Text Colors
 $font-color-header:				        $brand-primary !default;
-$font-color-headers:				    $font-color-header !default; // Backwards compatible with theme creator
+$font-color-headers:				    $font-color-header !default; // Backwards compatible with v1
 $font-color-detail:                     $gray-light !default;
 
 
