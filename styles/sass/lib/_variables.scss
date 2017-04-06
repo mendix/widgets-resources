@@ -37,25 +37,30 @@ $brand-logo-width:						26px !default; // Only used for CSS brand logo
 
 //== Step 2: UI Customization
 
+// Default Font Size & Color
+$font-size-default:                     14px !default;
+$font-base-size:                        $font-size-default !default; // Backwards compatible with v1
+$font-color-default:                    #555 !default;
+$font-base-color:                       $font-color-default !default; // Backwards compatible with v1
+
 // Global Border Color
 $border-color-default:                  $gray-primary !default;
 $default-border-color:                  $border-color-default !default; // Backwards compatible with v1
 
-// Topbar 
-$topbar-bg:                             $brand-primary !default;
+// Topbar
+$topbar-bg:                             #FFF !default;
 $topbar-minimalheight:                  60px !default;
-$topbar-border-color:                   transparent !default;
+$topbar-border-color:                   $border-color-default !default;
 
-// Sidebar 
+// Sidebar
 $sidebar-bg:                            $brand-inverse !default;
 
 // Navbar Brand Name / For your company, product, or project name (used in layouts/base/)
-$navbar-brand-name:                     #FFF !default;
+$navbar-brand-name:                     $font-color-default !default;
 
 // Background Colors
 $bg-color:                              #FFF !default;
-// Background color that is used for specific page templates background 
-$bg-color-secondary:                    #F8F8F8 !default;
+$bg-color-secondary:                    #E7EAF1 !default; // Background color that is used for specific page templates background
 
 // Default Font Size & Color
 $font-size-default:                        14px !default;
@@ -63,7 +68,6 @@ $font-base-size:                           $font-size-default !default; // Backw
 
 $font-color-default:                       #555 !default;
 $font-base-color:                          $font-color-default !default; // Backwards compatible with v1
-
 
 // Default Link Color
 $link-color:                            $brand-primary !default;
@@ -123,7 +127,7 @@ $line-height-base:                      1.428571429 !default;
 $font-header-margin:					10px 0 20px 0 !default;
 
 // Text Colors
-$font-color-header:				        $brand-primary !default;
+$font-color-header:				        #17347B !default;
 $font-color-headers:				    $font-color-header !default; // Backwards compatible with v1
 $font-color-detail:                     $gray-light !default;
 
