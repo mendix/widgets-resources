@@ -58,8 +58,8 @@ $bg-color:                              #FFF !default;
 $bg-color-secondary:                    #F8F8F8 !default;
 
 // Default Font Size & Color
-$font-base-size:                        14px !default;
-$font-base-color:                       #555 !default;
+$font-size-default:                        14px !default;
+$font-color-default:                       #555 !default;
 
 // Default Link Color
 $link-color:                            $brand-primary !default;
@@ -106,7 +106,7 @@ $font-size-h1:                          31px !default;
 $font-size-h2:                          26px !default;
 $font-size-h3:                          24px !default;
 $font-size-h4:                          18px !default;
-$font-size-h5:                          $font-base-size !default;
+$font-size-h5:                          $font-size-default !default;
 $font-size-h6:                          12px !default;
 
 // Font Weight Headers
@@ -121,7 +121,7 @@ $font-header-margin:					10px 0 20px 0 !default;
 // Text Colors
 $font-color-header:				        $brand-primary !default;
 $font-color-headers:				    $font-color-header !default; // Backwards compatible with theme creator
-$font-color-detail:                     $gray !default;
+$font-color-detail:                     $gray-light !default;
 
 
 
@@ -131,7 +131,7 @@ $font-color-detail:                     $gray !default;
 //## Used in components/navigation
 
 // Navigation Sidebar
-$navsidebar-font-size:                  $font-base-size !default;
+$navsidebar-font-size:                  $font-size-default !default;
 $navsidebar-sub-font-size:              $font-size-small !default;
 $navsidebar-glyph-size:                 20px !default; // For glyphicons that you can select in the Mendix Modeler
 
@@ -152,7 +152,7 @@ $navsidebar-sub-color-active:           $brand-primary !default;
 $navsidebar-border-color:               $navsidebar-bg-hover !default;
 
 // Navigation topbar
-$navtopbar-font-size:                   $font-base-size !default;
+$navtopbar-font-size:                   $font-size-default !default;
 $navtopbar-sub-font-size:               $font-size-small !default;
 $navtopbar-glyph-size:                  1.2em !default; // For glyphicons that you can select in the Mendix Modeler
 
@@ -184,7 +184,7 @@ $form-input-style:                      default !default;
 
 // Form Label  
 $form-label-color:                      #666 !default;        
-$form-label-size:                       $font-base-size !default;        
+$form-label-size:                       $font-size-default !default;        
 $form-label-weight:                     $font-weight-normal !default;             
 
 // Form Input dimensions
@@ -199,7 +199,7 @@ $form-input-border-radius:              4px !default;
 $form-input-bg:                         #FFF !default;
 $form-input-bg-focus:                   #FFF !default;
 $form-input-bg-disabled:                $gray-lighter !default;
-$form-input-color:                      $font-base-color !default;
+$form-input-color:                      $font-color-default !default;
 $form-input-focus-color:                $form-input-color !default;
 $form-input-disabled-color:             $form-input-color !default;
 $form-input-placeholder-color:          $gray-light !default;
@@ -240,7 +240,7 @@ $btn-warning-border-color:              $brand-warning !default;
 $btn-danger-border-color:               $brand-danger !default;
 
 // Button Text Color
-$btn-default-color:                     $font-base-color !default;
+$btn-default-color:                     $font-color-default !default;
 $btn-inverse-color:                     #FFF !default;
 $btn-primary-color:                     #FFF !default;
 $btn-info-color:                        #FFF !default;
@@ -348,7 +348,7 @@ $grid-bg-striped:                       lighten($grid-border-color,5) !default;
 $grid-footer-bg:                        $gray-primary !default;
 
 // Text Color
-$grid-selected-color:                   $font-base-color !default;
+$grid-selected-color:                   $font-color-default !default;
 
 // Paging Colors
 $grid-paging-bg:                        transparent !default;
@@ -366,7 +366,7 @@ $grid-paging-color-hover:               $brand-primary !default;
 
 // Text Color
 $tabs-color:                            $font-color-detail !default;
-$tabs-color-active:                     $font-base-color !default;
+$tabs-color-active:                     $font-color-default !default;
 $tabs-lined-color-active:               $brand-primary !default;
 
 // Border Color
@@ -391,7 +391,7 @@ $modal-header-bg:                       transparent !default;
 $modal-header-border-color:             $border-color-default !default;
 
 // Text Color
-$modal-header-color:                    $font-base-color !default;
+$modal-header-color:                    $font-color-default !default;
 
 
 
@@ -405,7 +405,7 @@ $dataview-controls-border-color:        $border-color-default !default;
 
 // Empty Message
 $dataview-emptymessage-bg:              $bg-color !default;
-$dataview-emptymessage-color:           $font-base-color !default;
+$dataview-emptymessage-color:           $font-color-default !default;
 
 
 
@@ -454,7 +454,7 @@ $label-warning-border-color:            $brand-warning !default;
 $label-danger-border-color:             $brand-danger !default;
 
 // Text Color
-$label-default-color:                   $font-base-color !default;
+$label-default-color:                   $font-color-default !default;
 $label-primary-color:                   #FFF !default;
 $label-info-color:                      #FFF !default;
 $label-success-color:                   #FFF !default;
@@ -478,14 +478,14 @@ $groupbox-danger-bg:                    $brand-danger !default;
 $groupbox-white-bg:                     #FFF !default;
 
 // Text Color
-$groupbox-default-color:                $font-base-color !default;
+$groupbox-default-color:                $font-color-default !default;
 $groupbox-inverse-color:                #FFF !default;
 $groupbox-primary-color:                #FFF !default;
 $groupbox-info-color:                   #FFF !default;
 $groupbox-success-color:                #FFF !default;
 $groupbox-warning-color:                #FFF !default;
 $groupbox-danger-color:                 #FFF !default;
-$groupbox-white-color:                  $font-base-color !default;
+$groupbox-white-color:                  $font-color-default !default;
 
 
 

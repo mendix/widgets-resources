@@ -11,7 +11,7 @@
     text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: $font-base-color !important;
+    color: $font-color-default !important;
     border: 1px solid $border-color-default;
     border-radius: 3px;
     background: #fff;
@@ -35,7 +35,7 @@
         }
         &:hover,
         &focus {
-            border-color: $font-base-color;
+            border-color: $font-color-default;
             background-color: #fff;
         }
     }

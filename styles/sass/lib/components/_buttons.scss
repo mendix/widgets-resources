@@ -57,7 +57,7 @@
 .mx-link {
     img {
         //height: auto; // MXUI override who set the height on 16px default
-        height: $font-base-size + 4px;
+        height: $font-size-default + 4px;
         margin-top: -1px;
     }
 }
@@ -105,7 +105,7 @@
 .btn-lg {
     font-size: $font-size-large;
     img {
-        height: $font-base-size + 4px;
+        height: $font-size-default + 4px;
     }
 }
 

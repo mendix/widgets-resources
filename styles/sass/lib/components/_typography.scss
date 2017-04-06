@@ -117,7 +117,7 @@ h6,
 // Colors
 .text-default,
 .text-default:hover {
-    color: $font-base-color !important;
+    color: $font-color-default !important;
 }
 
 .text-primary,
@@ -146,10 +146,10 @@ h6,
 }
 
 // Text styles
-.text-color-header {
+.text-header {
     color: $font-color-header !important;
 }
 
-.text-color-detail {
+.text-detail {
     color: $font-color-detail !important;
 }
