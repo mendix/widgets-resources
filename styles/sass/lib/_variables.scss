@@ -82,13 +82,13 @@ $link-hover-color:                      darken($link-color, 15%) !default;
 //## Change your font family, weight, line-height, headings and more (used in components/typography)
 
 // Font Family Import (Used for google font plugin in theme creater https://ux.mendix.com/theme-creator.html)
-$font-family-import:                    false !default;
+$font-family-import:                    "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" !default;
 @if $font-family-import != false { // Only import, if the import is set
     @import url($font-family-import);
 }
 
 // Font Family / False = fallback from Bootstrap (Helvetica Neue)
-$font-family-base:                      false !default;
+$font-family-base:                      'Open Sans', sans-serif !default;
 
 // Font Size
 $font-size-large:                       16px !default;
@@ -100,7 +100,13 @@ $font-weight-normal:                    normal !default;
 $font-weight-semibold:                  500 !default;
 $font-weight-bold:                      bold !default; 
 
+// Headers
 $font-weight-header:                    $font-weight-normal !default;
+$font-color-headers:				    $brand-primary !default;// Used by theme customizer
+$font-color-header:				        $font-color-headers !default;
+
+// Other
+$font-color-detail:                     $gray !default;
 
 // Font Header Size
 $font-size-h1:                          31px !default;
@@ -110,10 +116,6 @@ $font-size-h4:                          18px !default;
 $font-size-h5:                          $font-base-size !default;
 $font-size-h6:                          11px !default;
 
-// Font Header Color
-$font-color-headers:				    #000 !default;// Used by theme customizer
-$font-color-header:				        $font-color-headers !default;
-$font-color-detail:                     $gray !default;
 
 // Line Height
 $line-height-base:                      1.428571429 !default;
@@ -132,14 +134,14 @@ $font-header-margin:					10px 0 20px 0 !default;
 // Navigation Sidebar
 $navsidebar-font-size:                  $font-base-size !default;
 $navsidebar-sub-font-size:              $font-size-small !default;
-$navsidebar-glyph-size:                 1.2em !default; // For glyphicons that you can select in the Mendix Modeler
+$navsidebar-glyph-size:                 20px !default; // For glyphicons that you can select in the Mendix Modeler
 
 $navsidebar-bg:                         $sidebar-bg !default;
 $navsidebar-bg-hover:                   lighten($navsidebar-bg, 4) !default;
 $navsidebar-bg-active:                  lighten($navsidebar-bg, 8) !default;
 $navsidebar-color:                      #FFF !default;
-$navsidebar-color-hover:                $brand-primary !default;
-$navsidebar-color-active:               $brand-primary !default;
+$navsidebar-color-hover:                #FFF !default;
+$navsidebar-color-active:               #FFF !default;
 
 $navsidebar-sub-bg:                     darken($navsidebar-bg, 4) !default;
 $navsidebar-sub-bg-hover:               $navsidebar-sub-bg !default;
