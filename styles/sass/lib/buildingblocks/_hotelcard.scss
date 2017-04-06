@@ -2,7 +2,7 @@
 .hotelcard {
     position: relative;
     @include default-spacing($type: margin, $direction: bottom, $device: responsive);
-    border: 1px solid $default-border-color;
+    border: 1px solid $border-color-default;
     -webkit-box-shadow: 0 10px 16px -8px rgba(0, 0, 0, .16);
     -moz-box-shadow: 0 10px 16px -8px rgba(0, 0, 0, .16);
     box-shadow: 0 10px 16px -8px rgba(0, 0, 0, .16);

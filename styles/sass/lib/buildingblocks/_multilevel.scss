@@ -65,9 +65,9 @@
 		border-style: none;
 	}
 	.mx-datagrid-body-table {
-		border-left: 1px solid $default-border-color;
-		border-right: 1px solid $default-border-color;
-		border-bottom: 1px solid $default-border-color;
+		border-left: 1px solid $border-color-default;
+		border-right: 1px solid $border-color-default;
+		border-bottom: 1px solid $border-color-default;
 		.mx-datagrid-body tr {
 			td {
 				border-color: $gray-lighter;

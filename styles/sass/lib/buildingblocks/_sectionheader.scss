@@ -4,7 +4,7 @@
 
 .sectionheader {
     margin-bottom: $default-spacing-bottom;
-    border-bottom: 1px solid $default-border-color;
+    border-bottom: 1px solid $border-color-default;
     padding-bottom: $default-spacing-bottom / 2;
 }
 
@@ -20,7 +20,7 @@
 
 .sectionheader-avatar {
     padding: 4px;
-    border: 2px solid $default-border-color;
+    border: 2px solid $border-color-default;
     background-color: #FFF;
 }
 

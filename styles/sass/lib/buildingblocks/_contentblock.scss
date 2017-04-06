@@ -1,5 +1,5 @@
 .contentblock {
 	 @include default-spacing($type: margin, $direction: bottom, $device: responsive);
-	 border-bottom: 1px solid $default-border-color;
+	 border-bottom: 1px solid $border-color-default;
 	 padding: 0 0 30px 0;
 }

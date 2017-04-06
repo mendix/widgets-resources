@@ -4,7 +4,7 @@
 
 .pageheader,
 .pageheader-fullwidth {
-    border-bottom: 2px solid $default-border-color;
+    border-bottom: 2px solid $border-color-default;
     @include default-spacing($type: margin, $direction: bottom, $device: responsive);
     @include override-text-properties($color: $header-text-color);
     .pageheader-title {
@@ -29,6 +29,6 @@
 // Variation
 .pageheader-fullwidth {
     background-color: $header-bg-color;
-    border-bottom: 1px solid $default-border-color;
+    border-bottom: 1px solid $border-color-default;
     margin-bottom: 0;
 }
