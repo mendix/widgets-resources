@@ -38,7 +38,8 @@ $brand-logo-width:						26px !default; // Only used for CSS brand logo
 //== Step 2: UI Customization
 
 // Global Border Color
-$default-border-color:                  $gray-primary !default;
+$border-color-default:                  $gray-primary !default;
+$default-border-color:                  $border-color-default !default; // Backwards compatible with theme creator
 
 // Topbar 
 $topbar-bg:                             $brand-primary !default;
@@ -90,7 +91,7 @@ $font-family-import:                    "https://fonts.googleapis.com/css?family
 // Font Family / False = fallback from Bootstrap (Helvetica Neue)
 $font-family-base:                      'Open Sans', sans-serif !default;
 
-// Font Size
+// Font Sizes
 $font-size-large:                       16px !default;
 $font-size-small:                       11px !default;
 
@@ -100,22 +101,16 @@ $font-weight-normal:                    normal !default;
 $font-weight-semibold:                  500 !default;
 $font-weight-bold:                      bold !default; 
 
-// Headers
-$font-weight-header:                    $font-weight-normal !default;
-$font-color-headers:				    $brand-primary !default;// Used by theme customizer
-$font-color-header:				        $font-color-headers !default;
-
-// Other
-$font-color-detail:                     $gray !default;
-
-// Font Header Size
+// Font Size Headers
 $font-size-h1:                          31px !default;
 $font-size-h2:                          26px !default;
 $font-size-h3:                          24px !default;
 $font-size-h4:                          18px !default;
 $font-size-h5:                          $font-base-size !default;
-$font-size-h6:                          11px !default;
+$font-size-h6:                          12px !default;
 
+// Font Weight Headers
+$font-weight-header:                    $font-weight-normal !default;
 
 // Line Height
 $line-height-base:                      1.428571429 !default;
@@ -123,6 +118,10 @@ $line-height-base:                      1.428571429 !default;
 // Spacing
 $font-header-margin:					10px 0 20px 0 !default;
 
+// Text Colors
+$font-color-header:				        $brand-primary !default;
+$font-color-headers:				    $font-color-header !default; // Backwards compatible with theme creator
+$font-color-detail:                     $gray !default;
 
 
 
@@ -204,7 +203,7 @@ $form-input-color:                      $font-base-color !default;
 $form-input-focus-color:                $form-input-color !default;
 $form-input-disabled-color:             $form-input-color !default;
 $form-input-placeholder-color:          $gray-light !default;
-$form-input-border-color:               $default-border-color !default;
+$form-input-border-color:               $border-color-default !default;
 $form-input-border-focus-color:         $brand-primary !default;    
 
 // Form Group
@@ -327,7 +326,7 @@ $color-danger-lighter:                  mix($brand-danger, white, 20%) !default;
 //## Used for Datagrid, Templategrid, Listview & Tables (see components folder)
 
 // Default Border Colors
-$grid-border-color:                     $default-border-color !default;
+$grid-border-color:                     $border-color-default !default;
 
 // Spacing
 $grid-padding-top:                      10px !default;                   
@@ -371,7 +370,7 @@ $tabs-color-active:                     $font-base-color !default;
 $tabs-lined-color-active:               $brand-primary !default;
 
 // Border Color
-$tabs-border-color:                     $default-border-color !default;    
+$tabs-border-color:                     $border-color-default !default;    
 $tabs-lined-border-color:               $brand-primary !default;    
 
 // Background Color
@@ -389,7 +388,7 @@ $tabs-bg-active:                        $brand-primary !default;
 $modal-header-bg:                       transparent !default;
 
 // Border Color
-$modal-header-border-color:             $default-border-color !default;
+$modal-header-border-color:             $border-color-default !default;
 
 // Text Color
 $modal-header-color:                    $font-base-color !default;
@@ -402,7 +401,7 @@ $modal-header-color:                    $font-base-color !default;
 
 // Controls
 $dataview-controls-bg:                  transparent !default;
-$dataview-controls-border-color:        $default-border-color !default;
+$dataview-controls-border-color:        $border-color-default !default;
 
 // Empty Message
 $dataview-emptymessage-bg:              $bg-color !default;
