@@ -63,11 +63,11 @@ $bg-color:                              #FFF !default;
 $bg-color-secondary:                    #E7EAF1 !default; // Background color that is used for specific page templates background
 
 // Default Font Size & Color
-$font-size-default:                        14px !default;
-$font-base-size:                           $font-size-default !default; // Backwards compatible with v1
+$font-size-default:                     14px !default;
+$font-base-size:                        $font-size-default !default; // Backwards compatible with v1
 
-$font-color-default:                       #555 !default;
-$font-base-color:                          $font-color-default !default; // Backwards compatible with v1
+$font-color-default:                    #555 !default;
+$font-base-color:                       $font-color-default !default; // Backwards compatible with v1
 
 // Default Link Color
 $link-color:                            $brand-primary !default;
@@ -520,10 +520,10 @@ $callout-danger-bg:                     $color-danger-lighter !default;
 //== Layout Spacing
 //## Advanced layout options (used in base/mixins/default-spacing)
 
-$default-spacing-top:                   35px !default;
-$default-spacing-right:                 40px !default;
-$default-spacing-bottom:                35px !default;
-$default-spacing-left:                  40px !default;
+$default-spacing-top:                   30px !default;
+$default-spacing-right:                 30px !default;
+$default-spacing-bottom:                30px !default;
+$default-spacing-left:                  30px !default;
 
 $m-default-spacing-top:                 10px !default;
 $m-default-spacing-right:               15px !default;
