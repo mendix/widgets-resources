@@ -1,0 +1,13 @@
+/* ==========================================================================
+   Headers
+========================================================================== */
+
+.pageheader {
+    border-bottom: 2px solid $border-color-default;
+    @include default-spacing($type: margin, $direction: bottom, $device: responsive);
+    @include override-text-properties($color: $header-text-color);
+    .pageheader-title {
+    }
+    .pageheader-subtitle {
+    }
+}

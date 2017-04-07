@@ -47,32 +47,8 @@
 @import 'pagetemplates/responsive/page-assestmanager-engineers';
 @import 'pagetemplates/responsive/page-assestmanager-tasks';
 // Building Blocks
-@import 'buildingblocks/asset';
-@import 'buildingblocks/card';
-@import 'buildingblocks/hotelcard';
-@import 'buildingblocks/hotelheader';
-@import 'buildingblocks/sectionblocks';
-@import 'buildingblocks/dashboardcard';
-@import 'buildingblocks/dashboardstat';
-@import 'buildingblocks/form';
-@import 'buildingblocks/formblock';
-@import 'buildingblocks/layoutgridcard';
-@import 'buildingblocks/expensesheader';
-@import 'buildingblocks/masterdetail';
-@import 'buildingblocks/multilevel';
-@import 'buildingblocks/pageheader';
-@import 'buildingblocks/sectionheader';
-@import 'buildingblocks/profilecard';
-@import 'buildingblocks/profileheader';
-@import 'buildingblocks/products';
-@import 'buildingblocks/sidebarheader';
-@import 'buildingblocks/tabsfullwidth';
-@import 'buildingblocks/wizard';
-@import 'buildingblocks/templategrid-profilecard';
-@import 'buildingblocks/heroheader';
-@import 'buildingblocks/detailfacilities';
-@import 'buildingblocks/contentblock';
-@import 'buildingblocks/detailproperties';
-@import 'buildingblocks/productrating';
+@import "buildingblocks/headers";
+
 //layouts
 @import 'layouts/base';
+@import 'layouts/navlayout-atlas';
