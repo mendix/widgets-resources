@@ -63,19 +63,15 @@
 .region-sidebar,
 .region-sidebar-fixed {
     background-color: $navsidebar-bg;
-    >.mx-scrollcontainer-wrapper {
-        padding: 0;
-    }
 }
 
 .region-content {
     padding: 0; // for if region-content is on a col so you dont get scollbar
+    
 }
 
 .region-footer {
-    >.mx-scrollcontainer-wrapper {
-        padding: 0;
-    }
+
 }
 
 .layout-sidebar-responsive {
