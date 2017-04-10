@@ -4,10 +4,32 @@
 
 .pageheader {
     border-bottom: 2px solid $border-color-default;
+    padding-bottom: 15px;
     @include default-spacing($type: margin, $direction: bottom, $device: responsive);
-    @include override-text-properties($color: $header-text-color);
-    .pageheader-title {
-    }
-    .pageheader-subtitle {
+}
+
+// Components
+.pageheader-title {
+    margin: 0;
+    color: $font-color-default; // or class text-default
+    text-transform: uppercase; // or class text-uppercase
+    font-size: $font-size-small; // or class text-small
+}
+.pageheader-subtitle {
+    margin: 0;
+    font-size: $font-size-h3; // or propertie h3
+}
+
+
+// Variations
+.pageheader--filled {
+    background: $header-bg-color;
+}
+
+.pageheader--fullwidth {
+    margin-bottom: 0;
+    @include default-spacing($type: padding, $direction: all, $device: responsive);
+    .mx-layoutgrid {
+        padding: 0 !important;
     }
 }
