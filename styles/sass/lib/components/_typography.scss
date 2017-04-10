@@ -76,6 +76,15 @@ h6,
 //## Helper classes to change the look and feel of the component
 //-------------------------------------------------------------------------------------------------------------------//
 
+// Text size 
+.text-small {
+    font-size: $font-size-small !important;
+}
+
+.text-large {
+    font-size: $font-size-large !important;
+}
+
 // Text Weights 
 .text-light,
 .text-light>*,
