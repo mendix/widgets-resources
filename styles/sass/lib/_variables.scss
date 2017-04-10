@@ -46,6 +46,7 @@ $font-base-color:                       $font-color-default !default; // Backwar
 // Global Border Color
 $border-color-default:                  $gray-primary !default;
 $default-border-color:                  $border-color-default !default; // Backwards compatible with v1
+$border-radius-default:                 3px !default;
 
 // Topbar
 $topbar-bg:                             #FFF !default;
@@ -101,7 +102,7 @@ $font-family-base:                      'Open Sans', sans-serif !default;
 
 // Font Sizes
 $font-size-large:                       16px !default;
-$font-size-small:                       11px !default;
+$font-size-small:                       12px !default;
 
 // Font Weights
 $font-weight-light:                     100 !default;
@@ -201,7 +202,7 @@ $form-input-padding-y:                  8px !default;
 $form-input-padding-x:                  10px !default;
 $form-input-font-size:                  $form-label-size !default;
 $form-input-line-height:                $line-height-base !default;
-$form-input-border-radius:              4px !default;
+$form-input-border-radius:              $border-radius-default !default;
 
 // Form Input styling
 $form-input-bg:                         #FFF !default;
@@ -227,7 +228,7 @@ $form-group-gutter:                     15px !default;
 // Default button style 
 $btn-font-size:                         14px !default;
 $btn-bordered:                          false !default; // Default value false, set to true if you want this effect
-$btn-border-radius:                     3px !default; 
+$btn-border-radius:                     $border-radius-default !default; 
 
 // Button Background Color
 $btn-default-bg:                        $brand-default !default;
@@ -271,7 +272,7 @@ $btn-link-bg-hover:                     $gray-lighter;
 
 //== Header blocks
 //## Define look and feel over multible building blocks that serve as header
-$header-bg-color:                       $topbar-bg !default;           
+$header-bg-color:                       $bg-color-secondary !default;           
 $header-text-color:                     #FFF !default;
 $header-text-color-detail:              rgba(0,0,0, 0.2) !default;
 
