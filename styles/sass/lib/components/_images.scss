@@ -37,3 +37,9 @@ img.img-auto,
     max-width: 100% !important;
     max-height: 100% !important;
 }
+
+img.img-center,
+.img-center img {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}

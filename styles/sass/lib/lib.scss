@@ -31,23 +31,9 @@
 @import 'components/templategrids';
 @import 'components/typography';
 // Page Templates
-@import 'pagetemplates/responsive/page-expenses-home';
-@import 'pagetemplates/responsive/page-expenses-new-edit';
-@import 'pagetemplates/responsive/page-expenses-view';
-@import 'pagetemplates/responsive/page-expenses-overview';
-@import 'pagetemplates/responsive/page-hotel-dashboard';
-@import 'pagetemplates/responsive/page-hotel-offers';
-@import 'pagetemplates/responsive/page-hotel-detail';
-@import 'pagetemplates/responsive/page-event-dashboard';
-@import 'pagetemplates/responsive/page-event-program';
-@import 'pagetemplates/responsive/page-event-program-detail';
-@import 'pagetemplates/responsive/page-assestmanager-alerts';
-@import 'pagetemplates/responsive/page-assestmanager-assets';
-@import 'pagetemplates/responsive/page-assestmanager-dashboard';
-@import 'pagetemplates/responsive/page-assestmanager-engineers';
-@import 'pagetemplates/responsive/page-assestmanager-tasks';
+@import 'pagetemplates/all';
 // Building Blocks
-@import "buildingblocks/headers";
+@import 'buildingblocks/headers';
 
 //layouts
 @import 'layouts/base';

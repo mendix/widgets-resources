@@ -16,7 +16,7 @@
 $gray-darker:                           #222 !default;
 $gray-dark:                             #333 !default;
 $gray:                                  #555 !default;
-$gray-light:                            #999 !default;
+$gray-light:                            #888 !default;
 $gray-primary:                          #DDD !default;
 $gray-lighter:                          #eee !default;
 
@@ -526,15 +526,17 @@ $default-spacing-right:                 30px !default;
 $default-spacing-bottom:                30px !default;
 $default-spacing-left:                  30px !default;
 
-$m-default-spacing-top:                 10px !default;
+$t-default-spacing-top:                 30px !default;
+$t-default-spacing-right:               30px !default;
+$t-default-spacing-bottom:              30px !default;
+$t-default-spacing-left:                30px !default;
+
+$m-default-spacing-top:                 15px !default;
 $m-default-spacing-right:               15px !default;
-$m-default-spacing-bottom:              10px !default;
+$m-default-spacing-bottom:              15px !default;
 $m-default-spacing-left:                15px !default;
 
-$t-default-spacing-top:                 20px !default;
-$t-default-spacing-right:               30px !default;
-$t-default-spacing-bottom:              20px !default;
-$t-default-spacing-left:                30px !default;
+
 
 
 

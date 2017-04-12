@@ -1,0 +1,73 @@
+/* ==========================================================================
+   Card
+
+   --
+========================================================================== */
+
+//== Elements
+//## Elements that can be used within the blocks
+//-------------------------------------------------------------------------------------------------------------------//
+.card-title {}
+
+.card-image {}
+
+.card-button {}
+
+.card-counter {}
+
+.card-morebutton {}
+
+//== Default
+//-------------------------------------------------------------------------------------------------------------------//
+.card,
+%card {
+    background-color: #FFF;
+    border: 1px solid $border-color-default;
+    border-radius: $border-radius-default;
+    @include default-spacing($type: padding, $direction: all, $device: responsive);
+    @include default-spacing($type: margin, $direction: bottom, $device: responsive);
+}
+
+//== Varations
+//-------------------------------------------------------------------------------------------------------------------//
+.card--action {
+    @extend %card;
+    text-align: center;
+    .card-image {
+        margin: 0 auto 20px;
+    }
+}
+
+.card--metrics {
+    @extend %card;
+    .card-title {
+        font-size: $font-size-large; // text-large
+        margin: 0;
+    }
+    .card-image {
+        float: left;
+        @include default-spacing($type: margin, $direction: right, $device: responsive);
+        width: 100px;
+        height: auto;
+        // If btn
+        &.btn {
+            cursor: default;
+            height: 100px;
+            font-size: 40px;
+            padding: 0;
+            pointer-events: none;
+        }
+    }
+    .card-counter {
+        font-size: 64px;
+        margin: 0;
+    }
+    .card-content {
+        overflow: hidden;
+        padding: 5px 0;
+    }
+    .card-morebutton {
+        float: right;
+        font-size: $font-size-small; // text-small
+    }
+}

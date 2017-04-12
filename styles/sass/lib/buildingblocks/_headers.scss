@@ -2,32 +2,43 @@
    Headers
 ========================================================================== */
 
-.pageheader {
-    border-bottom: 2px solid $border-color-default;
-    padding-bottom: 15px;
-    @include default-spacing($type: margin, $direction: bottom, $device: responsive);
-}
-
-// Components
-.pageheader-title {
+//== Elements
+//## Elements that can be used within the blocks
+//-------------------------------------------------------------------------------------------------------------------//
+.pageheader-type {
     margin: 0;
     color: $font-color-default; // or class text-default
     text-transform: uppercase; // or class text-uppercase
     font-size: $font-size-small; // or class text-small
 }
-.pageheader-subtitle {
-    margin: 0;
+.pageheader-title {
+    margin: 3px 0;
     font-size: $font-size-h3; // or propertie h3
 }
-
-
-// Variations
-.pageheader--filled {
-    background: $header-bg-color;
+.pageheader-subtitle {
+    color: $font-color-detail; // or class text-detail
 }
 
+//== Default
+//-------------------------------------------------------------------------------------------------------------------//
+.pageheader,
+%pageheader {
+    @include default-spacing($type: margin, $direction: bottom, $device: responsive);
+}
+
+
+//== Varations
+//-------------------------------------------------------------------------------------------------------------------//
+.pageheader--simple {
+    @extend %pageheader;
+    border-bottom: 2px solid $border-color-default;
+    padding-bottom: 15px;
+}
 .pageheader--fullwidth {
+    @extend %pageheader;
     margin-bottom: 0;
+    background: $header-bg-color; 
+    border-bottom: 2px solid $border-color-default;
     @include default-spacing($type: padding, $direction: all, $device: responsive);
     .mx-layoutgrid {
         padding: 0 !important;
