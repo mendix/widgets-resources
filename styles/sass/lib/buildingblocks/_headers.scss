@@ -36,7 +36,6 @@
 }
 .pageheader--fullwidth {
     @extend %pageheader;
-    margin-bottom: 0;
     background: $header-bg-color; 
     border-bottom: 2px solid $border-color-default;
     @include default-spacing($type: padding, $direction: all, $device: responsive);
