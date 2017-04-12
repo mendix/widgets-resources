@@ -1,4 +1,5 @@
 @mixin default-spacing ($type: padding, $direction: all, $device: responsive) {
+    @include transition();
     @if $device==responsive {
         @if $direction==all {
             @media (max-width: $screen-xs-max) {
