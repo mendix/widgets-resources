@@ -29,36 +29,7 @@
 
 .mx-scrollcontainer .mx-placeholder {
     .mx-layoutgrid {
-        @include default-spacing($type: padding, $direction: left, $device: responsive);
-        @include default-spacing($type: padding, $direction: right, $device: responsive);
-        &:first-child {
-            @include default-spacing($type: padding, $direction: top, $device: responsive);
-        }
-        &:last-child {
-            @include default-spacing($type: padding, $direction: bottom, $device: responsive);
-        }
-        &.container {
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-        .mx-layoutgrid {
-            padding: 0;
-        }
-    }
-}
-
-.profile-phone .mx-scrollcontainer .mx-placeholder {
-    .mx-layoutgrid {
-        @include default-spacing($type: padding, $direction: all, $device: phone);
-        .mx-layoutgrid {
-            padding: 0;
-        }
-    }
-}
-
-.profile-tablet .mx-scrollcontainer .mx-placeholder {
-    .mx-layoutgrid {
-        @include default-spacing($type: padding, $direction: all, $device: tablet);
+        @include default-spacing($type: padding, $direction: all, $device: responsive);
         &.container {
             padding-right: 15px;
             padding-left: 15px;
