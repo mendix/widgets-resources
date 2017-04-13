@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.custom.slider.Slider" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/">
+    <name>Slider</name>
+    <description>Change a number value using a slider</description>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAHCAYAAADXhRcnAAAAAXNSR0IArs4c6QAAAP5JREFUGBljZMACampqVJmYmPSAUgJA/OHfv3+XWlpabmNRiipUWVmpNmHChKrXr1/f/v379w8QDeKDxFFVMjAw8vPzh//580cOJmFkZKQ3a9YsT0VFRWGY2P3799/m5ORsv379+iWYGFDfI0Z5efmctWvXTgbawgDCV69eZYiMjISpAdOMjIwMBw4cYDA1NYWL5+fn5zKqqKj4AyUlYaJSUlKmQGf6AWmR////M4A0Ap3+pre3d5OAgMBpmLq/f/8+h7HhtJubm0ZKSkrD5cuX7z579uwHiAbxQeJwRVAGI7oAiA90jdavX79MgCEuBAzpd2xsbGfu3LlzDV0tAAPUaxUShJrfAAAAAElFTkSuQmCC
+    </icon>
+    <properties>
+        <property key="valueAttribute" required="false" type="attribute">
+            <caption>Value attribute</caption>
+            <category>Data source</category>
+            <description>The selected value on the slider</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="minAttribute" type="attribute">
+            <caption>Minimum attribute</caption>
+            <category>Data source</category>
+            <description>Holds the minimum slider value</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="maxAttribute" type="attribute">
+            <caption>Maximum attribute</caption>
+            <category>Data source</category>
+            <description>Holds the maximum slider value</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="onChangeMicroflow" type="microflow" required="false">
+            <caption>On change microflow</caption>
+            <category>Behavior</category>
+            <description>Called when the slider is clicked or changed</description>
+            <returnType type="Void"/>
+        </property>
+        <property key="noOfMarkers" type="integer" defaultValue="2">
+            <caption>Number of markers</caption>
+            <category>Appearance</category>
+            <description>Marker ticks on the slider (visible when larger than 2)</description>
+        </property>
+        <property key="decimalPlaces" type="integer" defaultValue="1">
+            <caption>Decimal places</caption>
+            <category>Appearance</category>
+            <description>Number of decimal places for marker values</description>
+        </property>
+        <property key="tooltipText" type="string" required="false" defaultValue="{1}">
+            <caption>Tooltip text</caption>
+            <category>Appearance</category>
+            <description>Text to show when hovering over the slider value. Leave this empty to disable the tooltip. Use {1} as a replacement for the current value of the slider</description>
+        </property>
+        <property key="stepAttribute" type="attribute" required="false">
+            <caption>Step attribute</caption>
+            <category>Appearance</category>
+            <description>Holds the value for the interval between two points (numbers)</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="stepValue" type="integer" defaultValue="10">
+            <caption>Step value</caption>
+            <category>Appearance</category>
+            <description>Number of points to shift when sliding (used if step attribute is not set)</description>
+        </property>
+        <property key="bootstrapStyle" type="enumeration" defaultValue="primary">
+            <caption>Bootstrap style</caption>
+            <category>Appearance</category>
+            <description>Bootstrap color to apply to the slider</description>
+            <enumerationValues>
+                <enumerationValue key="primary">Primary</enumerationValue>
+                <enumerationValue key="inverse">Inverse</enumerationValue>
+                <enumerationValue key="info">Info</enumerationValue>
+                <enumerationValue key="success">Success</enumerationValue>
+                <enumerationValue key="warning">Warning</enumerationValue>
+                <enumerationValue key="danger">Danger</enumerationValue>
+            </enumerationValues>
+        </property>
+    </properties>
+</widget>
