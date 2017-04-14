@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.custom.progressbar.ProgressBar" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
+    <name>Progress Bar</name>
+    <description>The widget lets you display a percentage as a bar</description>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ bWFnZVJlYWR5ccllPAAAAKdJREFUeNpi/P//PwMlgImBQjDwBrDw8fFF/vnzR44szSwsj1iUlZUl 161b10GOAUFBQcVMkpKSf1hZWRl27NgBxvjY6Bikl4WHh+c/Gxsbw4cPH8Cm4mOjA5BekAH/2NnZ Gd68eQMWxMfGYsA/Fi4uLrABb9++hSvExUYHIL0snJyc/0H+mTt3LlwCFxsdgPSyAE1+2tDQkEFO LAD1PmMczQsMAAEGACNuS4UbtbU3AAAAAElFTkSuQmCC
+    </icon>
+    <properties>
+        <property key="progressAttribute" type="attribute">
+            <caption>Progress attribute</caption>
+            <category>Data source</category>
+            <description>Holds the progress value</description>
+            <attributeTypes>
+                <attributeType name="Integer" />
+                <attributeType name="Long" />
+                <attributeType name="Decimal" />
+            </attributeTypes>
+        </property>
+        <property key="maximumValueAttribute" type="attribute" required="false">
+            <caption>Maximum value attribute</caption>
+            <category>Data source</category>
+            <description>Highest progress value. If not set, maximum value defaults to 100</description>
+            <attributeTypes>
+                <attributeType name="Integer" />
+                <attributeType name="Long" />
+                <attributeType name="Decimal" />
+            </attributeTypes>
+        </property>
+        <property key="bootstrapStyleAttribute" type="attribute" required="false">
+            <caption>Bootstrap style attribute</caption>
+            <category>Data source</category>
+            <description>Value of attribute should be: info, warning, danger, success. Alternatively use the display 'Bootstrap style' property in the Display tab</description>
+            <attributeTypes>
+                <attributeType name="Enum" />
+                <attributeType name="String" />
+            </attributeTypes>
+        </property>
+        <property key="textColorSwitch" type="integer" defaultValue="50">
+            <caption>Color switch value</caption>
+            <category>Display</category>
+            <description>The percentage at which the text gets a contrast color (class) from black to white</description>
+        </property>
+        <property key="barType" type="enumeration" defaultValue="default">
+            <caption>Type</caption>
+            <category>Display</category>
+            <description>Render the type of progress bar: default, striped or animated </description>
+            <enumerationValues>
+                <enumerationValue key="default">Plain</enumerationValue>
+                <enumerationValue key="striped">Striped</enumerationValue>
+                <enumerationValue key="animated">Animated</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="onClickOption" type="enumeration" defaultValue="doNothing">
+            <caption>On click</caption>
+            <category>Events</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="doNothing">Do nothing</enumerationValue>
+                <enumerationValue key="showPage">Show a page</enumerationValue>
+                <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="onClickMicroflow" type="microflow" required="false">
+            <caption>Microflow</caption>
+            <category>Events</category>
+            <description>Microflow to execute when the progress bar is clicked</description>
+            <returnType type="Void" />
+        </property>
+        <property key="onClickPage" type="form" required="false">
+            <caption>Page</caption>
+            <category>Events</category>
+            <description>The page to open when the progress bar is clicked</description>
+        </property>
+        <property key="bootstrapStyle" type="enumeration" defaultValue="default">
+            <caption>Bootstrap style</caption>
+            <category>Display</category>
+            <description>The color of the progress bar using bootstrap classes. Only used when 'Style attribute' is not set</description>
+            <enumerationValues>
+                <enumerationValue key="default">Default</enumerationValue>
+                <enumerationValue key="success">Success</enumerationValue>
+                <enumerationValue key="info">Info</enumerationValue>
+                <enumerationValue key="warning">Warning</enumerationValue>
+                <enumerationValue key="danger">Danger</enumerationValue>
+            </enumerationValues>
+        </property>
+    </properties>
+</widget>
