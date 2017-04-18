@@ -2,12 +2,12 @@ var webpackConfig = require("./webpack.config");
 const path = require("path");
 Object.assign(webpackConfig, {
     devtool: "inline-source-map",
-    externals: webpackConfig.externals.concat([
+    externals: [
         "react/lib/ExecutionEnvironment",
         "react/lib/ReactContext",
         "react/addons",
         "jsdom"
-    ])
+    ]
 });
 
 module.exports = function(config) {
