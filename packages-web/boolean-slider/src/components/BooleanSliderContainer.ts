@@ -3,9 +3,14 @@ import { Component, createElement } from "react";
 import { Slider, SliderStatus } from "./Slider";
 import { Label, LabelOrientation } from "./Label";
 
-interface BooleanSliderContainerProps {
+interface WrapperProps {
+    class?: string;
+    mxObject?: mendix.lib.MxObject;
+    style?: string;
+}
+
+interface BooleanSliderContainerProps extends WrapperProps {
     booleanAttribute: string;
-    contextObject: mendix.lib.MxObject;
     onChangeMicroflow: string;
     label?: string;
     orientation: LabelOrientation;
@@ -26,18 +31,18 @@ class BooleanSliderContainer extends Component<BooleanSliderContainerProps, Bool
         this.subscriptionHandles = [];
         this.state = {
             alertMessage: "",
-            isChecked: this.getAttributeValue(this.props.contextObject, this.props.booleanAttribute)
+            isChecked: this.getAttributeValue(props.booleanAttribute, props.mxObject)
         };
         this.handleToggle = this.handleToggle.bind(this);
-    }
-
-    componentDidMount() {
-        this.resetSubscriptions(this.props.contextObject);
-        this.setState({ alertMessage: "" });
+        this.handleValidations = this.handleValidations.bind(this);
     }
 
     componentWillReceiveProps(newProps: BooleanSliderContainerProps) {
-        this.resetSubscriptions(newProps.contextObject);
+        this.resetSubscriptions(newProps.mxObject);
+        this.setState({
+            alertMessage: "",
+            isChecked: this.getAttributeValue(newProps.booleanAttribute, newProps.mxObject)
+        });
     }
 
     render() {
@@ -47,14 +52,15 @@ class BooleanSliderContainer extends Component<BooleanSliderContainerProps, Bool
                 orientation: this.props.orientation
             }, this.renderSlider());
         }
+
         return this.renderSlider();
     }
 
     private renderSlider() {
         const enabled = !this.props.readOnly
-            && this.props.contextObject
-            && !this.props.contextObject.isReadonlyAttr(this.props.booleanAttribute);
-        const status: SliderStatus = this.props.contextObject
+            && this.props.mxObject
+            && !this.props.mxObject.isReadonlyAttr(this.props.booleanAttribute);
+        const status: SliderStatus = this.props.mxObject
             ? enabled ? "enabled" : "disabled"
             : "no-context";
 
@@ -66,31 +72,33 @@ class BooleanSliderContainer extends Component<BooleanSliderContainerProps, Bool
         });
     }
 
-    private getAttributeValue(contextObject: mendix.lib.MxObject, attribute: string): boolean {
-        if (contextObject) {
-            return contextObject.get(attribute) as boolean;
+    private getAttributeValue(attribute: string, mxObject?: mendix.lib.MxObject): boolean {
+        if (mxObject) {
+            return mxObject.get(attribute) as boolean;
         }
 
         return false;
     }
 
     private handleToggle() {
-        const { booleanAttribute, contextObject, onChangeMicroflow } = this.props;
-        contextObject.set(booleanAttribute, !contextObject.get(booleanAttribute));
-        this.executeAction(onChangeMicroflow, contextObject.getGuid());
+        const { booleanAttribute, mxObject, onChangeMicroflow } = this.props;
+        if (mxObject) {
+            mxObject.set(booleanAttribute, !mxObject.get(booleanAttribute));
+            this.executeAction(onChangeMicroflow, mxObject.getGuid());
+        }
     }
 
-    private resetSubscriptions(contextObject?: mendix.lib.MxObject) {
+    private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
         this.unsubscribe();
 
-        if (contextObject) {
+        if (mxObject) {
             this.subscriptionHandles.push(mx.data.subscribe({
                 callback: () =>
                     this.setState({
                         alertMessage: "",
-                        isChecked: this.getAttributeValue(contextObject, this.props.booleanAttribute)
+                        isChecked: this.getAttributeValue(this.props.booleanAttribute, mxObject)
                     }),
-                guid: contextObject.getGuid()
+                guid: mxObject.getGuid()
             }));
 
             this.subscriptionHandles.push(mx.data.subscribe({
@@ -98,16 +106,16 @@ class BooleanSliderContainer extends Component<BooleanSliderContainerProps, Bool
                 callback: () =>
                     this.setState({
                         alertMessage: "",
-                        isChecked: this.getAttributeValue(contextObject, this.props.booleanAttribute)
+                        isChecked: this.getAttributeValue(this.props.booleanAttribute, mxObject)
                     }),
-                guid: contextObject.getGuid()
+                guid: mxObject.getGuid()
             }));
-
-            this.subscriptionHandles.push(mx.data.subscribe({
-                callback: (validations) => this.handleValidations(validations),
-                guid: contextObject.getGuid(),
-                val: true
-            }));
+            // Inline validation suspended until popup issue is fixed i.e popup validations still show up too
+            // this.subscriptionHandles.push(mx.data.subscribe({
+            //     callback: this.handleValidations,
+            //     guid: mxObject.getGuid(),
+            //     val: true
+            // }));
         }
     }
 
@@ -118,7 +126,7 @@ class BooleanSliderContainer extends Component<BooleanSliderContainerProps, Bool
 
     private unsubscribe() {
         if (this.subscriptionHandles) {
-            this.subscriptionHandles.forEach((handle) => mx.data.unsubscribe(handle));
+            this.subscriptionHandles.forEach(mx.data.unsubscribe);
         }
     }
 
@@ -126,7 +134,7 @@ class BooleanSliderContainer extends Component<BooleanSliderContainerProps, Bool
         if (actionname) {
             window.mx.ui.action(actionname, {
                 error: (error) =>
-                    this.setState({ alertMessage: `An error occurred while executing microflow: ${error.message}` }),
+                    window.mx.ui.error(`Error while executing microflow ${actionname}: ${error.message}`),
                 params: {
                     applyto: "selection",
                     guids: [ guid ]
