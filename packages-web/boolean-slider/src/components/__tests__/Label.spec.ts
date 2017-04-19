@@ -4,10 +4,10 @@ import { DOM, createElement } from "react";
 import { Label, LabelProps } from "../Label";
 
 describe("Label", () => {
-    const renderLabel = (props: Partial<LabelProps>) => shallow(createElement(Label as any, props));
+    const renderLabel = (props: Partial<LabelProps>) => shallow(createElement(Label, props as LabelProps));
     const label = "Label";
 
-    it("renders structure correctly", () => {
+    it("renders the structure correctly", () => {
         const labelComponent = renderLabel({ label });
 
         expect(labelComponent).toBeElement(
@@ -25,7 +25,7 @@ describe("Label", () => {
             expect(alert.childAt(0)).toHaveClass("col-sm-3");
         });
 
-        it("renders the labeled element's container with the calculated weight class", () => {
+        it("renders the labeled element's wrapper with the calculated weight class", () => {
             const weight = 3;
             const alert = renderLabel({ label, weight });
 
