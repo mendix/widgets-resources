@@ -1,24 +1,50 @@
-# Boolean Slider
+# Switch
 Toggle a boolean attribute.
 
 ## Features
 * Deactivate when attribute or context is read-only
 * Execute a microflow when toggled
+* Add a label to the switch
 
 ## Dependencies
-Mendix 6.
-
-## Usage
-Used on both the web and mobile as a more aesthetic alternative to a checkbox.
+Mendix 7.1
 
 ## Demo project
 http://booleansliderwidge.mxapps.io
 
-## Issues
-Please report issues at https://github.com/mendixlabs/boolean-slider/issues.
+## Usage
+Place the widget in the context of an object that has a boolean attribute.
 
-## Disclaimer
-Status: In development
+## Issues, suggestions and feature requests
+We are actively maintaining this widget, please report any issues or suggestion for improvement at https://github.com/mendixlabs/boolean-slider/issues
 
-This widget should not be used in a production environment.
-No guarantees are given that this works or keeps working, until it is officially released.
+## Development
+Prerequisite: Install git, node package manager, webpack CLI, grunt CLI, Karma CLI
+
+To contribute, fork and clone.
+
+    > git clone https://github.com/mendixlabs/boolean-slider.git
+
+The code is in typescript. Use a typescript IDE of your choice, like Visual Studio Code or WebStorm.
+
+To set up the development environment, run:
+
+    > npm install
+
+Create a folder named `dist` in the project root.
+
+Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Changes to the widget code shall be automatically pushed to this test project.
+
+[https://github.com/MendixLabs/boolean-slider/releases/download/1.0.0/Test.mpr](https://github.com/MendixLabs/boolean-slider/releases/download/1.0.0/Test.mpr)
+
+To automatically compile, bundle and push code changes to the running test project, run:
+
+    > grunt
+
+To run the project unit tests with code coverage, results can be found at `dist/testresults/coverage/index.html`, run:
+
+    > npm test
+
+or run the test continuously during development:
+
+    > karma start
