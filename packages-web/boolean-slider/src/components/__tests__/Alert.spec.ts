@@ -1,10 +1,10 @@
 import { shallow } from "enzyme";
 import { DOM, createElement } from "react";
 
-import { Alert } from "../Alert";
+import { Alert, AlertProps } from "../Alert";
 
 describe("Alert", () => {
-    const renderAlert = (message?: string) => shallow(createElement(Alert as any, { message }));
+    const renderAlert = (message?: string) => shallow(createElement(Alert, { message } as AlertProps));
 
     it("renders structure correctly", () => {
         const message = "This is an error";

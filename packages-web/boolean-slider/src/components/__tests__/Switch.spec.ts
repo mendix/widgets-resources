@@ -1,26 +1,26 @@
 import { ShallowWrapper, shallow } from "enzyme";
 import { DOM, createElement } from "react";
 
-import { Slider, SliderProps } from "../Switch";
+import { Switch, SwitchProps } from "../Switch";
 import { Alert } from "../Alert";
 
 describe("Switch", () => {
-    let slider: ShallowWrapper<SliderProps, any>;
+    let slider: ShallowWrapper<SwitchProps, any>;
     let checkbox: ShallowWrapper<any, any>;
     let label: ShallowWrapper<any, any>;
-    const createAndFindElements = (props: SliderProps) => {
-        slider = shallow(createElement(Slider, props));
+    const createAndFindElements = (props: SwitchProps) => {
+        slider = shallow(createElement(Switch, props));
         checkbox = slider.find(".widget-switch-checkbox");
         label = slider.find(".widget-switch-btn");
     };
-    const createProps = (props: Partial<SliderProps>): SliderProps => {
+    const createProps = (props: Partial<SwitchProps>): SwitchProps => {
         props.onClick = jasmine.createSpy("onClick");
         props.isChecked = typeof props.isChecked !== "undefined" ? props.isChecked : true;
         props.status = props.status || "enabled";
-        return props as SliderProps;
+        return props as SwitchProps;
     };
 
-    it("should render the full slider structure", () => {
+    it("should render the structure correctly", () => {
         createAndFindElements(createProps({}));
 
         expect(slider).toBeElement(
@@ -41,7 +41,7 @@ describe("Switch", () => {
     });
 
     describe("that is true", () => {
-        it("should be checked", () => {
+        it("should be on", () => {
             createAndFindElements(createProps({}));
 
             expect(checkbox.props().checked).toBe(true);
@@ -49,7 +49,7 @@ describe("Switch", () => {
     });
 
     describe("that is false", () => {
-        it("should be unchecked", () => {
+        it("should be off", () => {
             createAndFindElements(createProps({ isChecked: false }));
 
             expect(checkbox.props().checked).toBe(false);
@@ -64,7 +64,7 @@ describe("Switch", () => {
             expect(label.hasClass("enabled")).toBe(true);
         });
 
-        it("should handle click event", () => {
+        it("should handle click events", () => {
             const props = createProps({});
             createAndFindElements(props);
 
@@ -93,7 +93,7 @@ describe("Switch", () => {
     });
 
     describe("without a context", () => {
-        it("should have the no-slider class", () => {
+        it("should have the no-switch class", () => {
             createAndFindElements(createProps({
                 isChecked: false,
                 status: "no-context"
@@ -113,7 +113,7 @@ describe("Switch", () => {
     });
 
     describe("that has an error", () => {
-        it("should render the structure with an error alert", () => {
+        it("should render an error alert", () => {
             const props = createProps({
                 alertMessage: "This is an error",
                 isChecked: false
