@@ -99,7 +99,7 @@ describe("Switch", () => {
                 status: "no-context"
             }));
 
-            expect(label).toHaveClass("no-slider");
+            expect(label).toHaveClass("no-switch");
         });
 
         it("should not handle a click event", () => {
