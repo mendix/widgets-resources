@@ -1,17 +1,17 @@
 import { ShallowWrapper, shallow } from "enzyme";
 import { DOM, createElement } from "react";
 
-import { Slider, SliderProps } from "../Slider";
+import { Slider, SliderProps } from "../Switch";
 import { Alert } from "../Alert";
 
-describe("Slider", () => {
+describe("Switch", () => {
     let slider: ShallowWrapper<SliderProps, any>;
     let checkbox: ShallowWrapper<any, any>;
     let label: ShallowWrapper<any, any>;
     const createAndFindElements = (props: SliderProps) => {
         slider = shallow(createElement(Slider, props));
-        checkbox = slider.find(".widget-boolean-slider-checkbox");
-        label = slider.find(".widget-boolean-slider-btn");
+        checkbox = slider.find(".widget-switch-checkbox");
+        label = slider.find(".widget-switch-btn");
     };
     const createProps = (props: Partial<SliderProps>): SliderProps => {
         props.onClick = jasmine.createSpy("onClick");
@@ -24,15 +24,15 @@ describe("Slider", () => {
         createAndFindElements(createProps({}));
 
         expect(slider).toBeElement(
-            DOM.div({ className: "widget-boolean-slider" },
+            DOM.div({ className: "widget-switch" },
                 DOM.input({
                     checked: true,
-                    className: "widget-boolean-slider-checkbox enabled",
+                    className: "widget-switch-checkbox enabled",
                     readOnly: true,
                     type: "checkbox"
                 }),
                 DOM.div({
-                    className: "widget-boolean-slider-btn enabled",
+                    className: "widget-switch-btn enabled",
                     onClick: jasmine.any(Function) as any
                 }),
                 createElement(Alert)
@@ -121,15 +121,15 @@ describe("Slider", () => {
             createAndFindElements(props);
 
             expect(slider).toBeElement(
-                DOM.div({ className: "widget-boolean-slider has-error" },
+                DOM.div({ className: "widget-switch has-error" },
                     DOM.input({
                         checked: false,
-                        className: "widget-boolean-slider-checkbox enabled",
+                        className: "widget-switch-checkbox enabled",
                         readOnly: true,
                         type: "checkbox"
                     }),
                     DOM.div({
-                        className: "widget-boolean-slider-btn enabled",
+                        className: "widget-switch-btn enabled",
                         onClick: jasmine.any(Function) as any
                     }),
                     createElement(Alert as any, { message: props.alertMessage })

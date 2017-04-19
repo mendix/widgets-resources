@@ -3,7 +3,7 @@ $uncheckedColor: #F1F1F1
 $disabledCheckedColor: #F1F1F1
 $disabledUncheckedColor: #FFF
 
-.widget-boolean-slider-checkbox
+.widget-switch-checkbox
     display: none
     // add default box-sizing for this scope
     &,
@@ -12,12 +12,12 @@ $disabledUncheckedColor: #FFF
     & *,
     & *:after,
     & *:before,
-    & .widget-boolean-slider-btn
+    & .widget-switch-btn
         box-sizing: border-box
-        &::selection 
+        &::selection
             background: none
 
-    + .widget-boolean-slider-btn
+    + .widget-switch-btn
         background: $disabledUncheckedColor
         border-radius: 2em
         padding: 2px
@@ -50,7 +50,7 @@ $disabledUncheckedColor: #FFF
 
         &:before
             display: none
-        
+
         &:active
             box-shadow: inset 0 0 0 2em #e8eae9
             &:after
@@ -59,17 +59,17 @@ $disabledUncheckedColor: #FFF
         &.enabled
             background: $uncheckedColor
             cursor: pointer
-        
-        &.no-slider
+
+        &.no-switch
             &:after
                 display: none
             &:active
                 box-shadow: none
 
-    &:checked + .widget-boolean-slider-btn:after 
+    &:checked + .widget-switch-btn:after
         left: 50%
 
-    &:checked + .widget-boolean-slider-btn
+    &:checked + .widget-switch-btn
         background: $disabledCheckedColor
         &:active
             box-shadow: none
@@ -78,5 +78,5 @@ $disabledUncheckedColor: #FFF
                 width: 60%
 
     &.enabled
-        &:checked + .widget-boolean-slider-btn 
+        &:checked + .widget-switch-btn
             background: $checkedColor

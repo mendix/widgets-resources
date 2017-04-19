@@ -4,10 +4,10 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-    entry: "./src/components/BooleanSliderContainer.ts",
+    entry: "./src/components/SwitchContainer.ts",
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
-        filename: "src/com/mendix/widget/custom/booleanslider/BooleanSlider.js",
+        filename: "src/com/mendix/widget/custom/switch/Switch.js",
         libraryTarget:  "umd"
     },
     resolve: {
@@ -30,7 +30,7 @@ module.exports = {
     externals: [ "react", "react-dom" ],
     plugins: [
         new CopyWebpackPlugin([ { from: "src/**/*.xml" } ], { copyUnmodified: true }),
-        new ExtractTextPlugin({ filename: "./src/com/mendix/widget/custom/booleanslider/ui/BooleanSlider.css" }),
+        new ExtractTextPlugin({ filename: "./src/com/mendix/widget/custom/switch/ui/Switch.css" }),
         new webpack.LoaderOptionsPlugin({ debug: true })
     ]
 };

@@ -3,7 +3,7 @@ import * as classNames from "classnames";
 
 import { Alert } from "./Alert";
 
-import "../ui/Slider.sass";
+import "../ui/Switch.sass";
 
 export interface SliderProps {
     status: SliderStatus;
@@ -15,17 +15,17 @@ export interface SliderProps {
 export type SliderStatus = "enabled" | "disabled" | "no-context";
 
 export const Slider = (props: SliderProps) =>
-    DOM.div({ className: classNames("widget-boolean-slider", { "has-error": !!props.alertMessage }) },
+    DOM.div({ className: classNames("widget-switch", { "has-error": !!props.alertMessage }) },
         DOM.input({
             checked: props.isChecked,
-            className: classNames("widget-boolean-slider-checkbox", { enabled: props.status === "enabled" }),
+            className: classNames("widget-switch-checkbox", { enabled: props.status === "enabled" }),
             readOnly: true,
             type: "checkbox"
         }),
         DOM.div({
-            className: classNames("widget-boolean-slider-btn", {
+            className: classNames("widget-switch-btn", {
                 "enabled": props.status === "enabled",
-                "no-slider": props.status === "no-context"
+                "no-switch": props.status === "no-context"
             }),
             onClick: props.status === "enabled" ? props.onClick : undefined
         }),
