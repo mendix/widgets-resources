@@ -1,6 +1,6 @@
 import { Component, createElement } from "react";
 
-import { Slider, SliderStatus } from "./Slider";
+import { Slider, SliderStatus } from "./Switch";
 import { Label, LabelOrientation } from "./Label";
 
 interface WrapperProps {
@@ -12,9 +12,8 @@ interface WrapperProps {
 interface BooleanSliderContainerProps extends WrapperProps {
     booleanAttribute: string;
     onChangeMicroflow: string;
-    label?: string;
+    label: string;
     orientation: LabelOrientation;
-    readOnly: boolean;
 }
 
 interface BooleanSliderContainerState {
@@ -46,7 +45,7 @@ class BooleanSliderContainer extends Component<BooleanSliderContainerProps, Bool
     }
 
     render() {
-        if (this.props.label) {
+        if (this.props.label.trim()) {
             return createElement(Label as any, {
                 label: this.props.label,
                 orientation: this.props.orientation
@@ -57,9 +56,7 @@ class BooleanSliderContainer extends Component<BooleanSliderContainerProps, Bool
     }
 
     private renderSlider() {
-        const enabled = !this.props.readOnly
-            && this.props.mxObject
-            && !this.props.mxObject.isReadonlyAttr(this.props.booleanAttribute);
+        const enabled = this.props.mxObject && !this.props.mxObject.isReadonlyAttr(this.props.booleanAttribute);
         const status: SliderStatus = this.props.mxObject
             ? enabled ? "enabled" : "disabled"
             : "no-context";

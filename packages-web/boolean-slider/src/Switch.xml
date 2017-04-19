@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.booleanslider.BooleanSlider" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../../xsd/widget.xsd">
-    <name>Boolean slider</name>
+<widget id="com.mendix.widget.custom.switch.Switch" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../../xsd/widget.xsd">
+    <name>Switch</name>
     <description>Toggle a boolean attribute</description>
     <icon/>
     <properties>
-        <property key="label" type="string" required="false">
+        <property key="label" type="string" required="false" defaultValue="">
             <caption>Label</caption>
             <category>Display</category>
             <description/>
