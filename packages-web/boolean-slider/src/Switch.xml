@@ -26,6 +26,11 @@
                 <enumerationValue key="vertical">Vertical</enumerationValue>
             </enumerationValues>
         </property>
+        <property key="editable" type="boolean" defaultValue="true">
+            <caption>Editable</caption>
+            <category>Display</category>
+            <description/>
+        </property>
         <property key="labelWidth" type="integer" defaultValue="3">
             <caption>Label width (weight)</caption>
             <category>Display</category>
