@@ -1,33 +1,33 @@
-import { DOM, createElement } from "react";
+import { DOM, SFC, createElement } from "react";
 import * as classNames from "classnames";
 
-import { Alert } from "./Alert";
+import { Alert, AlertProps } from "./Alert";
 
 import "../ui/Switch.sass";
 
-export interface SliderProps {
-    status: SliderStatus;
+export interface SwitchProps {
+    status: SwitchStatus;
     isChecked: boolean;
     alertMessage?: string;
     onClick: () => void;
 }
 
-export type SliderStatus = "enabled" | "disabled" | "no-context";
+export type SwitchStatus = "enabled" | "disabled" | "no-context";
 
-export const Slider = (props: SliderProps) =>
-    DOM.div({ className: classNames("widget-switch", { "has-error": !!props.alertMessage }) },
+export const Switch: SFC<SwitchProps> = ({ alertMessage, isChecked, onClick, status }) =>
+    DOM.div({ className: classNames("widget-switch", { "has-error": !!alertMessage }) },
         DOM.input({
-            checked: props.isChecked,
-            className: classNames("widget-switch-checkbox", { enabled: props.status === "enabled" }),
+            checked: isChecked,
+            className: classNames("widget-switch-checkbox", { enabled: status === "enabled" }),
             readOnly: true,
             type: "checkbox"
         }),
         DOM.div({
             className: classNames("widget-switch-btn", {
-                "enabled": props.status === "enabled",
-                "no-switch": props.status === "no-context"
+                "enabled": status === "enabled",
+                "no-switch": status === "no-context"
             }),
-            onClick: props.status === "enabled" ? props.onClick : undefined
+            onClick: status === "enabled" ? onClick : undefined
         }),
-        createElement(Alert as any, { message: props.alertMessage })
+        createElement(Alert, { message: alertMessage } as AlertProps)
     );

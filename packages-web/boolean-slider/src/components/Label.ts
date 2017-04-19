@@ -2,7 +2,6 @@ import { DOM, SFC } from "react";
 import * as classNames from "classnames";
 
 interface LabelProps {
-    className?: string;
     label: string;
     weight: number;
     orientation?: LabelOrientation;
@@ -10,19 +9,21 @@ interface LabelProps {
 
 type LabelOrientation = "horizontal" | "vertical";
 
-const Label: SFC<LabelProps> = (props) =>
+const Label: SFC<LabelProps> = ({ children, label, orientation, weight }) =>
     DOM.div({ className: "form-group" },
         DOM.label({
-            className: classNames("control-label", { [`col-sm-${props.weight}`]: props.orientation === "horizontal" })
-        }, props.label),
+            className: classNames("control-label", { [`col-sm-${weight}`]: orientation === "horizontal" })
+        }, label),
         DOM.div({
-            className: classNames({ [`col-sm-${12 - props.weight}`]: props.orientation === "horizontal" })
-        }, props.children)
+            className: classNames({ [`col-sm-${12 - weight}`]: orientation === "horizontal" })
+        }, children)
     );
 
 Label.defaultProps = {
     orientation: "horizontal",
     weight: 6
 };
+
+Label.displayName = "Label";
 
 export { Label, LabelProps, LabelOrientation };

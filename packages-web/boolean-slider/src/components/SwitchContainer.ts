@@ -1,6 +1,6 @@
 import { Component, createElement } from "react";
 
-import { Slider, SliderStatus } from "./Switch";
+import { Switch, SwitchProps, SwitchStatus } from "./Switch";
 import { Label, LabelOrientation } from "./Label";
 
 interface WrapperProps {
@@ -9,64 +9,66 @@ interface WrapperProps {
     style?: string;
 }
 
-interface BooleanSliderContainerProps extends WrapperProps {
+interface SwitchContainerProps extends WrapperProps {
     booleanAttribute: string;
-    onChangeMicroflow: string;
     label: string;
+    labelWidth: number;
+    onChangeMicroflow: string;
     orientation: LabelOrientation;
 }
 
-interface BooleanSliderContainerState {
+interface SwitchContainerState {
     alertMessage?: string;
     isChecked?: boolean;
 }
 
-class BooleanSliderContainer extends Component<BooleanSliderContainerProps, BooleanSliderContainerState> {
+export default class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerState> {
     private subscriptionHandles: number[];
 
-    constructor(props: BooleanSliderContainerProps) {
+    constructor(props: SwitchContainerProps) {
         super(props);
 
         this.subscriptionHandles = [];
-        this.state = {
-            alertMessage: "",
-            isChecked: this.getAttributeValue(props.booleanAttribute, props.mxObject)
-        };
+        this.state = this.updateState(props.mxObject);
         this.handleToggle = this.handleToggle.bind(this);
         this.handleValidations = this.handleValidations.bind(this);
-    }
+        this.subscriptionCallback = this.subscriptionCallback.bind(this);
 
-    componentWillReceiveProps(newProps: BooleanSliderContainerProps) {
-        this.resetSubscriptions(newProps.mxObject);
-        this.setState({
-            alertMessage: "",
-            isChecked: this.getAttributeValue(newProps.booleanAttribute, newProps.mxObject)
-        });
     }
 
     render() {
         if (this.props.label.trim()) {
-            return createElement(Label as any, {
+            return createElement(Label, {
                 label: this.props.label,
-                orientation: this.props.orientation
-            }, this.renderSlider());
+                orientation: this.props.orientation,
+                weight: this.props.labelWidth
+            }, this.renderSwitch());
         }
 
-        return this.renderSlider();
+        return this.renderSwitch();
     }
 
-    private renderSlider() {
+    componentWillReceiveProps(newProps: SwitchContainerProps) {
+        this.resetSubscriptions(newProps.mxObject);
+        this.setState(this.updateState(newProps.mxObject));
+    }
+
+    componentWillUnmount() {
+        this.subscriptionHandles.forEach(mx.data.unsubscribe);
+    }
+
+    private renderSwitch() {
         const enabled = this.props.mxObject && !this.props.mxObject.isReadonlyAttr(this.props.booleanAttribute);
-        const status: SliderStatus = this.props.mxObject
+        const status: SwitchStatus = this.props.mxObject
             ? enabled ? "enabled" : "disabled"
             : "no-context";
 
-        return createElement(Slider as any, {
+        return createElement(Switch, {
             alertMessage: this.state.alertMessage,
             isChecked: this.state.isChecked,
             onClick: this.handleToggle,
             status
-        });
+        } as SwitchProps);
     }
 
     private getAttributeValue(attribute: string, mxObject?: mendix.lib.MxObject): boolean {
@@ -86,25 +88,18 @@ class BooleanSliderContainer extends Component<BooleanSliderContainerProps, Bool
     }
 
     private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
-        this.unsubscribe();
+        this.subscriptionHandles.forEach(mx.data.unsubscribe);
+        this.subscriptionHandles = [];
 
         if (mxObject) {
             this.subscriptionHandles.push(mx.data.subscribe({
-                callback: () =>
-                    this.setState({
-                        alertMessage: "",
-                        isChecked: this.getAttributeValue(this.props.booleanAttribute, mxObject)
-                    }),
+                callback: this.subscriptionCallback,
                 guid: mxObject.getGuid()
             }));
 
             this.subscriptionHandles.push(mx.data.subscribe({
                 attr: this.props.booleanAttribute,
-                callback: () =>
-                    this.setState({
-                        alertMessage: "",
-                        isChecked: this.getAttributeValue(this.props.booleanAttribute, mxObject)
-                    }),
+                callback: this.subscriptionCallback,
                 guid: mxObject.getGuid()
             }));
             // Inline validation suspended until popup issue is fixed i.e popup validations still show up too
@@ -116,15 +111,20 @@ class BooleanSliderContainer extends Component<BooleanSliderContainerProps, Bool
         }
     }
 
+    private updateState(mxObject = this.props.mxObject): SwitchContainerState {
+        return {
+            alertMessage: "",
+            isChecked: this.getAttributeValue(this.props.booleanAttribute, mxObject)
+        };
+    }
+
+    private subscriptionCallback() {
+        this.setState(this.updateState());
+    }
+
     private handleValidations(validations: mendix.lib.ObjectValidation[]) {
         const validationMessage = validations[0].getErrorReason(this.props.booleanAttribute);
         if (validationMessage) this.setState({ alertMessage: validationMessage });
-    }
-
-    private unsubscribe() {
-        if (this.subscriptionHandles) {
-            this.subscriptionHandles.forEach(mx.data.unsubscribe);
-        }
     }
 
     private executeAction(actionname: string, guid: string) {
@@ -140,5 +140,3 @@ class BooleanSliderContainer extends Component<BooleanSliderContainerProps, Bool
         }
     }
 }
-
-export default BooleanSliderContainer;

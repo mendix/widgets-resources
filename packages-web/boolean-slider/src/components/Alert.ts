@@ -1,8 +1,14 @@
 import { DOM, SFC } from "react";
 
-export const Alert: SFC<{ message: string }> = (props) =>
-    props.message
-        ? DOM.div({ className: "alert alert-danger widget-boolean-slider-alert" }, props.message)
+interface AlertProps {
+    message: string;
+}
+
+const Alert: SFC<AlertProps> = ({ message }) =>
+    message
+        ? DOM.div({ className: "alert alert-danger widget-boolean-slider-alert" }, message)
         : null as any;
 
 Alert.displayName = "Alert";
+
+export { Alert, AlertProps };
