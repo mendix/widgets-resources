@@ -2,15 +2,17 @@ import { DOM, SFC } from "react";
 import * as classNames from "classnames";
 
 interface LabelProps {
+    className?: string;
     label: string;
-    weight: number;
     orientation?: LabelOrientation;
+    style?: object;
+    weight: number;
 }
 
 type LabelOrientation = "horizontal" | "vertical";
 
-const Label: SFC<LabelProps> = ({ children, label, orientation, weight }) =>
-    DOM.div({ className: "form-group" },
+const Label: SFC<LabelProps> = ({ children, className, label, orientation, style, weight }) =>
+    DOM.div({ className: classNames("form-group", className), style },
         DOM.label({
             className: classNames("control-label", {
                 [`col-sm-${weight} col-xs-${weight}`]: orientation === "horizontal"

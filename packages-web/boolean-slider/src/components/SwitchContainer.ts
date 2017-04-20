@@ -38,12 +38,15 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
     }
 
     render() {
+        const maxLabelWidth = 11;
         if (this.props.label.trim()) {
             return createElement(Label, {
+                className: this.props.class,
                 label: this.props.label,
                 orientation: this.props.orientation,
-                weight: this.props.labelWidth
-            }, this.renderSwitch());
+                style: SwitchContainer.parseStyle(this.props.style),
+                weight: this.props.labelWidth > maxLabelWidth ? maxLabelWidth : this.props.labelWidth
+            }, this.renderSwitch(true));
         }
 
         return this.renderSwitch();
@@ -58,7 +61,7 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
         this.subscriptionHandles.forEach(mx.data.unsubscribe);
     }
 
-    private renderSwitch() {
+    private renderSwitch(hasLabel = false) {
         const { editable, mxObject } = this.props;
         const enabled = editable === "default" && (mxObject && !mxObject.isReadonlyAttr(this.props.booleanAttribute));
         const status: SwitchStatus = mxObject
@@ -67,9 +70,11 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
 
         return createElement(Switch, {
             alertMessage: this.state.alertMessage,
+            className: !hasLabel ? this.props.class : undefined,
             isChecked: this.state.isChecked,
             onClick: this.handleToggle,
-            status
+            status,
+            style: !hasLabel ? this.props.style : undefined,
         } as SwitchProps);
     }
 
@@ -140,5 +145,21 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
                 }
             });
         }
+    }
+
+    private static parseStyle(style = ""): {[key: string]: string} {
+        try {
+            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            console.log("Failed to parse style", style, error);
+        }
+        return {};
     }
 }

@@ -6,16 +6,18 @@ import { Alert, AlertProps } from "./Alert";
 import "../ui/Switch.sass";
 
 export interface SwitchProps {
-    status: SwitchStatus;
-    isChecked: boolean;
     alertMessage?: string;
+    className?: string;
+    isChecked: boolean;
     onClick: () => void;
+    status: SwitchStatus;
+    style?: object;
 }
 
 export type SwitchStatus = "enabled" | "disabled" | "no-context";
 
-export const Switch: SFC<SwitchProps> = ({ alertMessage, isChecked, onClick, status }) =>
-    DOM.div({ className: classNames("widget-switch", { "has-error": !!alertMessage }) },
+export const Switch: SFC<SwitchProps> = ({ alertMessage, className, isChecked, onClick, status, style }) =>
+    DOM.div({ className: classNames("widget-switch", className, { "has-error": !!alertMessage }), style },
         DOM.input({
             checked: isChecked,
             className: classNames("widget-switch-checkbox", { enabled: status === "enabled" }),
