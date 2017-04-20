@@ -11,7 +11,7 @@ interface WrapperProps {
 
 interface SwitchContainerProps extends WrapperProps {
     booleanAttribute: string;
-    editable: boolean;
+    editable: "default" | "never";
     label: string;
     labelWidth: number;
     onChangeMicroflow: string;
@@ -60,7 +60,7 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
 
     private renderSwitch() {
         const { editable, mxObject } = this.props;
-        const enabled = editable && (mxObject && !mxObject.isReadonlyAttr(this.props.booleanAttribute));
+        const enabled = editable === "default" && (mxObject && !mxObject.isReadonlyAttr(this.props.booleanAttribute));
         const status: SwitchStatus = mxObject
             ? enabled ? "enabled" : "disabled"
             : "no-context";
