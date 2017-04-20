@@ -148,8 +148,8 @@ export function toElementStructure(node: any): ElementStructure | ElementStructu
 
         const props: { [name: string]: string } = {};
         from(domNode.attributes || [])
-            .filter(attr => attr.nodeName.indexOf("data-react") === -1)
-            .forEach(attr => props[attr.nodeName] = attr.nodeValue || "");
+            .filter((attr: any) => attr.nodeName.indexOf("data-react") === -1)
+            .forEach((attr: any) => props[attr.nodeName] = attr.nodeValue || "");
         if ("class" in props) {
             props["className"] = props["class"];
             delete props["class"];
