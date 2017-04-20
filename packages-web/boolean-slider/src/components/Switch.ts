@@ -31,3 +31,5 @@ export const Switch: SFC<SwitchProps> = ({ alertMessage, isChecked, onClick, sta
         }),
         createElement(Alert, { message: alertMessage } as AlertProps)
     );
+
+Switch.displayName = "Switch";

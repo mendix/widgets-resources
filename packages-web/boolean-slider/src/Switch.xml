@@ -35,7 +35,7 @@
                 <enumerationValue key="never">Never</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="labelWidth" type="integer" defaultValue="3">
+        <property key="labelWidth" type="integer" defaultValue="9">
             <caption>Label width (weight)</caption>
             <category>Display</category>
             <description>How much of the total row width (12) the label should occupy. Should not be greater than 11. (Only for horizontal orientation)</description>

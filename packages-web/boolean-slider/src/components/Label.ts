@@ -12,10 +12,14 @@ type LabelOrientation = "horizontal" | "vertical";
 const Label: SFC<LabelProps> = ({ children, label, orientation, weight }) =>
     DOM.div({ className: "form-group" },
         DOM.label({
-            className: classNames("control-label", { [`col-sm-${weight}`]: orientation === "horizontal" })
+            className: classNames("control-label", {
+                [`col-sm-${weight} col-xs-${weight}`]: orientation === "horizontal"
+            })
         }, label),
         DOM.div({
-            className: classNames({ [`col-sm-${12 - weight}`]: orientation === "horizontal" })
+            className: classNames({
+                [`col-sm-${12 - weight} col-xs-${12 - weight}`]: orientation === "horizontal"
+            })
         }, children)
     );
 
