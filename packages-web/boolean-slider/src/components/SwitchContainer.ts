@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, createElement, SFCElement } from "react";
 
 import { Switch, SwitchProps, SwitchStatus } from "./Switch";
 import { Label, LabelOrientation } from "./Label";
@@ -61,7 +61,7 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
         this.subscriptionHandles.forEach(mx.data.unsubscribe);
     }
 
-    private renderSwitch(hasLabel = false) {
+    private renderSwitch(hasLabel = false): SFCElement<SwitchProps> {
         const { editable, mxObject } = this.props;
         const enabled = editable === "default" && (mxObject && !mxObject.isReadonlyAttr(this.props.booleanAttribute));
         const status: SwitchStatus = mxObject
@@ -74,7 +74,7 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
             isChecked: this.state.isChecked,
             onClick: this.handleToggle,
             status,
-            style: !hasLabel ? this.props.style : undefined,
+            style: !hasLabel ? SwitchContainer.parseStyle(this.props.style) : undefined,
         } as SwitchProps);
     }
 
@@ -160,6 +160,7 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
         } catch (error) {
             console.log("Failed to parse style", style, error);
         }
+
         return {};
     }
 }
