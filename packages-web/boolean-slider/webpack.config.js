@@ -31,7 +31,7 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([
             { from: "src/**/*.xml" },
-            { from: "assets/booleanslider_appstore.png", to: "src/Preview.png" }
+            { from: "assets/Preview.png", to: "src/Preview.png" }
         ], { copyUnmodified: true }),
         new ExtractTextPlugin({ filename: "./src/com/mendix/widget/custom/switch/ui/Switch.css" }),
         new webpack.LoaderOptionsPlugin({ debug: true })
