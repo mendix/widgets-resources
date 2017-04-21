@@ -4,7 +4,8 @@
     <description>Toggle a boolean attribute</description>
     <icon>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAANCAYAAACgu+4kAAAAAXNSR0IArs4c6QAAAWJJREFUKBWVUz1Pg1AU5eGDAiVh8CMu/gBHN8PmL+gE1qUbLmqKDvY36NTEaKLdZOhHWFkaZtLdwd/g18DQoUkBzyWFGIKx3gTuu/edc++5PB6bTCZqHMc3giC0syzbhv/TGGMfAI0Mw+jxxWJxqyjKKRL3eDZRpFNUAFBALJCvGDW6AJfxRqPRBuDBsqwrAvm+v5em6VGFUBuCd8xVVZ1jsUsIdNsIgmCLuq7ivHsRk5KfirCeszAMu+jYx+YMJAPJ/ZyNVw2hzBFGFEU3Hy6KohMUoY+4U5AIUKzJV+wd5JFpmsNK/v9hXnowGJQK1ikBRbkCx3GGzPO8bpIk/Tpi3QjIvWLUGPhDPC6XJOlSluWcj41y7l8KvqDAgW3byXg8pvldrmlak4hr2mer1UoIi5/vDa7JptPpHU7gnJJ1kilf2ErhM+IvrM9wEk9c1/Xr5XJJEta9Cx00orvwyDnvfQOvxafOwLorQQAAAABJRU5ErkJggg==
-    </icon>    <properties>
+    </icon>
+    <properties>
         <property key="booleanAttribute" type="attribute">
             <caption>Boolean attribute</caption>
             <category>Data source</category>

@@ -29,10 +29,13 @@ module.exports = {
     devtool: "source-map",
     externals: [ "react", "react-dom" ],
     plugins: [
-        new CopyWebpackPlugin([
-            { from: "src/**/*.xml" },
-            { from: "assets/Preview.png", to: "src/Preview.png" }
-        ], { copyUnmodified: true }),
+        new CopyWebpackPlugin(
+            [
+                { from: "src/**/*.xml" },
+                { from: "assets/Preview.png", to: "src/Preview.png" }
+            ],
+            { copyUnmodified: true }
+        ),
         new ExtractTextPlugin({ filename: "./src/com/mendix/widget/custom/switch/ui/Switch.css" }),
         new webpack.LoaderOptionsPlugin({ debug: true })
     ]
