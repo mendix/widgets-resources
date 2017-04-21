@@ -4,7 +4,6 @@ Toggle a boolean attribute.
 ## Features
 * Deactivate when attribute or context is read-only
 * Execute a microflow when toggled
-* Add a label to the switch
 
 ## Dependencies
 Mendix 7.1
