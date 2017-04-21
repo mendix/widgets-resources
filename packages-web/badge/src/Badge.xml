@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.custom.badge.Badge" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
+    <name>Badge</name>
+    <description>Badges are numerical indicators of how many items are associated with a link</description>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAASxJREFUKBWVUjFOxDAQ3LU3l0C4q2kRICFqmuMhUPMhPkBBeeILlAiJ5iRoQEh0FDzgIAh0WZvZGCMuBQpjWbtZz0x24zBNT9cOpvvn4436OGhLQ+C80OtbczG/eTgRqeLh1s7m0ePLO0V2FLEYy6KBsS2zmMGBaQ+au9v7M4nt51iV2YtRftMSnVGKcLDY4duthca0QhRixOF6iRSIYDPYFv+C6xxDFA+WBqJqZNlweO/IFN1r2fGPgXW6MnOvkMdx0Gg2ELgVPg3ZHyGPY3EV6VkUPiUG8UWfkOi5m/4X0aWdaxqhLD1JdwuomU9WGSfn2cE6wRytSwUhVSqKEdWV3f0w2DuaD7ChFX2+nl9dbs+KerIb22F/IovQslk8mdbMbE+wa+x/NQH+4gsBPW0QwdZQLAAAAABJRU5ErkJggg==
+    </icon>
+    <properties>
+        <property key="label" type="translatableString" required="false">
+            <caption>Label</caption>
+            <category>Display</category>
+            <description>The badge label</description>
+            <translations>
+                <translation lang="en_US"></translation>
+                <translation lang="nl_NL"></translation>
+            </translations>
+        </property>
+        <property key="badgeValue" type="translatableString" required="false">
+            <caption>Value</caption>
+            <category>Display</category>
+            <description>The badge value</description>
+            <translations>
+                <translation lang="en_US"></translation>
+                <translation lang="nl_NL"></translation>
+            </translations>
+        </property>
+        <property key="bootstrapStyle" type="enumeration" defaultValue="default">
+            <caption>Bootstrap style</caption>
+            <category>Display</category>
+            <description>The appearance of the badge based on Bootstrap classes</description>
+            <enumerationValues>
+                <enumerationValue key="default">Default</enumerationValue>
+                <enumerationValue key="primary">Primary</enumerationValue>
+                <enumerationValue key="success">Success</enumerationValue>
+                <enumerationValue key="info">Info</enumerationValue>
+                <enumerationValue key="warning">Warning</enumerationValue>
+                <enumerationValue key="danger">Danger</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="bootstrapStyleAttribute" type="attribute" required="false">
+            <caption>Bootstrap style attribute</caption>
+            <category>Data source</category>
+            <description>The attribute value should be: default, primary, info, warning, danger, success.</description>
+            <attributeTypes>
+                <attributeType name="Enum" />
+                <attributeType name="String" />
+            </attributeTypes>
+        </property>
+        <property key="labelAttribute" type="attribute" required="false">
+            <caption>Label attribute</caption>
+            <category>Data source</category>
+            <description>The attribute that contains the badge label</description>
+            <attributeTypes>
+                <attributeType name="Enum" />
+                <attributeType name="String" />
+            </attributeTypes>
+        </property>
+        <property key="valueAttribute" type="attribute" required="false">
+            <caption>Data attribute</caption>
+            <category>Data source</category>
+            <description>The attribute that contains the badge value</description>
+            <attributeTypes>
+                <attributeType name="String" />
+                <attributeType name="Integer" />
+                <attributeType name="Decimal" />
+                <attributeType name="Long" />
+            </attributeTypes>
+        </property>
+        <property key="onClickEvent" type="enumeration" defaultValue="doNothing">
+            <caption>On click</caption>
+            <category>Events</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="doNothing">Do nothing</enumerationValue>
+                <enumerationValue key="showPage">Show a page</enumerationValue>
+                <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="microflow" type="microflow" required="false">
+            <caption>Microflow</caption>
+            <category>Events</category>
+            <description>The microflow that will be executed on click</description>
+            <returnType type="Void" />
+        </property>
+        <property key="page" type="form" required="false">
+            <caption>Page</caption>
+            <category>Events</category>
+            <description>The page that will be opened on click</description>
+        </property>
+    </properties>
+</widget>
