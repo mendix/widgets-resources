@@ -90,12 +90,6 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
                 callback: this.subscriptionCallback,
                 guid: mxObject.getGuid()
             }));
-            // Inline validation suspended until popup issue is fixed i.e popup validations still show up too
-            // this.subscriptionHandles.push(mx.data.subscribe({
-            //     callback: this.handleValidations,
-            //     guid: mxObject.getGuid(),
-            //     val: true
-            // }));
         }
     }
 
