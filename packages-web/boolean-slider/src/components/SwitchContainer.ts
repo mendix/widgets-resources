@@ -1,6 +1,7 @@
-import { Component, createElement } from "react";
+import { Component, SFCElement, createElement } from "react";
 
 import { Switch, SwitchProps, SwitchStatus } from "./Switch";
+import { Label } from "./Label";
 
 interface WrapperProps {
     class?: string;
@@ -11,6 +12,8 @@ interface WrapperProps {
 interface SwitchContainerProps extends WrapperProps {
     booleanAttribute: string;
     editable: "default" | "never";
+    label: string;
+    labelWidth: number;
     onChangeMicroflow: string;
 }
 
@@ -34,20 +37,17 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
     }
 
     render() {
-        const { editable, mxObject } = this.props;
-        const enabled = editable === "default" && (mxObject && !mxObject.isReadonlyAttr(this.props.booleanAttribute));
-        const status: SwitchStatus = mxObject
-            ? enabled ? "enabled" : "disabled"
-            : "no-context";
+        const maxLabelWidth = 11;
+        if (this.props.label.trim()) {
+            return createElement(Label, {
+                className: this.props.class,
+                label: this.props.label,
+                style: SwitchContainer.parseStyle(this.props.style),
+                weight: this.props.labelWidth > maxLabelWidth ? maxLabelWidth : this.props.labelWidth
+            }, this.renderSwitch(true));
+        }
 
-        return createElement(Switch, {
-            alertMessage: this.state.alertMessage,
-            className: this.props.class,
-            isChecked: this.state.isChecked,
-            onClick: this.handleToggle,
-            status,
-            style: SwitchContainer.parseStyle(this.props.style)
-        } as SwitchProps);
+        return this.renderSwitch();
     }
 
     componentWillReceiveProps(newProps: SwitchContainerProps) {
@@ -57,6 +57,23 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
 
     componentWillUnmount() {
         this.subscriptionHandles.forEach(mx.data.unsubscribe);
+    }
+
+    private renderSwitch(hasLabel = false): SFCElement<SwitchProps> {
+        const { editable, mxObject } = this.props;
+        const enabled = editable === "default" && (mxObject && !mxObject.isReadonlyAttr(this.props.booleanAttribute));
+        const status: SwitchStatus = mxObject
+            ? enabled ? "enabled" : "disabled"
+            : "no-context";
+
+        return createElement(Switch, {
+            alertMessage: this.state.alertMessage,
+            className: !hasLabel ? this.props.class : undefined,
+            isChecked: this.state.isChecked,
+            onClick: this.handleToggle,
+            status,
+            style: !hasLabel ? SwitchContainer.parseStyle(this.props.style) : undefined
+        } as SwitchProps);
     }
 
     private getAttributeValue(attribute: string, mxObject?: mendix.lib.MxObject): boolean {
@@ -110,7 +127,7 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
     }
 
     private executeAction(actionname: string, guid: string) {
-        if (actionname) {
+        if (actionname && this.props.mxObject) {
             window.mx.ui.action(actionname, {
                 error: (error) =>
                     window.mx.ui.error(`Error while executing microflow ${actionname}: ${error.message}`),
@@ -122,9 +139,9 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
         }
     }
 
-    private static parseStyle(style = ""): {[key: string]: string} {
+    private static parseStyle(style = ""): { [key: string]: string } {
         try {
-            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
                 const pair = line.split(":");
                 if (pair.length === 2) {
                     const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
