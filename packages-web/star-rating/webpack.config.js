@@ -11,18 +11,19 @@ module.exports = {
         libraryTarget:  "umd"
     },
     resolve: {
-        extensions: [ "", ".ts", ".js", ".jsx", ".json" ],
+        extensions: [ ".ts", ".js", ".jsx", ".json" ],
         alias: {
             "tests": path.resolve(__dirname, "./tests"),
             "react-rating": path.resolve(__dirname, "./node_modules/react-rating/src/react-rating.js")
         }
     },
-    errorDetails: true,
     module: {
-        loaders: [
-            { test: /\.ts$/, loader: "ts-loader" },
+        rules: [
+            { test: /\.ts$/, use: "ts-loader" },
             { test: /\.json$/, loader: "json" },
-            { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
+            { test: /\.css$/, loader: ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: "css-loader"}) },
             { test: /\.jsx?$/, loader: "babel-loader" }
         ]
     },
@@ -32,12 +33,12 @@ module.exports = {
         new CopyWebpackPlugin([
             { from: "src/**/*.js" },
             { from: "src/**/*.xml" },
-            { from: "src/**/*.css" }
         ], {
             copyUnmodified: true
         }),
-        new ExtractTextPlugin("./src/com/mendix/widget/custom/StarRating/ui/StarRating.css")
-
-    ],
-    watch: true
+        new ExtractTextPlugin( {filename: "./src/com/mendix/widget/custom/StarRating/ui/StarRating.css" }),
+        new webpack.LoaderOptionsPlugin({
+            debug: true
+        })
+    ]
 };

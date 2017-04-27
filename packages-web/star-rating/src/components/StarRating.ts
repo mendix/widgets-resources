@@ -29,8 +29,8 @@ export class StarRating extends Component<StarRatingProps, {}> {
 
     render() {
         const rateType = this.props.rateType;
-        const readonly = this.props.readOnly || rateType === "average" || !(rateType === "rating"
-            && this.props.ownerGuid === window.mx.session.getUserId());
+        const readonly = this.props.readOnly || rateType === "average"
+            || !(rateType === "rating" && this.props.ownerGuid === window.mx.session.getUserId());
 
         return DOM.div({ className: "widget-star-rating" },
             createElement(Rating, {

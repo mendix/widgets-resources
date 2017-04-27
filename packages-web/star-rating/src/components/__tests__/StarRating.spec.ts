@@ -3,16 +3,13 @@ import { createElement, DOM } from "react";
 
 import * as Rating from "react-rating";
 
-import { mockMx } from "tests/mocks/Mendix";
 import { StarRating, StarRatingProps } from "../StarRating";
 
 describe("StarRating", () => {
-    const mxOriginal: mx.mx = window.mx;
     let starProps: StarRatingProps;
     const renderStarRating = (props: StarRatingProps) => shallow(createElement(StarRating, props));
 
     beforeAll(() => {
-        window.mx = mockMx;
         starProps = {
             handleOnChange: jasmine.createSpy("onChange"),
             initialRate: 2,
@@ -85,10 +82,6 @@ describe("StarRating", () => {
         star_rating.simulate("click");
 
         expect(onChange).toHaveBeenCalledTimes(1);
-    });
-
-    afterAll(() => {
-        window.mx = mxOriginal;
     });
 
 });
