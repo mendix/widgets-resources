@@ -3,6 +3,9 @@ $uncheckedColor: #F1F1F1
 $disabledCheckedColor: #F1F1F1
 $disabledUncheckedColor: #FFF
 
+.widget-switch
+    float: right
+
 .widget-switch-checkbox
     display: none
     // add default box-sizing for this scope
@@ -80,3 +83,16 @@ $disabledUncheckedColor: #FFF
     &.enabled
         &:checked + .widget-switch-btn
             background: $checkedColor
+
+.form-group
+    .control-label
+        padding-top: 8px
+        padding-bottom: 8px
+
+@media (min-width: 768px)
+    .widget-switch
+        float: left
+
+    .form-group
+        .widget-switch
+            float: left

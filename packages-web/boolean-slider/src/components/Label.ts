@@ -12,17 +12,19 @@ interface LabelProps {
 type LabelOrientation = "horizontal" | "vertical";
 
 const Label: SFC<LabelProps> = ({ children, className, label, orientation, style, weight }) =>
-    DOM.div({ className: classNames("form-group", className), style },
-        DOM.label({
-            className: classNames("control-label", {
-                [`col-sm-${weight}`]: orientation === "horizontal"
-            })
-        }, label),
-        DOM.div({
-            className: classNames({
-                [`col-sm-${12 - weight}`]: orientation === "horizontal"
-            })
-        }, children)
+    DOM.div({ className: "form-horizontal" },
+        DOM.div({ className: classNames("form-group", className), style },
+            DOM.label({
+                className: classNames("control-label", {
+                    [`col-sm-${weight} col-xs-${weight}`]: orientation === "horizontal"
+                })
+            }, label),
+            DOM.div({
+                className: classNames({
+                    [`col-sm-${12 - weight} col-xs-${12 - weight}`]: orientation === "horizontal"
+                })
+            }, children)
+        )
     );
 
 Label.defaultProps = {
