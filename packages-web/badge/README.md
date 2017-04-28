@@ -4,9 +4,11 @@ Show a numerical indicator of how many items are associated with a link
 
 ## Features
 
- * Display a badge on a button
+ * Display a badge on a label
+ * Display as a badge or a color label
  * Attach an onclick microflow
- * Set a static label text when the persisted label is not specified
+ * Set a static label text when the dynamic label is not specified
+ * Set a static data text when the dynamic data is not specified
 
 ## Dependencies
 
@@ -19,7 +21,7 @@ The data source attributes specified in the `Data source` tab are optional. If n
 
 <img src="./assets/Static_attributes.png" width="600px" height="300px" />
 <img src="./assets/Data_source.png" width="600px" height="300px" />
-<img src="./assets/Behaviour.png" width="600px" height="300px" />
+<img src="./assets/Behavior.png" width="600px" height="300px" />
 
 ## Demo project
 
@@ -49,7 +51,7 @@ Create a folder named dist in the project root.
 
 Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Changes to the widget code shall be automatically pushed to this test project.
 
-[https://github.com/MendixLabs/badge/releases/download/1.0.0/Test.mpr](https://github.com/MendixLabs/badge/releases/download/1.0.0/Test.mpr)
+[https://github.com/MendixLabs/badge/releases/download/v1.0.0/Badge.mpr](https://github.com/MendixLabs/badge/releases/download/v1.0.0/Badge.mpr)
 
 To automatically compile, bundle and push code changes to the running test project, run:
 
