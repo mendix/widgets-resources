@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.custom.RangeSlider.RangeSlider" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/">
+    <name>RangeSlider</name>
+    <description>Change range of values using a slider</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAYAAABrGwT5AAAAAXNSR0IArs4c6QAAARJJREFUKBVjZMABamtr9ZmZmc3//v17srm5+SI2ZUzYBMvLy/X//PljUV9fPxNEg/jY1GEVKy4uzgDa+P/379//QTSIj00hCzbBHz9+MAJtZPj37x8DExMTA4iPTR2LpqZm+MePH+WQJW/fvm0JtJEBZAALCwsDkO8qJSXFg6yGn5//EYuOjo7oxIkTu5Aljh07xgB0Mljz////GdLS0gKtrKwCkdXk5+fnMubl5fkDQ1USWeLt27eOEyZMCPv16xcDGxsbQ0FBwSphYeH9yGqALnuOzIezPTw88l69evX/8ePH/0E0iA+XRGJgjaoPHz4wgwKKlZUVHGAgPpIeOBNraD969Oi5lpZWGUwVMNCwOhEA7DF7VrZb3vwAAAAASUVORK5CYII=</icon>
+    <properties>
+        <property key="minAttribute" type="attribute">
+            <caption>Minimum attribute</caption>
+            <category>Data source</category>
+            <description>Holds the minimum value that can be selected</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="maxAttribute" type="attribute">
+            <caption>Maximum attribute</caption>
+            <category>Data source</category>
+            <description>Holds the maximum value that can be selected</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="lowerBoundAttribute" required="false" type="attribute">
+            <caption>Lower bound attribute</caption>
+            <category>Data source</category>
+            <description>The lower bound value on the slider</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="upperBoundAttribute" required="false" type="attribute">
+            <caption>Upper bound attribute</caption>
+            <category>Data source</category>
+            <description>The upper bound value on the slider</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="onChangeMicroflow" type="microflow" required="false">
+            <caption>On change microflow</caption>
+            <category>Behavior</category>
+            <description>Called when the slider is clicked or changed</description>
+            <returnType type="Void"/>
+        </property>
+        <property key="noOfMarkers" type="integer" defaultValue="2">
+            <caption>Number of Markers</caption>
+            <category>Appearance</category>
+            <description>Marker ticks on the slider (visible when larger than 2)</description>
+        </property>
+        <property key="tooltipText" type="string" required="false" defaultValue="{1}">
+            <caption>Tooltip text</caption>
+            <category>Appearance</category>
+            <description>Text to show when hovering over the slider value. Leave this empty to disable the tooltip. Use {1} as a replacement for the current value of the slider</description>
+        </property>
+        <property key="stepAttribute" type="attribute" required="false">
+            <caption>Step attribute</caption>
+            <category>Appearance</category>
+            <description>Holds the value for the interval between two points(numbers)</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="stepValue" type="integer" defaultValue="10">
+            <caption>Step value</caption>
+            <category>Appearance</category>
+            <description>Number of points to shift when sliding (Used if step attribute is not set)</description>
+        </property>
+        <property key="decimalPlaces" type="integer" defaultValue="1">
+            <caption>Decimal places</caption>
+            <category>Appearance</category>
+            <description>Number of decimal places for marker values</description>
+        </property>
+        <property key="bootstrapStyle" type="enumeration" defaultValue="primary">
+            <caption>Bootstrap style</caption>
+            <category>Appearance</category>
+            <description>Bootstrap color to apply to the range slider</description>
+            <enumerationValues>
+                <enumerationValue key="primary">Primary</enumerationValue>
+                <enumerationValue key="inverse">Inverse</enumerationValue>
+                <enumerationValue key="info">Info</enumerationValue>
+                <enumerationValue key="success">Success</enumerationValue>
+                <enumerationValue key="warning">Warning</enumerationValue>
+                <enumerationValue key="danger">Danger</enumerationValue>
+            </enumerationValues>
+        </property>
+    </properties>
+</widget>
