@@ -1,0 +1,75 @@
+@import "./variables";
+
+.widget-range-slider {
+    padding: 5px 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+
+    .rc-slider-handle, .rc-slider-dot-active {
+        border: 2px solid $brand-default;
+    }
+
+    &.has-error {
+        .rc-slider-track, .rc-slider-rail {
+            background-color: $brand-danger;
+        }
+    }
+
+    /* correction to keep the marks on the edges readable*/
+    .rc-slider-mark {
+        left: 1%;
+        width: 98%;
+    }
+
+    .rc-slider {
+        &.rc-slider-with-marks {
+            padding-bottom: 25px;
+        }
+
+        &.rc-slider-disabled {
+            background-color: transparent;
+        }
+    }
+}
+
+.widget-range-slider-no-value {
+    .rc-slider-track {
+        display: none;
+    }
+}
+
+.widget-range-slider-primary {
+    .rc-slider-track {
+        background-color: $brand-primary;
+    }
+}
+
+.widget-range-slider-info {
+    .rc-slider-track {
+        background-color: $brand-info;
+    }
+}
+
+.widget-range-slider-success {
+    .rc-slider-track {
+        background-color: $brand-success;
+    }
+}
+
+.widget-range-slider-warning {
+    .rc-slider-track {
+        background-color: $brand-warning;
+    }
+}
+
+.widget-range-slider-danger {
+    .rc-slider-track {
+        background-color: $brand-danger;
+    }
+}
+
+.widget-range-slider-inverse {
+    .rc-slider-track {
+        background-color: $brand-inverse;
+    }
+}
