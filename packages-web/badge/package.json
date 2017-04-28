@@ -1,7 +1,7 @@
 {
   "name": "badge",
   "widgetName": "Badge",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Show a numerical indicator of how many items are associated with a link",
   "scripts": {
     "pretest": "tsc",
@@ -22,7 +22,7 @@
     "@types/jasmine": "^2.5.47",
     "@types/karma": "^0.13.35",
     "@types/react": "^15.0.22",
-    "@types/react-dom": "^0.14.22",
+    "@types/react-dom": "^15.5.0",
     "check-dependencies": "^1.0.1",
     "copy-webpack-plugin": "^4.0.1",
     "core-js": "^2.4.1",

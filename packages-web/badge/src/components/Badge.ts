@@ -1,9 +1,10 @@
-import { DOM, SFC, createElement } from "react";
+import { DOM, SFC } from "react";
 import * as classNames from "classnames";
 
 import "../ui/Badge.css";
 
 export interface BadgeProps {
+    badgeType: "badge" | "label";
     className?: string;
     style?: object;
     label?: string;
@@ -15,19 +16,19 @@ export interface BadgeProps {
 
 type BootstrapStyle = "default" | "info" | "primary" | "danger" | "success" | "warning";
 
-const Badge: SFC<BadgeProps> = ({ bootstrapStyle, className, clickable, label, onClickAction, value, style }) =>
-    createElement("div",
+const Badge: SFC<BadgeProps> = (props) =>
+    DOM.div(
         {
-            className: classNames("widget-badge", className, { "widget-badge-link": clickable }),
-            onClick: onClickAction,
-            style
+            className: classNames("widget-badge", props.className, { "widget-badge-link": props.clickable }),
+            onClick: props.onClickAction,
+            style: props.style
         },
-        DOM.span({ className: "widget-badge-text" }, label),
+        DOM.span({ className: "widget-badge-text" }, props.label),
         DOM.span({
-            className: classNames("widget-badge", "badge", {
-                [`label-${bootstrapStyle}`]: !!bootstrapStyle
+            className: classNames("widget-badge", props.badgeType, {
+                [`label-${props.bootstrapStyle}`]: !!props.bootstrapStyle
             })
-        }, value)
+        }, props.value)
     );
 
 export { Badge, BootstrapStyle };

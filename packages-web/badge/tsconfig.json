@@ -21,7 +21,7 @@
     "skipLibCheck": false,
     "strictNullChecks": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": false
+    "noUnusedParameters": true
   },
   "exclude": [
     "dist/",

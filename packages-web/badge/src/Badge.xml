@@ -37,14 +37,14 @@
                 <enumerationValue key="danger">Danger</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="bootstrapStyleAttribute" type="attribute" required="false">
-            <caption>Bootstrap style attribute</caption>
-            <category>Data source</category>
-            <description>The attribute value should be: default, primary, info, warning, danger, success.</description>
-            <attributeTypes>
-                <attributeType name="Enum" />
-                <attributeType name="String" />
-            </attributeTypes>
+        <property key="badgeType" type="enumeration" required="true" defaultValue="badge">  
+            <caption>Type</caption>
+            <category>Display</category>
+            <description>Render it as either a badge or a color label</description>
+            <enumerationValues>
+                <enumerationValue key="badge">Badge</enumerationValue>
+                <enumerationValue key="label">Label</enumerationValue>
+                </enumerationValues>
         </property>
         <property key="labelAttribute" type="attribute" required="false">
             <caption>Label attribute</caption>
@@ -56,7 +56,7 @@
             </attributeTypes>
         </property>
         <property key="valueAttribute" type="attribute" required="false">
-            <caption>Data attribute</caption>
+            <caption>Value attribute</caption>
             <category>Data source</category>
             <description>The attribute that contains the badge value</description>
             <attributeTypes>
@@ -64,6 +64,15 @@
                 <attributeType name="Integer" />
                 <attributeType name="Decimal" />
                 <attributeType name="Long" />
+            </attributeTypes>
+        </property>
+        <property key="bootstrapStyleAttribute" type="attribute" required="false">
+            <caption>Bootstrap style attribute</caption>
+            <category>Data source</category>
+            <description>The attribute value should be: default, primary, info, warning, danger, success.</description>
+            <attributeTypes>
+                <attributeType name="Enum" />
+                <attributeType name="String" />
             </attributeTypes>
         </property>
         <property key="onClickEvent" type="enumeration" defaultValue="doNothing">

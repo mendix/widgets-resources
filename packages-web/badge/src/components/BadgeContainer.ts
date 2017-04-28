@@ -15,6 +15,7 @@ interface BadgeContainerProps extends WrapperProps {
     labelAttribute: string;
     label: string;
     bootstrapStyle: BootstrapStyle;
+    badgeType: "badge" | "label";
     badgeValue: string;
     microflow: string;
     onClickEvent: OnClickOptions;
@@ -50,6 +51,7 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
         }
 
         return createElement(Badge, {
+            badgeType: this.props.badgeType,
             bootstrapStyle: this.state.bootstrapStyle as BootstrapStyle,
             className: this.props.class,
             clickable: !!this.props.microflow || !!this.props.page,
@@ -81,6 +83,7 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
         if (mxObject) {
             return mxObject.get(attributeName) as string || defaultValue;
         }
+
         return defaultValue;
     }
 
@@ -119,7 +122,7 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
             errorMessage = "A 'Page' is required for 'Events' 'Show a page'";
         }
         if (errorMessage) {
-            errorMessage = `Error in badge configuration: ${errorMessage}`;
+            errorMessage = `Error in configuration: ${errorMessage}`;
         }
 
         return errorMessage;
@@ -159,7 +162,7 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
                 return styleObject;
             }, {});
         } catch (error) {
-            console.log("Failed to parse bootstrapStyle", style, error);
+            console.log("Failed to parse style", style, error);
         }
 
         return {};
