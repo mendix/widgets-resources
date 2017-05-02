@@ -80,10 +80,10 @@ module.exports = function (grunt) {
 
         clean: {
             build: [
-                "./dist/" + pkg.version + "/" + pkg.widgetName + "/*",
+                "./dist/" + pkg.version + "/" + pkg.name + "/*",
                 "./dist/tmp/**/*",
-                "./dist/MxTestProject/deployment/web/widgets/" + pkg.widgetName + "/*",
-                "./dist/MxTestProject/widgets/" + pkg.widgetName + ".mpk"
+                "./dist/MxTestProject/deployment/web/widgets/" + pkg.name + "/*",
+                "./dist/MxTestProject/widgets/" + pkg.name + ".mpk"
             ]
         },
 
