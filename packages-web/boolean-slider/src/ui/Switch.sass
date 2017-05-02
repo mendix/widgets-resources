@@ -1,6 +1,6 @@
+@import "./variables"
+
 $checkedColor: #4EC054
-$uncheckedColor: #F1F1F1
-$disabledCheckedColor: #F1F1F1
 $disabledUncheckedColor: #FFF
 
 .widget-switch
@@ -60,7 +60,7 @@ $disabledUncheckedColor: #FFF
                 width: 60%
 
         &.enabled
-            background: $uncheckedColor
+            background: $brand-default
             cursor: pointer
 
         &.no-switch
@@ -73,7 +73,7 @@ $disabledUncheckedColor: #FFF
         left: 50%
 
     &:checked + .widget-switch-btn
-        background: $disabledCheckedColor
+        background: $brand-default
         &:active
             box-shadow: none
             &:after
@@ -83,6 +83,16 @@ $disabledUncheckedColor: #FFF
     &.enabled
         &:checked + .widget-switch-btn
             background: $checkedColor
+            &.widget-switch-btn-primary
+                background: $brand-primary
+            &.widget-switch-btn-info
+                background: $brand-info
+            &.widget-switch-btn-success
+                background: $brand-success
+            &.widget-switch-btn-warning
+                background: $brand-warning
+            &.widget-switch-btn-danger
+                background: $brand-danger
 
 .form-group
     .control-label
