@@ -2,11 +2,13 @@ import { DOM, SFC, createElement } from "react";
 import * as classNames from "classnames";
 
 import { Alert, AlertProps } from "./Alert";
+import { BootstrapStyle } from "./SwitchContainer";
 
 import "../ui/Switch.sass";
 
 export interface SwitchProps {
     alertMessage?: string;
+    bootstrapStyle: BootstrapStyle;
     className?: string;
     isChecked: boolean;
     onClick: () => void;
@@ -16,22 +18,30 @@ export interface SwitchProps {
 
 export type SwitchStatus = "enabled" | "disabled" | "no-context";
 
-export const Switch: SFC<SwitchProps> = ({ alertMessage, className, isChecked, onClick, status, style }) =>
-    DOM.div({ className: classNames("widget-switch", className, { "has-error": !!alertMessage }), style },
+export const Switch: SFC<SwitchProps> = (props) =>
+    DOM.div(
+        {
+            className: classNames("widget-switch", props.className, { "has-error": !!props.alertMessage }),
+            style: props.style
+        },
         DOM.input({
-            checked: isChecked,
-            className: classNames("widget-switch-checkbox", { enabled: status === "enabled" }),
+            checked: props.isChecked,
+            className: classNames("widget-switch-checkbox", { enabled: props.status === "enabled" }),
             readOnly: true,
             type: "checkbox"
         }),
         DOM.div({
-            className: classNames("widget-switch-btn", {
-                "enabled": status === "enabled",
-                "no-switch": status === "no-context"
+            className: classNames(`widget-switch-btn widget-switch-btn-${props.bootstrapStyle}`, {
+                "enabled": props.status === "enabled",
+                "no-switch": props.status === "no-context"
             }),
-            onClick: status === "enabled" ? onClick : undefined
+            onClick: props.status === "enabled" ? props.onClick : undefined
         }),
-        createElement(Alert, { message: alertMessage } as AlertProps)
+        createElement(Alert, { message: props.alertMessage } as AlertProps)
     );
+
+Switch.defaultProps = {
+    bootstrapStyle: "primary"
+};
 
 Switch.displayName = "Switch";

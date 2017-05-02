@@ -28,6 +28,18 @@
             <category>Display</category>
             <description/>
         </property>
+        <property key="bootstrapStyle" type="enumeration" defaultValue="primary">
+            <caption>Bootstrap style</caption>
+            <category>Display</category>
+            <description>The color of the switch using bootstrap classes</description>
+            <enumerationValues>
+                <enumerationValue key="primary">Primary</enumerationValue>
+                <enumerationValue key="success">Success</enumerationValue>
+                <enumerationValue key="info">Info</enumerationValue>
+                <enumerationValue key="warning">Warning</enumerationValue>
+                <enumerationValue key="danger">Danger</enumerationValue>
+            </enumerationValues>
+        </property>
         <property key="labelWidth" type="integer" defaultValue="9">
             <caption>Label width (weight)</caption>
             <category>Display</category>
