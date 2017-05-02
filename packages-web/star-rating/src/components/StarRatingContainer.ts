@@ -5,11 +5,7 @@ import { StarRating } from "./StarRating";
 interface StarRatingContainerProps {
     // Properties from Mendix modeler
     rateAttribute: string;
-    campaignEntity: string;
-    rateEntity: string;
-    rateType: "average" | "rating";
-    onChangeMicroflow: string;
-    averageAttribute: string;
+    onCommitMicroflow: string;
     mxObject: mendix.lib.MxObject;
     readOnly: boolean;
 }
@@ -23,35 +19,35 @@ class StarRatingContainer extends Component<StarRatingContainerProps, { alertMes
 
         this.subscriptionHandles = [];
         this.ownerReference = "System.owner";
-        this.state = { alertMessage: this.validateProps(), initialRate: 0 };
+        this.state = { alertMessage: this.validateProps(props), initialRate: 0 };
         this.handleOnChange = this.handleOnChange.bind(this);
-        this.subscribe(this.props.mxObject);
+        this.resetSubscription(this.props.mxObject);
     }
 
     render() {
+        const ownerGuid = this.props.mxObject ? this.props.mxObject.get(this.ownerReference) as string : "";
         if (this.state.alertMessage) {
             return createElement(Alert, { message: this.state.alertMessage });
         } else {
             return createElement(StarRating, {
+                fractions: 1,
                 handleOnChange: this.handleOnChange,
                 initialRate: this.state.initialRate,
-                ownerGuid: this.props.mxObject
-                    ? this.props.mxObject.get(this.ownerReference) as string
-                    : undefined,
-                rateType: this.props.rateType,
-                readOnly: this.props.readOnly
+                ownerGuid,
+                readOnly: this.props.readOnly || !(ownerGuid === window.mx.session.getUserId())
             });
         }
     }
 
     componentWillReceiveProps(nextProps: StarRatingContainerProps) {
-        this.subscribe(nextProps.mxObject);
-        this.fetchData(nextProps.mxObject);
-    }
-
-     componentDidMount() {
-        if (!this.state.alertMessage) {
-            this.fetchData(this.props.mxObject);
+        if (nextProps.mxObject) {
+            const errorMessage = this.validateProps(nextProps);
+            if (!errorMessage) {
+                this.resetSubscription(nextProps.mxObject);
+                this.fetchData(nextProps.mxObject);
+            } else {
+                this.setState({ alertMessage: errorMessage });
+            }
         }
     }
 
@@ -60,36 +56,27 @@ class StarRatingContainer extends Component<StarRatingContainerProps, { alertMes
     }
 
     private handleOnChange(rate: number) {
-        const { mxObject, onChangeMicroflow, rateAttribute } = this.props;
+        const { mxObject, onCommitMicroflow, rateAttribute } = this.props;
         const context = new mendix.lib.MxContext();
         context.setContext(mxObject.getEntity(), mxObject.getGuid());
-        if (mxObject) {
+        if (mxObject && onCommitMicroflow) {
             mxObject.set(rateAttribute, rate);
-            if (onChangeMicroflow) {
-                window.mx.ui.action(onChangeMicroflow, {
-                    context,
-                    // tslint:disable-next-line:max-line-length
-                    error: error => window.mx.ui.error(`Error while executing microflow: ${onChangeMicroflow}: ${error.message}`),
-                    params: {
-                        applyto: "selection",
-                        guids: [ mxObject.getGuid() ]
-                    }
-                });
-            }
+            window.mx.ui.action(onCommitMicroflow, {
+                context,
+                // tslint:disable-next-line:max-line-length
+                error: error => window.mx.ui.error(`Error while executing microflow: ${onCommitMicroflow}: ${error.message}`),
+                params: {
+                    applyto: "selection",
+                    guids: [ mxObject.getGuid() ]
+                }
+            });
         }
     }
 
-    private validateProps(): string {
+    private validateProps(props: StarRatingContainerProps): string {
         const errorMessage: string[] = [];
-        const { campaignEntity, mxObject, rateEntity, rateType } = this.props;
-        if (mxObject) {
-            if ((rateType === "average") && mxObject.getEntity() !== campaignEntity.split("/")[1]) {
-                errorMessage.push(" - For rate type 'average', the contextObject should be campaign entity");
-            }
-            if ((rateType === "rating") && mxObject.getEntity() !== rateEntity) {
-                errorMessage.push(` - For rate type 'Rating', the contextObject be rate entity '${rateEntity}'`);
-            }
-            if (rateType === "rating" && !mxObject.isReference(this.ownerReference)) {
+        if (props.mxObject) {
+            if (!props.mxObject.isReference(this.ownerReference)) {
                 errorMessage.push(` - Context object has no User / Owner association to it`);
             }
             if (errorMessage.length) {
@@ -99,7 +86,7 @@ class StarRatingContainer extends Component<StarRatingContainerProps, { alertMes
         return errorMessage.join("\n");
     }
 
-    private subscribe(contextObject: mendix.lib.MxObject) {
+    private resetSubscription(contextObject: mendix.lib.MxObject) {
         this.unSubscribe();
 
         if (contextObject) {
@@ -107,14 +94,6 @@ class StarRatingContainer extends Component<StarRatingContainerProps, { alertMes
                 callback: () => this.fetchData(contextObject),
                 guid: contextObject.getGuid()
             }));
-
-            [ this.props.averageAttribute, this.props.rateAttribute ].forEach( attribute =>
-                this.subscriptionHandles.push( window.mx.data.subscribe({
-                    attr: attribute,
-                    callback: () => this.fetchData(contextObject),
-                    guid: contextObject.getGuid()
-                }))
-            );
         }
     }
 
@@ -125,9 +104,7 @@ class StarRatingContainer extends Component<StarRatingContainerProps, { alertMes
     private fetchData(contextObject: mendix.lib.MxObject) {
         this.setState({
             initialRate: contextObject
-                ? this.props.rateType === "average"
-                    ? contextObject.get(this.props.averageAttribute) as number
-                    : contextObject.get(this.props.rateAttribute) as number
+                ? contextObject.get(this.props.rateAttribute) as number
                 : 0
         });
     }

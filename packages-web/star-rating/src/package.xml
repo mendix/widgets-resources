@@ -3,6 +3,7 @@
     <clientModule name="StarRating" version="0.1.0" xmlns="http://www.mendix.com/clientModule/1.0/">
         <widgetFiles>
             <widgetFile path="StarRating.xml"/>
+            <widgetFile path="StarRatingView.xml"/>
         </widgetFiles>
         <files>
             <file path="com/mendix/widget/custom/StarRating"/>
