@@ -1,0 +1,70 @@
+{
+  "name": "badgebutton",
+  "widgetName": "BadgeButton",
+  "version": "1.0.0",
+  "description": "A special distinctive mark or token put on any display as a button",
+  "scripts": {
+    "pretest": "tsc",
+    "test": "karma start --single-run --codeCoverage && node tests/remap.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendixlabs/badge-button"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/mendixlabs/badge-button/issues"
+  },
+  "devDependencies": {
+    "@types/classnames": "0.0.32",
+    "@types/core-js": "0.9.36",
+    "@types/enzyme": "^2.7.9",
+    "@types/jasmine": "^2.5.47",
+    "@types/karma": "^0.13.35",
+    "@types/react": "^15.0.23",
+    "@types/react-dom": "^15.5.0",
+    "check-dependencies": "^1.0.1",
+    "copy-webpack-plugin": "^4.0.1",
+    "core-js": "^2.4.1",
+    "css-loader": "^0.28.0",
+    "enzyme": "^2.8.2",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "grunt": "1.0.1",
+    "grunt-check-dependencies": "^1.0.0",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-compress": "^1.4.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-newer": "^1.3.0",
+    "grunt-webpack": "^2.0.1",
+    "istanbul": "^0.4.3",
+    "istanbul-instrumenter-loader": "^2.0.0",
+    "jasmine": "^2.6.0",
+    "json-loader": "^0.5.4",
+    "karma": "^1.6.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-remap-istanbul": "^0.6.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^2.0.3",
+    "mendix-client": "https://github.com/FlockOfBirds/Mendix-client-typing/archive/7.1.0.tar.gz",
+    "react": "^15.5.2",
+    "react-addons-test-utils": "^15.4.2",
+    "react-dom": "^15.5.4",
+    "react-test-renderer": "^15.5.4",
+    "remap-istanbul": "^0.9.0",
+    "source-map-loader": "^0.2.1",
+    "style-loader": "^0.16.1",
+    "ts-loader": "^2.0.3",
+    "tslint": "^5.1.0",
+    "tslint-eslint-rules": "^4.0.0",
+    "typescript": "^2.2.2",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.5"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5"
+  }
+}
