@@ -12,13 +12,12 @@ interface ContainerProps {
 
 class StarRatingViewContainer extends Component<ContainerProps, { alertMessage?: string, initialRate: number }> {
     private subscriptionHandles: number[];
-    private ownerReference = "";
 
     constructor(props: ContainerProps) {
         super(props);
 
         this.subscriptionHandles = [];
-        this.state = { alertMessage: this.validateProps(), initialRate: 0 };
+        this.state = { initialRate: 0 };
         this.subscribe(this.props.mxObject);
     }
 
@@ -49,19 +48,6 @@ class StarRatingViewContainer extends Component<ContainerProps, { alertMessage?:
         this.unSubscribe();
     }
 
-    private validateProps(): string {
-        const errorMessage: string[] = [];
-        if (this.props.mxObject) {
-            if (this.props.mxObject.getEntity() !== this.props.campaignEntity.split("/")[1]) {
-                errorMessage.push(" - For rate type 'average', the contextObject should be campaign entity");
-            }
-            if (errorMessage.length) {
-                errorMessage.unshift("Configuration Error:");
-            }
-        }
-        return errorMessage.join("\n");
-    }
-
     private subscribe(contextObject: mendix.lib.MxObject) {
         this.unSubscribe();
 
@@ -71,9 +57,9 @@ class StarRatingViewContainer extends Component<ContainerProps, { alertMessage?:
                 guid: contextObject.getGuid()
             }));
             this.subscriptionHandles.push( window.mx.data.subscribe({
-                    attr: this.props.averageAttribute,
-                    callback: () => this.fetchData(contextObject),
-                    guid: contextObject.getGuid()
+                attr: this.props.averageAttribute,
+                callback: () => this.fetchData(contextObject),
+                guid: contextObject.getGuid()
             }));
         }
     }

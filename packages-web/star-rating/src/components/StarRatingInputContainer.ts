@@ -2,7 +2,7 @@ import { Component, createElement } from "react";
 import { Alert } from "./Alert";
 import { StarRating } from "./StarRating";
 
-interface StarRatingContainerProps {
+interface ContainerProps {
     // Properties from Mendix modeler
     rateAttribute: string;
     onCommitMicroflow: string;
@@ -10,11 +10,11 @@ interface StarRatingContainerProps {
     readOnly: boolean;
 }
 
-class StarRatingContainer extends Component<StarRatingContainerProps, { alertMessage?: string, initialRate: number }> {
+class StarRatingInputContainer extends Component<ContainerProps, { alertMessage?: string, initialRate: number }> {
     private subscriptionHandles: number[];
     private ownerReference = "";
 
-    constructor(props: StarRatingContainerProps) {
+    constructor(props: ContainerProps) {
         super(props);
 
         this.subscriptionHandles = [];
@@ -39,7 +39,7 @@ class StarRatingContainer extends Component<StarRatingContainerProps, { alertMes
         }
     }
 
-    componentWillReceiveProps(nextProps: StarRatingContainerProps) {
+    componentWillReceiveProps(nextProps: ContainerProps) {
         if (nextProps.mxObject) {
             const errorMessage = this.validateProps(nextProps);
             if (!errorMessage) {
@@ -73,7 +73,7 @@ class StarRatingContainer extends Component<StarRatingContainerProps, { alertMes
         }
     }
 
-    private validateProps(props: StarRatingContainerProps): string {
+    private validateProps(props: ContainerProps): string {
         const errorMessage: string[] = [];
         if (props.mxObject) {
             if (!props.mxObject.isReference(this.ownerReference)) {
@@ -110,4 +110,4 @@ class StarRatingContainer extends Component<StarRatingContainerProps, { alertMes
     }
 }
 
-export { StarRatingContainer as default, StarRatingContainerProps };
+export { StarRatingInputContainer as default, ContainerProps };
