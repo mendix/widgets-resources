@@ -80,8 +80,9 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
     }
 
     private getValue<T>(attributeName: string, defaultValue: T, mxObject?: mendix.lib.MxObject): string | T {
-        if (mxObject) {
-            return mxObject.get(attributeName) as string || defaultValue;
+        if (mxObject && attributeName) {
+            const value = mxObject.get(attributeName);
+            return value ? value.toString() : defaultValue;
         }
 
         return defaultValue;
