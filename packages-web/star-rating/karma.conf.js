@@ -38,7 +38,7 @@ module.exports = function(config) {
         },
         webpack: webpackConfig,
         webpackServer: { noInfo: true },
-        reporters: [ "progress", config.codeCoverage ? "coverage": "kjhtml" ],
+        reporters: [ "progress", config.codeCoverage ? "coverage" : "kjhtml" ],
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
@@ -53,5 +53,5 @@ module.exports = function(config) {
                 { type: "text" }
             ]
         }
-    })
+    });
 };
