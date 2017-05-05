@@ -6,7 +6,7 @@
             <widgetFile path="StarRatingView.xml"/>
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/custom/StarRating"/>
+            <file path="com/mendix/widget/custom/starrating"/>
         </files>
     </clientModule>
 </package>
