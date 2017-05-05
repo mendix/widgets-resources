@@ -11,7 +11,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
         filename: "src/com/mendix/widget/custom/StarRating/[name].js",
-        libraryTarget:  "umd"
+        libraryTarget: "umd"
     },
     resolve: {
         extensions: [ ".ts", ".js", ".jsx", ".json" ],
@@ -39,7 +39,7 @@ module.exports = {
         ], {
             copyUnmodified: true
         }),
-        new ExtractTextPlugin( {filename: "./src/com/mendix/widget/custom/StarRating/ui/StarRatingInput.css" }),
+        new ExtractTextPlugin( {filename: "./src/com/mendix/widget/custom/StarRating/ui/[name].css" }),
         new webpack.LoaderOptionsPlugin({
             debug: true
         })
