@@ -7,7 +7,7 @@
     "sourceMap": true,
     "module": "amd",
     "target": "es5",
-    "types": [ "mendix-client", "jasmine" ],
+    "types": [ "core-js", "mendix-client", "jasmine" ],
     "moduleResolution": "node",
     "declaration": false,
     "removeComments": true,
