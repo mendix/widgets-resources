@@ -29,7 +29,7 @@
                 <attributeType name="Long"/>
             </attributeTypes>
         </property>
-        <property key="onCommitMicroflow" type="microflow">
+        <property key="onCommitMicroflow" type="microflow" required="false">
             <caption>On commit microflow</caption>
             <category>Behavior</category>
             <description>Microflow to be executed when the rate is changed</description>

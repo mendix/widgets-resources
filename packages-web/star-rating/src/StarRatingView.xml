@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget id="com.mendix.widget.custom.starrating.StarRatingView" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../../xsd/widget.xsd">
     <name>Star rating view</name>
-    <description>This widget lets users rate an object from 1 to 5</description>
+    <description>This widget lets users view overall rating of an object from 1 to 5</description>
     <icon>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAANkE3LLa
         AgAAAkxJREFUeJyVkttLUwEcxz/n7OLm5tzcxHlhXjLDsUg0xYweeurF8M1kkaiJ
