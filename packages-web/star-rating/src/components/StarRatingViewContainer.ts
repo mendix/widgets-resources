@@ -1,8 +1,13 @@
 import { Component, createElement } from "react";
-import { Alert } from "./Alert";
 import { StarRating } from "./StarRating";
 
-interface ContainerProps {
+interface WrapperProps {
+    class?: string;
+    mxObject?: mendix.lib.MxObject;
+    style?: string;
+}
+
+export interface ContainerProps extends WrapperProps {
     mxObject: mendix.lib.MxObject;
     readOnly: boolean;
     // Properties from Mendix modeler
@@ -10,7 +15,11 @@ interface ContainerProps {
     averageAttribute: string;
 }
 
-class StarRatingViewContainer extends Component<ContainerProps, { alertMessage?: string, initialRate: number }> {
+interface ContainerState {
+    initialRate: number;
+}
+
+export default class StarRatingViewContainer extends Component<ContainerProps, ContainerState> {
     private subscriptionHandles: number[];
 
     constructor(props: ContainerProps) {
@@ -22,26 +31,20 @@ class StarRatingViewContainer extends Component<ContainerProps, { alertMessage?:
     }
 
     render() {
-        if (this.state.alertMessage) {
-            return createElement(Alert, { message: this.state.alertMessage });
-        } else {
-            return createElement(StarRating, {
-                fractions: 2,
-                initialRate: this.state.initialRate,
-                readOnly: true
-            });
-        }
+        return createElement(StarRating, {
+            fractions: 2,
+            initialRate: this.state.initialRate,
+            readOnly: true
+        });
     }
 
     componentWillReceiveProps(nextProps: ContainerProps) {
         this.subscribe(nextProps.mxObject);
-        this.fetchData(nextProps.mxObject);
+        this.updateRating(nextProps.mxObject);
     }
 
-     componentDidMount() {
-        if (!this.state.alertMessage) {
-            this.fetchData(this.props.mxObject);
-        }
+    componentDidMount() {
+        this.updateRating(this.props.mxObject);
     }
 
     componentWillUnmount() {
@@ -53,12 +56,7 @@ class StarRatingViewContainer extends Component<ContainerProps, { alertMessage?:
 
         if (contextObject) {
             this.subscriptionHandles.push(window.mx.data.subscribe({
-                callback: () => this.fetchData(contextObject),
-                guid: contextObject.getGuid()
-            }));
-            this.subscriptionHandles.push( window.mx.data.subscribe({
-                attr: this.props.averageAttribute,
-                callback: () => this.fetchData(contextObject),
+                callback: () => this.updateRating(contextObject),
                 guid: contextObject.getGuid()
             }));
         }
@@ -66,9 +64,10 @@ class StarRatingViewContainer extends Component<ContainerProps, { alertMessage?:
 
     private unSubscribe() {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
+        this.subscriptionHandles = [];
     }
 
-    private fetchData(contextObject: mendix.lib.MxObject) {
+    private updateRating(contextObject: mendix.lib.MxObject) {
         this.setState({
             initialRate: contextObject
                 ? contextObject.get(this.props.averageAttribute) as number
@@ -76,5 +75,3 @@ class StarRatingViewContainer extends Component<ContainerProps, { alertMessage?:
         });
     }
 }
-
-export { StarRatingViewContainer as default, ContainerProps };

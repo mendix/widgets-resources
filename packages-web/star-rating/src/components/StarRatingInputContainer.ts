@@ -2,15 +2,26 @@ import { Component, createElement } from "react";
 import { Alert } from "./Alert";
 import { StarRating } from "./StarRating";
 
-interface ContainerProps {
+interface WrapperProps {
+    class?: string;
+    mxObject?: mendix.lib.MxObject;
+    style?: string;
+}
+
+export interface ContainerProps extends WrapperProps {
+    mxObject: mendix.lib.MxObject;
+    readOnly: boolean;
     // Properties from Mendix modeler
     rateAttribute: string;
     onCommitMicroflow: string;
-    mxObject: mendix.lib.MxObject;
-    readOnly: boolean;
 }
 
-class StarRatingInputContainer extends Component<ContainerProps, { alertMessage?: string, initialRate: number }> {
+interface ContainerState {
+    alertMessage?: string;
+    initialRate: number;
+}
+
+export default class StarRatingInputContainer extends Component<ContainerProps, ContainerState> {
     private subscriptionHandles: number[];
     private ownerReference = "";
 
@@ -19,32 +30,36 @@ class StarRatingInputContainer extends Component<ContainerProps, { alertMessage?
 
         this.subscriptionHandles = [];
         this.ownerReference = "System.owner";
-        this.state = { alertMessage: this.validateProps(props), initialRate: 0 };
+        this.state = {
+            alertMessage: this.validateProps(props),
+            initialRate: 0
+        };
         this.handleOnChange = this.handleOnChange.bind(this);
         this.resetSubscription(this.props.mxObject);
     }
 
     render() {
-        const ownerGuid = this.props.mxObject ? this.props.mxObject.get(this.ownerReference) as string : "";
-        if (this.state.alertMessage) {
-            return createElement(Alert, { message: this.state.alertMessage });
-        } else {
+        if (!this.state.alertMessage) {
+            const ownerGuid = this.props.mxObject ? this.props.mxObject.get(this.ownerReference) as string : "";
             return createElement(StarRating, {
+                className: this.props.class,
                 fractions: 1,
                 handleOnChange: this.handleOnChange,
                 initialRate: this.state.initialRate,
-                ownerGuid,
-                readOnly: this.props.readOnly || !(ownerGuid === window.mx.session.getUserId())
+                readOnly: this.props.readOnly || !(ownerGuid === window.mx.session.getUserId()),
+                style: StarRatingInputContainer.parseStyle(this.props.style)
             });
+        } else {
+            return createElement(Alert, { message: this.state.alertMessage });
         }
     }
 
     componentWillReceiveProps(nextProps: ContainerProps) {
+        this.resetSubscription(nextProps.mxObject);
         if (nextProps.mxObject) {
             const errorMessage = this.validateProps(nextProps);
             if (!errorMessage) {
-                this.resetSubscription(nextProps.mxObject);
-                this.fetchData(nextProps.mxObject);
+                this.updateRating(nextProps.mxObject);
             } else {
                 this.setState({ alertMessage: errorMessage });
             }
@@ -57,33 +72,26 @@ class StarRatingInputContainer extends Component<ContainerProps, { alertMessage?
 
     private handleOnChange(rate: number) {
         const { mxObject, onCommitMicroflow, rateAttribute } = this.props;
-        const context = new mendix.lib.MxContext();
-        context.setContext(mxObject.getEntity(), mxObject.getGuid());
-        if (mxObject && onCommitMicroflow) {
+        if (mxObject) {
             mxObject.set(rateAttribute, rate);
-            window.mx.ui.action(onCommitMicroflow, {
-                context,
-                // tslint:disable-next-line:max-line-length
-                error: error => window.mx.ui.error(`Error while executing microflow: ${onCommitMicroflow}: ${error.message}`),
-                params: {
-                    applyto: "selection",
-                    guids: [ mxObject.getGuid() ]
-                }
-            });
+            if (onCommitMicroflow) {
+                window.mx.ui.action(onCommitMicroflow, {
+                    error: error =>
+                        window.mx.ui.error(`Error while executing microflow: ${onCommitMicroflow}: ${error.message}`),
+                    params: {
+                        applyto: "selection",
+                        guids: [ mxObject.getGuid() ]
+                    }
+                });
+            }
         }
     }
 
     private validateProps(props: ContainerProps): string {
-        const errorMessage: string[] = [];
-        if (props.mxObject) {
-            if (!props.mxObject.isReference(this.ownerReference)) {
-                errorMessage.push(` - Context object has no User / Owner association to it`);
-            }
-            if (errorMessage.length) {
-                errorMessage.unshift("Configuration Error: \n");
-            }
+        if (props.mxObject && !props.mxObject.isReference(this.ownerReference)) {
+            return `Configuration Error: Context object has no User / Owner association to it`;
         }
-        return errorMessage.join("\n");
+        return "";
     }
 
     private resetSubscription(contextObject: mendix.lib.MxObject) {
@@ -91,7 +99,7 @@ class StarRatingInputContainer extends Component<ContainerProps, { alertMessage?
 
         if (contextObject) {
             this.subscriptionHandles.push(window.mx.data.subscribe({
-                callback: () => this.fetchData(contextObject),
+                callback: () => this.updateRating(contextObject),
                 guid: contextObject.getGuid()
             }));
         }
@@ -99,15 +107,31 @@ class StarRatingInputContainer extends Component<ContainerProps, { alertMessage?
 
     private unSubscribe() {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
+        this.subscriptionHandles = [];
     }
 
-    private fetchData(contextObject: mendix.lib.MxObject) {
+    private updateRating(contextObject: mendix.lib.MxObject) {
         this.setState({
             initialRate: contextObject
                 ? contextObject.get(this.props.rateAttribute) as number
                 : 0
         });
     }
-}
 
-export { StarRatingInputContainer as default, ContainerProps };
+    private static parseStyle(style = ""): { [key: string]: string } {
+        try {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            console.log("Failed to parse style", style, error);
+        }
+
+        return {};
+    }
+}

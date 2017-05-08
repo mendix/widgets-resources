@@ -5,11 +5,12 @@ import * as Rating from "react-rating";
 import "../ui/StarRating.css";
 
 export interface StarRatingProps {
+    className?: string;
     fractions: number;
     initialRate: number;
     handleOnChange?: (rate: number) => void;
-    ownerGuid?: string;
     readOnly: boolean;
+    style?: object;
 }
 
 export class StarRating extends Component<StarRatingProps, {}> {
@@ -26,7 +27,7 @@ export class StarRating extends Component<StarRatingProps, {}> {
     }
 
     render() {
-        return DOM.div({ className: "widget-star-rating" },
+        return DOM.div({ className: `widget-star-rating ${this.props.className}`, style: this.props.style },
             createElement(Rating, {
                 empty: "glyphicon glyphicon-star-empty widget-star-rating-empty widget-star-rating-font",
                 fractions: this.props.fractions,
@@ -38,7 +39,8 @@ export class StarRating extends Component<StarRatingProps, {}> {
                 start: this.start,
                 step: this.step,
                 stop: this.stop
-            }));
+            })
+        );
     }
 
     private getRate(props: StarRatingProps) {

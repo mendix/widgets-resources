@@ -15,7 +15,6 @@
     "no-conditional-assignment": true,
     "no-console": [ true ],
     "no-debugger": true,
-    "no-default-export": true,
     "no-duplicate-variable": true,
     "no-empty": true,
     "no-eval": true,

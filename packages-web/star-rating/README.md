@@ -8,7 +8,7 @@ This widget lets users rate an object with stars from 1 to 5.
 * Execute a microflow when the rate is changed
 
 ## Dependencies
-Mendix 6.
+Mendix 7.1
 
 ## Demo project
 https://rating100.mxapps.io
