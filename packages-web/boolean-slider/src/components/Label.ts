@@ -4,34 +4,26 @@ import * as classNames from "classnames";
 interface LabelProps {
     className?: string;
     label: string;
-    orientation?: LabelOrientation;
     style?: object;
     weight: number;
 }
 
-type LabelOrientation = "horizontal" | "vertical";
-
-const Label: SFC<LabelProps> = ({ children, className, label, orientation, style, weight }) =>
-    DOM.div({ className: "form-horizontal" },
-        DOM.div({ className: classNames("form-group", className), style },
-            DOM.label({
-                className: classNames("control-label", {
-                    [`col-sm-${weight} col-xs-${weight}`]: orientation === "horizontal"
-                })
-            }, label),
+const Label: SFC<LabelProps> = ({ children, className, label, style, weight }) =>
+    DOM.div({ className: classNames("form-horizontal", className), style },
+        DOM.div({ className: "form-group" },
+            DOM.div({ className: `col-sm-${weight} col-xs-${weight}` },
+                DOM.label({ className: "control-label" }, label)
+            ),
             DOM.div({
-                className: classNames({
-                    [`col-sm-${12 - weight} col-xs-${12 - weight}`]: orientation === "horizontal"
-                })
+                className: `col-sm-${12 - weight} col-xs-${12 - weight}`
             }, children)
         )
     );
 
 Label.defaultProps = {
-    orientation: "horizontal",
     weight: 6
 };
 
 Label.displayName = "Label";
 
-export { Label, LabelProps, LabelOrientation };
+export { Label, LabelProps };

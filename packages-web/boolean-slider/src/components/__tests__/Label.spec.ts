@@ -11,23 +11,29 @@ describe("Label", () => {
         const labelComponent = renderLabel({ label });
 
         expect(labelComponent).toBeElement(
-            DOM.div({ className: "form-group" },
-                DOM.label({ className: `control-label col-sm-6 col-xs-6` }, label),
-                DOM.div({ className: `col-sm-6` })
+            DOM.div({ className: "form-horizontal" },
+                DOM.div({ className: "form-group" },
+                    DOM.div({ className: "col-sm-6 col-xs-6" },
+                        DOM.label({ className: "control-label" }, label)
+                    ),
+                    DOM.div({ className: `col-sm-6` })
+                )
             )
         );
     });
 
     it("renders a label with the specified weight class", () => {
-        const alert = renderLabel({ label, weight: 3 });
+        const labelComponent = renderLabel({ label, weight: 3 });
+        const Label = labelComponent.childAt(0).childAt(0);
 
-        expect(alert.childAt(0)).toHaveClass("col-sm-3");
+        expect(Label).toHaveClass("col-sm-3");
     });
 
     it("renders the labeled element's wrapper with the calculated weight class", () => {
         const weight = 3;
-        const alert = renderLabel({ label, weight });
+        const labelComponent = renderLabel({ label, weight });
+        const childrenWrapper = labelComponent.childAt(0).childAt(1);
 
-        expect(alert.childAt(1)).toHaveClass(`col-sm-${12 - weight}`);
+        expect(childrenWrapper).toHaveClass(`col-sm-${12 - weight}`);
     });
 });

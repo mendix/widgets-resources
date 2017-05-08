@@ -3,9 +3,6 @@
 $checkedColor: #4EC054
 $disabledUncheckedColor: #FFF
 
-.widget-switch
-    float: right
-
 .widget-switch-checkbox
     display: none
     // add default box-sizing for this scope
@@ -94,15 +91,30 @@ $disabledUncheckedColor: #FFF
             &.widget-switch-btn-danger
                 background: $brand-danger
 
+.widget-switch
+    float: left
+
+    @media (min-width: 320px) and (max-width: 736px)
+        float: right
+    @media (min-width: 768px) and (max-width: 1024px)
+        float: right
+
 .form-group
+    .widget-switch
+        float: left
     .control-label
+        float: right
         padding-top: 8px
         padding-bottom: 8px
 
-@media (min-width: 768px)
     .widget-switch
-        float: left
+        @media (min-width: 320px) and (max-width: 736px)
+            float: right
+        @media (min-width: 768px) and (max-width: 1024px)
+            float: right
 
-    .form-group
-        .widget-switch
+    .control-label
+        @media (min-width: 320px) and (max-width: 736px)
+            float: left
+        @media (min-width: 768px) and (max-width: 1024px)
             float: left
