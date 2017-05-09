@@ -2,7 +2,7 @@
   "name": "badge",
   "widgetName": "Badge",
   "version": "1.1.0",
-  "description": "Show a numerical indicator of how many items are associated with a link",
+  "description": "Shows a value as a badge or a color label",
   "scripts": {
     "pretest": "tsc",
     "test": "karma start --single-run --codeCoverage && node tests/remap.js"
