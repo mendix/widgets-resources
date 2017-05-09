@@ -2,7 +2,6 @@ import { ShallowWrapper, shallow } from "enzyme";
 import { DOM, createElement } from "react";
 
 import { Switch, SwitchProps } from "../Switch";
-import { Alert } from "../Alert";
 
 describe("Switch", () => {
     let switchWrapper: ShallowWrapper<SwitchProps, any>;
@@ -39,8 +38,7 @@ describe("Switch", () => {
                         onClick: jasmine.any(Function) as any
                     },
                     DOM.small({ className: "widget-switch-btn right" })
-                ),
-                createElement(Alert)
+                )
             )
         );
     });
@@ -136,8 +134,7 @@ describe("Switch", () => {
                     DOM.div({
                         className: "widget-switch-btn enabled",
                         onClick: jasmine.any(Function) as any
-                    }),
-                    createElement(Alert as any, { message: props.alertMessage })
+                    })
                 )
             );
         });
