@@ -34,7 +34,6 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
         this.subscriptionHandles = [];
         this.state = this.updateState(props.mxObject);
         this.handleToggle = this.handleToggle.bind(this);
-        this.handleValidations = this.handleValidations.bind(this);
         this.subscriptionCallback = this.subscriptionCallback.bind(this);
 
     }
@@ -123,11 +122,6 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
 
     private subscriptionCallback() {
         this.setState(this.updateState());
-    }
-
-    private handleValidations(validations: mendix.lib.ObjectValidation[]) {
-        const validationMessage = validations[0].getErrorReason(this.props.booleanAttribute);
-        if (validationMessage) this.setState({ alertMessage: validationMessage });
     }
 
     private executeAction(actionname: string, guid: string) {

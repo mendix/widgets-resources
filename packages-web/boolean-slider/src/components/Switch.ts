@@ -1,7 +1,6 @@
-import { DOM, SFC, createElement } from "react";
+import { DOM, SFC } from "react";
 import * as classNames from "classnames";
 
-import { Alert, AlertProps } from "./Alert";
 import { BootstrapStyle } from "./SwitchContainer";
 
 import "../ui/Switch.sass";
@@ -46,8 +45,7 @@ export const Switch: SFC<SwitchProps> = (props) =>
                     right: props.isChecked
                 })
             })
-        ),
-        createElement(Alert, { message: props.alertMessage } as AlertProps)
+        )
     );
 
 Switch.defaultProps = {
