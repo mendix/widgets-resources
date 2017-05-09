@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget id="com.mendix.widget.custom.badge.Badge" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
     <name>Badge</name>
-    <description>Badges are numerical indicators of how many items are associated with a link</description>
+    <description>Shows a value as a badge or a color label</description>
     <icon>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAASxJREFUKBWVUjFOxDAQ3LU3l0C4q2kRICFqmuMhUPMhPkBBeeILlAiJ5iRoQEh0FDzgIAh0WZvZGCMuBQpjWbtZz0x24zBNT9cOpvvn4436OGhLQ+C80OtbczG/eTgRqeLh1s7m0ePLO0V2FLEYy6KBsS2zmMGBaQ+au9v7M4nt51iV2YtRftMSnVGKcLDY4duthca0QhRixOF6iRSIYDPYFv+C6xxDFA+WBqJqZNlweO/IFN1r2fGPgXW6MnOvkMdx0Gg2ELgVPg3ZHyGPY3EV6VkUPiUG8UWfkOi5m/4X0aWdaxqhLD1JdwuomU9WGSfn2cE6wRytSwUhVSqKEdWV3f0w2DuaD7ChFX2+nl9dbs+KerIb22F/IovQslk8mdbMbE+wa+x/NQH+4gsBPW0QwdZQLAAAAABJRU5ErkJggg==
     </icon>
