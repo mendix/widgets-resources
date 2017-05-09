@@ -30,18 +30,28 @@ export const Switch: SFC<SwitchProps> = (props) =>
             readOnly: true,
             type: "checkbox"
         }),
-        DOM.div({
-            className: classNames(`widget-switch-btn widget-switch-btn-${props.bootstrapStyle}`, {
-                "enabled": props.status === "enabled",
-                "no-switch": props.status === "no-context"
-            }),
-            onClick: props.status === "enabled" ? props.onClick : undefined
-        }),
+        DOM.div(
+            {
+                className: classNames(`widget-switch-btn-wrapper widget-switch-btn-wrapper-${props.bootstrapStyle}`, {
+                    "checked": props.isChecked,
+                    "disabled": props.status === "disabled",
+                    "no-switch": props.status === "no-context",
+                    "un-checked": !props.isChecked
+                }),
+                onClick: props.status === "enabled" ? props.onClick : undefined
+            },
+            DOM.small({
+                className: classNames("widget-switch-btn", {
+                    left: !props.isChecked,
+                    right: props.isChecked
+                })
+            })
+        ),
         createElement(Alert, { message: props.alertMessage } as AlertProps)
     );
 
 Switch.defaultProps = {
-    bootstrapStyle: "primary"
+    bootstrapStyle: "success"
 };
 
 Switch.displayName = "Switch";

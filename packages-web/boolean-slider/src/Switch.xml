@@ -28,7 +28,7 @@
             <category>Display</category>
             <description/>
         </property>
-        <property key="bootstrapStyle" type="enumeration" defaultValue="primary">
+        <property key="bootstrapStyle" type="enumeration" defaultValue="success">
             <caption>Bootstrap style</caption>
             <category>Display</category>
             <description>The color of the switch using bootstrap classes</description>

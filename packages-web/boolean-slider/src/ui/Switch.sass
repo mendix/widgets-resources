@@ -1,96 +1,5 @@
 @import "./variables"
 
-$checkedColor: #4EC054
-$disabledUncheckedColor: #FFF
-
-.widget-switch-checkbox
-    display: none
-    // add default box-sizing for this scope
-    &,
-    &:after,
-    &:before,
-    & *,
-    & *:after,
-    & *:before,
-    & .widget-switch-btn
-        box-sizing: border-box
-        &::selection
-            background: none
-
-    + .widget-switch-btn
-        background: $disabledUncheckedColor
-        border-radius: 2em
-        padding: 2px
-        transition: all .4s ease
-        border: 1px solid #e8eae9
-        outline: 0
-        display: block
-        width: 5em
-        height: 2.6em
-        position: relative
-        cursor: default
-        user-select: none
-        &:after,
-        &:before
-            position: relative
-            display: block
-            content: ""
-            width: 50%
-            height: 100%
-
-        &:after
-            left: 0
-            border-radius: 2em
-            background: #fbfbfb
-            transition: left .3s cubic-bezier(0.175, 0.885, 0.320, 1.275), padding .3s ease, margin .3s ease
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 4px 0 rgba(0, 0, 0, .08)
-
-        &:hover:after
-            will-change: padding
-
-        &:before
-            display: none
-
-        &:active
-            box-shadow: inset 0 0 0 2em #e8eae9
-            &:after
-                width: 60%
-
-        &.enabled
-            background: $brand-default
-            cursor: pointer
-
-        &.no-switch
-            &:after
-                display: none
-            &:active
-                box-shadow: none
-
-    &:checked + .widget-switch-btn:after
-        left: 50%
-
-    &:checked + .widget-switch-btn
-        background: $brand-default
-        &:active
-            box-shadow: none
-            &:after
-                left: 40%
-                width: 60%
-
-    &.enabled
-        &:checked + .widget-switch-btn
-            background: $checkedColor
-            &.widget-switch-btn-primary
-                background: $brand-primary
-            &.widget-switch-btn-info
-                background: $brand-info
-            &.widget-switch-btn-success
-                background: $brand-success
-            &.widget-switch-btn-warning
-                background: $brand-warning
-            &.widget-switch-btn-danger
-                background: $brand-danger
-
 .widget-switch
     float: left
 
@@ -98,6 +7,119 @@ $disabledUncheckedColor: #FFF
         float: right
     @media (min-width: 768px) and (max-width: 1024px)
         float: right
+
+    .widget-switch-checkbox
+        display: none
+
+    .widget-switch-btn-wrapper
+        background-color: #fff
+        border: 1px solid #dfdfdf
+        border-radius: 20px
+        cursor: pointer
+        display: inline-block
+        height: 30px
+        position: relative
+        vertical-align: middle
+        width: 50px
+
+        -moz-user-select: none
+        -webkit-user-select: none
+        -ms-user-select: none
+        user-select: none
+
+        -webkit-box-sizing: content-box
+        -moz-box-sizing: content-box
+        box-sizing: content-box
+
+        -webkit-background-clip: content-box
+        background-clip: content-box
+
+        &.checked
+            transition: border 0.4s, box-shadow 0.4s, background-color 1.2s
+
+            &.widget-switch-btn-wrapper-default
+                background-color: $brand-default
+                border-color: $brand-default
+                box-shadow: $brand-default 0 0 0 16px inset
+
+            &.widget-switch-btn-wrapper-success
+                background-color: $brand-success
+                border-color: $brand-success
+                box-shadow: $brand-success 0 0 0 16px inset
+
+            &.widget-switch-btn-wrapper-info
+                background-color: $brand-info
+                border-color: $brand-info
+                box-shadow: $brand-info 0 0 0 16px inset
+
+            &.widget-switch-btn-wrapper-primary
+                background-color: $brand-primary
+                border-color: $brand-primary
+                box-shadow: $brand-primary 0 0 0 16px inset
+
+            &.widget-switch-btn-wrapper-warning
+                background-color: $brand-warning
+                border-color: $brand-warning
+                box-shadow: $brand-warning 0 0 0 16px inset
+
+            &.widget-switch-btn-wrapper-danger
+                background-color: $brand-danger
+                border-color: $brand-danger
+                box-shadow: $brand-danger 0 0 0 16px inset
+
+        &.un-checked
+            border-color: rgb(223, 223, 223)
+            box-shadow: rgb(223, 223, 223) 0 0 0 0 inset
+            transition: border 0.4s, box-shadow 0.4s
+
+        .widget-switch-btn
+            background: #fff
+            border-radius: 100%
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4)
+            height: 30px
+            position: absolute
+            top: 0
+            width: 30px
+
+            &.left
+                left: 0
+                transition: background-color 0.4s, left 0.2s
+
+                &:active
+                    width: 70%
+                    border-radius: 45%
+
+            &.right
+                left: 20px
+                transition: background-color 0.4s, left 0.2s
+                background-color: rgb(255, 255, 255)
+
+                &:active
+                    left: 30%
+                    transition: left 0s
+                    width: 70%
+                    border-radius: 45%
+
+        &.no-switch
+            .widget-switch-btn
+                display: none
+                &:active
+                    box-shadow: none
+
+        &.disabled
+            opacity: 0.5
+            cursor: default
+
+            .left
+                &:active
+                    width: 30px
+                    border-radius: 50%
+
+            .right
+                &:active
+                    width: 30px
+                    left: 20px
+                    border-radius: 50%
 
 .form-group
     .widget-switch
