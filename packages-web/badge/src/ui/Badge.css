@@ -1,12 +1,7 @@
-.widget-badge {
-    display: inline-block;
-}
-
-.widget-badge-text {
-    white-space: nowrap;
-    padding-right: 5px;
-}
-
-.widget-badge-link {
+.widget-badge-clickable {
     cursor: pointer;
+}
+
+.widget-badge-wrapper {
+    display: inline-block;
 }
