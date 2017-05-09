@@ -5,13 +5,15 @@ import { Switch, SwitchProps } from "../Switch";
 import { Alert } from "../Alert";
 
 describe("Switch", () => {
-    let slider: ShallowWrapper<SwitchProps, any>;
+    let switchWrapper: ShallowWrapper<SwitchProps, any>;
     let checkbox: ShallowWrapper<any, any>;
-    let label: ShallowWrapper<any, any>;
+    let switchButtonWrapper: ShallowWrapper<any, any>;
+    let switchButton: ShallowWrapper<any, any>;
     const createAndFindElements = (props: SwitchProps) => {
-        slider = shallow(createElement(Switch, props));
-        checkbox = slider.find(".widget-switch-checkbox");
-        label = slider.find(".widget-switch-btn");
+        switchWrapper = shallow(createElement(Switch, props));
+        checkbox = switchWrapper.find(".widget-switch-checkbox");
+        switchButtonWrapper = switchWrapper.find(".widget-switch-btn-wrapper");
+        switchButton = switchWrapper.find(".widget-switch-btn");
     };
     const createProps = (props: Partial<SwitchProps>): SwitchProps => {
         props.onClick = jasmine.createSpy("onClick");
@@ -23,7 +25,7 @@ describe("Switch", () => {
     it("should render the structure correctly", () => {
         createAndFindElements(createProps({}));
 
-        expect(slider).toBeElement(
+        expect(switchWrapper).toBeElement(
             DOM.div({ className: "widget-switch" },
                 DOM.input({
                     checked: true,
@@ -31,10 +33,13 @@ describe("Switch", () => {
                     readOnly: true,
                     type: "checkbox"
                 }),
-                DOM.div({
-                    className: "widget-switch-btn enabled",
-                    onClick: jasmine.any(Function) as any
-                }),
+                DOM.div(
+                    {
+                        className: "widget-switch-btn-wrapper enabled",
+                        onClick: jasmine.any(Function) as any
+                    },
+                    DOM.small({ className: "widget-switch-btn right" })
+                ),
                 createElement(Alert)
             )
         );
@@ -57,36 +62,36 @@ describe("Switch", () => {
     });
 
     describe("that is enabled", () => {
-        it("should have the enabled class", () => {
+        it("should not have the disabled class", () => {
             createAndFindElements(createProps({}));
 
             expect(checkbox.hasClass("enabled")).toBe(true);
-            expect(label.hasClass("enabled")).toBe(true);
+            expect(switchButtonWrapper.hasClass("enabled")).toBe(false);
         });
 
         it("should handle click events", () => {
             const props = createProps({});
             createAndFindElements(props);
 
-            label.simulate("click");
+            switchButtonWrapper.simulate("click");
 
             expect(props.onClick).toHaveBeenCalled();
         });
     });
 
     describe("that is disabled", () => {
-        it("should not have the enabled class", () => {
+        it("should have the disabled class", () => {
             createAndFindElements(createProps({ status: "disabled" }));
 
             expect(checkbox.hasClass("enabled")).toBe(false);
-            expect(label.hasClass("enabled")).toBe(false);
+            expect(switchButtonWrapper.hasClass("disabled")).toBe(true);
         });
 
         it("should not handle a click event", () => {
             const props = createProps({ status: "disabled" });
             createAndFindElements(props);
 
-            label.simulate("click");
+            switchButton.simulate("click");
 
             expect(props.onClick).not.toHaveBeenCalled();
         });
@@ -99,14 +104,14 @@ describe("Switch", () => {
                 status: "no-context"
             }));
 
-            expect(label).toHaveClass("no-switch");
+            expect(switchButtonWrapper).toHaveClass("no-switch");
         });
 
         it("should not handle a click event", () => {
             const props = createProps({ status: "no-context" });
             createAndFindElements(props);
 
-            label.simulate("click");
+            switchButton.simulate("click");
 
             expect(props.onClick).not.toHaveBeenCalled();
         });
@@ -120,7 +125,7 @@ describe("Switch", () => {
             });
             createAndFindElements(props);
 
-            expect(slider).toBeElement(
+            expect(switchWrapper).toBeElement(
                 DOM.div({ className: "widget-switch has-error" },
                     DOM.input({
                         checked: false,
