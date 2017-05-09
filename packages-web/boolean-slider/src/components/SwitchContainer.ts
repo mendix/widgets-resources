@@ -148,4 +148,4 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
     }
 }
 
-export { BootstrapStyle };
+export { BootstrapStyle, SwitchContainerProps };

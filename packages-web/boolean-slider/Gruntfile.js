@@ -1,12 +1,18 @@
 "use strict";
 const webpack = require("webpack");
 const webpackConfig = require("./webpack.config");
-const webpackConfigRelease = {};
-const plugins = webpackConfig.plugins.slice(0);
-plugins.push(new webpack.optimize.UglifyJsPlugin());
-Object.assign(webpackConfigRelease, webpackConfig, {
+const webpackConfigRelease = [ {}, {} ];
+const widgetPlugins = webpackConfig[0].plugins.slice();
+widgetPlugins.push(new webpack.optimize.UglifyJsPlugin());
+Object.assign(webpackConfigRelease[0], webpackConfig[0], {
     devtool: false,
-    plugins: plugins
+    plugins: widgetPlugins
+});
+const previewPlugins = webpackConfig[1].plugins.slice();
+previewPlugins.push(new webpack.optimize.UglifyJsPlugin());
+Object.assign(webpackConfigRelease[1], webpackConfig[1], {
+    devtool: false,
+    plugins: previewPlugins
 });
 
 module.exports = function(grunt) {
@@ -15,16 +21,16 @@ module.exports = function(grunt) {
 
         watch: {
             updateWidgetFiles: {
-                "files": [ "./dist/tmp/src/**/*" ],
-                "tasks": [ "webpack:develop", "compress:dist", "copy:distDeployment", "copy:mpk" ],
+                files: [ "./dist/tmp/src/**/*" ],
+                tasks: [ "webpack:develop", "compress:dist", "copy:distDeployment", "copy:mpk" ],
                 options: {
                     debounceDelay: 250,
                     livereload: true
                 }
             },
             sourceFiles: {
-                "files": [ "./src/**/*" ],
-                "tasks": [ "copy:source" ]
+                files: [ "./src/**/*" ],
+                tasks: [ "copy:source" ]
             }
         },
 
@@ -65,7 +71,7 @@ module.exports = function(grunt) {
                 files: [ {
                     dest: "./dist/tmp/src",
                     cwd: "./src/",
-                    src: [ "**/*", "!**/*.ts", "!**/*.css", "!**/*.sass" ],
+                    src: [ "**/*", "!**/*.ts", "!**/*.css" ],
                     expand: true
                 } ]
             }
@@ -86,21 +92,21 @@ module.exports = function(grunt) {
         },
 
         checkDependencies: {
-            this: {},
+            this: {}
         }
     });
 
-    grunt.loadNpmTasks("grunt-contrib-compress");
-    grunt.loadNpmTasks("grunt-contrib-clean");
-    grunt.loadNpmTasks("grunt-contrib-watch");
-    grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-check-dependencies");
+    grunt.loadNpmTasks("grunt-contrib-clean");
+    grunt.loadNpmTasks("grunt-contrib-compress");
+    grunt.loadNpmTasks("grunt-contrib-copy");
+    grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-webpack");
 
     grunt.registerTask("default", [ "clean build", "watch" ]);
     grunt.registerTask(
         "clean build",
-        "Compiles all the assets and copies the files to the build directory.",
+        "Compiles all the assets and copies the files to the dist directory.",
         [ "checkDependencies", "clean:build", "webpack:develop", "compress:dist", "copy:mpk" ]
     );
     grunt.registerTask(
