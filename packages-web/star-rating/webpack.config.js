@@ -5,12 +5,11 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
-        StarRatingInput: "./src/components/StarRatingInputContainer.ts",
-        StarRatingView: "./src/components/StarRatingViewContainer.ts"
+        StarRating: "./src/components/StarRatingContainer.ts"
     },
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
-        filename: "src/com/mendix/widget/custom/StarRating/[name].js",
+        filename: "src/com/mendix/widget/custom/starrating/StarRating.js",
         libraryTarget: "umd"
     },
     resolve: {
@@ -39,7 +38,7 @@ module.exports = {
         ], {
             copyUnmodified: true
         }),
-        new ExtractTextPlugin( {filename: "./src/com/mendix/widget/custom/StarRating/ui/[name].css" }),
+        new ExtractTextPlugin( {filename: "./src/com/mendix/widget/custom/starrating/ui/StarRating.css" }),
         new webpack.LoaderOptionsPlugin({
             debug: true
         })
