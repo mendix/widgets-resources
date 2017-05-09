@@ -25,6 +25,7 @@
     "@types/react": "^15.0.22",
     "@types/react-dom": "^15.5.0",
     "check-dependencies": "^1.0.1",
+    "clean-webpack-plugin": "^0.1.16",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
     "enzyme": "^2.8.2",
