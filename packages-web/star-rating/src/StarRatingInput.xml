@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.starrating.StarRatingInput" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../../xsd/widget.xsd">
+<widget id="com.mendix.widget.custom.starrating.StarRatingInput" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../../xsd/widget.xsd">
     <name>Star rating input</name>
     <description>This widget lets users rate an object from 1 to 5</description>
     <icon>
@@ -20,14 +20,19 @@
     </icon>
     <properties>
         <property key="rateAttribute" type="attribute">
-            <caption>Rating attribute</caption>
+            <caption>Value attribute</caption>
             <category>Data source</category>
-            <description>The attribute containing rate values</description>
+            <description>The attribute containing rate values or average rate</description>
             <attributeTypes>
                 <attributeType name="Decimal"/>
                 <attributeType name="Integer"/>
                 <attributeType name="Long"/>
             </attributeTypes>
+        </property>
+        <property key="viewAverage" type="boolean" defaultValue="false">
+            <caption>Type</caption>
+            <category>Data source</category>
+            <description>Is the widget used for viewing average rate</description>
         </property>
         <property key="onCommitMicroflow" type="microflow" required="false">
             <caption>On commit microflow</caption>

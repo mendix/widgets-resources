@@ -10,6 +10,7 @@ interface WrapperProps {
 
 export interface ContainerProps extends WrapperProps {
     mxObject: mendix.lib.MxObject;
+    viewAverage: boolean;
     readOnly: boolean;
     // Properties from Mendix modeler
     rateAttribute: string;
@@ -43,10 +44,11 @@ export default class StarRatingInputContainer extends Component<ContainerProps, 
             const ownerGuid = this.props.mxObject ? this.props.mxObject.get(this.ownerReference) as string : "";
             return createElement(StarRating, {
                 className: this.props.class,
-                fractions: 1,
-                handleOnChange: this.handleOnChange,
+                fractions: this.props.viewAverage ? 2 : 1,
+                handleOnChange: !this.props.viewAverage ? this.handleOnChange : undefined,
                 initialRate: this.state.initialRate,
-                readOnly: this.props.readOnly || !(ownerGuid === window.mx.session.getUserId()),
+                readOnly: this.props.readOnly || this.props.viewAverage
+                    || !(ownerGuid === window.mx.session.getUserId()),
                 style: StarRatingInputContainer.parseStyle(this.props.style)
             });
         } else {
@@ -89,7 +91,7 @@ export default class StarRatingInputContainer extends Component<ContainerProps, 
 
     private validateProps(props: ContainerProps): string {
         if (props.mxObject && !props.mxObject.isReference(this.ownerReference)) {
-            return `Configuration Error: Context object has no User / Owner association to it`;
+            return !props.viewAverage ? `Configuration Error: Context object has no 'Owner' system member to it` : "";
         }
         return "";
     }
