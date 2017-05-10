@@ -1,20 +1,32 @@
 import { Component, createElement } from "react";
-import { Switch, SwitchProps } from "./components/Switch";
+import { Switch } from "./components/Switch";
+import { SwitchContainerProps } from "./components/SwitchContainer";
 
 import * as css from "./ui/Switch.sass";
 
+interface PreviewState {
+    isChecked: boolean;
+}
 // tslint:disable class-name
-export class preview extends Component<SwitchProps, {}> {
+export class preview extends Component<SwitchContainerProps, PreviewState> {
+    constructor(props: SwitchContainerProps) {
+        super(props);
+
+        this.state = {
+            isChecked: true
+        };
+        this.toggleChecked = this.toggleChecked.bind(this);
+    }
     componentWillMount() {
         this.addPreviewStyle("widget-switch");
     }
 
     render() {
         return createElement(Switch, {
-            bootstrapStyle: "success",
-            isChecked: true,
-            onClick: () => console.log("Clicked"),
-            status: "enabled"
+            bootstrapStyle: this.props.bootstrapStyle,
+            isChecked: this.state.isChecked,
+            onClick: this.toggleChecked,
+            status: this.props.editable === "default" ? "enabled" : "disabled"
         });
     }
 
@@ -30,5 +42,9 @@ export class preview extends Component<SwitchProps, {}> {
             styleElement.appendChild(document.createTextNode(css));
             styleTarget.appendChild(styleElement);
         }
+    }
+
+    private toggleChecked() {
+        this.setState({ isChecked: !this.state.isChecked });
     }
 }
