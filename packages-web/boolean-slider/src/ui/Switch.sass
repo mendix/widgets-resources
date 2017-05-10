@@ -1,12 +1,19 @@
 @import "./variables"
 
+@mixin bootstrap-style($brand-style)
+    background-color: $brand-style
+    border-color: $brand-style
+    box-shadow: $brand-style 0 0 0 16px inset
+
+@mixin dynamic-float($min-width, $max-width, $direction)
+    @media (min-width: $min-width) and (max-width: $max-width)
+        float: $direction
+
 .widget-switch
     float: left
 
-    @media (min-width: 320px) and (max-width: 736px)
-        float: right
-    @media (min-width: 768px) and (max-width: 1024px)
-        float: right
+    @include dynamic-float(320px, 736px, right)
+    @include dynamic-float(768px, 1024px, right)
 
     .widget-switch-checkbox
         display: none
@@ -38,34 +45,22 @@
             transition: border 0.4s, box-shadow 0.4s, background-color 1.2s
 
             &.widget-switch-btn-wrapper-default
-                background-color: $brand-default
-                border-color: $brand-default
-                box-shadow: $brand-default 0 0 0 16px inset
+                @include bootstrap-style($brand-default)
 
             &.widget-switch-btn-wrapper-success
-                background-color: $brand-success
-                border-color: $brand-success
-                box-shadow: $brand-success 0 0 0 16px inset
+                @include bootstrap-style($brand-success)
 
             &.widget-switch-btn-wrapper-info
-                background-color: $brand-info
-                border-color: $brand-info
-                box-shadow: $brand-info 0 0 0 16px inset
+                @include bootstrap-style($brand-info)
 
             &.widget-switch-btn-wrapper-primary
-                background-color: $brand-primary
-                border-color: $brand-primary
-                box-shadow: $brand-primary 0 0 0 16px inset
+                @include bootstrap-style($brand-primary)
 
             &.widget-switch-btn-wrapper-warning
-                background-color: $brand-warning
-                border-color: $brand-warning
-                box-shadow: $brand-warning 0 0 0 16px inset
+                @include bootstrap-style($brand-warning)
 
             &.widget-switch-btn-wrapper-danger
-                background-color: $brand-danger
-                border-color: $brand-danger
-                box-shadow: $brand-danger 0 0 0 16px inset
+                @include bootstrap-style($brand-danger)
 
         &.un-checked
             border-color: rgb(223, 223, 223)
@@ -124,19 +119,16 @@
 .form-group
     .widget-switch
         float: left
+
     .control-label
         float: right
         padding-top: 8px
         padding-bottom: 8px
 
     .widget-switch
-        @media (min-width: 320px) and (max-width: 736px)
-            float: right
-        @media (min-width: 768px) and (max-width: 1024px)
-            float: right
+        @include dynamic-float(320px, 736px, right)
+        @include dynamic-float(768px, 1024px, right)
 
     .control-label
-        @media (min-width: 320px) and (max-width: 736px)
-            float: left
-        @media (min-width: 768px) and (max-width: 1024px)
-            float: left
+        @include dynamic-float(320px, 736px, left)
+        @include dynamic-float(768px, 1024px, left)
