@@ -1,5 +1,4 @@
 import { Component, createElement } from "react";
-import { Alert } from "./Alert";
 import { StarRating } from "./StarRating";
 
 interface WrapperProps {
@@ -9,20 +8,20 @@ interface WrapperProps {
 }
 
 export interface ContainerProps extends WrapperProps {
+    editable: "default" | "never";
     mxObject: mendix.lib.MxObject;
     viewAverage: boolean;
     readOnly: boolean;
     // Properties from Mendix modeler
     rateAttribute: string;
-    onCommitMicroflow: string;
+    onChangeMicroflow: string;
 }
 
 interface ContainerState {
-    alertMessage?: string;
     initialRate: number;
 }
 
-export default class StarRatingInputContainer extends Component<ContainerProps, ContainerState> {
+export default class StarRatingContainer extends Component<ContainerProps, ContainerState> {
     private subscriptionHandles: number[];
     private ownerReference = "";
 
@@ -30,42 +29,33 @@ export default class StarRatingInputContainer extends Component<ContainerProps, 
         super(props);
 
         this.subscriptionHandles = [];
-        this.ownerReference = "System.owner";
         this.state = {
-            alertMessage: this.validateProps(props),
-            initialRate: 0
+            initialRate: this.props.mxObject
+                ? this.props.mxObject.get(this.props.rateAttribute) as number
+                : 0
         };
         this.handleOnChange = this.handleOnChange.bind(this);
-        this.resetSubscription(this.props.mxObject);
+        this.subscribe(this.props.mxObject);
     }
 
     render() {
-        if (!this.state.alertMessage) {
-            const ownerGuid = this.props.mxObject ? this.props.mxObject.get(this.ownerReference) as string : "";
-            return createElement(StarRating, {
-                className: this.props.class,
-                fractions: this.props.viewAverage ? 2 : 1,
-                handleOnChange: !this.props.viewAverage ? this.handleOnChange : undefined,
-                initialRate: this.state.initialRate,
-                readOnly: this.props.readOnly || this.props.viewAverage
-                    || !(ownerGuid === window.mx.session.getUserId()),
-                style: StarRatingInputContainer.parseStyle(this.props.style)
-            });
-        } else {
-            return createElement(Alert, { message: this.state.alertMessage });
-        }
+        const { mxObject } = this.props;
+        const readOnly = this.props.editable === "never"
+            || (mxObject && mxObject.isReadonlyAttr(this.props.rateAttribute)) || this.props.readOnly;
+
+        return createElement(StarRating, {
+            className: this.props.class,
+            fractions: readOnly ? 2 : 1,
+            handleOnChange: !readOnly ? this.handleOnChange : undefined,
+            initialRate: this.state.initialRate,
+            readOnly,
+            style: StarRatingContainer.parseStyle(this.props.style)
+        });
     }
 
     componentWillReceiveProps(nextProps: ContainerProps) {
-        this.resetSubscription(nextProps.mxObject);
-        if (nextProps.mxObject) {
-            const errorMessage = this.validateProps(nextProps);
-            if (!errorMessage) {
-                this.updateRating(nextProps.mxObject);
-            } else {
-                this.setState({ alertMessage: errorMessage });
-            }
-        }
+        this.subscribe(nextProps.mxObject);
+        this.updateRating(nextProps.mxObject);
     }
 
     componentWillUnmount() {
@@ -73,13 +63,13 @@ export default class StarRatingInputContainer extends Component<ContainerProps, 
     }
 
     private handleOnChange(rate: number) {
-        const { mxObject, onCommitMicroflow, rateAttribute } = this.props;
+        const { mxObject, onChangeMicroflow, rateAttribute } = this.props;
         if (mxObject) {
             mxObject.set(rateAttribute, rate);
-            if (onCommitMicroflow) {
-                window.mx.ui.action(onCommitMicroflow, {
+            if (onChangeMicroflow) {
+                window.mx.ui.action(onChangeMicroflow, {
                     error: error =>
-                        window.mx.ui.error(`Error while executing microflow: ${onCommitMicroflow}: ${error.message}`),
+                        window.mx.ui.error(`Error while executing microflow: ${onChangeMicroflow}: ${error.message}`),
                     params: {
                         applyto: "selection",
                         guids: [ mxObject.getGuid() ]
@@ -89,18 +79,17 @@ export default class StarRatingInputContainer extends Component<ContainerProps, 
         }
     }
 
-    private validateProps(props: ContainerProps): string {
-        if (props.mxObject && !props.mxObject.isReference(this.ownerReference)) {
-            return !props.viewAverage ? `Configuration Error: Context object has no 'Owner' system member to it` : "";
-        }
-        return "";
-    }
-
-    private resetSubscription(contextObject: mendix.lib.MxObject) {
+    private subscribe(contextObject?: mendix.lib.MxObject) {
         this.unSubscribe();
 
         if (contextObject) {
             this.subscriptionHandles.push(window.mx.data.subscribe({
+                callback: () => this.updateRating(contextObject),
+                guid: contextObject.getGuid()
+            }));
+
+            this.subscriptionHandles.push(window.mx.data.subscribe({
+                attr: this.props.rateAttribute,
                 callback: () => this.updateRating(contextObject),
                 guid: contextObject.getGuid()
             }));
@@ -112,10 +101,10 @@ export default class StarRatingInputContainer extends Component<ContainerProps, 
         this.subscriptionHandles = [];
     }
 
-    private updateRating(contextObject: mendix.lib.MxObject) {
+    private updateRating(mxObject: mendix.lib.MxObject) {
         this.setState({
-            initialRate: contextObject
-                ? contextObject.get(this.props.rateAttribute) as number
+            initialRate: mxObject
+                ? mxObject.get(this.props.rateAttribute) as number
                 : 0
         });
     }
