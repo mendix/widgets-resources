@@ -61,17 +61,10 @@ const previewConfig = {
     module: {
         rules: [
             { test: /\.ts$/, use: "ts-loader" },
-            { test: /\.css$/, loader: "style-loader!css-loader" },
+            { test: /\.css$/, use: "raw-loader" },
             { test: /\.sass$/, use: [
-                {
-                    loader: "style-loader"
-                },
-                {
-                    loader: "css-loader"
-                },
-                {
-                    loader: "sass-loader"
-                }
+                { loader: "raw-loader" },
+                { loader: "sass-loader" }
             ] }
         ]
     },
