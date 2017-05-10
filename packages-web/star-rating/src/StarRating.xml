@@ -2,22 +2,7 @@
 <widget id="com.mendix.widget.custom.starrating.StarRating" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../../xsd/widget.xsd">
     <name>Star rating</name>
     <description>This widget lets users rate an object from 1 to 5</description>
-    <icon>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAANkE3LLa
-        AgAAAkxJREFUeJyVkttLUwEcxz/n7OLm5tzcxHlhXjLDsUg0xYweeurF8M1kkaiJ
-        L0Jv9T9UFERGEA578EENzMqXCkGwgU8qgRuIYtOpXZyXM912djmnl4wSJ/h9/H0v
-        /H5ffnAKWusM3rY6g/c0zWkQpl52zU298M4BwpndNXZto7wxrcgro0qNncZsOjEb
-        0dN+rVdfckHQF5cJPa3VvWddwB7yv4qo8oqq7nxSQ+PtEcB+klB746K5rbyiqiRH
-        r7PY7TZrnslkrakodLs8lwuQ1uAwjKvSUfDhfv740mo8ED1U9yJRYU9OCVJoN70p
-        3LrieOjzPX1gqr0DxIA4ZCTYXYPYOkSXYX8BYosgSSCJIJg43Etx9/XWI81iODb1
-        dnxyvcF1eLXMfT6X6C/YD0F8E6QAbM9AZBb2IhAVQGtldikdaR0I35tezjzWAGwf
-        KPOjb/x+ZzpQf8njdAryNkT88PMzRAOQSEDKiKIrZehLasE78K1zU1LfAWiOykjC
-        +vuZ1cnavO/XPVXbxYQ/QuIHyBmQDWByMTqfN9/5fPFmUmHxb4nHSt0oygmLbHyF
-        WALSGkgZIGmETIqiXEUENv41/PcHZTY8Dc4DNzsZSFnA2gC2esiY4CBBQ1HSXWbD
-        kzWgqVLXYtEadIiFbMkupetJaKjz2crQllioYDZg0cd1TZW5LVm/Z9CbP6YOn1NH
-        +kuC5Q6x42he7hA7RvpLg+pwtTp42zqWzW+Z6LMEu5uNPsB1Au/qbjb6Jvryg4Dl
-        pABznpaW42cdg/hHYz4a/Ablkdwn65WLsgAAAABJRU5ErkJggg==
-    </icon>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAA/1BMVEUAAACAgACqVQCqgAC2pADMswC9pQCWgACehQC7owPHsADLswCaggCWfgCXgQDLsgKljgC6pAPDqwKVgAC6owOWgAC6owHUviG8pgi9pwvJsxyjiwGjiwOdhwOVgADKtiXLuTGijAXj1V+umQiumQuwmgixmw3VxUjXx03CrhHCrhPRwUDg0F3NuhXOuxjTyz/b0lXSxy/Vyz3165X17Jbt4Hfy6pXl1CDl1Sfm2Cro2zfUzEfU0TzV0j3Y0EzY0FTe1jLg1lXo2ino2ynp2y3p22Hp3DDu3SPu3Wfv3yvx4nTx43Xx5Hzy5Hvy5X3z54Lz54Pz6IX27pf57ZP57pWYlORkAAAAO3RSTlMAAgMGHB4fIjJWV15gYWWPkZSUmJ6itre6ur3BwcjMzc3S09TU1NTX1+Pj4+Pq6u3t7u7v7/b2+fn9/aECAdoAAACeSURBVBgZBcHbTsJAFADA6fZss6FUvIUnQ/j//1ISgxLRSMFt1hmAcQQEIAASkEvJQALyOGYgAeXxoQABhrJvh+EGsQV3lzZV0MW02b60Nhtaens/f3e6cv+0v9ZliePH19x66lz1S+vOh88bgVpTj1QrEvp16YdIZewRyKvN6die71d5ITDE6+nk9hvDTCBffs5Xf/M6A3ZTgjTt8A872zTwPjIKmAAAAABJRU5ErkJggg==</icon>
     <properties>
         <property key="rateAttribute" type="attribute">
             <caption>Value attribute</caption>
