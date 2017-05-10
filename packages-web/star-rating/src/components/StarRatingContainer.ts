@@ -23,7 +23,6 @@ interface ContainerState {
 
 export default class StarRatingContainer extends Component<ContainerProps, ContainerState> {
     private subscriptionHandles: number[];
-    private ownerReference = "";
 
     constructor(props: ContainerProps) {
         super(props);
@@ -41,7 +40,7 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
     render() {
         const { mxObject } = this.props;
         const readOnly = this.props.editable === "never"
-            || (mxObject && mxObject.isReadonlyAttr(this.props.rateAttribute)) || this.props.readOnly;
+            || (mxObject && mxObject.isReadonlyAttr(this.props.rateAttribute)) || this.props.readOnly || !mxObject;
 
         return createElement(StarRating, {
             className: this.props.class,

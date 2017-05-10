@@ -8,8 +8,8 @@
     <properties>
         <property key="rateAttribute" type="attribute">
             <caption>Value attribute</caption>
-            <category>Data source</category>
-            <description>The attribute containing a rate or average</description>
+            <category>General</category>
+            <description>The attribute containing a rating</description>
             <attributeTypes>
                 <attributeType name="Decimal"/>
                 <attributeType name="Integer"/>
@@ -19,7 +19,7 @@
 
         <property key="editable" type="enumeration" defaultValue="default">
             <caption>Editable</caption>
-            <category>Display</category>
+            <category>General</category>
             <description/>
             <enumerationValues>
                 <enumerationValue key="default">Default</enumerationValue>
@@ -28,9 +28,9 @@
         </property>
         <property key="onChangeMicroflow" type="microflow" required="false">
             <caption>On change microflow</caption>
-            <category>Behavior</category>
+            <category>General</category>
             <description>Microflow to be executed when the rate is changed</description>
-            <returnType type="Void" />
+            <returnType type="Void"/>
         </property>
     </properties>
 </widget>
