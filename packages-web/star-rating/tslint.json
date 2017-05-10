@@ -13,7 +13,7 @@
     "no-arg": true,
     "no-bitwise": true,
     "no-conditional-assignment": true,
-    "no-console": [ true ],
+    "no-console": [ false ],
     "no-debugger": true,
     "no-duplicate-variable": true,
     "no-empty": true,

@@ -2,7 +2,7 @@
   "name": "star-rating",
   "widgetName": "StarRating",
   "version": "0.2.0",
-  "description": "This widget is used for rating using stars",
+  "description": "This widget lets users rate an object with stars from 1 to 5.",
   "copyright": "Mendix BV",
   "scripts": {
     "pretest": "tsc",

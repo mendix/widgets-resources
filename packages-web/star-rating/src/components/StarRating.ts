@@ -34,7 +34,6 @@ export class StarRating extends Component<StarRatingProps, {}> {
                 full: "glyphicon glyphicon-star widget-star-rating-full widget-star-rating-font",
                 initialRate: this.getRate(this.props),
                 onChange: this.props.handleOnChange && this.props.handleOnChange,
-                placeholder: "glyphicon glyphicon-star widget-star-rating-placeholder widget-star-rating-font",
                 readonly: this.props.readOnly,
                 start: this.start,
                 step: this.step,
