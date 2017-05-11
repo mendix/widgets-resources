@@ -1,6 +1,7 @@
 @import "./variables"
 
 $default-android-color: #6FBEB5
+$default-ios-color: rgb(100, 189, 99)
 
 @mixin bootstrap-style-ios($brand-style)
     background-color: $brand-style
@@ -44,7 +45,7 @@ $default-android-color: #6FBEB5
             transition: border 0.4s, box-shadow 0.4s, background-color 1.2s
 
             &.widget-switch-btn-wrapper-default
-                @include bootstrap-style-ios($brand-default)
+                @include bootstrap-style-ios($default-ios-color)
 
             &.widget-switch-btn-wrapper-success
                 @include bootstrap-style-ios($brand-success)
@@ -151,6 +152,21 @@ $default-android-color: #6FBEB5
             &.widget-switch-btn-wrapper-default
                 @include bootstrap-style-android($default-android-color)
 
+            &.widget-switch-btn-wrapper-success
+                @include bootstrap-style-android($brand-success)
+
+            &.widget-switch-btn-wrapper-info
+                @include bootstrap-style-android($brand-info)
+
+            &.widget-switch-btn-wrapper-primary
+                @include bootstrap-style-android($brand-primary)
+
+            &.widget-switch-btn-wrapper-warning
+                @include bootstrap-style-android($brand-warning)
+
+            &.widget-switch-btn-wrapper-danger
+                @include bootstrap-style-android($brand-danger)
+
             .widget-switch-btn
                 left: 20px
                 background: #179588
@@ -161,6 +177,14 @@ $default-android-color: #6FBEB5
 
             .widget-switch-btn
                     background: #BCBDBC
+
+@mixin auto-android($device-width, $device-height, $webkit-ratio)
+    @media screen and (device-width: $device-width) and (device-height: $device-height) and (-webkit-device-pixel-ratio: $webkit-ratio)
+        @include android
+
+@mixin auto-ios($device-width, $device-height, $webkit-ratio)
+    @media only screen and (min-device-width: $device-width) and (max-device-width: $device-height) and (-webkit-min-device-pixel-ratio: $webkit-ratio)
+        @include ios
 
 .widget-switch
     float: left
@@ -179,23 +203,58 @@ $default-android-color: #6FBEB5
 
     &.auto
 
+        @include ios
+
+        /* ----------- iPhone 4 & 4S ----------- */
+
+        /* Portrait and Landscape */
+        @include auto-ios(320px, 480px, 2)
+
         /* ----------- iPhone 5 & 5S ----------- */
 
         /* Portrait and Landscape */
-        @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2)
-            @include ios
+        @include auto-ios(320px, 568px, 2)
 
         /* ----------- iPhone 6 ----------- */
 
         /* Portrait and Landscape */
-        @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2)
-            @include ios
+        @include auto-ios(375px, 667px, 2)
+
+        /* ----------- iPhone 6+ ----------- */
+
+        /* Portrait and Landscape */
+        @include auto-ios(414px, 736px, 3)
+
+        /* ----------- iPad Mini, iPad 1 and 2 ----------- */
+
+        /* Portrait and Landscape */
+        @include auto-ios(768px, 1024px, 1)
+
+        /* ----------- iPad 3 and 4 ----------- */
+
+        /* Portrait and Landscape */
+        @include auto-ios(768px, 1024px, 2)
+
+        /* ----------- Galaxy S3 ----------- */
+
+        /* Portrait and Landscape */
+        @include auto-android(320px, 640px, 2)
+
+        /* ----------- Galaxy S4 ----------- */
+
+        /* Portrait and Landscape */
+        @include auto-android(320px, 640px, 3)
 
         /* ----------- Galaxy S5 ----------- */
 
         /* Portrait and Landscape */
-        @media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3)
-            @include android
+        @include auto-android(360px, 640px, 3)
+
+        /* ----------- Nexus 6P ----------- */
+
+        /* Portrait and Landscape */
+        @include auto-android(412px, 732px, 3.5)
+
 .form-group
     .widget-switch
         float: left
