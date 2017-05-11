@@ -9,12 +9,7 @@
     @media (min-width: $min-width) and (max-width: $max-width)
         float: $direction
 
-.widget-switch
-    float: left
-
-    .widget-switch-checkbox
-        display: none
-
+@mixin ios
     .widget-switch-btn-wrapper
         background-color: #fff
         border: 1px solid #dfdfdf
@@ -112,6 +107,17 @@
                     width: 30px
                     left: 20px
                     border-radius: 50%
+
+.widget-switch
+    float: left
+
+    @include dynamic-float(320px, 736px, right)
+    @include dynamic-float(768px, 1024px, right)
+
+    .widget-switch-checkbox
+        display: none
+
+    @include ios
 
 .form-group
     .widget-switch
