@@ -11,7 +11,8 @@ This widget lets users rate an object with stars from 1 to 5.
 Mendix 7.1
 
 ## Demo project
-https://rating100.mxapps.io
+Try our the demo project https://rating100.mxapps.io with username: x/y/z  and password: 1
+Editing of a rate is possible if the logged in user owns that vote
 
 ## Usage
 This widget requires a context.
@@ -27,13 +28,6 @@ Security is a mandatory feature for rating and is considered seriously for prope
 
 ## Issues
 Please report issues at https://github.com/mendixlabs/star-rating/issues.
-
-## Disclaimer
-Status: In development
-
-This widget should not be used in a production environment.
-No guarantees are given that this works or keeps working, until it is officially released.
-
 
 ## Issues, suggestions and feature requests
 We are actively maintaining this widget, please report any issues or suggestion for improvement at https://github.com/mendixlabs/star-rating/issues.
