@@ -108,6 +108,48 @@
                     left: 20px
                     border-radius: 50%
 
+@mixin android
+    .widget-switch-btn-wrapper
+        position: relative
+        display: block
+        height: 20px
+        width: 44px
+        background: #898989
+        border-radius: 100px
+        cursor: pointer
+        transition: all .3s ease
+
+        .widget-switch-btn
+            position: absolute
+            left: -2px
+            top: -3px
+            display: block
+            width: 26px
+            height: 26px
+            border-radius: 100px
+            background: white
+            box-shadow: 0 1px 3px rgba(#000,.4)
+            content: ''
+            transition: all .3s ease
+
+        &:active
+            .widget-switch-btn
+                transform: scale(1.15, .85)
+
+        &.checked
+            background: #6FBEB5
+
+            .widget-switch-btn
+                left: 20px
+                background: #179588
+
+        &.disabled
+            background: #D5D5D5
+            pointer-events: none
+
+            .widget-switch-btn
+                    background: #BCBDBC
+
 .widget-switch
     float: left
 
