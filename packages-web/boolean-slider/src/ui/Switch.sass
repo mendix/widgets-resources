@@ -1,9 +1,16 @@
 @import "./variables"
 
-@mixin bootstrap-style($brand-style)
+$default-android-color: #6FBEB5
+
+@mixin bootstrap-style-ios($brand-style)
     background-color: $brand-style
     border-color: $brand-style
     box-shadow: $brand-style 0 0 0 16px inset
+
+@mixin bootstrap-style-android($brand-style)
+    background-color: $brand-style
+    border: none
+    box-shadow: none
 
 @mixin dynamic-float($min-width, $max-width, $direction)
     @media (min-width: $min-width) and (max-width: $max-width)
@@ -37,22 +44,22 @@
             transition: border 0.4s, box-shadow 0.4s, background-color 1.2s
 
             &.widget-switch-btn-wrapper-default
-                @include bootstrap-style($brand-default)
+                @include bootstrap-style-ios($brand-default)
 
             &.widget-switch-btn-wrapper-success
-                @include bootstrap-style($brand-success)
+                @include bootstrap-style-ios($brand-success)
 
             &.widget-switch-btn-wrapper-info
-                @include bootstrap-style($brand-info)
+                @include bootstrap-style-ios($brand-info)
 
             &.widget-switch-btn-wrapper-primary
-                @include bootstrap-style($brand-primary)
+                @include bootstrap-style-ios($brand-primary)
 
             &.widget-switch-btn-wrapper-warning
-                @include bootstrap-style($brand-warning)
+                @include bootstrap-style-ios($brand-warning)
 
             &.widget-switch-btn-wrapper-danger
-                @include bootstrap-style($brand-danger)
+                @include bootstrap-style-ios($brand-danger)
 
         &.un-checked
             border-color: rgb(223, 223, 223)
@@ -115,6 +122,8 @@
         height: 20px
         width: 44px
         background: #898989
+        border: none
+        box-shadow: none
         border-radius: 100px
         cursor: pointer
         transition: all .3s ease
@@ -139,6 +148,9 @@
         &.checked
             background: #6FBEB5
 
+            &.widget-switch-btn-wrapper-default
+                @include bootstrap-style-android($default-android-color)
+
             .widget-switch-btn
                 left: 20px
                 background: #179588
@@ -159,8 +171,31 @@
     .widget-switch-checkbox
         display: none
 
-    @include ios
+    &.iOS
+        @include ios
 
+    &.android
+        @include android
+
+    &.auto
+
+        /* ----------- iPhone 5 & 5S ----------- */
+
+        /* Portrait and Landscape */
+        @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2)
+            @include ios
+
+        /* ----------- iPhone 6 ----------- */
+
+        /* Portrait and Landscape */
+        @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2)
+            @include ios
+
+        /* ----------- Galaxy S5 ----------- */
+
+        /* Portrait and Landscape */
+        @media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3)
+            @include android
 .form-group
     .widget-switch
         float: left

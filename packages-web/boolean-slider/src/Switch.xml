@@ -28,12 +28,22 @@
             <category>Display</category>
             <description/>
         </property>
+        <property key="deviceStyle" type="enumeration" defaultValue="auto">
+            <caption>Appearance</caption>
+            <category>Display</category>
+            <description>The general appearance of the switch</description>
+            <enumerationValues>
+                <enumerationValue key="auto">Auto detect</enumerationValue>
+                <enumerationValue key="android">Android</enumerationValue>
+                <enumerationValue key="iOS">iOS</enumerationValue>
+            </enumerationValues>
+        </property>
         <property key="bootstrapStyle" type="enumeration" defaultValue="default">
             <caption>Style</caption>
             <category>Display</category>
             <description>The color of the switch using bootstrap classes</description>
             <enumerationValues>
-                <enumerationValue key="default">Default</enumerationValue>
+                <enumerationValue key="default">Widget default</enumerationValue>
                 <enumerationValue key="primary">Primary</enumerationValue>
                 <enumerationValue key="success">Success</enumerationValue>
                 <enumerationValue key="info">Info</enumerationValue>
