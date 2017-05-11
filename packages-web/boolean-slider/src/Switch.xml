@@ -28,11 +28,12 @@
             <category>Display</category>
             <description/>
         </property>
-        <property key="bootstrapStyle" type="enumeration" defaultValue="success">
-            <caption>Bootstrap style</caption>
+        <property key="bootstrapStyle" type="enumeration" defaultValue="default">
+            <caption>Style</caption>
             <category>Display</category>
             <description>The color of the switch using bootstrap classes</description>
             <enumerationValues>
+                <enumerationValue key="default">Default</enumerationValue>
                 <enumerationValue key="primary">Primary</enumerationValue>
                 <enumerationValue key="success">Success</enumerationValue>
                 <enumerationValue key="info">Info</enumerationValue>
@@ -43,7 +44,7 @@
         <property key="labelWidth" type="integer" defaultValue="9">
             <caption>Label width (weight)</caption>
             <category>Display</category>
-            <description>How much of the total row width (12) the label should occupy. Should not be greater than 11. (Only for horizontal orientation)</description>
+            <description>How much of the total row width (12) the label should occupy. Should not be greater than 11.</description>
         </property>
         <property key="onChangeMicroflow" type="microflow" required="false">
             <caption>On change microflow</caption>
