@@ -97,7 +97,8 @@
     ],
     "member-access": false,
     "no-unused-variable": [true, "react"],
-    "arrow-parens": false
+    "arrow-parens": false,
+    "linebreak-style": [ true, "LF" ]
   },
   "jsRules": {
     "trailing-comma": [ false ],

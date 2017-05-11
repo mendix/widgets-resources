@@ -1,4 +1,4 @@
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { createElement, DOM } from "react";
 
 import * as Rating from "react-rating";
@@ -14,7 +14,7 @@ describe("StarRating", () => {
             fractions: 1,
             handleOnChange: jasmine.createSpy("onChange"),
             initialRate: 2,
-            readOnly: true
+            readOnly: false
         };
     });
 
@@ -29,7 +29,6 @@ describe("StarRating", () => {
                     full: "glyphicon glyphicon-star widget-star-rating-full widget-star-rating-font",
                     initialRate: 2,
                     onChange: jasmine.any(Function) as any,
-                    placeholder: "glyphicon glyphicon-star widget-star-rating-placeholder widget-star-rating-font",
                     readonly: starProps.readOnly,
                     start: 0,
                     step: 1,
@@ -53,14 +52,14 @@ describe("StarRating", () => {
         expect(starRating.props().fractions).toBe(2);
     });
 
-    it("should render with negative rating", () => {
+    it("should render no stars with negative rating", () => {
         starProps.initialRate = -1;
         const starRating = renderStarRating(starProps).find(Rating);
 
         expect(starRating.props().initialRate).toEqual(0);
     });
 
-    it("should render with large positive rating", () => {
+    it("should render max 5 stars for large positive rating", () => {
         starProps.initialRate = 100;
 
         const starRating = renderStarRating(starProps).find(Rating);
@@ -69,18 +68,35 @@ describe("StarRating", () => {
     });
 
     it("with onChange function should respond to change event", () => {
+        const handleOnChange = jasmine.createSpy("onChange");
         const ratingProps: StarRatingProps = {
             fractions: 1,
-            handleOnChange: jasmine.createSpy("onChange"),
+            handleOnChange,
             initialRate: 2,
             readOnly: false
         };
-        const onChange = ratingProps.handleOnChange = jasmine.createSpy("onChange");
-        const star_rating = renderStarRating(ratingProps);
 
-        star_rating.simulate("click");
+        const starRating = mount(createElement(StarRating, ratingProps)).find(Rating);
+            // renderStarRating(ratingProps).find(Rating);
+        starRating.simulate("change", { target: { value: 4 } });
 
-        expect(onChange).toHaveBeenCalledTimes(1);
+        expect(handleOnChange).toHaveBeenCalledWith(4);
+
     });
+
+    // it("when disabled should not change on click", () => {
+    //     const handleOnChange = jasmine.createSpy("onChange");
+    //     const ratingProps: StarRatingProps = {
+    //         fractions: 1,
+    //         handleOnChange,
+    //         initialRate: 2,
+    //         readOnly: true
+    //     };
+
+    //     const starRating = renderStarRating(ratingProps).find(Rating);
+    //     starRating.simulate("change", { target: { value: 4 } });
+
+    //     expect(handleOnChange).toHaveBeenCalledTimes(0);
+    // });
 
 });
