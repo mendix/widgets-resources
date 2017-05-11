@@ -75,6 +75,7 @@
     "webpack-dev-server": "^2.2.0"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "react-rating": "^0.7.1"
   }
 }

@@ -1,5 +1,5 @@
+import * as classNames from "classnames";
 import { Component, createElement, DOM } from "react";
-
 import * as Rating from "react-rating";
 
 import "../ui/StarRating.css";
@@ -27,13 +27,13 @@ export class StarRating extends Component<StarRatingProps, {}> {
     }
 
     render() {
-        return DOM.div({ className: `widget-star-rating ${this.props.className}`, style: this.props.style },
+        return DOM.div({ className: classNames("widget-star-rating", this.props.className), style: this.props.style },
             createElement(Rating, {
                 empty: "glyphicon glyphicon-star-empty widget-star-rating-empty widget-star-rating-font",
                 fractions: this.props.fractions,
                 full: "glyphicon glyphicon-star widget-star-rating-full widget-star-rating-font",
                 initialRate: this.getRate(this.props),
-                onChange: this.props.handleOnChange && this.props.handleOnChange,
+                onChange: !this.props.readOnly ? this.props.handleOnChange : undefined,
                 readonly: this.props.readOnly,
                 start: this.start,
                 step: this.step,

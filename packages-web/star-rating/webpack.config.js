@@ -22,7 +22,6 @@ module.exports = {
     module: {
         rules: [
             { test: /\.ts$/, use: "ts-loader" },
-            { test: /\.json$/, loader: "json" },
             { test: /\.css$/, loader: ExtractTextPlugin.extract({
                 fallback: "style-loader",
                 use: "css-loader"}) },
@@ -34,7 +33,7 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([
             { from: "src/**/*.js" },
-            { from: "src/**/*.xml" },
+            { from: "src/**/*.xml" }
         ], {
             copyUnmodified: true
         }),

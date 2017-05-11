@@ -64,7 +64,7 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
     private handleOnChange(rate: number) {
         const { mxObject, onChangeMicroflow, rateAttribute } = this.props;
         if (mxObject) {
-            mxObject.set(rateAttribute, rate);
+            mxObject.set(rateAttribute, Number(rate));
             if (onChangeMicroflow) {
                 window.mx.ui.action(onChangeMicroflow, {
                     error: error =>
