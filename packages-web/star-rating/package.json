@@ -1,7 +1,7 @@
 {
   "name": "star-rating",
   "widgetName": "StarRating",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "This widget lets users rate an object with stars from 1 to 5.",
   "copyright": "Mendix BV",
   "scripts": {
