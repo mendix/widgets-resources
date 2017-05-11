@@ -3,6 +3,7 @@ import { Switch } from "./components/Switch";
 import { SwitchContainerProps } from "./components/SwitchContainer";
 
 import * as css from "./ui/Switch.sass";
+import { Label } from "./components/Label";
 
 // tslint:disable class-name
 export class preview extends Component<SwitchContainerProps, {}> {
@@ -11,6 +12,19 @@ export class preview extends Component<SwitchContainerProps, {}> {
     }
 
     render() {
+        const maxLabelWidth = 11;
+        if (this.props.label.trim()) {
+            return createElement(Label, {
+                className: this.props.class,
+                label: this.props.label,
+                weight: this.props.labelWidth > maxLabelWidth ? maxLabelWidth : this.props.labelWidth
+            }, this.renderSwitch());
+        }
+
+        return this.renderSwitch();
+    }
+
+    private renderSwitch() {
         return createElement(Switch, {
             bootstrapStyle: this.props.bootstrapStyle,
             isChecked: true,
