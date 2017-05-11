@@ -1,13 +1,14 @@
 import { DOM, SFC } from "react";
 import * as classNames from "classnames";
 
-import { BootstrapStyle } from "./SwitchContainer";
+import { BootstrapStyle, DeviceStyle } from "./SwitchContainer";
 
 import "../ui/Switch.sass";
 
 export interface SwitchProps {
     bootstrapStyle: BootstrapStyle;
     className?: string;
+    deviceStyle?: DeviceStyle;
     isChecked: boolean;
     onClick: () => void;
     status: SwitchStatus;
@@ -19,7 +20,7 @@ export type SwitchStatus = "enabled" | "disabled" | "no-context";
 export const Switch: SFC<SwitchProps> = (props) =>
     DOM.div(
         {
-            className: classNames("widget-switch", props.className),
+            className: classNames("widget-switch", props.className, props.deviceStyle),
             style: props.style
         },
         DOM.input({
@@ -48,7 +49,8 @@ export const Switch: SFC<SwitchProps> = (props) =>
     );
 
 Switch.defaultProps = {
-    bootstrapStyle: "success"
+    bootstrapStyle: "default",
+    deviceStyle: "auto"
 };
 
 Switch.displayName = "Switch";

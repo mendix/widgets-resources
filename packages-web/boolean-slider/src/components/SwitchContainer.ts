@@ -12,6 +12,7 @@ interface WrapperProps {
 interface SwitchContainerProps extends WrapperProps {
     booleanAttribute: string;
     bootstrapStyle: BootstrapStyle;
+    deviceStyle: DeviceStyle;
     editable: "default" | "never";
     label: string;
     labelWidth: number;
@@ -23,6 +24,7 @@ interface SwitchContainerState {
 }
 
 type BootstrapStyle = "default" | "primary" | "info" | "warning" | "success" | "danger";
+type DeviceStyle = "auto" | "android" | "iOS";
 
 class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerState> {
     private subscriptionHandles: number[];
@@ -70,6 +72,7 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
         return createElement(Switch, {
             bootstrapStyle: this.props.bootstrapStyle,
             className: !hasLabel ? this.props.class : undefined,
+            deviceStyle: this.props.deviceStyle,
             isChecked: this.state.isChecked,
             onClick: this.handleToggle,
             status,
@@ -148,4 +151,4 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
     }
 }
 
-export { BootstrapStyle, SwitchContainer as default, SwitchContainerProps };
+export { BootstrapStyle, DeviceStyle, SwitchContainer as default, SwitchContainerProps };
