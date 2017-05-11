@@ -67,36 +67,4 @@ describe("StarRating", () => {
         expect(starRating.props().initialRate).toEqual(5);
     });
 
-    it("with onChange function should respond to change event", () => {
-        const handleOnChange = jasmine.createSpy("onChange");
-        const ratingProps: StarRatingProps = {
-            fractions: 1,
-            handleOnChange,
-            initialRate: 2,
-            readOnly: false
-        };
-
-        const starRating = mount(createElement(StarRating, ratingProps)).find(Rating);
-            // renderStarRating(ratingProps).find(Rating);
-        starRating.simulate("change", { target: { value: 4 } });
-
-        expect(handleOnChange).toHaveBeenCalledWith(4);
-
-    });
-
-    // it("when disabled should not change on click", () => {
-    //     const handleOnChange = jasmine.createSpy("onChange");
-    //     const ratingProps: StarRatingProps = {
-    //         fractions: 1,
-    //         handleOnChange,
-    //         initialRate: 2,
-    //         readOnly: true
-    //     };
-
-    //     const starRating = renderStarRating(ratingProps).find(Rating);
-    //     starRating.simulate("change", { target: { value: 4 } });
-
-    //     expect(handleOnChange).toHaveBeenCalledTimes(0);
-    // });
-
 });
