@@ -13,7 +13,7 @@
     "no-arg": true,
     "no-bitwise": true,
     "no-conditional-assignment": true,
-    "no-console": [ false ],
+    "no-console": [ true ],
     "no-debugger": true,
     "no-duplicate-variable": true,
     "no-empty": true,
@@ -103,6 +103,7 @@
   "jsRules": {
     "trailing-comma": [ false ],
     "object-literal-sort-keys": false,
-    "array-bracket-spacing": [ true, "always" ]
+    "array-bracket-spacing": [ true, "always" ],
+    "linebreak-style": [ true, "LF" ]
   }
 }
