@@ -95,6 +95,9 @@ $default-ios-color: rgb(100, 189, 99)
                     width: 70%
                     border-radius: 45%
 
+        &.disabled
+            opacity: 0.5
+
         &.no-switch
             .left
                 &:active
@@ -133,10 +136,6 @@ $default-ios-color: rgb(100, 189, 99)
             content: ''
             transition: all .3s ease
 
-        &:active
-            .widget-switch-btn
-                transform: scale(1.15, .85)
-
         &.checked
             background: #6FBEB5
 
@@ -171,7 +170,6 @@ $default-ios-color: rgb(100, 189, 99)
 
 .widget-switch-btn-wrapper
     &.disabled
-        opacity: 0.5
         cursor: default
 
     &.no-switch
