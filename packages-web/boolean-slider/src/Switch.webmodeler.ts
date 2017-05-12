@@ -29,6 +29,7 @@ export class preview extends Component<SwitchContainerProps, {}> {
         return createElement(Switch, {
             bootstrapStyle: this.props.bootstrapStyle,
             className: !hasLabel ? this.props.class : undefined,
+            deviceStyle: this.props.deviceStyle,
             isChecked: true,
             onClick: undefined as any,
             status: this.props.editable === "default" ? "enabled" : "disabled",
