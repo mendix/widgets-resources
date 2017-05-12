@@ -118,14 +118,16 @@
         float: left
 
     .control-label
-        float: right
-        padding-top: 8px
-        padding-bottom: 8px
+        &.widget-switch-label
+            float: right
+            padding-top: 8px
+            padding-bottom: 8px
 
     .widget-switch
         @include dynamic-float(320px, 736px, right)
         @include dynamic-float(768px, 1024px, right)
 
     .control-label
-        @include dynamic-float(320px, 736px, left)
-        @include dynamic-float(768px, 1024px, left)
+        &.widget-switch-label
+            @include dynamic-float(320px, 736px, left)
+            @include dynamic-float(768px, 1024px, left)
