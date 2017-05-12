@@ -19,7 +19,6 @@ interface SwitchContainerProps extends WrapperProps {
 }
 
 interface SwitchContainerState {
-    alertMessage?: string;
     isChecked?: boolean;
 }
 
@@ -69,7 +68,6 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
             : "no-context";
 
         return createElement(Switch, {
-            alertMessage: this.state.alertMessage,
             bootstrapStyle: this.props.bootstrapStyle,
             className: !hasLabel ? this.props.class : undefined,
             isChecked: this.state.isChecked,
@@ -80,11 +78,7 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
     }
 
     private getAttributeValue(attribute: string, mxObject?: mendix.lib.MxObject): boolean {
-        if (mxObject) {
-            return mxObject.get(attribute) as boolean;
-        }
-
-        return false;
+        return !!mxObject && mxObject.get(attribute) as boolean;
     }
 
     private handleToggle() {
@@ -115,7 +109,6 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
 
     private updateState(mxObject = this.props.mxObject): SwitchContainerState {
         return {
-            alertMessage: "",
             isChecked: this.getAttributeValue(this.props.booleanAttribute, mxObject)
         };
     }
