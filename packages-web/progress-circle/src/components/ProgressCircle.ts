@@ -4,21 +4,26 @@ import * as classNames from "classnames";
 import { Circle } from "progressbar.js";
 import { Alert } from "./Alert";
 
-import "../ui/ProgressCircle.css";
+import "../ui/ProgressCircle.scss";
 
-interface ProgressCircleProps {
+export interface ProgressCircleProps {
     alertMessage?: string;
     animate?: boolean;
+    className?: string;
+    clickable?: boolean;
     maximumValue?: number;
+    negativeValueColor?: BootstrapStyle;
     onClickAction?: () => void;
+    positiveValueColor?: BootstrapStyle;
+    style?: object;
     textSize?: ProgressTextSize;
     value?: number;
-    clickable?: boolean;
 }
 
-type ProgressTextSize = "small" | "medium" | "large";
+export type BootstrapStyle = "primary" | "inverse" | "success" | "info" | "warning" | "danger";
+export type ProgressTextSize = "small" | "medium" | "large";
 
-class ProgressCircle extends Component<ProgressCircleProps, { alertMessage?: string }> {
+export class ProgressCircle extends Component<ProgressCircleProps, { alertMessage?: string }> {
     static defaultProps: ProgressCircleProps = {
         animate: true,
         maximumValue: 100,
@@ -27,6 +32,7 @@ class ProgressCircle extends Component<ProgressCircleProps, { alertMessage?: str
     private progressNode: HTMLElement;
     private progressCircle: Circle;
     private setProgressNode: (node: HTMLElement) => void;
+    private progressCircleColorClass: string;
 
     constructor(props: ProgressCircleProps) {
         super(props);
@@ -45,17 +51,21 @@ class ProgressCircle extends Component<ProgressCircleProps, { alertMessage?: str
             this.setState({ alertMessage: newProps.alertMessage });
         }
         this.setProgress(newProps.value, newProps.maximumValue);
+        this.setCircleColor(newProps.negativeValueColor, newProps.positiveValueColor, newProps.value);
     }
 
     render() {
-        const { maximumValue, value } = this.props;
-        return DOM.div({ className: "widget-progress-circle" },
+        const { maximumValue } = this.props;
+        return DOM.div({
+            className: classNames("widget-progress-circle", this.props.className), style: this.props.style
+        },
             DOM.div({
-                className: classNames(`widget-progress-circle-${this.props.textSize}`,
+                className: classNames(
+                    `widget-progress-circle-${this.props.textSize}`,
+                    this.progressCircleColorClass,
                     {
                         "widget-progress-circle-alert": typeof maximumValue === "number" ? maximumValue < 1 : false,
-                        "widget-progress-circle-clickable": this.props.clickable,
-                        "widget-progress-circle-negative": !!value && value < 0
+                        "widget-progress-circle-clickable": this.props.clickable
                     }
                 ),
                 onClick: this.props.onClickAction,
@@ -77,6 +87,13 @@ class ProgressCircle extends Component<ProgressCircleProps, { alertMessage?: str
         });
         this.progressCircle.path.className.baseVal = "widget-progress-circle-path";
         this.progressCircle.trail.className.baseVal = "widget-progress-circle-trail-path";
+        this.setCircleColor(this.props.negativeValueColor, this.props.positiveValueColor, this.props.value);
+    }
+
+    private setCircleColor(negativeValueColor?: BootstrapStyle, positiveValueColor?: BootstrapStyle, value?: number) {
+        this.progressCircleColorClass = `widget-progress-circle-${
+            (value && value < 0) ? negativeValueColor : positiveValueColor
+        }`;
     }
 
     private setProgress(value: number | undefined, maximum = 100) {
@@ -102,5 +119,3 @@ class ProgressCircle extends Component<ProgressCircleProps, { alertMessage?: str
         this.progressCircle.animate(animateValue);
     }
 }
-
-export { ProgressCircle, ProgressCircleProps, ProgressTextSize };

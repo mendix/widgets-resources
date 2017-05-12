@@ -84,11 +84,13 @@
             }
         ],
         "curly": false,
-        "arrow-parens": false
+        "arrow-parens": false,
+        "linebreak-style": [ true, "LF" ]
     },
     "jsRules": {
         "trailing-comma": [ false ],
         "object-literal-sort-keys": false,
-        "array-bracket-spacing": [ true, "always" ]
+        "array-bracket-spacing": [ true, "always" ],
+        "linebreak-style": [ true, "LF" ]
     }
 }

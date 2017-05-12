@@ -1,19 +1,26 @@
 import { Component, createElement } from "react";
-import { ProgressCircle, ProgressTextSize } from "./ProgressCircle";
+import { BootstrapStyle, ProgressCircle, ProgressTextSize } from "./ProgressCircle";
 import { Alert } from "./Alert";
 
-interface ProgressCircleContainerProps {
+interface WrapperProps {
+    class: string;
+    mxObject?: mendix.lib.MxObject;
+    style: string;
+}
+
+export interface ContainerProps extends WrapperProps {
     animate: boolean;
-    mxObject: mendix.lib.MxObject;
     maximumValueAttribute: string;
     microflow?: string;
+    negativeValueColor: BootstrapStyle;
     onClickEvent: OnClickOptions;
     page?: string;
     progressAttribute: string;
+    positiveValueColor: BootstrapStyle;
     textSize: ProgressTextSize;
 }
 
-interface ProgressCircleContainerState {
+interface ContainerState {
     alertMessage?: string;
     maximumValue?: number;
     showAlert?: boolean;
@@ -22,18 +29,18 @@ interface ProgressCircleContainerState {
 
 type OnClickOptions = "doNothing" | "showPage" | "callMicroflow";
 
-class ProgressCircleContainer extends Component<ProgressCircleContainerProps, ProgressCircleContainerState> {
+export default class ProgressCircleContainer extends Component<ContainerProps, ContainerState> {
     private subscriptionHandles: number[];
     private defaultMaximumValue = 100;
     private attributeCallback: (mxObject: mendix.lib.MxObject) => () => void;
 
-    constructor(props: ProgressCircleContainerProps) {
+    constructor(props: ContainerProps) {
         super(props);
 
         this.state = {
             alertMessage: this.validateProps(),
-            maximumValue: this.getValue(props.mxObject, props.maximumValueAttribute),
-            progressValue: this.getValue(props.mxObject, this.props.progressAttribute),
+            maximumValue: this.getValue(props.maximumValueAttribute, props.mxObject),
+            progressValue: this.getValue(props.progressAttribute, props.mxObject),
             showAlert: !!this.validateProps()
         };
         this.subscriptionHandles = [];
@@ -49,15 +56,19 @@ class ProgressCircleContainer extends Component<ProgressCircleContainerProps, Pr
         return createElement(ProgressCircle, {
             alertMessage: this.state.alertMessage,
             animate: this.props.animate,
+            className: this.props.class,
             clickable: !!this.props.microflow || !!this.props.page,
             maximumValue: this.state.maximumValue,
+            negativeValueColor: this.props.negativeValueColor,
             onClickAction: this.handleOnClick,
+            positiveValueColor: this.props.positiveValueColor,
+            style: ProgressCircleContainer.parseStyle(this.props.style),
             textSize: this.props.textSize,
             value: this.state.progressValue
         });
     }
 
-    componentWillReceiveProps(newProps: ProgressCircleContainerProps) {
+    componentWillReceiveProps(newProps: ContainerProps) {
         this.resetSubscription(newProps.mxObject);
         this.updateValues(newProps.mxObject);
     }
@@ -77,19 +88,19 @@ class ProgressCircleContainer extends Component<ProgressCircleContainerProps, Pr
         return errorMessage && `Error in progress circle configuration: ${errorMessage}`;
     }
 
-    private getValue(mxObject: mendix.lib.MxObject, attribute: string): number | undefined {
+    private getValue( attribute: string, mxObject?: mendix.lib.MxObject): number | undefined {
         return mxObject ? parseFloat(mxObject.get(attribute) as string) : undefined;
     }
 
-    private updateValues(mxObject: mendix.lib.MxObject) {
-        const maxValue = this.getValue(mxObject, this.props.maximumValueAttribute);
+    private updateValues(mxObject?: mendix.lib.MxObject) {
+        const maxValue = this.getValue(this.props.maximumValueAttribute, mxObject);
         this.setState({
             maximumValue: (maxValue || maxValue === 0) ? maxValue : this.defaultMaximumValue,
-            progressValue: this.getValue(mxObject, this.props.progressAttribute)
+            progressValue: this.getValue(this.props.progressAttribute, mxObject)
         });
     }
 
-    private resetSubscription(mxObject: mendix.lib.MxObject) {
+    private resetSubscription(mxObject?: mendix.lib.MxObject) {
         this.subscriptionHandles.forEach((handle) => window.mx.data.unsubscribe(handle));
 
         if (mxObject) {
@@ -123,7 +134,7 @@ class ProgressCircleContainer extends Component<ProgressCircleContainerProps, Pr
             });
         } else if (mxObject && onClickEvent === "showPage" && page && mxObject.getGuid()) {
             const context = new window.mendix.lib.MxContext();
-            context.setContext(mxObject);
+            context.setContext(mxObject.getEntity(), mxObject.getGuid());
 
             window.mx.ui.openForm(page, {
                 error: error => window.mx.ui.error(
@@ -133,6 +144,21 @@ class ProgressCircleContainer extends Component<ProgressCircleContainerProps, Pr
             });
         }
     }
-}
 
-export { ProgressCircleContainer as default };
+    public static parseStyle(style = ""): { [key: string]: string } {
+        try {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            console.log("Failed to parse style", style, error);
+        }
+
+        return {};
+    }
+}
