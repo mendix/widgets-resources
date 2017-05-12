@@ -11,7 +11,6 @@ describe("StarRating", () => {
 
     beforeAll(() => {
         starProps = {
-            fractions: 1,
             handleOnChange: jasmine.createSpy("onChange"),
             initialRate: 2,
             readOnly: false
@@ -44,8 +43,8 @@ describe("StarRating", () => {
         expect(starRating.props().fractions).toBe(1);
     });
 
-    it("should render with fractions for the average rate type", () => {
-        starProps.fractions = 2;
+    it("should render with fractions if readOnly is true", () => {
+        starProps.readOnly = true;
 
         const starRating = renderStarRating(starProps).find(Rating);
 

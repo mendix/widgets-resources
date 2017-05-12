@@ -2,16 +2,17 @@ import { Component, createElement } from "react";
 import { StarRating } from "./StarRating";
 
 interface WrapperProps {
-    class?: string;
-    mxObject?: mendix.lib.MxObject;
-    style?: string;
+    class: string;
+    mxObject: mendix.lib.MxObject;
+    readOnly: boolean;
+    style: string;
+
 }
 
 export interface ContainerProps extends WrapperProps {
     editable: "default" | "never";
     mxObject: mendix.lib.MxObject;
     viewAverage: boolean;
-    readOnly: boolean;
     // Properties from Mendix modeler
     rateAttribute: string;
     onChangeMicroflow: string;
@@ -44,8 +45,7 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
 
         return createElement(StarRating, {
             className: this.props.class,
-            fractions: readOnly ? 2 : 1,
-            handleOnChange: !readOnly ? this.handleOnChange : undefined,
+            handleOnChange: this.handleOnChange,
             initialRate: this.state.initialRate,
             readOnly,
             style: StarRatingContainer.parseStyle(this.props.style)
@@ -119,7 +119,7 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
                 return styleObject;
             }, {});
         } catch (error) {
-            console.log("Failed to parse style", style, error);
+            window.logger.error("Failed to parse style", style, error);
         }
 
         return {};
