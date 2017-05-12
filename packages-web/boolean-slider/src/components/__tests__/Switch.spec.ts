@@ -26,7 +26,7 @@ describe("Switch", () => {
         createAndFindElements(createProps({}));
 
         expect(switchWrapper).toBeElement(
-            DOM.div({ className: "widget-switch" },
+            DOM.div({ className: "widget-switch auto" },
                 DOM.input({
                     checked: true,
                     className: "widget-switch-checkbox enabled",
@@ -44,20 +44,34 @@ describe("Switch", () => {
         );
     });
 
-    describe("that is true", () => {
-        it("should be on", () => {
-            createAndFindElements(createProps({}));
+    it("that is true should be on", () => {
+        createAndFindElements(createProps({}));
 
-            expect(checkbox.props().checked).toBe(true);
-        });
+        expect(checkbox.props().checked).toBe(true);
     });
 
-    describe("that is false", () => {
-        it("should be off", () => {
-            createAndFindElements(createProps({ isChecked: false }));
+    it("that is false should be off", () => {
+        createAndFindElements(createProps({ isChecked: false }));
 
-            expect(checkbox.props().checked).toBe(false);
-        });
+        expect(checkbox.props().checked).toBe(false);
+    });
+
+    it("with the iOS device style renders with the class iOS", () => {
+        createAndFindElements(createProps({ deviceStyle: "iOS" }));
+
+        expect(switchWrapper.hasClass("iOS")).toBe(true);
+    });
+
+    it("with the android device style renders with the class android", () => {
+        createAndFindElements(createProps({ deviceStyle: "android" }));
+
+        expect(switchWrapper.hasClass("android")).toBe(true);
+    });
+
+    it("with the auto device style renders with the class auto", () => {
+        createAndFindElements(createProps({ deviceStyle: "auto" }));
+
+        expect(switchWrapper.hasClass("auto")).toBe(true);
     });
 
     describe("that is enabled", () => {
