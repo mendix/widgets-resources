@@ -24,7 +24,7 @@ interface SwitchContainerState {
 
 type BootstrapStyle = "default" | "primary" | "info" | "warning" | "success" | "danger";
 
-export default class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerState> {
+class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerState> {
     private subscriptionHandles: number[];
 
     constructor(props: SwitchContainerProps) {
@@ -130,7 +130,7 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
         }
     }
 
-    private static parseStyle(style = ""): { [key: string]: string } {
+    public static parseStyle(style = ""): { [key: string]: string } {
         try {
             return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
                 const pair = line.split(":");
@@ -148,4 +148,4 @@ export default class SwitchContainer extends Component<SwitchContainerProps, Swi
     }
 }
 
-export { BootstrapStyle, SwitchContainerProps };
+export { BootstrapStyle, SwitchContainer as default, SwitchContainerProps };

@@ -1,6 +1,6 @@
 import { Component, createElement } from "react";
 import { Switch } from "./components/Switch";
-import { SwitchContainerProps } from "./components/SwitchContainer";
+import SwitchContainer, { SwitchContainerProps } from "./components/SwitchContainer";
 
 import * as css from "./ui/Switch.sass";
 import { Label } from "./components/Label";
@@ -17,19 +17,22 @@ export class preview extends Component<SwitchContainerProps, {}> {
             return createElement(Label, {
                 className: this.props.class,
                 label: this.props.label,
+                style: SwitchContainer.parseStyle(this.props.style),
                 weight: this.props.labelWidth > maxLabelWidth ? maxLabelWidth : this.props.labelWidth
-            }, this.renderSwitch());
+            }, this.renderSwitch(true));
         }
 
         return this.renderSwitch();
     }
 
-    private renderSwitch() {
+    private renderSwitch(hasLabel = false) {
         return createElement(Switch, {
             bootstrapStyle: this.props.bootstrapStyle,
+            className: !hasLabel ? this.props.class : undefined,
             isChecked: true,
             onClick: undefined as any,
-            status: this.props.editable === "default" ? "enabled" : "disabled"
+            status: this.props.editable === "default" ? "enabled" : "disabled",
+            style: !hasLabel ? SwitchContainer.parseStyle(this.props.style) : undefined
         });
     }
 
