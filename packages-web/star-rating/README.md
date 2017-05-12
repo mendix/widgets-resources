@@ -20,14 +20,17 @@ This widget requires a context.
 ### Security Configuration
 
 Security is a mandatory feature for rating and is considered seriously for proper use of this widget in a mendix project.
- - Model Configuration ![1](./assets/domain_model.jpg)
- - Campaign entity security: a User should only read the average attribute ![1](./assets/security_campaign.jpg)
- - Rating or voting entity security: The user can only write their own rating ![1](./assets/security_rate.jpg)
+ - Model Configuration
+
+ ![1](https://raw.githubusercontent.com/FlockOfBirds/star-rating/feature/mendixwrapper/assets/domain_model.jpg)
+ - Campaign entity security: a User should only read the average attribute 
+ 
+ ![1](https://raw.githubusercontent.com/FlockOfBirds/star-rating/feature/mendixwrapper/assets/security_campaign.jpg)
+ - Rating or voting entity security: The user can only write their own rating 
+ 
+ ![1](https://raw.githubusercontent.com/FlockOfBirds/star-rating/feature/mendixwrapper/assets/security_rate.jpg)
  - When creating a new rating, its important to use the current user's previous rating as the initial rate value. use this microflow [RateMe microflow](https://modelshare.mendix.com/models/d7ece331-49d4-4464-a2e2-ea75528a0367/rate-me) for the rate me custom button
  - Calculation of the average rate is done by adding a [Calculate average microflow](https://modelshare.mendix.com/models/d27114b6-e2fb-4d79-aa39-8c60a6477ca8/calculate-average-rate) to the after commit and and after delete event handlers in the domain modeler
-
-## Issues
-Please report issues at https://github.com/mendixlabs/star-rating/issues.
 
 ## Issues, suggestions and feature requests
 We are actively maintaining this widget, please report any issues or suggestion for improvement at https://github.com/mendixlabs/star-rating/issues.
