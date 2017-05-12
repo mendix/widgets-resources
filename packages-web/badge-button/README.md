@@ -11,21 +11,21 @@ A special distinctive mark or token put on any display as a button
 
 ## Dependencies
 
-Mendix 7.1
+Mendix 7.2
 
 ## Demo project
 
 [https://badgebutton.mxapps.io/](https://badgebutton.mxapps.io/)
 
-![1](assets/demo.png)
+![1](https://raw.githubusercontent.com/mendixlabs/badge-button/master/assets/demo.png)
 ## Usage
 Place the widget in the context of an object that has a label attribute, value attribute and bootstrap style attribute.
 
 The data source attributes specified in the `Data source` tab are optional. If not set, static data should be specified in the `Display` tab.
 
-![1](assets/Static_attributes.png)
-![1](assets/Data_source.png)
-![1](assets/Behavior.png)
+![1](https://raw.githubusercontent.com/mendixlabs/badge-button/master/assets/Static_attributes.png)
+![1](https://raw.githubusercontent.com/mendixlabs/badge-button/master/assets/Data_source.png)
+![1](https://raw.githubusercontent.com/mendixlabs/badge-button/master/assets/Behavior.png)
 
 ## Issues, suggestions and feature requests
 
@@ -37,7 +37,7 @@ Prerequisite: Install git, node package manager, webpack CLI, grunt CLI, Karma C
 
 To contribute, fork and clone.
 
-    git clone https://github.com/FlockOfBirds/badge-button.git
+    git clone https://github.com/mendixlabs/badge-button.git
 
 The code is in typescript. Use a typescript IDE of your choice, like Visual Studio Code or WebStorm.
 
@@ -49,7 +49,7 @@ Create a folder named dist in the project root.
 
 Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Changes to the widget code shall be automatically pushed to this test project.
 
-[https://github.com/MendixLabs/badge-button/releases/download/v1.0.0/Badge.mpr](https://github.com/MendixLabs/badge-button/releases/download/v1.0.0/Badge.mpr)
+[https://github.com/mendixlabs/badge-button/releases/download/V1.0.0/TestBadge.mpk](https://github.com/mendixlabs/badge-button/releases/download/V1.0.0/TestBadge.mpk)
 
 To automatically compile, bundle and push code changes to the running test project, run:
 
