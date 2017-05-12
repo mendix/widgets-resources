@@ -8,7 +8,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
         filename: "src/com/mendix/widget/custom/switch/Switch.js",
-        libraryTarget:  "umd"
+        libraryTarget: "umd"
     },
     resolve: {
         extensions: [ ".ts", ".js", ".json" ]
@@ -16,14 +16,19 @@ module.exports = {
     module: {
         rules: [
             { test: /\.ts$/, use: "ts-loader" },
-            { test: /\.css$/, loader: ExtractTextPlugin.extract({
+            {
+                test: /\.css$/, loader: ExtractTextPlugin.extract({
                 fallback: "style-loader",
                 use: "css-loader"
-            }) },
-            { test: /\.sass$/, loader: ExtractTextPlugin.extract({
-                fallback: "style-loader",
-                use: "css-loader!sass-loader"}
-            ) }
+            })
+            },
+            {
+                test: /\.sass$/, loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader!sass-loader"
+                }
+            )
+            }
         ]
     },
     devtool: "source-map",

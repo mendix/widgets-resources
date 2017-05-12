@@ -134,7 +134,11 @@
     ],
     "curly": false,
     "arrow-parens": false,
-    "no-object-literal-type-assertion": false
+    "no-object-literal-type-assertion": false,
+    "linebreak-style": [
+      true,
+      "LF"
+    ]
   },
   "jsRules": {
     "trailing-comma": [
@@ -144,6 +148,10 @@
     "array-bracket-spacing": [
       true,
       "always"
+    ],
+    "linebreak-style": [
+      true,
+      "LF"
     ]
   }
 }
