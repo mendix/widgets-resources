@@ -6,7 +6,6 @@ import "../ui/StarRating.css";
 
 export interface StarRatingProps {
     className?: string;
-    fractions: number;
     initialRate: number;
     handleOnChange?: (rate: number) => void;
     readOnly: boolean;
@@ -17,6 +16,7 @@ export class StarRating extends Component<StarRatingProps, {}> {
     private start: number;
     private step: number;
     private stop: number;
+    private fractions: number;
 
     constructor(props: StarRatingProps) {
         super(props);
@@ -27,14 +27,17 @@ export class StarRating extends Component<StarRatingProps, {}> {
     }
 
     render() {
+        const { readOnly } = this.props;
+        this.fractions = readOnly ? 2 : 1;
+
         return DOM.div({ className: classNames("widget-star-rating", this.props.className), style: this.props.style },
             createElement(Rating, {
                 empty: "glyphicon glyphicon-star-empty widget-star-rating-empty widget-star-rating-font",
-                fractions: this.props.fractions,
+                fractions: this.fractions,
                 full: "glyphicon glyphicon-star widget-star-rating-full widget-star-rating-font",
                 initialRate: this.getRate(this.props),
-                onChange: !this.props.readOnly ? this.props.handleOnChange : undefined,
-                readonly: this.props.readOnly,
+                onChange: !readOnly ? this.props.handleOnChange : undefined,
+                readonly: readOnly,
                 start: this.start,
                 step: this.step,
                 stop: this.stop
@@ -51,6 +54,6 @@ export class StarRating extends Component<StarRatingProps, {}> {
         }
         // This helps to round off to the nearest fraction.
         // eg fraction 2 or 0.5, rounds off a rate 1.4 to 1.5, 1.2 to 1.0
-        return Math.round(props.initialRate * props.fractions) / props.fractions as number;
+        return Math.round(props.initialRate * this.fractions) / this.fractions as number;
     }
 }
