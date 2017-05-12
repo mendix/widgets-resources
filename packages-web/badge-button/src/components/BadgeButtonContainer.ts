@@ -9,12 +9,10 @@ interface WrapperProps {
     style?: string;
 }
 
-interface BadgeButtonContainerProps extends WrapperProps {
+export interface BadgeButtonContainerProps extends WrapperProps {
     valueAttribute: string;
-    bootstrapStyleAttribute: string;
-    labelAttribute: string;
     label: string;
-    bootstrapStyle: string;
+    bootstrapStyle: BootstrapStyle;
     badgeButtonValue: string;
     microflow: string;
     onClickEvent: OnClickOptions;
@@ -24,8 +22,6 @@ interface BadgeButtonContainerProps extends WrapperProps {
 interface BadgeButtonContainerState {
     alertMessage?: string;
     value: string;
-    label: string;
-    bootstrapStyle: BootstrapStyle | string;
 }
 
 type OnClickOptions = "doNothing" | "showPage" | "callMicroflow";
@@ -37,7 +33,9 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
     constructor(props: BadgeButtonContainerProps) {
         super(props);
 
-        this.state = this.updateValues(props.mxObject);
+        const defaultState = this.updateValues(props.mxObject);
+        defaultState.alertMessage = this.validateProps();
+        this.state = defaultState;
         this.subscriptionHandles = [];
         this.handleOnClick = this.handleOnClick.bind(this);
         this.handleSubscriptions = this.handleSubscriptions.bind(this);
@@ -50,10 +48,10 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
         }
 
         return createElement(BadgeButton, {
-            bootstrapStyle: this.state.bootstrapStyle as BootstrapStyle,
+            bootstrapStyle: this.props.bootstrapStyle,
             className: this.props.class,
             getRef: this.setBadgeButtonReference,
-            label: this.state.label,
+            label: this.props.label,
             onClickAction: this.handleOnClick,
             style: BadgeButtonContainer.parseStyle(this.props.style),
             value: this.state.value
@@ -81,9 +79,6 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
 
     private updateValues(mxObject = this.props.mxObject): BadgeButtonContainerState {
         return({
-            alertMessage: this.validateProps(),
-            bootstrapStyle: this.getValue(this.props.bootstrapStyleAttribute, this.props.bootstrapStyle, mxObject),
-            label: this.getValue(this.props.labelAttribute, this.props.label, mxObject),
             value: this.getValue(this.props.valueAttribute, this.props.badgeButtonValue, mxObject)
         });
     }
@@ -99,7 +94,6 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
 
     private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
-        this.subscriptionHandles = [];
 
         if (mxObject) {
             this.subscriptionHandles.push(window.mx.data.subscribe({
@@ -107,22 +101,18 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
                 guid: mxObject.getGuid()
             }));
 
-            [
-                this.props.valueAttribute,
-                this.props.bootstrapStyleAttribute,
-                this.props.labelAttribute
-            ].forEach((attr) =>
-                this.subscriptionHandles.push(window.mx.data.subscribe({
-                    attr,
-                    callback: this.handleSubscriptions,
-                    guid: mxObject.getGuid()
-                }))
-            );
+            this.subscriptionHandles.push(window.mx.data.subscribe({
+                attr: this.props.valueAttribute,
+                callback: this.handleSubscriptions,
+                guid: mxObject.getGuid()
+            }));
         }
     }
 
     private handleSubscriptions() {
-        this.setState(this.updateValues());
+        this.setState({
+            value: this.getValue(this.props.valueAttribute, this.props.badgeButtonValue, this.props.mxObject)
+        });
     }
 
     private validateProps(): string {
@@ -162,7 +152,7 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
         }
     }
 
-    private static parseStyle(style = ""): { [key: string]: string } {
+    public static parseStyle(style = ""): { [key: string]: string } {
         try {
             return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
                 const pair = line.split(":");

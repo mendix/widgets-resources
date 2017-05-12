@@ -13,20 +13,16 @@ export interface BadgeButtonProps {
     getRef?: (node: HTMLElement) => void;
 }
 
-type BootstrapStyle = "default" | "info" | "primary" | "danger" | "success" | "warning";
+export type BootstrapStyle = "default" | "info" | "primary" | "danger" | "success" | "warning";
 
-const BadgeButton: SFC<BadgeButtonProps> = (props) =>
-    DOM.button(
-        {
-            className: classNames("widget-badge-button btn", props.className, {
-                [`btn-${props.bootstrapStyle}`]: !!props.bootstrapStyle
-            }),
-            onClick: props.onClickAction,
-            ref: props.getRef,
-            style: props.style
-        },
-        DOM.span({ className: "widget-badge-button-text" }, props.label),
-        DOM.span({ className: "badge" }, props.value)
-    );
-
-export { BadgeButton, BootstrapStyle };
+export const BadgeButton: SFC<BadgeButtonProps> = (props) => DOM.button({
+    className: classNames("widget-badge-button btn", props.className, {
+        [`btn-${props.bootstrapStyle}`]: !!props.bootstrapStyle
+    }),
+    onClick: props.onClickAction,
+    ref: props.getRef,
+    style: props.style
+},
+    DOM.span({ className: "widget-badge-button-text" }, props.label),
+    DOM.span({ className: "badge" }, props.value)
+);
