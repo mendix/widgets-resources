@@ -1,12 +1,18 @@
 "use strict";
 const webpack = require("webpack");
 const webpackConfig = require("./webpack.config");
-const webpackConfigRelease = {};
-let plugins = webpackConfig.plugins.slice(0);
-plugins.push(new webpack.optimize.UglifyJsPlugin());
-Object.assign(webpackConfigRelease, webpackConfig, {
+const webpackConfigRelease = [ {}, {} ];
+const pluginsWidget = webpackConfig[0].plugins.slice(0);
+pluginsWidget.push(new webpack.optimize.UglifyJsPlugin());
+Object.assign(webpackConfigRelease[0], webpackConfig[0], {
     devtool: false,
-    plugins: plugins
+    plugins: pluginsWidget
+});
+const pluginsPreview = webpackConfig[1].plugins.slice(0);
+pluginsPreview.push(new webpack.optimize.UglifyJsPlugin());
+Object.assign(webpackConfigRelease[1], webpackConfig[1], {
+    devtool: false,
+    plugins: pluginsPreview
 });
 
 module.exports = function (grunt) {

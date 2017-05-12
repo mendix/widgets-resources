@@ -1,0 +1,84 @@
+@import "./variables";
+
+.widget-progress-circle {
+    width: 100%;
+    max-width: 300px;
+}
+
+.widget-progress-circle-small,
+.widget-progress-circle-medium,
+.widget-progress-circle-large {
+    margin-bottom: 10px;
+}
+
+.widget-progress-circle-small {
+    .progressbar-text {
+        font-size: 16px;
+    }
+}
+
+.widget-progress-circle-medium {
+    .progressbar-text {
+        font-size: 26px;
+    }
+}
+
+.widget-progress-circle-large {
+    .progressbar-text {
+        font-size: 36px;
+    }
+}
+
+.widget-progress-circle-trail-path {
+    stroke: #eee;
+}
+
+.widget-progress-circle-path {
+    stroke: #307bbb;
+}
+
+.widget-progress-circle-alert {
+    .progressbar-text {
+        color: red !important; /* The Progress library has inline styling on the circle text */
+    }
+}
+
+.widget-progress-circle-clickable{
+    cursor: pointer;
+}
+
+.widget-progress-circle-primary {
+    .widget-progress-circle-path {
+        stroke: $brand-primary;
+    }
+}
+
+.widget-progress-circle-info {
+    .widget-progress-circle-path {
+        stroke: $brand-info;
+    }
+}
+
+.widget-progress-circle-success {
+    .widget-progress-circle-path {
+        stroke: $brand-success;
+    }
+}
+
+.widget-progress-circle-warning {
+    .widget-progress-circle-path {
+        stroke: $brand-warning;
+    }
+}
+
+.widget-progress-circle-danger {
+    .widget-progress-circle-path {
+        stroke: $brand-danger;
+    }
+}
+
+.widget-progress-circle-inverse {
+    .widget-progress-circle-path {
+        stroke: $brand-inverse;
+    }
+}

@@ -5,6 +5,7 @@ Displays a progress in a circle.
 * Show the percentage based on the progress value and the maximum progress value
 * Animate on load and on update
 * On click open a page or run a microflow
+* Show progress circle with different colors
 
 ## Dependencies
 Mendix 7.1
