@@ -4,6 +4,9 @@ Toggle a boolean attribute.
 ## Features
 * Deactivate when attribute or context is read-only
 * Execute a microflow when toggled
+* Add a label to the switch
+* Display in either iOS style or android(material design)
+* Display in various bootstrap styles
 
 ## Dependencies
 Mendix 7.1
@@ -34,7 +37,7 @@ Create a folder named `dist` in the project root.
 
 Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Changes to the widget code shall be automatically pushed to this test project.
 
-[https://github.com/MendixLabs/boolean-slider/releases/download/1.0.0/Test.mpr](https://github.com/MendixLabs/boolean-slider/releases/download/1.0.0/Test.mpr)
+[https://github.com/MendixLabs/boolean-slider/releases/download/v1.1.0/Test.mpk](https://github.com/MendixLabs/boolean-slider/releases/download/v1.1.0/Test.mpk)
 
 To automatically compile, bundle and push code changes to the running test project, run:
 
