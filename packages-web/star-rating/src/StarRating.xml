@@ -16,7 +16,6 @@
                 <attributeType name="Long"/>
             </attributeTypes>
         </property>
-
         <property key="editable" type="enumeration" defaultValue="default">
             <caption>Editable</caption>
             <category>General</category>
