@@ -96,15 +96,6 @@ $default-ios-color: rgb(100, 189, 99)
                     border-radius: 45%
 
         &.no-switch
-            .widget-switch-btn
-                display: none
-                &:active
-                    box-shadow: none
-
-        &.disabled
-            opacity: 0.5
-            cursor: default
-
             .left
                 &:active
                     width: 30px
@@ -178,13 +169,16 @@ $default-ios-color: rgb(100, 189, 99)
             .widget-switch-btn
                     background: #BCBDBC
 
-@mixin auto-android($device-width, $device-height, $webkit-ratio)
-    @media screen and (device-width: $device-width) and (device-height: $device-height) and (-webkit-device-pixel-ratio: $webkit-ratio)
-        @include android
+.widget-switch-btn-wrapper
+    &.disabled
+        opacity: 0.5
+        cursor: default
 
-@mixin auto-ios($device-width, $device-height, $webkit-ratio)
-    @media only screen and (min-device-width: $device-width) and (max-device-width: $device-height) and (-webkit-min-device-pixel-ratio: $webkit-ratio)
-        @include ios
+    &.no-switch
+        .widget-switch-btn
+            display: none !important
+            &:active
+                box-shadow: none
 
 .widget-switch
     float: left
@@ -202,58 +196,18 @@ $default-ios-color: rgb(100, 189, 99)
         @include android
 
     &.auto
-
         @include ios
 
-        /* ----------- iPhone 4 & 4S ----------- */
+html
+    &.dj_android
+        .widget-switch
+            &.auto
+                @include android
 
-        /* Portrait and Landscape */
-        @include auto-ios(320px, 480px, 2)
-
-        /* ----------- iPhone 5 & 5S ----------- */
-
-        /* Portrait and Landscape */
-        @include auto-ios(320px, 568px, 2)
-
-        /* ----------- iPhone 6 ----------- */
-
-        /* Portrait and Landscape */
-        @include auto-ios(375px, 667px, 2)
-
-        /* ----------- iPhone 6+ ----------- */
-
-        /* Portrait and Landscape */
-        @include auto-ios(414px, 736px, 3)
-
-        /* ----------- iPad Mini, iPad 1 and 2 ----------- */
-
-        /* Portrait and Landscape */
-        @include auto-ios(768px, 1024px, 1)
-
-        /* ----------- iPad 3 and 4 ----------- */
-
-        /* Portrait and Landscape */
-        @include auto-ios(768px, 1024px, 2)
-
-        /* ----------- Galaxy S3 ----------- */
-
-        /* Portrait and Landscape */
-        @include auto-android(320px, 640px, 2)
-
-        /* ----------- Galaxy S4 ----------- */
-
-        /* Portrait and Landscape */
-        @include auto-android(320px, 640px, 3)
-
-        /* ----------- Galaxy S5 ----------- */
-
-        /* Portrait and Landscape */
-        @include auto-android(360px, 640px, 3)
-
-        /* ----------- Nexus 6P ----------- */
-
-        /* Portrait and Landscape */
-        @include auto-android(412px, 732px, 3.5)
+    &.dj_ios
+        .widget-switch
+            &.auto
+                @include ios
 
 .form-group
     .widget-switch
