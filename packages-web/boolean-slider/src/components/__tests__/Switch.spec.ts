@@ -18,6 +18,7 @@ describe("Switch", () => {
         props.onClick = jasmine.createSpy("onClick");
         props.isChecked = typeof props.isChecked !== "undefined" ? props.isChecked : true;
         props.status = props.status || "enabled";
+
         return props as SwitchProps;
     };
 
@@ -112,31 +113,6 @@ describe("Switch", () => {
             switchButton.simulate("click");
 
             expect(props.onClick).not.toHaveBeenCalled();
-        });
-    });
-
-    describe("that has an error", () => {
-        it("should render an error alert", () => {
-            const props = createProps({
-                alertMessage: "This is an error",
-                isChecked: false
-            });
-            createAndFindElements(props);
-
-            expect(switchWrapper).toBeElement(
-                DOM.div({ className: "widget-switch has-error" },
-                    DOM.input({
-                        checked: false,
-                        className: "widget-switch-checkbox enabled",
-                        readOnly: true,
-                        type: "checkbox"
-                    }),
-                    DOM.div({
-                        className: "widget-switch-btn enabled",
-                        onClick: jasmine.any(Function) as any
-                    })
-                )
-            );
         });
     });
 });

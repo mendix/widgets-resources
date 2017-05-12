@@ -6,7 +6,6 @@ import { BootstrapStyle } from "./SwitchContainer";
 import "../ui/Switch.sass";
 
 export interface SwitchProps {
-    alertMessage?: string;
     bootstrapStyle: BootstrapStyle;
     className?: string;
     isChecked: boolean;
@@ -20,7 +19,7 @@ export type SwitchStatus = "enabled" | "disabled" | "no-context";
 export const Switch: SFC<SwitchProps> = (props) =>
     DOM.div(
         {
-            className: classNames("widget-switch", props.className, { "has-error": !!props.alertMessage }),
+            className: classNames("widget-switch", props.className),
             style: props.style
         },
         DOM.input({
