@@ -14,7 +14,7 @@ describe("Label", () => {
             DOM.div({ className: "form-horizontal" },
                 DOM.div({ className: "form-group" },
                     DOM.div({ className: "col-sm-6 col-xs-6" },
-                        DOM.label({ className: "control-label" }, label)
+                        DOM.label({ className: "control-label widget-switch-label" }, label)
                     ),
                     DOM.div({ className: `col-sm-6` })
                 )

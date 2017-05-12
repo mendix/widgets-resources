@@ -12,7 +12,7 @@ const Label: SFC<LabelProps> = ({ children, className, label, style, weight }) =
     DOM.div({ className: classNames("form-horizontal", className), style },
         DOM.div({ className: "form-group" },
             DOM.div({ className: `col-sm-${weight} col-xs-${weight}` },
-                DOM.label({ className: "control-label" }, label)
+                DOM.label({ className: "control-label widget-switch-label" }, label)
             ),
             DOM.div({
                 className: `col-sm-${12 - weight} col-xs-${12 - weight}`
