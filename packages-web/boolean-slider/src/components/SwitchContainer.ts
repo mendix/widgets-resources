@@ -12,7 +12,7 @@ interface WrapperProps {
 
 interface SwitchContainerProps extends WrapperProps {
     booleanAttribute: string;
-    bootstrapStyle: BootstrapStyle;
+    colorStyle: ColorStyle;
     deviceStyle: DeviceStyle;
     editable: "default" | "never";
     label: string;
@@ -24,7 +24,7 @@ interface SwitchContainerState {
     isChecked?: boolean;
 }
 
-type BootstrapStyle = "default" | "primary" | "info" | "warning" | "success" | "danger";
+type ColorStyle = "default" | "primary" | "info" | "warning" | "success" | "danger";
 type DeviceStyle = "auto" | "android" | "iOS";
 
 class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerState> {
@@ -64,11 +64,11 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
     }
 
     private renderSwitch(hasLabel = false): SFCElement<SwitchProps> {
-        const { bootstrapStyle, class: className, deviceStyle, style } = this.props;
+        const { class: className, colorStyle, deviceStyle, style } = this.props;
 
         return createElement(Switch, {
-            bootstrapStyle,
             className: !hasLabel ? className : undefined,
+            colorStyle,
             deviceStyle,
             isChecked: this.state.isChecked,
             onClick: this.handleToggle,
@@ -158,11 +158,11 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
                 return styleObject;
             }, {});
         } catch (error) {
-            console.log("Failed to parse style", style, error);
+            window.logger.warn("Failed to parse style", style, error);
         }
 
         return {};
     }
 }
 
-export { BootstrapStyle, DeviceStyle, SwitchContainer as default, SwitchContainerProps };
+export { ColorStyle, DeviceStyle, SwitchContainer as default, SwitchContainerProps };

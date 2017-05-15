@@ -1,12 +1,12 @@
 import { DOM, SFC } from "react";
 import * as classNames from "classnames";
 
-import { BootstrapStyle, DeviceStyle } from "./SwitchContainer";
+import { ColorStyle, DeviceStyle } from "./SwitchContainer";
 
 import "../ui/Switch.sass";
 
 export interface SwitchProps {
-    bootstrapStyle: BootstrapStyle;
+    colorStyle: ColorStyle;
     className?: string;
     deviceStyle?: DeviceStyle;
     isChecked: boolean;
@@ -31,7 +31,7 @@ export const Switch: SFC<SwitchProps> = (props) =>
         }),
         DOM.div(
             {
-                className: classNames(`widget-switch-btn-wrapper widget-switch-btn-wrapper-${props.bootstrapStyle}`, {
+                className: classNames(`widget-switch-btn-wrapper widget-switch-btn-wrapper-${props.colorStyle}`, {
                     "checked": props.isChecked,
                     "disabled": props.status === "disabled",
                     "no-switch": props.status === "no-context",
@@ -49,7 +49,7 @@ export const Switch: SFC<SwitchProps> = (props) =>
     );
 
 Switch.defaultProps = {
-    bootstrapStyle: "default",
+    colorStyle: "default",
     deviceStyle: "auto"
 };
 
