@@ -27,8 +27,8 @@ export class preview extends Component<SwitchContainerProps, {}> {
 
     private renderSwitch(hasLabel = false) {
         return createElement(Switch, {
-            bootstrapStyle: this.props.bootstrapStyle,
             className: !hasLabel ? this.props.class : undefined,
+            colorStyle: this.props.colorStyle,
             deviceStyle: this.props.deviceStyle,
             isChecked: true,
             onClick: undefined as any,
