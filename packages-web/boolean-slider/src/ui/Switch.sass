@@ -196,9 +196,6 @@ $default-ios-color: rgb(100, 189, 99)
 .widget-switch
     float: left
 
-    @include dynamic-float(320px, 736px, right)
-    @include dynamic-float(768px, 1024px, right)
-
     .widget-switch-checkbox
         display: none
 
@@ -215,9 +212,8 @@ $default-ios-color: rgb(100, 189, 99)
     &.android
         .form-group
             .control-label
-                &.widget-switch-label
-                    padding-top: 0
-                    padding-bottom: 0
+                padding-top: 0
+                padding-bottom: 0
 
 html
     &.dj_android
@@ -226,7 +222,8 @@ html
                 @include android
 
         .form-horizontal
-            @include android-label-padding
+            &.widget-switch-label
+                @include android-label-padding
 
     &.dj_ios
         .widget-switch
@@ -234,20 +231,20 @@ html
                 @include ios
 
 .form-horizontal
-    .form-group
-        .widget-switch
-            float: left
+    &.widget-switch-label
+        .form-group
+            .widget-switch
+                float: left
 
-        .control-label
-            &.widget-switch-label
+            .control-label
                 float: right
                 padding-top: 8px
                 padding-bottom: 8px
                 @include dynamic-float(320px, 736px, left)
                 @include dynamic-float(768px, 1024px, left)
 
-        .widget-switch
-            @include dynamic-float(320px, 736px, right)
-            @include dynamic-float(768px, 1024px, right)
+            .widget-switch
+                @include dynamic-float(320px, 736px, right)
+                @include dynamic-float(768px, 1024px, right)
 
-    @include android-label-padding
+        @include android-label-padding
