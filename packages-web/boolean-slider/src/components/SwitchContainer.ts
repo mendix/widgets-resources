@@ -7,6 +7,7 @@ interface WrapperProps {
     class?: string;
     mxObject?: mendix.lib.MxObject;
     style?: string;
+    readOnly?: boolean;
 }
 
 interface SwitchContainerProps extends WrapperProps {
@@ -63,25 +64,38 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
     }
 
     private renderSwitch(hasLabel = false): SFCElement<SwitchProps> {
-        const { editable, mxObject } = this.props;
-        const enabled = editable === "default" && (mxObject && !mxObject.isReadonlyAttr(this.props.booleanAttribute));
-        const status: SwitchStatus = mxObject
-            ? enabled ? "enabled" : "disabled"
-            : "no-context";
+        const { bootstrapStyle, class: className, deviceStyle, style } = this.props;
 
         return createElement(Switch, {
-            bootstrapStyle: this.props.bootstrapStyle,
-            className: !hasLabel ? this.props.class : undefined,
-            deviceStyle: this.props.deviceStyle,
+            bootstrapStyle,
+            className: !hasLabel ? className : undefined,
+            deviceStyle,
             isChecked: this.state.isChecked,
             onClick: this.handleToggle,
-            status,
-            style: !hasLabel ? SwitchContainer.parseStyle(this.props.style) : undefined
+            status: this.getSwitchStatus(!this.isReadOnly()),
+            style: !hasLabel ? SwitchContainer.parseStyle(style) : undefined
         } as SwitchProps);
     }
 
     private getAttributeValue(attribute: string, mxObject?: mendix.lib.MxObject): boolean {
         return !!mxObject && mxObject.get(attribute) as boolean;
+    }
+
+    private isReadOnly() {
+        const { booleanAttribute, editable, mxObject, readOnly } = this.props;
+        if (editable === "default" && mxObject) {
+            return readOnly || mxObject.isReadonlyAttr(booleanAttribute);
+        }
+
+        return true;
+    }
+
+    private getSwitchStatus(enabled: boolean): SwitchStatus {
+        if (this.props.mxObject) {
+            return enabled ? "enabled" : "disabled";
+        }
+
+        return "no-context";
     }
 
     private handleToggle() {

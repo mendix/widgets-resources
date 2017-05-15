@@ -19,7 +19,7 @@
             <category>Display</category>
             <description/>
             <enumerationValues>
-                <enumerationValue key="default">Always</enumerationValue>
+                <enumerationValue key="default">Default</enumerationValue>
                 <enumerationValue key="never">Never</enumerationValue>
             </enumerationValues>
         </property>
