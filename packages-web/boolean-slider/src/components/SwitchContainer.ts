@@ -43,7 +43,7 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
         const maxLabelWidth = 11;
         if (this.props.label.trim()) {
             return createElement(Label, {
-                className: this.props.class,
+                className: `${this.props.deviceStyle} ${this.props.class}`,
                 label: this.props.label,
                 style: SwitchContainer.parseStyle(this.props.style),
                 weight: this.props.labelWidth > maxLabelWidth ? maxLabelWidth : this.props.labelWidth
