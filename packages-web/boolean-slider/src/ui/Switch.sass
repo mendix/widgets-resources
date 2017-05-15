@@ -9,9 +9,7 @@ $default-ios-color: rgb(100, 189, 99)
     box-shadow: $brand-style 0 0 0 16px inset
 
 @mixin bootstrap-style-android($brand-style)
-    background-color: $brand-style
-    border: none
-    box-shadow: none
+    background-color: lighten($brand-style, 10%)
 
 @mixin dynamic-float($min-width, $max-width, $direction)
     @media (min-width: $min-width) and (max-width: $max-width)
@@ -138,24 +136,41 @@ $default-ios-color: rgb(100, 189, 99)
 
         &.checked
             background: #6FBEB5
+            border: none
+            box-shadow: none
 
             &.widget-switch-btn-wrapper-default
-                @include bootstrap-style-android($default-android-color)
+                background-color: $default-android-color
 
             &.widget-switch-btn-wrapper-success
                 @include bootstrap-style-android($brand-success)
 
+                .widget-switch-btn
+                    background: $brand-success
+
             &.widget-switch-btn-wrapper-info
                 @include bootstrap-style-android($brand-info)
+
+                .widget-switch-btn
+                    background: $brand-info
 
             &.widget-switch-btn-wrapper-primary
                 @include bootstrap-style-android($brand-primary)
 
+                .widget-switch-btn
+                    background: $brand-primary
+
             &.widget-switch-btn-wrapper-warning
                 @include bootstrap-style-android($brand-warning)
 
+                .widget-switch-btn
+                    background: $brand-warning
+
             &.widget-switch-btn-wrapper-danger
                 @include bootstrap-style-android($brand-danger)
+
+                .widget-switch-btn
+                    background: $brand-danger
 
             .widget-switch-btn
                 left: 20px
@@ -196,32 +211,43 @@ $default-ios-color: rgb(100, 189, 99)
     &.auto
         @include ios
 
+@mixin android-label-padding
+    &.android
+        .form-group
+            .control-label
+                &.widget-switch-label
+                    padding-top: 0
+                    padding-bottom: 0
+
 html
     &.dj_android
         .widget-switch
             &.auto
                 @include android
 
+        .form-horizontal
+            @include android-label-padding
+
     &.dj_ios
         .widget-switch
             &.auto
                 @include ios
 
-.form-group
-    .widget-switch
-        float: left
+.form-horizontal
+    .form-group
+        .widget-switch
+            float: left
 
-    .control-label
-        &.widget-switch-label
-            float: right
-            padding-top: 8px
-            padding-bottom: 8px
+        .control-label
+            &.widget-switch-label
+                float: right
+                padding-top: 8px
+                padding-bottom: 8px
+                @include dynamic-float(320px, 736px, left)
+                @include dynamic-float(768px, 1024px, left)
 
-    .widget-switch
-        @include dynamic-float(320px, 736px, right)
-        @include dynamic-float(768px, 1024px, right)
+        .widget-switch
+            @include dynamic-float(320px, 736px, right)
+            @include dynamic-float(768px, 1024px, right)
 
-    .control-label
-        &.widget-switch-label
-            @include dynamic-float(320px, 736px, left)
-            @include dynamic-float(768px, 1024px, left)
+    @include android-label-padding
