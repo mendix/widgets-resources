@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@types/classnames": "0.0.32",
-    "@types/core-js": "^0.9.36",
+    "@types/core-js": "0.9.36",
     "@types/enzyme": "^2.7.9",
     "@types/jasmine": "^2.5.47",
     "@types/karma": "^0.13.35",
