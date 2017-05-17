@@ -16,6 +16,11 @@
                 <attributeType name="Long"/>
             </attributeTypes>
         </property>
+        <property key="maximumStars" type="integer" defaultValue="5">
+            <caption>Number of stars</caption>
+            <category>General</category>
+            <description/>
+        </property>
         <property key="editable" type="enumeration" defaultValue="default">
             <caption>Editable</caption>
             <category>General</category>

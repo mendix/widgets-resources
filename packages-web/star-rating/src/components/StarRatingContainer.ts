@@ -16,6 +16,7 @@ export interface ContainerProps extends WrapperProps {
     // Properties from Mendix modeler
     rateAttribute: string;
     onChangeMicroflow: string;
+    maximumStars: number;
 }
 
 interface ContainerState {
@@ -48,6 +49,7 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
             handleOnChange: this.handleOnChange,
             initialRate: this.state.initialRate,
             readOnly,
+            maximumStars: this.props.maximumStars,
             style: StarRatingContainer.parseStyle(this.props.style)
         });
     }
@@ -108,7 +110,7 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
         });
     }
 
-    private static parseStyle(style = ""): { [key: string]: string } {
+    public static parseStyle(style = ""): { [key: string]: string } {
         try {
             return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
                 const pair = line.split(":");

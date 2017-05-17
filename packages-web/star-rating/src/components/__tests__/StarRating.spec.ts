@@ -13,7 +13,8 @@ describe("StarRating", () => {
         starProps = {
             handleOnChange: jasmine.createSpy("onChange"),
             initialRate: 2,
-            readOnly: false
+            readOnly: false,
+            maximumStars: 5
         };
     });
 
@@ -58,12 +59,12 @@ describe("StarRating", () => {
         expect(starRating.props().initialRate).toEqual(0);
     });
 
-    it("should render max 5 stars for large positive rating", () => {
+    it("should render max stars for large positive rating", () => {
         starProps.initialRate = 100;
 
         const starRating = renderStarRating(starProps).find(Rating);
 
-        expect(starRating.props().initialRate).toEqual(5);
+        expect(starRating.props().initialRate).toEqual(starProps.maximumStars);
     });
 
 });
