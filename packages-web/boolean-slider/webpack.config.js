@@ -2,9 +2,8 @@ const webpack = require("webpack");
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
 
- const widgetConfig = {
+const widgetConfig = {
     entry: "./src/components/SwitchContainer.ts",
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
@@ -35,7 +34,6 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
     devtool: "source-map",
     externals: [ "react", "react-dom" ],
     plugins: [
-        new CleanWebpackPlugin("dist/tmp"),
         new CopyWebpackPlugin(
             [
                 { from: "src/**/*.xml" },

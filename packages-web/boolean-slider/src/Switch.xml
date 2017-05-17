@@ -44,7 +44,7 @@
             </enumerationValues>
         </property>
         <property key="colorStyle" type="enumeration" defaultValue="default">
-            <caption>Style</caption>
+            <caption>Switch style</caption>
             <category>Display</category>
             <description>The color style of the switch</description>
             <enumerationValues>
