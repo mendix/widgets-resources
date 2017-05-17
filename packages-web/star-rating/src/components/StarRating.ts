@@ -9,6 +9,7 @@ export interface StarRatingProps {
     initialRate: number;
     handleOnChange?: (rate: number) => void;
     readOnly: boolean;
+    maximumStars: number;
     style?: object;
 }
 
@@ -23,12 +24,14 @@ export class StarRating extends Component<StarRatingProps, {}> {
 
         this.start = 0;
         this.step = 1;
-        this.stop = 5;
+        this.stop = this.props.maximumStars;
+        this.onChange = this.onChange.bind(this);
     }
 
     render() {
         const { readOnly } = this.props;
         this.fractions = readOnly ? 2 : 1;
+        this.stop = this.props.maximumStars;
 
         return DOM.div({ className: classNames("widget-star-rating", this.props.className), style: this.props.style },
             createElement(Rating, {
@@ -36,7 +39,7 @@ export class StarRating extends Component<StarRatingProps, {}> {
                 fractions: this.fractions,
                 full: "glyphicon glyphicon-star widget-star-rating-full widget-star-rating-font",
                 initialRate: this.getRate(this.props),
-                onChange: !readOnly ? this.props.handleOnChange : undefined,
+                onChange: !readOnly ? this.onChange : undefined,
                 readonly: readOnly,
                 start: this.start,
                 step: this.step,
@@ -55,5 +58,9 @@ export class StarRating extends Component<StarRatingProps, {}> {
         // This helps to round off to the nearest fraction.
         // eg fraction 2 or 0.5, rounds off a rate 1.4 to 1.5, 1.2 to 1.0
         return Math.round(props.initialRate * this.fractions) / this.fractions as number;
+    }
+
+    private onChange(rate: number) {
+        this.props.handleOnChange && this.props.handleOnChange(Number(rate < 1 ? 1 : rate));
     }
 }
