@@ -25,6 +25,7 @@ const widgetConfig = {
             { test: /\.css$/, loader: ExtractTextPlugin.extract({
                 fallback: "style-loader",
                 use: "css-loader"}) },
+            { test: /\.(scss|sass)$/, loader: ExtractTextPlugin.extract([ "css-loader", "sass-loader" ])},
             { test: /\.jsx?$/, loader: "babel-loader" }
         ]
     },
@@ -33,14 +34,10 @@ const widgetConfig = {
     plugins: [
         new CopyWebpackPlugin([
             { from: "src/**/*.js" },
-            { from: "src/**/*.xml" }
-        ], {
-            copyUnmodified: true
-        }),
+            { from: "src/**/*.xml" } ],
+            { copyUnmodified: true }),
         new ExtractTextPlugin( {filename: "./src/com/mendix/widget/custom/starrating/ui/StarRating.css" }),
-        new webpack.LoaderOptionsPlugin({
-            debug: true
-        })
+        new webpack.LoaderOptionsPlugin({ debug: true })
     ]
 };
 
@@ -57,7 +54,11 @@ const previewConfig = {
     module: {
         rules: [
             { test: /\.ts$/, use: "ts-loader" },
-            { test: /\.css$/, use: "raw-loader" }
+            { test: /\.css$/, use: "raw-loader" },
+            { test: /\.(scss|sass)$/, use: [
+                { loader: "raw-loader" },
+                { loader: "sass-loader" }
+            ]}
         ]
     },
     devtool: "inline-source-map",

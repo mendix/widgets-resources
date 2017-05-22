@@ -1,8 +1,10 @@
 import * as classNames from "classnames";
 import { Component, createElement, DOM } from "react";
 import * as Rating from "react-rating";
+import { widgetColors } from "./StarRatingContainer";
 
-import "../ui/StarRating.css";
+import "../ui/StarRating.scss";
+// import "../ui/testingsassmeister.scss";
 
 export interface StarRatingProps {
     className?: string;
@@ -11,6 +13,7 @@ export interface StarRatingProps {
     readOnly: boolean;
     maximumStars: number;
     style?: object;
+    widgetColor: widgetColors;
 }
 
 export class StarRating extends Component<StarRatingProps, {}> {
@@ -35,9 +38,11 @@ export class StarRating extends Component<StarRatingProps, {}> {
 
         return DOM.div({ className: classNames("widget-star-rating", this.props.className), style: this.props.style },
             createElement(Rating, {
-                empty: "glyphicon glyphicon-star-empty widget-star-rating-empty widget-star-rating-font",
+                empty: "glyphicon glyphicon-star-empty widget-star-rating-empty ",
                 fractions: this.fractions,
-                full: "glyphicon glyphicon-star widget-star-rating-full widget-star-rating-font",
+                full: classNames("glyphicon", `glyphicon-star`,
+                    { "widget-star-rating-full": this.props.widgetColor === "widget" },
+                    { [`widget-star-rating-full-${this.props.widgetColor}`]: this.props.widgetColor !== "widget" }),
                 initialRate: this.getRate(this.props),
                 onChange: !readOnly ? this.onChange : undefined,
                 readonly: readOnly,
@@ -61,6 +66,8 @@ export class StarRating extends Component<StarRatingProps, {}> {
     }
 
     private onChange(rate: number) {
-        this.props.handleOnChange && this.props.handleOnChange(Number(rate < 1 ? 1 : rate));
+        if (this.props.handleOnChange) {
+            this.props.handleOnChange(Number(rate < 1 ? 1 : rate));
+        }
     }
 }

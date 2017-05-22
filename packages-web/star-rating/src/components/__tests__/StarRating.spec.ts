@@ -4,6 +4,7 @@ import { createElement, DOM } from "react";
 import * as Rating from "react-rating";
 
 import { StarRating, StarRatingProps } from "../StarRating";
+import { widgetColors } from "../StarRatingContainer";
 
 describe("StarRating", () => {
     let starProps: StarRatingProps;
@@ -13,8 +14,9 @@ describe("StarRating", () => {
         starProps = {
             handleOnChange: jasmine.createSpy("onChange"),
             initialRate: 2,
+            maximumStars: 5,
             readOnly: false,
-            maximumStars: 5
+            widgetColor: "default"
         };
     });
 

@@ -1,0 +1,46 @@
+@import "variables";
+
+$widgetColors: "" default inverse primary success danger warning info;
+$full-icon: "star";
+$empty-icon: "star-empty";
+
+
+@function getWidgetColor($color) {
+  @if($color == "primary") {
+    @return $brand-primary;
+  } @else if ($color == "success") {
+    @return $brand-success;
+  } @else if ($color == "danger") {
+    @return $brand-danger;
+  } @else if ($color == "warning") {
+    @return $brand-warning;
+  } @else if ($color == "info") {
+    @return $brand-info;
+  } @else if ($color == "inverse") {
+    @return $brand-inverse;
+  } @else if ($color == "default") {
+    @return $brand-default;
+  } @else {
+    @return #ffa611;
+  }
+}
+
+
+.widget-star-rating-font {
+  font-size: 30px;
+}
+
+.widget-star-rating-empty {
+  @extend .widget-star-rating-font;
+  color:#ccc;
+}
+
+@each $widgetColor in $widgetColors {
+  $widgetColor-dash: $widgetColor;
+  @if($widgetColor != "") { $widgetColor-dash: "-"+$widgetColor; }
+  .widget-star-rating-full#{$widgetColor-dash} {
+    @extend .widget-star-rating-font;
+    color: getWidgetColor($widgetColor);
+  }
+}
+

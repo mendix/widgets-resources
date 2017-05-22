@@ -1,8 +1,9 @@
 import { Component, createElement } from "react";
 import { StarRating } from "./components/StarRating";
-import StarRatingContainer, { ContainerProps } from "./components/StarRatingContainer";
+import StarRatingContainer, { ContainerProps, widgetColors } from "./components/StarRatingContainer";
 
-import * as css from "./ui/StarRating.css";
+import * as css from "./ui/StarRating.scss";
+// import * as css from "../ui/testingsassmeister.scss";
 
 // tslint:disable class-name
 export class preview extends Component<ContainerProps, {}> {
@@ -20,10 +21,10 @@ export class preview extends Component<ContainerProps, {}> {
             initialRate: 1,
             readOnly,
             maximumStars: this.props.maximumStars,
-            style: StarRatingContainer.parseStyle(this.props.style)
+            style: StarRatingContainer.parseStyle(this.props.style),
+            widgetColor: this.props.widgetColor
         });
     }
-
 
     private addPreviewStyle(styleId: string) {
         // This workaround is to load style in the preview temporary till mendix has a better solution

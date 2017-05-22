@@ -36,5 +36,20 @@
             <description>Microflow to be executed when the rate is changed</description>
             <returnType type="Void"/>
         </property>
+        <property key="widgetColor" type="enumeration" defaultValue="widget">
+            <caption>Color</caption>
+            <category>Display</category>
+            <description>The color of the star using bootstrap classes</description>
+            <enumerationValues>
+                <enumerationValue key="widget">Widget default</enumerationValue>
+                <enumerationValue key="default">Default</enumerationValue>
+                <enumerationValue key="primary">Primary</enumerationValue>
+                <enumerationValue key="success">Success</enumerationValue>
+                <enumerationValue key="info">Info</enumerationValue>
+                <enumerationValue key="warning">Warning</enumerationValue>
+                <enumerationValue key="danger">Danger</enumerationValue>
+                <enumerationValue key="inverse">Inverse</enumerationValue>
+            </enumerationValues>
+        </property>
     </properties>
 </widget>
