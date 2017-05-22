@@ -26,3 +26,4 @@ declare module "react-rating" {
 }
 
 declare module "*.css";
+declare module "*.scss";

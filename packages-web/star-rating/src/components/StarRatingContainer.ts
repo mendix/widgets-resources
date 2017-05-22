@@ -10,14 +10,15 @@ interface WrapperProps {
 }
 
 export interface ContainerProps extends WrapperProps {
-    editable: "default" | "never";
-    mxObject: mendix.lib.MxObject;
-    viewAverage: boolean;
     // Properties from Mendix modeler
-    rateAttribute: string;
-    onChangeMicroflow: string;
+    editable: "default" | "never";
     maximumStars: number;
+    onChangeMicroflow: string;
+    rateAttribute: string;
+    widgetColor: widgetColors;
 }
+// tslint:disable max-length-line
+export type widgetColors = "widget" | "default" | "primary" | "success" | "info" | "warning" | "danger" | "inverse" ;
 
 interface ContainerState {
     initialRate: number;
@@ -50,7 +51,8 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
             initialRate: this.state.initialRate,
             readOnly,
             maximumStars: this.props.maximumStars,
-            style: StarRatingContainer.parseStyle(this.props.style)
+            style: StarRatingContainer.parseStyle(this.props.style),
+            widgetColor: this.props.widgetColor
         });
     }
 
