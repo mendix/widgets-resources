@@ -18,6 +18,7 @@ export interface ContainerProps extends WrapperProps {
     progressAttribute: string;
     positiveValueColor: BootstrapStyle;
     textSize: ProgressTextSize;
+    circleThickness: number;
 }
 
 interface ContainerState {
@@ -37,11 +38,12 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
     constructor(props: ContainerProps) {
         super(props);
 
+        const alertMessage = ProgressCircleContainer.validateProps(props);
         this.state = {
-            alertMessage: this.validateProps(),
+            alertMessage,
             maximumValue: this.getValue(props.maximumValueAttribute, props.mxObject),
             progressValue: this.getValue(props.progressAttribute, props.mxObject),
-            showAlert: !!this.validateProps()
+            showAlert: !!alertMessage
         };
         this.subscriptionHandles = [];
         this.handleOnClick = this.handleOnClick.bind(this);
@@ -56,6 +58,7 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
         return createElement(ProgressCircle, {
             alertMessage: this.state.alertMessage,
             animate: this.props.animate,
+            circleThickness: this.props.circleThickness,
             className: this.props.class,
             clickable: !!this.props.microflow || !!this.props.page,
             maximumValue: this.state.maximumValue,
@@ -77,18 +80,36 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
         this.subscriptionHandles.forEach((handle) => window.mx.data.unsubscribe(handle));
     }
 
-    private validateProps(): string {
+    public static validateProps(props: ContainerProps): string {
         let errorMessage = "";
-        if (this.props.onClickEvent === "callMicroflow" && !this.props.microflow) {
+        if (props.onClickEvent === "callMicroflow" && !props.microflow) {
             errorMessage = "on click microflow is required";
-        } else if (this.props.onClickEvent === "showPage" && !this.props.page) {
+        } else if (props.onClickEvent === "showPage" && !props.page) {
             errorMessage = "on click page is required";
         }
 
         return errorMessage && `Error in progress circle configuration: ${errorMessage}`;
     }
 
-    private getValue( attribute: string, mxObject?: mendix.lib.MxObject): number | undefined {
+    public static parseStyle(style = ""): { [key: string]: string } {
+        try {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            // tslint:disable-next-line no-console
+            console.log("Failed to parse style", style, error);
+        }
+
+        return {};
+    }
+
+    private getValue(attribute: string, mxObject?: mendix.lib.MxObject): number | undefined {
         return mxObject ? parseFloat(mxObject.get(attribute) as string) : undefined;
     }
 
@@ -143,22 +164,5 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
                 context
             });
         }
-    }
-
-    public static parseStyle(style = ""): { [key: string]: string } {
-        try {
-            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
-                const pair = line.split(":");
-                if (pair.length === 2) {
-                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
-                    styleObject[name] = pair[1].trim();
-                }
-                return styleObject;
-            }, {});
-        } catch (error) {
-            console.log("Failed to parse style", style, error);
-        }
-
-        return {};
     }
 }
