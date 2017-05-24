@@ -158,7 +158,8 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
                 return styleObject;
             }, {});
         } catch (error) {
-            window.logger.warn("Failed to parse style", style, error);
+            // tslint:disable-next-line no-console
+            window.console.error("Failed to parse style", style, error);
         }
 
         return {};
