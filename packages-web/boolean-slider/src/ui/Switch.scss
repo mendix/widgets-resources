@@ -69,6 +69,10 @@ $default-ios-color: rgb(100, 189, 99);
             &.widget-switch-btn-wrapper-danger {
                 @include bootstrap-style-ios($brand-danger);
             }
+
+            &.widget-switch-btn-wrapper-inverse {
+                @include bootstrap-style-ios($brand-inverse);
+            }
         }
 
         &.un-checked {
@@ -206,6 +210,14 @@ $default-ios-color: rgb(100, 189, 99);
 
                 .widget-switch-btn {
                     background: $brand-danger;
+                }
+            }
+
+            &.widget-switch-btn-wrapper-inverse {
+                @include bootstrap-style-android($brand-inverse);
+
+                .widget-switch-btn {
+                    background: $brand-inverse;
                 }
             }
 

@@ -24,7 +24,7 @@ interface SwitchContainerState {
     isChecked?: boolean;
 }
 
-type ColorStyle = "default" | "primary" | "info" | "warning" | "success" | "danger";
+type ColorStyle = "default" | "primary" | "inverse" | "info" | "warning" | "success" | "danger";
 type DeviceStyle = "auto" | "android" | "iOS";
 
 class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerState> {
