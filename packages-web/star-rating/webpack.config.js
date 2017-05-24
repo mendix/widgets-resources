@@ -25,17 +25,20 @@ const widgetConfig = {
             { test: /\.css$/, loader: ExtractTextPlugin.extract({
                 fallback: "style-loader",
                 use: "css-loader"}) },
-            { test: /\.(scss|sass)$/, loader: ExtractTextPlugin.extract([ "css-loader", "sass-loader" ])},
+            { test: /\.(scss)$/, loader: ExtractTextPlugin.extract([ "css-loader", "sass-loader" ])},
             { test: /\.jsx?$/, loader: "babel-loader" }
         ]
     },
     devtool: "source-map",
     externals: [ "react", "react-dom" ],
     plugins: [
-        new CopyWebpackPlugin([
-            { from: "src/**/*.js" },
-            { from: "src/**/*.xml" } ],
-            { copyUnmodified: true }),
+        new CopyWebpackPlugin(
+            [
+                { from: "src/**/*.js" },
+                { from: "src/**/*.xml" }
+            ],
+            { copyUnmodified: true }
+        ),
         new ExtractTextPlugin( {filename: "./src/com/mendix/widget/custom/starrating/ui/StarRating.css" }),
         new webpack.LoaderOptionsPlugin({ debug: true })
     ]
@@ -55,7 +58,7 @@ const previewConfig = {
         rules: [
             { test: /\.ts$/, use: "ts-loader" },
             { test: /\.css$/, use: "raw-loader" },
-            { test: /\.(scss|sass)$/, use: [
+            { test: /\.(scss)$/, use: [
                 { loader: "raw-loader" },
                 { loader: "sass-loader" }
             ]}

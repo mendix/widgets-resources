@@ -123,7 +123,8 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
                 return styleObject;
             }, {});
         } catch (error) {
-            window.logger.error("Failed to parse style", style, error);
+            // tslint:disable-next-line no-console
+            console.error("Failed to parse style", style, error);
         }
 
         return {};

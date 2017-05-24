@@ -1,6 +1,6 @@
-var webpackConfig = require("./webpack.config");
+var webpackConfig = require("./webpack.config")[0];
 const path = require("path");
-Object.assign(webpackConfig[0], {
+Object.assign(webpackConfig, {
     devtool: "inline-source-map",
     externals: [
         "react/lib/ExecutionEnvironment",
@@ -12,9 +12,9 @@ Object.assign(webpackConfig[0], {
 
 module.exports = function(config) {
     if (config.codeCoverage) {
-        Object.assign(webpackConfig[0], {
-            module: Object.assign(webpackConfig[0].module, {
-                rules: webpackConfig[0].module.rules.concat([ {
+        Object.assign(webpackConfig, {
+            module: Object.assign(webpackConfig.module, {
+                rules: webpackConfig.module.rules.concat([ {
                     test: /\.ts$/,
                     include: path.resolve(__dirname, "src"),
                     loader: "istanbul-instrumenter-loader",
@@ -35,7 +35,7 @@ module.exports = function(config) {
         ],
         exclude: [],
         preprocessors: { "tests/test-index.js": [ "webpack", "sourcemap" ] },
-        webpack: webpackConfig[0],
+        webpack: webpackConfig,
         webpackServer: { noInfo: true },
         reporters: [ "progress", config.codeCoverage ? "coverage" : "kjhtml" ],
         port: 9876,

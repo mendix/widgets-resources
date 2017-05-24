@@ -3,7 +3,6 @@ import { StarRating } from "./components/StarRating";
 import StarRatingContainer, { ContainerProps, widgetColors } from "./components/StarRatingContainer";
 
 import * as css from "./ui/StarRating.scss";
-// import * as css from "../ui/testingsassmeister.scss";
 
 // tslint:disable class-name
 export class preview extends Component<ContainerProps, {}> {
@@ -12,15 +11,11 @@ export class preview extends Component<ContainerProps, {}> {
     }
 
     render() {
-        const { mxObject } = this.props;
-        const readOnly = this.props.editable === "never"
-            || (mxObject && mxObject.isReadonlyAttr(this.props.rateAttribute)) || this.props.readOnly || !mxObject;
-
         return createElement(StarRating, {
             className: this.props.class,
             initialRate: 1,
-            readOnly,
             maximumStars: this.props.maximumStars,
+            readOnly: true,
             style: StarRatingContainer.parseStyle(this.props.style),
             widgetColor: this.props.widgetColor
         });
