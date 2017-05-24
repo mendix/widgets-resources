@@ -1,7 +1,7 @@
 {
   "name": "progresscircle",
   "widgetName": "ProgressCircle",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Displays a progress in a circle",
   "scripts": {
     "pretest": "tsc",
@@ -37,6 +37,7 @@
     "grunt-contrib-compress": "^1.4.1",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-file-append": "0.0.7",
     "grunt-newer": "^1.1.1",
     "grunt-webpack": "^2.0.1",
     "istanbul": "^0.4.3",

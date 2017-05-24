@@ -1,4 +1,5 @@
-import { Component, createElement } from "react";
+import { Component, DOM, createElement } from "react";
+import { Alert } from "./components/Alert";
 import { ProgressCircle, ProgressCircleProps } from "./components/ProgressCircle";
 import ProgressCircleContainer, { ContainerProps } from "./components/ProgressCircleContainer";
 
@@ -11,11 +12,21 @@ export class preview extends Component<ContainerProps, {}> {
     }
 
     render() {
-        return createElement(ProgressCircle, this.transformProps(this.props));
+        const warnings = ProgressCircleContainer.validateProps(this.props);
+        if (!warnings) {
+            return createElement(ProgressCircle, this.transformProps(this.props));
+        } else {
+            return DOM.div({},
+                createElement(Alert, { message: warnings }),
+                createElement(ProgressCircle, this.transformProps(this.props))
+            );
+        }
+
     }
 
     private transformProps(props: ContainerProps): ProgressCircleProps {
         return {
+            circleThickness: props.circleThickness,
             className: props.class,
             clickable: false,
             positiveValueColor: props.positiveValueColor,

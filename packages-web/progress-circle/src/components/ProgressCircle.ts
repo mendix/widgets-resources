@@ -18,16 +18,17 @@ export interface ProgressCircleProps {
     style?: object;
     textSize?: ProgressTextSize;
     value?: number;
+    circleThickness?: number;
 }
 
 export type BootstrapStyle = "primary" | "inverse" | "success" | "info" | "warning" | "danger";
-export type ProgressTextSize = "small" | "medium" | "large";
+export type ProgressTextSize = "text" |"h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 export class ProgressCircle extends Component<ProgressCircleProps, { alertMessage?: string }> {
     static defaultProps: ProgressCircleProps = {
         animate: true,
         maximumValue: 100,
-        textSize: "medium"
+        textSize: "h2"
     };
     private progressNode: HTMLElement;
     private progressCircle: Circle;
@@ -42,7 +43,7 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
     }
 
     componentDidMount() {
-        this.createProgressCircle();
+        this.createProgressCircle(this.props.circleThickness);
         this.setProgress(this.props.value, this.props.maximumValue);
     }
 
@@ -50,18 +51,22 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
         if (newProps.alertMessage !== this.props.alertMessage) {
             this.setState({ alertMessage: newProps.alertMessage });
         }
+        if (this.props.circleThickness !== newProps.circleThickness) {
+            this.progressCircle.destroy();
+            this.createProgressCircle(newProps.circleThickness);
+        }
         this.setProgress(newProps.value, newProps.maximumValue);
         this.setCircleColor(newProps.negativeValueColor, newProps.positiveValueColor, newProps.value);
     }
 
     render() {
-        const { maximumValue } = this.props;
+        const { maximumValue, textSize } = this.props;
         return DOM.div({
             className: classNames("widget-progress-circle", this.props.className), style: this.props.style
         },
             DOM.div({
                 className: classNames(
-                    `widget-progress-circle-${this.props.textSize}`,
+                    `${textSize === "text" ? "mx-text" : textSize}`,
                     this.progressCircleColorClass,
                     {
                         "widget-progress-circle-alert": typeof maximumValue === "number" ? maximumValue < 1 : false,
@@ -79,11 +84,12 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
         this.progressCircle.destroy();
     }
 
-    private createProgressCircle() {
+    private createProgressCircle(circleThickness?: number) {
+        const thickness = (circleThickness && circleThickness > 30 ? 30 : circleThickness) || 6;
         this.progressCircle = new Circle(this.progressNode, {
             duration: this.props.animate ? 800 : -1,
-            strokeWidth: 6,
-            trailWidth: 6
+            strokeWidth: thickness,
+            trailWidth: thickness
         });
         this.progressCircle.path.className.baseVal = "widget-progress-circle-path";
         this.progressCircle.trail.className.baseVal = "widget-progress-circle-trail-path";

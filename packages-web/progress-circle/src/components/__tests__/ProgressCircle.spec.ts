@@ -28,7 +28,7 @@ describe("ProgressCircle", () => {
 
         expect(progress).toBeElement(
             DOM.div({ className: "widget-progress-circle" },
-                DOM.div({ className: "widget-progress-circle-medium" }),
+                DOM.div({ className: "h2" }),
                 createElement(Alert)
             )
         );
@@ -126,22 +126,22 @@ describe("ProgressCircle", () => {
         expect(progress.find(".widget-progress-circle-alert").length).toBe(1);
     });
 
-    it("has the class widget-progress-circle-small when the text size is small", () => {
-        const progress = renderProgressCircle({ textSize: "small", value: 20 });
+    it("has the class h3 when the text style is small", () => {
+        const progress = renderProgressCircle({ textSize: "h3", value: 20 });
 
-        expect(progress.find(".widget-progress-circle-small").length).toBe(1);
+        expect(progress.find(".h3").length).toBe(1);
     });
 
-    it("has the class widget-progress-circle-medium when the text size is medium", () => {
-        const progress = renderProgressCircle({ textSize: "medium", value: 20 });
+    it("has the class h2 when the text styles is medium", () => {
+        const progress = renderProgressCircle({ textSize: "h2", value: 20 });
 
-        expect(progress.find(".widget-progress-circle-medium").length).toBe(1);
+        expect(progress.find(".h2").length).toBe(1);
     });
 
-    it("has the class widget-progress-circle-large when the text size is large", () => {
-        const progress = renderProgressCircle({ textSize: "large", value: 20 });
+    it("has the class h1 when the text style is large", () => {
+        const progress = renderProgressCircle({ textSize: "h1", value: 20 });
 
-        expect(progress.find(".widget-progress-circle-large").length).toBe(1);
+        expect(progress.find(".h1").length).toBe(1);
     });
 
     afterAll(() => {
