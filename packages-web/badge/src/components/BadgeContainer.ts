@@ -33,9 +33,10 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
     constructor(props: BadgeContainerProps) {
         super(props);
 
-        const defaultState = this.updateValues(props.mxObject);
-        defaultState.alertMessage = this.validateProps();
-        this.state = defaultState;
+        this.state = {
+            alertMessage: BadgeContainer.validateProps(this.props),
+            value: this.getValue(this.props.valueAttribute, this.props.mxObject)
+        };
         this.subscriptionHandles = [];
         this.handleOnClick = this.handleOnClick.bind(this);
         this.handleSubscriptions = this.handleSubscriptions.bind(this);
@@ -51,7 +52,8 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
             badgeType: this.props.badgeType,
             bootstrapStyle: this.props.bootstrapStyle,
             className: this.props.class,
-            clickable: !!this.props.microflow || !!this.props.page,
+            clickable: this.props.onClickEvent !== "doNothing",
+            defaultValue: this.props.badgeValue,
             getRef: this.setBadgeReference,
             onClickAction: this.handleOnClick,
             style: BadgeContainer.parseStyle(this.props.style),
@@ -67,7 +69,9 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
 
     componentWillReceiveProps(newProps: BadgeContainerProps) {
         this.resetSubscriptions(newProps.mxObject);
-        this.setState(this.updateValues(newProps.mxObject));
+        this.setState({
+            value: this.getValue(this.props.valueAttribute, newProps.mxObject)
+        });
     }
 
     componentWillUnmount() {
@@ -78,19 +82,16 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
         this.badge = ref;
     }
 
-    private updateValues(mxObject = this.props.mxObject): BadgeContainerState {
-        return ({
-            value: this.getValue(this.props.valueAttribute, this.props.badgeValue, mxObject)
-        });
-    }
-
-    private getValue<T>(attributeName: string, defaultValue: T, mxObject?: mendix.lib.MxObject): string | T {
+    private getValue(attributeName: string, mxObject?: mendix.lib.MxObject): string {
         if (mxObject && attributeName) {
             const value = mxObject.get(attributeName);
-            return value ? value.toString() : defaultValue;
+            if (mxObject.isEnum(attributeName)) {
+                return mxObject.getEnumCaption(attributeName, value as string);
+            }
+            return value.toString();
         }
 
-        return defaultValue;
+        return "";
     }
 
     private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
@@ -112,15 +113,15 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
 
     private handleSubscriptions() {
         this.setState({
-            value: this.getValue(this.props.valueAttribute, this.props.badgeValue, this.props.mxObject)
+            value: this.getValue(this.props.valueAttribute, this.props.mxObject)
         });
     }
 
-    private validateProps(): string {
+    public static validateProps(props: BadgeContainerProps): string {
         let errorMessage = "";
-        if (this.props.onClickEvent === "callMicroflow" && !this.props.microflow) {
+        if (props.onClickEvent === "callMicroflow" && !props.microflow) {
             errorMessage = "A 'Microflow' is required for 'Events' 'Call a microflow'";
-        } else if (this.props.onClickEvent === "showPage" && !this.props.page) {
+        } else if (props.onClickEvent === "showPage" && !props.page) {
             errorMessage = "A 'Page' is required for 'Events' 'Show a page'";
         }
         if (errorMessage) {
@@ -153,7 +154,7 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
         }
     }
 
-    private static parseStyle(style = ""): {[key: string]: string} {
+    public static parseStyle(style = ""): {[key: string]: string} {
         try {
             return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
                 const pair = line.split(":");
@@ -164,6 +165,7 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
                 return styleObject;
             }, {});
         } catch (error) {
+            // tslint:disable-next-line no-console
             console.log("Failed to parse style", style, error);
         }
 

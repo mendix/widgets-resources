@@ -22,8 +22,28 @@ describe("Badge", () => {
                     className: ("widget-badge badge label-default"),
                     onClick: jasmine.any(Function) as any,
                     style: badgeProps.style
-                }, badgeProps.value)
+                }, jasmine.any(String))
         );
+    });
+
+    it("should show no value when no value or default value provided", () => {
+        const value = "value";
+        const badge = createBadge({ badgeType: "label", value, defaultValue: "default value" });
+
+        expect(badge.text()).toBe(value);
+    });
+
+    it("should show default value when no value is provided", () => {
+        const defaultValue = "default";
+        const badge = createBadge({ badgeType: "label", value: undefined, defaultValue });
+
+        expect(badge.text()).toBe(defaultValue);
+    });
+
+    it("should show no value when no value or default value provided", () => {
+        const badge = createBadge({ badgeType: "label", value: undefined });
+
+        expect(badge.text()).toBe("");
     });
 
     it("configured as a label should have the class label", () => {
