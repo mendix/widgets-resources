@@ -14,8 +14,14 @@ Mendix 7.1
 ## Demo project
 http://booleansliderwidge.mxapps.io
 
+![1](https://raw.githubusercontent.com/mendixlabs/boolean-slider/v1.1.1/assets/Demo.PNG)
+
 ## Usage
 Place the widget in the context of an object that has a boolean attribute.
+
+![1](https://raw.githubusercontent.com/mendixlabs/boolean-slider/v1.1.1/assets/DataSource.PNG)
+![1](https://raw.githubusercontent.com/mendixlabs/boolean-slider/v1.1.1/assets/Display.PNG)
+![1](https://raw.githubusercontent.com/mendixlabs/boolean-slider/v1.1.1/assets/Events.PNG)
 
 ## Issues, suggestions and feature requests
 We are actively maintaining this widget, please report any issues or suggestion for improvement at https://github.com/mendixlabs/boolean-slider/issues
@@ -37,7 +43,7 @@ Create a folder named `dist` in the project root.
 
 Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Changes to the widget code shall be automatically pushed to this test project.
 
-[https://github.com/MendixLabs/boolean-slider/releases/download/v1.1.0/Test.mpk](https://github.com/MendixLabs/boolean-slider/releases/download/v1.1.0/Test.mpk)
+[https://github.com/MendixLabs/boolean-slider/releases/download/v1.1.1/Test.mpk](https://github.com/MendixLabs/boolean-slider/releases/download/v1.1.1/Test.mpk)
 
 To automatically compile, bundle and push code changes to the running test project, run:
 
