@@ -50,6 +50,7 @@
             <enumerationValues>
                 <enumerationValue key="default">Widget default</enumerationValue>
                 <enumerationValue key="primary">Primary</enumerationValue>
+                <enumerationValue key="inverse">Inverse</enumerationValue>
                 <enumerationValue key="success">Success</enumerationValue>
                 <enumerationValue key="info">Info</enumerationValue>
                 <enumerationValue key="warning">Warning</enumerationValue>
