@@ -3,7 +3,7 @@ import * as classNames from "classnames";
 
 import { ColorStyle, DeviceStyle } from "./SwitchContainer";
 
-import "../ui/Switch.sass";
+import "../ui/Switch.scss";
 
 export interface SwitchProps {
     colorStyle: ColorStyle;
