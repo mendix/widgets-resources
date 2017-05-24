@@ -2,7 +2,7 @@ import { Component, createElement } from "react";
 import { Switch } from "./components/Switch";
 import SwitchContainer, { SwitchContainerProps } from "./components/SwitchContainer";
 
-import * as css from "./ui/Switch.sass";
+import * as css from "./ui/Switch.scss";
 import { Label } from "./components/Label";
 
 // tslint:disable class-name

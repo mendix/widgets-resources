@@ -23,7 +23,7 @@ const widgetConfig = {
             })
             },
             {
-                test: /\.sass$/, loader: ExtractTextPlugin.extract({
+                test: /\.scss$/, loader: ExtractTextPlugin.extract({
                     fallback: "style-loader",
                     use: "css-loader!sass-loader"
                 }
@@ -60,7 +60,7 @@ const previewConfig = {
         rules: [
             { test: /\.ts$/, use: "ts-loader" },
             { test: /\.css$/, use: "raw-loader" },
-            { test: /\.sass$/, use: [
+            { test: /\.scss$/, use: [
                 { loader: "raw-loader" },
                 { loader: "sass-loader" }
             ] }
