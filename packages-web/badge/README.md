@@ -10,22 +10,21 @@ Shows a value as a badge or a color label
 
 ## Dependencies
 
-Mendix 7.1
+Mendix 7.2
 
 ## Usage
 Place the widget in the context of an object that has a value attribute.
 
 The value attribute specified in the `General` tab is optional. If not set, a static value should be specified.
-
-![1](assets/General.png)
-![1](assets/Display.png)
-![1](assets/Events.png)
+![1](https://raw.githubusercontent.com/mendixlabs/badge/v1.1.1/assets/General.png)
+![1](https://raw.githubusercontent.com/mendixlabs/badge/v1.1.1/assets/Display.png)
+![1](https://raw.githubusercontent.com/mendixlabs/badge/v1.1.1/assets/Events.png)
 
 ## Demo project
 
 [https://badge.mxapps.io/](https://badge.mxapps.io/)
 
-![1](assets/Demo.png)
+![1](https://raw.githubusercontent.com/mendixlabs/badge/v1.1.1/assets/demo.png)
 
 ## Issues, suggestions and feature requests
 
@@ -47,9 +46,7 @@ To set up the development environment, run:
 
 Create a folder named dist in the project root.
 
-Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Changes to the widget code shall be automatically pushed to this test project.
-
-[https://github.com/MendixLabs/badge/releases/download/v1.1.0/Badge.mpr](https://github.com/MendixLabs/badge/releases/download/v1.1.0/Badge.mpr)
+Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Or get the test project from [https://github.com/MendixLabs/badge/releases/download/v1.1.1/TestBadge.mpk](https://github.com/MendixLabs/badge/releases/download/v1.1.1/TestBadge.mpk). Changes to the widget code shall be automatically pushed to this test project.
 
 To automatically compile, bundle and push code changes to the running test project, run:
 
