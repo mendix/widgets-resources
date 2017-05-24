@@ -1,46 +1,47 @@
 @import "variables";
 
-$widgetColors: "" default inverse primary success danger warning info;
-$full-icon: "star";
-$empty-icon: "star-empty";
-
-
-@function getWidgetColor($color) {
-  @if($color == "primary") {
-    @return $brand-primary;
-  } @else if ($color == "success") {
-    @return $brand-success;
-  } @else if ($color == "danger") {
-    @return $brand-danger;
-  } @else if ($color == "warning") {
-    @return $brand-warning;
-  } @else if ($color == "info") {
-    @return $brand-info;
-  } @else if ($color == "inverse") {
-    @return $brand-inverse;
-  } @else if ($color == "default") {
-    @return $brand-default;
-  } @else {
-    @return #ffa611;
-  }
-}
-
-
 .widget-star-rating-font {
-  font-size: 30px;
+    font-size: 30px;
 }
 
 .widget-star-rating-empty {
-  @extend .widget-star-rating-font;
-  color:#ccc;
+    @extend.widget-star-rating-font;
+    color: #ccc;
 }
 
-@each $widgetColor in $widgetColors {
-  $widgetColor-dash: $widgetColor;
-  @if($widgetColor != "") { $widgetColor-dash: "-"+$widgetColor; }
-  .widget-star-rating-full#{$widgetColor-dash} {
-    @extend .widget-star-rating-font;
-    color: getWidgetColor($widgetColor);
-  }
+.widget-star-rating-full {
+    @extend.widget-star-rating-font;
+    color: #ffa611;
 }
 
+.widget-star-rating-full-default {
+    @extend.widget-star-rating-font;
+    color: $brand-default;
+}
+
+.widget-star-rating-full-primary {
+    @extend.widget-star-rating-font;
+    color: $brand-primary;
+}
+
+.widget-star-rating-full-success {
+    @extend.widget-star-rating-font;
+    color: $brand-success;
+}
+
+.widget-star-rating-full-info {
+    @extend.widget-star-rating-font;
+    color: $brand-info;
+}
+.widget-star-rating-full-warning {
+    @extend.widget-star-rating-font;
+    color: $brand-warning;
+}
+.widget-star-rating-full-danger {
+    @extend.widget-star-rating-font;
+    color: $brand-danger;
+}
+.widget-star-rating-full-inverse {
+    @extend.widget-star-rating-font;
+    color: $brand-inverse;
+}

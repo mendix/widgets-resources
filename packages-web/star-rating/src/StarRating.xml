@@ -39,7 +39,7 @@
         <property key="widgetColor" type="enumeration" defaultValue="widget">
             <caption>Color</caption>
             <category>Display</category>
-            <description>The color of the star using bootstrap classes</description>
+            <description>The color of a rated star</description>
             <enumerationValues>
                 <enumerationValue key="widget">Widget default</enumerationValue>
                 <enumerationValue key="default">Default</enumerationValue>

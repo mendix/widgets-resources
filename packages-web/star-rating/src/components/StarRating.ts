@@ -33,6 +33,7 @@ export class StarRating extends Component<StarRatingProps, {}> {
 
     render() {
         const { readOnly } = this.props;
+        // Read only allows to show half stars, editable only, whole stars.
         this.fractions = readOnly ? 2 : 1;
         this.stop = this.props.maximumStars;
 
@@ -67,6 +68,7 @@ export class StarRating extends Component<StarRatingProps, {}> {
 
     private onChange(rate: number) {
         if (this.props.handleOnChange) {
+            // Number(rate < 1 ? 1 : rate) deals with library bugs of passing 0 rates.
             this.props.handleOnChange(Number(rate < 1 ? 1 : rate));
         }
     }
