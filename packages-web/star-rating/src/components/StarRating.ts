@@ -39,7 +39,7 @@ export class StarRating extends Component<StarRatingProps, {}> {
 
         return DOM.div({ className: classNames("widget-star-rating", this.props.className), style: this.props.style },
             createElement(Rating, {
-                empty: "glyphicon glyphicon-star-empty widget-star-rating-empty ",
+                empty: "glyphicon glyphicon-star-empty widget-star-rating-empty",
                 fractions: this.fractions,
                 full: classNames("glyphicon", `glyphicon-star`,
                     { "widget-star-rating-full": this.props.widgetColor === "widget" },

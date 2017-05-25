@@ -16,7 +16,7 @@ describe("StarRating", () => {
             initialRate: 2,
             maximumStars: 5,
             readOnly: false,
-            widgetColor: "default"
+            widgetColor: "widget"
         };
     });
 
@@ -26,9 +26,9 @@ describe("StarRating", () => {
         expect(starRating).toBeElement(
             DOM.div({ className: "widget-star-rating" },
                 createElement(Rating, {
-                    empty: "glyphicon glyphicon-star-empty widget-star-rating-empty widget-star-rating-font",
+                    empty: "glyphicon glyphicon-star-empty widget-star-rating-empty",
                     fractions: 1,
-                    full: "glyphicon glyphicon-star widget-star-rating-full widget-star-rating-font",
+                    full: "glyphicon glyphicon-star widget-star-rating-full",
                     initialRate: 2,
                     onChange: jasmine.any(Function) as any,
                     readonly: starProps.readOnly,
