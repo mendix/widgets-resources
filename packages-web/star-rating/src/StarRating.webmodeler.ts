@@ -1,4 +1,5 @@
 import { Component, createElement } from "react";
+import { Alert } from "./components/Alert";
 import { StarRating } from "./components/StarRating";
 import StarRatingContainer, { ContainerProps, widgetColors } from "./components/StarRatingContainer";
 
@@ -11,14 +12,19 @@ export class preview extends Component<ContainerProps, {}> {
     }
 
     render() {
-        return createElement(StarRating, {
-            className: this.props.class,
-            initialRate: 1,
-            maximumStars: this.props.maximumStars,
-            readOnly: true,
-            style: StarRatingContainer.parseStyle(this.props.style),
-            widgetColor: this.props.widgetColor
-        });
+        const alertMessage = StarRatingContainer.validateProps(this.props);
+        if (!alertMessage) {
+            return createElement(StarRating, {
+                className: this.props.class,
+                initialRate: 1,
+                maximumStars: this.props.maximumStars,
+                readOnly: true,
+                style: StarRatingContainer.parseStyle(this.props.style),
+                widgetColor: this.props.widgetColor
+            });
+        } else {
+            return createElement(Alert, { message: alertMessage });
+        }
     }
 
     private addPreviewStyle(styleId: string) {
