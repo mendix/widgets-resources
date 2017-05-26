@@ -33,9 +33,10 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
     constructor(props: BadgeButtonContainerProps) {
         super(props);
 
-        const defaultState = this.updateValues(props.mxObject);
-        defaultState.alertMessage = this.validateProps();
-        this.state = defaultState;
+        this.state = {
+            alertMessage: BadgeButtonContainer.validateProps(this.props),
+            value: this.getValue(this.props.valueAttribute, this.props.mxObject)
+        };
         this.subscriptionHandles = [];
         this.handleOnClick = this.handleOnClick.bind(this);
         this.handleSubscriptions = this.handleSubscriptions.bind(this);
@@ -50,6 +51,7 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
         return createElement(BadgeButton, {
             bootstrapStyle: this.props.bootstrapStyle,
             className: this.props.class,
+            defaultValue: this.props.badgeButtonValue,
             getRef: this.setBadgeButtonReference,
             label: this.props.label,
             onClickAction: this.handleOnClick,
@@ -60,36 +62,68 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
 
     componentDidMount() {
         if (this.badgeButton && this.badgeButton.parentElement) {
+            // Add class in container element to enable the wrapper to be inline
             this.badgeButton.parentElement.classList.add("widget-badge-button-wrapper");
         }
     }
 
     componentWillReceiveProps(newProps: BadgeButtonContainerProps) {
         this.resetSubscriptions(newProps.mxObject);
-        this.setState(this.updateValues(newProps.mxObject));
+        this.setState({
+            value: this.getValue(this.props.valueAttribute, newProps.mxObject)
+        });
     }
 
     componentWillUnmount() {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
     }
 
+    public static validateProps(props: BadgeButtonContainerProps): string {
+        let errorMessage = "";
+        if (props.onClickEvent === "callMicroflow" && !props.microflow) {
+            errorMessage = "A 'Microflow' is required for 'Events' 'Call a microflow'";
+        } else if (props.onClickEvent === "showPage" && !props.page) {
+            errorMessage = "A 'Page' is required for 'Events' 'Show a page'";
+        }
+        if (errorMessage) {
+            errorMessage = `Error in badge button configuration: ${errorMessage}`;
+        }
+
+        return errorMessage;
+    }
+
+    public static parseStyle(style = ""): {[key: string]: string} {
+        try {
+            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            // tslint:disable-next-line no-console
+            console.log("Failed to parse style", style, error);
+        }
+
+        return {};
+    }
+
     private setBadgeButtonReference(ref: HTMLButtonElement) {
         this.badgeButton = ref;
     }
 
-    private updateValues(mxObject = this.props.mxObject): BadgeButtonContainerState {
-        return({
-            value: this.getValue(this.props.valueAttribute, this.props.badgeButtonValue, mxObject)
-        });
-    }
-
-    private getValue<T>(attributeName: string, defaultValue: T, mxObject?: mendix.lib.MxObject ): string | T {
+    private getValue(attributeName: string, mxObject?: mendix.lib.MxObject): string {
         if (mxObject && attributeName) {
             const value = mxObject.get(attributeName);
-            return value ? value.toString() : defaultValue;
+            if (mxObject.isEnum(attributeName)) {
+                return mxObject.getEnumCaption(attributeName, value as string);
+            }
+            return value.toString();
         }
 
-        return defaultValue;
+        return "";
     }
 
     private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
@@ -111,22 +145,8 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
 
     private handleSubscriptions() {
         this.setState({
-            value: this.getValue(this.props.valueAttribute, this.props.badgeButtonValue, this.props.mxObject)
+            value: this.getValue(this.props.valueAttribute, this.props.mxObject)
         });
-    }
-
-    private validateProps(): string {
-        let errorMessage = "";
-        if (this.props.onClickEvent === "callMicroflow" && !this.props.microflow) {
-            errorMessage = "A 'Microflow' is required for 'Events' 'Call a microflow'";
-        } else if (this.props.onClickEvent === "showPage" && !this.props.page) {
-            errorMessage = "A 'Page' is required for 'Events' 'Show a page'";
-        }
-        if (errorMessage) {
-            errorMessage = `Error in badge button configuration: ${errorMessage}`;
-        }
-
-        return errorMessage;
     }
 
     private handleOnClick() {
@@ -136,36 +156,19 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
         }
         const context = new mendix.lib.MxContext();
         context.setContext(mxObject.getEntity(), mxObject.getGuid());
-        if (onClickEvent === "callMicroflow" && microflow && mxObject.getGuid()) {
+        if (onClickEvent === "callMicroflow" && microflow) {
             window.mx.ui.action(microflow, {
-                error: (error) => window.mx.ui.error(`Error while executing microflow: ${microflow}: ${error.message}`),
+                error: error => window.mx.ui.error(`Error while executing microflow: ${microflow}: ${error.message}`),
                 params: {
                     applyto: "selection",
                     guids: [ mxObject.getGuid() ]
                 }
             });
-        } else if (onClickEvent === "showPage" && page && mxObject.getGuid()) {
+        } else if (onClickEvent === "showPage" && page) {
             window.mx.ui.openForm(page, {
                 context,
-                error: (error) => window.mx.ui.error(`Error while opening page ${page}: ${error.message}`)
+                error: error => window.mx.ui.error(`Error while opening page ${page}: ${error.message}`)
             });
         }
-    }
-
-    public static parseStyle(style = ""): { [key: string]: string } {
-        try {
-            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
-                const pair = line.split(":");
-                if (pair.length === 2) {
-                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
-                    styleObject[name] = pair[1].trim();
-                }
-                return styleObject;
-            }, {});
-        } catch (error) {
-            console.log("Failed to parse style", style, error);
-        }
-
-        return {};
     }
 }

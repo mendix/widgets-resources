@@ -6,7 +6,6 @@ A special distinctive mark or token put on any display as a button
 
  * Display a badge on a button.
  * Attach an onclick microflow 
- * Set a static label text when the persisted label is not specified
  * Set static data when the persisted data is not specified
 
 ## Dependencies
@@ -17,20 +16,20 @@ Mendix 7.2
 
 [https://badgebutton.mxapps.io/](https://badgebutton.mxapps.io/)
 
-![1](https://raw.githubusercontent.com/mendixlabs/badge-button/master/assets/demo.png)
+![1](https://raw.githubusercontent.com/mendixlabs/badge-button/v1.0.1/assets/demo.png)
 ## Usage
-Place the widget in the context of an object that has a label attribute, value attribute and bootstrap style attribute.
+Place the widget in the context of an object that has a value attribute.
 
-The data source attributes specified in the `Data source` tab are optional. If not set, static data should be specified in the `Display` tab.
+The data source attribute specified in the `Badge` tab is optional. If not set, static data should be specified in the `Button` tab.
 
-![1](https://raw.githubusercontent.com/mendixlabs/badge-button/master/assets/Static_attributes.png)
-![1](https://raw.githubusercontent.com/mendixlabs/badge-button/master/assets/Data_source.png)
-![1](https://raw.githubusercontent.com/mendixlabs/badge-button/master/assets/Behavior.png)
+![1](https://raw.githubusercontent.com/mendixlabs/badge-button/v1.0.1/assets/Static_attributes.png)
+![1](https://raw.githubusercontent.com/mendixlabs/badge-button/v1.0.1/assets/Data_source.png)
+![1](https://raw.githubusercontent.com/mendixlabs/badge-button/v1.0.1/assets/Behavior.png)
 
 ## Issues, suggestions and feature requests
 
 We are actively maintaining this widget, please report any issues or suggestion for improvement at
-https://github.com/mendixlabs/badge-button/issues.
+[https://github.com/mendixlabs/badge-button/issues](https://github.com/mendixlabs/badge-button/issues)
 
 ## Developer
 Prerequisite: Install git, node package manager, webpack CLI, grunt CLI, Karma CLI
@@ -49,7 +48,7 @@ Create a folder named dist in the project root.
 
 Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Changes to the widget code shall be automatically pushed to this test project.
 
-[https://github.com/mendixlabs/badge-button/releases/download/V1.0.0/TestBadge.mpk](https://github.com/mendixlabs/badge-button/releases/download/V1.0.0/TestBadge.mpk)
+[https://github.com/MendixLabs/badge-button/releases/download/v1.0.1/BadgeButton.mpk](https://github.com/MendixLabs/badge-button/releases/download/v1.0.1/BadgeButton.mpk)
 
 To automatically compile, bundle and push code changes to the running test project, run:
 
