@@ -6,6 +6,7 @@ This widget lets users rate an object with stars from 1 to 5.
 * Display average rating
 * Display rating in whole and half stars
 * Execute a microflow when the rate is changed
+* Configurable star colors
 * Flexible number of stars
 * Supports mobile touch events
 
