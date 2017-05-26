@@ -25,5 +25,4 @@ declare module "react-rating" {
     export = Rating
 }
 
-declare module "*.css";
 declare module "*.scss";
