@@ -6,6 +6,8 @@ This widget lets users rate an object with stars from 1 to 5.
 * Display average rating
 * Display rating in whole and half stars
 * Execute a microflow when the rate is changed
+* Flexible number of stars
+* Supports mobile touch events
 
 ## Dependencies
 Mendix 7.1
@@ -50,7 +52,7 @@ To set up the development environment, run:
 
 Create a folder named `dist` in the project root.
 
-Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Or get the test project from https://github.com/mendixlabs/star-rating/releases/download/1.0.0/TestStarRating.mpr. When Grunt is running changes to the widget code shall be automatically pushed to this test project.
+Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Or get the test project from https://github.com/mendixlabs/star-rating/releases/download/v1.1.0/TestStarRating.mpr. When Grunt is running changes to the widget code shall be automatically pushed to this test project.
 
 To automatically compile, bundle and push code changes to the running Mendix test project, run:
 

@@ -117,9 +117,9 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
         });
     }
 
-    public static validateProps(props: ContainerProps ) {
+    public static validateProps(props: ContainerProps) {
         const errorMessage: string[] = [];
-        if (props.maximumStars < 1 ) {
+        if (props.maximumStars < 1) {
             errorMessage.push("- Number of stars should be greater than Zero (0)");
         }
         if (errorMessage.length) {
