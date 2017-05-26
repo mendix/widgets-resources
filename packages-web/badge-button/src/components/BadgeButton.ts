@@ -11,6 +11,7 @@ export interface BadgeButtonProps {
     bootstrapStyle?: BootstrapStyle;
     onClickAction?: () => void;
     getRef?: (node: HTMLElement) => void;
+    defaultValue?: string;
 }
 
 export type BootstrapStyle = "default" | "info" | "primary" | "danger" | "success" | "warning";
@@ -24,5 +25,5 @@ export const BadgeButton: SFC<BadgeButtonProps> = (props) => DOM.button({
     style: props.style
 },
     DOM.span({ className: "widget-badge-button-text" }, props.label),
-    DOM.span({ className: "badge" }, props.value)
+    DOM.span({ className: "badge" }, props.value || props.defaultValue)
 );

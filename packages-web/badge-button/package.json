@@ -1,7 +1,7 @@
 {
   "name": "badgebutton",
   "widgetName": "BadgeButton",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A special distinctive mark or token put on any display as a button",
   "scripts": {
     "pretest": "tsc",
@@ -16,7 +16,7 @@
     "url": "https://github.com/mendixlabs/badge-button/issues"
   },
   "devDependencies": {
-    "@types/classnames": "0.0.32",
+    "@types/classnames": "^2.2.0",
     "@types/core-js": "0.9.36",
     "@types/enzyme": "^2.7.9",
     "@types/jasmine": "^2.5.47",
@@ -52,7 +52,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
     "mendix-client": "https://github.com/FlockOfBirds/Mendix-client-typing/archive/7.1.0.tar.gz",
-    "node-sass": "^4.5.2",
+    "node-sass": "^4.5.3",
     "raw-loader": "^0.5.1",
     "react": "^15.5.2",
     "react-addons-test-utils": "^15.4.2",
@@ -61,7 +61,7 @@
     "remap-istanbul": "^0.9.0",
     "sass-loader": "^6.0.4",
     "source-map-loader": "^0.2.1",
-    "style-loader": "^0.17.0",
+    "style-loader": "^0.18.1",
     "ts-loader": "^2.0.3",
     "tslint": "^5.2.0",
     "tslint-eslint-rules": "^4.0.0",
