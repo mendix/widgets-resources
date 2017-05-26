@@ -104,7 +104,6 @@
   "jsRules": {
     "trailing-comma": [ false ],
     "object-literal-sort-keys": false,
-    "array-bracket-spacing": [ true, "always" ],
-    "linebreak-style": [ true, "LF" ]
+    "array-bracket-spacing": [ true, "always" ]
   }
 }
