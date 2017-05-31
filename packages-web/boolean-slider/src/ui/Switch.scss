@@ -239,6 +239,8 @@ $default-ios-color: rgb(100, 189, 99);
 }
 
 .widget-switch-btn-wrapper {
+    margin-bottom: 8px;
+
     &.disabled {
         cursor: default;
     }
