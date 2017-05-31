@@ -36,8 +36,7 @@ const widgetConfig = {
     plugins: [
         new CopyWebpackPlugin(
             [
-                { from: "src/**/*.xml" },
-                { from: "assets/Preview.png", to: "src/Preview.png" }
+                { from: "src/**/*.xml" }
             ],
             { copyUnmodified: true }
         ),
