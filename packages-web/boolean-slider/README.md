@@ -14,14 +14,8 @@ Mendix 7.1
 ## Demo project
 http://booleansliderwidge.mxapps.io
 
-![1](https://raw.githubusercontent.com/mendixlabs/boolean-slider/v1.1.1/assets/Demo.PNG)
-
 ## Usage
 Place the widget in the context of an object that has a boolean attribute.
-
-![1](https://raw.githubusercontent.com/mendixlabs/boolean-slider/v1.1.1/assets/DataSource.PNG)
-![1](https://raw.githubusercontent.com/mendixlabs/boolean-slider/v1.1.1/assets/Display.PNG)
-![1](https://raw.githubusercontent.com/mendixlabs/boolean-slider/v1.1.1/assets/Events.PNG)
 
 ## Issues, suggestions and feature requests
 We are actively maintaining this widget, please report any issues or suggestion for improvement at https://github.com/mendixlabs/boolean-slider/issues
