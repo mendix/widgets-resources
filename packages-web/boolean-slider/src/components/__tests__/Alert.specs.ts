@@ -1,0 +1,23 @@
+import { shallow } from "enzyme";
+import { DOM, createElement } from "react";
+
+import { Alert, AlertProps } from "../Alert";
+
+describe("Alert", () => {
+    const renderAlert = (message?: string) => shallow(createElement(Alert, { message } as AlertProps));
+
+    it("renders structure correctly", () => {
+        const message = "This is an error";
+        const alert = renderAlert(message);
+
+        expect(alert).toBeElement(
+            DOM.div({ className: "alert alert-danger widget-switch-alert" }, message)
+        );
+    });
+
+    it("renders no structure when the alert message is not specified", () => {
+        const alert = renderAlert();
+
+        expect(alert).toBeElement(null);
+    });
+});
