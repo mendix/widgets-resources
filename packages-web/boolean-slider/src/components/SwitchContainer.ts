@@ -21,6 +21,7 @@ interface SwitchContainerProps extends WrapperProps {
 }
 
 interface SwitchContainerState {
+    alertMessage?: string;
     isChecked?: boolean;
 }
 
@@ -37,6 +38,7 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
         this.state = this.updateState(props.mxObject);
         this.handleToggle = this.handleToggle.bind(this);
         this.subscriptionCallback = this.subscriptionCallback.bind(this);
+        this.handleValidations = this.handleValidations.bind(this);
 
     }
 
@@ -67,6 +69,7 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
         const { class: className, colorStyle, deviceStyle, style } = this.props;
 
         return createElement(Switch, {
+            alertMessage: this.state.alertMessage,
             className: !hasLabel ? className : undefined,
             colorStyle,
             deviceStyle,
@@ -121,17 +124,30 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
                 callback: this.subscriptionCallback,
                 guid: mxObject.getGuid()
             }));
+
+            this.subscriptionHandles.push(mx.data.subscribe({
+                callback: this.handleValidations,
+                guid: mxObject.getGuid(),
+                val: true
+            }));
         }
     }
 
     private updateState(mxObject = this.props.mxObject): SwitchContainerState {
         return {
+            alertMessage: "",
             isChecked: this.getAttributeValue(this.props.booleanAttribute, mxObject)
         };
     }
 
     private subscriptionCallback() {
         this.setState(this.updateState());
+    }
+
+    private handleValidations(validations: mendix.lib.ObjectValidation[]) {
+        const validationMessage = validations[0].getErrorReason(this.props.booleanAttribute);
+        validations[0].removeAttribute(this.props.booleanAttribute);
+        if (validationMessage) this.setState({ alertMessage: validationMessage });
     }
 
     private executeAction(actionname: string, guid: string) {
