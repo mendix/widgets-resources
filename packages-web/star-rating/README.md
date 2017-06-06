@@ -1,5 +1,5 @@
 # Star rating
-This widget lets users rate an object with stars from 1 to 5.
+This widget lets users rate an object with stars or custom icons.
 
 ## Features
 * Rate an object with stars
@@ -14,12 +14,22 @@ This widget lets users rate an object with stars from 1 to 5.
 Mendix 7.1
 
 ## Demo project
-Try our the demo project https://rating100.mxapps.io with username: x/y/z  and password: 1
+Try our the demo project https://rating100.mxapps.io with username: x/y/z and password: 1
 Editing of a rate is possible if the logged in user owns that vote
 
 ## Usage
 This widget requires a context.
 
+## Customize rating icon
+In order to over-write the default star icon, add these classes to your project theme. Replace content with your preferred glyphicon icon
+``` css
+ [class*="widget-star-rating-full"]:before {
+  content: "\e034"; /* flag icon */ 
+ }
+.widget-star-rating-empty:before {
+  content: "\e034"; /* flag icon */
+ }
+```
 ### Security Configuration
 
 Security is a mandatory feature for rating and is considered seriously for proper use of this widget in a mendix project.
