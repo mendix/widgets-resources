@@ -30,12 +30,6 @@
                 <enumerationValue key="never">Never</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="onChangeMicroflow" type="microflow" required="false">
-            <caption>On change microflow</caption>
-            <category>General</category>
-            <description>Microflow to be executed when the rate is changed</description>
-            <returnType type="Void"/>
-        </property>
         <property key="widgetColor" type="enumeration" defaultValue="widget">
             <caption>Color</caption>
             <category>Display</category>
@@ -50,6 +44,12 @@
                 <enumerationValue key="danger">Danger</enumerationValue>
                 <enumerationValue key="inverse">Inverse</enumerationValue>
             </enumerationValues>
+        </property>
+        <property key="onChangeMicroflow" type="microflow" required="false">
+            <caption>On change microflow</caption>
+            <category>Events</category>
+            <description>Microflow to be executed when the rate is changed</description>
+            <returnType type="Void"/>
         </property>
     </properties>
 </widget>
