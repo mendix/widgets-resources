@@ -80,6 +80,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "react-rating": "https://github.com/djkwagala/react-rating/archive/v0.7.2-beta.tar.gz"
+    "react-rating": "0.8.0"
   }
 }
