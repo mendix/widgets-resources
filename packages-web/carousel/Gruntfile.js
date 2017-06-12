@@ -1,16 +1,17 @@
 "use strict";
 const webpack = require("webpack");
 const webpackConfig = require("./webpack.config");
-const webpackConfigRelease = {};
-const plugins = webpackConfig.plugins.slice(0);
-plugins.push(new webpack.optimize.UglifyJsPlugin());
-Object.assign(webpackConfigRelease, webpackConfig, {
-    devtool: false,
-    plugins: plugins
+const webpackConfigRelease = [ {}, {} ];
+webpackConfig.forEach(function (config, index) {
+    config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+    Object.assign(webpackConfigRelease[index], config, {
+        devtool: false,
+        plugins: config.plugins
+    });
 });
 
 module.exports = function (grunt) {
-    var pkg = grunt.file.readJSON("package.json");
+    const pkg = grunt.file.readJSON("package.json");
     grunt.initConfig({
 
         watch: {
@@ -71,6 +72,15 @@ module.exports = function (grunt) {
             }
         },
 
+        file_append: {
+            addSourceURL: {
+                files: [ {
+                    append: `\n\n//# sourceURL=${pkg.widgetName}.webmodeler.js\n`,
+                    input: `dist/tmp/src/${pkg.widgetName}.webmodeler.js`
+                } ]
+            }
+        },
+
         webpack: {
             develop: webpackConfig,
             release: webpackConfigRelease
@@ -80,6 +90,8 @@ module.exports = function (grunt) {
             build: [
                 "./dist/" + pkg.version + "/" + pkg.widgetName + "/*",
                 "./dist/tmp/**/*",
+                "./dist/tsc/**/*",
+                "./dist/testresults/**/*",
                 "./dist/MxTestProject/deployment/web/widgets/" + pkg.widgetName + "/*",
                 "./dist/MxTestProject/widgets/" + pkg.widgetName + ".mpk"
             ]
@@ -95,18 +107,19 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-compress");
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-watch");
+    grunt.loadNpmTasks("grunt-file-append");
     grunt.loadNpmTasks("grunt-webpack");
 
     grunt.registerTask("default", [ "clean build", "watch" ]);
     grunt.registerTask(
         "clean build",
         "Compiles all the assets and copies the files to the dist directory.",
-        [ "checkDependencies", "clean:build", "webpack:develop", "compress:dist", "copy:mpk" ]
+        [ "checkDependencies", "clean:build", "webpack:develop", "file_append", "compress:dist", "copy:mpk" ]
     );
     grunt.registerTask(
         "release",
         "Compiles all the assets and copies the files to the dist directory. Minified without source mapping",
-        [ "checkDependencies", "clean:build", "webpack:release", "compress:dist", "copy:mpk" ]
+        [ "checkDependencies", "clean:build", "webpack:release", "file_append", "compress:dist", "copy:mpk" ]
     );
     grunt.registerTask("build", [ "clean build" ]);
 };

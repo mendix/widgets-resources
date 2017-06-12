@@ -3,8 +3,11 @@ import { Carousel, Image } from "./Carousel";
 import { Alert } from "./Alert";
 import { UrlHelper } from "../UrlHelper";
 
-interface CarouselContainerProps {
+interface WrapperProps {
     mxObject: mendix.lib.MxObject;
+}
+
+interface CarouselContainerProps extends WrapperProps {
     dataSource: DataSource;
     dataSourceMicroflow: string;
     entityConstraint: string;
@@ -26,14 +29,14 @@ interface CarouselContainerState {
 type DataSource = "static" | "XPath" | "microflow";
 type ClickOptions = "doNothing" | "callMicroflow" | "showPage";
 
-export default class CarouselContainer extends Component<CarouselContainerProps, CarouselContainerState> {
+class CarouselContainer extends Component<CarouselContainerProps, CarouselContainerState> {
     private subscriptionHandle: number;
     private subscriptionCallback: (mxObject: mendix.lib.MxObject) => () => void;
 
     constructor(props: CarouselContainerProps) {
         super(props);
 
-        const alertMessage = this.validateProps();
+        const alertMessage = CarouselContainer.validateProps(props);
         this.state = {
             alertMessage,
             images: [],
@@ -72,15 +75,15 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
         if (this.subscriptionHandle) window.mx.data.unsubscribe(this.subscriptionHandle);
     }
 
-    private validateProps(): string {
+    public static validateProps(props: CarouselContainerProps): string {
         let message = "";
-        if (this.props.dataSource === "static" && !this.props.staticImages.length) {
+        if (props.dataSource === "static" && !props.staticImages.length) {
             message = "Configuration error: for data source static; at least one static image is required";
         }
-        if (this.props.dataSource === "XPath" && !this.props.imagesEntity) {
+        if (props.dataSource === "XPath" && !props.imagesEntity) {
             message = "Configuration error: for data source XPath; the images entity is required";
         }
-        if (this.props.dataSource === "microflow" && !this.props.dataSourceMicroflow) {
+        if (props.dataSource === "microflow" && !props.dataSourceMicroflow) {
             message = "Configuration error: for data source microflow; a data source microflow is required";
         }
 
@@ -196,3 +199,5 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
         return context;
     }
 }
+
+export { CarouselContainer as default, CarouselContainerProps };

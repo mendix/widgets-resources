@@ -11,10 +11,10 @@ describe("CarouselItem", () => {
 
     beforeEach(() => {
         carouselItem = shallow(createElement(CarouselItem, {
-            url,
             getItemNode: jasmine.createSpy("ref"),
             position: 100,
-            status: "active"
+            status: "active",
+            url
         }));
         carouselImage = carouselItem.children().first();
     });

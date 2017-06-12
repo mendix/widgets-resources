@@ -5,7 +5,7 @@ import { Alert } from "./Alert";
 import { CarouselControl, CarouselControlProps } from "./CarouselControl";
 import { CarouselItem, CarouselItemProps, ItemStatus } from "./CarouselItem";
 
-import "../ui/Carousel.css";
+import "../ui/Carousel.scss";
 
 interface Image {
     guid?: string;

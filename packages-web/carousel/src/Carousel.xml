@@ -2,7 +2,9 @@
 <widget id="com.mendix.widget.custom.carousel.Carousel" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
     <name>Carousel</name>
     <description>Carousel displaying images</description>
-    <icon/>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTM0A1t6AAAAs0lEQVQ4T2OoP/mfJDQYNBy+OweI4FwCGoBKP7yKBiK4Hgo0XHwNZaAhoNKXn+/AuVANQNW4NAARsixIA4QPFwpaXA9hwBGyAnQb/BeWW/aZA0mIOBDZL14ElwUiFD9YL6wzaJdVq2cAkhA91gvnSPfl7ryL4QcggquGICDbfVY8X3s0Q70bkATqRNGAphoZATUg6wFpsMatGoLgevRndTEA7cWvGoIgekAITQIPAqmudwMAlyXWdQ1JdQkAAAAASUVORK5CYII=
+    </icon>
     <properties>
         <property key="dataSource" type="enumeration" defaultValue="static">
             <caption>Data source</caption>
