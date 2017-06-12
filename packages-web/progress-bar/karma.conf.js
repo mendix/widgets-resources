@@ -1,4 +1,5 @@
-var webpackConfig = require("./webpack.config");
+const webpackConfigs = require("./webpack.config");
+const webpackConfig = webpackConfigs[0];
 const path = require("path");
 Object.assign(webpackConfig, {
     devtool: "inline-source-map",

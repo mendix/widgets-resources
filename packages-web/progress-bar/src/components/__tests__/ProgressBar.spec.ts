@@ -42,12 +42,6 @@ describe("Progress bar", () => {
         expect(wrapper.childAt(0).text()).toEqual(`${-20}%`);
     });
 
-    it("with no maximum value specified should set it to the default value of 100", () => {
-        const progressbar = getProgressbar({ progress } as ProgressBarProps).childAt(0);
-
-        expect(progressbar.childAt(0).text()).toBe(`${progress}%`);
-    });
-
     it("should render the progress label invalid when the maximum value is less than 1", () => {
         const progressbar = getProgressbar({ maximumValue: 0, progress }).childAt(0);
 
