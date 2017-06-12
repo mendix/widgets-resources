@@ -4,11 +4,12 @@ import { BootstrapStyle, RangeSlider } from "./RangeSlider";
 
 interface WrapperProps {
     class?: string;
-    mxObject?: mendix.lib.MxObject;
+    mxObject: mendix.lib.MxObject;
     style?: string;
+    readOnly: boolean;
 }
 
-interface RangeSliderContainerProps extends WrapperProps {
+export interface RangeSliderContainerProps extends WrapperProps {
     bootstrapStyle: BootstrapStyle;
     maxAttribute: string;
     minAttribute: string;
@@ -47,10 +48,13 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
     }
 
     render() {
-        const disabled = !this.props.mxObject
-            || !!(this.props.stepAttribute && this.props.mxObject.isReadonlyAttr(this.props.stepAttribute));
+        const disabled = !this.props.mxObject || this.props.readOnly
+            || !!(this.props.lowerBoundAttribute && this.props.mxObject.isReadonlyAttr(this.props.lowerBoundAttribute))
+            || !!(this.props.upperBoundAttribute && this.props.mxObject.isReadonlyAttr(this.props.upperBoundAttribute));
 
-        const alertMessage = !disabled ? this.validateSettings() || this.validateValues() : "";
+        const alertMessage = !disabled
+            ? this.validateSettings(this.state) || this.validateValues()
+            : "";
 
         return createElement(RangeSlider, {
             alertMessage,
@@ -80,6 +84,56 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
     }
 
+    public static parseStyle(style = ""): { [key: string]: string } {
+        try {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            // tslint:disable-next-line no-console
+            console.log("Failed to parse style", style, error);
+        }
+
+        return {};
+    }
+
+    private validateSettings(state: RangeSliderContainerState): string {
+        const message: string[] = [];
+        const { minimumValue, maximumValue, lowerBoundValue, upperBoundValue, stepValue } = state;
+        const validMax = typeof maximumValue === "number";
+        const validMin = typeof minimumValue === "number";
+        if (!validMax) {
+            message.push("Maximum value is required");
+        }
+        if (!validMin) {
+            message.push("Minimum value is required");
+        }
+        if (typeof lowerBoundValue !== "number") {
+            message.push("Lower bound value is required");
+        }
+        if (typeof upperBoundValue !== "number") {
+            message.push("Upper bound value is required");
+        }
+        if (typeof maximumValue === "number" && typeof minimumValue === "number") {
+            if (validMin && validMax && (minimumValue >= maximumValue)) {
+                message.push(`Minimum value ${minimumValue} should be less than the maximum value ${maximumValue}`);
+            }
+            if (!stepValue || stepValue <= 0) {
+                message.push(`Step value ${stepValue} should be greater than 0`);
+            } else if (validMax && validMin && (maximumValue - minimumValue) % stepValue > 0) {
+                message.push(`Step value is invalid, max - min (${maximumValue} - ${minimumValue})
+            should be evenly divisible by the step value ${stepValue}`);
+            }
+        }
+
+        return message.join(", ");
+    }
+
     private onUpdate(value: number[]) {
         const { mxObject, lowerBoundAttribute, upperBoundAttribute } = this.props;
         if (mxObject && Array.isArray(value) && value.length > 0) {
@@ -98,11 +152,11 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
 
     private updateValues(mxObject?: mendix.lib.MxObject): RangeSliderContainerState {
         return {
-            lowerBoundValue: this.getValue(this.props.lowerBoundAttribute, mxObject, undefined),
-            maximumValue: this.getValue(this.props.maxAttribute, mxObject, undefined),
-            minimumValue: this.getValue(this.props.minAttribute, mxObject, undefined),
+            lowerBoundValue: this.getValue(this.props.lowerBoundAttribute, mxObject),
+            maximumValue: this.getValue(this.props.maxAttribute, mxObject),
+            minimumValue: this.getValue(this.props.minAttribute, mxObject),
             stepValue: this.getValue(this.props.stepAttribute, mxObject, this.props.stepValue),
-            upperBoundValue: this.getValue(this.props.upperBoundAttribute, mxObject, undefined)
+            upperBoundValue: this.getValue(this.props.upperBoundAttribute, mxObject)
         };
     }
 
@@ -150,38 +204,6 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         }
     }
 
-    private validateSettings(): string {
-        const message: string[] = [];
-        const { minimumValue, maximumValue, lowerBoundValue, upperBoundValue, stepValue } = this.state;
-        const validMax = typeof maximumValue === "number";
-        const validMin = typeof minimumValue === "number";
-        if (!validMax) {
-            message.push("Maximum value is required");
-        }
-        if (!validMin) {
-            message.push("Minimum value is required");
-        }
-        if (typeof lowerBoundValue !== "number") {
-            message.push("Lower bound value is required");
-        }
-        if (typeof upperBoundValue !== "number") {
-            message.push("Upper bound value is required");
-        }
-        if (typeof maximumValue === "number" && typeof minimumValue === "number") {
-            if (validMin && validMax && (minimumValue >= maximumValue)) {
-                message.push(`Minimum value ${minimumValue} should be less than the maximum value ${maximumValue}`);
-            }
-            if (!stepValue || stepValue <= 0) {
-                message.push(`Step value ${stepValue} should be greater than 0`);
-            } else if (validMax && validMin && (maximumValue - minimumValue) % stepValue > 0) {
-                message.push(`Step value is invalid, max - min (${maximumValue} - ${minimumValue})
-            should be evenly divisible by the step value ${stepValue}`);
-            }
-        }
-
-        return message.join(", ");
-    }
-
     private validateValues(): string {
         const message: string[] = [];
         const { minimumValue, maximumValue, lowerBoundValue, upperBoundValue } = this.state;
@@ -216,22 +238,4 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
 
         return defaultValue;
     }
-
-    private static parseStyle(style = ""): { [key: string]: string } {
-        try {
-            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
-                const pair = line.split(":");
-                if (pair.length === 2) {
-                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
-                    styleObject[name] = pair[1].trim();
-                }
-                return styleObject;
-            }, {});
-        } catch (error) {
-            console.log("Failed to parse style", style, error);
-        }
-
-        return {};
-    }
-
 }

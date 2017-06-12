@@ -1,12 +1,19 @@
 {
   "name": "rangeslider",
   "widgetName": "RangeSlider",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Change a range of values on a slider",
   "scripts": {
     "pretest": "tsc",
-    "test": "karma start --single-run --codeCoverage && node tests/remap.js"
+    "test": "karma start --single-run --codeCoverage && node tests/remap.js",
+    "emit": "tsc",
+    "lint": "tslint -c tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'"
   },
+  "pre-commit": [
+    "emit",
+    "lint",
+    "test"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/mendixlabs/range-slider"
@@ -16,14 +23,12 @@
     "url": "https://github.com/mendixlabs/range-slider/issues"
   },
   "devDependencies": {
-    "@types/classnames": "0.0.32",
+    "@types/classnames": "^2.2.0",
     "@types/core-js": "0.9.36",
     "@types/dojo": "^1.9.37",
     "@types/enzyme": "^2.7.6",
     "@types/jasmine": "^2.5.41",
     "@types/karma": "^0.13.34",
-    "@types/rc-slider": "^6.1.2",
-    "@types/rc-tooltip": "^3.4.6",
     "@types/react": "^15.0.23",
     "@types/react-dom": "^15.5.0",
     "check-dependencies": "^1.0.1",
@@ -38,8 +43,9 @@
     "grunt-contrib-compress": "^1.4.1",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-file-append": "0.0.7",
     "grunt-newer": "^1.1.1",
-    "grunt-webpack": "^2.0.1",
+    "grunt-webpack": "^3.0.0",
     "istanbul": "^0.4.3",
     "istanbul-instrumenter-loader": "^2.0.0",
     "jasmine": "^2.6.0",
@@ -54,6 +60,8 @@
     "karma-webpack": "^2.0.3",
     "mendix-client": "https://github.com/FlockOfBirds/Mendix-client-typing/archive/7.1.0.tar.gz",
     "node-sass": "^4.5.2",
+    "pre-commit": "^1.2.2",
+    "raw-loader": "^0.5.1",
     "react": "~15.5.3",
     "react-addons-test-utils": "~15.5.1",
     "react-dom": "~15.5.3",
@@ -63,7 +71,7 @@
     "source-map-loader": "^0.2.0",
     "style-loader": "^0.16.1",
     "ts-loader": "^2.0.2",
-    "tslint": "^5.0.0",
+    "tslint": "^5.4.3",
     "tslint-eslint-rules": "^4.0.0",
     "typescript": "^2.2.1",
     "webpack": "^2.3.0",
@@ -71,7 +79,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "rc-slider": "^7.0.2",
-    "rc-tooltip": "^3.4.3"
+    "rc-slider": "^8.0.2",
+    "rc-tooltip": "^3.4.6"
   }
 }
