@@ -1,12 +1,19 @@
 {
   "name": "progressbar",
   "widgetName": "ProgressBar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Displays a progress bar",
   "scripts": {
     "pretest": "tsc",
-    "test": "karma start --single-run --codeCoverage && node tests/remap.js"
+    "test": "karma start --single-run --codeCoverage && node tests/remap.js",
+    "emit": "tsc",
+    "lint": "tslint -c tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'"
   },
+  "pre-commit": [
+    "emit",
+    "lint",
+    "test"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/mendixlabs/progress-bar"
@@ -54,6 +61,8 @@
     "karma-webpack": "^2.0.3",
     "mendix-client": "https://github.com/FlockOfBirds/Mendix-client-typing/archive/7.1.0.tar.gz",
     "node-sass": "^4.5.2",
+    "pre-commit": "^1.2.2",
+    "raw-loader": "^0.5.1",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -66,7 +75,8 @@
     "tslint-eslint-rules": "^4.0.0",
     "typescript": "^2.2.2",
     "webpack": "^2.3.3",
-    "webpack-dev-server": "^2.4.2"
+    "webpack-dev-server": "^2.4.2",
+    "webpack-merge": "^4.1.0"
   },
   "dependencies": {
     "classnames": "^2.2.5"

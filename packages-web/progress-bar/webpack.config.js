@@ -3,7 +3,7 @@ const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-module.exports = {
+const widgetConfig = {
     entry: "./src/components/ProgressBarContainer.ts",
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
@@ -11,7 +11,7 @@ module.exports = {
         libraryTarget: "umd"
     },
     resolve: {
-        extensions: [ ".ts", ".js" ],
+        extensions: [ ".ts", ".js", ".json" ],
         alias: {
             "tests": path.resolve(__dirname, "./tests")
         }
@@ -23,26 +23,55 @@ module.exports = {
                 fallback: "style-loader",
                 use: "css-loader"
             }) },
-            { test: /\.scss$/, use: ExtractTextPlugin.extract({
+            { test: /\.scss$/, loader: ExtractTextPlugin.extract({
+                fallback: "style-loader",
                 use: [
                     { loader: "css-loader" },
                     { loader: "sass-loader" }
-                ],
-                fallback: "style-loader"
-            })}
+                ]
+            }) }
         ]
     },
     devtool: "source-map",
     externals: [ "react", "react-dom" ],
     plugins: [
         new CopyWebpackPlugin([
+            { from: "src/**/*.js" },
             { from: "src/**/*.xml" }
         ], {
             copyUnmodified: true
         }),
         new ExtractTextPlugin({ filename: "./src/com/mendix/widget/custom/progressbar/ui/ProgressBar.css" }),
-        new webpack.LoaderOptionsPlugin({
-            debug: true
-        })
+        new webpack.LoaderOptionsPlugin({ debug: true })
     ]
 };
+
+const previewConfig = {
+    entry: "./src/ProgressBar.webmodeler.ts",
+    output: {
+        path: path.resolve(__dirname, "dist/tmp"),
+        filename: "src/ProgressBar.webmodeler.js",
+        libraryTarget: "commonjs"
+    },
+    resolve: {
+        extensions: [ ".ts", ".js" ]
+    },
+    module: {
+        rules: [
+            { test: /\.ts$/, use: "ts-loader" },
+            { test: /\.css$/, use: "raw-loader" },
+            { test: /\.scss$/, use: [
+                    { loader: "raw-loader" },
+                    { loader: "sass-loader" }
+                ]
+            }
+        ]
+    },
+    devtool: "inline-source-map",
+    externals: [ "react", "react-dom" ],
+    plugins: [
+        new webpack.LoaderOptionsPlugin({ debug: true })
+    ]
+};
+
+module.exports = [ widgetConfig, previewConfig ];
