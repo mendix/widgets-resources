@@ -3,9 +3,10 @@ import { Component, createElement } from "react";
 import { BootstrapStyle, Slider } from "./Slider";
 
 interface WrapperProps {
-    class?: string;
+    class: string;
     mxObject?: mendix.lib.MxObject;
-    style?: string;
+    style: string;
+    readOnly: boolean;
 }
 
 interface SliderContainerProps extends WrapperProps {
@@ -44,10 +45,10 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
     }
 
     render() {
-        const disabled = !this.props.mxObject
-            || !!(this.props.stepAttribute && this.props.mxObject.isReadonlyAttr(this.props.stepAttribute));
+        const disabled = !this.props.mxObject || this.props.readOnly
+            || !!(this.props.valueAttribute && this.props.mxObject.isReadonlyAttr(this.props.valueAttribute));
 
-        const alertMessage = !disabled ? this.validateSettings() || this.validateValues() : "";
+        const alertMessage = !disabled ? this.validateSettings(this.state) || this.validateValues() : "";
 
         return createElement(Slider, {
             alertMessage,
@@ -76,13 +77,57 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
     }
 
+    public static parseStyle(style = ""): {[key: string]: string} {
+        try {
+            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            // tslint:disable-next-line no-console
+            console.log("Failed to parse style", style, error);
+        }
+
+        return {};
+    }
+
+    private validateSettings(state: SliderContainerState): string {
+        const message: string[] = [];
+        const { minimumValue, maximumValue, stepValue } = state;
+        const validMax = typeof maximumValue === "number";
+        const validMin = typeof minimumValue === "number";
+        if (!validMax) {
+            message.push("Maximum value is required");
+        }
+        if (!validMin) {
+            message.push("Minimum value is required");
+        }
+        if (typeof maximumValue === "number" && typeof minimumValue === "number") {
+            if (validMin && validMax && (minimumValue >= maximumValue)) {
+                message.push(`Minimum value ${minimumValue} should be less than the maximum value ${maximumValue}`);
+            }
+            if (!stepValue || stepValue <= 0) {
+                message.push(`Step value ${stepValue} should be greater than 0`);
+            } else if (validMax && validMin && (maximumValue - minimumValue) % stepValue > 0) {
+                message.push(`Step value is invalid: max - min (${maximumValue} - ${minimumValue})
+             should be evenly divisible by the step value ${stepValue}`);
+            }
+        }
+
+        return message.join(", ");
+    }
+
     private updateValues(mxObject?: mendix.lib.MxObject): SliderContainerState {
-        const value = SliderContainer.getValue(this.props.valueAttribute, mxObject, null);
+        const value = this.getValue(this.props.valueAttribute, mxObject);
 
         return {
-            maximumValue: SliderContainer.getValue(this.props.maxAttribute, mxObject, undefined),
-            minimumValue: SliderContainer.getValue(this.props.minAttribute, mxObject, undefined),
-            stepValue: SliderContainer.getValue(this.props.stepAttribute, mxObject, this.props.stepValue),
+            maximumValue: this.getValue(this.props.maxAttribute, mxObject),
+            minimumValue: this.getValue(this.props.minAttribute, mxObject),
+            stepValue: this.getValue(this.props.stepAttribute, mxObject, this.props.stepValue),
             value: (value || value === 0) ? value : null
         };
     }
@@ -141,32 +186,6 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         }
     }
 
-    private validateSettings(): string {
-        const message: string[] = [];
-        const { minimumValue, maximumValue, stepValue } = this.state;
-        const validMax = typeof maximumValue === "number";
-        const validMin = typeof minimumValue === "number";
-        if (!validMax) {
-            message.push("Maximum value is required");
-        }
-        if (!validMin) {
-            message.push("Minimum value is required");
-        }
-        if (typeof maximumValue === "number" && typeof minimumValue === "number") {
-            if (validMin && validMax && (minimumValue >= maximumValue)) {
-                message.push(`Minimum value ${minimumValue} should be less than the maximum value ${maximumValue}`);
-            }
-            if (!stepValue || stepValue <= 0) {
-                message.push(`Step value ${stepValue} should be greater than 0`);
-            } else if (validMax && validMin && (maximumValue - minimumValue) % stepValue > 0) {
-                message.push(`Step value is invalid: max - min (${maximumValue} - ${minimumValue})
-             should be evenly divisible by the step value ${stepValue}`);
-            }
-        }
-
-        return message.join(", ");
-    }
-
     private validateValues(): string {
         const message: string[] = [];
         const { minimumValue, maximumValue, value } = this.state;
@@ -182,25 +201,9 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         return message.join(", ");
     }
 
-    private static parseStyle(style = ""): {[key: string]: string} {
-        try {
-            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
-                const pair = line.split(":");
-                if (pair.length === 2) {
-                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
-                    styleObject[name] = pair[1].trim();
-                }
-                return styleObject;
-            }, {});
-        } catch (error) {
-            console.log("Failed to parse style", style, error);
-        }
-
-        return {};
-    }
-
-    private static getValue<T>(attribute?: string, mxObject?: mendix.lib.MxObject, defaultValue?: T): number | T | undefined {
-        if (mxObject && attribute) {
+    // tslint:disable-next-line:max-line-length
+    private getValue(attribute: string, mxObject?: mendix.lib.MxObject, defaultValue?: number): number | undefined {
+        if (mxObject) {
             if (mxObject.get(attribute)) {
                 return parseFloat(mxObject.get(attribute) as string);
             }

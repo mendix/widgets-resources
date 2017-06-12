@@ -3,18 +3,19 @@
 .widget-slider {
     .rc-slider-handle, .rc-slider-dot-active {
         border: 2px solid $brand-default;
-    }
-
-    &.has-error {
-        &.rc-slider-track, .rc-slider-rail {
-            background-color: $brand-danger;
+        &:active {
+            box-shadow: none;
+            border-color: $brand-default;
+        }
+        &:hover {
+            border-color: $brand-default;
         }
     }
 
-    /* correction to keep the marks on the edges readable*/
-    .rc-slider-mark {
-        left: 1%;
-        width: 98%;
+    &.has-error {
+        .rc-slider-track, .rc-slider-rail {
+            background-color: $brand-danger;
+        }
     }
 
     .rc-slider {
@@ -35,7 +36,6 @@
     padding-left: 10px;
     padding-right: 10px;
     margin-bottom: 15px;
-    overflow: hidden;
 }
 
 .widget-slider-no-value {

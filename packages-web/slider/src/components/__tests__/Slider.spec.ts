@@ -1,7 +1,7 @@
 import { ShallowWrapper, shallow } from "enzyme";
 import { DOM, createElement } from "react";
 
-import * as RcSlider from "rc-slider";
+import RcSlider, { Marks } from "rc-slider";
 import { Alert } from "../Alert";
 
 import { Slider, SliderProps } from "../Slider";
@@ -14,7 +14,7 @@ describe("Slider", () => {
     const minValue = 0;
     const stepValue = 1;
     const noOfMarkers = 0;
-    const marks: RcSlider.Marks = { 0: "0", 25: "25", 50: "50", 75: "75", 100: "100" };
+    const marks: Marks = { 0: "0", 25: "25", 50: "50", 75: "75", 100: "100" };
     const bootstrapStyle = "primary";
 
     beforeEach(() => {

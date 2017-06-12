@@ -1,8 +1,8 @@
 import { Component, DOM, ReactNode, createElement } from "react";
 
 import * as classNames from "classnames";
-import * as RcSlider from "rc-slider";
-import * as Tooltip from "rc-tooltip";
+import RcSlider, { Handle, Marks } from "rc-slider";
+import Tooltip from "rc-tooltip";
 
 import { Alert } from "./Alert";
 
@@ -76,8 +76,8 @@ class Slider extends Component<SliderProps, {}> {
         );
     }
 
-    private calculateMarks(): RcSlider.Marks {
-        const marks: RcSlider.Marks = {};
+    private calculateMarks(): Marks {
+        const marks: Marks = {};
         const { noOfMarkers, maxValue, minValue } = this.props;
         if ((noOfMarkers || noOfMarkers === 0) && (maxValue || maxValue === 0) && (minValue || minValue === 0)) {
             if (this.isValidMinMax() && noOfMarkers >= 2) {
@@ -132,7 +132,7 @@ class Slider extends Component<SliderProps, {}> {
                     prefixCls: "rc-slider-tooltip",
                     trigger: [ "hover", "click", "focus" ]
                 },
-                createElement(RcSlider.Handle, {
+                createElement(Handle, {
                     className: props.className,
                     offset: props.offset,
                     vertical: props.vertical

@@ -1,5 +1,5 @@
 import { shallow } from "enzyme";
-import { createElement, DOM } from "react";
+import { DOM, createElement } from "react";
 
 import { Alert } from "../Alert";
 
