@@ -147,7 +147,9 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
     private handleValidations(validations: mendix.lib.ObjectValidation[]) {
         const validationMessage = validations[0].getErrorReason(this.props.booleanAttribute);
         validations[0].removeAttribute(this.props.booleanAttribute);
-        if (validationMessage) this.setState({ alertMessage: validationMessage });
+        if (validationMessage) {
+            this.setState({ alertMessage: validationMessage });
+        }
     }
 
     private executeAction(actionname: string, guid: string) {
