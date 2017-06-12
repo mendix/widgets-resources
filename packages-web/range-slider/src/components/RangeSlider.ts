@@ -1,8 +1,8 @@
 import { Component, DOM, ReactNode, createElement } from "react";
 import * as classNames from "classnames";
 
-import * as RcSlider from "rc-slider";
-import * as Tooltip from "rc-tooltip";
+import { Handle, Marks, Range } from "rc-slider";
+import Tooltip from "rc-tooltip";
 import { Alert } from "./Alert";
 
 import "rc-slider/dist/rc-slider.css";
@@ -55,7 +55,7 @@ class RangeSlider extends Component<RangeSliderProps, {}> {
             ),
             style: this.props.style
         },
-            createElement(RcSlider.Range, {
+            createElement(Range, {
                 defaultValue: rangeSliderValues,
                 disabled: this.props.disabled,
                 handle: tooltipText ? this.createTooltip(tooltipText) : undefined,
@@ -78,23 +78,19 @@ class RangeSlider extends Component<RangeSliderProps, {}> {
         let validLowerBound = 0;
         let validUpperBound = 0;
         if (typeof minValue === "number" && typeof maxValue === "number" && typeof stepValue === "number") {
-            if (typeof lowerBound === "number") {
-                validLowerBound = lowerBound;
-            } else {
-                validLowerBound = RangeSlider.isValidMinMax(this.props) ? (minValue + stepValue) : 1;
-            }
-            if (typeof upperBound === "number") {
-                validUpperBound = upperBound;
-            } else {
-                validUpperBound = RangeSlider.isValidMinMax(this.props) ? (maxValue - stepValue) : (100 - stepValue);
-            }
+            validLowerBound = typeof lowerBound === "number"
+                ? lowerBound
+                : RangeSlider.isValidMinMax(this.props) ? (minValue + stepValue) : 1;
+            validUpperBound = typeof upperBound === "number"
+                ? upperBound
+                : RangeSlider.isValidMinMax(this.props) ? (maxValue - stepValue) : (100 - stepValue);
         }
 
         return [ validLowerBound, validUpperBound ];
     }
 
-    private static calculateMarks(props: RangeSliderProps): RcSlider.Marks {
-        const marks: RcSlider.Marks = {};
+    private static calculateMarks(props: RangeSliderProps): Marks {
+        const marks: Marks = {};
         const { noOfMarkers, maxValue, minValue } = props;
         if (typeof noOfMarkers === "number" && typeof maxValue === "number" && typeof minValue === "number") {
             if (RangeSlider.isValidMinMax(props) && noOfMarkers >= 2) {
@@ -129,7 +125,7 @@ class RangeSlider extends Component<RangeSliderProps, {}> {
                     prefixCls: "rc-slider-tooltip",
                     trigger: [ "hover", "click", "focus" ]
                 },
-                createElement(RcSlider.Handle, {
+                createElement(Handle, {
                     className: props.className,
                     key: props.index,
                     offset: props.offset,
