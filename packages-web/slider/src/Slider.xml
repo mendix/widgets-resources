@@ -73,9 +73,9 @@
             <description>Number of points to shift when sliding (used if step attribute is not set)</description>
         </property>
         <property key="bootstrapStyle" type="enumeration" defaultValue="primary">
-            <caption>Bootstrap style</caption>
+            <caption>Slider style</caption>
             <category>Appearance</category>
-            <description>Bootstrap color to apply to the slider</description>
+            <description>Color to apply to the slider</description>
             <enumerationValues>
                 <enumerationValue key="primary">Primary</enumerationValue>
                 <enumerationValue key="inverse">Inverse</enumerationValue>

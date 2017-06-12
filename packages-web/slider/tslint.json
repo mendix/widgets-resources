@@ -138,7 +138,8 @@
       120
     ],
     "arrow-parens": false,
-    "no-namespace": false
+    "no-namespace": false,
+    "space-in-parens": [ true, "never" ]
   },
   "jsRules": {
     "trailing-comma": [

@@ -8,7 +8,7 @@ Change a number value using a slider
 * Render slider with different bootstrap colors
 
 ## Dependencies
-Mendix 7.1
+Mendix 7.3
 
 ## Usage
 Place the widget in the context of an object that has attributes for maximum value, minimum value and value
