@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.mendix.com/widget/1.0/" xmlns="http://www.mendix.com/widget/1.0/" elementFormDefault="qualified">
+
+    <xs:element name="widget" type="widgetType"/>
+
+    <xs:complexType name="widgetType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="icon" type="xs:base64Binary" minOccurs="0"/>
+            <xs:element name="phonegap" type="phonegapType" minOccurs="0"/>
+            <xs:element name="properties" type="propertiesType"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+        <xs:attribute name="needsEntityContext" type="xs:boolean" use="required"/>
+        <xs:attribute name="mobile" type="xs:boolean" default="false"/>
+        <xs:attribute name="offlineCapable" type="xs:boolean" default="false"/>
+    </xs:complexType>
+
+    <xs:complexType name="phonegapType">
+        <xs:attribute name="enabled" type="xs:boolean" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="propertiesType">
+        <xs:sequence>
+            <xs:element name="property" type="propertyType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="propertyType">
+        <xs:sequence>
+            <xs:element name="caption" type="xs:string"/>
+            <xs:element name="category" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="attributeTypes" type="attributeTypesType" minOccurs="0"/>
+            <xs:element name="enumerationValues" type="enumerationValuesType" minOccurs="0"/>
+            <xs:element name="properties" type="propertiesType" minOccurs="0"/>
+            <xs:element name="returnType" type="returnTypeType" minOccurs="0"/>
+            <xs:element name="translations" type="translationsType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="key" type="xs:string" use="required"/>
+        <xs:attribute name="type" type="propertyTypeType" use="required"/>
+        <xs:attribute name="isList" type="xs:boolean" default="false"/>
+        <xs:attribute name="entityProperty" type="xs:string"/>
+        <xs:attribute name="allowNonPersistableEntities" type="xs:boolean" default="false"/>
+        <xs:attribute name="isPath" type="isPathType" default="no"/>
+        <xs:attribute name="pathType" type="pathTypeType"/>
+        <xs:attribute name="parameterIsList" type="xs:boolean" default="false"/>
+        <xs:attribute name="multiline" type="xs:boolean" default="false"/>
+        <xs:attribute name="defaultValue" type="xs:string" default=""/>
+        <xs:attribute name="required" type="xs:boolean" default="true"/>
+        <xs:attribute name="isDefault" type="xs:boolean" default="false"/>
+    </xs:complexType>
+
+    <xs:simpleType name="propertyTypeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="attribute"/>
+            <xs:enumeration value="boolean"/>
+            <xs:enumeration value="entity"/>
+            <xs:enumeration value="entityConstraint"/>
+            <xs:enumeration value="enumeration"/>
+            <xs:enumeration value="form"/>
+            <xs:enumeration value="image"/>
+            <xs:enumeration value="integer"/>
+            <xs:enumeration value="microflow"/>
+            <xs:enumeration value="object"/>
+            <xs:enumeration value="string"/>
+            <xs:enumeration value="translatableString"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="attributeTypesType">
+        <xs:sequence>
+            <xs:element name="attributeType" type="attributeTypeType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="attributeTypeType">
+        <xs:attribute name="name" type="attributeTypeNameType" use="required"/>
+    </xs:complexType>
+
+    <xs:simpleType name="attributeTypeNameType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AutoNumber"/>
+            <xs:enumeration value="Binary"/>
+            <xs:enumeration value="Boolean"/>
+            <xs:enumeration value="DateTime"/>
+            <xs:enumeration value="Decimal"/>
+            <xs:enumeration value="Enum"/>
+            <xs:enumeration value="HashString"/>
+            <xs:enumeration value="Integer"/>
+            <xs:enumeration value="Long"/>
+            <xs:enumeration value="String"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="isPathType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="optional"/>
+            <xs:enumeration value="yes"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="pathTypeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="reference"/>
+            <xs:enumeration value="referenceSet"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="enumerationValuesType">
+        <xs:sequence>
+            <xs:element name="enumerationValue" type="enumerationValueType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="enumerationValueType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="key" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="returnTypeType">
+        <xs:attribute name="type" type="returnTypeTypeType" use="required"/>
+        <xs:attribute name="isList" type="xs:boolean" default="false"/>
+        <xs:attribute name="entityProperty" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:simpleType name="returnTypeTypeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Void"/>
+            <xs:enumeration value="Boolean"/>
+            <xs:enumeration value="Integer"/>
+            <xs:enumeration value="Decimal"/>
+            <xs:enumeration value="DateTime"/>
+            <xs:enumeration value="String"/>
+            <xs:enumeration value="Object"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="translationsType">
+        <xs:sequence>
+            <xs:element name="translation" type="translationType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="translationType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="lang" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+</xs:schema>

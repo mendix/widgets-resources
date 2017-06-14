@@ -1,0 +1,81 @@
+{
+  "name": "imageviewer",
+  "widgetName": "imageviewer",
+  "version": "1.0.0",
+  "description": "Display an image from specifed source",
+  "scripts": {
+    "pretest": "tsc",
+    "emit": "tsc",
+    "lint": "tslint -c tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'"
+  },
+  "pre-commit": [
+    "emit",
+    "lint",
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendixlabs/slider"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/mendixlabs/slider/issues"
+  },
+  "devDependencies": {
+    "@types/big.js": "0.0.31",
+    "@types/classnames": "^2.2.0",
+    "@types/core-js": "0.9.36",
+    "@types/dojo": "^1.9.37",
+    "@types/enzyme": "^2.7.6",
+    "@types/jasmine": "^2.5.41",
+    "@types/karma": "^0.13.34",
+    "@types/react": "^15.0.18",
+    "@types/react-dom": "^15.5.0",
+    "check-dependencies": "^1.0.1",
+    "copy-webpack-plugin": "^4.0.1",
+    "core-js": "^2.4.1",
+    "css-loader": "^0.28.0",
+    "enzyme": "^2.7.0",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "grunt": "1.0.1",
+    "grunt-check-dependencies": "^1.0.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-compress": "^1.4.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-file-append": "0.0.7",
+    "grunt-newer": "^1.1.1",
+    "grunt-webpack": "^3.0.0",
+    "istanbul": "^0.4.3",
+    "istanbul-instrumenter-loader": "^2.0.0",
+    "jasmine": "^2.5.3",
+    "json-loader": "^0.5.4",
+    "karma": "^1.4.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-remap-istanbul": "^0.6.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^2.0.3",
+    "mendix-client": "https://github.com/FlockOfBirds/Mendix-client-typing/archive/7.1.0.tar.gz",
+    "pre-commit": "^1.2.2",
+    "raw-loader": "^0.5.1",
+    "react": "^15.5.3",
+    "react-addons-test-utils": "^15.5.1",
+    "react-dom": "^15.5.3",
+    "react-test-renderer": "^15.5.4",
+    "remap-istanbul": "^0.9.1",
+    "source-map-loader": "^0.2.0",
+    "style-loader": "^0.16.1",
+    "ts-loader": "^2.0.2",
+    "tslint": "^5.0.0",
+    "tslint-eslint-rules": "^4.0.0",
+    "typescript": "^2.2.1",
+    "webpack": "^2.3.0",
+    "webpack-dev-server": "^2.4.2"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5"
+  }
+}
