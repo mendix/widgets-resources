@@ -1,0 +1,13 @@
+.widget-image-viewer-outer {
+    position: fixed;    
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background: black;
+}
+
+.widget-image-viewer-inner {
+    margin-top: 5%;
+}
