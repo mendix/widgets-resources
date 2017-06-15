@@ -1,4 +1,6 @@
-import { Component, DOM } from "react";
+import { Component, DOM, createElement } from "react";
+
+import * as Lightbox from "react-images";
 
 import "../ui/ImageViewer.css";
 
@@ -7,8 +9,6 @@ interface ImageViewerProps {
 }
 
 interface ImageViewerState {
-    className: string;
-    imageClass: string;
     isOpen: boolean;
 }
 
@@ -18,39 +18,39 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
         super(props);
 
         this.state = {
-            className: "",
-            imageClass: "",
             isOpen: false
         };
-        this.handleClick = this.handleClick.bind(this);
+        this.openLightBox = this.openLightBox.bind(this);
+        this.closeLightBox = this.closeLightBox.bind(this);
     }
 
     render() {
-        return DOM.div({ className: this.state.className },
-            DOM.div({ className: this.state.imageClass },
-                DOM.img({
-                    onClick: this.handleClick,
+        return DOM.div({ className: "widget-image-viewer" },
+            DOM.img({
+                onClick: this.openLightBox,
+                src: this.props.imageurl
+            }),
+            createElement(Lightbox, {
+                images: [ {
                     src: this.props.imageurl
-                })
-            )
+                } ],
+                isOpen: this.state.isOpen,
+                onClose: this.closeLightBox,
+                showImageCount: false
+            })
         );
     }
 
-    private handleClick() {
-        if (this.state.isOpen === false) {
-            this.setState({
-                className: "widget-image-viewer-outer",
-                imageClass: "widget-image-viewer-inner",
-                isOpen: true
-            });
-        } else {
-            this.setState({
-                className: "",
-                imageClass: "",
-                isOpen: false
-            });
-        }
+    private openLightBox() {
+        this.setState({
+            isOpen: true
+        });
+    }
 
+    private closeLightBox() {
+        this.setState({
+            isOpen: false
+        });
     }
 }
 
