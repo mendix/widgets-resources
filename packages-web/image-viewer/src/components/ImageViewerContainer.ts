@@ -41,9 +41,13 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 
     render() {
-
         return createElement(ImageViewer, {
-            imageurl: this.state.imageUrl
+            height: this.props.height,
+            heightUnits: this.props.heightUnit,
+            imageurl: this.state.imageUrl,
+            width: this.props.width,
+            widthUnits: this.props.widthUnit
+
         });
     }
 
@@ -79,6 +83,11 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
                 imageUrl: UrlHelper.getDynamicResourceUrl(mxObject.getGuid(), mxObject.get("changedDate") as number)
             });
         }
+        if (!mxObject && (this.props.source === "systemImage" || this.props.source === "imageUrlAttribute")) {
+            this.setState({
+                imageUrl: ""
+            });
+        }
         if (this.props.source === "staticUrl") {
             this.setState({ imageUrl: this.props.static_Url });
         }
@@ -90,4 +99,4 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 }
 
-export { ImageViewerContainer as default, ImageViewerContainerProps };
+export { ImageViewerContainer as default, ImageViewerContainerProps, Units };
