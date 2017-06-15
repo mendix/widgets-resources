@@ -56,7 +56,7 @@
             <category>Appearance</category>
             <description>Maximum width of the image in pixels.</description>
         </property>
-        <property key="heightUnit" type="enumeration" defaultValue="pixels">
+        <property key="heightUnit" type="enumeration" defaultValue="auto">
             <caption>Height unit</caption>
             <category>Appearance</category>
             <description>No inline style will be set on auto. Percentage is relative to parent container only when parent has an absolute height.</description>
