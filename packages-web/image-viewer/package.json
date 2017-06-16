@@ -5,6 +5,7 @@
   "description": "Display an image from specifed source",
   "scripts": {
     "pretest": "tsc",
+    "test": "karma start --single-run --codeCoverage && node tests/remap.js",
     "emit": "tsc",
     "lint": "tslint -c tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'"
   },
