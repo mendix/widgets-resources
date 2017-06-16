@@ -78,6 +78,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "react-images": "^0.5.4"
+    "react-image-lightbox": "^4.1.0"
   }
 }

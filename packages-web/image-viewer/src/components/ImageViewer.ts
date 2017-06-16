@@ -1,6 +1,6 @@
 import { Component, DOM, createElement } from "react";
 
-import * as Lightbox from "react-images";
+import * as Lightbox from "react-image-lightbox";
 
 import { Units } from "./ImageViewerContainer";
 
@@ -45,13 +45,9 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
                 src: this.props.imageurl,
                 style: imageStyle
             }),
-            createElement(Lightbox, {
-                images: [ {
-                    src: this.props.imageurl
-                } ],
-                isOpen: this.state.isOpen,
-                onClose: this.closeLightBox,
-                showImageCount: false
+            this.state.isOpen && createElement(Lightbox, {
+                mainSrc: this.props.imageurl,
+                onCloseRequest: this.closeLightBox
             })
         );
     }
