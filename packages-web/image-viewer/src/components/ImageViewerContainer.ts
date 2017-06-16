@@ -1,5 +1,6 @@
-import { Component, createElement } from "react";
+import { Component, DOM, createElement } from "react";
 
+import { Alert } from "./Alert";
 import { ImageViewer } from "./ImageViewer";
 import { UrlHelper } from "../UrlHelper";
 
@@ -12,7 +13,7 @@ interface WrapperProps {
 
 interface ImageViewerContainerProps extends WrapperProps {
     source: DataSource;
-    systemImageimageAttribute: string;
+    systemImageAttribute: string;
     imageAttribute: string;
     static_Url: string;
     static_Image: string;
@@ -23,7 +24,10 @@ interface ImageViewerContainerProps extends WrapperProps {
 }
 
 interface ImageViewerContainerState {
+    alertMessage?: string;
     imageUrl: string;
+    isLoading?: boolean;
+    showAlert?: boolean;
 }
 
 type DataSource = "systemImage" | "imageUrlAttribute" | "staticUrl" | "staticImage";
@@ -36,11 +40,27 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     constructor(props: ImageViewerContainerProps) {
         super(props);
 
-        this.state = { imageUrl: "" };
+        const alertMessage = ImageViewerContainer.validateProps(props);
+        this.state = {
+            alertMessage,
+            imageUrl: "",
+            isLoading: true,
+            showAlert: !!alertMessage
+        };
         this.attributeCallback = mxObject => () => this.getImageUrl(mxObject);
     }
 
     render() {
+        if (this.state.showAlert) {
+            return createElement(Alert, { message: this.state.alertMessage });
+        }
+        if (this.state.isLoading) {
+            return DOM.div(null,
+                DOM.i({ className: "glyphicon glyphicon-cog glyph-spin" }),
+                DOM.span(null, " Loading ...")
+            );
+        }
+
         return createElement(ImageViewer, {
             height: this.props.height,
             heightUnits: this.props.heightUnit,
@@ -53,6 +73,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
 
     componentWillReceiveProps(newProps: ImageViewerContainerProps) {
         this.resetSubscriptions(newProps.mxObject);
+        this.setState({ isLoading: true });
         this.getImageUrl(newProps.mxObject);
     }
 
@@ -71,29 +92,50 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         }
     }
 
-    // tslint:disable-next-line:max-line-length
+    public static validateProps(props: ImageViewerContainerProps): string {
+        let message = "";
+        if (props.source === "systemImage" && !props.systemImageAttribute) {
+            message = "Configuration error: for data source System Image; system image field is required";
+        }
+        if (props.source === "imageUrlAttribute" && !props.imageAttribute) {
+            message = "Configuration error: for data source Dynamic URL; Dynaic URL field is required";
+        }
+        if (props.source === "staticUrl" && !props.static_Url) {
+            message = "Configuration error: for data source Static URL; a static url is required";
+        }
+        if (props.source === "staticImage" && !props.static_Image) {
+            message = "Configuration error: for data source Static Image; a static image is required";
+        }
+
+        return message;
+    }
+
     private getImageUrl(mxObject?: mendix.lib.MxObject) {
         if (mxObject && this.props.source === "imageUrlAttribute") {
             this.setState({
-                imageUrl: mxObject.get(this.props.imageAttribute) as string
+                imageUrl: mxObject.get(this.props.imageAttribute) as string,
+                isLoading: false
             });
         }
         if (mxObject && this.props.source === "systemImage") {
             this.setState({
-                imageUrl: UrlHelper.getDynamicResourceUrl(mxObject.getGuid(), mxObject.get("changedDate") as number)
+                imageUrl: UrlHelper.getDynamicResourceUrl(mxObject.getGuid(), mxObject.get("changedDate") as number),
+                isLoading: false
             });
         }
         if (!mxObject && (this.props.source === "systemImage" || this.props.source === "imageUrlAttribute")) {
             this.setState({
-                imageUrl: ""
+                imageUrl: "",
+                isLoading: false
             });
         }
         if (this.props.source === "staticUrl") {
-            this.setState({ imageUrl: this.props.static_Url });
+            this.setState({ imageUrl: this.props.static_Url, isLoading: false });
         }
         if (this.props.source === "staticImage") {
             this.setState({
-                imageUrl: UrlHelper.getStaticResourceUrl(this.props.static_Image)
+                imageUrl: UrlHelper.getStaticResourceUrl(this.props.static_Image),
+                isLoading: false
             });
         }
     }

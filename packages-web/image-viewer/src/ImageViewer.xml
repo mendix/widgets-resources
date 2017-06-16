@@ -9,10 +9,10 @@
             <category>Data source</category>
             <description></description>
             <enumerationValues>
-                <enumerationValue key="systemImage">System image</enumerationValue> <!-- placed in system.image inheritated dataview -->
-                <enumerationValue key="imageUrlAttribute">Dynamic URL</enumerationValue> <!-- URL outside of mendx, URL, based on context attribute -->
-                <enumerationValue key="staticUrl">Static URL</enumerationValue> <!-- URL outside of mendix, Static URL, not context based -->
-                <enumerationValue key="staticImage">Static Image</enumerationValue> <!-- Static source mendix  -->
+                <enumerationValue key="systemImage">System image</enumerationValue>
+                <enumerationValue key="imageUrlAttribute">Dynamic URL</enumerationValue>
+                <enumerationValue key="staticUrl">Static URL</enumerationValue>
+                <enumerationValue key="staticImage">Static Image</enumerationValue>
             </enumerationValues>
         </property>
         <property key="systemImageAttribute" type="attribute" required="false" isPath="optional" pathType="reference">
