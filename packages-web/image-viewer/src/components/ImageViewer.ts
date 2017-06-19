@@ -79,4 +79,4 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
     }
 }
 
-export { ImageViewer, ImageViewerProps };
+export { ImageViewer, ImageViewerProps, ImageViewerState };
