@@ -13,10 +13,9 @@ interface WrapperProps {
 
 interface ImageViewerContainerProps extends WrapperProps {
     source: DataSource;
-    systemImageAttribute: string;
     imageAttribute: string;
-    static_Url: string;
-    static_Image: string;
+    urlStatic: string;
+    imageStatic: string;
     width: number;
     widthUnit: Units;
     height: number;
@@ -27,10 +26,9 @@ interface ImageViewerContainerState {
     alertMessage?: string;
     imageUrl: string;
     isLoading?: boolean;
-    showAlert?: boolean;
 }
 
-type DataSource = "systemImage" | "imageUrlAttribute" | "staticUrl" | "staticImage";
+type DataSource = "systemImage" | "urlAttribute" | "staticUrl" | "staticImage";
 type Units = "auto" | "pixels" | "percentage";
 
 class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageViewerContainerState> {
@@ -44,14 +42,13 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         this.state = {
             alertMessage,
             imageUrl: "",
-            isLoading: true,
-            showAlert: !!alertMessage
+            isLoading: true
         };
         this.attributeCallback = mxObject => () => this.getImageUrl(mxObject);
     }
 
     render() {
-        if (this.state.showAlert) {
+        if (this.state.alertMessage) {
             return createElement(Alert, { message: this.state.alertMessage });
         }
         if (this.state.isLoading) {
@@ -94,16 +91,13 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
 
     public static validateProps(props: ImageViewerContainerProps): string {
         let message = "";
-        if (props.source === "systemImage" && !props.systemImageAttribute) {
-            message = "Configuration error: for data source System Image; system image field is required";
+        if (props.source === "urlAttribute" && !props.imageAttribute) {
+            message = "Configuration error: for data source Dynamic URL; Dynaic URL attribute is required";
         }
-        if (props.source === "imageUrlAttribute" && !props.imageAttribute) {
-            message = "Configuration error: for data source Dynamic URL; Dynaic URL field is required";
-        }
-        if (props.source === "staticUrl" && !props.static_Url) {
+        if (props.source === "staticUrl" && !props.urlStatic) {
             message = "Configuration error: for data source Static URL; a static url is required";
         }
-        if (props.source === "staticImage" && !props.static_Image) {
+        if (props.source === "staticImage" && !props.imageStatic) {
             message = "Configuration error: for data source Static Image; a static image is required";
         }
 
@@ -111,7 +105,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 
     private getImageUrl(mxObject?: mendix.lib.MxObject) {
-        if (mxObject && this.props.source === "imageUrlAttribute") {
+        if (mxObject && this.props.source === "urlAttribute") {
             this.setState({
                 imageUrl: mxObject.get(this.props.imageAttribute) as string,
                 isLoading: false
@@ -123,18 +117,18 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
                 isLoading: false
             });
         }
-        if (!mxObject && (this.props.source === "systemImage" || this.props.source === "imageUrlAttribute")) {
+        if (!mxObject && (this.props.source === "systemImage" || this.props.source === "urlAttribute")) {
             this.setState({
                 imageUrl: "",
                 isLoading: false
             });
         }
         if (this.props.source === "staticUrl") {
-            this.setState({ imageUrl: this.props.static_Url, isLoading: false });
+            this.setState({ imageUrl: this.props.urlStatic, isLoading: false });
         }
         if (this.props.source === "staticImage") {
             this.setState({
-                imageUrl: UrlHelper.getStaticResourceUrl(this.props.static_Image),
+                imageUrl: UrlHelper.getStaticResourceUrl(this.props.imageStatic),
                 isLoading: false
             });
         }
