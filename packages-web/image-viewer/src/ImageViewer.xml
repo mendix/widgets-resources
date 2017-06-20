@@ -1,42 +1,36 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.custom.imageviewer.ImageViewer" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/">
-    <name>Image viewer</name>
-    <description>Change a number value using a slider</description>
-    <icon/>
+    <name>ImageViewer</name>
+    <description>Display an image in a lightbox when the image is clicked</description>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAAb5JREFUKBWdkb1v00AYhx9fzh/xZ1NaqiQU1AwwBNHCwIaEBAMLAwyV2Fn4JzJ0RqxMSKws7T/ACiMLW1WxgVhIWkpq4pxt3rOXLnToSa90Pvv5vc97dnYnk6cVDLjEUvBDL+t6uL+39/YSPM8nk1e6LgqnqmsevHFQDrgd0FKFATkm7UoFcibtRmsw7oMR5d17NZbVRVWpUr7cvubgacgEWIvg52/ouu2z5HB8Brdl0O0hnBVgGctqs1g0AYPoEzf7W/SiQdP51gZsJG1QLsDoSmuyEDPbxAZYVpfGKFNVfPzyjs9ByJO7z3g4ftQoWyOrnS9hNYRlSWMZipllLKsLGyBph0eHrGQrfDh9z8npdzbXr9Nf3eRq2qPrySU4YQt77Wh/KxnBBpR2BElbnAz59Uczn3rsH3+lGxwRhRFxFBPHMUmckCWpBA/YWh9y/4aPZXVRFI3BqP8Yz/PwfZ8wDEmSmCxL6PVSKYGziFR+RxS5KF9h6hzL6qUxnUoMzq/aXpApyeX2lMplr5jPa2azkiAImiZ3xhWW1bPp1Ou4LgevX5zPuGBvm+V0XA/LOtnOzksxGF1A/PeVUurbP6Hju2SWRo7eAAAAAElFTkSuQmCC
+    </icon>
     <properties>
-        <property key="source" type="enumeration" defaultValue="imageUrlAttribute">
+        <property key="source" type="enumeration" defaultValue="urlAttribute">
             <caption>Data source</caption>
             <category>Data source</category>
-            <description></description>
+            <description/>
             <enumerationValues>
                 <enumerationValue key="systemImage">System image</enumerationValue>
-                <enumerationValue key="imageUrlAttribute">Dynamic URL</enumerationValue>
+                <enumerationValue key="urlAttribute">Dynamic URL</enumerationValue>
                 <enumerationValue key="staticUrl">Static URL</enumerationValue>
                 <enumerationValue key="staticImage">Static Image</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="systemImageAttribute" type="attribute" required="false" isPath="optional" pathType="reference">
-            <caption>System image</caption>
-            <category>Data source</category>
-            <description>Holds the url of an image</description> 
-            <attributeTypes>
-                <attributeType name="String"/> 
-            </attributeTypes>
-        </property>
         <property key="imageAttribute" type="attribute" required="false" isPath="optional" pathType="reference">
-            <caption>Dynamic URL</caption>
+            <caption>Dynamic URL attribute</caption>
             <category>Data source</category>
             <description>Image url based on context</description> 
             <attributeTypes>
                 <attributeType name="String"/> 
             </attributeTypes>
         </property>
-        <property key="static_Url" type="string" required="false">
+        <property key="urlStatic" type="string" required="false">
             <caption>Static URL</caption>
             <category>Data source</category>
             <description>The url of the external image</description>
         </property>
-        <property key="static_Image" type="image" required="false">
+        <property key="imageStatic" type="image" required="false">
             <caption>Static image</caption>
             <category>Data source</category>
             <description>The image from the modeler</description>

@@ -2,12 +2,15 @@ const webpack = require("webpack");
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const pkg = require("./package");
+const widgetName = pkg.widgetName;
+const name = pkg.widgetName.toLowerCase();
 
 const widgetConfig = {
-    entry: "./src/components/ImageViewerContainer.ts",
+    entry: `./src/components/${widgetName}Container.ts`,
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
-        filename: "src/com/mendix/widget/custom/imageviewer/ImageViewer.js",
+        filename: `src/com/mendix/widget/custom/${name}/${widgetName}.js`,
         libraryTarget: "umd"
     },
     resolve: {
@@ -28,17 +31,22 @@ const widgetConfig = {
     devtool: "source-map",
     externals: [ "react", "react-dom" ],
     plugins: [
-        new CopyWebpackPlugin([ { from: "src/**/*.xml" } ], { copyUnmodified: true }),
-        new ExtractTextPlugin({ filename: "./src/com/mendix/widget/custom/imageviewer/ui/ImageViewer.css" }),
+        new CopyWebpackPlugin([
+                { from: "src/**/*.xml" },
+                { from: "src/**/*.png", to: `src/com/mendix/widget/custom/${name}/` }
+                ], {
+                    copyUnmodified: true
+                }),
+        new ExtractTextPlugin({ filename: `./src/com/mendix/widget/custom/${name}/ui/${widgetName}.css` }),
         new webpack.LoaderOptionsPlugin({ debug: true })
     ]
 };
 
 const previewConfig = {
-    entry: "./src/ImageViewer.webmodeler.ts",
+    entry: `./src/${widgetName}.webmodeler.ts`,
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
-        filename: "src/ImageViewer.webmodeler.js",
+        filename: `src/${widgetName}.webmodeler.js`,
         libraryTarget: "commonjs"
     },
     resolve: {

@@ -1,26 +1,23 @@
 {
   "name": "imageviewer",
-  "widgetName": "imageviewer",
+  "widgetName": "ImageViewer",
   "version": "1.0.0",
-  "description": "Display an image from specifed source",
+  "description": "Display an image in a lightbox when the image is clicked",
   "scripts": {
     "pretest": "tsc",
-    "test": "karma start --single-run --codeCoverage && node tests/remap.js",
-    "emit": "tsc",
     "lint": "tslint -c tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'"
   },
   "pre-commit": [
-    "emit",
-    "lint",
-    "test"
+    "pretest",
+    "lint"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mendixlabs/slider"
+    "url": "https://github.com/mendixlabs/image-viewer"
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/mendixlabs/slider/issues"
+    "url": "https://github.com/mendixlabs/image-viewer/issues"
   },
   "devDependencies": {
     "@types/big.js": "0.0.31",
@@ -32,6 +29,7 @@
     "@types/karma": "^0.13.34",
     "@types/react": "^15.0.18",
     "@types/react-dom": "^15.5.0",
+    "base64-image-loader": "^1.2.0",
     "check-dependencies": "^1.0.1",
     "copy-webpack-plugin": "^4.0.1",
     "core-js": "^2.4.1",
@@ -74,7 +72,8 @@
     "tslint-eslint-rules": "^4.0.0",
     "typescript": "^2.2.1",
     "webpack": "^2.3.0",
-    "webpack-dev-server": "^2.4.2"
+    "webpack-dev-server": "^2.4.2",
+    "webpack-merge": "^4.1.0"
   },
   "dependencies": {
     "classnames": "^2.2.5",
