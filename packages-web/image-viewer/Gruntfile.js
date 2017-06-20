@@ -1,17 +1,13 @@
 "use strict";
 const webpack = require("webpack");
 const webpackConfig = require("./webpack.config");
-const webpackConfigRelease = [];
-webpackConfig.forEach(function (currentWebpackConfig) {
-    const webpackLoaderOptionsPlugin = currentWebpackConfig.plugins.slice(0);
-    const configRelease = {};
+const merge = require("webpack-merge");
 
-    webpackLoaderOptionsPlugin.push(new webpack.optimize.UglifyJsPlugin());
-    Object.assign(configRelease, currentWebpackConfig, {
-        devtool: false,
-        plugins: webpackLoaderOptionsPlugin
-    });
-    webpackConfigRelease.push(configRelease);
+const webpackConfigRelease = [];
+webpackConfig.forEach(function (config) {
+    webpackConfigRelease.push(merge(config, {
+        plugins: [ new webpack.optimize.UglifyJsPlugin() ]
+    }));
 });
 
 module.exports = function(grunt) {
@@ -79,8 +75,8 @@ module.exports = function(grunt) {
         file_append: {
             addSourceURL: {
                 files: [ {
-                    append: "\n\n//# sourceURL=ImageViewer.webmodeler.js\n",
-                    input: "dist/tmp/src/ImageViewer.webmodeler.js"
+                    append: `\n\n//# sourceURL=${pkg.widgetName}.webmodeler.js\n`,
+                    input: `dist/tmp/src/${pkg.widgetName}.webmodeler.js`
                 } ]
             }
         },
