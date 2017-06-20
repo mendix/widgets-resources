@@ -17,7 +17,7 @@
                 <enumerationValue key="staticImage">Static Image</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="imageAttribute" type="attribute" required="false" isPath="optional" pathType="reference">
+        <property key="dynamicUrlAttribute" type="attribute" required="false" isPath="optional" pathType="reference">
             <caption>Dynamic URL attribute</caption>
             <category>Data source</category>
             <description>Image url based on context</description> 

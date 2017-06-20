@@ -1,17 +1,16 @@
 import { Component, DOM, createElement } from "react";
 
 import * as Lightbox from "react-image-lightbox";
-
 import { Units } from "./ImageViewerContainer";
 
 import "../ui/ImageViewer.css";
 
 interface ImageViewerProps {
-    imageurl: string;
+    imageUrl: string;
     height: number;
-    heightUnits: Units;
+    heightUnit: Units;
     width: number;
-    widthUnits: Units;
+    widthUnit: Units;
 }
 
 interface ImageViewerState {
@@ -26,41 +25,35 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
         this.state = {
             isOpen: false
         };
-        this.openLightBox = this.openLightBox.bind(this);
-        this.closeLightBox = this.closeLightBox.bind(this);
+        this.toggleLightBox = this.toggleLightBox.bind(this);
     }
 
     render() {
         const divStyle = {
-            height: this.getStyle(this.props.height, this.props.heightUnits),
-            width: this.getStyle(this.props.width, this.props.widthUnits)
+            height: this.getStyle(this.props.height, this.props.heightUnit),
+            width: this.getStyle(this.props.width, this.props.widthUnit)
         };
         const imageStyle = {
-            height: this.getStyle(this.props.height, this.props.heightUnits, true),
-            width: this.getStyle(this.props.width, this.props.widthUnits, true)
+            height: this.getStyle(this.props.height, this.props.heightUnit, true),
+            width: this.getStyle(this.props.width, this.props.widthUnit, true)
         };
+
         return DOM.div({ className: "widget-image-viewer", style: divStyle },
             DOM.img({
-                onClick: this.openLightBox,
-                src: this.props.imageurl,
+                onClick: this.toggleLightBox,
+                src: this.props.imageUrl,
                 style: imageStyle
             }),
             this.state.isOpen && createElement(Lightbox, {
-                mainSrc: this.props.imageurl,
-                onCloseRequest: this.closeLightBox
+                mainSrc: this.props.imageUrl,
+                onCloseRequest: this.toggleLightBox
             })
         );
     }
 
-    private openLightBox() {
+    private toggleLightBox() {
         this.setState({
-            isOpen: true
-        });
-    }
-
-    private closeLightBox() {
-        this.setState({
-            isOpen: false
+            isOpen: !this.state.isOpen
         });
     }
 
