@@ -24,10 +24,10 @@ export class preview extends Component<ImageViewerContainerProps, {}> {
     private transformProps(props: ImageViewerContainerProps): ImageViewerProps {
         return {
             height: props.height,
-            heightUnits: props.heightUnit,
-            imageurl: this.getImage(props),
+            heightUnit: props.heightUnit,
+            imageUrl: this.getImage(props),
             width: props.width,
-            widthUnits: props.widthUnit
+            widthUnit: props.widthUnit
         };
     }
 

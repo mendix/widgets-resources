@@ -13,7 +13,7 @@ interface WrapperProps {
 
 interface ImageViewerContainerProps extends WrapperProps {
     source: DataSource;
-    imageAttribute: string;
+    dynamicUrlAttribute: string;
     urlStatic: string;
     imageStatic: string;
     width: number;
@@ -48,6 +48,8 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 
     render() {
+        const { height, heightUnit, width, widthUnit } = this.props;
+        const { imageUrl } = this.state;
         if (this.state.alertMessage) {
             return createElement(Alert, { message: this.state.alertMessage });
         }
@@ -58,14 +60,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
             );
         }
 
-        return createElement(ImageViewer, {
-            height: this.props.height,
-            heightUnits: this.props.heightUnit,
-            imageurl: this.state.imageUrl,
-            width: this.props.width,
-            widthUnits: this.props.widthUnit
-
-        });
+        return createElement(ImageViewer, { height, heightUnit, imageUrl, width, widthUnit });
     }
 
     componentWillReceiveProps(newProps: ImageViewerContainerProps) {
@@ -75,11 +70,15 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 
     componentWillUnmount() {
-        if (this.subscriptionHandle) window.mx.data.unsubscribe(this.subscriptionHandle);
+        if (this.subscriptionHandle) {
+            window.mx.data.unsubscribe(this.subscriptionHandle);
+        }
     }
 
     private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
-        if (this.subscriptionHandle) window.mx.data.unsubscribe(this.subscriptionHandle);
+        if (this.subscriptionHandle) {
+            window.mx.data.unsubscribe(this.subscriptionHandle);
+        }
 
         if (mxObject) {
             this.subscriptionHandle = window.mx.data.subscribe({
@@ -91,8 +90,8 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
 
     public static validateProps(props: ImageViewerContainerProps): string {
         let message = "";
-        if (props.source === "urlAttribute" && !props.imageAttribute) {
-            message = "Configuration error: for data source Dynamic URL; Dynaic URL attribute is required";
+        if (props.source === "urlAttribute" && !props.dynamicUrlAttribute) {
+            message = "Configuration error: for data source Dynamic URL; Dynamic URL attribute is required";
         }
         if (props.source === "staticUrl" && !props.urlStatic) {
             message = "Configuration error: for data source Static URL; a static url is required";
@@ -106,32 +105,24 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
 
     private getImageUrl(mxObject?: mendix.lib.MxObject) {
         if (mxObject && this.props.source === "urlAttribute") {
-            this.setState({
-                imageUrl: mxObject.get(this.props.imageAttribute) as string,
-                isLoading: false
-            });
+            this.updateUrl(mxObject.get(this.props.dynamicUrlAttribute) as string);
         }
         if (mxObject && this.props.source === "systemImage") {
-            this.setState({
-                imageUrl: UrlHelper.getDynamicResourceUrl(mxObject.getGuid(), mxObject.get("changedDate") as number),
-                isLoading: false
-            });
+            this.updateUrl(UrlHelper.getDynamicResourceUrl(mxObject.getGuid(), mxObject.get("changedDate") as number));
         }
         if (!mxObject && (this.props.source === "systemImage" || this.props.source === "urlAttribute")) {
-            this.setState({
-                imageUrl: "",
-                isLoading: false
-            });
+            this.updateUrl("");
         }
         if (this.props.source === "staticUrl") {
-            this.setState({ imageUrl: this.props.urlStatic, isLoading: false });
+            this.updateUrl(this.props.urlStatic);
         }
         if (this.props.source === "staticImage") {
-            this.setState({
-                imageUrl: UrlHelper.getStaticResourceUrl(this.props.imageStatic),
-                isLoading: false
-            });
+            this.updateUrl(UrlHelper.getStaticResourceUrl(this.props.imageStatic));
         }
+    }
+
+    private updateUrl(url: string) {
+        this.setState({ imageUrl: url, isLoading: false });
     }
 }
 

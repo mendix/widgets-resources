@@ -2,26 +2,25 @@ import { ShallowWrapper, shallow } from "enzyme";
 import { DOM, createElement } from "react";
 
 import * as Lightbox from "react-image-lightbox";
-
 import { ImageViewer, ImageViewerProps, ImageViewerState } from "../ImageViewer";
 
 describe("ImageViewer", () => {
     let imageViewerProps: ImageViewerProps;
     let imageViewer: ShallowWrapper<ImageViewerProps, ImageViewerState>;
-    const imageurl = "https://pbs.twimg.com/profile_images/1905729715/llamas_1_.jpg";
+    const imageUrl = "https://pbs.twimg.com/profile_images/1905729715/llamas_1_.jpg";
     const height = 300;
-    const heightUnits = "pixels";
+    const heightUnit = "pixels";
     const width = 300;
-    const widthUnits = "pixels";
+    const widthUnit = "pixels";
     let style = { height: height + "px" , width: width + "px" };
 
     beforeEach(() => {
         imageViewerProps = {
             height,
-            heightUnits,
-            imageurl,
+            heightUnit,
+            imageUrl,
             width,
-            widthUnits
+            widthUnit
         };
     });
     const renderImageViewer = (props: ImageViewerProps) => shallow(createElement(ImageViewer, props));
@@ -33,18 +32,18 @@ describe("ImageViewer", () => {
             DOM.div({ className: "widget-image-viewer", style },
                 DOM.img({
                     onClick: jasmine.any(Function) as any,
-                    src: imageurl,
+                    src: imageUrl,
                     style
                 }),
                 imageViewer.state().isOpen && createElement(Lightbox, {
-                    mainSrc: imageurl,
+                    mainSrc: imageUrl,
                     onCloseRequest: jasmine.any(Function) as any
                 })
             )
         );
     });
 
-    it("renders the lightbox when image is clicked", () => {
+    it("renders the lightbox when the image is clicked", () => {
         imageViewer = renderImageViewer(imageViewerProps);
 
         imageViewer.childAt(0).simulate("click");
@@ -52,12 +51,12 @@ describe("ImageViewer", () => {
         expect(imageViewer.state().isOpen).toBe(true);
     });
 
-    it("closes the lightbox when close icon is clicked", () => {
+    it("closes the lightbox when the close icon is clicked", () => {
         imageViewer = renderImageViewer(imageViewerProps);
 
         imageViewer.childAt(0).simulate("click");
         const imageViewerInstance = imageViewer.instance() as any;
-        imageViewerInstance.closeLightBox();
+        imageViewerInstance.toggleLightBox();
 
         expect(imageViewer.state().isOpen).toBe(false);
     });
@@ -65,9 +64,9 @@ describe("ImageViewer", () => {
     describe("returns the style value as", () => {
         it("% when height or width units is set to percentage", () => {
             imageViewerProps.height = 50;
-            imageViewerProps.heightUnits = "percentage";
+            imageViewerProps.heightUnit = "percentage";
             imageViewerProps.width = 50;
-            imageViewerProps.widthUnits = "percentage";
+            imageViewerProps.widthUnit = "percentage";
             style = { height: imageViewerProps.height + "%", width: imageViewerProps.width + "%" };
 
             imageViewer = renderImageViewer(imageViewerProps);
@@ -76,20 +75,20 @@ describe("ImageViewer", () => {
                 DOM.div({ className: "widget-image-viewer", style },
                     DOM.img({
                         onClick: jasmine.any(Function) as any,
-                        src: imageurl,
+                        src: imageUrl,
                         style: { height: "100%" , width: "100%" }
                     }),
-                    imageViewer.state().isOpen && createElement(Lightbox, {
-                        mainSrc: imageurl,
+                    createElement(Lightbox, {
+                        mainSrc: imageUrl,
                         onCloseRequest: jasmine.any(Function) as any
                     })
                 )
             );
         });
 
-        it("as an empty string when height or width units is set to auto", () => {
-            imageViewerProps.widthUnits = "auto";
-            imageViewerProps.heightUnits = "auto";
+        it("as an empty string when the height or width units is set to auto", () => {
+            imageViewerProps.widthUnit = "auto";
+            imageViewerProps.heightUnit = "auto";
             style = { height: "", width: "" };
 
             imageViewer = renderImageViewer(imageViewerProps);
@@ -98,11 +97,11 @@ describe("ImageViewer", () => {
                 DOM.div({ className: "widget-image-viewer", style },
                     DOM.img({
                         onClick: jasmine.any(Function) as any,
-                        src: imageurl,
+                        src: imageUrl,
                         style
                     }),
-                    imageViewer.state().isOpen && createElement(Lightbox, {
-                        mainSrc: imageurl,
+                    createElement(Lightbox, {
+                        mainSrc: imageUrl,
                         onCloseRequest: jasmine.any(Function) as any
                     })
                 )
