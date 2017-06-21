@@ -8,10 +8,6 @@
             <caption>Caption</caption>
             <category>Button</category>
             <description>The caption of the button</description>
-            <translations>
-                <translation lang="en_US"></translation>
-                <translation lang="nl_NL"></translation>
-            </translations>
         </property>
         <property key="bootstrapStyle" type="enumeration" defaultValue="default">
             <caption>Button style</caption>
