@@ -12,6 +12,7 @@ describe("ImageViewer", () => {
     const heightUnit = "pixels";
     const width = 300;
     const widthUnit = "pixels";
+    const openFullScreen = true;
     let style = { height: height + "px" , width: width + "px" };
 
     beforeEach(() => {
@@ -19,6 +20,7 @@ describe("ImageViewer", () => {
             height,
             heightUnit,
             imageUrl,
+            openFullScreen,
             width,
             widthUnit
         };
