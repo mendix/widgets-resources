@@ -53,7 +53,16 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
             return createElement(Alert, { message: this.state.alertMessage });
         }
 
-        return createElement(ImageViewer, { height, heightUnit, imageUrl, openFullScreen, width, widthUnit });
+        return createElement(ImageViewer, {
+            className: this.props.class,
+            height,
+            heightUnit,
+            imageUrl,
+            openFullScreen,
+            style: ImageViewerContainer.parseStyle(this.props.style),
+            width,
+            widthUnit
+        });
     }
 
     componentWillReceiveProps(newProps: ImageViewerContainerProps) {
@@ -65,6 +74,24 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         if (this.subscriptionHandle) {
             window.mx.data.unsubscribe(this.subscriptionHandle);
         }
+    }
+
+    public static parseStyle(style = ""): {[key: string]: string} {
+        try {
+            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            // tslint:disable-next-line no-console
+            console.log("Failed to parse style", style, error);
+        }
+
+        return {};
     }
 
     private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
