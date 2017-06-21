@@ -20,8 +20,8 @@ interface ImageViewerContainerProps extends WrapperProps {
     widthUnit: Units;
     height: number;
     heightUnit: Units;
-    openFullScreen: boolean;
     responsive: boolean;
+    onClickOption: onClickOptions;
 }
 
 interface ImageViewerContainerState {
@@ -31,6 +31,7 @@ interface ImageViewerContainerState {
 
 type DataSource = "systemImage" | "urlAttribute" | "staticUrl" | "staticImage";
 type Units = "auto" | "pixels" | "percentage";
+type onClickOptions = "doNothing" | "openFullScreen";
 
 class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageViewerContainerState> {
     private subscriptionHandle: number;
@@ -48,7 +49,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 
     render() {
-        const { height, heightUnit, width, widthUnit, openFullScreen, responsive } = this.props;
+        const { height, heightUnit, width, widthUnit, onClickOption, responsive } = this.props;
         const { imageUrl } = this.state;
         if (this.state.alertMessage) {
             return createElement(Alert, { message: this.state.alertMessage });
@@ -59,7 +60,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
             height,
             heightUnit,
             imageUrl,
-            openFullScreen,
+            onClickOption,
             responsive,
             style: ImageViewerContainer.parseStyle(this.props.style),
             width,
@@ -145,4 +146,4 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 }
 
-export { ImageViewerContainer as default, ImageViewerContainerProps, Units };
+export { ImageViewerContainer as default, ImageViewerContainerProps, Units, onClickOptions };
