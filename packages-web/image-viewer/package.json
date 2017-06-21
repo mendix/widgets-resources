@@ -2,14 +2,16 @@
   "name": "imageviewer",
   "widgetName": "ImageViewer",
   "version": "1.0.0",
-  "description": "Display an image in a lightbox when the image is clicked",
+  "description": "Display an image and enlarge it on click",
   "scripts": {
     "pretest": "tsc",
-    "lint": "tslint -c tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'"
+    "lint": "tslint -c tslint.json '**/*.ts' --exclude '**/node_modules/**' --exclude '**/dist/**'",
+    "test": "karma start --single-run --codeCoverage && node tests/remap.js"
   },
   "pre-commit": [
     "pretest",
-    "lint"
+    "lint",
+    "test"
   ],
   "repository": {
     "type": "git",
