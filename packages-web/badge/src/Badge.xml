@@ -22,10 +22,6 @@
             <caption>Default value</caption>
             <category>General</category>
             <description>The badge value shown when no value is provided via the attribute</description>
-            <translations>
-                <translation lang="en_US"></translation>
-                <translation lang="nl_NL"></translation>
-            </translations>
         </property>
         <property key="bootstrapStyle" type="enumeration" defaultValue="default">
             <caption>Badge style</caption>

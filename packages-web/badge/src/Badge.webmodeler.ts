@@ -1,6 +1,5 @@
-import { Component, createElement } from "react";
+import { Component, DOM, createElement } from "react";
 import { Badge, BadgeProps } from "./components/Badge";
-import { Overlay } from "./components/Overlay";
 import { Alert } from "./components/Alert";
 import BadgeContainer, { BadgeContainerProps } from "./components/BadgeContainer";
 
@@ -8,21 +7,16 @@ declare function require(name: string): string;
 
 // tslint:disable-next-line class-name
 export class preview extends Component<BadgeContainerProps, {}> {
-
-    componentWillMount() {
-        const css = require("./ui/Badge.css");
-        this.addPreviewStyle(css, "widget-badge");
-    }
-
     render() {
         const message = BadgeContainer.validateProps(this.props);
-        return createElement(Overlay, { myRef: this.parentInline },
+        return DOM.div({ ref: this.parentInline },
             message && Alert(message),
             createElement(Badge, this.transformProps(this.props))
         );
     }
 
     private parentInline(node?: HTMLElement) {
+        // Temporary fix, the web modeler add a containing div, to render inline we need to change it.
         if (node && node.parentElement) {
             node.parentElement.style.display = "inline-block";
         }
@@ -39,18 +33,8 @@ export class preview extends Component<BadgeContainerProps, {}> {
             value: valueAttribute ? "[" + valueAttribute + "]" : props.badgeValue
         };
     }
+}
 
-    private addPreviewStyle(css: string, styleId: string) {
-        // This workaround is to load style in the preview temporary till mendix has a better solution
-        const iFrame = document.getElementsByClassName("t-page-editor-iframe")[0] as HTMLIFrameElement;
-        const iFrameDoc = iFrame.contentDocument;
-        if (!iFrameDoc.getElementById(styleId)) {
-            const styleTarget = iFrameDoc.head || iFrameDoc.getElementsByTagName("head")[0];
-            const styleElement = document.createElement("style");
-            styleElement.setAttribute("type", "text/css");
-            styleElement.setAttribute("id", styleId);
-            styleElement.appendChild(document.createTextNode(css));
-            styleTarget.appendChild(styleElement);
-        }
-    }
+export function getPreviewCss() {
+    return require("./ui/Badge.css");
 }
