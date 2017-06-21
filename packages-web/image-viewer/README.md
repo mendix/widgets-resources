@@ -1,13 +1,13 @@
-# ImageViewer
-Displays an image on lightbox when image is clicked.
+# Image viewer
+Display an image and enlarge it on click.
 
 ## Features
 * Supports different data sources:
     * Set static image in the Modeler
-    * Retrieve images from a static url
+    * Retrieve images from a static URL
     * Image from a URL attribute of context object
     * Image from mendix System.Images
-* Support zoom in and out on image.
+* Supports zoom actions
 
 ## Dependencies
 Mendix 7.3
@@ -19,20 +19,20 @@ https://imageviewer.mxapps.io/
 The widget requires a context.
  ### Data source: System image
  - On the Data source option of the Data source tab, select the system image.
- - widget will pick image from context object (context object should inherit from system.image entity).
+ - The widget will pick the image from the context object (context object should inherit from system.image entity).
  - Refer to the appearnace section for configuring height and width.
 
- ### Data source: Dynamic URL attribute
- - On the Data source option of the Data source tab, select the dynamic url option if its not already selected by default.
- - Select the attribute from the context objext that contains the url of the image.
+### Data source: Dynamic URL attribute
+ - On the Data source option of the Data source tab, select the dynamic URL option if its not already selected by default.
+ - Select the attribute from the context objext that contains the URL of the image.
  - Refer to the appearnace section for configuring height and width.
 
- ### Data source: Static URL
-  - On the Data source option of the Data source tab, select the static url
-  - Specify the url that points to the image (url outside of the mendix system).
+### Data source: Static URL
+  - On the Data source option of the Data source tab, select the static URL
+  - Specify the URL that points to the image (URL outside of the Mendix system).
   - Refer to the appearnace section for configuring height and width.
 
-   ### Data source: Static image
+### Data source: Static image
   - On the Data source option of the Data source tab, select the static image.
   - Click select button to add static images from the modeller.
   - Refer to the appearnace section for configuring height and width.
