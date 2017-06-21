@@ -63,6 +63,11 @@
             <category>Appearance</category>
             <description/>
         </property>
+        <property key="responsive" type="boolean" defaultValue="true">
+            <caption>Responsive</caption>
+            <category>Appearance</category>
+            <description/>
+        </property>
         <property key="openFullScreen" type="boolean" defaultValue="true">
             <caption>Open full screen</caption>
             <category>Events</category>
