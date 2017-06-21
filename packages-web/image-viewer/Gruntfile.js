@@ -16,11 +16,10 @@ module.exports = function(grunt) {
 
         watch: {
             updateWidgetFiles: {
-                files: [ "./dist/tmp/src/**/*" ],
+                files: [ "./src/**/*" ],
                 tasks: [ "webpack:develop", "file_append", "compress:dist", "copy:distDeployment", "copy:mpk" ],
                 options: {
-                    debounceDelay: 250,
-                    livereload: true
+                    debounceDelay: 250
                 }
             },
             sourceFiles: {
@@ -58,8 +57,7 @@ module.exports = function(grunt) {
                 files: [ {
                     dest: "./dist/MxTestProject/widgets",
                     cwd: "./dist/" + pkg.version + "/",
-                    src: [ pkg.widgetName + ".mpk" ],
-                    expand: true
+                    src: [ pkg.widgetName + ".mpk" ]
                 } ]
             },
             source: {
