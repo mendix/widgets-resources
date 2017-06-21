@@ -4,7 +4,7 @@ const webpackConfig = require("./webpack.config");
 const merge = require("webpack-merge");
 
 const webpackConfigRelease = [];
-webpackConfig.forEach(function (config) {
+webpackConfig.forEach(function(config) {
     webpackConfigRelease.push(merge(config, {
         plugins: [ new webpack.optimize.UglifyJsPlugin() ]
     }));
@@ -21,10 +21,6 @@ module.exports = function(grunt) {
                 options: {
                     debounceDelay: 250
                 }
-            },
-            sourceFiles: {
-                files: [ "./src/**/*" ],
-                tasks: [ "copy:source" ]
             }
         },
 
@@ -58,14 +54,6 @@ module.exports = function(grunt) {
                     dest: "./dist/MxTestProject/widgets",
                     cwd: "./dist/" + pkg.version + "/",
                     src: [ pkg.widgetName + ".mpk" ],
-                    expand: true
-                } ]
-            },
-            source: {
-                files: [ {
-                    dest: "./dist/tmp/src",
-                    cwd: "./src/",
-                    src: [ "**/*", "!**/*.ts", "!**/*.css" ],
                     expand: true
                 } ]
             }
