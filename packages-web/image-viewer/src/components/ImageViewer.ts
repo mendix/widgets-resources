@@ -11,6 +11,7 @@ interface ImageViewerProps {
     heightUnit: Units;
     width: number;
     widthUnit: Units;
+    openFullScreen: boolean;
 }
 
 interface ImageViewerState {
@@ -44,7 +45,7 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
                 src: this.props.imageUrl,
                 style: imageStyle
             }),
-            this.state.isOpen && createElement(Lightbox, {
+            this.props.openFullScreen && this.state.isOpen && createElement(Lightbox, {
                 mainSrc: this.props.imageUrl,
                 onCloseRequest: this.toggleLightBox
             })

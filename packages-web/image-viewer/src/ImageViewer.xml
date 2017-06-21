@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.custom.imageviewer.ImageViewer" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/">
-    <name>ImageViewer</name>
-    <description>Display an image in a lightbox when the image is clicked</description>
-    <icon>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAAb5JREFUKBWdkb1v00AYhx9fzh/xZ1NaqiQU1AwwBNHCwIaEBAMLAwyV2Fn4JzJ0RqxMSKws7T/ACiMLW1WxgVhIWkpq4pxt3rOXLnToSa90Pvv5vc97dnYnk6cVDLjEUvBDL+t6uL+39/YSPM8nk1e6LgqnqmsevHFQDrgd0FKFATkm7UoFcibtRmsw7oMR5d17NZbVRVWpUr7cvubgacgEWIvg52/ouu2z5HB8Brdl0O0hnBVgGctqs1g0AYPoEzf7W/SiQdP51gZsJG1QLsDoSmuyEDPbxAZYVpfGKFNVfPzyjs9ByJO7z3g4ftQoWyOrnS9hNYRlSWMZipllLKsLGyBph0eHrGQrfDh9z8npdzbXr9Nf3eRq2qPrySU4YQt77Wh/KxnBBpR2BElbnAz59Uczn3rsH3+lGxwRhRFxFBPHMUmckCWpBA/YWh9y/4aPZXVRFI3BqP8Yz/PwfZ8wDEmSmCxL6PVSKYGziFR+RxS5KF9h6hzL6qUxnUoMzq/aXpApyeX2lMplr5jPa2azkiAImiZ3xhWW1bPp1Ou4LgevX5zPuGBvm+V0XA/LOtnOzksxGF1A/PeVUurbP6Hju2SWRo7eAAAAAElFTkSuQmCC
-    </icon>
+    <name>Image viewer</name>
+    <description>Display an image and enlarge it on click</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAYAAABr5z2BAAAAAXNSR0IArs4c6QAAAb5JREFUKBWdkb1v00AYhx9fzh/xZ1NaqiQU1AwwBNHCwIaEBAMLAwyV2Fn4JzJ0RqxMSKws7T/ACiMLW1WxgVhIWkpq4pxt3rOXLnToSa90Pvv5vc97dnYnk6cVDLjEUvBDL+t6uL+39/YSPM8nk1e6LgqnqmsevHFQDrgd0FKFATkm7UoFcibtRmsw7oMR5d17NZbVRVWpUr7cvubgacgEWIvg52/ouu2z5HB8Brdl0O0hnBVgGctqs1g0AYPoEzf7W/SiQdP51gZsJG1QLsDoSmuyEDPbxAZYVpfGKFNVfPzyjs9ByJO7z3g4ftQoWyOrnS9hNYRlSWMZipllLKsLGyBph0eHrGQrfDh9z8npdzbXr9Nf3eRq2qPrySU4YQt77Wh/KxnBBpR2BElbnAz59Uczn3rsH3+lGxwRhRFxFBPHMUmckCWpBA/YWh9y/4aPZXVRFI3BqP8Yz/PwfZ8wDEmSmCxL6PVSKYGziFR+RxS5KF9h6hzL6qUxnUoMzq/aXpApyeX2lMplr5jPa2azkiAImiZ3xhWW1bPp1Ou4LgevX5zPuGBvm+V0XA/LOtnOzksxGF1A/PeVUurbP6Hju2SWRo7eAAAAAElFTkSuQmCC</icon>
     <properties>
-        <property key="source" type="enumeration" defaultValue="urlAttribute">
+        <property key="source" type="enumeration" defaultValue="staticUrl">
             <caption>Data source</caption>
             <category>Data source</category>
             <description/>
             <enumerationValues>
                 <enumerationValue key="systemImage">System image</enumerationValue>
+                <enumerationValue key="staticImage">Static image</enumerationValue>
                 <enumerationValue key="urlAttribute">Dynamic URL</enumerationValue>
                 <enumerationValue key="staticUrl">Static URL</enumerationValue>
-                <enumerationValue key="staticImage">Static Image</enumerationValue>
             </enumerationValues>
         </property>
         <property key="dynamicUrlAttribute" type="attribute" required="false" isPath="optional" pathType="reference">
             <caption>Dynamic URL attribute</caption>
             <category>Data source</category>
-            <description>Image url based on context</description> 
+            <description>Image URL based on context string attribute</description> 
             <attributeTypes>
                 <attributeType name="String"/> 
             </attributeTypes>
@@ -28,42 +26,47 @@
         <property key="urlStatic" type="string" required="false">
             <caption>Static URL</caption>
             <category>Data source</category>
-            <description>The url of the external image</description>
+            <description>The URL of the external image</description>
         </property>
         <property key="imageStatic" type="image" required="false">
             <caption>Static image</caption>
             <category>Data source</category>
             <description>The image from the modeler</description>
         </property>
-        <property key="widthUnit" type="enumeration" defaultValue="pixels">
+        <property key="widthUnit" type="enumeration" defaultValue="auto">
             <caption>Width unit</caption>
             <category>Appearance</category>
-            <description>No inline style will be set on auto. Percentage relative to parent container</description>
+            <description/>
             <enumerationValues>
                 <enumerationValue key="auto">Auto</enumerationValue>
                 <enumerationValue key="pixels">Pixels</enumerationValue>
                 <enumerationValue key="percentage">Percentage</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="width" type="integer" defaultValue="300">
+        <property key="width" type="integer" defaultValue="100">
             <caption>Width</caption>
             <category>Appearance</category>
-            <description>Maximum width of the image in pixels.</description>
+            <description/>
         </property>
         <property key="heightUnit" type="enumeration" defaultValue="auto">
             <caption>Height unit</caption>
             <category>Appearance</category>
-            <description>No inline style will be set on auto. Percentage is relative to parent container only when parent has an absolute height.</description>
+            <description>Auto will keep the aspect ratio of the image. Percentage is relative to the parent container which must have an absolute height</description>
             <enumerationValues>
                 <enumerationValue key="auto">Auto</enumerationValue>
                 <enumerationValue key="pixels">Pixels</enumerationValue>
                 <enumerationValue key="percentage">Percentage</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="height" type="integer" defaultValue="300">
+        <property key="height" type="integer" defaultValue="100">
             <caption>Height</caption>
             <category>Appearance</category>
-            <description>Maximum height of the image in pixels.</description>
+            <description/>
+        </property>
+        <property key="openFullScreen" type="boolean" defaultValue="true">
+            <caption>Open full screen</caption>
+            <category>Events</category>
+            <description/>
         </property>
     </properties>
 </widget>
