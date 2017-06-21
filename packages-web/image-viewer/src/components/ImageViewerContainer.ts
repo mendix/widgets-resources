@@ -1,4 +1,4 @@
-import { Component, DOM, createElement } from "react";
+import { Component, createElement } from "react";
 
 import { Alert } from "./Alert";
 import { ImageViewer } from "./ImageViewer";
@@ -26,7 +26,6 @@ interface ImageViewerContainerProps extends WrapperProps {
 interface ImageViewerContainerState {
     alertMessage?: string;
     imageUrl: string;
-    isLoading?: boolean;
 }
 
 type DataSource = "systemImage" | "urlAttribute" | "staticUrl" | "staticImage";
@@ -42,8 +41,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         const alertMessage = ImageViewerContainer.validateProps(props);
         this.state = {
             alertMessage,
-            imageUrl: "",
-            isLoading: true
+            imageUrl: ""
         };
         this.attributeCallback = mxObject => () => this.getImageUrl(mxObject);
     }
@@ -54,19 +52,12 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         if (this.state.alertMessage) {
             return createElement(Alert, { message: this.state.alertMessage });
         }
-        if (this.state.isLoading) {
-            return DOM.div(null,
-                DOM.i({ className: "glyphicon glyphicon-cog glyph-spin" }),
-                DOM.span(null, " Loading ...")
-            );
-        }
 
         return createElement(ImageViewer, { height, heightUnit, imageUrl, openFullScreen, width, widthUnit });
     }
 
     componentWillReceiveProps(newProps: ImageViewerContainerProps) {
         this.resetSubscriptions(newProps.mxObject);
-        this.setState({ isLoading: true });
         this.getImageUrl(newProps.mxObject);
     }
 
@@ -106,24 +97,22 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
 
     private getImageUrl(mxObject?: mendix.lib.MxObject) {
         if (mxObject && this.props.source === "urlAttribute") {
-            this.updateUrl(mxObject.get(this.props.dynamicUrlAttribute) as string);
+            this.setState({ imageUrl: mxObject.get(this.props.dynamicUrlAttribute) as string });
         }
         if (mxObject && this.props.source === "systemImage") {
-            this.updateUrl(UrlHelper.getDynamicResourceUrl(mxObject.getGuid(), mxObject.get("changedDate") as number));
+            this.setState({
+                imageUrl: UrlHelper.getDynamicResourceUrl(mxObject.getGuid(), mxObject.get("changedDate") as number)
+            });
         }
         if (!mxObject && (this.props.source === "systemImage" || this.props.source === "urlAttribute")) {
-            this.updateUrl("");
+            this.setState({ imageUrl: "" });
         }
         if (this.props.source === "staticUrl") {
-            this.updateUrl(this.props.urlStatic);
+            this.setState({ imageUrl: this.props.urlStatic });
         }
         if (this.props.source === "staticImage") {
-            this.updateUrl(UrlHelper.getStaticResourceUrl(this.props.imageStatic));
+            this.setState({ imageUrl: UrlHelper.getStaticResourceUrl(this.props.imageStatic) });
         }
-    }
-
-    private updateUrl(url: string) {
-        this.setState({ imageUrl: url, isLoading: false });
     }
 }
 
