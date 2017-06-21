@@ -68,10 +68,14 @@
             <category>Appearance</category>
             <description/>
         </property>
-        <property key="openFullScreen" type="boolean" defaultValue="true">
-            <caption>Open full screen</caption>
+        <property key="onClickOption" type="enumeration" defaultValue="openFullScreen">
+            <caption>On click</caption>
             <category>Events</category>
             <description/>
-        </property>
+            <enumerationValues>
+                <enumerationValue key="doNothing">Do nothing</enumerationValue>
+                <enumerationValue key="openFullScreen">Open full screen</enumerationValue>
+            </enumerationValues>
+            </property>
     </properties>
 </widget>

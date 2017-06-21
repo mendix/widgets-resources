@@ -3,6 +3,7 @@ import { DOM, createElement } from "react";
 
 import * as Lightbox from "react-image-lightbox";
 import { ImageViewer, ImageViewerProps, ImageViewerState } from "../ImageViewer";
+import { onClickOptions } from "./../ImageViewerContainer";
 
 describe("ImageViewer", () => {
     let imageViewerProps: ImageViewerProps;
@@ -12,8 +13,8 @@ describe("ImageViewer", () => {
     const heightUnit = "pixels";
     const width = 300;
     const widthUnit = "pixels";
-    const openFullScreen = true;
     const responsive = true;
+    const onClickOption: onClickOptions = "openFullScreen";
     let style = { height: height + "px" , width: width + "px" };
 
     beforeEach(() => {
@@ -21,7 +22,7 @@ describe("ImageViewer", () => {
             height,
             heightUnit,
             imageUrl,
-            openFullScreen,
+            onClickOption,
             responsive,
             width,
             widthUnit

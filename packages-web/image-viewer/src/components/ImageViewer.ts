@@ -2,7 +2,7 @@ import { Component, DOM, createElement } from "react";
 
 import * as classNames from "classnames";
 import * as Lightbox from "react-image-lightbox";
-import { Units } from "./ImageViewerContainer";
+import { Units, onClickOptions } from "./ImageViewerContainer";
 
 import "../ui/ImageViewer.css";
 
@@ -12,10 +12,10 @@ interface ImageViewerProps {
     heightUnit: Units;
     width: number;
     widthUnit: Units;
-    openFullScreen: boolean;
     className?: string;
     style?: object;
     responsive: boolean;
+    onClickOption?: onClickOptions;
 }
 
 interface ImageViewerState {
@@ -57,7 +57,7 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
                 src: this.props.imageUrl,
                 style: imageStyle
             }),
-            this.props.openFullScreen && this.state.isOpen && createElement(Lightbox, {
+            this.state.isOpen && createElement(Lightbox, {
                 mainSrc: this.props.imageUrl,
                 onCloseRequest: this.toggleLightBox
             })
@@ -65,9 +65,11 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
     }
 
     private toggleLightBox() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
+        if (this.props.onClickOption === "openFullScreen") {
+            this.setState({
+                isOpen: !this.state.isOpen
+            });
+        }
     }
 
     private getStyle(value: string | number, type: string, isInner?: boolean): number | string {
