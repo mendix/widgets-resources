@@ -29,6 +29,7 @@ export class preview extends Component<ImageViewerContainerProps, {}> {
             heightUnit: props.heightUnit,
             imageUrl: this.getImage(props),
             openFullScreen: props.openFullScreen,
+            responsive: props.responsive,
             style: ImageViewerContainer.parseStyle(props.style),
             width: props.width,
             widthUnit: props.widthUnit

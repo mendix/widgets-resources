@@ -13,6 +13,7 @@ describe("ImageViewer", () => {
     const width = 300;
     const widthUnit = "pixels";
     const openFullScreen = true;
+    const responsive = true;
     let style = { height: height + "px" , width: width + "px" };
 
     beforeEach(() => {
@@ -21,6 +22,7 @@ describe("ImageViewer", () => {
             heightUnit,
             imageUrl,
             openFullScreen,
+            responsive,
             width,
             widthUnit
         };
@@ -31,7 +33,7 @@ describe("ImageViewer", () => {
         imageViewer = renderImageViewer(imageViewerProps);
 
         expect(imageViewer).toBeElement(
-            DOM.div({ className: "widget-image-viewer", style },
+            DOM.div({ className: "widget-image-viewer widget-image-viewer-responsive", style },
                 DOM.img({
                     onClick: jasmine.any(Function) as any,
                     src: imageUrl,
@@ -74,7 +76,7 @@ describe("ImageViewer", () => {
             imageViewer = renderImageViewer(imageViewerProps);
 
             expect(imageViewer).toBeElement(
-                DOM.div({ className: "widget-image-viewer", style },
+                DOM.div({ className: "widget-image-viewer widget-image-viewer-responsive", style },
                     DOM.img({
                         onClick: jasmine.any(Function) as any,
                         src: imageUrl,
@@ -96,7 +98,7 @@ describe("ImageViewer", () => {
             imageViewer = renderImageViewer(imageViewerProps);
 
             expect(imageViewer).toBeElement(
-                DOM.div({ className: "widget-image-viewer", style },
+                DOM.div({ className: "widget-image-viewer widget-image-viewer-responsive", style },
                     DOM.img({
                         onClick: jasmine.any(Function) as any,
                         src: imageUrl,

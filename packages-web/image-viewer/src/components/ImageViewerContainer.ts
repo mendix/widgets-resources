@@ -21,6 +21,7 @@ interface ImageViewerContainerProps extends WrapperProps {
     height: number;
     heightUnit: Units;
     openFullScreen: boolean;
+    responsive: boolean;
 }
 
 interface ImageViewerContainerState {
@@ -47,7 +48,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 
     render() {
-        const { height, heightUnit, width, widthUnit, openFullScreen } = this.props;
+        const { height, heightUnit, width, widthUnit, openFullScreen, responsive } = this.props;
         const { imageUrl } = this.state;
         if (this.state.alertMessage) {
             return createElement(Alert, { message: this.state.alertMessage });
@@ -59,6 +60,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
             heightUnit,
             imageUrl,
             openFullScreen,
+            responsive,
             style: ImageViewerContainer.parseStyle(this.props.style),
             width,
             widthUnit

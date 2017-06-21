@@ -15,6 +15,7 @@ interface ImageViewerProps {
     openFullScreen: boolean;
     className?: string;
     style?: object;
+    responsive: boolean;
 }
 
 interface ImageViewerState {
@@ -41,6 +42,7 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
         return DOM.div({
             className: classNames(
                 "widget-image-viewer",
+                { "widget-image-viewer-responsive": this.props.responsive },
                 this.props.className,
                 { hidden: !this.props.imageUrl }
             ),
