@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, DOM, createElement } from "react";
 import { ImageViewer, ImageViewerProps } from "./components/ImageViewer";
 import ImageViewerContainer, { ImageViewerContainerProps } from "./components/ImageViewerContainer";
 import { Alert } from "./components/Alert";
@@ -8,17 +8,18 @@ const image = require("base64-image-loader!./img/Preview.jpg");
 
 declare function require(name: string): string;
 
+type VisibilityMap = {
+    [P in keyof ImageViewerContainerProps]: boolean;
+};
+
 // tslint:disable-next-line:class-name
 export class preview extends Component<ImageViewerContainerProps, {}> {
 
     render() {
-        const warnings = ImageViewerContainer.validateProps(this.props);
-        const imageViewer = createElement(ImageViewer, this.transformProps(this.props));
-        if (warnings) {
-            return createElement(Alert, { message: warnings });
-        }
-
-        return imageViewer;
+        return DOM.div({},
+            createElement(ImageViewer, this.transformProps(this.props)),
+            createElement(Alert, { message: ImageViewerContainer.validateProps(this.props) })
+        );
     }
 
     private transformProps(props: ImageViewerContainerProps): ImageViewerProps {
@@ -47,32 +48,27 @@ export function getPreviewCss() {
     return require("./ui/ImageViewer.css");
 }
 
-export function getVisibleProperties(valueMap: any, visibilityMap: any) {
+export function getVisibleProperties(valueMap: ImageViewerContainerProps, visibilityMap: VisibilityMap) {
     if (valueMap.source === "systemImage") {
-        visibilityMap.imageAttribute = false;
+        visibilityMap.dynamicUrlAttribute = false;
         visibilityMap.urlStatic = false;
         visibilityMap.imageStatic = false;
-    }
-    if (valueMap.source === "urlAttribute") {
-        visibilityMap.imageAttribute = true;
+    } else if (valueMap.source === "urlAttribute") {
+        visibilityMap.dynamicUrlAttribute = true;
         visibilityMap.urlStatic = false;
         visibilityMap.imageStatic = false;
-    }
-    if (valueMap.source === "staticUrl") {
-        visibilityMap.imageAttribute = false;
+    } else if (valueMap.source === "staticUrl") {
+        visibilityMap.dynamicUrlAttribute = false;
         visibilityMap.urlStatic = true;
         visibilityMap.imageStatic = false;
-    }
-    if (valueMap.source === "staticImage") {
-        visibilityMap.systemImageAttribute = false;
-        visibilityMap.imageAttribute = false;
+    } else if (valueMap.source === "staticImage") {
+        visibilityMap.dynamicUrlAttribute = false;
         visibilityMap.urlStatic = false;
         visibilityMap.imageStatic = true;
     }
     if (valueMap.widthUnit === "auto") {
         visibilityMap.width = false;
-    }
-    if (valueMap.heightUnit === "auto") {
+    } else if (valueMap.heightUnit === "auto") {
         visibilityMap.height = false;
     }
 
