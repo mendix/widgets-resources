@@ -1,5 +1,6 @@
 import { Component, DOM, createElement } from "react";
 
+import * as classNames from "classnames";
 import * as Lightbox from "react-image-lightbox";
 import { Units } from "./ImageViewerContainer";
 
@@ -39,7 +40,13 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
             width: this.getStyle(this.props.width, this.props.widthUnit, true)
         };
 
-        return DOM.div({ className: "widget-image-viewer", style: divStyle },
+        return DOM.div({
+            className: classNames(
+                "widget-image-viewer",
+                { hidden: !this.props.imageUrl }
+            ),
+            style: divStyle
+        },
             DOM.img({
                 onClick: this.toggleLightBox,
                 src: this.props.imageUrl,
