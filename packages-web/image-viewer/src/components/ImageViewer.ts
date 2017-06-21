@@ -13,6 +13,8 @@ interface ImageViewerProps {
     width: number;
     widthUnit: Units;
     openFullScreen: boolean;
+    className?: string;
+    style?: object;
 }
 
 interface ImageViewerState {
@@ -31,10 +33,6 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
     }
 
     render() {
-        const divStyle = {
-            height: this.getStyle(this.props.height, this.props.heightUnit),
-            width: this.getStyle(this.props.width, this.props.widthUnit)
-        };
         const imageStyle = {
             height: this.getStyle(this.props.height, this.props.heightUnit, true),
             width: this.getStyle(this.props.width, this.props.widthUnit, true)
@@ -43,9 +41,14 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
         return DOM.div({
             className: classNames(
                 "widget-image-viewer",
+                this.props.className,
                 { hidden: !this.props.imageUrl }
             ),
-            style: divStyle
+            style: {
+                ...this.props.style,
+                height: this.getStyle(this.props.height, this.props.heightUnit),
+                width: this.getStyle(this.props.width, this.props.widthUnit)
+            }
         },
             DOM.img({
                 onClick: this.toggleLightBox,

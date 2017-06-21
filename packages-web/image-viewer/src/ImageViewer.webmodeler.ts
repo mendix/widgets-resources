@@ -24,10 +24,12 @@ export class preview extends Component<ImageViewerContainerProps, {}> {
 
     private transformProps(props: ImageViewerContainerProps): ImageViewerProps {
         return {
+            className: props.class,
             height: props.height,
             heightUnit: props.heightUnit,
             imageUrl: this.getImage(props),
             openFullScreen: props.openFullScreen,
+            style: ImageViewerContainer.parseStyle(props.style),
             width: props.width,
             widthUnit: props.widthUnit
         };
