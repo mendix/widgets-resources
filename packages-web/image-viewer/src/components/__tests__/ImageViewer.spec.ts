@@ -15,7 +15,7 @@ describe("ImageViewer", () => {
     const widthUnit = "pixels";
     const responsive = true;
     const onClickOption: onClickOptions = "openFullScreen";
-    let style = { height: height + "px" , width: width + "px" };
+    const style = { height , width };
 
     beforeEach(() => {
         imageViewerProps = {
@@ -34,7 +34,7 @@ describe("ImageViewer", () => {
         imageViewer = renderImageViewer(imageViewerProps);
 
         expect(imageViewer).toBeElement(
-            DOM.div({ className: "widget-image-viewer widget-image-viewer-responsive", style },
+            DOM.div({ className: "widget-image-viewer widget-image-viewer-responsive" },
                 DOM.img({
                     onClick: jasmine.any(Function) as any,
                     src: imageUrl,
@@ -68,20 +68,17 @@ describe("ImageViewer", () => {
 
     describe("returns the style value as", () => {
         it("% when height or width units is set to percentage", () => {
-            imageViewerProps.height = 50;
-            imageViewerProps.heightUnit = "percentage";
             imageViewerProps.width = 50;
             imageViewerProps.widthUnit = "percentage";
-            style = { height: imageViewerProps.height + "%", width: imageViewerProps.width + "%" };
 
             imageViewer = renderImageViewer(imageViewerProps);
 
             expect(imageViewer).toBeElement(
-                DOM.div({ className: "widget-image-viewer widget-image-viewer-responsive", style },
+                DOM.div({ className: "widget-image-viewer widget-image-viewer-responsive" },
                     DOM.img({
                         onClick: jasmine.any(Function) as any,
                         src: imageUrl,
-                        style: { height: "100%" , width: "100%" }
+                        style: { height: 300 , width: "50%" }
                     }),
                     createElement(Lightbox, {
                         mainSrc: imageUrl,
@@ -94,16 +91,14 @@ describe("ImageViewer", () => {
         it("as an empty string when the height or width units is set to auto", () => {
             imageViewerProps.widthUnit = "auto";
             imageViewerProps.heightUnit = "auto";
-            style = { height: "", width: "" };
-
             imageViewer = renderImageViewer(imageViewerProps);
 
             expect(imageViewer).toBeElement(
-                DOM.div({ className: "widget-image-viewer widget-image-viewer-responsive", style },
+                DOM.div({ className: "widget-image-viewer widget-image-viewer-responsive" },
                     DOM.img({
                         onClick: jasmine.any(Function) as any,
                         src: imageUrl,
-                        style
+                        style: { height: "", width: "" }
                     }),
                     createElement(Lightbox, {
                         mainSrc: imageUrl,

@@ -16,6 +16,7 @@ interface ImageViewerProps {
     style?: object;
     responsive: boolean;
     onClickOption?: onClickOptions;
+    getRef?: (node: HTMLElement) => void;
 }
 
 interface ImageViewerState {
@@ -34,11 +35,6 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
     }
 
     render() {
-        const imageStyle = {
-            height: this.getStyle(this.props.height, this.props.heightUnit, true),
-            width: this.getStyle(this.props.width, this.props.widthUnit, true)
-        };
-
         return DOM.div(
             {
                 className: classNames(
@@ -47,16 +43,16 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
                     this.props.className,
                     { hidden: !this.props.imageUrl }
                 ),
+                ref: this.props.getRef
+            },
+            DOM.img({
+                onClick: this.toggleLightBox,
+                src: this.props.imageUrl,
                 style: {
                     ...this.props.style,
                     height: this.getStyle(this.props.height, this.props.heightUnit),
                     width: this.getStyle(this.props.width, this.props.widthUnit)
                 }
-            },
-            DOM.img({
-                onClick: this.toggleLightBox,
-                src: this.props.imageUrl,
-                style: imageStyle
             }),
             this.state.isOpen && createElement(Lightbox, {
                 mainSrc: this.props.imageUrl,
@@ -73,12 +69,9 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
         }
     }
 
-    private getStyle(value: string | number, type: string, isInner?: boolean): number | string {
+    private getStyle(value: string | number, type: string): number | string {
         if (type === "pixels") {
-            return value + "px";
-        }
-        if (isInner && type === "percentage") {
-            return "100%";
+            return value;
         }
         if (type === "percentage") {
             return value + "%";

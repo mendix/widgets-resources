@@ -36,7 +36,7 @@ type onClickOptions = "doNothing" | "openFullScreen";
 class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageViewerContainerState> {
     private subscriptionHandle: number;
     private attributeCallback: (mxObject: mendix.lib.MxObject) => () => void;
-
+    private imageViewer: HTMLElement;
     constructor(props: ImageViewerContainerProps) {
         super(props);
 
@@ -46,6 +46,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
             imageUrl: ""
         };
         this.attributeCallback = mxObject => () => this.getImageUrl(mxObject);
+        this.setImageViewerReference = this.setImageViewerReference.bind(this);
     }
 
     render() {
@@ -57,6 +58,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
 
         return createElement(ImageViewer, {
             className: this.props.class,
+            getRef: this.setImageViewerReference,
             height,
             heightUnit,
             imageUrl,
@@ -66,6 +68,11 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
             width,
             widthUnit
         });
+    }
+    componentDidMount() {
+        if (this.imageViewer && this.imageViewer.parentElement) {
+            this.imageViewer.parentElement.classList.add("widget-image-view-container");
+        }
     }
 
     componentWillReceiveProps(newProps: ImageViewerContainerProps) {
@@ -77,6 +84,10 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         if (this.subscriptionHandle) {
             window.mx.data.unsubscribe(this.subscriptionHandle);
         }
+    }
+
+    private setImageViewerReference(ref: HTMLElement) {
+        this.imageViewer = ref;
     }
 
     public static parseStyle(style = ""): {[key: string]: string} {
