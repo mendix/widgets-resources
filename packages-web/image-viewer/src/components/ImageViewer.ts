@@ -39,19 +39,20 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
             width: this.getStyle(this.props.width, this.props.widthUnit, true)
         };
 
-        return DOM.div({
-            className: classNames(
-                "widget-image-viewer",
-                { "widget-image-viewer-responsive": this.props.responsive },
-                this.props.className,
-                { hidden: !this.props.imageUrl }
-            ),
-            style: {
-                ...this.props.style,
-                height: this.getStyle(this.props.height, this.props.heightUnit),
-                width: this.getStyle(this.props.width, this.props.widthUnit)
-            }
-        },
+        return DOM.div(
+            {
+                className: classNames(
+                    "widget-image-viewer",
+                    { "widget-image-viewer-responsive": this.props.responsive },
+                    this.props.className,
+                    { hidden: !this.props.imageUrl }
+                ),
+                style: {
+                    ...this.props.style,
+                    height: this.getStyle(this.props.height, this.props.heightUnit),
+                    width: this.getStyle(this.props.width, this.props.widthUnit)
+                }
+            },
             DOM.img({
                 onClick: this.toggleLightBox,
                 src: this.props.imageUrl,

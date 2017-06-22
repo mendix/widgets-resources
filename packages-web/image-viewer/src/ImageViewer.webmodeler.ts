@@ -38,8 +38,7 @@ export class preview extends Component<ImageViewerContainerProps, {}> {
     private getImage(props: ImageViewerContainerProps): string {
         if (props.source === "staticUrl") {
             return props.urlStatic;
-        }
-        if (props.source === "staticImage") {
+        } else if (props.source === "staticImage") {
             return props.imageStatic;
         }
 
