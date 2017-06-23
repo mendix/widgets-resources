@@ -1,6 +1,9 @@
 import { DOM, StatelessComponent } from "react";
+import * as classNames from "classnames";
 
-export const Alert: StatelessComponent<{ message?: string }> = ({ message }) =>
-    message ? DOM.div({ className: "alert alert-danger widget-validation-message" }, message) : null as any;
+export const Alert: StatelessComponent<{ message?: string, className?: string }> = ({ message, className }) =>
+    message ?
+        DOM.div({ className: classNames("alert alert-danger widget-validation-message", className) }, message)
+        : null as any;
 
 Alert.displayName = "Alert";
