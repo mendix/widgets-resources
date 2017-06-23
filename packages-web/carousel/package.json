@@ -1,7 +1,7 @@
 {
   "name": "carousel",
   "widgetName": "Carousel",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Displays images in a carousel",
   "scripts": {
     "pretest": "tsc",
@@ -82,7 +82,8 @@
     "tslint-eslint-rules": "^4.1.1",
     "typescript": "^2.3.4",
     "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^2.4.5",
+    "webpack-merge": "^4.1.0"
   },
   "dependencies": {
     "classnames": "^2.2.5"
