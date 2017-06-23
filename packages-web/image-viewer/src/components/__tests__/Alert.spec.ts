@@ -18,4 +18,14 @@ describe("Alert", () => {
 
         expect(alert).toBeElement(null);
     });
+
+    it("renders with additional class", () => {
+        const message = "This is an error";
+        const className = "my-class";
+        const alert = shallow(createElement(Alert, { message, className }));
+
+        expect(alert).toBeElement(
+            DOM.div({ className: "alert alert-danger widget-validation-message " + className }, message)
+        );
+    });
 });

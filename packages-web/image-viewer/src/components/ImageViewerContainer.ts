@@ -37,6 +37,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     private subscriptionHandle: number;
     private attributeCallback: (mxObject: mendix.lib.MxObject) => () => void;
     private imageViewer: HTMLElement;
+
     constructor(props: ImageViewerContainerProps) {
         super(props);
 
@@ -69,6 +70,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
             widthUnit
         });
     }
+
     componentDidMount() {
         if (this.imageViewer && this.imageViewer.parentElement) {
             this.imageViewer.parentElement.classList.add("widget-image-view-container");

@@ -16,10 +16,15 @@ type VisibilityMap = {
 export class preview extends Component<ImageViewerContainerProps, {}> {
 
     render() {
-        return DOM.div({},
-            createElement(ImageViewer, this.transformProps(this.props)),
-            createElement(Alert, { message: ImageViewerContainer.validateProps(this.props) })
-        );
+        const message = ImageViewerContainer.validateProps(this.props);
+        if (!message) {
+            return createElement(ImageViewer, this.transformProps(this.props));
+        } else {
+            return DOM.div({},
+                createElement(Alert, { className: "widget-image-viewer-alert-danger", message }),
+                createElement(ImageViewer, this.transformProps(this.props))
+            );
+        }
     }
 
     private transformProps(props: ImageViewerContainerProps): ImageViewerProps {
@@ -37,9 +42,9 @@ export class preview extends Component<ImageViewerContainerProps, {}> {
 
     private getImage(props: ImageViewerContainerProps): string {
         if (props.source === "staticUrl") {
-            return props.urlStatic;
+            return props.urlStatic || image;
         } else if (props.source === "staticImage") {
-            return props.imageStatic;
+            return props.imageStatic || image;
         }
 
         return image;
