@@ -65,6 +65,9 @@ const previewConfig = {
             { test: /\.scss$/, use: [
                 { loader: "raw-loader" },
                 { loader: "sass-loader" }
+            ] },
+            { test: /\.jpg$/, use: [
+                { loader: "base64-image-loader" }
             ] }
         ]
     },

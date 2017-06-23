@@ -4,10 +4,13 @@ import { Alert } from "./Alert";
 import { UrlHelper } from "../UrlHelper";
 
 interface WrapperProps {
-    mxObject: mendix.lib.MxObject;
+    class?: string;
+    mxform: mxui.lib.form._FormBase;
+    mxObject?: mendix.lib.MxObject;
+    style?: string;
 }
 
-interface CarouselContainerProps extends WrapperProps {
+export interface CarouselContainerProps extends WrapperProps {
     dataSource: DataSource;
     dataSourceMicroflow: string;
     entityConstraint: string;
@@ -29,7 +32,7 @@ interface CarouselContainerState {
 type DataSource = "static" | "XPath" | "microflow";
 type ClickOptions = "doNothing" | "callMicroflow" | "showPage";
 
-class CarouselContainer extends Component<CarouselContainerProps, CarouselContainerState> {
+export default class CarouselContainer extends Component<CarouselContainerProps, CarouselContainerState> {
     private subscriptionHandle: number;
     private subscriptionCallback: (mxObject: mendix.lib.MxObject) => () => void;
 
@@ -45,6 +48,7 @@ class CarouselContainer extends Component<CarouselContainerProps, CarouselContai
         };
         this.executeAction = this.executeAction.bind(this);
         this.subscriptionCallback = mxObject => () => this.fetchData(mxObject);
+        this.onParseStyleError = this.onParseStyleError.bind(this);
     }
 
     render() {
@@ -60,8 +64,10 @@ class CarouselContainer extends Component<CarouselContainerProps, CarouselContai
 
         return createElement(Carousel, {
             alertMessage: this.state.alertMessage,
+            className: this.props.class,
             images: this.state.images,
-            onClickAction: this.executeAction
+            onClickAction: this.executeAction,
+            style: CarouselContainer.parseStyle(this.props.style, this.onParseStyleError)
         });
     }
 
@@ -78,19 +84,19 @@ class CarouselContainer extends Component<CarouselContainerProps, CarouselContai
     public static validateProps(props: CarouselContainerProps): string {
         let message = "";
         if (props.dataSource === "static" && !props.staticImages.length) {
-            message = "Configuration error: for data source static; at least one static image is required";
+            message = "For the data source option 'Static', at least one static image should be added";
         }
         if (props.dataSource === "XPath" && !props.imagesEntity) {
-            message = "Configuration error: for data source XPath; the images entity is required";
+            message = "For the data source 'XPath', the images entity is required";
         }
         if (props.dataSource === "microflow" && !props.dataSourceMicroflow) {
-            message = "Configuration error: for data source microflow; a data source microflow is required";
+            message = "For data source option 'microflow', a data source microflow is required";
         }
 
         return message;
     }
 
-    private resetSubscription(mxObject: mendix.lib.MxObject) {
+    private resetSubscription(mxObject?: mendix.lib.MxObject) {
         if (this.subscriptionHandle) window.mx.data.unsubscribe(this.subscriptionHandle);
 
         if (mxObject) {
@@ -102,7 +108,7 @@ class CarouselContainer extends Component<CarouselContainerProps, CarouselContai
 
     }
 
-    private fetchData(mxObject: mendix.lib.MxObject) {
+    private fetchData(mxObject?: mendix.lib.MxObject) {
         if (this.props.dataSource === "static") {
             const images = this.props.staticImages.map((image) => {
                 image.url = UrlHelper.getStaticResourceUrl(image.url);
@@ -198,6 +204,25 @@ class CarouselContainer extends Component<CarouselContainerProps, CarouselContai
 
         return context;
     }
-}
 
-export { CarouselContainer as default, CarouselContainerProps };
+    public static parseStyle(style = "", onError: (error: string) => void): {[key: string]: string} {
+        try {
+            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            onError(`Failed to parse style ${style}: ${error}`);
+        }
+
+        return {};
+    }
+
+    private onParseStyleError(error: string) {
+        this.setState({ alertMessage: error });
+    }
+}

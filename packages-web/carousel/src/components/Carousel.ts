@@ -18,6 +18,8 @@ interface CarouselProps {
     alertMessage?: string;
     images: Image[];
     onClickAction?: (image: Image) => void;
+    className?: string;
+    style?: object;
 }
 
 interface CarouselState {
@@ -78,7 +80,9 @@ class Carousel extends Component<CarouselProps, CarouselState> {
     }
 
     render() {
-        return DOM.div({ className: "widget-carousel-wrapper" },
+        const { className, images, style } = this.props;
+
+        return DOM.div({ className: classNames("widget-carousel-wrapper", className), style },
             createElement(Alert, { message: this.state.alertMessage }),
             DOM.div({ className: "widget-carousel" },
                 DOM.div(
@@ -86,7 +90,7 @@ class Carousel extends Component<CarouselProps, CarouselState> {
                         className: classNames("widget-carousel-item-wrapper", { animate: this.state.animate }),
                         style: { transform: `translate3d(${this.state.position}%, 0px, 0px)` }
                     },
-                    this.createCarouselItems(this.props.images, this.state.activeIndex || 0)
+                    this.createCarouselItems(images, this.state.activeIndex || 0)
                 ),
                 this.createCarouselControls()
             )
