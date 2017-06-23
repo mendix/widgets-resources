@@ -65,7 +65,7 @@
         <property key="responsive" type="boolean" defaultValue="true">
             <caption>Responsive</caption>
             <category>Appearance</category>
-            <description>Image will never get bigger than its original size. It can become smaller</description>
+            <description>Image will never get larger than its original size. It can become smaller</description>
         </property>
         <property key="onClickOption" type="enumeration" defaultValue="openFullScreen">
             <caption>On click</caption>
