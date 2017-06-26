@@ -79,7 +79,10 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
 
     componentWillReceiveProps(newProps: ImageViewerContainerProps) {
         this.resetSubscriptions(newProps.mxObject);
-        this.getImageUrl(newProps.mxObject);
+        this.setState({
+            alertMessage: ImageViewerContainer.validateProps(newProps),
+            imageUrl: this.getImageUrl(newProps.mxObject)
+        });
     }
 
     componentWillUnmount() {
@@ -125,6 +128,10 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
 
     public static validateProps(props: ImageViewerContainerProps): string {
         let message = "";
+        if (props.source === "systemImage" && props.mxObject && !(props.mxObject.inheritsFrom("System.Image"))) {
+            message = "Configuration error: for data source System image; " +
+                "context object should inherit from system.image";
+        }
         if (props.source === "urlAttribute" && !props.dynamicUrlAttribute) {
             message = "Configuration error: for data source Dynamic URL; Dynamic URL attribute is required";
         }
@@ -138,24 +145,21 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         return message;
     }
 
-    private getImageUrl(mxObject?: mendix.lib.MxObject) {
+    private getImageUrl(mxObject?: mendix.lib.MxObject): string {
         if (mxObject && this.props.source === "urlAttribute") {
-            this.setState({ imageUrl: mxObject.get(this.props.dynamicUrlAttribute) as string });
+            return mxObject.get(this.props.dynamicUrlAttribute) as string;
         }
         if (mxObject && this.props.source === "systemImage") {
-            this.setState({
-                imageUrl: UrlHelper.getDynamicResourceUrl(mxObject.getGuid(), mxObject.get("changedDate") as number)
-            });
-        }
-        if (!mxObject && (this.props.source === "systemImage" || this.props.source === "urlAttribute")) {
-            this.setState({ imageUrl: "" });
+            return UrlHelper.getDynamicResourceUrl(mxObject.getGuid(), mxObject.get("changedDate") as number);
         }
         if (this.props.source === "staticUrl") {
-            this.setState({ imageUrl: this.props.urlStatic });
+            return this.props.urlStatic;
         }
         if (this.props.source === "staticImage") {
-            this.setState({ imageUrl: UrlHelper.getStaticResourceUrl(this.props.imageStatic) });
+            return UrlHelper.getStaticResourceUrl(this.props.imageStatic);
         }
+
+        return "";
     }
 }
 
