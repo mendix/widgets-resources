@@ -73,8 +73,21 @@
             <description/>
             <enumerationValues>
                 <enumerationValue key="doNothing">Do nothing</enumerationValue>
+                <enumerationValue key="callMicroflow">Call microflow</enumerationValue>
+                <enumerationValue key="showPage">Show page</enumerationValue>
                 <enumerationValue key="openFullScreen">Open full screen</enumerationValue>
             </enumerationValues>
-            </property>
+        </property>
+        <property key="onClickMicroflow" type="microflow" required="false">
+            <caption>On click microflow</caption>
+            <category>Events</category>
+            <description>The microflow to call when an image is clicked</description>
+            <returnType type="Void"/>
+        </property>
+        <property key="onClickForm" type="form" required="false">
+            <caption>On click page</caption>
+            <category>Events</category>
+            <description>The page to open when an image is clicked</description>
+        </property>
     </properties>
 </widget>

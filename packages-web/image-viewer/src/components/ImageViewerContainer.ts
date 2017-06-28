@@ -22,6 +22,8 @@ interface ImageViewerContainerProps extends WrapperProps {
     heightUnit: Units;
     responsive: boolean;
     onClickOption: onClickOptions;
+    onClickMicroflow: string;
+    onClickForm: string;
 }
 
 interface ImageViewerContainerState {
@@ -31,7 +33,7 @@ interface ImageViewerContainerState {
 
 type DataSource = "systemImage" | "urlAttribute" | "staticUrl" | "staticImage";
 type Units = "auto" | "pixels" | "percentage";
-type onClickOptions = "doNothing" | "openFullScreen";
+type onClickOptions = "doNothing" | "callMicroflow" | "showPage" | "openFullScreen";
 
 class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageViewerContainerState> {
     private subscriptionHandle: number;
@@ -48,6 +50,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         };
         this.attributeCallback = mxObject => () => this.getImageUrl(mxObject);
         this.setImageViewerReference = this.setImageViewerReference.bind(this);
+        this.executeAction = this.executeAction.bind(this);
     }
 
     render() {
@@ -63,6 +66,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
             height,
             heightUnit,
             imageUrl,
+            onClick: this.executeAction,
             onClickOption,
             responsive,
             style: ImageViewerContainer.parseStyle(this.props.style),
@@ -141,6 +145,12 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         if (props.source === "staticImage" && !props.imageStatic) {
             message = "Configuration error: for data source Static Image; a static image is required";
         }
+        if (props.onClickOption === "callMicroflow" && !props.onClickMicroflow) {
+            message = "Configuration error: on click microflow is required";
+        }
+        if (props.onClickOption === "showPage" && !props.onClickForm) {
+            message = "Configuration error: on click page is required";
+        }
 
         return message;
     }
@@ -160,6 +170,34 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         }
 
         return "";
+    }
+
+    private executeAction() {
+        const context = this.getContext();
+        if (this.props.onClickOption === "callMicroflow") {
+            window.mx.ui.action(this.props.onClickMicroflow, {
+                context,
+                error: error => window.mx.ui.error(
+                    `An error occurred while executing action ${this.props.onClickMicroflow} : ${error.message}`
+                )
+            });
+        } else if (this.props.onClickOption === "showPage") {
+            window.mx.ui.openForm(this.props.onClickForm, {
+                context,
+                error: error => window.mx.ui.error(
+                    `An error occurred while opening form ${this.props.onClickForm} : ${error.message}`
+                )
+            });
+        }
+    }
+
+    private getContext(): mendix.lib.MxContext {
+        const context = new window.mendix.lib.MxContext();
+        if (this.props.mxObject) {
+            context.setContext(this.props.mxObject.getEntity(), this.props.mxObject.getGuid());
+        }
+
+        return context;
     }
 }
 

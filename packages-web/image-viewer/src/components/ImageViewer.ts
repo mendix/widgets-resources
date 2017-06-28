@@ -17,6 +17,7 @@ interface ImageViewerProps {
     responsive: boolean;
     onClickOption?: onClickOptions;
     getRef?: (node: HTMLElement) => void;
+    onClick?: () => void;
 }
 
 interface ImageViewerState {
@@ -46,7 +47,7 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
                 ref: this.props.getRef
             },
             DOM.img({
-                onClick: this.toggleLightBox,
+                onClick: this.props.onClickOption === "openFullScreen" ? this.toggleLightBox : this.props.onClick,
                 src: this.props.imageUrl,
                 style: {
                     ...this.props.style,
@@ -62,11 +63,9 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
     }
 
     private toggleLightBox() {
-        if (this.props.onClickOption === "openFullScreen") {
-            this.setState({
-                isOpen: !this.state.isOpen
-            });
-        }
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
     }
 
     private getStyle(value: string | number, type: string): number | string {
