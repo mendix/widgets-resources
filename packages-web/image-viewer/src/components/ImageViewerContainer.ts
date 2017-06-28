@@ -133,26 +133,25 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     public static validateProps(props: ImageViewerContainerProps): string {
         let message = "";
         if (props.source === "systemImage" && props.mxObject && !(props.mxObject.inheritsFrom("System.Image"))) {
-            message = "Configuration error: for data source System image; " +
-                "context object should inherit from system.image";
+            message = "for data source System image; context object should inherit from system.image";
         }
         if (props.source === "urlAttribute" && !props.dynamicUrlAttribute) {
-            message = "Configuration error: for data source Dynamic URL; Dynamic URL attribute is required";
+            message = "for data source Dynamic URL; Dynamic URL attribute is required";
         }
         if (props.source === "staticUrl" && !props.urlStatic) {
-            message = "Configuration error: for data source Static URL; a static url is required";
+            message = "for data source Static URL; a static url is required";
         }
         if (props.source === "staticImage" && !props.imageStatic) {
-            message = "Configuration error: for data source Static Image; a static image is required";
+            message = "for data source Static Image; a static image is required";
         }
         if (props.onClickOption === "callMicroflow" && !props.onClickMicroflow) {
-            message = "Configuration error: on click microflow is required";
+            message = "on click microflow is required";
         }
         if (props.onClickOption === "showPage" && !props.onClickForm) {
-            message = "Configuration error: on click page is required";
+            message = "on click page is required";
         }
 
-        return message;
+        return message && `Error in imageviewer configuration: ${message}`;
     }
 
     private getImageUrl(mxObject?: mendix.lib.MxObject): string {
