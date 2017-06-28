@@ -133,16 +133,16 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     public static validateProps(props: ImageViewerContainerProps): string {
         let message = "";
         if (props.source === "systemImage" && props.mxObject && !(props.mxObject.inheritsFrom("System.Image"))) {
-            message = "for data source System image; context object should inherit from system.image";
+            message = "for data source option 'System image' the context object should inherit system.image";
         }
         if (props.source === "urlAttribute" && !props.dynamicUrlAttribute) {
-            message = "for data source Dynamic URL; Dynamic URL attribute is required";
+            message = "for data source option 'Dynamic URL' the Dynamic image URL attribute should be configured";
         }
         if (props.source === "staticUrl" && !props.urlStatic) {
-            message = "for data source Static URL; a static url is required";
+            message = "for data source option 'Static URL' a static image url should be configured";
         }
         if (props.source === "staticImage" && !props.imageStatic) {
-            message = "for data source Static Image; a static image is required";
+            message = "for data source option 'Static Image' a static image should be configured";
         }
         if (props.onClickOption === "callMicroflow" && !props.onClickMicroflow) {
             message = "on click microflow is required";

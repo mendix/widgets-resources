@@ -4,7 +4,7 @@ import ImageViewerContainer, { ImageViewerContainerProps } from "./components/Im
 import { Alert } from "./components/Alert";
 
 // tslint:disable-next-line
-const image = require("base64-image-loader!./img/Preview.jpg");
+const image = require("base64-image-loader!./img/imageviewerpreview.png");
 
 declare function require(name: string): string;
 
