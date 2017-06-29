@@ -38,7 +38,7 @@ type onClickOptions = "doNothing" | "callMicroflow" | "showPage" | "openFullScre
 class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageViewerContainerState> {
     private subscriptionHandle: number;
     private attributeCallback: (mxObject: mendix.lib.MxObject) => () => void;
-    private imageViewer: HTMLElement;
+    private imageViewerNode: HTMLElement;
 
     constructor(props: ImageViewerContainerProps) {
         super(props);
@@ -76,8 +76,8 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 
     componentDidMount() {
-        if (this.imageViewer && this.imageViewer.parentElement) {
-            this.imageViewer.parentElement.classList.add("widget-image-view-container");
+        if (this.imageViewerNode && this.imageViewerNode.parentElement) {
+            this.imageViewerNode.parentElement.classList.add("widget-image-viewer-container");
         }
     }
 
@@ -96,7 +96,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 
     private setImageViewerReference(ref: HTMLElement) {
-        this.imageViewer = ref;
+        this.imageViewerNode = ref;
     }
 
     public static parseStyle(style = ""): {[key: string]: string} {
