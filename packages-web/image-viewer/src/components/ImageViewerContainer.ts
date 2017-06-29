@@ -36,7 +36,7 @@ type Units = "auto" | "pixels" | "percentage";
 type onClickOptions = "doNothing" | "callMicroflow" | "showPage" | "openFullScreen";
 
 class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageViewerContainerState> {
-    private subscriptionHandle: number;
+    private subscriptionHandles: number[];
     private attributeCallback: (mxObject: mendix.lib.MxObject) => () => void;
     private imageViewerNode: HTMLElement;
 
@@ -48,7 +48,8 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
             alertMessage,
             imageUrl: ""
         };
-        this.attributeCallback = mxObject => () => this.getImageUrl(mxObject);
+        this.subscriptionHandles = [];
+        this.attributeCallback = mxObject => () => this.setState({ imageUrl: this.getImageUrl(mxObject) });
         this.setImageViewerReference = this.setImageViewerReference.bind(this);
         this.executeAction = this.executeAction.bind(this);
     }
@@ -90,9 +91,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 
     componentWillUnmount() {
-        if (this.subscriptionHandle) {
-            window.mx.data.unsubscribe(this.subscriptionHandle);
-        }
+        this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
     }
 
     private setImageViewerReference(ref: HTMLElement) {
@@ -118,15 +117,19 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 
     private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
-        if (this.subscriptionHandle) {
-            window.mx.data.unsubscribe(this.subscriptionHandle);
-        }
+        this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
+        this.subscriptionHandles = [];
 
         if (mxObject) {
-            this.subscriptionHandle = window.mx.data.subscribe({
+            this.subscriptionHandles.push(window.mx.data.subscribe({
+                attr: this.props.dynamicUrlAttribute,
                 callback: this.attributeCallback(mxObject),
                 guid: mxObject.getGuid()
-            });
+            }));
+            this.subscriptionHandles.push(window.mx.data.subscribe({
+                callback: this.attributeCallback(mxObject),
+                guid: mxObject.getGuid()
+            }));
         }
     }
 
