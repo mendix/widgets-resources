@@ -9,6 +9,7 @@ interface WrapperProps {
     mxObject?: mendix.lib.MxObject;
     style: string;
     readOnly: boolean;
+    mxform: mxui.lib.form._FormBase;
 }
 
 interface ImageViewerContainerProps extends WrapperProps {
@@ -135,7 +136,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
 
     public static validateProps(props: ImageViewerContainerProps): string {
         let message = "";
-        if (props.source === "systemImage" && props.mxObject && !(props.mxObject.inheritsFrom("System.Image"))) {
+        if (props.source === "systemImage" && props.mxObject && !(props.mxObject.isA("System.Image"))) {
             message = "for data source option 'System image' the context object should inherit system.image";
         }
         if (props.source === "urlAttribute" && !props.dynamicUrlAttribute) {
@@ -160,14 +161,11 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     private getImageUrl(mxObject?: mendix.lib.MxObject): string {
         if (mxObject && this.props.source === "urlAttribute") {
             return mxObject.get(this.props.dynamicUrlAttribute) as string;
-        }
-        if (mxObject && this.props.source === "systemImage") {
+        } else if (mxObject && this.props.source === "systemImage") {
             return UrlHelper.getDynamicResourceUrl(mxObject.getGuid(), mxObject.get("changedDate") as number);
-        }
-        if (this.props.source === "staticUrl") {
+        } else if (this.props.source === "staticUrl") {
             return this.props.urlStatic;
-        }
-        if (this.props.source === "staticImage") {
+        } else if (this.props.source === "staticImage") {
             return UrlHelper.getStaticResourceUrl(this.props.imageStatic);
         }
 
@@ -175,19 +173,21 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 
     private executeAction() {
+        const { mxObject, onClickMicroflow, onClickOption, onClickForm, mxform } = this.props;
         const context = this.getContext();
-        if (this.props.onClickOption === "callMicroflow") {
-            window.mx.ui.action(this.props.onClickMicroflow, {
+        if (onClickOption === "callMicroflow" && mxObject) {
+            window.mx.ui.action(onClickMicroflow, {
                 context,
                 error: error => window.mx.ui.error(
-                    `An error occurred while executing action ${this.props.onClickMicroflow} : ${error.message}`
-                )
+                    `An error occurred while executing action ${onClickMicroflow} : ${error.message}`
+                ),
+                origin: mxform
             });
-        } else if (this.props.onClickOption === "showPage") {
-            window.mx.ui.openForm(this.props.onClickForm, {
+        } else if (onClickOption === "showPage" && mxObject) {
+            window.mx.ui.openForm(onClickForm, {
                 context,
                 error: error => window.mx.ui.error(
-                    `An error occurred while opening form ${this.props.onClickForm} : ${error.message}`
+                    `An error occurred while opening form ${onClickForm} : ${error.message}`
                 )
             });
         }
