@@ -47,7 +47,7 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
                 ref: this.props.getRef
             },
             DOM.img({
-                onClick: this.props.onClickOption === "openFullScreen" ? this.toggleLightBox : this.props.onClick,
+                onClick: this.toggleLightBox,
                 src: this.props.imageUrl,
                 style: {
                     ...this.props.style,
@@ -63,16 +63,20 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
     }
 
     private toggleLightBox() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
+        if (this.props.onClickOption === "openFullScreen") {
+            this.setState({
+                isOpen: !this.state.isOpen
+            });
+        } else if (this.props.onClick) {
+            this.props.onClick();
+        }
     }
 
     private getStyle(value: string | number, type: string): number | string {
+        // when type is auto default browser styles applies
         if (type === "pixels") {
             return value;
-        }
-        if (type === "percentage") {
+        } else if (type === "percentage") {
             return value + "%";
         }
 
