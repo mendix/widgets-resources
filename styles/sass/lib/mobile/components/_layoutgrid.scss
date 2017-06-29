@@ -1,0 +1,19 @@
+// This will make sure we don't get double spacing in the layout grid
+.profile-phone {
+	.mx-layoutgrid {
+		.row {
+			[class*="col-xs-4"] {
+				padding-right: 0;
+				&:last-child {
+					padding-right: 15px;
+				}
+			}
+			[class*="col-xs-6"] {
+				padding-right: 0;
+				&:last-child {
+					padding-right: 15px;
+				}
+			}
+		}
+	}
+}

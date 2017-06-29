@@ -1,0 +1,106 @@
+.userprofile {
+	margin-bottom: $default-spacing-bottom;
+	.userprofile-img {
+		margin: auto auto 20px auto;
+	}
+	.userprofile-title {
+		margin-bottom: 5px;
+	}
+	.userprofile-subtitle {
+		margin-bottom: 20px;
+	}
+}
+
+.eventactions {
+	.mx-link {
+		padding: 10px;
+		background-color: $gray-lighter;
+		border-radius: 4px;
+		> span {
+			display: block;
+			font-size: 19px;
+			margin-bottom: 3px;
+		}
+		a {
+			font-size: 11px;
+			text-decoration: none;
+		}
+		&:active {
+			background-color: darken($gray-lighter, 10%);
+		}
+	}
+	.btn {
+		font-size: 11px;
+		padding: 10px;
+		> span {
+			margin-bottom: 3px;
+			display: block;
+			font-size: 19px;
+		}
+	}
+}
+
+.fullgrowth {
+  margin-top: 85px;
+  padding: 0 55px;
+}
+.fullgrowth p {
+  color: #FFF;
+  margin-bottom: 0;
+}
+.fullgrowth .mx-link a {
+  color: #50E3C2;
+}
+.fullgrowth img {
+  margin-bottom: 20px;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animated {
+  animation-duration: 0.4s;
+  animation-fill-mode: both;
+}
+
+.slideInUp {
+  animation-name: slideInUp;
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInDown {
+  animation-name: slideInDown;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}
+

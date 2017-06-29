@@ -17,7 +17,7 @@ $gray-darker:                           #222 !default;
 $gray-dark:                             #333 !default;
 $gray:                                  #555 !default;
 $gray-light:                            #888 !default;
-$gray-primary:                          #DDD !default;
+$gray-primary:                          #d7d7d7 !default;
 $gray-lighter:                          #eee !default;
 
 
@@ -46,7 +46,7 @@ $font-base-color:                       $font-color-default !default; // Backwar
 // Global Border Color
 $border-color-default:                  $gray-primary !default;
 $default-border-color:                  $border-color-default !default; // Backwards compatible with v1
-$border-radius-default:                 3px !default;
+$border-radius-default:                 4px !default;
 
 // Topbar
 $topbar-bg:                             #FFF !default;
@@ -61,14 +61,7 @@ $navbar-brand-name:                     $font-color-default !default;
 
 // Background Colors
 $bg-color:                              #FFF !default;
-$bg-color-secondary:                    #E7EAF1 !default; // Background color that is used for specific page templates background
-
-// Default Font Size & Color
-$font-size-default:                     14px !default;
-$font-base-size:                        $font-size-default !default; // Backwards compatible with v1
-
-$font-color-default:                    #555 !default;
-$font-base-color:                       $font-color-default !default; // Backwards compatible with v1
+$bg-color-secondary:                    #F5F8FD !default; // Background color that is used for specific page templates background
 
 // Default Link Color
 $link-color:                            $brand-primary !default;
@@ -107,7 +100,7 @@ $font-size-small:                       12px !default;
 // Font Weights
 $font-weight-light:                     100 !default;
 $font-weight-normal:                    normal !default;         
-$font-weight-semibold:                  500 !default;
+$font-weight-semibold:                  600 !default;
 $font-weight-bold:                      bold !default; 
 
 // Font Size Headers
@@ -125,7 +118,7 @@ $font-weight-header:                    $font-weight-normal !default;
 $line-height-base:                      1.428571429 !default;
 
 // Spacing
-$font-header-margin:					10px 0 20px 0 !default;
+$font-header-margin:					0 0 20px 0 !default;
 
 // Text Colors
 $font-color-header:				        #17347B !default;
@@ -168,9 +161,9 @@ $navtopbar-glyph-size:                  1.2em !default; // For glyphicons that y
 $navtopbar-bg:                          $topbar-bg !default;
 $navtopbar-bg-hover:                    darken($navtopbar-bg, 4) !default;
 $navtopbar-bg-active:                   darken($navtopbar-bg, 8) !default;
-$navtopbar-color:                       #FFF !default;
-$navtopbar-color-hover:                 #FFF !default;
-$navtopbar-color-active:                #FFF !default;
+$navtopbar-color:                       $font-base-color !default;
+$navtopbar-color-hover:                 $navtopbar-color !default;
+$navtopbar-color-active:                $navtopbar-color !default;
 
 $navtopbar-sub-bg:                      lighten($navtopbar-bg, 4) !default;
 $navtopbar-sub-bg-hover:                $navtopbar-sub-bg !default;
@@ -194,7 +187,7 @@ $form-input-style:                      default !default;
 // Form Label  
 $form-label-color:                      #666 !default;        
 $form-label-size:                       $font-size-default !default;        
-$form-label-weight:                     $font-weight-normal !default;             
+$form-label-weight:                     $font-weight-semibold !default;             
 
 // Form Input dimensions
 $form-input-height:                     auto !default;
@@ -213,7 +206,10 @@ $form-input-focus-color:                $form-input-color !default;
 $form-input-disabled-color:             $form-input-color !default;
 $form-input-placeholder-color:          $gray-light !default;
 $form-input-border-color:               $border-color-default !default;
-$form-input-border-focus-color:         $brand-primary !default;    
+$form-input-border-focus-color:         $brand-primary !default;
+
+// Form Input Static styling
+$form-input-static-border-color:		#F0F0EE !default;
 
 // Form Group
 $form-group-margin-bottom:              15px !default;
@@ -231,7 +227,7 @@ $btn-bordered:                          false !default; // Default value false, 
 $btn-border-radius:                     $border-radius-default !default; 
 
 // Button Background Color
-$btn-default-bg:                        $brand-default !default;
+$btn-default-bg:                        #FFF !default;
 $btn-inverse-bg:                        $brand-inverse !default;
 $btn-primary-bg:                        $brand-primary !default;
 $btn-info-bg:                           $brand-info !default;
@@ -241,15 +237,15 @@ $btn-danger-bg:                         $brand-danger !default;
 
 // Button Border Color
 $btn-default-border-color:              $brand-default !default;
-$btn-inverse-border-color:              $brand-inverse !default;
-$btn-primary-border-color:              $brand-primary !default;
-$btn-info-border-color:                 $brand-info !default;
-$btn-success-border-color:              $brand-success !default;
-$btn-warning-border-color:              $brand-warning !default;
-$btn-danger-border-color:               $brand-danger !default;
+$btn-inverse-border-color:              $btn-inverse-bg !default;
+$btn-primary-border-color:              $btn-primary-bg !default;
+$btn-info-border-color:                 $btn-info-bg !default;
+$btn-success-border-color:              $btn-success-bg !default;
+$btn-warning-border-color:              $btn-warning-bg !default;
+$btn-danger-border-color:               $btn-danger-bg !default;
 
 // Button Text Color
-$btn-default-color:                     $font-color-default !default;
+$btn-default-color:                     $brand-primary !default;
 $btn-inverse-color:                     #FFF !default;
 $btn-primary-color:                     #FFF !default;
 $btn-info-color:                        #FFF !default;
@@ -258,14 +254,14 @@ $btn-warning-color:                     #FFF !default;
 $btn-danger-color:                      #FFF !default;
 
 // Button Background Color
-$btn-default-bg-hover:                  mix($brand-default, black, 80%) !default;
-$btn-inverse-bg-hover:                  mix($brand-inverse, white, 80%) !default;
-$btn-primary-bg-hover:                  mix($brand-primary, black, 80%) !default;
-$btn-info-bg-hover:                     mix($brand-info, black, 80%) !default;
-$btn-success-bg-hover:                  mix($brand-success, black, 80%) !default;
-$btn-warning-bg-hover:                  mix($brand-warning, black, 80%) !default;
-$btn-danger-bg-hover:                   mix($brand-danger, black, 80%) !default;
-$btn-link-bg-hover:                     $gray-lighter;
+$btn-default-bg-hover:                  mix($btn-default-bg, black, 95%) !default;
+$btn-inverse-bg-hover:                  mix($btn-inverse-bg, white, 80%) !default;
+$btn-primary-bg-hover:                  mix($btn-primary-bg, black, 80%) !default;
+$btn-info-bg-hover:                     mix($btn-info-bg, black, 80%) !default;
+$btn-success-bg-hover:                  mix($btn-success-bg, black, 80%) !default;
+$btn-warning-bg-hover:                  mix($btn-warning-bg, black, 80%) !default;
+$btn-danger-bg-hover:                   mix($btn-danger-bg, black, 80%) !default;
+$btn-link-bg-hover:                     $gray-lighter !default;
 
 
 
@@ -338,17 +334,24 @@ $color-danger-lighter:                  mix($brand-danger, white, 20%) !default;
 $grid-border-color:                     $border-color-default !default;
 
 // Spacing
-$grid-padding-top:                      10px !default;                   
-$grid-padding-right:                    10px !default;    
-$grid-padding-bottom:                   10px !default;    
-$grid-padding-left:                     10px !default;    
+// Default
+$grid-padding-top:                      15px !default;                   
+$grid-padding-right:                    15px !default;    
+$grid-padding-bottom:                   15px !default;    
+$grid-padding-left:                     15px !default;    
+
+// Listview
+$listview-padding-top:                  15px !default;                   
+$listview-padding-right:                15px !default;    
+$listview-padding-bottom:               15px !default;    
+$listview-padding-left:                 15px !default;    
 
 // Background Colors
 $grid-bg:                               #FFF !default;
 $grid-bg-header:                        transparent !default; // Grid Headers
-$grid-bg-hover:                         shade($color-primary-lighter,3) !default;
-$grid-bg-selected:                      $brand-primary !default;    
-$grid-bg-selected-hover:                shade($color-primary-lighter,3) !default;
+$grid-bg-hover:                         mix($color-warning-lighter, #FFF, 20%) !default;
+$grid-bg-selected:                      $color-warning-lighter !default;    
+$grid-bg-selected-hover:                $color-warning-lighter !default;
 
 // Striped Background Color
 $grid-bg-striped:                       lighten($grid-border-color,5) !default;
@@ -503,16 +506,39 @@ $groupbox-white-color:                  $font-color-default !default;
 //## Extended variables for Groupbox Widget (used in components/groupbox)
 
 // Text and Border Color
+$callout-default-color:                 $font-color-default !default;
 $callout-info-color:                    $brand-info !default;
 $callout-success-color:                 $brand-success !default;
 $callout-warning-color:                 $brand-warning !default;
 $callout-danger-color:                  $brand-danger !default;
 
 // Background Color
+$callout-default-bg:                    $color-default-lighter!default; 
 $callout-info-bg:                       $color-info-lighter !default; 
 $callout-success-bg:                    $color-success-lighter !default; 
 $callout-warning-bg:                    $color-warning-lighter !default; 
 $callout-danger-bg:                     $color-danger-lighter !default;
+
+
+
+
+//== Mobile
+//## Specific variables for Mobile
+
+// Header Height
+$m-header-height:                    	45px;
+
+// Background Color
+$m-header-bg:                           #FFF;
+
+// Text Color
+$m-header-color:                        #555;
+
+// Title Size
+$m-header-title-size:                   17px;
+
+// Link Color
+$m-header-link-color:                   $link-color;
 
 
 
@@ -549,7 +575,11 @@ $default-spacing:                       $default-spacing-top $default-spacing-ri
 $m-default-spacing:                     $m-default-spacing-top $m-default-spacing-right $m-default-spacing-bottom $m-default-spacing-left !default;
 $t-default-spacing:                     $t-default-spacing-top $t-default-spacing-right $t-default-spacing-bottom $t-default-spacing-left !default;
 
+// Gutter size
+$gutter-size:                           15px !default;
 
+// Element spacing
+$element-spacing:                       5px !default;
 
 //== Tables
 //## Table spacing options (used in components/tables)

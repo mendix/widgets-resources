@@ -142,43 +142,43 @@
 // Tab Styling Specific for mobile
 .tab-mobile.mx-tabcontainer {
     .mx-tabcontainer-tabs {
-        margin: 0 0 10px 0 !important;
+        margin: 0;
         text-align: center;
-        border-color: transparent;
+        border-style: none;
         background-color: $brand-primary;
         li {
+            border-style: none;
             display: table-cell;
             float: none;
-            width: 1%;
             margin: 0;
+            width: 1%;
+            text-align: center;
+            border-radius: 0;
             a {
-                font-size: 11px;
+                font-size: 12px;
                 font-weight: $font-weight-normal;
-                padding: 15px 0;
+                padding: 15px;
                 text-transform: uppercase;
-                color: #fff;
-                border-style: none;
+                color: #FFF;
+                border-style: solid;
+                border-width: 0 1px 0 0;
+                border-color: rgba(255,255,255,0.3);
+                border-radius: 0;
                 &:hover,
                 &:focus {
-                    color: $tabs-color-active;
-                    border-style: none;
-                    background-color: transparent;
+                    background-color: inherit;
                 }
             }
-            &.active a {
-                color: $tabs-color-active;
-                background-color: transparent;
-                @include css-arrow(bottom, 5px, 5px, #fff, #fff, 0);
-                &:after,
-                &:before {
-                    -webkit-transform: rotate(180deg);
-                }
-                &:after {
-                    top: 80%;
-                }
-                &:before {
-                    top: 75%;
-                }
+            &:last-child a {
+                border-right: none;
+            }
+            &.active > a,
+            &.active > a:hover,
+            &.active > a:focus {
+                border-style: none;
+                border-radius: 0;
+                color: #FFF;
+                background-color: #0486C5;
             }
         }
     }

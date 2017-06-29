@@ -1,0 +1,20 @@
+.profile-phone {
+	.region-topbar {
+		min-height: $m-header-height;
+		background-color: $m-header-bg;
+		border-style: none;
+		&:before {
+			display: none;
+		}
+	}
+	.btn,
+	.mx-link {
+		-webkit-transition: all 0.2s;
+  		-moz-transition: all 0.2s;
+  		transition: all 0.2s;
+		&:active {
+			-webkit-transform: translateY(1px);
+    		transform: translateY(1px);
+		}
+	}
+}

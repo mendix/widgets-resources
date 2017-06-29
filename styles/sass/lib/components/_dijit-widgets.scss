@@ -19,30 +19,40 @@
 
 .dijitCalendarContainer {
     /* (must be higher than popup z-index) */
+    padding: 10px;
     z-index: 10010 !important;
-    background-color: #eff0f2;
+    background: #FFF;
+    border: 1px solid #D1D6E4;
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.06);
+    border-radius: 4px;
+    font-size: 12px;
     tr {
         th {
             text-align: center;
-            color: #fff;
-            background-color: #26323d;
+            color: $brand-primary;
         }
         th,
         td {
-            padding: 6px;
+            padding: 10px;
             text-align: center;
         }
         td .dijitCalendarDateLabel {
-            color: #000;
+            color: #2D3E4E;
         }
         tfoot h3 {
             font-size: inherit;
             margin: 0;
             padding: 0;
         }
+        .dijitCalendarNextMonth,
+        .dijitCalendarPreviousMonth {
+            span {
+                color: lighten(#2D3E4E, 50%);
+            }
+        }
     }
     .dijitCalendarMonthLabel {
-        font-weight: $font-weight-bold;
+        color: $brand-primary;
     }
     .dijitButtonNode {
         border: 0;
@@ -52,26 +62,30 @@
     }
     .dijitCalendarSelectedDate,
     .dijitCalendarSelectedDate:hover {
-        border-radius: 10px;
+        border-radius: 50%;
         background: $brand-primary;
         .dijitCalendarDateLabel {
             color: #fff;
         }
     }
-    .dijitCalendarHoveredDate,
-    .dijitCalendarPreviousYearHover,
-    .dijitCalendarNextYearHover,
-    .dijitCalendarMonthLabelHover {
-        border-radius: 10px;
-        background-color: #dbdcdd;
+    .dijitCalendarHoveredDate {
+        border-radius: 50%;
+        background-color: $brand-default;
+        .dijitCalendarDateLabel {
+            color: $brand-primary;
+        }
     }
-    .dijitCalendarYearContainer td {
+    .dijitCalendarYearContainer {
         text-align: center;
-        color: #000;
-        border-top: 1px solid $border-color-default;
-        .dijitCalendarSelectedYear {
-            text-decoration: underline;
-            font-weight: $font-weight-bold;
+        span {
+            color: lighten($brand-primary, 30);
+            &.dijitCalendarSelectedYear {
+                color: $brand-primary;
+            }
+            &:hover {
+                text-decoration: underline;
+                background-color: transparent;
+            }
         }
     }
     .dijitCalendarMonthContainer th:first-child {
@@ -89,6 +103,8 @@
     border-radius: 3px;
     background-color: #26323d;
     .dijitCalendarMonthMenu {
+        padding: 5px;
+        font-size: 12px;
         border-style: none;
         background: none;
         .dijitCalendarMonthLabel {

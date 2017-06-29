@@ -3,3 +3,34 @@
 
    Default Bootstrap containers
 ========================================================================== */
+// Vertical Align Elements in a bootstrap grid (place on container)
+.v-center {
+    display: table;
+    width: 100%;
+    &:before,
+    &:after {
+        display: none;
+    }
+    .row {
+        display: table-row;
+    }
+    div[class*='col-'] {
+        display: table-cell;
+        vertical-align: middle;
+        float: none;
+
+        &:first-child {
+            padding-left: 0;
+        }
+        &:last-child {
+            padding-right: 0;
+        }
+    }
+}
+
+
+// Remove padding for Bootstrap columns, add class on row 
+.no-gutter>[class*='col-'] {
+    padding-right: 0;
+    padding-left: 0;
+}

@@ -12,26 +12,27 @@
         width: auto;
     }
     /* Load more button */
-    >.mx-button {
+    > .mx-button {
         width: 100%;
-        margin: 10px auto
+        margin: 10px auto;
     }
     .mx-listview-list {
         margin: 0;
+        .mx-listview-empty {
+            background-color: transparent;
+            border-style: none;
+        }
     }
     .mx-listview-item {
         background-color: $grid-bg;
-        padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
+        padding: $listview-padding-top $listview-padding-right $listview-padding-bottom $listview-padding-left;
         &:hover {
             background-color: $grid-bg;
         }
         &.selected {
             background-color: $grid-bg-selected !important;
-            &:hover {
-                background-color: $grid-bg-selected-hover !important;
-            }
         }
-        &:nth-child(2n+1) {
+        &:nth-child(2n + 1) {
             background-color: $grid-bg;
         }
     }
@@ -77,7 +78,7 @@
 
 // Striped
 .listview-striped.mx-listview {
-    .mx-listview-item:nth-child(2n+1) {
+    .mx-listview-item:nth-child(2n + 1) {
         background-color: $grid-bg-striped;
     }
 }
@@ -97,6 +98,9 @@
         &:hover,
         &:active {
             background-color: $grid-bg-hover !important;
+        }
+        &.selected:hover {
+            background-color: $grid-bg-selected-hover !important;
         }
     }
 }
@@ -134,7 +138,7 @@
 }
 
 // Bootstrap columns
-.listview-layoutgrid.mx-listview {
+.mx-listview[class*='lv-col'] {
     .mx-listview-content-wrapper {
         display: block;
     }
@@ -147,6 +151,7 @@
             // clearfix
             display: table;
             content: " ";
+            clear: both;
         }
     }
     .mx-listview-item {

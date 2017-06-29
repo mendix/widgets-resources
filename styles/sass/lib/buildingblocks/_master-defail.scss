@@ -1,0 +1,44 @@
+// Master detail
+.masterdetail {
+    position: relative;
+    @media (min-width: $screen-md) {
+        .mx-layoutgrid {
+            padding: 0 $gutter-size !important;
+        }
+    }
+    .masterdetail-master {
+        .controlgroup {
+            margin-bottom: $gutter-size;
+        }
+        @media (min-width: $screen-md) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            padding: 0;
+            border-right: 1px solid $border-color-default;
+
+            .mx-listview-searchbar {
+                margin: $gutter-size;
+            }
+            .controlgroup {
+                margin: 0;
+                padding: $gutter-size;
+                border-bottom: 1px solid $border-color-default;
+            }
+        }
+    }
+    .masterdetail-detail {
+        @media (min-width: $screen-md) {
+            @include default-spacing($type: padding, $direction: all, $device: responsive);
+        }
+    }
+}
+.masterdetailvertical {
+    .masterdetail-master {
+        @include default-spacing($type: margin, $direction: bottom, $device: responsive);
+    }
+    .masterdetail-detail {
+        @include default-spacing($type: padding, $direction: top, $device: responsive);
+    }
+}

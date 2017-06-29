@@ -1,0 +1,90 @@
+.mx-progress {
+    color: $font-color-default;
+    background: $bg-color-secondary;
+  .mx-progress-message {
+    color: $font-color-default;
+  }
+  .mx-progress-indicator {
+    max-width: 100%;
+    background: $gray-lighter;
+    height: 2px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    padding: 0;
+    border-radius: 0;
+
+    &:before,
+    &:after {
+      background: $brand-primary;
+      content: '';
+      display: block;
+      height:  2px;
+      left: 0;
+      position: absolute;
+      top: 0;
+      transform: translate3d(-100%,0,0);
+      width: 50%;
+    }
+    &::before {
+      animation: loader 2s infinite;
+    }
+    
+    &::after {
+      animation: loader 2s -2s infinite;
+    }
+  }
+}
+
+
+
+
+@keyframes loader {
+  0% {
+    transform: translate3d(-100%,0,0);
+  }
+  100% {
+    transform: translate3d(200%,0,0);
+  }
+}
+
+.profile-phone {
+  .mx-progress-empty {
+    max-width: 100%;
+    background: $gray-lighter;
+    height: 1px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    padding: 0;
+    top: 45px;
+    left: 0;
+    border-radius: 0;
+
+    &:before,
+    &:after {
+      background: $brand-primary;
+      content: '';
+      display: block;
+      height:  1px;
+      left: 0;
+      position: absolute;
+      top: 0;
+      transform: translate3d(-100%,0,0);
+      width: 50%;
+  	}
+  	&::before {
+      animation: loader 2s infinite;
+  	}
+    
+    &::after {
+      animation: loader 2s -2s infinite;
+    }
+
+    .mx-progress-indicator {
+      display: none;
+    }
+  }
+}

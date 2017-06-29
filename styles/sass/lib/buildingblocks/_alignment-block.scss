@@ -1,0 +1,25 @@
+/* ==========================================================================
+   Alignment Blocks
+   -
+========================================================================== */
+// Flex container
+.flexcontainer {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    overflow: hidden;
+    .flexitem {
+        margin-right: $gutter-size;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    .flexitem--main {
+        flex: 1;
+        overflow: hidden;
+    }
+}
+
+.flex-center {
+    align-items: center;
+}

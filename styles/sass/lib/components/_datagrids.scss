@@ -14,7 +14,7 @@
             border-color: $grid-border-color;
             border-top-width: 0;
             border-right: 0;
-            border-bottom-width: 2px;
+            border-bottom-width: 1px;
             border-left: 0;
             background-color: $grid-bg-header;
         }
@@ -35,8 +35,8 @@
                 vertical-align: middle;
                 border-width: 0;
                 border-color: $grid-border-color;
-                border-top-width: 1px;
-                border-top-style: solid;
+                border-bottom-width: 1px;
+                border-bottom-style: solid;
                 background-color: $grid-bg;
                 &:focus {
                     outline: none;

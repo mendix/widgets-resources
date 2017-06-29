@@ -42,7 +42,7 @@
         .open>&.dropdown-toggle {
             color: $color;
             border-color: $border;
-            background-color: $background;
+            background-color: $border;
         }
     }
     // Button as link

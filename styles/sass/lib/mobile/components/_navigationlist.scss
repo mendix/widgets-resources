@@ -1,0 +1,22 @@
+.profile-phone {
+	.mx-navigationlist {
+	    .mx-navigationlist-item {
+	    	border-left: none;
+	    	border-bottom: 1px solid $border-color-default;
+	    	background-color: transparent;
+    		border-radius: 0;
+    		p {
+    			margin-bottom: 0;
+    		}
+	        &:hover,
+	        &:focus,
+	        &.active {
+	        	color: inherit;
+	        	background-color: transparent;
+	        }
+	        &.active {
+	        	background-color: #F7F7F7;
+	        }
+	    }
+	}
+}

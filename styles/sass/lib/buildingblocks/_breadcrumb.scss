@@ -1,0 +1,35 @@
+// Breadcrumb
+.breadcrumb {
+    //reset
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    font-size: $font-size-default;
+}
+.breadcrumb-item {
+    display: inline-block;
+    margin: 0;
+    &:last-child {
+        color: $font-base-color;
+        a {
+            text-decoration: none;
+        }
+    }
+}
+.breadcrumb-item + .breadcrumb-item {
+    &::before {
+        content: "/";
+        display: inline-block;
+        padding-right: 10px;
+        padding-left: 10px;
+        color: $gray-light;
+    }
+}
+.breadcrumb--large {
+    font-size: $font-size-h3;
+}
+.breadcrumb--underline {
+    border-bottom: 1px solid $border-color-default;
+    padding-bottom: $gutter-size;
+}

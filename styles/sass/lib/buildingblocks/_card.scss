@@ -1,0 +1,181 @@
+/* ==========================================================================
+   Card
+========================================================================== */
+
+//== Default
+//-------------------------------------------------------------------------------------------------------------------//
+.card,
+%card {
+    background-color: #fff;
+    border: 1px solid $border-color-default;
+    border-radius: $border-radius-default;
+    @include default-spacing($type: padding, $direction: all, $device: responsive);
+    @include default-spacing($type: margin, $direction: bottom, $device: responsive);
+    .mx-layoutgrid {
+        padding: 0 !important;
+    }
+
+    //== Elements
+    //-------------------------------------------------------------------------------------------------------------------//
+    .card-title {
+        margin-top: 0;
+    }
+}
+
+//== Varations
+//-------------------------------------------------------------------------------------------------------------------//
+.cardaction {
+    text-align: center;
+    .card-image {
+        margin: 0 auto 20px;
+    }
+    .btn {
+    }
+}
+
+.cardmetrics {
+    .card-title {
+        // font-size: $font-size-large; // text-large
+        margin-bottom: 0;
+    }
+    .figurecontent {
+    }
+    .card-image {
+        width: 100px;
+        height: auto;
+        // If btn
+        &.btn {
+            cursor: default;
+            height: 100px;
+            width: 100px;
+            font-size: 40px;
+            padding: 0;
+            pointer-events: none;
+        }
+    }
+    .card-counter {
+        font-size: 64px;
+        margin: 0;
+    }
+    .card-morebutton {
+    }
+}
+
+.cardinfo {
+    .card-text {
+        @include default-spacing($type: margin, $direction: bottom, $device: responsive);
+    }
+}
+
+.cardtabs {
+    @extend %card;
+    padding: 0;
+    .cardtabs-tabs {
+        margin: 0;
+        ul.mx-tabcontainer-tabs {
+            margin: 0;
+            background-color: mix($tabs-border-color, #fff, 20%);
+            display: flex;
+
+            li {
+                flex: 1 1 auto;
+                text-align: center;
+                a,
+                a:hover,
+                a:focus {
+                    border-left-width: 0;
+                    border-top-width: 0;
+                    border-right-width: 1px;
+                }
+                &:first-child a {
+                    border-radius: $border-radius-default 0 0 0;
+                }
+                &:last-child a {
+                    border-radius: 0 $border-radius-default 0 0;
+                }
+            }
+        }
+        .mx-tabcontainer-pane {
+            @include default-spacing($type: padding, $direction: all, $device: responsive);
+        }
+    }
+}
+.carduser {
+    @extend %card;
+    .figurecontent {
+    }
+    .card-controls {
+    }
+    .card-title {
+        // margin-bottom: 5px;
+    }
+    .card-detail {
+        // display: block;
+        // margin-bottom: 5px;
+    }
+}
+
+.cardgraph {
+    .card-title {
+    }
+}
+
+.cardchart {
+    .card-title {
+    }
+}
+
+.cardproduct {
+    @extend %card;
+    padding: 0;
+    .cardproduct-header {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+        .card-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+        }
+        .cardproduct-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.60);
+
+            .cardproduct-overlay-category,
+            .cardproduct-overlay-title {
+                margin: 0;
+                color: #fff;
+            }
+        }
+    }
+    .cardproduct-footer {
+        position: relative;
+        padding: 20px 30px;
+        .cardproduct-name {
+            margin: 0;
+        }
+        .cardproduct-btn {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            display: flex;
+            bottom: 0;
+            right: 0;
+            border-left: 1px solid $border-color-default;
+            padding: 30px;
+            align-items: center;
+        }
+    }
+}
+
+.cardshopping {
+}
+
+.carduserlist {
+}

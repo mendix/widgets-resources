@@ -1,0 +1,30 @@
+.profile-phone .mx-listview {
+	.mx-listview-searchbar {
+		margin-bottom: 3px;
+		background: #FFF;
+		box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+		input {
+			border-radius: 0;
+    		padding: 14px 15px;
+   			color: #555;
+			border-style: none;
+			box-shadow: none;
+		}
+	}
+	.mx-listview-clear-button {
+		color: #555;
+		border-style: none;
+    	padding: 14px 15px;
+	}
+    .mx-listview-item {
+    	-webkit-transition: all 0.2s;
+  		-moz-transition: all 0.2s;
+  		transition: all 0.2s; 
+    	&:active {
+    		background-color: #F7F7F7;
+    	}
+    	&:first-child {
+    		border-top: none;
+    	}
+    }
+}

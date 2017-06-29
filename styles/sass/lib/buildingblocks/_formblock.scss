@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Form Block
+
+   Used in default forms
+========================================================================== */
+.formblock {
+    @include default-spacing($type: margin, $direction: bottom, $device: responsive);
+    .formblock-title {
+        color: $brand-primary; // text-primary?
+        border-bottom: 1px solid $default-border-color;
+        padding-bottom: $gutter-size;
+        margin-bottom: $gutter-size;
+    }
+}
