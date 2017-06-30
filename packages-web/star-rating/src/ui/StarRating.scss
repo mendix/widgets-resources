@@ -5,43 +5,11 @@
 }
 
 .widget-star-rating-empty {
-    @extend.widget-star-rating-font;
     color: #ccc;
 }
 
-.widget-star-rating-full {
-    @extend.widget-star-rating-font;
+.widget-star-rating-full-widget {
     color: #ffa611;
 }
 
-.widget-star-rating-full-default {
-    @extend.widget-star-rating-font;
-    color: $brand-default;
-}
-
-.widget-star-rating-full-primary {
-    @extend.widget-star-rating-font;
-    color: $brand-primary;
-}
-
-.widget-star-rating-full-success {
-    @extend.widget-star-rating-font;
-    color: $brand-success;
-}
-
-.widget-star-rating-full-info {
-    @extend.widget-star-rating-font;
-    color: $brand-info;
-}
-.widget-star-rating-full-warning {
-    @extend.widget-star-rating-font;
-    color: $brand-warning;
-}
-.widget-star-rating-full-danger {
-    @extend.widget-star-rating-font;
-    color: $brand-danger;
-}
-.widget-star-rating-full-inverse {
-    @extend.widget-star-rating-font;
-    color: $brand-inverse;
-}
+@import "star-rating-theme";
