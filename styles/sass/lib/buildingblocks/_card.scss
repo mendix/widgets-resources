@@ -4,13 +4,11 @@
 
 //== Default
 //-------------------------------------------------------------------------------------------------------------------//
-.card,
-%card {
+.card {
     background-color: #fff;
     border: 1px solid $border-color-default;
     border-radius: $border-radius-default;
     @include default-spacing($type: padding, $direction: all, $device: responsive);
-    @include default-spacing($type: margin, $direction: bottom, $device: responsive);
     .mx-layoutgrid {
         padding: 0 !important;
     }
@@ -68,7 +66,6 @@
 }
 
 .cardtabs {
-    @extend %card;
     padding: 0;
     .cardtabs-tabs {
         margin: 0;
@@ -101,7 +98,6 @@
     }
 }
 .carduser {
-    @extend %card;
     .figurecontent {
     }
     .card-controls {
@@ -126,7 +122,6 @@
 }
 
 .cardproduct {
-    @extend %card;
     padding: 0;
     .cardproduct-header {
         position: relative;
