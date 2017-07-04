@@ -117,5 +117,17 @@
                 }
             }
         }
+        .mx-navbar {
+            float: right;
+            min-height: $topbar-minimalheight;
+            background: transparent;
+            .mx-navbar-item {
+                a {
+                    padding: 0 20px;
+                    line-height: $topbar-minimalheight - 5;
+                    margin-top: 5px;
+                }
+            }
+        }
     }
 }
