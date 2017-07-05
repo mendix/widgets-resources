@@ -6,7 +6,7 @@ export interface CarouselItemProps {
     onClick?: (event: MouseEvent<HTMLDivElement>) => void;
     status: ItemStatus;
     position: number;
-    getItemNode?: (ref: HTMLElement) => void;
+    getItemNode?: (ref: HTMLDivElement | null) => void;
 }
 
 export type ItemStatus = "active" | "next" | "prev";

@@ -152,7 +152,7 @@ class Carousel extends Component<CarouselProps, CarouselState> {
         );
     }
 
-    private addCarouselItem(carouselItem: HTMLElement) {
+    private addCarouselItem(carouselItem: HTMLElement | null) {
         if (carouselItem && (this.carouselItems.length < this.props.images.length)) {
             this.carouselItems.push(carouselItem);
             this.registerEvents(carouselItem);
