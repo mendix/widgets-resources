@@ -1,17 +1,4 @@
-@import "./variables";
-
-$default-android-color: #6FBEB5;
-$default-ios-color: rgb(100, 189, 99);
-
-@mixin bootstrap-style-ios($brand-style){
-    background-color: $brand-style;
-    border-color: $brand-style;
-    box-shadow: $brand-style 0 0 0 16px inset;
-}
-
-@mixin bootstrap-style-android($brand-style) {
-    background-color: lighten($brand-style, 10%);
-}
+@import "variables";
 
 @mixin dynamic-float($min-width, $max-width, $direction) {
     @media (min-width: $min-width) and (max-width: $max-width) {
@@ -45,34 +32,6 @@ $default-ios-color: rgb(100, 189, 99);
 
         &.checked {
             transition: border 0.4s, box-shadow 0.4s, background-color 1.2s;
-
-            &.widget-switch-btn-wrapper-default {
-                @include bootstrap-style-ios($default-ios-color);
-            }
-
-            &.widget-switch-btn-wrapper-success {
-                @include bootstrap-style-ios($brand-success);
-            }
-
-            &.widget-switch-btn-wrapper-info {
-                @include bootstrap-style-ios($brand-info);
-            }
-
-            &.widget-switch-btn-wrapper-primary {
-                @include bootstrap-style-ios($brand-primary);
-            }
-
-            &.widget-switch-btn-wrapper-warning {
-                @include bootstrap-style-ios($brand-warning);
-            }
-
-            &.widget-switch-btn-wrapper-danger {
-                @include bootstrap-style-ios($brand-danger);
-            }
-
-            &.widget-switch-btn-wrapper-inverse {
-                @include bootstrap-style-ios($brand-inverse);
-            }
         }
 
         &.un-checked {
@@ -168,58 +127,6 @@ $default-ios-color: rgb(100, 189, 99);
             background: #6FBEB5;
             border: none;
             box-shadow: none;
-
-            &.widget-switch-btn-wrapper-default {
-                background-color: $default-android-color;
-            }
-
-            &.widget-switch-btn-wrapper-success {
-                @include bootstrap-style-android($brand-success);
-            }
-
-            .widget-switch-btn {
-                background: $brand-success;
-            }
-
-            &.widget-switch-btn-wrapper-info {
-                @include bootstrap-style-android($brand-info);
-
-                .widget-switch-btn {
-                    background: $brand-info;
-                }
-            }
-
-            &.widget-switch-btn-wrapper-primary {
-                @include bootstrap-style-android($brand-primary);
-
-                .widget-switch-btn {
-                    background: $brand-primary;
-                }
-            }
-
-            &.widget-switch-btn-wrapper-warning {
-                @include bootstrap-style-android($brand-warning);
-
-                .widget-switch-btn {
-                    background: $brand-warning;
-                }
-            }
-
-            &.widget-switch-btn-wrapper-danger {
-                @include bootstrap-style-android($brand-danger);
-
-                .widget-switch-btn {
-                    background: $brand-danger;
-                }
-            }
-
-            &.widget-switch-btn-wrapper-inverse {
-                @include bootstrap-style-android($brand-inverse);
-
-                .widget-switch-btn {
-                    background: $brand-inverse;
-                }
-            }
 
             .widget-switch-btn {
                 left: 20px;
@@ -341,3 +248,5 @@ html {
         }
     }
 }
+
+@import "switch-theme";
