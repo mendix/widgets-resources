@@ -16,7 +16,7 @@ interface ImageViewerProps {
     style?: object;
     responsive: boolean;
     onClickOption?: onClickOptions;
-    getRef?: (node: HTMLElement) => void;
+    getRef?: (node: HTMLDivElement) => void;
     onClick?: () => void;
 }
 

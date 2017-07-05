@@ -29,7 +29,7 @@
     "@types/enzyme": "^2.7.6",
     "@types/jasmine": "^2.5.41",
     "@types/karma": "^0.13.34",
-    "@types/react": "^15.0.18",
+    "@types/react": "^15.0.34",
     "@types/react-dom": "^15.5.0",
     "base64-image-loader": "^1.2.0",
     "check-dependencies": "^1.0.1",

@@ -39,7 +39,7 @@ type onClickOptions = "doNothing" | "callMicroflow" | "showPage" | "openFullScre
 class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageViewerContainerState> {
     private subscriptionHandles: number[];
     private attributeCallback: (mxObject: mendix.lib.MxObject) => () => void;
-    private imageViewerNode: HTMLElement;
+    private imageViewerNode: HTMLDivElement;
 
     constructor(props: ImageViewerContainerProps) {
         super(props);
@@ -95,7 +95,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
     }
 
-    private setImageViewerReference(ref: HTMLElement) {
+    private setImageViewerReference(ref: HTMLDivElement) {
         this.imageViewerNode = ref;
     }
 

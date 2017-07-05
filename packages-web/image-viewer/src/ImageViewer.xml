@@ -9,7 +9,7 @@
             <category>Data source</category>
             <description/>
             <enumerationValues>
-                <enumerationValue key="systemImage">System image</enumerationValue>
+                <enumerationValue key="systemImage">Dynamic image</enumerationValue>
                 <enumerationValue key="staticImage">Static image</enumerationValue>
                 <enumerationValue key="urlAttribute">Dynamic URL</enumerationValue>
                 <enumerationValue key="staticUrl">Static URL</enumerationValue>

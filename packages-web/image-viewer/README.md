@@ -17,8 +17,8 @@ https://imageviewer.mxapps.io/
 
 ## Usage
 The widget requires a context.
- ### Data source: System image
- - On the Data source option of the Data source tab, select the system image.
+ ### Data source: Dynamic image
+ - On the Data source option of the Data source tab, select the dynamic image.
  - The widget will pick the image from the context object (context object should inherit from system.image entity).
  - Refer to the appearnace section for configuring height and width.
 
