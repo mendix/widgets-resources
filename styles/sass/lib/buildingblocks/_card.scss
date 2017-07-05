@@ -29,6 +29,12 @@
     }
     .btn {
     }
+    .card-linkicon {
+        margin: 0 auto 20px;
+        .glyphicon {
+            font-size: 58px;
+        }
+    }
 }
 
 .cardmetrics {
@@ -97,17 +103,13 @@
         }
     }
 }
+
 .carduser {
-    .figurecontent {
-    }
     .card-controls {
     }
     .card-title {
-        // margin-bottom: 5px;
     }
     .card-detail {
-        // display: block;
-        // margin-bottom: 5px;
     }
 }
 
