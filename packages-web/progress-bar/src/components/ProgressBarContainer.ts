@@ -1,5 +1,5 @@
 import { Component, createElement } from "react";
-import { BarType, BootstrapStyle, ProgressBar } from "./ProgressBar";
+import { BarStyle, BarType, ProgressBar } from "./ProgressBar";
 import { Alert } from "./Alert";
 
 interface WrapperProps {
@@ -11,7 +11,7 @@ interface WrapperProps {
 
 export interface ProgressBarContainerProps extends WrapperProps {
     barType: BarType;
-    bootstrapStyle: BootstrapStyle;
+    bootstrapStyle: BarStyle;
     bootstrapStyleAttribute: string;
     maximumValueAttribute: string;
     onClickMicroflow?: string;
@@ -22,7 +22,7 @@ export interface ProgressBarContainerProps extends WrapperProps {
 }
 
 interface ProgressBarContainerState {
-    bootstrapStyle?: BootstrapStyle;
+    themeStyle?: BarStyle;
     alertMessage?: string;
     maximumValue: number;
     showAlert?: boolean;
@@ -73,7 +73,7 @@ export default class ProgressBarContainer extends Component<ProgressBarContainer
         return createElement(ProgressBar, {
             alertMessage: this.state.alertMessage,
             barType: this.props.barType,
-            bootstrapStyle: this.state.bootstrapStyle,
+            bootstrapStyle: this.state.themeStyle,
             className: this.props.class,
             colorSwitch: this.props.textColorSwitch,
             maximumValue: this.state.maximumValue,
@@ -116,9 +116,9 @@ export default class ProgressBarContainer extends Component<ProgressBarContainer
         return defaultValue;
     }
 
-    private getBootstrapStyle(mxObject?: mendix.lib.MxObject): BootstrapStyle {
+    private getBarStyle(mxObject?: mendix.lib.MxObject): BarStyle {
         if (mxObject && this.props.bootstrapStyleAttribute) {
-            return mxObject.get(this.props.bootstrapStyleAttribute) as BootstrapStyle;
+            return mxObject.get(this.props.bootstrapStyleAttribute) as BarStyle;
         }
 
         return this.props.bootstrapStyle;
@@ -126,9 +126,9 @@ export default class ProgressBarContainer extends Component<ProgressBarContainer
 
     private updateValues(mxObject?: mendix.lib.MxObject): ProgressBarContainerState {
         return {
-            bootstrapStyle: this.getBootstrapStyle(mxObject),
             maximumValue: this.getValue(this.props.maximumValueAttribute, this.defaultMaximumValue, mxObject),
-            progressValue: this.getValue(this.props.progressAttribute, undefined, mxObject)
+            progressValue: this.getValue(this.props.progressAttribute, undefined, mxObject),
+            themeStyle: this.getBarStyle (mxObject)
         };
     }
 

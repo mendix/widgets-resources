@@ -1,8 +1,4 @@
-@import "./variables";
-
-.widget-progress-bar-text-contrast .progress-bar {
-    color: $font-base-color;
-}
+@import "variables";
 
 .widget-progress-bar {
     width: 100%
@@ -17,6 +13,4 @@
     display: block;
 }
 
-.widget-progress-bar-alert.widget-progress-bar-text-contrast .progress-bar {
-    color: $color-danger-darker;
-}
+@import "progress-bar-theme";

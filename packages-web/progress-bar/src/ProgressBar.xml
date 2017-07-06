@@ -27,9 +27,9 @@
             </attributeTypes>
         </property>
         <property key="bootstrapStyleAttribute" type="attribute" required="false">
-            <caption>Bootstrap style attribute</caption>
+            <caption>Bar style attribute</caption>
             <category>Data source</category>
-            <description>Value of attribute should be: info, warning, danger, success. Alternatively use the display 'Bootstrap style' property in the Display tab</description>
+            <description>Value of attribute should be: info, warning, danger, success. Alternatively use the display 'Bar style' property in the `Appearance` tab</description>
             <attributeTypes>
                 <attributeType name="Enum" />
                 <attributeType name="String" />
@@ -37,12 +37,12 @@
         </property>
         <property key="textColorSwitch" type="integer" defaultValue="50">
             <caption>Color switch value</caption>
-            <category>Display</category>
+            <category>Appearance</category>
             <description>The percentage at which the text gets a contrast color (class) from black to white</description>
         </property>
         <property key="barType" type="enumeration" defaultValue="default">
             <caption>Type</caption>
-            <category>Display</category>
+            <category>Appearance</category>
             <description>Render the type of progress bar: default, striped or animated </description>
             <enumerationValues>
                 <enumerationValue key="default">Plain</enumerationValue>
@@ -73,14 +73,15 @@
         </property>
         <property key="bootstrapStyle" type="enumeration" defaultValue="default">
             <caption>Bar style</caption>
-            <category>Display</category>
-            <description>The color of the progress bar using bootstrap classes. Only used when 'Style attribute' is not set</description>
+            <category>Appearance</category>
+            <description>The color of the progress bar using as set in the theme. Only used when 'Style attribute' is not set</description>
             <enumerationValues>
                 <enumerationValue key="default">Default</enumerationValue>
                 <enumerationValue key="success">Success</enumerationValue>
                 <enumerationValue key="info">Info</enumerationValue>
                 <enumerationValue key="warning">Warning</enumerationValue>
                 <enumerationValue key="danger">Danger</enumerationValue>
+                <enumerationValue key="inverse">Inverse</enumerationValue>
             </enumerationValues>
         </property>
     </properties>
