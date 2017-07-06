@@ -9,7 +9,7 @@ Toggle a boolean attribute.
 * Display in various bootstrap styles
 
 ## Dependencies
-Mendix 7.1
+Mendix 7.3
 
 ## Demo project
 http://booleansliderwidge.mxapps.io
@@ -37,7 +37,7 @@ Create a folder named `dist` in the project root.
 
 Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Changes to the widget code shall be automatically pushed to this test project.
 
-[https://github.com/MendixLabs/boolean-slider/releases/download/v1.2.0/Test.mpk](https://github.com/MendixLabs/boolean-slider/releases/download/v1.2.0/Test.mpk)
+[https://github.com/MendixLabs/boolean-slider/releases/download/v1.2.1/TestSwitch.mpk](https://github.com/MendixLabs/boolean-slider/releases/download/v1.2.1/TestSwitch.mpk)
 
 To automatically compile, bundle and push code changes to the running test project, run:
 
