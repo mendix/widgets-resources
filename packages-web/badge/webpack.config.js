@@ -3,12 +3,16 @@ const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+const package = require("./package");
+const widgetName = package.widgetName;
+const name = package.widgetName.toLowerCase();
+
 const widgetConfig = {
-    entry: "./src/components/BadgeContainer.ts",
+    entry: `./src/components/${widgetName}Container.ts`,
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
-        filename: "src/com/mendix/widget/custom/badge/Badge.js",
-        libraryTarget: "umd"
+        filename: `src/com/mendix/widget/custom/${name}/${widgetName}.js`,
+        libraryTarget: "amd"
     },
     resolve: {
         extensions: [ ".ts", ".js" ],
@@ -29,16 +33,16 @@ const widgetConfig = {
     externals: [ "react", "react-dom" ],
     plugins: [
         new CopyWebpackPlugin([ { from: "src/**/*.xml" } ], { copyUnmodified: true }),
-        new ExtractTextPlugin({ filename: "./src/com/mendix/widget/custom/badge/ui/Badge.css" }),
+        new ExtractTextPlugin({ filename: `./src/com/mendix/widget/custom/${name}/ui/${widgetName}.css` }),
         new webpack.LoaderOptionsPlugin({ debug: true })
     ]
 };
 
 const previewConfig = {
-    entry: "./src/Badge.webmodeler.ts",
+    entry: `./src/${widgetName}.webmodeler.ts`,
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
-        filename: "src/Badge.webmodeler.js",
+        filename: `src/${widgetName}.webmodeler.js`,
         libraryTarget: "commonjs"
     },
     resolve: {
