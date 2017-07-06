@@ -1,0 +1,22 @@
+/* based on: https://raw.githubusercontent.com/mendix/atlas-framework/master/_variables.scss */
+//== Mendix UI Framework - Welcome to variables file
+//## The Basic step includes the customization that is also available in the Mendix Theme Creator (https://ux.mendix.com)
+
+//
+// ██████╗  █████╗ ███████╗██╗ ██████╗
+// ██╔══██╗██╔══██╗██╔════╝██║██╔════╝
+// ██████╔╝███████║███████╗██║██║     
+// ██╔══██╗██╔══██║╚════██║██║██║     
+// ██████╔╝██║  ██║███████║██║╚██████╗
+// ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝ ╚═════╝
+//
+
+
+//== Step 1: Brand Colors
+$brand-default:                         #DDDDDD;
+$brand-primary:                         #59C2E6;
+$brand-inverse:                         #000; 
+$brand-info:                            #8AD4ED;
+$brand-success:                         #8CC152;
+$brand-warning:                         #F6BB42;
+$brand-danger:                          #D9534F;
