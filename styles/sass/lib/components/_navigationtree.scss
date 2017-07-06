@@ -11,17 +11,14 @@
         margin: 0;
         padding-left: 0;
         li {
-            padding: 0;
             border-style: none;
             a {
                 font-size: $navsidebar-font-size;
                 font-weight: $font-weight-normal;
                 display: block;
                 padding: 15px;
-                vertical-align: middle;
                 color: $navsidebar-color;
                 border-bottom: 1px solid $navsidebar-border-color;
-                border-left: 4px solid transparent;
                 border-radius: 0;
                 background-color: $navsidebar-bg;
                 text-shadow: none;
