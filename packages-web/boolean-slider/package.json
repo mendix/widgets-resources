@@ -1,7 +1,7 @@
 {
   "name": "switch",
   "widgetName": "Switch",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Toggle a boolean attribute",
   "scripts": {
     "pretest": "tsc",
