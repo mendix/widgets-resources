@@ -49,7 +49,7 @@ $default-ios-color: rgb(100, 189, 99);
     .widget-switch-btn-wrapper {
         &.checked {
             &.widget-switch-btn-wrapper-default {
-                background-color: $default-android-color;
+                @include bootstrap-style-android($default-android-color);
                 .widget-switch-btn {
                     background: $default-android-color;
                 }
