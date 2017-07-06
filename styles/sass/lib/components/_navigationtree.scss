@@ -17,7 +17,7 @@
                 font-size: $navsidebar-font-size;
                 font-weight: $font-weight-normal;
                 display: block;
-                padding: 15px 20px 15px 16px;
+                padding: 15px;
                 vertical-align: middle;
                 color: $navsidebar-color;
                 border-bottom: 1px solid $navsidebar-border-color;
@@ -60,7 +60,7 @@
     }
     /* Sub navigation item specific */
     li.mx-navigationtree-has-items {
-        >ul {
+        > ul {
             margin: 0;
             padding-left: 0;
             background-color: $navsidebar-sub-bg;
@@ -98,7 +98,7 @@
 //== Design Properties
 //## Helper classes to change the look and feel of the component
 //-------------------------------------------------------------------------------------------------------------------//
-// Content Centerd text and icons 
+// Content Centerd text and icons
 .nav-content-center-text-icons.mx-navigationtree {
     .navbar-inner ul {
         a {
@@ -111,7 +111,7 @@
     }
 }
 
-// Content Centerd icons only 
+// Content Centerd icons only
 .nav-content-center.mx-navigationtree {
     .navbar-inner ul {
         a {

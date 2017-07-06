@@ -11,11 +11,11 @@
                         position: absolute;
                         left: 60px;
                         z-index: 100;
-                        margin-top: -60px;                        
+                        margin-top: -60px;
                     }
                 }
                 &.mx-navigationtree-collapsed,
-                &.mx-navigationtree-has-items  {
+                &.mx-navigationtree-has-items {
                     ul {
                         display: none;
                     }
@@ -45,6 +45,7 @@
                     span:first-child {
                         width: 40px;
                         height: 40px;
+                        margin-left: -5px;
                         margin-right: 10px;
                         padding: 10px;
                         border-radius: 3px;
@@ -62,7 +63,7 @@
         min-height: $topbar-minimalheight;
         border-bottom: 1px solid $navtopbar-border-color;
         background-color: $navtopbar-bg;
-        box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
         z-index: 1; // Show dropshadow
         position: relative;
         &:before {
@@ -74,7 +75,7 @@
             display: block;
             background-color: $brand-primary;
         }
-        
+
         .toggle-btn {
             display: none;
             @media (max-width: $screen-xs-max) {
@@ -83,7 +84,7 @@
                 display: inline-block;
             }
         }
-        
+
         // For your company, product, or project name
         .navbar-brand {
             display: inline-block;
@@ -101,8 +102,7 @@
                     background-position: left center;
                     background-repeat: no-repeat;
                     padding: $brand-logo-width / 2;
-                }
-                @else {
+                } @else {
                     height: $brand-logo-height;
                     width: auto;
                 }
