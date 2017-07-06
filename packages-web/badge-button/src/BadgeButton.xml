@@ -8,6 +8,10 @@
             <caption>Caption</caption>
             <category>Button</category>
             <description>The caption of the button</description>
+            <translations>
+                <translation lang="en_US">Button</translation>
+                <translation lang="nl_NL">Button</translation>
+            </translations>
         </property>
         <property key="bootstrapStyle" type="enumeration" defaultValue="default">
             <caption>Button style</caption>
@@ -38,6 +42,10 @@
             <caption>Default value</caption>
             <category>Badge</category>
             <description>The badge value shown when no value is provided via the attribute</description>
+            <translations>
+                <translation lang="en_US">Badge</translation>
+                <translation lang="nl_NL">Badge</translation>
+            </translations>
         </property>
         <property key="onClickEvent" type="enumeration" defaultValue="doNothing">
             <caption>On click</caption>

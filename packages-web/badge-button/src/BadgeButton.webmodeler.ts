@@ -6,14 +6,12 @@ import BadgeButtonContainer, { BadgeButtonContainerProps } from "./components/Ba
 
 declare function require(name: string): string;
 
+type VisibilityMap = {
+    [P in keyof BadgeButtonContainerProps]: boolean;
+};
+
 // tslint:disable-next-line:class-name
 export class preview extends Component<BadgeButtonContainerProps, {}> {
-
-    componentWillMount() {
-        const css = require("./ui/BadgeButton.css");
-        this.addPreviewStyle(css, "widget-badge");
-    }
-
     render() {
         const message = BadgeButtonContainer.validateProps(this.props);
 
@@ -36,21 +34,22 @@ export class preview extends Component<BadgeButtonContainerProps, {}> {
             className: props.class,
             label: props.label,
             style: BadgeButtonContainer.parseStyle(props.style),
-            value: valueAttributeArray ? "[" + valueAttributeArray + "]" : props.badgeButtonValue || " "
+            value: valueAttributeArray ? "[" + valueAttributeArray + "]" : props.badgeButtonValue
         };
     }
+}
 
-    private addPreviewStyle(css: string, styleId: string) {
-        // This workaround is to load style in the preview temporary till mendix has a better solution
-        const iFrame = document.getElementsByClassName("t-page-editor-iframe")[0] as HTMLIFrameElement;
-        const iFrameDoc = iFrame.contentDocument;
-        if (!iFrameDoc.getElementById(styleId)) {
-            const styleTarget = iFrameDoc.head || iFrameDoc.getElementsByTagName("head")[0];
-            const styleElement = document.createElement("style");
-            styleElement.setAttribute("type", "text/css");
-            styleElement.setAttribute("id", styleId);
-            styleElement.appendChild(document.createTextNode(css));
-            styleTarget.appendChild(styleElement);
-        }
+export function getPreviewCss() {
+    return require("./ui/BadgeButton.css");
+}
+
+export function getVisibleProperties(props: BadgeButtonContainerProps, visibilityMap: VisibilityMap) {
+    if (props.onClickEvent === "doNothing") {
+        visibilityMap.microflow = false;
+        visibilityMap.page = false;
+    } else if (props.onClickEvent === "callMicroflow") {
+        visibilityMap.page = false;
+    } else if (props.onClickEvent === "showPage") {
+        visibilityMap.microflow = false;
     }
 }
