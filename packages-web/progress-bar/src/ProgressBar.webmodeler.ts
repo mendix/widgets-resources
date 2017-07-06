@@ -25,6 +25,7 @@ export class preview extends Component<ProgressBarContainerProps, {}> {
             barType: props.barType,
             bootstrapStyle: props.bootstrapStyle,
             className: props.class,
+            colorSwitch: props.textColorSwitch,
             maximumValue: 100,
             progress: 80,
             style: ProgressBarContainer.parseStyle(props.style)

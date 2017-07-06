@@ -7,7 +7,7 @@ import "../ui/ProgressBar.scss";
 interface ProgressBarProps {
     alertMessage?: string;
     barType?: BarType;
-    bootstrapStyle?: BootstrapStyle;
+    bootstrapStyle?: BarStyle;
     className?: string;
     colorSwitch?: number;
     maximumValue: number;
@@ -16,7 +16,7 @@ interface ProgressBarProps {
     style?: object;
 }
 
-type BootstrapStyle = "default" | "info" | "primary" | "success" | "warning" | "danger";
+type BarStyle = "default" | "info" | "primary" | "success" | "warning" | "danger" | "inverse";
 type BarType = "default" | "striped" | "animated";
 
 class ProgressBar extends Component<ProgressBarProps, {}> {
@@ -79,4 +79,4 @@ class ProgressBar extends Component<ProgressBarProps, {}> {
     }
 }
 
-export { BarType, BootstrapStyle, ProgressBar, ProgressBarProps };
+export { BarType, BarStyle, ProgressBar, ProgressBarProps };
