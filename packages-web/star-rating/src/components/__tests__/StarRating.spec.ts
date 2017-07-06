@@ -26,9 +26,9 @@ describe("StarRating", () => {
         expect(starRating).toBeElement(
             DOM.div({ className: "widget-star-rating" },
                 createElement(Rating, {
-                    empty: "glyphicon glyphicon-star-empty widget-star-rating-empty",
+                    empty: "glyphicon glyphicon-star-empty widget-star-rating-empty widget-star-rating-font",
                     fractions: 1,
-                    full: "glyphicon glyphicon-star widget-star-rating-full",
+                    full: "glyphicon glyphicon-star widget-star-rating-font widget-star-rating-full-widget",
                     initialRate: 2,
                     onChange: jasmine.any(Function) as any,
                     readonly: starProps.readOnly,
