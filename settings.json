@@ -1,0 +1,436 @@
+﻿{
+    "designProperties": {
+        "Widget": [
+            {
+                "name": "Spacing top",
+                "type": "Toggle",
+                "description": "",
+                "class": "spacing-outer-top"
+            },
+
+            {
+                "name": "Spacing bottom",
+                "type": "Toggle",
+                "description": "",
+                "class": "spacing-outer-bottom"
+            },
+
+            {
+                "name": "Spacing bottom large",
+                "type": "Toggle",
+                "description": "",
+                "class": "spacing-outer-bottom-responsive"
+            },
+            {
+                "name": "Spacing left",
+                "type": "Toggle",
+                "description": "",
+                "class": "spacing-outer-left"
+            },
+            {
+                "name": "Spacing right",
+                "type": "Toggle",
+                "description": "",
+                "class": "spacing-outer-right"
+            },
+            {
+                "name": "Position",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Left",
+                        "class": "pull-left"
+                    },
+                    {
+                        "name": "Right",
+                        "class": "pull-right"
+                    }
+                ]
+            }
+        ],
+        "DivContainer": [
+            {
+                "name": "Align content",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Left",
+                        "class": "align-content-left"
+                    },
+                    {
+                        "name": "Center",
+                        "class": "align-content-center"
+                    },
+                    {
+                        "name": "Right",
+                        "class": "align-content-right"
+                    }
+                ]
+            }
+        ],
+        "Button": [
+            {
+                "name": "Size",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Small",
+                        "class": "btn-sm"
+                    },
+                    {
+                        "name": "Large",
+                        "class": "btn-lg"
+                    }
+                ]
+            },
+            {
+                "name": "Full width",
+                "type": "Toggle",
+                "description": "",
+                "class": "btn-block"
+            },
+            {
+                "name": "Bordered",
+                "type": "Toggle",
+                "description": "",
+                "class": "btn-bordered"
+            }
+        ],
+        "ListView": [
+            {
+                "name": "Style",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Striped",
+                        "class": "listview-striped"
+                    },
+                    {
+                        "name": "Bordered",
+                        "class": "listview-bordered"
+                    },
+                    {
+                        "name": "Lined",
+                        "class": "listview-lined"
+                    },
+                    {
+                        "name": "No Styling",
+                        "class": "listview-stylingless"
+                    }
+                ]
+            },
+            {
+                "name": "Hover style",
+                "type": "Toggle",
+                "description": "",
+                "class": "listview-hover"
+            },
+            {
+                "name": "Row Size",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Small",
+                        "class": "listview-sm"
+                    },
+                    {
+                        "name": "Large",
+                        "class": "listview-lg"
+                    }
+                ]
+            }
+        ],
+        "DataGrid": [
+            {
+                "name": "Style",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Striped",
+                        "class": "datagrid-striped"
+                    },
+                    {
+                        "name": "Bordered",
+                        "class": "datagrid-bordered"
+                    },
+                    {
+                        "name": "Lined",
+                        "class": "datagrid-lined"
+                    }
+                ]
+            },
+            {
+                "name": "Hover style",
+                "type": "Toggle",
+                "description": "",
+                "class": "datagrid-hover"
+            },
+            {
+                "name": "Row size",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Small",
+                        "class": "datagrid-sm"
+                    },
+                    {
+                        "name": "Large",
+                        "class": "datagrid-lg"
+                    }
+                ]
+            }
+        ],
+        "TemplateGrid": [
+            {
+                "name": "Style",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Striped",
+                        "class": "templategrid-striped"
+                    },
+                    {
+                        "name": "Bordered",
+                        "class": "templategrid-bordered"
+                    },
+                    {
+                        "name": "Lined",
+                        "class": "templategrid-lined"
+                    },
+                    {
+                        "name": "No styling",
+                        "class": "templategrid-stylingless"
+                    }
+                ]
+            },
+            {
+                "name": "Hover style",
+                "type": "Toggle",
+                "description": "",
+                "class": "templategrid-hover"
+            }
+        ],
+        "GroupBox": [
+            {
+                "name": "Style",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Default",
+                        "class": "groupbox-default"
+                    },
+                    {
+                        "name": "Primary",
+                        "class": "groupbox-primary"
+                    },
+                    {
+                        "name": "Inverse",
+                        "class": "groupbox-inverse"
+                    },
+                    {
+                        "name": "Success",
+                        "class": "groupbox-success"
+                    },
+                    {
+                        "name": "Warning",
+                        "class": "groupbox-warning"
+                    },
+                    {
+                        "name": "Danger",
+                        "class": "groupbox-danger"
+                    },
+                    {
+                        "name": "Transparent",
+                        "class": "groupbox-transparent"
+                    }
+                ]
+            },
+            {
+                "name": "Callout style",
+                "type": "Toggle",
+                "description": "",
+                "class": "groupbox-callout"
+            }
+        ],
+        "Image": [
+            {
+                "name": "Style",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Rounded",
+                        "class": "img-rounded"
+                    },
+                    {
+                        "name": "Thumbnail",
+                        "class": "img-thumbnail"
+                    },
+                    {
+                        "name": "Circle",
+                        "class": "img-circle"
+                    }
+                ]
+            }
+        ],
+        "Label": [
+            {
+                "name": "Style",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Default",
+                        "class": "label-default"
+                    },
+                    {
+                        "name": "Primary",
+                        "class": "label-primary"
+                    },
+                    {
+                        "name": "Inverse",
+                        "class": "label-inverse"
+                    },
+                    {
+                        "name": "Success",
+                        "class": "label-success"
+                    },
+                    {
+                        "name": "Warning",
+                        "class": "label-warning"
+                    },
+                    {
+                        "name": "Danger",
+                        "class": "label-danger"
+                    }
+                ]
+            }
+        ],
+        "DynamicText": [
+            {
+                "name": "Weight",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Light",
+                        "class": "text-light"
+                    },
+                    {
+                        "name": "Normal",
+                        "class": "text-normal"
+                    },
+                    {
+                        "name": "Semibold",
+                        "class": "text-semibold"
+                    },
+                    {
+                        "name": "Bold",
+                        "class": "text-bold"
+                    }
+                ]
+            },
+            {
+                "name": "Color",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Header color",
+                        "class": "text-header"
+                    },
+                    {
+                        "name": "Detail color",
+                        "class": "text-detail"
+                    },
+                    {
+                        "name": "Default",
+                        "class": "text-default"
+                    },
+                    {
+                        "name": "Primary",
+                        "class": "text-primary"
+                    },
+                    {
+                        "name": "Inverse",
+                        "class": "text-inverse"
+                    },
+                    {
+                        "name": "Success",
+                        "class": "text-success"
+                    },
+                    {
+                        "name": "Warning",
+                        "class": "text-warning"
+                    },
+                    {
+                        "name": "Danger",
+                        "class": "text-danger"
+                    }
+                ]
+            },
+            {
+                "name": "Alignment",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Left",
+                        "class": "text-left d-block"
+                    },
+                    {
+                        "name": "Center",
+                        "class": "text-center d-block"
+                    },
+                    {
+                        "name": "Right",
+                        "class": "text-right d-block"
+                    }
+                ]
+            },
+            {
+                "name": "Transform",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Lowercase",
+                        "class": "text-lowercase"
+                    },
+                    {
+                        "name": "Uppercase",
+                        "class": "text-uppercase"
+                    },
+                    {
+                        "name": "Capatalize",
+                        "class": "text-capatalize"
+                    }
+                ]
+            },
+            {
+                "name": "Wrap options",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Wrap",
+                        "class": "text-break"
+                    },
+                    {
+                        "name": "No Wrap",
+                        "class": "text-nowrap"
+                    }
+                ]
+            }
+        ]
+    }
+}

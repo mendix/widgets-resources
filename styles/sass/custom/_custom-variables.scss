@@ -1,0 +1,63 @@
+//== Gray Shades
+//## Different gray shades to be used for our variables and components
+$gray-darker: #222;
+$gray-dark: #333;
+$gray: #555;
+$gray-light: #888;
+$gray-primary: #d7d7d7;
+$gray-lighter: #eee;
+
+//== Step 1: Brand Colors
+$brand-default: #dddddd;
+$brand-primary: #0595db;
+$brand-inverse: #252c36;
+$brand-info: #48b0f7;
+$brand-success: #76ca02;
+$brand-warning: #f99b1d;
+$brand-danger: #ed1c24;
+
+// == Usages
+$border-color-default: $gray-primary;
+$font-size-default: 14px;
+$font-color-default: #555;
+$font-color-header: #17347b;
+
+//== Step 3: Typography
+$font-family-import: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700";
+$font-family-base: 'Open Sans', sans-serif;
+$font-base-size: $font-size-default;
+
+$font-base-color: $font-color-default;
+
+$link-color: $brand-primary;
+
+$font-size-h1: 31px;
+$font-size-h2: 26px;
+$font-size-h3: 24px;
+$font-size-h4: 18px;
+
+$font-color-headers: $font-color-header;
+
+//== Step 2: UI Customization
+
+// Topbar
+$topbar-bg: #fff;
+$navtopbar-border-color: $border-color-default;
+$topbar-border-color: $navtopbar-border-color;
+$topbar-minimalheight: 60px;
+$navtopbar-color: $font-base-color;
+
+$navbar-brand-name: $font-color-default;
+
+$brand-logo: '../../../logo.png';
+$brand-logo-height: 30px;
+$brand-logo-width: 30px;
+
+// Sidebar
+$sidebar-bg: $brand-inverse;
+$navsidebar-color: #fff;
+$navsidebar-color-hover: $navsidebar-color;
+
+// Backgrounds
+$bg-color: #fff;
+$bg-color-secondary: #f5f8fd;
