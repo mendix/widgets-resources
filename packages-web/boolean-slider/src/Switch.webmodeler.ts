@@ -17,9 +17,9 @@ export class preview extends Component<SwitchContainerProps, {}> {
                 style: SwitchContainer.parseStyle(this.props.style),
                 weight: this.props.labelWidth > maxLabelWidth ? maxLabelWidth : this.props.labelWidth
             }, this.renderSwitch(true));
+        } else {
+            return this.renderSwitch();
         }
-
-        return this.renderSwitch();
     }
 
     private renderSwitch(hasLabel = false) {
