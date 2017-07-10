@@ -46,7 +46,7 @@
         </property>
         <property key="onChangeMicroflow" type="microflow" required="false">
             <caption>On change microflow</caption>
-            <category>Behavior</category>
+            <category>Events</category>
             <description>Called when the slider is clicked or changed</description>
             <returnType type="Void"/>
         </property>
