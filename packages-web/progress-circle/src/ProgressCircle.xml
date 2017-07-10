@@ -6,7 +6,7 @@
     <properties>
         <property key="textSize" type="enumeration" defaultValue="h2">
             <caption>Text style</caption>
-            <category>Display</category>
+            <category>Appearance</category>
             <description>Size of the progress text</description>
             <enumerationValues>
                 <enumerationValue key="text">Text</enumerationValue>
@@ -20,12 +20,12 @@
         </property>
         <property key="animate" type="boolean" defaultValue="true">
             <caption>Animate</caption>
-            <category>Display</category>
+            <category>Appearance</category>
             <description>Animates when the progress circle is loaded and updated</description>
         </property>
         <property key="positiveValueColor" type="enumeration" defaultValue="primary">
             <caption>Positive style</caption>
-            <category>Display</category>
+            <category>Appearance</category>
             <description>Color of the circle with a positive progress value</description>
             <enumerationValues>
                 <enumerationValue key="primary">Primary</enumerationValue>
@@ -38,7 +38,7 @@
         </property>
         <property key="negativeValueColor" type="enumeration" defaultValue="danger">
             <caption>Negative style</caption>
-            <category>Display</category>
+            <category>Appearance</category>
             <description>Color of the circle with a negative progress value</description>
             <enumerationValues>
                 <enumerationValue key="primary">Primary</enumerationValue>
@@ -51,7 +51,7 @@
         </property>
         <property key="circleThickness" type="integer" defaultValue="6">
             <caption>Circle thickness</caption>
-            <category>Display</category>
+            <category>Appearance</category>
             <description>Thickness of the progress circle (thinkness is limited to 30)</description>
         </property>
         <property key="progressAttribute" type="attribute">

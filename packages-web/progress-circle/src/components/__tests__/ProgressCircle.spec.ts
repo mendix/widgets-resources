@@ -28,8 +28,8 @@ describe("ProgressCircle", () => {
 
         expect(progress).toBeElement(
             DOM.div({ className: "widget-progress-circle" },
-                DOM.div({ className: "h2" }),
-                createElement(Alert)
+                createElement(Alert),
+                DOM.div({ className: "h2" })
             )
         );
     });
