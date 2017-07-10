@@ -14,7 +14,7 @@ Mendix 7.1
 Place the widget in the context of an object that has attributes for value and maximum value
 
 ## Demo project
-http://progresscircle.mxapps.io
+https://progresscircle.mxapps.io
 
 ## Issues, suggestions and feature requests
 We are actively maintaining this widget, please report any issues or suggestion for improvement at https://github.com/mendixlabs/progress-circle/issues
@@ -35,7 +35,7 @@ To set up the development environment, run:
 Create a folder named `dist` in the project root.
 
 
-Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Or get the test project from https://github.com/mendixlabs/progress-circle/releases/download/1.2.1/TestProgressCircle.mpk Changes to the widget code shall be automatically pushed to this test project.
+Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Or get the test project from https://github.com/mendixlabs/progress-circle/releases/download/v1.2.2/TestProgressCircle.mpk Changes to the widget code shall be automatically pushed to this test project.
 
 To automatically compile, bundle and push code changes to the running test project, run:
 

@@ -30,9 +30,9 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
         maximumValue: 100,
         textSize: "h2"
     };
-    private progressNode: HTMLElement;
+    private progressNode: HTMLElement|null;
     private progressCircle: Circle;
-    private setProgressNode: (node: HTMLElement) => void;
+    private setProgressNode: (node: HTMLElement|null) => void;
     private progressCircleColorClass: string;
 
     constructor(props: ProgressCircleProps) {
@@ -56,27 +56,32 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
             this.createProgressCircle(newProps.circleThickness);
         }
         this.setProgress(newProps.value, newProps.maximumValue);
-        this.setCircleColor(newProps.negativeValueColor, newProps.positiveValueColor, newProps.value);
     }
 
     render() {
-        const { maximumValue, textSize } = this.props;
-        return DOM.div({
-            className: classNames("widget-progress-circle", this.props.className), style: this.props.style
-        },
+        const { maximumValue, textSize, negativeValueColor, positiveValueColor, value } = this.props;
+        const textClass = textSize === "text" ? "mx-text" : textSize;
+        const validMax = typeof maximumValue === "number" ? maximumValue > 0 : false;
+        return DOM.div(
+            {
+                className: classNames("widget-progress-circle", this.props.className),
+                style: this.props.style
+            },
+            createElement(Alert, { message: this.state.alertMessage }),
             DOM.div({
                 className: classNames(
-                    `${textSize === "text" ? "mx-text" : textSize}`,
+                    textClass,
                     this.progressCircleColorClass,
                     {
-                        "widget-progress-circle-alert": typeof maximumValue === "number" ? maximumValue < 1 : false,
+                        [`widget-progress-circle-${negativeValueColor}`]: value ? value < 0 : false,
+                        [`widget-progress-circle-${positiveValueColor}`]: value ? value > 0 : false,
+                        "widget-progress-circle-alert": !validMax,
                         "widget-progress-circle-clickable": this.props.clickable
                     }
                 ),
                 onClick: this.props.onClickAction,
                 ref: this.setProgressNode
-            }),
-            createElement(Alert, { message: this.state.alertMessage })
+            })
         );
     }
 
@@ -93,13 +98,6 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
         });
         this.progressCircle.path.className.baseVal = "widget-progress-circle-path";
         this.progressCircle.trail.className.baseVal = "widget-progress-circle-trail-path";
-        this.setCircleColor(this.props.negativeValueColor, this.props.positiveValueColor, this.props.value);
-    }
-
-    private setCircleColor(negativeValueColor?: BootstrapStyle, positiveValueColor?: BootstrapStyle, value?: number) {
-        this.progressCircleColorClass = `widget-progress-circle-${
-            (value && value < 0) ? negativeValueColor : positiveValueColor
-        }`;
     }
 
     private setProgress(value: number | undefined, maximum = 100) {

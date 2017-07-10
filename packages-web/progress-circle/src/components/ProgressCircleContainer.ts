@@ -6,6 +6,7 @@ interface WrapperProps {
     class: string;
     mxObject?: mendix.lib.MxObject;
     style: string;
+    mxform: mxui.lib.form._FormBase;
 }
 
 export interface ContainerProps extends WrapperProps {
@@ -122,7 +123,7 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
     }
 
     private resetSubscription(mxObject?: mendix.lib.MxObject) {
-        this.subscriptionHandles.forEach((handle) => window.mx.data.unsubscribe(handle));
+        this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
 
         if (mxObject) {
             this.subscriptionHandles.push(window.mx.data.subscribe({
@@ -138,31 +139,26 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
                 }));
             });
         }
-
     }
 
     private handleOnClick() {
-        const { mxObject, microflow, onClickEvent, page } = this.props;
-        if (mxObject && onClickEvent === "callMicroflow" && microflow && mxObject.getGuid()) {
-            window.mx.ui.action(microflow, {
-                error: error => window.mx.ui.error(
-                    `Error while executing microflow ${microflow}: ${error.message}`
-                ),
-                params: {
-                    applyto: "selection",
-                    guids: [ mxObject.getGuid() ]
-                }
-            });
-        } else if (mxObject && onClickEvent === "showPage" && page && mxObject.getGuid()) {
+        const { mxObject, microflow, onClickEvent, page, mxform } = this.props;
+        if (mxObject && mxObject.getGuid()) {
             const context = new window.mendix.lib.MxContext();
             context.setContext(mxObject.getEntity(), mxObject.getGuid());
-
-            window.mx.ui.openForm(page, {
-                error: error => window.mx.ui.error(
-                    `Error while opening page ${page}: ${error.message}`
-                ),
-                context
-            });
+            if (onClickEvent === "callMicroflow" && microflow) {
+                window.mx.ui.action(microflow, {
+                    context,
+                    error: error =>
+                        window.mx.ui.error(`Error while executing microflow ${microflow}: ${error.message}`),
+                    origin: mxform
+                });
+            } else if (onClickEvent === "showPage" && page) {
+                window.mx.ui.openForm(page, {
+                    error: error => window.mx.ui.error(`Error while opening page ${page}: ${error.message}`),
+                    context
+                });
+            }
         }
     }
 }

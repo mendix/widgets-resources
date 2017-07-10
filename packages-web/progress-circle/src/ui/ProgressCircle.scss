@@ -1,4 +1,4 @@
-@import "./variables";
+@import "variables";
 
 .widget-progress-circle {
     width: 100%;
@@ -14,10 +14,6 @@
     stroke: #eee;
 }
 
-.widget-progress-circle-path {
-    stroke: $brand-primary;
-}
-
 .widget-progress-circle-alert {
     .progressbar-text {
         color: red !important; /* The Progress library has inline styling on the circle text */
@@ -28,38 +24,4 @@
     cursor: pointer;
 }
 
-.widget-progress-circle-primary {
-    .widget-progress-circle-path {
-        stroke: $brand-primary;
-    }
-}
-
-.widget-progress-circle-info {
-    .widget-progress-circle-path {
-        stroke: $brand-info;
-    }
-}
-
-.widget-progress-circle-success {
-    .widget-progress-circle-path {
-        stroke: $brand-success;
-    }
-}
-
-.widget-progress-circle-warning {
-    .widget-progress-circle-path {
-        stroke: $brand-warning;
-    }
-}
-
-.widget-progress-circle-danger {
-    .widget-progress-circle-path {
-        stroke: $brand-danger;
-    }
-}
-
-.widget-progress-circle-inverse {
-    .widget-progress-circle-path {
-        stroke: $brand-inverse;
-    }
-}
+@import "progress-circle-theme";
