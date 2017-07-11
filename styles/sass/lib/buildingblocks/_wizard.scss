@@ -2,7 +2,6 @@
     $wizard-step-number-size: 60px;
     display: flex;
     justify-content: space-between;
-    @include default-spacing($type: margin, $direction: bottom, $device: responsive);
     table.mx-table > tbody > tr > td {
         padding: 0;
     }
@@ -26,7 +25,7 @@
         width: $wizard-step-number-size;
         height: $wizard-step-number-size;
         font-size: 20px;
-        background-color: #FFF;
+        background-color: #fff;
         border-color: $border-color-default;
     }
     .wizard-step-text {
@@ -38,7 +37,7 @@
         .wizard-step-number {
             background-color: $brand-primary;
             border-color: $brand-primary;
-            color: #FFF;
+            color: #fff;
         }
         .wizard-step-text {
             color: $brand-primary;
@@ -48,18 +47,17 @@
         .wizard-step-number {
             background-color: $brand-success;
             border-color: $brand-success;
-            color: #FFF;
+            color: #fff;
         }
         .wizard-step-text {
         }
     }
 }
 
-.wizard-progress {
+.wizard--progress {
     $wizard-step-height: 50px;
     display: flex;
     justify-content: space-between;
-    @include default-spacing($type: margin, $direction: bottom, $device: responsive);
     table.mx-table > tbody > tr > td {
         padding: 0;
     }
@@ -74,7 +72,7 @@
         border: 1px solid $border-color-default;
         margin-left: 0 - ($wizard-step-height / 2);
         padding-left: ($wizard-step-height / 2);
-        background: #FFF;
+        background: #fff;
 
         a {
             height: 100%;
@@ -87,7 +85,8 @@
             color: $font-color-default;
             text-decoration: none;
         }
-        &:before, &:after {
+        &:before,
+        &:after {
             content: " ";
             position: absolute;
             border-style: solid;
@@ -115,7 +114,8 @@
 
         &:last-child {
             border-radius: 0 5px 5px 0;
-            &:before, &:after {
+            &:before,
+            &:after {
                 display: none;
             }
         }
@@ -123,7 +123,7 @@
     // States
     .wizard-step--active {
         a {
-            color: #FFF;
+            color: #fff;
             text-decoration: none;
         }
         background: $brand-primary;

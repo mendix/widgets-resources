@@ -1,6 +1,4 @@
 @mixin default-spacing ($type: padding, $direction: all, $device: responsive, $is_important: false) {
-    @include transition();
-
     $suffix: '';
     @if $is_important != false {
         $suffix: ' !important';
@@ -16,8 +14,7 @@
             @media (min-width: $screen-md) {
                 #{$type}: #{$default-spacing}#{$suffix};
             }
-        }
-        @else if $direction==top {
+        } @else if $direction==top {
             @media (max-width: $screen-xs-max) {
                 #{$type}-top: #{$m-default-spacing-bottom}#{$suffix};
             }
@@ -27,8 +24,7 @@
             @media (min-width: $screen-md) {
                 #{$type}-top: #{$default-spacing-top}#{$suffix};
             }
-        }
-        @else if $direction==right {
+        } @else if $direction==right {
             @media (max-width: $screen-xs-max) {
                 #{$type}-right: #{$m-default-spacing-right}#{$suffix};
             }
@@ -38,8 +34,7 @@
             @media (min-width: $screen-md) {
                 #{$type}-right: #{$default-spacing-right}#{$suffix};
             }
-        }
-        @else if $direction==bottom {
+        } @else if $direction==bottom {
             @media (max-width: $screen-xs-max) {
                 #{$type}-bottom: #{$m-default-spacing-bottom}#{$suffix};
             }
@@ -49,8 +44,7 @@
             @media (min-width: $screen-md) {
                 #{$type}-bottom: #{$default-spacing-bottom}#{$suffix};
             }
-        }
-        @else if $direction==left {
+        } @else if $direction==left {
             @media (max-width: $screen-xs-max) {
                 #{$type}-left: #{$m-default-spacing-left}#{$suffix};
             }
@@ -61,38 +55,28 @@
                 #{$type}-left: #{$default-spacing-left}#{$suffix};
             }
         }
-    }
-    @else if $device==tablet {
+    } @else if $device==tablet {
         @if $direction==all {
             #{$type}: #{$t-default-spacing}#{$suffix};
-        }
-        @else if $direction==top {
+        } @else if $direction==top {
             #{$type}-top: #{$t-default-spacing-bottom}#{$suffix};
-        }
-        @else if $direction==right {
+        } @else if $direction==right {
             #{$type}-right: #{$t-default-spacing-right}#{$suffix};
-        }
-        @else if $direction==bottom {
+        } @else if $direction==bottom {
             #{$type}-bottom: #{$t-default-spacing-bottom}#{$suffix};
-        }
-        @else if $direction==left {
+        } @else if $direction==left {
             #{$type}-left: #{$t-default-spacing-left}#{$suffix};
         }
-    }
-    @else if $device==mobile {
+    } @else if $device==mobile {
         @if $direction==all {
             #{$type}: #{$m-default-spacing}#{$suffix};
-        }
-        @else if $direction==top {
+        } @else if $direction==top {
             #{$type}-top: #{$m-default-spacing-bottom}#{$suffix};
-        }
-        @else if $direction==right {
+        } @else if $direction==right {
             #{$type}-right: #{$m-default-spacing-right}#{$suffix};
-        }
-        @else if $direction==bottom {
+        } @else if $direction==bottom {
             #{$type}-bottom: #{$m-default-spacing-bottom}#{$suffix};
-        }
-        @else if $direction==left {
+        } @else if $direction==left {
             #{$type}-left: #{$m-default-spacing-left}#{$suffix};
         }
     }
