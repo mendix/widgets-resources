@@ -24,8 +24,8 @@
         }
     }
     /* Dataview-content gives problems for nexted layout grid containers */
-    >.mx-dataview-content>.mx-container-nested {
-        >.row {
+    > .mx-dataview-content > .mx-container-nested {
+        > .row {
             margin-right: 0;
             margin-left: 0;
         }

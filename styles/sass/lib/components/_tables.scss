@@ -18,26 +18,28 @@ html body .mx-page table.mx-table {
 }
 
 table.mx-table {
-    >tbody {
+    > tbody {
         /* Table row */
-        >tr {
+        > tr {
             /* Table header */
-            >th {
-                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
+            > th {
+                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom
+                    $padding-table-cell-left;
                 * {
                     font-weight: $font-weight-bold;
                     color: $form-label-color;
                     font-weight: $form-label-weight;
                 }
-                >label {
+                > label {
                     padding-top: 7px;
                     padding-bottom: 6px; // Aligns label in the middle if there is no input field next to it.
                 }
             }
             /* Table cells */
-            >td {
-                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
-                >div>label,
+            > td {
+                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom
+                    $padding-table-cell-left;
+                > div > label,
                 .mx-referenceselector-input-wrapper label {
                     padding-top: 7px;
                     padding-bottom: 6px; // Aligns label in the middle if there is no input field next to it.
@@ -49,23 +51,25 @@ table.mx-table {
 
 // Default Mendix Table Widget inside TemplateGrid
 .mx-templategrid table.mx-table {
-    >tbody {
-        >tr {
-            >th,
-            >td {
-                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
+    > tbody {
+        > tr {
+            > th,
+            > td {
+                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom
+                    $padding-table-cell-left;
             }
         }
     }
 }
 
-// Default Mendix Table Widget inside Listview 
+// Default Mendix Table Widget inside Listview
 .mx-list table.mx-table {
-    >tbody {
-        >tr {
-            >th,
-            >td {
-                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
+    > tbody {
+        > tr {
+            > th,
+            > td {
+                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom
+                    $padding-table-cell-left;
             }
         }
     }
@@ -76,13 +80,12 @@ table.mx-table {
 //-------------------------------------------------------------------------------------------------------------------//
 // Lined
 table.table-lined.mx-table {
-    >tbody {
+    > tbody {
         // Table row
-        >tr {
+        > tr {
             // Table header
             // Table data
-            >th,
-            >td {
+            > td {
                 border-width: 1px 0;
                 border-style: solid;
                 border-color: $grid-border-color;
@@ -93,13 +96,13 @@ table.table-lined.mx-table {
 
 // Bordered
 table.table-bordered.mx-table {
-    >tbody {
+    > tbody {
         // Table row
-        >tr {
+        > tr {
             // Table header
             // Table data
-            >th,
-            >td {
+            > th,
+            > td {
                 border-width: 1px;
                 border-style: solid;
                 border-color: $grid-border-color;
@@ -110,13 +113,13 @@ table.table-bordered.mx-table {
 
 // Makes table compact
 table.table-compact.mx-table {
-    >tbody {
+    > tbody {
         // Table row
-        >tr {
+        > tr {
             // Table header
             // Table data
-            >th,
-            >td {
+            > th,
+            > td {
                 padding-top: 2px;
                 padding-bottom: 2px;
             }
@@ -126,17 +129,17 @@ table.table-compact.mx-table {
 
 // Remove padding on sides
 table.table-sideless.mx-table {
-    >tbody {
+    > tbody {
         // Table row
-        >tr {
+        > tr {
             // Table header
             // Table data
-            >td,
-            >th {
+            > td,
+            > th {
                 padding-right: 0;
             }
-            >th:first-child,
-            >td:first-child {
+            > th:first-child,
+            > td:first-child {
                 padding-left: 0;
             }
         }
@@ -145,13 +148,13 @@ table.table-sideless.mx-table {
 
 // Remove all padding
 table.table-spaceless.mx-table {
-    >tbody {
+    > tbody {
         // Table row
-        >tr {
+        > tr {
             // Table header
             // Table data
-            >th,
-            >td {
+            > th,
+            > td {
                 padding: 0;
             }
         }
@@ -161,16 +164,16 @@ table.table-spaceless.mx-table {
 // Tables Vertical
 // Will remove unwanted paddings
 table.table-vertical.mx-table {
-    >tbody {
+    > tbody {
         // Table row
-        >tr {
+        > tr {
             // Table header
-            >th {
+            > th {
                 padding-bottom: 0;
-                >label {
+                > label {
                     padding: 0;
                 }
-                >div>label {
+                > div > label {
                     padding: 0;
                 }
             }
@@ -180,13 +183,13 @@ table.table-vertical.mx-table {
 
 // Align content in middle
 table.table-align-vertical-middle.mx-table {
-    >tbody {
+    > tbody {
         // Table row
-        >tr {
+        > tr {
             // Table header
             // Table data
-            >th,
-            >td {
+            > th,
+            > td {
                 vertical-align: middle;
             }
         }
@@ -195,18 +198,18 @@ table.table-align-vertical-middle.mx-table {
 
 // Compact labels
 table.table-label-compact.mx-table {
-    >tbody {
+    > tbody {
         // Table row
-        >tr {
+        > tr {
             // Table header
             // Table data
-            >th,
-            >td {
-                >label {
+            > th,
+            > td {
+                > label {
                     padding: 0;
                     margin: 0;
                 }
-                >div>label,
+                > div > label,
                 .mx-referenceselector-input-wrapper label {
                     padding: 0;
                     margin: 0;
@@ -221,13 +224,13 @@ $height-row-m: 70px;
 $height-row-l: 120px;
 // Small rows
 table.table-row-s.mx-table {
-    >tbody {
+    > tbody {
         // Table row
-        >tr {
+        > tr {
             // Table header
             // Table data
-            >th,
-            >td {
+            > th,
+            > td {
                 height: $height-row-s;
             }
         }
@@ -236,13 +239,13 @@ table.table-row-s.mx-table {
 
 // Medium rows
 table.table-row-m.mx-table {
-    >tbody {
+    > tbody {
         // Table row
-        >tr {
+        > tr {
             // Table header
             // Table data
-            >th,
-            >td {
+            > th,
+            > td {
                 height: $height-row-m;
             }
         }
@@ -251,13 +254,13 @@ table.table-row-m.mx-table {
 
 // Large rows
 table.table-row-l.mx-table {
-    >tbody {
+    > tbody {
         // Table row
-        >tr {
+        > tr {
             // Table header
             // Table data
-            >th,
-            >td {
+            > th,
+            > td {
                 height: $height-row-l;
             }
         }
