@@ -35,7 +35,8 @@
         .modal-footer {
             margin-top: 0;
             padding: 20px;
-            text-align: left;
+            justify-content: flex-end;
+            display: flex;
             border-style: none;
         }
     }
@@ -47,16 +48,18 @@
     &.mx-window-view .mx-window-body {
         padding: 0;
         // Dataview in popup
-        >.mx-dataview>.mx-dataview-content,
-        >.mx-placeholder>.mx-dataview>.mx-dataview-content {
+        > .mx-dataview > .mx-dataview-content,
+        > .mx-placeholder > .mx-dataview > .mx-dataview-content {
             padding: 20px;
         }
-        >.mx-dataview>.mx-dataview-controls,
-        >.mx-placeholder>.mx-dataview>.mx-dataview-controls {
+        > .mx-dataview > .mx-dataview-controls,
+        > .mx-placeholder > .mx-dataview > .mx-dataview-controls {
             margin: 0;
             padding: 20px;
             text-align: left;
-            border-style: none;
+            justify-content: flex-end;
+            display: flex;
+            border-top: 1px solid $modal-header-border-color;
         }
     }
     .mx-dataview-controls {

@@ -5,44 +5,44 @@
 //== Default
 //-------------------------------------------------------------------------------------------------------------------//
 .heroheader {
-	padding: 30px 0;
+    @include default-spacing($type: padding, $direction: all, $device: responsive);
     border-bottom: 1px solid $border-color-default;
     background: $header-bg-color;
 
-	//== Elements
+    //== Elements
     //-------------------------------------------------------------------------------------------------------------------//
     .heroheader-title {
-    	margin: 0 0 10px 0;
+        margin: 0 0 10px 0;
     }
     .heroheader-subtitle {
-		margin: 0;
-	    padding: 0 15px;
-		&:before {
-			content: '';
-			display: block;
-			max-width: 330px;
-			height: 1px;
-			margin: auto auto 10px auto;
-			background-color: lighten($border-color-default, 4);
-		}
+        margin: 0;
+        padding: 0 15px;
+        &:before {
+            content: '';
+            display: block;
+            max-width: 330px;
+            height: 1px;
+            margin: auto auto 10px auto;
+            background-color: lighten($border-color-default, 4);
+        }
     }
 }
 
 //== Varations
 //-------------------------------------------------------------------------------------------------------------------//
 .heroheader1 {
-	padding: 30px 25px;
-	background-image: linear-gradient(152deg, #0CC7F0 0%, #087ECC 51%, #077AC9 55%, #0659B9 78%);
+    @include default-spacing($type: padding, $direction: all, $device: responsive);
+    background-image: linear-gradient(152deg, #0cc7f0 0%, #087ecc 51%, #077ac9 55%, #0659b9 78%);
 
-	.heroheader-title {
-		margin-bottom: 10px;
-		color: #FFF;
-	}
-	.heroheader-subtitle {
-		color: #FFF;
-		padding: 0;
-		&:before {
-			display: none;
-		}
-	}
+    .heroheader-title {
+        margin-bottom: 10px;
+        color: #fff;
+    }
+    .heroheader-subtitle {
+        color: #fff;
+        padding: 0;
+        &:before {
+            display: none;
+        }
+    }
 }

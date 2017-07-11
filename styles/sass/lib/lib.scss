@@ -38,6 +38,7 @@
 @import 'buildingblocks/alignment-block';
 @import 'buildingblocks/breadcrumb';
 @import 'buildingblocks/card';
+@import 'buildingblocks/controlgroup';
 @import 'buildingblocks/pageheader';
 @import 'buildingblocks/heroheader';
 @import 'buildingblocks/formblock';
@@ -53,67 +54,9 @@
 @import 'mobile/all';
 @import 'mobile/header';
 @import 'mobile/layout';
-@import 'mobile/components/layoutgrid';
 @import 'mobile/components/listview';
 @import 'mobile/components/navigationlist';
 
 //customwidgets
 @import 'customwidgets/star-rating-theme';
-
-.controlgroup {
-    // Lose building block?
-    .btn,
-    .btn-group {
-        margin-right: $element-spacing;
-        &:last-child,
-        .btn {
-            margin-right: 0;
-        }
-    }
-    .btn-group {
-        .btn + .btn {
-            margin-left: -1px;
-        }
-    }
-}
-
-// Used in card info
-.textwithicon {
-    max-width: 100%;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    margin-bottom: 15px;
-    .textwithicon-icon,
-    .textwithicon-text {
-        display: inline-block;
-        vertical-align: middle;
-    }
-    .textwithicon-icon {
-        //reset btn styling
-        background: transparent;
-        border: 0;
-        padding: 0;
-
-       margin-right: 15px;
-        color: $brand-primary; // class .text-primary
-        font-size: 23px;
-    }
-    .textwithicon-text {
-    }
-}
-
-// Used in card info
-.socialprofiles {
-    .socialprofiles-title {
-        font-weight: bold; // class text-bold
-        margin-bottom: 10px;
-        display: block;
-    }
-    .socialprofiles-button {
-        border-radius: 24px;
-        padding: 0;
-        width: 24px;
-        height: 24px;
-        margin-right: 15px;
-    }
-}
+@import 'customwidgets/starwidget';
