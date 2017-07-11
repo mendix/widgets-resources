@@ -1,0 +1,15 @@
+.controlgroup {
+    .btn,
+    .btn-group {
+        margin-right: $element-spacing;
+        &:last-child,
+        .btn {
+            margin-right: 0;
+        }
+    }
+    .btn-group {
+        .btn + .btn {
+            margin-left: -1px;
+        }
+    }
+}

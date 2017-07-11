@@ -15,12 +15,13 @@
     white-space: nowrap;
     color: #fff;
     border-radius: .25em;
+    display: inline-block;
 }
 
 //== Design Properties
 //## Helper classes to change the look and feel of the component
 //-------------------------------------------------------------------------------------------------------------------//
-// Color variations 
+// Color variations
 .label-default {
     color: $label-default-color;
     background-color: $label-default-bg;
