@@ -254,7 +254,7 @@ $btn-warning-color:                     #FFF !default;
 $btn-danger-color:                      #FFF !default;
 
 // Button Background Color
-$btn-default-bg-hover:                  mix($btn-default-bg, black, 95%) !default;
+$btn-default-bg-hover:                  $btn-default-border-color !default;
 $btn-inverse-bg-hover:                  mix($btn-inverse-bg, white, 80%) !default;
 $btn-primary-bg-hover:                  mix($btn-primary-bg, black, 80%) !default;
 $btn-info-bg-hover:                     mix($btn-info-bg, black, 80%) !default;
