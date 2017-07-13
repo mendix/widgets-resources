@@ -162,7 +162,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         if (mxObject && this.props.source === "urlAttribute") {
             return mxObject.get(this.props.dynamicUrlAttribute) as string;
         } else if (mxObject && this.props.source === "systemImage") {
-            return UrlHelper.getDynamicResourceUrl(mxObject.getGuid(), mxObject.get("changedDate") as number);
+            return mx.data.getDocumentUrl(mxObject.getGuid(), mxObject.get("changedDate") as number);
         } else if (this.props.source === "staticUrl") {
             return this.props.urlStatic;
         } else if (this.props.source === "staticImage") {
