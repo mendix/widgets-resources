@@ -5,21 +5,21 @@
 ========================================================================== */
 
 .form-control {
-    -moz-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    -webkit-box-shadow: none;
-    box-shadow: none;
     display: block;
-    padding: $form-input-padding-y $form-input-padding-x;
     width: 100%;
     height: $form-input-height;
+    padding: $form-input-padding-y $form-input-padding-x;
+    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    -moz-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    color: $form-input-color;
     border: 1px solid $form-input-border-color;
     border-radius: $form-input-border-radius;
     background-color: $form-input-bg;
     background-image: none;
-    color: $form-input-color;
+    -webkit-box-shadow: none;
+    box-shadow: none;
     font-size: $form-input-font-size;
     line-height: $form-input-line-height;
     -moz-appearance: none;
@@ -30,11 +30,11 @@
 }
 
 .form-control:focus {
+    border-color: $form-input-border-focus-color;
+    outline: 0;
+    background-color: $form-input-bg-focus;
     -webkit-box-shadow: none;
     box-shadow: none;
-    border-color: $form-input-border-focus-color;
-    background-color: $form-input-bg-focus;
-    outline: 0;
 }
 
 textarea.form-control {
@@ -42,21 +42,21 @@ textarea.form-control {
 }
 
 select.form-control {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    padding-right: 30px;
     $arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15px' height='8px'><polyline id='Line' fill='none' stroke='#{$form-input-color}' points='0.5 0.5 6 6 11.545361 0.5'></polyline></svg>";
+    padding-right: 30px;
     background-image: url($arrow);
     background-repeat: no-repeat;
     background-position: calc(100% - #{$form-input-padding-x}) center;
+    -moz-appearance: none;
+    -webkit-appearance: none;
 }
 
 // Lined
 .form-control-lined {
     border: 0;
-    background-color: transparent;
-    border-radius: 0;
     border-bottom: 1px solid $form-input-border-color;
+    border-radius: 0;
+    background-color: transparent;
     &:focus {
         background-color: transparent;
     }
@@ -69,9 +69,9 @@ select.form-control {
     padding-top: $form-input-padding-y;
     padding-bottom: $form-input-padding-y;
     padding-left: $form-input-padding-x;
+    border-bottom: 1px solid $form-input-static-border-color;
     font-size: $form-input-font-size;
     line-height: $form-input-line-height;
-    border-bottom: 1px solid $form-input-static-border-color;
 }
 
 // Not editable textarea, textarea will be rendered as a label
@@ -99,14 +99,14 @@ select.form-control {
 // Form Group
 .form-group {
     margin-bottom: $form-group-margin-bottom;
-    [class*='col-'] {
-        padding-left: $form-group-gutter;
+    [class*="col-"] {
         padding-right: $form-group-gutter;
+        padding-left: $form-group-gutter;
     }
     // Alignment content
-    div[class*='textBox']>label,
-    div[class*='textArea']>label,
-    div[class*='datePicker']>label {
+    div[class*="textBox"] > label,
+    div[class*="textArea"] > label,
+    div[class*="datePicker"] > label {
         @extend .form-control-static;
     }
     // Label
@@ -121,9 +121,9 @@ select.form-control {
 .form-horizontal {
     @media (min-width: $screen-sm) {
         .control-label {
-            line-height: $form-input-line-height;
             padding-top: $form-input-padding-y;
             padding-bottom: $form-input-padding-y;
+            line-height: $form-input-line-height;
         }
     }
 }

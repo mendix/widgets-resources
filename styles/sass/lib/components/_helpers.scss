@@ -17,26 +17,27 @@
     visibility: hidden !important;
 }
 
-.display-ie8-only:not([attr*='']) {
+.display-ie8-only:not([attr*=""]) {
     display: none !important;
     padding: 0 !important;
 }
 
 .list-nostyle {
     ul {
-        padding: 0 !important;
         margin: 0 !important;
+        padding: 0 !important;
         li {
             list-style-type: none !important;
         }
     }
 }
 
-.nowrap, .nowrap * {
+.nowrap,
+.nowrap * {
+    overflow: hidden;
     // Star for inside an element, IE8 span > a
     white-space: nowrap !important;
     text-overflow: ellipsis;
-    overflow: hidden;
 }
 
 .form-disabled p {

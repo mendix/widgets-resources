@@ -8,17 +8,17 @@
     .modal-content {
         border: 1px solid $modal-header-border-color;
         border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         .modal-header {
             padding: 15px 20px;
             border-bottom-color: $modal-header-border-color;
             border-radius: 0; // Because of the class .mx-window-active in mxui.css
             background-color: $modal-header-bg;
             h4 {
-                font-size: 16px;
-                font-weight: $font-weight-bold;
                 margin: 0;
                 color: $modal-header-color;
+                font-size: 16px;
+                font-weight: $font-weight-bold;
             }
             .close {
                 margin-top: -3px;
@@ -33,10 +33,10 @@
             padding: 20px;
         }
         .modal-footer {
+            display: flex;
+            justify-content: flex-end;
             margin-top: 0;
             padding: 20px;
-            justify-content: flex-end;
-            display: flex;
             border-style: none;
         }
     }
@@ -54,11 +54,11 @@
         }
         > .mx-dataview > .mx-dataview-controls,
         > .mx-placeholder > .mx-dataview > .mx-dataview-controls {
+            display: flex;
+            justify-content: flex-end;
             margin: 0;
             padding: 20px;
             text-align: left;
-            justify-content: flex-end;
-            display: flex;
             border-top: 1px solid $modal-header-border-color;
         }
     }
@@ -78,14 +78,14 @@
     }
     .modal-content {
         input {
-            font-size: 16px;
             height: 56px;
             padding: 12px 12px;
-            border: 1px solid #eee;
-            background: #eee;
+            border: 1px solid #EEEEEE;
+            background: #EEEEEE;
             box-shadow: none;
+            font-size: 16px;
             &:focus {
-                border-color: #66afe9;
+                border-color: #66AFE9;
             }
         }
     }
@@ -97,8 +97,8 @@
         font-size: 16px;
     }
     h4 {
+        color: #AAAAAA;
         font-size: 20px;
         font-weight: $font-weight-bold;
-        color: #aaa;
     }
 }

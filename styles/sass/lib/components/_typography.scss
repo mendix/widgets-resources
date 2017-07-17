@@ -11,45 +11,45 @@ label {
 }
 
 .mx-title {
-    font-weight: $font-weight-header;
+    margin: $font-header-margin;
     color: $font-color-header;
     font-size: $font-size-h1;
-    margin: $font-header-margin;
+    font-weight: $font-weight-header;
 }
 
 h1,
 .h1,
-.h1>* {
+.h1 > * {
     font-size: $font-size-h1;
 }
 
 h2,
 .h2,
-.h2>* {
+.h2 > * {
     font-size: $font-size-h2;
 }
 
 h3,
 .h3,
-.h3>* {
+.h3 > * {
     font-size: $font-size-h3;
 }
 
 h4,
 .h4,
-.h4>* {
+.h4 > * {
     font-size: $font-size-h4;
 }
 
 h5,
 .h5,
-.h5>* {
+.h5 > * {
     font-size: $font-size-h5;
 }
 
 h6,
 .h6,
-.h6>* {
+.h6 > * {
     font-size: $font-size-h6;
 }
 
@@ -65,10 +65,10 @@ h6,
 .h4,
 .h5,
 .h6 {
-    font-weight: $font-weight-header;
-    color: $font-color-header;
-    line-height: 1.3;
     margin: $font-header-margin;
+    color: $font-color-header;
+    font-weight: $font-weight-header;
+    line-height: 1.3;
 }
 
 
@@ -87,25 +87,25 @@ h6,
 
 // Text Weights 
 .text-light,
-.text-light>*,
+.text-light > *,
 .text-light label {
     font-weight: $font-weight-light !important;
 }
 
 .text-normal,
-.text-normal>*,
+.text-normal > *,
 .text-normal label {
     font-weight: $font-weight-normal !important;
 }
 
 .text-semibold,
-.text-semibold>*,
+.text-semibold > *,
 .text-semibold label {
     font-weight: $font-weight-semibold !important;
 }
 
 .text-bold,
-.text-bold>*,
+.text-bold > *,
 .text-bold label {
     font-weight: $font-weight-bold !important;
 }
@@ -156,7 +156,7 @@ h6,
 .text-center {
     text-align: center !important;
 }
-.text-right	{
+.text-right {
     text-align: right !important;
 }
 .text-justify {
@@ -164,10 +164,10 @@ h6,
 }
 
 // Transform options
-.text-lowercase	{
+.text-lowercase {
     text-transform: lowercase !important;
 }
-.text-uppercase	{
+.text-uppercase {
     text-transform: uppercase !important;
 }
 .text-capitalize {
@@ -176,9 +176,9 @@ h6,
 
 // Wrap options
 .text-break {
-    -ms-word-break: break-all !important;
     word-break: break-all !important;
     word-break: break-word !important;
+    -ms-word-break: break-all !important;
     -webkit-hyphens: auto !important;
     -moz-hyphens: auto !important;
     hyphens: auto !important;

@@ -1,9 +1,9 @@
 // Breadcrumb
 .breadcrumb {
     //reset
-    border-radius: 0;
-    padding: 0;
     margin: 0;
+    padding: 0;
+    border-radius: 0;
     background-color: transparent;
     font-size: $font-size-default;
 }
@@ -19,10 +19,10 @@
 }
 .breadcrumb-item + .breadcrumb-item {
     &::before {
-        content: "/";
         display: inline-block;
         padding-right: 10px;
         padding-left: 10px;
+        content: "/";
         color: $gray-light;
     }
 }
@@ -30,6 +30,6 @@
     font-size: $font-size-h3;
 }
 .breadcrumb--underline {
-    border-bottom: 1px solid $border-color-default;
     padding-bottom: $gutter-size;
+    border-bottom: 1px solid $border-color-default;
 }

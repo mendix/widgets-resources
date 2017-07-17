@@ -5,9 +5,9 @@
 // Flex container
 .flexcontainer {
     display: flex;
-    flex-direction: row;
-    flex: 1;
     overflow: hidden;
+    flex: 1;
+    flex-direction: row;
     .flexitem {
         margin-right: $gutter-size;
         &:last-child {
@@ -15,8 +15,8 @@
         }
     }
     .flexitem--main {
-        flex: 1;
         overflow: hidden;
+        flex: 1;
     }
 }
 

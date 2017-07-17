@@ -14,29 +14,29 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    -webkit-transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-    font-size: $btn-font-size;
-    line-height: $line-height-base;
-    text-shadow: none;
-    color: $btn-default-color;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     text-align: center;
     vertical-align: middle;
     white-space: nowrap;
+    color: $btn-default-color;
     border: 1px solid transparent;
     border-radius: $btn-border-radius;
     background-color: $btn-default-bg;
     background-image: none;
     box-shadow: none;
+    text-shadow: none;
+    font-size: $btn-font-size;
+    line-height: $line-height-base;
     &:hover,
     &:focus,
     &:active {
         outline: none;
         box-shadow: none;
     }
-    
+
     @if $btn-bordered != false {
         @extend .btn-bordered;
     }
@@ -72,7 +72,8 @@
 //## Helper classes to change the look and feel of the component
 //-------------------------------------------------------------------------------------------------------------------//
 // Color variations 
-.btn, .btn-default {
+.btn,
+.btn-default {
     @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border-color, $btn-default-bg-hover);
 }
 

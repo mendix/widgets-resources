@@ -11,11 +11,9 @@
         margin: 0;
         padding-left: 0;
         li {
-            border-style: none;
             padding: 0;
+            border-style: none;
             a {
-                font-size: $navsidebar-font-size;
-                font-weight: $font-weight-normal;
                 display: block;
                 padding: 15px;
                 color: $navsidebar-color;
@@ -23,6 +21,8 @@
                 border-radius: 0;
                 background-color: $navsidebar-bg;
                 text-shadow: none;
+                font-size: $navsidebar-font-size;
+                font-weight: $font-weight-normal;
                 .caret {
                     border-top-color: $navsidebar-color;
                     border-bottom-color: $navsidebar-color;
@@ -33,9 +33,9 @@
                     margin-right: 4px;
                 }
                 .glyphicon {
-                    font-size: $navsidebar-glyph-size;
                     top: -1px;
                     vertical-align: middle;
+                    font-size: $navsidebar-glyph-size;
                 }
             }
             a:hover,
@@ -66,12 +66,12 @@
                 margin: 0;
                 padding: 0;
                 a {
-                    font-size: $navsidebar-sub-font-size;
-                    font-weight: $font-weight-normal;
                     padding: 12px 20px 12px 25px;
                     color: $navsidebar-sub-color;
                     border: 0;
                     background-color: $navsidebar-sub-bg;
+                    font-size: $navsidebar-sub-font-size;
+                    font-weight: $font-weight-normal;
                     &:hover,
                     &:focus,
                     &.active {

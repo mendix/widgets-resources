@@ -9,22 +9,22 @@
     .mx-tabcontainer-tabs {
         margin-bottom: 20px;
         border-color: $tabs-border-color;
-        >li>a {
-            font-weight: $font-weight-normal;
+        > li > a {
             margin-right: 0;
-            -webkit-transition: all .2s ease-in-out;
-            -moz-transition: all .2s ease-in-out;
-            -o-transition: all .2s ease-in-out;
-            transition: all .2s ease-in-out;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
             color: $tabs-color;
+            font-weight: $font-weight-normal;
             &:hover,
             &:focus {
                 background-color: $tabs-bg-hover;
             }
         }
-        >li.active>a,
-        >li.active>a:hover,
-        >li.active>a:focus {
+        > li.active > a,
+        > li.active > a:hover,
+        > li.active > a:focus {
             color: $tabs-color-active;
             border: 1px solid $tabs-border-color;
             border-bottom-color: transparent;
@@ -40,7 +40,7 @@
 .tab-pills.mx-tabcontainer {
     .mx-tabcontainer-tabs {
         border: 0;
-        >li>a {
+        > li > a {
             margin-right: 2px;
             color: $tabs-color;
             border: 1px solid $tabs-border-color;
@@ -50,10 +50,10 @@
                 background-color: $tabs-bg-hover;
             }
         }
-        >li.active>a,
-        >li.active>a:hover,
-        >li.active>a:focus {
-            color: #fff;
+        > li.active > a,
+        > li.active > a:hover,
+        > li.active > a:focus {
+            color: #FFFFFF;
             border-color: $tabs-bg-active;
             background-color: $tabs-bg-active;
         }
@@ -67,7 +67,7 @@
         li {
             margin-right: 30px;
             margin-bottom: -3px;
-            >a {
+            > a {
                 padding: 10px 0;
                 color: $tabs-color;
                 border: 0;
@@ -83,9 +83,9 @@
                     background: transparent;
                 }
             }
-            &.active>a,
-            &.active>a:hover,
-            &.active>a:focus {
+            &.active > a,
+            &.active > a:hover,
+            &.active > a:focus {
                 color: $tabs-lined-color-active;
                 border: 0;
                 border-bottom: 3px solid $tabs-lined-border-color;
@@ -101,7 +101,7 @@
     .mx-tabcontainer-tabs {
         width: 100%;
         border-bottom: 0;
-        >li {
+        > li {
             display: table-cell;
             float: none;
             width: 1%;
@@ -110,12 +110,12 @@
                 display: block;
                 width: 100%;
             }
-            >a {
+            > a {
                 text-align: center;
                 border-bottom: 1px solid $tabs-border-color;
             }
         }
-        >li.active>a {
+        > li.active > a {
             border-bottom-color: transparent;
             border-radius: 4px;
             @media (max-width: $screen-xs-max) {
@@ -135,7 +135,7 @@
         border-width: 0 1px 1px 1px;
         border-style: solid;
         border-color: $tabs-border-color;
-        background-color: #fff;
+        background-color: #FFFFFF;
     }
 }
 
@@ -147,23 +147,23 @@
         border-style: none;
         background-color: $brand-primary;
         li {
-            border-style: none;
             display: table-cell;
             float: none;
-            margin: 0;
             width: 1%;
+            margin: 0;
             text-align: center;
+            border-style: none;
             border-radius: 0;
             a {
-                font-size: 12px;
-                font-weight: $font-weight-normal;
                 padding: 15px;
                 text-transform: uppercase;
-                color: #FFF;
-                border-style: solid;
+                color: #FFFFFF;
                 border-width: 0 1px 0 0;
+                border-style: solid;
                 border-color: rgba(255,255,255,0.3);
                 border-radius: 0;
+                font-size: 12px;
+                font-weight: $font-weight-normal;
                 &:hover,
                 &:focus {
                     background-color: inherit;
@@ -175,9 +175,9 @@
             &.active > a,
             &.active > a:hover,
             &.active > a:focus {
+                color: #FFFFFF;
                 border-style: none;
                 border-radius: 0;
-                color: #FFF;
                 background-color: #0486C5;
             }
         }

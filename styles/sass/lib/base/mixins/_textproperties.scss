@@ -2,7 +2,7 @@
     label,
     .mx-title,
     .mx-text {
-         color: $color;
+        color: $color;
     }
     @if $form-input-style == lined {
         .form-control {

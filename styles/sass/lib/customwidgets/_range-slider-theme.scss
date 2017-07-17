@@ -1,12 +1,13 @@
 // Based on https://github.com/mendixlabs/range-slider/tree/master/src/ui/_range-slider-theme.scss
 
 div.widget-range-slider {
-    .rc-slider-handle, .rc-slider-dot-active {
+    .rc-slider-handle,
+    .rc-slider-dot-active {
         border-color: $brand-default;
 
         &:active {
-            box-shadow: none;
             border-color: $brand-default;
+            box-shadow: none;
         }
 
         &:hover {
@@ -15,7 +16,8 @@ div.widget-range-slider {
     }
 
     &.has-error {
-        .rc-slider-track, .rc-slider-rail {
+        .rc-slider-track,
+        .rc-slider-rail {
             background-color: $brand-danger;
         }
     }

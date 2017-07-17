@@ -54,16 +54,16 @@
         }
         /* Table Footer */
         .mx-datagrid-foot {
-            >tr>th {
+            > tr > th {
                 padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
                 border-width: 0;
                 background-color: $grid-footer-bg;
             }
-            >tr>td {
+            > tr > td {
                 padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
-                font-weight: $font-weight-bold;
                 border-width: 0;
                 background-color: $grid-bg;
+                font-weight: $font-weight-bold;
             }
         }
         & *:focus {
@@ -111,11 +111,11 @@
         }
     }
     .mx-datagrid-foot {
-        >tr>th {
+        > tr > th {
             border-width: 0;
             background-color: $grid-footer-bg;
         }
-        >tr>td {
+        > tr > td {
             border-width: 1px;
         }
     }

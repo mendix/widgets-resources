@@ -10,26 +10,26 @@ html {
 
 body {
     min-height: 100%;
-    font-size: $font-size-default;
-    line-height: $line-height-base;
     color: $font-color-default;
     background-color: $bg-color;
-    font-weight: $font-weight-normal;
     font-family: $font-family-base;
+    font-size: $font-size-default;
+    font-weight: $font-weight-normal;
+    line-height: $line-height-base;
 }
 
 a {
-    -webkit-transition: .25s;
-    -moz-transition: .25s;
-    -o-transition: .25s;
-    transition: .25s;
+    -webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
     color: $link-color;
     -webkit-backface-visibility: hidden;
 }
 
 a:hover {
-    color: $link-hover-color;
     text-decoration: underline;
+    color: $link-hover-color;
 }
 
 // Address `outline` inconsistency between Chrome and other browsers.

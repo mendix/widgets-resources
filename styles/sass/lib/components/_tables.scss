@@ -23,11 +23,10 @@ table.mx-table {
         > tr {
             /* Table header */
             > th {
-                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom
-                    $padding-table-cell-left;
+                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;s
                 * {
-                    font-weight: $font-weight-bold;
                     color: $form-label-color;
+                    font-weight: $font-weight-bold;
                     font-weight: $form-label-weight;
                 }
                 > label {
@@ -37,8 +36,7 @@ table.mx-table {
             }
             /* Table cells */
             > td {
-                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom
-                    $padding-table-cell-left;
+                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
                 > div > label,
                 .mx-referenceselector-input-wrapper label {
                     padding-top: 7px;
@@ -55,8 +53,7 @@ table.mx-table {
         > tr {
             > th,
             > td {
-                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom
-                    $padding-table-cell-left;
+                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
             }
         }
     }
@@ -68,8 +65,7 @@ table.mx-table {
         > tr {
             > th,
             > td {
-                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom
-                    $padding-table-cell-left;
+                padding: $padding-table-cell-top $padding-table-cell-right $padding-table-cell-bottom $padding-table-cell-left;
             }
         }
     }
@@ -206,13 +202,13 @@ table.table-label-compact.mx-table {
             > th,
             > td {
                 > label {
-                    padding: 0;
                     margin: 0;
+                    padding: 0;
                 }
                 > div > label,
                 .mx-referenceselector-input-wrapper label {
-                    padding: 0;
                     margin: 0;
+                    padding: 0;
                 }
             }
         }

@@ -16,9 +16,6 @@
             width: 100%;
             margin: 0;
             a {
-                font-size: $navsidebar-sub-font-size;
-                font-weight: $font-weight-normal;
-                line-height: 50px;
                 display: block;
                 overflow: hidden;
                 padding: 0 8px;
@@ -26,10 +23,13 @@
                 vertical-align: middle;
                 color: $navsidebar-color;
                 border-radius: 0;
+                font-size: $navsidebar-sub-font-size;
+                font-weight: $font-weight-normal;
+                line-height: 50px;
                 .glyphicon {
-                    font-size: $navsidebar-glyph-size;
                     top: -1px;
                     vertical-align: middle;
+                    font-size: $navsidebar-glyph-size;
                 }
             }
             a:hover,
@@ -60,13 +60,13 @@
     ul.mx-menubar-list {
         li.mx-menubar-item {
             a {
-                font-size: $navtopbar-font-size;
                 color: $navtopbar-color;
                 border-bottom: 1px solid $navtopbar-border-color;
+                font-size: $navtopbar-font-size;
                 .glyphicon {
-                    font-size: $navtopbar-glyph-size;
                     top: -1px;
                     vertical-align: middle;
+                    font-size: $navtopbar-glyph-size;
                 }
                 &:hover,
                 &:focus,
@@ -127,17 +127,17 @@
     ul.mx-menubar-list {
         li.mx-menubar-item {
             a {
-                line-height: normal;
                 padding: 8px 8px 6px 8px;
+                line-height: normal;
                 .glyphicon {
-                    font-size: 18px;
                     display: block;
                     margin-bottom: 4px;
+                    font-size: 18px;
                 }
                 img {
+                    display: block;
                     height: 18px;
                     margin: auto;
-                    display: block;
                     margin-bottom: 4px;
                 }
             }

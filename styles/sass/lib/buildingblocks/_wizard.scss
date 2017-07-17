@@ -2,31 +2,29 @@
     $wizard-step-number-size: 60px;
     display: flex;
     justify-content: space-between;
-    table.mx-table > tbody > tr > td {
-        padding: 0;
-    }
+
     .wizard-step {
-        text-align: center;
         position: relative;
         width: 100%;
+        text-align: center;
         &:before {
             position: absolute;
-            top: $wizard-step-number-size / 2;
             z-index: -1;
-            content: "";
+            top: $wizard-step-number-size / 2;
             display: block;
-            height: 2px;
             width: 100%;
+            height: 2px;
+            content: "";
             background-color: $border-color-default;
         }
     }
     .wizard-step-number {
-        border-radius: 50%;
         width: $wizard-step-number-size;
         height: $wizard-step-number-size;
-        font-size: 20px;
-        background-color: #fff;
         border-color: $border-color-default;
+        border-radius: 50%;
+        background-color: #FFFFFF;
+        font-size: 20px;
     }
     .wizard-step-text {
         display: block;
@@ -35,9 +33,9 @@
     // States
     .wizard-step--active {
         .wizard-step-number {
-            background-color: $brand-primary;
+            color: #FFFFFF;
             border-color: $brand-primary;
-            color: #fff;
+            background-color: $brand-primary;
         }
         .wizard-step-text {
             color: $brand-primary;
@@ -45,9 +43,9 @@
     }
     .wizard-step--visited {
         .wizard-step-number {
-            background-color: $brand-success;
+            color: #FFFFFF;
             border-color: $brand-success;
-            color: #fff;
+            background-color: $brand-success;
         }
         .wizard-step-text {
         }
@@ -69,41 +67,41 @@
         position: relative;
         width: 100%;
         height: $wizard-step-height;
-        border: 1px solid $border-color-default;
         margin-left: 0 - ($wizard-step-height / 2);
         padding-left: ($wizard-step-height / 2);
-        background: #fff;
+        border: 1px solid $border-color-default;
+        background: #FFFFFF;
 
         a {
-            height: 100%;
-            width: 100%;
-            padding: 14px;
             display: block;
-            white-space: nowrap;
             overflow: hidden;
+            width: 100%;
+            height: 100%;
+            padding: 14px;
+            white-space: nowrap;
+            text-decoration: none;
             text-overflow: ellipsis;
             color: $font-color-default;
-            text-decoration: none;
         }
         &:before,
         &:after {
-            content: " ";
             position: absolute;
-            border-style: solid;
-            left: 100%;
-            border-color: transparent;
-            margin-left: 0 - ($wizard-step-height / 2);
             z-index: 1;
+            left: 100%;
+            margin-left: 0 - ($wizard-step-height / 2);
+            content: " ";
+            border-style: solid;
+            border-color: transparent;
         }
         &::after {
             top: 1px;
-            border-left-color: white;
             border-width: (($wizard-step-height / 2) - 1);
+            border-left-color: white;
         }
         &::before {
             top: 0;
-            border-left-color: $border-color-default;
             border-width: $wizard-step-height / 2;
+            border-left-color: $border-color-default;
         }
 
         &:first-child {
@@ -122,11 +120,11 @@
     }
     // States
     .wizard-step--active {
-        a {
-            color: #fff;
-            text-decoration: none;
-        }
         background: $brand-primary;
+        a {
+            text-decoration: none;
+            color: #FFFFFF;
+        }
         &::after {
             border-left-color: $brand-primary;
         }

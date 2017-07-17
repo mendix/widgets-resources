@@ -5,9 +5,9 @@
 ========================================================================== */
 .formblock {
     .formblock-title {
+        margin-bottom: $gutter-size;
+        padding-bottom: $gutter-size;
         color: $brand-primary; // text-primary?
         border-bottom: 1px solid $default-border-color;
-        padding-bottom: $gutter-size;
-        margin-bottom: $gutter-size;
     }
 }

@@ -14,9 +14,9 @@
         border-radius: 0;
         background-color: $navsidebar-bg;
         label {
+            color: $navsidebar-color;
             font-size: $navsidebar-font-size;
             font-weight: $font-weight-normal;
-            color: $navsidebar-color;
         }
         &:hover,
         &:focus,

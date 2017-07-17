@@ -8,7 +8,7 @@
 
 // Basic styling Scroll container
 .mx-scrollcontainer {
-.mx-scrollcontainer-wrapper {
+    .mx-scrollcontainer-wrapper {
         padding: 0;
         // Convert width to max-width when in scroll container to make sure you dont get scrollbars
         .mx-layoutgrid-fixed {
@@ -54,7 +54,7 @@
 // Quick fix
 .profile-phone,
 .profile-tablet {
-    .mx-placeholder> {
+    .mx-placeholder > {
         .mx-tabcontainer:only-child,
         .mx-grid:only-child {
             margin-bottom: 0;

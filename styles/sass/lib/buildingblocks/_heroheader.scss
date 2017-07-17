@@ -18,11 +18,11 @@
         margin: 0;
         padding: 0 15px;
         &:before {
-            content: '';
             display: block;
             max-width: 330px;
             height: 1px;
             margin: auto auto 10px auto;
+            content: "";
             background-color: lighten($border-color-default, 4);
         }
     }
@@ -32,15 +32,15 @@
 //-------------------------------------------------------------------------------------------------------------------//
 .heroheader1 {
     @include default-spacing($type: padding, $direction: all, $device: responsive);
-    background-image: linear-gradient(152deg, #0cc7f0 0%, #087ecc 51%, #077ac9 55%, #0659b9 78%);
+    background-image: linear-gradient(152deg, #0CC7F0 0%, #087ECC 51%, #077AC9 55%, #0659B9 78%);
 
     .heroheader-title {
         margin-bottom: 10px;
-        color: #fff;
+        color: #FFFFFF;
     }
     .heroheader-subtitle {
-        color: #fff;
         padding: 0;
+        color: #FFFFFF;
         &:before {
             display: none;
         }

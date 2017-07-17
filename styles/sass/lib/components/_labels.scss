@@ -5,17 +5,17 @@
 ========================================================================== */
 
 .label {
-    font-size: 100%;
-    font-weight: $font-weight-bold;
-    line-height: 1;
     display: inline;
-    padding: .2em .6em .3em;
+    display: inline-block;
+    padding: 0.2em 0.6em 0.3em;
     text-align: center;
     vertical-align: baseline;
     white-space: nowrap;
-    color: #fff;
-    border-radius: .25em;
-    display: inline-block;
+    color: #FFFFFF;
+    border-radius: 0.25em;
+    font-size: 100%;
+    font-weight: $font-weight-bold;
+    line-height: 1;
 }
 
 //== Design Properties

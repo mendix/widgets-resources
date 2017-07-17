@@ -1,9 +1,9 @@
 $default-android-color: #6FBEB5;
 $default-ios-color: rgb(100, 189, 99);
 
-@mixin bootstrap-style-ios($brand-style){
-    background-color: $brand-style;
+@mixin bootstrap-style-ios($brand-style) {
     border-color: $brand-style;
+    background-color: $brand-style;
     box-shadow: $brand-style 0 0 0 16px inset;
 }
 

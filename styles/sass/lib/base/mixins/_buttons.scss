@@ -7,14 +7,14 @@
     &:focus,
     &:active,
     &.active,
-    .open>&.dropdown-toggle {
+    .open > &.dropdown-toggle {
         color: $color;
         border-color: $hover;
         background-color: $hover;
     }
     &:active,
     &.active,
-    .open>&.dropdown-toggle {
+    .open > &.dropdown-toggle {
         background-image: none;
     }
     &.disabled,
@@ -31,15 +31,15 @@
     }
     // Button bordered
     &.btn-bordered {
+        background-color: transparent;
         @if $color != $btn-default-color {
             color: $border;
         }
-        background-color: transparent;
         &:hover,
         &:focus,
         &:active,
         &.active,
-        .open>&.dropdown-toggle {
+        .open > &.dropdown-toggle {
             color: $color;
             border-color: $border;
             background-color: $border;
@@ -47,12 +47,12 @@
     }
     // Button as link
     &.btn-link {
+        text-decoration: none;
+        border-color: transparent;
+        background-color: transparent;
         @if $color != $btn-default-color {
             color: $background;
         }
-        border-color: transparent;
-        background-color: transparent;
-        text-decoration: none;
         &:hover {
             border-color: $btn-link-bg-hover;
             background-color: $btn-link-bg-hover;

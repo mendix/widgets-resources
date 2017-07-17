@@ -19,13 +19,13 @@
     .mx-listview-list {
         margin: 0;
         .mx-listview-empty {
-            background-color: transparent;
             border-style: none;
+            background-color: transparent;
         }
     }
     .mx-listview-item {
-        background-color: $grid-bg;
         padding: $listview-padding-top $listview-padding-right $listview-padding-bottom $listview-padding-left;
+        background-color: $grid-bg;
         &:hover {
             background-color: $grid-bg;
         }
@@ -55,8 +55,8 @@
             border-radius: 0;
         }
         &:last-child {
-            border-radius: 0;
             border-bottom: 1px solid $grid-border-color;
+            border-radius: 0;
         }
     }
 }
@@ -67,8 +67,8 @@
         border: 1px solid $grid-border-color;
         border-top: 0;
         &:first-child {
-            border-radius: 0;
             border-top: 1px solid $grid-border-color;
+            border-radius: 0;
         }
         &:last-child {
             border-radius: 0;
@@ -86,9 +86,9 @@
 // Items as seperated blocks
 .listview-seperated.mx-listview {
     .mx-listview-item {
-        border-radius: 4px;
         margin-bottom: 10px;
         border-style: solid;
+        border-radius: 4px;
     }
 }
 
@@ -108,10 +108,10 @@
 // Remove all styling
 .listview-stylingless.mx-listview {
     .mx-listview-item {
-        background-color: transparent;
-        border: 0;
         padding: 0;
         cursor: default;
+        border: 0;
+        background-color: transparent;
         &:hover {
             background-color: transparent;
         }
@@ -138,32 +138,32 @@
 }
 
 // Bootstrap columns
-.mx-listview[class*='lv-col'] {
+.mx-listview[class*="lv-col"] {
     .mx-listview-content-wrapper {
         display: block;
     }
     .mx-listview-list {
+        display: block; // normal a table
         margin-right: -15px;
         margin-left: -15px;
-        display: block; // normal a table
         &:before,
         &:after {
             // clearfix
             display: table;
-            content: " ";
             clear: both;
+            content: " ";
         }
     }
     .mx-listview-item {
-        display: block; // normal a table
-        border: 0;
         // bootstrap col
         position: relative;
+        display: block; // normal a table
+        float: left;
         min-height: 1px;
+        margin-bottom: 15px;
         padding-right: 15px;
         padding-left: 15px;
-        float: left;
-        margin-bottom: 15px;
+        border: 0;
         @media (max-width: $screen-sm-max) {
             width: 100% !important;
         }

@@ -13,10 +13,10 @@
 //    - color of border
 //    - border width
 /////////////////////////////////////////////////////////////////
-@mixin css-arrow($position: "top", $height: 10px, $width: 10px, $bg-color: #aaaaaa, $arrow-color: #cccccc, $arrow-border-width: 0) {
-    position: relative;
+@mixin css-arrow($position: "top", $height: 10px, $width: 10px, $bg-color: #AAAAAA, $arrow-color: #CCCCCC, $arrow-border-width: 0) {
     $position: unquote($position);
     $position: quote($position);
+    position: relative;
     &:after,
     &:before {
         position: absolute;
