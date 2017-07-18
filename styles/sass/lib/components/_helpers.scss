@@ -90,16 +90,19 @@
 // Flex alignments
 .align-content-left {
     display: flex !important;
+    flex-flow: row wrap !important;
     justify-content: flex-start !important;
 }
 
 .align-content-right {
     display: flex !important;
+    flex-flow: row wrap !important;
     justify-content: flex-end !important;
 }
 
 .align-content-center {
-    display: flex !important;
+    display: flex wrap !important;
+    flex-flow: row wrap !important;
     justify-content: center !important;
 }
 
