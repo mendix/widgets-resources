@@ -24,9 +24,9 @@
 
 // Check if it is part of a inner layoutgrid
 .mx-scrollcontainer .mx-placeholder .mx-layoutgrid .pageheader {
-    background: transparent;
     @include default-spacing($type: margin, $direction: bottom, $device: responsive);
     @include default-spacing($type: padding, $direction: bottom, $device: responsive);
+    background: transparent;
 }
 
 //== Varations
