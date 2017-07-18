@@ -2,6 +2,8 @@
     .btn,
     .btn-group {
         margin-right: $element-spacing;
+        margin-bottom: $element-spacing;
+
         &:last-child,
         .btn {
             margin-right: 0;
