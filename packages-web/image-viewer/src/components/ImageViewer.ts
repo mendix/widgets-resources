@@ -1,4 +1,4 @@
-import { Component, DOM, createElement } from "react";
+import { Component, createElement } from "react";
 
 import * as classNames from "classnames";
 import * as Lightbox from "react-image-lightbox";
@@ -36,7 +36,7 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
     }
 
     render() {
-        return DOM.div(
+        return createElement("div",
             {
                 className: classNames(
                     "widget-image-viewer",
@@ -46,7 +46,7 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
                 ),
                 ref: this.props.getRef
             },
-            DOM.img({
+            createElement("img", {
                 onClick: this.toggleLightBox,
                 src: this.props.imageUrl,
                 style: {
