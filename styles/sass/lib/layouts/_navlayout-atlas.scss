@@ -34,8 +34,9 @@
         .toggle-btn {
             width: $sidebar-width;
             height: 60px;
+            border-color: transparent;
             border-radius: 0;
-            background: transparent !important;
+            background: transparent;
         }
         .mx-navigationtree {
             ul li {
