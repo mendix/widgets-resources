@@ -3,12 +3,10 @@ const webpack = require("webpack");
 const webpackConfig = require("./webpack.config");
 const merge = require("webpack-merge");
 
-const webpackConfigRelease = [];
-webpackConfig.forEach(function(config) {
-    webpackConfigRelease.push(merge(config, {
-        plugins: [ new webpack.optimize.UglifyJsPlugin() ]
-    }));
-});
+const webpackConfigRelease = webpackConfig.map(config => merge(config, {
+    devtool: false,
+    plugins: [ new webpack.optimize.UglifyJsPlugin() ]
+}));
 
 module.exports = function(grunt) {
     const pkg = grunt.file.readJSON("package.json");

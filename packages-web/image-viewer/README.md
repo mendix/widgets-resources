@@ -55,7 +55,7 @@ To set up the development environment, run:
     
 Create a folder named dist in the project root.
 
-Create a Mendix test project in the dist folder and rename its root folder to MxTestProject. Changes to the widget code shall be automatically pushed to this test project. Or get the test project from https://github.com/MendixLabs/image-viewer/releases/download/v1.1.0/TestImageViewer.mpk
+Create a Mendix test project in the dist folder and rename its root folder to MxTestProject. Changes to the widget code shall be automatically pushed to this test project. Or get the test project from https://github.com/MendixLabs/image-viewer/releases/latest
 
     dist/MxTestProject
     
