@@ -48,6 +48,18 @@ describe("ImageViewer", () => {
         );
     });
 
+    it("executes other onlick actions", () => {
+        imageViewerProps.onClickOption = "callMicroflow";
+        const onClickSpy = jasmine.createSpy("onClick");
+        imageViewerProps.onClick = onClickSpy;
+        imageViewer = renderImageViewer(imageViewerProps);
+
+        imageViewer.childAt(0).simulate("click");
+
+        expect(imageViewer.state().isOpen).toBe(false);
+        expect(onClickSpy).toHaveBeenCalled();
+    });
+
     it("renders the lightbox when the image is clicked", () => {
         imageViewer = renderImageViewer(imageViewerProps);
 
