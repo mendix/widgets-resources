@@ -35,17 +35,17 @@ $brand-logo-height:						26px !default;
 $brand-logo-width:						26px !default; // Only used for CSS brand logo
 
 
+
+
+
 //== Step 2: UI Customization
 
 // Default Font Size & Color
 $font-size-default:                     14px !default;
-$font-base-size:                        $font-size-default !default; // Backwards compatible with v1
 $font-color-default:                    #555 !default;
-$font-base-color:                       $font-color-default !default; // Backwards compatible with v1
 
 // Global Border Color
 $border-color-default:                  $gray-primary !default;
-$default-border-color:                  $border-color-default !default; // Backwards compatible with v1
 $border-radius-default:                 4px !default;
 
 // Topbar
@@ -122,7 +122,6 @@ $font-header-margin:					0 0 20px 0 !default;
 
 // Text Colors
 $font-color-header:				        #17347B !default;
-$font-color-headers:				    $font-color-header !default; // Backwards compatible with v1
 $font-color-detail:                     $gray-light !default;
 
 
