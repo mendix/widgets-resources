@@ -1,5 +1,5 @@
 ﻿{
-    "PageTemplates" : "WebModeler",
+    "pageTemplates" : "WebModeler",
     "designProperties": {
         "Widget": [
             {
@@ -413,7 +413,7 @@
                     },
                     {
                         "name": "Capatalize",
-                        "class": "text-capatalize"
+                        "class": "text-capitalize"
                     }
                 ]
             },
