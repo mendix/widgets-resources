@@ -142,7 +142,7 @@
     .mx-listview-content-wrapper {
         display: block;
     }
-    .mx-listview-list {
+    > .mx-listview-list {
         display: block; // normal a table
         margin-right: -15px;
         margin-left: -15px;
@@ -153,172 +153,172 @@
             clear: both;
             content: " ";
         }
-    }
-    .mx-listview-item {
-        // bootstrap col
-        position: relative;
-        display: block; // normal a table
-        float: left;
-        min-height: 1px;
-        margin-bottom: 15px;
-        padding-right: 15px;
-        padding-left: 15px;
-        border: 0;
-        @media (max-width: $screen-sm-max) {
-            width: 100% !important;
+        > .mx-listview-item {
+            // bootstrap col
+            position: relative;
+            display: block; // normal a table
+            float: left;
+            min-height: 1px;
+            margin-bottom: 15px;
+            padding-right: 15px;
+            padding-left: 15px;
+            border: 0;
+            @media (max-width: $screen-sm-max) {
+                width: 100% !important;
+            }
+            > .mx-dataview {
+                //border: 1px solid #DDD; // styling from grid item
+                overflow: hidden;
+            }
         }
-        .mx-dataview {
-            //border: 1px solid #DDD; // styling from grid item
-            overflow: hidden;
-        }
     }
-    &.lv-col-xs-12 .mx-listview-item {
+    &.lv-col-xs-12 > .mx-listview-list > .mx-listview-item {
         width: 100% !important;
     }
-    &.lv-col-xs-11 .mx-listview-item {
+    &.lv-col-xs-11 > .mx-listview-list > .mx-listview-item {
         width: 91.66666667% !important;
     }
-    &.lv-col-xs-10 .mx-listview-item {
+    &.lv-col-xs-10 > .mx-listview-list > .mx-listview-item {
         width: 83.33333333% !important;
     }
-    &.lv-col-xs-9 .mx-listview-item {
+    &.lv-col-xs-9 > .mx-listview-list > .mx-listview-item {
         width: 75% !important;
     }
-    &.lv-col-xs-8 .mx-listview-item {
+    &.lv-col-xs-8 > .mx-listview-list > .mx-listview-item {
         width: 66.66666667% !important;
     }
-    &.lv-col-xs-7 .mx-listview-item {
+    &.lv-col-xs-7 > .mx-listview-list > .mx-listview-item {
         width: 58.33333333% !important;
     }
-    &.lv-col-xs-6 .mx-listview-item {
+    &.lv-col-xs-6 > .mx-listview-list > .mx-listview-item {
         width: 50% !important;
     }
-    &.lv-col-xs-5 .mx-listview-item {
+    &.lv-col-xs-5 > .mx-listview-list > .mx-listview-item {
         width: 41.66666667% !important;
     }
-    &.lv-col-xs-4 .mx-listview-item {
+    &.lv-col-xs-4 > .mx-listview-list > .mx-listview-item {
         width: 33.33333333% !important;
     }
-    &.lv-col-xs-3 .mx-listview-item {
+    &.lv-col-xs-3 > .mx-listview-list > .mx-listview-item {
         width: 25% !important;
     }
-    &.lv-col-xs-2 .mx-listview-item {
+    &.lv-col-xs-2 > .mx-listview-list > .mx-listview-item {
         width: 16.66666667% !important;
     }
-    &.lv-col-xs-1 .mx-listview-item {
+    &.lv-col-xs-1 > .mx-listview-list > .mx-listview-item {
         width: 8.33333333% !important;
     }
     @media (min-width: $screen-sm) {
-        &.lv-col-sm-12 .mx-listview-item {
+        &.lv-col-sm-12 > .mx-listview-list > .mx-listview-item {
             width: 100% !important;
         }
-        &.lv-col-sm-11 .mx-listview-item {
+        &.lv-col-sm-11 > .mx-listview-list > .mx-listview-item {
             width: 91.66666667% !important;
         }
-        &.lv-col-sm-10 .mx-listview-item {
+        &.lv-col-sm-10 > .mx-listview-list > .mx-listview-item {
             width: 83.33333333% !important;
         }
-        &.lv-col-sm-9 .mx-listview-item {
+        &.lv-col-sm-9 > .mx-listview-list > .mx-listview-item {
             width: 75% !important;
         }
-        &.lv-col-sm-8 .mx-listview-item {
+        &.lv-col-sm-8 > .mx-listview-list > .mx-listview-item {
             width: 66.66666667% !important;
         }
-        &.lv-col-sm-7 .mx-listview-item {
+        &.lv-col-sm-7 > .mx-listview-list > .mx-listview-item {
             width: 58.33333333% !important;
         }
-        &.lv-col-sm-6 .mx-listview-item {
+        &.lv-col-sm-6 > .mx-listview-list > .mx-listview-item {
             width: 50% !important;
         }
-        &.lv-col-sm-5 .mx-listview-item {
+        &.lv-col-sm-5 > .mx-listview-list > .mx-listview-item {
             width: 41.66666667% !important;
         }
-        &.lv-col-sm-4 .mx-listview-item {
+        &.lv-col-sm-4 > .mx-listview-list > .mx-listview-item {
             width: 33.33333333% !important;
         }
-        &.lv-col-sm-3 .mx-listview-item {
+        &.lv-col-sm-3 > .mx-listview-list > .mx-listview-item {
             width: 25% !important;
         }
-        &.lv-col-sm-2 .mx-listview-item {
+        &.lv-col-sm-2 > .mx-listview-list > .mx-listview-item {
             width: 16.66666667% !important;
         }
-        &.lv-col-sm-1 .mx-listview-item {
+        &.lv-col-sm-1 > .mx-listview-list > .mx-listview-item {
             width: 8.33333333% !important;
         }
     }
     @media (min-width: $screen-md) {
-        &.lv-col-md-12 .mx-listview-item {
+        &.lv-col-md-12 > .mx-listview-list > .mx-listview-item {
             width: 100% !important;
         }
-        &.lv-col-md-11 .mx-listview-item {
+        &.lv-col-md-11 > .mx-listview-list > .mx-listview-item {
             width: 91.66666667% !important;
         }
-        &.lv-col-md-10 .mx-listview-item {
+        &.lv-col-md-10 > .mx-listview-list > .mx-listview-item {
             width: 83.33333333% !important;
         }
-        &.lv-col-md-9 .mx-listview-item {
+        &.lv-col-md-9 > .mx-listview-list > .mx-listview-item {
             width: 75% !important;
         }
-        &.lv-col-md-8 .mx-listview-item {
+        &.lv-col-md-8 > .mx-listview-list > .mx-listview-item {
             width: 66.66666667% !important;
         }
-        &.lv-col-md-7 .mx-listview-item {
+        &.lv-col-md-7 > .mx-listview-list > .mx-listview-item {
             width: 58.33333333% !important;
         }
-        &.lv-col-md-6 .mx-listview-item {
+        &.lv-col-md-6 > .mx-listview-list > .mx-listview-item {
             width: 50% !important;
         }
-        &.lv-col-md-5 .mx-listview-item {
+        &.lv-col-md-5 > .mx-listview-list > .mx-listview-item {
             width: 41.66666667% !important;
         }
-        &.lv-col-md-4 .mx-listview-item {
+        &.lv-col-md-4 > .mx-listview-list > .mx-listview-item {
             width: 33.33333333% !important;
         }
-        &.lv-col-md-3 .mx-listview-item {
+        &.lv-col-md-3 > .mx-listview-list > .mx-listview-item {
             width: 25% !important;
         }
-        &.lv-col-md-2 .mx-listview-item {
+        &.lv-col-md-2 > .mx-listview-list > .mx-listview-item {
             width: 16.66666667% !important;
         }
-        &.lv-col-md-1 .mx-listview-item {
-            width: 8.33333333% !important;
+        &.lv-col-md-1 > .mx-listview-list > .mx-listview-item {
+            width: 16.66666667% !important;
         }
     }
     @media (min-width: $screen-lg) {
-        &.lv-col-lg-12 .mx-listview-item {
+        &.lv-col-lg-12 > .mx-listview-list > .mx-listview-item {
             width: 100% !important;
         }
-        &.lv-col-lg-11 .mx-listview-item {
+        &.lv-col-lg-11 > .mx-listview-list > .mx-listview-item {
             width: 91.66666667% !important;
         }
-        &.lv-col-lg-10 .mx-listview-item {
+        &.lv-col-lg-10 > .mx-listview-list > .mx-listview-item {
             width: 83.33333333% !important;
         }
-        &.lv-col-lg-9 .mx-listview-item {
+        &.lv-col-lg-9 > .mx-listview-list > .mx-listview-item {
             width: 75% !important;
         }
-        &.lv-col-lg-8 .mx-listview-item {
+        &.lv-col-lg-8 > .mx-listview-list > .mx-listview-item {
             width: 66.66666667% !important;
         }
-        &.lv-col-lg-7 .mx-listview-item {
+        &.lv-col-lg-7 > .mx-listview-list > .mx-listview-item {
             width: 58.33333333% !important;
         }
-        &.lv-col-lg-6 .mx-listview-item {
+        &.lv-col-lg-6 > .mx-listview-list > .mx-listview-item {
             width: 50% !important;
         }
-        &.lv-col-lg-5 .mx-listview-item {
+        &.lv-col-lg-5 > .mx-listview-list > .mx-listview-item {
             width: 41.66666667% !important;
         }
-        &.lv-col-lg-4 .mx-listview-item {
+        &.lv-col-lg-4 > .mx-listview-list > .mx-listview-item {
             width: 33.33333333% !important;
         }
-        &.lv-col-lg-3 .mx-listview-item {
+        &.lv-col-lg-3 > .mx-listview-list > .mx-listview-item {
             width: 25% !important;
         }
-        &.lv-col-lg-2 .mx-listview-item {
+        &.lv-col-lg-2 > .mx-listview-list > .mx-listview-item {
             width: 16.66666667% !important;
         }
-        &.lv-col-lg-1 .mx-listview-item {
+        &.lv-col-lg-1 > .mx-listview-list > .mx-listview-item {
             width: 8.33333333% !important;
         }
     }
