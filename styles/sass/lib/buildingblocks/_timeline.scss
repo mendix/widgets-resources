@@ -10,15 +10,16 @@
     }
 }
 .timeline-itemwrapper.mx-listview {
+    @include default-spacing($type: padding, $direction: bottom, $device: responsive);
+    @include default-spacing($type: padding, $direction: top, $device: responsive);
     margin-bottom: 0;
     margin-left: 55px;
-    padding: 30px 0;
     border-left: 1px solid $border-color-default;
-    .mx-listview-item {
+    > ul > .mx-listview-item {
         position: relative;
-        padding-left: 30px;
+        padding-left: ($gutter-size * 2);
 
-        &:before {
+        &::before {
             position: absolute;
             top: 5px;
             left: -5px;
@@ -31,6 +32,15 @@
         }
     }
     .mx-listview-item + .mx-listview-item {
-        margin-top: 30px;
+        @include default-spacing($type: margin, $direction: top, $device: responsive);
+    }
+}
+
+// Variation
+.timeline2 {
+    .timeline-itemwrapper.mx-listview {
+        > ul > .mx-listview-item {
+            padding-left: $gutter-size;
+        }
     }
 }
