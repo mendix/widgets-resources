@@ -50,10 +50,10 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
             imageUrl: ""
         };
         this.subscriptionHandles = [];
-        this.attributeCallback = mxObject => () => this.getImageUrl(mxObject);
+        this.attributeCallback = mxObject => () => this.setImageUrl(mxObject);
         this.setImageViewerReference = this.setImageViewerReference.bind(this);
         this.executeAction = this.executeAction.bind(this);
-        this.getImageUrl = this.getImageUrl.bind(this);
+        this.setImageUrl = this.setImageUrl.bind(this);
     }
 
     render() {
@@ -89,7 +89,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         this.setState({
             alertMessage: ImageViewerContainer.validateProps(newProps)
         });
-        this.getImageUrl(newProps.mxObject);
+        this.setImageUrl(newProps.mxObject);
     }
 
     componentWillUnmount() {
@@ -159,7 +159,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         return message && `Error in imageviewer configuration: ${message}`;
     }
 
-    private getImageUrl(mxObject?: mendix.lib.MxObject) {
+    private setImageUrl(mxObject?: mendix.lib.MxObject) {
         if (mxObject && this.props.source === "urlAttribute") {
             this.setState({ imageUrl: mxObject.get(this.props.dynamicUrlAttribute) as string });
         } else if (mxObject && this.props.source === "systemImage") {
