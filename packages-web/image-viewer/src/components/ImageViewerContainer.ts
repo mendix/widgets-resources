@@ -50,9 +50,10 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
             imageUrl: ""
         };
         this.subscriptionHandles = [];
-        this.attributeCallback = mxObject => () => this.setState({ imageUrl: this.getImageUrl(mxObject) });
+        this.attributeCallback = mxObject => () => this.getImageUrl(mxObject);
         this.setImageViewerReference = this.setImageViewerReference.bind(this);
         this.executeAction = this.executeAction.bind(this);
+        this.getImageUrl = this.getImageUrl.bind(this);
     }
 
     render() {
@@ -86,9 +87,9 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     componentWillReceiveProps(newProps: ImageViewerContainerProps) {
         this.resetSubscriptions(newProps.mxObject);
         this.setState({
-            alertMessage: ImageViewerContainer.validateProps(newProps),
-            imageUrl: this.getImageUrl(newProps.mxObject)
+            alertMessage: ImageViewerContainer.validateProps(newProps)
         });
+        this.getImageUrl(newProps.mxObject);
     }
 
     componentWillUnmount() {
@@ -158,18 +159,26 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         return message && `Error in imageviewer configuration: ${message}`;
     }
 
-    private getImageUrl(mxObject?: mendix.lib.MxObject): string {
+    private getImageUrl(mxObject?: mendix.lib.MxObject) {
         if (mxObject && this.props.source === "urlAttribute") {
-            return mxObject.get(this.props.dynamicUrlAttribute) as string;
+            this.setState({ imageUrl: mxObject.get(this.props.dynamicUrlAttribute) as string });
         } else if (mxObject && this.props.source === "systemImage") {
-            return mx.data.getDocumentUrl(mxObject.getGuid(), mxObject.get("changedDate") as number);
+            const url = mx.data.getDocumentUrl(mxObject.getGuid(), mxObject.get("changedDate") as number);
+            mx.data.getImageUrl(url,
+                objectUrl => {
+                    this.setState({ imageUrl: objectUrl });
+                },
+                error => this.setState({
+                    alertMessage: `Error in imageviewer while retrieving image url: ${error.message}`
+                })
+            );
+        } else if (!mxObject && (this.props.source === "systemImage" || this.props.source === "urlAttribute")) {
+            this.setState({ imageUrl: "" });
         } else if (this.props.source === "staticUrl") {
-            return this.props.urlStatic;
+            this.setState({ imageUrl: this.props.urlStatic });
         } else if (this.props.source === "staticImage") {
-            return UrlHelper.getStaticResourceUrl(this.props.imageStatic);
+            this.setState({ imageUrl: UrlHelper.getStaticResourceUrl(this.props.imageStatic) });
         }
-
-        return "";
     }
 
     private executeAction() {
