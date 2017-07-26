@@ -4,9 +4,12 @@
         margin-right: $element-spacing;
         margin-bottom: $element-spacing;
 
-        &:last-child,
+        &:last-child {
+            margin-right: 0;
+        }
         .btn {
             margin-right: 0;
+            margin-bottom: 0;
         }
     }
     .btn-group {
