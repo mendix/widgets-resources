@@ -353,7 +353,7 @@ $grid-bg-selected:                      $color-warning-lighter !default;
 $grid-bg-selected-hover:                $color-warning-lighter !default;
 
 // Striped Background Color
-$grid-bg-striped:                       lighten($grid-border-color,5) !default;
+$grid-bg-striped:                       mix($grid-border-color, #FFF, 20%) !default;
 
 // Background Footer Color
 $grid-footer-bg:                        $gray-primary !default;
