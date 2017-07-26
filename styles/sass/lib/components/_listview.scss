@@ -7,10 +7,17 @@
 .mx-listview {
     /* Remove widget padding */
     padding: 0;
+
     /* Clear search button (overrides load more button stying) */
     .mx-button.mx-listview-clear-button {
         width: auto;
     }
+
+    // Search bar
+    .mx-listview-searchbar {
+        margin-bottom: $gutter-size;
+    }
+
     /* Load more button */
     > .mx-button {
         width: 100%;
@@ -25,7 +32,15 @@
     }
     .mx-listview-item {
         padding: $listview-padding-top $listview-padding-right $listview-padding-bottom $listview-padding-left;
+        border-width: 1px 0 0 0;
+        border-style: solid;
+        border-color: $grid-border-color;
         background-color: $grid-bg;
+
+        &:last-child {
+            border-bottom: 1px solid $grid-border-color;
+        }
+
         &:hover {
             background-color: $grid-bg;
         }
@@ -45,22 +60,6 @@
 //== Design Properties
 //## Helper classes to change the look and feel of the component
 //-------------------------------------------------------------------------------------------------------------------//
-// Lined
-.listview-lined.mx-listview {
-    .mx-listview-item {
-        border-top: 1px solid $grid-border-color;
-        border-right: none;
-        border-left: none;
-        &:first-child {
-            border-radius: 0;
-        }
-        &:last-child {
-            border-bottom: 1px solid $grid-border-color;
-            border-radius: 0;
-        }
-    }
-}
-
 // Bordered
 .listview-bordered.mx-listview {
     .mx-listview-item {
@@ -86,9 +85,10 @@
 // Items as seperated blocks
 .listview-seperated.mx-listview {
     .mx-listview-item {
-        margin-bottom: 10px;
+        margin-bottom: $gutter-size;
+        border-width: 1px;
         border-style: solid;
-        border-radius: 4px;
+        border-radius: $border-radius-default;
     }
 }
 
