@@ -3899,10 +3899,13 @@ h6,
   margin-bottom: 5px;
 }
 .controlgroup .btn:last-child,
+.controlgroup .btn-group:last-child {
+  margin-right: 0;
+}
 .controlgroup .btn .btn,
-.controlgroup .btn-group:last-child,
 .controlgroup .btn-group .btn {
   margin-right: 0;
+  margin-bottom: 0;
 }
 .controlgroup .btn-group .btn + .btn {
   margin-left: -1px;
