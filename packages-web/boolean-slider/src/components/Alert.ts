@@ -1,4 +1,4 @@
-import { DOM, SFC } from "react";
+import { SFC, createElement } from "react";
 
 interface AlertProps {
     message: string;
@@ -6,8 +6,8 @@ interface AlertProps {
 
 const Alert: SFC<AlertProps> = ({ message }) =>
     message
-        ? DOM.div({ className: "alert alert-danger widget-switch-alert" }, message)
-        : null as any;
+        ? createElement("div", { className: "alert alert-danger widget-switch-alert" }, message)
+        : null;
 
 Alert.displayName = "Alert";
 

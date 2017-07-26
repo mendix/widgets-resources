@@ -1,5 +1,5 @@
 import { ShallowWrapper, shallow } from "enzyme";
-import { DOM, createElement } from "react";
+import { createElement } from "react";
 
 import { Switch, SwitchProps } from "../Switch";
 import { Alert } from "../Alert";
@@ -27,19 +27,19 @@ describe("Switch", () => {
         createAndFindElements(createProps({}));
 
         expect(switchWrapper).toBeElement(
-            DOM.div({ className: "widget-switch auto" },
-                DOM.input({
+            createElement("div", { className: "widget-switch auto" },
+                createElement("input", {
                     checked: true,
                     className: "widget-switch-checkbox enabled",
                     readOnly: true,
                     type: "checkbox"
                 }),
-                DOM.div(
+                createElement("div",
                     {
                         className: "widget-switch-btn-wrapper enabled",
                         onClick: jasmine.any(Function) as any
                     },
-                    DOM.small({ className: "widget-switch-btn right" })
+                    createElement("small", { className: "widget-switch-btn right" })
                 ),
                 createElement(Alert, { message: "" })
             )

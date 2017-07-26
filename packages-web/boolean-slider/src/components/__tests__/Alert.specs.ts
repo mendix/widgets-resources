@@ -1,5 +1,5 @@
 import { shallow } from "enzyme";
-import { DOM, createElement } from "react";
+import { createElement } from "react";
 
 import { Alert, AlertProps } from "../Alert";
 
@@ -11,7 +11,7 @@ describe("Alert", () => {
         const alert = renderAlert(message);
 
         expect(alert).toBeElement(
-            DOM.div({ className: "alert alert-danger widget-switch-alert" }, message)
+            createElement("div", { className: "alert alert-danger widget-switch-alert" }, message)
         );
     });
 
