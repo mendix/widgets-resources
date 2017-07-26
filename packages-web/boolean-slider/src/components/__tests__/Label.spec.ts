@@ -1,5 +1,5 @@
 import { shallow } from "enzyme";
-import { DOM, createElement } from "react";
+import { createElement } from "react";
 
 import { Label, LabelProps } from "../Label";
 
@@ -11,12 +11,12 @@ describe("Label", () => {
         const labelComponent = renderLabel({ label });
 
         expect(labelComponent).toBeElement(
-            DOM.div({ className: "form-horizontal widget-switch-label" },
-                DOM.div({ className: "form-group" },
-                    DOM.div({ className: "col-sm-6 col-xs-6" },
-                        DOM.label({ className: "control-label" }, label)
+            createElement("div", { className: "form-horizontal widget-switch-label" },
+                createElement("div", { className: "form-group" },
+                    createElement("div", { className: "col-sm-6 col-xs-6" },
+                        createElement("label", { className: "control-label" }, label)
                     ),
-                    DOM.div({ className: `col-sm-6` })
+                    createElement("div", { className: `col-sm-6` })
                 )
             )
         );
@@ -24,9 +24,9 @@ describe("Label", () => {
 
     it("renders a label with the specified weight class", () => {
         const labelComponent = renderLabel({ label, weight: 3 });
-        const Label = labelComponent.childAt(0).childAt(0);
+        const SwitchLabel = labelComponent.childAt(0).childAt(0);
 
-        expect(Label).toHaveClass("col-sm-3");
+        expect(SwitchLabel).toHaveClass("col-sm-3");
     });
 
     it("renders the labeled element's wrapper with the calculated weight class", () => {
