@@ -1,5 +1,5 @@
 # Image viewer
-Display an image and enlarge it on click.
+Display an image and optional perform an action on click: mobile friendly enlarge, open a page or call a mircoflow.
 
 ## Features
 * Supports different data sources:
@@ -7,10 +7,13 @@ Display an image and enlarge it on click.
     * Retrieve images from a static URL
     * Image from a URL attribute of context object
     * Image from mendix System.Images
-* Supports zoom actions
+* Supports actions:
+    * Enlarge and pinch zoom
+    * Open page
+    * Call microflow
 
 ## Dependencies
-Mendix 7.3
+Mendix 7.5
 
 ## Demo project
 https://imageviewer.mxapps.io/
