@@ -139,6 +139,52 @@
     }
 }
 
+// Wizard
+.tab-wizard.mx-tabcontainer {
+    .mx-tabcontainer-tabs {
+        border-style: none;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+
+        &:before {
+            content: "";
+            height: 1px;
+            position: absolute;
+            width: 100%;
+            display: block;
+            top: 16px;
+            background-color: $default-border-color;
+        }
+        > li {
+            position: relative;
+            width: 100%;
+            text-align: center;
+            float: none;
+            > a {
+                text-align: center;
+                margin: auto;
+                height: 33px;
+                width: 33px;
+                padding: 0;
+                line-height: 33px;
+                font-size: 18px;
+                font-weight: bold;
+                color: $brand-default;
+                border: 1px solid $default-border-color;
+                background-color: #FFF;
+                border-radius: 100%;
+            }
+            &.active a {
+                outline: none;
+                color: $brand-primary;
+                border-color: $default-border-color;
+                background-color: $gray-lighter;
+            }
+        }
+    }
+}
+
 // Tab Styling Specific for mobile
 .tab-mobile.mx-tabcontainer {
     .mx-tabcontainer-tabs {
