@@ -1,52 +1,61 @@
 {
-  "rulesDirectory": [ "node_modules/tslint-eslint-rules/dist/rules" ],
+  "rulesDirectory": [
+    "node_modules/tslint-eslint-rules/dist/rules"
+  ],
   "extends": "tslint:latest",
   "rules": {
     "class-name": true,
-    "curly": true,
-    "comment-format": [ true, "check-space" ],
+    "comment-format": [
+      true,
+      "check-space"
+    ],
     "eofline": true,
-    "indent": [ true, "spaces" ],
-    "interface-name": [ true, "never-prefix" ],
-    "member-ordering": [ true, "variables-before-functions", { "order": "statics-first" } ],
-    "new-parens": true,
+    "indent": [
+      true,
+      "tab"
+    ],
+    "member-ordering": [
+      true,
+      "variables-before-functions"
+    ],
     "no-arg": true,
     "no-bitwise": true,
     "no-conditional-assignment": true,
-    "no-console": [ true ],
+    "no-console": [
+      true
+    ],
     "no-debugger": true,
     "no-duplicate-variable": true,
-    "no-empty": true,
     "no-eval": true,
-    "no-inferrable-types": [ true, "ignore-params" ],
-    "no-namespace": [ true, "allow-declarations" ],
-    "no-invalid-this": [ true, "check-function-in-method" ],
-    "no-reference": true,
+    "no-inferrable-types": [
+      true
+    ],
+    "no-internal-module": true,
     "no-shadowed-variable": true,
-    "no-string-literal": true,
+    "no-switch-case-fall-through": true,
     "no-trailing-whitespace": true,
-    "no-unsafe-finally": true,
     "no-unused-expression": true,
-    "no-unused-new": true,
     "no-var-keyword": true,
-    "object-literal-shorthand": true,
     "one-line": [
       true,
       "check-catch",
-      "check-else",
       "check-finally",
+      "check-else",
       "check-open-brace",
       "check-whitespace"
     ],
-    "one-variable-per-declaration": [ true ],
-    "ordered-imports": [
+    "quotemark": [
       true,
-      { "import-sources-order": "lowercase-last" }
+      "double"
     ],
-    "prefer-for-of": true,
-    "quotemark": [ true, "double" ],
-    "semicolon": [ true, "always" ],
-    "triple-equals": [ true, "allow-null-check" ],
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "triple-equals": [
+      true,
+      "allow-null-check"
+    ],
     "typedef-whitespace": [
       true,
       {
@@ -57,7 +66,10 @@
         "variable-declaration": "nospace"
       }
     ],
-    "variable-name": [ true, "ban-keywords" ],
+    "variable-name": [
+      true,
+      "ban-keywords"
+    ],
     "whitespace": [
       true,
       "check-branch",
@@ -67,7 +79,13 @@
       "check-separator",
       "check-type"
     ],
-    "no-multi-spaces": [ true ],
+    "interface-name": [
+      false,
+      "always-prefix"
+    ],
+    "no-multi-spaces": [
+      true
+    ],
     "no-extra-semi": true,
     "no-irregular-whitespace": true,
     "no-duplicate-case": true,
@@ -80,14 +98,25 @@
     "no-regex-spaces": true,
     "no-invalid-regexp": true,
     "valid-typeof": true,
-    "array-bracket-spacing": [ true, "always" ],
-    "block-spacing": [ true, "always" ],
+    "array-bracket-spacing": [
+      true,
+      "always"
+    ],
+    "block-spacing": [
+      true,
+      "always"
+    ],
     "brace-style": [
       true,
       "1tbs",
-      { "allowSingleLine": true }
+      {
+        "allowSingleLine": true
+      }
     ],
-    "object-curly-spacing": [ true, "always" ],
+    "object-curly-spacing": [
+      true,
+      "always"
+    ],
     "trailing-comma": [
       true,
       {
@@ -96,14 +125,31 @@
       }
     ],
     "member-access": false,
-    "no-unused-variable": [true, "react"],
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "any",
+        "named-imports-order": "lowercase-last"
+      }
+    ],
+    "curly": false,
+    "max-line-length": [
+      true,
+      120
+    ],
     "arrow-parens": false,
-    "linebreak-style": [ true, "LF" ],
-    "space-in-parens": [ true, "never" ]
+    "no-namespace": false,
+    "array-type": [ true, "array" ],
+    "object-literal-sort-keys": false
   },
   "jsRules": {
-    "trailing-comma": [ false ],
+    "trailing-comma": [
+      false
+    ],
     "object-literal-sort-keys": false,
-    "array-bracket-spacing": [ true, "always" ]
+    "array-bracket-spacing": [
+      true,
+      "always"
+    ]
   }
 }
