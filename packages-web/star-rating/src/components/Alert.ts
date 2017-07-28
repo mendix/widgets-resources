@@ -1,8 +1,15 @@
-import { DOM, StatelessComponent } from "react";
+import { SFC, createElement } from "react";
+import * as classNames from "classnames";
 
-export const Alert: StatelessComponent<{ message?: string }> = (props) =>
-    props.message
-        ? DOM.div({ className: "alert alert-danger widget-star-rating-alert" }, props.message)
-        : null as any;
+export interface AlertProps {
+    message: string;
+    className?: string;
+    bootstrapStyle: "default" | "primary" | "success" | "info" | "warning" | "danger";
+}
+
+export const Alert: SFC<AlertProps> = ({ className, bootstrapStyle, message }) =>
+    message
+        ? createElement("div", { className: classNames(`alert alert-${bootstrapStyle}`, className) }, message)
+        : null;
 
 Alert.displayName = "Alert";
