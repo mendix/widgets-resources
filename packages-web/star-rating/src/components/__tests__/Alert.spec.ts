@@ -1,15 +1,19 @@
 import { shallow } from "enzyme";
-import { createElement, DOM } from "react";
+import { createElement } from "react";
 import { Alert } from "../Alert";
 
 describe("Alert", () => {
 
     it("should render structure correctly", () => {
         const message = "some alert message";
-        const renderAlert = shallow(createElement(Alert, { message }));
+        const renderAlert = shallow(createElement(Alert, {
+            bootstrapStyle: "danger",
+            className: "widget-star-rating-alert",
+            message
+        }));
 
         expect(renderAlert).toBeElement(
-            DOM.div({ className: "alert alert-danger widget-star-rating-alert" }, message)
+            createElement("div", { className: "alert alert-danger widget-star-rating-alert" }, message)
         );
     });
 
