@@ -41,7 +41,7 @@ describe("Switch", () => {
                     },
                     createElement("small", { className: "widget-switch-btn right" })
                 ),
-                createElement(Alert, { message: "" })
+                createElement(Alert, { bootstrapStyle: "danger", message: "" })
             )
         );
     });
