@@ -57,7 +57,11 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
                 widgetColor: this.props.widgetColor
             });
         } else {
-            return createElement(Alert, { message: alertMessage });
+            return createElement(Alert, {
+                bootstrapStyle: "danger",
+                message: alertMessage,
+                className: "widget-star-rating"
+            });
         }
     }
 

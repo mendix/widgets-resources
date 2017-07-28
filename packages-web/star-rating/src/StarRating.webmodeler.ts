@@ -23,7 +23,11 @@ export class preview extends Component<ContainerProps, {}> {
                 widgetColor: this.props.widgetColor
             });
         } else {
-            return createElement(Alert, { message: alertMessage });
+            return createElement(Alert, {
+                bootstrapStyle: "danger",
+                message: alertMessage,
+                className: "widget-star-rating"
+            });
         }
     }
 

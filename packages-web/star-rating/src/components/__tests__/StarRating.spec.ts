@@ -1,5 +1,5 @@
 import { mount, shallow } from "enzyme";
-import { createElement, DOM } from "react";
+import { createElement } from "react";
 
 import * as Rating from "react-rating";
 
@@ -24,7 +24,7 @@ describe("StarRating", () => {
         const starRating = renderStarRating(starProps);
 
         expect(starRating).toBeElement(
-            DOM.div({ className: "widget-star-rating" },
+            createElement("div", { className: "widget-star-rating" },
                 createElement(Rating, {
                     empty: "glyphicon glyphicon-star-empty widget-star-rating-empty widget-star-rating-font",
                     fractions: 1,

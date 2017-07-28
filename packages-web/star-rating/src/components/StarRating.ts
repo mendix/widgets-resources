@@ -1,10 +1,9 @@
 import * as classNames from "classnames";
-import { Component, createElement, DOM } from "react";
+import { Component, createElement } from "react";
 import * as Rating from "react-rating";
 import { widgetColors } from "./StarRatingContainer";
 
 import "../ui/StarRating.scss";
-// import "../ui/testingsassmeister.scss";
 
 export interface StarRatingProps {
     className?: string;
@@ -37,12 +36,15 @@ export class StarRating extends Component<StarRatingProps, {}> {
         this.fractions = readOnly ? 2 : 1;
         this.stop = this.props.maximumStars;
 
-        return DOM.div({ className: classNames("widget-star-rating", this.props.className), style: this.props.style },
+        return createElement("div", {
+            className: classNames("widget-star-rating", this.props.className),
+            style: this.props.style
+        },
             createElement(Rating, {
                 empty: "glyphicon glyphicon-star-empty widget-star-rating-empty widget-star-rating-font",
                 fractions: this.fractions,
                 full: "glyphicon glyphicon-star widget-star-rating-font " +
-                    `widget-star-rating-full-${this.props.widgetColor}`,
+                `widget-star-rating-full-${this.props.widgetColor}`,
                 initialRate: this.getRate(this.props),
                 onChange: !readOnly ? this.onChange : undefined,
                 readonly: readOnly,
