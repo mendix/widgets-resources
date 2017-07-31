@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/mendixlabs/boolean-slider.svg?branch=master)](https://travis-ci.org/mendixlabs/boolean-slider)
+[![Dependency Status](https://david-dm.org/mendixlabs/boolean-slider.svg)](https://david-dm.org/mendixlabs/boolean-slider)
+[![Dev Dependency Status](https://david-dm.org/mendixlabs/boolean-slider.svg#info=devDependencies)](https://david-dm.org/mendixlabs/boolean-slider#info=devDependencies)
+[![codecov](https://codecov.io/gh/mendixlabs/boolean-slider/branch/master/graph/badge.svg)](https://codecov.io/gh/mendixlabs/boolean-slider)
+
 # Switch
 Toggle a boolean attribute.
 
