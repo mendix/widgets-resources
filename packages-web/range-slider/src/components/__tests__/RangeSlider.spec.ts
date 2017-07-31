@@ -1,5 +1,5 @@
 import { ShallowWrapper, shallow } from "enzyme";
-import { DOM, createElement } from "react";
+import { createElement } from "react";
 
 import * as RcSlider from "rc-slider";
 import { Alert } from "../Alert";
@@ -39,7 +39,7 @@ describe("RangeSlider", () => {
         rangeSlider = renderSlider(sliderProps);
 
         expect(rangeSlider).toBeElement(
-            DOM.div({ className: "widget-range-slider widget-range-slider-primary" },
+            createElement("div", { className: "widget-range-slider widget-range-slider-primary" },
                 createElement(RcSlider.Range, {
                     defaultValue: [ lowerBound, upperBound ],
                     disabled: false,
@@ -50,7 +50,7 @@ describe("RangeSlider", () => {
                     step: stepValue,
                     value: [ lowerBound, upperBound ],
                     vertical: false
-                }), createElement(Alert, { message: "" })
+                }), createElement(Alert, { bootstrapStyle: "danger", message: "", className: "" })
             )
         );
     });

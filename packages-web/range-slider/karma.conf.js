@@ -11,7 +11,7 @@ Object.assign(webpackConfig, {
 });
 
 module.exports = function(config) {
-    if (config.sourceMapping) {
+    if (config.codeCoverage) {
         Object.assign(webpackConfig, {
             module: Object.assign(webpackConfig.module, {
                 rules: webpackConfig.module.rules.concat([ {
@@ -37,7 +37,7 @@ module.exports = function(config) {
         preprocessors: { "tests/test-index.js": [ "webpack", "sourcemap" ] },
         webpack: webpackConfig,
         webpackServer: { noInfo: true },
-        reporters: [ "progress", config.sourceMapping ? "coverage" : "kjhtml" ],
+        reporters: [ "progress", config.codeCoverage ? "coverage" : "kjhtml" ],
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,

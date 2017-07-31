@@ -30,6 +30,6 @@ export class preview extends Component<RangeSliderContainerProps, {}> {
 
 export function getPreviewCss() {
     return (
-        require("./ui/RangeSlider.scss") + require("rc-slider/dist/rc-slider.css")
+        require("./ui/RangeSlider.scss") + require("rc-slider/assets/index.css")
     );
 }
