@@ -12,7 +12,7 @@ const widgetConfig = {
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
         filename: `src/com/mendix/widget/custom/${name}/${widgetName}.js`,
-        libraryTarget: "amd"
+        libraryTarget: "umd"
     },
     resolve: {
         extensions: [ ".ts", ".js" ],
