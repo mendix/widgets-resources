@@ -1,17 +1,18 @@
 {
   "name": "imageviewer",
   "widgetName": "ImageViewer",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Display an image and enlarge it on click",
   "scripts": {
-    "pretest": "tsc",
-    "lint": "tslint -c tslint.json '**/*.ts' --exclude '**/node_modules/**' --exclude '**/dist/**'",
-    "test": "karma start --single-run --codeCoverage && node tests/remap.js"
+    "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec grunt",
+    "pretest": "tsc && npm run lint && grunt release",
+    "test": "karma start --single-run --codeCoverage && node tests/remap.js",
+    "emit": "tsc",
+    "lint": "tslint -c tslint.json '**/*.ts' --exclude '**/node_modules/**' --exclude '**/dist/**'"
   },
   "pre-commit": [
-    "pretest",
-    "lint",
-    "test"
+    "emit",
+    "lint"
   ],
   "repository": {
     "type": "git",
@@ -60,6 +61,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
     "mendix-client": "https://github.com/FlockOfBirds/Mendix-client-typing/archive/7.1.0.tar.gz",
+    "nodemon": "^1.11.0",
     "pre-commit": "^1.2.2",
     "raw-loader": "^0.5.1",
     "react": "^15.6.1",

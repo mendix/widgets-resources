@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/mendixlabs/image-viewer.svg?branch=master)](https://travis-ci.org/mendixlabs/image-viewer)
+[![Dependency Status](https://david-dm.org/mendixlabs/image-viewer.svg)](https://david-dm.org/mendixlabs/image-viewer)
+[![Dev Dependency Status](https://david-dm.org/mendixlabs/image-viewer.svg#info=devDependencies)](https://david-dm.org/mendixlabs/image-viewer#info=devDependencies)
+[![codecov](https://codecov.io/gh/mendixlabs/image-viewer/branch/master/graph/badge.svg)](https://codecov.io/gh/mendixlabs/image-viewer)
+
 # Image viewer
 Display an image and optional perform an action on click: mobile friendly enlarge, open a page or call a mircoflow.
 
