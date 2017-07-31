@@ -45,7 +45,7 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
 
     render() {
         if (this.state.alertMessage) {
-            return createElement(Alert, { message: this.state.alertMessage });
+            return createElement(Alert, { bootstrapStyle: "danger", message: this.state.alertMessage });
         }
 
         return createElement(BadgeButton, {

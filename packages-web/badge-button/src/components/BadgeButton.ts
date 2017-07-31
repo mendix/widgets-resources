@@ -1,4 +1,4 @@
-import { DOM, SFC } from "react";
+import { SFC, createElement } from "react";
 import * as classNames from "classnames";
 
 import "../ui/BadgeButton.css";
@@ -16,7 +16,7 @@ export interface BadgeButtonProps {
 
 export type BootstrapStyle = "default" | "info" | "primary" | "danger" | "success" | "warning";
 
-export const BadgeButton: SFC<BadgeButtonProps> = (props) => DOM.button({
+export const BadgeButton: SFC<BadgeButtonProps> = (props) => createElement("button", {
     className: classNames("widget-badge-button btn", props.className, {
         [`btn-${props.bootstrapStyle}`]: !!props.bootstrapStyle
     }),
@@ -24,6 +24,6 @@ export const BadgeButton: SFC<BadgeButtonProps> = (props) => DOM.button({
     ref: props.getRef,
     style: props.style
 },
-    DOM.span({ className: "widget-badge-button-text" }, props.label),
-    DOM.span({ className: "badge" }, props.value || props.defaultValue)
+    createElement("span", { className: "widget-badge-button-text" }, props.label),
+    createElement("span", { className: "badge" }, props.value || props.defaultValue)
 );

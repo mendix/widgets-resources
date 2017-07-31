@@ -1,10 +1,15 @@
-import { DOM, SFC } from "react";
+import { SFC, createElement } from "react";
+import * as classNames from "classnames";
 
-const Alert: SFC<{ message?: string }> = ({ message }) =>
+export interface AlertProps {
+    message?: string;
+    className?: string;
+    bootstrapStyle: "default" | "primary" | "success" | "info" | "warning" | "danger";
+}
+
+export const Alert: SFC<AlertProps> = ({ className, bootstrapStyle, message }) =>
     message
-        ? DOM.div({ className: "alert alert-danger widget-badge-button" }, message)
-        : null as any;
+        ? createElement("div", { className: classNames(`alert alert-${bootstrapStyle}`, className) }, message)
+        : null;
 
 Alert.displayName = "Alert";
-
-export { Alert };

@@ -1,18 +1,21 @@
-const path = require("path");
 const webpack = require("webpack");
+const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+
+const pkg = require("./package");
+const widgetName = pkg.widgetName;
+const name = pkg.widgetName.toLowerCase();
 
 const widgetConfig = {
-    entry: "./src/components/BadgeButtonContainer.ts",
+    entry: `./src/components/${widgetName}Container.ts`,
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
-        filename: "src/com/mendix/widget/custom/badgebutton/BadgeButton.js",
+        filename: `src/com/mendix/widget/custom/${name}/${widgetName}.js`,
         libraryTarget: "umd"
     },
     resolve: {
-        extensions: [ ".ts", ".js" ],
+        extensions: [ ".ts", ".js", ".json" ],
         alias: {
             "tests": path.resolve(__dirname, "./tests")
         }
@@ -23,24 +26,35 @@ const widgetConfig = {
             { test: /\.css$/, loader: ExtractTextPlugin.extract({
                 fallback: "style-loader",
                 use: "css-loader"
+            }) },
+            { test: /\.scss$/, loader: ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: "css-loader!sass-loader"
             }) }
         ]
     },
     devtool: "source-map",
     externals: [ "react", "react-dom" ],
     plugins: [
-        new CleanWebpackPlugin("dist/tmp"),
-        new CopyWebpackPlugin([ { from: "src/**/*.xml" } ], { copyUnmodified: true }),
-        new ExtractTextPlugin({ filename: "./src/com/mendix/widget/custom/badgebutton/ui/BadgeButton.css" }),
-        new webpack.LoaderOptionsPlugin({ debug: true })
+        new CopyWebpackPlugin([
+            { from: "src/**/*.js" },
+            { from: "src/**/*.xml" },
+            { from: "src/**/*.png", to: `src/com/mendix/widget/custom/${name}/` }
+        ], {
+            copyUnmodified: true
+        }),
+        new ExtractTextPlugin({ filename: `./src/com/mendix/widget/custom/${name}/ui/${widgetName}.css` }),
+        new webpack.LoaderOptionsPlugin({
+            debug: true
+        })
     ]
 };
 
 const previewConfig = {
-    entry: "./src/BadgeButton.webmodeler.ts",
+    entry: `./src/${widgetName}.webmodeler.ts`,
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
-        filename: "src/BadgeButton.webmodeler.js",
+        filename: `src/${widgetName}.webmodeler.js`,
         libraryTarget: "commonjs"
     },
     resolve: {
@@ -48,13 +62,16 @@ const previewConfig = {
     },
     module: {
         rules: [
-            { test: /\.ts$/, use: "ts-loader" },
+            { test: /\.ts$/, loader: "ts-loader", options: {
+                compilerOptions: {
+                    "module": "CommonJS",
+                }
+            }},
             { test: /\.css$/, use: "raw-loader" },
             { test: /\.scss$/, use: [
-                    { loader: "raw-loader" },
-                    { loader: "sass-loader" }
-                ]
-            }
+                { loader: "raw-loader" },
+                { loader: "sass-loader" }
+            ] }
         ]
     },
     devtool: "inline-source-map",

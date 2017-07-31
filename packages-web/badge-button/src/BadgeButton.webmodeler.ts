@@ -1,6 +1,5 @@
 import { Component, createElement } from "react";
 import { BadgeButton, BadgeButtonProps } from "./components/BadgeButton";
-import { Overlay } from "./components/Overlay";
 import { Alert } from "./components/Alert";
 import BadgeButtonContainer, { BadgeButtonContainerProps } from "./components/BadgeButtonContainer";
 
@@ -10,18 +9,18 @@ type VisibilityMap = {
     [P in keyof BadgeButtonContainerProps]: boolean;
 };
 
-// tslint:disable-next-line:class-name
+// tslint:disable-next-line class-name
 export class preview extends Component<BadgeButtonContainerProps, {}> {
     render() {
         const message = BadgeButtonContainer.validateProps(this.props);
-
-        return createElement(Overlay, { myRef: this.parentInline },
-            createElement(Alert, { message }),
+        return createElement("div", { ref: this.parentInline },
+            createElement(Alert, { bootstrapStyle: "danger", className: "widget-badge-button-alert", message }),
             createElement(BadgeButton, this.transformProps(this.props))
         );
     }
 
-    private parentInline(node?: HTMLElement) {
+    private parentInline(node?: HTMLElement | null) {
+        // Temporary fix, the web modeler add a containing div, to render inline we need to change it.
         if (node && node.parentElement) {
             node.parentElement.style.display = "inline-block";
         }
