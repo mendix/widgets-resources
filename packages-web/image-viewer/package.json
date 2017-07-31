@@ -60,7 +60,7 @@
     "karma-remap-istanbul": "^0.6.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
-    "mendix-client": "https://github.com/FlockOfBirds/Mendix-client-typing/archive/7.1.0.tar.gz",
+    "mendix-client": "https://github.com/FlockOfBirds/Mendix-client-typing/archive/7.3.0.tar.gz",
     "nodemon": "^1.11.0",
     "pre-commit": "^1.2.2",
     "raw-loader": "^0.5.1",
