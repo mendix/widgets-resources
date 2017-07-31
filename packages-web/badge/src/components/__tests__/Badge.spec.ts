@@ -1,5 +1,5 @@
 import { shallow } from "enzyme";
-import { DOM, createElement } from "react";
+import { createElement } from "react";
 
 import { Badge } from "../Badge";
 import { BadgeProps } from "../Badge";
@@ -17,7 +17,7 @@ describe("Badge", () => {
         const badge = createBadge(badgeProps);
 
         expect(badge).toBeElement(
-            DOM.span(
+            createElement("span",
                 {
                     className: ("widget-badge badge label-default"),
                     onClick: jasmine.any(Function) as any,
