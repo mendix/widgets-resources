@@ -1,11 +1,11 @@
-import { Component, DOM, ReactNode, createElement } from "react";
+import { Component, ReactNode, createElement } from "react";
 import * as classNames from "classnames";
 
 import { Handle, Marks, Range } from "rc-slider";
 import Tooltip from "rc-tooltip";
 import { Alert } from "./Alert";
 
-import "rc-slider/dist/rc-slider.css";
+import "rc-slider/assets/index.css";
 import "../ui/RangeSlider.scss";
 
 interface TooltipProps {
@@ -45,7 +45,7 @@ class RangeSlider extends Component<RangeSliderProps, {}> {
         const { alertMessage, maxValue, minValue, lowerBound, upperBound, stepValue, tooltipText } = this.props;
         const rangeSliderValues = this.getValidBounds();
 
-        return DOM.div({
+        return createElement("div", {
             className: classNames(
                 "widget-range-slider",
                 `widget-range-slider-${this.props.bootstrapStyle}`,
@@ -69,7 +69,12 @@ class RangeSlider extends Component<RangeSliderProps, {}> {
                 step: stepValue,
                 value: rangeSliderValues
             }),
-            createElement(Alert, { message: alertMessage })
+            createElement(Alert,
+                {
+                    bootstrapStyle: "danger",
+                    className: "widget-range-slider-alert",
+                    message: alertMessage
+                })
         );
     }
 
@@ -120,7 +125,7 @@ class RangeSlider extends Component<RangeSliderProps, {}> {
             return createElement(Tooltip,
                 {
                     mouseLeaveDelay: 0,
-                    overlay: DOM.div(null, sliderText),
+                    overlay: createElement("div", {}, sliderText),
                     placement: "top",
                     prefixCls: "rc-slider-tooltip",
                     trigger: [ "hover", "click", "focus" ]
