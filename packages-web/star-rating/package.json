@@ -35,7 +35,7 @@
   "devDependencies": {
     "@types/classnames": "^2.2.0",
     "@types/core-js": "0.9.36",
-    "@types/enzyme": "^2.7.9",
+    "@types/enzyme": "^2.8.4",
     "@types/jasmine": "^2.5.47",
     "@types/karma": "^0.13.35",
     "@types/react": "^15.6.0",
@@ -61,7 +61,7 @@
     "istanbul": "^0.4.3",
     "istanbul-instrumenter-loader": "^3.0.0",
     "jasmine": "^2.7.0",
-    "json-loader": "^0.5.4",
+    "json-loader": "^0.5.7",
     "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-coverage": "^1.1.1",
@@ -69,7 +69,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-remap-istanbul": "^0.6.0",
     "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^2.0.2",
+    "karma-webpack": "^2.0.4",
     "mendix-client": "https://github.com/FlockOfBirds/Mendix-client-typing/archive/7.1.0.tar.gz",
     "node-sass": "^4.5.3",
     "raw-loader": "^0.5.1",
@@ -81,11 +81,11 @@
     "source-map-loader": "^0.2.0",
     "style-loader": "^0.18.2",
     "ts-loader": "^2.3.2",
-    "tslint": "^5.4.3",
+    "tslint": "^5.5.0",
     "tslint-eslint-rules": "^4.0.0",
     "typescript": "^2.2.1",
     "webpack": "^3.4.1",
-    "webpack-dev-server": "^2.2.0"
+    "webpack-dev-server": "^2.6.1"
   },
   "dependencies": {
     "classnames": "^2.2.5",
