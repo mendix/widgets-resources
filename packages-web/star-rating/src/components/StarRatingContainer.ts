@@ -60,7 +60,7 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
             return createElement(Alert, {
                 bootstrapStyle: "danger",
                 message: alertMessage,
-                className: "widget-star-rating"
+                className: "widget-star-rating-alert"
             });
         }
     }
