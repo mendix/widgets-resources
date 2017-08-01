@@ -53,7 +53,11 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
 
     render() {
         if (this.state.showAlert) {
-            return createElement(Alert, { message: this.state.alertMessage });
+            return createElement(Alert, {
+                bootstrapStyle: "danger",
+                className: "widget-progress-circle-alert",
+                message: this.state.alertMessage
+            });
         }
 
         return createElement(ProgressCircle, {
@@ -155,8 +159,8 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
                 });
             } else if (onClickEvent === "showPage" && page) {
                 window.mx.ui.openForm(page, {
-                    error: error => window.mx.ui.error(`Error while opening page ${page}: ${error.message}`),
-                    context
+                    context,
+                    error: error => window.mx.ui.error(`Error while opening page ${page}: ${error.message}`)
                 });
             }
         }

@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/mendixlabs/progress-circle.svg?branch=master)](https://travis-ci.org/mendixlabs/progress-circle)
+[![Dependency Status](https://david-dm.org/mendixlabs/progress-circle.svg)](https://david-dm.org/mendixlabs/progress-circle)
+[![Dev Dependency Status](https://david-dm.org/mendixlabs/progress-circle.svg#info=devDependencies)](https://david-dm.org/mendixlabs/progress-circle#info=devDependencies)
+[![codecov](https://codecov.io/gh/mendixlabs/progress-circle/branch/master/graph/badge.svg)](https://codecov.io/gh/mendixlabs/progress-circle)
+
 # Progress circle
 Displays a progress in a circle.
 
@@ -8,7 +13,7 @@ Displays a progress in a circle.
 * Show progress circle with different colors
 
 ## Dependencies
-Mendix 7.1
+Mendix 7.5
 
 ## Usage
 Place the widget in the context of an object that has attributes for value and maximum value
@@ -35,7 +40,7 @@ To set up the development environment, run:
 Create a folder named `dist` in the project root.
 
 
-Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Or get the test project from https://github.com/mendixlabs/progress-circle/releases/download/v1.2.2/TestProgressCircle.mpk Changes to the widget code shall be automatically pushed to this test project.
+Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Or get the test project from [https://github.com/mendixlabs/progress-circle/releases/latest](https://github.com/mendixlabs/progress-circle/releases/latest) Changes to the widget code shall be automatically pushed to this test project.
 
 To automatically compile, bundle and push code changes to the running test project, run:
 

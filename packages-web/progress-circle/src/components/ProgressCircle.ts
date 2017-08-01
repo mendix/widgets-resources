@@ -1,4 +1,4 @@
-import { Component, DOM, createElement } from "react";
+import { Component, createElement } from "react";
 
 import * as classNames from "classnames";
 import { Circle } from "progressbar.js";
@@ -62,13 +62,13 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
         const { maximumValue, textSize, negativeValueColor, positiveValueColor, value } = this.props;
         const textClass = textSize === "text" ? "mx-text" : textSize;
         const validMax = typeof maximumValue === "number" ? maximumValue > 0 : false;
-        return DOM.div(
+        return createElement("div",
             {
                 className: classNames("widget-progress-circle", this.props.className),
                 style: this.props.style
             },
-            createElement(Alert, { message: this.state.alertMessage }),
-            DOM.div({
+            createElement(Alert, { bootstrapStyle: "danger", message: this.state.alertMessage }),
+            createElement("div", {
                 className: classNames(
                     textClass,
                     this.progressCircleColorClass,
