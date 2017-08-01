@@ -1,4 +1,4 @@
-import { Component, DOM, ReactNode, createElement } from "react";
+import { Component, ReactNode, createElement } from "react";
 
 import * as classNames from "classnames";
 import RcSlider, { Handle, Marks } from "rc-slider";
@@ -6,7 +6,7 @@ import Tooltip from "rc-tooltip";
 
 import { Alert } from "./Alert";
 
-import "rc-slider/dist/rc-slider.css";
+import "rc-slider/assets/index.css";
 import "../ui/Slider.scss";
 
 interface TooltipOptions {
@@ -49,7 +49,7 @@ class Slider extends Component<SliderProps, {}> {
 
     render() {
         const { alertMessage, tooltipText } = this.props;
-        return DOM.div(
+        return createElement("div",
             {
                 className: classNames(
                     "widget-slider",
@@ -127,7 +127,7 @@ class Slider extends Component<SliderProps, {}> {
             return createElement(Tooltip,
                 {
                     mouseLeaveDelay: 0,
-                    overlay: DOM.div(null, sliderText),
+                    overlay: createElement("div", {}, sliderText),
                     placement: "top",
                     prefixCls: "rc-slider-tooltip",
                     trigger: [ "hover", "click", "focus" ]

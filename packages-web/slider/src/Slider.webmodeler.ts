@@ -29,6 +29,6 @@ export class preview extends Component<SliderContainerProps, {}> {
 
 export function getPreviewCss() {
     return (
-        require("./ui/Slider.scss") + require("rc-slider/dist/rc-slider.css")
+        require("./ui/Slider.scss") + require("rc-slider/assets/index.css")
     );
 }

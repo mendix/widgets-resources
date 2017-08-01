@@ -1,18 +1,18 @@
 {
   "name": "slider",
   "widgetName": "Slider",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Change a number value using a slider",
   "scripts": {
-    "pretest": "tsc",
+    "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec grunt",
+    "pretest": "tsc && npm run lint && grunt release",
     "test": "karma start --single-run --codeCoverage && node tests/remap.js",
     "emit": "tsc",
-    "lint": "tslint -c tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'"
+    "lint": "tslint -c tslint.json '**/*.ts' --exclude '**/node_modules/**' --exclude '**/dist/**'"
   },
   "pre-commit": [
     "emit",
-    "lint",
-    "test"
+    "lint"
   ],
   "repository": {
     "type": "git",
@@ -37,7 +37,7 @@
     "core-js": "^2.4.1",
     "css-loader": "^0.28.0",
     "enzyme": "^2.7.0",
-    "extract-text-webpack-plugin": "^2.1.0",
+    "extract-text-webpack-plugin": "^3.0.0",
     "grunt": "1.0.1",
     "grunt-check-dependencies": "^1.0.0",
     "grunt-contrib-clean": "^1.0.0",
@@ -70,17 +70,18 @@
     "remap-istanbul": "^0.9.1",
     "sass-loader": "^6.0.3",
     "source-map-loader": "^0.2.0",
-    "style-loader": "^0.16.1",
+    "style-loader": "^0.18.2",
     "ts-loader": "^2.0.2",
     "tslint": "^5.0.0",
     "tslint-eslint-rules": "^4.0.0",
     "typescript": "^2.2.1",
-    "webpack": "^2.3.0",
+    "webpack": "^3.3.0",
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "rc-slider": "^8.0.2",
+    "jasmine-core": "^2.7.0",
+    "rc-slider": "^8.3.0",
     "rc-tooltip": "^3.4.6"
   }
 }
