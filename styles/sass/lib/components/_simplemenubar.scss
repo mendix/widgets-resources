@@ -3,33 +3,114 @@
 
    Default Mendix Simple Menu Bar
 ========================================================================== */
+@mixin menubar($variant: default) {
+    $navigation-font-size: $navigation-font-size;
+    $navigation-sub-font-size: $navigation-sub-font-size;
+    $navigation-glyph-size: $navigation-glyph-size;
+    $navigation-bg: $navigation-bg;
+    $navigation-bg-hover: $navigation-bg-hover;
+    $navigation-bg-active: $navigation-bg-active;
+    $navigation-color: $navigation-color;
+    $navigation-color-hover: $navigation-color-hover;
+    $navigation-color-active: $navigation-color-active;
+    $navigation-sub-bg: $navigation-sub-bg;
+    $navigation-sub-bg-hover: $navigation-sub-bg-hover;
+    $navigation-sub-bg-active: $navigation-sub-bg-active;
+    $navigation-sub-color: $navigation-sub-color;
+    $navigation-sub-color-hover: $navigation-sub-color-hover;
+    $navigation-sub-color-active: $navigation-sub-color-active;
+    $navigation-border-color: $navigation-border-color;
+    @if $variant == sidebar {
+        $navigation-font-size: $navsidebar-font-size;
+        $navigation-sub-font-size: $navsidebar-sub-font-size;
+        $navigation-glyph-size: $navsidebar-glyph-size;
+        $navigation-bg: $navsidebar-bg;
+        $navigation-bg-hover: $navsidebar-bg-hover;
+        $navigation-bg-active: $navsidebar-bg-active;
+        $navigation-color: $navsidebar-color;
+        $navigation-color-hover: $navsidebar-color-hover;
+        $navigation-color-active: $navsidebar-color-active;
+        $navigation-sub-bg: $navsidebar-sub-bg;
+        $navigation-sub-bg-hover: $navsidebar-sub-bg-hover;
+        $navigation-sub-bg-active: $navsidebar-sub-bg-active;
+        $navigation-sub-color: $navsidebar-sub-color;
+        $navigation-sub-color-hover: $navsidebar-sub-color-hover;
+        $navigation-sub-color-active: $navsidebar-sub-color-active;
+        $navigation-border-color: $navsidebar-border-color;
+    } @else if $variant == topbar {
+        $navigation-font-size: $navtopbar-font-size;
+        $navigation-sub-font-size: $navtopbar-sub-font-size;
+        $navigation-glyph-size: $navtopbar-glyph-size;
+        $navigation-bg: $navtopbar-bg ;
+        $navigation-bg-hover: $navtopbar-bg-hover;
+        $navigation-bg-active: $navtopbar-bg-active;
+        $navigation-color: $navtopbar-color;
+        $navigation-color-hover: $navtopbar-color-hover;
+        $navigation-color-active: $navtopbar-color-active;
+        $navigation-sub-bg: $navtopbar-sub-bg;
+        $navigation-sub-bg-hover: $navtopbar-sub-bg-hover;
+        $navigation-sub-bg-active: $navtopbar-sub-bg-active;
+        $navigation-sub-color: $navtopbar-sub-color;
+        $navigation-sub-color-hover: $navtopbar-sub-color-hover;
+        $navigation-sub-color-active: $navtopbar-sub-color-active;
+        $navigation-border-color: $navtopbar-border-color;
+    }
+    .mx-menubar {
+        background-color: $navigation-bg;
+        ul.mx-menubar-list {
+            li.mx-menubar-item {
+                a {
+                    color: $navigation-color;
+                    font-size: $navigation-sub-font-size;
+                    .glyphicon {
+                        font-size: $navigation-glyph-size;
+                    }
+                }
+                a:hover,
+                a:focus,
+                &:hover a,
+                &:focus a,
+                &.active a {
+                    color: $navigation-color-hover;
+                    background-color: $navigation-bg-hover;
+                }
+                &.active a {
+                    color: $navigation-color-active;
+                    background-color: $navigation-bg-active;
+                }
+            }
+        }
+    }
+    .mx-menubar-vertical {
+        ul.mx-menubar-list {
+            li.mx-menubar-item {
+                a {
+                    border-bottom: 1px solid $navigation-border-color;
+                }
+            }
+        }
+    }
+}
 
 .mx-menubar {
     padding: 0;
-    background-color: $navsidebar-bg;
     ul.mx-menubar-list {
         width: 100%;
         min-height: 50px;
         table-layout: fixed;
         li.mx-menubar-item {
-            display: inline-block;
-            width: 100%;
             margin: 0;
             a {
                 display: block;
                 overflow: hidden;
                 padding: 0 8px;
                 text-align: center;
-                vertical-align: middle;
-                color: $navsidebar-color;
                 border-radius: 0;
-                font-size: $navsidebar-sub-font-size;
                 font-weight: $font-weight-normal;
                 line-height: 50px;
                 .glyphicon {
                     top: -1px;
                     vertical-align: middle;
-                    font-size: $navsidebar-glyph-size;
                 }
             }
             a:hover,
@@ -38,12 +119,6 @@
             &:focus a,
             &.active a {
                 text-decoration: none;
-                color: $navsidebar-color-hover;
-                background-color: $navsidebar-bg-hover;
-            }
-            &.active a {
-                color: $navsidebar-color-active;
-                background-color: $navsidebar-bg-active;
             }
         }
     }
@@ -53,52 +128,17 @@
         outline: 0;
     }
 }
-
 // Vertical variation specifics 
-.mx-menubar-vertical {
-    background-color: $navtopbar-bg;
-    ul.mx-menubar-list {
-        li.mx-menubar-item {
-            a {
-                color: $navtopbar-color;
-                border-bottom: 1px solid $navtopbar-border-color;
-                font-size: $navtopbar-font-size;
-                .glyphicon {
-                    top: -1px;
-                    vertical-align: middle;
-                    font-size: $navtopbar-glyph-size;
-                }
-                &:hover,
-                &:focus,
-                &.active {
-                    text-decoration: none;
-                    color: $navtopbar-color-hover;
-                    background-color: $navtopbar-bg-hover;
-                }
-                &.active {
-                    color: $navtopbar-color-active;
-                    background-color: $navtopbar-bg-active;
-                }
-            }
-        }
-    }
+.mx-menubar-vertical ul.mx-menubar-list li.mx-menubar-item {
+    display: block;
 }
 
 // Horizontal variation specifics 
 .mx-menubar-horizontal {
-    background-color: #2D3E4E;
     box-shadow: 2px 0 4px 0 rgba(0,0,0,0.14);
     ul.mx-menubar-list {
         li.mx-menubar-item {
             width: auto;
-            a {
-                color: #F5F8FD;
-                font-size: 10px;
-            }
-            &.active a {
-                color: $brand-primary;
-                background-color: #283746;
-            }
         }
     }
     /* Two menu items */
@@ -143,4 +183,17 @@
             }
         }
     }
+}
+
+// Default
+@include menubar();
+
+// When used in topbar
+.region-topbar {
+    @include menubar($variant: topbar);
+}
+
+// When used in sidebar
+.region-sidebar {
+    @include menubar($variant: sidebar);
 }
