@@ -1,0 +1,123 @@
+.widget-rich-text {
+    @mixin separator {
+        padding-left: 8px;
+        padding-right: 8px;
+        border-right: 1px solid rgba(204, 204, 204, 0.5);
+        margin-left: 0;
+        margin-right: 0;
+
+        &:last-child {
+            border-right: none;
+        }
+    }
+
+    .ql-toolbar {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+
+        &.ql-snow {
+            border-color: #DDD;
+            border-bottom: 0;
+
+            .ql-formats {
+                @include separator;
+            }
+        }
+    }
+
+    .ql-bubble {
+        .ql-toolbar {
+            .ql-formats {
+                @include separator;
+            }
+        }
+    }
+
+    &.buttons-hidden {
+        .ql-formats {
+            visibility: hidden;
+        }
+    }
+
+    @mixin text-area-border-radius($radius) {
+        .ql-editor {
+            border-top-left-radius: $radius;
+            border-top-right-radius: $radius;
+        }
+    }
+
+    .widget-rich-text-quill {
+        &.ql-container {
+            &.ql-snow {
+                border: none;
+
+                @include text-area-border-radius(0);
+            }
+        }
+
+        &.ql-disabled {
+            .ql-editor {
+                cursor: default;
+            }
+        }
+    }
+
+    @mixin hide-toolbar() {
+        .ql-toolbar {
+            display: none;
+        }
+    }
+
+    &.disabled-text {
+        p {
+            margin-bottom: 0;
+        }
+    }
+
+    &.disabled-bordered {
+        @include hide-toolbar();
+
+        .widget-rich-text-quill {
+            &.ql-container {
+                @include text-area-border-radius(4px);
+            }
+
+            .ql-editor {
+                background-color: #eee;
+            }
+        }
+    }
+
+    &.disabled-bordered-toolbar {
+        .widget-rich-text-quill {
+            background-color: #eee;
+
+            .ql-editor {
+                background-color: #eee;
+            }
+        }
+
+        .ql-toolbar {
+            &.ql-snow {
+                background-color: #eee;
+
+                button {
+                    cursor: default;
+
+                    @mixin default-stroke {
+                        .ql-stroke {
+                            stroke: #444;
+                        }
+                    }
+                    &.ql-active {
+                        @include default-stroke;
+                    }
+
+                    &:hover {
+                        @include default-stroke
+                    }
+                }
+            }
+        }
+    }
+}
