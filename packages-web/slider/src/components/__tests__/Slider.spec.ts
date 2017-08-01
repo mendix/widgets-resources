@@ -1,5 +1,5 @@
 import { ShallowWrapper, shallow } from "enzyme";
-import { DOM, createElement } from "react";
+import { createElement } from "react";
 
 import RcSlider, { Marks } from "rc-slider";
 import { Alert } from "../Alert";
@@ -35,7 +35,7 @@ describe("Slider", () => {
         slider = renderSlider(sliderProps);
 
         expect(slider).toBeElement(
-            DOM.div({ className: "widget-slider widget-slider-primary" },
+            createElement("div", { className: "widget-slider widget-slider-primary" },
                 createElement(RcSlider, {
                     disabled: false,
                     handle: jasmine.any(Function) as any,

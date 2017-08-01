@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/mendixlabs/slider.svg?branch=master)](https://travis-ci.org/mendixlabs/slider)
+[![Dependency Status](https://david-dm.org/mendixlabs/slider.svg)](https://david-dm.org/mendixlabs/slider)
+[![Dev Dependency Status](https://david-dm.org/mendixlabs/slider.svg#info=devDependencies)](https://david-dm.org/mendixlabs/slider#info=devDependencies)
+[![codecov](https://codecov.io/gh/mendixlabs/slider/branch/master/graph/badge.svg)](https://codecov.io/gh/mendixlabs/slider)
+
 # Slider
 Change a number value using a slider
 
@@ -41,7 +46,7 @@ To set up the development environment, run:
 
 Create a folder named `dist` in the project root.
 
-Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Or get the test project from https://github.com/mendixlabs/slider/releases/download/v1.1.1/TestSlider.mpk. Changes to the widget code shall be automatically pushed to this test project.
+Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Or get the test project from [https://github.com/mendixlabs/slider/releases/latest](https://github.com/mendixlabs/slider/releases/latest) Changes to the widget code shall be automatically pushed to this test project.
 
 To automatically compile, bundle and push code changes to the running test project, run:
 
