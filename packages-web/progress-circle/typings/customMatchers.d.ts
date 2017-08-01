@@ -1,4 +1,5 @@
 // Note: cannot use ReactElement here, because importing a module from the declaration of a namespace is not allowed.
+// tslint:disable
 declare namespace jasmine {
     interface Matchers<T> {
         toBeElement(expected: any): boolean;

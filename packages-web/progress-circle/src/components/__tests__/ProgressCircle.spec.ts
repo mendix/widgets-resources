@@ -1,5 +1,5 @@
 import { shallow } from "enzyme";
-import { DOM, createElement } from "react";
+import { createElement } from "react";
 
 import * as progressbar from "progressbar.js";
 
@@ -27,9 +27,9 @@ describe("ProgressCircle", () => {
         const progress = renderProgressCircle({ value: 60, positiveValueColor });
 
         expect(progress).toBeElement(
-            DOM.div({ className: "widget-progress-circle" },
-                createElement(Alert),
-                DOM.div({ className: "h2" })
+            createElement("div", { className: "widget-progress-circle" },
+                createElement(Alert, { bootstrapStyle: "danger" }),
+                createElement("div", { className: "h2" })
             )
         );
     });
