@@ -8,7 +8,7 @@ declare module "react-rating" {
         placeholderRate?: number;
         initialRate?: number;
         empty?: (string | object | React.ReactElement<any>)[] | string | object;
-        placeholder?: (string | object | React.ReactElement <any>)[] | string | object;
+        placeholder?: (string | object | React.ReactElement<any>)[] | string | object;
         full?: (string | object | React.ReactElement <any>)[] | string | object;
         readonly?: boolean;
         quiet?: boolean;

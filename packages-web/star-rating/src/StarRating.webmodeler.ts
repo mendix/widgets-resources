@@ -26,7 +26,7 @@ export class preview extends Component<ContainerProps, {}> {
             return createElement(Alert, {
                 bootstrapStyle: "danger",
                 message: alertMessage,
-                className: "widget-star-rating"
+                className: "widget-star-rating-alert"
             });
         }
     }
