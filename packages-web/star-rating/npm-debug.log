@@ -3,7 +3,12 @@
 1 verbose cli   'C:\\Users\\Flock Of Birds\\node_modules\\npm\\bin\\npm-cli.js',
 1 verbose cli   'install',
 1 verbose cli   '--save-dev',
-1 verbose cli   'jasmine@2.7.0',
+1 verbose cli   '@types/enzyme@2.8.4',
+1 verbose cli   'karma-webpack@2.0.4',
+1 verbose cli   'typescript@2.4.2',
+1 verbose cli   'tslint@5.5.0',
+1 verbose cli   'webpack-dev-server@2.6.1',
+1 verbose cli   'json-loader@0.5.7',
 1 verbose cli   '--color=always' ]
 2 info using npm@2.15.11
 3 info using node@v8.2.1
@@ -20,7 +25,7 @@
 4 verbose stack     at Function.Module._load (module.js:458:3)
 5 verbose cwd C:\Users\Flock Of Birds\Documents\GitHub\Flock of Birds\star-rating
 6 error Windows_NT 10.0.15063
-7 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\Flock Of Birds\\node_modules\\npm\\bin\\npm-cli.js" "install" "--save-dev" "jasmine@2.7.0" "--color=always"
+7 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\Flock Of Birds\\node_modules\\npm\\bin\\npm-cli.js" "install" "--save-dev" "@types/enzyme@2.8.4" "karma-webpack@2.0.4" "typescript@2.4.2" "tslint@5.5.0" "webpack-dev-server@2.6.1" "json-loader@0.5.7" "--color=always"
 8 error node v8.2.1
 9 error npm  v2.15.11
 10 error code MODULE_NOT_FOUND
