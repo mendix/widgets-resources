@@ -3,33 +3,100 @@
 
    Default Mendix Navigation List Widget. A navigation list can be used to attach an action to an entire row. Such a row is called a navigation list item
 ========================================================================== */
+@mixin navigaitonlist($variant: default) {
+    $navigation-font-size: $navigation-font-size;
+    $navigation-sub-font-size: $navigation-sub-font-size;
+    $navigation-glyph-size: $navigation-glyph-size;
+    $navigation-bg: $navigation-bg;
+    $navigation-bg-hover: $navigation-bg-hover;
+    $navigation-bg-active: $navigation-bg-active;
+    $navigation-color: $navigation-color;
+    $navigation-color-hover: $navigation-color-hover;
+    $navigation-color-active: $navigation-color-active;
+    $navigation-sub-bg: $navigation-sub-bg;
+    $navigation-sub-bg-hover: $navigation-sub-bg-hover;
+    $navigation-sub-bg-active: $navigation-sub-bg-active;
+    $navigation-sub-color: $navigation-sub-color;
+    $navigation-sub-color-hover: $navigation-sub-color-hover;
+    $navigation-sub-color-active: $navigation-sub-color-active;
+    $navigation-border-color: $navigation-border-color;
+    @if $variant == sidebar {
+        $navigation-font-size: $navsidebar-font-size;
+        $navigation-sub-font-size: $navsidebar-sub-font-size;
+        $navigation-glyph-size: $navsidebar-glyph-size;
+        $navigation-bg: $navsidebar-bg;
+        $navigation-bg-hover: $navsidebar-bg-hover;
+        $navigation-bg-active: $navsidebar-bg-active;
+        $navigation-color: $navsidebar-color;
+        $navigation-color-hover: $navsidebar-color-hover;
+        $navigation-color-active: $navsidebar-color-active;
+        $navigation-sub-bg: $navsidebar-sub-bg;
+        $navigation-sub-bg-hover: $navsidebar-sub-bg-hover;
+        $navigation-sub-bg-active: $navsidebar-sub-bg-active;
+        $navigation-sub-color: $navsidebar-sub-color;
+        $navigation-sub-color-hover: $navsidebar-sub-color-hover;
+        $navigation-sub-color-active: $navsidebar-sub-color-active;
+        $navigation-border-color: $navsidebar-border-color;
+    } @else if $variant == topbar {
+        $navigation-font-size: $navtopbar-font-size;
+        $navigation-sub-font-size: $navtopbar-sub-font-size;
+        $navigation-glyph-size: $navtopbar-glyph-size;
+        $navigation-bg: $navtopbar-bg ;
+        $navigation-bg-hover: $navtopbar-bg-hover;
+        $navigation-bg-active: $navtopbar-bg-active;
+        $navigation-color: $navtopbar-color;
+        $navigation-color-hover: $navtopbar-color-hover;
+        $navigation-color-active: $navtopbar-color-active;
+        $navigation-sub-bg: $navtopbar-sub-bg;
+        $navigation-sub-bg-hover: $navtopbar-sub-bg-hover;
+        $navigation-sub-bg-active: $navtopbar-sub-bg-active;
+        $navigation-sub-color: $navtopbar-sub-color;
+        $navigation-sub-color-hover: $navtopbar-sub-color-hover;
+        $navigation-sub-color-active: $navtopbar-sub-color-active;
+        $navigation-border-color: $navtopbar-border-color;
+    }
 
-.mx-navigationlist {
-    margin: 0;
-    padding: 0;
-    .mx-navigationlist-item {
-        padding: 15px;
-        border-top: none;
-        border-bottom: 1px solid $navsidebar-border-color;
-        border-radius: 0;
-        background-color: $navsidebar-bg;
-        label {
-            color: $navsidebar-color;
-            font-size: $navsidebar-font-size;
-            font-weight: $font-weight-normal;
-        }
-        &:hover,
-        &:focus,
-        &.active {
-            background-color: $navsidebar-bg-hover;
+    .mx-navigationlist {
+        margin: 0;
+        padding: 0;
+        .mx-navigationlist-item {
+            padding: 15px;
+            border-top: none;
+            border-bottom: 1px solid $navigation-border-color;
+            border-radius: 0;
+            background-color: $navigation-bg;
             label {
-                color: $navsidebar-color-hover;
+                color: $navigation-color;
+                font-size: $navigation-font-size;
+                font-weight: $font-weight-normal;
+            }
+            &:hover,
+            &:focus,
+            &.active {
+                background-color: $navigation-bg-hover;
+                label {
+                    color: $navigation-color-hover;
+                }
+            }
+            &.active {
+                color: $navigation-color-active;
+                border-left-color: $navigation-color-active;
+                background-color: $navigation-bg-active;
             }
         }
-        &.active {
-            color: $navsidebar-color-active;
-            border-left-color: $navsidebar-color-active;
-            background-color: $navsidebar-bg-active;
-        }
     }
+}
+
+
+// Default
+@include navigaitonlist();
+
+// When used in topbar
+.region-topbar {
+    @include navigaitonlist($variant: topbar);
+}
+
+// When used in sidebar
+.region-sidebar {
+    @include navigaitonlist($variant: sidebar);
 }
