@@ -4,12 +4,14 @@
    Default Bootstrap containers
 ========================================================================== */
 .mx-layoutgrid {
-    .row {
+    > .row {
         @media (max-width: $screen-xs-max) {
+            margin-right: -#{$gutter-size / 2};
+            margin-left: -#{$gutter-size / 2};
             padding-right: $gutter-size / 2;
             padding-left: $gutter-size / 2;
         }
-        [class*="col-"] {
+        > [class*="col-"] {
             padding-right: $gutter-size;
             padding-left: $gutter-size;
             @media (max-width: $screen-xs-max) {
@@ -24,8 +26,8 @@
 .v-center {
     display: table;
     width: 100%;
-    &:before,
-    &:after {
+    &::before,
+    &::after {
         display: none;
     }
     .row {
