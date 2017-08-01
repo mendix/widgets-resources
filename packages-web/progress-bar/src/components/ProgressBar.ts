@@ -1,4 +1,4 @@
-import { Component, DOM, createElement } from "react";
+import { Component, createElement } from "react";
 import * as classNames from "classnames";
 
 import { Alert } from "./Alert";
@@ -30,8 +30,9 @@ class ProgressBar extends Component<ProgressBarProps, {}> {
     render() {
         const { barType, bootstrapStyle, colorSwitch, maximumValue, onClickAction, progress } = this.props;
         const percentage = this.progressValue(maximumValue as number, progress);
-        return DOM.div({ className: classNames("widget-progress-bar", this.props.className), style: this.props.style },
-            DOM.div(
+        return createElement("div",
+         { className: classNames("widget-progress-bar", this.props.className), style: this.props.style },
+            createElement("div",
                 {
                     className: classNames("progress", {
                         "widget-progress-bar-alert": !maximumValue || maximumValue < 1,
@@ -40,7 +41,7 @@ class ProgressBar extends Component<ProgressBarProps, {}> {
                     }),
                     onClick: this.props.onClickAction
                 },
-                DOM.div(
+                createElement("div",
                     {
                         className: classNames("progress-bar", `progress-bar-${bootstrapStyle || "default"}`, {
                             "active": barType === "animated",
@@ -52,7 +53,11 @@ class ProgressBar extends Component<ProgressBarProps, {}> {
                     this.getProgressText(maximumValue, progress)
                 )
             ),
-            createElement(Alert, { message: this.props.alertMessage })
+            createElement(Alert as any, {
+                bootstrapStyle: "danger",
+                className: "widget-progressbar",
+                message: this.props.alertMessage
+            })
         );
     }
 

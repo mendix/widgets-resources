@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/mendixlabs/progress-bar.svg?branch=master)](https://travis-ci.org/mendixlabs/progress-bar)
+[![Dependency Status](https://david-dm.org/mendixlabs/progress-bar.svg)](https://david-dm.org/mendixlabs/progress-bar)
+[![Dev Dependency Status](https://david-dm.org/mendixlabs/progress-bar.svg#info=devDependencies)](https://david-dm.org/mendixlabs/progress-bar#info=devDependencies)
+[![codecov](https://codecov.io/gh/mendixlabs/progress-bar/branch/master/graph/badge.svg)](https://codecov.io/gh/mendixlabs/progress-bar)
+
 # Progress bar
 Displays a progress bar
 
@@ -7,7 +12,7 @@ Displays a progress bar
 * Bar bootstrap colors: success, info, warning or danger
 
 ## Dependencies
-Mendix 7.3
+Mendix 7.4
 
 ## Demo project
 https://progressbar-demo.mxapps.io/
@@ -43,7 +48,7 @@ To set up the development environment, run:
 
 Create a folder named `dist` in the project root.
 
-Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Or get the test project from https://github.com/mendixlabs/progress-bar/releases/download/v1.0.2/TestProgressBar.mpk. Changes to the widget code shall be automatically pushed to this test project.
+Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Or get the test project from [https://github.com/mendixlabs/progress-bar/releases/latest](https://github.com/mendixlabs/progress-bar/releases/latest) Changes to the widget code shall be automatically pushed to this test project.
 
 To automatically compile, bundle and push code changes to the running test project, run:
 

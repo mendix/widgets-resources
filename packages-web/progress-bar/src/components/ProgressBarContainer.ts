@@ -67,7 +67,11 @@ export default class ProgressBarContainer extends Component<ProgressBarContainer
 
     render() {
         if (this.state.showAlert) {
-            return createElement(Alert, { message: this.state.alertMessage });
+            return createElement(Alert as any, {
+                bootstrapStyle: "danger",
+                className: "widget-progressbar",
+                message: this.state.alertMessage
+            });
         }
 
         return createElement(ProgressBar, {
