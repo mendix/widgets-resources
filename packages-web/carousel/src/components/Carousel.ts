@@ -1,4 +1,4 @@
-import { Component, DOM, MouseEventHandler, SFCElement, createElement } from "react";
+import { Component, MouseEventHandler, SFCElement, createElement } from "react";
 import * as classNames from "classnames";
 
 import { Alert } from "./Alert";
@@ -82,10 +82,14 @@ class Carousel extends Component<CarouselProps, CarouselState> {
     render() {
         const { className, images, style } = this.props;
 
-        return DOM.div({ className: classNames("widget-carousel-wrapper", className), style },
-            createElement(Alert, { message: this.state.alertMessage }),
-            DOM.div({ className: "widget-carousel" },
-                DOM.div(
+        return createElement("div", { className: classNames("widget-carousel-wrapper", className), style },
+            createElement(Alert, {
+                bootstrapStyle: "danger",
+                className: "widget-carousel-alert",
+                message: this.state.alertMessage
+            }),
+            createElement("div", { className: "widget-carousel" },
+                createElement("div",
                     {
                         className: classNames("widget-carousel-item-wrapper", { animate: this.state.animate }),
                         style: { transform: `translate3d(${this.state.position}%, 0px, 0px)` }

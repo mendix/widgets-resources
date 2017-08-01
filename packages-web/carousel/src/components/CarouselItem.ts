@@ -1,4 +1,4 @@
-import { DOM, MouseEvent, SFC } from "react";
+import { MouseEvent, SFC, createElement } from "react";
 import * as classNames from "classnames";
 
 export interface CarouselItemProps {
@@ -6,20 +6,20 @@ export interface CarouselItemProps {
     onClick?: (event: MouseEvent<HTMLDivElement>) => void;
     status: ItemStatus;
     position: number;
-    getItemNode?: (ref: HTMLDivElement | null) => void;
+    getItemNode?: (ref: HTMLElement | null) => void;
 }
 
 export type ItemStatus = "active" | "next" | "prev";
 
 export const CarouselItem: SFC<CarouselItemProps> = (props) =>
-    DOM.div(
+    createElement("div",
         {
             className: classNames("widget-carousel-item", props.status),
             onClick: props.onClick,
             ref: node => { if (props.getItemNode) { props.getItemNode(node); } },
             style: { transform: `translate3d(${props.position}%, 0px, 0px)` }
         },
-        DOM.img({ alt: "Carousel image", src: props.url })
+        createElement("img", { className: "widget-carousel-image", alt: "Carousel image", src: props.url })
     );
 
 CarouselItem.defaultProps = {
