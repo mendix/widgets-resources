@@ -1,4 +1,4 @@
-import { Component, DOM, createElement } from "react";
+import { Component, createElement } from "react";
 import { ProgressBar, ProgressBarProps } from "./components/ProgressBar";
 import ProgressBarContainer, { ProgressBarContainerProps } from "./components/ProgressBarContainer";
 import { Alert } from "./components/Alert";
@@ -12,8 +12,8 @@ export class preview extends Component<ProgressBarContainerProps, {}> {
         const warnings = ProgressBarContainer.validateProps(this.props);
         const bar = createElement(ProgressBar, this.transformProps(this.props));
         if (warnings) {
-            return DOM.div({},
-                createElement(Alert, { message: warnings }),
+            return createElement("div", {},
+                createElement(Alert, { bootstrapStyle: "danger", message: warnings }),
                 bar
             );
         }

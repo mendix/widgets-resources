@@ -1,5 +1,5 @@
 import { shallow } from "enzyme";
-import { DOM, createElement } from "react";
+import { createElement } from "react";
 
 import { ProgressBar, ProgressBarProps } from "../ProgressBar";
 import { Alert } from "../Alert";
@@ -15,13 +15,14 @@ describe("Progress bar", () => {
         const progressbar = shallow(createElement(ProgressBar, { maximumValue, onClickAction: onClickSpy, progress }));
 
         expect(progressbar).toBeElement(
-            DOM.div({ className: "widget-progress-bar" },
-                DOM.div(
+            createElement("div", { className: "widget-progress-bar" },
+                createElement("div",
                     {
                         className: "progress widget-progress-bar-text-contrast widget-progress-bar-clickable",
                         onClick: jasmine.any(Function) as any
                     },
-                    DOM.div({ className: "progress-bar progress-bar-default", style: { width: jasmine.any(String) } },
+                    createElement("div",
+                        { className: "progress-bar progress-bar-default", style: { width: jasmine.any(String) } },
                         jasmine.any(String) as any
                     )
                 ),
