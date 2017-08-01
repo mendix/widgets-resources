@@ -2,27 +2,27 @@
 declare module "react-rating" {
 
     interface RateProps {
-        start?: number,
-        stop?: number,
-        step?: number,
-        placeholderRate?: number,
-        initialRate?: number,
-        empty?: Array<string | Object | React.ReactElement<any>> | string | Object,
-        placeholder?: Array<string | Object | React.ReactElement<any>> | string | Object,
-        full?: Array<string | Object | React.ReactElement<any>> | string | Object,
-        readonly?: boolean,
-        quiet?: boolean,
-        fractions?: number,
+        start?: number;
+        stop?: number;
+        step?: number;
+        placeholderRate?: number;
+        initialRate?: number;
+        empty?: (string | object | React.ReactElement<any>)[] | string | object;
+        placeholder?: (string | object | React.ReactElement <any>)[] | string | object;
+        full?: (string | object | React.ReactElement <any>)[] | string | object;
+        readonly?: boolean;
+        quiet?: boolean;
+        fractions?: number;
         // Called when the selected rate is changed.
-        onChange?: (rate: number) => void,
+        onChange?: (rate: number) => void;
         // Called when a rate is clicked.
-        onClick?: (rate: number, e: Event) => void,
+        onClick?: (rate: number, e: Event) => void;
         // Called when a rate is entered or left. When a rate is left it is called with undefined.
-        onRate?:  (rate: number) => void
+        onRate?: (rate: number) => void;
     }
-    var Rating: React.ComponentClass<RateProps>;
+    const Rating: React.ComponentClass<RateProps>;
 
-    export = Rating
+    export = Rating;
 }
 
 declare module "*.scss";
