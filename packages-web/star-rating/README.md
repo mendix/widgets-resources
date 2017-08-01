@@ -40,13 +40,13 @@ In order to over-write the default star icon, add these classes to your project 
 Security is a mandatory feature for rating and is considered seriously for proper use of this widget in a mendix project.
  - Model Configuration
 
- ![1](https://raw.githubusercontent.com/mendixlabs/star-rating/v1.1.2/assets/domain_model.jpg)
+ ![1](https://raw.githubusercontent.com/mendixlabs/star-rating/v1.1.3/assets/domain_model.jpg)
  - Campaign entity security: a User should only read the average attribute 
  
- ![1](https://raw.githubusercontent.com/mendixlabs/star-rating/v1.1.2/assets/security_campaign.jpg)
+ ![1](https://raw.githubusercontent.com/mendixlabs/star-rating/v1.1.3/assets/security_campaign.jpg)
  - Rating or voting entity security: The user can only write their own rating 
  
- ![1](https://raw.githubusercontent.com/mendixlabs/star-rating/v1.1.2/assets/security_rate.jpg)
+ ![1](https://raw.githubusercontent.com/mendixlabs/star-rating/v1.1.3/assets/security_rate.jpg)
  - When creating a new rating, its important to use the current user's previous rating as the initial rate value. use this microflow [RateMe microflow](https://modelshare.mendix.com/models/d7ece331-49d4-4464-a2e2-ea75528a0367/rate-me) for the rate me custom button
  - Calculation of the average rate is done by adding a [Calculate average microflow](https://modelshare.mendix.com/models/d27114b6-e2fb-4d79-aa39-8c60a6477ca8/calculate-average-rate) to the after commit and and after delete event handlers in the domain modeler
 
@@ -68,7 +68,7 @@ To set up the development environment, run:
 
 Create a folder named `dist` in the project root.
 
-Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Or get the test project from https://github.com/mendixlabs/star-rating/releases/download/v1.1.2/TestStarRating.mpk. When Grunt is running changes to the widget code shall be automatically pushed to this test project.
+Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Or get the test project from [https://github.com/mendixlabs/star-rating/releases/latest](https://github.com/mendixlabs/star-rating/releases/latest) When Grunt is running changes to the widget code shall be automatically pushed to this test project.
 
 To automatically compile, bundle and push code changes to the running Mendix test project, run:
 
