@@ -1,5 +1,5 @@
 import { ShallowWrapper, shallow } from "enzyme";
-import { DOM, createElement } from "react";
+import { createElement } from "react";
 
 import { CarouselControl, CarouselControlProps } from "../CarouselControl";
 
@@ -15,8 +15,8 @@ describe("CarouselControl", () => {
 
     it("renders the structure correctly", () => {
         expect(carouselControl).toBeElement(
-            DOM.div({ className: "widget-carousel-control right", onClick: onClickSpy },
-                DOM.span({ className: "glyphicon glyphicon-chevron-right" })
+            createElement("div", { className: "widget-carousel-control right", onClick: onClickSpy },
+                createElement("span", { className: "glyphicon glyphicon-chevron-right" })
             )
         );
     });

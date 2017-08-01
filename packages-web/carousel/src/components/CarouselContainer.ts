@@ -1,4 +1,4 @@
-import { Component, DOM, createElement } from "react";
+import { Component, createElement } from "react";
 import { Carousel, Image } from "./Carousel";
 import { Alert } from "./Alert";
 import { UrlHelper } from "../UrlHelper";
@@ -53,12 +53,16 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
 
     render() {
         if (this.state.showAlert) {
-            return createElement(Alert, { message: this.state.alertMessage });
+            return createElement(Alert, {
+                bootstrapStyle: "danger",
+                className: "widget-carousel-alert",
+                message: this.state.alertMessage
+            });
         }
         if (this.state.isLoading) {
-            return DOM.div(null,
-                DOM.i({ className: "glyphicon glyphicon-cog glyph-spin" }),
-                DOM.span(null, " Loading ...")
+            return createElement("div", {},
+                createElement("i", { className: "glyphicon glyphicon-cog glyph-spin" }),
+                createElement("span", {}, " Loading ...")
             );
         }
 

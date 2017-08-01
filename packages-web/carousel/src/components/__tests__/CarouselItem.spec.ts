@@ -1,5 +1,5 @@
 import { ShallowWrapper, shallow } from "enzyme";
-import { DOM, createElement } from "react";
+import { createElement } from "react";
 import { image } from "faker";
 
 import { CarouselItem, CarouselItemProps } from "../CarouselItem";
@@ -21,12 +21,12 @@ describe("CarouselItem", () => {
 
     it("renders the structure correctly", () => {
         expect(carouselItem).toBeElement(
-            DOM.div(
+            createElement("div",
                 {
                     className: "widget-carousel-item active",
                     style: { transform: "translate3d(100%, 0px, 0px)" }
                 },
-                DOM.img({ alt: "Carousel image", src: url })
+                createElement("img", { className: "widget-carousel-image", alt: "Carousel image", src: url })
             ));
     });
 

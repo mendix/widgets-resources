@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/mendixlabs/carousel.svg?branch=master)](https://travis-ci.org/mendixlabs/carousel)
+[![Dependency Status](https://david-dm.org/mendixlabs/carousel.svg)](https://david-dm.org/mendixlabs/carousel)
+[![Dev Dependency Status](https://david-dm.org/mendixlabs/carousel.svg#info=devDependencies)](https://david-dm.org/mendixlabs/carousel#info=devDependencies)
+[![codecov](https://codecov.io/gh/mendixlabs/carousel/branch/master/graph/badge.svg)](https://codecov.io/gh/mendixlabs/carousel)
+
 # Carousel
 Displays images in a carousel.
 
@@ -12,7 +17,7 @@ Displays images in a carousel.
 * Swipe through the images on mobile devices
 
 ## Dependencies
-Mendix 7.1
+Mendix 7.4
 
 ## Demo project
 http://carouselwidget.mxapps.io
@@ -21,7 +26,7 @@ http://carouselwidget.mxapps.io
 The widget requires a context.
  ### Data source: Static
  - On the Data source option of the Data source tab, select the static option if its not already selected by default.
- - On the Static images option of the same tab, click new to add static images from the modeller and also configure an onclick action.
+ - On the Static images option of the same tab, click new to add static images from the modeler and also configure an onclick action.
  - For the on click options, configure only one of the two (either calling a microflow or a page).
  - Configuring both options will only trigger the microflow.
  
@@ -56,7 +61,7 @@ To set up the development environment, run:
     
 Create a folder named dist in the project root.
 
-Create a Mendix test project in the dist folder and rename its root folder to MxTestProject. Changes to the widget code shall be automatically pushed to this test project. Or get the test project from https://github.com/MendixLabs/carousel/releases/download/v1.3.0/Test.mpk
+Create a Mendix test project in the dist folder and rename its root folder to MxTestProject. Changes to the widget code shall be automatically pushed to this test project. Or get the test project from https://github.com/MendixLabs/carousel/releases/latest
 
     dist/MxTestProject
     

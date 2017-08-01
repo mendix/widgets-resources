@@ -1,5 +1,5 @@
 import { ShallowWrapper, shallow } from "enzyme";
-import { DOM, createElement } from "react";
+import { createElement } from "react";
 
 import { Alert } from "../Alert";
 import { Carousel, CarouselProps, Image } from "../Carousel";
@@ -17,10 +17,10 @@ describe("Carousel", () => {
         carousel = shallow(createElement(Carousel));
 
         expect(carousel).toBeElement(
-            DOM.div({ className: "widget-carousel-wrapper" },
-                createElement(Alert),
-                DOM.div({ className: "widget-carousel" },
-                    DOM.div({
+            createElement("div", { className: "widget-carousel-wrapper" },
+                createElement(Alert, { bootstrapStyle: "danger", className: "widget-carousel-alert" }),
+                createElement("div", { className: "widget-carousel" },
+                    createElement("div", {
                         className: "widget-carousel-item-wrapper",
                         style: { transform: "translate3d(0%, 0px, 0px)" }
                     })
