@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/mendixlabs/star-rating.svg?branch=master)](https://travis-ci.org/mendixlabs/star-rating)
+[![Dependency Status](https://david-dm.org/mendixlabs/star-rating.svg)](https://david-dm.org/mendixlabs/star-rating)
+[![Dev Dependency Status](https://david-dm.org/mendixlabs/star-rating.svg#info=devDependencies)](https://david-dm.org/mendixlabs/star-rating#info=devDependencies)
+[![codecov](https://codecov.io/gh/mendixlabs/star-rating/branch/master/graph/badge.svg)](https://codecov.io/gh/mendixlabs/star-rating)
+
 # Star rating
 This widget lets users rate an object with stars or custom icons.
 
