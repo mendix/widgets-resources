@@ -130,6 +130,26 @@ $font-color-detail:                     $gray-light !default;
 
 //== Navigation
 //## Used in components/navigation
+// Default Navigation styling
+$navigation-font-size:                  $font-size-default !default;
+$navigation-sub-font-size:              $font-size-small !default;
+$navigation-glyph-size:                 20px !default; // For glyphicons that you can select in the Mendix Modeler
+
+$navigation-bg:                         $brand-inverse !default;
+$navigation-bg-hover:                   lighten($navigation-bg, 4) !default;
+$navigation-bg-active:                  lighten($navigation-bg, 8) !default;
+$navigation-color:                      #FFF !default;
+$navigation-color-hover:                #FFF !default;
+$navigation-color-active:               #FFF !default;
+
+$navigation-sub-bg:                     darken($navigation-bg, 4) !default;
+$navigation-sub-bg-hover:               $navigation-sub-bg !default;
+$navigation-sub-bg-active:              $navigation-sub-bg !default;
+$navigation-sub-color:                  #AAA !default;
+$navigation-sub-color-hover:            $brand-primary !default;
+$navigation-sub-color-active:           $brand-primary !default;
+
+$navigation-border-color:               $navigation-bg-hover !default;
 
 // Navigation Sidebar
 $navsidebar-font-size:                  $font-size-default !default;
