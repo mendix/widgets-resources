@@ -3,166 +3,223 @@
 
    Default Mendix Navigation Tree
 ========================================================================== */
-@mixin navigaitontree($variant: default) {
-    $navigation-font-size: $navigation-font-size;
-    $navigation-sub-font-size: $navigation-sub-font-size;
-    $navigation-glyph-size: $navigation-glyph-size;
-    $navigation-bg: $navigation-bg;
-    $navigation-bg-hover: $navigation-bg-hover;
-    $navigation-bg-active: $navigation-bg-active;
-    $navigation-color: $navigation-color;
-    $navigation-color-hover: $navigation-color-hover;
-    $navigation-color-active: $navigation-color-active;
-    $navigation-sub-bg: $navigation-sub-bg;
-    $navigation-sub-bg-hover: $navigation-sub-bg-hover;
-    $navigation-sub-bg-active: $navigation-sub-bg-active;
-    $navigation-sub-color: $navigation-sub-color;
-    $navigation-sub-color-hover: $navigation-sub-color-hover;
-    $navigation-sub-color-active: $navigation-sub-color-active;
-    $navigation-border-color: $navigation-border-color;
-    @if $variant == sidebar {
-        $navigation-font-size: $navsidebar-font-size;
-        $navigation-sub-font-size: $navsidebar-sub-font-size;
-        $navigation-glyph-size: $navsidebar-glyph-size;
-        $navigation-bg: $navsidebar-bg;
-        $navigation-bg-hover: $navsidebar-bg-hover;
-        $navigation-bg-active: $navsidebar-bg-active;
-        $navigation-color: $navsidebar-color;
-        $navigation-color-hover: $navsidebar-color-hover;
-        $navigation-color-active: $navsidebar-color-active;
-        $navigation-sub-bg: $navsidebar-sub-bg;
-        $navigation-sub-bg-hover: $navsidebar-sub-bg-hover;
-        $navigation-sub-bg-active: $navsidebar-sub-bg-active;
-        $navigation-sub-color: $navsidebar-sub-color;
-        $navigation-sub-color-hover: $navsidebar-sub-color-hover;
-        $navigation-sub-color-active: $navsidebar-sub-color-active;
-        $navigation-border-color: $navsidebar-border-color;
-    } @else if $variant == topbar {
-        $navigation-font-size: $navtopbar-font-size;
-        $navigation-sub-font-size: $navtopbar-sub-font-size;
-        $navigation-glyph-size: $navtopbar-glyph-size;
-        $navigation-bg: $navtopbar-bg ;
-        $navigation-bg-hover: $navtopbar-bg-hover;
-        $navigation-bg-active: $navtopbar-bg-active;
-        $navigation-color: $navtopbar-color;
-        $navigation-color-hover: $navtopbar-color-hover;
-        $navigation-color-active: $navtopbar-color-active;
-        $navigation-sub-bg: $navtopbar-sub-bg;
-        $navigation-sub-bg-hover: $navtopbar-sub-bg-hover;
-        $navigation-sub-bg-active: $navtopbar-sub-bg-active;
-        $navigation-sub-color: $navtopbar-sub-color;
-        $navigation-sub-color-hover: $navtopbar-sub-color-hover;
-        $navigation-sub-color-active: $navtopbar-sub-color-active;
-        $navigation-border-color: $navtopbar-border-color;
+.mx-navigationtree {
+    background-color: $navigation-bg;
+    /* Every navigation item */
+    .navbar-inner ul {
+        margin: 0;
+        padding-left: 0;
+        li {
+            padding: 0;
+            border-style: none;
+            a {
+                display: block;
+                padding: 15px;
+                color: $navigation-color;
+                border-bottom: 1px solid $navigation-border-color;
+                border-radius: 0;
+                background-color: $navigation-bg;
+                text-shadow: none;
+                font-size: $navigation-font-size;
+                font-weight: $font-weight-normal;
+                .caret {
+                    border-top-color: $navigation-color;
+                    border-bottom-color: $navigation-color;
+                }
+                img {
+                    width: 20px; // Default size
+                    height: auto;
+                    margin-right: 4px;
+                }
+                .glyphicon {
+                    top: -1px;
+                    vertical-align: middle;
+                    font-size: $navigation-glyph-size;
+                }
+            }
+            a:hover,
+            a:focus,
+            a.active {
+                text-decoration: none;
+                color: $navigation-color-hover;
+                background-color: $navigation-bg-hover;
+                .caret {
+                    border-top-color: $navigation-color-active;
+                    border-bottom-color: $navigation-color-active;
+                }
+            }
+            a.active {
+                color: $navigation-color-active;
+                border-left-color: $navigation-color-active;
+                background-color: $navigation-bg-active;
+            }
+        }
     }
-
-    .mx-navigationtree {
-        background-color: $navigation-bg;
-
-        /* Every navigation item */
-        .navbar-inner ul {
+    /* Sub navigation item specific */
+    li.mx-navigationtree-has-items {
+        > ul {
             margin: 0;
             padding-left: 0;
+            background-color: $navigation-sub-bg;
             li {
+                margin: 0;
                 padding: 0;
-                border-style: none;
                 a {
-                    display: block;
-                    padding: 15px;
-                    color: $navigation-color;
-                    border-bottom: 1px solid $navigation-border-color;
-                    border-radius: 0;
-                    background-color: $navigation-bg;
-                    text-shadow: none;
-                    font-size: $navigation-font-size;
+                    padding: 12px 20px 12px 25px;
+                    color: $navigation-sub-color;
+                    border: 0;
+                    background-color: $navigation-sub-bg;
+                    font-size: $navigation-sub-font-size;
                     font-weight: $font-weight-normal;
+                    &:hover,
+                    &:focus,
+                    &.active {
+                        color: $navigation-sub-color-hover;
+                        background-color: $navigation-sub-bg-hover;
+                    }
+                    &.active {
+                        color: $navigation-sub-color-active;
+                        border: 0;
+                        background-color: $navigation-sub-bg-active;
+                    }
+                }
+            }
+        }
+    }
+    /* remove focus */
+    &:focus {
+        outline: 0;
+    }
+}
+
+//== Regions
+//## Behavior in the different regions
+//-------------------------------------------------------------------------------------------------------------------//
+// When used in topbar
+.region-topbar {
+    .mx-navigationtree {
+        background-color: $navtopbar-bg;
+        .navbar-inner ul {
+            li {
+                a {
+                    color: $navtopbar-color;
+                    border-color: $navtopbar-border-color;
+                    background-color: $navtopbar-bg;
+                    font-size: $navtopbar-font-size;
                     .caret {
-                        border-top-color: $navigation-color;
-                        border-bottom-color: $navigation-color;
+                        border-top-color: $navtopbar-color;
+                        border-bottom-color: $navtopbar-color;
                     }
-                    img {
-                        width: 20px; // Default size
-                        height: auto;
-                        margin-right: 4px;
-                    }
+
                     .glyphicon {
-                        top: -1px;
-                        vertical-align: middle;
-                        font-size: $navigation-glyph-size;
+                        font-size: $navtopbar-glyph-size;
                     }
                 }
                 a:hover,
                 a:focus,
                 a.active {
-                    text-decoration: none;
-                    color: $navigation-color-hover;
-                    background-color: $navigation-bg-hover;
+                    color: $navtopbar-color-hover;
+                    background-color: $navtopbar-bg-hover;
                     .caret {
-                        border-top-color: $navigation-color-active;
-                        border-bottom-color: $navigation-color-active;
+                        border-top-color: $navtopbar-color-active;
+                        border-bottom-color: $navtopbar-color-active;
                     }
                 }
                 a.active {
-                    color: $navigation-color-active;
-                    border-left-color: $navigation-color-active;
-                    background-color: $navigation-bg-active;
+                    color: $navtopbar-color-active;
+                    border-left-color: $navtopbar-color-active;
+                    background-color: $navtopbar-bg-active;
                 }
             }
         }
-
         /* Sub navigation item specific */
         li.mx-navigationtree-has-items {
             > ul {
-                margin: 0;
-                padding-left: 0;
-                background-color: $navigation-sub-bg;
+                background-color: $navtopbar-sub-bg;
                 li {
-                    margin: 0;
-                    padding: 0;
                     a {
-                        padding: 12px 20px 12px 25px;
-                        color: $navigation-sub-color;
-                        border: 0;
-                        background-color: $navigation-sub-bg;
-                        font-size: $navigation-sub-font-size;
-                        font-weight: $font-weight-normal;
+                        color: $navtopbar-sub-color;
+                        background-color: $navtopbar-sub-bg;
+                        font-size: $navtopbar-sub-font-size;
                         &:hover,
                         &:focus,
                         &.active {
-                            color: $navigation-sub-color-hover;
-                            background-color: $navigation-sub-bg-hover;
+                            color: $navtopbar-sub-color-hover;
+                            background-color: $navtopbar-sub-bg-hover;
                         }
                         &.active {
-                            color: $navigation-sub-color-active;
-                            border: 0;
-                            background-color: $navigation-sub-bg-active;
+                            color: $navtopbar-sub-color-active;
+                            background-color: $navtopbar-sub-bg-active;
                         }
                     }
                 }
             }
-        }
-
-        /* remove focus */
-        &:focus {
-            outline: 0;
         }
     }
 }
 
-
-// Default
-@include navigaitontree();
-
-// When used in topbar
-.region-topbar {
-    @include navigaitontree($variant: topbar);
-}
-
 // When used in sidebar
 .region-sidebar {
-    @include navigaitontree($variant: sidebar);
-}
+    .mx-navigationtree {
+        background-color: $navsidebar-bg;
+        .navbar-inner ul {
+            li {
+                a {
+                    color: $navsidebar-color;
+                    border-color: $navsidebar-border-color;
+                    background-color: $navsidebar-bg;
+                    font-size: $navsidebar-font-size;
+                    .caret {
+                        border-top-color: $navsidebar-color;
+                        border-bottom-color: $navsidebar-color;
+                    }
 
+                    .glyphicon {
+                        font-size: $navsidebar-glyph-size;
+                    }
+                }
+                a:hover,
+                a:focus,
+                a.active {
+                    color: $navsidebar-color-hover;
+                    background-color: $navsidebar-bg-hover;
+                    .caret {
+                        border-top-color: $navsidebar-color-active;
+                        border-bottom-color: $navsidebar-color-active;
+                    }
+                }
+                a.active {
+                    color: $navsidebar-color-active;
+                    border-left-color: $navsidebar-color-active;
+                    background-color: $navsidebar-bg-active;
+                }
+            }
+        }
+        /* Sub navigation item specific */
+        li.mx-navigationtree-has-items {
+            > ul {
+                background-color: $navsidebar-sub-bg;
+                li {
+                    a {
+                        color: $navsidebar-sub-color;
+                        background-color: $navsidebar-sub-bg;
+                        font-size: $navsidebar-sub-font-size;
+                        &:hover,
+                        &:focus,
+                        &.active {
+                            color: $navsidebar-sub-color-hover;
+                            background-color: $navsidebar-sub-bg-hover;
+                        }
+                        &.active {
+                            color: $navsidebar-sub-color-active;
+                            background-color: $navsidebar-sub-bg-active;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 //== Design Properties
 //## Helper classes to change the look and feel of the component
