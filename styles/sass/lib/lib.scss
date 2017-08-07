@@ -1,66 +1,66 @@
-@import '../custom/custom-variables';
+@import "../custom/custom-variables";
 
-@import 'variables';
+@import "variables";
 
 // Base
-@import 'base/mixins';
-@import 'base/reset';
-@import 'base/base';
+@import "base/mixins";
+@import "base/reset";
+@import "base/base";
 
 // Components
-@import 'components/inputs';
-@import 'components/alerts';
-@import 'components/backgrounds';
-@import 'components/buttons';
-@import 'components/grid';
-@import 'components/datagrids';
-@import 'components/dataview';
-@import 'components/dijit-widgets';
-@import 'components/glyphicons';
-@import 'components/groupbox';
-@import 'components/helpers';
-@import 'components/images';
-@import 'components/labels';
-@import 'components/listview';
-@import 'components/modals';
-@import 'components/navigationbar';
-@import 'components/navigationlist';
-@import 'components/navigationtree';
-@import 'components/simplemenubar';
-@import 'components/tabcontainer';
-@import 'components/tables';
-@import 'components/templategrids';
-@import 'components/typography';
-@import 'components/layoutgrid';
-@import 'components/progress';
+@import "components/inputs";
+@import "components/alerts";
+@import "components/backgrounds";
+@import "components/buttons";
+@import "components/grid";
+@import "components/datagrids";
+@import "components/dataview";
+@import "components/header";
+@import "components/dijit-widgets";
+@import "components/glyphicons";
+@import "components/groupbox";
+@import "components/helpers";
+@import "components/images";
+@import "components/labels";
+@import "components/listview";
+@import "components/modals";
+@import "components/navigationbar";
+@import "components/navigationlist";
+@import "components/navigationtree";
+@import "components/simplemenubar";
+@import "components/tabcontainer";
+@import "components/tables";
+@import "components/templategrids";
+@import "components/typography";
+@import "components/layoutgrid";
+@import "components/progress";
 
 // Building Blocks
-@import 'buildingblocks/alignment-block';
-@import 'buildingblocks/breadcrumb';
-@import 'buildingblocks/card';
-@import 'buildingblocks/controlgroup';
-@import 'buildingblocks/pageheader';
-@import 'buildingblocks/heroheader';
-@import 'buildingblocks/formblock';
-@import 'buildingblocks/list';
-@import 'buildingblocks/master-detail';
-@import 'buildingblocks/wizard';
-@import 'buildingblocks/timeline';
+@import "buildingblocks/alignment-block";
+@import "buildingblocks/breadcrumb";
+@import "buildingblocks/card";
+@import "buildingblocks/controlgroup";
+@import "buildingblocks/pageheader";
+@import "buildingblocks/heroheader";
+@import "buildingblocks/formblock";
+@import "buildingblocks/list";
+@import "buildingblocks/master-detail";
+@import "buildingblocks/wizard";
+@import "buildingblocks/timeline";
 
 //layouts
-@import 'layouts/navlayout-atlas';
+@import "layouts/navlayout-atlas";
 
 //mobile
-@import 'mobile/all';
-@import 'mobile/header';
-@import 'mobile/layout';
-@import 'mobile/components/listview';
-@import 'mobile/components/navigationlist';
+@import "mobile/all";
+@import "mobile/layout";
+@import "mobile/components/listview";
+@import "mobile/components/navigationlist";
 
 //customwidgets
-@import 'customwidgets/progress-bar-theme';
-@import 'customwidgets/progress-circle-theme';
-@import 'customwidgets/range-slider-theme';
-@import 'customwidgets/slider-theme';
-@import 'customwidgets/star-rating-theme';
-@import 'customwidgets/switchwidget';
+@import "customwidgets/progress-bar-theme";
+@import "customwidgets/progress-circle-theme";
+@import "customwidgets/range-slider-theme";
+@import "customwidgets/slider-theme";
+@import "customwidgets/star-rating-theme";
+@import "customwidgets/switchwidget";
