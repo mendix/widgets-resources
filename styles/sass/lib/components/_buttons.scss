@@ -37,6 +37,7 @@
         box-shadow: none;
     }
 
+
     @if $btn-bordered != false {
         @extend .btn-bordered;
     }
@@ -51,14 +52,18 @@
     }
 }
 
-// Images in buttons
+// Images and icons in buttons
 .btn,
 .mx-button,
 .mx-link {
+    > span {
+        margin-right: 5px;
+    }
     img {
         //height: auto; // MXUI override who set the height on 16px default
         height: $font-size-default + 4px;
         margin-top: -1px;
+        margin-right: 5px;
     }
 }
 
