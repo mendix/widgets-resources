@@ -145,3 +145,18 @@
         margin-left: 5px;
     }
 }
+
+//== Phone specific 
+//-------------------------------------------------------------------------------------------------------------------//
+.profile-phone {
+    .btn,
+    .mx-link {
+        -webkit-transition: all 0.2s;
+        -moz-transition: all 0.2s;
+        transition: all 0.2s;
+        &:active {
+            -webkit-transform: translateY(1px);
+            transform: translateY(1px);
+        }
+    }
+}
