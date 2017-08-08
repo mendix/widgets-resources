@@ -6,86 +6,21 @@
 .mx-navigationlist {
     margin: 0;
     padding: 0;
-    .mx-navigationlist-item {
-        padding: 15px;
-        border-top: none;
-        border-bottom: 1px solid $navigation-border-color;
-        border-radius: 0;
-        background-color: $navigation-bg;
-        label {
-            color: $navigation-color;
-            font-size: $navigation-font-size;
-            font-weight: $font-weight-normal;
-        }
+    
+    li.mx-navigationlist-item {
+        padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
+        border-width: 1px 0;
+        border-color: $grid-border-color;
+        background-color: $grid-bg;
+
         &:hover,
-        &:focus,
-        &.active {
-            background-color: $navigation-bg-hover;
-            label {
-                color: $navigation-color-hover;
-            }
+        &:focus {
+            background-color: $grid-bg-hover;
+            color: inherit;
         }
         &.active {
-            color: $navigation-color-active;
-            border-left-color: $navigation-color-active;
-            background-color: $navigation-bg-active;
-        }
-    }
-}
-
-//== Regions
-//## Behavior in the different regions
-//-------------------------------------------------------------------------------------------------------------------//
-// When used in topbar
-.region-topbar {
-    .mx-navigationlist {
-        .mx-navigationlist-item {
-            border-color: $navtopbar-border-color;
-            background-color: $navtopbar-bg;
-            label {
-                color: $navtopbar-color;
-                font-size: $navtopbar-font-size;
-            }
-            &:hover,
-            &:focus,
-            &.active {
-                background-color: $navtopbar-bg-hover;
-                label {
-                    color: $navtopbar-color-hover;
-                }
-            }
-            &.active {
-                color: $navtopbar-color-active;
-                border-left-color: $navtopbar-color-active;
-                background-color: $navtopbar-bg-active;
-            }
-        }
-    }
-}
-
-// When used in sidebar
-.region-sidebar {
-    .mx-navigationlist {
-        .mx-navigationlist-item {
-            border-color: $navsidebar-border-color;
-            background-color: $navsidebar-bg;
-            label {
-                color: $navsidebar-color;
-                font-size: $navsidebar-font-size;
-            }
-            &:hover,
-            &:focus,
-            &.active {
-                background-color: $navsidebar-bg-hover;
-                label {
-                    color: $navsidebar-color-hover;
-                }
-            }
-            &.active {
-                color: $navsidebar-color-active;
-                border-left-color: $navsidebar-color-active;
-                background-color: $navsidebar-bg-active;
-            }
+            background-color: $grid-bg-selected;
+            color: inherit;
         }
     }
 }
