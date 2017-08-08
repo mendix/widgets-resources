@@ -348,12 +348,12 @@ $listview-padding-left:                 15px !default;
 // Background Colors
 $grid-bg:                               #FFF !default;
 $grid-bg-header:                        transparent !default; // Grid Headers
-$grid-bg-hover:                         mix($color-warning-lighter, #FFF, 20%) !default;
-$grid-bg-selected:                      $color-warning-lighter !default;    
-$grid-bg-selected-hover:                $color-warning-lighter !default;
+$grid-bg-hover:                         mix($grid-border-color, #FFF, 20%) !default;
+$grid-bg-selected:                      mix($grid-border-color, #FFF, 30%) !default;    
+$grid-bg-selected-hover:                mix($grid-border-color, #FFF, 50%) !default;
 
 // Striped Background Color
-$grid-bg-striped:                       mix($grid-border-color, #FFF, 20%) !default;
+$grid-bg-striped:                       mix($grid-border-color, #FFF, 10%) !default;
 
 // Background Footer Color
 $grid-footer-bg:                        $gray-primary !default;
