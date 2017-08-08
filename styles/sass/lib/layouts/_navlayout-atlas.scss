@@ -1,10 +1,10 @@
 .layout-atlas {
     $sidebar-width: 60px;
     @media (min-width: $screen-sm) {
-        .mx-layoutcontainer:not(.mx-scrollcontainer-open) .region-sidebar {
+        .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
             width: $sidebar-width !important;
 
-            .mx-navigationtree ul li {
+            .mx-scrollcontainer-wrapper > .mx-navigationtree ul li {
                 &.mx-navigationtree-has-items:hover {
                     ul {
                         position: absolute;
@@ -38,7 +38,7 @@
             border-radius: 0;
             background: transparent;
         }
-        .mx-navigationtree {
+        .mx-scrollcontainer-wrapper > .mx-navigationtree {
             ul li {
                 a {
                     span:first-child {
@@ -65,7 +65,7 @@
         border-bottom: 1px solid $navtopbar-border-color;
         background-color: $navtopbar-bg;
         box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
-        &:before {
+        &::before {
             position: absolute;
             top: 0;
             display: block;
