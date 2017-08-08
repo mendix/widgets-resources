@@ -136,42 +136,40 @@
 
 // When used in sidebar
 .region-sidebar {
-    .region-topbar {
-        .mx-menubar {
-            background-color: $navsidebar-bg;
-            ul.mx-menubar-list {
-                li.mx-menubar-item {
-                    a {
-                        color: $navsidebar-color;
-                        font-size: $navsidebar-sub-font-size;
-                        .glyphicon {
-                            font-size: $navsidebar-glyph-size;
-                        }
+    .mx-menubar {
+        background-color: $navsidebar-bg;
+        ul.mx-menubar-list {
+            li.mx-menubar-item {
+                a {
+                    color: $navsidebar-color;
+                    font-size: $navsidebar-sub-font-size;
+                    .glyphicon {
+                        font-size: $navsidebar-glyph-size;
                     }
-                    a:hover,
-                    a:focus,
-                    &:hover a,
-                    &:focus a,
-                    &.active a {
-                        color: $navsidebar-color-hover;
-                        background-color: $navsidebar-bg-hover;
-                    }
-                    &.active a {
-                        color: $navsidebar-color-active;
-                        background-color: $navsidebar-bg-active;
-                    }
+                }
+                a:hover,
+                a:focus,
+                &:hover a,
+                &:focus a,
+                &.active a {
+                    color: $navsidebar-color-hover;
+                    background-color: $navsidebar-bg-hover;
+                }
+                &.active a {
+                    color: $navsidebar-color-active;
+                    background-color: $navsidebar-bg-active;
                 }
             }
         }
+    }
 
-        // Vertical variation specifics 
-        .mx-menubar-vertical {
-            background-color: $navsidebar-bg;
-            ul.mx-menubar-list {
-                li.mx-menubar-item {
-                    a {
-                        border-color: $navsidebar-border-color;
-                    }
+    // Vertical variation specifics 
+    .mx-menubar-vertical {
+        background-color: $navsidebar-bg;
+        ul.mx-menubar-list {
+            li.mx-menubar-item {
+                a {
+                    border-color: $navsidebar-border-color;
                 }
             }
         }
