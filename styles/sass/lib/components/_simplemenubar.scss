@@ -3,33 +3,29 @@
 
    Default Mendix Simple Menu Bar
 ========================================================================== */
-
 .mx-menubar {
     padding: 0;
-    background-color: $navsidebar-bg;
+    background-color: $navigation-bg;
     ul.mx-menubar-list {
         width: 100%;
         min-height: 50px;
         table-layout: fixed;
         li.mx-menubar-item {
-            display: inline-block;
-            width: 100%;
             margin: 0;
             a {
                 display: block;
                 overflow: hidden;
                 padding: 0 8px;
                 text-align: center;
-                vertical-align: middle;
-                color: $navsidebar-color;
+                color: $navigation-color;
                 border-radius: 0;
-                font-size: $navsidebar-sub-font-size;
+                font-size: $navigation-sub-font-size;
                 font-weight: $font-weight-normal;
                 line-height: 50px;
                 .glyphicon {
                     top: -1px;
                     vertical-align: middle;
-                    font-size: $navsidebar-glyph-size;
+                    font-size: $navigation-glyph-size;
                 }
             }
             a:hover,
@@ -38,12 +34,12 @@
             &:focus a,
             &.active a {
                 text-decoration: none;
-                color: $navsidebar-color-hover;
-                background-color: $navsidebar-bg-hover;
+                color: $navigation-color-hover;
+                background-color: $navigation-bg-hover;
             }
             &.active a {
-                color: $navsidebar-color-active;
-                background-color: $navsidebar-bg-active;
+                color: $navigation-color-active;
+                background-color: $navigation-bg-active;
             }
         }
     }
@@ -56,29 +52,12 @@
 
 // Vertical variation specifics 
 .mx-menubar-vertical {
-    background-color: $navtopbar-bg;
+    background-color: $navigation-bg;
     ul.mx-menubar-list {
         li.mx-menubar-item {
+            display: block;
             a {
-                color: $navtopbar-color;
-                border-bottom: 1px solid $navtopbar-border-color;
-                font-size: $navtopbar-font-size;
-                .glyphicon {
-                    top: -1px;
-                    vertical-align: middle;
-                    font-size: $navtopbar-glyph-size;
-                }
-                &:hover,
-                &:focus,
-                &.active {
-                    text-decoration: none;
-                    color: $navtopbar-color-hover;
-                    background-color: $navtopbar-bg-hover;
-                }
-                &.active {
-                    color: $navtopbar-color-active;
-                    background-color: $navtopbar-bg-active;
-                }
+                border-bottom: 1px solid $navigation-border-color;
             }
         }
     }
@@ -86,19 +65,10 @@
 
 // Horizontal variation specifics 
 .mx-menubar-horizontal {
-    background-color: #2D3E4E;
     box-shadow: 2px 0 4px 0 rgba(0,0,0,0.14);
     ul.mx-menubar-list {
         li.mx-menubar-item {
             width: auto;
-            a {
-                color: #F5F8FD;
-                font-size: 10px;
-            }
-            &.active a {
-                color: $brand-primary;
-                background-color: #283746;
-            }
         }
     }
     /* Two menu items */
@@ -116,6 +86,93 @@
     /* Five menu items */
     &.menubar-col-2 ul.mx-menubar-list li.mx-menubar-item {
         width: 20%;
+    }
+}
+
+//== Regions
+//## Behavior in the different regions
+//-------------------------------------------------------------------------------------------------------------------//
+// When used in topbar
+.region-topbar {
+    .mx-menubar {
+        background-color: $navtopbar-bg;
+        ul.mx-menubar-list {
+            li.mx-menubar-item {
+                a {
+                    color: $navtopbar-color;
+                    font-size: $navtopbar-sub-font-size;
+                    .glyphicon {
+                        font-size: $navtopbar-glyph-size;
+                    }
+                }
+                a:hover,
+                a:focus,
+                &:hover a,
+                &:focus a,
+                &.active a {
+                    color: $navtopbar-color-hover;
+                    background-color: $navtopbar-bg-hover;
+                }
+                &.active a {
+                    color: $navtopbar-color-active;
+                    background-color: $navtopbar-bg-active;
+                }
+            }
+        }
+    }
+
+    // Vertical variation specifics 
+    .mx-menubar-vertical {
+        background-color: $navtopbar-bg;
+        ul.mx-menubar-list {
+            li.mx-menubar-item {
+                a {
+                    border-color: $navtopbar-border-color;
+                }
+            }
+        }
+    }
+}
+
+// When used in sidebar
+.region-sidebar {
+    .mx-menubar {
+        background-color: $navsidebar-bg;
+        ul.mx-menubar-list {
+            li.mx-menubar-item {
+                a {
+                    color: $navsidebar-color;
+                    font-size: $navsidebar-sub-font-size;
+                    .glyphicon {
+                        font-size: $navsidebar-glyph-size;
+                    }
+                }
+                a:hover,
+                a:focus,
+                &:hover a,
+                &:focus a,
+                &.active a {
+                    color: $navsidebar-color-hover;
+                    background-color: $navsidebar-bg-hover;
+                }
+                &.active a {
+                    color: $navsidebar-color-active;
+                    background-color: $navsidebar-bg-active;
+                }
+            }
+        }
+    }
+
+    // Vertical variation specifics 
+    .mx-menubar-vertical {
+        background-color: $navsidebar-bg;
+        ul.mx-menubar-list {
+            li.mx-menubar-item {
+                a {
+                    border-color: $navsidebar-border-color;
+                }
+            }
+        }
     }
 }
 
