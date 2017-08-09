@@ -102,10 +102,11 @@
 
 .align-content-center {
     display: flex !important;
-    flex-flow: row wrap !important;
+    align-items: center !important;
+    flex-direction: column !important;
     justify-content: center !important;
 }
-
+ 
 // Spacing
 .spacing-inner {
     padding: $element-spacing !important;
