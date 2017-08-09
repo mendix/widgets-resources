@@ -145,6 +145,14 @@
         margin-left: 5px;
     }
 }
+.btn-icon-top {
+    padding-left: 0;
+    padding-right: 0;
+    > span {
+        display: block;
+        margin: 0 0 5px 0;
+    }
+}
 
 //== Phone specific 
 //-------------------------------------------------------------------------------------------------------------------//
