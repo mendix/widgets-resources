@@ -3,6 +3,7 @@
 @import "variables";
 
 // Base
+@import "base/animation";
 @import "base/mixins";
 @import "base/reset";
 @import "base/base";
@@ -40,11 +41,13 @@
 @import "buildingblocks/breadcrumb";
 @import "buildingblocks/card";
 @import "buildingblocks/controlgroup";
+@import "buildingblocks/pageblocks";
 @import "buildingblocks/pageheader";
 @import "buildingblocks/heroheader";
 @import "buildingblocks/formblock";
 @import "buildingblocks/list";
 @import "buildingblocks/master-detail";
+@import "buildingblocks/userprofile";
 @import "buildingblocks/wizard";
 @import "buildingblocks/timeline";
 

@@ -1,0 +1,17 @@
+/* ==========================================================================
+   Full page blocks
+   
+   Blocks that take up the full width and height
+========================================================================== */
+.fullpageblock {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+    text-align: center;
+    background-image: -webkit-linear-gradient(62deg, rgb(12, 199, 240) 0%, rgb(8, 126, 204) 51%, rgb(7, 122, 201) 55%, rgb(6, 89, 185) 78%);
+    background-image: -moz-linear-gradient(62deg, rgb(12, 199, 240) 0%, rgb(8, 126, 204) 51%, rgb(7, 122, 201) 55%, rgb(6, 89, 185) 78%);
+    background-image: -o-linear-gradient(62deg, rgb(12, 199, 240) 0%, rgb(8, 126, 204) 51%, rgb(7, 122, 201) 55%, rgb(6, 89, 185) 78%);
+    background-image: linear-gradient(152deg, rgb(12, 199, 240) 0%, rgb(8, 126, 204) 51%, rgb(7, 122, 201) 55%, rgb(6, 89, 185) 78%);
+}
