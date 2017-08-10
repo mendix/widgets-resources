@@ -53,6 +53,13 @@ $topbar-bg:                             #FFF !default;
 $topbar-minimalheight:                  60px !default;
 $topbar-border-color:                   $border-color-default !default;
 
+// Topbar mobile
+$m-header-height:                    	45px !default;
+$m-header-bg:                           $topbar-bg !default;
+$m-header-color:                        #555 !default;
+$m-header-title-size:                   17px !default;
+
+
 // Sidebar
 $sidebar-bg:                            $brand-inverse !default;
 
@@ -539,25 +546,6 @@ $callout-warning-bg:                    $color-warning-lighter !default;
 $callout-danger-bg:                     $color-danger-lighter !default;
 
 
-
-
-//== Mobile
-//## Specific variables for Mobile
-
-// Header Height
-$m-header-height:                    	45px;
-
-// Background Color
-$m-header-bg:                           #FFF;
-
-// Text Color
-$m-header-color:                        #555;
-
-// Title Size
-$m-header-title-size:                   17px;
-
-// Link Color
-$m-header-link-color:                   $link-color;
 
 
 
