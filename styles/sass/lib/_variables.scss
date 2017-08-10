@@ -53,6 +53,13 @@ $topbar-bg:                             #FFF !default;
 $topbar-minimalheight:                  60px !default;
 $topbar-border-color:                   $border-color-default !default;
 
+// Topbar mobile
+$m-header-height:                    	45px !default;
+$m-header-bg:                           $topbar-bg !default;
+$m-header-color:                        #555 !default;
+$m-header-title-size:                   17px !default;
+
+
 // Sidebar
 $sidebar-bg:                            $brand-inverse !default;
 
@@ -368,12 +375,12 @@ $listview-padding-left:                 15px !default;
 // Background Colors
 $grid-bg:                               #FFF !default;
 $grid-bg-header:                        transparent !default; // Grid Headers
-$grid-bg-hover:                         mix($color-warning-lighter, #FFF, 20%) !default;
-$grid-bg-selected:                      $color-warning-lighter !default;    
-$grid-bg-selected-hover:                $color-warning-lighter !default;
+$grid-bg-hover:                         mix($grid-border-color, #FFF, 20%) !default;
+$grid-bg-selected:                      mix($grid-border-color, #FFF, 30%) !default;    
+$grid-bg-selected-hover:                mix($grid-border-color, #FFF, 50%) !default;
 
 // Striped Background Color
-$grid-bg-striped:                       mix($grid-border-color, #FFF, 20%) !default;
+$grid-bg-striped:                       mix($grid-border-color, #FFF, 10%) !default;
 
 // Background Footer Color
 $grid-footer-bg:                        $gray-primary !default;
@@ -539,25 +546,6 @@ $callout-warning-bg:                    $color-warning-lighter !default;
 $callout-danger-bg:                     $color-danger-lighter !default;
 
 
-
-
-//== Mobile
-//## Specific variables for Mobile
-
-// Header Height
-$m-header-height:                    	45px;
-
-// Background Color
-$m-header-bg:                           #FFF;
-
-// Text Color
-$m-header-color:                        #555;
-
-// Title Size
-$m-header-title-size:                   17px;
-
-// Link Color
-$m-header-link-color:                   $link-color;
 
 
 

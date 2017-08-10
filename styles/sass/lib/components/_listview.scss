@@ -31,6 +31,7 @@
         }
     }
     .mx-listview-item {
+        @include transition();
         padding: $listview-padding-top $listview-padding-right $listview-padding-bottom $listview-padding-left;
         border-width: 1px 0 0 0;
         border-style: solid;
@@ -40,15 +41,18 @@
         &:last-child {
             border-bottom: 1px solid $grid-border-color;
         }
-
+        &:nth-child(2n + 1) {
+            background-color: $grid-bg;
+        }
         &:hover {
             background-color: $grid-bg;
         }
+        &:focus,
+        &:active {
+            background-color: $grid-bg-hover;
+        }
         &.selected {
             background-color: $grid-bg-selected !important;
-        }
-        &:nth-child(2n + 1) {
-            background-color: $grid-bg;
         }
     }
     .mx-layoutgrid {
@@ -96,11 +100,16 @@
 .listview-hover.mx-listview {
     .mx-listview-item {
         &:hover,
+        &:focus,
         &:active {
             background-color: $grid-bg-hover !important;
         }
-        &.selected:hover {
-            background-color: $grid-bg-selected-hover !important;
+        &.selected {
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: $grid-bg-selected-hover !important;
+            }
         }
     }
 }
@@ -112,12 +121,16 @@
         cursor: default;
         border: 0;
         background-color: transparent;
-        &:hover {
+        &:hover,
+        &:focus,
+        &:active {
             background-color: transparent;
         }
         &.selected {
             background-color: transparent !important;
-            &:hover {
+            &:hover,
+            &:focus,
+            &:active {
                 background-color: transparent !important;
             }
         }
@@ -320,6 +333,33 @@
         }
         &.lv-col-lg-1 > .mx-listview-list > .mx-listview-item {
             width: 8.33333333% !important;
+        }
+    }
+}
+
+//== Phone specific 
+//-------------------------------------------------------------------------------------------------------------------//
+.profile-phone .mx-listview {
+    .mx-listview-searchbar {
+        margin-bottom: 3px;
+        background: #FFFFFF;
+        box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+        input {
+            padding: 14px 15px;
+            color: #555555;
+            border-style: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+    }
+    .mx-listview-clear-button {
+        padding: 14px 15px;
+        color: inherit;
+        border-style: none;
+    }
+    .mx-listview-item {
+        &:first-child {
+            border-top: none;
         }
     }
 }

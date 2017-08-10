@@ -37,6 +37,7 @@
         box-shadow: none;
     }
 
+
     @if $btn-bordered != false {
         @extend .btn-bordered;
     }
@@ -51,14 +52,18 @@
     }
 }
 
-// Images in buttons
+// Images and icons in buttons
 .btn,
 .mx-button,
 .mx-link {
+    > span {
+        margin-right: 5px;
+    }
     img {
         //height: auto; // MXUI override who set the height on 16px default
         height: $font-size-default + 4px;
         margin-top: -1px;
+        margin-right: 5px;
     }
 }
 
@@ -138,5 +143,28 @@
     > span {
         float: right;
         margin-left: 5px;
+    }
+}
+.btn-icon-top {
+    padding-left: 0;
+    padding-right: 0;
+    > span {
+        display: block;
+        margin: 0 0 5px 0;
+    }
+}
+
+//== Phone specific 
+//-------------------------------------------------------------------------------------------------------------------//
+.profile-phone {
+    .btn,
+    .mx-link {
+        -webkit-transition: all 0.2s;
+        -moz-transition: all 0.2s;
+        transition: all 0.2s;
+        &:active {
+            -webkit-transform: translateY(1px);
+            transform: translateY(1px);
+        }
     }
 }

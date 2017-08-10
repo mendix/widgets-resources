@@ -101,11 +101,12 @@
 }
 
 .align-content-center {
-    display: flex wrap !important;
-    flex-flow: row wrap !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-direction: column !important;
     justify-content: center !important;
 }
-
+ 
 // Spacing
 .spacing-inner {
     padding: $element-spacing !important;
