@@ -52,11 +52,9 @@
 @import "buildingblocks/timeline";
 
 //layouts
-@import "layouts/navlayout-atlas";
-
-//mobile
-@import "mobile/all";
-@import "mobile/layout";
+@import "layouts/layout-atlas";
+@import "layouts/layout-atlas-phone";
+@import "layouts/layout-atlas-tablet";
 
 //customwidgets
 @import "customwidgets/progress-bar-theme";
