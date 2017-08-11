@@ -39,7 +39,6 @@ type onClickOptions = "doNothing" | "callMicroflow" | "showPage" | "openFullScre
 class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageViewerContainerState> {
     private subscriptionHandles: number[];
     private attributeCallback: (mxObject: mendix.lib.MxObject) => () => void;
-    private imageViewerNode: HTMLDivElement;
 
     constructor(props: ImageViewerContainerProps) {
         super(props);
@@ -51,7 +50,6 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         };
         this.subscriptionHandles = [];
         this.attributeCallback = mxObject => () => this.setImageUrl(mxObject);
-        this.setImageViewerReference = this.setImageViewerReference.bind(this);
         this.executeAction = this.executeAction.bind(this);
         this.setImageUrl = this.setImageUrl.bind(this);
     }
@@ -65,7 +63,6 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
 
         return createElement(ImageViewer, {
             className: this.props.class,
-            getRef: this.setImageViewerReference,
             height,
             heightUnit,
             imageUrl,
@@ -78,12 +75,6 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         });
     }
 
-    componentDidMount() {
-        if (this.imageViewerNode && this.imageViewerNode.parentElement) {
-            this.imageViewerNode.parentElement.classList.add("widget-image-viewer-container");
-        }
-    }
-
     componentWillReceiveProps(newProps: ImageViewerContainerProps) {
         this.resetSubscriptions(newProps.mxObject);
         this.setState({
@@ -94,10 +85,6 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
 
     componentWillUnmount() {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
-    }
-
-    private setImageViewerReference(ref: HTMLDivElement) {
-        this.imageViewerNode = ref;
     }
 
     public static parseStyle(style = ""): {[key: string]: string} {
