@@ -5,16 +5,19 @@
 ========================================================================== */
 .mx-navigationtree {
     background-color: $navigation-bg;
+    
     /* Every navigation item */
-    .navbar-inner ul {
+    .navbar-inner > ul {
         margin: 0;
         padding-left: 0;
-        li {
+        > li {
             padding: 0;
             border-style: none;
-            a {
-                display: block;
-                padding: 15px;
+            > a {
+                display: flex;
+                align-items: center;
+                padding: $navigation-item-padding;
+                height: $navigation-item-height;
                 color: $navigation-color;
                 border-bottom: 1px solid $navigation-border-color;
                 border-radius: 0;
@@ -29,12 +32,13 @@
                 img {
                     width: 20px; // Default size
                     height: auto;
-                    margin-right: 4px;
+                    margin-right: 0.5em;
                 }
                 .glyphicon {
                     top: -1px;
                     vertical-align: middle;
                     font-size: $navigation-glyph-size;
+                    margin-right: 0.5em;
                 }
             }
             a:hover,
@@ -55,6 +59,7 @@
             }
         }
     }
+    
     /* Sub navigation item specific */
     li.mx-navigationtree-has-items {
         > ul {
@@ -64,6 +69,7 @@
             li {
                 margin: 0;
                 padding: 0;
+                border: 0;
                 a {
                     padding: 12px 20px 12px 25px;
                     color: $navigation-sub-color;
@@ -71,6 +77,9 @@
                     background-color: $navigation-sub-bg;
                     font-size: $navigation-sub-font-size;
                     font-weight: $font-weight-normal;
+                    text-decoration: none;
+                    text-shadow: none;
+                    
                     &:hover,
                     &:focus,
                     &.active {
@@ -86,6 +95,7 @@
             }
         }
     }
+    
     /* remove focus */
     &:focus {
         outline: 0;
@@ -99,9 +109,9 @@
 .region-topbar {
     .mx-navigationtree {
         background-color: $navtopbar-bg;
-        .navbar-inner ul {
-            li {
-                a {
+        .navbar-inner > ul {
+            > li {
+                > a {
                     color: $navtopbar-color;
                     border-color: $navtopbar-border-color;
                     background-color: $navtopbar-bg;
@@ -132,6 +142,7 @@
                 }
             }
         }
+
         /* Sub navigation item specific */
         li.mx-navigationtree-has-items {
             > ul {
@@ -162,9 +173,9 @@
 .region-sidebar {
     .mx-navigationtree {
         background-color: $navsidebar-bg;
-        .navbar-inner ul {
-            li {
-                a {
+        .navbar-inner > ul {
+            > li {
+                > a {
                     color: $navsidebar-color;
                     border-color: $navsidebar-border-color;
                     background-color: $navsidebar-bg;
@@ -195,6 +206,7 @@
                 }
             }
         }
+        
         /* Sub navigation item specific */
         li.mx-navigationtree-has-items {
             > ul {

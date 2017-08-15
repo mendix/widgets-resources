@@ -10,14 +10,19 @@
     background-color: $navigation-bg;
     ul.nav {
         margin: 0; // weird -margin if screen gets small (bootstrap)
+
         /* Navigation item */
         > li.mx-navbar-item > a {
-            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            padding: $navigation-item-padding;
+            min-height: $topbar-minimalheight;
             vertical-align: middle;
             color: $navigation-color;
             border-radius: 0;
             font-size: $navigation-font-size;
             font-weight: $font-weight-normal;
+
             /* Dropdown arrow */
             .caret {
                 border-top-color: $navigation-color;
@@ -38,6 +43,7 @@
                 color: $navigation-color-active;
                 background-color: $navigation-bg-active;
             }
+
             /* Dropdown */
             .mx-navbar-submenu::before {
                 position: absolute;
@@ -52,17 +58,21 @@
                 border-style: solid;
                 border-color: transparent transparent $navigation-border-color transparent;
             }
+
             // Image
             img {
                 width: 20px; // Default size (so it looks good)
                 height: auto;
+                margin-right: 0.5em;
             }
             .glyphicon {
                 top: -1px;
                 vertical-align: middle;
                 font-size: $navigation-glyph-size;
+                margin-right: 0.5em;
             }
         }
+        
         /* When hovering or the dropdown is open */
         > .mx-navbar-item > a:hover,
         > .mx-navbar-item > a:focus,
@@ -113,6 +123,7 @@
             }
         }
     }
+    
     /* remove focus */
     &:focus {
         outline: 0;
@@ -127,10 +138,12 @@
     .mx-navbar {
         background-color: $navtopbar-bg;
         ul.nav {
+            
             /* Navigation item */
             > li.mx-navbar-item > a {
                 color: $navtopbar-color;
                 font-size: $navtopbar-font-size;
+
                 /* Dropdown arrow */
                 .caret {
                     border-top-color: $navtopbar-color;
@@ -150,16 +163,18 @@
                     color: $navtopbar-color-active;
                     background-color: $navtopbar-bg-active;
                 }
+                
                 /* Dropdown */
                 .mx-navbar-submenu::before {
                     border-color: transparent transparent $navtopbar-border-color transparent;
                 }
+                
                 // Image
-
                 .glyphicon {
                     font-size: $navtopbar-glyph-size;
                 }
             }
+
             /* When hovering or the dropdown is open */
             > .mx-navbar-item > a:hover,
             > .mx-navbar-item > a:focus,
@@ -211,10 +226,12 @@
     .mx-navbar {
         background-color: $navsidebar-bg;
         ul.nav {
+
             /* Navigation item */
             > li.mx-navbar-item > a {
                 color: $navsidebar-color;
                 font-size: $navsidebar-font-size;
+
                 /* Dropdown arrow */
                 .caret {
                     border-top-color: $navsidebar-color;
@@ -234,16 +251,18 @@
                     color: $navsidebar-color-active;
                     background-color: $navsidebar-bg-active;
                 }
+
                 /* Dropdown */
                 .mx-navbar-submenu::before {
                     border-color: transparent transparent $navsidebar-border-color transparent;
                 }
+                
                 // Image
-
                 .glyphicon {
                     font-size: $navsidebar-glyph-size;
                 }
             }
+            
             /* When hovering or the dropdown is open */
             > .mx-navbar-item > a:hover,
             > .mx-navbar-item > a:focus,

@@ -12,20 +12,25 @@
         table-layout: fixed;
         li.mx-menubar-item {
             margin: 0;
-            a {
-                display: block;
+            > a {
+                display: flex;
+                align-items: center;
                 overflow: hidden;
-                padding: 0 8px;
+                padding: $navigation-item-padding;
                 text-align: center;
                 color: $navigation-color;
                 border-radius: 0;
-                font-size: $navigation-sub-font-size;
+                font-size: $navigation-font-size;
                 font-weight: $font-weight-normal;
                 line-height: 50px;
+                img {
+                    margin-right: 0.5em;
+                }
                 .glyphicon {
                     top: -1px;
                     vertical-align: middle;
                     font-size: $navigation-glyph-size;
+                    margin-right: 0.5em;
                 }
             }
             a:hover,
@@ -100,7 +105,7 @@
             li.mx-menubar-item {
                 a {
                     color: $navtopbar-color;
-                    font-size: $navtopbar-sub-font-size;
+                    font-size: $navtopbar-font-size;
                     .glyphicon {
                         font-size: $navtopbar-glyph-size;
                     }
@@ -128,6 +133,7 @@
             li.mx-menubar-item {
                 a {
                     border-color: $navtopbar-border-color;
+                    height: $navigation-item-height; 
                 }
             }
         }
@@ -142,7 +148,7 @@
             li.mx-menubar-item {
                 a {
                     color: $navsidebar-color;
-                    font-size: $navsidebar-sub-font-size;
+                    font-size: $navsidebar-font-size;
                     .glyphicon {
                         font-size: $navsidebar-glyph-size;
                     }
