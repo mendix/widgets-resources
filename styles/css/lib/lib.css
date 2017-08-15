@@ -884,6 +884,10 @@ select.form-control {
   background-color: transparent;
 }
 
+.btn-icon > span {
+  margin: 0;
+}
+
 .btn-icon-right > span {
   float: right;
   margin-left: 5px;
@@ -2556,7 +2560,10 @@ img.img-center,
   /* When hovering or the dropdown is open */
 }
 .mx-navbar ul.nav > li.mx-navbar-item > a {
-  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  padding: 5px 15px;
+  min-height: 60px;
   vertical-align: middle;
   color: #FFF;
   border-radius: 0;
@@ -2598,11 +2605,13 @@ img.img-center,
 .mx-navbar ul.nav > li.mx-navbar-item > a img {
   width: 20px;
   height: auto;
+  margin-right: 0.5em;
 }
 .mx-navbar ul.nav > li.mx-navbar-item > a .glyphicon {
   top: -1px;
   vertical-align: middle;
   font-size: 20px;
+  margin-right: 0.5em;
 }
 .mx-navbar ul.nav > .mx-navbar-item > a:hover,
 .mx-navbar ul.nav > .mx-navbar-item > a:focus,
@@ -2668,25 +2677,25 @@ img.img-center,
   /* When hovering or the dropdown is open */
 }
 .region-topbar .mx-navbar ul.nav > li.mx-navbar-item > a {
-  color: #D7D7D7;
+  color: #555555;
   font-size: 14px;
   /* Dropdown arrow */
   /* Dropdown */
 }
 .region-topbar .mx-navbar ul.nav > li.mx-navbar-item > a .caret {
-  border-top-color: #D7D7D7;
-  border-bottom-color: #D7D7D7;
+  border-top-color: #555555;
+  border-bottom-color: #555555;
 }
 .region-topbar .mx-navbar ul.nav > li.mx-navbar-item > a:hover, .region-topbar .mx-navbar ul.nav > li.mx-navbar-item > a:focus, .region-topbar .mx-navbar ul.nav > li.mx-navbar-item > a.active {
-  color: #D7D7D7;
+  color: #555555;
   background-color: whitesmoke;
 }
 .region-topbar .mx-navbar ul.nav > li.mx-navbar-item > a:hover .caret, .region-topbar .mx-navbar ul.nav > li.mx-navbar-item > a:focus .caret, .region-topbar .mx-navbar ul.nav > li.mx-navbar-item > a.active .caret {
-  border-top-color: #D7D7D7;
-  border-bottom-color: #D7D7D7;
+  border-top-color: #555555;
+  border-bottom-color: #555555;
 }
 .region-topbar .mx-navbar ul.nav > li.mx-navbar-item > a.active {
-  color: #D7D7D7;
+  color: #555555;
   background-color: #ebebeb;
 }
 .region-topbar .mx-navbar ul.nav > li.mx-navbar-item > a .mx-navbar-submenu::before {
@@ -2701,7 +2710,7 @@ img.img-center,
 .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a,
 .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a:hover,
 .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a:focus {
-  color: #D7D7D7;
+  color: #555555;
   background-color: whitesmoke;
 }
 .region-topbar .mx-navbar ul.nav > .mx-navbar-item > a:hover .caret,
@@ -2710,8 +2719,8 @@ img.img-center,
 .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a .caret,
 .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a:hover .caret,
 .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a:focus .caret {
-  border-top-color: #D7D7D7;
-  border-bottom-color: #D7D7D7;
+  border-top-color: #555555;
+  border-bottom-color: #555555;
 }
 .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
   color: #FFF;
@@ -2859,17 +2868,19 @@ img.img-center,
   /* Sub navigation item specific */
   /* remove focus */
 }
-.mx-navigationtree .navbar-inner ul {
+.mx-navigationtree .navbar-inner > ul {
   margin: 0;
   padding-left: 0;
 }
-.mx-navigationtree .navbar-inner ul li {
+.mx-navigationtree .navbar-inner > ul > li {
   padding: 0;
   border-style: none;
 }
-.mx-navigationtree .navbar-inner ul li a {
-  display: block;
-  padding: 15px;
+.mx-navigationtree .navbar-inner > ul > li > a {
+  display: flex;
+  align-items: center;
+  padding: 5px 15px;
+  height: 60px;
   color: #FFF;
   border-bottom: 1px solid #2d3642;
   border-radius: 0;
@@ -2878,34 +2889,35 @@ img.img-center,
   font-size: 14px;
   font-weight: normal;
 }
-.mx-navigationtree .navbar-inner ul li a .caret {
+.mx-navigationtree .navbar-inner > ul > li > a .caret {
   border-top-color: #FFF;
   border-bottom-color: #FFF;
 }
-.mx-navigationtree .navbar-inner ul li a img {
+.mx-navigationtree .navbar-inner > ul > li > a img {
   width: 20px;
   height: auto;
-  margin-right: 4px;
+  margin-right: 0.5em;
 }
-.mx-navigationtree .navbar-inner ul li a .glyphicon {
+.mx-navigationtree .navbar-inner > ul > li > a .glyphicon {
   top: -1px;
   vertical-align: middle;
   font-size: 20px;
+  margin-right: 0.5em;
 }
-.mx-navigationtree .navbar-inner ul li a:hover,
-.mx-navigationtree .navbar-inner ul li a:focus,
-.mx-navigationtree .navbar-inner ul li a.active {
+.mx-navigationtree .navbar-inner > ul > li a:hover,
+.mx-navigationtree .navbar-inner > ul > li a:focus,
+.mx-navigationtree .navbar-inner > ul > li a.active {
   text-decoration: none;
   color: #FFF;
   background-color: #2d3642;
 }
-.mx-navigationtree .navbar-inner ul li a:hover .caret,
-.mx-navigationtree .navbar-inner ul li a:focus .caret,
-.mx-navigationtree .navbar-inner ul li a.active .caret {
+.mx-navigationtree .navbar-inner > ul > li a:hover .caret,
+.mx-navigationtree .navbar-inner > ul > li a:focus .caret,
+.mx-navigationtree .navbar-inner > ul > li a.active .caret {
   border-top-color: #FFF;
   border-bottom-color: #FFF;
 }
-.mx-navigationtree .navbar-inner ul li a.active {
+.mx-navigationtree .navbar-inner > ul > li a.active {
   color: #FFF;
   border-left-color: #FFF;
   background-color: #36404e;
@@ -2918,6 +2930,7 @@ img.img-center,
 .mx-navigationtree li.mx-navigationtree-has-items > ul li {
   margin: 0;
   padding: 0;
+  border: 0;
 }
 .mx-navigationtree li.mx-navigationtree-has-items > ul li a {
   padding: 12px 20px 12px 25px;
@@ -2926,6 +2939,8 @@ img.img-center,
   background-color: #1d222a;
   font-size: 12px;
   font-weight: normal;
+  text-decoration: none;
+  text-shadow: none;
 }
 .mx-navigationtree li.mx-navigationtree-has-items > ul li a:hover, .mx-navigationtree li.mx-navigationtree-has-items > ul li a:focus, .mx-navigationtree li.mx-navigationtree-has-items > ul li a.active {
   color: #0595DB;
@@ -2944,34 +2959,34 @@ img.img-center,
   background-color: #FFFFFF;
   /* Sub navigation item specific */
 }
-.region-topbar .mx-navigationtree .navbar-inner ul li a {
-  color: #D7D7D7;
+.region-topbar .mx-navigationtree .navbar-inner > ul > li > a {
+  color: #555555;
   border-color: #D7D7D7;
   background-color: #FFFFFF;
   font-size: 14px;
 }
-.region-topbar .mx-navigationtree .navbar-inner ul li a .caret {
-  border-top-color: #D7D7D7;
-  border-bottom-color: #D7D7D7;
+.region-topbar .mx-navigationtree .navbar-inner > ul > li > a .caret {
+  border-top-color: #555555;
+  border-bottom-color: #555555;
 }
-.region-topbar .mx-navigationtree .navbar-inner ul li a .glyphicon {
+.region-topbar .mx-navigationtree .navbar-inner > ul > li > a .glyphicon {
   font-size: 1.2em;
 }
-.region-topbar .mx-navigationtree .navbar-inner ul li a:hover,
-.region-topbar .mx-navigationtree .navbar-inner ul li a:focus,
-.region-topbar .mx-navigationtree .navbar-inner ul li a.active {
-  color: #D7D7D7;
+.region-topbar .mx-navigationtree .navbar-inner > ul > li a:hover,
+.region-topbar .mx-navigationtree .navbar-inner > ul > li a:focus,
+.region-topbar .mx-navigationtree .navbar-inner > ul > li a.active {
+  color: #555555;
   background-color: whitesmoke;
 }
-.region-topbar .mx-navigationtree .navbar-inner ul li a:hover .caret,
-.region-topbar .mx-navigationtree .navbar-inner ul li a:focus .caret,
-.region-topbar .mx-navigationtree .navbar-inner ul li a.active .caret {
-  border-top-color: #D7D7D7;
-  border-bottom-color: #D7D7D7;
+.region-topbar .mx-navigationtree .navbar-inner > ul > li a:hover .caret,
+.region-topbar .mx-navigationtree .navbar-inner > ul > li a:focus .caret,
+.region-topbar .mx-navigationtree .navbar-inner > ul > li a.active .caret {
+  border-top-color: #555555;
+  border-bottom-color: #555555;
 }
-.region-topbar .mx-navigationtree .navbar-inner ul li a.active {
-  color: #D7D7D7;
-  border-left-color: #D7D7D7;
+.region-topbar .mx-navigationtree .navbar-inner > ul > li a.active {
+  color: #555555;
+  border-left-color: #555555;
   background-color: #ebebeb;
 }
 .region-topbar .mx-navigationtree li.mx-navigationtree-has-items > ul {
@@ -2995,32 +3010,32 @@ img.img-center,
   background-color: #252C36;
   /* Sub navigation item specific */
 }
-.region-sidebar .mx-navigationtree .navbar-inner ul li a {
+.region-sidebar .mx-navigationtree .navbar-inner > ul > li > a {
   color: #FFFFFF;
   border-color: #2d3642;
   background-color: #252C36;
   font-size: 14px;
 }
-.region-sidebar .mx-navigationtree .navbar-inner ul li a .caret {
+.region-sidebar .mx-navigationtree .navbar-inner > ul > li > a .caret {
   border-top-color: #FFFFFF;
   border-bottom-color: #FFFFFF;
 }
-.region-sidebar .mx-navigationtree .navbar-inner ul li a .glyphicon {
+.region-sidebar .mx-navigationtree .navbar-inner > ul > li > a .glyphicon {
   font-size: 20px;
 }
-.region-sidebar .mx-navigationtree .navbar-inner ul li a:hover,
-.region-sidebar .mx-navigationtree .navbar-inner ul li a:focus,
-.region-sidebar .mx-navigationtree .navbar-inner ul li a.active {
+.region-sidebar .mx-navigationtree .navbar-inner > ul > li a:hover,
+.region-sidebar .mx-navigationtree .navbar-inner > ul > li a:focus,
+.region-sidebar .mx-navigationtree .navbar-inner > ul > li a.active {
   color: #FFFFFF;
   background-color: #2d3642;
 }
-.region-sidebar .mx-navigationtree .navbar-inner ul li a:hover .caret,
-.region-sidebar .mx-navigationtree .navbar-inner ul li a:focus .caret,
-.region-sidebar .mx-navigationtree .navbar-inner ul li a.active .caret {
+.region-sidebar .mx-navigationtree .navbar-inner > ul > li a:hover .caret,
+.region-sidebar .mx-navigationtree .navbar-inner > ul > li a:focus .caret,
+.region-sidebar .mx-navigationtree .navbar-inner > ul > li a.active .caret {
   border-top-color: #FFF;
   border-bottom-color: #FFF;
 }
-.region-sidebar .mx-navigationtree .navbar-inner ul li a.active {
+.region-sidebar .mx-navigationtree .navbar-inner > ul > li a.active {
   color: #FFF;
   border-left-color: #FFF;
   background-color: #36404e;
@@ -3072,21 +3087,26 @@ img.img-center,
 .mx-menubar ul.mx-menubar-list li.mx-menubar-item {
   margin: 0;
 }
-.mx-menubar ul.mx-menubar-list li.mx-menubar-item a {
-  display: block;
+.mx-menubar ul.mx-menubar-list li.mx-menubar-item > a {
+  display: flex;
+  align-items: center;
   overflow: hidden;
-  padding: 0 8px;
+  padding: 5px 15px;
   text-align: center;
   color: #FFF;
   border-radius: 0;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: normal;
   line-height: 50px;
 }
-.mx-menubar ul.mx-menubar-list li.mx-menubar-item a .glyphicon {
+.mx-menubar ul.mx-menubar-list li.mx-menubar-item > a img {
+  margin-right: 0.5em;
+}
+.mx-menubar ul.mx-menubar-list li.mx-menubar-item > a .glyphicon {
   top: -1px;
   vertical-align: middle;
   font-size: 20px;
+  margin-right: 0.5em;
 }
 .mx-menubar ul.mx-menubar-list li.mx-menubar-item a:hover,
 .mx-menubar ul.mx-menubar-list li.mx-menubar-item a:focus, .mx-menubar ul.mx-menubar-list li.mx-menubar-item:hover a, .mx-menubar ul.mx-menubar-list li.mx-menubar-item:focus a, .mx-menubar ul.mx-menubar-list li.mx-menubar-item.active a {
@@ -3139,19 +3159,19 @@ img.img-center,
   background-color: #FFFFFF;
 }
 .region-topbar .mx-menubar ul.mx-menubar-list li.mx-menubar-item a {
-  color: #D7D7D7;
-  font-size: 12px;
+  color: #555555;
+  font-size: 14px;
 }
 .region-topbar .mx-menubar ul.mx-menubar-list li.mx-menubar-item a .glyphicon {
   font-size: 1.2em;
 }
 .region-topbar .mx-menubar ul.mx-menubar-list li.mx-menubar-item a:hover,
 .region-topbar .mx-menubar ul.mx-menubar-list li.mx-menubar-item a:focus, .region-topbar .mx-menubar ul.mx-menubar-list li.mx-menubar-item:hover a, .region-topbar .mx-menubar ul.mx-menubar-list li.mx-menubar-item:focus a, .region-topbar .mx-menubar ul.mx-menubar-list li.mx-menubar-item.active a {
-  color: #D7D7D7;
+  color: #555555;
   background-color: whitesmoke;
 }
 .region-topbar .mx-menubar ul.mx-menubar-list li.mx-menubar-item.active a {
-  color: #D7D7D7;
+  color: #555555;
   background-color: #ebebeb;
 }
 .region-topbar .mx-menubar-vertical {
@@ -3159,6 +3179,7 @@ img.img-center,
 }
 .region-topbar .mx-menubar-vertical ul.mx-menubar-list li.mx-menubar-item a {
   border-color: #D7D7D7;
+  height: 60px;
 }
 
 .region-sidebar .mx-menubar {
@@ -3166,7 +3187,7 @@ img.img-center,
 }
 .region-sidebar .mx-menubar ul.mx-menubar-list li.mx-menubar-item a {
   color: #FFFFFF;
-  font-size: 12px;
+  font-size: 14px;
 }
 .region-sidebar .mx-menubar ul.mx-menubar-list li.mx-menubar-item a .glyphicon {
   font-size: 20px;
@@ -4798,46 +4819,27 @@ h6,
   padding-left: 15px;
 }
 
-@media (min-width: 768px) {
-  .layout-atlas .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
-    width: 60px !important;
-  }
-  .layout-atlas .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover ul {
-    position: absolute;
-    z-index: 100;
-    left: 60px;
-    display: block;
-    margin-top: -60px;
-  }
-  .layout-atlas .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-collapsed ul, .layout-atlas .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items ul {
-    display: none;
-  }
-}
-@media (max-width: 767px) {
-  .layout-atlas .mx-scrollcontainer-open {
-    width: 1100px;
-  }
+/* ==========================================================================
+   Atlas layout
+   
+   The core stucture of all atlas layouts
+========================================================================== */
+.layout-atlas .toggle-btn > .glyphicon {
+  margin: 0;
 }
 .layout-atlas .region-sidebar {
   background-color: #252C36;
 }
+.layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a {
+  padding: 0 15px;
+}
+.layout-atlas .region-sidebar .mx-navigationtree .navbar-inner > ul > li > a .glyphicon {
+  margin-right: 10px;
+}
 .layout-atlas .region-sidebar .toggle-btn {
-  width: 60px;
-  height: 60px;
   border-color: transparent;
   border-radius: 0;
   background: transparent;
-}
-.layout-atlas .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li a span:first-child {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  margin-left: -5px;
-  padding: 10px;
-  border-radius: 3px;
-}
-.layout-atlas .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li a.active span:first-child {
-  background: #F99B1D;
 }
 .layout-atlas .region-topbar {
   position: relative;
@@ -4850,6 +4852,7 @@ h6,
 .layout-atlas .region-topbar::before {
   position: absolute;
   top: 0;
+  z-index: 1;
   display: block;
   width: 100%;
   height: 5px;
@@ -4857,14 +4860,8 @@ h6,
   background-color: #0595DB;
 }
 .layout-atlas .region-topbar .toggle-btn {
-  display: none;
-}
-@media (max-width: 767px) {
-  .layout-atlas .region-topbar .toggle-btn {
-    display: inline-block;
-    margin-right: 15px;
-    padding: 5px;
-  }
+  margin-right: 15px;
+  padding: 5px;
 }
 .layout-atlas .region-topbar .navbar-brand {
   display: inline-block;
@@ -4896,12 +4893,16 @@ h6,
   min-height: 60px;
   background: transparent;
 }
-.layout-atlas .region-topbar .mx-navbar .mx-navbar-item a {
+.layout-atlas .region-topbar .mx-navbar > .mx-navbar-item > a {
   margin-top: 5px;
   padding: 0 20px;
-  line-height: 55px;
 }
 
+/* ==========================================================================
+   Atlas layout
+   
+   Extra styling for phone layouts
+========================================================================== */
 .layout-atlas-phone .region-topbar {
   min-height: 45px;
   border-style: none;
@@ -4911,6 +4912,69 @@ h6,
   display: none;
 }
 
+/* ==========================================================================
+   Atlas layout
+   
+   Extra styling for responsive layouts
+========================================================================== */
+@media (min-width: 768px) {
+  .layout-atlas-responsive-default .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
+    width: 60px !important;
+  }
+  .layout-atlas-responsive-default .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover a {
+    background-color: #1d222a;
+  }
+  .layout-atlas-responsive-default .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover ul {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    bottom: 0;
+    left: 60px;
+    display: block;
+    overflow-y: scroll;
+    min-width: 200px;
+    padding-top: 10px;
+  }
+  .layout-atlas-responsive-default .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-collapsed ul, .layout-atlas-responsive-default .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items ul {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .layout-atlas-responsive-default .mx-scrollcontainer-open {
+    width: 1100px;
+  }
+}
+.layout-atlas-responsive-default .region-sidebar .toggle-btn {
+  width: 60px;
+  height: 60px;
+  border-color: transparent;
+  border-radius: 0;
+  background: transparent;
+}
+.layout-atlas-responsive-default .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li a .glyphicon {
+  width: 40px;
+  height: 40px;
+  margin-left: -5px;
+  padding: 10px;
+  border-radius: 3px;
+}
+.layout-atlas-responsive-default .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li a.active .glyphicon {
+  background: #0595DB;
+}
+.layout-atlas-responsive-default .region-topbar .toggle-btn {
+  display: none;
+}
+@media (max-width: 767px) {
+  .layout-atlas-responsive-default .region-topbar .toggle-btn {
+    display: inline-block;
+  }
+}
+
+/* ==========================================================================
+   Atlas layout
+   
+   Extra styling for tablet layouts
+========================================================================== */
 /* Based on https://github.com/mendixlabs/star-rating/blob/v1.1.1/src/ui/StarRating.scss */
 div.widget-progress-bar .progress-bar-default {
   background-color: #DDDDDD;
