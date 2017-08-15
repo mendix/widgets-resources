@@ -29,7 +29,7 @@ $font-size-h1:                                      31px;
 $font-size-h2:                                      26px;
 $font-size-h3:                                      24px;
 $font-size-h4:                                      18px;
-$font-color-headers:                                 #17347B;
+$font-color-headers:                                #17347B;
 
 //== Step 2: UI Customization
 
@@ -38,7 +38,7 @@ $topbar-bg:                                         #FFFFFF;
 $navtopbar-border-color:                            $default-border-color;
 $topbar-border-color:                               $navtopbar-border-color;
 $topbar-minimalheight:                              60px;
-$navtopbar-color:                                   $default-border-color;
+$navtopbar-color:                                   $font-base-color;
 $navbar-brand-name:                                 $default-border-color;
 $brand-logo:                                        "../../../logo.png";
 $brand-logo-height:                                 30px;
