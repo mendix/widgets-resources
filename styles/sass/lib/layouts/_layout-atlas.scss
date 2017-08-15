@@ -1,83 +1,34 @@
+/* ==========================================================================
+   Atlas layout
+   
+   The core stucture of all atlas layouts
+========================================================================== */
 .layout-atlas {
-    $sidebar-width: 60px;
 
-    @media (min-width: $screen-sm) {
-        .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
-            width: $sidebar-width !important;
-
-            .mx-scrollcontainer-wrapper > .mx-navigationtree ul li {
-                &.mx-navigationtree-has-items:hover {
-                    a {
-                        background-color: $navsidebar-sub-bg;
-                    }
-
-                    ul {
-                        position: absolute;
-                        z-index: 100;
-                        top: 0;
-                        bottom: 0;
-                        left: $sidebar-width;
-                        display: block;
-                        overflow-y: scroll;
-                        min-width: 200px;
-                        padding-top: 10px;
-                    }
-                }
-
-                &.mx-navigationtree-collapsed,
-                &.mx-navigationtree-has-items {
-                    ul {
-                        display: none;
-                    }
-                }
-            }
-        }
-    }
-
-    // Push aside for mobile
-    @media (max-width: $screen-xs-max) {
-        .mx-scrollcontainer-open {
-            width: 1100px;
-        }
-    }
-
+    // Toggle button
     .toggle-btn > .glyphicon {
         margin: 0;
     }
 
+    // Sidebar
     .region-sidebar {
         background-color: $navsidebar-bg;
-
+        
+        .mx-navigationtree .navbar-inner > ul > li > a {
+            padding: 0 15px;
+        
+            .glyphicon {
+                margin-right: 10px;
+            }
+        }
         .toggle-btn {
-            width: $sidebar-width;
-            height: 60px;
             border-color: transparent;
             border-radius: 0;
             background: transparent;
         }
-
-        .mx-scrollcontainer-wrapper > .mx-navigationtree {
-            ul li {
-                a {
-                    span:first-child {
-                        width: 40px;
-                        height: 40px;
-                        margin-right: 10px;
-                        margin-left: -5px;
-                        padding: 10px;
-                        border-radius: 3px;
-                    }
-
-                    &.active {
-                        span:first-child {
-                            background: $brand-warning;
-                        }
-                    }
-                }
-            }
-        }
     }
 
+    // Topbar
     .region-topbar {
         position: relative;
         z-index: 1; // Show dropshadow
@@ -89,6 +40,7 @@
         &::before {
             position: absolute;
             top: 0;
+            z-index: 1;
             display: block;
             width: 100%;
             height: 5px;
@@ -96,14 +48,10 @@
             background-color: $brand-primary;
         }
 
+        // Toggle btn
         .toggle-btn {
-            display: none;
-
-            @media (max-width: $screen-xs-max) {
-                display: inline-block;
-                margin-right: 15px;
-                padding: 5px;
-            }
+            margin-right: 15px;
+            padding: 5px;
         }
 
         // For your company, product, or project name
@@ -147,11 +95,10 @@
             min-height: $topbar-minimalheight;
             background: transparent;
 
-            .mx-navbar-item {
-                a {
+            > .mx-navbar-item {
+                > a {
                     margin-top: 5px;
                     padding: 0 20px;
-                    line-height: $topbar-minimalheight - 5;
                 }
             }
         }
