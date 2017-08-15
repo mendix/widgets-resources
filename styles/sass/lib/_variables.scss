@@ -137,7 +137,11 @@ $font-color-detail:                     $gray-light !default;
 
 //== Navigation
 //## Used in components/navigation
+
 // Default Navigation styling
+$navigation-item-height:                60px;
+$navigation-item-padding:               5px 15px;
+
 $navigation-font-size:                  $font-size-default !default;
 $navigation-sub-font-size:              $font-size-small !default;
 $navigation-glyph-size:                 20px !default; // For glyphicons that you can select in the Mendix Modeler
