@@ -30,6 +30,7 @@
     text-shadow: none;
     font-size: $btn-font-size;
     line-height: $line-height-base;
+    
     &:hover,
     &:focus,
     &:active {
@@ -107,7 +108,7 @@
 }
 
 
-// Buttons Sizes
+// Button Sizes
 .btn-lg {
     font-size: $font-size-large;
     img {
@@ -122,7 +123,7 @@
     }
 }
 
-// Buttons Image 
+// Button Image 
 .btn-image {
     padding: 0;
     vertical-align: middle;
@@ -138,7 +139,12 @@
     }
 }
 
-// Align icon
+// Icon buttons
+.btn-icon {
+    > span {
+        margin: 0;
+    }
+}
 .btn-icon-right {
     > span {
         float: right;
