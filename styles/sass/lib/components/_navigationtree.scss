@@ -5,19 +5,19 @@
 ========================================================================== */
 .mx-navigationtree {
     background-color: $navigation-bg;
-    
+
     /* Every navigation item */
     .navbar-inner > ul {
         margin: 0;
         padding-left: 0;
-        > li {
+         > li {
             padding: 0;
             border-style: none;
-            > a {
+             > a {
                 display: flex;
                 align-items: center;
-                padding: $navigation-item-padding;
                 height: $navigation-item-height;
+                padding: $navigation-item-padding;
                 color: $navigation-color;
                 border-bottom: 1px solid $navigation-border-color;
                 border-radius: 0;
@@ -36,9 +36,9 @@
                 }
                 .glyphicon {
                     top: -1px;
+                    margin-right: 0.5em;
                     vertical-align: middle;
                     font-size: $navigation-glyph-size;
-                    margin-right: 0.5em;
                 }
             }
             a:hover,
@@ -59,10 +59,10 @@
             }
         }
     }
-    
+
     /* Sub navigation item specific */
     li.mx-navigationtree-has-items {
-        > ul {
+         > ul {
             margin: 0;
             padding-left: 0;
             background-color: $navigation-sub-bg;
@@ -72,14 +72,14 @@
                 border: 0;
                 a {
                     padding: 12px 20px 12px 25px;
+                    text-decoration: none;
                     color: $navigation-sub-color;
                     border: 0;
                     background-color: $navigation-sub-bg;
+                    text-shadow: none;
                     font-size: $navigation-sub-font-size;
                     font-weight: $font-weight-normal;
-                    text-decoration: none;
-                    text-shadow: none;
-                    
+
                     &:hover,
                     &:focus,
                     &.active {
@@ -95,7 +95,7 @@
             }
         }
     }
-    
+
     /* remove focus */
     &:focus {
         outline: 0;
@@ -110,8 +110,8 @@
     .mx-navigationtree {
         background-color: $navtopbar-bg;
         .navbar-inner > ul {
-            > li {
-                > a {
+             > li {
+                 > a {
                     color: $navtopbar-color;
                     border-color: $navtopbar-border-color;
                     background-color: $navtopbar-bg;
@@ -145,7 +145,7 @@
 
         /* Sub navigation item specific */
         li.mx-navigationtree-has-items {
-            > ul {
+             > ul {
                 background-color: $navtopbar-sub-bg;
                 li {
                     a {
@@ -174,8 +174,8 @@
     .mx-navigationtree {
         background-color: $navsidebar-bg;
         .navbar-inner > ul {
-            > li {
-                > a {
+             > li {
+                 > a {
                     color: $navsidebar-color;
                     border-color: $navsidebar-border-color;
                     background-color: $navsidebar-bg;
@@ -206,10 +206,10 @@
                 }
             }
         }
-        
+
         /* Sub navigation item specific */
         li.mx-navigationtree-has-items {
-            > ul {
+             > ul {
                 background-color: $navsidebar-sub-bg;
                 li {
                     a {
@@ -240,10 +240,10 @@
 .nav-content-center-text-icons.mx-navigationtree {
     .navbar-inner ul {
         a {
-            text-align: center;
+            flex-direction: column;
+            justify-content: center;
             .glyphicon {
-                display: block;
-                margin-bottom: 5px;
+                margin: 0 0 5px 0;
             }
         }
     }
@@ -253,7 +253,7 @@
 .nav-content-center.mx-navigationtree {
     .navbar-inner ul {
         a {
-            text-align: center;
+            justify-content: center;
         }
     }
 }

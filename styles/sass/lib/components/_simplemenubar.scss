@@ -7,30 +7,31 @@
     padding: 0;
     background-color: $navigation-bg;
     ul.mx-menubar-list {
+        display: flex;
         width: 100%;
         min-height: 50px;
-        table-layout: fixed;
         li.mx-menubar-item {
             margin: 0;
-            > a {
+             > a {
                 display: flex;
-                align-items: center;
                 overflow: hidden;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
                 padding: $navigation-item-padding;
-                text-align: center;
+                white-space: nowrap;
                 color: $navigation-color;
                 border-radius: 0;
                 font-size: $navigation-font-size;
                 font-weight: $font-weight-normal;
-                line-height: 50px;
                 img {
                     margin-right: 0.5em;
                 }
                 .glyphicon {
                     top: -1px;
+                    margin-right: 0.5em;
                     vertical-align: middle;
                     font-size: $navigation-glyph-size;
-                    margin-right: 0.5em;
                 }
             }
             a:hover,
@@ -59,6 +60,7 @@
 .mx-menubar-vertical {
     background-color: $navigation-bg;
     ul.mx-menubar-list {
+        display: flex;
         li.mx-menubar-item {
             display: block;
             a {
@@ -74,20 +76,27 @@
     ul.mx-menubar-list {
         li.mx-menubar-item {
             width: auto;
+            a {
+                width: 100%;
+            }
         }
     }
+
     /* Two menu items */
     &.menubar-col-6 ul.mx-menubar-list li.mx-menubar-item {
         width: 50%;
     }
+
     /* Three menu items */
     &.menubar-col-4 ul.mx-menubar-list li.mx-menubar-item {
         width: 33.33333333%;
     }
+
     /* Four menu items */
     &.menubar-col-3 ul.mx-menubar-list li.mx-menubar-item {
         width: 25%;
     }
+
     /* Five menu items */
     &.menubar-col-2 ul.mx-menubar-list li.mx-menubar-item {
         width: 20%;
@@ -132,8 +141,8 @@
         ul.mx-menubar-list {
             li.mx-menubar-item {
                 a {
+                    height: $navigation-item-height;
                     border-color: $navtopbar-border-color;
-                    height: $navigation-item-height; 
                 }
             }
         }
@@ -190,18 +199,18 @@
     ul.mx-menubar-list {
         li.mx-menubar-item {
             a {
+                flex-direction: column;
                 padding: 8px 8px 6px 8px;
                 line-height: normal;
                 .glyphicon {
                     display: block;
-                    margin-bottom: 4px;
+                    margin: 0 0 5px 0;
                     font-size: 18px;
                 }
                 img {
                     display: block;
                     height: 18px;
-                    margin: auto;
-                    margin-bottom: 4px;
+                    margin: 0 0 5px 0;
                 }
             }
         }
