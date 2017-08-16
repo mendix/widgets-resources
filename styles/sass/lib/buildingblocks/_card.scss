@@ -5,7 +5,7 @@
 //== Default
 //-------------------------------------------------------------------------------------------------------------------//
 .card {
-    @include default-spacing($type: padding, $direction: all, $device: responsive);
+    padding: $container-spacing;
     border: 1px solid $border-color-default;
     border-radius: $border-radius-default;
     background-color: #FFFFFF;
@@ -66,7 +66,7 @@
 
 .cardinfo {
     .card-text {
-        @include default-spacing($type: margin, $direction: bottom, $device: responsive);
+        margin-bottom: $container-spacing;
     }
 }
 // Used in card info
@@ -137,7 +137,7 @@
             }
         }
         .mx-tabcontainer-pane {
-            @include default-spacing($type: padding, $direction: all, $device: responsive);
+            @include layout-spacing($type: padding, $direction: all, $device: responsive);
         }
     }
 }
