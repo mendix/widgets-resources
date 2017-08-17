@@ -140,6 +140,38 @@
     margin-left: $element-spacing !important;
 }
 
+.spacing-inner-container {
+    padding: $container-spacing !important;
+}
+.spacing-inner-top-container {
+    padding-top: $container-spacing !important;
+}
+.spacing-inner-right-container {
+    padding-right: $container-spacing !important;
+}
+.spacing-inner-bottom-container {
+    padding-bottom: $container-spacing !important;
+}
+.spacing-inner-left-container {
+    padding-left: $container-spacing !important;
+}
+
+.spacing-outer-container {
+    margin: $element-spacing !important;
+}
+.spacing-outer-top-container {
+    margin-top: $container-spacing !important;
+}
+.spacing-outer-right-container {
+    margin-right: $container-spacing !important;
+}
+.spacing-outer-bottom-container {
+    margin-bottom: $container-spacing !important;
+}
+.spacing-outer-left-container {
+    margin-left: $container-spacing !important;
+}
+
 .spacing-inner-responsive {
     @include layout-spacing($type: padding, $direction: all, $device: responsive, $is_important: true);
 }
