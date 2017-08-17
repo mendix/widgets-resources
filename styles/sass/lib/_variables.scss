@@ -553,44 +553,42 @@ $callout-danger-bg:                     $color-danger-lighter !default;
 
 
 
-
-
-//== Layout Spacing
+//== Spacing
 //## Advanced layout options (used in base/mixins/default-spacing)
 
-$default-spacing-top:                   30px !default;
-$default-spacing-right:                 30px !default;
-$default-spacing-bottom:                30px !default;
-$default-spacing-left:                  30px !default;
+// Layout spacing
+$layout-spacing-top:                   30px !default;
+$layout-spacing-right:                 30px !default;
+$layout-spacing-bottom:                30px !default;
+$layout-spacing-left:                  30px !default;
 
-$t-default-spacing-top:                 30px !default;
-$t-default-spacing-right:               30px !default;
-$t-default-spacing-bottom:              30px !default;
-$t-default-spacing-left:                30px !default;
+$t-layout-spacing-top:                 30px !default;
+$t-layout-spacing-right:               30px !default;
+$t-layout-spacing-bottom:              30px !default;
+$t-layout-spacing-left:                30px !default;
 
-$m-default-spacing-top:                 15px !default;
-$m-default-spacing-right:               15px !default;
-$m-default-spacing-bottom:              15px !default;
-$m-default-spacing-left:                15px !default;
+$m-layout-spacing-top:                 15px !default;
+$m-layout-spacing-right:               15px !default;
+$m-layout-spacing-bottom:              15px !default;
+$m-layout-spacing-left:                15px !default;
 
-
-
-
-
-
-//== Layouts
-//##
-
-// Combined spacing 
-$default-spacing:                       $default-spacing-top $default-spacing-right $default-spacing-bottom $default-spacing-left !default;
-$m-default-spacing:                     $m-default-spacing-top $m-default-spacing-right $m-default-spacing-bottom $m-default-spacing-left !default;
-$t-default-spacing:                     $t-default-spacing-top $t-default-spacing-right $t-default-spacing-bottom $t-default-spacing-left !default;
+// Combined layout spacing 
+$layout-spacing:                       $layout-spacing-top $layout-spacing-right $layout-spacing-bottom $layout-spacing-left !default;
+$m-layout-spacing:                     $m-layout-spacing-top $m-layout-spacing-right $m-layout-spacing-bottom $m-layout-spacing-left !default;
+$t-layout-spacing:                     $t-layout-spacing-top $t-layout-spacing-right $t-layout-spacing-bottom $t-layout-spacing-left !default;
 
 // Gutter size
 $gutter-size:                           15px !default;
 
 // Element spacing
 $element-spacing:                       5px !default;
+
+// Container spacing (spacing used in building block)
+$container-spacing:                     30px !default;
+
+
+
+
 
 //== Tables
 //## Table spacing options (used in components/tables)

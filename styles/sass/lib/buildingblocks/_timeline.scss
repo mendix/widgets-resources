@@ -10,8 +10,7 @@
     }
 }
 .timeline-itemwrapper.mx-listview {
-    @include default-spacing($type: padding, $direction: bottom, $device: responsive);
-    @include default-spacing($type: padding, $direction: top, $device: responsive);
+    padding: $container-spacing 0;
     margin-bottom: 0;
     margin-left: 55px;
     border-left: 1px solid $border-color-default;
@@ -32,7 +31,7 @@
         }
     }
     .mx-listview-item + .mx-listview-item {
-        @include default-spacing($type: margin, $direction: top, $device: responsive);
+        margin-top: $container-spacing;
     }
 }
 
