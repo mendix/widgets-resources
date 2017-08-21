@@ -1867,6 +1867,46 @@ body[dir="rtl"] .mx-header-right {
   margin-left: 5px !important;
 }
 
+.spacing-inner-container {
+  padding: 30px !important;
+}
+
+.spacing-inner-top-container {
+  padding-top: 30px !important;
+}
+
+.spacing-inner-right-container {
+  padding-right: 30px !important;
+}
+
+.spacing-inner-bottom-container {
+  padding-bottom: 30px !important;
+}
+
+.spacing-inner-left-container {
+  padding-left: 30px !important;
+}
+
+.spacing-outer-container {
+  margin: 5px !important;
+}
+
+.spacing-outer-top-container {
+  margin-top: 30px !important;
+}
+
+.spacing-outer-right-container {
+  margin-right: 30px !important;
+}
+
+.spacing-outer-bottom-container {
+  margin-bottom: 30px !important;
+}
+
+.spacing-outer-left-container {
+  margin-left: 30px !important;
+}
+
 @media (max-width: 767px) {
   .spacing-inner-responsive {
     padding: 15px 15px 15px 15px !important;
@@ -4214,24 +4254,10 @@ h6,
    Card
 ========================================================================== */
 .card {
+  padding: 30px;
   border: 1px solid #D7D7D7;
   border-radius: 4px;
   background-color: #FFFFFF;
-}
-@media (max-width: 767px) {
-  .card {
-    padding: 15px 15px 15px 15px;
-  }
-}
-@media (min-width: 768px) {
-  .card {
-    padding: 30px 30px 30px 30px;
-  }
-}
-@media (min-width: 992px) {
-  .card {
-    padding: 30px 30px 30px 30px;
-  }
 }
 .card .mx-layoutgrid {
   padding: 0 !important;
@@ -4273,20 +4299,8 @@ h6,
   font-size: 64px;
 }
 
-@media (max-width: 767px) {
-  .cardinfo .card-text {
-    margin-bottom: 15px;
-  }
-}
-@media (min-width: 768px) {
-  .cardinfo .card-text {
-    margin-bottom: 30px;
-  }
-}
-@media (min-width: 992px) {
-  .cardinfo .card-text {
-    margin-bottom: 30px;
-  }
+.cardinfo .card-text {
+  margin-bottom: 30px;
 }
 
 .textwithicon {
@@ -4760,39 +4774,10 @@ h6,
 }
 
 .timeline-itemwrapper.mx-listview {
+  padding: 30px 0;
   margin-bottom: 0;
   margin-left: 55px;
   border-left: 1px solid #D7D7D7;
-}
-@media (max-width: 767px) {
-  .timeline-itemwrapper.mx-listview {
-    padding-bottom: 15px;
-  }
-}
-@media (min-width: 768px) {
-  .timeline-itemwrapper.mx-listview {
-    padding-bottom: 30px;
-  }
-}
-@media (min-width: 992px) {
-  .timeline-itemwrapper.mx-listview {
-    padding-bottom: 30px;
-  }
-}
-@media (max-width: 767px) {
-  .timeline-itemwrapper.mx-listview {
-    padding-top: 15px;
-  }
-}
-@media (min-width: 768px) {
-  .timeline-itemwrapper.mx-listview {
-    padding-top: 30px;
-  }
-}
-@media (min-width: 992px) {
-  .timeline-itemwrapper.mx-listview {
-    padding-top: 30px;
-  }
 }
 .timeline-itemwrapper.mx-listview > ul > .mx-listview-item {
   position: relative;
@@ -4809,20 +4794,8 @@ h6,
   border-radius: 50%;
   background-color: #0595DB;
 }
-@media (max-width: 767px) {
-  .timeline-itemwrapper.mx-listview .mx-listview-item + .mx-listview-item {
-    margin-top: 15px;
-  }
-}
-@media (min-width: 768px) {
-  .timeline-itemwrapper.mx-listview .mx-listview-item + .mx-listview-item {
-    margin-top: 30px;
-  }
-}
-@media (min-width: 992px) {
-  .timeline-itemwrapper.mx-listview .mx-listview-item + .mx-listview-item {
-    margin-top: 30px;
-  }
+.timeline-itemwrapper.mx-listview .mx-listview-item + .mx-listview-item {
+  margin-top: 30px;
 }
 
 .timeline2 .timeline-itemwrapper.mx-listview > ul > .mx-listview-item {
@@ -4928,13 +4901,13 @@ h6,
    Extra styling for responsive layouts
 ========================================================================== */
 @media (min-width: 768px) {
-  .layout-atlas-responsive-default .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
+  .layout-atlas-responsive-default .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
     width: 60px !important;
   }
-  .layout-atlas-responsive-default .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover a {
+  .layout-atlas-responsive-default .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover a {
     background-color: #1d222a;
   }
-  .layout-atlas-responsive-default .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover ul {
+  .layout-atlas-responsive-default .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover ul {
     position: absolute;
     z-index: 100;
     top: 0;
@@ -4945,7 +4918,7 @@ h6,
     min-width: 200px;
     padding-top: 10px;
   }
-  .layout-atlas-responsive-default .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-collapsed ul, .layout-atlas-responsive-default .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items ul {
+  .layout-atlas-responsive-default .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-collapsed ul, .layout-atlas-responsive-default .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items ul {
     display: none;
   }
 }
@@ -4971,11 +4944,14 @@ h6,
 .layout-atlas-responsive-default .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li a.active .glyphicon {
   background: #0595DB;
 }
-.layout-atlas-responsive-default .region-topbar .toggle-btn {
+
+.layout-atlas-responsive-default .region-topbar .toggle-btn,
+.layout-atlas-responsive-topbar .region-topbar .toggle-btn {
   display: none;
 }
 @media (max-width: 767px) {
-  .layout-atlas-responsive-default .region-topbar .toggle-btn {
+  .layout-atlas-responsive-default .region-topbar .toggle-btn,
+  .layout-atlas-responsive-topbar .region-topbar .toggle-btn {
     display: inline-block;
   }
 }
