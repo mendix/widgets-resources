@@ -7,7 +7,7 @@
     $sidebar-width: 60px;
 
     @media (min-width: $screen-sm) {
-        .mx-layoutcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
+        .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
             width: $sidebar-width !important;
 
             .mx-scrollcontainer-wrapper > .mx-navigationtree ul li {
@@ -69,7 +69,7 @@
                     }
 
                     &.active {
-                        .glyphicon{
+                        .glyphicon {
                             background: $brand-primary;
                         }
                     }
@@ -80,6 +80,18 @@
 
     // Topbar
     .region-topbar {
+    }
+}
+
+// Topbar variant
+.layout-atlas-responsive-topbar {
+}
+
+// All responsive layouts
+.layout-atlas-responsive-default,
+.layout-atlas-responsive-topbar {
+    // Topbar
+    .region-topbar {
         .toggle-btn {
             display: none;
 
@@ -88,8 +100,4 @@
             }
         }
     }
-}
-
-// Topbar variant
-.layout-atlas-responsive-topbar {
 }

@@ -105,6 +105,9 @@
         margin-right: 15px;
         padding: 0;
         border-radius: 24px;
+        .glyphicon {
+            margin: 0;
+        }
     }
 }
 
@@ -194,6 +197,9 @@
         padding: 20px 30px;
         .cardproduct-name {
             margin: 0;
+        }
+        .widget-star-rating-font {
+            font-size: 20px;
         }
         .cardproduct-btn {
             position: absolute;
