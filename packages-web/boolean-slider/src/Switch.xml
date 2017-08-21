@@ -23,15 +23,19 @@
                 <enumerationValue key="never">Never</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="label" type="string" required="false" defaultValue="Label">
+        <property key="label" type="translatableString">
             <caption>Label</caption>
             <category>Appearance</category>
             <description/>
+            <translations>
+                <translation lang="en_US"/>
+                <translation lang="nl_NL"/>
+            </translations>
         </property>
         <property key="labelWidth" type="integer" defaultValue="9">
             <caption>Label width (weight)</caption>
             <category>Appearance</category>
-            <description>How much of the total row width (12) the label should occupy. Should not be greater than 11.</description>
+            <description>How much of the total row width (12) the label should occupy. Should not be greater than 11</description>
         </property>
         <property key="deviceStyle" type="enumeration" defaultValue="auto">
             <caption>Platform</caption>
