@@ -4,7 +4,7 @@ import { createElement } from "react";
 import * as Rating from "react-rating";
 
 import { StarRating, StarRatingProps } from "../StarRating";
-import { widgetColors } from "../StarRatingContainer";
+import { starSize, widgetColors } from "../StarRatingContainer";
 
 describe("StarRating", () => {
     let starProps: StarRatingProps;
@@ -16,6 +16,8 @@ describe("StarRating", () => {
             initialRate: 2,
             maximumStars: 5,
             readOnly: false,
+            starSize: "medium",
+            starSizeCustom: 50,
             widgetColor: "widget"
         };
     });
@@ -26,9 +28,9 @@ describe("StarRating", () => {
         expect(starRating).toBeElement(
             createElement("div", { className: "widget-star-rating" },
                 createElement(Rating, {
-                    empty: "glyphicon glyphicon-star-empty widget-star-rating-empty widget-star-rating-font",
+                    empty: "glyphicon glyphicon-star-empty widget-star-rating-empty widget-star-rating-font-medium",
                     fractions: 1,
-                    full: "glyphicon glyphicon-star widget-star-rating-font widget-star-rating-full-widget",
+                    full: "glyphicon glyphicon-star widget-star-rating-font-medium widget-star-rating-full-widget",
                     initialRate: 2,
                     onChange: jasmine.any(Function) as any,
                     readonly: starProps.readOnly,
