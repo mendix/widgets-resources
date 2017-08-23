@@ -15,10 +15,13 @@ export interface ContainerProps extends WrapperProps {
     maximumStars: number;
     onChangeMicroflow: string;
     rateAttribute: string;
+    starSize: starSize;
+    starSizeCustom: number;
     widgetColor: widgetColors;
 }
 // tslint:disable max-length-line
 export type widgetColors = "widget" | "default" | "primary" | "success" | "info" | "warning" | "danger" | "inverse" ;
+export type starSize = "small" | "medium" | "large" | "custom";
 
 interface ContainerState {
     initialRate: number;
@@ -53,6 +56,8 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
                 initialRate: this.state.initialRate,
                 readOnly,
                 maximumStars: this.props.maximumStars,
+                starSize: this.props.starSize,
+                starSizeCustom: this.props.starSizeCustom,
                 style: StarRatingContainer.parseStyle(this.props.style),
                 widgetColor: this.props.widgetColor
             });

@@ -1,7 +1,7 @@
 import * as classNames from "classnames";
-import { Component, createElement } from "react";
+import { Component, SFC, createElement } from "react";
 import * as Rating from "react-rating";
-import { widgetColors } from "./StarRatingContainer";
+import { starSize, widgetColors } from "./StarRatingContainer";
 
 import "../ui/StarRating.scss";
 
@@ -11,6 +11,8 @@ export interface StarRatingProps {
     handleOnChange?: (rate: number) => void;
     readOnly: boolean;
     maximumStars: number;
+    starSize: starSize;
+    starSizeCustom: number;
     style?: object;
     widgetColor: widgetColors;
 }
@@ -36,15 +38,29 @@ export class StarRating extends Component<StarRatingProps, {}> {
         this.fractions = readOnly ? 2 : 1;
         this.stop = this.props.maximumStars;
 
-        return createElement("div", {
-            className: classNames("widget-star-rating", this.props.className),
-            style: this.props.style
-        },
+        const customStyle: object | undefined = this.props.starSize === "custom"
+            ? { fontSize: `${this.props.starSizeCustom}px` }
+            : undefined;
+        const EmptyStar = createElement("div", {
+            className: `glyphicon glyphicon-star-empty widget-star-rating-empty ` +
+                `widget-star-rating-font-${this.props.starSize}`,
+            style: customStyle
+        });
+        const FullStar = createElement("span", {
+            className: `glyphicon glyphicon-star widget-star-rating-font-${this.props.starSize} ` +
+            `widget-star-rating-full-${this.props.widgetColor}`,
+            style: customStyle
+        });
+
+        return createElement("div",
+            {
+                className: classNames("widget-star-rating", this.props.className),
+                style: this.props.style
+            },
             createElement(Rating, {
-                empty: "glyphicon glyphicon-star-empty widget-star-rating-empty widget-star-rating-font",
+                empty: EmptyStar,
                 fractions: this.fractions,
-                full: "glyphicon glyphicon-star widget-star-rating-font " +
-                `widget-star-rating-full-${this.props.widgetColor}`,
+                full: FullStar,
                 initialRate: this.getRate(this.props),
                 onChange: !readOnly ? this.onChange : undefined,
                 readonly: readOnly,

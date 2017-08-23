@@ -26,7 +26,7 @@ Editing of a rate is possible if the logged in user owns that vote
 This widget requires a context.
 
 ## Customize rating icon
-In order to over-write the default star icon, add these classes to your project theme. Replace content with your preferred glyphicon icon
+In order to over-write the default star icon, add these classes to your project theme. Replace `content` with your preferred glyphicon icon
 ``` css
  [class*="widget-star-rating-full"]:before {
   content: "\e034"; /* flag icon */ 
