@@ -509,11 +509,6 @@ select.form-control {
   color: inherit;
 }
 
-.btn > span,
-.mx-button > span,
-.mx-link > span {
-  margin-right: 5px;
-}
 .btn img,
 .mx-button img,
 .mx-link img {
@@ -2213,7 +2208,11 @@ img.img-center,
   border-color: #D7D7D7;
   background-color: #FFF;
 }
+.mx-listview .mx-listview-item:first-child {
+  border-radius: 0;
+}
 .mx-listview .mx-listview-item:last-child {
+  border-radius: 0;
   border-bottom: 1px solid #D7D7D7;
 }
 .mx-listview .mx-listview-item:nth-child(2n + 1) {
