@@ -34,15 +34,14 @@ describe("Switch", () => {
         expect(page.radioButton.getText()).toContain(radioValue);
     });
 
-    // Popup is not recognised by webdriverio
-    xit("opens popup when clicked", () => {
+    it("opens popup when clicked", () => {
         page.open();
         page.switch3.waitForVisible();
-        page.switch3.clickAndWait();
+        page.switch3.click();
 
-        page.popupWindow.waitForVisible();
-        if (browser.alertText()) {
+        setTimeout(() => {
+            page.popupWindow.waitForVisible();
             expect(page.popupWindow.getText()).toContain(popupValue);
-        }
+        }, 3000);
     });
 });
