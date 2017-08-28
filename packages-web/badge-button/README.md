@@ -15,7 +15,7 @@ A special distinctive mark or token put on any display as a button
 
 ## Dependencies
 
-Mendix 7.2
+Mendix 7.6
 
 ## Demo project
 
