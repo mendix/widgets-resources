@@ -1,8 +1,7 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
 
-import { Badge } from "../Badge";
-import { BadgeProps } from "../Badge";
+import { Badge, BadgeProps } from "../Badge";
 
 describe("Badge", () => {
     const createBadge = (props: BadgeProps) => shallow(createElement(Badge, props));
