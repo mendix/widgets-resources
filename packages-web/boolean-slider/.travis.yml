@@ -22,7 +22,7 @@ cache:
   - node_modules
 env:
   global:
-  - MX_APP_NAME=offlinesearch
+  - MX_APP_NAME=booleansliderwidge
   - MX_BRANCH_NAME=trunk
   - MX_PROJECT_ID=fd556f33-bbc2-4c60-bf68-a36d7f4ef872
   - MX_ENVIRONMENT=Sandbox
