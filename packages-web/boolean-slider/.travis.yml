@@ -9,12 +9,12 @@ before_install:
 - export CHROME_BIN=chromium-browser
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
-- wget -q -O - http://opensource.wandisco.com/wandisco-debian.gpg | sudo apt-key add
-  -
+- wget -q -O - http://opensource.wandisco.com/wandisco-debian.gpg | sudo apt-key add -
 - sudo sh -c "echo 'deb http://opensource.wandisco.com/debian/ wheezy svn17' > /etc/apt/sources.list.d/wandisco-subversion.list"
 - sudo apt-get -qq update
 - sudo apt-get install -y --allow-downgrades subversion=1.7.22-1+WANdisco libsvn1=1.7.22-1+WANdisco
 - svn --version
+- npm --version
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 cache:
@@ -27,15 +27,13 @@ env:
   - MX_PROJECT_ID=fd556f33-bbc2-4c60-bf68-a36d7f4ef872
   - MX_ENVIRONMENT=Sandbox
   - MX_USER=ci@flockofbirds.org
-  - secure: O/ogFnzXkcvnqkfIOhyz6Z4YQzysR+kWxjghx8cykTzRqH1vWgLRyR5AiIVHBEuX2kneN+g907h/r2ZwOhc9Kvp9O9IT1KTwftolXl9zgwJ7qDjE6nnZ/jcVeNw0MFIi1154iYmMv7eRYvbKB9Pki6r1ZG0cXbsdYxC+GVS6FOKQGdNec+E+QHfna0izgQqlau2UCD3OiBvk8yOpbP39FgiNNd6/7O7tiIABuEZA47jcTN+QkxZhDq7OPqPic5F/Uc7rJGkY5M00NEd1gBxjI86C8FgMawcxUoxZUc8BdEldkoDSMGu01n9d8AagwtRSCi/+SF3JCIwcmqtrnZLozMw9J5Ju+JOBxzaEZ7DHn2BQmov/LMBOmM5Aq9z3Ac3wFklDvAIc41pNY6SfcPOfxTcggx/W6xd+wImrdrby7XZsBbUkgIEf0w+klxnWUnb8jdExLADyH4YOGeUxGqY+m0FEZtOxZwQSoIdWTy1RJbXERHOoDwjwf9iRktZCYSiE4xYQryBUGdqC4AxZXZ5ZDKOITn+N+8WJvIoKqGvrQd02Ma5cxynbSxFOYEr94Im2c4dmSlPs9Kmg3c65q+PjrCAV/YxgsYQKX2FYBMwOhdat/BR4FMIfeFzHS5BWZVGWPjRrvtC3xtq+T8k4V+6uH3JuqBHL/EJ/cYP6h1ka9fA=
-  - secure: DbC2eVNJJRIwxPFAhetmBe+MOL32mmF+38ZdGaxoIj4IpMmn+JE0C3HtVFzxgb5aA9m5/eoVJVi+4i5W1BFQT7OC/gEsEFOoqxCxdwviMb43JnvE81+1uboNMBudl7OtOcbSDQ2RE2pLNNWI75E7KAnK7yPoydrRycUYVsO6T7mKu+XjL+BaJSCe0HqDdPfarAp1tMDx/n2Dlf1bPKhPAuCewcCdtS51+77FAVfZiNYOrFmuVjKvmTf5Ase7vKifl5bT4KlAfG6oq+HUg83b/ZlkNTs0ZQ+Kl9nyJIrEkP5hXETYM4YK0OIrOYClFzux0OcU125k3+YN3VkPZNP3QJGqypjBvqGWsUiCBUmeuq5q6tSHuPi7GccJm9EW7pe5rVGXI7EQvz5ZSh1TdzJMQCAuyzKHMA+8qBUMSnBbLVV4U66S6T18UarkexwLfcExfFf0iqLSE/DPSbPJc1vjpwZNN839PsNYeHQVHTC5KOTrBD2vx8H47cE2V+0t0yir2OrrE64wQyqMQYTH3HTVaWAG/uS8sfePVMpSEnTzY+ijqltm0EfDxa4edkcwBemXN0q8ztS8+XcSNKrSKDshL87xHHagoEmMFBIYpmILtBxOj4WdXV6K8wSx6/2kIlWeI//md8D2cnJq+f4SJKyzwVg4kstT+EI9TxpjTt0hgbY=
 deploy:
   provider: releases
   api_key:
-    secure: TPwN8LWu6MzNZa7aXRcK4CfuqFHfWYY3I9+9SgbkDXN0LnmsyzvW+BVMhcgEQcWOuiixiNQvbplrTvDP0h0NIlvgux69SHxdsfQKaox0OCoMWNq4fWBLZVl/jMMPOgZTQrJF385h1NojW9Ax3dtWCgiO+ZDGAi+NaM8C29CAf3Wh6Tq/I5uNmySaqS45UNWai++DYNiRuk250PdpjftBFmmUgHstzZoedtoYxLzmQtsursX/zT+ZieTPIMPiptxRHDzHy9U0vttD4IV9FK2Pr++JvXAiAXac/rQgOrJXK3BX4RnovaK2iDBtfxkQw5EbfTfF7j+uVjpXan4Qyutx9UqpYbgSc/DAdowIWztVCdCtemvjpuxfOXlNGS8UdGzWuU1rBv5gyo1J4mKDMScP1kKucTDPsrUDVcTeFyL9IO0ZZpchH+HvtrYQ0+LjoOhuwFhOgMbqUCiL1QXGHtKwsKg2xHbvTVTg3jSKaTKl/96SGvT0Tfj5+pek3atgFUP9nWAyYUmAYrwS+Mn1WNM29xbsLuSYKwWodL966dkcQYGUrj2OmkYX+QVLgOWINju+G5ErA7ArUca71dILj6xgxw0r6blpjFn3fFSj25mf6cGOb9L4/kZiKdwcmUUyM/8y2gBjfn8CdxBjdOClzNiJicjKeI91xD1IW535u0hh0C4=
+    secure: $GITHUB_KEY
   file: dist/release/*
   file_glob: true
   skip_cleanup: true
   on:
-    repo: FlockOfBirds/boolean-slider
+    repo: $TRAVIS_REPO_SLUG
     tags: true
