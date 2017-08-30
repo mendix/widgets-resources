@@ -40,8 +40,8 @@ describe("Switch", () => {
         page.switch3.click();
 
         setTimeout(() => {
-            page.popupWindow.waitForVisible();
-            expect(page.popupWindow.getText()).toContain(popupValue);
+            page.popup.waitForVisible();
+            expect(page.popup.getText()).toContain(popupValue);
         }, 3000);
     });
 });
