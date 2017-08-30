@@ -18,7 +18,8 @@
     "lint:fix": "npm run lint -- --fix",
     "deploy": "npm run updateProject && npm run deployApp",
     "build": "grunt release",
-    "updateProject": "node ./node_modules/mendix-widget-build-script/dist/UpdateMxProject.js"
+    "updateProject": "node ./node_modules/mendix-widget-build-script/dist/UpdateMxProject.js",
+    "deployApp": "node ./node_modules/mendix-widget-build-script/dist/DeployMxApp.js"
   },
   "pre-commit": [
     "pretest",
