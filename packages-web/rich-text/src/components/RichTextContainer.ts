@@ -27,6 +27,8 @@ export type ReadOnlyStyle = "bordered" | "text" | "borderedToolbar";
 
 export default class RichTextContainer extends Component<RichTextContainerProps, RichTextState> {
     private subscriptionHandles: number[] = [];
+    private updateEditor = true;
+    private editorChanged = false;
 
     constructor(props: RichTextContainerProps) {
         super(props);
@@ -35,20 +37,27 @@ export default class RichTextContainer extends Component<RichTextContainerProps,
             value: getValue(props.stringAttribute, "", props.mxObject) as string
         };
         this.handleOnChange = this.handleOnChange.bind(this);
+        this.executeOnChangeAction = this.executeOnChangeAction.bind(this);
         this.handleSubscriptions = this.handleSubscriptions.bind(this);
+        this.onFormSubmit = this.onFormSubmit.bind(this);
     }
 
     render() {
         return createElement(ValidateConfigs, { ...this.props as RichTextContainerProps, showOnError: false },
             createElement(RichText, {
-                ... this.props as any,
-                className: this.props.class,
-                hasContext: !!this.props.mxObject,
-                onChange: this.handleOnChange,
-                readOnly: this.isReadOnly(),
+                editorOption: this.props.editorOption,
+                theme: this.props.theme,
+                customOptions: this.props.customOptions,
+                minNumberOfLines: this.props.minNumberOfLines,
+                maxNumberOfLines: this.props.maxNumberOfLines,
                 readOnlyStyle: this.props.mxObject ? this.props.readOnlyStyle : "bordered",
+                className: this.props.class,
                 style: parseStyle(this.props.style),
-                value: this.state.value
+                value: this.state.value,
+                onChange: this.handleOnChange,
+                onBlur: this.executeOnChangeAction,
+                readOnly: this.isReadOnly(),
+                updateEditor: this.updateEditor
             })
         );
     }
@@ -83,22 +92,38 @@ export default class RichTextContainer extends Component<RichTextContainerProps,
                 window.mx.data.subscribe(commonOptions),
                 window.mx.data.subscribe({ attr: this.props.stringAttribute, ...commonOptions })
             ];
+
+            this.props.mxform.listen("submit", this.onFormSubmit);
         }
     }
 
     private handleSubscriptions() {
         this.setState({
             value: getValue(this.props.stringAttribute, "", this.props.mxObject) as string
-        });
+        }, () => this.updateEditor = true);
     }
 
-    private handleOnChange(data: string) {
-        const { mxObject, onChangeMicroflow } = this.props;
-        if (!mxObject) {
+    private handleOnChange(value: string) {
+        if (!this.props.mxObject) {
             return;
         }
-        mxObject.set(this.props.stringAttribute, data);
-        this.executeAction(mxObject, onChangeMicroflow);
+        this.updateEditor = false;
+        this.editorChanged = true;
+        this.props.mxObject.set(this.props.stringAttribute, value);
+    }
+
+    private executeOnChangeAction() {
+        if (this.props.mxObject && this.editorChanged) {
+            this.executeAction(this.props.mxObject, this.props.onChangeMicroflow);
+            this.editorChanged = false;
+        }
+    }
+
+    private onFormSubmit(onSuccess: () => void) {
+        if (this.editorChanged) {
+            this.executeOnChangeAction();
+        }
+        onSuccess();
     }
 
     private executeAction(mxObject: mendix.lib.MxObject, action?: string) {
