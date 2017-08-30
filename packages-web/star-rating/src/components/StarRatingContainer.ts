@@ -1,6 +1,7 @@
 import { Component, createElement } from "react";
 import { Alert } from "./Alert";
 import { StarRating } from "./StarRating";
+import * as classNames from "classnames";
 
 interface WrapperProps {
     class: string;
@@ -15,13 +16,13 @@ export interface ContainerProps extends WrapperProps {
     maximumStars: number;
     onChangeMicroflow: string;
     rateAttribute: string;
-    starSize: starSize;
+    starSize: StarSize;
     starSizeCustom: number;
-    widgetColor: widgetColors;
+    widgetColor: WidgetColors;
 }
 // tslint:disable max-length-line
-export type widgetColors = "widget" | "default" | "primary" | "success" | "info" | "warning" | "danger" | "inverse" ;
-export type starSize = "small" | "medium" | "large" | "custom";
+export type WidgetColors = "widget" | "default" | "primary" | "success" | "info" | "warning" | "danger" | "inverse" ;
+export type StarSize = "small" | "medium" | "large" | "custom";
 
 interface ContainerState {
     initialRate: number;
@@ -50,17 +51,20 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
             const readOnly = this.props.editable === "never"
                 || (mxObject && mxObject.isReadonlyAttr(this.props.rateAttribute)) || this.props.readOnly || !mxObject;
 
-            return createElement(StarRating, {
-                className: this.props.class,
-                handleOnChange: this.handleOnChange,
-                initialRate: this.state.initialRate,
-                readOnly,
-                maximumStars: this.props.maximumStars,
-                starSize: this.props.starSize,
-                starSizeCustom: this.props.starSizeCustom,
-                style: StarRatingContainer.parseStyle(this.props.style),
-                widgetColor: this.props.widgetColor
-            });
+            return createElement("div", {
+                    className: classNames("widget-star-rating", this.props.class),
+                    style: StarRatingContainer.parseStyle(this.props.style)
+                },
+                createElement(StarRating, {
+                    handleOnChange: this.handleOnChange,
+                    initialRate: this.state.initialRate,
+                    readOnly,
+                    maximumStars: this.props.maximumStars,
+                    starSize: this.props.starSize,
+                    starSizeCustom: this.props.starSizeCustom,
+                    widgetColor: this.props.widgetColor
+                })
+            );
         } else {
             return createElement(Alert, {
                 bootstrapStyle: "danger",
