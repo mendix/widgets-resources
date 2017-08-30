@@ -20,11 +20,14 @@ export interface CommonRichTextProps {
     customOptions: { option: string }[];
     minNumberOfLines: number;
     maxNumberOfLines: number;
+    recreate?: boolean;
 }
 
 export interface RichTextProps extends CommonRichTextProps {
     className?: string;
     onChange?: (value: string) => void;
+    onBlur?: () => void;
+    updateEditor: boolean; // controls whether the Quill editor should be updated with the prop.value or not
     style?: object;
 }
 
@@ -32,15 +35,19 @@ export type EditorOption = "basic" | "extended" | "custom";
 export type Theme = "snow" | "bubble";
 
 export class RichText extends Component<RichTextProps, {}> {
+    private richTextNode?: HTMLElement;
     private quillNode?: HTMLElement;
     private quill?: Quill.Quill;
     private averageLineHeight = 1.42857; // Copied from the bootstrap <p/> element css
+    private textChanged = false;
 
     constructor(props: RichTextProps) {
         super(props);
 
         this.handleSelectionChange = this.handleSelectionChange.bind(this);
+        this.handleTextChange = this.handleTextChange.bind(this);
         this.setQuillNode = this.setQuillNode.bind(this);
+        this.setRichTextNode = this.setRichTextNode.bind(this);
     }
 
     render() {
@@ -51,6 +58,7 @@ export class RichText extends Component<RichTextProps, {}> {
                     "buttons-hidden": this.props.editorOption === "custom" && this.props.customOptions.length === 0
                 }),
                 dangerouslySetInnerHTML: this.getReadOnlyText(),
+                ref: this.setRichTextNode,
                 style: this.props.style
             },
             this.renderQuillNode()
@@ -62,16 +70,24 @@ export class RichText extends Component<RichTextProps, {}> {
     }
 
     componentDidUpdate(prevProps: RichTextProps) {
+        if (this.props.recreate) {
+            this.recreateEditor(this.props);
+
+            return;
+        }
         if (prevProps.readOnly && !this.props.readOnly && this.props.readOnlyStyle !== "text") {
             this.setUpEditor(this.props);
         }
-        this.updateEditor(this.props);
+        if (this.props.updateEditor) {
+            this.updateEditor(this.props);
+        }
     }
 
     componentWillUnmount() {
         this.handleSelectionChange();
         if (this.quill) {
             this.quill.off("selection-change", this.handleSelectionChange);
+            this.quill.off("text-change", this.handleTextChange);
         }
     }
 
@@ -91,15 +107,16 @@ export class RichText extends Component<RichTextProps, {}> {
 
     private renderQuillNode(): ReactNode {
         return !(this.props.readOnly && this.props.readOnlyStyle === "text")
-            ? createElement("div", {
-                className: classNames("widget-rich-text-quill"),
-                ref: this.setQuillNode
-            })
+            ? createElement("div", { className: "widget-rich-text-quill", ref: this.setQuillNode })
             : null;
     }
 
     private setQuillNode(node: HTMLElement) {
         this.quillNode = node;
+    }
+
+    private setRichTextNode(node: HTMLElement) {
+        this.richTextNode = node;
     }
 
     private setUpEditor(props: RichTextProps) {
@@ -108,19 +125,9 @@ export class RichText extends Component<RichTextProps, {}> {
                 modules: this.getEditorOptions(),
                 theme: props.theme
             });
-
-            this.quill.on("selection-change", this.handleSelectionChange);
-
             this.updateEditor(props);
-        }
-    }
-
-    private handleSelectionChange() {
-        if (this.quill && !this.quill.hasFocus() && this.props.onChange) {
-            const value = this.quill.container.firstChild.innerHTML;
-            if (this.props.value !== value) {
-                this.props.onChange(value);
-            }
+            this.quill.on("selection-change", this.handleSelectionChange);
+            this.quill.on("text-change", this.handleTextChange);
         }
     }
 
@@ -128,9 +135,37 @@ export class RichText extends Component<RichTextProps, {}> {
         if (this.quill) {
             this.quill.enable(!props.readOnly);
             this.quill.clipboard.dangerouslyPasteHTML(props.value);
-
             this.setEditorStyle(props);
         }
+    }
+
+    private handleTextChange() {
+        if (this.quill && this.quill.hasFocus() && this.props.onChange) {
+            const value = this.quill.root.innerHTML;
+            if (this.props.value !== value) {
+                this.props.onChange(value);
+                this.textChanged = true;
+            }
+        }
+    }
+
+    private handleSelectionChange() {
+        if (this.textChanged && this.quill && !this.quill.hasFocus() && this.props.onBlur) {
+            this.props.onBlur();
+        }
+    }
+
+    private recreateEditor(props: RichTextProps) {
+        if (this.quill && this.richTextNode) {
+            this.quill.off("selection-change", this.handleSelectionChange);
+            this.quill.off("text-change", this.handleTextChange);
+            this.quill = undefined;
+            const toolbar = this.richTextNode.querySelector(".ql-toolbar");
+            if (toolbar) {
+                toolbar.remove();
+            }
+        }
+        this.setUpEditor(props);
     }
 
     private setEditorStyle(props: RichTextProps) {

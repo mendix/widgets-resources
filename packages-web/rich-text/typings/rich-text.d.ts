@@ -1,1 +1,2 @@
-declare function require(name: string): string;
+import * as WebdriverIO from "webdriverio";
+declare const browser: WebdriverIO.Client<void>;

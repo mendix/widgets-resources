@@ -8,7 +8,7 @@ const webpackConfigRelease = webpackConfig.map(config => merge(config, {
     plugins: [ new webpack.optimize.UglifyJsPlugin() ]
 }));
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
     const pkg = grunt.file.readJSON("package.json");
     grunt.initConfig({
 
@@ -79,7 +79,8 @@ module.exports = function (grunt) {
                 "./dist/tsc/**/*",
                 "./dist/testresults/**/*",
                 "./dist/MxTestProject/deployment/web/widgets/" + pkg.widgetName + "/*",
-                "./dist/MxTestProject/widgets/" + pkg.widgetName + ".mpk"
+                "./dist/MxTestProject/widgets/" + pkg.widgetName + ".mpk",
+                "./dist/wdio/**/*"
             ]
         },
 
