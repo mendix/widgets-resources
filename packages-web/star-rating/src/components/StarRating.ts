@@ -1,20 +1,17 @@
-import * as classNames from "classnames";
-import { Component, SFC, createElement } from "react";
+import { CSSProperties, Component, createElement } from "react";
 import * as Rating from "react-rating";
-import { starSize, widgetColors } from "./StarRatingContainer";
+import { StarSize, WidgetColors } from "./StarRatingContainer";
 
 import "../ui/StarRating.scss";
 
 export interface StarRatingProps {
-    className?: string;
     initialRate: number;
     handleOnChange?: (rate: number) => void;
     readOnly: boolean;
     maximumStars: number;
-    starSize: starSize;
+    starSize: StarSize;
     starSizeCustom: number;
-    style?: object;
-    widgetColor: widgetColors;
+    widgetColor: WidgetColors;
 }
 
 export class StarRating extends Component<StarRatingProps, {}> {
@@ -38,37 +35,31 @@ export class StarRating extends Component<StarRatingProps, {}> {
         this.fractions = readOnly ? 2 : 1;
         this.stop = this.props.maximumStars;
 
-        const customStyle: object | undefined = this.props.starSize === "custom"
+        const customStyle: CSSProperties = this.props.starSize === "custom"
             ? { fontSize: `${this.props.starSizeCustom}px` }
-            : undefined;
-        const EmptyStar = createElement("div", {
+            : {};
+        const emptyStar = createElement("span", {
             className: `glyphicon glyphicon-star-empty widget-star-rating-empty ` +
                 `widget-star-rating-font-${this.props.starSize}`,
             style: customStyle
         });
-        const FullStar = createElement("span", {
+        const fullStar = createElement("span", {
             className: `glyphicon glyphicon-star widget-star-rating-font-${this.props.starSize} ` +
             `widget-star-rating-full-${this.props.widgetColor}`,
             style: customStyle
         });
 
-        return createElement("div",
-            {
-                className: classNames("widget-star-rating", this.props.className),
-                style: this.props.style
-            },
-            createElement(Rating, {
-                empty: EmptyStar,
-                fractions: this.fractions,
-                full: FullStar,
-                initialRate: this.getRate(this.props),
-                onChange: !readOnly ? this.onChange : undefined,
-                readonly: readOnly,
-                start: this.start,
-                step: this.step,
-                stop: this.stop
-            })
-        );
+        return createElement(Rating, {
+            empty: emptyStar,
+            fractions: this.fractions,
+            full: fullStar,
+            initialRate: this.getRate(this.props),
+            onChange: !readOnly ? this.onChange : undefined,
+            readonly: readOnly,
+            start: this.start,
+            step: this.step,
+            stop: this.stop
+        });
     }
 
     private getRate(props: StarRatingProps) {

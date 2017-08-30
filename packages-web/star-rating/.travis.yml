@@ -1,19 +1,37 @@
 sudo: required
 dist: trusty
-
 language: node_js
 node_js:
-  - "6"
-
+- "6"
 before_install:
-  - npm i -g npm
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-
+- npm i -g npm
+- npm install grunt-cli -g
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- wget -q -O - http://opensource.wandisco.com/wandisco-debian.gpg | sudo apt-key add -
+- sudo sh -c "echo 'deb http://opensource.wandisco.com/debian/ wheezy svn17' > /etc/apt/sources.list.d/wandisco-subversion.list"
+- sudo apt-get -qq update
+- sudo apt-get install -y --allow-downgrades subversion=1.7.22-1+WANdisco libsvn1=1.7.22-1+WANdisco
+- svn --version
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
-
-cache:
-  directories:
-    - "node_modules"
+- bash <(curl -s https://codecov.io/bash)
+env:
+  global:
+  - MX_APP_NAME=rating
+  - MX_BRANCH_NAME=trunk
+  - MX_PROJECT_ID=609089fc-64db-474c-b994-f682e21291c2
+  - MX_ENVIRONMENT=Sandbox
+  - MX_USER=ci@flockofbirds.org
+  - secure: Gr6nJsmGZ7xTtcOntDc2mRuAsgnxAGh95c7+mKirJVebGkzmFVo4Ln0HGRs5OKiHqond82kaYUrlXLXFDDzn4pP/5/cchhxu1gTgi2v/8j/g40O/0pG0ZFuJQMNZPhiNc8pjj3IY8Pqafb/UpcIqNSOvUBFGkmuCU2o/Wyw9Oequ9SIdO4tHEyUMpCVeSmDeychLyaIMeoKvAhYv1hnftAq/ZR3YOfRMGvF+uUwKGT4/wD8CYUAoRx7/woa5zrp67oa7mav0mC98eIi+9PiUZTt7p+nbRGd2vtOp/XciNx0gocR1pUr/g0jfi7K+V4adwF2YZ2U5EOy/sJ4LXWFOU4fJAmHrH//ziFVCfBkClJ8v+1bdW5T1zkXI7/2CvmvYua3K1DsD7Uo782URZ9p7ASmyITT+DSm1+TfGwv1WvBp3se2oOd06r7/c5cDTzJkmOmURuMu5luUnqiiYE05PYTqlxQYWDi7jLyV5NDzc+RC/ail8jaZDyxm49Go494abVdWmOEIArAO8uTgp+/Q3mVYEkhg4swawqnoKjqePNg0cO9g3vhq/Fq4uejac92bceH37qzu6EHnfTC+cUKhfAO29E2EZL2g0wW0c0OVzmDrQL3OzhLhaS0V2GS/qCXfxrBJ+w8NFrXMlMH/79mrBZc5fQxqwro1vjpg6Ed2rT6Q=
+  - secure: oXYvSE2dzwc3zGR9tRMAdBV9IYLo4NHhNDwrQXVCzrTJdlpphfiMgde4Akyxy4oXuqDwsVz5xIz1o5sdk5DkFvBnGj26aNEdpnLtW7Ajqkb8ol9uViSW19NjGrJRqiama+YUh2BDZI3RUqjwzKRQxYZObMVXJXNTzVqFTXSf50RTs7JiOGlumGC1SO35C8fxYzAllN9RRCRM+3JigpAKnq3udSvKMuTREaj39hiDFoVPacuEt2UErU0h81aCHyhvbsY26XECWD++fGPFHA+rIDFeQA7UPD2XNpUg6ASftWEaM3DWxsYPGsh3R+8jhVI18p2hybAd2F8g6HFPOXvVVeKNZXCU4E7+SuqoNC1B+zQNZQAPztWK7ClkDxSBie2ecdViaQ9gyCWVjDTbTkw0hJJ2Kbhib83G+xVOojKPqcQ7/807xi+mX5A/5ImVPlHLpBttm32E7OZGsYSok2J8FY9askinoHSy0AjWKd5Jj/rDOk2qBgnX5R0UhhZkdMA1iPMcFwKCXRzz8ottWCJEKFUXj5FjYijtyYtQGgsOpOUvd38IkMk7DiM4lcDOBIpRAmrAusLkq26Q8KzgM1e5UyFSl7/6jzmZ66oASSsmQv8auuczEbGxCneheQNAvynYOZagNe/QjByjxwfmrDZuLl/3NTUbuU+XDa1iPYeP7IU=
+  - secure: LME/0xbimXxl/lMJxGxmINKw5zNl9m0zWKHXNP1iRpfzsYLRWGUxGefXOsK9mP6EEza9c4c85K9Wh8xkXeRD0BcXq7V7ijquD5W2/jf1UX1nuxeDWdEboI7nqqL7L7UGL70oq5mkiNkeyjAiWkeaKrnms6ZlqVYkRCUB4Z+Hjj/XHKsWr8nNjde8+4hrqYgvM7TiIAu+TX7j6J6UwK8wbqwCUivIUApp/v7JxXp1VbdEHUX1fe3IQEJdGz6ZzmXXQvLdYyXZvrPLaYasTqgfTL/fBryWGZProYOmWXeJtQQzn4TJZOkQSzYkOoh0rJHa5Pt7CeALJxZf9twnrjWzX3Zx+OM2SBToyZID7HhuOJL4spE5D1A6NiJD+gMNf/LH9kM2+s2GL/uqInge45tr6rSBA6TuXVWn4TjdsTznwGrTlRzO8xunopziMAO81A3JXeiBdWzUmuur8FTvD9ugoBFQspK9LAVDEC9UxUa/3Ji0DYcCVVIROcJxhLyKmZ+G4xkCWraxi6E4hS8Ks1sUOJFeGgQxSzaOCuN+2ixGr/rJqFj5OEwfxQlYnUYmm+GvsSRJckUH0gapurKsC5zXj9HPcHp6MO1u0q3G5nI4eCHK2cfttODHRaTGOdeq0z76/lxQriDBusGgZak8rEk/QQbpqL0s1rr2F5ZE1UlRhLo=
+deploy:
+  provider: releases
+  api_key: $GITHUB_KEY
+  file_glob: true
+  file: dist/release/*
+  skip_cleanup: true
+  on:
+    repo: $TRAVIS_REPO_SLUG
+    tags: true
