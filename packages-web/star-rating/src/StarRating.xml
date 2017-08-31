@@ -53,13 +53,13 @@
                 <enumerationValue key="small">Small</enumerationValue>
                 <enumerationValue key="medium">Medium</enumerationValue>
                 <enumerationValue key="large">Large</enumerationValue>
-                <enumerationValue key="custom">Custom size</enumerationValue>
+                <enumerationValue key="custom">Custom</enumerationValue>
             </enumerationValues>
         </property>
         <property key="starSizeCustom" type="integer" defaultValue="30">
             <caption>Custom size</caption>
             <category>Display</category>
-            <description>The size of a rating star in pixels</description>
+            <description>When 'Star size' is set to custom, set the size in pixels</description>
         </property>
         <property key="onChangeMicroflow" type="microflow" required="false">
             <caption>On change microflow</caption>
