@@ -25,7 +25,7 @@ exports.config = {
     execArgv: debug ? [ "--inspect" ] : undefined,
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {
-        defaultTimeoutInterval: debug ? (60 * 60 * 1000) : (10 * 1000),
+        defaultTimeoutInterval: debug ? (60 * 60 * 1000) : (30 * 1000),
         expectationResultHandler: function(passed, assertion) {
             if (passed) {
                 return;
