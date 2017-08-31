@@ -28,14 +28,14 @@ This widget requires a context.
 ## Customize rating icon
 In order to over-write the default star icon, add these classes to your project theme. Replace `content` with your preferred glyphicon icon
 ``` css
- .rating-icon [class*="widget-star-rating-full"]:before {
+ .rating-flag [class*="widget-star-rating-full"]:before {
   content: "\e034"; /* flag icon */ 
  }
-.rating-icon .widget-star-rating-empty:before {
+.rating-flag .widget-star-rating-empty:before {
   content: "\e034"; /* flag icon */
  }
 ```
-Note. Add class `rating-icon` to the widget configuration in the modeler tab 'common'
+Note. Add class `rating-flag` to the widget configuration in the modeler tab 'common'
 
 ### Security Configuration
 
