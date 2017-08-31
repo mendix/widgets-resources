@@ -28,8 +28,8 @@
             <category>Appearance</category>
             <description/>
             <translations>
-                <translation lang="en_US"/>
-                <translation lang="nl_NL"/>
+                <translation lang="en_US">Label</translation>
+                <translation lang="nl_NL">Label</translation>
             </translations>
         </property>
         <property key="labelWidth" type="integer" defaultValue="9">
