@@ -1,7 +1,7 @@
 import { SFC, createElement } from "react";
 import * as classNames from "classnames";
 
-import { Alert, AlertProps } from "./Alert";
+import { Alert } from "./Alert";
 import { ColorStyle, DeviceStyle } from "./SwitchContainer";
 
 import "../ui/Switch.scss";
@@ -48,7 +48,7 @@ export const Switch: SFC<SwitchProps> = (props) =>
                 })
             })
         ),
-        createElement(Alert, { message: props.alertMessage } as AlertProps)
+        createElement(Alert, { message: props.alertMessage })
     );
 
 Switch.defaultProps = {
