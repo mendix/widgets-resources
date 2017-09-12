@@ -14,7 +14,7 @@ exports.config = {
     coloredLogs: true,
     bail: 0,
     screenshotPath: "dist/wdio/",
-    baseUrl: debug ? "http://localhost:8080/" : "https://booleansliderwidge.mxapps.io/", 
+    baseUrl: debug ? "http://localhost:8080/" : "https://booleansliderwidge.mxapps.io/",
     waitforTimeout: 10000,
     connectionRetryTimeout: 90000,
     connectionRetryCount: 0,
