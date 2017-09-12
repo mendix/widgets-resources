@@ -23,7 +23,7 @@
                 <enumerationValue key="never">Never</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="label" type="translatableString">
+        <property key="label" type="translatableString" required="false">
             <caption>Label</caption>
             <category>Appearance</category>
             <description/>
