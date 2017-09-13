@@ -16,7 +16,7 @@ describe("Alert", () => {
         const alert = renderAlert(defaultProps);
 
         expect(alert).toBeElement(
-            createElement("div", { className: "alert alert-danger widget-switch" }, message)
+            createElement("div", { className: "alert alert-danger widget-switch-alert" }, message)
         );
     });
 
