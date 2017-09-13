@@ -21,6 +21,7 @@ export class preview extends Component<ContainerProps, {}> {
             className: props.class,
             clickable: false,
             positiveValueColor: props.positiveValueColor,
+            showPercentage: props.showPercentage,
             style: ProgressCircleContainer.parseStyle(props.style),
             textSize: props.textSize,
             value: 67

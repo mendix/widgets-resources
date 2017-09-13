@@ -1,6 +1,7 @@
-var webpackConfig = require("./webpack.config");
+const webpackConfigs = require("./webpack.config");
 const path = require("path");
-Object.assign(webpackConfig[0], {
+const webpackConfig = webpackConfigs[0];
+Object.assign(webpackConfig, {
     devtool: "inline-source-map",
     externals: [
         "react/lib/ExecutionEnvironment",
@@ -12,9 +13,9 @@ Object.assign(webpackConfig[0], {
 
 module.exports = function(config) {
     if (config.codeCoverage) {
-        Object.assign(webpackConfig[0], {
-            module: Object.assign(webpackConfig[0].module, {
-                rules: webpackConfig[0].module.rules.concat([ {
+        Object.assign(webpackConfig, {
+            module: Object.assign(webpackConfig.module, {
+                rules: webpackConfig.module.rules.concat([ {
                     test: /\.ts$/,
                     enforce: "post",
                     loader: "istanbul-instrumenter-loader",
@@ -25,24 +26,30 @@ module.exports = function(config) {
         });
     }
 
-    config.set({
+    const configuration = {
         basePath: "",
         frameworks: [ "jasmine" ],
         files: [
-            { pattern: "src/**/*.ts", watched: true, included: false, served: false },
-            { pattern: "tests/**/*.ts", watched: true, included: false, served: false },
+            { pattern: "src/**/*.ts", watched: true },
+            { pattern: "tests/**/*.ts", watched: true },
             "tests/test-index.js"
         ],
         exclude: [],
         preprocessors: { "tests/test-index.js": [ "webpack", "sourcemap" ] },
-        webpack: webpackConfig[0],
+        webpack: webpackConfig,
         webpackServer: { noInfo: true },
-        reporters: [ "progress", config.codeCoverage ? "coverage": "kjhtml" ],
+        reporters: [ "progress", config.codeCoverage ? "coverage" : "kjhtml" ],
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: true,
         browsers: [ "Chrome" ],
+        customLaunchers: {
+            Chrome_travis_ci: {
+                base: "Chrome",
+                flags: [ "--no-sandbox" ]
+            }
+        },
         singleRun: false,
         concurrency: Infinity,
         coverageReporter: {
@@ -52,5 +59,11 @@ module.exports = function(config) {
                 { type: "text" }
             ]
         }
-    });
+    };
+
+    if (process.env.TRAVIS) {
+        configuration.browsers = [ "Chrome_travis_ci" ];
+    }
+
+    config.set(configuration);
 };

@@ -16,6 +16,7 @@ export interface ProgressCircleProps {
     onClickAction?: () => void;
     positiveValueColor?: BootstrapStyle;
     style?: object;
+    showPercentage?: boolean;
     textSize?: ProgressTextSize;
     value?: number;
     circleThickness?: number;
@@ -28,6 +29,7 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
     static defaultProps: ProgressCircleProps = {
         animate: true,
         maximumValue: 100,
+        showPercentage: false,
         textSize: "h2"
     };
     private progressNode: HTMLElement|null;
@@ -109,7 +111,7 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
             progressText = "Invalid";
         } else {
             progress = Math.round((value / maximum) * 100);
-            progressText = progress + "%";
+            progressText = `${this.props.showPercentage ? progress + "%" : progress}`;
         }
 
         let animateValue = progress / 100;
