@@ -1,8 +1,8 @@
 import page from "./pages/home.page";
 
-const switchBgcolor = "rgba(100,189,99,1)";
-const switchBorder = "rgb(100,189,99)";
-const radioValue = "Yes";
+const switchBackgroundColor = "rgba(100,189,99,1)";
+const switchBorderColor = "rgb(100,189,99)";
+const radioValueTrue = "Yes";
 const popupValue = "IT WORKS";
 
 describe("Switch", () => {
@@ -12,7 +12,7 @@ describe("Switch", () => {
         page.switch1.waitForVisible();
 
         const content = page.switchValue.getCssProperty("background-color");
-        expect(content.value).toBe(switchBgcolor);
+        expect(content.value).toBe(switchBackgroundColor);
     });
 
     it("is updated by an attribute", () => {
@@ -22,7 +22,7 @@ describe("Switch", () => {
 
         page.switch2.waitForVisible();
         const content = page.switchValue.getCssProperty("border-color");
-        expect(content.value).toBe(switchBorder);
+        expect(content.value).toBe(switchBorderColor);
     });
 
     it("updates attribute when clicked", () => {
@@ -31,7 +31,7 @@ describe("Switch", () => {
         page.switch2.click();
 
         page.radioButton.waitForVisible();
-        expect(page.radioButton.getText()).toContain(radioValue);
+        expect(page.radioButton.getText()).toContain(radioValueTrue);
     });
 
     it("opens popup when clicked", () => {
