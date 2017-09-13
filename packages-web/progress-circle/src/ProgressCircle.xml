@@ -4,6 +4,11 @@
     <description>Displays a progress in a circle</description>
     <icon>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTM0A1t6AAABY0lEQVQ4T6WTvy8EURDHtxCulFCQnCO5QicaqpPrr9pGI+QKjdDQUUk0q9L4Ec0RocDS6a+6lfgXrnMbGnLFKlzs3vp+14y82zg/4iWfZN68N9+dmZ1nxXGc4HlePzgGsYm1h0OD6ZNmvXzVGNU4DS6AhgQFwAE2yC64/pR9/ugUz55uMwdhmyIDh61w9uJhORHAJX5Zg6tgTNXTzLt+YfwoaKoIM6GApl39KijN4vV9Jl95CbQcCmjaXb+cZu7SL/XuRx99EQFHD7F2QAtwMwwmwauwpPdmTp/vTAFbgifAtl4SnwtGxA7Vz8aaAlm5sAUqwrr43jQI6wbkaPPvdBPYAH1gFxTBrwS0hFWwIvYmKIEaGBTfp1i6hKSJWDkQAW4i8ZVBW3xrKsDBMgU6fiPWkNqGr0dtDpROJQX+PEg6jTpI/xtlHvBh0MEDpsb62CR2+sfHpOpUS1JiXd/Q+Zxj6x3u72eCF5jDPgAAAABJRU5ErkJggg==</icon>
     <properties>
+        <property key="showPercentage" type="boolean" defaultValue="true">
+            <caption>Show percentage</caption>
+            <category>Appearance</category>
+            <description>Shows percentage symbol on the progress circle value</description>
+        </property>
         <property key="textSize" type="enumeration" defaultValue="h2">
             <caption>Text style</caption>
             <category>Appearance</category>
