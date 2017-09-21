@@ -109,14 +109,14 @@
 .btn-lg {
     font-size: $font-size-large;
     img {
-        height: $font-size-default + 4px;
+        height: calc($font-size-small + 4px);
     }
 }
 
 .btn-sm {
     font-size: $font-size-small;
     img {
-        height: $font-size-small + 4px;
+        height: calc($font-size-small + 4px);
     }
 }
 
