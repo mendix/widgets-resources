@@ -20,11 +20,12 @@ export class preview extends Component<ContainerProps, {}> {
             circleThickness: props.circleThickness,
             className: props.class,
             clickable: false,
+            displayText: props.displayText,
+            maximumValue: 200,
             positiveValueColor: props.positiveValueColor,
-            showPercentage: props.showPercentage,
             style: ProgressCircleContainer.parseStyle(props.style),
             textSize: props.textSize,
-            value: 67
+            value: 134
         };
     }
 }
