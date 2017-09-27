@@ -3,6 +3,7 @@ import { Component, createElement } from "react";
 import * as classNames from "classnames";
 import { Circle } from "progressbar.js";
 import { Alert } from "./Alert";
+import { DisplayText } from "./ProgressCircleContainer";
 
 import "../ui/ProgressCircle.scss";
 
@@ -16,7 +17,7 @@ export interface ProgressCircleProps {
     onClickAction?: () => void;
     positiveValueColor?: BootstrapStyle;
     style?: object;
-    showPercentage?: boolean;
+    displayText?: DisplayText;
     textSize?: ProgressTextSize;
     value?: number;
     circleThickness?: number;
@@ -28,8 +29,8 @@ export type ProgressTextSize = "text" |"h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 export class ProgressCircle extends Component<ProgressCircleProps, { alertMessage?: string }> {
     static defaultProps: ProgressCircleProps = {
         animate: true,
+        displayText: "percentage",
         maximumValue: 100,
-        showPercentage: false,
         textSize: "h2"
     };
     private progressNode: HTMLElement|null;
@@ -46,7 +47,7 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
 
     componentDidMount() {
         this.createProgressCircle(this.props.circleThickness);
-        this.setProgress(this.props.value, this.props.maximumValue);
+        this.setProgress(this.props.value, this.props.maximumValue, this.props.displayText);
     }
 
     componentWillReceiveProps(newProps: ProgressCircleProps) {
@@ -57,7 +58,7 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
             this.progressCircle.destroy();
             this.createProgressCircle(newProps.circleThickness);
         }
-        this.setProgress(newProps.value, newProps.maximumValue);
+        this.setProgress(newProps.value, newProps.maximumValue, newProps.displayText);
     }
 
     render() {
@@ -102,7 +103,7 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
         this.progressCircle.trail.className.baseVal = "widget-progress-circle-trail-path";
     }
 
-    private setProgress(value: number | undefined, maximum = 100) {
+    private setProgress(value: number | undefined, maximum = 100, text?: DisplayText) {
         let progress = 0;
         let progressText: string;
         if (value === null || typeof value === "undefined") {
@@ -111,7 +112,13 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
             progressText = "Invalid";
         } else {
             progress = Math.round((value / maximum) * 100);
-            progressText = `${this.props.showPercentage ? progress + "%" : progress}`;
+            if (text === "value") {
+                progressText = `${value}`;
+            } else if (text === "percentage") {
+                progressText = progress + "%";
+            } else {
+                progressText = "";
+            }
         }
 
         let animateValue = progress / 100;

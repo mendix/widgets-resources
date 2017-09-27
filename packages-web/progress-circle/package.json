@@ -1,7 +1,7 @@
 {
   "name": "progresscircle",
   "widgetName": "ProgressCircle",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Displays a progress in a circle",
   "scripts": {
     "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec \"grunt",
@@ -38,8 +38,8 @@
     "@types/classnames": "^2.2.3",
     "@types/core-js": "^0.9.42",
     "@types/dojo": "^1.9.38",
-    "@types/enzyme": "^2.8.7",
-    "@types/jasmine": "^2.5.54",
+    "@types/enzyme": "^2.8.8",
+    "@types/jasmine": "^2.6.0",
     "@types/karma": "^0.13.34",
     "@types/react": "^15.0.38",
     "@types/react-dom": "^15.5.4",
@@ -73,12 +73,12 @@
     "mendix-client": "^7.4.1",
     "mendix-widget-build-script": "^1.0.0-rc2",
     "node-sass": "^4.5.2",
-    "nodemon": "^1.12.0",
+    "nodemon": "^1.12.1",
     "raw-loader": "^0.5.1",
-    "react": "^15.6.1",
-    "react-addons-test-utils": "^15.4.2",
-    "react-dom": "^15.6.1",
-    "react-test-renderer": "^15.5.4",
+    "react": "^15.6.2",
+    "react-addons-test-utils": "^15.6.2",
+    "react-dom": "^15.6.2",
+    "react-test-renderer": "^15.6.2",
     "remap-istanbul": "^0.9.1",
     "sass-loader": "^6.0.3",
     "source-map-loader": "^0.2.0",
@@ -93,11 +93,11 @@
     "wdio-selenium-standalone-service": "0.0.9",
     "wdio-spec-reporter": "^0.1.2",
     "webdriverio": "^4.8.0",
-    "webpack": "^3.5.6",
-    "webpack-dev-server": "^2.7.1"
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.8.2"
   },
   "dependencies": {
-    "@types/webdriverio": "^4.8.4",
+    "@types/webdriverio": "^4.8.5",
     "classnames": "^2.2.5",
     "progressbar.js": "^1.0.1"
   }

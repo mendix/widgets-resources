@@ -19,7 +19,7 @@ export interface ContainerProps extends WrapperProps {
     page?: string;
     progressAttribute: string;
     positiveValueColor: BootstrapStyle;
-    showPercentage: boolean;
+    displayText: DisplayText;
     textSize: ProgressTextSize;
 }
 
@@ -30,6 +30,7 @@ interface ContainerState {
     progressValue?: number;
 }
 
+export type DisplayText = "none" | "value" | "percentage";
 type OnClickOptions = "doNothing" | "showPage" | "callMicroflow";
 
 export default class ProgressCircleContainer extends Component<ContainerProps, ContainerState> {
@@ -67,11 +68,11 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
             circleThickness: this.props.circleThickness,
             className: this.props.class,
             clickable: !!this.props.microflow || !!this.props.page,
+            displayText: this.props.displayText,
             maximumValue: this.state.maximumValue,
             negativeValueColor: this.props.negativeValueColor,
             onClickAction: this.handleOnClick,
             positiveValueColor: this.props.positiveValueColor,
-            showPercentage: this.props.showPercentage,
             style: ProgressCircleContainer.parseStyle(this.props.style),
             textSize: this.props.textSize,
             value: this.state.progressValue

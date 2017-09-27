@@ -6,7 +6,7 @@ describe("ProgressCircle", () => {
         homePage.open();
         homePage.progressText.waitForVisible();
 
-        expect(homePage.progressText.getText()).toBe("-60");
+        expect(homePage.progressText.getText()).toBe("-60%");
     });
 
     it("updates the progress percentage when the value is changed", () => {
@@ -16,6 +16,6 @@ describe("ProgressCircle", () => {
         playgroundPage.maximumValueTextBox.waitForVisible();
         playgroundPage.maximumValueTextBox.click();
 
-        expect(homePage.progressText.getText()).toBe("67");
+        expect(homePage.progressText.getText()).toBe("67%");
     });
 });
