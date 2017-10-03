@@ -7,19 +7,6 @@
 .pageheader {
     border-bottom: 1px solid $border-color-default;
     background: $header-bg-color;
-
-    //== Elements
-    //-------------------------------------------------------------------------------------------------------------------//
-    .pageheader-type {
-        margin: 0;
-    }
-
-    .pageheader-title {
-    }
-
-    .pageheader-subtitle {
-        margin: 0;
-    }
 }
 
 // Check if it is part of a inner layoutgrid
@@ -29,7 +16,20 @@
     background: transparent;
 }
 
-//== Varations
+//== Elements
+//-------------------------------------------------------------------------------------------------------------------//
+.pageheader-type {
+    margin: 0;
+}
+
+.pageheader-title {
+}
+
+.pageheader-subtitle {
+    margin: 0;
+}
+
+//== Variations
 //-------------------------------------------------------------------------------------------------------------------//
 .pageheaderwithcontrols {
     .controlgroup {

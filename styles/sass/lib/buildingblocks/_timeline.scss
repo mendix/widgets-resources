@@ -10,11 +10,11 @@
     }
 }
 .timeline-itemwrapper.mx-listview {
-    padding: $container-spacing 0;
     margin-bottom: 0;
     margin-left: 55px;
+    padding: $container-spacing 0;
     border-left: 1px solid $border-color-default;
-    > ul > .mx-listview-item {
+    & > ul > .mx-listview-item {
         position: relative;
         padding-left: ($gutter-size * 2);
 
@@ -35,10 +35,11 @@
     }
 }
 
-// Variation
+//== Variations
+//-------------------------------------------------------------------------------------------------------------------//
 .timeline2 {
     .timeline-itemwrapper.mx-listview {
-        > ul > .mx-listview-item {
+        & > ul > .mx-listview-item {
             padding-left: $gutter-size;
         }
     }

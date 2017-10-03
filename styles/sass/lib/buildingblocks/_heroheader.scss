@@ -1,33 +1,31 @@
 /* ==========================================================================
    Pageheader
+   
 ========================================================================== */
-
-//== Default
-//-------------------------------------------------------------------------------------------------------------------//
 .heroheader {
     border-bottom: 1px solid $border-color-default;
     background: $header-bg-color;
+}
 
-    //== Elements
-    //-------------------------------------------------------------------------------------------------------------------//
-    .heroheader-title {
-        margin: 0 0 10px 0;
-    }
-    .heroheader-subtitle {
-        margin: 0;
-        padding: 0 15px;
-        &:before {
-            display: block;
-            max-width: 330px;
-            height: 1px;
-            margin: auto auto 10px auto;
-            content: "";
-            background-color: lighten($border-color-default, 4);
-        }
+//== Elements
+//-------------------------------------------------------------------------------------------------------------------//
+.heroheader-title {
+    margin: 0 0 10px 0;
+}
+.heroheader-subtitle {
+    margin: 0;
+    padding: 0 15px;
+    &::before {
+        display: block;
+        max-width: 330px;
+        height: 1px;
+        margin: auto auto 10px auto;
+        content: "";
+        background-color: lighten($border-color-default, 4);
     }
 }
 
-//== Varations
+//== Variations
 //-------------------------------------------------------------------------------------------------------------------//
 .heroheader1 {
     background-image: linear-gradient(152deg, #0CC7F0 0%, #087ECC 51%, #077AC9 55%, #0659B9 78%);
@@ -39,7 +37,7 @@
     .heroheader-subtitle {
         padding: 0;
         color: #FFFFFF;
-        &:before {
+        &::before {
             display: none;
         }
     }
