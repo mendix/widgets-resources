@@ -19,7 +19,7 @@
     }
 
     /* Load more button */
-    > .mx-button {
+     > .mx-button {
         width: 100%;
         margin: 10px auto;
     }
@@ -42,8 +42,8 @@
             border-radius: 0; // Reset mxui listview style
         }
         &:last-child {
-            border-radius: 0; // Reset mxui listview style
             border-bottom: 1px solid $grid-border-color;
+            border-radius: 0; // Reset mxui listview style
         }
         &:nth-child(2n + 1) {
             background-color: $grid-bg;
@@ -156,21 +156,22 @@
 
 // Bootstrap columns
 .mx-listview[class*="lv-col"] {
+    overflow: hidden; // For if it is not in a layout, to prevent scrollbars
     .mx-listview-content-wrapper {
         display: block;
     }
-    > .mx-listview-list {
+    & > .mx-listview-list {
         display: block; // normal a table
         margin-right: -15px;
         margin-left: -15px;
-        &:before,
-        &:after {
+        &::before,
+        &::after {
             // clearfix
             display: table;
             clear: both;
             content: " ";
         }
-        > .mx-listview-item {
+        & > .mx-listview-item {
             // bootstrap col
             position: relative;
             display: block; // normal a table
@@ -183,7 +184,7 @@
             @media (max-width: $screen-sm-max) {
                 width: 100% !important;
             }
-            > .mx-dataview {
+             > .mx-dataview {
                 //border: 1px solid #DDD; // styling from grid item
                 overflow: hidden;
             }

@@ -99,7 +99,7 @@ select.form-control {
 // Form Group
 .form-group {
     margin-bottom: $form-group-margin-bottom;
-    [class*="col-"] {
+    & > [class*="col-"] {
         padding-right: $form-group-gutter;
         padding-left: $form-group-gutter;
     }
