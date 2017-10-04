@@ -13,10 +13,10 @@ describe("RichText", () => {
         maxNumberOfLines: 10,
         minNumberOfLines: 10,
         onChange: jasmine.any(Function),
+        onBlur: jasmine.any(Function),
         readOnly: false,
         readOnlyStyle: "bordered",
         theme: "snow",
-        updateEditor: true,
         value: "<p>Rich Text</p>"
     };
 
@@ -55,7 +55,7 @@ describe("RichText", () => {
             defaultProps.value = "New value";
             textEditorInstance.componentDidUpdate(defaultProps);
 
-            expect(editorSpy).toHaveBeenCalledTimes(3);
+            expect(editorSpy).toHaveBeenCalledTimes(1);
         });
 
         describe("with editor mode set to", () => {
