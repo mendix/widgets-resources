@@ -114,7 +114,7 @@
 
 // Templategrid Layoutgrid styles
 .mx-templategrid[class*="tg-col"] {
-    overflow: hidden;
+    overflow: hidden; // For if it is not in a layout, to prevent scrollbars
     .mx-templategrid-content-wrapper {
         display: block;
     }
