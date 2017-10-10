@@ -114,6 +114,7 @@
 
 // Templategrid Layoutgrid styles
 .mx-templategrid[class*="tg-col"] {
+    overflow: hidden;
     .mx-templategrid-content-wrapper {
         display: block;
     }
@@ -122,8 +123,8 @@
         margin-right: -15px;
         margin-left: -15px;
 
-        &:before,
-        &:after {
+        &::before,
+        &::after {
             // clearfix
             display: table;
             clear: both;
