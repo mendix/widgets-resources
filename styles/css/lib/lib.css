@@ -245,7 +245,7 @@ select.form-control {
 .form-group {
   margin-bottom: 15px;
 }
-.form-group [class*="col-"] {
+.form-group > [class*="col-"] {
   padding-right: 15px;
   padding-left: 15px;
 }
@@ -313,7 +313,7 @@ select.form-control {
 
    Different background components, all managed by variables
 ========================================================================== */
-.background-primary {
+.background-main {
   background-color: #FFFFFF !important;
 }
 
@@ -855,14 +855,14 @@ select.form-control {
   font-size: 16px;
 }
 .btn-lg img {
-  height: 18px;
+  height: calc($font-size-small + 4px);
 }
 
 .btn-sm {
   font-size: 12px;
 }
 .btn-sm img {
-  height: 16px;
+  height: calc($font-size-small + 4px);
 }
 
 .btn-image {
@@ -2174,7 +2174,6 @@ img.img-center,
    Default Mendix Listview Widget. The list view shows a list of objects arranged vertically. Each object is shown using a template
 ========================================================================== */
 .mx-listview {
-  /* Remove widget padding */
   padding: 0;
   /* Clear search button (overrides load more button stying) */
   /* Load more button */
@@ -2212,8 +2211,8 @@ img.img-center,
   border-radius: 0;
 }
 .mx-listview .mx-listview-item:last-child {
-  border-radius: 0;
   border-bottom: 1px solid #D7D7D7;
+  border-radius: 0;
 }
 .mx-listview .mx-listview-item:nth-child(2n + 1) {
   background-color: #FFF;
@@ -2286,6 +2285,9 @@ img.img-center,
   padding: 7.5px 7.5px 7.5px 7.5px;
 }
 
+.mx-listview[class*="lv-col"] {
+  overflow: hidden;
+}
 .mx-listview[class*="lv-col"] .mx-listview-content-wrapper {
   display: block;
 }
@@ -2294,7 +2296,7 @@ img.img-center,
   margin-right: -15px;
   margin-left: -15px;
 }
-.mx-listview[class*="lv-col"] > .mx-listview-list:before, .mx-listview[class*="lv-col"] > .mx-listview-list:after {
+.mx-listview[class*="lv-col"] > .mx-listview-list::before, .mx-listview[class*="lv-col"] > .mx-listview-list::after {
   display: table;
   clear: both;
   content: " ";
@@ -3689,6 +3691,9 @@ table.table-fixed {
   padding: 7.5px 7.5px 7.5px 7.5px;
 }
 
+.mx-templategrid[class*="tg-col"] {
+  overflow: hidden;
+}
 .mx-templategrid[class*="tg-col"] .mx-templategrid-content-wrapper {
   display: block;
 }
@@ -3697,7 +3702,7 @@ table.table-fixed {
   margin-right: -15px;
   margin-left: -15px;
 }
-.mx-templategrid[class*="tg-col"] .mx-templategrid-row:before, .mx-templategrid[class*="tg-col"] .mx-templategrid-row:after {
+.mx-templategrid[class*="tg-col"] .mx-templategrid-row::before, .mx-templategrid[class*="tg-col"] .mx-templategrid-row::after {
   display: table;
   clear: both;
   content: " ";
@@ -4067,17 +4072,18 @@ h6,
    Default Bootstrap containers
 ========================================================================== */
 @media (max-width: 767px) {
-  .mx-layoutgrid > .row {
+  .row {
     margin-right: -7.5px;
     margin-left: -7.5px;
   }
 }
-.mx-layoutgrid > .row > [class*="col-"] {
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
   padding-right: 15px;
   padding-left: 15px;
 }
 @media (max-width: 767px) {
-  .mx-layoutgrid > .row > [class*="col-"] {
+  .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
     padding-right: 7.5px;
     padding-left: 7.5px;
   }
@@ -4093,15 +4099,15 @@ h6,
 .v-center .row {
   display: table-row;
 }
-.v-center div[class*="col-"] {
+.v-center .row > [class*="col-"] {
   display: table-cell;
   float: none;
   vertical-align: middle;
 }
-.v-center div[class*="col-"]:first-child {
+.v-center .row > [class*="col-"]:first-child {
   padding-left: 0;
 }
-.v-center div[class*="col-"]:last-child {
+.v-center .row > [class*="col-"]:last-child {
   padding-right: 0;
 }
 
@@ -4190,7 +4196,7 @@ h6,
 
 /* ==========================================================================
    Alignment Blocks
-   -
+
 ========================================================================== */
 .flexcontainer {
   display: flex;
@@ -4213,6 +4219,10 @@ h6,
   align-items: center;
 }
 
+/* ==========================================================================
+   Breadcrumbs
+
+========================================================================== */
 .breadcrumb {
   margin: 0;
   padding: 0;
@@ -4250,7 +4260,8 @@ h6,
 }
 
 /* ==========================================================================
-   Card
+   Cards
+
 ========================================================================== */
 .card {
   padding: 30px;
@@ -4258,10 +4269,8 @@ h6,
   border-radius: 4px;
   background-color: #FFFFFF;
 }
-.card .mx-layoutgrid {
-  padding: 0 !important;
-}
-.card .card-title {
+
+.card-title {
   margin-top: 0;
 }
 
@@ -4432,6 +4441,11 @@ h6,
   border-left: 1px solid #D7D7D7;
 }
 
+/* ==========================================================================
+   Control Group
+   
+   A group of buttons next to eachother
+========================================================================== */
 .controlgroup .btn,
 .controlgroup .btn-group {
   margin-right: 5px;
@@ -4475,12 +4489,6 @@ h6,
   border-bottom: 1px solid #D7D7D7;
   background: #F5F8FD;
 }
-.pageheader .pageheader-type {
-  margin: 0;
-}
-.pageheader .pageheader-subtitle {
-  margin: 0;
-}
 
 .mx-scrollcontainer .mx-placeholder .mx-layoutgrid .pageheader {
   background: transparent;
@@ -4516,25 +4524,36 @@ h6,
   }
 }
 
+.pageheader-type {
+  margin: 0;
+}
+
+.pageheader-subtitle {
+  margin: 0;
+}
+
 .pageheaderwithsearch .pageheader-title {
   margin-bottom: 1em;
 }
 
 /* ==========================================================================
    Pageheader
+   
 ========================================================================== */
 .heroheader {
   border-bottom: 1px solid #D7D7D7;
   background: #F5F8FD;
 }
-.heroheader .heroheader-title {
+
+.heroheader-title {
   margin: 0 0 10px 0;
 }
-.heroheader .heroheader-subtitle {
+
+.heroheader-subtitle {
   margin: 0;
   padding: 0 15px;
 }
-.heroheader .heroheader-subtitle:before {
+.heroheader-subtitle::before {
   display: block;
   max-width: 330px;
   height: 1px;
@@ -4554,7 +4573,7 @@ h6,
   padding: 0;
   color: #FFFFFF;
 }
-.heroheader1 .heroheader-subtitle:before {
+.heroheader1 .heroheader-subtitle::before {
   display: none;
 }
 
@@ -4563,13 +4582,22 @@ h6,
 
    Used in default forms
 ========================================================================== */
-.formblock .formblock-title {
+.formblock-title {
   margin-bottom: 15px;
   padding-bottom: 15px;
-  color: #0595DB;
   border-bottom: 1px solid #D7D7D7;
 }
 
+/* ==========================================================================
+   Lists
+   
+   Pre-styled listviews with content
+========================================================================== */
+/* ==========================================================================
+   Master Detail
+   
+    A list with a listening dataview
+========================================================================== */
 .masterdetail {
   position: relative;
 }
@@ -4654,12 +4682,13 @@ h6,
   display: flex;
   justify-content: space-between;
 }
-.wizard .wizard-step {
+
+.wizard-step {
   position: relative;
   width: 100%;
   text-align: center;
 }
-.wizard .wizard-step:before {
+.wizard-step::before {
   position: absolute;
   z-index: -1;
   top: 30px;
@@ -4669,7 +4698,8 @@ h6,
   content: "";
   background-color: #D7D7D7;
 }
-.wizard .wizard-step-number {
+
+.wizard-step-number {
   width: 60px;
   height: 60px;
   border-color: #D7D7D7;
@@ -4677,19 +4707,22 @@ h6,
   background-color: #FFFFFF;
   font-size: 20px;
 }
-.wizard .wizard-step-text {
+
+.wizard-step-text {
   display: block;
   margin-top: 15px;
 }
-.wizard .wizard-step--active .wizard-step-number {
+
+.wizard-step--active .wizard-step-number {
   color: #FFFFFF;
   border-color: #0595DB;
   background-color: #0595DB;
 }
-.wizard .wizard-step--active .wizard-step-text {
+.wizard-step--active .wizard-step-text {
   color: #0595DB;
 }
-.wizard .wizard-step--visited .wizard-step-number {
+
+.wizard-step--visited .wizard-step-number {
   color: #FFFFFF;
   border-color: #76CA02;
   background-color: #76CA02;
@@ -4779,9 +4812,9 @@ h6,
 }
 
 .timeline-itemwrapper.mx-listview {
-  padding: 30px 0;
   margin-bottom: 0;
   margin-left: 55px;
+  padding: 30px 0;
   border-left: 1px solid #D7D7D7;
 }
 .timeline-itemwrapper.mx-listview > ul > .mx-listview-item {
