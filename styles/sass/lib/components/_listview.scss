@@ -5,7 +5,7 @@
 ========================================================================== */
 
 .mx-listview {
-    /* Remove widget padding */
+    // Remove widget padding
     padding: 0;
 
     /* Clear search button (overrides load more button stying) */
@@ -19,7 +19,7 @@
     }
 
     /* Load more button */
-     > .mx-button {
+    & > .mx-button {
         width: 100%;
         margin: 10px auto;
     }
@@ -184,7 +184,7 @@
             @media (max-width: $screen-sm-max) {
                 width: 100% !important;
             }
-             > .mx-dataview {
+            & > .mx-dataview {
                 //border: 1px solid #DDD; // styling from grid item
                 overflow: hidden;
             }
