@@ -4,7 +4,6 @@
    The core stucture of all atlas layouts
 ========================================================================== */
 .layout-atlas {
-
     // Toggle button
     .toggle-btn > .glyphicon {
         margin: 0;
@@ -13,10 +12,10 @@
     // Sidebar
     .region-sidebar {
         background-color: $navsidebar-bg;
-        
+
         .mx-navigationtree .navbar-inner > ul > li > a {
             padding: 0 15px;
-        
+
             .glyphicon {
                 margin-right: 10px;
             }
@@ -39,8 +38,8 @@
 
         &::before {
             position: absolute;
-            top: 0;
             z-index: 1;
+            top: 0;
             display: block;
             width: 100%;
             height: 5px;
@@ -58,6 +57,7 @@
         .navbar-brand {
             display: inline-block;
             float: none;
+            overflow: hidden;
             min-height: $topbar-minimalheight;
             padding: 0;
             line-height: $topbar-minimalheight;
@@ -95,8 +95,8 @@
             min-height: $topbar-minimalheight;
             background: transparent;
 
-            > .mx-navbar-item {
-                > a {
+            & > .mx-navbar-item {
+                & > a {
                     margin-top: 5px;
                     padding: 0 20px;
                 }
