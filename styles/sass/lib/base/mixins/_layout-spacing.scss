@@ -1,7 +1,7 @@
 @mixin layout-spacing ($type: padding, $direction: all, $device: responsive, $is_important: false) {
-    $suffix: '';
+    $suffix: "";
     @if $is_important != false {
-        $suffix: ' !important';
+        $suffix: " !important";
     }
     @if $device==responsive {
         @if $direction==all {
@@ -16,7 +16,7 @@
             }
         } @else if $direction==top {
             @media (max-width: $screen-xs-max) {
-                #{$type}-top: #{$m-layout-spacing-bottom}#{$suffix};
+                #{$type}-top: #{$m-layout-spacing-top}#{$suffix};
             }
             @media (min-width: $screen-sm) {
                 #{$type}-top: #{$t-layout-spacing-top}#{$suffix};
@@ -59,7 +59,7 @@
         @if $direction==all {
             #{$type}: #{$t-layout-spacing}#{$suffix};
         } @else if $direction==top {
-            #{$type}-top: #{$t-layout-spacing-bottom}#{$suffix};
+            #{$type}-top: #{$t-layout-spacing-top}#{$suffix};
         } @else if $direction==right {
             #{$type}-right: #{$t-layout-spacing-right}#{$suffix};
         } @else if $direction==bottom {
@@ -71,7 +71,7 @@
         @if $direction==all {
             #{$type}: #{$m-layout-spacing}#{$suffix};
         } @else if $direction==top {
-            #{$type}-top: #{$m-layout-spacing-bottom}#{$suffix};
+            #{$type}-top: #{$m-layout-spacing-top}#{$suffix};
         } @else if $direction==right {
             #{$type}-right: #{$m-layout-spacing-right}#{$suffix};
         } @else if $direction==bottom {
