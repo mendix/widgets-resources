@@ -95,7 +95,7 @@
                 ]
             },
             {
-                "name": "Position",
+                "name": "Align Self",
                 "type": "Dropdown",
                 "description": "",
                 "options": [
