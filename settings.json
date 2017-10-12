@@ -4,35 +4,95 @@
         "Widget": [
             {
                 "name": "Spacing top",
-                "type": "Toggle",
+                "type": "Dropdown",
                 "description": "",
-                "class": "spacing-outer-top"
+                "options": [
+                    {
+                        "name": "None",
+                        "class": "spacing-outer-top-none"
+                    },
+                    {
+                        "name": "Small",
+                        "class": "spacing-outer-top"
+                    },
+                    {
+                        "name": "Large",
+                        "class": "spacing-outer-top-large"
+                    },
+                    {
+                        "name": "Responsive",
+                        "class": "spacing-outer-top-responsive"
+                    }
+                ]
             },
-
             {
                 "name": "Spacing bottom",
-                "type": "Toggle",
+                "type": "Dropdown",
                 "description": "",
-                "class": "spacing-outer-bottom"
-            },
-
-            {
-                "name": "Spacing bottom large",
-                "type": "Toggle",
-                "description": "",
-                "class": "spacing-outer-bottom-responsive"
+                "options": [
+                    {
+                        "name": "None",
+                        "class": "spacing-outer-bottom-none"
+                    },
+                    {
+                        "name": "Small",
+                        "class": "spacing-outer-bottom"
+                    },
+                    {
+                        "name": "Large",
+                        "class": "spacing-outer-bottom-large"
+                    },
+                    {
+                        "name": "Responsive",
+                        "class": "spacing-outer-bottom-responsive"
+                    }
+                ]
             },
             {
                 "name": "Spacing left",
-                "type": "Toggle",
+                "type": "Dropdown",
                 "description": "",
-                "class": "spacing-outer-left"
+                "options": [
+                    {
+                        "name": "None",
+                        "class": "spacing-outer-left-none"
+                    },
+                    {
+                        "name": "Small",
+                        "class": "spacing-outer-left"
+                    },
+                    {
+                        "name": "Large",
+                        "class": "spacing-outer-left-large"
+                    },
+                    {
+                        "name": "Responsive",
+                        "class": "spacing-outer-left-responsive"
+                    }
+                ]
             },
             {
                 "name": "Spacing right",
-                "type": "Toggle",
+                "type": "Dropdown",
                 "description": "",
-                "class": "spacing-outer-right"
+                "options": [
+                    {
+                        "name": "None",
+                        "class": "spacing-outer-right-none"
+                    },
+                    {
+                        "name": "Small",
+                        "class": "spacing-outer-right"
+                    },
+                    {
+                        "name": "Large",
+                        "class": "spacing-outer-right-large"
+                    },
+                    {
+                        "name": "Responsive",
+                        "class": "spacing-outer-right-responsive"
+                    }
+                ]
             },
             {
                 "name": "Position",
@@ -57,16 +117,28 @@
                 "description": "",
                 "options": [
                     {
-                        "name": "Left",
-                        "class": "align-content-left"
+                        "name": "Left align as row",
+                        "class": "row-left"
                     },
                     {
-                        "name": "Center",
-                        "class": "align-content-center"
+                        "name": "Center align as row",
+                        "class": "row-center"
                     },
                     {
-                        "name": "Right",
-                        "class": "align-content-right"
+                        "name": "Right align as row",
+                        "class": "row-right"
+                    },
+                    {
+                        "name": "Left align as column",
+                        "class": "col-left"
+                    },
+                    {
+                        "name": "Center align as column",
+                        "class": "col-center"
+                    },
+                    {
+                        "name": "Right align as column",
+                        "class": "col-right"
                     }
                 ]
             }
@@ -281,6 +353,12 @@
                         "class": "img-circle"
                     }
                 ]
+            },
+            {
+                "name": "Center",
+                "type": "Toggle",
+                "description": "",
+                "class": "img-center"
             }
         ],
         "Label": [
