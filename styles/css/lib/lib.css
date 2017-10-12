@@ -158,7 +158,7 @@ div[tabindex] {
 
    The form-control class style all inputs
 ========================================================================== */
-.form-control, .form-disabled p {
+.form-control {
   display: block;
   width: 100%;
   height: auto;
@@ -180,7 +180,7 @@ div[tabindex] {
   -webkit-appearance: none;
 }
 
-.form-control:focus, .form-disabled p:focus {
+.form-control:focus {
   border-color: #0595DB;
   outline: 0;
   background-color: #FFF;
@@ -950,7 +950,7 @@ select.form-control {
 .mx-grid .mx-grid-searchbar .mx-grid-search-item .mx-grid-search-label label {
   padding-top: 5px;
 }
-.mx-grid .mx-grid-searchbar .mx-grid-search-item .mx-grid-search-input .form-control, .mx-grid .mx-grid-searchbar .mx-grid-search-item .mx-grid-search-input .form-disabled p, .form-disabled .mx-grid .mx-grid-searchbar .mx-grid-search-item .mx-grid-search-input p {
+.mx-grid .mx-grid-searchbar .mx-grid-search-item .mx-grid-search-input .form-control {
   height: 28px;
   font-size: 11px;
 }
@@ -1110,7 +1110,7 @@ select.form-control {
   width: 80%;
   padding-left: 0;
 }
-.datagrid-fullsearch.mx-grid .mx-grid-searchbar .mx-grid-search-input .form-control, .datagrid-fullsearch.mx-grid .mx-grid-searchbar .mx-grid-search-input .form-disabled p, .form-disabled .datagrid-fullsearch.mx-grid .mx-grid-searchbar .mx-grid-search-input p {
+.datagrid-fullsearch.mx-grid .mx-grid-searchbar .mx-grid-search-input .form-control {
   height: 35px;
   font-size: 12px;
 }
@@ -1759,18 +1759,6 @@ body[dir="rtl"] .mx-header-right {
   text-overflow: ellipsis;
 }
 
-.form-disabled p {
-  background-color: #EEEEEE !important;
-}
-
-.padding-bottom-none {
-  padding-bottom: 0 !important;
-}
-
-.no-margin {
-  margin: 0 !important;
-}
-
 .table {
   display: table !important;
 }
@@ -1803,23 +1791,86 @@ body[dir="rtl"] .mx-header-right {
   vertical-align: bottom !important;
 }
 
-.align-content-left {
+.row-left {
   display: flex !important;
-  flex-flow: row wrap !important;
+  align-items: center !important;
+  flex-flow: row !important;
   justify-content: flex-start !important;
 }
 
-.align-content-right {
+.row-center {
   display: flex !important;
-  flex-flow: row wrap !important;
+  align-items: center !important;
+  flex-flow: row !important;
+  justify-content: center !important;
+}
+
+.row-right {
+  display: flex !important;
+  align-items: center !important;
+  flex-flow: row !important;
   justify-content: flex-end !important;
 }
 
-.align-content-center {
+.col-left {
+  display: flex !important;
+  align-items: flex-start !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+.col-center {
   display: flex !important;
   align-items: center !important;
   flex-direction: column !important;
   justify-content: center !important;
+}
+
+.col-right {
+  display: flex !important;
+  align-items: flex-end !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+.spacing-inner-none {
+  padding: 0 !important;
+}
+
+.spacing-inner-top-none {
+  padding-top: 0 !important;
+}
+
+.spacing-inner-right-none {
+  padding-right: 0 !important;
+}
+
+.spacing-inner-bottom-none {
+  padding-bottom: 0 !important;
+}
+
+.spacing-inner-left-none {
+  padding-left: 0 !important;
+}
+
+.spacing-outer-none {
+  margin: 0 !important;
+}
+
+.spacing-outer-top-none {
+  margin-top: 0 !important;
+}
+
+.spacing-outer-right-none {
+  margin-right: 0 !important;
+}
+
+.spacing-outer-bottom-none {
+  margin-bottom: 0 !important;
+}
+
+.spacing-outer-left-none {
+  margin-left: 0 !important;
 }
 
 .spacing-inner {
@@ -1862,44 +1913,44 @@ body[dir="rtl"] .mx-header-right {
   margin-left: 5px !important;
 }
 
-.spacing-inner-container {
-  padding: 30px !important;
+.spacing-inner-large {
+  padding: 15px !important;
 }
 
-.spacing-inner-top-container {
-  padding-top: 30px !important;
+.spacing-inner-top-large {
+  padding-top: 15px !important;
 }
 
-.spacing-inner-right-container {
-  padding-right: 30px !important;
+.spacing-inner-right-large {
+  padding-right: 15px !important;
 }
 
-.spacing-inner-bottom-container {
-  padding-bottom: 30px !important;
+.spacing-inner-bottom-large {
+  padding-bottom: 15px !important;
 }
 
-.spacing-inner-left-container {
-  padding-left: 30px !important;
+.spacing-inner-left-large {
+  padding-left: 15px !important;
 }
 
-.spacing-outer-container {
-  margin: 5px !important;
+.spacing-outer-large {
+  margin: 15px !important;
 }
 
-.spacing-outer-top-container {
-  margin-top: 30px !important;
+.spacing-outer-top-large {
+  margin-top: 15px !important;
 }
 
-.spacing-outer-right-container {
-  margin-right: 30px !important;
+.spacing-outer-right-large {
+  margin-right: 15px !important;
 }
 
-.spacing-outer-bottom-container {
-  margin-bottom: 30px !important;
+.spacing-outer-bottom-large {
+  margin-bottom: 15px !important;
 }
 
-.spacing-outer-left-container {
-  margin-left: 30px !important;
+.spacing-outer-left-large {
+  margin-left: 15px !important;
 }
 
 @media (max-width: 767px) {
@@ -4264,7 +4315,7 @@ h6,
 
 ========================================================================== */
 .card {
-  padding: 30px;
+  padding: 15px;
   border: 1px solid #D7D7D7;
   border-radius: 4px;
   background-color: #FFFFFF;
@@ -4308,7 +4359,7 @@ h6,
 }
 
 .cardinfo .card-text {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .textwithicon {
@@ -4814,7 +4865,7 @@ h6,
 .timeline-itemwrapper.mx-listview {
   margin-bottom: 0;
   margin-left: 55px;
-  padding: 30px 0;
+  padding: 15px 0;
   border-left: 1px solid #D7D7D7;
 }
 .timeline-itemwrapper.mx-listview > ul > .mx-listview-item {
@@ -4833,7 +4884,7 @@ h6,
   background-color: #0595DB;
 }
 .timeline-itemwrapper.mx-listview .mx-listview-item + .mx-listview-item {
-  margin-top: 30px;
+  margin-top: 15px;
 }
 
 .timeline2 .timeline-itemwrapper.mx-listview > ul > .mx-listview-item {
@@ -4872,8 +4923,8 @@ h6,
 }
 .layout-atlas .region-topbar::before {
   position: absolute;
-  top: 0;
   z-index: 1;
+  top: 0;
   display: block;
   width: 100%;
   height: 5px;
@@ -4887,6 +4938,7 @@ h6,
 .layout-atlas .region-topbar .navbar-brand {
   display: inline-block;
   float: none;
+  overflow: hidden;
   min-height: 60px;
   padding: 0;
   line-height: 60px;
