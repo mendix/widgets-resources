@@ -4325,16 +4325,7 @@ h6,
   margin-top: 0;
 }
 
-.cardaction {
-  text-align: center;
-}
-.cardaction .card-image {
-  margin: 0 auto 20px;
-}
-.cardaction .card-linkicon {
-  margin: 0 auto 20px;
-}
-.cardaction .card-linkicon .glyphicon {
+.cardaction .card-image .glyphicon {
   font-size: 58px;
 }
 
@@ -4490,6 +4481,16 @@ h6,
   height: 100%;
   padding: 30px;
   border-left: 1px solid #D7D7D7;
+}
+
+.cardstatus {
+  padding: 20px;
+}
+.cardstatus .card-linkicon {
+  font-size: 30px;
+}
+.cardstatus .cardstatus-status {
+  margin-bottom: 5px;
 }
 
 /* ==========================================================================
