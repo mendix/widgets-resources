@@ -556,6 +556,12 @@ $callout-danger-bg:                     $color-danger-lighter !default;
 //== Spacing
 //## Advanced layout options (used in base/mixins/default-spacing)
 
+// Element (Small) spacing
+$element-spacing:                       5px !default;
+
+// Container (Large) spacing
+$container-spacing:                     15px !default;
+
 // Layout spacing
 $layout-spacing-top:                   30px !default;
 $layout-spacing-right:                 30px !default;
@@ -579,12 +585,6 @@ $t-layout-spacing:                     $t-layout-spacing-top $t-layout-spacing-r
 
 // Gutter size
 $gutter-size:                           15px !default;
-
-// Element spacing
-$element-spacing:                       5px !default;
-
-// Container spacing (spacing used in building block)
-$container-spacing:                     30px !default;
 
 
 

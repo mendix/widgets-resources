@@ -40,19 +40,6 @@
     text-overflow: ellipsis;
 }
 
-.form-disabled p {
-    @extend .form-control;
-    background-color: $form-input-bg-disabled !important;
-}
-
-.padding-bottom-none {
-    padding-bottom: 0 !important;
-}
-
-.no-margin {
-    margin: 0 !important;
-}
-
 // Render DIV as Table Cells
 .table {
     display: table !important;
@@ -88,26 +75,77 @@
 }
 
 // Flex alignments
-.align-content-left {
+.row-left {
     display: flex !important;
-    flex-flow: row wrap !important;
+    align-items: center !important;
+    flex-flow: row !important;
     justify-content: flex-start !important;
 }
-
-.align-content-right {
+.row-center {
     display: flex !important;
-    flex-flow: row wrap !important;
+    align-items: center !important;
+    flex-flow: row !important;
+    justify-content: center !important;
+}
+.row-right {
+    display: flex !important;
+    align-items: center !important;
+    flex-flow: row !important;
     justify-content: flex-end !important;
 }
-
-.align-content-center {
+.col-left {
+    display: flex !important;
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+.col-center {
     display: flex !important;
     align-items: center !important;
     flex-direction: column !important;
     justify-content: center !important;
 }
- 
-// Spacing
+.col-right {
+    display: flex !important;
+    align-items: flex-end !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+
+// Spacing none
+.spacing-inner-none {
+    padding: 0 !important;
+}
+.spacing-inner-top-none {
+    padding-top: 0 !important;
+}
+.spacing-inner-right-none {
+    padding-right: 0 !important;
+}
+.spacing-inner-bottom-none {
+    padding-bottom: 0 !important;
+}
+.spacing-inner-left-none {
+    padding-left: 0 !important;
+}
+
+.spacing-outer-none {
+    margin: 0 !important;
+}
+.spacing-outer-top-none {
+    margin-top: 0 !important;
+}
+.spacing-outer-right-none {
+    margin-right: 0 !important;
+}
+.spacing-outer-bottom-none {
+    margin-bottom: 0 !important;
+}
+.spacing-outer-left-none {
+    margin-left: 0 !important;
+}
+
+// Spacing small
 .spacing-inner {
     padding: $element-spacing !important;
 }
@@ -140,38 +178,40 @@
     margin-left: $element-spacing !important;
 }
 
-.spacing-inner-container {
+// Spacing Large
+.spacing-inner-large {
     padding: $container-spacing !important;
 }
-.spacing-inner-top-container {
+.spacing-inner-top-large {
     padding-top: $container-spacing !important;
 }
-.spacing-inner-right-container {
+.spacing-inner-right-large {
     padding-right: $container-spacing !important;
 }
-.spacing-inner-bottom-container {
+.spacing-inner-bottom-large {
     padding-bottom: $container-spacing !important;
 }
-.spacing-inner-left-container {
+.spacing-inner-left-large {
     padding-left: $container-spacing !important;
 }
 
-.spacing-outer-container {
-    margin: $element-spacing !important;
+.spacing-outer-large {
+    margin: $container-spacing !important;
 }
-.spacing-outer-top-container {
+.spacing-outer-top-large {
     margin-top: $container-spacing !important;
 }
-.spacing-outer-right-container {
+.spacing-outer-right-large {
     margin-right: $container-spacing !important;
 }
-.spacing-outer-bottom-container {
+.spacing-outer-bottom-large {
     margin-bottom: $container-spacing !important;
 }
-.spacing-outer-left-container {
+.spacing-outer-left-large {
     margin-left: $container-spacing !important;
 }
 
+// Spacing layouts
 .spacing-inner-responsive {
     @include layout-spacing($type: padding, $direction: all, $device: responsive, $is_important: true);
 }
