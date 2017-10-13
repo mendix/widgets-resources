@@ -29,6 +29,8 @@
 //-------------------------------------------------------------------------------------------------------------------//
 .heroheader1 {
     background-image: linear-gradient(152deg, #0CC7F0 0%, #087ECC 51%, #077AC9 55%, #0659B9 78%);
+    background-image: $brand-gradient;
+
 
     .heroheader-title {
         margin-bottom: 10px;
