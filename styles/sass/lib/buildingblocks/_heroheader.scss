@@ -28,9 +28,7 @@
 //== Variations
 //-------------------------------------------------------------------------------------------------------------------//
 .heroheader1 {
-    background-image: linear-gradient(152deg, #0CC7F0 0%, #087ECC 51%, #077AC9 55%, #0659B9 78%);
     background-image: $brand-gradient;
-
 
     .heroheader-title {
         margin-bottom: 10px;
@@ -45,71 +43,49 @@
     }
 }
 
-.heroheadermap { 
-    position: relative;
-    height: 350px;
-    overflow: hidden;
-    .left {
-        width: 25%;
-        height: 100%;
-        left: 0;
-        background-color: #fff;
-        position: absolute;
-        z-index: 2;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-        padding: 30px;
+.heroheadermap {
+    .heroheadermap-map {
+        height: 350px;
     }
-    .right {
-        width: 100%;
-        right: 0;
-        z-index: 1;
-        position: absolute
+    .heroheadermap-controls {
+        background: $header-bg-color;
     }
 }
 
 .heroheaderproduct {
     position: relative;
-    background-color: #000;
     overflow: hidden;
-    height: 400px;
-    img {
-
-        width: 100%;
+    height: 300px;
+    background-color: #000000;
+    .heroheaderproduct-backgroundimage {
         position: absolute;
-        top: 0;
         z-index: 0;
+        top: 0;
+        width: 100%;
         opacity: 0.7;
         filter: blur(5px);
     }
-    .card-hero {
+    .heroheaderproduct-overlay {
         position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
         z-index: 1;
-        padding: 30px; 
-        max-width: 350px;
-        max-height: 270px;
-        padding: 30px 55px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }
+
 .heroheaderexpense {
-    .flexcontainer {
-        flex-direction: column;
-    }
-    h2 {
+    .heroheaderexpense-title {
         font-size: 72px;
     }
-    .expensetype {
+    .heroheaderexpense-type {
         align-items: center;
-        &:before {
-            content: "";
-            height: 1px;
-            background-color: #d2d2d2;
+        &::before {
             flex-grow: 1;
+            height: 1px;
             margin-right: 10px;
+            content: "";
+            background-color: #D2D2D2;
         }
     }
 }
