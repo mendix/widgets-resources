@@ -30,7 +30,7 @@
     text-shadow: none;
     font-size: $btn-font-size;
     line-height: $line-height-base;
-    
+
     &:hover,
     &:focus,
     &:active {
@@ -138,20 +138,23 @@
 
 // Icon buttons
 .btn-icon {
-    > span {
+    & > img,
+    & > .glyphicon {
         margin: 0;
     }
 }
 .btn-icon-right {
-    > span {
+    & > img,
+    & > .glyphicon {
         float: right;
         margin-left: 5px;
     }
 }
 .btn-icon-top {
-    padding-left: 0;
     padding-right: 0;
-    > span {
+    padding-left: 0;
+    & > img,
+    & > .glyphicon {
         display: block;
         margin: 0 0 5px 0;
     }
