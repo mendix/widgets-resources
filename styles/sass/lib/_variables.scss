@@ -354,7 +354,7 @@ $color-danger-dark:                     mix($brand-danger, black, 70%) !default;
 $color-danger-light:                    mix($brand-danger, white, 60%) !default;
 $color-danger-lighter:                  mix($brand-danger, white, 20%) !default;
 
-
+$brand-gradient:                        linear-gradient(152deg, #0CC7F0 0%, #087ECC 51%, #077AC9 55%, #0659B9 78%);
 
 
 //== Grids
