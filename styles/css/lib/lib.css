@@ -4865,13 +4865,12 @@ h6,
   display: flex;
   justify-content: space-between;
 }
-
-.wizard-step {
+.wizard .wizard-step {
   position: relative;
   width: 100%;
   text-align: center;
 }
-.wizard-step::before {
+.wizard .wizard-step::before {
   position: absolute;
   z-index: -1;
   top: 30px;
@@ -4881,8 +4880,7 @@ h6,
   content: "";
   background-color: #D7D7D7;
 }
-
-.wizard-step-number {
+.wizard .wizard-step .wizard-step-number {
   width: 60px;
   height: 60px;
   border-color: #D7D7D7;
@@ -4890,38 +4888,32 @@ h6,
   background-color: #FFFFFF;
   font-size: 20px;
 }
-
-.wizard-step-text {
+.wizard .wizard-step .wizard-step-text {
   display: block;
   margin-top: 15px;
 }
-
-.wizard-step--active .wizard-step-number {
+.wizard .wizard-step--active .wizard-step-number {
   color: #FFFFFF;
   border-color: #0595DB;
   background-color: #0595DB;
 }
-.wizard-step--active .wizard-step-text {
+.wizard .wizard-step--active .wizard-step-text {
   color: #0595DB;
 }
-
-.wizard-step--visited .wizard-step-number {
+.wizard .wizard-step--visited .wizard-step-number {
   color: #FFFFFF;
   border-color: #76CA02;
   background-color: #76CA02;
 }
 
-.wizard--progress {
+.wizardprogress {
   display: flex;
   justify-content: space-between;
 }
-.wizard--progress table.mx-table > tbody > tr > td {
-  padding: 0;
-}
-.wizard--progress .wizard-step-text {
+.wizardprogress .wizard-step-text {
   width: 100%;
 }
-.wizard--progress .wizard-step {
+.wizardprogress .wizard-step {
   position: relative;
   width: 100%;
   height: 50px;
@@ -4930,7 +4922,7 @@ h6,
   border: 1px solid #D7D7D7;
   background: #FFFFFF;
 }
-.wizard--progress .wizard-step a {
+.wizardprogress .wizard-step a {
   display: block;
   overflow: hidden;
   width: 100%;
@@ -4941,7 +4933,7 @@ h6,
   text-overflow: ellipsis;
   color: #555555;
 }
-.wizard--progress .wizard-step:before, .wizard--progress .wizard-step:after {
+.wizardprogress .wizard-step::before, .wizardprogress .wizard-step::after {
   position: absolute;
   z-index: 1;
   left: 100%;
@@ -4950,38 +4942,38 @@ h6,
   border-style: solid;
   border-color: transparent;
 }
-.wizard--progress .wizard-step::after {
+.wizardprogress .wizard-step::after {
   top: 1px;
   border-width: 24px;
-  border-left-color: white;
+  border-left-color: #FFFFFF;
 }
-.wizard--progress .wizard-step::before {
+.wizardprogress .wizard-step::before {
   top: 0;
   border-width: 25px;
   border-left-color: #D7D7D7;
 }
-.wizard--progress .wizard-step:first-child {
+.wizardprogress .wizard-step:first-child {
   margin-left: 0;
   padding-left: 0;
   border-radius: 5px 0 0 5px;
 }
-.wizard--progress .wizard-step:last-child {
+.wizardprogress .wizard-step:last-child {
   border-radius: 0 5px 5px 0;
 }
-.wizard--progress .wizard-step:last-child:before, .wizard--progress .wizard-step:last-child:after {
+.wizardprogress .wizard-step:last-child::before, .wizardprogress .wizard-step:last-child::after {
   display: none;
 }
-.wizard--progress .wizard-step--active {
+.wizardprogress .wizard-step--active {
   background: #0595DB;
 }
-.wizard--progress .wizard-step--active a {
+.wizardprogress .wizard-step--active a {
   text-decoration: none;
   color: #FFFFFF;
 }
-.wizard--progress .wizard-step--active::after {
+.wizardprogress .wizard-step--active::after {
   border-left-color: #0595DB;
 }
-.wizard--progress .wizard-step--visited a {
+.wizardprogress .wizard-step--visited a {
   color: #0595DB;
 }
 
