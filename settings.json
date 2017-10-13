@@ -16,6 +16,10 @@
                         "class": "spacing-outer-top"
                     },
                     {
+                        "name": "Medium",
+                        "class": "spacing-outer-top-medium"
+                    },
+                    {
                         "name": "Large",
                         "class": "spacing-outer-top-large"
                     },
@@ -37,6 +41,10 @@
                     {
                         "name": "Small",
                         "class": "spacing-outer-bottom"
+                    },
+                    {
+                        "name": "Medium",
+                        "class": "spacing-outer-bottom-medium"
                     },
                     {
                         "name": "Large",
@@ -62,6 +70,10 @@
                         "class": "spacing-outer-left"
                     },
                     {
+                        "name": "Medium",
+                        "class": "spacing-outer-left-medium"
+                    },
+                    {
                         "name": "Large",
                         "class": "spacing-outer-left-large"
                     },
@@ -83,6 +95,10 @@
                     {
                         "name": "Small",
                         "class": "spacing-outer-right"
+                    },
+                    {
+                        "name": "Medium",
+                        "class": "spacing-outer-right-medium"
                     },
                     {
                         "name": "Large",
