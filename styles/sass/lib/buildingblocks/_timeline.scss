@@ -12,7 +12,7 @@
 .timeline-itemwrapper.mx-listview {
     margin-bottom: 0;
     margin-left: 55px;
-    padding: $container-spacing 0;
+    padding: $spacing-large 0;
     border-left: 1px solid $border-color-default;
     & > ul > .mx-listview-item {
         position: relative;
@@ -31,7 +31,7 @@
         }
     }
     .mx-listview-item + .mx-listview-item {
-        margin-top: $container-spacing;
+        margin-top: $spacing-large;
     }
 }
 
