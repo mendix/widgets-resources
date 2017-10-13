@@ -3311,6 +3311,7 @@ img.img-center,
   flex-direction: column;
   padding: 8px 8px 6px 8px;
   line-height: normal;
+  font-size: 11px;
 }
 .bottom-nav-text-icons.mx-menubar ul.mx-menubar-list li.mx-menubar-item a .glyphicon {
   display: block;
