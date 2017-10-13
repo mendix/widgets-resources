@@ -165,11 +165,27 @@
                 "description": "",
                 "class": "btn-block"
             },
+
             {
                 "name": "Bordered",
                 "type": "Toggle",
                 "description": "",
                 "class": "btn-bordered"
+            },
+            {
+                "name": "Align icon",
+                "type": "Dropdown",
+                "description": "",
+                "options": [
+                    {
+                        "name": "Right",
+                        "class": "btn-icon-right"
+                    },
+                    {
+                        "name": "Top",
+                        "class": "btn-icon-top"
+                    }
+                ]
             }
         ],
         "ListView": [
