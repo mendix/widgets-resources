@@ -125,7 +125,7 @@ $font-weight-header:                    $font-weight-normal !default;
 $line-height-base:                      1.428571429 !default;
 
 // Spacing
-$font-header-margin:					0 0 20px 0 !default;
+$font-header-margin:					15px 0 20px 0 !default;
 
 // Text Colors
 $font-color-header:				        #17347B !default;
@@ -556,11 +556,14 @@ $callout-danger-bg:                     $color-danger-lighter !default;
 //== Spacing
 //## Advanced layout options (used in base/mixins/default-spacing)
 
-// Element (Small) spacing
-$element-spacing:                       5px !default;
+// Small spacing
+$spacing-small:                         5px !default;
 
-// Container (Large) spacing
-$container-spacing:                     15px !default;
+// Medium spacing
+$spacing-medium:                        15px !default;
+
+// Large spacing
+$spacing-large:                         30px !default;
 
 // Layout spacing
 $layout-spacing-top:                   30px !default;
