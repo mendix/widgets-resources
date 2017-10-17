@@ -5,7 +5,7 @@
             {
                 "name": "Spacing top",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Spacing indicates the outer top margin of an element.",
                 "options": [
                     {
                         "name": "None",
@@ -32,7 +32,7 @@
             {
                 "name": "Spacing bottom",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Spacing indicates the outer bottom margin of an element.",
                 "options": [
                     {
                         "name": "None",
@@ -59,7 +59,7 @@
             {
                 "name": "Spacing left",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Spacing indicates the outer left margin of an element.",
                 "options": [
                     {
                         "name": "None",
@@ -86,7 +86,7 @@
             {
                 "name": "Spacing right",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Spacing indicates the outer right margin of an element.",
                 "options": [
                     {
                         "name": "None",
@@ -113,7 +113,7 @@
             {
                 "name": "Align Self",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Float an element to the left or right.",
                 "options": [
                     {
                         "name": "Left",
@@ -130,7 +130,7 @@
             {
                 "name": "Align content",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Align content of the element left, right or center as a row or column.",
                 "options": [
                     {
                         "name": "Left align as row",
@@ -163,7 +163,7 @@
             {
                 "name": "Size",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Fancy larger or smaller buttons?",
                 "options": [
                     {
                         "name": "Small",
@@ -178,20 +178,20 @@
             {
                 "name": "Full width",
                 "type": "Toggle",
-                "description": "",
+                "description": "Create block level buttons—those that span the full width of a parent.",
                 "class": "btn-block"
             },
 
             {
                 "name": "Bordered",
                 "type": "Toggle",
-                "description": "",
+                "description": "Buttons bordererd have a transparent background while mainting the border and text color.",
                 "class": "btn-bordered"
             },
             {
                 "name": "Align icon",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Float an icon to the left or right of the element.",
                 "options": [
                     {
                         "name": "Right",
@@ -208,7 +208,7 @@
             {
                 "name": "Style",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Choose one of the following listview styles to change the appearance of the listview.",
                 "options": [
                     {
                         "name": "Striped",
@@ -231,13 +231,13 @@
             {
                 "name": "Hover style",
                 "type": "Toggle",
-                "description": "",
+                "description": "Enable listview hover to make the rows hoverable.",
                 "class": "listview-hover"
             },
             {
                 "name": "Row Size",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Increase or decrease the row spacing of the listview.",
                 "options": [
                     {
                         "name": "Small",
@@ -254,7 +254,7 @@
             {
                 "name": "Style",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Choose one of the following data grid styles to change the appearance of the data grid.",
                 "options": [
                     {
                         "name": "Striped",
@@ -273,13 +273,13 @@
             {
                 "name": "Hover style",
                 "type": "Toggle",
-                "description": "",
+                "description": "Enable data grid hover to make the rows hoverable.",
                 "class": "datagrid-hover"
             },
             {
                 "name": "Row size",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Increase or decrease the row spacing of the data grid row.",
                 "options": [
                     {
                         "name": "Small",
@@ -296,7 +296,7 @@
             {
                 "name": "Style",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Choose one of the following data grid styles to change the appearance of the template grid.",
                 "options": [
                     {
                         "name": "Striped",
@@ -319,7 +319,7 @@
             {
                 "name": "Hover style",
                 "type": "Toggle",
-                "description": "",
+                "description": "Enable template grid hover to make the rows hoverable.",
                 "class": "templategrid-hover"
             }
         ],
@@ -327,7 +327,7 @@
             {
                 "name": "Style",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Choose one of the following groupbox styles to change the appearance of the groupbox.",
                 "options": [
                     {
                         "name": "Default",
@@ -362,7 +362,7 @@
             {
                 "name": "Callout style",
                 "type": "Toggle",
-                "description": "",
+                "description": "Enable the groupbox callout functionality to highlight the groupbox importance.",
                 "class": "groupbox-callout"
             }
         ],
@@ -370,7 +370,7 @@
             {
                 "name": "Style",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Use of the following types for enhancing the look and feel of your image.",
                 "options": [
                     {
                         "name": "Rounded",
@@ -389,7 +389,7 @@
             {
                 "name": "Center",
                 "type": "Toggle",
-                "description": "",
+                "description": "Align the image in the center of an element.",
                 "class": "img-center"
             }
         ],
@@ -397,7 +397,7 @@
             {
                 "name": "Style",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Add any of the below mentioned styles to change the appearance of a label.",
                 "options": [
                     {
                         "name": "Default",
@@ -430,7 +430,7 @@
             {
                 "name": "Weight",
                 "type": "Dropdown",
-                "description": "",
+                "description": "For emphasizing a snippet of text with a heavier or lighter font weight.",
                 "options": [
                     {
                         "name": "Light",
@@ -453,7 +453,7 @@
             {
                 "name": "Color",
                 "type": "Dropdown",
-                "description": "",
+                "description": "For emphasizing a snippet of text with a different text color.",
                 "options": [
                     {
                         "name": "Header color",
@@ -492,7 +492,7 @@
             {
                 "name": "Alignment",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Easily realign text to components with text alignment styles.",
                 "options": [
                     {
                         "name": "Left",
@@ -511,7 +511,7 @@
             {
                 "name": "Transform",
                 "type": "Dropdown",
-                "description": "",
+                "description": "Easily transform text with text transform classes.",
                 "options": [
                     {
                         "name": "Lowercase",
@@ -530,7 +530,7 @@
             {
                 "name": "Wrap options",
                 "type": "Dropdown",
-                "description": "",
+                "description": "The wrap property allows long words to be able to be broken and wrap onto the next line.",
                 "options": [
                     {
                         "name": "Wrap",
