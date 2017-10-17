@@ -1,11 +1,11 @@
-﻿{
+{
     "pageTemplates" : "WebModeler",
     "designProperties": {
         "Widget": [
             {
                 "name": "Spacing top",
                 "type": "Dropdown",
-                "description": "Spacing indicates the outer top margin of an element.",
+                "description": "The outer top margin of an element.",
                 "options": [
                     {
                         "name": "None",
@@ -32,7 +32,7 @@
             {
                 "name": "Spacing bottom",
                 "type": "Dropdown",
-                "description": "Spacing indicates the outer bottom margin of an element.",
+                "description": "The outer bottom margin of an element.",
                 "options": [
                     {
                         "name": "None",
@@ -59,7 +59,7 @@
             {
                 "name": "Spacing left",
                 "type": "Dropdown",
-                "description": "Spacing indicates the outer left margin of an element.",
+                "description": "The outer left margin of an element.",
                 "options": [
                     {
                         "name": "None",
@@ -86,7 +86,7 @@
             {
                 "name": "Spacing right",
                 "type": "Dropdown",
-                "description": "Spacing indicates the outer right margin of an element.",
+                "description": "The outer right margin of an element.",
                 "options": [
                     {
                         "name": "None",
@@ -130,7 +130,7 @@
             {
                 "name": "Align content",
                 "type": "Dropdown",
-                "description": "Align content of the element left, right or center as a row or column.",
+                "description": "Align content of the element left, right, or center as a row or column.",
                 "options": [
                     {
                         "name": "Left align as row",
@@ -163,7 +163,7 @@
             {
                 "name": "Size",
                 "type": "Dropdown",
-                "description": "Fancy larger or smaller buttons?",
+                "description": "Size of buttons",
                 "options": [
                     {
                         "name": "Small",
@@ -178,20 +178,20 @@
             {
                 "name": "Full width",
                 "type": "Toggle",
-                "description": "Create block level buttons—those that span the full width of a parent.",
+                "description": "Create block-level buttons (buttons that span the full width of a parent).",
                 "class": "btn-block"
             },
 
             {
                 "name": "Bordered",
                 "type": "Toggle",
-                "description": "Buttons bordererd have a transparent background while mainting the border and text color.",
+                "description": "Buttons styled with a transparent background, colored border, and colored text.",
                 "class": "btn-bordered"
             },
             {
                 "name": "Align icon",
                 "type": "Dropdown",
-                "description": "Float an icon to the left or right of the element.",
+                "description": "Align an icon to the left or right of an element.",
                 "options": [
                     {
                         "name": "Right",
@@ -208,7 +208,7 @@
             {
                 "name": "Style",
                 "type": "Dropdown",
-                "description": "Choose one of the following listview styles to change the appearance of the listview.",
+                "description": "Choose one of the following styles to change the appearance of the listview.",
                 "options": [
                     {
                         "name": "Striped",
@@ -254,7 +254,7 @@
             {
                 "name": "Style",
                 "type": "Dropdown",
-                "description": "Choose one of the following data grid styles to change the appearance of the data grid.",
+                "description": "Choose one of the following styles to change the appearance of the data grid.",
                 "options": [
                     {
                         "name": "Striped",
@@ -296,7 +296,7 @@
             {
                 "name": "Style",
                 "type": "Dropdown",
-                "description": "Choose one of the following data grid styles to change the appearance of the template grid.",
+                "description": "Choose one of the following styles to change the appearance of the template grid.",
                 "options": [
                     {
                         "name": "Striped",
@@ -327,7 +327,7 @@
             {
                 "name": "Style",
                 "type": "Dropdown",
-                "description": "Choose one of the following groupbox styles to change the appearance of the groupbox.",
+                "description": "Choose one of the following styles to change the appearance of the groupbox.",
                 "options": [
                     {
                         "name": "Default",
@@ -362,7 +362,7 @@
             {
                 "name": "Callout style",
                 "type": "Toggle",
-                "description": "Enable the groupbox callout functionality to highlight the groupbox importance.",
+                "description": "Enable the groupbox callout functionality to highlight the importance of the groupbox.",
                 "class": "groupbox-callout"
             }
         ],
@@ -370,7 +370,7 @@
             {
                 "name": "Style",
                 "type": "Dropdown",
-                "description": "Use of the following types for enhancing the look and feel of your image.",
+                "description": "Choose the style of your image.",
                 "options": [
                     {
                         "name": "Rounded",
@@ -397,7 +397,7 @@
             {
                 "name": "Style",
                 "type": "Dropdown",
-                "description": "Add any of the below mentioned styles to change the appearance of a label.",
+                "description": "Change the appearance of a label.",
                 "options": [
                     {
                         "name": "Default",
@@ -430,7 +430,7 @@
             {
                 "name": "Weight",
                 "type": "Dropdown",
-                "description": "For emphasizing a snippet of text with a heavier or lighter font weight.",
+                "description": "Emphasize a snippet of text with a heavier or lighter font weight.",
                 "options": [
                     {
                         "name": "Light",
@@ -453,7 +453,7 @@
             {
                 "name": "Color",
                 "type": "Dropdown",
-                "description": "For emphasizing a snippet of text with a different text color.",
+                "description": "Change the color of a snippet of text.",
                 "options": [
                     {
                         "name": "Header color",
@@ -492,7 +492,7 @@
             {
                 "name": "Alignment",
                 "type": "Dropdown",
-                "description": "Easily realign text to components with text alignment styles.",
+                "description": "Align text to components.",
                 "options": [
                     {
                         "name": "Left",
@@ -511,7 +511,7 @@
             {
                 "name": "Transform",
                 "type": "Dropdown",
-                "description": "Easily transform text with text transform classes.",
+                "description": "Change the letter case of your text.",
                 "options": [
                     {
                         "name": "Lowercase",
@@ -522,7 +522,7 @@
                         "class": "text-uppercase"
                     },
                     {
-                        "name": "Capatalize",
+                        "name": "Capitalize",
                         "class": "text-capitalize"
                     }
                 ]
@@ -530,7 +530,7 @@
             {
                 "name": "Wrap options",
                 "type": "Dropdown",
-                "description": "The wrap property allows long words to be able to be broken and wrap onto the next line.",
+                "description": "Break long words and sentences into multiple lines.",
                 "options": [
                     {
                         "name": "Wrap",
