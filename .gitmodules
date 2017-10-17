@@ -1,3 +1,4 @@
 [submodule "styles/sass/lib"]
 	path = styles/sass/lib
 	url = git@github.com:mendix/atlas-framework.git
+	branch = v.1.0.0-rc
