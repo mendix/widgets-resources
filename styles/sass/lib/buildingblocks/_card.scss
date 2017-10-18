@@ -128,7 +128,7 @@
             }
         }
         .mx-tabcontainer-pane {
-            @include layout-spacing($type: padding, $direction: all, $device: responsive);
+            @include get-responsive-spacing-large($type: padding, $direction: all);
         }
     }
 }
