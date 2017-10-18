@@ -19,7 +19,7 @@ export type BootstrapStyle = "default" | "info" | "inverse" | "primary" | "dange
 
 export const Badge: SFC<BadgeProps> = (props) => createElement("span",
     {
-        className: classNames("widget-badge", props.badgeType, {
+        className: classNames("widget-badge", props.badgeType, props.className, {
             [`label-${props.bootstrapStyle}`]: !!props.bootstrapStyle,
             "widget-badge-clickable": props.clickable
         }),
