@@ -180,100 +180,100 @@
 
 // Spacing Medium
 .spacing-inner-medium {
-    padding: $spacing-medium !important;
+    @include get-responsive-spacing-medium($type: padding, $direction: all, $is_important: true);
 }
 .spacing-inner-top-medium {
-    padding-top: $spacing-medium !important;
+    @include get-responsive-spacing-medium($type: padding, $direction: top, $is_important: true);
 }
 .spacing-inner-right-medium {
-    padding-right: $spacing-medium !important;
+    @include get-responsive-spacing-medium($type: padding, $direction: right, $is_important: true);
 }
 .spacing-inner-bottom-medium {
-    padding-bottom: $spacing-medium !important;
+    @include get-responsive-spacing-medium($type: padding, $direction: bottom, $is_important: true);
 }
 .spacing-inner-left-medium {
-    padding-left: $spacing-medium !important;
+    @include get-responsive-spacing-medium($type: padding, $direction: left, $is_important: true);
 }
 
 .spacing-outer-medium {
-    margin: $spacing-medium !important;
+    @include get-responsive-spacing-medium($type: margin, $direction: all, $is_important: true);
 }
 .spacing-outer-top-medium {
-    margin-top: $spacing-medium !important;
+    @include get-responsive-spacing-medium($type: margin, $direction: top, $is_important: true);
 }
 .spacing-outer-right-medium {
-    margin-right: $spacing-medium !important;
+    @include get-responsive-spacing-medium($type: margin, $direction: right, $is_important: true);
 }
 .spacing-outer-bottom-medium {
-    margin-bottom: $spacing-medium !important;
+    @include get-responsive-spacing-medium($type: margin, $direction: bottom, $is_important: true);
 }
 .spacing-outer-left-medium {
-    margin-left: $spacing-medium !important;
+    @include get-responsive-spacing-medium($type: margin, $direction: left, $is_important: true);
 }
 
 // Spacing Large
 .spacing-inner-large {
-    padding: $spacing-large !important;
+    @include get-responsive-spacing-large($type: padding, $direction: all, $is_important: true);
 }
 .spacing-inner-top-large {
-    padding-top: $spacing-large !important;
+    @include get-responsive-spacing-large($type: padding, $direction: top, $is_important: true);
 }
 .spacing-inner-right-large {
-    padding-right: $spacing-large !important;
+    @include get-responsive-spacing-large($type: padding, $direction: right, $is_important: true);
 }
 .spacing-inner-bottom-large {
-    padding-bottom: $spacing-large !important;
+    @include get-responsive-spacing-large($type: padding, $direction: bottom, $is_important: true);
 }
 .spacing-inner-left-large {
-    padding-left: $spacing-large !important;
+    @include get-responsive-spacing-large($type: padding, $direction: left, $is_important: true);
 }
 
 .spacing-outer-large {
-    margin: $spacing-large !important;
+    @include get-responsive-spacing-large($type: margin, $direction: all, $is_important: true);
 }
 .spacing-outer-top-large {
-    margin-top: $spacing-large !important;
+    @include get-responsive-spacing-large($type: margin, $direction: top, $is_important: true);
 }
 .spacing-outer-right-large {
-    margin-right: $spacing-large !important;
+    @include get-responsive-spacing-large($type: margin, $direction: right, $is_important: true);
 }
 .spacing-outer-bottom-large {
-    margin-bottom: $spacing-large !important;
+    @include get-responsive-spacing-large($type: margin, $direction: bottom, $is_important: true);
 }
 .spacing-outer-left-large {
-    margin-left: $spacing-large !important;
+    @include get-responsive-spacing-large($type: margin, $direction: left, $is_important: true);
 }
 
 // Spacing layouts
-.spacing-inner-responsive {
+.spacing-inner-layout {
     @include layout-spacing($type: padding, $direction: all, $device: responsive, $is_important: true);
 }
-.spacing-inner-top-responsive {
+.spacing-inner-top-layout {
     @include layout-spacing($type: padding, $direction: top, $device: responsive, $is_important: true);
 }
-.spacing-inner-right-responsive {
+.spacing-inner-right-layout {
     @include layout-spacing($type: padding, $direction: right, $device: responsive, $is_important: true);
 }
-.spacing-inner-bottom-responsive {
+.spacing-inner-bottom-layout {
     @include layout-spacing($type: padding, $direction: bottom, $device: responsive, $is_important: true);
 }
-.spacing-inner-left-responsive {
+.spacing-inner-left-layout {
     @include layout-spacing($type: padding, $direction: left, $device: responsive, $is_important: true);
 }
 
-.spacing-outer-responsive {
+.spacing-outer-layout {
     @include layout-spacing($type: margin, $direction: all, $device: responsive, $is_important: true);
 }
-.spacing-outer-top-responsive {
+.spacing-outer-top-layout {
     @include layout-spacing($type: margin, $direction: top, $device: responsive, $is_important: true);
 }
-.spacing-outer-right-responsive {
+.spacing-outer-right-layout {
     @include layout-spacing($type: margin, $direction: right, $device: responsive, $is_important: true);
 }
-.spacing-outer-bottom-responsive {
+.spacing-outer-bottom-layout {
     @include layout-spacing($type: margin, $direction: bottom, $device: responsive, $is_important: true);
 }
-.spacing-outer-left-responsive {
+.spacing-outer-left-layout {
     @include layout-spacing($type: margin, $direction: left, $device: responsive, $is_important: true);
 }
 

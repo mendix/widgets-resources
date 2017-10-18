@@ -557,13 +557,17 @@ $callout-danger-bg:                     $color-danger-lighter !default;
 //## Advanced layout options (used in base/mixins/default-spacing)
 
 // Small spacing
-$spacing-small:                         5px !default;
+$spacing-small:                        5px !default;
 
 // Medium spacing
-$spacing-medium:                        15px !default;
+$spacing-medium:                       15px !default;
+$t-spacing-medium:                     15px !default;
+$m-spacing-medium:                     15px !default;
 
 // Large spacing
-$spacing-large:                         30px !default;
+$spacing-large:                        30px !default;
+$t-spacing-large:                      30px !default;
+$m-spacing-large:                      15px !default;
 
 // Layout spacing
 $layout-spacing-top:                   30px !default;
