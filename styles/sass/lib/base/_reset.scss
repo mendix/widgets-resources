@@ -24,10 +24,6 @@
     height: 100%;
     .mx-layoutgrid {
         @include layout-spacing($type: padding, $direction: all, $device: responsive);
-        &.container {
-            padding-right: 15px;
-            padding-left: 15px;
-        }
         .mx-layoutgrid {
             padding: 0;
         }
