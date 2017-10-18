@@ -24,8 +24,8 @@
                         "class": "spacing-outer-top-large"
                     },
                     {
-                        "name": "Responsive",
-                        "class": "spacing-outer-top-responsive"
+                        "name": "Layout",
+                        "class": "spacing-outer-top-layout"
                     }
                 ]
             },
@@ -51,8 +51,8 @@
                         "class": "spacing-outer-bottom-large"
                     },
                     {
-                        "name": "Responsive",
-                        "class": "spacing-outer-bottom-responsive"
+                        "name": "Layout",
+                        "class": "spacing-outer-bottom-layout"
                     }
                 ]
             },
@@ -78,8 +78,8 @@
                         "class": "spacing-outer-left-large"
                     },
                     {
-                        "name": "Responsive",
-                        "class": "spacing-outer-left-responsive"
+                        "name": "Layout",
+                        "class": "spacing-outer-left-layout"
                     }
                 ]
             },
@@ -105,8 +105,8 @@
                         "class": "spacing-outer-right-large"
                     },
                     {
-                        "name": "Responsive",
-                        "class": "spacing-outer-right-responsive"
+                        "name": "Layout",
+                        "class": "spacing-outer-right-layout"
                     }
                 ]
             },
