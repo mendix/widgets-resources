@@ -11,8 +11,8 @@
 
 // Check if it is part of a inner layoutgrid
 .mx-scrollcontainer .mx-placeholder .mx-layoutgrid .pageheader {
-    @include layout-spacing($type: margin, $direction: bottom, $device: responsive);
-    @include layout-spacing($type: padding, $direction: bottom, $device: responsive);
+    @include get-responsive-spacing-large($type: margin, $direction: bottom);
+    @include get-responsive-spacing-large($type: padding, $direction: bottom);
     background: transparent;
 }
 
