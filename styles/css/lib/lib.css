@@ -2637,7 +2637,6 @@ img.img-center,
   display: block;
   float: left;
   min-height: 1px;
-  margin-bottom: 15px;
   padding-right: 15px;
   padding-left: 15px;
   border: 0;
@@ -4044,7 +4043,6 @@ table.table-fixed {
   display: block;
   float: left;
   min-height: 1px;
-  margin-bottom: 15px;
   padding-right: 15px;
   padding-left: 15px;
   border: 0;
@@ -4700,17 +4698,17 @@ h6,
 }
 @media (max-width: 767px) {
   .cardtabs .cardtabs-tabs .mx-tabcontainer-pane {
-    padding: 15px !important;
+    padding: 15px;
   }
 }
 @media (min-width: 768px) {
   .cardtabs .cardtabs-tabs .mx-tabcontainer-pane {
-    padding: 30px !important;
+    padding: 30px;
   }
 }
 @media (min-width: 992px) {
   .cardtabs .cardtabs-tabs .mx-tabcontainer-pane {
-    padding: 30px !important;
+    padding: 30px;
   }
 }
 
