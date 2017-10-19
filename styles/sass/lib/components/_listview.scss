@@ -162,8 +162,8 @@
     }
     & > .mx-listview-list {
         display: block; // normal a table
-        margin-right: -15px;
-        margin-left: -15px;
+        margin-right: -1 * $gutter-size;
+        margin-left: -1 * $gutter-size;
         &::before,
         &::after {
             // clearfix
@@ -177,15 +177,13 @@
             display: block; // normal a table
             float: left;
             min-height: 1px;
-            margin-bottom: 15px;
-            padding-right: 15px;
-            padding-left: 15px;
+            padding-right: $gutter-size;
+            padding-left: $gutter-size;
             border: 0;
             @media (max-width: $screen-sm-max) {
                 width: 100% !important;
             }
             & > .mx-dataview {
-                //border: 1px solid #DDD; // styling from grid item
                 overflow: hidden;
             }
         }

@@ -120,8 +120,8 @@
     }
     .mx-templategrid-row {
         display: block;
-        margin-right: -15px;
-        margin-left: -15px;
+        margin-right: -1 * $gutter-size;
+        margin-left: -1 * $gutter-size;
 
         &::before,
         &::after {
@@ -137,9 +137,8 @@
         display: block;
         float: left;
         min-height: 1px;
-        margin-bottom: 15px;
-        padding-right: 15px;
-        padding-left: 15px;
+        padding-right: $gutter-size;
+        padding-left: $gutter-size;
         border: 0;
         @media (max-width: 992px) {
             width: 100% !important;
