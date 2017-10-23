@@ -1,0 +1,7 @@
+@mixin transition($style: initial, $delay: 0.1s, $duration: 0.2s, $property: all, $timing-fucntion: cubic-bezier(0.4, 0, 0.2, 1)) {
+    transition-delay: $delay;
+    transition-timing-function: $timing-fucntion;
+    transition-duration: $duration;
+    transition-property: $property;
+    transform-style: $style;
+}

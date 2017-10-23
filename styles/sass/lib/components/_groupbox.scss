@@ -1,0 +1,172 @@
+/* ==========================================================================
+   Groupbox
+
+   Default Mendix Groupboxes
+========================================================================== */
+
+.mx-groupbox {
+    margin: 0;
+    > .mx-groupbox-header {
+        margin: 0;
+        color: $groupbox-default-color;
+        border-width: 1px 1px 0 1px;
+        border-style: solid;
+        border-color: $groupbox-default-bg;
+        background: $groupbox-default-bg;
+        font-size: $font-size-h5;
+        .mx-groupbox-collapse-icon {
+            margin-top: 0.1em;
+        }
+    }
+    > .mx-groupbox-body {
+        padding: 10px 15px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: $groupbox-default-bg;
+        background-color: #FFFFFF;
+    }
+    .mx-groupbox-header + .mx-groupbox-body {
+        border-top: none;
+    }
+    &.collapsed > .mx-groupbox-header {
+    }
+}
+
+//== Design Properties
+//## Helper classes to change the look and feel of the component
+//-------------------------------------------------------------------------------------------------------------------//
+
+// Color variations 
+.groupbox-default {
+    @include groupbox-variant($groupbox-default-color, $groupbox-default-bg);
+}
+
+.groupbox-primary {
+    @include groupbox-variant($groupbox-primary-color, $groupbox-primary-bg);
+}
+
+.groupbox-inverse {
+    @include groupbox-variant($groupbox-inverse-color, $groupbox-inverse-bg);
+}
+
+// Success appears as green
+.groupbox-success {
+    @include groupbox-variant($groupbox-success-color, $groupbox-success-bg);
+}
+
+// Info appears as blue-green
+.groupbox-info {
+    @include groupbox-variant($groupbox-info-color, $groupbox-info-bg);
+}
+
+// Warning appears as orange
+.groupbox-warning {
+    @include groupbox-variant($groupbox-warning-color, $groupbox-warning-bg);
+}
+
+// Danger and error appear as red
+.groupbox-danger {
+    @include groupbox-variant($groupbox-danger-color, $groupbox-danger-bg);
+}
+
+// white appears as full white	
+.groupbox-white {
+    @include groupbox-variant($groupbox-white-color, $groupbox-white-bg);
+}
+
+.groupbox-transparent {
+    border-bottom: 1px solid $border-color-default;
+    > .mx-groupbox-header {
+        padding: 15px 0;
+        color: $gray-darker;
+        border-style: none;
+        background: transparent;
+        font-size: 16px;
+        font-weight: $font-weight-semibold;
+    }
+    .mx-groupbox-body {
+        padding: 15px 0;
+        border-style: none;
+        background-color: transparent;
+    }
+    .mx-groupbox-collapse-icon {
+        color: $brand-primary;
+    }
+}
+
+// Header options
+.groupbox-h1 > .mx-groupbox-header {
+    font-size: $font-size-h1;
+}
+
+.groupbox-h2 > .mx-groupbox-header {
+    font-size: $font-size-h2;
+}
+
+.groupbox-h3 > .mx-groupbox-header {
+    font-size: $font-size-h3;
+}
+
+.groupbox-h4 > .mx-groupbox-header {
+    font-size: $font-size-h4;
+}
+
+.groupbox-h5 > .mx-groupbox-header {
+    font-size: $font-size-h5;
+}
+
+.groupbox-h6 > .mx-groupbox-header {
+    font-size: $font-size-h6;
+}
+
+// Callout Look and Feel
+.groupbox-callout {
+    > .mx-groupbox-header,
+    > .mx-groupbox-body {
+        border: 0;
+        background-color: $callout-info-bg;
+    }
+    .mx-groupbox-header + .mx-groupbox-body {
+        padding-top: 0;
+    }
+}
+
+.groupbox-info.groupbox-callout {
+    > .mx-groupbox-header,
+    > .mx-groupbox-body {
+        background-color: $callout-info-bg;
+    }
+    > .mx-groupbox-header {
+        color: $callout-info-color;
+    }
+}
+
+.groupbox-success.groupbox-callout {
+    > .mx-groupbox-header,
+    > .mx-groupbox-body {
+        background-color: $callout-success-bg;
+    }
+    > .mx-groupbox-header {
+        color: $callout-success-color;
+    }
+}
+
+.groupbox-warning.groupbox-callout {
+    > .mx-groupbox-header,
+    > .mx-groupbox-body {
+        background-color: $callout-warning-bg;
+    }
+    > .mx-groupbox-header {
+        color: $callout-warning-color;
+    }
+}
+
+.groupbox-danger.groupbox-callout {
+    > .mx-groupbox-header,
+    > .mx-groupbox-body {
+        background-color: $callout-danger-bg;
+    }
+    > .mx-groupbox-header {
+        color: $callout-danger-color;
+    }
+}

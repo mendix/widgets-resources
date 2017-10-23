@@ -1,0 +1,52 @@
+/* ==========================================================================
+   Alerts
+
+   Default Bootstrap Alert boxes. Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages
+========================================================================== */
+
+.alert {
+    margin-top: 0; // want to align it with padding of a page
+    padding: 15px;
+    border: 0;
+    border-radius: 4px;
+}
+
+//== Design Properties
+//## Helper classes to change the look and feel of the component
+//-------------------------------------------------------------------------------------------------------------------//
+.alert-bordered {
+    border: 1px solid;
+}
+
+// Color variations 
+.alert-success {
+    color: $alert-success-color;
+    border-color: $alert-success-border-color;
+    background-color: $alert-success-bg;
+}
+
+.alert-info {
+    color: $alert-info-color;
+    border-color: $alert-info-border-color;
+    background-color: $alert-info-bg;
+}
+
+.alert-warning {
+    color: $alert-warning-color;
+    border-color: $alert-warning-border-color;
+    background-color: $alert-warning-bg;
+}
+
+.alert-danger {
+    color: $alert-danger-color;
+    border-color: $alert-danger-border-color;
+    background-color: $alert-danger-bg;
+}
+
+//== State
+//## Styling when component is in certain state
+//-------------------------------------------------------------------------------------------------------------------//
+.has-error .alert {
+    margin-top: 8px;
+    margin-bottom: 0;
+}
