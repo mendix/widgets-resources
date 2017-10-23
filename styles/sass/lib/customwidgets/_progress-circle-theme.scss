@@ -1,0 +1,40 @@
+/* Based on https://github.com/mendixlabs/progress-circle/tree/master/src/ui/_progress-circle-theme.scss */
+path.widget-progress-circle-path {
+    stroke: $brand-primary;
+}
+
+.widget-progress-circle-primary {
+    path.widget-progress-circle-path {
+        stroke: $brand-primary;
+    }
+}
+
+.widget-progress-circle-info {
+    path.widget-progress-circle-path {
+        stroke: $brand-info;
+    }
+}
+
+.widget-progress-circle-success {
+    path.widget-progress-circle-path {
+        stroke: $brand-success;
+    }
+}
+
+.widget-progress-circle-warning {
+    path.widget-progress-circle-path {
+        stroke: $brand-warning;
+    }
+}
+
+.widget-progress-circle-danger {
+    path.widget-progress-circle-path {
+        stroke: $brand-danger;
+    }
+}
+
+.widget-progress-circle-inverse {
+    path.widget-progress-circle-path {
+        stroke: $brand-inverse;
+    }
+}

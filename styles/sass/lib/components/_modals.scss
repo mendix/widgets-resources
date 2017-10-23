@@ -1,0 +1,104 @@
+/* ==========================================================================
+   Modals
+
+   Default Mendix Modals. Modals are streamlined, but flexible, dialog prompts with the minimum required functionality and smart defaults
+========================================================================== */
+
+.modal-dialog {
+    .modal-content {
+        border: 1px solid $modal-header-border-color;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        .modal-header {
+            padding: 15px 20px;
+            border-bottom-color: $modal-header-border-color;
+            border-radius: 0; // Because of the class .mx-window-active in mxui.css
+            background-color: $modal-header-bg;
+            h4 {
+                margin: 0;
+                color: $modal-header-color;
+                font-size: 16px;
+                font-weight: $font-weight-bold;
+            }
+            .close {
+                margin-top: -3px;
+                opacity: 1;
+                /* For IE8 and earlier */
+                color: $modal-header-color;
+                text-shadow: none;
+                filter: alpha(opacity=100);
+            }
+        }
+        .modal-body {
+            padding: 20px;
+        }
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 0;
+            padding: 20px;
+            border-style: none;
+        }
+    }
+}
+
+// Default Mendix Window Modal
+.mx-window {
+    // If popup direct child is a dataview it gets the class mx-window-view
+    &.mx-window-view .mx-window-body {
+        padding: 0;
+        // Dataview in popup
+        > .mx-dataview > .mx-dataview-content,
+        > .mx-placeholder > .mx-dataview > .mx-dataview-content {
+            padding: 20px;
+        }
+        > .mx-dataview > .mx-dataview-controls,
+        > .mx-placeholder > .mx-dataview > .mx-dataview-controls {
+            display: flex;
+            justify-content: flex-end;
+            margin: 0;
+            padding: 20px;
+            text-align: left;
+            border-top: 1px solid $modal-header-border-color;
+        }
+    }
+    .mx-dataview-controls {
+        padding-bottom: 0;
+    }
+    .mx-layoutgrid {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+// Login modal
+.mx-login {
+    .modal-body {
+        padding: 0 15px;
+    }
+    .modal-content {
+        input {
+            height: 56px;
+            padding: 12px 12px;
+            border: 1px solid #EEEEEE;
+            background: #EEEEEE;
+            box-shadow: none;
+            font-size: 16px;
+            &:focus {
+                border-color: #66AFE9;
+            }
+        }
+    }
+    .modal-header,
+    .modal-footer {
+        border: 0;
+    }
+    button {
+        font-size: 16px;
+    }
+    h4 {
+        color: #AAAAAA;
+        font-size: 20px;
+        font-weight: $font-weight-bold;
+    }
+}

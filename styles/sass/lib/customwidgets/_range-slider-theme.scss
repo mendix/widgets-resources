@@ -1,0 +1,48 @@
+// Based on https://github.com/mendixlabs/range-slider/tree/master/src/ui/_range-slider-theme.scss
+
+div.widget-range-slider {
+    .rc-slider-handle,
+    .rc-slider-dot-active {
+        border-color: $brand-default;
+
+        &:active {
+            border-color: $brand-default;
+            box-shadow: none;
+        }
+
+        &:hover {
+            border-color: $brand-default;
+        }
+    }
+
+    &.has-error {
+        .rc-slider-track,
+        .rc-slider-rail {
+            background-color: $brand-danger;
+        }
+    }
+}
+
+div.widget-range-slider-primary .rc-slider-track {
+    background-color: $brand-primary;
+}
+
+div.widget-range-slider-info .rc-slider-track {
+    background-color: $brand-info;
+}
+
+div.widget-range-slider-success .rc-slider-track {
+    background-color: $brand-success;
+}
+
+div.widget-range-slider-warning .rc-slider-track {
+    background-color: $brand-warning;
+}
+
+div.widget-range-slider-danger .rc-slider-track {
+    background-color: $brand-danger;
+}
+
+div.widget-range-slider-inverse .rc-slider-track {
+    background-color: $brand-inverse;
+}
