@@ -3270,7 +3270,7 @@ img.img-center,
   margin-right: 0.5em;
 }
 .mx-navigationtree .navbar-inner > ul > li > a .glyphicon {
-  top: -1px;
+  top: 0;
   margin-right: 0.5em;
   vertical-align: middle;
   font-size: 20px;
