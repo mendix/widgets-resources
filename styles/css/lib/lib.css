@@ -5304,7 +5304,7 @@ h6,
   display: inline-block;
   width: 0;
   height: 0;
-  padding: 15px;
+  padding: 15px 15px;
   background-image: url("../../../logo.png");
   background-repeat: no-repeat;
   background-position: left center;
