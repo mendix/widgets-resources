@@ -12,7 +12,7 @@
         margin: 0; // weird -margin if screen gets small (bootstrap)
 
         /* Navigation item */
-        > li.mx-navbar-item > a {
+        & > li.mx-navbar-item > a {
             display: flex;
             align-items: center;
             min-height: $topbar-minimalheight;
@@ -66,7 +66,7 @@
                 margin-right: 0.5em;
             }
             .glyphicon {
-                top: -1px;
+                top: 0;
                 margin-right: 0.5em;
                 vertical-align: middle;
                 font-size: $navigation-glyph-size;
@@ -74,12 +74,12 @@
         }
 
         /* When hovering or the dropdown is open */
-         > .mx-navbar-item > a:hover,
-         > .mx-navbar-item > a:focus,
-         > .mx-navbar-item.active a,
-         > .mx-navbar-item.open > a,
-         > .mx-navbar-item.open > a:hover,
-         > .mx-navbar-item.open > a:focus {
+        & > .mx-navbar-item > a:hover,
+        & > .mx-navbar-item > a:focus,
+        & > .mx-navbar-item.active a,
+        & > .mx-navbar-item.open > a,
+        & > .mx-navbar-item.open > a:hover,
+        & > .mx-navbar-item.open > a:focus {
             text-decoration: none;
             color: $navigation-color-hover;
             background-color: $navigation-bg-hover;
@@ -88,7 +88,7 @@
                 border-bottom-color: $navigation-color-hover;
             }
         }
-         > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
+        & > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
             color: $navigation-sub-color-active;
             background-color: $navigation-sub-bg-active;
             .caret {
@@ -105,7 +105,7 @@
             padding: 0;
             border-radius: 0;
             background-color: $navigation-sub-bg;
-             > li.mx-navbar-subitem > a {
+            & > li.mx-navbar-subitem > a {
                 padding: 10px 20px;
                 color: $navigation-sub-color;
                 border-radius: 0;
@@ -139,7 +139,7 @@
         background-color: $navtopbar-bg;
         ul.nav {
             /* Navigation item */
-             > li.mx-navbar-item > a {
+            & > li.mx-navbar-item > a {
                 color: $navtopbar-color;
                 font-size: $navtopbar-font-size;
 
@@ -175,12 +175,12 @@
             }
 
             /* When hovering or the dropdown is open */
-             > .mx-navbar-item > a:hover,
-             > .mx-navbar-item > a:focus,
-             > .mx-navbar-item.active a,
-             > .mx-navbar-item.open > a,
-             > .mx-navbar-item.open > a:hover,
-             > .mx-navbar-item.open > a:focus {
+            & > .mx-navbar-item > a:hover,
+            & > .mx-navbar-item > a:focus,
+            & > .mx-navbar-item.active a,
+            & > .mx-navbar-item.open > a,
+            & > .mx-navbar-item.open > a:hover,
+            & > .mx-navbar-item.open > a:focus {
                 color: $navtopbar-color-hover;
                 background-color: $navtopbar-bg-hover;
                 .caret {
@@ -188,7 +188,7 @@
                     border-bottom-color: $navtopbar-color-hover;
                 }
             }
-             > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
+            & > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
                 color: $navtopbar-sub-color-active;
                 background-color: $navtopbar-sub-bg-active;
                 .caret {
@@ -202,7 +202,7 @@
             }
             .mx-navbar-item.open .dropdown-menu {
                 background-color: $navtopbar-sub-bg;
-                 > li.mx-navbar-subitem > a {
+                & > li.mx-navbar-subitem > a {
                     color: $navtopbar-sub-color;
                     font-size: $navtopbar-sub-font-size;
                     &:hover,
@@ -226,7 +226,7 @@
         background-color: $navsidebar-bg;
         ul.nav {
             /* Navigation item */
-             > li.mx-navbar-item > a {
+            & > li.mx-navbar-item > a {
                 color: $navsidebar-color;
                 font-size: $navsidebar-font-size;
 
@@ -262,12 +262,12 @@
             }
 
             /* When hovering or the dropdown is open */
-             > .mx-navbar-item > a:hover,
-             > .mx-navbar-item > a:focus,
-             > .mx-navbar-item.active a,
-             > .mx-navbar-item.open > a,
-             > .mx-navbar-item.open > a:hover,
-             > .mx-navbar-item.open > a:focus {
+            & > .mx-navbar-item > a:hover,
+            & > .mx-navbar-item > a:focus,
+            & > .mx-navbar-item.active a,
+            & > .mx-navbar-item.open > a,
+            & > .mx-navbar-item.open > a:hover,
+            & > .mx-navbar-item.open > a:focus {
                 color: $navsidebar-color-hover;
                 background-color: $navsidebar-bg-hover;
                 .caret {
@@ -275,7 +275,7 @@
                     border-bottom-color: $navsidebar-color-hover;
                 }
             }
-             > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
+            & > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
                 color: $navsidebar-sub-color-active;
                 background-color: $navsidebar-sub-bg-active;
                 .caret {
@@ -289,7 +289,7 @@
             }
             .mx-navbar-item.open .dropdown-menu {
                 background-color: $navtopbar-sub-bg;
-                 > li.mx-navbar-subitem > a {
+                & > li.mx-navbar-subitem > a {
                     color: $navsidebar-sub-color;
                     font-size: $navsidebar-sub-font-size;
                     &:hover,
