@@ -57,10 +57,14 @@
         }
 
         .mx-scrollcontainer-wrapper > .mx-navigationtree {
-            ul li {
-                a {
+            .navbar-inner > ul > li {
+                & > a {
+                    height: $sidebar-width;
                     // Glyph icon
                     .glyphicon {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                         width: 40px;
                         height: 40px;
                         margin-left: -5px;
