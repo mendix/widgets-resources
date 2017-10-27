@@ -2979,27 +2979,17 @@ img.img-center,
   margin-right: 0.5em;
 }
 .mx-navbar ul.nav > li.mx-navbar-item > a .glyphicon {
-  top: -1px;
+  top: 0;
   margin-right: 0.5em;
   vertical-align: middle;
   font-size: 20px;
 }
-.mx-navbar ul.nav > .mx-navbar-item > a:hover,
-.mx-navbar ul.nav > .mx-navbar-item > a:focus,
-.mx-navbar ul.nav > .mx-navbar-item.active a,
-.mx-navbar ul.nav > .mx-navbar-item.open > a,
-.mx-navbar ul.nav > .mx-navbar-item.open > a:hover,
-.mx-navbar ul.nav > .mx-navbar-item.open > a:focus {
+.mx-navbar ul.nav > .mx-navbar-item > a:hover, .mx-navbar ul.nav > .mx-navbar-item > a:focus, .mx-navbar ul.nav > .mx-navbar-item.active a, .mx-navbar ul.nav > .mx-navbar-item.open > a, .mx-navbar ul.nav > .mx-navbar-item.open > a:hover, .mx-navbar ul.nav > .mx-navbar-item.open > a:focus {
   text-decoration: none;
   color: #FFF;
   background-color: #2d3642;
 }
-.mx-navbar ul.nav > .mx-navbar-item > a:hover .caret,
-.mx-navbar ul.nav > .mx-navbar-item > a:focus .caret,
-.mx-navbar ul.nav > .mx-navbar-item.active a .caret,
-.mx-navbar ul.nav > .mx-navbar-item.open > a .caret,
-.mx-navbar ul.nav > .mx-navbar-item.open > a:hover .caret,
-.mx-navbar ul.nav > .mx-navbar-item.open > a:focus .caret {
+.mx-navbar ul.nav > .mx-navbar-item > a:hover .caret, .mx-navbar ul.nav > .mx-navbar-item > a:focus .caret, .mx-navbar ul.nav > .mx-navbar-item.active a .caret, .mx-navbar ul.nav > .mx-navbar-item.open > a .caret, .mx-navbar ul.nav > .mx-navbar-item.open > a:hover .caret, .mx-navbar ul.nav > .mx-navbar-item.open > a:focus .caret {
   border-top-color: #FFF;
   border-bottom-color: #FFF;
 }
@@ -3075,21 +3065,11 @@ img.img-center,
 .region-topbar .mx-navbar ul.nav > li.mx-navbar-item > a .glyphicon {
   font-size: 1.2em;
 }
-.region-topbar .mx-navbar ul.nav > .mx-navbar-item > a:hover,
-.region-topbar .mx-navbar ul.nav > .mx-navbar-item > a:focus,
-.region-topbar .mx-navbar ul.nav > .mx-navbar-item.active a,
-.region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a,
-.region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a:hover,
-.region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a:focus {
+.region-topbar .mx-navbar ul.nav > .mx-navbar-item > a:hover, .region-topbar .mx-navbar ul.nav > .mx-navbar-item > a:focus, .region-topbar .mx-navbar ul.nav > .mx-navbar-item.active a, .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a, .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a:hover, .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a:focus {
   color: #555555;
   background-color: whitesmoke;
 }
-.region-topbar .mx-navbar ul.nav > .mx-navbar-item > a:hover .caret,
-.region-topbar .mx-navbar ul.nav > .mx-navbar-item > a:focus .caret,
-.region-topbar .mx-navbar ul.nav > .mx-navbar-item.active a .caret,
-.region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a .caret,
-.region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a:hover .caret,
-.region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a:focus .caret {
+.region-topbar .mx-navbar ul.nav > .mx-navbar-item > a:hover .caret, .region-topbar .mx-navbar ul.nav > .mx-navbar-item > a:focus .caret, .region-topbar .mx-navbar ul.nav > .mx-navbar-item.active a .caret, .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a .caret, .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a:hover .caret, .region-topbar .mx-navbar ul.nav > .mx-navbar-item.open > a:focus .caret {
   border-top-color: #555555;
   border-bottom-color: #555555;
 }
@@ -3154,21 +3134,11 @@ img.img-center,
 .region-sidebar .mx-navbar ul.nav > li.mx-navbar-item > a .glyphicon {
   font-size: 20px;
 }
-.region-sidebar .mx-navbar ul.nav > .mx-navbar-item > a:hover,
-.region-sidebar .mx-navbar ul.nav > .mx-navbar-item > a:focus,
-.region-sidebar .mx-navbar ul.nav > .mx-navbar-item.active a,
-.region-sidebar .mx-navbar ul.nav > .mx-navbar-item.open > a,
-.region-sidebar .mx-navbar ul.nav > .mx-navbar-item.open > a:hover,
-.region-sidebar .mx-navbar ul.nav > .mx-navbar-item.open > a:focus {
+.region-sidebar .mx-navbar ul.nav > .mx-navbar-item > a:hover, .region-sidebar .mx-navbar ul.nav > .mx-navbar-item > a:focus, .region-sidebar .mx-navbar ul.nav > .mx-navbar-item.active a, .region-sidebar .mx-navbar ul.nav > .mx-navbar-item.open > a, .region-sidebar .mx-navbar ul.nav > .mx-navbar-item.open > a:hover, .region-sidebar .mx-navbar ul.nav > .mx-navbar-item.open > a:focus {
   color: #FFFFFF;
   background-color: #2d3642;
 }
-.region-sidebar .mx-navbar ul.nav > .mx-navbar-item > a:hover .caret,
-.region-sidebar .mx-navbar ul.nav > .mx-navbar-item > a:focus .caret,
-.region-sidebar .mx-navbar ul.nav > .mx-navbar-item.active a .caret,
-.region-sidebar .mx-navbar ul.nav > .mx-navbar-item.open > a .caret,
-.region-sidebar .mx-navbar ul.nav > .mx-navbar-item.open > a:hover .caret,
-.region-sidebar .mx-navbar ul.nav > .mx-navbar-item.open > a:focus .caret {
+.region-sidebar .mx-navbar ul.nav > .mx-navbar-item > a:hover .caret, .region-sidebar .mx-navbar ul.nav > .mx-navbar-item > a:focus .caret, .region-sidebar .mx-navbar ul.nav > .mx-navbar-item.active a .caret, .region-sidebar .mx-navbar ul.nav > .mx-navbar-item.open > a .caret, .region-sidebar .mx-navbar ul.nav > .mx-navbar-item.open > a:hover .caret, .region-sidebar .mx-navbar ul.nav > .mx-navbar-item.open > a:focus .caret {
   border-top-color: #FFFFFF;
   border-bottom-color: #FFFFFF;
 }
@@ -5381,14 +5351,20 @@ h6,
   border-radius: 0;
   background: transparent;
 }
-.layout-atlas-responsive-default .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li a .glyphicon {
+.layout-atlas-responsive-default .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree .navbar-inner > ul > li > a {
+  height: 60px;
+}
+.layout-atlas-responsive-default .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree .navbar-inner > ul > li > a .glyphicon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 40px;
   height: 40px;
   margin-left: -5px;
   padding: 10px;
   border-radius: 3px;
 }
-.layout-atlas-responsive-default .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li a.active .glyphicon {
+.layout-atlas-responsive-default .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree .navbar-inner > ul > li > a.active .glyphicon {
   background: #0595DB;
 }
 
