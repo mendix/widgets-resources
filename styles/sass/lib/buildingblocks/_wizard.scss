@@ -34,7 +34,7 @@ $wizard-step-height: 50px;
 
 
     // States
-    .wizard-step--active {
+    .wizard-step-active {
         .wizard-step-number {
             color: #FFFFFF;
             border-color: $brand-primary;
@@ -44,7 +44,7 @@ $wizard-step-height: 50px;
             color: $brand-primary;
         }
     }
-    .wizard-step--visited {
+    .wizard-step-visited {
         .wizard-step-number {
             color: #FFFFFF;
             border-color: $brand-success;
@@ -119,7 +119,7 @@ $wizard-step-height: 50px;
         }
     }
     // States
-    .wizard-step--active {
+    .wizard-step-active {
         background: $brand-primary;
         a {
             text-decoration: none;
@@ -129,7 +129,7 @@ $wizard-step-height: 50px;
             border-left-color: $brand-primary;
         }
     }
-    .wizard-step--visited {
+    .wizard-step-visited {
         a {
             color: $link-color;
         }
