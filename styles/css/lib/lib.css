@@ -4510,7 +4510,7 @@ h6,
 .flexcontainer .flexitem:last-child {
   margin-right: 0;
 }
-.flexcontainer .flexitem--main {
+.flexcontainer .flexitem-main {
   overflow: hidden;
   flex: 1;
 }
@@ -5096,15 +5096,15 @@ h6,
   display: block;
   margin-top: 15px;
 }
-.wizard .wizard-step--active .wizard-step-number {
+.wizard .wizard-step-active .wizard-step-number {
   color: #FFFFFF;
   border-color: #0595DB;
   background-color: #0595DB;
 }
-.wizard .wizard-step--active .wizard-step-text {
+.wizard .wizard-step-active .wizard-step-text {
   color: #0595DB;
 }
-.wizard .wizard-step--visited .wizard-step-number {
+.wizard .wizard-step-visited .wizard-step-number {
   color: #FFFFFF;
   border-color: #76CA02;
   background-color: #76CA02;
@@ -5167,17 +5167,17 @@ h6,
 .wizardprogress .wizard-step:last-child::before, .wizardprogress .wizard-step:last-child::after {
   display: none;
 }
-.wizardprogress .wizard-step--active {
+.wizardprogress .wizard-step-active {
   background: #0595DB;
 }
-.wizardprogress .wizard-step--active a {
+.wizardprogress .wizard-step-active a {
   text-decoration: none;
   color: #FFFFFF;
 }
-.wizardprogress .wizard-step--active::after {
+.wizardprogress .wizard-step-active::after {
   border-left-color: #0595DB;
 }
-.wizardprogress .wizard-step--visited a {
+.wizardprogress .wizard-step-visited a {
   color: #0595DB;
 }
 
