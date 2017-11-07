@@ -4550,11 +4550,11 @@ h6,
   color: #888888;
 }
 
-.breadcrumb--large {
+.breadcrumb-large {
   font-size: 24px;
 }
 
-.breadcrumb--underline {
+.breadcrumb-underline {
   padding-bottom: 15px;
   border-bottom: 1px solid #D7D7D7;
 }
