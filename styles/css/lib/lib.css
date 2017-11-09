@@ -4757,7 +4757,7 @@ h6,
   object-fit: cover;
 }
 .cardproduct3 .cardproduct-header .cardproduct-overlay {
-  height: 100px;
+  min-height: 100px;
   padding: 30px;
   background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(250, 250, 250, 0) 8%, rgba(0, 0, 0, 0.99) 121%, black 100%);
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(250, 250, 250, 0) 8%, rgba(0, 0, 0, 0.99) 121%, black 100%);
