@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Login</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css?{{cachebust}}">
+        <link rel="stylesheet" href="styles/login.css?{{cachebust}}">
+    </head>
+    <body>
+        <div class="login-container">
+            <form id="loginForm" class="login-form">
+                <div class="login-logo"></div>
+                <a id="ssoButton" href="/openid/login" class="login-sso-button btn btn-primary">Sign in with your Mendix account</a>
+
+                <label class="login-or-label">&ndash; or &ndash; </label>
+
+                <div class="login-form-inputs well">
+                    <label class="login-local-label">Sign in with a local account</label>
+                    <div id="loginMessage" class="alert alert-danger login-message"></div>
+
+                    <div class="form-group">
+                        <label id="usernameLabel" for="usernameInput">User name</label>
+                        <input id="usernameInput" class="form-control" type="text" placeholder="User name" autocorrect="off" autocapitalize="none">
+                    </div>
+                    <div class="form-group">
+                        <label id="passwordLabel" for="passwordInput">Password</label>
+                        <input id="passwordInput" class="form-control" type="password" placeholder="Password" autocorrect="off" autocapitalize="none">
+                    </div>
+                    <button id="loginButton" type="submit" class="btn btn-primary">Sign in</button>
+                </div>
+            </form>
+        </div>
+
+        <script src="js/login_i18n.js?{{cachebust}}"></script>
+        <script src="js/login.js?{{cachebust}}"></script>
+    </body>
+</html>
