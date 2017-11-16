@@ -37,14 +37,18 @@
         box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
 
         &::before {
-            position: absolute;
             z-index: 1;
-            top: 0;
             display: block;
             width: 100%;
-            height: 5px;
+            height: 4px;
             content: "";
             background-color: $brand-primary;
+        }
+        // Topbar Content
+        .topbar-content {
+            display: flex;
+            align-items: center;
+            min-height: $topbar-minimalheight;
         }
 
         // Toggle btn
@@ -56,10 +60,11 @@
         // For your company, product, or project name
         .navbar-brand {
             display: inline-block;
+            // reset bootstrap
             float: none;
-            min-height: $topbar-minimalheight;
+            height: auto;
             padding: 0;
-            line-height: $topbar-minimalheight;
+            line-height: inherit;
 
             img {
                 display: inline-block;
@@ -90,8 +95,9 @@
         }
 
         .mx-navbar {
-            float: right;
-            min-height: $topbar-minimalheight;
+            display: inline-block;
+            margin-left: $gutter-size;
+            vertical-align: middle;
             background: transparent;
 
             & > .mx-navbar-item {
