@@ -1,5 +1,7 @@
 @mixin get-responsive-spacing-large ($type: padding, $direction: all, $is_important: false) {
     $suffix: "";
+    $dash: "-"; // Needed for the Gonzales PE version: 3.4.7 compiler (used by the Webmodeler)
+    
     @if $is_important != false {
         $suffix: " !important";
     }
@@ -15,19 +17,21 @@
         }
     } @else {
         @media (max-width: $screen-xs-max) {
-            #{$type}-#{$direction}: #{$m-spacing-large}#{$suffix};
+            #{$type}#{$dash}#{$direction}: #{$m-spacing-large}#{$suffix};
         }
         @media (min-width: $screen-sm) {
-            #{$type}-#{$direction}: #{$t-spacing-large}#{$suffix};
+            #{$type}#{$dash}#{$direction}: #{$t-spacing-large}#{$suffix};
         }
         @media (min-width: $screen-md) {
-            #{$type}-#{$direction}: #{$spacing-large}#{$suffix};
+            #{$type}#{$dash}#{$direction}: #{$spacing-large}#{$suffix};
         }
     }
 }
 
 @mixin get-responsive-spacing-medium ($type: padding, $direction: all, $is_important: false) {
     $suffix: "";
+    $dash: "-"; // Needed for the Gonzales PE version: 3.4.7 compiler (used by the Webmodeler)
+    
     @if $is_important != false {
         $suffix: " !important";
     }
@@ -43,13 +47,13 @@
         }
     } @else {
         @media (max-width: $screen-xs-max) {
-            #{$type}-#{$direction}: #{$m-spacing-medium}#{$suffix};
+            #{$type}#{$dash}#{$direction}: #{$m-spacing-medium}#{$suffix};
         }
         @media (min-width: $screen-sm) {
-            #{$type}-#{$direction}: #{$t-spacing-medium}#{$suffix};
+            #{$type}#{$dash}#{$direction}: #{$t-spacing-medium}#{$suffix};
         }
         @media (min-width: $screen-md) {
-            #{$type}-#{$direction}: #{$spacing-medium}#{$suffix};
+            #{$type}#{$dash}#{$direction}: #{$spacing-medium}#{$suffix};
         }
     }
 }
