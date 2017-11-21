@@ -35,11 +35,13 @@
         }
     }
 
-    .mx-header-left {
-        justify-content: flex-start;
+    div.mx-header-left .mx-placeholder {
         order: 1;
+        .mx-placeholder {
+            justify-content: flex-start;
+        }
     }
-    .mx-header-center {
+    div.mx-header-center {
         overflow: hidden;
         flex: 1;
         order: 2;
@@ -55,9 +57,11 @@
             line-height: $m-header-height;
         }
     }
-    .mx-header-right {
-        justify-content: flex-end;
+    div.mx-header-right {
         order: 3;
+        .mx-placeholder {
+            justify-content: flex-end;
+        }
     }
 
     // Content magic 

@@ -1184,17 +1184,19 @@ select.form-control {
   align-items: center;
   height: 100%;
 }
-.mx-header .mx-header-left {
-  justify-content: flex-start;
+.mx-header div.mx-header-left .mx-placeholder {
   order: 1;
 }
-.mx-header .mx-header-center {
+.mx-header div.mx-header-left .mx-placeholder .mx-placeholder {
+  justify-content: flex-start;
+}
+.mx-header div.mx-header-center {
   overflow: hidden;
   flex: 1;
   order: 2;
   text-align: center;
 }
-.mx-header .mx-header-center .mx-title {
+.mx-header div.mx-header-center .mx-title {
   overflow: hidden;
   width: 100%;
   margin: 0;
@@ -1203,9 +1205,11 @@ select.form-control {
   font-size: 17px;
   line-height: 45px;
 }
-.mx-header .mx-header-right {
-  justify-content: flex-end;
+.mx-header div.mx-header-right {
   order: 3;
+}
+.mx-header div.mx-header-right .mx-placeholder {
+  justify-content: flex-end;
 }
 .mx-header .mx-link {
   display: flex;
