@@ -5279,13 +5279,8 @@ h6,
 }
 .layout-atlas .region-topbar .navbar-brand img {
   display: inline-block;
-  width: 0;
-  height: 0;
-  padding: 15px 15px;
-  background-image: url("../../../logo.png");
-  background-repeat: no-repeat;
-  background-position: left center;
-  background-size: 30px;
+  width: auto;
+  height: 30px;
 }
 .layout-atlas .region-topbar .navbar-brand a {
   margin-left: 5px;
