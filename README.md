@@ -1,35 +1,54 @@
 # Mendix Atlas UI
-Mendix Atlas UI it base of your app to quickly create a beautiful app with Mendix. For more information about the framework go [here](https://atlas.mendix.com/).
+Mendix Atlas UI is the foundation of making beautiful apps with Mendix. For more information about the framework go [here](https://atlas.mendix.com/).
 
 ### Theme folder structure
-The theme folder consists of the default HTML pages, Sass, CSS and resources needed to style your application.
+The theme folder contains the default HTML pages, Sass, CSS and resources needed to style your application.
 
-#### Styles / Sass
-In the Sass folder you will notice two main folders, custom and library. The library folder houses the complete Mendix UI Framework and the custom folder is a duplication of the library folder. We advice to do *all customization* in the custom folder.
+#### Workflow
+In the Sass folder you will notice two main folders, custom and lib. The lib folder houses the complete Mendix UI Framework. The custom folder is where we recommend doing *all customizations*. This will making updating to the new framework easier.
 
-##### Library Folder
-We created a framework so our users have a clear understanding what Mendix is capable of. The library folder structure is as follows:
+##### Structure
+Mendix is capable of creating beautiful and user-friendly UI. Our Atlas UI framework demonstrates some of its possibilities. Here you will find a basic overview of our framework.
 
-- Base
-- Building Blocks
-- Components
-- Custom Widgets
-- Layouts
+```
+theme/
+├── styles/
+|   ├── css/
+|   │   ├── * all output files
+|   └── sass/
+|       ├── custom/
+|       |   ├── _custom-variable.scss
+|       |   ├── custom.scss
+|       ├── lib/
+|           ├── base/
+|           ├── buildinblocks/
+|           ├── components/
+|           ├── customwidgets/
+|           ├── layouts/
+|           ├── _variable.scss
+|           ├── lib.scss
+|
+├── * index files
+├── * assets
+```
 
 ###### Base
-The base folder holds the *architecture* for our framework. Here we have our *mixins*, *variables* and *resets*. The variables is what makes our framework, which holds all global variables for the project (for typography, color schemes, and so on).
+The base folder contains the *architecture* for our framework. Here you will find our *mixins* and *resets*.
 
 ###### Components
-This directory contains all kind of basic components like a datagrid, buttons, label, form, listview, or anything along those lines. They have distinct properties and can't be broken down further without losing their meaning.
+This directory contains the styling of all kinds of basic components like the datagrid, buttons, label, form, listview, and anything along those lines. They have distinct properties and can't be broken down further without losing their meaning.
 
 ###### Custom Widgets
-This directory contain custom widgets that are included from the Mendix App Store.
+This directory contains any extra styling that might be needed for custom widgets downloaded from the Mendix App Store.
 
 ###### Building Blocks
-Building blocks are combined components/widgets. For example *cards* or *headers* are building blocks. A building block could be an image, title and a button built together.
+Building blocks are made up of components and widgets. For example *cards* or *headers* are building blocks. A building block could be an image, a title, and a button, assembled together into one UI block.
 
 ###### Layouts
 The layout directory contains some styles for the main sections of the layout (topbar, sidebar, footer and so on).
+
+##### Variable.scss
+This file contains the style settings that are used across the project, allowing for consistent typography, color schemes, etc.
 
 ### License
 
