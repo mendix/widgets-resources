@@ -47,7 +47,7 @@ Building blocks are made up of components and widgets. For example *cards* or *h
 ###### Layouts
 The layout directory contains some styles for the main sections of the layout (topbar, sidebar, footer and so on).
 
-##### Variable.scss
+###### Variable.scss
 This file contains the style settings that are used across the project, allowing for consistent typography, color schemes, etc.
 
 ### License
