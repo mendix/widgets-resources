@@ -148,7 +148,9 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
 
     private setImageUrl(mxObject?: mendix.lib.MxObject) {
         if (mxObject && this.props.source === "urlAttribute") {
-            this.setState({ imageUrl: mxObject.get(this.props.dynamicUrlAttribute) as string });
+            mxObject.fetch(this.props.dynamicUrlAttribute, (imageUrl: string) => {
+                this.setState({ imageUrl });
+            });
         } else if (mxObject && this.props.source === "systemImage") {
             const url = mx.data.getDocumentUrl(mxObject.getGuid(), mxObject.get("changedDate") as number);
             mx.data.getImageUrl(url,
