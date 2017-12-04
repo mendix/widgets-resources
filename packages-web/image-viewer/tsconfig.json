@@ -7,11 +7,8 @@
     "sourceMap": true,
     "module": "amd",
     "target": "es5",
-    "types": [
-      "mendix-client",
-      "jasmine",
-      "core-js"
-    ],
+    "lib": [ "es2015", "dom" ],
+    "types": [ "mendix-client", "jasmine", "core-js" ],
     "moduleResolution": "node",
     "declaration": false,
     "removeComments": true,
@@ -19,11 +16,10 @@
     "watch": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
+    "alwaysStrict": true,
+    "skipLibCheck": false,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "strict": true,
-    "skipLibCheck": false
+    "noUnusedParameters": true
   },
   "exclude": [
     "dist/",
