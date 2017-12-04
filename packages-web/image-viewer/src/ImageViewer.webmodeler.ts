@@ -1,4 +1,4 @@
-import { Component, DOM, createElement } from "react";
+import { Component, createElement } from "react";
 import { ImageViewer, ImageViewerProps } from "./components/ImageViewer";
 import ImageViewerContainer, { ImageViewerContainerProps } from "./components/ImageViewerContainer";
 import { Alert } from "./components/Alert";
@@ -20,7 +20,7 @@ export class preview extends Component<ImageViewerContainerProps, {}> {
         if (!message) {
             return createElement(ImageViewer, this.transformProps(this.props));
         } else {
-            return DOM.div({},
+            return createElement("div", {},
                 createElement(Alert, { className: "widget-image-viewer-alert-danger", message }),
                 createElement(ImageViewer, this.transformProps(this.props))
             );

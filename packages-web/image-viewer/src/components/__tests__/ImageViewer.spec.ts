@@ -1,5 +1,5 @@
 import { ShallowWrapper, shallow } from "enzyme";
-import { DOM, createElement } from "react";
+import { createElement } from "react";
 
 import * as Lightbox from "react-image-lightbox";
 import { ImageViewer, ImageViewerProps, ImageViewerState } from "../ImageViewer";
@@ -34,8 +34,8 @@ describe("ImageViewer", () => {
         imageViewer = renderImageViewer(imageViewerProps);
 
         expect(imageViewer).toBeElement(
-            DOM.div({ className: "widget-image-viewer widget-image-viewer-responsive" },
-                DOM.img({
+            createElement("div", { className: "widget-image-viewer widget-image-viewer-responsive" },
+                createElement("img", {
                     onClick: jasmine.any(Function) as any,
                     src: imageUrl,
                     style
@@ -86,8 +86,8 @@ describe("ImageViewer", () => {
             imageViewer = renderImageViewer(imageViewerProps);
 
             expect(imageViewer).toBeElement(
-                DOM.div({ className: "widget-image-viewer widget-image-viewer-responsive" },
-                    DOM.img({
+                createElement("div", { className: "widget-image-viewer widget-image-viewer-responsive" },
+                    createElement("img", {
                         onClick: jasmine.any(Function) as any,
                         src: imageUrl,
                         style: { height: 300 , width: "50%" }
@@ -106,8 +106,8 @@ describe("ImageViewer", () => {
             imageViewer = renderImageViewer(imageViewerProps);
 
             expect(imageViewer).toBeElement(
-                DOM.div({ className: "widget-image-viewer widget-image-viewer-responsive" },
-                    DOM.img({
+                createElement("div", { className: "widget-image-viewer widget-image-viewer-responsive" },
+                    createElement("img", {
                         onClick: jasmine.any(Function) as any,
                         src: imageUrl,
                         style: { height: "", width: "" }
