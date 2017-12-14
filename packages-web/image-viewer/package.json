@@ -101,7 +101,6 @@
     "webpack-merge": "^4.1.1"
   },
   "dependencies": {
-    "@types/webdriverio": "^4.8.6",
     "classnames": "^2.2.5",
     "jasmine-core": "^2.8.0",
     "react-image-lightbox": "^4.1.0"
