@@ -12,7 +12,7 @@
     "eofline": true,
     "indent": [
       true,
-      "tab"
+      "spaces"
     ],
     "member-ordering": [
       true,
