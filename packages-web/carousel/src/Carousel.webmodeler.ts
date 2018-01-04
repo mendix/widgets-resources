@@ -45,7 +45,7 @@ export function getVisibleProperties(props: CarouselContainerProps, visibilityMa
         visibilityMap.dataSourceMicroflow = false;
     } else if (props.dataSource === "microflow") {
         visibilityMap.staticImages = false;
-        visibilityMap.imagesEntity = false;
+        visibilityMap.imagesEntity = true;
         visibilityMap.entityConstraint = false;
     }
 

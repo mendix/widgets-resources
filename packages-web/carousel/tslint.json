@@ -18,6 +18,7 @@
         "no-internal-module": true,
         "no-shadowed-variable": true,
         "no-switch-case-fall-through": true,
+        "no-implicit-dependencies": false,
         "no-trailing-whitespace": true,
         "no-unused-expression": true,
         "no-var-keyword": true,
@@ -84,7 +85,8 @@
             }
         ],
         "curly": false,
-        "arrow-parens": false
+        "arrow-parens": false,
+        "max-line-length": false
     },
     "jsRules": {
         "trailing-comma": [ false ],

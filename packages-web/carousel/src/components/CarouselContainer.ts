@@ -1,10 +1,12 @@
 import { Component, createElement } from "react";
+import { findDOMNode } from "react-dom";
+
 import { Carousel, Image } from "./Carousel";
 import { Alert } from "./Alert";
 import { UrlHelper } from "../UrlHelper";
 
 interface WrapperProps {
-    class?: string;
+    "class"?: string;
     mxform: mxui.lib.form._FormBase;
     mxObject?: mendix.lib.MxObject;
     style?: string;
@@ -35,6 +37,7 @@ type ClickOptions = "doNothing" | "callMicroflow" | "showPage";
 export default class CarouselContainer extends Component<CarouselContainerProps, CarouselContainerState> {
     private subscriptionHandle: number;
     private subscriptionCallback: (mxObject: mendix.lib.MxObject) => () => void;
+    private widgetId?: string;
 
     constructor(props: CarouselContainerProps) {
         super(props);
@@ -76,9 +79,20 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
     }
 
     componentWillReceiveProps(nextProps: CarouselContainerProps) {
+        if (!this.widgetId) {
+            const domNode = findDOMNode(this);
+            this.widgetId = domNode.getAttribute("widgetId") || undefined;
+        }
         this.resetSubscription(nextProps.mxObject);
         this.setState({ isLoading: true });
         this.fetchData(nextProps.mxObject);
+    }
+
+    componentDidUpdate() {
+        if (this.widgetId) {
+            const domNode = findDOMNode(this);
+            domNode.setAttribute("widgetId", this.widgetId);
+        }
     }
 
     componentWillUnmount() {

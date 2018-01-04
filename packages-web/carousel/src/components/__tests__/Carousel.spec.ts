@@ -30,7 +30,7 @@ describe("Carousel", () => {
     });
 
     describe("with no images", () => {
-        beforeEach(() => carousel = shallow(createElement(Carousel)) );
+        beforeEach(() => carousel = shallow(createElement(Carousel)));
 
         it("renders no carousel items", () => {
             const carouselItems = carousel.find(CarouselItem);

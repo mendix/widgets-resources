@@ -1,5 +1,5 @@
 {
-   "compilerOptions": {
+    "compilerOptions": {
       "baseUrl": ".",
       "rootDir": "./",
       "outDir": "dist/tsc/",
@@ -7,6 +7,7 @@
       "sourceMap": true,
       "module": "amd",
       "target": "es5",
+      "lib": [ "es2015", "dom" ],
       "types": [ "mendix-client", "jasmine", "core-js" ],
       "moduleResolution": "node",
       "declaration": false,
@@ -21,9 +22,9 @@
       "skipLibCheck": true,
       "strictNullChecks": true,
       "noUnusedLocals": true
-   },
-   "exclude": [
+    },
+    "exclude": [
       "dist/",
       "node_modules/"
-   ]
-}
+    ]
+  }
