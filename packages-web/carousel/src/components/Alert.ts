@@ -4,7 +4,7 @@ import * as classNames from "classnames";
 export interface AlertProps {
     message?: string;
     className?: string;
-    bootstrapStyle: "default" | "primary" | "success" | "info" | "warning" | "danger";
+    bootstrapStyle: "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
 }
 
 export const Alert: SFC<AlertProps> = ({ className, bootstrapStyle, message }) =>
