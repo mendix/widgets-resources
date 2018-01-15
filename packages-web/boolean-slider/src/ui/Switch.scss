@@ -218,26 +218,24 @@ html {
     }
 }
 
-.form-horizontal {
-    &.widget-switch-label {
-        .form-group {
-            .widget-switch {
-                float: left;
-                @include dynamic-float(320px, 736px, right);
-                @include dynamic-float(768px, 1024px, right);
-            }
-
-            .control-label {
-                float: right;
-                padding-top: 8px;
-                padding-bottom: 8px;
-                @include dynamic-float(320px, 736px, left);
-                @include dynamic-float(768px, 1024px, left);
-            }
+.widget-switch-label {
+    .form-group {
+        .widget-switch {
+            float: left;
+            @include dynamic-float(320px, 736px, right);
+            @include dynamic-float(768px, 1024px, right);
         }
 
-        @include android-label-padding;
+        .control-label {
+            float: right;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            @include dynamic-float(320px, 736px, left);
+            @include dynamic-float(768px, 1024px, left);
+        }
     }
+
+    @include android-label-padding;
 }
 
 .mx-table {
