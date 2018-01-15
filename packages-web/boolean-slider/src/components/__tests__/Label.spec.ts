@@ -11,7 +11,7 @@ describe("Label", () => {
         const labelComponent = renderLabel({ label });
 
         expect(labelComponent).toBeElement(
-            createElement("div", { className: "form-horizontal widget-switch-label" },
+            createElement("div", { className: "widget-switch-label" },
                 createElement("div", { className: "form-group" },
                     createElement("div", { className: "col-sm-6 col-xs-6" },
                         createElement("label", { className: "control-label" }, label)
