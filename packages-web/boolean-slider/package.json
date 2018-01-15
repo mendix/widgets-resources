@@ -4,7 +4,7 @@
   "version": "2.0.1",
   "description": "Toggle a boolean attribute",
   "scripts": {
-    "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec \"grunt",
+    "start": "grunt",
     "emit": "tsc",
     "pretest": "tsc && npm run lint && npm run build",
     "test": "npm run test:unit && npm run test:conditional",
@@ -15,7 +15,7 @@
     "test:e2e": "tsc -p ./tests/e2e/tsconfig.json && wdio ./tests/e2e/wdio.conf.js",
     "test:e2e:dev": "tsc -p ./tests/e2e/tsconfig.json && set DEBUG=true&& wdio ./tests/e2e/wdio.conf.js",
     "lint": "tslint -c tslint.json '**/*.ts' --exclude '**/node_modules/**'",
-    "lint:fix": "npm run lint -- --fix",
+    "lint:fix": "npm run lint --fix",
     "deploy": "npm run updateProject && npm run deployApp",
     "build": "grunt release",
     "updateProject": "node ./node_modules/mendix-widget-build-script/dist/UpdateMxProject.js",
