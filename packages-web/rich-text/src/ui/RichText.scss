@@ -69,6 +69,12 @@
     }
 
     &.disabled-text {
+        .ql-editor{
+            padding: 0;
+        }
+    }
+
+    &.disabled-text {
         p {
             margin-bottom: 0;
         }

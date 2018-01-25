@@ -1,6 +1,7 @@
 import { Component, ReactNode, createElement } from "react";
 import * as classNames from "classnames";
 
+import { Alert } from "./Alert";
 import * as Quill from "quill";
 import * as sanitizeHtml from "sanitize-html";
 
@@ -14,6 +15,7 @@ import "../ui/RichText.scss";
 export interface CommonRichTextProps {
     editorOption: EditorOption;
     value: string;
+    sanitizeContent: boolean;
     readOnly: boolean;
     readOnlyStyle: ReadOnlyStyle;
     theme: Theme;
@@ -21,6 +23,7 @@ export interface CommonRichTextProps {
     minNumberOfLines: number;
     maxNumberOfLines: number;
     recreate?: boolean;
+    alertMessage?: string;
 }
 
 export interface RichTextProps extends CommonRichTextProps {
@@ -33,7 +36,7 @@ export interface RichTextProps extends CommonRichTextProps {
 export type EditorOption = "basic" | "extended" | "custom";
 export type Theme = "snow" | "bubble";
 
-export class RichText extends Component<RichTextProps, {}> {
+export class RichText extends Component<RichTextProps> {
     private richTextNode?: HTMLElement;
     private quillNode?: HTMLElement;
     private quill?: Quill.Quill;
@@ -41,9 +44,7 @@ export class RichText extends Component<RichTextProps, {}> {
     private textChanged = false;
     private undoDefault = "<p><br></p>"; // Text left in editor when ctrl + z clears all content
 
-    constructor(props: RichTextProps) {
-        super(props);
-
+    componentWillMount() {
         this.handleSelectionChange = this.handleSelectionChange.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
         this.setQuillNode = this.setQuillNode.bind(this);
@@ -54,14 +55,19 @@ export class RichText extends Component<RichTextProps, {}> {
         return createElement("div",
             {
                 className: classNames("widget-rich-text", this.props.className, {
+                    "has-error": !!this.props.alertMessage,
                     [ RichText.getReadOnlyClasses(this.props.readOnlyStyle) ]: this.props.readOnly,
-                    "buttons-hidden": this.props.editorOption === "custom" && this.props.customOptions.length === 0
-                }),
+                    "buttons-hidden": this.props.editorOption === "custom" && this.props.customOptions.length === 0,
+                    "ql-snow": this.props.readOnly && this.props.readOnlyStyle === "text"
+                })
+            },
+            createElement("div", {
+                className: this.props.readOnly && this.props.readOnlyStyle === "text" ? "ql-editor" : undefined,
                 dangerouslySetInnerHTML: this.getReadOnlyText(),
                 ref: this.setRichTextNode,
-                style: this.props.style
-            },
-            this.renderQuillNode()
+                style: { whiteSpace: "pre-wrap", ...this.props.style }
+            }, this.renderQuillNode()),
+            this.renderAlertMessage()
         );
     }
 
@@ -101,13 +107,33 @@ export class RichText extends Component<RichTextProps, {}> {
 
     private getReadOnlyText(): { __html: string } | undefined {
         return this.props.readOnly && this.props.readOnlyStyle === "text"
-            ? { __html: sanitizeHtml(this.props.value) }
+            ? { __html: this.sanitize(this.props.value) }
             : undefined;
+    }
+
+    private sanitize(value: string): string {
+        if (this.props.sanitizeContent) {
+            return sanitizeHtml(value, {
+                allowedTags: [ "h1", "h2", "h3", "h4", "h5", "h6", "p", "br", "a", "ul", "li", "ol", "s", "u", "em", "pre", "strong", "blockquote", "span" ],
+                allowedAttributes: {
+                    "*": [ "class", "style" ],
+                    "a": [ "href", "name", "target" ]
+                },
+                allowedSchemes: [ "http", "https", "ftp", "mailto" ]
+            });
+        }
+        return value;
     }
 
     private renderQuillNode(): ReactNode {
         return !(this.props.readOnly && this.props.readOnlyStyle === "text")
             ? createElement("div", { className: "widget-rich-text-quill", ref: this.setQuillNode })
+            : null;
+    }
+
+    private renderAlertMessage(): ReactNode {
+        return !this.props.readOnly
+            ? createElement(Alert, { message: this.props.alertMessage })
             : null;
     }
 
@@ -123,8 +149,9 @@ export class RichText extends Component<RichTextProps, {}> {
         if (this.quillNode && !this.quill) {
             this.quill = new Quill(this.quillNode, {
                 modules: this.getEditorOptions(),
-                theme: props.theme
-            });
+                theme: props.theme,
+                clipboard: { matchVisual: false }
+            } as any);
             this.updateEditor(props);
             this.quill.on("selection-change", this.handleSelectionChange);
             this.quill.on("text-change", this.handleTextChange);
@@ -139,7 +166,7 @@ export class RichText extends Component<RichTextProps, {}> {
     private updateEditor(props: RichTextProps) {
         if (this.quill) {
             this.quill.enable(!props.readOnly);
-            this.quill.clipboard.dangerouslyPasteHTML(props.value);
+            this.quill.clipboard.dangerouslyPasteHTML(this.sanitize(props.value), "silent");
             this.setEditorStyle(props);
         }
     }

@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.richtext.RichText" needsEntityContext="true" offlineCapable="true"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
+<widget id="com.mendix.widget.custom.richtext.RichText" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
     <name>Rich Text</name>
     <description>Rich inline or toolbar text editing</description>
     <icon>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAlVJREFUOBGNkt9LVEEUx8+Z2b3XdlVWoRSthB4s6aG3ikKCfhBR+igUWQ/5UuB7ELIr0l8Q9GRv/QWVRGRJRRC9RFKYksViWhq5qXvv7r1z50xzJpR9MPMLdzic+X7OnDlzceD2zwIKkTdEw6O3dhZgG6pl8EphwVw+11S8/7jUsQ12w7LOYN/N2YIxJn/2eONC74mG+Q3HFsGDF2vtT16vtiHiMLLv/OB7c2+k822kaHULbmPLT4vGa0Mzh8fuHMIUZ8vlMhgAIjL08Nlcy7cfQcbOBKQUNg2gNaGdE+xuzYY9p/YsspcZluAlDEMgbUgT6anPpYYP08tN1Zhw8tNyM38cc4732MNeZliuQKUSQmJPVxqoOeeHZ7rbi9f7u6YzO2SYTsuV3p69Tw905d4EKvk6Obfyca5UKTLDcleIIgXaFTC6r2ffl8SAml0MSlUNrYAGlpZVfOxI2wwDpEHEiogZliugtSXIaJWQDqIk+BXEpbCsUdoRG+TxoOSVZQSnhGCG5Qqg3beDolIYr/2uxGtAIJRO0kqTx6CKY6/O82NLons2Q5IZlpuBED6EkY5WQ1URBmVU0f7Ey/mD1WqSqUZJZuLVdxvrOoGYsp9EgZIZluvA8zIQJaSk+Pus9mS/HCT1TTk/EHYIHEea6uoFRuQwSDFTU6CeY2lbdH3lcn7Sf7HznXPULPY2PBa+h/Q8x0Dq6KUp/pVhbDzcf+F01l2xhtk0fDQedHpeFpjF7qtFM3RjV3Hk7lLHpu5/JNcZPDmwWLBN5e0DDT8fbbHx/1XL/AG5x0zzWC9FvAAAAABJRU5ErkJggg==</icon>
     <properties>
+        <property key="stringAttribute" type="attribute">
+            <caption>Value attribute</caption>
+            <category>Data source</category>
+            <description>Rich text HTML content</description>
+            <attributeTypes>
+                <attributeType name="String"/>
+            </attributeTypes>
+        </property>
+        <property key="sanitizeContent" type="boolean" defaultValue="true">
+            <caption>Sanitize content</caption>
+            <category>Data source</category>
+            <description>The strict sanitize rules will remove all unsupported HTML tags and attributes before displaying.
+WARNING disabling this option is a security risk for XSS attacks</description>
+        </property>
         <property key="theme" type="enumeration" defaultValue="snow">
             <caption>Show as</caption>
             <category>Appearance</category>
-            <description>Display the editor options in a toolbar or a bubble</description>
+            <description>Display the editor formatting options in a toolbar or a bubble when text is selected</description>
             <enumerationValues>
                 <enumerationValue key="snow">Toolbar</enumerationValue>
                 <enumerationValue key="bubble">Bubble</enumerationValue>
@@ -18,7 +30,7 @@
         <property key="editorOption" type="enumeration" defaultValue="basic">
             <caption>Text formatting options</caption>
             <category>Appearance</category>
-            <description>Formatting options shown in the toolbar or bubble</description>
+            <description>Formatting options shown in the toolbar or bubble. More options can be set in the 'Custom options'</description>
             <enumerationValues>
                 <enumerationValue key="basic">Basic</enumerationValue>
                 <enumerationValue key="extended">Extended</enumerationValue>
@@ -52,25 +64,17 @@
         <property key="maxNumberOfLines" type="integer" defaultValue="10">
             <caption>Maximum number of lines</caption>
             <category>Appearance</category>
-            <description>If greater that the minimum, the input will auto grow until the specified lines are reached. When set to 0, the maximum number of lines won't be set.</description>
-        </property>
-        <property key="stringAttribute" type="attribute" required="false">
-            <caption>Value attribute</caption>
-            <category>Data source</category>
-            <description>The attribute that contains the HTML output</description>
-            <attributeTypes>
-                <attributeType name="String"/>
-            </attributeTypes>
+            <description>When greater that the minimum, the input will auto grow, until the specified lines are reached. When set to 0, the maximum number of lines won't be set</description>
         </property>
         <property key="customOptions" type="object" isList="true" required="false">
             <caption>Formatting options</caption>
             <category>Custom options</category>
-            <description>Group the editor options you wish to appear</description>
+            <description>Options when the 'Text formatting options' is set to 'Custom'</description>
             <properties>
                 <property key="option" type="enumeration" defaultValue="bold">
                     <caption>Options</caption>
                     <category>Options</category>
-                    <description>Use the spacer to group the different options</description>
+                    <description>Use the spacer to group the options</description>
                     <enumerationValues>
                         <enumerationValue key="bold">Bold</enumerationValue>
                         <enumerationValue key="italic">Italic</enumerationValue>
@@ -99,7 +103,7 @@
         <property key="onChangeMicroflow" type="microflow" required="false">
             <caption>On change microflow</caption>
             <category>Events</category>
-            <description>Microflow to trigger when the editor is changed</description>
+            <description>Microflow will be triggered when focus is lost and the content has changed</description>
             <returnType type="Void"/>
         </property>
     </properties>
