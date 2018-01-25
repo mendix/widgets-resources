@@ -134,7 +134,10 @@ export function findDifference(expected: ElementStructure | ElementStructure[], 
 
 export function toElementStructure(node: any): ElementStructure | ElementStructure[] {
     if (node == null) return "";
-    if (typeof node === "object" && "nodes" in node) node = node.nodes.length > 1 ? node.nodes : node.nodes[0];
+    if (typeof node === "object" && "nodes" in node) {
+        const nodes = node.getElements();
+        node = nodes.length > 1 ? nodes : node.getElement(0);
+    }
 
     if (Array.isArray(node)) return node.map(n => toElementStructure(n) as ElementStructure);
     if (node instanceof HTMLElement) return domToStructure(node);
@@ -157,9 +160,9 @@ export function toElementStructure(node: any): ElementStructure | ElementStructu
 
         const children = from(domNode.childNodes)
             .filter((child: Node) => child.nodeName !== "#comment")
-            .map(domToStructure);
+            .map(domToStructure as any);
 
-        return { type, props, children };
+        return { type, props, children } as any;
     }
 
     function reactToStructure(child: ReactChild | jasmine.Any): ElementStructure {

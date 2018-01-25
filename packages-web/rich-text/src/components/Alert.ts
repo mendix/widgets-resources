@@ -2,7 +2,7 @@ import { SFC, createElement } from "react";
 import * as classNames from "classnames";
 
 export interface AlertProps {
-    message: string;
+    message?: string;
     className?: string;
 }
 

@@ -96,6 +96,7 @@
     "no-unexpected-multiline": true,
     "no-sparse-arrays": true,
     "no-regex-spaces": true,
+    "no-implicit-dependencies": false,
     "no-invalid-regexp": true,
     "valid-typeof": true,
     "array-bracket-spacing": [
@@ -133,10 +134,7 @@
       }
     ],
     "curly": false,
-    "max-line-length": [
-      true,
-      120
-    ],
+    "max-line-length": false,
     "arrow-parens": false,
     "no-namespace": false,
     "array-type": [ true, "array" ],

@@ -26,6 +26,7 @@ export class preview extends Component<RichTextContainerProps, {}> {
             readOnlyStyle: props.mxObject ? props.readOnlyStyle : "bordered",
             className: props.class,
             style: parseStyle(props.style),
+            sanitizeContent: props.sanitizeContent,
             readOnly: props.editable === "never",
             recreate: true,
             value: `<p>${valueAttribute ? `[${valueAttribute}]` : props.stringAttribute}</p>`,

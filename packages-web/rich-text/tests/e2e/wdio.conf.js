@@ -15,15 +15,15 @@ exports.config = {
     bail: 0,
     screenshotPath: "dist/wdio/",
     baseUrl: debug ? "http://localhost:8080/" : "https://texteditorwidget.mxapps.io/",
-    waitforTimeout: 10000,
+    waitforTimeout: 100000,
     connectionRetryTimeout: 90000,
-    connectionRetryCount: 0,
+    connectionRetryCount: 2,
     services: [ "selenium-standalone" ],
     framework: "jasmine",
     reporters: [ "dot", "spec" ],
     execArgv: debug ? [ "--inspect" ] : undefined,
     jasmineNodeOpts: {
-        defaultTimeoutInterval: debug ? (60 * 60 * 1000) : (10 * 1000),
+        defaultTimeoutInterval: debug ? (60 * 60 * 3000) : (10 * 3000),
         expectationResultHandler: function(passed, assertion) {
             if (passed) {
                 return;

@@ -11,6 +11,7 @@ Rich inline or toolbar text editing
 * HTML output of formatted text
 * Show editor options either on a toolbar or as a bubble
 * Use the custom option to select which editing options you want to show
+* Input and display text is sanitized.
 
 ### Keyboard shortcuts
 * Ctrl + B: Bold
@@ -21,12 +22,12 @@ Rich inline or toolbar text editing
 * Ctrl + C: Copy
 * Ctrl + V: Paste
 * -, space : start list
-* tab: not functional, go to next input field
+* tab: adds a tab to the content, will not move focus to next input
 
 ## Dependencies
-Mendix 7.5.1
+Mendix 7.9
 
-## Demo project
+## Test project
 http://texteditorwidget.mxapps.io
 ![Running rich text toolbar widget](/assets/Demo-Toolbar.png)
 ![Running rich text bubble widget](/assets/Demo-Bubble.png)
@@ -34,14 +35,20 @@ http://texteditorwidget.mxapps.io
 ## Usage
 Place the widget in a data view, list view or template grid with a data source that has a string attribute and select the 'Value attribute' that contains the editable text.
 
+## HTML content
+Please note, that the input and output is sanitized. All unsupported HTML tags and JavaScript is removed for security reasons.
+Supports:
+ * Tags: h1, h2, h3, h4, h5, h6, p, br, a, ul, li, ol, s, u, em, pre, strong, blockquote, span
+ * Attributes:
+   * for all tags: class, style
+   * `a` tag: href, name, target
+ * Schemes: http, https, ftp, mailto
+
+**Please note**: To be fully secure, all user HTML input should be sanitized on the server side too. This could be done with the `XSSSanitize` action found in the Community Commons https://appstore.home.mendix.com/link/app/170/
+When the option 'Sanitize content' is set to 'false' server side sanitating is required before showing any HTML content.
+
 ## Issues, suggestions and feature requests
 We are actively maintaining this widget, please report any issues or suggestion for improvement at https://github.com/mendixlabs/rich-text/issues
-
-### Known issues
-Due to a bug in Mendix 7.6, the React lifecycle method componentWillUnmount is no longer called. 
-This perpetuates events even after the widget has been destroyed, causing a noticeable effect on subsequent editor performance.
-It also prevents the onChange action from being called when a user navigates to a different page.
-This issue shall be fixed in Mendix 7.8
 
 ## Development
 Prerequisite: Install git, node package manager, webpack CLI, grunt CLI, Karma CLI

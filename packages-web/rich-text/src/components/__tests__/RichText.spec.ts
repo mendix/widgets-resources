@@ -1,7 +1,10 @@
 import { ShallowWrapper, mount, shallow } from "enzyme";
 import { createElement } from "react";
 
+import * as classNames from "classnames";
+
 import { RichText, RichTextProps } from "../RichText";
+import { Alert } from "../Alert";
 
 describe("RichText", () => {
     const shallowRenderTextEditor = (props: RichTextProps) => shallow(createElement(RichText, props));
@@ -12,6 +15,7 @@ describe("RichText", () => {
         editorOption: "basic",
         maxNumberOfLines: 10,
         minNumberOfLines: 10,
+        sanitizeContent: false,
         onChange: jasmine.any(Function),
         onBlur: jasmine.any(Function),
         readOnly: false,
@@ -25,8 +29,10 @@ describe("RichText", () => {
             textEditor = shallowRenderTextEditor(defaultProps);
 
             expect(textEditor).toBeElement(
-                createElement("div", { className: "widget-rich-text disabled-bordered" },
-                    createElement("div", { className: "widget-rich-text-quill" })
+                createElement("div", { className: classNames("widget-rich-text disabled-bordered") },
+                    createElement("div", { style: { whiteSpace: "pre-wrap" } },
+                        createElement("div", { className: "widget-rich-text-quill" })
+                    )
                 )
             );
         });
@@ -56,6 +62,27 @@ describe("RichText", () => {
             textEditorInstance.componentDidUpdate(defaultProps);
 
             expect(editorSpy).toHaveBeenCalledTimes(1);
+        });
+
+        it("renders a quill editor with an alert message", () => {
+            const richTextProps: RichTextProps = {
+                ...defaultProps,
+                alertMessage: "Error message",
+                readOnly: false
+            };
+
+            textEditor = shallowRenderTextEditor(richTextProps);
+            expect(textEditor).toBeElement(
+                createElement("div", { className: "widget-rich-text has-error" },
+                    createElement("div", {
+                            style: { whiteSpace: "pre-wrap" },
+                            dangerouslySetInnerHTML: undefined
+                        },
+                        createElement("div", { className: "widget-rich-text-quill" })
+                    ),
+                    createElement(Alert, { message: richTextProps.alertMessage })
+                )
+            );
         });
 
         describe("with editor mode set to", () => {
@@ -100,10 +127,13 @@ describe("RichText", () => {
             textEditor = shallowRenderTextEditor(defaultProps);
 
             expect(textEditor).toBeElement(
-                createElement("div", {
-                    className: "widget-rich-text disabled-text",
-                    dangerouslySetInnerHTML: { __html: defaultProps.value }
-                })
+                createElement("div", { className: "widget-rich-text disabled-text ql-snow" },
+                    createElement("div", {
+                        className: "ql-editor",
+                        style: { whiteSpace: "pre-wrap" },
+                        dangerouslySetInnerHTML: { __html: defaultProps.value }
+                    })
+                )
             );
         });
 
@@ -125,9 +155,10 @@ describe("RichText", () => {
     it("destroys and recreates the editor on update when configured to recreate", () => {
         defaultProps.recreate = true;
         const richText = fullRenderTextEditor(defaultProps);
-        const editorSpy = spyOn(richText.instance() as any, "setUpEditor").and.callThrough();
+        const richTextInstance = richText.instance() as any;
+        const editorSpy = spyOn(richTextInstance, "setUpEditor").and.callThrough();
 
-        richText.update();
+        richTextInstance.componentDidUpdate();
         expect(editorSpy).toHaveBeenCalled();
     });
 

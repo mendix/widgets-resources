@@ -10,6 +10,7 @@ describe("RichText", () => {
         HomePage.textArea2.waitForVisible();
         HomePage.textArea2.click();
         HomePage.textArea2.setValue(testValue);
+        HomePage.textArea3.waitForVisible();
         HomePage.textArea3.click();
 
         const content = HomePage.richText1.getHTML(false);
@@ -21,9 +22,10 @@ describe("RichText", () => {
         HomePage.richText1.waitForVisible();
         HomePage.richText1.click();
         HomePage.richText1.keys(plainValue);
+        const updatedValue = HomePage.richText1.getHTML(false);
         HomePage.textArea2.click();
 
         const content = HomePage.textArea2.getValue();
-        expect(content).toContain(plainValue);
+        expect(content).toContain(updatedValue);
     });
 });
