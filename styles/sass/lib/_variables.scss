@@ -136,8 +136,8 @@ $font-color-detail:                     $gray-light !default;
 //## Used in components/navigation
 
 // Default Navigation styling
-$navigation-item-height:                60px;
-$navigation-item-padding:               5px 15px;
+$navigation-item-height:                60px !default;
+$navigation-item-padding:               5px 15px !default;
 
 $navigation-font-size:                  $font-size-default !default;
 $navigation-sub-font-size:              $font-size-small !default;
