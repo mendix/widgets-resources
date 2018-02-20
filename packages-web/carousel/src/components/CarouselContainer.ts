@@ -201,7 +201,7 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
                 }
             }));
 
-        Promise.all(imagesPromises).then((images: Image[] ) => {
+        Promise.all(imagesPromises).then((images: Image[]) => {
             this.setState({ images, isLoading: false });
         });
     }
