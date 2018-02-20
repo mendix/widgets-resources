@@ -1,7 +1,7 @@
 {
   "name": "carousel",
   "widgetName": "Carousel",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Displays images in a carousel",
   "scripts": {
     "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec \"grunt",
@@ -78,7 +78,7 @@
     "karma-remap-istanbul": "^0.6.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
-    "mendix-client": "https://github.com/FlockOfBirds/Mendix-client-typing/archive/7.1.0.tar.gz",
+    "mendix-client": "https://github.com/FlockOfBirds/Mendix-client-typing/archive/7.3.0.tar.gz",
     "mendix-widget-build-script": "^1.0.0-rc2",
     "node-sass": "^4.5.3",
     "nodemon": "^1.12.1",

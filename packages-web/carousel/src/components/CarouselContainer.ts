@@ -36,6 +36,7 @@ type ClickOptions = "doNothing" | "callMicroflow" | "showPage";
 
 export default class CarouselContainer extends Component<CarouselContainerProps, CarouselContainerState> {
     private subscriptionHandle: number;
+    private xpathUrl: string;
     private subscriptionCallback: (mxObject: mendix.lib.MxObject) => () => void;
     private widgetId?: string;
 
@@ -52,6 +53,7 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
         this.executeAction = this.executeAction.bind(this);
         this.subscriptionCallback = mxObject => () => this.fetchData(mxObject);
         this.onParseStyleError = this.onParseStyleError.bind(this);
+        this.getUrl = this.getUrl.bind(this);
     }
 
     render() {
@@ -133,22 +135,24 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
                 return image;
             });
             this.setState({ images, isLoading: false });
-        } else if (this.props.dataSource === "XPath" && this.props.imagesEntity) {
-            this.fetchImagesByXPath(mxObject ? mxObject.getGuid() : "");
+        } else if (this.props.dataSource === "XPath" && this.props.imagesEntity && mxObject) {
+                this.fetchImagesByXPath(mxObject);
         } else if (this.props.dataSource === "microflow" && this.props.dataSourceMicroflow) {
             this.fetchImagesByMicroflow(this.props.dataSourceMicroflow, mxObject);
         }
     }
 
-    private fetchImagesByXPath(contextGuid: string) {
+    private fetchImagesByXPath(mxObject: mendix.lib.MxObject) {
         const { entityConstraint } = this.props;
         const requiresContext = entityConstraint && entityConstraint.indexOf("[%CurrentObject%]") > -1;
+        const contextGuid = mxObject.getGuid();
         if (!contextGuid && requiresContext) {
             this.setState({ images: [], isLoading: false });
             return;
         }
 
-        const constraint = entityConstraint ? entityConstraint.replace("[%CurrentObject%]", contextGuid) : "";
+        const constraint = entityConstraint ? entityConstraint.replace(/\[%CurrentObject%\]/g, contextGuid) : "";
+
         window.mx.data.get({
             callback: mxObjects => this.setImagesFromMxObjects(mxObjects),
             error: error =>
@@ -180,17 +184,50 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
 
     private setImagesFromMxObjects(mxObjects: mendix.lib.MxObject[]) {
         mxObjects = mxObjects || [];
+        const imagesPromises = mxObjects.map(mxObject =>
+            new Promise((resolve, reject) => {
+                if (this.props.urlAttribute) {
+                    resolve(this.getImageProps(mxObject, mxObject.get(this.props.urlAttribute) as string));
+                } else {
+                    const docURL = mx.data.getDocumentUrl(mxObject.getGuid(), mxObject.get("changedDate") as number);
+                    mx.data.getImageUrl(docURL,
+                        objectUrl => {
+                            resolve(this.getImageProps(mxObject, objectUrl));
+                        },
+                        error => {
+                            reject(`Error in carousel while retrieving image url: ${error.message}`);
+                        }
+                    );
+                }
+            }));
+
+        Promise.all(imagesPromises).then((images: Image[] ) => {
+            this.setState({ images, isLoading: false });
+        });
+    }
+
+    private getImageProps(mxObject: mendix.lib.MxObject, url: string) {
         const { onClickOptions, onClickForm, onClickMicroflow } = this.props;
-        const images = mxObjects.map((mxObject) => ({
+
+        return {
             guid: mxObject.getGuid(),
             onClickForm: onClickOptions === "showPage" ? onClickForm : undefined,
             onClickMicroflow: onClickOptions === "callMicroflow" ? onClickMicroflow : undefined,
-            url: this.props.urlAttribute
-                ? mxObject.get(this.props.urlAttribute) as string
-                : UrlHelper.getDynamicResourceUrl(mxObject.getGuid(), mxObject.get("changedDate") as number)
-        }));
+            url
+        };
+    }
 
-        this.setState({ images, isLoading: false });
+    private getUrl(url: string): string {
+        mx.data.getImageUrl(url,
+            objectUrl => {
+                    this.xpathUrl = objectUrl;
+            },
+            error => this.setState({
+                alertMessage: `Error in imageviewer while retrieving image url: ${error.message}`
+            })
+        );
+
+        return this.xpathUrl;
     }
 
     private executeAction(image: Image) {
