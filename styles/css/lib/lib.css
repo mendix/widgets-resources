@@ -1090,7 +1090,7 @@ select.form-control {
   padding: 7.5px 7.5px 7.5px 7.5px;
 }
 .datagrid-sm.mx-datagrid .mx-datagrid-body-table .mx-datagrid-body tr td {
-  padding: 7.5px 7.5px 7.5px grid-padding-left/2;
+  padding: 7.5px 7.5px 7.5px 7.5px;
 }
 
 .datagrid-fullsearch.mx-grid .mx-grid-reset-button {
