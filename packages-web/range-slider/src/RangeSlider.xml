@@ -2,7 +2,7 @@
 <widget id="com.mendix.widget.custom.RangeSlider.RangeSlider" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/">
     <name>RangeSlider</name>
     <description>Change range of values using a slider</description>
-    <icon>iVBORw0KGgoAAAANSUhEUgAAAA8AAAAKCAYAAABrGwT5AAAAAXNSR0IArs4c6QAAARJJREFUKBVjZMABamtr9ZmZmc3//v17srm5+SI2ZUzYBMvLy/X//PljUV9fPxNEg/jY1GEVKy4uzgDa+P/379//QTSIj00hCzbBHz9+MAJtZPj37x8DExMTA4iPTR2LpqZm+MePH+WQJW/fvm0JtJEBZAALCwsDkO8qJSXFg6yGn5//EYuOjo7oxIkTu5Aljh07xgB0Mljz////GdLS0gKtrKwCkdXk5+fnMubl5fkDQ1USWeLt27eOEyZMCPv16xcDGxsbQ0FBwSphYeH9yGqALnuOzIezPTw88l69evX/8ePH/0E0iA+XRGJgjaoPHz4wgwKKlZUVHGAgPpIeOBNraD969Oi5lpZWGUwVMNCwOhEA7DF7VrZb3vwAAAAASUVORK5CYII=</icon>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAAEvQFx7AAAAMFBMVEUAAAD///9SuP+Pj4+IiIhJsfeIiIhJsfiIiIhJsfeIiIiJiYlIsPiIiIhIsPeIiIhBKPKXAAAADnRSTlMAARkZSWVlvb3IyOPz8+LP6LYAAAE4SURBVEjHY2BAAw/4PzDwv///H8LCCfge8DMw7Hv//wMDD4iFFzC+Y2D43wDSBGJ8QGYwABn9BgwUA77nDIz/GSAm86Mw+P+9+w8EH1CleMEM9kdAZzDQFTDOCQBRUtdgAvPeAYOAgev/f1hgvwML8MME/P8DBf5DwW9sKrAIxIEF2BACIwuwnhQAUbkLYQJ17x4CSY7//wXgIfYSEmILcAUhIYH9yPHyBSjwn5yIwiLwBiJwAS7wFCKQABXQe1cAJJn//2AYBcMHMNW9e/dcAcph7v///wdaqQjM0pCkAAL5oDT2DVXBOZCCN1DOfZCCv6gK3oEBlANJptRUsP8/OAcgZYL/qLnBG7eCLfRyJLTEhWR/EFgPkv+FqkAcpKAQypEAKWhEiy3ROScD4RyxtbcSRxMwiQAA3l9bWaJDdzkAAAAASUVORK5CYII=</icon>
     <properties>
         <property key="minAttribute" type="attribute">
             <caption>Minimum attribute</caption>
