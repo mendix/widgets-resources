@@ -1,8 +1,8 @@
 class HomePage {
 
-    public get badge() { return browser.element("#mxui_widget_ReactCustomWidgetWrapper_0"); }
+    public get badge() { return browser.element("#mxui_widget_ReactCustomWidgetWrapper_4"); }
 
-    public get badgeSuccess() { return browser.element("#mxui_widget_ReactCustomWidgetWrapper_2"); }
+    public get badgeSuccess() { return browser.element(".mx-name-badge6"); }
 
     public get badgeDanger() { return browser.element("#mxui_widget_ReactCustomWidgetWrapper_8"); }
 
