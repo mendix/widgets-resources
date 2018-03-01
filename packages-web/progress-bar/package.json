@@ -1,7 +1,7 @@
 {
   "name": "progressbar",
   "widgetName": "ProgressBar",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Displays a progress bar",
   "scripts": {
     "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec grunt",
