@@ -1,7 +1,7 @@
 {
   "name": "progresscircle",
   "widgetName": "ProgressCircle",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Displays a progress in a circle",
   "scripts": {
     "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec \"grunt",
