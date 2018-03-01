@@ -1,7 +1,7 @@
 {
   "name": "badge",
   "widgetName": "Badge",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Shows a value as a badge or a color label",
   "copyright": "Mendix BV",
   "scripts": {

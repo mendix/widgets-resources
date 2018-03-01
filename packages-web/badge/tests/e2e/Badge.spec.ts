@@ -1,13 +1,14 @@
 import homepage from "./pages/home.page";
 
-const caption = "New";
+const caption = "Static";
 const testValue = "Test";
+
 describe("Badge", () => {
     it("should render a badge with a caption", () => {
         homepage.open();
         homepage.badge.waitForVisible();
 
-        const badge = homepage.badge.getHTML();
+        const badge = homepage.badgeSuccess.getHTML();
         expect(badge).toContain(caption);
     });
 
@@ -44,7 +45,7 @@ describe("label", () => {
         homepage.open();
         homepage.label.waitForVisible();
 
-        const label = homepage.label.getHTML();
+        const label = homepage.labelSuccess.getHTML();
         expect(label).toContain(caption);
     });
 
