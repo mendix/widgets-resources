@@ -1,7 +1,7 @@
 {
   "name": "rich-text",
   "widgetName": "RichText",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Rich inline or toolbar text editing",
   "scripts": {
     "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec grunt",
