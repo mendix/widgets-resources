@@ -1,0 +1,40 @@
+.widget-Signature {
+    div {
+        clear: both;
+    }
+
+    canvas, image {
+        position: relative;
+        left:     0px;
+        right:    0px;
+        max-width: none;
+    }
+
+    .signature-unset {
+        canvas {
+            display: block;
+            touch-action: none;
+        }
+
+        &.image, button {
+            display: none;
+        }
+    }
+    .signature-set {
+        canvas {
+            display: none;
+        }
+
+        image {
+            display: block;
+            opacity: 0.5;
+        }
+
+        button {
+            display: block;
+        }
+    }
+    .signature-disabled button {
+        display: none;
+    }
+}

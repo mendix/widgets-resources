@@ -1,0 +1,36 @@
+sudo: required
+language: node_js
+node_js:
+- '6'
+before_install:
+- npm i -g npm@latest
+- npm install grunt-cli -g
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- wget -q -O - http://opensource.wandisco.com/wandisco-debian.gpg | sudo apt-key add -
+- sudo sh -c 'echo "deb http://opensource.wandisco.com/debian/ wheezy svn17" > /etc/apt/sources.list.d/wandisco-subversion.list'
+- sudo apt-get -qq update
+- sudo apt-get install -y --allow-downgrades subversion=1.7.22-1+WANdisco libsvn1=1.7.22-1+WANdisco
+- svn --version
+after_success:
+- bash <(curl -s https://codecov.io/bash)
+cache:
+  directories:
+  - node_modules
+env:
+  global:
+  - MX_APP_NAME=enumswitch-main
+  - MX_PROJECT_ID=cf366268-e45f-4125-be2a-8dfdcd70dff6
+  - MX_BRANCH_NAME=trunk
+  - MX_ENVIRONMENT=Sandbox
+  - MX_USER="ci@flockofbirds.org"
+deploy:
+  provider: releases
+  api_key: $GITHUB_KEY
+  file_glob: true
+  file: dist/release/*
+  skip_cleanup: true
+  on:
+    repo: $TRAVIS_REPO_SLUG
+    tags: true
