@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-export default class Point extends Component<{}, {}> {
+export class Point extends Component<{}, {}> {
     x: number;
     y: number;
     time: number;

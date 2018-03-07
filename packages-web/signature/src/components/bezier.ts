@@ -1,7 +1,7 @@
-import Point from "./point";
+import { Point } from "./point";
 import { Component } from "react";
 
-export default class Bezier extends Component<{}, {} > {
+export class Bezier extends Component<{}, {} > {
     startPoint: Point;
     control1: Point;
     control2: Point;

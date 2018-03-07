@@ -7,7 +7,7 @@ export interface ImageProps {
     gridBorder?: number;
 }
 
-export default class Image extends Component<ImageProps> {
+export class Image extends Component<ImageProps> {
     render() {
         return createElement("img", {
             height: this.props.height,

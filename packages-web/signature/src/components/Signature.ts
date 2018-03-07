@@ -1,9 +1,9 @@
 import { Component, createElement } from "react";
 import * as classNames from "classnames";
-import Bezier from "./bezier";
-import Point from "./point";
-import Canvas from "./canvas";
-import Image from "./image";
+import { Bezier } from "./bezier";
+import { Point } from "./point";
+import { Canvas } from "./canvas";
+import { Image } from "./image";
 import "../ui/Signature.scss";
 
 export interface SignatureProps {
@@ -126,7 +126,7 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
     }
 
     private setupEvents() {
-        this.canvas.addEventListener("pointerdown", this.beginCurve.bind(this));
+        this.canvas.addEventListener("pointerdown", this.beginCurve);
     }
 
     private beginCurve(e: PointerEvent) {
