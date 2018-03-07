@@ -10,7 +10,7 @@ export interface CanvasProps {
     getItemNode?: (ref: HTMLElement | null) => void;
 }
 
-export default class Canvas extends Component<CanvasProps> {
+export class Canvas extends Component<CanvasProps> {
     render() {
         return createElement("canvas", {
             gridx: this.props.gridx,
