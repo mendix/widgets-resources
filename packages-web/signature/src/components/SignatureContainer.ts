@@ -1,12 +1,12 @@
 import { Component, createElement } from "react";
-import { SignatureCanvas } from "./Signature";
+import { SignatureCanvas, SignatureProps } from "./Signature";
 
 interface WrapperProps {
     mxObject: mendix.lib.MxObject;
 }
 
 export interface SignatureContainerProps extends WrapperProps {
-    dataUrl: string;
+    dataUrl?: string;
     height?: number;
     width?: number;
     gridx?: number;
@@ -17,10 +17,6 @@ export interface SignatureContainerProps extends WrapperProps {
     maxWidth?: string;
     minWidth?: string;
     velocityFilterWeight?: string;
-    className?: string;
-    responsive?: boolean;
-    responsiveRatio?: string;
-    timeOut?: number;
     showGrid?: boolean;
 }
 
@@ -40,10 +36,11 @@ export default class SignatureContainer extends Component<SignatureContainerProp
     }
 
     render() {
+        // tslint:disable-next-line:no-object-literal-type-assertion
         return createElement(SignatureCanvas, {
             ...this.props as SignatureContainerProps,
-            dataUrl: this.props.dataUrl
-        });
+            url: this.props.dataUrl
+        } as SignatureProps);
     }
 
     componentWillReceiveProps(newProps: SignatureContainerProps) {

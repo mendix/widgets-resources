@@ -1,28 +1,33 @@
 import { Component, createElement } from "react";
 import * as classNames from "classnames";
-import { findDOMNode } from "react-dom";
 import Bezier from "./bezier";
 import Point from "./point";
-import { SignatureContainerProps as SignatureProps } from "./SignatureContainer";
+import Canvas from "./canvas";
+import Image from "./image";
 import "../ui/Signature.scss";
 
-export interface Signaturestate {
-    signature_set: boolean;
-    signature_unset: boolean;
+export interface SignatureProps {
+    height?: number;
+    width?: number;
+    gridx?: number;
+    gridy?: number;
+    gridColor?: string;
+    gridBorder?: number;
+    penColor?: string;
+    maxWidth?: string;
+    minWidth?: string;
+    velocityFilterWeight?: string;
+    showGrid?: boolean;
+    url?: string;
 }
-
-export interface Coordinates {
-    x: number;
-    y: number;
+export interface Signaturestate {
+    isset: boolean;
 }
 
 export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
     private canvas: HTMLCanvasElement;
-    private divNode: HTMLDivElement;
-    private image: HTMLImageElement;
     private points: Point[] = [];
     private lastWidth: number;
-    private timer: any;
     private lastVelocity: number;
     private penSize: number;
 
@@ -30,145 +35,63 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
         super(props);
 
         this.state = {
-            signature_set: false,
-            signature_unset: true
+            isset: false
         };
 
         this.penSize = this.dotSize();
 
         this.getCanvasRef = this.getCanvasRef.bind(this);
-        this.getImageRef = this.getImageRef.bind(this);
-        this.finalizeSignature = this.finalizeSignature.bind(this);
-        this.showImage = this.showImage.bind(this);
         this.eventResetClicked = this.eventResetClicked.bind(this);
         this.beginCurve = this.beginCurve.bind(this);
         this.updateCurve = this.updateCurve.bind(this);
         this.endCurve = this.endCurve.bind(this);
+        this.createCanvas = this.createCanvas.bind(this);
 
     }
 
     render() {
-        if (this.state.signature_unset) {
+        return this.createCanvas();
+    }
 
-            return createElement("div", {
-                className: classNames("widget-Signature signature-unset", this.props.className),
-                ref: (node: HTMLDivElement) => this.divNode = node
-            },
-                createElement("canvas", {
-                    gridx: this.props.gridx,
-                    gridy: this.props.gridy,
-                    height: this.props.height,
-                    ref: this.getCanvasRef,
-                    style: { border: this.props.gridBorder + "px solid", display: "block" },
-                    width: this.props.width
-                }),
-                createElement("img", {
-                    height: this.props.height,
-                    ref: this.getImageRef,
-                    style: { display: "none", opacity: 0.5, border: this.props.gridBorder + "px solid" },
-                    width: this.props.width
-                }));
-
-        } else if (this.state.signature_set) {
-            return createElement("div", {
-                className: classNames("widget-Signature signature-set", this.props.className),
-                ref: (node: HTMLDivElement) => this.divNode = node
-            },
-                createElement("canvas", {
-                    gridx: this.props.gridx,
-                    gridy: this.props.gridy,
-                    height: this.props.height,
-                    ref: this.getCanvasRef,
-                    style: { border: this.props.gridBorder + "px solid", display: "none" },
-                    width: this.props.width
-                }),
-                createElement("img", {
-                    height: this.props.height,
-                    ref: this.getImageRef,
-                    src: this.image.src,
-                    style: { display: "block", opacity: 0.5, border: this.props.gridBorder + "px solid" },
-                    width: this.props.width
-                }),
-                createElement("button", {
-                    className: classNames(" btn", this.props.className),
-                    onClick: this.eventResetClicked,
-                    style: { width: this.props.width }
-                }, "Reset"));
-
-        }
-        return null;
+    private createCanvas() {
+        return createElement("div", {
+            className: this.state.isset ? "widget-Signature signature-set" : "widget-Signature signature-unset"
+        },
+            createElement(Canvas, {
+                gridx: this.props.gridx,
+                gridy: this.props.gridy,
+                height: this.props.height,
+                getItemNode: this.getCanvasRef,
+                gridBorder: this.props.gridBorder,
+                width: this.props.width
+            }),
+            createElement(Image, {
+                height: this.props.height,
+                gridBorder: this.props.gridBorder,
+                width: this.props.width
+            }),
+            createElement("button", {
+                className: " btn",
+                onClick: this.eventResetClicked,
+                style: { width: this.props.width }
+            }, "Reset")
+        );
     }
 
     private getCanvasRef(node: HTMLCanvasElement) {
         this.canvas = node;
     }
 
-    private getImageRef(node: HTMLImageElement) {
-        this.image = node;
-    }
-
     componentDidMount() {
         this.context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
-        this.resizeCanvas();
+
         this.resetCanvas();
         this.setupEvents();
     }
 
-    private resizeCanvas() {
-        if (this.props.responsive) {
-            const position = findDOMNode(this.divNode).getBoundingClientRect();
-
-            let node_height = this.divNode.offsetHeight;
-            let node_width = this.divNode.offsetWidth;
-            let ratio = parseFloat(this.props.responsiveRatio as string);
-
-            if (isNaN(ratio)) {
-                ratio = 1.5;
-            }
-
-            node_width = (position.width > 0 && this.props.responsive)
-                ? position.width
-                : this.props.width as number;
-
-            if (position.height > 0 && this.props.responsive) {
-                const node_width2 = this.divNode.offsetWidth;
-                const height = Math.floor(node_width2 / ratio);
-
-                node_height = (position.height < height)
-                    ? position.height
-                    : height;
-            } else {
-                node_height = this.props.height as number;
-              }
-
-            this.canvas.height = this.props.height as number;
-            this.canvas.width = this.props.width as number - 4;
-            this.image.height = this.props.height as number;
-            this.image.width = this.props.width as number;
-            this.resetCanvas();
-        }
-    }
-
     private eventResetClicked() {
-        this.resetMxObject();
         this.resetCanvas();
-        this.hideImage();
-
-    }
-
-    private resetMxObject() {
-        this.props.mxObject.set(this.props.dataUrl, "");
-    }
-
-    private hideImage() {
-        this.image.src = "";
-        this.setState({ signature_set: false, signature_unset: true });
-    }
-
-    private showImage() {
-        const obj = this.props.mxObject;
-        this.image.src = obj.get(this.props.dataUrl) as string;
-        this.setState({ signature_set: !this.state.signature_set, signature_unset: !this.state.signature_unset });
+        this.setState({ isset: false });
     }
 
     private resetCanvas() {
@@ -204,27 +127,6 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
 
     private setupEvents() {
         this.canvas.addEventListener("pointerdown", this.beginCurve.bind(this));
-
-        if (this.props.responsive) {
-            window.addEventListener("resize", this.resizeCanvas.bind(this));
-        }
-    }
-
-    private stopTimeout() {
-            if (this.timer) {
-                clearTimeout(this.timer);
-            }
-    }
-
-    private finalizeSignature() {
-        if (this.props.mxObject) {
-            if (this.props.dataUrl) {
-                this.props.mxObject.set(this.props.dataUrl, this.canvas.toDataURL());
-            } else {
-                mx.ui.error("finalizeSignature: no dataUrl attribute found.");
-              }
-        }
-        this.showImage();
     }
 
     private beginCurve(e: PointerEvent) {
@@ -235,7 +137,6 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
         context.lineJoin = "round";
         context.beginPath();
 
-        this.stopTimeout();
         this.points = [];
         this.lastVelocity = 0;
         this.lastWidth = (parseFloat(this.props.minWidth as string) + parseFloat(this.props.maxWidth as string) / 2);
@@ -249,11 +150,11 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
     }
 
     private createPoint(event: PointerEvent) {
-    const rect = this.canvas.getBoundingClientRect();
-    return new Point(
-      event.pageX - rect.left,
-      event.pageY - rect.top
-    );
+        const rect = this.canvas.getBoundingClientRect();
+        return new Point(
+            event.pageX - rect.left,
+            event.pageY - rect.top
+        );
     }
 
     private updateCurve(e: PointerEvent) {
@@ -300,7 +201,7 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
         // velocity = (velocityFilterWeight) * velocity
         //     + (1 - (velocityFilterWeight)) * this.lastVelocity;
         velocity = velocityFilterWeight * endPoint.velocityFrom(startPoint)
-        + (1 - velocityFilterWeight) * this.lastVelocity;
+            + (1 - velocityFilterWeight) * this.lastVelocity;
 
         newWidth = this.strokeWidth(velocity);
         this.drawCurve(curve, this.lastWidth, newWidth);
@@ -393,11 +294,9 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
 
     private endCurve(e: PointerEvent) {
         e.preventDefault();
-        this.stopTimeout();
 
         this.canvas.removeEventListener("pointermove", this.updateCurve);
         document.removeEventListener("pointerup", this.endCurve);
-        this.timer = setTimeout(this.finalizeSignature, this.props.timeOut);
     }
 
 }
