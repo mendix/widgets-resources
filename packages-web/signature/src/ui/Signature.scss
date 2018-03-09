@@ -3,38 +3,35 @@
         clear: both;
     }
 
-    canvas, image {
+    canvas, .image {
         position: relative;
         left:     0px;
         right:    0px;
         max-width: none;
     }
 
-    .signature-unset {
+    &.signature-unset {
         canvas {
             display: block;
             touch-action: none;
         }
 
-        &.image, button {
+        .image, .btn {
             display: none;
         }
     }
-    .signature-set {
+    &.signature-set {
         canvas {
             display: none;
         }
 
-        image {
+        .image {
             display: block;
             opacity: 0.5;
         }
 
-        button {
+        .btn {
             display: block;
         }
-    }
-    .signature-disabled button {
-        display: none;
     }
 }

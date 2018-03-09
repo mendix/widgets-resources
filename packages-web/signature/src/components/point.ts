@@ -13,11 +13,11 @@ export class Point extends Component<{}, {}> {
         this.time = time || new Date().getTime();
     }
 
-    velocityFrom(start: Point) {
+    velocityFrom(start: Point): number {
         return (this.time !== start.time) ? this.distanceTo(start) / (this.time - start.time) : 1;
     }
 
-    distanceTo(start: Point) {
+    distanceTo(start: Point): number {
         return Math.sqrt(Math.pow(this.x - start.x, 2) + Math.pow(this.y - start.y, 2));
     }
 

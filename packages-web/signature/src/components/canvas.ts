@@ -18,8 +18,7 @@ export class Canvas extends Component<CanvasProps> {
             height: this.props.height,
             ref: node => { if (this.props.getItemNode) { this.props.getItemNode(node); } },
             style: {
-                border: this.props.gridBorder + "px solid",
-                display: "block"
+                border: this.props.gridBorder + "px solid black"
             },
             width: this.props.width
         });

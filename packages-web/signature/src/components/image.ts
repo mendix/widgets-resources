@@ -5,18 +5,17 @@ export interface ImageProps {
     width?: number;
     height?: number;
     gridBorder?: number;
+    url?: string;
 }
 
 export class Image extends Component<ImageProps> {
     render() {
         return createElement("img", {
+            className: "image",
             height: this.props.height,
-            style: {
-                display: "none",
-                opacity: 0.5,
-                border: this.props.gridBorder + "px solid"
-            },
-            width: this.props.width
+            style: { border: this.props.gridBorder + "px solid black" },
+            width: this.props.width,
+            src: this.props.url
         });
     }
 }

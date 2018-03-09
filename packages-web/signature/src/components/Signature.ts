@@ -18,7 +18,7 @@ export interface SignatureProps {
     minWidth?: string;
     velocityFilterWeight?: string;
     showGrid?: boolean;
-    url?: string;
+    dataUrl?: string;
 }
 export interface Signaturestate {
     isset: boolean;
@@ -29,7 +29,6 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
     private points: Point[] = [];
     private lastWidth: number;
     private lastVelocity: number;
-    private penSize: number;
 
     constructor(props: SignatureProps) {
         super(props);
@@ -38,22 +37,15 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
             isset: false
         };
 
-        this.penSize = this.dotSize();
-
         this.getCanvasRef = this.getCanvasRef.bind(this);
         this.eventResetClicked = this.eventResetClicked.bind(this);
         this.beginCurve = this.beginCurve.bind(this);
         this.updateCurve = this.updateCurve.bind(this);
         this.endCurve = this.endCurve.bind(this);
-        this.createCanvas = this.createCanvas.bind(this);
 
     }
 
     render() {
-        return this.createCanvas();
-    }
-
-    private createCanvas() {
         return createElement("div", {
             className: this.state.isset ? "widget-Signature signature-set" : "widget-Signature signature-unset"
         },
@@ -68,25 +60,26 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
             createElement(Image, {
                 height: this.props.height,
                 gridBorder: this.props.gridBorder,
-                width: this.props.width
+                width: this.props.width,
+                url: this.props.dataUrl
             }),
             createElement("button", {
-                className: " btn",
+                className: "btn",
                 onClick: this.eventResetClicked,
                 style: { width: this.props.width }
             }, "Reset")
         );
     }
 
-    private getCanvasRef(node: HTMLCanvasElement) {
-        this.canvas = node;
-    }
-
     componentDidMount() {
         this.context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
 
         this.resetCanvas();
-        this.setupEvents();
+        this.canvas.addEventListener("pointerdown", this.beginCurve);
+    }
+
+    private getCanvasRef(node: HTMLCanvasElement) {
+        this.canvas = node;
     }
 
     private eventResetClicked() {
@@ -125,22 +118,18 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
         context.stroke();
     }
 
-    private setupEvents() {
-        this.canvas.addEventListener("pointerdown", this.beginCurve);
-    }
-
     private beginCurve(e: PointerEvent) {
         e.preventDefault();
         const context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
         context.fillStyle = this.props.penColor as string;
-        context.lineWidth = this.penSize;
+        context.lineWidth = this.dotSize();
         context.lineJoin = "round";
         context.beginPath();
 
         this.points = [];
         this.lastVelocity = 0;
         this.lastWidth = (parseFloat(this.props.minWidth as string) + parseFloat(this.props.maxWidth as string) / 2);
-        this.drawPoint(e.x, e.y, this.penSize);
+        this.drawPoint(e.x, e.y, this.dotSize());
         this.canvas.addEventListener("pointermove", this.updateCurve);
         document.addEventListener("pointerup", this.endCurve);
     }
@@ -173,8 +162,7 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
         points.push(point);
 
         if (points.length > 2) {
-            // To reduce the initial lag make it work with 3 points
-            // by copying the first point to the beginning.
+
             if (points.length === 3) points.unshift(points[0]);
 
             tmp = this.calculateCurveControlPoints(points[0], points[1], points[2]);
@@ -184,8 +172,6 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
             curve = new Bezier(points[1], c2, c3, points[2]);
             this.addCurve(curve);
 
-            // Remove the first element from the list,
-            // so that we always have no more than 4 points in points array.
             points.shift();
         }
     }
@@ -197,9 +183,6 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
         let velocity;
         let newWidth;
 
-        // velocity = endPoint.velocityFrom(startPoint);
-        // velocity = (velocityFilterWeight) * velocity
-        //     + (1 - (velocityFilterWeight)) * this.lastVelocity;
         velocity = velocityFilterWeight * endPoint.velocityFrom(startPoint)
             + (1 - velocityFilterWeight) * this.lastVelocity;
 
@@ -210,7 +193,6 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
         this.lastWidth = newWidth;
     }
 
-    // We draw smooth curves taking into consideration the width of the dot size
     private drawCurve(curve: Bezier, startWidth: number, endWidth: number) {
         const context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
         const widthDelta = endWidth - startWidth;
@@ -264,7 +246,6 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
         return Math.max(maxWidth / (velocity + 1), minWidth);
     }
 
-    // Here we calculate the exact x and y coordinates of the curve points drawn by pointer position
     private calculateCurveControlPoints(s1: Point, s2: Point, s3: Point) {
         const dx1 = s1.x - s2.x;
         const dy1 = s1.y - s2.y;
@@ -297,6 +278,7 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
 
         this.canvas.removeEventListener("pointermove", this.updateCurve);
         document.removeEventListener("pointerup", this.endCurve);
+        setTimeout(this.setState({ isset: true }), 1000);
     }
 
 }

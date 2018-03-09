@@ -30,7 +30,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         super(props);
 
         this.state = {
-            url : this.getAttributeValue(this.props.dataUrl, this.props.mxObject)
+            url : ""
         };
         this.updateState = this.updateState.bind(this);
     }
@@ -39,7 +39,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         // tslint:disable-next-line:no-object-literal-type-assertion
         return createElement(SignatureCanvas, {
             ...this.props as SignatureContainerProps,
-            url: this.props.dataUrl
+            dataUrl: this.state.url
         } as SignatureProps);
     }
 
