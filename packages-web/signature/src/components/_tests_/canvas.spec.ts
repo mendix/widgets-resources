@@ -22,10 +22,7 @@ describe("Canvas", () => {
                 gridx: defaultProps.gridx,
                 gridy: defaultProps.gridy,
                 height: defaultProps.height,
-                style: {
-                    border: defaultProps.gridBorder + "px solid",
-                    display: "block"
-                },
+                style: { border: defaultProps.gridBorder + "px solid black" },
                 width: defaultProps.width
             })
         );

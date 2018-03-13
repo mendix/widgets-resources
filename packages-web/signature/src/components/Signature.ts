@@ -89,53 +89,52 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
 
     private resetCanvas() {
         const context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
-        context.clearRect(0, 0, this.props.width as number, this.props.height as number);
+        context.clearRect(0, 0, this.props.width, this.props.height);
         this.drawGrid();
     }
 
     private drawGrid() {
-        if (!this.props.showGrid) return;
-        let x = this.props.gridx as number;
-        let y = this.props.gridy as number;
-        const context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
-        const width = this.props.width as number;
-        const height = this.props.height as number;
+        const { width , height, showGrid, gridColor, gridx, gridy } = this.props;
+        if (!showGrid) return;
 
+        let x = gridx;
+        let y = gridy;
+        const context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
         context.beginPath();
 
-        for (; x < width; x += this.props.gridx as number) {
+        for (; x < width; x += gridx) {
             context.moveTo(x, 0);
-            context.lineTo(x, this.props.height as number);
+            context.lineTo(x, height);
         }
 
-        for (; y < height; y += this.props.gridy as number) {
+        for (; y < height; y += gridy) {
             context.moveTo(0, y);
-            context.lineTo(this.props.width as number, y);
+            context.lineTo(width, y);
         }
 
         context.lineWidth = 1;
-        context.strokeStyle = this.props.gridColor as string;
+        context.strokeStyle = gridColor;
         context.stroke();
     }
 
     private beginCurve(e: PointerEvent) {
         e.preventDefault();
         const context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
-        context.fillStyle = this.props.penColor as string;
+        context.fillStyle = this.props.penColor;
         context.lineWidth = this.dotSize();
         context.lineJoin = "round";
         context.beginPath();
 
         this.points = [];
         this.lastVelocity = 0;
-        this.lastWidth = (parseFloat(this.props.minWidth as string) + parseFloat(this.props.maxWidth as string) / 2);
+        this.lastWidth = (parseFloat(this.props.minWidth) + parseFloat(this.props.maxWidth) / 2);
         this.drawPoint(e.x, e.y, this.dotSize());
         this.canvas.addEventListener("pointermove", this.updateCurve);
         document.addEventListener("pointerup", this.endCurve);
     }
 
     private dotSize() {
-        return (parseFloat(this.props.minWidth as string) + parseFloat(this.props.maxWidth as string) / 2);
+        return (parseFloat(this.props.minWidth) + parseFloat(this.props.maxWidth) / 2);
     }
 
     private createPoint(event: PointerEvent) {
@@ -241,8 +240,8 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
     }
 
     private strokeWidth(velocity: number) {
-        const minWidth = parseFloat(this.props.minWidth as string);
-        const maxWidth = parseFloat(this.props.maxWidth as string);
+        const minWidth = parseFloat(this.props.minWidth);
+        const maxWidth = parseFloat(this.props.maxWidth);
         return Math.max(maxWidth / (velocity + 1), minWidth);
     }
 
@@ -278,7 +277,7 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
 
         this.canvas.removeEventListener("pointermove", this.updateCurve);
         document.removeEventListener("pointerup", this.endCurve);
-        setTimeout(this.setState({ isset: true }), 1000);
+        window.setTimeout(this.setState({ isset: true }), 1000);
     }
 
 }
