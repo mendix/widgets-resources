@@ -1,5 +1,4 @@
 import { Component, createElement } from "react";
-import * as classNames from "classnames";
 
 export interface CanvasProps {
     width?: number;

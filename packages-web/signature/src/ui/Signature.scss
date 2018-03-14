@@ -10,6 +10,12 @@
         max-width: none;
     }
 
+    span.glyphicon.glyphicon-floppy-save {
+        cursor: pointer;
+        position: absolute;
+        top: 90%;
+    }
+
     &.signature-unset {
         canvas {
             display: block;

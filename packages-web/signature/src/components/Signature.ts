@@ -1,5 +1,4 @@
 import { Component, createElement } from "react";
-import * as classNames from "classnames";
 import { Bezier } from "./bezier";
 import { Point } from "./point";
 import { Canvas } from "./canvas";
@@ -18,10 +17,12 @@ export interface SignatureProps {
     minWidth?: string;
     velocityFilterWeight?: string;
     showGrid?: boolean;
-    dataUrl?: string;
+    imageUrl?: string;
+    onClickAction(imageUrl?: string): void;
 }
 export interface Signaturestate {
     isset: boolean;
+    imageUrl: string;
 }
 
 export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
@@ -29,12 +30,14 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
     private points: Point[] = [];
     private lastWidth: number;
     private lastVelocity: number;
+    private eventHandle = 0;
 
     constructor(props: SignatureProps) {
         super(props);
 
         this.state = {
-            isset: false
+            isset: false,
+            imageUrl: ""
         };
 
         this.getCanvasRef = this.getCanvasRef.bind(this);
@@ -42,6 +45,7 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
         this.beginCurve = this.beginCurve.bind(this);
         this.updateCurve = this.updateCurve.bind(this);
         this.endCurve = this.endCurve.bind(this);
+        this.throttleUpdate = this.throttleUpdate.bind(this);
 
     }
 
@@ -61,7 +65,12 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
                 height: this.props.height,
                 gridBorder: this.props.gridBorder,
                 width: this.props.width,
-                url: this.props.dataUrl
+                url: this.state.imageUrl
+            }),
+            createElement("span", {
+                className: "glyphicon glyphicon-floppy-save",
+                onClick: () => this.props.onClickAction(this.state.imageUrl),
+                style: { visibility: this.state.isset ? "visible" : "hidden" }
             }),
             createElement("button", {
                 className: "btn",
@@ -94,7 +103,7 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
     }
 
     private drawGrid() {
-        const { width , height, showGrid, gridColor, gridx, gridy } = this.props;
+        const { width, height, showGrid, gridColor, gridx, gridy } = this.props;
         if (!showGrid) return;
 
         let x = gridx;
@@ -210,7 +219,6 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
         drawSteps = Math.floor(curve.length());
         context.beginPath();
         for (i = 0; i < drawSteps; i++) {
-            // Calculate the Bezier (x, y) coordinate for this step.
             t = i / drawSteps;
             tt = t * t;
             ttt = tt * t;
@@ -277,7 +285,20 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
 
         this.canvas.removeEventListener("pointermove", this.updateCurve);
         document.removeEventListener("pointerup", this.endCurve);
-        window.setTimeout(this.setState({ isset: true }), 1000);
+        this.throttleUpdate();
+    }
+
+    private throttleUpdate() {
+        if (this.eventHandle) {
+            window.clearTimeout(this.eventHandle);
+        }
+        this.eventHandle = window.setTimeout(() => {
+            this.setState({
+                isset: true,
+                imageUrl: this.canvas.toDataURL()
+            });
+            this.eventHandle = 0;
+        }, 1000);
     }
 
 }
