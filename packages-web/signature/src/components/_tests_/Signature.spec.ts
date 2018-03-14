@@ -22,7 +22,8 @@ describe("SignatureCanvas", () => {
         minWidth: "0.5",
         velocityFilterWeight: "0.7",
         showGrid: true,
-        dataUrl: ""
+        onClickAction: jasmine.any(Function),
+        imageUrl: ""
     };
 
     it("renders the structure correctly", () => {
@@ -43,7 +44,7 @@ describe("SignatureCanvas", () => {
                 createElement(Image, {
                     height: defaultProps.height,
                     width: defaultProps.width,
-                    url: defaultProps.dataUrl
+                    url: defaultProps.imageUrl
                 }),
                 createElement("button", {
                     style: { width: defaultProps.width }

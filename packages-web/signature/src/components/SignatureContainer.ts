@@ -1,5 +1,7 @@
 import { Component, createElement } from "react";
-import { SignatureCanvas, SignatureProps } from "./Signature";
+
+import { SignatureCanvas } from "./Signature";
+import { Alert } from "./Alert";
 
 interface WrapperProps {
     mxObject: mendix.lib.MxObject;
@@ -18,10 +20,12 @@ export interface SignatureContainerProps extends WrapperProps {
     minWidth?: string;
     velocityFilterWeight?: string;
     showGrid?: boolean;
+    onChangeMicroflow: string;
 }
 
 interface SignatureContainerState {
     url: string;
+    alertMessage: string;
 }
 
 export default class SignatureContainer extends Component<SignatureContainerProps, SignatureContainerState> {
@@ -30,17 +34,24 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         super(props);
 
         this.state = {
-            url : ""
+            url: "",
+            alertMessage: ""
         };
+
         this.updateState = this.updateState.bind(this);
+        this.saveImage = this.saveImage.bind(this);
     }
 
     render() {
+        if (this.state.alertMessage) {
+            return createElement(Alert, { message: this.state.alertMessage || "", bootstrapStyle: "danger" });
+        }
         // tslint:disable-next-line:no-object-literal-type-assertion
         return createElement(SignatureCanvas, {
             ...this.props as SignatureContainerProps,
-            dataUrl: this.state.url
-        } as SignatureProps);
+            imageUrl: this.state.url,
+            onClickAction: this.saveImage
+        } as any);
     }
 
     componentWillReceiveProps(newProps: SignatureContainerProps) {
@@ -51,15 +62,33 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         });
     }
 
+    private saveImage(url: string) {
+        const { mxObject, dataUrl, onChangeMicroflow } = this.props;
+
+        if (mxObject && dataUrl) {
+            mxObject.set(dataUrl, url);
+            this.executeAction(onChangeMicroflow, mxObject.getGuid());
+        } else {
+            this.setState({ alertMessage: "No Data Url attribute found" });
+        }
+    }
+
     private getAttributeValue(attributeName: string, mxObject?: mendix.lib.MxObject): string {
         return mxObject ? mxObject.get(attributeName) as string : "";
     }
 
     private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
+        this.subscriptionHandles = [];
 
         if (mxObject) {
             this.subscriptionHandles.push(window.mx.data.subscribe({
+                callback: this.updateState,
+                guid: mxObject.getGuid()
+            }));
+
+            this.subscriptionHandles.push(mx.data.subscribe({
+                attr: this.props.dataUrl,
                 callback: this.updateState,
                 guid: mxObject.getGuid()
             }));
@@ -69,7 +98,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
     private updateState() {
 
         this.setState({
-            url : this.getAttributeValue(this.props.dataUrl, this.props.mxObject)
+            url: this.getAttributeValue(this.props.dataUrl, this.props.mxObject)
         });
     }
 

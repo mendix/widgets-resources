@@ -18,7 +18,7 @@
     "noFallthroughCasesInSwitch": true,
     "alwaysStrict": true,
     "skipLibCheck": false,
-    // "noUnusedLocals": true,
+    "noUnusedLocals": true,
     "noUnusedParameters": true
   },
   "exclude": [
