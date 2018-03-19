@@ -68,7 +68,7 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
                 url: this.state.imageUrl
             }),
             createElement("span", {
-                className: "glyphicon glyphicon-floppy-save",
+                className: "glyphicon glyphicon-save",
                 onClick: () => this.props.onClickAction(this.state.imageUrl),
                 style: { visibility: this.state.isset ? "visible" : "hidden" }
             }),
@@ -300,5 +300,4 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
             this.eventHandle = 0;
         }, 1000);
     }
-
 }
