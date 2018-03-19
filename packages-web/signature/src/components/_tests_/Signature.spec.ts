@@ -46,6 +46,11 @@ describe("SignatureCanvas", () => {
                     width: defaultProps.width,
                     url: defaultProps.imageUrl
                 }),
+                createElement("span", {
+                    className: "glyphicon glyphicon-save",
+                    onClick: jasmine.any(Function),
+                    style: { visibility: "visible" }
+                }),
                 createElement("button", {
                     style: { width: defaultProps.width }
                 })

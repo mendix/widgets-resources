@@ -4,7 +4,7 @@ import { SignatureCanvas } from "./Signature";
 import { Alert } from "./Alert";
 
 interface WrapperProps {
-    mxObject: mendix.lib.MxObject;
+    mxObject?: mendix.lib.MxObject;
 }
 
 export interface SignatureContainerProps extends WrapperProps {
@@ -20,7 +20,7 @@ export interface SignatureContainerProps extends WrapperProps {
     minWidth?: string;
     velocityFilterWeight?: string;
     showGrid?: boolean;
-    onChangeMicroflow: string;
+    onChangeMicroflow?: string;
 }
 
 interface SignatureContainerState {
