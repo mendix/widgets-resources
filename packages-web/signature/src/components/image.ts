@@ -10,7 +10,6 @@ export interface ImageProps {
 export class Image extends Component<ImageProps> {
     render() {
         return createElement("img", {
-            className: "image",
             height: this.props.height,
             style: { border: this.props.gridBorder + "px solid black" },
             width: this.props.width,

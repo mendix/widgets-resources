@@ -17,7 +17,6 @@ describe("Image", () => {
 
         expect(canvasImage).toBeElement(
             createElement("img", {
-                className: "image",
                 height: defaultProps.height,
                 style: { border: defaultProps.gridBorder + "px solid black" },
                 width: defaultProps.width
