@@ -1,7 +1,6 @@
 import { Component, createElement } from "react";
 
 import { SignatureCanvas } from "./Signature";
-import { Alert } from "./Alert";
 
 interface WrapperProps {
     mxObject?: mendix.lib.MxObject;
@@ -40,17 +39,17 @@ export default class SignatureContainer extends Component<SignatureContainerProp
 
         this.updateState = this.updateState.bind(this);
         this.saveImage = this.saveImage.bind(this);
+        this.handleValidations = this.handleValidations.bind(this);
     }
 
     render() {
-        if (this.state.alertMessage) {
-            return createElement(Alert, { message: this.state.alertMessage || "", bootstrapStyle: "danger" });
-        }
+
         // tslint:disable-next-line:no-object-literal-type-assertion
         return createElement(SignatureCanvas, {
             ...this.props as SignatureContainerProps,
             imageUrl: this.state.url,
-            onClickAction: this.saveImage
+            onClickAction: this.saveImage,
+            alertMessage: this.state.alertMessage
         } as any);
     }
 
@@ -65,11 +64,19 @@ export default class SignatureContainer extends Component<SignatureContainerProp
     private saveImage(url: string) {
         const { mxObject, dataUrl, onChangeMicroflow } = this.props;
 
-        if (mxObject && dataUrl) {
+        if (mxObject && mxObject.inheritsFrom("System.Image") && dataUrl) {
             mxObject.set(dataUrl, url);
+
+            mx.data.saveDocument(
+                mxObject.getGuid(),
+                `${Math.floor(Math.random() * 1000000)}.jpg`, {}, this.base64toBlob(url),
+                () => { mx.ui.info("Image has been saved", false); },
+                error => { mx.ui.error(error.message, false); }
+            );
+
             this.executeAction(onChangeMicroflow, mxObject.getGuid());
         } else {
-            this.setState({ alertMessage: "No Data Url attribute found" });
+            this.setState({ alertMessage: "The entity does not inherit from System Image" });
         }
     }
 
@@ -92,6 +99,12 @@ export default class SignatureContainer extends Component<SignatureContainerProp
                 callback: this.updateState,
                 guid: mxObject.getGuid()
             }));
+
+            this.subscriptionHandles.push(mx.data.subscribe({
+                callback: this.handleValidations,
+                guid: mxObject.getGuid(),
+                val: true
+            }));
         }
     }
 
@@ -100,6 +113,15 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         this.setState({
             url: this.getAttributeValue(this.props.dataUrl, this.props.mxObject)
         });
+    }
+
+    private handleValidations(validations: mendix.lib.ObjectValidation[]) {
+        const validationMessage = validations[0].getErrorReason(this.props.dataUrl);
+        validations[0].removeAttribute(this.props.dataUrl);
+
+        if (validationMessage) {
+            this.setState({ alertMessage: validationMessage });
+        }
     }
 
     private executeAction(actionname: string, guid: string) {
@@ -113,5 +135,17 @@ export default class SignatureContainer extends Component<SignatureContainerProp
                 }
             });
         }
+    }
+
+    private base64toBlob(base64Uri: string): Blob {
+        const byteString = atob(base64Uri.split(",")[1]);
+        const bufferArray = new ArrayBuffer(byteString.length);
+        const uintArray = new Uint8Array(bufferArray);
+
+        for (let i = 0; i < byteString.length; i++) {
+            uintArray[i] = byteString.charCodeAt(i);
+        }
+
+        return new Blob([ bufferArray ]);
     }
 }

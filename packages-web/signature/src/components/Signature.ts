@@ -1,4 +1,6 @@
 import { Component, createElement } from "react";
+import { Alert } from "./Alert";
+
 import { Bezier } from "./bezier";
 import { Point } from "./point";
 import { Canvas } from "./canvas";
@@ -6,6 +8,7 @@ import { Image } from "./image";
 import "../ui/Signature.scss";
 
 export interface SignatureProps {
+    alertMessage?: string;
     height?: number;
     width?: number;
     gridx?: number;
@@ -76,7 +79,8 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
                 className: "btn",
                 onClick: this.eventResetClicked,
                 style: { width: this.props.width }
-            }, "Reset")
+            }, "Reset"),
+            createElement(Alert, { message: this.props.alertMessage || "", bootstrapStyle: "danger" })
         );
     }
 
@@ -84,7 +88,7 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
         this.context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
 
         this.resetCanvas();
-        this.canvas.addEventListener("pointerdown", this.beginCurve);
+        this.registerEvents(this.canvas);
     }
 
     private getCanvasRef(node: HTMLCanvasElement) {
@@ -282,10 +286,23 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
 
     private endCurve(e: PointerEvent) {
         e.preventDefault();
-
-        this.canvas.removeEventListener("pointermove", this.updateCurve);
-        document.removeEventListener("pointerup", this.endCurve);
+        this.removeEvents(this.canvas);
         this.throttleUpdate();
+    }
+
+    private registerEvents(canvas: HTMLCanvasElement) {
+        canvas.addEventListener("pointerdown", this.beginCurve);
+        canvas.addEventListener("touchstart", this.beginCurve);
+        canvas.addEventListener("touchend", this.endCurve);
+        canvas.addEventListener("touchmove", (event) => event.preventDefault());
+    }
+
+    private removeEvents(canvas: HTMLCanvasElement) {
+        canvas.removeEventListener("pointermove", this.updateCurve);
+        canvas.removeEventListener("touchstart", this.updateCurve);
+        canvas.removeEventListener("touchend", this.updateCurve);
+        document.removeEventListener("pointerup", this.endCurve);
+        canvas.removeEventListener("touchmove", (event) => event.preventDefault());
     }
 
     private throttleUpdate() {
@@ -298,6 +315,6 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
                 imageUrl: this.canvas.toDataURL()
             });
             this.eventHandle = 0;
-        }, 1000);
+        }, 2000);
     }
 }
