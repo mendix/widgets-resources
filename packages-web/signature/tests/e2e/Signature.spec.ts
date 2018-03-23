@@ -1,7 +1,8 @@
 import HomePage from "./pages/home.page";
 
 const border = "1px solid rgb(0, 0, 0)";
-const display = "block";
+const visible = "visible";
+const hidden = "hidden";
 
 describe("SignatureCanvas", () => {
 
@@ -18,29 +19,26 @@ describe("SignatureCanvas", () => {
         HomePage.canvas.waitForVisible();
         HomePage.canvas.click();
 
-        HomePage.Signature.waitForVisible();
-        const displayButton = HomePage.Signature.getCssProperty("display");
-        expect(displayButton.value).toBe(display);
+        HomePage.renderSave.waitForVisible();
+        const displayButton = HomePage.renderSave.getCssProperty("visibility");
+        expect(displayButton.value).toBe(visible);
     });
 
-    it("renders reset button", () => {
+    it("renders save button", () => {
         HomePage.open();
         HomePage.canvas.waitForVisible();
         HomePage.canvas.click();
 
-        HomePage.Signature.waitForVisible();
-        const displayButton = HomePage.button.getCssProperty("display");
-        expect(displayButton.value).toBe(display);
+        HomePage.renderSave.waitForVisible();
+        const displayButton = HomePage.renderSave.getCssProperty("visibility");
+        expect(displayButton.value).toBe(visible);
     });
 
-    it("clears canvas on reset", () => {
-        HomePage.open();
-        HomePage.canvas.waitForVisible();
-        HomePage.canvas.click();
+    xit("clears canvas on reset", () => {
+        HomePage.resetButton.waitForVisible();
+        HomePage.resetButton.click();
 
-        HomePage.button.waitForVisible();
-        HomePage.button.click();
-        const displayButton = HomePage.canvas.getCssProperty("display");
-        expect(displayButton.value).toBe(display);
+        const displayButton = HomePage.renderSave.getCssProperty("visibility");
+        expect(displayButton.value).toBe(hidden);
     });
 });

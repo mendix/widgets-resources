@@ -3,41 +3,21 @@
         clear: both;
     }
 
-    canvas, .image {
+    canvas {
         position: relative;
         left:     0px;
         right:    0px;
         max-width: none;
     }
 
-    span.glyphicon.glyphicon-save {
-        cursor: pointer;
-        position: absolute;
-        top: 90%;
+    button.btn {
+        width: 100px;
     }
 
     &.signature-unset {
         canvas {
             display: block;
             touch-action: none;
-        }
-
-        img, .btn {
-            display: none;
-        }
-    }
-    &.signature-set {
-        canvas {
-            display: none;
-        }
-
-        img {
-            display: block;
-            opacity: 0.5;
-        }
-
-        .btn {
-            display: block;
         }
     }
 }
