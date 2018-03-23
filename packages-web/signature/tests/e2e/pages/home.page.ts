@@ -1,14 +1,14 @@
 class HomePage {
     public get canvas() {
-        return browser.element(".mx-name-dataView1 .widget-Signature.signature-unset canvas");
+        return browser.element(".widget-Signature.signature-unset canvas");
     }
 
-    public get Signature() {
-        return browser.element(".mx-name-dataView1 .widget-Signature.signature-set img");
+    public get renderSave() {
+        return browser.element(".widget-Signature.signature-unset .btn-primary");
     }
 
-    public get button() {
-        return browser.element(".mx-name-dataView1 .widget-Signature.signature-set button");
+    public get resetButton() {
+        return browser.element(".widget-Signature.signature-unset .btn-default");
     }
 
     public open(): void {

@@ -29,6 +29,7 @@ interface SignatureContainerState {
 
 export default class SignatureContainer extends Component<SignatureContainerProps, SignatureContainerState> {
     private subscriptionHandles: number[] = [];
+
     constructor(props: SignatureContainerProps) {
         super(props);
 
@@ -124,11 +125,11 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         }
     }
 
-    private executeAction(actionname: string, guid: string) {
-        if (actionname && guid) {
-            window.mx.ui.action(actionname, {
+    private executeAction(actionName: string, guid: string) {
+        if (actionName && guid) {
+            window.mx.ui.action(actionName, {
                 error: (error) =>
-                    window.mx.ui.error(`Error while executing microflow ${actionname}: ${error.message}`),
+                    window.mx.ui.error(`Error while executing microflow ${actionName}: ${error.message}`),
                 params: {
                     applyto: "selection",
                     guids: [ guid ]

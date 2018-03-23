@@ -4,7 +4,6 @@ import { Alert } from "./Alert";
 import { Bezier } from "./bezier";
 import { Point } from "./point";
 import { Canvas } from "./canvas";
-import { Image } from "./image";
 import "../ui/Signature.scss";
 
 export interface SignatureProps {
@@ -23,9 +22,9 @@ export interface SignatureProps {
     imageUrl?: string;
     onClickAction(imageUrl?: string): void;
 }
+
 export interface Signaturestate {
     isset: boolean;
-    imageUrl: string;
 }
 
 export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
@@ -33,28 +32,25 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
     private points: Point[] = [];
     private lastWidth: number;
     private lastVelocity: number;
-    private eventHandle = 0;
 
     constructor(props: SignatureProps) {
         super(props);
 
         this.state = {
-            isset: false,
-            imageUrl: ""
+            isset: false
         };
 
         this.getCanvasRef = this.getCanvasRef.bind(this);
-        this.eventResetClicked = this.eventResetClicked.bind(this);
+        this.resetCanvas = this.resetCanvas.bind(this);
         this.beginCurve = this.beginCurve.bind(this);
         this.updateCurve = this.updateCurve.bind(this);
         this.endCurve = this.endCurve.bind(this);
-        this.throttleUpdate = this.throttleUpdate.bind(this);
 
     }
 
     render() {
         return createElement("div", {
-            className: this.state.isset ? "widget-Signature signature-set" : "widget-Signature signature-unset"
+            className: "widget-Signature signature-unset"
         },
             createElement(Canvas, {
                 gridx: this.props.gridx,
@@ -64,22 +60,15 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
                 gridBorder: this.props.gridBorder,
                 width: this.props.width
             }),
-            createElement(Image, {
-                height: this.props.height,
-                gridBorder: this.props.gridBorder,
-                width: this.props.width,
-                url: this.state.imageUrl
-            }),
-            createElement("span", {
-                className: "glyphicon glyphicon-save",
-                onClick: () => this.props.onClickAction(this.state.imageUrl),
-                style: { visibility: this.state.isset ? "visible" : "hidden" }
-            }),
             createElement("button", {
-                className: "btn",
-                onClick: this.eventResetClicked,
-                style: { width: this.props.width }
+                className: "btn btn-default",
+                onClick: this.resetCanvas
             }, "Reset"),
+            createElement("button", {
+                className: "btn btn-primary",
+                onClick: () => this.props.onClickAction(this.canvas.toDataURL()),
+                style: { visibility: this.state.isset ? "visible" : "hidden" }
+            }, "Save"),
             createElement(Alert, { message: this.props.alertMessage || "", bootstrapStyle: "danger" })
         );
     }
@@ -88,19 +77,15 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
         this.context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
 
         this.resetCanvas();
-        this.registerEvents(this.canvas);
+        this.canvas.addEventListener("pointerdown", this.beginCurve);
     }
 
     private getCanvasRef(node: HTMLCanvasElement) {
         this.canvas = node;
     }
 
-    private eventResetClicked() {
-        this.resetCanvas();
-        this.setState({ isset: false });
-    }
-
     private resetCanvas() {
+        this.setState({ isset: false });
         const context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
         context.clearRect(0, 0, this.props.width, this.props.height);
         this.drawGrid();
@@ -286,35 +271,8 @@ export class SignatureCanvas extends Component<SignatureProps, Signaturestate> {
 
     private endCurve(e: PointerEvent) {
         e.preventDefault();
-        this.removeEvents(this.canvas);
-        this.throttleUpdate();
-    }
-
-    private registerEvents(canvas: HTMLCanvasElement) {
-        canvas.addEventListener("pointerdown", this.beginCurve);
-        canvas.addEventListener("touchstart", this.beginCurve);
-        canvas.addEventListener("touchend", this.endCurve);
-        canvas.addEventListener("touchmove", (event) => event.preventDefault());
-    }
-
-    private removeEvents(canvas: HTMLCanvasElement) {
-        canvas.removeEventListener("pointermove", this.updateCurve);
-        canvas.removeEventListener("touchstart", this.updateCurve);
-        canvas.removeEventListener("touchend", this.updateCurve);
+        this.canvas.removeEventListener("pointermove", this.updateCurve);
         document.removeEventListener("pointerup", this.endCurve);
-        canvas.removeEventListener("touchmove", (event) => event.preventDefault());
-    }
-
-    private throttleUpdate() {
-        if (this.eventHandle) {
-            window.clearTimeout(this.eventHandle);
-        }
-        this.eventHandle = window.setTimeout(() => {
-            this.setState({
-                isset: true,
-                imageUrl: this.canvas.toDataURL()
-            });
-            this.eventHandle = 0;
-        }, 2000);
+        this.setState({ isset: true });
     }
 }
