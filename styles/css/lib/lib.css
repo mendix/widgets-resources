@@ -4779,6 +4779,20 @@ h6,
   margin-bottom: 5px;
 }
 
+.cardprogress .cardprogress-state {
+  width: 80px;
+  height: 80px;
+  padding: 0;
+  cursor: default;
+  pointer-events: none;
+  font-size: 28px;
+  border-radius: 100%;
+}
+
+.cardhighlight {
+  border-top: 4px solid #0595DB;
+}
+
 /* ==========================================================================
    Control Group
    
@@ -5432,25 +5446,43 @@ path.widget-progress-circle-path {
 .widget-progress-circle-primary path.widget-progress-circle-path {
   stroke: #0595DB;
 }
+.widget-progress-circle-primary .progressbar-text {
+  color: #0595DB !important;
+}
 
 .widget-progress-circle-info path.widget-progress-circle-path {
   stroke: #48B0F7;
+}
+.widget-progress-circle-info .progressbar-text {
+  color: #48B0F7 !important;
 }
 
 .widget-progress-circle-success path.widget-progress-circle-path {
   stroke: #76CA02;
 }
+.widget-progress-circle-success .progressbar-text {
+  color: #76CA02 !important;
+}
 
 .widget-progress-circle-warning path.widget-progress-circle-path {
   stroke: #F99B1D;
+}
+.widget-progress-circle-warning .progressbar-text {
+  color: #F99B1D !important;
 }
 
 .widget-progress-circle-danger path.widget-progress-circle-path {
   stroke: #ED1C24;
 }
+.widget-progress-circle-danger .progressbar-text {
+  color: #ED1C24 !important;
+}
 
 .widget-progress-circle-inverse path.widget-progress-circle-path {
   stroke: #252C36;
+}
+.widget-progress-circle-inverse .progressbar-text {
+  color: #252C36 !important;
 }
 
 div.widget-range-slider .rc-slider-handle,

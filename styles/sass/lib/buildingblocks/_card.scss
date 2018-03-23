@@ -262,3 +262,19 @@
 
 .cardpayment {
 }
+
+.cardprogress {
+    .cardprogress-state {
+        width: 80px;
+        height: 80px;
+        padding: 0;
+        cursor: default;
+        pointer-events: none;
+        font-size: 28px;
+        border-radius: 100%;
+    }
+}
+
+.cardhighlight {
+    border-top: 4px solid $brand-primary;
+}
