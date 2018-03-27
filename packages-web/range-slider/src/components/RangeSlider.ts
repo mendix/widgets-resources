@@ -66,7 +66,7 @@ class RangeSlider extends Component<RangeSliderProps, {}> {
                 onAfterChange: this.props.onChange,
                 onChange: this.props.onUpdate,
                 pushable: false,
-                step: stepValue,
+                step: stepValue || 1,
                 value: rangeSliderValues
             }),
             createElement(Alert,
