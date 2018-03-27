@@ -111,7 +111,7 @@
                 ]
             },
             {
-                "name": "Align Self",
+                "name": "Align self",
                 "type": "Dropdown",
                 "description": "Float an element to the left or right.",
                 "options": [
@@ -155,6 +155,37 @@
                     {
                         "name": "Right align as column",
                         "class": "col-right"
+                    }
+                ]
+            },
+            {
+                "name": "Background color",
+                "type": "Dropdown",
+                "description": "Choose one of the following colors to change the background color of the container.",
+                "options": [
+                    {
+                        "name": "Default",
+                        "class": "background-default"
+                    },
+                    {
+                        "name": "Primary",
+                        "class": "background-primary"
+                    },
+                    {
+                        "name": "Inverse",
+                        "class": "background-inverse"
+                    },
+                    {
+                        "name": "Success",
+                        "class": "background-success"
+                    },
+                    {
+                        "name": "Warning",
+                        "class": "background-warning"
+                    },
+                    {
+                        "name": "Danger",
+                        "class": "background-danger"
                     }
                 ]
             }
