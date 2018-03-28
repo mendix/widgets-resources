@@ -94,6 +94,7 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "classnames": "^2.2.5"
+    "classnames": "^2.2.5",
+    "signature_pad": "^2.3.2"
   }
 }
