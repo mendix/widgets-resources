@@ -1,23 +1,23 @@
 .widget-Signature {
-    div {
-        clear: both;
-    }
-
     canvas {
         position: relative;
-        left:     0px;
-        right:    0px;
+        left: 0px;
+        right: 0px;
         max-width: none;
+        display: block;
+        margin: 0 auto;
     }
 
     button.btn {
         width: 100px;
+        margin-top: 10px;
+    }
+
+    button.btn.btn-primary {
+        float: right;
     }
 
     &.signature-unset {
-        canvas {
-            display: block;
-            touch-action: none;
-        }
+        position: absolute;
     }
 }

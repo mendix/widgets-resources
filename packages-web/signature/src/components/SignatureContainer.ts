@@ -1,6 +1,6 @@
 import { Component, createElement } from "react";
 
-import { SignatureCanvas } from "./Signature";
+import { Signature } from "./Signature";
 
 interface WrapperProps {
     mxObject?: mendix.lib.MxObject;
@@ -15,8 +15,8 @@ export interface SignatureContainerProps extends WrapperProps {
     gridColor?: string;
     gridBorder?: number;
     penColor?: string;
-    maxWidth?: string;
-    minWidth?: string;
+    maxWidth?: number;
+    minWidth?: number;
     velocityFilterWeight?: string;
     showGrid?: boolean;
     onChangeMicroflow?: string;
@@ -44,9 +44,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
     }
 
     render() {
-
-        // tslint:disable-next-line:no-object-literal-type-assertion
-        return createElement(SignatureCanvas, {
+        return createElement(Signature, {
             ...this.props as SignatureContainerProps,
             imageUrl: this.state.url,
             onClickAction: this.saveImage,
@@ -66,11 +64,11 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         const { mxObject, dataUrl, onChangeMicroflow } = this.props;
 
         if (mxObject && mxObject.inheritsFrom("System.Image") && dataUrl) {
-            mxObject.set(dataUrl, url);
-
             mx.data.saveDocument(
                 mxObject.getGuid(),
-                `${Math.floor(Math.random() * 1000000)}.jpg`, {}, this.base64toBlob(url),
+                `${Math.floor(Math.random() * 1000000)}.png`,
+                { width: this.props.width, height: this.props.height },
+                this.base64toBlob(url),
                 () => { mx.ui.info("Image has been saved", false); },
                 error => { mx.ui.error(error.message, false); }
             );
@@ -110,7 +108,6 @@ export default class SignatureContainer extends Component<SignatureContainerProp
     }
 
     private updateState() {
-
         this.setState({
             url: this.getAttributeValue(this.props.dataUrl, this.props.mxObject)
         });
@@ -139,7 +136,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
     }
 
     private base64toBlob(base64Uri: string): Blob {
-        const byteString = atob(base64Uri.split(",")[1]);
+        const byteString = atob(base64Uri.split(";base64,")[1]);
         const bufferArray = new ArrayBuffer(byteString.length);
         const uintArray = new Uint8Array(bufferArray);
 
@@ -147,6 +144,6 @@ export default class SignatureContainer extends Component<SignatureContainerProp
             uintArray[i] = byteString.charCodeAt(i);
         }
 
-        return new Blob([ bufferArray ]);
+        return new Blob([ bufferArray ], { type: base64Uri.split(":")[0] });
     }
 }
