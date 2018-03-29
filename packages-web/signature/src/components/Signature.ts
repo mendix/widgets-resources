@@ -79,6 +79,7 @@ export class Signature extends Component<SignatureProps, SignatureState> {
 
     private resetCanvas = () => {
         this.signaturePad.clear();
+        this.setState({ isSet: false });
         if (this.props.showGrid) { this.drawGrid(); }
     }
 
