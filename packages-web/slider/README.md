@@ -13,20 +13,38 @@ Change a number value using a slider
 * Render slider with different bootstrap colors
 
 ## Dependencies
-Mendix 7.3
-
-## Usage
-Place the widget in the context of an object that has attributes for maximum value, minimum value and value
-
-The maximum and minimum values determine the range within which the slider value can be adjusted.
-
-For the step value, the difference between the maximum value and the minimum value should be divisible by 2. i.e.
-
-    (maximumValue - minimumValue) % 2 = 0
+Mendix 7.4
 
 ## Demo project
 https://slider.mxapps.io/
 
+## Basic configuration
+* `Value attribute` - The selected value on the slider.
+* `Minimum attribute` [required] - The attribute that contains the `minimum` slider value
+* `Maximum attribute` [required] - The attribute that contains the `maximum` slider value.
+
+ ![Sample slider datasource configuration](/assets/DataSource.PNG)
+
+## Usage
+The `slider` allows a user to set a value between two bounds (minimum value and maximum value)
+However, if there are two values that need to be set between two bounds, download the Range slider from [appstore](https://appstore.home.mendix.com/link/app/52704/Mendix/Range-slider) or from [github](https://github.com/mendixlabs/range-slider) instead.
+
+![Sample slider](/assets/Sample_usage.png)
+
+From the modeler place the widget in the context of an object that has attributes for maximum value, minimum value and value
+
+The maximum and minimum values determine the range within which the slider value can be adjusted.
+
+The step value determines the next point to shift to when sliding (interval between to points or numbers).
+
+![Sample step value](/assets/Sample_stepvalue.png)
+
+Note when choosing the step value, the difference between the maximum value and the minimum value should be divisible by 2. i.e.
+
+```
+(maximumValue - minimumValue) % 2 = 0
+
+```
 ## Issues, suggestions and feature requests
 We are actively maintaining this widget, please report any issues or suggestions for improvement at
 https://github.com/mendixlabs/slider/issues
