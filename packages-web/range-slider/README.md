@@ -15,10 +15,27 @@ Change a range of values using a slider.
 ## Dependencies
 Mendix 7.4
 
+## Basic configuration
+* `Minimum attribute` [required] - The attribute that contains the `minimum` slider value
+* `Maximum attribute` [required] - The attribute that contains the `maximum` slider value.
+* `Lower bound attribute` - The attribute that contains the `lower` bound slider value.
+* `Upper bound attribute` - The attribute that contains the `upper` bound slider value.
+
+ ![Sample slider datasource configuration](/assets/Datasource.PNG)
+
 ## Usage
-Place the widget in the context of an object that has attributes for maximum value, minimum value, lower bound value and upper bound value
+The `Range slider` allows a user to set two values between two bounds (minimum value and maximum value)
+However, if there is only one value that needs to be set between two bounds, download the slider from [appstore](https://appstore.home.mendix.com/link/app/48786/Mendix/Slider) or from [github](https://github.com/mendixlabs/slider) instead.
+
+![Sample slider](/assets/Sample_range.PNG)
+
+From the modeler place the widget in the context of an object that has attributes for maximum value, minimum value, lower bound value and upper bound value
 
 The maximum and minimum values determine the range within which the range slider values can be adjusted.
+
+The step value determines the next point to shift to when sliding (interval between to points or numbers).
+
+![Sample step value](/assets/Sample_step.PNG)
 
 For the step value, the difference between the maximum value and the minimum value should be divisible by 2. i.e.
 
