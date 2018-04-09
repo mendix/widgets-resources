@@ -19,6 +19,7 @@
     }
 
     &.signature-unset {
-        position: absolute;
+        float: left;
+        clear: left;
     }
 }

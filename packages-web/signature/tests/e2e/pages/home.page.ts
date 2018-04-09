@@ -1,15 +1,9 @@
 class HomePage {
-    public get canvas() {
-        return browser.element(".widget-Signature.signature-unset canvas");
-    }
-
-    public get renderSave() {
-        return browser.element(".widget-Signature.signature-unset .btn-primary");
-    }
-
-    public get resetButton() {
-        return browser.element(".widget-Signature.signature-unset .btn-default");
-    }
+    public get canvases() { return browser.elements(".signature-unset canvas"); }
+    public get canvas() { return browser.element(".signature-unset canvas"); }
+    public get saveButton() { return browser.element(".signature-unset button.btn.btn-primary"); }
+    public get dialogBox() { return browser.element(".mx-dialog-content"); }
+    public get resetButton() { return browser.element(".signature-unset button.btn.btn-default"); }
 
     public open(): void {
         browser.url("/");

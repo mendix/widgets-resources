@@ -65,9 +65,7 @@ describe("Siganture", () => {
 
         const signaturePadInstance = signaturePad.instance() as any;
         const resetCanvas = spyOn(signaturePadInstance, "resetCanvas").and.callThrough();
-        const signatureWrapper = signaturePad.find("button.btn.btn-default");
-        console.log(signatureWrapper); //tslint:disable-line
-        signatureWrapper.simulate("click");
+        signaturePad.find("button.btn.btn-default").first().simulate("click");
 
         expect(resetCanvas).toHaveBeenCalled();
     });

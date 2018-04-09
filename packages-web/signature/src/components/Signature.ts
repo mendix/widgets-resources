@@ -12,7 +12,7 @@ export interface SignatureProps {
     gridy?: number;
     gridColor?: string;
     gridBorder?: number;
-    penColor: string;
+    penColor?: string;
     maxWidth?: string;
     minWidth?: string;
     velocityFilterWeight?: string;
@@ -51,7 +51,7 @@ export class Signature extends Component<SignatureProps, SignatureState> {
             }, "Reset"),
             createElement("button", {
                 className: "btn btn-primary",
-                onClick: () => this.props.onClickAction(this.signaturePad.toDataURL()),
+                onClick: () => this.getDataUrl(),
                 style: { visibility: this.state.isSet ? "visible" : "hidden" }
             }, "Save"),
             createElement(Alert, { message: this.props.alertMessage || "", bootstrapStyle: "danger" })
@@ -71,6 +71,10 @@ export class Signature extends Component<SignatureProps, SignatureState> {
             });
             if (this.props.showGrid) { this.drawGrid(); }
         }
+    }
+
+    private getDataUrl = () => {
+        this.props.onClickAction(this.signaturePad.toDataURL());
     }
 
     private getCanvas = (node: HTMLCanvasElement) => {
