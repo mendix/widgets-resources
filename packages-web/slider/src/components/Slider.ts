@@ -69,7 +69,7 @@ class Slider extends Component<SliderProps, {}> {
                 min: this.props.minValue,
                 onAfterChange: this.props.onChange,
                 onChange: this.props.onUpdate,
-                step: this.props.stepValue,
+                step: this.props.stepValue || 1,
                 value: this.getValidValue()
             }),
             createElement(Alert, { message: alertMessage })
