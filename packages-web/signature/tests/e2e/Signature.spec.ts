@@ -1,54 +1,41 @@
 import HomePage from "./pages/home.page";
-import configsPage from "./pages/validateConfigs";
 
-const border = "1px solid rgb(0, 0, 0)";
 const visible = "visible";
-const hidden = "hidden";
-const feedbackMessage = "The entity does not inherit from System Image";
 
 describe("SignatureCanvas", () => {
+    beforeAll(() => {
+        HomePage.open();
+    });
 
     it("renders Canvas", () => {
-        HomePage.open();
-        HomePage.canvas.waitForVisible();
+        HomePage.canvases.waitForVisible();
 
-        const canvasBorder = HomePage.canvas.getCssProperty("border");
-        expect(canvasBorder.value).toBe(border);
+        expect(HomePage.canvases.value.length).toBeGreaterThan(0);
     });
 
-    it("renders signature", () => {
-        HomePage.open();
+    it("should save signature after signing", () => {
         HomePage.canvas.waitForVisible();
         HomePage.canvas.click();
+        HomePage.saveButton.click();
+        HomePage.dialogBox.waitForExist();
 
-        HomePage.renderSave.waitForVisible();
-        const displayButton = HomePage.renderSave.getCssProperty("visibility");
-        expect(displayButton.value).toBe(visible);
+        expect(HomePage.dialogBox.getText()).toContain("Image has been saved");
     });
 
-    xit("clears canvas on reset", () => {
-        HomePage.open();
+    it("clears canvas on reset", () => {
+        browser.refresh();
         HomePage.canvas.waitForVisible();
         HomePage.canvas.click();
+        HomePage.saveButton.waitForVisible();
 
-        HomePage.resetButton.waitForVisible();
+        expect(HomePage.saveButton.getCssProperty("visibility").value).toBe(visible);
+
         HomePage.resetButton.click();
 
-        const displayButton = HomePage.renderSave.getCssProperty("visibility");
-        expect(displayButton.value).toBe(hidden);
-    });
+        browser.waitUntil(() => {
+            return HomePage.saveButton.getCssProperty("visibility").value === "hidden";
+        }, 3000, "expected button to be invisible after 3s");
 
-    it("handles validations", () => {
-        configsPage.open();
-        configsPage.canvas.waitForVisible();
-        configsPage.canvas.click();
-
-        configsPage.renderSave.waitForVisible();
-        configsPage.renderSave.click();
-
-        configsPage.validationFeedback.waitForVisible();
-        const feedback = configsPage.validationFeedback.getText();
-
-        expect(feedback).toBe(feedbackMessage);
+        expect(HomePage.saveButton.getCssProperty("visibility").value).toBe("hidden");
     });
 });
