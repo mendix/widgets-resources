@@ -67,5 +67,11 @@
             <description>Microflow to trigger when button is toggled</description>
             <returnType type="Void"/>
         </property>
+        <property key="onChangeNanoflow" type="nanoflow" required="false">
+            <caption>On change nanoflow</caption>
+            <category>Events</category>
+            <description>Nanoflow to trigger when button is toggled</description>
+            <returnType type="Void"/>
+        </property>
     </properties>
 </widget>

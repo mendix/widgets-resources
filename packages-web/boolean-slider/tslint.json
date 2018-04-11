@@ -138,7 +138,13 @@
     "linebreak-style": [
       true,
       "LF"
-    ]
+    ],
+    "object-literal-sort-keys": false,
+    "array-type": false,
+    "max-line-length": false,
+    "no-submodule-imports": false,
+    "no-implicit-dependencies": false,
+    "no-namespace": false
   },
   "jsRules": {
     "trailing-comma": [

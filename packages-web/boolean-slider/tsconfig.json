@@ -7,6 +7,7 @@
     "sourceMap": true,
     "module": "amd",
     "target": "es5",
+    "lib": [ "es2015", "dom" ],
     "types": [
       "mendix-client",
       "jasmine",
@@ -22,10 +23,11 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "skipLibCheck": true,
-    "strictNullChecks": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "skipLibCheck": false
   },
   "exclude": [
     "dist/",
