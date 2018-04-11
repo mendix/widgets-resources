@@ -5,6 +5,7 @@ import { Label } from "./Label";
 
 interface WrapperProps {
     class?: string;
+    mxform: mxui.lib.form._FormBase;
     mxObject?: mendix.lib.MxObject;
     style?: string;
     readOnly?: boolean;
@@ -18,11 +19,17 @@ interface SwitchContainerProps extends WrapperProps {
     label: string;
     labelWidth: number;
     onChangeMicroflow: string;
+    onChangeNanoflow: Nanoflow;
 }
 
 interface SwitchContainerState {
     alertMessage?: string;
     isChecked?: boolean;
+}
+
+interface Nanoflow {
+    nanoflow: object[];
+    paramsSpec: { Progress: string };
 }
 
 type ColorStyle = "default" | "primary" | "inverse" | "info" | "warning" | "success" | "danger";
@@ -102,10 +109,10 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
     }
 
     private handleToggle() {
-        const { booleanAttribute, mxObject, onChangeMicroflow } = this.props;
+        const { booleanAttribute, mxObject } = this.props;
         if (mxObject) {
             mxObject.set(booleanAttribute, !mxObject.get(booleanAttribute));
-            this.executeAction(onChangeMicroflow, mxObject.getGuid());
+            this.executeAction(mxObject);
         }
     }
 
@@ -152,15 +159,29 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
         }
     }
 
-    private executeAction(actionname: string, guid: string) {
-        if (actionname && this.props.mxObject) {
-            window.mx.ui.action(actionname, {
-                error: (error) =>
-                    window.mx.ui.error(`Error while executing microflow ${actionname}: ${error.message}`),
+    private executeAction(mxObject: mendix.lib.MxObject) {
+        const { onChangeMicroflow, onChangeNanoflow, mxform } = this.props;
+
+        if (onChangeMicroflow) {
+            window.mx.ui.action(onChangeMicroflow, {
+                error: error =>
+                    window.mx.ui.error(`Error while executing microflow ${onChangeMicroflow}: ${error.message}`),
                 params: {
                     applyto: "selection",
-                    guids: [ guid ]
+                    guids: [ mxObject.getGuid() ]
                 }
+            });
+        }
+
+        if (onChangeNanoflow.nanoflow) {
+            const context = new mendix.lib.MxContext();
+            context.setContext(mxObject.getEntity(), mxObject.getGuid());
+            window.mx.data.callNanoflow({
+                context,
+                error: error =>
+                    window.mx.ui.error(`Error while executing nanoflow: ${onChangeNanoflow.nanoflow}: ${error.message}`),
+                nanoflow: onChangeNanoflow,
+                origin: mxform
             });
         }
     }
