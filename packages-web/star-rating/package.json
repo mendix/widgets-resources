@@ -1,13 +1,13 @@
 {
   "name": "star-rating",
   "widgetName": "StarRating",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "This widget lets users rate an object with stars or custom icons.",
   "scripts": {
-    "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec \"grunt",
+    "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec grunt",
     "emit": "tsc",
-    "pretest": "tsc && npm run lint && npm run build",
-    "test": "npm run test:unit && npm run test:conditional",
+    "pretest": "tsc && npm run lint && grunt release",
+    "test": "karma start --single-run --codeCoverage && node tests/remap.js",
     "test:conditional": "node ./node_modules/mendix-widget-build-script/dist/CheckPullRequestFromFork.js && echo 'Skip tests on forked pull request' || npm run deployAndTest",
     "test:dev": "karma start",
     "test:unit": "karma start --single-run --codeCoverage && node tests/remap.js",
