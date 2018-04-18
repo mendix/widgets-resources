@@ -67,5 +67,11 @@
             <description>Microflow to be executed when the rate is changed</description>
             <returnType type="Void"/>
         </property>
+        <property key="onChangeNanoflow" type="nanoflow" required="false">
+            <caption>On change nanoflow</caption>
+            <category>Events</category>
+            <description>Nanoflow to be executed when the rate is changed</description>
+            <returnType type="Void" />
+        </property>
     </properties>
 </widget>
