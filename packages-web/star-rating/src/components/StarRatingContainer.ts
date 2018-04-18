@@ -5,6 +5,7 @@ import * as classNames from "classnames";
 
 interface WrapperProps {
     class: string;
+    mxform: mxui.lib.form._FormBase;
     mxObject: mendix.lib.MxObject;
     readOnly: boolean;
     style: string;
@@ -15,10 +16,16 @@ export interface ContainerProps extends WrapperProps {
     editable: "default" | "never";
     maximumStars: number;
     onChangeMicroflow: string;
+    onChangeNanoflow: Nanoflow;
     rateAttribute: string;
     starSize: StarSize;
     starSizeCustom: number;
     widgetColor: WidgetColors;
+}
+
+interface Nanoflow {
+    nanoflow: object[];
+    paramsSpec: { Progress: string };
 }
 // tslint:disable max-length-line
 export type WidgetColors = "widget" | "default" | "primary" | "success" | "info" | "warning" | "danger" | "inverse" ;
@@ -84,7 +91,7 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
     }
 
     private handleOnChange(rate: number) {
-        const { mxObject, onChangeMicroflow, rateAttribute } = this.props;
+        const { mxform, mxObject, onChangeMicroflow, onChangeNanoflow, rateAttribute } = this.props;
         if (mxObject) {
             mxObject.set(rateAttribute, Number(rate));
             if (onChangeMicroflow) {
@@ -95,6 +102,19 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
                         applyto: "selection",
                         guids: [ mxObject.getGuid() ]
                     }
+                });
+            }
+
+            if (onChangeNanoflow.nanoflow) {
+                const context = new mendix.lib.MxContext();
+                context.setContext(mxObject.getEntity(), mxObject.getGuid());
+                window.mx.data.callNanoflow({
+                    context,
+                    error: error => window.mx.ui.error(
+                        `An error occurred while executing nanoflow: + ${onChangeNanoflow} : ${error.message}`
+                    ),
+                    nanoflow: onChangeNanoflow,
+                    origin: mxform
                 });
             }
         }
