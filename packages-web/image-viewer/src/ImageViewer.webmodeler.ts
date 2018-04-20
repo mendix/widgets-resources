@@ -56,39 +56,16 @@ export function getPreviewCss() {
 }
 
 export function getVisibleProperties(valueMap: ImageViewerContainerProps, visibilityMap: VisibilityMap) {
-    if (valueMap.source === "systemImage") {
-        visibilityMap.dynamicUrlAttribute = false;
-        visibilityMap.urlStatic = false;
-        visibilityMap.imageStatic = false;
-    } else if (valueMap.source === "urlAttribute") {
-        visibilityMap.dynamicUrlAttribute = true;
-        visibilityMap.urlStatic = false;
-        visibilityMap.imageStatic = false;
-    } else if (valueMap.source === "staticUrl") {
-        visibilityMap.dynamicUrlAttribute = false;
-        visibilityMap.urlStatic = true;
-        visibilityMap.imageStatic = false;
-    } else if (valueMap.source === "staticImage") {
-        visibilityMap.dynamicUrlAttribute = false;
-        visibilityMap.urlStatic = false;
-        visibilityMap.imageStatic = true;
-    }
-    if (valueMap.widthUnit === "auto") {
-        visibilityMap.width = false;
-    }
-    if (valueMap.heightUnit === "auto") {
-        visibilityMap.height = false;
-    }
-    if (valueMap.onClickOption === "doNothing" || valueMap.onClickOption === "openFullScreen") {
-        visibilityMap.onClickMicroflow = false;
-        visibilityMap.onClickForm = false;
-    } else if (valueMap.onClickOption === "callMicroflow") {
-        visibilityMap.onClickMicroflow = true;
-        visibilityMap.onClickForm = false;
-    } else if (valueMap.onClickOption === "showPage") {
-        visibilityMap.onClickMicroflow = false;
-        visibilityMap.onClickForm = true;
-    }
+    visibilityMap.dynamicUrlAttribute = valueMap.source === "urlAttribute";
+    visibilityMap.urlStatic = valueMap.source === "staticUrl";
+    visibilityMap.imageStatic = valueMap.source === "staticImage";
+
+    visibilityMap.width = valueMap.widthUnit === "auto";
+    visibilityMap.height = valueMap.heightUnit === "auto";
+
+    visibilityMap.onClickMicroflow = valueMap.onClickOption === "callMicroflow";
+    visibilityMap.onClickNanoflow = valueMap.onClickOption === "callNanoflow";
+    visibilityMap.onClickForm = valueMap.onClickOption === "showPage";
 
     return visibilityMap;
 }

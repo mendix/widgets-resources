@@ -74,6 +74,7 @@
             <enumerationValues>
                 <enumerationValue key="doNothing">Do nothing</enumerationValue>
                 <enumerationValue key="callMicroflow">Call microflow</enumerationValue>
+                <enumerationValue key="callNanoflow">Call nanoflow</enumerationValue>
                 <enumerationValue key="showPage">Show page</enumerationValue>
                 <enumerationValue key="openFullScreen">Open full screen</enumerationValue>
             </enumerationValues>
@@ -82,6 +83,12 @@
             <caption>On click microflow</caption>
             <category>Events</category>
             <description>The microflow to call when an image is clicked</description>
+            <returnType type="Void"/>
+        </property>
+        <property key="onClickNanoflow" type="nanoflow" required="false">
+            <caption>On click nanoflow</caption>
+            <category>Events</category>
+            <description>The nanoflow to call when an image is clicked</description>
             <returnType type="Void"/>
         </property>
         <property key="onClickForm" type="form" required="false">

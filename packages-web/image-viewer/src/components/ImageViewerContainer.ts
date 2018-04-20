@@ -25,6 +25,7 @@ interface ImageViewerContainerProps extends WrapperProps {
     onClickOption: onClickOptions;
     onClickMicroflow: string;
     onClickForm: string;
+    onClickNanoflow: Nanoflow;
 }
 
 interface ImageViewerContainerState {
@@ -32,9 +33,14 @@ interface ImageViewerContainerState {
     imageUrl: string;
 }
 
+interface Nanoflow {
+    nanoflow: object[];
+    paramsSpec: { Progress: string };
+}
+
 type DataSource = "systemImage" | "urlAttribute" | "staticUrl" | "staticImage";
 type Units = "auto" | "pixels" | "percentage";
-type onClickOptions = "doNothing" | "callMicroflow" | "showPage" | "openFullScreen";
+type onClickOptions = "doNothing" | "callMicroflow" | "showPage" | "openFullScreen" | "callNanoflow";
 
 class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageViewerContainerState> {
     private subscriptionHandles: number[];
@@ -139,6 +145,9 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         if (props.onClickOption === "callMicroflow" && !props.onClickMicroflow) {
             message = "on click microflow is required";
         }
+        if (props.onClickOption === "callNanoflow" && !props.onClickNanoflow.nanoflow) {
+            message = "on click nanoflow is required";
+        }
         if (props.onClickOption === "showPage" && !props.onClickForm) {
             message = "on click page is required";
         }
@@ -171,14 +180,19 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 
     private executeAction() {
-        const { mxObject, onClickMicroflow, onClickOption, onClickForm, mxform } = this.props;
+        const { mxObject, onClickMicroflow, onClickNanoflow, onClickOption, onClickForm, mxform } = this.props;
         const context = this.getContext();
         if (onClickOption === "callMicroflow" && mxObject) {
             window.mx.ui.action(onClickMicroflow, {
                 context,
-                error: error => window.mx.ui.error(
-                    `An error occurred while executing action ${onClickMicroflow} : ${error.message}`
-                ),
+                error: error => window.mx.ui.error(`An error occurred while executing action ${onClickMicroflow} : ${error.message}`),
+                origin: mxform
+            });
+        } else if (onClickOption === "callNanoflow" && mxObject) {
+            window.mx.data.callNanoflow({
+                context,
+                error: error => window.mx.ui.error(`An error occurred while executing action ${onClickNanoflow} : ${error.message}`),
+                nanoflow: onClickNanoflow,
                 origin: mxform
             });
         } else if (onClickOption === "showPage" && mxObject) {
