@@ -98,6 +98,7 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
                 window.mx.ui.action(onChangeMicroflow, {
                     error: error =>
                         window.mx.ui.error(`Error while executing microflow: ${onChangeMicroflow}: ${error.message}`),
+                    origin: mxform,
                     params: {
                         applyto: "selection",
                         guids: [ mxObject.getGuid() ]
