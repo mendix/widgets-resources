@@ -1,10 +1,10 @@
 import { Component, createElement } from "react";
-import { Color, ColorResult, SketchPicker } from "react-color";
+import { Color, ColorChangeHandler, ColorResult, SketchPicker } from "react-color";
 
 interface ColorPickerProps {
-    color?: Color;
+    color: Color;
     type: PickerType;
-    onChange?: (color: ColorResult) => void;
+    onChange?: ColorChangeHandler;
 }
 
 export type PickerType = "sketch" | "photoshop" | "chrome" | "block" | "github" | "twitter" | "circle" | "hue" |
@@ -12,6 +12,9 @@ export type PickerType = "sketch" | "photoshop" | "chrome" | "block" | "github" 
 
 export class ColorPicker extends Component<ColorPickerProps, {}> {
     render() {
-        return createElement(SketchPicker);
+        return createElement(SketchPicker, {
+            color: this.props.color,
+            onChange: this.props.onChange
+        });
     }
 }
