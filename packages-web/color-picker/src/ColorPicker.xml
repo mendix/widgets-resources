@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.custom.colorpicker.ColorPicker" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/">
+    <name>Color picker</name>
+    <description>Pick a color from color input</description>
+    <icon/>
+    <properties>
+        <property key="message" type="string" required="false">
+            <caption>Message</caption>
+            <category>Data source</category>
+            <description/>
+        </property>
+    </properties>
+</widget>
