@@ -16,9 +16,10 @@ Display an image and optional perform an action on click: mobile friendly enlarg
     * Enlarge and pinch zoom
     * Open page
     * Call microflow
+    * Call nanoflow
 
 ## Dependencies
-Mendix 7.5
+Mendix 7.13.1
 
 ## Demo project
 https://imageviewer.mxapps.io/
