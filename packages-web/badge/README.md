@@ -11,11 +11,12 @@ Shows a value as a badge or a color label
 
  * Display as a badge or a color label
  * Attach an onclick microflow
+ * Attach an onclick nanoflow
  * Set static data text when the dynamic data is not specified
 
 ## Dependencies
 
-Mendix 7.4
+Mendix 7.13.1
 
 ## Usage
 Place the widget in the context of an object that has a value attribute.
