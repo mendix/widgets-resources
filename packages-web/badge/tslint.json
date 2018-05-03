@@ -12,7 +12,7 @@
     "eofline": true,
     "indent": [
       true,
-      "tab"
+      "spaces"
     ],
     "member-ordering": [
       true,
@@ -39,8 +39,8 @@
     "one-line": [
       true,
       "check-catch",
-      "check-finally",
       "check-else",
+      "check-finally",
       "check-open-brace",
       "check-whitespace"
     ],
@@ -133,11 +133,17 @@
       }
     ],
     "curly": false,
-    "max-line-length": [
-      true,
-      120
-    ],
     "arrow-parens": false,
+    "no-object-literal-type-assertion": false,
+    "linebreak-style": [
+      true,
+      "LF"
+    ],
+    "object-literal-sort-keys": false,
+    "array-type": false,
+    "max-line-length": false,
+    "no-submodule-imports": false,
+    "no-implicit-dependencies": false,
     "no-namespace": false
   },
   "jsRules": {
@@ -148,6 +154,10 @@
     "array-bracket-spacing": [
       true,
       "always"
+    ],
+    "linebreak-style": [
+      true,
+      "LF"
     ]
   }
 }

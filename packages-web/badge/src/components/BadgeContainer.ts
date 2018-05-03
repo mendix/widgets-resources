@@ -5,6 +5,7 @@ import { Alert } from "./Alert";
 
 interface WrapperProps {
     "class"?: string;
+    mxform: mxui.lib.form._FormBase;
     mxObject?: mendix.lib.MxObject;
     style?: string;
 }
@@ -15,6 +16,7 @@ export interface BadgeContainerProps extends WrapperProps {
     badgeType: "badge" | "label";
     badgeValue: string;
     microflow: string;
+    nanoflow: Nanoflow;
     onClickEvent: OnClickOptions;
     page: string;
 }
@@ -24,7 +26,12 @@ interface BadgeContainerState {
     value: string;
 }
 
-type OnClickOptions = "doNothing" | "showPage" | "callMicroflow";
+interface Nanoflow {
+    nanoflow: object[];
+    paramsSpec: { Progress: string };
+}
+
+type OnClickOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
 
 export default class BadgeContainer extends Component<BadgeContainerProps, BadgeContainerState> {
     private subscriptionHandles: number[];
@@ -112,6 +119,8 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
         let errorMessage = "";
         if (props.onClickEvent === "callMicroflow" && !props.microflow) {
             errorMessage = "A 'Microflow' is required for 'Events' 'Call a microflow'";
+        } else if (props.onClickEvent === "callNanoflow" && !props.nanoflow.nanoflow) {
+            errorMessage = "A 'Nanoflow' is required for 'Events' 'Call a nanoflow'";
         } else if (props.onClickEvent === "showPage" && !props.page) {
             errorMessage = "A 'Page' is required for 'Events' 'Show a page'";
         }
@@ -123,7 +132,7 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
     }
 
     private handleOnClick() {
-        const { mxObject, onClickEvent, microflow, page } = this.props;
+        const { mxObject, onClickEvent, microflow, mxform, nanoflow, page } = this.props;
         if (!mxObject || !mxObject.getGuid()) {
             return;
         }
@@ -132,10 +141,18 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
         if (onClickEvent === "callMicroflow" && microflow && mxObject.getGuid()) {
             window.mx.ui.action(microflow, {
                 error: error => window.mx.ui.error(`Error while executing microflow: ${microflow}: ${error.message}`),
+                origin: mxform,
                 params: {
                     applyto: "selection",
                     guids: [ mxObject.getGuid() ]
                 }
+            });
+        } else if (onClickEvent === "callNanoflow" && nanoflow) {
+            window.mx.data.callNanoflow({
+                context,
+                error: error => window.mx.ui.error(`Error while executing nanoflow ${nanoflow} : ${error.message}`),
+                nanoflow,
+                origin: mxform
             });
         } else if (onClickEvent === "showPage" && page && mxObject.getGuid()) {
             window.mx.ui.openForm(page, {
