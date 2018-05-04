@@ -1,20 +1,98 @@
 import { Component, createElement } from "react";
-import { Color, ColorChangeHandler, ColorResult, SketchPicker } from "react-color";
+
+import * as classNames from "classnames";
+import * as Picker from "react-color";
+
+import "../ui/ColorPicker.css";
 
 interface ColorPickerProps {
-    color: Color;
+    className?: string;
+    color: string;
     type: PickerType;
-    onChange?: ColorChangeHandler;
+    mode: RenderMode;
+    onChange?: Picker.ColorChangeHandler;
+}
+
+interface ColorPickerState {
+    displayColorPicker: boolean;
 }
 
 export type PickerType = "sketch" | "photoshop" | "chrome" | "block" | "github" | "twitter" | "circle" | "hue" |
     "aplha" | "slider" | "compact" | "material" | "swatches";
 
-export class ColorPicker extends Component<ColorPickerProps, {}> {
+export type RenderMode = "popover" | "input" | "inline";
+
+export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
+    private components: any = {
+        sketch: Picker.SketchPicker,
+        photoshop: Picker.PhotoshopPicker
+    };
+
+    constructor(props: ColorPickerProps) {
+        super(props);
+
+        this.state = {
+            displayColorPicker: false
+        };
+    }
+
     render() {
-        return createElement(SketchPicker, {
-            color: this.props.color,
-            onChange: this.props.onChange
-        });
+        return createElement("div", {
+            className: classNames(
+                "widget-color-picker",
+                this.props.className
+            )
+        }, this.renderCompoents(), this.renderPicker());
+    }
+
+    handleClick = () => {
+        this.setState({ displayColorPicker: !this.state.displayColorPicker });
+    }
+
+    handleClose = () => {
+        this.setState({ displayColorPicker: false });
+    }
+
+    private renderCompoents() {
+        const { mode } = this.props;
+        if (mode === "input") {
+            return createElement("div", { className: "widget-color-picker-input-container" },
+                createElement("input", {
+                    className: classNames(`form-control widget-color-picker-button`),
+                    type: "text",
+                    value: this.props.color
+                }),
+                createElement("div", {
+                    className: "widget-color-picker-input"
+                },
+                    createElement("div", {
+                        className: "widget-color-picker-outer",
+                        onClick: this.handleClick,
+                        onBlur: this.handleClose
+                    }, createElement("div", { className: "widget-color-picker-input-inner", style: { background: this.props.color } }))
+                )
+            );
+        } else {
+            return createElement("div", {
+                className: "widget-color-picker-outer",
+                ...(mode === "popover") ? { onClick: this.handleClick } : {}
+            }, createElement("div", { className: "widget-color-picker-inner", style: { background: this.props.color } }));
+        }
+
+    }
+
+    private renderPicker() {
+        const { mode } = this.props;
+        if (this.state.displayColorPicker || mode === "inline") {
+            return createElement("div", {
+                className: classNames({ "widget-color-picker-popover": !(mode === "inline") })
+            },
+                createElement(this.components[this.props.type], {
+                    color: this.props.color,
+                    onChange: this.props.onChange,
+                    onBlur: this.handleClose
+                })
+            );
+        }
     }
 }
