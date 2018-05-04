@@ -4,7 +4,7 @@
     <description>Pick a color from color input</description>
     <icon/>
     <properties>
-        <property key="colorAttribute" required="false" type="attribute">
+        <property key="colorAttribute" type="attribute">
             <caption>Color attribute</caption>
             <category>Data source</category>
             <description>Holds the color input value</description>
@@ -13,7 +13,7 @@
             </attributeTypes>
         </property>
         <property key="type" type="enumeration" defaultValue="sketch">
-            <caption>Type</caption>
+            <caption>Picker type</caption>
             <category>Data source</category>
             <description/>
             <enumerationValues>
@@ -30,6 +30,16 @@
                 <enumerationValue key="compact">Compact</enumerationValue>
                 <enumerationValue key="material">Material</enumerationValue>
                 <enumerationValue key="swatches">Swatches</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="renderMode" type="enumeration" defaultValue="popover">
+            <caption>Render mode</caption>
+            <category>Appearance</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="popover">Popover</enumerationValue>
+                <enumerationValue key="input">Input</enumerationValue>
+                <enumerationValue key="inline">Inline</enumerationValue>
             </enumerationValues>
         </property>
         <property key="onChangeMicroflow" type="microflow" required="false">

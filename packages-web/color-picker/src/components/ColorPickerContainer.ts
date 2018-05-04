@@ -1,5 +1,5 @@
 import { Component, createElement } from "react";
-import { ColorPicker, PickerType } from "./ColorPicker";
+import { ColorPicker, PickerType, RenderMode } from "./ColorPicker";
 import { Color, ColorResult } from "react-color";
 
 interface WrapperProps {
@@ -12,12 +12,13 @@ interface WrapperProps {
 interface ColorPickerContainerProps extends WrapperProps {
     colorAttribute: string;
     type: PickerType;
+    renderMode: RenderMode;
     onChangeMicroflow: string;
 }
 
 interface ColorPickerContainerState {
     alertMessage?: string;
-    color: Color;
+    color: string;
 }
 
 export default class ColorPickerContainer extends Component<ColorPickerContainerProps, ColorPickerContainerState> {
@@ -36,6 +37,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         return createElement(ColorPicker, {
             color: this.state.color,
             type: this.props.type,
+            mode: this.props.renderMode,
             onChange: this.updateColorValue
         });
     }
