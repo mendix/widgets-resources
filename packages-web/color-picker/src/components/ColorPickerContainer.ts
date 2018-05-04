@@ -14,12 +14,15 @@ interface ColorPickerContainerProps extends WrapperProps {
     type: PickerType;
     renderMode: RenderMode;
     onChangeMicroflow: string;
+    format: string;
 }
 
 interface ColorPickerContainerState {
     alertMessage?: string;
     color: string;
 }
+
+type Format = "hex" | "rgb" | "rgba";
 
 export default class ColorPickerContainer extends Component<ColorPickerContainerProps, ColorPickerContainerState> {
     private subscriptionHandles: number[];
@@ -54,9 +57,15 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     }
 
     private updateColorValue = (color: ColorResult) => {
-        const { mxObject, colorAttribute } = this.props;
+        const { format, mxObject, colorAttribute } = this.props;
         if (color && mxObject) {
-            mxObject.set(colorAttribute, color.hex);
+            if (format === "hex") {
+                mxObject.set(colorAttribute, color.hex);
+            } else if (format === "rgb") {
+                mxObject.set(colorAttribute, `rgb(${color.rgb.r},${color.rgb.g},${color.rgb.b})`);
+            } else {
+                mxObject.set(colorAttribute, `rgba(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})`);
+            }
         }
     }
 
