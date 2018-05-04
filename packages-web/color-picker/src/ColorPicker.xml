@@ -42,6 +42,16 @@
                 <enumerationValue key="inline">Inline</enumerationValue>
             </enumerationValues>
         </property>
+        <property key="format" type="enumeration" defaultValue="hex">
+            <caption>Format</caption>
+            <category>Appearance</category>
+            <description>Format of the color value (hex, rgb or rgba)</description>
+            <enumerationValues>
+                <enumerationValue key="hex">Hex</enumerationValue>
+                <enumerationValue key="rgb">RGB</enumerationValue>
+                <enumerationValue key="rgba">RGBA</enumerationValue>
+            </enumerationValues>
+        </property>
         <property key="onChangeMicroflow" type="microflow" required="false">
             <caption>On change microflow</caption>
             <category>Events</category>

@@ -49,10 +49,6 @@ export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         this.setState({ displayColorPicker: !this.state.displayColorPicker });
     }
 
-    handleClose = () => {
-        this.setState({ displayColorPicker: false });
-    }
-
     private renderCompoents() {
         const { mode } = this.props;
         if (mode === "input") {
@@ -67,8 +63,7 @@ export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
                 },
                     createElement("div", {
                         className: "widget-color-picker-outer",
-                        onClick: this.handleClick,
-                        onBlur: this.handleClose
+                        onClick: this.handleClick
                     }, createElement("div", { className: "widget-color-picker-input-inner", style: { background: this.props.color } }))
                 )
             );
@@ -89,8 +84,7 @@ export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
             },
                 createElement(this.components[this.props.type], {
                     color: this.props.color,
-                    onChange: this.props.onChange,
-                    onBlur: this.handleClose
+                    onChange: this.props.onChange
                 })
             );
         }
