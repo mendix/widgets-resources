@@ -1,5 +1,6 @@
 import { Component, createElement } from "react";
 
+import { Alert } from "./Alert";
 import * as classNames from "classnames";
 import * as Picker from "react-color";
 
@@ -11,6 +12,7 @@ interface ColorPickerProps {
     type: PickerType;
     mode: RenderMode;
     onChange?: Picker.ColorChangeHandler;
+    alertMessage?: string;
 }
 
 interface ColorPickerState {
@@ -42,7 +44,10 @@ export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
                 "widget-color-picker",
                 this.props.className
             )
-        }, this.renderCompoents(), this.renderPicker());
+        }, this.renderCompoents(),
+            this.renderPicker(),
+            createElement(Alert, { className: "widget-color-picker-alert" }, this.props.alertMessage)
+        );
     }
 
     handleClick = () => {
