@@ -18,7 +18,6 @@ interface ColorPickerContainerProps extends WrapperProps {
 }
 
 interface ColorPickerContainerState {
-    alertMessage?: string;
     color: string;
 }
 
@@ -37,8 +36,11 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     }
 
     render() {
+        const alertMessage = this.validateColor();
+
         return createElement(ColorPicker, {
-            color: this.state.color,
+            alertMessage,
+            color: this.state.color || "#00ffff",
             type: this.props.type,
             mode: this.props.renderMode,
             onChange: this.updateColorValue
@@ -98,5 +100,14 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         this.setState({
             color: this.getValue(this.props.mxObject)
         });
+    }
+
+    private validateColor = (): string => {
+        const { color } = this.state;
+        if (color.indexOf("#") === -1) {
+            return "Color value should be of format 'rgb', 'rgba' or 'hex'";
+        }
+
+        return "";
     }
 }
