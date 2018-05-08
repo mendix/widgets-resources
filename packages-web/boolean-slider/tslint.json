@@ -154,10 +154,6 @@
     "array-bracket-spacing": [
       true,
       "always"
-    ],
-    "linebreak-style": [
-      true,
-      "LF"
     ]
   }
 }
