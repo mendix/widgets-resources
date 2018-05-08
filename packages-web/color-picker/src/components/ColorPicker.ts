@@ -10,9 +10,10 @@ interface ColorPickerProps {
     className?: string;
     color: string;
     type: PickerType;
-    mode: RenderMode;
+    mode: Mode;
     onChange?: Picker.ColorChangeHandler;
     alertMessage?: string;
+    onChangeComplete?: Picker.ColorChangeHandler;
 }
 
 interface ColorPickerState {
@@ -22,7 +23,7 @@ interface ColorPickerState {
 export type PickerType = "sketch" | "photoshop" | "chrome" | "block" | "github" | "twitter" | "circle" | "hue" |
     "aplha" | "slider" | "compact" | "material" | "swatches";
 
-export type RenderMode = "popover" | "input" | "inline";
+export type Mode = "popover" | "input" | "inline";
 
 export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
     private components: any = {
@@ -89,7 +90,8 @@ export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
             },
                 createElement(this.components[this.props.type], {
                     color: this.props.color,
-                    onChange: this.props.onChange
+                    onChange: this.props.onChange,
+                    onChangeComplete: this.props.onChangeComplete
                 })
             );
         }
