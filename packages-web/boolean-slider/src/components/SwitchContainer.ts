@@ -179,7 +179,7 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
             window.mx.data.callNanoflow({
                 context,
                 error: error =>
-                    window.mx.ui.error(`Error while executing nanoflow: ${onChangeNanoflow.nanoflow}: ${error.message}`),
+                    window.mx.ui.error(`Error while executing the on change nanoflow: ${error.message}`),
                 nanoflow: onChangeNanoflow,
                 origin: mxform
             });

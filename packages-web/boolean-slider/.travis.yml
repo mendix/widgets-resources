@@ -1,10 +1,15 @@
 sudo: required
-dist: trusty
 language: node_js
 node_js:
-- '6'
+- "8"
+addons:
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
 before_install:
-- npm i -g npm@5.2
+- npm i -g npm
 - npm install grunt-cli -g
 - export CHROME_BIN=chromium-browser
 - export DISPLAY=:99.0
@@ -29,10 +34,9 @@ env:
   - MX_USER=ci@flockofbirds.org
 deploy:
   provider: releases
-  api_key:
-    secure: $GITHUB_KEY
-  file: dist/release/*
+  api_key: $GITHUB_KEY
   file_glob: true
+  file: dist/release/*
   skip_cleanup: true
   on:
     repo: $TRAVIS_REPO_SLUG
