@@ -191,7 +191,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         } else if (onClickOption === "callNanoflow" && mxObject) {
             window.mx.data.callNanoflow({
                 context,
-                error: error => window.mx.ui.error(`An error occurred while executing action ${onClickNanoflow} : ${error.message}`),
+                error: error => window.mx.ui.error(`An error occurred while executing the on click nanoflow: ${error.message}`),
                 nanoflow: onClickNanoflow,
                 origin: mxform
             });
