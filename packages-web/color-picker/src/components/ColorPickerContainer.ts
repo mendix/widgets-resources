@@ -17,9 +17,10 @@ interface Nanoflow {
 
 interface ColorPickerContainerProps extends WrapperProps {
     colorAttribute: string;
-    type: PickerType;
-    mode: Mode;
+    editable: "default" | "never";
     format: string;
+    mode: Mode;
+    type: PickerType;
     onChangeEvent: onChange;
     onChangeMicroflow: string;
     onChangePage: string;
@@ -46,11 +47,17 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     }
 
     render() {
+        const { mxObject, readOnly, colorAttribute } = this.props;
+        const disabled = this.props.editable === "default"
+            ? (!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute)))
+            : true;
+
         const alertMessage = this.state.alertMessage || ColorPickerContainer.validateProps(this.props);
 
         return createElement(ColorPicker, {
             alertMessage,
             color: this.state.color,
+            disabled,
             type: this.props.type,
             mode: this.props.mode,
             onChange: this.updateColorValue,
@@ -133,10 +140,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             };
         }
 
-        return {
-            alertMessage: "",
-            color
-        };
+        return { color: color || this.defaultColor };
     }
 
     private handleOnChange = () => {
