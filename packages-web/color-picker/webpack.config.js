@@ -28,6 +28,7 @@ const widgetConfig = {
             }) }
         ]
     },
+    mode: "development",
     devtool: "source-map",
     externals: [ "react", "react-dom" ],
     plugins: [
@@ -58,6 +59,7 @@ const previewConfig = {
             { test: /\.css$/, use: "raw-loader" },
         ]
     },
+    mode: "development",
     devtool: "inline-source-map",
     externals: [ "react", "react-dom" ],
     plugins: [
