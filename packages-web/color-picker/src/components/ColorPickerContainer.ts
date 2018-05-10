@@ -38,6 +38,7 @@ type onChange = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
 export default class ColorPickerContainer extends Component<ColorPickerContainerProps, ColorPickerContainerState> {
     private subscriptionHandles: number[];
     private defaultColor = "#000000";
+    private disabled = false;
 
     constructor(props: ColorPickerContainerProps) {
         super(props);
@@ -48,7 +49,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
 
     render() {
         const { mxObject, readOnly, colorAttribute } = this.props;
-        const disabled = this.props.editable === "default"
+        this.disabled = this.props.editable === "default"
             ? (!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute)))
             : true;
 
@@ -57,7 +58,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         return createElement(ColorPicker, {
             alertMessage,
             color: this.state.color,
-            disabled,
+            disabled: this.disabled,
             type: this.props.type,
             mode: this.props.mode,
             onChange: this.updateColorValue,
@@ -89,7 +90,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
 
     private updateColorValue = (color: ColorResult) => {
         const { format, mxObject, colorAttribute } = this.props;
-        if (color && mxObject) {
+        if (color && mxObject && !this.disabled) {
             if (format === "hex") {
                 mxObject.set(colorAttribute, color.hex);
             } else if (format === "rgb") {
@@ -145,7 +146,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
 
     private handleOnChange = () => {
         const { mxform, mxObject, onChangeEvent, onChangeMicroflow, onChangeNanoflow, onChangePage } = this.props;
-        if (mxObject) {
+        if (mxObject && !this.disabled) {
             const context = new mendix.lib.MxContext();
             context.setContext(mxObject.getEntity(), mxObject.getGuid());
             if (onChangeEvent === "callMicroflow" && onChangeMicroflow) {
