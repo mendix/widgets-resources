@@ -67,6 +67,10 @@ export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         this.setState({ displayColorPicker: !this.state.displayColorPicker });
     }
 
+    private handleClose = () => {
+        this.setState({ displayColorPicker: false });
+    }
+
     private renderComponents() {
         if (this.props.mode === "input") {
             return createElement("div", { className: "input-group" },
@@ -98,6 +102,10 @@ export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
             return createElement("div", {
                 className: classNames({ "widget-color-picker-popover": !(this.props.mode === "inline") })
             },
+                createElement("div", {
+                    className: "widget-color-picker-cover",
+                    onClick: this.handleClose
+                }),
                 createElement(this.components[this.props.type], {
                     color: this.props.color,
                     onChange: this.props.onChange,
