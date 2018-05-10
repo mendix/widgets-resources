@@ -66,6 +66,7 @@ export function getVisibleProperties(valueMap: ImageViewerContainerProps, visibi
     visibilityMap.onClickMicroflow = valueMap.onClickOption === "callMicroflow";
     visibilityMap.onClickNanoflow = valueMap.onClickOption === "callNanoflow";
     visibilityMap.onClickForm = valueMap.onClickOption === "showPage";
+    visibilityMap.openPageAs = valueMap.onClickOption === "showPage";
 
     return visibilityMap;
 }
