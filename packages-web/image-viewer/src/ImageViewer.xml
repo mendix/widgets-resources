@@ -96,5 +96,15 @@
             <category>Events</category>
             <description>The page to open when an image is clicked</description>
         </property>
+        <property key="openPageAs" type="enumeration" defaultValue="content">
+            <caption>Open page as</caption>
+            <category>Events</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="content">Full page</enumerationValue>
+                <enumerationValue key="popup">Popup</enumerationValue>
+                <enumerationValue key="modal">Blocking popup</enumerationValue>
+            </enumerationValues>
+        </property>
     </properties>
 </widget>

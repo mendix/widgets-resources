@@ -26,6 +26,7 @@ interface ImageViewerContainerProps extends WrapperProps {
     onClickMicroflow: string;
     onClickForm: string;
     onClickNanoflow: Nanoflow;
+    openPageAs: PageLocation;
 }
 
 interface ImageViewerContainerState {
@@ -41,6 +42,7 @@ interface Nanoflow {
 type DataSource = "systemImage" | "urlAttribute" | "staticUrl" | "staticImage";
 type Units = "auto" | "pixels" | "percentage";
 type onClickOptions = "doNothing" | "callMicroflow" | "showPage" | "openFullScreen" | "callNanoflow";
+type PageLocation = "content" | "popup" | "modal";
 
 class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageViewerContainerState> {
     private subscriptionHandles: number[];
@@ -180,7 +182,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 
     private executeAction() {
-        const { mxObject, onClickMicroflow, onClickNanoflow, onClickOption, onClickForm, mxform } = this.props;
+        const { mxObject, onClickMicroflow, onClickNanoflow, onClickOption, onClickForm, mxform, openPageAs } = this.props;
         const context = this.getContext();
         if (onClickOption === "callMicroflow" && mxObject) {
             window.mx.ui.action(onClickMicroflow, {
@@ -200,7 +202,8 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
                 context,
                 error: error => window.mx.ui.error(
                     `An error occurred while opening form ${onClickForm} : ${error.message}`
-                )
+                ),
+                location: openPageAs
             });
         }
     }
