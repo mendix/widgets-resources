@@ -15,7 +15,7 @@ interface Nanoflow {
     paramsSpec: { Progress: string };
 }
 
-interface ColorPickerContainerProps extends WrapperProps {
+export interface ColorPickerContainerProps extends WrapperProps {
     colorAttribute: string;
     editable: "default" | "never";
     format: string;
@@ -37,7 +37,7 @@ type onChange = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
 
 export default class ColorPickerContainer extends Component<ColorPickerContainerProps, ColorPickerContainerState> {
     private subscriptionHandles: number[];
-    private defaultColor = "#00ffff";
+    private defaultColor = "#000000";
 
     constructor(props: ColorPickerContainerProps) {
         super(props);
