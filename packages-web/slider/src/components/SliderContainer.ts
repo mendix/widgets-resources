@@ -4,7 +4,8 @@ import { BootstrapStyle, Slider } from "./Slider";
 
 interface WrapperProps {
     class: string;
-    mxObject?: mendix.lib.MxObject;
+    mxform: mxui.lib.form._FormBase;
+    mxObject: mendix.lib.MxObject;
     style: string;
     readOnly: boolean;
 }
@@ -16,11 +17,18 @@ interface SliderContainerProps extends WrapperProps {
     minAttribute: string;
     noOfMarkers: number;
     onChangeMicroflow: string;
+    onChangeNanoflow: Nanoflow;
     readOnly: boolean;
     stepValue: number;
     stepAttribute: string;
     tooltipText: string;
     valueAttribute: string;
+    editable: "default" | "never";
+}
+
+interface Nanoflow {
+    nanoflow: object[];
+    paramsSpec: { Progress: string };
 }
 
 interface SliderContainerState {
@@ -45,8 +53,10 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
     }
 
     render() {
-        const disabled = !this.props.mxObject || this.props.readOnly
-            || !!(this.props.valueAttribute && this.props.mxObject.isReadonlyAttr(this.props.valueAttribute));
+        const { mxObject, readOnly, valueAttribute } = this.props;
+        const disabled = this.props.editable === "default"
+            ? (!mxObject || readOnly || !!(valueAttribute && mxObject.isReadonlyAttr(valueAttribute)))
+            : true;
 
         const alertMessage = !disabled ? this.validateSettings(this.state) || this.validateValues() : "";
 
@@ -107,8 +117,8 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
             message.push("Minimum value is required");
         }
         if (typeof maximumValue === "number" && typeof minimumValue === "number") {
-            if (validMin && validMax && (minimumValue >= maximumValue)) {
-                message.push(`Minimum value ${minimumValue} should be less than the maximum value ${maximumValue}`);
+            if (validMin && validMax && (minimumValue > maximumValue)) {
+                message.push(`Minimum value ${minimumValue} should be less than or equal to the maximum value ${maximumValue}`); // tslint:disable:max-line-length
             }
             if (!stepValue || stepValue <= 0) {
                 message.push(`Step value ${stepValue} should be greater than 0`);
@@ -146,19 +156,34 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
 
     private handleAction(value: number) {
         if ((value || value === 0) && this.props.mxObject) {
-            this.executeMicroflow(this.props.onChangeMicroflow, this.props.mxObject.getGuid());
+            this.handleChange();
         }
     }
 
-    private executeMicroflow(actionName: string, guid: string) {
-        if (actionName) {
-            window.mx.ui.action(actionName, {
+    private handleChange() {
+        const { mxform, mxObject, onChangeMicroflow, onChangeNanoflow } = this.props;
+        if (onChangeMicroflow) {
+            window.mx.ui.action(onChangeMicroflow, {
                 error: error =>
-                    window.mx.ui.error(`An error occurred while executing microflow: ${actionName}: ${error.message}`),
+                    window.mx.ui.error(`An error occurred while executing microflow: ${onChangeMicroflow}: ${error.message}`),
+                origin: mxform,
                 params: {
                     applyto: "selection",
-                    guids: [ guid ]
+                    guids: [ mxObject.getGuid() ]
                 }
+            });
+        }
+
+        if (onChangeNanoflow.nanoflow) {
+            const context = new mendix.lib.MxContext();
+            context.setContext(mxObject.getEntity(), mxObject.getGuid());
+            window.mx.data.callNanoflow({
+                context,
+                error: error => window.mx.ui.error(
+                    `An error occurred while executing the on change nanoflow: ${error.message}`
+                ),
+                nanoflow: onChangeNanoflow,
+                origin: mxform
             });
         }
     }
