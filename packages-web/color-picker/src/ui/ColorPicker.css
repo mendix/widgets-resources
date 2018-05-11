@@ -1,10 +1,5 @@
-.widget-color-picker-outer {
-    padding: 5px;
-    background: #fff;
-    border-radius: 1px;
-    box-shadow: 0 0 0 1px rgba(0,0,0,.1);
-    display: inline-block;
-    cursor: pointer;
+.widget-color-picker-inline.btn:hover, .widget-color-picker-inline.btn:focus {
+    background-color: transparent;
 }
 
 .widget-color-picker-inner {
@@ -14,6 +9,7 @@
 }
 
 .widget-color-picker-popover {
+    margin-top: 6px;
     position: absolute;
     z-index: 2;
 }
@@ -27,8 +23,8 @@
 }
 
 .widget-color-picker-input-inner {
-    width: 25px;
-    height: 20px;
+    width: 20px;
+    height: 15px;
     border-radius: 2px;
     cursor: pointer;
 }
@@ -37,6 +33,15 @@
     cursor: not-allowed;
 }
 
-.widget-color-picker .input-group {
+.widget-color-picker-inline.btn {
     margin-bottom: 5px;
+    cursor: default;
+}
+
+.widget-color-picker-input.btn {
+    margin-left: 6px;
+}
+
+.widget-color-picker-input-container {
+    display: flex;
 }
