@@ -18,6 +18,12 @@ export interface RichTextContainerProps extends WrapperProps, CommonRichTextProp
     sanitizeContent: boolean;
     editable: "default" | "never";
     onChangeMicroflow: string;
+    onChangeNanoflow: Nanoflow;
+}
+
+interface Nanoflow {
+    nanoflow: object[];
+    paramsSpec: { Progress: string };
 }
 
 interface RichTextContainerState {
@@ -135,7 +141,7 @@ export default class RichTextContainer extends Component<RichTextContainerProps,
 
     private executeOnChangeAction() {
         if (this.props.mxObject && this.state.value !== this.defaultValue) {
-            this.executeAction(this.props.mxObject, this.props.onChangeMicroflow);
+            this.executeAction(this.props.mxObject);
             this.defaultValue = this.state.value;
         }
         if (this.isEditing) {
@@ -150,15 +156,28 @@ export default class RichTextContainer extends Component<RichTextContainerProps,
         onSuccess();
     }
 
-    private executeAction(mxObject: mendix.lib.MxObject, action?: string) {
-        if (action) {
-            window.mx.ui.action(action, {
+    private executeAction(mxObject: mendix.lib.MxObject) {
+        const { onChangeMicroflow, onChangeNanoflow, mxform } = this.props;
+
+        if (onChangeMicroflow) {
+            window.mx.ui.action(onChangeMicroflow, {
                 origin: this.props.mxform,
                 params: {
                     guids: [ mxObject.getGuid() ],
                     applyto: "selection"
                 },
-                error: error => window.mx.ui.error(`Error while executing microflow: ${action}: ${error.message}`)
+                error: error => window.mx.ui.error(`Error while executing microflow: ${onChangeMicroflow}: ${error.message}`)
+            });
+        }
+
+        if (onChangeNanoflow.nanoflow) {
+            const context = new mendix.lib.MxContext();
+            context.setContext(mxObject.getEntity(), mxObject.getGuid());
+            window.mx.data.callNanoflow({
+                context,
+                error: error => window.mx.ui.error(`Error while executing the on change nanoflow: ${error.message}`),
+                nanoflow: onChangeNanoflow,
+                origin: mxform
             });
         }
     }

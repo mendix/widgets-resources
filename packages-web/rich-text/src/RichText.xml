@@ -2,7 +2,7 @@
 <widget id="com.mendix.widget.custom.richtext.RichText" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
     <name>Rich Text</name>
     <description>Rich inline or toolbar text editing</description>
-    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAAHqsLF6AAAAVFBMVEUAAACqqqqZmZmIiIiNjY2KioqLi4uKiopJsviIiIiLi4uKioqKioqLi4uJiYmJiYmJiYmIiIiJiYmIiIiIiIiIiIhJsPeJiYmIiIiJiYlIsPeIiIgAvshEAAAAGnRSTlMAAwoeLz9ASElJUVNvcoygqazH0NXf4+Pk+DNXn6MAAAHHSURBVFjD7VaLdsIgDM2UzVbcFN3oJP//n+NVHi1BrHu4nd1zxHib3iYhpAIEvCBjDBHAfNwCoKS/qiAzgk/qbCG4lmHa2FvSXpajARMDZwY8CLH3UmhZwQFPDuhu1Kuy8EL+SwWLIGQk7CM9IIm+goMQ3uoRB6PBj8/MAsesxNsYqCMQN+6WAUOGPvQYlzKBqutSaSFUIDBsEDoTk+zHSHOPBTg4wW1GhqeYnURuliliAwk8CvFuvAgF2HJEvoFOBchJ/7kfNvm4zB0glGjCfbNDp8IRiw69zXjIy5uSvmh0JWfHckoOaVVHFMmvw04YPJZi6OdbX+oH3QxcdwTLUKjDxUKdMuQOOsZ6DGSQbrPWJkS+0uMnoCOaNmJZV9tecg7yrtv+Hhyk2wfaQZXOZtqfS5u2rSdvON0NMRQmTJH81dil9TuvK55D6hlLkL+teEVgtldRgBekyii8gj9Z4FIKhMBNNXg6J+zrqiLQJ9sw9GR4UhUhL/yDiRcUgasEaKtBoJOym94WuQaBiChQ9/sX+MsCMjsDCwQ6qzB2YEWAGJXtQzUfE6cKiIGSD6oFMzGnWQVNAnD9UCUyax+q1VHZPlR/CB/PDIdSg+zfSQAAAABJRU5ErkJggg==</icon>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAA2tJREFUeAHtW72OEzEQ3g1IQJn+gI4WpGsQT0AaREESeIGrrsxrnES9DbRJQDrRHC0010JDjY68ANLBQZPc571dnT32xo4zXhzWadZjz+839uyPnSxLv4RAQqDLCOQ0+OFweAN9h3meP8FVtG2/89Vq9WY+n3+yMXKOj8fjwXK5LKBzz1HvotfrHUyn0xOZ/6ZMVO1DXF8jKMNQY9dLAPcAIJw1cjAPbBi8sL5XydyVXenJhGhXmafdNvoWGPZtTMzjrpmXzWoyGgDgdpn2stKyDeBMujS+2DpMS0DxEYEdoeNU6bwiJlgmj+t+tO9jXT6s6dBXTGfFBJafVs8EA5bm2rVsBQA6Tmez2XvFGojRaPSK9B1Rp8h4lOROTltOJDsPgMsScAIcteI7GH86MTMwoeaw1Bs2ABDTxFQrGGI1qrAVN6OQodMFgImh4GXyHcCgt/UuX0CsAMQWKDeypiJ47mMEQP3ykdtCZuEhq8loAOCF4S0U/91Q+bd+v/95Q5mt2MWLDRRoAa1RWr4M0fGmp6d7YNyXH2+R4XeyMMZeCFpkXgRfFMVvQQ8+/Blky1WBxy/tuVuM+/7g6CLr5Qcnz24rb3O1PloDmp4Ma/76aqwB1VvdWc0krjAgk1ljxQ8QvDAsAM2hG03lbU5xyoPQloCHDkWEO/Oy8hC62QGQHd6FtnEJcDr+8fkdY515enyBhF7/XPmuJXhanZ8B7ACU1bpKjtz2zZesQ2776qNy7ACIW5VwtHQWbWpwY5pbH3GAvQZU92m2WxW3PhJ/xj8DqIXI6QRA5AkK7l6aAcEhjtxAmgGRJyi4e2kGBIc4cgNpBkSeoODupRkQHOLIDaQZEHmCgrvX+gwQ+waD44sfNDLRV+4p0IHAdOsANG2alJ+8r777Bw5ZVd8+AKr9f061D0D1jY9GzvYNkSq20LCr/rhOYKpa+SkuP7UZsMUJTP4o12jk8lMDADZ9dnV9ZNaE5zTkY1OTYfssjmM0X5zcZmLCtjyLJisATfvsdD8eDrGc2vKNytVPqt+0BCjPf013HgDrEnBNP87sPHLl5eDDXYCl5rABgH9ifOUIzFUHPbLjKkf50hKgiFCaVns6Hgvt62fnZ4AJgIVHVn1kPMwoIj42NRkNAK4TmIqrAYhd8TNA6EllQiAhwIjAJSEj9lh5/+kBAAAAAElFTkSuQmCC</icon>
     <properties>
         <property key="stringAttribute" type="attribute">
             <caption>Value attribute</caption>
@@ -105,6 +105,12 @@ WARNING disabling this option is a security risk for XSS attacks</description>
             <category>Events</category>
             <description>Microflow will be triggered when focus is lost and the content has changed</description>
             <returnType type="Void"/>
+        </property>
+        <property key="onChangeNanoflow" type="nanoflow" required="false">
+            <caption>On change nanoflow</caption>
+            <category>Events</category>
+            <description>Nanoflow will be triggered when focus is lost and the content has changed</description>
+            <returnType type="Void" />
         </property>
     </properties>
 </widget>
