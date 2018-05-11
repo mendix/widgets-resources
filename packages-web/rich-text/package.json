@@ -1,7 +1,7 @@
 {
   "name": "rich-text",
   "widgetName": "RichText",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Rich inline or toolbar text editing",
   "scripts": {
     "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec grunt",
@@ -73,7 +73,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^2.0.9",
-    "mendix-client": "https://github.com/FlockOfBirds/Mendix-client-typing/archive/7.4.tar.gz",
+    "mendix-client": "https://github.com/FlockOfBirds/Mendix-client-typing/archive/7.13.1.tar.gz",
     "mendix-widget-build-script": "^1.0.0-rc2",
     "node-sass": "^4.5.3",
     "nodemon": "^1.14.11",

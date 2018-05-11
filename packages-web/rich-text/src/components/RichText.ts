@@ -156,9 +156,13 @@ export class RichText extends Component<RichTextProps> {
             this.quill.on("selection-change", this.handleSelectionChange);
             this.quill.on("text-change", this.handleTextChange);
             const toolbar = this.richTextNode && this.richTextNode.querySelector(".ql-toolbar");
+            const editor = this.richTextNode && this.richTextNode.querySelector(".ql-editor");
             if (toolbar) {
                 // required to disable editor blur events when the toolbar is clicked
                 toolbar.addEventListener("mousedown", event => event.preventDefault());
+            }
+            if (editor) {
+                editor.addEventListener("keydown", event => event.stopPropagation());
             }
         }
     }
