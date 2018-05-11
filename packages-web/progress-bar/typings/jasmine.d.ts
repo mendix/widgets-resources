@@ -1,8 +1,9 @@
-// tslint:disable no-namespace
+// tslint:disable
 declare namespace jasmine {
     interface Any {
         asymmetricMatch(other: any): boolean;
     }
 
-    export const matchersUtil: MatchersUtil;
+    interface MatchersUtil {}
+    export var matchersUtil: MatchersUtil;
 }

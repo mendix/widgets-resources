@@ -27,7 +27,9 @@
     "no-debugger": true,
     "no-duplicate-variable": true,
     "no-eval": true,
-    "no-inferrable-types": true,
+    "no-inferrable-types": [
+      true
+    ],
     "no-internal-module": true,
     "no-shadowed-variable": true,
     "no-switch-case-fall-through": true,
@@ -37,8 +39,8 @@
     "one-line": [
       true,
       "check-catch",
-      "check-finally",
       "check-else",
+      "check-finally",
       "check-open-brace",
       "check-whitespace"
     ],
@@ -131,11 +133,18 @@
       }
     ],
     "curly": false,
-    "max-line-length": [
+    "arrow-parens": false,
+    "no-object-literal-type-assertion": false,
+    "linebreak-style": [
       true,
-      120
+      "LF"
     ],
-    "arrow-parens": false
+    "object-literal-sort-keys": false,
+    "array-type": false,
+    "max-line-length": false,
+    "no-submodule-imports": false,
+    "no-implicit-dependencies": false,
+    "no-namespace": false
   },
   "jsRules": {
     "trailing-comma": [
@@ -145,6 +154,10 @@
     "array-bracket-spacing": [
       true,
       "always"
+    ],
+    "linebreak-style": [
+      true,
+      "LF"
     ]
   }
 }

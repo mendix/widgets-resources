@@ -15,10 +15,12 @@ export interface ProgressBarContainerProps extends WrapperProps {
     bootstrapStyleAttribute: string;
     maximumValueAttribute: string;
     onClickMicroflow?: string;
+    onClickNanoflow: Nanoflow;
     onClickOption: OnClickOptions;
     onClickPage?: string;
     progressAttribute: string;
     textColorSwitch: number;
+    openPageAs: PageLocation;
 }
 
 interface ProgressBarContainerState {
@@ -29,7 +31,13 @@ interface ProgressBarContainerState {
     progressValue?: number;
 }
 
-type OnClickOptions = "doNothing" | "showPage" | "callMicroflow";
+interface Nanoflow {
+    nanoflow: object[];
+    paramsSpec: { Progress: string };
+}
+
+type OnClickOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
+type PageLocation = "content"| "popup" | "modal";
 
 export default class ProgressBarContainer extends Component<ProgressBarContainerProps, ProgressBarContainerState> {
     private subscriptionHandles: number[];
@@ -81,7 +89,7 @@ export default class ProgressBarContainer extends Component<ProgressBarContainer
             className: this.props.class,
             colorSwitch: this.props.textColorSwitch,
             maximumValue: this.state.maximumValue,
-            onClickAction: (this.props.onClickMicroflow || this.props.onClickPage) && this.props.mxObject
+            onClickAction: this.props.onClickOption !== "doNothing" && this.props.mxObject
                 ? this.handleClick
                 : undefined,
             progress: this.state.progressValue,
@@ -102,6 +110,8 @@ export default class ProgressBarContainer extends Component<ProgressBarContainer
         let errorMessage = "";
         if (props.onClickOption === "callMicroflow" && !props.onClickMicroflow) {
             errorMessage = "on click microflow is required in the 'Events' tab, 'Microflow' property";
+        } else if (props.onClickOption === "callNanoflow" && !props.onClickNanoflow.nanoflow) {
+            errorMessage = "on click nanoflow is required in the 'Events' tab, 'Nanoflow' property";
         } else if (props.onClickOption === "showPage" && !props.onClickPage) {
             errorMessage = "on click page is required in the 'Events' tab, 'Page' property";
         }
@@ -161,11 +171,12 @@ export default class ProgressBarContainer extends Component<ProgressBarContainer
     }
 
     private handleClick() {
-        const { mxform, mxObject, onClickMicroflow, onClickOption, onClickPage } = this.props;
+        const { mxform, mxObject, onClickMicroflow, onClickNanoflow, onClickOption, onClickPage, openPageAs } = this.props;
         if (!mxObject || !mxObject.getGuid()) {
             return;
         }
         const context = new window.mendix.lib.MxContext();
+
         context.setContext(mxObject.getEntity(), mxObject.getGuid());
         if (onClickOption === "callMicroflow" && onClickMicroflow) {
             window.mx.ui.action(onClickMicroflow, {
@@ -174,11 +185,18 @@ export default class ProgressBarContainer extends Component<ProgressBarContainer
                     window.mx.ui.error(`Error while executing microflow ${onClickMicroflow}: ${error.message}`),
                 origin: mxform
             });
+        } else if (onClickOption === "callNanoflow" && onClickNanoflow.nanoflow) {
+            window.mx.data.callNanoflow({
+                context,
+                error: error => mx.ui.error(`An error occurred while executing the on click nanoflow: ${error.message}`),
+                nanoflow: onClickNanoflow,
+                origin: mxform
+            });
         } else if (onClickOption === "showPage" && onClickPage) {
             window.mx.ui.openForm(onClickPage, {
                 context,
-                error: error =>
-                    window.mx.ui.error(`Error while opening page ${onClickPage}: ${error.message}`)
+                error: error => window.mx.ui.error(`Error while opening page ${onClickPage}: ${error.message}`),
+                location: openPageAs
             });
         }
     }
