@@ -32,6 +32,7 @@ const widgetConfig = {
             }) }
         ]
     },
+    mode: "development",
     devtool: "source-map",
     externals: [ "react", "react-dom" ],
     plugins: [
@@ -67,6 +68,7 @@ const previewConfig = {
             }
         ]
     },
+    mode: "development",
     devtool: "inline-source-map",
     externals: [ "react", "react-dom" ],
     plugins: [
