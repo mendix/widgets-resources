@@ -14,10 +14,11 @@ Displays images in a carousel.
 * Image from mendix System.Images or from a URL
 * Navigate to the next or the previous image
 * Execute a microflow or open a page when an image is clicked
+* Execute a nanoflow or open a page when an image is clicked
 * Swipe through the images on mobile devices
 
 ## Dependencies
-Mendix 7.11.0
+Mendix 7.13.1
 
 ## Test project
 https://carousel.mxapps.io/

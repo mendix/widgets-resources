@@ -1,7 +1,7 @@
 import { Component, createElement } from "react";
 import { findDOMNode } from "react-dom";
 
-import { Carousel, Image } from "./Carousel";
+import { Carousel, Image, Nanoflow, PageLocation } from "./Carousel";
 import { Alert } from "./Alert";
 import { UrlHelper } from "../UrlHelper";
 
@@ -20,7 +20,9 @@ export interface CarouselContainerProps extends WrapperProps {
     urlAttribute: string;
     onClickOptions: ClickOptions;
     onClickMicroflow: string;
+    onClickNanoflow: Nanoflow;
     onClickForm: string;
+    openPageAs: PageLocation;
     staticImages: Image[];
 }
 
@@ -32,7 +34,7 @@ interface CarouselContainerState {
 }
 
 type DataSource = "static" | "XPath" | "microflow";
-type ClickOptions = "doNothing" | "callMicroflow" | "showPage";
+type ClickOptions = "doNothing" | "callMicroflow" | "callNanoflow" | "showPage";
 
 export default class CarouselContainer extends Component<CarouselContainerProps, CarouselContainerState> {
     private subscriptionHandle: number;
@@ -136,7 +138,7 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
             });
             this.setState({ images, isLoading: false });
         } else if (this.props.dataSource === "XPath" && this.props.imagesEntity && mxObject) {
-                this.fetchImagesByXPath(mxObject);
+            this.fetchImagesByXPath(mxObject);
         } else if (this.props.dataSource === "microflow" && this.props.dataSourceMicroflow) {
             this.fetchImagesByMicroflow(this.props.dataSourceMicroflow, mxObject);
         }
@@ -207,20 +209,23 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
     }
 
     private getImageProps(mxObject: mendix.lib.MxObject, url: string) {
-        const { onClickOptions, onClickForm, onClickMicroflow } = this.props;
+        const { onClickOptions, onClickForm, onClickMicroflow, onClickNanoflow, openPageAs } = this.props;
 
         return {
             guid: mxObject.getGuid(),
             onClickForm: onClickOptions === "showPage" ? onClickForm : undefined,
             onClickMicroflow: onClickOptions === "callMicroflow" ? onClickMicroflow : undefined,
+            onClickNanoflow: onClickOptions === "callNanoflow" ? onClickNanoflow : undefined,
+            openPageAs,
             url
+
         };
     }
 
     private getUrl(url: string): string {
         mx.data.getImageUrl(url,
             objectUrl => {
-                    this.xpathUrl = objectUrl;
+                this.xpathUrl = objectUrl;
             },
             error => this.setState({
                 alertMessage: `Error in imageviewer while retrieving image url: ${error.message}`
@@ -232,15 +237,25 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
 
     private executeAction(image: Image) {
         const context = this.getContext(image);
+
         if (image.onClickMicroflow) {
             window.mx.ui.action(image.onClickMicroflow, {
                 context,
+                origin: this.props.mxform,
                 error: error => window.mx.ui.error(
                     `An error occurred while executing action ${image.onClickMicroflow} : ${error.message}`
                 )
             });
+        } else if (image.onClickNanoflow && image.onClickNanoflow.nanoflow) {
+            window.mx.data.callNanoflow({
+                nanoflow: image.onClickNanoflow,
+                context,
+                origin: this.props.mxform,
+                error: error => mx.ui.error(`An error occurred while executing the on click nanoflow: ${error.message}`)
+            });
         } else if (image.onClickForm) {
             window.mx.ui.openForm(image.onClickForm, {
+                location: image.openPageAs,
                 context,
                 error: error => window.mx.ui.error(
                     `An error occurred while opening form ${image.onClickForm} : ${error.message}`

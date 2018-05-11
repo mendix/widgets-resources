@@ -19,7 +19,7 @@ export class preview extends Component<CarouselContainerProps, {}> {
     }
 
     private getImages(props: CarouselContainerProps): Image[] {
-        const defaultImages = [ { url: require("./img/Preview.png") } ];
+        const defaultImages = [ { url: require("./img/Preview.png"), openPageAs: props.openPageAs } ];
         if (props.dataSource === "static") {
             return props.staticImages && props.staticImages.length
                 ? props.staticImages
@@ -35,26 +35,15 @@ export function getPreviewCss() {
 }
 
 export function getVisibleProperties(props: CarouselContainerProps, visibilityMap: VisibilityMap) {
-    if (props.dataSource === "static") {
-        visibilityMap.imagesEntity = false;
-        visibilityMap.entityConstraint = false;
-        visibilityMap.dataSourceMicroflow = false;
-        visibilityMap.urlAttribute = false;
-    } else if (props.dataSource === "XPath") {
-        visibilityMap.staticImages = false;
-        visibilityMap.dataSourceMicroflow = false;
-    } else if (props.dataSource === "microflow") {
-        visibilityMap.staticImages = false;
-        visibilityMap.imagesEntity = true;
-        visibilityMap.entityConstraint = false;
-    }
+    visibilityMap.dataSourceMicroflow = props.dataSource === "microflow";
+    visibilityMap.entityConstraint = props.dataSource === "XPath";
+    visibilityMap.staticImages = props.dataSource === "static";
+    visibilityMap.imagesEntity = props.dataSource === "microflow";
 
-    if (props.onClickOptions === "doNothing") {
-        visibilityMap.onClickMicroflow = false;
-        visibilityMap.onClickForm = false;
-    } else if (props.onClickOptions === "callMicroflow") {
-        visibilityMap.onClickForm = false;
-    } else if (props.onClickOptions === "showPage") {
-        visibilityMap.onClickMicroflow = false;
-    }
+    visibilityMap.onClickForm = props.onClickOptions === "showPage";
+    visibilityMap.openPageAs = props.onClickOptions === "showPage";
+    visibilityMap.onClickMicroflow = props.onClickOptions === "callMicroflow";
+    visibilityMap.onClickNanoflow = props.onClickOptions === "callNanoflow";
+
+    return visibilityMap;
 }
