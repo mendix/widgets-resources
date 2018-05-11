@@ -35,16 +35,10 @@ export function getPreviewCss() {
 }
 
 export function getVisibleProperties(valueMap: ContainerProps, visibilityMap: VisibilityMap) {
-    if (valueMap.onClickEvent === "doNothing") {
-        visibilityMap.microflow = false;
-        visibilityMap.page = false;
-    } else if (valueMap.onClickEvent === "showPage") {
-        visibilityMap.page = true;
-        visibilityMap.microflow = false;
-    } else if (valueMap.onClickEvent === "callMicroflow") {
-        visibilityMap.page = false;
-        visibilityMap.microflow = true;
-    }
+    visibilityMap.microflow = valueMap.onClickEvent === "callMicroflow";
+    visibilityMap.nanoflow = valueMap.onClickEvent === "callNanoflow";
+    visibilityMap.page = valueMap.onClickEvent === "showPage";
+    visibilityMap.openPageAs = valueMap.onClickEvent === "showPage";
 
     return visibilityMap;
 }

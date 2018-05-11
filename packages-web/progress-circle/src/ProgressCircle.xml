@@ -2,7 +2,7 @@
 <widget id="com.mendix.widget.custom.progresscircle.ProgressCircle" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
     <name>Progress circle</name>
     <description>Displays a progress in a circle</description>
-    <icon>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</icon>
+    <icon>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</icon>
     <properties>
         <property key="displayText" type="enumeration" defaultValue="percentage">
             <caption>Display text</caption>
@@ -92,6 +92,7 @@
                 <enumerationValue key="doNothing">Do nothing</enumerationValue>
                 <enumerationValue key="showPage">Show a page</enumerationValue>
                 <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
+                <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
             </enumerationValues>
         </property>
         <property key="page" type="form" required="false">
@@ -99,10 +100,26 @@
             <category>Events</category>
             <description>The page that will be opened on click</description>
         </property>
+        <property key="openPageAs" type="enumeration" defaultValue="content">
+            <caption>Open page as</caption>
+            <category>Events</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="content">Full page</enumerationValue>
+                <enumerationValue key="popup">Popup</enumerationValue>
+                <enumerationValue key="modal">Blocking popup</enumerationValue>
+            </enumerationValues>
+        </property>
         <property key="microflow" type="microflow" required="false">
             <caption>Microflow</caption>
             <category>Events</category>
             <description>The microflow that will be executed on click</description>
+            <returnType type="Void" />
+        </property>
+        <property key="nanoflow" type="nanoflow" required="false">
+            <caption>Nanoflow</caption>
+            <category>Events</category>
+            <description>The nanoflow that will be executed on click</description>
             <returnType type="Void" />
         </property>
     </properties>
