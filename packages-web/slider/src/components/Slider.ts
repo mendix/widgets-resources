@@ -122,7 +122,7 @@ class Slider extends Component<SliderProps, {}> {
         return (props) => {
             const sliderText = tooltipProps.value === null
                 ? "--"
-                : tooltipProps.text.replace(/\{1}/, props.value.toString());
+                : tooltipProps.text.replace(/\{1}/, tooltipProps.value.toString());
 
             return createElement(Tooltip,
                 {

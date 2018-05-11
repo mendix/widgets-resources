@@ -36,11 +36,26 @@
                 <attributeType name="Decimal"/>
             </attributeTypes>
         </property>
+        <property key="editable" type="enumeration" defaultValue="default">
+            <caption>Editable</caption>
+            <category>Data source</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="default">Default</enumerationValue>
+                <enumerationValue key="never">Never</enumerationValue>
+            </enumerationValues>
+        </property>
         <property key="onChangeMicroflow" type="microflow" required="false">
             <caption>On change microflow</caption>
             <category>Events</category>
             <description>Called when the slider is clicked or changed</description>
             <returnType type="Void"/>
+        </property>
+        <property key="onChangeNanoflow" type="nanoflow" required="false">
+            <caption>On change nanoflow</caption>
+            <category>Events</category>
+            <description>Called when the slider is clicked or changed</description>
+            <returnType type="Void" />
         </property>
         <property key="noOfMarkers" type="integer" defaultValue="2">
             <caption>Number of markers</caption>
