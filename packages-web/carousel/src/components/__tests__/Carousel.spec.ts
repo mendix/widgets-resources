@@ -45,7 +45,7 @@ describe("Carousel", () => {
 
     describe("with one image", () => {
         beforeEach(() => {
-            images = [ { url: image.imageUrl() } ];
+            images = [ { url: image.imageUrl(), openPageAs: "content" } ];
             carousel = shallow(createElement(Carousel, { images }));
         });
 
@@ -67,9 +67,9 @@ describe("Carousel", () => {
     describe("with multiple images", () => {
         beforeEach(() => {
             images = [
-                { url: image.imageUrl() },
-                { url: image.imageUrl(800, 600) },
-                { url: image.imageUrl(600, 600) }
+                { url: image.imageUrl(), openPageAs: "content" },
+                { url: image.imageUrl(800, 600), openPageAs: "content" },
+                { url: image.imageUrl(600, 600), openPageAs: "content" }
             ];
             carousel = shallow(createElement(Carousel, { images }));
             carouselWrapper = carousel.find(".widget-carousel-item-wrapper") as ShallowWrapper<CarouselProps, any>;
@@ -169,9 +169,9 @@ describe("Carousel", () => {
 
         beforeEach(() => {
             images = [
-                { url: image.imageUrl() },
-                { url: image.imageUrl(800, 600) },
-                { url: image.imageUrl(600, 600) }
+                { url: image.imageUrl(), openPageAs: "content" },
+                { url: image.imageUrl(800, 600), openPageAs: "content" },
+                { url: image.imageUrl(600, 600), openPageAs: "content" }
             ];
             carousel = shallow(createElement(Carousel, { images }));
         });
