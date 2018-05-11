@@ -10,12 +10,13 @@ A special distinctive mark or token put on any display as a button
 ## Features
 
  * Display a badge on a button.
- * Attach an onclick microflow 
+ * Attach an onclick microflow
+ * Attach an onclick nanoflow 
  * Set static data when the persisted data is not specified
 
 ## Dependencies
 
-Mendix 7.6
+Mendix 7.13.1
 
 ## Demo project
 

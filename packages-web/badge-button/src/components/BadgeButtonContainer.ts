@@ -5,6 +5,7 @@ import { Alert } from "./Alert";
 
 interface WrapperProps {
     class?: string;
+    mxform: mxui.lib.form._FormBase;
     mxObject?: mendix.lib.MxObject;
     style?: string;
 }
@@ -15,8 +16,15 @@ export interface BadgeButtonContainerProps extends WrapperProps {
     bootstrapStyle: BootstrapStyle;
     badgeButtonValue: string;
     microflow: string;
+    nanoflow: Nanoflow;
     onClickEvent: OnClickOptions;
     page: string;
+    openPageAs: PageLocation;
+}
+
+interface Nanoflow {
+    nanoflow: object[];
+    paramsSpec: { Progress: string };
 }
 
 interface BadgeButtonContainerState {
@@ -24,7 +32,8 @@ interface BadgeButtonContainerState {
     value: string;
 }
 
-type OnClickOptions = "doNothing" | "showPage" | "callMicroflow";
+type OnClickOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
+type PageLocation = "content"| "popup" | "modal";
 
 export default class BadgeButtonContainer extends Component<BadgeButtonContainerProps, BadgeButtonContainerState> {
     private subscriptionHandles: number[];
@@ -72,6 +81,8 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
         let errorMessage = "";
         if (props.onClickEvent === "callMicroflow" && !props.microflow) {
             errorMessage = "A 'Microflow' is required for 'Events' 'Call a microflow'";
+        } else if (props.onClickEvent === "callNanoflow" && !props.nanoflow.nanoflow) {
+            errorMessage = "A 'Nanoflow' is required for 'Events' 'Call a nanoflow'";
         } else if (props.onClickEvent === "showPage" && !props.page) {
             errorMessage = "A 'Page' is required for 'Events' 'Show a page'";
         }
@@ -136,7 +147,7 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
     }
 
     private handleOnClick() {
-        const { mxObject, onClickEvent, microflow, page } = this.props;
+        const { mxObject, onClickEvent, microflow, mxform, nanoflow, openPageAs, page } = this.props;
         if (!mxObject || !mxObject.getGuid()) {
             return;
         }
@@ -145,15 +156,24 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
         if (onClickEvent === "callMicroflow" && microflow) {
             window.mx.ui.action(microflow, {
                 error: error => window.mx.ui.error(`Error while executing microflow: ${microflow}: ${error.message}`),
+                origin: mxform,
                 params: {
                     applyto: "selection",
                     guids: [ mxObject.getGuid() ]
                 }
             });
+        } else if (onClickEvent === "callNanoflow" && nanoflow.nanoflow) {
+            window.mx.data.callNanoflow({
+                context,
+                error: error => window.mx.ui.error(`Error while executing the nanoflow: ${error.message}`),
+                nanoflow,
+                origin: mxform
+            });
         } else if (onClickEvent === "showPage" && page) {
             window.mx.ui.openForm(page, {
                 context,
-                error: error => window.mx.ui.error(`Error while opening page ${page}: ${error.message}`)
+                error: error => window.mx.ui.error(`Error while opening page ${page}: ${error.message}`),
+                location: openPageAs
             });
         }
     }
