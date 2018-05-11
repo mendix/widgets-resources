@@ -4,6 +4,7 @@ import { BootstrapStyle, RangeSlider } from "./RangeSlider";
 
 interface WrapperProps {
     class?: string;
+    mxform: mxui.lib.form._FormBase;
     mxObject: mendix.lib.MxObject;
     style?: string;
     readOnly: boolean;
@@ -14,6 +15,7 @@ export interface RangeSliderContainerProps extends WrapperProps {
     maxAttribute: string;
     minAttribute: string;
     onChangeMicroflow: string;
+    onChangeNanoflow: Nanoflow;
     stepValue: number;
     stepAttribute: string;
     noOfMarkers: number;
@@ -22,6 +24,11 @@ export interface RangeSliderContainerProps extends WrapperProps {
     readOnly: boolean;
     lowerBoundAttribute: string;
     upperBoundAttribute: string;
+}
+
+interface Nanoflow {
+    nanoflow: object[];
+    paramsSpec: { Progress: string };
 }
 
 interface RangeSliderContainerState {
@@ -42,7 +49,7 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
 
         this.state = this.updateValues(props.mxObject);
         this.subscriptionHandles = [];
-        this.handleAction = this.handleAction.bind(this);
+        this.handleChangeAction = this.handleChangeAction.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
         this.subscriptionCallback = mxObject => () => this.setState(this.updateValues(mxObject));
     }
@@ -66,7 +73,7 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
             maxValue: this.state.maximumValue,
             minValue: this.state.minimumValue,
             noOfMarkers: this.props.noOfMarkers,
-            onChange: this.handleAction,
+            onChange: this.handleChangeAction,
             onUpdate: this.onUpdate,
             stepValue: this.state.stepValue,
             style: RangeSliderContainer.parseStyle(this.props.style),
@@ -160,22 +167,36 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         };
     }
 
-    private handleAction(value: number) {
+    private handleChangeAction(value: number) {
         if ((value || value === 0) && this.props.mxObject) {
-            this.executeMicroflow(this.props.onChangeMicroflow, this.props.mxObject.getGuid());
+            this.executeOnChangeAction(this.props.mxObject);
         }
     }
 
-    private executeMicroflow(actionname: string, guid: string) {
-        if (actionname) {
-            window.mx.ui.action(actionname, {
+    private executeOnChangeAction(mxObject: mendix.lib.MxObject) {
+        const { onChangeMicroflow, onChangeNanoflow, mxform } = this.props;
+        if (onChangeMicroflow) {
+            window.mx.ui.action(onChangeMicroflow, {
                 error: (error) => window.mx.ui.error(
-                    `An error occurred while executing microflow: ${actionname}: ${error.message}`
+                    `An error occurred while executing microflow: ${onChangeMicroflow}: ${error.message}`
                 ),
                 params: {
                     applyto: "selection",
-                    guids: [ guid ]
+                    guids: [ mxObject.getGuid() ]
                 }
+            });
+        }
+
+        if (onChangeNanoflow.nanoflow) {
+            const context = new mendix.lib.MxContext();
+            context.setContext(mxObject.getEntity(), mxObject.getGuid());
+            window.mx.data.callNanoflow({
+                context,
+                error: error => window.mx.ui.error(
+                    `An error occurred while executing the on change nanoflow: ${error.message}`
+                ),
+                nanoflow: onChangeNanoflow,
+                origin: mxform
             });
         }
     }
