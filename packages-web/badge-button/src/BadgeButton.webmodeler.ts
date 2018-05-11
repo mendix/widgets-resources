@@ -43,12 +43,10 @@ export function getPreviewCss() {
 }
 
 export function getVisibleProperties(props: BadgeButtonContainerProps, visibilityMap: VisibilityMap) {
-    if (props.onClickEvent === "doNothing") {
-        visibilityMap.microflow = false;
-        visibilityMap.page = false;
-    } else if (props.onClickEvent === "callMicroflow") {
-        visibilityMap.page = false;
-    } else if (props.onClickEvent === "showPage") {
-        visibilityMap.microflow = false;
-    }
+    visibilityMap.microflow = props.onClickEvent === "callMicroflow";
+    visibilityMap.nanoflow = props.onClickEvent === "callNanoflow";
+    visibilityMap.page = props.onClickEvent === "showPage";
+    visibilityMap.openPageAs = props.onClickEvent === "showPage";
+
+    return visibilityMap;
 }

@@ -2,7 +2,7 @@
 <widget id="com.mendix.widget.custom.badgebutton.BadgeButton" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
     <name>Badge button</name>
     <description>A special distinctive mark or token put on any display as a button</description>
-    <icon>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</icon>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAACplBMVEUAAAD///+AgIBVVVVV//+AgICAv/9mZmZmzP9VVVVgv/9VVVVmZmZduf9Vv/9Osf9iYmJJtv9bW1taWlpVVVVVuP9eXl5ZWVlJtv9VVVVZWVlKtf9SZmZOsf9Ms/9VVVVbW1tPuf9YWFhYWFhVVVVLtPhJtvhVVVVMs/hNsvlZWVlIsflZWVlXV1dKtfpYWFhXV1dLtPpVVVVYWFhXV1dVVVVXV1dVVVVWVlZLtPtYWFhWVlZVVVVMs/dVVVVLtPhJsvhIs/hWVlZVVVVKsvVVVVVKsvlWVlZIsflWVlZJs/lXV1dXV1dWVlZKsvpXV1dOgaRKsvdXV1dWVlZVVVVWVlZJsvhVVVVWVlZVVVVWVlZXV1dJsfhWVlZWVlZWVlZWVlZIsPlVVVVKsflWVlZJsPlVVVVWVlZVVVVVVVVWVlZWVlZVVVVVVVVWVlZWVlZWVlZVVVVWVlZVVVVWVlZWVlZVVVVWVlZQcYdWVlZWVlZWVlZSdItJsvlWVlZJsfdWVlZIsfdWVlZWVlZJsfhVVVVVVVVJsPhIsfhVVVVWVlZIsfhJsPhWVlZVVVVVVVVIsPhJsPhVVVVIsfhVVVVWVlZVVVVVVVVWVlZVVVVJsfdVVVVIsfhWVlZLnNRTXmZWVlZVVVVJsPhWVlZIsfhWVlZIsfhWVlZIsfhWVlZVVVVWVlZVVVVWVlZVVVVJsfdVVVVVW15WVlZIsPdJsfdJsfdWVlZJsfdJsfdWVlZIsPdVVVVVVVVUZnJWVlZVVVVVVVVWVlZVW15VVVVWVlZJsfhVVVVKpOFVVVVIsfhJo+BKpeRVW19WVlZVVVVVVVVIsPhWVlZVVVVVVVVJsPhWVlZIsfhVVVVIsPdKodxKpOFLm9FMlchQepZTaHZUXWNVVVVVWl19DoylAAAA2HRSTlMAAQIDAwQEBQUGCAkKCwwNDQ4OERISExQVFRcYGRobGxwdHSAhIiMkJSsrLi4vMDEyMzM0NTY4OTs9PT4/QEJHSUpKS0xRU1NVVldYW1xdXl9gYWJjZWZmaGxucHNzdHZ3eHh5eXt7fX6BgoOEh4iJjI2PkJGSk5SVlZqbnJ6eoaSmpqerq62vsLGytLW1tre4ubq+v8HCw8TFy8zNzc/Q0NLT09TW19nb3N7f4OLj5OTk5ebn6Ojq6+vs7O3u7u/w8fLz9PX19vb39/f39/j5+vr7/P39/v7kR+qdAAACxElEQVR42u2V+VdNURTHv0+eSkSEzFPmDCVkJjJEpooMmYeHpJQpZA6ROfNMRApF9NBAMkaGp0No+0/s895qPe+t5XmnfuCHPmvdde7Z6+7PvfuedfZBNdX8XzQMT842kF08OhvhCWuCc0mFdyscYEEkqZLkaPF+Umf97/Xnyq/SeWlhD5pO03KIqNTHHJot831hP80yOGO7eZ7MUx1UGMEZBeb/mM1TL6igfcEpbVCBXH8tlLjAKT1RATFQ4zSn+FgL6sTGxkSEuPOdV1zc2hqAX2xs9IzekHjptsTPbc8RJvhPAneSZDYBYshAA4EwksRrgPkfifE3RRJsCKaEysc06ZRIa6Qgb+xOohD4GujEuIlRNWTE37+XDUH4Mipuij5UOIQyNfx4NpBCiYik9w0ctFopyA8K6mq7hPHASjrgXER+JsEGuogEOoZiosOmEhbaEESvJkM/XKfjS2/TKpPgJO1nyQ0cTTMKnurWTbIhGOBcSHO6k5F0DQscR3+gxZhOFICZLJBKvd6GICWbSgctp7zQ0CVEfcPIUEB0zQUuN4nScowCQ4YQNgT0cFsAUuRCOeRTFFf89nJUfQDt9hTRk9fnnDhCRsH5sm/Wgr+gaez6QOx24jsp8HguyhQFTA+92MVDaircrogv5SxQ3UxsaA64umK4eFXOm0l9O7cdDNTuXBO1Rr7hlNaVaiiTn4ms/tYNJdyOlhb4UgixDx1KeMhqcecrD/puKk3VKNiLCULy+KdZoNjWvwvJD8u2zkQqC5IcrY82JYE82tQPV7Ngoycqy1Qh8ca/Flxa0BHq1A0cWs8k+MzXqVmuUOSQEPdGGQUmx61WUKKlTPp0UJjZBCXcSlhgwVWosVlYcQZqeNy3EmyFImOEZRHzoMoOYcEwoGpF8DJWqQg9mKoUcQSVwOOuWbAIlaGRdwVdNKimmgp+AfwMb+k/OIPLAAAAAElFTkSuQmCC</icon>
     <properties>
         <property key="label" type="translatableString" required="false">
             <caption>Caption</caption>
@@ -55,6 +55,7 @@
                 <enumerationValue key="doNothing">Do nothing</enumerationValue>
                 <enumerationValue key="showPage">Show a page</enumerationValue>
                 <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
+                <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
             </enumerationValues>
         </property>
         <property key="page" type="form" required="false">
@@ -62,10 +63,26 @@
             <category>Events</category>
             <description>The page that will be opened on click</description>
         </property>
+        <property key="openPageAs" type="enumeration" defaultValue="content">
+            <caption>Open page as</caption>
+            <category>Events</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="content">Full page</enumerationValue>
+                <enumerationValue key="popup">Popup</enumerationValue>
+                <enumerationValue key="modal">Blocking popup</enumerationValue>
+            </enumerationValues>
+        </property>
         <property key="microflow" type="microflow" required="false">
             <caption>Microflow</caption>
             <category>Events</category>
             <description>The microflow that will be executed on click</description>
+            <returnType type="Void" />
+        </property>
+        <property key="nanoflow" type="nanoflow" required="false">
+            <caption>Nanoflow</caption>
+            <category>Events</category>
+            <description>The nanoflow that will be executed on click</description>
             <returnType type="Void" />
         </property>
     </properties>
