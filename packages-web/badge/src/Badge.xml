@@ -66,6 +66,16 @@
             <category>Events</category>
             <description>The page that will be opened on click</description>
         </property>
+        <property key="openPageAs" type="enumeration" defaultValue="content">
+            <caption>Open page as</caption>
+            <category>Events</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="content">Full page</enumerationValue>
+                <enumerationValue key="popup">Popup</enumerationValue>
+                <enumerationValue key="modal">Blocking popup</enumerationValue>
+            </enumerationValues>
+        </property>
         <property key="microflow" type="microflow" required="false">
             <caption>Microflow</caption>
             <category>Events</category>

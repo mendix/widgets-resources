@@ -48,6 +48,7 @@ export function getVisibleProperties(valueMap: BadgeContainerProps, visibilityMa
     visibilityMap.microflow = valueMap.onClickEvent === "callMicroflow";
     visibilityMap.nanoflow = valueMap.onClickEvent === "callNanoflow";
     visibilityMap.page = valueMap.onClickEvent === "showPage";
+    visibilityMap.openPageAs = valueMap.onClickEvent === "showPage";
 
     return visibilityMap;
 }

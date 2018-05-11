@@ -19,6 +19,7 @@ export interface BadgeContainerProps extends WrapperProps {
     nanoflow: Nanoflow;
     onClickEvent: OnClickOptions;
     page: string;
+    openPageAs: PageLocation;
 }
 
 interface BadgeContainerState {
@@ -32,6 +33,7 @@ interface Nanoflow {
 }
 
 type OnClickOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
+type PageLocation = "content"| "popup" | "modal";
 
 export default class BadgeContainer extends Component<BadgeContainerProps, BadgeContainerState> {
     private subscriptionHandles: number[];
@@ -132,7 +134,7 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
     }
 
     private handleOnClick() {
-        const { mxObject, onClickEvent, microflow, mxform, nanoflow, page } = this.props;
+        const { mxObject, onClickEvent, microflow, mxform, nanoflow, openPageAs, page } = this.props;
         if (!mxObject || !mxObject.getGuid()) {
             return;
         }
@@ -147,17 +149,18 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
                     guids: [ mxObject.getGuid() ]
                 }
             });
-        } else if (onClickEvent === "callNanoflow" && nanoflow) {
+        } else if (onClickEvent === "callNanoflow" && nanoflow.nanoflow) {
             window.mx.data.callNanoflow({
                 context,
-                error: error => window.mx.ui.error(`Error while executing nanoflow ${nanoflow} : ${error.message}`),
+                error: error => window.mx.ui.error(`An error occurred while executing the nanoflow: ${error.message}`),
                 nanoflow,
                 origin: mxform
             });
         } else if (onClickEvent === "showPage" && page && mxObject.getGuid()) {
             window.mx.ui.openForm(page, {
                 context,
-                error: error => window.mx.ui.error(`Error while opening page ${page}: ${error.message}`)
+                error: error => window.mx.ui.error(`Error while opening page ${page}: ${error.message}`),
+                location: openPageAs
             });
         }
     }
