@@ -18,7 +18,6 @@
             <description/>
             <enumerationValues>
                 <enumerationValue key="sketch">Sketch</enumerationValue>
-                <enumerationValue key="photoshop">Photoshop</enumerationValue>
                 <enumerationValue key="chrome">Chrome</enumerationValue>
                 <enumerationValue key="block">Block</enumerationValue>
                 <enumerationValue key="github">Github</enumerationValue>

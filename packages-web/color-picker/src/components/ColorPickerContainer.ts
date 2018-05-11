@@ -37,7 +37,6 @@ type onChange = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
 
 export default class ColorPickerContainer extends Component<ColorPickerContainerProps, ColorPickerContainerState> {
     private subscriptionHandles: number[];
-    private defaultColor = "#000000";
     private disabled = false;
 
     constructor(props: ColorPickerContainerProps) {
@@ -62,7 +61,8 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             type: this.props.type,
             mode: this.props.mode,
             onChange: this.updateColorValue,
-            onChangeComplete: this.handleOnChange
+            onChangeComplete: this.handleOnChange,
+            onInputChange: this.handleInputChange
         });
     }
 
@@ -98,6 +98,8 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             } else {
                 mxObject.set(colorAttribute, `rgba(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})`);
             }
+
+            this.setState({ alertMessage: "" });
         }
     }
 
@@ -137,11 +139,21 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         if (color && color.indexOf("#") === -1) {
             return {
                 alertMessage: "Color value should be of format 'rgb', 'rgba' or 'hex'",
-                color: this.defaultColor
+                color: ""
             };
         }
 
-        return { color: color || this.defaultColor };
+        return { color };
+    }
+
+    private handleInputChange = (event: any) => {
+        const newColor = event.target.value as string;
+        if (newColor.length > 0) {
+            this.setState({ alertMessage: "", color: event.target.value });
+        } else {
+            this.setState({ alertMessage: "Invalid color", color: event.target.value });
+        }
+
     }
 
     private handleOnChange = () => {
