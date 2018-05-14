@@ -37,3 +37,12 @@
 .widget-color-picker-input-container {
     display: flex;
 }
+
+.widget-color-picker .form-group {
+    margin-bottom: 0px;
+}
+
+.widget-color-picker-input-container .form-group{
+    margin-right: 0px;
+    margin-left: 0px;
+}

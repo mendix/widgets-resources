@@ -22,7 +22,9 @@ export class preview extends Component<ColorPickerContainerProps, {}> {
                 color: "#000000",
                 type: this.props.type,
                 mode: this.props.mode,
-                disabled: false
+                disabled: false,
+                label: this.props.label,
+                labelWidth: this.props.labelWidth
             })
         );
     }

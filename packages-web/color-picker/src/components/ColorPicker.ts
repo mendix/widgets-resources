@@ -1,6 +1,7 @@
 import { Component, createElement } from "react";
 
 import { Alert } from "./Alert";
+import { Label } from "./Label";
 import * as classNames from "classnames";
 import * as Picker from "react-color";
 
@@ -13,6 +14,8 @@ interface ColorPickerProps {
     mode: Mode;
     disabled: boolean;
     style?: object;
+    label: string;
+    labelWidth: number;
     onChange?: Picker.ColorChangeHandler;
     alertMessage?: string;
     onChangeComplete?: Picker.ColorChangeHandler;
@@ -83,23 +86,11 @@ export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
                     value: this.props.color,
                     onChange: this.props.onInputChange
                 }),
-                createElement("button", {
-                    ...this.getDefaultProps()
-                }, createElement("div", {
-                    className: "widget-color-picker-input-inner",
-                    style: { background: this.props.color }
-                }))
+                this.renderLabelComponent()
             );
         }
 
-        return createElement("button", {
-            ...this.getDefaultProps()
-        },
-            createElement("div", {
-                className: "widget-color-picker-inner",
-                style: { background: this.props.color }
-            })
-        );
+        return this.renderLabelComponent();
     }
 
     private renderPicker() {
@@ -130,5 +121,30 @@ export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
                 ? { onClick: this.handleClick, onBlur: this.handleClose }
                 : {}
         };
+    }
+
+    private renderInnerComponents() {
+        return createElement("button", {
+            ...this.getDefaultProps()
+        },
+            createElement("div", {
+                className: classNames(
+                    { "widget-color-picker-inner": this.props.mode !== "input" },
+                    { "widget-color-picker-input-inner": this.props.mode === "input" }
+                ),
+                style: { background: this.props.color }
+            })
+        );
+    }
+
+    private renderLabelComponent() {
+        if (this.props.label.trim()) {
+            return createElement(Label, {
+                label: this.props.label,
+                weight: this.props.labelWidth
+            }, this.renderInnerComponents());
+        }
+
+        return this.renderInnerComponents();
     }
 }
