@@ -61,6 +61,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             disabled: this.disabled,
             type: this.props.type,
             mode: this.props.mode,
+            style: ColorPickerContainer.parseStyle(this.props.style),
             onChange: this.updateColorValue,
             onChangeComplete: this.handleOnChange,
             onInputChange: this.handleInputChange
@@ -87,6 +88,24 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         }
 
         return errorMessage && `Error in color picker configuration: ${errorMessage}`;
+    }
+
+    public static parseStyle(style = ""): {[key: string]: string} {
+        try {
+            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            // tslint:disable-next-line no-console
+            console.log("Failed to parse style", style, error);
+        }
+
+        return {};
     }
 
     private updateColorValue = (color: ColorResult) => {

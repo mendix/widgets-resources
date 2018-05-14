@@ -12,6 +12,7 @@ interface ColorPickerProps {
     type: PickerType;
     mode: Mode;
     disabled: boolean;
+    style?: object;
     onChange?: Picker.ColorChangeHandler;
     alertMessage?: string;
     onChangeComplete?: Picker.ColorChangeHandler;
@@ -56,7 +57,8 @@ export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
             className: classNames(
                 "widget-color-picker",
                 this.props.className
-            )
+            ),
+            style: this.props.style
         }, this.renderComponents(),
             this.renderPicker(),
             createElement(Alert, { className: "widget-color-picker-alert" }, this.props.alertMessage)
