@@ -21,6 +21,8 @@ export interface ColorPickerContainerProps extends WrapperProps {
     format: string;
     mode: Mode;
     type: PickerType;
+    label: string;
+    labelWidth: number;
     onChangeEvent: onChange;
     onChangeMicroflow: string;
     onChangePage: string;
@@ -61,6 +63,8 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             disabled: this.disabled,
             type: this.props.type,
             mode: this.props.mode,
+            label: this.props.label,
+            labelWidth: this.props.labelWidth,
             style: ColorPickerContainer.parseStyle(this.props.style),
             onChange: this.updateColorValue,
             onChangeComplete: this.handleOnChange,

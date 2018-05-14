@@ -61,6 +61,20 @@
                 <enumerationValue key="swatches">Swatches</enumerationValue>
             </enumerationValues>
         </property>
+        <property key="label" type="translatableString" required="false">
+            <caption>Label</caption>
+            <category>Appearance</category>
+            <description/>
+            <translations>
+                <translation lang="en_US">Label</translation>
+                <translation lang="nl_NL">Label</translation>
+            </translations>
+        </property>
+        <property key="labelWidth" type="integer" defaultValue="9">
+            <caption>Label width (weight)</caption>
+            <category>Appearance</category>
+            <description>How much of the total row width (12) the label should occupy. Should not be greater than 11</description>
+        </property>
         <property key="onChangeEvent" type="enumeration" defaultValue="doNothing">
             <caption>On change</caption>
             <category>Events</category>
