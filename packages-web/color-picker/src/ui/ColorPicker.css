@@ -14,14 +14,6 @@
     z-index: 2;
 }
 
-.widget-color-picker-cover {
-    position: fixed;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px
-}
-
 .widget-color-picker-input-inner {
     width: 20px;
     height: 15px;

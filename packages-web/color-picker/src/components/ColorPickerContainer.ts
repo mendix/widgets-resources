@@ -25,6 +25,7 @@ export interface ColorPickerContainerProps extends WrapperProps {
     onChangeMicroflow: string;
     onChangePage: string;
     onChangeNanoflow: Nanoflow;
+    openPageLocation: "content" | "popup" | "modal";
 }
 
 interface ColorPickerContainerState {
@@ -174,7 +175,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
                 window.mx.ui.openForm(onChangePage, {
                     context,
                     error: error => window.mx.ui.error(`Error while opening page ${onChangePage}: ${error.message}`),
-                    location: "content"
+                    location: this.props.openPageLocation
                 });
             } else if (onChangeEvent === "callNanoflow" && onChangeNanoflow.nanoflow) {
                 window.mx.data.callNanoflow({

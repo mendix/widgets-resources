@@ -105,12 +105,6 @@ export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
             return createElement("div", {
                 className: classNames({ "widget-color-picker-popover": !(this.props.mode === "inline") })
             },
-                this.props.mode !== "inline"
-                    ? createElement("div", {
-                        className: "widget-color-picker-cover",
-                        onClick: this.handleClose
-                    })
-                    : null,
                 createElement(this.components[this.props.type], {
                     color: this.props.color,
                     onChange: this.props.onChange,
@@ -130,7 +124,9 @@ export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
                 { "widget-color-picker-inline": mode === "inline" },
                 { "widget-color-picker-disabled": disabled }
             ),
-            ...(!disabled && mode !== "inline") ? { onClick: this.handleClick } : {}
+            ...(!disabled && mode !== "inline")
+                ? { onClick: this.handleClick, onBlur: this.handleClose }
+                : {}
         };
     }
 }
