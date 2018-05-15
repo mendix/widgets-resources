@@ -70,6 +70,7 @@ export function getVisibleProperties(valueMap: ColorPickerContainerProps, visibi
     visibilityMap.onChangeMicroflow = valueMap.onChangeEvent === "callMicroflow";
     visibilityMap.onChangeNanoflow = valueMap.onChangeEvent === "callNanoflow";
     visibilityMap.onChangePage = valueMap.onChangeEvent === "showPage";
+    visibilityMap.openPageLocation = valueMap.onChangeEvent === "showPage";
 
     return visibilityMap;
 }
