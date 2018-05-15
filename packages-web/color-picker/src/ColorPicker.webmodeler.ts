@@ -1,6 +1,10 @@
 import { Component, createElement } from "react";
 
 import { Alert } from "./components/Alert";
+import { Input } from "./components/Input";
+import { Button } from "./components/Button";
+import { Label } from "./components/Label";
+
 import { ColorPicker } from "./components/ColorPicker";
 
 import ColorPickerContainer, { ColorPickerContainerProps } from "./components/ColorPickerContainer";
@@ -14,19 +18,47 @@ type VisibilityMap = {
 // tslint:disable-next-line class-name
 export class preview extends Component<ColorPickerContainerProps, {}> {
     render() {
+        const maxLabelWidth = 11;
         return createElement("div", {},
             createElement(Alert, { className: "widget-charts-color-picker-alert" },
                 ColorPickerContainer.validateProps(this.props)
             ),
-            createElement(ColorPicker, {
-                color: "#000000",
-                type: this.props.type,
-                mode: this.props.mode,
-                disabled: false,
-                label: this.props.label,
-                labelWidth: this.props.labelWidth
-            })
+            this.props.label.trim()
+                ? createElement(Label, {
+                    className: this.props.class,
+                    label: this.props.label,
+                    style: ColorPickerContainer.parseStyle(this.props.style),
+                    weight: this.props.labelWidth > maxLabelWidth ? maxLabelWidth : this.props.labelWidth
+                }, this.renderColorPicker(true))
+                : this.renderColorPicker()
         );
+    }
+
+    private renderColorPicker(hasLabel = false) {
+        return createElement(ColorPicker, {
+            className: !hasLabel ? this.props.class : undefined,
+            color: "#000000",
+            disabled: false,
+            type: this.props.type,
+            mode: this.props.mode,
+            displayColorPicker: false,
+            style: !hasLabel ? ColorPickerContainer.parseStyle(this.props.style) : undefined
+        }, this.props.mode === "input"
+                ? createElement(Input, {
+                    disabled: false,
+                    color: "#000000"
+                }, this.renderColorPickerButton())
+                : this.renderColorPickerButton()
+        );
+    }
+
+    private renderColorPickerButton() {
+        return createElement(Button, {
+            className: this.props.mode === "input" ? "widget-color-picker-input-inner" : "widget-color-picker-inner",
+            disabled: false,
+            mode: this.props.mode,
+            color: "#000000"
+        });
     }
 }
 
