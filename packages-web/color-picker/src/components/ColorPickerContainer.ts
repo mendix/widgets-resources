@@ -1,6 +1,11 @@
 import { Component, createElement } from "react";
-import { ColorPicker, Mode, PickerType } from "./ColorPicker";
+
 import { Color, ColorResult } from "react-color";
+
+import { ColorPicker, Mode, PickerType } from "./ColorPicker";
+import { Input } from "./Input";
+import { Button } from "./Button";
+import { Label } from "./Label";
 
 interface WrapperProps {
     class: string;
@@ -33,6 +38,7 @@ export interface ColorPickerContainerProps extends WrapperProps {
 interface ColorPickerContainerState {
     color: string;
     alertMessage?: string;
+    displayColorPicker: boolean;
 }
 
 type Format = "hex" | "rgb" | "rgba";
@@ -55,21 +61,17 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             ? (!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute)))
             : true;
 
-        const alertMessage = this.state.alertMessage || ColorPickerContainer.validateProps(this.props);
+        const maxLabelWidth = 11;
+        if (this.props.label.trim()) {
+            return createElement(Label, {
+                className: this.props.class,
+                label: this.props.label,
+                style: ColorPickerContainer.parseStyle(this.props.style),
+                weight: this.props.labelWidth > maxLabelWidth ? maxLabelWidth : this.props.labelWidth
+            }, this.renderColorPicker(true));
+        }
 
-        return createElement(ColorPicker, {
-            alertMessage,
-            color: this.state.color,
-            disabled: this.disabled,
-            type: this.props.type,
-            mode: this.props.mode,
-            label: this.props.label,
-            labelWidth: this.props.labelWidth,
-            style: ColorPickerContainer.parseStyle(this.props.style),
-            onChange: this.updateColorValue,
-            onChangeComplete: this.handleOnChange,
-            onInputChange: this.handleInputChange
-        });
+        return this.renderColorPicker();
     }
 
     componentWillReceiveProps(newProps: ColorPickerContainerProps) {
@@ -110,6 +112,50 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         }
 
         return {};
+    }
+
+    private renderColorPicker(hasLabel = false) {
+        const alertMessage = this.state.alertMessage || ColorPickerContainer.validateProps(this.props);
+
+        return createElement(ColorPicker, {
+            alertMessage,
+            className: !hasLabel ? this.props.class : undefined,
+            color: this.state.color,
+            disabled: this.disabled,
+            type: this.props.type,
+            mode: this.props.mode,
+            displayColorPicker: this.state.displayColorPicker,
+            style: !hasLabel ? ColorPickerContainer.parseStyle(this.props.style) : undefined,
+            onChange: this.updateColorValue,
+            onChangeComplete: this.handleOnChange
+        }, this.props.mode === "input"
+                ? createElement(Input, {
+                    disabled: this.disabled,
+                    color: this.state.color,
+                    onChange: this.handleInputChange
+                }, this.renderColorPickerButton())
+                : this.renderColorPickerButton()
+        );
+    }
+
+    private renderColorPickerButton() {
+        return createElement(Button, {
+            className: this.props.mode === "input" ? "widget-color-picker-input-inner" : "widget-color-picker-inner",
+            disabled: this.disabled,
+            mode: this.props.mode,
+            color: this.state.color,
+            ...(!this.disabled && this.props.mode !== "inline")
+                ? { onClick: this.handleClick, onBlur: this.handleClose }
+                : {}
+        });
+    }
+
+    private handleClick = () => {
+        this.setState({ displayColorPicker: !this.state.displayColorPicker });
+    }
+
+    private handleClose = () => {
+        this.setState({ displayColorPicker: false });
     }
 
     private updateColorValue = (color: ColorResult) => {
@@ -163,11 +209,12 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         if (color && color.indexOf("#") === -1) {
             return {
                 alertMessage: "Color value should be of format 'rgb', 'rgba' or 'hex'",
-                color: ""
+                color: "",
+                displayColorPicker: false
             };
         }
 
-        return { color };
+        return { color, displayColorPicker: false };
     }
 
     private handleInputChange = (event: any) => {

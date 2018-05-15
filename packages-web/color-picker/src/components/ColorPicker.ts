@@ -1,7 +1,6 @@
 import { Component, createElement } from "react";
 
 import { Alert } from "./Alert";
-import { Label } from "./Label";
 import * as classNames from "classnames";
 import * as Picker from "react-color";
 
@@ -14,16 +13,10 @@ interface ColorPickerProps {
     mode: Mode;
     disabled: boolean;
     style?: object;
-    label: string;
-    labelWidth: number;
+    displayColorPicker: boolean;
     onChange?: Picker.ColorChangeHandler;
     alertMessage?: string;
     onChangeComplete?: Picker.ColorChangeHandler;
-    onInputChange?: (event: any) => void;
-}
-
-interface ColorPickerState {
-    displayColorPicker: boolean;
 }
 
 export type PickerType = "sketch" | "chrome" | "block" | "github" | "twitter" | "circle" | "hue" |
@@ -31,7 +24,7 @@ export type PickerType = "sketch" | "chrome" | "block" | "github" | "twitter" | 
 
 export type Mode = "popover" | "input" | "inline";
 
-export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
+export class ColorPicker extends Component<ColorPickerProps, {}> {
     private components: any = {
         sketch: Picker.SketchPicker,
         chrome: Picker.ChromePicker,
@@ -47,14 +40,6 @@ export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
         swatches: Picker.SwatchesPicker
     };
 
-    constructor(props: ColorPickerProps) {
-        super(props);
-
-        this.state = {
-            displayColorPicker: false
-        };
-    }
-
     render() {
         return createElement("div", {
             className: classNames(
@@ -62,89 +47,21 @@ export class ColorPicker extends Component<ColorPickerProps, ColorPickerState> {
                 this.props.className
             ),
             style: this.props.style
-        }, this.renderComponents(),
-            this.renderPicker(),
+        },
+            this.props.children,
+            this.props.displayColorPicker || this.props.mode === "inline"
+                ? createElement("div", {
+                    className: classNames({ "widget-color-picker-popover": !(this.props.mode === "inline") })
+                },
+                    createElement(this.components[this.props.type], {
+                        color: this.props.color,
+                        onChange: this.props.onChange,
+                        onChangeComplete: this.props.onChangeComplete,
+                        triangle: "hide"
+                    })
+                )
+                : null,
             createElement(Alert, { className: "widget-color-picker-alert" }, this.props.alertMessage)
         );
-    }
-
-    private handleClick = () => {
-        this.setState({ displayColorPicker: !this.state.displayColorPicker });
-    }
-
-    private handleClose = () => {
-        this.setState({ displayColorPicker: false });
-    }
-
-    private renderComponents() {
-        if (this.props.mode === "input") {
-            return createElement("div", { className: "widget-color-picker-input-container" },
-                createElement("input", {
-                    className: "form-control",
-                    type: "text",
-                    disabled: this.props.disabled,
-                    value: this.props.color,
-                    onChange: this.props.onInputChange
-                }),
-                this.renderLabelComponent()
-            );
-        }
-
-        return this.renderLabelComponent();
-    }
-
-    private renderPicker() {
-        if (this.state.displayColorPicker || this.props.mode === "inline") {
-            return createElement("div", {
-                className: classNames({ "widget-color-picker-popover": !(this.props.mode === "inline") })
-            },
-                createElement(this.components[this.props.type], {
-                    color: this.props.color,
-                    onChange: this.props.onChange,
-                    onChangeComplete: this.props.onChangeComplete,
-                    triangle: "hide"
-                })
-            );
-        }
-    }
-
-    private getDefaultProps() {
-        const { disabled, mode } = this.props;
-        return {
-            className: classNames(
-                "btn",
-                { "widget-color-picker-input": mode === "input" },
-                { "widget-color-picker-inline": mode === "inline" },
-                { "widget-color-picker-disabled": disabled }
-            ),
-            ...(!disabled && mode !== "inline")
-                ? { onClick: this.handleClick, onBlur: this.handleClose }
-                : {}
-        };
-    }
-
-    private renderInnerComponents() {
-        return createElement("button", {
-            ...this.getDefaultProps()
-        },
-            createElement("div", {
-                className: classNames(
-                    { "widget-color-picker-inner": this.props.mode !== "input" },
-                    { "widget-color-picker-input-inner": this.props.mode === "input" }
-                ),
-                style: { background: this.props.color }
-            })
-        );
-    }
-
-    private renderLabelComponent() {
-        if (this.props.label.trim()) {
-            return createElement(Label, {
-                label: this.props.label,
-                weight: this.props.labelWidth
-            }, this.renderInnerComponents());
-        }
-
-        return this.renderInnerComponents();
     }
 }

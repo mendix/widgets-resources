@@ -47,7 +47,6 @@
             <description>For samples see: http://casesandberg.github.io/react-color/</description>
             <enumerationValues>
                 <enumerationValue key="sketch">Sketch</enumerationValue>
-                <enumerationValue key="photoshop">Photoshop</enumerationValue>
                 <enumerationValue key="chrome">Chrome</enumerationValue>
                 <enumerationValue key="block">Block</enumerationValue>
                 <enumerationValue key="github">Github</enumerationValue>
@@ -70,7 +69,7 @@
                 <translation lang="nl_NL">Label</translation>
             </translations>
         </property>
-        <property key="labelWidth" type="integer" defaultValue="9">
+        <property key="labelWidth" type="integer" defaultValue="3">
             <caption>Label width (weight)</caption>
             <category>Appearance</category>
             <description>How much of the total row width (12) the label should occupy. Should not be greater than 11</description>
