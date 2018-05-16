@@ -199,22 +199,25 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     }
 
     private handleSubscriptions = () => {
-        this.setState({
-            color: this.getValue(this.props.mxObject)
-        });
+        this.setState(this.validateColor(this.props.mxObject));
     }
 
     private validateColor = (mxObject?: mendix.lib.MxObject): ColorPickerContainerState => {
+        let message = "";
         const color = this.getValue(mxObject);
-        if (color && color.indexOf("#") === -1) {
-            return {
-                alertMessage: "Color value should be of format 'rgb', 'rgba' or 'hex'",
-                color: "",
-                displayColorPicker: false
-            };
+        if (color && this.props.format === "hex" && !color.includes("#", 1)) {
+            message = `Color value ${color} should be of format '#d0d0d0'`;
+        } else if (color && this.props.format === "rgb" && !color.includes("rgb(")) {
+            message = `Color value ${color} should be of format 'rgb(115,159,159)'`;
+        } else if (color && this.props.format === "rgba" && !color.includes("rgba")) {
+            message = `Color value ${color} should be of format 'rgba(195,226,226,1)'`;
         }
 
-        return { color, displayColorPicker: false };
+        return {
+            alertMessage: message,
+            color: (message === "") ? color : "",
+            displayColorPicker: false
+        };
     }
 
     private handleInputChange = (event: any) => {
