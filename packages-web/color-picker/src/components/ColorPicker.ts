@@ -21,7 +21,7 @@ interface ColorPickerProps {
 }
 
 export type PickerType = "sketch" | "chrome" | "block" | "github" | "twitter" | "circle" | "hue" |
-    "aplha" | "slider" | "compact" | "material" | "swatches";
+    "alpha" | "slider" | "compact" | "material" | "swatches";
 
 export type Mode = "popover" | "input" | "inline";
 
@@ -34,7 +34,7 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
         twitter: Picker.TwitterPicker,
         circle: Picker.CirclePicker,
         hue: Picker.HuePicker,
-        aplha: Picker.AlphaPicker,
+        alpha: Picker.AlphaPicker,
         slider: Picker.SliderPicker,
         compact: Picker.CompactPicker,
         material: Picker.MaterialPicker,
@@ -42,6 +42,8 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
     };
 
     render() {
+        const { mode, type } = this.props;
+
         return createElement("div", {
             className: classNames(
                 "widget-color-picker",
@@ -52,7 +54,9 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
             this.props.children,
             this.props.displayColorPicker || this.props.mode === "inline"
                 ? createElement("div", {
-                    className: classNames({ "widget-color-picker-popover": !(this.props.mode === "inline") })
+                    className: classNames(
+                        { "widget-color-picker-popover": (mode !== "inline" && type !== "alpha" && type !== "slider")
+                    })
                 },
                     this.props.mode !== "inline"
                         ? createElement("div", {
