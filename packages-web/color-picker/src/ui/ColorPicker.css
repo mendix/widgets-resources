@@ -46,3 +46,11 @@
     margin-right: 0px;
     margin-left: 0px;
 }
+
+.widget-color-picker-cover {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}

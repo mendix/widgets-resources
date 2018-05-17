@@ -52,7 +52,11 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         super(props);
 
         this.subscriptionHandles = [];
-        this.state = this.validateColor(props.mxObject);
+        this.state = {
+            alertMessage: "",
+            color: "",
+            displayColorPicker: false
+        };
     }
 
     render() {
@@ -124,6 +128,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             disabled: this.disabled,
             type: this.props.type,
             mode: this.props.mode,
+            close: this.handleClose,
             displayColorPicker: this.state.displayColorPicker,
             style: !hasLabel ? ColorPickerContainer.parseStyle(this.props.style) : undefined,
             onChange: this.updateColorValue,
@@ -145,7 +150,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             mode: this.props.mode,
             color: this.state.color,
             ...(!this.disabled && this.props.mode !== "inline")
-                ? { onClick: this.handleClick, onBlur: this.handleClose }
+                ? { onClick: this.handleClick }
                 : {}
         });
     }
@@ -205,7 +210,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     private validateColor = (mxObject?: mendix.lib.MxObject): ColorPickerContainerState => {
         let message = "";
         const color = this.getValue(mxObject);
-        if (color && this.props.format === "hex" && !color.includes("#", 1)) {
+        if (color && this.props.format === "hex" && !color.includes("#")) {
             message = `Color value ${color} should be of format '#d0d0d0'`;
         } else if (color && this.props.format === "rgb" && !color.includes("rgb(")) {
             message = `Color value ${color} should be of format 'rgb(115,159,159)'`;
@@ -216,7 +221,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         return {
             alertMessage: message,
             color: (message === "") ? color : "",
-            displayColorPicker: false
+            displayColorPicker: this.state.displayColorPicker
         };
     }
 
