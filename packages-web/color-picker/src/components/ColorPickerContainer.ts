@@ -60,9 +60,10 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     }
 
     render() {
-        const { mxObject, readOnly, colorAttribute } = this.props;
+        const { mxObject, readOnly, colorAttribute, format, type } = this.props;
         this.disabled = this.props.editable === "default"
-            ? (!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute)))
+            ? (!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute))
+            || (type === "alpha" && (format === "hex" || format === "rgb")))
             : true;
 
         const maxLabelWidth = 11;

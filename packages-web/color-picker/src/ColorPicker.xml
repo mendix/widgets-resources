@@ -53,7 +53,7 @@
                 <enumerationValue key="twitter">Twitter</enumerationValue>
                 <enumerationValue key="circle">Circle</enumerationValue>
                 <enumerationValue key="hue">Hue</enumerationValue>
-                <enumerationValue key="aplha">Aplha</enumerationValue>
+                <enumerationValue key="alpha">Alpha</enumerationValue>
                 <enumerationValue key="slider">Slider</enumerationValue>
                 <enumerationValue key="compact">Compact</enumerationValue>
                 <enumerationValue key="material">Material</enumerationValue>
