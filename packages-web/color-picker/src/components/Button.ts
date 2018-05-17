@@ -9,7 +9,6 @@ export interface ButtonProps {
     color?: string;
     mode: Mode;
     onClick?: () => void;
-    onBlur?: () => void;
 }
 
 export const Button: SFC<ButtonProps> = (props) =>
@@ -20,8 +19,7 @@ export const Button: SFC<ButtonProps> = (props) =>
             { "widget-color-picker-inline": props.mode === "inline" },
             { "widget-color-picker-disabled": props.disabled }
         ),
-        onClick: props.onClick,
-        onBlur: props.onBlur
+        onClick: props.onClick
     },
         createElement("div", {
             className: props.className,
