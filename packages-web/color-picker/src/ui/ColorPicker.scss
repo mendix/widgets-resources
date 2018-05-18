@@ -1,0 +1,66 @@
+.widget-color-picker-inline {
+    &.btn:hover, &.btn:focus {
+        background-color: transparent;
+    }
+}
+
+.widget-color-picker-inner {
+    width: 36px;
+    height: 14px;
+    border-radius: 2px;
+}
+
+.widget-color-picker-popover {
+    margin-top: 6px;
+    position: absolute;
+    z-index: 2;
+}
+
+.widget-color-picker-input-inner {
+    width: 20px;
+    height: 15px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.widget-color-picker-disabled, .widget-color-picker-disabled {
+    &.widget-color-picker-input-inner {
+        cursor: not-allowed;
+    }
+}
+
+.widget-color-picker-inline {
+    &.btn {
+        margin-bottom: 5px;
+        cursor: default;
+    }
+}
+
+.widget-color-picker-input {
+    &.btn {
+        margin-left: 6px;
+    }
+}
+
+.widget-color-picker-input-container {
+    display: flex;
+
+    .form-group{
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+}
+
+.widget-color-picker {
+    .form-group {
+        margin-bottom: 0px;
+    }
+}
+
+.widget-color-picker-cover {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}

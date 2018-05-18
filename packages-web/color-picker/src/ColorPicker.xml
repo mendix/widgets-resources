@@ -17,7 +17,7 @@
         <property key="colorAttribute" type="attribute">
             <caption>Color attribute</caption>
             <category>Data source</category>
-            <description>Attribute containing a valid HTML color: rgb(115,159,159), rgba(195,226,226,1) or #d0d0d0</description>
+            <description>Attribute containing a valid color: rgb(115,159,159), rgba(195,226,226,1) or #d0d0d0. Non-code color values such as 'red' are not supported</description>
             <attributeTypes>
                 <attributeType name="String"/>
             </attributeTypes>

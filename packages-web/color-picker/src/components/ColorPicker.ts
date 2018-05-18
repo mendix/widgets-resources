@@ -4,7 +4,7 @@ import { Alert } from "./Alert";
 import * as classNames from "classnames";
 import * as Picker from "react-color";
 
-import "../ui/ColorPicker.css";
+import "../ui/ColorPicker.scss";
 
 interface ColorPickerProps {
     className?: string;
@@ -42,37 +42,37 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
     };
 
     render() {
+        return createElement("div", {
+            className: classNames("widget-color-picker", this.props.className),
+            style: this.props.style
+        },
+            this.props.children,
+            (this.props.displayColorPicker || this.props.mode === "inline")
+                ? this.renderPicker()
+                : null,
+            createElement(Alert, { className: "widget-color-picker-alert" }, this.props.alertMessage)
+        );
+    }
+
+    private renderPicker() {
         const { mode, type } = this.props;
 
         return createElement("div", {
             className: classNames(
-                "widget-color-picker",
-                this.props.className
-            ),
-            style: this.props.style
+                {
+                    "widget-color-picker-popover": (mode !== "inline" && type !== "alpha" && type !== "slider")
+                }
+            )
         },
-            this.props.children,
-            this.props.displayColorPicker || this.props.mode === "inline"
-                ? createElement("div", {
-                    className: classNames(
-                        { "widget-color-picker-popover": (mode !== "inline" && type !== "alpha" && type !== "slider")
-                    })
-                },
-                    this.props.mode !== "inline"
-                        ? createElement("div", {
-                            className: "widget-color-picker-cover",
-                            onClick: this.props.close
-                        })
-                        : null,
-                    createElement(this.components[this.props.type], {
-                        color: this.props.color,
-                        onChange: this.props.onChange,
-                        onChangeComplete: this.props.onChangeComplete,
-                        triangle: "hide"
-                    })
-                )
+            mode !== "inline"
+                ? createElement("div", { className: "widget-color-picker-cover", onClick: this.props.close })
                 : null,
-            createElement(Alert, { className: "widget-color-picker-alert" }, this.props.alertMessage)
+            createElement(this.components[type], {
+                color: this.props.color,
+                onChange: this.props.onChange,
+                onChangeComplete: this.props.onChangeComplete,
+                triangle: "hide"
+            })
         );
     }
 }
