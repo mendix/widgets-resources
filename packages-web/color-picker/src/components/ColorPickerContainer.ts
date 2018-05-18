@@ -1,5 +1,4 @@
 import { Component, createElement } from "react";
-
 import { Color, ColorResult } from "react-color";
 
 import { ColorPicker, Mode, PickerType } from "./ColorPicker";
@@ -45,13 +44,12 @@ type Format = "hex" | "rgb" | "rgba";
 type onChange = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
 
 export default class ColorPickerContainer extends Component<ColorPickerContainerProps, ColorPickerContainerState> {
-    private subscriptionHandles: number[];
+    private subscriptionHandles: number[] = [];
     private disabled = false;
 
     constructor(props: ColorPickerContainerProps) {
         super(props);
 
-        this.subscriptionHandles = [];
         this.state = {
             alertMessage: "",
             color: "",
@@ -61,10 +59,9 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
 
     render() {
         const { mxObject, readOnly, colorAttribute, format, type } = this.props;
-        this.disabled = this.props.editable === "default"
-            ? (!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute))
-            || (type === "alpha" && (format === "hex" || format === "rgb")))
-            : true;
+        this.disabled = this.props.editable !== "default"
+            || ((!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute))
+            || (type === "alpha" && (format === "hex" || format === "rgb"))));
 
         const maxLabelWidth = 11;
         if (this.props.label.trim()) {
@@ -88,37 +85,6 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
     }
 
-    public static validateProps(props: ColorPickerContainerProps): string {
-        let errorMessage = "";
-        if (props.onChangeEvent === "callMicroflow" && !props.onChangeMicroflow) {
-            errorMessage = "on change event is set to 'Call a microflow' but no microflow is selected";
-        } else if (props.onChangeEvent === "showPage" && !props.onChangePage) {
-            errorMessage = "on change event is set to 'Show a page' but no page is selected";
-        } else if (props.onChangeEvent === "callNanoflow" && (JSON.stringify(props.onChangeNanoflow) === JSON.stringify({}))) {
-            errorMessage = "on change event is set to 'Call a nanoflow' but no nanoflow is selected";
-        }
-
-        return errorMessage && `Error in color picker configuration: ${errorMessage}`;
-    }
-
-    public static parseStyle(style = ""): {[key: string]: string} {
-        try {
-            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
-                const pair = line.split(":");
-                if (pair.length === 2) {
-                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
-                    styleObject[name] = pair[1].trim();
-                }
-                return styleObject;
-            }, {});
-        } catch (error) {
-            // tslint:disable-next-line no-console
-            console.log("Failed to parse style", style, error);
-        }
-
-        return {};
-    }
-
     private renderColorPicker(hasLabel = false) {
         const alertMessage = this.state.alertMessage || ColorPickerContainer.validateProps(this.props);
 
@@ -135,29 +101,33 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             onChange: this.updateColorValue,
             onChangeComplete: this.handleOnChange
         }, this.props.mode === "input"
-                ? createElement(Input, {
-                    disabled: this.disabled,
-                    color: this.state.color,
-                    onChange: this.handleInputChange
-                }, this.renderColorPickerButton())
-                : this.renderColorPickerButton()
+                ? this.renderInput()
+                : this.renderButton()
         );
     }
 
-    private renderColorPickerButton() {
+    private renderButton() {
         return createElement(Button, {
             className: this.props.mode === "input" ? "widget-color-picker-input-inner" : "widget-color-picker-inner",
             disabled: this.disabled,
             mode: this.props.mode,
             color: this.state.color,
-            ...(!this.disabled && this.props.mode !== "inline")
-                ? { onClick: this.handleClick }
-                : {}
+            onClick: this.handleClick
         });
     }
 
+    private renderInput() {
+        return createElement(Input, {
+            disabled: this.disabled,
+            color: this.state.color,
+            onChange: this.handleInputChange
+        }, this.renderButton());
+    }
+
     private handleClick = () => {
-        this.setState({ displayColorPicker: !this.state.displayColorPicker });
+        if (!this.disabled && this.props.mode !== "inline") {
+            this.setState({ displayColorPicker: !this.state.displayColorPicker });
+        }
     }
 
     private handleClose = () => {
@@ -180,11 +150,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     }
 
     private getValue = (mxObject?: mendix.lib.MxObject): string => {
-        if (mxObject) {
-            return mxObject.get(this.props.colorAttribute) as string;
-        }
-
-        return "";
+        return mxObject ? mxObject.get(this.props.colorAttribute) as string : "";
     }
 
     private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
@@ -221,19 +187,18 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
 
         return {
             alertMessage: message,
-            color: (message === "") ? color : "",
+            color: !message ? color : "",
             displayColorPicker: this.state.displayColorPicker
         };
     }
 
     private handleInputChange = (event: any) => {
         const newColor = event.target.value as string;
-        if (newColor.length > 0) {
+        if (newColor) {
             this.setState({ alertMessage: "", color: event.target.value });
         } else {
             this.setState({ alertMessage: "Invalid color", color: event.target.value });
         }
-
     }
 
     private handleOnChange = () => {
@@ -265,5 +230,36 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
                 });
             }
         }
+    }
+
+    public static validateProps(props: ColorPickerContainerProps): string {
+        let errorMessage = "";
+        if (props.onChangeEvent === "callMicroflow" && !props.onChangeMicroflow) {
+            errorMessage = "on change event is set to 'Call a microflow' but no microflow is selected";
+        } else if (props.onChangeEvent === "showPage" && !props.onChangePage) {
+            errorMessage = "on change event is set to 'Show a page' but no page is selected";
+        } else if (props.onChangeEvent === "callNanoflow" && (JSON.stringify(props.onChangeNanoflow) === JSON.stringify({}))) {
+            errorMessage = "on change event is set to 'Call a nanoflow' but no nanoflow is selected";
+        }
+
+        return errorMessage && `Error in color picker configuration: ${errorMessage}`;
+    }
+
+    public static parseStyle(style = ""): {[key: string]: string} {
+        try {
+            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            // tslint:disable-next-line no-console
+            console.log("Failed to parse style", style, error);
+        }
+
+        return {};
     }
 }
