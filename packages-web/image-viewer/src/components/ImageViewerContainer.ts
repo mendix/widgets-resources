@@ -182,22 +182,22 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
     }
 
     private executeAction() {
-        const { mxObject, onClickMicroflow, onClickNanoflow, onClickOption, onClickForm, mxform, openPageAs } = this.props;
+        const { onClickMicroflow, onClickNanoflow, onClickOption, onClickForm, mxform, openPageAs } = this.props;
         const context = this.getContext();
-        if (onClickOption === "callMicroflow" && mxObject) {
+        if (onClickOption === "callMicroflow" && onClickMicroflow) {
             window.mx.ui.action(onClickMicroflow, {
                 context,
                 error: error => window.mx.ui.error(`An error occurred while executing action ${onClickMicroflow} : ${error.message}`),
                 origin: mxform
             });
-        } else if (onClickOption === "callNanoflow" && mxObject) {
+        } else if (onClickOption === "callNanoflow" && onClickNanoflow.nanoflow) {
             window.mx.data.callNanoflow({
                 context,
                 error: error => window.mx.ui.error(`An error occurred while executing the on click nanoflow: ${error.message}`),
                 nanoflow: onClickNanoflow,
                 origin: mxform
             });
-        } else if (onClickOption === "showPage" && mxObject) {
+        } else if (onClickOption === "showPage" && onClickForm) {
             window.mx.ui.openForm(onClickForm, {
                 context,
                 error: error => window.mx.ui.error(
