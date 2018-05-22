@@ -78,7 +78,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
 
     componentWillReceiveProps(newProps: ColorPickerContainerProps) {
         this.resetSubscriptions(newProps.mxObject);
-        this.setState(this.validateColor(newProps.mxObject));
+        this.setState(this.validateColor(this.getValue(newProps.mxObject)));
     }
 
     componentWillUnmount() {
@@ -171,12 +171,11 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     }
 
     private handleSubscriptions = () => {
-        this.setState(this.validateColor(this.props.mxObject));
+        this.setState(this.validateColor(this.getValue(this.props.mxObject)));
     }
 
-    private validateColor = (mxObject?: mendix.lib.MxObject): ColorPickerContainerState => {
+    private validateColor = (color: string): ColorPickerContainerState => {
         let message = "";
-        const color = this.getValue(mxObject);
         if (color && this.props.format === "hex" && !color.includes("#")) {
             message = `Color value ${color} should be of format '#d0d0d0'`;
         } else if (color && this.props.format === "rgb" && !color.includes("rgb(")) {
@@ -187,7 +186,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
 
         return {
             alertMessage: message,
-            color: !message ? color : "",
+            color,
             displayColorPicker: this.state.displayColorPicker
         };
     }
@@ -195,7 +194,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     private handleInputChange = (event: any) => {
         const newColor = event.target.value as string;
         if (newColor) {
-            this.setState({ alertMessage: "", color: event.target.value });
+            this.setState(this.validateColor(event.target.value));
         } else {
             this.setState({ alertMessage: "Invalid color", color: event.target.value });
         }

@@ -26,7 +26,7 @@ export type PickerType = "sketch" | "chrome" | "block" | "github" | "twitter" | 
 export type Mode = "popover" | "input" | "inline";
 
 export class ColorPicker extends Component<ColorPickerProps, {}> {
-    private components: any = {
+    private components: { [P in PickerType]: any } = {
         sketch: Picker.SketchPicker,
         chrome: Picker.ChromePicker,
         block: Picker.BlockPicker,
