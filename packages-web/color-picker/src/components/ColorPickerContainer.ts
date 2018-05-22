@@ -61,7 +61,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         const { mxObject, readOnly, colorAttribute, format, type } = this.props;
         this.disabled = this.props.editable !== "default"
             || ((!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute))
-            || (type === "alpha" && (format === "hex" || format === "rgb"))));
+            || (type === "alpha" && format !== "rgba")));
 
         const maxLabelWidth = 11;
         if (this.props.label.trim()) {
@@ -93,6 +93,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             className: !hasLabel ? this.props.class : undefined,
             color: this.state.color,
             disabled: this.disabled,
+            disableAlpha: this.props.format !== "rgba",
             type: this.props.type,
             mode: this.props.mode,
             close: this.handleClose,

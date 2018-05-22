@@ -12,6 +12,7 @@ interface ColorPickerProps {
     type: PickerType;
     mode: Mode;
     disabled: boolean;
+    disableAlpha?: boolean;
     style?: object;
     displayColorPicker: boolean;
     onChange?: Picker.ColorChangeHandler;
@@ -71,7 +72,8 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
                 color: this.props.color,
                 onChange: this.props.onChange,
                 onChangeComplete: this.props.onChangeComplete,
-                triangle: "hide"
+                triangle: "hide",
+                disableAlpha: this.props.disableAlpha
             })
         );
     }
