@@ -44,7 +44,11 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
 
     render() {
         return createElement("div", {
-            className: classNames("widget-color-picker", this.props.className),
+            className: classNames(
+                "widget-color-picker",
+                this.props.className,
+                { "widget-color-picker-disabled": this.props.disabled }
+            ),
             style: this.props.style
         },
             this.props.children,
@@ -56,7 +60,7 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
     }
 
     private renderPicker() {
-        const { mode, type } = this.props;
+        const { disabled, mode, type } = this.props;
 
         return createElement("div", {
             className: classNames(
@@ -68,6 +72,7 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
             mode !== "inline"
                 ? createElement("div", { className: "widget-color-picker-cover", onClick: this.props.close })
                 : null,
+            disabled ? createElement("div", { className: "widget-color-picker-overlay" }) : null,
             createElement(this.components[type], {
                 color: this.props.color,
                 onChange: this.props.onChange,
