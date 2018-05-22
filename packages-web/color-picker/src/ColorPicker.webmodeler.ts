@@ -17,7 +17,7 @@ type VisibilityMap = {
 export class preview extends Component<ColorPickerContainerProps, {}> {
     render() {
         return createElement("div", {},
-            createElement(Alert, { className: "widget-charts-color-picker-alert" },
+            createElement(Alert, { className: "widget-color-picker-alert" },
                 ColorPickerContainer.validateProps(this.props)
             ),
             this.props.label.trim() ? this.renderLabelColorPicker() : this.renderColorPicker()

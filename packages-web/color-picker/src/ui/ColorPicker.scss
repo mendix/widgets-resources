@@ -12,6 +12,10 @@
     .block-picker {
         box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 2px, rgba(0, 0, 0, 0.3) 0px 4px 8px !important;
     }
+
+    .widget-color-picker-alert {
+        margin-top: 10px;
+    }
 }
 
 .widget-color-picker-inline {
@@ -37,12 +41,6 @@
     height: 15px;
     border-radius: 2px;
     cursor: pointer;
-}
-
-.widget-color-picker-disabled, .widget-color-picker-disabled {
-    &.widget-color-picker-input-inner {
-        cursor: not-allowed;
-    }
 }
 
 .widget-color-picker-inline {

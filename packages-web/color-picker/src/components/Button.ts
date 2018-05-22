@@ -18,7 +18,7 @@ export const Button: SFC<ButtonProps> = (props) =>
             {
                 "widget-color-picker-input": props.mode === "input",
                 "widget-color-picker-inline": props.mode === "inline",
-                "widget-color-picker-disabled": props.disabled
+                "disabled": props.disabled
             }
         ),
         onClick: props.onClick
