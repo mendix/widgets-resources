@@ -1,3 +1,15 @@
+.widget-color-picker {
+    .sketch-picker, .compact-picker {
+        input {
+            width: 100% !important;
+        }
+    }
+
+    .material-picker {
+        height: auto !important;
+    }
+}
+
 .widget-color-picker-inline {
     &.btn:hover, &.btn:focus {
         background-color: transparent;
