@@ -112,7 +112,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             className: this.props.mode === "input" ? "widget-color-picker-input-inner" : "widget-color-picker-inner",
             disabled: this.disabled,
             mode: this.props.mode,
-            color: this.state.color,
+            color: this.state.alertMessage ? this.getValue(this.props.mxObject) : this.state.color,
             onClick: this.handleClick
         });
     }
@@ -195,7 +195,11 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     private handleInputChange = (event: any) => {
         const newColor = event.target.value as string;
         if (newColor) {
-            this.setState(this.validateColor(event.target.value));
+            const state = this.validateColor(event.target.value);
+            if (!state.alertMessage && this.props.mxObject) {
+                this.props.mxObject.set(this.props.colorAttribute, newColor);
+            }
+            this.setState(state);
         } else {
             this.setState({ alertMessage: "Invalid color", color: event.target.value });
         }
