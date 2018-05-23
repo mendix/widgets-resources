@@ -31,6 +31,18 @@
                 <enumerationValue key="never">Never</enumerationValue>
             </enumerationValues>
         </property>
+        <property key="defaultColors" type="object" isList="true" required="false">
+            <caption>Default colors</caption>
+            <category>Data source</category>
+            <description>List of pre-defined colors. Only used by 'Block', 'Sketch', 'Circle', 'Compact' and 'Twitter'</description>
+            <properties>
+                <property key="color" type="string">
+                    <caption>Color</caption>
+                    <category>Data source</category>
+                    <description>Valid color value: rgb(115,159,159), rgba(195,226,226,1) or #d0d0d0</description>
+                </property>
+            </properties>
+        </property>
         <property key="mode" type="enumeration" defaultValue="popover">
             <caption>Mode</caption>
             <category>Appearance</category>
