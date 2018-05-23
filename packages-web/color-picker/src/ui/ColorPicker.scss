@@ -30,6 +30,20 @@
         width: 100%;
         height: 100%;
     }
+
+    .circle-picker > span {
+        margin: 8px;
+    }
+
+    .circle-picker > span > div {
+        margin: 0 !important;
+    }
+
+    .circle-picker {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
+        background: rgb(255, 255, 255);
+        padding: 14px 0 14px 14px;
+    }
 }
 
 .widget-color-picker-inline {
