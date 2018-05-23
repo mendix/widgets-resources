@@ -21,7 +21,9 @@
     "noFallthroughCasesInSwitch": true,
     "strict": true,
     "strictFunctionTypes": false,
-    "skipLibCheck": false
+    "skipLibCheck": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "exclude": [
     "dist/",
