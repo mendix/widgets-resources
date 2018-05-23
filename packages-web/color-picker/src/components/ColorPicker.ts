@@ -19,6 +19,7 @@ interface ColorPickerProps {
     close?: () => void;
     alertMessage?: string;
     onChangeComplete?: Picker.ColorChangeHandler;
+    defaultColors: string[];
 }
 
 export type PickerType = "sketch" | "chrome" | "block" | "github" | "twitter" | "circle" | "hue" |
@@ -60,7 +61,8 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
     }
 
     private renderPicker() {
-        const { disabled, mode, type } = this.props;
+        const { defaultColors, disabled, mode, type } = this.props;
+        const colors = defaultColors.map((color: any) => color.color);
 
         return createElement("div", {
             className: classNames(
@@ -75,8 +77,10 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
             disabled ? createElement("div", { className: "widget-color-picker-overlay" }) : null,
             createElement(this.components[type], {
                 color: this.props.color,
+                colors: (defaultColors.length > 0 && type !== "swatches") ? colors : undefined,
                 onChange: this.props.onChange,
                 onChangeComplete: this.props.onChangeComplete,
+                presetColors: defaultColors.length > 0 ? colors : undefined,
                 triangle: "hide",
                 disableAlpha: this.props.disableAlpha
             })

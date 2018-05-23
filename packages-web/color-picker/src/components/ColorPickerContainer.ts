@@ -32,6 +32,7 @@ export interface ColorPickerContainerProps extends WrapperProps {
     onChangePage: string;
     onChangeNanoflow: Nanoflow;
     openPageLocation: "content" | "popup" | "modal";
+    defaultColors: string[];
 }
 
 interface ColorPickerContainerState {
@@ -93,12 +94,13 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             alertMessage,
             className: !hasLabel ? this.props.class : undefined,
             color: this.state.color,
+            defaultColors: this.props.defaultColors,
             disabled: this.disabled,
             disableAlpha: this.props.format !== "rgba",
+            displayColorPicker: this.state.displayColorPicker,
             type: this.props.type,
             mode: this.props.mode,
             close: this.handleClose,
-            displayColorPicker: this.state.displayColorPicker,
             style: !hasLabel ? ColorPickerContainer.parseStyle(this.props.style) : undefined,
             onChange: this.updateColorValue,
             onChangeComplete: this.handleOnChange

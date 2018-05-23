@@ -44,6 +44,7 @@ export class preview extends Component<ColorPickerContainerProps, {}> {
             mode: this.props.mode,
             displayColorPicker: false,
             disableAlpha: this.props.format !== "rgba",
+            defaultColors: this.props.defaultColors,
             style: !hasLabel ? ColorPickerContainer.parseStyle(this.props.style) : undefined
         }, this.props.mode === "input" ? this.renderInputColorPicker() : this.renderColorPickerButton());
     }
