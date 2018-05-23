@@ -1,5 +1,4 @@
 import { SFC, createElement } from "react";
-import * as classNames from "classnames";
 
 export interface InputProps {
     disabled: boolean;
