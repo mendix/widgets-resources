@@ -125,7 +125,8 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         return createElement(Input, {
             disabled: this.disabled,
             color: this.state.color,
-            onChange: this.handleInputChange
+            onChange: this.handleInputChange,
+            onKeyDown: this.handleClick
         }, this.renderButton());
     }
 
