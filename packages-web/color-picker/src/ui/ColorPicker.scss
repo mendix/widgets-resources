@@ -13,10 +13,6 @@
         box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 2px, rgba(0, 0, 0, 0.3) 0px 4px 8px !important;
     }
 
-    .widget-color-picker-alert {
-        margin-top: 10px;
-    }
-
     &.widget-color-picker-disabled {
         position: relative;
     }
@@ -46,7 +42,7 @@
         margin-bottom: 0px !important;
     }
 
-    .slider-picker {
+    .slider-picker, .widget-color-picker-alert, .hue-horizontal {
         margin-top: 10px;
     }
 }
