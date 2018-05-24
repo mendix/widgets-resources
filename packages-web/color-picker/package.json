@@ -14,7 +14,6 @@
     "test:unit": "karma start --single-run --codeCoverage && node tests/remap.js",
     "test:e2e": "tsc -p ./tests/e2e/tsconfig.json && wdio ./tests/e2e/wdio.conf.js",
     "test:e2e:dev": "tsc -p ./tests/e2e/tsconfig.json && set DEBUG=true&& wdio ./tests/e2e/wdio.conf.js",
-    "test:e2e:dev:mult-browser": "tsc -p ./tests/e2e/tsconfig.json && set DEBUG=true&& set MULTCLIENT=true&& wdio ./tests/e2e/wdio.conf.js",
     "lint": "tslint -c tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'",
     "lint:fix": "npm run lint -- --fix",
     "deploy": " npm run updateProject && npm run deployApp",
