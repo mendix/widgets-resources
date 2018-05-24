@@ -12,6 +12,7 @@ interface WrapperProps {
     mxform: mxui.lib.form._FormBase;
     style: string;
     readOnly: boolean;
+    friendlyId: string;
 }
 
 interface Nanoflow {
@@ -248,7 +249,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             errorMessage = "on change event is set to 'Call a nanoflow' but no nanoflow is selected";
         }
 
-        return errorMessage && `Error in color picker configuration: ${errorMessage}`;
+        return errorMessage && `Error in configuration ${props.friendlyId}: ${errorMessage}`;
     }
 
     public static parseStyle(style = ""): {[key: string]: string} {
