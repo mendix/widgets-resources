@@ -1,7 +1,7 @@
 import modePage from "./pages/modePage";
 import colorFormatPage from "./pages/colorFormatPage";
 
-describe("Color Picker", () => {
+fdescribe("Color Picker", () => {
 
     beforeAll(() => {
         modePage.open();
@@ -11,11 +11,11 @@ describe("Color Picker", () => {
         modePage.button.waitForVisible();
         modePage.buttonColor.waitForVisible();
 
-        const buttonBackgroundColor = browser.getCssProperty(".mx-name-colorPicker3 div", "background").value;
-        expect(buttonBackgroundColor).toContain("rgb(76,175,80)nonerepeatscroll0%0%/autopadding-boxborder-box");
+        const buttonBackgroundColor = browser.getCssProperty(".mx-name-colorPicker3 .widget-color-picker-inner", "background").value;
+        expect(buttonBackgroundColor).toContain("rgb(76,175,80)");
     });
 
-    it("should render an input box with a value: #4caf50", () => {
+    it("should render an input box with a color value: #4caf50", () => {
         modePage.inPutBoxTab.click();
         modePage.inPutBox.waitForVisible();
 
@@ -27,89 +27,91 @@ describe("Color Picker", () => {
         modePage.inlineTab.click();
         modePage.inLineColorPicker.waitForVisible();
 
-        const inPutBoxValue = browser.getValue(".mx-name-colorPicker29 input");
-        expect(inPutBoxValue.length).toBe(7);
+        const inPutBoxValue: boolean = browser.isExisting(".mx-name-colorPicker27 .sketch-picker ");
+        expect(inPutBoxValue).toBe(true);
     });
 
     it("should be render type: Sketch", () => {
 
-        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker27 div");
+        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker27 .sketch-picker ");
         expect(doesExist).toBe(true);
     });
 
     it("should be render type: Block", () => {
 
-        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker28 div");
+        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker28 .block-picker ");
         expect(doesExist).toBe(true);
     });
 
     it("should be render type: Chrome", () => {
 
-        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker29 div");
+        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker29 .chrome-picker ");
         expect(doesExist).toBe(true);
     });
 
     it("should be render type: Github", () => {
 
-        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker30 div");
+        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker30 .github-picker ");
         expect(doesExist).toBe(true);
     });
 
     it("should be render type: Material", () => {
 
-        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker31 div");
+        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker31 .material-picker ");
         expect(doesExist).toBe(true);
     });
 
     it("should be render type: Swatches", () => {
 
-        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker32 div");
+        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker32 .swatches-picker ");
         expect(doesExist).toBe(true);
     });
 
     it("should be render type: Twitter", () => {
 
-        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker33 div");
+        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker33 .twitter-picker ");
         expect(doesExist).toBe(true);
     });
 
     it("should be render type: Circle", () => {
 
-        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker34 div");
+        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker34 .circle-picker ");
         expect(doesExist).toBe(true);
     });
 
     it("should be render type: Hue", () => {
 
-        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker35 div");
+        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker35 .hue-picker ");
         expect(doesExist).toBe(true);
     });
 
     it("should be render type: Alpha", () => {
 
-        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker36 div");
+        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker36 .alpha-picker ");
         expect(doesExist).toBe(true);
     });
 
     it("should be render type: Slider", () => {
 
-        const doesExist: boolean = browser.isVisible(".mx-name-colorPicker37 div");
+        const doesExist: boolean = browser.isExisting(".mx-name-colorPicker37 .slider-picker ");
         expect(doesExist).toBe(true);
     });
 
     it("should be render type: Compact", () => {
 
-        const doesExist: boolean = browser.element(".mx-name-colorPicker26 div").isExisting();
+        const doesExist: boolean = browser.element(".mx-name-colorPicker26 .compact-picker ").isExisting();
         expect(doesExist).toBe(true);
     });
 
     it("should change color when a new color is picked", () => {
         colorFormatPage.open();
+        colorFormatPage.skethInput.waitForVisible();
+        colorFormatPage.rgbTab.click();
         colorFormatPage.circleColorPicker.waitForVisible();
-        colorFormatPage.circleColorPicker.click();
-        colorFormatPage.circleColorPickerButton.waitForVisible();
+        colorFormatPage.circleColorPickerButton.click();
+        colorFormatPage.circleColorPickerButtonValue.waitForValue();
 
-        const circleButtonBackgroundColor = browser.getCssProperty(".mx-name-colorPicker11 div", "background").value;
+        const circleButtonBackgroundColor = browser.getCssProperty(".mx-name-colorPicker22 .widget-color-picker-inner", "background").value;
         expect(circleButtonBackgroundColor).toContain("rgb(233, 30, 99)");
     });
 
