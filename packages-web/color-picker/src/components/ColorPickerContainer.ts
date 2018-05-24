@@ -180,11 +180,11 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
 
     private validateColor = (color: string): ColorPickerContainerState => {
         let message = "";
-        if (color && this.props.format === "hex" && !color.includes("#")) {
+        if (color && this.props.format === "hex" && (color.indexOf("#") === -1)) {
             message = `Color value ${color} should be of format '#d0d0d0'`;
-        } else if (color && this.props.format === "rgb" && !color.includes("rgb(")) {
+        } else if (color && this.props.format === "rgb" && (color.toLowerCase().indexOf("rgb(") === -1)) {
             message = `Color value ${color} should be of format 'rgb(115,159,159)'`;
-        } else if (color && this.props.format === "rgba" && !color.includes("rgba")) {
+        } else if (color && this.props.format === "rgba" && (color.toLowerCase().indexOf("rgba") === -1)) {
             message = `Color value ${color} should be of format 'rgba(195,226,226,1)'`;
         }
 
