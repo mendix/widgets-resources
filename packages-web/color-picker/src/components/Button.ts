@@ -9,6 +9,7 @@ export interface ButtonProps {
     color?: string;
     mode: Mode;
     onClick?: () => void;
+    tabIndex?: number;
 }
 
 export const Button: SFC<ButtonProps> = (props) =>
@@ -21,7 +22,8 @@ export const Button: SFC<ButtonProps> = (props) =>
                 "disabled": props.disabled
             }
         ),
-        onClick: props.onClick
+        onClick: props.onClick,
+        tabIndex: props.tabIndex
     }, createElement("div", { className: props.className, style: { background: props.color } }));
 
 Button.displayName = "Button";

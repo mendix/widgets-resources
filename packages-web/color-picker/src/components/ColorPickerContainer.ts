@@ -117,7 +117,8 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             disabled: this.disabled,
             mode: this.props.mode,
             color: this.state.alertMessage ? this.getValue(this.props.mxObject) : this.state.color,
-            onClick: this.handleClick
+            onClick: this.handleClick,
+            tabIndex: this.props.mode === "popover" ? 0 : -1
         });
     }
 
