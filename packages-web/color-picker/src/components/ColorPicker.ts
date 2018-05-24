@@ -67,7 +67,7 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
         return createElement("div", {
             className: classNames(
                 {
-                    "widget-color-picker-popover": (mode !== "inline" && type !== "alpha" && type !== "slider")
+                    "widget-color-picker-popover": (mode !== "inline" && type !== "hue" && type !== "alpha" && type !== "slider")
                 }
             )
         },
