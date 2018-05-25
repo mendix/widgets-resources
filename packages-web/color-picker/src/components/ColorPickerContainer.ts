@@ -72,7 +72,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
                 className: this.props.class,
                 label: this.props.label,
                 style: ColorPickerContainer.parseStyle(this.props.style),
-                weight: this.props.labelWidth > maxLabelWidth ? maxLabelWidth : this.props.labelWidth
+                weight: this.props.labelWidth > maxLabelWidth ? 6 : this.props.labelWidth
             }, this.renderColorPicker(true));
         }
 
@@ -242,16 +242,19 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     }
 
     public static validateProps(props: ColorPickerContainerProps): string {
-        let errorMessage = "";
+        const message: string[] = [];
         if (props.onChangeEvent === "callMicroflow" && !props.onChangeMicroflow) {
-            errorMessage = "on change event is set to 'Call a microflow' but no microflow is selected";
+            message.push("On change event is set to 'Call a microflow' but no microflow is selected");
         } else if (props.onChangeEvent === "showPage" && !props.onChangePage) {
-            errorMessage = "on change event is set to 'Show a page' but no page is selected";
+            message.push("On change event is set to 'Show a page' but no page is selected");
         } else if (props.onChangeEvent === "callNanoflow" && (JSON.stringify(props.onChangeNanoflow) === JSON.stringify({}))) {
-            errorMessage = "on change event is set to 'Call a nanoflow' but no nanoflow is selected";
+            message.push("On change event is set to 'Call a nanoflow' but no nanoflow is selected");
+        }
+        if (props.label.trim() && props.labelWidth > 11) {
+            message.push("Label width (weight) should not be greater than 11");
         }
 
-        return errorMessage && `Error in configuration ${props.friendlyId}: ${errorMessage}`;
+        return message.length ? `Configuration error in widget ${props.friendlyId}: ${message.join(", ")}` : "";
     }
 
     public static parseStyle(style = ""): {[key: string]: string} {
