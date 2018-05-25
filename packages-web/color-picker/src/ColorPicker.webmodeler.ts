@@ -31,7 +31,7 @@ export class preview extends Component<ColorPickerContainerProps, {}> {
             className: this.props.class,
             label: this.props.label,
             style: ColorPickerContainer.parseStyle(this.props.style),
-            weight: this.props.labelWidth > maxLabelWidth ? maxLabelWidth : this.props.labelWidth
+            weight: this.props.labelWidth > maxLabelWidth ? 6 : this.props.labelWidth
         }, this.renderColorPicker(true));
     }
 
