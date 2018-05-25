@@ -26,15 +26,23 @@ export class Input extends Component<InputProps, {}> {
 
     componentDidMount() {
         if (this.colorInputNode) {
-            this.colorInputNode.addEventListener("keyup", (event: KeyboardEvent) => {
-                if (event.keyCode === 40 && this.props.onKeyDown) {
-                    this.props.onKeyDown();
-                }
-            }, false);
+            this.colorInputNode.addEventListener("keyup", this.handleKeyboardEvent, false);
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.colorInputNode) {
+            this.colorInputNode.removeEventListener("keyup", this.handleKeyboardEvent, false);
         }
     }
 
     private getColorInputNodeRef = (node: HTMLInputElement) => {
         this.colorInputNode = node;
+    }
+
+    private handleKeyboardEvent = (event: KeyboardEvent) => {
+        if (event.keyCode === 40 && this.props.onKeyDown) {
+            this.props.onKeyDown();
+        }
     }
 }
