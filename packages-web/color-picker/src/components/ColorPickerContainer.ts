@@ -49,6 +49,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     private subscriptionHandles: number[] = [];
     private disabled = false;
     private previousColor = "";
+    private colorChanged = false;
 
     constructor(props: ColorPickerContainerProps) {
         super(props);
@@ -200,9 +201,11 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     private handleInputChange = (event: any) => {
         const newColor = event.target.value as string;
         if (newColor) {
+            this.colorChanged = this.getValue(this.props.mxObject) !== newColor;
             const state = this.validateColor(event.target.value);
             if (!state.alertMessage && this.props.mxObject) {
                 this.props.mxObject.set(this.props.colorAttribute, newColor);
+                this.handleOnChange();
             }
             this.setState(state);
         } else {
@@ -212,7 +215,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
 
     private handleOnChange = () => {
         const { mxform, mxObject, onChangeEvent, onChangeMicroflow, onChangeNanoflow, onChangePage } = this.props;
-        if (mxObject && (this.previousColor !== this.state.color)) {
+        if (mxObject && ((this.previousColor !== this.state.color) || this.colorChanged)) {
             const context = new mendix.lib.MxContext();
             context.setContext(mxObject.getEntity(), mxObject.getGuid());
             if (onChangeEvent === "callMicroflow" && onChangeMicroflow) {
