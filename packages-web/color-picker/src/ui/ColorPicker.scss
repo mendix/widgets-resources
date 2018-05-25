@@ -45,6 +45,10 @@
     .slider-picker, .widget-color-picker-alert, .hue-horizontal {
         margin-top: 10px;
     }
+
+    .slider-picker:nth-child(2) {
+        position: relative;
+    }
 }
 
 .widget-color-picker-inline {
