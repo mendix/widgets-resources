@@ -14,21 +14,21 @@ describe("Button", () => {
     };
 
     it("renders the structure correctly", () => {
-        const labelComponent = renderButton(buttonProps);
+        const buttonComponent = renderButton(buttonProps);
 
-        expect(labelComponent).toBeElement(
+        expect(buttonComponent).toBeElement(
             createElement("button", { className: "btn", tabIndex: buttonProps.tabIndex },
                 createElement("div", { className: buttonProps.className, style: { background: buttonProps.color } })
             )
         );
 
-        labelComponent.setProps({ disabled: true });
-        expect(labelComponent).toHaveClass("disabled");
+        buttonComponent.setProps({ disabled: true });
+        expect(buttonComponent).toHaveClass("disabled");
 
-        labelComponent.setProps({ mode: "input" });
-        expect(labelComponent).toHaveClass("widget-color-picker-input");
+        buttonComponent.setProps({ mode: "input" });
+        expect(buttonComponent).toHaveClass("widget-color-picker-input");
 
-        labelComponent.setProps({ mode: "inline" });
-        expect(labelComponent).toHaveClass("widget-color-picker-inline");
+        buttonComponent.setProps({ mode: "inline" });
+        expect(buttonComponent).toHaveClass("widget-color-picker-inline");
     });
 });

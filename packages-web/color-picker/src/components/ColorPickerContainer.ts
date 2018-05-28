@@ -128,7 +128,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             disabled: this.disabled,
             color: this.state.color,
             onChange: this.handleInputChange,
-            onKeyDown: this.handleClick
+            onKeyDown: this.handleKeyboardEvent
         }, this.renderButton());
     }
 
@@ -140,6 +140,12 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
 
     private handleClose = () => {
         this.setState({ displayColorPicker: false });
+    }
+
+    private handleKeyboardEvent = (event: KeyboardEvent) => {
+        if (event.keyCode === 40) {
+            this.handleClick();
+        }
     }
 
     private updateColorValue = (color: ColorResult) => {
