@@ -4,7 +4,7 @@ export interface InputProps {
     disabled: boolean;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     color?: string;
-    onKeyDown?: () => void;
+    onKeyDown?: (event: KeyboardEvent) => void;
 }
 
 export class Input extends Component<InputProps, {}> {
@@ -25,24 +25,18 @@ export class Input extends Component<InputProps, {}> {
     }
 
     componentDidMount() {
-        if (this.colorInputNode) {
-            this.colorInputNode.addEventListener("keyup", this.handleKeyboardEvent, false);
+        if (this.colorInputNode && this.props.onKeyDown) {
+            this.colorInputNode.addEventListener("keyup", this.props.onKeyDown, false);
         }
     }
 
     componentWillUnmount() {
-        if (this.colorInputNode) {
-            this.colorInputNode.removeEventListener("keyup", this.handleKeyboardEvent, false);
+        if (this.colorInputNode && this.props.onKeyDown) {
+            this.colorInputNode.removeEventListener("keyup", this.props.onKeyDown, false);
         }
     }
 
     private getColorInputNodeRef = (node: HTMLInputElement) => {
         this.colorInputNode = node;
-    }
-
-    private handleKeyboardEvent = (event: KeyboardEvent) => {
-        if (event.keyCode === 40 && this.props.onKeyDown) {
-            this.props.onKeyDown();
-        }
     }
 }

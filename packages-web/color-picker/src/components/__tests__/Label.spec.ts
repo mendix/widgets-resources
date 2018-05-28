@@ -24,9 +24,9 @@ describe("Label", () => {
 
     it("renders a label with the specified weight class", () => {
         const labelComponent = renderLabel({ label, weight: 3 });
-        const SwitchLabel = labelComponent.childAt(0).childAt(0);
+        const colorLabel = labelComponent.childAt(0).childAt(0);
 
-        expect(SwitchLabel).toHaveClass("col-sm-3");
+        expect(colorLabel).toHaveClass("col-sm-3");
     });
 
     it("renders the labeled element's wrapper with the calculated weight class", () => {
