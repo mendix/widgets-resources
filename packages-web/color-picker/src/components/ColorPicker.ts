@@ -6,7 +6,7 @@ import * as Picker from "react-color";
 
 import "../ui/ColorPicker.scss";
 
-interface ColorPickerProps {
+export interface ColorPickerProps {
     className?: string;
     color: string;
     type: PickerType;
