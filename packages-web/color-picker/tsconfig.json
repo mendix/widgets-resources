@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "rootDir": "./",
     "outDir": "dist/tsc/",
     "noEmitOnError": true,
@@ -19,11 +20,13 @@
     "watch": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "strict": true,
-    "strictFunctionTypes": false,
-    "skipLibCheck": false,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "skipLibCheck": false,
+    "strictNullChecks": true
   },
   "exclude": [
     "dist/",
