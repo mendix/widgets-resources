@@ -6,9 +6,16 @@
 
 
 # Color-picker
-Change a color using a color selector
+Change a color using a color picker
+
+## Features
+ * Render using different modes i.e. Button, Input box, or Inline
+ * Execute a microflow, a nanoflow or show a page after a color change
+ * Add a label and label width (weight)
+ * Color format of hex, rgb or rgba
 
 ## Supported color pickers
+Based on the color picker library [http://casesandberg.github.io/react-color/](http://casesandberg.github.io/react-color/)
 * Sketch
 * Chrome
 * Block
@@ -26,8 +33,14 @@ Change a color using a color selector
 * Mendix 7.14.1
 
 ## Development test project
+[https://colorpicker.mxapps.io](https://colorpicker.mxapps.io)
 
 ## Basic configuration
+![ColorPickerProperties](/assets/ColorPickerProperties.png)
+* `Color attribute` [required] - Attribute containing a valid color: `rgb(115,159,159)`, `rgba(195,226,226,1)` or `#d0d0d0`. Non-code color values such as `red` are not supported.
+* `Color format` - The output formatting of the selected color.
+* `Editable` - Make the widget ediatble or not ediatble.
+* `Default colors` - A list of pre-defined colors. Only used by `Block`, `Sketch`, `Circle`, `Compact` or `Twitter`.
 
 
 ## Issues, suggestions and feature requests
@@ -38,7 +51,7 @@ Prerequisite: Install git, node package manager, webpack CLI, grunt CLI, Karma C
 
 To contribute, fork and clone.
 
-    > git clone https://github.com/mendixlabs/list-view-controls.git
+    > git clone https://github.com/mendixlabs/color-picker.git
 
 The code is in typescript. Use a typescript IDE of your choice, like Visual Studio Code or WebStorm.
 
