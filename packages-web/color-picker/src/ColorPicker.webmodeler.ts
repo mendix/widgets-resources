@@ -73,8 +73,6 @@ export function getPreviewCss() {
 export function getVisibleProperties(valueMap: ColorPickerContainerProps, visibilityMap: VisibilityMap) {
     visibilityMap.onChangeMicroflow = valueMap.onChangeEvent === "callMicroflow";
     visibilityMap.onChangeNanoflow = valueMap.onChangeEvent === "callNanoflow";
-    visibilityMap.onChangePage = valueMap.onChangeEvent === "showPage";
-    visibilityMap.openPageLocation = valueMap.onChangeEvent === "showPage";
 
     return visibilityMap;
 }

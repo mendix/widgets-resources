@@ -23,7 +23,7 @@ export interface ColorPickerProps {
 }
 
 export type PickerType = "sketch" | "chrome" | "block" | "github" | "twitter" | "circle" | "hue" |
-    "alpha" | "slider" | "compact" | "material" | "swatches";
+    "slider" | "compact" | "material" | "swatches";
 
 export type Mode = "popover" | "input" | "inline";
 
@@ -36,7 +36,6 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
         twitter: Picker.TwitterPicker,
         circle: Picker.CirclePicker,
         hue: Picker.HuePicker,
-        alpha: Picker.AlphaPicker,
         slider: Picker.SliderPicker,
         compact: Picker.CompactPicker,
         material: Picker.MaterialPicker,
@@ -67,7 +66,7 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
         return createElement("div", {
             className: classNames(
                 {
-                    "widget-color-picker-popover": (mode !== "inline" && type !== "hue" && type !== "alpha" && type !== "slider")
+                    "widget-color-picker-popover": (mode !== "inline" && type !== "hue" && type !== "slider")
                 }
             )
         },

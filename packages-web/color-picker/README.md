@@ -10,8 +10,8 @@ Change a color using a color picker
 
 ## Features
  * Render using different modes i.e. Button, Input box, or Inline
- * Execute a microflow, a nanoflow or show a page after a color change
- * Add a label and label width (weight)
+ * Execute a microflow or a nanoflow after a color change
+ * Add a label and label width
  * Color format of hex, rgb or rgba
 
 ## Supported color pickers
@@ -23,7 +23,6 @@ Based on the color picker library [http://casesandberg.github.io/react-color/](h
 * Twitter
 * Circle
 * Hue
-* Alpha
 * Slider
 * Compact
 * Material
@@ -37,10 +36,10 @@ Based on the color picker library [http://casesandberg.github.io/react-color/](h
 
 ## Basic configuration
 ![ColorPickerProperties](/assets/ColorPickerProperties.png)
-* `Color attribute` [required] - Attribute containing a valid color: `rgb(115,159,159)`, `rgba(195,226,226,1)` or `#d0d0d0`. Non-code color values such as `red` are not supported.
+* `Color attribute` [required] - Attribute containing a valid color: `#d0d0d0`, `rgb(115,159,159)` or `rgba(195,226,226,1)`. Non-code color values such as `red` are not supported.
 * `Color format` - The output formatting of the selected color.
 * `Editable` - Make the widget ediatble or not ediatble.
-* `Default colors` - A list of pre-defined colors. Only used by `Block`, `Sketch`, `Circle`, `Compact` or `Twitter`.
+* `Default colors` - The list of predefined colors. This can only be used in combination with `Block`, `Sketch`, `Circle`, `Compact` or `Twitter`.
 
 
 ## Issues, suggestions and feature requests
