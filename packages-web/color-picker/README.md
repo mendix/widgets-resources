@@ -6,16 +6,19 @@
 
 
 # Color-picker
-Change a color using a color picker
+Select and adjust a color value
 
 ## Features
  * Render using different modes i.e. Button, Input box, or Inline
- * Execute a microflow or a nanoflow after a color change
+ * Execute an action after color change: microflow or nanoflow
  * Add a label and label width
- * Color format of hex, rgb or rgba
+ * Support color format of hex, rgb or rgba
 
 ## Supported color pickers
 Based on the color picker library [http://casesandberg.github.io/react-color/](http://casesandberg.github.io/react-color/)
+
+![ColorPickers](/assets/Colorpickers.gif)
+
 * Sketch
 * Chrome
 * Block
@@ -36,10 +39,11 @@ Based on the color picker library [http://casesandberg.github.io/react-color/](h
 
 ## Basic configuration
 ![ColorPickerProperties](/assets/ColorPickerProperties.png)
-* `Color attribute` [required] - Attribute containing a valid color: `#d0d0d0`, `rgb(115,159,159)` or `rgba(195,226,226,1)`. Non-code color values such as `red` are not supported.
-* `Color format` - The output formatting of the selected color.
-* `Editable` - Make the widget ediatble or not ediatble.
-* `Default colors` - The list of predefined colors. This can only be used in combination with `Block`, `Sketch`, `Circle`, `Compact` or `Twitter`.
+
+* Create an entity with a string attribute, to store the color value
+* Place the widget in data form within the context of the entity
+* Select the attribtue for the color
+* Optional change the rendering and appearance properties to your need.
 
 
 ## Issues, suggestions and feature requests
