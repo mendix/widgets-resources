@@ -26,7 +26,6 @@ describe("ColorPicker", () => {
         twitter: Picker.TwitterPicker,
         circle: Picker.CirclePicker,
         hue: Picker.HuePicker,
-        alpha: Picker.AlphaPicker,
         slider: Picker.SliderPicker,
         compact: Picker.CompactPicker,
         material: Picker.MaterialPicker,
@@ -140,13 +139,6 @@ describe("ColorPicker", () => {
             colorPickerComponent.setProps({ type: "hue", displayColorPicker: true });
 
             expect(colorPickerComponent.find(".hue-picker").length).toBe(1);
-        });
-
-        it("alpha", () => {
-            const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
-            colorPickerComponent.setProps({ type: "alpha", displayColorPicker: true });
-
-            expect(colorPickerComponent.find(".alpha-picker").length).toBe(1);
         });
 
         it("slider", () => {

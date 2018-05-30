@@ -30,9 +30,7 @@ export interface ColorPickerContainerProps extends WrapperProps {
     labelWidth: number;
     onChangeEvent: onChange;
     onChangeMicroflow: string;
-    onChangePage: string;
     onChangeNanoflow: Nanoflow;
-    openPageLocation: "content" | "popup" | "modal";
     defaultColors: string[];
 }
 
@@ -43,7 +41,7 @@ interface ColorPickerContainerState {
 }
 
 type Format = "hex" | "rgb" | "rgba";
-type onChange = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
+type onChange = "doNothing" | "callMicroflow" | "callNanoflow";
 
 export default class ColorPickerContainer extends Component<ColorPickerContainerProps, ColorPickerContainerState> {
     private subscriptionHandles: number[] = [];
@@ -62,10 +60,9 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     }
 
     render() {
-        const { mxObject, readOnly, colorAttribute, format, type } = this.props;
+        const { mxObject, readOnly, colorAttribute } = this.props;
         this.disabled = this.props.editable !== "default"
-            || ((!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute))
-            || (type === "alpha" && format !== "rgba")));
+            || (!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute)));
 
         const maxLabelWidth = 11;
         if (this.props.label.trim()) {
@@ -220,7 +217,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     }
 
     private handleOnChange = () => {
-        const { mxform, mxObject, onChangeEvent, onChangeMicroflow, onChangeNanoflow, onChangePage } = this.props;
+        const { mxform, mxObject, onChangeEvent, onChangeMicroflow, onChangeNanoflow } = this.props;
         if (mxObject && ((this.previousColor !== this.state.color) || this.colorChanged)) {
             const context = new mendix.lib.MxContext();
             context.setContext(mxObject.getEntity(), mxObject.getGuid());
@@ -232,12 +229,6 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
                         guids: [ mxObject.getGuid() ]
                     },
                     origin: mxform
-                });
-            } else if (onChangeEvent === "showPage" && onChangePage) {
-                window.mx.ui.openForm(onChangePage, {
-                    context,
-                    error: error => window.mx.ui.error(`Error while opening page ${onChangePage}: ${error.message}`),
-                    location: this.props.openPageLocation
                 });
             } else if (onChangeEvent === "callNanoflow" && onChangeNanoflow.nanoflow) {
                 window.mx.data.callNanoflow({
@@ -254,13 +245,11 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         const message: string[] = [];
         if (props.onChangeEvent === "callMicroflow" && !props.onChangeMicroflow) {
             message.push("On change event is set to 'Call a microflow' but no microflow is selected");
-        } else if (props.onChangeEvent === "showPage" && !props.onChangePage) {
-            message.push("On change event is set to 'Show a page' but no page is selected");
         } else if (props.onChangeEvent === "callNanoflow" && (JSON.stringify(props.onChangeNanoflow) === JSON.stringify({}))) {
             message.push("On change event is set to 'Call a nanoflow' but no nanoflow is selected");
         }
         if (props.label.trim() && props.labelWidth > 11) {
-            message.push("Label width (weight) should not be greater than 11");
+            message.push("Label width should not be greater than 11");
         }
 
         return message.length ? `Configuration error in widget ${props.friendlyId}: ${message.join(", ")}` : "";
