@@ -35,7 +35,7 @@ export type ReadOnlyStyle = "bordered" | "text" | "borderedToolbar";
 
 export default class RichTextContainer extends Component<RichTextContainerProps, RichTextContainerState> {
     private subscriptionHandles: number[] = [];
-    private defaultValue: string | null;
+    private defaultValue: string | null | undefined;
     private isEditing = false;
 
     constructor(props: RichTextContainerProps) {
@@ -56,6 +56,7 @@ export default class RichTextContainer extends Component<RichTextContainerProps,
     }
 
     render() {
+        const readOnly = this.isReadOnly();
         return createElement(ValidateConfigs, { ...this.props as RichTextContainerProps, showOnError: false },
             createElement(RichText, {
                 editorOption: this.props.editorOption,
@@ -68,9 +69,9 @@ export default class RichTextContainer extends Component<RichTextContainerProps,
                 style: parseStyle(this.props.style),
                 sanitizeContent: this.props.sanitizeContent,
                 value: this.state.value,
-                onChange: this.handleOnChange,
-                onBlur: this.executeOnChangeAction,
-                readOnly: this.isReadOnly(),
+                onChange: !readOnly ? this.handleOnChange : undefined,
+                onBlur: !readOnly ? this.executeOnChangeAction : undefined,
+                readOnly,
                 alertMessage: this.state.alertMessage
             })
         );
