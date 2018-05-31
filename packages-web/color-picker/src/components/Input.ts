@@ -1,42 +1,23 @@
-import { Component, createElement } from "react";
+import { SFC, createElement } from "react";
 
 export interface InputProps {
     disabled: boolean;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     color?: string;
-    onKeyDown?: (event: KeyboardEvent) => void;
+    onKeyUp?: (event: KeyboardEvent) => void;
 }
 
-export class Input extends Component<InputProps, {}> {
-    private colorInputNode!: HTMLInputElement;
+export const Input: SFC<InputProps> = (props) =>
+    createElement("div", { className: "widget-color-picker-input-container" },
+        createElement("input", {
+            className: "form-control",
+            type: "text",
+            disabled: props.disabled,
+            value: props.color,
+            onChange: props.onChange,
+            onKeyUp: props.onKeyUp
+        }),
+        props.children
+    );
 
-    render() {
-        return createElement("div", { className: "widget-color-picker-input-container" },
-            createElement("input", {
-                className: "form-control",
-                type: "text",
-                disabled: this.props.disabled,
-                value: this.props.color,
-                onChange: this.props.onChange,
-                ref: this.getColorInputNodeRef
-            }),
-            this.props.children
-        );
-    }
-
-    componentDidMount() {
-        if (this.colorInputNode && this.props.onKeyDown) {
-            this.colorInputNode.addEventListener("keyup", this.props.onKeyDown, false);
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.colorInputNode && this.props.onKeyDown) {
-            this.colorInputNode.removeEventListener("keyup", this.props.onKeyDown, false);
-        }
-    }
-
-    private getColorInputNodeRef = (node: HTMLInputElement) => {
-        this.colorInputNode = node;
-    }
-}
+Input.displayName = "Input";

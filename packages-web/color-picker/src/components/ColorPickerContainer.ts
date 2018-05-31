@@ -60,17 +60,13 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     }
 
     render() {
-        const { mxObject, readOnly, colorAttribute } = this.props;
-        this.disabled = this.props.editable !== "default"
-            || (!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute)));
-
-        const maxLabelWidth = 11;
+        this.disabled = this.isReadOnly();
         if (this.props.label.trim()) {
             return createElement(Label, {
                 className: this.props.class,
                 label: this.props.label,
                 style: ColorPickerContainer.parseStyle(this.props.style),
-                weight: this.props.labelWidth > maxLabelWidth ? 6 : this.props.labelWidth
+                weight: this.props.labelWidth
             }, this.renderColorPicker(true));
         }
 
@@ -125,10 +121,15 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             disabled: this.disabled,
             color: this.state.color,
             onChange: this.handleInputChange,
-            onKeyDown: this.handleKeyboardEvent
+            onKeyUp: this.handleKeyUpEvent
         }, this.renderButton());
     }
 
+    private isReadOnly(): boolean {
+        const { editable, mxObject, readOnly, colorAttribute } = this.props;
+
+        return editable !== "default" || (!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute)));
+    }
     private handleClick = () => {
         if (!this.disabled && this.props.mode !== "inline") {
             this.setState({ displayColorPicker: !this.state.displayColorPicker });
@@ -139,7 +140,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         this.setState({ displayColorPicker: false });
     }
 
-    private handleKeyboardEvent = (event: KeyboardEvent) => {
+    private handleKeyUpEvent = (event: KeyboardEvent) => {
         if (event.keyCode === 40) {
             this.handleClick();
         }
