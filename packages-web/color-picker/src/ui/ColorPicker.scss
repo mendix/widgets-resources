@@ -70,7 +70,7 @@
 }
 
 .widget-color-picker-input-inner {
-    width: 20px;
+    width: 15px;
     height: 15px;
     border-radius: 2px;
     cursor: pointer;
@@ -85,7 +85,7 @@
 
 .widget-color-picker-input {
     &.btn {
-        margin-left: 6px;
+        margin-left: 5px;
     }
 }
 
@@ -104,6 +104,11 @@
     }
 }
 
+.widget-color-picker-label{
+    .control-label {
+        float: right;
+    }
+}
 .widget-color-picker-cover {
     position: fixed;
     top: 0px;

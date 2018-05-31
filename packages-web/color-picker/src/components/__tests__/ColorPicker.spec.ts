@@ -107,7 +107,6 @@ describe("ColorPicker", () => {
 
         it("block", () => {
             const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
-
             colorPickerComponent.setProps({ type: "block", displayColorPicker: true });
 
             expect(colorPickerComponent.find(".block-picker").length).toBe(1);

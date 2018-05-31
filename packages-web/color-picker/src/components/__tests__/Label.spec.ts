@@ -36,4 +36,11 @@ describe("Label", () => {
 
         expect(childrenWrapper).toHaveClass(`col-sm-${12 - weight}`);
     });
+
+    it("renders a label with calculated weight when specifed value is greater than 11", () => {
+        const labelComponent = renderLabel({ label, weight: 20 });
+        const colorLabel = labelComponent.childAt(0).childAt(0);
+
+        expect(colorLabel).toHaveClass("col-sm-6");
+    });
 });

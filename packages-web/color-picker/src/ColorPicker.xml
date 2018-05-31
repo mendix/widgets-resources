@@ -31,18 +31,6 @@
                 <enumerationValue key="never">Never</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="defaultColors" type="object" isList="true" required="false">
-            <caption>Default colors</caption>
-            <category>Data source</category>
-            <description>The list of predefined colors. This can only be used in combination with 'Block', 'Sketch', 'Circle', 'Compact' or 'Twitter'</description>
-            <properties>
-                <property key="color" type="string">
-                    <caption>Color</caption>
-                    <category>Data source</category>
-                    <description>Valid color value: #d0d0d0, rgb(115,159,159) or rgba(195,226,226,1)</description>
-                </property>
-            </properties>
-        </property>
         <property key="mode" type="enumeration" defaultValue="input">
             <caption>Mode</caption>
             <category>Appearance</category>
@@ -70,6 +58,18 @@
                 <enumerationValue key="material">Material</enumerationValue>
                 <enumerationValue key="swatches">Swatches</enumerationValue>
             </enumerationValues>
+        </property>
+        <property key="defaultColors" type="object" isList="true" required="false">
+            <caption>Default colors</caption>
+            <category>Appearance</category>
+            <description>The list of predefined colors. This can only be used in combination with picker type: 'Block', 'Sketch', 'Circle', 'Compact' or 'Twitter'</description>
+            <properties>
+                <property key="color" type="string">
+                    <caption>Color</caption>
+                    <category>Data source</category>
+                    <description>Valid color value: #d0d0d0, rgb(115,159,159) or rgba(195,226,226,1)</description>
+                </property>
+            </properties>
         </property>
         <property key="label" type="translatableString" required="false">
             <caption>Label</caption>
