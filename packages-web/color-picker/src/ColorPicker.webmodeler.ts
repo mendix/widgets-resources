@@ -1,6 +1,5 @@
 import { Component, createElement } from "react";
 
-import { Alert } from "./components/Alert";
 import { Input } from "./components/Input";
 import { Button } from "./components/Button";
 import { Label } from "./components/Label";
@@ -16,12 +15,8 @@ type VisibilityMap = {
 // tslint:disable-next-line class-name
 export class preview extends Component<ColorPickerContainerProps, {}> {
     render() {
-        return createElement("div", {},
-            createElement(Alert, { className: "widget-color-picker-alert" },
-                ColorPickerContainer.validateProps(this.props)
-            ),
-            this.props.label.trim() ? this.renderLabelColorPicker() : this.renderColorPicker()
-        );
+        ColorPickerContainer.validateProps(this.props);
+        return this.props.label.trim() ? this.renderLabelColorPicker() : this.renderColorPicker();
     }
 
     private renderLabelColorPicker() {

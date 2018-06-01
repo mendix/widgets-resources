@@ -83,10 +83,10 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     }
 
     private renderColorPicker(hasLabel = false) {
-        const alertMessage = this.state.alertMessage || ColorPickerContainer.validateProps(this.props);
+        ColorPickerContainer.validateProps(this.props);
 
         return createElement(ColorPicker, {
-            alertMessage,
+            alertMessage: this.state.alertMessage,
             className: !hasLabel ? this.props.class : undefined,
             color: this.state.color,
             defaultColors: this.props.defaultColors,
@@ -242,7 +242,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         }
     }
 
-    public static validateProps(props: ColorPickerContainerProps): string {
+    public static validateProps(props: ColorPickerContainerProps) {
         const message: string[] = [];
         if (props.onChangeEvent === "callMicroflow" && !props.onChangeMicroflow) {
             message.push("On change event is set to 'Call a microflow' but no microflow is selected");
@@ -253,7 +253,9 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             message.push("Label width should not be greater than 11");
         }
 
-        return message.length ? `Configuration error in widget ${props.friendlyId}: ${message.join(", ")}` : "";
+        if (message.length) {
+            ColorPickerContainer.logError(`Configuration error in widget ${props.friendlyId}: ${message.join(", ")}`);
+        }
     }
 
     public static parseStyle(style = ""): {[key: string]: string} {
@@ -267,10 +269,14 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
                 return styleObject;
             }, {});
         } catch (error) {
-            // tslint:disable-next-line no-console
-            console.log("Failed to parse style", style, error);
+            ColorPickerContainer.logError("Failed to parse style", style, error);
         }
 
         return {};
+    }
+
+    public static logError(message: string, style?: string, error?: any) {
+        // tslint:disable-next-line:no-console
+        window.logger ? window.logger.error(message) : console.log(message, style, error);
     }
 }
