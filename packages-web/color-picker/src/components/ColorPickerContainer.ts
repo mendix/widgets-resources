@@ -121,7 +121,8 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             disabled: this.disabled,
             color: this.state.color,
             onChange: this.handleInputChange,
-            onKeyUp: this.handleKeyUpEvent
+            onKeyUp: this.handleKeyUpEvent,
+            hasError: !!this.state.alertMessage
         }, this.renderButton());
     }
 
@@ -130,6 +131,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
 
         return editable !== "default" || (!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute)));
     }
+
     private handleClick = () => {
         if (!this.disabled && this.props.mode !== "inline") {
             this.setState({ displayColorPicker: !this.state.displayColorPicker });
