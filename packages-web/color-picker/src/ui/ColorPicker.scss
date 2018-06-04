@@ -49,11 +49,20 @@
     .slider-picker:nth-child(2) {
         position: relative;
     }
+
+    .form-group {
+        margin-bottom: 0px;
+    }
 }
 
 .widget-color-picker-inline {
     &.btn:hover, &.btn:focus {
         background-color: transparent;
+    }
+
+    &.btn {
+        margin-bottom: 5px;
+        cursor: default;
     }
 }
 
@@ -76,13 +85,6 @@
     cursor: pointer;
 }
 
-.widget-color-picker-inline {
-    &.btn {
-        margin-bottom: 5px;
-        cursor: default;
-    }
-}
-
 .widget-color-picker-input {
     &.btn {
         margin-left: 5px;
@@ -96,11 +98,11 @@
         margin-right: 0px;
         margin-left: 0px;
     }
-}
 
-.widget-color-picker {
-    .form-group {
-        margin-bottom: 0px;
+    .form-control {
+        &.widget-color-picker-error {
+            border-color: #a94442;
+        }
     }
 }
 
