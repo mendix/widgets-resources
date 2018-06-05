@@ -65,7 +65,10 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
         const supportPopover = mode !== "inline" && type !== "hue" && type !== "slider";
 
         return createElement("div", {
-            className: classNames({ "widget-color-picker-popover": supportPopover })
+            className: classNames({
+                "widget-color-picker-popover" : supportPopover,
+                "widget-color-picker-no-popover": mode !== "inline"
+            })
         },
             mode !== "inline"
                 ? createElement("div", { className: "widget-color-picker-cover", onClick: this.props.close })
