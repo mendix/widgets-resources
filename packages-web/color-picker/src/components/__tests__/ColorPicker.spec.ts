@@ -48,7 +48,7 @@ describe("ColorPicker", () => {
 
         expect(colorPickerComponent).toBeElement(
             createElement("div", { className: "widget-color-picker widget-color-picker-disabled" },
-                createElement("div", { className: "widget-color-picker-popover" },
+                createElement("div", { className: "widget-color-picker-popover widget-color-picker-no-popover" },
                     createElement("div", { className: "widget-color-picker-cover" }),
                     createElement("div", { className: "widget-color-picker-overlay" }),
                     createElement(components[colorPickerProps.type])
@@ -176,7 +176,7 @@ describe("ColorPicker", () => {
 
             expect(colorPickerComponent).toBeElement(
                 createElement("div", { className: "widget-color-picker" },
-                    createElement("div", { className: "widget-color-picker-popover" },
+                    createElement("div", { className: "widget-color-picker-popover widget-color-picker-no-popover" },
                         createElement("div", { className: "widget-color-picker-cover" }),
                         createElement(components[colorPickerProps.type])
                     ),

@@ -40,7 +40,7 @@ describe("Color picker", () => {
 
         it("inline", () => {
             modePage.inlineTab.click();
-            modePage.inLineColorPicker.waitForVisible();
+            modePage.inLineColorPicker.waitForExist();
 
             const inPutBoxValue: boolean = browser.isExisting(".mx-name-colorPicker27 .sketch-picker");
             expect(inPutBoxValue).toBe(true);

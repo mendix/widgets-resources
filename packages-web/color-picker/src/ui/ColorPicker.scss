@@ -21,7 +21,7 @@
         z-index: 50;
         background: rgba(255,255,255,0.5);
         position: absolute;
-        top: 0;
+        top: 30px;
         left: 0;
         width: 100%;
         height: 100%;
@@ -42,7 +42,13 @@
         margin-bottom: 0px !important;
     }
 
-    .slider-picker, .widget-color-picker-alert, .hue-horizontal {
+    .widget-color-picker-no-popover {
+        .sketch-picker, .hue-horizontal {
+            margin-top: 10px;
+        }
+    }
+
+    .widget-color-picker-alert {
         margin-top: 10px;
     }
 
