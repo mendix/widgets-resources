@@ -17,7 +17,7 @@ Select and adjust a color value
 ## Supported color pickers
 Based on the color picker library [http://casesandberg.github.io/react-color/](http://casesandberg.github.io/react-color/)
 
-![ColorPickers](/assets/Colorpickers.gif)
+![ColorPickers](/assets/colorpickers.gif)
 
 * Sketch
 * Chrome
@@ -38,7 +38,7 @@ Based on the color picker library [http://casesandberg.github.io/react-color/](h
 [https://colorpicker.mxapps.io](https://colorpicker.mxapps.io)
 
 ## Basic configuration
-![ColorPickerProperties](/assets/ColorPickerProperties.png)
+![ColorPickerProperties](/assets/colorPickerProperties.png)
 
 * Create an entity with a string attribute, to store the color value
 * Place the widget in data form within the context of the entity
