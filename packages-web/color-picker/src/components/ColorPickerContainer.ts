@@ -1,5 +1,6 @@
 import { Component, createElement } from "react";
 import { ColorResult } from "react-color";
+import * as classNames from "classnames";
 
 import { ColorPicker, Mode, PickerType } from "./ColorPicker";
 import { Input } from "./Input";
@@ -32,6 +33,7 @@ export interface ColorPickerContainerProps extends WrapperProps {
     onChangeMicroflow: string;
     onChangeNanoflow: Nanoflow;
     defaultColors: string[];
+    labelOrientation: "horizontal" | "vertical";
 }
 
 interface ColorPickerContainerState {
@@ -63,7 +65,10 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         this.disabled = this.isReadOnly();
         if (this.props.label.trim()) {
             return createElement(Label, {
-                className: this.props.class,
+                className: classNames(
+                    this.props.class,
+                    { "widget-color-picker-vertical": this.props.labelOrientation === "vertical" }
+                ),
                 label: this.props.label,
                 style: ColorPickerContainer.parseStyle(this.props.style),
                 weight: this.props.labelWidth
