@@ -85,6 +85,15 @@
             <category>Appearance</category>
             <description>The weight of the label, which must be a value between 1 and 11</description>
         </property>
+        <property key="labelOrientation" type="enumeration" defaultValue="horizontal">
+            <caption>Label orientation</caption>
+            <category>Appearance</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                <enumerationValue key="vertical">Vertical</enumerationValue>
+            </enumerationValues>
+        </property>
         <property key="onChangeEvent" type="enumeration" defaultValue="doNothing">
             <caption>On change</caption>
             <category>Events</category>

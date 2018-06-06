@@ -43,7 +43,7 @@
     }
 
     .widget-color-picker-no-popover {
-        .sketch-picker, .hue-horizontal {
+        .hue-horizontal {
             margin-top: 10px;
         }
     }
@@ -67,7 +67,7 @@
     }
 
     &.btn {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
         cursor: default;
     }
 }
@@ -79,7 +79,7 @@
 }
 
 .widget-color-picker-popover {
-    margin-top: 6px;
+    margin-top: 10px;
     position: absolute;
     z-index: 2;
 }
@@ -115,8 +115,29 @@
 .widget-color-picker-label{
     .control-label {
         float: right;
+        padding-top: 7px;
     }
 }
+
+.widget-color-picker-label {
+    &.widget-color-picker-vertical {
+        .control-label {
+            float: left;
+            padding-top: 0;
+        }
+
+        .form-group {
+            display: grid;
+        
+            [class*='col-'] {
+                padding-right:0;
+                padding-left:0;
+                width: 100%;
+            }
+        }
+    }
+}
+
 .widget-color-picker-cover {
     position: fixed;
     top: 0px;
