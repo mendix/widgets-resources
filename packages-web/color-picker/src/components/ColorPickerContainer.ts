@@ -35,6 +35,7 @@ export interface ColorPickerContainerProps extends WrapperProps {
     defaultColors: string[];
     labelOrientation: "horizontal" | "vertical";
     showLabel: boolean;
+    invalidFromatMessage: string;
 }
 
 interface ColorPickerContainerState {
@@ -51,6 +52,11 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     private disabled = false;
     private previousColor = "";
     private colorChanged = false;
+    private defaultColor = {
+        hex: "#FFFFFF",
+        rgb: "rgb(255,255,255)",
+        rgba: "rgb(255,255,255,1)"
+    };
 
     constructor(props: ColorPickerContainerProps) {
         super(props);
@@ -94,7 +100,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         return createElement(ColorPicker, {
             alertMessage: this.state.alertMessage,
             className: !hasLabel ? this.props.class : undefined,
-            color: this.state.color,
+            color: this.state.color || this.defaultColor[this.props.format],
             defaultColors: this.props.defaultColors,
             disabled: this.disabled,
             disableAlpha: this.props.format !== "rgba",
@@ -197,23 +203,23 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         const hexRegExp = /^#?([a-f\d]{3}|[a-f\d]{6})$/;
         const rgbRegExp = /^rgb\((0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d)\)$/;
         const rgbaRegExp = /^rgba\((0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0?\.\d*|1(\.0)?)\)$/;
-        let message = "";
+        let format = "";
         if (color && this.props.format === "hex" && !hexRegExp.test(color)) {
-            message = `Invalid hex format, color value ${color} should be of format '#0d0' or #d0d0d0'`;
+            format = "'#0d0' or '#d0d0d0'";
         } else if (color && this.props.format === "rgb" && !rgbRegExp.test(color.toLowerCase())) {
-            message = `Invalid rgb format, color value ${color} should be of format 'rgb(115,159,159)'`;
+            format = "'rgb(115,159,159)'";
         } else if (color && this.props.format === "rgba" && !rgbaRegExp.test(color.toLowerCase())) {
-            message = `Invalid rgba format, color value ${color} should be of format 'rgba(195,226,226,1)'`;
+            format = "'rgba(195,226,226,1)'";
         }
 
         return {
-            alertMessage: message,
+            alertMessage: format ? this.props.invalidFromatMessage.replace(/\{1}/, format) : format,
             color,
             displayColorPicker: this.state.displayColorPicker
         };
     }
 
-    private handleInputChange = (event: any) => {
+    private handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newColor = event.target.value as string;
         if (newColor) {
             this.colorChanged = this.getValue(this.props.mxObject) !== newColor;
@@ -224,7 +230,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             }
             this.setState(state);
         } else {
-            this.setState({ alertMessage: "Invalid color", color: event.target.value });
+            this.setState({ alertMessage: "", color: event.target.value });
         }
     }
 

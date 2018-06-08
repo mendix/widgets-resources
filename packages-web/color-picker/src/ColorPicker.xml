@@ -121,5 +121,14 @@
             <description>The nanoflow that will be executed on color change</description>
             <returnType type="Void"/>
         </property>
+        <property key="invalidFromatMessage" type="translatableString" required="false">
+            <caption>Invalid fromat message</caption>
+            <category>Validation</category>
+            <description>Message shown when the user provides a wrong input, {1} will be replaced by a sample format</description>
+            <translations>
+                <translation lang="en_US">Invalid format, color value should be of format like {1}</translation>
+                <translation lang="nl_NL">De opgeven kleur code is incorrect, voorbeeld {1}</translation>
+            </translations>
+        </property>
     </properties>
 </widget>
