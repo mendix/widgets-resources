@@ -1,4 +1,8 @@
 .widget-color-picker {
+    [class*='-picker'] {
+        font-family: inherit !important;
+    }
+
     .sketch-picker, .compact-picker {
         input {
             width: 100% !important;
@@ -7,6 +11,7 @@
 
     .material-picker {
         height: auto !important;
+        width: 130px !important;
     }
 
     .block-picker {
