@@ -34,6 +34,7 @@ export interface ColorPickerContainerProps extends WrapperProps {
     onChangeNanoflow: Nanoflow;
     defaultColors: string[];
     labelOrientation: "horizontal" | "vertical";
+    showLabel: boolean;
 }
 
 interface ColorPickerContainerState {
@@ -63,7 +64,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
 
     render() {
         this.disabled = this.isReadOnly();
-        if (this.props.label.trim()) {
+        if (this.props.label.trim() && this.props.showLabel) {
             return createElement(Label, {
                 className: classNames(
                     this.props.class,
