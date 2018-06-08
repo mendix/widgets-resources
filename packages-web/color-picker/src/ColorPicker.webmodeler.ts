@@ -15,6 +15,12 @@ type VisibilityMap = {
 
 // tslint:disable-next-line class-name
 export class preview extends Component<ColorPickerContainerProps, {}> {
+    private color = {
+        hex: "#000000",
+        rgb: "rgb(0,0,0)",
+        rgba: "rgb(0,0,0,1)"
+    };
+
     render() {
         ColorPickerContainer.validateProps(this.props);
         return (this.props.label.trim() && this.props.showLabel) ? this.renderLabelColorPicker() : this.renderColorPicker();
@@ -35,8 +41,8 @@ export class preview extends Component<ColorPickerContainerProps, {}> {
     private renderColorPicker(hasLabel = false) {
         return createElement(ColorPicker, {
             className: !hasLabel ? this.props.class : undefined,
-            color: "#000000",
-            disabled: false,
+            color: this.color[this.props.format],
+            disabled: this.props.editable === "default",
             type: this.props.type,
             mode: this.props.mode,
             displayColorPicker: false,
@@ -49,7 +55,7 @@ export class preview extends Component<ColorPickerContainerProps, {}> {
     private renderInputColorPicker() {
         return createElement(Input, {
             disabled: false,
-            color: "#000000"
+            color: this.color[this.props.format]
         }, this.renderColorPickerButton());
     }
 
@@ -58,7 +64,7 @@ export class preview extends Component<ColorPickerContainerProps, {}> {
             className: this.props.mode === "input" ? "widget-color-picker-input-inner" : "widget-color-picker-inner",
             disabled: false,
             mode: this.props.mode,
-            color: "#000000"
+            color: this.color[this.props.format]
         });
     }
 }
