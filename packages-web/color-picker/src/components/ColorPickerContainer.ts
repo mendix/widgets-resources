@@ -95,10 +95,10 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     }
 
     private renderColorPicker(hasLabel = false) {
-        ColorPickerContainer.validateProps(this.props);
+        const alertMessage = this.state.alertMessage || ColorPickerContainer.validateProps(this.props);
 
         return createElement(ColorPicker, {
-            alertMessage: this.state.alertMessage,
+            alertMessage,
             className: !hasLabel ? this.props.class : undefined,
             color: this.state.color || this.defaultColor[this.props.format],
             defaultColors: this.props.defaultColors,
@@ -259,20 +259,23 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         }
     }
 
-    public static validateProps(props: ColorPickerContainerProps) {
+    public static validateProps(props: ColorPickerContainerProps): string {
         const message: string[] = [];
         if (props.onChangeEvent === "callMicroflow" && !props.onChangeMicroflow) {
             message.push("On change event is set to 'Call a microflow' but no microflow is selected");
         } else if (props.onChangeEvent === "callNanoflow" && (JSON.stringify(props.onChangeNanoflow) === JSON.stringify({}))) {
             message.push("On change event is set to 'Call a nanoflow' but no nanoflow is selected");
         }
-        if (props.label.trim() && props.labelWidth > 11) {
-            message.push("Label width should not be greater than 11");
+        if (props.label.trim() && props.showLabel && (props.labelWidth > 11 || props.labelWidth < 1)) {
+            message.push("Label width should be a value between 0 and 12");
+        }
+        if (message.length) {
+            const errorMessage = `Configuration error in widget ${props.friendlyId}: ${message.join(", ")}`;
+            ColorPickerContainer.logError(errorMessage);
+            return errorMessage;
         }
 
-        if (message.length) {
-            ColorPickerContainer.logError(`Configuration error in widget ${props.friendlyId}: ${message.join(", ")}`);
-        }
+        return message.join(", ");
     }
 
     public static parseStyle(style = ""): {[key: string]: string} {
