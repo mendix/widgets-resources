@@ -61,17 +61,6 @@
     }
 }
 
-.widget-color-picker-inline {
-    &.btn:hover, &.btn:focus {
-        background-color: transparent;
-    }
-
-    &.btn {
-        margin-bottom: 10px;
-        cursor: default;
-    }
-}
-
 .widget-color-picker-inner {
     width: 36px;
     height: 14px;
@@ -79,7 +68,7 @@
 }
 
 .widget-color-picker-popover {
-    margin-top: 10px;
+    margin-top: 3px;
     position: absolute;
     z-index: 2;
 }
