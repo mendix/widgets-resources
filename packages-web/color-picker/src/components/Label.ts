@@ -9,7 +9,7 @@ export interface LabelProps {
 }
 
 export const Label: SFC<LabelProps> = ({ children, className, label, style, weight }) => {
-    weight = weight > 11 ? 6 : weight;
+    weight = weight > 11 ? 3 : weight;
     return createElement("div", { className: classNames("widget-color-picker-label", className), style },
         createElement("div", { className: "form-group" },
             createElement("div", { className: `col-sm-${weight} col-xs-${weight}` },

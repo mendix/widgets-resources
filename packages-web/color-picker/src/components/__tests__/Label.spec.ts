@@ -41,6 +41,6 @@ describe("Label", () => {
         const labelComponent = renderLabel({ label, weight: 20 });
         const colorLabel = labelComponent.childAt(0).childAt(0);
 
-        expect(colorLabel).toHaveClass("col-sm-6");
+        expect(colorLabel).toHaveClass("col-sm-3");
     });
 });
