@@ -1,6 +1,7 @@
 import { Component, createElement } from "react";
 import * as classNames from "classnames";
 
+import { Alert } from "./components/Alert";
 import { Input } from "./components/Input";
 import { Button } from "./components/Button";
 import { Label } from "./components/Label";
@@ -22,8 +23,12 @@ export class preview extends Component<ColorPickerContainerProps, {}> {
     };
 
     render() {
-        ColorPickerContainer.validateProps(this.props);
-        return (this.props.label.trim() && this.props.showLabel) ? this.renderLabelColorPicker() : this.renderColorPicker();
+        const errorMessage = ColorPickerContainer.validateProps(this.props);
+
+        return createElement("div", {},
+            createElement(Alert, { className: "widget-color-picker-alert" }, errorMessage),
+            (this.props.label.trim() && this.props.showLabel) ? this.renderLabelColorPicker() : this.renderColorPicker()
+        );
     }
 
     private renderLabelColorPicker() {
