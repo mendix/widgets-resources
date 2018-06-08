@@ -7,7 +7,7 @@
         <property key="colorAttribute" type="attribute">
             <caption>Color attribute</caption>
             <category>Data source</category>
-            <description>Attribute containing a valid color: #d0d0d0, rgb(115,159,159) or rgba(195,226,226,1). Non-code color values such as 'red' are not supported</description>
+            <description>Attribute containing a valid color like #d0d0d0, rgb(115,159,159) or rgba(195,226,226,1). Non-code color values such as 'red' are not supported</description>
             <attributeTypes>
                 <attributeType name="String"/>
             </attributeTypes>
@@ -17,9 +17,9 @@
             <category>Data source</category>
             <description>The output formatting of the selected color</description>
             <enumerationValues>
-                <enumerationValue key="hex">hex</enumerationValue>
-                <enumerationValue key="rgb">rgb</enumerationValue>
-                <enumerationValue key="rgba">rgba</enumerationValue>
+                <enumerationValue key="hex">HEX</enumerationValue>
+                <enumerationValue key="rgb">RGB</enumerationValue>
+                <enumerationValue key="rgba">RBGA</enumerationValue>
             </enumerationValues>
         </property>
         <property key="editable" type="enumeration" defaultValue="default">
@@ -44,7 +44,7 @@
         <property key="type" type="enumeration" defaultValue="sketch">
             <caption>Picker type</caption>
             <category>Appearance</category>
-            <description>For samples see: http://casesandberg.github.io/react-color/</description>
+            <description/>
             <enumerationValues>
                 <enumerationValue key="sketch">Sketch</enumerationValue>
                 <enumerationValue key="chrome">Chrome</enumerationValue>
@@ -62,7 +62,7 @@
         <property key="defaultColors" type="object" isList="true" required="false">
             <caption>Default colors</caption>
             <category>Appearance</category>
-            <description>The list of predefined colors. This can only be used in combination with picker type: 'Block', 'Sketch', 'Circle', 'Compact' or 'Twitter'</description>
+            <description>The list of predefined colors. This can only be used with picker type: 'Block', 'Sketch', 'Circle', 'Compact' or 'Twitter'</description>
             <properties>
                 <property key="color" type="string">
                     <caption>Color</caption>
@@ -73,26 +73,31 @@
         </property>
         <property key="label" type="translatableString" required="false">
             <caption>Label</caption>
-            <category>Appearance</category>
+            <category>Label</category>
             <description/>
             <translations>
-                <translation lang="en_US">Label</translation>
-                <translation lang="nl_NL">Label</translation>
+                <translation lang="en_US">Color</translation>
+                <translation lang="nl_NL">Kleur</translation>
             </translations>
         </property>
         <property key="labelWidth" type="integer" defaultValue="3">
             <caption>Label width</caption>
-            <category>Appearance</category>
-            <description>The weight of the label, which must be a value between 1 and 11</description>
+            <category>Label</category>
+            <description>The weight of the label, which must be a value between 0 and 12</description>
         </property>
         <property key="labelOrientation" type="enumeration" defaultValue="horizontal">
             <caption>Label orientation</caption>
-            <category>Appearance</category>
+            <category>Label</category>
             <description/>
             <enumerationValues>
                 <enumerationValue key="horizontal">Horizontal</enumerationValue>
                 <enumerationValue key="vertical">Vertical</enumerationValue>
             </enumerationValues>
+        </property>
+        <property key="showLabel" type="boolean" defaultValue="true">
+            <caption>Show label</caption>
+            <category>Label</category>
+            <description/>
         </property>
         <property key="onChangeEvent" type="enumeration" defaultValue="doNothing">
             <caption>On change</caption>

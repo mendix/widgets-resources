@@ -17,7 +17,7 @@ type VisibilityMap = {
 export class preview extends Component<ColorPickerContainerProps, {}> {
     render() {
         ColorPickerContainer.validateProps(this.props);
-        return this.props.label.trim() ? this.renderLabelColorPicker() : this.renderColorPicker();
+        return (this.props.label.trim() && this.props.showLabel) ? this.renderLabelColorPicker() : this.renderColorPicker();
     }
 
     private renderLabelColorPicker() {
