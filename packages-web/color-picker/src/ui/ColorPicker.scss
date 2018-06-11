@@ -102,33 +102,6 @@
     }
 }
 
-.widget-color-picker-label{
-    .control-label {
-        float: right;
-        padding-top: 7px;
-    }
-}
-
-.widget-color-picker-label {
-    &.widget-color-picker-vertical {
-        .control-label {
-            float: left;
-            padding-top: 0;
-        }
-
-        .form-group {
-            display: grid;
-            margin: 0;
-        
-            [class*='col-'] {
-                padding-right:0;
-                padding-left:0;
-                width: 100%;
-            }
-        }
-    }
-}
-
 .widget-color-picker-cover {
     position: fixed;
     top: 0px;
