@@ -1,6 +1,5 @@
 import { Component, createElement } from "react";
 
-import { Alert } from "./components/Alert";
 import { Input } from "./components/Input";
 import { Button } from "./components/Button";
 import { Label } from "./components/Label";
@@ -22,12 +21,7 @@ export class preview extends Component<ColorPickerContainerProps, {}> {
     };
 
     render() {
-        const errorMessage = ColorPickerContainer.validateProps(this.props);
-
-        return createElement("div", {},
-            createElement(Alert, { className: "widget-color-picker-alert" }, errorMessage),
-            (this.props.label.trim() && this.props.showLabel) ? this.renderLabelColorPicker() : this.renderColorPicker()
-        );
+        return (this.props.label.trim() && this.props.showLabel) ? this.renderLabelColorPicker() : this.renderColorPicker();
     }
 
     private renderLabelColorPicker() {
@@ -42,9 +36,10 @@ export class preview extends Component<ColorPickerContainerProps, {}> {
 
     private renderColorPicker(hasLabel = false) {
         return createElement(ColorPicker, {
+            alertMessage: ColorPickerContainer.validateProps(this.props),
             className: !hasLabel ? this.props.class : undefined,
             color: this.color[this.props.format],
-            disabled: this.props.editable === "default",
+            disabled: this.props.editable === "never",
             type: this.props.type,
             mode: this.props.mode,
             displayColorPicker: false,
