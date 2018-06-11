@@ -1,6 +1,5 @@
 import { Component, createElement } from "react";
 import { ColorResult } from "react-color";
-import * as classNames from "classnames";
 
 import { ColorPicker, Mode, PickerType } from "./ColorPicker";
 import { Input } from "./Input";
@@ -32,7 +31,7 @@ export interface ColorPickerContainerProps extends WrapperProps {
     onChangeEvent: onChange;
     onChangeMicroflow: string;
     onChangeNanoflow: Nanoflow;
-    defaultColors: string[];
+    defaultColors: { color: string }[];
     labelOrientation: "horizontal" | "vertical";
     showLabel: boolean;
     invalidFromatMessage: string;
@@ -72,11 +71,9 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         this.disabled = this.isReadOnly();
         if (this.props.label.trim() && this.props.showLabel) {
             return createElement(Label, {
-                className: classNames(
-                    this.props.class,
-                    { "widget-color-picker-vertical": this.props.labelOrientation === "vertical" }
-                ),
+                className: this.props.class,
                 label: this.props.label,
+                orientation: this.props.labelOrientation,
                 style: ColorPickerContainer.parseStyle(this.props.style),
                 weight: this.props.labelWidth
             }, this.renderColorPicker(true));
@@ -200,17 +197,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     }
 
     private validateColor = (color: string): ColorPickerContainerState => {
-        const hexRegExp = /^#?([a-f\d]{3}|[a-f\d]{6})$/;
-        const rgbRegExp = /^rgb\((0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d)\)$/;
-        const rgbaRegExp = /^rgba\((0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0?\.\d*|1(\.0)?)\)$/;
-        let format = "";
-        if (color && this.props.format === "hex" && !hexRegExp.test(color)) {
-            format = "'#0d0' or '#d0d0d0'";
-        } else if (color && this.props.format === "rgb" && !rgbRegExp.test(color.toLowerCase())) {
-            format = "'rgb(115,159,159)'";
-        } else if (color && this.props.format === "rgba" && !rgbaRegExp.test(color.toLowerCase())) {
-            format = "'rgba(195,226,226,1)'";
-        }
+        const format = ColorPickerContainer.validateColorFormat(color, this.props.format);
 
         return {
             alertMessage: format ? this.props.invalidFromatMessage.replace(/\{1}/, format) : format,
@@ -259,8 +246,25 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         }
     }
 
+    public static validateColorFormat = (color: string, colorFormat: Format): string => {
+        const hexRegExp = /^#?([a-f\d]{3}|[a-f\d]{6})$/;
+        const rgbRegExp = /^rgb\((0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d)\)$/;
+        const rgbaRegExp = /^rgba\((0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0?\.\d*|1(\.0)?)\)$/;
+        let format = "";
+        if (color && colorFormat === "hex" && !hexRegExp.test(color.toLowerCase())) {
+            format = "'#0d0' or '#d0d0d0'";
+        } else if (color && colorFormat === "rgb" && !rgbRegExp.test(color.toLowerCase())) {
+            format = "'rgb(115,159,159)'";
+        } else if (color && colorFormat === "rgba" && !rgbaRegExp.test(color.toLowerCase())) {
+            format = "'rgba(195,226,226,1)'";
+        }
+
+        return format;
+    }
+
     public static validateProps(props: ColorPickerContainerProps): string {
         const message: string[] = [];
+        const supportDefaultColors = props.type === "block" || props.type === "sketch" || props.type === "circle" || props.type === "compact" || props.type === "twitter";
         if (props.onChangeEvent === "callMicroflow" && !props.onChangeMicroflow) {
             message.push("On change event is set to 'Call a microflow' but no microflow is selected");
         } else if (props.onChangeEvent === "callNanoflow" && (JSON.stringify(props.onChangeNanoflow) === JSON.stringify({}))) {
@@ -268,6 +272,14 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         }
         if (props.label.trim() && props.showLabel && (props.labelWidth > 11 || props.labelWidth < 1)) {
             message.push("Label width should be a value between 0 and 12");
+        }
+        if (props.defaultColors.length > 0 && supportDefaultColors) {
+            props.defaultColors.forEach(color => {
+                const validFormat = ColorPickerContainer.validateColorFormat(color.color, props.format);
+                if (validFormat) {
+                    message.push(`${color.color}, ${props.invalidFromatMessage.replace(/\{1}/, validFormat)}`);
+                }
+            });
         }
         if (message.length) {
             const errorMessage = `Configuration error in widget ${props.friendlyId}: ${message.join(", ")}`;
