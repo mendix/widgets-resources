@@ -19,7 +19,7 @@ export interface ColorPickerProps {
     close?: () => void;
     alertMessage?: string;
     onChangeComplete?: Picker.ColorChangeHandler;
-    defaultColors: string[];
+    defaultColors: { color: string }[];
 }
 
 export type PickerType = "sketch" | "chrome" | "block" | "github" | "twitter" | "circle" | "hue" |
@@ -61,7 +61,7 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
 
     private renderPicker() {
         const { defaultColors, disabled, mode, type } = this.props;
-        const colors = defaultColors.map((color: any) => color.color);
+        const colors = defaultColors.map((color) => color.color);
         const supportPopover = mode !== "inline" && type !== "hue" && type !== "slider";
 
         return createElement("div", {

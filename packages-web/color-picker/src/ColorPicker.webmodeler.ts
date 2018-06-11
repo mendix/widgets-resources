@@ -1,5 +1,4 @@
 import { Component, createElement } from "react";
-import * as classNames from "classnames";
 
 import { Alert } from "./components/Alert";
 import { Input } from "./components/Input";
@@ -33,11 +32,9 @@ export class preview extends Component<ColorPickerContainerProps, {}> {
 
     private renderLabelColorPicker() {
         return createElement(Label, {
-            className: classNames(
-                this.props.class,
-                { "widget-color-picker-vertical": this.props.labelOrientation === "vertical" }
-            ),
+            className: this.props.class,
             label: this.props.label,
+            orientation: this.props.labelOrientation,
             style: ColorPickerContainer.parseStyle(this.props.style),
             weight: this.props.labelWidth
         }, this.renderColorPicker(true));
