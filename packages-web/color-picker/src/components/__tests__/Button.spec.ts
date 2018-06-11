@@ -29,6 +29,6 @@ describe("Button", () => {
         expect(buttonComponent).toHaveClass("widget-color-picker-input");
 
         buttonComponent.setProps({ mode: "inline" });
-        expect(buttonComponent).toHaveClass("widget-color-picker-inline");
+        expect(buttonComponent).toHaveClass("hidden");
     });
 });

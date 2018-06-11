@@ -6,16 +6,17 @@ export interface LabelProps {
     label: string;
     weight: number;
     style?: object;
+    orientation?: "horizontal" | "vertical";
 }
 
-export const Label: SFC<LabelProps> = ({ children, className, label, style, weight }) => {
+export const Label: SFC<LabelProps> = ({ children, className, label, style, weight, orientation }) => {
     weight = weight > 11 ? 3 : weight;
-    return createElement("div", { className: classNames("widget-color-picker-label", className), style },
-        createElement("div", { className: "form-group" },
-            createElement("div", { className: `col-sm-${weight} col-xs-${weight}` },
-                createElement("label", { className: "control-label" }, label)
-            ),
-            createElement("div", { className: `col-sm-${12 - weight} col-xs-${12 - weight}` }, children))
+    const labelWeight = orientation === "horizontal" ? `col-sm-${weight}` : "";
+    const childrenWeight = orientation === "horizontal" ? `col-sm-${12 - weight}` : "";
+
+    return createElement("div", { className: classNames("form-group", className), style },
+        createElement("label", { className: `control-label ${labelWeight}` }, label),
+        createElement("div", { className: `${childrenWeight}` }, children)
     );
 };
 
