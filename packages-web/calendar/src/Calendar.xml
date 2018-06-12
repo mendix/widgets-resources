@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.custom.calendar.Calendar" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/">
+    <name>Calendar</name>
+    <description/>
+    <icon/>
+    <properties>
+        <property key="dataSource" type="enumeration" defaultValue="XPath">
+            <caption>Data source</caption>
+            <category>Data source</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="XPath">Database</enumerationValue>
+                <enumerationValue key="microflow">Microflow</enumerationValue>
+            </enumerationValues>
+        </property>
+    </properties>
+</widget>
