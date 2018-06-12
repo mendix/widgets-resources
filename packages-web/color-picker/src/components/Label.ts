@@ -10,7 +10,7 @@ export interface LabelProps {
 }
 
 export const Label: SFC<LabelProps> = ({ children, className, label, style, weight, orientation }) => {
-    weight = weight > 11 ? 3 : weight;
+    weight = (weight > 11 || weight < 1) ? 3 : weight;
     const labelWeight = orientation === "horizontal" ? `col-sm-${weight}` : "";
     const childrenWeight = orientation === "horizontal" ? `col-sm-${12 - weight}` : "";
 
