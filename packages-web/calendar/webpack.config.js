@@ -41,7 +41,7 @@ const widgetConfig = {
             }
         ]
     },
-    devtool: "source-map",
+    devtool: "eval",
     externals: ["react", "react-dom"],
     plugins: [
         new CopyWebpackPlugin([{
@@ -102,7 +102,7 @@ const previewConfig = {
             }
         ]
     },
-    devtool: "inline-source-map",
+    devtool: "eval",
     externals: ["react", "react-dom"],
     plugins: [
         new webpack.LoaderOptionsPlugin({
