@@ -1,5 +1,6 @@
 import { Component, createElement } from "react";
 
+import { Alert } from "./Alert";
 import { Calendar, CalendarEvent } from "./Calendar";
 
 interface WrapperProps {
@@ -49,17 +50,34 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         super(props);
 
         this.subscriptionHandles = [];
-        this.state = { events: [] };
+        this.state = {
+            alertMessage: CalendarContainer.validateProps(this.props),
+            events: []
+        };
     }
 
     render() {
-        return createElement(Calendar, {
-            events: this.state.events,
-            defaultView: this.props.defaultView,
-            popup: this.props.popup,
-            onSelectEventAction: this.excecuteEventAction,
-            onSelectSlotAction: this.excecuteSlotAction
-        });
+        if (this.state.alertMessage) {
+            return createElement(Alert, {
+                bootstrapStyle: "danger",
+                className: "widget-calendar-alert",
+                message: this.state.alertMessage
+            });
+        } else {
+            return createElement(Calendar, {
+                events: this.state.events,
+                defaultView: this.props.defaultView,
+                popup: this.props.popup,
+                onSelectEventAction: this.excecuteEventAction,
+                onSelectSlotAction: this.excecuteSlotAction
+            });
+        }
+    }
+
+    componentDidMount() {
+        if (!this.state.alertMessage) {
+            this.fetchData(this.props.mxObject);
+        }
     }
 
     componentWillUnMount() {
@@ -211,5 +229,27 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
                 location: openPageAs
             });
         }
+    }
+
+    public static validateProps(props: CalendarContainerProps): string {
+        let errorMessage = "";
+        if (props.onClickEvent === "callMicroflow" && !props.eventMicroflow) {
+            errorMessage = `On click event is set to 'Call a microflow' but no microflow is selected`;
+        } else if (props.onClickSlotEvent === "callMicroflow" && !props.slotMicroflow) {
+            errorMessage = `On click slot is set to 'Call a microflow' but no microflow is selected`;
+        } else if (props.onClickEvent === "callNanoflow" && !props.eventNanoflow.nanoflow) {
+            errorMessage = `On click event is set to 'Call a nanoflow' but no nanoflow is selected`;
+        } else if (props.onClickSlotEvent === "callNanoflow" && !props.slotNanoflow.nanoflow) {
+            errorMessage = `On click slot is set to 'Call a nanoflow' but no nanoflow is selected`;
+        } else if (props.onClickEvent === "showPage" && !props.eventPage) {
+            errorMessage = `On click event is set to 'Show a page' but no page is selected`;
+        } else if (props.onClickSlotEvent === "showPage" && !props.slotPage) {
+            errorMessage = `On click slot is set to 'Show a page' but no page is selected`;
+        }
+        if (errorMessage) {
+            errorMessage = `Error in calendar configuration: ${errorMessage}`;
+        }
+
+        return errorMessage;
     }
 }
