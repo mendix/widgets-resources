@@ -6,6 +6,8 @@ import { Calendar } from "./components/Calendar";
 export class preview extends Component<{}> {
     render() {
         return createElement(Calendar, {
+            onSelectEventAction: () => null,
+            onSelectSlotAction: () => null
         });
     }
 }
