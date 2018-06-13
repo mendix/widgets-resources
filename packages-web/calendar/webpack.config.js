@@ -41,7 +41,7 @@ const widgetConfig = {
             }
         ]
     },
-    devtool: "eval",
+    devtool: "source-map",
     externals: ["react", "react-dom"],
     plugins: [
         new CopyWebpackPlugin([{

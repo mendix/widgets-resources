@@ -18,6 +18,7 @@ interface CalendarContainerProps extends WrapperProps {
     entityConstraint: string;
     dataSourceMicroflow: string;
     popup: boolean;
+    selectable: boolean;
     onClickEvent: OnClickEventOptions;
     onClickSlotEvent: OnClickEventOptions;
     eventPage: string;
@@ -68,14 +69,15 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
                 events: this.state.events,
                 defaultView: this.props.defaultView,
                 popup: this.props.popup,
-                onSelectEventAction: this.excecuteEventAction,
-                onSelectSlotAction: this.excecuteSlotAction
+                selectable: this.props.selectable,
+                onSelectEventAction: this.onClickEvent,
+                onSelectSlotAction: this.onClickSlot
             });
         }
     }
 
     componentDidMount() {
-        if (!this.state.alertMessage) {
+        if (!this.state.alertMessage && this.props.mxObject) {
             this.fetchData(this.props.mxObject);
         }
     }
@@ -89,7 +91,7 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         this.resetSubscriptions(nextProps.mxObject);
     }
 
-    private fetchData = (mxObject?: mendix.lib.MxObject) => {
+    private fetchData = (mxObject: mendix.lib.MxObject) => {
         const { dataSource, dataSourceMicroflow, eventEntity } = this.props;
         if (dataSource === "XPath" && eventEntity && mxObject) {
             this.fetchEventsByXPath(mxObject.getGuid());
@@ -98,7 +100,7 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         }
     }
 
-    private resetSubscriptions = (mxObject?: mendix.lib.MxObject) => {
+    private resetSubscriptions = (mxObject: mendix.lib.MxObject) => {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
         this.subscriptionHandles = [];
 
@@ -151,7 +153,7 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         this.setState({ events });
     }
 
-    private fetchEventsByMicroflow(mxObject?: mendix.lib.MxObject) {
+    private fetchEventsByMicroflow(mxObject: mendix.lib.MxObject) {
         const { dataSourceMicroflow } = this.props;
         if (mxObject && dataSourceMicroflow) {
             window.mx.ui.action(dataSourceMicroflow, {
@@ -165,14 +167,22 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         }
     }
 
-    private excecuteEventAction = () => {
-        const { mxObject, onClickEvent, eventMicroflow, mxform, eventNanoflow, openPageAs, eventPage } = this.props;
-        if (!mxObject || !mxObject.getGuid()) {
+    private onClickEvent = (eventInfo: any) => {
+        mx.data.get({
+            guid: eventInfo.guid,
+            callback: (object) => this.excecuteEventAction(object),
+            error: error => window.mx.ui.error(`Error while executing action: ${error.message}`)
+        });
+    }
+
+    private excecuteEventAction = (object: mendix.lib.MxObject) => {
+        const { onClickEvent, eventMicroflow, mxform, eventNanoflow, openPageAs, eventPage } = this.props;
+        if (!object || !object.getGuid()) {
             return;
         }
         const context = new mendix.lib.MxContext();
-        context.setContext(mxObject.getEntity(), mxObject.getGuid());
-        if (onClickEvent === "callMicroflow" && eventMicroflow && mxObject.getGuid()) {
+        context.setContext(object.getEntity(), object.getGuid());
+        if (onClickEvent === "callMicroflow" && eventMicroflow) {
             window.mx.ui.action(eventMicroflow, {
                 error: error => window.mx.ui.error(`Error while executing microflow: ${eventMicroflow}: ${error.message}`),
                 origin: mxform,
@@ -187,7 +197,7 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
                 nanoflow: eventNanoflow,
                 origin: mxform
             });
-        } else if (onClickEvent === "showPage" && eventPage && mxObject.getGuid()) {
+        } else if (onClickEvent === "showPage" && eventPage) {
             window.mx.ui.openForm(eventPage, {
                 context,
                 error: error => window.mx.ui.error(
@@ -198,11 +208,24 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         }
     }
 
-    private excecuteSlotAction = () => {
-        const { mxObject, onClickSlotEvent, slotMicroflow, mxform, slotNanoflow, openPageAs, slotPage } = this.props;
-        if (!mxObject || !mxObject.getGuid()) {
-            return;
-        }
+    private onClickSlot = (slotInfo: any) => {
+        const { startAttribute, titleAttribute, endAttribute } = this.props;
+        mx.data.create({
+            entity: this.props.eventEntity,
+            callback: (object) => {
+                object.set(titleAttribute, object.get(titleAttribute));
+                object.set(startAttribute, slotInfo.start);
+                object.set(endAttribute, slotInfo.end);
+                this.excecuteSlotAction(object);
+            },
+            error: error => window.mx.ui.error(
+                `Error in while creating a new event: ${ error.message }`
+            )
+        });
+    }
+
+    private excecuteSlotAction(mxObject: mendix.lib.MxObject) {
+        const { onClickSlotEvent, slotMicroflow, mxform, slotNanoflow, openPageAs, slotPage } = this.props;
         const context = new mendix.lib.MxContext();
         context.setContext(mxObject.getEntity(), mxObject.getGuid());
         if (onClickSlotEvent === "callMicroflow" && slotMicroflow && mxObject.getGuid()) {

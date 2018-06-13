@@ -20,6 +20,11 @@
             <category>Appearance</category>
             <description>Show truncated events in an overlay when you click the "+x more" link</description>
         </property>
+        <property key="selectable" type="boolean" defaultValue="true">
+            <caption>Selectable</caption>
+            <category>Appearance</category>
+            <description/>
+        </property>
         <property key="dataSource" type="enumeration" defaultValue="XPath">
             <caption>Data source</caption>
             <category>Event data</category>

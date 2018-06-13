@@ -17,8 +17,9 @@ export interface CalendarProps {
     defaultDate?: Date;
     defaultView?: string;
     popup?: boolean;
-    onSelectEventAction: () => void;
-    onSelectSlotAction: () => void;
+    selectable?: boolean;
+    onSelectEventAction: (eventInfo: any) => void;
+    onSelectSlotAction: (slotInfo: any) => void;
 }
 
 export interface CalendarEvent {
@@ -45,13 +46,13 @@ export class Calendar extends Component<CalendarProps, CalendarState> {
             createElement(BigCalendar, {
                 events: this.props.events,
                 step: 60,
-                selectable: true,
+                selectable: this.props.selectable,
                 showMultiDayTimes: true,
                 defaultDate: new Date(),
                 defaultView: this.props.defaultView,
                 popup: this.props.popup,
-                onSelectEvent: () => this.props.onSelectEventAction(),
-                onSelectSlot: () => this.props.onSelectSlotAction()
+                onSelectEvent: (eventInfo: any) => this.props.onSelectEventAction(eventInfo),
+                onSelectSlot: (slotInfo: {}) => this.props.onSelectSlotAction(slotInfo)
             })
         );
     }
