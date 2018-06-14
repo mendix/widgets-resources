@@ -211,13 +211,20 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         if (newColor) {
             this.colorChanged = this.getValue(this.props.mxObject) !== newColor;
             const state = this.validateColor(event.target.value);
-            if (!state.alertMessage && this.props.mxObject) {
-                this.props.mxObject.set(this.props.colorAttribute, newColor);
-                this.handleOnChange();
+            if (!state.alertMessage) {
+                this.updateColorAttribute(newColor, this.props.mxObject);
             }
             this.setState(state);
         } else {
+            this.updateColorAttribute(newColor, this.props.mxObject);
             this.setState({ alertMessage: "", color: event.target.value });
+        }
+    }
+
+    private updateColorAttribute = (color: string, mxObject?: mendix.lib.MxObject) => {
+        if (mxObject) {
+            mxObject.set(this.props.colorAttribute, color);
+            this.handleOnChange();
         }
     }
 
