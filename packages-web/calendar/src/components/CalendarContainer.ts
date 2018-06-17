@@ -1,18 +1,18 @@
 import { Component, createElement } from "react";
 
 import { Alert } from "./Alert";
-import { Calendar, CalendarEvent } from "./Calendar";
+import { Calendar, CalendarEvent, View } from "./Calendar";
 
 interface WrapperProps {
-    mxObject: mendix.lib.MxObject;
     mxform: mxui.lib.form._FormBase;
+    mxObject: mendix.lib.MxObject;
 }
 
-interface CalendarContainerProps extends WrapperProps {
+export interface CalendarContainerProps extends WrapperProps {
     titleAttribute: string;
     startAttribute: string;
     endAttribute: string;
-    defaultView: string;
+    defaultView: View;
     dataSource: DataSource;
     eventEntity: string;
     entityConstraint: string;
@@ -71,7 +71,8 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
                 popup: this.props.popup,
                 selectable: this.props.selectable,
                 onSelectEventAction: this.onClickEvent,
-                onSelectSlotAction: this.onClickSlot
+                onSelectSlotAction: this.onClickSlot,
+                onEventDropAction: this.onDropEvent
             });
         }
     }
@@ -252,6 +253,20 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
                 location: openPageAs
             });
         }
+    }
+
+    private onDropEvent = (eventInfo: any) => {
+        const { events } = this.state;
+        const eventPosition = events.indexOf(eventInfo.event);
+        const updatedEvent: CalendarEvent = {
+            title: eventInfo.event.title,
+            start: eventInfo.start,
+            end: eventInfo.end,
+            guid: eventInfo.event.guid
+        };
+        const nextEvents = [ ...events ];
+        nextEvents.splice(eventPosition, 1, updatedEvent);
+        this.setState({ events: nextEvents });
     }
 
     public static validateProps(props: CalendarContainerProps): string {

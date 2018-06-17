@@ -39,11 +39,13 @@
     "@types/core-js": "^0.9.46",
     "@types/enzyme": "^3.1.10",
     "@types/enzyme-adapter-react-16": "^1.0.2",
+    "@types/globalize": "0.0.33",
     "@types/jasmine": "^2.8.6",
     "@types/karma": "^1.7.3",
     "@types/node": "9.6.7",
-    "@types/react": "^16.3.13",
-    "@types/react-dom": "^16.0.5",
+    "@types/react": "^16.3.17",
+    "@types/react-big-calendar": "^0.18.0",
+    "@types/react-dom": "^16.0.6",
     "@types/webdriverio": "^4.10.1",
     "check-dependencies": "^1.1.0",
     "copy-webpack-plugin": "^4.5.1",
@@ -65,8 +67,8 @@
     "istanbul": "^0.4.3",
     "istanbul-instrumenter-loader": "^3.0.1",
     "jasmine": "^2.8.0",
-    "json-source-map": "^0.4.0",
     "json-loader": "^0.5.4",
+    "json-source-map": "^0.4.0",
     "karma": "^2.0.2",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.1",
@@ -76,7 +78,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^3.0.0",
-    "mendix-client": "^7.13.3",
+    "mendix-client": "^7.13.4",
     "mendix-widget-build-script": "^1.0.0",
     "node-sass": "^4.9.0",
     "nodemon": "^1.17.3",
@@ -108,9 +110,10 @@
     "webworkify-webpack": "^2.1.1"
   },
   "dependencies": {
-    "@types/react-big-calendar": "^0.18.0",
     "classnames": "^2.2.5",
-    "globalize": "^0.1.1",
-    "react-big-calendar": "^0.18"
+    "globalize": "0.1.1",
+    "react-big-calendar": "^0.19.1",
+    "react-dnd": "^2.6.0",
+    "react-dnd-html5-backend": "^2.6.0"
   }
 }

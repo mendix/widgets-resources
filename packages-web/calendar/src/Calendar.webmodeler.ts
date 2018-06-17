@@ -7,7 +7,8 @@ export class preview extends Component<{}> {
     render() {
         return createElement(Calendar, {
             onSelectEventAction: () => null,
-            onSelectSlotAction: () => null
+            onSelectSlotAction: () => null,
+            onEventDropAction: () => null
         });
     }
 }
