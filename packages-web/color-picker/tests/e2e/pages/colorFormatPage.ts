@@ -12,7 +12,7 @@ class ColorFormat {
     }
 
     public get skethInput() {
-        return browser.element(".mx-name-colorPicker3 input");
+        return browser.element(".mx-name-colorPicker24 input");
     }
 
     public get rgbTab() {
