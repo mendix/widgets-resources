@@ -72,7 +72,7 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
 
         return createElement(ProgressCircle, {
             alertMessage: this.state.alertMessage,
-            animate: this.props.animate,
+            animate: this.hasAnimation(),
             circleThickness: this.props.circleThickness,
             className: this.props.class,
             clickable: this.props.onClickEvent !== "doNothing",
@@ -94,6 +94,18 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
 
     componentWillUnmount() {
         this.subscriptionHandles.forEach((handle) => window.mx.data.unsubscribe(handle));
+    }
+
+    private hasAnimation() {
+        // IE 11 does not support animation when line svg line size large then 7
+        // https://github.com/kimmobrunfeldt/progressbar.js/issues/79
+        const isIe11 = !!(window as any).MSInputMethodContext && !!(document as any).documentMode;
+        const isEdge = window.navigator.userAgent.indexOf("Edge/") > 0;
+        if ((isIe11 || isEdge) && this.props.circleThickness >= 7 && this.props.animate) {
+            logger.warn("Disabled animation on IE and Edge");
+            return false;
+        }
+        return this.props.animate;
     }
 
     public static validateProps(props: ContainerProps): string {
