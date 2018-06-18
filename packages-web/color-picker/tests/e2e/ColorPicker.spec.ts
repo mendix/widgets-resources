@@ -121,7 +121,7 @@ describe("Color picker", () => {
 
         it("hex", () => {
             colorFormatPage.skethInput.waitForVisible();
-            const buttonBackgroundColor = browser.getValue(".mx-name-colorPicker3 input");
+            const buttonBackgroundColor = browser.getValue(".mx-name-colorPicker24 input");
 
             expect(buttonBackgroundColor).toContain("#4caf50");
         });
