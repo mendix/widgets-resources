@@ -1,33 +1,34 @@
-import { Component, createElement } from "react";
-import * as classNames from "classnames";
+import { Component, ReactChild, createElement } from "react";
 
+import { Alert } from "./Alert";
 import * as BigCalendar from "react-big-calendar";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import * as globalize from "globalize";
 import localizer from "react-big-calendar/lib/localizers/globalize";
 import * as withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
+
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-
 import "../ui/Calendar.scss";
 
 localizer(globalize);
 const DragAndDropCalendar = withDragAndDrop(BigCalendar);
 
 export interface CalendarProps {
+    alertMessage?: ReactChild;
     events?: CalendarEvent[];
     showMultiDayTimes?: boolean;
-    defaultDate: Date;
     defaultView: View;
+    defaultDate: Date;
     popup: boolean;
     selectable: boolean;
-    onSelectEventAction: (eventInfo: any) => void;
-    onSelectSlotAction: (slotInfo: any) => void;
-    onEventDropAction: (eventInfo: any) => void;
+    onSelectEventAction?: (eventInfo: object) => void;
+    onSelectSlotAction?: (slotInfo: object) => void;
+    onEventDropAction?: (eventInfo: object) => void;
 }
 
-export type View = "month" | "week" | "day" | "agenda";
+export type View = "month" | "week" | "work_week" | "day" | "agenda";
 
 export interface CalendarEvent {
     title: string;
@@ -41,35 +42,45 @@ interface CalendarState {
 }
 
 class Calendar extends Component<CalendarProps, CalendarState> {
-
-    constructor(props: CalendarProps) {
-        super(props);
-
-        this.state = { events: this.props.events };
-    }
+    state: CalendarState = { events: this.props.events };
 
     render() {
-        return createElement("div", { className: classNames("widget-calendar") },
+        if (this.props.alertMessage) {
+            return createElement(Alert, { className: "widget-calendar-alert" }, this.props.alertMessage);
+        }
+
+        return createElement("div", { className: ("widget-calendar") },
             createElement(DragAndDropCalendar, {
                 events: this.props.events,
                 defaultDate: new Date(),
                 defaultView: this.props.defaultView,
+                views: [ "month", "week", "work_week", "day", "agenda" ],
                 popup: this.props.popup,
                 selectable: this.props.selectable,
                 showMultiDayTimes: true,
-                onEventDrop: (eventInfo: any) => this.props.onEventDropAction(eventInfo),
-                onSelectEvent: (eventInfo: any) => this.props.onSelectEventAction(eventInfo),
-                onSelectSlot: (slotInfo: {}) => this.props.onSelectSlotAction(slotInfo)
+                onEventDrop:  this.onEventDrop,
+                onSelectEvent: this.onSelectEvent,
+                onSelectSlot: this.onSelectSlot
             })
         );
     }
 
     componentWillReceiveProps(newProps: CalendarProps) {
         if (this.state.events !== newProps.events) {
-            this.setState({
-                events: newProps.events
-            });
+            this.setState({ events: newProps.events });
         }
+    }
+
+    private onEventDrop = (eventInfo: object) => {
+        if (this.props.onEventDropAction) { this.props.onEventDropAction(eventInfo); }
+    }
+
+    private onSelectEvent = (eventInfo: object) => {
+        if (this.props.onSelectEventAction) { this.props.onSelectEventAction(eventInfo); }
+    }
+
+    private onSelectSlot = (slotInfo: object) => {
+        if (this.props.onSelectSlotAction) { this.props.onSelectSlotAction(slotInfo); }
     }
 }
 

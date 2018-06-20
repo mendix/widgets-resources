@@ -2,14 +2,14 @@ import { SFC, createElement } from "react";
 import * as classNames from "classnames";
 
 export interface AlertProps {
-    message?: string;
+    bootstrapStyle?: "default" | "primary" | "success" | "info" | "warning" | "danger";
     className?: string;
-    bootstrapStyle: "default" | "primary" | "success" | "info" | "warning" | "danger";
 }
 
-export const Alert: SFC<AlertProps> = ({ className, bootstrapStyle, message }) =>
-    message
-        ? createElement("div", { className: classNames(`alert alert-${bootstrapStyle}`, className) }, message)
+export const Alert: SFC<AlertProps> = ({ bootstrapStyle, className, children }) =>
+    children
+        ? createElement("div", { className: classNames(`alert alert-${bootstrapStyle}`, className) }, children)
         : null;
 
 Alert.displayName = "Alert";
+Alert.defaultProps = { bootstrapStyle: "danger" };

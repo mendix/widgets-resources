@@ -1,6 +1,5 @@
 import { Component, createElement } from "react";
 
-import { Alert } from "./components/Alert";
 import { Calendar, CalendarProps } from "./components/Calendar";
 import CalendarContainer, { CalendarContainerProps } from "./components/CalendarContainer";
 
@@ -12,40 +11,31 @@ type VisibilityMap = {
 // tslint:disable-next-line class-name
 export class preview extends Component<CalendarContainerProps, {}> {
     render() {
-        const message = CalendarContainer.validateProps(this.props);
         return createElement("div", {},
-            createElement(Alert, { bootstrapStyle: "danger", message, className: "widget-calendar-alert" }),
-            createElement(Calendar, preview.transformProps(this.props))
+            createElement(Calendar, this.transformProps(this.props))
         );
     }
 
-    private static transformProps(props: CalendarContainerProps): CalendarProps {
+    private transformProps(props: CalendarContainerProps): CalendarProps {
         const eventData = [ {
             title: "Leave",
             start: new Date(),
             end: new Date(),
             guid: ""
         } ];
+
         return {
+            alertMessage: CalendarContainer.validateProps(this.props),
             events: eventData,
             defaultView: props.defaultView,
             defaultDate: new Date(),
             popup: props.popup,
-            selectable: props.selectable,
-            onSelectEventAction: () => null,
-            onSelectSlotAction: () => null,
-            onEventDropAction: () => null
+            selectable: props.selectable
         };
     }
 }
 
 export function getVisibleProperties(valueMap: CalendarContainerProps, visibilityMap: VisibilityMap) {
-    if (valueMap.dataSource !== "XPath") {
-        visibilityMap.entityConstraint = false;
-    }
-    if (valueMap.dataSource !== "microflow") {
-        visibilityMap.dataSourceMicroflow = false;
-    }
     visibilityMap.dataSourceMicroflow = valueMap.dataSource === "microflow";
     visibilityMap.entityConstraint = valueMap.dataSource === "XPath";
 

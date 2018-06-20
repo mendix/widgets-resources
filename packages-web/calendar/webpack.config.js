@@ -2,7 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const pkg = require("./package");
 const widgetName = pkg.widgetName;
@@ -42,10 +42,11 @@ const widgetConfig = {
             }
         ]
     },
-    devtool: "source-map",
+    devtool: "eval",
     externals: ["react", "react-dom"],
+    mode: "development",
     plugins: [
-        new BundleAnalyzerPlugin(),
+        // new BundleAnalyzerPlugin(),
         new CopyWebpackPlugin([{
                 from: "src/**/*.js"
             },
@@ -106,6 +107,7 @@ const previewConfig = {
     },
     devtool: "inline-source-map",
     externals: ["react", "react-dom"],
+    mode: "development",
     plugins: [
         new webpack.LoaderOptionsPlugin({
             debug: true
