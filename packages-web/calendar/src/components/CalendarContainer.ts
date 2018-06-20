@@ -1,11 +1,11 @@
-import { Component, createElement } from "react";
+import { Component, ReactChild, createElement } from "react";
 
-import { Alert } from "./Alert";
 import { Calendar, CalendarEvent, View } from "./Calendar";
 
 interface WrapperProps {
     mxform: mxui.lib.form._FormBase;
     mxObject: mendix.lib.MxObject;
+    readOnly: boolean;
 }
 
 export interface CalendarContainerProps extends WrapperProps {
@@ -19,6 +19,7 @@ export interface CalendarContainerProps extends WrapperProps {
     dataSourceMicroflow: string;
     popup: boolean;
     selectable: boolean;
+    editable: "default" | "never";
     onClickEvent: OnClickEventOptions;
     onClickSlotEvent: OnClickEventOptions;
     eventPage: string;
@@ -28,6 +29,10 @@ export interface CalendarContainerProps extends WrapperProps {
     slotPage: string;
     slotMicroflow: string;
     slotNanoflow: Nanoflow;
+    onDropEvent: OnClickEventOptions;
+    onDropPage: string;
+    onDropMicroflow: string;
+    onDropNanoflow: Nanoflow;
 }
 
 type DataSource = "XPath" | "microflow";
@@ -35,7 +40,7 @@ type OnClickEventOptions = "doNothing" | "showPage" | "callMicroflow" | "callNan
 type PageLocation = "content" | "popup" | "modal";
 
 interface CalendarContainerState {
-    alertMessage?: string;
+    alertMessage?: ReactChild;
     events: CalendarEvent[];
 }
 
@@ -45,36 +50,24 @@ interface Nanoflow {
 }
 
 export default class CalendarContainer extends Component<CalendarContainerProps, CalendarContainerState> {
-    private subscriptionHandles: number[];
+    private subscriptionHandles: number[] = [];
 
-    constructor(props: CalendarContainerProps) {
-        super(props);
-
-        this.subscriptionHandles = [];
-        this.state = {
-            alertMessage: CalendarContainer.validateProps(this.props),
-            events: []
-        };
-    }
+    state: CalendarContainerState = { alertMessage: "", events: [] };
 
     render() {
-        if (this.state.alertMessage) {
-            return createElement(Alert, {
-                bootstrapStyle: "danger",
-                className: "widget-calendar-alert",
-                message: this.state.alertMessage
-            });
-        } else {
-            return createElement(Calendar, {
-                events: this.state.events,
-                defaultView: this.props.defaultView,
-                popup: this.props.popup,
-                selectable: this.props.selectable,
-                onSelectEventAction: this.onClickEvent,
-                onSelectSlotAction: this.onClickSlot,
-                onEventDropAction: this.onDropEvent
-            });
-        }
+        const readOnly = this.isReadOnly();
+        const alertMessage = this.state.alertMessage || CalendarContainer.validateProps(this.props);
+
+        return createElement(Calendar, {
+            alertMessage,
+            events: this.state.events,
+            defaultView: this.props.defaultView,
+            popup: this.props.popup,
+            selectable: !readOnly ? this.props.selectable : false,
+            onSelectEventAction: !readOnly ? this.onClickEvent : undefined,
+            onSelectSlotAction: !readOnly ? this.onClickSlot : undefined,
+            onEventDropAction: !readOnly ? this.onDropEvent : undefined
+        });
     }
 
     componentDidMount() {
@@ -92,11 +85,17 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         this.resetSubscriptions(nextProps.mxObject);
     }
 
+    private isReadOnly(): boolean {
+        return !this.props.mxObject || this.props.editable === "never" || this.props.readOnly ||
+            this.props.mxObject.isReadonlyAttr(this.props.titleAttribute) ||
+            this.props.mxObject.isReadonlyAttr(this.props.startAttribute) ||
+            this.props.mxObject.isReadonlyAttr(this.props.endAttribute);
+    }
+
     private fetchData = (mxObject: mendix.lib.MxObject) => {
-        const { dataSource, dataSourceMicroflow, eventEntity } = this.props;
-        if (dataSource === "XPath" && eventEntity && mxObject) {
+        if (this.props.dataSource === "XPath" && this.props.eventEntity && mxObject) {
             this.fetchEventsByXPath(mxObject.getGuid());
-        } else if (dataSource === "microflow" && dataSourceMicroflow) {
+        } else if (this.props.dataSource === "microflow" && this.props.dataSourceMicroflow) {
             this.fetchEventsByMicroflow(mxObject);
         }
     }
@@ -107,12 +106,12 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
 
         if (mxObject) {
             this.subscriptionHandles.push(window.mx.data.subscribe({
-                callback: () => this.fetchData(mxObject),
-                entity: this.props.eventEntity
+                entity: this.props.eventEntity,
+                callback: () => this.fetchData(mxObject)
             }));
             this.subscriptionHandles.push(window.mx.data.subscribe({
-                callback: () => this.fetchData(mxObject),
-                guid: mxObject.getGuid()
+                guid: mxObject.getGuid(),
+                callback: () => this.fetchData(mxObject)
             }));
             [
                 this.props.titleAttribute,
@@ -132,38 +131,33 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
 
         window.mx.data.get({
             xpath: XPath,
-            callback: mxObjects => this.setEventsFromMxObjects(mxObjects)
+            callback: this.setEventsFromMxObjects
         });
     }
 
     private setEventsFromMxObjects = (mxObjects: mendix.lib.MxObject[]) => {
-        const { titleAttribute, startAttribute, endAttribute } = this.props;
         const events = mxObjects.map(mxObject => {
-            const title = mxObject.get(titleAttribute) as string;
-            const start = new Date(mxObject.get(startAttribute) as number);
-            const end = new Date(mxObject.get(endAttribute) as number);
-            const guid = mxObject.getGuid();
-
             return {
-                title,
-                start,
-                end,
-                guid
+                title: mxObject.get(this.props.titleAttribute) as string,
+                start: new Date(mxObject.get(this.props.startAttribute) as number),
+                end: new Date(mxObject.get(this.props.endAttribute) as number),
+                guid: mxObject.getGuid()
             };
         });
         this.setState({ events });
     }
 
     private fetchEventsByMicroflow(mxObject: mendix.lib.MxObject) {
-        const { dataSourceMicroflow } = this.props;
-        if (mxObject && dataSourceMicroflow) {
-            window.mx.ui.action(dataSourceMicroflow, {
-                callback: (mxObjects: mendix.lib.MxObject[]) => this.setEventsFromMxObjects(mxObjects),
-                error: error => window.mx.ui.error(`Error while executing microflow: ${dataSourceMicroflow}: ${error.message}`),
+        if (mxObject && this.props.dataSourceMicroflow) {
+            window.mx.ui.action(this.props.dataSourceMicroflow, {
                 params: {
                     applyto: "selection",
                     guids: mxObject ? [ mxObject.getGuid() ] : []
-                }
+                },
+                callback: this.setEventsFromMxObjects,
+                error: error => window.mx.ui.error(
+                    `Error while executing microflow: ${this.props.dataSourceMicroflow}: ${error.message}`
+                )
             });
         }
     }
@@ -171,7 +165,7 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
     private onClickEvent = (eventInfo: any) => {
         mx.data.get({
             guid: eventInfo.guid,
-            callback: (object) => this.excecuteEventAction(object),
+            callback: this.excecuteEventAction,
             error: error => window.mx.ui.error(`Error while executing action: ${error.message}`)
         });
     }
@@ -185,43 +179,42 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         context.setContext(object.getEntity(), object.getGuid());
         if (onClickEvent === "callMicroflow" && eventMicroflow) {
             window.mx.ui.action(eventMicroflow, {
-                error: error => window.mx.ui.error(`Error while executing microflow: ${eventMicroflow}: ${error.message}`),
+                context,
                 origin: mxform,
-                context
+                error: error => window.mx.ui.error(
+                    `Error while executing microflow: ${eventMicroflow}: ${error.message}`
+                )
             });
         } else if (onClickEvent === "callNanoflow" && eventNanoflow.nanoflow) {
             window.mx.data.callNanoflow({
+                nanoflow: eventNanoflow,
+                origin: mxform,
                 context,
                 error: error => window.mx.ui.error(
                     `An error occurred while executing the nanoflow: ${error.message}`
-                ),
-                nanoflow: eventNanoflow,
-                origin: mxform
+                )
             });
         } else if (onClickEvent === "showPage" && eventPage) {
             window.mx.ui.openForm(eventPage, {
+                location: openPageAs,
                 context,
                 error: error => window.mx.ui.error(
                     `Error while opening page ${eventPage}: ${error.message}`
-                ),
-                location: openPageAs
+                )
             });
         }
     }
 
     private onClickSlot = (slotInfo: any) => {
-        const { startAttribute, titleAttribute, endAttribute } = this.props;
         mx.data.create({
             entity: this.props.eventEntity,
             callback: (object) => {
-                object.set(titleAttribute, object.get(titleAttribute));
-                object.set(startAttribute, slotInfo.start);
-                object.set(endAttribute, slotInfo.end);
+                object.set(this.props.titleAttribute, object.get(this.props.titleAttribute));
+                object.set(this.props.startAttribute, slotInfo.start);
+                object.set(this.props.endAttribute, slotInfo.end);
                 this.excecuteSlotAction(object);
             },
-            error: error => window.mx.ui.error(
-                `Error in while creating a new event: ${ error.message }`
-            )
+            error: error => window.mx.ui.error(`Error while creating a new event: ${ error.message }`)
         });
     }
 
@@ -231,26 +224,26 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         context.setContext(mxObject.getEntity(), mxObject.getGuid());
         if (onClickSlotEvent === "callMicroflow" && slotMicroflow && mxObject.getGuid()) {
             window.mx.ui.action(slotMicroflow, {
-                error: error => window.mx.ui.error(`Error while executing microflow: ${slotMicroflow}: ${error.message}`),
+                context,
                 origin: mxform,
-                context
+                error: error => window.mx.ui.error(
+                    `Error while executing microflow: ${slotMicroflow}: ${error.message}`
+                )
             });
         } else if (onClickSlotEvent === "callNanoflow" && slotNanoflow.nanoflow) {
             window.mx.data.callNanoflow({
+                nanoflow: slotNanoflow,
+                origin: mxform,
                 context,
                 error: error => window.mx.ui.error(
                     `An error occurred while executing the nanoflow: ${error.message}`
-                ),
-                nanoflow: slotNanoflow,
-                origin: mxform
+                )
             });
         } else if (onClickSlotEvent === "showPage" && slotPage && mxObject.getGuid()) {
             window.mx.ui.openForm(slotPage, {
+                location: openPageAs,
                 context,
-                error: error => window.mx.ui.error(
-                    `Error while opening page ${slotPage}: ${error.message}`
-                ),
-                location: openPageAs
+                error: error => window.mx.ui.error(`Error while opening page ${slotPage}: ${error.message}`)
             });
         }
     }
@@ -267,22 +260,69 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         const nextEvents = [ ...events ];
         nextEvents.splice(eventPosition, 1, updatedEvent);
         this.setState({ events: nextEvents });
+        mx.data.get({
+            guid: eventInfo.event.guid,
+            callback: (object) => {
+                object.set(this.props.titleAttribute, eventInfo.event.title);
+                object.set(this.props.startAttribute, eventInfo.start);
+                object.set(this.props.endAttribute, eventInfo.end);
+                this.excecuteonDropAction(object);
+            },
+            error: error => window.mx.ui.error(`Error while droping an event: ${error.message}`)
+        });
+    }
+
+    private excecuteonDropAction = (mxObject: mendix.lib.MxObject) => {
+        if (!mxObject || !mxObject.getGuid()) { return; }
+        const { onDropEvent, onDropMicroflow, mxform, onDropNanoflow, openPageAs, onDropPage } = this.props;
+        const context = new mendix.lib.MxContext();
+        context.setContext(mxObject.getEntity(), mxObject.getGuid());
+        if (onDropEvent === "callMicroflow" && onDropMicroflow && mxObject.getGuid()) {
+            window.mx.ui.action(onDropMicroflow, {
+                context,
+                origin: mxform,
+                error: error => window.mx.ui.error(
+                    `Error while executing microflow: ${onDropMicroflow}: ${error.message}`
+                )
+            });
+        } else if (onDropEvent === "callNanoflow" && onDropNanoflow.nanoflow) {
+            window.mx.data.callNanoflow({
+                nanoflow: onDropNanoflow,
+                origin: mxform,
+                context,
+                error: error => window.mx.ui.error(
+                    `An error occurred while executing the nanoflow: ${error.message}`
+                )
+            });
+        } else if (onDropEvent === "showPage" && onDropPage && mxObject.getGuid()) {
+            window.mx.ui.openForm(onDropPage, {
+                location: openPageAs,
+                context,
+                error: error => window.mx.ui.error(`Error while opening page ${onDropPage}: ${error.message}`)
+            });
+        }
     }
 
     public static validateProps(props: CalendarContainerProps): string {
         let errorMessage = "";
         if (props.onClickEvent === "callMicroflow" && !props.eventMicroflow) {
-            errorMessage = `On click event is set to 'Call a microflow' but no microflow is selected`;
+            errorMessage = "On click event is set to 'Call a microflow' but no microflow is selected";
         } else if (props.onClickSlotEvent === "callMicroflow" && !props.slotMicroflow) {
-            errorMessage = `On click slot is set to 'Call a microflow' but no microflow is selected`;
+            errorMessage = "On click slot is set to 'Call a microflow' but no microflow is selected";
+        } else if (props.onDropEvent === "callMicroflow" && !props.onDropMicroflow) {
+        errorMessage = "On drop event is set to 'Call a microflow' but no microflow is selected";
         } else if (props.onClickEvent === "callNanoflow" && !props.eventNanoflow.nanoflow) {
-            errorMessage = `On click event is set to 'Call a nanoflow' but no nanoflow is selected`;
+            errorMessage = "On click event is set to 'Call a nanoflow' but no nanoflow is selected";
+        } else if (props.onDropEvent === "callNanoflow" && !props.onDropNanoflow.nanoflow) {
+            errorMessage = "On drop event is set to 'Call a nanoflow' but no nanoflow is selected";
         } else if (props.onClickSlotEvent === "callNanoflow" && !props.slotNanoflow.nanoflow) {
-            errorMessage = `On click slot is set to 'Call a nanoflow' but no nanoflow is selected`;
+            errorMessage = "On click slot is set to 'Call a nanoflow' but no nanoflow is selected";
         } else if (props.onClickEvent === "showPage" && !props.eventPage) {
-            errorMessage = `On click event is set to 'Show a page' but no page is selected`;
+            errorMessage = "On click event is set to 'Show a page' but no page is selected";
         } else if (props.onClickSlotEvent === "showPage" && !props.slotPage) {
-            errorMessage = `On click slot is set to 'Show a page' but no page is selected`;
+            errorMessage = "On click slot is set to 'Show a page' but no page is selected";
+        } else if (props.onDropEvent === "showPage" && !props.onDropPage) {
+            errorMessage = "On drop event is set to 'Show a page' but no page is selected";
         }
         if (errorMessage) {
             errorMessage = `Error in calendar configuration: ${errorMessage}`;

@@ -18,6 +18,7 @@
       true,
       "variables-before-functions"
     ],
+    "newline-before-return": true,
     "no-arg": true,
     "no-bitwise": true,
     "no-conditional-assignment": true,
