@@ -1,5 +1,9 @@
 {
     "pageTemplates" : "WebModeler",
+    "cssFiles": [
+        "styles/css/lib/lib.css",
+        "styles/css/custom/custom.css"
+    ],
     "designProperties": {
         "Widget": [
             {
