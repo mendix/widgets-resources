@@ -4785,8 +4785,8 @@ h6,
   padding: 0;
   cursor: default;
   pointer-events: none;
-  font-size: 28px;
   border-radius: 100%;
+  font-size: 28px;
 }
 
 .cardhighlight {

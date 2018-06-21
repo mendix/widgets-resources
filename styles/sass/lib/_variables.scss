@@ -188,7 +188,7 @@ $navtopbar-glyph-size:                  1.2em !default; // For glyphicons that y
 $navtopbar-bg:                          $topbar-bg !default;
 $navtopbar-bg-hover:                    darken($navtopbar-bg, 4) !default;
 $navtopbar-bg-active:                   darken($navtopbar-bg, 8) !default;
-$navtopbar-color:                       $font-base-color !default;
+$navtopbar-color:                       $font-color-default !default;
 $navtopbar-color-hover:                 $navtopbar-color !default;
 $navtopbar-color-active:                $navtopbar-color !default;
 
