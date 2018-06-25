@@ -21,14 +21,16 @@ export class preview extends Component<CalendarContainerProps, {}> {
             title: "Leave",
             start: new Date(),
             end: new Date(),
-            guid: ""
+            guid: "",
+            color: "red"
         } ];
 
         return {
             alertMessage: CalendarContainer.validateProps(this.props),
+            color: props.eventColor,
             events: eventData,
             defaultView: props.defaultView,
-            defaultDate: new Date(),
+            startPosition: new Date(),
             popup: props.popup,
             selectable: props.selectable
         };
