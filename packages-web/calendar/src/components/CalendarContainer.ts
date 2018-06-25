@@ -12,6 +12,7 @@ export interface CalendarContainerProps extends WrapperProps {
     titleAttribute: string;
     startAttribute: string;
     endAttribute: string;
+    eventColor: string;
     defaultView: View;
     dataSource: DataSource;
     eventEntity: string;
@@ -42,6 +43,7 @@ type PageLocation = "content" | "popup" | "modal";
 interface CalendarContainerState {
     alertMessage?: ReactChild;
     events: CalendarEvent[];
+    eventColor: string;
 }
 
 interface Nanoflow {
@@ -52,7 +54,11 @@ interface Nanoflow {
 export default class CalendarContainer extends Component<CalendarContainerProps, CalendarContainerState> {
     private subscriptionHandles: number[] = [];
 
-    state: CalendarContainerState = { alertMessage: "", events: [] };
+    state: CalendarContainerState = {
+        alertMessage: "",
+        events: [],
+        eventColor: ""
+    };
 
     render() {
         const readOnly = this.isReadOnly();
@@ -89,7 +95,8 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         return !this.props.mxObject || this.props.editable === "never" || this.props.readOnly ||
             this.props.mxObject.isReadonlyAttr(this.props.titleAttribute) ||
             this.props.mxObject.isReadonlyAttr(this.props.startAttribute) ||
-            this.props.mxObject.isReadonlyAttr(this.props.endAttribute);
+            this.props.mxObject.isReadonlyAttr(this.props.endAttribute) ||
+            this.props.mxObject.isReadonlyAttr(this.props.eventColor);
     }
 
     private fetchData = (mxObject: mendix.lib.MxObject) => {
@@ -116,7 +123,8 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
             [
                 this.props.titleAttribute,
                 this.props.startAttribute,
-                this.props.endAttribute
+                this.props.endAttribute,
+                this.props.eventColor
             ].forEach(attr => this.subscriptionHandles.push(window.mx.data.subscribe({
                 attr,
                 callback: () => this.fetchData(mxObject), guid: mxObject.getGuid()
@@ -141,7 +149,8 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
                 title: mxObject.get(this.props.titleAttribute) as string,
                 start: new Date(mxObject.get(this.props.startAttribute) as number),
                 end: new Date(mxObject.get(this.props.endAttribute) as number),
-                guid: mxObject.getGuid()
+                guid: mxObject.getGuid(),
+                color: mxObject.get(this.props.eventColor) as string
             };
         });
         this.setState({ events });
@@ -210,6 +219,7 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
             entity: this.props.eventEntity,
             callback: (object) => {
                 object.set(this.props.titleAttribute, object.get(this.props.titleAttribute));
+                object.set(this.props.eventColor, object.get(this.props.titleAttribute));
                 object.set(this.props.startAttribute, slotInfo.start);
                 object.set(this.props.endAttribute, slotInfo.end);
                 this.excecuteSlotAction(object);
@@ -255,7 +265,8 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
             title: eventInfo.event.title,
             start: eventInfo.start,
             end: eventInfo.end,
-            guid: eventInfo.event.guid
+            guid: eventInfo.event.guid,
+            color: eventInfo.event.color
         };
         const nextEvents = [ ...events ];
         nextEvents.splice(eventPosition, 1, updatedEvent);
@@ -264,6 +275,7 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
             guid: eventInfo.event.guid,
             callback: (object) => {
                 object.set(this.props.titleAttribute, eventInfo.event.title);
+                object.set(this.props.eventColor, eventInfo.event.color);
                 object.set(this.props.startAttribute, eventInfo.start);
                 object.set(this.props.endAttribute, eventInfo.end);
                 this.excecuteonDropAction(object);

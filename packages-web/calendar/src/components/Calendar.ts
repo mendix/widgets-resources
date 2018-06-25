@@ -18,9 +18,10 @@ const DragAndDropCalendar = withDragAndDrop(BigCalendar);
 export interface CalendarProps {
     alertMessage?: ReactChild;
     events?: CalendarEvent[];
+    color: string;
     showMultiDayTimes?: boolean;
     defaultView: View;
-    defaultDate: Date;
+    startPosition: Date;
     popup: boolean;
     selectable: boolean;
     onSelectEventAction?: (eventInfo: object) => void;
@@ -35,10 +36,12 @@ export interface CalendarEvent {
     start: Date;
     end: Date;
     guid: string;
+    color: string;
 }
 
 interface CalendarState {
     events?: CalendarEvent[];
+    color?: string;
 }
 
 class Calendar extends Component<CalendarProps, CalendarState> {
@@ -52,6 +55,9 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         return createElement("div", { className: ("widget-calendar") },
             createElement(DragAndDropCalendar, {
                 events: this.props.events,
+                eventPropGetter: (events: any) => {
+                    return { style: { backgroundColor: events.color } };
+                },
                 defaultDate: new Date(),
                 defaultView: this.props.defaultView,
                 views: [ "month", "week", "work_week", "day", "agenda" ],
