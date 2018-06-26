@@ -19,6 +19,7 @@ export class preview extends Component<CalendarContainerProps, {}> {
     private transformProps(props: CalendarContainerProps): CalendarProps {
         const eventData = [ {
             title: "Leave",
+            allDay: true,
             start: new Date(),
             end: new Date(),
             guid: "",

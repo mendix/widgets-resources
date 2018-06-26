@@ -12,6 +12,7 @@ export interface CalendarContainerProps extends WrapperProps {
     titleAttribute: string;
     startAttribute: string;
     endAttribute: string;
+    allDayAttribute: string;
     eventColor: string;
     defaultView: View;
     dataSource: DataSource;
@@ -147,6 +148,7 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         const events = mxObjects.map(mxObject => {
             return {
                 title: mxObject.get(this.props.titleAttribute) as string,
+                allDay: mxObject.get(this.props.allDayAttribute) as boolean,
                 start: new Date(mxObject.get(this.props.startAttribute) as number),
                 end: new Date(mxObject.get(this.props.endAttribute) as number),
                 guid: mxObject.getGuid(),
@@ -263,6 +265,7 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         const eventPosition = events.indexOf(eventInfo.event);
         const updatedEvent: CalendarEvent = {
             title: eventInfo.event.title,
+            allDay: eventInfo.event.allDay,
             start: eventInfo.start,
             end: eventInfo.end,
             guid: eventInfo.event.guid,

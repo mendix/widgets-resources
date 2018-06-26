@@ -33,6 +33,7 @@ export type View = "month" | "week" | "work_week" | "day" | "agenda";
 
 export interface CalendarEvent {
     title: string;
+    allDay: boolean;
     start: Date;
     end: Date;
     guid: string;

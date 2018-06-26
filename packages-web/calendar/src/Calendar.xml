@@ -81,6 +81,14 @@
                 <attributeType name="String"/>
             </attributeTypes>
         </property>
+        <property key="allDayAttribute" type="attribute" entityProperty="eventEntity" required="false">
+            <caption>All day</caption>
+            <category>Event data</category>
+            <description/>
+            <attributeTypes>
+                <attributeType name="Boolean"/>
+            </attributeTypes>
+        </property>
         <property key="startAttribute" type="attribute" entityProperty="eventEntity" required="false">
             <caption>Start</caption>
             <category>Event data</category>
