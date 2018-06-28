@@ -2,6 +2,7 @@ import { Component, ReactChild, createElement } from "react";
 
 import { Alert } from "./Alert";
 import * as BigCalendar from "react-big-calendar";
+import { CalendarLoading } from "./CalendarLoading";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import * as globalize from "globalize";
@@ -19,6 +20,7 @@ export interface CalendarProps {
     alertMessage?: ReactChild;
     events?: CalendarEvent[];
     color: string;
+    loading?: boolean;
     showMultiDayTimes?: boolean;
     defaultView: View;
     startPosition: Date;
@@ -52,6 +54,9 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         if (this.props.alertMessage) {
             return createElement(Alert, { className: "widget-calendar-alert" }, this.props.alertMessage);
         }
+        if (this.props.loading) {
+            return createElement(CalendarLoading);
+        }
 
         return createElement("div", { className: ("widget-calendar") },
             createElement(DragAndDropCalendar, {
@@ -59,7 +64,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
                 eventPropGetter: (events: any) => {
                     return { style: { backgroundColor: events.color } };
                 },
-                defaultDate: new Date(),
+                defaultDate: this.props.startPosition,
                 defaultView: this.props.defaultView,
                 views: [ "month", "week", "work_week", "day", "agenda" ],
                 popup: this.props.popup,

@@ -4,10 +4,76 @@
     <description>Display and manage calendar events</description>
     <icon/>
     <properties>
-        <property key="contextEntity" type="entity" required="false">
-            <caption>Data source entity</caption>
+        <property key="dataSource" type="enumeration" defaultValue="XPath">
+            <caption>Data source</caption>
             <category>Data source</category>
             <description/>
+            <enumerationValues>
+                <enumerationValue key="XPath">Database</enumerationValue>
+                <enumerationValue key="microflow">Microflow</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="eventEntity" type="entity" required="false">
+            <caption>Event entity</caption>
+            <category>Data source</category>
+            <description/>
+        </property>
+        <property key="entityConstraint" type="entityConstraint" entityProperty="eventEntity" required="false">
+            <caption>XPath</caption>
+            <category>Data source</category>
+            <description/>
+        </property>
+		<property key="dataSourceMicroflow" type="microflow" required="false">
+			<caption>Data source microflow</caption>
+			<category>Data source</category>
+			<description></description>
+			<returnType type="Void" />
+		</property>
+        <property key="titleAttribute" type="attribute" entityProperty="eventEntity">
+            <caption>Title</caption>
+            <category>Data source</category>
+            <description/>
+            <attributeTypes>
+                <attributeType name="String"/>
+            </attributeTypes>
+        </property>
+        <property key="allDayAttribute" type="attribute" entityProperty="eventEntity" required="false">
+            <caption>All day</caption>
+            <category>Data source</category>
+            <description/>
+            <attributeTypes>
+                <attributeType name="Boolean"/>
+            </attributeTypes>
+        </property>
+        <property key="startAttribute" type="attribute" entityProperty="eventEntity" required="false">
+            <caption>Start</caption>
+            <category>Data source</category>
+            <description/>
+            <attributeTypes>
+                <attributeType name="DateTime"/>
+            </attributeTypes>
+        </property>
+        <property key="endAttribute" type="attribute" entityProperty="eventEntity" required="false">
+            <caption>End</caption>
+            <category>Data source</category>
+            <description/>
+            <attributeTypes>
+                <attributeType name="DateTime"/>
+            </attributeTypes>
+        </property>
+        <property key="eventColor" type="attribute" entityProperty="eventEntity" required="false">
+            <caption>Event color</caption>
+            <category>Data source</category>
+            <description/>
+            <attributeTypes>
+                <attributeType name="Enum" />
+                <attributeType name="String" />
+            </attributeTypes>
+        </property>
+        <property key="limitEvents" type="boolean" defaultValue="false">
+            <caption>Limit events</caption>
+            <category>Data source</category>
+            <description>Boolean attribute to define whether the amount of events for one single day should be limited</description>
         </property>
         <property key="defaultView" type="enumeration" defaultValue="month">
             <caption>Default view</caption>
@@ -21,12 +87,20 @@
                 <enumerationValue key="agenda">Agenda</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="startPosition" type="attribute" entityProperty="contextEntity" required="false">
+        <property key="startPositionAttribute" type="attribute" required="false">
             <caption>Start position attribute</caption>
             <category>Appearance</category>
             <description>The date on which the calendar should start</description>
             <attributeTypes>
                 <attributeType name="DateTime"/>
+            </attributeTypes>
+        </property>
+        <property key="firstDayAttribute" type="attribute" required="false">
+            <caption>First day of week</caption>
+            <category>Appearance</category>
+            <description>An integer attribute to specify the first day of the week, 0 = Sunday, 1 = Monday etc</description>
+            <attributeTypes>
+                <attributeType name="Integer" />
             </attributeTypes>
         </property>
         <property key="popup" type="boolean" defaultValue="true">
@@ -47,77 +121,6 @@
                 <enumerationValue key="default">Default</enumerationValue>
                 <enumerationValue key="never">Never</enumerationValue>
             </enumerationValues>
-        </property>
-        <property key="dataSource" type="enumeration" defaultValue="XPath">
-            <caption>Data source</caption>
-            <category>Event data</category>
-            <description/>
-            <enumerationValues>
-                <enumerationValue key="XPath">Database</enumerationValue>
-                <enumerationValue key="microflow">Microflow</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="eventEntity" type="entity" required="false">
-            <caption>Event entity</caption>
-            <category>Event data</category>
-            <description/>
-        </property>
-        <property key="entityConstraint" type="entityConstraint" entityProperty="eventEntity" required="false">
-            <caption>XPath</caption>
-            <category>Event data</category>
-            <description/>
-        </property>
-		<property key="dataSourceMicroflow" type="microflow" required="false">
-			<caption>Data source microflow</caption>
-			<category>Event data</category>
-			<description></description>
-			<returnType type="Void" />
-		</property>
-        <property key="titleAttribute" type="attribute" entityProperty="eventEntity">
-            <caption>Title</caption>
-            <category>Event data</category>
-            <description/>
-            <attributeTypes>
-                <attributeType name="String"/>
-            </attributeTypes>
-        </property>
-        <property key="allDayAttribute" type="attribute" entityProperty="eventEntity" required="false">
-            <caption>All day</caption>
-            <category>Event data</category>
-            <description/>
-            <attributeTypes>
-                <attributeType name="Boolean"/>
-            </attributeTypes>
-        </property>
-        <property key="startAttribute" type="attribute" entityProperty="eventEntity" required="false">
-            <caption>Start</caption>
-            <category>Event data</category>
-            <description/>
-            <attributeTypes>
-                <attributeType name="DateTime"/>
-            </attributeTypes>
-        </property>
-        <property key="endAttribute" type="attribute" entityProperty="eventEntity" required="false">
-            <caption>End</caption>
-            <category>Event data</category>
-            <description/>
-            <attributeTypes>
-                <attributeType name="DateTime"/>
-            </attributeTypes>
-        </property>
-        <property key="eventColor" type="attribute" entityProperty="eventEntity" required="false">
-            <caption>Event color</caption>
-            <category>Event data</category>
-            <description/>
-            <attributeTypes>
-                <attributeType name="Enum" />
-                <attributeType name="String" />
-            </attributeTypes>
-        </property>
-        <property key="limitEvents" type="boolean" defaultValue="false">
-            <caption>Limit events</caption>
-            <category>Event data</category>
-            <description>Boolean attribute to define whether the amount of events for one single day should be limited</description>
         </property>
         <property key="onClickEvent" type="enumeration" defaultValue="doNothing">
             <caption>On click event</caption>
