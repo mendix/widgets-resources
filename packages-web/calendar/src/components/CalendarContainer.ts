@@ -6,6 +6,7 @@ interface WrapperProps {
     mxform: mxui.lib.form._FormBase;
     mxObject: mendix.lib.MxObject;
     readOnly: boolean;
+    style: string;
 }
 
 export interface CalendarContainerProps extends WrapperProps {
@@ -15,9 +16,11 @@ export interface CalendarContainerProps extends WrapperProps {
     allDayAttribute: string;
     eventColor: string;
     defaultView: View;
+    startPositionAttribute: string;
     dataSource: DataSource;
     eventEntity: string;
     entityConstraint: string;
+    firstDayAttribute: number;
     dataSourceMicroflow: string;
     popup: boolean;
     selectable: boolean;
@@ -35,6 +38,7 @@ export interface CalendarContainerProps extends WrapperProps {
     onDropPage: string;
     onDropMicroflow: string;
     onDropNanoflow: Nanoflow;
+    refreshInterval: number;
 }
 
 type DataSource = "XPath" | "microflow";
@@ -45,6 +49,8 @@ interface CalendarContainerState {
     alertMessage?: ReactChild;
     events: CalendarEvent[];
     eventColor: string;
+    startPosition: Date;
+    loading: boolean;
 }
 
 interface Nanoflow {
@@ -54,32 +60,43 @@ interface Nanoflow {
 
 export default class CalendarContainer extends Component<CalendarContainerProps, CalendarContainerState> {
     private subscriptionHandles: number[] = [];
+    private intervalID?: number;
 
     state: CalendarContainerState = {
         alertMessage: "",
         events: [],
-        eventColor: ""
+        eventColor: "",
+        loading: true,
+        startPosition: new Date()
     };
 
     render() {
         const readOnly = this.isReadOnly();
         const alertMessage = this.state.alertMessage || CalendarContainer.validateProps(this.props);
 
-        return createElement(Calendar, {
-            alertMessage,
-            events: this.state.events,
-            defaultView: this.props.defaultView,
-            popup: this.props.popup,
-            selectable: !readOnly ? this.props.selectable : false,
-            onSelectEventAction: !readOnly ? this.onClickEvent : undefined,
-            onSelectSlotAction: !readOnly ? this.onClickSlot : undefined,
-            onEventDropAction: !readOnly ? this.onDropEvent : undefined
-        });
+        return createElement("div",
+            {
+                style: this.state.loading ? { ...parseStyle(this.props.style) } : undefined
+            },
+            createElement(Calendar, {
+                alertMessage,
+                events: this.state.events,
+                defaultView: this.props.defaultView,
+                loading: this.state.loading,
+                popup: this.props.popup,
+                startPosition: this.state.startPosition,
+                selectable: !readOnly ? this.props.selectable : false,
+                onSelectEventAction: !readOnly ? this.onClickEvent : undefined,
+                onSelectSlotAction: !readOnly ? this.onClickSlot : undefined,
+                onEventDropAction: !readOnly ? this.onDropEvent : undefined
+            })
+        );
     }
 
     componentDidMount() {
         if (!this.state.alertMessage && this.props.mxObject) {
             this.fetchData(this.props.mxObject);
+            this.setStartPosition(this.props.mxObject);
         }
     }
 
@@ -88,16 +105,47 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
     }
 
     componentWillReceiveProps(nextProps: CalendarContainerProps) {
+        if (!this.state.loading) { this.setState({ loading: true }); }
+        if (!this.state.alertMessage) {
+            this.fetchData(nextProps.mxObject);
+            this.setStartPosition(nextProps.mxObject);
+            this.setRefreshInterval(nextProps.refreshInterval, nextProps.mxObject);
+        }
         this.fetchData(nextProps.mxObject);
         this.resetSubscriptions(nextProps.mxObject);
     }
 
+    private setRefreshInterval(refreshInterval: number, mxObject?: mendix.lib.MxObject) {
+        if (refreshInterval > 0 && mxObject) {
+            this.clearRefreshInterval();
+            this.intervalID = window.setInterval(() => {
+                if (!this.state.loading) {
+                    this.fetchData(mxObject);
+                }
+            }, refreshInterval);
+        }
+    }
+
+    private clearRefreshInterval() {
+        if (this.intervalID) {
+            window.clearInterval(this.intervalID);
+        }
+    }
+
+    private setStartPosition = (mxObject: mendix.lib.MxObject) => {
+        this.setState({
+            loading: false,
+            startPosition: new Date(mxObject.get(this.props.startPositionAttribute) as number)
+        });
+    }
+
     private isReadOnly(): boolean {
-        return !this.props.mxObject || this.props.editable === "never" || this.props.readOnly ||
-            this.props.mxObject.isReadonlyAttr(this.props.titleAttribute) ||
-            this.props.mxObject.isReadonlyAttr(this.props.startAttribute) ||
-            this.props.mxObject.isReadonlyAttr(this.props.endAttribute) ||
-            this.props.mxObject.isReadonlyAttr(this.props.eventColor);
+        return !this.props.mxObject || this.props.editable === "never";
+        // || this.props.readOnly ||
+        //     this.props.mxObject.isReadonlyAttr(this.props.titleAttribute) ||
+        //     this.props.mxObject.isReadonlyAttr(this.props.startAttribute) ||
+        //     this.props.mxObject.isReadonlyAttr(this.props.endAttribute) ||
+        //     this.props.mxObject.isReadonlyAttr(this.props.eventColor);
     }
 
     private fetchData = (mxObject: mendix.lib.MxObject) => {
@@ -130,6 +178,11 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
                 attr,
                 callback: () => this.fetchData(mxObject), guid: mxObject.getGuid()
             })));
+            this.subscriptionHandles.push(window.mx.data.subscribe({
+                guid: mxObject.getGuid(),
+                attr: this.props.startPositionAttribute,
+                callback: () => this.setStartPosition(mxObject)
+            }));
         }
     }
 
@@ -345,4 +398,45 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
 
         return errorMessage;
     }
+
+    public static parseStyle(style = ""): { [key: string]: string } {
+        try {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+
+                return styleObject;
+            }, {});
+        } catch (error) {
+            CalendarContainer.logError("Failed to parse style", style, error);
+        }
+
+        return {};
+    }
+
+    public static logError(message: string, style?: string, error?: any) {
+        // tslint:disable-next-line:no-console
+        window.logger ? window.logger.error(message) : console.log(message, style, error);
+    }
 }
+
+export const parseStyle = (style = ""): { [key: string]: string } => { // Doesn't support a few stuff.
+    try {
+        return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
+            const pair = line.split(":");
+            if (pair.length === 2) {
+                const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                styleObject[name] = pair[1].trim();
+            }
+
+            return styleObject;
+        }, {});
+    } catch (error) {
+        window.console.log("Failed to parse style", style, error); // tslint:disable-line no-console
+    }
+
+    return {};
+};
