@@ -24,6 +24,7 @@ export interface CalendarProps {
     showMultiDayTimes?: boolean;
     defaultView: View;
     startPosition: Date;
+    firstDay?: number;
     popup: boolean;
     selectable: boolean;
     onSelectEventAction?: (eventInfo: object) => void;
@@ -57,6 +58,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         if (this.props.loading) {
             return createElement(CalendarLoading);
         }
+        globalize().cultures.default.calendars.standard.firstDay = this.props.firstDay;
 
         return createElement("div", { className: ("widget-calendar") },
             createElement(DragAndDropCalendar, {
@@ -69,6 +71,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
                 views: [ "month", "week", "work_week", "day", "agenda" ],
                 popup: this.props.popup,
                 selectable: this.props.selectable,
+                step: 60,
                 showMultiDayTimes: true,
                 onEventDrop:  this.onEventDrop,
                 onSelectEvent: this.onSelectEvent,

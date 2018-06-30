@@ -20,7 +20,7 @@ export interface CalendarContainerProps extends WrapperProps {
     dataSource: DataSource;
     eventEntity: string;
     entityConstraint: string;
-    firstDayAttribute: number;
+    firstDayAttribute: string;
     dataSourceMicroflow: string;
     popup: boolean;
     selectable: boolean;
@@ -50,6 +50,7 @@ interface CalendarContainerState {
     events: CalendarEvent[];
     eventColor: string;
     startPosition: Date;
+    firstDayAttribute: number;
     loading: boolean;
 }
 
@@ -67,7 +68,8 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         events: [],
         eventColor: "",
         loading: true,
-        startPosition: new Date()
+        startPosition: new Date(),
+        firstDayAttribute: 0
     };
 
     render() {
@@ -82,6 +84,7 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
                 alertMessage,
                 events: this.state.events,
                 defaultView: this.props.defaultView,
+                firstDay: this.state.firstDayAttribute,
                 loading: this.state.loading,
                 popup: this.props.popup,
                 startPosition: this.state.startPosition,
@@ -96,6 +99,7 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
     componentDidMount() {
         if (!this.state.alertMessage && this.props.mxObject) {
             this.fetchData(this.props.mxObject);
+            this.setFirstDay(this.props.mxObject);
             this.setStartPosition(this.props.mxObject);
         }
     }
@@ -108,6 +112,7 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         if (!this.state.loading) { this.setState({ loading: true }); }
         if (!this.state.alertMessage) {
             this.fetchData(nextProps.mxObject);
+            this.setFirstDay(nextProps.mxObject);
             this.setStartPosition(nextProps.mxObject);
             this.setRefreshInterval(nextProps.refreshInterval, nextProps.mxObject);
         }
@@ -127,16 +132,22 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
     }
 
     private clearRefreshInterval() {
-        if (this.intervalID) {
-            window.clearInterval(this.intervalID);
-        }
+        if (this.intervalID) { window.clearInterval(this.intervalID); }
+    }
+
+    private setFirstDay = (mxObject: mendix.lib.MxObject) => {
+        this.setState({ firstDayAttribute: mxObject.get(this.props.firstDayAttribute) as number });
     }
 
     private setStartPosition = (mxObject: mendix.lib.MxObject) => {
+        if (this.props.startPositionAttribute !== "") {
         this.setState({
             loading: false,
             startPosition: new Date(mxObject.get(this.props.startPositionAttribute) as number)
         });
+        } else {
+            this.setState({ loading: false, startPosition: new Date() });
+        }
     }
 
     private isReadOnly(): boolean {
@@ -182,6 +193,11 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
                 guid: mxObject.getGuid(),
                 attr: this.props.startPositionAttribute,
                 callback: () => this.setStartPosition(mxObject)
+            }));
+            this.subscriptionHandles.push(window.mx.data.subscribe({
+                guid: mxObject.getGuid(),
+                attr: this.props.firstDayAttribute,
+                callback: () => this.setFirstDay(mxObject)
             }));
         }
     }
@@ -399,31 +415,13 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         return errorMessage;
     }
 
-    public static parseStyle(style = ""): { [key: string]: string } {
-        try {
-            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
-                const pair = line.split(":");
-                if (pair.length === 2) {
-                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
-                    styleObject[name] = pair[1].trim();
-                }
-
-                return styleObject;
-            }, {});
-        } catch (error) {
-            CalendarContainer.logError("Failed to parse style", style, error);
-        }
-
-        return {};
-    }
-
     public static logError(message: string, style?: string, error?: any) {
         // tslint:disable-next-line:no-console
         window.logger ? window.logger.error(message) : console.log(message, style, error);
     }
 }
 
-export const parseStyle = (style = ""): { [key: string]: string } => { // Doesn't support a few stuff.
+const parseStyle = (style = ""): { [key: string]: string } => {
     try {
         return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
             const pair = line.split(":");
@@ -435,7 +433,7 @@ export const parseStyle = (style = ""): { [key: string]: string } => { // Doesn'
             return styleObject;
         }, {});
     } catch (error) {
-        window.console.log("Failed to parse style", style, error); // tslint:disable-line no-console
+        CalendarContainer.logError("Failed to parse style", style, error);
     }
 
     return {};
