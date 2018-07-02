@@ -21,6 +21,7 @@ export interface CalendarContainerProps extends WrapperProps {
     eventEntity: string;
     entityConstraint: string;
     firstDayAttribute: string;
+    firstDayOfTheWeek: number;
     dataSourceMicroflow: string;
     popup: boolean;
     selectable: boolean;
@@ -39,6 +40,11 @@ export interface CalendarContainerProps extends WrapperProps {
     onDropMicroflow: string;
     onDropNanoflow: Nanoflow;
     refreshInterval: number;
+    dayFormat: string;
+    weekdayFormat: string;
+    timeGutterFormat: string;
+    monthHeaderFormat: string;
+    dayHeaderFormat: string;
 }
 
 type DataSource = "XPath" | "microflow";
@@ -84,7 +90,12 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
                 alertMessage,
                 events: this.state.events,
                 defaultView: this.props.defaultView,
-                firstDay: this.state.firstDayAttribute,
+                firstDay: this.state.firstDayAttribute || this.props.firstDayOfTheWeek,
+                dayFormat: this.props.dayFormat,
+                weekdayFormat: this.props.weekdayFormat,
+                timeGutterFormat: this.props.timeGutterFormat,
+                monthHeaderFormat: this.props.monthHeaderFormat,
+                dayHeaderFormat: this.props.dayHeaderFormat,
                 loading: this.state.loading,
                 popup: this.props.popup,
                 startPosition: this.state.startPosition,
@@ -410,6 +421,9 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         }
         if (errorMessage) {
             errorMessage = `Error in calendar configuration: ${errorMessage}`;
+        }
+        if (props.firstDayOfTheWeek > 6) {
+            errorMessage = "Invalid first day of the week value";
         }
 
         return errorMessage;
