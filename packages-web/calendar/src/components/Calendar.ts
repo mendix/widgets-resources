@@ -27,6 +27,11 @@ export interface CalendarProps {
     firstDay?: number;
     popup: boolean;
     selectable: boolean;
+    dayFormat?: string;
+    weekdayFormat?: string;
+    timeGutterFormat?: string;
+    monthHeaderFormat?: string;
+    dayHeaderFormat?: string;
     onSelectEventAction?: (eventInfo: object) => void;
     onSelectSlotAction?: (slotInfo: object) => void;
     onEventDropAction?: (eventInfo: object) => void;
@@ -68,6 +73,13 @@ class Calendar extends Component<CalendarProps, CalendarState> {
                 },
                 defaultDate: this.props.startPosition,
                 defaultView: this.props.defaultView,
+                formats: {
+                    dayFormat: this.dayFormat,
+                    weekdayFormat: this.weekdayFormat,
+                    timeGutterFormat: this.timeGutterFormat,
+                    monthHeaderFormat: this.monthHeaderFormat,
+                    dayHeaderFormat: this.dayHeaderFormat
+                },
                 views: [ "month", "week", "work_week", "day", "agenda" ],
                 popup: this.props.popup,
                 selectable: this.props.selectable,
@@ -84,6 +96,36 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         if (this.state.events !== newProps.events) {
             this.setState({ events: newProps.events });
         }
+    }
+
+    private dayFormat = (date: Date) => {
+        const dayFormat = this.props.dayFormat || "EEEE dd/MM";
+
+        return mx.parser.formatValue(date, "dateTime", { datePattern: dayFormat });
+    }
+
+    private weekdayFormat = (date: Date) => {
+        const weekdayFormat = this.props.weekdayFormat || "EEEE";
+
+        return mx.parser.formatValue(date, "dateTime", { datePattern: weekdayFormat });
+    }
+
+    private timeGutterFormat = (date: Date) => {
+        const timeGutterFormat = this.props.timeGutterFormat || "hh:mm a";
+
+        return mx.parser.formatValue(date, "dateTime", { datePattern: timeGutterFormat });
+    }
+
+    private monthHeaderFormat = (date: Date) => {
+        const monthHeaderFormat = this.props.monthHeaderFormat || "MMMM yyyy";
+
+        return mx.parser.formatValue(date, "dateTime", { datePattern: monthHeaderFormat });
+    }
+
+    private dayHeaderFormat = (date: Date) => {
+        const dayHeaderFormat = this.props.dayHeaderFormat || "EEE yyyy/MM/dd";
+
+        return mx.parser.formatValue(date, "dateTime", { datePattern: dayHeaderFormat });
     }
 
     private onEventDrop = (eventInfo: object) => {
