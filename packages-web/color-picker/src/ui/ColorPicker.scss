@@ -109,3 +109,15 @@
     bottom: 0px;
     left: 0px;
 }
+
+.modal-content.mx-window-content {
+    .widget-color-picker .widget-color-picker-popover {
+        position: fixed;
+    }
+}
+
+.modal-body.mx-window-body {
+    .widget-color-picker .widget-color-picker-popover {
+        position: fixed;
+    }
+}
