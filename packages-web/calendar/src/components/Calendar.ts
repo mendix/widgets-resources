@@ -68,6 +68,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         return createElement("div", { className: ("widget-calendar") },
             createElement(DragAndDropCalendar, {
                 events: this.props.events,
+                allDayAccessor: this.allDayAccessor,
                 eventPropGetter: (events: any) => {
                     return { style: { backgroundColor: events.color } };
                 },
@@ -85,6 +86,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
                 selectable: this.props.selectable,
                 step: 60,
                 showMultiDayTimes: true,
+                component: { Toolbar: this.getCustomToolbar },
                 onEventDrop:  this.onEventDrop,
                 onSelectEvent: this.onSelectEvent,
                 onSelectSlot: this.onSelectSlot
@@ -92,10 +94,22 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         );
     }
 
+    private getCustomToolbar = () => {
+        return createElement("div", { className: "rbc-toolbar" },
+            createElement("span", { className: "rbc-btn-group" },
+                createElement("button", {}),
+                createElement("button")),
+            createElement("span", { className: "rbc-toolbar-label" }));
+    }
+
     componentWillReceiveProps(newProps: CalendarProps) {
         if (this.state.events !== newProps.events) {
             this.setState({ events: newProps.events });
         }
+    }
+
+    private allDayAccessor = (event: any) => {
+        return event.allDay;
     }
 
     private dayFormat = (date: Date) => {
