@@ -44,7 +44,6 @@ export function getVisibleProperties(valueMap: CalendarContainerProps, visibilit
 
     visibilityMap.eventMicroflow = valueMap.onClickEvent === "callMicroflow";
     visibilityMap.eventNanoflow = valueMap.onClickEvent === "callNanoflow";
-    visibilityMap.eventPage = valueMap.onClickEvent === "showPage";
 
     return visibilityMap;
 }

@@ -70,11 +70,6 @@
                 <attributeType name="String" />
             </attributeTypes>
         </property>
-        <property key="limitEvents" type="boolean" defaultValue="false">
-            <caption>Limit events</caption>
-            <category>Data source</category>
-            <description>Boolean attribute to define whether the amount of events for one single day should be limited</description>
-        </property>
         <property key="firstDayOfTheWeek" type="integer" defaultValue="0">
             <caption>First day of the week</caption>
             <category>Data source</category>
@@ -158,24 +153,8 @@
             <description/>
             <enumerationValues>
                 <enumerationValue key="doNothing">Do nothing</enumerationValue>
-                <enumerationValue key="showPage">Show a page</enumerationValue>
                 <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
                 <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="eventPage" type="form" required="false">
-            <caption>Page</caption>
-            <category>Events</category>
-            <description>The page that will be opened on clicking an event</description>
-        </property>
-        <property key="openPageAs" type="enumeration" defaultValue="content">
-            <caption>Open page as</caption>
-            <category>Events</category>
-            <description/>
-            <enumerationValues>
-                <enumerationValue key="content">Full page</enumerationValue>
-                <enumerationValue key="popup">Popup</enumerationValue>
-                <enumerationValue key="modal">Blocking popup</enumerationValue>
             </enumerationValues>
         </property>
         <property key="eventMicroflow" type="microflow" required="false">
@@ -196,15 +175,9 @@
             <description/>
             <enumerationValues>
                 <enumerationValue key="doNothing">Do nothing</enumerationValue>
-                <enumerationValue key="showPage">Show a page</enumerationValue>
                 <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
                 <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
             </enumerationValues>
-        </property>
-        <property key="slotPage" type="form" required="false">
-            <caption>New event page</caption>
-            <category>Events</category>
-            <description>The page that will be opened on clicking a slot</description>
         </property>
         <property key="slotMicroflow" type="microflow" required="false">
             <caption>New event microflow</caption>
@@ -224,15 +197,9 @@
             <description/>
             <enumerationValues>
                 <enumerationValue key="doNothing">Do nothing</enumerationValue>
-                <enumerationValue key="showPage">Show a page</enumerationValue>
                 <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
                 <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
             </enumerationValues>
-        </property>
-        <property key="onDropPage" type="form" required="false">
-            <caption>On drop page</caption>
-            <category>Events</category>
-            <description>The page that will be opened on droping an event</description>
         </property>
         <property key="onDropMicroflow" type="microflow" required="false">
             <caption>On drop microflow</caption>
