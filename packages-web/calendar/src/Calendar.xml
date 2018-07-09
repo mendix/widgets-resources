@@ -9,8 +9,10 @@
             <category>Data source</category>
             <description/>
             <enumerationValues>
+                <enumerationValue key="context">Context</enumerationValue>
                 <enumerationValue key="XPath">Database</enumerationValue>
                 <enumerationValue key="microflow">Microflow</enumerationValue>
+                <enumerationValue key="nanoflow">Nanoflow</enumerationValue>
             </enumerationValues>
         </property>
         <property key="eventEntity" type="entity" required="false">
@@ -27,7 +29,13 @@
 			<caption>Data source microflow</caption>
 			<category>Data source</category>
 			<description></description>
-			<returnType type="Void" />
+			<returnType type="Void"/>
+		</property>
+		<property key="dataSourceNanoflow" type="nanoflow" required="false">
+			<caption>Data source nanoflow</caption>
+			<category>Data source</category>
+			<description></description>
+			<returnType type="Void"/>
 		</property>
         <property key="titleAttribute" type="attribute" entityProperty="eventEntity">
             <caption>Title</caption>
@@ -70,22 +78,50 @@
                 <attributeType name="String" />
             </attributeTypes>
         </property>
-        <property key="firstDayOfTheWeek" type="integer" defaultValue="0">
-            <caption>First day of the week</caption>
-            <category>Data source</category>
-            <description>An integer to specify the first day of the week, 0 = Sunday, 1 = Monday etc.</description>
+        <property key="views" type="enumeration" defaultValue="standard">
+            <caption>View</caption>
+            <category>Appearance</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="standard">Standard</enumerationValue>
+                <enumerationValue key="custom">Custom</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="objectList" type="object" isList="true" required="false">
+            <caption>Custom toolbar</caption>
+            <category>Appearance</category>
+            <description/>
+            <properties>
+                <property key="customView" type="enumeration" defaultValue="month">
+                    <caption>Views</caption>
+                    <category>Appearance</category>
+                    <description/>
+                        <enumerationValues>
+                        <enumerationValue key="month">Month</enumerationValue>
+                        <enumerationValue key="week">Week</enumerationValue>
+                        <enumerationValue key="work_week">Work week</enumerationValue>
+                        <enumerationValue key="day">Day</enumerationValue>
+                        <enumerationValue key="agenda">Agenda</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="customCaption" type="translatableString" required="false">
+                    <caption>Custom caption</caption>
+                    <category>Appearance</category>
+                    <description/>
+                </property>
+            </properties>
         </property>
         <property key="defaultView" type="enumeration" defaultValue="month">
             <caption>Default view</caption>
             <category>Appearance</category>
             <description/>
-            <enumerationValues>
-                <enumerationValue key="month">Month</enumerationValue>
-                <enumerationValue key="week">Week</enumerationValue>
-                <enumerationValue key="work_week">Work week</enumerationValue>
-                <enumerationValue key="day">Day</enumerationValue>
-                <enumerationValue key="agenda">Agenda</enumerationValue>
-            </enumerationValues>
+                <enumerationValues>
+                    <enumerationValue key="month">Month</enumerationValue>
+                    <enumerationValue key="week">Week</enumerationValue>
+                    <enumerationValue key="work_week">Work week</enumerationValue>
+                    <enumerationValue key="day">Day</enumerationValue>
+                    <enumerationValue key="agenda">Agenda</enumerationValue>
+                </enumerationValues>
         </property>
         <property key="startPositionAttribute" type="attribute" required="false">
             <caption>Start position attribute</caption>
@@ -95,34 +131,36 @@
                 <attributeType name="DateTime"/>
             </attributeTypes>
         </property>
-        <property key="firstDayAttribute" type="attribute" required="false">
-            <caption>First day of week</caption>
-            <category>Appearance</category>
-            <description>An integer attribute to specify the first day of the week, 0 = Sunday, 1 = Monday etc</description>
-            <attributeTypes>
-                <attributeType name="Integer" />
-            </attributeTypes>
-        </property>
         <property key="popup" type="boolean" defaultValue="true">
-            <caption>Popup</caption>
+            <caption>Show truncated events</caption>
             <category>Appearance</category>
             <description>Show truncated events in an overlay when you click the "+x more" link</description>
         </property>
         <property key="selectable" type="boolean" defaultValue="true">
-            <caption>Selectable</caption>
+            <caption>Event editable</caption>
+            <category>Appearance</category>
+            <description/>
+        </property>
+        <property key="create" type="boolean" defaultValue="true">
+            <caption>Create</caption>
+            <category>Appearance</category>
+            <description/>
+        </property>
+        <property key="change" type="boolean" defaultValue="true">
+            <caption>change ???</caption> <!-- handles on the side -->
             <category>Appearance</category>
             <description/>
         </property>
         <property key="editable" type="enumeration" defaultValue="default">
             <caption>Editable</caption>
             <category>Appearance</category>
-            <description>The default option is based on the page settings and the attribute's write access</description>
+            <description/>
             <enumerationValues>
                 <enumerationValue key="default">Default</enumerationValue>
                 <enumerationValue key="never">Never</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="dayFormat" type="translatableString" required="false">
+        <!-- <property key="dayFormat" type="translatableString" required="false">
             <caption>Custom day format</caption>
             <category>Appearance</category>
             <description/>
@@ -146,7 +184,7 @@
             <caption>Custom day header format</caption>
             <category>Appearance</category>
             <description/>
-        </property>
+        </property> -->
         <property key="onClickEvent" type="enumeration" defaultValue="doNothing">
             <caption>On click event</caption>
             <category>Events</category>
@@ -170,7 +208,7 @@
             <returnType type="Void" />
         </property>
         <property key="onClickSlotEvent" type="enumeration" defaultValue="doNothing">
-            <caption>On click slot</caption>
+            <caption>On create</caption>
             <category>Events</category>
             <description/>
             <enumerationValues>
@@ -180,7 +218,7 @@
             </enumerationValues>
         </property>
         <property key="slotMicroflow" type="microflow" required="false">
-            <caption>New event microflow</caption>
+            <caption>on create microflow</caption>
             <category>Events</category>
             <description>The microflow that will be executed on clicking a slot</description>
             <returnType type="Void" />
@@ -192,7 +230,7 @@
             <returnType type="Void" />
         </property>
         <property key="onDropEvent" type="enumeration" defaultValue="doNothing">
-            <caption>On drop event</caption>
+            <caption>On change event</caption>
             <category>Events</category>
             <description/>
             <enumerationValues>
@@ -202,13 +240,13 @@
             </enumerationValues>
         </property>
         <property key="onDropMicroflow" type="microflow" required="false">
-            <caption>On drop microflow</caption>
+            <caption>On change microflow</caption>
             <category>Events</category>
             <description>The microflow that will be executed on droping an event</description>
             <returnType type="Void" />
         </property>
         <property key="onDropNanoflow" type="nanoflow" required="false">
-            <caption>On drop nanoflow</caption>
+            <caption>On change nanoflow</caption>
             <category>Events</category>
             <description>The nanoflow that will be executed on droping an event</description>
             <returnType type="Void" />

@@ -63,7 +63,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         if (this.props.loading) {
             return createElement(CalendarLoading);
         }
-        globalize().cultures.default.calendars.standard.firstDay = this.props.firstDay;
+        globalize().cultures.default.calendars.standard.firstDay = window.mx.session.sessionData.locale.firstDayOfWeek;
 
         return createElement("div", { className: ("widget-calendar") },
             createElement(DragAndDropCalendar, {
@@ -74,32 +74,33 @@ class Calendar extends Component<CalendarProps, CalendarState> {
                 },
                 defaultDate: this.props.startPosition,
                 defaultView: this.props.defaultView,
-                formats: {
-                    dayFormat: this.dayFormat,
-                    weekdayFormat: this.weekdayFormat,
-                    timeGutterFormat: this.timeGutterFormat,
-                    monthHeaderFormat: this.monthHeaderFormat,
-                    dayHeaderFormat: this.dayHeaderFormat
+                // formats: {
+                //     dayFormat: this.dayFormat,
+                //     weekdayFormat: this.weekdayFormat,
+                //     timeGutterFormat: this.timeGutterFormat,
+                //     monthHeaderFormat: this.monthHeaderFormat,
+                //     dayHeaderFormat: this.dayHeaderFormat
+                // },
+                messages: {
+                    today: "lelo",
+                    previous: "emabega",
+                    next: "mumaso",
+                    month: "Omwezi",
+                    week: "Wiki",
+                    work_week: "Enaku zokukola",
+                    day: "olunaku",
+                    agenda: "Pulogram"
                 },
                 views: [ "month", "week", "work_week", "day", "agenda" ],
                 popup: this.props.popup,
                 selectable: this.props.selectable,
                 step: 60,
                 showMultiDayTimes: true,
-                component: { Toolbar: this.getCustomToolbar },
-                onEventDrop:  this.onEventDrop,
+                onEventDrop: this.onEventDrop,
                 onSelectEvent: this.onSelectEvent,
                 onSelectSlot: this.onSelectSlot
             })
         );
-    }
-
-    private getCustomToolbar = () => {
-        return createElement("div", { className: "rbc-toolbar" },
-            createElement("span", { className: "rbc-btn-group" },
-                createElement("button", {}),
-                createElement("button")),
-            createElement("span", { className: "rbc-toolbar-label" }));
     }
 
     componentWillReceiveProps(newProps: CalendarProps) {
@@ -112,38 +113,40 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         return event.allDay;
     }
 
-    private dayFormat = (date: Date) => {
-        const dayFormat = this.props.dayFormat || "EEEE dd/MM";
+    // private dayFormat = (date: Date) => {
+    //     const dayFormat = this.props.dayFormat || "EEEE dd/MM";
 
-        return mx.parser.formatValue(date, "dateTime", { datePattern: dayFormat });
-    }
+    //     return mx.parser.formatValue(date, "dateTime", { datePattern: dayFormat });
+    // }
 
-    private weekdayFormat = (date: Date) => {
-        const weekdayFormat = this.props.weekdayFormat || "EEEE";
+    // private weekdayFormat = (date: Date) => {
+    //     const weekdayFormat = this.props.weekdayFormat || "EEEE";
 
-        return mx.parser.formatValue(date, "dateTime", { datePattern: weekdayFormat });
-    }
+    //     return mx.parser.formatValue(date, "dateTime", { datePattern: weekdayFormat });
+    // }
 
-    private timeGutterFormat = (date: Date) => {
-        const timeGutterFormat = this.props.timeGutterFormat || "hh:mm a";
+    // private timeGutterFormat = (date: Date) => {
+    //     const timeGutterFormat = this.props.timeGutterFormat || "hh:mm a";
 
-        return mx.parser.formatValue(date, "dateTime", { datePattern: timeGutterFormat });
-    }
+    //     return mx.parser.formatValue(date, "dateTime", { datePattern: timeGutterFormat });
+    // }
 
-    private monthHeaderFormat = (date: Date) => {
-        const monthHeaderFormat = this.props.monthHeaderFormat || "MMMM yyyy";
+    // private monthHeaderFormat = (date: Date) => {
+    //     const monthHeaderFormat = this.props.monthHeaderFormat || "MMMM yyyy";
 
-        return mx.parser.formatValue(date, "dateTime", { datePattern: monthHeaderFormat });
-    }
+    //     return mx.parser.formatValue(date, "dateTime", { datePattern: monthHeaderFormat });
+    // }
 
-    private dayHeaderFormat = (date: Date) => {
-        const dayHeaderFormat = this.props.dayHeaderFormat || "EEE yyyy/MM/dd";
+    // private dayHeaderFormat = (date: Date) => {
+    //     const dayHeaderFormat = this.props.dayHeaderFormat || "EEE yyyy/MM/dd";
 
-        return mx.parser.formatValue(date, "dateTime", { datePattern: dayHeaderFormat });
-    }
+    //     return mx.parser.formatValue(date, "dateTime", { datePattern: dayHeaderFormat });
+    // }
 
-    private onEventDrop = (eventInfo: object) => {
+    private onEventDrop = (eventInfo: any) => {
+        if (eventInfo.start !== eventInfo.event.start) {
         if (this.props.onEventDropAction) { this.props.onEventDropAction(eventInfo); }
+    }
     }
 
     private onSelectEvent = (eventInfo: object) => {
