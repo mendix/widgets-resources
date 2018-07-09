@@ -20,9 +20,8 @@ export interface CalendarContainerProps extends WrapperProps {
     dataSource: DataSource;
     eventEntity: string;
     entityConstraint: string;
-    firstDayAttribute: string;
-    firstDayOfTheWeek: number;
     dataSourceMicroflow: string;
+    dataSourceNanoflow: Nanoflow;
     popup: boolean;
     selectable: boolean;
     editable: "default" | "never";
@@ -36,14 +35,14 @@ export interface CalendarContainerProps extends WrapperProps {
     onDropMicroflow: string;
     onDropNanoflow: Nanoflow;
     refreshInterval: number;
-    dayFormat: string;
-    weekdayFormat: string;
-    timeGutterFormat: string;
-    monthHeaderFormat: string;
-    dayHeaderFormat: string;
+    // dayFormat: string;
+    // weekdayFormat: string;
+    // timeGutterFormat: string;
+    // monthHeaderFormat: string;
+    // dayHeaderFormat: string;
 }
 
-type DataSource = "XPath" | "microflow";
+type DataSource = "context" | "XPath" | "microflow" | "nanoflow";
 type OnClickEventOptions = "doNothing" | "callMicroflow" | "callNanoflow";
 
 interface CalendarContainerState {
@@ -51,7 +50,6 @@ interface CalendarContainerState {
     events: CalendarEvent[];
     eventColor: string;
     startPosition: Date;
-    firstDayAttribute: number;
     loading: boolean;
 }
 
@@ -69,8 +67,7 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         events: [],
         eventColor: "",
         loading: true,
-        startPosition: new Date(),
-        firstDayAttribute: 0
+        startPosition: new Date()
     };
 
     render() {
@@ -85,12 +82,11 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
                 alertMessage,
                 events: this.state.events,
                 defaultView: this.props.defaultView,
-                firstDay: this.state.firstDayAttribute || this.props.firstDayOfTheWeek,
-                dayFormat: this.props.dayFormat,
-                weekdayFormat: this.props.weekdayFormat,
-                timeGutterFormat: this.props.timeGutterFormat,
-                monthHeaderFormat: this.props.monthHeaderFormat,
-                dayHeaderFormat: this.props.dayHeaderFormat,
+                // dayFormat: this.props.dayFormat,
+                // weekdayFormat: this.props.weekdayFormat,
+                // timeGutterFormat: this.props.timeGutterFormat,
+                // monthHeaderFormat: this.props.monthHeaderFormat,
+                // dayHeaderFormat: this.props.dayHeaderFormat,
                 loading: this.state.loading,
                 popup: this.props.popup,
                 startPosition: this.state.startPosition,
@@ -105,7 +101,6 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
     componentDidMount() {
         if (!this.state.alertMessage && this.props.mxObject) {
             this.fetchData(this.props.mxObject);
-            this.setFirstDay(this.props.mxObject);
             this.setStartPosition(this.props.mxObject);
         }
     }
@@ -118,7 +113,6 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         if (!this.state.loading) { this.setState({ loading: true }); }
         if (!this.state.alertMessage) {
             this.fetchData(nextProps.mxObject);
-            this.setFirstDay(nextProps.mxObject);
             this.setStartPosition(nextProps.mxObject);
             this.setRefreshInterval(nextProps.refreshInterval, nextProps.mxObject);
         }
@@ -141,12 +135,6 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         if (this.intervalID) { window.clearInterval(this.intervalID); }
     }
 
-    private setFirstDay = (mxObject: mendix.lib.MxObject) => {
-        if (mxObject) {
-            this.setState({ firstDayAttribute: mxObject.get(this.props.firstDayAttribute) as number });
-        }
-    }
-
     private setStartPosition = (mxObject: mendix.lib.MxObject) => {
         if (this.props.startPositionAttribute !== "" && mxObject) {
         this.setState({
@@ -159,7 +147,7 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
     }
 
     private isReadOnly(): boolean {
-        return !this.props.mxObject || this.props.editable === "never";
+        return !this.props.mxObject || this.props.editable === "never" || this.props.readOnly;
         // || this.props.readOnly ||
         //     this.props.mxObject.isReadonlyAttr(this.props.titleAttribute) ||
         //     this.props.mxObject.isReadonlyAttr(this.props.startAttribute) ||
@@ -168,10 +156,14 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
     }
 
     private fetchData = (mxObject: mendix.lib.MxObject) => {
-        if (this.props.dataSource === "XPath" && this.props.eventEntity && mxObject) {
+        if (this.props.dataSource === "context" && mxObject) {
+            this.fetchEventsByContext(mxObject);
+        } else if (this.props.dataSource === "XPath" && this.props.eventEntity && mxObject) {
             this.fetchEventsByXPath(mxObject.getGuid());
         } else if (this.props.dataSource === "microflow" && this.props.dataSourceMicroflow) {
             this.fetchEventsByMicroflow(mxObject);
+        } else if (this.props.dataSource === "nanoflow" && this.props.dataSourceNanoflow) {
+            this.fetchEventsByNanoflow(mxObject);
         }
     }
 
@@ -202,11 +194,12 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
                 attr: this.props.startPositionAttribute,
                 callback: () => this.setStartPosition(mxObject)
             }));
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                guid: mxObject.getGuid(),
-                attr: this.props.firstDayAttribute,
-                callback: () => this.setFirstDay(mxObject)
-            }));
+        }
+    }
+
+    private fetchEventsByContext(mxObject: mendix.lib.MxObject) {
+        if (mxObject) {
+            this.setEventsFromMxObjects([ mxObject ]);
         }
     }
 
@@ -245,6 +238,21 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
                 callback: this.setEventsFromMxObjects,
                 error: error => window.mx.ui.error(
                     `Error while executing microflow: ${this.props.dataSourceMicroflow}: ${error.message}`
+                )
+            });
+        }
+    }
+
+    private fetchEventsByNanoflow(mxObject: mendix.lib.MxObject) {
+        const context = new mendix.lib.MxContext();
+        if (mxObject && this.props.dataSourceNanoflow.nanoflow) {
+            window.mx.data.callNanoflow({
+                nanoflow: this.props.dataSourceNanoflow,
+                origin: this.props.mxform,
+                context,
+                callback: this.setEventsFromMxObjects,
+                error: error => window.mx.ui.error(
+                    `Error while executing nanoflow: ${this.props.dataSourceNanoflow}: ${error.message}`
                 )
             });
         }
@@ -377,7 +385,6 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
 
     public static validateProps(props: CalendarContainerProps): string {
         let errorMessage = "";
-        // const firstDayAttribute = mxObject.get(props.firstDayAttribute);
         if (props.onClickEvent === "callMicroflow" && !props.eventMicroflow) {
             errorMessage = "On click event is set to 'Call a microflow' but no microflow is selected";
         } else if (props.onClickSlotEvent === "callMicroflow" && !props.slotMicroflow) {
@@ -394,12 +401,6 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         if (errorMessage) {
             errorMessage = `Error in calendar configuration: ${errorMessage}`;
         }
-        if (props.firstDayOfTheWeek > 6) {
-            errorMessage = "Invalid first day of the week value";
-        }
-        // if (firstDayAttribute > 6) {
-        //     errorMessage = "Invalid first day of the week value";
-        // }
 
         return errorMessage;
     }

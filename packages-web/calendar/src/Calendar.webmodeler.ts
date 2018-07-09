@@ -11,10 +11,8 @@ type VisibilityMap = {
 // tslint:disable-next-line class-name
 export class preview extends Component<CalendarContainerProps, {}> {
     render() {
-        return createElement("div", {},
-            createElement(Calendar, this.transformProps(this.props))
-        );
-    }
+        return createElement(Calendar, this.transformProps(this.props));
+        }
 
     private transformProps(props: CalendarContainerProps): CalendarProps {
         const eventData = [ {
@@ -41,7 +39,6 @@ export class preview extends Component<CalendarContainerProps, {}> {
 export function getVisibleProperties(valueMap: CalendarContainerProps, visibilityMap: VisibilityMap) {
     visibilityMap.dataSourceMicroflow = valueMap.dataSource === "microflow";
     visibilityMap.entityConstraint = valueMap.dataSource === "XPath";
-
     visibilityMap.eventMicroflow = valueMap.onClickEvent === "callMicroflow";
     visibilityMap.eventNanoflow = valueMap.onClickEvent === "callNanoflow";
 
