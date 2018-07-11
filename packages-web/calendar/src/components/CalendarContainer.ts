@@ -15,6 +15,11 @@ export interface CalendarContainerProps extends WrapperProps {
     endAttribute: string;
     allDayAttribute: string;
     eventColor: string;
+    titleAttributeContext: string;
+    startAttributeContext: string;
+    endAttributeContext: string;
+    allDayAttributeContext: string;
+    eventColorContext: string;
     defaultView: View;
     startPositionAttribute: string;
     dataSource: DataSource;
@@ -35,6 +40,7 @@ export interface CalendarContainerProps extends WrapperProps {
     onDropMicroflow: string;
     onDropNanoflow: Nanoflow;
     refreshInterval: number;
+    customViews: { customView: string, customCaption: string }[];
     // dayFormat: string;
     // weekdayFormat: string;
     // timeGutterFormat: string;
@@ -47,11 +53,20 @@ type OnClickEventOptions = "doNothing" | "callMicroflow" | "callNanoflow";
 
 interface CalendarContainerState {
     alertMessage?: ReactChild;
-    events: CalendarEvent[];
+    // messages: Messages;
+    events: Array<CalendarEvent>;
     eventColor: string;
     startPosition: Date;
     loading: boolean;
 }
+
+// interface Messages {
+//     month: string;
+//     week: string;
+//     work_week: string;
+//     day: string;
+//     agenda: string;
+// }
 
 interface Nanoflow {
     nanoflow: object[];
@@ -67,6 +82,13 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         events: [],
         eventColor: "",
         loading: true,
+        // messages: {
+        //     month: "month",
+        //     week: "week",
+        //     work_week: "work week",
+        //     day: "day",
+        //     agenda: "agenda"
+        // },
         startPosition: new Date()
     };
 
@@ -80,7 +102,9 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
             },
             createElement(Calendar, {
                 alertMessage,
+                // messages: this.state.messages,
                 events: this.state.events,
+                customViews: this.props.customViews,
                 defaultView: this.props.defaultView,
                 // dayFormat: this.props.dayFormat,
                 // weekdayFormat: this.props.weekdayFormat,
@@ -217,12 +241,22 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
     private setEventsFromMxObjects = (mxObjects: mendix.lib.MxObject[]) => {
         const events = mxObjects.map(mxObject => {
             return {
-                title: mxObject.get(this.props.titleAttribute) as string,
-                allDay: mxObject.get(this.props.allDayAttribute) as boolean,
-                start: new Date(mxObject.get(this.props.startAttribute) as number),
-                end: new Date(mxObject.get(this.props.endAttribute) as number),
-                guid: mxObject.getGuid(),
-                color: mxObject.get(this.props.eventColor) as string
+                title: this.props.dataSource === "context"
+                    ? mxObject.get(this.props.titleAttributeContext) as string
+                    : mxObject.get(this.props.titleAttribute) as string,
+                allDay: this.props.dataSource === "context"
+                    ? mxObject.get(this.props.allDayAttributeContext) as boolean
+                    : mxObject.get(this.props.allDayAttribute) as boolean,
+                start: this.props.dataSource === "context"
+                    ? new Date(mxObject.get(this.props.startAttributeContext) as number)
+                    : new Date(mxObject.get(this.props.startAttribute) as number),
+                end: this.props.dataSource === "context"
+                    ? new Date(mxObject.get(this.props.endAttributeContext) as number)
+                    : new Date(mxObject.get(this.props.endAttribute) as number),
+                color: this.props.dataSource === "context"
+                    ? mxObject.get(this.props.eventColorContext) as string
+                    : mxObject.get(this.props.eventColor) as string,
+                guid: mxObject.getGuid()
             };
         });
         this.setState({ events });
