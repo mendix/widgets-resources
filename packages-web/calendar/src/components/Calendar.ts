@@ -20,6 +20,8 @@ export interface CalendarProps {
     alertMessage?: ReactChild;
     events?: CalendarEvent[];
     color: string;
+    customCaption?: string;
+    customViews?: { customView: string, customCaption: string }[];
     loading?: boolean;
     showMultiDayTimes?: boolean;
     defaultView: View;
@@ -82,10 +84,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
                 //     dayHeaderFormat: this.dayHeaderFormat
                 // },
                 messages: {
-                    today: "lelo",
-                    previous: "emabega",
-                    next: "mumaso",
-                    month: "Omwezi",
+                    month: "month",
                     week: "Wiki",
                     work_week: "Enaku zokukola",
                     day: "olunaku",

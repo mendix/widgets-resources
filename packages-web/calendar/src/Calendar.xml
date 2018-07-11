@@ -4,7 +4,7 @@
     <description>Display and manage calendar events</description>
     <icon/>
     <properties>
-        <property key="dataSource" type="enumeration" defaultValue="XPath">
+        <property key="dataSource" type="enumeration" defaultValue="context">
             <caption>Data source</caption>
             <category>Data source</category>
             <description/>
@@ -37,7 +37,7 @@
 			<description></description>
 			<returnType type="Void"/>
 		</property>
-        <property key="titleAttribute" type="attribute" entityProperty="eventEntity">
+        <property key="titleAttribute" type="attribute" entityProperty="eventEntity" required="false">
             <caption>Title</caption>
             <category>Data source</category>
             <description/>
@@ -78,6 +78,47 @@
                 <attributeType name="String" />
             </attributeTypes>
         </property>
+        <property key="titleAttributeContext" type="attribute" required="false">
+            <caption>Context title</caption>
+            <category>Context</category>
+            <description/>
+            <attributeTypes>
+                <attributeType name="String"/>
+            </attributeTypes>
+        </property>
+        <property key="allDayAttributeContext" type="attribute" required="false">
+            <caption>Context all day</caption>
+            <category>Context</category>
+            <description/>
+            <attributeTypes>
+                <attributeType name="Boolean"/>
+            </attributeTypes>
+        </property>
+        <property key="startAttributeContext" type="attribute" required="false">
+            <caption>Context start</caption>
+            <category>Context</category>
+            <description/>
+            <attributeTypes>
+                <attributeType name="DateTime"/>
+            </attributeTypes>
+        </property>
+        <property key="endAttributeContext" type="attribute" required="false">
+            <caption>Context end</caption>
+            <category>Context</category>
+            <description/>
+            <attributeTypes>
+                <attributeType name="DateTime"/>
+            </attributeTypes>
+        </property>
+        <property key="eventColorContext" type="attribute" required="false">
+            <caption>Context event color</caption>
+            <category>Context</category>
+            <description/>
+            <attributeTypes>
+                <attributeType name="Enum" />
+                <attributeType name="String" />
+            </attributeTypes>
+        </property>
         <property key="views" type="enumeration" defaultValue="standard">
             <caption>View</caption>
             <category>Appearance</category>
@@ -87,7 +128,7 @@
                 <enumerationValue key="custom">Custom</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="objectList" type="object" isList="true" required="false">
+        <property key="customViews" type="object" isList="true" required="false">
             <caption>Custom toolbar</caption>
             <category>Appearance</category>
             <description/>
