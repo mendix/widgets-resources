@@ -1,6 +1,6 @@
 import { Component, ReactChild, createElement } from "react";
 
-import { Calendar, CalendarEvent, View } from "./Calendar";
+import { Calendar, CalendarEvent, CustomViews, View, ViewOptions } from "./Calendar";
 
 interface WrapperProps {
     mxform: mxui.lib.form._FormBase;
@@ -39,34 +39,29 @@ export interface CalendarContainerProps extends WrapperProps {
     onDropEvent: OnClickEventOptions;
     onDropMicroflow: string;
     onDropNanoflow: Nanoflow;
+    onResizeEvent: OnClickEventOptions;
+    onResizeMicroflow: string;
+    onResizeNanoflow: Nanoflow;
     refreshInterval: number;
-    customViews: { customView: string, customCaption: string }[];
-    // dayFormat: string;
-    // weekdayFormat: string;
-    // timeGutterFormat: string;
-    // monthHeaderFormat: string;
-    // dayHeaderFormat: string;
+    resizable: string;
+    customViews: CustomViews[];
+    dayFormat: string;
+    weekdayFormat: string;
+    timeGutterFormat: string;
+    monthHeaderFormat: string;
+    dayHeaderFormat: string;
 }
 
 type DataSource = "context" | "XPath" | "microflow" | "nanoflow";
 type OnClickEventOptions = "doNothing" | "callMicroflow" | "callNanoflow";
 
 interface CalendarContainerState {
-    alertMessage?: ReactChild;
-    // messages: Messages;
-    events: Array<CalendarEvent>;
+    alertMessage: ReactChild;
+    events: CalendarEvent[];
     eventColor: string;
     startPosition: Date;
     loading: boolean;
 }
-
-// interface Messages {
-//     month: string;
-//     week: string;
-//     work_week: string;
-//     day: string;
-//     agenda: string;
-// }
 
 interface Nanoflow {
     nanoflow: object[];
@@ -82,13 +77,6 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         events: [],
         eventColor: "",
         loading: true,
-        // messages: {
-        //     month: "month",
-        //     week: "week",
-        //     work_week: "work week",
-        //     day: "day",
-        //     agenda: "agenda"
-        // },
         startPosition: new Date()
     };
 
@@ -102,20 +90,21 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
             },
             createElement(Calendar, {
                 alertMessage,
-                // messages: this.state.messages,
+                messages: this.setCustomViews(),
                 events: this.state.events,
-                customViews: this.props.customViews,
                 defaultView: this.props.defaultView,
-                // dayFormat: this.props.dayFormat,
-                // weekdayFormat: this.props.weekdayFormat,
-                // timeGutterFormat: this.props.timeGutterFormat,
-                // monthHeaderFormat: this.props.monthHeaderFormat,
-                // dayHeaderFormat: this.props.dayHeaderFormat,
+                dayFormat: this.props.dayFormat,
+                weekdayFormat: this.props.weekdayFormat,
+                timeGutterFormat: this.props.timeGutterFormat,
+                monthHeaderFormat: this.props.monthHeaderFormat,
+                dayHeaderFormat: this.props.dayHeaderFormat,
                 loading: this.state.loading,
                 popup: this.props.popup,
+                resizable: this.props.resizable,
                 startPosition: this.state.startPosition,
                 selectable: !readOnly ? this.props.selectable : false,
                 onSelectEventAction: !readOnly ? this.onClickEvent : undefined,
+                onEventResizeAction: !readOnly ? this.onResizeEvent : undefined,
                 onSelectSlotAction: !readOnly ? this.onClickSlot : undefined,
                 onEventDropAction: !readOnly ? this.onDropEvent : undefined
             })
@@ -172,11 +161,6 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
 
     private isReadOnly(): boolean {
         return !this.props.mxObject || this.props.editable === "never" || this.props.readOnly;
-        // || this.props.readOnly ||
-        //     this.props.mxObject.isReadonlyAttr(this.props.titleAttribute) ||
-        //     this.props.mxObject.isReadonlyAttr(this.props.startAttribute) ||
-        //     this.props.mxObject.isReadonlyAttr(this.props.endAttribute) ||
-        //     this.props.mxObject.isReadonlyAttr(this.props.eventColor);
     }
 
     private fetchData = (mxObject: mendix.lib.MxObject) => {
@@ -236,6 +220,13 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
             xpath: XPath,
             callback: this.setEventsFromMxObjects
         });
+    }
+
+    private setCustomViews = () => {
+        const viewOptions: ViewOptions = {};
+        this.props.customViews.forEach(customView => viewOptions[customView.customView] = customView.customCaption);
+
+        return viewOptions;
     }
 
     private setEventsFromMxObjects = (mxObjects: mendix.lib.MxObject[]) => {
@@ -318,6 +309,60 @@ export default class CalendarContainer extends Component<CalendarContainerProps,
         } else if (onClickEvent === "callNanoflow" && eventNanoflow.nanoflow) {
             window.mx.data.callNanoflow({
                 nanoflow: eventNanoflow,
+                origin: mxform,
+                context,
+                error: error => window.mx.ui.error(
+                    `An error occurred while executing the nanoflow: ${error.message}`
+                )
+            });
+        }
+    }
+
+    private onResizeEvent = (eventInfo: any) => {
+        const { events } = this.state;
+        const eventPosition = events.indexOf(eventInfo.event);
+        const updatedEvent: CalendarEvent = {
+            title: eventInfo.event.title,
+            allDay: eventInfo.event.allDay,
+            start: eventInfo.start,
+            end: eventInfo.end,
+            guid: eventInfo.event.guid,
+            color: eventInfo.event.color
+        };
+        const nextEvents = [ ...events ];
+
+        nextEvents.splice(eventPosition, 1, updatedEvent);
+        this.setState({ events: nextEvents });
+
+        mx.data.get({
+            guid: eventInfo.event.guid,
+            callback: (object) => {
+                object.set(this.props.titleAttribute, eventInfo.event.title);
+                object.set(this.props.eventColor, eventInfo.event.color);
+                object.set(this.props.startAttribute, eventInfo.start);
+                object.set(this.props.endAttribute, eventInfo.end);
+                this.excecuteonResizeAction(object);
+            },
+            error: error => window.mx.ui.error(`Error while resizing an event: ${error.message}`)
+        });
+    }
+
+    private excecuteonResizeAction = (mxObject: mendix.lib.MxObject) => {
+        if (!mxObject || !mxObject.getGuid()) { return; }
+        const { onResizeEvent, onResizeMicroflow, mxform, onResizeNanoflow } = this.props;
+        const context = new mendix.lib.MxContext();
+        context.setContext(mxObject.getEntity(), mxObject.getGuid());
+        if (onResizeEvent === "callMicroflow" && onResizeMicroflow && mxObject.getGuid()) {
+            window.mx.ui.action(onResizeMicroflow, {
+                context,
+                origin: mxform,
+                error: error => window.mx.ui.error(
+                    `Error while executing microflow: ${onResizeMicroflow}: ${error.message}`
+                )
+            });
+        } else if (onResizeEvent === "callNanoflow" && onResizeNanoflow.nanoflow) {
+            window.mx.data.callNanoflow({
+                nanoflow: onResizeNanoflow,
                 origin: mxform,
                 context,
                 error: error => window.mx.ui.error(

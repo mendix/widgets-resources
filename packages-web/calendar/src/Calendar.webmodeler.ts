@@ -31,6 +31,7 @@ export class preview extends Component<CalendarContainerProps, {}> {
             defaultView: props.defaultView,
             startPosition: new Date(),
             popup: props.popup,
+            resizable: true,
             selectable: props.selectable
         };
     }
