@@ -1,4 +1,4 @@
-import { Component, ReactChild, createElement } from "react";
+import { CSSProperties, Component, ReactChild, createElement } from "react";
 
 import { Alert } from "./Alert";
 import * as BigCalendar from "react-big-calendar";
@@ -20,27 +20,34 @@ export interface CalendarProps {
     alertMessage: ReactChild;
     events: CalendarEvent[];
     color: string;
+    height: number;
+    heightUnit: HeightUnitType;
     loading?: boolean;
     showMultiDayTimes?: boolean;
     defaultView: View;
     startPosition: Date;
     firstDay?: number;
-    messages?: CustomViews[];
+    messages: CustomViews[];
     popup: boolean;
-    resizable: boolean;
     selectable: boolean;
     dayFormat?: string;
     weekdayFormat?: string;
     timeGutterFormat?: string;
     monthHeaderFormat?: string;
     dayHeaderFormat?: string;
+    style: object;
+    views?: string;
+    width: number;
+    widthUnit: WidthUnitType;
     onSelectEventAction?: (eventInfo: object) => void;
     onEventResizeAction?: (eventInfo: any) => void;
     onSelectSlotAction?: (slotInfo: object) => void;
     onEventDropAction?: (eventInfo: object) => void;
 }
 
+export type HeightUnitType = "percentageOfWidth" | "percentageOfParent" | "pixels";
 export type View = "month" | "week" | "work_week" | "day" | "agenda";
+export type WidthUnitType = "percentage" | "pixels";
 
 export interface CalendarEvent {
     title: string;
@@ -56,13 +63,6 @@ export interface CustomViews {
     customView: View;
 }
 
-export interface ViewOptions {
-    month?: string;
-    week?: string;
-    work_week?: string;
-    day?: string;
-    agenda?: string;
-}
 interface CalendarState {
     events?: CalendarEvent[];
     color?: string;
@@ -71,6 +71,10 @@ interface CalendarState {
 class Calendar extends Component<CalendarProps, CalendarState> {
     state: CalendarState = { events: this.props.events };
 
+    componentWillMount() {
+        globalize().cultures.default.calendars.standard.firstDay = window.mx.session.sessionData.locale.firstDayOfWeek;
+    }
+
     render() {
         if (this.props.alertMessage) {
             return createElement(Alert, { className: "widget-calendar-alert" }, this.props.alertMessage);
@@ -78,9 +82,8 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         if (this.props.loading) {
             return createElement(CalendarLoading);
         }
-        globalize().cultures.default.calendars.standard.firstDay = window.mx.session.sessionData.locale.firstDayOfWeek;
 
-        return createElement("div", { className: ("widget-calendar") },
+        return createElement("div", { className: ("widget-calendar"), style: this.getDimensions() },
             createElement(DragAndDropCalendar, {
                 events: this.props.events,
                 allDayAccessor: this.allDayAccessor,
@@ -96,10 +99,11 @@ class Calendar extends Component<CalendarProps, CalendarState> {
                     monthHeaderFormat: this.monthHeaderFormat,
                     dayHeaderFormat: this.dayHeaderFormat
                 },
-                messages: this.props.messages,
-                views: [ "month", "week", "work_week", "day", "agenda" ],
+                messages: this.props.views === "custom" ? this.props.messages : "",
+                views: this.props.views === "standard"
+                    ? [ "day", "week", "month" ]
+                    : Object.keys(this.props.messages),
                 popup: this.props.popup,
-                resizable: true,
                 selectable: this.props.selectable,
                 step: 60,
                 showMultiDayTimes: true,
@@ -115,6 +119,23 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         if (this.state.events !== newProps.events) {
             this.setState({ events: newProps.events });
         }
+    }
+
+    private getDimensions = (): CSSProperties => {
+        const style: CSSProperties = {
+            width: this.props.widthUnit === "percentage" ? `${this.props.width}%` : `${this.props.width}px`
+        };
+        if (this.props.heightUnit === "percentageOfWidth") {
+            style.paddingBottom = this.props.widthUnit === "percentage"
+                ? `${this.props.height}%`
+                : `${this.props.width / 2}px`;
+        } else if (this.props.heightUnit === "pixels") {
+            style.height = `${this.props.height}px`;
+        } else if (this.props.heightUnit === "percentageOfParent") {
+            style.height = `${this.props.height}%`;
+        }
+
+        return style;
     }
 
     private allDayAccessor = (event: any) => {
@@ -152,13 +173,15 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     }
 
     private onEventDrop = (eventInfo: any) => {
-        if (eventInfo.start !== eventInfo.event.start) {
+        if (eventInfo.start.getDate() !== eventInfo.event.start.getDate() && this.props.selectable) {
             if (this.props.onEventDropAction) { this.props.onEventDropAction(eventInfo); }
         }
     }
 
-    private onEventResize = (_resizeType: any, eventInfo: any) => {
-        if (this.props.onEventResizeAction) { this.props.onEventResizeAction(eventInfo); }
+    private onEventResize = (_resizeType: string, eventInfo: any) => {
+        if (eventInfo.start.getDate() !== eventInfo.event.start.getDate() && this.props.selectable) {
+            if (this.props.onEventResizeAction) { this.props.onEventResizeAction(eventInfo); }
+        }
     }
 
     private onSelectEvent = (eventInfo: object) => {

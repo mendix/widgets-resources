@@ -2,8 +2,6 @@ const webpack = require("webpack");
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
 const pkg = require("./package");
 const widgetName = pkg.widgetName;
 const name = pkg.widgetName.toLowerCase();
@@ -16,7 +14,7 @@ const widgetConfig = {
         libraryTarget: "umd"
     },
     resolve: {
-        extensions: [".ts", ".js", ".json"],
+        extensions: [".ts", ".js"],
         alias: {
             "tests": path.resolve(__dirname, "./tests")
         }
@@ -24,7 +22,7 @@ const widgetConfig = {
     module: {
         rules: [{
                 test: /\.ts$/,
-                use: "ts-loader"
+                loader: "ts-loader"
             },
             {
                 test: /\.css$/,
@@ -37,27 +35,24 @@ const widgetConfig = {
                 test: /\.scss$/,
                 loader: ExtractTextPlugin.extract({
                     fallback: "style-loader",
-                    use: "css-loader!sass-loader"
+                    use: [{
+                            loader: "css-loader"
+                        },
+                        {
+                            loader: "sass-loader"
+                        }
+                    ]
                 })
             }
         ]
     },
+    mode: "development",
     devtool: "eval",
     externals: ["react", "react-dom"],
-    mode: "development",
     plugins: [
-        // new BundleAnalyzerPlugin(),
         new CopyWebpackPlugin([{
-                from: "src/**/*.js"
-            },
-            {
-                from: "src/**/*.xml"
-            },
-            {
-                from: "src/**/*.png",
-                to: `src/com/mendix/widget/custom/${name}/`
-            }
-        ], {
+            from: "src/**/*.xml"
+        }], {
             copyUnmodified: true
         }),
         new ExtractTextPlugin({
@@ -82,37 +77,23 @@ const previewConfig = {
     module: {
         rules: [{
                 test: /\.ts$/,
-                loader: "ts-loader",
-                options: {
-                    compilerOptions: {
-                        "module": "CommonJS",
-                    }
-                }
-            },
-            {
+                use: "ts-loader"
+            }, {
                 test: /\.css$/,
                 use: "raw-loader"
             },
             {
                 test: /\.scss$/,
-                use: [{
-                        loader: "raw-loader"
-                    },
-                    {
-                        loader: "sass-loader"
-                    }
-                ]
+                use: ["raw-loader", "sass-loader"]
             }
         ]
     },
+    mode: "development",
     devtool: "inline-source-map",
     externals: ["react", "react-dom"],
-    mode: "development",
-    plugins: [
-        new webpack.LoaderOptionsPlugin({
-            debug: true
-        })
-    ]
+    plugins: [new webpack.LoaderOptionsPlugin({
+        debug: true
+    })]
 };
 
 module.exports = [widgetConfig, previewConfig];

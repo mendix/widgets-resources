@@ -25,18 +25,18 @@
             <category>Data source</category>
             <description/>
         </property>
-		<property key="dataSourceMicroflow" type="microflow" required="false">
-			<caption>Data source microflow</caption>
-			<category>Data source</category>
-			<description></description>
-			<returnType type="Void"/>
-		</property>
-		<property key="dataSourceNanoflow" type="nanoflow" required="false">
-			<caption>Data source nanoflow</caption>
-			<category>Data source</category>
-			<description></description>
-			<returnType type="Void"/>
-		</property>
+        <property key="dataSourceMicroflow" type="microflow" required="false">
+            <caption>Data source microflow</caption>
+            <category>Data source</category>
+            <description></description>
+            <returnType type="Void"/>
+        </property>
+        <property key="dataSourceNanoflow" type="nanoflow" required="false">
+            <caption>Data source nanoflow</caption>
+            <category>Data source</category>
+            <description></description>
+            <returnType type="Void"/>
+        </property>
         <property key="titleAttribute" type="attribute" entityProperty="eventEntity" required="false">
             <caption>Title</caption>
             <category>Data source</category>
@@ -78,56 +78,15 @@
                 <attributeType name="String" />
             </attributeTypes>
         </property>
-        <property key="titleAttributeContext" type="attribute" required="false">
-            <caption>Context title</caption>
-            <category>Context</category>
-            <description/>
-            <attributeTypes>
-                <attributeType name="String"/>
-            </attributeTypes>
-        </property>
-        <property key="allDayAttributeContext" type="attribute" required="false">
-            <caption>Context all day</caption>
-            <category>Context</category>
-            <description/>
-            <attributeTypes>
-                <attributeType name="Boolean"/>
-            </attributeTypes>
-        </property>
-        <property key="startAttributeContext" type="attribute" required="false">
-            <caption>Context start</caption>
-            <category>Context</category>
-            <description/>
-            <attributeTypes>
-                <attributeType name="DateTime"/>
-            </attributeTypes>
-        </property>
-        <property key="endAttributeContext" type="attribute" required="false">
-            <caption>Context end</caption>
-            <category>Context</category>
-            <description/>
-            <attributeTypes>
-                <attributeType name="DateTime"/>
-            </attributeTypes>
-        </property>
-        <property key="eventColorContext" type="attribute" required="false">
-            <caption>Context event color</caption>
-            <category>Context</category>
-            <description/>
-            <attributeTypes>
-                <attributeType name="Enum" />
-                <attributeType name="String" />
-            </attributeTypes>
-        </property>
-        <!-- <property key="views" type="enumeration" defaultValue="standard">
+        <property key="views" type="enumeration" defaultValue="standard">
             <caption>View</caption>
             <category>Appearance</category>
-            <description/>
+            <description>NB: When using Custom view, month view must be selected</description>
             <enumerationValues>
                 <enumerationValue key="standard">Standard</enumerationValue>
                 <enumerationValue key="custom">Custom</enumerationValue>
             </enumerationValues>
-        </property> -->
+        </property>
         <property key="customViews" type="object" isList="true" required="false">
             <caption>Custom toolbar</caption>
             <category>Appearance</category>
@@ -146,25 +105,48 @@
                     </enumerationValues>
                 </property>
                 <property key="customCaption" type="translatableString" required="false">
-                    <caption>Custom caption</caption>
+                    <caption>Button caption</caption>
+                    <category>Appearance</category>
+                    <description/>
+                </property>
+                <property key="dayFormat" type="translatableString" required="false">
+                    <caption>Custom day format</caption>
+                    <category>Appearance</category>
+                    <description/>
+                </property>
+                <property key="weekdayFormat" type="translatableString" required="false">
+                    <caption>Custom week day format</caption>
+                    <category>Appearance</category>
+                    <description/>
+                </property>
+                <property key="timeGutterFormat" type="translatableString" required="false">
+                    <caption>Custom time gutter format</caption>
+                    <category>Appearance</category>
+                    <description/>
+                </property>
+                <property key="monthHeaderFormat" type="translatableString" required="false">
+                    <caption>Custom month header format</caption>
+                    <category>Appearance</category>
+                    <description/>
+                </property>
+                <property key="dayHeaderFormat" type="translatableString" required="false">
+                    <caption>Custom day header format</caption>
                     <category>Appearance</category>
                     <description/>
                 </property>
             </properties>
         </property>
         <property key="defaultView" type="enumeration" defaultValue="month">
-            <caption>Default view</caption>
+            <caption>Inital selected view</caption>
             <category>Appearance</category>
             <description/>
                 <enumerationValues>
-                    <enumerationValue key="month">Month</enumerationValue>
-                    <enumerationValue key="week">Week</enumerationValue>
-                    <enumerationValue key="work_week">Work week</enumerationValue>
                     <enumerationValue key="day">Day</enumerationValue>
-                    <enumerationValue key="agenda">Agenda</enumerationValue>
+                    <enumerationValue key="week">Week</enumerationValue>
+                    <enumerationValue key="month">Month</enumerationValue>
                 </enumerationValues>
         </property>
-        <property key="startPositionAttribute" type="attribute" required="false">
+        <property key="startPositionAttribute" type="attribute" isPath="yes" pathType="reference" required="false">
             <caption>Start position attribute</caption>
             <category>Appearance</category>
             <description>The date on which the calendar should start</description>
@@ -178,51 +160,36 @@
             <description>Show truncated events in an overlay when you click the "+x more" link</description>
         </property>
         <property key="selectable" type="boolean" defaultValue="true">
-            <caption>Event editable</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
-        <!-- <property key="create" type="boolean" defaultValue="true">
-            <caption>Create</caption>
-            <category>Appearance</category>
-            <description/>
-        </property> -->
-        <property key="resizable" type="boolean" defaultValue="true">
-            <caption>Resize event</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
-        <property key="editable" type="enumeration" defaultValue="default">
             <caption>Editable</caption>
             <category>Appearance</category>
             <description/>
+        </property>
+        <property key="widthUnit" type="enumeration" defaultValue="percentage">
+            <caption>Width unit</caption>
+            <category>Appearance</category>
+            <description/>
             <enumerationValues>
-                <enumerationValue key="default">Default</enumerationValue>
-                <enumerationValue key="never">Never</enumerationValue>
+                <enumerationValue key="percentage">Percentage</enumerationValue>
+                <enumerationValue key="pixels">Pixels</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="dayFormat" type="translatableString" required="false">
-            <caption>Custom day format</caption>
+        <property key="width" type="integer" defaultValue="100">
+            <caption>Width</caption>
             <category>Appearance</category>
             <description/>
         </property>
-        <property key="weekdayFormat" type="translatableString" required="false">
-            <caption>Custom week day format</caption>
+        <property key="heightUnit" type="enumeration" defaultValue="pixels">
+            <caption>Height unit</caption>
             <category>Appearance</category>
-            <description/>
+            <description>'Percentage of width' is the aspect ratio, 'Pixels' is absolute. Warning: When using 'Percentage of parent' the parent container must have an absolute height, else nothing is displayed.</description>
+            <enumerationValues>
+                <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
+                <enumerationValue key="pixels">Pixels</enumerationValue>
+                <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
+            </enumerationValues>
         </property>
-        <property key="timeGutterFormat" type="translatableString" required="false">
-            <caption>Custom time gutter format</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
-        <property key="monthHeaderFormat" type="translatableString" required="false">
-            <caption>Custom month header format</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
-        <property key="dayHeaderFormat" type="translatableString" required="false">
-            <caption>Custom day header format</caption>
+        <property key="height" type="integer" defaultValue="580">
+            <caption>Height</caption>
             <category>Appearance</category>
             <description/>
         </property>
@@ -232,45 +199,77 @@
             <description/>
             <enumerationValues>
                 <enumerationValue key="doNothing">Do nothing</enumerationValue>
+                <enumerationValue key="showPage">Show a page</enumerationValue>
                 <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
                 <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="eventMicroflow" type="microflow" required="false">
-            <caption>Microflow</caption>
+        <property key="onClickOpenPageAs" type="enumeration" defaultValue="content">
+            <caption>On click open page as</caption>
+            <category>Events</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="content">Full page</enumerationValue>
+                <enumerationValue key="popup">Popup</enumerationValue>
+                <enumerationValue key="modal">Blocking popup</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="onClickPage" type="form" required="false">
+            <caption>on click page</caption>
+            <category>Events</category>
+            <description>The page that will be opened on clicking an event</description>
+        </property>
+        <property key="onClickMicroflow" type="microflow" required="false">
+            <caption>On click microflow</caption>
             <category>Events</category>
             <description>The microflow that will be executed on clicking an event</description>
             <returnType type="Void" />
         </property>
-        <property key="eventNanoflow" type="nanoflow" required="false">
-            <caption>Nanoflow</caption>
+        <property key="onClickNanoflow" type="nanoflow" required="false">
+            <caption>On click nanoflow</caption>
             <category>Events</category>
             <description>The nanoflow that will be executed on clicking an event</description>
             <returnType type="Void" />
         </property>
-        <property key="onClickSlotEvent" type="enumeration" defaultValue="doNothing">
+        <property key="onCreate" type="enumeration" defaultValue="doNothing">
             <caption>On create</caption>
             <category>Events</category>
             <description/>
             <enumerationValues>
                 <enumerationValue key="doNothing">Do nothing</enumerationValue>
+                <enumerationValue key="showPage">Show a page</enumerationValue>
                 <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
                 <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="slotMicroflow" type="microflow" required="false">
-            <caption>on create microflow</caption>
+        <property key="onCreateOpenPageAs" type="enumeration" defaultValue="content">
+            <caption>On create open page as</caption>
+            <category>Events</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="content">Full page</enumerationValue>
+                <enumerationValue key="popup">Popup</enumerationValue>
+                <enumerationValue key="modal">Blocking popup</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="onCreatePage" type="form" required="false">
+            <caption>On create page</caption>
+            <category>Events</category>
+            <description>The page that will be opened on clickicking a slot</description>
+        </property>
+        <property key="onCreateMicroflow" type="microflow" required="false">
+            <caption>On create microflow</caption>
             <category>Events</category>
             <description>The microflow that will be executed on clicking a slot</description>
             <returnType type="Void" />
         </property>
-        <property key="slotNanoflow" type="nanoflow" required="false">
-            <caption>New event nanoflow</caption>
+        <property key="onCreateNanoflow" type="nanoflow" required="false">
+            <caption>On create nanoflow</caption>
             <category>Events</category>
             <description>The nanoflow that will be executed on clicking a slot</description>
             <returnType type="Void" />
         </property>
-        <property key="onDropEvent" type="enumeration" defaultValue="doNothing">
+        <property key="onChangeEvent" type="enumeration" defaultValue="doNothing">
             <caption>On change event</caption>
             <category>Events</category>
             <description/>
@@ -280,38 +279,16 @@
                 <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="onDropMicroflow" type="microflow" required="false">
+        <property key="onChangeMicroflow" type="microflow" required="false">
             <caption>On change microflow</caption>
             <category>Events</category>
-            <description>The microflow that will be executed on droping an event</description>
+            <description>The microflow that will be executed on droping / resizing an event</description>
             <returnType type="Void" />
         </property>
-        <property key="onDropNanoflow" type="nanoflow" required="false">
+        <property key="onChangeNanoflow" type="nanoflow" required="false">
             <caption>On change nanoflow</caption>
             <category>Events</category>
-            <description>The nanoflow that will be executed on droping an event</description>
-            <returnType type="Void" />
-        </property>
-        <property key="onResizeEvent" type="enumeration" defaultValue="doNothing">
-            <caption>On resize event</caption>
-            <category>Events</category>
-            <description/>
-            <enumerationValues>
-                <enumerationValue key="doNothing">Do nothing</enumerationValue>
-                <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
-                <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="onResizeMicroflow" type="microflow" required="false">
-            <caption>On resize microflow</caption>
-            <category>Events</category>
-            <description>The microflow that will be executed on resizing an event</description>
-            <returnType type="Void" />
-        </property>
-        <property key="onResizeNanoflow" type="nanoflow" required="false">
-            <caption>On resize nanoflow</caption>
-            <category>Events</category>
-            <description>The nanoflow that will be executed on resizing an event</description>
+            <description>The nanoflow that will be executed on droping / resizing an event</description>
             <returnType type="Void" />
         </property>
     </properties>
