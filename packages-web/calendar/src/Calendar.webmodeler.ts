@@ -1,7 +1,7 @@
 import { Component, createElement } from "react";
 
 import { Calendar, CalendarProps } from "./components/Calendar";
-import CalendarContainer, { CalendarContainerProps } from "./components/CalendarContainer";
+import CalendarContainer, { CalendarContainerProps, parseStyle } from "./components/CalendarContainer";
 
 declare function require(name: string): string;
 type VisibilityMap = {
@@ -29,10 +29,15 @@ export class preview extends Component<CalendarContainerProps, {}> {
             color: props.eventColor,
             events: eventData,
             defaultView: props.defaultView,
+            height: props.height,
+            heightUnit: props.heightUnit,
+            messages: [],
             startPosition: new Date(),
             popup: props.popup,
-            resizable: true,
-            selectable: props.selectable
+            selectable: props.selectable,
+            style: parseStyle(props.style),
+            width: props.width,
+            widthUnit: props.widthUnit
         };
     }
 }
@@ -40,8 +45,8 @@ export class preview extends Component<CalendarContainerProps, {}> {
 export function getVisibleProperties(valueMap: CalendarContainerProps, visibilityMap: VisibilityMap) {
     visibilityMap.dataSourceMicroflow = valueMap.dataSource === "microflow";
     visibilityMap.entityConstraint = valueMap.dataSource === "XPath";
-    visibilityMap.eventMicroflow = valueMap.onClickEvent === "callMicroflow";
-    visibilityMap.eventNanoflow = valueMap.onClickEvent === "callNanoflow";
+    visibilityMap.onClickMicroflow = valueMap.onClickEvent === "callMicroflow";
+    visibilityMap.onClickNanoflow = valueMap.onClickEvent === "callNanoflow";
 
     return visibilityMap;
 }
