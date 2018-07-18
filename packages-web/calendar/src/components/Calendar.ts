@@ -1,8 +1,9 @@
 import { CSSProperties, Component, ReactChild, createElement } from "react";
 
 import { Alert } from "./Alert";
+import { Container, Style } from "../utils/namespaces";
+import * as classNames from "classnames";
 import * as BigCalendar from "react-big-calendar";
-import { CalendarLoading } from "./CalendarLoading";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import * as globalize from "globalize";
@@ -18,16 +19,17 @@ const DragAndDropCalendar = withDragAndDrop(BigCalendar);
 
 export interface CalendarProps {
     alertMessage: ReactChild;
+    className?: string;
     events: CalendarEvent[];
     color: string;
     height: number;
-    heightUnit: HeightUnitType;
+    heightUnit: Style.HeightUnitType;
     loading?: boolean;
     showMultiDayTimes?: boolean;
-    defaultView: View;
+    defaultView: Style.View;
     startPosition: Date;
     firstDay?: number;
-    messages: CustomViews[];
+    messages: Container.CustomViews[];
     popup: boolean;
     selectable: boolean;
     dayFormat?: string;
@@ -38,16 +40,12 @@ export interface CalendarProps {
     style: object;
     views?: string;
     width: number;
-    widthUnit: WidthUnitType;
+    widthUnit: Style.WidthUnitType;
     onSelectEventAction?: (eventInfo: object) => void;
     onEventResizeAction?: (eventInfo: any) => void;
     onSelectSlotAction?: (slotInfo: object) => void;
     onEventDropAction?: (eventInfo: object) => void;
 }
-
-export type HeightUnitType = "percentageOfWidth" | "percentageOfParent" | "pixels";
-export type View = "month" | "week" | "work_week" | "day" | "agenda";
-export type WidthUnitType = "percentage" | "pixels";
 
 export interface CalendarEvent {
     title: string;
@@ -56,11 +54,6 @@ export interface CalendarEvent {
     end: Date;
     guid: string;
     color: string;
-}
-
-export interface CustomViews {
-    customCaption: string;
-    customView: View;
 }
 
 interface CalendarState {
@@ -76,14 +69,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     }
 
     render() {
-        if (this.props.alertMessage) {
-            return createElement(Alert, { className: "widget-calendar-alert" }, this.props.alertMessage);
-        }
-        if (this.props.loading) {
-            return createElement(CalendarLoading);
-        }
-
-        return createElement("div", { className: ("widget-calendar"), style: this.getDimensions() },
+        return createElement("div", { className: classNames("widget-calendar", this.props.className), style: this.getDimensions() },
             createElement(DragAndDropCalendar, {
                 events: this.props.events,
                 allDayAccessor: this.allDayAccessor,
@@ -111,7 +97,8 @@ class Calendar extends Component<CalendarProps, CalendarState> {
                 onEventResize: this.onEventResize,
                 onSelectEvent: this.onSelectEvent,
                 onSelectSlot: this.onSelectSlot
-            })
+            }),
+            createElement(Alert, { className: "widget-calendar-alert" }, this.props.alertMessage)
         );
     }
 

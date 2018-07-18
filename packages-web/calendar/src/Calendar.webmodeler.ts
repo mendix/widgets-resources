@@ -1,20 +1,21 @@
 import { Component, createElement } from "react";
 
 import { Calendar, CalendarProps } from "./components/Calendar";
-import CalendarContainer, { CalendarContainerProps, parseStyle } from "./components/CalendarContainer";
+import CalendarContainer, { parseStyle } from "./components/CalendarContainer";
+import { Container } from "./utils/namespaces";
 
 declare function require(name: string): string;
 type VisibilityMap = {
-    [P in keyof CalendarContainerProps]: boolean;
+    [P in keyof Container.CalendarContainerProps]: boolean;
 };
 
 // tslint:disable-next-line class-name
-export class preview extends Component<CalendarContainerProps, {}> {
+export class preview extends Component<Container.CalendarContainerProps, {}> {
     render() {
         return createElement(Calendar, this.transformProps(this.props));
         }
 
-    private transformProps(props: CalendarContainerProps): CalendarProps {
+    private transformProps(props: Container.CalendarContainerProps): CalendarProps {
         const eventData = [ {
             title: "Leave",
             allDay: true,
@@ -42,7 +43,7 @@ export class preview extends Component<CalendarContainerProps, {}> {
     }
 }
 
-export function getVisibleProperties(valueMap: CalendarContainerProps, visibilityMap: VisibilityMap) {
+export function getVisibleProperties(valueMap: Container.CalendarContainerProps, visibilityMap: VisibilityMap) {
     visibilityMap.dataSourceMicroflow = valueMap.dataSource === "microflow";
     visibilityMap.entityConstraint = valueMap.dataSource === "XPath";
     visibilityMap.onClickMicroflow = valueMap.onClickEvent === "callMicroflow";

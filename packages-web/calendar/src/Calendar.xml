@@ -106,32 +106,32 @@
                 </property>
                 <property key="customCaption" type="translatableString" required="false">
                     <caption>Button caption</caption>
-                    <category>Appearance</category>
+                    <category>Custom formats</category>
                     <description/>
                 </property>
                 <property key="dayFormat" type="translatableString" required="false">
                     <caption>Custom day format</caption>
-                    <category>Appearance</category>
+                    <category>Custom formats</category>
                     <description/>
                 </property>
                 <property key="weekdayFormat" type="translatableString" required="false">
                     <caption>Custom week day format</caption>
-                    <category>Appearance</category>
+                    <category>Custom formats</category>
                     <description/>
                 </property>
                 <property key="timeGutterFormat" type="translatableString" required="false">
                     <caption>Custom time gutter format</caption>
-                    <category>Appearance</category>
+                    <category>Custom formats</category>
                     <description/>
                 </property>
                 <property key="monthHeaderFormat" type="translatableString" required="false">
                     <caption>Custom month header format</caption>
-                    <category>Appearance</category>
+                    <category>Custom formats</category>
                     <description/>
                 </property>
                 <property key="dayHeaderFormat" type="translatableString" required="false">
                     <caption>Custom day header format</caption>
-                    <category>Appearance</category>
+                    <category>Custom formats</category>
                     <description/>
                 </property>
             </properties>
