@@ -1,7 +1,7 @@
 {
   "name": "carousel",
   "widgetName": "Carousel",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Displays images in a carousel",
   "scripts": {
     "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec grunt",

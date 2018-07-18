@@ -8,6 +8,7 @@ type VisibilityMap = {
 };
 
 // tslint:disable class-name
+declare function require(name: string): string;
 export class preview extends Component<CarouselContainerProps, {}> {
     render() {
         const validationAlert = CarouselContainer.validateProps(this.props);
@@ -37,7 +38,7 @@ export function getPreviewCss() {
 export function getVisibleProperties(props: CarouselContainerProps, visibilityMap: VisibilityMap) {
     visibilityMap.dataSourceMicroflow = props.dataSource === "microflow";
     visibilityMap.entityConstraint = props.dataSource === "XPath";
-    visibilityMap.staticImages = props.dataSource === "static";
+    visibilityMap.staticImages = props.dataSource === "static" ? visibilityMap.staticImages : false;
     visibilityMap.imagesEntity = props.dataSource === "microflow";
 
     visibilityMap.onClickForm = props.onClickOptions === "showPage";
