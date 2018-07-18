@@ -10,7 +10,7 @@ interface LabelProps {
 
 const Label: SFC<LabelProps> = ({ children, className, label, style, weight }) =>
     createElement("div", { className: classNames("widget-switch-label", className), style },
-        createElement("div", { className: "form-group" },
+        createElement("div", { className: "form-group clearfix" },
             createElement("div", { className: `col-sm-${weight} col-xs-${weight}` },
                 createElement("label", { className: "control-label" }, label)
             ),
