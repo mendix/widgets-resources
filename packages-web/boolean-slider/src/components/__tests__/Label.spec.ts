@@ -12,7 +12,7 @@ describe("Label", () => {
 
         expect(labelComponent).toBeElement(
             createElement("div", { className: "widget-switch-label" },
-                createElement("div", { className: "form-group" },
+                createElement("div", { className: "form-group clearfix" },
                     createElement("div", { className: "col-sm-6 col-xs-6" },
                         createElement("label", { className: "control-label" }, label)
                     ),
