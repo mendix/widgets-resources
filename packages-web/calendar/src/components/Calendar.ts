@@ -69,6 +69,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
 
     render() {
         return createElement("div", { className: classNames("widget-calendar", this.props.className), style: this.getDimensions() },
+            createElement(Alert, { className: "widget-calendar-alert" }, this.props.alertMessage),
             createElement(DragAndDropCalendar, {
                 events: this.props.events,
                 allDayAccessor: this.allDayAccessor,
@@ -94,8 +95,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
                 onEventResize: this.onEventResize,
                 onSelectEvent: this.onSelectEvent,
                 onSelectSlot: this.onSelectSlot
-            }),
-            createElement(Alert, { className: "widget-calendar-alert" }, this.props.alertMessage)
+            })
         );
     }
 
@@ -163,7 +163,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     }
 
     private onEventResize = (_resizeType: string, eventInfo: any) => {
-        if (eventInfo.start.getDate() !== eventInfo.event.start.getDate() && this.props.selectable) {
+        if (eventInfo.end.getDate() !== eventInfo.event.end.getDate() && this.props.selectable) {
             if (this.props.onEventResizeAction) { this.props.onEventResizeAction(eventInfo); }
         }
     }

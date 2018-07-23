@@ -12,16 +12,16 @@ export const fetchData = (options: Data.FetchDataOptions): Promise<MxObject[]> =
                     entity,
                     constraint: options.constraint || ""
                 })
-                .then(mxObjects => resolve(mxObjects))
-                .catch(message => reject({ message }));
+                    .then(resolve)
+                    .catch(message => reject({ message }));
             } else if (options.type === "microflow" && options.microflow) {
                 fetchByMicroflow(options.microflow, guid)
-                    .then(mxObjects => resolve(mxObjects))
+                    .then(resolve)
                     .catch(message => reject({ message }));
             } else if (options.type === "nanoflow" && options.nanoflow.nanoflow && options.mxform) {
                 fetchByNanoflow(options.nanoflow, options.mxform)
-                .then(mxObjects => resolve(mxObjects))
-                .catch(message => reject({ message }));
+                    .then(resolve)
+                    .catch(message => reject({ message }));
             }
         } else {
             reject("entity & guid are required");

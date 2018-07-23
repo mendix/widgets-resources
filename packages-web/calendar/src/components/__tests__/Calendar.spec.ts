@@ -301,9 +301,9 @@ describe("Calendar", () => {
         it("#onEventResize() calls the parent onEventResize handler when the dates are different", () => {
             const resizeType = "drop";
             const eventInfo = {
-                start: new Date(),
+                end: new Date(),
                 event: {
-                    start: new Date((new Date()).valueOf() + 1000 * 3600 * 24)
+                    end: new Date((new Date()).valueOf() + 1000 * 3600 * 24)
                 }
             };
             calendarProps.onEventResizeAction = jasmine.createSpy("onDrop");

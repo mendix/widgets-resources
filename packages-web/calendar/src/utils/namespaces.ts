@@ -9,6 +9,7 @@ export namespace Container {
     }
 
     export interface CalendarContainerProps extends WrapperProps {
+        customViews: CustomViews[];
         height: number;
         heightUnit: Style.HeightUnitType;
         titleAttribute: string;
@@ -44,7 +45,6 @@ export namespace Container {
         onChangeMicroflow: string;
         onChangeNanoflow: Data.Nanoflow;
         refreshInterval: number;
-        customViews: CustomViews[];
         dayFormat: string;
         views: Views;
         weekdayFormat: string;
@@ -80,7 +80,7 @@ export namespace Data {
         type?: Container.DataSource;
         entity?: string;
         guid?: string;
-        mxform?: mxui.lib.form._FormBase;
+        mxform: mxui.lib.form._FormBase;
         constraint?: string;
         microflow?: string;
         nanoflow: Nanoflow;
