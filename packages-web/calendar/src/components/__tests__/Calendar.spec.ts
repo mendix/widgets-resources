@@ -17,15 +17,9 @@ describe("Calendar", () => {
         popup: true,
         selectable: true,
         style: {},
+        views: "standard",
         width: 100,
         widthUnit: "percentage"
-    };
-    const formats = {
-        dayFormat: jasmine.any(Function),
-        weekdayFormat: jasmine.any(Function),
-        timeGutterFormat: jasmine.any(Function),
-        monthHeaderFormat: jasmine.any(Function),
-        dayHeaderFormat: jasmine.any(Function)
     };
 
     beforeAll(() => {
@@ -42,138 +36,87 @@ describe("Calendar", () => {
     });
 
     it("renders the structure correctly", () => {
-        const calendarComponent = renderCalendar(calendarProps);
-        const style = { width: "100%", height: "580px" };
+        const calendar = renderCalendar(calendarProps);
+        const style = { width: "100px", paddingBottom: "50px" };
+        calendar.setProps({
+            heightUnit: "percentageOfWidth",
+            widthUnit: "pixels",
+            views: "custom"
+        });
 
-        expect(calendarComponent).toBeElement(
+        expect(calendar).toBeElement(
             createElement("div", { className: "widget-calendar", style },
+                createElement(Alert, { className: "widget-calendar-alert" }),
                 createElement(DragAndDropCalendar, {
-                    events: [],
-                    allDayAccessor: jasmine.any(Function),
-                    eventPropGetter: jasmine.any(Function),
-                    defaultView: "month",
-                    formats,
-                    messages: "",
-                    views: [],
-                    popup: true,
-                    selectable: true,
-                    step: 60,
-                    showMultiDayTimes: true,
-                    onEventDrop: jasmine.any(Function),
-                    onEventResize: jasmine.any(Function),
-                    onSelectEvent: jasmine.any(Function),
-                    onSelectSlot: jasmine.any(Function)
-                }),
-                createElement(Alert, { className: "widget-calendar-alert" })
+                    ...calendarProps
+                })
             )
         );
     });
 
     it("should render a structure correctly with pixels", () => {
-        const calendarComponent = renderCalendar(calendarProps);
+        const calendar = renderCalendar(calendarProps);
         const style = { width: "100px", height: "580px" };
-        calendarComponent.setProps({
+        calendar.setProps({
             heightUnit: "pixels",
             widthUnit: "pixels"
         });
 
-        expect(calendarComponent).toBeElement(
+        expect(calendar).toBeElement(
             createElement("div", { className: "widget-calendar", style },
+                createElement(Alert, { className: "widget-calendar-alert" }),
                 createElement(DragAndDropCalendar, {
-                    events: [],
-                    allDayAccessor: jasmine.any(Function),
-                    eventPropGetter: jasmine.any(Function),
-                    defaultView: "month",
-                    formats,
-                    messages: "",
-                    views: [],
-                    popup: true,
-                    selectable: true,
-                    step: 60,
-                    showMultiDayTimes: true,
-                    onEventDrop: jasmine.any(Function),
-                    onEventResize: jasmine.any(Function),
-                    onSelectEvent: jasmine.any(Function),
-                    onSelectSlot: jasmine.any(Function)
-                }),
-                createElement(Alert, { className: "widget-calendar-alert" })
+                    ...calendarProps
+                })
             )
         );
     });
 
     it("should render a structure correctly with percentage", () => {
-        const calendarComponent = renderCalendar(calendarProps);
+        const calendar = renderCalendar(calendarProps);
         const style = { width: "100%", paddingBottom: "580%" };
-        calendarComponent.setProps({
+        calendar.setProps({
             heightUnit: "percentageOfWidth",
             widthUnit: "percentage"
         });
 
-        expect(calendarComponent).toBeElement(
+        expect(calendar).toBeElement(
             createElement("div", { className: "widget-calendar", style },
+                createElement(Alert, { className: "widget-calendar-alert" }),
                 createElement(DragAndDropCalendar, {
-                    events: [],
-                    allDayAccessor: jasmine.any(Function),
-                    eventPropGetter: jasmine.any(Function),
-                    defaultView: "month",
-                    formats,
-                    messages: "",
-                    views: [],
-                    popup: true,
-                    selectable: true,
-                    step: 60,
-                    showMultiDayTimes: true,
-                    onEventDrop: jasmine.any(Function),
-                    onEventResize: jasmine.any(Function),
-                    onSelectEvent: jasmine.any(Function),
-                    onSelectSlot: jasmine.any(Function)
-                }),
-                createElement(Alert, { className: "widget-calendar-alert" })
+                    ...calendarProps
+                })
             )
         );
     });
 
     it("should render a structure correctly with percentage of parent", () => {
-        const calendarComponent = renderCalendar(calendarProps);
+        const calendar = renderCalendar(calendarProps);
         const style = { width: "100%", height: "580%" };
-        calendarComponent.setProps({
+        calendar.setProps({
             heightUnit: "percentageOfParent",
             widthUnit: "percentage"
         });
 
-        expect(calendarComponent).toBeElement(
+        expect(calendar).toBeElement(
             createElement("div", { className: "widget-calendar", style },
+                createElement(Alert, { className: "widget-calendar-alert" }),
                 createElement(DragAndDropCalendar, {
-                    events: [],
-                    allDayAccessor: jasmine.any(Function),
-                    eventPropGetter: jasmine.any(Function),
-                    defaultView: "month",
-                    formats,
-                    messages: "",
-                    views: [],
-                    popup: true,
-                    selectable: true,
-                    step: 60,
-                    showMultiDayTimes: true,
-                    onEventDrop: jasmine.any(Function) as any,
-                    onEventResize: jasmine.any(Function) as any,
-                    onSelectEvent: jasmine.any(Function) as any,
-                    onSelectSlot: jasmine.any(Function) as any
-                }),
-                createElement(Alert, { className: "widget-calendar-alert" })
+                    ...calendarProps
+                })
             )
         );
     });
 
     it("should render a structure correctly with custom formats", () => {
-        const calendarComponent = renderCalendar(calendarProps);
-        const dayFormat = (calendarComponent.instance() as any).dayFormat();
-        const weekdayFormat = (calendarComponent.instance() as any).weekdayFormat();
-        const timeGutterFormat = (calendarComponent.instance() as any).timeGutterFormat();
-        const monthHeaderFormat = (calendarComponent.instance() as any).monthHeaderFormat();
-        const dayHeaderFormat = (calendarComponent.instance() as any).dayHeaderFormat();
+        const calendar = renderCalendar(calendarProps);
+        const dayFormat = (calendar.instance() as any).dayFormat();
+        const weekdayFormat = (calendar.instance() as any).weekdayFormat();
+        const timeGutterFormat = (calendar.instance() as any).timeGutterFormat();
+        const monthHeaderFormat = (calendar.instance() as any).monthHeaderFormat();
+        const dayHeaderFormat = (calendar.instance() as any).dayHeaderFormat();
         const newProps = { events: [] };
-        (calendarComponent.instance() as any).componentWillReceiveProps(newProps);
+        (calendar.instance() as any).componentWillReceiveProps(newProps);
         const style = { width: "100%", height: "580px" };
         const customFormats = {
             dayFormat,
@@ -183,86 +126,45 @@ describe("Calendar", () => {
             dayHeaderFormat
         };
 
-        expect(calendarComponent).toBeElement(
+        expect(calendar).toBeElement(
             createElement("div", { className: "widget-calendar", style },
+                createElement(Alert, { className: "widget-calendar-alert" }),
                 createElement(DragAndDropCalendar, {
-                    events: [],
-                    allDayAccessor: jasmine.any(Function),
-                    eventPropGetter: jasmine.any(Function),
-                    defaultView: "month",
-                    formats: customFormats,
-                    messages: "",
-                    views: [],
-                    popup: true,
-                    selectable: true,
-                    step: 60,
-                    showMultiDayTimes: true,
-                    onEventDrop: jasmine.any(Function),
-                    onEventResize: jasmine.any(Function),
-                    onSelectEvent: jasmine.any(Function),
-                    onSelectSlot: jasmine.any(Function)
-                }),
-                createElement(Alert, { className: "widget-calendar-alert" })
+                    ...calendarProps,
+                    formats: customFormats
+                })
             )
         );
     });
 
     it("should renders all day events", () => {
-        const calendarComponent = renderCalendar(calendarProps);
+        const calendar = renderCalendar(calendarProps);
         const style = { width: "100%", height: "580px" };
         const event = { allDay: true };
-        (calendarComponent.instance() as any).allDayAccessor(event);
+        (calendar.instance() as any).allDayAccessor(event);
 
-        expect(calendarComponent).toBeElement(
+        expect(calendar).toBeElement(
             createElement("div", { className: "widget-calendar", style },
+                createElement(Alert, { className: "widget-calendar-alert" }),
                 createElement(DragAndDropCalendar, {
-                    events: [],
-                    allDayAccessor: jasmine.any(Function),
-                    eventPropGetter: jasmine.any(Function),
-                    defaultView: "month",
-                    formats,
-                    messages: "",
-                    views: [],
-                    popup: true,
-                    selectable: true,
-                    step: 60,
-                    showMultiDayTimes: true,
-                    onEventDrop: jasmine.any(Function),
-                    onEventResize: jasmine.any(Function),
-                    onSelectEvent: jasmine.any(Function),
-                    onSelectSlot: jasmine.any(Function)
-                }),
-                createElement(Alert, { className: "widget-calendar-alert" })
+                    ...calendarProps
+                })
             )
         );
     });
 
     it("renders events with custom colors", () => {
-        const calendarComponent = renderCalendar(calendarProps);
+        const calendar = renderCalendar(calendarProps);
         const style = { width: "100%", height: "580px" };
         const events = { color: "red" };
-        (calendarComponent.instance() as any).eventColor(events);
+        (calendar.instance() as any).eventColor(events);
 
-        expect(calendarComponent).toBeElement(
+        expect(calendar).toBeElement(
             createElement("div", { className: "widget-calendar", style },
+                createElement(Alert, { className: "widget-calendar-alert" }),
                 createElement(DragAndDropCalendar, {
-                    events: [],
-                    allDayAccessor: jasmine.any(Function),
-                    eventPropGetter: jasmine.any(Function),
-                    defaultView: "month",
-                    formats,
-                    messages: "",
-                    views: [],
-                    popup: true,
-                    selectable: true,
-                    step: 60,
-                    showMultiDayTimes: true,
-                    onEventDrop: jasmine.any(Function),
-                    onEventResize: jasmine.any(Function),
-                    onSelectEvent: jasmine.any(Function),
-                    onSelectSlot: jasmine.any(Function)
-                }),
-                createElement(Alert, { className: "widget-calendar-alert" })
+                    ...calendarProps
+                })
             )
         );
     });
@@ -270,16 +172,16 @@ describe("Calendar", () => {
     describe("event handler", () => {
         it("#onSelectSlot() calls the parent onSelectSlot handler", () => {
             calendarProps.onSelectSlotAction = jasmine.createSpy("onClick");
-            const calendarComponent = renderCalendar(calendarProps);
-            (calendarComponent.instance() as any).onSelectSlot();
+            const calendar = renderCalendar(calendarProps);
+            (calendar.instance() as any).onSelectSlot();
 
             expect(calendarProps.onSelectSlotAction).toHaveBeenCalled();
         });
 
         it("#onSelectEvent() calls the parent onSelectEvent handler", () => {
             calendarProps.onSelectEventAction = jasmine.createSpy("onClick");
-            const calendarComponent = renderCalendar(calendarProps);
-            (calendarComponent.instance() as any).onSelectEvent();
+            const calendar = renderCalendar(calendarProps);
+            (calendar.instance() as any).onSelectEvent();
 
             expect(calendarProps.onSelectEventAction).toHaveBeenCalled();
         });
@@ -292,8 +194,8 @@ describe("Calendar", () => {
                 }
             };
             calendarProps.onEventDropAction = jasmine.createSpy("onDrop");
-            const calendarComponent = renderCalendar(calendarProps);
-            (calendarComponent.instance() as any).onEventDrop(eventInfo);
+            const calendar = renderCalendar(calendarProps);
+            (calendar.instance() as any).onEventDrop(eventInfo);
 
             expect(calendarProps.onEventDropAction).toHaveBeenCalled();
         });
@@ -307,8 +209,8 @@ describe("Calendar", () => {
                 }
             };
             calendarProps.onEventResizeAction = jasmine.createSpy("onDrop");
-            const calendarComponent = renderCalendar(calendarProps);
-            (calendarComponent.instance() as any).onEventResize(resizeType, eventInfo);
+            const calendar = renderCalendar(calendarProps);
+            (calendar.instance() as any).onEventResize(resizeType, eventInfo);
 
             expect(calendarProps.onEventResizeAction).toHaveBeenCalled();
         });
