@@ -125,6 +125,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 entity: this.props.eventEntity,
                 constraint: this.props.entityConstraint,
                 microflow: this.props.dataSourceMicroflow,
+                mxform: this.props.mxform,
                 nanoflow: this.props.dataSourceNanoflow
             }).then(this.setCalendarEvents);
         }
