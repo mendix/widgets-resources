@@ -157,14 +157,14 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     }
 
     private onEventDrop = (eventInfo: any) => {
-        if (eventInfo.start.getDate() !== eventInfo.event.start.getDate() && this.props.selectable) {
-            if (this.props.onEventDropAction) { this.props.onEventDropAction(eventInfo); }
+        if (eventInfo.start.getDate() !== eventInfo.event.start.getDate() && this.props.selectable && this.props.onEventDropAction) {
+            this.props.onEventDropAction(eventInfo);
         }
     }
 
     private onEventResize = (_resizeType: string, eventInfo: any) => {
-        if (eventInfo.end.getDate() !== eventInfo.event.end.getDate() && this.props.selectable) {
-            if (this.props.onEventResizeAction) { this.props.onEventResizeAction(eventInfo); }
+        if (eventInfo.end.getDate() !== eventInfo.event.end.getDate() && this.props.selectable && this.props.onEventResizeAction) {
+            this.props.onEventResizeAction(eventInfo);
         }
     }
 
