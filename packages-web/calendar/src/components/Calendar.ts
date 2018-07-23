@@ -15,20 +15,19 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "../ui/Calendar.scss";
 
 localizer(globalize);
-const DragAndDropCalendar = withDragAndDrop(BigCalendar);
+export const DragAndDropCalendar = withDragAndDrop(BigCalendar);
 
 export interface CalendarProps {
-    alertMessage: ReactChild;
+    alertMessage?: ReactChild;
     className?: string;
     events: CalendarEvent[];
-    color: string;
+    color?: string;
     height: number;
     heightUnit: Style.HeightUnitType;
     loading?: boolean;
     showMultiDayTimes?: boolean;
     defaultView: Style.View;
-    startPosition: Date;
-    firstDay?: number;
+    startPosition?: Date;
     messages: Container.CustomViews[];
     popup: boolean;
     selectable: boolean;
@@ -73,9 +72,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
             createElement(DragAndDropCalendar, {
                 events: this.props.events,
                 allDayAccessor: this.allDayAccessor,
-                eventPropGetter: (events: any) => {
-                    return { style: { backgroundColor: events.color } };
-                },
+                eventPropGetter: this.eventColor,
                 defaultDate: this.props.startPosition,
                 defaultView: this.props.defaultView,
                 formats: {
@@ -125,9 +122,9 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         return style;
     }
 
-    private allDayAccessor = (event: any) => {
-        return event.allDay;
-    }
+    private allDayAccessor = (event: any) => event.allDay;
+
+    private eventColor = (events: any) => ({ style: { backgroundColor: events.color } });
 
     private dayFormat = (date: Date) => {
         const dayFormat = this.props.dayFormat || "EEEE dd/MM";
@@ -182,4 +179,4 @@ class Calendar extends Component<CalendarProps, CalendarState> {
 
 const CalendarDnD = DragDropContext(HTML5Backend)(Calendar);
 
-export { CalendarDnD as Calendar };
+export { CalendarDnD as Calendar, Calendar as MyCalendar };

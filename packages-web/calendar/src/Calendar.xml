@@ -106,7 +106,7 @@
                 </property>
                 <property key="customCaption" type="translatableString" required="false">
                     <caption>Button caption</caption>
-                    <category>Custom formats</category>
+                    <category>Appearance</category>
                     <description/>
                 </property>
                 <property key="dayFormat" type="translatableString" required="false">
