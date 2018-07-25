@@ -14,7 +14,7 @@ exports.config = {
     coloredLogs: true,
     bail: 0,
     screenshotPath: "dist/wdio/",
-    baseUrl: debug ? "http://localhost:8080/" : "https://reactCalendar.mxapps.io/",
+    baseUrl: debug ? "http://localhost:8080/" : "http://reactcalendar.mxapps.io/",
 
     waitforTimeout: 33000,
     connectionRetryTimeout: 90000,
