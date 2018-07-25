@@ -4,9 +4,9 @@ exports.config = {
     host: "127.0.0.1",
     port: 4444,
     specs: [ "./dist/e2e/**/*.spec.js" ],
-    maxInstances: debug ? 1 : 5,
+    maxInstances: 1,
     capabilities: [ {
-        maxInstances: debug ? 1 : 5,
+        maxInstances: 1,
         browserName: "chrome"
     } ],
     sync: true,

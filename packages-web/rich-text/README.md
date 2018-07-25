@@ -22,10 +22,10 @@ Rich inline or toolbar text editing
 * Ctrl + C: Copy
 * Ctrl + V: Paste
 * -, space : start list
-* tab: adds a tab to the content, will not move focus to next input
+* tab: indents the content when tab key is configured to indent from the widget xml else it will move focus to next element
 
 ## Dependencies
-Mendix 7.9
+Mendix 7.13.1
 
 ## Test project
 http://texteditorwidget.mxapps.io
