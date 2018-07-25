@@ -100,6 +100,15 @@ WARNING disabling this option is a security risk for XSS attacks</description>
                 </property>
             </properties>
         </property>
+        <property key="tabAction" type="enumeration" defaultValue="indent">
+            <caption>Tab key behavior</caption>
+            <category>Events</category>
+            <description>Press 'Tab' to indent text or to move focus to the next element</description>
+            <enumerationValues>
+                <enumerationValue key="indent">Indent</enumerationValue>
+                <enumerationValue key="changeFocus">Focus next</enumerationValue>
+            </enumerationValues>
+        </property>
         <property key="onChangeMicroflow" type="microflow" required="false">
             <caption>On change microflow</caption>
             <category>Events</category>

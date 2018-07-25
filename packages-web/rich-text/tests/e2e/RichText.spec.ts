@@ -1,6 +1,6 @@
 import HomePage from "./pages/home.page";
 
-const testValue = "<b>Hello World!</b>";
+const testValue = "<strong>Hello World!</strong>";
 const plainValue = "Hello my World";
 const resultValue = "<p><strong>Hello World!</strong></p>";
 

@@ -24,6 +24,7 @@ export interface CommonRichTextProps {
     maxNumberOfLines: number;
     recreate?: boolean;
     alertMessage?: string;
+    tabAction?: TabOptions;
 }
 
 export interface RichTextProps extends CommonRichTextProps {
@@ -34,6 +35,7 @@ export interface RichTextProps extends CommonRichTextProps {
 }
 
 export type EditorOption = "basic" | "extended" | "custom";
+export type TabOptions = "indent" | "changeFocus";
 export type Theme = "snow" | "bubble";
 
 export class RichText extends Component<RichTextProps> {
@@ -148,7 +150,12 @@ export class RichText extends Component<RichTextProps> {
     private setUpEditor(props: RichTextProps) {
         if (this.quillNode && !this.quill) {
             this.quill = new Quill(this.quillNode, {
-                modules: this.getEditorOptions(),
+                modules: {
+                    ...this.getEditorOptions(),
+                    keyboard: this.props.tabAction === "changeFocus"
+                        ? this.createKeyboardModule()
+                        : {}
+                },
                 theme: props.theme,
                 clipboard: { matchVisual: false }
             } as any);
@@ -161,7 +168,7 @@ export class RichText extends Component<RichTextProps> {
                 // required to disable editor blur events when the toolbar is clicked
                 toolbar.addEventListener("mousedown", event => event.preventDefault());
             }
-            if (editor) {
+            if (editor && props.tabAction === "indent") {
                 editor.addEventListener("keydown", event => event.stopPropagation());
             }
         }
@@ -228,5 +235,32 @@ export class RichText extends Component<RichTextProps> {
         }
 
         return getToolbar(this.props.customOptions.length ? this.props.customOptions : [ { option: "spacer" } ]);
+    }
+
+    private createKeyboardModule() {
+        return {
+            bindings: {
+                indent: {
+                    key: 9,
+                    handler: (range: { index: number, length: number }, _context: any) => {
+                        this.formatText(range);
+                        return false;
+                    }
+                },
+                tab: {
+                    key: 9,
+                    handler: (range: { index: number, length: number }, _context: any) => {
+                        this.formatText(range);
+                        return false;
+                    }
+                }
+            }
+        };
+    }
+
+    private formatText(range: { index: number, length: number }) {
+        if (this.quill) {
+            this.quill.formatText(range.index, range.length + 1, { indent: -1 });
+        }
     }
 }
