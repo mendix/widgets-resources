@@ -13,6 +13,7 @@ describe("Calendar", () => {
     });
 
     it("renders day view", () => {
+        HomePage.dayViewButton.waitForExist();
         HomePage.dayViewButton.click();
         HomePage.dayView.waitForExist();
         const doesExist = HomePage.dayView.isExisting();
