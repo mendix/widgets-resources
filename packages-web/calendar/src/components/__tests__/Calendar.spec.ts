@@ -13,7 +13,7 @@ describe("Calendar", () => {
         loading: false,
         showMultiDayTimes: true,
         defaultView: "month",
-        messages: [],
+        messages: {},
         popup: true,
         selectable: true,
         style: {},

@@ -1,11 +1,11 @@
 import { CSSProperties, Component, ReactChild, createElement } from "react";
 
 import { Alert } from "./Alert";
-import { Container, Style } from "../utils/namespaces";
+import { Style } from "../utils/namespaces";
 import * as classNames from "classnames";
 import * as BigCalendar from "react-big-calendar";
 import { DragDropContext } from "react-dnd";
-import HTML5Backend from "react-dnd-html5-backend";
+import * as HTML5Backend from "react-dnd-html5-backend";
 import * as globalize from "globalize";
 import localizer from "react-big-calendar/lib/localizers/globalize";
 import * as withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
@@ -28,7 +28,7 @@ export interface CalendarProps {
     showMultiDayTimes?: boolean;
     defaultView: Style.View;
     startPosition?: Date;
-    messages: Container.CustomViews[];
+    messages: BigCalendar.Messages;
     popup: boolean;
     selectable: boolean;
     dayFormat?: string;
