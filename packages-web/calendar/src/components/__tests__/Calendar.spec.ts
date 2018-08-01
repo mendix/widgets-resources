@@ -7,13 +7,15 @@ import { CalendarProps, DragAndDropCalendar, MyCalendar } from "../Calendar";
 describe("Calendar", () => {
     const renderCalendar = (props: CalendarProps) => shallow(createElement(MyCalendar, props));
     const calendarProps: CalendarProps = {
+        formats: {},
+        dragAndDrop: true,
         events: [],
         height: 580,
         heightUnit: "pixels",
         loading: false,
         showMultiDayTimes: true,
         defaultView: "month",
-        messages: {},
+        messages: [],
         popup: true,
         selectable: true,
         style: {},
