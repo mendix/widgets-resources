@@ -8,29 +8,14 @@ export namespace Container {
         style: string;
     }
 
-    export interface CalendarContainerProps extends WrapperProps {
-        customViews: CustomViews[];
+    interface Dimensions {
         height: number;
         heightUnit: Style.HeightUnitType;
-        titleAttribute: string;
-        startAttribute: string;
-        endAttribute: string;
-        allDayAttribute: string;
-        eventColor: string;
-        titleAttributeContext: string;
-        startAttributeContext: string;
-        endAttributeContext: string;
-        allDayAttributeContext: string;
-        eventColorContext: string;
-        defaultView: Style.View;
-        startPositionAttribute: string;
-        dataSource: DataSource;
-        eventEntity: string;
-        entityConstraint: string;
-        dataSourceMicroflow: string;
-        dataSourceNanoflow: Data.Nanoflow;
-        popup: boolean;
-        selectable: boolean;
+        width: number;
+        widthUnit: Style.WidthUnitType;
+    }
+
+    interface Events {
         onClickEvent: OnClickEventOptions;
         onCreate: OnClickEventOptions;
         onClickMicroflow: string;
@@ -44,15 +29,78 @@ export namespace Container {
         onChangeEvent: OnClickEventOptions;
         onChangeMicroflow: string;
         onChangeNanoflow: Data.Nanoflow;
-        refreshInterval: number;
+    }
+
+    interface EventData {
+        titleAttribute: string;
+        startAttribute: string;
+        endAttribute: string;
+        allDayAttribute: string;
+        eventColor: string;
+    }
+
+    interface CustomFormats {
         dayFormat: string;
-        views: Views;
+        dateFormat: string;
         weekdayFormat: string;
         timeGutterFormat: string;
         monthHeaderFormat: string;
         dayHeaderFormat: string;
-        width: number;
-        widthUnit: Style.WidthUnitType;
+        agendaHeaderFormat: string;
+        agendaDateFormat: string;
+        agendaTimeFormat: string;
+        eventTimeRangeStartFormat: string;
+        eventTimeRangeEndFormat: string;
+    }
+
+    export interface CalendarContainerProps extends WrapperProps, Dimensions, Events, EventData, CustomFormats {
+        customViews: CustomViews[];
+        dragAndDrop: boolean;
+        defaultView: Style.View;
+        viewStartAttribute: string;
+        dataSource: DataSource;
+        eventEntity: string;
+        entityConstraint: string;
+        dataSourceMicroflow: string;
+        dataSourceNanoflow: Data.Nanoflow;
+        popup: boolean;
+        selectable: boolean;
+        refreshInterval: number;
+        view: Views;
+    }
+
+    type functionType = (date: Date) => string;
+
+    export type DateType =
+    | "date"
+    | "day"
+    | "weekday"
+    | "timeGutter"
+    | "monthHeader"
+    | "dayHeader"
+    | "agendaHeader"
+    | "agendaDate"
+    | "agendaTime"
+    | "eventTimeStart"
+    | "eventTimeEnd";
+
+    export interface ViewOptions {
+        month?: string;
+        week?: string;
+        work_week?: string;
+        day?: string;
+        agenda?: string;
+        dateFormat?: string | functionType;
+        dayFormat?: string | functionType;
+        weekdayFormat?: string | functionType;
+        timeGutterFormat?: string | functionType;
+        monthHeaderFormat?: string | functionType;
+        dayHeaderFormat?: string | functionType;
+        agendaHeaderFormat?: string | functionType;
+        agendaDateFormat?: string | functionType;
+        agendaTimeFormat?: string | functionType;
+        eventTimeRangeStartFormat?: string | functionType;
+        eventTimeRangeEndFormat?: string | functionType;
     }
 
     export type DataSource = "context" | "XPath" | "microflow" | "nanoflow";
@@ -60,9 +108,9 @@ export namespace Container {
     type PageLocation = "content" | "popup" | "modal";
     type Views = "custom" | "standard";
 
-    export interface CustomViews {
-        customCaption: string;
+    export interface CustomViews extends CustomFormats {
         customView: Style.View;
+        customCaption: string;
     }
 }
 

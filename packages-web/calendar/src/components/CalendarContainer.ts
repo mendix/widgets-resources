@@ -3,7 +3,7 @@ import { Component, ReactChild, createElement } from "react";
 import { Calendar, CalendarEvent } from "./Calendar";
 import { fetchData } from "../utils/data";
 import { Container } from "../utils/namespaces";
-
+import * as globalize from "globalize";
 export interface CalendarContainerState {
     alertMessage: ReactChild;
     events: CalendarEvent[];
@@ -11,14 +11,6 @@ export interface CalendarContainerState {
     eventColor: string;
     startPosition: Date;
     loading: boolean;
-}
-
-interface ViewOptions {
-    month?: string;
-    week?: string;
-    work_week?: string;
-    day?: string;
-    agenda?: string;
 }
 
 export default class CalendarContainer extends Component<Container.CalendarContainerProps, CalendarContainerState> {
@@ -33,6 +25,10 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         startPosition: new Date()
     };
 
+    componentWillMount() {
+        globalize().cultures.default.calendars.standard.firstDay = window.mx.session.sessionData.locale.firstDayOfWeek;
+    }
+
     render() {
         const readOnly = this.isReadOnly();
         const alertMessage = this.state.alertMessage || CalendarContainer.validateProps(this.props);
@@ -44,28 +40,26 @@ export default class CalendarContainer extends Component<Container.CalendarConta
             createElement(Calendar, {
                 alertMessage,
                 className: this.props.class,
+                dragAndDrop: this.props.dragAndDrop,
+                formats: this.setCalendarFormats(),
                 height: this.props.height,
                 heightUnit: this.props.heightUnit,
-                messages: this.setCustomViews(this.props),
+                messages: this.setCustomViews(),
                 events: this.state.events,
                 defaultView: this.props.defaultView,
-                dayFormat: this.props.dayFormat,
-                weekdayFormat: this.props.weekdayFormat,
-                timeGutterFormat: this.props.timeGutterFormat,
-                monthHeaderFormat: this.props.monthHeaderFormat,
-                dayHeaderFormat: this.props.dayHeaderFormat,
                 loading: this.state.loading,
                 popup: this.props.popup,
                 startPosition: this.state.startPosition,
                 selectable: !readOnly ? this.props.selectable : false,
                 style: parseStyle(this.props.style),
-                views: this.props.views,
+                views: this.props.view,
                 width: this.props.width,
                 widthUnit: this.props.widthUnit,
                 onSelectEventAction: !readOnly ? this.onClickEvent : undefined,
                 onEventResizeAction: !readOnly ? this.onChangeEvent : undefined,
                 onSelectSlotAction: !readOnly ? this.onClickSlot : undefined,
-                onEventDropAction: !readOnly ? this.onChangeEvent : undefined
+                onEventDropAction: !readOnly ? this.onChangeEvent : undefined,
+                onViewChangeAction: this.onViewChange
             })
         );
     }
@@ -75,18 +69,22 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     }
 
     componentWillReceiveProps(nextProps: Container.CalendarContainerProps) {
-        if (!this.state.alertMessage) {
-            this.loadEvents(nextProps.mxObject);
-            this.setStartPosition(nextProps.mxObject);
+        if (nextProps.mxObject) {
+            if (!this.state.alertMessage) {
+                this.loadEvents(nextProps.mxObject);
+                this.setStartPosition(nextProps.mxObject);
+            }
+            this.resetSubscriptions(nextProps.mxObject);
+        } else {
+            this.setState({ events: [] });
         }
-        this.resetSubscriptions(nextProps.mxObject);
 
     }
 
     private setCalendarEvents = (mxObjects: mendix.lib.MxObject[]) => {
         const events = mxObjects.map(mxObject => {
             return {
-                title:  mxObject.get(this.props.titleAttribute) as string,
+                title:  mxObject.get(this.props.titleAttribute) as string || " ",
                 allDay: mxObject.get(this.props.allDayAttribute) as boolean,
                 start: new Date(mxObject.get(this.props.startAttribute) as number),
                 end: new Date(mxObject.get(this.props.endAttribute) as number),
@@ -98,10 +96,10 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     }
 
     private setStartPosition = (mxObject: mendix.lib.MxObject) => {
-        if (this.props.startPositionAttribute !== "" && mxObject) {
+        if (this.props.viewStartAttribute !== "" && mxObject) {
         this.setState({
             loading: false,
-            startPosition: new Date(mxObject.get(this.props.startPositionAttribute) as number)
+            startPosition: new Date(mxObject.get(this.props.viewStartAttribute) as number)
         });
         } else {
             this.setState({ loading: false, startPosition: new Date() });
@@ -156,17 +154,65 @@ export default class CalendarContainer extends Component<Container.CalendarConta
             })));
             this.subscriptionHandles.push(window.mx.data.subscribe({
                 guid: mxObject.getGuid(),
-                attr: this.props.startPositionAttribute,
+                attr: this.props.viewStartAttribute,
                 callback: () => this.setStartPosition(mxObject)
             }));
         }
     }
 
-    private setCustomViews = (props: Container.CalendarContainerProps) => {
-        const viewOptions: ViewOptions = {};
-        props.customViews.forEach(customView => viewOptions[customView.customView] = customView.customCaption);
+    private setCustomViews = () => {
+        const viewOptions: Container.ViewOptions = {};
+        this.props.customViews.forEach(customView => { viewOptions[customView.customView] = customView.customCaption; });
 
         return viewOptions;
+    }
+
+    private setCalendarFormats = () => {
+        const viewOptions: Container.ViewOptions = {};
+        this.props.customViews.forEach((customView) => {
+            viewOptions.dateFormat = this.customFormat(customView.dateFormat, "date");
+            viewOptions.dayFormat = this.customFormat(customView.dayFormat, "day");
+            viewOptions.weekdayFormat = this.customFormat(customView.weekdayFormat, "weekday");
+            viewOptions.timeGutterFormat = this.customFormat(customView.timeGutterFormat, "timeGutter");
+            viewOptions.monthHeaderFormat = this.customFormat(customView.monthHeaderFormat, "monthHeader");
+            viewOptions.dayHeaderFormat = this.customFormat(customView.dayHeaderFormat, "dayHeader");
+            viewOptions.agendaHeaderFormat = this.customFormat(customView.agendaHeaderFormat, "agendaHeader");
+            viewOptions.agendaDateFormat = this.customFormat(customView.agendaDateFormat, "agendaDate");
+            viewOptions.agendaTimeFormat = this.customFormat(customView.agendaTimeFormat, "agendaTime");
+            viewOptions.eventTimeRangeStartFormat = this.customFormat(customView.eventTimeRangeStartFormat, "eventTimeStart");
+            viewOptions.eventTimeRangeEndFormat = this.customFormat(customView.eventTimeRangeEndFormat, "eventTimeEnd");
+        });
+
+        return viewOptions;
+    }
+
+    private customFormat = (dateFormat: string, dateType: Container.DateType) => {
+        let datePattern = "";
+        if (dateType === "date") {
+            datePattern = dateFormat || "dd";
+        } else if (dateType === "day") {
+            datePattern = dateFormat || "EEEE dd/MM";
+        } else if (dateType === "weekday") {
+            datePattern = dateFormat || "EEE";
+        } else if (dateType === "timeGutter") {
+            datePattern = dateFormat || "hh:mm a";
+        } else if (dateType === "monthHeader") {
+            datePattern = dateFormat || "MMMM yyyy";
+        } else if (dateType === "dayHeader") {
+            datePattern = dateFormat || "EEE yyyy/MM/dd";
+        } else if (dateType === "agendaHeader") {
+            datePattern = dateFormat || "";
+        } else if (dateType === "agendaDate") {
+            datePattern = dateFormat || "EEE MMM d";
+        } else if (dateType === "agendaTime") {
+            datePattern = dateFormat || "hh:mm a";
+        } else if (dateType === "eventTimeStart") {
+            datePattern = dateFormat || "M/d/yyyy";
+        } else if (dateType === "eventTimeEnd") {
+            datePattern = dateFormat || "M/d/yyyy";
+        }
+
+        return (date: Date) => mx.parser.formatValue(date, "dateTime", { datePattern });
     }
 
     private onClickEvent = (eventInfo: any) => {
@@ -307,6 +353,10 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         }
     }
 
+    private onViewChange() {
+        // TODO:
+    }
+
     public static validateProps(props: Container.CalendarContainerProps): ReactChild {
         const errorMessages: string[] = [];
 
@@ -329,18 +379,13 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         } else if (props.onChangeEvent === "callNanoflow" && !props.onChangeNanoflow.nanoflow) {
             errorMessages.push("On change event is set to 'Call a nanoflow' but no nanoflow is selected");
         }
+        if (props.dataSource === "microflow" && !props.dataSourceMicroflow) {
+            errorMessages.push("Datasource is set to 'microflow' but no microflow is selected");
+        } else if (props.dataSource === "nanoflow" && !props.dataSourceNanoflow.nanoflow) {
+            errorMessages.push("Datasource is set to 'nanoflow' but no nanoflow is selected");
+        }
         if (props.dataSource === "context" && (props.mxObject && props.mxObject.getEntity() !== props.eventEntity)) {
             errorMessages.push(`${props.friendlyId}: Context entity does not match the event entity`);
-        }
-        if (props.views === "custom") {
-            for (const a of props.customViews) {
-                if (a.customView !== "month") {
-                    errorMessages.push(`${props.friendlyId}: Month view is missing`);
-                }
-            }
-            if (props.customViews.length < 1) {
-                errorMessages.push(`${props.friendlyId}: Month view is missing`);
-            }
         }
         if (errorMessages.length) {
             return createElement("div", {},

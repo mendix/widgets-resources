@@ -23,19 +23,29 @@ export class preview extends Component<Container.CalendarContainerProps> {
             end: new Date(),
             guid: "",
             color: "red"
+        },
+        {
+            title: "Bank Holiday",
+            allDay: true,
+            start: new Date((new Date()).valueOf() + 1000 * 3600 * 24),
+            end: new Date((new Date()).valueOf() + 1000 * 3600 * 24),
+            guid: "",
+            color: "red"
         } ];
 
         return {
             alertMessage: CalendarContainer.validateProps(props),
             color: props.eventColor,
+            dragAndDrop: props.dragAndDrop,
             events: eventData,
+            formats: {}, // TODO:
             defaultView: props.defaultView,
             height: props.height,
             heightUnit: props.heightUnit,
-            messages: {},
+            messages: [],
             startPosition: new Date(),
             popup: props.popup,
-            selectable: props.selectable,
+            selectable: true,
             style: parseStyle(props.style),
             width: props.width,
             widthUnit: props.widthUnit
@@ -48,6 +58,11 @@ export function getVisibleProperties(valueMap: Container.CalendarContainerProps,
     visibilityMap.entityConstraint = valueMap.dataSource === "XPath";
     visibilityMap.onClickMicroflow = valueMap.onClickEvent === "callMicroflow";
     visibilityMap.onClickNanoflow = valueMap.onClickEvent === "callNanoflow";
+    visibilityMap.onClickPage = valueMap.onClickEvent === "showPage";
+    visibilityMap.onCreatePage = valueMap.onCreate === "showPage";
+    visibilityMap.onClickOpenPageAs = valueMap.onClickEvent === "showPage";
+    visibilityMap.onCreateOpenPageAs = valueMap.onCreate === "showPage";
+    if (valueMap.view === "standard") { visibilityMap.view = false; }
 
     return visibilityMap;
 }

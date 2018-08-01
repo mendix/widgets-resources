@@ -46,7 +46,7 @@ const widgetConfig = {
             }
         ]
     },
-    mode: "development",
+    mode: "production",
     devtool: "eval",
     externals: ["react", "react-dom"],
     plugins: [
@@ -88,7 +88,7 @@ const previewConfig = {
             }
         ]
     },
-    mode: "development",
+    mode: "production",
     devtool: "inline-source-map",
     externals: ["react", "react-dom"],
     plugins: [new webpack.LoaderOptionsPlugin({
