@@ -2,7 +2,7 @@ import { createElement } from "react";
 import * as Toolbar from "react-big-calendar/lib/ToolBar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-class CustomToolbar extends Toolbar {
+export default class CustomToolbar extends Toolbar {
     render() {
         return (
             createElement("div", { className: "rbc-toolbar" },
@@ -21,5 +21,3 @@ class CustomToolbar extends Toolbar {
         this.props.onNavigate(action);
     }
 }
-
-export { CustomToolbar as default };

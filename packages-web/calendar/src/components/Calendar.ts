@@ -4,8 +4,6 @@ import { Alert } from "./Alert";
 import { Style } from "../utils/namespaces";
 import * as classNames from "classnames";
 import * as BigCalendar from "react-big-calendar";
-import { DragDropContext } from "react-dnd";
-import * as HTML5Backend from "react-dnd-html5-backend";
 import * as globalize from "globalize";
 import localizer from "react-big-calendar/lib/localizers/globalize";
 import * as withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
@@ -33,7 +31,7 @@ export interface CalendarProps {
     startPosition?: Date;
     messages: {};
     popup: boolean;
-    selectable: boolean;
+    editable: string;
     titleFormat?: (date: Date) => void;
     weekdayFormat?: (date: Date) => void;
     timeGutterFormat?: (date: Date) => void;
@@ -94,18 +92,20 @@ class Calendar extends Component<CalendarProps, CalendarState> {
                 ? [ "day", "week", "month" ]
                 : Object.keys(this.props.messages),
             popup: this.props.popup,
-            selectable: this.props.selectable,
+            selectable: this.props.dragAndDrop,
             step: 60,
             showMultiDayTimes: true,
-            onEventDrop: this.onEventDrop,
-            onEventResize: this.onEventResize,
             onSelectEvent: this.onSelectEvent,
             onSelectSlot: this.onSelectSlot,
             onView: this.onViewChange
         };
 
-        if (this.props.dragAndDrop) {
-            return createElement(DragAndDropCalendar, { ...props });
+        if (this.props.dragAndDrop && this.props.editable === "default") {
+            return createElement(DragAndDropCalendar, {
+                ...props,
+                onEventDrop: this.onEventDrop,
+                onEventResize: this.onEventResize
+            });
         } else {
             return createElement(BigCalendar, { ...props });
         }
@@ -133,13 +133,13 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     private eventColor = (events: any) => ({ style: { backgroundColor: events.color } });
 
     private onEventDrop = (eventInfo: any) => {
-        if (eventInfo.start.getDate() !== eventInfo.event.start.getDate() && this.props.selectable && this.props.onEventDropAction) {
+        if (eventInfo.start.getDate() !== eventInfo.event.start.getDate() && this.props.editable === "default" && this.props.onEventDropAction) {
             this.props.onEventDropAction(eventInfo);
         }
     }
 
     private onEventResize = (_resizeType: string, eventInfo: any) => {
-        if (eventInfo.end.getDate() !== eventInfo.event.end.getDate() && this.props.selectable && this.props.onEventResizeAction) {
+        if (eventInfo.end.getDate() !== eventInfo.event.end.getDate() && this.props.editable && this.props.onEventResizeAction) {
             this.props.onEventResizeAction(eventInfo);
         }
     }
@@ -157,6 +157,4 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     }
 }
 
-const CalendarDnD = DragDropContext(HTML5Backend)(Calendar);
-
-export { CalendarDnD as Calendar, Calendar as MyCalendar };
+export { Calendar as Calendar, Calendar as MyCalendar };

@@ -38,14 +38,14 @@ export class preview extends Component<Container.CalendarContainerProps> {
             color: props.eventColor,
             dragAndDrop: props.dragAndDrop,
             events: eventData,
-            formats: {}, // TODO:
+            formats: {},
             defaultView: props.defaultView,
             height: props.height,
             heightUnit: props.heightUnit,
             messages: [],
             startPosition: new Date(),
             popup: props.popup,
-            selectable: true,
+            editable: props.editable,
             style: parseStyle(props.style),
             width: props.width,
             widthUnit: props.widthUnit
@@ -68,7 +68,5 @@ export function getVisibleProperties(valueMap: Container.CalendarContainerProps,
 }
 
 export function getPreviewCss() {
-    return (
-        require("./ui/Calendar.scss") + require("react-big-calendar/lib/css/react-big-calendar.css")
-    );
+    return require("./ui/Calendar.scss") + require("react-big-calendar/lib/css/react-big-calendar.css");
 }

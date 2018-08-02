@@ -44,7 +44,6 @@
     "@types/karma": "^1.7.3",
     "@types/node": "9.6.7",
     "@types/react": "^16.3.17",
-    "@types/react-big-calendar": "^0.18.1",
     "@types/react-dnd": "^2.0.36",
     "@types/react-dom": "^16.0.6",
     "@types/webdriverio": "^4.10.2",
@@ -79,6 +78,8 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^3.0.0",
+    "less": "^3.8.0",
+    "less-loader": "^4.1.0",
     "mendix-client": "^7.13.5",
     "mendix-widget-build-script": "^1.0.0",
     "node-sass": "^4.9.0",
@@ -117,7 +118,7 @@
     "globalize": "0.1.1",
     "moment": "^2.22.2",
     "react-big-calendar": "^0.19.2",
-    "react-dnd": "^2.6.0",
+    "react-dnd": "2.6.0",
     "react-dnd-html5-backend": "^5.0.1"
   }
 }

@@ -17,7 +17,7 @@ describe("Calendar", () => {
         defaultView: "month",
         messages: [],
         popup: true,
-        selectable: true,
+        editable: "default",
         style: {},
         views: "standard",
         width: 100,
@@ -105,35 +105,6 @@ describe("Calendar", () => {
                 createElement(Alert, { className: "widget-calendar-alert" }),
                 createElement(DragAndDropCalendar, {
                     ...calendarProps
-                })
-            )
-        );
-    });
-
-    it("should render a structure correctly with custom formats", () => {
-        const calendar = renderCalendar(calendarProps);
-        const dayFormat = (calendar.instance() as any).dayFormat();
-        const weekdayFormat = (calendar.instance() as any).weekdayFormat();
-        const timeGutterFormat = (calendar.instance() as any).timeGutterFormat();
-        const monthHeaderFormat = (calendar.instance() as any).monthHeaderFormat();
-        const dayHeaderFormat = (calendar.instance() as any).dayHeaderFormat();
-        const newProps = { events: [] };
-        (calendar.instance() as any).componentWillReceiveProps(newProps);
-        const style = { width: "100%", height: "580px" };
-        const customFormats = {
-            dayFormat,
-            weekdayFormat,
-            timeGutterFormat,
-            monthHeaderFormat,
-            dayHeaderFormat
-        };
-
-        expect(calendar).toBeElement(
-            createElement("div", { className: "widget-calendar", style },
-                createElement(Alert, { className: "widget-calendar-alert" }),
-                createElement(DragAndDropCalendar, {
-                    ...calendarProps,
-                    formats: customFormats
                 })
             )
         );
