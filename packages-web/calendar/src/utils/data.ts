@@ -41,26 +41,26 @@ const fetchByXPath = (options: Data.FetchByXPathOptions): Promise<MxObject[]> =>
     });
 });
 
-const fetchByMicroflow = (actionname: string, guid: string): Promise<MxObject[]> =>
-    new Promise((resolve, reject) => {
+export const fetchByMicroflow = (actionname: string, guid: string): Promise<MxObject[]> =>
+    new Promise((resolve: (objects: MxObject[]) => void, reject) => {
         window.mx.ui.action(actionname, {
             params: {
                 applyto: "selection",
                 guids: [ guid ]
             },
-            callback: (mxObjects: MxObject[]) => resolve(mxObjects),
+            callback: resolve,
             error: error => reject(`An error occurred while retrieving data via microflow: ${actionname}: ${error.message}`)
         });
     });
 
-const fetchByNanoflow = (actionname: Data.Nanoflow, mxform: mxui.lib.form._FormBase): Promise<MxObject[]> =>
-    new Promise((resolve, reject) => {
+export const fetchByNanoflow = (actionname: Data.Nanoflow, mxform: mxui.lib.form._FormBase): Promise<MxObject[]> =>
+    new Promise((resolve: (objects: MxObject[]) => void, reject) => {
         const context = new mendix.lib.MxContext();
         window.mx.data.callNanoflow({
             nanoflow: actionname,
             origin: mxform,
             context,
-            callback: (mxObjects: MxObject[]) => resolve(mxObjects),
+            callback: resolve,
             error: error => reject(`An error occurred while retrieving data via nanoflow: ${actionname}: ${error.message}`)
         });
     });

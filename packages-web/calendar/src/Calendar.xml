@@ -81,7 +81,7 @@
         <property key="view" type="enumeration" defaultValue="standard">
             <caption>View</caption>
             <category>View</category>
-            <description>Standard has Day, Week Month</description>
+            <description>Standard has Day, Week and Month</description>
             <enumerationValues>
                 <enumerationValue key="standard">Standard</enumerationValue>
                 <enumerationValue key="custom">Custom</enumerationValue>
@@ -171,11 +171,6 @@
                     <category>Custom formats</category>
                     <description/>
                 </property>
-                <property key="agendaHeaderFormat" type="translatableString" required="false">
-                    <caption>Agenda header format</caption>
-                    <category>Custom formats</category>
-                    <description>All custom formats use Mendix date time formatting standard</description>
-                </property>
             </properties>
         </property>
         <property key="executeOnViewChange" type="boolean" defaultValue="false">
@@ -186,12 +181,12 @@
         <property key="viewStartAttribute" type="attribute" isPath="optional" pathType="reference" required="false">
             <caption>Start position attribute</caption>
             <category>View</category>
-            <description>The date on which the calendar should start initial, will be updated with `Refresh data source` before the view changes</description>
+            <description>The date on which the calendar view starts, will be updated with `Refresh data source` before the view changes</description>
             <attributeTypes>
                 <attributeType name="DateTime"/>
             </attributeTypes>
         </property>
-        <property key="viewEndAttribute" type="attribute" required="false">
+        <property key="viewEndAttribute" type="attribute" required="false" allowNonPersistableEntities="true">
             <caption>View end attribute</caption>
             <category>View</category>
             <description>The date on which the calendar view ends, will be updated with `Refresh data source` before the view changes</description>
@@ -204,7 +199,7 @@
             <category>View</category>
             <description>Show truncated events in an overlay when you click the "+x more" link</description>
         </property>
-        <property key="selectable" type="enumeration" defaultValue="default">
+        <property key="editable" type="enumeration" defaultValue="default">
             <caption>Editable</caption>
             <category>View</category>
             <description/>
@@ -214,7 +209,7 @@
             </enumerationValues>
         </property>
         <property key="dragAndDrop" type="boolean" defaultValue="true">
-            <caption>Drag and drop</caption>
+            <caption>Enable create</caption>
             <category>View</category>
             <description/>
         </property>

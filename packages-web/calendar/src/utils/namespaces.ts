@@ -57,14 +57,16 @@ export namespace Container {
         customViews: CustomViews[];
         dragAndDrop: boolean;
         defaultView: Style.View;
+        executeOnViewChange: boolean;
         viewStartAttribute: string;
+        viewEndAttribute: string;
         dataSource: DataSource;
         eventEntity: string;
         entityConstraint: string;
         dataSourceMicroflow: string;
         dataSourceNanoflow: Data.Nanoflow;
         popup: boolean;
-        selectable: boolean;
+        editable: string;
         refreshInterval: number;
         view: Views;
     }
@@ -99,8 +101,8 @@ export namespace Container {
         agendaHeaderFormat?: string | functionType;
         agendaDateFormat?: string | functionType;
         agendaTimeFormat?: string | functionType;
-        eventTimeRangeStartFormat?: string | functionType;
         eventTimeRangeEndFormat?: string | functionType;
+        eventTimeRangeStartFormat?: string | functionType;
     }
 
     export type DataSource = "context" | "XPath" | "microflow" | "nanoflow";

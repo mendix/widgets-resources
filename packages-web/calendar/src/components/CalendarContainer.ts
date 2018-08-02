@@ -1,7 +1,7 @@
 import { Component, ReactChild, createElement } from "react";
 
 import { Calendar, CalendarEvent } from "./Calendar";
-import { fetchData } from "../utils/data";
+import { fetchByMicroflow, fetchByNanoflow, fetchData } from "../utils/data";
 import { Container } from "../utils/namespaces";
 import * as globalize from "globalize";
 export interface CalendarContainerState {
@@ -50,7 +50,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 loading: this.state.loading,
                 popup: this.props.popup,
                 startPosition: this.state.startPosition,
-                selectable: !readOnly ? this.props.selectable : false,
+                editable: this.props.editable,
                 style: parseStyle(this.props.style),
                 views: this.props.view,
                 width: this.props.width,
@@ -59,7 +59,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 onEventResizeAction: !readOnly ? this.onChangeEvent : undefined,
                 onSelectSlotAction: !readOnly ? this.onClickSlot : undefined,
                 onEventDropAction: !readOnly ? this.onChangeEvent : undefined,
-                onViewChangeAction: this.onViewChange
+                onViewChangeAction: this.onChangeView
             })
         );
     }
@@ -107,7 +107,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     }
 
     private isReadOnly(): boolean {
-        return !this.props.mxObject || !this.props.selectable || this.props.readOnly;
+        return !this.props.mxObject || !this.props.editable || this.props.readOnly;
     }
 
     private loadEvents = (mxObject: mendix.lib.MxObject) => {
@@ -200,8 +200,6 @@ export default class CalendarContainer extends Component<Container.CalendarConta
             datePattern = dateFormat || "MMMM yyyy";
         } else if (dateType === "dayHeader") {
             datePattern = dateFormat || "EEE yyyy/MM/dd";
-        } else if (dateType === "agendaHeader") {
-            datePattern = dateFormat || "";
         } else if (dateType === "agendaDate") {
             datePattern = dateFormat || "EEE MMM d";
         } else if (dateType === "agendaTime") {
@@ -213,6 +211,18 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         }
 
         return (date: Date) => mx.parser.formatValue(date, "dateTime", { datePattern });
+    }
+
+    private onChangeView = () => {
+        if (this.props.executeOnViewChange && this.props.mxObject) {
+            const guid = this.props.mxObject ? this.props.mxObject.getGuid() : "";
+            if (this.props.dataSource === "microflow") {
+                fetchByMicroflow(this.props.dataSourceMicroflow, guid);
+            }
+            if (this.props.dataSource === "nanoflow") {
+                fetchByNanoflow(this.props.dataSourceNanoflow, this.props.mxform);
+            }
+        }
     }
 
     private onClickEvent = (eventInfo: any) => {
@@ -351,10 +361,6 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 )
             });
         }
-    }
-
-    private onViewChange() {
-        // TODO:
     }
 
     public static validateProps(props: Container.CalendarContainerProps): ReactChild {
