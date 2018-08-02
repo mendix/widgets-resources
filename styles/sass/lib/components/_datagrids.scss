@@ -31,6 +31,7 @@
         /* Table Body */
         .mx-datagrid-body tr {
             td {
+				@include transition();
                 padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
                 vertical-align: middle;
                 border-width: 0;

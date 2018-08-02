@@ -1,0 +1,176 @@
+body {
+    height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    height: 100%;
+
+    .logo {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        width: 120px;
+    }
+
+    .design-wrapper {
+        display: none;
+    }
+
+    .login-wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        .login-container {
+            width: 300px;
+			margin: 0 auto;
+
+			// Form
+            .login-form {
+
+                .alert {
+                    display: none;
+                }
+
+                .btn {
+                    border-radius: 40px;
+				}
+
+				// Form label + input
+                .form-group {
+                    width: 100%;
+
+                    label {
+                        font-size: 14px;
+                        font-weight: 500;
+                        margin-bottom: 10px;
+                    }
+
+                    .inputWrapper {
+                        position: relative;
+                        width: 100%;
+
+                        .glyphicon:before {
+                            -webkit-transition: color 0.4s;
+                            -o-transition: color 0.4s;
+                            -moz-transition: color 0.4s;
+                            transition: color 0.4s;
+                        }
+
+                        .glyphicon-eye-close,
+                        .glyphicon-user {
+                            position: absolute;
+                            left: 15px;
+                            top: 50%;
+                            -webkit-transform: translateY(-50%);
+                            -moz-transform: translateY(-50%);
+                            -ms-transform: translateY(-50%);
+                            -o-transform: translateY(-50%);
+                            transform: translateY(-50%);
+                        }
+
+                        input {
+                            width: 100%;
+                            border: 1px solid $gray-primary;
+                            border-radius: 4px;
+                            display: block;
+                            outline: none;
+                            padding: 0 10px 0 45px;
+                            height: 48px;
+                            color: #333333 !important;
+                            background-color: #FFFFFF !important;
+                            -webkit-transition: border 0.3s;
+                            transition: border 0.3s;
+
+                            &:focus {
+                                border: 1px solid $brand-primary;
+                            }
+
+                            &:-webkit-autofill,
+                            &:-webkit-autofill:hover,
+                            &:-webkit-autofill:focus {
+                                -webkit-text-fill-color: #333333;
+                                -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset;
+                            }
+                        }
+
+                        input:focus ~ .glyphicon:before {
+                            color: $brand-primary;
+                        }
+                    }
+				}
+
+				// Divider - only on login-with-sso.html
+                .alternative-label {
+                    margin: 25px 0px;
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    hr {
+                        flex: 1;
+                        border: 0;
+                        border-color: #d8d8d8;
+                        border-top: 1px solid #eee;
+                        margin: 20px 0 20px 10px;
+                    }
+                }
+
+                .mendix-signin {
+                    color: #555555;
+                }
+            }
+        }
+    }
+}
+
+// Show only on wide screens
+@media screen and (min-width: $screen-lg) {
+
+    .wrapper {
+        .logo {
+            width: 150px;
+        }
+
+        .design-wrapper {
+            flex: 1;
+            height: 100%;
+            width: 100%;
+            position: relative;
+			display: block;
+
+			// Image and clipping mask
+            .bg-image {
+                height: 100%;
+                -webkit-clip-path: polygon(0% 0%, 100% 0, 100% 50%, 100% 100%, 0% 100%);
+                clip-path: polygon(0% 0%, 100% 0, 100% 50%, 100% 100%, 0% 100%);
+                background: left / cover no-repeat url("../../../work-do-more.jpeg"); // Microsoft EDGE
+                background: left / cover no-repeat linear-gradient(to right, rgba($brand-primary, 0.9) 0%, rgba($brand-primary, 0.6) 100%), left / cover no-repeat url("../../../work-do-more.jpeg");
+                background: left / cover no-repeat -moz-linear-gradient(left, rgba($brand-primary, 0.9) 0%, rgba($brand-primary, 0.6) 100%), left / cover no-repeat url("../../../work-do-more.jpeg");
+                background: left / cover no-repeat -webkit-gradient(linear, left bottom, right bottom, color-stop(0%, rgba($brand-primary, 0.9)), color-stop(100%, rgba($brand-primary, 0.6))), left / cover no-repeat url("../../../work-do-more.jpeg");
+                background: left / cover no-repeat -webkit-linear-gradient(left, rgba($brand-primary, 0.9) 0%, rgba($brand-primary, 0.6) 100%), left / cover no-repeat url("../../../work-do-more.jpeg");
+                background: left / cover no-repeat -o-linear-gradient(left, rgba($brand-primary, 0.9) 0%, rgba($brand-primary, 0.6) 100%), left / cover no-repeat url("../../../work-do-more.jpeg");
+                background: left / cover no-repeat -ms-linear-gradient(left, rgba($brand-primary, 0.9) 0%, rgba($brand-primary, 0.6) 100%), left / cover no-repeat url("../../../work-do-more.jpeg");
+                animation: makePointer 1s ease-out both;
+            }
+        }
+
+        .login-wrapper {
+            .login-container {
+                width: 400px;
+            }
+        }
+    }
+}
+
+// Animate image clipping mask
+@keyframes makePointer {
+    100% {
+        -webkit-clip-path: polygon(0% 0%, 80% 0%, 100% 50%, 80% 100%, 0% 100%);
+        clip-path: polygon(0% 0%, 80% 0%, 100% 50%, 80% 100%, 0% 100%);
+    }
+}
