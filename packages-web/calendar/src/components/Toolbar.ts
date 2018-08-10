@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import * as Toolbar from "react-big-calendar/lib/ToolBar";
+import * as Toolbar from "react-big-calendar/lib/Toolbar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 export default class CustomToolbar extends Toolbar {
