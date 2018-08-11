@@ -4,8 +4,7 @@ import { Alert } from "./Alert";
 import { Style } from "../utils/namespaces";
 import * as classNames from "classnames";
 import * as BigCalendar from "react-big-calendar";
-import * as globalize from "globalize";
-import localizer from "react-big-calendar/lib/localizers/globalize";
+import * as moment from "moment";
 import * as withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import CustomToolbar from "./Toolbar";
 
@@ -13,7 +12,7 @@ import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "../ui/Calendar.scss";
 
-localizer(globalize);
+BigCalendar.momentLocalizer(moment);
 export const DragAndDropCalendar = withDragAndDrop(BigCalendar);
 
 export interface CalendarProps {
