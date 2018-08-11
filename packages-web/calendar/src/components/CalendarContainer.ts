@@ -3,7 +3,7 @@ import { Component, ReactChild, createElement } from "react";
 import { Calendar, CalendarEvent } from "./Calendar";
 import { fetchByMicroflow, fetchByNanoflow, fetchData } from "../utils/data";
 import { Container } from "../utils/namespaces";
-import * as globalize from "globalize";
+import * as moment from "moment";
 export interface CalendarContainerState {
     alertMessage: ReactChild;
     events: CalendarEvent[];
@@ -26,7 +26,12 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     };
 
     componentWillMount() {
-        globalize().cultures.default.calendars.standard.firstDay = window.mx.session.sessionData.locale.firstDayOfWeek;
+        moment.locale(window.mx.session.sessionData.locale.code, {
+            week: {
+                dow: window.mx.session.sessionData.locale.firstDayOfWeek,
+                doy: 6
+            }
+        });
     }
 
     render() {
