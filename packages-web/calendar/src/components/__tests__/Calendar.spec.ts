@@ -8,7 +8,7 @@ describe("Calendar", () => {
     const renderCalendar = (props: CalendarProps) => shallow(createElement(MyCalendar, props));
     const calendarProps: CalendarProps = {
         formats: {},
-        dragAndDrop: true,
+        enableCreate: true,
         events: [],
         height: 580,
         heightUnit: "pixels",
