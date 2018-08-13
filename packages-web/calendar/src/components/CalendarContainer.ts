@@ -2,7 +2,7 @@ import { Component, ReactChild, createElement } from "react";
 
 import { Calendar, CalendarEvent } from "./Calendar";
 import { fetchByMicroflow, fetchByNanoflow, fetchData } from "../utils/data";
-import { Container } from "../utils/namespaces";
+import { Container, Data } from "../utils/namespaces";
 import * as moment from "moment";
 export interface CalendarContainerState {
     alertMessage: ReactChild;
@@ -45,7 +45,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
             createElement(Calendar, {
                 alertMessage,
                 className: this.props.class,
-                dragAndDrop: this.props.dragAndDrop,
+                enableCreate: this.props.enableCreate,
                 formats: this.setCalendarFormats(),
                 height: this.props.height,
                 heightUnit: this.props.heightUnit,
@@ -61,9 +61,9 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 width: this.props.width,
                 widthUnit: this.props.widthUnit,
                 onSelectEventAction: !readOnly ? this.onClickEvent : undefined,
-                onEventResizeAction: !readOnly ? this.onChangeEvent : undefined,
+                onEventResizeAction: !readOnly ? this.handleOnChangeEvent : undefined,
                 onSelectSlotAction: !readOnly ? this.onClickSlot : undefined,
-                onEventDropAction: !readOnly ? this.onChangeEvent : undefined,
+                onEventDropAction: !readOnly ? this.handleOnChangeEvent : undefined,
                 onViewChangeAction: this.onChangeView
             })
         );
@@ -233,44 +233,17 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     private onClickEvent = (eventInfo: any) => {
         mx.data.get({
             guid: eventInfo.guid,
-            callback: this.excecuteEventAction,
+            callback: this.executeEventAction,
             error: error => window.mx.ui.error(`Error while executing action: ${error.message}`)
         });
     }
 
-    private excecuteEventAction = (object: mendix.lib.MxObject) => {
+    private executeEventAction = (mxObject: mendix.lib.MxObject) => {
         const { onClickEvent, onClickMicroflow, mxform, onClickNanoflow, onClickPage, onClickOpenPageAs } = this.props;
-        if (!object || !object.getGuid()) {
+        if (!mxObject || !mxObject.getGuid()) {
             return;
         }
-        const context = new mendix.lib.MxContext();
-        context.setContext(object.getEntity(), object.getGuid());
-        if (onClickEvent === "callMicroflow" && onClickMicroflow) {
-            window.mx.ui.action(onClickMicroflow, {
-                context,
-                origin: mxform,
-                error: error => window.mx.ui.error(
-                    `Error while executing microflow: ${onClickMicroflow}: ${error.message}`
-                )
-            });
-        } else if (onClickEvent === "callNanoflow" && onClickNanoflow.nanoflow) {
-            window.mx.data.callNanoflow({
-                nanoflow: onClickNanoflow,
-                origin: mxform,
-                context,
-                error: error => window.mx.ui.error(
-                    `An error occurred while executing the nanoflow: ${error.message}`
-                )
-            });
-        } else if (onClickEvent === "showPage" && onClickPage) {
-            window.mx.ui.openForm(onClickPage, {
-                context,
-                error: error => window.mx.ui.error(
-                    `Error while opening page ${onClickPage}: ${error.message}`
-                ),
-                location: onClickOpenPageAs
-            });
-        }
+        this.executeAction(mxObject, onClickEvent, onClickMicroflow, mxform, onClickNanoflow, onClickOpenPageAs, onClickPage);
     }
 
     private onClickSlot = (slotInfo: any) => {
@@ -281,45 +254,18 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 object.set(this.props.eventColor, object.get(this.props.titleAttribute));
                 object.set(this.props.startAttribute, slotInfo.start);
                 object.set(this.props.endAttribute, slotInfo.end);
-                this.excecuteSlotAction(object);
+                this.executeSlotAction(object);
             },
             error: error => window.mx.ui.error(`Error while creating a new event: ${ error.message }`)
         });
     }
 
-    private excecuteSlotAction(mxObject: mendix.lib.MxObject) {
+    private executeSlotAction(mxObject: mendix.lib.MxObject) {
         const { onCreate, onCreateMicroflow, mxform, onCreateOpenPageAs, onCreateNanoflow, onCreatePage } = this.props;
-        const context = new mendix.lib.MxContext();
-        context.setContext(mxObject.getEntity(), mxObject.getGuid());
-        if (onCreate === "callMicroflow" && onCreateMicroflow && mxObject.getGuid()) {
-            window.mx.ui.action(onCreateMicroflow, {
-                context,
-                origin: mxform,
-                error: error => window.mx.ui.error(
-                    `Error while executing microflow: ${onCreateMicroflow}: ${error.message}`
-                )
-            });
-        } else if (onCreate === "callNanoflow" && onCreateNanoflow.nanoflow) {
-            window.mx.data.callNanoflow({
-                nanoflow: onCreateNanoflow,
-                origin: mxform,
-                context,
-                error: error => window.mx.ui.error(
-                    `An error occurred while executing the nanoflow: ${error.message}`
-                )
-            });
-        } else if (onCreate === "showPage" && onCreatePage && mxObject.getGuid()) {
-            window.mx.ui.openForm(onCreatePage, {
-                context,
-                error: error => window.mx.ui.error(
-                    `Error while opening page ${onCreatePage}: ${error.message}`
-                ),
-                location: onCreateOpenPageAs
-            });
-        }
+        this.executeAction(mxObject, onCreate, onCreateMicroflow, mxform, onCreateNanoflow, onCreateOpenPageAs, onCreatePage);
     }
 
-    private onChangeEvent = (eventInfo: any) => {
+    private handleOnChangeEvent = (eventInfo: any) => {
         const { events } = this.state;
         const eventPosition = events.indexOf(eventInfo.event);
         const updatedEvent: CalendarEvent = {
@@ -339,31 +285,43 @@ export default class CalendarContainer extends Component<Container.CalendarConta
             mxEventObject.set(this.props.eventColor, eventInfo.event.color);
             mxEventObject.set(this.props.startAttribute, eventInfo.start);
             mxEventObject.set(this.props.endAttribute, eventInfo.end);
-            this.excecuteonDropAction(mxEventObject);
+            this.executeonDropAction(mxEventObject);
         }
     }
 
-    private excecuteonDropAction = (mxObject: mendix.lib.MxObject) => {
+    private executeonDropAction = (mxObject: mendix.lib.MxObject) => {
         if (!mxObject || !mxObject.getGuid()) { return; }
         const { onChangeEvent, onChangeMicroflow, mxform, onChangeNanoflow } = this.props;
+        this.executeAction(mxObject, onChangeEvent, onChangeMicroflow, mxform, onChangeNanoflow);
+    }
+
+    private executeAction(mxObject: mendix.lib.MxObject, action: Container.OnClickEventOptions, microflow: string, mxform: mxui.lib.form._FormBase, nanoflow: Data.Nanoflow, openPageAs?: any, page?: string) {
         const context = new mendix.lib.MxContext();
         context.setContext(mxObject.getEntity(), mxObject.getGuid());
-        if (onChangeEvent === "callMicroflow" && onChangeMicroflow && mxObject.getGuid()) {
-            window.mx.ui.action(onChangeMicroflow, {
+        if (action === "callMicroflow" && microflow && mxObject.getGuid()) {
+            window.mx.ui.action(microflow, {
                 context,
                 origin: mxform,
                 error: error => window.mx.ui.error(
-                    `Error while executing microflow: ${onChangeMicroflow}: ${error.message}`
+                    `Error while executing microflow: ${microflow}: ${error.message}`
                 )
             });
-        } else if (onChangeEvent === "callNanoflow" && onChangeNanoflow.nanoflow) {
+        } else if (action === "callNanoflow" && nanoflow.nanoflow) {
             window.mx.data.callNanoflow({
-                nanoflow: onChangeNanoflow,
+                nanoflow,
                 origin: mxform,
                 context,
                 error: error => window.mx.ui.error(
                     `An error occurred while executing the nanoflow: ${error.message}`
                 )
+            });
+        } else if (action === "showPage" && page && mxObject.getGuid()) {
+            window.mx.ui.openForm(page, {
+                context,
+                error: error => window.mx.ui.error(
+                    `Error while opening page ${page}: ${error.message}`
+                ),
+                location: openPageAs
             });
         }
     }
