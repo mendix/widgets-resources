@@ -36,7 +36,7 @@ export class preview extends Component<Container.CalendarContainerProps> {
         return {
             alertMessage: CalendarContainer.validateProps(props),
             color: props.eventColor,
-            dragAndDrop: props.dragAndDrop,
+            enableCreate: props.enableCreate,
             events: eventData,
             formats: {},
             defaultView: props.defaultView,

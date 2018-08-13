@@ -21,7 +21,7 @@ export interface CalendarProps {
     events: CalendarEvent[];
     color?: string;
     formats: {};
-    dragAndDrop: boolean;
+    enableCreate: boolean;
     height: number;
     heightUnit: Style.HeightUnitType;
     loading?: boolean;
@@ -91,7 +91,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
                 ? [ "day", "week", "month" ]
                 : Object.keys(this.props.messages),
             popup: this.props.popup,
-            selectable: this.props.dragAndDrop,
+            selectable: this.props.enableCreate,
             step: 60,
             showMultiDayTimes: true,
             onSelectEvent: this.onSelectEvent,
@@ -99,7 +99,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
             onView: this.onViewChange
         };
 
-        if (this.props.dragAndDrop && this.props.editable === "default") {
+        if (this.props.enableCreate && this.props.editable === "default") {
             return createElement(DragAndDropCalendar, {
                 ...props,
                 onEventDrop: this.onEventDrop,

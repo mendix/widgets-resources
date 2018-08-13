@@ -32,7 +32,7 @@ describe("Calendar", () => {
         expect(doesExist).toBeTruthy();
     });
 
-    it("should excecute an action when a slot is clicked", () => {
+    it("should execute an action when a slot is clicked", () => {
         OnCreateEventPage.open();
         OnCreateEventPage.calendarSlot.waitForVisible();
         OnCreateEventPage.calendarSlot.click();

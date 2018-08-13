@@ -55,7 +55,7 @@ export namespace Container {
 
     export interface CalendarContainerProps extends WrapperProps, Dimensions, Events, EventData, CustomFormats {
         customViews: CustomViews[];
-        dragAndDrop: boolean;
+        enableCreate: boolean;
         defaultView: Style.View;
         executeOnViewChange: boolean;
         viewStartAttribute: string;
@@ -106,8 +106,8 @@ export namespace Container {
     }
 
     export type DataSource = "context" | "XPath" | "microflow" | "nanoflow";
-    type OnClickEventOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
-    type PageLocation = "content" | "popup" | "modal";
+    export type OnClickEventOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
+    export type PageLocation = "content" | "popup" | "modal" | "node";
     type Views = "custom" | "standard";
 
     export interface CustomViews extends CustomFormats {
