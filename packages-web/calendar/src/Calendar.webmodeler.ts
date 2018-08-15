@@ -47,6 +47,7 @@ export class preview extends Component<Container.CalendarContainerProps> {
             popup: props.popup,
             editable: props.editable,
             style: parseStyle(props.style),
+            views: "standard",
             width: props.width,
             widthUnit: props.widthUnit
         };
@@ -68,5 +69,7 @@ export function getVisibleProperties(valueMap: Container.CalendarContainerProps,
 }
 
 export function getPreviewCss() {
-    return require("./ui/Calendar.scss") + require("react-big-calendar/lib/css/react-big-calendar.css");
+    return (
+        require("./ui/Calendar.scss") + require("react-big-calendar/lib/css/react-big-calendar.css")
+    );
 }

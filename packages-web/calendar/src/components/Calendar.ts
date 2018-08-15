@@ -37,7 +37,7 @@ export interface CalendarProps {
     monthHeaderFormat?: (date: Date) => void;
     dayHeaderFormat?: (date: Date) => void;
     style: object;
-    views?: string;
+    views: string;
     width: number;
     widthUnit: Style.WidthUnitType;
     onSelectEventAction?: (eventInfo: object) => void;
@@ -48,12 +48,12 @@ export interface CalendarProps {
 }
 
 export interface CalendarEvent {
-    title: string;
     allDay: boolean;
-    start: Date;
+    color: string;
     end: Date;
     guid: string;
-    color: string;
+    start: Date;
+    title: string;
 }
 
 interface CalendarState {
@@ -63,10 +63,11 @@ interface CalendarState {
 
 class Calendar extends Component<CalendarProps, CalendarState> {
     state: CalendarState = { events: this.props.events };
+    standardViews: [ "day", "week", "month" ];
 
     render() {
         return createElement("div", { className: classNames("widget-calendar", this.props.className), style: this.getDimensions() },
-            createElement(Alert, { className: "widget-calendar-alert" }, this.props.alertMessage),
+            this.renderAlert(),
             this.renderCalendar()
         );
     }
@@ -75,6 +76,10 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         if (this.state.events !== newProps.events) {
             this.setState({ events: newProps.events });
         }
+    }
+
+    private renderAlert() {
+        return createElement(Alert, { className: "widget-calendar-alert" }, this.props.alertMessage);
     }
 
     private renderCalendar() {
@@ -88,8 +93,10 @@ class Calendar extends Component<CalendarProps, CalendarState> {
             formats: this.props.views === "custom" ? this.props.formats : "",
             messages: this.props.views === "custom" ? this.props.messages : "",
             views: this.props.views === "standard"
-                ? [ "day", "week", "month" ]
-                : Object.keys(this.props.messages),
+                ? this.standardViews
+                : Object.keys(this.props.messages).length > 0
+                ? Object.keys(this.props.messages)
+                : this.renderAlert,
             popup: this.props.popup,
             selectable: this.props.enableCreate,
             step: 60,
