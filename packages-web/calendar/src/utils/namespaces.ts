@@ -46,7 +46,6 @@ export namespace Container {
         timeGutterFormat: string;
         monthHeaderFormat: string;
         dayHeaderFormat: string;
-        agendaHeaderFormat: string;
         agendaDateFormat: string;
         agendaTimeFormat: string;
         eventTimeRangeStartFormat: string;
@@ -80,7 +79,6 @@ export namespace Container {
     | "timeGutter"
     | "monthHeader"
     | "dayHeader"
-    | "agendaHeader"
     | "agendaDate"
     | "agendaTime"
     | "eventTimeStart"
@@ -92,17 +90,16 @@ export namespace Container {
         work_week?: string;
         day?: string;
         agenda?: string;
-        dateFormat?: string | functionType;
-        dayFormat?: string | functionType;
-        weekdayFormat?: string | functionType;
-        timeGutterFormat?: string | functionType;
-        monthHeaderFormat?: string | functionType;
-        dayHeaderFormat?: string | functionType;
-        agendaHeaderFormat?: string | functionType;
-        agendaDateFormat?: string | functionType;
-        agendaTimeFormat?: string | functionType;
-        eventTimeRangeEndFormat?: string | functionType;
-        eventTimeRangeStartFormat?: string | functionType;
+        dateFormat?: functionType | string;
+        dayFormat?: functionType | string;
+        weekdayFormat?: functionType | string;
+        timeGutterFormat?: functionType | string;
+        monthHeaderFormat?: functionType | string;
+        dayHeaderFormat?: functionType | string;
+        agendaDateFormat?: functionType | string;
+        agendaTimeFormat?: functionType | string;
+        eventTimeRangeEndFormat?: functionType | string;
+        eventTimeRangeStartFormat?: functionType | string;
     }
 
     export type DataSource = "context" | "XPath" | "microflow" | "nanoflow";

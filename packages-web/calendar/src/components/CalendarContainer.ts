@@ -60,7 +60,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 views: this.props.view,
                 width: this.props.width,
                 widthUnit: this.props.widthUnit,
-                onSelectEventAction: !readOnly ? this.onClickEvent : undefined,
+                onSelectEventAction: !readOnly ? this.handleOnClickEvent : undefined,
                 onEventResizeAction: !readOnly ? this.handleOnChangeEvent : undefined,
                 onSelectSlotAction: !readOnly ? this.onClickSlot : undefined,
                 onEventDropAction: !readOnly ? this.handleOnChangeEvent : undefined,
@@ -175,15 +175,30 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     private setCalendarFormats = () => {
         const viewOptions: Container.ViewOptions = {};
         this.props.customViews.forEach((customView) => {
-            viewOptions.dateFormat = this.customFormat(customView.dateFormat, "date");
-            viewOptions.dayFormat = this.customFormat(customView.dayFormat, "day");
-            viewOptions.weekdayFormat = this.customFormat(customView.weekdayFormat, "weekday");
-            viewOptions.timeGutterFormat = this.customFormat(customView.timeGutterFormat, "timeGutter");
-            viewOptions.monthHeaderFormat = this.customFormat(customView.monthHeaderFormat, "monthHeader");
-            viewOptions.dayHeaderFormat = this.customFormat(customView.dayHeaderFormat, "dayHeader");
-            viewOptions.agendaHeaderFormat = this.customFormat(customView.agendaHeaderFormat, "agendaHeader");
-            viewOptions.agendaDateFormat = this.customFormat(customView.agendaDateFormat, "agendaDate");
-            viewOptions.agendaTimeFormat = this.customFormat(customView.agendaTimeFormat, "agendaTime");
+            viewOptions.dateFormat = customView.customView === "month"
+                ? this.customFormat(customView.dateFormat, "date")
+                : viewOptions.dateFormat;
+            viewOptions.dayFormat = customView.customView === "day"
+                ? this.customFormat(customView.dayFormat, "day")
+                : viewOptions.dayFormat;
+            viewOptions.weekdayFormat = customView.customView === "month"
+                ? this.customFormat(customView.weekdayFormat, "weekday")
+                : viewOptions.weekdayFormat;
+            viewOptions.timeGutterFormat = customView.customView === "week"
+                ? this.customFormat(customView.timeGutterFormat, "timeGutter")
+                : viewOptions.timeGutterFormat;
+            viewOptions.monthHeaderFormat = customView.customView === "month"
+                ? this.customFormat(customView.monthHeaderFormat, "monthHeader")
+                : viewOptions.monthHeaderFormat;
+            viewOptions.dayHeaderFormat = customView.customView === "day"
+                ? this.customFormat(customView.dayHeaderFormat, "dayHeader")
+                : viewOptions.dayHeaderFormat;
+            viewOptions.agendaDateFormat = customView.customView === "agenda"
+                ? this.customFormat(customView.agendaDateFormat, "agendaDate")
+                : viewOptions.agendaDateFormat;
+            viewOptions.agendaTimeFormat = customView.customView === "agenda"
+                ? this.customFormat(customView.agendaTimeFormat, "agendaTime")
+                : viewOptions.agendaTimeFormat;
             viewOptions.eventTimeRangeStartFormat = this.customFormat(customView.eventTimeRangeStartFormat, "eventTimeStart");
             viewOptions.eventTimeRangeEndFormat = this.customFormat(customView.eventTimeRangeEndFormat, "eventTimeEnd");
         });
@@ -196,9 +211,9 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         if (dateType === "date") {
             datePattern = dateFormat || "dd";
         } else if (dateType === "day") {
-            datePattern = dateFormat || "EEEE dd/MM";
+            datePattern = dateFormat || "EEE dd/MM";
         } else if (dateType === "weekday") {
-            datePattern = dateFormat || "EEE";
+            datePattern = dateFormat || "EEEE";
         } else if (dateType === "timeGutter") {
             datePattern = dateFormat || "hh:mm a";
         } else if (dateType === "monthHeader") {
@@ -215,7 +230,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
             datePattern = dateFormat || "M/d/yyyy";
         }
 
-        return (date: Date) => mx.parser.formatValue(date, "dateTime", { datePattern });
+        return (date: Date) => window.mx.parser.formatValue(date, "datetime", { datePattern });
     }
 
     private onChangeView = () => {
@@ -230,7 +245,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         }
     }
 
-    private onClickEvent = (eventInfo: any) => {
+    private handleOnClickEvent = (eventInfo: any) => {
         mx.data.get({
             guid: eventInfo.guid,
             callback: this.executeEventAction,
@@ -355,6 +370,28 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         }
         if (props.dataSource === "context" && (props.mxObject && props.mxObject.getEntity() !== props.eventEntity)) {
             errorMessages.push(`${props.friendlyId}: Context entity does not match the event entity`);
+        }
+        if (props.view === "custom" && props.customViews.length <= 0) {
+            errorMessages.push(`${props.friendlyId}: View is set to "custom" but there is no view selected`);
+        }
+        try {
+            if (props.view === "custom") {
+                const viewOptions: Container.ViewOptions = {};
+                props.customViews.forEach((customView) => {
+                    viewOptions.dateFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.dateFormat });
+                    viewOptions.dayFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.dayFormat });
+                    viewOptions.weekdayFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.weekdayFormat });
+                    viewOptions.timeGutterFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.timeGutterFormat });
+                    viewOptions.monthHeaderFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.monthHeaderFormat });
+                    viewOptions.dayHeaderFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.dayHeaderFormat });
+                    viewOptions.agendaDateFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.agendaDateFormat });
+                    viewOptions.agendaTimeFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.agendaTimeFormat });
+                    viewOptions.eventTimeRangeStartFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.eventTimeRangeStartFormat });
+                    viewOptions.eventTimeRangeEndFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.eventTimeRangeEndFormat });
+                });
+            }
+        } catch (error) {
+            errorMessages.push(`${props.friendlyId}: Invalid format value`);
         }
         if (errorMessages.length) {
             return createElement("div", {},
