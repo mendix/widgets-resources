@@ -376,18 +376,11 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         }
         try {
             if (props.view === "custom") {
-                const viewOptions: Container.ViewOptions = {};
+                const formatKeys = Object.keys(props.customViews[0] as Container.CustomFormats);
                 props.customViews.forEach((customView) => {
-                    viewOptions.dateFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.dateFormat });
-                    viewOptions.dayFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.dayFormat });
-                    viewOptions.weekdayFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.weekdayFormat });
-                    viewOptions.timeGutterFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.timeGutterFormat });
-                    viewOptions.monthHeaderFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.monthHeaderFormat });
-                    viewOptions.dayHeaderFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.dayHeaderFormat });
-                    viewOptions.agendaDateFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.agendaDateFormat });
-                    viewOptions.agendaTimeFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.agendaTimeFormat });
-                    viewOptions.eventTimeRangeStartFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.eventTimeRangeStartFormat });
-                    viewOptions.eventTimeRangeEndFormat = window.mx.parser.formatValue(new Date(), "datetime", { datePattern: customView.eventTimeRangeEndFormat });
+                    formatKeys.forEach(format => {
+                        window.mx.parser.formatValue(new Date(), "datetime", { datePattern: (customView as any)[format] });
+                    });
                 });
             }
         } catch (error) {

@@ -39,7 +39,7 @@ export namespace Container {
         eventColor: string;
     }
 
-    interface CustomFormats {
+    export interface CustomFormats {
         dayFormat: string;
         dateFormat: string;
         weekdayFormat: string;

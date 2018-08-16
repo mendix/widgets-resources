@@ -124,52 +124,52 @@
                 <property key="dateFormat" type="translatableString" required="false">
                     <caption>Date format</caption>
                     <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g. dd (Works in month view only)</description>
+                    <description>Formats date in month view using mendix date formats e.g: dd</description>
                 </property>
                 <property key="dayFormat" type="translatableString" required="false">
                     <caption>Day format</caption>
                     <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g. EEEE dd/MM (Works in week and day view)</description>
+                    <description>Formats date in week and day views using mendix date formats. e.g: EEEE dd/MM</description>
                 </property>
                 <property key="weekdayFormat" type="translatableString" required="false">
                     <caption>Weekday format</caption>
                     <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g. EEE (Works in month view only)</description>
+                    <description>Formats date in month view using mendix date formats e.g: EEE</description>
                 </property>
                 <property key="timeGutterFormat" type="translatableString" required="false">
                     <caption>Time gutter format</caption>
                     <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g. hh:mm a (Works in week and day view)</description>
+                    <description>Formats date in week and day views using mendix date formats. e.g: hh:mm a</description>
                 </property>
                 <property key="monthHeaderFormat" type="translatableString" required="false">
                     <caption>Month header format</caption>
                     <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g. MMMM yyyy</description>
+                    <description>Use mendix date formats. e.g: MMMM yyyy</description>
                 </property>
                 <property key="dayHeaderFormat" type="translatableString" required="false">
                     <caption>Day header format</caption>
                     <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g. EEE yyyy/MM/dd</description>
+                    <description>Use mendix date formats. e.g: EEE yyyy/MM/dd</description>
                 </property>
                 <property key="agendaDateFormat" type="translatableString" required="false">
                     <caption>Agenda date format</caption>
                     <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g. EEE MMM d</description>
+                    <description>Use mendix date formats. e.g: EEE MMM d</description>
                 </property>
                 <property key="agendaTimeFormat" type="translatableString" required="false">
                     <caption>Agenda time format</caption>
                     <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g. hh:mm a</description>
+                    <description>Use mendix date formats. e.g: hh:mm a</description>
                 </property>
                 <property key="eventTimeRangeStartFormat" type="translatableString" required="false">
                     <caption>Event time range start format</caption>
                     <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g. M/d/yyyy</description>
+                    <description>Use mendix date formats. e.g: M/d/yyyy</description>
                 </property>
                 <property key="eventTimeRangeEndFormat" type="translatableString" required="false">
                     <caption>Event time range end format</caption>
                     <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g. M/d/yyyy</description>
+                    <description>Use mendix date formats. e.g: M/d/yyyy</description>
                 </property>
             </properties>
         </property>
