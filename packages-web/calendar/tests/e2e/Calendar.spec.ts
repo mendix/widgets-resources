@@ -12,15 +12,6 @@ describe("Calendar", () => {
         expect(doesExist).toBeTruthy();
     });
 
-    it("renders day view", () => {
-        HomePage.dayViewButton.waitForExist();
-        HomePage.dayViewButton.click();
-        HomePage.dayView.waitForExist();
-        const doesExist = HomePage.dayView.isExisting();
-
-        expect(doesExist).toBeTruthy();
-    });
-
     it("should execute an action when a calendar event is clicked", () => {
         OnClickEventPage.open();
         OnClickEventPage.calendar.waitForVisible();

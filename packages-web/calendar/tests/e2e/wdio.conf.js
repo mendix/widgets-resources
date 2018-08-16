@@ -16,7 +16,7 @@ exports.config = {
     screenshotPath: "dist/wdio/",
     baseUrl: debug ? "http://localhost:8080/" : "http://reactcalendar.mxapps.io/",
 
-    waitforTimeout: 33000,
+    waitforTimeout: 40000,
     connectionRetryTimeout: 90000,
     connectionRetryCount: 0,
     services: ["selenium-standalone"],

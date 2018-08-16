@@ -8,7 +8,7 @@ class HomePage {
     }
 
     public get dayViewButton() {
-        return browser.element(".mx-name-calendar1 .rbc-toolbar > span:nth-child(3) > button:nth-child(1)");
+        return browser.element(".mx-name-calendar1 .mx-grid-controlbar .mx-grid-toolbar.calendar-messages button:nth-child(3)");
     }
 
     public get dayView() {

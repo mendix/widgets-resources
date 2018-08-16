@@ -62,7 +62,7 @@ interface CalendarState {
 }
 
 class Calendar extends Component<CalendarProps, CalendarState> {
-    state: CalendarState = { events: this.props.events };
+    readonly state: CalendarState = { events: this.props.events };
     standardViews: [ "day", "week", "month" ];
 
     render() {
@@ -94,9 +94,9 @@ class Calendar extends Component<CalendarProps, CalendarState> {
             messages: this.props.views === "custom" ? this.props.messages : "",
             views: this.props.views === "standard"
                 ? this.standardViews
-                : Object.keys(this.props.messages).length > 0
-                ? Object.keys(this.props.messages)
-                : this.renderAlert,
+                : !Object.keys(this.props.messages).length
+                    ? this.renderAlert
+                    : Object.keys(this.props.messages),
             popup: this.props.popup,
             selectable: this.props.enableCreate,
             step: 60,
