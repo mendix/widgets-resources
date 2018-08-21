@@ -59,10 +59,6 @@ export function getVisibleProperties(valueMap: Container.CalendarContainerProps,
     visibilityMap.entityConstraint = valueMap.dataSource === "XPath";
     visibilityMap.onClickMicroflow = valueMap.onClickEvent === "callMicroflow";
     visibilityMap.onClickNanoflow = valueMap.onClickEvent === "callNanoflow";
-    visibilityMap.onClickPage = valueMap.onClickEvent === "showPage";
-    visibilityMap.onCreatePage = valueMap.onCreate === "showPage";
-    visibilityMap.onClickOpenPageAs = valueMap.onClickEvent === "showPage";
-    visibilityMap.onCreateOpenPageAs = valueMap.onCreate === "showPage";
     if (valueMap.view === "standard") { visibilityMap.view = false; }
 
     return visibilityMap;

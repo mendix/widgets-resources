@@ -20,12 +20,8 @@ export namespace Container {
         onCreate: OnClickEventOptions;
         onClickMicroflow: string;
         onClickNanoflow: Data.Nanoflow;
-        onClickPage: string;
-        onClickOpenPageAs: PageLocation;
         onCreateMicroflow: string;
         onCreateNanoflow: Data.Nanoflow;
-        onCreatePage: string;
-        onCreateOpenPageAs: PageLocation;
         onChangeEvent: OnClickEventOptions;
         onChangeMicroflow: string;
         onChangeNanoflow: Data.Nanoflow;
@@ -103,8 +99,7 @@ export namespace Container {
     }
 
     export type DataSource = "context" | "XPath" | "microflow" | "nanoflow";
-    export type OnClickEventOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
-    export type PageLocation = "content" | "popup" | "modal" | "node";
+    export type OnClickEventOptions = "doNothing" | "callMicroflow" | "callNanoflow";
     type Views = "custom" | "standard";
 
     export interface CustomViews extends CustomFormats {
@@ -115,9 +110,7 @@ export namespace Container {
 
 export namespace Data {
     export interface EventProps {
-        onClickEvent: "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
-        openPageLocation: "popup" | "modal" | "content";
-        onClickPage: string;
+        onClickEvent: "doNothing" | "callMicroflow" | "callNanoflow";
         onClickMicroflow: string;
         onClickNanoflow: Nanoflow;
         tooltipForm: string;
