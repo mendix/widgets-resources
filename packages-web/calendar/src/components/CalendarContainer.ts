@@ -254,11 +254,11 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     }
 
     private executeEventAction = (mxObject: mendix.lib.MxObject) => {
-        const { onClickEvent, onClickMicroflow, mxform, onClickNanoflow, onClickPage, onClickOpenPageAs } = this.props;
+        const { onClickEvent, onClickMicroflow, mxform, onClickNanoflow } = this.props;
         if (!mxObject || !mxObject.getGuid()) {
             return;
         }
-        this.executeAction(mxObject, onClickEvent, onClickMicroflow, mxform, onClickNanoflow, onClickOpenPageAs, onClickPage);
+        this.executeAction(mxObject, onClickEvent, onClickMicroflow, mxform, onClickNanoflow);
     }
 
     private onClickSlot = (slotInfo: any) => {
@@ -276,8 +276,8 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     }
 
     private executeSlotAction(mxObject: mendix.lib.MxObject) {
-        const { onCreate, onCreateMicroflow, mxform, onCreateOpenPageAs, onCreateNanoflow, onCreatePage } = this.props;
-        this.executeAction(mxObject, onCreate, onCreateMicroflow, mxform, onCreateNanoflow, onCreateOpenPageAs, onCreatePage);
+        const { onCreate, onCreateMicroflow, mxform, onCreateNanoflow } = this.props;
+        this.executeAction(mxObject, onCreate, onCreateMicroflow, mxform, onCreateNanoflow);
     }
 
     private handleOnChangeEvent = (eventInfo: any) => {
@@ -300,17 +300,17 @@ export default class CalendarContainer extends Component<Container.CalendarConta
             mxEventObject.set(this.props.eventColor, eventInfo.event.color);
             mxEventObject.set(this.props.startAttribute, eventInfo.start);
             mxEventObject.set(this.props.endAttribute, eventInfo.end);
-            this.executeonDropAction(mxEventObject);
+            this.executeOnDropAction(mxEventObject);
         }
     }
 
-    private executeonDropAction = (mxObject: mendix.lib.MxObject) => {
+    private executeOnDropAction = (mxObject: mendix.lib.MxObject) => {
         if (!mxObject || !mxObject.getGuid()) { return; }
         const { onChangeEvent, onChangeMicroflow, mxform, onChangeNanoflow } = this.props;
         this.executeAction(mxObject, onChangeEvent, onChangeMicroflow, mxform, onChangeNanoflow);
     }
 
-    private executeAction(mxObject: mendix.lib.MxObject, action: Container.OnClickEventOptions, microflow: string, mxform: mxui.lib.form._FormBase, nanoflow: Data.Nanoflow, openPageAs?: any, page?: string) {
+    private executeAction(mxObject: mendix.lib.MxObject, action: Container.OnClickEventOptions, microflow: string, mxform: mxui.lib.form._FormBase, nanoflow: Data.Nanoflow) {
         const context = new mendix.lib.MxContext();
         context.setContext(mxObject.getEntity(), mxObject.getGuid());
         if (action === "callMicroflow" && microflow && mxObject.getGuid()) {
@@ -330,14 +330,6 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                     `An error occurred while executing the nanoflow: ${error.message}`
                 )
             });
-        } else if (action === "showPage" && page && mxObject.getGuid()) {
-            window.mx.ui.openForm(page, {
-                context,
-                error: error => window.mx.ui.error(
-                    `Error while opening page ${page}: ${error.message}`
-                ),
-                location: openPageAs
-            });
         }
     }
 
@@ -346,15 +338,11 @@ export default class CalendarContainer extends Component<Container.CalendarConta
 
         if (props.onClickEvent === "callMicroflow" && !props.onClickMicroflow) {
             errorMessages.push("On click event is set to 'Call a microflow' but no microflow is selected");
-        } else if (props.onClickEvent === "showPage" && !props.onClickPage) {
-            errorMessages.push("On click event is set to 'Show a page' but no page is selected");
         } else if (props.onClickEvent === "callNanoflow" && !props.onClickNanoflow.nanoflow) {
             errorMessages.push("On click event is set to 'Call a nanoflow' but no nanoflow is selected");
         }
         if (props.onCreate === "callMicroflow" && !props.onCreateMicroflow) {
             errorMessages.push("On create event is set to 'Call a microflow' but no microflow is selected");
-        } else if (props.onCreate === "showPage" && !props.onCreatePage) {
-            errorMessages.push("On create event is set to 'Show a page' but no page is selected");
         } else if (props.onCreate === "callNanoflow" && !props.onCreateNanoflow.nanoflow) {
             errorMessages.push("On create event is set to 'Call a nanoflow' but no nanoflow is selected");
         }

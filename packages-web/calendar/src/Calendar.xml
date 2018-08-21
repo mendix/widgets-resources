@@ -48,7 +48,7 @@
         <property key="allDayAttribute" type="attribute" entityProperty="eventEntity" required="false">
             <caption>All day</caption>
             <category>Data source</category>
-            <description/>
+            <description>Boolean indicating whether the event is all day or not. If not specified, All day is false</description>
             <attributeTypes>
                 <attributeType name="Boolean"/>
             </attributeTypes>
@@ -248,25 +248,9 @@
             <description>Click on calender item</description>
             <enumerationValues>
                 <enumerationValue key="doNothing">Do nothing</enumerationValue>
-                <enumerationValue key="showPage">Show a page</enumerationValue>
                 <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
                 <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
             </enumerationValues>
-        </property>
-        <property key="onClickOpenPageAs" type="enumeration" defaultValue="popup">
-            <caption>On click open page as</caption>
-            <category>Events</category>
-            <description/>
-            <enumerationValues>
-                <enumerationValue key="popup">Popup</enumerationValue>
-                <enumerationValue key="content">Full page</enumerationValue>
-                <enumerationValue key="modal">Blocking popup</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="onClickPage" type="form" required="false">
-            <caption>On click page</caption>
-            <category>Events</category>
-            <description/>
         </property>
         <property key="onClickMicroflow" type="microflow" required="false" entityProperty="eventEntity">
             <caption>On click microflow</caption>
@@ -286,25 +270,9 @@
             <description>Create is triggered when a time slot is selected</description>
             <enumerationValues>
                 <enumerationValue key="doNothing">Do nothing</enumerationValue>
-                <enumerationValue key="showPage">Show a page</enumerationValue>
                 <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
                 <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
             </enumerationValues>
-        </property>
-        <property key="onCreateOpenPageAs" type="enumeration" defaultValue="popup">
-            <caption>On create open page as</caption>
-            <category>Events</category>
-            <description/>
-            <enumerationValues>
-                <enumerationValue key="popup">Popup</enumerationValue>
-                <enumerationValue key="content">Full page</enumerationValue>
-                <enumerationValue key="modal">Blocking popup</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="onCreatePage" type="form" required="false">
-            <caption>On create page</caption>
-            <category>Events</category>
-            <description/>
         </property>
         <property key="onCreateMicroflow" type="microflow" required="false" entityProperty="eventEntity">
             <caption>On create microflow</caption>
