@@ -18,7 +18,7 @@
         <property key="eventEntity" type="entity" allowNonPersistableEntities="true">
             <caption>Event entity</caption>
             <category>Data source</category>
-            <description>With data context, this entity should be equal to the containing dataview</description>
+            <description>With data context, this entity should be equal to the containing data view</description>
         </property>
         <property key="entityConstraint" type="entityConstraint" entityProperty="eventEntity" required="false">
             <caption>XPath</caption>
@@ -26,19 +26,40 @@
             <description/>
         </property>
         <property key="dataSourceMicroflow" type="microflow" required="false">
-            <caption>Data source microflow</caption>
+            <caption>Microflow</caption>
             <category>Data source</category>
             <description></description>
             <returnType type="Object" isList="true" entityProperty="eventEntity"/>
         </property>
         <property key="dataSourceNanoflow" type="nanoflow" required="false">
-            <caption>Data source nanoflow</caption>
+            <caption>Nanoflow</caption>
             <category>Data source</category>
             <description></description>
             <returnType type="Object" isList="true" entityProperty="eventEntity"/>
         </property>
+        <property key="executeOnViewChange" type="boolean" defaultValue="false">
+            <caption>Refresh data source on view change</caption>
+            <category>View</category>
+            <description>For data source microflow and nanoflow, enable to retrieve a sub set of large data set based on view start and end attribute</description>
+        </property>
+        <property key="viewStartAttribute" type="attribute" isPath="optional" pathType="reference" required="false">
+            <caption>View start attribute</caption>
+            <category>Data source</category>
+            <description>The date on which the calendar view starts, will be updated with `Refresh data source` before the view changes</description>
+            <attributeTypes>
+                <attributeType name="DateTime"/>
+            </attributeTypes>
+        </property>
+        <property key="viewEndAttribute" type="attribute" required="false" allowNonPersistableEntities="true">
+            <caption>View end attribute</caption>
+            <category>Data source</category>
+            <description>The date on which the calendar view ends, will be updated with `Refresh data source` before the view changes</description>
+            <attributeTypes>
+                <attributeType name="DateTime"/>
+            </attributeTypes>
+        </property>
         <property key="titleAttribute" type="attribute" entityProperty="eventEntity" required="false">
-            <caption>Title</caption>
+            <caption>Title attribute</caption>
             <category>Data source</category>
             <description/>
             <attributeTypes>
@@ -46,15 +67,15 @@
             </attributeTypes>
         </property>
         <property key="allDayAttribute" type="attribute" entityProperty="eventEntity" required="false">
-            <caption>All day</caption>
+            <caption>All day attribute</caption>
             <category>Data source</category>
-            <description>Boolean indicating whether the event is all day or not. If not specified, All day is false</description>
+            <description/>
             <attributeTypes>
                 <attributeType name="Boolean"/>
             </attributeTypes>
         </property>
         <property key="startAttribute" type="attribute" entityProperty="eventEntity">
-            <caption>Start</caption>
+            <caption>Start attribute</caption>
             <category>Data source</category>
             <description/>
             <attributeTypes>
@@ -62,7 +83,7 @@
             </attributeTypes>
         </property>
         <property key="endAttribute" type="attribute" entityProperty="eventEntity">
-            <caption>End</caption>
+            <caption>End attribute</caption>
             <category>Data source</category>
             <description/>
             <attributeTypes>
@@ -70,9 +91,9 @@
             </attributeTypes>
         </property>
         <property key="eventColor" type="attribute" entityProperty="eventEntity" required="false">
-            <caption>Event color</caption>
+            <caption>Color attribute</caption>
             <category>Data source</category>
-            <description>Attribute containing a valid html color eg: red #FF0000 ragb(250,10,20) rgba(10,10,10, 0.5)</description>
+            <description>Attribute containing a valid html color eg: red #FF0000 rgb(250,10,20) rgba(10,10,10, 0.5)</description>
             <attributeTypes>
                 <attributeType name="Enum" />
                 <attributeType name="String" />
@@ -100,99 +121,142 @@
             </enumerationValues>
         </property>
         <property key="customViews" type="object" isList="true" required="false">
-            <caption>Custom views</caption>
+            <caption>Custom top bar views</caption>
             <category>View</category>
             <description/>
             <properties>
                 <property key="customView" type="enumeration" defaultValue="month">
-                    <caption>Views</caption>
+                    <caption>Item</caption>
                     <category>Appearance</category>
                     <description/>
-                        <enumerationValues>
-                        <enumerationValue key="month">Month</enumerationValue>
-                        <enumerationValue key="week">Week</enumerationValue>
-                        <enumerationValue key="work_week">Work week</enumerationValue>
-                        <enumerationValue key="day">Day</enumerationValue>
-                        <enumerationValue key="agenda">Agenda</enumerationValue>
+                    <enumerationValues>
+                        <enumerationValue key="previous">Previous button</enumerationValue>
+                        <enumerationValue key="today">Today button</enumerationValue>
+                        <enumerationValue key="next">Next button</enumerationValue>
+                        <enumerationValue key="title">Title date text</enumerationValue>
+                        <enumerationValue key="month">Month button</enumerationValue>
+                        <enumerationValue key="week">Week button</enumerationValue>
+                        <enumerationValue key="work_week">Work week button</enumerationValue>
+                        <enumerationValue key="day">Day button</enumerationValue>
+                        <enumerationValue key="agenda">Agenda button</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="position" type="enumeration" defaultValue="left">
+                    <caption>Position</caption>
+                    <category>Appearance</category>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="left">Left</enumerationValue>
+                        <enumerationValue key="center">Center</enumerationValue>
+                        <enumerationValue key="right">Right</enumerationValue>
                     </enumerationValues>
                 </property>
                 <property key="customCaption" type="translatableString" required="false">
-                    <caption>Button caption</caption>
+                    <caption>Caption</caption>
+                    <category>Appearance</category>
+                    <description>The text for the button or title. For type 'Title' the from and to date are substituted with '{Mendix date format}'. e.g. 'Events from {M/d/yyyy} to {M/d/yyyy}'</description>
+                </property>
+                <property key="renderMode" type="enumeration" defaultValue="button">
+                    <caption>Render mode</caption>
+                    <category>Appearance</category>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="button">Button</enumerationValue>
+                        <enumerationValue key="link">Link</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="buttonToolTip" type="translatableString" required="false">
+                    <caption>Button tooltip</caption>
                     <category>Appearance</category>
                     <description/>
                 </property>
-                <property key="dateFormat" type="translatableString" required="false">
-                    <caption>Date format</caption>
-                    <category>Custom formats</category>
-                    <description>Formats date in month view using mendix date formats e.g: dd</description>
+                <property key="buttonStyle" type="enumeration" defaultValue="default">
+                    <caption>Button style</caption>
+                    <category>Appearance</category>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="default">Default</enumerationValue>
+                        <enumerationValue key="primary">Primary</enumerationValue>
+                        <enumerationValue key="success">Success</enumerationValue>
+                        <enumerationValue key="info">Info</enumerationValue>
+                        <enumerationValue key="inverse">Inverse</enumerationValue>
+                        <enumerationValue key="warning">Warning</enumerationValue>
+                        <enumerationValue key="danger">Danger</enumerationValue>
+                    </enumerationValues>
                 </property>
-                <property key="dayFormat" type="translatableString" required="false">
-                    <caption>Day format</caption>
+                <property key="headerFormat" type="translatableString" required="false">
+                    <caption>Header day format</caption>
                     <category>Custom formats</category>
-                    <description>Formats date in week and day views using mendix date formats. e.g: EEEE dd/MM</description>
+                    <description>Header date shown in the top row of the month, week and day view. Use Mendix date formats. e.g. 'EEEE dd/MM'</description>
+                    <translations>
+                        <translation lang="en_US">EEE</translation>
+                        <translation lang="nl_NL">EEE</translation>
+                    </translations>
                 </property>
-                <property key="weekdayFormat" type="translatableString" required="false">
-                    <caption>Weekday format</caption>
+                <property key="cellDateFormat" type="translatableString" required="false">
+                    <caption>Cell date format</caption>
                     <category>Custom formats</category>
-                    <description>Formats date in month view using mendix date formats e.g: EEE</description>
+                    <description>Date shown in the month cells. Use Mendix date formats. e.g. 'dd'</description>
+                    <translations>
+                        <translation lang="en_US">dd</translation>
+                        <translation lang="nl_NL">dd</translation>
+                    </translations>
                 </property>
-                <property key="timeGutterFormat" type="translatableString" required="false">
+                <property key="gutterTimeFormat" type="translatableString" required="false">
                     <caption>Time gutter format</caption>
                     <category>Custom formats</category>
-                    <description>Formats date in week and day views using mendix date formats. e.g: hh:mm a</description>
+                    <description>Time shown as the first column in the week, day and agenda view. Use Mendix date formats. e.g. HH:mm</description>
+                    <translations>
+                        <translation lang="en_US">hh:mm a</translation>
+                        <translation lang="nl_NL">HH:mm</translation>
+                    </translations>
                 </property>
-                <property key="monthHeaderFormat" type="translatableString" required="false">
-                    <caption>Month header format</caption>
+                <property key="gutterDateFormat" type="translatableString" required="false">
+                    <caption>Date gutter format</caption>
                     <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g: MMMM yyyy</description>
+                    <description>Date shown as the first column in the agenda view. e.g. 'EEE MMM d'</description>
+                    <translations>
+                        <translation lang="en_US">EEE dd/MM</translation>
+                        <translation lang="nl_NL">EEE MM-dd</translation>
+                    </translations>
                 </property>
-                <property key="dayHeaderFormat" type="translatableString" required="false">
-                    <caption>Day header format</caption>
-                    <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g: EEE yyyy/MM/dd</description>
+                <property key="textAllDay" type="translatableString" required="false">
+                    <caption>All day</caption>
+                    <category>Text</category>
+                    <description>Text showing in the agenda view to indicate an event will be all day</description>
+                    <translations>
+                        <translation lang="en_US">all day</translation>
+                        <translation lang="nl_NL">gehele dag</translation>
+                    </translations>
                 </property>
-                <property key="agendaDateFormat" type="translatableString" required="false">
-                    <caption>Agenda date format</caption>
-                    <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g: EEE MMM d</description>
+                <property key="textHeaderDate" type="translatableString" required="false">
+                    <caption>Header date</caption>
+                    <category>Text</category>
+                    <description>Text showing in the agenda view to header in the column date</description>
+                    <translations>
+                        <translation lang="en_US">Date</translation>
+                        <translation lang="nl_NL">Datum</translation>
+                    </translations>
                 </property>
-                <property key="agendaTimeFormat" type="translatableString" required="false">
-                    <caption>Agenda time format</caption>
-                    <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g: hh:mm a</description>
+                <property key="textHeaderTime" type="translatableString" required="false">
+                    <caption>Header time</caption>
+                    <category>Text</category>
+                    <description>Text showing in the agenda view to header in the column time</description>
+                    <translations>
+                        <translation lang="en_US">Time</translation>
+                        <translation lang="nl_NL">Tijd</translation>
+                    </translations>
                 </property>
-                <property key="eventTimeRangeStartFormat" type="translatableString" required="false">
-                    <caption>Event time range start format</caption>
-                    <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g: M/d/yyyy</description>
-                </property>
-                <property key="eventTimeRangeEndFormat" type="translatableString" required="false">
-                    <caption>Event time range end format</caption>
-                    <category>Custom formats</category>
-                    <description>Use mendix date formats. e.g: M/d/yyyy</description>
+                <property key="textHeaderEvent" type="translatableString" required="false">
+                    <caption>Header event</caption>
+                    <category>Text</category>
+                    <description>Text showing in the agenda view to header in the column event</description>
+                    <translations>
+                        <translation lang="en_US">Event</translation>
+                        <translation lang="nl_NL">Afspraak</translation>
+                    </translations>
                 </property>
             </properties>
-        </property>
-        <property key="executeOnViewChange" type="boolean" defaultValue="false">
-            <caption>Refresh data source on view change</caption>
-            <category>View</category>
-            <description>For data source microflow and nanoflow, enable to retrieve a sub set of large data set based on view start and end attribute</description>
-        </property>
-        <property key="viewStartAttribute" type="attribute" isPath="optional" pathType="reference" required="false">
-            <caption>View start attribute</caption>
-            <category>View</category>
-            <description>The date on which the calendar view starts, will be updated with `Refresh data source` before the view changes</description>
-            <attributeTypes>
-                <attributeType name="DateTime"/>
-            </attributeTypes>
-        </property>
-        <property key="viewEndAttribute" type="attribute" required="false" allowNonPersistableEntities="true">
-            <caption>View end attribute</caption>
-            <category>View</category>
-            <description>The date on which the calendar view ends, will be updated with `Refresh data source` before the view changes</description>
-            <attributeTypes>
-                <attributeType name="DateTime"/>
-            </attributeTypes>
         </property>
         <property key="popup" type="boolean" defaultValue="true">
             <caption>Show truncated events</caption>
@@ -213,39 +277,10 @@
             <category>View</category>
             <description/>
         </property>
-        <property key="widthUnit" type="enumeration" defaultValue="percentage">
-            <caption>Width unit</caption>
-            <category>Appearance</category>
-            <description/>
-            <enumerationValues>
-                <enumerationValue key="percentage">Percentage</enumerationValue>
-                <enumerationValue key="pixels">Pixels</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="width" type="integer" defaultValue="100">
-            <caption>Width</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
-        <property key="heightUnit" type="enumeration" defaultValue="pixels">
-            <caption>Height unit</caption>
-            <category>Appearance</category>
-            <description>'Percentage of width' is the aspect ratio, 'Pixels' is absolute. Warning: When using 'Percentage of parent' the parent container must have an absolute height, else nothing is displayed.</description>
-            <enumerationValues>
-                <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
-                <enumerationValue key="pixels">Pixels</enumerationValue>
-                <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="height" type="integer" defaultValue="580">
-            <caption>Height</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
         <property key="onClickEvent" type="enumeration" defaultValue="doNothing">
             <caption>On click</caption>
             <category>Events</category>
-            <description>Click on calender item</description>
+            <description>The click event is triggered when an exiting item is clicked on the calender</description>
             <enumerationValues>
                 <enumerationValue key="doNothing">Do nothing</enumerationValue>
                 <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
@@ -267,7 +302,7 @@
         <property key="onCreate" type="enumeration" defaultValue="doNothing">
             <caption>On create</caption>
             <category>Events</category>
-            <description>Create is triggered when a time slot is selected</description>
+            <description>The create event is triggered when a time slot is selected, and the 'Enable create' property is set to 'true'</description>
             <enumerationValues>
                 <enumerationValue key="doNothing">Do nothing</enumerationValue>
                 <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
@@ -289,7 +324,7 @@
         <property key="onChangeEvent" type="enumeration" defaultValue="doNothing">
             <caption>On change</caption>
             <category>Events</category>
-            <description>Change event is triggered on moving and changing the start or end time of by resizing</description>
+            <description>The change event is triggered on moving/dragging an item or changing the start or end time of by resizing an item</description>
             <enumerationValues>
                 <enumerationValue key="doNothing">Do nothing</enumerationValue>
                 <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
@@ -307,6 +342,35 @@
             <category>Events</category>
             <description/>
             <returnType type="Void" />
+        </property>
+        <property key="widthUnit" type="enumeration" defaultValue="percentage">
+            <caption>Width unit</caption>
+            <category>Size</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="percentage">Percentage</enumerationValue>
+                <enumerationValue key="pixels">Pixels</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="width" type="integer" defaultValue="100">
+            <caption>Width</caption>
+            <category>Size</category>
+            <description/>
+        </property>
+        <property key="heightUnit" type="enumeration" defaultValue="pixels">
+            <caption>Height unit</caption>
+            <category>Size</category>
+            <description>'Percentage of width' is the aspect ratio, 'Pixels' is absolute. Warning: When using 'Percentage of parent' the parent container must have an absolute height, else nothing is displayed.</description>
+            <enumerationValues>
+                <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
+                <enumerationValue key="pixels">Pixels</enumerationValue>
+                <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="height" type="integer" defaultValue="580">
+            <caption>Height</caption>
+            <category>Size</category>
+            <description/>
         </property>
     </properties>
 </widget>

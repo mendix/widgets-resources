@@ -26,7 +26,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     };
 
     componentWillMount() {
-        moment.locale(window.mx.session.sessionData.locale.code, {
+        moment.updateLocale(window.mx.session.sessionData.locale.code, {
             week: {
                 dow: window.mx.session.sessionData.locale.firstDayOfWeek,
                 doy: 6
@@ -57,14 +57,15 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 startPosition: this.state.startPosition,
                 editable: this.props.editable,
                 style: parseStyle(this.props.style),
-                views: this.props.view,
+                viewOption: this.props.view,
                 width: this.props.width,
                 widthUnit: this.props.widthUnit,
                 onSelectEventAction: !readOnly ? this.handleOnClickEvent : undefined,
                 onEventResizeAction: !readOnly ? this.handleOnChangeEvent : undefined,
                 onSelectSlotAction: !readOnly ? this.onClickSlot : undefined,
                 onEventDropAction: !readOnly ? this.handleOnChangeEvent : undefined,
-                onViewChangeAction: this.onChangeView
+                onViewChangeAction: this.onChangeView,
+                customViews: this.props.customViews
             })
         );
     }

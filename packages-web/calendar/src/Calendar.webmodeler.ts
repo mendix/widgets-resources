@@ -36,9 +36,9 @@ export class preview extends Component<Container.CalendarContainerProps> {
         return {
             alertMessage: CalendarContainer.validateProps(props),
             color: props.eventColor,
+            customViews: props.customViews,
             enableCreate: props.enableCreate,
             events: eventData,
-            formats: {},
             defaultView: props.defaultView,
             height: props.height,
             heightUnit: props.heightUnit,
@@ -47,7 +47,7 @@ export class preview extends Component<Container.CalendarContainerProps> {
             popup: props.popup,
             editable: props.editable,
             style: parseStyle(props.style),
-            views: "standard",
+            viewOption: "standard",
             width: props.width,
             widthUnit: props.widthUnit
         };

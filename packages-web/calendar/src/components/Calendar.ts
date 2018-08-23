@@ -1,7 +1,7 @@
 import { CSSProperties, Component, ReactChild, createElement } from "react";
 
 import { Alert } from "./Alert";
-import { Style } from "../utils/namespaces";
+import { Container, Style } from "../utils/namespaces";
 import * as classNames from "classnames";
 import * as BigCalendar from "react-big-calendar";
 import * as moment from "moment";
@@ -20,7 +20,7 @@ export interface CalendarProps {
     className?: string;
     events: CalendarEvent[];
     color?: string;
-    formats: {};
+    formats?: {};
     enableCreate: boolean;
     height: number;
     heightUnit: Style.HeightUnitType;
@@ -36,8 +36,8 @@ export interface CalendarProps {
     timeGutterFormat?: (date: Date) => void;
     monthHeaderFormat?: (date: Date) => void;
     dayHeaderFormat?: (date: Date) => void;
-    style: object;
-    views: string;
+    style: CSSProperties;
+    viewOption: string;
     width: number;
     widthUnit: Style.WidthUnitType;
     onSelectEventAction?: (eventInfo: object) => void;
@@ -45,6 +45,7 @@ export interface CalendarProps {
     onSelectSlotAction?: (slotInfo: object) => void;
     onEventDropAction?: (eventInfo: object) => void;
     onViewChangeAction?: () => void;
+    customViews: Container.CustomViews[];
 }
 
 export interface CalendarEvent {
@@ -63,7 +64,6 @@ interface CalendarState {
 
 class Calendar extends Component<CalendarProps, CalendarState> {
     readonly state: CalendarState = { events: this.props.events };
-    standardViews: [ "day", "week", "month" ];
 
     render() {
         return createElement("div", { className: classNames("widget-calendar", this.props.className), style: this.getDimensions() },
@@ -83,17 +83,20 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     }
 
     private renderCalendar() {
+        const wrapToolbar = (injectedProps: CalendarProps) =>
+            (toolbarProps: any) => createElement(CustomToolbar as any, { ...injectedProps, ...toolbarProps });
+
         const props = {
             events: this.props.events,
             allDayAccessor: this.allDayAccessor,
-            components: { toolbar: CustomToolbar },
+            components: { toolbar: wrapToolbar(this.props) },
             eventPropGetter: this.eventColor,
             defaultDate: this.props.startPosition,
             defaultView: this.props.defaultView,
-            formats: this.props.views === "custom" ? this.props.formats : "",
-            messages: this.props.views === "custom" ? this.props.messages : "",
-            views: this.props.views === "standard"
-                ? this.standardViews
+            formats: this.props.viewOption === "custom" ? this.props.formats : "",
+            messages: this.props.viewOption === "custom" ? this.props.messages : "",
+            views: this.props.viewOption === "standard"
+                ? [ "day", "week", "month" ]
                 : !Object.keys(this.props.messages).length
                     ? this.renderAlert
                     : Object.keys(this.props.messages),
