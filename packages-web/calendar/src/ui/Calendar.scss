@@ -8,26 +8,28 @@
     }
 }
 
-button.btn.mx-button.mx-name-paging-previous {
-    border-color: transparent;
-}
-
-button.btn.mx-button.mx-name-paging-next {
-    border-color: transparent;
-}
-
 .rbc-toolbar {
     .btn {
         padding: 0.6em 1em;
     }
 }
 
-.calendar-messages > button {
-    display: none;
+.calendar-label {
+    font-size: 16px;
 }
 
-.calendar-messages > button.mx-button {
-    display: inline-block;
+.align-right {
+    float: right;
+}
+
+.calendar-toolbar {
+    text-align: center;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.align-left {
+    float: left;
 }
 
 

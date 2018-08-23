@@ -7,19 +7,20 @@ import { CalendarProps, DragAndDropCalendar, MyCalendar } from "../Calendar";
 describe("Calendar", () => {
     const renderCalendar = (props: CalendarProps) => shallow(createElement(MyCalendar, props));
     const calendarProps: CalendarProps = {
-        formats: {},
+        customViews: [],
+        defaultView: "month",
         enableCreate: true,
         events: [],
+        formats: {},
         height: 580,
         heightUnit: "pixels",
         loading: false,
         showMultiDayTimes: true,
-        defaultView: "month",
         messages: [],
         popup: true,
         editable: "default",
         style: {},
-        views: "standard",
+        viewOption: "standard",
         width: 100,
         widthUnit: "percentage"
     };
@@ -43,7 +44,7 @@ describe("Calendar", () => {
         calendar.setProps({
             heightUnit: "percentageOfWidth",
             widthUnit: "pixels",
-            views: "custom"
+            viewOption: "custom"
         });
 
         expect(calendar).toBeElement(
