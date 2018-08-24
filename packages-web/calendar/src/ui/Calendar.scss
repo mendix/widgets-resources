@@ -1,3 +1,5 @@
+@import "variables";
+
 .widget-calendar {
     .rbc-calendar {
         min-height: 580px !important;
@@ -32,4 +34,25 @@
     float: left;
 }
 
+.rbc-current-time-indicator {
+    background-color: $brand-danger;
+}
 
+.rbc-day-slot .rbc-event {
+    border-top-color: $border-color-default;
+    border-right-color: $border-color-default;
+    border-bottom-color: $border-color-default;
+    border-left-color: $border-color-default;
+}
+
+.rbc-off-range-bg {
+    background-color: $color-default-lighter;
+}
+
+.rbc-today {
+    background-color: $color-primary-lighter;
+}
+
+.rbc-event {
+    background-color: #0595DB;
+}
