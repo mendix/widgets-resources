@@ -36,16 +36,14 @@ export namespace Container {
     }
 
     export interface CustomFormats {
-        dayFormat: string;
-        dateFormat: string;
-        weekdayFormat: string;
-        timeGutterFormat: string;
-        monthHeaderFormat: string;
-        dayHeaderFormat: string;
-        agendaDateFormat: string;
-        agendaTimeFormat: string;
-        eventTimeRangeStartFormat: string;
-        eventTimeRangeEndFormat: string;
+        headerFormat: string;
+        cellDateFormat: string;
+        gutterTimeFormat: string;
+        gutterDateFormat: string;
+        textAllDay: string;
+        textHeaderDate: string;
+        textHeaderTime: string;
+        textHeaderEvent: string;
     }
 
     export interface CalendarContainerProps extends WrapperProps, Dimensions, Events, EventData, CustomFormats {
@@ -68,17 +66,7 @@ export namespace Container {
 
     type functionType = (date: Date) => string;
 
-    export type DateType =
-    | "date"
-    | "day"
-    | "weekday"
-    | "timeGutter"
-    | "monthHeader"
-    | "dayHeader"
-    | "agendaDate"
-    | "agendaTime"
-    | "eventTimeStart"
-    | "eventTimeEnd";
+    export type DateType = "date" | "day" | "weekday" | "timeGutter";
 
     export interface ViewOptions {
         month?: string;
@@ -86,16 +74,14 @@ export namespace Container {
         work_week?: string;
         day?: string;
         agenda?: string;
+        allDay?: string;
+        date?: string;
+        time?: string;
+        event?: string;
         dateFormat?: functionType | string;
         dayFormat?: functionType | string;
         weekdayFormat?: functionType | string;
         timeGutterFormat?: functionType | string;
-        monthHeaderFormat?: functionType | string;
-        dayHeaderFormat?: functionType | string;
-        agendaDateFormat?: functionType | string;
-        agendaTimeFormat?: functionType | string;
-        eventTimeRangeEndFormat?: functionType | string;
-        eventTimeRangeStartFormat?: functionType | string;
     }
 
     export type DataSource = "context" | "XPath" | "microflow" | "nanoflow";

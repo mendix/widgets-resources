@@ -168,7 +168,15 @@ export default class CalendarContainer extends Component<Container.CalendarConta
 
     private setCustomViews = () => {
         const viewOptions: Container.ViewOptions = {};
-        this.props.customViews.forEach(customView => { viewOptions[customView.customView] = customView.customCaption; });
+        this.props.customViews.forEach(customView => {
+            viewOptions[customView.customView] = customView.customCaption;
+            if (customView.customView === "agenda") {
+                viewOptions.allDay = customView.textAllDay;
+                viewOptions.date = customView.textHeaderDate;
+                viewOptions.time = customView.textHeaderTime;
+                viewOptions.event = customView.textHeaderEvent;
+            }
+        });
 
         return viewOptions;
     }
@@ -177,31 +185,21 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         const viewOptions: Container.ViewOptions = {};
         this.props.customViews.forEach((customView) => {
             viewOptions.dateFormat = customView.customView === "month"
-                ? this.customFormat(customView.dateFormat, "date")
+                ? this.customFormat(customView.cellDateFormat, "date")
                 : viewOptions.dateFormat;
             viewOptions.dayFormat = customView.customView === "day"
-                ? this.customFormat(customView.dayFormat, "day")
+                || customView.customView === "week"
+                || customView.customView === "work_week"
+                ? this.customFormat(customView.gutterDateFormat, "day")
                 : viewOptions.dayFormat;
             viewOptions.weekdayFormat = customView.customView === "month"
-                ? this.customFormat(customView.weekdayFormat, "weekday")
+                ? this.customFormat(customView.headerFormat, "weekday")
                 : viewOptions.weekdayFormat;
             viewOptions.timeGutterFormat = customView.customView === "week"
-                ? this.customFormat(customView.timeGutterFormat, "timeGutter")
+                || customView.customView === "day"
+                || customView.customView === "work_week"
+                ? this.customFormat(customView.gutterTimeFormat, "timeGutter")
                 : viewOptions.timeGutterFormat;
-            viewOptions.monthHeaderFormat = customView.customView === "month"
-                ? this.customFormat(customView.monthHeaderFormat, "monthHeader")
-                : viewOptions.monthHeaderFormat;
-            viewOptions.dayHeaderFormat = customView.customView === "day"
-                ? this.customFormat(customView.dayHeaderFormat, "dayHeader")
-                : viewOptions.dayHeaderFormat;
-            viewOptions.agendaDateFormat = customView.customView === "agenda"
-                ? this.customFormat(customView.agendaDateFormat, "agendaDate")
-                : viewOptions.agendaDateFormat;
-            viewOptions.agendaTimeFormat = customView.customView === "agenda"
-                ? this.customFormat(customView.agendaTimeFormat, "agendaTime")
-                : viewOptions.agendaTimeFormat;
-            viewOptions.eventTimeRangeStartFormat = this.customFormat(customView.eventTimeRangeStartFormat, "eventTimeStart");
-            viewOptions.eventTimeRangeEndFormat = this.customFormat(customView.eventTimeRangeEndFormat, "eventTimeEnd");
         });
 
         return viewOptions;
@@ -217,18 +215,6 @@ export default class CalendarContainer extends Component<Container.CalendarConta
             datePattern = dateFormat || "EEEE";
         } else if (dateType === "timeGutter") {
             datePattern = dateFormat || "hh:mm a";
-        } else if (dateType === "monthHeader") {
-            datePattern = dateFormat || "MMMM yyyy";
-        } else if (dateType === "dayHeader") {
-            datePattern = dateFormat || "EEE yyyy/MM/dd";
-        } else if (dateType === "agendaDate") {
-            datePattern = dateFormat || "EEE MMM d";
-        } else if (dateType === "agendaTime") {
-            datePattern = dateFormat || "hh:mm a";
-        } else if (dateType === "eventTimeStart") {
-            datePattern = dateFormat || "M/d/yyyy";
-        } else if (dateType === "eventTimeEnd") {
-            datePattern = dateFormat || "M/d/yyyy";
         }
 
         return (date: Date) => window.mx.parser.formatValue(date, "datetime", { datePattern });
