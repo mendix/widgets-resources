@@ -24,8 +24,6 @@ export interface CalendarProps {
     enableCreate: boolean;
     height: number;
     heightUnit: Style.HeightUnitType;
-    loading?: boolean;
-    showMultiDayTimes?: boolean;
     defaultView: Style.View;
     startPosition?: Date;
     messages: {};

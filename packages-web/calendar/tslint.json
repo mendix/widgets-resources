@@ -12,13 +12,13 @@
     "eofline": true,
     "indent": [
       true,
-      "spaces"
+      "spaces",
+      4
     ],
     "member-ordering": [
       true,
       "variables-before-functions"
     ],
-    "newline-before-return": true,
     "no-arg": true,
     "no-bitwise": true,
     "no-conditional-assignment": true,
@@ -57,6 +57,9 @@
       true,
       "allow-null-check"
     ],
+    "typedef": [
+      true
+    ],
     "typedef-whitespace": [
       true,
       {
@@ -69,7 +72,8 @@
     ],
     "variable-name": [
       true,
-      "ban-keywords"
+      "ban-keywords",
+      "check-format"
     ],
     "whitespace": [
       true,
@@ -145,7 +149,8 @@
     "max-line-length": false,
     "no-submodule-imports": false,
     "no-implicit-dependencies": false,
-    "no-namespace": false
+    "no-namespace": false,
+    "newline-before-return": true
   },
   "jsRules": {
     "trailing-comma": [

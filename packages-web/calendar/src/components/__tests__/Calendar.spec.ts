@@ -14,8 +14,6 @@ describe("Calendar", () => {
         formats: {},
         height: 580,
         heightUnit: "pixels",
-        loading: false,
-        showMultiDayTimes: true,
         messages: [],
         popup: true,
         editable: "default",
