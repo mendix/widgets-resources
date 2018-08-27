@@ -51,6 +51,7 @@ export namespace Container {
         enableCreate: boolean;
         defaultView: Style.View;
         executeOnViewChange: boolean;
+        startPositionAttribute: string;
         viewStartAttribute: string;
         viewEndAttribute: string;
         dataSource: DataSource;
@@ -60,7 +61,6 @@ export namespace Container {
         dataSourceNanoflow: Data.Nanoflow;
         popup: boolean;
         editable: string;
-        refreshInterval: number;
         view: Views;
     }
 

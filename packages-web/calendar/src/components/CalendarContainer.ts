@@ -45,6 +45,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
             createElement(Calendar, {
                 alertMessage,
                 className: this.props.class,
+                editable: this.props.editable,
                 enableCreate: this.props.enableCreate,
                 formats: this.setCalendarFormats(),
                 height: this.props.height,
@@ -52,10 +53,8 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 messages: this.setCustomViews(),
                 events: this.state.events,
                 defaultView: this.props.defaultView,
-                loading: this.state.loading,
                 popup: this.props.popup,
                 startPosition: this.state.startPosition,
-                editable: this.props.editable,
                 style: parseStyle(this.props.style),
                 viewOption: this.props.view,
                 width: this.props.width,
@@ -102,10 +101,10 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     }
 
     private setStartPosition = (mxObject: mendix.lib.MxObject) => {
-        if (this.props.viewStartAttribute !== "" && mxObject) {
+        if (this.props.startPositionAttribute !== "" && mxObject) {
         this.setState({
             loading: false,
-            startPosition: new Date(mxObject.get(this.props.viewStartAttribute) as number)
+            startPosition: new Date(mxObject.get(this.props.startPositionAttribute) as number)
         });
         } else {
             this.setState({ loading: false, startPosition: new Date() });
