@@ -90,7 +90,7 @@ export namespace Container {
 
     export interface CustomViews extends CustomFormats {
         customView: Style.View;
-        position: "left" | "right" | "centre";
+        position: Style.Position;
         customCaption: string;
         renderMode: string;
         buttonToolTip: string;
@@ -129,6 +129,7 @@ export namespace Data {
 
 export namespace Style {
     export type HeightUnitType = "percentageOfWidth" | "percentageOfParent" | "pixels";
+    export type Position = "left" | "right" | "center";
     export type View = "month" | "week" | "work_week" | "day" | "agenda";
     export type ButtonStyle = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
     export type WidthUnitType = "percentage" | "pixels";
