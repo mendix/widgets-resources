@@ -350,11 +350,28 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         }
         try {
             if (props.view === "custom") {
-                const formatKeys = Object.keys(props.customViews[0] as Container.CustomFormats);
-                props.customViews.forEach((customView) => {
-                    formatKeys.forEach(format => {
-                        window.mx.parser.formatValue(new Date(), "datetime", { datePattern: (customView as any)[format] });
-                    });
+                const viewOptions: Container.ViewOptions = {};
+                props.customViews.forEach(customView => {
+                    viewOptions.dateFormat = window.mx.parser.formatValue(
+                        new Date(),
+                        "datetime",
+                        { datePattern: customView.cellDateFormat }
+                    );
+                    viewOptions.dayFormat = window.mx.parser.formatValue(
+                        new Date(),
+                        "datetime",
+                        { datePattern: customView.gutterDateFormat }
+                    );
+                    viewOptions.weekdayFormat = window.mx.parser.formatValue(
+                        new Date(),
+                        "datetime",
+                        { datePattern: customView.headerFormat }
+                    );
+                    viewOptions.timeGutterFormat = window.mx.parser.formatValue(
+                        new Date(),
+                        "datetime",
+                        { datePattern: customView.gutterTimeFormat }
+                    );
                 });
             }
         } catch (error) {
