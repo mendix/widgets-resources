@@ -37,27 +37,6 @@
             <description></description>
             <returnType type="Object" isList="true" entityProperty="eventEntity"/>
         </property>
-        <property key="executeOnViewChange" type="boolean" defaultValue="false">
-            <caption>Refresh data source on view change</caption>
-            <category>Data source</category>
-            <description>For data source microflow and nanoflow, enable to retrieve a sub set of large data set based on view start and end attribute</description>
-        </property>
-        <property key="viewStartAttribute" type="attribute" isPath="optional" pathType="reference" required="false" allowNonPersistableEntities="true">
-            <caption>View start attribute</caption>
-            <category>Data source</category>
-            <description>The date on which the calendar view starts, will be updated with `Refresh data source` before the view changes</description>
-            <attributeTypes>
-                <attributeType name="DateTime"/>
-            </attributeTypes>
-        </property>
-        <property key="viewEndAttribute" type="attribute" isPath="optional" pathType="reference" required="false" allowNonPersistableEntities="true">
-            <caption>View end attribute</caption>
-            <category>Data source</category>
-            <description>The date on which the calendar view ends, will be updated with `Refresh data source` before the view changes</description>
-            <attributeTypes>
-                <attributeType name="DateTime"/>
-            </attributeTypes>
-        </property>
         <property key="titleAttribute" type="attribute" entityProperty="eventEntity" required="false">
             <caption>Title attribute</caption>
             <category>Data source</category>
@@ -99,6 +78,27 @@
                 <attributeType name="String" />
             </attributeTypes>
         </property>
+        <property key="executeOnViewChange" type="boolean" defaultValue="false">
+            <caption>Refresh data source on view change</caption>
+            <category>Data source</category>
+            <description>For data source microflow and nanoflow, enable to retrieve a sub set of large data set based on view start and end attribute</description>
+        </property>
+        <property key="viewStartAttribute" type="attribute" isPath="optional" pathType="reference" required="false" allowNonPersistableEntities="true">
+            <caption>View start attribute</caption>
+            <category>Data source</category>
+            <description>The date on which the calendar view starts, will be updated with `Refresh data source` before the view changes</description>
+            <attributeTypes>
+                <attributeType name="DateTime"/>
+            </attributeTypes>
+        </property>
+        <property key="viewEndAttribute" type="attribute" isPath="optional" pathType="reference" required="false" allowNonPersistableEntities="true">
+            <caption>View end attribute</caption>
+            <category>Data source</category>
+            <description>The date on which the calendar view ends, will be updated with `Refresh data source` before the view changes</description>
+            <attributeTypes>
+                <attributeType name="DateTime"/>
+            </attributeTypes>
+        </property>
         <property key="view" type="enumeration" defaultValue="standard">
             <caption>View</caption>
             <category>View</category>
@@ -120,10 +120,10 @@
                 <enumerationValue key="agenda">(Agenda)</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="startPositionAttribute" type="attribute" isPath="optional" pathType="reference" required="false">
-            <caption>Start position attribute</caption>
+        <property key="startDateAttribute" type="attribute" isPath="optional" pathType="reference" required="false">
+            <caption>Start date attribute</caption>
             <category>View</category>
-            <description/>
+            <description>The start date that should be shown in the view</description>
             <attributeTypes>
                 <attributeType name="DateTime"/>
             </attributeTypes>
@@ -228,13 +228,13 @@
                         <translation lang="nl_NL">EEE MM-dd</translation>
                     </translations>
                 </property>
-                <property key="textAllDay" type="translatableString" required="false">
-                    <caption>All day</caption>
+                <property key="allDayText" type="translatableString" required="false">
+                    <caption>Default all day text</caption>
                     <category>Text</category>
                     <description>Text showing in the agenda view to indicate an event will be all day</description>
                     <translations>
-                        <translation lang="en_US">all day</translation>
-                        <translation lang="nl_NL">gehele dag</translation>
+                        <translation lang="en_US">All day</translation>
+                        <translation lang="nl_NL">Gehele dag</translation>
                     </translations>
                 </property>
                 <property key="textHeaderDate" type="translatableString" required="false">

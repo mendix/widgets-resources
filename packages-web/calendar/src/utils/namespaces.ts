@@ -40,7 +40,7 @@ export namespace Container {
         cellDateFormat: string;
         gutterTimeFormat: string;
         gutterDateFormat: string;
-        textAllDay: string;
+        allDayText: string;
         textHeaderDate: string;
         textHeaderTime: string;
         textHeaderEvent: string;
@@ -51,7 +51,7 @@ export namespace Container {
         enableCreate: boolean;
         defaultView: Style.View;
         executeOnViewChange: boolean;
-        startPositionAttribute: string;
+        startDateAttribute: string;
         viewStartAttribute: string;
         viewEndAttribute: string;
         dataSource: DataSource;

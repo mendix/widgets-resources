@@ -7,10 +7,12 @@ import * as BigCalendar from "react-big-calendar";
 import * as moment from "moment";
 import * as withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import CustomToolbar from "./Toolbar";
+import { CalendarLoader } from "./CalendarLoader";
 
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "../ui/Calendar.scss";
+import "../ui/CalendarLoader.scss";
 
 BigCalendar.momentLocalizer(moment);
 export const DragAndDropCalendar = withDragAndDrop(BigCalendar);
@@ -25,6 +27,7 @@ export interface CalendarProps {
     height: number;
     heightUnit: Style.HeightUnitType;
     defaultView: Style.View;
+    loading?: boolean;
     startPosition?: Date;
     messages: {};
     popup: boolean;
@@ -93,11 +96,6 @@ class Calendar extends Component<CalendarProps, CalendarState> {
             defaultView: this.props.defaultView,
             formats: this.props.viewOption === "custom" ? this.props.formats : "",
             messages: this.props.viewOption === "custom" ? this.props.messages : "",
-            views: this.props.viewOption === "standard"
-                ? [ "day", "week", "month" ]
-                : !Object.keys(this.props.messages).length
-                    ? this.renderAlert
-                    : Object.keys(this.props.messages),
             popup: this.props.popup,
             selectable: this.props.enableCreate,
             step: 60,
@@ -107,7 +105,9 @@ class Calendar extends Component<CalendarProps, CalendarState> {
             onView: this.onViewChange
         };
 
-        if (this.props.enableCreate && this.props.editable === "default") {
+        if (this.props.loading) {
+            return createElement(CalendarLoader);
+        } else if (this.props.enableCreate && this.props.editable === "default") {
             return createElement(DragAndDropCalendar, {
                 ...props,
                 onEventDrop: this.onEventDrop,
