@@ -9,8 +9,8 @@ export interface CalendarContainerState {
     events: CalendarEvent[];
     eventCache: mendix.lib.MxObject[];
     eventColor: string;
-    startPosition: Date;
     loading: boolean;
+    startPosition: Date;
 }
 
 export default class CalendarContainer extends Component<Container.CalendarContainerProps, CalendarContainerState> {
@@ -27,10 +27,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
 
     componentWillMount() {
         moment.updateLocale(window.mx.session.sessionData.locale.code, {
-            week: {
-                dow: window.mx.session.sessionData.locale.firstDayOfWeek,
-                doy: 6
-            }
+            week: { dow: window.mx.session.sessionData.locale.firstDayOfWeek, doy: 6 }
         });
     }
 
@@ -55,6 +52,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 defaultView: this.props.defaultView,
                 popup: this.props.popup,
                 startPosition: this.state.startPosition,
+                loading: this.state.loading,
                 style: parseStyle(this.props.style),
                 viewOption: this.props.view,
                 width: this.props.width,
@@ -77,11 +75,11 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         if (nextProps.mxObject) {
             if (!this.state.alertMessage) {
                 this.loadEvents(nextProps.mxObject);
-                this.setStartPosition(nextProps.mxObject);
+                this.getStartPosition(nextProps.mxObject);
             }
             this.resetSubscriptions(nextProps.mxObject);
         } else {
-            this.setState({ events: [] });
+            this.setState({ events: [], loading: false });
         }
 
     }
@@ -89,7 +87,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     private setCalendarEvents = (mxObjects: mendix.lib.MxObject[]) => {
         const events = mxObjects.map(mxObject => {
             return {
-                title:  mxObject.get(this.props.titleAttribute) as string || " ",
+                title: mxObject.get(this.props.titleAttribute) as string || " ",
                 allDay: mxObject.get(this.props.allDayAttribute) as boolean,
                 start: new Date(mxObject.get(this.props.startAttribute) as number),
                 end: new Date(mxObject.get(this.props.endAttribute) as number),
@@ -100,14 +98,14 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         this.setState({ events, eventCache: mxObjects });
     }
 
-    private setStartPosition = (mxObject: mendix.lib.MxObject) => {
-        if (this.props.startPositionAttribute !== "" && mxObject) {
-        this.setState({
-            loading: false,
-            startPosition: new Date(mxObject.get(this.props.startPositionAttribute) as number)
-        });
-        } else {
-            this.setState({ loading: false, startPosition: new Date() });
+    private getStartPosition = (mxObject: mendix.lib.MxObject) => {
+        if (mxObject) {
+            this.setState({
+                loading: false,
+                startPosition: this.props.startDateAttribute
+                    ? new Date(mxObject.get(this.props.startDateAttribute) as number) :
+                    new Date()
+            });
         }
     }
 
@@ -159,8 +157,8 @@ export default class CalendarContainer extends Component<Container.CalendarConta
             })));
             this.subscriptionHandles.push(window.mx.data.subscribe({
                 guid: mxObject.getGuid(),
-                attr: this.props.viewStartAttribute,
-                callback: () => this.setStartPosition(mxObject)
+                attr: this.props.startDateAttribute,
+                callback: () => this.getStartPosition(mxObject)
             }));
         }
     }
@@ -170,7 +168,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         this.props.customViews.forEach(customView => {
             viewOptions[customView.customView] = customView.customCaption;
             if (customView.customView === "agenda") {
-                viewOptions.allDay = customView.textAllDay;
+                viewOptions.allDay = customView.allDayText;
                 viewOptions.date = customView.textHeaderDate;
                 viewOptions.time = customView.textHeaderTime;
                 viewOptions.event = customView.textHeaderEvent;
