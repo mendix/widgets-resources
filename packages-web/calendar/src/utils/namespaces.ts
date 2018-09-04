@@ -88,13 +88,16 @@ export namespace Container {
     export type OnClickEventOptions = "doNothing" | "callMicroflow" | "callNanoflow";
     type Views = "custom" | "standard";
 
-    export interface CustomViews extends CustomFormats {
-        customView: Style.View;
+    export interface ButtonConfig {
+        customView: Style.View | Style.Action | "title";
         position: Style.Position;
-        customCaption: string;
-        renderMode: string;
-        buttonToolTip: string;
-        buttonStyle: Style.ButtonStyle;
+        customCaption?: string;
+        renderMode?: "button" | "link";
+        buttonToolTip?: string;
+        buttonStyle?: Style.ButtonStyle;
+    }
+
+    export interface CustomViews extends CustomFormats, ButtonConfig {
     }
 }
 
@@ -131,6 +134,7 @@ export namespace Style {
     export type HeightUnitType = "percentageOfWidth" | "percentageOfParent" | "pixels";
     export type Position = "left" | "right" | "center";
     export type View = "month" | "week" | "work_week" | "day" | "agenda";
+    export type Action = "previous" | "next" | "today";
     export type ButtonStyle = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
     export type WidthUnitType = "percentage" | "pixels";
 }

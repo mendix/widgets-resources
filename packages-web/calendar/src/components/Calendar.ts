@@ -38,7 +38,7 @@ export interface CalendarProps {
     monthHeaderFormat?: (date: Date) => void;
     dayHeaderFormat?: (date: Date) => void;
     style: CSSProperties;
-    viewOption: string;
+    viewOption: "custom" | "standard";
     width: number;
     widthUnit: Style.WidthUnitType;
     onSelectEventAction?: (eventInfo: object) => void;
@@ -79,18 +79,57 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         }
     }
 
+    private getDefaultToolbar(): Container.ButtonConfig[] {
+        return [
+            {
+                customView: "previous",
+                position: "left",
+                buttonToolTip: "previous"
+            },
+            {
+                customView: "today",
+                position: "left",
+                customCaption: "today"
+            },
+            {
+                customView: "next",
+                position: "left",
+                buttonToolTip: "next"
+            },
+            {
+                customView: "title",
+                position: "center"
+            },
+            {
+                customView: "day",
+                position: "right",
+                customCaption: "day"
+            },
+            {
+                customView: "week",
+                position: "right",
+                customCaption: "week"
+            },
+            {
+                customView: "month",
+                position: "right",
+                customCaption: "month"
+            }
+        ];
+    }
+
     private renderAlert() {
         return createElement(Alert, { className: "widget-calendar-alert" }, this.props.alertMessage);
     }
 
     private renderCalendar() {
-        const wrapToolbar = (injectedProps: CalendarProps) =>
-            (toolbarProps: any) => createElement(CustomToolbar as any, { ...injectedProps, ...toolbarProps });
+        const wrapToolbar = (injectedProps: Container.CustomViews[] | Container.ButtonConfig[]) =>
+            (toolbarProps: any) => createElement(CustomToolbar as any, { customViews: injectedProps, ...toolbarProps });
 
         const props = {
             events: this.props.events,
             allDayAccessor: this.allDayAccessor,
-            components: { toolbar: wrapToolbar(this.props) },
+            components: { toolbar: wrapToolbar(this.getToolbarProps()) },
             eventPropGetter: this.eventColor,
             defaultDate: this.props.startPosition,
             defaultView: this.props.defaultView,
@@ -114,8 +153,15 @@ class Calendar extends Component<CalendarProps, CalendarState> {
                 onEventResize: this.onEventResize
             });
         } else {
-            return createElement(BigCalendar, { ...props });
+            return createElement(BigCalendar, props);
         }
+    }
+
+    private getToolbarProps(): Container.CustomViews[] | Container.ButtonConfig[] {
+        // TODO maybe only return type should be ButtonConfig
+        return this.props.viewOption === "standard"
+            ? this.getDefaultToolbar()
+            : this.props.customViews;
     }
 
     private getDimensions = (): CSSProperties => {

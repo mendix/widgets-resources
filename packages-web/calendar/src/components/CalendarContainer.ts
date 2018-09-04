@@ -166,7 +166,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     private setCustomViews = () => {
         const viewOptions: Container.ViewOptions = {};
         this.props.customViews.forEach(customView => {
-            viewOptions[customView.customView] = customView.customCaption;
+            (viewOptions as any)[customView.customView] = customView.customCaption;
             if (customView.customView === "agenda") {
                 viewOptions.allDay = customView.allDayText;
                 viewOptions.date = customView.textHeaderDate;
