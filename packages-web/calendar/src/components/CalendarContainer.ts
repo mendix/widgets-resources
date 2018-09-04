@@ -229,7 +229,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         }
     }
 
-    private handleOnClickEvent = (eventInfo: any) => {
+    private handleOnClickEvent = (eventInfo: Container.EventInfo) => {
         mx.data.get({
             guid: eventInfo.guid,
             callback: this.executeEventAction,
@@ -245,7 +245,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         this.executeAction(mxObject, onClickEvent, onClickMicroflow, mxform, onClickNanoflow);
     }
 
-    private onClickSlot = (slotInfo: any) => {
+    private onClickSlot = (slotInfo: Container.EventInfo) => {
         mx.data.create({
             entity: this.props.eventEntity,
             callback: (object) => {
@@ -264,7 +264,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         this.executeAction(mxObject, onCreate, onCreateMicroflow, mxform, onCreateNanoflow);
     }
 
-    private handleOnChangeEvent = (eventInfo: any) => {
+    private handleOnChangeEvent = (eventInfo: Container.EventInfo) => {
         const { events } = this.state;
         const eventPosition = events.indexOf(eventInfo.event);
         const updatedEvent: CalendarEvent = {

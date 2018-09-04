@@ -1,4 +1,27 @@
 export namespace Container {
+    export interface ToolbarProps {
+        messages: ViewOptions;
+        onNavigate: (action: Style.Action, newDate: Date) => void;
+        onViewChange: (view: Style.View) => void;
+    }
+
+    export interface EventInfo {
+        allDay: boolean;
+        end: Date;
+        event: Info;
+        start: Date;
+        guid: string;
+    }
+
+    interface Info {
+        allDay: boolean;
+        color: string;
+        end: Date;
+        guid: string;
+        start: Date;
+        title: string;
+    }
+
     interface WrapperProps {
         class: string;
         friendlyId: string;
@@ -92,7 +115,7 @@ export namespace Container {
         customView: Style.View | Style.Action | "title";
         position: Style.Position;
         customCaption?: string;
-        renderMode?: "button" | "link";
+        renderMode: "button" | "link";
         buttonToolTip?: string;
         buttonStyle?: Style.ButtonStyle;
     }
