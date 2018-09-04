@@ -42,7 +42,7 @@ export interface CalendarProps {
     width: number;
     widthUnit: Style.WidthUnitType;
     onSelectEventAction?: (eventInfo: object) => void;
-    onEventResizeAction?: (eventInfo: any) => void;
+    onEventResizeAction?: (eventInfo: object) => void;
     onSelectSlotAction?: (slotInfo: object) => void;
     onEventDropAction?: (eventInfo: object) => void;
     onViewChangeAction?: () => void;
@@ -79,7 +79,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         }
     }
 
-    private getDefaultToolbar(): Container.ButtonConfig[] {
+    private getDefaultToolbar(): Partial<Container.ButtonConfig>[] {
         return [
             {
                 customView: "previous",
@@ -123,8 +123,8 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     }
 
     private renderCalendar() {
-        const wrapToolbar = (injectedProps: Container.CustomViews[] | Container.ButtonConfig[]) =>
-            (toolbarProps: any) => createElement(CustomToolbar as any, { customViews: injectedProps, ...toolbarProps });
+        const wrapToolbar = (injectedProps: Container.CustomViews[] | Partial<Container.ButtonConfig>[]) =>
+            (toolbarProps: Container.ToolbarProps) => createElement(CustomToolbar as any, { customViews: injectedProps, ...toolbarProps });
 
         const props = {
             events: this.props.events,
@@ -141,7 +141,8 @@ class Calendar extends Component<CalendarProps, CalendarState> {
             showMultiDayTimes: true,
             onSelectEvent: this.onSelectEvent,
             onSelectSlot: this.onSelectSlot,
-            onView: this.onViewChange
+            onView: this.onViewChange,
+            views: [ "month", "day", "week", "work_week", "month" ]
         };
 
         if (this.props.loading) {
@@ -157,8 +158,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         }
     }
 
-    private getToolbarProps(): Container.CustomViews[] | Container.ButtonConfig[] {
-        // TODO maybe only return type should be ButtonConfig
+    private getToolbarProps(): Partial<Container.ButtonConfig>[] {
         return this.props.viewOption === "standard"
             ? this.getDefaultToolbar()
             : this.props.customViews;
@@ -181,17 +181,17 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         return style;
     }
 
-    private allDayAccessor = (event: any) => event.allDay;
+    private allDayAccessor = (event: Container.ViewOptions) => event.allDay;
 
-    private eventColor = (events: any) => ({ style: { backgroundColor: events.color } });
+    private eventColor = (events: CalendarEvent) => ({ style: { backgroundColor: events.color } });
 
-    private onEventDrop = (eventInfo: any) => {
+    private onEventDrop = (eventInfo: Container.EventInfo) => {
         if (eventInfo.start.getDate() !== eventInfo.event.start.getDate() && this.props.editable === "default" && this.props.onEventDropAction) {
             this.props.onEventDropAction(eventInfo);
         }
     }
 
-    private onEventResize = (_resizeType: string, eventInfo: any) => {
+    private onEventResize = (_resizeType: string, eventInfo: Container.EventInfo) => {
         if (eventInfo.end.getDate() !== eventInfo.event.end.getDate() && this.props.editable && this.props.onEventResizeAction) {
             this.props.onEventResizeAction(eventInfo);
         }

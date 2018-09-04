@@ -50,6 +50,6 @@ const Button: SFC<ButtonProps> = ({ title, className, caption, onClick, buttonSt
 
 const Link: SFC<ButtonProps> = ({ title, className, caption, onClick, active, icon, iconPosition }) =>
     createElement("span",
-        { className: classNames("mx-link", className, { active }), title, onClick },
+        { className: classNames("btn btn-link", className, { active }), title, onClick },
         addIcon(icon, iconPosition, createElement("a", {}, caption))
     );
