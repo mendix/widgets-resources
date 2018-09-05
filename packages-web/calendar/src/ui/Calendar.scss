@@ -2,7 +2,7 @@
 
 .widget-calendar {
     .rbc-calendar {
-        min-height: 580px !important;
+        min-height: -webkit-fill-available !important;
     }
 
     .rbc-event {
