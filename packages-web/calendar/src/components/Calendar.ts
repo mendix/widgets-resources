@@ -142,7 +142,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
             onSelectEvent: this.onSelectEvent,
             onSelectSlot: this.onSelectSlot,
             onView: this.onViewChange,
-            views: [ "month", "day", "week", "work_week", "month" ]
+            views: [ "month", "day", "week", "work_week", "month", "agenda" ]
         };
 
         if (this.props.loading) {

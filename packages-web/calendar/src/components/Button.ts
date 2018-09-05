@@ -15,7 +15,7 @@ export interface ButtonProps {
 
 export type ButtonStyle = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
 
-const addIcon = (icon?: string, iconPosition?: "left" | "right", content?: ReactNode) => {
+export const addIcon = (icon?: string, iconPosition?: "left" | "right", content?: ReactNode) => {
     if (icon) {
         if (iconPosition === "right") {
             return [
@@ -42,7 +42,7 @@ export const ToolbarButton: SFC<ButtonProps> = props =>
 
 ToolbarButton.defaultProps = { buttonStyle: "default", renderMode: "button", iconPosition: "left" };
 
-const Button: SFC<ButtonProps> = ({ title, className, caption, onClick, buttonStyle, active, icon, iconPosition }) =>
+export const Button: SFC<ButtonProps> = ({ title, className, caption, onClick, buttonStyle, active, icon, iconPosition }) =>
     createElement("button",
         { className: classNames("btn", `btn-${buttonStyle}`, className, { active }), title, onClick },
         addIcon(icon, iconPosition, caption)
