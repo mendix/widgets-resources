@@ -14,20 +14,19 @@ exports.config = {
     coloredLogs: true,
     bail: 0,
     screenshotPath: "dist/wdio/",
-    baseUrl: debug ? "http://localhost:8080/" : "http://reactcalendar.mxapps.io/",
+    baseUrl: debug ? "http://localhost:8080/" : "https://reactcalendar.mxapps.io/",
 
     waitforTimeout: 40000,
     connectionRetryTimeout: 90000,
     connectionRetryCount: 0,
-    services: ["selenium-standalone"],
+    services: [ "selenium-standalone" ],
 
     framework: "jasmine",
-    reporters: ["spec"],
-    execArgv: debug ? ["--inspect"] : undefined,
-    // Options to be passed to Jasmine.
+    reporters: [ "spec" ],
+    execArgv: debug ? [ "--inspect" ] : undefined,
     jasmineNodeOpts: {
         defaultTimeoutInterval: debug ? (60 * 60 * 1000) : (30 * 1000),
-        expectationResultHandler: function (passed, assertion) {
+        expectationResultHandler: function(passed, assertion) {
             if (passed) {
                 return;
             }

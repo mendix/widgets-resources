@@ -2,7 +2,7 @@ import { Component, ReactChild, createElement } from "react";
 
 import { Calendar, CalendarEvent } from "./Calendar";
 import { fetchByMicroflow, fetchByNanoflow, fetchData } from "../utils/data";
-import { Container, Data } from "../utils/namespaces";
+import { Container } from "../utils/namespaces";
 import * as moment from "moment";
 export interface CalendarContainerState {
     alertMessage: ReactChild;
@@ -164,42 +164,39 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     }
 
     private setCustomViews = () => {
-        const viewOptions: Container.ViewOptions = {};
-        this.props.customViews.forEach(customView => {
-            (viewOptions as any)[customView.customView] = customView.customCaption;
+        return this.props.customViews.reduce((accumulator: Container.ViewOptions, customView: Container.CustomViews) => {
             if (customView.customView === "agenda") {
-                viewOptions.allDay = customView.allDayText;
-                viewOptions.date = customView.textHeaderDate;
-                viewOptions.time = customView.textHeaderTime;
-                viewOptions.event = customView.textHeaderEvent;
+                accumulator.allDay = customView.allDayText;
+                accumulator.date = customView.textHeaderDate;
+                accumulator.time = customView.textHeaderTime;
+                accumulator.event = customView.textHeaderEvent;
             }
-        });
 
-        return viewOptions;
+            return accumulator;
+        }, {});
     }
 
     private setCalendarFormats = () => {
-        const viewOptions: Container.ViewOptions = {};
-        this.props.customViews.forEach((customView) => {
-            viewOptions.dateFormat = customView.customView === "month"
+        return this.props.customViews.reduce((accumulator: Container.ViewOptions, customView: Container.CustomViews) => {
+            accumulator.dateFormat = customView.customView === "month"
                 ? this.customFormat(customView.cellDateFormat, "date")
-                : viewOptions.dateFormat;
-            viewOptions.dayFormat = customView.customView === "day"
+                : accumulator.dateFormat;
+            accumulator.dayFormat = customView.customView === "day"
                 || customView.customView === "week"
                 || customView.customView === "work_week"
-                ? this.customFormat(customView.gutterDateFormat, "day")
-                : viewOptions.dayFormat;
-            viewOptions.weekdayFormat = customView.customView === "month"
+                    ? this.customFormat(customView.gutterDateFormat, "day")
+                    : accumulator.dayFormat;
+            accumulator.weekdayFormat = customView.customView === "month"
                 ? this.customFormat(customView.headerFormat, "weekday")
-                : viewOptions.weekdayFormat;
-            viewOptions.timeGutterFormat = customView.customView === "week"
+                : accumulator.weekdayFormat;
+            accumulator.timeGutterFormat = customView.customView === "week"
                 || customView.customView === "day"
                 || customView.customView === "work_week"
-                ? this.customFormat(customView.gutterTimeFormat, "timeGutter")
-                : viewOptions.timeGutterFormat;
-        });
+                    ? this.customFormat(customView.gutterTimeFormat, "timeGutter")
+                    : accumulator.timeGutterFormat;
 
-        return viewOptions;
+            return accumulator;
+        }, {});
     }
 
     private customFormat = (dateFormat: string, dateType: Container.DateType) => {
@@ -219,9 +216,8 @@ export default class CalendarContainer extends Component<Container.CalendarConta
 
     private onChangeView = () => {
         if (this.props.executeOnViewChange && this.props.mxObject) {
-            const guid = this.props.mxObject ? this.props.mxObject.getGuid() : "";
             if (this.props.dataSource === "microflow") {
-                fetchByMicroflow(this.props.dataSourceMicroflow, guid);
+                fetchByMicroflow(this.props.dataSourceMicroflow, this.props.mxObject.getGuid());
             }
             if (this.props.dataSource === "nanoflow") {
                 fetchByNanoflow(this.props.dataSourceNanoflow, this.props.mxform);
@@ -239,10 +235,9 @@ export default class CalendarContainer extends Component<Container.CalendarConta
 
     private executeEventAction = (mxObject: mendix.lib.MxObject) => {
         const { onClickEvent, onClickMicroflow, mxform, onClickNanoflow } = this.props;
-        if (!mxObject || !mxObject.getGuid()) {
-            return;
+        if (mxObject) {
+            this.executeAction(mxObject, onClickEvent, onClickMicroflow, mxform, onClickNanoflow);
         }
-        this.executeAction(mxObject, onClickEvent, onClickMicroflow, mxform, onClickNanoflow);
     }
 
     private onClickSlot = (slotInfo: Container.EventInfo) => {
@@ -289,12 +284,13 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     }
 
     private executeOnDropAction = (mxObject: mendix.lib.MxObject) => {
-        if (!mxObject || !mxObject.getGuid()) { return; }
         const { onChangeEvent, onChangeMicroflow, mxform, onChangeNanoflow } = this.props;
-        this.executeAction(mxObject, onChangeEvent, onChangeMicroflow, mxform, onChangeNanoflow);
+        if (mxObject && mxObject.getGuid()) {
+            this.executeAction(mxObject, onChangeEvent, onChangeMicroflow, mxform, onChangeNanoflow);
+        }
     }
 
-    private executeAction(mxObject: mendix.lib.MxObject, action: Container.OnClickEventOptions, microflow: string, mxform: mxui.lib.form._FormBase, nanoflow: Data.Nanoflow) {
+    private executeAction(mxObject: mendix.lib.MxObject, action: Container.OnClickEventOptions, microflow: string, mxform: mxui.lib.form._FormBase, nanoflow: mx.Nanoflow) {
         const context = new mendix.lib.MxContext();
         context.setContext(mxObject.getEntity(), mxObject.getGuid());
         if (action === "callMicroflow" && microflow && mxObject.getGuid()) {
@@ -348,28 +344,12 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         }
         try {
             if (props.view === "custom") {
-                const viewOptions: Container.ViewOptions = {};
+                const date = new Date();
                 props.customViews.forEach(customView => {
-                    viewOptions.dateFormat = window.mx.parser.formatValue(
-                        new Date(),
-                        "datetime",
-                        { datePattern: customView.cellDateFormat }
-                    );
-                    viewOptions.dayFormat = window.mx.parser.formatValue(
-                        new Date(),
-                        "datetime",
-                        { datePattern: customView.gutterDateFormat }
-                    );
-                    viewOptions.weekdayFormat = window.mx.parser.formatValue(
-                        new Date(),
-                        "datetime",
-                        { datePattern: customView.headerFormat }
-                    );
-                    viewOptions.timeGutterFormat = window.mx.parser.formatValue(
-                        new Date(),
-                        "datetime",
-                        { datePattern: customView.gutterTimeFormat }
-                    );
+                    window.mx.parser.formatValue(date, "datetime", { datePattern: customView.cellDateFormat });
+                    window.mx.parser.formatValue(date, "datetime", { datePattern: customView.gutterDateFormat });
+                    window.mx.parser.formatValue(date, "datetime", { datePattern: customView.headerFormat });
+                    window.mx.parser.formatValue(date, "datetime", { datePattern: customView.gutterTimeFormat });
                 });
             }
         } catch (error) {
