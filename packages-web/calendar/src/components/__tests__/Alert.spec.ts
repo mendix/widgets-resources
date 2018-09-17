@@ -22,9 +22,9 @@ describe("Alert", () => {
     });
 
     it("renders with the specified class", () => {
-        const alert = renderAlert({ className: "widget-color-picker-alert" }, alertMessage);
+        const alert = renderAlert({ className: "widget-calendar-alert" }, alertMessage);
 
-        expect(alert).toHaveClass("widget-color-picker-alert");
+        expect(alert).toHaveClass("widget-calendar-alert");
     });
 
     it("with no bootstrap style specified renders with the class alert-danger", () => {

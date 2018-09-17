@@ -14,6 +14,7 @@ class MxMock implements mx.MxInterface {
     server!: mx.server;
     session!: mx.session;
     ui!: mx.ui;
+    onlineData: mx.OnlineData;
     onError(_error: Error): void { /* */ }
     isOffline(): boolean { return false; }
 }

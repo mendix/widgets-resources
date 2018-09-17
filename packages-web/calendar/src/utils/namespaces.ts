@@ -42,12 +42,12 @@ export namespace Container {
         onClickEvent: OnClickEventOptions;
         onCreate: OnClickEventOptions;
         onClickMicroflow: string;
-        onClickNanoflow: Data.Nanoflow;
+        onClickNanoflow: mx.Nanoflow;
         onCreateMicroflow: string;
-        onCreateNanoflow: Data.Nanoflow;
+        onCreateNanoflow: mx.Nanoflow;
         onChangeEvent: OnClickEventOptions;
         onChangeMicroflow: string;
-        onChangeNanoflow: Data.Nanoflow;
+        onChangeNanoflow: mx.Nanoflow;
     }
 
     interface EventData {
@@ -69,7 +69,7 @@ export namespace Container {
         textHeaderEvent: string;
     }
 
-    export interface CalendarContainerProps extends WrapperProps, Dimensions, Events, EventData, CustomFormats {
+    export interface CalendarContainerProps extends WrapperProps, Dimensions, Events, EventData {
         customViews: CustomViews[];
         enableCreate: boolean;
         defaultView: Style.View;
@@ -81,7 +81,7 @@ export namespace Container {
         eventEntity: string;
         entityConstraint: string;
         dataSourceMicroflow: string;
-        dataSourceNanoflow: Data.Nanoflow;
+        dataSourceNanoflow: mx.Nanoflow;
         popup: boolean;
         editable: string;
         view: Views;
@@ -128,7 +128,7 @@ export namespace Data {
     export interface EventProps {
         onClickEvent: "doNothing" | "callMicroflow" | "callNanoflow";
         onClickMicroflow: string;
-        onClickNanoflow: Nanoflow;
+        onClickNanoflow: mx.Nanoflow;
         tooltipForm: string;
     }
 
@@ -139,17 +139,13 @@ export namespace Data {
         mxform: mxui.lib.form._FormBase;
         constraint?: string;
         microflow?: string;
-        nanoflow: Nanoflow;
+        nanoflow: mx.Nanoflow;
     }
 
     export interface FetchByXPathOptions {
         guid: string;
         entity: string;
         constraint: string;
-    }
-    export interface Nanoflow {
-        nanoflow: object[];
-        paramsSpec: { Progress: string };
     }
 }
 

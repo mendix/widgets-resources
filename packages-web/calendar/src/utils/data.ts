@@ -53,7 +53,7 @@ export const fetchByMicroflow = (actionname: string, guid: string): Promise<MxOb
         });
     });
 
-export const fetchByNanoflow = (actionname: Data.Nanoflow, mxform: mxui.lib.form._FormBase): Promise<MxObject[]> =>
+export const fetchByNanoflow = (actionname: mx.Nanoflow, mxform: mxui.lib.form._FormBase): Promise<MxObject[]> =>
     new Promise((resolve: (objects: MxObject[]) => void, reject) => {
         const context = new mendix.lib.MxContext();
         window.mx.data.callNanoflow({
