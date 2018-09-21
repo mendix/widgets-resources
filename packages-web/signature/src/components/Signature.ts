@@ -17,7 +17,7 @@ export interface SignatureProps {
     minLineWidth?: string;
     velocityFilterWeight?: string;
     showGrid?: boolean;
-    onClickAction(imageUrl?: string): void;
+    onClickAction?: (imageUrl?: string) => void;
 }
 
 export interface SignatureState {
