@@ -1,6 +1,6 @@
 import { Component, createElement } from "react";
 
-import { Signature } from "./Signature";
+import { Signature, SignatureProps } from "./Signature";
 
 interface WrapperProps {
     mxObject?: mendix.lib.MxObject;
@@ -45,11 +45,10 @@ export default class SignatureContainer extends Component<SignatureContainerProp
 
     render() {
         return createElement(Signature, {
-            ...this.props as SignatureContainerProps,
-            imageUrl: this.state.url,
+            ...this.props as SignatureProps,
             onClickAction: this.saveImage,
             alertMessage: this.state.alertMessage
-        } as any);
+        });
     }
 
     componentWillReceiveProps(newProps: SignatureContainerProps) {

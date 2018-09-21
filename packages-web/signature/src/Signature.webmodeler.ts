@@ -1,6 +1,5 @@
 import { Component, createElement } from "react";
-import { Signature } from "./components/Signature";
-import { SignatureContainerProps } from "./components/SignatureContainer";
+import { Signature, SignatureProps } from "./components/Signature";
 
 declare function require(name: string): string;
 
@@ -8,10 +7,9 @@ declare function require(name: string): string;
 export class preview extends Component<{ SignatureContainerProps }, {}> {
     render() {
         return createElement(Signature, {
-            ...this.props as SignatureContainerProps,
-            imageUrl: "",
+            ...this.props as SignatureProps,
             onClickAction: () => { return; }
-        } as any);
+        });
     }
 }
 
