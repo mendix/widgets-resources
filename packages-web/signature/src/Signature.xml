@@ -18,12 +18,12 @@
             <category>Pen Customization</category>
             <description>Pen color</description>
         </property>
-        <property key="maxWidth" type="string" defaultValue="2.5">
+        <property key="maxLineWidth" type="string" defaultValue="2.5">
             <caption>Maximum line width</caption>
             <category>Pen Customization</category>
             <description>Pathline maximum width</description>
         </property>
-        <property key="minWidth" type="string" defaultValue="0.5">
+        <property key="minLineWidth" type="string" defaultValue="0.5">
             <caption>Minimum line width</caption>
             <category>Pen Customization</category>
             <description>Pathline minimum width</description>

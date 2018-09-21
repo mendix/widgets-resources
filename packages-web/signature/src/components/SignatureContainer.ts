@@ -15,8 +15,8 @@ export interface SignatureContainerProps extends WrapperProps {
     gridColor?: string;
     gridBorder?: number;
     penColor?: string;
-    maxWidth?: number;
-    minWidth?: number;
+    maxLineWidth?: number;
+    minLineWidth?: number;
     velocityFilterWeight?: string;
     showGrid?: boolean;
     onChangeMicroflow?: string;
