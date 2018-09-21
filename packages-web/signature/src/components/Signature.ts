@@ -13,8 +13,8 @@ export interface SignatureProps {
     gridColor?: string;
     gridBorder?: number;
     penColor?: string;
-    maxWidth?: string;
-    minWidth?: string;
+    maxLineWidth?: string;
+    minLineWidth?: string;
     velocityFilterWeight?: string;
     showGrid?: boolean;
     onClickAction(imageUrl?: string): void;
@@ -66,8 +66,8 @@ export class Signature extends Component<SignatureProps, SignatureState> {
                 backgroundColor: "white",
                 penColor: this.props.penColor,
                 velocityFilterWeight: this.props.velocityFilterWeight,
-                maxWidth: this.props.maxWidth,
-                minWidth: this.props.minWidth
+                maxWidth: this.props.maxLineWidth,
+                minWidth: this.props.minLineWidth
             });
             if (this.props.showGrid) { this.drawGrid(); }
         }
