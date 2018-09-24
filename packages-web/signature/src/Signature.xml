@@ -68,10 +68,31 @@
             <category>Appearance</category>
             <description>Border width(px)</description>
         </property>
-        <property key="onChangeMicroflow" type="microflow" required="false">
-            <caption>Microflow</caption>
+        <property key="afterSignEvent" type="enumeration" defaultValue="doNothing">
+            <caption>After sign</caption>
             <category>Events</category>
-            <description>The microflow that will be executed on click</description>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="doNothing">Do nothing</enumerationValue>
+                <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
+                <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="timeout" type="integer" defaultValue="1000">
+            <caption>Signature timeout</caption>
+            <category>Events</category>
+            <description>Time (in ms) to wait before considering the signature finished after the pen has stopped touching the pad</description>
+        </property>
+        <property key="afterSignMicroflow" type="microflow" required="false">
+            <caption>After sign microflow</caption>
+            <category>Events</category>
+            <description>The microflow that will be executed after signing</description>
+            <returnType type="Void" />
+        </property>
+        <property key="afterSignNanoflow" type="nanoflow" required="false">
+            <caption>After sign nanoflow</caption>
+            <category>Events</category>
+            <description>The nanoflow that will be executed after signing</description>
             <returnType type="Void" />
         </property>
     </properties>

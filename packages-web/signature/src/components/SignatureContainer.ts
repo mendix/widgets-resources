@@ -4,6 +4,7 @@ import { Signature, SignatureProps } from "./Signature";
 
 interface WrapperProps {
     mxObject?: mendix.lib.MxObject;
+    mxform: mxui.lib.form._FormBase;
 }
 
 export interface SignatureContainerProps extends WrapperProps {
@@ -17,9 +18,19 @@ export interface SignatureContainerProps extends WrapperProps {
     penColor?: string;
     maxLineWidth?: number;
     minLineWidth?: number;
-    velocityFilterWeight?: string;
+    velocityFilterWeight?: number;
     showGrid?: boolean;
-    onChangeMicroflow?: string;
+    afterSignEvent: OnClickEventOptions;
+    afterSignMicroflow: string;
+    afterSignNanoflow: Nanoflow;
+    timeout: number;
+}
+
+type OnClickEventOptions = "doNothing" | "callMicroflow" | "callNanoflow";
+
+interface Nanoflow {
+    nanoflow: object[];
+    paramsSpec: { Progress: string };
 }
 
 interface SignatureContainerState {
@@ -39,13 +50,13 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         };
 
         this.updateState = this.updateState.bind(this);
-        this.saveImage = this.saveImage.bind(this);
         this.handleValidations = this.handleValidations.bind(this);
     }
 
     render() {
         return createElement(Signature, {
             ...this.props as SignatureProps,
+            onEndAction: this.handleAfterSignAction,
             onClickAction: this.saveImage,
             alertMessage: this.state.alertMessage
         });
@@ -59,8 +70,8 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         });
     }
 
-    private saveImage(url: string) {
-        const { mxObject, dataUrl, onChangeMicroflow } = this.props;
+    private saveImage = (url: string) => {
+        const { mxObject, dataUrl } = this.props;
 
         if (mxObject && mxObject.inheritsFrom("System.Image") && dataUrl) {
             mx.data.saveDocument(
@@ -72,7 +83,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
                 error => { mx.ui.error(error.message, false); }
             );
 
-            this.executeAction(onChangeMicroflow, mxObject.getGuid());
+            // this.executeAction(onClickEvent, onChangeMicroflow, onChangeNanoflow);
         } else {
             this.setState({ alertMessage: "The entity does not inherit from System Image" });
         }
@@ -121,15 +132,26 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         }
     }
 
-    private executeAction(actionName: string, guid: string) {
-        if (actionName && guid) {
-            window.mx.ui.action(actionName, {
-                error: (error) =>
-                    window.mx.ui.error(`Error while executing microflow ${actionName}: ${error.message}`),
-                params: {
-                    applyto: "selection",
-                    guids: [ guid ]
-                }
+    private handleAfterSignAction = () => {
+        const { afterSignEvent, afterSignMicroflow, afterSignNanoflow } = this.props;
+        const context = new mendix.lib.MxContext();
+        context.setContext(this.props.mxObject.getEntity(), this.props.mxObject.getGuid());
+        if (afterSignEvent === "callMicroflow" && afterSignMicroflow && this.props.mxObject.getGuid()) {
+            window.mx.ui.action(afterSignMicroflow, {
+                context,
+                origin: this.props.mxform,
+                error: error => window.mx.ui.error(
+                    `An error occurred while executing the nanoflow: ${afterSignMicroflow}: ${error.message}`
+                )
+            });
+        } else if (afterSignEvent === "callNanoflow" && afterSignNanoflow.nanoflow) {
+            window.mx.data.callNanoflow({
+                nanoflow: afterSignNanoflow,
+                origin: this.props.mxform,
+                context,
+                error: error => window.mx.ui.error(
+                    `An error occurred while executing the nanoflow: ${error.message}`
+                )
             });
         }
     }
