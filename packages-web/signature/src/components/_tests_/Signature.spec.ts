@@ -45,7 +45,7 @@ describe("Siganture", () => {
                     onClick: jasmine.any(Function),
                     style: { visibility: "visible" }
                 }),
-                createElement(Alert, { message: defaultProps.alertMessage, bootstrapStyle: "danger" })
+                createElement(Alert, { bootstrapStyle: "danger" }, defaultProps.alertMessage)
             )
         );
     });

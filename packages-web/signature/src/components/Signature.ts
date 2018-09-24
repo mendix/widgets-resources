@@ -54,7 +54,7 @@ export class Signature extends Component<SignatureProps, SignatureState> {
                 onClick: () => this.getDataUrl(),
                 style: { visibility: this.state.isSet ? "visible" : "hidden" }
             }, "Save"),
-            createElement(Alert, { message: this.props.alertMessage || "", bootstrapStyle: "danger" })
+            createElement(Alert, { bootstrapStyle: "danger" }, this.props.alertMessage)
         );
     }
 
