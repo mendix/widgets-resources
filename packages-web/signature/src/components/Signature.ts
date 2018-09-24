@@ -1,7 +1,6 @@
 import { Component, createElement } from "react";
 import { Alert } from "./Alert";
-// tslint:disable-next-line:no-submodule-imports
-import * as SignaturePad from "signature_pad/dist/signature_pad.min";
+import SignaturePad from "signature_pad";
 import "../ui/Signature.scss";
 
 export interface SignatureProps {
@@ -13,11 +12,13 @@ export interface SignatureProps {
     gridColor?: string;
     gridBorder?: number;
     penColor?: string;
-    maxLineWidth?: string;
-    minLineWidth?: string;
-    velocityFilterWeight?: string;
+    maxLineWidth?: number;
+    minLineWidth?: number;
+    velocityFilterWeight?: number;
     showGrid?: boolean;
+    timeout?: number;
     onClickAction?: (imageUrl?: string) => void;
+    onEndAction?: () => void;
 }
 
 export interface SignatureState {
@@ -62,15 +63,20 @@ export class Signature extends Component<SignatureProps, SignatureState> {
         if (this.canvasNode) {
             this.canvasNode.style.backgroundColor = "white";
             this.signaturePad = new SignaturePad(this.canvasNode, {
-                onEnd: () => { this.setState({ isSet: true }); },
                 backgroundColor: "white",
                 penColor: this.props.penColor,
                 velocityFilterWeight: this.props.velocityFilterWeight,
                 maxWidth: this.props.maxLineWidth,
-                minWidth: this.props.minLineWidth
+                minWidth: this.props.minLineWidth,
+                onEnd: this.onEnd
             });
             if (this.props.showGrid) { this.drawGrid(); }
         }
+    }
+
+    private onEnd = () => {
+        this.setState({ isSet: true });
+        setTimeout(() => this.props.onEndAction(), this.props.timeout);
     }
 
     private getDataUrl = () => {
