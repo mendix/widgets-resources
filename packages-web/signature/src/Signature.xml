@@ -42,15 +42,34 @@
                 <enumerationValue key="never">Never</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="height" type="integer" defaultValue="500">
-            <caption>Canvas height</caption>
+        <property key="widthUnit" type="enumeration" defaultValue="percentage">
+            <caption>Width unit</caption>
             <category>Appearance</category>
-            <description>Canvas height</description>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="percentage">Percentage</enumerationValue>
+                <enumerationValue key="pixels">Pixels</enumerationValue>
+            </enumerationValues>
         </property>
-        <property key="width" type="integer" defaultValue="500">
-            <caption>Canvas width</caption>
+        <property key="width" type="integer" defaultValue="100">
+            <caption>Width</caption>
             <category>Appearance</category>
-            <description>Canvas width</description>
+            <description/>
+        </property>
+        <property key="heightUnit" type="enumeration" defaultValue="percentageOfWidth">
+            <caption>Height unit</caption>
+            <category>Appearance</category>
+            <description>'Percentage of width' is the aspect ratio, 'Pixels' is absolute. Warning: the 'Percentage of parent' only works when the parent has an absolute height, else it will not display</description>
+            <enumerationValues>
+                <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
+                <enumerationValue key="pixels">Pixels</enumerationValue>
+                <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="height" type="integer" defaultValue="75">
+            <caption>Height</caption>
+            <category>Appearance</category>
+            <description/>
         </property>
         <property key="showGrid" type="boolean" defaultValue="true">
             <caption>Show background grid</caption>
