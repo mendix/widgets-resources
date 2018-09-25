@@ -1,6 +1,6 @@
 import { Component, createElement } from "react";
 
-import { Signature, SignatureProps } from "./Signature";
+import { Signature, SignatureProps, heightUnitType, widthUnitType } from "./Signature";
 
 interface WrapperProps {
     mxObject?: mendix.lib.MxObject;
