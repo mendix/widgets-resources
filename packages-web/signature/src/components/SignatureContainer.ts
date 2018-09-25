@@ -9,19 +9,19 @@ interface WrapperProps {
 }
 
 export interface SignatureContainerProps extends WrapperProps {
-    dataUrl?: string;
-    height?: number;
-    width?: number;
-    editable?: "default" | "never";
-    gridx?: number;
-    gridy?: number;
+    dataUrl: string;
+    height: number;
+    width: number;
+    gridx: number;
+    gridy: number;
     gridColor?: string;
     gridBorder?: number;
-    penColor?: string;
-    maxLineWidth?: number;
-    minLineWidth?: number;
-    velocityFilterWeight?: number;
-    showGrid?: boolean;
+    penColor: string;
+    maxLineWidth: number;
+    minLineWidth: number;
+    velocityFilterWeight: number;
+    editable?: "default" | "never";
+    showGrid: boolean;
     afterSignEvent: OnClickEventOptions;
     afterSignMicroflow: string;
     afterSignNanoflow: Nanoflow;
@@ -58,9 +58,9 @@ export default class SignatureContainer extends Component<SignatureContainerProp
     render() {
         return createElement(Signature, {
             ...this.props as SignatureProps,
-            onEndAction: this.handleAfterSignAction,
-            onClickAction: this.saveImage,
             alertMessage: this.state.alertMessage,
+            onClickAction: this.saveImage,
+            onEndAction: this.handleAfterSignAction,
             status: this.getCanvasStatus(!this.isReadOnly())
         });
     }
