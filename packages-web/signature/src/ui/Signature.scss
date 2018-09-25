@@ -7,6 +7,17 @@
         display: block;
         margin: 0 auto;
         width: 100%;
+        padding: 0px;
+    }
+
+    &.disabled {
+        pointer-events: none;
+        background-color: rgb(238,238,238)
+    }
+
+    &.signature-unset {
+        float: left;
+        clear: left;
     }
 
     button.btn {
@@ -16,10 +27,5 @@
 
     button.btn.btn-primary {
         float: right;
-    }
-
-    &.signature-unset {
-        float: left;
-        clear: left;
     }
 }
