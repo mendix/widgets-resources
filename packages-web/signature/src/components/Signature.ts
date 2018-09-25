@@ -93,6 +93,7 @@ export class Signature extends Component<SignatureProps, SignatureState> {
                 this.width = this.canvasNode.parentElement.clientWidth;
             }
         }
+        window.addEventListener("resize", this.resizeCanvas);
     }
 
     componentDidUpdate() {
@@ -100,6 +101,10 @@ export class Signature extends Component<SignatureProps, SignatureState> {
             this.drawGrid();
             this.setState({ isGridDrawn: true });
         }
+    }
+
+    componentDidUnmount() {
+        window.removeEventListener("resize", this.resizeCanvas);
     }
 
     private onEnd = () => {
@@ -118,6 +123,15 @@ export class Signature extends Component<SignatureProps, SignatureState> {
     private resetCanvas = () => {
         this.signaturePad.clear();
         this.setState({ isSet: false , isGridDrawn: false });
+    }
+
+    private resizeCanvas = () => {
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+
+        this.width = this.canvasNode.parentElement.offsetWidth * ratio;
+        this.canvasNode.getContext("2d").scale(ratio, ratio);
+        this.signaturePad.clear();
+        this.setState({ isGridDrawn: false });
     }
 
     private drawGrid = () => {
