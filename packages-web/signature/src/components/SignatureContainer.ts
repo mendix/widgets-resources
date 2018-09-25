@@ -9,23 +9,24 @@ interface WrapperProps {
 }
 
 export interface SignatureContainerProps extends WrapperProps {
-    dataUrl: string;
-    height: number;
-    width: number;
-    gridx: number;
-    gridy: number;
+    dataUrl?: string;
+    height?: number;
+    width?: number;
+    gridx?: number;
+    gridy?: number;
     gridColor?: string;
     gridBorder?: number;
-    penColor: string;
-    maxLineWidth: number;
-    minLineWidth: number;
-    velocityFilterWeight: number;
-    editable?: "default" | "never";
-    showGrid: boolean;
+    penColor?: string;
+    maxLineWidth?: number;
+    minLineWidth?: number;
+    velocityFilterWeight?: number;
+    showGrid?: boolean;
+    style?: object;
     afterSignEvent: OnClickEventOptions;
     afterSignMicroflow: string;
     afterSignNanoflow: Nanoflow;
     timeout: number;
+    editable?: "default" | "never";
 }
 
 type OnClickEventOptions = "doNothing" | "callMicroflow" | "callNanoflow";
