@@ -5,12 +5,14 @@ import { Signature, SignatureProps } from "./Signature";
 interface WrapperProps {
     mxObject?: mendix.lib.MxObject;
     mxform: mxui.lib.form._FormBase;
+    readOnly?: boolean;
 }
 
 export interface SignatureContainerProps extends WrapperProps {
     dataUrl?: string;
     height?: number;
     width?: number;
+    editable?: "default" | "never";
     gridx?: number;
     gridy?: number;
     gridColor?: string;
@@ -58,7 +60,8 @@ export default class SignatureContainer extends Component<SignatureContainerProp
             ...this.props as SignatureProps,
             onEndAction: this.handleAfterSignAction,
             onClickAction: this.saveImage,
-            alertMessage: this.state.alertMessage
+            alertMessage: this.state.alertMessage,
+            status: this.getCanvasStatus(!this.isReadOnly())
         });
     }
 
@@ -91,6 +94,16 @@ export default class SignatureContainer extends Component<SignatureContainerProp
 
     private getAttributeValue(attributeName: string, mxObject?: mendix.lib.MxObject): string {
         return mxObject ? mxObject.get(attributeName) as string : "";
+    }
+
+    private isReadOnly(): boolean {
+        const { dataUrl, editable, mxObject, readOnly } = this.props;
+
+        return !(editable === "default" && mxObject) || (readOnly || mxObject.isReadonlyAttr(dataUrl));
+    }
+
+    private getCanvasStatus(enabled: boolean) {
+        return enabled ? "enabled" : "disabled";
     }
 
     private resetSubscriptions(mxObject?: mendix.lib.MxObject) {

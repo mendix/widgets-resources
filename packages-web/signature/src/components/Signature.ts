@@ -1,4 +1,5 @@
 import { Component, createElement } from "react";
+import * as classNames from "classnames";
 import { Alert } from "./Alert";
 import SignaturePad from "signature_pad";
 import "../ui/Signature.scss";
@@ -17,9 +18,12 @@ export interface SignatureProps {
     velocityFilterWeight?: number;
     showGrid?: boolean;
     timeout?: number;
+    status?: editable;
     onClickAction?: (imageUrl?: string) => void;
     onEndAction?: () => void;
 }
+
+type editable = "enabled" | "disabled";
 
 export interface SignatureState {
     isSet: boolean;
@@ -40,11 +44,13 @@ export class Signature extends Component<SignatureProps, SignatureState> {
             className: "widget-Signature signature-unset"
         },
             createElement("canvas", {
+                className: classNames("widget-Signature", "form-control mx-textarea-input mx-textarea",
+                {
+                    disabled: this.props.status === "disabled"
+                }),
                 height: this.props.height,
                 width: this.props.width,
-                ref: this.getCanvas,
-                resize: true,
-                style: { border: this.props.gridBorder + "px solid black" }
+                ref: this.getCanvas
             }),
             createElement("button", {
                 className: "btn btn-default",
@@ -61,9 +67,7 @@ export class Signature extends Component<SignatureProps, SignatureState> {
 
     componentDidMount() {
         if (this.canvasNode) {
-            this.canvasNode.style.backgroundColor = "white";
             this.signaturePad = new SignaturePad(this.canvasNode, {
-                backgroundColor: "white",
                 penColor: this.props.penColor,
                 velocityFilterWeight: this.props.velocityFilterWeight,
                 maxWidth: this.props.maxLineWidth,
@@ -102,14 +106,18 @@ export class Signature extends Component<SignatureProps, SignatureState> {
         const context = this.canvasNode.getContext("2d") as CanvasRenderingContext2D;
         context.beginPath();
 
-        for (; x < width; x += gridx) {
-            context.moveTo(x, 0);
-            context.lineTo(x, height);
+        if (gridx !== 0) {
+            for (; x < width; x += gridx) {
+                context.moveTo(x, 0);
+                context.lineTo(x, height);
+            }
         }
 
-        for (; y < height; y += gridy) {
-            context.moveTo(0, y);
-            context.lineTo(width, y);
+        if (gridy !== 0) {
+            for (; y < height; y += gridy) {
+                context.moveTo(0, y);
+                context.lineTo(width, y);
+            }
         }
 
         context.lineWidth = 1;

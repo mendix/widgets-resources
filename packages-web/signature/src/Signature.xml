@@ -33,6 +33,15 @@
             <category>Pen Customization</category>
             <description>Velocity filter pressure</description>
         </property>
+        <property key="editable" type="enumeration" defaultValue="default">
+            <caption>Editable</caption>
+            <category>Appearance</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="default">Default</enumerationValue>
+                <enumerationValue key="never">Never</enumerationValue>
+            </enumerationValues>
+        </property>
         <property key="height" type="integer" defaultValue="500">
             <caption>Canvas height</caption>
             <category>Appearance</category>
