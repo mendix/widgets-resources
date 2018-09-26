@@ -61,8 +61,9 @@ export class Signature extends Component<SignatureProps, SignatureState> {
                 {
                     disabled: this.props.status === "disabled"
                 }),
-                height: this.props.height,
-                width: this.props.width,
+                height: this.height,
+                width: this.width,
+                resize: true,
                 ref: this.getCanvas
             }),
             createElement("button", {

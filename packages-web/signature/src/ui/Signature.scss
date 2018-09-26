@@ -1,24 +1,12 @@
 .widget-signature-wrapper {
     position: relative;
 
-    .widget-signature {
-    top: 0; bottom: 0; left: 0; right: 0;
-    position: absolute;
-
+    canvas {
+        padding: 0px;
         &.disabled {
             pointer-events: none;
-            background-color: rgb(238,238,238)
+            background-color: rgb(238, 238, 238)
         }
-    }
-
-    canvas {
-        left: 0px;
-        right: 0px;
-        max-width: none;
-        display: block;
-        margin: 0 auto;
-        float: left;
-        clear: left;
     }
 
     button.btn {
