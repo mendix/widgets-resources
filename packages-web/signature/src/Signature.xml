@@ -96,6 +96,20 @@
             <category>Appearance</category>
             <description>Border width(px)</description>
         </property>
+        <property key="saveImage" type="enumeration" defaultValue="onChange">
+            <caption>Save image</caption>
+            <category>Events</category>
+            <description>Save signature image, OnChange is default where the image is saved based on a given timeout</description>
+            <enumerationValues>
+                <enumerationValue key="onChange">OnChange</enumerationValue>
+                <enumerationValue key="onFormCommit">OnFormCommit</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="timeout" type="integer" defaultValue="1000">
+            <caption>Signature timeout</caption>
+            <category>Events</category>
+            <description>Time (in ms) to wait before considering the signature finished after the pen has stopped touching the pad</description>
+        </property>
         <property key="afterSignEvent" type="enumeration" defaultValue="doNothing">
             <caption>After sign</caption>
             <category>Events</category>
@@ -105,11 +119,6 @@
                 <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
                 <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
             </enumerationValues>
-        </property>
-        <property key="timeout" type="integer" defaultValue="1000">
-            <caption>Signature timeout</caption>
-            <category>Events</category>
-            <description>Time (in ms) to wait before considering the signature finished after the pen has stopped touching the pad</description>
         </property>
         <property key="afterSignMicroflow" type="microflow" required="false">
             <caption>After sign microflow</caption>

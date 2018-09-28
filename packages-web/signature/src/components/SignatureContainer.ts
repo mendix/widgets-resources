@@ -22,6 +22,7 @@ export interface SignatureContainerProps extends WrapperProps {
     velocityFilterWeight?: number;
     showGrid?: boolean;
     style?: object;
+    saveImage: SaveImage;
     afterSignEvent: OnClickEventOptions;
     afterSignMicroflow: string;
     afterSignNanoflow: Nanoflow;
@@ -30,6 +31,7 @@ export interface SignatureContainerProps extends WrapperProps {
 }
 
 type OnClickEventOptions = "doNothing" | "callMicroflow" | "callNanoflow";
+type SaveImage = "onChange" | "onFormCommit";
 
 interface Nanoflow {
     nanoflow: object[];
@@ -39,20 +41,28 @@ interface Nanoflow {
 interface SignatureContainerState {
     url: string;
     alertMessage: string;
+    imageBlob: Blob;
 }
 
 export default class SignatureContainer extends Component<SignatureContainerProps, SignatureContainerState> {
     private subscriptionHandles: number[] = [];
+    private _formHandle = 0;
+    public get formHandle() {
+        return this._formHandle;
+    }
+    public set formHandle(value) {
+        this._formHandle = value;
+    }
 
     constructor(props: SignatureContainerProps) {
         super(props);
 
         this.state = {
-            url: "",
-            alertMessage: ""
+            alertMessage: "",
+            imageBlob: null,
+            url: ""
         };
 
-        this.updateState = this.updateState.bind(this);
         this.handleValidations = this.handleValidations.bind(this);
     }
 
@@ -60,8 +70,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         return createElement(Signature, {
             ...this.props as SignatureProps,
             alertMessage: this.state.alertMessage,
-            onClickAction: this.saveImage,
-            onEndAction: this.handleAfterSignAction,
+            onSignEndAction: this.processEndSign,
             status: this.getCanvasStatus(!this.isReadOnly())
         });
     }
@@ -74,23 +83,38 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         });
     }
 
-    private saveImage = (url: string) => {
-        const { mxObject, dataUrl } = this.props;
+    private processEndSign = (url: string) => {
+        const { mxObject, dataUrl, saveImage } = this.props;
 
         if (mxObject && mxObject.inheritsFrom("System.Image") && dataUrl) {
-            mx.data.saveDocument(
-                mxObject.getGuid(),
-                `${Math.floor(Math.random() * 1000000)}.png`,
-                { width: this.props.width, height: this.props.height },
-                this.base64toBlob(url),
-                () => { mx.ui.info("Image has been saved", false); },
-                error => { mx.ui.error(error.message, false); }
-            );
-
-            // this.executeAction(onClickEvent, onChangeMicroflow, onChangeNanoflow);
+            this.convertUrltoBlob(url);
+            if (saveImage === "onChange") {
+                setTimeout(this.saveDocument(), 3000);
+            }
         } else {
-            this.setState({ alertMessage: "The entity does not inherit from System Image" });
+            this.setState({
+                alertMessage: `${mxObject.getEntity()} does not inherit from "System.Image.`
+            });
         }
+    }
+
+    private saveDocument = () => {
+        const { height, mxObject, width } = this.props;
+
+        mx.data.saveDocument(mxObject.getGuid(), this.generateFileName(),
+            { width, height }, this.state.imageBlob, () => {
+                mx.ui.info("Image has been saved", false);
+            },
+            error => {
+                mx.ui.error(error.message, false);
+            }
+        );
+
+        this.handleAfterSignAction();
+    }
+
+    private generateFileName(): string {
+        return `${Math.floor(Math.random() * 1000000)}.png`;
     }
 
     private getAttributeValue(attributeName: string, mxObject?: mendix.lib.MxObject): string {
@@ -128,10 +152,12 @@ export default class SignatureContainer extends Component<SignatureContainerProp
                 guid: mxObject.getGuid(),
                 val: true
             }));
+
+            this.formHandle = this.props.mxform.listen("commit", this.saveDocument);
         }
     }
 
-    private updateState() {
+    private updateState = () => {
         this.setState({
             url: this.getAttributeValue(this.props.dataUrl, this.props.mxObject)
         });
@@ -150,6 +176,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         const { afterSignEvent, afterSignMicroflow, afterSignNanoflow } = this.props;
         const context = new mendix.lib.MxContext();
         context.setContext(this.props.mxObject.getEntity(), this.props.mxObject.getGuid());
+
         if (afterSignEvent === "callMicroflow" && afterSignMicroflow && this.props.mxObject.getGuid()) {
             window.mx.ui.action(afterSignMicroflow, {
                 context,
@@ -170,15 +197,24 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         }
     }
 
-    private base64toBlob(base64Uri: string): Blob {
-        const byteString = atob(base64Uri.split(";base64,")[1]);
-        const bufferArray = new ArrayBuffer(byteString.length);
-        const uintArray = new Uint8Array(bufferArray);
+    private convertUrltoBlob(base64Uri: string, contentType = "image/png", sliceSize = 512) {
+        const byteCharacters = atob(base64Uri.split(";base64,")[1]);
+        const byteArrays = [];
 
-        for (let i = 0; i < byteString.length; i++) {
-            uintArray[i] = byteString.charCodeAt(i);
+        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            const byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
         }
 
-        return new Blob([ bufferArray ], { type: base64Uri.split(":")[0] });
+        const imageBlob = new Blob(byteArrays, { type: contentType });
+        this.setState({ imageBlob });
     }
 }

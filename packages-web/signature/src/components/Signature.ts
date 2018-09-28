@@ -19,8 +19,7 @@ export interface SignatureProps {
     showGrid: boolean;
     timeout: number;
     status?: editable;
-    onClickAction?: (imageUrl?: string) => void;
-    onEndAction?: () => void;
+    onSignEndAction?: (imageUrl?: string) => void;
     widthUnit?: widthUnitType;
     heightUnit?: heightUnitType;
     style?: object;
@@ -29,7 +28,6 @@ export interface SignatureProps {
 type editable = "enabled" | "disabled";
 
 export interface SignatureState {
-    isSet: boolean;
     isGridDrawn: boolean;
 }
 
@@ -46,7 +44,6 @@ export class Signature extends Component<SignatureProps, SignatureState> {
         super(props);
 
         this.state = {
-            isSet: false,
             isGridDrawn: false
         };
     }
@@ -70,11 +67,6 @@ export class Signature extends Component<SignatureProps, SignatureState> {
                 className: "btn btn-default",
                 onClick: this.resetCanvas
             }, "Reset"),
-            createElement("button", {
-                className: "btn btn-primary",
-                onClick: () => this.getDataUrl(),
-                style: { visibility: this.state.isSet ? "visible" : "hidden" }
-            }, "Save"),
             createElement(Alert, { bootstrapStyle: "danger" }, this.props.alertMessage)
         );
     }
@@ -86,7 +78,7 @@ export class Signature extends Component<SignatureProps, SignatureState> {
                 velocityFilterWeight: this.props.velocityFilterWeight,
                 maxWidth: this.props.maxLineWidth,
                 minWidth: this.props.minLineWidth,
-                onEnd: this.onEnd
+                onEnd: this.handleSignEnd
             });
 
             if (this.canvasNode.parentElement) {
@@ -108,13 +100,12 @@ export class Signature extends Component<SignatureProps, SignatureState> {
         window.removeEventListener("resize", this.resizeCanvas);
     }
 
-    private onEnd = () => {
-        this.setState({ isSet: true });
-        setTimeout(() => this.props.onEndAction(), this.props.timeout);
-    }
+    private handleSignEnd = () => {
+        const { onSignEndAction } = this.props;
 
-    private getDataUrl = () => {
-        this.props.onClickAction(this.signaturePad.toDataURL());
+        if (onSignEndAction) {
+            onSignEndAction(this.signaturePad.toDataURL());
+        }
     }
 
     private getCanvas = (node: HTMLCanvasElement) => {
@@ -123,7 +114,7 @@ export class Signature extends Component<SignatureProps, SignatureState> {
 
     private resetCanvas = () => {
         this.signaturePad.clear();
-        this.setState({ isSet: false , isGridDrawn: false });
+        this.setState({ isGridDrawn: false });
     }
 
     private resizeCanvas = () => {
