@@ -13,6 +13,9 @@ export interface ProgressBarContainerProps extends WrapperProps {
     barType: BarType;
     bootstrapStyle: BarStyle;
     bootstrapStyleAttribute: string;
+    displayText: DisplayText;
+    displayTextAttribute: string;
+    displayTextStatic: string;
     maximumValueAttribute: string;
     onClickMicroflow?: string;
     onClickNanoflow: Nanoflow;
@@ -21,6 +24,8 @@ export interface ProgressBarContainerProps extends WrapperProps {
     progressAttribute: string;
     textColorSwitch: number;
     openPageAs: PageLocation;
+    staticValue: number;
+    staticMaximumValue: number;
 }
 
 interface ProgressBarContainerState {
@@ -29,6 +34,7 @@ interface ProgressBarContainerState {
     maximumValue: number;
     showAlert?: boolean;
     progressValue?: number;
+    displayTextAttributeValue?: string;
 }
 
 interface Nanoflow {
@@ -36,6 +42,7 @@ interface Nanoflow {
     paramsSpec: { Progress: string };
 }
 
+export type DisplayText = "none" | "value" | "percentage" | "static" | "attribute";
 type OnClickOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
 type PageLocation = "content"| "popup" | "modal";
 
@@ -67,6 +74,7 @@ export default class ProgressBarContainer extends Component<ProgressBarContainer
         const defaultState: ProgressBarContainerState = this.updateValues(props.mxObject);
         defaultState.alertMessage = ProgressBarContainer.validateProps(props);
         defaultState.showAlert = !!defaultState.alertMessage;
+        defaultState.displayTextAttributeValue = "";
         this.state = defaultState;
         this.subscriptionHandles = [];
         this.handleClick = this.handleClick.bind(this);
@@ -88,11 +96,13 @@ export default class ProgressBarContainer extends Component<ProgressBarContainer
             bootstrapStyle: this.state.themeStyle,
             className: this.props.class,
             colorSwitch: this.props.textColorSwitch,
-            maximumValue: this.state.maximumValue,
+            displayText: this.props.displayText,
+            displayTextValue: this.getDisplayTextValue(),
+            maximumValue: this.props.maximumValueAttribute ? this.state.maximumValue : this.props.staticMaximumValue,
             onClickAction: this.props.onClickOption !== "doNothing" && this.props.mxObject
                 ? this.handleClick
                 : undefined,
-            progress: this.state.progressValue,
+            progress: this.props.progressAttribute ? this.state.progressValue || 0 : this.props.staticValue,
             style: ProgressBarContainer.parseStyle(this.props.style)
         });
     }
@@ -140,10 +150,21 @@ export default class ProgressBarContainer extends Component<ProgressBarContainer
 
     private updateValues(mxObject?: mendix.lib.MxObject): ProgressBarContainerState {
         return {
+            displayTextAttributeValue: mxObject ? mxObject.get(this.props.displayTextAttribute) as string : "",
             maximumValue: this.getValue(this.props.maximumValueAttribute, this.defaultMaximumValue, mxObject),
             progressValue: this.getValue(this.props.progressAttribute, undefined, mxObject),
             themeStyle: this.getBarStyle (mxObject)
         };
+    }
+
+    private getDisplayTextValue() {
+        if (this.props.displayText === "attribute") {
+            return this.state.displayTextAttributeValue;
+        } else if (this.props.displayText === "static") {
+            return this.props.displayTextStatic;
+        }
+
+        return "";
     }
 
     private resetSubscription(mxObject?: mendix.lib.MxObject) {
@@ -157,6 +178,7 @@ export default class ProgressBarContainer extends Component<ProgressBarContainer
             }));
             [
                 this.props.progressAttribute,
+                this.props.displayTextAttribute,
                 this.props.maximumValueAttribute,
                 this.props.bootstrapStyleAttribute
             ].forEach(attr => {

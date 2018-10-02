@@ -19,12 +19,13 @@ https://progressbar-demo.mxapps.io/
 
 ## Usage
 Place the widget in the context of an object that has attributes for value and maximum value.
+If attribute `value` is not set, the `Value static` will be used to calculate the progress.
 
 Progress percentage is calculated as follows:
 
     (value / maximumValue) * 100
 
-If the maximum value attribute is not set, maximum value defaults to 100.
+If the maximum value attribute is not set, the maximum default value is set to `Maximum value static`.
 
 Depending on the specified bootstrap style (primary, success, info, warning, danger), the progress bar can appear in the associated colors.
 

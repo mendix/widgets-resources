@@ -29,10 +29,22 @@ export class preview extends Component<ProgressBarContainerProps, {}> {
             bootstrapStyle: props.bootstrapStyle,
             className: props.class,
             colorSwitch: props.textColorSwitch,
-            maximumValue: 100,
-            progress: 80,
+            displayText: props.displayText,
+            displayTextValue: this.getDisplayTextValue(),
+            maximumValue: props.staticMaximumValue,
+            progress: props.staticValue,
             style: ProgressBarContainer.parseStyle(props.style)
         };
+    }
+
+    private getDisplayTextValue() {
+        if (this.props.displayText === "attribute") {
+            return `{ ${this.props.displayTextAttribute} }`;
+        } else if (this.props.displayText === "static") {
+            return this.props.displayTextStatic;
+        }
+
+        return "";
     }
 }
 
@@ -45,6 +57,8 @@ export function getVisibleProperties(valueMap: ProgressBarContainerProps, visibi
     visibilityMap.onClickNanoflow = valueMap.onClickOption === "callNanoflow";
     visibilityMap.onClickPage = valueMap.onClickOption === "showPage";
     visibilityMap.openPageAs = valueMap.onClickOption === "showPage";
+    visibilityMap.displayTextAttribute = valueMap.displayText === "attribute";
+    visibilityMap.displayTextStatic = valueMap.displayText === "static";
 
     return visibilityMap;
 }
