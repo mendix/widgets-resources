@@ -27,7 +27,7 @@ export interface SignatureContainerProps extends WrapperProps {
     afterSignMicroflow: string;
     afterSignNanoflow: Nanoflow;
     timeout: number;
-    editable?: "default" | "never";
+    editable: "default" | "never";
 }
 
 type OnClickEventOptions = "doNothing" | "callMicroflow" | "callNanoflow";
@@ -70,7 +70,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         return createElement(Signature, {
             ...this.props as SignatureProps,
             alertMessage: this.state.alertMessage,
-            onSignEndAction: this.processEndSign,
+            onSignEndAction: this.handleSignEnd,
             status: this.getCanvasStatus(!this.isReadOnly())
         });
     }
@@ -83,7 +83,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         });
     }
 
-    private processEndSign = (url: string) => {
+    private handleSignEnd = (url: string) => {
         const { mxObject, dataUrl, saveImage } = this.props;
 
         if (mxObject && mxObject.inheritsFrom("System.Image") && dataUrl) {
