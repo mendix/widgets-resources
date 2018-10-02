@@ -5,7 +5,7 @@ import ProgressCircleContainer, { ContainerProps } from "./components/ProgressCi
 declare function require(name: string): string;
 
 type VisibilityMap = {
-    [P in keyof ContainerProps]: boolean;
+    [ P in keyof ContainerProps ]: boolean;
 };
 
 // tslint:disable-next-line:class-name
@@ -21,12 +21,23 @@ export class preview extends Component<ContainerProps, {}> {
             className: props.class,
             clickable: false,
             displayText: props.displayText,
-            maximumValue: 200,
+            displayTextValue: this.getDisplayTextValue(),
+            maximumValue: props.staticMaximumValue,
             positiveValueColor: props.positiveValueColor,
             style: ProgressCircleContainer.parseStyle(props.style),
             textSize: props.textSize,
-            value: 134
+            value: props.staticValue
         };
+    }
+
+    private getDisplayTextValue() {
+        if (this.props.displayText === "attribute") {
+            return `{ ${this.props.displayTextAttribute} }`;
+        } else if (this.props.displayText === "static") {
+            return this.props.displayTextStatic;
+        }
+
+        return "";
     }
 }
 
@@ -39,6 +50,8 @@ export function getVisibleProperties(valueMap: ContainerProps, visibilityMap: Vi
     visibilityMap.nanoflow = valueMap.onClickEvent === "callNanoflow";
     visibilityMap.page = valueMap.onClickEvent === "showPage";
     visibilityMap.openPageAs = valueMap.onClickEvent === "showPage";
+    visibilityMap.displayTextAttribute = valueMap.displayText === "attribute";
+    visibilityMap.displayTextStatic = valueMap.displayText === "static";
 
     return visibilityMap;
 }

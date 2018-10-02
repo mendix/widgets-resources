@@ -12,6 +12,9 @@ interface WrapperProps {
 export interface ContainerProps extends WrapperProps {
     animate: boolean;
     circleThickness: number;
+    displayText: DisplayText;
+    displayTextAttribute: string;
+    displayTextStatic: string;
     maximumValueAttribute: string;
     microflow?: string;
     nanoflow: Nanoflow;
@@ -20,9 +23,10 @@ export interface ContainerProps extends WrapperProps {
     page?: string;
     progressAttribute: string;
     positiveValueColor: BootstrapStyle;
-    displayText: DisplayText;
     textSize: ProgressTextSize;
     openPageAs: PageLocation;
+    staticValue: number;
+    staticMaximumValue: number;
 }
 
 interface Nanoflow {
@@ -35,9 +39,10 @@ interface ContainerState {
     maximumValue?: number;
     showAlert?: boolean;
     progressValue?: number;
+    displayTextAttributeValue: string;
 }
 
-export type DisplayText = "none" | "value" | "percentage";
+export type DisplayText = "none" | "value" | "percentage" | "static" | "attribute";
 type OnClickOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
 type PageLocation = "content"| "popup" | "modal";
 
@@ -54,11 +59,12 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
             alertMessage,
             maximumValue: this.getValue(props.maximumValueAttribute, props.mxObject),
             progressValue: this.getValue(props.progressAttribute, props.mxObject),
-            showAlert: !!alertMessage
+            showAlert: !!alertMessage,
+            displayTextAttributeValue: ""
         };
         this.subscriptionHandles = [];
         this.handleOnClick = this.handleOnClick.bind(this);
-        this.attributeCallback = mxObject => () => this.updateValues(mxObject);
+        this.attributeCallback = mxObject => () => this.updateAttributeValues(mxObject);
     }
 
     render() {
@@ -77,19 +83,20 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
             className: this.props.class,
             clickable: this.props.onClickEvent !== "doNothing",
             displayText: this.props.displayText,
-            maximumValue: this.state.maximumValue,
+            displayTextValue: this.getDisplayTextValue(),
+            maximumValue: this.props.maximumValueAttribute ? this.state.maximumValue : this.props.staticMaximumValue,
             negativeValueColor: this.props.negativeValueColor,
             onClickAction: this.handleOnClick,
             positiveValueColor: this.props.positiveValueColor,
             style: ProgressCircleContainer.parseStyle(this.props.style),
             textSize: this.props.textSize,
-            value: this.state.progressValue
+            value: this.props.progressAttribute ? this.state.progressValue || 0 : this.props.staticValue
         });
     }
 
     componentWillReceiveProps(newProps: ContainerProps) {
         this.resetSubscription(newProps.mxObject);
-        this.updateValues(newProps.mxObject);
+        this.updateAttributeValues(newProps.mxObject);
     }
 
     componentWillUnmount() {
@@ -143,11 +150,22 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
         return mxObject ? parseFloat(mxObject.get(attribute) as string) : undefined;
     }
 
-    private updateValues(mxObject?: mendix.lib.MxObject) {
+    private getDisplayTextValue() {
+        if (this.props.displayText === "attribute") {
+            return this.state.displayTextAttributeValue;
+        } else if (this.props.displayText === "static") {
+            return this.props.displayTextStatic;
+        }
+
+        return "";
+    }
+
+    private updateAttributeValues(mxObject?: mendix.lib.MxObject) {
         const maxValue = this.getValue(this.props.maximumValueAttribute, mxObject);
         this.setState({
             maximumValue: (maxValue || maxValue === 0) ? maxValue : this.defaultMaximumValue,
-            progressValue: this.getValue(this.props.progressAttribute, mxObject)
+            progressValue: this.getValue(this.props.progressAttribute, mxObject),
+            displayTextAttributeValue: mxObject ? mxObject.get(this.props.displayTextAttribute) as string : ""
         });
     }
 
@@ -160,7 +178,7 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
                 guid: mxObject.getGuid()
             }));
 
-            [ this.props.progressAttribute, this.props.maximumValueAttribute ].forEach(attr => {
+            [ this.props.displayTextAttribute, this.props.progressAttribute, this.props.maximumValueAttribute ].forEach(attr => {
                 this.subscriptionHandles.push(window.mx.data.subscribe({
                     attr,
                     callback: this.attributeCallback(mxObject),

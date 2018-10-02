@@ -12,6 +12,7 @@ export interface ProgressCircleProps {
     animate?: boolean;
     className?: string;
     clickable?: boolean;
+    displayTextValue?: string;
     maximumValue?: number;
     negativeValueColor?: BootstrapStyle;
     onClickAction?: () => void;
@@ -47,7 +48,7 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
 
     componentDidMount() {
         this.createProgressCircle(this.props.circleThickness);
-        this.setProgress(this.props.value, this.props.maximumValue, this.props.displayText);
+        this.setProgress(this.props.value, this.props.maximumValue, this.props.displayText, this.props.displayTextValue);
     }
 
     componentWillReceiveProps(newProps: ProgressCircleProps) {
@@ -58,7 +59,7 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
             this.progressCircle.destroy();
             this.createProgressCircle(newProps.circleThickness);
         }
-        this.setProgress(newProps.value, newProps.maximumValue, newProps.displayText);
+        this.setProgress(newProps.value, newProps.maximumValue, newProps.displayText, newProps.displayTextValue);
     }
 
     render() {
@@ -103,9 +104,10 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
         this.progressCircle.trail.className.baseVal = "widget-progress-circle-trail-path";
     }
 
-    private setProgress(value: number | undefined, maximum = 100, text?: DisplayText) {
+    private setProgress = (value: number | undefined, maximum = 100, text?: DisplayText, displayTextValue?: string) => {
         let progress = 0;
         let progressText: string;
+
         if (value === null || typeof value === "undefined") {
             progressText = "--";
         } else if (maximum <= 0) {
@@ -116,6 +118,8 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
                 progressText = `${value}`;
             } else if (text === "percentage") {
                 progressText = progress + "%";
+            } else if (text === "static" || text === "attribute") {
+                progressText = displayTextValue || "";
             } else {
                 progressText = "";
             }
