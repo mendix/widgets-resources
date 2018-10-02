@@ -18,14 +18,14 @@ export interface SignatureProps {
     velocityFilterWeight: number;
     showGrid: boolean;
     timeout: number;
-    status?: editable;
+    status?: Status;
     onSignEndAction?: (imageUrl?: string) => void;
     widthUnit?: widthUnitType;
     heightUnit?: heightUnitType;
     style?: object;
 }
 
-type editable = "enabled" | "disabled";
+export type Status = "enabled" | "disabled";
 
 export interface SignatureState {
     isGridDrawn: boolean;
@@ -52,8 +52,7 @@ export class Signature extends Component<SignatureProps, SignatureState> {
         return createElement("div", {
             className: "widget-signature-wrapper",
             style: this.getStyle(this.props)
-        },
-            createElement("canvas", {
+        }, createElement("canvas", {
                 className: classNames("widget-Signature", "form-control mx-textarea-input mx-textarea",
                 {
                     disabled: this.props.status === "disabled"
@@ -62,9 +61,9 @@ export class Signature extends Component<SignatureProps, SignatureState> {
                 width: this.width,
                 resize: true,
                 ref: this.getCanvas
-            }),
-            createElement("button", {
-                className: "btn btn-default",
+            }), createElement("button", {
+                className: classNames("btn btn-default"),
+                style: { visibility: this.props.status === "enabled" ? "visible" : "hidden" },
                 onClick: this.resetCanvas
             }, "Reset"),
             createElement(Alert, { bootstrapStyle: "danger" }, this.props.alertMessage)
@@ -96,7 +95,7 @@ export class Signature extends Component<SignatureProps, SignatureState> {
         }
     }
 
-    componentDidUnmount() {
+    componentWillUnmount() {
         window.removeEventListener("resize", this.resizeCanvas);
     }
 
@@ -121,14 +120,18 @@ export class Signature extends Component<SignatureProps, SignatureState> {
         const ratio = Math.max(window.devicePixelRatio || 1, 1);
 
         this.width = this.canvasNode.parentElement.offsetWidth * ratio;
-        this.canvasNode.getContext("2d").scale(ratio, ratio);
+        const context = this.canvasNode.getContext("2d") as CanvasRenderingContext2D;
+        context.scale(ratio, ratio);
+
         this.signaturePad.clear();
         this.setState({ isGridDrawn: false });
     }
 
     private drawGrid = () => {
         const { showGrid, gridColor, gridx, gridy } = this.props;
-        if (!showGrid) return;
+        if (!showGrid) {
+            return;
+        }
 
         if (this.width && this.height) {
             let x = gridx;
