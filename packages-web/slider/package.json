@@ -1,7 +1,7 @@
 {
   "name": "slider",
   "widgetName": "Slider",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Change a number value using a slider",
   "scripts": {
     "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec grunt",
@@ -60,7 +60,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
     "mendix-client": "^7.13.3",
-    "node-sass": "^4.5.2",
+    "node-sass": "4.9.3",
     "pre-commit": "^1.2.2",
     "raw-loader": "^0.5.1",
     "react": "^15.5.3",
