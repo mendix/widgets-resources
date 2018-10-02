@@ -132,9 +132,16 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
             }
             if (!stepValue || stepValue <= 0) {
                 message.push(`Step value ${stepValue} should be greater than 0`);
-            } else if (validMax && validMin && (maximumValue - minimumValue) % stepValue > 0) {
-                message.push(`Step value is invalid, max - min (${maximumValue} - ${minimumValue})
-            should be evenly divisible by the step value ${stepValue}`);
+            }
+            if (maximumValue && minimumValue && stepValue) {
+                const quotient = Math.floor((maximumValue - minimumValue) / stepValue);
+                const product = quotient * stepValue;
+                const remainder = (maximumValue - minimumValue) - product;
+
+                if (validMax && validMin && remainder > 0) {
+                    message.push(`Step value is invalid: max - min (${maximumValue} - ${minimumValue})
+                 should be evenly divisible by the step value ${stepValue}`);
+                }
             }
         }
 
