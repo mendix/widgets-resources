@@ -139,6 +139,8 @@
     ],
     "arrow-parens": false,
     "no-namespace": false,
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": false,
     "space-in-parens": [ true, "never" ]
   },
   "jsRules": {
