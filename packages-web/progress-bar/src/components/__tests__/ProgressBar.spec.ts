@@ -9,11 +9,11 @@ describe("Progress bar", () => {
     const getProgressbar = (props: ProgressBarProps) => renderWrapper(props).childAt(0);
     const progress = 23;
     const maximumValue = 100;
+    const displayTextValue = "test1";
     const onClickSpy = jasmine.createSpy("onClick");
 
     it("has progress bar structure", () => {
         const progressbar = shallow(createElement(ProgressBar, { maximumValue, onClickAction: onClickSpy, progress }));
-
         expect(progressbar).toBeElement(
             createElement("div", { className: "widget-progress-bar" },
                 createElement("div",
@@ -47,6 +47,30 @@ describe("Progress bar", () => {
         const progressbar = getProgressbar({ maximumValue: 0, progress }).childAt(0);
 
         expect(progressbar.text()).toEqual("Invalid");
+    });
+
+    it("should render the progress label from progress value when the display text is value", () => {
+        const progressbar = getProgressbar({ maximumValue: 100, progress, displayText: "value" }).childAt(0);
+
+        expect(progressbar.text()).toEqual(`${progress}`);
+    });
+
+    it("should render the progress label from a static value when the display text is static", () => {
+        const progressbar = getProgressbar({ maximumValue: 100, progress, displayText: "static", displayTextValue }).childAt(0);
+
+        expect(progressbar.text()).toEqual(displayTextValue);
+    });
+
+    it("should render the progress label from an attribute when the display text is attribute", () => {
+        const progressbar = getProgressbar({ maximumValue: 100, progress, displayText: "attribute", displayTextValue }).childAt(0);
+
+        expect(progressbar.text()).toEqual(displayTextValue);
+    });
+
+    it("should render the progress with no label when the display text is none", () => {
+        const progressbar = getProgressbar({ maximumValue: 100, progress, displayText: "none" }).childAt(0);
+
+        expect(progressbar.text()).toEqual("");
     });
 
     it("should not render the progress label when no progress value is specified", () => {
