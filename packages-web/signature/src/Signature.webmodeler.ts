@@ -4,6 +4,10 @@ import { SignatureContainerProps } from "./components/SignatureContainer";
 
 declare function require(name: string): string;
 
+type VisibilityMap = {
+    [ P in keyof SignatureContainerProps ]: boolean;
+};
+
 // tslint:disable-next-line class-name
 export class preview extends Component<SignatureContainerProps> {
     render() {
@@ -29,3 +33,10 @@ export class preview extends Component<SignatureContainerProps> {
 }
 
 export function getPreviewCss() { return require("./ui/Signature.scss"); }
+
+export function getVisibleProperties(valueMap: SignatureContainerProps, visibilityMap: VisibilityMap) {
+    visibilityMap.afterSignMicroflow = valueMap.afterSignEvent === "callMicroflow";
+    visibilityMap.afterSignNanoflow = valueMap.afterSignEvent === "callNanoflow";
+
+    return visibilityMap;
+}
