@@ -3,7 +3,6 @@
 // Copyright (c) 2018 Mendix
 // Licensed under MIT (https://github.com/mendix/Atlas-UI-Framework/blob/master/LICENSE)
 //
-
 @import "../custom/custom-variables";
 
 @import "variables";
@@ -13,6 +12,7 @@
 @import "base/mixins";
 @import "base/reset";
 @import "base/base";
+@import "base/login";
 
 // Components
 @import "components/inputs";
