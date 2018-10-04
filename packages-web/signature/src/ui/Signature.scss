@@ -1,5 +1,8 @@
 .widget-signature-wrapper {
     position: relative;
+    &.disabled {
+        cursor: not-allowed;
+    }
 
     canvas {
         padding: 0px;
