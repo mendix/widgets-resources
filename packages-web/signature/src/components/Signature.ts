@@ -6,6 +6,7 @@ import "../ui/Signature.scss";
 
 export interface SignatureProps {
     alertMessage?: string;
+    clearPad?: boolean;
     height: number;
     width: number;
     gridx: number;
@@ -46,26 +47,25 @@ export class Signature extends Component<SignatureProps, SignatureState> {
         this.state = {
             isGridDrawn: false
         };
+
+        this.handleSignEnd = this.handleSignEnd.bind(this);
+        this.getCanvas = this.getCanvas.bind(this);
+        this.resizeCanvas = this.resizeCanvas.bind(this);
+        this.drawGrid = this.drawGrid.bind(this);
     }
 
     render() {
         return createElement("div", {
-            className: "widget-signature-wrapper",
+            className: classNames("widget-signature-wrapper", { disabled: this.props.status === "disabled" }),
             style: this.getStyle(this.props)
         }, createElement("canvas", {
                 className: classNames("widget-Signature", "form-control mx-textarea-input mx-textarea",
-                {
-                    disabled: this.props.status === "disabled"
-                }),
+                { disabled: this.props.status === "disabled" }),
                 height: this.height,
                 width: this.width,
                 resize: true,
                 ref: this.getCanvas
-            }), createElement("button", {
-                className: classNames("btn btn-default"),
-                style: { visibility: this.props.status === "enabled" ? "visible" : "hidden" },
-                onClick: this.resetCanvas
-            }, "Reset"),
+            }),
             createElement(Alert, { bootstrapStyle: "danger" }, this.props.alertMessage)
         );
     }
@@ -93,13 +93,19 @@ export class Signature extends Component<SignatureProps, SignatureState> {
             this.drawGrid();
             this.setState({ isGridDrawn: true });
         }
+        if (this.props.clearPad) {
+            this.signaturePad.clear();
+            if (this.props.showGrid) {
+                this.drawGrid();
+            }
+        }
     }
 
     componentWillUnmount() {
         window.removeEventListener("resize", this.resizeCanvas);
     }
 
-    private handleSignEnd = () => {
+    private handleSignEnd() {
         const { onSignEndAction } = this.props;
 
         if (onSignEndAction) {
@@ -107,16 +113,11 @@ export class Signature extends Component<SignatureProps, SignatureState> {
         }
     }
 
-    private getCanvas = (node: HTMLCanvasElement) => {
+    private getCanvas(node: HTMLCanvasElement) {
         this.canvasNode = node;
     }
 
-    private resetCanvas = () => {
-        this.signaturePad.clear();
-        this.setState({ isGridDrawn: false });
-    }
-
-    private resizeCanvas = () => {
+    private resizeCanvas() {
         const ratio = Math.max(window.devicePixelRatio || 1, 1);
 
         this.width = this.canvasNode.parentElement.offsetWidth * ratio;
@@ -127,7 +128,7 @@ export class Signature extends Component<SignatureProps, SignatureState> {
         this.setState({ isGridDrawn: false });
     }
 
-    private drawGrid = () => {
+    private drawGrid() {
         const { showGrid, gridColor, gridx, gridy } = this.props;
         if (!showGrid) {
             return;
