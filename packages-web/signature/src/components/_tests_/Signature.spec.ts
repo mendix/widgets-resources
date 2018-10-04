@@ -37,11 +37,6 @@ describe("Siganture", () => {
                         { disabled: defaultProps.status === "disabled" }),
                     resize: true
                 }),
-                createElement("button", {
-                    className: classNames("btn btn-default"),
-                    style: { visibility:  "visible" },
-                    onClick: jasmine.any(Function)
-                }),
                 createElement(Alert, { bootstrapStyle: "danger" }, defaultProps.alertMessage)
             )
         );
@@ -68,11 +63,6 @@ describe("Siganture", () => {
                     className: classNames("widget-Signature", "form-control mx-textarea-input mx-textarea disabled"),
                     resize: true
                 }),
-                createElement("button", {
-                    className: classNames("btn btn-default"),
-                    style: { visibility:  "hidden" },
-                    onClick: jasmine.any(Function)
-                }),
                 createElement(Alert, { bootstrapStyle: "danger" }, defaultProps.alertMessage)
             )
         );
@@ -88,19 +78,6 @@ describe("Siganture", () => {
 
         expect(handleSignEnd).toHaveBeenCalled();
         dispatchEvent(event);
-    });
-
-    it("resets canvas when reset button is clicked", () => {
-        const customProps = { ...defaultProps, onSignEndAction: jasmine.any(Function) };
-        const signaturePad = fullRenderCanvas(customProps);
-        const canvasInstance: any = signaturePad.instance();
-
-        const resetCanvas = spyOn(canvasInstance, "resetCanvas").and.callThrough();
-        canvasInstance.componentDidUpdate();
-        signaturePad.find("button").first().simulate("click");
-        signaturePad.setProps({ heightUnit: "percentageOfWidth" });
-
-        expect(resetCanvas).toHaveBeenCalledTimes(1);
     });
 
     xit("resizes the canvas on window resize", () => {
