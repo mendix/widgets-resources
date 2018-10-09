@@ -7,31 +7,31 @@
     <title>Login</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css?{{cachebust}}">
-    <link rel="stylesheet" href="styles/css/lib/lib.css?{{cachebust}}">
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css?{{cachebust}}">
+    <link rel="stylesheet" type="text/css" href="styles/css/lib/lib.css?{{cachebust}}">
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="design-wrapper">
-            <div class="bg-image"></div>
+    <div class="loginpage">
+        <div class="loginpage-left">
+            <div class="loginpage-image"></div>
         </div>
-        <div class="login-wrapper">
-            <div class="login-container">
+        <div class="loginpage-right">
+            <div class="loginpage-formwrapper">
                 <h2>Sign in</h2>
-                <form id="loginForm" class="login-form">
-                    <div class="login-form-inputs">
-                        <div id="loginMessage" class="alert alert-danger login-message"></div>
+                <form id="loginForm" class="loginpage-form">
+                    <div>
+                        <div id="loginMessage" class="alert alert-danger"></div>
                         <div class="form-group">
                             <label id="usernameLabel" for="usernameInput">User name</label>
-                            <div class="inputWrapper">
+                            <div class="inputwrapper">
                                 <input id="usernameInput" class="form-control" type="text" placeholder="User name" autocorrect="off" autocapitalize="none">
                                 <span class="glyphicon glyphicon-user"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label id="passwordLabel" for="passwordInput">Password</label>
-                            <div class="inputWrapper">
+                            <div class="inputwrapper">
                                 <input id="passwordInput" class="form-control" type="password" placeholder="Password" autocorrect="off" autocapitalize="none">
                                 <span class="glyphicon glyphicon-eye-close"></span>
                             </div>
@@ -39,20 +39,20 @@
                         <button id="loginButton" type="submit" class="btn btn-success btn-lg">Sign in</button>
                     </div>
 
-                    <div class="alternative-label">
+                    <div class="loginpage-alternativelabel">
                         <div>Or sign in with</div>
                         <hr>
                     </div>
 
-                    <a id="ssoButton" href="/openid/login" class="login-sso-button btn btn-default btn-lg">
-                        <img class="mendix-logo" src="logo.png" />
-                        <span class="mendix-signin">Mendix Account</span>
+                    <a id="ssoButton" href="/openid/login" class="btn btn-default btn-lg">
+                        <img src="logo.png" />
+                        <span class="loginpage-signin">Mendix Account</span>
                     </a>
 
                 </form>
             </div>
         </div>
-        <div class="logo">
+        <div class="loginpage-logo">
             <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 599 187">
                 <g>
                     <rect x="0.98" y="0.86" width="185.28" height="185.28" rx="24.72" ry="24.72" style="fill: #00aae7" />
