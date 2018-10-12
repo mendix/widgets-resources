@@ -74,6 +74,7 @@ export namespace Container {
         enableCreate: boolean;
         defaultView: Style.View;
         executeOnViewChange: boolean;
+        newEventContextPath: string;
         startDateAttribute: string;
         viewStartAttribute: string;
         viewEndAttribute: string;

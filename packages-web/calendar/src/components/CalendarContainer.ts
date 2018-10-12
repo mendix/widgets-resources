@@ -243,14 +243,17 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     private onClickSlot = (slotInfo: Container.EventInfo) => {
         mx.data.create({
             entity: this.props.eventEntity,
-            callback: (object) => {
-                object.set(this.props.titleAttribute, object.get(this.props.titleAttribute));
-                object.set(this.props.eventColor, object.get(this.props.titleAttribute));
-                object.set(this.props.startAttribute, slotInfo.start);
-                object.set(this.props.endAttribute, slotInfo.end);
-                this.executeSlotAction(object);
+            callback: (newEvent) => {
+                newEvent.set(this.props.startAttribute, slotInfo.start);
+                newEvent.set(this.props.endAttribute, slotInfo.end);
+                if (this.props.mxObject && this.props.newEventContextPath && this.props.newEventContextPath.split("/")[1] === this.props.mxObject.getEntity()) {
+                    newEvent.set(this.props.newEventContextPath.split("/")[0], this.props.mxObject.getGuid());
+                } else {
+                    window.logger.error("Event entity should not be same as context entity");
+                }
+                this.executeSlotAction(newEvent);
             },
-            error: error => window.mx.ui.error(`Error while creating a new event: ${ error.message }`)
+            error: error => window.mx.ui.error(`Error while creating a new event: ${error.message}`)
         });
     }
 

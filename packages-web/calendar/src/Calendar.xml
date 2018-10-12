@@ -23,18 +23,18 @@
         <property key="entityConstraint" type="entityConstraint" entityProperty="eventEntity" required="false">
             <caption>XPath</caption>
             <category>Data source</category>
-            <description/>
+            <description>Also allows the event objects to be constrained to a relation to context by using [%CurrentObject%]</description>
         </property>
         <property key="dataSourceMicroflow" type="microflow" required="false">
             <caption>Microflow</caption>
             <category>Data source</category>
-            <description></description>
+            <description/>
             <returnType type="Object" isList="true" entityProperty="eventEntity"/>
         </property>
         <property key="dataSourceNanoflow" type="nanoflow" required="false">
             <caption>Nanoflow</caption>
             <category>Data source</category>
-            <description></description>
+            <description/>
             <returnType type="Object" isList="true" entityProperty="eventEntity"/>
         </property>
         <property key="titleAttribute" type="attribute" entityProperty="eventEntity" required="false">
@@ -316,6 +316,11 @@
                 <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
                 <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
             </enumerationValues>
+        </property>
+        <property key="newEventContextPath" type="entity" isPath="yes" allowNonPersistableEntities="true" pathType="reference" entityProperty="eventEntity" required="false">
+            <caption>Create association</caption>
+            <category>Events</category>
+            <description>Association is set on create with the context</description>
         </property>
         <property key="onCreateMicroflow" type="microflow" required="false" entityProperty="eventEntity">
             <caption>On create microflow</caption>

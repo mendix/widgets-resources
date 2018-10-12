@@ -16,7 +16,7 @@ const webpackConfigRelease = webpackConfig.map(config => merge(config, {
 webpackConfigRelease[0].plugins.push(new ExtractTextPlugin({
     filename: `./widgets/com/mendix/widget/custom/${name}/ui/${widgetName}.css`
 }));
-webpackConfigRelease[0].module.rules[1] = { test: /\.css$/, loader: ExtractTextPlugin.extract({
+webpackConfigRelease[0].module.rules[1] = { test: /\.s?css$/, loader: ExtractTextPlugin.extract({
         fallback: "style-loader",
         use: [ "css-loader", "sass-loader" ]
     })
