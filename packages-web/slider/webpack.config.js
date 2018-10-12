@@ -3,11 +3,15 @@ const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+const package = require("./package");
+const widgetName = package.widgetName;
+const name = package.widgetName.toLowerCase();
+
 const widgetConfig = {
-    entry: "./src/components/SliderContainer.ts",
+    entry: `./src/components/${widgetName}Container.ts`,
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
-        filename: "src/com/mendix/widget/custom/slider/Slider.js",
+        filename: `src/com/mendix/widget/custom/${name}/${widgetName}.js`,
         libraryTarget: "umd"
     },
     resolve: {
@@ -32,17 +36,18 @@ const widgetConfig = {
             }) }
         ]
     },
+    mode: "development",
     devtool: "source-map",
     externals: [ "react", "react-dom" ],
     plugins: [
         new CopyWebpackPlugin([ { from: "src/**/*.xml" } ], { copyUnmodified: true }),
-        new ExtractTextPlugin({ filename: "./src/com/mendix/widget/custom/slider/ui/Slider.css" }),
+        new ExtractTextPlugin({ filename: `./src/com/mendix/widget/custom/${name}/ui/${widgetName}.css` }),
         new webpack.LoaderOptionsPlugin({ debug: true })
     ]
 };
 
 const previewConfig = {
-    entry: "./src/Slider.webmodeler.ts",
+    entry: `./src/${widgetName}.webmodeler.ts`,
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
         filename: "src/Slider.webmodeler.js",
@@ -62,6 +67,7 @@ const previewConfig = {
             }
         ]
     },
+    mode: "development",
     devtool: "inline-source-map",
     externals: [ "react", "react-dom" ],
     plugins: [

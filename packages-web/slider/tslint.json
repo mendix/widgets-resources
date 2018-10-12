@@ -139,7 +139,9 @@
     ],
     "arrow-parens": false,
     "no-namespace": false,
-    "space-in-parens": [ true, "never" ]
+    "space-in-parens": [ true, "never" ],
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": false
   },
   "jsRules": {
     "trailing-comma": [
