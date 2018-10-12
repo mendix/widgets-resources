@@ -14,9 +14,9 @@ const widgetConfig = {
         libraryTarget: "umd",
     },
     devServer: {
-        port: 3000,
+        port: 4000,
         proxy: [ {
-            context: [ "**", "!/widgets/com/mendix/widget/custom/calendar/Calendar.js" ],
+            context: [ "**", `!/widgets/com/mendix/widget/custom/${name}/${widgetName}.js` ],
             target: "http://localhost:8080"
         } ],
         stats: "errors-only"
@@ -34,8 +34,7 @@ const widgetConfig = {
             ] },
         ]
     },
-    devtool: "eval",
-    mode: "production",
+    mode: "development",
     externals: [ "react", "react-dom" ],
     plugins: [
         new CopyWebpackPlugin(
@@ -75,7 +74,7 @@ const previewConfig = {
             }
         ]
     },
-    mode: "production",
+    mode: "development",
     devtool: "inline-source-map",
     externals: [ "react", "react-dom" ],
     plugins: [ new webpack.LoaderOptionsPlugin({ debug: true }) ]
