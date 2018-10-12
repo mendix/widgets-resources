@@ -16,10 +16,10 @@ Change a range of values using a slider.
 Mendix 7.4
 
 ## Basic configuration
-* `Minimum attribute` [required] - The attribute that contains the `minimum` slider value
-* `Maximum attribute` [required] - The attribute that contains the `maximum` slider value.
-* `Lower bound attribute` - The attribute that contains the `lower` bound slider value.
-* `Upper bound attribute` - The attribute that contains the `upper` bound slider value.
+* `Minimum attribute` - The attribute that contains the `minimum` slider value, if not provided, 'Minimum static value' will be used.
+* `Maximum attribute` - The attribute that contains the `maximum` slider value, if not provided, 'Maximum static value' will be used.
+* `Lower bound attribute` - The attribute that contains the `lower` bound slider value, if not provided, 'Static lower bound' will be used.
+* `Upper bound attribute` - The attribute that contains the `upper` bound slider value, if not provided, 'Static upper bound' will be used.
 
  ![Sample slider datasource configuration](/assets/Datasource.PNG)
 
