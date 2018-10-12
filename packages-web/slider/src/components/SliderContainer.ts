@@ -24,6 +24,8 @@ interface SliderContainerProps extends WrapperProps {
     tooltipText: string;
     valueAttribute: string;
     editable: "default" | "never";
+    staticMaximumValue: number;
+    staticMinimumValue: number;
 }
 
 interface Nanoflow {
@@ -143,8 +145,8 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         const value = this.getValue(this.props.valueAttribute, mxObject);
 
         return {
-            maximumValue: this.getValue(this.props.maxAttribute, mxObject),
-            minimumValue: this.getValue(this.props.minAttribute, mxObject),
+            maximumValue: this.getValue(this.props.maxAttribute, mxObject, this.props.staticMaximumValue),
+            minimumValue: this.getValue(this.props.minAttribute, mxObject, this.props.staticMinimumValue),
             stepValue: this.getValue(this.props.stepAttribute, mxObject, this.props.stepValue),
             value: (value || value === 0) ? value : null
         };
@@ -224,10 +226,10 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         const { minimumValue, maximumValue, value } = this.state;
         if (typeof minimumValue === "number" && typeof maximumValue === "number" && typeof value === "number") {
             if (value > maximumValue) {
-                message.push(`Value ${value} should be less than the maximum ${maximumValue}`);
+                message.push(`Value ${value} should be equal or less than the maximum ${maximumValue}`);
             }
             if (value < minimumValue) {
-                message.push(`Value ${value} should be greater than the minimum ${minimumValue}`);
+                message.push(`Value ${value} should be equal or greater than the minimum ${minimumValue}`);
             }
         }
 
@@ -236,7 +238,7 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
 
     // tslint:disable-next-line:max-line-length
     private getValue(attribute: string, mxObject?: mendix.lib.MxObject, defaultValue?: number): number | undefined {
-        if (mxObject) {
+        if (mxObject && attribute) {
             if (mxObject.get(attribute)) {
                 return parseFloat(mxObject.get(attribute) as string);
             }
