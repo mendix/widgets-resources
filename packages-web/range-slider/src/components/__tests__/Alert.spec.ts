@@ -14,9 +14,8 @@ describe("Alert", () => {
 
     it("renders the structure when an alert message is specified", () => {
         const alert = renderAlert(defaultProps);
-
         expect(alert).toBeElement(
-            createElement("div", { className: "alert alert-danger widget-range-slider" }, message)
+            createElement("div", { className: "alert alert-danger widget-unit-test-class" }, message)
         );
     });
 
