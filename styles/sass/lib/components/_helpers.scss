@@ -287,3 +287,19 @@
 .d-block {
     display: block !important;
 }
+
+@media (max-width: $screen-xs-max) {
+    .hidden-xs {
+        display: none !important;
+    }
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .hidden-sm {
+        display: none !important;
+    }
+}
+@media (min-width: $screen-md) {
+    .hidden-md {
+        display: none !important;
+    }
+}
