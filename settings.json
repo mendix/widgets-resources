@@ -128,6 +128,24 @@
                         "class": "pull-right"
                     }
                 ]
+            },
+            {
+                "name": "Hide On Phone",
+                "type": "Toggle",
+                "description": "Hide element on phone.",
+                "class": "hidden-xs"
+            },
+            {
+                "name": "Hide On Tablet",
+                "type": "Toggle",
+                "description": "Hide element on tablet.",
+                "class": "hidden-sm"
+            },
+            {
+                "name": "Hide On Desktop",
+                "type": "Toggle",
+                "description": "Hide element on desktop.",
+                "class": "hidden-md"
             }
         ],
         "DivContainer": [
