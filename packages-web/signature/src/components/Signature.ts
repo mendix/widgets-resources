@@ -19,7 +19,6 @@ export interface SignatureProps {
     velocityFilterWeight: number;
     showGrid: boolean;
     timeout: number;
-    status?: Status;
     onSignEndAction?: (imageUrl?: string) => void;
     widthUnit?: widthUnitType;
     heightUnit?: heightUnitType;
@@ -56,11 +55,10 @@ export class Signature extends Component<SignatureProps, SignatureState> {
 
     render() {
         return createElement("div", {
-            className: classNames("widget-signature-wrapper", { disabled: this.props.status === "disabled" }),
+            className: "widget-signature-wrapper",
             style: this.getStyle(this.props)
         }, createElement("canvas", {
-                className: classNames("widget-Signature", "form-control mx-textarea-input mx-textarea",
-                { disabled: this.props.status === "disabled" }),
+                className: classNames("widget-Signature", "form-control mx-textarea-input mx-textarea"),
                 height: this.height,
                 width: this.width,
                 resize: true,

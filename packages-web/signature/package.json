@@ -27,7 +27,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/SamuelMuloki/Signature.git"
+    "url": "https://github.com/mendixlabs/signature.git"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.4",
