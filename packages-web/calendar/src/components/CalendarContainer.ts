@@ -33,7 +33,9 @@ export default class CalendarContainer extends Component<Container.CalendarConta
 
     render() {
         const readOnly = this.isReadOnly();
-        const alertMessage = this.state.alertMessage || CalendarContainer.validateProps(this.props);
+        const alertMessage = this.state.alertMessage
+            || CalendarContainer.validateProps(this.props)
+            || CalendarContainer.validateCustomFormats(this.props);
 
         return createElement("div",
             {
@@ -345,6 +347,19 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         if (props.view === "custom" && props.customViews.length <= 0) {
             errorMessages.push(`${props.friendlyId}: View is set to "custom" but there is no view selected`);
         }
+        if (errorMessages.length) {
+            return createElement("div", {},
+                "Error in calendar configuration:",
+                errorMessages.map((message, key) => createElement("p", { key }, message))
+            );
+        }
+
+        return "";
+    }
+
+    public static validateCustomFormats(props: Container.CalendarContainerProps): ReactChild {
+        const errorMessages: string[] = [];
+
         try {
             if (props.view === "custom") {
                 const date = new Date();
