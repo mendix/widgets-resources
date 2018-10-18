@@ -347,6 +347,9 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         if (props.view === "custom" && props.customViews.length <= 0) {
             errorMessages.push(`${props.friendlyId}: View is set to "custom" but there is no view selected`);
         }
+        if (props.view === "standard" && props.defaultView === "work_week" || props.defaultView === "agenda") {
+            errorMessages.push(`${props.friendlyId}: ${props.defaultView} is only available in custom view`);
+        }
         if (errorMessages.length) {
             return createElement("div", {},
                 "Error in calendar configuration:",

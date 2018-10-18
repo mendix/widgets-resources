@@ -75,7 +75,6 @@ const previewConfig = {
         ]
     },
     mode: "development",
-    devtool: "inline-source-map",
     externals: [ "react", "react-dom" ],
     plugins: [ new webpack.LoaderOptionsPlugin({ debug: true }) ]
 };

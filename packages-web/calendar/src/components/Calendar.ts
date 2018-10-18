@@ -132,7 +132,7 @@ class Calendar extends Component<CalendarProps, CalendarState> {
             components: { toolbar: wrapToolbar(this.getToolbarProps()) },
             eventPropGetter: this.eventColor,
             defaultDate: this.props.startPosition,
-            defaultView: this.props.defaultView,
+            defaultView: this.defaultView(),
             formats: this.props.viewOption === "custom" ? this.props.formats : "",
             messages: this.props.viewOption === "custom" ? this.props.messages : "",
             popup: this.props.popup,
@@ -156,6 +156,14 @@ class Calendar extends Component<CalendarProps, CalendarState> {
         } else {
             return createElement(BigCalendar, props);
         }
+    }
+
+    private defaultView() {
+        if (this.props.viewOption === "standard" && this.props.defaultView === "work_week" || this.props.defaultView === "agenda") {
+            return "month";
+        }
+
+        return this.props.defaultView;
     }
 
     private getToolbarProps(): Partial<Container.ButtonConfig>[] {
