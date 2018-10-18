@@ -28,7 +28,6 @@ export interface SignatureContainerProps extends WrapperProps {
     afterSignMicroflow: string;
     afterSignNanoflow: Nanoflow;
     timeout: number;
-    editable: "default" | "never";
 }
 
 type OnClickEventOptions = "doNothing" | "callMicroflow" | "callNanoflow";
@@ -48,23 +47,18 @@ interface SignatureContainerState {
 
 export default class SignatureContainer extends Component<SignatureContainerProps, SignatureContainerState> {
     private subscriptionHandles: number[] = [];
-    private _formCommitHandle = 0;
-    public get formHandle() {
-        return this._formCommitHandle;
-    }
-    public set formHandle(value) { this._formCommitHandle = value; }
+    private formHandle = 0;
 
     constructor(props: SignatureContainerProps) {
         super(props);
 
         this.state = {
-            alertMessage: SignatureContainer.validateProps(props),
+            alertMessage: "",
             base64Uri: "",
             clearPad: false,
             url: ""
         };
 
-        this.handleValidations = this.handleValidations.bind(this);
         this.handleSignEnd = this.handleSignEnd.bind(this);
         this.handleAfterSignAction = this.handleAfterSignAction.bind(this);
         this.saveDocument = this.saveDocument.bind(this);
@@ -79,17 +73,15 @@ export default class SignatureContainer extends Component<SignatureContainerProp
             ...this.props as SignatureProps,
             alertMessage: this.state.alertMessage,
             clearPad: this.state.clearPad,
-            onSignEndAction: this.handleSignEnd,
-            status: !this.isReadOnly() ? "enabled" : "disabled"
+            onSignEndAction: this.handleSignEnd
         });
     }
 
     componentWillReceiveProps(newProps: SignatureContainerProps) {
         this.resetSubscriptions(newProps.mxObject);
+        const validationMessage = this.validateProps(newProps.mxObject);
 
-        this.setState({
-            alertMessage: SignatureContainer.validateProps(newProps)
-        });
+        this.setState({ alertMessage: validationMessage });
     }
 
     componentWillMount() {
@@ -97,12 +89,12 @@ export default class SignatureContainer extends Component<SignatureContainerProp
     }
 
     private handleSignEnd(base64Uri: string) {
-        const { mxObject, dataUrl, saveImage } = this.props;
+        const { mxObject, saveImage } = this.props;
 
-        if (mxObject && mxObject.inheritsFrom("System.Image") && dataUrl) {
+        if (mxObject && mxObject.inheritsFrom("System.Image")) {
             this.setState({ base64Uri });
             if (saveImage === "onChange") {
-                setTimeout(this.saveDocument(), this.props.timeout);
+                setTimeout(() => this.saveDocument(), this.props.timeout);
             }
         } else {
             this.setState({
@@ -131,24 +123,15 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         return `${Math.floor(Math.random() * 1000000)}.png`;
     }
 
-    private getAttributeValue(attribute: string, mxObject?: mendix.lib.MxObject): string {
-        return mxObject ? mxObject.get(attribute) as string : "";
-    }
-
-    private isReadOnly(): boolean {
-        return !this.props.mxObject || this.props.editable === "never" || this.props.readOnly ||
-            this.props.mxObject.isReadonlyAttr(this.props.dataUrl);
-    }
-
-    public static validateProps(props: SignatureContainerProps): string {
+    public validateProps(mxObject: mendix.lib.MxObject): string {
         let errorMessage = "";
 
-        if (props.mxObject && !props.mxObject.inheritsFrom("System.Image")) {
-            errorMessage = `${props.mxObject.getEntity()} does not inherit from "System.Image.`;
+        if (mxObject && !mxObject.inheritsFrom("System.Image")) {
+            errorMessage = `${mxObject.getEntity()} does not inherit from "System.Image.`;
         }
-        if (props.afterSignEvent === "callMicroflow" && !props.afterSignMicroflow) {
+        if (this.props.afterSignEvent === "callMicroflow" && !this.props.afterSignMicroflow) {
             errorMessage = "A 'Microflow' is required for 'After sign event' 'Call a microflow'";
-        } else if (props.afterSignEvent === "callNanoflow" && !props.afterSignNanoflow.nanoflow) {
+        } else if (this.props.afterSignEvent === "callNanoflow" && !this.props.afterSignNanoflow.nanoflow) {
             errorMessage = "A 'Nanoflow' is required for 'After sign event' 'Call a nanoflow'";
         }
         if (errorMessage) {
@@ -164,38 +147,11 @@ export default class SignatureContainer extends Component<SignatureContainerProp
 
         if (mxObject) {
             this.subscriptionHandles.push(window.mx.data.subscribe({
-                callback: this.updateState,
-                guid: mxObject.getGuid()
-            }));
-
-            this.subscriptionHandles.push(mx.data.subscribe({
-                attr: this.props.dataUrl,
-                callback: this.updateState,
-                guid: mxObject.getGuid()
-            }));
-
-            this.subscriptionHandles.push(mx.data.subscribe({
-                callback: this.handleValidations,
                 guid: mxObject.getGuid(),
-                val: true
+                callback: () => this.validateProps(mxObject)
             }));
 
             this.formHandle = this.props.mxform.listen("commit", this.saveDocument);
-        }
-    }
-
-    private updateState() {
-        this.setState({
-            url: this.getAttributeValue(this.props.dataUrl, this.props.mxObject)
-        });
-    }
-
-    private handleValidations(validations: mendix.lib.ObjectValidation[]) {
-        const validationMessage = validations[0].getErrorReason(this.props.dataUrl);
-        validations[0].removeAttribute(this.props.dataUrl);
-
-        if (validationMessage) {
-            this.setState({ alertMessage: validationMessage });
         }
     }
 

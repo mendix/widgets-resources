@@ -32,7 +32,9 @@ export class preview extends Component<SignatureContainerProps> {
     }
 }
 
-export function getPreviewCss() { return require("./ui/Signature.scss"); }
+export function getPreviewCss() {
+    return require("./ui/Signature.scss");
+}
 
 export function getVisibleProperties(valueMap: SignatureContainerProps, visibilityMap: VisibilityMap) {
     visibilityMap.afterSignMicroflow = valueMap.afterSignEvent === "callMicroflow";

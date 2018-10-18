@@ -20,8 +20,8 @@ cache:
   - node_modules
 env:
   global:
-  - MX_APP_NAME=enumswitch-main
-  - MX_PROJECT_ID=cf366268-e45f-4125-be2a-8dfdcd70dff6
+  - MX_APP_NAME=signature101
+  - MX_PROJECT_ID=a48ab6ca-82a2-4b82-8286-eddd07eae0b9
   - MX_BRANCH_NAME=trunk
   - MX_ENVIRONMENT=Sandbox
   - MX_USER="ci@flockofbirds.org"

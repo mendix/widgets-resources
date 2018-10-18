@@ -33,8 +33,7 @@ describe("Siganture", () => {
         expect(canvas).toBeElement(
             createElement("div", { className: "widget-signature-wrapper", style: { width: defaultProps.width + "%" } },
                 createElement("canvas", {
-                    className: classNames("widget-Signature", "form-control mx-textarea-input mx-textarea",
-                        { disabled: defaultProps.status === "disabled" }),
+                    className: classNames("widget-Signature", "form-control mx-textarea-input mx-textarea"),
                     resize: true
                 }),
                 createElement(Alert, { bootstrapStyle: "danger" }, defaultProps.alertMessage)
@@ -55,7 +54,7 @@ describe("Siganture", () => {
 
     it("hides clear button when  signature pad is not editable", () => {
         const signaturePad = renderCanvas(defaultProps);
-        signaturePad.setProps({ status: "disabled", widthUnit: "pixels" });
+        signaturePad.setProps({ widthUnit: "pixels" });
 
         expect(signaturePad).toBeElement(
             createElement("div", { className: "widget-signature-wrapper", style: { width: defaultProps.width + "px" } },
