@@ -7,9 +7,20 @@ import { ToolbarButton } from "../components/Button";
 export default class CustomToolbar extends Toolbar {
 
     render() {
-        const leftButton = this.filterPosition("left");
-        const centerButton = this.filterPosition("center");
-        const rightButton = this.filterPosition("right");
+        const isView = (customView: Container.ButtonConfig) =>
+            customView.customView === "day"
+            || customView.customView === "week"
+            || customView.customView === "month"
+            || customView.customView === "work_week"
+            || customView.customView === "agenda";
+        let activeViews: Container.ButtonConfig[] = this.props.customViews;
+        const countViews = activeViews.filter(customView => isView(customView)).length;
+        if (countViews === 1) {
+            activeViews = activeViews.filter(customView => !isView(customView));
+        }
+        const leftButton = this.filterPosition(activeViews, "left");
+        const centerButton = this.filterPosition(activeViews, "center");
+        const rightButton = this.filterPosition(activeViews, "right");
 
         return createElement("div", { className: classNames("calendar-toolbar") },
             this.createGroupButton(leftButton, "left"),
@@ -18,12 +29,8 @@ export default class CustomToolbar extends Toolbar {
         );
     }
 
-    componentDidMount() {
-        this.buttonVisibility();
-    }
-
-    private filterPosition(position: string) {
-        return this.props.customViews.filter((customView: Container.ButtonConfig) => customView.position === position);
+    private filterPosition(customViews: Container.ButtonConfig[], position: string) {
+        return customViews.filter((customView: Container.ButtonConfig) => customView.position === position);
     }
 
     private createGroupButton(views: Container.ButtonConfig[], position: Style.Position): ReactNode {
@@ -39,7 +46,7 @@ export default class CustomToolbar extends Toolbar {
 
         return createElement(ToolbarButton, {
             renderMode: view.renderMode,
-            className: `toolbar-btn-${view.customView} ${this.addClass(view.customView)}`,
+            className: `toolbar-btn-${view.customView}`,
             active: this.props.view === view.customView,
             title: view.buttonToolTip,
             icon: this.getIcon(view),
@@ -47,34 +54,6 @@ export default class CustomToolbar extends Toolbar {
             caption: view.customCaption,
             onClick: this.getOnClickFunction(view)
         });
-    }
-
-    private addClass(view: any) {
-        return view === "day"
-            || view === "week"
-            || view === "work_week"
-            || view === "month"
-            || view === "agenda"
-            ? "navigation"
-            : "";
-    }
-
-    private buttonVisibility() {
-        const button = document.getElementsByTagName("button");
-
-        for (let i = 0; i <= button.length; i++) {
-            if (button) {
-                const buttons = [].filter.call(button, (element: HTMLElement) => [].indexOf.call(element.classList, "navigation"));
-                buttons.forEach((element: HTMLElement) => {
-                    const navigationButtons = document.getElementsByClassName("navigation");
-                    if (element.className.indexOf("navigation") > 0) {
-                        if (navigationButtons.length === 1) {
-                            element.classList.add("hidden");
-                        }
-                    }
-                });
-            }
-        }
     }
 
     private getOnClickFunction(view: Container.ButtonConfig) {

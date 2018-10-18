@@ -121,8 +121,7 @@ export namespace Container {
         buttonStyle?: Style.ButtonStyle;
     }
 
-    export interface CustomViews extends CustomFormats, ButtonConfig {
-    }
+    export interface CustomViews extends CustomFormats, ButtonConfig {}
 }
 
 export namespace Data {
