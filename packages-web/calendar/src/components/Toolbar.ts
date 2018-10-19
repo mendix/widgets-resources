@@ -58,11 +58,20 @@ export default class CustomToolbar extends Toolbar {
 
     private getOnClickFunction(view: Container.ButtonConfig) {
         if (view.customView === "previous") {
-            return () => this.props.onNavigate("PREV");
+            return () => {
+                this.props.onNavigate("PREV");
+                if (this.props.onClickToolbarButton) this.props.onClickToolbarButton();
+            };
         } else if (view.customView === "next") {
-            return () => this.props.onNavigate("NEXT");
+            return () => {
+                this.props.onNavigate("NEXT");
+                if (this.props.onClickToolbarButton) this.props.onClickToolbarButton();
+            };
         } else if (view.customView === "today") {
-            return () => this.props.onNavigate("TODAY");
+            return () => {
+                this.props.onNavigate("TODAY");
+                if (this.props.onClickToolbarButton) this.props.onClickToolbarButton();
+            };
         }
 
         return () => this.props.onViewChange(view.customView);
