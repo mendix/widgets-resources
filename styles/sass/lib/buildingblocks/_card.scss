@@ -279,6 +279,13 @@
     border-top: 4px solid $brand-primary;
 }
 
+.cardchat {
+    overflow: hidden;
+    padding: 0;
+    .chat {
+        height: 400px;
+    }
+}
 
 @media screen and (max-width: $screen-sm-max) {
     .widget-charts:not([height]),
