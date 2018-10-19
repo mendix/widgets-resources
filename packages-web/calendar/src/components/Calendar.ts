@@ -41,12 +41,18 @@ export interface CalendarProps {
     viewOption: "custom" | "standard";
     width: number;
     widthUnit: Style.WidthUnitType;
+    onRangeChange?: (date: object) => void;
     onSelectEventAction?: (eventInfo: object) => void;
     onEventResizeAction?: (eventInfo: object) => void;
     onSelectSlotAction?: (slotInfo: object) => void;
     onEventDropAction?: (eventInfo: object) => void;
     onViewChangeAction?: () => void;
     customViews: Container.CustomViews[];
+}
+
+interface HOCToolbarProps {
+    customViews: Container.CustomViews[] | Partial<Container.ButtonConfig>[];
+    onClickToolbarButton: (date: object) => void;
 }
 
 export interface CalendarEvent {
@@ -123,13 +129,13 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     }
 
     private renderCalendar() {
-        const wrapToolbar = (injectedProps: Container.CustomViews[] | Partial<Container.ButtonConfig>[]) =>
-            (toolbarProps: Container.ToolbarProps) => createElement(CustomToolbar as any, { customViews: injectedProps, ...toolbarProps });
+        const wrapToolbar = (injectedProps: HOCToolbarProps) =>
+            (toolbarProps: Container.ToolbarProps) => createElement(CustomToolbar as any, { ...injectedProps, ...toolbarProps });
 
         const props = {
             events: this.props.events,
             allDayAccessor: this.allDayAccessor,
-            components: { toolbar: wrapToolbar(this.getToolbarProps()) },
+            components: { toolbar: wrapToolbar({ customViews: this.getToolbarProps(), onClickToolbarButton: this.onRangeChange }) },
             eventPropGetter: this.eventColor,
             defaultDate: this.props.startPosition,
             defaultView: this.defaultView(),
@@ -139,9 +145,9 @@ class Calendar extends Component<CalendarProps, CalendarState> {
             selectable: this.props.enableCreate,
             step: 60,
             showMultiDayTimes: true,
+            onRangeChange: this.onRangeChange,
             onSelectEvent: this.onSelectEvent,
             onSelectSlot: this.onSelectSlot,
-            onView: this.onViewChange,
             views: [ "month", "day", "week", "work_week", "month", "agenda" ]
         };
 
@@ -167,9 +173,11 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     }
 
     private getToolbarProps(): Partial<Container.ButtonConfig>[] {
-        return this.props.viewOption === "standard"
+        const toolbarProps = this.props.viewOption === "standard"
             ? this.getDefaultToolbar()
             : this.props.customViews;
+
+        return toolbarProps.map(customView => ({ ...customView, onClickToolbarButton: this.onRangeChange }));
     }
 
     private getDimensions = (): CSSProperties => {
@@ -193,6 +201,12 @@ class Calendar extends Component<CalendarProps, CalendarState> {
 
     private eventColor = (events: CalendarEvent) => ({ style: { backgroundColor: events.color } });
 
+    private onRangeChange = (date: object) => {
+        if (this.props.onRangeChange) {
+            this.props.onRangeChange(date);
+        }
+    }
+
     private onEventDrop = (eventInfo: Container.EventInfo) => {
         if (eventInfo.start.getDate() !== eventInfo.event.start.getDate() && this.props.editable === "default" && this.props.onEventDropAction) {
             this.props.onEventDropAction(eventInfo);
@@ -211,10 +225,6 @@ class Calendar extends Component<CalendarProps, CalendarState> {
 
     private onSelectSlot = (slotInfo: object) => {
         if (this.props.onSelectSlotAction) { this.props.onSelectSlotAction(slotInfo); }
-    }
-
-    private onViewChange = () => {
-        if (this.props.onViewChangeAction) { this.props.onViewChangeAction(); }
     }
 }
 

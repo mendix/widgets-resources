@@ -119,6 +119,7 @@ export namespace Container {
         renderMode: "button" | "link";
         buttonToolTip?: string;
         buttonStyle?: Style.ButtonStyle;
+        onClickToolbarButton?: (date: object) => void;
     }
 
     export interface CustomViews extends CustomFormats, ButtonConfig {}

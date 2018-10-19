@@ -13,6 +13,11 @@ export interface CalendarContainerState {
     startPosition: Date;
 }
 
+interface ViewDate {
+    start: Date;
+    end: Date;
+}
+
 export default class CalendarContainer extends Component<Container.CalendarContainerProps, CalendarContainerState> {
     private subscriptionHandles: number[] = [];
 
@@ -59,11 +64,11 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 viewOption: this.props.view,
                 width: this.props.width,
                 widthUnit: this.props.widthUnit,
+                onRangeChange: this.onRangeChange,
                 onSelectEventAction: !readOnly ? this.handleOnClickEvent : undefined,
                 onEventResizeAction: !readOnly ? this.handleOnChangeEvent : undefined,
                 onSelectSlotAction: !readOnly ? this.onClickSlot : undefined,
                 onEventDropAction: !readOnly ? this.handleOnChangeEvent : undefined,
-                onViewChangeAction: this.onChangeView,
                 customViews: this.props.customViews
             })
         );
@@ -87,17 +92,19 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     }
 
     private setCalendarEvents = (mxObjects: mendix.lib.MxObject[]) => {
-        const events = mxObjects.map(mxObject => {
-            return {
-                title: mxObject.get(this.props.titleAttribute) as string || " ",
-                allDay: mxObject.get(this.props.allDayAttribute) as boolean,
-                start: new Date(mxObject.get(this.props.startAttribute) as number),
-                end: new Date(mxObject.get(this.props.endAttribute) as number),
-                color: mxObject.get(this.props.eventColor) as string,
-                guid: mxObject.getGuid()
-            };
-        });
-        this.setState({ events, eventCache: mxObjects });
+        if (mxObjects) {
+            const events = mxObjects.map(mxObject => {
+                return {
+                    title: mxObject.get(this.props.titleAttribute) as string || " ",
+                    allDay: mxObject.get(this.props.allDayAttribute) as boolean,
+                    start: new Date(mxObject.get(this.props.startAttribute) as number),
+                    end: new Date(mxObject.get(this.props.endAttribute) as number),
+                    color: mxObject.get(this.props.eventColor) as string,
+                    guid: mxObject.getGuid()
+                };
+            });
+            this.setState({ events, eventCache: mxObjects });
+        }
     }
 
     private getStartPosition = (mxObject: mendix.lib.MxObject) => {
@@ -216,13 +223,19 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         return (date: Date) => window.mx.parser.formatValue(date, "datetime", { datePattern });
     }
 
-    private onChangeView = () => {
+    private onRangeChange = (date: ViewDate | Date[]) => {
         if (this.props.executeOnViewChange && this.props.mxObject) {
             if (this.props.dataSource === "microflow") {
                 fetchByMicroflow(this.props.dataSourceMicroflow, this.props.mxObject.getGuid());
             }
             if (this.props.dataSource === "nanoflow") {
                 fetchByNanoflow(this.props.dataSourceNanoflow, this.props.mxform);
+            }
+            if (date) {
+                const startDate = Array.isArray(date) ? date[0] : date.start;
+                const endDate = Array.isArray(date) ? date[date.length - 1] || date[0] : date.end;
+                this.props.mxObject.set(this.props.viewStartAttribute, startDate);
+                this.props.mxObject.set(this.props.viewEndAttribute, endDate);
             }
         }
     }
