@@ -1,13 +1,3 @@
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
 /* ==========================================================================
    Chats
 
@@ -27,7 +17,7 @@
     flex: 1;
     flex-direction: column;
     justify-content: flex-end;
-    .mx-listview {
+    .chat-content-list {
         position: relative;
         overflow: auto;
         .mx-listview-list {
@@ -127,12 +117,5 @@
         .chat-message-time {
             text-align: right;
         }
-    }
-}
-.cardchat {
-    overflow: hidden;
-    padding: 0;
-    .chat {
-        height: 400px;
     }
 }
