@@ -5,27 +5,57 @@
     <icon>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAehJREFUeNpi/J82k4Hh/38Ghn//UPAD5e0M99V2MUxeHcAAAlM2bLD5w8BQ9I6B4eaT//8rGaCAhQENPFDZwXAfqBkZ/P//Xy3GwcF4r4lJIOOlS6/u79y5Fyi8B8WAy7xbGS7zbGWQVGbE0Pzx40fPPXv2TFi3fv21f93d739DNYMA46VCX4bL3JvhGiS1GJE0M9h//cpQqqoT6P30ycOPvvHXZhT/+FGhAvIyFDAha0a1GaLZ3a/K++/vf69PHT17WVr0d8U1RlQXMhHSfPvm1deb1m24+es3g62sxD8MtSzEav4H1XsdqGAdsgFff0CdAnQZCzOD3IOrPHaByZHee3ftfHnh7JnbMM0Hz4AwFhfADGBmYmD8+48xpaBpf21xhunC778YbgmJMLYdufAfrBkn8DCD4LZUxp5nV5f9zwliXO5nzehpos7IQAqQAnk/w59xlZQIoxeQrQrECkAsDcRiQCwIxDxAzA4NN7DpvHL6QJ02cWA2KAkAsTgQiwKxMBALADEfEHMDMScQs0E1g2KOEaTZuHw3A7NaZA8Dn7zBL3Z+iS9A9ldGRsZvQMnvQPYPIPsnkP0byP4DZP8Fsv8B2f+BbAYFr1JISgSaEgWkl0G9QjKbiYFCAHKBCzSgyAGvAAIMAHD/1dmmASuxAAAAAElFTkSuQmCC</icon>
 
     <properties>
+        <property key="showGrid" type="boolean" defaultValue="true">
+            <caption>Show background grid</caption>
+            <category>Grid properties</category>
+            <description/>
+        </property>
+        <property key="gridx" type="integer" defaultValue="50">
+            <caption>Grid X</caption>
+            <category>Grid properties</category>
+            <description>Grid column size</description>
+        </property>
+        <property key="gridy" type="integer" defaultValue="50">
+            <caption>Grid Y</caption>
+            <category>Grid properties</category>
+            <description>Grid row size</description>
+        </property>
+        <property key="gridColor" type="string" defaultValue="#777">
+            <caption>Grid color</caption>
+            <category>Grid properties</category>
+            <description>Grid color</description>
+        </property>
+        <property key="gridBorder" type="integer" defaultValue="1">
+            <caption>Grid border width</caption>
+            <category>Grid properties</category>
+            <description>Border width(px)</description>
+        </property>
+        <property key="captureGrid" type="boolean" defaultValue="true">
+            <caption>Capture grid</caption>
+            <category>Grid properties</category>
+            <description>Capture grid in image</description>
+        </property>
         <property key="penColor" type="string" defaultValue="#000">
             <caption>Pen color</caption>
-            <category>Pen Customization</category>
+            <category>Pen customization</category>
             <description>Pen color</description>
-        </property>
-        <property key="maxLineWidth" type="string" defaultValue="2.5">
-            <caption>Maximum line width</caption>
-            <category>Pen Customization</category>
-            <description>Pathline maximum width</description>
         </property>
         <property key="minLineWidth" type="string" defaultValue="0.5">
             <caption>Minimum line width</caption>
-            <category>Pen Customization</category>
+            <category>Pen customization</category>
             <description>Pathline minimum width</description>
+        </property>
+        <property key="maxLineWidth" type="string" defaultValue="2.5">
+            <caption>Maximum line width</caption>
+            <category>Pen customization</category>
+            <description>Pathline maximum width</description>
         </property>
         <property key="velocityFilterWeight" type="string" defaultValue="0.7">
             <caption>Pen pressure weight</caption>
-            <category>Pen Customization</category>
+            <category>Pen customization</category>
             <description>Velocity filter pressure</description>
         </property>
-        <property key="widthUnit" type="enumeration" defaultValue="percentage">
+        <property key="widthUnit" type="enumeration" defaultValue="pixels">
             <caption>Width unit</caption>
             <category>Appearance</category>
             <description/>
@@ -54,31 +84,6 @@
             <category>Appearance</category>
             <description/>
         </property>
-        <property key="showGrid" type="boolean" defaultValue="true">
-            <caption>Show background grid</caption>
-            <category>Appearance</category>
-            <description>Show background grid</description>
-        </property>
-        <property key="gridx" type="integer" defaultValue="50">
-            <caption>Grid X</caption>
-            <category>Appearance</category>
-            <description>Grid column size</description>
-        </property>
-        <property key="gridy" type="integer" defaultValue="50">
-            <caption>Grid Y</caption>
-            <category>Appearance</category>
-            <description>Grid row size</description>
-        </property>
-        <property key="gridColor" type="string" defaultValue="#777">
-            <caption>Grid color</caption>
-            <category>Appearance</category>
-            <description>Grid color</description>
-        </property>
-        <property key="gridBorder" type="integer" defaultValue="1">
-            <caption>Grid border width</caption>
-            <category>Appearance</category>
-            <description>Border width(px)</description>
-        </property>
         <property key="saveImage" type="enumeration" defaultValue="onFormCommit">
             <caption>Save image</caption>
             <category>Events</category>
@@ -88,7 +93,7 @@
                 <enumerationValue key="onChange">On change</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="timeout" type="integer" defaultValue="1000">
+        <property key="changeTimeout" type="integer" defaultValue="1000">
             <caption>Signature timeout</caption>
             <category>Events</category>
             <description>Time (in ms) to wait before considering the signature finished after the pen has stopped touching the pad</description>

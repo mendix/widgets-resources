@@ -27,7 +27,7 @@ export class preview extends Component<SignatureContainerProps> {
             minLineWidth: props.minLineWidth,
             velocityFilterWeight: props.velocityFilterWeight,
             showGrid: props.showGrid,
-            timeout: props.timeout
+            changeTimeout: props.changeTimeout
         };
     }
 }

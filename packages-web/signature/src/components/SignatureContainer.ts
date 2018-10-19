@@ -27,7 +27,7 @@ export interface SignatureContainerProps extends WrapperProps {
     afterSignEvent: OnClickEventOptions;
     afterSignMicroflow: string;
     afterSignNanoflow: Nanoflow;
-    timeout: number;
+    changeTimeout: number;
 }
 
 type OnClickEventOptions = "doNothing" | "callMicroflow" | "callNanoflow";
@@ -48,21 +48,12 @@ interface SignatureContainerState {
 export default class SignatureContainer extends Component<SignatureContainerProps, SignatureContainerState> {
     private subscriptionHandles: number[] = [];
     private formHandle = 0;
-
-    constructor(props: SignatureContainerProps) {
-        super(props);
-
-        this.state = {
-            alertMessage: "",
-            base64Uri: "",
-            clearPad: false,
-            url: ""
-        };
-
-        this.handleSignEnd = this.handleSignEnd.bind(this);
-        this.handleAfterSignAction = this.handleAfterSignAction.bind(this);
-        this.saveDocument = this.saveDocument.bind(this);
-    }
+    readonly state = {
+        alertMessage: "",
+        base64Uri: "",
+        clearPad: false,
+        url: ""
+    };
 
     render() {
         if (this.state.alertMessage) {
@@ -88,13 +79,13 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         this.props.mxform.unlisten(this.formHandle);
     }
 
-    private handleSignEnd(base64Uri: string) {
+    private handleSignEnd = (base64Uri: string) => {
         const { mxObject, saveImage } = this.props;
 
         if (mxObject && mxObject.inheritsFrom("System.Image")) {
             this.setState({ base64Uri });
             if (saveImage === "onChange") {
-                setTimeout(() => this.saveDocument(), this.props.timeout);
+                setTimeout(() => this.saveDocument(), this.props.changeTimeout);
             }
         } else {
             this.setState({
@@ -103,7 +94,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         }
     }
 
-    private saveDocument() {
+    private saveDocument = () => {
         const { height, mxObject, width } = this.props;
 
         mx.data.saveDocument(mxObject.getGuid(), this.generateFileName(),
@@ -155,7 +146,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         }
     }
 
-    private handleAfterSignAction() {
+    private handleAfterSignAction = () => {
         const { afterSignEvent, afterSignMicroflow, afterSignNanoflow } = this.props;
         const context = new mendix.lib.MxContext();
         context.setContext(this.props.mxObject.getEntity(), this.props.mxObject.getGuid());
