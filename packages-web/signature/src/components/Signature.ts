@@ -18,7 +18,7 @@ export interface SignatureProps {
     minLineWidth: number;
     velocityFilterWeight: number;
     showGrid: boolean;
-    timeout: number;
+    changeTimeout: number;
     onSignEndAction?: (imageUrl?: string) => void;
     widthUnit?: widthUnitType;
     heightUnit?: heightUnitType;
@@ -39,19 +39,10 @@ export class Signature extends Component<SignatureProps, SignatureState> {
     private signaturePad: any;
     private width: number;
     private height: number;
-
-    constructor(props: SignatureProps) {
-        super(props);
-
-        this.state = {
-            isGridDrawn: false
-        };
-
-        this.handleSignEnd = this.handleSignEnd.bind(this);
-        this.getCanvas = this.getCanvas.bind(this);
-        this.resizeCanvas = this.resizeCanvas.bind(this);
-        this.drawGrid = this.drawGrid.bind(this);
-    }
+    private eventHandle = 0;
+    readonly state = {
+        isGridDrawn: false
+    };
 
     render() {
         return createElement("div", {
@@ -83,7 +74,7 @@ export class Signature extends Component<SignatureProps, SignatureState> {
                 this.width = this.canvasNode.parentElement.clientWidth;
             }
         }
-        window.addEventListener("resize", this.resizeCanvas);
+        window.addEventListener("resize", this.throttleUpdate);
     }
 
     componentDidUpdate() {
@@ -100,10 +91,20 @@ export class Signature extends Component<SignatureProps, SignatureState> {
     }
 
     componentWillUnmount() {
-        window.removeEventListener("resize", this.resizeCanvas);
+        window.removeEventListener("resize", this.throttleUpdate);
     }
 
-    private handleSignEnd() {
+    private throttleUpdate = () => {
+        if (this.eventHandle) {
+            window.clearTimeout(this.eventHandle);
+        }
+        this.eventHandle = window.setTimeout(() => {
+            this.resizeCanvas();
+            this.eventHandle = 0;
+        }, 50);
+    }
+
+    private handleSignEnd = () => {
         const { onSignEndAction } = this.props;
 
         if (onSignEndAction) {
@@ -111,11 +112,11 @@ export class Signature extends Component<SignatureProps, SignatureState> {
         }
     }
 
-    private getCanvas(node: HTMLCanvasElement) {
+    private getCanvas = (node: HTMLCanvasElement) => {
         this.canvasNode = node;
     }
 
-    private resizeCanvas() {
+    private resizeCanvas = () => {
         const ratio = Math.max(window.devicePixelRatio || 1, 1);
 
         this.width = this.canvasNode.parentElement.offsetWidth * ratio;
@@ -126,7 +127,7 @@ export class Signature extends Component<SignatureProps, SignatureState> {
         this.setState({ isGridDrawn: false });
     }
 
-    private drawGrid() {
+    private drawGrid = () => {
         const { showGrid, gridColor, gridx, gridy } = this.props;
         if (!showGrid) {
             return;

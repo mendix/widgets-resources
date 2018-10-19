@@ -19,7 +19,7 @@ describe("Siganture", () => {
         penColor: "#000",
         maxLineWidth: 2.5,
         minLineWidth: 0.5,
-        timeout: 3000,
+        changeTimeout: 3000,
         velocityFilterWeight: 0.7,
         showGrid: true,
         onSignEndAction: jasmine.any(Function),
