@@ -135,7 +135,7 @@
     ],
     "curly": false,
     "max-line-length": [
-      true,
+      false,
       120
     ],
     "arrow-parens": false,

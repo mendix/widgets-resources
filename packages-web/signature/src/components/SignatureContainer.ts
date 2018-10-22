@@ -1,48 +1,34 @@
 import { Component, createElement } from "react";
 
-import { Signature, SignatureProps } from "./Signature";
-import { Alert } from "./Alert";
+import { Signature, SignatureProps, heightUnitType, penOptions, widthUnitType } from "./Signature";
 
 interface WrapperProps {
     mxObject?: mendix.lib.MxObject;
     mxform: mxui.lib.form._FormBase;
-    readOnly?: boolean;
+    style?: string;
+    friendlyId: string;
 }
 
 export interface SignatureContainerProps extends WrapperProps {
-    dataUrl?: string;
+    showSignature: string;
     height?: number;
     width?: number;
-    gridx?: number;
-    gridy?: number;
+    gridColumnSize?: number;
+    gridRowSize?: number;
     gridColor?: string;
     gridBorder?: number;
     penColor?: string;
-    maxLineWidth?: number;
-    minLineWidth?: number;
-    velocityFilterWeight?: number;
+    penType: penOptions;
     showGrid?: boolean;
-    style?: object;
-    saveImage: SaveImage;
-    afterSignEvent: OnClickEventOptions;
-    afterSignMicroflow: string;
-    afterSignNanoflow: Nanoflow;
-    changeTimeout: number;
-}
-
-type OnClickEventOptions = "doNothing" | "callMicroflow" | "callNanoflow";
-type SaveImage = "onChange" | "onFormCommit";
-
-interface Nanoflow {
-    nanoflow: object[];
-    paramsSpec: { Progress: string };
+    widthUnit: widthUnitType;
+    heightUnit: heightUnitType;
+    saveGridToImage: boolean;
 }
 
 interface SignatureContainerState {
-    url: string;
     alertMessage: string;
     base64Uri: string;
-    clearPad: boolean;
+    hasSignature: boolean;
 }
 
 export default class SignatureContainer extends Component<SignatureContainerProps, SignatureContainerState> {
@@ -51,28 +37,29 @@ export default class SignatureContainer extends Component<SignatureContainerProp
     readonly state = {
         alertMessage: "",
         base64Uri: "",
-        clearPad: false,
-        url: ""
+        hasSignature: false
     };
 
     render() {
-        if (this.state.alertMessage) {
-            return createElement(Alert, { bootstrapStyle: "danger" }, this.state.alertMessage);
-        }
-
         return createElement(Signature, {
             ...this.props as SignatureProps,
+            divStyle: parseStyle(this.props.style),
             alertMessage: this.state.alertMessage,
-            clearPad: this.state.clearPad,
+            clearPad: !this.state.hasSignature,
             onSignEndAction: this.handleSignEnd
         });
     }
 
     componentWillReceiveProps(newProps: SignatureContainerProps) {
-        this.resetSubscriptions(newProps.mxObject);
         const validationMessage = this.validateProps(newProps.mxObject);
 
-        this.setState({ alertMessage: validationMessage });
+        if (validationMessage) {
+            this.setState({ alertMessage: validationMessage });
+        }
+    }
+
+    componentDidUpdate() {
+        this.resetSubscriptions(this.props.mxObject);
     }
 
     componentWillMount() {
@@ -80,34 +67,28 @@ export default class SignatureContainer extends Component<SignatureContainerProp
     }
 
     private handleSignEnd = (base64Uri: string) => {
-        const { mxObject, saveImage } = this.props;
+        const { mxObject } = this.props;
 
-        if (mxObject && mxObject.inheritsFrom("System.Image")) {
-            this.setState({ base64Uri });
-            if (saveImage === "onChange") {
-                setTimeout(() => this.saveDocument(), this.props.changeTimeout);
-            }
-        } else {
-            this.setState({
-                alertMessage: `${mxObject.getEntity()} does not inherit from "System.Image.`
-            });
+        if (mxObject && !this.state.hasSignature) {
+            mxObject.set(this.props.showSignature, !this.state.hasSignature);
         }
+        this.setState({ base64Uri, hasSignature: true });
     }
 
-    private saveDocument = () => {
-        const { height, mxObject, width } = this.props;
+    private saveDocument = (mxObject: mendix.lib.MxObject) => {
+        const { height, width } = this.props;
 
-        mx.data.saveDocument(mxObject.getGuid(), this.generateFileName(),
-            { width, height }, this.convertUrltoBlob(), () => {
-                mx.ui.info("Image has been saved", true);
-                this.setState({ clearPad: true });
-            },
-            error => {
-                mx.ui.error(error.message, false);
-            }
-        );
-
-        this.handleAfterSignAction();
+        if (this.state.base64Uri && this.state.hasSignature) {
+            mx.data.saveDocument(mxObject.getGuid(), this.generateFileName(),
+                { width, height }, this.convertUrltoBlob(), () => {
+                    mx.ui.info("Image has been saved", true);
+                },
+                error => {
+                    mx.ui.error(error.message, false);
+                });
+        } else {
+            this.setState({ alertMessage: `${this.props.friendlyId}: Please provide a signature first` });
+        }
     }
 
     private generateFileName(): string {
@@ -118,15 +99,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         let errorMessage = "";
 
         if (mxObject && !mxObject.inheritsFrom("System.Image")) {
-            errorMessage = `${mxObject.getEntity()} does not inherit from "System.Image.`;
-        }
-        if (this.props.afterSignEvent === "callMicroflow" && !this.props.afterSignMicroflow) {
-            errorMessage = "A 'Microflow' is required for 'After sign event' 'Call a microflow'";
-        } else if (this.props.afterSignEvent === "callNanoflow" && !this.props.afterSignNanoflow.nanoflow) {
-            errorMessage = "A 'Nanoflow' is required for 'After sign event' 'Call a nanoflow'";
-        }
-        if (errorMessage) {
-            errorMessage = `Error in configuration: ${errorMessage}`;
+            errorMessage = `${this.props.friendlyId}: ${mxObject.getEntity()} does not inherit from "System.Image.`;
         }
 
         return errorMessage;
@@ -139,36 +112,26 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         if (mxObject) {
             this.subscriptionHandles.push(window.mx.data.subscribe({
                 guid: mxObject.getGuid(),
-                callback: () => this.validateProps(mxObject)
+                callback: () => this.updateCanvasState(mxObject)
+            }));
+            this.subscriptionHandles.push(mx.data.subscribe({
+                attr: this.props.showSignature,
+                callback: () => this.updateCanvasState(mxObject),
+                guid: mxObject.getGuid()
             }));
 
-            this.formHandle = this.props.mxform.listen("commit", this.saveDocument);
+            this.formHandle = this.props.mxform.listen("commit", () => this.saveDocument(mxObject));
         }
     }
 
-    private handleAfterSignAction = () => {
-        const { afterSignEvent, afterSignMicroflow, afterSignNanoflow } = this.props;
-        const context = new mendix.lib.MxContext();
-        context.setContext(this.props.mxObject.getEntity(), this.props.mxObject.getGuid());
+    private updateCanvasState = (mxObject: mendix.lib.MxObject) => {
+        this.setState({
+            hasSignature: this.getAttributeValue(this.props.showSignature, mxObject)
+        });
+    }
 
-        if (afterSignEvent === "callMicroflow" && afterSignMicroflow && this.props.mxObject.getGuid()) {
-            window.mx.ui.action(afterSignMicroflow, {
-                context,
-                origin: this.props.mxform,
-                error: error => window.mx.ui.error(
-                    `An error occurred while executing the nanoflow: ${afterSignMicroflow}: ${error.message}`
-                )
-            });
-        } else if (afterSignEvent === "callNanoflow" && afterSignNanoflow.nanoflow) {
-            window.mx.data.callNanoflow({
-                nanoflow: afterSignNanoflow,
-                origin: this.props.mxform,
-                context,
-                error: error => window.mx.ui.error(
-                    `An error occurred while executing the nanoflow: ${error.message}`
-                )
-            });
-        }
+    private getAttributeValue(attribute: string, mxObject?: mendix.lib.MxObject): boolean {
+        return !!mxObject && mxObject.get(attribute) as boolean;
     }
 
     private convertUrltoBlob(): Blob {
@@ -196,3 +159,22 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         return imageBlob;
     }
 }
+
+export const parseStyle = (style = ""): {[key: string]: string} => { // Doesn't support a few stuff.
+    try {
+        return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+            const pair = line.split(":");
+            if (pair.length === 2) {
+                const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                styleObject[name] = pair[1].trim();
+            }
+
+            return styleObject;
+        }, {});
+    } catch (error) {
+        // tslint:disable-next-line no-console
+        window.console.log("Failed to parse style", style, error);
+    }
+
+    return {};
+};

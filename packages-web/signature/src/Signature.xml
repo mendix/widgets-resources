@@ -7,53 +7,56 @@
     <properties>
         <property key="showGrid" type="boolean" defaultValue="true">
             <caption>Show background grid</caption>
-            <category>Grid properties</category>
+            <category>Canvas</category>
             <description/>
         </property>
-        <property key="gridx" type="integer" defaultValue="50">
-            <caption>Grid X</caption>
-            <category>Grid properties</category>
-            <description>Grid column size</description>
+        <property key="showSignature" type="attribute" required="false">
+            <caption>Has signature</caption>
+            <category>Canvas</category>
+            <description/>
+            <attributeTypes>
+                <attributeType name="Boolean" />
+            </attributeTypes>
         </property>
-        <property key="gridy" type="integer" defaultValue="50">
-            <caption>Grid Y</caption>
-            <category>Grid properties</category>
-            <description>Grid row size</description>
+        <property key="saveGridToImage" type="boolean" defaultValue="false">
+            <caption>Capture grid</caption>
+            <category>Canvas</category>
+            <description>Store the grid lines as part of the signature image</description>
         </property>
         <property key="gridColor" type="string" defaultValue="#777">
             <caption>Grid color</caption>
-            <category>Grid properties</category>
-            <description>Grid color</description>
+            <category>Canvas</category>
+            <description/>
+        </property>
+        <property key="gridColumnSize" type="integer" defaultValue="50">
+            <caption>Grid X</caption>
+            <category>Canvas</category>
+            <description>Grid column size</description>
+        </property>
+        <property key="gridRowSize" type="integer" defaultValue="50">
+            <caption>Grid Y</caption>
+            <category>Canvas</category>
+            <description>Grid row size</description>
         </property>
         <property key="gridBorder" type="integer" defaultValue="1">
             <caption>Grid border width</caption>
-            <category>Grid properties</category>
-            <description>Border width(px)</description>
+            <category>Canvas</category>
+            <description>Grid border line width(px)</description>
         </property>
-        <property key="captureGrid" type="boolean" defaultValue="true">
-            <caption>Capture grid</caption>
-            <category>Grid properties</category>
-            <description>Capture grid in image</description>
+        <property key="penType" type="enumeration" defaultValue="fountain">
+            <caption>Type</caption>
+            <category>Pen</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="fountain">Fountain pen</enumerationValue>
+                <enumerationValue key="ballpoint">Ball point pen</enumerationValue>
+                <enumerationValue key="marker">Highlight marker</enumerationValue>
+            </enumerationValues>
         </property>
         <property key="penColor" type="string" defaultValue="#000">
-            <caption>Pen color</caption>
-            <category>Pen customization</category>
-            <description>Pen color</description>
-        </property>
-        <property key="minLineWidth" type="string" defaultValue="0.5">
-            <caption>Minimum line width</caption>
-            <category>Pen customization</category>
-            <description>Pathline minimum width</description>
-        </property>
-        <property key="maxLineWidth" type="string" defaultValue="2.5">
-            <caption>Maximum line width</caption>
-            <category>Pen customization</category>
-            <description>Pathline maximum width</description>
-        </property>
-        <property key="velocityFilterWeight" type="string" defaultValue="0.7">
-            <caption>Pen pressure weight</caption>
-            <category>Pen customization</category>
-            <description>Velocity filter pressure</description>
+            <caption>Color</caption>
+            <category>Pen</category>
+            <description>Color of the line e.g. green, #00FF00, rgb(0,255,0)</description>
         </property>
         <property key="widthUnit" type="enumeration" defaultValue="pixels">
             <caption>Width unit</caption>
@@ -83,42 +86,6 @@
             <caption>Height</caption>
             <category>Appearance</category>
             <description/>
-        </property>
-        <property key="saveImage" type="enumeration" defaultValue="onFormCommit">
-            <caption>Save image</caption>
-            <category>Events</category>
-            <description>Save signature image, OnChange is default where the image is saved based on a given timeout</description>
-            <enumerationValues>
-                <enumerationValue key="onFormCommit">On form commit</enumerationValue>
-                <enumerationValue key="onChange">On change</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="changeTimeout" type="integer" defaultValue="1000">
-            <caption>Signature timeout</caption>
-            <category>Events</category>
-            <description>Time (in ms) to wait before considering the signature finished after the pen has stopped touching the pad</description>
-        </property>
-        <property key="afterSignEvent" type="enumeration" defaultValue="doNothing">
-            <caption>After sign</caption>
-            <category>Events</category>
-            <description/>
-            <enumerationValues>
-                <enumerationValue key="doNothing">Do nothing</enumerationValue>
-                <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
-                <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="afterSignMicroflow" type="microflow" required="false">
-            <caption>After sign microflow</caption>
-            <category>Events</category>
-            <description>The microflow that will be executed after signing</description>
-            <returnType type="Void" />
-        </property>
-        <property key="afterSignNanoflow" type="nanoflow" required="false">
-            <caption>After sign nanoflow</caption>
-            <category>Events</category>
-            <description>The nanoflow that will be executed after signing</description>
-            <returnType type="Void" />
         </property>
     </properties>
 </widget>
