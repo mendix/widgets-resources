@@ -41,7 +41,7 @@ export interface CalendarProps {
     viewOption: "custom" | "standard";
     width: number;
     widthUnit: Style.WidthUnitType;
-    onRangeChange?: (date: object) => void;
+    onRangeChangeAction?: (date: object) => void;
     onSelectEventAction?: (eventInfo: object) => void;
     onEventResizeAction?: (eventInfo: object) => void;
     onSelectSlotAction?: (slotInfo: object) => void;
@@ -202,8 +202,8 @@ class Calendar extends Component<CalendarProps, CalendarState> {
     private eventColor = (events: CalendarEvent) => ({ style: { backgroundColor: events.color } });
 
     private onRangeChange = (date: object) => {
-        if (this.props.onRangeChange) {
-            this.props.onRangeChange(date);
+        if (this.props.onRangeChangeAction && date) {
+            this.props.onRangeChangeAction(date);
         }
     }
 

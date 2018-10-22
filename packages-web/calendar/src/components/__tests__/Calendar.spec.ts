@@ -186,14 +186,6 @@ describe("Calendar", () => {
 
             expect(calendarProps.onEventResizeAction).toHaveBeenCalled();
         });
-
-        it("#onViewChange() calls the parent onViewChange  handler", () => {
-            calendarProps.onViewChangeAction = jasmine.createSpy("onClick");
-            const calendar = renderCalendar(calendarProps);
-            (calendar.instance() as any).onViewChange();
-
-            expect(calendarProps.onViewChangeAction).toHaveBeenCalled();
-        });
     });
 
     afterAll(() => {

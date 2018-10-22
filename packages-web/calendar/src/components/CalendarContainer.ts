@@ -64,7 +64,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 viewOption: this.props.view,
                 width: this.props.width,
                 widthUnit: this.props.widthUnit,
-                onRangeChange: this.onRangeChange,
+                onRangeChangeAction: this.onRangeChange,
                 onSelectEventAction: !readOnly ? this.handleOnClickEvent : undefined,
                 onEventResizeAction: !readOnly ? this.handleOnChangeEvent : undefined,
                 onSelectSlotAction: !readOnly ? this.onClickSlot : undefined,
@@ -155,6 +155,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 callback: () => this.loadEvents(mxObject)
             }));
             [
+                this.props.allDayAttribute,
                 this.props.titleAttribute,
                 this.props.startAttribute,
                 this.props.endAttribute,
@@ -225,17 +226,17 @@ export default class CalendarContainer extends Component<Container.CalendarConta
 
     private onRangeChange = (date: ViewDate | Date[]) => {
         if (this.props.executeOnViewChange && this.props.mxObject) {
-            if (this.props.dataSource === "microflow") {
-                fetchByMicroflow(this.props.dataSourceMicroflow, this.props.mxObject.getGuid());
-            }
-            if (this.props.dataSource === "nanoflow") {
-                fetchByNanoflow(this.props.dataSourceNanoflow, this.props.mxform);
-            }
             if (date) {
                 const startDate = Array.isArray(date) ? date[0] : date.start;
                 const endDate = Array.isArray(date) ? date[date.length - 1] || date[0] : date.end;
                 this.props.mxObject.set(this.props.viewStartAttribute, startDate);
                 this.props.mxObject.set(this.props.viewEndAttribute, endDate);
+            }
+            if (this.props.dataSource === "microflow") {
+                fetchByMicroflow(this.props.dataSourceMicroflow, this.props.mxObject.getGuid());
+            }
+            if (this.props.dataSource === "nanoflow") {
+                fetchByNanoflow(this.props.dataSourceNanoflow, this.props.mxform);
             }
         }
     }
