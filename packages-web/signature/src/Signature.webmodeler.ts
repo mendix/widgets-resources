@@ -4,8 +4,8 @@ import { SignatureContainerProps } from "./components/SignatureContainer";
 
 declare function require(name: string): string;
 
-type VisibilityMap = {
-    [ P in keyof SignatureContainerProps ]: boolean;
+type VisibilityMap<T> = {
+    [P in keyof T]: any;
 };
 
 // tslint:disable-next-line class-name
@@ -18,16 +18,16 @@ export class preview extends Component<SignatureContainerProps> {
         return {
             height: props.height,
             width: props.width,
-            gridx: props.gridx,
-            gridy: props.gridy,
+            gridColumnSize: props.gridColumnSize,
+            gridRowSize: props.gridRowSize,
             gridColor: props.gridColor,
             gridBorder: props.gridBorder,
             penColor: props.penColor,
-            maxLineWidth: props.maxLineWidth,
-            minLineWidth: props.minLineWidth,
-            velocityFilterWeight: props.velocityFilterWeight,
+            penType: props.penType,
+            saveGridToImage: this.props.saveGridToImage,
             showGrid: props.showGrid,
-            changeTimeout: props.changeTimeout
+            widthUnit: props.widthUnit,
+            heightUnit: props.heightUnit
         };
     }
 }
@@ -36,9 +36,13 @@ export function getPreviewCss() {
     return require("./ui/Signature.scss");
 }
 
-export function getVisibleProperties(valueMap: SignatureContainerProps, visibilityMap: VisibilityMap) {
-    visibilityMap.afterSignMicroflow = valueMap.afterSignEvent === "callMicroflow";
-    visibilityMap.afterSignNanoflow = valueMap.afterSignEvent === "callNanoflow";
+export function getVisibleProperties(valueMap: SignatureContainerProps, visibilityMap: VisibilityMap<SignatureContainerProps>) {
+    if (!valueMap.showGrid) {
+        visibilityMap.gridColor = false;
+        visibilityMap.gridBorder = false;
+        visibilityMap.gridColumnSize = false;
+        visibilityMap.gridRowSize = false;
+    }
 
     return visibilityMap;
 }

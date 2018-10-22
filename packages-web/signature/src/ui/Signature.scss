@@ -1,23 +1,27 @@
 .widget-signature-wrapper {
     position: relative;
-    &.disabled {
-        cursor: not-allowed;
+    > canvas {
+        position: absolute;
+        left: 0;
+        top: 0;
     }
-
     canvas {
-        padding: 0px;
-        &.disabled {
-            pointer-events: none;
-            background-color: rgb(238, 238, 238)
+        &.widget-Signature {
+            padding: 0px;
+            &.disabled {
+                pointer-events: none;
+                background-color: rgb(238, 238, 238)
+            }
+            &.signature-grid {
+                z-index: 0;
+            }
+            &.signature-canvas {
+                z-index: 1;
+            }
+            &.signature-capture-grid {
+                opacity: 0;
+            }
         }
     }
-
-    button.btn {
-        width: 100px;
-        margin-top: 10px;
-    }
-
-    button.btn.btn-primary {
-        float: right;
-    }
 }
+

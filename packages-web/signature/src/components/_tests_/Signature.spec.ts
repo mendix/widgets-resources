@@ -12,64 +12,145 @@ describe("Siganture", () => {
     const defaultProps: SignatureProps = {
         height: 500,
         width: 500,
-        gridx: 50,
-        gridy: 50,
+        gridColumnSize: 50,
+        gridRowSize: 50,
         gridColor: "#777",
         gridBorder: 1,
+        penType: "fountain",
         penColor: "#000",
-        maxLineWidth: 2.5,
-        minLineWidth: 0.5,
-        changeTimeout: 3000,
-        velocityFilterWeight: 0.7,
         showGrid: true,
         onSignEndAction: jasmine.any(Function),
         alertMessage: "",
+        saveGridToImage: false,
+        heightUnit: "pixels",
         widthUnit: "percentage"
     };
 
     it("renders the structure correctly", () => {
+        const canvasStyle = { width: defaultProps.width, height: defaultProps.height };
         const canvas = renderCanvas(defaultProps);
 
         expect(canvas).toBeElement(
-            createElement("div", { className: "widget-signature-wrapper", style: { width: defaultProps.width + "%" } },
-                createElement("canvas", {
-                    className: classNames("widget-Signature", "form-control mx-textarea-input mx-textarea"),
-                    resize: true
-                }),
-                createElement(Alert, { bootstrapStyle: "danger" }, defaultProps.alertMessage)
-            )
+            createElement("div", {},
+                createElement(Alert, { bootstrapStyle: "danger" }, defaultProps.alertMessage),
+                createElement("div", { className: "widget-signature-wrapper", style: canvasStyle },
+                    createElement("canvas", {
+                        className: "widget-Signature form-control mx-textarea-input mx-textarea signature-grid"
+                    }),
+                    createElement("canvas", {
+                        className: "widget-Signature signature-capture-grid"
+                    }),
+                    createElement("canvas", {
+                        className: classNames("widget-Signature", "signature-canvas", "disabled")
+                    })
+                ))
+        );
+    });
+
+    it("with pixels renders the structure correctly", () => {
+        const canvasProps: SignatureProps = {
+            ...defaultProps,
+            widthUnit: "pixels"
+        };
+        const canvas = renderCanvas(canvasProps);
+        const canvasStyle = { width: defaultProps.width, height: defaultProps.height };
+
+        expect(canvas).toBeElement(
+            createElement("div", {},
+                createElement(Alert, { bootstrapStyle: "danger" }, defaultProps.alertMessage),
+                createElement("div", { className: "widget-signature-wrapper", style: canvasStyle },
+                    createElement("canvas", {
+                        className: "widget-Signature form-control mx-textarea-input mx-textarea signature-grid"
+                    }),
+                    createElement("canvas", {
+                        className: "widget-Signature signature-capture-grid"
+                    }),
+                    createElement("canvas", {
+                        className: classNames("widget-Signature", "signature-canvas", "disabled")
+                    })
+                ))
+        );
+    });
+
+    it("with percentage of parent units renders the structure correctly", () => {
+        const canvasProps: SignatureProps = {
+            ...defaultProps,
+            heightUnit: "percentageOfParent",
+            widthUnit: "percentage"
+        };
+        const canvas = renderCanvas(canvasProps);
+        const canvasStyle = { width: defaultProps.width, height: defaultProps.height };
+
+        expect(canvas).toBeElement(
+            createElement("div", {},
+                createElement(Alert, { bootstrapStyle: "danger" }, defaultProps.alertMessage),
+                createElement("div", { className: "widget-signature-wrapper", style: canvasStyle },
+                    createElement("canvas", {
+                        className: "widget-Signature form-control mx-textarea-input mx-textarea signature-grid"
+                    }),
+                    createElement("canvas", {
+                        className: "widget-Signature signature-capture-grid"
+                    }),
+                    createElement("canvas", {
+                        className: classNames("widget-Signature", "signature-canvas", "disabled")
+                    })
+                ))
+        );
+    });
+
+    it("with percentage of width and height units renders the structure correctly", () => {
+        const canvasProps: SignatureProps = {
+            ...defaultProps,
+            heightUnit: "percentageOfWidth",
+            widthUnit: "percentage"
+        };
+        const canvas = renderCanvas(canvasProps);
+        const canvasStyle = { width: defaultProps.width, height: defaultProps.height };
+
+        expect(canvas).toBeElement(
+            createElement("div", {},
+                createElement(Alert, { bootstrapStyle: "danger" }, defaultProps.alertMessage),
+                createElement("div", { className: "widget-signature-wrapper", style: canvasStyle },
+                    createElement("canvas", {
+                        className: "widget-Signature form-control mx-textarea-input mx-textarea signature-grid"
+                    }),
+                    createElement("canvas", {
+                        className: "widget-Signature signature-capture-grid"
+                    }),
+                    createElement("canvas", {
+                        className: classNames("widget-Signature", "signature-canvas", "disabled")
+                    })
+                ))
         );
     });
 
     it("renders grid if showGrid set", () => {
         const signaturePad = fullRenderCanvas(defaultProps);
+        signaturePad.setProps({
+            clearPad: true
+        });
         const signaturePadInstance: any = signaturePad.instance();
-        signaturePadInstance.height = 500;
-        signaturePadInstance.width = 500;
+        signaturePadInstance.canvasNode.height = 500;
+        signaturePadInstance.canvasNode.width = 500;
         const drawGrid = spyOn(signaturePadInstance, "drawGrid").and.callThrough();
         signaturePadInstance.componentDidUpdate();
 
         expect(drawGrid).toHaveBeenCalled();
     });
 
-    it("hides clear button when  signature pad is not editable", () => {
+    it("removes event listeners on unmounting", () => {
         const signaturePad = renderCanvas(defaultProps);
-        signaturePad.setProps({ widthUnit: "pixels" });
+        const signaturePadInstance: any = signaturePad.instance();
 
-        expect(signaturePad).toBeElement(
-            createElement("div", { className: "widget-signature-wrapper", style: { width: defaultProps.width + "px" } },
-                createElement("canvas", {
-                    className: classNames("widget-Signature", "form-control mx-textarea-input mx-textarea disabled"),
-                    resize: true
-                }),
-                createElement(Alert, { bootstrapStyle: "danger" }, defaultProps.alertMessage)
-            )
-        );
+        const componentWillUnmount = spyOn(signaturePadInstance, "componentWillUnmount").and.callThrough();
+        signaturePad.unmount();
+
+        expect(componentWillUnmount).toHaveBeenCalled();
     });
 
     xit("handles sign end action after user signing", () => {
         const signaturePad = renderCanvas(defaultProps);
-        signaturePad.setProps({ onSignEndAction: jasmine.any(Function), heightUnit: "percentageOfParent" });
+
         const signatureInstance: any = signaturePad.instance();
         const handleSignEnd = spyOn(signatureInstance, "handleSignEnd").and.callThrough();
 
@@ -79,12 +160,12 @@ describe("Siganture", () => {
         dispatchEvent(event);
     });
 
-    xit("resizes the canvas on window resize", () => {
+    it("resizes the canvas on window resize", () => {
         const signaturePad = renderCanvas(defaultProps);
         const signatureInstance: any = signaturePad.instance();
         const resizeCanvas = spyOn(signatureInstance, "resizeCanvas").and.callThrough();
 
-        signaturePad.setProps({ heightUnit: "pixels" });
+        signatureInstance.eventHandle = 1;
         signatureInstance.canvasNode = {
             parentElement: document.createElement("div") as any,
             getContext: document.createElement("canvas").getContext("2d") as any
