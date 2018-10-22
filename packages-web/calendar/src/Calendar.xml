@@ -53,7 +53,7 @@
                 <attributeType name="Boolean"/>
             </attributeTypes>
         </property>
-        <property key="startAttribute" type="attribute" entityProperty="eventEntity">
+        <property key="startAttribute" type="attribute" entityProperty="eventEntity" required="false">
             <caption>Start attribute</caption>
             <category>Data source</category>
             <description/>
@@ -61,7 +61,7 @@
                 <attributeType name="DateTime"/>
             </attributeTypes>
         </property>
-        <property key="endAttribute" type="attribute" entityProperty="eventEntity">
+        <property key="endAttribute" type="attribute" entityProperty="eventEntity" required="false">
             <caption>End attribute</caption>
             <category>Data source</category>
             <description/>

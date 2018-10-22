@@ -67,7 +67,8 @@ const previewConfig = {
                 }
             }},
             { test: /\.css$/, use: "raw-loader" },
-            { test: /\.scss$/, use: [
+            {
+                test: /\.scss$/, use: [
                     { loader: "raw-loader" },
                     { loader: "sass-loader" }
                 ]
