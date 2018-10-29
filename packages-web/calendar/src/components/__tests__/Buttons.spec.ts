@@ -1,13 +1,13 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
-import { ButtonProps, ToolbarButton } from "../Button";
+import * as Button from "../Button";
 
 describe("ToolbarButton", () => {
-    const renderToolbarButton = (props: ButtonProps) => shallow(createElement(ToolbarButton, props));
-    const buttonProps: ButtonProps = {
+    const renderToolbarButton = (props: Button.ButtonProps) => shallow(createElement(Button.ToolbarButton, props));
+    const buttonProps: Button.ButtonProps = {
         renderMode: "button",
         buttonStyle: "default",
-        iconPosition: "left",
+        iconPosition: "right",
         active: false,
         caption: "",
         onClick: jasmine.any(Function)
@@ -15,7 +15,6 @@ describe("ToolbarButton", () => {
 
     it("renders a button when button is selected", () => {
         const toolbarButton = renderToolbarButton(buttonProps);
-
         expect(toolbarButton).toBeElement(
             createElement("button", { className: "btn btn-default", onClick: () => jasmine.any(Function) })
         );
@@ -30,5 +29,27 @@ describe("ToolbarButton", () => {
                 createElement("a")
             )
         );
+    });
+
+    it("renders with a icon on the left if icon position === `right`", () => {
+        const toolbarButton = renderToolbarButton(buttonProps);
+        toolbarButton.setProps({ iconPosition: "right" });
+        const icons = "";
+        const iconPosition = "right";
+        const content = "";
+        const icon = Button.addIcon(icons, iconPosition, content);
+
+        expect(icon).toEqual("");
+    });
+
+    it("renders with a icon on the left if icon position === `left`", () => {
+        const toolbarButton = renderToolbarButton(buttonProps);
+        toolbarButton.setProps({ iconPosition: "left" });
+        const icons = "";
+        const iconPosition = "left";
+        const content = "";
+        const icon = Button.addIcon(icons, iconPosition, content);
+
+        expect(icon).toEqual("");
     });
 });
