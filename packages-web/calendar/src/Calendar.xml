@@ -288,7 +288,7 @@
         <property key="onClickEvent" type="enumeration" defaultValue="doNothing">
             <caption>On click</caption>
             <category>Events</category>
-            <description>The click event is triggered when an exiting item is clicked on the calender</description>
+            <description>The click event is triggered when an exiting item is clicked on the calendar</description>
             <enumerationValues>
                 <enumerationValue key="doNothing">Do nothing</enumerationValue>
                 <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>

@@ -1,8 +1,9 @@
 import { Component, ReactChild, createElement } from "react";
 
 import { Calendar, CalendarEvent } from "./Calendar";
-import { fetchByMicroflow, fetchByNanoflow, fetchData } from "../utils/data";
+import { fetchData } from "../utils/data";
 import { Container } from "../utils/namespaces";
+import * as dateArithmetic from "date-arithmetic";
 import * as moment from "moment";
 export interface CalendarContainerState {
     alertMessage: ReactChild;
@@ -122,16 +123,34 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         return !this.props.mxObject || !this.props.editable || this.props.readOnly;
     }
 
+    private setViewDates(mxObject: mendix.lib.MxObject) {
+        if (
+            this.props.executeOnViewChange
+            && mxObject.get(this.props.viewStartAttribute) === ""
+            && mxObject.get(this.props.viewEndAttribute) === ""
+        ) {
+            const viewStart = new Date(this.state.startPosition.getFullYear(), this.state.startPosition.getMonth(), 1);
+            const viewEnd = new Date(this.state.startPosition.getFullYear(), this.state.startPosition.getMonth() + 1, 0);
+            if (this.props.defaultView === "day") {
+                mxObject.set(this.props.viewStartAttribute, dateArithmetic.startOf(this.state.startPosition, "day"));
+                mxObject.set(this.props.viewEndAttribute, dateArithmetic.endOf(this.state.startPosition, "day"));
+            } else {
+                mxObject.set(this.props.viewStartAttribute, viewStart);
+                mxObject.set(this.props.viewEndAttribute, viewEnd);
+            }
+        }
+    }
+
     private loadEvents = (mxObject: mendix.lib.MxObject) => {
-        const { dataSource } = this.props;
         if (!mxObject) return;
+        this.setViewDates(mxObject);
         const guid = mxObject ? mxObject.getGuid() : "";
-        if (dataSource === "context" && mxObject) {
+        if (this.props.dataSource === "context" && mxObject) {
             this.setCalendarEvents([ mxObject ]);
         } else {
             fetchData({
                 guid,
-                type: dataSource,
+                type: this.props.dataSource,
                 entity: this.props.eventEntity,
                 constraint: this.props.entityConstraint,
                 microflow: this.props.dataSourceMicroflow,
@@ -230,14 +249,9 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 const startDate = Array.isArray(date) ? date[0] : date.start;
                 const endDate = Array.isArray(date) ? date[date.length - 1] || date[0] : date.end;
                 this.props.mxObject.set(this.props.viewStartAttribute, startDate);
-                this.props.mxObject.set(this.props.viewEndAttribute, endDate);
+                this.props.mxObject.set(this.props.viewEndAttribute, dateArithmetic.endOf(endDate, "day"));
             }
-            if (this.props.dataSource === "microflow") {
-                fetchByMicroflow(this.props.dataSourceMicroflow, this.props.mxObject.getGuid());
-            }
-            if (this.props.dataSource === "nanoflow") {
-                fetchByNanoflow(this.props.dataSourceNanoflow, this.props.mxform);
-            }
+            this.loadEvents(this.props.mxObject);
         }
     }
 
