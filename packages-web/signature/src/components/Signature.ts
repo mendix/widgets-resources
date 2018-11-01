@@ -1,7 +1,7 @@
 import { CSSProperties, PureComponent, createElement } from "react";
 import * as classNames from "classnames";
 import { Alert } from "./Alert";
-import SignaturePad from "signature_pad";
+import SignaturePad, { IOptions } from "signature_pad";
 import "../ui/Signature.scss";
 
 export interface SignatureProps {
@@ -110,8 +110,8 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
         }, 50);
     }
 
-    private signaturePadOptions = (): SignaturePad.SignaturePadOptions => {
-        let options: SignaturePad.SignaturePadOptions = {};
+    private signaturePadOptions = (): IOptions => {
+        let options: IOptions = {};
         if (this.props.penType === "fountain") {
             options = { minWidth: 0.7, maxWidth: 2.6, velocityFilterWeight: 0.6 };
         } else if (this.props.penType === "ballpoint") {
