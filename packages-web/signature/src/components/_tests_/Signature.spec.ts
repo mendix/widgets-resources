@@ -132,10 +132,8 @@ describe("Siganture", () => {
         const signaturePadInstance: any = signaturePad.instance();
         signaturePadInstance.canvasNode.height = 500;
         signaturePadInstance.canvasNode.width = 500;
-        const drawGrid = spyOn(signaturePadInstance, "drawGrid").and.callThrough();
-        signaturePadInstance.componentDidUpdate();
 
-        expect(drawGrid).toHaveBeenCalled();
+        expect(signaturePad.state("isGridDrawn")).toBe(true);
     });
 
     it("removes event listeners on unmounting", () => {
@@ -148,33 +146,18 @@ describe("Siganture", () => {
         expect(componentWillUnmount).toHaveBeenCalled();
     });
 
-    xit("handles sign end action after user signing", () => {
-        const signaturePad = renderCanvas(defaultProps);
-
-        const signatureInstance: any = signaturePad.instance();
-        const handleSignEnd = spyOn(signatureInstance, "handleSignEnd").and.callThrough();
-
-        signaturePad.simulate("dblclick");
-
-        expect(handleSignEnd).toHaveBeenCalled();
-        dispatchEvent(event);
-    });
-
-    it("resizes the canvas on window resize", () => {
+    it("resizes the canvas on window resize", (done) => {
         const signaturePad = renderCanvas(defaultProps);
         const signatureInstance: any = signaturePad.instance();
         const resizeCanvas = spyOn(signatureInstance, "resizeCanvas").and.callThrough();
 
         signatureInstance.eventHandle = 1;
-        signatureInstance.canvasNode = {
-            parentElement: document.createElement("div") as any,
-            getContext: document.createElement("canvas").getContext("2d") as any
-        };
 
         window.dispatchEvent(new Event("resize"));
 
         setTimeout(() => {
             expect(resizeCanvas).toHaveBeenCalled();
+            done();
         }, 1000);
     });
 });

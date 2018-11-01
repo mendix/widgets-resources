@@ -112,12 +112,12 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
 
     private signaturePadOptions = (): SignaturePad.SignaturePadOptions => {
         let options: SignaturePad.SignaturePadOptions = {};
-        if (this.props.penType === "marker") {
-            options = { maxWidth: 0.7, minWidth: 4, velocityFilterWeight: 0.9 };
+        if (this.props.penType === "fountain") {
+            options = { minWidth: 0.7, maxWidth: 2.6, velocityFilterWeight: 0.6 };
         } else if (this.props.penType === "ballpoint") {
-            options = { maxWidth: 1, minWidth: 1.5, velocityFilterWeight: 1.5 };
-        } else {
-            options = { maxWidth: 0.7, minWidth: 2.6, velocityFilterWeight: 0.6 };
+            options = { minWidth: 1.4, maxWidth: 1.5, velocityFilterWeight: 1.5 };
+        } else if (this.props.penType === "marker") {
+            options = { minWidth: 2, maxWidth: 4, velocityFilterWeight: 0.9 };
         }
         return options;
     }
@@ -190,7 +190,7 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
     private drawGrid = () => {
         const { gridColor, gridColumnSize, gridRowSize } = this.props;
 
-        if (this.canvasNode.width && this.canvasNode.height) {
+        if (this.canvasNode && this.canvasNode.width && this.canvasNode.height) {
             let x = gridColumnSize;
             let y = gridRowSize;
             const context = this.canvasNode.getContext("2d") as CanvasRenderingContext2D;
