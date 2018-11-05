@@ -134,6 +134,9 @@ export default class CalendarContainer extends Component<Container.CalendarConta
             if (this.props.defaultView === "day") {
                 mxObject.set(this.props.viewStartAttribute, dateArithmetic.startOf(this.state.startPosition, "day"));
                 mxObject.set(this.props.viewEndAttribute, dateArithmetic.endOf(this.state.startPosition, "day"));
+            } else if (this.props.defaultView === "week" || this.props.defaultView === "work_week") {
+                mxObject.set(this.props.viewStartAttribute, dateArithmetic.startOf(this.state.startPosition, "day"));
+                mxObject.set(this.props.viewEndAttribute, dateArithmetic.endOf(new Date(this.state.startPosition.setDate(this.state.startPosition.getDate() + 6)), "day"));
             } else {
                 mxObject.set(this.props.viewStartAttribute, viewStart);
                 mxObject.set(this.props.viewEndAttribute, viewEnd);
@@ -243,16 +246,46 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         return (date: Date) => window.mx.parser.formatValue(date, "datetime", { datePattern });
     }
 
-    private onRangeChange = (date: ViewDate | Date[]) => {
-        if (this.props.executeOnViewChange && this.props.mxObject) {
-            if (date) {
-                const startDate = Array.isArray(date) ? date[0] : date.start;
-                const endDate = Array.isArray(date) ? date[date.length - 1] || date[0] : date.end;
+    private onRangeChange = (date: ViewDate) => {
+        if (!this.props.executeOnViewChange) { return; }
+        if (date.start) {
+            const getCurrentMonth = () => {
+                if (date.end.getFullYear() !== date.start.getFullYear()) {
+                    if (date.end.getMonth() === 0) { return 12; }
+
+                    return 1;
+                } else if (date.end.getMonth() - date.start.getMonth() > 1) {
+                    return date.end.getMonth();
+                }
+
+                return date.end.getMonth() + 1;
+            };
+            const getCurrentYear = () => {
+                if (date.start.getFullYear() === date.end.getFullYear()) {
+                    return date.start.getFullYear();
+                } else if (date.end.getMonth() === getCurrentMonth()) {
+                    return date.end.getFullYear();
+                } else if (date.end.getMonth() > getCurrentMonth()) {
+                    return date.end.getFullYear() + 1;
+                } else {
+                    return date.end.getFullYear() - 1;
+                }
+            };
+            if (date && this.props.mxObject) {
+                const startDate = new Date(getCurrentYear(), getCurrentMonth() - 1, 1);
+                const endDate = new Date(getCurrentYear(), getCurrentMonth(), 0);
                 this.props.mxObject.set(this.props.viewStartAttribute, startDate);
                 this.props.mxObject.set(this.props.viewEndAttribute, dateArithmetic.endOf(endDate, "day"));
             }
-            this.loadEvents(this.props.mxObject);
+        } else {
+            if (date) {
+                const startDate = Array.isArray(date) ? date[0] : date.start;
+                const endDate = Array.isArray(date) ? date[date.length - 1] || date[0] : date.end;
+                this.props.mxObject.set(this.props.viewStartAttribute, dateArithmetic.startOf(startDate, "day"));
+                this.props.mxObject.set(this.props.viewEndAttribute, dateArithmetic.endOf(endDate, "day"));
+            }
         }
+        this.loadEvents(this.props.mxObject);
     }
 
     private handleOnClickEvent = (eventInfo: Container.EventInfo) => {
