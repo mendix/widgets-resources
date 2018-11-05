@@ -4,16 +4,10 @@
         position: absolute;
         left: 0;
         top: 0;
-        height: 100%;
-        width: 100%;
     }
     canvas {
         &.widget-Signature {
             padding: 0px;
-            &.disabled {
-                pointer-events: none;
-                background-color: rgb(238, 238, 238)
-            }
             &.signature-grid {
                 z-index: 0;
             }
