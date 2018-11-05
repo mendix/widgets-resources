@@ -46,7 +46,6 @@ export interface CalendarProps {
     onEventResizeAction?: (eventInfo: object) => void;
     onSelectSlotAction?: (slotInfo: object) => void;
     onEventDropAction?: (eventInfo: object) => void;
-    onViewChangeAction?: () => void;
     customViews: Container.CustomViews[];
 }
 
