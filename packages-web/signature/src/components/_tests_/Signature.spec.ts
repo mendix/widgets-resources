@@ -25,9 +25,9 @@ describe("Siganture", () => {
         heightUnit: "pixels",
         widthUnit: "percentage"
     };
+    const canvasStyle = { width: defaultProps.width, height: defaultProps.height };
 
     it("renders the structure correctly", () => {
-        const canvasStyle = { width: defaultProps.width, height: defaultProps.height };
         const canvas = renderCanvas(defaultProps);
 
         expect(canvas).toBeElement(
@@ -53,7 +53,6 @@ describe("Siganture", () => {
             widthUnit: "pixels"
         };
         const canvas = renderCanvas(canvasProps);
-        const canvasStyle = { width: defaultProps.width, height: defaultProps.height };
 
         expect(canvas).toBeElement(
             createElement("div", {},
@@ -79,7 +78,6 @@ describe("Siganture", () => {
             widthUnit: "percentage"
         };
         const canvas = renderCanvas(canvasProps);
-        const canvasStyle = { width: defaultProps.width, height: defaultProps.height };
 
         expect(canvas).toBeElement(
             createElement("div", {},
@@ -105,7 +103,6 @@ describe("Siganture", () => {
             widthUnit: "percentage"
         };
         const canvas = renderCanvas(canvasProps);
-        const canvasStyle = { width: defaultProps.width, height: defaultProps.height };
 
         expect(canvas).toBeElement(
             createElement("div", {},
@@ -124,7 +121,7 @@ describe("Siganture", () => {
         );
     });
 
-    it("renders grid if showGrid set", () => {
+    it("renders grid if showGrid is set to true", () => {
         const signaturePad = fullRenderCanvas(defaultProps);
         signaturePad.setProps({
             clearPad: true
