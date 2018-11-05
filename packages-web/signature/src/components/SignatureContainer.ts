@@ -86,8 +86,6 @@ export default class SignatureContainer extends Component<SignatureContainerProp
                 error => {
                     mx.ui.error(error.message, false);
                 });
-        } else {
-            this.setState({ alertMessage: `${this.props.friendlyId}: Please provide a signature first` });
         }
     }
 
