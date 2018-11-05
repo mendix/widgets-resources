@@ -27,7 +27,8 @@ export class preview extends Component<SignatureContainerProps> {
             saveGridToImage: this.props.saveGridToImage,
             showGrid: props.showGrid,
             widthUnit: props.widthUnit,
-            heightUnit: props.heightUnit
+            heightUnit: props.heightUnit,
+            clearPad: false
         };
     }
 }

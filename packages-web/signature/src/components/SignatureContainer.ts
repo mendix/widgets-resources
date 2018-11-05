@@ -1,6 +1,6 @@
 import { Component, createElement } from "react";
 
-import { Signature, SignatureProps, heightUnitType, penOptions, widthUnitType } from "./Signature";
+import { Signature, heightUnitType, penOptions, widthUnitType } from "./Signature";
 
 interface WrapperProps {
     mxObject?: mendix.lib.MxObject;
@@ -11,15 +11,15 @@ interface WrapperProps {
 
 export interface SignatureContainerProps extends WrapperProps {
     showSignature: string;
-    height?: number;
-    width?: number;
-    gridColumnSize?: number;
-    gridRowSize?: number;
-    gridColor?: string;
-    gridBorder?: number;
-    penColor?: string;
+    height: number;
+    width: number;
+    gridColumnSize: number;
+    gridRowSize: number;
+    gridColor: string;
+    gridBorder: number;
+    penColor: string;
     penType: penOptions;
-    showGrid?: boolean;
+    showGrid: boolean;
     widthUnit: widthUnitType;
     heightUnit: heightUnitType;
     saveGridToImage: boolean;
@@ -27,25 +27,24 @@ export interface SignatureContainerProps extends WrapperProps {
 
 interface SignatureContainerState {
     alertMessage: string;
-    base64Uri: string;
     hasSignature: boolean;
 }
 
 export default class SignatureContainer extends Component<SignatureContainerProps, SignatureContainerState> {
     private subscriptionHandles: number[] = [];
+    private base64Uri: string;
     private formHandle = 0;
     readonly state = {
         alertMessage: "",
-        base64Uri: "",
         hasSignature: false
     };
 
     render() {
         return createElement(Signature, {
-            ...this.props as SignatureProps,
+            ...this.props as SignatureContainerProps,
             divStyle: parseStyle(this.props.style),
             alertMessage: this.state.alertMessage,
-            clearPad: !this.state.hasSignature,
+            clearPad: this.state.hasSignature === false ? false : true,
             onSignEndAction: this.handleSignEnd
         });
     }
@@ -68,17 +67,18 @@ export default class SignatureContainer extends Component<SignatureContainerProp
 
     private handleSignEnd = (base64Uri: string) => {
         const { mxObject } = this.props;
+        this.base64Uri = "";
 
         if (mxObject && !this.state.hasSignature) {
             mxObject.set(this.props.showSignature, !this.state.hasSignature);
         }
-        this.setState({ base64Uri, hasSignature: true });
+        this.base64Uri = base64Uri;
     }
 
     private saveDocument = (mxObject: mendix.lib.MxObject) => {
         const { height, width } = this.props;
 
-        if (this.state.base64Uri && this.state.hasSignature) {
+        if (this.base64Uri && this.state.hasSignature) {
             mx.data.saveDocument(mxObject.getGuid(), this.generateFileName(),
                 { width, height }, this.convertUrltoBlob(), () => {
                     mx.ui.info("Image has been saved", true);
@@ -133,7 +133,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
     }
 
     private convertUrltoBlob(): Blob {
-        const base64Uri = this.state.base64Uri;
+        const base64Uri = this.base64Uri;
         const contentType = "image/png";
         const sliceSize = 512;
         const byteCharacters = atob(base64Uri.split(";base64,")[1]);

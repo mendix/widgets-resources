@@ -23,7 +23,8 @@ describe("Siganture", () => {
         alertMessage: "",
         saveGridToImage: false,
         heightUnit: "pixels",
-        widthUnit: "percentage"
+        widthUnit: "percentage",
+        clearPad: false
     };
     const canvasStyle = { width: defaultProps.width, height: defaultProps.height };
 

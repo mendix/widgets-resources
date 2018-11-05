@@ -1,12 +1,11 @@
 import { CSSProperties, PureComponent, createElement } from "react";
-import * as classNames from "classnames";
 import { Alert } from "./Alert";
 import SignaturePad, { IOptions } from "signature_pad";
 import "../ui/Signature.scss";
 
 export interface SignatureProps {
     alertMessage?: string;
-    clearPad?: boolean;
+    clearPad: boolean;
     height: number;
     width: number;
     gridColumnSize: number;
@@ -34,8 +33,6 @@ export type widthUnitType = "percentage" | "pixels";
 
 export class Signature extends PureComponent<SignatureProps, SignatureState> {
     private canvasNode: HTMLCanvasElement;
-    private signatureCanvasNode: HTMLCanvasElement;
-    private captureGridNode: HTMLCanvasElement;
     private signaturePad: SignaturePad;
     private eventHandle = 0;
     readonly state = {
@@ -54,18 +51,12 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
             }, createElement("canvas", {
                 className: "widget-Signature form-control mx-textarea-input mx-textarea signature-grid",
                 ref: this.getCanvas
-            }), createElement("canvas", {
-                className: "widget-Signature signature-capture-grid",
-                ref: this.getCaptureGridCanvas
-            }), createElement("canvas", {
-                className: classNames("widget-Signature", "signature-canvas"),
-                ref: this.getSigantureCanvas
             })));
     }
 
     componentDidMount() {
-        if (this.signatureCanvasNode && this.canvasNode) {
-            this.signaturePad = new SignaturePad(this.signatureCanvasNode, {
+        if (this.canvasNode) {
+            this.signaturePad = new SignaturePad(this.canvasNode, {
                 penColor: this.props.penColor,
                 onEnd: this.handleSignEnd,
                 ...this.signaturePadOptions()
@@ -74,8 +65,6 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
             if (this.canvasNode.parentElement) {
                 this.canvasNode.height = this.canvasNode.parentElement.clientHeight || this.props.height;
                 this.canvasNode.width = this.canvasNode.parentElement.clientWidth || this.props.width;
-                this.signatureCanvasNode.height = this.canvasNode.parentElement.clientHeight || this.props.height;
-                this.signatureCanvasNode.width = this.canvasNode.parentElement.clientWidth || this.props.width;
             }
         }
         window.addEventListener("resize", this.throttleUpdate);
@@ -85,14 +74,15 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
         if (nextProps.alertMessage !== this.props.alertMessage) {
             this.setState({ alertMessage: nextProps.alertMessage });
         }
+        if (nextProps.clearPad !== this.props.clearPad && this.props.clearPad) {
+            this.signaturePad.clear();
+            this.setState({ isGridDrawn: false });
+        }
     }
 
     componentDidUpdate() {
-        if (this.props.showGrid && !this.state.isGridDrawn) {
+        if (this.props.showGrid && this.state.isGridDrawn !== true) {
             this.drawGrid();
-        }
-        if (this.props.clearPad) {
-            this.signaturePad.clear();
         }
     }
 
@@ -123,16 +113,10 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
     }
 
     private handleSignEnd = () => {
-        const { onSignEndAction, saveGridToImage, showGrid } = this.props;
+        const { onSignEndAction } = this.props;
 
         if (onSignEndAction) {
-            if (showGrid && saveGridToImage) {
-                this.captureGrid()
-                    .then(dataUrl => onSignEndAction(dataUrl))
-                    .catch(error => this.setState({ alertMessage: error }));
-            } else {
-                onSignEndAction(this.signaturePad.toDataURL());
-            }
+            onSignEndAction(this.signaturePad.toDataURL());
         }
     }
 
@@ -140,50 +124,18 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
         this.canvasNode = node;
     }
 
-    private getSigantureCanvas = (node: HTMLCanvasElement) => {
-        this.signatureCanvasNode = node;
-    }
-
-    private getCaptureGridCanvas = (node: HTMLCanvasElement) => {
-        this.captureGridNode = node;
-    }
-
-    private captureGrid = (): Promise<string> => new Promise((resolve, reject) => {
-        if (this.captureGridNode && this.canvasNode && this.signaturePad) {
-            const context = this.captureGridNode.getContext("2d");
-            const gridImage = new Image();
-            const signaturePadImage = new Image();
-
-            gridImage.src = this.canvasNode.toDataURL();
-            signaturePadImage.src = this.signaturePad.toDataURL();
-            gridImage.onload = () => {
-                this.captureGridNode.width = gridImage.width;
-                this.captureGridNode.height = gridImage.height;
-            };
-            signaturePadImage.onload = () => {
-                context.globalAlpha = 1.0;
-                context.drawImage(gridImage, 0, 0);
-                context.globalAlpha = 0.5;
-                context.drawImage(signaturePadImage, 0, 0);
-                resolve(this.captureGridNode.toDataURL());
-            };
-            signaturePadImage.onerror = () => reject(new Error("Could not load image"));
-        }
-    })
-
     private resizeCanvas = () => {
         const ratio = Math.max(window.devicePixelRatio || 1, 1);
 
-        if (this.canvasNode) {
+        if (this.canvasNode && this.signaturePad) {
+            const data = this.signaturePad.toData();
             this.canvasNode.width = this.canvasNode.parentElement.offsetWidth * ratio;
             this.canvasNode.height = this.canvasNode.parentElement.offsetHeight * ratio;
             const context = this.canvasNode.getContext("2d") as CanvasRenderingContext2D;
             context.scale(ratio, ratio);
             context.clearRect(0, 0, this.canvasNode.width, this.canvasNode.height);
-        }
-
-        if (this.props.showGrid) {
-            this.drawGrid();
+            this.signaturePad.fromData(data);
+            this.setState({ isGridDrawn: false });
         }
     }
 
