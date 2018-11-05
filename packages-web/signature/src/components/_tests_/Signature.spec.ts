@@ -3,7 +3,6 @@ import { createElement } from "react";
 
 import { Alert } from "../Alert";
 import { Signature, SignatureProps } from "../Signature";
-import classNames = require("classnames");
 
 describe("Siganture", () => {
     const renderCanvas = (props: SignatureProps) => shallow(createElement(Signature, props));
@@ -37,12 +36,6 @@ describe("Siganture", () => {
                 createElement("div", { className: "widget-signature-wrapper", style: canvasStyle },
                     createElement("canvas", {
                         className: "widget-Signature form-control mx-textarea-input mx-textarea signature-grid"
-                    }),
-                    createElement("canvas", {
-                        className: "widget-Signature signature-capture-grid"
-                    }),
-                    createElement("canvas", {
-                        className: classNames("widget-Signature", "signature-canvas", "disabled")
                     })
                 ))
         );
@@ -61,12 +54,6 @@ describe("Siganture", () => {
                 createElement("div", { className: "widget-signature-wrapper", style: canvasStyle },
                     createElement("canvas", {
                         className: "widget-Signature form-control mx-textarea-input mx-textarea signature-grid"
-                    }),
-                    createElement("canvas", {
-                        className: "widget-Signature signature-capture-grid"
-                    }),
-                    createElement("canvas", {
-                        className: classNames("widget-Signature", "signature-canvas", "disabled")
                     })
                 ))
         );
@@ -86,12 +73,6 @@ describe("Siganture", () => {
                 createElement("div", { className: "widget-signature-wrapper", style: canvasStyle },
                     createElement("canvas", {
                         className: "widget-Signature form-control mx-textarea-input mx-textarea signature-grid"
-                    }),
-                    createElement("canvas", {
-                        className: "widget-Signature signature-capture-grid"
-                    }),
-                    createElement("canvas", {
-                        className: classNames("widget-Signature", "signature-canvas", "disabled")
                     })
                 ))
         );
@@ -111,12 +92,6 @@ describe("Siganture", () => {
                 createElement("div", { className: "widget-signature-wrapper", style: canvasStyle },
                     createElement("canvas", {
                         className: "widget-Signature form-control mx-textarea-input mx-textarea signature-grid"
-                    }),
-                    createElement("canvas", {
-                        className: "widget-Signature signature-capture-grid"
-                    }),
-                    createElement("canvas", {
-                        className: classNames("widget-Signature", "signature-canvas", "disabled")
                     })
                 ))
         );
@@ -145,7 +120,7 @@ describe("Siganture", () => {
     });
 
     it("resizes the canvas on window resize", (done) => {
-        const signaturePad = renderCanvas(defaultProps);
+        const signaturePad = fullRenderCanvas(defaultProps);
         const signatureInstance: any = signaturePad.instance();
         const resizeCanvas = spyOn(signatureInstance, "resizeCanvas").and.callThrough();
 
