@@ -63,25 +63,13 @@ export interface CalendarEvent {
     title: string;
 }
 
-interface CalendarState {
-    events?: CalendarEvent[];
-    color?: string;
-}
-
-class Calendar extends Component<CalendarProps, CalendarState> {
-    readonly state: CalendarState = { events: this.props.events };
+class Calendar extends Component<CalendarProps> {
 
     render() {
         return createElement("div", { className: classNames("widget-calendar", this.props.className), style: this.getDimensions() },
             this.renderAlert(),
             this.renderCalendar()
         );
-    }
-
-    componentWillReceiveProps(newProps: CalendarProps) {
-        if (this.state.events !== newProps.events) {
-            this.setState({ events: newProps.events });
-        }
     }
 
     private getDefaultToolbar(): Partial<Container.ButtonConfig>[] {
