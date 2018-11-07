@@ -1,10 +1,12 @@
 import { Component, ReactChild, createElement } from "react";
+import { hot } from "react-hot-loader";
 
 import { Calendar, CalendarEvent } from "./Calendar";
 import { fetchData } from "../utils/data";
 import { Container } from "../utils/namespaces";
 import * as dateMath from "date-arithmetic";
 import * as moment from "moment";
+
 export interface CalendarContainerState {
     alertMessage: ReactChild;
     events: CalendarEvent[];
@@ -19,7 +21,7 @@ interface ViewDate {
     end: Date;
 }
 
-export default class CalendarContainer extends Component<Container.CalendarContainerProps, CalendarContainerState> {
+class CalendarContainer extends Component<Container.CalendarContainerProps, CalendarContainerState> {
     private subscriptionHandles: number[] = [];
     private progressHandle?: number;
 
@@ -484,3 +486,5 @@ export const parseStyle = (style = ""): { [key: string]: string } => {
 
     return {};
 };
+
+export default hot(module)(CalendarContainer);

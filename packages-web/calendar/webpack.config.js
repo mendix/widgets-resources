@@ -1,10 +1,15 @@
 const path = require("path");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 const package = require("./package");
 const widgetName = package.widgetName;
 const name = package.widgetName.toLowerCase();
+
+const packageName = process.env.npm_package_name;
+const mxHost = process.env.npm_package_config_mendixHost || "http://localhost:8080";
+const developmentPort = process.env.npm_package_config_developmentPort || "3000";
 
 const widgetConfig = {
     entry: `./src/components/${widgetName}Container.ts`,
@@ -14,10 +19,26 @@ const widgetConfig = {
         libraryTarget: "umd",
     },
     devServer: {
-        port: 4000,
+        port: developmentPort,
         proxy: [ {
+            target: mxHost,
             context: [ "**", `!/widgets/com/mendix/widget/custom/${name}/${widgetName}.js` ],
-            target: "http://localhost:8080"
+            ws: true,
+            onError: function(err, req, res) {
+                if (res && res.writeHead) {
+                    res.writeHead(500, {
+                        "Content-Type": "text/plain"
+                    });
+                    if (err.code === "ECONNREFUSED") {
+                        res.end("Please make sure that the Mendix server is running at " + mxHost
+                            + " or change the configuration \n "
+                            + "> npm config set " + packageName + ":mendixhost http://host:port");
+                    } else {
+                        res.end("Error connecting to Mendix server"
+                        + "\n " + JSON.stringify(err, null, 2));
+                    }
+                }
+            }
         } ],
         stats: "errors-only"
     },
@@ -28,7 +49,16 @@ const widgetConfig = {
         }
     },
     module: {
-        rules: [ { test: /\.ts$/, use: "ts-loader" },
+        rules: [
+            {
+                test: /\.ts$/,
+                use: {
+                    loader: "ts-loader",
+                    options: {
+                        transpileOnly: true
+                    }
+                }
+            },
             { test: /\.(css|scss)$/, use: [
                 "style-loader", "css-loader", "sass-loader"
             ] },
@@ -37,6 +67,7 @@ const widgetConfig = {
     mode: "development",
     externals: [ "react", "react-dom" ],
     plugins: [
+        new ForkTsCheckerWebpackPlugin(),
         new CopyWebpackPlugin(
             [ {
                 from: "src/**/*.xml",
