@@ -44,12 +44,21 @@ ToolbarButton.defaultProps = { buttonStyle: "default", renderMode: "button", ico
 
 export const Button: SFC<ButtonProps> = ({ title, className, caption, onClick, buttonStyle, active, icon, iconPosition }) =>
     createElement("button",
-        { className: classNames("btn", `btn-${buttonStyle}`, className, { active }), title, onClick },
+        {
+            className: classNames("btn", `btn-${buttonStyle}`, className, { active }),
+            title,
+            onClick
+        },
         addIcon(icon, iconPosition, caption)
     );
 
 const Link: SFC<ButtonProps> = ({ title, className, caption, onClick, active, icon, iconPosition }) =>
     createElement("span",
-        { className: classNames("btn btn-link", className, { active }), title, onClick },
-        addIcon(icon, iconPosition, createElement("a", {}, caption))
+        {
+            className: classNames("mx-link", className, { active }),
+            tabindex: "0",
+            title,
+            onClick
+        },
+        addIcon(icon, iconPosition, createElement("a", { tabindex: "-1" }, caption))
     );
