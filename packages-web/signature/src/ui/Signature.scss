@@ -8,14 +8,8 @@
     canvas {
         &.widget-Signature {
             padding: 0px;
-            &.signature-grid {
-                z-index: 0;
-            }
             &.signature-canvas {
                 z-index: 1;
-            }
-            &.signature-capture-grid {
-                opacity: 0;
             }
         }
     }

@@ -105,6 +105,7 @@ describe("Siganture", () => {
         const signaturePadInstance: any = signaturePad.instance();
         signaturePadInstance.canvasNode.height = 500;
         signaturePadInstance.canvasNode.width = 500;
+        signaturePadInstance.componentDidUpdate();
 
         expect(signaturePad.state("isGridDrawn")).toBe(true);
     });
