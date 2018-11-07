@@ -23,18 +23,18 @@
             <category>Canvas</category>
             <description>Store the grid lines as part of the signature image</description>
         </property>
-        <property key="gridColor" type="string" defaultValue="#777">
-            <caption>Grid color</caption>
+        <property key="gridColor" type="string" defaultValue="#D7D7D7">
+            <caption>Default grid color</caption>
             <category>Canvas</category>
             <description/>
         </property>
         <property key="gridColumnSize" type="integer" defaultValue="50">
-            <caption>Grid X</caption>
+            <caption>Grid cell height</caption>
             <category>Canvas</category>
             <description>Grid column size</description>
         </property>
         <property key="gridRowSize" type="integer" defaultValue="50">
-            <caption>Grid Y</caption>
+            <caption>Grid cell width</caption>
             <category>Canvas</category>
             <description>Grid row size</description>
         </property>
