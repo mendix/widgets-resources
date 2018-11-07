@@ -7,6 +7,8 @@ import * as BigCalendar from "react-big-calendar";
 import * as moment from "moment";
 import * as withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import CustomToolbar from "./Toolbar";
+import { SizeContainer } from "./SizeContainer";
+
 import { CalendarLoader } from "./CalendarLoader";
 
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
@@ -66,7 +68,15 @@ export interface CalendarEvent {
 class Calendar extends Component<CalendarProps> {
 
     render() {
-        return createElement("div", { className: classNames("widget-calendar", this.props.className), style: this.getDimensions() },
+        return createElement(SizeContainer,
+            {
+                className: classNames("widget-calendar", this.props.className),
+                style: this.props.style,
+                widthUnit: this.props.widthUnit,
+                width: this.props.width,
+                heightUnit: this.props.heightUnit,
+                height: this.props.height
+            },
             this.renderAlert(),
             this.renderCalendar()
         );
@@ -165,23 +175,6 @@ class Calendar extends Component<CalendarProps> {
             : this.props.customViews;
 
         return toolbarProps.map(customView => ({ ...customView, onClickToolbarButton: this.onRangeChange }));
-    }
-
-    private getDimensions = (): CSSProperties => {
-        const style: CSSProperties = {
-            width: this.props.widthUnit === "percentage" ? `${this.props.width}%` : `${this.props.width}px`
-        };
-        if (this.props.heightUnit === "percentageOfWidth") {
-            style.paddingBottom = this.props.widthUnit === "percentage"
-                ? `${this.props.height}%`
-                : `${this.props.width / 2}px`;
-        } else if (this.props.heightUnit === "pixels") {
-            style.height = `${this.props.height}px`;
-        } else if (this.props.heightUnit === "percentageOfParent") {
-            style.height = `${this.props.height}%`;
-        }
-
-        return style;
     }
 
     private allDayAccessor = (event: Container.ViewOptions) => event.allDay;
