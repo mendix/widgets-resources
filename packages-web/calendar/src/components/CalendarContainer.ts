@@ -3,7 +3,7 @@ import { Component, ReactChild, createElement } from "react";
 import { Calendar, CalendarEvent } from "./Calendar";
 import { fetchData } from "../utils/data";
 import { Container } from "../utils/namespaces";
-import * as dateArithmetic from "date-arithmetic";
+import * as dateMath from "date-arithmetic";
 import * as moment from "moment";
 export interface CalendarContainerState {
     alertMessage: ReactChild;
@@ -21,6 +21,7 @@ interface ViewDate {
 
 export default class CalendarContainer extends Component<Container.CalendarContainerProps, CalendarContainerState> {
     private subscriptionHandles: number[] = [];
+    private progressHandle?: number;
 
     readonly state: CalendarContainerState = {
         alertMessage: "",
@@ -94,27 +95,24 @@ export default class CalendarContainer extends Component<Container.CalendarConta
 
     private setCalendarEvents = (mxObjects: mendix.lib.MxObject[]) => {
         if (mxObjects) {
-            const events = mxObjects.map(mxObject => {
-                return {
-                    title: mxObject.get(this.props.titleAttribute) as string || " ",
-                    allDay: mxObject.get(this.props.allDayAttribute) as boolean,
-                    start: new Date(mxObject.get(this.props.startAttribute) as number),
-                    end: new Date(mxObject.get(this.props.endAttribute) as number),
-                    color: mxObject.get(this.props.eventColor) as string,
-                    guid: mxObject.getGuid()
-                };
-            });
-            this.setState({ events, eventCache: mxObjects });
+            const events = mxObjects.map(mxObject => ({
+                title: mxObject.get(this.props.titleAttribute) as string || " ",
+                allDay: mxObject.get(this.props.allDayAttribute) as boolean,
+                start: new Date(mxObject.get(this.props.startAttribute) as number),
+                end: new Date(mxObject.get(this.props.endAttribute) as number),
+                color: mxObject.get(this.props.eventColor) as string,
+                guid: mxObject.getGuid()
+            }));
+            this.setState({ events, eventCache: mxObjects, loading: false });
         }
     }
 
     private getStartPosition = (mxObject: mendix.lib.MxObject) => {
-        if (mxObject) {
+        if (mxObject && mxObject.get(this.props.startDateAttribute) !== "") {
             this.setState({
-                loading: false,
                 startPosition: this.props.startDateAttribute
-                    ? new Date(mxObject.get(this.props.startDateAttribute) as number) :
-                    new Date()
+                    ? new Date(mxObject.get(this.props.startDateAttribute) as number)
+                    : new Date()
             });
         }
     }
@@ -132,14 +130,21 @@ export default class CalendarContainer extends Component<Container.CalendarConta
             const viewStart = new Date(this.state.startPosition.getFullYear(), this.state.startPosition.getMonth(), 1);
             const viewEnd = new Date(this.state.startPosition.getFullYear(), this.state.startPosition.getMonth() + 1, 0);
             if (this.props.defaultView === "day") {
-                mxObject.set(this.props.viewStartAttribute, dateArithmetic.startOf(this.state.startPosition, "day"));
-                mxObject.set(this.props.viewEndAttribute, dateArithmetic.endOf(this.state.startPosition, "day"));
+                mxObject.set(this.props.viewStartAttribute, dateMath.startOf(this.state.startPosition, "day"));
+                mxObject.set(this.props.viewEndAttribute, dateMath.endOf(this.state.startPosition, "day"));
             } else if (this.props.defaultView === "week" || this.props.defaultView === "work_week") {
-                mxObject.set(this.props.viewStartAttribute, dateArithmetic.startOf(this.state.startPosition, "day"));
-                mxObject.set(this.props.viewEndAttribute, dateArithmetic.endOf(new Date(this.state.startPosition.setDate(this.state.startPosition.getDate() + 6)), "day"));
+                mxObject.set(
+                    this.props.viewStartAttribute,
+                    dateMath.startOf(
+                        this.state.startPosition,
+                        "week",
+                        [ window.mx.session.sessionData.locale.firstDayOfWeek ]
+                    )
+                );
+                mxObject.set(this.props.viewEndAttribute, dateMath.endOf(new Date(this.state.startPosition.setDate(this.state.startPosition.getDate() + 6)), "day"));
             } else {
-                mxObject.set(this.props.viewStartAttribute, viewStart);
-                mxObject.set(this.props.viewEndAttribute, viewEnd);
+                mxObject.set(this.props.viewStartAttribute, dateMath.startOf(viewStart, "month"));
+                mxObject.set(this.props.viewEndAttribute, dateMath.endOf(viewEnd, "month"));
             }
         }
     }
@@ -159,7 +164,13 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 microflow: this.props.dataSourceMicroflow,
                 mxform: this.props.mxform,
                 nanoflow: this.props.dataSourceNanoflow
-            }).then(this.setCalendarEvents);
+            }).then(mxObjects => {
+                this.setCalendarEvents(mxObjects);
+                if (this.progressHandle) {
+                    mx.ui.hideProgress(this.progressHandle);
+                    this.progressHandle = undefined;
+                }
+            });
         }
     }
 
@@ -275,15 +286,18 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 const startDate = new Date(getCurrentYear(), getCurrentMonth() - 1, 1);
                 const endDate = new Date(getCurrentYear(), getCurrentMonth(), 0);
                 this.props.mxObject.set(this.props.viewStartAttribute, startDate);
-                this.props.mxObject.set(this.props.viewEndAttribute, dateArithmetic.endOf(endDate, "day"));
+                this.props.mxObject.set(this.props.viewEndAttribute, dateMath.endOf(endDate, "day"));
             }
         } else {
             if (date) {
                 const startDate = Array.isArray(date) ? date[0] : date.start;
                 const endDate = Array.isArray(date) ? date[date.length - 1] || date[0] : date.end;
-                this.props.mxObject.set(this.props.viewStartAttribute, dateArithmetic.startOf(startDate, "day"));
-                this.props.mxObject.set(this.props.viewEndAttribute, dateArithmetic.endOf(endDate, "day"));
+                this.props.mxObject.set(this.props.viewStartAttribute, dateMath.startOf(startDate, "day"));
+                this.props.mxObject.set(this.props.viewEndAttribute, dateMath.endOf(endDate, "day"));
             }
+        }
+        if (!this.progressHandle) {
+            this.progressHandle = mx.ui.showProgress();
         }
         this.loadEvents(this.props.mxObject);
     }
@@ -307,8 +321,8 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         mx.data.create({
             entity: this.props.eventEntity,
             callback: (newEvent) => {
-                newEvent.set(this.props.startAttribute, slotInfo.start);
-                newEvent.set(this.props.endAttribute, slotInfo.end);
+                newEvent.set(this.props.startAttribute, dateMath.startOf(slotInfo.start, "day"));
+                newEvent.set(this.props.endAttribute, dateMath.endOf(slotInfo.end, "day"));
                 if (this.props.mxObject && this.props.newEventContextPath && this.props.newEventContextPath.split("/")[1] === this.props.mxObject.getEntity()) {
                     newEvent.set(this.props.newEventContextPath.split("/")[0], this.props.mxObject.getGuid());
                 } else {
