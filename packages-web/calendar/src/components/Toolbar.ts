@@ -16,8 +16,12 @@ export default class CustomToolbar extends Toolbar {
         let activeViews: Container.ButtonConfig[] = this.props.customViews;
         const countViews = activeViews.filter(customView => isView(customView)).length;
         if (countViews === 1) {
+            if (activeViews.length <= 1) {
+                return null;
+            }
             activeViews = activeViews.filter(customView => !isView(customView));
         }
+
         const leftButton = this.filterPosition(activeViews, "left");
         const centerButton = this.filterPosition(activeViews, "center");
         const rightButton = this.filterPosition(activeViews, "right");
@@ -34,9 +38,13 @@ export default class CustomToolbar extends Toolbar {
     }
 
     private createGroupButton(views: Container.ButtonConfig[], position: Style.Position): ReactNode {
-        return createElement("div", { className: classNames(`align-${position}`, { "btn-group": true }) },
-            views.map(view => this.createToolbarElement(view))
-        );
+        if (views.length > 0) {
+            return createElement("div", { className: classNames(`align-${position}`, { "btn-group": true }) },
+                views.map(view => this.createToolbarElement(view))
+            );
+        }
+
+        return null;
     }
 
     private createToolbarElement(view: Container.ButtonConfig) {

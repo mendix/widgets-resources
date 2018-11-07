@@ -2,6 +2,8 @@
 
 .widget-calendar {
     min-height: 350px;
+    margin-bottom: $form-group-margin-bottom;
+
     .rbc-calendar {
         width: 100%;
         height: 100%;
@@ -10,67 +12,50 @@
     .rbc-event {
         min-height: 20px;
     }
-}
 
-.btn-link:hover {
-    background-color: transparent !important;
-    border: transparent !important;
-}
-
-.btn-link {
-    border-top-width: 0px !important;
-    border-right-width: 0px !important;
-    border-bottom-width: 0px !important;
-    border-left-width: 0px !important;
-}
-
-.btn-group .btn {
-    min-height: 38px;
-}
-
-.rbc-toolbar {
-    .btn {
-        padding: 0.6em 1em;
+    .mx-link {
+        padding: 9.4px 12px;
     }
-}
 
-.calendar-label {
-    font-size: 16px;
-}
+    .calendar-label {
+        font-size: 16px;
+    }
 
-.align-right {
-    float: right;
-}
+    .calendar-toolbar {
+        text-align: center;
+        align-items: center;
+        padding-bottom: 10px;
+    }
 
-.calendar-toolbar {
-    text-align: center;
-    align-items: center;
-    padding-bottom: 10px;
-}
+    .align-right {
+        float: right;
+    }
 
-.align-left {
-    float: left;
-}
+    .align-left {
+        float: left;
+    }
 
-.rbc-current-time-indicator {
-    background-color: $brand-danger;
-}
+    .rbc-current-time-indicator {
+        background-color: $brand-danger;
+    }
 
-.rbc-day-slot .rbc-event {
-    border-top-color: $border-color-default;
-    border-right-color: $border-color-default;
-    border-bottom-color: $border-color-default;
-    border-left-color: $border-color-default;
-}
+    .rbc-day-slot .rbc-event {
+        border-top-color: $border-color-default;
+        border-right-color: $border-color-default;
+        border-bottom-color: $border-color-default;
+        border-left-color: $border-color-default;
+    }
 
-.rbc-off-range-bg {
-    background-color: $color-default-lighter;
-}
+    .rbc-off-range-bg {
+        background-color: $color-default-lighter;
+    }
 
-.rbc-today {
-    background-color: $color-primary-lighter;
-}
+    .rbc-today {
+        background-color: $color-primary-lighter;
+    }
 
-.rbc-event {
-    background-color: #0595DB;
+    .rbc-event {
+        background-color: $brand-primary;
+    }
+
 }
