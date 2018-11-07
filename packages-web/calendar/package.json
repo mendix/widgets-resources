@@ -5,8 +5,7 @@
   "description": "Display and manage calendar events",
   "copyright": "Mendix BV",
   "scripts": {
-    "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec \"grunt",
-    "start:dev": "webpack-dev-server --open",
+    "start": "webpack-dev-server --hot --open",
     "emit": "tsc",
     "pretest": "tsc && npm run lint && npm run build",
     "test": "npm run test:unit && npm run test:conditional",
@@ -22,6 +21,10 @@
     "updateProject": "node ./node_modules/mendix-widget-build-script/dist/UpdateMxProject.js",
     "deployApp": "node ./node_modules/mendix-widget-build-script/dist/DeployMxApp.js",
     "deployAndTest": "npm run deploy && npm run test:e2e"
+  },
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
   },
   "pre-commit": [
     "emit",
@@ -59,6 +62,7 @@
     "enzyme-adapter-react-16": "^1.6.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^2.0.0",
+    "fork-ts-checker-webpack-plugin": "^0.4.14",
     "grunt": "^1.0.3",
     "grunt-check-dependencies": "^1.0.0",
     "grunt-contrib-clean": "^2.0.0",
