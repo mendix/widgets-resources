@@ -49,7 +49,7 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
                 className: "widget-signature-wrapper",
                 style: this.getStyle(this.props)
             }, createElement("canvas", {
-                className: "widget-Signature form-control mx-textarea-input mx-textarea signature-grid",
+                className: "widget-Signature form-control mx-textarea-input mx-textarea signature-canvas",
                 ref: this.getCanvas
             })));
     }
@@ -63,8 +63,8 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
             });
 
             if (this.canvasNode.parentElement) {
-                this.canvasNode.height = this.canvasNode.parentElement.clientHeight || this.props.height;
-                this.canvasNode.width = this.canvasNode.parentElement.clientWidth || this.props.width;
+                this.canvasNode.height = this.canvasNode.parentElement.offsetHeight;
+                this.canvasNode.width = this.canvasNode.parentElement.offsetWidth;
             }
         }
         window.addEventListener("resize", this.throttleUpdate);
@@ -125,7 +125,7 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
     }
 
     private resizeCanvas = () => {
-        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        const ratio = 1;
 
         if (this.canvasNode && this.signaturePad) {
             const data = this.signaturePad.toData();
