@@ -44,7 +44,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
             ...this.props as SignatureContainerProps,
             divStyle: parseStyle(this.props.style),
             alertMessage: this.state.alertMessage,
-            clearPad: this.state.hasSignature === false ? false : true,
+            clearPad: this.state.hasSignature ? true : false,
             onSignEndAction: this.handleSignEnd
         });
     }
