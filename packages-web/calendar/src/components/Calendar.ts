@@ -162,7 +162,7 @@ class Calendar extends Component<CalendarProps> {
     }
 
     private defaultView() {
-        if (this.props.viewOption === "standard" && this.props.defaultView === "work_week" || this.props.defaultView === "agenda") {
+        if (this.props.viewOption === "standard" && (this.props.defaultView === "work_week" || this.props.defaultView === "agenda")) {
             return "month";
         }
 
