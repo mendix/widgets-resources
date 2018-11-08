@@ -13,26 +13,16 @@
         min-height: 20px;
     }
 
-    .mx-link {
-        padding: 9.4px 12px;
-    }
-
     .calendar-label {
         font-size: 16px;
     }
 
     .calendar-toolbar {
-        text-align: center;
+        display: flex;
         align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
         padding-bottom: 10px;
-    }
-
-    .align-right {
-        float: right;
-    }
-
-    .align-left {
-        float: left;
     }
 
     .rbc-current-time-indicator {
