@@ -28,6 +28,7 @@ export type penOptions = "fountain" | "ballpoint" | "marker";
 
 export class Signature extends PureComponent<SignatureProps, SignatureState> {
     private canvasNode: HTMLCanvasElement;
+    private GridNode: HTMLCanvasElement;
     private signaturePad: SignaturePad;
     private eventHandle = 0;
     readonly state = {
@@ -44,23 +45,27 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
                 className: "widget-signature-wrapper",
                 style: { height: this.props.height, width: this.props.width, ...this.props.divStyle }
             }, createElement("canvas", {
+                className: "widget-Signature form-control mx-textarea-input mx-textarea signature-grid",
+                ref: this.getGridCanvas
+            }), createElement("canvas", {
                 className: "widget-Signature form-control mx-textarea-input mx-textarea signature-canvas",
                 ref: this.getCanvas
-            })));
+            })
+        ));
     }
 
     componentDidMount() {
-        if (this.canvasNode) {
+        if (this.canvasNode && this.GridNode) {
             this.signaturePad = new SignaturePad(this.canvasNode, {
                 penColor: this.props.penColor,
                 onEnd: this.handleSignEnd,
                 ...this.signaturePadOptions()
             });
 
-            if (this.canvasNode.parentElement) {
-                this.canvasNode.height = this.canvasNode.parentElement.offsetHeight;
-                this.canvasNode.width = this.canvasNode.parentElement.offsetWidth;
-            }
+            this.canvasNode.height = this.props.height;
+            this.canvasNode.width = this.props.width;
+            this.GridNode.height = this.props.height;
+            this.GridNode.width = this.props.width;
         }
         window.addEventListener("resize", this.throttleUpdate);
     }
@@ -115,45 +120,45 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
         }
     }
 
+    private getGridCanvas = (node: HTMLCanvasElement) => {
+        this.GridNode = node;
+    }
+
     private getCanvas = (node: HTMLCanvasElement) => {
         this.canvasNode = node;
     }
 
     private resizeCanvas = () => {
-        const ratio = 1;
-
-        if (this.canvasNode && this.signaturePad) {
+        if (this.GridNode && this.signaturePad) {
             const data = this.signaturePad.toData();
-            this.canvasNode.width = this.canvasNode.parentElement.offsetWidth * ratio;
-            this.canvasNode.height = this.canvasNode.parentElement.offsetHeight * ratio;
-            const context = this.canvasNode.getContext("2d") as CanvasRenderingContext2D;
-            context.scale(ratio, ratio);
-            context.clearRect(0, 0, this.canvasNode.width, this.canvasNode.height);
+            const context = this.GridNode.getContext("2d") as CanvasRenderingContext2D;
+            context.scale(1, 1);
+            context.clearRect(0, 0, this.GridNode.width, this.GridNode.height);
             this.signaturePad.fromData(data);
             this.setState({ isGridDrawn: false });
         }
     }
 
     private drawGrid = () => {
-        const { gridColor, gridColumnSize, gridRowSize } = this.props;
+        const { gridColor, gridColumnSize, gridRowSize, gridBorder } = this.props;
 
-        if (this.canvasNode && this.canvasNode.width && this.canvasNode.height) {
+        if (this.GridNode && this.GridNode.width && this.GridNode.height) {
             let x = gridColumnSize;
             let y = gridRowSize;
-            const context = this.canvasNode.getContext("2d") as CanvasRenderingContext2D;
+            const context = this.GridNode.getContext("2d") as CanvasRenderingContext2D;
             context.beginPath();
 
-            for (; x < this.canvasNode.width; x += gridColumnSize) {
+            for (; x < this.GridNode.width; x += gridColumnSize) {
                 context.moveTo(x, 0);
-                context.lineTo(x, this.canvasNode.height);
+                context.lineTo(x, this.GridNode.height);
             }
 
-            for (; y < this.canvasNode.height; y += gridRowSize) {
+            for (; y < this.GridNode.height; y += gridRowSize) {
                 context.moveTo(0, y);
-                context.lineTo(this.canvasNode.width, y);
+                context.lineTo(this.GridNode.width, y);
             }
 
-            context.lineWidth = this.props.gridBorder;
+            context.lineWidth = gridBorder;
             context.strokeStyle = gridColor;
             context.stroke();
             this.setState({ isGridDrawn: true });
