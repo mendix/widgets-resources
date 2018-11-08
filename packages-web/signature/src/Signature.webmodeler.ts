@@ -24,10 +24,7 @@ export class preview extends Component<SignatureContainerProps> {
             gridBorder: props.gridBorder,
             penColor: props.penColor,
             penType: props.penType,
-            saveGridToImage: this.props.saveGridToImage,
             showGrid: props.showGrid,
-            widthUnit: props.widthUnit,
-            heightUnit: props.heightUnit,
             clearPad: false
         };
     }

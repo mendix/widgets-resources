@@ -20,71 +20,12 @@ describe("Siganture", () => {
         showGrid: true,
         onSignEndAction: jasmine.any(Function),
         alertMessage: "",
-        saveGridToImage: false,
-        heightUnit: "pixels",
-        widthUnit: "percentage",
         clearPad: false
     };
     const canvasStyle = { width: defaultProps.width, height: defaultProps.height };
 
     it("renders the structure correctly", () => {
         const canvas = renderCanvas(defaultProps);
-
-        expect(canvas).toBeElement(
-            createElement("div", {},
-                createElement(Alert, { bootstrapStyle: "danger" }, defaultProps.alertMessage),
-                createElement("div", { className: "widget-signature-wrapper", style: canvasStyle },
-                    createElement("canvas", {
-                        className: "widget-Signature form-control mx-textarea-input mx-textarea signature-grid"
-                    })
-                ))
-        );
-    });
-
-    it("with pixels renders the structure correctly", () => {
-        const canvasProps: SignatureProps = {
-            ...defaultProps,
-            widthUnit: "pixels"
-        };
-        const canvas = renderCanvas(canvasProps);
-
-        expect(canvas).toBeElement(
-            createElement("div", {},
-                createElement(Alert, { bootstrapStyle: "danger" }, defaultProps.alertMessage),
-                createElement("div", { className: "widget-signature-wrapper", style: canvasStyle },
-                    createElement("canvas", {
-                        className: "widget-Signature form-control mx-textarea-input mx-textarea signature-grid"
-                    })
-                ))
-        );
-    });
-
-    it("with percentage of parent units renders the structure correctly", () => {
-        const canvasProps: SignatureProps = {
-            ...defaultProps,
-            heightUnit: "percentageOfParent",
-            widthUnit: "percentage"
-        };
-        const canvas = renderCanvas(canvasProps);
-
-        expect(canvas).toBeElement(
-            createElement("div", {},
-                createElement(Alert, { bootstrapStyle: "danger" }, defaultProps.alertMessage),
-                createElement("div", { className: "widget-signature-wrapper", style: canvasStyle },
-                    createElement("canvas", {
-                        className: "widget-Signature form-control mx-textarea-input mx-textarea signature-grid"
-                    })
-                ))
-        );
-    });
-
-    it("with percentage of width and height units renders the structure correctly", () => {
-        const canvasProps: SignatureProps = {
-            ...defaultProps,
-            heightUnit: "percentageOfWidth",
-            widthUnit: "percentage"
-        };
-        const canvas = renderCanvas(canvasProps);
 
         expect(canvas).toBeElement(
             createElement("div", {},
