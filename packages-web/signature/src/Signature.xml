@@ -5,11 +5,6 @@
     <icon>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAehJREFUeNpi/J82k4Hh/38Ghn//UPAD5e0M99V2MUxeHcAAAlM2bLD5w8BQ9I6B4eaT//8rGaCAhQENPFDZwXAfqBkZ/P//Xy3GwcF4r4lJIOOlS6/u79y5Fyi8B8WAy7xbGS7zbGWQVGbE0Pzx40fPPXv2TFi3fv21f93d739DNYMA46VCX4bL3JvhGiS1GJE0M9h//cpQqqoT6P30ycOPvvHXZhT/+FGhAvIyFDAha0a1GaLZ3a/K++/vf69PHT17WVr0d8U1RlQXMhHSfPvm1deb1m24+es3g62sxD8MtSzEav4H1XsdqGAdsgFff0CdAnQZCzOD3IOrPHaByZHee3ftfHnh7JnbMM0Hz4AwFhfADGBmYmD8+48xpaBpf21xhunC778YbgmJMLYdufAfrBkn8DCD4LZUxp5nV5f9zwliXO5nzehpos7IQAqQAnk/w59xlZQIoxeQrQrECkAsDcRiQCwIxDxAzA4NN7DpvHL6QJ02cWA2KAkAsTgQiwKxMBALADEfEHMDMScQs0E1g2KOEaTZuHw3A7NaZA8Dn7zBL3Z+iS9A9ldGRsZvQMnvQPYPIPsnkP0byP4DZP8Fsv8B2f+BbAYFr1JISgSaEgWkl0G9QjKbiYFCAHKBCzSgyAGvAAIMAHD/1dmmASuxAAAAAElFTkSuQmCC</icon>
 
     <properties>
-        <property key="showGrid" type="boolean" defaultValue="true">
-            <caption>Show background grid</caption>
-            <category>Canvas</category>
-            <description/>
-        </property>
         <property key="showSignature" type="attribute" required="false">
             <caption>Has signature</caption>
             <category>Canvas</category>
@@ -18,29 +13,39 @@
                 <attributeType name="Boolean" />
             </attributeTypes>
         </property>
-        <property key="saveGridToImage" type="boolean" defaultValue="false">
-            <caption>Capture grid</caption>
+        <property key="width" type="integer" defaultValue="500">
+            <caption>Width</caption>
             <category>Canvas</category>
-            <description>Store the grid lines as part of the signature image</description>
+            <description>Height of the canvas(px)</description>
+        </property>
+        <property key="height" type="integer" defaultValue="500">
+            <caption>Height</caption>
+            <category>Canvas</category>
+            <description>Width of the canvas(px)</description>
+        </property>
+        <property key="showGrid" type="boolean" defaultValue="true">
+            <caption>Show background grid</caption>
+            <category>Grid</category>
+            <description/>
         </property>
         <property key="gridColor" type="string" defaultValue="#D7D7D7">
             <caption>Default grid color</caption>
-            <category>Canvas</category>
+            <category>Grid</category>
             <description/>
         </property>
         <property key="gridColumnSize" type="integer" defaultValue="50">
             <caption>Grid cell height</caption>
-            <category>Canvas</category>
+            <category>Grid</category>
             <description>Grid column size</description>
         </property>
         <property key="gridRowSize" type="integer" defaultValue="50">
             <caption>Grid cell width</caption>
-            <category>Canvas</category>
+            <category>Grid</category>
             <description>Grid row size</description>
         </property>
         <property key="gridBorder" type="integer" defaultValue="1">
             <caption>Grid border width</caption>
-            <category>Canvas</category>
+            <category>Grid</category>
             <description>Grid border line width(px)</description>
         </property>
         <property key="penType" type="enumeration" defaultValue="fountain">
@@ -57,35 +62,6 @@
             <caption>Color</caption>
             <category>Pen</category>
             <description>Color of the line e.g. green, #00FF00, rgb(0,255,0)</description>
-        </property>
-        <property key="widthUnit" type="enumeration" defaultValue="pixels">
-            <caption>Width unit</caption>
-            <category>Appearance</category>
-            <description/>
-            <enumerationValues>
-                <enumerationValue key="pixels">Pixels</enumerationValue>
-                <enumerationValue key="percentage">Percentage</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="width" type="integer" defaultValue="100">
-            <caption>Width</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
-        <property key="heightUnit" type="enumeration" defaultValue="pixels">
-            <caption>Height unit</caption>
-            <category>Appearance</category>
-            <description>'Percentage of width' is the aspect ratio, 'Pixels' is absolute. Warning: the 'Percentage of parent' only works when the parent has an absolute height, else it will not display</description>
-            <enumerationValues>
-                <enumerationValue key="pixels">Pixels</enumerationValue>
-                <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
-                <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="height" type="integer" defaultValue="75">
-            <caption>Height</caption>
-            <category>Appearance</category>
-            <description/>
         </property>
     </properties>
 </widget>

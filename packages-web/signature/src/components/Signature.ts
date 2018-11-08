@@ -1,4 +1,4 @@
-import { CSSProperties, PureComponent, createElement } from "react";
+import { PureComponent, createElement } from "react";
 import { Alert } from "./Alert";
 import SignaturePad, { IOptions } from "signature_pad";
 import "../ui/Signature.scss";
@@ -16,10 +16,7 @@ export interface SignatureProps {
     penColor: string;
     showGrid: boolean;
     onSignEndAction?: (imageUrl?: string) => void;
-    widthUnit: widthUnitType;
-    heightUnit: heightUnitType;
     divStyle?: object;
-    saveGridToImage: boolean;
 }
 
 export interface SignatureState {
@@ -28,8 +25,6 @@ export interface SignatureState {
 }
 
 export type penOptions = "fountain" | "ballpoint" | "marker";
-export type heightUnitType = "percentageOfWidth" | "pixels" | "percentageOfParent";
-export type widthUnitType = "percentage" | "pixels";
 
 export class Signature extends PureComponent<SignatureProps, SignatureState> {
     private canvasNode: HTMLCanvasElement;
@@ -47,7 +42,7 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
                 this.state.alertMessage),
             createElement("div", {
                 className: "widget-signature-wrapper",
-                style: this.getStyle(this.props)
+                style: { height: this.props.height, width: this.props.width, ...this.props.divStyle }
             }, createElement("canvas", {
                 className: "widget-Signature form-control mx-textarea-input mx-textarea signature-canvas",
                 ref: this.getCanvas
@@ -163,22 +158,5 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
             context.stroke();
             this.setState({ isGridDrawn: true });
         }
-    }
-
-    private getStyle(props: SignatureProps): object {
-        const style: CSSProperties = {
-            width: props.widthUnit === "percentage" ? `${props.width}%` : `${props.width}px`
-        };
-        if (props.heightUnit === "percentageOfWidth") {
-            style.paddingBottom = props.widthUnit === "percentage"
-                ? `${props.height}%`
-                : `${props.width / 2}px`;
-        } else if (props.heightUnit === "pixels") {
-            style.height = `${props.height}px`;
-        } else if (props.heightUnit === "percentageOfParent") {
-            style.height = `${props.height}%`;
-        }
-
-        return { ...style, ...props.divStyle };
     }
 }
