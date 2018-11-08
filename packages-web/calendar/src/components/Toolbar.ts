@@ -38,13 +38,9 @@ export default class CustomToolbar extends Toolbar {
     }
 
     private createGroupButton(views: Container.ButtonConfig[], position: Style.Position): ReactNode {
-        if (views.length > 0) {
-            return createElement("div", { className: classNames(`align-${position}`, { "btn-group": true }) },
-                views.map(view => this.createToolbarElement(view))
-            );
-        }
-
-        return null;
+        return createElement("div", { className: classNames(`align-${position}`, { "btn-group": true }) },
+            views.map(view => this.createToolbarElement(view))
+        );
     }
 
     private createToolbarElement(view: Container.ButtonConfig) {
