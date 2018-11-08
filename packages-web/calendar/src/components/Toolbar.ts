@@ -78,7 +78,11 @@ export default class CustomToolbar extends Toolbar {
             };
         }
 
-        return () => this.props.onViewChange(view.customView);
+        return () => {
+            if (this.props.view !== view.customView) {
+                this.props.onViewChange(view.customView);
+            }
+        };
     }
 
     private getIcon(view: Container.ButtonConfig) {

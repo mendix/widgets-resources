@@ -267,33 +267,11 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
     private onRangeChange = (date: ViewDate) => {
         if (!this.props.executeOnViewChange) { return; }
         if (date.start) {
-            const getCurrentMonth = () => {
-                if (date.end.getFullYear() !== date.start.getFullYear()) {
-                    if (date.end.getMonth() === 0) { return 12; }
+            const middle = new Date((date.start.getTime() + date.end.getTime()) / 2);
 
-                    return 1;
-                } else if (date.end.getMonth() - date.start.getMonth() > 1) {
-                    return date.end.getMonth();
-                }
-
-                return date.end.getMonth() + 1;
-            };
-            const getCurrentYear = () => {
-                if (date.start.getFullYear() === date.end.getFullYear()) {
-                    return date.start.getFullYear();
-                } else if (date.end.getMonth() === getCurrentMonth()) {
-                    return date.end.getFullYear();
-                } else if (date.end.getMonth() > getCurrentMonth()) {
-                    return date.end.getFullYear() + 1;
-                } else {
-                    return date.end.getFullYear() - 1;
-                }
-            };
             if (date && this.props.mxObject) {
-                const startDate = new Date(getCurrentYear(), getCurrentMonth() - 1, 1);
-                const endDate = new Date(getCurrentYear(), getCurrentMonth(), 0);
-                this.props.mxObject.set(this.props.viewStartAttribute, startDate);
-                this.props.mxObject.set(this.props.viewEndAttribute, dateMath.endOf(endDate, "day"));
+                this.props.mxObject.set(this.props.viewStartAttribute, dateMath.startOf(middle, "month"));
+                this.props.mxObject.set(this.props.viewEndAttribute, dateMath.endOf(middle, "month"));
             }
         } else {
             if (date) {
