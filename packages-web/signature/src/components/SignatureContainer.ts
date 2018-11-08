@@ -1,6 +1,6 @@
 import { Component, createElement } from "react";
 
-import { Signature, heightUnitType, penOptions, widthUnitType } from "./Signature";
+import { Signature, penOptions } from "./Signature";
 
 interface WrapperProps {
     mxObject?: mendix.lib.MxObject;
@@ -20,9 +20,6 @@ export interface SignatureContainerProps extends WrapperProps {
     penColor: string;
     penType: penOptions;
     showGrid: boolean;
-    widthUnit: widthUnitType;
-    heightUnit: heightUnitType;
-    saveGridToImage: boolean;
 }
 
 interface SignatureContainerState {
@@ -69,8 +66,8 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         const { mxObject } = this.props;
         this.base64Uri = "";
 
-        if (mxObject && !this.state.hasSignature) {
-            mxObject.set(this.props.showSignature, !this.state.hasSignature);
+        if (mxObject && this.state.hasSignature === false) {
+            mxObject.set(this.props.showSignature, true);
         }
         this.base64Uri = base64Uri;
     }
