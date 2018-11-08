@@ -86,7 +86,6 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         if (nextProps.mxObject) {
             if (!this.state.alertMessage) {
                 this.loadEvents(nextProps.mxObject);
-                this.getStartPosition(nextProps.mxObject);
             }
             this.resetSubscriptions(nextProps.mxObject);
         } else {
@@ -95,60 +94,20 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
 
     }
 
-    private setCalendarEvents = (mxObjects: mendix.lib.MxObject[]) => {
-        if (mxObjects) {
-            const events = mxObjects.map(mxObject => ({
-                title: mxObject.get(this.props.titleAttribute) as string || " ",
-                allDay: mxObject.get(this.props.allDayAttribute) as boolean,
-                start: new Date(mxObject.get(this.props.startAttribute) as number),
-                end: new Date(mxObject.get(this.props.endAttribute) as number),
-                color: mxObject.get(this.props.eventColor) as string,
-                guid: mxObject.getGuid()
-            }));
-            this.setState({ events, eventCache: mxObjects, loading: false });
-        }
-    }
-
-    private getStartPosition = (mxObject: mendix.lib.MxObject) => {
-        if (mxObject && mxObject.get(this.props.startDateAttribute) !== "") {
-            this.setState({
-                startPosition: this.props.startDateAttribute
-                    ? new Date(mxObject.get(this.props.startDateAttribute) as number)
-                    : new Date()
-            });
-        }
-    }
-
     private isReadOnly(): boolean {
         return !this.props.mxObject || !this.props.editable || this.props.readOnly;
     }
 
-    private setViewDates(mxObject: mendix.lib.MxObject) {
-        if (
-            this.props.executeOnViewChange
-            && mxObject.get(this.props.viewStartAttribute) === ""
-            && mxObject.get(this.props.viewEndAttribute) === ""
-        ) {
-            const viewStart = new Date(this.state.startPosition.getFullYear(), this.state.startPosition.getMonth(), 1);
-            const viewEnd = new Date(this.state.startPosition.getFullYear(), this.state.startPosition.getMonth() + 1, 0);
-            if (this.props.defaultView === "day") {
-                mxObject.set(this.props.viewStartAttribute, dateMath.startOf(this.state.startPosition, "day"));
-                mxObject.set(this.props.viewEndAttribute, dateMath.endOf(this.state.startPosition, "day"));
-            } else if (this.props.defaultView === "week" || this.props.defaultView === "work_week") {
-                mxObject.set(
-                    this.props.viewStartAttribute,
-                    dateMath.startOf(
-                        this.state.startPosition,
-                        "week",
-                        [ window.mx.session.sessionData.locale.firstDayOfWeek ]
-                    )
-                );
-                mxObject.set(this.props.viewEndAttribute, dateMath.endOf(new Date(this.state.startPosition.setDate(this.state.startPosition.getDate() + 6)), "day"));
-            } else {
-                mxObject.set(this.props.viewStartAttribute, dateMath.startOf(viewStart, "month"));
-                mxObject.set(this.props.viewEndAttribute, dateMath.endOf(viewEnd, "month"));
-            }
+    private getStartPosition = (mxObject: mendix.lib.MxObject) => {
+        if (mxObject && mxObject.get(this.props.startDateAttribute) !== "") {
+            const startPosition = this.props.startDateAttribute
+                ? new Date(mxObject.get(this.props.startDateAttribute) as number)
+                : new Date();
+
+            return startPosition;
         }
+
+        return new Date();
     }
 
     private loadEvents = (mxObject: mendix.lib.MxObject) => {
@@ -176,11 +135,62 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         }
     }
 
+    private setViewDates(mxObject: mendix.lib.MxObject) {
+        const startPosition = this.getStartPosition(mxObject);
+        if (
+            this.props.executeOnViewChange
+            && mxObject.get(this.props.viewStartAttribute) === ""
+            && mxObject.get(this.props.viewEndAttribute) === ""
+        ) {
+            const viewStart = new Date(startPosition.getFullYear(), startPosition.getMonth(), 1);
+            const viewEnd = new Date(startPosition.getFullYear(), startPosition.getMonth() + 1, 0);
+            if (this.props.defaultView === "day") {
+                mxObject.set(this.props.viewStartAttribute, dateMath.startOf(startPosition, "day"));
+                mxObject.set(this.props.viewEndAttribute, dateMath.endOf(startPosition, "day"));
+            } else if (this.props.defaultView === "week" || this.props.defaultView === "work_week") {
+                mxObject.set(
+                    this.props.viewStartAttribute,
+                    dateMath.startOf(
+                        startPosition,
+                        "week",
+                        [ window.mx.session.sessionData.locale.firstDayOfWeek ]
+                    )
+                );
+                this.props.defaultView === "week"
+                    ? mxObject.set(this.props.viewEndAttribute, dateMath.endOf(new Date(startPosition.setDate(startPosition.getDate() + 6)), "day"))
+                    : mxObject.set(this.props.viewEndAttribute, dateMath.endOf(new Date(startPosition.setDate(startPosition.getDate() + 4)), "day"));
+            } else {
+                mxObject.set(this.props.viewStartAttribute, dateMath.startOf(viewStart, "month"));
+                mxObject.set(this.props.viewEndAttribute, dateMath.endOf(viewEnd, "month"));
+            }
+        }
+        this.setState({ startPosition });
+    }
+
+    private setCalendarEvents = (mxObjects: mendix.lib.MxObject[]) => {
+        if (mxObjects) {
+            const events = mxObjects.map(mxObject => ({
+                title: mxObject.get(this.props.titleAttribute) as string || " ",
+                allDay: mxObject.get(this.props.allDayAttribute) as boolean,
+                start: new Date(mxObject.get(this.props.startAttribute) as number),
+                end: new Date(mxObject.get(this.props.endAttribute) as number),
+                color: mxObject.get(this.props.eventColor) as string,
+                guid: mxObject.getGuid()
+            }));
+            this.setState({ events, eventCache: mxObjects, loading: false });
+        }
+    }
+
     private resetSubscriptions = (mxObject: mendix.lib.MxObject) => {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
         this.subscriptionHandles = [];
 
         if (mxObject) {
+            this.subscriptionHandles.push(window.mx.data.subscribe({
+                guid: mxObject.getGuid(),
+                attr: this.props.startDateAttribute,
+                callback: () => this.getStartPosition(mxObject)
+            }));
             this.subscriptionHandles.push(window.mx.data.subscribe({
                 entity: this.props.eventEntity,
                 callback: () => this.loadEvents(mxObject)
@@ -200,11 +210,6 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
                 callback: () => this.loadEvents(mxObject),
                 guid: mxObject.getGuid()
             })));
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                guid: mxObject.getGuid(),
-                attr: this.props.startDateAttribute,
-                callback: () => this.getStartPosition(mxObject)
-            }));
         }
     }
 
@@ -424,7 +429,7 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         if (props.view === "custom" && props.customViews.length <= 0) {
             errorMessages.push(`${props.friendlyId}: View is set to "custom" but there is no view selected`);
         }
-        if (props.view === "standard" && props.defaultView === "work_week" || props.defaultView === "agenda") {
+        if (props.view === "standard" && (props.defaultView === "work_week" || props.defaultView === "agenda")) {
             errorMessages.push(`${props.friendlyId}: ${props.defaultView} is only available in custom view`);
         }
         if (errorMessages.length) {
