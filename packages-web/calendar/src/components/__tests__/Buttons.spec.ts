@@ -25,8 +25,8 @@ describe("ToolbarButton", () => {
         toolbarButton.setProps({ renderMode: "link" });
 
         expect(toolbarButton).toBeElement(
-            createElement("span", { className: "btn btn-link", onClick: () => jasmine.any(Function) },
-                createElement("a")
+            createElement("span", { className: "mx-link", tabindex: "0", onClick: () => jasmine.any(Function) },
+                createElement("a", { tabindex: "-1" })
             )
         );
     });
