@@ -45,10 +45,10 @@ export class Signature extends PureComponent<SignatureProps, SignatureState> {
                 className: "widget-signature-wrapper",
                 style: { height: this.props.height, width: this.props.width, ...this.props.divStyle }
             }, createElement("canvas", {
-                className: "widget-Signature form-control mx-textarea-input mx-textarea signature-grid",
+                className: "widget-signature form-control mx-textarea-input mx-textarea signature-grid",
                 ref: this.getGridCanvas
             }), createElement("canvas", {
-                className: "widget-Signature form-control mx-textarea-input mx-textarea signature-canvas",
+                className: "widget-signature form-control mx-textarea-input mx-textarea signature-canvas",
                 ref: this.getCanvas
             })
         ));
