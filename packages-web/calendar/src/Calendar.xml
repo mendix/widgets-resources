@@ -81,7 +81,7 @@
         <property key="executeOnViewChange" type="boolean" defaultValue="false">
             <caption>Refresh data source on view change</caption>
             <category>Data source</category>
-            <description>For data source microflow and nanoflow, enable to retrieve a sub set of large data set based on view start and end attribute</description>
+            <description>For data source microflow, enable to retrieve a sub set of large data set based on view start and end attribute</description>
         </property>
         <property key="viewStartAttribute" type="attribute" isPath="optional" pathType="reference" required="false" allowNonPersistableEntities="true">
             <caption>View start attribute</caption>
