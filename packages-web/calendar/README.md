@@ -2,7 +2,7 @@
 [![Dependency Status](https://david-dm.org/mendixlabs/calendar.svg)](https://david-dm.org/mendixlabs/calendar)
 [![Dev Dependency Status](https://david-dm.org/mendixlabs/calendar.svg#info=devDependencies)](https://david-dm.org/mendixlabs/calendar#info=devDependencies)
 [![codecov](https://codecov.io/gh/mendixlabs/calendar/branch/master/graph/badge.svg)](https://codecov.io/gh/mendixlabs/calendar)
-![badge](https://img.shields.io/badge/mendix-7.14.1-green.svg)
+![badge](https://img.shields.io/badge/mendix-7.20.0-green.svg)
 
 
 # Calendar
@@ -12,6 +12,7 @@ Display and manage calendar events
  * Add and edit calendar events
  * Drag and drop calendar events
  * Change calendar event color
+ * Retrieve events based on selected date ranges
 
 ## Dependencies
 * Mendix 7.15.1
@@ -27,6 +28,8 @@ Display and manage calendar events
 * Select the event entity
 * For data source `Microflow`, select a `Data source microflow` and for data source `Nanoflow`, select a `Data source nanoflow`
 * Select attributes to provide the event `Title`, `start date`, `end date`, `color` and a boolean attribute to determine whether the event should be considered `all day`
+* Setting up `Refresh data source on view`, retrieve data by microflow (Data source = Microflow) and add a constraint based on the `View start attribute` and the `View end attribute`. *E.g. [End > $CalenderView/StartAttribute and Start < $CalenderView/EndAttribute]*
+When navigating through the calendar, only event that lie with in the `View start attribute` and `View end attribute` dates will be retrieved.
 
 ![CalendarProperties](/assets/Appearance.png)
 
