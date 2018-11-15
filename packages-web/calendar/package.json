@@ -1,7 +1,7 @@
 {
   "name": "calendar",
   "widgetName": "Calendar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Display and manage calendar events",
   "copyright": "Mendix BV",
   "scripts": {
