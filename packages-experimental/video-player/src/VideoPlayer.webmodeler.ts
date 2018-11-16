@@ -44,7 +44,7 @@ export class preview extends Component<VideoPlayerWebModelerProps, {}> {
             url: props.urlAttribute,
             staticUrl: props.urlValue,
             className: props.class,
-            autoStart: props.autoStart,
+            autoStart: false,
             showControls: props.showControls
         };
     }
