@@ -1,5 +1,5 @@
-import {Component, createElement, ReactElement} from "react";
-import {Alert} from "./Alert";
+import { Component, ReactElement, createElement } from "react";
+import { Alert } from "./Alert";
 
 export interface VideoPlayerProps {
     url: string;
@@ -15,12 +15,11 @@ const extractProvider = (url: string) => {
     if (url)
         if (url.includes("youtube.com") || url.includes("youtu.be")) {
             return "youtube";
-        }
-        else if (url.includes("vimeo.com")) {
+        } else if (url.includes("vimeo.com")) {
             return "vimeo";
         }
     return "";
-}
+};
 
 export interface VideoPlayerState {
     alertMessage?: string;
@@ -30,7 +29,7 @@ export const validateUrl = (url: string) => {
     if (/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g.test(url))
         return url;
     return null;
-}
+};
 
 export class VideoPlayer extends Component <VideoPlayerProps, VideoPlayerState> {
 
@@ -39,15 +38,15 @@ export class VideoPlayer extends Component <VideoPlayerProps, VideoPlayerState> 
 
         this.state = {
             alertMessage: ""
-        }
+        };
 
         this.renderVideoPlayer = this.renderVideoPlayer.bind(this);
         this.renderJwPlayerContent = this.renderJwPlayerContent.bind(this);
     }
 
     render() {
-        let url = this.generateUrl(this.props.url || this.props.staticUrl);
-        return createElement("div", {className: "video-player-container"},
+        const url = this.generateUrl(this.props.url || this.props.staticUrl);
+        return createElement("div", { className: "video-player-container" },
             createElement(Alert, {
                 bootstrapStyle: "danger",
                 className: "widget-badge-alert",
@@ -62,7 +61,7 @@ export class VideoPlayer extends Component <VideoPlayerProps, VideoPlayerState> 
                 controls: this.props.showControls,
                 height: "100%",
                 width: "100%",
-                style: {display: !extractProvider(url) ? 'block' : 'none', backgroundColor: '#999'},
+                style: { display: !extractProvider(url) ? "block" : "none", backgroundColor: "#999" },
                 autoPlay: this.props.autoStart
             },
             createElement("source", {
@@ -76,30 +75,30 @@ export class VideoPlayer extends Component <VideoPlayerProps, VideoPlayerState> 
             className: this.props.className,
             src: extractProvider(url) ? url : "",
             frameBorder: 0,
-            style: {display: extractProvider(url) ? 'block' : 'none'},
+            style: { display: extractProvider(url) ? "block" : "none" },
             allowFullScreen: true
-        })
+        });
     }
 
-    private generateUrl (url: string) {
-        let provider = extractProvider(url);
-        let attributes = `${this.props.autoStart ? '&autoplay=1': '&autoplay=0'}${this.props.showControls ? '&controls=1': '&controls=0'}`
+    private generateUrl(url: string) {
+        const provider = extractProvider(url);
+        const attributes = `?${this.props.autoStart ? "autoplay=1" : "autoplay=0"}${this.props.showControls ? "&controls=1" : "&controls=0"}`;
         try {
             switch (provider) {
                 case "youtube":
                     if (url.includes("youtube.com/embed/"))
                         return url;
                     if (url.includes("youtu.be/") || url.includes("youtube.com/v/")) {
-                        let urlSplit = url.split("/");
+                        const urlSplit = url.split("/");
                         if (urlSplit.length > 0) {
-                            let id = urlSplit[urlSplit.length - 1];
+                            const id = urlSplit[urlSplit.length - 1];
                             return `https://www.youtube.com/embed/${id}${attributes}`;
                         }
                     }
                     if (url.includes("youtube.com/watch?v=")) {
-                        let urlSplit = url.split("watch?v=");
-                        if (urlSplit.length > 0) {
-                            let id = urlSplit[urlSplit.length - 1];
+                        const urlYoutubeSplit = url.split("watch?v=");
+                        if (urlYoutubeSplit.length > 0) {
+                            const id = urlYoutubeSplit[urlYoutubeSplit.length - 1];
                             return `https://www.youtube.com/embed/${id}${attributes}`;
                         }
                     }
@@ -108,28 +107,27 @@ export class VideoPlayer extends Component <VideoPlayerProps, VideoPlayerState> 
                     if (url.includes("player.vimeo.com"))
                         return url;
 
-                    let urlSplit = url.split("/");
-                    if (urlSplit.length > 0) {
-                        let id = urlSplit[urlSplit.length - 1];
+                    const urlVimeoSplit = url.split("/");
+                    if (urlVimeoSplit.length > 0) {
+                        const id = urlVimeoSplit[urlVimeoSplit.length - 1];
                         if (isFinite(Number(id)))
-                            return `https://player.vimeo.com/video/${id}`;
+                            return `https://player.vimeo.com/video/${id}${attributes}`;
                     }
                     break;
             }
         } catch (e) {
-
+            //
         }
         return url;
     }
 
     componentWillReceiveProps(nextProps: VideoPlayerProps) {
-        let url = nextProps.url || nextProps.staticUrl;
-        this.setState({alertMessage: ""});
+        const url = nextProps.url || nextProps.staticUrl;
+        this.setState({ alertMessage: "" });
         if (!url)
-            this.setState({alertMessage: "Please provide an URL"});
+            this.setState({ alertMessage: "Please provide an URL" });
         if (url && !validateUrl(url))
-            this.setState({alertMessage: "Please provide a valid URL"});
+            this.setState({ alertMessage: "Please provide a valid URL" });
     }
 
 }
-

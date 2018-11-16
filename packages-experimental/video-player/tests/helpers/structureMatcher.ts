@@ -1,3 +1,4 @@
+// tslint:disable
 import * as assign from "core-js/fn/object/assign";
 import * as keys from "core-js/fn/object/keys";
 import * as from from "core-js/fn/array/from";
@@ -6,7 +7,7 @@ import * as find from "core-js/fn/array/find";
 import { ReactChild, ReactElement, isValidElement } from "react";
 
 export type ElementStructure = string | jasmine.Any | ElementJson;
-export type ElementJson = { type: string, props: { [name: string]: any }, children: ElementStructure[] };
+export interface ElementJson { type: string, props: { [name: string]: any }, children: ElementStructure[] }
 
 export function findDifference(expected: ElementStructure | ElementStructure[], actual: ElementStructure | ElementStructure[], strict: boolean): string {
     if (Array.isArray(expected)) {
@@ -36,7 +37,7 @@ export function findDifference(expected: ElementStructure | ElementStructure[], 
         return `${msgPrefix} type '${expectedJson.type}'`;
     }
 
-    for (let prop in expectedJson.props) {
+    for (const prop in expectedJson.props) {
         const difference = compareProp(prop);
         if (difference) return difference;
     }
@@ -129,14 +130,14 @@ export function findDifference(expected: ElementStructure | ElementStructure[], 
         if (typeof structure === "string" || structure == null) return `text '${structure}'`;
         if (Array.isArray(structure)) return "[" + structure.map(toString).join(", ") + "]";
         const json = structure as ElementJson;
-        return "element " + json.type + ("className" in json.props ? "." + json.props["className"].trim().replace(/\s+/g, ".") : "");
+        return "element " + json.type + ("className" in json.props ? "." + json.props.className.trim().replace(/\s+/g, ".") : "");
     }
 }
 
 export function toElementStructure(node: any): ElementStructure | ElementStructure[] {
     if (node == null) return "";
     if (typeof node === "object" && "nodes" in node) {
-        var elements = node.getElements();
+        const elements = node.getElements();
         node = elements.length > 1 ? elements : elements[0];
     }
 
@@ -144,7 +145,7 @@ export function toElementStructure(node: any): ElementStructure | ElementStructu
     if (node instanceof HTMLElement) return domToStructure(node);
     return reactToStructure(node as ReactChild | jasmine.Any);
 
-    function domToStructure(domNode: HTMLElement): ElementStructure{
+    function domToStructure(domNode: HTMLElement): ElementStructure {
         const type = domNode.nodeName.toLowerCase();
         if (type === "#text") {
             return domNode.nodeValue || "";
@@ -155,8 +156,8 @@ export function toElementStructure(node: any): ElementStructure | ElementStructu
             .filter(attr => attr.nodeName.indexOf("data-react") === -1)
             .forEach(attr => props[attr.nodeName] = attr.nodeValue || "");
         if ("class" in props) {
-            props["className"] = props["class"];
-            delete props["class"];
+            props.className = props.class;
+            delete props.class;
         }
 
         const children = from(domNode.childNodes)
@@ -183,7 +184,7 @@ export function toElementStructure(node: any): ElementStructure | ElementStructu
         const children: ReactChild[] = Array.isArray(props.children) ? props.children : (props.children ? [ props.children ] : []);
         delete props.children;
 
-        for (let propName in props) {
+        for (const propName in props) {
             const propValue = props[propName];
             if (typeof propValue === "object" && propValue && "_model" in propValue) {
                 props[propName] = "Element " + propValue.typeName + " (" + propValue.id + ")";

@@ -1,7 +1,7 @@
-import {Component, createElement, CSSProperties} from "react";
-import {VideoPlayerProps, VideoPlayer, validateUrl} from "./components/VideoPlayer";
-import {Alert} from "./components/Alert";
-import {HeightUnitType, SizeContainer, WidthUnitType} from "./components/SizeContainer";
+import { CSSProperties, Component, createElement } from "react";
+import { VideoPlayer, VideoPlayerProps, validateUrl } from "./components/VideoPlayer";
+import { Alert } from "./components/Alert";
+import { HeightUnitType, SizeContainer, WidthUnitType } from "./components/SizeContainer";
 import classNames = require("classnames");
 
 declare function require(name: string): string;
@@ -20,12 +20,12 @@ interface VideoPlayerWebModelerProps {
     autoStart: boolean;
     showControls: boolean;
 }
-
+// tslint:disable-next-line class-name
 export class preview extends Component<VideoPlayerWebModelerProps, {}> {
     render() {
         const message = this.validateProps(this.props);
         if (message)
-            return createElement(Alert, {bootstrapStyle: "danger", message, className: "widget-badge-alert"});
+            return createElement(Alert, { bootstrapStyle: "danger", message, className: "widget-badge-alert" });
         return createElement(SizeContainer,
             {
                 className: classNames("video-player-container", this.props.class),

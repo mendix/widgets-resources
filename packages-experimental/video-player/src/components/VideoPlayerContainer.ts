@@ -1,7 +1,7 @@
-import {Component, createElement, CSSProperties} from "react";
-import {HeightUnitType, SizeContainer, WidthUnitType} from "./SizeContainer";
+import { CSSProperties, Component, createElement } from "react";
+import { HeightUnitType, SizeContainer, WidthUnitType } from "./SizeContainer";
 import classNames = require("classnames");
-import {VideoPlayer} from "./VideoPlayer";
+import { VideoPlayer } from "./VideoPlayer";
 
 export interface VideoPlayerContainerProps {
     "class"?: string;
@@ -34,7 +34,7 @@ export default class VideoPlayerContainer extends Component<VideoPlayerContainer
                 staticUrl: this.props.urlValue || "",
                 className: this.props.class,
                 autoStart: this.props.autoStart,
-                showControls: this.props.showControls,
+                showControls: this.props.showControls
             }));
     }
 
