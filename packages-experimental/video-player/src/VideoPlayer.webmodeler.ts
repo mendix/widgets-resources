@@ -11,6 +11,8 @@ interface VideoPlayerWebModelerProps {
     style?: CSSProperties;
     urlAttribute: string;
     urlValue: string;
+    posterAttribute?: string;
+    posterImage?: string;
 
     widthUnit: WidthUnitType;
     width: number;
@@ -43,9 +45,13 @@ export class preview extends Component<VideoPlayerWebModelerProps, {}> {
         return {
             url: props.urlAttribute,
             staticUrl: props.urlValue,
+            poster: props.posterAttribute,
+            staticPoster: props.posterImage,
             className: props.class,
             autoStart: false,
-            showControls: props.showControls
+            showControls: props.showControls,
+            loop: false,
+            muted: true
         };
     }
 

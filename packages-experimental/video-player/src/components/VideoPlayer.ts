@@ -6,9 +6,13 @@ export interface VideoPlayerProps {
     staticUrl: string;
     className?: string;
     style?: object;
+    poster?: string;
+    staticPoster?: string;
 
     autoStart: boolean;
     showControls: boolean;
+    loop: boolean;
+    muted: boolean;
 }
 
 const extractProvider = (url: string) => {
@@ -62,7 +66,10 @@ export class VideoPlayer extends Component <VideoPlayerProps, VideoPlayerState> 
                 height: "100%",
                 width: "100%",
                 style: { display: !extractProvider(url) ? "block" : "none", backgroundColor: "#999" },
-                autoPlay: this.props.autoStart
+                autoPlay: this.props.autoStart,
+                muted: this.props.muted,
+                loop: this.props.loop,
+                poster: this.props.poster || this.props.staticPoster
             },
             createElement("source", {
                 src: this.props.url || this.props.staticUrl,
@@ -82,7 +89,7 @@ export class VideoPlayer extends Component <VideoPlayerProps, VideoPlayerState> 
 
     private generateUrl(url: string) {
         const provider = extractProvider(url);
-        const attributes = `?${this.props.autoStart ? "autoplay=1" : "autoplay=0"}${this.props.showControls ? "&controls=1" : "&controls=0"}`;
+        const attributes = this.getUrlAttributes();
         try {
             switch (provider) {
                 case "youtube":
@@ -119,6 +126,16 @@ export class VideoPlayer extends Component <VideoPlayerProps, VideoPlayerState> 
             //
         }
         return url;
+    }
+
+    private getUrlAttributes() {
+        const attributes = `?
+        ${this.props.autoStart ? "autoplay=1" : "autoplay=0"}
+        ${this.props.showControls ? "&controls=1" : "&controls=0"}
+        ${this.props.muted ? "&muted=1" : "&muted=0"}
+        ${this.props.loop ? "&loop=1" : "&loop=0"}
+        `;
+        return attributes;
     }
 
     componentWillReceiveProps(nextProps: VideoPlayerProps) {

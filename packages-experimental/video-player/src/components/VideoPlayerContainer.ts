@@ -3,11 +3,15 @@ import { HeightUnitType, SizeContainer, WidthUnitType } from "./SizeContainer";
 import classNames = require("classnames");
 import { VideoPlayer } from "./VideoPlayer";
 
+import "../ui/VideoPlayer.css";
+
 export interface VideoPlayerContainerProps {
     "class"?: string;
     style?: CSSProperties;
     urlAttribute?: PluginWidget.EditableValue<string>;
     urlValue?: string;
+    posterAttribute?: PluginWidget.EditableValue<string>;
+    posterImage?: string;
 
     widthUnit: WidthUnitType;
     width: number;
@@ -16,6 +20,8 @@ export interface VideoPlayerContainerProps {
 
     autoStart: boolean;
     showControls: boolean;
+    loop: boolean;
+    muted: boolean;
 }
 
 export default class VideoPlayerContainer extends Component<VideoPlayerContainerProps> {
@@ -33,8 +39,12 @@ export default class VideoPlayerContainer extends Component<VideoPlayerContainer
                 url: this.props.urlAttribute ? this.props.urlAttribute.value! : "",
                 staticUrl: this.props.urlValue || "",
                 className: this.props.class,
+                poster: this.props.posterAttribute ? this.props.posterAttribute.value! : "",
+                staticPoster: this.props.posterImage,
                 autoStart: this.props.autoStart,
-                showControls: this.props.showControls
+                showControls: this.props.showControls,
+                loop: this.props.loop,
+                muted: this.props.muted
             }));
     }
 
