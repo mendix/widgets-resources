@@ -14,14 +14,14 @@ const widgetConfig = {
         libraryTarget: "umd"
     },
     resolve: {
-        extensions: [ ".ts", ".js" ],
+        extensions: [ ".ts", ".tsx", ".js" ],
         alias: {
-            "tests": path.resolve(__dirname, "./tests")
+            tests: path.resolve(__dirname, "./tests")
         }
     },
     module: {
         rules: [
-            { test: /\.ts$/, use: "ts-loader" },
+            { test: /\.tsx?$/, use: "ts-loader" },
             { test: /signature_pad.m.js$/, use: [ {
                     loader: "babel-loader",
                     options: { presets: [ "@babel/preset-env" ] }
@@ -57,11 +57,11 @@ const previewConfig = {
         libraryTarget: "commonjs"
     },
     resolve: {
-        extensions: [ ".ts", ".js" ]
+        extensions: [ ".ts", ".tsx", ".js" ]
     },
     module: {
         rules: [
-            { test: /\.ts$/, loader: "ts-loader", options: {
+            { test: /\.tsx?$/, loader: "ts-loader", options: {
                 compilerOptions: {
                     "module": "CommonJS",
                 }

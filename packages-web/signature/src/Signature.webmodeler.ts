@@ -1,6 +1,7 @@
 import { Component, createElement } from "react";
 import { Signature, SignatureProps } from "./components/Signature";
 import { SignatureContainerProps } from "./components/SignatureContainer";
+import Utils from "./utils/Utils";
 
 declare function require(name: string): string;
 
@@ -16,16 +17,20 @@ export class preview extends Component<SignatureContainerProps> {
 
     private transformProps(props: SignatureContainerProps): SignatureProps {
         return {
+            className: props.class,
+            heightUnit: props.heightUnit,
             height: props.height,
+            widthUnit: props.widthUnit,
             width: props.width,
-            gridColumnSize: props.gridColumnSize,
-            gridRowSize: props.gridRowSize,
-            gridColor: props.gridColor,
-            gridBorder: props.gridBorder,
+            gridCellWidth: props.gridCellHeight,
+            gridCellHeight: props.gridCellWidth,
+            gridBorderColor: props.gridBorderColor,
+            gridBorderWidth: props.gridBorderWidth,
             penColor: props.penColor,
             penType: props.penType,
             showGrid: props.showGrid,
-            clearPad: false
+            clearSignature: false,
+            wrapperStyle: Utils.parseStyle(props.style)
         };
     }
 }
@@ -36,10 +41,10 @@ export function getPreviewCss() {
 
 export function getVisibleProperties(valueMap: SignatureContainerProps, visibilityMap: VisibilityMap<SignatureContainerProps>) {
     if (!valueMap.showGrid) {
-        visibilityMap.gridColor = false;
-        visibilityMap.gridBorder = false;
-        visibilityMap.gridColumnSize = false;
-        visibilityMap.gridRowSize = false;
+        visibilityMap.gridBorderColor = false;
+        visibilityMap.gridBorderWidth = false;
+        visibilityMap.gridCellHeight = false;
+        visibilityMap.gridCellWidth = false;
     }
 
     return visibilityMap;
