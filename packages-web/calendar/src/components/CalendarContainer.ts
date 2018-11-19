@@ -199,17 +199,19 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
                 guid: mxObject.getGuid(),
                 callback: () => this.loadEvents(mxObject)
             }));
-            [
-                this.props.allDayAttribute,
-                this.props.titleAttribute,
-                this.props.startAttribute,
-                this.props.endAttribute,
-                this.props.eventColor
-            ].forEach(attr => this.subscriptionHandles.push(window.mx.data.subscribe({
-                attr,
-                callback: () => this.loadEvents(mxObject),
-                guid: mxObject.getGuid()
-            })));
+            if (mxObject.getEntity() === this.props.eventEntity) {
+                [
+                    this.props.allDayAttribute,
+                    this.props.titleAttribute,
+                    this.props.startAttribute,
+                    this.props.endAttribute,
+                    this.props.eventColor
+                ].forEach(attr => this.subscriptionHandles.push(window.mx.data.subscribe({
+                    attr,
+                    callback: () => this.loadEvents(mxObject),
+                    guid: mxObject.getGuid()
+                })));
+            }
         }
     }
 
@@ -311,7 +313,7 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
                 if (this.props.mxObject && this.props.newEventContextPath && this.props.newEventContextPath.split("/")[1] === this.props.mxObject.getEntity()) {
                     newEvent.set(this.props.newEventContextPath.split("/")[0], this.props.mxObject.getGuid());
                 } else {
-                    window.logger.error("Event entity should not be same as context entity");
+                    window.logger.warn("Event entity should not be same as context entity");
                 }
                 this.executeSlotAction(newEvent);
             },
@@ -362,18 +364,14 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
             window.mx.ui.action(microflow, {
                 context,
                 origin: mxform,
-                error: error => window.mx.ui.error(
-                    `Error while executing microflow: ${microflow}: ${error.message}`
-                )
+                error: error => window.mx.ui.error(`Error while executing microflow: ${microflow}: ${error.message}`)
             });
         } else if (action === "callNanoflow" && nanoflow.nanoflow) {
             window.mx.data.callNanoflow({
                 nanoflow,
                 origin: mxform,
                 context,
-                error: error => window.mx.ui.error(
-                    `An error occurred while executing the nanoflow: ${error.message}`
-                )
+                error: error => window.mx.ui.error(`An error occurred while executing the nanoflow: ${error.message}`)
             });
         }
     }

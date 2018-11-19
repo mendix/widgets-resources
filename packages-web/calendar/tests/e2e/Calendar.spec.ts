@@ -10,7 +10,7 @@ describe("Calendar", () => {
         const doesExist = HomePage.monthView.isExisting();
 
         expect(doesExist).toBeTruthy();
-    });
+    }, 30000);
 
     it("should execute an action when a calendar event is clicked", () => {
         OnClickEventPage.open();
