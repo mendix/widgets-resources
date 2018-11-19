@@ -18,6 +18,36 @@ after_success:
 cache:
   directories:
   - node_modules
+env:sudo: required
+language: node_js
+node_js:
+- "8"
+addons:
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
+before_install:
+- npm i -g npm
+- npm install grunt-cli -g
+- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+- sudo dpkg -i google-chrome*.deb
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- wget -q -O - http://opensource.wandisco.com/wandisco-debian.gpg | sudo apt-key add -
+- sudo sh -c "echo 'deb http://opensource.wandisco.com/debian/ wheezy svn17' > /etc/apt/sources.list.d/wandisco-subversion.list"
+- sudo apt-get -qq update
+- sudo apt-get install -y --allow-downgrades subversion=1.7.22-1+WANdisco libsvn1=1.7.22-1+WANdisco
+- svn --version
+- npm --version
+script: travis_wait 30 npm test
+after_success:
+- bash <(curl -s https://codecov.io/bash)
+cache:
+  directories:
+  - node_modules
 env:
   global:
   - MX_APP_NAME=signature101
@@ -34,3 +64,4 @@ deploy:
   on:
     repo: $TRAVIS_REPO_SLUG
     tags: true
+
