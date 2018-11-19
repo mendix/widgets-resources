@@ -30,6 +30,7 @@ export class preview extends Component<SignatureContainerProps> {
             penType: props.penType,
             showGrid: props.showGrid,
             clearSignature: false,
+            readOnly: false,
             wrapperStyle: Utils.parseStyle(props.style)
         };
     }

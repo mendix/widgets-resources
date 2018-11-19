@@ -15,10 +15,11 @@ export interface Dimensions {
 export interface SizeProps extends Dimensions {
     className: string;
     classNameInner?: string;
+    readOnly?: boolean;
     style?: CSSProperties;
 }
 
-export const SizeContainer: SFC<SizeProps> = ({ className, classNameInner, widthUnit, width, heightUnit, height, children, style }) => {
+export const SizeContainer: SFC<SizeProps> = ({ className, classNameInner, widthUnit, width, heightUnit, height, children, style, readOnly }) => {
     const styleWidth = widthUnit === "percentage" ? `${width}%` : `${width}px`;
     return createElement("div",
         {
@@ -31,6 +32,8 @@ export const SizeContainer: SFC<SizeProps> = ({ className, classNameInner, width
             }
         }, createElement("div", {
             className: classNames("size-box-inner", classNameInner),
+            readOnly,
+            disabled: readOnly,
             style: {
                 position: "absolute",
                 top: "0",
@@ -43,6 +46,7 @@ export const SizeContainer: SFC<SizeProps> = ({ className, classNameInner, width
 };
 
 SizeContainer.displayName = "SizeContainer";
+SizeContainer.defaultProps = { readOnly: false };
 
 const getHeight = (heightUnit: HeightUnitType, height: number, widthUnit: WidthUnitType, width: number): CSSProperties => {
     const style: CSSProperties = {};
