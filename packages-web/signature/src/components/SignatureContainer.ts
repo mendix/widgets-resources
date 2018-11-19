@@ -1,25 +1,26 @@
 import { Component, createElement } from "react";
 
 import { Signature, penOptions } from "./Signature";
+import { Dimensions } from "./SizeContainer";
+import Utils from "../utils/Utils";
 
 interface WrapperProps {
+    "class": string;
     mxObject?: mendix.lib.MxObject;
     mxform: mxui.lib.form._FormBase;
     style?: string;
     friendlyId: string;
 }
 
-export interface SignatureContainerProps extends WrapperProps {
-    showSignature: string;
-    height: number;
-    width: number;
-    gridColumnSize: number;
-    gridRowSize: number;
-    gridColor: string;
-    gridBorder: number;
-    penColor: string;
-    penType: penOptions;
+export interface SignatureContainerProps extends WrapperProps, Dimensions {
+    hasSignatureAttribute: string;
     showGrid: boolean;
+    gridBorderColor: string;
+    gridCellHeight: number;
+    gridCellWidth: number;
+    gridBorderWidth: number;
+    penType: penOptions;
+    penColor: string;
 }
 
 interface SignatureContainerState {
@@ -30,7 +31,8 @@ interface SignatureContainerState {
 export default class SignatureContainer extends Component<SignatureContainerProps, SignatureContainerState> {
     private subscriptionHandles: number[] = [];
     private base64Uri: string;
-    private formHandle = 0;
+    private formHandle?: number;
+
     readonly state = {
         alertMessage: "",
         hasSignature: false
@@ -39,18 +41,19 @@ export default class SignatureContainer extends Component<SignatureContainerProp
     render() {
         return createElement(Signature, {
             ...this.props as SignatureContainerProps,
-            divStyle: parseStyle(this.props.style),
+            wrapperStyle: Utils.parseStyle(this.props.style),
             alertMessage: this.state.alertMessage,
-            clearPad: this.state.hasSignature ? true : false,
-            onSignEndAction: this.handleSignEnd
+            clearSignature: this.state.hasSignature ? true : false,
+            onSignEndAction: this.handleSignEnd,
+            className: this.props.class
         });
     }
 
     componentWillReceiveProps(newProps: SignatureContainerProps) {
-        const validationMessage = this.validateProps(newProps.mxObject);
+        const alertMessage = this.validateProps(newProps.mxObject);
 
-        if (validationMessage) {
-            this.setState({ alertMessage: validationMessage });
+        if (alertMessage) {
+            this.setState({ alertMessage });
         }
     }
 
@@ -58,36 +61,44 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         this.resetSubscriptions(this.props.mxObject);
     }
 
-    componentWillMount() {
-        this.props.mxform.unlisten(this.formHandle);
+    componentDidMount() {
+        this.formHandle = this.props.mxform.listen("commit", callback => this.saveDocument(callback));
+    }
+
+    componentWillUnmount() {
+        logger.debug("componentWillUnMount");
+        if (this.formHandle) {
+            this.props.mxform.unlisten(this.formHandle);
+        }
+        this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
     }
 
     private handleSignEnd = (base64Uri: string) => {
         const { mxObject } = this.props;
-        this.base64Uri = "";
 
         if (mxObject && this.state.hasSignature === false) {
-            mxObject.set(this.props.showSignature, true);
+            mxObject.set(this.props.hasSignatureAttribute, true);
         }
         this.base64Uri = base64Uri;
+        if (base64Uri) {
+            this.setState({ hasSignature: true });
+        }
     }
 
-    private saveDocument = (mxObject: mendix.lib.MxObject) => {
-        const { height, width } = this.props;
-
+    private saveDocument(callback: () => void) {
         if (this.base64Uri && this.state.hasSignature) {
-            mx.data.saveDocument(mxObject.getGuid(), this.generateFileName(),
-                { width, height }, this.convertUrltoBlob(), () => {
-                    mx.ui.info("Image has been saved", true);
-                },
-                error => {
-                    mx.ui.error(error.message, false);
-                });
+            mx.data.saveDocument(this.props.mxObject.getGuid(), this.generateFileName(), { },
+                Utils.convertUrlToBlob(this.base64Uri),
+                callback,
+                error => mx.ui.error("Error saving signature: " + error.message)
+            );
+        } else {
+            callback();
         }
     }
 
     private generateFileName(): string {
-        return `${Math.floor(Math.random() * 1000000)}.png`;
+        return `signature${Math.floor(Math.random() * 1000000)}.png`;
     }
 
     public validateProps(mxObject: mendix.lib.MxObject): string {
@@ -107,69 +118,24 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         if (mxObject) {
             this.subscriptionHandles.push(window.mx.data.subscribe({
                 guid: mxObject.getGuid(),
-                callback: () => this.updateCanvasState(mxObject)
+                callback: () => this.updateCanvasState()
             }));
             this.subscriptionHandles.push(mx.data.subscribe({
-                attr: this.props.showSignature,
-                callback: () => this.updateCanvasState(mxObject),
-                guid: mxObject.getGuid()
+                guid: mxObject.getGuid(),
+                attr: this.props.hasSignatureAttribute,
+                callback: () => this.updateCanvasState()
             }));
-
-            this.formHandle = this.props.mxform.listen("commit", () => this.saveDocument(mxObject));
         }
     }
 
-    private updateCanvasState = (mxObject: mendix.lib.MxObject) => {
-        this.setState({
-            hasSignature: this.getAttributeValue(this.props.showSignature, mxObject)
-        });
-    }
-
-    private getAttributeValue(attribute: string, mxObject?: mendix.lib.MxObject): boolean {
-        return !!mxObject && mxObject.get(attribute) as boolean;
-    }
-
-    private convertUrltoBlob(): Blob {
-        const base64Uri = this.base64Uri;
-        const contentType = "image/png";
-        const sliceSize = 512;
-        const byteCharacters = atob(base64Uri.split(";base64,")[1]);
-        const byteArrays = [];
-
-        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-            const slice = byteCharacters.slice(offset, offset + sliceSize);
-
-            const byteNumbers = new Array(slice.length);
-            for (let i = 0; i < slice.length; i++) {
-                byteNumbers[i] = slice.charCodeAt(i);
+    private updateCanvasState = () => {
+        const { mxObject, hasSignatureAttribute } = this.props;
+        if (hasSignatureAttribute) {
+            const hasSignature = !!mxObject && mxObject.get(hasSignatureAttribute) as boolean;
+            if (this.state.hasSignature !== hasSignature) {
+                this.setState({ hasSignature });
             }
-
-            const byteArray = new Uint8Array(byteNumbers);
-
-            byteArrays.push(byteArray);
         }
-
-        const imageBlob = new Blob(byteArrays, { type: contentType });
-
-        return imageBlob;
     }
+
 }
-
-export const parseStyle = (style = ""): {[key: string]: string} => { // Doesn't support a few stuff.
-    try {
-        return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
-            const pair = line.split(":");
-            if (pair.length === 2) {
-                const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
-                styleObject[name] = pair[1].trim();
-            }
-
-            return styleObject;
-        }, {});
-    } catch (error) {
-        // tslint:disable-next-line no-console
-        window.console.log("Failed to parse style", style, error);
-    }
-
-    return {};
-};

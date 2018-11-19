@@ -6,6 +6,7 @@
     "noEmitOnError": true,
     "sourceMap": true,
     "module": "amd",
+    "jsx": "react",
     "target": "es5",
     "lib": [ "es2015", "dom" ],
     "types": [ "mendix-client", "jasmine", "core-js" ],

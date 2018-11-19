@@ -1,52 +1,70 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.custom.signature.Signature" offlineCapable="true" needsEntityContext="true" mobile="true" xmlns="http://www.mendix.com/widget/1.0/">
+<widget id="com.mendix.widget.custom.signature.Signature" offlineCapable="true" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/">
     <name>Signature</name>
     <description>A signature pad for capturing signatures</description>
     <icon>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</icon>
-
     <properties>
-        <property key="showSignature" type="attribute" required="false">
+        <property key="hasSignatureAttribute" type="attribute" required="false">
             <caption>Has signature</caption>
             <category>Canvas</category>
-            <description/>
+            <description>Optional boolean attribute, which will be set to true after the canvas is signed. When the attribute is set to false, the signature is cleared, but will not clear the stored image</description>
             <attributeTypes>
                 <attributeType name="Boolean" />
             </attributeTypes>
         </property>
-        <property key="width" type="integer" defaultValue="500">
+        <property key="widthUnit" type="enumeration" defaultValue="percentage">
+            <caption>Width unit</caption>
+            <category>Canvas</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="percentage">Percentage</enumerationValue>
+                <enumerationValue key="pixels">Pixels</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="width" type="integer" defaultValue="100">
             <caption>Width</caption>
             <category>Canvas</category>
-            <description>Height of the canvas(px)</description>
+            <description/>
         </property>
-        <property key="height" type="integer" defaultValue="500">
+        <property key="heightUnit" type="enumeration" defaultValue="percentageOfWidth">
+            <caption>Height unit</caption>
+            <category>Canvas</category>
+            <description>'Percentage of width' is the aspect ratio, 'Pixels' is absolute. Warning: When using 'Percentage of parent' the parent container must have an absolute height, else nothing is displayed.</description>
+            <enumerationValues>
+                <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
+                <enumerationValue key="pixels">Pixels</enumerationValue>
+                <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="height" type="integer" defaultValue="50">
             <caption>Height</caption>
             <category>Canvas</category>
-            <description>Width of the canvas(px)</description>
+            <description/>
         </property>
-        <property key="showGrid" type="boolean" defaultValue="true">
+        <property key="showGrid" type="boolean" defaultValue="false">
             <caption>Show background grid</caption>
             <category>Grid</category>
             <description/>
         </property>
-        <property key="gridColor" type="string" defaultValue="#D7D7D7">
-            <caption>Default grid color</caption>
+        <property key="gridBorderColor" type="string" defaultValue="#D7D7D7">
+            <caption>Grid line color</caption>
             <category>Grid</category>
             <description/>
         </property>
-        <property key="gridColumnSize" type="integer" defaultValue="50">
+        <property key="gridCellHeight" type="integer" defaultValue="50">
             <caption>Grid cell height</caption>
             <category>Grid</category>
             <description>Grid column size</description>
         </property>
-        <property key="gridRowSize" type="integer" defaultValue="50">
+        <property key="gridCellWidth" type="integer" defaultValue="50">
             <caption>Grid cell width</caption>
             <category>Grid</category>
             <description>Grid row size</description>
         </property>
-        <property key="gridBorder" type="integer" defaultValue="1">
-            <caption>Grid border width</caption>
+        <property key="gridBorderWidth" type="integer" defaultValue="5">
+            <caption>Grid line width</caption>
             <category>Grid</category>
-            <description>Grid border line width(px)</description>
+            <description>Grid border line width (pixels)</description>
         </property>
         <property key="penType" type="enumeration" defaultValue="fountain">
             <caption>Type</caption>

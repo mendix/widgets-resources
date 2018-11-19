@@ -1,21 +1,16 @@
-.widget-signature-wrapper {
-    position: relative;
-    > canvas {
+.widget-signature {
+
+    &-wrapper {
+        overflow: hidden;
+        padding: 0 !important;
+    }
+
+    &-canvas {
         position: absolute;
         left: 0;
         top: 0;
-    }
-    canvas {
-        &.widget-signature {
-            padding: 0px;
-            &.signature-grid {
-                z-index: 0;
-            }
-            &.signature-canvas {
-                z-index: 1;
-                background: transparent;
-            }
-        }
+        z-index: 1;
+        background: transparent;
     }
 }
 
