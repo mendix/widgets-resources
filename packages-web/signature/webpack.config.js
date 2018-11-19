@@ -22,10 +22,10 @@ const widgetConfig = {
     module: {
         rules: [
             { test: /\.ts$/, use: "ts-loader" },
-            { test: /\.css$/, loader: ExtractTextPlugin.extract({
-                fallback: "style-loader",
-                use: "css-loader"
-            }) },
+            { test: /signature_pad.m.js$/, use: [ {
+                    loader: "babel-loader",
+                    options: { presets: [ "@babel/preset-env" ] }
+            } ] },
             { test: /\.scss$/, loader: ExtractTextPlugin.extract({
                 fallback: "style-loader",
                 use: "css-loader!sass-loader"
