@@ -8,21 +8,28 @@ const widgetName = package.widgetName;
 const name = package.widgetName.toLowerCase();
 
 const widgetConfig = {
-    entry: `./src/components/${widgetName}Container.ts`,
+    entry: `./src/components/${widgetName}Container.tsx`,
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
         filename: `src/com/mendix/widget/custom/${name}/${widgetName}.js`,
         libraryTarget: "umd"
     },
     resolve: {
-        extensions: [ ".ts", ".js" ],
+        extensions: [ ".ts", ".js", ".tsx", ".jsx" ],
         alias: {
             "tests": path.resolve(__dirname, "./tests")
         }
     },
     module: {
         rules: [
-            { test: /\.ts$/, use: "ts-loader" },
+            {
+                test: /\.(j|t)sx?$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "ts-loader",
+                    options: { transpileOnly: true }
+                }
+            },
             { test: /\.css$/, loader: ExtractTextPlugin.extract({
                 fallback: "style-loader",
                 use: "css-loader"
@@ -39,22 +46,30 @@ const widgetConfig = {
 };
 
 const previewConfig = {
-    entry: `./src/${widgetName}.webmodeler.ts`,
+    entry: `./src/${widgetName}.webmodeler.tsx`,
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
         filename: `src/${widgetName}.webmodeler.js`,
         libraryTarget: "commonjs"
     },
     resolve: {
-        extensions: [ ".ts", ".js" ]
+        extensions: [ ".ts", ".js", ".tsx", ".jsx" ]
     },
     module: {
         rules: [
-            { test: /\.ts$/, loader: "ts-loader", options: {
-                compilerOptions: {
-                    "module": "CommonJS",
+            {
+                test: /\.(j|t)sx?$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "ts-loader",
+                    options: {
+                        transpileOnly: true,
+                        compilerOptions: {
+                            "module": "CommonJS",
+                        }
+                    }
                 }
-            }},
+            },
             { test: /\.css$/, use: "raw-loader" },
             { test: /\.scss$/, use: [
                     { loader: "raw-loader" },

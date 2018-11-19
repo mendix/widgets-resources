@@ -1,5 +1,5 @@
-import { Component, ReactElement, createElement } from "react";
 import { Alert } from "./Alert";
+import * as React from "react";
 
 export interface VideoPlayerProps {
     url: string;
@@ -35,7 +35,7 @@ export const validateUrl = (url: string) => {
     return null;
 };
 
-export class VideoPlayer extends Component <VideoPlayerProps, VideoPlayerState> {
+export class VideoPlayer extends React.Component <VideoPlayerProps, VideoPlayerState> {
 
     constructor(props: VideoPlayerProps) {
         super(props);
@@ -45,46 +45,50 @@ export class VideoPlayer extends Component <VideoPlayerProps, VideoPlayerState> 
         };
 
         this.renderVideoPlayer = this.renderVideoPlayer.bind(this);
-        this.renderJwPlayerContent = this.renderJwPlayerContent.bind(this);
+        this.renderHtml5PlayerContent = this.renderHtml5PlayerContent.bind(this);
     }
 
     render() {
         const url = this.generateUrl(this.props.url || this.props.staticUrl);
-        return createElement("div", { className: "video-player-container" },
-            createElement(Alert, {
-                bootstrapStyle: "danger",
-                className: "widget-badge-alert",
-                message: this.state.alertMessage!
-            }),
-            this.renderVideoPlayer(url),
-            this.renderJwPlayerContent(url));
+        return (
+            <div className="video-player-container">
+                <Alert bootstrapStyle="danger" className="widget-badge-alert" message={this.state.alertMessage!}/>
+                {this.renderVideoPlayer(url)}
+                {this.renderHtml5PlayerContent(url)}
+            </div>
+        );
     }
 
-    private renderJwPlayerContent(url: string): ReactElement<{}> {
-        return createElement("video", {
-                controls: this.props.showControls,
-                height: "100%",
-                width: "100%",
-                style: { display: !extractProvider(url) ? "block" : "none", backgroundColor: "#999" },
-                autoPlay: this.props.autoStart,
-                muted: this.props.muted,
-                loop: this.props.loop,
-                poster: this.props.poster || this.props.staticPoster
-            },
-            createElement("source", {
-                src: this.props.url || this.props.staticUrl,
-                type: "video/mp4"
-            }));
+    private renderHtml5PlayerContent(url: string): React.ReactElement<{}> {
+        return (
+            <video controls={this.props.showControls}
+                   height="100%"
+                   width="100%"
+                   style={
+                       {
+                           display: !extractProvider(url) ? "block" : "none",
+                           backgroundColor: "#999"
+                       }
+                   }
+                   autoPlay={this.props.autoStart}
+                   muted={this.props.muted}
+                   loop={this.props.loop}
+                   poster={this.props.poster || this.props.staticPoster}>
+                <source src={this.props.url || this.props.staticUrl}
+                        type="video/mp4"/>
+            </video>
+        );
     }
 
-    private renderVideoPlayer(url: string): ReactElement<{}> {
-        return createElement("iframe", {
-            className: this.props.className,
-            src: extractProvider(url) ? url : "",
-            frameBorder: 0,
-            style: { display: extractProvider(url) ? "block" : "none" },
-            allowFullScreen: true
-        });
+    private renderVideoPlayer(url: string): React.ReactElement <{}> {
+        return (
+            <iframe className={this.props.className}
+                    src={extractProvider(url) ? url : ""}
+                    frameBorder="0"
+                    style={ { display: extractProvider(url) ? "block" : "none" } }
+                    allowFullScreen={true}>
+            </iframe>
+        );
     }
 
     private generateUrl(url: string) {
