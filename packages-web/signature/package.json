@@ -30,6 +30,8 @@
     "url": "https://github.com/mendixlabs/signature.git"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
     "@types/classnames": "^2.2.4",
     "@types/core-js": "^2.5.0",
     "@types/enzyme": "^3.1.10",
@@ -39,8 +41,8 @@
     "@types/node": "^10.12.1",
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
-    "@types/signature_pad": "^2.3.0",
     "@types/webdriverio": "^4.13.0",
+    "babel-loader": "^8.0.4",
     "check-dependencies": "^1.1.0",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.6.0",
