@@ -23,7 +23,7 @@ const widgetConfig = {
     module: {
         rules: [
             {
-                test: /\.(j|t)sx?$/,
+                test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: {
                     loader: "ts-loader",
@@ -33,7 +33,12 @@ const widgetConfig = {
             { test: /\.css$/, loader: ExtractTextPlugin.extract({
                 fallback: "style-loader",
                 use: "css-loader"
-            }) }
+            }) },
+            { test: /\.scss$/, use: [
+                    { loader: "raw-loader" },
+                    { loader: "sass-loader" }
+                ]
+            }
         ]
     },
     devtool: "source-map",
@@ -58,7 +63,7 @@ const previewConfig = {
     module: {
         rules: [
             {
-                test: /\.(j|t)sx?$/,
+                test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: {
                     loader: "ts-loader",
