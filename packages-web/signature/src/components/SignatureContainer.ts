@@ -10,6 +10,7 @@ interface WrapperProps {
     mxform: mxui.lib.form._FormBase;
     style?: string;
     friendlyId: string;
+    readOnly: boolean;
 }
 
 export interface SignatureContainerProps extends WrapperProps, Dimensions {
@@ -42,6 +43,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         return createElement(Signature, {
             ...this.props as SignatureContainerProps,
             wrapperStyle: Utils.parseStyle(this.props.style),
+            readOnly: this.isReadOnly(),
             alertMessage: this.state.alertMessage,
             clearSignature: this.state.hasSignature ? true : false,
             onSignEndAction: this.handleSignEnd,
@@ -66,7 +68,6 @@ export default class SignatureContainer extends Component<SignatureContainerProp
     }
 
     componentWillUnmount() {
-        logger.debug("componentWillUnMount");
         if (this.formHandle) {
             this.props.mxform.unlisten(this.formHandle);
         }
@@ -83,6 +84,12 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         if (base64Uri) {
             this.setState({ hasSignature: true });
         }
+    }
+
+    private isReadOnly(): boolean {
+        const { mxObject, readOnly } = this.props;
+
+        return !mxObject || readOnly || mxObject.isReadonlyAttr("Contents");
     }
 
     private saveDocument(callback: () => void) {

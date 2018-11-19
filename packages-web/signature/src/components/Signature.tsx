@@ -23,6 +23,7 @@ export interface SignatureProps extends Dimensions {
     penColor: string;
     onSignEndAction?: (imageUrl?: string) => void;
     wrapperStyle?: object;
+    readOnly: boolean;
 }
 
 export type penOptions = "fountain" | "ballpoint" | "marker";
@@ -32,21 +33,24 @@ export class Signature extends React.PureComponent<SignatureProps> {
     private signaturePad: SignaturePad;
 
     render() {
+        const { widthUnit, width, heightUnit, height, readOnly, className, alertMessage } = this.props;
+
         return < SizeContainer
-                className={ classNames("widget-signature", this.props.className) }
-                classNameInner="widget-signature-wrapper form-control mx-textarea-input mx-textarea"
-                widthUnit={ this.props.widthUnit }
-                width={ this.props.width }
-                heightUnit={ this.props.heightUnit }
-                height={ this.props.height }
-            >
-                <Alert bootstrapStyle = "danger">{ this.props.alertMessage }</Alert>
-                { this.getGrid() }
-                <canvas className = "widget-signature-canvas"
-                    ref = { (node: HTMLCanvasElement) => this.canvasNode = node }
-                />,
-                <ReactResizeDetector handleWidth handleHeight onResize={ this.onResize }/>
-            </SizeContainer>;
+            className={ classNames("widget-signature", className) }
+            classNameInner="widget-signature-wrapper form-control mx-textarea-input mx-textarea"
+            widthUnit={widthUnit}
+            width={width}
+            heightUnit={heightUnit}
+            height={height}
+            readOnly={readOnly}
+        >
+            <Alert bootstrapStyle = "danger">{alertMessage}</Alert>
+            { this.getGrid() }
+            <canvas className="widget-signature-canvas"
+                ref={ (node: HTMLCanvasElement) => this.canvasNode = node }
+            />
+            <ReactResizeDetector handleWidth handleHeight onResize={ this.onResize } />
+        </SizeContainer>;
     }
 
     componentDidMount() {
@@ -55,11 +59,24 @@ export class Signature extends React.PureComponent<SignatureProps> {
             onEnd: this.handleSignEnd,
             ...this.signaturePadOptions()
         });
+        if (this.props.readOnly) {
+            this.signaturePad.off();
+        }
     }
 
     componentWillReceiveProps(nextProps: SignatureProps) {
-        if (nextProps.clearSignature !== this.props.clearSignature && this.props.clearSignature) {
-            this.signaturePad.clear();
+        if (this.signaturePad) {
+            const { clearSignature, readOnly } = this.props;
+            if (nextProps.clearSignature !== clearSignature && clearSignature) {
+                this.signaturePad.clear();
+            }
+            if (nextProps.readOnly !== readOnly) {
+                if (nextProps.readOnly) {
+                    this.signaturePad.off();
+                } else {
+                    this.signaturePad.on();
+                }
+            }
         }
     }
 
@@ -75,13 +92,16 @@ export class Signature extends React.PureComponent<SignatureProps> {
 
     private getGrid(): React.ReactNode {
         if (this.props.showGrid) {
+            const { gridCellWidth, gridCellHeight, gridBorderColor, gridBorderWidth } = this.props;
+
             return <Grid
-                gridCellWidth = { this.props.gridCellWidth }
-                gridCellHeight = { this.props.gridCellHeight }
-                gridBorderColor = { this.props.gridBorderColor }
-                gridBorderWidth = { this.props.gridBorderWidth }
+                gridCellWidth={gridCellWidth}
+                gridCellHeight={gridCellHeight}
+                gridBorderColor={gridBorderColor}
+                gridBorderWidth={gridBorderWidth}
             />;
         }
+
         return null;
     }
 
