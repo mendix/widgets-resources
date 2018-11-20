@@ -1,4 +1,4 @@
-import { SFC, createElement } from "react";
+import * as React from "react";
 import * as classNames from "classnames";
 
 export interface AlertProps {
@@ -6,9 +6,9 @@ export interface AlertProps {
     className?: string;
 }
 
-export const Alert: SFC<AlertProps> = ({ bootstrapStyle, className, children }) =>
+export const Alert: React.SFC<AlertProps> = ({ bootstrapStyle, className, children }) =>
     children
-        ? createElement("div", { className: classNames(`alert alert-${bootstrapStyle}`, className) }, children)
+        ? <div className={classNames(`alert alert-${bootstrapStyle}`, className)}>{children}</div>
         : null;
 
 Alert.displayName = "Alert";
