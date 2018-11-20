@@ -26,12 +26,17 @@ Add the widget to a dataview.
 ![Data source](/assets/signature-image.png)
 
 ### Properties
-* **Pen color** - HTML color code of the pen.
+* **Pen** | **color** - HTML color code of the pen.
 * **Show background grid** - When set to yes, a grid is shown in the background of the writable area.
-* **Grid X** - The distance in pixels between gridlines in the horizontal direction.
-* **Grid Y** - The distance in pixels between gridlines in the vertical direction.
-* **Grid color** - HTML color code of the grid
-* **Grid border width** - Width of grid line border in pixels
+* **Cell width** - The width of a grid cell in (px).
+* **Cell height** - The height of a grid cell in (px).
+* **Line color** - HTML color code of the grid lines
+* **Line width** - Width of grid line border in pixels
+* Under the **common tab**, custom CSS Style properties can be set for responsive design, when width and height are a percentage. For example:
+    - min-width: 200px;
+    - max-width: 600px;
+    - min-height: 200px;
+    - max-height: 600px;
 
 ## Compatibility
 The widget is usable and works smoothly in Google chrome, Internet explorer. 
