@@ -112,7 +112,7 @@ export default class SignatureContainer extends Component<SignatureContainerProp
         let errorMessage = "";
 
         if (mxObject && !mxObject.inheritsFrom("System.Image")) {
-            errorMessage = `${this.props.friendlyId}: ${mxObject.getEntity()} does not inherit from "System.Image.`;
+            errorMessage = `${this.props.friendlyId}: ${mxObject.getEntity()} does not inherit from "System.Image".`;
         }
 
         return errorMessage;
