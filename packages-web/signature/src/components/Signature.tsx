@@ -5,7 +5,7 @@ import * as classNames from "classnames";
 import ReactResizeDetector from "react-resize-detector";
 
 import { Alert } from "./Alert";
-import Grid from "./Grid";
+import { Grid } from "./Grid";
 import { Dimensions, SizeContainer } from "./SizeContainer";
 
 import "../ui/Signature.scss";
@@ -33,23 +33,20 @@ export class Signature extends React.PureComponent<SignatureProps> {
     private signaturePad: SignaturePad;
 
     render() {
-        const { widthUnit, width, heightUnit, height, readOnly, className, alertMessage } = this.props;
+        const { className, alertMessage, wrapperStyle } = this.props;
 
         return < SizeContainer
-            className={ classNames("widget-signature", className) }
+            {...this.props}
+            className={classNames("widget-signature", className)}
             classNameInner="widget-signature-wrapper form-control mx-textarea-input mx-textarea"
-            widthUnit={widthUnit}
-            width={width}
-            heightUnit={heightUnit}
-            height={height}
-            readOnly={readOnly}
+            style={wrapperStyle}
         >
             <Alert bootstrapStyle = "danger">{alertMessage}</Alert>
-            { this.getGrid() }
+            <Grid {...this.props} />
             <canvas className="widget-signature-canvas"
                 ref={ (node: HTMLCanvasElement) => this.canvasNode = node }
             />
-            <ReactResizeDetector handleWidth handleHeight onResize={ this.onResize } />
+            <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
         </SizeContainer>;
     }
 
@@ -88,21 +85,6 @@ export class Signature extends React.PureComponent<SignatureProps> {
             this.signaturePad.clear();
             this.signaturePad.fromData(data);
         }
-    }
-
-    private getGrid(): React.ReactNode {
-        if (this.props.showGrid) {
-            const { gridCellWidth, gridCellHeight, gridBorderColor, gridBorderWidth } = this.props;
-
-            return <Grid
-                gridCellWidth={gridCellWidth}
-                gridCellHeight={gridCellHeight}
-                gridBorderColor={gridBorderColor}
-                gridBorderWidth={gridBorderWidth}
-            />;
-        }
-
-        return null;
     }
 
     private signaturePadOptions(): IOptions {
