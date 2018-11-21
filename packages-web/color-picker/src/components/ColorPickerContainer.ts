@@ -256,7 +256,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     public static validateColorFormat = (color: string, colorFormat: Format): string => {
         const hexRegExp = /^#?([a-f\d]{3}|[a-f\d]{6})$/;
         const rgbRegExp = /^rgb\((0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d)\)$/;
-        const rgbaRegExp = /^rgba\((0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0?\.\d*|1(\.0)?)\)$/;
+        const rgbaRegExp = /^rgba\((0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0?\.\d*|0|1(\.0)?)\)$/;
         let format = "";
         if (color && colorFormat === "hex" && !hexRegExp.test(color.toLowerCase())) {
             format = "'#0d0' or '#d0d0d0'";
