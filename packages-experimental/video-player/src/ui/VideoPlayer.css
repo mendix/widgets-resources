@@ -14,7 +14,7 @@
 
 .video-player-html5{
     object-fit: cover;
-    backgroundColor: "#999";
+    background-color: #999;
 }
 
 .video-player-error{
