@@ -133,12 +133,27 @@ export class VideoPlayer extends React.Component <VideoPlayerProps, VideoPlayerS
     }
 
     private getUrlAttributes() {
-        const attributes = `?
-        ${this.props.autoStart ? "autoplay=1" : "autoplay=0"}
-        ${this.props.showControls ? "&controls=1" : "&controls=0"}
-        ${this.props.muted ? "&muted=1" : "&muted=0"}
-        ${this.props.loop ? "&loop=1" : "&loop=0"}
-        `;
+        let attributes = "?";
+
+        if (this.props.autoStart)
+            attributes += "autoplay=1";
+        else
+            attributes += "autoplay=0";
+
+        if (this.props.showControls)
+            attributes += "&controls=1";
+        else
+            attributes += "&controls=0";
+
+        if (this.props.muted)
+            attributes += "&muted=1";
+        else
+            attributes += "&muted=0";
+        if (this.props.loop)
+            attributes += "&loop=1";
+        else
+            attributes += "&loop=0";
+
         return attributes;
     }
 
