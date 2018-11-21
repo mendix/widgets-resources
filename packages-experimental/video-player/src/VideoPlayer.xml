@@ -35,6 +35,26 @@
             <category>General</category>
             <description></description>
         </property>
+        <property key="autoStart" type="boolean" defaultValue="false">
+            <caption>Auto start</caption>
+            <category>Behavior</category>
+            <description>Automatically start playing the video on page load.</description>
+        </property>
+        <property key="showControls" type="boolean" defaultValue="true">
+            <caption>Show Controls</caption>
+            <category>Behavior</category>
+            <description>Whether to display the video controls (control bar, display icons and dock buttons). Available for youtube and external videos</description>
+        </property>
+        <property key="muted" type="boolean" defaultValue="true">
+            <caption>Muted</caption>
+            <category>Behavior</category>
+            <description>Starts the video muted</description>
+        </property>
+        <property key="loop" type="boolean" defaultValue="true">
+            <caption>Loop</caption>
+            <category>Behavior</category>
+            <description>Set the video to loop after it finishes</description>
+        </property>
         <property key="widthUnit" type="enumeration" defaultValue="percentage">
             <caption>Width unit</caption>
             <category>Size</category>
@@ -59,31 +79,10 @@
                 <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
             </enumerationValues>
         </property>
-        <property key="height" type="integer" defaultValue="580">
+        <property key="height" type="integer" defaultValue="500">
             <caption>Height</caption>
             <category>Size</category>
             <description/>
-        </property>
-        <!-- Adding properties for JWPlayer -->
-        <property key="autoStart" type="boolean" defaultValue="false">
-            <caption>Auto start</caption>
-            <category>Behavior</category>
-            <description>Automatically start playing the video on page load.</description>
-        </property>
-        <property key="showControls" type="boolean" defaultValue="true">
-            <caption>Show Controls</caption>
-            <category>Behavior</category>
-            <description>Whether to display the video controls (control bar, display icons and dock buttons). Available for youtube and external videos</description>
-        </property>
-        <property key="muted" type="boolean" defaultValue="true">
-            <caption>Muted</caption>
-            <category>Behavior</category>
-            <description>Starts the video muted</description>
-        </property>
-        <property key="loop" type="boolean" defaultValue="true">
-            <caption>Loop</caption>
-            <category>Behavior</category>
-            <description>Set the video to loop after it finishes</description>
         </property>
     </properties>
 </widget>

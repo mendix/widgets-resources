@@ -7,9 +7,9 @@ export interface AlertProps {
     bootstrapStyle: "default" | "primary" | "success" | "info" | "warning" | "danger";
 }
 
-export const Alert: React.SFC<AlertProps> = ({ className, bootstrapStyle, message }) =>
-    message
-        ? (<div className={classNames(`alert alert-${bootstrapStyle}`, className)}>{message}</div>)
+export const Alert: React.FunctionComponent<AlertProps> = (props) =>
+    props.message
+        ? (<div className={classNames(`alert alert-${props.bootstrapStyle}`, props.className)}>{props.message}</div>)
         : null;
 
 Alert.displayName = "Alert";
