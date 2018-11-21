@@ -12,6 +12,7 @@ export default class Vimeo extends React.Component<VimeoProps> {
     render() {
         return (
             <iframe
+                className="video-player-iframe"
                 src={this.generateUrl(this.props.url)}
                 frameBorder="0"
                 allowFullScreen={true}>

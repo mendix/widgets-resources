@@ -1,4 +1,3 @@
-import { Alert } from "./Alert";
 import * as React from "react";
 import { Html5Player } from "./Html5Player";
 import Youtube from "./Youtube";
@@ -28,21 +27,13 @@ const extractProvider = (url: string): string => {
     return "";
 };
 
-export interface VideoPlayerState {
-    alertMessage?: string;
-}
-
 export const validateUrl = (url: string): string => {
     if (/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g.test(url))
         return url;
     return "";
 };
 
-export class VideoPlayer extends React.Component <VideoPlayerProps, VideoPlayerState> {
-
-    static state = {
-        alertMessage: ""
-    };
+export class VideoPlayer extends React.Component <VideoPlayerProps> {
 
     constructor(props: VideoPlayerProps) {
         super(props);
@@ -53,15 +44,6 @@ export class VideoPlayer extends React.Component <VideoPlayerProps, VideoPlayerS
     }
 
     render() {
-        return (
-            <div className="video-player-container">
-                <Alert bootstrapStyle="danger" className="widget-badge-alert" message={this.state.alertMessage!}/>
-                {this.renderPlayers()}
-            </div>
-        );
-    }
-
-    private renderPlayers(): React.ReactElement<{}> {
         const provider = extractProvider(this.props.url || this.props.staticUrl);
         if (provider === "youtube") {
             return this.renderYoutubePlayer();

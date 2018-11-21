@@ -3,6 +3,7 @@ import { Alert } from "./components/Alert";
 import { HeightUnitType, SizeContainer, WidthUnitType } from "./components/SizeContainer";
 import classNames = require("classnames");
 import * as React from "react";
+import { PlayerError } from "./components/PlayerError";
 
 declare function require(name: string): string;
 
@@ -22,12 +23,19 @@ interface VideoPlayerWebModelerProps {
     autoStart: boolean;
     showControls: boolean;
 }
+
 // tslint:disable-next-line class-name
 export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
     render() {
         const message = this.validateProps(this.props);
         if (message)
-            return (<Alert bootstrapStyle="danger" message={message} className="widget-badge-alert" />);
+            return (<Alert bootstrapStyle="danger" message={message} className="widget-badge-alert"/>);
+
+        if (!validateUrl(this.props.urlAttribute || this.props.urlValue))
+            return <PlayerError widthUnit={this.props.widthUnit}
+                                width={this.props.width}
+                                heightUnit={this.props.heightUnit}
+                                height={this.props.height}/>;
         return (
             <SizeContainer
                 className={classNames("video-player-container", this.props.class)}
@@ -58,10 +66,7 @@ export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
     private validateProps(props: VideoPlayerWebModelerProps): string {
         let errorMessage = "";
         if (!props.urlAttribute && !props.urlValue) {
-            errorMessage = `A video URL is required`;
-        }
-        if (props.urlAttribute && !validateUrl(props.urlAttribute)) {
-            errorMessage = `A valid video URL is required. URL: ${props.urlAttribute}`;
+            errorMessage = `Please provide an URL`;
         }
         if (errorMessage) {
             errorMessage = `Error in configuration: ${errorMessage}`;
