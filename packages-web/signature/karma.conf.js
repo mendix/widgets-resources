@@ -17,7 +17,7 @@ module.exports = function(config) {
         Object.assign(webpackConfig, {
             module: Object.assign(webpackConfig.module, {
                 rules: webpackConfig.module.rules.concat([ {
-                    test: /\.ts$/,
+                    test: /\.+(ts|tsx)$/,
                     enforce: "post",
                     loader: "istanbul-instrumenter-loader",
                     include: path.resolve(__dirname, "src"),
