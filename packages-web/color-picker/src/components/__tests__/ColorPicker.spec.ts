@@ -36,7 +36,7 @@ describe("ColorPicker", () => {
         const colorPickerComponent = renderColorPicker(colorPickerProps);
 
         expect(colorPickerComponent).toBeElement(
-            createElement("div", { className: "widget-color-picker" },
+            createElement("div", { className: "widget-color-picker-picker" },
                 createElement(Alert, { className: "widget-color-picker-alert" })
             )
         );
@@ -47,7 +47,7 @@ describe("ColorPicker", () => {
         colorPickerComponent.setProps({ displayColorPicker: true, disabled: true });
 
         expect(colorPickerComponent).toBeElement(
-            createElement("div", { className: "widget-color-picker widget-color-picker-disabled" },
+            createElement("div", { className: "widget-color-picker-picker widget-color-picker-disabled" },
                 createElement("div", { className: "widget-color-picker-popover widget-color-picker-no-popover" },
                     createElement("div", { className: "widget-color-picker-cover" }),
                     createElement("div", { className: "widget-color-picker-overlay" }),
@@ -65,7 +65,7 @@ describe("ColorPicker", () => {
         });
 
         expect(colorPickerComponent).toBeElement(
-            createElement("div", { className: "widget-color-picker" },
+            createElement("div", { className: "widget-color-picker-picker" },
                 createElement("div", { className: "" },
                     createElement(components[colorPickerProps.type], {
                         color: colorPickerProps.color,
@@ -175,7 +175,7 @@ describe("ColorPicker", () => {
             colorPickerComponent.setProps({ displayColorPicker: true });
 
             expect(colorPickerComponent).toBeElement(
-                createElement("div", { className: "widget-color-picker" },
+                createElement("div", { className: "widget-color-picker-picker" },
                     createElement("div", { className: "widget-color-picker-popover widget-color-picker-no-popover" },
                         createElement("div", { className: "widget-color-picker-cover" }),
                         createElement(components[colorPickerProps.type])
@@ -190,7 +190,7 @@ describe("ColorPicker", () => {
             colorPickerComponent.setProps({ mode: "inline" });
 
             expect(colorPickerComponent).toBeElement(
-                createElement("div", { className: "widget-color-picker" },
+                createElement("div", { className: "widget-color-picker-picker" },
                     createElement("div", { className: "" },
                         createElement(components[colorPickerProps.type], {
                             color: colorPickerProps.color,

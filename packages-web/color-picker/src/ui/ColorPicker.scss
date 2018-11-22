@@ -1,4 +1,4 @@
-.widget-color-picker {
+.widget-color-picker-picker {
     [class*='-picker'] {
         font-family: inherit !important;
     }
@@ -83,8 +83,12 @@
 
 .widget-color-picker-input {
     &.btn {
-        margin-left: 6px;
+        margin-left: 5px;
     }
+}
+
+.widget-color-picker.has-error .btn {
+    border-color: #a94442;
 }
 
 .widget-color-picker-input-container {
@@ -93,12 +97,6 @@
     .form-group{
         margin-right: 0px;
         margin-left: 0px;
-    }
-
-    .form-control {
-        &.widget-color-picker-error {
-            border-color: #a94442;
-        }
     }
 }
 
