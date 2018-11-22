@@ -1,6 +1,6 @@
 import * as React from "react";
 
-interface GridBackgroundProps {
+export interface GridBackgroundProps {
     gridCellWidth: number;
     gridCellHeight: number;
     gridBorderColor: string;

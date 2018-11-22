@@ -7,7 +7,7 @@ describe("Alert", () => {
     const renderAlert = (props: AlertProps, message: ReactChild) => shallow(createElement(Alert, props, message));
     const alertMessage = "This is an error";
 
-    it("renders structure correctly", () => {
+    it("renders the structure correctly", () => {
         const alert = renderAlert({}, alertMessage);
 
         expect(alert).toBeElement(
