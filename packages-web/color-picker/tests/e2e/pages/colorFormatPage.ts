@@ -4,7 +4,7 @@ class ColorFormat {
     }
 
     public get circleColorPickerButton() {
-        return browser.element(".mx-name-colorPicker22  > div > div > span:nth-child(2) > div > span > div");
+        return browser.element(".mx-name-colorPicker22 .circle-picker div [title=\"#e91e63\"]");
     }
 
     public get circleColorPickerButtonValue() {
