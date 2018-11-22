@@ -1,7 +1,7 @@
 {
   "name": "colorpicker",
   "widgetName": "ColorPicker",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Change a color using a color input",
   "copyright": "Mendix BV",
   "scripts": {
