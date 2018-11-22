@@ -1,4 +1,5 @@
 import * as React from "react";
+import { hot } from "react-hot-loader";
 
 export interface VimeoProps {
     url: string;
@@ -7,7 +8,7 @@ export interface VimeoProps {
     muted: boolean;
 }
 
-export default class Vimeo extends React.Component<VimeoProps> {
+class Vimeo extends React.Component<VimeoProps> {
 
     render() {
         return (
@@ -60,3 +61,5 @@ export default class Vimeo extends React.Component<VimeoProps> {
         return attributes;
     }
 }
+
+export default hot(module)(Vimeo);

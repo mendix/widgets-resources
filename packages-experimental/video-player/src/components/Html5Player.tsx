@@ -1,4 +1,5 @@
 import * as React from "react";
+import { hot } from "react-hot-loader";
 
 export interface Html5PlayerProps {
     url: string;
@@ -10,18 +11,22 @@ export interface Html5PlayerProps {
     style?: any;
 }
 
-export const Html5Player: React.FunctionComponent<Html5PlayerProps> = (props) =>
-    (
-        <video
+class Html5Player extends React.Component<Html5PlayerProps> {
+    render() {
+        return (
+            <video
             className="video-player-html5"
-            controls={props.showControls}
+            controls={this.props.showControls}
             height="100%"
             width="100%"
-            autoPlay={props.autoPlay}
-            muted={props.muted}
-            loop={props.loop}
-            poster={props.poster}
+            autoPlay={this.props.autoPlay}
+            muted={this.props.muted}
+            loop={this.props.loop}
+            poster={this.props.poster}
         >
-            <source src={props.url} type="video/mp4"/>
+            <source src={this.props.url} type="video/mp4"/>
         </video>
-    );
+        );
+    }
+}
+export default hot(module)(Html5Player);

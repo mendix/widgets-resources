@@ -1,9 +1,10 @@
 import { HeightUnitType, SizeContainer, WidthUnitType } from "./SizeContainer";
 import classNames = require("classnames");
-import { VideoPlayer } from "./VideoPlayer";
 import * as React from "react";
 
 import "../ui/VideoPlayer.css";
+import { hot } from "react-hot-loader";
+import VideoPlayer from "./VideoPlayer";
 
 export interface VideoPlayerContainerProps {
     "class"?: string;
@@ -24,7 +25,7 @@ export interface VideoPlayerContainerProps {
     muted: boolean;
 }
 
-export default class VideoPlayerContainer extends React.Component<VideoPlayerContainerProps> {
+class VideoPlayerContainer extends React.Component<VideoPlayerContainerProps> {
 
     render() {
         return (
@@ -47,4 +48,10 @@ export default class VideoPlayerContainer extends React.Component<VideoPlayerCon
         );
     }
 
+    componentDidMount(): void {
+            setTimeout(() =>
+                this.props.urlAttribute && this.props.urlAttribute.setValidation("Test validation"), 2000);
+    }
 }
+
+export default hot(module)(VideoPlayerContainer);

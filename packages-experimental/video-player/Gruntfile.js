@@ -5,7 +5,10 @@ const merge = require("webpack-merge");
 
 const webpackConfigRelease = webpackConfig.map(config => merge(config, {
     devtool: false,
-    plugins: [ new webpack.optimize.UglifyJsPlugin() ]
+    mode: "production",
+    optimization: {
+        minimize: true
+    }
 }));
 
 module.exports = function(grunt) {
@@ -33,7 +36,7 @@ module.exports = function(grunt) {
                     expand: true,
                     date: new Date(),
                     store: false,
-                    cwd: "./dist/tmp/src",
+                    cwd: "./dist/tmp/widgets",
                     src: [ "**/*" ]
                 } ]
             }
@@ -43,7 +46,7 @@ module.exports = function(grunt) {
             distDeployment: {
                 files: [ {
                     dest: "./dist/MxTestProject/deployment/web/widgets",
-                    cwd: "./dist/tmp/src/",
+                    cwd: "./dist/tmp/widgets/",
                     src: [ "**/*" ],
                     expand: true
                 } ]
@@ -62,7 +65,7 @@ module.exports = function(grunt) {
             addSourceURL: {
                 files: [ {
                     append: "\n\n//# sourceURL=" + pkg.widgetName + ".webmodeler.js\n",
-                    input: "dist/tmp/src/" + pkg.widgetName + ".webmodeler.js"
+                    input: "dist/tmp/widgets/" + pkg.widgetName + ".webmodeler.js"
                 } ]
             }
         },
@@ -76,7 +79,6 @@ module.exports = function(grunt) {
             build: [
                 "./dist/" + pkg.version + "/" + pkg.widgetName + "/*",
                 "./dist/tmp/**/*",
-                "./dist/tsc/**/*",
                 "./dist/MxTestProject/deployment/web/widgets/" + pkg.widgetName + "/*",
                 "./dist/MxTestProject/widgets/" + pkg.widgetName + ".mpk"
             ]

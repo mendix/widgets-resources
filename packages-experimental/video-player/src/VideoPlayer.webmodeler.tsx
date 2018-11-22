@@ -1,4 +1,4 @@
-import { VideoPlayer, VideoPlayerProps, validateUrl } from "./components/VideoPlayer";
+import VideoPlayer, { VideoPlayerProps, validateUrl } from "./components/VideoPlayer";
 import { Alert } from "./components/Alert";
 import { HeightUnitType, SizeContainer, WidthUnitType } from "./components/SizeContainer";
 import classNames = require("classnames");
@@ -29,13 +29,8 @@ export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
     render() {
         const message = this.validateProps(this.props);
         if (message)
-            return (<Alert bootstrapStyle="danger" message={message} className="widget-badge-alert"/>);
+            return <Alert bootstrapStyle="danger" message={message} className="widget-badge-alert"/>;
 
-        if (!validateUrl(this.props.urlAttribute || this.props.urlValue))
-            return <PlayerError widthUnit={this.props.widthUnit}
-                                width={this.props.width}
-                                heightUnit={this.props.heightUnit}
-                                height={this.props.height}/>;
         return (
             <SizeContainer
                 className={classNames("video-player-container", this.props.class)}
@@ -44,9 +39,16 @@ export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
                 width={this.props.width}
                 heightUnit={this.props.heightUnit}
                 height={this.props.height}>
-                <VideoPlayer {...this.transformProps(this.props)}/>
+                {this.renderPlayers()}
             </SizeContainer>
         );
+    }
+
+    private renderPlayers(): React.ReactElement<{}> {
+        if (!validateUrl(this.props.urlAttribute || this.props.urlValue)) {
+            return <PlayerError/>;
+        }
+        return <VideoPlayer {...this.transformProps(this.props)}/>;
     }
 
     private transformProps(props: VideoPlayerWebModelerProps): VideoPlayerProps {

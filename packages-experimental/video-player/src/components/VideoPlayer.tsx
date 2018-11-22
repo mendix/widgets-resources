@@ -1,7 +1,9 @@
 import * as React from "react";
-import { Html5Player } from "./Html5Player";
+import Html5Player from "./Html5Player";
 import Youtube from "./Youtube";
 import Vimeo from "./Vimeo";
+import { PlayerError } from "./PlayerError";
+import { hot } from "react-hot-loader";
 
 export interface VideoPlayerProps {
     url: string;
@@ -33,7 +35,7 @@ export const validateUrl = (url: string): string => {
     return "";
 };
 
-export class VideoPlayer extends React.Component <VideoPlayerProps> {
+class VideoPlayer extends React.Component <VideoPlayerProps> {
 
     constructor(props: VideoPlayerProps) {
         super(props);
@@ -45,6 +47,8 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
 
     render() {
         const provider = extractProvider(this.props.url || this.props.staticUrl);
+        if (!validateUrl(this.props.url || this.props.staticUrl))
+            return <PlayerError />;
         if (provider === "youtube") {
             return this.renderYoutubePlayer();
         } else if (provider === "vimeo") {
@@ -88,3 +92,5 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
         );
     }
 }
+
+export default hot(module)(VideoPlayer);
