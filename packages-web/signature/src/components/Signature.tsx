@@ -51,13 +51,15 @@ export class Signature extends React.PureComponent<SignatureProps> {
     }
 
     componentDidMount() {
-        this.signaturePad = new SignaturePad(this.canvasNode, {
-            penColor: this.props.penColor,
-            onEnd: this.handleSignEnd,
-            ...this.signaturePadOptions()
-        });
-        if (this.props.readOnly) {
-            this.signaturePad.off();
+        if (this.canvasNode) {
+            this.signaturePad = new SignaturePad(this.canvasNode, {
+                penColor: this.props.penColor,
+                onEnd: this.handleSignEnd,
+                ...this.signaturePadOptions()
+            });
+            if (this.props.readOnly) {
+                this.signaturePad.off();
+            }
         }
     }
 

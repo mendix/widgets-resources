@@ -1,25 +1,19 @@
 import HomePage from "./pages/home.page";
+import GridPage from "./pages/grid.page";
 
 describe("SignatureCanvas", () => {
-    beforeAll(() => {
+    it("renders Canvas", () => {
         HomePage.open();
+        HomePage.canvas.waitForExist();
+        const isExisting = HomePage.canvas.isExisting();
+
+        expect(isExisting).toBeTruthy();
     });
 
-    it("fake test", () => {
-            expect(true);
+    it("renders signature grid", () => {
+        GridPage.open();
+        GridPage.signatureGrid.waitForVisible();
+
+        expect(GridPage.signatureGrid.getHTML()).toContain("svg");
     });
-    // it("renders Canvas", () => {
-    //     HomePage.canvases.waitForVisible();
-
-    //     expect(HomePage.canvases.value.length).toBeGreaterThan(0);
-    // });
-
-    // it("should save signature after signing", () => {
-    //     HomePage.canvas.waitForVisible();
-    //     HomePage.canvas.click();
-    //     HomePage.saveButton.click();
-    //     HomePage.dialogBox.waitForExist();
-
-    //     expect(HomePage.dialogBox.getText()).toContain("Image has been saved");
-    // });
 });
