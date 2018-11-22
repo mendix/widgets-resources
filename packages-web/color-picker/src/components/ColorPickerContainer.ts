@@ -69,7 +69,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
 
     render() {
         this.disabled = this.isReadOnly();
-        if (this.props.label.trim() && this.props.showLabel) {
+        if (this.props.showLabel) {
             return createElement(Label, {
                 className: this.props.class,
                 label: this.props.label,
