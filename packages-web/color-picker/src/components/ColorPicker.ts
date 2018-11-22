@@ -45,7 +45,7 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
     render() {
         return createElement("div", {
             className: classNames(
-                "widget-color-picker",
+                "widget-color-picker-picker",
                 this.props.className,
                 { "widget-color-picker-disabled": this.props.disabled }
             ),

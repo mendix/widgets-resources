@@ -1,5 +1,6 @@
 import { Component, createElement } from "react";
 import { ColorResult } from "react-color";
+import classNames = require("classnames");
 
 import { ColorPicker, Mode, PickerType } from "./ColorPicker";
 import { Input } from "./Input";
@@ -41,45 +42,57 @@ interface ColorPickerContainerState {
     color: string;
     alertMessage?: string;
     displayColorPicker: boolean;
+    hasValidationFeedback: boolean;
 }
 
 type Format = "hex" | "rgb" | "rgba";
 type onChange = "doNothing" | "callMicroflow" | "callNanoflow";
 
 export default class ColorPickerContainer extends Component<ColorPickerContainerProps, ColorPickerContainerState> {
+    readonly state: ColorPickerContainerState = {
+        alertMessage: "",
+        color: "",
+        displayColorPicker: false,
+        hasValidationFeedback: false
+    };
+
     private subscriptionHandles: number[] = [];
     private disabled = false;
     private previousColor = "";
     private colorChanged = false;
+    private formHandle?: number;
     private defaultColor = {
         hex: "#FFFFFF",
         rgb: "rgb(255,255,255)",
         rgba: "rgb(255,255,255,1)"
     };
 
-    constructor(props: ColorPickerContainerProps) {
-        super(props);
-
-        this.state = {
-            alertMessage: "",
-            color: "",
-            displayColorPicker: false
-        };
-    }
-
     render() {
         this.disabled = this.isReadOnly();
         if (this.props.showLabel) {
             return createElement(Label, {
-                className: this.props.class,
+                className: classNames(this.props.class, "widget-color-picker"),
                 label: this.props.label,
                 orientation: this.props.labelOrientation,
                 style: ColorPickerContainer.parseStyle(this.props.style),
-                weight: this.props.labelWidth
+                weight: this.props.labelWidth,
+                hasError: this.state.hasValidationFeedback
             }, this.renderColorPicker(true));
         }
 
         return this.renderColorPicker();
+    }
+
+    componentDidMount() {
+        this.formHandle = this.props.mxform.listen("validate", (callback, error) => {
+            const newState = this.validateColor(this.state.color);
+            this.setState(newState);
+            if (newState.hasValidationFeedback && error) {
+                error(new mendix.lib.ValidationError(newState.alertMessage!));
+            } else {
+                callback();
+            }
+        });
     }
 
     componentWillReceiveProps(newProps: ColorPickerContainerProps) {
@@ -89,14 +102,17 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
 
     componentWillUnmount() {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
+        if (this.formHandle) {
+            this.props.mxform.unlisten(this.formHandle);
+        }
     }
 
     private renderColorPicker(hasLabel = false) {
         const alertMessage = this.state.alertMessage || ColorPickerContainer.validateProps(this.props);
-
+        const className = !hasLabel ? classNames("widget-color-picker", this.props.class, { "has-error" : this.state.hasValidationFeedback }) : undefined;
         return createElement(ColorPicker, {
             alertMessage,
-            className: !hasLabel ? this.props.class : undefined,
+            className,
             color: this.state.color || this.defaultColor[this.props.format],
             defaultColors: this.props.defaultColors,
             disabled: this.disabled,
@@ -130,8 +146,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             disabled: this.disabled,
             color: this.state.color,
             onChange: this.handleInputChange,
-            onKeyUp: this.handleKeyUpEvent,
-            hasError: !!this.state.alertMessage
+            onKeyUp: this.handleKeyUpEvent
         }, this.renderButton());
     }
 
@@ -189,6 +204,11 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
                 callback: this.handleSubscriptions,
                 guid: mxObject.getGuid()
             }));
+            this.subscriptionHandles.push(window.mx.data.subscribe({
+                val: true,
+                callback: this.handleValidations,
+                guid: mxObject.getGuid()
+            }));
         }
     }
 
@@ -196,11 +216,22 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         this.setState(this.validateColor(this.getValue(this.props.mxObject)));
     }
 
+    private handleValidations = (validations: mendix.lib.ObjectValidation[]) => {
+        if (this.isReadOnly()) return;
+
+        const validation = validations.length ? validations[0].getErrorReason(this.props.colorAttribute) : undefined;
+        if (validation !== undefined) {
+            this.setState({ alertMessage: validation, hasValidationFeedback: true });
+            validations[0].removeAttribute(this.props.colorAttribute);
+        }
+    }
+
     private validateColor = (color: string): ColorPickerContainerState => {
-        const format = ColorPickerContainer.validateColorFormat(color, this.props.format);
+        const validFormat = ColorPickerContainer.validateColorFormat(color, this.props.format);
 
         return {
-            alertMessage: format ? this.props.invalidFromatMessage.replace(/\{1}/, format) : format,
+            alertMessage: validFormat ? this.props.invalidFromatMessage.replace(/\{1}/, validFormat) : "",
+            hasValidationFeedback: !!validFormat,
             color,
             displayColorPicker: this.state.displayColorPicker
         };
@@ -211,13 +242,15 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         if (newColor) {
             this.colorChanged = this.getValue(this.props.mxObject) !== newColor;
             const state = this.validateColor(event.target.value);
-            if (!state.alertMessage) {
-                this.updateColorAttribute(newColor, this.props.mxObject);
-            }
+            this.updateColorAttribute(newColor, this.props.mxObject);
             this.setState(state);
         } else {
             this.updateColorAttribute(newColor, this.props.mxObject);
-            this.setState({ alertMessage: "", color: event.target.value });
+            this.setState({
+                alertMessage: "",
+                color: event.target.value,
+                hasValidationFeedback: false
+            });
         }
     }
 
