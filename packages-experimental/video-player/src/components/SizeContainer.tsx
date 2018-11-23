@@ -1,7 +1,8 @@
+import { CSSProperties, SFC, createElement } from "react";
 import * as classNames from "classnames";
-import * as React from "react";
 
 export type HeightUnitType = "percentageOfWidth" | "percentageOfParent" | "pixels";
+
 export type WidthUnitType = "percentage" | "pixels";
 
 export interface Dimensions {
@@ -13,49 +14,61 @@ export interface Dimensions {
 
 export interface SizeProps extends Dimensions {
     className: string;
-    style?: React.CSSProperties;
+    classNameInner?: string;
+    readOnly?: boolean;
+    style?: CSSProperties;
 }
 
-export const SizeContainer: React.SFC<SizeProps> = ({ className, widthUnit, width, heightUnit, height, children, style }) => {
+export const SizeContainer: SFC<SizeProps> = ({ className, classNameInner, widthUnit, width, heightUnit, height, children, style, readOnly }) => {
     const styleWidth = widthUnit === "percentage" ? `${width}%` : `${width}px`;
-    return (
-        <div className={classNames(className, "size-box")}
-             style={
-                 {
-                     position: "relative",
-                     width: styleWidth,
-                     ...getHeight(heightUnit, height),
-                     ...style
-                 }
-             }
-             ref={parentHeight}>
-            <div className="size-box-inner" style={
-                {
-                    position: "absolute",
-                    top: "0",
-                    right: "0",
-                    bottom: "0",
-                    left: "0"
-                }
-            }>{children}</div>
-        </div>);
+    return createElement("div",
+        {
+            className: classNames(className, "size-box"),
+            style: {
+                position: "relative",
+                width: styleWidth,
+                ...getHeight(heightUnit, height, widthUnit, width),
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                ...style
+            }
+        }, createElement("div", {
+            className: classNames("size-box-inner", classNameInner),
+            readOnly,
+            disabled: readOnly,
+            style: {
+                position: "absolute",
+                top: "0",
+                right: "0",
+                bottom: "0",
+                left: "0",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }
+        }, children)
+    );
 };
-const parentHeight = (node?: HTMLElement | null) => {
-    // Fix for percentage height of parent.
-    // There no other way to control widget wrapper style
-    if (node && node.parentElement) {
-        node.parentElement.style.height = "100%";
-    }
-};
-const getHeight = (heightUnit: HeightUnitType, height: number): React.CSSProperties => {
-    const style: React.CSSProperties = {};
+
+SizeContainer.displayName = "SizeContainer";
+SizeContainer.defaultProps = { readOnly: false };
+
+const getHeight = (heightUnit: HeightUnitType, height: number, widthUnit: WidthUnitType, width: number): CSSProperties => {
+    const style: CSSProperties = {};
     if (heightUnit === "percentageOfWidth") {
-        style.height = "auto";
-        style.paddingBottom = `${height}%`;
+        const ratio = height / 100 * width;
+        if (widthUnit === "percentage") {
+            style.height = "auto";
+            style.paddingBottom = `${ratio}%`;
+        } else {
+            style.height = `${ratio}px`;
+        }
     } else if (heightUnit === "pixels") {
         style.height = `${height}px`;
     } else if (heightUnit === "percentageOfParent") {
         style.height = `${height}%`;
     }
+
     return style;
 };

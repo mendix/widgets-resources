@@ -1,5 +1,4 @@
 import * as React from "react";
-import { hot } from "react-hot-loader";
 
 export interface Html5PlayerProps {
     url: string;
@@ -29,4 +28,4 @@ class Html5Player extends React.Component<Html5PlayerProps> {
         );
     }
 }
-export default hot(module)(Html5Player);
+export default Html5Player;

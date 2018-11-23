@@ -3,7 +3,6 @@ import Html5Player from "./Html5Player";
 import Youtube from "./Youtube";
 import Vimeo from "./Vimeo";
 import { PlayerError } from "./PlayerError";
-import { hot } from "react-hot-loader";
 
 export interface VideoPlayerProps {
     url: string;
@@ -93,4 +92,4 @@ class VideoPlayer extends React.Component <VideoPlayerProps> {
     }
 }
 
-export default hot(module)(VideoPlayer);
+export default VideoPlayer;

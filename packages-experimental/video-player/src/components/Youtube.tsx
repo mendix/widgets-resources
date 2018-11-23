@@ -1,5 +1,4 @@
 import * as React from "react";
-import { hot } from "react-hot-loader";
 
 export interface YoutubeProps {
     url: string;
@@ -74,4 +73,4 @@ class Youtube extends React.Component<YoutubeProps> {
     }
 }
 
-export default hot(module)(Youtube);
+export default Youtube;

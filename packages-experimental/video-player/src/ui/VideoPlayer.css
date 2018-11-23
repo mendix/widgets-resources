@@ -13,8 +13,9 @@
 }
 
 .video-player-html5{
-    object-fit: cover;
-    background-color: #999;
+    /*object-fit: cover; -> problems with the video size */
+    background-color: #000;
+    position: absolute;
 }
 
 .video-player-error{
@@ -26,5 +27,5 @@
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    border: 2px solid #888;
+    border: 1px solid #888;
 }
