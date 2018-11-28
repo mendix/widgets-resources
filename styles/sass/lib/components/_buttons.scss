@@ -6,7 +6,6 @@
 
 .btn,
 .mx-button {
-    @include ripple();
     display: inline-block;
     margin-bottom: 0;
     padding: 0.6em 1em;
