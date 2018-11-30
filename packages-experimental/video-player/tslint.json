@@ -22,7 +22,7 @@
     "no-bitwise": true,
     "no-conditional-assignment": true,
     "no-console": [
-      true
+      false
     ],
     "no-debugger": true,
     "no-duplicate-variable": true,

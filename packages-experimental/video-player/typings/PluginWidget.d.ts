@@ -47,14 +47,13 @@ declare global {
             value: Option<T>;
             displayValue: string;
             status: ValueStatus;
-            validation: string[];
+            validation: Option<string>;
             readOnly: boolean;
             formatter: ValueFormatter<T>;
             universe?: T[];
-            setValue(value: Option<T>): void;
+            setValue(value: Option<T>, customValidation?: Option<string>): void;
             setTextValue(value: string): void;
             setFormatting(config: FormatterConfig<T>): void;
-            setValidation(validation?: string): void;
         }
     }
 }

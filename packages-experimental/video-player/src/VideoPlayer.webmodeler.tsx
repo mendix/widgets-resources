@@ -61,7 +61,8 @@ export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
             autoStart: false,
             showControls: props.showControls,
             loop: false,
-            muted: true
+            muted: true,
+            aspectRatio: false
         };
     }
 

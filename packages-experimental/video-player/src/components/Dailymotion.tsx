@@ -1,23 +1,23 @@
 import * as React from "react";
-import { fixHeightWithRatio, getRatio } from "./VideoPlayer";
 import ReactResizeDetector from "react-resize-detector";
+import { fixHeightWithRatio, getRatio } from "./VideoPlayer";
 
-export interface YoutubeProps {
+export interface DailymotionProps {
     url: string;
     autoPlay: boolean;
-    showControls: boolean;
-    loop: boolean;
+    controls: boolean;
     muted: boolean;
     aspectRatio?: boolean;
 }
 
-class Youtube extends React.Component<YoutubeProps> {
+class Dailymotion extends React.Component<DailymotionProps> {
+
     private iframe: HTMLIFrameElement;
     readonly state = {
         ratio: 0
     };
 
-    constructor(props: YoutubeProps) {
+    constructor(props: DailymotionProps) {
         super(props);
 
         this.onResize = this.onResize.bind(this);
@@ -25,11 +25,11 @@ class Youtube extends React.Component<YoutubeProps> {
 
     render() {
         return (
-            <iframe id="iframe"
+            <iframe
                 className="video-player-iframe"
                 src={this.generateUrl(this.props.url)}
                 frameBorder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allow="autoplay; fullscreen"
                 allowFullScreen={true}
                 ref={(node: HTMLIFrameElement) => this.iframe = node }>
                 <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
@@ -54,21 +54,15 @@ class Youtube extends React.Component<YoutubeProps> {
     private generateUrl(url: string): string {
         const attributes = this.getUrlAttributes();
         try {
-            if (url.includes("youtube.com/embed/"))
+
+            if (url.includes("dailymotion.com/embed"))
                 return url;
-            if (url.includes("youtu.be/") || url.includes("youtube.com/v/")) {
-                const urlSplit = url.split("/");
-                if (urlSplit.length > 0) {
-                    const id = urlSplit[urlSplit.length - 1];
-                    return `https://www.youtube.com/embed/${id}${attributes}`;
-                }
-            }
-            if (url.includes("youtube.com/watch?v=")) {
-                const urlYoutubeSplit = url.split("watch?v=");
-                if (urlYoutubeSplit.length > 0) {
-                    const id = urlYoutubeSplit[urlYoutubeSplit.length - 1];
-                    return `https://www.youtube.com/embed/${id}${attributes}`;
-                }
+
+            const urlVimeoSplit = url.split("/");
+            if (urlVimeoSplit.length > 0) {
+                const id = urlVimeoSplit[urlVimeoSplit.length - 1];
+                if (id)
+                    return `https://www.dailymotion.com/embed/video/${id}${attributes}`;
             }
         } catch (e) {
             //
@@ -77,31 +71,25 @@ class Youtube extends React.Component<YoutubeProps> {
     }
 
     private getUrlAttributes(): string {
-        let attributes = "?modestbranding=1&rel=0";
+        let attributes = "?sharing-enable=false";
 
         if (this.props.autoPlay) {
-            attributes += "&autoplay=1";
+            attributes += "&autoplay=true";
         } else {
-            attributes += "&autoplay=0";
-        }
-        if (this.props.showControls) {
-            attributes += "&controls=1";
-        } else {
-            attributes += "&controls=0";
+            attributes += "&autoplay=false";
         }
         if (this.props.muted) {
-            attributes += "&muted=1";
+            attributes += "&mute=true";
         } else {
-            attributes += "&muted=0";
+            attributes += "&mute=false";
         }
-        if (this.props.loop) {
-            attributes += "&loop=1";
+        if (this.props.controls) {
+            attributes += "&controls=true";
         } else {
-            attributes += "&loop=0";
+            attributes += "&controls=false";
         }
         return attributes;
     }
-
 }
 
-export default Youtube;
+export default Dailymotion;

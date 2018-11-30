@@ -45,15 +45,15 @@
             <category>Behavior</category>
             <description>Whether to display the video controls (control bar, display icons and dock buttons). Available for youtube and external videos</description>
         </property>
-        <property key="muted" type="boolean" defaultValue="true">
+        <property key="muted" type="boolean" defaultValue="false">
             <caption>Muted</caption>
             <category>Behavior</category>
             <description>Starts the video muted</description>
         </property>
-        <property key="loop" type="boolean" defaultValue="true">
+        <property key="loop" type="boolean" defaultValue="false">
             <caption>Loop</caption>
             <category>Behavior</category>
-            <description>Set the video to loop after it finishes</description>
+            <description>Set the video to loop after it finishes. Available for youtube, vimeo and external videos</description>
         </property>
         <property key="widthUnit" type="enumeration" defaultValue="percentage">
             <caption>Width unit</caption>
@@ -68,6 +68,11 @@
             <caption>Width</caption>
             <category>Size</category>
             <description/>
+        </property>
+        <property key="aspectRatio" type="boolean" defaultValue="false">
+            <caption>Keep aspect ratio</caption>
+            <category>Size</category>
+            <description>Based on aspect ratio keep the video height</description>
         </property>
         <property key="heightUnit" type="enumeration" defaultValue="pixels">
             <caption>Height unit</caption>

@@ -1,13 +1,27 @@
 import * as React from "react";
+import { fixHeightWithRatio, getRatio } from "./VideoPlayer";
+import ReactResizeDetector from "react-resize-detector";
 
 export interface VimeoProps {
     url: string;
     autoPlay: boolean;
     loop: boolean;
     muted: boolean;
+    aspectRatio?: boolean;
 }
 
 class Vimeo extends React.Component<VimeoProps> {
+
+    private iframe: HTMLIFrameElement;
+    readonly state = {
+        ratio: 0
+    };
+
+    constructor(props: VimeoProps) {
+        super(props);
+
+        this.onResize = this.onResize.bind(this);
+    }
 
     render() {
         return (
@@ -15,12 +29,29 @@ class Vimeo extends React.Component<VimeoProps> {
                 className="video-player-iframe"
                 src={this.generateUrl(this.props.url)}
                 frameBorder="0"
-                allowFullScreen={true}>
+                allow="autoplay; fullscreen"
+                allowFullScreen={true}
+                ref={(node: HTMLIFrameElement) => this.iframe = node }>
+                <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
             </iframe>
         );
     }
 
-    private generateUrl(url: string) {
+    private onResize() {
+        if (this.iframe && this.props.aspectRatio) {
+            if (this.state.ratio) {
+                fixHeightWithRatio(this.iframe, this.state.ratio);
+            } else {
+                getRatio(this.props.url)
+                    .then(ratio => {
+                        this.setState({ ratio });
+                        fixHeightWithRatio(this.iframe, this.state.ratio);
+                    });
+            }
+        }
+    }
+
+    private generateUrl(url: string): string {
         const attributes = this.getUrlAttributes();
         try {
 
@@ -39,7 +70,7 @@ class Vimeo extends React.Component<VimeoProps> {
         return url;
     }
 
-    private getUrlAttributes() {
+    private getUrlAttributes(): string {
         let attributes = "?dnt=1";
 
         if (this.props.autoPlay) {

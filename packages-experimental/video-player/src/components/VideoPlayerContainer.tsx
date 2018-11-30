@@ -23,10 +23,10 @@ export interface VideoPlayerContainerProps {
     showControls: boolean;
     loop: boolean;
     muted: boolean;
+    aspectRatio: boolean;
 }
 
 class VideoPlayerContainer extends React.Component<VideoPlayerContainerProps> {
-
     render() {
         return (
             <SizeContainer
@@ -43,14 +43,10 @@ class VideoPlayerContainer extends React.Component<VideoPlayerContainerProps> {
                              autoStart={this.props.autoStart}
                              showControls={this.props.showControls}
                              loop={this.props.loop}
-                             muted={this.props.muted}/>
+                             muted={this.props.muted}
+                             aspectRatio={this.props.aspectRatio}/>
             </SizeContainer>
         );
-    }
-
-    componentDidMount(): void {
-            setTimeout(() =>
-                this.props.urlAttribute && this.props.urlAttribute.setValidation("Test validation"), 2000);
     }
 }
 

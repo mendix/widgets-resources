@@ -1,4 +1,4 @@
-import { CSSProperties, SFC, createElement } from "react";
+import * as React from "react";
 import * as classNames from "classnames";
 
 export type HeightUnitType = "percentageOfWidth" | "percentageOfParent" | "pixels";
@@ -15,47 +15,42 @@ export interface Dimensions {
 export interface SizeProps extends Dimensions {
     className: string;
     classNameInner?: string;
-    readOnly?: boolean;
-    style?: CSSProperties;
+    style?: React.CSSProperties;
 }
 
-export const SizeContainer: SFC<SizeProps> = ({ className, classNameInner, widthUnit, width, heightUnit, height, children, style, readOnly }) => {
-    const styleWidth = widthUnit === "percentage" ? `${width}%` : `${width}px`;
-    return createElement("div",
-        {
-            className: classNames(className, "size-box"),
-            style: {
-                position: "relative",
-                width: styleWidth,
-                ...getHeight(heightUnit, height, widthUnit, width),
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                ...style
-            }
-        }, createElement("div", {
-            className: classNames("size-box-inner", classNameInner),
-            readOnly,
-            disabled: readOnly,
-            style: {
-                position: "absolute",
-                top: "0",
-                right: "0",
-                bottom: "0",
-                left: "0",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-            }
-        }, children)
+export const SizeContainer: React.FunctionComponent<SizeProps> = (props) => {
+    const styleWidth = props.widthUnit === "percentage" ? `${props.width}%` : `${props.width}px`;
+    const relativeStyle: React.CSSProperties = {
+        position: "relative",
+        width: styleWidth,
+        ...getHeight(props.heightUnit, props.height, props.widthUnit, props.width),
+        display: "flex",
+        justifyContent: "center",
+        ...props.style
+    };
+    const absoluteStyle: React.CSSProperties = {
+        position: "absolute",
+        top: "0",
+        right: "0",
+        bottom: "0",
+        left: "0",
+        display: "flex",
+        justifyContent: "center"
+    };
+
+    return (
+        <div className={classNames(props.className, "size-box")} style={relativeStyle}>
+            <div className={classNames("size-box-inner", props.classNameInner)} style={absoluteStyle}>
+                {props.children}
+            </div>
+        </div>
     );
 };
 
 SizeContainer.displayName = "SizeContainer";
-SizeContainer.defaultProps = { readOnly: false };
 
-const getHeight = (heightUnit: HeightUnitType, height: number, widthUnit: WidthUnitType, width: number): CSSProperties => {
-    const style: CSSProperties = {};
+const getHeight = (heightUnit: HeightUnitType, height: number, widthUnit: WidthUnitType, width: number): React.CSSProperties => {
+    const style: React.CSSProperties = {};
     if (heightUnit === "percentageOfWidth") {
         const ratio = height / 100 * width;
         if (widthUnit === "percentage") {
