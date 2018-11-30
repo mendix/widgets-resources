@@ -32,7 +32,8 @@ class Youtube extends React.Component<YoutubeProps> {
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen={true}
                 ref={(node: HTMLIFrameElement) => this.iframe = node }>
-                <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
+                <ReactResizeDetector handleWidth handleHeight onResize={this.onResize}
+                                     refreshMode="debounce" refreshRate={100} />
             </iframe>
         );
     }

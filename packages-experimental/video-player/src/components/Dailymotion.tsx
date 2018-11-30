@@ -32,7 +32,8 @@ class Dailymotion extends React.Component<DailymotionProps> {
                 allow="autoplay; fullscreen"
                 allowFullScreen={true}
                 ref={(node: HTMLIFrameElement) => this.iframe = node }>
-                <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
+                <ReactResizeDetector handleWidth handleHeight onResize={this.onResize}
+                                     refreshMode="debounce" refreshRate={100} />
             </iframe>
         );
     }

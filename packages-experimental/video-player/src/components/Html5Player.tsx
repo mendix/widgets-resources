@@ -43,7 +43,8 @@ class Html5Player extends React.Component<Html5PlayerProps> {
                 ref={(node: HTMLVideoElement) => this.video = node }
                 {...sizeProps}>
                 <source src={this.props.url} type="video/mp4"/>
-                <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
+                <ReactResizeDetector handleWidth handleHeight onResize={this.onResize}
+                                     refreshMode="debounce" refreshRate={100} />
             </video>
         );
     }
