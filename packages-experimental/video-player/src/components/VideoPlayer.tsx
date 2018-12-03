@@ -114,7 +114,7 @@ class VideoPlayer extends React.Component <VideoPlayerProps> {
 }
 
 export function fixHeightWithRatio(element: HTMLElement, ratio: number) {
-    const height = element.parentElement!.offsetWidth * ratio;
+    const height = element.parentElement ? element.parentElement!.offsetWidth * ratio : 0;
     if (height > 0) {
         element.style.height = `${height}px`;
         element.parentElement!.style.height = `${height}px`;

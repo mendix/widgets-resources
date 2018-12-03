@@ -69,10 +69,7 @@ export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
     private validateProps(props: VideoPlayerWebModelerProps): string {
         let errorMessage = "";
         if (!props.urlAttribute && !props.urlValue) {
-            errorMessage = `Please provide an URL`;
-        }
-        if (errorMessage) {
-            errorMessage = `Error in configuration: ${errorMessage}`;
+            errorMessage = `An URL is required for this widget`;
         }
 
         return errorMessage;

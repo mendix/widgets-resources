@@ -25,7 +25,7 @@ class Youtube extends React.Component<YoutubeProps> {
 
     render() {
         return (
-            <iframe id="iframe"
+            <iframe
                 className="video-player-iframe"
                 src={this.generateUrl(this.props.url)}
                 frameBorder="0"

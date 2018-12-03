@@ -1,8 +1,9 @@
 const path = require("path");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const package = require("./package");
 const widgetName = package.widgetName;
@@ -54,9 +55,10 @@ const widgetConfig = {
                 }
             },
             {
-                test: /\.(css|scss)$/, use: [
-                    "style-loader", "css-loader", "sass-loader"
-                ]
+                test: /\.(sa|sc|c)ss$/, loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader!sass-loader"
+                })
             }
         ]
     },
@@ -66,13 +68,17 @@ const widgetConfig = {
     plugins: [
         new ForkTsCheckerWebpackPlugin(),
         new CopyWebpackPlugin(
-            [ {
-                from: "src/**/*.xml",
-                toType: "template",
-                to: "widgets/[name].[ext]"
-            } ],
+            [
+                {
+                    from: "src/**/*.xml",
+                    toType: "template",
+                    to: "widgets/[name].[ext]"
+                }
+            ],
             { copyUnmodified: true }
-        )
+        ),
+        new ExtractTextPlugin({ filename: `./widgets/com/mendix/widget/custom/${name}/ui/${widgetName}.css` }),
+        // new BundleAnalyzerPlugin()
     ]
 };
 

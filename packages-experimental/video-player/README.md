@@ -11,7 +11,7 @@ Mendix widget to play videos from Youtube, Vimeo, Dailymotion and external Mp4 f
 * Identify the provider and auto load the right player
 * Enable and disable controls bar
 * Loop the video when it finishes
-* Starts the video muted
+* Starts the video on mute
 * Auto play the video when it ready
 * Define poster image for external Mp4 files
 * Set static URL & Poster when the dynamic data is not specified

@@ -10,16 +10,18 @@ Object.assign(webpackConfig, {
     ]
 });
 
+webpackConfig.devtool = "none";
+
 module.exports = function(config) {
     if (config.codeCoverage) {
         Object.assign(webpackConfig, {
             module: Object.assign(webpackConfig.module, {
                 rules: webpackConfig.module.rules.concat([ {
-                    test: /\.ts$/,
+                    test: /\.tsx?$/,
                     enforce: "post",
                     loader: "istanbul-instrumenter-loader",
                     include: path.resolve(__dirname, "src"),
-                    exclude: /\.(spec)\.ts$/
+                    exclude: /node_modules|\.spec\.tsx?$/
                 } ])
             })
         });
@@ -29,8 +31,8 @@ module.exports = function(config) {
         basePath: "",
         frameworks: [ "jasmine" ],
         files: [
-            { pattern: "src/**/*.ts", watched: true },
             { pattern: "tests/**/*.ts", watched: true },
+            { pattern: "tests/**/*.tsx", watched: true },
             "tests/test-index.js"
         ],
         exclude: [],
