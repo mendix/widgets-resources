@@ -23,7 +23,6 @@ const widgetConfig = {
         proxy: [ {
             target: mxHost,
             context: [ "**", `!/widgets/com/mendix/widget/custom/${name}/${widgetName}.js` ],
-            ws: true,
             onError: function(err, req, res) {
                 if (res && res.writeHead) {
                     res.writeHead(500, {
