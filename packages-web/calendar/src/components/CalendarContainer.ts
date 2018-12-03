@@ -199,7 +199,7 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
                 guid: mxObject.getGuid(),
                 callback: () => this.loadEvents(mxObject)
             }));
-            if (mxObject.getEntity() === this.props.eventEntity) {
+            if (this.props.dataSource === "context" && mxObject.getEntity() === this.props.eventEntity) {
                 [
                     this.props.allDayAttribute,
                     this.props.titleAttribute,
