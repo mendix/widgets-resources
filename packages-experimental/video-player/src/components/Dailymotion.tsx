@@ -57,7 +57,7 @@ class Dailymotion extends React.Component<DailymotionProps> {
         try {
 
             if (url.includes("dailymotion.com/embed"))
-                return url;
+                return `${url}${attributes}`;
 
             const urlVimeoSplit = url.split("/");
             if (urlVimeoSplit.length > 0) {

@@ -57,12 +57,12 @@ class Vimeo extends React.Component<VimeoProps> {
         try {
 
             if (url.includes("player.vimeo.com"))
-                return url;
+                return `${url}${attributes}`;
 
             const urlVimeoSplit = url.split("/");
             if (urlVimeoSplit.length > 0) {
                 const id = urlVimeoSplit[urlVimeoSplit.length - 1];
-                if (isFinite(Number(id)))
+                if (Number(id) > 0 && isFinite(Number(id)))
                     return `https://player.vimeo.com/video/${id}${attributes}`;
             }
         } catch (e) {

@@ -6,6 +6,7 @@ import Youtube from "../Youtube";
 import Vimeo from "../Vimeo";
 import Dailymotion from "../Dailymotion";
 import Html5Player from "../Html5Player";
+import { PlayerError } from "../PlayerError";
 
 describe("Video Player", () => {
     it("Renders the structure of youtube tags", () => {
@@ -107,24 +108,57 @@ describe("Video Player", () => {
         );
     });
 
+    it("Renders the structure of player error tags", () => {
+        const player = shallow(<VideoPlayer
+            url="httj://dailymotion,com/123456"
+            staticUrl=""
+            poster=""
+            staticPoster=""
+            autoStart={false}
+            showControls={false}
+            loop={false}
+            muted={false}
+            aspectRatio={false}
+        />);
+
+        expect(player).toBeElement(
+            <PlayerError />
+        );
+    });
+
     it("Test fixHeightWithRatio", () => {
         const test = fixHeightWithRatio(document.createElement("iframe"), 0);
 
         expect(test).toBe(undefined);
     });
 
-    it("Test getRatio", () => {
-        let ratioTest = 0;
-        getRatio("http://youtube.com/video/123456")
-            .then(ratio => ratioTest = ratio);
+    it("Test fixHeightWithRatio with parents", () => {
+        const parentOfParent = document.createElement("div");
+        const parent = document.createElement("div");
+        const child = document.createElement("iframe");
+        parent.style.width = "500px";
+        parent.appendChild(child);
+        parentOfParent.appendChild(parent);
+        const test = fixHeightWithRatio(child, 0.6);
 
-        expect(ratioTest).toEqual(0);
+        expect(test).toBe(undefined);
     });
 
-    it("Test validUrl", () => {
+    it("Test getRatio", () => {
+        getRatio("https://www.youtube.com/watch?v=ikW1LGOtnGM")
+            .then(ratio => expect(ratio).toEqual(0.5625));
+    });
+
+    it("Test valid url", () => {
         const provider = validateUrl("http://youtube.com");
 
         expect(provider).toEqual("http://youtube.com");
+    });
+
+    it("Test invalid url", () => {
+        const provider = validateUrl("http://youtube,com");
+
+        expect(provider).toEqual("");
     });
 
 });

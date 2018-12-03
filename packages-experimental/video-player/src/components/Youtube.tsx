@@ -56,7 +56,7 @@ class Youtube extends React.Component<YoutubeProps> {
         const attributes = this.getUrlAttributes();
         try {
             if (url.includes("youtube.com/embed/"))
-                return url;
+                return `${url}${attributes}`;
             if (url.includes("youtu.be/") || url.includes("youtube.com/v/")) {
                 const urlSplit = url.split("/");
                 if (urlSplit.length > 0) {
