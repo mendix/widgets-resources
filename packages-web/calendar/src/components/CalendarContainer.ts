@@ -78,7 +78,7 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         );
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
     }
 
