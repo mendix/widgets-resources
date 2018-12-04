@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.custom.Maps.Maps" needsEntityContext="false" offlineCapable="true"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
+    <name>Maps</name>
+    <description>Add different type of maps to your application, using LeafletJS</description>
+    <icon>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</icon>
+    <properties>
+        <!-- Data source -->
+        <property key="locations" type="object" isList="true" required="false">
+            <caption>Locations</caption>
+            <category>Map properties</category>
+            <description/>
+            <properties>
+                <property key="dataSourceType" type="enumeration" defaultValue="static">
+                    <caption>Data source</caption>
+                    <category>Data source</category>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="static">Static</enumerationValue>
+                        <enumerationValue key="context">Context</enumerationValue>
+                        <enumerationValue key="XPath">Database</enumerationValue>
+                        <enumerationValue key="microflow">Microflow</enumerationValue>
+                        <enumerationValue key="nanoflow">Nanoflow</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="locationsEntity" type="entity" required="false">
+                    <caption>Locations entity</caption>
+                    <category>Data source</category>
+                    <description/>
+                </property>
+                <property key="latitudeAttribute" type="attribute" entityProperty="locationsEntity" required="false">
+                    <caption>Latitude attribute</caption>
+                    <category>Data source</category>
+                    <description/>
+                    <attributeTypes>
+                        <attributeType name="Decimal"/>
+                    </attributeTypes>
+                </property>
+                <property key="longitudeAttribute" type="attribute" entityProperty="locationsEntity" required="false">
+                    <caption>Longitude attribute</caption>
+                    <category>Data source</category>
+                    <description/>
+                    <attributeTypes>
+                        <attributeType name="Decimal"/>
+                    </attributeTypes>
+                </property>
+                <property key="entityConstraint" type="entityConstraint" entityProperty="locationsEntity" required="false">
+                    <caption>XPath constraint</caption>
+                    <category>Data source</category>
+                    <description>Constraint for the data source 'Database' locations. It could be used with relation to '[%CurrentObject%]'</description>
+                </property>
+                <property key="inputParameterEntity" type="entity" required="false">
+                    <caption>Input parameter entity</caption>
+                    <category>Data source</category>
+                    <description>Entity of the parameter passed to the microflow or nanoflow, this should be equal to the context</description>
+                </property>
+                <property key="dataSourceMicroflow" type="microflow" entityProperty="inputParameterEntity" required="false">
+                    <caption>Microflow</caption>
+                    <category>Data source</category>
+                    <description>The datasource 'Microflow' that returns the list of locations</description>
+                    <returnType type="Object" entityProperty="locationsEntity" isList="true"/>
+                </property>
+                <property key="dataSourceNanoflow" type="nanoflow" entityProperty="inputParameterEntity" required="false">
+                    <caption>Nanoflow</caption>
+                    <category>Data source</category>
+                    <description>The datasource 'Nanoflow' that returns the list of locations</description>
+                    <returnType type="Object" isList="true" entityProperty="locationsEntity"/>
+                </property>
+                <property key="staticLatitude" type="string" required="false">
+                    <caption>Latitude</caption>
+                    <category>Static</category>
+                    <description/>
+                </property>
+                <property key="staticLongitude" type="string" required="false">
+                    <caption>Longitude</caption>
+                    <category>Static</category>
+                    <description/>
+                </property>
+                <!-- Custom Markers -->
+                <property key="markerImage" type="enumeration" defaultValue="defaultImage">
+                    <caption>Marker image</caption>
+                    <category>Markers</category>
+                    <description>Marker list: when the 'Image attribute' has a value it should be provided in the marker image list</description>
+                    <enumerationValues>
+                        <enumerationValue key="defaultImage">Default</enumerationValue>
+                        <enumerationValue key="staticImage">Static</enumerationValue>
+                        <enumerationValue key="systemImage">System image</enumerationValue>
+                        <enumerationValue key="enumImage">Marker list</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="staticMarkerIcon" type="image" required="false">
+                    <caption>Static image</caption>
+                    <category>Markers</category>
+                    <description>Image from the modeler</description>
+                </property>
+                <property key="markerImageAttribute" type="attribute" required="false" entityProperty="locationsEntity">
+                    <caption>Image attribute</caption>
+                    <category>Markers</category>
+                    <description>For 'Datasource' 'Database' or 'Microflow' and 'Context'; Display custom markers based on the enumeration attribute value, as configured in the 'Marker images list'</description>
+                    <attributeTypes>
+                        <attributeType name="Enum"/>
+                    </attributeTypes>
+                </property>
+                <property key="systemImagePath" type="entity" isPath="optional" pathType="reference" required="false" entityProperty="locationsEntity">
+                    <caption>System image path</caption>
+                    <category>Markers</category>
+                    <description>The entity selected should inherit from system image</description>
+                </property>
+                <property key="onClickEvent" type="enumeration" defaultValue="doNothing">
+                    <caption>On click</caption>
+                    <category>Marker events</category>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="doNothing">Do nothing</enumerationValue>
+                        <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
+                        <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
+                        <enumerationValue key="showPage">Show a page</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="onClickMicroflow" type="microflow" required="false" entityProperty="locationsEntity">
+                    <caption>On click microflow</caption>
+                    <category>Marker events</category>
+                    <description>The microflow that will be executed when a marker is clicked</description>
+                    <returnType type="Void" />
+                </property>
+                <property key="onClickNanoflow" type="nanoflow" required="false" entityProperty="locationsEntity">
+                    <caption>On click nanoflow</caption>
+                    <category>Marker events</category>
+                    <description>The nanoflow that will be executed when a marker is clicked</description>
+                    <returnType type="Void" />
+                </property>
+                <property key="openPageAs" type="enumeration" defaultValue="content">
+                    <caption>Open page as</caption>
+                    <category>Marker events</category>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="content">Full page</enumerationValue>
+                        <enumerationValue key="popup">Popup</enumerationValue>
+                        <enumerationValue key="modal">Blocking popup</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="page" type="form" required="false">
+                    <caption>Page</caption>
+                    <category>Marker events</category>
+                    <description>The page that will be opened when a marker is clicked</description>
+                </property>
+            </properties>
+        </property>
+        <property key="mapProvider" type="enumeration" defaultValue="openStreet">
+            <caption>Map provider</caption>
+            <category>Map properties</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="openStreet">Open street</enumerationValue>
+                <enumerationValue key="mapBox">Map box</enumerationValue>
+                <enumerationValue key="hereMaps">Here Maps</enumerationValue>
+                <enumerationValue key="googleMaps">Google Maps</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="apiToken" type="string" required="false">
+            <caption>Access token</caption>
+            <category>Map properties</category>
+            <description>Add token for either map box, here maps(app ID, app code respectively) and google maps</description>
+        </property>
+        <property key="defaultCenterLatitude" type="string" required="false">
+            <caption>Default center latitude</caption>
+            <category>Map properties</category>
+            <description/>
+        </property>
+        <property key="defaultCenterLongitude" type="string" required="false">
+            <caption>Default center longitude</caption>
+            <category>Map properties</category>
+            <description/>
+        </property>
+        <!-- Appearance -->
+        <property key="autoZoom" type="boolean" defaultValue="true">
+            <caption>Auto zoom centered</caption>
+            <category>Appearance</category>
+            <description>Initial best fit zoom based the available makers. It will overwrite the specified 'Zoom level'</description>
+        </property>
+        <property key="zoomLevel" type="integer" defaultValue="10">
+            <caption>Zoom level</caption>
+            <category>Appearance</category>
+            <description>1: World, 5: Landmass/continent, 10: City, 15: Streets, 20: Buildings</description>
+        </property>
+        <property key="widthUnit" type="enumeration" defaultValue="percentage">
+            <caption>Width unit</caption>
+            <category>Appearance</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="percentage">Percentage</enumerationValue>
+                <enumerationValue key="pixels">Pixels</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="width" type="integer" defaultValue="100">
+            <caption>Map width</caption>
+            <category>Appearance</category>
+            <description/>
+        </property>
+        <property key="heightUnit" type="enumeration" defaultValue="percentageOfWidth">
+            <caption>Height unit</caption>
+            <category>Appearance</category>
+            <description>'Percentage of width' is the aspect ratio, 'Pixels' is absolute. Warning: the 'Percentage of parent' only works when the parent has an absolute height, else it will not display</description>
+            <enumerationValues>
+                <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
+                <enumerationValue key="pixels">Pixels</enumerationValue>
+                <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="height" type="integer" defaultValue="75">
+            <caption>Map height</caption>
+            <category>Appearance</category>
+            <description/>
+        </property>
+        <!-- Map Controls -->
+        <property key="optionDrag" type="boolean" defaultValue="true">
+            <caption>Drag</caption>
+            <category>Controls</category>
+            <description>Enable moving center by dragging</description>
+        </property>
+        <property key="optionScroll" type="boolean" defaultValue="true">
+            <caption>Scroll to zoom</caption>
+            <category>Controls</category>
+            <description>Enable zooming the map using the mouse scroll wheel</description>
+        </property>
+        <property key="optionZoomControl" type="boolean" defaultValue="true">
+            <caption>Zoom</caption>
+            <category>Controls</category>
+            <description>Show zoom control [ + ] [ - ]</description>
+        </property>
+        <property key="attributionControl" type="boolean" defaultValue="true">
+            <caption>Attribution control</caption>
+            <category>Controls</category>
+            <description>Add attributions to the map (credits)</description>
+        </property>
+        <property key="optionStreetView" type="boolean" defaultValue="true">
+            <caption>Street view</caption>
+            <category>Google maps</category>
+            <description>Show the Street View Pegman control for google maps only</description>
+        </property>
+        <property key="mapTypeControl" type="boolean" defaultValue="true">
+            <caption>Map type</caption>
+            <category>Google maps</category>
+            <description>Show the map types control for google maps only</description>
+        </property>
+        <property key="fullScreenControl" type="boolean" defaultValue="true">
+            <caption>Full screen</caption>
+            <category>Google maps</category>
+            <description>Show the full screen control for google maps only</description>
+        </property>
+        <property key="rotateControl" type="boolean" defaultValue="true">
+            <caption>Rotate</caption>
+            <category>Google maps</category>
+            <description>Show the rotate control for google maps only</description>
+        </property>
+        <!-- Maps styles -->
+        <property key="mapStyles" type="string" multiline="true" required="false">
+            <caption>Map styles</caption>
+            <category>Google maps</category>
+            <description>JSON array with Google Maps styles. See https://developers.google.com/maps/documentation/javascript/style-reference This can be generated with tools like https://mapstyle.withgoogle.com</description>
+        </property>
+        <!-- Images -->
+        <property key="markerImages" type="object" isList="true" required="false">
+            <caption>Images</caption>
+            <category>Marker image list</category>
+            <description>Marker images are displayed when there is a location item for all data source types except 'static', 'marker image attribute' and the 'marker image' is of type 'marker list'. When the attribute value does not match a name, the marker will show the 'Static image' when available, or the default marker</description>
+            <properties>
+                <property key="enumKey" type="string">
+                    <caption>Value</caption>
+                    <category>Appearance</category>
+                    <description>The value should match with the marker image attribute. (Empty enumeration names can not be used)</description>
+                </property>
+                <property key="enumImage" type="image">
+                    <caption>Image</caption>
+                    <category>Appearance</category>
+                    <description/>
+                </property>
+            </properties>
+        </property>
+    </properties>
+</widget>
