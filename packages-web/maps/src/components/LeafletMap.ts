@@ -5,6 +5,7 @@ import {
     LeafletEvent,
     Map,
     Marker,
+    TileLayerOptions,
     icon,
     tileLayer
 } from "leaflet";
@@ -123,7 +124,7 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
         return tileLayer(urlTemplate, {
             attribution: mapAttribution,
             id: mapProvider === "mapBox" ? "mapbox.streets" : undefined
-        });
+        } as TileLayerOptions);
     }
 
     private setDefaultCenter = (props: LeafletMapProps) => {
