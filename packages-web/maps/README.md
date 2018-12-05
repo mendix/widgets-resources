@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/mendixlabs/google-maps.svg?branch=master)](https://travis-ci.org/mendixlabs/google-maps)
-[![Dependency Status](https://david-dm.org/mendixlabs/google-maps.svg)](https://david-dm.org/mendixlabs/google-maps)
-[![Dev Dependency Status](https://david-dm.org/mendixlabs/google-maps.svg#info=devDependencies)](https://david-dm.org/mendixlabs/google-maps#info=devDependencies)
-[![codecov](https://codecov.io/gh/mendixlabs/google-maps/branch/master/graph/badge.svg)](https://codecov.io/gh/mendixlabs/google-maps)
+[![Build Status](https://travis-ci.org/mendix/maps.svg?branch=master)](https://travis-ci.org/mendix/maps)
+[![Dependency Status](https://david-dm.org/mendix/maps.svg)](https://david-dm.org/mendix/maps)
+[![Dev Dependency Status](https://david-dm.org/mendix/maps.svg#info=devDependencies)](https://david-dm.org/mendix/maps#info=devDependencies)
+[![codecov](https://codecov.io/gh/mendix/maps/branch/master/graph/badge.svg)](https://codecov.io/gh/mendix/maps)
 ![badge](https://img.shields.io/badge/mendix-7.18.0-green.svg)
 
 # Maps
@@ -33,7 +33,7 @@ the specified custom markers else it will use the widget bundled marker.
 [Mapbox](https://www.mapbox.com)  
 [Here maps](https://www.here.com/)  
 [Google maps](https://cloud.google.com/maps-platform/)
-* The Google maps widget uses [Google Maps API v3](https://developers.google.com/maps/). So the [Limitations](https://developers.google.com/maps/premium/usage-limits)
+* Google maps uses [Google Maps API v3](https://developers.google.com/maps/). So the [Limitations](https://developers.google.com/maps/premium/usage-limits)
 from Google apply.
 
 ## Dependencies
@@ -90,7 +90,7 @@ From the `Marker image list` tab, the enumeration key and image is then specifie
 
 ## Issues, suggestions and feature requests
 We are actively maintaining this widget, please report any issues or suggestion for improvement at  
-[https://github.com/mendixlabs/google-maps/issues](https://github.com/mendixlabs/google-maps/issues).
+[https://github.com/mendix/maps/issues](https://github.com/mendix/maps/issues).
 
 ## Development
 See [here](/development.md)

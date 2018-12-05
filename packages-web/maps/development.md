@@ -3,7 +3,7 @@ Prerequisite: Install git, node package manager, webpack CLI, grunt CLI, Karma C
 
 To contribute, fork and clone.
 
-    > git clone https://github.com/mendixlabs/google-maps.git
+    > git clone https://github.com/mendix/maps.git
 
 The code is in typescript. Use a typescript IDE of your choice, like Visual Studio Code or WebStorm.
 
@@ -14,7 +14,7 @@ To set up the development environment, run:
 Create a folder named `dist` in the project root.
 
 Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Changes to the widget code shall be automatically pushed to this test project.
-Or get the test project from [https://github.com/mendixlabs/google-maps/releases/latest](https://github.com/mendixlabs/google-maps/releases/latest)
+Or get the test project from [https://github.com/mendix/maps/releases/latest](https://github.com/mendix/maps/releases/latest)
 
 To automatically compile, bundle and push code changes to the running test project, run:
 
