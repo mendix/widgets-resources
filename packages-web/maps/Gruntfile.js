@@ -5,7 +5,6 @@ const merge = require("webpack-merge");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const packageJson = require("./package.json");
 const widgetName = packageJson.widgetName;
-const name = packageJson.widgetName.toLowerCase();
 
 const webpackConfigRelease = webpackConfig.map(config => merge(config, {
     devtool: false,
@@ -13,7 +12,7 @@ const webpackConfigRelease = webpackConfig.map(config => merge(config, {
 }));
 
 webpackConfigRelease[0].plugins.push(new ExtractTextPlugin({
-    filename: `./widgets/com/mendix/widget/custom/${name}/ui/${widgetName}.css`
+    filename: `./widgets/com/mendix/widget/custom/${widgetName}/ui/${widgetName}.css`
 }));
 
 webpackConfigRelease[0].module.rules[1] = {

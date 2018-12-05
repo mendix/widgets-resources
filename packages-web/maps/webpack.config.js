@@ -5,7 +5,6 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 const package = require("./package");
 const widgetName = package.widgetName;
-const name = package.widgetName.toLowerCase();
 
 const mxHost = process.env.npm_package_config_mendixHost || "http://localhost:8080";
 const developmentPort = process.env.npm_package_config_developmentPort || "3000";
@@ -14,14 +13,14 @@ const widgetConfig = {
     entry: `./src/components/${widgetName}Container.ts`,
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
-        filename: `widgets/com/mendix/widget/custom/${name}/${widgetName}.js`,
+        filename: `widgets/com/mendix/widget/custom/${widgetName}/${widgetName}.js`,
         libraryTarget: "umd",
         publicPath: "/"
     },
     devServer: {
         port: developmentPort,
         proxy: [ {
-            context: [ "**", `!/widgets/com/mendix/widget/custom/${name}/${widgetName}.js` ],
+            context: [ "**", `!/widgets/com/mendix/widget/custom/${widgetName}/${widgetName}.js` ],
             target: mxHost,
             ws: true,
             onError: function(err, req, res) {
