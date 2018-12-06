@@ -12,12 +12,9 @@ export interface Html5PlayerProps {
     aspectRatio?: boolean;
 }
 
-class Html5Player extends React.Component<Html5PlayerProps> {
+export class Html5Player extends React.Component<Html5PlayerProps> {
 
     private video: HTMLVideoElement;
-    readonly state = {
-        ratio: 0
-    };
 
     constructor(props: Html5PlayerProps) {
         super(props);
@@ -33,7 +30,7 @@ class Html5Player extends React.Component<Html5PlayerProps> {
             };
         return (
             <video
-                className="video-player-html5"
+                className="widget-video-player-html5"
                 controls={this.props.showControls}
                 width="100%"
                 autoPlay={this.props.autoPlay}
@@ -64,5 +61,3 @@ class Html5Player extends React.Component<Html5PlayerProps> {
         }
     }
 }
-
-export default Html5Player;

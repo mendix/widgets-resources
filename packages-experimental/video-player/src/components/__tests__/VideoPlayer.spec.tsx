@@ -1,11 +1,11 @@
 import { shallow } from "enzyme";
 import * as React from "react";
 
-import VideoPlayer, { fixHeightWithRatio, getRatio, validateUrl } from "../VideoPlayer";
-import Youtube from "../Youtube";
-import Vimeo from "../Vimeo";
-import Dailymotion from "../Dailymotion";
-import Html5Player from "../Html5Player";
+import { VideoPlayer } from "../VideoPlayer";
+import { Youtube } from "../Youtube";
+import { Vimeo } from "../Vimeo";
+import { Dailymotion } from "../Dailymotion";
+import { Html5Player } from "../Html5Player";
 import { PlayerError } from "../PlayerError";
 
 describe("Video Player", () => {
@@ -127,7 +127,7 @@ describe("Video Player", () => {
     });
 
     it("Test fixHeightWithRatio", () => {
-        const test = fixHeightWithRatio(document.createElement("iframe"), 0);
+        const test = Utils.fixHeightWithRatio(document.createElement("iframe"), 0);
 
         expect(test).toBe(undefined);
     });
@@ -139,24 +139,24 @@ describe("Video Player", () => {
         parent.style.width = "500px";
         parent.appendChild(child);
         parentOfParent.appendChild(parent);
-        const test = fixHeightWithRatio(child, 0.6);
+        const test = Utils.fixHeightWithRatio(child, 0.6);
 
         expect(test).toBe(undefined);
     });
 
     it("Test getRatio", () => {
-        getRatio("https://www.youtube.com/watch?v=ikW1LGOtnGM")
+        Utils.getRatio("https://www.youtube.com/watch?v=ikW1LGOtnGM")
             .then(ratio => expect(ratio).toEqual(0.5625));
     });
 
     it("Test valid url", () => {
-        const provider = validateUrl("http://youtube.com");
+        const provider = Utils.validateUrl("http://youtube.com");
 
         expect(provider).toEqual("http://youtube.com");
     });
 
     it("Test invalid url", () => {
-        const provider = validateUrl("http://youtube,com");
+        const provider = Utils.validateUrl("http://youtube,com");
 
         expect(provider).toEqual("");
     });

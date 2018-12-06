@@ -1,6 +1,5 @@
 import * as React from "react";
 import ReactResizeDetector from "react-resize-detector";
-import { fixHeightWithRatio, getRatio } from "./VideoPlayer";
 
 export interface DailymotionProps {
     url: string;
@@ -10,7 +9,7 @@ export interface DailymotionProps {
     aspectRatio?: boolean;
 }
 
-class Dailymotion extends React.Component<DailymotionProps> {
+export class Dailymotion extends React.Component<DailymotionProps> {
 
     private iframe: HTMLIFrameElement;
     readonly state = {
@@ -26,7 +25,7 @@ class Dailymotion extends React.Component<DailymotionProps> {
     render() {
         return (
             <iframe
-                className="video-player-iframe"
+                className="widget-video-player-iframe"
                 src={this.generateUrl(this.props.url)}
                 frameBorder="0"
                 allow="autoplay; fullscreen"
@@ -41,12 +40,12 @@ class Dailymotion extends React.Component<DailymotionProps> {
     private onResize() {
         if (this.iframe && this.props.aspectRatio) {
             if (this.state.ratio) {
-                fixHeightWithRatio(this.iframe, this.state.ratio);
+                Utils.fixHeightWithRatio(this.iframe, this.state.ratio);
             } else {
-                getRatio(this.props.url)
+                Utils.getRatio(this.props.url)
                     .then(ratio => {
                         this.setState({ ratio });
-                        fixHeightWithRatio(this.iframe, this.state.ratio);
+                        Utils.fixHeightWithRatio(this.iframe, this.state.ratio);
                     });
             }
         }
@@ -91,6 +90,13 @@ class Dailymotion extends React.Component<DailymotionProps> {
         }
         return attributes;
     }
-}
 
-export default Dailymotion;
+    public static canPlay(url: string): boolean {
+        if (url) {
+            if (url.includes("dailymotion.com")) {
+                return true;
+            }
+        }
+        return false;
+    }
+}

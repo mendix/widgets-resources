@@ -2,7 +2,7 @@ import { shallow } from "enzyme";
 import * as React from "react";
 
 import ReactResizeDetector from "react-resize-detector";
-import Html5Player from "../Html5Player";
+import { Html5Player } from "../Html5Player";
 
 describe("Html5 Player", () => {
     it("Renders the structure of video tags and check the style", () => {

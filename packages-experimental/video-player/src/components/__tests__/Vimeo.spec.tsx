@@ -2,7 +2,7 @@ import { shallow } from "enzyme";
 import * as React from "react";
 
 import ReactResizeDetector from "react-resize-detector";
-import Vimeo from "../Vimeo";
+import { Vimeo } from "../Vimeo";
 
 describe("Vimeo Player", () => {
     it("Renders the structure of iframe tags and check classes", () => {

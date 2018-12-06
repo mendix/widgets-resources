@@ -1,10 +1,11 @@
-import { HeightUnitType, SizeContainer, WidthUnitType } from "./SizeContainer";
-import classNames = require("classnames");
 import * as React from "react";
+import classNames = require("classnames");
+
+import { hot } from "react-hot-loader";
+import { HeightUnitType, SizeContainer, WidthUnitType } from "./SizeContainer";
+import { VideoPlayer } from "./VideoPlayer";
 
 import "../ui/VideoPlayer.css";
-import { hot } from "react-hot-loader";
-import VideoPlayer from "./VideoPlayer";
 
 export interface VideoPlayerContainerProps {
     "class"?: string;
@@ -30,7 +31,7 @@ class VideoPlayerContainer extends React.Component<VideoPlayerContainerProps> {
     render() {
         return (
             <SizeContainer
-                className={classNames("video-player-container", this.props.class)}
+                className={classNames("widget-video-player widget-video-player-container", this.props.class)}
                 style={this.props.style}
                 widthUnit={this.props.widthUnit}
                 width={this.props.width}

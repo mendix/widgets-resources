@@ -1,9 +1,10 @@
 import * as React from "react";
-import Html5Player from "./Html5Player";
-import Youtube from "./Youtube";
-import Vimeo from "./Vimeo";
+
+import { Dailymotion } from "./Dailymotion";
+import { Html5Player } from "./Html5Player";
 import { PlayerError } from "./PlayerError";
-import Dailymotion from "./Dailymotion";
+import { Vimeo } from "./Vimeo";
+import { Youtube } from "./Youtube";
 
 export interface VideoPlayerProps {
     url: string;
@@ -20,25 +21,7 @@ export interface VideoPlayerProps {
     aspectRatio: boolean;
 }
 
-const extractProvider = (url: string): string => {
-    if (url)
-        if (url.includes("youtube.com") || url.includes("youtu.be")) {
-            return "youtube";
-        } else if (url.includes("vimeo.com")) {
-            return "vimeo";
-        } else if (url.includes("dailymotion.com")) {
-            return "dailymotion";
-        }
-    return "";
-};
-
-export const validateUrl = (url: string): string => {
-    if (/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g.test(url))
-        return url;
-    return "";
-};
-
-class VideoPlayer extends React.Component <VideoPlayerProps> {
+export class VideoPlayer extends React.Component <VideoPlayerProps> {
 
     constructor(props: VideoPlayerProps) {
         super(props);
@@ -49,14 +32,14 @@ class VideoPlayer extends React.Component <VideoPlayerProps> {
     }
 
     render() {
-        const provider = extractProvider(this.props.url || this.props.staticUrl);
-        if (!validateUrl(this.props.url || this.props.staticUrl))
+        const url = this.props.url || this.props.staticUrl;
+        if (!Utils.validateUrl(url))
             return <PlayerError />;
-        if (provider === "youtube") {
+        if (Youtube.canPlay(url)) {
             return this.renderYoutubePlayer();
-        } else if (provider === "vimeo") {
+        } else if (Vimeo.canPlay(url)) {
             return this.renderVimeoPlayer();
-        } else if (provider === "dailymotion") {
+        } else if (Dailymotion.canPlay(url)) {
             return this.renderDailymotionPlayer();
         }
         return this.renderHtml5Player();
@@ -112,26 +95,3 @@ class VideoPlayer extends React.Component <VideoPlayerProps> {
         );
     }
 }
-
-export function fixHeightWithRatio(element: HTMLElement, ratio: number) {
-    const height = element.parentElement ? element.parentElement!.offsetWidth * ratio : 0;
-    if (height > 0) {
-        element.style.height = `${height}px`;
-        element.parentElement!.style.height = `${height}px`;
-        if (element.parentElement!.parentElement)
-            element.parentElement!.parentElement!.style.height = `${height}px`;
-    }
-}
-
-export function getRatio(url: string): Promise<number> {
-    return fetch(`https://noembed.com/embed?url=${url}`)
-        .then(response => response.json())
-        .then((properties) => {
-            return properties.height / properties.width;
-        })
-        .catch(() => {
-            return 0;
-        });
-}
-
-export default VideoPlayer;

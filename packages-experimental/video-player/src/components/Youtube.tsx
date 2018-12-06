@@ -1,5 +1,4 @@
 import * as React from "react";
-import { fixHeightWithRatio, getRatio } from "./VideoPlayer";
 import ReactResizeDetector from "react-resize-detector";
 
 export interface YoutubeProps {
@@ -11,7 +10,7 @@ export interface YoutubeProps {
     aspectRatio?: boolean;
 }
 
-class Youtube extends React.Component<YoutubeProps> {
+export class Youtube extends React.Component<YoutubeProps> {
     private iframe: HTMLIFrameElement;
     readonly state = {
         ratio: 0
@@ -26,7 +25,7 @@ class Youtube extends React.Component<YoutubeProps> {
     render() {
         return (
             <iframe
-                className="video-player-iframe"
+                className="widget-video-player-iframe"
                 src={this.generateUrl(this.props.url)}
                 frameBorder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -41,12 +40,12 @@ class Youtube extends React.Component<YoutubeProps> {
     private onResize() {
         if (this.iframe && this.props.aspectRatio) {
             if (this.state.ratio) {
-                fixHeightWithRatio(this.iframe, this.state.ratio);
+                Utils.fixHeightWithRatio(this.iframe, this.state.ratio);
             } else {
-                getRatio(this.props.url)
+                Utils.getRatio(this.props.url)
                     .then(ratio => {
                         this.setState({ ratio });
-                        fixHeightWithRatio(this.iframe, this.state.ratio);
+                        Utils.fixHeightWithRatio(this.iframe, this.state.ratio);
                     });
             }
         }
@@ -103,6 +102,13 @@ class Youtube extends React.Component<YoutubeProps> {
         return attributes;
     }
 
-}
+    public static canPlay(url: string): boolean {
+        if (url) {
+            if (url.includes("youtube.com") || url.includes("youtu.be")) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-export default Youtube;
+}

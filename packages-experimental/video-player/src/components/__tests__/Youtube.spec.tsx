@@ -2,7 +2,7 @@ import { shallow } from "enzyme";
 import * as React from "react";
 
 import ReactResizeDetector from "react-resize-detector";
-import Youtube from "../Youtube";
+import { Youtube } from "../Youtube";
 
 describe("Youtube Player", () => {
     it("Renders the structure of iframe tags and check classes", () => {

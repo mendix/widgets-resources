@@ -1,4 +1,4 @@
-.video-player-iframe{
+.widget-video-player-iframe{
     position: absolute;
     border: 0px;
     margin: 0;
@@ -8,12 +8,11 @@
     height: 100%;
 }
 
-.video-player-container{
+.widget-video-player-container{
     min-height: 250px;
 }
 
-.video-player-html5{
-    /*object-fit: cover; -> problems with the video size */
+.widget-video-player-html5{
     background-color: #000;
     position: absolute;
 }

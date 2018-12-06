@@ -1,7 +1,7 @@
 import { shallow } from "enzyme";
 import * as React from "react";
 
-import Dailymotion from "../Dailymotion";
+import { Dailymotion } from "../Dailymotion";
 import ReactResizeDetector from "react-resize-detector";
 
 describe("Dailymotion Player", () => {
