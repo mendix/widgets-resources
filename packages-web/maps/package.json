@@ -1,7 +1,7 @@
 {
   "name": "maps",
   "widgetName": "Maps",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "Show locations on Google Maps",
   "copyright": "Mendix BV",
   "scripts": {
@@ -85,7 +85,7 @@
     "karma-remap-istanbul": "^0.6.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.32",
-    "karma-webpack": "^3.0.5",
+    "karma-webpack": "2.0.4",
     "mendix-client": "^7.15.4",
     "mendix-widget-build-script": "^1.0.0",
     "node-sass": "^4.10.0",
