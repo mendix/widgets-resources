@@ -19,6 +19,8 @@ export interface VideoPlayerProps {
     loop: boolean;
     muted: boolean;
     aspectRatio: boolean;
+
+    preview?: boolean;
 }
 
 export class VideoPlayer extends React.Component <VideoPlayerProps> {
@@ -34,7 +36,7 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
     render() {
         const url = this.props.url || this.props.staticUrl;
         if (!Utils.validateUrl(url))
-            return <PlayerError />;
+            return <PlayerError preview={this.props.preview} />;
         if (Youtube.canPlay(url)) {
             return this.renderYoutubePlayer();
         } else if (Vimeo.canPlay(url)) {
