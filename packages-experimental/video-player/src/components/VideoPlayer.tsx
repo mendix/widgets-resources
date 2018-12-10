@@ -5,6 +5,7 @@ import { Html5Player } from "./Html5Player";
 import { PlayerError } from "./PlayerError";
 import { Vimeo } from "./Vimeo";
 import { Youtube } from "./Youtube";
+import { validateUrl } from "../utils/Utils";
 
 export interface VideoPlayerProps {
     url: string;
@@ -35,7 +36,7 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
 
     render() {
         const url = this.props.url || this.props.staticUrl;
-        if (!Utils.validateUrl(url))
+        if (!validateUrl(url))
             return <PlayerError preview={this.props.preview} />;
         if (Youtube.canPlay(url)) {
             return this.renderYoutubePlayer();

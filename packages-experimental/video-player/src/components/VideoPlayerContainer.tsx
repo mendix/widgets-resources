@@ -46,7 +46,7 @@ class VideoPlayerContainer extends React.Component<VideoPlayerContainerProps> {
                              loop={this.props.loop}
                              muted={this.props.muted}
                              aspectRatio={this.props.aspectRatio}
-                             preview={true}/>
+                             preview={false}/>
             </SizeContainer>
         );
     }

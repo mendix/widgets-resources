@@ -5,6 +5,7 @@ import { Alert } from "./components/Alert";
 import { PlayerError } from "./components/PlayerError";
 import { HeightUnitType, SizeContainer, WidthUnitType } from "./components/SizeContainer";
 import { VideoPlayer, VideoPlayerProps } from "./components/VideoPlayer";
+import { validateUrl } from "./utils/Utils";
 
 declare function require(name: string): string;
 
@@ -46,8 +47,8 @@ export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
     }
 
     private renderPlayers(): React.ReactElement<{}> {
-        if (!Utils.validateUrl(this.props.urlAttribute || this.props.urlValue)) {
-            return <PlayerError/>;
+        if (!validateUrl(this.props.urlAttribute || this.props.urlValue)) {
+            return <PlayerError preview={true}/>;
         }
         return <VideoPlayer {...this.transformProps(this.props)}/>;
     }
@@ -63,7 +64,8 @@ export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
             showControls: props.showControls,
             loop: false,
             muted: true,
-            aspectRatio: false
+            aspectRatio: false,
+            preview: true
         };
     }
 

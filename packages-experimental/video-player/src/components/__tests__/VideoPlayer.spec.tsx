@@ -7,6 +7,7 @@ import { Vimeo } from "../Vimeo";
 import { Dailymotion } from "../Dailymotion";
 import { Html5Player } from "../Html5Player";
 import { PlayerError } from "../PlayerError";
+import { fixHeightWithRatio, getRatio, validateUrl } from "../../utils/Utils";
 
 describe("Video Player", () => {
     it("Renders the structure of youtube tags", () => {
@@ -127,7 +128,7 @@ describe("Video Player", () => {
     });
 
     it("Test fixHeightWithRatio", () => {
-        const test = Utils.fixHeightWithRatio(document.createElement("iframe"), 0);
+        const test = fixHeightWithRatio(document.createElement("iframe"), 0);
 
         expect(test).toBe(undefined);
     });
@@ -139,24 +140,24 @@ describe("Video Player", () => {
         parent.style.width = "500px";
         parent.appendChild(child);
         parentOfParent.appendChild(parent);
-        const test = Utils.fixHeightWithRatio(child, 0.6);
+        const test = fixHeightWithRatio(child, 0.6);
 
         expect(test).toBe(undefined);
     });
 
     it("Test getRatio", () => {
-        Utils.getRatio("https://www.youtube.com/watch?v=ikW1LGOtnGM")
+        getRatio("https://www.youtube.com/watch?v=ikW1LGOtnGM")
             .then(ratio => expect(ratio).toEqual(0.5625));
     });
 
     it("Test valid url", () => {
-        const provider = Utils.validateUrl("http://youtube.com");
+        const provider = validateUrl("http://youtube.com");
 
         expect(provider).toEqual("http://youtube.com");
     });
 
     it("Test invalid url", () => {
-        const provider = Utils.validateUrl("http://youtube,com");
+        const provider = validateUrl("http://youtube,com");
 
         expect(provider).toEqual("");
     });

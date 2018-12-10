@@ -1,5 +1,6 @@
 import * as React from "react";
 import ReactResizeDetector from "react-resize-detector";
+import { fixHeightWithRatio, getRatio } from "../utils/Utils";
 
 export interface VimeoProps {
     url: string;
@@ -40,12 +41,12 @@ export class Vimeo extends React.Component<VimeoProps> {
     private onResize() {
         if (this.iframe && this.props.aspectRatio) {
             if (this.state.ratio) {
-                Utils.fixHeightWithRatio(this.iframe, this.state.ratio);
+                fixHeightWithRatio(this.iframe, this.state.ratio);
             } else {
-                Utils.getRatio(this.props.url)
+                getRatio(this.props.url)
                     .then(ratio => {
                         this.setState({ ratio });
-                        Utils.fixHeightWithRatio(this.iframe, this.state.ratio);
+                        fixHeightWithRatio(this.iframe, this.state.ratio);
                     });
             }
         }
