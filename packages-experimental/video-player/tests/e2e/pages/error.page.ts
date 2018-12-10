@@ -1,6 +1,6 @@
 class ErrorPage {
 
-    public get noContent() { return browser.element(".video-player-container.mx-name-videoPlayerNoContent div.video-player-error"); }
+    public get noContent() { return browser.element(".widget-video-player.widget-video-player-container.mx-name-videoPlayerNoContent.size-box video"); }
 
     public open(): void {
         browser.url("/p/errors");

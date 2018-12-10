@@ -1,12 +1,12 @@
 class TabPage {
 
-    public get youtube() { return browser.element(".video-player-container.mx-name-videoPlayer1.size-box iframe"); }
+    public get youtube() { return browser.element(".widget-video-player.widget-video-player-container.mx-name-videoPlayer1.size-box iframe"); }
 
-    public get vimeo() { return browser.element(".video-player-container.mx-name-videoPlayer5.size-box iframe"); }
+    public get vimeo() { return browser.element(".widget-video-player.widget-video-player-container.mx-name-videoPlayer5.size-box iframe"); }
 
-    public get html5() { return browser.element(".video-player-container.mx-name-videoPlayer3.size-box video"); }
+    public get html5() { return browser.element(".widget-video-player.widget-video-player-container.mx-name-videoPlayer3.size-box video"); }
 
-    public get dailymotion() { return browser.element(".video-player-container.mx-name-videoPlayer4.size-box iframe"); }
+    public get dailymotion() { return browser.element(".widget-video-player.widget-video-player-container.mx-name-videoPlayer4.size-box iframe"); }
 
     public get youtubeTab() {
         return browser.element(".mx-name-tabPage1");

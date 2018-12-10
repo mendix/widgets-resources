@@ -14,7 +14,7 @@ exports.config = {
     coloredLogs: true,
     bail: 0,
     screenshotPath: "dist/wdio/",
-    baseUrl: debug ? "http://localhost:8080/" : "https://videoplayertest100-sandbox.mxapps.io",
+    baseUrl: debug ? "http://localhost:8080/" : "https://videoplayer-sandbox.mxapps.io",
     waitforTimeout: 30000,
     connectionRetryTimeout: 90000,
     connectionRetryCount: 0,
