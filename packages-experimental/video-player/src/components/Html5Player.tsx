@@ -20,6 +20,7 @@ export class Html5Player extends React.Component<Html5PlayerProps> {
         super(props);
 
         this.onResize = this.onResize.bind(this);
+        this.handleError = this.handleError.bind(this);
     }
 
     render() {
@@ -39,11 +40,17 @@ export class Html5Player extends React.Component<Html5PlayerProps> {
                 poster={this.props.poster}
                 ref={(node: HTMLVideoElement) => this.video = node }
                 {...sizeProps}>
-                <source src={this.props.url} type="video/mp4"/>
+                <source src={this.props.url} type="video/mp4" onError={this.handleError}/>
                 <ReactResizeDetector handleWidth handleHeight onResize={this.onResize}
                                      refreshMode="debounce" refreshRate={100} />
             </video>
         );
+    }
+
+    private handleError() {
+        if (!this.props.poster) {
+            this.video.poster = "https://i.imgur.com/V5pqyp2.png";
+        }
     }
 
     private onResize() {
