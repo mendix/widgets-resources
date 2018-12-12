@@ -52,7 +52,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
 
     componentDidMount() {
         if (this.props.scriptsLoaded) {
-            this.initMap(this.props);
+            this.createUpdateMap(this.props);
         }
     }
 
@@ -60,8 +60,8 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
         if (nextProps.alertMessage !== this.props.alertMessage) {
             this.setState({ alertMessage: nextProps.alertMessage });
         }
-        if (nextProps.scriptsLoaded && this.props.allLocations !== nextProps.allLocations) {
-            this.initMap(nextProps);
+        if (!this.props.scriptsLoaded && nextProps.scriptsLoaded || this.props.allLocations !== nextProps.allLocations) {
+            this.createUpdateMap(nextProps);
         }
     }
 
@@ -75,7 +75,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
         this.googleMapsNode = node;
     }
 
-    private initMap = (props: GoogleMapsProps) => {
+    private createUpdateMap = (props: GoogleMapsProps) => {
         const mapOptions = {
             zoom: props.zoomLevel,
             zoomControl: props.optionZoomControl,
