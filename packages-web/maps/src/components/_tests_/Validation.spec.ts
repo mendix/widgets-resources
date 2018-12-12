@@ -16,7 +16,6 @@ describe("utils/Data", () => {
         };
 
         const validationProps: Partial<mapContainerProps> = {
-            friendlyId: "_com.mendix.Maps.Maps",
             mapProvider: "openStreet",
             autoZoom: true
         };
@@ -30,7 +29,7 @@ describe("utils/Data", () => {
         it("returns alert message if autozoom is not enabled and zomm is less than 2", () => {
             const validationMessage = validateLocationProps({ ...validationProps, zoomLevel: 1, autoZoom: false });
 
-            expect(validationMessage).toBe("_com.mendix.Maps.Maps: Zoom Level should be greater than one");
+            expect(validationMessage).toBe("Zoom Level should be greater than one");
         });
 
         it("returns no alert if there is a map token for mapProvider mapbox", () => {
@@ -43,7 +42,7 @@ describe("utils/Data", () => {
         it("returns alert if there is no map token for mapProvider mapbox", () => {
             const validationMessage = validateLocationProps({ ...validationProps, mapProvider: "mapBox" });
 
-            expect(validationMessage).toBe("_com.mendix.Maps.Maps: An api token for mapBox is required");
+            expect(validationMessage).toBe("An api token for mapBox is required");
         });
 
         it("returns no alert if there are no locations", () => {
@@ -58,7 +57,7 @@ describe("utils/Data", () => {
                 locations: [ { ...defaultProps as locationDataProps, longitudeAttribute: "" } ]
             });
 
-            expect(validationMessage).toBe(`_com.mendix.Maps.Maps: Latitude and longitude attributes are required for data source context at location 1`);
+            expect(validationMessage).toBe(`Latitude and longitude attributes are required for data source context at location 1`);
         });
 
         it("returns alert if data source type is static and there is no latitude or longitude", () => {
@@ -67,7 +66,7 @@ describe("utils/Data", () => {
                 locations: [ { ...defaultProps as locationDataProps, dataSourceType: "static", staticLatitude: "lat" } ]
             });
 
-            expect(validationMessage).toBe("_com.mendix.Maps.Maps: Invalid static locations. Latitude and longitude are required at location 1");
+            expect(validationMessage).toBe("Invalid static locations. Latitude and longitude are required at location 1");
         });
 
         it("returns alert if data source type is microflow and there is no microflow", () => {
@@ -76,7 +75,7 @@ describe("utils/Data", () => {
                 locations: [ { ...defaultProps as locationDataProps, dataSourceType: "microflow" } ]
             });
 
-            expect(validationMessage).toBe("_com.mendix.Maps.Maps: A Microflow is required for Data source Microflow at location 1");
+            expect(validationMessage).toBe("A Microflow is required for Data source Microflow at location 1");
         });
 
         it("return an alert if marker image is selected and there are no marker images", () => {
@@ -85,7 +84,7 @@ describe("utils/Data", () => {
                 locations: [ { ...defaultProps as locationDataProps, markerImage: "enumImage" } ]
             });
 
-            expect(validationMessage).toBe("_com.mendix.Maps.Maps: Marker images are required for image attribute at location 1");
+            expect(validationMessage).toBe("Marker images are required for image attribute at location 1");
         });
 
         it("return an alert if marker image type is 'system image path' and there is no 'system image path'", () => {
@@ -94,7 +93,7 @@ describe("utils/Data", () => {
                 locations: [ { ...defaultProps as locationDataProps, markerImage: "systemImage" } ]
             });
 
-            expect(validationMessage).toBe("_com.mendix.Maps.Maps: System image path is required at location 1");
+            expect(validationMessage).toBe("System image path is required at location 1");
         });
 
         it("return an alert if on click event is call microflow and there is no microflow", () => {
@@ -103,7 +102,7 @@ describe("utils/Data", () => {
                 locations: [ { ...defaultProps as locationDataProps, onClickEvent: "callMicroflow" } ]
             });
 
-            expect(validationMessage).toBe("_com.mendix.Maps.Maps: A Microflow is required for on click Microflow at location 1");
+            expect(validationMessage).toBe("A Microflow is required for on click Microflow at location 1");
         });
         it("return an alert if on click event is call nanoflow and there is no nanoflow", () => {
             const validationMessage = validateLocationProps({
@@ -111,7 +110,7 @@ describe("utils/Data", () => {
                 locations: [ { ...defaultProps as locationDataProps, onClickEvent: "callNanoflow" } ]
             });
 
-            expect(validationMessage).toBe("_com.mendix.Maps.Maps: A Nanoflow is required for on click Nanoflow at location 1");
+            expect(validationMessage).toBe("A Nanoflow is required for on click Nanoflow at location 1");
         });
 
         it("return an alert if on click event is show page and there is no page", () => {
@@ -120,7 +119,7 @@ describe("utils/Data", () => {
                 locations: [ { ...defaultProps as locationDataProps, onClickEvent: "showPage" } ]
             });
 
-            expect(validationMessage).toBe("_com.mendix.Maps.Maps: A page is required for on click show page at location 1");
+            expect(validationMessage).toBe("A page is required for on click show page at location 1");
         });
 
         it("return no alert if on click event is do nothing", () => {

@@ -115,16 +115,16 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
                 });
             }
 
-            return Promise.all(flattenLocations.map(loca => validateLocations(loca)));
+            return Promise.all(flattenLocations.map(location => validateLocations(location)));
         }).then(validLocations =>
             this.setState({
                 locations: validLocations,
                 isFetchingData: false,
                 alertMessage: ""
-            })).catch(reason => {
+            })).catch(alertMessage => {
                 this.setState({
                     locations: [],
-                    alertMessage: `${this.props.friendlyId}: ${reason}`,
+                    alertMessage,
                     isFetchingData: false
                 });
             });
@@ -197,23 +197,26 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
                 mx.ui.action(onClickMicroflow, {
                     context,
                     origin: mxform,
-                    error: error =>
-                        this.setState({
-                            alertMessage: `${this.props.friendlyId}: Error while executing on click microflow ${onClickMicroflow} : ${error.message}`
-                        })
+                    error: error => mx.ui.error(`Error while executing on click microflow ${onClickMicroflow} : ${error.message}`)
                 });
             } else if (onClickEvent === "callNanoflow" && onClickNanoflow.nanoflow) {
                 window.mx.data.callNanoflow({
                     nanoflow: onClickNanoflow,
                     origin: mxform,
                     context,
-                    error: error => this.setState({ alertMessage: `${this.props.friendlyId}: Error while executing on click nanoflow: ${error.message}` })
+                    error: error => {
+                        logger.error(`${this.props.friendlyId}: Error while executing on click nanoflow: ${error.message}`);
+                        mx.ui.error(`Error while executing on click nanoflow: ${error.message}`);
+                    }
                 });
             } else if (onClickEvent === "showPage" && page) {
                 window.mx.ui.openForm(page, {
                     location: openPageAs,
                     context,
-                    error: error => this.setState({ alertMessage: `${this.props.friendlyId}: Error while opening page ${page}: ${error.message}` })
+                    error: error => {
+                        logger.error(`${this.props.friendlyId}: Error while opening page ${page}: ${error.message}`);
+                        mx.ui.error(`Error while opening page ${page}: ${error.message}`);
+                    }
                 });
             }
         }
