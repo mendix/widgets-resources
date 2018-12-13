@@ -24,7 +24,6 @@ const mapAttr = Utils.mapAttr;
 
 export interface LeafletMapProps extends SharedProps, MapProps {
     onClickMarker?: (event: LeafletEvent, locationAttr: DataSourceLocationProps) => void;
-    inPreviewMode: boolean;
 }
 
 export interface LeafletMapState {

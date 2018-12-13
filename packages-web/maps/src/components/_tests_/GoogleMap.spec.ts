@@ -22,7 +22,8 @@ describe("Google maps", () => {
         widthUnit: "percentage",
         mapStyles: "",
         divStyles: {},
-        mapProvider: "googleMaps"
+        mapProvider: "googleMaps",
+        inPreviewMode: false
     };
 
     beforeAll(() => {

@@ -25,12 +25,13 @@ export class preview extends PureComponent<MapsContainerProps, {}> {
             className: this.props.class,
             fetchingData: false,
             divStyles: parseStyle(this.props.style),
-            mapsToken: mapsApiToken
+            mapsToken: mapsApiToken,
+            inPreviewMode: true
         };
 
         return this.props.mapProvider === "googleMaps"
             ? createElement(GoogleMap, { ...commonProps })
-            : createElement(LeafletMap, { ...commonProps, inPreviewMode: true });
+            : createElement(LeafletMap, { ...commonProps });
     }
 
     getLocations({ locations }: MapsContainerProps): Container.Location[] {
