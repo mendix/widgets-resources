@@ -45,12 +45,13 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
             alertMessage: this.state.alertMessage,
             divStyles: parseStyle(this.props.style),
             onClickMarker: this.onClickMarker,
-            mapsToken: mapsApiToken
+            mapsToken: mapsApiToken,
+            inPreviewMode: false
         };
 
         return this.props.mapProvider === "googleMaps"
             ? createElement(GoogleMap, { ...commonProps })
-            : createElement(LeafletMap, { ...commonProps, inPreviewMode: false });
+            : createElement(LeafletMap, { ...commonProps });
     }
 
     UNSAFE_componentWillReceiveProps(nextProps: MapsContainerProps) {

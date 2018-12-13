@@ -131,6 +131,7 @@ export namespace MapUtils {
         fetchingData?: boolean;
         divStyles: object;
         mapsToken?: string;
+        inPreviewMode: boolean;
     }
 
     export type heightUnitType = "percentageOfWidth" | "percentageOfParent" | "pixels";

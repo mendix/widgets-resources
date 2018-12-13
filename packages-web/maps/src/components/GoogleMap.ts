@@ -60,8 +60,10 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
         if (nextProps.alertMessage !== this.props.alertMessage) {
             this.setState({ alertMessage: nextProps.alertMessage });
         }
-        if (!this.props.scriptsLoaded && nextProps.scriptsLoaded || this.props.allLocations !== nextProps.allLocations) {
-            this.createUpdateMap(nextProps);
+        if (nextProps.scriptsLoaded) {
+            if (this.props.allLocations !== nextProps.allLocations || this.props.inPreviewMode) {
+                this.createUpdateMap(nextProps);
+            }
         }
     }
 
