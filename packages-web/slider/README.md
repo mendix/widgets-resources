@@ -13,7 +13,7 @@ Change a number value using a slider
 * Render slider with different bootstrap colors
 
 ## Dependencies
-Mendix 7.4
+Mendix 7.14
 
 ## Demo project
 https://slider.mxapps.io/
