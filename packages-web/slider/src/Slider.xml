@@ -15,7 +15,7 @@
             </attributeTypes>
         </property>
         <property key="minAttribute" type="attribute" required="false">
-            <caption>Minimum attribute</caption>
+            <caption>Range minimum attribute</caption>
             <category>Data source</category>
             <description>Holds the minimum slider value (when empty the 'Default minimum value' is used)</description>
             <attributeTypes>
@@ -25,7 +25,7 @@
             </attributeTypes>
         </property>
         <property key="maxAttribute" type="attribute" required="false">
-            <caption>Maximum attribute</caption>
+            <caption>Range maximum attribute</caption>
             <category>Data source</category>
             <description>Holds the maximum slider value (when empty the 'Default maximum value' is used)</description>
             <attributeTypes>
@@ -37,12 +37,12 @@
         <property key="staticMinimumValue" type="integer" defaultValue="0">
             <caption>Default minimum value</caption>
             <category>Data source</category>
-            <description>The minimum slider value (when not provided through 'Minimum attribute')</description>
+            <description>The minimum slider value (when not provided through 'Range minimum attribute')</description>
         </property>
         <property key="staticMaximumValue" type="integer" defaultValue="100">
             <caption>Default maximum value</caption>
             <category>Data source</category>
-            <description>The maximum slider value (when not provided through 'Maximum attribute')</description>
+            <description>The maximum slider value (when not provided through 'Range maximum attribute')</description>
         </property>
         <property key="editable" type="enumeration" defaultValue="default">
             <caption>Editable</caption>

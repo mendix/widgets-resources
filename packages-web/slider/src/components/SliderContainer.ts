@@ -1,4 +1,5 @@
 import { Component, createElement } from "react";
+import { hot } from "react-hot-loader";
 
 import { BootstrapStyle, Slider } from "./Slider";
 
@@ -10,7 +11,7 @@ interface WrapperProps {
     readOnly: boolean;
 }
 
-interface SliderContainerProps extends WrapperProps {
+export interface SliderContainerProps extends WrapperProps {
     bootstrapStyle: BootstrapStyle;
     decimalPlaces: number;
     maxAttribute: string;
@@ -43,6 +44,8 @@ interface SliderContainerState {
 class SliderContainer extends Component<SliderContainerProps, SliderContainerState> {
     private subscriptionHandles: number[];
     private attributeCallback: (mxObject: mendix.lib.MxObject) => () => void;
+    private selfUpdate = false;
+    private previousValue?: number;
 
     constructor(props: SliderContainerProps) {
         super(props);
@@ -51,7 +54,13 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         this.subscriptionHandles = [];
         this.handleAction = this.handleAction.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
-        this.attributeCallback = mxObject => () => this.setState(this.updateValues(mxObject));
+        this.attributeCallback = mxObject => () => {
+            if (this.selfUpdate) {
+                this.selfUpdate = false;
+                return;
+            }
+            this.setState(this.updateValues(mxObject));
+        };
     }
 
     render() {
@@ -143,29 +152,40 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
 
     private updateValues(mxObject?: mendix.lib.MxObject): SliderContainerState {
         const value = this.getValue(this.props.valueAttribute, mxObject);
-
+        this.previousValue = value;
         return {
             maximumValue: this.getValue(this.props.maxAttribute, mxObject, this.props.staticMaximumValue),
             minimumValue: this.getValue(this.props.minAttribute, mxObject, this.props.staticMinimumValue),
             stepValue: this.getValue(this.props.stepAttribute, mxObject, this.props.stepValue),
-            value: (value || value === 0) ? value : null
+            value: value !== undefined ? value : null
         };
     }
 
     private onUpdate(value: number) {
         const { mxObject, valueAttribute } = this.props;
-        const { maximumValue } = this.state;
-        if ((value || value === 0) && mxObject) {
-            if ((maximumValue || maximumValue === 0) && (value > maximumValue)) {
-                mxObject.set(valueAttribute, maximumValue);
-            } else {
+        if (value !== undefined && mxObject) {
+            this.setState({ value });
+            if (this.validValue(value)) {
+                this.selfUpdate = true;
                 mxObject.set(valueAttribute, value);
             }
         }
     }
 
+    private validValue(value: number) {
+        const { minimumValue, maximumValue } = this.state;
+        return typeof minimumValue === "number"
+            && typeof maximumValue === "number"
+            && typeof value === "number"
+            && minimumValue <= maximumValue
+            && value >= minimumValue
+            && value <= maximumValue;
+    }
+
     private handleAction(value: number) {
-        if ((value || value === 0) && this.props.mxObject) {
+        if (value !== undefined && this.props.mxObject) {
+            if (this.previousValue === value) return;
+            this.previousValue = value;
             this.handleChange();
         }
     }
@@ -248,4 +268,4 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
     }
 }
 
-export { SliderContainer as default, SliderContainerProps };
+export default hot(module)(SliderContainer);

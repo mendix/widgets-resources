@@ -19,9 +19,9 @@ Mendix 7.4
 https://slider.mxapps.io/
 
 ## Basic configuration
-* `Value attribute` - The selected value on the slider, if not provided, 'Static value' will be used.
-* `Minimum attribute` - The attribute that contains the `minimum` slider value, if not provided, 'Minimum static value' will be used.
-* `Maximum attribute` - The attribute that contains the `maximum` slider value, if not provided, 'Maximum static value' will be used.
+* `Value attribute` - The selected value on the slider.
+* `Range minimum attribute` - The attribute that contains the `minimum` slider value, if not provided, 'Default minimum value' will be used.
+* `Range maximum attribute` - The attribute that contains the `maximum` slider value, if not provided, 'Default maximum value' will be used.
 
  ![Sample slider datasource configuration](/assets/DataSource.PNG)
 
