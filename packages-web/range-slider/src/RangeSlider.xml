@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.custom.RangeSlider.RangeSlider" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/">
-    <name>RangeSlider</name>
+    <name>Range Slider</name>
     <description>Change range of values using a slider</description>
     <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAoRJREFUeAHtmU9qwkAUxk02qdAeQPAGvYV00XYhpaAuKt0oPVSpm5IuVCilC+tCvIU3EHqAFqwb0/dsApk/iXkjFKJfNpM388375v0ykZhUKjhAAARAAARAAARAAARAAARAAARAAARAAASOi4DnWm4URd71+0+f5vfo9JzzeF60oGYwaZ48eRRw374H+3Q6nT61Pcq19aF2QfkHw+Fwbx8nALfTqLZar0NaVMNWIC1uXg2C7uul92kbL9rX7XZra/IhvdWH+ucB+YRh6OzjF11MouMrklc86xhMrHECHOfwdhTPsgZreE0cuBxiALzts658egGsiW+RdHfhc972JM668uk8jVib7it8LgZAmfleLHpItEpOAlh4rkSrmFAgBpD84OmJbLFEa5mf/OBZhowuiVaZLAZAd/ipkiE3kGiNRAKfikSrGDkAUOaXPgCA0l/CPQvADtgTYOmnG09Q9FBxtdlsHqmyuq26r7tnW3dm39nLfebYPw8sfd9/oP8PH2lf4xbIKz49sYTn9bg2ZekGAGX0CAIDAG8Tqnt5gLVvbwG9LuM3QBfo8eXbSvQ/f3pTFXuwZ6vVEvmMx2MnH2MH6AUfegwAh36Fd9WHHbCL0KGPO+wA77s4FInWyCrwqUi0ipEYQPzqW0mSFUi0lhz8ir3oIdEqOcUAaPZAyZAfSLRKJn7vr3TkBBKtnkb88EAvIOmDyHrGb331ZOmYvw1MmsEFtaIHmiQH+7Tb7RnFuT40Ph+NRs4+4h3ABfFHDy4wWaze8liscSqe87EPf/Sg00wfHmMNa3mOyyHeAYnJ304o/6expB60IAACIAACIAACIAACIAACIAACIAACIAACx0LgF7FjzreN3sQFAAAAAElFTkSuQmCC</icon>
     <properties>
         <property key="minAttribute" type="attribute" required="false">
-            <caption>Minimum attribute</caption>
+            <caption>Range minimum attribute</caption>
             <category>Data source</category>
             <description>Holds the minimum slider value (when empty the 'Default minimum value' is used)</description>
             <attributeTypes>
@@ -15,7 +15,7 @@
             </attributeTypes>
         </property>
         <property key="maxAttribute" type="attribute" required="false">
-            <caption>Maximum attribute</caption>
+            <caption>Range maximum attribute</caption>
             <category>Data source</category>
             <description>Holds the maximum slider value (when empty the 'Default maximum value' is used)</description>
             <attributeTypes>
@@ -25,7 +25,7 @@
             </attributeTypes>
         </property>
         <property key="lowerBoundAttribute" required="false" type="attribute">
-            <caption>Lower bound attribute</caption>
+            <caption>Selected minimum attribute</caption>
             <category>Data source</category>
             <description>The lower bound value on the slider</description>
             <attributeTypes>
@@ -35,7 +35,7 @@
             </attributeTypes>
         </property>
         <property key="upperBoundAttribute" required="false" type="attribute">
-            <caption>Upper bound attribute</caption>
+            <caption>Selected maximum attribute</caption>
             <category>Data source</category>
             <description>The upper bound value on the slider</description>
             <attributeTypes>
@@ -47,12 +47,12 @@
         <property key="staticMinimumValue" type="integer" defaultValue="0">
             <caption>Default minimum value</caption>
             <category>Data source</category>
-            <description>The minimum slider value (when not provided through 'Minimum attribute')</description>
+            <description>The minimum slider value (when not provided through 'Range minimum attribute')</description>
         </property>
         <property key="staticMaximumValue" type="integer" defaultValue="100">
             <caption>Default maximum value</caption>
             <category>Data source</category>
-            <description>The maximum slider value (when not provided through 'Maximum attribute')</description>
+            <description>The maximum slider value (when not provided through 'Range maximum attribute')</description>
         </property>
         <property key="onChangeMicroflow" type="microflow" required="false">
             <caption>On change microflow</caption>
@@ -86,7 +86,7 @@
                 <attributeType name="Decimal"/>
             </attributeTypes>
         </property>
-        <property key="stepValue" type="integer" defaultValue="10">
+        <property key="stepValue" type="integer" defaultValue="1">
             <caption>Default step size</caption>
             <category>Appearance</category>
             <description>The interval between two selectable points (when not provided through 'Step size attribute')</description>

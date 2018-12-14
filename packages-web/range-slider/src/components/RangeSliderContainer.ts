@@ -45,6 +45,9 @@ interface RangeSliderContainerState {
 export default class RangeSliderContainer extends Component<RangeSliderContainerProps, RangeSliderContainerState> {
     private subscriptionHandles: number[];
     private subscriptionCallback: (mxObject: mendix.lib.MxObject) => () => void;
+    private selfUpdate = false;
+    private previousUpperBoundValue?: number;
+    private previousLowerBoundValue?: number;
 
     constructor(props: RangeSliderContainerProps) {
         super(props);
@@ -53,7 +56,13 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         this.subscriptionHandles = [];
         this.handleChangeAction = this.handleChangeAction.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
-        this.subscriptionCallback = mxObject => () => this.setState(this.updateValues(mxObject));
+        this.subscriptionCallback = mxObject => () => {
+            if (this.selfUpdate) {
+                this.selfUpdate = false;
+                return;
+            }
+            this.setState(this.updateValues(mxObject));
+        };
     }
 
     render() {
@@ -114,8 +123,10 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
     private validateSettings(state: RangeSliderContainerState): string {
         const message: string[] = [];
         const { minimumValue, maximumValue, lowerBoundValue, upperBoundValue, stepValue } = state;
+        const { lowerBoundAttribute, upperBoundAttribute } = this.props;
         const validMax = typeof maximumValue === "number";
         const validMin = typeof minimumValue === "number";
+
         if (!validMax) {
             message.push("Maximum value is required");
         }
@@ -145,45 +156,79 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
                  should be evenly divisible by the step value ${stepValue}`);
                 }
             }
+            if ((!this.isDecimal(lowerBoundAttribute) || !this.isDecimal(upperBoundAttribute)) && stepValue && stepValue % 1 !== 0) {
+                message.push(`Step value ${stepValue} is invalid: it can not be a decimal as the attribute ${lowerBoundAttribute} and or attribute ${upperBoundAttribute} can not store decimals`);
+            }
         }
 
         return message.join(", ");
     }
 
-    private onUpdate(value: number[]) {
+    private onUpdate(values: number[]) {
         const { mxObject, lowerBoundAttribute, upperBoundAttribute } = this.props;
-        if (mxObject && Array.isArray(value) && value.length > 0) {
-            if (value[0] !== this.state.lowerBoundValue) {
-                mxObject.set(lowerBoundAttribute, value[0]);
-            } else {
-                if (this.state.maximumValue && value[1] > this.state.maximumValue) {
-                    mxObject.set(upperBoundAttribute, this.getValue(this.props.maxAttribute, mxObject));
-                } else {
-                    mxObject.set(upperBoundAttribute, value[1]);
-                }
-
+        if (mxObject && this.validValues(values)) {
+            if (values[0] !== this.state.lowerBoundValue) {
+                this.selfUpdate = true;
+                mxObject.set(lowerBoundAttribute, values[0]);
             }
+            if (values[1] !== this.state.upperBoundValue) {
+                this.selfUpdate = true;
+                mxObject.set(upperBoundAttribute, values[1]);
+            }
+            this.setState({ lowerBoundValue: values[0], upperBoundValue: values[1] });
         }
+    }
+
+    private validValues(values: number[]) {
+        const { minimumValue, maximumValue } = this.state;
+        const { lowerBoundAttribute, upperBoundAttribute } = this.props;
+        return Array.isArray(values)
+            && values.length === 2
+            && typeof minimumValue === "number"
+            && typeof maximumValue === "number"
+            && typeof values[0] === "number"
+            && typeof values[1] === "number"
+            && minimumValue <= maximumValue
+            && values[0] >= minimumValue
+            && values[0] <= maximumValue
+            && values[1] >= minimumValue
+            && values[1] <= maximumValue
+            && values[0] <= values[1]
+            && (this.isDecimal(lowerBoundAttribute)
+                || (!this.isDecimal(lowerBoundAttribute) && values[0] % 1 === 0))
+            && (this.isDecimal(upperBoundAttribute)
+                || (!this.isDecimal(upperBoundAttribute) && values[1] % 1 === 0));
     }
 
     private updateValues(mxObject?: mendix.lib.MxObject): RangeSliderContainerState {
         const { lowerBoundAttribute, maxAttribute, minAttribute, upperBoundAttribute } = this.props;
+        const lowerBoundValue = this.getValue(lowerBoundAttribute, mxObject);
+        const upperBoundValue = this.getValue(upperBoundAttribute, mxObject);
+        this.previousLowerBoundValue = lowerBoundValue;
+        this.previousUpperBoundValue = upperBoundValue;
+
         return {
-            lowerBoundValue: this.getValue(lowerBoundAttribute, mxObject),
+            lowerBoundValue,
             maximumValue: this.getValue(maxAttribute, mxObject, this.props.staticMaximumValue),
             minimumValue: this.getValue(minAttribute, mxObject, this.props.staticMinimumValue),
             stepValue: this.getValue(this.props.stepAttribute, mxObject, this.props.stepValue),
-            upperBoundValue: this.getValue(upperBoundAttribute, mxObject)
+            upperBoundValue
         };
     }
 
-    private handleChangeAction(value: number) {
-        if ((value || value === 0) && this.props.mxObject) {
-            this.executeOnChangeAction(this.props.mxObject);
+    private handleChangeAction(value: number[]) {
+        if (this.previousLowerBoundValue === value[0] && this.previousUpperBoundValue === value[1]) {
+            return;
+        }
+        this.previousLowerBoundValue = value[0];
+        this.previousUpperBoundValue = value[1];
+
+        if (value !== undefined && this.props.mxObject) {
+            this.callOnChangeEvents(this.props.mxObject);
         }
     }
 
-    private executeOnChangeAction(mxObject: mendix.lib.MxObject) {
+    private callOnChangeEvents(mxObject: mendix.lib.MxObject) {
         const { onChangeMicroflow, onChangeNanoflow, mxform } = this.props;
         if (onChangeMicroflow) {
             window.mx.ui.action(onChangeMicroflow, {
@@ -260,11 +305,13 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         return message.join(", ");
     }
 
+    private isDecimal(attribute: string) {
+        return this.props.mxObject.getAttributeType(attribute) === "Decimal";
+    }
+
     private getValue(attributeName: string, mxObject?: mendix.lib.MxObject, defaultValue?: number): number | undefined {
-        if (mxObject && attributeName) {
-            if (mxObject.get(attributeName) !== "") {
-                return parseFloat(mxObject.get(attributeName) as string);
-            }
+        if (mxObject && attributeName && mxObject.get(attributeName) !== "") {
+            return parseFloat(mxObject.get(attributeName) as string);
         }
 
         return defaultValue;
