@@ -33,6 +33,7 @@ const widgetConfig = {
         ]
     },
     devtool: "source-map",
+    mode: "development",
     externals: [ "react", "react-dom" ],
     plugins: [
         new CopyWebpackPlugin([ { from: "src/**/*.xml" } ], { copyUnmodified: true }),
@@ -63,6 +64,7 @@ const previewConfig = {
         ]
     },
     devtool: "inline-source-map",
+    mode: "development",
     externals: [ "react", "react-dom" ],
     plugins: [
         new webpack.LoaderOptionsPlugin({ debug: true })

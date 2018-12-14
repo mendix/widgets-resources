@@ -23,7 +23,7 @@ interface RangeSliderProps {
     maxValue?: number;
     minValue?: number;
     alertMessage?: string;
-    onChange?: (value: number) => void;
+    onChange?: (value: number | number[]) => void;
     onUpdate?: (value: number | number[]) => void;
     stepValue?: number;
     style?: object;
