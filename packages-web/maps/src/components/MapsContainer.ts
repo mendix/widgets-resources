@@ -5,6 +5,7 @@ import GoogleMap from "./GoogleMap";
 import { LeafletMap } from "./LeafletMap";
 import { Container } from "../utils/namespace";
 import { fetchData, fetchMarkerObjectUrl, parseStaticLocations } from "../utils/Data";
+import Utils from "../utils/Utils";
 import { validateLocationProps, validateLocations } from "../utils/Validations";
 import { hot } from "react-hot-loader";
 
@@ -43,7 +44,7 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
             fetchingData: this.state.isFetchingData,
             className: this.props.class,
             alertMessage: this.state.alertMessage,
-            divStyles: parseStyle(this.props.style),
+            divStyles: Utils.parseStyle(this.props.style),
             onClickMarker: this.onClickMarker,
             mapsToken: mapsApiToken,
             inPreviewMode: false
@@ -223,24 +224,5 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
         }
     }
 }
-
-export const parseStyle = (style = ""): {[key: string]: string} => { // Doesn't support a few stuff.
-    try {
-        return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
-            const pair = line.split(":");
-            if (pair.length === 2) {
-                const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
-                styleObject[name] = pair[1].trim();
-            }
-
-            return styleObject;
-        }, {});
-    } catch (error) {
-        // tslint:disable-next-line no-console
-        window.console.log("Failed to parse style", style, error);
-    }
-
-    return {};
-};
 
 export default hot(module)(MapsContainer);

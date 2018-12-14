@@ -2,8 +2,13 @@ import { PureComponent, createElement } from "react";
 import { LeafletMap } from "./components/LeafletMap";
 import GoogleMap from "./components/GoogleMap";
 import { validateLocationProps } from "./utils/Validations";
+import Utils from "./utils/Utils";
 import { Container } from "./utils/namespace";
-import { parseStyle } from "./components/MapsContainer";
+
+// Re-uses images from ~leaflet package
+// Use workaround for marker icon, that is not standard compatible with webpack
+// https://github.com/ghybs/leaflet-defaulticon-compatibility#readme
+import "leaflet-defaulticon-compatibility";
 
 type MapsContainerProps = Container.MapsContainerProps;
 type MapProps = Container.MapProps;
@@ -24,7 +29,7 @@ export class preview extends PureComponent<MapsContainerProps, {}> {
             alertMessage: validationMessage,
             className: this.props.class,
             fetchingData: false,
-            divStyles: parseStyle(this.props.style),
+            divStyles: Utils.parseStyle(this.props.style),
             mapsToken: mapsApiToken,
             inPreviewMode: true
         };
@@ -60,7 +65,6 @@ export class preview extends PureComponent<MapsContainerProps, {}> {
 export function getPreviewCss() {
     return (
         require("leaflet/dist/leaflet.css") +
-        require("leaflet-defaulticon-compatibility") +
         require("leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css") +
         require("./ui/Maps.css")
     );
