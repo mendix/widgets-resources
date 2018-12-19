@@ -65,7 +65,7 @@ class SignatureContainer extends Component<SignatureContainerProps, SignatureCon
     }
 
     componentDidMount() {
-        this.formHandle = this.props.mxform.listen("commit", callback => this.saveDocument(callback));
+        this.formHandle = this.props.mxform.listen("submit", callback => this.saveDocument(callback));
     }
 
     componentWillUnmount() {
