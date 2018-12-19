@@ -1,3 +1,9 @@
+[![Build Status](https://travis-ci.org/mendixlabs/signature.svg?branch=master)](https://travis-ci.org/mendixlabs/signature)
+[![Dependency Status](https://david-dm.org/mendixlabs/signature.svg)](https://david-dm.org/mendixlabs/signature)
+[![Dev Dependency Status](https://david-dm.org/mendixlabs/signature.svg#info=devDependencies)](https://david-dm.org/mendixlabs/signature#info=devDependencies)
+[![codecov](https://codecov.io/gh/mendixlabs/signature/branch/master/graph/badge.svg)](https://codecov.io/gh/mendixlabs/signature)
+![badge](https://img.shields.io/badge/mendix-7.21.0-green.svg)
+
 ## Signature
 A signature pad for capturing signatures.  
 The widget implements bezier curves and velocity for the smooth drawing of the signature.
