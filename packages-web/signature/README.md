@@ -14,8 +14,8 @@ Add the widget to a dataview.
 [https://signature101.mxapps.io](https://signature101.mxapps.io)
 
 ## Usage
-
-* Add the **Has signature** attribute to toggle when clearing the canvas.  
+* Add an entity to the domain model which should inherit from Mendix **System.image**
+* Add the **Has signature** attribute to the entity, to toggle when clearing the canvas.  
 ![Canvas](/assets/signature-attribute.png)
 
 * Under the pen tab, you can customize your own pen size by choosing the different pen types, the pen color.  
