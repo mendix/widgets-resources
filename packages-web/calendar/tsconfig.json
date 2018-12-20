@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "alwaysStrict": true,
     "baseUrl": ".",
     "rootDir": "./",
     "outDir": "dist/tsc/",

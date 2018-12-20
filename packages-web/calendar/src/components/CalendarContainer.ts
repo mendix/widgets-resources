@@ -1,5 +1,5 @@
 import { Component, ReactChild, createElement } from "react";
-import { hot } from "react-hot-loader";
+import { hot } from "react-hot-loader/root";
 
 import { Calendar, CalendarEvent } from "./Calendar";
 import { fetchData } from "../utils/data";
@@ -468,4 +468,4 @@ export const parseStyle = (style = ""): { [key: string]: string } => {
     return {};
 };
 
-export default hot(module)(CalendarContainer);
+export default hot(CalendarContainer);
