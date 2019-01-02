@@ -1,7 +1,7 @@
 {
   "name": "signature",
   "widgetName": "Signature",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A signature pad for capturing signatures",
   "scripts": {
     "build": "grunt release",
@@ -76,7 +76,7 @@
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^2.0.13",
     "mendix-client": "^7.15.3",
-    "mendix-widget-build-script": "^1.0.0",
+    "mendix-widget-build-script": "^1.0.3",
     "node-sass": "^4.9.4",
     "pre-commit": "^1.2.2",
     "raw-loader": "^0.5.1",

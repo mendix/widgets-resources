@@ -95,7 +95,7 @@ class SignatureContainer extends Component<SignatureContainerProps, SignatureCon
 
     private saveDocument(callback: () => void) {
         if (this.base64Uri && this.state.hasSignature) {
-            mx.data.saveDocument(this.props.mxObject.getGuid(), this.generateFileName(), { },
+            mx.data.saveDocument(this.props.mxObject.getGuid(), this.generateFileName(this.props.mxObject), { },
                 Utils.convertUrlToBlob(this.base64Uri),
                 callback,
                 error => mx.ui.error("Error saving signature: " + error.message)
@@ -105,7 +105,11 @@ class SignatureContainer extends Component<SignatureContainerProps, SignatureCon
         }
     }
 
-    private generateFileName(): string {
+    private generateFileName(mxObject: mendix.lib.MxObject): string {
+        const currentName = mxObject.get("Name") as string;
+        if (currentName) {
+            return currentName;
+        }
         return `signature${Math.floor(Math.random() * 1000000)}.png`;
     }
 
