@@ -24,6 +24,7 @@ export class preview extends Component<RichTextContainerProps, {}> {
             minNumberOfLines: props.minNumberOfLines,
             maxNumberOfLines: props.maxNumberOfLines,
             readOnlyStyle: props.mxObject ? props.readOnlyStyle : "bordered",
+            translatable: false,
             className: props.class,
             style: parseStyle(props.style),
             sanitizeContent: props.sanitizeContent,

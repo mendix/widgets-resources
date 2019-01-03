@@ -15,6 +15,7 @@ describe("RichText", () => {
         editorOption: "basic",
         maxNumberOfLines: 10,
         minNumberOfLines: 10,
+        translatable: false,
         sanitizeContent: false,
         onChange: jasmine.any(Function),
         onBlur: jasmine.any(Function),
@@ -29,7 +30,7 @@ describe("RichText", () => {
             textEditor = shallowRenderTextEditor(defaultProps);
 
             expect(textEditor).toBeElement(
-                createElement("div", { className: classNames("widget-rich-text disabled-bordered") },
+                createElement("div", { className: classNames("widget-rich-text notranslate disabled-bordered") },
                     createElement("div", { style: { whiteSpace: "pre-wrap" } },
                         createElement("div", { className: "widget-rich-text-quill" })
                     )
@@ -68,7 +69,8 @@ describe("RichText", () => {
             const richTextProps: RichTextProps = {
                 ...defaultProps,
                 alertMessage: "Error message",
-                readOnly: false
+                readOnly: false,
+                translatable: true
             };
 
             textEditor = shallowRenderTextEditor(richTextProps);
@@ -127,7 +129,7 @@ describe("RichText", () => {
             textEditor = shallowRenderTextEditor(defaultProps);
 
             expect(textEditor).toBeElement(
-                createElement("div", { className: "widget-rich-text disabled-text ql-snow" },
+                createElement("div", { className: "widget-rich-text notranslate disabled-text ql-snow" },
                     createElement("div", {
                         className: "ql-editor",
                         style: { whiteSpace: "pre-wrap" },

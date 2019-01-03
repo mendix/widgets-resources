@@ -1,11 +1,11 @@
 {
   "name": "rich-text",
   "widgetName": "RichText",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Rich inline or toolbar text editing",
   "scripts": {
-    "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec grunt",
-    "emit": "tsc",
+    "start": "grunt",
+    "checkTypings": "tsc --noEmit",
     "pretest": "tsc && npm run lint && npm run build",
     "test": "npm run test:unit && npm run test:conditional",
     "test:conditional": "node ./node_modules/mendix-widget-build-script/dist/CheckPullRequestFromFork.js && echo 'Skip tests on forked pull request' || npm run deployAndTest",
@@ -22,7 +22,7 @@
     "deployAndTest": "npm run deploy && npm run test:e2e"
   },
   "pre-commit": [
-    "emit",
+    "checkTypings",
     "lint"
   ],
   "repository": {
@@ -74,9 +74,8 @@
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^2.0.9",
     "mendix-client": "https://github.com/FlockOfBirds/Mendix-client-typing/archive/7.13.1.tar.gz",
-    "mendix-widget-build-script": "^1.0.0-rc2",
+    "mendix-widget-build-script": "^1.0.3",
     "node-sass": "^4.5.3",
-    "nodemon": "^1.14.11",
     "pre-commit": "^1.2.2",
     "raw-loader": "^0.5.1",
     "react": "^16.2.0",
@@ -103,7 +102,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "npm": "^6.2.0",
-    "quill": "^1.3.2",
+    "quill": "^1.3.6",
     "sanitize-html": "^1.16.3"
   }
 }
