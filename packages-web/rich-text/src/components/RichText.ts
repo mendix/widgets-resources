@@ -18,6 +18,7 @@ export interface CommonRichTextProps {
     sanitizeContent: boolean;
     readOnly: boolean;
     readOnlyStyle: ReadOnlyStyle;
+    translatable: boolean;
     theme: Theme;
     customOptions: { option: string }[];
     minNumberOfLines: number;
@@ -58,6 +59,7 @@ export class RichText extends Component<RichTextProps> {
             {
                 className: classNames("widget-rich-text", this.props.className, {
                     "has-error": !!this.props.alertMessage,
+                    "notranslate": !this.props.translatable,
                     [ RichText.getReadOnlyClasses(this.props.readOnlyStyle) ]: this.props.readOnly,
                     "buttons-hidden": this.props.editorOption === "custom" && this.props.customOptions.length === 0,
                     "ql-snow": this.props.readOnly && this.props.readOnlyStyle === "text"

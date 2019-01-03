@@ -7,25 +7,25 @@ const resultValue = "<p><strong>Hello World!</strong></p>";
 describe("RichText", () => {
     it("content is updated by attribute", () => {
         HomePage.open();
-        HomePage.textArea2.waitForVisible();
-        HomePage.textArea2.click();
-        HomePage.textArea2.setValue(testValue);
+        HomePage.textAreaBubbleBasic.waitForVisible();
+        HomePage.textAreaBubbleBasic.click();
+        HomePage.textAreaBubbleBasic.setValue(testValue);
         HomePage.textArea3.waitForVisible();
         HomePage.textArea3.click();
 
-        const content = HomePage.richText1.getHTML(false);
+        const content = HomePage.richTextBubbleBasic.getHTML(false);
         expect(content).toBe(resultValue);
     });
 
     it("change value should update the attribute", () => {
         HomePage.open();
-        HomePage.richText1.waitForVisible();
-        HomePage.richText1.click();
-        HomePage.richText1.keys(plainValue);
-        const updatedValue = HomePage.richText1.getHTML(false);
-        HomePage.textArea2.click();
+        HomePage.richTextBubbleBasic.waitForVisible();
+        HomePage.richTextBubbleBasic.click();
+        HomePage.richTextBubbleBasic.keys(plainValue);
+        const updatedValue = HomePage.richTextBubbleBasic.getHTML(false);
+        HomePage.textAreaBubbleBasic.click();
 
-        const content = HomePage.textArea2.getValue();
+        const content = HomePage.textAreaBubbleBasic.getValue();
         expect(content).toContain(updatedValue);
     });
 });
