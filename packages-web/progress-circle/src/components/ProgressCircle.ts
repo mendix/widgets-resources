@@ -24,7 +24,7 @@ export interface ProgressCircleProps {
     circleThickness?: number;
 }
 
-export type BootstrapStyle = "primary" | "inverse" | "success" | "info" | "warning" | "danger";
+export type BootstrapStyle = "default" |"primary" | "inverse" | "success" | "info" | "warning" | "danger";
 export type ProgressTextSize = "text" |"h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 export class ProgressCircle extends Component<ProgressCircleProps, { alertMessage?: string }> {
