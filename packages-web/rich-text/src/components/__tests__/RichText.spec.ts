@@ -75,7 +75,7 @@ describe("RichText", () => {
 
             textEditor = shallowRenderTextEditor(richTextProps);
             expect(textEditor).toBeElement(
-                createElement("div", { className: "widget-rich-text has-error" },
+                createElement("div", { className: "widget-rich-text notranslate has-error" },
                     createElement("div", {
                             style: { whiteSpace: "pre-wrap" },
                             dangerouslySetInnerHTML: undefined
