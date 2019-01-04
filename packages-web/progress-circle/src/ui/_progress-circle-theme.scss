@@ -8,6 +8,12 @@
     }
 }
 
+.widget-progress-circle-default {
+    .widget-progress-circle-path {
+        stroke: $brand-default;
+    }
+}
+
 .widget-progress-circle-info {
     .widget-progress-circle-path {
         stroke: $brand-info;

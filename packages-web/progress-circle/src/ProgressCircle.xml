@@ -83,6 +83,7 @@
             <category>Appearance</category>
             <description>Color of the circle with a positive progress value</description>
             <enumerationValues>
+                <enumerationValue key="default">Default</enumerationValue>
                 <enumerationValue key="primary">Primary</enumerationValue>
                 <enumerationValue key="inverse">Inverse</enumerationValue>
                 <enumerationValue key="info">Info</enumerationValue>
@@ -96,6 +97,7 @@
             <category>Appearance</category>
             <description>Color of the circle with a negative progress value</description>
             <enumerationValues>
+                <enumerationValue key="default">Default</enumerationValue>
                 <enumerationValue key="primary">Primary</enumerationValue>
                 <enumerationValue key="inverse">Inverse</enumerationValue>
                 <enumerationValue key="info">Info</enumerationValue>
@@ -109,7 +111,6 @@
             <category>Appearance</category>
             <description>Thickness of the progress circle (thinkness is limited to 30)</description>
         </property>
-        
         <property key="onClickEvent" type="enumeration" defaultValue="doNothing">
             <caption>On click</caption>
             <category>Events</category>

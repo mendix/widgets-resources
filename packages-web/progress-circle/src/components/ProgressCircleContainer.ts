@@ -100,7 +100,8 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
     }
 
     componentWillUnmount() {
-        this.subscriptionHandles.forEach((handle) => window.mx.data.unsubscribe(handle));
+        this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
+        this.subscriptionHandles = [];
     }
 
     private hasAnimation() {
@@ -171,7 +172,7 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
 
     private resetSubscription(mxObject?: mendix.lib.MxObject) {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
-
+        this.subscriptionHandles = [];
         if (mxObject) {
             this.subscriptionHandles.push(window.mx.data.subscribe({
                 callback: this.attributeCallback(mxObject),
