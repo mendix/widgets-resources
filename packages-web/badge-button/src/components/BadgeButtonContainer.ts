@@ -1,4 +1,5 @@
 import { Component, createElement } from "react";
+import { hot } from "react-hot-loader";
 
 import { BadgeButton, BootstrapStyle } from "./BadgeButton";
 import { Alert } from "./Alert";
@@ -35,7 +36,7 @@ interface BadgeButtonContainerState {
 type OnClickOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
 type PageLocation = "content"| "popup" | "modal";
 
-export default class BadgeButtonContainer extends Component<BadgeButtonContainerProps, BadgeButtonContainerState> {
+class BadgeButtonContainer extends Component<BadgeButtonContainerProps, BadgeButtonContainerState> {
     private subscriptionHandles: number[];
 
     constructor(props: BadgeButtonContainerProps) {
@@ -178,3 +179,5 @@ export default class BadgeButtonContainer extends Component<BadgeButtonContainer
         }
     }
 }
+
+export default hot(module)(BadgeButtonContainer);

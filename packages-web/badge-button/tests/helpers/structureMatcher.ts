@@ -134,7 +134,10 @@ export function findDifference(expected: ElementStructure | ElementStructure[], 
 
 export function toElementStructure(node: any): ElementStructure | ElementStructure[] {
     if (node == null) return "";
-    if (typeof node === "object" && "nodes" in node) node = node.nodes.length > 1 ? node.nodes : node.nodes[0];
+    if (typeof node === "object" && "getElements" in node) {
+        var elements = node.getElements();
+        node = elements.length > 1 ? elements : elements[0];
+    }
 
     if (Array.isArray(node)) return node.map(n => toElementStructure(n) as ElementStructure);
     if (node instanceof HTMLElement) return domToStructure(node);
@@ -157,7 +160,7 @@ export function toElementStructure(node: any): ElementStructure | ElementStructu
 
         const children = from(domNode.childNodes)
             .filter((child: Node) => child.nodeName !== "#comment")
-            .map(domToStructure);
+            .map((child: Node) => domToStructure(child as HTMLElement));
 
         return { type, props, children };
     }
