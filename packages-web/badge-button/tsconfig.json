@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "alwaysStrict": true,
     "baseUrl": ".",
     "rootDir": "./",
     "outDir": "dist/tsc/",
@@ -7,21 +8,19 @@
     "sourceMap": true,
     "module": "amd",
     "target": "es5",
-    "types": [ "mendix-client", "jasmine", "core-js" ],
+    "types": [ "mendix-client", "jasmine", "core-js", "node" ],
     "moduleResolution": "node",
     "declaration": false,
     "removeComments": true,
     "noLib": false,
+    "strict": true,
     "watch": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
     "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "skipLibCheck": false,
-    "strictNullChecks": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "skipLibCheck": true,
   },
   "exclude": [
     "dist/",
