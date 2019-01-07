@@ -1,4 +1,5 @@
 import { Component, createElement } from "react";
+import { hot } from "react-hot-loader";
 import { BarStyle, BarType, ProgressBar } from "./ProgressBar";
 import { Alert } from "./Alert";
 
@@ -46,7 +47,7 @@ export type DisplayText = "none" | "value" | "percentage" | "static" | "attribut
 type OnClickOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
 type PageLocation = "content"| "popup" | "modal";
 
-export default class ProgressBarContainer extends Component<ProgressBarContainerProps, ProgressBarContainerState> {
+class ProgressBarContainer extends Component<ProgressBarContainerProps, ProgressBarContainerState> {
     private subscriptionHandles: number[];
     private subscriptionCallback: (mxObject: mendix.lib.MxObject) => () => void;
     private defaultMaximumValue = 100;
@@ -223,3 +224,5 @@ export default class ProgressBarContainer extends Component<ProgressBarContainer
         }
     }
 }
+
+export default hot(module)(ProgressBarContainer);
