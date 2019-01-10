@@ -17,6 +17,8 @@ export class Html5Player extends React.Component<Html5PlayerProps> {
     private videoElement: HTMLVideoElement | null = null;
     private errorElement: HTMLDivElement;
     private readonly handleOnResize = this.onResize.bind(this);
+    private readonly handleOnSuccess = this.handleSuccess.bind(this);
+    private readonly handleOnError = this.handleError.bind(this);
 
     render() {
         const sizeProps: React.CSSProperties = {
@@ -24,7 +26,9 @@ export class Html5Player extends React.Component<Html5PlayerProps> {
         };
         return (
             <div className="widget-video-player-html5-container">
-                <div className="video-error-label-html5" ref={(node: HTMLDivElement) => this.errorElement = node}>We are unable to show the video content :(</div>
+                <div className="video-error-label-html5" ref={(node: HTMLDivElement) => this.errorElement = node}>We are
+                    unable to show the video content :(
+                </div>
                 <video
                     className="widget-video-player-html5"
                     controls={this.props.showControls}
@@ -32,22 +36,27 @@ export class Html5Player extends React.Component<Html5PlayerProps> {
                     muted={this.props.muted}
                     loop={this.props.loop}
                     poster={this.props.poster}
-                    ref={(node: HTMLVideoElement) => this.videoElement = node }
+                    ref={(node: HTMLVideoElement) => this.videoElement = node}
                     {...sizeProps}>
-                    <source src={this.props.url} type="video/mp4" onError={this.handleError} onLoad={this.handleSuccess}/>
+                    <source src={this.props.url} type="video/mp4" onError={this.handleOnError}
+                            onLoad={this.handleOnSuccess}/>
                     <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize}
-                                         refreshMode="debounce" refreshRate={100} />
+                                         refreshMode="debounce" refreshRate={100}/>
                 </video>
             </div>
         );
     }
 
     private handleError(): void {
-        this.errorElement.classList.add("hasError");
+        if (this.errorElement) {
+            this.errorElement.classList.add("hasError");
+        }
     }
 
     private handleSuccess(): void {
-        this.errorElement.classList.remove("hasError");
+        if (this.errorElement) {
+            this.errorElement.classList.remove("hasError");
+        }
     }
 
     private onResize(): void {
