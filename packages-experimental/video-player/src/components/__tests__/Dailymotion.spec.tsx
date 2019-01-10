@@ -1,24 +1,12 @@
-import { shallow } from "enzyme";
 import * as React from "react";
+import { shallow } from "enzyme";
 
-import { Dailymotion } from "../Dailymotion";
+import { DailymotionPlayer } from "../DailymotionPlayer";
 import ReactResizeDetector from "react-resize-detector";
 
-describe("Dailymotion Player", () => {
-    it("Renders the structure of iframe tags and check classes", () => {
-        const player = shallow(<Dailymotion
-            url="http://dailymotion.com/123456"
-            controls={true}
-            autoPlay={false}
-            muted={false}
-            aspectRatio={false}
-        />);
-
-        expect(player).toHaveClass("video-player-iframe");
-        expect(player).toBeDefined();
-    });
+describe("DailymotionPlayer Player", () => {
     it("Renders the structure of iframe tags and check the structure", () => {
-        const player = shallow(<Dailymotion
+        const player = shallow(<DailymotionPlayer
             url="http://dailymotion.com/123456"
             controls={false}
             autoPlay={false}
@@ -28,7 +16,7 @@ describe("Dailymotion Player", () => {
 
         expect(player).toBeElement(
             <iframe
-                className="video-player-iframe"
+                className="widget-video-player-iframe"
                 frameBorder="0"
                 allow="autoplay; fullscreen"
                 allowFullScreen={true}
@@ -39,8 +27,32 @@ describe("Dailymotion Player", () => {
         );
     });
 
+    it("Renders the structure of iframe tags and check classes", () => {
+        const player = shallow(<DailymotionPlayer
+            url="http://dailymotion.com/123456"
+            controls={true}
+            autoPlay={false}
+            muted={false}
+            aspectRatio={false}
+        />);
+
+        expect(player).toBeElement(
+            <iframe
+                className="widget-video-player-iframe"
+                frameBorder="0"
+                allow="autoplay; fullscreen"
+                allowFullScreen={true}
+                src="https://www.dailymotion.com/embed/video/123456?sharing-enable=false&autoplay=false&mute=false&controls=true">
+                <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
+                                     refreshMode="debounce" refreshRate={100} />
+            </iframe>
+        );
+        expect(player).toHaveClass("widget-video-player-iframe");
+        expect(player).toBeDefined();
+    });
+
     it("Renders the structure of iframe tags and check the structure with properties", () => {
-        const player = shallow(<Dailymotion
+        const player = shallow(<DailymotionPlayer
             url="http://dailymotion.com/123456"
             controls={true}
             autoPlay={true}
@@ -50,7 +62,7 @@ describe("Dailymotion Player", () => {
 
         expect(player).toBeElement(
             <iframe
-                className="video-player-iframe"
+                className="widget-video-player-iframe"
                 frameBorder="0"
                 allow="autoplay; fullscreen"
                 allowFullScreen={true}
@@ -62,7 +74,7 @@ describe("Dailymotion Player", () => {
     });
 
     it("Renders the structure of iframe tags with an embed url", () => {
-        const player = shallow(<Dailymotion
+        const player = shallow(<DailymotionPlayer
             url="http://dailymotion.com/embed/123456"
             controls={true}
             autoPlay={true}
@@ -72,7 +84,7 @@ describe("Dailymotion Player", () => {
 
         expect(player).toBeElement(
             <iframe
-                className="video-player-iframe"
+                className="widget-video-player-iframe"
                 frameBorder="0"
                 allow="autoplay; fullscreen"
                 allowFullScreen={true}
@@ -84,7 +96,7 @@ describe("Dailymotion Player", () => {
     });
 
     it("Renders the structure of iframe tags with an invalid url", () => {
-        const player = shallow(<Dailymotion
+        const player = shallow(<DailymotionPlayer
             url=""
             controls={true}
             autoPlay={true}
@@ -94,7 +106,7 @@ describe("Dailymotion Player", () => {
 
         expect(player).toBeElement(
             <iframe
-                className="video-player-iframe"
+                className="widget-video-player-iframe"
                 frameBorder="0"
                 allow="autoplay; fullscreen"
                 allowFullScreen={true}

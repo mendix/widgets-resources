@@ -8,7 +8,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const package = require("./package");
 const widgetName = package.widgetName;
 const name = package.widgetName.toLowerCase();
-const host = "http://10.211.55.3:8080/";
+const host = package.config.host;
 
 const widgetConfig = {
     entry: `./src/components/${widgetName}Container.tsx`,
@@ -18,7 +18,7 @@ const widgetConfig = {
         libraryTarget: "umd"
     },
     devServer: {
-        port: 3000,
+        port: package.config.localPort,
         proxy: [ {
             context: [ "**", `!/widgets/com/mendix/widget/custom/${name}/${widgetName}.js` ],
             target: host,

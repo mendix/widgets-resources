@@ -14,37 +14,28 @@ export interface Html5PlayerProps {
 
 export class Html5Player extends React.Component<Html5PlayerProps> {
 
-    private video: HTMLVideoElement;
+    private videoElement: HTMLVideoElement | null = null;
     private errorElement: HTMLDivElement;
-
-    constructor(props: Html5PlayerProps) {
-        super(props);
-
-        this.onResize = this.onResize.bind(this);
-        this.handleError = this.handleError.bind(this);
-    }
+    private readonly handleOnResize = this.onResize.bind(this);
 
     render() {
-        let sizeProps: React.CSSProperties = {};
-        if (!this.props.aspectRatio)
-            sizeProps = {
-                height: "100%"
-            };
+        const sizeProps: React.CSSProperties = {
+            height: !this.props.aspectRatio ? "100%" : undefined
+        };
         return (
-            <div style={{ width: "100%", height: "100%" }}>
+            <div className="widget-video-player-html5-container">
                 <div className="video-error-label-html5" ref={(node: HTMLDivElement) => this.errorElement = node}>We are unable to show the video content :(</div>
                 <video
                     className="widget-video-player-html5"
                     controls={this.props.showControls}
-                    width="100%"
                     autoPlay={this.props.autoPlay}
                     muted={this.props.muted}
                     loop={this.props.loop}
                     poster={this.props.poster}
-                    ref={(node: HTMLVideoElement) => this.video = node }
+                    ref={(node: HTMLVideoElement) => this.videoElement = node }
                     {...sizeProps}>
                     <source src={this.props.url} type="video/mp4" onError={this.handleError} onLoad={this.handleSuccess}/>
-                    <ReactResizeDetector handleWidth handleHeight onResize={this.onResize}
+                    <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize}
                                          refreshMode="debounce" refreshRate={100} />
                 </video>
             </div>
@@ -52,16 +43,16 @@ export class Html5Player extends React.Component<Html5PlayerProps> {
     }
 
     private handleError(): void {
-        this.errorElement.style.display = "flex";
+        this.errorElement.classList.add("hasError");
     }
 
     private handleSuccess(): void {
-        this.errorElement.style.display = "none";
+        this.errorElement.classList.remove("hasError");
     }
 
     private onResize(): void {
-        if (this.video && this.props.aspectRatio) {
-            this.changeHeight(this.video);
+        if (this.videoElement && this.props.aspectRatio) {
+            this.changeHeight(this.videoElement);
         }
     }
 
@@ -70,6 +61,10 @@ export class Html5Player extends React.Component<Html5PlayerProps> {
             const height = element.clientHeight + "px";
             if (element.parentElement.parentElement) {
                 element.parentElement.parentElement.style.height = height;
+
+                if (element.parentElement.parentElement.parentElement) {
+                    element.parentElement.parentElement.parentElement.style.height = height;
+                }
             }
         }
     }

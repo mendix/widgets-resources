@@ -10,18 +10,18 @@ export interface DailymotionProps {
     aspectRatio?: boolean;
 }
 
-export class Dailymotion extends React.Component<DailymotionProps> {
+export interface DailymotionState {
+    ratio: number;
+}
+
+export class DailymotionPlayer extends React.Component<DailymotionProps, DailymotionState> {
 
     private iframe: HTMLIFrameElement;
-    readonly state = {
+    private readonly handleOnResize = this.onResize.bind(this);
+    private handleAttributes = this.getUrlAttributes.bind(this);
+    readonly state: DailymotionState = {
         ratio: 0
     };
-
-    constructor(props: DailymotionProps) {
-        super(props);
-
-        this.onResize = this.onResize.bind(this);
-    }
 
     render() {
         return (
@@ -31,9 +31,9 @@ export class Dailymotion extends React.Component<DailymotionProps> {
                 frameBorder="0"
                 allow="autoplay; fullscreen"
                 allowFullScreen={true}
-                ref={(node: HTMLIFrameElement) => this.iframe = node }>
-                <ReactResizeDetector handleWidth handleHeight onResize={this.onResize}
-                                     refreshMode="debounce" refreshRate={100} />
+                ref={(node: HTMLIFrameElement) => this.iframe = node}>
+                <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize}
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
     }
@@ -53,11 +53,11 @@ export class Dailymotion extends React.Component<DailymotionProps> {
     }
 
     private generateUrl(url: string): string {
-        const attributes = this.getUrlAttributes();
+        const attributes = this.handleAttributes();
         try {
-
-            if (url.includes("dailymotion.com/embed"))
+            if (url.includes("dailymotion.com/embed")) {
                 return `${url}${attributes}`;
+            }
 
             const urlVimeoSplit = url.split("/");
             if (urlVimeoSplit.length > 0) {
@@ -66,37 +66,22 @@ export class Dailymotion extends React.Component<DailymotionProps> {
                     return `https://www.dailymotion.com/embed/video/${id}${attributes}`;
             }
         } catch (e) {
-            //
+            return url;
         }
         return url;
     }
 
     private getUrlAttributes(): string {
         let attributes = "?sharing-enable=false";
-
-        if (this.props.autoPlay) {
-            attributes += "&autoplay=true";
-        } else {
-            attributes += "&autoplay=false";
-        }
-        if (this.props.muted) {
-            attributes += "&mute=true";
-        } else {
-            attributes += "&mute=false";
-        }
-        if (this.props.controls) {
-            attributes += "&controls=true";
-        } else {
-            attributes += "&controls=false";
-        }
+        attributes += "&autoplay=" + (this.props.autoPlay ? "true" : "false");
+        attributes += "&mute=" + (this.props.muted ? "true" : "false");
+        attributes += "&controls=" + (this.props.controls ? "true" : "false");
         return attributes;
     }
 
     public static canPlay(url: string): boolean {
-        if (url) {
-            if (url.includes("dailymotion.com")) {
-                return true;
-            }
+        if (url && url.includes("dailymotion.com")) {
+            return true;
         }
         return false;
     }

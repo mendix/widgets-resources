@@ -5,9 +5,14 @@
   "description": "Player for YouTube and Vimeo videos",
   "author": "Mendix BV",
   "license": "Apache-2.0",
+  "config": {
+    "widgetPath": "./dist/MxTestProject/widgets",
+    "projectPath": "./dist/MxTestProject",
+    "host": "http://localhost:8080/",
+    "localPort": 3000
+  },
   "scripts": {
-    "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec \"grunt",
-    "start:dev": "webpack-dev-server --hot --open",
+    "start": "webpack-dev-server --hot --open",
     "emit": "tsc",
     "pretest": "tsc && npm run lint && npm run build",
     "test": "npm run test:unit && npm run test:conditional",
@@ -16,13 +21,15 @@
     "test:unit": "karma start --single-run --codeCoverage && node tests/remap.js",
     "test:e2e": "tsc -p ./tests/e2e/tsconfig.json && wdio ./tests/e2e/wdio.conf.js",
     "test:e2e:dev": "tsc -p ./tests/e2e/tsconfig.json && set DEBUG=true&& wdio ./tests/e2e/wdio.conf.js",
+    "dev": "gulp --gulpfile Gulpfile.js",
+    "build": "npm run dev",
     "lint": "tslint -c tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'",
     "lint:fix": "npm run lint -- --fix",
     "deploy": " npm run updateProject && npm run deployApp",
-    "build": "grunt release",
     "updateProject": "node ./node_modules/mendix-widget-build-script/dist/UpdateMxProject.js",
     "deployApp": "node ./node_modules/mendix-widget-build-script/dist/DeployMxApp.js",
-    "deployAndTest": "npm run deploy && npm run test:e2e"
+    "deployAndTest": "npm run deploy && npm run test:e2e",
+    "release": "gulp release --gulpfile Gulpfile.js"
   },
   "pre-commit": [
     "emit",
@@ -30,10 +37,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mendixlabs/videoplayer"
+    "url": "https://github.com/mendix/videoplayer"
   },
   "bugs": {
-    "url": "https://github.com/mendixlabs/videoplayer/issues"
+    "url": "https://github.com/mendix/videoplayer/issues"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
@@ -54,15 +61,12 @@
     "enzyme-adapter-react-16": "^1.7.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "fork-ts-checker-webpack-plugin": "^0.4.13",
-    "grunt": "^1.0.3",
-    "grunt-check-dependencies": "^1.0.0",
-    "grunt-contrib-clean": "^2.0.0",
-    "grunt-contrib-compress": "^1.4.3",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.1",
-    "grunt-file-append": "0.0.7",
-    "grunt-newer": "^1.3.0",
-    "grunt-webpack": "^3.1.3",
+    "gulp": "^3.9.1",
+    "gulp-copy": "^4.0.1",
+    "gulp-help": "^1.6.1",
+    "gulp-sequence": "^1.0.0",
+    "gulp-watch": "^5.0.1",
+    "gulp-zip": "^4.2.0",
     "istanbul": "^0.4.3",
     "istanbul-instrumenter-loader": "^3.0.1",
     "jasmine": "^3.3.0",
@@ -76,9 +80,8 @@
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "^2.0.13",
     "mendix-client": "^7.15.4",
-    "mendix-widget-build-script": "^1.0.0",
+    "mendix-widget-build-script": "^1.0.3",
     "node-sass": "^4.5.3",
-    "nodemon": "^1.12.1",
     "pre-commit": "^1.2.2",
     "raw-loader": "^0.5.1",
     "react": "^16.6.3",

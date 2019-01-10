@@ -16,7 +16,7 @@
                 <attributeType name="String" />
             </attributeTypes>
         </property>
-        <property key="urlValue" type="string" required="false">
+        <property key="urlStatic" type="string" required="false">
             <caption>Static URL</caption>
             <category>General</category>
             <description>A static url ensures your video will show when there is no value provided from an attribute. When there is a URL provided by an attribute, that will override the static URL.</description>
@@ -29,10 +29,10 @@
                 <attributeType name="String" />
             </attributeTypes>
         </property>
-        <property key="posterImage" type="string" required="false">
+        <property key="posterImageUrl" type="string" required="false">
             <caption>Poster Static URL</caption>
             <category>General</category>
-            <description></description>
+            <description />
         </property>
         <property key="autoStart" type="boolean" defaultValue="false">
             <caption>Auto start</caption>
@@ -76,7 +76,7 @@
         <property key="heightUnit" type="enumeration" defaultValue="pixels">
             <caption>Height unit</caption>
             <category>Size</category>
-            <description>"Percentage of width" maintains the aspect ratio of the video. "Pixels" is absolute. Warning: when "Percentage of parent" is selected, the parent container must have an absolute height, otherwise nothing will be displayed.</description>
+            <description>Warning: when "Percentage of parent" is selected, the parent container must have an absolute height, otherwise nothing will be displayed.</description>
             <enumerationValues>
                 <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
                 <enumerationValue key="pixels">Pixels</enumerationValue>

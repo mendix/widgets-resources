@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { Dailymotion } from "./Dailymotion";
+import { DailymotionPlayer } from "./DailymotionPlayer";
 import { Html5Player } from "./Html5Player";
 import { PlayerError } from "./PlayerError";
-import { Vimeo } from "./Vimeo";
-import { Youtube } from "./Youtube";
+import { VimeoPlayer } from "./VimeoPlayer";
+import { YoutubePlayer } from "./YoutubePlayer";
 import { validateUrl } from "../utils/Utils";
 
 export interface VideoPlayerProps {
@@ -26,26 +26,23 @@ export interface VideoPlayerProps {
 
 export class VideoPlayer extends React.Component <VideoPlayerProps> {
 
-    constructor(props: VideoPlayerProps) {
-        super(props);
-
-        this.renderHtml5Player = this.renderHtml5Player.bind(this);
-        this.renderYoutubePlayer = this.renderYoutubePlayer.bind(this);
-        this.renderVimeoPlayer = this.renderVimeoPlayer.bind(this);
-    }
+    private readonly handleHtml5PlayerRender = this.renderHtml5Player.bind(this);
+    private readonly handleYoutubePlayerRender = this.renderYoutubePlayer.bind(this);
+    private readonly handleVimeoPlayerRender = this.renderVimeoPlayer.bind(this);
+    private readonly handleDailymotionPlayerRender = this.renderDailymotionPlayer.bind(this);
 
     render() {
         const url = this.props.url || this.props.staticUrl;
         if (!validateUrl(url))
             return <PlayerError preview={this.props.preview} />;
-        if (Youtube.canPlay(url)) {
-            return this.renderYoutubePlayer();
-        } else if (Vimeo.canPlay(url)) {
-            return this.renderVimeoPlayer();
-        } else if (Dailymotion.canPlay(url)) {
-            return this.renderDailymotionPlayer();
+        if (YoutubePlayer.canPlay(url)) {
+            return this.handleYoutubePlayerRender();
+        } else if (VimeoPlayer.canPlay(url)) {
+            return this.handleVimeoPlayerRender();
+        } else if (DailymotionPlayer.canPlay(url)) {
+            return this.handleDailymotionPlayerRender();
         }
-        return this.renderHtml5Player();
+        return this.handleHtml5PlayerRender();
     }
 
     private renderHtml5Player(): React.ReactElement<Html5Player> {
@@ -61,9 +58,9 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
         );
     }
 
-    private renderYoutubePlayer(): React.ReactElement<Youtube> {
+    private renderYoutubePlayer(): React.ReactElement<YoutubePlayer> {
         return (
-            <Youtube
+            <YoutubePlayer
                 url={this.props.url || this.props.staticUrl}
                 showControls={this.props.showControls}
                 autoPlay={this.props.autoStart}
@@ -74,9 +71,9 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
         );
     }
 
-    private renderVimeoPlayer(): React.ReactElement<Vimeo> {
+    private renderVimeoPlayer(): React.ReactElement<VimeoPlayer> {
         return (
-            <Vimeo
+            <VimeoPlayer
                 url={this.props.url || this.props.staticUrl}
                 autoPlay={this.props.autoStart}
                 muted={this.props.muted}
@@ -86,9 +83,9 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
         );
     }
 
-    private renderDailymotionPlayer(): React.ReactElement<Dailymotion> {
+    private renderDailymotionPlayer(): React.ReactElement<DailymotionPlayer> {
         return (
-            <Dailymotion
+            <DailymotionPlayer
                 url={this.props.url || this.props.staticUrl}
                 autoPlay={this.props.autoStart}
                 muted={this.props.muted}

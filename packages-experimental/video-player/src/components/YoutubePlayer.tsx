@@ -11,17 +11,17 @@ export interface YoutubeProps {
     aspectRatio?: boolean;
 }
 
-export class Youtube extends React.Component<YoutubeProps> {
+export interface YoutubeState {
+    ratio: number;
+}
+
+export class YoutubePlayer extends React.Component<YoutubeProps, YoutubeState> {
     private iframe: HTMLIFrameElement;
-    readonly state = {
+    private readonly handleOnResize = this.onResize.bind(this);
+    private handleAttributes = this.getUrlAttributes.bind(this);
+    readonly state: YoutubeState = {
         ratio: 0
     };
-
-    constructor(props: YoutubeProps) {
-        super(props);
-
-        this.onResize = this.onResize.bind(this);
-    }
 
     render() {
         return (
@@ -31,9 +31,9 @@ export class Youtube extends React.Component<YoutubeProps> {
                 frameBorder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen={true}
-                ref={(node: HTMLIFrameElement) => this.iframe = node }>
-                <ReactResizeDetector handleWidth handleHeight onResize={this.onResize}
-                                     refreshMode="debounce" refreshRate={100} />
+                ref={(node: HTMLIFrameElement) => this.iframe = node}>
+                <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize}
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
     }
@@ -53,10 +53,11 @@ export class Youtube extends React.Component<YoutubeProps> {
     }
 
     private generateUrl(url: string): string {
-        const attributes = this.getUrlAttributes();
+        const attributes = this.handleAttributes();
         try {
-            if (url.includes("youtube.com/embed/"))
+            if (url.includes("youtube.com/embed/")) {
                 return `${url}${attributes}`;
+            }
             if (url.includes("youtu.be/") || url.includes("youtube.com/v/")) {
                 const urlSplit = url.split("/");
                 if (urlSplit.length > 0) {
@@ -72,42 +73,23 @@ export class Youtube extends React.Component<YoutubeProps> {
                 }
             }
         } catch (e) {
-            //
+            return url;
         }
         return url;
     }
 
     private getUrlAttributes(): string {
         let attributes = "?modestbranding=1&rel=0";
-
-        if (this.props.autoPlay) {
-            attributes += "&autoplay=1";
-        } else {
-            attributes += "&autoplay=0";
-        }
-        if (this.props.showControls) {
-            attributes += "&controls=1";
-        } else {
-            attributes += "&controls=0";
-        }
-        if (this.props.muted) {
-            attributes += "&muted=1";
-        } else {
-            attributes += "&muted=0";
-        }
-        if (this.props.loop) {
-            attributes += "&loop=1";
-        } else {
-            attributes += "&loop=0";
-        }
+        attributes += "&autoplay=" + (this.props.autoPlay ? "1" : "0");
+        attributes += "&controls=" + (this.props.showControls ? "1" : "0");
+        attributes += "&muted=" + (this.props.muted ? "1" : "0");
+        attributes += "&loop=" + (this.props.loop ? "1" : "0");
         return attributes;
     }
 
     public static canPlay(url: string): boolean {
-        if (url) {
-            if (url.includes("youtube.com") || url.includes("youtu.be")) {
-                return true;
-            }
+        if (url && url.includes("youtube.com") || url.includes("youtu.be")) {
+            return true;
         }
         return false;
     }

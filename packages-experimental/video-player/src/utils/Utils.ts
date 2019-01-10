@@ -3,8 +3,9 @@ export const fixHeightWithRatio = (element: HTMLElement, ratio: number): void =>
     if (height > 0) {
         element.style.height = `${height}px`;
         element.parentElement!.style.height = `${height}px`;
-        if (element.parentElement!.parentElement)
+        if (element.parentElement!.parentElement) {
             element.parentElement!.parentElement!.style.height = `${height}px`;
+        }
     }
 };
 
@@ -20,7 +21,8 @@ export const getRatio = (url: string): Promise<number> => {
 };
 
 export const validateUrl = (url: string): string => {
-    if (/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g.test(url))
+    if (/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g.test(url)) {
         return url;
+    }
     return "";
 };

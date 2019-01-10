@@ -10,18 +10,18 @@ export interface VimeoProps {
     aspectRatio?: boolean;
 }
 
-export class Vimeo extends React.Component<VimeoProps> {
+export interface VimeoState {
+    ratio: number;
+}
+
+export class VimeoPlayer extends React.Component<VimeoProps, VimeoState> {
 
     private iframe: HTMLIFrameElement;
-    readonly state = {
+    private readonly handleOnResize = this.onResize.bind(this);
+    private handleAttributes = this.getUrlAttributes.bind(this);
+    readonly state: VimeoState = {
         ratio: 0
     };
-
-    constructor(props: VimeoProps) {
-        super(props);
-
-        this.onResize = this.onResize.bind(this);
-    }
 
     render() {
         return (
@@ -31,9 +31,9 @@ export class Vimeo extends React.Component<VimeoProps> {
                 frameBorder="0"
                 allow="autoplay; fullscreen"
                 allowFullScreen={true}
-                ref={(node: HTMLIFrameElement) => this.iframe = node }>
-                <ReactResizeDetector handleWidth handleHeight onResize={this.onResize}
-                                     refreshMode="debounce" refreshRate={100} />
+                ref={(node: HTMLIFrameElement) => this.iframe = node}>
+                <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize}
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
     }
@@ -53,50 +53,35 @@ export class Vimeo extends React.Component<VimeoProps> {
     }
 
     private generateUrl(url: string): string {
-        const attributes = this.getUrlAttributes();
+        const attributes = this.handleAttributes();
         try {
-
             if (url.includes("player.vimeo.com"))
                 return `${url}${attributes}`;
 
             const urlVimeoSplit = url.split("/");
             if (urlVimeoSplit.length > 0) {
                 const id = urlVimeoSplit[urlVimeoSplit.length - 1];
-                if (Number(id) > 0 && isFinite(Number(id)))
+                if (Number(id) > 0 && isFinite(Number(id))) {
                     return `https://player.vimeo.com/video/${id}${attributes}`;
+                }
             }
         } catch (e) {
-            //
+            return url;
         }
         return url;
     }
 
     private getUrlAttributes(): string {
         let attributes = "?dnt=1";
-
-        if (this.props.autoPlay) {
-            attributes += "&autoplay=1";
-        } else {
-            attributes += "&autoplay=0";
-        }
-        if (this.props.muted) {
-            attributes += "&muted=1";
-        } else {
-            attributes += "&muted=0";
-        }
-        if (this.props.loop) {
-            attributes += "&loop=1";
-        } else {
-            attributes += "&loop=0";
-        }
+        attributes += "&autoplay=" + (this.props.autoPlay ? "1" : "0");
+        attributes += "&muted=" + (this.props.muted ? "1" : "0");
+        attributes += "&loop=" + (this.props.loop ? "1" : "0");
         return attributes;
     }
 
     public static canPlay(url: string): boolean {
-        if (url) {
-            if (url.includes("vimeo.com")) {
-                return true;
-            }
+        if (url && url.includes("vimeo.com")) {
+            return true;
         }
         return false;
     }

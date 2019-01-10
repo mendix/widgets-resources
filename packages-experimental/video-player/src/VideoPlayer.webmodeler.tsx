@@ -1,5 +1,5 @@
 import * as React from "react";
-import classNames = require("classnames");
+import * as classNames from "classnames";
 
 import { Alert } from "./components/Alert";
 import { PlayerError } from "./components/PlayerError";
@@ -12,10 +12,11 @@ declare function require(name: string): string;
 interface VideoPlayerWebModelerProps {
     "class"?: string;
     style?: React.CSSProperties;
+    tabIndex: number;
     urlAttribute: string;
-    urlValue: string;
+    urlStatic: string;
     posterAttribute?: string;
-    posterImage?: string;
+    posterImageUrl?: string;
 
     widthUnit: WidthUnitType;
     width: number;
@@ -31,7 +32,7 @@ export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
     render() {
         const message = this.validateProps(this.props);
         if (message)
-            return <Alert bootstrapStyle="danger" message={message} className="widget-badge-alert"/>;
+            return (<Alert message={message} className="widget-badge-alert"/>);
 
         return (
             <SizeContainer
@@ -47,7 +48,7 @@ export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
     }
 
     private renderPlayers(): React.ReactElement<{}> {
-        if (!validateUrl(this.props.urlAttribute || this.props.urlValue)) {
+        if (!validateUrl(this.props.urlAttribute || this.props.urlStatic)) {
             return <PlayerError preview={true}/>;
         }
         return <VideoPlayer {...this.transformProps(this.props)}/>;
@@ -56,9 +57,9 @@ export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
     private transformProps(props: VideoPlayerWebModelerProps): VideoPlayerProps {
         return {
             url: props.urlAttribute,
-            staticUrl: props.urlValue,
+            staticUrl: props.urlStatic,
             poster: props.posterAttribute,
-            staticPoster: props.posterImage,
+            staticPoster: props.posterImageUrl,
             className: props.class,
             autoStart: false,
             showControls: props.showControls,
@@ -71,8 +72,8 @@ export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
 
     private validateProps(props: VideoPlayerWebModelerProps): string {
         let errorMessage = "";
-        if (!props.urlAttribute && !props.urlValue) {
-            errorMessage = `An URL is required for this widget`;
+        if (!props.urlAttribute && !props.urlStatic) {
+            errorMessage = "An URL is required for this widget";
         }
 
         return errorMessage;

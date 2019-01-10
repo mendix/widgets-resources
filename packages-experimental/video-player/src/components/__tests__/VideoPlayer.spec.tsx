@@ -1,10 +1,10 @@
-import { shallow } from "enzyme";
 import * as React from "react";
+import { shallow } from "enzyme";
 
 import { VideoPlayer } from "../VideoPlayer";
-import { Youtube } from "../Youtube";
-import { Vimeo } from "../Vimeo";
-import { Dailymotion } from "../Dailymotion";
+import { YoutubePlayer } from "../YoutubePlayer";
+import { VimeoPlayer } from "../VimeoPlayer";
+import { DailymotionPlayer } from "../DailymotionPlayer";
 import { Html5Player } from "../Html5Player";
 import { PlayerError } from "../PlayerError";
 import { fixHeightWithRatio, getRatio, validateUrl } from "../../utils/Utils";
@@ -24,7 +24,7 @@ describe("Video Player", () => {
         />);
 
         expect(player).toBeElement(
-            <Youtube
+            <YoutubePlayer
                 url="http://youtube.com/video/123456"
                 showControls={false}
                 autoPlay={false}
@@ -49,7 +49,7 @@ describe("Video Player", () => {
         />);
 
         expect(player).toBeElement(
-            <Vimeo
+            <VimeoPlayer
                 url="http://vimeo.com/123456"
                 autoPlay={false}
                 muted={false}
@@ -73,7 +73,7 @@ describe("Video Player", () => {
         />);
 
         expect(player).toBeElement(
-            <Dailymotion
+            <DailymotionPlayer
                 controls={false}
                 url="http://dailymotion.com/123456"
                 autoPlay={false}

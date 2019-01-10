@@ -16,7 +16,7 @@ describe("Html5 Player", () => {
             showControls={true}
         />);
 
-        expect(player).toHaveClass("video-player-html5");
+        expect(player).toHaveClass("widget-video-player-html5-container");
         expect(player).toBeDefined();
     });
     it("Renders the structure of video tags and check the structure", () => {
@@ -30,20 +30,23 @@ describe("Html5 Player", () => {
             showControls={true}
         />);
         expect(player).toBeElement(
-            <video
-                className="video-player-html5"
-                controls={true}
-                width="100%"
-                height="100%"
-                autoPlay={false}
-                muted={false}
-                loop={true}
-                poster="test"
-                ref={jasmine.any(HTMLVideoElement)}>
-                <source src="test" type="video/mp4"/>
-                <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
-                                     refreshMode="debounce" refreshRate={100} />
-            </video>
+            <div className="widget-video-player-html5-container">
+                <div className="video-error-label-html5">We are unable to show the video content :(</div>
+                <video
+                    className="widget-video-player-html5"
+                    controls={true}
+                    width="100%"
+                    height="100%"
+                    autoPlay={false}
+                    muted={false}
+                    loop={true}
+                    poster="test"
+                    ref={jasmine.any(HTMLVideoElement)}>
+                    <source src="test" type="video/mp4"/>
+                    <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
+                                         refreshMode="debounce" refreshRate={100}/>
+                </video>
+            </div>
         );
     });
 });

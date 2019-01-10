@@ -16,7 +16,6 @@ Mendix widget to play videos from Youtube, Vimeo, Dailymotion and external Mp4 f
 * Define poster image for external Mp4 files
 * Set static URL & Poster when the dynamic data is not specified
 
-
 ## Dependencies
  Mendix 7.20
 
@@ -24,20 +23,19 @@ Mendix widget to play videos from Youtube, Vimeo, Dailymotion and external Mp4 f
  Place the widget inside or outside a context of an object that has a value attribute.
  If you don`t place the widget inside a context, you need to provide a static URL otherwise the player will not render.
  
- ![Picure 1](/assets/pic1.png)
- ![Picture 2](/assets/pic2.png)
- ![Picture 3](/assets/pic3.png)
+ ![General Tab](/assets/general_tab_configuration.png)
+ ![Behavior Tab](/assets/behavior_tab_configuration.png)
+ ![Size Tab](/assets/size_tab_configuration.png)
 
-## Demo project
+## Development project
 
-[https://videoplayer.mxapps.io/](https://videoplayer.mxapps.io/)
+[https://videoplayer-sandbox.mxapps.io/](https://videoplayer-sandbox.mxapps.io/)
 
 ![demo](/assets/demo.png)
 
 ## Issues, suggestions and feature requests
 
-We are actively maintaining this widget, please report any issues or suggestion for improvement at
-https://github.com/mendix/video-player/issues.
+Please report any issue and bugs to https://support.mendix.com/
 
 ## Development and contribution
 Please follow [development guide](/development.md).
