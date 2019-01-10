@@ -1,30 +1,24 @@
 import { ReactNode } from "react";
-// import { Dispatch } from "./dispatch";
-// import { FormatterConfig } from "./formatters/FormatterConfig";
-// import { ValueFormatter } from "./formatters/ValueFormatter";
-// import { ResolvedValue } from "./values/ResolvedValue";
 
-type FormatterConfig<T> = any;
-type Dispatch = any;
-type ValueFormatter<T> = any;
-type ResolvedValue<T> = any;
 type Option<T> = T | undefined;
-type AttributeValue = any;
+// @ts-ignore
+type BigJS = BigJsLibrary.BigJS;
+type GUID = string & {
+    __guidTag: any;
+};
+type AttributeType = "AutoNumber" | "Binary" | "Boolean" | "Currency" | "DateTime" | "Decimal" | "Enum" | "EnumSet" | "Float" | "HashString" | "Integer" | "Long" | "ObjectReference" | "ObjectReferenceSet" | "String";
+type PrimitiveAttributeValue = undefined | string | boolean | Date | BigJS;
+type AttributeValue = PrimitiveAttributeValue | GUID | GUID[];
 
 declare global {
     namespace PluginWidget {
         export type PrimitiveValue = number | string | boolean | null;
-        export type WidgetPropertyValue =
-            | PrimitiveValue
-            | PrimitiveValue[]
-            | ResolvedValue<any>
-            | (() => ReactNode)
-            | ReactNode
-            | { [name: string]: WidgetPropertyValue };
+        export type PluginWidgetProp = PrimitiveValue | PrimitiveValue[] | (() => ReactNode) | ((props: any) => ReactNode) | ReactNode | ActionValue | DynamicValue<any> | EditableValue<any> | {
+            [name: string]: PluginWidgetProp;
+        };
 
         export interface PluginWidgetProps {
-            $dispatch: Dispatch;
-            [name: string]: WidgetPropertyValue | Dispatch;
+            [name: string]: PluginWidgetProp;
         }
 
         export const enum ValueStatus {
@@ -54,6 +48,36 @@ declare global {
             setValue(value: Option<T>, customValidation?: Option<string>): void;
             setTextValue(value: string): void;
             setFormatting(config: FormatterConfig<T>): void;
+        }
+
+        /* Formatter */
+        export type FormatterConfig<V> = V extends BigJS ? NumberFormatterConfig : V extends Date ? DateTimeFormatterConfig : never;
+        export interface NumberFormatterConfig {
+            readonly groupDigits: boolean;
+            readonly decimalPrecision?: number;
+        }
+        export interface DefaultDateTimeFormatterConfig {
+            readonly type: "date" | "time" | "datetime";
+        }
+        export interface CustomDateTimeFormatterConfig {
+            readonly type: "custom";
+            readonly pattern: string;
+        }
+        export type DateTimeFormatterConfig = DefaultDateTimeFormatterConfig | CustomDateTimeFormatterConfig;
+
+        interface ValidParseResult<V> {
+            readonly valid: true;
+            readonly value?: V;
+        }
+        interface InvalidParseResult {
+            readonly valid: false;
+        }
+        export type ParseResult<V> = ValidParseResult<V> | InvalidParseResult;
+        export interface ValueFormatter<V> {
+            readonly defaultConfig?: FormatterConfig<V>;
+            format(value?: V, config?: FormatterConfig<V>): string;
+            parse(value: string, config?: FormatterConfig<V>): ParseResult<V>;
+            getFormatPlaceholder(): Option<string>;
         }
     }
 }
