@@ -43,6 +43,7 @@
     "url": "https://github.com/mendix/videoplayer/issues"
   },
   "devDependencies": {
+    "@types/big.js": "0.0.31",
     "@types/classnames": "^2.2.3",
     "@types/core-js": "^2.5.0",
     "@types/enzyme": "^3.1.15",
