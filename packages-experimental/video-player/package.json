@@ -20,7 +20,7 @@
     "test:dev": "karma start",
     "test:unit": "karma start --single-run --codeCoverage && node tests/remap.js",
     "test:e2e": "tsc -p ./tests/e2e/tsconfig.json && wdio ./tests/e2e/wdio.conf.js",
-    "test:e2e:dev": "tsc -p ./tests/e2e/tsconfig.json && set DEBUG=true&& wdio ./tests/e2e/wdio.conf.js",
+    "test:e2e:dev": "tsc -p ./tests/e2e/tsconfig.json && set DEBUG=true && wdio ./tests/e2e/wdio.conf.js",
     "dev": "gulp --gulpfile Gulpfile.js",
     "build": "gulp build",
     "lint": "tslint -c tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'",
