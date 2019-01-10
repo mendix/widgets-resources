@@ -41,7 +41,8 @@ export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
                 widthUnit={this.props.widthUnit}
                 width={this.props.width}
                 heightUnit={this.props.heightUnit}
-                height={this.props.height}>
+                height={this.props.height}
+                tabIndex={this.props.tabIndex}>
                 {this.renderPlayers()}
             </SizeContainer>
         );

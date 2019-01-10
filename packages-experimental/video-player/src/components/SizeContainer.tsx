@@ -10,6 +10,7 @@ export interface Dimensions {
     width: number;
     heightUnit: HeightUnitType;
     height: number;
+    tabIndex: number;
 }
 
 export interface SizeProps extends Dimensions {
@@ -39,7 +40,7 @@ export const SizeContainer: React.FunctionComponent<SizeProps> = (props) => {
     };
 
     return (
-        <div className={classNames(props.className, "size-box")} style={relativeStyle}>
+        <div className={classNames(props.className, "size-box")} style={relativeStyle} tabIndex={props.tabIndex}>
             <div className={classNames("size-box-inner", props.classNameInner)} style={absoluteStyle}>
                 {props.children}
             </div>

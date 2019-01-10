@@ -10,7 +10,7 @@ Object.assign(webpackConfig, {
     ]
 });
 
-webpackConfig.devtool = "none";
+webpackConfig.devtool = false;
 
 module.exports = function(config) {
     if (config.codeCoverage) {

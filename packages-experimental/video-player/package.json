@@ -13,8 +13,8 @@
   },
   "scripts": {
     "start": "webpack-dev-server --hot --open",
-    "emit": "tsc",
-    "pretest": "tsc && npm run lint && npm run build",
+    "checkTypes": "tsc --noEmit",
+    "pretest": "npm run checkTypes && npm run lint && npm run build",
     "test": "npm run test:unit && npm run test:conditional",
     "test:conditional": "node ./node_modules/mendix-widget-build-script/dist/CheckPullRequestFromFork.js && echo 'Skip tests on forked pull request' || npm run deployAndTest",
     "test:dev": "karma start",
@@ -22,7 +22,7 @@
     "test:e2e": "tsc -p ./tests/e2e/tsconfig.json && wdio ./tests/e2e/wdio.conf.js",
     "test:e2e:dev": "tsc -p ./tests/e2e/tsconfig.json && set DEBUG=true&& wdio ./tests/e2e/wdio.conf.js",
     "dev": "gulp --gulpfile Gulpfile.js",
-    "build": "npm run dev",
+    "build": "gulp build",
     "lint": "tslint -c tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'",
     "lint:fix": "npm run lint -- --fix",
     "deploy": " npm run updateProject && npm run deployApp",
@@ -32,7 +32,7 @@
     "release": "gulp release --gulpfile Gulpfile.js"
   },
   "pre-commit": [
-    "emit",
+    "checkTypes",
     "lint"
   ],
   "repository": {

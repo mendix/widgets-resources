@@ -10,6 +10,7 @@ import "../ui/VideoPlayer.css";
 export interface VideoPlayerContainerProps {
     "class"?: string;
     style?: React.CSSProperties;
+    tabIndex: number;
     urlAttribute?: PluginWidget.EditableValue<string>;
     urlStatic?: string;
     posterAttribute?: PluginWidget.EditableValue<string>;
@@ -36,7 +37,8 @@ class VideoPlayerContainer extends React.Component<VideoPlayerContainerProps> {
                 widthUnit={this.props.widthUnit}
                 width={this.props.width}
                 heightUnit={this.props.heightUnit}
-                height={this.props.height}>
+                height={this.props.height}
+                tabIndex={this.props.tabIndex}>
                 <VideoPlayer url={this.props.urlAttribute ? this.props.urlAttribute.value! : ""}
                              staticUrl={this.props.urlStatic || ""}
                              poster={this.props.posterAttribute ? this.props.posterAttribute.value! : ""}
