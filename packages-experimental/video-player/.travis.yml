@@ -28,7 +28,7 @@ cache:
     - node_modules
 env:
   global:
-    - MX_APP_NAME=videoplayer_test
+    - MX_APP_NAME=videoplayer-sandbox
     - MX_BRANCH_NAME=trunk
     - MX_PROJECT_ID=25c71ec6-4eb0-4324-8299-4e1948f0c165
     - MX_ENVIRONMENT=Sandbox
