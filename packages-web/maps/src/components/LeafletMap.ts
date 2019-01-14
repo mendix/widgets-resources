@@ -35,6 +35,7 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
     private leafletNode?: HTMLDivElement;
     private defaultCenterLocation: LatLngLiteral = { lat: 51.9107963, lng: 4.4789878 };
     private map?: Map;
+    private div?: HTMLDivElement;
     private markerGroup = new FeatureGroup();
     readonly state: LeafletMapState = {
         center: this.defaultCenterLocation
@@ -48,8 +49,9 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
             }, this.state.alertMessage),
             createElement("div",
                 {
+                    ref: (node: HTMLDivElement) => this.div = node,
                     className: classNames("widget-leaflet-maps-wrapper", this.props.className),
-                    style: { ...this.props.divStyles , ...Utils.getDimensions(this.props) }
+                    style: { ...this.props.divStyles , ...Utils.getDimensions(this.props, this.div) }
                 },
                 createElement("div", {
                     className: "widget-leaflet-maps",
