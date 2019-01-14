@@ -26,6 +26,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
     private markers: google.maps.Marker[] = [];
     private bounds!: google.maps.LatLngBounds;
     private googleMapsNode?: HTMLDivElement;
+    private div?: HTMLDivElement;
     readonly state: GoogleMapState = {
         center: this.defaultCenterLocation,
         alertMessage: this.props.alertMessage
@@ -39,8 +40,9 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
             }, this.state.alertMessage),
             createElement("div",
                 {
+                    ref: (node: HTMLDivElement) => this.div = node,
                     className: classNames("widget-google-maps-wrapper", this.props.className),
-                    style: { ...this.props.divStyles , ...Utils.getDimensions(this.props) }
+                    style: { ...this.props.divStyles , ...Utils.getDimensions(this.props, this.div) }
                 },
                 createElement("div", {
                     className: "widget-google-maps",
