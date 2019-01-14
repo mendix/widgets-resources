@@ -34,11 +34,9 @@ export default class Utils {
         } else if (props.heightUnit === "percentageOfParent") {
             let height = `${props.height}%`;
             if (ref && ref.parentElement) {
-                if (ref.parentElement.parentElement) {
-                    const parentHeight = ref.parentElement.parentElement.clientHeight;
-                    if (parentHeight > 0) {
-                        height = `${parentHeight * props.height / 100}px`;
-                    }
+                const parentHeight = ref.parentElement.clientHeight;
+                if (parentHeight > 0) {
+                    height = `${parentHeight * props.height / 100}px`;
                 }
             }
             style.height = height;
@@ -49,7 +47,7 @@ export default class Utils {
 
     static parseStyle(style = ""): CSSProperties { // Doesn't support a few stuff.
         try {
-            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
                 const pair = line.split(":");
                 if (pair.length === 2) {
                     const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
