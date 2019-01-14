@@ -1,14 +1,14 @@
 import { ReactNode } from "react";
 
-type Option<T> = T | undefined;
+export declare type Option<T> = T | undefined;
 // @ts-ignore
-type BigJS = BigJsLibrary.BigJS;
-type GUID = string & {
+export declare type BigJS = BigJsLibrary.BigJS;
+export declare type GUID = string & {
     __guidTag: any;
 };
-type AttributeType = "AutoNumber" | "Binary" | "Boolean" | "Currency" | "DateTime" | "Decimal" | "Enum" | "EnumSet" | "Float" | "HashString" | "Integer" | "Long" | "ObjectReference" | "ObjectReferenceSet" | "String";
-type PrimitiveAttributeValue = undefined | string | boolean | Date | BigJS;
-type AttributeValue = PrimitiveAttributeValue | GUID | GUID[];
+export declare type AttributeType = "AutoNumber" | "Binary" | "Boolean" | "Currency" | "DateTime" | "Decimal" | "Enum" | "EnumSet" | "Float" | "HashString" | "Integer" | "Long" | "ObjectReference" | "ObjectReferenceSet" | "String";
+export declare type PrimitiveAttributeValue = undefined | string | boolean | Date | BigJS;
+export declare type AttributeValue = PrimitiveAttributeValue | GUID | GUID[];
 
 declare global {
     namespace PluginWidget {
@@ -16,38 +16,38 @@ declare global {
         export type PluginWidgetProp = PrimitiveValue | PrimitiveValue[] | (() => ReactNode) | ((props: any) => ReactNode) | ReactNode | ActionValue | DynamicValue<any> | EditableValue<any> | {
             [name: string]: PluginWidgetProp;
         };
-
         export interface PluginWidgetProps {
             [name: string]: PluginWidgetProp;
         }
-
-        export const enum ValueStatus {
+        export enum ValueStatus {
             Loading = "loading",
             Unavailable = "unavailable",
             Available = "available"
         }
-
-        export type DynamicValue<T> =
-            | { status: ValueStatus.Loading | ValueStatus.Unavailable; value: undefined }
-            | { status: ValueStatus.Available; value: T };
-
+        export type DynamicValue<T> = {
+            status: ValueStatus.Loading | ValueStatus.Unavailable;
+            value: undefined;
+        } | {
+            status: ValueStatus.Available;
+            value: T;
+        };
         export interface ActionValue {
             canExecute: boolean;
             isExecuting: boolean;
             execute(): void;
         }
-
         export interface EditableValue<T extends AttributeValue> {
             value: Option<T>;
             displayValue: string;
             status: ValueStatus;
-            validation: Option<string>;
+            validation: string[];
             readOnly: boolean;
             formatter: ValueFormatter<T>;
             universe?: T[];
-            setValue(value: Option<T>, customValidation?: Option<string>): void;
+            setValue(value: Option<T>): void;
             setTextValue(value: string): void;
             setFormatting(config: FormatterConfig<T>): void;
+            setValidation(validation?: string): void;
         }
 
         /* Formatter */
