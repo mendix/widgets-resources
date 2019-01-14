@@ -9,12 +9,13 @@ const watch = require("gulp-watch");
 const sequence = require("gulp-sequence");
 const del = require("del");
 const merge = require("webpack-merge");
+const gulpSlash = require('gulp-slash');
 
 const banner = (color, banner) => gutil.colors[color || "blue"](banner ? `[${banner}]` : "[GULP]");
 
 const pkg = require("./package.json");
 
-const projectPath = pkg.config.projectPath ? pkg.config.projectPath : path.join(__dirname, "./dist/MxTestProject");
+const projectPath = pkg.config.projectPath ? gulpSlash(pkg.config.projectPath) : path.join(__dirname, "./dist/MxTestProject");
 const widgetsFolder = path.join(projectPath, "/widgets/");
 const deploymentFolder = projectPath ? path.join(projectPath, "/deployment/web/widgets/") : false;
 
