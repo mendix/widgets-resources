@@ -130,15 +130,23 @@ gulp.task("clean", `Cleanup the dist/build`, () => {
 // Final tasks
 
 gulp.task("build", "Build the widget", done => {
-    sequence("clean", "build-dist", "compress", "copyDistDeployment", done);
+    sequence("clean", "check:dependencies", "build:dist", "compress", "copyDistDeployment", done);
 });
 
 gulp.task("release", "Release the widget", done => {
-    sequence("clean", "build-release", "compress", "copyDistDeployment", done);
+    sequence("clean", "check:dependencies", "build:release", "compress", "copyDistDeployment", done);
 });
 
-gulp.task("build-dist", callback => { runWebpack("development", callback); });
+gulp.task("build:dist", callback => { runWebpack("development", callback); });
 
-gulp.task("build-release", callback => { runWebpack("production", callback); });
+gulp.task("build:release", callback => { runWebpack("production", callback); });
+
+gulp.task("check:dependencies", "Checking the dependencies", function() {
+    require("check-dependencies").sync({
+        packageDir: "package.json",
+        scopeList: ["devDependencies"],
+        install: true
+    });
+});
 
 gulp.task("default", sequence("build", "watch:src", "watch:build", "watch:dist" ));
