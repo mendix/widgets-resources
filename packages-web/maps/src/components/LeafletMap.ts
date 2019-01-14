@@ -42,14 +42,13 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
     };
 
     render() {
-        return createElement("div", {},
+        return createElement("div", { ref: (node: HTMLDivElement) => this.div = node },
             createElement(Alert, {
                 bootstrapStyle: "danger",
                 className: "widget-leaflet-maps-alert leaflet-control"
             }, this.state.alertMessage),
             createElement("div",
                 {
-                    ref: (node: HTMLDivElement) => this.div = node,
                     className: classNames("widget-leaflet-maps-wrapper", this.props.className),
                     style: { ...this.props.divStyles , ...Utils.getDimensions(this.props, this.div) }
                 },
