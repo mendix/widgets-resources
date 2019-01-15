@@ -1,0 +1,11 @@
+{
+    "name": "actions",
+    "version": "0.0.1",
+    "license": "Apache-2.0",
+    "scripts": {
+        "start": "../../node_modules/.bin/tsc --watch",
+        "build": "../../node_modules/.bin/tsc",
+        "postbuild": "node ./scripts/copyActionsToTestProject.js",
+        "lint": "../../node_modules/.bin/tslint --project tsconfig.json --config ../../tslint.json"
+    }
+}

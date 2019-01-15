@@ -1,0 +1,12 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "include": ["./typings", "./src"],
+    "compilerOptions": {
+        "outDir": "./dist/tsc",
+        "module": "es2015",
+        "removeComments": false,
+        "alwaysStrict": false,
+        "sourceMap": false,
+        "noUnusedLocals": false
+    }
+}

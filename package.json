@@ -1,0 +1,79 @@
+{
+    "name": "root",
+    "private": true,
+    "scripts": {
+        "format": "npm run format:prettier -- --write",
+        "format:check": "npm run format:prettier -- --list-different",
+        "format:prettier": "prettier '**/*.{md,html,json,ts,tsx,js,jsx,css}'",
+        "lint": "lerna run lint"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^7.3.2",
+        "@commitlint/config-conventional": "^7.3.1",
+        "@commitlint/config-lerna-scopes": "^7.3.1",
+        "@types/big.js": "^4.0.5",
+        "@types/node": "^10.12.18",
+        "@types/react": "^16.7.18",
+        "@types/react-dom": "^16.0.11",
+        "@types/react-native": "^0.57.27",
+        "@types/react-native-push-notification": "^3.0.3",
+        "copy-webpack-plugin": "^4.6.0",
+        "del": "^3.0.0",
+        "fancy-log": "^1.3.3",
+        "gulp": "^4.0.0",
+        "gulp-zip": "^4.2.0",
+        "husky": "^1.3.1",
+        "lerna": "^3.10.5",
+        "lint-staged": "^8.1.0",
+        "mendix-client": "^7.15.6",
+        "prettier": "^1.15.3",
+        "pretty-quick": "^1.8.0",
+        "react": "^16.7.0",
+        "react-dom": "^16.7.0",
+        "react-native": "^0.57.8",
+        "react-native-add-calendar-event": "^2.2.0",
+        "react-native-camera": "^1.8.0",
+        "react-native-image-picker": "^0.28.0",
+        "react-native-maps": "^0.22.1",
+        "react-native-push-notification": "^3.1.2",
+        "react-native-touch-id": "^4.3.0",
+        "semantic-release": "^15.13.3",
+        "ts-loader": "^5.3.3",
+        "tslint": "^5.12.1",
+        "tslint-config-prettier": "^1.17.0",
+        "tslint-react": "^3.6.0",
+        "typescript": "^3.2.2",
+        "webpack": "^4.28.4",
+        "webpack-cli": "^3.2.1"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged && pretty-quick --staged",
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+    },
+    "lint-staged": {
+        "*.{ts,tsx}": [
+            "tslint"
+        ]
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-lerna-scopes",
+            "@commitlint/config-conventional"
+        ]
+    },
+    "prettier": {
+        "printWidth": 120,
+        "tabWidth": 4,
+        "proseWrap": "always",
+        "overrides": [
+            {
+                "files": "package-lock.json",
+                "options": {
+                    "tabWidth": 2
+                }
+            }
+        ]
+    }
+}
