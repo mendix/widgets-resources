@@ -1,4 +1,5 @@
 import { Component, createElement } from "react";
+import { hot } from "react-hot-loader/root";
 
 import { CommonRichTextProps, RichText, TabOptions } from "./RichText";
 import { ValidateConfigs } from "./ValidateConfigs";
@@ -34,7 +35,7 @@ interface RichTextContainerState {
 
 export type ReadOnlyStyle = "bordered" | "text" | "borderedToolbar";
 
-export default class RichTextContainer extends Component<RichTextContainerProps, RichTextContainerState> {
+class RichTextContainer extends Component<RichTextContainerProps, RichTextContainerState> {
     private subscriptionHandles: number[] = [];
     private defaultValue: string | null | undefined;
     private isEditing = false;
@@ -186,3 +187,5 @@ export default class RichTextContainer extends Component<RichTextContainerProps,
         }
     }
 }
+
+export default hot(RichTextContainer);
