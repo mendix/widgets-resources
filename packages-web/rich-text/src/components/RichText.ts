@@ -117,14 +117,23 @@ export class RichText extends Component<RichTextProps> {
 
     private sanitize(value: string): string {
         if (this.props.sanitizeContent) {
-            return sanitizeHtml(value, {
-                allowedTags: [ "h1", "h2", "h3", "h4", "h5", "h6", "p", "br", "a", "ul", "li", "ol", "s", "u", "em", "pre", "strong", "blockquote", "span" ],
-                allowedAttributes: {
-                    "*": [ "class", "style" ],
-                    "a": [ "href", "name", "target" ]
-                },
-                allowedSchemes: [ "http", "https", "ftp", "mailto" ]
-            });
+            try {
+                return sanitizeHtml(value, {
+                    allowedTags: [ "h1", "h2", "h3", "h4", "h5", "h6", "p", "br", "a", "ul", "li", "ol", "s", "u", "em", "pre", "strong", "blockquote", "span" ],
+                    allowedAttributes: {
+                        "*": [ "class", "style" ],
+                        "a": [ "href", "name", "target" ]
+                    },
+                    allowedSchemes: [ "http", "https", "ftp", "mailto" ]
+                });
+            } catch (e) {
+                // Catch error in IE where link href="{%attribute%}"
+                mx.ui.error("Failed to sanitize text, please use an other browser");
+                if (this.quill) {
+                    this.quill.enable(false);
+                }
+                return "";
+            }
         }
         return value;
     }
@@ -178,9 +187,15 @@ export class RichText extends Component<RichTextProps> {
 
     private updateEditor(props: RichTextProps) {
         if (this.quill) {
-            this.quill.enable(!props.readOnly);
-            this.quill.clipboard.dangerouslyPasteHTML(this.sanitize(props.value), "silent");
-            this.setEditorStyle(props);
+            try {
+                this.quill.clipboard.dangerouslyPasteHTML(this.sanitize(props.value), "silent");
+                this.quill.enable(!props.readOnly);
+                this.setEditorStyle(props);
+            } catch (e) {
+                // Catch error in IE where link href="{%attribute%}"
+                mx.ui.error("Failed to sanitize text, please use an other browser");
+                this.quill.enable(false);
+            }
         }
     }
 
