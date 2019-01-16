@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="mendix.native.progressbar.ProgressBar" needsEntityContext="true" offlineCapable="true" pluginWidget="true" 
+    xmlns="http://www.mendix.com/widget/1.0/" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
+    <name>Progress Bar</name>
+    <description>This widget allows you to use a native progress bar in your application.</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAABs1BMVEUAAAD///+AgICA//9V//+Av/9mzP9V1f9Jtv9gv/9Vxv9Ns/9duf9VVVVVv/9Jtv9Qv/9LtP9RvP9Ns/9Ruf9Osf9Osf9YWFhMs/9bW1tPuf9Ns/9NsvdLtPhMs/hKtfhLtPlVVVVNsvlIsflMs/pJsfpNs/pLtPpKsfpMs/pKsPpMs/tJsftLtPtKsftLsfdJsvdVVVVLsPhLtPhIs/hJs/hVVVVIrvZIr/VJsfhWVlZJsvhKsPhWVlZJsvhXV1dIsPhKsfhJsvlKsflKsflIsflMk8FJsvdIsfdJsPhKsvhNlslJsfhKsPhJsfhWVlZKsfhJsfdIsPdJsfdIsfdIsfhJsPhJsfhJsPhVVVVJsPhIsfhIsfhJsfdVWl5UXF9JsfdIsPdIsPdJsfdJsfhJsPhJsPhIsfhVVVVIsfhIsfhWVlZIsfhJsPhIsPhJsPdJsPdJsfdIsPdJsfdJsfdIsPdJsfhJsPhIsPhJsfhJsfhVVVVIsPhVVVVIsfhJsfhJsPhIsfhJsfhJsPhVVVVIsPhVVVVWVlZIrPBIsfhSZHBTZHBIq+9IsPdKodxOiLBVVVV1/q+UAAAAjHRSTlMAAQICAwQFBgcICQoLDAwOEBETFBYXGhobHB0eISIlJikqKy4vMTIzNDY3OTs9PkFCQkRHSk1OUmNpa21ubnBwcXV3eXx/f4SGi46Sk5Wam5ygoqepra+ztba5u77AwcPExcnKzs/S1NTX2Nnb3N/g4+Tm5+rt7u/w8fLy8/P09fb3+Pn5+vz9/v7+/kcKcD4AAAHXSURBVHgB7ZRnW9RAEICHIHbEjrFj74rllChG7D12jb17GrsgCqKiCBYC+cnuy4fVjDyc9+Trvp/e2Wdm73Yzs+IYFYfD4fCDOOnJKtCTxIEvo9EY9Wf/SX/UKP9Q6s6qoLskitaBrCoGWtXvj9SXwxODaZq+XcnSlBup4fpkfM07fA9a3xSWR3Yo5c7P/+8LvAPkda5madI1/PZUfEUH3oaCF/Rxir/vIaK+WdrIe7+WlQlX8LsN+LJ2/KD8oZkdIrH43H8g+8jrWs9K3SX8/nR8yRv8CGoJ+BZ+Lix7u8n7sIGFcRfwhzPxRa/wY5LD4x4CG8YmClvI+7SJuPYc/ng2vuAFflIUoSmJbZSY6PAPk/d5M2HNGWqezsXnPcNP14iiyZQkNqJ/v5u83q0Cp6h5Ph+d8wQ/S32eero6t4FpgC/bBI5T83IhOusRfr5WKmzAEYbSr9sFjlLzejE64wF+sQ4f8wi3TDT8bYfAIWral6IN9/DL4/GxL5HP+HOnwH5qOpaj0+7gVyeKRX9G1UjYXmo6V6lZsOhG0q0sLdR0rdOzYNGtrIdpF73wcWNuFhRqmNQ4/xoeGuzdomZBoce5+INS/Ekr9KjqZ/1mkWfd4XA4HL8B8hyYZtVVCEkAAAAASUVORK5CYII=</icon>
+    <properties>
+        <property key="progressValue" type="attribute">
+            <caption>Progress value</caption>
+            <category>Value</category>
+            <description/>
+            <attributeTypes>
+                <attributeType name="Integer" />
+                <attributeType name="Long" />
+                <attributeType name="Decimal" />
+            </attributeTypes>
+        </property>
+        <property key="progressMin" type="attribute" required="false">
+            <caption>Minimum progress value</caption>
+            <category>Value</category>
+            <description>Defaults to 0</description>
+            <attributeTypes>
+                <attributeType name="Integer" />
+                <attributeType name="Long" />
+                <attributeType name="Decimal" />
+            </attributeTypes>
+        </property>
+        <property key="progressMax" type="attribute" required="false">
+            <caption>Maximum progress value</caption>
+            <category>Value</category>
+            <description>Defaults to 100</description>
+            <attributeTypes>
+                <attributeType name="Integer" />
+                <attributeType name="Long" />
+                <attributeType name="Decimal" />
+            </attributeTypes>
+        </property>
+        <property key="color" type="string" required="false">
+            <caption>Color</caption>
+            <category>Appearance</category>
+            <description/>
+        </property>
+    </properties>
+</widget>
