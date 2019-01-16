@@ -13,13 +13,22 @@ const config = {
         libraryTarget: "commonjs2"
     },
     resolve: {
-        extensions: [".ts", ".tsx"]
+        extensions: [".js", ".jsx", ".ts", ".tsx"]
     },
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
                 loader: "ts-loader"
+            },
+            {
+                test: /\.jsx?$/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ["module:metro-react-native-babel-preset"]
+                    }
+                }
             }
         ]
     },
