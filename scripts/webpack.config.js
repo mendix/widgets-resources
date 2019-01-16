@@ -25,7 +25,7 @@ const config = {
     },
     mode: "development",
     devtool: false,
-    externals: ["react", "react-dom", "react-native", "react-native-camera"],
+    externals: ["react", "react-dom", "react-native", "react-native-camera", "react-native-maps"],
     plugins: [
         new CopyWebpackPlugin([{ from: "src/**/*.xml", toType: "template", to: "widgets/[name].[ext]" }], {
             copyUnmodified: true
