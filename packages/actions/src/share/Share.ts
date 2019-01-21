@@ -6,18 +6,6 @@
 
 import ReactNative from "react-native";
 
-declare module "react-native" {
-    export interface ShareStatic {
-        share(
-            content: ShareContent,
-            options?: ShareOptions
-        ): Promise<{
-            action: string;
-            activityType?: string;
-        }>;
-    }
-}
-
 /**
  * @param {string} message - The message to share. Required.
  * @param {string} title - Title of the message
