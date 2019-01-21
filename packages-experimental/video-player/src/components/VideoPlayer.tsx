@@ -41,7 +41,7 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
         } else if (DailymotionPlayer.canPlay(url)) {
             return this.handleDailymotionPlayerRender(url);
         }
-        return this.handleHtml5PlayerRender();
+        return this.handleHtml5PlayerRender(url);
     }
 
     private renderHtml5Player(url: string): React.ReactElement<Html5Player> {
