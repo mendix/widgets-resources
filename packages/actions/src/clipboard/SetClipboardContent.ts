@@ -14,13 +14,13 @@ function SetClipboardContent(content?: string): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/clipboard#setstring
 
-    const RNClipboard: typeof ReactNative.Clipboard = require("react-native").Clipboard;
+    const Clipboard: typeof ReactNative.Clipboard = require("react-native").Clipboard;
 
     if (!content) {
         throw new TypeError("Input parameter 'content' is required");
     }
 
-    RNClipboard.setString(content);
+    Clipboard.setString(content);
 
     return Promise.resolve();
 

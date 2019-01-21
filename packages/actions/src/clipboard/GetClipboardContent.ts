@@ -13,9 +13,9 @@ function GetClipboardContent(): Promise<string> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/clipboard#getstring
 
-    const RNClipboard: typeof ReactNative.Clipboard = require("react-native").Clipboard;
+    const Clipboard: typeof ReactNative.Clipboard = require("react-native").Clipboard;
 
-    return RNClipboard.getString();
+    return Clipboard.getString();
 
     // END USER CODE
 }

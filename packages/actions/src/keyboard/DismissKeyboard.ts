@@ -13,9 +13,9 @@ function DismissKeyboard(): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/keyboard
 
-    const RNKeyboard: typeof ReactNative.Keyboard = require("react-native").Keyboard;
+    const Keyboard: typeof ReactNative.Keyboard = require("react-native").Keyboard;
 
-    RNKeyboard.dismiss();
+    Keyboard.dismiss();
     return Promise.resolve();
 
     // END USER CODE

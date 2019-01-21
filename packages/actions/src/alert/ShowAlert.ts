@@ -15,13 +15,13 @@ function ShowAlert(title?: string, message?: string): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/alert
 
-    const RNAlert: typeof ReactNative.Alert = require("react-native").Alert;
+    const Alert: typeof ReactNative.Alert = require("react-native").Alert;
 
     if (!title) {
         throw new TypeError("Input parameter 'title' is required");
     }
 
-    RNAlert.alert(title, message);
+    Alert.alert(title, message);
     return Promise.resolve();
 
     // END USER CODE

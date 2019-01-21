@@ -15,12 +15,12 @@ function Vibrate(duration?: BigJs.Big, repeat?: boolean): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/vibration#vibrate
 
-    const RNVibration: typeof ReactNative.Vibration = require("react-native").Vibration;
+    const Vibration: typeof ReactNative.Vibration = require("react-native").Vibration;
 
     const pattern = duration ? Number(duration.toString()) : 500;
     repeat = repeat || false;
 
-    RNVibration.vibrate(pattern, repeat);
+    Vibration.vibrate(pattern, repeat);
 
     return Promise.resolve();
 

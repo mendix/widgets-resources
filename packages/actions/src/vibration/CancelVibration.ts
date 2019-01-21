@@ -13,9 +13,9 @@ function CancelVibration(): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/vibration#cancel
 
-    const RNVibration: typeof ReactNative.Vibration = require("react-native").Vibration;
+    const Vibration: typeof ReactNative.Vibration = require("react-native").Vibration;
 
-    RNVibration.cancel();
+    Vibration.cancel();
     return Promise.resolve();
 
     // END USER CODE
