@@ -6,19 +6,21 @@ interface Props {
     progressValue?: PluginWidget.EditableValue<number>;
     progressMax?: PluginWidget.EditableValue<number>;
     animated: boolean;
+    color?: string;
+    unfilledColor?: string;
+    borderColor?: string;
+    borderWidth: number;
+
     size: number;
     thickness: number;
     showsText: boolean;
-    color?: string;
-    unfilledColor?: string;
-    borderWidth: number;
-    borderColor?: string;
 }
 
 export class ProgressCircle extends Component<Props> {
     private get progress(): number {
-        const max = (this.props.progressMax && this.props.progressMax.value) || 100;
-        const value = (this.props.progressValue && this.props.progressValue.value) || 0;
+        const { progressMax, progressValue } = this.props;
+        const max = progressMax && progressMax.value != null ? Number(progressMax.value) : 100;
+        const value = progressValue && progressValue.value != null ? Number(progressValue.value) : 0;
 
         if (this.props.indeterminate || max === 0) {
             return 0;
@@ -33,13 +35,13 @@ export class ProgressCircle extends Component<Props> {
                 progress={this.progress}
                 indeterminate={this.props.indeterminate}
                 animated={this.props.animated}
+                {...(this.props.color ? { color: this.props.color } : {})}
+                {...(this.props.unfilledColor ? { color: this.props.unfilledColor } : {})}
+                {...(this.props.borderColor ? { color: this.props.borderColor } : {})}
+                borderWidth={this.props.borderWidth}
                 size={this.props.size}
                 thickness={this.props.thickness}
                 showsText={this.props.showsText}
-                {...(this.props.color ? { color: this.props.color } : {})}
-                {...(this.props.unfilledColor ? { color: this.props.unfilledColor } : {})}
-                borderWidth={this.props.borderWidth}
-                {...(this.props.borderColor ? { color: this.props.borderColor } : {})}
             />
         );
     }
