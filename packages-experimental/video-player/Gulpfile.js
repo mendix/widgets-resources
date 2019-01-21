@@ -9,7 +9,11 @@ const watch = require("gulp-watch");
 const sequence = require("gulp-sequence");
 const del = require("del");
 const merge = require("webpack-merge");
-const gulpSlash = require('gulp-slash');
+const gulpSlash = require("gulp-slash");
+const xml2js = require("gulp-xml2js");
+const modifyFile = require("gulp-modify-file");
+const rename = require("gulp-rename");
+const transformXml = require("./XmlGeneration");
 
 const banner = (color, banner) => gutil.colors[color || "blue"](banner ? `[${banner}]` : "[GULP]");
 
@@ -17,7 +21,6 @@ const pkg = require("./package.json");
 
 const projectPath = pkg.config.projectPath ? gulpSlash(pkg.config.projectPath) : path.join(__dirname, "./dist/MxTestProject");
 const widgetsFolder = path.join(projectPath, "/widgets/");
-const deploymentFolder = projectPath ? path.join(projectPath, "/deployment/web/widgets/") : false;
 
 let stat = null;
 if (!projectPath) {
@@ -33,7 +36,6 @@ if (!projectPath) {
     }
 }
 
-// Helper functions
 const webpackConfigRelease = webpackConfig.map(config => merge(config, {
     devtool: false,
     mode: "production",
@@ -53,41 +55,11 @@ const runWebpack = (type, callback) => {
     });
 };
 
-const copyFile = paths => {
-    try {
-        fs.copySync(paths.src, paths.dest);
-    } catch (err) {
-        gutil.log(`${banner("red")} Copy fail`, err);
-    }
-};
-
-const getPaths = (file, srcFolder, destFolder) => {
-    return {
-        src: path.join(__dirname, srcFolder, file.relative),
-        dest: path.join(destFolder, file.relative),
-    }
-}
-
 gulp.task("watch:src", () => {
     return watch("src/**/*", {
         verbose: true
     }, () => {
         gulp.start("build");
-    })
-});
-
-gulp.task("watch:build", () => {
-    return watch("build/**/*", {
-        verbose: stat !== null,
-        read: false
-    }, file => {
-        if (stat !== null) {
-            const paths = getPaths(file, "build", deploymentFolder);
-            if (paths.src.indexOf("package.xml") !== -1) {
-                return;
-            }
-            copyFile(paths);
-        }
     })
 });
 
@@ -105,18 +77,6 @@ gulp.task("copyDistDeployment", function() {
         .pipe(gulp.dest(`${pkg.config.projectPath}/deployment/web/widgets`));
 });
 
-gulp.task("watch:dist", () => {
-    return watch(`dist/${pkg.version}/*.mpk`, {
-        verbose: stat !== null,
-        read: false
-    }, file => {
-        if (stat !== null) {
-            const paths = getPaths(file, `dist/${pkg.version}`, widgetsFolder);
-            copyFile(paths);
-        }
-    })
-});
-
 gulp.task("clean", `Cleanup the dist/build`, () => {
     return del([
         "./dist/" + pkg.version + "/*",
@@ -128,14 +88,12 @@ gulp.task("clean", `Cleanup the dist/build`, () => {
     ], { force: true });
 });
 
-// Final tasks
-
 gulp.task("build", "Build the widget", done => {
-    sequence("clean", "check:dependencies", "build:dist", "compress", "copyDistDeployment", done);
+    sequence("clean", "generate:xml", "check:dependencies", "build:dist", "compress", "copyDistDeployment", done);
 });
 
 gulp.task("release", "Release the widget", done => {
-    sequence("clean", "check:dependencies", "build:release", "compress", "copyDistDeployment", done);
+    sequence("clean", "generate:xml", "check:dependencies", "build:release", "compress", "copyDistDeployment", done);
 });
 
 gulp.task("build:dist", callback => { runWebpack("development", callback); });
@@ -150,4 +108,22 @@ gulp.task("check:dependencies", "Checking the dependencies", function() {
     });
 });
 
-gulp.task("default", sequence("build", "watch:src", "watch:build", "watch:dist" ));
+gulp.task("default", sequence(["watch:xml", "build"], "watch:src"));
+
+gulp.task("watch:xml", () => {
+    return watch("src/VideoPlayer.xml", {
+        verbose: true
+    }, () => {
+        gulp.start("generate:xml");
+    });
+});
+
+gulp.task("generate:xml", () => {
+    gulp.src(`src/${pkg.widgetName}.xml`)
+        .pipe(xml2js())
+        .pipe(modifyFile((content, path, file) => {
+            return transformXml(content);
+        }))
+        .pipe(rename(`${pkg.widgetName}Props.d.ts`))
+        .pipe(gulp.dest(`./typings`));
+});

@@ -2,31 +2,11 @@ import * as React from "react";
 import classNames = require("classnames");
 
 import { hot } from "react-hot-loader";
-import { HeightUnitType, SizeContainer, WidthUnitType } from "./SizeContainer";
+import { SizeContainer } from "./SizeContainer";
 import { VideoPlayer } from "./VideoPlayer";
+import { VideoPlayerContainerProps } from "../../typings/VideoPlayerProps";
 
 import "../ui/VideoPlayer.css";
-
-export interface VideoPlayerContainerProps {
-    "class"?: string;
-    style?: React.CSSProperties;
-    tabIndex: number;
-    urlAttribute?: PluginWidget.EditableValue<string>;
-    urlStatic?: string;
-    posterAttribute?: PluginWidget.EditableValue<string>;
-    posterImageUrl?: string;
-
-    widthUnit: WidthUnitType;
-    width: number;
-    heightUnit: HeightUnitType;
-    height: number;
-
-    autoStart: boolean;
-    showControls: boolean;
-    loop: boolean;
-    muted: boolean;
-    aspectRatio: boolean;
-}
 
 class VideoPlayerContainer extends React.Component<VideoPlayerContainerProps> {
     render() {

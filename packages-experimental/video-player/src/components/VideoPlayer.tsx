@@ -8,9 +8,8 @@ import { YoutubePlayer } from "./YoutubePlayer";
 import { validateUrl } from "../utils/Utils";
 
 export interface VideoPlayerProps {
-    url: string;
-    staticUrl: string;
-    className?: string;
+    url?: string;
+    staticUrl?: string;
     style?: object;
     poster?: string;
     staticPoster?: string;
@@ -32,20 +31,20 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
     private readonly handleDailymotionPlayerRender = this.renderDailymotionPlayer.bind(this);
 
     render() {
-        const url = this.props.url || this.props.staticUrl;
+        const url = this.props.url || this.props.staticUrl || "";
         if (!validateUrl(url))
             return <PlayerError preview={this.props.preview} />;
         if (YoutubePlayer.canPlay(url)) {
-            return this.handleYoutubePlayerRender();
+            return this.handleYoutubePlayerRender(url);
         } else if (VimeoPlayer.canPlay(url)) {
-            return this.handleVimeoPlayerRender();
+            return this.handleVimeoPlayerRender(url);
         } else if (DailymotionPlayer.canPlay(url)) {
-            return this.handleDailymotionPlayerRender();
+            return this.handleDailymotionPlayerRender(url);
         }
         return this.handleHtml5PlayerRender();
     }
 
-    private renderHtml5Player(): React.ReactElement<Html5Player> {
+    private renderHtml5Player(url: string): React.ReactElement<Html5Player> {
         return (
             <Html5Player
                 showControls={this.props.showControls}
@@ -53,15 +52,15 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
                 muted={this.props.muted}
                 loop={this.props.loop}
                 poster={this.props.poster || this.props.staticPoster}
-                url={this.props.url || this.props.staticUrl}
+                url={url}
                 aspectRatio={this.props.aspectRatio}/>
         );
     }
 
-    private renderYoutubePlayer(): React.ReactElement<YoutubePlayer> {
+    private renderYoutubePlayer(url: string): React.ReactElement<YoutubePlayer> {
         return (
             <YoutubePlayer
-                url={this.props.url || this.props.staticUrl}
+                url={url}
                 showControls={this.props.showControls}
                 autoPlay={this.props.autoStart}
                 muted={this.props.muted}
@@ -71,10 +70,10 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
         );
     }
 
-    private renderVimeoPlayer(): React.ReactElement<VimeoPlayer> {
+    private renderVimeoPlayer(url: string): React.ReactElement<VimeoPlayer> {
         return (
             <VimeoPlayer
-                url={this.props.url || this.props.staticUrl}
+                url={url}
                 autoPlay={this.props.autoStart}
                 muted={this.props.muted}
                 loop={this.props.loop}
@@ -83,10 +82,10 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
         );
     }
 
-    private renderDailymotionPlayer(): React.ReactElement<DailymotionPlayer> {
+    private renderDailymotionPlayer(url: string): React.ReactElement<DailymotionPlayer> {
         return (
             <DailymotionPlayer
-                url={this.props.url || this.props.staticUrl}
+                url={url}
                 autoPlay={this.props.autoStart}
                 muted={this.props.muted}
                 controls={this.props.showControls}

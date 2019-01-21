@@ -3,29 +3,12 @@ import * as classNames from "classnames";
 
 import { Alert } from "./components/Alert";
 import { PlayerError } from "./components/PlayerError";
-import { HeightUnitType, SizeContainer, WidthUnitType } from "./components/SizeContainer";
+import { SizeContainer } from "./components/SizeContainer";
 import { VideoPlayer, VideoPlayerProps } from "./components/VideoPlayer";
 import { validateUrl } from "./utils/Utils";
+import { VideoPlayerWebModelerProps } from "../typings/VideoPlayerProps";
 
 declare function require(name: string): string;
-
-interface VideoPlayerWebModelerProps {
-    "class"?: string;
-    style?: React.CSSProperties;
-    tabIndex: number;
-    urlAttribute: string;
-    urlStatic: string;
-    posterAttribute?: string;
-    posterImageUrl?: string;
-
-    widthUnit: WidthUnitType;
-    width: number;
-    heightUnit: HeightUnitType;
-    height: number;
-
-    autoStart: boolean;
-    showControls: boolean;
-}
 
 // tslint:disable-next-line class-name
 export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
@@ -49,7 +32,7 @@ export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
     }
 
     private renderPlayers(): React.ReactElement<{}> {
-        if (!validateUrl(this.props.urlAttribute || this.props.urlStatic)) {
+        if (!validateUrl(this.props.urlAttribute || this.props.urlStatic || "")) {
             return <PlayerError preview={true}/>;
         }
         return <VideoPlayer {...this.transformProps(this.props)}/>;
@@ -61,7 +44,6 @@ export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
             staticUrl: props.urlStatic,
             poster: props.posterAttribute,
             staticPoster: props.posterImageUrl,
-            className: props.class,
             autoStart: false,
             showControls: props.showControls,
             loop: false,
