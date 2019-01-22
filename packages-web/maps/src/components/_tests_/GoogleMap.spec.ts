@@ -35,16 +35,16 @@ describe("Google maps", () => {
 
     it("renders structure correctly", () => {
         const googleMaps = renderGoogleMap(defaultProps);
-        const mapStyle = { width: "100px", height: "580px" };
+        const mapStyle = { width: "50px", height: "37.5px" };
         googleMaps.setProps({
             heightUnit: "percentageOfWidth",
             widthUnit: "pixels"
         });
 
         expect(googleMaps).toBeElement(
-            createElement("div", {},
+            createElement("div", { className: "widget-maps", style: mapStyle },
                 createElement(Alert, { className: "widget-google-maps-alert" }),
-                createElement("div", { className: "widget-google-maps-wrapper", style: mapStyle },
+                createElement("div", { className: "widget-google-maps-wrapper" },
                     createElement("div", { className: "widget-google-maps" })
                 )
             )
@@ -53,16 +53,16 @@ describe("Google maps", () => {
 
     it("with pixels renders structure correctly", () => {
         const googleMaps = renderGoogleMap(defaultProps);
-        const mapStyle = { width: "100px", height: "580px" };
+        const mapStyle = { width: "50px", height: "75px" };
         googleMaps.setProps({
             heightUnit: "pixels",
             widthUnit: "pixels"
         });
 
         expect(googleMaps).toBeElement(
-            createElement("div", {},
+            createElement("div", { className: "widget-maps", style: mapStyle },
                 createElement(Alert, { className: "widget-google-maps-alert" }),
-                createElement("div", { className: "widget-google-maps-wrapper", style: mapStyle },
+                createElement("div", { className: "widget-google-maps-wrapper" },
                     createElement("div", { className: "widget-google-maps" })
                 )
             )
@@ -71,16 +71,16 @@ describe("Google maps", () => {
 
     it("with percentage of width and height units renders the structure correctly", () => {
         const googleMaps = renderGoogleMap(defaultProps);
-        const mapStyle = { width: "100%", paddingBottom: "68%" };
+        const mapStyle = { width: "50%", paddingBottom: "37.5%", height: "auto" };
         googleMaps.setProps({
             heightUnit: "percentageOfWidth",
             widthUnit: "percentage"
         });
 
         expect(googleMaps).toBeElement(
-            createElement("div", {},
+            createElement("div", { className: "widget-maps", style: mapStyle },
                 createElement(Alert, { className: "widget-google-maps-alert" }),
-                createElement("div", { className: "widget-google-maps-wrapper", style: mapStyle },
+                createElement("div", { className: "widget-google-maps-wrapper" },
                     createElement("div", { className: "widget-google-maps" })
                 )
             )
@@ -89,16 +89,16 @@ describe("Google maps", () => {
 
     it("with percentage of parent units renders the structure correctly", () => {
         const googleMaps = renderGoogleMap(defaultProps);
-        const mapStyle = { width: "100%", height: "89%" };
+        const mapStyle = { width: "50%", height: "75%" };
         googleMaps.setProps({
             heightUnit: "percentageOfParent",
             widthUnit: "percentage"
         });
 
         expect(googleMaps).toBeElement(
-            createElement("div", {},
+            createElement("div", { className: "widget-maps", style: mapStyle },
                 createElement(Alert, { className: "widget-google-maps-alert" }),
-                createElement("div", { className: "widget-google-maps-wrapper", style: mapStyle },
+                createElement("div", { className: "widget-google-maps-wrapper" },
                     createElement("div", { className: "widget-google-maps" })
                 )
             )

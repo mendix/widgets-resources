@@ -27,16 +27,16 @@ describe("Leaflet maps", () => {
 
     it("renders structure correctly", () => {
         const leafletMap = renderLeafletMap(defaultProps);
-        const mapStyle = { width: "100px", height: "580px" };
+        const mapStyle = { width: "50px", height: "37.5px" };
         leafletMap.setProps({
             heightUnit: "percentageOfWidth",
             widthUnit: "pixels"
         });
 
         expect(leafletMap).toBeElement(
-            createElement("div", {},
+            createElement("div", { className: "widget-maps", style: mapStyle },
                 createElement(Alert, { className: "widget-leaflet-maps-alert leaflet-control" }),
-                createElement("div", { className: "widget-leaflet-maps-wrapper", style: mapStyle },
+                createElement("div", { className: "widget-leaflet-maps-wrapper" },
                     createElement("div", { className: "widget-leaflet-maps" })
                 )
             )
@@ -45,16 +45,16 @@ describe("Leaflet maps", () => {
 
     it("with pixels renders structure correctly", () => {
         const leafletMap = renderLeafletMap(defaultProps);
-        const mapStyle = { width: "100px", height: "580px" };
+        const mapStyle = { width: "50px", height: "75px" };
         leafletMap.setProps({
             heightUnit: "pixels",
             widthUnit: "pixels"
         });
 
         expect(leafletMap).toBeElement(
-            createElement("div", {},
+            createElement("div", { className: "widget-maps", style: mapStyle },
                 createElement(Alert, { className: "widget-leaflet-maps-alert leaflet-control" }),
-                createElement("div", { className: "widget-leaflet-maps-wrapper", style: mapStyle },
+                createElement("div", { className: "widget-leaflet-maps-wrapper" },
                     createElement("div", { className: "widget-leaflet-maps" })
                 )
             )
@@ -63,16 +63,16 @@ describe("Leaflet maps", () => {
 
     it("with percentage of width and height units renders the structure correctly", () => {
         const leafletMap = renderLeafletMap(defaultProps);
-        const mapStyle = { width: "100%", paddingBottom: "68%" };
+        const mapStyle = { width: "50%", paddingBottom: "37.5%", height: "auto" };
         leafletMap.setProps({
             heightUnit: "percentageOfWidth",
             widthUnit: "percentage"
         });
 
         expect(leafletMap).toBeElement(
-            createElement("div", {},
+            createElement("div", { className: "widget-maps", style: mapStyle },
                 createElement(Alert, { className: "widget-leaflet-maps-alert leaflet-control" }),
-                createElement("div", { className: "widget-leaflet-maps-wrapper", style: mapStyle },
+                createElement("div", { className: "widget-leaflet-maps-wrapper" },
                     createElement("div", { className: "widget-leaflet-maps" })
                 )
             )
@@ -81,16 +81,16 @@ describe("Leaflet maps", () => {
 
     it("with percentage of parent units renders the structure correctly", () => {
         const leafletMap = renderLeafletMap(defaultProps);
-        const mapStyle = { width: "100%", height: "89%" };
+        const mapStyle = { width: "50%", height: "75%" };
         leafletMap.setProps({
             heightUnit: "percentageOfParent",
             widthUnit: "percentage"
         });
 
         expect(leafletMap).toBeElement(
-            createElement("div", {},
+            createElement("div", { className: "widget-maps", style: mapStyle },
                 createElement(Alert, { className: "widget-leaflet-maps-alert leaflet-control" }),
-                createElement("div", { className: "widget-leaflet-maps-wrapper", style: mapStyle },
+                createElement("div", { className: "widget-leaflet-maps-wrapper" },
                     createElement("div", { className: "widget-leaflet-maps" })
                 )
             )
