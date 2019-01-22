@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { RNCamera } from "react-native-camera";
 
 interface Props {
-    inputValue?: PluginWidget.EditableValue<string | undefined>;
+    inputValue?: PluginWidget.EditableValue<string>;
     onChange?: PluginWidget.ActionValue;
 }
 

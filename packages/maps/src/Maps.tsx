@@ -3,16 +3,16 @@ import { Text, View } from "react-native";
 import MapView, { Marker, Region } from "react-native-maps";
 
 interface Props {
-    markerTitle: PluginWidget.EditableValue<string | undefined>;
-    markerDescription: PluginWidget.EditableValue<string | undefined>;
-    markerLatitude: PluginWidget.EditableValue<number | undefined>;
-    markerLongitude: PluginWidget.EditableValue<number | undefined>;
+    markerTitle: PluginWidget.EditableValue<string>;
+    markerDescription: PluginWidget.EditableValue<string>;
+    markerLatitude: PluginWidget.EditableValue<BigJs.Big>;
+    markerLongitude: PluginWidget.EditableValue<BigJs.Big>;
     onMarkerPress?: PluginWidget.ActionValue;
 
-    latitude: PluginWidget.EditableValue<number | undefined>;
-    longitude: PluginWidget.EditableValue<number | undefined>;
-    latitudeDelta: PluginWidget.EditableValue<number | undefined>;
-    longitudeDelta: PluginWidget.EditableValue<number | undefined>;
+    latitude: PluginWidget.EditableValue<BigJs.Big>;
+    longitude: PluginWidget.EditableValue<BigJs.Big>;
+    latitudeDelta: PluginWidget.EditableValue<BigJs.Big>;
+    longitudeDelta: PluginWidget.EditableValue<BigJs.Big>;
     onRegionChange?: PluginWidget.ActionValue;
 
     mapType: "standard" | "satellite" | "hybrid";
@@ -48,10 +48,10 @@ export class Maps extends Component<Props> {
         }
 
         return {
-            latitude: this.props.latitude.value,
-            longitude: this.props.longitude.value,
-            latitudeDelta: this.props.latitudeDelta.value,
-            longitudeDelta: this.props.longitudeDelta.value
+            latitude: Number(this.props.latitude.value),
+            longitude: Number(this.props.longitude.value),
+            latitudeDelta: Number(this.props.latitudeDelta.value),
+            longitudeDelta: Number(this.props.longitudeDelta.value)
         };
     }
 
@@ -98,8 +98,8 @@ export class Maps extends Component<Props> {
                 title={this.props.markerTitle.value}
                 description={this.props.markerDescription.value}
                 coordinate={{
-                    latitude: this.props.markerLatitude.value,
-                    longitude: this.props.markerLongitude.value
+                    latitude: Number(this.props.markerLatitude.value),
+                    longitude: Number(this.props.markerLongitude.value)
                 }}
                 onPress={this.onMarkerPressHandler}
             />
@@ -107,10 +107,10 @@ export class Maps extends Component<Props> {
     }
 
     private onRegionChange(region: Region): void {
-        this.props.latitude.setValue(region.latitude);
-        this.props.longitude.setValue(region.longitude);
-        this.props.latitudeDelta.setValue(region.latitudeDelta);
-        this.props.longitudeDelta.setValue(region.longitudeDelta);
+        this.props.latitude.setTextValue(String(region.latitude));
+        this.props.longitude.setTextValue(String(region.longitude));
+        this.props.latitudeDelta.setTextValue(String(region.latitudeDelta));
+        this.props.longitudeDelta.setTextValue(String(region.longitudeDelta));
 
         if (this.props.onRegionChange && this.props.onRegionChange.canExecute) {
             this.props.onRegionChange.execute();

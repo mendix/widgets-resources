@@ -3,8 +3,8 @@ import { Bar } from "react-native-progress";
 
 interface Props {
     indeterminate: boolean;
-    progressValue?: PluginWidget.EditableValue<number>;
-    progressMax?: PluginWidget.EditableValue<number>;
+    progressValue?: PluginWidget.EditableValue<BigJs.Big>;
+    progressMax?: PluginWidget.EditableValue<BigJs.Big>;
     animated: boolean;
     color?: string;
     unfilledColor?: string;
