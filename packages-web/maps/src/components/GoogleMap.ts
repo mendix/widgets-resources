@@ -34,7 +34,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
     render() {
         return createElement("div", {
                 className: classNames("widget-maps", this.props.className),
-                style: { ...this.props.divStyles , ...Utils.getDimensions(this.props) }
+                style: { ...this.props.divStyles, ...Utils.getDimensions(this.props) }
             },
             createElement(Alert, {
                 bootstrapStyle: "danger",
