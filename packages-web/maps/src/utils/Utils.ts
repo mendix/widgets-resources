@@ -32,14 +32,16 @@ export default class Utils {
         } else if (props.heightUnit === "pixels") {
             style.height = `${props.height}px`;
         } else if (props.heightUnit === "percentageOfParent") {
-            let height = `${props.height}%`;
-            if (ref && ref.parentElement) {
-                const parentHeight = ref.parentElement.clientHeight;
-                if (parentHeight > 0) {
-                    height = `${parentHeight * props.height / 100}px`;
+            if (ref && ref.parentElement && ref.parentElement.clientHeight > 1) {
+                ref.style.height = `${props.height}%`;
+                style.height = "100%";
+                if (props.widthUnit === "percentage") {
+                    ref.style.width = `${props.width}%`;
+                    style.width = "100%";
                 }
+            } else {
+                style.height = `${props.height}%`;
             }
-            style.height = height;
         }
 
         return style;
