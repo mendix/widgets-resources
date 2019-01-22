@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="mendix.native.slider.Slider" needsEntityContext="true" offlineCapable="true" pluginWidget="true" 
+    xmlns="http://www.mendix.com/widget/1.0/" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
+    <name>Slider</name>
+    <description>Change a number value using a slider.</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAAEvQFx7AAAAIVBMVEUAAAD///9SuP+IiIhJsfdJsfhJsfeJiYlIsPhIsPeIiIjzihhCAAAACXRSTlMAARlJZb3I4/MVTrONAAAAz0lEQVRIx2NgQAMTgJhr1qpVEBZOwAmSrZy1agEDB151IMA4E6YJg8Ewk4EqgHMqLiu4Vs5cBQQLsNnOOomB3oAxwwFVIHMmWhDMRBWwWgUUWAUFy7GpwCLgOXMmwwgGLG0CqAKRMyeih9g0AkFISKAKOV4WAwVWkRNRWARmoAtMQRXQnBnAMAqGG2CKnDlzqgIeBcAsjZEUUEAnSMEMPApmggHNFFStAucApEywCjU3mONWUEwvR0JLXIzsjwJEQQoC8cWWSEab42iapQQAAD3okfmgsuelAAAAAElFTkSuQmCC</icon>
+    <properties>
+        <property key="value" type="attribute">
+            <caption>Value</caption>
+            <category>Data source</category>
+            <description>The selected value on the slider</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="minimumValue" type="attribute" required="false">
+            <caption>Minimum value</caption>
+            <category>Data source</category>
+            <description>When empty the 'Default minimum value' is used</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="maximumValue" type="attribute" required="false">
+            <caption>Maximum value</caption>
+            <category>Data source</category>
+            <description>When empty the 'Default maximum value' is used</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="defaultMinimumValue" type="integer" defaultValue="0">
+            <caption>Default minimum value</caption>
+            <category>Data source</category>
+            <description/>
+        </property>
+        <property key="defaultMaximumValue" type="integer" defaultValue="100">
+            <caption>Default maximum value</caption>
+            <category>Data source</category>
+            <description/>
+        </property>
+        <property key="editable" type="enumeration" defaultValue="default">
+            <caption>Editable</caption>
+            <category>Data source</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="default">Default</enumerationValue>
+                <enumerationValue key="never">Never</enumerationValue>
+            </enumerationValues>
+        </property>
+
+        <property key="onChange" type="action" required="false">
+            <caption>On change</caption>
+            <category>Events</category>
+            <description>Callback continuously called while the user is dragging the slider</description>
+        </property>
+        <property key="onSlidingComplete" type="action" required="false">
+            <caption>On sliding complete</caption>
+            <category>Events</category>
+            <description>Called when the user releases the slider, regardless if the value has changed</description>
+        </property>
+
+        <property key="step" type="attribute" required="false">
+            <caption>Step size</caption>
+            <category>Appearance</category>
+            <description>The interval between two selectable points (when empty the 'Default step size' is used)</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="defaultStep" type="integer" defaultValue="1">
+            <caption>Default step size</caption>
+            <category>Appearance</category>
+            <description/>
+        </property>
+        <property key="minimumTrackTintColor" type="string" required="false">
+            <caption>Minimum track color</caption>
+            <category>Appearance</category>
+            <description>The color used for the track to the left of the button</description>
+        </property>
+        <property key="maximumTrackTintColor" type="string" required="false">
+            <caption>Maximum track color</caption>
+            <category>Appearance</category>
+            <description>The color used for the track to the left of the button</description>
+        </property>
+        <property key="thumbTintColor" type="string" required="false">
+            <caption>Grip color</caption>
+            <category>Appearance</category>
+            <description>Color of the foreground switch grip</description>
+        </property>
+    </properties>
+</widget>
