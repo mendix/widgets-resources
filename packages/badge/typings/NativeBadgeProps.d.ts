@@ -7,7 +7,7 @@ interface CommonProps {
     id: string;
 }
 export interface NativeBadgeProps extends CommonProps {
-    valueAttribute?: PluginWidget.EditableValue<string>;
+    valueAttribute?: PluginWidget.EditableValue<string | BigJs.Big>;
     type: "badge" | "label";
     badgeStyle: "default" | "primary" | "success" | "info" | "warning" | "danger";
     onClickAction?: PluginWidget.ActionValue;
