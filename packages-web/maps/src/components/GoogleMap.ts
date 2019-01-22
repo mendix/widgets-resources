@@ -26,22 +26,23 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
     private markers: google.maps.Marker[] = [];
     private bounds!: google.maps.LatLngBounds;
     private googleMapsNode?: HTMLDivElement;
-    private div?: HTMLDivElement;
     readonly state: GoogleMapState = {
         center: this.defaultCenterLocation,
         alertMessage: this.props.alertMessage
     };
 
     render() {
-        return createElement("div", { ref: (node: HTMLDivElement) => this.div = node },
+        return createElement("div", {
+                className: classNames("widget-maps", this.props.className),
+                style: { ...this.props.divStyles , ...Utils.getDimensions(this.props) }
+            },
             createElement(Alert, {
                 bootstrapStyle: "danger",
                 className: "widget-google-maps-alert"
             }, this.state.alertMessage),
             createElement("div",
                 {
-                    className: classNames("widget-google-maps-wrapper", this.props.className),
-                    style: { ...this.props.divStyles , ...Utils.getDimensions(this.props, this.div) }
+                    className: "widget-google-maps-wrapper"
                 },
                 createElement("div", {
                     className: "widget-google-maps",
