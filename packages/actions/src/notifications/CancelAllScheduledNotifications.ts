@@ -7,23 +7,16 @@
 import ReactNativeFirebase from "react-native-firebase";
 
 /**
+ * Cancels all pending scheduled notifications.
  * @returns {boolean}
  */
-function SetBadgeNumber(badgeNumber?: BigJs.Big): Promise<void> {
+function CancelAllScheduledNotifications(): Promise<void> {
     // BEGIN USER CODE
-    // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/reference/Notifications#setBadge
+    // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/reference/Notifications#cancelAllNotifications
 
     const Firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
-    if (!badgeNumber) {
-        throw new TypeError("Input parameter 'badgeNumber' is required");
-    }
-
-    if (badgeNumber.lt(0)) {
-        throw new TypeError("Input parameter 'badgeNumber' should be zero or greater");
-    }
-
-    Firebase.notifications().setBadge(Number(badgeNumber));
+    Firebase.notifications().cancelAllNotifications();
     return Promise.resolve();
 
     // END USER CODE

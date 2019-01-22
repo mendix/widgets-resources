@@ -7,24 +7,17 @@
 import ReactNativeFirebase from "react-native-firebase";
 
 /**
- * Notification permissions are required to send a user push messages. Calling this action displays the permission dialog to the user.
- * Returns true if permission is granted, otherwise it returns false.
+ * Checks if the user has granted the appropriate permissions to be able to send and receive messages.
+ * Returns true if permission is granted, false otherwise.
  * @returns {boolean}
  */
-function RequestPushNotificationPermission(): Promise<boolean> {
+function HasPushNotificationPermission(): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/receiving-notifications
 
     const Firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
-    return Firebase.messaging()
-        .requestPermission()
-        .then(() =>
-            Firebase.messaging()
-                .ios.registerForRemoteNotifications()
-                .then(() => true)
-        )
-        .catch(() => false);
+    return Firebase.messaging().hasPermission();
 
     // END USER CODE
 }

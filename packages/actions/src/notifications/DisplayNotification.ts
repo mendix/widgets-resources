@@ -7,10 +7,9 @@
 import ReactNativeFirebase from "react-native-firebase";
 
 /**
- * Displays the specified notification at a future moment in time.
+ * Displays the specified notification straight away.
  *
  * Note: It is not possible to display a notification whilst the app is in the foreground on iOS 9.
- * @param {Date} date - Required
  * @param {string} body - Required
  * @param {string} title
  * @param {string} subtitle
@@ -18,8 +17,7 @@ import ReactNativeFirebase from "react-native-firebase";
  * @param {Big} iosBadgeNumber
  * @returns {boolean}
  */
-function ScheduleNotification(
-    date?: Date,
+function DisplayNotification(
     body?: string,
     title?: string,
     subtitle?: string,
@@ -27,13 +25,9 @@ function ScheduleNotification(
     iosBadgeNumber?: BigJs.Big
 ): Promise<void> {
     // BEGIN USER CODE
-    // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/scheduling-notifications
+    // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/displaying-notifications
 
     const Firebase: typeof ReactNativeFirebase = require("react-native-firebase");
-
-    if (!date) {
-        throw new TypeError("Input parameter 'date' is required");
-    }
 
     if (!body) {
         throw new TypeError("Input parameter 'body' is required");
@@ -61,9 +55,7 @@ function ScheduleNotification(
         notification = notification.ios.setBadge(Number(iosBadgeNumber));
     }
 
-    return Firebase.notifications().scheduleNotification(notification, {
-        fireDate: date.getTime()
-    });
+    return Firebase.notifications().displayNotification(notification);
 
     // END USER CODE
 }
