@@ -1,5 +1,7 @@
 .widget-leaflet-maps-wrapper {
     position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .widget-leaflet-maps-wrapper > div {
@@ -19,6 +21,8 @@
 
 .widget-google-maps-wrapper {
     position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .widget-google-maps-wrapper > div {

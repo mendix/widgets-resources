@@ -17,7 +17,7 @@ export default class Utils {
         hereMapsAttr: `Map &copy; 1987-2014 <a href="https://developer.here.com">HERE</a>`
     };
 
-    static getDimensions<T extends Dimensions>(props: T, ref?: HTMLDivElement): CSSProperties {
+    static getDimensions<T extends Dimensions>(props: T): CSSProperties {
         const style: CSSProperties = {
             width: props.widthUnit === "percentage" ? `${props.width}%` : `${props.width}px`
         };
@@ -32,16 +32,7 @@ export default class Utils {
         } else if (props.heightUnit === "pixels") {
             style.height = `${props.height}px`;
         } else if (props.heightUnit === "percentageOfParent") {
-            if (ref && ref.parentElement && ref.parentElement.clientHeight > 1) {
-                ref.style.height = `${props.height}%`;
-                style.height = "100%";
-                if (props.widthUnit === "percentage") {
-                    ref.style.width = `${props.width}%`;
-                    style.width = "100%";
-                }
-            } else {
-                style.height = `${props.height}%`;
-            }
+            style.height = `${props.height}%`;
         }
 
         return style;
