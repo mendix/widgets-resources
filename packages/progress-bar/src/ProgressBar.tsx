@@ -1,21 +1,8 @@
 import React, { Component } from "react";
 import { Bar } from "react-native-progress";
+import { ProgressBarProps } from "../typings/ProgressBarProps";
 
-interface Props {
-    indeterminate: boolean;
-    progressValue?: PluginWidget.EditableValue<BigJs.Big>;
-    progressMax?: PluginWidget.EditableValue<BigJs.Big>;
-    animated: boolean;
-    color?: string;
-    unfilledColor?: string;
-    borderColor?: string;
-    borderWidth: number;
-
-    height?: number;
-    borderRadius?: number;
-}
-
-export class ProgressBar extends Component<Props> {
+export class ProgressBar extends Component<ProgressBarProps> {
     private get progress(): number {
         const { progressMax, progressValue } = this.props;
         const max = progressMax && progressMax.value != null ? Number(progressMax.value) : 100;

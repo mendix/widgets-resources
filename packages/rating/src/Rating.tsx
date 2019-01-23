@@ -1,31 +1,8 @@
 import React, { Component } from "react";
 import StarRating from "react-native-star-rating";
+import { RatingProps } from "../typings/RatingProps";
 
-interface Props {
-    rating: PluginWidget.EditableValue<BigJs.Big>;
-    maximumValue: number;
-    editable: "default" | "never";
-    animation:
-        | "none"
-        | "bounce"
-        | "flash"
-        | "jello"
-        | "pulse"
-        | "rotate"
-        | "rubberBand"
-        | "shake"
-        | "swing"
-        | "tada"
-        | "wobble";
-    iconSize: number;
-    fullStarColor: string;
-    emptyStarColor: string;
-    halfStarEnabled: boolean;
-    halfStarColor?: string;
-    onChange: PluginWidget.ActionValue;
-}
-
-export class Rating extends Component<Props> {
+export class Rating extends Component<RatingProps> {
     private readonly onChangeHandler = this.onChange.bind(this);
 
     render(): JSX.Element {

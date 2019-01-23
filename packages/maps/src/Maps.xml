@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="mendix.native.maps.Maps" needsEntityContext="true" offlineCapable="true" pluginWidget="true" 
-    xmlns="http://www.mendix.com/widget/1.0/" 
+<widget id="mendix.native.maps.Maps" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
+    xmlns="http://www.mendix.com/widget/1.0/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
     <name>Maps</name>
     <description>This widget allows you to use native Google or Apple maps views in your application.</description>
@@ -154,12 +154,12 @@
             <description>Allow the user to adjust the camera’s pitch angle</description>
         </property>
 
-        <property key="onRegionChange" type="action">
+        <property key="onRegionChange" type="action" required="false">
             <caption>On region change action</caption>
             <category>Events</category>
             <description />
         </property>
-        <property key="onMarkerPress" type="action">
+        <property key="onMarkerPress" type="action" required="false">
             <caption>On marker press action</caption>
             <category>Events</category>
             <description />

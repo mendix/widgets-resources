@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import { View } from "react-native";
 import { RNCamera } from "react-native-camera";
+import { BarcodeScannerProps } from "../typings/BarcodeScannerProps";
 
-interface Props {
-    inputValue?: PluginWidget.EditableValue<string>;
-    onChange?: PluginWidget.ActionValue;
-}
-
-export class BarcodeScanner extends Component<Props> {
+export class BarcodeScanner extends Component<BarcodeScannerProps> {
     private readonly onBarCodeReadHandler = this.onBarCodeRead.bind(this);
 
     render(): JSX.Element {

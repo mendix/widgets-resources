@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import { ActivityIndicator as RNActivityIndicator } from "react-native";
+import { ActivityIndicatorProps } from "../typings/ActivityIndicatorProps";
 
-interface Props {
-    color?: string;
-    size: "small" | "large";
-}
-
-export class ActivityIndicator extends Component<Props> {
+export class ActivityIndicator extends Component<ActivityIndicatorProps> {
     render(): JSX.Element {
         return <RNActivityIndicator size={this.props.size} color={this.props.color} />;
     }

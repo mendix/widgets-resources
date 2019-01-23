@@ -1,39 +1,9 @@
 import React, { Component } from "react";
 import { Text, View } from "react-native";
 import MapView, { Marker, Region } from "react-native-maps";
+import { MapsProps } from "../typings/MapsProps";
 
-interface Props {
-    markerTitle: PluginWidget.EditableValue<string>;
-    markerDescription: PluginWidget.EditableValue<string>;
-    markerLatitude: PluginWidget.EditableValue<BigJs.Big>;
-    markerLongitude: PluginWidget.EditableValue<BigJs.Big>;
-    onMarkerPress?: PluginWidget.ActionValue;
-
-    latitude: PluginWidget.EditableValue<BigJs.Big>;
-    longitude: PluginWidget.EditableValue<BigJs.Big>;
-    latitudeDelta: PluginWidget.EditableValue<BigJs.Big>;
-    longitudeDelta: PluginWidget.EditableValue<BigJs.Big>;
-    onRegionChange?: PluginWidget.ActionValue;
-
-    mapType: "standard" | "satellite" | "hybrid";
-    showsUserLocation: boolean;
-    showsMyLocationButton: boolean;
-    showsPointsOfInterest: boolean;
-    showsCompass: boolean;
-    showsScale: boolean;
-    showsBuildings: boolean;
-    showsTraffic: boolean;
-    showsIndoors: boolean;
-
-    zoomEnabled: boolean;
-    minZoomLevel: number;
-    maxZoomLevel: number;
-    rotateEnabled: boolean;
-    scrollEnabled: boolean;
-    pitchEnabled: boolean;
-}
-
-export class Maps extends Component<Props> {
+export class Maps extends Component<MapsProps> {
     private readonly onRegionChangeHandler = this.onRegionChange.bind(this);
     private readonly onMarkerPressHandler = this.onMarkerPress.bind(this);
 

@@ -4,6 +4,10 @@ const path = require("path");
 const log = require("fancy-log");
 const webpack = require("webpack");
 const del = require("del");
+const xml2js = require("gulp-xml2js");
+const modifyFile = require("gulp-modify-file");
+const rename = require("gulp-rename");
+const transformXml = require("./GenerateTypings");
 
 const pkg = require(path.join(process.cwd(), "package.json"));
 
@@ -45,11 +49,40 @@ function productionBundle(cb) {
     runWebpack(config, cb);
 }
 
+function checkDependencies(cb) {
+    require("check-dependencies").sync({
+        packageDir: path.join(process.cwd(), "../../package.json"),
+        scopeList: ["devDependencies"],
+        install: true
+    });
+    cb();
+}
+
+function generateTypings() {
+    return gulp
+        .src(`./src/${pkg.config.widgetName}.xml`)
+        .pipe(xml2js())
+        .pipe(
+            modifyFile((content, path, file) => {
+                return transformXml(content, pkg.config.widgetName);
+            })
+        )
+        .pipe(rename(`${pkg.config.widgetName}Props.d.ts`))
+        .pipe(gulp.dest("./typings"));
+}
+
 // Final tasks
 
-const build = gulp.series(clean, bundle, createMpkFile, copyToDeployment);
+const build = gulp.series(clean, generateTypings, checkDependencies, bundle, createMpkFile, copyToDeployment);
 
-const productionBuild = gulp.series(clean, productionBundle, createMpkFile, copyToDeployment);
+const productionBuild = gulp.series(
+    clean,
+    generateTypings,
+    checkDependencies,
+    productionBundle,
+    createMpkFile,
+    copyToDeployment
+);
 
 function watch() {
     return gulp.watch("./src/**/*", { ignoreInitial: false }, build);

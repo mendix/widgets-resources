@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
-import { NativeBadgeProps } from "../typings/NativeBadgeProps";
+import { BadgeProps } from "../typings/BadgeProps";
 
 import { styles } from "./ui/Styles";
 
-export class Badge extends React.Component<NativeBadgeProps> {
+export class Badge extends React.Component<BadgeProps> {
     private readonly onClickHandler = this.onClick.bind(this);
 
     render(): JSX.Element {

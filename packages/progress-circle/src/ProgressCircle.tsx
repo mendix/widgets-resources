@@ -1,22 +1,8 @@
 import React, { Component } from "react";
 import { Circle } from "react-native-progress";
+import { ProgressCircleProps } from "../typings/ProgressCircleProps";
 
-interface Props {
-    indeterminate: boolean;
-    progressValue?: PluginWidget.EditableValue<BigJs.Big>;
-    progressMax?: PluginWidget.EditableValue<BigJs.Big>;
-    animated: boolean;
-    color?: string;
-    unfilledColor?: string;
-    borderColor?: string;
-    borderWidth: number;
-
-    size: number;
-    thickness: number;
-    showsText: boolean;
-}
-
-export class ProgressCircle extends Component<Props> {
+export class ProgressCircle extends Component<ProgressCircleProps> {
     private get progress(): number {
         const { progressMax, progressValue } = this.props;
         const max = progressMax && progressMax.value != null ? Number(progressMax.value) : 100;

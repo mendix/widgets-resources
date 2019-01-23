@@ -1,26 +1,8 @@
 import React, { Component } from "react";
 import { Slider as RNSlider } from "react-native";
+import { SliderProps } from "../typings/SliderProps";
 
-interface ActionProps {
-    onChange: PluginWidget.ActionValue;
-    onSlidingComplete: PluginWidget.ActionValue;
-}
-
-interface Props extends ActionProps {
-    value: PluginWidget.EditableValue<BigJs.Big>;
-    minimumValue?: PluginWidget.EditableValue<BigJs.Big>;
-    maximumValue?: PluginWidget.EditableValue<BigJs.Big>;
-    defaultMinimumValue: number;
-    defaultMaximumValue: number;
-    editable: "default" | "never";
-    step?: PluginWidget.EditableValue<BigJs.Big>;
-    defaultStep: number;
-    minimumTrackTintColor?: string;
-    maximumTrackTintColor?: string;
-    thumbTintColor?: string;
-}
-
-export class Slider extends Component<Props> {
+export class Slider extends Component<SliderProps> {
     private readonly onChangeHandler = this.onChange.bind(this);
     private readonly onSlidingCompleteHandler = this.onSlidingComplete.bind(this);
 

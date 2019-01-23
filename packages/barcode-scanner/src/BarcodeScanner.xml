@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="mendix.native.barcodescanner.BarcodeScanner" needsEntityContext="true" offlineCapable="true" pluginWidget="true" 
-    xmlns="http://www.mendix.com/widget/1.0/" 
+<widget id="mendix.native.barcodescanner.BarcodeScanner" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
+    xmlns="http://www.mendix.com/widget/1.0/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
     <name>Barcode Scanner</name>
     <description>This widget enables native barcode scanning functionality within your Mendix mobile application.</description>
@@ -14,7 +14,7 @@
                 <attributeType name="String" />
             </attributeTypes>
         </property>
-        <property key="onChange" type="action">
+        <property key="onChange" type="action" required="false">
             <caption>On change action</caption>
             <category>Events</category>
             <description />
