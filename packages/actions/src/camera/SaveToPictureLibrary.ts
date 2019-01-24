@@ -7,26 +7,26 @@
 import ReactNative from "react-native";
 
 /**
- * @param {MxObject} image - Required
+ * @param {MxObject} picture - This field is required.
  * @returns {string}
  */
-function SaveToPhotoLibrary(image?: mendix.lib.MxObject): Promise<string> {
+function SaveToPictureLibrary(picture?: mendix.lib.MxObject): Promise<string> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/cameraroll#savetocameraroll
 
     const CameraRoll: typeof ReactNative.CameraRoll = require("react-native").CameraRoll;
 
-    if (!image) {
-        throw new TypeError("Input parameter 'image' is required");
+    if (!picture) {
+        throw new TypeError("Input parameter 'Picture' is required");
     }
 
-    if (!image.inheritsFrom("System.FileDocument")) {
-        const entity = image.getEntity();
+    if (!picture.inheritsFrom("System.FileDocument")) {
+        const entity = picture.getEntity();
         throw new TypeError(`Entity ${entity} does not inherit from 'System.FileDocument'`);
     }
 
-    const guid = image.getGuid();
-    const changedDate = image.get("changedDate") as number;
+    const guid = picture.getGuid();
+    const changedDate = picture.get("changedDate") as number;
     const url = mx.data.getDocumentUrl(guid, changedDate);
 
     return CameraRoll.saveToCameraRoll(url);

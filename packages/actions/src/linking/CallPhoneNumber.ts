@@ -7,7 +7,7 @@
 import ReactNative from "react-native";
 
 /**
- * @param {string} phoneNumber - Required
+ * @param {string} phoneNumber - This field is required.
  * @returns {boolean}
  */
 function CallPhoneNumber(phoneNumber?: string): Promise<void> {
@@ -17,10 +17,10 @@ function CallPhoneNumber(phoneNumber?: string): Promise<void> {
     const Linking: typeof ReactNative.Linking = require("react-native").Linking;
 
     if (!phoneNumber) {
-        throw new TypeError("Input parameter 'phoneNumber' is required");
+        throw new TypeError("Input parameter 'Phone number' is required");
     }
 
-    phoneNumber = encodeURIComponent(phoneNumber);
+    phoneNumber = encodeURI(phoneNumber);
 
     return Linking.openURL(`tel:${phoneNumber}`);
 

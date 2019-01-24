@@ -7,7 +7,7 @@
 import ReactNative from "react-native";
 
 /**
- * @param {string} title - Required
+ * @param {string} title - This field is required.
  * @param {string} message
  * @returns {boolean}
  */
@@ -18,7 +18,7 @@ function ShowAlert(title?: string, message?: string): Promise<void> {
     const Alert: typeof ReactNative.Alert = require("react-native").Alert;
 
     if (!title) {
-        throw new TypeError("Input parameter 'title' is required");
+        throw new TypeError("Input parameter 'Title' is required");
     }
 
     Alert.alert(title, message);

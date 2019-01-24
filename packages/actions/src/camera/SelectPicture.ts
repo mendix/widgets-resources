@@ -9,37 +9,45 @@ import ImagePickerLib from "react-native-image-picker";
 
 type PictureSource = "camera" | "imageLibrary" | "either";
 
+type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
+
 /**
- * @param {MxObject} image - Required
- * @param {Big} targetWidth - Defaults to 150
- * @param {Big} targetHeight - Defaults to 150
- * @param {"Actions.PictureSource.camera"|"Actions.PictureSource.imageLibrary"|"Actions.PictureSource.either"} pictureSource - Defaults to "either"
+ * @param {MxObject} picture - This field is required.
+ * @param {"Actions.PictureSource.camera"|"Actions.PictureSource.imageLibrary"|"Actions.PictureSource.either"} pictureSource - Select a picture from the library or the camera. The default is to let the user decide.
+ * @param {"Actions.PictureQuality.original"|"Actions.PictureQuality.low"|"Actions.PictureQuality.medium"|"Actions.PictureQuality.high"|"Actions.PictureQuality.custom"} pictureQuality - The default picture quality is 'Medium'.
+ * @param {Big} maximumWidth - The picture will be scaled to this maximum pixel width, while maintaing the aspect ratio.
+ * @param {Big} maximumHeight - The picture will be scaled to this maximum pixel height, while maintaing the aspect ratio.
  * @returns {boolean}
  */
-function SelectImage(
-    image?: mendix.lib.MxObject,
-    targetWidth?: BigJs.Big,
-    targetHeight?: BigJs.Big,
-    pictureSource?: PictureSource
+function SelectPicture(
+    picture?: mendix.lib.MxObject,
+    pictureSource?: PictureSource,
+    pictureQuality?: PictureQuality,
+    maximumWidth?: BigJs.Big,
+    maximumHeight?: BigJs.Big
 ): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/react-native-community/react-native-image-picker/blob/master/docs/Reference.md
 
     const ImagePicker: typeof ImagePickerLib = require("react-native-image-picker");
 
-    if (!image) {
-        throw new TypeError("Input parameter 'image' is required");
+    if (!picture) {
+        throw new TypeError("Input parameter 'Picture' is required");
     }
 
-    if (!image.inheritsFrom("System.FileDocument")) {
-        const entity = image.getEntity();
+    if (!picture.inheritsFrom("System.FileDocument")) {
+        const entity = picture.getEntity();
         throw new TypeError(`Entity ${entity} does not inherit from 'System.FileDocument'`);
+    }
+
+    if (pictureQuality === "custom" && !maximumHeight && !maximumWidth) {
+        throw new TypeError("Picture quality is set to 'Custom', but no maximum width or height was provided");
     }
 
     return takePicture()
         .then(uri => {
             if (uri) {
-                return storeFile(image, uri);
+                return storeFile(picture, uri);
             }
             return Promise.resolve(false);
         })
@@ -102,19 +110,19 @@ function SelectImage(
         const source = pictureSource ? pictureSource : "either";
 
         switch (source) {
-            case "either":
-                return ImagePicker.showImagePicker;
             case "imageLibrary":
                 return ImagePicker.launchImageLibrary;
             case "camera":
                 return ImagePicker.launchCamera;
+            case "either":
+            default:
+                return ImagePicker.showImagePicker;
         }
     }
 
     // tslint:disable-next-line:typedef
     function getOptions() {
-        const maxWidth = targetWidth ? Number(targetWidth.toString()) : 150;
-        const maxHeight = targetHeight ? Number(targetHeight.toString()) : 150;
+        const { maxWidth, maxHeight } = getPictureQuality();
 
         return {
             mediaType: "photo" as "photo",
@@ -128,6 +136,32 @@ function SelectImage(
                 okTitle: "Cancel"
             }
         };
+    }
+
+    function getPictureQuality(): { maxWidth: number; maxHeight: number } {
+        switch (pictureQuality) {
+            case "low":
+                return {
+                    maxWidth: 1024,
+                    maxHeight: 1024
+                };
+            case "medium":
+            default:
+                return {
+                    maxWidth: 2048,
+                    maxHeight: 2048
+                };
+            case "high":
+                return {
+                    maxWidth: 4096,
+                    maxHeight: 4096
+                };
+            case "custom":
+                return {
+                    maxWidth: Number(maximumWidth),
+                    maxHeight: Number(maximumHeight)
+                };
+        }
     }
 
     function handleImagePickerError(error: string): string | undefined {

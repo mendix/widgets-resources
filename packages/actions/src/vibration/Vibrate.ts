@@ -7,8 +7,8 @@
 import ReactNative from "react-native";
 
 /**
- * @param {Big} duration - How long to vibrate in milliseconds. Android only, defaults to 500.
- * @param {boolean} repeat - Android only, defaults to false
+ * @param {Big} duration - How long to vibrate in milliseconds. Default value is 500. Android only.
+ * @param {boolean} repeat - Default value is false. Android only.
  * @returns {boolean}
  */
 function Vibrate(duration?: BigJs.Big, repeat?: boolean): Promise<void> {

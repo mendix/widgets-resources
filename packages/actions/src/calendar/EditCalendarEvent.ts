@@ -14,7 +14,7 @@ function EditCalendarEvent(eventId?: string): Promise<void> {
     const AddCalendarEvent: typeof AddCalendarEventLib = require("react-native-add-calendar-event");
 
     if (!eventId) {
-        throw new TypeError("Input parameter 'eventId' is required");
+        throw new TypeError("Input parameter 'Event id' is required");
     }
 
     return AddCalendarEvent.presentEventEditingDialog({

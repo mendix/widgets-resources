@@ -7,7 +7,7 @@
 import ReactNative from "react-native";
 
 /**
- * @param {string} content - Required
+ * @param {string} content - This field is required.
  * @returns {boolean}
  */
 function SetClipboardContent(content?: string): Promise<void> {
@@ -17,7 +17,7 @@ function SetClipboardContent(content?: string): Promise<void> {
     const Clipboard: typeof ReactNative.Clipboard = require("react-native").Clipboard;
 
     if (!content) {
-        throw new TypeError("Input parameter 'content' is required");
+        throw new TypeError("Input parameter 'Content' is required");
     }
 
     Clipboard.setString(content);

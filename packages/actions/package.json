@@ -4,6 +4,7 @@
     "license": "Apache-2.0",
     "scripts": {
         "start": "../../node_modules/.bin/tsc --watch",
+        "prebuild": "rm -rf ./dist/tsc",
         "build": "../../node_modules/.bin/tsc",
         "postbuild": "node ./scripts/copyActionsToTestProject.js",
         "lint": "../../node_modules/.bin/tslint --project tsconfig.json --config ../../tslint.json"

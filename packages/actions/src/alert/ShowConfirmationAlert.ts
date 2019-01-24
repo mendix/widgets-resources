@@ -7,10 +7,10 @@
 import ReactNative from "react-native";
 
 /**
- * @param {string} title - Required
+ * @param {string} title - This field is required.
  * @param {string} message
- * @param {string} cancelText - Defaults to 'Cancel'
- * @param {string} okText - Defaults to 'OK'
+ * @param {string} cancelText - The default text is 'Cancel'.
+ * @param {string} okText - The default text is 'OK'.
  * @returns {boolean}
  */
 function ShowConfirmationAlert(
@@ -25,7 +25,7 @@ function ShowConfirmationAlert(
     const Alert: typeof ReactNative.Alert = require("react-native").Alert;
 
     if (!title) {
-        throw new TypeError("Input parameter 'title' is required");
+        throw new TypeError("Input parameter 'Title' is required");
     }
 
     cancelText = cancelText || "Cancel";

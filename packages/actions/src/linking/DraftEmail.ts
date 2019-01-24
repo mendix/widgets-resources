@@ -7,9 +7,9 @@
 import ReactNative from "react-native";
 
 /**
- * @param {string} recipient - The recipient, or recipients, separated by comma's
- * @param {string} cc - The CC recipient(s)
- * @param {string} bcc - The BCC recipient(s)
+ * @param {string} recipient - The recipient, or recipients, separated by comma's.
+ * @param {string} cc - The CC recipient(s).
+ * @param {string} bcc - The BCC recipient(s).
  * @param {string} subject
  * @param {string} body
  * @returns {boolean}
@@ -22,7 +22,7 @@ function DraftEmail(recipient?: string, cc?: string, bcc?: string, subject?: str
 
     let url = "mailto:";
     if (recipient) {
-        url += `${encodeURIComponent(recipient)}?`;
+        url += `${encodeURI(recipient)}?`;
     }
     if (cc) {
         url += `cc=${encodeURIComponent(cc)}&`;
