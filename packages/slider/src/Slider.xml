@@ -82,20 +82,20 @@
             <category>Appearance</category>
             <description/>
         </property>
-        <property key="minimumTrackTintColor" type="string" required="false">
-            <caption>Minimum track color</caption>
+        <property key="selectedTrackTintColor" type="string" required="false">
+            <caption>Selected track color</caption>
             <category>Appearance</category>
             <description>The color used for the track to the left of the button</description>
         </property>
-        <property key="maximumTrackTintColor" type="string" required="false">
-            <caption>Maximum track color</caption>
+        <property key="trackTintColor" type="string" required="false">
+            <caption>Track color</caption>
             <category>Appearance</category>
-            <description>The color used for the track to the left of the button</description>
+            <description>The color used for the track to the right of the button</description>
         </property>
         <property key="thumbTintColor" type="string" required="false">
             <caption>Grip color</caption>
             <category>Appearance</category>
-            <description>Color of the foreground switch grip</description>
+            <description>Color of the foreground switch grip (Android only)</description>
         </property>
     </properties>
 </widget>
