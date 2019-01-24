@@ -29,5 +29,4 @@ export interface RatingProps extends CommonProps {
     fullStarColor: string;
     emptyStarColor: string;
     halfStarEnabled: boolean;
-    halfStarColor?: string;
 }

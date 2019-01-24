@@ -76,10 +76,5 @@
             <category>Appearance</category>
             <description/>
         </property>
-        <property key="halfStarColor" type="string" required="false">
-            <caption>Half icon color</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
     </properties>
 </widget>

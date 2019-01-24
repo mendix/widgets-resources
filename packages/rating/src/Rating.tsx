@@ -16,7 +16,7 @@ export class Rating extends Component<RatingProps> {
                 fullStarColor={this.props.fullStarColor}
                 emptyStarColor={this.props.emptyStarColor}
                 halfStarEnabled={this.props.halfStarEnabled}
-                halfStarColor={this.props.halfStarColor}
+                halfStarColor={this.props.fullStarColor}
                 selectedStar={this.onChangeHandler}
                 iconSet="Ionicons"
                 emptyStar="md-star-outline"
