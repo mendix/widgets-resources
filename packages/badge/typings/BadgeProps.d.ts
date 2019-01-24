@@ -9,8 +9,9 @@ interface CommonProps {
 }
 
 export interface BadgeProps extends CommonProps {
-    valueAttribute?: PluginWidget.EditableValue<string | BigJs.Big>;
+    value?: PluginWidget.EditableValue<string | BigJs.Big>;
+    defaultValue?: string;
+    onClick?: PluginWidget.ActionValue;
     type: "badge" | "label";
-    badgeStyle: "default" | "primary" | "success" | "info" | "warning" | "danger";
-    onClickAction?: PluginWidget.ActionValue;
+    color: "default" | "primary" | "success" | "info" | "warning" | "danger";
 }

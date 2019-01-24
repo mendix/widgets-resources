@@ -9,31 +9,40 @@ export class Badge extends React.Component<BadgeProps> {
 
     render(): JSX.Element {
         const isAndroid = Platform.OS === "android";
-        const touchableStyle = [
+        const componentStyle = [
             this.props.type === "badge" ? styles.badge : styles.label,
-            styles[`badge-${this.props.badgeStyle}`]
+            (styles as any)[`background-${this.props.color}`]
         ];
-        const textStyle = [styles.labelText, styles[`label-${this.props.badgeStyle}`]];
-        const value = this.props.valueAttribute ? this.props.valueAttribute.value : "";
 
         return (
-            <View style={styles.flex}>
-                {isAndroid ? (
-                    <TouchableNativeFeedback style={touchableStyle} onPress={this.onClickHandler}>
-                        <Text style={textStyle}>{value}</Text>
-                    </TouchableNativeFeedback>
+            <View style={styles.container}>
+                {this.props.onClick ? (
+                    isAndroid ? (
+                        <TouchableNativeFeedback style={componentStyle} onPress={this.onClickHandler}>
+                            {this.renderText()}
+                        </TouchableNativeFeedback>
+                    ) : (
+                        <TouchableOpacity style={componentStyle} onPress={this.onClickHandler}>
+                            {this.renderText()}
+                        </TouchableOpacity>
+                    )
                 ) : (
-                    <TouchableOpacity style={touchableStyle} onPress={this.onClickHandler}>
-                        <Text style={textStyle}>{value}</Text>
-                    </TouchableOpacity>
+                    <View style={componentStyle}>{this.renderText()}</View>
                 )}
             </View>
         );
     }
 
+    private renderText(): JSX.Element {
+        const textStyle = [styles.text, (styles as any)[`text-${this.props.color}`]];
+        const value = this.props.value ? this.props.value.value : this.props.defaultValue;
+
+        return <Text style={textStyle}>{value}</Text>;
+    }
+
     private onClick(): void {
-        if (this.props.onClickAction && this.props.onClickAction.canExecute) {
-            this.props.onClickAction.execute();
+        if (this.props.onClick && this.props.onClick.canExecute) {
+            this.props.onClick.execute();
         }
     }
 }

@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
-export const styles: any = StyleSheet.create({
-    flex: {
+export const styles = StyleSheet.create({
+    container: {
         flexDirection: "row"
     },
     badge: {
@@ -18,45 +18,44 @@ export const styles: any = StyleSheet.create({
         paddingTop: 3,
         paddingBottom: 3
     },
-    labelText: {
-        textAlign: "center",
+    text: {
         fontSize: 15,
         fontWeight: "bold"
     },
-    "badge-warning": {
+    "background-warning": {
         backgroundColor: "#F6BB42"
     },
-    "badge-info": {
+    "background-info": {
         backgroundColor: "#8AD4ED"
     },
-    "badge-danger": {
+    "background-danger": {
         backgroundColor: "#D9534F"
     },
-    "badge-success": {
+    "background-success": {
         backgroundColor: "#8CC152"
     },
-    "badge-primary": {
+    "background-primary": {
         backgroundColor: "#59C2E6"
     },
-    "badge-default": {
+    "background-default": {
         backgroundColor: "#ccc"
     },
-    "label-warning": {
+    "text-warning": {
         color: "#FFFFFF"
     },
-    "label-info": {
+    "text-info": {
         color: "#FFFFFF"
     },
-    "label-danger": {
+    "text-danger": {
         color: "#FFFFFF"
     },
-    "label-success": {
+    "text-success": {
         color: "#FFFFFF"
     },
-    "label-primary": {
+    "text-primary": {
         color: "#FFFFFF"
     },
-    "label-default": {
+    "text-default": {
         color: "#000"
     }
 });
