@@ -9,6 +9,6 @@ interface CommonProps {
 }
 
 export interface ActivityIndicatorProps extends CommonProps {
-    color?: string;
+    color: string;
     size: "small" | "large";
 }
