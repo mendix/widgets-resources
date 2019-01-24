@@ -9,15 +9,17 @@ interface CommonProps {
 }
 
 export interface ProgressCircleProps extends CommonProps {
+    value?: PluginWidget.EditableValue<BigJs.Big>;
+    defaultValue: number;
+    maximumValue?: PluginWidget.EditableValue<BigJs.Big>;
+    defaultMaximumValue: number;
     indeterminate: boolean;
-    progressValue?: PluginWidget.EditableValue<BigJs.Big>;
-    progressMax?: PluginWidget.EditableValue<BigJs.Big>;
-    animated: boolean;
     size: number;
     thickness: number;
     showsText: boolean;
+    customText?: PluginWidget.DynamicValue<string>;
     color?: string;
     unfilledColor?: string;
-    borderWidth: number;
     borderColor?: string;
+    borderWidth: number;
 }

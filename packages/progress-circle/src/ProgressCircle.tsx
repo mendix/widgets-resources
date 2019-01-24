@@ -3,16 +3,18 @@ import { Circle } from "react-native-progress";
 import { ProgressCircleProps } from "../typings/ProgressCircleProps";
 
 export class ProgressCircle extends Component<ProgressCircleProps> {
-    private get progress(): number {
-        const { progressMax, progressValue } = this.props;
-        const max = progressMax && progressMax.value != null ? Number(progressMax.value) : 100;
-        const value = progressValue && progressValue.value != null ? Number(progressValue.value) : 0;
+    private readonly formatTextHandler = this.formatText.bind(this);
 
-        if (this.props.indeterminate || max === 0) {
+    private get progress(): number {
+        const { maximumValue, value, defaultMaximumValue, defaultValue } = this.props;
+        const maximum = maximumValue && maximumValue.value != null ? Number(maximumValue.value) : defaultMaximumValue;
+        const current = value && value.value != null ? Number(value.value) : defaultValue;
+
+        if (this.props.indeterminate || maximum === 0) {
             return 0;
         }
 
-        return value / max;
+        return current / maximum;
     }
 
     render(): JSX.Element {
@@ -20,7 +22,6 @@ export class ProgressCircle extends Component<ProgressCircleProps> {
             <Circle
                 progress={this.progress}
                 indeterminate={this.props.indeterminate}
-                animated={this.props.animated}
                 {...(this.props.color ? { color: this.props.color } : {})}
                 {...(this.props.unfilledColor ? { color: this.props.unfilledColor } : {})}
                 {...(this.props.borderColor ? { color: this.props.borderColor } : {})}
@@ -28,7 +29,14 @@ export class ProgressCircle extends Component<ProgressCircleProps> {
                 size={this.props.size}
                 thickness={this.props.thickness}
                 showsText={this.props.showsText}
+                {...(this.props.customText && this.props.customText.value
+                    ? { formatText: this.formatTextHandler }
+                    : {})}
             />
         );
+    }
+
+    private formatText(): string {
+        return (this.props.customText && this.props.customText.value) || "";
     }
 }
