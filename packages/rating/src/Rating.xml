@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="mendix.native.rating.Rating" needsEntityContext="true" offlineCapable="true" pluginWidget="true" 
+<widget id="com.mendix.widget.native.rating.Rating" needsEntityContext="true" offlineCapable="true" pluginWidget="true" 
     xmlns="http://www.mendix.com/widget/1.0/" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
     <name>Rating</name>

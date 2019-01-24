@@ -6,7 +6,7 @@
             <widgetFile path="BarcodeScanner.xml"/>
         </widgetFiles>
         <files>
-            <file path="mendix/native/barcodescanner"/>
+            <file path="com/mendix/widget/native/barcodescanner"/>
         </files>
     </clientModule>
 </package>

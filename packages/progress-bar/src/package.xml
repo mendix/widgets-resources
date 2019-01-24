@@ -6,7 +6,7 @@
             <widgetFile path="ProgressBar.xml"/>
         </widgetFiles>
         <files>
-            <file path="mendix/native/progressbar"/>
+            <file path="com/mendix/widget/native/progressbar"/>
         </files>
     </clientModule>
 </package>

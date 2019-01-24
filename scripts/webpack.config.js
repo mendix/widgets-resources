@@ -9,7 +9,7 @@ const config = {
     entry: `./src/${widgetName}.tsx`,
     output: {
         path: path.resolve(process.cwd(), "dist/tmp"),
-        filename: `widgets/mendix/native/${name}/${widgetName}.js`,
+        filename: `widgets/com/mendix/widget/native/${name}/${widgetName}.js`,
         libraryTarget: "commonjs2"
     },
     resolve: {

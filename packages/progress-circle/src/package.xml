@@ -6,7 +6,7 @@
             <widgetFile path="ProgressCircle.xml"/>
         </widgetFiles>
         <files>
-            <file path="mendix/native/progresscircle"/>
+            <file path="com/mendix/widget/native/progresscircle"/>
         </files>
     </clientModule>
 </package>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="mendix.native.maps.Maps" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
-    xmlns="http://www.mendix.com/widget/1.0/"
+<widget id="com.mendix.widget.native.maps.Maps" needsEntityContext="true" offlineCapable="true" pluginWidget="true" 
+    xmlns="http://www.mendix.com/widget/1.0/" 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
     <name>Maps</name>
     <description>This widget allows you to use native Google or Apple maps views in your application.</description>

@@ -6,7 +6,7 @@
             <widgetFile path="ActivityIndicator.xml"/>
         </widgetFiles>
         <files>
-            <file path="mendix/native/activityindicator"/>
+            <file path="com/mendix/widget/native/activityindicator"/>
         </files>
     </clientModule>
 </package>
