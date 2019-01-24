@@ -24,7 +24,9 @@ function createMpkFile() {
 }
 
 function copyToDeployment() {
-    return gulp.src("./dist/tmp/widgets/**/*").pipe(gulp.dest(`../test-project/mxproject/deployment/web/widgets`));
+    return gulp
+        .src(["./dist/tmp/widgets/**/*", "!./dist/tmp/widgets/package.xml"])
+        .pipe(gulp.dest(`../test-project/mxproject/deployment/web/widgets`));
 }
 
 function runWebpack(config, cb) {

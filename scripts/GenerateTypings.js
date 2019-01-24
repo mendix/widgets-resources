@@ -7,6 +7,7 @@ const translateType = (prop, webmodeler = false) => {
         case "action":
             return "PluginWidget.ActionValue";
         case "translatableString":
+        case "textTemplate":
             return webmodeler ? "string" : "PluginWidget.DynamicValue<string>";
         case "integer":
             return "number";
@@ -49,18 +50,17 @@ const translateAttributeType = type => {
         case "String":
         case "Enum":
             return "string";
+        default:
+            return "any";
     }
-    return "any";
 };
 
 module.exports = (content, widgetName) => {
     const properties = JSON.parse(content).widget.properties[0].property;
 
     let newContent = `/**
- * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten 
- * @author Mendix Widgets Team 
+ * Auto-generated from ${widgetName}.xml
  */
-
 
 interface CommonProps {
     id: string;
