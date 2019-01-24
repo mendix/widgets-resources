@@ -59,12 +59,12 @@
         <property key="onChange" type="action" required="false">
             <caption>On change</caption>
             <category>Events</category>
-            <description>Callback continuously called while the user is dragging the slider</description>
+            <description>Called continuously while the user is dragging the handle</description>
         </property>
         <property key="onSlidingComplete" type="action" required="false">
             <caption>On sliding complete</caption>
             <category>Events</category>
-            <description>Called when the user releases the slider, regardless if the value has changed</description>
+            <description>Called when the user releases the handle, regardless of weither the value has changed</description>
         </property>
 
         <property key="step" type="attribute" required="false">
@@ -82,20 +82,20 @@
             <category>Appearance</category>
             <description/>
         </property>
-        <property key="selectedTrackTintColor" type="string" required="false">
+        <property key="selectedTrackColor" type="string" required="false">
             <caption>Selected track color</caption>
             <category>Appearance</category>
-            <description>The color used for the track to the left of the button</description>
+            <description>The color used for the track to the left of the handle</description>
         </property>
-        <property key="trackTintColor" type="string" required="false">
+        <property key="trackColor" type="string" required="false">
             <caption>Track color</caption>
             <category>Appearance</category>
-            <description>The color used for the track to the right of the button</description>
+            <description>The color used for the track to the right of the handle</description>
         </property>
-        <property key="thumbTintColor" type="string" required="false">
-            <caption>Grip color</caption>
+        <property key="handleColor" type="string" required="false">
+            <caption>Slider handle color</caption>
             <category>Appearance</category>
-            <description>Color of the foreground switch grip (Android only)</description>
+            <description>The color used for the slider handle (Android only)</description>
         </property>
     </properties>
 </widget>

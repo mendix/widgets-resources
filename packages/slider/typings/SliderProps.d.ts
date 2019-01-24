@@ -19,7 +19,7 @@ export interface SliderProps extends CommonProps {
     onSlidingComplete?: PluginWidget.ActionValue;
     step?: PluginWidget.EditableValue<BigJs.Big>;
     defaultStep: number;
-    selectedTrackTintColor?: string;
-    trackTintColor?: string;
-    thumbTintColor?: string;
+    selectedTrackColor?: string;
+    trackColor?: string;
+    handleColor?: string;
 }

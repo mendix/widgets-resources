@@ -43,9 +43,9 @@ export class Slider extends Component<SliderProps> {
                         maximumValue={this.maximumValue}
                         disabled={this.disabled}
                         step={this.step}
-                        minimumTrackTintColor={this.props.selectedTrackTintColor}
-                        maximumTrackTintColor={this.props.trackTintColor}
-                        thumbTintColor={this.props.thumbTintColor}
+                        minimumTrackTintColor={this.props.selectedTrackColor}
+                        maximumTrackTintColor={this.props.trackColor}
+                        thumbTintColor={this.props.handleColor}
                         onValueChange={this.onChangeHandler}
                         onSlidingComplete={this.onSlidingCompleteHandler}
                     />
