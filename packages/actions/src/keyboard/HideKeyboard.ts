@@ -9,7 +9,7 @@ import ReactNative from "react-native";
 /**
  * @returns {boolean}
  */
-function DismissKeyboard(): Promise<void> {
+function HideKeyboard(): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/keyboard
 

@@ -32,15 +32,15 @@ function ScheduleNotification(
     const Firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     if (!date) {
-        throw new TypeError("Input parameter 'date' is required");
+        throw new TypeError("Input parameter 'Date' is required");
     }
 
     if (!body) {
-        throw new TypeError("Input parameter 'body' is required");
+        throw new TypeError("Input parameter 'Body' is required");
     }
 
     if (iosBadgeNumber && iosBadgeNumber.lte(0)) {
-        throw new TypeError("Input parameter 'iosBadgeNumber' should be greater than zero");
+        throw new TypeError("Input parameter 'iOS badge number' should be greater than zero");
     }
 
     let notification = new Firebase.notifications.Notification().setBody(body);

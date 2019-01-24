@@ -7,7 +7,7 @@
 import ReactNative from "react-native";
 
 /**
- * @param {string} url
+ * @param {string} url - This field is required.
  * @returns {boolean}
  */
 function OpenURL(url?: string): Promise<boolean> {
@@ -17,7 +17,7 @@ function OpenURL(url?: string): Promise<boolean> {
     const Linking: typeof ReactNative.Linking = require("react-native").Linking;
 
     if (!url) {
-        throw new TypeError("Input parameter 'url' is required");
+        throw new TypeError("Input parameter 'Url' is required");
     }
 
     return Linking.canOpenURL(url).then(supported => {

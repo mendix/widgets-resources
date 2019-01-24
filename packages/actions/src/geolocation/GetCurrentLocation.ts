@@ -7,15 +7,15 @@
 import { GeolocationError, GeolocationReturnType, GeoOptions } from "react-native";
 
 /**
- * @param {Big} timeout - A positive value representing the maximum length of time (in milliseconds) the device is allowed to take in order to return a position. Defaults to INFINITY.
- * @param {Big} maximumAge - A positive value indicating the maximum age in milliseconds of a possible cached position that is acceptable to return. If set to 0, it means that the device cannot use a cached position and must attempt to retrieve the real current position. If set to Infinity the device will always return a cached position regardless of its age. Defaults to INFINITY.
- * @param {boolean} enableHighAccuracy - A boolean representing if to use GPS or not. If set to true, a GPS position will be requested. If set to false, a WIFI location will be requested. Default is false.
+ * @param {Big} timeout - The maximum length of time (in milliseconds) the device is allowed to take in order to return a location.
+ * @param {Big} maximumAge - The maximum age (in milliseconds) of a possible cached position that is acceptable to return. If set to 0, it means that the device cannot use a cached position and must attempt to retrieve the real current position. By default the device will always return a cached position regardless of its age.
+ * @param {boolean} highAccuracy - Use a higher accuracy method to determine the current location. Disabling this saves battery life.
  * @returns {MxObject}
  */
 function GetCurrentLocation(
     timeout?: BigJs.Big,
     maximumAge?: BigJs.Big,
-    enableHighAccuracy?: boolean
+    highAccuracy?: boolean
 ): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/geolocation#getcurrentposition
@@ -48,7 +48,7 @@ function GetCurrentLocation(
             return {
                 timeout: timeoutNumber,
                 maximumAge: maximumAgeNumber,
-                enableHighAccuracy
+                enableHighAccuracy: highAccuracy
             };
         }
 

@@ -6,7 +6,11 @@
 
 import ReactNative from "react-native";
 
-function OpenMaps(query?: string): Promise<void> {
+/**
+ * @param {string} query - This field is required.
+ * @returns {boolean}
+ */
+function OpenMapsLocation(query?: string): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/linking
 
@@ -14,7 +18,7 @@ function OpenMaps(query?: string): Promise<void> {
     const Platform: typeof ReactNative.Platform = require("react-native").Platform;
 
     if (!query) {
-        throw new TypeError("Input parameter 'query' is required");
+        throw new TypeError("Input parameter 'Query' is required");
     }
 
     query = encodeURIComponent(query);

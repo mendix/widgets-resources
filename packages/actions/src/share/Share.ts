@@ -7,8 +7,8 @@
 import ReactNative from "react-native";
 
 /**
- * @param {string} message - The message to share. Required.
- * @param {string} title - Title of the message
+ * @param {string} message - The message to share. This field is required.
+ * @param {string} title - Title of the message to share. Only some share targets use this value.
  * @returns {boolean}
  */
 function Share(message?: string, title?: string): Promise<boolean> {
@@ -18,7 +18,7 @@ function Share(message?: string, title?: string): Promise<boolean> {
     const RNShare: typeof ReactNative.Share = require("react-native").Share;
 
     if (!message) {
-        throw new TypeError("Input parameter 'message' is required");
+        throw new TypeError("Input parameter 'Message' is required");
     }
 
     return RNShare.share({ message, title }).then(result => {

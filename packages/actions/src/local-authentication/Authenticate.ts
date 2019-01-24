@@ -7,7 +7,7 @@
 import ReactNativeTouchId from "react-native-touch-id";
 
 /**
- * @param {string} reason - Required
+ * @param {string} reason - The reason for requesting authentication.
  * @returns {boolean}
  */
 function Authenticate(reason?: string): Promise<boolean> {
@@ -15,10 +15,6 @@ function Authenticate(reason?: string): Promise<boolean> {
     // Documentation https://github.com/naoufal/react-native-touch-id
 
     const TouchID: typeof ReactNativeTouchId = require("react-native-touch-id").default;
-
-    if (!reason) {
-        throw new TypeError("Input parameter 'reason' is required");
-    }
 
     return TouchID.authenticate(reason)
         .then(() => true)
