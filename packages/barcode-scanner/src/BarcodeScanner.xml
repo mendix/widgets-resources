@@ -6,14 +6,15 @@
     <description>This widget enables native barcode scanning functionality within your Mendix mobile application.</description>
     <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAElBMVEUAAABXV1dVVVVJsPhIsPdVVVWcEer3AAAABHRSTlMASeP9eof+WwAAAHJJREFUeAHtlzEKxTAMQ239r/tfuaHtFEpxIkog6C1e7AchixQXJsET5OQ2eIMo8LDNOQE7wegTOkEMspsAJGKE/iaBjDrlG7OAf6M89xdYYIEFBb4XtPF7n/sL1v2CWYoespSY56ysFw698uilS6995gADwwwpR7MpFwAAAABJRU5ErkJggg==</icon>
     <properties>
-        <property key="inputValue" type="attribute">
-            <caption>Attribute</caption>
-            <category>General</category>
+        <property key="barcode" type="attribute">
+            <caption>Barcode</caption>
+            <category>Data source</category>
             <description>The attribute that contains the barcode value</description>
             <attributeTypes>
                 <attributeType name="String" />
             </attributeTypes>
         </property>
+
         <property key="onChange" type="action" required="false">
             <caption>On change action</caption>
             <category>Events</category>

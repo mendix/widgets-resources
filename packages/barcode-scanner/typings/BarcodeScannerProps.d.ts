@@ -9,6 +9,6 @@ interface CommonProps {
 }
 
 export interface BarcodeScannerProps extends CommonProps {
-    inputValue: PluginWidget.EditableValue<string>;
+    barcode: PluginWidget.EditableValue<string>;
     onChange?: PluginWidget.ActionValue;
 }

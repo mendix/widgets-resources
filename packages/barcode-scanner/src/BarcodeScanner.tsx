@@ -19,8 +19,8 @@ export class BarcodeScanner extends Component<BarcodeScannerProps> {
     }
 
     private onBarCodeRead(event: { data: string }): void {
-        if (this.props.inputValue && this.props.inputValue.status === PluginWidget.ValueStatus.Available) {
-            this.props.inputValue.setValue(event.data);
+        if (this.props.barcode.status === PluginWidget.ValueStatus.Available) {
+            this.props.barcode.setValue(event.data);
 
             if (this.props.onChange && this.props.onChange.canExecute) {
                 this.props.onChange.execute();
