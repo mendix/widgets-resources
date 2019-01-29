@@ -1,7 +1,7 @@
-import * as React from "react";
+import React from "react";
 import { Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
-import { BadgeProps } from "../typings/BadgeProps";
 
+import { BadgeProps } from "../typings/BadgeProps";
 import { styles } from "./ui/Styles";
 
 export class Badge extends React.Component<BadgeProps> {
