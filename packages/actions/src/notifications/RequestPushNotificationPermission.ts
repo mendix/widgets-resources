@@ -4,6 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
+import ReactNative from "react-native";
 import ReactNativeFirebase from "react-native-firebase";
 
 /**
@@ -15,14 +16,19 @@ function RequestPushNotificationPermission(): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/receiving-notifications
 
-    const Firebase: typeof ReactNativeFirebase = require("react-native-firebase");
+    const Platform: typeof ReactNative.Platform = require("react-native").Platform;
+    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
-    return Firebase.messaging()
+    return firebase
+        .messaging()
         .requestPermission()
         .then(() =>
-            Firebase.messaging()
-                .ios.registerForRemoteNotifications()
-                .then(() => true)
+            Platform.OS === "ios"
+                ? firebase
+                      .messaging()
+                      .ios.registerForRemoteNotifications()
+                      .then(() => true)
+                : true
         )
         .catch(() => false);
 

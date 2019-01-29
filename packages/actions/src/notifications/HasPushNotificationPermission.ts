@@ -15,9 +15,9 @@ function HasPushNotificationPermission(): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/receiving-notifications
 
-    const Firebase: typeof ReactNativeFirebase = require("react-native-firebase");
+    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
-    return Firebase.messaging().hasPermission();
+    return firebase.messaging().hasPermission();
 
     // END USER CODE
 }

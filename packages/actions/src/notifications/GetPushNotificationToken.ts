@@ -7,17 +7,16 @@
 import ReactNativeFirebase from "react-native-firebase";
 
 /**
- * Cancels all pending scheduled notifications.
- * @returns {boolean}
+ * This generated registration token is used to identify the app instance and periodically sends data to the backend.
+ * @returns {string}
  */
-function CancelAllScheduledNotifications(): Promise<void> {
+function getPushNotificationToken(): Promise<string> {
     // BEGIN USER CODE
-    // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/reference/Notifications#cancelAllNotifications
+    // Documentation https://rnfirebase.io/docs/v5.x.x/messaging/reference/Messaging#getToken
 
     const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
-    firebase.notifications().cancelAllNotifications();
-    return Promise.resolve();
+    return firebase.messaging().getToken();
 
     // END USER CODE
 }

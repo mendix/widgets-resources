@@ -110,7 +110,14 @@ function inlineNativeAssets() {
 
 const config = {
     input,
-    external: ["react", "react-dom", "react-native", "react-native-camera", "react-native-maps"],
+    external: [
+        "react",
+        "react-dom",
+        "react-native",
+        "react-native-camera",
+        "react-native-maps",
+        "react-native-firebase"
+    ],
     preserveModules: true,
     plugins: [
         rollupNodeResolve(),

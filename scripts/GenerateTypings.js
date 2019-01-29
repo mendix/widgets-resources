@@ -18,9 +18,30 @@ const translateType = (prop, webmodeler = false) => {
             }
             return "undefined";
         case "object":
+            if (prop.$.hasOwnProperty("isList")) {
+                if (prop.$.isList) {
+                    return `Array<${generateChildProps(prop)}>`;
+                }
+            }
             return "any";
     }
     return prop.$.type;
+};
+
+const generateChildProps = prop => {
+    const properties = prop.properties[0].property;
+    return `{
+${properties
+    .map(prop => {
+        let name = prop.$.key;
+        if (prop.$.hasOwnProperty("required") && prop.$.required === "false") {
+            name += "?";
+        }
+        const type = translateType(prop);
+        return `        ${name}: ${type};`;
+    })
+    .join("\n")}
+    }`;
 };
 
 const findTypes = attributeTypes => {

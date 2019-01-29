@@ -13,7 +13,7 @@ function SetBadgeNumber(badgeNumber?: BigJs.Big): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/reference/Notifications#setBadge
 
-    const Firebase: typeof ReactNativeFirebase = require("react-native-firebase");
+    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     if (!badgeNumber) {
         throw new TypeError("Input parameter 'Badge number' is required");
@@ -23,7 +23,7 @@ function SetBadgeNumber(badgeNumber?: BigJs.Big): Promise<void> {
         throw new TypeError("Input parameter 'Badge number' should be zero or greater");
     }
 
-    Firebase.notifications().setBadge(Number(badgeNumber));
+    firebase.notifications().setBadge(Number(badgeNumber));
     return Promise.resolve();
 
     // END USER CODE

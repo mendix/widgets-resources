@@ -29,7 +29,7 @@ function ScheduleNotification(
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/scheduling-notifications
 
-    const Firebase: typeof ReactNativeFirebase = require("react-native-firebase");
+    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     if (!date) {
         throw new TypeError("Input parameter 'Date' is required");
@@ -43,7 +43,16 @@ function ScheduleNotification(
         throw new TypeError("Input parameter 'iOS badge number' should be greater than zero");
     }
 
-    let notification = new Firebase.notifications.Notification().setBody(body);
+    const channel = new firebase.notifications.Android.Channel(
+        "mendix-local-notifications-jsactions",
+        "Local notifications channel used by JS actions",
+        firebase.notifications.Android.Importance.Default
+    );
+    firebase.notifications().android.createChannel(channel);
+
+    let notification = new firebase.notifications.Notification()
+        .setBody(body)
+        .android.setChannelId("mendix-local-notifications-jsactions");
 
     if (title) {
         notification = notification.setTitle(title);
@@ -61,7 +70,7 @@ function ScheduleNotification(
         notification = notification.ios.setBadge(Number(iosBadgeNumber));
     }
 
-    return Firebase.notifications().scheduleNotification(notification, {
+    return firebase.notifications().scheduleNotification(notification, {
         fireDate: date.getTime()
     });
 
