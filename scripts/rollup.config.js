@@ -66,7 +66,7 @@ function copyNativeAssets() {
             return Promise.all(
                 Object.values(bundle)
                     .reduce((copyTasks, source) => {
-                        const regexp = /require\((?:"|')(.\/.*)(?:"|')\)/g;
+                        const regexp = /require\(['"]([^'"]+?\.(?:png|jpg|gif))['"]\)/g;
                         let match;
                         while ((match = regexp.exec(source.code)) !== null) {
                             const src = path.join(path.dirname(source.facadeModuleId), match[1]);
@@ -93,7 +93,7 @@ function inlineNativeAssets() {
              */
             return Promise.all(
                 Object.values(bundle).map(source => {
-                    const regexp = /require\((?:"|')(.\/.*)(?:"|')\)/g;
+                    const regexp = /require\(['"]([^'"]+?\.(?:png|jpg|gif))['"]\)/g;
                     const inlined = source.code.replace(regexp, (match, requirePath) => {
                         const src = path.join(path.dirname(source.facadeModuleId), requirePath);
                         const data = fs.readFileSync(src, { encoding: "base64" });
