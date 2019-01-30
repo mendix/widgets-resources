@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import StarRating from "react-native-star-rating";
+import { Rating as RNRating } from "react-native-ratings";
+
 import { RatingProps } from "../typings/RatingProps";
 
 export class Rating extends Component<RatingProps> {
@@ -7,21 +8,14 @@ export class Rating extends Component<RatingProps> {
 
     render(): JSX.Element {
         return (
-            <StarRating
-                rating={Number(this.props.rating.value)}
-                maxStars={this.props.maximumValue}
-                disabled={this.props.editable === "never" || this.props.rating.readOnly}
-                {...(this.props.animation !== "none" ? { animation: this.props.animation } : {})}
-                starSize={this.props.iconSize}
-                fullStarColor={this.props.fullStarColor}
-                emptyStarColor={this.props.emptyStarColor}
-                halfStarEnabled={this.props.halfStarEnabled}
-                halfStarColor={this.props.fullStarColor}
-                selectedStar={this.onChangeHandler}
-                iconSet="Ionicons"
-                emptyStar="md-star-outline"
-                halfStar="md-star-half"
-                fullStar="md-star"
+            <RNRating
+                type={this.props.icon}
+                startingValue={Number(this.props.rating.value)}
+                ratingCount={this.props.maximumValue}
+                readonly={this.props.editable === "never" || this.props.rating.readOnly}
+                imageSize={this.props.iconSize}
+                onFinishRating={this.onChangeHandler}
+                fractions={this.props.fractions}
             />
         );
     }
