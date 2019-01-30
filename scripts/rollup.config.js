@@ -123,6 +123,7 @@ const config = {
         rollupNodeResolve(),
         rollupTypescript2({ cacheRoot: "./dist/rpt2_cache" }),
         rollupBabel({
+            exclude: [/node_modules\/colorsys/],
             presets: [
                 [
                     "module:metro-react-native-babel-preset",
