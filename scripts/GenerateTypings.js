@@ -3,10 +3,11 @@
 const translateType = (prop, webmodeler = false) => {
     switch (prop.$.type) {
         case "attribute":
-            return webmodeler ? "string" : `PluginWidget.EditableValue<${findTypes(prop.attributeTypes[0])}>`;
+            return webmodeler
+                ? findTypes(prop.attributeTypes[0])
+                : `PluginWidget.EditableValue<${findTypes(prop.attributeTypes[0])}>`;
         case "action":
             return "PluginWidget.ActionValue";
-        case "translatableString":
         case "textTemplate":
             return webmodeler ? "string" : "PluginWidget.DynamicValue<string>";
         case "integer":

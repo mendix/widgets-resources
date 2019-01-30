@@ -22,7 +22,7 @@ function checkDependencies(cb) {
 }
 
 function clean() {
-    return del(["./dist/**/*"], { force: true });
+    return del(["./dist/**/*.*"], { force: true });
 }
 
 function generateTypings() {
