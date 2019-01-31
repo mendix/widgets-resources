@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.native.qrcode.QRCode" needsEntityContext="true" offlineCapable="true" pluginWidget="true" 
+    xmlns="http://www.mendix.com/widget/1.0/" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
+    <name>QR code</name>
+    <description>Displays a QR code</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAIVJREFUWEftlNEKwCAIRXX//8+tYhMmSN0YKOKB6CEmeqYyEbV+YFr7fsY8QuFcz+2GGNAVWbyVWgbQOPEMWP9Sv68M7MZxN1AJVAKjFWdb6q622J2CFWGmQAygWAZQ/A30So4M/EWNYZ4pOCWOAXSD5TVgbTT9nsZAJVAJ1B4QAyhJDBDdQaBQGZb6/OEAAAAASUVORK5CYII=</icon>
+    <properties>
+        <property key="value" type="attribute">
+            <caption>Value</caption>
+            <category>Data source</category>
+            <description>Value of the QR code</description>
+            <attributeTypes>
+                <attributeType name="String"/>
+            </attributeTypes>
+        </property>
+        <property key="size" type="integer" defaultValue="100">
+            <caption>Size</caption>
+            <category>Appearance</category>
+            <description>Size of the rendered QR code in pixels</description>
+        </property>
+        <property key="color" type="string" defaultValue="#000000">
+            <caption>Color</caption>
+            <category>Appearance</category>
+            <description/>
+        </property>
+        <property key="backgroundColor" type="string" defaultValue="#ffffff">
+            <caption>Background color</caption>
+            <category>Appearance</category>
+            <description/>
+        </property>
+    </properties>
+</widget>

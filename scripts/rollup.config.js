@@ -118,11 +118,14 @@ const config = {
         "react-native-camera",
         "react-native-maps",
         "react-native-firebase",
-        "react-native-video"
+        "react-native-video",
+        "react-native-svg"
     ],
     preserveModules: true,
     plugins: [
-        rollupNodeResolve(),
+        rollupNodeResolve({
+            browser: true
+        }),
         rollupTypescript2({ cacheRoot: "./dist/rpt2_cache" }),
         rollupBabel({
             exclude: [/node_modules\/colorsys/],
