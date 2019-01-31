@@ -27,9 +27,9 @@ $brand-success:                         #76CA02 !default;
 $brand-warning:                         #f99b1d !default;
 $brand-danger:                          #ed1c24 !default;
 
-$brand-logo:							false !default;
-$brand-logo-height:						26px !default;
-$brand-logo-width:						26px !default; // Only used for CSS brand logo
+$brand-logo:                            false !default;
+$brand-logo-height:                     26px !default;
+$brand-logo-width:                      26px !default; // Only used for CSS brand logo
 
 
 
@@ -198,7 +198,7 @@ $navtopbar-sub-bg-hover:                $navtopbar-sub-bg !default;
 $navtopbar-sub-bg-active:               $navtopbar-sub-bg !default;
 $navtopbar-sub-color:                   #AAA !default;
 $navtopbar-sub-color-hover:             $brand-primary !default;
-$navtopbar-sub-color-active:            #FFF !default;
+$navtopbar-sub-color-active:            $brand-primary !default;
 
 //## Used in layouts/base
 $navtopbar-border-color:                $topbar-border-color !default;
