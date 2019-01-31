@@ -124,15 +124,7 @@ const config = {
         rollupTypescript2({ cacheRoot: "./dist/rpt2_cache" }),
         rollupBabel({
             exclude: [/node_modules\/colorsys/],
-            presets: [
-                [
-                    "module:metro-react-native-babel-preset",
-                    {
-                        disableImportExportTransform: true,
-                        enableBabelRuntime: false
-                    }
-                ]
-            ]
+            plugins: ["@babel/plugin-transform-react-jsx", "@babel/plugin-proposal-class-properties"]
         }),
         rollupCommonjs({ include: /node_modules/ }),
         ...(isProduction ? [rollupTerser.terser()] : []),
