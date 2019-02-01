@@ -1,3 +1,10 @@
 {
-    "version": "independent"
+    "version": "independent",
+    "command": {
+        "version": {
+            "ignoreChanges": ["*.md"],
+            "message": "chore: release",
+            "allowBranch": "master"
+        }
+    }
 }

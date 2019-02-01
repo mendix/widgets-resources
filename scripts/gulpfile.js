@@ -56,7 +56,7 @@ function createMpkFile() {
         .src("./dist/tmp/widgets/**/*")
         .pipe(zip(`${pkg.config.widgetName}.mpk`))
         .pipe(gulp.dest("../test-project/mxproject/widgets"))
-        .pipe(gulp.dest(`./dist/${pkg.version}`));
+        .pipe(gulp.dest(`./dist/release`));
 }
 
 function copyToDeployment() {

@@ -2,6 +2,10 @@
     "name": "activity-indicator",
     "version": "0.1.0",
     "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jobvs/native-components.git"
+    },
     "config": {
         "widgetName": "ActivityIndicator"
     },
@@ -10,6 +14,7 @@
         "build": "npm run gulp build",
         "build:release": "NODE_ENV=production npm run gulp build",
         "gulp": "../../node_modules/.bin/gulp --gulpfile ../../scripts/gulpfile.js --cwd .",
-        "lint": "../../node_modules/.bin/tslint --project tsconfig.json --config ../../tslint.json"
+        "lint": "../../node_modules/.bin/tslint --project tsconfig.json --config ../../tslint.json",
+        "postversion": "npm run build && node ../../scripts/UpdateGithubRelease.js"
     }
 }

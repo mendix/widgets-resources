@@ -3,12 +3,14 @@
     "private": true,
     "scripts": {
         "format": "pretty-quick",
-        "lint": "lerna run lint"
+        "lint": "lerna run lint",
+        "build": "lerna run build",
+        "release": "lerna version --conventional-commits"
     },
     "devDependencies": {
         "@babel/core": "^7.2.2",
-        "@babel/plugin-transform-react-jsx": "^7.3.0",
         "@babel/plugin-proposal-class-properties": "^7.3.0",
+        "@babel/plugin-transform-react-jsx": "^7.3.0",
         "@commitlint/cli": "^7.4.0",
         "@commitlint/config-conventional": "^7.3.1",
         "@commitlint/config-lerna-scopes": "^7.3.1",
@@ -19,6 +21,7 @@
         "@types/react-native": "^0.57.32",
         "check-dependencies": "^1.1.0",
         "del": "^3.0.0",
+        "gh-release": "^3.4.0",
         "gulp": "^4.0.0",
         "gulp-change": "^1.0.2",
         "gulp-rename": "^1.4.0",
@@ -46,7 +49,6 @@
         "rollup-plugin-node-resolve": "^4.0.0",
         "rollup-plugin-terser": "^4.0.3",
         "rollup-plugin-typescript2": "^0.19.2",
-        "semantic-release": "^15.13.3",
         "tslint": "^5.12.1",
         "tslint-config-prettier": "^1.17.0",
         "tslint-react": "^3.6.0",
