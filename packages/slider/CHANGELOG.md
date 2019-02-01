@@ -8,6 +8,4 @@ All notable changes to this project will be documented in this file. See
 ### Features
 
 -   **slider:** initial implementation ([72272bc](https://github.com/jobvs/native-components/commit/72272bc))
--   typing generation from XML ([#3](https://github.com/jobvs/native-components/issues/3))
-    ([9ac0a63](https://github.com/jobvs/native-components/commit/9ac0a63))
 -   **slider:** tap to set slider value ([31e84a1](https://github.com/jobvs/native-components/commit/31e84a1))

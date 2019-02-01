@@ -7,5 +7,4 @@ All notable changes to this project will be documented in this file. See
 
 ### Features
 
--   typing generation from XML ([#3](https://github.com/jobvs/native-components/issues/3))
-    ([9ac0a63](https://github.com/jobvs/native-components/commit/9ac0a63))
+-   **barcode-scanner:** initial implementation ([5e2ac86](https://github.com/jobvs/native-components/commit/5e2ac86))

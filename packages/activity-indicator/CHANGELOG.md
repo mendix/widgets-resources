@@ -16,5 +16,3 @@ All notable changes to this project will be documented in this file. See
 
 -   **activity-indicator:** initial implementation
     ([82dafb5](https://github.com/jobvs/native-components/commit/82dafb5))
--   typing generation from XML ([#3](https://github.com/jobvs/native-components/issues/3))
-    ([9ac0a63](https://github.com/jobvs/native-components/commit/9ac0a63))
