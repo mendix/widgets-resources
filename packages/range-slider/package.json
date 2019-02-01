@@ -15,7 +15,8 @@
         "build:release": "NODE_ENV=production npm run gulp build",
         "gulp": "../../node_modules/.bin/gulp --gulpfile ../../scripts/gulpfile.js --cwd .",
         "lint": "../../node_modules/.bin/tslint --project tsconfig.json --config ../../tslint.json",
-        "postversion": "npm run build && node ../../scripts/UpdateGithubRelease.js"
+        "preversion": "npm run build",
+        "postversion": "node ../../scripts/UpdateGithubRelease.js"
     },
     "dependencies": {
         "@ptomasroos/react-native-multi-slider": "^1.0.0",

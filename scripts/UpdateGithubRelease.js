@@ -1,25 +1,58 @@
-const path = require("path");
 const ghauth = require("ghauth");
 const ghRelease = require("gh-release");
+const { exec } = require("child_process");
 
-const ghauthOpts = {
-    configName: "gh-release",
-    scopes: ["repo"],
-    note: "gh-release",
-    userAgent: "gh-release"
-};
+try {
+    main();
+} catch (error) {
+    handleError(error);
+}
 
-ghauth(ghauthOpts, (error, auth) => {
-    if (error) {
-        return handleError(error);
-    }
-    releaseWithAuth(auth);
-});
+async function main() {
+    await pushTagsIfNeeded();
+    const auth = await getAuth();
+    await releaseWithAuth(auth);
+}
+
+function pushTagsIfNeeded() {
+    return new Promise((resolve, reject) => {
+        exec("git diff --exit-code --quiet origin/master..master", error => {
+            if (!error) {
+                return resolve();
+            }
+            exec("git push --follow-tags", error => {
+                if (error) {
+                    return reject(error);
+                }
+                return resolve();
+            });
+        });
+    });
+}
+
+function getAuth() {
+    return new Promise((resolve, reject) => {
+        const ghauthOptions = {
+            configName: "gh-release",
+            scopes: ["repo"],
+            note: "gh-release", // asd
+            userAgent: "gh-release"
+        };
+
+        ghauth(ghauthOptions, (error, auth) => {
+            if (error) {
+                return reject(error);
+            }
+            resolve(auth);
+        });
+    });
+}
 
 function releaseWithAuth(auth) {
-    const pkg = require(path.resolve(process.cwd(), "package.json"));
-    const tagName = `${pkg.name}@${pkg.version}`;
-    const assets = pkg.config && pkg.config.widgetName ? [`dist/release/${pkg.config.widgetName}.mpk`] : false;
+    const tagName = `${process.env.npm_package_name}@${process.env.npm_package_version}`;
+    const assets = process.env.npm_package_config_widgetName
+        ? [`dist/release/${process.env.npm_package_config_widgetName}.mpk`]
+        : false;
 
     const options = {
         tag_name: tagName,
