@@ -5,6 +5,7 @@ const del = require("del");
 const xml2js = require("gulp-xml2js");
 const change = require("gulp-change");
 const rename = require("gulp-rename");
+const git = require("gulp-git");
 const rollup = require("rollup");
 const rollupConfig = require("./rollup.config");
 const transformXml = require("./GenerateTypings");
@@ -21,13 +22,19 @@ function checkDependencies(cb) {
     cb();
 }
 
-function checkVersion() {
+function updatePackageVersion(cb) {
+    if (process.env.NODE_ENV !== "production") {
+        cb();
+        return;
+    }
+
     return gulp
         .src("./src/package.xml", { base: "./" })
         .pipe(xml2js())
         .pipe(change(updateVersion))
         .pipe(rename("package.xml"))
-        .pipe(gulp.dest("./src"));
+        .pipe(gulp.dest("./src"))
+        .pipe(git.add());
 
     function updateVersion(content) {
         content = JSON.parse(content);
@@ -87,7 +94,7 @@ function copyToDeployment() {
 
 const build = gulp.series(
     checkDependencies,
-    checkVersion,
+    updatePackageVersion,
     clean,
     generateTypings,
     bundle,
