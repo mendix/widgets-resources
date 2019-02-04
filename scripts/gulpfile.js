@@ -21,6 +21,26 @@ function checkDependencies(cb) {
     cb();
 }
 
+function checkVersion() {
+    return gulp
+        .src("./src/package.xml", { base: "./" })
+        .pipe(xml2js())
+        .pipe(change(updateVersion))
+        .pipe(rename("package.xml"))
+        .pipe(gulp.dest("./src"));
+
+    function updateVersion(content) {
+        content = JSON.parse(content);
+        content.package.clientModule[0].$.version = pkg.version;
+        const xml2jsLib = require("xml2js");
+        const xmlBuilder = new xml2jsLib.Builder({
+            renderOpts: { pretty: true, indent: "    " },
+            xmldec: { version: "1.0", encoding: "utf-8" }
+        });
+        return xmlBuilder.buildObject(content);
+    }
+}
+
 function clean() {
     return del(["./dist"]);
 }
@@ -65,7 +85,16 @@ function copyToDeployment() {
         .pipe(gulp.dest(`../test-project/mxproject/deployment/web/widgets`));
 }
 
-const build = gulp.series(checkDependencies, clean, generateTypings, bundle, copyXML, createMpkFile, copyToDeployment);
+const build = gulp.series(
+    checkDependencies,
+    checkVersion,
+    clean,
+    generateTypings,
+    bundle,
+    copyXML,
+    createMpkFile,
+    copyToDeployment
+);
 
 function watch() {
     return gulp.watch("./src/**/*", { ignoreInitial: false }, build);
