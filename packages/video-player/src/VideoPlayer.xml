@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.videoplayer.VideoPlayer" pluginWidget="true" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
+    <name>VideoPlayer</name>
+    <description>My widget description</description>
+    <icon/>
+    <properties>
+        <property key="url" type="attribute">
+            <caption>Video URL</caption>
+            <category>General</category>
+            <description>The URL containing the video. Needs to be MP4</description>
+            <attributeTypes>
+                <attributeType name="String"/>
+            </attributeTypes>
+        </property>
+    </properties>
+</widget>
