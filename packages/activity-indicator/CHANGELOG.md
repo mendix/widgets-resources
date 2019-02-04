@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.3](https://github.com/jobvs/native-components/compare/activity-indicator@0.1.2...activity-indicator@0.1.3) (2019-02-04)
+
+### Performance Improvements
+
+-   production mode build for releases ([c78eef1](https://github.com/jobvs/native-components/commit/c78eef1))
+
 ## [0.1.2](https://github.com/jobvs/native-components/compare/activity-indicator@0.1.1...activity-indicator@0.1.2) (2019-02-04)
 
 ### Bug Fixes
