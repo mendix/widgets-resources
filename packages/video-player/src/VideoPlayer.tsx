@@ -1,27 +1,55 @@
-import * as React from "react";
-import { StyleSheet } from "react-native";
+import React, { Component } from "react";
+import { ActivityIndicator, View } from "react-native";
 import Video from "react-native-video";
+
 import { VideoPlayerProps } from "../typings/VideoPlayerProps";
 
-export class VideoPlayer extends React.PureComponent<VideoPlayerProps, {}> {
-    private styles = StyleSheet.create({
-        backgroundVideo: {
-            position: "absolute",
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            width: 100,
-            height: 100
-        }
-    });
+interface State {
+    loading: boolean;
+}
+
+export class VideoPlayer extends Component<VideoPlayerProps, State> {
+    readonly state = {
+        loading: true
+    };
+
+    private readonly onLoadStartHandler = this.onLoadStart.bind(this);
+    private readonly onLoadHandler = this.onLoad.bind(this);
 
     render(): JSX.Element {
+        const videoUrl = (this.props.videoUrl && this.props.videoUrl.value) || this.props.staticVideoUrl;
         return (
-            <Video
-                source={{ uri: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" }}
-                style={this.styles.backgroundVideo}
-            />
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: this.props.loadingBackgroundColor
+                }}
+            >
+                {this.state.loading && <ActivityIndicator color={this.props.loadingForegroundColor} size="large" />}
+                <Video
+                    source={{ uri: videoUrl }}
+                    paused={!this.props.autoStart}
+                    muted={this.props.muted}
+                    repeat={this.props.loop}
+                    controls={this.props.showControls}
+                    onLoadStart={this.onLoadStartHandler}
+                    onLoad={this.onLoadHandler}
+                    style={{
+                        width: "100%",
+                        height: this.state.loading ? 0 : "100%"
+                    }}
+                />
+            </View>
         );
+    }
+
+    private onLoadStart(): void {
+        this.setState({ loading: true });
+    }
+
+    private onLoad(): void {
+        this.setState({ loading: false });
     }
 }

@@ -1,3 +1,1 @@
-# VideoPlayer
-
-My widget description
+# Video Player Widget

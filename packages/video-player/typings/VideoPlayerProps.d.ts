@@ -8,5 +8,12 @@ interface CommonProps {
 }
 
 export interface VideoPlayerProps extends CommonProps {
-    url: PluginWidget.EditableValue<string>;
+    videoUrl?: PluginWidget.EditableValue<string>;
+    staticVideoUrl?: string;
+    autoStart: boolean;
+    showControls: boolean;
+    muted: boolean;
+    loop: boolean;
+    loadingBackgroundColor: string;
+    loadingForegroundColor: string;
 }
