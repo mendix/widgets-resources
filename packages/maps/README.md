@@ -5,3 +5,7 @@
 * Create ~/.gradle/gradle.properties
 * Add following line `GOOGLE_MAPS_API_KEY=YourRandomApiKeyPlaceHolder`
 
+* for ios
+  * Product -> Scheme -> Edit Scheme (Make sure its DeveloperApp) -> Run -> Environment Variables -> Add `GOOGLE_MAPS_API_KEY` with your value
+
+
