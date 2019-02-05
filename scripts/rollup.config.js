@@ -116,7 +116,8 @@ const config = {
         "react-native",
         "react-native-camera",
         "react-native-maps",
-        "react-native-firebase"
+        "react-native-firebase",
+        "react-native-video"
     ],
     preserveModules: true,
     plugins: [
