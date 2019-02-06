@@ -6,6 +6,7 @@
 
 - Put your api key in to ApiKeys.xcconfig
 - Do a clean build via `cmd + option + shift + K`
+- Remove the app from your simulator to not face with caching issues
 
 #### Android
 
