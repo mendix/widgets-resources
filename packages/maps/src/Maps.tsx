@@ -27,6 +27,7 @@ export class Maps extends Component<MapsProps> {
     render(): JSX.Element {
         return (
             <MapView
+                provider={this.props.provider === "default" ? null : this.props.provider}
                 initialRegion={this.region}
                 onRegionChangeComplete={this.onRegionChangeHandler}
                 mapType={this.props.mapType}
