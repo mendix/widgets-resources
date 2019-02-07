@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Platform } from "react-native";
 import MapView, { Marker, Region } from "react-native-maps";
+import { Option } from "../../../typings/PluginWidget";
 import { MapsProps } from "../typings/MapsProps";
 
 export class Maps extends Component<MapsProps> {
@@ -55,6 +56,7 @@ export class Maps extends Component<MapsProps> {
                 }}
             >
                 {this.renderMarker()}
+                {this.renderMarkers()}
             </MapView>
         );
     }
@@ -64,13 +66,44 @@ export class Maps extends Component<MapsProps> {
             return;
         }
 
+        return this.createMarker(
+            this.props.markerTitle.value,
+            this.props.markerDescription.value,
+            Number(this.props.markerLatitude.value),
+            Number(this.props.markerLongitude.value)
+        );
+    }
+
+    renderMarkers(): JSX.Element[] | undefined {
+        if (!this.props.markers || this.props.markers.length === 0) {
+            return;
+        }
+
+        const markers: JSX.Element[] = [];
+        this.props.markers.forEach(marker => {
+            if (marker.latitude && marker.longitude) {
+                markers.push(
+                    this.createMarker(
+                        marker.title,
+                        marker.description,
+                        Number(marker.latitude),
+                        Number(marker.longitude)
+                    )
+                );
+            }
+        });
+
+        return markers;
+    }
+
+    createMarker(title: Option<string>, description: Option<string>, latitude: number, longitude: number): JSX.Element {
         return (
             <Marker
-                title={this.props.markerTitle.value}
-                description={this.props.markerDescription.value}
+                title={title}
+                description={description}
                 coordinate={{
-                    latitude: Number(this.props.markerLatitude.value),
-                    longitude: Number(this.props.markerLongitude.value)
+                    latitude: Number(latitude),
+                    longitude: Number(longitude)
                 }}
                 onPress={this.onMarkerPressHandler}
             />

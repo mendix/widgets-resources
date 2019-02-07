@@ -38,6 +38,33 @@
                 <attributeType name="Decimal" />
             </attributeTypes>
         </property>
+        <property key="markers" type="object" isList="true" required="false">
+            <caption>Markers</caption>
+            <category>Marker</category>
+            <description>List of markers to be rendered</description>
+            <properties>
+                <property key="title" type="string" required="false">
+                    <caption>Title</caption>
+                    <category>Marker</category>
+                    <description></description>
+                </property>
+                <property key="description" type="string" required="false">
+                    <caption>Description</caption>
+                    <category>Marker</category>
+                    <description></description>
+                </property>
+                <property key="latitude" type="string">
+                    <caption>Latitude</caption>
+                    <category>Marker</category>
+                    <description></description>
+                </property>
+                <property key="longitude" type="string">
+                    <caption>Longitude</caption>
+                    <category>Marker</category>
+                    <description></description>
+                </property>
+            </properties>
+        </property>
 
         <property key="latitude" type="attribute">
             <caption>Latitude</caption>

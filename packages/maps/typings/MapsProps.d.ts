@@ -12,6 +12,12 @@ export interface MapsProps extends CommonProps {
     markerDescription: PluginWidget.EditableValue<string>;
     markerLatitude: PluginWidget.EditableValue<BigJs.Big>;
     markerLongitude: PluginWidget.EditableValue<BigJs.Big>;
+    markers?: Array<{
+        title?: string;
+        description?: string;
+        latitude: string;
+        longitude: string;
+    }>;
     latitude: PluginWidget.EditableValue<BigJs.Big>;
     longitude: PluginWidget.EditableValue<BigJs.Big>;
     latitudeDelta: PluginWidget.EditableValue<BigJs.Big>;
