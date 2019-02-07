@@ -32,7 +32,7 @@ export class Maps extends Component<MapsProps> {
         return (
             <MapView
                 provider={this.props.provider === "default" ? null : this.props.provider}
-                initialRegion={this.region}
+                region={this.region}
                 onRegionChangeComplete={this.onRegionChangeHandler}
                 mapType={mapType}
                 showsUserLocation={this.props.showsUserLocation}
