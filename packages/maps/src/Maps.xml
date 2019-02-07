@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.maps.Maps" needsEntityContext="true" offlineCapable="true" pluginWidget="true" 
-    xmlns="http://www.mendix.com/widget/1.0/" 
+<widget id="com.mendix.widget.native.maps.Maps" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
+    xmlns="http://www.mendix.com/widget/1.0/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
     <name>Maps</name>
     <description>This widget allows you to use native Google or Apple maps views in your application.</description>
@@ -80,6 +80,16 @@
                 <enumerationValue key="standard">Standard road map</enumerationValue>
                 <enumerationValue key="satellite">Satellite view</enumerationValue>
                 <enumerationValue key="hybrid">Satellite view with roads and points of interest overlayed</enumerationValue>
+                <enumerationValue key="terrain">Topographic view (Android only)</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="provider" type="enumeration" defaultValue="default">
+            <caption>Provider</caption>
+            <category>Map properties</category>
+            <description>Map provider. * The default value for iOS is Apple Maps and for Android is Google Maps</description>
+            <enumerationValues>
+                <enumerationValue key="default">Default</enumerationValue>
+                <enumerationValue key="google">Google Maps</enumerationValue>
             </enumerationValues>
         </property>
         <property key="showsUserLocation" type="boolean" defaultValue="false">
@@ -115,7 +125,7 @@
         <property key="showsTraffic" type="boolean" defaultValue="true">
             <caption>Show traffic information</caption>
             <category>Map properties</category>
-            <description/>
+            <description>*Property ignored if type is 'Satellite view'</description>
         </property>
         <property key="showsIndoors" type="boolean" defaultValue="true">
             <caption>Show indoor maps</caption>

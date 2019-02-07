@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
+import { Platform } from "react-native";
 import MapView, { Marker, Region } from "react-native-maps";
 import { MapsProps } from "../typings/MapsProps";
 
@@ -26,35 +26,36 @@ export class Maps extends Component<MapsProps> {
     }
 
     render(): JSX.Element {
+        const showsTraffic = this.props.mapType === "satellite" ? false : this.props.showsTraffic;
+        const isAndroid = Platform.OS === "android";
+        const mapType = this.props.mapType === "terrain" && !isAndroid ? "standard" : this.props.mapType;
         return (
-            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-                {!this.region ? (
-                    <Text>No region defined</Text>
-                ) : (
-                    <MapView
-                        style={{ flex: 1 }}
-                        initialRegion={this.region}
-                        onRegionChangeComplete={this.onRegionChangeHandler}
-                        mapType={this.props.mapType}
-                        showsUserLocation={this.props.showsUserLocation}
-                        showsMyLocationButton={this.props.showsMyLocationButton}
-                        showsPointsOfInterest={this.props.showsPointsOfInterest}
-                        showsCompass={this.props.showsCompass}
-                        showsScale={this.props.showsScale}
-                        showsBuildings={this.props.showsBuildings}
-                        showsTraffic={this.props.showsTraffic}
-                        showsIndoors={this.props.showsIndoors}
-                        zoomEnabled={this.props.zoomEnabled}
-                        minZoomLevel={this.props.minZoomLevel}
-                        maxZoomLevel={this.props.maxZoomLevel}
-                        rotateEnabled={this.props.rotateEnabled}
-                        scrollEnabled={this.props.scrollEnabled}
-                        pitchEnabled={this.props.pitchEnabled}
-                    >
-                        {this.renderMarker()}
-                    </MapView>
-                )}
-            </View>
+            <MapView
+                provider={this.props.provider === "default" ? null : this.props.provider}
+                region={this.region}
+                onRegionChangeComplete={this.onRegionChangeHandler}
+                mapType={mapType}
+                showsUserLocation={this.props.showsUserLocation}
+                showsMyLocationButton={this.props.showsMyLocationButton}
+                showsPointsOfInterest={this.props.showsPointsOfInterest}
+                showsCompass={this.props.showsCompass}
+                showsScale={this.props.showsScale}
+                showsBuildings={this.props.showsBuildings}
+                showsTraffic={showsTraffic}
+                showsIndoors={this.props.showsIndoors}
+                zoomEnabled={this.props.zoomEnabled}
+                minZoomLevel={this.props.minZoomLevel}
+                maxZoomLevel={this.props.maxZoomLevel}
+                rotateEnabled={this.props.rotateEnabled}
+                scrollEnabled={this.props.scrollEnabled}
+                pitchEnabled={this.props.pitchEnabled}
+                style={{
+                    width: "100%",
+                    height: "100%"
+                }}
+            >
+                {this.renderMarker()}
+            </MapView>
         );
     }
 

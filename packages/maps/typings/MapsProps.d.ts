@@ -16,7 +16,8 @@ export interface MapsProps extends CommonProps {
     longitude: PluginWidget.EditableValue<BigJs.Big>;
     latitudeDelta: PluginWidget.EditableValue<BigJs.Big>;
     longitudeDelta: PluginWidget.EditableValue<BigJs.Big>;
-    mapType: "standard" | "satellite" | "hybrid";
+    mapType: "standard" | "satellite" | "hybrid" | "terrain";
+    provider: "default" | "google";
     showsUserLocation: boolean;
     showsMyLocationButton: boolean;
     showsPointsOfInterest: boolean;
