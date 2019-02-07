@@ -6,7 +6,6 @@ import { MapsProps } from "../typings/MapsProps";
 
 export class Maps extends Component<MapsProps> {
     private readonly onRegionChangeHandler = this.onRegionChange.bind(this);
-    private readonly onMarkerPressHandler = this.onMarkerPress.bind(this);
 
     get region(): Region | undefined {
         if (
@@ -71,7 +70,7 @@ export class Maps extends Component<MapsProps> {
             Number(this.props.markerLongitude.value),
             this.props.markerTitle.value,
             this.props.markerDescription.value,
-            this.onMarkerPressHandler
+            this.props.onMarkerPress
         );
     }
 
@@ -86,7 +85,7 @@ export class Maps extends Component<MapsProps> {
                 Number(marker.longitude),
                 marker.title,
                 marker.description,
-                marker.action && marker.action.canExecute ? marker.action.execute : undefined
+                marker.action
             )
         );
     }
@@ -96,8 +95,9 @@ export class Maps extends Component<MapsProps> {
         longitude: number,
         title?: string,
         description?: string,
-        action?: () => void
+        action?: PluginWidget.ActionValue
     ): JSX.Element {
+        const onPress = () => onMarkerPress(action);
         return (
             <Marker
                 title={title}
@@ -106,7 +106,7 @@ export class Maps extends Component<MapsProps> {
                     latitude: Number(latitude),
                     longitude: Number(longitude)
                 }}
-                onPress={action}
+                onPress={onPress}
             />
         );
     }
@@ -121,10 +121,10 @@ export class Maps extends Component<MapsProps> {
             this.props.onRegionChange.execute();
         }
     }
+}
 
-    private onMarkerPress(): void {
-        if (this.props.onMarkerPress && this.props.onMarkerPress.canExecute) {
-            this.props.onMarkerPress.execute();
-        }
+function onMarkerPress(action?: PluginWidget.ActionValue): void {
+    if (action && action.canExecute) {
+        action.execute();
     }
 }
