@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Platform } from "react-native";
 import MapView, { Marker, Region } from "react-native-maps";
-import { Option } from "../../../typings/PluginWidget";
+
 import { MapsProps } from "../typings/MapsProps";
 
 export class Maps extends Component<MapsProps> {
@@ -55,48 +55,36 @@ export class Maps extends Component<MapsProps> {
                     height: "100%"
                 }}
             >
-                {this.renderMarker()}
-                {this.renderMarkers()}
+                {this.renderDynamicMarker()}
+                {this.renderStaticMarkers()}
             </MapView>
         );
     }
 
-    renderMarker(): JSX.Element | undefined {
+    renderDynamicMarker(): JSX.Element | undefined {
         if (this.props.markerLatitude.value == null || this.props.markerLongitude.value == null) {
             return;
         }
 
-        return this.createMarker(
-            this.props.markerTitle.value,
-            this.props.markerDescription.value,
+        return this.renderMarker(
             Number(this.props.markerLatitude.value),
-            Number(this.props.markerLongitude.value)
+            Number(this.props.markerLongitude.value),
+            this.props.markerTitle.value,
+            this.props.markerDescription.value
         );
     }
 
-    renderMarkers(): JSX.Element[] | undefined {
+    renderStaticMarkers(): JSX.Element[] | undefined {
         if (!this.props.markers || this.props.markers.length === 0) {
             return;
         }
 
-        const markers: JSX.Element[] = [];
-        this.props.markers.forEach(marker => {
-            if (marker.latitude && marker.longitude) {
-                markers.push(
-                    this.createMarker(
-                        marker.title,
-                        marker.description,
-                        Number(marker.latitude),
-                        Number(marker.longitude)
-                    )
-                );
-            }
-        });
-
-        return markers;
+        return this.props.markers.map(marker =>
+            this.renderMarker(Number(marker.latitude), Number(marker.longitude), marker.title, marker.description)
+        );
     }
 
-    createMarker(title: Option<string>, description: Option<string>, latitude: number, longitude: number): JSX.Element {
+    renderMarker(latitude: number, longitude: number, title?: string, description?: string): JSX.Element {
         return (
             <Marker
                 title={title}
