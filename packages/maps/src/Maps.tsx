@@ -70,7 +70,8 @@ export class Maps extends Component<MapsProps> {
             Number(this.props.markerLatitude.value),
             Number(this.props.markerLongitude.value),
             this.props.markerTitle.value,
-            this.props.markerDescription.value
+            this.props.markerDescription.value,
+            this.onMarkerPressHandler
         );
     }
 
@@ -80,11 +81,23 @@ export class Maps extends Component<MapsProps> {
         }
 
         return this.props.markers.map(marker =>
-            this.renderMarker(Number(marker.latitude), Number(marker.longitude), marker.title, marker.description)
+            this.renderMarker(
+                Number(marker.latitude),
+                Number(marker.longitude),
+                marker.title,
+                marker.description,
+                marker.action && marker.action.canExecute ? marker.action.execute : undefined
+            )
         );
     }
 
-    renderMarker(latitude: number, longitude: number, title?: string, description?: string): JSX.Element {
+    renderMarker(
+        latitude: number,
+        longitude: number,
+        title?: string,
+        description?: string,
+        action?: () => void
+    ): JSX.Element {
         return (
             <Marker
                 title={title}
@@ -93,7 +106,7 @@ export class Maps extends Component<MapsProps> {
                     latitude: Number(latitude),
                     longitude: Number(longitude)
                 }}
-                onPress={this.onMarkerPressHandler}
+                onPress={action}
             />
         );
     }
