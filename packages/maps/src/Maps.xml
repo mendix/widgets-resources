@@ -80,6 +80,7 @@
                 <enumerationValue key="standard">Standard road map</enumerationValue>
                 <enumerationValue key="satellite">Satellite view</enumerationValue>
                 <enumerationValue key="hybrid">Satellite view with roads and points of interest overlayed</enumerationValue>
+                <enumerationValue key="terrain">Topographic view (Android only)</enumerationValue>
             </enumerationValues>
         </property>
         <property key="provider" type="enumeration" defaultValue="default">
@@ -124,7 +125,7 @@
         <property key="showsTraffic" type="boolean" defaultValue="true">
             <caption>Show traffic information</caption>
             <category>Map properties</category>
-            <description/>
+            <description>*Property ignored if type is 'Satellite view'</description>
         </property>
         <property key="showsIndoors" type="boolean" defaultValue="true">
             <caption>Show indoor maps</caption>
