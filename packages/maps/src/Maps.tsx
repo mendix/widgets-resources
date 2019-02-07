@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Platform } from "react-native";
 import MapView, { Marker, Region } from "react-native-maps";
+
 import { MapsProps } from "../typings/MapsProps";
 
 export class Maps extends Component<MapsProps> {
@@ -54,23 +55,43 @@ export class Maps extends Component<MapsProps> {
                     height: "100%"
                 }}
             >
-                {this.renderMarker()}
+                {this.renderDynamicMarker()}
+                {this.renderStaticMarkers()}
             </MapView>
         );
     }
 
-    renderMarker(): JSX.Element | undefined {
+    renderDynamicMarker(): JSX.Element | undefined {
         if (this.props.markerLatitude.value == null || this.props.markerLongitude.value == null) {
             return;
         }
 
+        return this.renderMarker(
+            Number(this.props.markerLatitude.value),
+            Number(this.props.markerLongitude.value),
+            this.props.markerTitle.value,
+            this.props.markerDescription.value
+        );
+    }
+
+    renderStaticMarkers(): JSX.Element[] | undefined {
+        if (!this.props.markers || this.props.markers.length === 0) {
+            return;
+        }
+
+        return this.props.markers.map(marker =>
+            this.renderMarker(Number(marker.latitude), Number(marker.longitude), marker.title, marker.description)
+        );
+    }
+
+    renderMarker(latitude: number, longitude: number, title?: string, description?: string): JSX.Element {
         return (
             <Marker
-                title={this.props.markerTitle.value}
-                description={this.props.markerDescription.value}
+                title={title}
+                description={description}
                 coordinate={{
-                    latitude: Number(this.props.markerLatitude.value),
-                    longitude: Number(this.props.markerLongitude.value)
+                    latitude: Number(latitude),
+                    longitude: Number(longitude)
                 }}
                 onPress={this.onMarkerPressHandler}
             />
