@@ -6,7 +6,6 @@ import { MapsProps } from "../typings/MapsProps";
 
 export class Maps extends Component<MapsProps> {
     private readonly onRegionChangeHandler = this.onRegionChange.bind(this);
-    private readonly onMarkerPressHandler = this.onMarkerPress.bind(this);
 
     get region(): Region | undefined {
         if (
@@ -70,7 +69,8 @@ export class Maps extends Component<MapsProps> {
             Number(this.props.markerLatitude.value),
             Number(this.props.markerLongitude.value),
             this.props.markerTitle.value,
-            this.props.markerDescription.value
+            this.props.markerDescription.value,
+            this.props.onMarkerPress
         );
     }
 
@@ -80,11 +80,24 @@ export class Maps extends Component<MapsProps> {
         }
 
         return this.props.markers.map(marker =>
-            this.renderMarker(Number(marker.latitude), Number(marker.longitude), marker.title, marker.description)
+            this.renderMarker(
+                Number(marker.latitude),
+                Number(marker.longitude),
+                marker.title,
+                marker.description,
+                marker.action
+            )
         );
     }
 
-    renderMarker(latitude: number, longitude: number, title?: string, description?: string): JSX.Element {
+    renderMarker(
+        latitude: number,
+        longitude: number,
+        title?: string,
+        description?: string,
+        action?: PluginWidget.ActionValue
+    ): JSX.Element {
+        const onPress = () => onMarkerPress(action);
         return (
             <Marker
                 title={title}
@@ -93,7 +106,7 @@ export class Maps extends Component<MapsProps> {
                     latitude: Number(latitude),
                     longitude: Number(longitude)
                 }}
-                onPress={this.onMarkerPressHandler}
+                onPress={onPress}
             />
         );
     }
@@ -108,10 +121,10 @@ export class Maps extends Component<MapsProps> {
             this.props.onRegionChange.execute();
         }
     }
+}
 
-    private onMarkerPress(): void {
-        if (this.props.onMarkerPress && this.props.onMarkerPress.canExecute) {
-            this.props.onMarkerPress.execute();
-        }
+function onMarkerPress(action?: PluginWidget.ActionValue): void {
+    if (action && action.canExecute) {
+        action.execute();
     }
 }

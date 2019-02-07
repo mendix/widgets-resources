@@ -61,6 +61,11 @@
                     <category>Marker</category>
                     <description></description>
                 </property>
+                <property key="action" type="action" required="false">
+                    <caption>On marker press action</caption>
+                    <category>Marker</category>
+                    <description></description>
+                </property>
             </properties>
         </property>
 
