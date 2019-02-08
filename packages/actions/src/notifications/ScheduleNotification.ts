@@ -16,7 +16,7 @@ import ReactNativeFirebase from "react-native-firebase";
  * @param {string} subtitle
  * @param {boolean} playSound
  * @param {Big} iosBadgeNumber
- * @returns {boolean}
+ * @returns {string}
  */
 function ScheduleNotification(
     date?: Date,

@@ -12,7 +12,7 @@ import ReactNative from "react-native";
  * @param {string} bcc - The BCC recipient(s).
  * @param {string} subject
  * @param {string} body
- * @returns {boolean}
+ * @returns {string}
  */
 function DraftEmail(recipient?: string, cc?: string, bcc?: string, subject?: string, body?: string): Promise<void> {
     // BEGIN USER CODE

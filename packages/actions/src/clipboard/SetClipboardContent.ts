@@ -8,9 +8,9 @@ import ReactNative from "react-native";
 
 /**
  * @param {string} content - This field is required.
- * @returns {boolean}
+ * @returns {string}
  */
-function SetClipboardContent(content?: string): Promise<void> {
+function SetClipboardContent(content?: string): void {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/clipboard#setstring
 
@@ -21,8 +21,6 @@ function SetClipboardContent(content?: string): Promise<void> {
     }
 
     Clipboard.setString(content);
-
-    return Promise.resolve();
 
     // END USER CODE
 }

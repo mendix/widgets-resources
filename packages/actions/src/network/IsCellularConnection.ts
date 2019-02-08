@@ -14,9 +14,7 @@ function IsCellularConnection(): Promise<boolean> {
 
     const NetInfo: typeof ReactNative.NetInfo = require("react-native").NetInfo;
 
-    return NetInfo.getConnectionInfo().then(info => {
-        return info.type === "cell";
-    });
+    return NetInfo.getConnectionInfo().then(({ type }) => type === "cell");
 
     // END USER CODE
 }

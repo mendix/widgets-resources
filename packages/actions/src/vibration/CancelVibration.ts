@@ -7,16 +7,15 @@
 import ReactNative from "react-native";
 
 /**
- * @returns {boolean}
+ * @returns {string}
  */
-function CancelVibration(): Promise<void> {
+function CancelVibration(): void {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/vibration#cancel
 
     const Vibration: typeof ReactNative.Vibration = require("react-native").Vibration;
 
     Vibration.cancel();
-    return Promise.resolve();
 
     // END USER CODE
 }

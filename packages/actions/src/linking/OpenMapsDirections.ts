@@ -8,7 +8,7 @@ import ReactNative from "react-native";
 
 /**
  * @param {string} destinationAddress - This field is required.
- * @returns {boolean}
+ * @returns {string}
  */
 function OpenMapsDirections(destinationAddress?: string): Promise<void> {
     // BEGIN USER CODE
