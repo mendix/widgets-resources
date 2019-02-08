@@ -12,7 +12,7 @@
         min-height: 50px;
         li.mx-menubar-item {
             margin: 0;
-             > a {
+            > a {
                 display: flex;
                 overflow: hidden;
                 align-items: center;
@@ -56,7 +56,7 @@
     }
 }
 
-// Vertical variation specifics 
+// Vertical variation specifics
 .mx-menubar-vertical {
     background-color: $navigation-bg;
     ul.mx-menubar-list {
@@ -70,9 +70,9 @@
     }
 }
 
-// Horizontal variation specifics 
+// Horizontal variation specifics
 .mx-menubar-horizontal {
-    box-shadow: 2px 0 4px 0 rgba(0,0,0,0.14);
+    box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.14);
     ul.mx-menubar-list {
         li.mx-menubar-item {
             width: auto;
@@ -135,7 +135,7 @@
         }
     }
 
-    // Vertical variation specifics 
+    // Vertical variation specifics
     .mx-menubar-vertical {
         background-color: $navtopbar-bg;
         ul.mx-menubar-list {
@@ -178,7 +178,7 @@
         }
     }
 
-    // Vertical variation specifics 
+    // Vertical variation specifics
     .mx-menubar-vertical {
         background-color: $navsidebar-bg;
         ul.mx-menubar-list {
@@ -203,6 +203,9 @@
                 padding: 8px 8px 6px 8px;
                 line-height: normal;
                 font-size: 11px;
+                &:focus {
+                    outline: none;
+                }
                 .glyphicon {
                     display: block;
                     margin: 0 0 5px 0;
