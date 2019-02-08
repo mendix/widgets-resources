@@ -114,6 +114,7 @@ const config = {
         "react",
         "react-dom",
         "react-native",
+        "react-native/Libraries/StyleSheet/StyleSheet",
         "react-native-camera",
         "react-native-maps",
         "react-native-firebase",
@@ -125,7 +126,11 @@ const config = {
         rollupTypescript2({ cacheRoot: "./dist/rpt2_cache" }),
         rollupBabel({
             exclude: [/node_modules\/colorsys/],
-            plugins: ["@babel/plugin-transform-react-jsx", "@babel/plugin-proposal-class-properties"]
+            plugins: [
+                "@babel/plugin-transform-react-jsx",
+                "@babel/plugin-proposal-class-properties",
+                "@babel/plugin-transform-flow-strip-types"
+            ]
         }),
         rollupCommonjs({ include: /node_modules/ }),
         ...(isProduction ? [rollupTerser.terser()] : []),
