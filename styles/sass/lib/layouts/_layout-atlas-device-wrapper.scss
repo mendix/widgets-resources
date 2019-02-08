@@ -1,9 +1,12 @@
 .devicephone {
-    width: 340px;
-    height: 600px;
+    width: 320px;
+    height: 665px;
     margin: auto;
-    padding: 120px 40px;
+    padding: 93px 21px 80px 20px;
     background: url(../../../resources/phone.png) no-repeat center center;
+    .deviceframe {
+        border-radius: 30px;
+    }
 }
 
 .devicetablet {
