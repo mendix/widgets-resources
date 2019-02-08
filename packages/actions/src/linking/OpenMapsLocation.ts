@@ -8,7 +8,7 @@ import ReactNative from "react-native";
 
 /**
  * @param {string} query - This field is required.
- * @returns {boolean}
+ * @returns {string}
  */
 function OpenMapsLocation(query?: string): Promise<void> {
     // BEGIN USER CODE

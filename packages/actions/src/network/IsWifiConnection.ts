@@ -14,9 +14,7 @@ function IsWifiConnection(): Promise<boolean> {
 
     const NetInfo: typeof ReactNative.NetInfo = require("react-native").NetInfo;
 
-    return NetInfo.getConnectionInfo().then(info => {
-        return info.type === "wifi";
-    });
+    return NetInfo.getConnectionInfo().then(({ type }) => type === "wifi");
 
     // END USER CODE
 }

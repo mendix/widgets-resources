@@ -7,9 +7,9 @@
 import ReactNativeFirebase from "react-native-firebase";
 
 /**
- * @returns {boolean}
+ * @returns {string}
  */
-function SetBadgeNumber(badgeNumber?: BigJs.Big): Promise<void> {
+function SetBadgeNumber(badgeNumber?: BigJs.Big): void {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/reference/Notifications#setBadge
 
@@ -24,7 +24,6 @@ function SetBadgeNumber(badgeNumber?: BigJs.Big): Promise<void> {
     }
 
     firebase.notifications().setBadge(Number(badgeNumber));
-    return Promise.resolve();
 
     // END USER CODE
 }

@@ -8,16 +8,15 @@ import ReactNativeFirebase from "react-native-firebase";
 
 /**
  * Cancels all pending scheduled notifications.
- * @returns {boolean}
+ * @returns {string}
  */
-function CancelAllScheduledNotifications(): Promise<void> {
+function CancelAllScheduledNotifications(): void {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/reference/Notifications#cancelAllNotifications
 
     const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     firebase.notifications().cancelAllNotifications();
-    return Promise.resolve();
 
     // END USER CODE
 }

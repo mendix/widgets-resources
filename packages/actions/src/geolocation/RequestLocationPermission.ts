@@ -5,14 +5,13 @@
 // Other code you write will be lost the next time you deploy the project.
 
 /**
- * @returns {boolean}
+ * @returns {string}
  */
-function RequestLocationPermission(): Promise<void> {
+function RequestLocationPermission(): void {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/geolocation#requestauthorization
 
     navigator.geolocation.requestAuthorization();
-    return Promise.resolve();
 
     // END USER CODE
 }
