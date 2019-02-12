@@ -1,4 +1,4 @@
 {
     "extends": "../../tsconfig.base.json",
-    "include": ["../../typings/PluginWidget.d.ts", "./src"]
+    "include": ["../../typings/PluginWidget.d.ts", "./typings/ReactNativeSegmentedControlTab.d.ts", "./src"]
 }

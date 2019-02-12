@@ -17,7 +17,7 @@ export class SegmentedControl extends Component<SegmentedControlProps> {
             <SegmentedControlTab
                 values={this.values}
                 selectedIndex={selectedIndex}
-                enable={this.props.editable !== "never" && !this.props.enum.readOnly}
+                enabled={this.props.editable !== "never" && !this.props.enum.readOnly}
                 onTabPress={this.onChangeHandler}
             />
         );
