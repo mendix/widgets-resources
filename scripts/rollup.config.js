@@ -119,7 +119,8 @@ const config = {
         "react-native-maps",
         "react-native-firebase",
         "react-native-video",
-        "react-native-svg"
+        "react-native-svg",
+        "react-native-webview"
     ],
     preserveModules: true,
     plugins: [
