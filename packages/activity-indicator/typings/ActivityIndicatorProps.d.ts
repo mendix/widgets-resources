@@ -1,5 +1,7 @@
 /**
- * Auto-generated from ActivityIndicator.xml
+ * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
+ * File generated based on ActivityIndicator.xml
+ * @author Mendix Widgets Team
  */
 
 interface CommonProps {
@@ -7,7 +9,9 @@ interface CommonProps {
     class: string;
 }
 
+export type SizeEnum = "small" | "large";
+
 export interface ActivityIndicatorProps extends CommonProps {
     color: string;
-    size: "small" | "large";
+    size: SizeEnum;
 }

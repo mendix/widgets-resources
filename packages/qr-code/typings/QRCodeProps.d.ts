@@ -1,5 +1,7 @@
 /**
- * Auto-generated from QRCode.xml
+ * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
+ * File generated based on QRCode.xml
+ * @author Mendix Widgets Team
  */
 
 interface CommonProps {

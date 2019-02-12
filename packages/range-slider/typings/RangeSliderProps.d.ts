@@ -1,11 +1,15 @@
 /**
- * Auto-generated from RangeSlider.xml
+ * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
+ * File generated based on RangeSlider.xml
+ * @author Mendix Widgets Team
  */
 
 interface CommonProps {
     id: string;
     class: string;
 }
+
+export type EditableEnum = "default" | "never";
 
 export interface RangeSliderProps extends CommonProps {
     lowerValue: PluginWidget.EditableValue<BigJs.Big>;
@@ -14,7 +18,7 @@ export interface RangeSliderProps extends CommonProps {
     maximumValue?: PluginWidget.EditableValue<BigJs.Big>;
     defaultMinimumValue: number;
     defaultMaximumValue: number;
-    editable: "default" | "never";
+    editable: EditableEnum;
     onChange?: PluginWidget.ActionValue;
     onSlidingComplete?: PluginWidget.ActionValue;
     step?: PluginWidget.EditableValue<BigJs.Big>;

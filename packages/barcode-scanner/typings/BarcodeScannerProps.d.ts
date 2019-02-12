@@ -1,5 +1,7 @@
 /**
- * Auto-generated from BarcodeScanner.xml
+ * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
+ * File generated based on BarcodeScanner.xml
+ * @author Mendix Widgets Team
  */
 
 interface CommonProps {

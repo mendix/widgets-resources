@@ -1,5 +1,7 @@
 /**
- * Auto-generated from Rating.xml
+ * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
+ * File generated based on Rating.xml
+ * @author Mendix Widgets Team
  */
 
 interface CommonProps {
@@ -7,12 +9,16 @@ interface CommonProps {
     class: string;
 }
 
+export type EditableEnum = "default" | "never";
+
+export type IconEnum = "star" | "heart" | "rocket" | "bell";
+
 export interface RatingProps extends CommonProps {
     rating: PluginWidget.EditableValue<BigJs.Big>;
     maximumValue: number;
     fractions: number;
-    editable: "default" | "never";
+    editable: EditableEnum;
     onChange?: PluginWidget.ActionValue;
-    icon: "star" | "heart" | "rocket" | "bell";
+    icon: IconEnum;
     iconSize: number;
 }

@@ -1,5 +1,7 @@
 /**
- * Auto-generated from PushNotifications.xml
+ * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
+ * File generated based on PushNotifications.xml
+ * @author Mendix Widgets Team
  */
 
 interface CommonProps {
@@ -7,10 +9,12 @@ interface CommonProps {
     class: string;
 }
 
+export interface ActionsType {
+    name: string;
+    onReceive?: PluginWidget.ActionValue;
+    onOpen?: PluginWidget.ActionValue;
+}
+
 export interface PushNotificationsProps extends CommonProps {
-    actions: Array<{
-        name: string;
-        onReceive?: PluginWidget.ActionValue;
-        onOpen?: PluginWidget.ActionValue;
-    }>;
+    actions: ActionsType[];
 }

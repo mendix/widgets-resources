@@ -1,5 +1,7 @@
 /**
- * Auto-generated from Maps.xml
+ * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
+ * File generated based on Maps.xml
+ * @author Mendix Widgets Team
  */
 
 interface CommonProps {
@@ -7,24 +9,30 @@ interface CommonProps {
     class: string;
 }
 
+export interface MarkersType {
+    latitude: string;
+    longitude: string;
+    title?: string;
+    description?: string;
+    action?: PluginWidget.ActionValue;
+}
+
+export type MapTypeEnum = "standard" | "satellite" | "hybrid" | "terrain";
+
+export type ProviderEnum = "default" | "google";
+
 export interface MapsProps extends CommonProps {
     markerTitle: PluginWidget.EditableValue<string>;
     markerDescription: PluginWidget.EditableValue<string>;
     markerLatitude: PluginWidget.EditableValue<BigJs.Big>;
     markerLongitude: PluginWidget.EditableValue<BigJs.Big>;
-    markers?: Array<{
-        latitude: string;
-        longitude: string;
-        title?: string;
-        description?: string;
-        action?: PluginWidget.ActionValue;
-    }>;
+    markers?: MarkersType[];
     latitude: PluginWidget.EditableValue<BigJs.Big>;
     longitude: PluginWidget.EditableValue<BigJs.Big>;
     latitudeDelta: PluginWidget.EditableValue<BigJs.Big>;
     longitudeDelta: PluginWidget.EditableValue<BigJs.Big>;
-    mapType: "standard" | "satellite" | "hybrid" | "terrain";
-    provider: "default" | "google";
+    mapType: MapTypeEnum;
+    provider: ProviderEnum;
     showsUserLocation: boolean;
     showsMyLocationButton: boolean;
     showsPointsOfInterest: boolean;
