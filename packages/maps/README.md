@@ -10,7 +10,6 @@
 
 #### Android
 
-- Create ~/.gradle/gradle.properties
-- Add following line `GOOGLE_MAPS_API_KEY=YourRandomApiKey`
+- Create `google-maps-api-key` file in `android/app` and put your api key in the file as only context. No quotes needed.
 
 
