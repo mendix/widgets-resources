@@ -46,6 +46,7 @@
         "react-native-image-picker": "^0.28.0",
         "react-native-maps": "^0.23.0",
         "react-native-sound": "^0.10.12",
+        "react-native-svg": "^9.2.3",
         "react-native-touch-id": "^4.3.0",
         "react-native-video": "^4.3.1",
         "rollup": "^1.1.2",

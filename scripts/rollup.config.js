@@ -115,11 +115,12 @@ const config = {
         "react-dom",
         "react-native",
         "react-native/Libraries/StyleSheet/StyleSheet",
+        /\/react-native\//,
         "react-native-camera",
-        "react-native-maps",
         "react-native-firebase",
-        "react-native-video",
+        "react-native-maps",
         "react-native-svg",
+        "react-native-video",
         "react-native-webview"
     ],
     preserveModules: true,
@@ -136,7 +137,12 @@ const config = {
                 "@babel/plugin-transform-flow-strip-types"
             ]
         }),
-        rollupCommonjs({ include: /node_modules/ }),
+        rollupCommonjs({
+            include: /node_modules/,
+            namedExports: {
+                "d3-interpolate-path": ["interpolatePath"]
+            }
+        }),
         ...(isProduction ? [rollupTerser.terser()] : []),
         fixPreservedModules(),
         /** Replace inlineNativeAssets by copyNativeAssets when the native app supports this */

@@ -82,14 +82,14 @@ function createMpkFile() {
     return gulp
         .src("./dist/tmp/widgets/**/*")
         .pipe(zip(`${pkg.config.widgetName}.mpk`))
-        .pipe(gulp.dest("../test-project/mxproject/widgets"))
+        .pipe(gulp.dest("../../packages/test-project/mxproject/widgets"))
         .pipe(gulp.dest(`./dist/release`));
 }
 
 function copyToDeployment() {
     return gulp
         .src(["./dist/tmp/widgets/**/*", "!./dist/tmp/widgets/package.xml"])
-        .pipe(gulp.dest(`../test-project/mxproject/deployment/web/widgets`));
+        .pipe(gulp.dest(`../../packages/test-project/mxproject/deployment/web/widgets`));
 }
 
 const build = gulp.series(

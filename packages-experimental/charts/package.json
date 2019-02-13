@@ -1,0 +1,28 @@
+{
+    "name": "charts",
+    "version": "0.0.1",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jobvs/native-components.git"
+    },
+    "config": {
+        "widgetName": "Charts"
+    },
+    "scripts": {
+        "start": "npm run gulp watch",
+        "build": "npm run gulp build",
+        "build:release": "NODE_ENV=production npm run gulp build",
+        "gulp": "../../node_modules/.bin/gulp --gulpfile ../../scripts/gulpfile.js --cwd .",
+        "lint": "../../node_modules/.bin/tslint --project tsconfig.json --config ../../tslint.json",
+        "version": "npm run build:release",
+        "postversion": "node ../../scripts/UpdateGithubRelease.js"
+    },
+    "devDependencies": {
+        "@types/d3-shape": "^1.2.8",
+        "@types/react-native-svg-charts": "^5.0.1"
+    },
+    "dependencies": {
+        "react-native-svg-charts": "^5.2.0"
+    }
+}
