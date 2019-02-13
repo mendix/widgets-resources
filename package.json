@@ -38,9 +38,9 @@
         "prettier": "^1.16.1",
         "pretty-quick": "^1.10.0",
         "react": "^16.7.0",
+        "react-native-add-calendar-event": "^2.2.0",
         "react-dom": "^16.7.0",
         "react-native": "^0.58.1",
-        "react-native-add-calendar-event": "^2.2.0",
         "react-native-camera": "^1.9.2",
         "react-native-firebase": "^5.2.1",
         "react-native-image-picker": "^0.28.0",
@@ -58,7 +58,8 @@
         "tslint": "^5.12.1",
         "tslint-config-prettier": "^1.17.0",
         "tslint-react": "^3.6.0",
-        "typescript": "^3.2.4"
+        "typescript": "^3.2.4",
+        "widget-typing-generator": "^0.0.1"
     },
     "husky": {
         "hooks": {

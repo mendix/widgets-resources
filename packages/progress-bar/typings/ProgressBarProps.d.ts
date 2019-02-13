@@ -1,6 +1,5 @@
 /**
  * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
- * File generated based on ProgressBar.xml
  * @author Mendix Widgets Team
  */
 
