@@ -5,7 +5,8 @@
     padding: 93px 21px 80px 20px;
     background: url(../../../resources/phone.png) no-repeat center center;
     .deviceframe {
-        border-radius: 30px;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
     }
 }
 
