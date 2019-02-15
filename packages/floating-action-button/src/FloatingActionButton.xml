@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.native.floatingactionbutton.FloatingActionButton" supportedPlatform="Native" needsEntityContext="false" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
+    <name>Floating action button</name>
+    <description>Add a floating action button to your app</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Button">
+                <property key="icon" type="image">
+                    <caption>Icon</caption>
+                    <description/>
+                </property>
+                <property key="iconActive" type="image" required="false">
+                    <caption>Secondary icon</caption>
+                    <description>The secondary icon will be shown when the secondary buttons are visible.</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Position">
+                <property key="horizontalPosition" type="enumeration" defaultValue="right">
+                    <caption>Horizontal</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="left">Left</enumerationValue>
+                        <enumerationValue key="center">Center</enumerationValue>
+                        <enumerationValue key="right">Right</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="verticalPosition" type="enumeration" defaultValue="bottom">
+                    <caption>Vertical</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="top">Top</enumerationValue>
+                        <enumerationValue key="bottom">Bottom</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onPress" type="action">
+                    <caption>On click</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Secondary buttons">
+            <property key="speedDialButtons" type="object" isList="true" required="false">
+                <caption>Buttons</caption>
+                <description>The secondary buttons animate in when the main button is pressed.</description>
+                <properties>
+                    <propertyGroup caption="Action">
+                        <property key="icon" type="image">
+                            <caption>Icon</caption>
+                            <description/>
+                        </property>
+                        <property key="caption" type="textTemplate" required="false">
+                            <caption>Caption</caption>
+                            <description/>
+                        </property>
+                        <property key="action" type="action">
+                            <caption>On click</caption>
+                            <description/>
+                        </property>
+                    </propertyGroup>
+                </properties>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
