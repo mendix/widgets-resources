@@ -1,0 +1,36 @@
+//
+// Atlas-UI-Framework v2.0.0 (https://atlas.mendix.com/)
+// Copyright (c) 2018 Mendix
+// Licensed under MIT (https://github.com/mendix/Atlas-UI-Framework/blob/master/LICENSE)
+//
+
+// Custom variables
+@import "app/custom_variables";
+
+
+
+//================================== CORE ==================================\\
+// Default variables
+@import "core/variables";
+
+// Base
+@import "core/base/__all";
+
+// Components
+@import "core/widgets/__all";
+
+// Custom widgets
+@import "core/widgetscustom/__all";
+
+
+
+//================================= CUSTOM =================================\\
+
+// Building blocks
+@import "resources/atlas_resources_default/buildingblocks/__all";
+
+// Layouts
+@import "resources/atlas_resources_default/layouts/__all";
+
+// Custom
+@import "app/custom";

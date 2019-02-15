@@ -4,6 +4,9 @@
         "styles/css/lib/lib.css",
         "styles/css/custom/custom.css"
     ],
+    "jsFiles": [
+        "styles/native/"
+    ],
     "designProperties": {
         "Widget": [{
                 "name": "Spacing top",

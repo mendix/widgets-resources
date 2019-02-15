@@ -3,6 +3,8 @@
 **/.sass-cache/*
 *.css.map
 
+**/directoryList*.md
+
 # Mac OS file
 .DS_Store
 
