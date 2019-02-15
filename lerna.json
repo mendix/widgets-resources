@@ -1,0 +1,11 @@
+{
+    "version": "independent",
+    "packages": ["packages/*", "packages-experimental/*"],
+    "command": {
+        "version": {
+            "ignoreChanges": ["*.md"],
+            "message": "chore: release",
+            "allowBranch": "master"
+        }
+    }
+}

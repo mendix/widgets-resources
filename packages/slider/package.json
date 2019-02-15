@@ -1,0 +1,21 @@
+{
+    "name": "slider",
+    "version": "0.1.3",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jobvs/native-components.git"
+    },
+    "config": {
+        "widgetName": "Slider"
+    },
+    "scripts": {
+        "start": "npm run gulp watch",
+        "build": "npm run gulp build",
+        "build:release": "NODE_ENV=production npm run gulp build",
+        "gulp": "../../node_modules/.bin/gulp --gulpfile ../../scripts/gulpfile.js --cwd .",
+        "lint": "../../node_modules/.bin/tslint --project tsconfig.json --config ../../tslint.json",
+        "version": "npm run build:release",
+        "postversion": "node ../../scripts/UpdateGithubRelease.js"
+    }
+}

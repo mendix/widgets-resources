@@ -1,0 +1,9 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "include": [
+        "../../typings/PluginWidget.d.ts",
+        "./src",
+        "./typings/ColorSys.d.ts",
+        "./typings/ReactNativeColorWheel.d.ts"
+    ]
+}

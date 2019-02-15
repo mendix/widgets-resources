@@ -1,0 +1,31 @@
+{
+    "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
+    "rules": {
+        "await-promise": true,
+        "interface-name": [true, "never-prefix"],
+        "member-access": [true, "no-public"],
+        "member-ordering": [
+            true,
+            {
+                "order": ["static-field", "instance-field", "constructor", "instance-method", "public-static-method"]
+            }
+        ],
+        "no-boolean-literal-compare": true,
+        "no-default-export": true,
+        "no-floating-promises": true,
+        "no-for-in-array": true,
+        "no-implicit-dependencies": false,
+        "no-inferrable-types": [true, "ignore-params"],
+        "no-invalid-this": [true, "check-function-in-method"],
+        "no-namespace": [true, "allow-declarations"],
+        "no-submodule-imports": false,
+        "no-switch-case-fall-through": true,
+        "no-unnecessary-type-assertion": true,
+        "object-literal-sort-keys": false,
+        "prefer-function-over-method": [true, "allow-public", "allow-protected"],
+        "prefer-readonly": true,
+        "prefer-while": true,
+        "typedef": [true, "call-signature"],
+        "variable-name": [true, "ban-keywords"]
+    }
+}
