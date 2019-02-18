@@ -1,5 +1,5 @@
 {
-    "name": "push-notifications",
+    "name": "notifications",
     "version": "0.0.5",
     "license": "Apache-2.0",
     "repository": {
@@ -7,7 +7,7 @@
         "url": "https://github.com/jobvs/native-components.git"
     },
     "config": {
-        "widgetName": "PushNotifications"
+        "widgetName": "Notifications"
     },
     "scripts": {
         "start": "npm run gulp watch",

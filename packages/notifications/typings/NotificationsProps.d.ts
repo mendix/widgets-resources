@@ -10,10 +10,13 @@ interface CommonProps {
 
 export interface ActionsType {
     name: string;
+    placeholderForModelerBug1?: string;
+    placeholderForModelerBug2?: string;
     onReceive?: PluginWidget.ActionValue;
     onOpen?: PluginWidget.ActionValue;
 }
 
-export interface PushNotificationsProps extends CommonProps {
+export interface NotificationsProps extends CommonProps {
     actions: ActionsType[];
+    guid?: PluginWidget.EditableValue<string>;
 }
