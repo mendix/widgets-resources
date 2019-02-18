@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component, createElement } from "react";
 import RNQRCode from "react-native-qrcode-svg";
 
 import { QRCodeProps } from "../typings/QRCodeProps";

@@ -1,5 +1,5 @@
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
-import React, { Component } from "react";
+import { Component, createElement } from "react";
 import { LayoutChangeEvent, View } from "react-native";
 
 import { RangeSliderProps } from "../typings/RangeSliderProps";

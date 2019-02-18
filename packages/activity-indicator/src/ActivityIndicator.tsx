@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component, createElement } from "react";
 import { ActivityIndicator as RNActivityIndicator } from "react-native";
 import { ActivityIndicatorProps } from "../typings/ActivityIndicatorProps";
 

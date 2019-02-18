@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component, createElement } from "react";
 import { Bar } from "react-native-progress";
 import { ProgressBarProps } from "../typings/ProgressBarProps";
 

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component, createElement } from "react";
 import { Text, View } from "react-native";
 import { WebView as RNWebView } from "react-native-webview";
 import { WebViewProps } from "../typings/WebViewProps";

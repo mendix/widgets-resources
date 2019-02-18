@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component, createElement } from "react";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 
 import { SegmentedControlProps } from "../typings/SegmentedControlProps";

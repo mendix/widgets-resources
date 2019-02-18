@@ -1,5 +1,5 @@
 import colorsys from "colorsys";
-import React, { Component } from "react";
+import { Component, createElement } from "react";
 import { ColorWheel as RNColorWheel, HSV } from "react-native-color-wheel";
 
 import { ColorWheelProps } from "../typings/ColorWheelProps";

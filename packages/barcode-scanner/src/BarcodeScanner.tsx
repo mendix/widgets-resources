@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component, createElement } from "react";
 import { View } from "react-native";
 import { RNCamera } from "react-native-camera";
 

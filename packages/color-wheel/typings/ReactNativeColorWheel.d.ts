@@ -1,5 +1,5 @@
 declare module "react-native-color-wheel" {
-    import React, { Component } from "react";
+    import { Component, createElement } from "react";
     import { ImageURISource, StyleProp, ViewStyle } from "react-native";
 
     export interface HSV {

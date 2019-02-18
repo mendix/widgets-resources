@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component, createElement } from "react";
 import { ActivityIndicator, View } from "react-native";
 import Video from "react-native-video";
 

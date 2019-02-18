@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component, createElement } from "react";
 import { GestureResponderEvent, Slider as RNSlider, TouchableWithoutFeedback, View } from "react-native";
 
 import { SliderProps } from "../typings/SliderProps";

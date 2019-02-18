@@ -1,5 +1,5 @@
 import { curveNatural } from "d3-shape";
-import React, { Component } from "react";
+import { Component, createElement } from "react";
 import { Text, View } from "react-native";
 import { PathProps } from "react-native-svg";
 import {

@@ -1,9 +1,9 @@
 import ReactNativeSegmentedControlTab, { SegmentedControlTabProperties } from "react-native-segmented-control-tab";
 
 declare module "react-native-segmented-control-tab" {
-    import React from "react";
+    import { Props } from "react";
 
-    export interface SegmentedControlTabProperties extends React.Props<ReactNativeSegmentedControlTab> {
+    export interface SegmentedControlTabProperties extends Props<ReactNativeSegmentedControlTab> {
         /**
          * Boolean to enable or disable the component
          * @default true

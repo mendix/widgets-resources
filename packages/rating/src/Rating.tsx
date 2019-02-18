@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component, createElement } from "react";
 import { Rating as RNRating } from "react-native-ratings";
 
 import { RatingProps } from "../typings/RatingProps";

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component, createElement } from "react";
 import { Platform } from "react-native";
 import MapView, { Marker, Region } from "react-native-maps";
 

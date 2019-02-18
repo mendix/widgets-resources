@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component, createElement } from "react";
 import { Circle } from "react-native-progress";
 import { ProgressCircleProps } from "../typings/ProgressCircleProps";
 
