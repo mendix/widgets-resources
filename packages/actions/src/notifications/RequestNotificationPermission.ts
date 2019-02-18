@@ -12,7 +12,7 @@ import ReactNativeFirebase from "react-native-firebase";
  * Returns true if permission is granted, otherwise it returns false.
  * @returns {boolean}
  */
-function RequestPushNotificationPermission(): Promise<boolean> {
+function RequestNotificationPermission(): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/receiving-notifications
 

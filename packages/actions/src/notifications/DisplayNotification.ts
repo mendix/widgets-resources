@@ -10,11 +10,13 @@ import ReactNativeFirebase from "react-native-firebase";
  * Displays the specified notification straight away.
  *
  * Note: It is not possible to display a notification whilst the app is in the foreground on iOS 9.
- * @param {string} body - Required
+ * @param {string} body - This field is required.
  * @param {string} title
  * @param {string} subtitle
  * @param {boolean} playSound
  * @param {Big} iosBadgeNumber
+ * @param {string} actionName
+ * @param {string} actionGuid
  * @returns {string}
  */
 function DisplayNotification(
@@ -22,7 +24,9 @@ function DisplayNotification(
     title?: string,
     subtitle?: string,
     playSound?: boolean,
-    iosBadgeNumber?: BigJs.Big
+    iosBadgeNumber?: BigJs.Big,
+    actionName?: string,
+    actionGuid?: string
 ): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/displaying-notifications
@@ -44,24 +48,31 @@ function DisplayNotification(
     );
     firebase.notifications().android.createChannel(channel);
 
-    let notification = new firebase.notifications.Notification()
+    const notification = new firebase.notifications.Notification()
         .setBody(body)
         .android.setChannelId("mendix-local-notifications-jsactions");
 
     if (title) {
-        notification = notification.setTitle(title);
+        notification.setTitle(title);
     }
 
     if (subtitle) {
-        notification = notification.setSubtitle(subtitle);
+        notification.setSubtitle(subtitle);
     }
 
     if (playSound) {
-        notification = notification.setSound("default");
+        notification.setSound("default");
     }
 
     if (iosBadgeNumber) {
-        notification = notification.ios.setBadge(Number(iosBadgeNumber));
+        notification.ios.setBadge(Number(iosBadgeNumber));
+    }
+
+    if (actionName || actionGuid) {
+        notification.setData({
+            actionName,
+            guid: actionGuid
+        });
     }
 
     return firebase.notifications().displayNotification(notification);

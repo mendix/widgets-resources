@@ -10,12 +10,14 @@ import ReactNativeFirebase from "react-native-firebase";
  * Displays the specified notification at a future moment in time.
  *
  * Note: It is not possible to display a notification whilst the app is in the foreground on iOS 9.
- * @param {Date} date - Required
- * @param {string} body - Required
+ * @param {Date} date - This field is required.
+ * @param {string} body - This field is required.
  * @param {string} title
  * @param {string} subtitle
  * @param {boolean} playSound
  * @param {Big} iosBadgeNumber
+ * @param {string} actionName
+ * @param {string} actionGuid
  * @returns {string}
  */
 function ScheduleNotification(
@@ -24,7 +26,9 @@ function ScheduleNotification(
     title?: string,
     subtitle?: string,
     playSound?: boolean,
-    iosBadgeNumber?: BigJs.Big
+    iosBadgeNumber?: BigJs.Big,
+    actionName?: string,
+    actionGuid?: string
 ): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/scheduling-notifications
@@ -50,24 +54,31 @@ function ScheduleNotification(
     );
     firebase.notifications().android.createChannel(channel);
 
-    let notification = new firebase.notifications.Notification()
+    const notification = new firebase.notifications.Notification()
         .setBody(body)
         .android.setChannelId("mendix-local-notifications-jsactions");
 
     if (title) {
-        notification = notification.setTitle(title);
+        notification.setTitle(title);
     }
 
     if (subtitle) {
-        notification = notification.setSubtitle(subtitle);
+        notification.setSubtitle(subtitle);
     }
 
     if (playSound) {
-        notification = notification.setSound("default");
+        notification.setSound("default");
     }
 
     if (iosBadgeNumber) {
-        notification = notification.ios.setBadge(Number(iosBadgeNumber));
+        notification.ios.setBadge(Number(iosBadgeNumber));
+    }
+
+    if (actionName || actionGuid) {
+        notification.setData({
+            actionName,
+            guid: actionGuid
+        });
     }
 
     return firebase.notifications().scheduleNotification(notification, {
