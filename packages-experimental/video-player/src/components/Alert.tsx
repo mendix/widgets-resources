@@ -1,5 +1,5 @@
 import * as classNames from "classnames";
-import * as React from "react";
+import { FunctionComponent, createElement } from "react";
 
 export interface AlertProps {
     message?: string;
@@ -7,7 +7,7 @@ export interface AlertProps {
     bootstrapStyle?: "default" | "primary" | "success" | "info" | "warning" | "danger";
 }
 
-export const Alert: React.FunctionComponent<AlertProps> = (props) =>
+export const Alert: FunctionComponent<AlertProps> = (props) =>
     props.message
         ? <div className={classNames(`alert alert-${props.bootstrapStyle}`, props.className)}>{props.message}</div>
         : null;

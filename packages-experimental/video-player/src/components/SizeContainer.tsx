@@ -1,4 +1,4 @@
-import * as React from "react";
+import { CSSProperties, FunctionComponent, createElement } from "react";
 import * as classNames from "classnames";
 
 export type HeightUnitType = "percentageOfWidth" | "percentageOfParent" | "pixels";
@@ -16,12 +16,12 @@ export interface Dimensions {
 export interface SizeProps extends Dimensions {
     className: string;
     classNameInner?: string;
-    style?: React.CSSProperties;
+    style?: CSSProperties;
 }
 
-export const SizeContainer: React.FunctionComponent<SizeProps> = (props) => {
+export const SizeContainer: FunctionComponent<SizeProps> = (props) => {
     const styleWidth = props.widthUnit === "percentage" ? `${props.width}%` : `${props.width}px`;
-    const relativeStyle: React.CSSProperties = {
+    const relativeStyle: CSSProperties = {
         position: "relative",
         width: styleWidth,
         ...getHeight(props.heightUnit, props.height, props.widthUnit, props.width),
@@ -29,7 +29,7 @@ export const SizeContainer: React.FunctionComponent<SizeProps> = (props) => {
         justifyContent: "center",
         ...props.style
     };
-    const absoluteStyle: React.CSSProperties = {
+    const absoluteStyle: CSSProperties = {
         position: "absolute",
         top: "0",
         right: "0",
@@ -50,8 +50,8 @@ export const SizeContainer: React.FunctionComponent<SizeProps> = (props) => {
 
 SizeContainer.displayName = "SizeContainer";
 
-const getHeight = (heightUnit: HeightUnitType, height: number, widthUnit: WidthUnitType, width: number): React.CSSProperties => {
-    const style: React.CSSProperties = {};
+const getHeight = (heightUnit: HeightUnitType, height: number, widthUnit: WidthUnitType, width: number): CSSProperties => {
+    const style: CSSProperties = {};
     if (heightUnit === "percentageOfWidth") {
         const ratio = height / 100 * width;
         if (widthUnit === "percentage") {

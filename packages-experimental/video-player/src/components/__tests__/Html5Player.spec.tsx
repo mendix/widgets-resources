@@ -1,5 +1,5 @@
 import { shallow } from "enzyme";
-import * as React from "react";
+import { createElement } from "react";
 
 import ReactResizeDetector from "react-resize-detector";
 import { Html5Player } from "../Html5Player";

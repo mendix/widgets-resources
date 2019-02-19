@@ -1,5 +1,5 @@
 import { shallow } from "enzyme";
-import * as React from "react";
+import { createElement } from "react";
 
 import { Alert } from "../Alert";
 
@@ -17,7 +17,7 @@ describe("Alert", () => {
     });
 
     it("renders no structure when the alert message is not specified", () => {
-        const alert = shallow(<Alert />);
+        const alert = shallow(<Alert/>);
 
         expect(alert).toBeElement(null);
     });

@@ -1,11 +1,21 @@
-import * as React from "react";
+/**
+ * This file was generated from VideoPlayer.xml
+ * WARNING: All changes made to this file will be overwritten
+ * @author Mendix Widgets Team
+ */
+import { CSSProperties } from "react";
 
 interface CommonProps {
-    "class"?: string;
-    style?: React.CSSProperties;
-    tabIndex: number;
     id: string;
+    class: string;
+    style?: CSSProperties;
+    tabIndex: number;
 }
+
+export type WidthUnitEnum = "percentage" | "pixels";
+
+export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
+
 export interface VideoPlayerContainerProps extends CommonProps {
     urlAttribute?: PluginWidget.EditableValue<string>;
     urlStatic?: string;
@@ -15,12 +25,13 @@ export interface VideoPlayerContainerProps extends CommonProps {
     showControls: boolean;
     muted: boolean;
     loop: boolean;
-    widthUnit: "percentage" | "pixels";
+    widthUnit: WidthUnitEnum;
     width: number;
     aspectRatio: boolean;
-    heightUnit: "percentageOfWidth" | "pixels" | "percentageOfParent";
+    heightUnit: HeightUnitEnum;
     height: number;
 }
+
 export interface VideoPlayerWebModelerProps extends CommonProps {
     urlAttribute?: string;
     urlStatic?: string;
@@ -30,9 +41,25 @@ export interface VideoPlayerWebModelerProps extends CommonProps {
     showControls: boolean;
     muted: boolean;
     loop: boolean;
-    widthUnit: "percentage" | "pixels";
+    widthUnit: WidthUnitEnum;
     width: number;
     aspectRatio: boolean;
-    heightUnit: "percentageOfWidth" | "pixels" | "percentageOfParent";
+    heightUnit: HeightUnitEnum;
     height: number;
+}
+
+export interface VisibilityMap {
+    urlAttribute: boolean;
+    urlStatic: boolean;
+    posterAttribute: boolean;
+    posterImageUrl: boolean;
+    autoStart: boolean;
+    showControls: boolean;
+    muted: boolean;
+    loop: boolean;
+    widthUnit: boolean;
+    width: boolean;
+    aspectRatio: boolean;
+    heightUnit: boolean;
+    height: boolean;
 }

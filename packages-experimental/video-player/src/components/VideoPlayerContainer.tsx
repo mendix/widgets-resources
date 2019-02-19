@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Component, createElement } from "react";
 import classNames = require("classnames");
 
 import { hot } from "react-hot-loader";
@@ -8,7 +8,7 @@ import { VideoPlayerContainerProps } from "../../typings/VideoPlayerProps";
 
 import "../ui/VideoPlayer.css";
 
-class VideoPlayerContainer extends React.Component<VideoPlayerContainerProps> {
+class VideoPlayerContainer extends Component<VideoPlayerContainerProps> {
     render() {
         return (
             <SizeContainer
@@ -34,4 +34,4 @@ class VideoPlayerContainer extends React.Component<VideoPlayerContainerProps> {
     }
 }
 
-export default hot(module)(VideoPlayerContainer);
+export default hot(VideoPlayerContainer);

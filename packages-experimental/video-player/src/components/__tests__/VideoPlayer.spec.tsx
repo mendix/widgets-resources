@@ -1,4 +1,4 @@
-import * as React from "react";
+import { createElement } from "react";
 import { shallow } from "enzyme";
 
 import { VideoPlayer } from "../VideoPlayer";
@@ -6,7 +6,6 @@ import { YoutubePlayer } from "../YoutubePlayer";
 import { VimeoPlayer } from "../VimeoPlayer";
 import { DailymotionPlayer } from "../DailymotionPlayer";
 import { Html5Player } from "../Html5Player";
-import { PlayerError } from "../PlayerError";
 import { fixHeightWithRatio, getRatio, validateUrl } from "../../utils/Utils";
 
 describe("Video Player", () => {
@@ -106,24 +105,6 @@ describe("Video Player", () => {
                 aspectRatio={false}
                 poster=""
             />
-        );
-    });
-
-    it("Renders the structure of player error tags", () => {
-        const player = shallow(<VideoPlayer
-            url="httj://dailymotion,com/123456"
-            staticUrl=""
-            poster=""
-            staticPoster=""
-            autoStart={false}
-            showControls={false}
-            loop={false}
-            muted={false}
-            aspectRatio={false}
-        />);
-
-        expect(player).toBeElement(
-            <PlayerError />
         );
     });
 

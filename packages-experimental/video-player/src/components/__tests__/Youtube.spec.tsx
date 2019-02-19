@@ -1,4 +1,4 @@
-import * as React from "react";
+import { createElement } from "react";
 import { shallow } from "enzyme";
 
 import ReactResizeDetector from "react-resize-detector";
@@ -36,7 +36,7 @@ describe("YoutubePlayer Player", () => {
                 allowFullScreen={true}
                 src="https://www.youtube.com/embed/123456?modestbranding=1&rel=0&autoplay=0&controls=0&muted=0&loop=0">
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
-                                     refreshMode="debounce" refreshRate={100} />
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
     });
@@ -59,7 +59,7 @@ describe("YoutubePlayer Player", () => {
                 allowFullScreen={true}
                 src="https://www.youtube.com/embed/123456?modestbranding=1&rel=0&autoplay=1&controls=1&muted=1&loop=1">
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
-                                     refreshMode="debounce" refreshRate={100} />
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
     });
@@ -82,7 +82,7 @@ describe("YoutubePlayer Player", () => {
                 allowFullScreen={true}
                 src="http://youtube.com/embed/123456?modestbranding=1&rel=0&autoplay=1&controls=1&muted=1&loop=1">
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
-                                     refreshMode="debounce" refreshRate={100} />
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
     });
@@ -105,7 +105,7 @@ describe("YoutubePlayer Player", () => {
                 allowFullScreen={true}
                 src="">
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
-                                     refreshMode="debounce" refreshRate={100} />
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
     });

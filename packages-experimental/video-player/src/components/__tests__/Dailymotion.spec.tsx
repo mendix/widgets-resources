@@ -1,4 +1,4 @@
-import * as React from "react";
+import { createElement } from "react";
 import { shallow } from "enzyme";
 
 import { DailymotionPlayer } from "../DailymotionPlayer";
@@ -22,7 +22,7 @@ describe("DailymotionPlayer Player", () => {
                 allowFullScreen={true}
                 src="https://www.dailymotion.com/embed/video/123456?sharing-enable=false&autoplay=false&mute=false&controls=false">
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
-                                     refreshMode="debounce" refreshRate={100} />
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
     });
@@ -44,7 +44,7 @@ describe("DailymotionPlayer Player", () => {
                 allowFullScreen={true}
                 src="https://www.dailymotion.com/embed/video/123456?sharing-enable=false&autoplay=false&mute=false&controls=true">
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
-                                     refreshMode="debounce" refreshRate={100} />
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
         expect(player).toHaveClass("widget-video-player-iframe");
@@ -68,7 +68,7 @@ describe("DailymotionPlayer Player", () => {
                 allowFullScreen={true}
                 src="https://www.dailymotion.com/embed/video/123456?sharing-enable=false&autoplay=true&mute=true&controls=true">
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
-                                     refreshMode="debounce" refreshRate={100} />
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
     });
@@ -90,7 +90,7 @@ describe("DailymotionPlayer Player", () => {
                 allowFullScreen={true}
                 src="http://dailymotion.com/embed/123456?sharing-enable=false&autoplay=true&mute=true&controls=true">
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
-                                     refreshMode="debounce" refreshRate={100} />
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
     });
@@ -112,7 +112,7 @@ describe("DailymotionPlayer Player", () => {
                 allowFullScreen={true}
                 src="">
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
-                                     refreshMode="debounce" refreshRate={100} />
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
     });

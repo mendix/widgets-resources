@@ -1,4 +1,4 @@
-import * as React from "react";
+import { CSSProperties, Component, createElement } from "react";
 import ReactResizeDetector from "react-resize-detector";
 
 export interface Html5PlayerProps {
@@ -12,7 +12,7 @@ export interface Html5PlayerProps {
     aspectRatio?: boolean;
 }
 
-export class Html5Player extends React.Component<Html5PlayerProps> {
+export class Html5Player extends Component<Html5PlayerProps> {
 
     private videoElement: HTMLVideoElement | null = null;
     private errorElement: HTMLDivElement;
@@ -21,7 +21,7 @@ export class Html5Player extends React.Component<Html5PlayerProps> {
     private readonly handleOnError = this.handleError.bind(this);
 
     render() {
-        const sizeProps: React.CSSProperties = {
+        const sizeProps: CSSProperties = {
             height: !this.props.aspectRatio ? "100%" : undefined
         };
         return (

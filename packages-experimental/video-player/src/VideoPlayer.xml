@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.videoplayer.VideoPlayer" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+<widget id="com.mendix.widget.custom.videoplayer.VideoPlayer" pluginWidget="true" needsEntityContext="true"
+        offlineCapable="true"
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
     <name>Video Player</name>
@@ -13,26 +14,30 @@
             <category>General</category>
             <description>A full URL of the video; Youtube, Vimeo, Dailymotion or MP4.</description>
             <attributeTypes>
-                <attributeType name="String" />
+                <attributeType name="String"/>
             </attributeTypes>
         </property>
         <property key="urlStatic" type="string" required="false">
             <caption>Static URL</caption>
             <category>General</category>
-            <description>A static url ensures your video will show when there is no value provided from an attribute. When there is a URL provided by an attribute, that will override the static URL.</description>
+            <description>A static url ensures your video will show when there is no value provided from an attribute.
+                When there is a URL provided by an attribute, that will override the static URL.
+            </description>
         </property>
         <property key="posterAttribute" type="attribute" required="false">
             <caption>Poster URL</caption>
             <category>General</category>
-            <description>The poster image is a custom preview image that will be shown in the player until the user starts the video.</description>
+            <description>The poster image is a custom preview image that will be shown in the player until the user
+                starts the video.
+            </description>
             <attributeTypes>
-                <attributeType name="String" />
+                <attributeType name="String"/>
             </attributeTypes>
         </property>
         <property key="posterImageUrl" type="string" required="false">
             <caption>Poster Static URL</caption>
             <category>General</category>
-            <description />
+            <description/>
         </property>
         <property key="autoStart" type="boolean" defaultValue="false">
             <caption>Auto start</caption>
@@ -42,7 +47,9 @@
         <property key="showControls" type="boolean" defaultValue="true">
             <caption>Show Controls</caption>
             <category>Behavior</category>
-            <description>Display video controls (control bar, display icons, dock buttons). Available for YouTube, Dailymotion and external videos.</description>
+            <description>Display video controls (control bar, display icons, dock buttons). Available for YouTube,
+                Dailymotion and external videos.
+            </description>
         </property>
         <property key="muted" type="boolean" defaultValue="false">
             <caption>Muted</caption>
@@ -52,7 +59,8 @@
         <property key="loop" type="boolean" defaultValue="false">
             <caption>Loop</caption>
             <category>Behavior</category>
-            <description>Loop the video after it finishes. Available for YouTube, Vimeo, and external videos.</description>
+            <description>Loop the video after it finishes. Available for YouTube, Vimeo, and external videos.
+            </description>
         </property>
         <property key="widthUnit" type="enumeration" defaultValue="percentage">
             <caption>Width unit</caption>
@@ -76,7 +84,9 @@
         <property key="heightUnit" type="enumeration" defaultValue="pixels">
             <caption>Height unit</caption>
             <category>Size</category>
-            <description>Warning: when "Percentage of parent" is selected, the parent container must have an absolute height, otherwise nothing will be displayed.</description>
+            <description>Warning: when "Percentage of parent" is selected, the parent container must have an absolute
+                height, otherwise nothing will be displayed.
+            </description>
             <enumerationValues>
                 <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
                 <enumerationValue key="pixels">Pixels</enumerationValue>

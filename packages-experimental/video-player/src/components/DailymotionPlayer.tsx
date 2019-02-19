@@ -1,6 +1,6 @@
-import * as React from "react";
+import { Component, createElement } from "react";
 import ReactResizeDetector from "react-resize-detector";
-import { fixHeightWithRatio, getRatio } from "../utils/Utils";
+import { fixHeightWithRatio, getRatio, validateUrl } from "../utils/Utils";
 
 export interface DailymotionProps {
     url: string;
@@ -14,7 +14,7 @@ export interface DailymotionState {
     ratio: number;
 }
 
-export class DailymotionPlayer extends React.Component<DailymotionProps, DailymotionState> {
+export class DailymotionPlayer extends Component<DailymotionProps, DailymotionState> {
 
     private iframe: HTMLIFrameElement;
     private readonly handleOnResize = this.onResize.bind(this);
@@ -80,7 +80,7 @@ export class DailymotionPlayer extends React.Component<DailymotionProps, Dailymo
     }
 
     public static canPlay(url: string): boolean {
-        if (url && url.includes("dailymotion.com")) {
+        if (url && validateUrl(url) && url.indexOf("dailymotion.com") > -1) {
             return true;
         }
         return false;

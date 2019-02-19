@@ -1,4 +1,4 @@
-import * as React from "react";
+import { createElement } from "react";
 import { shallow } from "enzyme";
 
 import ReactResizeDetector from "react-resize-detector";
@@ -34,7 +34,7 @@ describe("VimeoPlayer Player", () => {
                 allow="autoplay; fullscreen"
                 allowFullScreen={true}>
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
-                                     refreshMode="debounce" refreshRate={100} />
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
     });
@@ -56,7 +56,7 @@ describe("VimeoPlayer Player", () => {
                 allow="autoplay; fullscreen"
                 allowFullScreen={true}>
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
-                                     refreshMode="debounce" refreshRate={100} />
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
     });
@@ -78,7 +78,7 @@ describe("VimeoPlayer Player", () => {
                 allow="autoplay; fullscreen"
                 allowFullScreen={true}>
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
-                                     refreshMode="debounce" refreshRate={100} />
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
     });
@@ -100,7 +100,7 @@ describe("VimeoPlayer Player", () => {
                 allow="autoplay; fullscreen"
                 allowFullScreen={true}>
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)}
-                                     refreshMode="debounce" refreshRate={100} />
+                                     refreshMode="debounce" refreshRate={100}/>
             </iframe>
         );
     });

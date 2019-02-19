@@ -1,11 +1,9 @@
-import * as React from "react";
+import { Component, ReactElement, createElement } from "react";
 
 import { DailymotionPlayer } from "./DailymotionPlayer";
 import { Html5Player } from "./Html5Player";
-import { PlayerError } from "./PlayerError";
 import { VimeoPlayer } from "./VimeoPlayer";
 import { YoutubePlayer } from "./YoutubePlayer";
-import { validateUrl } from "../utils/Utils";
 
 export interface VideoPlayerProps {
     url?: string;
@@ -23,7 +21,7 @@ export interface VideoPlayerProps {
     preview?: boolean;
 }
 
-export class VideoPlayer extends React.Component <VideoPlayerProps> {
+export class VideoPlayer extends Component <VideoPlayerProps> {
 
     private readonly handleHtml5PlayerRender = this.renderHtml5Player.bind(this);
     private readonly handleYoutubePlayerRender = this.renderYoutubePlayer.bind(this);
@@ -32,8 +30,6 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
 
     render() {
         const url = this.props.url || this.props.staticUrl || "";
-        if (!validateUrl(url))
-            return <PlayerError preview={this.props.preview} />;
         if (YoutubePlayer.canPlay(url)) {
             return this.handleYoutubePlayerRender(url);
         } else if (VimeoPlayer.canPlay(url)) {
@@ -44,7 +40,7 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
         return this.handleHtml5PlayerRender(url);
     }
 
-    private renderHtml5Player(url: string): React.ReactElement<Html5Player> {
+    private renderHtml5Player(url: string): ReactElement<Html5Player> {
         return (
             <Html5Player
                 showControls={this.props.showControls}
@@ -57,7 +53,7 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
         );
     }
 
-    private renderYoutubePlayer(url: string): React.ReactElement<YoutubePlayer> {
+    private renderYoutubePlayer(url: string): ReactElement<YoutubePlayer> {
         return (
             <YoutubePlayer
                 url={url}
@@ -70,7 +66,7 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
         );
     }
 
-    private renderVimeoPlayer(url: string): React.ReactElement<VimeoPlayer> {
+    private renderVimeoPlayer(url: string): ReactElement<VimeoPlayer> {
         return (
             <VimeoPlayer
                 url={url}
@@ -82,7 +78,7 @@ export class VideoPlayer extends React.Component <VideoPlayerProps> {
         );
     }
 
-    private renderDailymotionPlayer(url: string): React.ReactElement<DailymotionPlayer> {
+    private renderDailymotionPlayer(url: string): ReactElement<DailymotionPlayer> {
         return (
             <DailymotionPlayer
                 url={url}

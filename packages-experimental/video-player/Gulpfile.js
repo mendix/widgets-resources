@@ -10,10 +10,7 @@ const sequence = require("gulp-sequence");
 const del = require("del");
 const merge = require("webpack-merge");
 const gulpSlash = require("gulp-slash");
-const xml2js = require("gulp-xml2js");
-const modifyFile = require("gulp-modify-file");
-const rename = require("gulp-rename");
-const transformXml = require("./XmlGeneration");
+const typingGenerator = require("mx-widget-typing-generator");
 
 const banner = (color, banner) => gutil.colors[color || "blue"](banner ? `[${banner}]` : "[GULP]");
 
@@ -120,10 +117,6 @@ gulp.task("watch:xml", () => {
 
 gulp.task("generate:xml", () => {
     gulp.src(`src/${pkg.widgetName}.xml`)
-        .pipe(xml2js())
-        .pipe(modifyFile((content, path, file) => {
-            return transformXml(content);
-        }))
-        .pipe(rename(`${pkg.widgetName}Props.d.ts`))
-        .pipe(gulp.dest(`./typings`));
+        .pipe(typingGenerator({widgetName: pkg.widgetName, isNative: false}))
+        .pipe(gulp.dest("./typings"));
 });

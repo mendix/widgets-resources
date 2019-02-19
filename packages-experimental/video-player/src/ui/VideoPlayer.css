@@ -13,17 +13,21 @@
     background-color: #000;
     position: absolute;
 }
+
 .widget-video-player-html5-container {
     height: 100%;
     width: 100%;
 }
+
 .widget-video-player-error-container {
     height: 100%;
     width: 100%;
 }
+
 .widget-video-player-error-container video {
     background-color: #000;
 }
+
 .video-error-label {
     position: absolute;
     color: #CCC;
@@ -39,6 +43,7 @@
     -ms-user-select: none;
     -webkit-user-select: none;
 }
+
 .video-error-label-html5 {
     position: absolute;
     color: #CCC;
@@ -54,6 +59,7 @@
     -ms-user-select: none;
     -webkit-user-select: none;
 }
+
 .hasError {
     display: flex;
 }

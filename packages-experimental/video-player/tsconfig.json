@@ -12,10 +12,7 @@
       "dom"
     ],
     "types": [
-      "mendix-client",
-      "jasmine",
-      "core-js",
-      "node"
+      "jasmine"
     ],
     "moduleResolution": "node",
     "declaration": false,
@@ -31,7 +28,8 @@
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "jsx": "react"
+    "jsx": "react",
+    "jsxFactory": "createElement"
   },
   "exclude": [
     "dist/",

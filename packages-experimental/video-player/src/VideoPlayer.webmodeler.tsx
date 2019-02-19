@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Component, ReactElement, createElement } from "react";
 import * as classNames from "classnames";
 
 import { Alert } from "./components/Alert";
@@ -11,7 +11,7 @@ import { VideoPlayerWebModelerProps } from "../typings/VideoPlayerProps";
 declare function require(name: string): string;
 
 // tslint:disable-next-line class-name
-export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
+export class preview extends Component<VideoPlayerWebModelerProps, {}> {
     render() {
         const message = this.validateProps(this.props);
         if (message)
@@ -31,7 +31,7 @@ export class preview extends React.Component<VideoPlayerWebModelerProps, {}> {
         );
     }
 
-    private renderPlayers(): React.ReactElement<{}> {
+    private renderPlayers(): ReactElement<{}> {
         if (!validateUrl(this.props.urlAttribute || this.props.urlStatic || "")) {
             return <PlayerError preview={true}/>;
         }

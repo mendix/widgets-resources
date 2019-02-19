@@ -1,6 +1,6 @@
-import * as React from "react";
+import { Component, createElement } from "react";
 import ReactResizeDetector from "react-resize-detector";
-import { fixHeightWithRatio, getRatio } from "../utils/Utils";
+import { fixHeightWithRatio, getRatio, validateUrl } from "../utils/Utils";
 
 export interface YoutubeProps {
     url: string;
@@ -15,7 +15,7 @@ export interface YoutubeState {
     ratio: number;
 }
 
-export class YoutubePlayer extends React.Component<YoutubeProps, YoutubeState> {
+export class YoutubePlayer extends Component<YoutubeProps, YoutubeState> {
     private iframe: HTMLIFrameElement;
     private readonly handleOnResize = this.onResize.bind(this);
     private handleAttributes = this.getUrlAttributes.bind(this);
@@ -88,7 +88,7 @@ export class YoutubePlayer extends React.Component<YoutubeProps, YoutubeState> {
     }
 
     public static canPlay(url: string): boolean {
-        if (url && url.includes("youtube.com") || url.includes("youtu.be")) {
+        if (url && validateUrl(url) && url.indexOf("youtube.com") > -1 || url.indexOf("youtu.be") > -1) {
             return true;
         }
         return false;

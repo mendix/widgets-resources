@@ -1,6 +1,6 @@
-import * as React from "react";
+import { Component, createElement } from "react";
 import ReactResizeDetector from "react-resize-detector";
-import { fixHeightWithRatio, getRatio } from "../utils/Utils";
+import { fixHeightWithRatio, getRatio, validateUrl } from "../utils/Utils";
 
 export interface VimeoProps {
     url: string;
@@ -14,7 +14,7 @@ export interface VimeoState {
     ratio: number;
 }
 
-export class VimeoPlayer extends React.Component<VimeoProps, VimeoState> {
+export class VimeoPlayer extends Component<VimeoProps, VimeoState> {
 
     private iframe: HTMLIFrameElement;
     private readonly handleOnResize = this.onResize.bind(this);
@@ -80,7 +80,7 @@ export class VimeoPlayer extends React.Component<VimeoProps, VimeoState> {
     }
 
     public static canPlay(url: string): boolean {
-        if (url && url.includes("vimeo.com")) {
+        if (url && validateUrl(url) && url.indexOf("vimeo.com") > -1) {
             return true;
         }
         return false;
