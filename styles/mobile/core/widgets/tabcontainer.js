@@ -14,8 +14,8 @@ export const TabContainer = {
   tabBar: {
     bounces: true,
     pressColor: background.dark,
-    pressOpacity: 1,
-    scrollEnabled: true,
+    pressOpacity: 0.1,
+    scrollEnabled: false,
     backgroundColor: background.light,
     ...Platform.select({
       ios: {
@@ -24,10 +24,7 @@ export const TabContainer = {
         marginBottom: 10,
         alignItems: "center"
       },
-      android: {
-        height: 50,
-        alignItems: "flex-start"
-      }
+      android: {}
     })
   },
   indicator: {

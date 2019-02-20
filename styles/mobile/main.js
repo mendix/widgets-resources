@@ -11,9 +11,6 @@ export * from "./core/base/_all";
 // Components
 export * from "./core/widgets/_all";
 
-// Custom widgets
-export * from "./core/widgetscustom/_all";
-
 //================================= CUSTOM =================================\\
 
 // Building blocks

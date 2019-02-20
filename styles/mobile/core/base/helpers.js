@@ -1,9 +1,24 @@
-import { spacing } from "../variables";
+import { spacing, background } from "../variables";
 import { Platform } from "react-native";
 
 //== TEMP
 export const AndroidSpacingInnerMedium = {
   padding: Platform.select({ ios: 0, android: spacing.small })
+};
+
+//== Background Colors
+export const backgroundLight = {
+  background: background.light
+};
+export const backgroundDark = {
+  background: background.dark
+};
+
+export const backgroundPrimary = {
+  background: background.primary
+};
+export const backgroundSecondary = {
+  background: background.secondary
 };
 
 //== Flex layout
@@ -64,30 +79,6 @@ export const flexItemCrossDirectionAlignEnd = {
 };
 
 //== Inner Spacing
-export const spacingInnerNone = {
-  padding: 0
-};
-export const spacingInnerVerticalNone = {
-  paddingTop: 0,
-  paddingBottom: 0
-};
-export const spacingInnerHorizontalNone = {
-  paddingLeft: 0,
-  paddingRight: 0
-};
-export const spacingInnerTopNone = {
-  paddingTop: 0
-};
-export const spacingInnerRightNone = {
-  paddingRight: 0
-};
-export const spacingInnerLeftNone = {
-  paddingLeft: 0
-};
-export const spacingInnerBottomNone = {
-  paddingBottom: 0
-};
-
 export const spacingInner = {
   padding: spacing.smaller
 };
@@ -161,30 +152,6 @@ export const spacingInnerBottomLarge = {
 };
 
 //== Outer Spacing
-export const spacingOuterNone = {
-  margin: 0
-};
-export const spacingOuterVerticalNone = {
-  paddingTop: 0,
-  paddingBottom: 0
-};
-export const spacingOuterHorizontalNone = {
-  paddingLeft: 0,
-  paddingRight: 0
-};
-export const spacingOuterTopNone = {
-  marginTop: 0
-};
-export const spacingOuterRightNone = {
-  marginRight: 0
-};
-export const spacingOuterLeftNone = {
-  marginLeft: 0
-};
-export const spacingOuterBottomNone = {
-  marginBottom: 0
-};
-
 export const spacingOuter = {
   margin: spacing.smaller
 };

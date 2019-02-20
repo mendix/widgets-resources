@@ -1,5 +1,5 @@
 import { Platform, Dimensions } from "react-native";
-// import { shadeBlendConvert } from "./variables-helpers";
+import { setContrast } from "./variables-helpers";
 
 //== Global variables
 //## Variables to be used during styling
@@ -29,7 +29,7 @@ export const gray = {
 // Background Colors
 export const background = {
   light: "#FFF",
-  dark: "#000",
+  dark: "#222",
   primary: brand.primary,
   secondary: gray.light
 };
@@ -51,7 +51,7 @@ export const font = {
   sizeH4: 18,
   sizeH5: 14,
   sizeH6: 12,
-  color: gray.regular,
+  color: setContrast("#FFF"),
   weightLight: "100",
   weightNormal: "normal",
   weightSemiBold: "600",
@@ -76,27 +76,32 @@ export const button = {
   borderRadius: Platform.select({ ios: border.radius + 16, android: border.radius }),
 
   primary: {
-    color: "#FFF",
+    color: setContrast(brand.primary),
+    // color: brand.primary,
     borderColor: brand.primary,
     background: brand.primary
   },
   secondary: {
-    color: brand.primary,
+    color: setContrast("#FFF"),
+    // color: brand.primary,
     borderColor: gray.lighter,
-    background: "transparent"
+    background: "#FFF"
   },
   success: {
-    color: "#FFF",
+    color: setContrast(brand.success),
+    // color: brand.success,
     borderColor: brand.success,
     background: brand.success
   },
   warning: {
-    color: "#FFF",
+    color: setContrast(brand.warning),
+    // color: brand.warning,
     borderColor: brand.warning,
     background: brand.warning
   },
   danger: {
-    color: "#FFF",
+    color: setContrast(brand.danger),
+    // color: brand.danger,
     borderColor: brand.danger,
     background: brand.danger
   }

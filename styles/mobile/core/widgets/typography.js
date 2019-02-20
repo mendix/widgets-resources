@@ -7,7 +7,7 @@ import { gray, brand, font } from "../variables";
 ========================================================================== */
 
 export const Text = {
-  color: gray.regular,
+  color: font.color,
   fontSize: font.size
 };
 

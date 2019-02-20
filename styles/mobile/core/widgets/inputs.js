@@ -1,4 +1,4 @@
-import { gray, spacing, border, brand } from "../variables";
+import { gray, spacing, border, brand, font } from "../variables";
 import { Platform } from "react-native";
 
 /* ==========================================================================
@@ -12,11 +12,11 @@ export const TextBox = {
     color: gray.light
   },
   input: {
-    color: gray.regular,
-    placeholderTextColor: gray.light,
-    selectionColor: gray.lightest,
-    borderColor: gray.lightest,
+    color: font.color,
     backgroundColor: "#FFF",
+    placeholderTextColor: gray.light,
+    selectionColor: gray.lighter,
+    borderColor: gray.lightest,
     ...Platform.select({
       ios: {
         padding: spacing.smaller
@@ -102,9 +102,9 @@ export const DropDown = {
   pickerBackdropIOS: {},
   pickerTopIOS: {},
   value: {
-    color: gray.regular,
-    borderColor: gray.lightest,
+    color: font.color,
     backgroundColor: "#FFF",
+    borderColor: gray.lightest,
     ...Platform.select({
       ios: {
         borderTopWidth: 1,

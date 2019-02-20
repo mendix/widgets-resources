@@ -46,12 +46,14 @@ export const ActionButton = {
 //-------------------------------------------------------------------------------------------------------------------//
 // Button Colors
 
+// This mixin function takes the following order -> color, backgroundColor, borderColor
 export const btnPrimary = mixinButton.variant(button.primary.color, button.primary.background, button.primary.borderColor);
 export const btnSecondary = mixinButton.variant(button.secondary.color, button.secondary.background, button.secondary.borderColor);
 export const btnSuccess = mixinButton.variant(button.success.color, button.success.background, button.success.borderColor);
 export const btnWarning = mixinButton.variant(button.warning.color, button.warning.background, button.warning.borderColor);
 export const btnDanger = mixinButton.variant(button.danger.color, button.danger.background, button.danger.borderColor);
 
+// This mixin function will remove the background and border, and set the icon color
 export const btnIconPrimary = mixinButton.iconOnly(button.primary.background);
 export const btnIconSecondary = mixinButton.iconOnly(button.secondary.borderColor);
 export const btnIconSuccess = mixinButton.iconOnly(button.success.background);
@@ -59,6 +61,7 @@ export const btnIconWarning = mixinButton.iconOnly(button.warning.background);
 export const btnIconDanger = mixinButton.iconOnly(button.danger.background);
 
 // Button sizes
+//TODO: Remove?
 export const btnSmall = {
   button: {},
   icon: {
