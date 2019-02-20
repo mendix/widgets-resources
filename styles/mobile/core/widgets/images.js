@@ -27,8 +27,8 @@ export const imageBig = {
 };
 export const imageSmall = {
   //TODO: Delete width / height when resizing in modeler works
-  width: Image.width - 30,
-  height: Image.height - 30
+  width: Image.width - 20,
+  height: Image.height - 20
 };
 
 export const imageRounded = {
@@ -46,5 +46,5 @@ export const imageRoundedSmall = {
 export const imageHeader = {
   //TODO: Delete width / height when resizing in modeler works
   width: "100%",
-  height: 250
+  height: 200
 };

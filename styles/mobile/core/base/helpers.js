@@ -32,6 +32,12 @@ export const flexWrap = {
 export const flexSpaceBetween = {
   justifyContent: "space-between"
 };
+export const flexSpaceEvenly = {
+  justifyContent: "space-evenly"
+};
+export const flexSpaceAround = {
+  justifyContent: "space-around"
+};
 export const flexCrossDirectionAlignCenter = {
   // alignItems aligns children in the cross direction.
   // For example, if children are flowing vertically, alignItems controls how they align horizontally.
@@ -156,12 +162,12 @@ export const spacingOuter = {
   margin: spacing.smaller
 };
 export const spacingOuterVertical = {
-  paddingTop: spacing.smaller,
-  paddingBottom: spacing.smaller
+  marginTop: spacing.smaller,
+  marginBottom: spacing.smaller
 };
 export const spacingOuterHorizontal = {
-  paddingLeft: spacing.smaller,
-  paddingRight: spacing.smaller
+  marginLeft: spacing.smaller,
+  marginRight: spacing.smaller
 };
 export const spacingOuterTop = {
   marginTop: spacing.smaller
@@ -180,12 +186,12 @@ export const spacingOuterMedium = {
   margin: spacing.regular
 };
 export const spacingOuterVerticalMedium = {
-  paddingTop: spacing.regular,
-  paddingBottom: spacing.regular
+  marginTop: spacing.regular,
+  marginBottom: spacing.regular
 };
 export const spacingOuterHorizontalMedium = {
-  paddingLeft: spacing.regular,
-  paddingRight: spacing.regular
+  marginLeft: spacing.regular,
+  marginRight: spacing.regular
 };
 export const spacingOuterTopMedium = {
   marginTop: spacing.regular
@@ -204,12 +210,12 @@ export const spacingOuterLarge = {
   margin: spacing.larger
 };
 export const spacingOuterVerticalLarge = {
-  paddingTop: spacing.larger,
-  paddingBottom: spacing.larger
+  marginTop: spacing.larger,
+  marginBottom: spacing.larger
 };
 export const spacingOuterHorizontalLarge = {
-  paddingLeft: spacing.larger,
-  paddingRight: spacing.larger
+  marginLeft: spacing.larger,
+  marginRight: spacing.larger
 };
 export const spacingOuterTopLarge = {
   marginTop: spacing.larger
