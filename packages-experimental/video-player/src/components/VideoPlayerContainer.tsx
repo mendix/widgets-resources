@@ -1,7 +1,7 @@
 import { Component, createElement } from "react";
 import classNames = require("classnames");
 
-import { hot } from "react-hot-loader";
+import { hot } from "react-hot-loader/root";
 import { SizeContainer } from "./SizeContainer";
 import { VideoPlayer } from "./VideoPlayer";
 import { VideoPlayerContainerProps } from "../../typings/VideoPlayerProps";
