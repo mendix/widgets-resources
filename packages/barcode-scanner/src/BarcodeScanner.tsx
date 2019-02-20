@@ -9,7 +9,7 @@ export class BarcodeScanner extends Component<BarcodeScannerProps> {
 
     render(): JSX.Element {
         return (
-            <View style={{ flex: 1, flexDirection: "column" }}>
+            <View style={{ flex: 1, minHeight: 100, flexDirection: "column" }}>
                 <RNCamera
                     style={{ flex: 1, justifyContent: "flex-end", alignItems: "center" }}
                     captureAudio={false}
