@@ -8,37 +8,37 @@ import * as mixinButton from "../base/mixins/buttons";
     Default Class For Mendix Button Widget
 ========================================================================== */
 export const ActionButton = {
-  button: {
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: button.primary.borderColor,
-    backgroundColor: button.primary.background,
-    alignItems: "center",
-    justifyContent: "center",
-    ...Platform.select({
-      ios: {
-        borderRadius: button.borderRadius,
-        paddingTop: spacing.smaller,
-        paddingRight: spacing.small,
-        paddingBottom: spacing.smaller,
-        paddingLeft: spacing.small
-      },
-      android: {
-        borderRadius: button.borderRadius,
-        paddingTop: spacing.smaller,
-        paddingRight: spacing.small,
-        paddingBottom: spacing.smaller,
-        paddingLeft: spacing.small
-      }
-    })
-  },
-  icon: {
-    color: button.primary.color
-  },
-  caption: {
-    textAlign: "center",
-    color: button.primary.color
-  }
+    button: {
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: button.primary.borderColor,
+        backgroundColor: button.primary.background,
+        alignItems: "center",
+        justifyContent: "center",
+        ...Platform.select({
+            ios: {
+                borderRadius: button.borderRadius,
+                paddingTop: spacing.smaller,
+                paddingRight: spacing.small,
+                paddingBottom: spacing.smaller,
+                paddingLeft: spacing.small
+            },
+            android: {
+                borderRadius: button.borderRadius,
+                paddingTop: spacing.smaller,
+                paddingRight: spacing.small,
+                paddingBottom: spacing.smaller,
+                paddingLeft: spacing.small
+            }
+        })
+    },
+    icon: {
+        color: button.primary.color
+    },
+    caption: {
+        textAlign: "center",
+        color: button.primary.color
+    }
 };
 
 //== Design Properties
@@ -63,35 +63,35 @@ export const btnIconDanger = mixinButton.iconOnly(button.danger.background);
 // Button sizes
 //TODO: Remove?
 export const btnSmall = {
-  button: {},
-  icon: {
-    size: font.sizeSmall
-  },
-  caption: {
-    fontSize: font.sizeSmall
-  }
+    button: {},
+    icon: {
+        size: font.sizeSmall
+    },
+    caption: {
+        fontSize: font.sizeSmall
+    }
 };
 export const btnLarge = {
-  button: {},
-  icon: {
-    size: font.sizeLarge
-  },
-  caption: {
-    fontSize: font.sizeLarge
-  }
+    button: {},
+    icon: {
+        size: font.sizeLarge
+    },
+    caption: {
+        fontSize: font.sizeLarge
+    }
 };
 export const btnLargest = {
-  button: {},
-  icon: {
-    size: font.sizeH1
-  },
-  caption: {
-    fontSize: font.sizeH1
-  }
+    button: {},
+    icon: {
+        size: font.sizeH1
+    },
+    caption: {
+        fontSize: font.sizeH1
+    }
 };
 
 export const btnBlock = {
-  button: {
-    width: "100%"
-  }
+    button: {
+        width: "100%"
+    }
 };

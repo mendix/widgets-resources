@@ -1,0 +1,290 @@
+{
+  "pageTemplates": "DesktopModeler",
+  "jsFiles": ["styles/mobile/"],
+  "designProperties": {
+    "Widget": [
+      {
+        "name": "Spacing top",
+        "type": "Dropdown",
+        "description": "The spacing above this element.",
+        "options": [
+          {
+            "name": "None",
+            "class": ""
+          },
+          {
+            "name": "Small",
+            "class": "spacingOuterTop"
+          },
+          {
+            "name": "Medium",
+            "class": "spacingOuterTopMedium"
+          },
+          {
+            "name": "Large",
+            "class": "spacingOuterTopLarge"
+          }
+        ]
+      },
+      {
+        "name": "Spacing bottom",
+        "type": "Dropdown",
+        "description": "The spacing below this element.",
+        "options": [
+          {
+            "name": "None",
+            "class": ""
+          },
+          {
+            "name": "Small",
+            "class": "spacingOuterBottom"
+          },
+          {
+            "name": "Medium",
+            "class": "spacingOuterBottomMedium"
+          },
+          {
+            "name": "Large",
+            "class": "spacingOuterBottomLarge"
+          }
+        ]
+      },
+      {
+        "name": "Spacing left",
+        "type": "Dropdown",
+        "description": "The spacing to the left of this element.",
+        "options": [
+          {
+            "name": "None",
+            "class": ""
+          },
+          {
+            "name": "Small",
+            "class": "spacingOuterLeft"
+          },
+          {
+            "name": "Medium",
+            "class": "spacingOuterLeftMedium"
+          },
+          {
+            "name": "Large",
+            "class": "spacingOuterLeftLarge"
+          }
+        ]
+      },
+      {
+        "name": "Spacing right",
+        "type": "Dropdown",
+        "description": "The spacing to the right of this element.",
+        "options": [
+          {
+            "name": "None",
+            "class": ""
+          },
+          {
+            "name": "Small",
+            "class": "spacingOuterRight"
+          },
+          {
+            "name": "Medium",
+            "class": "spacingOuterRightMedium"
+          },
+          {
+            "name": "Large",
+            "class": "spacingOuterRightLarge"
+          }
+        ]
+      },
+    ],
+    "DivContainer": [
+      {
+        "name": "Align content",
+        "type": "Dropdown",
+        "description": "Align content of this element left, right or center it. Align elements inside the container as a row or as a column.",
+        "options": [
+          {
+            "name": "Left align as a row",
+            "class": "rowLeft"
+          },
+          {
+            "name": "Center align as a row",
+            "class": "rowCenter"
+          },
+          {
+            "name": "Right align as a row",
+            "class": "rowRight"
+          },
+          {
+            "name": "Left align as a column",
+            "class": "columnLeft"
+          },
+          {
+            "name": "Center align as a column",
+            "class": "columnCenter"
+          },
+          {
+            "name": "Right align as a column",
+            "class": "columnRight"
+          }
+        ]
+      },
+      {
+        "name": "Background color",
+        "type": "Dropdown",
+        "description": "Change the background color of the container.",
+        "options": [
+          {
+            "name": "Primary",
+            "class": "backgroundPrimary"
+          },
+          {
+            "name": "Secondary",
+            "class": "backgroundSecondary"
+          },
+        ]
+      }
+    ],
+    "Button": [
+      {
+        "name": "Size",
+        "type": "Dropdown",
+        "description": "Size of the buttons",
+        "options": [
+          {
+            "name": "Small",
+            "class": "btnSmall"
+          },
+          {
+            "name": "Default",
+            "class": ""
+          },
+          {
+            "name": "Large",
+            "class": "btnLarge"
+          }
+        ]
+      },
+      {
+        "name": "Full width",
+        "type": "Toggle",
+        "description": "Extend the button to the full width of the container it is placed in.",
+        "class": "btnBlock"
+      },
+    ],
+    "Image": [
+      {
+        "name": "Size",
+        "type": "Dropdown",
+        "description": "Size of the image.",
+        "options": [
+          {
+            "name": "Small",
+            "class": "imageSmall"
+          },
+          {
+            "name": "Default",
+            "class": ""
+          },
+          {
+            "name": "Large",
+            "class": "imageLarge"
+          }
+        ]
+      },
+    ],
+    "DynamicText": [
+      {
+        "name": "Font Weight",
+        "type": "Dropdown",
+        "description": "Emphasize the text with a heavier or lighter font weight",
+        "options": [
+          {
+            "name": "Light",
+            "class": "textLight"
+          },
+          {
+            "name": "Default",
+            "class": "textNormal"
+          },
+          {
+            "name": "Semibold",
+            "class": "textSemiBold"
+          },
+          {
+            "name": "Bold",
+            "class": "textBold"
+          }
+        ]
+      },
+      {
+        "name": "Color",
+        "type": "Dropdown",
+        "description": "Change the color of text.",
+        "options": [
+          {
+            "name": "Default",
+            "class": ""
+          },
+          {
+            "name": "Brand Primary",
+            "class": "textPrimary"
+          },
+          {
+            "name": "Brand Secondary",
+            "class": "textSecondary"
+          },
+          {
+            "name": "Brand Success",
+            "class": "textSuccess"
+          },
+          {
+            "name": "Brand Warning",
+            "class": "textWarning"
+          },
+          {
+            "name": "Brand Danger",
+            "class": "textDanger"
+          }
+        ]
+      },
+      {
+        "name": "Alignment",
+        "type": "Dropdown",
+        "description": "Align the text.",
+        "options": [
+          {
+            "name": "Left",
+            "class": "textLeft"
+          },
+          {
+            "name": "Center",
+            "class": "textCenter"
+          },
+          {
+            "name": "Right",
+            "class": "textRight"
+          }
+        ]
+      },
+      {
+        "name": "Transform",
+        "type": "Dropdown",
+        "description": "Change the letter case of the text.",
+        "options": [
+          {
+            "name": "Lowercase",
+            "class": "textLowercase"
+          },
+          {
+            "name": "Uppercase",
+            "class": "textUppercase"
+          },
+          {
+            "name": "Capitalize",
+            "class": "textCapitalize"
+          }
+        ]
+      },
+    ]
+  }
+}

@@ -7,8 +7,8 @@ import { gray, brand, font } from "../variables";
 ========================================================================== */
 
 export const Text = {
-  color: font.color,
-  fontSize: font.size
+    color: font.color,
+    fontSize: font.size
 };
 
 //== Design Properties
@@ -17,101 +17,101 @@ export const Text = {
 // Text Colors
 
 export const textPrimary = {
-  color: brand.primary
+    color: brand.primary
 };
 export const textSecondary = {
-  color: brand.secondary
+    color: brand.secondary
 };
 export const textSuccess = {
-  color: brand.success
+    color: brand.success
 };
 export const textWarning = {
-  color: brand.warning
+    color: brand.warning
 };
 export const textDanger = {
-  color: brand.danger
+    color: brand.danger
 };
 
 export const textGrayDarkest = {
-  color: gray.darkest
+    color: gray.darkest
 };
 export const textGrayDarker = {
-  color: gray.darker
+    color: gray.darker
 };
 export const textGrayDark = {
-  color: gray.dark
+    color: gray.dark
 };
 export const textGrayRegular = {
-  color: gray.regular
+    color: gray.regular
 };
 export const textGrayLight = {
-  color: gray.light
+    color: gray.light
 };
 export const textGrayLighter = {
-  color: gray.lighter
+    color: gray.lighter
 };
 export const textGrayLightest = {
-  color: gray.lightest
+    color: gray.lightest
 };
 
 // Text Sizes
 export const h1 = {
-  fontSize: font.sizeH1
+    fontSize: font.sizeH1
 };
 export const h2 = {
-  fontSize: font.sizeH2
+    fontSize: font.sizeH2
 };
 export const h3 = {
-  fontSize: font.sizeH3
+    fontSize: font.sizeH3
 };
 export const h4 = {
-  fontSize: font.sizeH4
+    fontSize: font.sizeH4
 };
 export const h5 = {
-  fontSize: font.sizeH5
+    fontSize: font.sizeH5
 };
 export const h6 = {
-  fontSize: font.sizeH6
+    fontSize: font.sizeH6
 };
 export const textSmall = {
-  fontSize: font.sizeSmall
+    fontSize: font.sizeSmall
 };
 export const textLarge = {
-  fontSize: font.sizeLarge
+    fontSize: font.sizeLarge
 };
 
 // Text Alignment
 export const textLeft = {
-  textAlign: "left"
+    textAlign: "left"
 };
 export const textCenter = {
-  textAlign: "center"
+    textAlign: "center"
 };
 export const textRight = {
-  textAlign: "right"
+    textAlign: "right"
 };
 
 // Text Weights
 export const textLight = {
-  fontWeight: font.weightLight
+    fontWeight: font.weightLight
 };
 export const textNormal = {
-  fontWeight: font.weightNormal
+    fontWeight: font.weightNormal
 };
 export const textSemiBold = {
-  fontWeight: font.weightSemiBold
+    fontWeight: font.weightSemiBold
 };
 export const textBold = {
-  fontWeight: font.weightBold
+    fontWeight: font.weightBold
 };
 
 // Text Transformations
 export const textLowercase = {
-  textTransform: "lowercase"
+    textTransform: "lowercase"
 };
 export const textUppercase = {
-  textTransform: "uppercase"
+    textTransform: "uppercase"
 };
 export const textCapitalize = {
-  textTransform: "capitalize"
+    textTransform: "capitalize"
 };

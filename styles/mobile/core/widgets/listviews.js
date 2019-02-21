@@ -7,16 +7,15 @@ import { gray } from "../variables";
 ========================================================================== */
 
 export const ListView = {
-  list: {
-    // numColumns: 1,
-    showsHorizontalScrollIndicator: false
-  },
-  listItem: {}
+    list: {
+        // numColumns: 1,
+    },
+    listItem: {}
 };
 
 export const listItemBorderBottom = {
-  listItem: {
-    borderBottomWidth: 1,
-    borderBottomColor: gray.lightest
-  }
+    listItem: {
+        borderBottomWidth: 1,
+        borderBottomColor: gray.lightest
+    }
 };
