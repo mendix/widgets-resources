@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.native.appevents.AppEvents" needsEntityContext="false" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
+    <name>App events</name>
+    <description>Perform actions on all kinds of events</description>
+    <icon></icon>
+    <properties>
+        <property key="onLoad" type="action" required="false">
+            <caption>On load</caption>
+            <category>Widget</category>
+            <description>The moment this widget is created.</description>
+        </property>
+        <property key="onUnload" type="action" required="false">
+            <caption>On unload</caption>
+            <category>Widget</category>
+            <description>The moment this widget is destroyed.</description>
+        </property>
+
+        <property key="onAppStateBackground" type="action" required="false">
+            <caption>On pause</caption>
+            <category>App</category>
+            <description>The user navigated to another app or the home screen, which pauses the app.</description>
+        </property>
+        <property key="onAppStateActive" type="action" required="false">
+            <caption>On resume</caption>
+            <category>App</category>
+            <description>The user navigated back to this app.</description>
+        </property>
+        <property key="onAppStateActiveTimeout" type="integer" defaultValue="0">
+            <caption>On resume timeout</caption>
+            <category>App</category>
+            <description>Only call the on resume action, if it was this amount of seconds after the last time the app was resumed (or started).</description>
+        </property>
+        <property key="onAppStateInactive" type="action" required="false">
+            <caption>On inactive</caption>
+            <category>App</category>
+            <description>The user is currently transitioning between foreground and background, or entered a period of inactivity by using the multitasking view or receiving an incoming call.</description>
+        </property>
+
+        <property key="onOnline" type="action" required="false">
+            <caption>On online</caption>
+            <category>Network</category>
+            <description>The device network status changed to online. Also called on load if online.</description>
+        </property>
+        <property key="onOnlineTimeout" type="integer" defaultValue="5">
+            <caption>On online timeout</caption>
+            <category>Network</category>
+            <description>Only call the on online action, if it was this amount of seconds after the last time the device came online.</description>
+        </property>
+        <property key="onOffline" type="action" required="false">
+            <caption>On offline</caption>
+            <category>Network</category>
+            <description>The device network status changed to offline. Also called on load if offline.</description>
+        </property>
+
+        <property key="onKeyboardShow" type="action" required="false">
+            <caption>On show</caption>
+            <category>Keyboard</category>
+            <description>The on screen keyboard was opened</description>
+        </property>
+        <property key="onKeyboardHide" type="action" required="false">
+            <caption>On hide</caption>
+            <category>Keyboard</category>
+            <description>The on screen keyboard was closed</description>
+        </property>
+
+        <property key="intervals" type="object" isList="true" required="false">
+            <caption>Interval events</caption>
+            <category>Time</category>
+            <description>Call an action based on an interval, until this widget is destroyed.</description>
+            <properties>
+                <property key="interval" type="integer" defaultValue="30">
+                    <caption>Interval</caption>
+                    <category>Timer</category>
+                    <description>Defines how often the action is called, in seconds.</description>
+                </property>
+                <property key="placeholderForModelerBug1" type="string" required="false">
+                    <caption>Ignore me</caption>
+                    <category>Ignore me</category>
+                    <description/>
+                </property>
+                <property key="placeholderForModelerBug2" type="string" required="false">
+                    <caption>Ignore me too</caption>
+                    <category>Ignore me</category>
+                    <description/>
+                </property>
+                <property key="action" type="action" required="true">
+                    <caption>Action</caption>
+                    <category>Timer</category>
+                    <description></description>
+                </property>
+            </properties>
+        </property>
+    </properties>
+</widget>
