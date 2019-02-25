@@ -33,13 +33,13 @@
         <property key="onAppStateInactive" type="action" required="false">
             <caption>On inactive</caption>
             <category>App</category>
-            <description>The user is currently transitioning between foreground and background, or entered a period of inactivity by using the multitasking view or receiving an incoming call.</description>
+            <description>The user is currently transitioning between foreground and background, or entered a period of inactivity by using the multitasking view or receiving an incoming call. (iOS only, on Android these cases use on pause.)</description>
         </property>
 
         <property key="onOnline" type="action" required="false">
             <caption>On online</caption>
             <category>Network</category>
-            <description>The device network status changed to online. Also called on load if online.</description>
+            <description>The device network status changed to online.</description>
         </property>
         <property key="onOnlineTimeout" type="integer" defaultValue="5">
             <caption>On online timeout</caption>
@@ -49,7 +49,7 @@
         <property key="onOffline" type="action" required="false">
             <caption>On offline</caption>
             <category>Network</category>
-            <description>The device network status changed to offline. Also called on load if offline.</description>
+            <description>The device network status changed to offline.</description>
         </property>
 
         <property key="onKeyboardShow" type="action" required="false">
