@@ -20,7 +20,7 @@
     },
     "dependencies": {
         "@ptomasroos/react-native-multi-slider": "^1.0.0",
-        "prop-types": "^15.6.2"
+        "prop-types": "^15.7.2"
     },
     "devDependencies": {
         "@types/ptomasroos__react-native-multi-slider": "0.0.1"
