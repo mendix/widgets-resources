@@ -16,19 +16,22 @@ export class Badge extends Component<BadgeProps> {
 
         return (
             <View style={styles.container}>
-                {this.props.onClick ? (
-                    isAndroid ? (
-                        <TouchableNativeFeedback style={componentStyle} onPress={this.onClickHandler}>
-                            {this.renderText()}
-                        </TouchableNativeFeedback>
+                <View style={componentStyle}>
+                    {this.props.onClick ? (
+                        isAndroid ? (
+                            <TouchableNativeFeedback
+                                background={TouchableNativeFeedback.SelectableBackgroundBorderless()}
+                                onPress={this.onClickHandler}
+                            >
+                                {this.renderText()}
+                            </TouchableNativeFeedback>
+                        ) : (
+                            <TouchableOpacity onPress={this.onClickHandler}>{this.renderText()}</TouchableOpacity>
+                        )
                     ) : (
-                        <TouchableOpacity style={componentStyle} onPress={this.onClickHandler}>
-                            {this.renderText()}
-                        </TouchableOpacity>
-                    )
-                ) : (
-                    <View style={componentStyle}>{this.renderText()}</View>
-                )}
+                        this.renderText()
+                    )}
+                </View>
             </View>
         );
     }
