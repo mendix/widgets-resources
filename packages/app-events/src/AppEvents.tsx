@@ -1,42 +1,37 @@
 import { Component } from "react";
-import { AppState, AppStateStatus, Keyboard, NetInfo } from "react-native";
+import { AppState, AppStateStatus, NetInfo } from "react-native";
 
 import { AppEventsProps } from "../typings/AppEventsProps";
 
 export class AppEvents extends Component<AppEventsProps> {
     private onAppStateChangeHandler = this.onAppStateChange.bind(this);
     private onConnectionChangeHandler = this.onConnectionChange.bind(this);
-    private onKeyboardDidShowHandler = this.onKeyboardDidShow.bind(this);
-    private onKeyboardDidHideHandler = this.onKeyboardDidHide.bind(this);
 
     private appState = AppState.currentState;
-    private lastOnAppStateActive = Date.now();
+    private lastOnResume = Date.now();
+
+    private isConnected?: boolean;
     private lastOnOnline = 0;
+
     private intervalHandles: number[] = [];
-
-    private get hasAppStateActions(): boolean {
-        return !!(this.props.onAppStateActive || this.props.onAppStateBackground || this.props.onAppStateInactive);
-    }
-
-    private get hasNetworkActions(): boolean {
-        return !!(this.props.onOnline || this.props.onOffline);
-    }
+    private timeoutHandles: number[] = [];
 
     componentDidMount(): void {
-        if (this.hasAppStateActions) {
+        executeAction(this.props.onLoad);
+
+        if (this.props.onResume) {
             AppState.addEventListener("change", this.onAppStateChangeHandler);
         }
 
-        if (this.hasNetworkActions) {
+        NetInfo.isConnected.fetch().then(isConnected => {
+            this.isConnected = isConnected;
             NetInfo.isConnected.addEventListener("connectionChange", this.onConnectionChangeHandler);
-        }
+        });
 
-        if (this.props.onKeyboardShow) {
-            Keyboard.addListener("keyboardDidShow", this.onKeyboardDidShowHandler);
-        }
-
-        if (this.props.onKeyboardHide) {
-            Keyboard.addListener("keyboardDidHide", this.onKeyboardDidHideHandler);
+        if (this.props.timeouts) {
+            this.timeoutHandles = this.props.timeouts.map(timeout =>
+                setTimeout(() => executeAction(timeout.action), timeout.timeout * 1000)
+            );
         }
 
         if (this.props.intervals) {
@@ -44,30 +39,19 @@ export class AppEvents extends Component<AppEventsProps> {
                 setInterval(() => executeAction(interval.action), interval.interval * 1000)
             );
         }
-
-        executeAction(this.props.onLoad);
     }
 
     componentWillUnmount(): void {
-        if (this.hasAppStateActions) {
+        if (this.props.onResume) {
             AppState.removeEventListener("change", this.onAppStateChangeHandler);
         }
 
-        if (this.hasNetworkActions) {
+        if (this.props.onOnline) {
             NetInfo.isConnected.removeEventListener("connectionChange", this.onConnectionChangeHandler);
         }
 
-        if (this.props.onKeyboardShow) {
-            Keyboard.removeListener("keyboardDidShow", this.onKeyboardDidShowHandler);
-        }
-
-        if (this.props.onKeyboardHide) {
-            Keyboard.removeListener("keyboardDidHide", this.onKeyboardDidHideHandler);
-        }
-
+        this.timeoutHandles.forEach(timeout => clearTimeout(timeout));
         this.intervalHandles.forEach(interval => clearInterval(interval));
-
-        executeAction(this.props.onUnload);
     }
 
     render(): null {
@@ -79,39 +63,25 @@ export class AppEvents extends Component<AppEventsProps> {
             return;
         }
 
-        switch (nextAppState) {
-            case "active":
-                if (isPastTimeout(this.lastOnAppStateActive, this.props.onAppStateActiveTimeout)) {
-                    executeAction(this.props.onAppStateActive);
-                    this.lastOnAppStateActive = Date.now();
-                }
-                break;
-            case "background":
-                executeAction(this.props.onAppStateBackground);
-                break;
-            case "inactive":
-                executeAction(this.props.onAppStateInactive);
-                break;
+        if (nextAppState === "active" && isPastTimeout(this.lastOnResume, this.props.onResumeTimeout)) {
+            executeAction(this.props.onResume);
+            this.lastOnResume = Date.now();
         }
 
         this.appState = nextAppState;
     }
 
-    private onConnectionChange(isConnected: boolean): void {
-        if (isConnected && isPastTimeout(this.lastOnOnline, this.props.onOnlineTimeout)) {
+    private onConnectionChange(nextIsConnected: boolean): void {
+        if (this.isConnected === nextIsConnected) {
+            return;
+        }
+
+        if (nextIsConnected && isPastTimeout(this.lastOnOnline, this.props.onOnlineTimeout)) {
             executeAction(this.props.onOnline);
             this.lastOnOnline = Date.now();
-        } else {
-            executeAction(this.props.onOffline);
         }
-    }
 
-    private onKeyboardDidShow(): void {
-        executeAction(this.props.onKeyboardShow);
-    }
-
-    private onKeyboardDidHide(): void {
-        executeAction(this.props.onKeyboardHide);
+        this.isConnected = nextIsConnected;
     }
 }
 

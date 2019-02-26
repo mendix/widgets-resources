@@ -8,6 +8,13 @@ interface CommonProps {
     class: string;
 }
 
+export interface TimeoutsType {
+    timeout: number;
+    placeholderForModelerBug1?: string;
+    placeholderForModelerBug2?: string;
+    action: PluginWidget.ActionValue;
+}
+
 export interface IntervalsType {
     interval: number;
     placeholderForModelerBug1?: string;
@@ -17,15 +24,10 @@ export interface IntervalsType {
 
 export interface AppEventsProps extends CommonProps {
     onLoad?: PluginWidget.ActionValue;
-    onUnload?: PluginWidget.ActionValue;
-    onAppStateBackground?: PluginWidget.ActionValue;
-    onAppStateActive?: PluginWidget.ActionValue;
-    onAppStateActiveTimeout: number;
-    onAppStateInactive?: PluginWidget.ActionValue;
+    onResume?: PluginWidget.ActionValue;
+    onResumeTimeout: number;
     onOnline?: PluginWidget.ActionValue;
     onOnlineTimeout: number;
-    onOffline?: PluginWidget.ActionValue;
-    onKeyboardShow?: PluginWidget.ActionValue;
-    onKeyboardHide?: PluginWidget.ActionValue;
+    timeouts?: TimeoutsType[];
     intervals?: IntervalsType[];
 }
