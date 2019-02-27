@@ -121,6 +121,7 @@ const config = {
         "react-native-maps",
         "react-native-svg",
         "react-native-video",
+        "react-native-view-shot",
         "react-native-webview"
     ],
     preserveModules: true,
