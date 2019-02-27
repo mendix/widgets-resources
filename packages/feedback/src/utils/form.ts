@@ -1,5 +1,5 @@
 import { stringify } from "querystringify";
-import { Dimensions } from "react-native";
+import { Dimensions, Platform } from "react-native";
 
 const SPRINTR_FEEDBACK_URL = "https://sprintr.home.mendix.com/submitissue/";
 
@@ -9,13 +9,13 @@ export const sendToSprintr = (data: any, cb: (success: boolean) => void) => {
     const dataToSend = {
         apiversion: "1.0",
         application: data.appId,
-        username: data.username ? data.username.value : "Fake user",
-        emailaddress: data.email ? data.email.value : "native@mendix.com",
+        username: "Native Feedback",
+        emailaddress: "native@mendix.com",
         userroles: "",
-        shortname, // Max length = 200
-        description, // Max length = 128000
+        shortname,
+        description,
         img: data.allowScreenshot ? data.screenshot.replace(/(data:image\/png;base64,)/, "") : "",
-        browser: "React Native",
+        browser: "React Native for " + Platform.OS,
         screensize: Dimensions.get("window").width + "x" + Dimensions.get("window").height,
         issuetype: "issue",
         documentType: "Page",

@@ -9,8 +9,6 @@ interface CommonProps {
 }
 
 export interface FeedbackProps extends CommonProps {
-    username?: PluginWidget.EditableValue<string>;
-    email?: PluginWidget.EditableValue<string>;
     appId: string;
     allowScreenshot: boolean;
     hideLogo: boolean;
