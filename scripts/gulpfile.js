@@ -8,7 +8,7 @@ const rename = require("gulp-rename");
 const git = require("gulp-git");
 const rollup = require("rollup");
 const rollupConfig = require("./rollup.config");
-const typingGenerator = require("widget-typing-generator");
+const typingGenerator = require("mx-widget-typing-generator");
 
 const cwd = process.cwd();
 const pkg = require(path.join(cwd, "package.json"));
@@ -55,7 +55,7 @@ function clean() {
 function generateTypings() {
     return gulp
         .src(`./src/${pkg.config.widgetName}.xml`)
-        .pipe(typingGenerator(pkg.config.widgetName, true))
+        .pipe(typingGenerator({ widgetName: pkg.config.widgetName, isNative: true }))
         .pipe(gulp.dest("./typings"));
 }
 

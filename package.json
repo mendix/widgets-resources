@@ -34,6 +34,7 @@
         "lerna": "^3.13.0",
         "lint-staged": "^8.1.4",
         "mendix-client": "^7.15.6",
+        "mx-widget-typing-generator": "^0.0.5",
         "mime": "^2.4.0",
         "prettier": "^1.16.4",
         "pretty-quick": "^1.10.0",
@@ -60,8 +61,7 @@
         "tslint": "^5.13.0",
         "tslint-config-prettier": "^1.18.0",
         "tslint-react": "^3.6.0",
-        "typescript": "^3.3.3",
-        "widget-typing-generator": "^0.0.1"
+        "typescript": "^3.3.3"
     },
     "husky": {
         "hooks": {
