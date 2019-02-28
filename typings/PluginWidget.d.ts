@@ -1,12 +1,11 @@
 import { ReactNode } from "react";
 
-export declare type Option<T> = T | undefined;
-// @ts-ignore
-export declare type BigJS = BigJsLibrary.BigJS;
-export declare type GUID = string & {
+type Option<T> = T | undefined;
+type BigJS = BigJs.Big;
+type GUID = string & {
     __guidTag: any;
 };
-export declare type AttributeType =
+type AttributeType =
     | "AutoNumber"
     | "Binary"
     | "Boolean"
@@ -22,8 +21,8 @@ export declare type AttributeType =
     | "ObjectReference"
     | "ObjectReferenceSet"
     | "String";
-export declare type PrimitiveAttributeValue = undefined | string | boolean | Date | BigJS;
-export declare type AttributeValue = PrimitiveAttributeValue | GUID | GUID[];
+type PrimitiveAttributeValue = undefined | string | boolean | Date | BigJS;
+type AttributeValue = PrimitiveAttributeValue | GUID | GUID[];
 
 declare global {
     export type PrimitiveValue = number | string | boolean | null;
