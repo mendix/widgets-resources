@@ -1,16 +1,17 @@
 /**
- * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
+ * This file was generated from ColorWheel.xml
+ * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
+import PropTypes from "prop-types";
 
 interface CommonProps {
-    id: string;
-    class: string;
+    style: PropTypes.array;
 }
 
 export interface ColorWheelProps extends CommonProps {
-    color: PluginWidget.EditableValue<string>;
-    onChange?: PluginWidget.ActionValue;
-    onChangeComplete?: PluginWidget.ActionValue;
+    color: EditableValue<string>;
+    onChange?: ActionValue;
+    onChangeComplete?: ActionValue;
     handleSize: number;
 }

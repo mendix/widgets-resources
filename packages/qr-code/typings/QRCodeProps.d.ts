@@ -1,15 +1,16 @@
 /**
- * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
+ * This file was generated from QRCode.xml
+ * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
+import PropTypes from "prop-types";
 
 interface CommonProps {
-    id: string;
-    class: string;
+    style: PropTypes.array;
 }
 
 export interface QRCodeProps extends CommonProps {
-    value: PluginWidget.EditableValue<string>;
+    value: EditableValue<string>;
     size: number;
     color: string;
     backgroundColor: string;

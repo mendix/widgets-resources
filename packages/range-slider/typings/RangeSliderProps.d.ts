@@ -1,26 +1,27 @@
 /**
- * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
+ * This file was generated from RangeSlider.xml
+ * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
+import PropTypes from "prop-types";
 
 interface CommonProps {
-    id: string;
-    class: string;
+    style: PropTypes.array;
 }
 
 export type EditableEnum = "default" | "never";
 
 export interface RangeSliderProps extends CommonProps {
-    lowerValue: PluginWidget.EditableValue<BigJs.Big>;
-    upperValue: PluginWidget.EditableValue<BigJs.Big>;
-    minimumValue?: PluginWidget.EditableValue<BigJs.Big>;
-    maximumValue?: PluginWidget.EditableValue<BigJs.Big>;
+    lowerValue: EditableValue<BigJs.Big>;
+    upperValue: EditableValue<BigJs.Big>;
+    minimumValue?: EditableValue<BigJs.Big>;
+    maximumValue?: EditableValue<BigJs.Big>;
     defaultMinimumValue: number;
     defaultMaximumValue: number;
     editable: EditableEnum;
-    onChange?: PluginWidget.ActionValue;
-    onSlidingComplete?: PluginWidget.ActionValue;
-    step?: PluginWidget.EditableValue<BigJs.Big>;
+    onChange?: ActionValue;
+    onSlidingComplete?: ActionValue;
+    step?: EditableValue<BigJs.Big>;
     defaultStep: number;
     selectedTrackColor?: string;
     trackColor?: string;

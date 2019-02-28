@@ -61,8 +61,8 @@ export class RangeSlider extends Component<RangeSliderProps, State> {
 
     private onChange(values: number[]): void {
         if (
-            this.props.lowerValue.status === PluginWidget.ValueStatus.Available &&
-            this.props.upperValue.status === PluginWidget.ValueStatus.Available
+            this.props.lowerValue.status === ValueStatus.Available &&
+            this.props.upperValue.status === ValueStatus.Available
         ) {
             this.props.lowerValue.setTextValue(String(values[0]));
             this.props.upperValue.setTextValue(String(values[1]));

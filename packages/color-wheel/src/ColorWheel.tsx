@@ -9,7 +9,7 @@ export class ColorWheel extends Component<ColorWheelProps> {
     private readonly onChangeCompleteHandler = this.onChangeComplete.bind(this);
 
     render(): JSX.Element | null {
-        return this.props.color.status === PluginWidget.ValueStatus.Available ? (
+        return this.props.color.status === ValueStatus.Available ? (
             <RNColorWheel
                 initialColor={this.props.color.value}
                 thumbSize={this.props.handleSize}
@@ -36,7 +36,7 @@ export class ColorWheel extends Component<ColorWheelProps> {
     }
 
     private setValue(hsv: HSV): void {
-        if (this.props.color.status === PluginWidget.ValueStatus.Available) {
+        if (this.props.color.status === ValueStatus.Available) {
             const value = colorsys.hsvToHex(hsv);
             this.props.color.setValue(value);
         }

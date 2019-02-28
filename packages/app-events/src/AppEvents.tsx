@@ -85,7 +85,7 @@ export class AppEvents extends Component<AppEventsProps> {
     }
 }
 
-function executeAction(action?: PluginWidget.ActionValue): void {
+function executeAction(action?: ActionValue): void {
     if (action && action.canExecute) {
         action.execute();
     }

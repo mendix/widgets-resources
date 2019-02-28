@@ -1,17 +1,18 @@
 /**
- * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
+ * This file was generated from SegmentedControl.xml
+ * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
+import PropTypes from "prop-types";
 
 interface CommonProps {
-    id: string;
-    class: string;
+    style: PropTypes.array;
 }
 
 export type EditableEnum = "default" | "never";
 
 export interface SegmentedControlProps extends CommonProps {
-    enum: PluginWidget.EditableValue<string>;
+    enum: EditableValue<string>;
     editable: EditableEnum;
-    onChange?: PluginWidget.ActionValue;
+    onChange?: ActionValue;
 }

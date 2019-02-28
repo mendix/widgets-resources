@@ -1,16 +1,20 @@
 /**
- * Auto-generated from Charts.xml
+ * This file was generated from Charts.xml
+ * WARNING: All changes made to this file will be overwritten
+ * @author Mendix Widgets Team
  */
+import PropTypes from "prop-types";
 
 interface CommonProps {
-    id: string;
-    class: string;
+    style: PropTypes.array;
 }
 
+export type TypeEnum = "area" | "stackedArea" | "bar" | "stackedBar" | "line" | "pie";
+
 export interface ChartsProps extends CommonProps {
-    type: "area" | "stackedArea" | "bar" | "stackedBar" | "line" | "pie";
-    values?: PluginWidget.EditableValue<string>;
-    onClick: PluginWidget.ActionValue;
+    type: TypeEnum;
+    values?: EditableValue<string>;
+    onClick: ActionValue;
     showLabels: boolean;
     height: number;
     showGrid: boolean;

@@ -21,7 +21,7 @@ export class Rating extends Component<RatingProps> {
     }
 
     private onChange(rating: number): void {
-        if (this.props.rating.status === PluginWidget.ValueStatus.Available) {
+        if (this.props.rating.status === ValueStatus.Available) {
             this.props.rating.setTextValue(String(rating));
 
             if (this.props.onChange && this.props.onChange.canExecute) {

@@ -1,33 +1,34 @@
 /**
- * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
+ * This file was generated from AppEvents.xml
+ * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
+import PropTypes from "prop-types";
 
 interface CommonProps {
-    id: string;
-    class: string;
+    style: PropTypes.array;
 }
 
 export interface TimeoutsType {
     timeout: number;
     placeholderForModelerBug1?: string;
     placeholderForModelerBug2?: string;
-    action: PluginWidget.ActionValue;
+    action: ActionValue;
 }
 
 export interface IntervalsType {
     interval: number;
     placeholderForModelerBug1?: string;
     placeholderForModelerBug2?: string;
-    action: PluginWidget.ActionValue;
+    action: ActionValue;
 }
 
 export interface AppEventsProps extends CommonProps {
-    onLoad?: PluginWidget.ActionValue;
-    onResume?: PluginWidget.ActionValue;
+    onLoad?: ActionValue;
+    onResume?: ActionValue;
     onResumeTimeout: number;
-    onOnline?: PluginWidget.ActionValue;
+    onOnline?: ActionValue;
     onOnlineTimeout: number;
-    timeouts?: TimeoutsType[];
-    intervals?: IntervalsType[];
+    timeouts: TimeoutsType[];
+    intervals: IntervalsType[];
 }

@@ -1,22 +1,23 @@
 /**
- * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
+ * This file was generated from Notifications.xml
+ * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
+import PropTypes from "prop-types";
 
 interface CommonProps {
-    id: string;
-    class: string;
+    style: PropTypes.array;
 }
 
 export interface ActionsType {
     name: string;
     placeholderForModelerBug1?: string;
     placeholderForModelerBug2?: string;
-    onReceive?: PluginWidget.ActionValue;
-    onOpen?: PluginWidget.ActionValue;
+    onReceive?: ActionValue;
+    onOpen?: ActionValue;
 }
 
 export interface NotificationsProps extends CommonProps {
     actions: ActionsType[];
-    guid?: PluginWidget.EditableValue<string>;
+    guid?: EditableValue<string>;
 }

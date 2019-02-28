@@ -98,7 +98,7 @@ export class Maps extends Component<MapsProps> {
         longitude: number,
         title?: string,
         description?: string,
-        action?: PluginWidget.ActionValue
+        action?: ActionValue
     ): JSX.Element {
         const onPress = () => onMarkerPress(action);
         return (
@@ -127,7 +127,7 @@ export class Maps extends Component<MapsProps> {
     }
 }
 
-function onMarkerPress(action?: PluginWidget.ActionValue): void {
+function onMarkerPress(action?: ActionValue): void {
     if (action && action.canExecute) {
         action.execute();
     }

@@ -1,22 +1,23 @@
 /**
- * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
+ * This file was generated from WebView.xml
+ * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
+import PropTypes from "prop-types";
 
 interface CommonProps {
-    id: string;
-    class: string;
+    style: PropTypes.array;
 }
 
 export interface WebViewProps extends CommonProps {
-    url?: PluginWidget.EditableValue<string>;
+    url?: EditableValue<string>;
     staticUrl?: string;
     javaScriptEnabled: boolean;
     allowsInlineMediaPlayback: boolean;
     scrollEnabled: boolean;
     userAgent?: string;
-    onLoad?: PluginWidget.ActionValue;
-    onError?: PluginWidget.ActionValue;
-    onLoadStart?: PluginWidget.ActionValue;
-    onLoadEnd?: PluginWidget.ActionValue;
+    onLoad?: ActionValue;
+    onError?: ActionValue;
+    onLoadStart?: ActionValue;
+    onLoadEnd?: ActionValue;
 }

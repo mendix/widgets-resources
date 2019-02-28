@@ -1,10 +1,10 @@
-import { Component, createElement } from "react";
+import { Component, createElement, createRef } from "react";
 import { GestureResponderEvent, Slider as RNSlider, TouchableWithoutFeedback, View } from "react-native";
 
 import { SliderProps } from "../typings/SliderProps";
 
 export class Slider extends Component<SliderProps> {
-    private readonly viewRef = React.createRef<View>();
+    private readonly viewRef = createRef<View>();
     private sliding = false;
 
     private readonly onChangeHandler = this.onChange.bind(this);
@@ -85,7 +85,7 @@ export class Slider extends Component<SliderProps> {
     }
 
     private setValue(value: number): void {
-        if (this.props.value.status === PluginWidget.ValueStatus.Available) {
+        if (this.props.value.status === ValueStatus.Available) {
             this.props.value.setTextValue(String(value));
 
             if (this.props.onChange && this.props.onChange.canExecute) {

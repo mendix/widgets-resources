@@ -1,11 +1,12 @@
 /**
- * AUTO-GENERATED file: please do not change this file otherwise it will be overwritten
+ * This file was generated from Badge.xml
+ * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
+import PropTypes from "prop-types";
 
 interface CommonProps {
-    id: string;
-    class: string;
+    style: PropTypes.array;
 }
 
 export type TypeEnum = "badge" | "label";
@@ -13,9 +14,9 @@ export type TypeEnum = "badge" | "label";
 export type ColorEnum = "default" | "primary" | "success" | "info" | "warning" | "danger";
 
 export interface BadgeProps extends CommonProps {
-    value?: PluginWidget.EditableValue<string | BigJs.Big>;
+    value?: EditableValue<string | BigJs.Big>;
     defaultValue?: string;
-    onClick?: PluginWidget.ActionValue;
+    onClick?: ActionValue;
     type: TypeEnum;
     color: ColorEnum;
 }
