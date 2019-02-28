@@ -1,6 +1,4 @@
-import { TextBox } from "./textbox";
-import { gray, spacing, border } from "../variables";
-import { Platform } from "react-native";
+import { TextBox } from './textbox';
 
 /* ==========================================================================
     DatePicker
@@ -9,21 +7,15 @@ import { Platform } from "react-native";
 ========================================================================== */
 
 export const DatePicker = {
-    label: TextBox.label,
-    value: {
-        borderColor: gray.lightest,
-        backgroundColor: "#FFF",
-        ...Platform.select({
-            ios: {
-                borderTopWidth: 1,
-                borderBottomWidth: 1,
-                padding: spacing.smaller
-            },
-            android: {
-                borderWidth: 1,
-                borderRadius: border.radius,
-                padding: spacing.small
-            }
-        })
-    }
+  label: TextBox.label,
+  value: {
+    color: TextBox.input.color,
+    fontSize: TextBox.input.fontSize,
+    backgroundColor: TextBox.input.backgroundColor,
+    paddingVertical: TextBox.input.paddingVertical,
+    paddingHorizontal: TextBox.input.paddingHorizontal,
+    borderRadius: TextBox.input.radius,
+    borderWidth: TextBox.input.borderWidth,
+    borderColor: TextBox.input.borderColor,
+  },
 };

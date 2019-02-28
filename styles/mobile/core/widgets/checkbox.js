@@ -1,5 +1,6 @@
-import { TextBox } from "./textbox";
-import { Platform } from "react-native";
+import { TextBox } from './textbox';
+import { Platform } from 'react-native';
+import { spacing } from '../variables';
 
 /* ==========================================================================
     CheckBox
@@ -8,26 +9,33 @@ import { Platform } from "react-native";
 ========================================================================== */
 
 export const CheckBox = {
-    label: TextBox.label,
-    input: {
-        ...TextBox.input,
-        ...Platform.select({
-            ios: {
-                borderTopWidth: 1,
-                borderBottomWidth: 1
-            },
-            android: {}
-        })
-    },
-    inputError: TextBox.inputError,
-    validationMessage: TextBox.validationMessage
+  label: TextBox.label,
+  input: {
+    ...TextBox.input,
+    ...Platform.select({
+      ios: {
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+      },
+      android: {
+        backgroundColor: 'transparent',
+      },
+    }),
+  },
+  inputError: TextBox.inputError,
+  validationMessage: TextBox.validationMessage,
 };
 export const CheckBoxVertical = {
-    label: {
-        ...CheckBox.label,
-        marginBottom: 5
-    },
-    input: CheckBox.input,
-    inputError: CheckBox.inputError,
-    validationMessage: CheckBox.validationMessage
+  label: {
+    ...CheckBox.label,
+    marginBottom: 5,
+    marginLeft: spacing.small,
+  },
+  input: {
+    ...CheckBox.input,
+    marginBottom: 20,
+    marginLeft: spacing.small,
+  },
+  inputError: CheckBox.inputError,
+  validationMessage: CheckBox.validationMessage,
 };

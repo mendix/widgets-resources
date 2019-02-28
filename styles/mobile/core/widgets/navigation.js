@@ -1,4 +1,5 @@
-import { gray, brand } from "../variables";
+import { gray, brand, font, background } from '../variables';
+import { Platform } from 'react-native';
 
 /* ==========================================================================
     TopBar / BottomBar
@@ -6,20 +7,21 @@ import { gray, brand } from "../variables";
     Default Class For Mendix TopBar / BottomBar
 ========================================================================== */
 
-//TODO: Should we split this?
 export const navigationStyle = {
   topBar: {
-    backgroundColor: "#FFF",
-    //   backButtonFontSize: ,
-    backButtonColor: gray.dark,
-    titleColor: gray.dark
-    //   titleFontSize: ,
+    backgroundColor: background.primary,
+    backButtonColor: gray.darkest,
+    backButtonFontSize: font.size,
+    titleColor: gray.darkest,
+    titleFontSize: font.sizeH4,
+    fontWeight: Platform.select({ ios: font.weightBold, android: font.weightNormal }),
   },
   bottomBar: {
-    backgroundColor: "#FFF",
+    fontSize: font.size,
+    backgroundColor: background.primary,
     textColor: gray.dark,
     iconColor: gray.dark,
     selectedIconColor: brand.primary,
-    selectedTextColor: brand.primary
-  }
+    selectedTextColor: brand.primary,
+  },
 };

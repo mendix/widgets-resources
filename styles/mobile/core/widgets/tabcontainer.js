@@ -1,5 +1,5 @@
-import { gray, brand, background } from "../variables";
-import { Platform } from "react-native";
+import { gray, brand, background } from '../variables';
+import { Platform } from 'react-native';
 
 /* ==========================================================================
     TabContainer
@@ -9,27 +9,29 @@ import { Platform } from "react-native";
 
 export const TabContainer = {
   tabView: {
-    tabBarPosition: "top"
+    tabBarPosition: 'top',
   },
   tabBar: {
     bounces: true,
-    pressColor: background.dark,
+    pressColor: background.secondary,
     pressOpacity: 0.1,
-    scrollEnabled: false,
-    backgroundColor: background.light,
+    backgroundColor: background.primary,
     ...Platform.select({
       ios: {
         height: 30,
         marginTop: 10,
         marginBottom: 10,
-        alignItems: "center"
+        alignItems: 'center',
+        scrollEnabled: true,
       },
-      android: {}
-    })
+      android: {
+        scrollEnabled: false,
+      },
+    }),
   },
   indicator: {
-    backgroundColor: background.primary,
-    height: Platform.select({ ios: 0, android: 2 })
+    backgroundColor: brand.primary,
+    height: Platform.select({ ios: 0, android: 2 }),
   },
   tab: {
     ...Platform.select({
@@ -37,14 +39,37 @@ export const TabContainer = {
         padding: 0,
         borderWidth: 1,
         borderColor: brand.primary,
-        borderRadius: 4
+        borderRadius: 4,
       },
-      android: {}
-    })
+      android: {},
+    }),
   },
   label: {
-    margin: 0,
-    padding: 0,
-    color: gray.regular
-  }
+    color: gray.darkest,
+    ...Platform.select({
+      ios: {
+        margin: 0,
+        padding: 0,
+      },
+      android: {},
+    }),
+  },
+};
+
+//== Design Properties
+//## Helper classes to change the look and feel of the widget
+//-------------------------------------------------------------------------------------------------------------------//
+// Tabcontainer as content of page
+export const tabContainerMinimal = {
+  tabView: {
+    tabBarPosition: 'top',
+    backgroundColor: 'transparent',
+  },
+  tabBar: {
+    backgroundColor: 'transparent',
+    elevation: 0,
+  },
+  indicator: {},
+  tab: {},
+  label: {},
 };
