@@ -4,7 +4,7 @@ import { Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from 
 import { BadgeProps } from "../typings/BadgeProps";
 import { styles } from "./ui/Styles";
 
-export class Badge extends Component<BadgeProps> {
+export class Badge extends Component<BadgeProps<undefined>> {
     private readonly onClickHandler = this.onClick.bind(this);
 
     render(): JSX.Element {

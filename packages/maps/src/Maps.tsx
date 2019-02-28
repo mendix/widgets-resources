@@ -4,7 +4,7 @@ import MapView, { Marker, Region } from "react-native-maps";
 
 import { MapsProps } from "../typings/MapsProps";
 
-export class Maps extends Component<MapsProps> {
+export class Maps extends Component<MapsProps<undefined>> {
     private readonly onRegionChangeHandler = this.onRegionChange.bind(this);
 
     get region(): Region | undefined {

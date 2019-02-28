@@ -8,7 +8,7 @@ interface NotificationData {
     guid?: string;
 }
 
-export class Notifications extends Component<NotificationsProps> {
+export class Notifications extends Component<NotificationsProps<undefined>> {
     private listeners: Array<() => void> = [];
 
     componentDidMount(): void {

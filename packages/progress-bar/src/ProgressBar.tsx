@@ -2,7 +2,7 @@ import { Component, createElement } from "react";
 import { Bar } from "react-native-progress";
 import { ProgressBarProps } from "../typings/ProgressBarProps";
 
-export class ProgressBar extends Component<ProgressBarProps> {
+export class ProgressBar extends Component<ProgressBarProps<undefined>> {
     private get progress(): number {
         const { maximumValue, value, defaultMaximumValue, defaultValue } = this.props;
         const maximum = maximumValue && maximumValue.value != null ? Number(maximumValue.value) : defaultMaximumValue;

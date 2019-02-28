@@ -3,7 +3,7 @@ import RNQRCode from "react-native-qrcode-svg";
 
 import { QRCodeProps } from "../typings/QRCodeProps";
 
-export class QRCode extends Component<QRCodeProps> {
+export class QRCode extends Component<QRCodeProps<undefined>> {
     render(): JSX.Element | null {
         if (!this.props.value.value) {
             return null;

@@ -3,17 +3,16 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import PropTypes from "prop-types";
 
-interface CommonProps {
-    style: PropTypes.array;
+interface CommonProps<Style> {
+    style: Style[];
 }
 
 export type EditableEnum = "default" | "never";
 
 export type IconEnum = "star" | "heart" | "rocket" | "bell";
 
-export interface RatingProps extends CommonProps {
+export interface RatingProps<Style> extends CommonProps<Style> {
     rating: EditableValue<BigJs.Big>;
     maximumValue: number;
     fractions: number;

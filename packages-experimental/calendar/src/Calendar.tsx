@@ -2,7 +2,7 @@ import { Component, createElement } from "react";
 import { Calendar as RNCalendar } from "react-native-calendars";
 import { CalendarProps } from "../typings/CalendarProps";
 
-export class Calendar extends Component<CalendarProps, {}> {
+export class Calendar extends Component<CalendarProps<undefined>, {}> {
     private readonly onChangeHandler = this.onChange.bind(this);
 
     render(): JSX.Element {

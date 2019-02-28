@@ -3,7 +3,7 @@ import { AppState, AppStateStatus, NetInfo } from "react-native";
 
 import { AppEventsProps } from "../typings/AppEventsProps";
 
-export class AppEvents extends Component<AppEventsProps> {
+export class AppEvents extends Component<AppEventsProps<undefined>> {
     private onAppStateChangeHandler = this.onAppStateChange.bind(this);
     private onConnectionChangeHandler = this.onConnectionChange.bind(this);
 

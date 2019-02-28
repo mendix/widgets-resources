@@ -8,7 +8,7 @@ interface State {
     width?: number;
 }
 
-export class RangeSlider extends Component<RangeSliderProps, State> {
+export class RangeSlider extends Component<RangeSliderProps<undefined>, State> {
     readonly state: State = {};
 
     private readonly onLayoutHandler = this.onLayout.bind(this);

@@ -3,15 +3,14 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import PropTypes from "prop-types";
 
-interface CommonProps {
-    style: PropTypes.array;
+interface CommonProps<Style> {
+    style: Style[];
 }
 
 export type EditableEnum = "default" | "never";
 
-export interface RangeSliderProps extends CommonProps {
+export interface RangeSliderProps<Style> extends CommonProps<Style> {
     lowerValue: EditableValue<BigJs.Big>;
     upperValue: EditableValue<BigJs.Big>;
     minimumValue?: EditableValue<BigJs.Big>;

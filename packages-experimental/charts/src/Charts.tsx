@@ -16,7 +16,7 @@ import {
 
 import { ChartsProps } from "../typings/ChartsProps";
 
-export class Charts extends Component<ChartsProps> {
+export class Charts extends Component<ChartsProps<undefined>> {
     private keys: any[] = [];
     private data: any[] = [];
     private dataSafe: Set<number> = new Set();

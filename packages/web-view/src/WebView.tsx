@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 import { WebView as RNWebView } from "react-native-webview";
 import { WebViewProps } from "../typings/WebViewProps";
 
-export class WebView extends Component<WebViewProps> {
+export class WebView extends Component<WebViewProps<undefined>> {
     private readonly onLoadHandler = this.onLoad.bind(this);
     private readonly onErrorHandler = this.onError.bind(this);
     private readonly onLoadStartHandler = this.onLoadStart.bind(this);

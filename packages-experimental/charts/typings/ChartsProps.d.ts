@@ -3,15 +3,14 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import PropTypes from "prop-types";
 
-interface CommonProps {
-    style: PropTypes.array;
+interface CommonProps<Style> {
+    style: Style[];
 }
 
 export type TypeEnum = "area" | "stackedArea" | "bar" | "stackedBar" | "line" | "pie";
 
-export interface ChartsProps extends CommonProps {
+export interface ChartsProps<Style> extends CommonProps<Style> {
     type: TypeEnum;
     values?: EditableValue<string>;
     onClick: ActionValue;

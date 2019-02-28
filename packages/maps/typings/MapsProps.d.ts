@@ -3,10 +3,9 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import PropTypes from "prop-types";
 
-interface CommonProps {
-    style: PropTypes.array;
+interface CommonProps<Style> {
+    style: Style[];
 }
 
 export interface MarkersType {
@@ -21,7 +20,7 @@ export type MapTypeEnum = "standard" | "satellite" | "hybrid" | "terrain";
 
 export type ProviderEnum = "default" | "google";
 
-export interface MapsProps extends CommonProps {
+export interface MapsProps<Style> extends CommonProps<Style> {
     markerTitle: EditableValue<string>;
     markerDescription: EditableValue<string>;
     markerLatitude: EditableValue<BigJs.Big>;

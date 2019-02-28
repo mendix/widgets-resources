@@ -3,10 +3,9 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import PropTypes from "prop-types";
 
-interface CommonProps {
-    style: PropTypes.array;
+interface CommonProps<Style> {
+    style: Style[];
 }
 
 export interface TimeoutsType {
@@ -23,7 +22,7 @@ export interface IntervalsType {
     action: ActionValue;
 }
 
-export interface AppEventsProps extends CommonProps {
+export interface AppEventsProps<Style> extends CommonProps<Style> {
     onLoad?: ActionValue;
     onResume?: ActionValue;
     onResumeTimeout: number;

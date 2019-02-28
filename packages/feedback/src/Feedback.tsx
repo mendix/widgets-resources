@@ -31,7 +31,7 @@ import {
 } from "./ui/styles";
 import { sendToSprintr } from "./utils/form";
 
-export class Feedback extends Component<FeedbackProps> {
+export class Feedback extends Component<FeedbackProps<undefined>> {
     private isAndroid = Platform.OS === "android";
     readonly state = {
         modalVisible: false,

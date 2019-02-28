@@ -3,13 +3,12 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import PropTypes from "prop-types";
 
-interface CommonProps {
-    style: PropTypes.array;
+interface CommonProps<Style> {
+    style: Style[];
 }
 
-export interface ProgressBarProps extends CommonProps {
+export interface ProgressBarProps<Style> extends CommonProps<Style> {
     value?: EditableValue<BigJs.Big>;
     defaultValue: number;
     maximumValue?: EditableValue<BigJs.Big>;

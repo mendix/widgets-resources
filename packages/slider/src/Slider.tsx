@@ -3,7 +3,7 @@ import { GestureResponderEvent, Slider as RNSlider, TouchableWithoutFeedback, Vi
 
 import { SliderProps } from "../typings/SliderProps";
 
-export class Slider extends Component<SliderProps> {
+export class Slider extends Component<SliderProps<undefined>> {
     private readonly viewRef = createRef<View>();
     private sliding = false;
 

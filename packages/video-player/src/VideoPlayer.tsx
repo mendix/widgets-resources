@@ -8,7 +8,7 @@ interface State {
     loading: boolean;
 }
 
-export class VideoPlayer extends Component<VideoPlayerProps, State> {
+export class VideoPlayer extends Component<VideoPlayerProps<undefined>, State> {
     readonly state = {
         loading: true
     };

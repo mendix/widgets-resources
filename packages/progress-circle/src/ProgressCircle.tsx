@@ -2,7 +2,7 @@ import { Component, createElement } from "react";
 import { Circle } from "react-native-progress";
 import { ProgressCircleProps } from "../typings/ProgressCircleProps";
 
-export class ProgressCircle extends Component<ProgressCircleProps> {
+export class ProgressCircle extends Component<ProgressCircleProps<undefined>> {
     private readonly formatTextHandler = this.formatText.bind(this);
 
     private get progress(): number {

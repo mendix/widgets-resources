@@ -3,13 +3,12 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import PropTypes from "prop-types";
 
-interface CommonProps {
-    style: PropTypes.array;
+interface CommonProps<Style> {
+    style: Style[];
 }
 
-export interface QRCodeProps extends CommonProps {
+export interface QRCodeProps<Style> extends CommonProps<Style> {
     value: EditableValue<string>;
     size: number;
     color: string;

@@ -4,7 +4,7 @@ import { RNCamera } from "react-native-camera";
 
 import { BarcodeScannerProps } from "../typings/BarcodeScannerProps";
 
-export class BarcodeScanner extends Component<BarcodeScannerProps> {
+export class BarcodeScanner extends Component<BarcodeScannerProps<undefined>> {
     private readonly onBarCodeReadHandler = this.onBarCodeRead.bind(this);
 
     render(): JSX.Element {

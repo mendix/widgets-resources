@@ -3,13 +3,12 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import PropTypes from "prop-types";
 
-interface CommonProps {
-    style: PropTypes.array;
+interface CommonProps<Style> {
+    style: Style[];
 }
 
-export interface CalendarProps extends CommonProps {
+export interface CalendarProps<Style> extends CommonProps<Style> {
     currentDate: EditableValue<Date>;
     selectedDate: EditableValue<Date>;
     minDate: EditableValue<Date>;

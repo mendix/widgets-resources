@@ -3,7 +3,7 @@ import { Rating as RNRating } from "react-native-ratings";
 
 import { RatingProps } from "../typings/RatingProps";
 
-export class Rating extends Component<RatingProps> {
+export class Rating extends Component<RatingProps<undefined>> {
     private readonly onChangeHandler = this.onChange.bind(this);
 
     render(): JSX.Element {

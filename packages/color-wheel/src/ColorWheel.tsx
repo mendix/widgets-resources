@@ -4,7 +4,7 @@ import { ColorWheel as RNColorWheel, HSV } from "react-native-color-wheel";
 
 import { ColorWheelProps } from "../typings/ColorWheelProps";
 
-export class ColorWheel extends Component<ColorWheelProps> {
+export class ColorWheel extends Component<ColorWheelProps<undefined>> {
     private readonly onChangeHandler = this.onChange.bind(this);
     private readonly onChangeCompleteHandler = this.onChangeComplete.bind(this);
 

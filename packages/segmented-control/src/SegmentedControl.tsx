@@ -3,7 +3,7 @@ import SegmentedControlTab from "react-native-segmented-control-tab";
 
 import { SegmentedControlProps } from "../typings/SegmentedControlProps";
 
-export class SegmentedControl extends Component<SegmentedControlProps> {
+export class SegmentedControl extends Component<SegmentedControlProps<undefined>> {
     private readonly onChangeHandler = this.onChange.bind(this);
 
     get values(): string[] {
