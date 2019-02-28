@@ -25,17 +25,17 @@ export const CheckBox = {
   inputError: TextBox.inputError,
   validationMessage: TextBox.validationMessage,
 };
-export const CheckBoxVertical = {
-  label: {
-    ...CheckBox.label,
-    marginBottom: 5,
-    marginLeft: spacing.small,
-  },
-  input: {
-    ...CheckBox.input,
-    marginBottom: 20,
-    marginLeft: spacing.small,
-  },
-  inputError: CheckBox.inputError,
-  validationMessage: CheckBox.validationMessage,
-};
+// export const CheckBoxVertical = {
+//   label: {
+//     ...CheckBox.label,
+//     marginBottom: 5,
+//     marginLeft: spacing.small,
+//   },
+//   input: {
+//     ...CheckBox.input,
+//     marginBottom: 20,
+//     marginLeft: spacing.small,
+//   },
+//   inputError: CheckBox.inputError,
+//   validationMessage: CheckBox.validationMessage,
+// };
