@@ -9,7 +9,7 @@ import ReactNativeTouchId from "react-native-touch-id";
 /**
  * @returns {boolean}
  */
-function IsAuthenticationSupported(): Promise<boolean> {
+function IsBiometricAuthenticationSupported(): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/naoufal/react-native-touch-id
 

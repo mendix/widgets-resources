@@ -9,16 +9,9 @@ import ReactNative from "react-native";
 /**
  * @param {string} title - This field is required.
  * @param {string} message
- * @param {string} cancelText - The default text is 'Cancel'.
- * @param {string} okText - The default text is 'OK'.
- * @returns {boolean}
+ * @returns {string}
  */
-function ShowConfirmationAlert(
-    title?: string,
-    message?: string,
-    cancelText?: string,
-    okText?: string
-): Promise<boolean> {
+function ShowMessage(title?: string, message?: string): void {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/alert
 
@@ -28,15 +21,7 @@ function ShowConfirmationAlert(
         throw new TypeError("Input parameter 'Title' is required");
     }
 
-    cancelText = cancelText || "Cancel";
-    okText = okText || "OK";
-
-    return new Promise(resolve => {
-        Alert.alert(title, message, [
-            { text: cancelText, onPress: () => resolve(false), style: "cancel" },
-            { text: okText, onPress: () => resolve(true) }
-        ]);
-    });
+    Alert.alert(title, message);
 
     // END USER CODE
 }

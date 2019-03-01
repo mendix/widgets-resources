@@ -10,7 +10,7 @@ import ReactNativeTouchId from "react-native-touch-id";
  * @param {string} reason - The reason for requesting authentication.
  * @returns {boolean}
  */
-function Authenticate(reason?: string): Promise<boolean> {
+function BiometricAuthentication(reason?: string): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/naoufal/react-native-touch-id
 
