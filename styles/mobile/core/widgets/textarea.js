@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { TextBox } from './textbox';
+import { TextBox, TextBoxVertical } from './textbox';
 import { spacing, gray, background } from '../variables';
 
 /* ==========================================================================
@@ -22,23 +22,19 @@ export const TextArea = {
 };
 export const TextAreaVertical = {
   label: {
-    ...TextArea.label,
-    marginBottom: 5,
-    marginLeft: spacing.small,
+    ...TextBoxVertical.label,
   },
   input: {
-    ...TextArea.input,
-    marginBottom: 20,
-    ...Platform.select({
-      ios: {
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
-        borderColor: gray.lightest,
-        backgroundColor: background.primary,
-      },
-      android: {},
-    }),
+    ...TextBoxVertical.input,
   },
+  inputError: TextBoxVertical.inputError,
+  validationMessage: TextBoxVertical.validationMessage,
+};
+export const TextAreaNoLabel = {
+  label: {
+    flex: -1,
+  },
+  input: TextArea.input,
   inputError: TextArea.inputError,
   validationMessage: TextArea.validationMessage,
 };

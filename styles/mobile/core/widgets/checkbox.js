@@ -1,6 +1,6 @@
-import { TextBox } from './textbox';
+import { TextBox, TextBoxVertical } from './textbox';
 import { Platform } from 'react-native';
-import { spacing } from '../variables';
+import { spacing, font } from '../variables';
 
 /* ==========================================================================
     CheckBox
@@ -11,7 +11,10 @@ import { spacing } from '../variables';
 export const CheckBox = {
   label: TextBox.label,
   input: {
-    ...TextBox.input,
+    color: font.color,
+    fontSize: font.size,
+    paddingVertical: spacing.smaller,
+    paddingHorizontal: spacing.small,
     ...Platform.select({
       ios: {
         borderTopWidth: 1,
@@ -25,17 +28,35 @@ export const CheckBox = {
   inputError: TextBox.inputError,
   validationMessage: TextBox.validationMessage,
 };
+
 export const CheckBoxVertical = {
   label: {
-    ...CheckBox.label,
-    marginBottom: 5,
-    marginLeft: spacing.small,
+    ...TextBoxVertical.label,
   },
   input: {
-    ...CheckBox.input,
-    marginBottom: 20,
-    marginLeft: spacing.small,
+    flex: 1,
+    color: TextBoxVertical.input.color,
+    fontSize: TextBoxVertical.input.size,
+    paddingVertical: TextBoxVertical.input.paddingVertical,
+    paddingHorizontal: TextBoxVertical.input.paddingHorizontal,
+    ...Platform.select({
+      ios: {
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+      },
+      android: {
+        backgroundColor: 'transparent',
+      },
+    }),
   },
+  inputError: TextBoxVertical.inputError,
+  validationMessage: TextBoxVertical.validationMessage,
+};
+export const CheckBoxNoLabel = {
+  label: {
+    flex: -1,
+  },
+  input: CheckBox.input,
   inputError: CheckBox.inputError,
   validationMessage: CheckBox.validationMessage,
 };

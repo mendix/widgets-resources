@@ -1,4 +1,4 @@
-import { TextBox } from './textbox';
+import { TextBox, TextBoxVertical } from './textbox';
 import { gray, spacing, border, font, background } from '../variables';
 import { Platform } from 'react-native';
 
@@ -11,7 +11,6 @@ import { Platform } from 'react-native';
 export const DropDown = {
   label: {
     ...TextBox.label,
-    marginVertical: Platform.select({ ios: spacing.smaller, android: 0 }),
   },
   pickerIOS: {},
   pickerItemIOS: {},
@@ -19,6 +18,7 @@ export const DropDown = {
   pickerTopIOS: {},
   value: {
     color: font.color,
+    // fontSize: font.size,
     borderColor: gray.lightest,
     ...Platform.select({
       ios: {
@@ -28,7 +28,8 @@ export const DropDown = {
       android: {
         borderWidth: 1,
         borderRadius: border.radius,
-        padding: spacing.small,
+        paddingVertical: spacing.smaller,
+        paddingHorizontal: spacing.small,
         backgroundColor: background.primary,
       },
     }),
@@ -36,9 +37,7 @@ export const DropDown = {
 };
 export const DropDownVertical = {
   label: {
-    ...DropDown.label,
-    marginBottom: 5,
-    marginLeft: spacing.small,
+    ...TextBoxVertical.label,
   },
   pickerIOS: DropDown.pickerIOS,
   pickerItemIOS: DropDown.pickerItemIOS,
@@ -56,4 +55,15 @@ export const DropDownVertical = {
       android: {},
     }),
   },
+};
+
+export const DropDownNoLabel = {
+  label: {
+    flex: -1,
+  },
+  pickerIOS: DropDown.pickerIOS,
+  pickerItemIOS: DropDown.pickerItemIOS,
+  pickerBackdropIOS: DropDown.pickerBackdropIOS,
+  pickerTopIOS: DropDown.pickerTopIOS,
+  value: DropDown.value,
 };

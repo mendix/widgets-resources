@@ -11,6 +11,8 @@ export const TextBox = {
   label: {
     color: gray.darker,
     fontSize: font.size,
+    textAlign: Platform.select({ ios: 'left', android: 'right' }),
+    marginRight: spacing.regular,
   },
   input: {
     color: font.color,
@@ -49,9 +51,11 @@ export const TextBox = {
 
 export const TextBoxVertical = {
   label: {
-    ...TextBox.label,
+    color: TextBox.label.color,
+    fontSize: TextBox.label.fontSize,
     marginBottom: 5,
     marginLeft: spacing.small,
+    textAlign: 'left', //FIXME: Shouldn't be needed
   },
   input: {
     ...TextBox.input,
@@ -65,6 +69,17 @@ export const TextBoxVertical = {
       },
       android: {},
     }),
+  },
+  inputError: TextBox.inputError,
+  validationMessage: TextBox.validationMessage,
+};
+
+export const TextBoxNoLabel = {
+  label: {
+    flex: -1,
+  },
+  input: {
+    ...TextBox.input,
   },
   inputError: TextBox.inputError,
   validationMessage: TextBox.validationMessage,

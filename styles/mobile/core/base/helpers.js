@@ -2,8 +2,14 @@ import { spacing, background, gray, border } from '../variables';
 import { Platform } from 'react-native';
 
 //== TEMP
-export const androidSpacingInnerMedium = {
+export const androidSpacingInnerVerticalLarge = {
+  paddingVertical: Platform.select({ ios: 0, android: spacing.large }),
+};
+export const androidSpacingInnerHorizontalMedium = {
   paddingHorizontal: Platform.select({ ios: 0, android: spacing.small }),
+};
+export const androidSpacingInnerVertical = {
+  paddingVertical: Platform.select({ ios: 0, android: spacing.smallest }),
 };
 export const spacingOuterBottomNone = {
   marginBottom: 0,

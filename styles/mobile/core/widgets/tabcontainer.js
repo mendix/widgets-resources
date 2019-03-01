@@ -21,6 +21,7 @@ export const TabContainer = {
         height: 30,
         marginTop: 10,
         marginBottom: 10,
+        padding: 0,
         alignItems: 'center',
         scrollEnabled: true,
       },
@@ -37,6 +38,7 @@ export const TabContainer = {
     ...Platform.select({
       ios: {
         padding: 0,
+        margin: 0,
         borderWidth: 1,
         borderColor: brand.primary,
         borderRadius: 4,
