@@ -12,6 +12,7 @@ const typingGenerator = require("mx-widget-typing-generator");
 
 const cwd = process.cwd();
 const pkg = require(path.join(cwd, "package.json"));
+const packageName = "com.mendix.widget.native";
 
 function checkDependencies(cb) {
     require("check-dependencies").sync({
@@ -79,7 +80,7 @@ function copyXML() {
 function createMpkFile() {
     return gulp
         .src("./dist/tmp/widgets/**/*")
-        .pipe(zip(`${pkg.config.widgetName}.mpk`))
+        .pipe(zip(`${packageName}.${pkg.config.widgetName}.mpk`))
         .pipe(gulp.dest("../../packages/test-project/mxproject/widgets"))
         .pipe(gulp.dest(`./dist/release`));
 }
