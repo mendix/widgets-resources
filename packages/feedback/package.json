@@ -19,7 +19,8 @@
         "postversion": "node ../../scripts/UpdateGithubRelease.js"
     },
     "devDependencies": {
-        "@types/querystringify": "^2.0.0"
+        "@types/querystringify": "^2.0.0",
+        "@types/react-native-dialog": "^5.5.0"
     },
     "dependencies": {
         "querystringify": "^2.1.0",
