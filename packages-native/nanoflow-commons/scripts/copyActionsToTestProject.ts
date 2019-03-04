@@ -3,7 +3,7 @@ import { basename, join } from "path";
 
 const cwd = process.cwd();
 const actionsDir = join(cwd, "dist/tsc/");
-const testProjectDir = join(cwd, "dist/mxproject/javascriptsource/actions/actions/");
+const testProjectDir = join(cwd, "dist/mxproject/javascriptsource/nanoflowcommons/actions/");
 
 try {
     main();
