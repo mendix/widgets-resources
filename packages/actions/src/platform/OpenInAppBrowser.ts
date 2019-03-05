@@ -9,7 +9,7 @@ import InAppBrowserType, { InAppBrowserOptions } from "react-native-inappbrowser
 /**
  * @param {string} url - This field is required.
  * @param {string} toolbarColor
- * @param {"Actions.InAppBrowserDismissButtonStyle.done"|"Actions.InAppBrowserDismissButtonStyle.close"|"Actions.InAppBrowserDismissButtonStyle.cancel"} iosDismissButtonStyle
+ * @param {"NativeMobileActions.InAppBrowserDismissButtonStyle.done"|"NativeMobileActions.InAppBrowserDismissButtonStyle.close"|"NativeMobileActions.InAppBrowserDismissButtonStyle.cancel"} iosDismissButtonStyle
  * @param {boolean} androidShowTitle
  * @returns {string}
  */

@@ -13,8 +13,8 @@ type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
 
 /**
  * @param {MxObject} picture - This field is required.
- * @param {"Actions.PictureSource.camera"|"Actions.PictureSource.imageLibrary"|"Actions.PictureSource.either"} pictureSource - Select a picture from the library or the camera. The default is to let the user decide.
- * @param {"Actions.PictureQuality.original"|"Actions.PictureQuality.low"|"Actions.PictureQuality.medium"|"Actions.PictureQuality.high"|"Actions.PictureQuality.custom"} pictureQuality - The default picture quality is 'Medium'.
+ * @param {"NativeMobileActions.PictureSource.camera"|"NativeMobileActions.PictureSource.imageLibrary"|"NativeMobileActions.PictureSource.either"} pictureSource - Select a picture from the library or the camera. The default is to let the user decide.
+ * @param {"NativeMobileActions.PictureQuality.original"|"NativeMobileActions.PictureQuality.low"|"NativeMobileActions.PictureQuality.medium"|"NativeMobileActions.PictureQuality.high"|"NativeMobileActions.PictureQuality.custom"} pictureQuality - The default picture quality is 'Medium'.
  * @param {Big} maximumWidth - The picture will be scaled to this maximum pixel width, while maintaing the aspect ratio.
  * @param {Big} maximumHeight - The picture will be scaled to this maximum pixel height, while maintaing the aspect ratio.
  * @returns {boolean}

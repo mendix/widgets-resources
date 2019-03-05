@@ -14,7 +14,7 @@ function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
 
     const DeviceInfo: typeof ReactNativeDeviceInfo = require("react-native-device-info").default;
 
-    return Promise.all([createMxObject("Actions.DeviceInfo"), DeviceInfo.getBatteryLevel()]).then(
+    return Promise.all([createMxObject("NativeMobileActions.DeviceInfo"), DeviceInfo.getBatteryLevel()]).then(
         ([mxObject, batteryLevel]) => {
             mxObject.set("ApplicationName", DeviceInfo.getApplicationName());
             mxObject.set("BatteryLevel", String(batteryLevel));
