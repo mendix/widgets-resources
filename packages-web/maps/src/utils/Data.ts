@@ -5,9 +5,9 @@ type MxObject = mendix.lib.MxObject;
 
 export const fetchData = (options: Data.FetchDataOptions): Promise<MxObject[]> =>
     new Promise<MxObject[]>((resolve, reject) => {
-        const { guid, entity, contextObject, inputParameterEntity } = options;
-        if (entity && guid) {
-            if (options.type === "XPath") {
+        const { type, guid, entity, contextObject, inputParameterEntity, requiresContext, microflow, mxform, nanoflow } = options;
+        if (entity && (guid || !requiresContext)) {
+            if (type === "XPath") {
                 fetchByXPath({
                     guid,
                     entity,
@@ -15,14 +15,16 @@ export const fetchData = (options: Data.FetchDataOptions): Promise<MxObject[]> =
                 })
                 .then(mxObjects => resolve(mxObjects))
                 .catch(message => reject({ message }));
-            } else if (options.type === "microflow" && options.microflow) {
-                fetchByMicroflow(options.microflow, guid, contextObject, inputParameterEntity)
+            } else if (type === "microflow" && microflow && contextObject) {
+                fetchByMicroflow(microflow, contextObject, mxform, inputParameterEntity)
                     .then(mxObjects => resolve(mxObjects))
                     .catch(message => reject({ message }));
-            } else if (options.type === "nanoflow" && options.nanoflow.nanoflow && options.mxform) {
-                fetchByNanoflow(options.nanoflow, options.mxform)
+            } else if (type === "nanoflow" && nanoflow.nanoflow && contextObject) {
+                fetchByNanoflow(nanoflow, contextObject, mxform, inputParameterEntity)
                     .then(resolve)
                     .catch(message => reject({ message }));
+            } else {
+                reject("Failed data retrieval");
             }
         } else {
             reject("entity & guid are required");
@@ -43,34 +45,40 @@ const fetchByXPath = (options: Data.FetchByXPathOptions): Promise<MxObject[]> =>
     });
 });
 
-const fetchByMicroflow = (actionname: string, guid: string, contextObj: mendix.lib.MxObject, inputParameterEntity: string): Promise<MxObject[]> => {
+const fetchByMicroflow = (actionName: string, contextObj: MxObject, mxform: mxui.lib.form._FormBase, inputParameterEntity: string): Promise<MxObject[]> => {
     if (contextObj.getEntity() !== inputParameterEntity) {
-        logger.warn("input parameter does not match the context object type");
+        Promise.reject("Input parameter entity does not match the context object type");
     }
 
     return new Promise((resolve, reject) => {
-        window.mx.ui.action(actionname, {
-            params: {
-                applyto: "selection",
-                guids: [ guid ]
-            },
-            callback: (mxObjects: MxObject[] | any) => resolve(mxObjects),
-            error: error => reject(`An error occurred while retrieving data via microflow: ${actionname}: ${error.message}`)
+        const context = new mendix.lib.MxContext();
+        context.setTrackObject(contextObj);
+        window.mx.ui.action(actionName, {
+            context,
+            origin: mxform,
+            callback: (mxObjects: MxObject[]) => resolve(mxObjects),
+            error: error => reject(`An error occurred while retrieving data via microflow: ${actionName}: ${error.message}`)
         });
     });
 };
 
-const fetchByNanoflow = (actionname: Data.Nanoflow, mxform: mxui.lib.form._FormBase): Promise<MxObject[]> =>
-    new Promise((resolve: (objects: MxObject[]) => void, reject) => {
+const fetchByNanoflow = (nanoflow: Data.Nanoflow, contextObj: MxObject, mxform: mxui.lib.form._FormBase, inputParameterEntity: string): Promise<MxObject[]> => {
+    if (contextObj.getEntity() !== inputParameterEntity) {
+        Promise.reject("Input parameter entity does not match the context object type");
+    }
+
+    return new Promise((resolve: (objects: MxObject[]) => void, reject) => {
         const context = new mendix.lib.MxContext();
+        context.setTrackObject(contextObj);
         window.mx.data.callNanoflow({
-            nanoflow: actionname,
+            nanoflow,
             origin: mxform,
             context,
-            callback: resolve,
-            error: error => reject(`An error occurred while retrieving data via nanoflow: ${actionname}: ${error.message}`)
+            callback: (data:  MxObject[]) => resolve(data),
+            error: error => reject(`An error occurred while retrieving data via nanoflow: ${error.message}`)
         });
     });
+};
 
 export const fetchMarkerObjectUrl = (options: Data.FetchMarkerIcons, mxObject: mendix.lib.MxObject): Promise<string> =>
     new Promise((resolve, reject) => {
