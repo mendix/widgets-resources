@@ -5,6 +5,7 @@
 // Other code you write will be lost the next time you deploy the project.
 
 import ReactNative from "react-native";
+import { StorageValue } from "./StorageValue.interface";
 
 /**
  * @param {string} key - This field is required.
@@ -29,27 +30,60 @@ function GetStorageItemObject(key?: string, entity?: string): Promise<mendix.lib
         if (result === null) {
             throw new Error(`Storage item '${key}' does not exist`);
         }
-        const value: { [key: string]: number | boolean | string } = JSON.parse(result);
-        return createMxObject(entity, value);
+        const value: StorageValue = JSON.parse(result);
+
+        return getOrCreateMxObject(entity, value).then(newObject => {
+            const newValue = serializeMxObject(newObject);
+            return AsyncStorage.setItem(key, JSON.stringify(newValue)).then(() => newObject);
+        });
     });
 
-    function createMxObject(
-        entityName: string,
-        attributes: { [key: string]: number | boolean | string }
-    ): Promise<mendix.lib.MxObject> {
+    function getOrCreateMxObject(entity: string, value: StorageValue): Promise<mendix.lib.MxObject> {
+        return getMxObject(value.guid).then(existingObject => {
+            if (existingObject) {
+                return existingObject;
+            } else {
+                return createMxObject(entity, value);
+            }
+        });
+    }
+
+    function getMxObject(guid: string): Promise<mendix.lib.MxObject | undefined> {
         return new Promise((resolve, reject) => {
-            mx.data.create({
-                entity: entityName,
-                callback: mxObject => {
-                    Object.keys(attributes).forEach(attributeName => {
-                        const attributeValue = attributes[attributeName];
-                        mxObject.set(attributeName, attributeValue);
-                    });
-                    resolve(mxObject);
-                },
-                error: () => reject(`Could not create '${entityName}' object`)
+            mx.data.get({
+                guid,
+                callback: mxObject => resolve(mxObject),
+                error: (error: Error) => reject(error)
             });
         });
+    }
+
+    function createMxObject(entity: string, value: StorageValue): Promise<mendix.lib.MxObject> {
+        return new Promise((resolve, reject) => {
+            mx.data.create({
+                entity,
+                callback: mxObject => {
+                    Object.keys(value)
+                        .filter(attribute => attribute !== "guid")
+                        .forEach(attributeName => {
+                            const attributeValue = value[attributeName];
+                            mxObject.set(attributeName, attributeValue);
+                        });
+                    resolve(mxObject);
+                },
+                error: () => reject(`Could not create '${entity}' object`)
+            });
+        });
+    }
+
+    function serializeMxObject(object: mendix.lib.MxObject): StorageValue {
+        return object.getAttributes().reduce<StorageValue>(
+            (accumulator, attributeName) => ({
+                ...accumulator,
+                [attributeName]: object.get(attributeName)
+            }),
+            { guid: object.getGuid() }
+        );
     }
     // END USER CODE
 }

@@ -5,13 +5,14 @@
 // Other code you write will be lost the next time you deploy the project.
 
 import ReactNative from "react-native";
+import { StorageValue } from "./StorageValue.interface";
 
 /**
  * @param {string} key - This field is required.
- * @param {MxObject[]} objects - This field is required.
+ * @param {MxObject[]} value - This field is required.
  * @returns {string}
  */
-function SetStorageItemObjectList(key?: string, objects?: mendix.lib.MxObject[]): Promise<void> {
+function SetStorageItemObjectList(key?: string, value?: mendix.lib.MxObject[]): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/asyncstorage
 
@@ -21,22 +22,22 @@ function SetStorageItemObjectList(key?: string, objects?: mendix.lib.MxObject[])
         throw new TypeError("Input parameter 'Key' is required");
     }
 
-    if (!objects) {
-        throw new TypeError("Input parameter 'Object' is required");
+    if (!value) {
+        throw new TypeError("Input parameter 'Value' is required");
     }
 
-    const attributeObjects = objects.map(object =>
-        object.getAttributes().reduce<{ [key: string]: number | boolean | string }>(
+    const serializedObjects = value.map(serializeMxObject);
+
+    return AsyncStorage.setItem(key, JSON.stringify(serializedObjects));
+
+    function serializeMxObject(object: mendix.lib.MxObject): StorageValue {
+        return object.getAttributes().reduce<StorageValue>(
             (accumulator, attributeName) => ({
                 ...accumulator,
                 [attributeName]: object.get(attributeName)
             }),
-            {}
-        )
-    );
-    const value = JSON.stringify(attributeObjects);
-
-    return AsyncStorage.setItem(key, value);
-
+            { guid: object.getGuid() }
+        );
+    }
     // END USER CODE
 }
