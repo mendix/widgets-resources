@@ -1,11 +1,12 @@
 {
   "name": "maps",
   "widgetName": "Maps",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Show locations on Google Maps",
   "copyright": "Mendix BV",
   "scripts": {
     "start": "webpack-dev-server --hot --open",
+    "dev": "grunt",
     "emit": "tsc",
     "pretest": "tsc && npm run lint && npm run build",
     "test": "npm run test:unit && npm run test:conditional",
