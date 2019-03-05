@@ -22,7 +22,6 @@ const widgetConfig = {
         proxy: [ {
             context: [ "**", `!/widgets/com/mendix/widget/custom/${widgetName}/${widgetName}.js` ],
             target: mxHost,
-            ws: true,
             onError: function(err, req, res) {
                 if (res) {
                     res.writeHead(500, {
@@ -31,7 +30,7 @@ const widgetConfig = {
                     if (err.code === "ECONNREFUSED") {
                         res.end("Please make sure that the Mendix server is running at " + mxHost
                             + " or change the configuration \n "
-                            + "> npm config set google-maps:mendixhost http://host:port");
+                            + "> npm config set maps:mendixhost http://host:port");
                     } else {
                         res.end("Error connecting to Mendix server"
                         + "\n " + JSON.stringify(err, null, 2));
@@ -39,7 +38,10 @@ const widgetConfig = {
                 }
             }
         } ],
-        stats: "errors-only"
+        stats: "errors-only",
+        overlay: {
+            errors: true
+        }
     },
     resolve: {
         extensions: [ ".ts", ".js" ],
@@ -68,6 +70,7 @@ const widgetConfig = {
         ]
     },
     mode: "development",
+    // devtool: "inline-source-map",
     devtool: "eval",
     externals: [ "mendix/lang", "react", "react-dom" ],
     plugins: [
