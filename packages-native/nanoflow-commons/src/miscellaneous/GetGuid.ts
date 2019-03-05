@@ -5,11 +5,20 @@
 // Other code you write will be lost the next time you deploy the project.
 
 /**
- * @param {MxObject} entity
+ * @param {string} entity
+ * @param {MxObject} entityObject
  * @returns {string}
  */
-function GetGuid(entity: mendix.lib.MxObject): string {
+function GetGuid(entity: string, entityObject: mendix.lib.MxObject): string {
     // BEGIN USER CODE
-    return entity.getGuid();
+    if (!entity) {
+        throw new TypeError("Input parameter 'Entity' is required.");
+    }
+
+    if (!entityObject) {
+        throw new TypeError("Input parameter 'Entity object' is required.");
+    }
+
+    return entityObject.getGuid();
     // END USER CODE
 }
