@@ -7,7 +7,7 @@
   "scripts": {
     "start": "webpack-dev-server --hot --open",
     "dev": "grunt",
-    "emit": "tsc",
+    "typeCheck": "tsc --noEmit",
     "pretest": "tsc && npm run lint && npm run build",
     "test": "npm run test:unit && npm run test:conditional",
     "test:conditional": "node ./node_modules/mendix-widget-build-script/dist/CheckPullRequestFromFork.js && echo 'Skip tests on forked pull request' || npm run deployAndTest",
@@ -28,7 +28,7 @@
     "developmentPort": 3000
   },
   "pre-commit": [
-    "emit",
+    "typeCheck",
     "lint"
   ],
   "repository": {
