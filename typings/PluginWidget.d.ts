@@ -43,7 +43,7 @@ declare global {
         [name: string]: PluginWidgetProp;
     }
 
-    export enum ValueStatus {
+    export const enum ValueStatus {
         Loading = "loading",
         Unavailable = "unavailable",
         Available = "available"
