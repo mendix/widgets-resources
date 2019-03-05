@@ -9,7 +9,7 @@ type ReverseGeocodingProvider = "Google" | "Geocodio" | "LocationIQ" | "MapQuest
 /**
  * @param {string} latitude - This field is required.
  * @param {string} longitude - This field is required.
- * @param {"Actions.GeocodingProvider.Google"|"Actions.GeocodingProvider.Geocodio"|"Actions.GeocodingProvider.LocationIQ"|"Actions.GeocodingProvider.MapQuest"} geocodingProvider - This field is required.
+ * @param {"NanoflowCommons.GeocodingProvider.Google"|"NanoflowCommons.GeocodingProvider.Geocodio"|"NanoflowCommons.GeocodingProvider.LocationIQ"|"NanoflowCommons.GeocodingProvider.MapQuest"} geocodingProvider - This field is required.
  * @param {string} geocodingProviderApiKey - This field is required.
  * @returns {string}
  */

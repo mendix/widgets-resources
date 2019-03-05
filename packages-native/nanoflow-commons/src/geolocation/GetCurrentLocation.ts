@@ -26,13 +26,13 @@ function GetCurrentLocation(
 
         function onSuccess(position: GeolocationReturnType): void {
             mx.data.create({
-                entity: "Actions.Geolocation",
+                entity: "NanoflowCommons.Geolocation",
                 callback: mxObject => {
                     const geolocation = mapPositionToMxObject(mxObject, position);
                     resolve(geolocation);
                 },
                 error: () => {
-                    reject("Could not create 'Actions.Geolocation' object to store location");
+                    reject("Could not create 'NanoflowCommons.Geolocation' object to store location");
                 }
             });
         }
