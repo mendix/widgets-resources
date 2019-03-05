@@ -5,18 +5,18 @@
 // Other code you write will be lost the next time you deploy the project.
 
 /**
+ * @param {string} entity
  * @param {string} objectGuid
- * @param {string} objectSample
  * @returns {MxObject}
  */
-function GetObjectByGuid(objectGuid: string, objectSample: mendix.lib.MxObject): Promise<mendix.lib.MxObject> {
+function GetObjectByGuid(entity: string, objectGuid: string): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
-    if (!objectGuid) {
-        throw new TypeError("Input parameter 'objectGuid' is required.");
+    if (!entity) {
+        throw new TypeError("Input parameter 'Entity' is required.");
     }
 
-    if (!objectSample) {
-        throw new TypeError("Input parameter 'objectSample' is required.");
+    if (!objectGuid) {
+        throw new TypeError("Input parameter 'Object guid' is required.");
     }
 
     return new Promise((resolve, reject) => {
