@@ -138,10 +138,13 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
                 if (locationOptions.dataSourceType === "static") {
                     const staticLocation = parseStaticLocations([ locationOptions ]);
                     resolve(staticLocation);
-                } else if (locationOptions.dataSourceType === "context" && contextObject) {
+                } else if (locationOptions.dataSourceType === "context") {
+                    if (contextObject) {
                     this.setLocationsFromMxObjects([ contextObject ], locationOptions)
                         .then(locations => resolve(locations));
-                } else if (contextObject) {
+                    } else {
+                        resolve([]);
+                    }
                     fetchData({
                         guid,
                         type: locationOptions.dataSourceType,
