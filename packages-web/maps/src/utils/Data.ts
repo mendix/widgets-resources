@@ -87,7 +87,8 @@ export const fetchMarkerObjectUrl = (options: Data.FetchMarkerIcons, mxObject: m
                         error => reject(`Error while retrieving the image url: ${error.message}`)
                     );
                 } else {
-                    reject("Upload Image inorder to view marker");
+                    logger.warn("Marker system image object does not have any content, fallback to default marker");
+                    resolve("");
                 }
             });
         } else if (type === "enumImage" && mxObject) {
