@@ -19,6 +19,7 @@
         "no-invalid-this": [true, "check-function-in-method"],
         "no-namespace": [true, "allow-declarations"],
         "no-submodule-imports": false,
+        "no-shadowed-variable": false,
         "no-switch-case-fall-through": true,
         "no-unnecessary-type-assertion": true,
         "object-literal-sort-keys": false,
