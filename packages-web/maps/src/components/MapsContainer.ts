@@ -108,22 +108,26 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
     private fetchData = (contextObject?: mendix.lib.MxObject) => {
         this.setState({ isFetchingData: true });
         const { defaultCenterLatitude, defaultCenterLongitude } = this.props;
-        Promise.all(this.props.locations.map(locationAttr => this.retrieveData(locationAttr, contextObject))).then(locations => {
-            const flattenLocations = locations.reduce((loc1, loc2) => loc1.concat(loc2), []);
-            if (defaultCenterLatitude && defaultCenterLongitude) {
-                flattenLocations.push({
-                    latitude: parseFloat(defaultCenterLatitude),
-                    longitude: parseFloat(defaultCenterLongitude)
-                });
-            }
+        Promise.all(this.props.locations.map(locationAttr => this.retrieveData(locationAttr, contextObject)))
+            .then(locations => {
+                const flattenLocations = locations.reduce((loc1, loc2) => loc1.concat(loc2), []);
+                if (defaultCenterLatitude && defaultCenterLongitude) {
+                    flattenLocations.push({
+                        latitude: parseFloat(defaultCenterLatitude),
+                        longitude: parseFloat(defaultCenterLongitude)
+                    });
+                }
 
-            return Promise.all(flattenLocations.map(location => validateLocations(location)));
-        }).then(validLocations =>
-            this.setState({
-                locations: validLocations,
-                isFetchingData: false,
-                alertMessage: ""
-            })).catch(alertMessage => {
+                return Promise.all(flattenLocations.map(location => validateLocations(location)));
+            })
+            .then(validLocations =>
+                this.setState({
+                    locations: validLocations,
+                    isFetchingData: false,
+                    alertMessage: ""
+                })
+            )
+            .catch(alertMessage => {
                 this.setState({
                     locations: [],
                     alertMessage,
@@ -135,6 +139,9 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
     private retrieveData = (locationOptions: DataSourceLocationProps, contextObject?: mendix.lib.MxObject): Promise<Location[]> =>
         new Promise((resolve, reject) => {
                 const guid = contextObject && contextObject.getGuid();
+                const requiresContext = locationOptions.dataSourceType === "microflow"
+                    || locationOptions.dataSourceType === "nanoflow"
+                    || locationOptions.dataSourceType === "XPath" && locationOptions.entityConstraint.indexOf("[%CurrentObject%]") !== -1;
                 if (locationOptions.dataSourceType === "static") {
                     const staticLocation = parseStaticLocations([ locationOptions ]);
                     resolve(staticLocation);
@@ -145,6 +152,7 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
                     } else {
                         resolve([]);
                     }
+                } else if (contextObject || !requiresContext) {
                     fetchData({
                         guid,
                         type: locationOptions.dataSourceType,
@@ -154,11 +162,12 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
                         mxform: this.props.mxform,
                         nanoflow: locationOptions.dataSourceNanoflow,
                         contextObject,
-                        inputParameterEntity: locationOptions.inputParameterEntity
+                        inputParameterEntity: locationOptions.inputParameterEntity,
+                        requiresContext
                     })
                     .then(mxObjects => this.setLocationsFromMxObjects(mxObjects, locationOptions))
                     .then(locations => resolve(locations))
-                    .catch(reason => reject(`${reason}`));
+                    .catch(reason => reject(reason.message));
                 } else {
                     resolve([]);
                 }
@@ -167,21 +176,22 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
     private setLocationsFromMxObjects = (mxObjects: mendix.lib.MxObject[], locationAttr: DataSourceLocationProps): Promise<Location[]> =>
         Promise.all(mxObjects.map(mxObject =>
             fetchMarkerObjectUrl({
-                    type: locationAttr.markerImage,
-                    markerIcon: locationAttr.staticMarkerIcon,
-                    imageAttribute: locationAttr.markerImageAttribute,
-                    systemImagePath: locationAttr.systemImagePath,
-                    markerEnumImages: this.props.markerImages
-                }, mxObject).then(markerUrl => {
-                    return {
-                        latitude: Number(mxObject.get(locationAttr.latitudeAttribute)),
-                        longitude: Number(mxObject.get(locationAttr.longitudeAttribute)),
-                        mxObject,
-                        url: markerUrl,
-                        locationAttr
-                    };
-                })
-            ))
+                type: locationAttr.markerImage,
+                markerIcon: locationAttr.staticMarkerIcon,
+                imageAttribute: locationAttr.markerImageAttribute,
+                systemImagePath: locationAttr.systemImagePath,
+                markerEnumImages: this.props.markerImages
+            }, mxObject)
+            .then(markerUrl => {
+                return {
+                    latitude: Number(mxObject.get(locationAttr.latitudeAttribute)),
+                    longitude: Number(mxObject.get(locationAttr.longitudeAttribute)),
+                    mxObject,
+                    url: markerUrl,
+                    locationAttr
+                };
+            })
+        ))
 
     private onClickMarker = (event: LeafletEvent & google.maps.MouseEvent, locationAttr: DataSourceLocationProps) => {
         const { locations } = this.state;
