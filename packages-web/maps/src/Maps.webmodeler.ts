@@ -66,7 +66,8 @@ export function getPreviewCss() {
     return (
         require("leaflet/dist/leaflet.css") +
         require("leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css") +
-        require("./ui/Maps.css")
+        require("./ui/Maps.css") +
+        require("./ui/GoogleMapsPreview.css")
     );
 }
 
