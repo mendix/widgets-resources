@@ -8,19 +8,17 @@ import ReactNative from "react-native";
 
 /**
  * @param {Big} duration - How long to vibrate in milliseconds. Default value is 500. Android only.
- * @param {boolean} repeat - Default value is false. Android only.
  * @returns {boolean}
  */
-function Vibrate(duration?: BigJs.Big, repeat?: boolean): boolean {
+function Vibrate(duration?: BigJs.Big): boolean {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/vibration#vibrate
 
     const Vibration: typeof ReactNative.Vibration = require("react-native").Vibration;
 
-    const pattern = duration ? Number(duration.toString()) : 500;
-    repeat = repeat || false;
+    const pattern = duration ? Number(duration) : 500;
 
-    Vibration.vibrate(pattern, repeat);
+    Vibration.vibrate(pattern, false);
     return true;
 
     // END USER CODE
