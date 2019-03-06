@@ -10,7 +10,7 @@ import ReactNative from "react-native";
  * @param {string} destinationAddress - This field is required.
  * @returns {string}
  */
-function OpenMapsDirections(destinationAddress?: string): Promise<void> {
+function NavigateTo(destinationAddress?: string): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/linking
 
