@@ -11,7 +11,7 @@ import ReactNative from "react-native";
  * @param {string} message
  * @returns {string}
  */
-function ShowMessage(title?: string, message?: string): void {
+function ShowMessage(title?: string, message?: string): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/alert
 
@@ -21,7 +21,9 @@ function ShowMessage(title?: string, message?: string): void {
         throw new TypeError("Input parameter 'Title' is required");
     }
 
-    Alert.alert(title, message);
+    return new Promise(resolve => {
+        Alert.alert(title, message, [{ text: "OK", onPress: () => resolve() }]);
+    });
 
     // END USER CODE
 }
