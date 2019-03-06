@@ -1,22 +1,34 @@
 import { Component, createElement } from "react";
-import { Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
+import { Platform, Text, TextStyle, TouchableNativeFeedback, TouchableOpacity, View, ViewStyle } from "react-native";
+import { flattenStyles, Style } from "./utils/common";
 
 import { BadgeProps } from "../typings/BadgeProps";
 import { styles } from "./ui/Styles";
 
-export class Badge extends Component<BadgeProps<undefined>> {
+interface BadgeStyle extends Style {
+    container: ViewStyle;
+    text: TextStyle;
+}
+
+const defaultBadgeStyle: BadgeStyle = {
+    container: styles.badge,
+    text: styles.text
+};
+
+export class Badge extends Component<BadgeProps<BadgeStyle>> {
     private readonly onClickHandler = this.onClick.bind(this);
+    private styles = defaultBadgeStyle;
+
+    componentDidMount(): void {
+        this.styles = flattenStyles(defaultBadgeStyle, this.props.style);
+    }
 
     render(): JSX.Element {
         const isAndroid = Platform.OS === "android";
-        const componentStyle = [
-            this.props.type === "badge" ? styles.badge : styles.label,
-            (styles as any)[`background-${this.props.color}`]
-        ];
 
         return (
             <View style={styles.container}>
-                <View style={componentStyle}>
+                <View style={this.styles.container}>
                     {this.props.onClick ? (
                         isAndroid ? (
                             <TouchableNativeFeedback
@@ -37,10 +49,9 @@ export class Badge extends Component<BadgeProps<undefined>> {
     }
 
     private renderText(): JSX.Element {
-        const textStyle = [styles.text, (styles as any)[`text-${this.props.color}`]];
         const value = this.props.value ? this.props.value.value : this.props.defaultValue;
 
-        return <Text style={textStyle}>{value}</Text>;
+        return <Text style={this.styles.text}>{value}</Text>;
     }
 
     private onClick(): void {

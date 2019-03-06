@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.badge.Badge" needsEntityContext="true" offlineCapable="true" pluginWidget="true" 
-    xmlns="http://www.mendix.com/widget/1.0/" 
+<widget id="com.mendix.widget.native.badge.Badge" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
+    xmlns="http://www.mendix.com/widget/1.0/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
     <name>Badge</name>
     <description>Shows a value as a badge or a color label</description>
@@ -28,29 +28,6 @@
             <caption>On click</caption>
             <category>Events</category>
             <description/>
-        </property>
-
-        <property key="type" type="enumeration" defaultValue="badge">
-            <caption>Type</caption>
-            <category>Appearance</category>
-            <description>Render it as either a badge or a color label</description>
-            <enumerationValues>
-                <enumerationValue key="badge">Badge</enumerationValue>
-                <enumerationValue key="label">Label</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="color" type="enumeration" defaultValue="default">
-            <caption>Style</caption>
-            <category>Appearance</category>
-            <description>The style of the badge</description>
-            <enumerationValues>
-                <enumerationValue key="default">Default</enumerationValue>
-                <enumerationValue key="primary">Primary</enumerationValue>
-                <enumerationValue key="success">Success</enumerationValue>
-                <enumerationValue key="info">Info</enumerationValue>
-                <enumerationValue key="warning">Warning</enumerationValue>
-                <enumerationValue key="danger">Danger</enumerationValue>
-            </enumerationValues>
         </property>
     </properties>
 </widget>

@@ -18,6 +18,7 @@
         "no-inferrable-types": [true, "ignore-params"],
         "no-invalid-this": [true, "check-function-in-method"],
         "no-namespace": [true, "allow-declarations"],
+        "no-object-literal-type-assertion": false,
         "no-submodule-imports": false,
         "no-switch-case-fall-through": true,
         "no-unnecessary-type-assertion": true,
