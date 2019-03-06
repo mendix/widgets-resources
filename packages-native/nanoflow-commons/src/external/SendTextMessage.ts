@@ -10,7 +10,7 @@ import ReactNative from "react-native";
  * @param {string} phoneNumber - This field is required.
  * @returns {string}
  */
-function TextPhoneNumber(phoneNumber?: string): Promise<void> {
+function SendTextMessage(phoneNumber?: string): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/linking
 
