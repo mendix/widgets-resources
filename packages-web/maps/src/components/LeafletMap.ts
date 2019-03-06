@@ -10,6 +10,7 @@ import {
     tileLayer
 } from "leaflet";
 import * as classNames from "classnames";
+import ReactResizeDetector from "react-resize-detector";
 
 import { Container, MapUtils } from "../utils/namespace";
 import Utils from "../utils/Utils";
@@ -29,6 +30,7 @@ export interface LeafletMapProps extends SharedProps, MapProps {
 export interface LeafletMapState {
     center: LatLngLiteral;
     alertMessage?: string;
+    resized: boolean;
 }
 
 export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
@@ -36,8 +38,11 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
     private defaultCenterLocation: LatLngLiteral = { lat: 51.9107963, lng: 4.4789878 };
     private map?: Map;
     private markerGroup = new FeatureGroup();
+    private readonly onResizeHandle = this.onResize.bind(this);
+
     readonly state: LeafletMapState = {
-        center: this.defaultCenterLocation
+        center: this.defaultCenterLocation,
+        resized: false
     };
 
     render() {
@@ -56,6 +61,13 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
                 createElement("div", {
                     className: "widget-leaflet-maps",
                     ref: this.getRef
+                }),
+                createElement(ReactResizeDetector, {
+                    handleWidth: true,
+                    handleHeight: true,
+                    refreshRate: 100,
+                    refreshMode: "throttle",
+                    onResize: this.onResizeHandle
                 })
             )
         );
@@ -64,16 +76,17 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
     componentDidMount() {
         if (this.leafletNode && !this.map) {
             this.map = new Map(this.leafletNode, {
-                scrollWheelZoom: this.props.optionScroll,
-                zoomControl: this.props.optionZoomControl,
-                attributionControl: this.props.attributionControl,
-                zoom: this.props.zoomLevel,
-                minZoom: 2,
-                // Work around for page scroll down to botom on first click on map in Chrome and IE
-                // https://github.com/Leaflet/Leaflet/issues/5392
-                keyboard: false,
-                dragging: this.props.optionDrag
-            }).addLayer(this.setTileLayer());
+                    scrollWheelZoom: this.props.optionScroll,
+                    zoomControl: this.props.optionZoomControl,
+                    attributionControl: this.props.attributionControl,
+                    zoom: this.props.zoomLevel,
+                    minZoom: 2,
+                    // Work around for page scroll down to botom on first click on map in Chrome and IE
+                    // https://github.com/Leaflet/Leaflet/issues/5392
+                    keyboard: false,
+                    dragging: this.props.optionDrag
+                })
+                .addLayer(this.setTileLayer());
             if (this.props.inPreviewMode) {
                 this.setDefaultCenter(this.props);
             }
@@ -86,6 +99,7 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
         }
         if (this.props.allLocations !== nextProps.allLocations) {
             this.setDefaultCenter(nextProps);
+            this.setState({ resized: false });
         }
     }
 
@@ -98,6 +112,16 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
     componentWillUnmount() {
         if (this.map) {
             this.map.remove();
+        }
+    }
+
+    private onResize() {
+        // When map is placed on the non default tab, the maps has no size.
+        // Therefor it need to update on the first view.
+        if (this.map && !this.state.resized) {
+            this.setDefaultCenter(this.props);
+            this.setBounds();
+            this.setState({ resized: true });
         }
     }
 
@@ -154,21 +178,20 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
     private setBounds = () => {
         const { defaultCenterLatitude, defaultCenterLongitude, autoZoom, zoomLevel } = this.props;
         setTimeout(() => {
-            try {
-                if (this.map && this.markerGroup) {
+            if (this.map && this.markerGroup) {
+                const bounds = this.markerGroup.getBounds();
+                if (bounds.isValid()) {
                     this.map.fitBounds(this.markerGroup.getBounds(), { animate: false }).invalidateSize();
-                    if (!autoZoom) {
-                        if (defaultCenterLatitude && defaultCenterLongitude) {
-                            this.map.panTo({
-                                lat: parseFloat(defaultCenterLatitude),
-                                lng: parseFloat(defaultCenterLongitude)
-                            }, { animate: false });
-                        }
-                        this.map.setZoom(zoomLevel);
-                    }
                 }
-            } catch (error) {
-                this.setState({ alertMessage: `Invalid map bounds ${error.message}` });
+                if (!autoZoom) {
+                    if (defaultCenterLatitude && defaultCenterLongitude) {
+                        this.map.panTo({
+                            lat: parseFloat(defaultCenterLatitude),
+                            lng: parseFloat(defaultCenterLongitude)
+                        }, { animate: false });
+                    }
+                    this.map.setZoom(zoomLevel);
+                }
             }
         }, 0);
     }

@@ -52,6 +52,7 @@
     "@types/node": "^11.10.4",
     "@types/react": "^16.8.6",
     "@types/react-dom": "^16.8.2",
+    "@types/react-resize-detector": "^3.1.1",
     "@types/webdriverio": "^4.13.3",
     "check-dependencies": "^1.1.0",
     "clean-webpack-plugin": "^2.0.0",
@@ -121,6 +122,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "leaflet": "^1.4.0",
-    "leaflet-defaulticon-compatibility": "^0.1.1"
+    "leaflet-defaulticon-compatibility": "^0.1.1",
+    "react-resize-detector": "^4.0.2"
   }
 }

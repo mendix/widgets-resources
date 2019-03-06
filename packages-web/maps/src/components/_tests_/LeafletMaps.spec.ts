@@ -1,5 +1,6 @@
 import { mount, shallow } from "enzyme";
 import { createElement } from "react";
+import ReactResizeDetector from "react-resize-detector";
 
 import { LeafletMap, LeafletMapProps } from "../LeafletMap";
 import { Alert } from "../../components/Alert";
@@ -37,7 +38,8 @@ describe("Leaflet maps", () => {
             createElement("div", { className: "widget-maps", style: mapStyle },
                 createElement(Alert, { className: "widget-leaflet-maps-alert leaflet-control" }),
                 createElement("div", { className: "widget-leaflet-maps-wrapper" },
-                    createElement("div", { className: "widget-leaflet-maps" })
+                    createElement("div", { className: "widget-leaflet-maps" }),
+                    createElement(ReactResizeDetector)
                 )
             )
         );

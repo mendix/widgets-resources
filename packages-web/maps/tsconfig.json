@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": "./",
     "outDir": "dist/tsc/",
-    "noEmitOnError": true,
+    "noEmitOnError": false,
     "sourceMap": true,
     "module": "amd",
     "target": "es5",
