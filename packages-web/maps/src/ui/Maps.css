@@ -3,7 +3,7 @@
     height: 100%;
 }
 
-.widget-leaflet-maps-wrapper > div {
+.widget-leaflet-maps {
     top: 0; bottom: 0; left: 0; right: 0;
     position: absolute;
     z-index: 1;
