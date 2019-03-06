@@ -19,7 +19,7 @@ type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
  * @param {Big} maximumHeight - The picture will be scaled to this maximum pixel height, while maintaing the aspect ratio.
  * @returns {boolean}
  */
-function SelectPicture(
+function TakePicture(
     picture?: mendix.lib.MxObject,
     pictureSource?: PictureSource,
     pictureQuality?: PictureQuality,
@@ -46,16 +46,16 @@ function SelectPicture(
 
     return takePicture()
         .then(uri => {
-            if (uri) {
-                return storeFile(picture, uri);
+            if (!uri) {
+                return false;
             }
-            return Promise.resolve(false);
+            return storeFile(picture, uri);
         })
         .catch(error => {
-            if (error !== "canceled") {
-                throw new Error(error);
+            if (error === "canceled") {
+                return false;
             }
-            return Promise.resolve(false);
+            throw new Error(error);
         });
 
     function takePicture(): Promise<string | undefined> {
@@ -88,20 +88,11 @@ function SelectPicture(
                 .then(blob => {
                     const guid = imageObject.getGuid();
                     const filename = /[^\/]*$/.exec(uri)![0];
+                    const onSuccess = () => resolve(true);
+                    const onError = (error: Error) => reject(error.message);
 
                     mx.data.saveDocument(guid, filename, {}, blob, onSuccess, onError);
-
-                    function onSuccess(): void {
-                        const Alert: typeof ReactNative.Alert = require("react-native").Alert;
-                        Alert.alert("Success", filename);
-                        resolve(true);
-                    }
-
-                    function onError(e: Error): void {
-                        reject(e.message);
-                    }
-                })
-                .catch(error => reject(error));
+                });
         });
     }
 
