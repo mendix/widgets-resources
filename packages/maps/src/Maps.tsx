@@ -1,11 +1,34 @@
 import { Component, createElement } from "react";
-import { Platform } from "react-native";
+import { Platform, ViewStyle } from "react-native";
 import MapView, { Marker, Region } from "react-native-maps";
 
 import { MapsProps } from "../typings/MapsProps";
+import { flattenStyles, Style } from "./utils/common";
 
-export class Maps extends Component<MapsProps<undefined>> {
+interface MarkerStyle {
+    color: string;
+    opacity: number;
+}
+
+interface MapsStyle extends Style {
+    container: ViewStyle;
+    marker: MarkerStyle;
+}
+
+const defaultMapsStyle: MapsStyle = {
+    container: {
+        width: "100%",
+        height: "100%"
+    },
+    marker: {
+        color: "red",
+        opacity: 1
+    }
+};
+
+export class Maps extends Component<MapsProps<MapsStyle>> {
     private readonly onRegionChangeHandler = this.onRegionChange.bind(this);
+    private readonly styles = flattenStyles(defaultMapsStyle, this.props.style);
 
     get region(): Region | undefined {
         if (
@@ -49,10 +72,7 @@ export class Maps extends Component<MapsProps<undefined>> {
                 rotateEnabled={this.props.rotateEnabled}
                 scrollEnabled={this.props.scrollEnabled}
                 pitchEnabled={this.props.pitchEnabled}
-                style={{
-                    width: "100%",
-                    height: "100%"
-                }}
+                style={this.styles.container}
             >
                 {this.renderDynamicMarker()}
                 {this.renderStaticMarkers()}
@@ -111,6 +131,8 @@ export class Maps extends Component<MapsProps<undefined>> {
                     longitude: Number(longitude)
                 }}
                 onPress={onPress}
+                pinColor={this.styles.marker.color}
+                opacity={this.styles.marker.opacity}
             />
         );
     }
