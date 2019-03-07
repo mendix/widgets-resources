@@ -37,15 +37,5 @@
             <category>Behavior</category>
             <description>Repeat the video after it finishes</description>
         </property>
-        <property key="loadingBackgroundColor" type="string" defaultValue="black">
-            <caption>Loading background color</caption>
-            <category>Appearance</category>
-            <description>The color of the video player container while the video is loading</description>
-        </property>
-        <property key="loadingForegroundColor" type="string" defaultValue="white">
-            <caption>Loading foreground color</caption>
-            <category>Appearance</category>
-            <description>The color of the loading spinner that is shown while the video is loading</description>
-        </property>
     </properties>
 </widget>

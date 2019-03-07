@@ -15,6 +15,4 @@ export interface VideoPlayerProps<Style> extends CommonProps<Style> {
     showControls: boolean;
     muted: boolean;
     loop: boolean;
-    loadingBackgroundColor: string;
-    loadingForegroundColor: string;
 }
