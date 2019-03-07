@@ -9,9 +9,9 @@ import ReactNative from "react-native";
 /**
  * @param {string} title - This field is required.
  * @param {string} message
- * @returns {string}
+ * @returns {boolean}
  */
-function ShowMessage(title?: string, message?: string): Promise<void> {
+function ShowMessage(title?: string, message?: string): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/alert
 
@@ -22,7 +22,7 @@ function ShowMessage(title?: string, message?: string): Promise<void> {
     }
 
     return new Promise(resolve => {
-        Alert.alert(title, message, [{ text: "OK", onPress: () => resolve() }]);
+        Alert.alert(title, message, [{ text: "OK", onPress: () => resolve(true) }]);
     });
 
     // END USER CODE

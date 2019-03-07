@@ -10,9 +10,9 @@ import { StorageValue } from "./StorageValue.interface";
 /**
  * @param {string} key - This field is required.
  * @param {MxObject[]} value - This field is required.
- * @returns {string}
+ * @returns {boolean}
  */
-function SetStorageItemObjectList(key?: string, value?: mendix.lib.MxObject[]): Promise<void> {
+function SetStorageItemObjectList(key?: string, value?: mendix.lib.MxObject[]): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/asyncstorage
 
@@ -28,7 +28,7 @@ function SetStorageItemObjectList(key?: string, value?: mendix.lib.MxObject[]): 
 
     const serializedObjects = value.map(serializeMxObject);
 
-    return AsyncStorage.setItem(key, JSON.stringify(serializedObjects));
+    return AsyncStorage.setItem(key, JSON.stringify(serializedObjects)).then(() => true);
 
     function serializeMxObject(object: mendix.lib.MxObject): StorageValue {
         return object.getAttributes().reduce<StorageValue>(

@@ -10,7 +10,7 @@ import ReactNative from "react-native";
  * @param {string} phoneNumber - This field is required.
  * @returns {string}
  */
-function CallPhoneNumber(phoneNumber?: string): Promise<void> {
+function CallPhoneNumber(phoneNumber?: string): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/linking
 
@@ -21,8 +21,14 @@ function CallPhoneNumber(phoneNumber?: string): Promise<void> {
     }
 
     phoneNumber = encodeURI(phoneNumber);
+    const url = `tel:${phoneNumber}`;
 
-    return Linking.openURL(`tel:${phoneNumber}`);
+    return Linking.canOpenURL(url).then(supported => {
+        if (supported === false) {
+            return false;
+        }
+        return Linking.openURL(url).then(() => true);
+    });
 
     // END USER CODE
 }

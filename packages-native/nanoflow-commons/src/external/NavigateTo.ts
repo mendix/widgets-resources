@@ -8,9 +8,9 @@ import ReactNative from "react-native";
 
 /**
  * @param {string} destinationAddress - This field is required.
- * @returns {string}
+ * @returns {boolean}
  */
-function NavigateTo(destinationAddress?: string): Promise<void> {
+function NavigateTo(destinationAddress?: string): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/linking
 
@@ -28,7 +28,12 @@ function NavigateTo(destinationAddress?: string): Promise<void> {
         android: `google.navigation:q=${destinationAddress}`
     });
 
-    return Linking.openURL(url);
+    return Linking.canOpenURL(url).then(supported => {
+        if (supported === false) {
+            return false;
+        }
+        return Linking.openURL(url).then(() => true);
+    });
 
     // END USER CODE
 }

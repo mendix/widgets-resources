@@ -7,9 +7,9 @@
 import ReactNative from "react-native";
 
 /**
- * @returns {string}
+ * @returns {boolean}
  */
-function RemoveStorageItem(key?: string): Promise<void> {
+function RemoveStorageItem(key?: string): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/asyncstorage
 
@@ -19,7 +19,7 @@ function RemoveStorageItem(key?: string): Promise<void> {
         throw new TypeError("Input parameter 'Key' is required");
     }
 
-    return AsyncStorage.removeItem(key);
+    return AsyncStorage.removeItem(key).then(() => true);
 
     // END USER CODE
 }

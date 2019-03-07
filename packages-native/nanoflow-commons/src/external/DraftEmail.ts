@@ -12,9 +12,9 @@ import ReactNative from "react-native";
  * @param {string} bcc - The BCC recipient(s).
  * @param {string} subject
  * @param {string} body
- * @returns {string}
+ * @returns {boolean}
  */
-function DraftEmail(recipient?: string, cc?: string, bcc?: string, subject?: string, body?: string): Promise<void> {
+function DraftEmail(recipient?: string, cc?: string, bcc?: string, subject?: string, body?: string): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/linking
 
@@ -40,7 +40,12 @@ function DraftEmail(recipient?: string, cc?: string, bcc?: string, subject?: str
     // Remove the last '?' or '&'
     url = url.slice(0, -1);
 
-    return Linking.openURL(url);
+    return Linking.canOpenURL(url).then(supported => {
+        if (supported === false) {
+            return false;
+        }
+        return Linking.openURL(url).then(() => true);
+    });
 
     // END USER CODE
 }

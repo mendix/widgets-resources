@@ -8,9 +8,9 @@ import ReactNative from "react-native";
 
 /**
  * @param {string} phoneNumber - This field is required.
- * @returns {string}
+ * @returns {boolean}
  */
-function SendTextMessage(phoneNumber?: string): Promise<void> {
+function SendTextMessage(phoneNumber?: string): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/linking
 
@@ -21,8 +21,14 @@ function SendTextMessage(phoneNumber?: string): Promise<void> {
     }
 
     phoneNumber = encodeURI(phoneNumber);
+    const url = `sms:${phoneNumber}`;
 
-    return Linking.openURL(`sms:${phoneNumber}`);
+    return Linking.canOpenURL(url).then(supported => {
+        if (!supported) {
+            return false;
+        }
+        return Linking.openURL(url).then(() => true);
+    });
 
     // END USER CODE
 }

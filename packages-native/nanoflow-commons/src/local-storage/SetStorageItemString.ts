@@ -9,9 +9,9 @@ import ReactNative from "react-native";
 /**
  * @param {string} key - This field is required.
  * @param {string} value - This field is required.
- * @returns {string}
+ * @returns {boolean}
  */
-function SetStorageItemString(key?: string, value?: string): Promise<void> {
+function SetStorageItemString(key?: string, value?: string): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/asyncstorage
 
@@ -25,7 +25,7 @@ function SetStorageItemString(key?: string, value?: string): Promise<void> {
         throw new TypeError("Input parameter 'Value' is required");
     }
 
-    return AsyncStorage.setItem(key, value);
+    return AsyncStorage.setItem(key, value).then(() => true);
 
     // END USER CODE
 }
