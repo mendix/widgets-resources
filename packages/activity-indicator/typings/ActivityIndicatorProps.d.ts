@@ -11,6 +11,5 @@ interface CommonProps<Style> {
 export type SizeEnum = "small" | "large";
 
 export interface ActivityIndicatorProps<Style> extends CommonProps<Style> {
-    color: string;
     size: SizeEnum;
 }
