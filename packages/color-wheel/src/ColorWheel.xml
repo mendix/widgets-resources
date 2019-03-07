@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.colorwheel.ColorWheel" needsEntityContext="true" offlineCapable="true" pluginWidget="true" 
-    xmlns="http://www.mendix.com/widget/1.0/" 
+<widget id="com.mendix.widget.native.colorwheel.ColorWheel" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
+    xmlns="http://www.mendix.com/widget/1.0/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
     <name>Color wheel</name>
     <description>Pick a color from a circular color input</description>
@@ -24,12 +24,6 @@
             <caption>On change complete</caption>
             <category>Events</category>
             <description>Called when the user releases the handle, regardless of weither the value has changed</description>
-        </property>
-
-        <property key="handleSize" type="integer" defaultValue="50">
-            <caption>Handle size</caption>
-            <category>Appearance</category>
-            <description>Size of the draggable handle</description>
         </property>
     </properties>
 </widget>

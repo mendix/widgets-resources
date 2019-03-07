@@ -12,5 +12,4 @@ export interface ColorWheelProps<Style> extends CommonProps<Style> {
     color: EditableValue<string>;
     onChange?: ActionValue;
     onChangeComplete?: ActionValue;
-    handleSize: number;
 }
