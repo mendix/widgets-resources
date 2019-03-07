@@ -1,19 +1,39 @@
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
-import { LayoutChangeEvent, View } from "react-native";
+import { LayoutChangeEvent, View, ViewStyle } from "react-native";
 
 import { RangeSliderProps } from "../typings/RangeSliderProps";
+import { flattenStyles, Style } from "./utils/common";
 
 interface State {
     width?: number;
 }
 
-export class RangeSlider extends Component<RangeSliderProps<undefined>, State> {
+interface RangeSliderStyle extends Style {
+    container: ViewStyle;
+    track: ViewStyle;
+    selectedTrack: ViewStyle;
+    marker: ViewStyle;
+    markerOnPress: ViewStyle;
+}
+
+const defaultRangeSliderStyle: RangeSliderStyle = {
+    container: {},
+    track: {},
+    selectedTrack: {
+        backgroundColor: "rgba(0,122,255,1)"
+    },
+    marker: {},
+    markerOnPress: {}
+};
+
+export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, State> {
     readonly state: State = {};
 
     private readonly onLayoutHandler = this.onLayout.bind(this);
     private readonly onChangeHandler = this.onChange.bind(this);
     private readonly onSlidingCompleteHandler = this.onSlidingComplete.bind(this);
+    private readonly styles = flattenStyles(defaultRangeSliderStyle, this.props.style);
 
     render(): JSX.Element {
         const {
@@ -25,10 +45,7 @@ export class RangeSlider extends Component<RangeSliderProps<undefined>, State> {
             defaultMaximumValue,
             editable,
             step,
-            defaultStep,
-            selectedTrackColor,
-            trackColor,
-            handleColor
+            defaultStep
         } = this.props;
 
         const sliderProps = {
@@ -38,9 +55,11 @@ export class RangeSlider extends Component<RangeSliderProps<undefined>, State> {
             enabledOne: editable !== "never" && !lowerValue.readOnly,
             enabledTwo: editable !== "never" && !upperValue.readOnly,
             step: step && step.value != null && step.value.gt(0) ? Number(step.value) : defaultStep,
-            trackStyle: trackColor ? { backgroundColor: trackColor } : undefined,
-            selectedStyle: selectedTrackColor ? { backgroundColor: selectedTrackColor } : undefined,
-            markerStyle: handleColor ? { backgroundColor: handleColor } : undefined,
+            containerStyle: this.styles.container,
+            markerStyle: this.styles.marker,
+            trackStyle: this.styles.track,
+            selectedStyle: this.styles.selectedTrack,
+            pressedMarkerStyle: this.styles.markerOnPress,
             onValuesChange: this.onChangeHandler,
             onValuesChangeFinish: this.onSlidingCompleteHandler,
             sliderLength: this.state.width

@@ -22,7 +22,4 @@ export interface RangeSliderProps<Style> extends CommonProps<Style> {
     onSlidingComplete?: ActionValue;
     step?: EditableValue<BigJs.Big>;
     defaultStep: number;
-    selectedTrackColor?: string;
-    trackColor?: string;
-    handleColor?: string;
 }
