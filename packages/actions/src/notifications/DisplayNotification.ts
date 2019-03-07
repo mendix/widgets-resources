@@ -17,7 +17,7 @@ import ReactNativeFirebase from "react-native-firebase";
  * @param {Big} iosBadgeNumber
  * @param {string} actionName
  * @param {string} actionGuid
- * @returns {string}
+ * @returns {boolean}
  */
 function DisplayNotification(
     body?: string,
@@ -27,7 +27,7 @@ function DisplayNotification(
     iosBadgeNumber?: BigJs.Big,
     actionName?: string,
     actionGuid?: string
-): Promise<void> {
+): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/displaying-notifications
 
@@ -75,7 +75,10 @@ function DisplayNotification(
         });
     }
 
-    return firebase.notifications().displayNotification(notification);
+    return firebase
+        .notifications()
+        .displayNotification(notification)
+        .then(() => true);
 
     // END USER CODE
 }

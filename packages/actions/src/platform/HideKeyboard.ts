@@ -7,15 +7,16 @@
 import ReactNative from "react-native";
 
 /**
- * @returns {string}
+ * @returns {boolean}
  */
-function HideKeyboard(): void {
+function HideKeyboard(): boolean {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/keyboard
 
     const Keyboard: typeof ReactNative.Keyboard = require("react-native").Keyboard;
 
     Keyboard.dismiss();
+    return true;
 
     // END USER CODE
 }

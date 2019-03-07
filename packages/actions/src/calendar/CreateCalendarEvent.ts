@@ -4,7 +4,6 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-// import ReactNative from "react-native";
 import AddCalendarEventLib from "react-native-add-calendar-event";
 
 function CreateCalendarEvent(

@@ -4,10 +4,9 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-// import ReactNative from "react-native";
 import AddCalendarEventLib from "react-native-add-calendar-event";
 
-function EditCalendarEvent(eventId?: string): Promise<void> {
+function EditCalendarEvent(eventId?: string): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/vonovak/react-native-add-calendar-event#editing-an-event
 
@@ -19,7 +18,7 @@ function EditCalendarEvent(eventId?: string): Promise<void> {
 
     return AddCalendarEvent.presentEventEditingDialog({
         eventId
-    }).then(() => undefined);
+    }).then(() => true);
 
     // END USER CODE
 }

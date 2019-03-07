@@ -11,14 +11,14 @@ import InAppBrowserType, { InAppBrowserOptions } from "react-native-inappbrowser
  * @param {string} toolbarColor
  * @param {"NativeMobileActions.InAppBrowserDismissButtonStyle.done"|"NativeMobileActions.InAppBrowserDismissButtonStyle.close"|"NativeMobileActions.InAppBrowserDismissButtonStyle.cancel"} iosDismissButtonStyle
  * @param {boolean} androidShowTitle
- * @returns {string}
+ * @returns {boolean}
  */
 function OpenInAppBrowser(
     url?: string,
     toolbarColor?: string,
     iosDismissButtonStyle?: "done" | "close" | "cancel",
     androidShowTitle?: boolean
-): Promise<void> {
+): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/proyecto26/react-native-inappbrowser
 
@@ -35,9 +35,7 @@ function OpenInAppBrowser(
         showTitle: androidShowTitle
     };
 
-    return InAppBrowser.open(url, options).then(() => {
-        return;
-    });
+    return InAppBrowser.open(url, options).then(() => true);
 
     // END USER CODE
 }

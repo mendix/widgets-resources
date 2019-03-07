@@ -26,7 +26,7 @@ function ChangeStatusBar(
     translucent?: boolean,
     networkActivityIndicatorVisible?: boolean,
     animateHideShow?: StatusBarAnimation
-): void {
+): boolean {
     // BEGIN USER CODE
 
     const RN: typeof ReactNative = require("react-native");
@@ -50,6 +50,8 @@ function ChangeStatusBar(
     if (networkActivityIndicatorVisible && RN.Platform.OS === "ios") {
         RN.StatusBar.setNetworkActivityIndicatorVisible(networkActivityIndicatorVisible);
     }
+
+    return true;
 
     function mapStyleEnum(styleEnum: Style): StatusBarStyle {
         switch (styleEnum) {

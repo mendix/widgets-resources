@@ -19,7 +19,7 @@ import ReactNativeFirebase from "react-native-firebase";
  * @param {string} actionName
  * @param {string} actionGuid
  * @param {string} notificationId - This ID can be used to cancel the scheduled notification later.
- * @returns {string}
+ * @returns {boolean}
  */
 function ScheduleNotification(
     date?: Date,
@@ -31,7 +31,7 @@ function ScheduleNotification(
     actionName?: string,
     actionGuid?: string,
     notificationId?: string
-): Promise<void> {
+): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/scheduling-notifications
 
@@ -87,9 +87,12 @@ function ScheduleNotification(
         notification.setNotificationId(notificationId);
     }
 
-    return firebase.notifications().scheduleNotification(notification, {
-        fireDate: date.getTime()
-    });
+    return firebase
+        .notifications()
+        .scheduleNotification(notification, {
+            fireDate: date.getTime()
+        })
+        .then(() => true);
 
     // END USER CODE
 }

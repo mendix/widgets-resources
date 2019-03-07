@@ -11,9 +11,9 @@ import ReactNativeSound from "react-native-sound";
  * - iOS: https://developer.apple.com/library/content/documentation/MusicAudio/Conceptual/CoreAudioOverview/SupportedAudioFormatsMacOSX/SupportedAudioFormatsMacOSX.html
  * - Android: https://developer.android.com/guide/topics/media/media-formats.html
  * @param {MxObject} audioFile - This field is required.
- * @returns {string}
+ * @returns {boolean}
  */
-function PlaySound(audioFile?: mendix.lib.MxObject): Promise<void> {
+function PlaySound(audioFile?: mendix.lib.MxObject): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/zmxv/react-native-sound
 
@@ -41,7 +41,7 @@ function PlaySound(audioFile?: mendix.lib.MxObject): Promise<void> {
             audio.play(success => {
                 audio.release();
                 if (success) {
-                    return resolve();
+                    return resolve(true);
                 }
                 return reject("Playback failed due to an audio encoding error");
             });

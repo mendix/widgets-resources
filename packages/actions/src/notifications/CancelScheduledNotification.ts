@@ -8,9 +8,9 @@ import ReactNativeFirebase from "react-native-firebase";
 
 /**
  * @param {string} notificationId - This field is required.
- * @returns {string}
+ * @returns {boolean}
  */
-function CancelScheduledNotification(notificationId?: string): void {
+function CancelScheduledNotification(notificationId?: string): boolean {
     // BEGIN USER CODE
 
     const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
@@ -20,6 +20,7 @@ function CancelScheduledNotification(notificationId?: string): void {
     }
 
     firebase.notifications().cancelNotification(notificationId);
+    return true;
 
     // END USER CODE
 }
