@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.slider.Slider" needsEntityContext="true" offlineCapable="true" pluginWidget="true" 
-    xmlns="http://www.mendix.com/widget/1.0/" 
+<widget id="com.mendix.widget.native.slider.Slider" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
+    xmlns="http://www.mendix.com/widget/1.0/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
     <name>Slider</name>
     <description>Change a number value using a slider.</description>
@@ -81,21 +81,6 @@
             <caption>Default step size</caption>
             <category>Appearance</category>
             <description/>
-        </property>
-        <property key="selectedTrackColor" type="string" required="false">
-            <caption>Selected track color</caption>
-            <category>Appearance</category>
-            <description>The color used for the track to the left of the handle</description>
-        </property>
-        <property key="trackColor" type="string" required="false">
-            <caption>Track color</caption>
-            <category>Appearance</category>
-            <description>The color used for the track to the right of the handle</description>
-        </property>
-        <property key="handleColor" type="string" required="false">
-            <caption>Slider handle color</caption>
-            <category>Appearance</category>
-            <description>The color used for the slider handle (Android only)</description>
         </property>
     </properties>
 </widget>

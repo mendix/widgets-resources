@@ -1,7 +1,34 @@
 import { Component, createElement, createRef } from "react";
-import { GestureResponderEvent, Slider as RNSlider, TouchableWithoutFeedback, View } from "react-native";
+import { GestureResponderEvent, Slider as RNSlider, TouchableWithoutFeedback, View, ViewStyle } from "react-native";
 
 import { SliderProps } from "../typings/SliderProps";
+import { flattenStyles, Style } from "./utils/common";
+
+interface SliderStyle extends Style {
+    container: ViewStyle;
+    track: {
+        backgroundColor: string;
+    };
+    selectedTrack: {
+        backgroundColor: string;
+    };
+    marker: {
+        backgroundColor: string;
+    };
+}
+
+const defaultSliderStyle: SliderStyle = {
+    container: {},
+    track: {
+        backgroundColor: ""
+    },
+    selectedTrack: {
+        backgroundColor: "rgba(0,122,255,1)"
+    },
+    marker: {
+        backgroundColor: ""
+    }
+};
 
 export class Slider extends Component<SliderProps<undefined>> {
     private readonly viewRef = createRef<View>();
@@ -10,6 +37,7 @@ export class Slider extends Component<SliderProps<undefined>> {
     private readonly onChangeHandler = this.onChange.bind(this);
     private readonly onSlidingCompleteHandler = this.onSlidingComplete.bind(this);
     private readonly onTapHandler = this.onTap.bind(this);
+    private readonly styles = flattenStyles(defaultSliderStyle, this.props.style);
 
     private get minimumValue(): number {
         return this.props.minimumValue && this.props.minimumValue.value != null
@@ -43,11 +71,12 @@ export class Slider extends Component<SliderProps<undefined>> {
                         maximumValue={this.maximumValue}
                         disabled={this.disabled}
                         step={this.step}
-                        minimumTrackTintColor={this.props.selectedTrackColor}
-                        maximumTrackTintColor={this.props.trackColor}
-                        thumbTintColor={this.props.handleColor}
+                        minimumTrackTintColor={this.styles.selectedTrack.backgroundColor}
+                        maximumTrackTintColor={this.styles.track.backgroundColor}
+                        thumbTintColor={this.styles.marker.backgroundColor}
                         onValueChange={this.onChangeHandler}
                         onSlidingComplete={this.onSlidingCompleteHandler}
+                        style={this.styles.container}
                     />
                 </TouchableWithoutFeedback>
             </View>
