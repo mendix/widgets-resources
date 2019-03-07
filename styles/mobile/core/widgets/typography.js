@@ -8,8 +8,8 @@ import { Platform } from 'react-native';
 ========================================================================== */
 
 export const Text = {
-  color: font.color,
-  fontSize: font.size,
+    color: font.color,
+    fontSize: font.size,
 };
 
 //== Design Properties
@@ -18,110 +18,110 @@ export const Text = {
 // Text Colors
 
 export const textPrimary = {
-  color: brand.primary,
+    color: brand.primary,
 };
 export const textSuccess = {
-  color: brand.success,
+    color: brand.success,
 };
 export const textWarning = {
-  color: brand.warning,
+    color: brand.warning,
 };
 export const textDanger = {
-  color: brand.danger,
+    color: brand.danger,
 };
 
 export const textGrayDarkest = {
-  color: gray.darkest,
+    color: gray.darkest,
 };
 export const textGrayDarker = {
-  color: gray.darker,
+    color: gray.darker,
 };
 export const textGrayDark = {
-  color: gray.dark,
+    color: gray.dark,
 };
 export const textGray = {
-  color: gray.regular,
+    color: gray.regular,
 };
 export const textGrayLight = {
-  color: gray.light,
+    color: gray.light,
 };
 export const textGrayLighter = {
-  color: gray.lighter,
+    color: gray.lighter,
 };
 export const textGrayLightest = {
-  color: gray.lightest,
+    color: gray.lightest,
 };
 
 // Text Sizes
 export const h1 = {
-  fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
-  fontSize: font.sizeH1,
-  marginBottom: spacing.small,
+    fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+    fontSize: font.sizeH1,
+    marginBottom: spacing.small,
 };
 export const h2 = {
-  fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
-  fontSize: font.sizeH2,
-  marginBottom: spacing.small,
+    fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+    fontSize: font.sizeH2,
+    marginBottom: spacing.small,
 };
 export const h3 = {
-  fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
-  fontSize: font.sizeH3,
-  marginBottom: spacing.small,
+    fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+    fontSize: font.sizeH3,
+    marginBottom: spacing.small,
 };
 export const h4 = {
-  fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
-  fontSize: font.sizeH4,
-  marginBottom: spacing.smaller,
+    fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+    fontSize: font.sizeH4,
+    marginBottom: spacing.smaller,
 };
 export const h5 = {
-  fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
-  fontSize: font.sizeH5,
-  marginBottom: spacing.smallest,
+    fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+    fontSize: font.sizeH5,
+    marginBottom: spacing.smallest,
 };
 export const h6 = {
-  fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
-  fontSize: font.sizeH6,
-  marginBottom: spacing.smallest,
+    fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+    fontSize: font.sizeH6,
+    marginBottom: spacing.smallest,
 };
 export const textSmall = {
-  fontSize: font.sizeSmall,
+    fontSize: font.sizeSmall,
 };
 export const textLarge = {
-  fontSize: font.sizeLarge,
+    fontSize: font.sizeLarge,
 };
 
 // Text Alignment
 export const textLeft = {
-  textAlign: 'left',
+    textAlign: 'left',
 };
 export const textCenter = {
-  textAlign: 'center',
+    textAlign: 'center',
 };
 export const textRight = {
-  textAlign: 'right',
+    textAlign: 'right',
 };
 
 // Text Weights
 export const textLight = {
-  fontWeight: font.weightLight,
+    fontWeight: font.weightLight,
 };
 export const textNormal = {
-  fontWeight: font.weightNormal,
+    fontWeight: font.weightNormal,
 };
 export const textSemiBold = {
-  fontWeight: font.weightSemiBold,
+    fontWeight: font.weightSemiBold,
 };
 export const textBold = {
-  fontWeight: font.weightBold,
+    fontWeight: font.weightBold,
 };
 
 // Text Transformations
 export const textLowercase = {
-  textTransform: 'lowercase',
+    textTransform: 'lowercase',
 };
 export const textUppercase = {
-  textTransform: 'uppercase',
+    textTransform: 'uppercase',
 };
 export const textCapitalize = {
-  textTransform: 'capitalize',
+    textTransform: 'capitalize',
 };
