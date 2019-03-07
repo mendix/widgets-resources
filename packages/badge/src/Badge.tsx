@@ -17,11 +17,7 @@ const defaultBadgeStyle: BadgeStyle = {
 
 export class Badge extends Component<BadgeProps<BadgeStyle>> {
     private readonly onClickHandler = this.onClick.bind(this);
-    private styles = defaultBadgeStyle;
-
-    componentDidMount(): void {
-        this.styles = flattenStyles(defaultBadgeStyle, this.props.style);
-    }
+    private readonly styles = flattenStyles(defaultBadgeStyle, this.props.style);
 
     render(): JSX.Element {
         const isAndroid = Platform.OS === "android";
