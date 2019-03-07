@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.progresscircle.ProgressCircle" needsEntityContext="true" offlineCapable="true" pluginWidget="true" 
-    xmlns="http://www.mendix.com/widget/1.0/" 
+<widget id="com.mendix.widget.native.progresscircle.ProgressCircle" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
+    xmlns="http://www.mendix.com/widget/1.0/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
     <name>Progress circle</name>
     <description>Displays progress in a circle.</description>
@@ -36,22 +36,6 @@
             <category>Data source</category>
             <description/>
         </property>
-
-        <property key="indeterminate" type="boolean" defaultValue="false">
-            <caption>Indeterminate</caption>
-            <category>Appearance</category>
-            <description>If set, the indicator will spin and the data source will be ignored</description>
-        </property>
-        <property key="size" type="integer" defaultValue="40">
-            <caption>Diameter</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
-        <property key="thickness" type="integer" defaultValue="3">
-            <caption>Thickness</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
         <property key="showsText" type="boolean" defaultValue="false">
             <caption>Show text</caption>
             <category>Appearance</category>
@@ -61,26 +45,6 @@
             <caption>Custom text</caption>
             <category>Appearance</category>
             <description>Use a custom text message instead of the default percentage</description>
-        </property>
-        <property key="color" type="string" required="false">
-            <caption>Fill color</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
-        <property key="unfilledColor" type="string" required="false">
-            <caption>Unfilled color</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
-        <property key="borderColor" type="string" required="false">
-            <caption>Border color</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
-        <property key="borderWidth" type="integer" defaultValue="1">
-            <caption>Border width</caption>
-            <category>Appearance</category>
-            <description>Set to 0 to remove the border</description>
         </property>
     </properties>
 </widget>

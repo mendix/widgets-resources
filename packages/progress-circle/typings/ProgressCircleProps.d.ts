@@ -13,13 +13,6 @@ export interface ProgressCircleProps<Style> extends CommonProps<Style> {
     defaultValue: number;
     maximumValue?: EditableValue<BigJs.Big>;
     defaultMaximumValue: number;
-    indeterminate: boolean;
-    size: number;
-    thickness: number;
     showsText: boolean;
     customText?: DynamicValue<string>;
-    color?: string;
-    unfilledColor?: string;
-    borderColor?: string;
-    borderWidth: number;
 }
