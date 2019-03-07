@@ -119,6 +119,7 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
         // When map is placed on the non default tab, the maps has no size.
         // Therefor it need to update on the first view.
         if (this.map && !this.state.resized) {
+            this.map!.invalidateSize();
             this.setDefaultCenter(this.props);
             this.setBounds();
             this.setState({ resized: true });
@@ -172,6 +173,7 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
             this.setBounds();
         } else if (this.map) {
             this.map.removeLayer(this.markerGroup);
+            this.map.setZoom(this.props.zoomLevel);
         }
     }
 
