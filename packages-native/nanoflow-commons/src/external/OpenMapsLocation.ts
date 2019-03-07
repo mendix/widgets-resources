@@ -8,9 +8,9 @@ import ReactNative from "react-native";
 
 /**
  * @param {string} query - This field is required.
- * @returns {string}
+ * @returns {boolean}
  */
-function OpenMapsLocation(query?: string): Promise<void> {
+function OpenMapsLocation(query?: string): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/linking
 
@@ -28,7 +28,12 @@ function OpenMapsLocation(query?: string): Promise<void> {
         android: `geo:0,0?q=${query}`
     });
 
-    return Linking.openURL(url);
+    return Linking.canOpenURL(url).then(supported => {
+        if (supported === false) {
+            return false;
+        }
+        return Linking.openURL(url).then(() => true);
+    });
 
     // END USER CODE
 }

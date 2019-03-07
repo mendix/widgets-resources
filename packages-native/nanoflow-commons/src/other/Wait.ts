@@ -6,16 +6,16 @@
 
 /**
  * @param {MxObject} entity
- * @returns {string}
+ * @returns {boolean}
  */
-function Wait(delay?: BigJs.Big): Promise<void> {
+function Wait(delay?: BigJs.Big): Promise<boolean> {
     // BEGIN USER CODE
     if (delay == null) {
         throw new TypeError("Input parameter 'delay' is required.");
     }
 
     return new Promise(resolve => {
-        setTimeout(() => resolve(), Number(delay));
+        setTimeout(() => resolve(true), Number(delay));
     });
     // END USER CODE
 }
