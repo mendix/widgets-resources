@@ -1,28 +1,48 @@
 import { Component, createElement } from "react";
-import { Text, View } from "react-native";
+import { Text, TextStyle, View, ViewStyle } from "react-native";
 import { WebView as RNWebView } from "react-native-webview";
 import { WebViewProps } from "../typings/WebViewProps";
+import { flattenStyles, Style } from "./utils/common";
 
-export class WebView extends Component<WebViewProps<undefined>> {
+interface WebViewStyle extends Style {
+    container: ViewStyle;
+    errorContainer: ViewStyle;
+    errorText: TextStyle;
+}
+
+const defaultWebViewStyle: WebViewStyle = {
+    container: {
+        width: "100%",
+        height: "100%"
+    },
+    errorContainer: {},
+    errorText: {
+        color: "red",
+        fontWeight: "bold"
+    }
+};
+
+export class WebView extends Component<WebViewProps<WebViewStyle>> {
     private readonly onLoadHandler = this.onLoad.bind(this);
     private readonly onErrorHandler = this.onError.bind(this);
     private readonly onLoadStartHandler = this.onLoadStart.bind(this);
     private readonly onLoadEndHandler = this.onLoadEnd.bind(this);
+    private readonly styles = flattenStyles(defaultWebViewStyle, this.props.style);
 
     render(): JSX.Element {
-        const url = this.props.url ? this.props.url.value : this.props.staticUrl;
+        const url = this.props.url && this.props.url.value ? this.props.url.value : this.props.staticUrl;
 
         if (!url) {
             return (
-                <View>
-                    <Text>No URL</Text>
+                <View style={this.styles.errorContainer}>
+                    <Text style={this.styles.errorText}>No URL</Text>
                 </View>
             );
         }
         return (
             <RNWebView
                 source={{ uri: url }}
-                style={{ width: "100%", height: "100%" }}
+                style={this.styles.container}
                 onLoad={this.onLoadHandler}
                 onError={this.onErrorHandler}
                 onLoadStart={this.onLoadStartHandler}
