@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.progressbar.ProgressBar" needsEntityContext="true" offlineCapable="true" pluginWidget="true" 
-    xmlns="http://www.mendix.com/widget/1.0/" 
+<widget id="com.mendix.widget.native.progressbar.ProgressBar" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
+    xmlns="http://www.mendix.com/widget/1.0/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
     <name>Progress bar</name>
     <description>Displays progress in a bar.</description>
@@ -35,42 +35,6 @@
             <caption>Default maximum value</caption>
             <category>Data source</category>
             <description/>
-        </property>
-
-        <property key="indeterminate" type="boolean" defaultValue="false">
-            <caption>Indeterminate</caption>
-            <category>Appearance</category>
-            <description>If set, the indicator will spin and the data source will be ignored</description>
-        </property>
-        <property key="height" type="integer" defaultValue="6">
-            <caption>Height</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
-        <property key="color" type="string" required="false">
-            <caption>Fill color</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
-        <property key="unfilledColor" type="string" required="false">
-            <caption>Unfilled color</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
-        <property key="borderColor" type="string" required="false">
-            <caption>Border color</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
-        <property key="borderWidth" type="integer" defaultValue="1">
-            <caption>Border width</caption>
-            <category>Appearance</category>
-            <description>Set to 0 to disable the border</description>
-        </property>
-        <property key="borderRadius" type="integer" defaultValue="4">
-            <caption>Border radius</caption>
-            <category>Appearance</category>
-            <description>Rounding of corners, set to 0 to disable rounding</description>
         </property>
     </properties>
 </widget>

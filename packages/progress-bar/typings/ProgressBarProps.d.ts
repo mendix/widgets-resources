@@ -13,11 +13,4 @@ export interface ProgressBarProps<Style> extends CommonProps<Style> {
     defaultValue: number;
     maximumValue?: EditableValue<BigJs.Big>;
     defaultMaximumValue: number;
-    indeterminate: boolean;
-    height: number;
-    color?: string;
-    unfilledColor?: string;
-    borderColor?: string;
-    borderWidth: number;
-    borderRadius: number;
 }
