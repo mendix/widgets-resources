@@ -14,7 +14,7 @@ export const DatePicker = {
         fontSize: TextBox.input.fontSize,
         backgroundColor: TextBox.input.backgroundColor,
         paddingVertical: TextBox.input.paddingVertical,
-        // paddingHorizontal: TextBox.input.paddingHorizontal,
+        paddingHorizontal: TextBox.input.paddingHorizontal,
         borderRadius: TextBox.input.radius,
         borderWidth: TextBox.input.borderWidth,
         borderColor: TextBox.input.borderColor,

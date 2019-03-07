@@ -13,10 +13,10 @@ import { spacing, font } from '../variables';
 export const CheckBox = {
     label: TextBox.label,
     input: {
-        color: font.color,
-        fontSize: font.size,
-        paddingVertical: spacing.smaller,
-        paddingHorizontal: spacing.small,
+        color: TextBox.input.color,
+        fontSize: TextBox.input.fontSize,
+        paddingVertical: TextBox.input.paddingVertical,
+        paddingHorizontal: TextBox.input.paddingHorizontal,
         ...Platform.select({
             ios: {
                 borderTopWidth: 1,
@@ -32,25 +32,8 @@ export const CheckBox = {
 };
 
 export const CheckBoxVertical = {
-    label: {
-        ...TextBoxVertical.label,
-    },
-    input: {
-        flex: 1,
-        color: TextBoxVertical.input.color,
-        fontSize: TextBoxVertical.input.size,
-        paddingVertical: TextBoxVertical.input.paddingVertical,
-        paddingHorizontal: TextBoxVertical.input.paddingHorizontal,
-        ...Platform.select({
-            ios: {
-                borderTopWidth: 1,
-                borderBottomWidth: 1,
-            },
-            android: {
-                backgroundColor: 'transparent',
-            },
-        }),
-    },
+    label: TextBoxVertical.label,
+    input: TextBoxVertical.input,
     inputError: TextBoxVertical.inputError,
     validationMessage: TextBoxVertical.validationMessage,
 };

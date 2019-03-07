@@ -21,12 +21,8 @@ export const TextArea = {
     validationMessage: TextBox.validationMessage,
 };
 export const TextAreaVertical = {
-    label: {
-        ...TextBoxVertical.label,
-    },
-    input: {
-        ...TextBoxVertical.input,
-    },
+    label: TextBoxVertical.label,
+    input: TextBoxVertical.input,
     inputError: TextBoxVertical.inputError,
     validationMessage: TextBoxVertical.validationMessage,
 };

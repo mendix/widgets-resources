@@ -1,4 +1,4 @@
-import { gray, brand, background } from '../variables';
+import { gray, brand, background, font } from '../variables';
 import { Platform } from 'react-native';
 
 /* ==========================================================================
@@ -13,17 +13,12 @@ export const TabContainer = {
     },
     tabBar: {
         bounces: true,
-        pressColor: background.secondary,
-        pressOpacity: 0.1,
+        pressColor: brand.primary,
+        pressOpacity: 0.8,
         backgroundColor: background.primary,
         ...Platform.select({
             ios: {
-                height: 30,
-                marginTop: 10,
-                marginBottom: 10,
-                padding: 0,
-                alignItems: 'center',
-                scrollEnabled: true,
+                scrollEnabled: false,
             },
             android: {
                 scrollEnabled: false,
@@ -32,17 +27,11 @@ export const TabContainer = {
     },
     indicator: {
         backgroundColor: brand.primary,
-        height: Platform.select({ ios: 0, android: 2 }),
+        height: Platform.select({ ios: 2, android: 2 }),
     },
     tab: {
         ...Platform.select({
-            ios: {
-                padding: 0,
-                margin: 0,
-                borderWidth: 1,
-                borderColor: brand.primary,
-                borderRadius: 4,
-            },
+            ios: {},
             android: {},
         }),
     },
@@ -50,8 +39,7 @@ export const TabContainer = {
         color: gray.darkest,
         ...Platform.select({
             ios: {
-                margin: 0,
-                padding: 0,
+                // fontWeight: font.weightSemiBold,
             },
             android: {},
         }),

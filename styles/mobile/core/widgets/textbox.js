@@ -21,16 +21,14 @@ export const TextBox = {
         selectionColor: gray.lighter,
         paddingVertical: spacing.smaller,
         paddingHorizontal: spacing.small,
+        backgroundColor: background.primary,
         ...Platform.select({
-            ios: {
-                backgroundColor: 'transparent',
-            },
+            ios: {},
             android: {
                 borderWidth: 1,
                 borderColor: gray.lighter,
                 borderRadius: border.radius,
                 underlineColorAndroid: 'transparent',
-                backgroundColor: background.primary,
             },
         }),
     },
