@@ -42,15 +42,15 @@ function DisplayNotification(
     }
 
     const channel = new firebase.notifications.Android.Channel(
-        "mendix-local-notifications-jsactions",
-        "Local notifications channel used by JS actions",
+        "mendix-local-notifications",
+        "Local notifications",
         firebase.notifications.Android.Importance.Default
     );
     firebase.notifications().android.createChannel(channel);
 
     const notification = new firebase.notifications.Notification()
         .setBody(body)
-        .android.setChannelId("mendix-local-notifications-jsactions");
+        .android.setChannelId("mendix-local-notifications");
 
     if (title) {
         notification.setTitle(title);
