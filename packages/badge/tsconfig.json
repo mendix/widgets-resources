@@ -1,4 +1,4 @@
 {
     "extends": "../../tsconfig.base.json",
-    "include": ["../../typings/PluginWidget.d.ts", "./src", "./typings/NativeBadgeProps.d.ts"]
+    "include": ["../../typings", "../util", "./src", "./typings"]
 }

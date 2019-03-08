@@ -1,9 +1,9 @@
+import { flattenStyles, Style } from "@native-components/util-widgets";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
 import { LayoutChangeEvent, View, ViewStyle } from "react-native";
 
 import { RangeSliderProps } from "../typings/RangeSliderProps";
-import { flattenStyles, Style } from "./utils/common";
 
 interface State {
     width?: number;

@@ -19,6 +19,7 @@
         "postversion": "node ../../scripts/UpdateGithubRelease.js"
     },
     "dependencies": {
+        "@native-components/util-widgets": "^0.0.1",
         "react-native-segmented-control-tab": "^3.4.0"
     }
 }

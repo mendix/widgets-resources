@@ -1,9 +1,9 @@
+import { flattenStyles, Style } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
 import { ActivityIndicator, View, ViewStyle } from "react-native";
 import Video from "react-native-video";
 
 import { VideoPlayerProps } from "../typings/VideoPlayerProps";
-import { flattenStyles, Style } from "./utils/common";
 
 interface State {
     loading: boolean;

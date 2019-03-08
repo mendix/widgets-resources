@@ -1,9 +1,9 @@
+import { flattenStyles, Style } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
 import { Platform, ViewStyle } from "react-native";
 import MapView, { Marker, Region } from "react-native-maps";
 
 import { MapsProps } from "../typings/MapsProps";
-import { flattenStyles, Style } from "./utils/common";
 
 interface MarkerStyle {
     color: string;

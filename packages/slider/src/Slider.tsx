@@ -1,8 +1,8 @@
+import { flattenStyles, Style } from "@native-components/util-widgets";
 import { Component, createElement, createRef } from "react";
 import { GestureResponderEvent, Slider as RNSlider, TouchableWithoutFeedback, View, ViewStyle } from "react-native";
 
 import { SliderProps } from "../typings/SliderProps";
-import { flattenStyles, Style } from "./utils/common";
 
 interface SliderStyle extends Style {
     container: ViewStyle;

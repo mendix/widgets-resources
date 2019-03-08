@@ -1,9 +1,9 @@
+import { flattenStyles, Style } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
 import { TextStyle, ViewStyle } from "react-native";
 import { Circle } from "react-native-progress";
-import { Style } from "../../progress-bar/src/utils/common";
+
 import { ProgressCircleProps } from "../typings/ProgressCircleProps";
-import { flattenStyles } from "./utils/common";
 
 interface ProgressCircleStyle extends Style {
     container: ViewStyle;

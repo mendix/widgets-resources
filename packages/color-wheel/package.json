@@ -19,6 +19,7 @@
         "postversion": "node ../../scripts/UpdateGithubRelease.js"
     },
     "dependencies": {
+        "@native-components/util-widgets": "^0.0.1",
         "colorsys": "^1.0.22",
         "react-native-color-wheel": "^0.1.6"
     }

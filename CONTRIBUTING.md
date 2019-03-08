@@ -12,11 +12,10 @@ $ git clone git@github.com:jobvs/native-components.git
 $ cd native-components
 ```
 
-2. Install dependencies
+2. Install and link dependencies
 
 ```sh
 $ npm install
-$ npx lerna exec npm install
 ```
 
 3. Checkout the Mendix test project (Optional)

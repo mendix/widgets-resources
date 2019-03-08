@@ -1,10 +1,10 @@
+import { flattenStyles, Style } from "@native-components/util-widgets";
 import colorsys from "colorsys";
 import { Component, createElement } from "react";
 import { ViewStyle } from "react-native";
 import { ColorWheel as RNColorWheel, HSV } from "react-native-color-wheel";
 
 import { ColorWheelProps } from "../typings/ColorWheelProps";
-import { flattenStyles, Style } from "./utils/common";
 
 interface ColorWheelStyle extends Style {
     container: ViewStyle;

@@ -1,6 +1,6 @@
+import { flattenStyles, Style } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
 import { Platform, Text, TextStyle, TouchableNativeFeedback, TouchableOpacity, View, ViewStyle } from "react-native";
-import { flattenStyles, Style } from "./utils/common";
 
 import { BadgeProps } from "../typings/BadgeProps";
 import { styles } from "./ui/Styles";

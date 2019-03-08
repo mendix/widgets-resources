@@ -1,8 +1,9 @@
+import { flattenStyles, Style } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
 import { ViewStyle } from "react-native";
 import { Bar } from "react-native-progress";
+
 import { ProgressBarProps } from "../typings/ProgressBarProps";
-import { flattenStyles, Style } from "./utils/common";
 
 interface ProgressBarStyle extends Style {
     bar: ViewStyle;

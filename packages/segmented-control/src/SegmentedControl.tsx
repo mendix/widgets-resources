@@ -1,9 +1,9 @@
+import { flattenStyles, Style } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
 import { TextStyle, ViewStyle } from "react-native";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 
 import { SegmentedControlProps } from "../typings/SegmentedControlProps";
-import { flattenStyles, Style } from "./utils/common";
 
 interface SegmentedControlStyle extends Style {
     container: ViewStyle;

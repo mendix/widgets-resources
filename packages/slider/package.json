@@ -17,5 +17,8 @@
         "lint": "../../node_modules/.bin/tslint --project tsconfig.json --config ../../tslint.json",
         "version": "npm run build:release",
         "postversion": "node ../../scripts/UpdateGithubRelease.js"
+    },
+    "dependencies": {
+        "@native-components/util-widgets": "^0.0.1"
     }
 }

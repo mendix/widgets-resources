@@ -35,11 +35,10 @@ function fixPreservedModules() {
                  * When a widget has dependencies, the entry point ends up in a subfolder.
                  * In this case create a new entry point that re-exports the original.
                  */
-                ...input
-                    .filter(() => !Object.keys(bundle).includes(pkg.config.widgetName + ".tsx"))
-                    .map(filePath => {
-                        const relativePathToContent = path.relative(cwd, filePath);
-                        const reexportCode = `export * from "./${removeExtension(relativePathToContent)}";`;
+                ...Object.keys(bundle)
+                    .filter(filePath => filePath.includes(pkg.config.widgetName + ".tsx"))
+                    .map(entryFilePath => {
+                        const reexportCode = `export * from "./${removeExtension(entryFilePath)}";`;
                         const outputFile = path.join(outputPath, pkg.config.widgetName + ".js");
                         return fs.promises.writeFile(outputFile, reexportCode, { encoding: "utf8" });
                     })
@@ -115,7 +114,6 @@ const config = {
         "react-dom",
         "react-native",
         "react-native/Libraries/StyleSheet/StyleSheet",
-        /\/react-native\//,
         "react-native-camera",
         "react-native-firebase",
         "react-native-maps",
@@ -129,7 +127,9 @@ const config = {
         rollupNodeResolve({
             browser: true
         }),
-        rollupTypescript2({ cacheRoot: "./dist/rpt2_cache" }),
+        rollupTypescript2({
+            cacheRoot: "./dist/rpt2_cache"
+        }),
         rollupBabel({
             exclude: [/node_modules\/colorsys/],
             plugins: [

@@ -1,8 +1,9 @@
+import { flattenStyles, Style } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
 import { Text, TextStyle, View, ViewStyle } from "react-native";
 import { WebView as RNWebView } from "react-native-webview";
+
 import { WebViewProps } from "../typings/WebViewProps";
-import { flattenStyles, Style } from "./utils/common";
 
 interface WebViewStyle extends Style {
     container: ViewStyle;
