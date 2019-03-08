@@ -107,16 +107,9 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
 
     private fetchData = (contextObject?: mendix.lib.MxObject) => {
         this.setState({ isFetchingData: true });
-        const { defaultCenterLatitude, defaultCenterLongitude } = this.props;
         Promise.all(this.props.locations.map(locationAttr => this.retrieveData(locationAttr, contextObject)))
             .then(locations => {
                 const flattenLocations = locations.reduce((loc1, loc2) => loc1.concat(loc2), []);
-                if (defaultCenterLatitude && defaultCenterLongitude) {
-                    flattenLocations.push({
-                        latitude: parseFloat(defaultCenterLatitude),
-                        longitude: parseFloat(defaultCenterLongitude)
-                    });
-                }
 
                 return Promise.all(flattenLocations.map(location => validateLocations(location)));
             })
