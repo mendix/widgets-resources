@@ -1,5 +1,5 @@
 import { Component } from "react";
-import firebase from "react-native-firebase";
+import firebase, { RNFirebase } from "react-native-firebase";
 
 import { ActionsType, NotificationsProps } from "../typings/NotificationsProps";
 
@@ -15,11 +15,8 @@ export class Notifications extends Component<NotificationsProps<undefined>> {
         this.checkForInitialNotification();
 
         this.listeners = [
-            firebase.messaging().onMessage(message => this.onReceive(message.data)),
-            firebase.notifications().onNotification(notification => this.onReceive(notification.data)),
-            firebase
-                .notifications()
-                .onNotificationOpened(notificationOpen => this.onOpen(notificationOpen.notification.data))
+            firebase.notifications().onNotification(notification => this.onReceive(notification)),
+            firebase.notifications().onNotificationOpened(notificationOpen => this.onOpen(notificationOpen))
         ];
     }
 
@@ -37,36 +34,43 @@ export class Notifications extends Component<NotificationsProps<undefined>> {
             .getInitialNotification()
             .then(notificationOpen => {
                 if (notificationOpen) {
-                    this.onOpen(notificationOpen.notification.data);
+                    this.onOpen(notificationOpen);
                 }
             });
     }
 
-    private onReceive(data: NotificationData): void {
-        this.setGuid(data.guid);
-        this.getActionsByName(data.actionName).forEach(action => {
-            if (action.onReceive && action.onReceive.canExecute) {
-                action.onReceive.execute();
-            }
-        });
+    private onReceive(notification: RNFirebase.notifications.Notification): void {
+        this.handleNotification(notification, action => action.onReceive);
     }
 
-    private onOpen(data: NotificationData): void {
-        this.setGuid(data.guid);
-        this.getActionsByName(data.actionName).forEach(action => {
-            if (action.onOpen && action.onOpen.canExecute) {
-                action.onOpen.execute();
-            }
-        });
+    private onOpen(notificationOpen: RNFirebase.notifications.NotificationOpen): void {
+        this.handleNotification(notificationOpen.notification, action => action.onOpen);
     }
 
-    private setGuid(guid?: string): void {
-        if (this.props.guid) {
-            this.props.guid.setValue(guid);
+    private handleNotification(
+        notification: RNFirebase.notifications.Notification,
+        getHandler: (action: ActionsType) => ActionValue | undefined
+    ): void {
+        const data: NotificationData = notification.data;
+        const actions = this.props.actions.filter(item => item.name === data.actionName);
+
+        if (actions.length === 0) {
+            return;
         }
-    }
 
-    private getActionsByName(actionName?: string): ActionsType[] {
-        return this.props.actions.filter(item => item.name === actionName);
+        if (this.props.guid) {
+            this.props.guid.setValue(data.guid);
+        }
+
+        actions.forEach(action => {
+            const handler = getHandler(action);
+            if (handler && handler.canExecute) {
+                handler.execute();
+            }
+        });
+
+        if (notification.notificationId) {
+            firebase.notifications().removeDeliveredNotification(notification.notificationId);
+        }
     }
 }
