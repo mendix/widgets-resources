@@ -19,6 +19,7 @@
         "postversion": "node ../../scripts/UpdateGithubRelease.js"
     },
     "dependencies": {
-        "react-native-qrcode-svg": "^5.1.2"
+        "react-native-qrcode-svg": "^5.1.2",
+        "@native-components/util-widgets": "^0.0.1"
     }
 }

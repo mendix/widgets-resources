@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.qrcode.QRCode" needsEntityContext="true" offlineCapable="true" pluginWidget="true" 
-    xmlns="http://www.mendix.com/widget/1.0/" 
+<widget id="com.mendix.widget.native.qrcode.QRCode" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
+    xmlns="http://www.mendix.com/widget/1.0/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
     <name>QR code</name>
     <description>Displays a QR code</description>
@@ -13,21 +13,6 @@
             <attributeTypes>
                 <attributeType name="String"/>
             </attributeTypes>
-        </property>
-        <property key="size" type="integer" defaultValue="100">
-            <caption>Size</caption>
-            <category>Appearance</category>
-            <description>Size of the rendered QR code in pixels</description>
-        </property>
-        <property key="color" type="string" defaultValue="#000000">
-            <caption>Color</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
-        <property key="backgroundColor" type="string" defaultValue="#ffffff">
-            <caption>Background color</caption>
-            <category>Appearance</category>
-            <description/>
         </property>
     </properties>
 </widget>
