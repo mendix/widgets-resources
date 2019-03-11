@@ -23,11 +23,9 @@ export class ActivityIndicator extends Component<ActivityIndicatorProps<Activity
 
     render(): JSX.Element {
         return (
-            <RNActivityIndicator
-                size={this.props.size}
-                color={this.styles.indicator.color}
-                style={this.styles.container}
-            />
+            <View style={this.styles.container}>
+                <RNActivityIndicator size={this.props.size} color={this.styles.indicator.color} />
+            </View>
         );
     }
 }
