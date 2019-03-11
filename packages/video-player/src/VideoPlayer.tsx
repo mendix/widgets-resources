@@ -12,7 +12,7 @@ interface State {
 interface VideoStyle extends Style {
     container: ViewStyle;
     indicator: {
-        backgroundColor: string;
+        color: string;
     };
     video: ViewStyle;
 }
@@ -25,7 +25,7 @@ const defaultVideoStyle: VideoStyle = {
         backgroundColor: "black"
     },
     indicator: {
-        backgroundColor: "white"
+        color: "white"
     },
     video: {
         width: "100%",
@@ -46,7 +46,7 @@ export class VideoPlayer extends Component<VideoPlayerProps<undefined>, State> {
         const videoUrl = (this.props.videoUrl && this.props.videoUrl.value) || this.props.staticVideoUrl;
         return (
             <View style={this.styles.container}>
-                {this.state.loading && <ActivityIndicator color={this.styles.indicator.backgroundColor} size="large" />}
+                {this.state.loading && <ActivityIndicator color={this.styles.indicator.color} size="large" />}
                 <Video
                     source={{ uri: videoUrl }}
                     paused={!this.props.autoStart}
