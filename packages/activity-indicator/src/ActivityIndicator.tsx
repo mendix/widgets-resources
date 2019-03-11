@@ -1,6 +1,6 @@
 import { flattenStyles, Style } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
-import { ActivityIndicator as RNActivityIndicator, ViewStyle } from "react-native";
+import { ActivityIndicator as RNActivityIndicator, View, ViewStyle } from "react-native";
 
 import { ActivityIndicatorProps } from "../typings/ActivityIndicatorProps";
 
