@@ -1,9 +1,10 @@
 import { flattenStyles, Style } from "@native-components/util-widgets";
-import MultiSlider from "@ptomasroos/react-native-multi-slider";
+import MultiSlider, { MarkerProps } from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
 import { LayoutChangeEvent, View, ViewStyle } from "react-native";
 
 import { RangeSliderProps } from "../typings/RangeSliderProps";
+import { Marker } from "./Marker";
 
 interface State {
     width?: number;
@@ -12,19 +13,25 @@ interface State {
 interface RangeSliderStyle extends Style {
     container: ViewStyle;
     track: ViewStyle;
-    selectedTrack: ViewStyle;
+    trackDisabled: ViewStyle;
+    highlight: ViewStyle;
+    highlightDisabled: ViewStyle;
     marker: ViewStyle;
-    markerOnPress: ViewStyle;
+    markerActive: ViewStyle;
+    markerDisabled: ViewStyle;
 }
 
 const defaultRangeSliderStyle: RangeSliderStyle = {
     container: {},
     track: {},
-    selectedTrack: {
+    trackDisabled: {},
+    highlight: {
         backgroundColor: "rgba(0,122,255,1)"
     },
+    highlightDisabled: {},
     marker: {},
-    markerOnPress: {}
+    markerActive: {},
+    markerDisabled: {}
 };
 
 export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, State> {
@@ -48,21 +55,31 @@ export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, S
             defaultStep
         } = this.props;
 
+        const enabledOne = editable !== "never" && !lowerValue.readOnly;
+        const enabledTwo = editable !== "never" && !upperValue.readOnly;
+
         const sliderProps = {
             values: [Number(lowerValue.value), Number(upperValue.value)],
             min: minimumValue && minimumValue.value != null ? Number(minimumValue.value) : defaultMinimumValue,
             max: maximumValue && maximumValue.value != null ? Number(maximumValue.value) : defaultMaximumValue,
-            enabledOne: editable !== "never" && !lowerValue.readOnly,
-            enabledTwo: editable !== "never" && !upperValue.readOnly,
+            enabledOne,
+            enabledTwo,
             step: step && step.value != null && step.value.gt(0) ? Number(step.value) : defaultStep,
             containerStyle: this.styles.container,
             markerStyle: this.styles.marker,
-            trackStyle: this.styles.track,
-            selectedStyle: this.styles.selectedTrack,
-            pressedMarkerStyle: this.styles.markerOnPress,
+            trackStyle: enabledOne || enabledTwo ? this.styles.track : this.styles.trackDisabled,
+            selectedStyle: enabledOne || enabledTwo ? this.styles.highlight : this.styles.highlightDisabled,
+            pressedMarkerStyle: this.styles.markerActive,
             onValuesChange: this.onChangeHandler,
             onValuesChangeFinish: this.onSlidingCompleteHandler,
-            sliderLength: this.state.width
+            sliderLength: this.state.width,
+            isMarkersSeparated: true,
+            customMarkerLeft: (props: MarkerProps) => (
+                <Marker {...props} markerStyle={enabledOne ? props.markerStyle : this.styles.markerDisabled} />
+            ),
+            customMarkerRight: (props: MarkerProps) => (
+                <Marker {...props} markerStyle={enabledTwo ? props.markerStyle : this.styles.markerDisabled} />
+            )
         };
 
         return (
