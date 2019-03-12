@@ -88,7 +88,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             const newState = this.validateColor(this.state.color);
             this.setState(newState);
             if (newState.hasValidationFeedback && error) {
-                error(new mendix.lib.ValidationError(newState.alertMessage!));
+                error(new mendix.lib.ValidationError({}));
             } else {
                 callback();
             }
