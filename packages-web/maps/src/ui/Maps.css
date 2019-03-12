@@ -10,8 +10,9 @@
 }
 
 .widget-leaflet-maps-alert.leaflet-control {
-    float: none;
+    position: absolute;
     z-index: 10;
+    width: 100%;
 }
 
 .widget-leaflet-maps .marker {

@@ -115,8 +115,7 @@ describe("Google maps", () => {
         googleMaps.setProps({
             fetchingData: false
         });
-
-        expect(googleMaps.state("center")).toEqual({ lat: 51.9107963, lng: 4.4789878 });
+        expect(googleMaps.state("center")).toEqual({ lat: 51.9066346, lng: 4.4861703 });
     });
 
     it("creates markers from given locations", () => {

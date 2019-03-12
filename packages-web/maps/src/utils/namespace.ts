@@ -47,8 +47,8 @@ export namespace Container {
     }
 
     export interface DefaultLocations {
-        defaultCenterLatitude?: string;
-        defaultCenterLongitude?: string;
+        defaultCenterLatitude: string;
+        defaultCenterLongitude: string;
     }
 
     export interface MarkerIconProps {

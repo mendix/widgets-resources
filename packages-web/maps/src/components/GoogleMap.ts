@@ -6,6 +6,7 @@ import { Alert } from "./Alert";
 import googleApiWrapper from "./GoogleApi";
 import { Container, MapUtils } from "../utils/namespace";
 import Utils from "../utils/Utils";
+import { validLocation } from "../utils/Validations";
 
 type MapProps = Container.MapProps;
 type DataSourceLocationProps = Container.DataSourceLocationProps;
@@ -25,14 +26,14 @@ export interface GoogleMapState {
 
 export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
     private map!: google.maps.Map;
-    private defaultCenterLocation: google.maps.LatLngLiteral = { lat: 51.9107963, lng: 4.4789878 };
+    private defaultCenterLocation: google.maps.LatLngLiteral = { lat: 51.9066346, lng: 4.4861703 };
     private markers: google.maps.Marker[] = [];
     private bounds!: google.maps.LatLngBounds;
     private googleMapsNode?: HTMLDivElement;
     private readonly onResizeHandle = this.onResize.bind(this);
 
     readonly state: GoogleMapState = {
-        center: this.defaultCenterLocation,
+        center: this.getDefaultCenter(this.props),
         alertMessage: this.props.alertMessage,
         resized: false
     };
@@ -85,6 +86,22 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
         if (this.map && !this.props.fetchingData && !this.state.resized) {
             this.map.setCenter(this.state.center);
         }
+    }
+
+    private getDefaultCenter(props: GoogleMapsProps): google.maps.LatLngLiteral {
+        const { defaultCenterLatitude, defaultCenterLongitude } = props;
+        const location = {
+            latitude: defaultCenterLatitude && parseFloat(defaultCenterLatitude),
+            longitude: defaultCenterLongitude && parseFloat(defaultCenterLongitude)
+        };
+        if (validLocation(location)) {
+            return {
+                lat: parseFloat(defaultCenterLatitude!),
+                lng: parseFloat(defaultCenterLongitude!)
+            };
+        }
+
+        return this.defaultCenterLocation;
     }
 
     private onResize() {

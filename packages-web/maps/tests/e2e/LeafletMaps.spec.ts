@@ -13,7 +13,7 @@ describe("Maps", () => {
             expect(markerList.length).toBe(1);
         });
 
-        it("with wrong coodinates should show an alert message", () => {
+        it("with wrong coordinates should show an alert message", () => {
             singleLocationPage.latitudeInput.waitForExist();
             singleLocationPage.longitudeInput.waitForExist();
 
@@ -29,7 +29,7 @@ describe("Maps", () => {
             expect (alert).toContain(alertValue);
         });
 
-        describe("when xpath data source is selected", () => {
+        describe("when XPath data source is selected", () => {
             it("it should show multiple locations", () => {
                 xpathPage.open();
                 xpathPage.getGrid(1).waitForVisible();
