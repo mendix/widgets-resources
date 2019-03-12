@@ -133,9 +133,6 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
         };
         if (this.googleMapsNode && !this.map) {
             this.map = new google.maps.Map(this.googleMapsNode, { ...mapOptions });
-            // this.map.addListener("dragend", () => {
-            //     this.setState({ dragged: true });
-            // });
         } else if (this.map) {
             this.map.setOptions({ ...mapOptions });
         }
@@ -216,7 +213,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
             try {
                 return JSON.parse(this.props.mapStyles);
             } catch (error) {
-                this.setState({ alertMessage: `invalid Map styles, ${error}` });
+                this.setState({ alertMessage: `invalid Map styles, ${error.message}` });
             }
         }
 

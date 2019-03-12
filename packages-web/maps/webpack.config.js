@@ -70,7 +70,6 @@ const widgetConfig = {
         ]
     },
     mode: "development",
-    // devtool: "inline-source-map",
     devtool: "eval",
     externals: [ "mendix/lang", "react", "react-dom" ],
     plugins: [

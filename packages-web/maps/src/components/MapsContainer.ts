@@ -108,63 +108,66 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
     private fetchData = (contextObject?: mendix.lib.MxObject) => {
         this.setState({ isFetchingData: true });
         Promise.all(this.props.locations.map(locationAttr => this.retrieveData(locationAttr, contextObject)))
-            .then(locations => {
-                const flattenLocations = locations.reduce((loc1, loc2) => loc1.concat(loc2), []);
+            .then(allLocations => {
+                const alertMessage: string[] = [];
+                const locations = allLocations.reduce((loc1, loc2) => loc1.concat(loc2), [])
+                    .filter(location => {
+                        if (validLocation(location)) {
+                            return true;
+                        }
+                        alertMessage.push(`invalid location: latitude '${location.latitude}', longitude '${location.longitude}'`);
 
-                return Promise.all(flattenLocations.map(location => validateLocations(location)));
-            })
-            .then(validLocations =>
+                        return false;
+                    });
                 this.setState({
-                    locations: validLocations,
+                    locations,
                     isFetchingData: false,
-                    alertMessage: ""
-                })
-            )
-            .catch(alertMessage => {
+                    alertMessage: alertMessage.join(", ")
+                });
+            })
+            .catch((error: Error) => {
                 this.setState({
                     locations: [],
-                    alertMessage,
+                    alertMessage: error.message,
                     isFetchingData: false
                 });
             });
     }
 
-    private retrieveData = (locationOptions: DataSourceLocationProps, contextObject?: mendix.lib.MxObject): Promise<Location[]> =>
-        new Promise((resolve, reject) => {
-                const guid = contextObject && contextObject.getGuid();
-                const requiresContext = locationOptions.dataSourceType === "microflow"
-                    || locationOptions.dataSourceType === "nanoflow"
-                    || locationOptions.dataSourceType === "XPath" && locationOptions.entityConstraint.indexOf("[%CurrentObject%]") !== -1;
-                if (locationOptions.dataSourceType === "static") {
-                    const staticLocation = parseStaticLocations([ locationOptions ]);
-                    resolve(staticLocation);
-                } else if (locationOptions.dataSourceType === "context") {
-                    if (contextObject) {
-                    this.setLocationsFromMxObjects([ contextObject ], locationOptions)
-                        .then(locations => resolve(locations));
-                    } else {
-                        resolve([]);
-                    }
-                } else if (contextObject || !requiresContext) {
-                    fetchData({
-                        guid,
-                        type: locationOptions.dataSourceType,
-                        entity: locationOptions.locationsEntity,
-                        constraint: locationOptions.entityConstraint,
-                        microflow: locationOptions.dataSourceMicroflow,
-                        mxform: this.props.mxform,
-                        nanoflow: locationOptions.dataSourceNanoflow,
-                        contextObject,
-                        inputParameterEntity: locationOptions.inputParameterEntity,
-                        requiresContext
-                    })
-                    .then(mxObjects => this.setLocationsFromMxObjects(mxObjects, locationOptions))
-                    .then(locations => resolve(locations))
-                    .catch(reason => reject(reason.message));
-                } else {
-                    resolve([]);
-                }
-            })
+    private retrieveData(locationOptions: DataSourceLocationProps, contextObject?: mendix.lib.MxObject): Promise<Location[]> {
+        const { dataSourceType, entityConstraint } = locationOptions;
+        const requiresContext = dataSourceType === "microflow" || dataSourceType === "nanoflow"
+            || (dataSourceType === "XPath" && entityConstraint.indexOf("[%CurrentObject%]") !== -1);
+
+        if (dataSourceType === "static") {
+            const staticLocation = parseStaticLocations([ locationOptions ]);
+
+            return Promise.resolve(staticLocation);
+        }
+        if (dataSourceType === "context") {
+            if (contextObject) {
+                return this.setLocationsFromMxObjects([ contextObject ], locationOptions);
+            }
+
+            return Promise.resolve([]);
+        }
+        if (contextObject || !requiresContext) {
+            return fetchData({
+                    type: dataSourceType,
+                    entity: locationOptions.locationsEntity,
+                    constraint: entityConstraint,
+                    microflow: locationOptions.dataSourceMicroflow,
+                    mxform: this.props.mxform,
+                    nanoflow: locationOptions.dataSourceNanoflow,
+                    contextObject,
+                    inputParameterEntity: locationOptions.inputParameterEntity,
+                    requiresContext
+                })
+                .then(mxObjects => this.setLocationsFromMxObjects(mxObjects, locationOptions));
+        }
+
+        return Promise.resolve([]);
+    }
 
     private setLocationsFromMxObjects = (mxObjects: mendix.lib.MxObject[], locationAttr: DataSourceLocationProps): Promise<Location[]> =>
         Promise.all(mxObjects.map(mxObject =>

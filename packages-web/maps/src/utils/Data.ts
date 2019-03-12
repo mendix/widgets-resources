@@ -3,33 +3,24 @@ import { UrlHelper } from "./UrlHelper";
 
 type MxObject = mendix.lib.MxObject;
 
-export const fetchData = (options: Data.FetchDataOptions): Promise<MxObject[]> =>
-    new Promise<MxObject[]>((resolve, reject) => {
-        const { type, guid, entity, contextObject, inputParameterEntity, requiresContext, microflow, mxform, nanoflow } = options;
-        if (entity && (guid || !requiresContext)) {
-            if (type === "XPath") {
-                fetchByXPath({
-                    guid,
-                    entity,
-                    constraint: options.constraint || ""
-                })
-                .then(mxObjects => resolve(mxObjects))
-                .catch(message => reject({ message }));
-            } else if (type === "microflow" && microflow && contextObject) {
-                fetchByMicroflow(microflow, contextObject, mxform, inputParameterEntity)
-                    .then(mxObjects => resolve(mxObjects))
-                    .catch(message => reject({ message }));
-            } else if (type === "nanoflow" && nanoflow.nanoflow && contextObject) {
-                fetchByNanoflow(nanoflow, contextObject, mxform, inputParameterEntity)
-                    .then(resolve)
-                    .catch(message => reject({ message }));
-            } else {
-                reject("Failed data retrieval");
-            }
-        } else {
-            reject("entity & guid are required");
-        }
-    });
+export const fetchData = (options: Data.FetchDataOptions): Promise<MxObject[]> => {
+    const { type, entity, contextObject, inputParameterEntity, microflow, mxform, nanoflow } = options;
+    if (type === "XPath" && entity) {
+        return fetchByXPath({
+            guid: contextObject && contextObject.getGuid(),
+            entity,
+            constraint: options.constraint || ""
+        });
+    }
+    if (type === "microflow" && microflow && contextObject) {
+        return fetchByMicroflow(microflow, contextObject, mxform, inputParameterEntity);
+    }
+    if (type === "nanoflow" && nanoflow.nanoflow && contextObject) {
+        return fetchByNanoflow(nanoflow, contextObject, mxform, inputParameterEntity);
+    }
+
+    return Promise.reject(new Error("Failed data retrieval"));
+};
 
 const fetchByXPath = (options: Data.FetchByXPathOptions): Promise<MxObject[]> => new Promise<MxObject[]>((resolve, reject) => {
     const { guid, entity, constraint } = options;
@@ -41,13 +32,13 @@ const fetchByXPath = (options: Data.FetchByXPathOptions): Promise<MxObject[]> =>
     window.mx.data.get({
         xpath,
         callback: resolve,
-        error: error => reject(`An error occurred while retrieving data via XPath: ${xpath}: ${error.message}`)
+        error: error => reject(new Error(`An error occurred while retrieving data via XPath: ${xpath}: ${error.message}`))
     });
 });
 
 const fetchByMicroflow = (actionName: string, contextObj: MxObject, mxform: mxui.lib.form._FormBase, inputParameterEntity: string): Promise<MxObject[]> => {
     if (contextObj.getEntity() !== inputParameterEntity) {
-        Promise.reject("Input parameter entity does not match the context object type");
+        Promise.reject(new Error("Input parameter entity does not match the context object type"));
     }
 
     return new Promise((resolve, reject) => {
@@ -57,14 +48,14 @@ const fetchByMicroflow = (actionName: string, contextObj: MxObject, mxform: mxui
             context,
             origin: mxform,
             callback: (mxObjects: MxObject[]) => resolve(mxObjects),
-            error: error => reject(`An error occurred while retrieving data via microflow: ${actionName}: ${error.message}`)
+            error: error => reject(new Error(`An error occurred while retrieving data via microflow: ${actionName}: ${error.message}`))
         });
     });
 };
 
 const fetchByNanoflow = (nanoflow: Data.Nanoflow, contextObj: MxObject, mxform: mxui.lib.form._FormBase, inputParameterEntity: string): Promise<MxObject[]> => {
     if (contextObj.getEntity() !== inputParameterEntity) {
-        Promise.reject("Input parameter entity does not match the context object type");
+        Promise.reject(new Error("Input parameter entity does not match the context object type"));
     }
 
     return new Promise((resolve: (objects: MxObject[]) => void, reject) => {
@@ -75,7 +66,7 @@ const fetchByNanoflow = (nanoflow: Data.Nanoflow, contextObj: MxObject, mxform: 
             origin: mxform,
             context,
             callback: (data:  MxObject[]) => resolve(data),
-            error: error => reject(`An error occurred while retrieving data via nanoflow: ${error.message}`)
+            error: error => reject(new Error(`An error occurred while retrieving data via nanoflow: ${error.message}`))
         });
     });
 };
@@ -92,7 +83,7 @@ export const fetchMarkerObjectUrl = (options: Data.FetchMarkerIcons, mxObject: m
 
                     return window.mx.data.getImageUrl(url,
                         objectUrl => resolve(objectUrl),
-                        error => reject(`Error while retrieving the image url: ${error.message}`)
+                        error => reject(new Error(`Error while retrieving the image url: ${error.message}`))
                     );
                 } else {
                     logger.warn("Marker system image object does not have any content, fallback to default marker");
