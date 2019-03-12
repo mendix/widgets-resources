@@ -15,6 +15,7 @@ import ReactResizeDetector from "react-resize-detector";
 import { Container, MapUtils } from "../utils/namespace";
 import Utils from "../utils/Utils";
 import { Alert } from "./Alert";
+import { validLocation } from "../utils/Validations";
 type MapProps = Container.MapProps;
 type DataSourceLocationProps = Container.DataSourceLocationProps;
 type Location = Container.Location;
@@ -35,13 +36,13 @@ export interface LeafletMapState {
 
 export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
     private leafletNode?: HTMLDivElement;
-    private defaultCenterLocation: LatLngLiteral = { lat: 51.9107963, lng: 4.4789878 };
+    private defaultCenterLocation: LatLngLiteral = { lat: 51.9066346, lng: 4.4861703 };
     private map?: Map;
     private markerGroup = new FeatureGroup();
     private readonly onResizeHandle = this.onResize.bind(this);
 
     readonly state: LeafletMapState = {
-        center: this.defaultCenterLocation,
+        center: this.getDefaultCenter(this.props),
         resized: false
     };
 
@@ -113,6 +114,22 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
         if (this.map) {
             this.map.remove();
         }
+    }
+
+    private getDefaultCenter(props: LeafletMapProps): LatLngLiteral {
+        const { defaultCenterLatitude, defaultCenterLongitude } = props;
+        const location = {
+            latitude: defaultCenterLatitude && parseFloat(defaultCenterLatitude),
+            longitude: defaultCenterLongitude && parseFloat(defaultCenterLongitude)
+        };
+        if (validLocation(location)) {
+            return {
+                lat: parseFloat(defaultCenterLatitude!),
+                lng: parseFloat(defaultCenterLongitude!)
+            };
+        }
+
+        return this.defaultCenterLocation;
     }
 
     private onResize() {

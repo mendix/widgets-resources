@@ -106,7 +106,7 @@ describe("Leaflet maps", () => {
             allLocations: []
         });
 
-        expect(leafletMap.state("center")).toEqual({ lat: 51.9107963, lng: 4.4789878 });
+        expect(leafletMap.state("center")).toEqual({ lat: 51.9066346, lng: 4.4861703 });
     });
 
     it("un mounts from the dom when unmounted", () => {

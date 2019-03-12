@@ -6,7 +6,7 @@ import { LeafletMap } from "./LeafletMap";
 import { Container } from "../utils/namespace";
 import { fetchData, fetchMarkerObjectUrl, parseStaticLocations } from "../utils/Data";
 import Utils from "../utils/Utils";
-import { validateLocationProps, validateLocations } from "../utils/Validations";
+import { validLocation, validateLocationProps } from "../utils/Validations";
 import { hot } from "react-hot-loader";
 
 import "leaflet/dist/leaflet.css";

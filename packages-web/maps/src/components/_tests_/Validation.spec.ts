@@ -1,7 +1,7 @@
 import { random } from "faker";
 
 import { Container } from "../../utils/namespace";
-import { validateLocationProps, validateLocations } from "../../utils/Validations";
+import { validLocation, validateLocationProps } from "../../utils/Validations";
 type locationDataProps = Container.DataSourceLocationProps;
 type mapContainerProps = Container.MapsContainerProps;
 
@@ -26,7 +26,7 @@ describe("utils/Data", () => {
             expect(validationMessage).toBe("");
         });
 
-        it("returns alert message if autozoom is not enabled and zomm is less than 2", () => {
+        it("returns alert message if autozoom is not enabled and zoom is less than 2", () => {
             const validationMessage = validateLocationProps({ ...validationProps, zoomLevel: 1, autoZoom: false });
 
             expect(validationMessage).toBe("Zoom Level should be greater than one");
@@ -43,6 +43,17 @@ describe("utils/Data", () => {
             const validationMessage = validateLocationProps({ ...validationProps, mapProvider: "mapBox" });
 
             expect(validationMessage).toBe("An 'Access token' for 'Map provider' mapBox is required");
+        });
+
+        it("returns alert if data source type is static and there is no latitude or longitude invalid", () => {
+            const validationMessage = validateLocationProps({
+                ...validationProps,
+                defaultCenterLatitude: "-200",
+                defaultCenterLongitude: "200",
+                locations: [ ]
+            });
+
+            expect(validationMessage).toBe("Invalid default center: latitude '-200', longitude '200'");
         });
 
         it("returns no alert if there are no locations", () => {
@@ -63,10 +74,19 @@ describe("utils/Data", () => {
         it("returns alert if data source type is static and there is no latitude or longitude", () => {
             const validationMessage = validateLocationProps({
                 ...validationProps,
-                locations: [ { ...defaultProps as locationDataProps, dataSourceType: "static", staticLatitude: "lat" } ]
+                locations: [ { ...defaultProps as locationDataProps, dataSourceType: "static", staticLatitude: "0", staticLongitude: "" } ]
             });
 
-            expect(validationMessage).toBe("Invalid static locations. Latitude and longitude are required at location 1");
+            expect(validationMessage).toBe("Invalid static location: Latitude and longitude are required at location 1");
+        });
+
+        it("returns alert if data source type is static and there is no latitude or longitude invalid", () => {
+            const validationMessage = validateLocationProps({
+                ...validationProps,
+                locations: [ { ...defaultProps as locationDataProps, dataSourceType: "static", staticLatitude: "1000", staticLongitude: "1000" } ]
+            });
+
+            expect(validationMessage).toBe("Invalid static location: latitude '1000', longitude '1000' at location 1");
         });
 
         it("returns alert if data source type is microflow and there is no microflow", () => {
@@ -135,16 +155,16 @@ describe("utils/Data", () => {
     describe("#ValidLocation", () => {
         it("returns location if valid", () => {
             const location = { latitude:  51.9107963, longitude: 4.4789878 };
-            const checkValidLocation = validateLocations(location);
+            const valid = validLocation(location);
 
-            checkValidLocation.then(e => expect(e).toEqual({ latitude: 51.9107963, longitude: 4.4789878 }));
+            expect(valid).toEqual(true);
         });
 
         it("returns error if location is not valid", () => {
             const location = { latitude: 0, longitude: 0 };
-            const checkValidLocation = validateLocations(location);
+            const invalid = validLocation(location);
 
-            checkValidLocation.catch(e => expect(e).toEqual("invalid location: latitude 0, longitude 0"));
+            expect(invalid).toEqual(false);
         });
     });
 });
