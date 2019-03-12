@@ -35,7 +35,7 @@ const googleApiWrapper = (script: string) => <P extends GoogleMapsProps>(wrapped
                     scriptElement.type = "text/javascript";
                     scriptElement.id = "googleScript";
                     scriptElement.src = googleScript + this.props.mapsToken + `&libraries=places`;
-                    scriptElement.onerror = (err) => reject(`There is no internet connection ${err}`);
+                    scriptElement.onerror = error => reject(new Error(`There is no internet connection ${error}`));
                     scriptElement.onload = () => {
                         if (typeof google === "object" && typeof google.maps === "object") {
                             resolve();
@@ -53,7 +53,7 @@ const googleApiWrapper = (script: string) => <P extends GoogleMapsProps>(wrapped
         private loadScript = (googleScript: string) => {
             this.addScript(googleScript)
                 .then(() => this.setState({ scriptsLoaded: true }))
-                .catch((error: string) => this.setState({ alertMessage: `Failed due to ${error}` }));
+                .catch((error: Error) => this.setState({ alertMessage: `Failed load external maps script, due to ${error.message}` }));
         }
 
     }
