@@ -60,8 +60,6 @@ const styles = StyleSheet.create({
         })
     },
     disabled: {
-        backgroundColor: "#d3d3d3",
-        elevation: 0,
-        shadowOpacity: 0
+        backgroundColor: "#d3d3d3"
     }
 });
