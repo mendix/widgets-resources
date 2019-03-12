@@ -38,7 +38,7 @@ const fetchByXPath = (options: Data.FetchByXPathOptions): Promise<MxObject[]> =>
 
 const fetchByMicroflow = (actionName: string, contextObj: MxObject, mxform: mxui.lib.form._FormBase, inputParameterEntity: string): Promise<MxObject[]> => {
     if (contextObj.getEntity() !== inputParameterEntity) {
-        Promise.reject(new Error("Input parameter entity does not match the context object type"));
+        return Promise.reject(new Error("Input parameter entity does not match the context object type"));
     }
 
     return new Promise((resolve, reject) => {
@@ -55,7 +55,7 @@ const fetchByMicroflow = (actionName: string, contextObj: MxObject, mxform: mxui
 
 const fetchByNanoflow = (nanoflow: Data.Nanoflow, contextObj: MxObject, mxform: mxui.lib.form._FormBase, inputParameterEntity: string): Promise<MxObject[]> => {
     if (contextObj.getEntity() !== inputParameterEntity) {
-        Promise.reject(new Error("Input parameter entity does not match the context object type"));
+        return Promise.reject(new Error("Input parameter entity does not match the context object type"));
     }
 
     return new Promise((resolve: (objects: MxObject[]) => void, reject) => {
