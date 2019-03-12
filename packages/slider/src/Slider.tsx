@@ -1,129 +1,105 @@
 import { flattenStyles, Style } from "@native-components/util-widgets";
-import { Component, createElement, createRef } from "react";
-import { GestureResponderEvent, Slider as RNSlider, TouchableWithoutFeedback, View, ViewStyle } from "react-native";
+import MultiSlider from "@ptomasroos/react-native-multi-slider";
+import { Component, createElement } from "react";
+import { LayoutChangeEvent, View, ViewStyle } from "react-native";
 
 import { SliderProps } from "../typings/SliderProps";
+import { Marker } from "./Marker";
+
+interface State {
+    width?: number;
+}
 
 interface SliderStyle extends Style {
     container: ViewStyle;
-    track: {
-        backgroundColor: string;
-    };
-    selectedTrack: {
-        backgroundColor: string;
-    };
-    marker: {
-        backgroundColor: string;
-    };
+    track: ViewStyle;
+    trackDisabled: ViewStyle;
+    highlight: ViewStyle;
+    highlightDisabled: ViewStyle;
+    marker: ViewStyle;
+    markerActive: ViewStyle;
+    markerDisabled: ViewStyle;
 }
 
 const defaultSliderStyle: SliderStyle = {
     container: {},
-    track: {
-        backgroundColor: ""
-    },
-    selectedTrack: {
+    track: {},
+    trackDisabled: {},
+    highlight: {
         backgroundColor: "rgba(0,122,255,1)"
     },
-    marker: {
-        backgroundColor: ""
-    }
+    highlightDisabled: {},
+    marker: {},
+    markerActive: {},
+    markerDisabled: {}
 };
 
-export class Slider extends Component<SliderProps<undefined>> {
-    private readonly viewRef = createRef<View>();
-    private sliding = false;
+export class Slider extends Component<SliderProps<SliderStyle>, State> {
+    readonly state: State = {};
 
     private readonly onChangeHandler = this.onChange.bind(this);
     private readonly onSlidingCompleteHandler = this.onSlidingComplete.bind(this);
-    private readonly onTapHandler = this.onTap.bind(this);
     private readonly styles = flattenStyles(defaultSliderStyle, this.props.style);
-
-    private get minimumValue(): number {
-        return this.props.minimumValue && this.props.minimumValue.value != null
-            ? Number(this.props.minimumValue.value)
-            : this.props.defaultMinimumValue;
-    }
-
-    private get maximumValue(): number {
-        return this.props.maximumValue && this.props.maximumValue.value != null
-            ? Number(this.props.maximumValue.value)
-            : this.props.defaultMaximumValue;
-    }
-
-    private get step(): number {
-        return this.props.step && this.props.step.value != null && this.props.step.value.gt(0)
-            ? Number(this.props.step.value)
-            : this.props.defaultStep;
-    }
-
-    private get disabled(): boolean {
-        return this.props.editable === "never" || this.props.value.readOnly;
-    }
+    private readonly onLayoutHandler = this.onLayout.bind(this);
 
     render(): JSX.Element {
+        const {
+            minimumValue,
+            defaultMinimumValue,
+            maximumValue,
+            defaultMaximumValue,
+            editable,
+            step,
+            defaultStep,
+            value
+        } = this.props;
+
+        const enabled = editable !== "never" && !value.readOnly;
+
+        const sliderProps = {
+            values: [Number(value.value)],
+            min: minimumValue && minimumValue.value != null ? Number(minimumValue.value) : defaultMinimumValue,
+            max: maximumValue && maximumValue.value != null ? Number(maximumValue.value) : defaultMaximumValue,
+            enabledOne: enabled,
+            step: step && step.value != null && step.value.gt(0) ? Number(step.value) : defaultStep,
+            containerStyle: this.styles.container,
+            markerStyle: enabled ? this.styles.marker : this.styles.markerDisabled,
+            trackStyle: enabled ? this.styles.track : this.styles.trackDisabled,
+            selectedStyle: enabled ? this.styles.highlight : this.styles.highlightDisabled,
+            pressedMarkerStyle: this.styles.markerActive,
+            onValuesChange: this.onChangeHandler,
+            onValuesChangeFinish: this.onSlidingCompleteHandler,
+            sliderLength: this.state.width,
+            allowOverlap: true,
+            customMarker: Marker
+        };
+
         return (
-            <View ref={this.viewRef}>
-                <TouchableWithoutFeedback onPressIn={this.onTapHandler}>
-                    <RNSlider
-                        value={Number(this.props.value.value)}
-                        minimumValue={this.minimumValue}
-                        maximumValue={this.maximumValue}
-                        disabled={this.disabled}
-                        step={this.step}
-                        minimumTrackTintColor={this.styles.selectedTrack.backgroundColor}
-                        maximumTrackTintColor={this.styles.track.backgroundColor}
-                        thumbTintColor={this.styles.marker.backgroundColor}
-                        onValueChange={this.onChangeHandler}
-                        onSlidingComplete={this.onSlidingCompleteHandler}
-                        style={this.styles.container}
-                    />
-                </TouchableWithoutFeedback>
+            <View onLayout={this.onLayoutHandler}>
+                <MultiSlider {...sliderProps} />
             </View>
         );
     }
 
-    private onChange(value: number): void {
-        this.sliding = true;
-
-        this.setValue(value);
-    }
-
-    private onSlidingComplete(): void {
-        this.sliding = false;
-
-        if (this.props.onSlidingComplete && this.props.onSlidingComplete.canExecute) {
-            this.props.onSlidingComplete.execute();
-        }
-    }
-
-    private onTap(event: GestureResponderEvent): void {
-        if (!this.viewRef.current || this.disabled) {
-            return;
-        }
-
-        this.viewRef.current.measure((_x, _y, width, _height, _pageX, _pageY) => {
-            if (this.sliding) {
-                return;
-            }
-            const positionFraction = event.nativeEvent.locationX / width;
-            const value = (this.maximumValue - this.minimumValue) * positionFraction + this.minimumValue;
-            const roundedValue = roundToMultiple(value, this.step);
-            this.setValue(roundedValue);
+    private onLayout(event: LayoutChangeEvent): void {
+        this.setState({
+            width: event.nativeEvent.layout.width
         });
     }
 
-    private setValue(value: number): void {
+    private onChange(values: number[]): void {
         if (this.props.value.status === ValueStatus.Available) {
-            this.props.value.setTextValue(String(value));
+            this.props.value.setTextValue(String(values[0]));
 
             if (this.props.onChange && this.props.onChange.canExecute) {
                 this.props.onChange.execute();
             }
         }
     }
-}
 
-function roundToMultiple(value: number, multiple: number): number {
-    return Math.round(value / multiple) * multiple;
+    private onSlidingComplete(): void {
+        if (this.props.onSlidingComplete && this.props.onSlidingComplete.canExecute) {
+            this.props.onSlidingComplete.execute();
+        }
+    }
 }

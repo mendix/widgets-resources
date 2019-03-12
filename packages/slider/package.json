@@ -19,6 +19,10 @@
         "postversion": "node ../../scripts/UpdateGithubRelease.js"
     },
     "dependencies": {
-        "@native-components/util-widgets": "^0.0.1"
+        "@native-components/util-widgets": "^0.0.1",
+        "@ptomasroos/react-native-multi-slider": "^1.0.0"
+    },
+    "devDependencies": {
+        "@types/ptomasroos__react-native-multi-slider": "0.0.1"
     }
 }
