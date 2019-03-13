@@ -5,6 +5,7 @@
   "description": "Display an image and enlarge it on click",
   "scripts": {
     "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec \"grunt",
+    "typeCheck": "tsc --noEmit",
     "emit": "tsc",
     "pretest": "tsc && npm run lint && npm run build",
     "test": "npm run test:unit && npm run test:conditional",
@@ -22,7 +23,7 @@
     "deployAndTest": "npm run deploy && npm run test:e2e"
   },
   "pre-commit": [
-    "emit",
+    "typeCheck",
     "lint"
   ],
   "repository": {
