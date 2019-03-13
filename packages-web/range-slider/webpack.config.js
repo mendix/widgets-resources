@@ -7,7 +7,10 @@ const widgetConfig = {
     entry: "./src/components/RangeSliderContainer.ts",
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
-        filename: "src/com/mendix/widget/custom/RangeSlider/RangeSlider.js",
+        filename: (chunkData) => {
+            const fileName = chunkData.chunk.name === "main" ? "RangeSlider" : "[name]";
+            return `src/com/mendix/widget/custom/RangeSlider/${fileName}.js`;
+        },
         libraryTarget:  "umd"
     },
     resolve: {
