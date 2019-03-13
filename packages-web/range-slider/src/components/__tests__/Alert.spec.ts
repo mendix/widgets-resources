@@ -15,7 +15,7 @@ describe("Alert", () => {
     it("renders the structure when an alert message is specified", () => {
         const alert = renderAlert(defaultProps);
         expect(alert).toBeElement(
-            createElement("div", { className: "alert alert-danger widget-unit-test-class" }, message)
+            createElement("div", { className: "alert alert-danger widget-range-slider" }, message)
         );
     });
 
@@ -47,9 +47,10 @@ describe("Alert", () => {
     });
 
     it("renders with the specified class name", () => {
-        defaultProps.className = "widget-unit-test-class";
-        const alert = renderAlert(defaultProps);
+        const className = "widget-unit-test-class";
+        const newClassProps = { ...defaultProps, className };
+        const alert = renderAlert(newClassProps);
 
-        expect(alert).toHaveClass(defaultProps.className);
+        expect(alert).toHaveClass(className);
     });
 });
