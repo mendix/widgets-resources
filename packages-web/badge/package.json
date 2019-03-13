@@ -6,6 +6,7 @@
   "copyright": "Mendix BV",
   "scripts": {
     "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec \"grunt",
+    "typeCheck": "tsc --noEmit",
     "emit": "tsc",
     "pretest": "tsc && npm run lint && npm run build",
     "test": "npm run test:unit && npm run test:conditional",
@@ -23,7 +24,7 @@
     "deployAndTest": "npm run deploy && npm run test:e2e"
   },
   "pre-commit": [
-    "emit",
+    "typeCheck",
     "lint"
   ],
   "repository": {
@@ -87,7 +88,7 @@
     "ts-loader": "^3.0.3",
     "tslint": "^5.7.0",
     "tslint-eslint-rules": "^4.1.1",
-    "typescript": "^2.5.3",
+    "typescript": "^3.3.3333",
     "wdio-dot-reporter": "0.0.9",
     "wdio-jasmine-framework": "^0.3.1",
     "wdio-selenium-standalone-service": "0.0.9",
