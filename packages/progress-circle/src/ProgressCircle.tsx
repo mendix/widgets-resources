@@ -15,6 +15,7 @@ interface ProgressCircleStyle extends Style {
     fill: {
         backgroundColor: string;
         width: number;
+        lineCapRounded: boolean;
     };
     text: TextStyle;
 }
@@ -28,7 +29,8 @@ const defaultProgressCircleStyle: ProgressCircleStyle = {
     },
     fill: {
         backgroundColor: "rgba(0, 122, 255, 1)",
-        width: 3
+        width: 3,
+        lineCapRounded: false
     },
     text: {}
 };
@@ -60,6 +62,7 @@ export class ProgressCircle extends Component<ProgressCircleProps<ProgressCircle
                     ? { formatText: this.formatTextHandler }
                     : {})}
                 style={this.styles.container}
+                strokeCap={this.styles.fill.lineCapRounded ? "round" : "square"}
             />
         );
     }
