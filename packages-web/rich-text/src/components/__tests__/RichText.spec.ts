@@ -28,12 +28,12 @@ describe("RichText", () => {
     describe("that is not read-only", () => {
         it("renders the structure correctly", () => {
             textEditor = shallowRenderTextEditor(defaultProps);
-
             expect(textEditor).toBeElement(
-                createElement("div", { className: classNames("widget-rich-text notranslate disabled-bordered") },
+                createElement("div", { className: classNames("widget-rich-text notranslate") },
                     createElement("div", { style: { whiteSpace: "pre-wrap" } },
                         createElement("div", { className: "widget-rich-text-quill" })
-                    )
+                    ),
+                    createElement("Alert")
                 )
             );
         });
@@ -59,8 +59,7 @@ describe("RichText", () => {
             const editorSpy = spyOn(textEditorInstance, "updateEditor").and.callThrough();
             textEditorInstance.componentDidUpdate(defaultProps);
             textEditorInstance.componentDidMount();
-            defaultProps.value = "New value";
-            textEditorInstance.componentDidUpdate(defaultProps);
+            textEditorInstance.componentDidUpdate({ ...defaultProps, value: "New value" });
 
             expect(editorSpy).toHaveBeenCalledTimes(1);
         });
@@ -105,16 +104,17 @@ describe("RichText", () => {
             });
 
             it("extended renders an extended text editor", () => {
-                defaultProps.editorOption = "extended";
-                const toolbar = getToolBar(defaultProps);
+                const toolbar = getToolBar({ ...defaultProps, editorOption: "extended" });
 
                 expect(toolbar.options.container.length).toBe(6);
             });
 
             it("custom renders a custom toolbar", () => {
-                defaultProps.editorOption = "custom";
-                defaultProps.customOptions = [ { option: "bold" }, { option: "spacer" }, { option: "underline" } ];
-                const toolbar = getToolBar(defaultProps);
+                const toolbar = getToolBar({
+                    ...defaultProps,
+                    editorOption: "custom",
+                    customOptions: [ { option: "bold" }, { option: "spacer" }, { option: "underline" } ]
+                });
 
                 expect(toolbar.options.container.length).toBe(2);
             });
@@ -122,11 +122,8 @@ describe("RichText", () => {
     });
     // TODO: Add tests for invalid HTML and for sanitized HTML
     describe("that is read-only", () => {
-        defaultProps.readOnly = true;
-
         it("with read-only style text renders the structure correctly", () => {
-            defaultProps.readOnlyStyle = "text";
-            textEditor = shallowRenderTextEditor(defaultProps);
+            textEditor = shallowRenderTextEditor({ ...defaultProps, readOnly: true, readOnlyStyle: "text" });
 
             expect(textEditor).toBeElement(
                 createElement("div", { className: "widget-rich-text notranslate disabled-text ql-snow" },
@@ -140,23 +137,20 @@ describe("RichText", () => {
         });
 
         it("with read-only style bordered has the disabled-bordered class", () => {
-            defaultProps.readOnlyStyle = "bordered";
-            textEditor = shallowRenderTextEditor(defaultProps);
+            textEditor = shallowRenderTextEditor({ ...defaultProps, readOnly: true, readOnlyStyle: "bordered" });
 
             expect(textEditor).toHaveClass("disabled-bordered");
         });
 
         it("with read-only style borderedToolbar has the disabled-bordered-toolbar class", () => {
-            defaultProps.readOnlyStyle = "borderedToolbar";
-            textEditor = shallowRenderTextEditor(defaultProps);
+            textEditor = shallowRenderTextEditor({ ...defaultProps, readOnly: true, readOnlyStyle: "borderedToolbar" });
 
             expect(textEditor).toHaveClass("disabled-bordered-toolbar");
         });
     });
 
     it("destroys and recreates the editor on update when configured to recreate", () => {
-        defaultProps.recreate = true;
-        const richText = fullRenderTextEditor(defaultProps);
+        const richText = fullRenderTextEditor({ ...defaultProps, recreate: true });
         const richTextInstance = richText.instance() as any;
         const editorSpy = spyOn(richTextInstance, "setUpEditor").and.callThrough();
 
@@ -166,8 +160,7 @@ describe("RichText", () => {
 
     describe("whose read-only status changes from true to false", () => {
         it("and read-only style is not text sets up the editor afresh", () => {
-            defaultProps.readOnly = true;
-            const richText = fullRenderTextEditor(defaultProps);
+            const richText = fullRenderTextEditor({ ...defaultProps, readOnly: true });
             const editorSpy = spyOn(richText.instance() as any, "setUpEditor").and.callThrough();
 
             richText.setProps({ readOnly: false });
