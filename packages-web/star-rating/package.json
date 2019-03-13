@@ -5,6 +5,7 @@
   "description": "This widget lets users rate an object with stars or custom icons.",
   "scripts": {
     "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec grunt",
+    "typeCheck": "tsc --noEmit",
     "emit": "tsc",
     "pretest": "tsc && npm run lint && grunt release",
     "test": "karma start --single-run --codeCoverage && node tests/remap.js",
@@ -22,7 +23,7 @@
     "deployAndTest": "npm run deploy && npm run test:e2e"
   },
   "pre-commit": [
-    "pretest",
+    "typeCheck",
     "lint"
   ],
   "repository": {
