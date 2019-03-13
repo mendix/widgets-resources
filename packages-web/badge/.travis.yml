@@ -1,8 +1,13 @@
 sudo: required
-dist: trusty
 language: node_js
 node_js:
 - "6"
+addons:
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
 before_install:
 - npm i -g npm
 - npm install grunt-cli -g
