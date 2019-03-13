@@ -81,8 +81,10 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
                 onChangeComplete: this.props.onChangeComplete,
                 presetColors: defaultColors.length > 0 ? colors : undefined,
                 triangle: "hide",
-                disableAlpha: this.props.disableAlpha
+                disableAlpha: this.props.disableAlpha,
+                styles: type === "slider" ? { default: { wrap: {} } } : {}
             })
+            // styles, is a temp work around for issue https://github.com/casesandberg/react-color/issues/585
         );
     }
 }
