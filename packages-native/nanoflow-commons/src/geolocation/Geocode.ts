@@ -52,7 +52,7 @@ function Geocode(
             )
         )
         .then(response => getLatLong(geocodingProvider, response))
-        .then(([lat, long]) => createMxObject(lat, long));
+        .then(latLong => createMxObject(latLong[0], latLong[1]));
 
     function getApiUrl(provider: GeocodingProvider, query: string, key: string): string {
         switch (provider) {

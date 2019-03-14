@@ -29,7 +29,7 @@ function NavigateTo(destinationAddress?: string): Promise<boolean> {
     });
 
     return Linking.canOpenURL(url).then(supported => {
-        if (supported === false) {
+        if (!supported) {
             return false;
         }
         return Linking.openURL(url).then(() => true);

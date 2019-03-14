@@ -1,5 +1,5 @@
 {
-    "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
+    "extends": ["tslint:latest", "tslint-config-prettier"],
     "rules": {
         "await-promise": true,
         "interface-name": [true, "never-prefix"],

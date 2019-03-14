@@ -2,15 +2,10 @@ import { promises as fs } from "fs";
 import { basename, join } from "path";
 
 const cwd = process.cwd();
-const actionsDir = join(cwd, "dist/tsc/");
+const actionsDir = join(cwd, "dist/babel/");
 const testProjectDir = join(cwd, "dist/mxproject/javascriptsource/nanoflowcommons/actions/");
 
-try {
-    main();
-} catch (exception) {
-    // tslint:disable-next-line:no-console
-    console.error(exception);
-}
+main().catch(console.error);
 
 async function main(): Promise<void> {
     await fs.mkdir(testProjectDir, { recursive: true });

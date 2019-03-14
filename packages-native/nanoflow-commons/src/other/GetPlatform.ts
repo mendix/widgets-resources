@@ -6,8 +6,6 @@
 
 type Platform = "Web" | "Native_mobile" | "Hybrid_mobile";
 
-let window: undefined | { cordova?: {} };
-
 /**
  * @returns {"NanoflowCommons.Platform.Web"|"NanoflowCommons.Platform.Native_mobile"|"NanoflowCommons.Platform.Hybrid_mobile"}
  */

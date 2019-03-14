@@ -5,7 +5,7 @@
 // Other code you write will be lost the next time you deploy the project.
 
 import ReactNative from "react-native";
-import { StorageValue } from "./StorageValue.interface";
+import { StorageValue } from "./StorageValue";
 
 /**
  * @param {string} key - This field is required.
@@ -78,10 +78,10 @@ function GetStorageItemObject(key?: string, entity?: string): Promise<mendix.lib
 
     function serializeMxObject(object: mendix.lib.MxObject): StorageValue {
         return object.getAttributes().reduce<StorageValue>(
-            (accumulator, attributeName) => ({
-                ...accumulator,
-                [attributeName]: object.get(attributeName)
-            }),
+            (accumulator, attributeName) => {
+                accumulator[attributeName] = object.get(attributeName);
+                return accumulator;
+            },
             { guid: object.getGuid() }
         );
     }

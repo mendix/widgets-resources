@@ -5,7 +5,7 @@
 // Other code you write will be lost the next time you deploy the project.
 
 import ReactNative from "react-native";
-import { StorageValue } from "./StorageValue.interface";
+import { StorageValue } from "./StorageValue";
 
 /**
  * @returns {MxObject}
@@ -76,10 +76,10 @@ function GetStorageItemObjectList(key?: string, entity?: string): Promise<mendix
 
     function serializeMxObject(object: mendix.lib.MxObject): StorageValue {
         return object.getAttributes().reduce<StorageValue>(
-            (accumulator, attributeName) => ({
-                ...accumulator,
-                [attributeName]: object.get(attributeName)
-            }),
+            (accumulator, attributeName) => {
+                accumulator[attributeName] = object.get(attributeName);
+                return accumulator;
+            },
             { guid: object.getGuid() }
         );
     }

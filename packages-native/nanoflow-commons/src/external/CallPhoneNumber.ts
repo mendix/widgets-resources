@@ -24,7 +24,7 @@ function CallPhoneNumber(phoneNumber?: string): Promise<boolean> {
     const url = `tel:${phoneNumber}`;
 
     return Linking.canOpenURL(url).then(supported => {
-        if (supported === false) {
+        if (!supported) {
             return false;
         }
         return Linking.openURL(url).then(() => true);
