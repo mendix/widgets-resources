@@ -48,9 +48,10 @@ describe("Alert", () => {
     });
 
     it("renders with the specified class name", () => {
-        defaultProps.className = "widget-unit-test-class";
-        const alert = renderAlert(defaultProps);
+        const className = "widget-unit-test-class";
+        const customClassProps = { ...defaultProps, className };
+        const alert = renderAlert(customClassProps);
 
-        expect(alert).toHaveClass(defaultProps.className);
+        expect(alert).toHaveClass(className);
     });
 });
