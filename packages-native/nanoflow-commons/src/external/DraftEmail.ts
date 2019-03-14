@@ -16,9 +16,6 @@ import ReactNative from "react-native";
  */
 function DraftEmail(recipient?: string, cc?: string, bcc?: string, subject?: string, body?: string): Promise<boolean> {
     // BEGIN USER CODE
-    // Documentation https://facebook.github.io/react-native/docs/linking
-
-    const Linking: typeof ReactNative.Linking = require("react-native").Linking;
 
     let url = "mailto:";
     if (recipient) {
@@ -40,12 +37,27 @@ function DraftEmail(recipient?: string, cc?: string, bcc?: string, subject?: str
     // Remove the last '?' or '&'
     url = url.slice(0, -1);
 
-    return Linking.canOpenURL(url).then(supported => {
-        if (!supported) {
-            return false;
+    if (navigator && navigator.product === "ReactNative") {
+        const Linking: typeof ReactNative.Linking = require("react-native").Linking;
+
+        return Linking.canOpenURL(url).then(supported => {
+            if (!supported) {
+                return false;
+            }
+            return Linking.openURL(url).then(() => true);
+        });
+    }
+
+    if (window) {
+        if (window.cordova) {
+            window.open(url, "_system");
+        } else {
+            window.location.href = url;
         }
-        return Linking.openURL(url).then(() => true);
-    });
+        return Promise.resolve(true);
+    }
+
+    return Promise.resolve(false);
 
     // END USER CODE
 }

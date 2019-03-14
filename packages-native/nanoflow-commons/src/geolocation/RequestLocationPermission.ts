@@ -9,10 +9,15 @@
  */
 function RequestLocationPermission(): boolean {
     // BEGIN USER CODE
-    // Documentation https://facebook.github.io/react-native/docs/geolocation#requestauthorization
 
-    navigator.geolocation.requestAuthorization();
-    return true;
+    if (navigator && navigator.geolocation) {
+        if (navigator.geolocation.requestAuthorization) {
+            navigator.geolocation.requestAuthorization();
+        }
+        return true;
+    }
+
+    return false;
 
     // END USER CODE
 }

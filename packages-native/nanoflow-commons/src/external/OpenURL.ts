@@ -12,20 +12,32 @@ import ReactNative from "react-native";
  */
 function OpenURL(url?: string): Promise<boolean> {
     // BEGIN USER CODE
-    // Documentation https://facebook.github.io/react-native/docs/linking
-
-    const Linking: typeof ReactNative.Linking = require("react-native").Linking;
 
     if (!url) {
         throw new TypeError("Input parameter 'Url' is required");
     }
 
-    return Linking.canOpenURL(url).then(supported => {
-        if (!supported) {
-            return false;
+    if (navigator && navigator.product === "ReactNative") {
+        const Linking: typeof ReactNative.Linking = require("react-native").Linking;
+
+        return Linking.canOpenURL(url).then(supported => {
+            if (!supported) {
+                return false;
+            }
+            return Linking.openURL(url).then(() => true);
+        });
+    }
+
+    if (window) {
+        if (window.cordova) {
+            window.open(url, "_system");
+        } else {
+            window.location.href = url;
         }
-        return Linking.openURL(url).then(() => true);
-    });
+        return Promise.resolve(true);
+    }
+
+    return Promise.resolve(false);
 
     // END USER CODE
 }
