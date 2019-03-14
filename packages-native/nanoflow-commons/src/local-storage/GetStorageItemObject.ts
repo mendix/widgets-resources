@@ -14,9 +14,6 @@ import { StorageValue } from "./StorageValue";
  */
 function GetStorageItemObject(key?: string, entity?: string): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
-    // Documentation https://facebook.github.io/react-native/docs/asyncstorage
-
-    const AsyncStorage: typeof ReactNative.AsyncStorage = require("react-native").AsyncStorage;
 
     if (!key) {
         throw new TypeError("Input parameter 'Key' is required");
@@ -26,7 +23,7 @@ function GetStorageItemObject(key?: string, entity?: string): Promise<mendix.lib
         throw new TypeError("Input parameter 'Entity' is required");
     }
 
-    return AsyncStorage.getItem(key).then(result => {
+    return getItem(key).then(result => {
         if (result === null) {
             throw new Error(`Storage item '${key}' does not exist`);
         }
@@ -34,9 +31,37 @@ function GetStorageItemObject(key?: string, entity?: string): Promise<mendix.lib
 
         return getOrCreateMxObject(entity, value).then(newObject => {
             const newValue = serializeMxObject(newObject);
-            return AsyncStorage.setItem(key, JSON.stringify(newValue)).then(() => newObject);
+            return setItem(key, JSON.stringify(newValue)).then(() => newObject);
         });
     });
+
+    function getItem(key: string): Promise<string | null> {
+        if (navigator && navigator.product === "ReactNative") {
+            const AsyncStorage: typeof ReactNative.AsyncStorage = require("react-native").AsyncStorage;
+            return AsyncStorage.getItem(key);
+        }
+
+        if (window) {
+            const value = window.localStorage.getItem(key);
+            return Promise.resolve(value);
+        }
+
+        throw new Error("No storage API available");
+    }
+
+    function setItem(key: string, value: string): Promise<void> {
+        if (navigator && navigator.product === "ReactNative") {
+            const AsyncStorage: typeof ReactNative.AsyncStorage = require("react-native").AsyncStorage;
+            return AsyncStorage.setItem(key, value);
+        }
+
+        if (window) {
+            window.localStorage.setItem(key, value);
+            return Promise.resolve();
+        }
+
+        throw new Error("No storage API available");
+    }
 
     function getOrCreateMxObject(entity: string, value: StorageValue): Promise<mendix.lib.MxObject> {
         return getMxObject(value.guid).then(existingObject => {

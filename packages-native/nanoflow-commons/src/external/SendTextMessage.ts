@@ -12,23 +12,34 @@ import ReactNative from "react-native";
  */
 function SendTextMessage(phoneNumber?: string): Promise<boolean> {
     // BEGIN USER CODE
-    // Documentation https://facebook.github.io/react-native/docs/linking
-
-    const Linking: typeof ReactNative.Linking = require("react-native").Linking;
 
     if (!phoneNumber) {
         throw new TypeError("Input parameter 'Phone number' is required");
     }
 
-    phoneNumber = encodeURI(phoneNumber);
-    const url = `sms:${phoneNumber}`;
+    const url = `sms:${encodeURI(phoneNumber)}`;
 
-    return Linking.canOpenURL(url).then(supported => {
-        if (!supported) {
-            return false;
+    if (navigator && navigator.product === "ReactNative") {
+        const Linking: typeof ReactNative.Linking = require("react-native").Linking;
+
+        return Linking.canOpenURL(url).then(supported => {
+            if (!supported) {
+                return false;
+            }
+            return Linking.openURL(url).then(() => true);
+        });
+    }
+
+    if (window) {
+        if (window.cordova) {
+            window.open(url, "_system");
+        } else {
+            window.location.href = url;
         }
-        return Linking.openURL(url).then(() => true);
-    });
+        return Promise.resolve(true);
+    }
+
+    return Promise.resolve(false);
 
     // END USER CODE
 }

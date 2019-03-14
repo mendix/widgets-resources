@@ -14,9 +14,6 @@ import { StorageValue } from "./StorageValue";
  */
 function SetStorageItemObjectList(key?: string, value?: mendix.lib.MxObject[]): Promise<boolean> {
     // BEGIN USER CODE
-    // Documentation https://facebook.github.io/react-native/docs/asyncstorage
-
-    const AsyncStorage: typeof ReactNative.AsyncStorage = require("react-native").AsyncStorage;
 
     if (!key) {
         throw new TypeError("Input parameter 'Key' is required");
@@ -28,7 +25,21 @@ function SetStorageItemObjectList(key?: string, value?: mendix.lib.MxObject[]): 
 
     const serializedObjects = value.map(serializeMxObject);
 
-    return AsyncStorage.setItem(key, JSON.stringify(serializedObjects)).then(() => true);
+    return setItem(key, JSON.stringify(serializedObjects)).then(() => true);
+
+    function setItem(key: string, value: string): Promise<void> {
+        if (navigator && navigator.product === "ReactNative") {
+            const AsyncStorage: typeof ReactNative.AsyncStorage = require("react-native").AsyncStorage;
+            return AsyncStorage.setItem(key, value);
+        }
+
+        if (window) {
+            window.localStorage.setItem(key, value);
+            return Promise.resolve();
+        }
+
+        throw new Error("No storage API available");
+    }
 
     function serializeMxObject(object: mendix.lib.MxObject): StorageValue {
         return object.getAttributes().reduce<StorageValue>(

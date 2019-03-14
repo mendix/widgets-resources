@@ -11,15 +11,25 @@ import ReactNative from "react-native";
  */
 function RemoveStorageItem(key?: string): Promise<boolean> {
     // BEGIN USER CODE
-    // Documentation https://facebook.github.io/react-native/docs/asyncstorage
-
-    const AsyncStorage: typeof ReactNative.AsyncStorage = require("react-native").AsyncStorage;
 
     if (!key) {
         throw new TypeError("Input parameter 'Key' is required");
     }
 
-    return AsyncStorage.removeItem(key).then(() => true);
+    return removeItem(key).then(() => true);
 
+    function removeItem(key: string): Promise<void> {
+        if (navigator && navigator.product === "ReactNative") {
+            const AsyncStorage: typeof ReactNative.AsyncStorage = require("react-native").AsyncStorage;
+            return AsyncStorage.removeItem(key);
+        }
+
+        if (window) {
+            window.localStorage.removeItem(key);
+            return Promise.resolve();
+        }
+
+        throw new Error("No storage API available");
+    }
     // END USER CODE
 }

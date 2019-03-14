@@ -7,33 +7,66 @@
 import ReactNative from "react-native";
 
 /**
- * @param {string} query - This field is required.
+ * @param {string} location - This field is required.
  * @returns {boolean}
  */
-function OpenMapsLocation(query?: string): Promise<boolean> {
+function OpenMapsLocation(location?: string): Promise<boolean> {
     // BEGIN USER CODE
-    // Documentation https://facebook.github.io/react-native/docs/linking
 
-    const Linking: typeof ReactNative.Linking = require("react-native").Linking;
-    const Platform: typeof ReactNative.Platform = require("react-native").Platform;
-
-    if (!query) {
-        throw new TypeError("Input parameter 'Query' is required");
+    if (!location) {
+        throw new TypeError("Input parameter 'Location' is required");
     }
 
-    query = encodeURIComponent(query);
+    location = encodeURIComponent(location);
+    const iosUrl = `maps://maps.apple.com/?q=${location}`;
+    const androidUrl = `geo:0,0?q=${location}`;
+    const webUrl = `https://maps.google.com/maps?q=${location}`;
 
-    const url = Platform.select({
-        ios: `maps://maps.apple.com/?q=${query}`,
-        android: `geo:0,0?q=${query}`
-    });
+    if (navigator && navigator.product === "ReactNative") {
+        const Linking: typeof ReactNative.Linking = require("react-native").Linking;
+        const Platform: typeof ReactNative.Platform = require("react-native").Platform;
 
-    return Linking.canOpenURL(url).then(supported => {
-        if (!supported) {
-            return false;
+        const url = Platform.select({
+            ios: iosUrl,
+            android: androidUrl
+        });
+
+        return Linking.canOpenURL(url).then(supported => {
+            if (!supported) {
+                return false;
+            }
+            return Linking.openURL(url).then(() => true);
+        });
+    }
+
+    if (window && window.navigator.userAgent) {
+        if (/iPad|iPhone|iPod/i.test(window.navigator.userAgent)) {
+            openUrl(iosUrl);
+            return Promise.resolve(true);
         }
-        return Linking.openURL(url).then(() => true);
-    });
+
+        if (/android|sink/i.test(window.navigator.userAgent)) {
+            openUrl(androidUrl);
+            return Promise.resolve(true);
+        }
+    }
+
+    if (window) {
+        window.location.href = webUrl;
+        return Promise.resolve(true);
+    }
+
+    return Promise.resolve(false);
+
+    function openUrl(url: string): void {
+        if (window && window.cordova) {
+            window.open(url, "_system");
+        }
+
+        if (window) {
+            window.location.href = url;
+        }
+    }
 
     // END USER CODE
 }

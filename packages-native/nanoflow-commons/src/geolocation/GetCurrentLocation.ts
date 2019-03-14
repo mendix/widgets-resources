@@ -18,7 +18,6 @@ function GetCurrentLocation(
     highAccuracy?: boolean
 ): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
-    // Documentation https://facebook.github.io/react-native/docs/geolocation#getcurrentposition
 
     return new Promise((resolve, reject) => {
         const options = getOptions();
