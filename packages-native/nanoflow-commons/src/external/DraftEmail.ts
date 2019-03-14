@@ -41,7 +41,7 @@ function DraftEmail(recipient?: string, cc?: string, bcc?: string, subject?: str
     url = url.slice(0, -1);
 
     return Linking.canOpenURL(url).then(supported => {
-        if (supported === false) {
+        if (!supported) {
             return false;
         }
         return Linking.openURL(url).then(() => true);
