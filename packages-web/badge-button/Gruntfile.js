@@ -10,8 +10,7 @@ const name = packageJson.widgetName.toLowerCase();
 
 const webpackConfigRelease = webpackConfig.map(config => merge(config, {
     devtool: false,
-    mode: "production",
-    optimization: { minimize: true }
+    mode: "production"
 }));
 webpackConfigRelease[0].plugins.push(new ExtractTextPlugin({
     filename: `./widgets/com/mendix/widget/custom/${name}/ui/${widgetName}.css`
