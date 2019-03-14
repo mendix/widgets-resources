@@ -7,11 +7,14 @@ const widgetConfig = {
     entry: "./src/components/SwitchContainer.ts",
     output: {
         path: path.resolve(__dirname, "dist/tmp"),
-        filename: "src/com/mendix/widget/custom/switch/Switch.js",
+        filename: (chunkData) => {
+            const fileName = chunkData.chunk.name === "main" ? "Switch" : "[name]";
+            return `src/com/mendix/widget/custom/switch/${fileName}.js`
+        },
         libraryTarget: "umd"
     },
     resolve: {
-        extensions: [ ".ts", ".js", ".json" ]
+        extensions: [ ".ts", ".js" ]
     },
     module: {
         rules: [
@@ -31,17 +34,14 @@ const widgetConfig = {
             }
         ]
     },
+    mode: "development",
     devtool: "source-map",
     externals: [ "react", "react-dom" ],
     plugins: [
-        new CopyWebpackPlugin(
-            [
-                { from: "src/**/*.xml" }
-            ],
-            { copyUnmodified: true }
-        ),
-        new ExtractTextPlugin({ filename: "./src/com/mendix/widget/custom/switch/ui/Switch.css" }),
-        new webpack.LoaderOptionsPlugin({ debug: true })
+        new CopyWebpackPlugin([ {
+            from: "src/**/*.xml" }
+        ], { copyUnmodified: true }),
+        new ExtractTextPlugin({ filename: "./src/com/mendix/widget/custom/switch/ui/Switch.css" })
     ]
 };
 
@@ -65,11 +65,9 @@ const previewConfig = {
             ] }
         ]
     },
+    mode: "development",
     devtool: "inline-source-map",
-    externals: [ "react", "react-dom" ],
-    plugins: [
-        new webpack.LoaderOptionsPlugin({ debug: true })
-    ]
+    externals: [ "react", "react-dom" ]
 };
 
 module.exports = [ widgetConfig, previewConfig ];
