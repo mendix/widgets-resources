@@ -1,5 +1,6 @@
 import { TextBox, TextBoxVertical } from './textbox';
-import { spacing } from '../variables';
+import { gray, background } from '../variables';
+import { Platform } from 'react-native';
 
 /* ==========================================================================
     DatePicker
@@ -13,21 +14,28 @@ export const DatePicker = {
         color: TextBox.input.color,
         fontSize: TextBox.input.fontSize,
         backgroundColor: TextBox.input.backgroundColor,
-        paddingVertical: TextBox.input.paddingVertical,
-        paddingHorizontal: TextBox.input.paddingHorizontal,
-        borderRadius: TextBox.input.radius,
+        borderRadius: TextBox.input.borderRadius,
         borderWidth: TextBox.input.borderWidth,
         borderColor: TextBox.input.borderColor,
+        paddingHorizontal: TextBox.input.paddingHorizontal,
+        paddingVertical: TextBox.input.paddingVertical,
     },
 };
 
 export const DatePickerVertical = {
-    label: {
-        ...TextBoxVertical.label,
-    },
+    label: TextBoxVertical.label,
     value: {
-        ...TextBoxVertical.input,
-        maxHeight: 40, //TODO: Needs to be properly fixed
+        ...DatePicker.value,
+        marginBottom: 20,
+        ...Platform.select({
+            ios: {
+                borderTopWidth: 1,
+                borderBottomWidth: 1,
+                borderColor: gray.lightest,
+                backgroundColor: background.primary,
+                maxHeight: 40, //TODO: Needs to be properly fixed
+            },
+        }),
     },
 };
 

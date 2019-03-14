@@ -16,33 +16,15 @@ export const TabContainer = {
         pressColor: brand.primary,
         pressOpacity: 0.8,
         backgroundColor: background.primary,
-        ...Platform.select({
-            ios: {
-                scrollEnabled: false,
-            },
-            android: {
-                scrollEnabled: false,
-            },
-        }),
+        scrollEnabled: false,
     },
     indicator: {
         backgroundColor: brand.primary,
         height: Platform.select({ ios: 2, android: 2 }),
     },
-    tab: {
-        ...Platform.select({
-            ios: {},
-            android: {},
-        }),
-    },
+    tab: {},
     label: {
         color: gray.darkest,
-        ...Platform.select({
-            ios: {
-                // fontWeight: font.weightSemiBold,
-            },
-            android: {},
-        }),
     },
 };
 

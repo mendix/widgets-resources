@@ -23,5 +23,6 @@ export const navigationStyle = {
         iconColor: gray.dark,
         selectedIconColor: brand.primary,
         selectedTextColor: brand.primary,
+        justifyContent: 'space-between',
     },
 };

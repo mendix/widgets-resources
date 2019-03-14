@@ -1,6 +1,6 @@
 import { TextBox, TextBoxVertical } from './textbox';
 import { Platform } from 'react-native';
-import { spacing, font } from '../variables';
+import { merge } from '../variables-helpers';
 
 /* ==========================================================================
     CheckBox
@@ -13,8 +13,6 @@ import { spacing, font } from '../variables';
 export const CheckBox = {
     label: TextBox.label,
     input: {
-        color: TextBox.input.color,
-        fontSize: TextBox.input.fontSize,
         paddingVertical: TextBox.input.paddingVertical,
         paddingHorizontal: TextBox.input.paddingHorizontal,
         ...Platform.select({
@@ -31,12 +29,11 @@ export const CheckBox = {
     validationMessage: TextBox.validationMessage,
 };
 
-export const CheckBoxVertical = {
-    label: TextBoxVertical.label,
-    input: TextBoxVertical.input,
-    inputError: TextBoxVertical.inputError,
-    validationMessage: TextBoxVertical.validationMessage,
-};
+export const CheckBoxVertical = merge(TextBoxVertical, {
+    input: {
+        backgroundColor: 'transparent',
+    },
+});
 export const CheckBoxNoLabel = {
     label: {
         flex: -1,

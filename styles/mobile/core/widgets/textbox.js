@@ -23,7 +23,6 @@ export const TextBox = {
         paddingHorizontal: spacing.small,
         backgroundColor: background.primary,
         ...Platform.select({
-            ios: {},
             android: {
                 borderWidth: 1,
                 borderColor: gray.lighter,
@@ -65,7 +64,6 @@ export const TextBoxVertical = {
                 borderColor: gray.lightest,
                 backgroundColor: background.primary,
             },
-            android: {},
         }),
     },
     inputError: TextBox.inputError,
@@ -76,9 +74,7 @@ export const TextBoxNoLabel = {
     label: {
         flex: -1,
     },
-    input: {
-        ...TextBox.input,
-    },
+    input: TextBox.input,
     inputError: TextBox.inputError,
     validationMessage: TextBox.validationMessage,
 };

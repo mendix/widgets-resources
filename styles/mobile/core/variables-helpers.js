@@ -236,6 +236,11 @@ function hexToRGB(hex) {
     });
 }
 
+export function hexToRGBString(hex) {
+    const object = hexToRGB(hex);
+    return [object.r, object.g, object.b].join(',');
+}
+
 // HSL or HSL Alpha to RGB
 function hslToRGB(hsl) {
     let [h, s, l, a = '1'] = hsl.replace(/hsla?[(]|[%]|[)]/gm, '').split(',');
@@ -387,3 +392,28 @@ export const normalizeFont = size => {
     // if older device ie pixelRatio !== 2 || 3 || 3.5
     return size;
 };
+
+export function merge(...sources) {
+    function mergeDeep(target, ...sources) {
+        function isObject(item) {
+            return item && typeof item === 'object' && !Array.isArray(item);
+        }
+
+        if (!sources.length) return target;
+        const source = sources.shift();
+
+        if (isObject(target) && isObject(source)) {
+            for (const key in source) {
+                if (isObject(source[key])) {
+                    if (!target[key]) Object.assign(target, { [key]: {} });
+                    mergeDeep(target[key], source[key]);
+                } else {
+                    Object.assign(target, { [key]: source[key] });
+                }
+            }
+        }
+        return mergeDeep(target, ...sources);
+    }
+
+    return mergeDeep({}, ...sources);
+}

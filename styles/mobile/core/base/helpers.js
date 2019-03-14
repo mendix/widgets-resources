@@ -1,61 +1,15 @@
 import { spacing, background, gray, border } from '../variables';
 import { Platform } from 'react-native';
 
-//== TEMP
-export const androidSpacingInnerVerticalLarge = {
-    paddingVertical: Platform.select({ ios: 0, android: spacing.large }),
-};
-export const androidSpacingInnerHorizontalMedium = {
-    paddingHorizontal: Platform.select({ ios: 0, android: spacing.small }),
-};
-export const androidSpacingInnerVertical = {
-    paddingVertical: Platform.select({ ios: 0, android: spacing.smallest }),
-};
-export const spacingOuterBottomNone = {
-    marginBottom: 0,
-};
-export const hide = {
-    display: 'none',
-};
-export const shadowBottom = {
-    backgroundColor: '#FFF',
-    elevation: 2,
-    shadowColor: gray.lightest,
-    // shadowOpacity: 0.9,
-    // shadowRadius: 8,
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-};
-export const borderTop = {
-    ...Platform.select({
-        ios: {
-            borderTopWidth: 1,
-            borderColor: gray.lightest,
-        },
-        android: {},
-    }),
-};
-export const inputWrapper = {
-    ...Platform.select({
-        ios: {
-            borderBottomWidth: 1,
-            borderColor: gray.lightest,
-            backgroundColor: background.primary,
-        },
-        android: {
-            marginBottom: spacing.regular,
-        },
-    }),
-};
-/*_____________________________________________________________________________
------------------------ Helpers Above Are Temporary ---------------------------
-‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾*/
-
 //== Background sizing
 export const fullSize = {
     width: '100%',
+    height: '100%',
+};
+export const fullWidth = {
+    width: '100%',
+};
+export const fullHeight = {
     height: '100%',
 };
 

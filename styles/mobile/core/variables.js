@@ -29,7 +29,8 @@ export const gray = {
 // Background Colors
 export const background = {
     primary: '#FFF',
-    secondary: '#fafafa',
+    secondary: '#f9f9f9',
+    // secondary: '#fafafa',
 };
 
 // Border Style

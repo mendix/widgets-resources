@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 import { button, spacing, font, gray } from '../variables';
-import * as mixinButton from '../base/mixins/buttons';
+import { merge } from '../variables-helpers';
 
 /* ==========================================================================
     Buttons
@@ -41,23 +41,98 @@ export const ActionButton = {
 //-------------------------------------------------------------------------------------------------------------------//
 // Button Colors
 
-// This mixin function takes the following order -> color, backgroundColor, borderColor
-// export const btnPrimary = mixinButton.variant(button.primary.color, button.primary.background, button.primary.borderColor);// TODO: Remove?
-export const btnSecondary = mixinButton.variant(button.secondary.color, button.secondary.background, button.secondary.borderColor);
-export const btnSuccess = mixinButton.variant(button.success.color, button.success.background, button.success.borderColor);
-export const btnWarning = mixinButton.variant(button.warning.color, button.warning.background, button.warning.borderColor);
-export const btnDanger = mixinButton.variant(button.danger.color, button.danger.background, button.danger.borderColor);
+export const btnSecondary = {
+    button: {
+        borderColor: button.secondary.borderColor,
+        backgroundColor: button.secondary.background,
+    },
+    icon: {
+        color: button.secondary.color,
+    },
+    caption: {
+        color: button.secondary.color,
+    },
+};
+export const btnSuccess = {
+    button: {
+        borderColor: button.success.borderColor,
+        backgroundColor: button.success.background,
+    },
+    icon: {
+        color: button.success.color,
+    },
+    caption: {
+        color: button.success.color,
+    },
+};
+export const btnWarning = {
+    button: {
+        borderColor: button.warning.borderColor,
+        backgroundColor: button.warning.background,
+    },
+    icon: {
+        color: button.warning.color,
+    },
+    caption: {
+        color: button.warning.color,
+    },
+};
+export const btnDanger = {
+    button: {
+        borderColor: button.danger.borderColor,
+        backgroundColor: button.danger.background,
+    },
+    icon: {
+        color: button.danger.color,
+    },
+    caption: {
+        color: button.danger.color,
+    },
+};
 
-// This mixin function will remove the background and border, and set the icon color
-export const btnIconPrimary = mixinButton.iconOnly(button.primary.background);
-export const btnIconSecondary = mixinButton.iconOnly(gray.light);
-export const btnIconSuccess = mixinButton.iconOnly(button.success.background);
-export const btnIconWarning = mixinButton.iconOnly(button.warning.background);
-export const btnIconDanger = mixinButton.iconOnly(button.danger.background);
+// Button Icon Only
+export const btnIconPrimary = {
+    button: {
+        borderWidth: 0,
+        backgroundColor: 'transparent',
+        padding: 0,
+        paddingVertical: 0, // FIXME: Should not be needed
+        paddingHorizontal: 0, // FIXME: Should not be needed
+        paddingTop: 0, // FIXME: Should not be needed
+        paddingLeft: 0, // FIXME: Should not be needed
+        paddingRight: 0, // FIXME: Should not be needed
+        paddingBottom: 0, // FIXME: Should not be needed
+    },
+    icon: {
+        color: button.primary.background,
+    },
+    caption: {
+        fontSize: 0,
+    },
+};
+export const btnIconSecondary = merge(btnIconPrimary, {
+    icon: {
+        color: gray.light,
+    },
+});
+export const btnIconSuccess = merge(btnIconPrimary, {
+    icon: {
+        color: button.success.background,
+    },
+});
+export const btnIconWarning = merge(btnIconPrimary, {
+    icon: {
+        color: button.warning.background,
+    },
+});
+export const btnIconDanger = merge(btnIconPrimary, {
+    icon: {
+        color: button.danger.background,
+    },
+});
 
 // Button sizes
 export const btnSmall = {
-    button: {},
     icon: {
         size: font.sizeSmall,
     },
@@ -66,21 +141,11 @@ export const btnSmall = {
     },
 };
 export const btnLarge = {
-    button: {},
     icon: {
         size: font.sizeLarge,
     },
     caption: {
         fontSize: font.sizeLarge,
-    },
-};
-export const btnLargest = {
-    button: {},
-    icon: {
-        size: font.sizeH1,
-    },
-    caption: {
-        fontSize: font.sizeH1,
     },
 };
 

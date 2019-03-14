@@ -53,32 +53,32 @@ export const textGrayLightest = {
 };
 
 // Text Sizes
-export const h1 = {
+export const TextH1 = {
     fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
     fontSize: font.sizeH1,
     marginBottom: spacing.small,
 };
-export const h2 = {
+export const TextH2 = {
     fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
     fontSize: font.sizeH2,
     marginBottom: spacing.small,
 };
-export const h3 = {
+export const TextH3 = {
     fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
     fontSize: font.sizeH3,
     marginBottom: spacing.small,
 };
-export const h4 = {
+export const TextH4 = {
     fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
     fontSize: font.sizeH4,
     marginBottom: spacing.smaller,
 };
-export const h5 = {
+export const TextH5 = {
     fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
     fontSize: font.sizeH5,
     marginBottom: spacing.smallest,
 };
-export const h6 = {
+export const TextH6 = {
     fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
     fontSize: font.sizeH6,
     marginBottom: spacing.smallest,

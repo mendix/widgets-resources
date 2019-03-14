@@ -1,6 +1,4 @@
 import { TextBox, TextBoxVertical } from './textbox';
-import { gray, spacing, border, font, background } from '../variables';
-import { Platform } from 'react-native';
 
 /* ==========================================================================
     DropDown
