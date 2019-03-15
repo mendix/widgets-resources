@@ -15,9 +15,6 @@ import ReactNative from "react-native";
  */
 function ShowConfirmation(title?: string, message?: string, cancelText?: string, okText?: string): Promise<boolean> {
     // BEGIN USER CODE
-    // Documentation https://facebook.github.io/react-native/docs/alert
-
-    const Alert: typeof ReactNative.Alert = require("react-native").Alert;
 
     if (!title) {
         throw new TypeError("Input parameter 'Title' is required");
@@ -26,12 +23,23 @@ function ShowConfirmation(title?: string, message?: string, cancelText?: string,
     cancelText = cancelText || "Cancel";
     okText = okText || "OK";
 
-    return new Promise(resolve => {
-        Alert.alert(title, message, [
-            { text: cancelText, onPress: () => resolve(false), style: "cancel" },
-            { text: okText, onPress: () => resolve(true) }
-        ]);
-    });
+    if (navigator && navigator.product === "ReactNative") {
+        const Alert: typeof ReactNative.Alert = require("react-native").Alert;
+
+        return new Promise(resolve => {
+            Alert.alert(title, message, [
+                { text: cancelText, onPress: () => resolve(false), style: "cancel" },
+                { text: okText, onPress: () => resolve(true) }
+            ]);
+        });
+    }
+
+    if (window && window.confirm) {
+        const result = window.confirm(`${title}\n\n${message || ""}`);
+        return Promise.resolve(result);
+    }
+
+    return Promise.resolve(false);
 
     // END USER CODE
 }
