@@ -4,13 +4,15 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
+import RNGeocoder from "react-native-geocoder";
+
 type ReverseGeocodingProvider = "Google" | "Geocodio" | "LocationIQ" | "MapQuest";
 
 /**
  * @param {string} latitude - This field is required.
  * @param {string} longitude - This field is required.
- * @param {"NanoflowCommons.GeocodingProvider.Google"|"NanoflowCommons.GeocodingProvider.Geocodio"|"NanoflowCommons.GeocodingProvider.LocationIQ"|"NanoflowCommons.GeocodingProvider.MapQuest"} geocodingProvider - This field is required.
- * @param {string} geocodingProviderApiKey - This field is required.
+ * @param {"NanoflowCommons.GeocodingProvider.Google"|"NanoflowCommons.GeocodingProvider.Geocodio"|"NanoflowCommons.GeocodingProvider.LocationIQ"|"NanoflowCommons.GeocodingProvider.MapQuest"} geocodingProvider - This field is required for use on web.
+ * @param {string} geocodingProviderApiKey - This field is required for use on web.
  * @returns {string}
  */
 function ReverseGeocode(
@@ -22,6 +24,7 @@ function ReverseGeocode(
     // BEGIN USER CODE
     /**
      * Documentation:
+     *  - Native: https://github.com/devfd/react-native-geocoder
      *  - Google: https://developers.google.com/maps/documentation/geocoding/intro#ReverseGeocoding
      *  - Geocodio: https://www.geocod.io/docs/#reverse-geocoding
      *  - LocationIQ: https://locationiq.com/docs-html/index.html#reverse-geocoding
@@ -36,12 +39,25 @@ function ReverseGeocode(
         throw new TypeError("Input parameter 'Longitude' is required");
     }
 
+    if (navigator && navigator.product === "ReactNative") {
+        const Geocoder: typeof RNGeocoder = require("react-native-geocoder").default;
+
+        const position = { lat: Number(latitude), lng: Number(longitude) };
+
+        return Geocoder.geocodePosition(position).then(results => {
+            if (results.length === 0) {
+                throw new Error("No results found");
+            }
+            return results[0].formattedAddress;
+        });
+    }
+
     if (!geocodingProvider) {
-        throw new TypeError("Input parameter 'Geocoding provider' is required");
+        throw new TypeError("Input parameter 'Geocoding provider' is required for use on web");
     }
 
     if (!geocodingProviderApiKey) {
-        throw new TypeError("Input parameter 'Geocoding provider api key' is required");
+        throw new TypeError("Input parameter 'Geocoding provider api key' is required for use on web");
     }
 
     latitude = encodeURIComponent(latitude);
@@ -60,7 +76,7 @@ function ReverseGeocode(
         )
         .then(response => getAddress(geocodingProvider, response));
 
-    function getApiUrl(provider: GeocodingProvider, lat: string, long: string, key: string): string {
+    function getApiUrl(provider: ReverseGeocodingProvider, lat: string, long: string, key: string): string {
         switch (provider) {
             case "Google":
                 return `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${key}`;
@@ -73,7 +89,7 @@ function ReverseGeocode(
         }
     }
 
-    function getAddress(provider: GeocodingProvider, response: any): string {
+    function getAddress(provider: ReverseGeocodingProvider, response: any): string {
         switch (provider) {
             case "Google":
                 if (response.status !== "OK") {
