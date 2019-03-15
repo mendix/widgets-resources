@@ -116,6 +116,7 @@ const config = {
         "react-native/Libraries/StyleSheet/StyleSheet",
         "react-native-camera",
         "react-native-firebase",
+        "react-native-geocoder",
         "react-native-maps",
         "react-native-svg",
         "react-native-video",

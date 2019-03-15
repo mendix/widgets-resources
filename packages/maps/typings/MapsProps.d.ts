@@ -9,10 +9,10 @@ interface CommonProps<Style> {
 }
 
 export interface MarkersType {
-    latitude: string;
-    longitude: string;
     title?: string;
     description?: string;
+    latitude: string;
+    longitude: string;
     action?: ActionValue;
 }
 
@@ -21,10 +21,11 @@ export type MapTypeEnum = "standard" | "satellite" | "hybrid" | "terrain";
 export type ProviderEnum = "default" | "google";
 
 export interface MapsProps<Style> extends CommonProps<Style> {
-    markerTitle: EditableValue<string>;
-    markerDescription: EditableValue<string>;
-    markerLatitude: EditableValue<BigJs.Big>;
-    markerLongitude: EditableValue<BigJs.Big>;
+    markerTitle?: EditableValue<string>;
+    markerDescription?: EditableValue<string>;
+    markerAddress?: EditableValue<string>;
+    markerLatitude?: EditableValue<BigJs.Big>;
+    markerLongitude?: EditableValue<BigJs.Big>;
     markers: MarkersType[];
     latitude: EditableValue<BigJs.Big>;
     longitude: EditableValue<BigJs.Big>;

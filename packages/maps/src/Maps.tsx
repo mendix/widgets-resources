@@ -1,6 +1,7 @@
 import { flattenStyles, Style } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
-import { Platform, ViewStyle } from "react-native";
+import { Alert, Platform, ViewStyle } from "react-native";
+import Geocoder from "react-native-geocoder";
 import MapView, { Marker, Region } from "react-native-maps";
 
 import { MapsProps } from "../typings/MapsProps";
@@ -26,9 +27,21 @@ const defaultMapsStyle: MapsStyle = {
     }
 };
 
-export class Maps extends Component<MapsProps<MapsStyle>> {
+type LatLong = [number, number];
+
+interface MapsState {
+    geocodeCache: {
+        [address: string]: LatLong | undefined;
+    };
+}
+
+export class Maps extends Component<MapsProps<MapsStyle>, MapsState> {
     private readonly onRegionChangeHandler = this.onRegionChange.bind(this);
     private readonly styles = flattenStyles(defaultMapsStyle, this.props.style);
+
+    readonly state: MapsState = {
+        geocodeCache: {}
+    };
 
     get region(): Region | undefined {
         if (
@@ -37,7 +50,7 @@ export class Maps extends Component<MapsProps<MapsStyle>> {
             this.props.latitudeDelta.value == null ||
             this.props.longitudeDelta.value == null
         ) {
-            return undefined;
+            return;
         }
 
         return {
@@ -52,6 +65,7 @@ export class Maps extends Component<MapsProps<MapsStyle>> {
         const showsTraffic = this.props.mapType === "satellite" ? false : this.props.showsTraffic;
         const isAndroid = Platform.OS === "android";
         const mapType = this.props.mapType === "terrain" && !isAndroid ? "standard" : this.props.mapType;
+
         return (
             <MapView
                 provider={this.props.provider === "default" ? null : this.props.provider}
@@ -80,17 +94,23 @@ export class Maps extends Component<MapsProps<MapsStyle>> {
         );
     }
 
-    renderDynamicMarker(): JSX.Element | undefined {
-        if (this.props.markerLatitude.value == null || this.props.markerLongitude.value == null) {
-            return;
+    renderDynamicMarker(): JSX.Element | null {
+        const latLong = this.getLatLong(
+            this.props.markerLatitude && this.props.markerLatitude.value,
+            this.props.markerLongitude && this.props.markerLongitude.value,
+            this.props.markerAddress && this.props.markerAddress.value
+        );
+
+        if (!latLong) {
+            return null;
         }
 
         return this.renderMarker(
             0,
-            Number(this.props.markerLatitude.value),
-            Number(this.props.markerLongitude.value),
-            this.props.markerTitle.value,
-            this.props.markerDescription.value,
+            latLong[0],
+            latLong[1],
+            this.props.markerTitle && this.props.markerTitle.value,
+            this.props.markerDescription && this.props.markerDescription.value,
             this.props.onMarkerPress
         );
     }
@@ -121,15 +141,13 @@ export class Maps extends Component<MapsProps<MapsStyle>> {
         action?: ActionValue
     ): JSX.Element {
         const onPress = () => onMarkerPress(action);
+
         return (
             <Marker
                 key={"map_marker_" + index}
                 title={title}
                 description={description}
-                coordinate={{
-                    latitude: Number(latitude),
-                    longitude: Number(longitude)
-                }}
+                coordinate={{ latitude, longitude }}
                 onPress={onPress}
                 pinColor={this.styles.marker.color}
                 opacity={this.styles.marker.opacity}
@@ -146,6 +164,42 @@ export class Maps extends Component<MapsProps<MapsStyle>> {
         if (this.props.onRegionChange && this.props.onRegionChange.canExecute) {
             this.props.onRegionChange.execute();
         }
+    }
+
+    private getLatLong(latitude?: BigJs.Big, longitude?: BigJs.Big, address?: string): LatLong | undefined {
+        if (latitude && longitude) {
+            return [Number(latitude), Number(longitude)];
+        }
+
+        if (address) {
+            const cachedValue = this.state.geocodeCache[address];
+            if (cachedValue) {
+                return cachedValue;
+            }
+
+            this.geocodeAndCache(address);
+        }
+
+        return;
+    }
+
+    private geocodeAndCache(address: string): void {
+        Geocoder.geocodeAddress(address)
+            .then(results => {
+                if (results.length === 0) {
+                    return;
+                }
+
+                this.setState({
+                    geocodeCache: {
+                        ...this.state.geocodeCache,
+                        [address]: [results[0].position.lat, results[0].position.lng]
+                    }
+                });
+            })
+            .catch(() => {
+                Alert.alert("Could not find the given address:", address);
+            });
     }
 }
 
