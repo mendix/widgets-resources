@@ -13,17 +13,25 @@ import ReactNative from "react-native";
  */
 function ShowMessage(title?: string, message?: string): Promise<boolean> {
     // BEGIN USER CODE
-    // Documentation https://facebook.github.io/react-native/docs/alert
-
-    const Alert: typeof ReactNative.Alert = require("react-native").Alert;
 
     if (!title) {
         throw new TypeError("Input parameter 'Title' is required");
     }
 
-    return new Promise(resolve => {
-        Alert.alert(title, message, [{ text: "OK", onPress: () => resolve(true) }]);
-    });
+    if (navigator && navigator.product === "ReactNative") {
+        const Alert: typeof ReactNative.Alert = require("react-native").Alert;
+
+        return new Promise(resolve => {
+            Alert.alert(title, message, [{ text: "OK", onPress: () => resolve(true) }]);
+        });
+    }
+
+    if (window && window.alert) {
+        window.alert(`${title}\n\n${message || ""}`);
+        return Promise.resolve(true);
+    }
+
+    return Promise.resolve(false);
 
     // END USER CODE
 }
