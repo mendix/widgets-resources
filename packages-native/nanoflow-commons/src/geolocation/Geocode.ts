@@ -4,12 +4,14 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
+import RNGeocoder from "react-native-geocoder";
+
 type GeocodingProvider = "Google" | "Geocodio" | "LocationIQ" | "MapQuest";
 
 /**
  * @param {string} address - This field is required.
- * @param {"NanoflowCommons.GeocodingProvider.Google"|"NanoflowCommons.GeocodingProvider.Geocodio"|"NanoflowCommons.GeocodingProvider.LocationIQ"|"NanoflowCommons.GeocodingProvider.MapQuest"} geocodingProvider - This field is required.
- * @param {string} geocodingProviderApiKey - This field is required.
+ * @param {"NanoflowCommons.GeocodingProvider.Google"|"NanoflowCommons.GeocodingProvider.Geocodio"|"NanoflowCommons.GeocodingProvider.LocationIQ"|"NanoflowCommons.GeocodingProvider.MapQuest"} geocodingProvider - This field is required for use on web.
+ * @param {string} geocodingProviderApiKey - This field is required for use on web.
  * @returns {MxObject}
  */
 function Geocode(
@@ -20,6 +22,7 @@ function Geocode(
     // BEGIN USER CODE
     /**
      * Documentation:
+     *  - Native: https://github.com/devfd/react-native-geocoder
      *  - Google: https://developers.google.com/maps/documentation/geocoding/intro#GeocodingRequests
      *  - Geocodio: https://www.geocod.io/docs/#geocoding
      *  - LocationIQ: https://locationiq.com/docs-html/index.html#search-forward-geocoding
@@ -30,16 +33,24 @@ function Geocode(
         throw new TypeError("Input parameter 'Address' is required");
     }
 
+    if (navigator && navigator.product === "ReactNative") {
+        const Geocoder: typeof RNGeocoder = require("react-native-geocoder").default;
+
+        return Geocoder.geocodeAddress(address).then(results => {
+            if (results.length === 0) {
+                throw new Error("No results found");
+            }
+            return createMxObject(String(results[0].position.lat), String(results[0].position.lng));
+        });
+    }
+
     if (!geocodingProvider) {
-        throw new TypeError("Input parameter 'Geocoding provider' is required");
+        throw new TypeError("Input parameter 'Geocoding provider' is required for use on web");
     }
 
     if (!geocodingProviderApiKey) {
-        throw new TypeError("Input parameter 'Geocoding provider api key' is required");
+        throw new TypeError("Input parameter 'Geocoding provider api key' is required for use on web");
     }
-
-    address = encodeURIComponent(address);
-    geocodingProviderApiKey = encodeURIComponent(geocodingProviderApiKey);
 
     const url = getApiUrl(geocodingProvider, address, geocodingProviderApiKey);
 
@@ -55,6 +66,9 @@ function Geocode(
         .then(latLong => createMxObject(latLong[0], latLong[1]));
 
     function getApiUrl(provider: GeocodingProvider, query: string, key: string): string {
+        query = encodeURIComponent(query);
+        key = encodeURIComponent(key);
+
         switch (provider) {
             case "Google":
                 return `https://maps.googleapis.com/maps/api/geocode/json?address=${query}&key=${key}`;
@@ -104,14 +118,14 @@ function Geocode(
     function createMxObject(lat: string, long: string): Promise<mendix.lib.MxObject> {
         return new Promise((resolve, reject) => {
             mx.data.create({
-                entity: "NanoflowCommons.Location",
+                entity: "NanoflowCommons.Position",
                 callback: mxObject => {
                     mxObject.set("Latitude", lat);
                     mxObject.set("Longitude", long);
                     resolve(mxObject);
                 },
                 error: () => {
-                    reject("Could not create 'NanoflowCommons.Location' object to store coordinates");
+                    reject("Could not create 'NanoflowCommons.Position' object to store coordinates");
                 }
             });
         });
