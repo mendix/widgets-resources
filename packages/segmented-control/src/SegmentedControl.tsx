@@ -27,16 +27,18 @@ export class SegmentedControl extends Component<SegmentedControlProps<SegmentedC
     private readonly onChangeHandler = this.onChange.bind(this);
     private readonly styles = flattenStyles(defaultSegmentedControlStyle, this.props.style);
 
-    get values(): string[] {
+    private get universe(): string[] {
         // As this property can only be an Enum we know that universe is defined
         return this.props.enum.universe!;
     }
 
     render(): JSX.Element {
-        const selectedIndex = this.values.indexOf(this.props.enum.value!);
+        const selectedIndex = this.universe.indexOf(this.props.enum.value!);
+        const captions = this.universe.map(name => this.props.enum.formatter.format(name));
+
         return (
             <SegmentedControlTab
-                values={this.values}
+                values={captions}
                 selectedIndex={selectedIndex}
                 enabled={this.props.editable !== "never" && !this.props.enum.readOnly}
                 onTabPress={this.onChangeHandler}
@@ -51,7 +53,7 @@ export class SegmentedControl extends Component<SegmentedControlProps<SegmentedC
     }
 
     private onChange(index: number): void {
-        const value = this.values[index];
+        const value = this.universe[index];
         this.props.enum.setValue(value);
 
         if (this.props.onChange && this.props.onChange.canExecute) {
