@@ -187,15 +187,20 @@ export class Maps extends Component<MapsProps<MapsStyle>, MapsState> {
         Geocoder.geocodeAddress(address)
             .then(results => {
                 if (results.length === 0) {
-                    return;
+                    throw new Error("No results found for the given address");
                 }
 
-                this.setState({
-                    geocodeCache: {
-                        ...this.state.geocodeCache,
-                        [address]: [results[0].position.lat, results[0].position.lng]
-                    }
-                });
+                if (this.props.markerLatitude && this.props.markerLongitude) {
+                    this.props.markerLatitude.setTextValue(String(results[0].position.lat));
+                    this.props.markerLatitude.setTextValue(String(results[0].position.lng));
+                } else {
+                    this.setState({
+                        geocodeCache: {
+                            ...this.state.geocodeCache,
+                            [address]: [results[0].position.lat, results[0].position.lng]
+                        }
+                    });
+                }
             })
             .catch(() => {
                 Alert.alert("Could not find the given address:", address);

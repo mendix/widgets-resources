@@ -23,7 +23,7 @@
         <property key="markerAddress" type="attribute" required="false">
             <caption>Marker address</caption>
             <category>Marker</category>
-            <description>The address is ignored if latitude and longitude are set</description>
+            <description>The widget will try to geocode the address to coordinates, and save those to the latitude and longitude attributes, if provided. The address is ignored if latitude and longitude are set.</description>
             <attributeTypes>
                 <attributeType name="String" />
             </attributeTypes>
