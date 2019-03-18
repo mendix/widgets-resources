@@ -1,39 +1,9 @@
-import { flattenStyles, Style } from "@native-components/util-widgets";
+import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
-import { TextStyle, ViewStyle } from "react-native";
 import { Circle } from "react-native-progress";
 
 import { ProgressCircleProps } from "../typings/ProgressCircleProps";
-
-interface ProgressCircleStyle extends Style {
-    container: ViewStyle;
-    circle: {
-        width: number;
-        borderWidth: number;
-        borderColor: string;
-    };
-    fill: {
-        backgroundColor: string;
-        width: number;
-        lineCapRounded: boolean;
-    };
-    text: TextStyle;
-}
-
-const defaultProgressCircleStyle: ProgressCircleStyle = {
-    container: {},
-    circle: {
-        width: 40,
-        borderWidth: 1,
-        borderColor: "rgba(0, 122, 255, 1)"
-    },
-    fill: {
-        backgroundColor: "rgba(0, 122, 255, 1)",
-        width: 3,
-        lineCapRounded: false
-    },
-    text: {}
-};
+import { defaultProgressCircleStyle, ProgressCircleStyle } from "./ui/Styles";
 
 export class ProgressCircle extends Component<ProgressCircleProps<ProgressCircleStyle>> {
     private readonly formatTextHandler = this.formatText.bind(this);

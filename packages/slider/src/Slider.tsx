@@ -1,38 +1,15 @@
-import { flattenStyles, Style } from "@native-components/util-widgets";
+import { flattenStyles } from "@native-components/util-widgets";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
-import { LayoutChangeEvent, View, ViewStyle } from "react-native";
+import { LayoutChangeEvent, View } from "react-native";
 
 import { SliderProps } from "../typings/SliderProps";
 import { Marker } from "./Marker";
+import { defaultSliderStyle, SliderStyle } from "./ui/Styles";
 
 interface State {
     width?: number;
 }
-
-interface SliderStyle extends Style {
-    container: ViewStyle;
-    track: ViewStyle;
-    trackDisabled: ViewStyle;
-    highlight: ViewStyle;
-    highlightDisabled: ViewStyle;
-    marker: ViewStyle;
-    markerActive: ViewStyle;
-    markerDisabled: ViewStyle;
-}
-
-const defaultSliderStyle: SliderStyle = {
-    container: {},
-    track: {},
-    trackDisabled: {},
-    highlight: {
-        backgroundColor: "rgba(0,122,255,1)"
-    },
-    highlightDisabled: {},
-    marker: {},
-    markerActive: {},
-    markerDisabled: {}
-};
 
 export class Slider extends Component<SliderProps<SliderStyle>, State> {
     readonly state: State = {};

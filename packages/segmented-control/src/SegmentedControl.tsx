@@ -1,27 +1,9 @@
-import { flattenStyles, Style } from "@native-components/util-widgets";
+import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
-import { TextStyle, ViewStyle } from "react-native";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 
 import { SegmentedControlProps } from "../typings/SegmentedControlProps";
-
-interface SegmentedControlStyle extends Style {
-    container: ViewStyle;
-    tab: ViewStyle;
-    text: TextStyle;
-    activeTab: ViewStyle;
-    activeTabText: TextStyle;
-}
-
-const defaultSegmentedControlStyle: SegmentedControlStyle = {
-    container: {
-        borderRadius: 5
-    },
-    tab: {},
-    text: {},
-    activeTab: {},
-    activeTabText: {}
-};
+import { defaultSegmentedControlStyle, SegmentedControlStyle } from "./ui/Styles";
 
 export class SegmentedControl extends Component<SegmentedControlProps<SegmentedControlStyle>> {
     private readonly onChangeHandler = this.onChange.bind(this);

@@ -1,38 +1,15 @@
-import { flattenStyles, Style } from "@native-components/util-widgets";
+import { flattenStyles } from "@native-components/util-widgets";
 import MultiSlider, { MarkerProps } from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
-import { LayoutChangeEvent, View, ViewStyle } from "react-native";
+import { LayoutChangeEvent, View } from "react-native";
 
 import { RangeSliderProps } from "../typings/RangeSliderProps";
 import { Marker } from "./Marker";
+import { defaultRangeSliderStyle, RangeSliderStyle } from "./ui/Styles";
 
 interface State {
     width?: number;
 }
-
-interface RangeSliderStyle extends Style {
-    container: ViewStyle;
-    track: ViewStyle;
-    trackDisabled: ViewStyle;
-    highlight: ViewStyle;
-    highlightDisabled: ViewStyle;
-    marker: ViewStyle;
-    markerActive: ViewStyle;
-    markerDisabled: ViewStyle;
-}
-
-const defaultRangeSliderStyle: RangeSliderStyle = {
-    container: {},
-    track: {},
-    trackDisabled: {},
-    highlight: {
-        backgroundColor: "rgba(0,122,255,1)"
-    },
-    highlightDisabled: {},
-    marker: {},
-    markerActive: {},
-    markerDisabled: {}
-};
 
 export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, State> {
     readonly state: State = {};

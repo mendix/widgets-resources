@@ -1,28 +1,8 @@
-import { flattenStyles, Style } from "@native-components/util-widgets";
+import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
-import { ViewStyle } from "react-native";
 import { Bar } from "react-native-progress";
-
 import { ProgressBarProps } from "../typings/ProgressBarProps";
-
-interface ProgressBarStyle extends Style {
-    bar: ViewStyle;
-    fill: {
-        backgroundColor: string;
-    };
-}
-
-const defaultProgressBarStyle: ProgressBarStyle = {
-    bar: {
-        borderWidth: 1,
-        borderColor: "rgba(0,122,255,1)",
-        borderRadius: 4,
-        height: 6
-    },
-    fill: {
-        backgroundColor: "rgba(0,122,255,1)"
-    }
-};
+import { defaultProgressBarStyle, ProgressBarStyle } from "./ui/Styles";
 
 export class ProgressBar extends Component<ProgressBarProps<ProgressBarStyle>> {
     private readonly styles = flattenStyles(defaultProgressBarStyle, this.props.style);

@@ -14,7 +14,9 @@ interface ColorWheelStyle extends Style {
 const defaultColorWheelStyle: ColorWheelStyle = {
     container: {},
     thumbnail: {
-        width: 50
+        width: 50,
+        borderWidth: 5,
+        borderColor: "#FFF"
     }
 };
 

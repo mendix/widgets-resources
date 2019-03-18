@@ -6,10 +6,8 @@ export const styles = StyleSheet.create({
     },
     badge: {
         borderRadius: 30,
-        paddingLeft: 10,
-        paddingRight: 10,
-        paddingTop: 5,
-        paddingBottom: 5,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
         backgroundColor: "#ccc"
     },
     text: {

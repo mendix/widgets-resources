@@ -1,0 +1,35 @@
+import { Style } from "@native-components/util-widgets";
+import { Platform, TextStyle, ViewStyle } from "react-native";
+
+export interface ProgressCircleStyle extends Style {
+    container: ViewStyle;
+    circle: {
+        width: number;
+        borderWidth: number;
+        borderColor: string;
+    };
+    fill: {
+        backgroundColor: string;
+        width: number;
+        lineCapRounded: boolean;
+    };
+    text: TextStyle;
+}
+
+export const defaultProgressCircleStyle: ProgressCircleStyle = {
+    container: {},
+    circle: {
+        width: 100,
+        borderWidth: 1,
+        borderColor: Platform.select({ ios: "rgb(0, 122, 255)", android: "rgb(98,0,238)" })
+    },
+    fill: {
+        width: 3,
+        lineCapRounded: false,
+        backgroundColor: Platform.select({ ios: "rgb(0, 122, 255)", android: "rgb(98,0,238)" })
+    },
+    text: {
+        fontSize: 18,
+        color: Platform.select({ ios: "rgb(0, 122, 255)", android: "rgb(98,0,238)" })
+    }
+};
