@@ -7,7 +7,7 @@ export const ActivityIndicatorDefault = {
     },
     indicator: {
         // Just this property
-        color: '#444',
+        color: '#666',
     },
 };
 

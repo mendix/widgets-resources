@@ -12,7 +12,7 @@ export const ActionButton = {
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: button.primary.borderColor,
-        backgroundColor: button.primary.background,
+        backgroundColor: button.primary.backgroundColor,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: button.borderRadius,
@@ -41,10 +41,25 @@ export const ActionButton = {
 //-------------------------------------------------------------------------------------------------------------------//
 // Button Colors
 
+export const ActionButtonHeader = {
+    button: {
+        borderColor: button.header.borderColor,
+        backgroundColor: button.header.backgroundColor,
+        paddingVertical: 0,
+        paddingHorizontal: 0,
+    },
+    icon: {
+        color: button.header.color,
+    },
+    caption: {
+        color: button.header.color,
+    },
+};
+
 export const btnSecondary = {
     button: {
         borderColor: button.secondary.borderColor,
-        backgroundColor: button.secondary.background,
+        backgroundColor: button.secondary.backgroundColor,
     },
     icon: {
         color: button.secondary.color,
@@ -56,7 +71,7 @@ export const btnSecondary = {
 export const btnSuccess = {
     button: {
         borderColor: button.success.borderColor,
-        backgroundColor: button.success.background,
+        backgroundColor: button.success.backgroundColor,
     },
     icon: {
         color: button.success.color,
@@ -68,7 +83,7 @@ export const btnSuccess = {
 export const btnWarning = {
     button: {
         borderColor: button.warning.borderColor,
-        backgroundColor: button.warning.background,
+        backgroundColor: button.warning.backgroundColor,
     },
     icon: {
         color: button.warning.color,
@@ -80,7 +95,7 @@ export const btnWarning = {
 export const btnDanger = {
     button: {
         borderColor: button.danger.borderColor,
-        backgroundColor: button.danger.background,
+        backgroundColor: button.danger.backgroundColor,
     },
     icon: {
         color: button.danger.color,
@@ -104,7 +119,7 @@ export const btnIconPrimary = {
         paddingBottom: 0, // FIXME: Should not be needed
     },
     icon: {
-        color: button.primary.background,
+        color: button.primary.backgroundColor,
     },
     caption: {
         fontSize: 0,
@@ -117,17 +132,17 @@ export const btnIconSecondary = merge(btnIconPrimary, {
 });
 export const btnIconSuccess = merge(btnIconPrimary, {
     icon: {
-        color: button.success.background,
+        color: button.success.backgroundColor,
     },
 });
 export const btnIconWarning = merge(btnIconPrimary, {
     icon: {
-        color: button.warning.background,
+        color: button.warning.backgroundColor,
     },
 });
 export const btnIconDanger = merge(btnIconPrimary, {
     icon: {
-        color: button.danger.background,
+        color: button.danger.backgroundColor,
     },
 });
 

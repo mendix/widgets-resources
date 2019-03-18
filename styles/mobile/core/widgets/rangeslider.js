@@ -6,12 +6,14 @@ const blue = 'rgb(0,122,255)';
 const blueLighter = 'rgba(0,122,255,0.3)';
 const blueLightest = 'rgba(0, 122, 255, 0.1)';
 
+const purple = 'rgb(98,0,238)';
+const purpleLighter = 'rgba(98,0,238, 0.3)';
+const purpleLightest = 'rgba(98,0,238, 0.1)';
 export const RangeSliderDefault = {
     // All these properties allow ViewStyle properties
     container: {},
     track: {
-        height: Platform.select({ ios: 2, android: 3 }),
-        backgroundColor: blueLighter,
+        backgroundColor: Platform.select({ ios: blueLighter, android: purpleLighter }),
     },
     trackDisabled: {
         ...Platform.select({
@@ -20,46 +22,38 @@ export const RangeSliderDefault = {
                 backgroundColor: blueLighter,
             },
             android: {
-                height: 3,
-                backgroundColor: gray.lightest,
+                backgroundColor: '#EEE',
             },
         }),
     },
     highlight: {
-        backgroundColor: blue,
+        backgroundColor: Platform.select({ ios: blue, android: purple }),
     },
     highlightDisabled: {
         backgroundColor: Platform.select({
             ios: blue,
-            android: gray.lightest,
+            android: '#AAA',
         }),
     },
     marker: {
         ...Platform.select({
-            ios: {
-                marginTop: 1,
-            },
+            ios: {},
             android: {
-                marginTop: 2,
-                borderColor: blue,
-                backgroundColor: blue,
-                transform: [{ scale: 1.75 }],
+                borderColor: purple,
+                backgroundColor: purple,
             },
         }),
     },
     markerDisabled: {
         ...Platform.select({
             ios: {
-                marginTop: 1,
                 backgroundColor: '#FFF',
                 shadowOpacity: 0.1,
                 borderColor: 'rgba(221,221,221,0.6)',
             },
             android: {
                 elevation: 0,
-                marginTop: 2,
-                backgroundColor: gray.light,
-                transform: [{ scale: 1.25 }],
+                backgroundColor: '#AAA',
             },
         }),
     },
@@ -67,7 +61,7 @@ export const RangeSliderDefault = {
         ...Platform.select({
             android: {
                 borderWidth: 5,
-                borderColor: blueLightest,
+                borderColor: purpleLightest,
                 transform: [{ scale: 2 }],
             },
         }),
@@ -94,13 +88,16 @@ export const RangeSlider = merge(RangeSliderDefault, {
     marker: {
         ...Platform.select({
             ios: {
+                marginTop: 1,
                 shadowColor: '#666',
                 shadowOpacity: 0.2,
                 shadowOffset: { width: 0, height: 1 },
                 backgroundColor: background.primary,
             },
             android: {
+                marginTop: 2,
                 elevation: 3,
+                transform: [{ scale: 1.75 }],
                 backgroundColor: background.secondary,
             },
         }),
@@ -108,10 +105,12 @@ export const RangeSlider = merge(RangeSliderDefault, {
     markerDisabled: {
         ...Platform.select({
             ios: {
+                marginTop: 1,
                 shadowOpacity: 0.2,
                 shadowOffset: { width: 0, height: 1 },
             },
             android: {
+                marginTop: 2,
                 borderWidth: 3,
                 borderColor: '#FFF',
                 backgroundColor: gray.light,
@@ -119,21 +118,28 @@ export const RangeSlider = merge(RangeSliderDefault, {
             },
         }),
     },
-    markerOnPress: {},
+    markerOnPress: {
+        ...Platform.select({
+            android: {
+                //TODO: Check for merge => platform bug
+                transform: [{ scale: 2 }],
+            },
+        }),
+    },
 });
 
-export const RangeSliderSuccess = merge(RangeSlider, {
+export const rangeSliderSuccess = merge(RangeSlider, {
     highlight: {
         backgroundColor: brand.success,
     },
 });
 
-export const RangeSliderWarning = merge(RangeSlider, {
+export const rangeSliderWarning = merge(RangeSlider, {
     highlight: {
         backgroundColor: brand.warning,
     },
 });
-export const RangeSliderDanger = merge(RangeSlider, {
+export const rangeSliderDanger = merge(RangeSlider, {
     highlight: {
         backgroundColor: brand.danger,
     },

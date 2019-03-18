@@ -1,5 +1,6 @@
 import { brand, gray, font } from '../variables';
 import { merge } from '../variables-helpers';
+import { Platform } from 'react-native';
 
 export const ProgressCircleDefault = {
     container: {
@@ -7,14 +8,21 @@ export const ProgressCircleDefault = {
     },
     circle: {
         width: 100,
+        borderColor: Platform.select({ android: 'rgb(98,0,238)' }),
     },
     fill: {
         //Just allow these 2 properties
         width: 3, // (Thickness),
+        backgroundColor: Platform.select({ android: 'rgb(98,0,238)' }),
     },
     text: {
         // All TextStyle properties are allowed
         fontSize: 18,
+        ...Platform.select({
+            android: {
+                color: 'rgb(98,0,238)',
+            },
+        }),
     },
 };
 
@@ -40,7 +48,7 @@ export const ProgressCircle = merge(ProgressCircleDefault, {
         fontSize: font.sizeLarge,
     },
 });
-export const ProgressCircleSuccess = merge(ProgressCircle, {
+export const progressCircleSuccess = merge(ProgressCircle, {
     fill: {
         backgroundColor: brand.success,
     },
@@ -48,7 +56,7 @@ export const ProgressCircleSuccess = merge(ProgressCircle, {
         color: brand.success,
     },
 });
-export const ProgressCircleDanger = merge(ProgressCircle, {
+export const progressCircleDanger = merge(ProgressCircle, {
     fill: {
         backgroundColor: brand.danger,
     },

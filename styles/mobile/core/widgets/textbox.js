@@ -8,6 +8,9 @@ import { Platform } from 'react-native';
 ========================================================================== */
 
 export const TextBox = {
+    // container: {
+    //     borderWidth: 5,
+    // },
     label: {
         color: gray.darker,
         fontSize: font.size,

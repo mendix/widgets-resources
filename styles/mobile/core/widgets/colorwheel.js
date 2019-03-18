@@ -10,7 +10,7 @@ export const ColorWheelDefault = {
     },
     thumbnail: {
         // All ViewStyle properties are allowed
-        borderColor: background.primary,
+        borderColor: '#FFF',
         borderWidth: 5,
     },
 };

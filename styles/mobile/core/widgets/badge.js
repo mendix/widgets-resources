@@ -5,18 +5,19 @@ import { merge } from '../variables-helpers';
 export const BadgeDefault = {
     container: {
         // All ViewStyle properties are allowed
-        backgroundColor: gray.lighter,
+        backgroundColor: '#ccc',
     },
     text: {
         // All TextStyle properties are allowed
-        fontSize: button.fontSize,
-        color: gray.darker,
+        fontSize: 14,
+        color: '#444',
     },
 };
+
 export const badgePrimary = merge(BadgeDefault, {
     container: {
         // All ViewStyle properties are allowed
-        backgroundColor: button.primary.background,
+        backgroundColor: button.primary.backgroundColor,
     },
     text: {
         // All TextStyle properties are allowed
@@ -25,7 +26,7 @@ export const badgePrimary = merge(BadgeDefault, {
 });
 export const badgeSuccess = merge(BadgeDefault, {
     container: {
-        backgroundColor: button.success.background,
+        backgroundColor: button.success.backgroundColor,
     },
     text: {
         color: button.success.color,
@@ -33,7 +34,7 @@ export const badgeSuccess = merge(BadgeDefault, {
 });
 export const badgeWarning = merge(BadgeDefault, {
     container: {
-        backgroundColor: button.warning.background,
+        backgroundColor: button.warning.backgroundColor,
     },
     text: {
         color: button.warning.color,
@@ -41,7 +42,7 @@ export const badgeWarning = merge(BadgeDefault, {
 });
 export const badgeDanger = merge(BadgeDefault, {
     container: {
-        backgroundColor: button.danger.background,
+        backgroundColor: button.danger.backgroundColor,
     },
     text: {
         color: button.danger.color,

@@ -312,6 +312,127 @@
                     }
                 ]
             }
+        ],
+        "Badge": [
+            {
+                "name": "Badge style",
+                "type": "Dropdown",
+                "description": "Style of the Badge.",
+                "options": [
+                    {
+                        "name": "Default",
+                        "class": ""
+                    },
+                    {
+                        "name": "Primary",
+                        "class": "badgePrimary"
+                    },
+                    {
+                        "name": "Success",
+                        "class": "badgeSuccess"
+                    },
+                    {
+                        "name": "Warning",
+                        "class": "badgeWarning"
+                    },
+                    {
+                        "name": "Danger",
+                        "class": "badgeDanger"
+                    }
+                ]
+            }
+        ],
+        "ProgressBar": [
+            {
+                "name": "Progress bar style",
+                "type": "Dropdown",
+                "description": "Style of the Progress bar.",
+                "options": [
+                    {
+                        "name": "Primary",
+                        "class": ""
+                    },
+                    {
+                        "name": "Success",
+                        "class": "progressBarSuccess"
+                    },
+                    {
+                        "name": "Danger",
+                        "class": "progressBarDanger"
+                    }
+                ]
+            }
+        ],
+        "ProgressCircle": [
+            {
+                "name": "Progress circle style",
+                "type": "Dropdown",
+                "description": "Style of the Progress circle.",
+                "options": [
+                    {
+                        "name": "Primary",
+                        "class": ""
+                    },
+                    {
+                        "name": "Success",
+                        "class": "progressCircleSuccess"
+                    },
+                    {
+                        "name": "Danger",
+                        "class": "progressCircleDanger"
+                    }
+                ]
+            }
+        ],
+        "RangeSlider": [
+            {
+                "name": "Range Slider style",
+                "type": "Dropdown",
+                "description": "Style of the Range Slider.",
+                "options": [
+                    {
+                        "name": "Primary",
+                        "class": ""
+                    },
+                    {
+                        "name": "Success",
+                        "class": "rangeSliderSuccess"
+                    },
+                    {
+                        "name": "Warning",
+                        "class": "rangeSliderWarning"
+                    },
+                    {
+                        "name": "Danger",
+                        "class": "rangeSliderDanger"
+                    }
+                ]
+            }
+        ],
+        "Slider": [
+            {
+                "name": "Slider style",
+                "type": "Dropdown",
+                "description": "Style of the Slider.",
+                "options": [
+                    {
+                        "name": "Primary",
+                        "class": ""
+                    },
+                    {
+                        "name": "Success",
+                        "class": "sliderSuccess"
+                    },
+                    {
+                        "name": "Warning",
+                        "class": "sliderWarning"
+                    },
+                    {
+                        "name": "Danger",
+                        "class": "sliderDanger"
+                    }
+                ]
+            }
         ]
     }
 }

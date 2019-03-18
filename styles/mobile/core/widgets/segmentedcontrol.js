@@ -3,6 +3,7 @@ import { gray, brand, font } from '../variables';
 import { Platform } from 'react-native';
 
 const blue = 'rgb(0,122,255)';
+const purple = 'rgb(98,0,238)';
 
 export const SegmentedControlDefault = {
     container: {
@@ -39,8 +40,8 @@ export const SegmentedControlDefault = {
                 backgroundColor: blue,
             },
             android: {
-                borderColor: blue,
-                backgroundColor: blue,
+                borderColor: purple,
+                backgroundColor: purple,
             },
         }),
     },

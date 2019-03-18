@@ -6,12 +6,20 @@ export const ProgressBarDefault = {
     bar: {
         // All ViewStyle properties are allowed
         width: '100%',
+        ...Platform.select({
+            android: {
+                borderRadius: 0,
+                borderWidth: 0,
+                backgroundColor: 'rgba(98,0,238, 0.2)',
+            },
+        }),
     },
     fill: {
         //Just allow this property
-        // backgroundColor: brand.primary,
+        backgroundColor: Platform.select({ android: 'rgb(98,0,238)' }),
     },
 };
+
 // com_mendix_widget_native_ProgressBar
 export const ProgressBar = merge(ProgressBarDefault, {
     bar: {
@@ -32,7 +40,8 @@ export const ProgressBar = merge(ProgressBarDefault, {
         backgroundColor: brand.primary,
     },
 });
-export const ProgressBarSuccess = merge(ProgressBar, {
+
+export const progressBarSuccess = merge(ProgressBar, {
     bar: {
         borderColor: Platform.select({ ios: brand.success }), //TODO: Check for merge => platform bug
         backgroundColor: Platform.select({ android: `rgba(${hexToRGBString(brand.success)},0.2)` }),
@@ -41,7 +50,8 @@ export const ProgressBarSuccess = merge(ProgressBar, {
         backgroundColor: brand.success,
     },
 });
-export const ProgressBarDanger = merge(ProgressBar, {
+
+export const progressBarDanger = merge(ProgressBar, {
     bar: {
         borderColor: Platform.select({ ios: brand.danger }), //TODO: Check for merge => platform bug
         backgroundColor: Platform.select({ android: `rgba(${hexToRGBString(brand.danger)},0.2)` }),

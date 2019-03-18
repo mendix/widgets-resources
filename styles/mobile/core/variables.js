@@ -36,7 +36,8 @@ export const background = {
 // Border Style
 export const border = {
     color: '#ddd',
-    radius: Platform.select({ ios: 10, android: 5 }),
+    radius: Platform.select({ ios: 5, android: 5 }),
+    // radius: Platform.select({ ios: 10, android: 5 }),  //TODO: Create design property
 };
 
 // Font Styles
@@ -72,31 +73,37 @@ export const spacing = {
 // Button Styles
 export const button = {
     fontSize: font.size,
-    borderRadius: Platform.select({ ios: border.radius + 16, android: border.radius }),
+    borderRadius: Platform.select({ ios: border.radius, android: border.radius }), //TODO: Create design property
+    // borderRadius: Platform.select({ ios: border.radius + 16, android: border.radius }),
 
+    header: {
+        color: brand.primary,
+        borderColor: 'transparent',
+        backgroundColor: 'transparent',
+    },
     primary: {
         color: setContrast(brand.primary),
         borderColor: brand.primary,
-        background: brand.primary,
+        backgroundColor: brand.primary,
     },
     secondary: {
         color: brand.primary,
         borderColor: brand.primary,
-        background: 'transparent',
+        backgroundColor: 'transparent',
     },
     success: {
         color: setContrast(brand.success),
         borderColor: brand.success,
-        background: brand.success,
+        backgroundColor: brand.success,
     },
     warning: {
         color: setContrast(brand.warning),
         borderColor: brand.warning,
-        background: brand.warning,
+        backgroundColor: brand.warning,
     },
     danger: {
         color: setContrast(brand.danger),
         borderColor: brand.danger,
-        background: brand.danger,
+        backgroundColor: brand.danger,
     },
 };

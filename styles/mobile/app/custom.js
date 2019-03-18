@@ -44,7 +44,7 @@ export const btnListItem = {
     },
     caption: {
         width: '100%',
-        height: '100%',
+        // height: '100%',
         textAlign: 'left',
         ...Platform.select({
             ios: {
@@ -139,3 +139,10 @@ export const homeHeaderPhone = {
 //     aspectRatio: 1,
 //     resizeMode: 'contain',
 // };
+
+export const fullWidthBar = {
+    // progress bar
+    bar: {
+        width: '100%',
+    },
+};
