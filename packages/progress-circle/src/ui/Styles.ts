@@ -4,7 +4,7 @@ import { Platform, TextStyle, ViewStyle } from "react-native";
 export interface ProgressCircleStyle extends Style {
     container: ViewStyle;
     circle: {
-        width: number;
+        size: number;
         borderWidth: number;
         borderColor: string;
     };
@@ -19,7 +19,7 @@ export interface ProgressCircleStyle extends Style {
 export const defaultProgressCircleStyle: ProgressCircleStyle = {
     container: {},
     circle: {
-        width: 100,
+        size: 100,
         borderWidth: 1,
         borderColor: Platform.select({ ios: "rgb(0, 122, 255)", android: "rgb(98,0,238)" })
     },

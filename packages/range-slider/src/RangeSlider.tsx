@@ -5,11 +5,7 @@ import { LayoutChangeEvent, View } from "react-native";
 
 import { RangeSliderProps } from "../typings/RangeSliderProps";
 import { Marker } from "./Marker";
-import { defaultRangeSliderStyle, RangeSliderStyle } from "./ui/Styles";
-
-interface State {
-    width?: number;
-}
+import { defaultRangeSliderStyle, RangeSliderStyle, State } from "./ui/Styles";
 
 export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, State> {
     readonly state: State = {};

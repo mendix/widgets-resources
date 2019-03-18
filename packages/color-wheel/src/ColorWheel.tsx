@@ -1,24 +1,10 @@
-import { flattenStyles, Style } from "@native-components/util-widgets";
+import { flattenStyles } from "@native-components/util-widgets";
 import colorsys from "colorsys";
 import { Component, createElement } from "react";
-import { ViewStyle } from "react-native";
 import { ColorWheel as RNColorWheel, HSV } from "react-native-color-wheel";
 
 import { ColorWheelProps } from "../typings/ColorWheelProps";
-
-interface ColorWheelStyle extends Style {
-    container: ViewStyle;
-    thumbnail: ViewStyle;
-}
-
-const defaultColorWheelStyle: ColorWheelStyle = {
-    container: {},
-    thumbnail: {
-        width: 50,
-        borderWidth: 5,
-        borderColor: "#FFF"
-    }
-};
+import { ColorWheelStyle, defaultColorWheelStyle } from "./ui/Styles";
 
 export class ColorWheel extends Component<ColorWheelProps<ColorWheelStyle>> {
     private readonly onChangeHandler = this.onChange.bind(this);
@@ -30,7 +16,7 @@ export class ColorWheel extends Component<ColorWheelProps<ColorWheelStyle>> {
             <RNColorWheel
                 style={this.styles.container}
                 initialColor={this.props.color.value}
-                thumbSize={Number(this.styles.thumbnail.width) || Number(this.styles.thumbnail.height)}
+                thumbSize={Number(this.styles.thumbnail.size)}
                 onColorChange={this.onChangeHandler}
                 onColorChangeComplete={this.onChangeCompleteHandler}
                 thumbStyle={this.styles.thumbnail}

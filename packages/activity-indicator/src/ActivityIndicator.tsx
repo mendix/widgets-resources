@@ -1,23 +1,9 @@
-import { flattenStyles, Style } from "@native-components/util-widgets";
+import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
-import { ActivityIndicator as RNActivityIndicator, View, ViewStyle } from "react-native";
+import { ActivityIndicator as RNActivityIndicator, View } from "react-native";
 
 import { ActivityIndicatorProps } from "../typings/ActivityIndicatorProps";
-
-interface ActivityIndicatorStyle extends Style {
-    container: ViewStyle;
-    indicator: {
-        color: string;
-    };
-}
-
-const defaultActivityStyle: ActivityIndicatorStyle = {
-    indicator: {
-        color: "gray"
-    },
-    container: {}
-};
-
+import { ActivityIndicatorStyle, defaultActivityStyle } from "./ui/Styles";
 export class ActivityIndicator extends Component<ActivityIndicatorProps<ActivityIndicatorStyle>> {
     private readonly styles = flattenStyles(defaultActivityStyle, this.props.style);
 

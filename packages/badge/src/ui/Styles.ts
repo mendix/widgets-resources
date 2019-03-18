@@ -1,4 +1,10 @@
-import { StyleSheet } from "react-native";
+import { Style } from "@native-components/util-widgets";
+import { StyleSheet, TextStyle, ViewStyle } from "react-native";
+
+export interface BadgeStyle extends Style {
+    container: ViewStyle;
+    text: TextStyle;
+}
 
 export const styles = StyleSheet.create({
     container: {
@@ -17,3 +23,8 @@ export const styles = StyleSheet.create({
         alignSelf: "center"
     }
 });
+
+export const defaultBadgeStyle: BadgeStyle = {
+    container: styles.badge,
+    text: styles.text
+};

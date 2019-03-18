@@ -1,27 +1,10 @@
-import { flattenStyles, Style } from "@native-components/util-widgets";
+import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
-import { Text, TextStyle, View, ViewStyle } from "react-native";
+import { Text, View } from "react-native";
 import { WebView as RNWebView } from "react-native-webview";
 
 import { WebViewProps } from "../typings/WebViewProps";
-
-interface WebViewStyle extends Style {
-    container: ViewStyle;
-    errorContainer: ViewStyle;
-    errorText: TextStyle;
-}
-
-const defaultWebViewStyle: WebViewStyle = {
-    container: {
-        width: "100%",
-        height: "100%"
-    },
-    errorContainer: {},
-    errorText: {
-        color: "red",
-        fontWeight: "bold"
-    }
-};
+import { defaultWebViewStyle, WebViewStyle } from "./ui/Styles";
 
 export class WebView extends Component<WebViewProps<WebViewStyle>> {
     private readonly onLoadHandler = this.onLoad.bind(this);

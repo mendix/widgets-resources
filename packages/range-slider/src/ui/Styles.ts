@@ -1,6 +1,10 @@
 import { Style } from "@native-components/util-widgets";
 import { Platform, ViewStyle } from "react-native";
 
+export interface State {
+    width?: number;
+}
+
 export interface RangeSliderStyle extends Style {
     container: ViewStyle;
     track: ViewStyle;
@@ -19,7 +23,6 @@ const purpleLighter = "rgba(98,0,238, 0.3)";
 const purpleLightest = "rgba(98,0,238, 0.1)";
 
 export const defaultRangeSliderStyle: RangeSliderStyle = {
-    // All these properties allow ViewStyle properties
     container: {},
     track: {
         backgroundColor: Platform.select({ ios: blueLighter, android: purpleLighter })

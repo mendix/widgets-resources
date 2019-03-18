@@ -5,11 +5,7 @@ import { LayoutChangeEvent, View } from "react-native";
 
 import { SliderProps } from "../typings/SliderProps";
 import { Marker } from "./Marker";
-import { defaultSliderStyle, SliderStyle } from "./ui/Styles";
-
-interface State {
-    width?: number;
-}
+import { defaultSliderStyle, SliderStyle, State } from "./ui/Styles";
 
 export class Slider extends Component<SliderProps<SliderStyle>, State> {
     readonly state: State = {};

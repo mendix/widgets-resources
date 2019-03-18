@@ -1,19 +1,9 @@
-import { flattenStyles, Style } from "@native-components/util-widgets";
+import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
-import { Platform, Text, TextStyle, TouchableNativeFeedback, TouchableOpacity, View, ViewStyle } from "react-native";
+import { Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
 
 import { BadgeProps } from "../typings/BadgeProps";
-import { styles } from "./ui/Styles";
-
-interface BadgeStyle extends Style {
-    container: ViewStyle;
-    text: TextStyle;
-}
-
-const defaultBadgeStyle: BadgeStyle = {
-    container: styles.badge,
-    text: styles.text
-};
+import { BadgeStyle, defaultBadgeStyle, styles } from "./ui/Styles";
 
 export class Badge extends Component<BadgeProps<BadgeStyle>> {
     private readonly onClickHandler = this.onClick.bind(this);

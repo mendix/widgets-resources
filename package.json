@@ -5,7 +5,6 @@
         "postinstall": "lerna bootstrap",
         "format": "pretty-quick",
         "lint": "lerna run lint",
-        "prebuild": "lerna link",
         "build": "lerna run build",
         "release": "lerna version --conventional-commits"
     },

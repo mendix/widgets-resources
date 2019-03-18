@@ -23,7 +23,7 @@ export class ProgressCircle extends Component<ProgressCircleProps<ProgressCircle
                 progress={this.progress}
                 textStyle={this.styles.text as string} // remove this after PR be accepted (https://github.com/oblador/react-native-progress/pull/148)
                 color={this.styles.fill.backgroundColor}
-                size={Number(this.styles.circle.width)}
+                size={Number(this.styles.circle.size)}
                 borderWidth={this.styles.circle.borderWidth}
                 borderColor={this.styles.circle.borderColor}
                 thickness={this.styles.fill.width}

@@ -1,27 +1,10 @@
-import { flattenStyles, Style } from "@native-components/util-widgets";
+import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
-import { View, ViewStyle } from "react-native";
+import { View } from "react-native";
 import RNQRCode from "react-native-qrcode-svg";
 
 import { QRCodeProps } from "../typings/QRCodeProps";
-
-interface QRCodeStyle extends Style {
-    container: ViewStyle;
-    qrcode: {
-        size: number;
-        color: string;
-        backgroundColor: string;
-    };
-}
-
-const defaultQRCodeStyle: QRCodeStyle = {
-    container: {},
-    qrcode: {
-        size: 100,
-        color: "black",
-        backgroundColor: "white"
-    }
-};
+import { defaultQRCodeStyle } from "./ui/Styles";
 
 export class QRCode extends Component<QRCodeProps<undefined>> {
     private readonly styles = flattenStyles(defaultQRCodeStyle, this.props.style);

@@ -1,37 +1,14 @@
-import { flattenStyles, Style } from "@native-components/util-widgets";
+import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
-import { ActivityIndicator, View, ViewStyle } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import Video from "react-native-video";
 
 import { VideoPlayerProps } from "../typings/VideoPlayerProps";
+import { defaultVideoStyle } from "./ui/Styles";
 
 interface State {
     loading: boolean;
 }
-
-interface VideoStyle extends Style {
-    container: ViewStyle;
-    indicator: {
-        color: string;
-    };
-    video: ViewStyle;
-}
-
-const defaultVideoStyle: VideoStyle = {
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "black"
-    },
-    indicator: {
-        color: "white"
-    },
-    video: {
-        width: "100%",
-        height: "100%"
-    }
-};
 
 export class VideoPlayer extends Component<VideoPlayerProps<undefined>, State> {
     readonly state = {

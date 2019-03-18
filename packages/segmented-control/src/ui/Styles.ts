@@ -13,16 +13,13 @@ const blue = "rgb(0,122,255)";
 const purple = "rgb(98,0,238)";
 export const defaultSegmentedControlStyle: SegmentedControlStyle = {
     container: {
-        // All ViewStyle properties are allowed
         borderRadius: Platform.select({ ios: 5, android: 3 })
     },
     tab: {
-        // All ViewStyle properties are allowed
         borderRadius: 0,
         borderColor: Platform.select({ ios: blue, android: "#CCC" })
     },
     text: {
-        // All TextStyle properties are allowed
         ...(Platform.select({
             ios: {
                 color: blue
@@ -35,7 +32,6 @@ export const defaultSegmentedControlStyle: SegmentedControlStyle = {
         }) as TextStyle)
     },
     activeTab: {
-        // All ViewStyle properties are allowed
         ...Platform.select({
             ios: {
                 borderColor: blue,
@@ -48,7 +44,6 @@ export const defaultSegmentedControlStyle: SegmentedControlStyle = {
         })
     },
     activeTabText: {
-        // All TextStyle properties are allowed
         color: "#fff"
     }
 };

@@ -1,41 +1,12 @@
-import { flattenStyles, Style } from "@native-components/util-widgets";
+import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
-import { Alert, ViewStyle } from "react-native";
-import Geocoder from "react-native-geocoder";
+import { Platform } from "react-native";
 import MapView, { Marker, Region } from "react-native-maps";
 
 import { MapsProps } from "../typings/MapsProps";
+import { defaultMapsStyle, MapsStyle } from "./ui/Styles";
 
-interface MarkerStyle {
-    color: string;
-    opacity: number;
-}
-
-interface MapsStyle extends Style {
-    container: ViewStyle;
-    marker: MarkerStyle;
-}
-
-const defaultMapsStyle: MapsStyle = {
-    container: {
-        width: "100%",
-        height: "100%"
-    },
-    marker: {
-        color: "red",
-        opacity: 1
-    }
-};
-
-type LatLong = [number, number];
-
-interface MapsState {
-    geocodeCache: {
-        [address: string]: LatLong | undefined;
-    };
-}
-
-export class Maps extends Component<MapsProps<MapsStyle>, MapsState> {
+export class Maps extends Component<MapsProps<MapsStyle>> {
     private readonly onRegionChangeHandler = this.onRegionChange.bind(this);
     private readonly styles = flattenStyles(defaultMapsStyle, this.props.style);
 
