@@ -9,5 +9,6 @@ interface CommonProps<Style> {
 }
 
 export interface QRCodeProps<Style> extends CommonProps<Style> {
-    value: EditableValue<string>;
+    value?: EditableValue<string>;
+    defaultValue?: string;
 }

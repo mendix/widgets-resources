@@ -39,7 +39,7 @@ export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, S
 
     private readonly onLayoutHandler = this.onLayout.bind(this);
     private readonly onChangeHandler = this.onChange.bind(this);
-    private readonly onSlidingCompleteHandler = this.onSlidingComplete.bind(this);
+    private readonly onChangeCompleteHandler = this.onChangeComplete.bind(this);
     private readonly styles = flattenStyles(defaultRangeSliderStyle, this.props.style);
 
     render(): JSX.Element {
@@ -71,7 +71,7 @@ export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, S
             selectedStyle: enabledOne || enabledTwo ? this.styles.highlight : this.styles.highlightDisabled,
             pressedMarkerStyle: this.styles.markerActive,
             onValuesChange: this.onChangeHandler,
-            onValuesChangeFinish: this.onSlidingCompleteHandler,
+            onValuesChangeFinish: this.onChangeCompleteHandler,
             sliderLength: this.state.width,
             isMarkersSeparated: true,
             customMarkerLeft: (props: MarkerProps) => (
@@ -109,9 +109,9 @@ export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, S
         }
     }
 
-    private onSlidingComplete(): void {
-        if (this.props.onSlidingComplete && this.props.onSlidingComplete.canExecute) {
-            this.props.onSlidingComplete.execute();
+    private onChangeComplete(): void {
+        if (this.props.onChangeComplete && this.props.onChangeComplete.canExecute) {
+            this.props.onChangeComplete.execute();
         }
     }
 }

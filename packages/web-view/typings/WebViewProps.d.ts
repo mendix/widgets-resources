@@ -11,12 +11,7 @@ interface CommonProps<Style> {
 export interface WebViewProps<Style> extends CommonProps<Style> {
     url?: EditableValue<string>;
     staticUrl?: string;
-    javaScriptEnabled: boolean;
-    allowsInlineMediaPlayback: boolean;
-    scrollEnabled: boolean;
-    userAgent?: string;
     onLoad?: ActionValue;
     onError?: ActionValue;
-    onLoadStart?: ActionValue;
-    onLoadEnd?: ActionValue;
+    userAgent?: string;
 }

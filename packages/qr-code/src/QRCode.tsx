@@ -27,14 +27,16 @@ export class QRCode extends Component<QRCodeProps<undefined>> {
     private readonly styles = flattenStyles(defaultQRCodeStyle, this.props.style);
 
     render(): JSX.Element | null {
-        if (!this.props.value.value) {
+        const value = this.props.value && this.props.value.value ? this.props.value.value : this.props.defaultValue;
+
+        if (!value) {
             return null;
         }
 
         return (
             <View style={this.styles.container}>
                 <RNQRCode
-                    value={this.props.value.value}
+                    value={value}
                     size={this.styles.qrcode.size}
                     color={this.styles.qrcode.color}
                     backgroundColor={this.styles.qrcode.backgroundColor}

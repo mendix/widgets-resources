@@ -3,18 +3,21 @@ import { Dimensions, Platform } from "react-native";
 
 const SPRINTR_FEEDBACK_URL = "https://sprintr.home.mendix.com/submitissue/";
 
-export const sendToSprintr = (data: any, cb: (success: boolean) => void) => {
+export const sendToSprintr = (
+    data: { feedbackMsg: string; sprintrAppId: string; screenshot: string },
+    cb: (success: boolean) => void
+) => {
     const shortname = data.feedbackMsg ? data.feedbackMsg.substring(0, 200) : "";
     const description = data.feedbackMsg ? data.feedbackMsg.substring(200) : "";
     const dataToSend = {
         apiversion: "1.0",
-        application: data.appId,
+        application: data.sprintrAppId,
         username: "Native Feedback",
         emailaddress: "native@mendix.com",
         userroles: "",
         shortname,
         description,
-        img: data.allowScreenshot ? data.screenshot.replace(/(data:image\/png;base64,)/, "") : "",
+        img: data.screenshot.replace(/(data:image\/png;base64,)/, ""),
         browser: "React Native for " + Platform.OS,
         screensize: Dimensions.get("window").width + "x" + Dimensions.get("window").height,
         issuetype: "issue",

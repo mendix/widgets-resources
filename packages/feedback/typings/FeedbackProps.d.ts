@@ -9,7 +9,7 @@ interface CommonProps<Style> {
 }
 
 export interface FeedbackProps<Style> extends CommonProps<Style> {
-    appId: string;
+    sprintrapp: string;
     allowScreenshot: boolean;
     hideLogo: boolean;
 }

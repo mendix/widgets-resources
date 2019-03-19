@@ -16,7 +16,7 @@ export interface MarkersType {
     action?: ActionValue;
 }
 
-export type MapTypeEnum = "standard" | "satellite" | "hybrid" | "terrain";
+export type MapTypeEnum = "standard" | "satellite" | "hybrid";
 
 export type ProviderEnum = "default" | "google";
 
@@ -35,12 +35,6 @@ export interface MapsProps<Style> extends CommonProps<Style> {
     provider: ProviderEnum;
     showsUserLocation: boolean;
     showsMyLocationButton: boolean;
-    showsPointsOfInterest: boolean;
-    showsCompass: boolean;
-    showsScale: boolean;
-    showsBuildings: boolean;
-    showsTraffic: boolean;
-    showsIndoors: boolean;
     zoomEnabled: boolean;
     minZoomLevel: number;
     maxZoomLevel: number;

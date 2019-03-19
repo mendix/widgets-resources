@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.qrcode.QRCode" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
-    xmlns="http://www.mendix.com/widget/1.0/"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
+<widget id="com.mendix.widget.native.qrcode.QRCode" supportedPlatform="All" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
     <name>QR code</name>
     <description>Displays a QR code</description>
     <icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAIVJREFUWEftlNEKwCAIRXX//8+tYhMmSN0YKOKB6CEmeqYyEbV+YFr7fsY8QuFcz+2GGNAVWbyVWgbQOPEMWP9Sv68M7MZxN1AJVAKjFWdb6q622J2CFWGmQAygWAZQ/A30So4M/EWNYZ4pOCWOAXSD5TVgbTT9nsZAJVAJ1B4QAyhJDBDdQaBQGZb6/OEAAAAASUVORK5CYII=</icon>
     <properties>
-        <property key="value" type="attribute">
-            <caption>Value</caption>
-            <category>Data source</category>
-            <description>Value of the QR code</description>
-            <attributeTypes>
-                <attributeType name="String"/>
-            </attributeTypes>
-        </property>
+        <propertyGroup caption="Data source">
+            <propertyGroup caption="QR code value">
+                <property key="value" type="attribute" required="false">
+                    <caption>Dynamic value</caption>
+                    <description>Value of the QR code that will be displayed.</description>
+                    <attributeTypes>
+                        <attributeType name="String"/>
+                    </attributeTypes>
+                </property>
+                <property key="defaultValue" type="string" required="false">
+                    <caption>Static value</caption>
+                    <description>Used when no dynamic value is provided.</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
     </properties>
 </widget>

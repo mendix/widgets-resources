@@ -18,8 +18,8 @@
         <xs:attribute name="id" type="xs:string" use="required"/>
         <xs:attribute name="needsEntityContext" type="xs:boolean" use="required"/>
         <xs:attribute name="pluginWidget" type="xs:boolean"/>
-        <xs:attribute name="labeled" type="xs:boolean" default="false"/>
         <xs:attribute name="mobile" type="xs:boolean" default="false"/>
+        <xs:attribute name="supportedPlatform" type="platformType" default="All"/>
         <xs:attribute name="offlineCapable" type="xs:boolean" default="false"/>
     </xs:complexType>
 
@@ -28,15 +28,31 @@
     </xs:complexType>
 
     <xs:complexType name="propertiesType">
-        <xs:sequence>
-            <xs:element name="property" type="propertyType" minOccurs="1" maxOccurs="unbounded"/>
-        </xs:sequence>
+        <xs:choice>
+            <xs:sequence>
+                <xs:element name="propertyGroup" type="propertyGroupType" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:sequence>
+                <xs:choice maxOccurs="unbounded">
+                    <xs:element name="property" type="propertyType" minOccurs="1" maxOccurs="unbounded"/>
+                    <xs:element name="systemProperty" type="systemPropertyType" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:choice>
+            </xs:sequence>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="propertyGroupType">
+        <xs:complexContent>
+            <xs:extension base="propertiesType">
+                <xs:attribute name="caption" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <xs:complexType name="propertyType">
         <xs:sequence>
             <xs:element name="caption" type="xs:string"/>
-            <xs:element name="category" type="xs:string"/>
+            <xs:element name="category" type="xs:string" minOccurs="0"/>
             <xs:element name="description" type="xs:string"/>
             <xs:element name="attributeTypes" type="attributeTypesType" minOccurs="0"/>
             <xs:element name="enumerationValues" type="enumerationValuesType" minOccurs="0"/>
@@ -159,4 +175,26 @@
         </xs:simpleContent>
     </xs:complexType>
 
+    <xs:simpleType name="platformType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="All"/>
+            <xs:enumeration value="Native"/>
+            <xs:enumeration value="Web"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="systemPropertyType">
+        <xs:sequence>
+            <xs:element name="category" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="key" type="systemPropertyKey" use="required"/>
+    </xs:complexType>
+
+    <xs:simpleType name="systemPropertyKey">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Label"/>
+            <xs:enumeration value="Name"/>
+            <xs:enumeration value="TabIndex"/>
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>

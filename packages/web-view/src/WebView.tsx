@@ -26,8 +26,6 @@ const defaultWebViewStyle: WebViewStyle = {
 export class WebView extends Component<WebViewProps<WebViewStyle>> {
     private readonly onLoadHandler = this.onLoad.bind(this);
     private readonly onErrorHandler = this.onError.bind(this);
-    private readonly onLoadStartHandler = this.onLoadStart.bind(this);
-    private readonly onLoadEndHandler = this.onLoadEnd.bind(this);
     private readonly styles = flattenStyles(defaultWebViewStyle, this.props.style);
 
     render(): JSX.Element {
@@ -46,12 +44,7 @@ export class WebView extends Component<WebViewProps<WebViewStyle>> {
                 style={this.styles.container}
                 onLoad={this.onLoadHandler}
                 onError={this.onErrorHandler}
-                onLoadStart={this.onLoadStartHandler}
-                onLoadEnd={this.onLoadEndHandler}
-                javaScriptEnabled={this.props.javaScriptEnabled}
                 userAgent={this.props.userAgent}
-                allowsInlineMediaPlayback={this.props.allowsInlineMediaPlayback}
-                scrollEnabled={this.props.scrollEnabled}
                 useWebKit={true}
             />
         );
@@ -66,18 +59,6 @@ export class WebView extends Component<WebViewProps<WebViewStyle>> {
     private onError(): void {
         if (this.props.onError && this.props.onError.canExecute) {
             this.props.onError.execute();
-        }
-    }
-
-    private onLoadStart(): void {
-        if (this.props.onLoadStart && this.props.onLoadStart.canExecute) {
-            this.props.onLoadStart.execute();
-        }
-    }
-
-    private onLoadEnd(): void {
-        if (this.props.onLoadEnd && this.props.onLoadEnd.canExecute) {
-            this.props.onLoadEnd.execute();
         }
     }
 }

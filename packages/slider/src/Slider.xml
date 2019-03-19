@@ -1,86 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.slider.Slider" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
-    xmlns="http://www.mendix.com/widget/1.0/"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
+<widget id="com.mendix.widget.native.slider.Slider" supportedPlatform="All" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
     <name>Slider</name>
     <description>Change a number value using a slider.</description>
     <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAAEvQFx7AAAAIVBMVEUAAAD///9SuP+IiIhJsfdJsfhJsfeJiYlIsPhIsPeIiIjzihhCAAAACXRSTlMAARlJZb3I4/MVTrONAAAAz0lEQVRIx2NgQAMTgJhr1qpVEBZOwAmSrZy1agEDB151IMA4E6YJg8Ewk4EqgHMqLiu4Vs5cBQQLsNnOOomB3oAxwwFVIHMmWhDMRBWwWgUUWAUFy7GpwCLgOXMmwwgGLG0CqAKRMyeih9g0AkFISKAKOV4WAwVWkRNRWARmoAtMQRXQnBnAMAqGG2CKnDlzqgIeBcAsjZEUUEAnSMEMPApmggHNFFStAucApEywCjU3mONWUEwvR0JLXIzsjwJEQQoC8cWWSEab42iapQQAAD3okfmgsuelAAAAAElFTkSuQmCC</icon>
     <properties>
-        <property key="value" type="attribute">
-            <caption>Value</caption>
-            <category>Data source</category>
-            <description>The selected value on the slider</description>
-            <attributeTypes>
-                <attributeType name="Integer"/>
-                <attributeType name="Long"/>
-                <attributeType name="Decimal"/>
-            </attributeTypes>
-        </property>
-        <property key="minimumValue" type="attribute" required="false">
-            <caption>Minimum value</caption>
-            <category>Data source</category>
-            <description>When empty the 'Default minimum value' is used</description>
-            <attributeTypes>
-                <attributeType name="Integer"/>
-                <attributeType name="Long"/>
-                <attributeType name="Decimal"/>
-            </attributeTypes>
-        </property>
-        <property key="maximumValue" type="attribute" required="false">
-            <caption>Maximum value</caption>
-            <category>Data source</category>
-            <description>When empty the 'Default maximum value' is used</description>
-            <attributeTypes>
-                <attributeType name="Integer"/>
-                <attributeType name="Long"/>
-                <attributeType name="Decimal"/>
-            </attributeTypes>
-        </property>
-        <property key="defaultMinimumValue" type="integer" defaultValue="0">
-            <caption>Default minimum value</caption>
-            <category>Data source</category>
-            <description/>
-        </property>
-        <property key="defaultMaximumValue" type="integer" defaultValue="100">
-            <caption>Default maximum value</caption>
-            <category>Data source</category>
-            <description/>
-        </property>
-        <property key="editable" type="enumeration" defaultValue="default">
-            <caption>Editable</caption>
-            <category>Data source</category>
-            <description/>
-            <enumerationValues>
-                <enumerationValue key="default">Default</enumerationValue>
-                <enumerationValue key="never">Never</enumerationValue>
-            </enumerationValues>
-        </property>
-
-        <property key="onChange" type="action" required="false">
-            <caption>On change</caption>
-            <category>Events</category>
-            <description>Called continuously while the user is dragging the handle</description>
-        </property>
-        <property key="onSlidingComplete" type="action" required="false">
-            <caption>On sliding complete</caption>
-            <category>Events</category>
-            <description>Called when the user releases the handle, regardless of weither the value has changed</description>
-        </property>
-
-        <property key="step" type="attribute" required="false">
-            <caption>Step size</caption>
-            <category>Appearance</category>
-            <description>The interval between two selectable points (when empty the 'Default step size' is used)</description>
-            <attributeTypes>
-                <attributeType name="Integer"/>
-                <attributeType name="Long"/>
-                <attributeType name="Decimal"/>
-            </attributeTypes>
-        </property>
-        <property key="defaultStep" type="integer" defaultValue="1">
-            <caption>Default step size</caption>
-            <category>Appearance</category>
-            <description/>
-        </property>
+        <propertyGroup caption="Data source">
+            <propertyGroup caption="Current value">
+                <property key="value" type="attribute">
+                    <caption>Value</caption>
+                    <description>The selected value on the slider</description>
+                    <attributeTypes>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                        <attributeType name="Decimal"/>
+                    </attributeTypes>
+                </property>
+                <property key="editable" type="enumeration" defaultValue="default">
+                    <caption>Editable</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="default">Default</enumerationValue>
+                        <enumerationValue key="never">Never</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Minimum value">
+                <property key="minimumValue" type="attribute" required="false">
+                    <caption>Dynamic minimum value</caption>
+                    <description>The minimum value that can be selected.</description>
+                    <attributeTypes>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                        <attributeType name="Decimal"/>
+                    </attributeTypes>
+                </property>
+                <property key="defaultMinimumValue" type="integer" defaultValue="0">
+                    <caption>Static minimum value</caption>
+                    <description>Used when no dynamic value is provided.</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Maximum value">
+                <property key="maximumValue" type="attribute" required="false">
+                    <caption>Dynamic maximum value</caption>
+                    <description>The maximum value that can be selected.</description>
+                    <attributeTypes>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                        <attributeType name="Decimal"/>
+                    </attributeTypes>
+                </property>
+                <property key="defaultMaximumValue" type="integer" defaultValue="100">
+                    <caption>Static maximum value</caption>
+                    <description>Used when no dynamic value is provided.</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Step size">
+                <property key="step" type="attribute" required="false">
+                    <caption>Dynamic step size</caption>
+                    <description>The interval between two selectable points.</description>
+                    <attributeTypes>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                        <attributeType name="Decimal"/>
+                    </attributeTypes>
+                </property>
+                <property key="defaultStep" type="integer" defaultValue="1">
+                    <caption>Static step size</caption>
+                    <description>Used when no dynamic value is provided.</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="onChange" type="action" required="false">
+                <caption>On change</caption>
+                <description>Called continuously while the user is dragging the handle.</description>
+            </property>
+            <property key="onChangeComplete" type="action" required="false">
+                <caption>On change complete</caption>
+                <description>Called when the user releases the handle, regardless of whether the value has changed.</description>
+            </property>
+        </propertyGroup>
     </properties>
 </widget>

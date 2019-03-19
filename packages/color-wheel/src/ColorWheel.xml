@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.colorwheel.ColorWheel" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
-    xmlns="http://www.mendix.com/widget/1.0/"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
+<widget id="com.mendix.widget.native.colorwheel.ColorWheel" supportedPlatform="All" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
     <name>Color wheel</name>
     <description>Pick a color from a circular color input</description>
     <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAA5FBMVEUAAACAgIBVVVVgYGBVVVVmZmZdXV1iYmJVVVVeXl5ZWVlVVVVVVVVYWFhJtv9bW1tXV1dMs/pVVVVYWFhJs/hXV1dLtPhWVlZJsvhXV1dWVlZXV1dXV1dVVVVXV1dWVlZWVlZWVlZWVlZVVVVVVVVWVlZIsfdJsfdJsPdJsPhWVlZWVlZVVVVVVVVWVlZVVVVVVVVWVlZWVlZVVVVVVVVVVVVVVVVJsPdVVVVVVVVWVlZJsPdVVVVWVlZIsPdJsfdVVVVIsPdWVlZVVVVJsfhVVVVWVlZVVVVWVlZVVVVIsPdVVVWIl4c0AAAASnRSTlMAAgMICQoLDRITFBUYGhwcLzY2Q0ZGR0dJSUpPVWNkgoOFkpmcoaanqKyytba5vsXGx9bY293e4ODh4uPj5ebo6u3u7/Lz9Pb9/n9E/agAAAExSURBVHgB7dPZTsJAFMbxT0CpWivgIgiKslRxQUQEpbWAssic938fD4wx3KDOaWJC7O/q3Hz/pGkGke+lSs3RqFlKQSZemdLctBKHQKJBXxoJmKvSgiqMZYi1C7ZdaBPLwFSZV60kWLLFZxmmZqu8PvOzFkxNeGXp0+JzAlPEFu+/DUSBnE9L+Dn8hk9L+eED4T9h5X5j1vOyoQKeUl6ogGL/OxAFokCfR7Z+TDaffZiq8+pUP+cTPuswVeRVdxPMeuazCFNbY57d7wI7d3yMt2HsjNjbwd4rsXOYi10Re3wgdh2DwPoNfbrdgMw7aWtY2cCT3r9A6qhLzD+G3GGns48QnKFSQwdyNcVqEEuruTSkLnXgAlI9HehBKtCBAFKuDriQcgaKDRyIOW4QuD/tIx9N6qiDmf0nQgAAAABJRU5ErkJggg==</icon>
     <properties>
-        <property key="color" type="attribute">
-            <caption>Color</caption>
-            <category>Data source</category>
-            <description>Attribute containing a valid color like #d0d0d0, rgb(115,159,159) or rgba(195,226,226,1). Non-code color values such as 'red' are not supported</description>
-            <attributeTypes>
-                <attributeType name="String"/>
-            </attributeTypes>
-        </property>
-
-        <property key="onChange" type="action" required="false">
-            <caption>On change</caption>
-            <category>Events</category>
-            <description>Called continuously while the user is dragging the handle</description>
-        </property>
-        <property key="onChangeComplete" type="action" required="false">
-            <caption>On change complete</caption>
-            <category>Events</category>
-            <description>Called when the user releases the handle, regardless of weither the value has changed</description>
-        </property>
+        <propertyGroup caption="Data source">
+            <property key="color" type="attribute">
+                <caption>Color</caption>
+                <description>Attribute containing a valid color like #d0d0d0. Non-code color values such as 'red' are not supported.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="onChange" type="action" required="false">
+                <caption>On change</caption>
+                <description>Called continuously while the user is dragging the handle.</description>
+            </property>
+            <property key="onChangeComplete" type="action" required="false">
+                <caption>On change complete</caption>
+                <description>Called when the user releases the handle, regardless of whether the value has changed.</description>
+            </property>
+        </propertyGroup>
     </properties>
 </widget>

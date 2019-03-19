@@ -31,15 +31,27 @@ import {
 } from "./ui/styles";
 import { sendToSprintr } from "./utils/form";
 
-export class Feedback extends Component<FeedbackProps<undefined>> {
-    private isAndroid = Platform.OS === "android";
-    readonly state = {
+type Status = "todo" | "takingScreenshot" | "inprogress" | "done" | "error";
+
+interface State {
+    modalVisible: boolean;
+    sendScreenshot: boolean;
+    feedbackMsg: string;
+    screenshot: string;
+    status: Status;
+}
+
+export class Feedback extends Component<FeedbackProps<undefined>, State> {
+    readonly state: State = {
         modalVisible: false,
         sendScreenshot: true,
         feedbackMsg: "",
         screenshot: "",
         status: "todo"
     };
+
+    private isAndroid = Platform.OS === "android";
+
     private readonly onCommentButtonPressHandler = this.onCommentButtonPress.bind(this);
     private readonly onModalCloseHandler = this.onModalClose.bind(this);
     private readonly onScreenshotToggleChangeHandler = this.onScreenshotToggleValueChange.bind(this);
@@ -129,7 +141,7 @@ export class Feedback extends Component<FeedbackProps<undefined>> {
             case "inprogress":
                 return (
                     <Dialog.Container visible={this.state.modalVisible}>
-                        <Dialog.Description>Sending..</Dialog.Description>
+                        <Dialog.Description>Sending...</Dialog.Description>
                         <ActivityIndicator color="black" size="large" style={activityIndicatorStyle} />
                     </Dialog.Container>
                 );
@@ -171,10 +183,11 @@ export class Feedback extends Component<FeedbackProps<undefined>> {
     }
 
     private onSend(): void {
-        const data = { ...this.props, ...this.state };
-        if (!this.state.sendScreenshot) {
-            data.screenshot = "";
-        }
+        const data = {
+            feedbackMsg: this.state.feedbackMsg,
+            sprintrAppId: this.props.sprintrapp,
+            screenshot: this.state.sendScreenshot ? this.state.screenshot : ""
+        };
 
         this.setStatus("inprogress");
         sendToSprintr(data, this.onResultHandler);
@@ -192,7 +205,7 @@ export class Feedback extends Component<FeedbackProps<undefined>> {
         this.setState({ modalVisible, status: "todo" });
     }
 
-    private setStatus(status: string, callback?: () => void): void {
+    private setStatus(status: Status, callback?: () => void): void {
         this.setState({ status }, callback);
     }
 

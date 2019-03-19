@@ -1,6 +1,6 @@
 import { flattenStyles, Style } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
-import { Alert, Platform, ViewStyle } from "react-native";
+import { Alert, ViewStyle } from "react-native";
 import Geocoder from "react-native-geocoder";
 import MapView, { Marker, Region } from "react-native-maps";
 
@@ -62,24 +62,17 @@ export class Maps extends Component<MapsProps<MapsStyle>, MapsState> {
     }
 
     render(): JSX.Element {
-        const showsTraffic = this.props.mapType === "satellite" ? false : this.props.showsTraffic;
-        const isAndroid = Platform.OS === "android";
-        const mapType = this.props.mapType === "terrain" && !isAndroid ? "standard" : this.props.mapType;
+        const showsTraffic = this.props.mapType !== "satellite" ? true : false;
 
         return (
             <MapView
                 provider={this.props.provider === "default" ? null : this.props.provider}
                 region={this.region}
                 onRegionChangeComplete={this.onRegionChangeHandler}
-                mapType={mapType}
+                mapType={this.props.mapType}
                 showsUserLocation={this.props.showsUserLocation}
                 showsMyLocationButton={this.props.showsMyLocationButton}
-                showsPointsOfInterest={this.props.showsPointsOfInterest}
-                showsCompass={this.props.showsCompass}
-                showsScale={this.props.showsScale}
-                showsBuildings={this.props.showsBuildings}
                 showsTraffic={showsTraffic}
-                showsIndoors={this.props.showsIndoors}
                 zoomEnabled={this.props.zoomEnabled}
                 minZoomLevel={this.props.minZoomLevel}
                 maxZoomLevel={this.props.maxZoomLevel}
