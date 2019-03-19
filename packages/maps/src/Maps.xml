@@ -78,14 +78,14 @@
         </propertyGroup>
         <propertyGroup caption="Region">
             <property key="latitude" type="attribute">
-                <caption>Latitude</caption>
+                <caption>Center latitude</caption>
                 <description/>
                 <attributeTypes>
                     <attributeType name="Decimal"/>
                 </attributeTypes>
             </property>
             <property key="longitude" type="attribute">
-                <caption>Longitude</caption>
+                <caption>Center longitude</caption>
                 <description>The center coordinates of the region to be displayed on the map.</description>
                 <attributeTypes>
                     <attributeType name="Decimal"/>
