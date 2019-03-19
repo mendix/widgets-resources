@@ -2,26 +2,7 @@ import { brand } from '../variables';
 import { merge, hexToRGBString } from '../variables-helpers';
 import { Platform } from 'react-native';
 
-export const ProgressBarDefault = {
-    bar: {
-        // All ViewStyle properties are allowed
-        width: '100%',
-        ...Platform.select({
-            android: {
-                borderRadius: 0,
-                borderWidth: 0,
-                backgroundColor: 'rgba(98,0,238, 0.2)',
-            },
-        }),
-    },
-    fill: {
-        //Just allow this property
-        backgroundColor: Platform.select({ android: 'rgb(98,0,238)' }),
-    },
-};
-
-// com_mendix_widget_native_ProgressBar
-export const ProgressBar = merge(ProgressBarDefault, {
+export const ProgressBar = {
     bar: {
         // All ViewStyle properties are allowed
         ...Platform.select({
@@ -39,7 +20,7 @@ export const ProgressBar = merge(ProgressBarDefault, {
         //Just allow this property
         backgroundColor: brand.primary,
     },
-});
+};
 
 export const progressBarSuccess = merge(ProgressBar, {
     bar: {

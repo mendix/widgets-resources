@@ -1,18 +1,6 @@
 import { brand } from '../variables';
-import { merge } from '../variables-helpers';
 
-export const ActivityIndicatorDefault = {
-    container: {
-        // All ViewStyle properties are allowed
-    },
-    indicator: {
-        // Just this property
-        color: '#666',
-    },
-};
-
-// com.mendix.widget.native.ActivityIndicator
-export const ActivityIndicator = merge(ActivityIndicatorDefault, {
+export const ActivityIndicator = {
     indicator: {
         // Just this property
         color: brand.primary,
@@ -20,4 +8,4 @@ export const ActivityIndicator = merge(ActivityIndicatorDefault, {
     container: {
         // All ViewStyle properties are allowed
     },
-});
+};

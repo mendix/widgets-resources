@@ -44,7 +44,6 @@ export const btnListItem = {
     },
     caption: {
         width: '100%',
-        // height: '100%',
         textAlign: 'left',
         ...Platform.select({
             ios: {

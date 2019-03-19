@@ -192,6 +192,12 @@
                 ]
             },
             {
+                "name": "Rounded border",
+                "type": "Toggle",
+                "description": "Give the button a rounded border.",
+                "class": "btnRoundedBorder"
+            },
+            {
                 "name": "Full width",
                 "type": "Toggle",
                 "description": "Extend the button to the full width of the container it is placed in.",

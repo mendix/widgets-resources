@@ -36,8 +36,8 @@ export const background = {
 // Border Style
 export const border = {
     color: '#ddd',
-    radius: Platform.select({ ios: 5, android: 5 }),
-    // radius: Platform.select({ ios: 10, android: 5 }),  //TODO: Create design property
+    radius: 5,
+    radiusRounded: 25,
 };
 
 // Font Styles
@@ -73,8 +73,8 @@ export const spacing = {
 // Button Styles
 export const button = {
     fontSize: font.size,
-    borderRadius: Platform.select({ ios: border.radius, android: border.radius }), //TODO: Create design property
-    // borderRadius: Platform.select({ ios: border.radius + 16, android: border.radius }),
+    borderRadius: border.radius,
+    borderRadiusRounded: border.radiusRounded,
 
     header: {
         color: brand.primary,

@@ -1,20 +1,7 @@
-import { brand, button, gray } from '../variables';
+import { button } from '../variables';
 import { merge } from '../variables-helpers';
 
-// com_mendix_widget_native_Badge
-export const BadgeDefault = {
-    container: {
-        // All ViewStyle properties are allowed
-        backgroundColor: '#ccc',
-    },
-    text: {
-        // All TextStyle properties are allowed
-        fontSize: 14,
-        color: '#444',
-    },
-};
-
-export const badgePrimary = merge(BadgeDefault, {
+export const badgePrimary = {
     container: {
         // All ViewStyle properties are allowed
         backgroundColor: button.primary.backgroundColor,
@@ -23,8 +10,8 @@ export const badgePrimary = merge(BadgeDefault, {
         // All TextStyle properties are allowed
         color: button.primary.color,
     },
-});
-export const badgeSuccess = merge(BadgeDefault, {
+};
+export const badgeSuccess = merge(badgePrimary, {
     container: {
         backgroundColor: button.success.backgroundColor,
     },
@@ -32,7 +19,7 @@ export const badgeSuccess = merge(BadgeDefault, {
         color: button.success.color,
     },
 });
-export const badgeWarning = merge(BadgeDefault, {
+export const badgeWarning = merge(badgePrimary, {
     container: {
         backgroundColor: button.warning.backgroundColor,
     },
@@ -40,7 +27,7 @@ export const badgeWarning = merge(BadgeDefault, {
         color: button.warning.color,
     },
 });
-export const badgeDanger = merge(BadgeDefault, {
+export const badgeDanger = merge(badgePrimary, {
     container: {
         backgroundColor: button.danger.backgroundColor,
     },

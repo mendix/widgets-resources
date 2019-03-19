@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { button, spacing, font, gray } from '../variables';
+import { button, spacing, font, gray, border } from '../variables';
 import { merge } from '../variables-helpers';
 
 /* ==========================================================================
@@ -36,11 +36,6 @@ export const ActionButton = {
     },
 };
 
-//== Design Properties
-//## Helper classes to change the look and feel of the widget
-//-------------------------------------------------------------------------------------------------------------------//
-// Button Colors
-
 export const ActionButtonHeader = {
     button: {
         borderColor: button.header.borderColor,
@@ -55,6 +50,11 @@ export const ActionButtonHeader = {
         color: button.header.color,
     },
 };
+
+//== Design Properties
+//## Helper classes to change the look and feel of the widget
+//-------------------------------------------------------------------------------------------------------------------//
+// Button Colors
 
 export const btnSecondary = {
     button: {
@@ -145,6 +145,13 @@ export const btnIconDanger = merge(btnIconPrimary, {
         color: button.danger.backgroundColor,
     },
 });
+
+// Button border
+export const btnRoundedBorder = {
+    button: {
+        borderRadius: button.borderRadiusRounded,
+    },
+};
 
 // Button sizes
 export const btnSmall = {

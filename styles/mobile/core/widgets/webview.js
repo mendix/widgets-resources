@@ -1,6 +1,4 @@
-import { merge } from '../variables-helpers';
-
-export const WebViewDefault = {
+export const WebView = {
     container: {
         // All ViewStyle properties are allowed
     },
@@ -9,17 +7,5 @@ export const WebViewDefault = {
     },
     errorText: {
         // All TextStyle properties are allowed
-        fontWeight: 'bold',
     },
 };
-export const WebView = merge(WebViewDefault, {
-    container: {
-        // All ViewStyle properties are allowed
-    },
-    errorContainer: {
-        // All ViewStyle properties are allowed
-    },
-    errorText: {
-        // All TextStyle properties are allowed
-    },
-});

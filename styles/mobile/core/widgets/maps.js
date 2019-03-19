@@ -1,6 +1,5 @@
 import { brand, deviceWidth } from '../variables';
 
-// com_mendix_widget_native_Maps
 export const Maps = {
     container: {
         // All ViewStyle properties are allowed
