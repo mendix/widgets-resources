@@ -1,6 +1,6 @@
-import { TextBox } from './textbox';
+import { TextBox, TextBoxVertical } from './textbox';
 import { Platform } from 'react-native';
-import { spacing } from '../variables';
+import { merge } from '../variables-helpers';
 
 /* ==========================================================================
     CheckBox
@@ -8,34 +8,37 @@ import { spacing } from '../variables';
     Default Class For Mendix CheckBox Widget
 ========================================================================== */
 
+//TODO: Horizontal checkbox in vertical form
+
 export const CheckBox = {
-  label: TextBox.label,
-  input: {
-    ...TextBox.input,
-    ...Platform.select({
-      ios: {
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
-      },
-      android: {
-        backgroundColor: 'transparent',
-      },
-    }),
-  },
-  inputError: TextBox.inputError,
-  validationMessage: TextBox.validationMessage,
+    label: TextBox.label,
+    input: {
+        paddingVertical: TextBox.input.paddingVertical,
+        paddingHorizontal: TextBox.input.paddingHorizontal,
+        ...Platform.select({
+            ios: {
+                borderTopWidth: 1,
+                borderBottomWidth: 1,
+            },
+            android: {
+                backgroundColor: 'transparent',
+            },
+        }),
+    },
+    inputError: TextBox.inputError,
+    validationMessage: TextBox.validationMessage,
 };
-export const CheckBoxVertical = {
-  label: {
-    ...CheckBox.label,
-    marginBottom: 5,
-    marginLeft: spacing.small,
-  },
-  input: {
-    ...CheckBox.input,
-    marginBottom: 20,
-    marginLeft: spacing.small,
-  },
-  inputError: CheckBox.inputError,
-  validationMessage: CheckBox.validationMessage,
+
+export const CheckBoxVertical = merge(TextBoxVertical, {
+    input: {
+        backgroundColor: 'transparent',
+    },
+});
+export const CheckBoxNoLabel = {
+    label: {
+        flex: -1,
+    },
+    input: CheckBox.input,
+    inputError: CheckBox.inputError,
+    validationMessage: CheckBox.validationMessage,
 };
