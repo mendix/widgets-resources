@@ -36,7 +36,7 @@
         "lint-staged": "^8.1.4",
         "mendix-client": "^7.15.6",
         "mime": "^2.4.0",
-        "mx-widget-typing-generator": "^0.0.7",
+        "mx-widget-typing-generator": "^0.0.8",
         "prettier": "^1.16.4",
         "pretty-quick": "^1.10.0",
         "react": "^16.8.3",
