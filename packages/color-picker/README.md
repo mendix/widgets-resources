@@ -1,21 +1,21 @@
-## Color Wheel Widget
+## Color Picker Widget
 
 ### Styling
 
-You can use the following objects to stylize
+You can use the following objects to stylize:
 
 ```
 {
     container: ViewStyle;
-    thumbnail: ViewStyle;
+    thumbnail: ViewStyle & { size: number; };
 }
 ```
 
-Container supports all the ViewStyle properties, thumbnail doesn`t allow to use borderRadius, backgroundColor and
-opacity. If you define the width and height, width will precede height. Example:
+Container supports all the ViewStyle properties, thumbnail has a custom property `size` and ignores width, height,
+borderRadius, backgroundColor and opacity. Example:
 
 ```
- export const customColorWheel = {
+ export const customColorPicker = {
     container: {
         // All ViewStyle properties are allowed
         borderWidth: 1,
@@ -24,9 +24,8 @@ opacity. If you define the width and height, width will precede height. Example:
         alignSelf: "center"
     },
     thumbnail: {
+        size: 50,
         // All ViewStyle properties are allowed
-        height: 20,
-        width: 20,
         borderColor: "red",
         borderWidth: 10
     }

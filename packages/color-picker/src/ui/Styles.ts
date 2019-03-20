@@ -1,12 +1,12 @@
 import { Style } from "@native-components/util-widgets";
 import { ViewStyle } from "react-native";
 
-export interface ColorWheelStyle extends Style {
+export interface ColorPickerStyle extends Style {
     container: ViewStyle;
     thumbnail: ViewStyle & { size: number };
 }
 
-export const defaultColorWheelStyle: ColorWheelStyle = {
+export const defaultColorWheelStyle: ColorPickerStyle = {
     container: {},
     thumbnail: {
         size: 50,

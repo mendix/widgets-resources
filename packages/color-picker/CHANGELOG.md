@@ -17,11 +17,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [0.1.1](https://github.com/jobvs/native-components/compare/color-wheel@0.1.0...color-wheel@0.1.1) (2019-02-01)
 
-**Note:** Version bump only for package color-wheel
+**Note:** Version bump only for package color-picker
 
 # 0.1.0 (2019-02-01)
 
 ### Features
 
--   **color-wheel:** initial implementation ([#11](https://github.com/jobvs/native-components/issues/11))
+-   **color-picker:** initial implementation ([#11](https://github.com/jobvs/native-components/issues/11))
     ([9dc9bd4](https://github.com/jobvs/native-components/commit/9dc9bd4))

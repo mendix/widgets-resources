@@ -3,10 +3,10 @@ import colorsys from "colorsys";
 import { Component, createElement } from "react";
 import { ColorWheel as RNColorWheel, HSV } from "react-native-color-wheel";
 
-import { ColorWheelProps } from "../typings/ColorWheelProps";
-import { ColorWheelStyle, defaultColorWheelStyle } from "./ui/Styles";
+import { ColorPickerProps } from "../typings/ColorPickerProps";
+import { ColorPickerStyle, defaultColorWheelStyle } from "./ui/Styles";
 
-export class ColorWheel extends Component<ColorWheelProps<ColorWheelStyle>> {
+export class ColorPicker extends Component<ColorPickerProps<ColorPickerStyle>> {
     private readonly onChangeHandler = this.onChange.bind(this);
     private readonly onChangeCompleteHandler = this.onChangeComplete.bind(this);
     private readonly styles = flattenStyles(defaultColorWheelStyle, this.props.style);
@@ -16,7 +16,7 @@ export class ColorWheel extends Component<ColorWheelProps<ColorWheelStyle>> {
             <RNColorWheel
                 style={this.styles.container}
                 initialColor={this.props.color.value}
-                thumbSize={Number(this.styles.thumbnail.size)}
+                thumbSize={this.styles.thumbnail.size}
                 onColorChange={this.onChangeHandler}
                 onColorChangeComplete={this.onChangeCompleteHandler}
                 thumbStyle={this.styles.thumbnail}
