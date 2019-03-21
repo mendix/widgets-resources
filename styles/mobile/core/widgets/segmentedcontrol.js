@@ -1,8 +1,8 @@
-import { merge } from '../variables-helpers';
-import { gray, brand, font } from '../variables';
+import merge from '../_helperfunctions/mergeobjects';
+import {contrast, brand, font, background } from '../variables';
 import { Platform } from 'react-native';
 
-export const SegmentedControl = {
+export const com_mendix_widget_native_segmentedcontrol_SegmentedControl = (SegmentedControl = {
     container: {
         // All ViewStyle properties are allowed
     },
@@ -11,11 +11,12 @@ export const SegmentedControl = {
     },
     tab: {
         // All ViewStyle properties are allowed
-        borderColor: Platform.select({ ios: brand.primary, android: gray.lighter }),
+        backgroundColor: background.primary,
+        borderColor: Platform.select({ ios: brand.primary, android: contrast.lower }),
     },
     text: {
         // All TextStyle properties are allowed
-        color: Platform.select({ ios: brand.primary, android: gray.dark }),
+        color: Platform.select({ ios: brand.primary, android: contrast.high }),
     },
     activeTab: {
         // All ViewStyle properties are allowed
@@ -27,12 +28,12 @@ export const SegmentedControl = {
             android: {
                 backgroundColor: brand.primary,
                 borderColor: brand.primary,
-                // borderColor: gray.darker,
-                // backgroundColor: gray.darker,
+                // borderColor: contrast.higher,
+                // backgroundColor: contrast.higher,
             },
         }),
     },
     activeTabText: {
         // All TextStyle properties are allowed
     },
-};
+});

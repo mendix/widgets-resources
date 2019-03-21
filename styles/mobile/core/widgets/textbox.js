@@ -1,4 +1,4 @@
-import { gray, spacing, border, brand, font, background } from '../variables';
+import {contrast, spacing, border, brand, font, background } from '../variables';
 import { Platform } from 'react-native';
 
 /* ==========================================================================
@@ -12,7 +12,7 @@ export const TextBox = {
     //     borderWidth: 5,
     // },
     label: {
-        color: gray.darker,
+        color: contrast.higher,
         fontSize: font.size,
         textAlign: Platform.select({ ios: 'left', android: 'right' }),
         marginRight: spacing.regular,
@@ -20,15 +20,15 @@ export const TextBox = {
     input: {
         color: font.color,
         fontSize: font.size,
-        placeholderTextColor: gray.light,
-        selectionColor: gray.lighter,
+        placeholderTextColor: contrast.low,
+        selectionColor: contrast.lower,
         paddingVertical: spacing.smaller,
         paddingHorizontal: spacing.small,
         backgroundColor: background.primary,
         ...Platform.select({
             android: {
                 borderWidth: 1,
-                borderColor: gray.lighter,
+                borderColor: contrast.lower,
                 borderRadius: border.radius,
                 underlineColorAndroid: 'transparent',
             },
@@ -64,7 +64,7 @@ export const TextBoxVertical = {
             ios: {
                 borderTopWidth: 1,
                 borderBottomWidth: 1,
-                borderColor: gray.lightest,
+                borderColor: contrast.lowest,
                 backgroundColor: background.primary,
             },
         }),

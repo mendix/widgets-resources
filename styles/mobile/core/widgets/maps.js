@@ -1,6 +1,6 @@
 import { brand, deviceWidth } from '../variables';
 
-export const Maps = {
+export const com_mendix_widget_native_maps_Maps = (Maps = {
     container: {
         // All ViewStyle properties are allowed
         height: 200,
@@ -11,4 +11,4 @@ export const Maps = {
         color: brand.primary,
         opacity: 1,
     },
-};
+});

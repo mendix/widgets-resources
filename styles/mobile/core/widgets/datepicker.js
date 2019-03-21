@@ -1,5 +1,5 @@
 import { TextBox, TextBoxVertical } from './textbox';
-import { gray, background } from '../variables';
+import {contrast, background } from '../variables';
 import { Platform } from 'react-native';
 
 /* ==========================================================================
@@ -31,7 +31,7 @@ export const DatePickerVertical = {
             ios: {
                 borderTopWidth: 1,
                 borderBottomWidth: 1,
-                borderColor: gray.lightest,
+                borderColor: contrast.lowest,
                 backgroundColor: background.primary,
                 maxHeight: 40, //TODO: Needs to be properly fixed
             },

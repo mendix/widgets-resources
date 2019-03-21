@@ -1,11 +1,14 @@
 import { Platform, Dimensions } from 'react-native';
-import { setContrast, normalizeFont } from './variables-helpers';
+import { setColorBasedOnBackground, setContrastScale } from './_helperfunctions/calculatecontrast';
+import normalizeFont from './_helperfunctions/normalizefont';
 
 //== Global variables
 //## Variables to be used during styling
 //-------------------------------------------------------------------------------------------------------------------//
 // System defined read-only values
 export const { height: deviceHeight, width: deviceWidth } = Dimensions.get('window');
+
+const darkMode = false;
 
 // Brand Style
 export const brand = {
@@ -15,27 +18,35 @@ export const brand = {
     danger: '#ed1c24',
 };
 
-// Gray Colors
-export const gray = {
-    darkest: '#222',
-    darker: '#444',
-    dark: '#666',
-    regular: '#888',
-    light: '#aaa',
-    lighter: '#ccc',
-    lightest: '#eee',
-};
-
 // Background Colors
 export const background = {
-    primary: '#FFF',
-    secondary: '#f9f9f9',
-    // secondary: '#fafafa',
+    primary: darkMode ? '#111' : '#FFF',
+    secondary: darkMode ? '#222' : '#f9f9f9', //FIXME: Colors based on bg color
+};
+
+// // Gray Colors
+// export const gray = {
+//     darkest: '#222',
+//     darker: '#444',
+//     dark: '#666',
+//     regular: '#888',
+//     light: '#aaa',
+//     lighter: '#ccc',
+//     lightest: '#eee',
+// };
+export const contrast = {
+    highest: setContrastScale(background.primary, 0.99),
+    higher: setContrastScale(background.primary, 0.83),
+    high: setContrastScale(background.primary, 0.67),
+    regular: setContrastScale(background.primary, 0.5),
+    low: setContrastScale(background.primary, 0.33),
+    lower: setContrastScale(background.primary, 0.17),
+    lowest: setContrastScale(background.primary, 0.01),
 };
 
 // Border Style
 export const border = {
-    color: '#ddd',
+    color: setContrastScale(background.primary, 0.17),
     radius: 5,
     radiusRounded: 25,
 };
@@ -51,7 +62,7 @@ export const font = {
     sizeH4: normalizeFont(18),
     sizeH5: normalizeFont(14),
     sizeH6: normalizeFont(12),
-    color: setContrast('#FFF'),
+    color: setColorBasedOnBackground(background.primary),
     weightLight: '100',
     weightNormal: 'normal',
     weightSemiBold: '600',
@@ -82,7 +93,7 @@ export const button = {
         backgroundColor: 'transparent',
     },
     primary: {
-        color: setContrast(brand.primary),
+        color: setColorBasedOnBackground(brand.primary),
         borderColor: brand.primary,
         backgroundColor: brand.primary,
     },
@@ -92,17 +103,17 @@ export const button = {
         backgroundColor: 'transparent',
     },
     success: {
-        color: setContrast(brand.success),
+        color: setColorBasedOnBackground(brand.success),
         borderColor: brand.success,
         backgroundColor: brand.success,
     },
     warning: {
-        color: setContrast(brand.warning),
+        color: setColorBasedOnBackground(brand.warning),
         borderColor: brand.warning,
         backgroundColor: brand.warning,
     },
     danger: {
-        color: setContrast(brand.danger),
+        color: setColorBasedOnBackground(brand.danger),
         borderColor: brand.danger,
         backgroundColor: brand.danger,
     },

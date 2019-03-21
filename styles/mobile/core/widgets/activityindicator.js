@@ -1,6 +1,6 @@
 import { brand } from '../variables';
 
-export const ActivityIndicator = {
+export const com_mendix_widget_native_activityindicator_ActivityIndicator = (ActivityIndicator = {
     indicator: {
         // Just this property
         color: brand.primary,
@@ -8,4 +8,4 @@ export const ActivityIndicator = {
     container: {
         // All ViewStyle properties are allowed
     },
-};
+});

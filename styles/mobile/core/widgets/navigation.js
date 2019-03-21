@@ -1,4 +1,4 @@
-import { gray, brand, font, background } from '../variables';
+import {contrast, brand, font, background } from '../variables';
 import { Platform } from 'react-native';
 
 /* ==========================================================================
@@ -10,17 +10,17 @@ import { Platform } from 'react-native';
 export const navigationStyle = {
     topBar: {
         backgroundColor: background.primary,
-        backButtonColor: gray.darkest,
+        backButtonColor: contrast.highest,
         backButtonFontSize: font.size,
-        titleColor: gray.darkest,
+        titleColor: contrast.highest,
         titleFontSize: font.sizeH4,
         fontWeight: Platform.select({ ios: font.weightBold, android: font.weightNormal }),
     },
     bottomBar: {
         fontSize: font.size,
         backgroundColor: background.primary,
-        textColor: gray.dark,
-        iconColor: gray.dark,
+        textColor: contrast.high,
+        iconColor: contrast.high,
         selectedIconColor: brand.primary,
         selectedTextColor: brand.primary,
         justifyContent: 'space-between',
