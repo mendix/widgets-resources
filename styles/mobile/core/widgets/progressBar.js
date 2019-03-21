@@ -1,8 +1,8 @@
 import { brand } from '../variables';
-import { merge, hexToRGBString } from '../variables-helpers';
-import { Platform } from 'react-native';
+import {hexToRGBString} from '../_helperfunctions/calculatecontrast';
+import merge from '../_helperfunctions/mergeobjects';import { Platform } from 'react-native';
 
-export const ProgressBar = {
+export const com_mendix_widget_native_progressbar_ProgressBar = (ProgressBar = {
     bar: {
         // All ViewStyle properties are allowed
         ...Platform.select({
@@ -20,7 +20,7 @@ export const ProgressBar = {
         //Just allow this property
         backgroundColor: brand.primary,
     },
-};
+});
 
 export const progressBarSuccess = merge(ProgressBar, {
     bar: {

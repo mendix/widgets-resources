@@ -1,8 +1,22 @@
-import { spacing, background, gray, border } from '../variables';
+import { spacing, background, contrast, border } from '../variables';
 import { Platform } from 'react-native';
+
+// Hide on Android
+// export const hideOnAndroid = {
+//     container: {
+//         display: ' none',
+//     },
+// };
+// // Hide on iOS
+// export const hideOnIos = {
+//     container: {
+//         display: ' none',
+//     },
+// };
 
 //== Background sizing
 export const fullSize = {
+    // flexGrow: 1,
     width: '100%',
     height: '100%',
 };

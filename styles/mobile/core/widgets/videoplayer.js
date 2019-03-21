@@ -1,4 +1,4 @@
-export const VideoPlayer = {
+export const com_mendix_widget_native_videoplayer_VideoPlayer = (VideoPlayer = {
     container: {
         // All ViewStyle properties are allowed
     },
@@ -13,4 +13,4 @@ export const VideoPlayer = {
         // borderRadius: 175,
         // alignSelf: 'center',
     },
-};
+});

@@ -1,6 +1,6 @@
 import { TextBox, TextBoxVertical } from './textbox';
 import { Platform } from 'react-native';
-import { merge } from '../variables-helpers';
+import merge from '../_helperfunctions/mergeobjects';
 
 /* ==========================================================================
     CheckBox

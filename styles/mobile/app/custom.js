@@ -1,5 +1,5 @@
-import { gray, background, spacing, font, brand } from '../core/variables';
-import { merge } from '../core/variables-helpers';
+import {contrast, background, spacing, font, brand } from '../core/variables';
+import merge from '../core/_helperfunctions/mergeobjects';
 import { Platform } from 'react-native';
 
 //== Temporary Classes
@@ -27,7 +27,7 @@ export const btnListItem = {
         borderWidth: 0,
         borderRadius: 0,
         borderBottomWidth: 1,
-        borderColor: gray.lightest,
+        borderColor: contrast.lowest,
         backgroundColor: background.primary,
         paddingHorizontal: spacing.small,
         ...Platform.select({
@@ -40,18 +40,18 @@ export const btnListItem = {
         }),
     },
     icon: {
-        color: gray.darker,
+        color: contrast.higher,
     },
     caption: {
         width: '100%',
         textAlign: 'left',
         ...Platform.select({
             ios: {
-                color: gray.darker,
+                color: contrast.higher,
                 fontSize: font.size,
             },
             android: {
-                color: gray.dark,
+                color: contrast.high,
                 fontSize: font.sizeLarge,
             },
         }),
@@ -90,7 +90,7 @@ export const borderTop = {
     ...Platform.select({
         ios: {
             borderTopWidth: 1,
-            borderColor: gray.lightest,
+            borderColor: contrast.lowest,
         },
         android: {},
     }),
@@ -99,7 +99,7 @@ export const inputWrapper = {
     ...Platform.select({
         ios: {
             borderBottomWidth: 1,
-            borderColor: gray.lightest,
+            borderColor: contrast.lowest,
             backgroundColor: background.primary,
         },
         android: {
@@ -116,7 +116,7 @@ export const homeHeader = {
     backgroundColor: '#fff',
     alignItems: 'center',
     elevation: 2,
-    shadowColor: gray.lightest,
+    shadowColor: contrast.lowest,
     // shadowOpacity: 0.9,
     // shadowRadius: 8,
     // shadowOffset: {
@@ -139,9 +139,6 @@ export const homeHeaderPhone = {
 //     resizeMode: 'contain',
 // };
 
-export const fullWidthBar = {
-    // progress bar
-    bar: {
-        width: '100%',
-    },
+export const tempBorder = {
+    borderWidth: 2,
 };

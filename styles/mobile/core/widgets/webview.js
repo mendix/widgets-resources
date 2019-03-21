@@ -1,4 +1,4 @@
-export const WebView = {
+export const com_mendix_widget_native_webview_WebView = (WebView = {
     container: {
         // All ViewStyle properties are allowed
     },
@@ -8,4 +8,4 @@ export const WebView = {
     errorText: {
         // All TextStyle properties are allowed
     },
-};
+});

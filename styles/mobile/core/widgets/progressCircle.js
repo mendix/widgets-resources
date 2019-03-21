@@ -1,7 +1,7 @@
 import { brand, font } from '../variables';
-import { merge } from '../variables-helpers';
+import merge from '../_helperfunctions/mergeobjects';
 
-export const ProgressCircle = {
+export const com_mendix_widget_native_progresscircle_ProgressCircle = (ProgressCircle = {
     container: {
         // All ViewStyle properties are allowed
     },
@@ -21,7 +21,7 @@ export const ProgressCircle = {
         color: brand.primary,
         fontSize: font.sizeLarge,
     },
-};
+});
 
 export const progressCircleSuccess = merge(ProgressCircle, {
     fill: {

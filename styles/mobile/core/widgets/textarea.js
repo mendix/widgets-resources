@@ -1,5 +1,5 @@
 import { TextBox, TextBoxVertical } from './textbox';
-import { merge } from '../variables-helpers';
+import merge from '../_helperfunctions/mergeobjects';
 
 /* ==========================================================================
     TextArea

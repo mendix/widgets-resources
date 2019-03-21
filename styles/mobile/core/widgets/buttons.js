@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
-import { button, spacing, font, gray, border } from '../variables';
-import { merge } from '../variables-helpers';
+import { button, spacing, font, contrast, border } from '../variables';
+import merge from '../_helperfunctions/mergeobjects';
 
 /* ==========================================================================
     Buttons
@@ -111,12 +111,12 @@ export const btnIconPrimary = {
         borderWidth: 0,
         backgroundColor: 'transparent',
         padding: 0,
-        paddingVertical: 0, // FIXME: Should not be needed
-        paddingHorizontal: 0, // FIXME: Should not be needed
-        paddingTop: 0, // FIXME: Should not be needed
-        paddingLeft: 0, // FIXME: Should not be needed
-        paddingRight: 0, // FIXME: Should not be needed
-        paddingBottom: 0, // FIXME: Should not be needed
+        paddingTop: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingBottom: 0,
+        paddingVertical: 0,
+        paddingHorizontal: 0,
     },
     icon: {
         color: button.primary.backgroundColor,
@@ -127,7 +127,7 @@ export const btnIconPrimary = {
 };
 export const btnIconSecondary = merge(btnIconPrimary, {
     icon: {
-        color: gray.light,
+        color: contrast.low,
     },
 });
 export const btnIconSuccess = merge(btnIconPrimary, {

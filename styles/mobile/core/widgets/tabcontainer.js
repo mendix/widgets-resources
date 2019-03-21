@@ -1,4 +1,4 @@
-import { gray, brand, background, font } from '../variables';
+import { contrast, brand, background, font } from '../variables';
 import { Platform } from 'react-native';
 
 /* ==========================================================================
@@ -24,7 +24,7 @@ export const TabContainer = {
     },
     tab: {},
     label: {
-        color: gray.darkest,
+        color: contrast.highest,
     },
 };
 

@@ -1,4 +1,4 @@
-import { gray, background } from '../variables';
+import {contrast, background } from '../variables';
 
 /* ==========================================================================
     ListView
@@ -16,7 +16,7 @@ export const ListView = {
 export const listItemBorderBottom = {
     listItem: {
         borderBottomWidth: 1,
-        borderBottomColor: gray.lightest,
+        borderBottomColor: contrast.lowest,
         backgroundColor: background.primary,
     },
 };

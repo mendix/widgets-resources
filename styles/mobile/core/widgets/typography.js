@@ -1,4 +1,4 @@
-import { gray, brand, font, spacing } from '../variables';
+import {contrast, brand, font, spacing } from '../variables';
 import { Platform } from 'react-native';
 
 /* ==========================================================================
@@ -31,25 +31,25 @@ export const textDanger = {
 };
 
 export const textGrayDarkest = {
-    color: gray.darkest,
+    color: contrast.highest,
 };
 export const textGrayDarker = {
-    color: gray.darker,
+    color: contrast.higher,
 };
 export const textGrayDark = {
-    color: gray.dark,
+    color: contrast.high,
 };
 export const textGray = {
-    color: gray.regular,
+    color: contrast.regular,
 };
 export const textGrayLight = {
-    color: gray.light,
+    color: contrast.low,
 };
 export const textGrayLighter = {
-    color: gray.lighter,
+    color: contrast.lower,
 };
 export const textGrayLightest = {
-    color: gray.lightest,
+    color: contrast.lowest,
 };
 
 // Text Sizes
