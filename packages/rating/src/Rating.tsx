@@ -23,10 +23,10 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
     constructor(props: RatingProps<RatingStyle>) {
         super(props);
 
-        const { fullColor, emptyColor, size, starStyle } = this.processStyles(this.styles);
+        const { color, selectedColor, size, starStyle } = this.processStyles(this.styles);
         const iconConfigurations: IconConfiguration[] = [
-            { name: fullIcon, size, color: fullColor },
-            { name: emptyIcon, size, color: emptyColor }
+            { name: fullIcon, size, color: selectedColor },
+            { name: emptyIcon, size, color }
         ];
 
         this.starStyle = starStyle;
@@ -63,8 +63,8 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
     }
 
     processStyles(styles: RatingStyle): any {
-        const keys: Array<keyof StarStyle> = ["fullColor", "emptyColor", "color", "size"];
-        const { fullColor, emptyColor, size }: StarStyle = styles.star;
+        const keys: Array<keyof StarStyle> = ["color", "selectedColor", "size"];
+        const { selectedColor, color, size }: StarStyle = styles.star;
 
         const starStyle = {
             ...styles.star,
@@ -75,8 +75,8 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
         keys.forEach(key => delete starStyle[key]);
 
         return {
-            fullColor,
-            emptyColor,
+            color,
+            selectedColor,
             size,
             starStyle
         };
