@@ -3,13 +3,15 @@ import {
     ActivityIndicator,
     Image,
     ImageURISource,
+    Keyboard,
     Platform,
     Switch,
     Text,
     TextInput,
     TouchableNativeFeedback,
     TouchableOpacity,
-    View
+    View,
+    ViewStyle
 } from "react-native";
 import Dialog from "react-native-dialog";
 import { captureScreen } from "react-native-view-shot";
@@ -39,6 +41,7 @@ interface State {
     feedbackMsg: string;
     screenshot: string;
     status: Status;
+    containerStyle: ViewStyle;
 }
 
 export class Feedback extends Component<FeedbackProps<undefined>, State> {
@@ -47,7 +50,8 @@ export class Feedback extends Component<FeedbackProps<undefined>, State> {
         sendScreenshot: true,
         feedbackMsg: "",
         screenshot: "",
-        status: "todo"
+        status: "todo",
+        containerStyle: {}
     };
 
     private isAndroid = Platform.OS === "android";
@@ -58,6 +62,21 @@ export class Feedback extends Component<FeedbackProps<undefined>, State> {
     private readonly onChangeTextHandler = this.onChangeText.bind(this);
     private readonly onSendHandler = this.onSend.bind(this);
     private readonly onResultHandler = this.onResult.bind(this);
+    private readonly onKeyboardShowHandler = this.onKeyboardShow.bind(this);
+    private readonly onKeyboardHideHandler = this.onKeyboardHide.bind(this);
+
+    componentDidMount(): void {
+        Keyboard.addListener("keyboardWillShow", this.onKeyboardShowHandler);
+        Keyboard.addListener("keyboardWillHide", this.onKeyboardHideHandler);
+    }
+
+    onKeyboardShow(): void {
+        this.setState({ containerStyle: { marginTop: Platform.select({ ios: -110, android: 25 }) } });
+    }
+
+    onKeyboardHide(): void {
+        this.setState({ containerStyle: { marginTop: 0 } });
+    }
 
     render(): JSX.Element {
         return (
@@ -107,6 +126,7 @@ export class Feedback extends Component<FeedbackProps<undefined>, State> {
             case "todo":
                 return (
                     <Dialog.Container
+                        style={this.state.containerStyle}
                         visible={this.state.modalVisible}
                         buttonSeparatorStyle={buttonSeparatorStyle}
                         footerStyle={borderIos}
