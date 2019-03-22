@@ -10,14 +10,23 @@ interface CommonProps<Style> {
 
 export type EditableEnum = "default" | "never";
 
-export type IconEnum = "star" | "heart" | "rocket" | "bell";
+export type AnimationEnum =
+    | "none"
+    | "bounce"
+    | "flash"
+    | "jello"
+    | "pulse"
+    | "rotate"
+    | "rubberBand"
+    | "shake"
+    | "swing"
+    | "tada"
+    | "wobble";
 
 export interface RatingProps<Style> extends CommonProps<Style> {
     rating: EditableValue<BigJs.Big>;
     maximumValue: number;
-    fractions: number;
     editable: EditableEnum;
     onChange?: ActionValue;
-    icon: IconEnum;
-    iconSize: number;
+    animation: AnimationEnum;
 }

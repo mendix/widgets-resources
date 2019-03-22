@@ -19,6 +19,10 @@
         "postversion": "node ../../scripts/UpdateGithubRelease.js"
     },
     "dependencies": {
-        "react-native-ratings": "^6.3.0"
+        "@native-components/util-widgets": "^0.0.1",
+        "react-native-star-rating": "^1.0.1"
+    },
+    "devDependencies": {
+        "@types/react-native-star-rating": "^1.0.1"
     }
 }

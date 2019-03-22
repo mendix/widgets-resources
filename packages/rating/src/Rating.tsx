@@ -1,23 +1,55 @@
+import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
-import { Rating as RNRating } from "react-native-ratings";
+import StarRating from "react-native-star-rating";
 
 import { RatingProps } from "../typings/RatingProps";
+import { defaultRatingStyle, RatingStyle, StarStyle } from "./ui/Styles";
+import { IconConfiguration, ImageSourcesCache, preloadIcons } from "./utils/fonts/font";
 
-export class Rating extends Component<RatingProps<undefined>> {
+interface State {
+    imageSourceCache?: ImageSourcesCache;
+}
+
+const fullIcon = "glyphicon-star";
+const emptyIcon = "glyphicon-star-empty";
+
+export class Rating extends Component<RatingProps<RatingStyle>, State> {
+    readonly state: State = {};
+
     private readonly onChangeHandler = this.onChange.bind(this);
+    private readonly styles = flattenStyles(defaultRatingStyle, this.props.style);
+    private readonly starStyle: StarStyle;
 
-    render(): JSX.Element {
-        return (
-            <RNRating
-                type={this.props.icon}
-                startingValue={Number(this.props.rating.value)}
-                ratingCount={this.props.maximumValue}
-                readonly={this.props.editable === "never" || this.props.rating.readOnly}
-                imageSize={this.props.iconSize}
-                onFinishRating={this.onChangeHandler}
-                fractions={this.props.fractions}
+    constructor(props: RatingProps<RatingStyle>) {
+        super(props);
+
+        const { fullColor, emptyColor, size, starStyle } = this.processStyles(this.styles);
+        const iconConfigurations: IconConfiguration[] = [
+            { name: fullIcon, size, color: fullColor },
+            { name: emptyIcon, size, color: emptyColor }
+        ];
+
+        this.starStyle = starStyle;
+
+        preloadIcons(iconConfigurations).then(imageSourceCache => this.setState({ imageSourceCache }));
+    }
+
+    render(): JSX.Element | null {
+        return this.state.imageSourceCache ? (
+            <StarRating
+                rating={Number(this.props.rating.value)}
+                maxStars={this.props.maximumValue}
+                disabled={this.props.editable === "never" || this.props.rating.readOnly}
+                {...(this.props.animation !== "none" ? { animation: this.props.animation } : {})}
+                selectedStar={this.onChangeHandler}
+                halfStarEnabled={false}
+                iconSet={undefined}
+                containerStyle={this.styles.container}
+                starStyle={this.starStyle}
+                fullStar={this.state.imageSourceCache[fullIcon]}
+                emptyStar={this.state.imageSourceCache[emptyIcon]}
             />
-        );
+        ) : null;
     }
 
     private onChange(rating: number): void {
@@ -28,5 +60,25 @@ export class Rating extends Component<RatingProps<undefined>> {
                 this.props.onChange.execute();
             }
         }
+    }
+
+    processStyles(styles: RatingStyle): any {
+        const keys: Array<keyof StarStyle> = ["fullColor", "emptyColor", "color", "size"];
+        const { fullColor, emptyColor, size }: StarStyle = styles.star;
+
+        const starStyle = {
+            ...styles.star,
+            width: size,
+            height: size
+        };
+
+        keys.forEach(key => delete starStyle[key]);
+
+        return {
+            fullColor,
+            emptyColor,
+            size,
+            starStyle
+        };
     }
 }

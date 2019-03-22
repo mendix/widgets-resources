@@ -107,13 +107,11 @@ function inlineNativeAssets() {
     };
 }
 
-const config = {
-    input,
-    external: [
+function isExternal(id) {
+    const externals = [
         "react",
         "react-dom",
         "react-native",
-        "react-native/Libraries/StyleSheet/StyleSheet",
         "react-native-camera",
         "react-native-firebase",
         "react-native-geocoder",
@@ -122,7 +120,15 @@ const config = {
         "react-native-video",
         "react-native-view-shot",
         "react-native-webview"
-    ],
+    ];
+    const regexExternals = [/^react-native\//, /react-native-vector-icons/];
+
+    return externals.includes(id) || regexExternals.some(regex => regex.test(id));
+}
+
+const config = {
+    input,
+    external: isExternal,
     preserveModules: true,
     plugins: [
         rollupNodeResolve({
