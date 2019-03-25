@@ -237,8 +237,13 @@ export class Feedback extends Component<FeedbackProps<undefined>, State> {
     private takeScreenshot(): void {
         captureScreen({
             format: "png",
-            result: "base64",
-            quality: 0.5
-        }).then(uri => this.setScreenshot(uri), () => this.setScreenshot(""));
+            result: "base64"
+        }).then(
+            uri => {
+                const newImage = uri.replace(/(\r\n|\n|\r)/gm, "");
+                this.setScreenshot(newImage);
+            },
+            () => this.setScreenshot("")
+        );
     }
 }

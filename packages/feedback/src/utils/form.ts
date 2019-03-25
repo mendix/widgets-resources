@@ -17,7 +17,7 @@ export const sendToSprintr = (
         userroles: "",
         shortname,
         description,
-        img: data.screenshot.replace(/(data:image\/png;base64,)/, ""),
+        img: data.screenshot,
         browser: "React Native for " + Platform.OS,
         screensize: Dimensions.get("window").width + "x" + Dimensions.get("window").height,
         issuetype: "issue",
@@ -26,11 +26,10 @@ export const sendToSprintr = (
     };
 
     postToSprintr(dataToSend)
-        .then(text => {
+        .then(result => {
             if (cb && typeof cb === "function") {
-                cb(true);
+                cb(result);
             }
-            return text;
         })
         .catch(_e => {
             if (cb && typeof cb === "function") {
@@ -48,6 +47,10 @@ const postToSprintr = (data: any) =>
         },
         mode: "no-cors",
         referrer: "no-referrer"
-    }).then(() => {
-        return true;
-    });
+    })
+        .then(response => {
+            return response.ok;
+        })
+        .catch(() => {
+            return false;
+        });
