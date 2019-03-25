@@ -10,8 +10,7 @@ import {
     TextInput,
     TouchableNativeFeedback,
     TouchableOpacity,
-    View,
-    ViewStyle
+    View
 } from "react-native";
 import Dialog from "react-native-dialog";
 import { captureScreen } from "react-native-view-shot";
@@ -41,7 +40,7 @@ interface State {
     feedbackMsg: string;
     screenshot: string;
     status: Status;
-    containerStyle: ViewStyle;
+    keyboardOpen: boolean;
 }
 
 export class Feedback extends Component<FeedbackProps<undefined>, State> {
@@ -51,7 +50,7 @@ export class Feedback extends Component<FeedbackProps<undefined>, State> {
         feedbackMsg: "",
         screenshot: "",
         status: "todo",
-        containerStyle: {}
+        keyboardOpen: false
     };
 
     private isAndroid = Platform.OS === "android";
@@ -70,12 +69,17 @@ export class Feedback extends Component<FeedbackProps<undefined>, State> {
         Keyboard.addListener("keyboardWillHide", this.onKeyboardHideHandler);
     }
 
+    componentWillUnmount(): void {
+        Keyboard.removeListener("keyboardWillShow", this.onKeyboardShowHandler);
+        Keyboard.removeListener("keyboardWillHide", this.onKeyboardHideHandler);
+    }
+
     onKeyboardShow(): void {
-        this.setState({ containerStyle: { marginTop: Platform.select({ ios: -110, android: 25 }) } });
+        this.setState({ keyboardOpen: true });
     }
 
     onKeyboardHide(): void {
-        this.setState({ containerStyle: { marginTop: 0 } });
+        this.setState({ keyboardOpen: false });
     }
 
     render(): JSX.Element {
@@ -124,9 +128,17 @@ export class Feedback extends Component<FeedbackProps<undefined>, State> {
         });
         switch (this.state.status) {
             case "todo":
+                const containerStyle = this.state.keyboardOpen
+                    ? {
+                          marginTop: Platform.select({
+                              ios: -110,
+                              android: 0
+                          })
+                      }
+                    : { marginTop: 0 };
                 return (
                     <Dialog.Container
-                        style={this.state.containerStyle}
+                        style={containerStyle}
                         visible={this.state.modalVisible}
                         buttonSeparatorStyle={buttonSeparatorStyle}
                         footerStyle={borderIos}
