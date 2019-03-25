@@ -1,3 +1,4 @@
+import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement, Fragment } from "react";
 import {
     ActivityIndicator,
@@ -17,18 +18,14 @@ import { captureScreen } from "react-native-view-shot";
 import { FeedbackProps } from "../typings/FeedbackProps";
 import {
     activityIndicatorStyle,
-    borderIos,
-    button,
-    buttonSeparatorStyle,
-    childElementStyle,
     commentIcon,
-    elementStyle,
-    gray,
+    defaultFeedbackStyle,
+    FeedbackStyle,
+    floatingButtonContainer,
     imageStyle,
     mendixLogo,
-    switchViewStyle,
-    TextArea,
-    Toggle
+    processStyles,
+    switchContainer
 } from "./ui/styles";
 import { sendToSprintr } from "./utils/form";
 
@@ -43,7 +40,7 @@ interface State {
     keyboardOpen: boolean;
 }
 
-export class Feedback extends Component<FeedbackProps<undefined>, State> {
+export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
     readonly state: State = {
         modalVisible: false,
         sendScreenshot: true,
@@ -63,6 +60,7 @@ export class Feedback extends Component<FeedbackProps<undefined>, State> {
     private readonly onResultHandler = this.onResult.bind(this);
     private readonly onKeyboardShowHandler = this.onKeyboardShow.bind(this);
     private readonly onKeyboardHideHandler = this.onKeyboardHide.bind(this);
+    private readonly styles = flattenStyles(defaultFeedbackStyle, this.props.style);
 
     componentDidMount(): void {
         Keyboard.addListener("keyboardWillShow", this.onKeyboardShowHandler);
@@ -87,8 +85,8 @@ export class Feedback extends Component<FeedbackProps<undefined>, State> {
             <Fragment>
                 {this.renderDialog()}
                 {!this.state.modalVisible && this.state.status !== "takingScreenshot" && (
-                    <View style={elementStyle}>
-                        <View style={childElementStyle}>
+                    <View style={floatingButtonContainer}>
+                        <View style={this.styles.floatingButton}>
                             {!this.props.hideLogo ? this.renderMendixLogo() : null}
                             {this.renderCommentIcon()}
                         </View>
@@ -119,13 +117,15 @@ export class Feedback extends Component<FeedbackProps<undefined>, State> {
     }
 
     renderDialog(): JSX.Element | null {
-        const androidProps = Platform.select({
-            ios: {},
-            android: {
-                trackColor: { false: "", true: "61c5ff" },
-                thumbColor: !this.state.sendScreenshot ? "white" : button.primary.background
-            }
-        });
+        const {
+            textAreaInputStyles,
+            textAreaInputProps,
+            switchInputStyles,
+            switchInputProps,
+            borderIos,
+            buttonSeparatorIos
+        } = processStyles(this.styles);
+
         switch (this.state.status) {
             case "todo":
                 const containerStyle = this.state.keyboardOpen
@@ -138,36 +138,38 @@ export class Feedback extends Component<FeedbackProps<undefined>, State> {
                     : { marginTop: 0 };
                 return (
                     <Dialog.Container
-                        style={containerStyle}
+                        style={[this.styles.dialog, containerStyle]}
                         visible={this.state.modalVisible}
-                        buttonSeparatorStyle={buttonSeparatorStyle}
+                        buttonSeparatorStyle={buttonSeparatorIos}
                         footerStyle={borderIos}
                     >
-                        <Dialog.Title>Send Feedback</Dialog.Title>
+                        <Dialog.Title style={this.styles.title}>Send Feedback</Dialog.Title>
                         <TextInput
                             multiline={true}
                             numberOfLines={5}
-                            style={TextArea}
+                            style={textAreaInputStyles}
                             value={this.state.feedbackMsg}
-                            placeholderTextColor={gray.regular}
                             onChangeText={this.onChangeTextHandler}
-                            selectionColor={gray.light}
                             placeholder="Type your feedback here"
-                            underlineColorAndroid="transparent"
+                            {...textAreaInputProps}
                         />
                         {this.props.allowScreenshot ? (
-                            <View style={switchViewStyle}>
-                                <Text style={Toggle.label}>Include Screenshot</Text>
+                            <View style={switchContainer}>
+                                <Text style={this.styles.switchLabel}>Include Screenshot</Text>
                                 <Switch
-                                    style={Toggle.input}
-                                    {...androidProps}
+                                    style={switchInputStyles}
                                     value={this.state.sendScreenshot}
                                     onValueChange={this.onScreenshotToggleChangeHandler}
+                                    {...switchInputProps}
                                 />
                             </View>
                         ) : null}
-                        <Dialog.Button label="Cancel" onPress={this.onModalCloseHandler} />
-                        <Dialog.Button label="Send" onPress={this.onSendHandler} />
+                        <Dialog.Button
+                            label="Cancel"
+                            onPress={this.onModalCloseHandler}
+                            color={this.styles.button.color}
+                        />
+                        <Dialog.Button label="Send" onPress={this.onSendHandler} color={this.styles.button.color} />
                     </Dialog.Container>
                 );
             case "inprogress":
@@ -182,7 +184,7 @@ export class Feedback extends Component<FeedbackProps<undefined>, State> {
                     <Dialog.Container visible={this.state.modalVisible}>
                         <Dialog.Title>Result</Dialog.Title>
                         <Dialog.Description>Feedback successfully sent</Dialog.Description>
-                        <Dialog.Button label="OK" onPress={this.onModalCloseHandler} />
+                        <Dialog.Button label="OK" onPress={this.onModalCloseHandler} color={this.styles.button.color} />
                     </Dialog.Container>
                 );
             case "error":
@@ -190,7 +192,7 @@ export class Feedback extends Component<FeedbackProps<undefined>, State> {
                     <Dialog.Container visible={this.state.modalVisible}>
                         <Dialog.Title>Result</Dialog.Title>
                         <Dialog.Description>Error sending feedback</Dialog.Description>
-                        <Dialog.Button label="OK" onPress={this.onModalCloseHandler} />
+                        <Dialog.Button label="OK" onPress={this.onModalCloseHandler} color={this.styles.button.color} />
                     </Dialog.Container>
                 );
             default:

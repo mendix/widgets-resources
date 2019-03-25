@@ -20,7 +20,8 @@
     },
     "devDependencies": {
         "@types/querystringify": "^2.0.0",
-        "@types/react-native-dialog": "^5.5.0"
+        "@types/react-native-dialog": "^5.5.0",
+        "@native-components/util-widgets": "^0.0.1"
     },
     "dependencies": {
         "querystringify": "^2.1.0",
