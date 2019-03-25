@@ -2,12 +2,14 @@ import { Style } from "@native-components/util-widgets";
 import { Platform, ViewStyle } from "react-native";
 
 export interface ProgressBarStyle extends Style {
+    container: ViewStyle;
     bar: ViewStyle;
     fill: {
         backgroundColor: string;
     };
 }
 export const defaultProgressBarStyle: ProgressBarStyle = {
+    container: {},
     bar: {
         width: "100%",
         height: 6,
