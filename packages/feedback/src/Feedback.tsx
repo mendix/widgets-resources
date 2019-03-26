@@ -130,7 +130,8 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
                     : { marginTop: 0 };
                 return (
                     <Dialog.Container
-                        style={[this.styles.dialog, containerStyle]}
+                        style={containerStyle}
+                        contentStyle={this.styles.dialog}
                         visible={this.state.modalVisible}
                         buttonSeparatorStyle={this.processedStyles.buttonSeparatorIos}
                         footerStyle={this.processedStyles.borderIos}
