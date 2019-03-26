@@ -38,7 +38,7 @@ export const switchContainer: ViewStyle = {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: Platform.select({ ios: 10, android: 10 }),
+    paddingVertical: 10,
     paddingHorizontal: Platform.select({ ios: 10, android: 0 })
 };
 
@@ -115,8 +115,8 @@ export const defaultFeedbackStyle: FeedbackStyle = {
         marginRight: Platform.select({ ios: 0, android: -5 })
     },
     button: {
-        borderColor: "#eee", // Required for IOS
-        borderWidth: 1, // Required for IOS
+        borderColor: "#eee",
+        borderWidth: 1,
         color: Platform.select({ ios: "#007ff9", android: "#169689" })
     }
 };
@@ -150,7 +150,7 @@ export function processStyles(styles: FeedbackStyle): any {
             borderTopWidth: styles.button.borderWidth
         },
         android: {}
-    }); // TODO: Extract in some place
+    });
 
     const buttonSeparatorIos = Platform.select({
         ios: { backgroundColor: styles.button.borderColor, width: styles.button.borderWidth },

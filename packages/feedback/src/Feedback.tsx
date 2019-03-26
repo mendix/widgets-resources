@@ -61,6 +61,7 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
     private readonly onKeyboardShowHandler = this.onKeyboardShow.bind(this);
     private readonly onKeyboardHideHandler = this.onKeyboardHide.bind(this);
     private readonly styles = flattenStyles(defaultFeedbackStyle, this.props.style);
+    private readonly processedStyles = processStyles(this.styles);
 
     componentDidMount(): void {
         Keyboard.addListener("keyboardWillShow", this.onKeyboardShowHandler);
@@ -117,15 +118,6 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
     }
 
     renderDialog(): JSX.Element | null {
-        const {
-            textAreaInputStyles,
-            textAreaInputProps,
-            switchInputStyles,
-            switchInputProps,
-            borderIos,
-            buttonSeparatorIos
-        } = processStyles(this.styles);
-
         switch (this.state.status) {
             case "todo":
                 const containerStyle = this.state.keyboardOpen
@@ -140,27 +132,27 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
                     <Dialog.Container
                         style={[this.styles.dialog, containerStyle]}
                         visible={this.state.modalVisible}
-                        buttonSeparatorStyle={buttonSeparatorIos}
-                        footerStyle={borderIos}
+                        buttonSeparatorStyle={this.processedStyles.buttonSeparatorIos}
+                        footerStyle={this.processedStyles.borderIos}
                     >
                         <Dialog.Title style={this.styles.title}>Send Feedback</Dialog.Title>
                         <TextInput
                             multiline={true}
                             numberOfLines={5}
-                            style={textAreaInputStyles}
+                            style={this.processedStyles.textAreaInputStyles}
                             value={this.state.feedbackMsg}
                             onChangeText={this.onChangeTextHandler}
                             placeholder="Type your feedback here"
-                            {...textAreaInputProps}
+                            {...this.processedStyles.textAreaInputProps}
                         />
                         {this.props.allowScreenshot ? (
                             <View style={switchContainer}>
                                 <Text style={this.styles.switchLabel}>Include Screenshot</Text>
                                 <Switch
-                                    style={switchInputStyles}
+                                    style={this.processedStyles.switchInputStyles}
                                     value={this.state.sendScreenshot}
                                     onValueChange={this.onScreenshotToggleChangeHandler}
-                                    {...switchInputProps}
+                                    {...this.processedStyles.switchInputProps}
                                 />
                             </View>
                         ) : null}
