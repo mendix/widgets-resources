@@ -1,4 +1,4 @@
-import {contrast, brand, font, spacing } from '../variables';
+import { contrast, brand, font, spacing } from '../variables';
 import { Platform } from 'react-native';
 
 /* ==========================================================================
@@ -8,8 +8,11 @@ import { Platform } from 'react-native';
 ========================================================================== */
 
 export const Text = {
-    color: font.color,
-    fontSize: font.size,
+    container: {},
+    text: {
+        color: font.color,
+        fontSize: font.size,
+    },
 };
 
 //== Design Properties
@@ -18,110 +21,197 @@ export const Text = {
 // Text Colors
 
 export const textPrimary = {
-    color: brand.primary,
+    container: {},
+    text: {
+        color: brand.primary,
+    },
 };
 export const textSuccess = {
-    color: brand.success,
+    container: {},
+    text: {
+        color: brand.success,
+    },
 };
 export const textWarning = {
-    color: brand.warning,
+    container: {},
+    text: {
+        color: brand.warning,
+    },
 };
 export const textDanger = {
-    color: brand.danger,
+    container: {},
+    text: {
+        color: brand.danger,
+    },
 };
 
 export const textGrayDarkest = {
-    color: contrast.highest,
+    container: {},
+    text: {
+        color: contrast.highest,
+    },
 };
 export const textGrayDarker = {
-    color: contrast.higher,
+    container: {},
+    text: {
+        color: contrast.higher,
+    },
 };
 export const textGrayDark = {
-    color: contrast.high,
+    container: {},
+    text: {
+        color: contrast.high,
+    },
 };
 export const textGray = {
-    color: contrast.regular,
+    container: {},
+    text: {
+        color: contrast.regular,
+    },
 };
 export const textGrayLight = {
-    color: contrast.low,
+    container: {},
+    text: {
+        color: contrast.low,
+    },
 };
 export const textGrayLighter = {
-    color: contrast.lower,
+    container: {},
+    text: {
+        color: contrast.lower,
+    },
 };
 export const textGrayLightest = {
-    color: contrast.lowest,
+    container: {},
+    text: {
+        color: contrast.lowest,
+    },
 };
 
 // Text Sizes
 export const TextH1 = {
-    fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
-    fontSize: font.sizeH1,
-    marginBottom: spacing.small,
+    container: {},
+    text: {
+        fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+        fontSize: font.sizeH1,
+        marginBottom: spacing.small,
+    },
 };
 export const TextH2 = {
-    fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
-    fontSize: font.sizeH2,
-    marginBottom: spacing.small,
+    container: {},
+    text: {
+        fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+        fontSize: font.sizeH2,
+        marginBottom: spacing.small,
+    },
 };
 export const TextH3 = {
-    fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
-    fontSize: font.sizeH3,
-    marginBottom: spacing.small,
+    container: {},
+    text: {
+        fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+        fontSize: font.sizeH3,
+        marginBottom: spacing.small,
+    },
 };
 export const TextH4 = {
-    fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
-    fontSize: font.sizeH4,
-    marginBottom: spacing.smaller,
+    container: {},
+    text: {
+        fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+        fontSize: font.sizeH4,
+        marginBottom: spacing.smaller,
+    },
 };
 export const TextH5 = {
-    fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
-    fontSize: font.sizeH5,
-    marginBottom: spacing.smallest,
+    container: {},
+    text: {
+        fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+        fontSize: font.sizeH5,
+        marginBottom: spacing.smallest,
+    },
 };
 export const TextH6 = {
-    fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
-    fontSize: font.sizeH6,
-    marginBottom: spacing.smallest,
+    container: {},
+    text: {
+        fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+        fontSize: font.sizeH6,
+        marginBottom: spacing.smallest,
+    },
 };
 export const textSmall = {
-    fontSize: font.sizeSmall,
+    container: {},
+    text: {
+        fontSize: font.sizeSmall,
+    },
 };
 export const textLarge = {
-    fontSize: font.sizeLarge,
+    container: {},
+    text: {
+        fontSize: font.sizeLarge,
+    },
 };
 
 // Text Alignment
 export const textLeft = {
-    textAlign: 'left',
+    container: {},
+    text: {
+        textAlign: 'left',
+    },
 };
 export const textCenter = {
-    textAlign: 'center',
+    container: {},
+    text: {
+        textAlign: 'center',
+    },
 };
 export const textRight = {
-    textAlign: 'right',
+    container: {},
+    text: {
+        textAlign: 'right',
+    },
 };
 
 // Text Weights
 export const textLight = {
-    fontWeight: font.weightLight,
+    container: {},
+    text: {
+        fontWeight: font.weightLight,
+    },
 };
 export const textNormal = {
-    fontWeight: font.weightNormal,
+    container: {},
+    text: {
+        fontWeight: font.weightNormal,
+    },
 };
 export const textSemiBold = {
-    fontWeight: font.weightSemiBold,
+    container: {},
+    text: {
+        fontWeight: font.weightSemiBold,
+    },
 };
 export const textBold = {
-    fontWeight: font.weightBold,
+    container: {},
+    text: {
+        fontWeight: font.weightBold,
+    },
 };
 
 // Text Transformations
 export const textLowercase = {
-    textTransform: 'lowercase',
+    container: {},
+    text: {
+        textTransform: 'lowercase',
+    },
 };
 export const textUppercase = {
-    textTransform: 'uppercase',
+    container: {},
+    text: {
+        textTransform: 'uppercase',
+    },
 };
 export const textCapitalize = {
-    textTransform: 'capitalize',
+    container: {},
+    text: {
+        textTransform: 'capitalize',
+    },
 };

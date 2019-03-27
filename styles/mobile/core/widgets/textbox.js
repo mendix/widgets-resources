@@ -1,83 +1,88 @@
-import {contrast, spacing, border, brand, font, background } from '../variables';
 import { Platform } from 'react-native';
+import { input, spacing } from '../variables';
 
 /* ==========================================================================
-    TextBox
+    Text Box
 
-    Default Class For Mendix TextBox Widget
+    Default Class For Mendix Text Box Widget
 ========================================================================== */
 
 export const TextBox = {
-    // container: {
-    //     borderWidth: 5,
-    // },
+    container: {
+        borderColor: input.borderColor,
+        backgroundColor: Platform.select({ ios: input.backgroundColor }),
+        borderBottomWidth: Platform.select({ ios: input.borderWidth }),
+        paddingHorizontal: Platform.select({ ios: input.paddingHorizontal }),
+        paddingVertical: Platform.select({ ios: input.paddingVertical }),
+    },
     label: {
-        color: contrast.higher,
-        fontSize: font.size,
-        textAlign: Platform.select({ ios: 'left', android: 'right' }),
-        marginRight: spacing.regular,
+        color: input.color,
+        fontSize: input.fontSize,
+        textAlign: input.textAlign,
+        marginRight: Platform.select({ ios: spacing.regular }),
     },
     input: {
-        color: font.color,
-        fontSize: font.size,
-        placeholderTextColor: contrast.low,
-        selectionColor: contrast.lower,
-        paddingVertical: spacing.smaller,
-        paddingHorizontal: spacing.small,
-        backgroundColor: background.primary,
-        ...Platform.select({
-            android: {
-                borderWidth: 1,
-                borderColor: contrast.lower,
-                borderRadius: border.radius,
-                underlineColorAndroid: 'transparent',
-            },
-        }),
+        color: input.color,
+        borderColor: input.borderColor,
+        backgroundColor: input.backgroundColor,
+        selectionColor: input.selectionColor,
+        placeholderTextColor: input.placeholderTextColor,
+        underlineColorAndroidColor: input.underlineColorAndroidColor,
+
+        fontSize: input.fontSize,
+        borderWidth: Platform.select({ android: input.borderWidth }),
+        borderRadius: input.borderRadius,
+
+        paddingTop: Platform.select({ ios: 0 }), // TextArea unexpected spacing
+        paddingHorizontal: Platform.select({ ios: 0, android: input.paddingHorizontal }),
+        paddingVertical: Platform.select({ ios: 0, android: input.paddingVertical }),
     },
     inputError: {
-        placeholderTextColor: brand.danger,
-        selectionColor: brand.danger,
-        underlineColorAndroid: 'transparent',
+        selectionColor: input.errorColor,
+        placeholderTextColor: input.errorColor,
+        underlineColorAndroid: input.underlineColorAndroid,
     },
     validationMessage: {
-        color: brand.danger,
-        borderWidth: 1,
-        borderRadius: border.radius,
-        borderColor: brand.danger,
-        backgroundColor: '#FFF',
-        padding: spacing.small,
+        color: input.errorColor,
+        borderColor: input.errorColor,
+        backgroundColor: input.backgroundColor,
+        borderWidth: input.borderWidth,
+        borderRadius: input.borderRadius,
+        // padding: spacing.small,
     },
 };
 
 export const TextBoxVertical = {
+    container: {
+        backgroundColor: 'transparent',
+        borderBottomWidth: 0,
+        paddingHorizontal: 0,
+        paddingVertical: 0,
+    },
     label: {
-        color: TextBox.label.color,
-        fontSize: TextBox.label.fontSize,
-        marginBottom: 5,
+        color: input.color,
+        fontSize: input.fontSize,
+        textAlign: input.textAlign,
         marginLeft: spacing.small,
-        textAlign: 'left', //FIXME: Shouldn't be needed
+        marginBottom: spacing.smallest,
     },
     input: {
-        ...TextBox.input,
-        marginBottom: 20,
-        ...Platform.select({
-            ios: {
-                borderTopWidth: 1,
-                borderBottomWidth: 1,
-                borderColor: contrast.lowest,
-                backgroundColor: background.primary,
-            },
-        }),
-    },
-    inputError: TextBox.inputError,
-    validationMessage: TextBox.validationMessage,
-};
+        color: input.color,
+        borderColor: input.borderColor,
+        backgroundColor: input.backgroundColor,
+        selectionColor: input.selectionColor,
+        placeholderTextColor: input.placeholderTextColor,
+        underlineColorAndroidColor: input.underlineColorAndroidColor,
 
-export const TextBoxNoLabel = {
-    label: {
-        flex: -1,
+        fontSize: input.fontSize,
+        borderRadius: input.borderRadius,
+        borderWidth: Platform.select({ android: input.borderWidth }),
+        borderTopWidth: Platform.select({ ios: input.borderWidth }),
+        borderBottomWidth: Platform.select({ ios: input.borderWidth }),
+
+        paddingHorizontal: input.paddingHorizontal,
+        paddingVertical: input.paddingVertical,
     },
-    input: TextBox.input,
     inputError: TextBox.inputError,
     validationMessage: TextBox.validationMessage,
 };

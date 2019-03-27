@@ -1,47 +1,47 @@
-import { TextBox, TextBoxVertical } from './textbox';
-import {contrast, background } from '../variables';
+import { input } from '../variables';
 import { Platform } from 'react-native';
+import { TextBox, TextBoxVertical } from './textbox';
 
 /* ==========================================================================
-    DatePicker
+    Date Picker
 
-    Default Class For Mendix DatePicker Widget
+    Default Class For Mendix Date Picker Widget
 ========================================================================== */
 
 export const DatePicker = {
+    container: TextBox.container,
     label: TextBox.label,
     value: {
-        color: TextBox.input.color,
-        fontSize: TextBox.input.fontSize,
-        backgroundColor: TextBox.input.backgroundColor,
-        borderRadius: TextBox.input.borderRadius,
-        borderWidth: TextBox.input.borderWidth,
-        borderColor: TextBox.input.borderColor,
-        paddingHorizontal: TextBox.input.paddingHorizontal,
-        paddingVertical: TextBox.input.paddingVertical,
+        color: input.color,
+        borderColor: input.borderColor,
+        backgroundColor: input.backgroundColor,
+        // placeholderTextColor: input.placeholderTextColor,
+
+        fontSize: input.fontSize,
+        borderWidth: Platform.select({ android: input.borderWidth }),
+        borderRadius: input.borderRadius,
+
+        paddingHorizontal: Platform.select({ ios: 0, android: input.paddingHorizontal }),
+        paddingVertical: Platform.select({ ios: 0, android: input.paddingVertical }),
     },
 };
 
 export const DatePickerVertical = {
+    container: TextBoxVertical.container,
     label: TextBoxVertical.label,
     value: {
-        ...DatePicker.value,
-        marginBottom: 20,
-        ...Platform.select({
-            ios: {
-                borderTopWidth: 1,
-                borderBottomWidth: 1,
-                borderColor: contrast.lowest,
-                backgroundColor: background.primary,
-                maxHeight: 40, //TODO: Needs to be properly fixed
-            },
-        }),
-    },
-};
+        color: input.color,
+        borderColor: input.borderColor,
+        backgroundColor: input.backgroundColor,
+        // placeholderTextColor: input.placeholderTextColor,
 
-export const DatePickerNoLabel = {
-    label: {
-        flex: -1,
+        fontSize: input.fontSize,
+        borderRadius: Platform.select({ android: input.borderRadius }),
+        borderWidth: Platform.select({ android: input.borderWidth }),
+        borderTopWidth: Platform.select({ ios: input.borderWidth }),
+        borderBottomWidth: Platform.select({ ios: input.borderWidth }),
+
+        paddingHorizontal: input.paddingHorizontal,
+        paddingVertical: input.paddingVertical,
     },
-    value: DatePicker.value,
 };

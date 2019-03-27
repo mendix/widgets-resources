@@ -1,6 +1,11 @@
-import merge from '../_helperfunctions/mergeobjects';
-import {contrast, brand, font, background } from '../variables';
+import { contrast, brand, font, background } from '../variables';
 import { Platform } from 'react-native';
+
+/* ==========================================================================
+    Segmented Controls
+
+    Default Class For Mendix Segmented Controls Widget
+========================================================================== */
 
 export const com_mendix_widget_native_segmentedcontrol_SegmentedControl = (SegmentedControl = {
     container: {

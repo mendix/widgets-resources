@@ -1,6 +1,12 @@
 import { brand, font } from '../variables';
 import merge from '../_helperfunctions/mergeobjects';
 
+/* ==========================================================================
+    Progress Circle
+
+    Default Class For Mendix Progress Circle Widget
+========================================================================== */
+
 export const com_mendix_widget_native_progresscircle_ProgressCircle = (ProgressCircle = {
     container: {
         // All ViewStyle properties are allowed
@@ -23,12 +29,26 @@ export const com_mendix_widget_native_progresscircle_ProgressCircle = (ProgressC
     },
 });
 
+//== Design Properties
+//## Helper classes to change the look and feel of the widget
+//-------------------------------------------------------------------------------------------------------------------//
+// Progress Circle Color
+
 export const progressCircleSuccess = merge(ProgressCircle, {
     fill: {
         backgroundColor: brand.success,
     },
     text: {
         color: brand.success,
+    },
+});
+
+export const progressCircleWarning = merge(ProgressCircle, {
+    fill: {
+        backgroundColor: brand.warning,
+    },
+    text: {
+        color: brand.warning,
     },
 });
 

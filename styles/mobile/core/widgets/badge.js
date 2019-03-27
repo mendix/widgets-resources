@@ -11,6 +11,12 @@ export const com_mendix_widget_native_badge_Badge = (Badge = {
         color: contrast.higher,
     },
 });
+
+//== Design Properties
+//## Helper classes to change the look and feel of the widget
+//-------------------------------------------------------------------------------------------------------------------//
+// Badge Colors
+
 export const badgePrimary = merge(Badge, {
     container: {
         backgroundColor: button.primary.backgroundColor,

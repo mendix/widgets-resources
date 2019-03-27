@@ -2,27 +2,33 @@ import { contrast, brand, background, font } from '../variables';
 import { Platform } from 'react-native';
 
 /* ==========================================================================
-    TabContainer
+    Tab Container
 
-    Default Class For Mendix TabContainer Widget
+    Default Class For Mendix Tab Container Widget
 ========================================================================== */
 
 export const TabContainer = {
-    tabView: {
-        tabBarPosition: 'top',
+    container: {
+        // flex: 1,
+        // flexGrow: 1,
+        // width: '100%',
+        // height: '100%',
     },
     tabBar: {
         bounces: true,
-        pressColor: brand.primary,
+        pressColor: contrast.lower,
         pressOpacity: 0.8,
+        // tabBarPosition: 'top',
         backgroundColor: background.primary,
-        scrollEnabled: false,
+        // scrollEnabled: false,
     },
     indicator: {
         backgroundColor: brand.primary,
         height: Platform.select({ ios: 2, android: 2 }),
     },
-    tab: {},
+    tab: {
+        flex: 1,
+    },
     label: {
         color: contrast.highest,
     },
@@ -31,7 +37,8 @@ export const TabContainer = {
 //== Design Properties
 //## Helper classes to change the look and feel of the widget
 //-------------------------------------------------------------------------------------------------------------------//
-// Tabcontainer as content of page
+// Tab container as content of page
+
 export const tabContainerMinimal = {
     tabView: {
         tabBarPosition: 'top',

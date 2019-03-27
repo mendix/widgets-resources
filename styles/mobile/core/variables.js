@@ -24,16 +24,7 @@ export const background = {
     secondary: darkMode ? '#222' : '#f9f9f9', //FIXME: Colors based on bg color
 };
 
-// // Gray Colors
-// export const gray = {
-//     darkest: '#222',
-//     darker: '#444',
-//     dark: '#666',
-//     regular: '#888',
-//     light: '#aaa',
-//     lighter: '#ccc',
-//     lightest: '#eee',
-// };
+// Gray colors
 export const contrast = {
     highest: setContrastScale(background.primary, 0.99),
     higher: setContrastScale(background.primary, 0.83),
@@ -47,8 +38,8 @@ export const contrast = {
 // Border Style
 export const border = {
     color: setContrastScale(background.primary, 0.17),
+    width: 1,
     radius: 5,
-    radiusRounded: 25,
 };
 
 // Font Styles
@@ -67,7 +58,7 @@ export const font = {
     weightNormal: 'normal',
     weightSemiBold: '600',
     weightBold: 'bold',
-    family: Platform.select({ ios: 'system', android: 'normal' }),
+    family: Platform.select({ ios: 'System', android: 'normal' }),
 };
 
 // Spacing
@@ -85,7 +76,6 @@ export const spacing = {
 export const button = {
     fontSize: font.size,
     borderRadius: border.radius,
-    borderRadiusRounded: border.radiusRounded,
 
     header: {
         color: brand.primary,
@@ -117,4 +107,27 @@ export const button = {
         borderColor: brand.danger,
         backgroundColor: brand.danger,
     },
+};
+
+//Input Styles
+export const input = {
+    // Colors
+    color: contrast.higher,
+    errorColor: brand.danger,
+    borderColor: Platform.select({ ios: contrast.lowest, android: contrast.lower }),
+    backgroundColor: background.primary,
+    selectionColor: contrast.lower,
+    placeholderTextColor: contrast.low,
+    underlineColorAndroid: Platform.select({ android: 'transparent' }),
+
+    // Sizes
+    fontSize: font.size,
+    fontFamily: font.family,
+    borderWidth: border.width,
+    borderRadius: border.radius,
+
+    // Alignment
+    textAlign: 'left',
+    paddingHorizontal: Platform.select({ ios: spacing.small, android: spacing.small }),
+    paddingVertical: Platform.select({ ios: spacing.smaller, android: spacing.smallest }),
 };

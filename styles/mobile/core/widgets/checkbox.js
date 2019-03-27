@@ -1,6 +1,7 @@
-import { TextBox, TextBoxVertical } from './textbox';
 import { Platform } from 'react-native';
-import merge from '../_helperfunctions/mergeobjects';
+import { brand, spacing } from '../variables';
+import { TextBox, TextBoxVertical } from './textbox';
+import { hexToRGBString } from '../_helperfunctions/calculatecontrast';
 
 /* ==========================================================================
     CheckBox
@@ -11,34 +12,29 @@ import merge from '../_helperfunctions/mergeobjects';
 //TODO: Horizontal checkbox in vertical form
 
 export const CheckBox = {
+    container: {
+        ...TextBox.container,
+        paddingVertical: spacing.smallest,
+    },
     label: TextBox.label,
     input: {
-        paddingVertical: TextBox.input.paddingVertical,
-        paddingHorizontal: TextBox.input.paddingHorizontal,
-        ...Platform.select({
-            ios: {
-                borderTopWidth: 1,
-                borderBottomWidth: 1,
-            },
-            android: {
-                backgroundColor: 'transparent',
-            },
-        }),
+        backgroundColor: 'transparent',
+        marginRight: Platform.select({ ios: 0, android: -5 }),
+        // tintColor: `rgba(${hexToRGBString(brand.primary)},0.2)`,
+        // thumbTintColor: brand.primary,
+        tintColor: Platform.select({ android: `rgba(${hexToRGBString(brand.primary)},0.2)` }),
+        thumbTintColor: Platform.select({ android: brand.primary }),
     },
     inputError: TextBox.inputError,
     validationMessage: TextBox.validationMessage,
 };
 
-export const CheckBoxVertical = merge(TextBoxVertical, {
+export const CheckBoxVertical = {
+    container: TextBoxVertical.container,
+    label: TextBoxVertical.label,
     input: {
         backgroundColor: 'transparent',
     },
-});
-export const CheckBoxNoLabel = {
-    label: {
-        flex: -1,
-    },
-    input: CheckBox.input,
-    inputError: CheckBox.inputError,
-    validationMessage: CheckBox.validationMessage,
+    inputError: TextBoxVertical.inputError,
+    validationMessage: TextBoxVertical.validationMessage,
 };
