@@ -16,243 +16,340 @@ import { Platform } from 'react-native';
 
 //== Background sizing
 export const fullSize = {
-    // flexGrow: 1,
-    width: '100%',
-    height: '100%',
+    container: {
+        flex: 1,
+    },
 };
 export const fullWidth = {
-    width: '100%',
+    container: {
+        width: '100%',
+    },
 };
 export const fullHeight = {
-    height: '100%',
+    container: {
+        height: '100%',
+    },
 };
 
 //== Background Colors
 export const backgroundPrimary = {
-    backgroundColor: background.primary,
+    container: {
+        backgroundColor: background.primary,
+    },
 };
 export const backgroundSecondary = {
-    backgroundColor: background.secondary,
+    container: {
+        backgroundColor: background.secondary,
+    },
 };
 
 //== Flex layout
 export const flexRow = {
-    flexDirection: 'row',
+    container: {
+        flexDirection: 'row',
+    },
 };
 export const flexWrap = {
-    // flexWrap controls whether children can wrap around after they hit the end of a flex container.
-    flexWrap: 'wrap',
+    container: {
+        // flexWrap controls whether children can wrap around after they hit the end of a flex container.
+        flexWrap: 'wrap',
+    },
 };
 export const flexSpaceBetween = {
-    justifyContent: 'space-between',
+    container: {
+        justifyContent: 'space-between',
+    },
 };
 export const flexSpaceEvenly = {
-    justifyContent: 'space-evenly',
+    container: {
+        justifyContent: 'space-evenly',
+    },
 };
 export const flexSpaceAround = {
-    justifyContent: 'space-around',
+    container: {
+        justifyContent: 'space-around',
+    },
 };
 export const flexCrossDirectionAlignCenter = {
-    // alignItems aligns children in the cross direction.
-    // For example, if children are flowing vertically, alignItems controls how they align horizontally.
-    alignItems: 'center',
+    container: {
+        // alignItems aligns children in the cross direction.
+        // For example, if children are flowing vertically, alignItems controls how they align horizontally.
+        alignItems: 'center',
+    },
 };
 export const flexCrossDirectionAlignEnd = {
-    // alignItems aligns children in the cross direction.
-    // For example, if children are flowing vertically, alignItems controls how they align horizontally.
-    alignItems: 'flex-end',
+    container: {
+        // alignItems aligns children in the cross direction.
+        // For example, if children are flowing vertically, alignItems controls how they align horizontally.
+        alignItems: 'flex-end',
+    },
 };
 export const flexDirectionAlignCenter = {
-    // justifyContent aligns children in the main direction.
-    // For example, if children are flowing vertically, justifyContent controls how they align vertically.
-    justifyContent: 'center',
+    container: {
+        // justifyContent aligns children in the main direction.
+        // For example, if children are flowing vertically, justifyContent controls how they align vertically.
+        justifyContent: 'center',
+    },
 };
 export const flexDirectionAlignEnd = {
-    // justifyContent aligns children in the main direction.
-    // For example, if children are flowing vertically, justifyContent controls how they align vertically.
-    justifyContent: 'flex-end',
+    container: {
+        // justifyContent aligns children in the main direction.
+        // For example, if children are flowing vertically, justifyContent controls how they align vertically.
+        justifyContent: 'flex-end',
+    },
 };
 export const flexAlignCenter = {
-    ...flexDirectionAlignCenter,
-    ...flexCrossDirectionAlignCenter,
+    container: {
+        ...flexDirectionAlignCenter,
+        ...flexCrossDirectionAlignCenter,
+    },
 };
 export const flexMain = {
-    // flex 1 will take all available space not taken by flexItems.
-    flex: 1,
+    container: {
+        // flex 1 will take all available space not taken by flexItems.
+        flex: 1,
+    },
 };
 export const flexItem = {
-    // When flex is -1, the component is normally sized according width and height.
-    // However, if there's not enough space, the component will shrink to its minWidth and minHeight
-    flex: -1,
+    container: {
+        // When flex is -1, the component is normally sized according width and height.
+        // However, if there's not enough space, the component will shrink to its minWidth and minHeight
+        flex: -1,
+    },
 };
 export const flexItemCrossDirectionAlignStart = {
-    // controls how a child aligns in the cross direction, overriding the alignItems of the parent.
-    alignSelf: 'flex-start',
+    container: {
+        // controls how a child aligns in the cross direction, overriding the alignItems of the parent.
+        alignSelf: 'flex-start',
+    },
 };
 export const flexItemCrossDirectionAlignCenter = {
-    // controls how a child aligns in the cross direction, overriding the alignItems of the parent.
-    alignSelf: 'center',
+    container: {
+        // controls how a child aligns in the cross direction, overriding the alignItems of the parent.
+        alignSelf: 'center',
+    },
 };
 export const flexItemCrossDirectionAlignEnd = {
-    // controls how a child aligns in the cross direction, overriding the alignItems of the parent.
-    alignSelf: 'flex-end',
-};
-
-//== Alignment
-export const rowLeft = {
-    ...flexRow,
-    ...flexCrossDirectionAlignCenter,
-};
-export const rowCenter = {
-    ...flexRow,
-    ...flexAlignCenter,
-};
-export const rowRight = {
-    ...flexRow,
-    ...flexDirectionAlignEnd,
-    ...flexCrossDirectionAlignCenter,
-};
-export const columnLeft = {
-    ...flexCrossDirectionAlignCenter,
-};
-export const columnCenter = {
-    ...flexAlignCenter,
-};
-export const columnRight = {
-    ...flexDirectionAlignEnd,
-    ...flexCrossDirectionAlignCenter,
+    container: {
+        // controls how a child aligns in the cross direction, overriding the alignItems of the parent.
+        alignSelf: 'flex-end',
+    },
 };
 
 //== Inner Spacing
 export const spacingInner = {
-    padding: spacing.smaller,
+    container: {
+        padding: spacing.smaller,
+    },
 };
 export const spacingInnerVertical = {
-    paddingVertical: spacing.smaller,
+    container: {
+        paddingVertical: spacing.smaller,
+    },
 };
 export const spacingInnerHorizontal = {
-    paddingHorizontal: spacing.smaller,
+    container: {
+        paddingHorizontal: spacing.smaller,
+    },
 };
 export const spacingInnerTop = {
-    paddingTop: spacing.smaller,
+    container: {
+        paddingTop: spacing.smaller,
+    },
 };
 export const spacingInnerRight = {
-    paddingRight: spacing.smaller,
+    container: {
+        paddingRight: spacing.smaller,
+    },
 };
 export const spacingInnerLeft = {
-    paddingLeft: spacing.smaller,
+    container: {
+        paddingLeft: spacing.smaller,
+    },
 };
 export const spacingInnerBottom = {
-    paddingBottom: spacing.smaller,
+    container: {
+        paddingBottom: spacing.smaller,
+    },
 };
 
 export const spacingInnerMedium = {
-    padding: spacing.regular,
+    container: {
+        padding: spacing.regular,
+    },
 };
 export const spacingInnerVerticalMedium = {
-    paddingVertical: spacing.regular,
+    container: {
+        paddingVertical: spacing.regular,
+    },
 };
 export const spacingInnerHorizontalMedium = {
-    paddingHorizontal: spacing.regular,
+    container: {
+        paddingHorizontal: spacing.regular,
+    },
 };
 export const spacingInnerTopMedium = {
-    paddingTop: spacing.regular,
+    container: {
+        paddingTop: spacing.regular,
+    },
 };
 export const spacingInnerRightMedium = {
-    paddingRight: spacing.regular,
+    container: {
+        paddingRight: spacing.regular,
+    },
 };
 export const spacingInnerLeftMedium = {
-    paddingLeft: spacing.regular,
+    container: {
+        paddingLeft: spacing.regular,
+    },
 };
 export const spacingInnerBottomMedium = {
-    paddingBottom: spacing.regular,
+    container: {
+        paddingBottom: spacing.regular,
+    },
 };
 
 export const spacingInnerLarge = {
-    padding: spacing.larger,
+    container: {
+        padding: spacing.larger,
+    },
 };
 export const spacingInnerVerticalLarge = {
-    paddingVertical: spacing.larger,
+    container: {
+        paddingVertical: spacing.larger,
+    },
 };
 export const spacingInnerHorizontalLarge = {
-    paddingHorizontal: spacing.larger,
+    container: {
+        paddingHorizontal: spacing.larger,
+    },
 };
 export const spacingInnerTopLarge = {
-    paddingTop: spacing.larger,
+    container: {
+        paddingTop: spacing.larger,
+    },
 };
 export const spacingInnerRightLarge = {
-    paddingRight: spacing.larger,
+    container: {
+        paddingRight: spacing.larger,
+    },
 };
 export const spacingInnerLeftLarge = {
-    paddingLeft: spacing.larger,
+    container: {
+        paddingLeft: spacing.larger,
+    },
 };
 export const spacingInnerBottomLarge = {
-    paddingBottom: spacing.larger,
+    container: {
+        paddingBottom: spacing.larger,
+    },
 };
 
 //== Outer Spacing
 export const spacingOuter = {
-    margin: spacing.smaller,
+    container: {
+        margin: spacing.smaller,
+    },
 };
 export const spacingOuterVertical = {
-    marginVertical: spacing.smaller,
+    container: {
+        marginVertical: spacing.smaller,
+    },
 };
 export const spacingOuterHorizontal = {
-    marginHorizontal: spacing.smaller,
+    container: {
+        marginHorizontal: spacing.smaller,
+    },
 };
 export const spacingOuterTop = {
-    marginTop: spacing.smaller,
+    container: {
+        marginTop: spacing.smaller,
+    },
 };
 export const spacingOuterRight = {
-    marginRight: spacing.smaller,
+    container: {
+        marginRight: spacing.smaller,
+    },
 };
 export const spacingOuterLeft = {
-    marginLeft: spacing.smaller,
+    container: {
+        marginLeft: spacing.smaller,
+    },
 };
 export const spacingOuterBottom = {
-    marginBottom: spacing.smaller,
+    container: {
+        marginBottom: spacing.smaller,
+    },
 };
 
 export const spacingOuterMedium = {
-    margin: spacing.regular,
+    container: {
+        margin: spacing.regular,
+    },
 };
 export const spacingOuterVerticalMedium = {
-    marginVertical: spacing.regular,
+    container: {
+        marginVertical: spacing.regular,
+    },
 };
 export const spacingOuterHorizontalMedium = {
-    marginHorizontal: spacing.regular,
+    container: {
+        marginHorizontal: spacing.regular,
+    },
 };
 export const spacingOuterTopMedium = {
-    marginTop: spacing.regular,
+    container: {
+        marginTop: spacing.regular,
+    },
 };
 export const spacingOuterRightMedium = {
-    marginRight: spacing.regular,
+    container: {
+        marginRight: spacing.regular,
+    },
 };
 export const spacingOuterLeftMedium = {
-    marginLeft: spacing.regular,
+    container: {
+        marginLeft: spacing.regular,
+    },
 };
 export const spacingOuterBottomMedium = {
-    marginBottom: spacing.regular,
+    container: {
+        marginBottom: spacing.regular,
+    },
 };
 
 export const spacingOuterLarge = {
-    margin: spacing.larger,
+    container: {
+        margin: spacing.larger,
+    },
 };
 export const spacingOuterVerticalLarge = {
-    marginVertical: spacing.larger,
+    container: {
+        marginVertical: spacing.larger,
+    },
 };
 export const spacingOuterHorizontalLarge = {
-    marginHorizontal: spacing.larger,
+    container: {
+        marginHorizontal: spacing.larger,
+    },
 };
 export const spacingOuterTopLarge = {
-    marginTop: spacing.larger,
+    container: {
+        marginTop: spacing.larger,
+    },
 };
 export const spacingOuterRightLarge = {
-    marginRight: spacing.larger,
+    container: {
+        marginRight: spacing.larger,
+    },
 };
 export const spacingOuterLeftLarge = {
-    marginLeft: spacing.larger,
+    container: {
+        marginLeft: spacing.larger,
+    },
 };
 export const spacingOuterBottomLarge = {
-    marginBottom: spacing.larger,
+    container: {
+        marginBottom: spacing.larger,
+    },
 };

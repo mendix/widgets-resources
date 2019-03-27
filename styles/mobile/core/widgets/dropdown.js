@@ -1,58 +1,53 @@
-import { TextBox, TextBoxVertical } from './textbox';
+import { Platform } from 'react-native';
+import { input } from '../variables';
+import { TextBoxVertical, TextBox } from './textbox';
 
 /* ==========================================================================
-    DropDown
+    Drop Down
 
-    Default Class For Mendix DropDown Widget
+    Default Class For Mendix Drop Down Widget
 ========================================================================== */
 
 export const DropDown = {
+    container: TextBox.container,
     label: TextBox.label,
     pickerIOS: {},
     pickerItemIOS: {},
     pickerBackdropIOS: {},
     pickerTopIOS: {},
     value: {
-        color: TextBox.input.color,
-        // fontSize: TextBox.input.fontSize, //FIXME: Throws error
-        borderColor: TextBox.input.borderColor,
-        paddingVertical: TextBox.input.paddingVertical,
-        paddingHorizontal: TextBox.input.paddingHorizontal,
-        backgroundColor: TextBox.input.backgroundColor,
-        borderRadius: TextBox.input.radius,
-        borderWidth: TextBox.input.borderWidth,
-        borderColor: TextBox.input.borderColor,
+        color: input.color,
+        borderColor: input.borderColor,
+        backgroundColor: input.backgroundColor,
+
+        // height: 40,
+        // fontSize: input.fontSize, //FIXME: Throws error
+        borderWidth: Platform.select({ android: input.borderWidth }),
+        borderRadius: input.radius,
+
+        paddingHorizontal: Platform.select({ ios: 0, android: input.paddingHorizontal }),
+        paddingVertical: Platform.select({ ios: 0, android: input.paddingVertical }),
     },
 };
 export const DropDownVertical = {
+    container: TextBoxVertical.container,
     label: TextBoxVertical.label,
     pickerIOS: DropDown.pickerIOS,
     pickerItemIOS: DropDown.pickerItemIOS,
     pickerBackdropIOS: DropDown.pickerBackdropIOS,
     pickerTopIOS: DropDown.pickerTopIOS,
     value: {
-        marginBottom: TextBoxVertical.input.marginBottom,
-        color: TextBoxVertical.input.color,
-        // fontSize: TextBoxVertical.input.fontSize, //FIXME: Throws error
-        borderColor: TextBoxVertical.input.borderColor,
-        paddingVertical: TextBoxVertical.input.paddingVertical,
-        paddingHorizontal: TextBoxVertical.input.paddingHorizontal,
-        backgroundColor: TextBoxVertical.input.backgroundColor,
-        borderRadius: TextBoxVertical.input.radius,
-        borderColor: TextBoxVertical.input.borderColor,
-        borderWidth: TextBoxVertical.input.borderWidth,
-        borderTopWidth: TextBoxVertical.input.borderTopWidth,
-        borderBottomWidth: TextBoxVertical.input.borderBottomWidth,
-    },
-};
+        color: input.color,
+        borderColor: input.borderColor,
+        backgroundColor: input.backgroundColor,
 
-export const DropDownNoLabel = {
-    label: {
-        flex: -1,
+        // fontSize: input.fontSize, //FIXME: Throws error
+        borderRadius: input.radius,
+        borderWidth: Platform.select({ android: input.borderWidth }),
+        borderTopWidth: Platform.select({ ios: input.borderWidth }),
+        borderBottomWidth: Platform.select({ ios: input.borderWidth }),
+
+        paddingVertical: input.paddingVertical,
+        paddingHorizontal: input.paddingHorizontal,
     },
-    pickerIOS: DropDown.pickerIOS,
-    pickerItemIOS: DropDown.pickerItemIOS,
-    pickerBackdropIOS: DropDown.pickerBackdropIOS,
-    pickerTopIOS: DropDown.pickerTopIOS,
-    value: DropDown.value,
 };

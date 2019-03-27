@@ -2,6 +2,12 @@ import { contrast, brand, background, border } from '../variables';
 import merge from '../_helperfunctions/mergeobjects';
 import { Platform } from 'react-native';
 
+/* ==========================================================================
+    Range Slider
+
+    Default Class For Mendix Range Slider Widget
+========================================================================== */
+
 export const com_mendix_widget_native_rangeslider_RangeSlider = (RangeSlider = {
     // All these properties allow ViewStyle properties
     container: {},
@@ -65,19 +71,32 @@ export const com_mendix_widget_native_rangeslider_RangeSlider = (RangeSlider = {
     },
 });
 
-export const rangeSliderSuccess = merge(RangeSlider, {
+//== Design Properties
+//## Helper classes to change the look and feel of the widget
+//-------------------------------------------------------------------------------------------------------------------//
+// Range Slider Color
+
+export const sliderSuccess = merge(Slider, {
     highlight: {
         backgroundColor: brand.success,
     },
+    highlightDisabled: {
+        backgroundColor: Platform.select({ ios: brand.success, android: contrast.low }),
+    },
 });
-
-export const rangeSliderWarning = merge(RangeSlider, {
+export const sliderWarning = merge(Slider, {
     highlight: {
         backgroundColor: brand.warning,
     },
+    highlightDisabled: {
+        backgroundColor: Platform.select({ ios: brand.warning, android: contrast.low }),
+    },
 });
-export const rangeSliderDanger = merge(RangeSlider, {
+export const sliderDanger = merge(Slider, {
     highlight: {
         backgroundColor: brand.danger,
+    },
+    highlightDisabled: {
+        backgroundColor: Platform.select({ ios: brand.danger, android: contrast.low }),
     },
 });

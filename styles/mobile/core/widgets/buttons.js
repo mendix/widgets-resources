@@ -3,14 +3,15 @@ import { button, spacing, font, contrast, border } from '../variables';
 import merge from '../_helperfunctions/mergeobjects';
 
 /* ==========================================================================
-    Buttons
+    Button
 
     Default Class For Mendix Button Widget
 ========================================================================== */
 export const ActionButton = {
-    button: {
+    container: {
         borderWidth: 1,
         borderStyle: 'solid',
+        // rippleColor: ,
         borderColor: button.primary.borderColor,
         backgroundColor: button.primary.backgroundColor,
         alignItems: 'center',
@@ -37,7 +38,7 @@ export const ActionButton = {
 };
 
 export const ActionButtonHeader = {
-    button: {
+    container: {
         borderColor: button.header.borderColor,
         backgroundColor: button.header.backgroundColor,
         paddingVertical: 0,
@@ -57,7 +58,7 @@ export const ActionButtonHeader = {
 // Button Colors
 
 export const btnSecondary = {
-    button: {
+    container: {
         borderColor: button.secondary.borderColor,
         backgroundColor: button.secondary.backgroundColor,
     },
@@ -69,7 +70,7 @@ export const btnSecondary = {
     },
 };
 export const btnSuccess = {
-    button: {
+    container: {
         borderColor: button.success.borderColor,
         backgroundColor: button.success.backgroundColor,
     },
@@ -81,7 +82,7 @@ export const btnSuccess = {
     },
 };
 export const btnWarning = {
-    button: {
+    container: {
         borderColor: button.warning.borderColor,
         backgroundColor: button.warning.backgroundColor,
     },
@@ -93,7 +94,7 @@ export const btnWarning = {
     },
 };
 export const btnDanger = {
-    button: {
+    container: {
         borderColor: button.danger.borderColor,
         backgroundColor: button.danger.backgroundColor,
     },
@@ -105,9 +106,37 @@ export const btnDanger = {
     },
 };
 
+// Button sizes
+export const btnSmall = {
+    icon: {
+        size: font.sizeSmall,
+    },
+    caption: {
+        fontSize: font.sizeSmall,
+    },
+};
+export const btnLarge = {
+    icon: {
+        size: font.sizeLarge,
+    },
+    caption: {
+        fontSize: font.sizeLarge,
+    },
+};
+
+export const btnBlock = {
+    container: {
+        width: '100%',
+    },
+};
+
+//== Extra Classes
+//## Helper classes to change the look and feel of the widget
+//-------------------------------------------------------------------------------------------------------------------//
 // Button Icon Only
+
 export const btnIconPrimary = {
-    button: {
+    container: {
         borderWidth: 0,
         backgroundColor: 'transparent',
         padding: 0,
@@ -145,34 +174,3 @@ export const btnIconDanger = merge(btnIconPrimary, {
         color: button.danger.backgroundColor,
     },
 });
-
-// Button border
-export const btnRoundedBorder = {
-    button: {
-        borderRadius: button.borderRadiusRounded,
-    },
-};
-
-// Button sizes
-export const btnSmall = {
-    icon: {
-        size: font.sizeSmall,
-    },
-    caption: {
-        fontSize: font.sizeSmall,
-    },
-};
-export const btnLarge = {
-    icon: {
-        size: font.sizeLarge,
-    },
-    caption: {
-        fontSize: font.sizeLarge,
-    },
-};
-
-export const btnBlock = {
-    button: {
-        width: '100%',
-    },
-};

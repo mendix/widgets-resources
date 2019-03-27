@@ -1,4 +1,4 @@
-import {contrast, background, spacing, font, brand } from '../core/variables';
+import { contrast, background, spacing, font, brand } from '../core/variables';
 import merge from '../core/_helperfunctions/mergeobjects';
 import { Platform } from 'react-native';
 
@@ -8,7 +8,7 @@ import { Platform } from 'react-native';
 // Buttons
 export const cardButton = {
     //Temporary invisible button to make a card clickable
-    button: {
+    container: {
         position: 'absolute',
         top: 0,
         right: 0,
@@ -22,7 +22,7 @@ export const cardButton = {
 };
 
 export const btnListItem = {
-    button: {
+    container: {
         width: '100%',
         borderWidth: 0,
         borderRadius: 0,
@@ -58,7 +58,7 @@ export const btnListItem = {
     },
 };
 export const btnListItemTop = merge(btnListItem, {
-    button: {
+    container: {
         borderTopWidth: 1,
     },
 });
@@ -71,66 +71,65 @@ export const colorWheelContainer = {
 
 // Spacing
 export const androidSpacingInnerVerticalLarge = {
-    paddingVertical: Platform.select({ ios: 0, android: spacing.large }),
+    container: {
+        paddingVertical: Platform.select({ ios: 0, android: spacing.large }),
+    },
 };
 export const androidSpacingInnerHorizontalMedium = {
-    paddingHorizontal: Platform.select({ ios: 0, android: spacing.small }),
+    container: {
+        paddingHorizontal: Platform.select({ ios: 0, android: spacing.small }),
+    },
 };
 export const androidSpacingInnerVertical = {
-    paddingVertical: Platform.select({ ios: 0, android: spacing.smallest }),
+    container: {
+        paddingVertical: Platform.select({ ios: 0, android: spacing.smallest }),
+    },
 };
 export const spacingOuterBottomNone = {
-    marginBottom: 0,
+    container: {
+        marginBottom: 0,
+    },
 };
 export const hide = {
-    display: 'none',
+    container: {
+        display: 'none',
+    },
 };
 
 export const borderTop = {
-    ...Platform.select({
-        ios: {
-            borderTopWidth: 1,
-            borderColor: contrast.lowest,
-        },
-        android: {},
-    }),
+    container: {
+        ...Platform.select({
+            ios: {
+                borderTopWidth: 1,
+                borderColor: contrast.lowest,
+            },
+            android: {},
+        }),
+    },
 };
-export const inputWrapper = {
-    ...Platform.select({
-        ios: {
-            borderBottomWidth: 1,
-            borderColor: contrast.lowest,
-            backgroundColor: background.primary,
-        },
-        android: {
-            marginBottom: spacing.regular,
-        },
-    }),
-};
-
-export const homeHeader = {
-    // height: 300,
-    width: '100%',
-    paddingTop: 20,
-    paddingBottom: 20,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    elevation: 2,
-    shadowColor: contrast.lowest,
-    // shadowOpacity: 0.9,
-    // shadowRadius: 8,
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-};
+// export const inputWrapper = {
+//     container: {
+//         ...Platform.select({
+//             ios: {
+//                 borderBottomWidth: 1,
+//                 borderColor: contrast.lowest,
+//                 backgroundColor: background.primary,
+//             },
+//             android: {
+//                 marginBottom: spacing.regular,
+//             },
+//         }),
+//     },
+// };
 
 export const homeHeaderPhone = {
-    height: 200,
-    width: '100%',
-    // flexGrow: 1,
-    // aspectRatio: 1,
-    resizeMode: 'contain',
+    container: {
+        height: 200,
+        width: '100%',
+        // flexGrow: 1,
+        // aspectRatio: 1,
+        resizeMode: 'contain',
+    },
 };
 // export const homeHeaderLogo = {
 //     height: 100,
@@ -140,5 +139,7 @@ export const homeHeaderPhone = {
 // };
 
 export const tempBorder = {
-    borderWidth: 2,
+    container: {
+        borderWidth: 2,
+    },
 };

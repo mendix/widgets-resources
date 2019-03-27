@@ -2,6 +2,12 @@ import { contrast, brand, background, border } from '../variables';
 import merge from '../_helperfunctions/mergeobjects';
 import { Platform } from 'react-native';
 
+/* ==========================================================================
+    Slider
+
+    Default Class For Mendix Slider Widget
+========================================================================== */
+
 export const com_mendix_widget_native_slider_Slider = (Slider = {
     // All these properties allow ViewStyle properties
     container: {},
@@ -65,18 +71,32 @@ export const com_mendix_widget_native_slider_Slider = (Slider = {
     },
 });
 
+//== Design Properties
+//## Helper classes to change the look and feel of the widget
+//-------------------------------------------------------------------------------------------------------------------//
+// Slider Color
+
 export const sliderSuccess = merge(Slider, {
     highlight: {
         backgroundColor: brand.success,
+    },
+    highlightDisabled: {
+        backgroundColor: Platform.select({ ios: brand.success, android: contrast.low }),
     },
 });
 export const sliderWarning = merge(Slider, {
     highlight: {
         backgroundColor: brand.warning,
     },
+    highlightDisabled: {
+        backgroundColor: Platform.select({ ios: brand.warning, android: contrast.low }),
+    },
 });
 export const sliderDanger = merge(Slider, {
     highlight: {
         backgroundColor: brand.danger,
+    },
+    highlightDisabled: {
+        backgroundColor: Platform.select({ ios: brand.danger, android: contrast.low }),
     },
 });

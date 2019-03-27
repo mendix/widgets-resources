@@ -1,26 +1,30 @@
+import { Platform } from 'react-native';
 import { TextBox, TextBoxVertical } from './textbox';
-import merge from '../_helperfunctions/mergeobjects';
 
 /* ==========================================================================
-    TextArea
+    Text Area
 
-    Default Class For Mendix TextArea Widget
+    Default Class For Mendix Text Area Widget
 ========================================================================== */
 
-export const TextArea = merge(TextBox, {
+export const TextArea = {
+    container: TextBox.container,
     label: {
+        ...TextBox.label,
         textAlignVertical: 'top',
     },
     input: {
-        textAlignVertical: 'top',
+        ...TextBox.input,
+        textAlignVertical: Platform.select({ ios: 'top', android: 'top' }),
     },
-});
-export const TextAreaVertical = TextBoxVertical;
-export const TextAreaNoLabel = {
-    label: {
-        flex: -1,
-    },
-    input: TextArea.input,
-    inputError: TextArea.inputError,
-    validationMessage: TextArea.validationMessage,
+    inputError: TextBox.inputError,
+    validationMessage: TextBox.validationMessage,
+};
+
+export const TextAreaVertical = {
+    container: TextBoxVertical.container,
+    label: TextBoxVertical.label,
+    input: TextBoxVertical.input,
+    inputError: TextBoxVertical.inputError,
+    validationMessage: TextBoxVertical.validationMessage,
 };
