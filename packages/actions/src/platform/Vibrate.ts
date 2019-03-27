@@ -7,7 +7,7 @@
 import ReactNative from "react-native";
 
 /**
- * @param {Big} duration - How long to vibrate in milliseconds. Default value is 500. Android only.
+ * @param {Big} duration - Android only setting. The time (in milliseconds) the device should vibrate. Set to empty to use the default value 500.
  * @returns {boolean}
  */
 function Vibrate(duration?: BigJs.Big): boolean {

@@ -15,10 +15,10 @@ import ReactNativeFirebase from "react-native-firebase";
  * @param {string} title
  * @param {string} subtitle
  * @param {boolean} playSound
- * @param {Big} iosBadgeNumber
+ * @param {Big} iosBadgeNumber - iOS only setting.
+ * @param {string} notificationId - This ID can be used to cancel the scheduled notification later.
  * @param {string} actionName
  * @param {string} actionGuid
- * @param {string} notificationId - This ID can be used to cancel the scheduled notification later.
  * @returns {boolean}
  */
 function ScheduleNotification(
@@ -28,9 +28,9 @@ function ScheduleNotification(
     subtitle?: string,
     playSound?: boolean,
     iosBadgeNumber?: BigJs.Big,
+    notificationId?: string,
     actionName?: string,
-    actionGuid?: string,
-    notificationId?: string
+    actionGuid?: string
 ): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/scheduling-notifications

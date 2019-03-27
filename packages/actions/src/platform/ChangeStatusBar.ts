@@ -9,13 +9,13 @@ import ReactNative, { StatusBarAnimation, StatusBarStyle } from "react-native";
 type Style = "DefaultStyle" | "LightContentStyle" | "DarkContentStyle";
 
 /**
- * @param {"NativeMobileActions.StatusBarStyle.DefaultStyle"|"NativeMobileActions.StatusBarStyle.LightContentStyle"|"NativeMobileActions.StatusBarStyle.DarkContentStyle"} style
+ * @param {"NativeMobileActions.StatusBarStyle.DefaultStyle"|"NativeMobileActions.StatusBarStyle.LightContentStyle"|"NativeMobileActions.StatusBarStyle.DarkContentStyle"} style - If empty, the current style is not changed.
  * @param {boolean} hidden
  * @param {boolean} animateChanges
- * @param {string} backgroundColor - Android only
- * @param {boolean} translucent - Android only
- * @param {boolean} networkActivityIndicatorVisible - iOS only
- * @param {"NativeMobileActions.StatusBarHideShowAnimation.none"|"NativeMobileActions.StatusBarHideShowAnimation.fade"|"NativeMobileActions.StatusBarHideShowAnimation.slide"} animateHideShow - iOS only
+ * @param {string} backgroundColor - If empty, the current background color is not changed.
+ * @param {boolean} translucent
+ * @param {boolean} networkActivityIndicatorVisible
+ * @param {"NativeMobileActions.StatusBarHideShowAnimation.none"|"NativeMobileActions.StatusBarHideShowAnimation.fade"|"NativeMobileActions.StatusBarHideShowAnimation.slide"} animateHideShow - If empty, the default value 'none' is used.
  * @returns {boolean}
  */
 function ChangeStatusBar(

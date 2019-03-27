@@ -14,7 +14,7 @@ import ReactNativeFirebase from "react-native-firebase";
  * @param {string} title
  * @param {string} subtitle
  * @param {boolean} playSound
- * @param {Big} iosBadgeNumber
+ * @param {Big} iosBadgeNumber - iOS only setting.
  * @param {string} actionName
  * @param {string} actionGuid
  * @returns {boolean}

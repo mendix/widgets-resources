@@ -7,6 +7,7 @@
 import ReactNativeFirebase from "react-native-firebase";
 
 /**
+ * @param {Big} badgeNumber - This field is required. Should be greater than or equal to 0.
  * @returns {boolean}
  */
 function SetBadgeNumber(badgeNumber?: BigJs.Big): boolean {

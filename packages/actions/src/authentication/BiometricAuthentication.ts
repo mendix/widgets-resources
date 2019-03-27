@@ -7,7 +7,7 @@
 import ReactNativeTouchId from "react-native-touch-id";
 
 /**
- * @param {string} reason - The reason for requesting authentication.
+ * @param {string} reason - The reason for requesting authentication. If empty, the system default message is used.
  * @returns {boolean}
  */
 function BiometricAuthentication(reason?: string): Promise<boolean> {
