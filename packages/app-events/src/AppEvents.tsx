@@ -12,6 +12,7 @@ export class AppEvents extends Component<AppEventsProps<undefined>> {
 
     private isConnected?: boolean;
     private lastOnOnline = 0;
+    private lastOnOffline = 0;
 
     private intervalHandles: number[] = [];
     private timeoutHandles: number[] = [];
@@ -79,6 +80,11 @@ export class AppEvents extends Component<AppEventsProps<undefined>> {
         if (nextIsConnected && isPastTimeout(this.lastOnOnline, this.props.onOnlineTimeout)) {
             executeAction(this.props.onOnline);
             this.lastOnOnline = Date.now();
+        }
+
+        if (!nextIsConnected && isPastTimeout(this.lastOnOffline, this.props.onOfflineTimeout)) {
+            executeAction(this.props.onOffline);
+            this.lastOnOffline = Date.now();
         }
 
         this.isConnected = nextIsConnected;

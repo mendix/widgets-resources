@@ -28,6 +28,8 @@ export interface AppEventsProps<Style> extends CommonProps<Style> {
     onResumeTimeout: number;
     onOnline?: ActionValue;
     onOnlineTimeout: number;
+    onOffline?: ActionValue;
+    onOfflineTimeout: number;
     timeouts: TimeoutsType[];
     intervals: IntervalsType[];
 }

@@ -21,6 +21,8 @@
                     <description>Only call the action if it was this amount of seconds after the last time the app was resumed (or started).</description>
                 </property>
             </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Network events">
             <propertyGroup caption="On online">
                 <property key="onOnline" type="action" required="false">
                     <caption>Online action</caption>
@@ -29,6 +31,16 @@
                 <property key="onOnlineTimeout" type="integer" defaultValue="5">
                     <caption>Online timeout</caption>
                     <description>Only call the action if it was this amount of seconds after the last time the device came online.</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="On offline">
+                <property key="onOffline" type="action" required="false">
+                    <caption>Offline action</caption>
+                    <description>The device network status changed to offline.</description>
+                </property>
+                <property key="onOfflineTimeout" type="integer" defaultValue="5">
+                    <caption>Offline timeout</caption>
+                    <description>Only call the action if it was this amount of seconds after the last time the device went offline.</description>
                 </property>
             </propertyGroup>
         </propertyGroup>
