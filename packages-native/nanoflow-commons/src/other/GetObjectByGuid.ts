@@ -5,8 +5,8 @@
 // Other code you write will be lost the next time you deploy the project.
 
 /**
- * @param {string} entity
- * @param {string} objectGuid
+ * @param {string} entity - This field is required.
+ * @param {string} objectGuid - This field is required.
  * @returns {MxObject}
  */
 function GetObjectByGuid(entity: string, objectGuid: string): Promise<mendix.lib.MxObject> {

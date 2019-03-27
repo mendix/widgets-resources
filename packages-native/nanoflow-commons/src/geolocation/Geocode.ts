@@ -11,13 +11,13 @@ type GeocodingProvider = "Google" | "Geocodio" | "LocationIQ" | "MapQuest";
 /**
  * @param {string} address - This field is required.
  * @param {"NanoflowCommons.GeocodingProvider.Google"|"NanoflowCommons.GeocodingProvider.Geocodio"|"NanoflowCommons.GeocodingProvider.LocationIQ"|"NanoflowCommons.GeocodingProvider.MapQuest"} geocodingProvider - This field is required for use on web.
- * @param {string} geocodingProviderApiKey - This field is required for use on web.
+ * @param {string} providerApiKey - This field is required for use on web.
  * @returns {MxObject}
  */
 function Geocode(
     address?: string,
     geocodingProvider?: GeocodingProvider,
-    geocodingProviderApiKey?: string
+    providerApiKey?: string
 ): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
     /**
@@ -48,11 +48,11 @@ function Geocode(
         throw new TypeError("Input parameter 'Geocoding provider' is required for use on web");
     }
 
-    if (!geocodingProviderApiKey) {
-        throw new TypeError("Input parameter 'Geocoding provider api key' is required for use on web");
+    if (!providerApiKey) {
+        throw new TypeError("Input parameter 'Provider api key' is required for use on web");
     }
 
-    const url = getApiUrl(geocodingProvider, address, geocodingProviderApiKey);
+    const url = getApiUrl(geocodingProvider, address, providerApiKey);
 
     return fetch(url)
         .then(response =>

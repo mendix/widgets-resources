@@ -9,8 +9,8 @@ import ReactNative from "react-native";
 /**
  * @param {string} title - This field is required.
  * @param {string} message
- * @param {string} cancelText - The default text is 'Cancel'.
- * @param {string} okText - The default text is 'OK'.
+ * @param {string} cancelText - Set to empty to use default text 'Cancel'.
+ * @param {string} okText - Set to empty to use default text 'OK'.
  * @returns {boolean}
  */
 function ShowConfirmation(title?: string, message?: string, cancelText?: string, okText?: string): Promise<boolean> {

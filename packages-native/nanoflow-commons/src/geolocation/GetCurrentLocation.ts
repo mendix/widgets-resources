@@ -7,9 +7,9 @@
 import { GeolocationError, GeolocationReturnType, GeoOptions } from "react-native";
 
 /**
- * @param {Big} timeout - The maximum length of time (in milliseconds) the device is allowed to take in order to return a location.
- * @param {Big} maximumAge - The maximum age (in milliseconds) of a possible cached position that is acceptable to return. If set to 0, it means that the device cannot use a cached position and must attempt to retrieve the real current position. By default the device will always return a cached position regardless of its age.
- * @param {boolean} highAccuracy - Use a higher accuracy method to determine the current location. Disabling this saves battery life.
+ * @param {Big} timeout - The maximum length of time (in milliseconds) the device is allowed to take in order to return a location. If empty, there is no timeout.
+ * @param {Big} maximumAge - The maximum age (in milliseconds) of a possible cached position that is acceptable to return. If set to 0, it means that the device cannot use a cached position and must attempt to retrieve the real current position. If empty, the device will always return a cached position regardless of its age.
+ * @param {boolean} highAccuracy - Use a higher accuracy method to determine the current location. Setting this to false saves battery life.
  * @returns {MxObject}
  */
 function GetCurrentLocation(
