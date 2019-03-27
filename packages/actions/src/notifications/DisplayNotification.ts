@@ -14,7 +14,6 @@ import ReactNativeFirebase from "react-native-firebase";
  * @param {string} title
  * @param {string} subtitle
  * @param {boolean} playSound
- * @param {Big} iosBadgeNumber - iOS only setting.
  * @param {string} actionName
  * @param {string} actionGuid
  * @returns {boolean}
@@ -24,7 +23,6 @@ function DisplayNotification(
     title?: string,
     subtitle?: string,
     playSound?: boolean,
-    iosBadgeNumber?: BigJs.Big,
     actionName?: string,
     actionGuid?: string
 ): Promise<boolean> {
@@ -35,10 +33,6 @@ function DisplayNotification(
 
     if (!body) {
         throw new TypeError("Input parameter 'Body' is required");
-    }
-
-    if (iosBadgeNumber && iosBadgeNumber.lte(0)) {
-        throw new TypeError("Input parameter 'iOS badge number' should be greater than zero");
     }
 
     const channel = new firebase.notifications.Android.Channel(
@@ -62,10 +56,6 @@ function DisplayNotification(
 
     if (playSound) {
         notification.setSound("default");
-    }
-
-    if (iosBadgeNumber) {
-        notification.ios.setBadge(Number(iosBadgeNumber));
     }
 
     if (actionName || actionGuid) {
