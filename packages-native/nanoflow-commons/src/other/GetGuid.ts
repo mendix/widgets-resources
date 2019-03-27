@@ -5,8 +5,8 @@
 // Other code you write will be lost the next time you deploy the project.
 
 /**
- * @param {string} entity
- * @param {MxObject} entityObject
+ * @param {string} entity - This field is required.
+ * @param {MxObject} entityObject - This field is required.
  * @returns {string}
  */
 function GetGuid(entity: string, entityObject: mendix.lib.MxObject): string {

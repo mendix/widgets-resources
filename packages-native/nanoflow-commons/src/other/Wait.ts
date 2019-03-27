@@ -5,7 +5,7 @@
 // Other code you write will be lost the next time you deploy the project.
 
 /**
- * @param {MxObject} entity
+ * @param {Big} delay - The number of milliseconds to wait. This field is required.
  * @returns {boolean}
  */
 function Wait(delay?: BigJs.Big): Promise<boolean> {
