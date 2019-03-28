@@ -48,7 +48,4 @@ export const tabContainerMinimal = {
         backgroundColor: 'transparent',
         elevation: 0,
     },
-    indicator: {},
-    tab: {},
-    label: {},
 };

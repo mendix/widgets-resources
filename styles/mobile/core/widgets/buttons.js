@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { button, spacing, font, contrast, border } from '../variables';
+import { button, spacing, font, contrast } from '../variables';
 import merge from '../_helperfunctions/mergeobjects';
 
 /* ==========================================================================

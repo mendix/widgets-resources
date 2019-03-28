@@ -1,6 +1,5 @@
 import { brand } from '../variables';
 import { hexToRGBString } from '../_helperfunctions/calculatecontrast';
-import merge from '../_helperfunctions/mergeobjects';
 import { Platform } from 'react-native';
 
 /* ==========================================================================
@@ -35,46 +34,46 @@ export const com_mendix_widget_native_progressbar_ProgressBar = (ProgressBar = {
 //-------------------------------------------------------------------------------------------------------------------//
 // Progress Bar Color
 
-export const progressBarSuccess = merge(ProgressBar, {
+export const progressBarSuccess = {
     bar: {
-        borderColor: Platform.select({ ios: brand.success }), //TODO: Check for merge => platform bug
+        borderColor: Platform.select({ ios: brand.success }),
         backgroundColor: Platform.select({ android: `rgba(${hexToRGBString(brand.success)},0.2)` }),
     },
     fill: {
         backgroundColor: brand.success,
     },
-});
+};
 
-export const progressBarWarning = merge(ProgressBar, {
+export const progressBarWarning = {
     bar: {
-        borderColor: Platform.select({ ios: brand.warning }), //TODO: Check for merge => platform bug
+        borderColor: Platform.select({ ios: brand.warning }),
         backgroundColor: Platform.select({ android: `rgba(${hexToRGBString(brand.warning)},0.2)` }),
     },
     fill: {
         backgroundColor: brand.warning,
     },
-});
+};
 
-export const progressBarDanger = merge(ProgressBar, {
+export const progressBarDanger = {
     bar: {
-        borderColor: Platform.select({ ios: brand.danger }), //TODO: Check for merge => platform bug
+        borderColor: Platform.select({ ios: brand.danger }),
         backgroundColor: Platform.select({ android: `rgba(${hexToRGBString(brand.danger)},0.2)` }),
     },
     fill: {
         backgroundColor: brand.danger,
     },
-});
+};
 
 // Progress Bar Size
-export const progressBarSmall = merge(ProgressBar, {
+export const progressBarSmall = {
     bar: {
         height: 3,
         borderRadius: 2,
     },
-});
-export const progressBarLarge = merge(ProgressBar, {
+};
+export const progressBarLarge = {
     bar: {
         height: 10,
         borderRadius: 8,
     },
-});
+};

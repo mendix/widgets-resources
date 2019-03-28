@@ -1,5 +1,4 @@
 import { contrast, brand, background, border } from '../variables';
-import merge from '../_helperfunctions/mergeobjects';
 import { Platform } from 'react-native';
 
 /* ==========================================================================
@@ -16,7 +15,7 @@ export const com_mendix_widget_native_rangeslider_RangeSlider = (RangeSlider = {
     },
     trackDisabled: {
         backgroundColor: contrast.lower,
-        opacity: Platform.select({ ios: 0.4 }), //TODO: Check for merge => platform bug
+        opacity: Platform.select({ ios: 0.4 }),
     },
     highlight: {
         backgroundColor: brand.primary,
@@ -63,7 +62,6 @@ export const com_mendix_widget_native_rangeslider_RangeSlider = (RangeSlider = {
     markerActive: {
         ...Platform.select({
             android: {
-                //TODO: Check for merge => platform bug
                 borderWidth: 0,
                 transform: [{ scale: 2 }],
             },
@@ -76,27 +74,27 @@ export const com_mendix_widget_native_rangeslider_RangeSlider = (RangeSlider = {
 //-------------------------------------------------------------------------------------------------------------------//
 // Range Slider Color
 
-export const sliderSuccess = merge(Slider, {
+export const rangeSliderSuccess = {
     highlight: {
         backgroundColor: brand.success,
     },
     highlightDisabled: {
         backgroundColor: Platform.select({ ios: brand.success, android: contrast.low }),
     },
-});
-export const sliderWarning = merge(Slider, {
+};
+export const rangeSliderWarning = {
     highlight: {
         backgroundColor: brand.warning,
     },
     highlightDisabled: {
         backgroundColor: Platform.select({ ios: brand.warning, android: contrast.low }),
     },
-});
-export const sliderDanger = merge(Slider, {
+};
+export const rangeSliderDanger = {
     highlight: {
         backgroundColor: brand.danger,
     },
     highlightDisabled: {
         backgroundColor: Platform.select({ ios: brand.danger, android: contrast.low }),
     },
-});
+};

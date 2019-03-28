@@ -1,5 +1,4 @@
 import { brand, font } from '../variables';
-import merge from '../_helperfunctions/mergeobjects';
 
 /* ==========================================================================
     Progress Circle
@@ -34,29 +33,29 @@ export const com_mendix_widget_native_progresscircle_ProgressCircle = (ProgressC
 //-------------------------------------------------------------------------------------------------------------------//
 // Progress Circle Color
 
-export const progressCircleSuccess = merge(ProgressCircle, {
+export const progressCircleSuccess = {
     fill: {
         backgroundColor: brand.success,
     },
     text: {
         color: brand.success,
     },
-});
+};
 
-export const progressCircleWarning = merge(ProgressCircle, {
+export const progressCircleWarning = {
     fill: {
         backgroundColor: brand.warning,
     },
     text: {
         color: brand.warning,
     },
-});
+};
 
-export const progressCircleDanger = merge(ProgressCircle, {
+export const progressCircleDanger = {
     fill: {
         backgroundColor: brand.danger,
     },
     text: {
         color: brand.danger,
     },
-});
+};

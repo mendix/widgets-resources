@@ -1,5 +1,4 @@
 import { button, contrast } from '../variables';
-import merge from '../_helperfunctions/mergeobjects';
 
 export const com_mendix_widget_native_badge_Badge = (Badge = {
     container: {
@@ -17,35 +16,35 @@ export const com_mendix_widget_native_badge_Badge = (Badge = {
 //-------------------------------------------------------------------------------------------------------------------//
 // Badge Colors
 
-export const badgePrimary = merge(Badge, {
+export const badgePrimary = {
     container: {
         backgroundColor: button.primary.backgroundColor,
     },
     text: {
         color: button.primary.color,
     },
-});
-export const badgeSuccess = merge(Badge, {
+};
+export const badgeSuccess = {
     container: {
         backgroundColor: button.success.backgroundColor,
     },
     text: {
         color: button.success.color,
     },
-});
-export const badgeWarning = merge(Badge, {
+};
+export const badgeWarning = {
     container: {
         backgroundColor: button.warning.backgroundColor,
     },
     text: {
         color: button.warning.color,
     },
-});
-export const badgeDanger = merge(Badge, {
+};
+export const badgeDanger = {
     container: {
         backgroundColor: button.danger.backgroundColor,
     },
     text: {
         color: button.danger.color,
     },
-});
+};
