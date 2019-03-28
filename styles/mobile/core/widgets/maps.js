@@ -1,4 +1,4 @@
-import { brand, deviceWidth } from '../variables';
+import { brand } from '../variables';
 
 /* ==========================================================================
     Maps
@@ -10,7 +10,7 @@ export const com_mendix_widget_native_maps_Maps = (Maps = {
     container: {
         // All ViewStyle properties are allowed
         flex: 1,
-        height: 200,
+        aspectRatio: 4 / 3,
     },
     marker: {
         //Just allow these 2 properties
@@ -42,7 +42,7 @@ export const mapsDanger = {
 // Maps Size
 export const mapsSquare = {
     container: {
-        aspectRatio: 1,
+        aspectRatio: 1 / 1,
     },
 };
 

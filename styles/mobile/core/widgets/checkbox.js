@@ -9,8 +9,6 @@ import { hexToRGBString } from '../_helperfunctions/calculatecontrast';
     Default Class For Mendix CheckBox Widget
 ========================================================================== */
 
-//TODO: Horizontal checkbox in vertical form
-
 export const CheckBox = {
     container: {
         ...TextBox.container,
@@ -22,8 +20,8 @@ export const CheckBox = {
         marginRight: Platform.select({ ios: 0, android: -5 }),
         // tintColor: `rgba(${hexToRGBString(brand.primary)},0.2)`,
         // thumbTintColor: brand.primary,
-        tintColor: Platform.select({ android: `rgba(${hexToRGBString(brand.primary)},0.2)` }),
-        thumbTintColor: Platform.select({ android: brand.primary }),
+        // tintColor: Platform.select({ android: `rgba(${hexToRGBString(brand.primary)},0.2)` }),
+        // thumbTintColor: Platform.select({ android: brand.primary }),
     },
     inputError: TextBox.inputError,
     validationMessage: TextBox.validationMessage,
