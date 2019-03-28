@@ -88,7 +88,7 @@ export class RichText extends Component<RichTextProps> {
         if (prevProps.readOnly && !this.props.readOnly && this.props.readOnlyStyle !== "text") {
             this.setUpEditor(this.props);
         }
-        if (this.quill && this.props.value !== this.quill.root.innerHTML) {
+        if (this.quill && this.props.value !== this.quill.root.innerHTML && !(this.props.readOnly && this.props.readOnlyStyle === "text")) {
             this.updateEditor(this.props);
         }
     }
