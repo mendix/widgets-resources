@@ -169,8 +169,12 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
         return Promise.resolve([]);
     }
 
-    private setLocationsFromMxObjects = (mxObjects: mendix.lib.MxObject[], locationAttr: DataSourceLocationProps): Promise<Location[]> =>
-        Promise.all(mxObjects.map(mxObject =>
+    private setLocationsFromMxObjects(mxObjects: mendix.lib.MxObject[] | null, locationAttr: DataSourceLocationProps): Promise<Location[]> {
+        if (!mxObjects) {
+            return Promise.resolve([]);
+        }
+
+        return Promise.all(mxObjects.map(mxObject =>
             fetchMarkerObjectUrl({
                 type: locationAttr.markerImage,
                 markerIcon: locationAttr.staticMarkerIcon,
@@ -187,7 +191,8 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
                     locationAttr
                 };
             })
-        ))
+        ));
+    }
 
     private onClickMarker = (event: LeafletEvent & google.maps.MouseEvent, locationAttr: DataSourceLocationProps) => {
         const { locations } = this.state;
