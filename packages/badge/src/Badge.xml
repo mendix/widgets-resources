@@ -6,7 +6,7 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
-                <property key="caption" type="textTemplate" required="false">
+                <property key="caption" type="textTemplate">
                     <caption>Caption</caption>
                     <description/>
                 </property>
@@ -20,7 +20,6 @@
             <propertyGroup caption="Common">
                 <systemProperty key="Name"/>
             </propertyGroup>
-            <!-- move system name also to general, just like button -->
         </propertyGroup>
     </properties>
 </widget>

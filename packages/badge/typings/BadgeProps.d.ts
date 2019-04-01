@@ -9,6 +9,6 @@ interface CommonProps<Style> {
 }
 
 export interface BadgeProps<Style> extends CommonProps<Style> {
-    caption?: DynamicValue<string>;
+    caption: DynamicValue<string>;
     onClick?: ActionValue;
 }
