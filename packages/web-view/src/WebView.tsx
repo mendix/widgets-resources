@@ -1,7 +1,7 @@
 import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
 import { Text, View } from "react-native";
-import { WebView as RNWebView } from "react-native-webview";
+import { WebView as RNWebView, WebViewSource } from "react-native-webview";
 
 import { WebViewProps } from "../typings/WebViewProps";
 import { defaultWebViewStyle, WebViewStyle } from "./ui/Styles";
@@ -12,18 +12,20 @@ export class WebView extends Component<WebViewProps<WebViewStyle>> {
     private readonly styles = flattenStyles(defaultWebViewStyle, this.props.style);
 
     render(): JSX.Element {
-        const url = this.props.url && this.props.url.value ? this.props.url.value : this.props.staticUrl;
+        const hasUrl = !!(this.props.url && this.props.url.value);
+        const hasContent = !!(this.props.content && this.props.content.value);
 
-        if (!url) {
+        if (!hasUrl && !hasContent) {
             return (
                 <View style={this.styles.errorContainer}>
-                    <Text style={this.styles.errorText}>No URL</Text>
+                    <Text style={this.styles.errorText}>No URL/content provided</Text>
                 </View>
             );
         }
+
         return (
             <RNWebView
-                source={{ uri: url }}
+                source={this.getSource(hasContent)}
                 style={this.styles.container}
                 onLoad={this.onLoadHandler}
                 onError={this.onErrorHandler}
@@ -31,6 +33,17 @@ export class WebView extends Component<WebViewProps<WebViewStyle>> {
                 useWebKit={true}
             />
         );
+    }
+
+    private getSource(hasContent: boolean): WebViewSource {
+        if (hasContent) {
+            return {
+                html: this.props.content!.value
+            };
+        }
+        return {
+            uri: this.props.url!.value
+        };
     }
 
     private onLoad(): void {

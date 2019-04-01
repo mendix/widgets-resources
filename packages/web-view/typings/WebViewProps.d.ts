@@ -9,8 +9,8 @@ interface CommonProps<Style> {
 }
 
 export interface WebViewProps<Style> extends CommonProps<Style> {
-    url?: EditableValue<string>;
-    staticUrl?: string;
+    url?: DynamicValue<string>;
+    content?: DynamicValue<string>;
     onLoad?: ActionValue;
     onError?: ActionValue;
     userAgent?: string;
