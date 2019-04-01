@@ -1,21 +1,21 @@
 import { Style } from "@native-components/util-widgets";
 import { Platform, TextStyle, ViewStyle } from "react-native";
 
-export interface SegmentedControlStyle extends Style {
+export interface ToggleButtonsStyle extends Style {
     container: ViewStyle;
-    tab: ViewStyle;
+    button: ViewStyle;
     text: TextStyle;
-    activeTab: ViewStyle;
-    activeTabText: TextStyle;
+    activeButton: ViewStyle;
+    activeButtonText: TextStyle;
 }
 
 const blue = "rgb(0,122,255)";
 const purple = "rgb(98,0,238)";
-export const defaultSegmentedControlStyle: SegmentedControlStyle = {
+export const defaultToggleButtonsStyle: ToggleButtonsStyle = {
     container: {
         borderRadius: Platform.select({ ios: 5, android: 3 })
     },
-    tab: {
+    button: {
         borderRadius: 0,
         borderColor: Platform.select({ ios: blue, android: "#CCC" })
     },
@@ -31,7 +31,7 @@ export const defaultSegmentedControlStyle: SegmentedControlStyle = {
             }
         }) as TextStyle)
     },
-    activeTab: {
+    activeButton: {
         ...Platform.select({
             ios: {
                 borderColor: blue,
@@ -43,7 +43,7 @@ export const defaultSegmentedControlStyle: SegmentedControlStyle = {
             }
         })
     },
-    activeTabText: {
+    activeButtonText: {
         color: "#fff"
     }
 };

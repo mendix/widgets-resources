@@ -2,12 +2,12 @@ import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 
-import { SegmentedControlProps } from "../typings/SegmentedControlProps";
-import { defaultSegmentedControlStyle, SegmentedControlStyle } from "./ui/Styles";
+import { ToggleButtonsProps } from "../typings/ToggleButtonsProps";
+import { defaultToggleButtonsStyle, ToggleButtonsStyle } from "./ui/Styles";
 
-export class SegmentedControl extends Component<SegmentedControlProps<SegmentedControlStyle>> {
+export class ToggleButtons extends Component<ToggleButtonsProps<ToggleButtonsStyle>> {
     private readonly onChangeHandler = this.onChange.bind(this);
-    private readonly styles = flattenStyles(defaultSegmentedControlStyle, this.props.style);
+    private readonly styles = flattenStyles(defaultToggleButtonsStyle, this.props.style);
 
     private get universe(): string[] {
         // As this property can only be an Enum we know that universe is defined
@@ -26,10 +26,10 @@ export class SegmentedControl extends Component<SegmentedControlProps<SegmentedC
                 onTabPress={this.onChangeHandler}
                 borderRadius={this.styles.container.borderRadius}
                 tabsContainerStyle={this.styles.container}
-                tabStyle={this.styles.tab}
+                tabStyle={this.styles.button}
                 tabTextStyle={this.styles.text}
-                activeTabStyle={this.styles.activeTab}
-                activeTabTextStyle={this.styles.activeTabText}
+                activeTabStyle={this.styles.activeButton}
+                activeTabTextStyle={this.styles.activeButtonText}
             />
         );
     }

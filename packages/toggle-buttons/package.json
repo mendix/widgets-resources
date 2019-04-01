@@ -1,5 +1,5 @@
 {
-    "name": "segmented-control",
+    "name": "toggle-buttons",
     "version": "0.0.1",
     "license": "Apache-2.0",
     "repository": {
@@ -7,7 +7,7 @@
         "url": "https://github.com/jobvs/native-components.git"
     },
     "config": {
-        "widgetName": "SegmentedControl"
+        "widgetName": "ToggleButtons"
     },
     "scripts": {
         "start": "npm run gulp watch",

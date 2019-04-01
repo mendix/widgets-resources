@@ -10,7 +10,7 @@ interface CommonProps<Style> {
 
 export type EditableEnum = "default" | "never";
 
-export interface SegmentedControlProps<Style> extends CommonProps<Style> {
+export interface ToggleButtonsProps<Style> extends CommonProps<Style> {
     enum: EditableValue<string>;
     editable: EditableEnum;
     onChange?: ActionValue;
