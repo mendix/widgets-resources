@@ -20,12 +20,12 @@ export class VideoPlayer extends Component<VideoPlayerProps<undefined>, State> {
     private readonly styles = flattenStyles(defaultVideoStyle, this.props.style);
 
     render(): JSX.Element {
-        const videoUrl = (this.props.videoUrl && this.props.videoUrl.value) || this.props.staticVideoUrl;
+        const uri = this.props.videoUrl && this.props.videoUrl.value;
         return (
             <View style={this.styles.container}>
                 {this.state.loading && <ActivityIndicator color={this.styles.indicator.color} size="large" />}
                 <Video
-                    source={{ uri: videoUrl }}
+                    source={{ uri }}
                     paused={!this.props.autoStart}
                     muted={this.props.muted}
                     repeat={this.props.loop}

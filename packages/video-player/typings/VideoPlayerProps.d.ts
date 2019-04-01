@@ -9,8 +9,7 @@ interface CommonProps<Style> {
 }
 
 export interface VideoPlayerProps<Style> extends CommonProps<Style> {
-    videoUrl?: EditableValue<string>;
-    staticVideoUrl?: string;
+    videoUrl: DynamicValue<string>;
     autoStart: boolean;
     showControls: boolean;
     muted: boolean;
