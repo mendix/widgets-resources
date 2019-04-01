@@ -35,7 +35,7 @@ export class Badge extends Component<BadgeProps<BadgeStyle>> {
     }
 
     private renderText(): JSX.Element {
-        const value = this.props.value ? this.props.value.value : this.props.defaultValue;
+        const value = this.props.caption ? this.props.caption.value : "";
 
         return <Text style={this.styles.text}>{value}</Text>;
     }

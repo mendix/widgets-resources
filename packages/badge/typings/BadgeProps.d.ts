@@ -9,7 +9,6 @@ interface CommonProps<Style> {
 }
 
 export interface BadgeProps<Style> extends CommonProps<Style> {
-    value?: EditableValue<string | BigJs.Big>;
-    defaultValue?: string;
+    caption?: DynamicValue<string>;
     onClick?: ActionValue;
 }
