@@ -62,6 +62,12 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
     private readonly onKeyboardHideHandler = this.onKeyboardHide.bind(this);
     private readonly styles = flattenStyles(defaultFeedbackStyle, this.props.style);
     private readonly processedStyles = processStyles(this.styles);
+    private readonly dialogContainerProps = {
+        contentStyle: this.processedStyles.dialogStyle,
+        buttonSeparatorStyle: this.processedStyles.buttonSeparatorIos,
+        footerStyle: this.processedStyles.borderIos,
+        blurStyle: this.processedStyles.blurStyle
+    };
 
     componentDidMount(): void {
         Keyboard.addListener("keyboardWillShow", this.onKeyboardShowHandler);
@@ -128,18 +134,25 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
                           })
                       }
                     : { marginTop: 0 };
+
+                const trackColor = {
+                    true: this.styles.switchInput.trackColorOn || "",
+                    false: this.styles.switchInput.trackColorOff || ""
+                };
+
+                const thumbColor = this.state.sendScreenshot
+                    ? this.styles.switchInput.thumbColorOn
+                    : this.styles.switchInput.thumbColorOff;
+
                 return (
                     <Dialog.Container
                         style={containerStyle}
-                        contentStyle={this.styles.dialog}
                         visible={this.state.modalVisible}
-                        buttonSeparatorStyle={this.processedStyles.buttonSeparatorIos}
-                        footerStyle={this.processedStyles.borderIos}
+                        {...this.dialogContainerProps}
                     >
                         <Dialog.Title style={this.styles.title}>Send Feedback</Dialog.Title>
                         <TextInput
                             multiline={true}
-                            numberOfLines={5}
                             style={this.processedStyles.textAreaInputStyles}
                             value={this.state.feedbackMsg}
                             onChangeText={this.onChangeTextHandler}
@@ -153,7 +166,8 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
                                     style={this.processedStyles.switchInputStyles}
                                     value={this.state.sendScreenshot}
                                     onValueChange={this.onScreenshotToggleChangeHandler}
-                                    {...this.processedStyles.switchInputProps}
+                                    trackColor={trackColor}
+                                    thumbColor={thumbColor}
                                 />
                             </View>
                         ) : null}
@@ -167,24 +181,34 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
                 );
             case "inprogress":
                 return (
-                    <Dialog.Container visible={this.state.modalVisible}>
-                        <Dialog.Description>Sending...</Dialog.Description>
-                        <ActivityIndicator color="black" size="large" style={activityIndicatorStyle} />
+                    <Dialog.Container visible={this.state.modalVisible} {...this.dialogContainerProps}>
+                        <Dialog.Description style={this.processedStyles.descriptionStyle}>
+                            Sending...
+                        </Dialog.Description>
+                        <ActivityIndicator
+                            color={this.styles.activityIndicator.color}
+                            size="large"
+                            style={activityIndicatorStyle}
+                        />
                     </Dialog.Container>
                 );
             case "done":
                 return (
-                    <Dialog.Container visible={this.state.modalVisible}>
-                        <Dialog.Title>Result</Dialog.Title>
-                        <Dialog.Description>Feedback successfully sent</Dialog.Description>
+                    <Dialog.Container visible={this.state.modalVisible} {...this.dialogContainerProps}>
+                        <Dialog.Title style={this.styles.title}>Result</Dialog.Title>
+                        <Dialog.Description style={this.processedStyles.descriptionStyle}>
+                            Feedback successfully sent
+                        </Dialog.Description>
                         <Dialog.Button label="OK" onPress={this.onModalCloseHandler} color={this.styles.button.color} />
                     </Dialog.Container>
                 );
             case "error":
                 return (
-                    <Dialog.Container visible={this.state.modalVisible}>
-                        <Dialog.Title>Result</Dialog.Title>
-                        <Dialog.Description>Error sending feedback</Dialog.Description>
+                    <Dialog.Container visible={this.state.modalVisible} {...this.dialogContainerProps}>
+                        <Dialog.Title style={this.styles.title}>Result</Dialog.Title>
+                        <Dialog.Description style={this.processedStyles.descriptionStyle}>
+                            Error sending feedback
+                        </Dialog.Description>
                         <Dialog.Button label="OK" onPress={this.onModalCloseHandler} color={this.styles.button.color} />
                     </Dialog.Container>
                 );
@@ -243,8 +267,9 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
 
     private takeScreenshot(): void {
         captureScreen({
-            format: "png",
-            result: "base64"
+            format: "jpg",
+            result: "base64",
+            quality: 0.4
         }).then(
             uri => {
                 const newImage = uri.replace(/(\r\n|\n|\r)/gm, "");

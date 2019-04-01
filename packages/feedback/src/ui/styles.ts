@@ -1,4 +1,4 @@
-import { exclude, only, pluckFromList, Style } from "@native-components/util-widgets";
+import { exclude, only, Style } from "@native-components/util-widgets";
 import { Dimensions, ImageStyle, ImageURISource, Platform, TextInputProps, TextStyle, ViewStyle } from "react-native";
 
 /**
@@ -48,6 +48,15 @@ export const switchContainer: ViewStyle = {
 
 export interface TextAreaStyleProps extends TextStyle, TextInputProps {}
 
+interface CustomSwitchStyleProps {
+    trackColorOn?: string;
+    trackColorOff?: string;
+    thumbColorOn?: string;
+    thumbColorOff?: string;
+}
+
+interface SwitchStyleProps extends TextStyle, CustomSwitchStyleProps {}
+
 interface ButtonStyleProps {
     borderColor: string;
     borderWidth: number;
@@ -60,8 +69,11 @@ export interface FeedbackStyle extends Style {
     title: TextStyle;
     textAreaInput: TextAreaStyleProps;
     switchLabel: TextStyle;
-    switchInput: TextStyle;
+    switchInput: SwitchStyleProps;
     button: ButtonStyleProps;
+    activityIndicator: {
+        color: string;
+    };
 }
 
 export const defaultFeedbackStyle: FeedbackStyle = {
@@ -102,7 +114,8 @@ export const defaultFeedbackStyle: FeedbackStyle = {
         textAlignVertical: "top",
         placeholderTextColor: "#888",
         selectionColor: "#aaa",
-        underlineColorAndroid: "transparent"
+        underlineColorAndroid: "transparent",
+        numberOfLines: 5
     },
     switchLabel: {
         color: "#444",
@@ -118,6 +131,9 @@ export const defaultFeedbackStyle: FeedbackStyle = {
         borderColor: "#eee",
         borderWidth: 1,
         color: Platform.select({ ios: "#007ff9", android: "#169689" })
+    },
+    activityIndicator: {
+        color: "#666"
     }
 };
 
@@ -125,24 +141,28 @@ export function processStyles(styles: FeedbackStyle): any {
     const textInputStylePropsKeys: Array<keyof TextInputProps> = [
         "placeholderTextColor",
         "selectionColor",
-        "underlineColorAndroid"
+        "underlineColorAndroid",
+        "numberOfLines"
     ];
+    const blurStylePropKeys: Array<keyof ViewStyle> = ["backgroundColor", "opacity"];
+    const switchPropKeys: Array<keyof CustomSwitchStyleProps> = [
+        "thumbColorOn",
+        "thumbColorOff",
+        "trackColorOn",
+        "trackColorOff"
+    ];
+    const textareaTextPropKeys: Array<keyof TextStyle> = ["color", "fontSize", "fontFamily", "fontWeight"];
 
-    const textAreaInputStyles = pluckFromList([styles], "textAreaInput").map((input: any) =>
-        exclude<TextAreaStyleProps, TextInputProps>(input!, textInputStylePropsKeys)
+    const textAreaInputStyles = exclude<TextAreaStyleProps, TextInputProps>(
+        styles.textAreaInput,
+        textInputStylePropsKeys
     );
 
-    const textAreaInputProps = pluckFromList([styles], "textAreaInput")
-        .map((input: any) => only<TextAreaStyleProps, TextInputProps>(input!, textInputStylePropsKeys))
-        .reduce((result: TextInputProps, style: TextInputProps) => ({ ...result, ...style }), {} as TextInputProps);
+    const textAreaInputProps = only<TextAreaStyleProps, TextInputProps>(styles.textAreaInput, textInputStylePropsKeys);
 
-    const switchInputStyles = pluckFromList([styles], "switchInput").map((input: any) =>
-        exclude<TextAreaStyleProps, TextInputProps>(input!, textInputStylePropsKeys)
-    );
+    const switchInputStyles = exclude<SwitchStyleProps, CustomSwitchStyleProps>(styles.switchInput, switchPropKeys);
 
-    const switchInputProps = pluckFromList([styles], "switchInput")
-        .map((input: any) => only<TextAreaStyleProps, TextInputProps>(input!, textInputStylePropsKeys))
-        .reduce((result: TextInputProps, style: TextInputProps) => ({ ...result, ...style }), {} as TextInputProps);
+    const switchInputProps = only<SwitchStyleProps, CustomSwitchStyleProps>(styles.switchInput, switchPropKeys);
 
     const borderIos = Platform.select({
         ios: {
@@ -157,12 +177,27 @@ export function processStyles(styles: FeedbackStyle): any {
         android: {}
     });
 
+    const blurStyle = Platform.select({
+        ios: only<TextAreaStyleProps, ViewStyle>(styles.dialog, blurStylePropKeys),
+        android: {}
+    });
+
+    const dialogStyle = Platform.select({
+        ios: exclude<TextAreaStyleProps, ViewStyle>(styles.dialog, blurStylePropKeys),
+        android: styles.dialog
+    });
+
+    const descriptionStyle = only<TextAreaStyleProps, TextStyle>(styles.textAreaInput, textareaTextPropKeys);
+
     return {
         textAreaInputStyles,
         textAreaInputProps,
         switchInputStyles,
         switchInputProps,
         borderIos,
-        buttonSeparatorIos
+        buttonSeparatorIos,
+        dialogStyle,
+        blurStyle,
+        descriptionStyle
     };
 }
