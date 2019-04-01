@@ -22,6 +22,7 @@
         "@types/react-dom": "^16.8.2",
         "@types/react-native": "^0.57.38",
         "@types/react-native-video": "^3.1.1",
+        "@types/react-native-vector-icons": "^4.6.4",
         "check-dependencies": "^1.1.0",
         "del": "^3.0.0",
         "gh-release": "^3.5.0",

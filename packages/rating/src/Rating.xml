@@ -58,6 +58,14 @@
                     <enumerationValue key="wobble">Wobble</enumerationValue>
                 </enumerationValues>
             </property>
+            <property key="emptyImage" type="image" required="false">
+                <caption>Empty Image</caption>
+                <description />
+            </property>
+            <property key="image" type="image" required="false">
+                <caption>Image</caption>
+                <description />
+            </property>
         </propertyGroup>
     </properties>
 </widget>
