@@ -26,8 +26,8 @@ export class BarcodeScanner extends Component<BarcodeScannerProps<undefined>> {
 
         this.props.barcode.setValue(event.data);
 
-        if (this.props.onChange && this.props.onChange.canExecute) {
-            this.props.onChange.execute();
+        if (this.props.onDetect && this.props.onDetect.canExecute) {
+            this.props.onDetect.execute();
         }
     }
 }

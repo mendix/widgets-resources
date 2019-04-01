@@ -10,5 +10,5 @@ interface CommonProps<Style> {
 
 export interface BarcodeScannerProps<Style> extends CommonProps<Style> {
     barcode: EditableValue<string>;
-    onChange?: ActionValue;
+    onDetect?: ActionValue;
 }
