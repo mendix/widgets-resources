@@ -18,8 +18,8 @@
                 <caption>On change</caption>
                 <description>Called continuously while the user is dragging the handle.</description>
             </property>
-            <property key="onSelect" type="action" required="false">
-                <caption>On select</caption>
+            <property key="onChangeComplete" type="action" required="false">
+                <caption>On change complete</caption>
                 <description>Called when the user releases the handle, regardless of whether the value has changed.</description>
             </property>
         </propertyGroup>

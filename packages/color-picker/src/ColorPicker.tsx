@@ -7,7 +7,7 @@ import { ColorPickerStyle, defaultColorWheelStyle } from "./ui/Styles";
 
 export class ColorPicker extends Component<ColorPickerProps<ColorPickerStyle>> {
     private readonly onChangeHandler = this.onChange.bind(this);
-    private readonly onColorSelectedHandler = this.onColorSelected.bind(this);
+    private readonly onChangeCompleteHandler = this.onChangeComplete.bind(this);
     private readonly styles = flattenStyles(defaultColorWheelStyle, this.props.style);
 
     render(): JSX.Element | null {
@@ -15,7 +15,7 @@ export class ColorPicker extends Component<ColorPickerProps<ColorPickerStyle>> {
             <TriangleColorPicker
                 color={this.props.color.value}
                 onColorChange={this.onChangeHandler}
-                onColorSelected={this.onColorSelectedHandler}
+                onColorSelected={this.onChangeCompleteHandler}
                 style={this.styles.container}
             />
         ) : null;
@@ -28,9 +28,9 @@ export class ColorPicker extends Component<ColorPickerProps<ColorPickerStyle>> {
         }
     }
 
-    private onColorSelected(): void {
-        if (this.props.onSelect && this.props.onSelect.canExecute) {
-            this.props.onSelect.execute();
+    private onChangeComplete(): void {
+        if (this.props.onChangeComplete && this.props.onChangeComplete.canExecute) {
+            this.props.onChangeComplete.execute();
         }
     }
 
