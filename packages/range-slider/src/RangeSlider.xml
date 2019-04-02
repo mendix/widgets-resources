@@ -4,10 +4,10 @@
     <description>Change range of values using a slider.</description>
     <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAAEvQFx7AAAAIVBMVEUAAAD///9SuP+IiIhJsfdJsfhJsfeJiYlIsPhIsPeIiIjzihhCAAAACXRSTlMAARlJZb3I4/MVTrONAAAAz0lEQVRIx2NgQAMTgJhr1qpVEBZOwAmSrZy1agEDB151IMA4E6YJg8Ewk4EqgHMqLiu4Vs5cBQQLsNnOOomB3oAxwwFVIHMmWhDMRBWwWgUUWAUFy7GpwCLgOXMmwwgGLG0CqAKRMyeih9g0AkFISKAKOV4WAwVWkRNRWARmoAtMQRXQnBnAMAqGG2CKnDlzqgIeBcAsjZEUUEAnSMEMPApmggHNFFStAucApEywCjU3mONWUEwvR0JLXIzsjwJEQQoC8cWWSEab42iapQQAAD3okfmgsuelAAAAAElFTkSuQmCC</icon>
     <properties>
-        <propertyGroup caption="Data source">
-            <propertyGroup caption="Selected range">
-                <property key="lowerValue" type="attribute">
-                    <caption>Lower bound value</caption>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Data source selected range">
+                <property key="lowerValueAttribute" type="attribute">
+                    <caption>Lower value attribute</caption>
                     <description>The selected lower bound value on the slider.</description>
                     <attributeTypes>
                         <attributeType name="Integer"/>
@@ -15,8 +15,8 @@
                         <attributeType name="Decimal"/>
                     </attributeTypes>
                 </property>
-                <property key="upperValue" type="attribute">
-                    <caption>Upper bound value</caption>
+                <property key="upperValueAttribute" type="attribute">
+                    <caption>Upper value attribute</caption>
                     <description>The selected upper bound value on the slider.</description>
                     <attributeTypes>
                         <attributeType name="Integer"/>
@@ -24,6 +24,8 @@
                         <attributeType name="Decimal"/>
                     </attributeTypes>
                 </property>
+            </propertyGroup>
+            <propertyGroup caption="Editability">
                 <property key="editable" type="enumeration" defaultValue="default">
                     <caption>Editable</caption>
                     <description/>
@@ -33,9 +35,9 @@
                     </enumerationValues>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Minimum value">
-                <property key="minimumValue" type="attribute" required="false">
-                    <caption>Dynamic minimum value</caption>
+            <propertyGroup caption="Minimum range value">
+                <property key="minimumValueAttribute" type="attribute" required="false">
+                    <caption>Attribute</caption>
                     <description>The minimum value that can be selected.</description>
                     <attributeTypes>
                         <attributeType name="Integer"/>
@@ -43,14 +45,14 @@
                         <attributeType name="Decimal"/>
                     </attributeTypes>
                 </property>
-                <property key="defaultMinimumValue" type="integer" defaultValue="0">
-                    <caption>Static minimum value</caption>
-                    <description>Used when no dynamic value is provided.</description>
+                <property key="minimumValueDefault" type="integer" defaultValue="0">
+                    <caption>Static</caption>
+                    <description>Used when no value is provided through the minimum range value attribute.</description>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Maximum value">
-                <property key="maximumValue" type="attribute" required="false">
-                    <caption>Dynamic maximum value</caption>
+            <propertyGroup caption="Maximum range value">
+                <property key="maximumValueAttribute" type="attribute" required="false">
+                    <caption>Attribute </caption>
                     <description>The maximum value that can be selected.</description>
                     <attributeTypes>
                         <attributeType name="Integer"/>
@@ -58,14 +60,14 @@
                         <attributeType name="Decimal"/>
                     </attributeTypes>
                 </property>
-                <property key="defaultMaximumValue" type="integer" defaultValue="100">
-                    <caption>Static maximum value</caption>
-                    <description>Used when no dynamic value is provided.</description>
+                <property key="maximumValueDefault" type="integer" defaultValue="100">
+                    <caption>Static </caption>
+                    <description>Used when no value is provided through the maximum range value attribute.</description>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Step size">
-                <property key="step" type="attribute" required="false">
-                    <caption>Dynamic step size</caption>
+                <property key="stepSizeAttribute" type="attribute" required="false">
+                    <caption>Attribute  </caption>
                     <description>The interval between two selectable points.</description>
                     <attributeTypes>
                         <attributeType name="Integer"/>
@@ -73,20 +75,20 @@
                         <attributeType name="Decimal"/>
                     </attributeTypes>
                 </property>
-                <property key="defaultStep" type="integer" defaultValue="1">
-                    <caption>Static step size</caption>
-                    <description>Used when no dynamic value is provided.</description>
+                <property key="stepSizeDefault" type="integer" defaultValue="1">
+                    <caption>Static  </caption>
+                    <description>Used when no value is provided through the step size attribute.</description>
                 </property>
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Events">
+            <property key="onSlide" type="action" required="false">
+                <caption>On slide</caption>
+                <description>Called when the value changes while the user is sliding the handle.</description>
+            </property>
             <property key="onChange" type="action" required="false">
                 <caption>On change</caption>
-                <description>Called continuously while the user is dragging the handle.</description>
-            </property>
-            <property key="onChangeComplete" type="action" required="false">
-                <caption>On change complete</caption>
-                <description>Called when the user releases the handle, regardless of whether the value has changed.</description>
+                <description>Called when the user releases the handle and the value has changed.</description>
             </property>
         </propertyGroup>
     </properties>

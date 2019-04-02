@@ -11,53 +11,45 @@ export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, S
     readonly state: State = {};
 
     private readonly onLayoutHandler = this.onLayout.bind(this);
+    private readonly onSlideHandler = this.onSlide.bind(this);
     private readonly onChangeHandler = this.onChange.bind(this);
-    private readonly onChangeCompleteHandler = this.onChangeComplete.bind(this);
     private readonly styles = flattenStyles(defaultRangeSliderStyle, this.props.style);
 
+    private lastLowerValue = Number(this.props.lowerValueAttribute.value);
+    private lastUpperValue = Number(this.props.upperValueAttribute.value);
+
     render(): JSX.Element {
-        const {
-            lowerValue,
-            upperValue,
-            minimumValue,
-            defaultMinimumValue,
-            maximumValue,
-            defaultMaximumValue,
-            editable,
-            step,
-            defaultStep
-        } = this.props;
+        const enabledOne = this.props.editable !== "never" && !this.props.lowerValueAttribute.readOnly;
+        const enabledTwo = this.props.editable !== "never" && !this.props.upperValueAttribute.readOnly;
 
-        const enabledOne = editable !== "never" && !lowerValue.readOnly;
-        const enabledTwo = editable !== "never" && !upperValue.readOnly;
-
-        const sliderProps = {
-            values: [Number(lowerValue.value), Number(upperValue.value)],
-            min: minimumValue && minimumValue.value != null ? Number(minimumValue.value) : defaultMinimumValue,
-            max: maximumValue && maximumValue.value != null ? Number(maximumValue.value) : defaultMaximumValue,
-            enabledOne,
-            enabledTwo,
-            step: step && step.value != null && step.value.gt(0) ? Number(step.value) : defaultStep,
-            containerStyle: this.styles.container,
-            markerStyle: this.styles.marker,
-            trackStyle: enabledOne || enabledTwo ? this.styles.track : this.styles.trackDisabled,
-            selectedStyle: enabledOne || enabledTwo ? this.styles.highlight : this.styles.highlightDisabled,
-            pressedMarkerStyle: this.styles.markerActive,
-            onValuesChange: this.onChangeHandler,
-            onValuesChangeFinish: this.onChangeCompleteHandler,
-            sliderLength: this.state.width,
-            isMarkersSeparated: true,
-            customMarkerLeft: (props: MarkerProps) => (
-                <Marker {...props} markerStyle={enabledOne ? props.markerStyle : this.styles.markerDisabled} />
-            ),
-            customMarkerRight: (props: MarkerProps) => (
-                <Marker {...props} markerStyle={enabledTwo ? props.markerStyle : this.styles.markerDisabled} />
-            )
-        };
+        const customMarker = (enabled: boolean) => (props: MarkerProps) => (
+            <Marker {...props} markerStyle={enabled ? props.markerStyle : this.styles.markerDisabled} />
+        );
 
         return (
             <View onLayout={this.onLayoutHandler}>
-                <MultiSlider {...sliderProps} />
+                <MultiSlider
+                    values={[
+                        Number(this.props.lowerValueAttribute.value),
+                        Number(this.props.upperValueAttribute.value)
+                    ]}
+                    min={getNumberValue(this.props.minimumValueAttribute, this.props.minimumValueDefault)}
+                    max={getNumberValue(this.props.maximumValueAttribute, this.props.maximumValueDefault)}
+                    step={getNumberValue(this.props.stepSizeAttribute, this.props.stepSizeDefault, val => val.gt(0))}
+                    enabledOne={enabledOne}
+                    enabledTwo={enabledTwo}
+                    containerStyle={this.styles.container}
+                    markerStyle={enabledOne || enabledTwo ? this.styles.marker : this.styles.markerDisabled}
+                    trackStyle={enabledOne || enabledTwo ? this.styles.track : this.styles.trackDisabled}
+                    selectedStyle={enabledOne || enabledTwo ? this.styles.highlight : this.styles.highlightDisabled}
+                    pressedMarkerStyle={this.styles.markerActive}
+                    onValuesChange={this.onSlideHandler}
+                    onValuesChangeFinish={this.onChangeHandler}
+                    sliderLength={this.state.width}
+                    isMarkersSeparated={true}
+                    customMarkerLeft={customMarker(enabledOne)}
+                    customMarkerRight={customMarker(enabledTwo)}
+                />
             </View>
         );
     }
@@ -68,23 +60,45 @@ export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, S
         });
     }
 
-    private onChange(values: number[]): void {
+    private onSlide(values: number[]): void {
         if (
-            this.props.lowerValue.status === ValueStatus.Available &&
-            this.props.upperValue.status === ValueStatus.Available
+            this.props.lowerValueAttribute.status === ValueStatus.Available &&
+            this.props.upperValueAttribute.status === ValueStatus.Available
         ) {
-            this.props.lowerValue.setTextValue(String(values[0]));
-            this.props.upperValue.setTextValue(String(values[1]));
+            this.props.lowerValueAttribute.setTextValue(String(values[0]));
+            this.props.upperValueAttribute.setTextValue(String(values[1]));
 
-            if (this.props.onChange && this.props.onChange.canExecute) {
-                this.props.onChange.execute();
+            if (this.props.onSlide && this.props.onSlide.canExecute) {
+                this.props.onSlide.execute();
             }
         }
     }
 
-    private onChangeComplete(): void {
-        if (this.props.onChangeComplete && this.props.onChangeComplete.canExecute) {
-            this.props.onChangeComplete.execute();
+    private onChange(values: number[]): void {
+        if (
+            this.lastLowerValue != null &&
+            this.lastLowerValue === values[0] &&
+            this.lastUpperValue != null &&
+            this.lastUpperValue === values[1]
+        ) {
+            return;
+        }
+
+        this.lastLowerValue = values[0];
+        this.lastUpperValue = values[1];
+        this.props.lowerValueAttribute.setTextValue(String(values[0]));
+        this.props.upperValueAttribute.setTextValue(String(values[1]));
+
+        if (this.props.onChange && this.props.onChange.canExecute) {
+            this.props.onChange.execute();
         }
     }
+}
+
+function getNumberValue(
+    attribute: EditableValue<BigJs.Big> | undefined,
+    defaultValue: number,
+    validate: (value: BigJs.Big) => boolean = () => true
+): number {
+    return attribute && attribute.value != null && validate(attribute.value) ? Number(attribute.value) : defaultValue;
 }
