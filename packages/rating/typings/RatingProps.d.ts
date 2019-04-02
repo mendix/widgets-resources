@@ -9,27 +9,27 @@ interface CommonProps<Style> {
     style: Style[];
 }
 
-export type EditableEnum = "default" | "never";
-
 export type AnimationEnum =
-    | "none"
+    | "pulse"
     | "bounce"
     | "flash"
     | "jello"
-    | "pulse"
     | "rotate"
     | "rubberBand"
     | "shake"
     | "swing"
     | "tada"
-    | "wobble";
+    | "wobble"
+    | "none";
+
+export type EditableEnum = "default" | "never";
 
 export interface RatingProps<Style> extends CommonProps<Style> {
-    rating: EditableValue<BigJs.Big>;
+    ratingAttribute: EditableValue<BigJs.Big>;
+    emptyIcon?: DynamicValue<ImageURISource>;
+    icon?: DynamicValue<ImageURISource>;
     maximumValue: number;
+    animation: AnimationEnum;
     editable: EditableEnum;
     onChange?: ActionValue;
-    animation: AnimationEnum;
-    emptyImage?: DynamicValue<ImageURISource>;
-    image?: DynamicValue<ImageURISource>;
 }

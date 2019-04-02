@@ -37,31 +37,32 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
     render(): JSX.Element | null {
         const ratingProps = {
             activeOpacity: 1, // Waiting PR to merge properties in JSX https://github.com/DefinitelyTyped/DefinitelyTyped/pull/34397
-            rating: Number(this.props.rating.value),
-            disabled: this.props.editable === "never" || this.props.rating.readOnly,
-            selectedStar: this.onChangeHandler,
-            halfStarEnabled: false,
-            iconSet: undefined,
-            containerStyle: this.styles.container,
-            starStyle: this.starStyle,
-            fullStar: this.props.image
-                ? this.props.image.value
-                : this.state.imageSourceCache
-                ? this.state.imageSourceCache[fullIcon]
-                : undefined,
-            emptyStar: this.props.emptyImage
-                ? this.props.emptyImage.value
-                : this.state.imageSourceCache
-                ? this.state.imageSourceCache[emptyIcon]
-                : undefined,
             ...(this.props.animation !== "none" ? { animation: this.props.animation } : {})
         };
-        return this.state.imageSourceCache ? <StarRating {...ratingProps} /> : null;
+
+        if (!this.state.imageSourceCache) {
+            return null;
+        }
+
+        return (
+            <StarRating
+                rating={Number(this.props.ratingAttribute.value)}
+                disabled={this.props.editable === "never" || this.props.ratingAttribute.readOnly}
+                selectedStar={this.onChangeHandler}
+                halfStarEnabled={false}
+                iconSet={undefined}
+                containerStyle={this.styles.container}
+                starStyle={this.starStyle}
+                fullStar={this.props.icon ? this.props.icon.value : this.state.imageSourceCache[fullIcon]}
+                emptyStar={this.props.emptyIcon ? this.props.emptyIcon.value : this.state.imageSourceCache[emptyIcon]}
+                {...ratingProps}
+            />
+        );
     }
 
     private onChange(rating: number): void {
-        if (this.props.rating.status === ValueStatus.Available) {
-            this.props.rating.setTextValue(String(rating));
+        if (this.props.ratingAttribute.status === ValueStatus.Available) {
+            this.props.ratingAttribute.setTextValue(String(rating));
 
             if (this.props.onChange && this.props.onChange.canExecute) {
                 this.props.onChange.execute();
