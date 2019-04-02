@@ -35,21 +35,28 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
     }
 
     render(): JSX.Element | null {
-        return this.state.imageSourceCache ? (
-            <StarRating
-                rating={Number(this.props.rating.value)}
-                maxStars={this.props.maximumValue}
-                disabled={this.props.editable === "never" || this.props.rating.readOnly}
-                {...(this.props.animation !== "none" ? { animation: this.props.animation } : {})}
-                selectedStar={this.onChangeHandler}
-                halfStarEnabled={false}
-                iconSet={undefined}
-                containerStyle={this.styles.container}
-                starStyle={this.starStyle}
-                fullStar={this.props.image ? this.props.image.value : this.state.imageSourceCache[fullIcon]}
-                emptyStar={this.props.emptyImage ? this.props.emptyImage.value : this.state.imageSourceCache[emptyIcon]}
-            />
-        ) : null;
+        const ratingProps = {
+            activeOpacity: 1,
+            rating: Number(this.props.rating.value),
+            disabled: this.props.editable === "never" || this.props.rating.readOnly,
+            selectedStar: this.onChangeHandler,
+            halfStarEnabled: false,
+            iconSet: undefined,
+            containerStyle: this.styles.container,
+            starStyle: this.starStyle,
+            fullStar: this.props.image
+                ? this.props.image.value
+                : this.state.imageSourceCache
+                ? this.state.imageSourceCache[fullIcon]
+                : undefined,
+            emptyStar: this.props.emptyImage
+                ? this.props.emptyImage.value
+                : this.state.imageSourceCache
+                ? this.state.imageSourceCache[emptyIcon]
+                : undefined,
+            ...(this.props.animation !== "none" ? { animation: this.props.animation } : {})
+        };
+        return this.state.imageSourceCache ? <StarRating {...ratingProps} /> : null;
     }
 
     private onChange(rating: number): void {

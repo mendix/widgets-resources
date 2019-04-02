@@ -3,7 +3,6 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import { ImageURISource } from "react-native";
 
 interface CommonProps<Style> {
     style: Style[];
@@ -30,6 +29,6 @@ export interface RatingProps<Style> extends CommonProps<Style> {
     editable: EditableEnum;
     onChange?: ActionValue;
     animation: AnimationEnum;
-    image: DynamicValue<ImageURISource>;
-    emptyImage: DynamicValue<ImageURISource>;
+    emptyImage?: any;
+    image?: any;
 }
