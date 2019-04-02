@@ -11,14 +11,14 @@ interface CommonProps<Style> {
 export type EditableEnum = "default" | "never";
 
 export interface SliderProps<Style> extends CommonProps<Style> {
-    value: EditableValue<BigJs.Big>;
+    valueAttribute: EditableValue<BigJs.Big>;
     editable: EditableEnum;
-    minimumValue?: EditableValue<BigJs.Big>;
-    defaultMinimumValue: number;
-    maximumValue?: EditableValue<BigJs.Big>;
-    defaultMaximumValue: number;
-    step?: EditableValue<BigJs.Big>;
-    defaultStep: number;
+    minimumValueAttribute?: EditableValue<BigJs.Big>;
+    minimumValueDefault: number;
+    maximumValueAttribute?: EditableValue<BigJs.Big>;
+    maximumValueDefault: number;
+    stepSizeAttribute?: EditableValue<BigJs.Big>;
+    stepSizeDefault: number;
+    onSlide?: ActionValue;
     onChange?: ActionValue;
-    onChangeComplete?: ActionValue;
 }
