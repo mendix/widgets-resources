@@ -140,7 +140,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
     }
 
     private setDefaultCenter = (props: GoogleMapsProps) => {
-        if (!props.fetchingData && props.allLocations && props.allLocations.length) {
+        if (!props.fetchingData) {
             this.addMarkers(props.allLocations);
         }
     }
