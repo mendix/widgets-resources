@@ -36,7 +36,7 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
 
     render(): JSX.Element | null {
         const ratingProps = {
-            activeOpacity: 1,
+            activeOpacity: 1, // Waiting PR to merge properties in JSX https://github.com/DefinitelyTyped/DefinitelyTyped/pull/34397
             rating: Number(this.props.rating.value),
             disabled: this.props.editable === "never" || this.props.rating.readOnly,
             selectedStar: this.onChangeHandler,

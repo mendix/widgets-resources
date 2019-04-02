@@ -43,6 +43,10 @@ declare global {
         [name: string]: PluginWidgetProp;
     }
 
+    export interface WebImageSource {
+        uri: string;
+    }
+
     export const enum ValueStatus {
         Loading = "loading",
         Unavailable = "unavailable",
