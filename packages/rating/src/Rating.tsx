@@ -31,7 +31,9 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
 
         this.starStyle = starStyle;
 
-        preloadIcons(iconConfigurations).then(imageSourceCache => this.setState({ imageSourceCache }));
+        if ((!props.icon || !props.icon.value) && (!props.emptyIcon || !props.emptyIcon.value)) {
+            preloadIcons(iconConfigurations).then(imageSourceCache => this.setState({ imageSourceCache }));
+        }
     }
 
     render(): JSX.Element | null {
