@@ -19,6 +19,7 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
     private readonly onChangeHandler = this.onChange.bind(this);
     private readonly styles = flattenStyles(defaultRatingStyle, this.props.style);
     private readonly starStyle: StarStyle;
+    private isGlyphicon = false;
 
     constructor(props: RatingProps<RatingStyle>) {
         super(props);
@@ -31,7 +32,8 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
 
         this.starStyle = starStyle;
 
-        if ((!props.icon || !props.icon.value) && (!props.emptyIcon || !props.emptyIcon.value)) {
+        if (!props.icon || !props.icon.value || !props.emptyIcon || !props.emptyIcon.value) {
+            this.isGlyphicon = true;
             preloadIcons(iconConfigurations).then(imageSourceCache => this.setState({ imageSourceCache }));
         }
     }
@@ -42,7 +44,7 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
             ...(this.props.animation !== "none" ? { animation: this.props.animation } : {})
         };
 
-        if (!this.state.imageSourceCache) {
+        if (!this.state.imageSourceCache && this.isGlyphicon) {
             return null;
         }
 
@@ -55,8 +57,8 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
                 iconSet={undefined}
                 containerStyle={this.styles.container}
                 starStyle={this.starStyle}
-                fullStar={this.props.icon ? this.props.icon.value : this.state.imageSourceCache[fullIcon]}
-                emptyStar={this.props.emptyIcon ? this.props.emptyIcon.value : this.state.imageSourceCache[emptyIcon]}
+                fullStar={this.props.icon ? this.props.icon.value : this.state.imageSourceCache![fullIcon]}
+                emptyStar={this.props.emptyIcon ? this.props.emptyIcon.value : this.state.imageSourceCache![emptyIcon]}
                 {...ratingProps}
             />
         );
