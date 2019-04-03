@@ -17,7 +17,8 @@ import { Platform } from 'react-native';
 //== Background sizing
 export const fullSize = {
     container: {
-        flex: 1,
+        width: '100%',
+        height: '100%',
     },
 };
 export const fullWidth = {
@@ -70,38 +71,59 @@ export const flexSpaceAround = {
         justifyContent: 'space-around',
     },
 };
-export const flexCrossDirectionAlignCenter = {
+export const alignChildrenStretch = {
+    container: {
+        // alignItems aligns children in the cross direction.
+        // For example, if children are flowing vertically, alignItems controls how they align horizontally.
+        alignItems: 'stretch',
+    },
+};
+export const alignChildrenCenter = {
     container: {
         // alignItems aligns children in the cross direction.
         // For example, if children are flowing vertically, alignItems controls how they align horizontally.
         alignItems: 'center',
     },
 };
-export const flexCrossDirectionAlignEnd = {
+export const alignChildrenEnd = {
     container: {
         // alignItems aligns children in the cross direction.
         // For example, if children are flowing vertically, alignItems controls how they align horizontally.
         alignItems: 'flex-end',
     },
 };
-export const flexDirectionAlignCenter = {
+export const justifyChildrenSpaceAround = {
+    container: {
+        // justifyContent aligns children in the main direction.
+        // For example, if children are flowing vertically, justifyContent controls how they align vertically.
+        justifyContent: 'space-around',
+    },
+};
+export const justifyChildrenSpaceBetween = {
+    container: {
+        // justifyContent aligns children in the main direction.
+        // For example, if children are flowing vertically, justifyContent controls how they align vertically.
+        justifyContent: 'space-between',
+    },
+};
+export const justifyChildrenCenter = {
     container: {
         // justifyContent aligns children in the main direction.
         // For example, if children are flowing vertically, justifyContent controls how they align vertically.
         justifyContent: 'center',
     },
 };
-export const flexDirectionAlignEnd = {
+export const justifyChildrenEnd = {
     container: {
         // justifyContent aligns children in the main direction.
         // For example, if children are flowing vertically, justifyContent controls how they align vertically.
         justifyContent: 'flex-end',
     },
 };
-export const flexAlignCenter = {
+export const alignCenter = {
     container: {
-        ...flexDirectionAlignCenter,
-        ...flexCrossDirectionAlignCenter,
+        ...justifyChildrenCenter,
+        ...alignChildrenCenter,
     },
 };
 export const flexMain = {
@@ -117,19 +139,25 @@ export const flexItem = {
         flex: -1,
     },
 };
-export const flexItemCrossDirectionAlignStart = {
+export const alignSelfStretch = {
+    container: {
+        // controls how a child aligns in the cross direction, overriding the alignItems of the parent.
+        alignSelf: 'stretch',
+    },
+};
+export const alignSelfStart = {
     container: {
         // controls how a child aligns in the cross direction, overriding the alignItems of the parent.
         alignSelf: 'flex-start',
     },
 };
-export const flexItemCrossDirectionAlignCenter = {
+export const alignSelfCenter = {
     container: {
         // controls how a child aligns in the cross direction, overriding the alignItems of the parent.
         alignSelf: 'center',
     },
 };
-export const flexItemCrossDirectionAlignEnd = {
+export const alignSelfEnd = {
     container: {
         // controls how a child aligns in the cross direction, overriding the alignItems of the parent.
         alignSelf: 'flex-end',

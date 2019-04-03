@@ -22,11 +22,11 @@ export const DropDown = {
 
         // height: 40,
         // fontSize: input.fontSize, //FIXME: Throws error
-        borderWidth: Platform.select({ android: input.borderWidth }),
+        borderWidth: input.borderWidth,
         borderRadius: input.radius,
 
-        paddingHorizontal: Platform.select({ ios: 0, android: input.paddingHorizontal }),
-        paddingVertical: Platform.select({ ios: 0, android: input.paddingVertical }),
+        paddingHorizontal: input.paddingHorizontal,
+        paddingVertical: input.paddingVertical,
     },
 };
 export const DropDownVertical = {
@@ -43,9 +43,7 @@ export const DropDownVertical = {
 
         // fontSize: input.fontSize, //FIXME: Throws error
         borderRadius: input.radius,
-        borderWidth: Platform.select({ android: input.borderWidth }),
-        borderTopWidth: Platform.select({ ios: input.borderWidth }),
-        borderBottomWidth: Platform.select({ ios: input.borderWidth }),
+        borderWidth: input.borderWidth,
 
         paddingVertical: input.paddingVertical,
         paddingHorizontal: input.paddingHorizontal,

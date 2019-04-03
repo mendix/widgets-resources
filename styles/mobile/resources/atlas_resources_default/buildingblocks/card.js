@@ -8,12 +8,14 @@ import { Platform } from 'react-native';
 ========================================================================== */
 export const card = {
     container: {
-        position: 'relative',
-        height: 'auto',
-        width: 200,
-        backgroundColor: background.primary,
-        padding: spacing.small,
         borderRadius: border.radius,
+        backgroundColor: background.primary,
+
+        width: 200,
+        height: 'auto',
+        padding: spacing.small,
+        marginVertical: spacing.regular,
+
         elevation: 1.5,
         shadowColor: contrast.lowest,
         shadowOpacity: 0.9,

@@ -18,11 +18,11 @@ export const DatePicker = {
         // placeholderTextColor: input.placeholderTextColor,
 
         fontSize: input.fontSize,
-        borderWidth: Platform.select({ android: input.borderWidth }),
+        borderWidth: input.borderWidth,
         borderRadius: input.borderRadius,
 
-        paddingHorizontal: Platform.select({ ios: 0, android: input.paddingHorizontal }),
-        paddingVertical: Platform.select({ ios: 0, android: input.paddingVertical }),
+        paddingHorizontal: input.paddingHorizontal,
+        paddingVertical: input.paddingVertical,
     },
 };
 
@@ -36,10 +36,8 @@ export const DatePickerVertical = {
         // placeholderTextColor: input.placeholderTextColor,
 
         fontSize: input.fontSize,
-        borderRadius: Platform.select({ android: input.borderRadius }),
-        borderWidth: Platform.select({ android: input.borderWidth }),
-        borderTopWidth: Platform.select({ ios: input.borderWidth }),
-        borderBottomWidth: Platform.select({ ios: input.borderWidth }),
+        borderRadius: input.borderRadius,
+        borderWidth: input.borderWidth,
 
         paddingHorizontal: input.paddingHorizontal,
         paddingVertical: input.paddingVertical,

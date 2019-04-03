@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { brand, spacing } from '../variables';
+import { brand, spacing, contrast } from '../variables';
 import { TextBox, TextBoxVertical } from './textbox';
 import { hexToRGBString } from '../_helperfunctions/calculatecontrast';
 
@@ -17,13 +17,19 @@ export const CheckBox = {
     label: TextBox.label,
     input: {
         backgroundColor: 'transparent',
-        marginRight: Platform.select({ ios: 0, android: -5 }),
-        // tintColor: `rgba(${hexToRGBString(brand.primary)},0.2)`,
-        // thumbTintColor: brand.primary,
-        // tintColor: Platform.select({ android: `rgba(${hexToRGBString(brand.primary)},0.2)` }),
-        // thumbTintColor: Platform.select({ android: brand.primary }),
+        marginRight: Platform.select({ ios: 0, android: -3 }),
+        thumbColorOn: brand.primary,
+        trackColorOn: `rgba(${hexToRGBString(brand.primary)},0.2)`,
+        thumbColorOff: contrast.low,
+        trackColorOff: `rgba(${hexToRGBString(contrast.low)},0.2)`,
     },
-    inputError: TextBox.inputError,
+    inputError: {
+        ...TextBox.inputError,
+        thumbColorOn: brand.primary,
+        trackColorOn: `rgba(${hexToRGBString(brand.primary)},0.2)`,
+        thumbColorOff: contrast.low,
+        trackColorOff: `rgba(${hexToRGBString(contrast.low)},0.2)`,
+    },
     validationMessage: TextBox.validationMessage,
 };
 
@@ -32,6 +38,7 @@ export const CheckBoxVertical = {
     label: TextBoxVertical.label,
     input: {
         backgroundColor: 'transparent',
+        alignSelf: 'flex-start',
     },
     inputError: TextBoxVertical.inputError,
     validationMessage: TextBoxVertical.validationMessage,

@@ -8,18 +8,13 @@ import { input, spacing } from '../variables';
 ========================================================================== */
 
 export const TextBox = {
-    container: {
-        borderColor: input.borderColor,
-        backgroundColor: Platform.select({ ios: input.backgroundColor }),
-        borderBottomWidth: Platform.select({ ios: input.borderWidth }),
-        paddingHorizontal: Platform.select({ ios: input.paddingHorizontal }),
-        paddingVertical: Platform.select({ ios: input.paddingVertical }),
-    },
+    container: {},
     label: {
         color: input.color,
         fontSize: input.fontSize,
         textAlign: input.textAlign,
-        marginRight: Platform.select({ ios: spacing.regular }),
+        numberOfLines: 1,
+        marginRight: spacing.small,
     },
     input: {
         color: input.color,
@@ -27,15 +22,15 @@ export const TextBox = {
         backgroundColor: input.backgroundColor,
         selectionColor: input.selectionColor,
         placeholderTextColor: input.placeholderTextColor,
-        underlineColorAndroidColor: input.underlineColorAndroidColor,
+        // underlineColorAndroidColor: input.underlineColorAndroidColor,
 
         fontSize: input.fontSize,
-        borderWidth: Platform.select({ android: input.borderWidth }),
+        borderWidth: input.borderWidth,
         borderRadius: input.borderRadius,
 
-        paddingTop: Platform.select({ ios: 0 }), // TextArea unexpected spacing
-        paddingHorizontal: Platform.select({ ios: 0, android: input.paddingHorizontal }),
-        paddingVertical: Platform.select({ ios: 0, android: input.paddingVertical }),
+        // paddingTop: Platform.select({ ios: 0 }), // TextArea unexpected spacing
+        paddingHorizontal: input.paddingHorizontal,
+        paddingVertical: input.paddingVertical,
     },
     inputError: {
         selectionColor: input.errorColor,
@@ -53,18 +48,14 @@ export const TextBox = {
 };
 
 export const TextBoxVertical = {
-    container: {
-        backgroundColor: 'transparent',
-        borderBottomWidth: 0,
-        paddingHorizontal: 0,
-        paddingVertical: 0,
-    },
+    container: {},
     label: {
         color: input.color,
         fontSize: input.fontSize,
         textAlign: input.textAlign,
         marginLeft: spacing.small,
         marginBottom: spacing.smallest,
+        numberOfLines: 1,
     },
     input: {
         color: input.color,
@@ -72,13 +63,11 @@ export const TextBoxVertical = {
         backgroundColor: input.backgroundColor,
         selectionColor: input.selectionColor,
         placeholderTextColor: input.placeholderTextColor,
-        underlineColorAndroidColor: input.underlineColorAndroidColor,
+        // underlineColorAndroidColor: input.underlineColorAndroidColor,
 
         fontSize: input.fontSize,
         borderRadius: input.borderRadius,
-        borderWidth: Platform.select({ android: input.borderWidth }),
-        borderTopWidth: Platform.select({ ios: input.borderWidth }),
-        borderBottomWidth: Platform.select({ ios: input.borderWidth }),
+        borderWidth: input.borderWidth,
 
         paddingHorizontal: input.paddingHorizontal,
         paddingVertical: input.paddingVertical,

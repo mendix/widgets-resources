@@ -44,6 +44,12 @@ export const textDanger = {
         color: brand.danger,
     },
 };
+export const textWhite = {
+    container: {},
+    text: {
+        color: '#FFF',
+    },
+};
 
 export const textGrayDarkest = {
     container: {},
