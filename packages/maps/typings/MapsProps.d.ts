@@ -9,38 +9,35 @@ interface CommonProps<Style> {
 }
 
 export interface MarkersType {
-    title?: string;
-    description?: string;
-    latitude: string;
-    longitude: string;
-    action?: ActionValue;
+    address?: DynamicValue<string>;
+    latitude?: DynamicValue<string>;
+    longitude?: DynamicValue<string>;
+    title?: DynamicValue<string>;
+    description?: DynamicValue<string>;
+    onPress?: ActionValue;
 }
 
-export type MapTypeEnum = "standard" | "satellite" | "hybrid";
+export type DefaultZoomLevelEnum = "world" | "continent" | "country" | "city" | "town" | "streets" | "building";
+
+export type MinZoomLevelEnum = "world" | "continent" | "country" | "city" | "town" | "streets" | "building";
+
+export type MaxZoomLevelEnum = "world" | "continent" | "country" | "city" | "town" | "streets" | "building";
+
+export type MapTypeEnum = "standard" | "satellite";
 
 export type ProviderEnum = "default" | "google";
 
 export interface MapsProps<Style> extends CommonProps<Style> {
-    markerTitle?: EditableValue<string>;
-    markerDescription?: EditableValue<string>;
-    markerAddress?: EditableValue<string>;
-    markerLatitude?: EditableValue<BigJs.Big>;
-    markerLongitude?: EditableValue<BigJs.Big>;
     markers: MarkersType[];
-    latitude: EditableValue<BigJs.Big>;
-    longitude: EditableValue<BigJs.Big>;
-    latitudeDelta: EditableValue<BigJs.Big>;
-    longitudeDelta: EditableValue<BigJs.Big>;
+    fitToMarkers: boolean;
+    centerAddress?: DynamicValue<string>;
+    centerLatitude?: DynamicValue<string>;
+    centerLongitude?: DynamicValue<string>;
+    defaultZoomLevel: DefaultZoomLevelEnum;
+    minZoomLevel: MinZoomLevelEnum;
+    maxZoomLevel: MaxZoomLevelEnum;
     mapType: MapTypeEnum;
     provider: ProviderEnum;
     showsUserLocation: boolean;
-    showsMyLocationButton: boolean;
-    zoomEnabled: boolean;
-    minZoomLevel: number;
-    maxZoomLevel: number;
-    rotateEnabled: boolean;
     scrollEnabled: boolean;
-    pitchEnabled: boolean;
-    onRegionChange?: ActionValue;
-    onMarkerPress?: ActionValue;
 }

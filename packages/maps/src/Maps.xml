@@ -1,176 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget id="com.mendix.widget.native.maps.Maps" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../xsd/widget.xsd">
     <name>Maps</name>
-    <description>This widget allows you to use native Google or Apple maps views in your application.</description>
+    <description>Use native Google or Apple maps views in your application.</description>
     <icon>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</icon>
     <properties>
         <propertyGroup caption="Markers">
-            <propertyGroup caption="Dynamic marker">
-                <property key="markerTitle" type="attribute" required="false">
-                    <caption>Title</caption>
-                    <description/>
-                    <attributeTypes>
-                        <attributeType name="String"/>
-                    </attributeTypes>
-                </property>
-                <property key="markerDescription" type="attribute" required="false">
-                    <caption>Description</caption>
-                    <description/>
-                    <attributeTypes>
-                        <attributeType name="String"/>
-                    </attributeTypes>
-                </property>
-                <property key="markerAddress" type="attribute" required="false">
-                    <caption>Address</caption>
-                    <description>The widget will try to geocode the address to coordinates, and save those to the latitude and longitude attributes, if provided. The address is ignored if latitude and longitude are set.</description>
-                    <attributeTypes>
-                        <attributeType name="String"/>
-                    </attributeTypes>
-                </property>
-                <property key="markerLatitude" type="attribute" required="false">
-                    <caption>Latitude</caption>
-                    <description/>
-                    <attributeTypes>
-                        <attributeType name="Decimal"/>
-                    </attributeTypes>
-                </property>
-                <property key="markerLongitude" type="attribute" required="false">
-                    <caption>Longitude</caption>
-                    <description/>
-                    <attributeTypes>
-                        <attributeType name="Decimal"/>
-                    </attributeTypes>
-                </property>
-            </propertyGroup>
-            <propertyGroup caption="Static markers">
-                <property key="markers" type="object" isList="true" required="false">
-                    <caption>Marker list</caption>
-                    <description/>
-                    <properties>
-                        <property key="title" type="string" required="false">
-                            <caption>Title</caption>
-                            <category>Marker</category>
-                            <description/>
-                        </property>
-                        <property key="description" type="string" required="false">
-                            <caption>Description</caption>
-                            <category>Marker</category>
-                            <description/>
-                        </property>
-                        <property key="latitude" type="string">
-                            <caption>Latitude</caption>
-                            <category>Marker</category>
-                            <description/>
-                        </property>
-                        <property key="longitude" type="string">
-                            <caption>Longitude</caption>
-                            <category>Marker</category>
-                            <description/>
-                        </property>
-                        <property key="action" type="action" required="false">
-                            <caption>On marker press</caption>
-                            <category>Marker</category>
-                            <description/>
-                        </property>
-                    </properties>
-                </property>
-            </propertyGroup>
-        </propertyGroup>
-        <propertyGroup caption="Region">
-            <property key="latitude" type="attribute">
-                <caption>Center latitude</caption>
+            <property key="markers" type="object" isList="true" required="false">
+                <caption>List</caption>
                 <description/>
-                <attributeTypes>
-                    <attributeType name="Decimal"/>
-                </attributeTypes>
-            </property>
-            <property key="longitude" type="attribute">
-                <caption>Center longitude</caption>
-                <description>The center coordinates of the region to be displayed on the map.</description>
-                <attributeTypes>
-                    <attributeType name="Decimal"/>
-                </attributeTypes>
-            </property>
-            <property key="latitudeDelta" type="attribute">
-                <caption>Latitude delta</caption>
-                <description/>
-                <attributeTypes>
-                    <attributeType name="Decimal"/>
-                </attributeTypes>
-            </property>
-            <property key="longitudeDelta" type="attribute">
-                <caption>Longitude delta</caption>
-                <description>The span of coordinates that is displayed around the center coordinates.</description>
-                <attributeTypes>
-                    <attributeType name="Decimal"/>
-                </attributeTypes>
+                <properties>
+                    <propertyGroup caption="Marker">
+                        <propertyGroup caption="Location">
+                            <property key="address" type="textTemplate" required="false">
+                                <caption>Address</caption>
+                                <description>When latitude and longitude are provided, the address is ignored.</description>
+                            </property>
+                            <property key="latitude" type="textTemplate" required="false">
+                                <caption>Latitude</caption>
+                                <description/>
+                            </property>
+                            <property key="longitude" type="textTemplate" required="false">
+                                <caption>Longitude</caption>
+                                <description/>
+                            </property>
+                        </propertyGroup>
+                        <propertyGroup caption="Callout box">
+                            <property key="title" type="textTemplate" required="false">
+                                <caption>Title</caption>
+                                <description/>
+                            </property>
+                            <property key="description" type="textTemplate" required="false">
+                                <caption>Description</caption>
+                                <description/>
+                            </property>
+                        </propertyGroup>
+                        <propertyGroup caption="Events">
+                            <property key="onPress" type="action" required="false">
+                                <caption>On press</caption>
+                                <description/>
+                            </property>
+                        </propertyGroup>
+                    </propertyGroup>
+                </properties>
             </property>
         </propertyGroup>
-        <propertyGroup caption="Behavior">
-            <propertyGroup caption="Display">
-                <property key="mapType" type="enumeration" defaultValue="standard">
-                    <caption>Map type</caption>
+        <propertyGroup caption="View">
+            <propertyGroup caption="Automatic">
+                <property key="fitToMarkers" type="boolean" defaultValue="true">
+                    <caption>Fit to markers</caption>
+                    <description>The map view is centered and zoomed so that all the markers are visible. When switched off or when no marker is available the map centers on the default location.</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Default center">
+                <property key="centerAddress" type="textTemplate" required="false">
+                    <caption>Address </caption>
+                    <description>When latitude and longitude are provided, the address is ignored.</description>
+                </property>
+                <property key="centerLatitude" type="textTemplate" required="false">
+                    <caption>Latitude </caption>
                     <description/>
-                    <enumerationValues>
-                        <enumerationValue key="standard">Standard road map</enumerationValue>
-                        <enumerationValue key="satellite">Satellite view</enumerationValue>
-                        <enumerationValue key="hybrid">Satellite view with roads and points of interest overlayed</enumerationValue>
-                    </enumerationValues>
                 </property>
-                <property key="provider" type="enumeration" defaultValue="default">
-                    <caption>Provider</caption>
-                    <description>Map provider. The default uses Apple Maps on iOS and Google Maps on Android.</description>
-                    <enumerationValues>
-                        <enumerationValue key="default">Default</enumerationValue>
-                        <enumerationValue key="google">Google Maps</enumerationValue>
-                    </enumerationValues>
-                </property>
-                <property key="showsUserLocation" type="boolean" defaultValue="false">
-                    <caption>Show user location</caption>
-                    <description>If enabled the app will ask for permission to access the user's location.</description>
-                </property>
-                <property key="showsMyLocationButton" type="boolean" defaultValue="true">
-                    <caption>Show 'my location' button</caption>
-                    <description>Show the button to move map to the current user's location.</description>
+                <property key="centerLongitude" type="textTemplate" required="false">
+                    <caption>Longitude </caption>
+                    <description/>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Zoom">
-                <property key="zoomEnabled" type="boolean" defaultValue="true">
-                    <caption>Enable zoom</caption>
-                    <description>Allow the user to pinch/zoom the map.</description>
+                <property key="defaultZoomLevel" type="enumeration" defaultValue="city">
+                    <caption>Default</caption>
+                    <description>Zoom level for single marker, no marker or when fit to markers is disabled.</description>
+                    <enumerationValues>
+                        <enumerationValue key="world">World</enumerationValue>
+                        <enumerationValue key="continent">Landmass/continent</enumerationValue>
+                        <enumerationValue key="country">Country</enumerationValue>
+                        <enumerationValue key="city">City</enumerationValue>
+                        <enumerationValue key="town">Town</enumerationValue>
+                        <enumerationValue key="streets">Streets</enumerationValue>
+                        <enumerationValue key="building">Buildings</enumerationValue>
+                    </enumerationValues>
                 </property>
-                <property key="minZoomLevel" type="integer" defaultValue="1">
-                    <caption>Minimum zoom value</caption>
-                    <description>1: World, 5: Landmass/continent, 10: City, 15: Streets, 20: Buildings</description>
+                <property key="minZoomLevel" type="enumeration" defaultValue="world">
+                    <caption>Minimum </caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="world">World</enumerationValue>
+                        <enumerationValue key="continent">Landmass/continent</enumerationValue>
+                        <enumerationValue key="country">Country</enumerationValue>
+                        <enumerationValue key="city">City</enumerationValue>
+                        <enumerationValue key="town">Town</enumerationValue>
+                        <enumerationValue key="streets">Streets</enumerationValue>
+                        <enumerationValue key="building">Buildings</enumerationValue>
+                    </enumerationValues>
                 </property>
-                <property key="maxZoomLevel" type="integer" defaultValue="20">
-                    <caption>Maximum zoom value</caption>
-                    <description>1: World, 5: Landmass/continent, 10: City, 15: Streets, 20: Buildings</description>
-                </property>
-            </propertyGroup>
-            <propertyGroup caption="Other">
-                <property key="rotateEnabled" type="boolean" defaultValue="true">
-                    <caption>Enable rotation</caption>
-                    <description>Allow the user to pinch/rotate the map.</description>
-                </property>
-                <property key="scrollEnabled" type="boolean" defaultValue="true">
-                    <caption>Enable scroll</caption>
-                    <description>Allow the user to change the map region being displayed.</description>
-                </property>
-                <property key="pitchEnabled" type="boolean" defaultValue="true">
-                    <caption>Enable pitch</caption>
-                    <description>Allow the user to adjust the camera’s pitch angle.</description>
+                <property key="maxZoomLevel" type="enumeration" defaultValue="building">
+                    <caption>Maximum </caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="world">World</enumerationValue>
+                        <enumerationValue key="continent">Landmass/continent</enumerationValue>
+                        <enumerationValue key="country">Country</enumerationValue>
+                        <enumerationValue key="city">City</enumerationValue>
+                        <enumerationValue key="town">Town</enumerationValue>
+                        <enumerationValue key="streets">Streets</enumerationValue>
+                        <enumerationValue key="building">Buildings</enumerationValue>
+                    </enumerationValues>
                 </property>
             </propertyGroup>
         </propertyGroup>
-        <propertyGroup caption="Events">
-            <property key="onRegionChange" type="action" required="false">
-                <caption>On region change</caption>
+        <propertyGroup caption="Map">
+            <property key="mapType" type="enumeration" defaultValue="standard">
+                <caption>Type</caption>
                 <description/>
+                <enumerationValues>
+                    <enumerationValue key="standard">Standard</enumerationValue>
+                    <enumerationValue key="satellite">Satellite</enumerationValue>
+                </enumerationValues>
             </property>
-            <property key="onMarkerPress" type="action" required="false">
-                <caption>On marker press</caption>
-                <description/>
+            <property key="provider" type="enumeration" defaultValue="default">
+                <caption>Provider</caption>
+                <description>Map provider. The default uses Apple Maps on iOS and Google Maps on Android.</description>
+                <enumerationValues>
+                    <enumerationValue key="default">Default</enumerationValue>
+                    <enumerationValue key="google">Google Maps</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="showsUserLocation" type="boolean" defaultValue="false">
+                <caption>Show user location</caption>
+                <description>Show the current location of the user, requires permission to access the user's location.</description>
+            </property>
+            <property key="scrollEnabled" type="boolean" defaultValue="true">
+                <caption>Enable scroll</caption>
+                <description>Allow the user to change the map region being displayed.</description>
             </property>
         </propertyGroup>
     </properties>

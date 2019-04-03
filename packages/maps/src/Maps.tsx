@@ -1,187 +1,228 @@
 import { flattenStyles } from "@native-components/util-widgets";
-import { Component, createElement } from "react";
-import { Alert } from "react-native";
-import Geocoder from "react-native-geocoder";
-import MapView, { Marker, Region } from "react-native-maps";
+import { Component, createElement, createRef } from "react";
+import Geocoder, { GeocodingObject } from "react-native-geocoder";
+import MapView, { LatLng, Marker } from "react-native-maps";
 
-import { MapsProps } from "../typings/MapsProps";
+import { DefaultZoomLevelEnum, MapsProps, MarkersType } from "../typings/MapsProps";
 import { defaultMapsStyle, MapsStyle } from "./ui/Styles";
+import { PromiseQueue } from "./util/promise-queue";
 
-type LatLong = [number, number];
-interface MapsState {
-    geocodeCache: {
-        [address: string]: LatLong | undefined;
-    };
+type Props = MapsProps<MapsStyle>;
+
+interface State {
+    geocodeCache: { [address: string]: LatLng | undefined };
 }
 
-export class Maps extends Component<MapsProps<MapsStyle>, MapsState> {
-    private readonly onRegionChangeHandler = this.onRegionChange.bind(this);
-    private readonly styles = flattenStyles(defaultMapsStyle, this.props.style);
-
-    readonly state: MapsState = {
+export class Maps extends Component<Props, State> {
+    readonly state: State = {
         geocodeCache: {}
     };
 
-    get region(): Region | undefined {
-        if (
-            this.props.latitude.value == null ||
-            this.props.longitude.value == null ||
-            this.props.latitudeDelta.value == null ||
-            this.props.longitudeDelta.value == null
-        ) {
-            return;
-        }
+    private readonly styles = flattenStyles(defaultMapsStyle, this.props.style);
+    private readonly mapViewRef = createRef<MapView>();
 
-        return {
-            latitude: Number(this.props.latitude.value),
-            longitude: Number(this.props.longitude.value),
-            latitudeDelta: Number(this.props.latitudeDelta.value),
-            longitudeDelta: Number(this.props.longitudeDelta.value)
-        };
+    private geocodeInProgress: { [address: string]: boolean | undefined } = {};
+    private geocodeQueue = new PromiseQueue<GeocodingObject[]>();
+
+    componentDidMount(): void {
+        this.updateCamera(false);
+    }
+
+    componentDidUpdate(): void {
+        this.updateCamera(true);
     }
 
     render(): JSX.Element {
-        const showsTraffic = this.props.mapType !== "satellite" ? true : false;
-
         return (
             <MapView
+                ref={this.mapViewRef}
                 provider={this.props.provider === "default" ? null : this.props.provider}
-                region={this.region}
-                onRegionChangeComplete={this.onRegionChangeHandler}
                 mapType={this.props.mapType}
                 showsUserLocation={this.props.showsUserLocation}
-                showsMyLocationButton={this.props.showsMyLocationButton}
-                showsTraffic={showsTraffic}
-                zoomEnabled={this.props.zoomEnabled}
-                minZoomLevel={this.props.minZoomLevel}
-                maxZoomLevel={this.props.maxZoomLevel}
-                rotateEnabled={this.props.rotateEnabled}
+                showsMyLocationButton={this.props.showsUserLocation}
+                showsTraffic={this.props.mapType !== "satellite"}
+                minZoomLevel={toZoomValue(this.props.minZoomLevel)}
+                maxZoomLevel={toZoomValue(this.props.maxZoomLevel)}
+                rotateEnabled={this.props.scrollEnabled}
                 scrollEnabled={this.props.scrollEnabled}
-                pitchEnabled={this.props.pitchEnabled}
+                pitchEnabled={this.props.scrollEnabled}
+                zoomEnabled={this.props.scrollEnabled}
                 style={this.styles.container}
             >
-                {this.renderDynamicMarker()}
-                {this.renderStaticMarkers()}
+                {this.props.markers.map((marker, index) => this.renderMarker(marker, index))}
             </MapView>
         );
     }
 
-    renderDynamicMarker(): JSX.Element | null {
-        const latLong = this.getLatLong(
-            this.props.markerLatitude && this.props.markerLatitude.value,
-            this.props.markerLongitude && this.props.markerLongitude.value,
-            this.props.markerAddress && this.props.markerAddress.value
-        );
+    private renderMarker(marker: MarkersType, index: number): JSX.Element | null {
+        const coordinate = this.parseCoordinate(marker.latitude, marker.longitude, marker.address);
 
-        if (!latLong) {
+        if (!coordinate) {
             return null;
         }
-
-        return this.renderMarker(
-            0,
-            latLong[0],
-            latLong[1],
-            this.props.markerTitle && this.props.markerTitle.value,
-            this.props.markerDescription && this.props.markerDescription.value,
-            this.props.onMarkerPress
-        );
-    }
-
-    renderStaticMarkers(): JSX.Element[] | undefined {
-        if (!this.props.markers || this.props.markers.length === 0) {
-            return;
-        }
-
-        return this.props.markers.map((marker, index) =>
-            this.renderMarker(
-                index + 1,
-                Number(marker.latitude),
-                Number(marker.longitude),
-                marker.title,
-                marker.description,
-                marker.action
-            )
-        );
-    }
-
-    renderMarker(
-        index: number,
-        latitude: number,
-        longitude: number,
-        title?: string,
-        description?: string,
-        action?: ActionValue
-    ): JSX.Element {
-        const onPress = () => onMarkerPress(action);
 
         return (
             <Marker
                 key={"map_marker_" + index}
-                title={title}
-                description={description}
-                coordinate={{ latitude, longitude }}
-                onPress={onPress}
+                title={marker.title && marker.title.value}
+                description={marker.description && marker.description.value}
+                coordinate={coordinate}
                 pinColor={this.styles.marker.color}
                 opacity={this.styles.marker.opacity}
+                // tslint:disable-next-line:jsx-no-lambda
+                onPress={() => onMarkerPress(marker.onPress)}
             />
         );
     }
 
-    private onRegionChange(region: Region): void {
-        this.props.latitude.setTextValue(String(region.latitude));
-        this.props.longitude.setTextValue(String(region.longitude));
-        this.props.latitudeDelta.setTextValue(String(region.latitudeDelta));
-        this.props.longitudeDelta.setTextValue(String(region.longitudeDelta));
+    private updateCamera(animate: boolean): void {
+        if (!this.mapViewRef.current) {
+            return;
+        }
 
-        if (this.props.onRegionChange && this.props.onRegionChange.canExecute) {
-            this.props.onRegionChange.execute();
+        if (this.props.fitToMarkers && this.props.markers.length > 1) {
+            this.mapViewRef.current.fitToElements(animate);
+            return;
+        }
+
+        const center =
+            this.props.markers.length === 1 && this.props.fitToMarkers
+                ? this.parseCoordinate(
+                      this.props.markers[0].latitude,
+                      this.props.markers[0].longitude,
+                      this.props.markers[0].address
+                  )
+                : this.parseCoordinate(this.props.centerLatitude, this.props.centerLongitude, this.props.centerAddress);
+
+        if (!center) {
+            return;
+        }
+
+        const camera = {
+            center,
+            zoom: toZoomValue(this.props.defaultZoomLevel),
+            altitude: toAltitude(this.props.defaultZoomLevel)
+        };
+
+        if (animate) {
+            this.mapViewRef.current.animateCamera(camera);
+        } else {
+            this.mapViewRef.current.setCamera(camera);
         }
     }
 
-    private getLatLong(latitude?: BigJs.Big, longitude?: BigJs.Big, address?: string): LatLong | undefined {
-        if (latitude && longitude) {
-            return [Number(latitude), Number(longitude)];
-        }
+    private parseCoordinate(
+        latitudeProp?: DynamicValue<string>,
+        longitudeProp?: DynamicValue<string>,
+        addressProp?: DynamicValue<string>
+    ): LatLng | null {
+        if (latitudeProp && latitudeProp.value && longitudeProp && longitudeProp.value) {
+            const latitude = parseDecimalFromString(latitudeProp.value);
+            const longitude = parseDecimalFromString(longitudeProp.value);
 
-        if (address) {
-            const cachedValue = this.state.geocodeCache[address];
-            if (cachedValue) {
-                return cachedValue;
+            if (isValidLatitude(latitude) && isValidLongitude(longitude)) {
+                return { latitude, longitude };
             }
-
-            this.geocodeAndCache(address);
         }
 
-        return;
+        if (addressProp && addressProp.value) {
+            const coordinate = this.geocodeWithCache(addressProp.value);
+            if (coordinate) {
+                return coordinate;
+            }
+        }
+
+        return null;
     }
 
-    private geocodeAndCache(address: string): void {
-        Geocoder.geocodeAddress(address)
-            .then(results => {
-                if (results.length === 0) {
-                    throw new Error("No results found for the given address");
-                }
+    private geocodeWithCache(address: string): LatLng | null {
+        const cachedValue = this.state.geocodeCache[address];
+        if (cachedValue) {
+            return cachedValue;
+        }
 
-                if (this.props.markerLatitude && this.props.markerLongitude) {
-                    this.props.markerLatitude.setTextValue(String(results[0].position.lat));
-                    this.props.markerLatitude.setTextValue(String(results[0].position.lng));
-                } else {
-                    this.setState({
-                        geocodeCache: {
-                            ...this.state.geocodeCache,
-                            [address]: [results[0].position.lat, results[0].position.lng]
-                        }
-                    });
-                }
-            })
-            .catch(() => {
-                Alert.alert("Could not find the given address:", address);
-            });
+        if (!this.geocodeInProgress[address]) {
+            this.geocodeInProgress = { ...this.geocodeInProgress, [address]: true };
+
+            this.geocodeQueue
+                .add(() => Geocoder.geocodeAddress(address))
+                .then(results => {
+                    if (results.length === 0) {
+                        throw new Error(`No location found for the provided address: ${address}`);
+                    }
+
+                    const coordinate: LatLng = {
+                        latitude: results[0].position.lat,
+                        longitude: results[0].position.lng
+                    };
+
+                    if (this.mapViewRef.current) {
+                        this.setState({
+                            geocodeCache: { ...this.state.geocodeCache, [address]: coordinate }
+                        });
+                    }
+                })
+                .catch(() => {
+                    throw new Error(`Failed to retrieve a location for the provided address: ${address}`);
+                });
+        }
+
+        return null;
     }
+}
+
+function isValidLatitude(latitude: number): boolean {
+    return !isNaN(latitude) && latitude <= 90 && latitude >= -90;
+}
+
+function isValidLongitude(longitude: number): boolean {
+    return !isNaN(longitude) && longitude <= 180 && longitude >= -180;
+}
+
+function parseDecimalFromString(text: string): number {
+    return parseFloat(text.replace(",", "."));
 }
 
 function onMarkerPress(action?: ActionValue): void {
     if (action && action.canExecute) {
         action.execute();
+    }
+}
+
+function toZoomValue(level: DefaultZoomLevelEnum): number {
+    switch (level) {
+        case "world":
+            return 3;
+        case "continent":
+            return 5;
+        case "country":
+            return 7;
+        case "city":
+            return 10;
+        case "town":
+            return 12;
+        case "streets":
+            return 15;
+        case "building":
+            return 20;
+    }
+}
+
+function toAltitude(level: DefaultZoomLevelEnum): number {
+    switch (level) {
+        case "world":
+            return 16026161;
+        case "continent":
+            return 4006540;
+        case "country":
+            return 1001635;
+        case "city":
+            return 125204;
+        case "town":
+            return 31301;
+        case "streets":
+            return 3914;
+        case "building":
+            return 122;
     }
 }
