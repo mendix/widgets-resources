@@ -9,6 +9,7 @@ import normalizeFont from './_helperfunctions/normalizefont';
 export const { height: deviceHeight, width: deviceWidth } = Dimensions.get('window');
 
 const darkMode = false;
+const backgroundColor = darkMode ? '#222' : '#FFF';
 
 // Brand Style
 export const brand = {
@@ -20,19 +21,19 @@ export const brand = {
 
 // Background Colors
 export const background = {
-    primary: darkMode ? '#111' : '#FFF',
-    secondary: darkMode ? '#222' : '#f9f9f9', //FIXME: Colors based on bg color
+    primary: backgroundColor,
+    secondary: setContrastScale(backgroundColor, 0.03),
 };
 
 // Gray colors
 export const contrast = {
-    highest: setContrastScale(background.primary, 0.99),
-    higher: setContrastScale(background.primary, 0.83),
-    high: setContrastScale(background.primary, 0.67),
+    highest: setContrastScale(background.primary, 0.95),
+    higher: setContrastScale(background.primary, 0.8),
+    high: setContrastScale(background.primary, 0.65),
     regular: setContrastScale(background.primary, 0.5),
-    low: setContrastScale(background.primary, 0.33),
-    lower: setContrastScale(background.primary, 0.17),
-    lowest: setContrastScale(background.primary, 0.01),
+    low: setContrastScale(background.primary, 0.35),
+    lower: setContrastScale(background.primary, 0.2),
+    lowest: setContrastScale(background.primary, 0.05),
 };
 
 // Border Style
@@ -114,7 +115,7 @@ export const input = {
     // Colors
     color: contrast.higher,
     errorColor: brand.danger,
-    borderColor: Platform.select({ ios: contrast.lowest, android: contrast.lower }),
+    borderColor: contrast.lower,
     backgroundColor: background.primary,
     selectionColor: contrast.lower,
     placeholderTextColor: contrast.low,
@@ -128,6 +129,6 @@ export const input = {
 
     // Alignment
     textAlign: 'left',
-    paddingHorizontal: Platform.select({ ios: spacing.small, android: spacing.small }),
-    paddingVertical: Platform.select({ ios: spacing.smaller, android: spacing.smallest }),
+    paddingHorizontal: spacing.small,
+    paddingVertical: spacing.smaller,
 };

@@ -1,10 +1,34 @@
 import colors from './colorwords.js';
 
 // const grayScale = ['#F9F9F9', '#EEE', '#DDD', '#CCC', '#BBB', '#AAA', '#999', '#888', '#777', '#666', '#555', '#444', '#333', '#222', '#111', '#070707'];
-const grayScale = ['#EEE', '#DDD', '#CCC', '#BBB', '#AAA', '#999', '#888', '#777', '#666', '#555', '#444', '#333', '#222', '#111'];
-const colorContrast = ['#DDD', '#EEE', '#FFF', '#FFF', '#FFF', '#FFF', '#FFF', '#FFF', '#000', '#000', '#000', '#000', '#000', '#000', '#111', '#222'];
+// const grayScale = ['#EEE', '#DDD', '#CCC', '#BBB', '#AAA', '#999', '#888', '#777', '#666', '#555', '#444', '#333', '#222', '#111'];
+// const colorContrast = ['#DDD', '#EEE', '#FFF', '#FFF', '#FFF', '#FFF', '#FFF', '#FFF', '#000', '#000', '#000', '#000', '#000', '#000', '#111', '#222'];
 
-// HEX or HEX Alpha to RGB
+/**
+ * Converts RGB color to HEX
+ *
+ * @param   {number || string}    r   Accepts RGB as string || Accepts R as string or number
+ * @param   {number || string}    g   Accepts G as string or number
+ * @param   {number || string}    b   Accepts B as string or number
+ *
+ * @return  {string} Returns HEX color
+ */
+function RGBToHex(r, g, b) {
+    if (typeof r === 'string' && !g && !b) {
+        const color = r.replace(/rgb[(]|[)]/gm, '');
+        [r, g, b] = color.split(',');
+    }
+    return '#' + ((1 << 24) + (Number(r) << 16) + (Number(g) << 8) + Number(b)).toString(16).slice(1);
+    // return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+/**
+ * Converts HEX or HEX Alpha to RGB
+ *
+ * @param   {string}    hex   Accepts HEX color
+ *
+ * @return  {object} Returns RGB color
+ */
 function hexToRGB(hex) {
     hex = hex.substring(1);
     hex = hex.length === 3 || hex.length === 4 ? [...hex].map(x => x + x).join('') : hex;
@@ -16,12 +40,25 @@ function hexToRGB(hex) {
     });
 }
 
+/**
+ * Converts HEX color to RGB string
+ *
+ * @param   {string}    hex   Accepts HEX color
+ *
+ * @return  {string} Returns RGB color
+ */
 export function hexToRGBString(hex) {
     const object = hexToRGB(hex);
     return [object.r, object.g, object.b].join(',');
 }
 
-// HSL or HSL Alpha to RGB
+/**
+ * Converts HSL to RGB color
+ *
+ * @param   {string}    hsl   Accepts HSL color
+ *
+ * @return  {object} Returns RGB color
+ */
 function hslToRGB(hsl) {
     let [h, s, l, a = '1'] = hsl.replace(/hsla?[(]|[%]|[)]/gm, '').split(',');
     [h, s, l, a].forEach(x => Number(x.trim()));
@@ -73,6 +110,8 @@ function hslToRGB(hsl) {
 }
 
 // RGB with HEX or Word to RGB
+// Accepts:
+//== //TODO
 function rgbToRGB(rgb) {
     const color = rgb.replace(/rgb[(]|[)]/gm, '');
     // if rgb has hex color definition
@@ -88,6 +127,8 @@ function rgbToRGB(rgb) {
 }
 
 // RGB Alpha to RGB
+// Accepts:
+//== //TODO
 function rgbaToRGB(rgba) {
     let RGB = typeof rgba === 'object' ? rgba : {};
     const calc = val => Math.round(RGB.a * (val / 255) * 255); // Calc best color contrast values
@@ -115,6 +156,8 @@ function rgbaToRGB(rgba) {
 }
 
 // Check what kind of color type is used.
+// Accepts:
+//== //TODO
 function checkColor(color) {
     if (typeof color === 'string') {
         if (color in colors) return colors[color.toLowerCase()];
@@ -125,6 +168,9 @@ function checkColor(color) {
     }
 }
 
+// Expects a (background) color and returns the best contrast color
+// Accepts:
+//== //TODO
 export function setColorBasedOnBackground(color) {
     const c = checkColor(color);
     const RGB = typeof c === 'object' ? c : { r: '255', g: '255', b: '255' };
@@ -147,14 +193,23 @@ export function setColorBasedOnBackground(color) {
 //     // return o > 125 ? contrast.higher : "#FFF";
 // }
 
+/**
+ * Expects a color and a contrast value between 0 and 1.
+ * It will return a gray color with the desired contrast which is based on the specified color
+ *
+ * @param   {string}    color   Accepts any color format
+ *
+ * @return  {string} Returns HEX color
+ */
 export function setContrastScale(color, contrast) {
+    if (contrast > 1) contrast = 1;
+    if (contrast < 0) contrast = 0;
     const max = 256;
     const c = checkColor(color);
     const RGB = typeof c === 'object' ? c : { r: '255', g: '255', b: '255' };
 
     // https://www.w3.org/TR/AERT/#color-contrast
-    let brightness = Math.round((RGB.r * 299 + RGB.g * 587 + RGB.b * 114) / 1000);
-    brightness = brightness > max / 2 ? max * contrast : max - max * contrast;
-    const index = Math.round((brightness / max) * (grayScale.length - 1));
-    return grayScale[index];
+    const brightness = Math.round((RGB.r * 299 + RGB.g * 587 + RGB.b * 114) / 1000);
+    const value = Math.round(brightness > max / 2 ? max - max * contrast : max * contrast);
+    return RGBToHex(value, value, value);
 }

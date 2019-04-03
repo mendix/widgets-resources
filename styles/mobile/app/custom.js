@@ -1,10 +1,65 @@
-import { contrast, background, spacing, font, brand } from '../core/variables';
+import { contrast, background, spacing, font, brand, deviceWidth, deviceHeight } from '../core/variables';
 import merge from '../core/_helperfunctions/mergeobjects';
 import { Platform } from 'react-native';
 
 //== Temporary Classes
 //## Helper classes to create the desired look & feel
 //-------------------------------------------------------------------------------------------------------------------//
+// Home
+export const homeImageBackground = {
+    container: {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        position: 'absolute',
+        zIndex: 0,
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'cover',
+    },
+};
+
+export const homeImageIllustration = {
+    container: {
+        zIndex: 1,
+        width: 200,
+        marginTop: 100,
+        height: deviceHeight / 2.5,
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'center',
+    },
+};
+
+export const homeFooter = {
+    container: {
+        zIndex: 1,
+        width: '100%',
+        // height: '100%',
+    },
+};
+
+export const homeFooterLogo = {
+    container: {
+        height: 60,
+    },
+    image: {
+        resizeMode: 'center',
+    },
+};
+
+export const homeFooterText = {
+    container: {},
+    text: {
+        lineHeight: 25,
+    },
+};
+
 // Buttons
 export const cardButton = {
     //Temporary invisible button to make a card clickable

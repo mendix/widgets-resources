@@ -12,6 +12,7 @@ export const com_mendix_widget_native_feedback_Feedback = (Feedback = {
     floatingButton: {
         // All ViewStyle properties
         borderRadius: 0,
+        backgroundColor: background.secondary,
         borderTopLeftRadius: button.borderRadius,
         borderBottomLeftRadius: button.borderRadius,
         shadowColor: contrast.lower,

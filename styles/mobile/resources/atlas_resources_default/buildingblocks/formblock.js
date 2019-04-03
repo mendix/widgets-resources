@@ -28,3 +28,13 @@ export const formTitle = {
         }),
     },
 };
+
+export const inputFieldIcon = {
+    container: {
+        marginRight: spacing.small,
+    },
+    image: {
+        width: 30,
+        height: 30,
+    },
+};

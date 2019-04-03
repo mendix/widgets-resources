@@ -9,7 +9,9 @@ import { Platform } from 'react-native';
 ========================================================================== */
 
 export const com_mendix_widget_native_progressbar_ProgressBar = (ProgressBar = {
-    container: {},
+    container: {
+        width: '100%',
+    },
     bar: {
         // All ViewStyle properties are allowed
         ...Platform.select({
@@ -68,12 +70,12 @@ export const progressBarDanger = {
 export const progressBarSmall = {
     bar: {
         height: 3,
-        borderRadius: 2,
+        borderRadius: Platform.select({ ios: 2 }),
     },
 };
 export const progressBarLarge = {
     bar: {
         height: 10,
-        borderRadius: 8,
+        borderRadius: Platform.select({ ios: 8 }),
     },
 };

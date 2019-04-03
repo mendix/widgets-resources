@@ -9,10 +9,7 @@ import { Platform } from 'react-native';
 
 export const TabContainer = {
     container: {
-        // flex: 1,
-        // flexGrow: 1,
-        // width: '100%',
-        // height: '100%',
+        flex: 1,
     },
     tabBar: {
         bounces: true,
@@ -20,15 +17,13 @@ export const TabContainer = {
         pressOpacity: 0.8,
         // tabBarPosition: 'top',
         backgroundColor: background.primary,
-        // scrollEnabled: false,
+        scrollEnabled: true,
     },
     indicator: {
         backgroundColor: brand.primary,
         height: Platform.select({ ios: 2, android: 2 }),
     },
-    tab: {
-        flex: 1,
-    },
+    tab: {},
     label: {
         color: contrast.highest,
     },
@@ -40,7 +35,7 @@ export const TabContainer = {
 // Tab container as content of page
 
 export const tabContainerMinimal = {
-    tabView: {
+    container: {
         tabBarPosition: 'top',
         backgroundColor: 'transparent',
     },

@@ -1,6 +1,6 @@
 {
-    "pageTemplates": "DesktopModeler",
-    "jsFiles": ["styles/mobile/"],
+    // "pageTemplates": "DesktopModeler",
+    // "jsFiles": ["styles/mobile/"],
     "designProperties": {
         "Widget": [
             {
@@ -8,10 +8,6 @@
                 "type": "Dropdown",
                 "description": "The spacing above this element.",
                 "options": [
-                    {
-                        "name": "None",
-                        "class": "spacingOuterTopNone"
-                    },
                     {
                         "name": "Small",
                         "class": "spacingOuterTop"
@@ -32,10 +28,6 @@
                 "description": "The spacing below this element.",
                 "options": [
                     {
-                        "name": "None",
-                        "class": "spacingOuterBottomNone"
-                    },
-                    {
                         "name": "Small",
                         "class": "spacingOuterBottom"
                     },
@@ -55,10 +47,6 @@
                 "description": "The spacing to the left of this element.",
                 "options": [
                     {
-                        "name": "None",
-                        "class": "spacingOuterLeftNone"
-                    },
-                    {
                         "name": "Small",
                         "class": "spacingOuterLeft"
                     },
@@ -77,10 +65,6 @@
                 "type": "Dropdown",
                 "description": "The spacing to the right of this element.",
                 "options": [
-                    {
-                        "name": "None",
-                        "class": "spacingOuterRightNone"
-                    },
                     {
                         "name": "Small",
                         "class": "spacingOuterRight"
@@ -103,10 +87,6 @@
                 "description": "The spacing above this element.",
                 "options": [
                     {
-                        "name": "Inner None",
-                        "class": "spacingInnerTopNone"
-                    },
-                    {
                         "name": "Inner Small",
                         "class": "spacingInnerTop"
                     },
@@ -117,10 +97,6 @@
                     {
                         "name": "Inner Large",
                         "class": "spacingInnerTopLarge"
-                    },
-                    {
-                        "name": "Outer None",
-                        "class": "spacingOuterTopNone"
                     },
                     {
                         "name": "Outer Small",
@@ -142,10 +118,6 @@
                 "description": "The spacing below this element.",
                 "options": [
                     {
-                        "name": "Inner None",
-                        "class": "spacingInnerBottomNone"
-                    },
-                    {
                         "name": "Inner Small",
                         "class": "spacingInnerBottom"
                     },
@@ -156,10 +128,6 @@
                     {
                         "name": "Inner Large",
                         "class": "spacingInnerBottomLarge"
-                    },
-                    {
-                        "name": "Outer None",
-                        "class": "spacingOuterBottomNone"
                     },
                     {
                         "name": "Outer Small",
@@ -181,10 +149,6 @@
                 "description": "The spacing to the left of this element.",
                 "options": [
                     {
-                        "name": "Inner None",
-                        "class": "spacingInnerLeftNone"
-                    },
-                    {
                         "name": "Inner Small",
                         "class": "spacingInnerLeft"
                     },
@@ -195,10 +159,6 @@
                     {
                         "name": "Inner Large",
                         "class": "spacingInnerLeftLarge"
-                    },
-                    {
-                        "name": "Outer None",
-                        "class": "spacingOuterLeftNone"
                     },
                     {
                         "name": "Outer Small",
@@ -220,10 +180,6 @@
                 "description": "The spacing to the right of this element.",
                 "options": [
                     {
-                        "name": "Inner None",
-                        "class": "spacingInnerRightNone"
-                    },
-                    {
                         "name": "Inner Small",
                         "class": "spacingInnerRight"
                     },
@@ -234,10 +190,6 @@
                     {
                         "name": "Inner Large",
                         "class": "spacingInnerRightLarge"
-                    },
-                    {
-                        "name": "Outer None",
-                        "class": "spacingOuterRightNone"
                     },
                     {
                         "name": "Outer Small",
@@ -254,31 +206,90 @@
                 ]
             },
             {
-                "name": "Align horizontal",
+                "name": "Flex size",
+                "type": "Dropdown",
+                "description": "Change the size of the widget based on based on his brothers.",
+                "options": [
+                    {
+                        "name": "Flex Main",
+                        "class": "flexMain"
+                    },
+                    {
+                        "name": "Flex Item",
+                        "class": "flexItem"
+                    }
+                ]
+            },
+            {
+                "name": "Align Self",
+                "type": "Dropdown",
+                "description": "Align self in the cross flex direction. This overrides 'align children' of the parent.",
+                "options": [
+                    {
+                        "name": "Stretch",
+                        "class": "alignSelfStretch"
+                    },
+                    {
+                        "name": "Align Start",
+                        "class": "alignSelfStart"
+                    },
+                    {
+                        "name": "Align center",
+                        "class": "alignSelfCenter"
+                    },
+                    {
+                        "name": "Align end",
+                        "class": "alignSelfEnd"
+                    }
+                ]
+            },
+            {
+                "name": "Render children horizontal",
                 "type": "Toggle",
                 "description": "Align the content as a row.",
                 "class": "flexRow"
             },
             {
-                "name": "Align content",
+                "name": "Justify children",
                 "type": "Dropdown",
-                "description": "Align content at the center or the end.",
+                "description": "Align children in the flex direction.",
                 "options": [
                     {
+                        "name": "Space Between",
+                        "class": "justifyChildrenSpaceBetween"
+                    },
+                    {
+                        "name": "Space Around",
+                        "class": "justifyChildrenSpaceAround"
+                    },
+                    {
                         "name": "Align center",
-                        "class": "flexDirectionAlignCenter"
+                        "class": "justifyChildrenCenter"
                     },
                     {
                         "name": "Align end",
-                        "class": "flexDirectionAlignEnd"
+                        "class": "justifyChildrenEnd"
                     }
                 ]
             },
             {
-                "name": "Full Width/Height",
-                "type": "Toggle",
-                "description": "Give the container a width & height of 100%.",
-                "class": "fullSize"
+                "name": "Align children",
+                "type": "Dropdown",
+                "description": "Align children in the cross flex direction.",
+                "options": [
+                    {
+                        "name": "Stretch",
+                        "class": "alignChildrenStretch"
+                    },
+                    {
+                        "name": "Align center",
+                        "class": "alignChildrenCenter"
+                    },
+                    {
+                        "name": "Align end",
+                        "class": "alignChildrenEnd"
+                    }
+                ]
             },
             {
                 "name": "Background color",
@@ -303,10 +314,6 @@
                 "description": "The spacing above this element.",
                 "options": [
                     {
-                        "name": "Inner None",
-                        "class": "spacingInnerTopNone"
-                    },
-                    {
                         "name": "Inner Small",
                         "class": "spacingInnerTop"
                     },
@@ -317,10 +324,6 @@
                     {
                         "name": "Inner Large",
                         "class": "spacingInnerTopLarge"
-                    },
-                    {
-                        "name": "Outer None",
-                        "class": "spacingOuterTopNone"
                     },
                     {
                         "name": "Outer Small",
@@ -342,10 +345,6 @@
                 "description": "The spacing below this element.",
                 "options": [
                     {
-                        "name": "Inner None",
-                        "class": "spacingInnerBottomNone"
-                    },
-                    {
                         "name": "Inner Small",
                         "class": "spacingInnerBottom"
                     },
@@ -356,10 +355,6 @@
                     {
                         "name": "Inner Large",
                         "class": "spacingInnerBottomLarge"
-                    },
-                    {
-                        "name": "Outer None",
-                        "class": "spacingOuterBottomNone"
                     },
                     {
                         "name": "Outer Small",
@@ -381,10 +376,6 @@
                 "description": "The spacing to the left of this element.",
                 "options": [
                     {
-                        "name": "Inner None",
-                        "class": "spacingInnerLeftNone"
-                    },
-                    {
                         "name": "Inner Small",
                         "class": "spacingInnerLeft"
                     },
@@ -395,10 +386,6 @@
                     {
                         "name": "Inner Large",
                         "class": "spacingInnerLeftLarge"
-                    },
-                    {
-                        "name": "Outer None",
-                        "class": "spacingOuterLeftNone"
                     },
                     {
                         "name": "Outer Small",
@@ -420,10 +407,6 @@
                 "description": "The spacing to the right of this element.",
                 "options": [
                     {
-                        "name": "Inner None",
-                        "class": "spacingInnerRightNone"
-                    },
-                    {
                         "name": "Inner Small",
                         "class": "spacingInnerRight"
                     },
@@ -434,10 +417,6 @@
                     {
                         "name": "Inner Large",
                         "class": "spacingInnerRightLarge"
-                    },
-                    {
-                        "name": "Outer None",
-                        "class": "spacingOuterRightNone"
                     },
                     {
                         "name": "Outer Small",
@@ -454,31 +433,90 @@
                 ]
             },
             {
-                "name": "Align horizontal",
+                "name": "Flex size",
+                "type": "Dropdown",
+                "description": "Change the size of the widget based on based on his brothers.",
+                "options": [
+                    {
+                        "name": "Flex Main",
+                        "class": "flexMain"
+                    },
+                    {
+                        "name": "Flex Item",
+                        "class": "flexItem"
+                    }
+                ]
+            },
+            {
+                "name": "Align Self",
+                "type": "Dropdown",
+                "description": "Align self in the cross flex direction. This overrides 'align children' of the parent.",
+                "options": [
+                    {
+                        "name": "Stretch",
+                        "class": "alignSelfStretch"
+                    },
+                    {
+                        "name": "Align Start",
+                        "class": "alignSelfStart"
+                    },
+                    {
+                        "name": "Align center",
+                        "class": "alignSelfCenter"
+                    },
+                    {
+                        "name": "Align end",
+                        "class": "alignSelfEnd"
+                    }
+                ]
+            },
+            {
+                "name": "Render children horizontal",
                 "type": "Toggle",
                 "description": "Align the content as a row.",
                 "class": "flexRow"
             },
             {
-                "name": "Align content",
+                "name": "Justify children",
                 "type": "Dropdown",
-                "description": "Align content at the center or the end.",
+                "description": "Align children in the flex direction.",
                 "options": [
                     {
+                        "name": "Space Between",
+                        "class": "justifyChildrenSpaceBetween"
+                    },
+                    {
+                        "name": "Space Around",
+                        "class": "justifyChildrenSpaceAround"
+                    },
+                    {
                         "name": "Align center",
-                        "class": "flexDirectionAlignCenter"
+                        "class": "justifyChildrenCenter"
                     },
                     {
                         "name": "Align end",
-                        "class": "flexDirectionAlignEnd"
+                        "class": "justifyChildrenEnd"
                     }
                 ]
             },
             {
-                "name": "Full Width/Height",
-                "type": "Toggle",
-                "description": "Give the container a width & height of 100%.",
-                "class": "fullSize"
+                "name": "Align children",
+                "type": "Dropdown",
+                "description": "Align children in the cross flex direction.",
+                "options": [
+                    {
+                        "name": "Stretch",
+                        "class": "alignChildrenStretch"
+                    },
+                    {
+                        "name": "Align center",
+                        "class": "alignChildrenCenter"
+                    },
+                    {
+                        "name": "Align end",
+                        "class": "alignChildrenEnd"
+                    }
+                ]
             },
             {
                 "name": "Background color",
@@ -539,29 +577,6 @@
         ],
         "DynamicText": [
             {
-                "name": "Font Weight",
-                "type": "Dropdown",
-                "description": "Emphasize the text with a heavier or lighter font weight",
-                "options": [
-                    {
-                        "name": "Light",
-                        "class": "textLight"
-                    },
-                    {
-                        "name": "Default",
-                        "class": "textNormal"
-                    },
-                    {
-                        "name": "Semibold",
-                        "class": "textSemiBold"
-                    },
-                    {
-                        "name": "Bold",
-                        "class": "textBold"
-                    }
-                ]
-            },
-            {
                 "name": "Color",
                 "type": "Dropdown",
                 "description": "Change the color of text.",
@@ -581,6 +596,76 @@
                     {
                         "name": "Brand Danger",
                         "class": "textDanger"
+                    },
+                    {
+                        "name": "White",
+                        "class": "textWhite"
+                    },
+                    {
+                        "name": "Gray Lightest",
+                        "class": "textGrayLightest"
+                    },
+                    {
+                        "name": "Gray Lighter",
+                        "class": "textGrayLighter"
+                    },
+                    {
+                        "name": "Gray Light",
+                        "class": "textGrayLight"
+                    },
+                    {
+                        "name": "Gray",
+                        "class": "textGray"
+                    },
+                    {
+                        "name": "Gray Dark",
+                        "class": "textGrayDark"
+                    },
+                    {
+                        "name": "Gray Darker",
+                        "class": "textGrayDarker"
+                    },
+                    {
+                        "name": "Gray Darkest",
+                        "class": "textGrayDarkest"
+                    }
+                ]
+            },
+            {
+                "name": "Size",
+                "type": "Dropdown",
+                "description": "Make the text smaller or larger.",
+                "options": [
+                    {
+                        "name": "Small",
+                        "class": "textSmall"
+                    },
+                    {
+                        "name": "Large",
+                        "class": "textLarge"
+                    }
+                ]
+            },
+            {
+                "name": "Weight",
+                "type": "Dropdown",
+                "description": "Emphasize the text with a heavier or lighter font weight",
+                "options": [
+                    {
+                        "name": "Light",
+                        "class": "textLight"
+                    },
+                    {
+                        "name": "Default",
+                        "class": "textNormal"
+                    },
+                    {
+                        "name": "Semibold",
+                        "class": "textSemiBold"
+                    },
+                    {
+                        "name": "Bold",
+                        "class": "textBold"
                     }
                 ]
             },
@@ -678,8 +763,8 @@
                         "class": "mapsSquare"
                     },
                     {
-                        "name": "Full Height",
-                        "class": "mapsFullHeight"
+                        "name": "Full Screen",
+                        "class": "mapsFullScreen"
                     }
                 ]
             },
