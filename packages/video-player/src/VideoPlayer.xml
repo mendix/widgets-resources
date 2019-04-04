@@ -16,10 +16,6 @@
                     <caption>Auto start</caption>
                     <description>Automatically start playing the video after it loads.</description>
                 </property>
-                <property key="showControls" type="boolean" defaultValue="true">
-                    <caption>Show controls</caption>
-                    <description>Display video controls to pause, play, go fullscreen, etc.</description>
-                </property>
                 <property key="muted" type="boolean" defaultValue="false">
                     <caption>Muted</caption>
                     <description>Mute the sound of the video.</description>
@@ -28,6 +24,15 @@
                     <caption>Loop</caption>
                     <description>Repeat the video after it finishes.</description>
                 </property>
+            </propertyGroup>
+            <propertyGroup caption="Display">
+                <property key="showControls" type="boolean" defaultValue="true">
+                    <caption>Show controls</caption>
+                    <description>Display video controls to pause, play, go fullscreen, etc.</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
             </propertyGroup>
         </propertyGroup>
     </properties>
