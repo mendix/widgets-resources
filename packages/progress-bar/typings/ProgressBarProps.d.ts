@@ -9,8 +9,8 @@ interface CommonProps<Style> {
 }
 
 export interface ProgressBarProps<Style> extends CommonProps<Style> {
-    value?: EditableValue<BigJs.Big>;
-    defaultValue: number;
-    maximumValue?: EditableValue<BigJs.Big>;
-    defaultMaximumValue: number;
+    valueAttribute?: EditableValue<BigJs.Big>;
+    valueDefault: number;
+    maximumValueAttribute?: EditableValue<BigJs.Big>;
+    maximumValueDefault: number;
 }
