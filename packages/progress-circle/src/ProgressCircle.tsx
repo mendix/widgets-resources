@@ -10,14 +10,15 @@ export class ProgressCircle extends Component<ProgressCircleProps<ProgressCircle
     private readonly styles = flattenStyles(defaultProgressCircleStyle, this.props.style);
 
     private get progress(): number {
-        const { maximumValue, value, defaultMaximumValue, defaultValue } = this.props;
-        const maximum = maximumValue && maximumValue.value != null ? Number(maximumValue.value) : defaultMaximumValue;
-        const current = value && value.value != null ? Number(value.value) : defaultValue;
+        const maximum = getNumberValue(this.props.maximumValueAttribute, this.props.maximumValueDefault);
+        const current = getNumberValue(this.props.valueAttribute, this.props.valueDefault);
 
         return current / maximum;
     }
 
     render(): JSX.Element {
+        const showsText = this.props.circleText !== "none";
+
         return (
             <Circle
                 progress={this.progress}
@@ -27,17 +28,26 @@ export class ProgressCircle extends Component<ProgressCircleProps<ProgressCircle
                 borderWidth={this.styles.circle.borderWidth}
                 borderColor={this.styles.circle.borderColor}
                 thickness={this.styles.fill.width}
-                showsText={this.props.showsText}
-                {...(this.props.customText && this.props.customText.value
-                    ? { formatText: this.formatTextHandler }
-                    : {})}
+                showsText={showsText}
+                {...(showsText ? { formatText: this.formatTextHandler } : {})}
                 style={this.styles.container}
                 strokeCap={this.styles.fill.lineCapRounded ? "round" : "square"}
             />
         );
     }
 
-    private formatText(): string {
-        return (this.props.customText && this.props.customText.value) || "";
+    private formatText(): string | null {
+        switch (this.props.circleText) {
+            case "customText":
+                return (this.props.customText && this.props.customText.value) || "";
+            case "percentage":
+                return `${Math.round(this.progress * 100)}%`;
+            case "none":
+                return null;
+        }
     }
+}
+
+function getNumberValue(attribute: EditableValue<BigJs.Big> | undefined, staticDefault: number): number {
+    return attribute && attribute.value != null ? Number(attribute.value) : staticDefault;
 }
