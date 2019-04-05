@@ -10,8 +10,6 @@ interface CommonProps<Style> {
 
 export interface ActionsType {
     name: string;
-    placeholderForModelerBug1?: string;
-    placeholderForModelerBug2?: string;
     onReceive?: ActionValue;
     onOpen?: ActionValue;
 }

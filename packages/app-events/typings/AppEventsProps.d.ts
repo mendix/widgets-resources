@@ -10,15 +10,11 @@ interface CommonProps<Style> {
 
 export interface TimeoutsType {
     timeout: number;
-    placeholderForModelerBug1?: string;
-    placeholderForModelerBug2?: string;
     action: ActionValue;
 }
 
 export interface IntervalsType {
     interval: number;
-    placeholderForModelerBug1?: string;
-    placeholderForModelerBug2?: string;
     action: ActionValue;
 }
 
