@@ -14,16 +14,6 @@
                         <category>Action</category>
                         <description>Unique identifier for the action (Should match the notification action name provided in the 'Send message' action).</description>
                     </property>
-                    <property key="placeholderForModelerBug1" type="string" required="false">
-                        <caption>Ignore me</caption>
-                        <category>Ignore me</category>
-                        <description/>
-                    </property>
-                    <property key="placeholderForModelerBug2" type="string" required="false">
-                        <caption>Ignore me too</caption>
-                        <category>Ignore me</category>
-                        <description/>
-                    </property>
                     <property key="onReceive" type="action" required="false">
                         <caption>On receive</caption>
                         <category>Action</category>
