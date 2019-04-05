@@ -54,16 +54,6 @@
                         <category>Timer</category>
                         <description>How many seconds should pass before the action is called.</description>
                     </property>
-                    <property key="placeholderForModelerBug1" type="string" required="false">
-                        <caption>Ignore me</caption>
-                        <category>Ignore me</category>
-                        <description/>
-                    </property>
-                    <property key="placeholderForModelerBug2" type="string" required="false">
-                        <caption>Ignore me too</caption>
-                        <category>Ignore me</category>
-                        <description/>
-                    </property>
                     <property key="action" type="action" required="true">
                         <caption>Action</caption>
                         <category>Timer</category>
@@ -79,16 +69,6 @@
                         <caption>Interval</caption>
                         <category>Interval</category>
                         <description>Defines how often the action is called, in seconds.</description>
-                    </property>
-                    <property key="placeholderForModelerBug1" type="string" required="false">
-                        <caption>Ignore me</caption>
-                        <category>Ignore me</category>
-                        <description/>
-                    </property>
-                    <property key="placeholderForModelerBug2" type="string" required="false">
-                        <caption>Ignore me too</caption>
-                        <category>Ignore me</category>
-                        <description/>
                     </property>
                     <property key="action" type="action" required="true">
                         <caption>Action</caption>
