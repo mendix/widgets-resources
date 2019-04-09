@@ -8,8 +8,4 @@ interface CommonProps<Style> {
     style: Style[];
 }
 
-export type SizeEnum = "small" | "large";
-
-export interface ActivityIndicatorProps<Style> extends CommonProps<Style> {
-    size: SizeEnum;
-}
+export interface ActivityIndicatorProps<Style> extends CommonProps<Style> {}

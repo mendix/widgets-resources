@@ -10,7 +10,7 @@ export class ActivityIndicator extends Component<ActivityIndicatorProps<Activity
     render(): JSX.Element {
         return (
             <View style={this.styles.container}>
-                <RNActivityIndicator size={this.props.size} color={this.styles.indicator.color} />
+                <RNActivityIndicator size={this.styles.indicator.size} color={this.styles.indicator.color} />
             </View>
         );
     }
