@@ -8,24 +8,17 @@ interface CommonProps<Style> {
     style: Style[];
 }
 
-export interface TimeoutsType {
-    timeout: number;
-    action: ActionValue;
-}
-
-export interface IntervalsType {
-    interval: number;
-    action: ActionValue;
-}
+export type TimerTypeEnum = "once" | "interval";
 
 export interface AppEventsProps<Style> extends CommonProps<Style> {
-    onLoad?: ActionValue;
-    onResume?: ActionValue;
+    onLoadAction?: ActionValue;
+    onResumeAction?: ActionValue;
     onResumeTimeout: number;
-    onOnline?: ActionValue;
+    onOnlineAction?: ActionValue;
     onOnlineTimeout: number;
-    onOffline?: ActionValue;
+    onOfflineAction?: ActionValue;
     onOfflineTimeout: number;
-    timeouts: TimeoutsType[];
-    intervals: IntervalsType[];
+    onTimeoutAction: ActionValue;
+    delayTime: number;
+    timerType: TimerTypeEnum;
 }

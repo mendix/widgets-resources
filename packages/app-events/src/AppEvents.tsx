@@ -4,8 +4,8 @@ import { AppState, AppStateStatus, NetInfo } from "react-native";
 import { AppEventsProps } from "../typings/AppEventsProps";
 
 export class AppEvents extends Component<AppEventsProps<undefined>> {
-    private onAppStateChangeHandler = this.onAppStateChange.bind(this);
-    private onConnectionChangeHandler = this.onConnectionChange.bind(this);
+    private readonly onAppStateChangeHandler = this.onAppStateChange.bind(this);
+    private readonly onConnectionChangeHandler = this.onConnectionChange.bind(this);
 
     private appState = AppState.currentState;
     private lastOnResume = Date.now();
@@ -14,45 +14,39 @@ export class AppEvents extends Component<AppEventsProps<undefined>> {
     private lastOnOnline = 0;
     private lastOnOffline = 0;
 
-    private intervalHandles: number[] = [];
-    private timeoutHandles: number[] = [];
+    private timeoutHandle?: number;
 
-    componentDidMount(): void {
-        executeAction(this.props.onLoad);
+    async componentDidMount(): Promise<void> {
+        executeAction(this.props.onLoadAction);
 
-        if (this.props.onResume) {
+        if (this.props.onResumeAction) {
             AppState.addEventListener("change", this.onAppStateChangeHandler);
         }
 
-        NetInfo.isConnected.fetch().then(isConnected => {
-            this.isConnected = isConnected;
-            NetInfo.isConnected.addEventListener("connectionChange", this.onConnectionChangeHandler);
-        });
-
-        if (this.props.timeouts) {
-            this.timeoutHandles = this.props.timeouts.map(timeout =>
-                setTimeout(() => executeAction(timeout.action), timeout.timeout * 1000)
-            );
+        if (this.props.onTimeoutAction) {
+            const schedule = this.props.timerType === "once" ? setTimeout : setInterval;
+            this.timeoutHandle = schedule(() => executeAction(this.props.onTimeoutAction), this.props.delayTime * 1000);
         }
 
-        if (this.props.intervals) {
-            this.intervalHandles = this.props.intervals.map(interval =>
-                setInterval(() => executeAction(interval.action), interval.interval * 1000)
-            );
+        if (this.props.onOnlineAction || this.props.onOfflineAction) {
+            this.isConnected = await NetInfo.isConnected.fetch();
+            NetInfo.isConnected.addEventListener("connectionChange", this.onConnectionChangeHandler);
         }
     }
 
     componentWillUnmount(): void {
-        if (this.props.onResume) {
+        if (this.props.onResumeAction) {
             AppState.removeEventListener("change", this.onAppStateChangeHandler);
         }
 
-        if (this.props.onOnline) {
+        if (this.props.onOnlineAction || this.props.onOfflineAction) {
             NetInfo.isConnected.removeEventListener("connectionChange", this.onConnectionChangeHandler);
         }
 
-        this.timeoutHandles.forEach(timeout => clearTimeout(timeout));
-        this.intervalHandles.forEach(interval => clearInterval(interval));
+        if (this.props.onTimeoutAction && this.timeoutHandle != null) {
+            const clear = this.props.timerType === "once" ? clearTimeout : clearInterval;
+            clear(this.timeoutHandle);
+        }
     }
 
     render(): null {
@@ -65,7 +59,7 @@ export class AppEvents extends Component<AppEventsProps<undefined>> {
         }
 
         if (nextAppState === "active" && isPastTimeout(this.lastOnResume, this.props.onResumeTimeout)) {
-            executeAction(this.props.onResume);
+            executeAction(this.props.onResumeAction);
             this.lastOnResume = Date.now();
         }
 
@@ -78,12 +72,12 @@ export class AppEvents extends Component<AppEventsProps<undefined>> {
         }
 
         if (nextIsConnected && isPastTimeout(this.lastOnOnline, this.props.onOnlineTimeout)) {
-            executeAction(this.props.onOnline);
+            executeAction(this.props.onOnlineAction);
             this.lastOnOnline = Date.now();
         }
 
         if (!nextIsConnected && isPastTimeout(this.lastOnOffline, this.props.onOfflineTimeout)) {
-            executeAction(this.props.onOffline);
+            executeAction(this.props.onOfflineAction);
             this.lastOnOffline = Date.now();
         }
 
