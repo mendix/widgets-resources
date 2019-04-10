@@ -1,6 +1,6 @@
 {
     "pageTemplates": "WebModeler",
-    "cssFiles": ["styles/web/css/all.css"],
+    "cssFiles": ["styles/web/css/main.css"],
     "designProperties": {
         "Widget": [
             {
