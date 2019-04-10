@@ -1,5 +1,6 @@
 import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
+import { View } from "react-native";
 import { Circle } from "react-native-progress";
 
 import { ProgressCircleProps } from "../typings/ProgressCircleProps";
@@ -20,19 +21,20 @@ export class ProgressCircle extends Component<ProgressCircleProps<ProgressCircle
         const showsText = this.props.circleText !== "none";
 
         return (
-            <Circle
-                progress={this.progress}
-                textStyle={this.styles.text}
-                color={this.styles.fill.backgroundColor}
-                size={Number(this.styles.circle.size)}
-                borderWidth={this.styles.circle.borderWidth}
-                borderColor={this.styles.circle.borderColor}
-                thickness={this.styles.fill.width}
-                showsText={showsText}
-                {...(showsText ? { formatText: this.formatTextHandler } : {})}
-                style={this.styles.container}
-                strokeCap={this.styles.fill.lineCapRounded ? "round" : "square"}
-            />
+            <View style={this.styles.container}>
+                <Circle
+                    progress={this.progress}
+                    textStyle={this.styles.text}
+                    color={this.styles.fill.backgroundColor}
+                    size={Number(this.styles.circle.size)}
+                    borderWidth={this.styles.circle.borderWidth}
+                    borderColor={this.styles.circle.borderColor}
+                    thickness={this.styles.fill.width}
+                    showsText={showsText}
+                    {...(showsText ? { formatText: this.formatTextHandler } : {})}
+                    strokeCap={this.styles.fill.lineCapRounded ? "round" : "square"}
+                />
+            </View>
         );
     }
 
