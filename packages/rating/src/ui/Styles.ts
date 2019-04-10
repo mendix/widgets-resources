@@ -1,20 +1,24 @@
 import { Style } from "@native-components/util-widgets";
 import { ViewStyle } from "react-native";
 
-export interface StarStyle extends ViewStyle {
+export interface RatingStyle extends Style {
+    container: ViewStyle;
+    containerDisabled: ViewStyle;
+    icon: IconStyle;
+}
+
+export interface IconStyle extends ViewStyle {
     size: number;
     color: string;
     selectedColor: string;
 }
 
-export interface RatingStyle extends Style {
-    container: ViewStyle;
-    star: StarStyle;
-}
-
 export const defaultRatingStyle: RatingStyle = {
     container: {},
-    star: {
+    containerDisabled: {
+        opacity: 0.5
+    },
+    icon: {
         size: 40,
         color: "#cccccc",
         selectedColor: "#ffa611"
