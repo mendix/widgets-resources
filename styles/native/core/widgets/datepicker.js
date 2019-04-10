@@ -21,7 +21,6 @@ export const DatePicker = {
         color: input.color,
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
-        // placeholderTextColor: input.placeholderTextColor,
 
         fontSize: input.fontSize,
         borderWidth: input.borderWidth,
@@ -30,17 +29,12 @@ export const DatePicker = {
         paddingHorizontal: input.paddingHorizontal,
         paddingVertical: input.paddingVertical,
     },
-    inputError: {
-        // All TextStyle properties are allowed
-        color: input.errorColor,
-        borderColor: input.errorColor,
-        selectionColor: input.errorColor,
-        placeholderTextColor: input.errorColor,
-        underlineColorAndroid: input.underlineColorAndroid,
+    placeholder: {
+        color: input.placeholderTextColor,
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        color: input.errorColor,
+        ...TextBox.validationMessage,
     },
 };
 
@@ -51,7 +45,6 @@ export const DatePickerVertical = {
         color: input.color,
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
-        // placeholderTextColor: input.placeholderTextColor,
 
         fontSize: input.fontSize,
         borderRadius: input.borderRadius,
@@ -60,4 +53,8 @@ export const DatePickerVertical = {
         paddingHorizontal: input.paddingHorizontal,
         paddingVertical: input.paddingVertical,
     },
+    placeholder: {
+        color: input.placeholderTextColor,
+    },
+    validationMessage: TextBoxVertical.validationMessage,
 };

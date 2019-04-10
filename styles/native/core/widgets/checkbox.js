@@ -28,6 +28,18 @@ export const CheckBox = {
         thumbColorOff: contrast.low,
         trackColorOff: `rgba(${hexToRgbString(contrast.low)},0.2)`,
     },
+    inputError: {
+        // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
+        ...TextBox.inputError,
+        thumbColorOn: brand.primary,
+        trackColorOn: `rgba(${hexToRgbString(brand.primary)},0.2)`,
+        thumbColorOff: contrast.low,
+        trackColorOff: `rgba(${hexToRgbString(contrast.low)},0.2)`,
+    },
+    validationMessage: {
+        // All TextStyle properties are allowed
+        ...TextBox.validationMessage,
+    },
 };
 
 export const CheckBoxVertical = {
@@ -36,4 +48,6 @@ export const CheckBoxVertical = {
     input: {
         alignSelf: 'flex-start',
     },
+    inputError: TextBoxVertical.inputError,
+    validationMessage: TextBoxVertical.validationMessage,
 };

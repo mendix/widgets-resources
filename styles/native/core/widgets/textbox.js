@@ -30,6 +30,7 @@ export const TextBox = {
         fontSize: input.fontSize,
         borderWidth: input.borderWidth,
         borderRadius: input.borderRadius,
+        // autoCapitalize: 'none',
 
         paddingHorizontal: input.paddingHorizontal,
         paddingVertical: input.paddingVertical,

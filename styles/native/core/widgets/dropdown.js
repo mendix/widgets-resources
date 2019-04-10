@@ -43,7 +43,7 @@ export const DropDown = {
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        color: input.errorColor,
+        ...TextBox.validationMessage,
     },
 };
 export const DropDownVertical = {
@@ -65,4 +65,5 @@ export const DropDownVertical = {
         paddingVertical: input.paddingVertical,
         paddingHorizontal: input.paddingHorizontal,
     },
+    validationMessage: TextBoxVertical.validationMessage,
 };
