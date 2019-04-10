@@ -26,6 +26,7 @@ export class ToggleButtons extends Component<ToggleButtonsProps<ToggleButtonsSty
                 onTabPress={this.onChangeHandler}
                 borderRadius={this.styles.container.borderRadius}
                 tabsContainerStyle={this.styles.container}
+                tabsContainerDisableStyle={this.styles.containerDisabled}
                 tabStyle={this.styles.button}
                 tabTextStyle={this.styles.text}
                 activeTabStyle={this.styles.activeButton}

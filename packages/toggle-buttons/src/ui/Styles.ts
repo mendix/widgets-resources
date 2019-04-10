@@ -3,6 +3,7 @@ import { Platform, TextStyle, ViewStyle } from "react-native";
 
 export interface ToggleButtonsStyle extends Style {
     container: ViewStyle;
+    containerDisabled: ViewStyle;
     button: ViewStyle;
     text: TextStyle;
     activeButton: ViewStyle;
@@ -14,6 +15,9 @@ const purple = "rgb(98,0,238)";
 export const defaultToggleButtonsStyle: ToggleButtonsStyle = {
     container: {
         borderRadius: Platform.select({ ios: 5, android: 3 })
+    },
+    containerDisabled: {
+        opacity: 0.5
     },
     button: {
         borderRadius: 0,
