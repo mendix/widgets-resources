@@ -11,17 +11,20 @@
                 <properties>
                     <propertyGroup caption="Marker">
                         <propertyGroup caption="Location">
-                            <property key="address" type="textTemplate" required="false">
+                            <property key="address" type="expression" required="false">
                                 <caption>Address</caption>
                                 <description>When latitude and longitude are provided, the address is ignored.</description>
+                                <returnType type="String"/>
                             </property>
-                            <property key="latitude" type="textTemplate" required="false">
+                            <property key="latitude" type="expression" required="false">
                                 <caption>Latitude</caption>
                                 <description/>
+                                <returnType type="Decimal"/>
                             </property>
-                            <property key="longitude" type="textTemplate" required="false">
+                            <property key="longitude" type="expression" required="false">
                                 <caption>Longitude</caption>
                                 <description/>
+                                <returnType type="Decimal"/>
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Callout box">
@@ -52,17 +55,20 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Default center">
-                <property key="centerAddress" type="textTemplate" required="false">
+                <property key="centerAddress" type="expression" required="false">
                     <caption>Address </caption>
                     <description>When latitude and longitude are provided, the address is ignored.</description>
+                    <returnType type="String"/>
                 </property>
-                <property key="centerLatitude" type="textTemplate" required="false">
+                <property key="centerLatitude" type="expression" required="false">
                     <caption>Latitude </caption>
                     <description/>
+                    <returnType type="Decimal"/>
                 </property>
-                <property key="centerLongitude" type="textTemplate" required="false">
+                <property key="centerLongitude" type="expression" required="false">
                     <caption>Longitude </caption>
                     <description/>
+                    <returnType type="Decimal"/>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Zoom">

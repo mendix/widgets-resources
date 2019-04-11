@@ -10,8 +10,8 @@ interface CommonProps<Style> {
 
 export interface MarkersType {
     address?: DynamicValue<string>;
-    latitude?: DynamicValue<string>;
-    longitude?: DynamicValue<string>;
+    latitude?: DynamicValue<BigJs.Big>;
+    longitude?: DynamicValue<BigJs.Big>;
     title?: DynamicValue<string>;
     description?: DynamicValue<string>;
     onPress?: ActionValue;
@@ -31,8 +31,8 @@ export interface MapsProps<Style> extends CommonProps<Style> {
     markers: MarkersType[];
     fitToMarkers: boolean;
     centerAddress?: DynamicValue<string>;
-    centerLatitude?: DynamicValue<string>;
-    centerLongitude?: DynamicValue<string>;
+    centerLatitude?: DynamicValue<BigJs.Big>;
+    centerLongitude?: DynamicValue<BigJs.Big>;
     defaultZoomLevel: DefaultZoomLevelEnum;
     minZoomLevel: MinZoomLevelEnum;
     maxZoomLevel: MaxZoomLevelEnum;

@@ -20,9 +20,9 @@ export class Maps extends Component<Props, State> {
 
     private readonly styles = flattenStyles(defaultMapsStyle, this.props.style);
     private readonly mapViewRef = createRef<MapView>();
+    private readonly geocodeQueue = new PromiseQueue<GeocodingObject[]>();
 
     private geocodeInProgress: { [address: string]: boolean | undefined } = {};
-    private geocodeQueue = new PromiseQueue<GeocodingObject[]>();
 
     componentDidMount(): void {
         this.updateCamera(false);
@@ -112,13 +112,13 @@ export class Maps extends Component<Props, State> {
     }
 
     private parseCoordinate(
-        latitudeProp?: DynamicValue<string>,
-        longitudeProp?: DynamicValue<string>,
+        latitudeProp?: DynamicValue<BigJs.Big>,
+        longitudeProp?: DynamicValue<BigJs.Big>,
         addressProp?: DynamicValue<string>
     ): LatLng | null {
         if (latitudeProp && latitudeProp.value && longitudeProp && longitudeProp.value) {
-            const latitude = parseDecimalFromString(latitudeProp.value);
-            const longitude = parseDecimalFromString(longitudeProp.value);
+            const latitude = Number(latitudeProp.value);
+            const longitude = Number(longitudeProp.value);
 
             if (isValidLatitude(latitude) && isValidLongitude(longitude)) {
                 return { latitude, longitude };
@@ -177,10 +177,6 @@ function isValidLatitude(latitude: number): boolean {
 
 function isValidLongitude(longitude: number): boolean {
     return !isNaN(longitude) && longitude <= 180 && longitude >= -180;
-}
-
-function parseDecimalFromString(text: string): number {
-    return parseFloat(text.replace(",", "."));
 }
 
 function onMarkerPress(action?: ActionValue): void {
