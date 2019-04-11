@@ -26,49 +26,21 @@
                     </enumerationValues>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Minimum range value">
-                <property key="minimumValueAttribute" type="attribute" required="false">
-                    <caption>Attribute </caption>
-                    <description>The dynamic minimum value that can be selected.</description>
-                    <attributeTypes>
-                        <attributeType name="Integer"/>
-                        <attributeType name="Long"/>
-                        <attributeType name="Decimal"/>
-                    </attributeTypes>
+            <propertyGroup caption="Range">
+                <property key="minimumValue" type="expression" defaultValue="0">
+                    <caption>Minimum value</caption>
+                    <description>The minimum value that can be selected.</description>
+                    <returnType type="Decimal"/>
                 </property>
-                <property key="minimumValueDefault" type="integer" defaultValue="0">
-                    <caption>Static</caption>
-                    <description>Used when no value is provided through the minimum range value attribute.</description>
+                <property key="maximumValue" type="expression" defaultValue="100">
+                    <caption>Maximum value</caption>
+                    <description>The maximum value that can be selected.</description>
+                    <returnType type="Decimal"/>
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Maximum range value">
-                <property key="maximumValueAttribute" type="attribute" required="false">
-                    <caption>Attribute  </caption>
-                    <description>The dynamic maximum value that can be selected.</description>
-                    <attributeTypes>
-                        <attributeType name="Integer"/>
-                        <attributeType name="Long"/>
-                        <attributeType name="Decimal"/>
-                    </attributeTypes>
-                </property>
-                <property key="maximumValueDefault" type="integer" defaultValue="100">
-                    <caption>Static </caption>
-                    <description>Used when no value is provided through the maximum range value attribute.</description>
-                </property>
-            </propertyGroup>
-            <propertyGroup caption="Step size">
-                <property key="stepSizeAttribute" type="attribute" required="false">
-                    <caption>Attribute   </caption>
+                <property key="stepSize" type="expression" defaultValue="1">
+                    <caption>Step size</caption>
                     <description>The interval between two selectable points.</description>
-                    <attributeTypes>
-                        <attributeType name="Integer"/>
-                        <attributeType name="Long"/>
-                        <attributeType name="Decimal"/>
-                    </attributeTypes>
-                </property>
-                <property key="stepSizeDefault" type="integer" defaultValue="1">
-                    <caption>Static   </caption>
-                    <description>Used when no value is provided through the step size attribute.</description>
+                    <returnType type="Decimal"/>
                 </property>
             </propertyGroup>
         </propertyGroup>

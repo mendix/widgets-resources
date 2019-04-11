@@ -19,14 +19,16 @@ export class Slider extends Component<SliderProps<SliderStyle>, State> {
 
     render(): JSX.Element {
         const enabled = this.props.editable !== "never" && !this.props.valueAttribute.readOnly;
+        const step =
+            this.props.stepSize.value && this.props.stepSize.value.gt(0) ? Number(this.props.stepSize.value) : 1;
 
         return (
             <View onLayout={this.onLayoutHandler}>
                 <MultiSlider
                     values={[Number(this.props.valueAttribute.value)]}
-                    min={getNumberValue(this.props.minimumValueAttribute, this.props.minimumValueDefault)}
-                    max={getNumberValue(this.props.maximumValueAttribute, this.props.maximumValueDefault)}
-                    step={getNumberValue(this.props.stepSizeAttribute, this.props.stepSizeDefault, val => val.gt(0))}
+                    min={Number(this.props.minimumValue.value)}
+                    max={Number(this.props.maximumValue.value)}
+                    step={step}
                     enabledOne={enabled}
                     containerStyle={this.styles.container}
                     markerStyle={enabled ? this.styles.marker : this.styles.markerDisabled}
@@ -71,12 +73,4 @@ export class Slider extends Component<SliderProps<SliderStyle>, State> {
             this.props.onChange.execute();
         }
     }
-}
-
-function getNumberValue(
-    attribute: EditableValue<BigJs.Big> | undefined,
-    defaultValue: number,
-    validate: (value: BigJs.Big) => boolean = () => true
-): number {
-    return attribute && attribute.value != null && validate(attribute.value) ? Number(attribute.value) : defaultValue;
 }
