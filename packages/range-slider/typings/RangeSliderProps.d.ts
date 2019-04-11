@@ -14,12 +14,9 @@ export interface RangeSliderProps<Style> extends CommonProps<Style> {
     lowerValueAttribute: EditableValue<BigJs.Big>;
     upperValueAttribute: EditableValue<BigJs.Big>;
     editable: EditableEnum;
-    minimumValueAttribute?: EditableValue<BigJs.Big>;
-    minimumValueDefault: number;
-    maximumValueAttribute?: EditableValue<BigJs.Big>;
-    maximumValueDefault: number;
-    stepSizeAttribute?: EditableValue<BigJs.Big>;
-    stepSizeDefault: number;
+    minimumValue: DynamicValue<BigJs.Big>;
+    maximumValue: DynamicValue<BigJs.Big>;
+    stepSize: DynamicValue<BigJs.Big>;
     onSlide?: ActionValue;
     onChange?: ActionValue;
 }

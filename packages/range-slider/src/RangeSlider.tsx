@@ -21,6 +21,8 @@ export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, S
     render(): JSX.Element {
         const enabledOne = this.props.editable !== "never" && !this.props.lowerValueAttribute.readOnly;
         const enabledTwo = this.props.editable !== "never" && !this.props.upperValueAttribute.readOnly;
+        const step =
+            this.props.stepSize.value && this.props.stepSize.value.gt(0) ? Number(this.props.stepSize.value) : 1;
 
         const customMarker = (enabled: boolean) => (props: MarkerProps) => (
             <Marker {...props} markerStyle={enabled ? props.markerStyle : this.styles.markerDisabled} />
@@ -33,9 +35,9 @@ export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, S
                         Number(this.props.lowerValueAttribute.value),
                         Number(this.props.upperValueAttribute.value)
                     ]}
-                    min={getNumberValue(this.props.minimumValueAttribute, this.props.minimumValueDefault)}
-                    max={getNumberValue(this.props.maximumValueAttribute, this.props.maximumValueDefault)}
-                    step={getNumberValue(this.props.stepSizeAttribute, this.props.stepSizeDefault, val => val.gt(0))}
+                    min={Number(this.props.minimumValue.value)}
+                    max={Number(this.props.maximumValue.value)}
+                    step={step}
                     enabledOne={enabledOne}
                     enabledTwo={enabledTwo}
                     containerStyle={this.styles.container}
@@ -93,12 +95,4 @@ export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, S
             this.props.onChange.execute();
         }
     }
-}
-
-function getNumberValue(
-    attribute: EditableValue<BigJs.Big> | undefined,
-    defaultValue: number,
-    validate: (value: BigJs.Big) => boolean = () => true
-): number {
-    return attribute && attribute.value != null && validate(attribute.value) ? Number(attribute.value) : defaultValue;
 }
