@@ -17,7 +17,7 @@ function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
     return Promise.all([createMxObject("NativeMobileActions.DeviceInfo"), DeviceInfo.getBatteryLevel()]).then(
         ([mxObject, batteryLevel]) => {
             mxObject.set("ApplicationName", DeviceInfo.getApplicationName());
-            mxObject.set("BatteryLevel", String(batteryLevel));
+            mxObject.set("BatteryLevel", new Big(batteryLevel));
             mxObject.set("Brand", DeviceInfo.getBrand());
             mxObject.set("BuildNumber", String(DeviceInfo.getBuildNumber()));
             mxObject.set("BundleId", DeviceInfo.getBundleId());
@@ -25,16 +25,16 @@ function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
             mxObject.set("DeviceCountry", DeviceInfo.getDeviceCountry());
             mxObject.set("DeviceId", DeviceInfo.getDeviceId());
             mxObject.set("DeviceLocale", DeviceInfo.getDeviceLocale());
-            mxObject.set("FontScale", String(DeviceInfo.getFontScale()));
-            mxObject.set("FreeDiskStorage", String(DeviceInfo.getFreeDiskStorage()));
+            mxObject.set("FontScale", new Big(DeviceInfo.getFontScale()));
+            mxObject.set("FreeDiskStorage", new Big(DeviceInfo.getFreeDiskStorage()));
             mxObject.set("Manufacturer", DeviceInfo.getManufacturer());
             mxObject.set("Model", DeviceInfo.getModel());
             mxObject.set("ReadableVersion", DeviceInfo.getReadableVersion());
             mxObject.set("SystemName", DeviceInfo.getSystemName());
             mxObject.set("SystemVersion", DeviceInfo.getSystemVersion());
             mxObject.set("Timezone", DeviceInfo.getTimezone());
-            mxObject.set("TotalDiskCapacity", String(DeviceInfo.getTotalDiskCapacity()));
-            mxObject.set("TotalMemory", String(DeviceInfo.getTotalMemory()));
+            mxObject.set("TotalDiskCapacity", new Big(DeviceInfo.getTotalDiskCapacity()));
+            mxObject.set("TotalMemory", new Big(DeviceInfo.getTotalMemory()));
             mxObject.set("UniqueId", DeviceInfo.getUniqueID());
             mxObject.set("UserAgent", DeviceInfo.getUserAgent());
             mxObject.set("Version", DeviceInfo.getVersion());
