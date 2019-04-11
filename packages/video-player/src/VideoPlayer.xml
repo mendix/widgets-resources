@@ -6,9 +6,10 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
-                <property key="videoUrl" type="textTemplate" required="true">
+                <property key="videoUrl" type="expression" required="true">
                     <caption>Video URL</caption>
                     <description>URL of the MP4 video file that is played.</description>
+                    <returnType type="String"/>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Behavior">
