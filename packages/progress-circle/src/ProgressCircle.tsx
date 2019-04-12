@@ -11,10 +11,16 @@ export class ProgressCircle extends Component<ProgressCircleProps<ProgressCircle
     private readonly styles = flattenStyles(defaultProgressCircleStyle, this.props.style);
 
     private get progress(): number {
-        const maximum = getNumberValue(this.props.maximumValueAttribute, this.props.maximumValueDefault);
-        const current = getNumberValue(this.props.valueAttribute, this.props.valueDefault);
+        if (!this.props.progressValue.value || !this.props.minimumValue.value || !this.props.maximumValue.value) {
+            return 0;
+        }
 
-        return current / maximum;
+        const denominator = this.props.maximumValue.value.minus(this.props.minimumValue.value);
+        if (denominator.eq(0)) {
+            return 0;
+        }
+
+        return Number(this.props.progressValue.value.minus(this.props.minimumValue.value).div(denominator));
     }
 
     render(): JSX.Element {
@@ -48,8 +54,4 @@ export class ProgressCircle extends Component<ProgressCircleProps<ProgressCircle
                 return null;
         }
     }
-}
-
-function getNumberValue(attribute: EditableValue<BigJs.Big> | undefined, staticDefault: number): number {
-    return attribute && attribute.value != null ? Number(attribute.value) : staticDefault;
 }

@@ -11,10 +11,9 @@ interface CommonProps<Style> {
 export type CircleTextEnum = "percentage" | "customText" | "none";
 
 export interface ProgressCircleProps<Style> extends CommonProps<Style> {
-    valueAttribute?: EditableValue<BigJs.Big>;
-    valueDefault: number;
-    maximumValueAttribute?: EditableValue<BigJs.Big>;
-    maximumValueDefault: number;
+    progressValue: DynamicValue<BigJs.Big>;
+    minimumValue: DynamicValue<BigJs.Big>;
+    maximumValue: DynamicValue<BigJs.Big>;
     circleText: CircleTextEnum;
     customText?: DynamicValue<string>;
 }
