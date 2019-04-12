@@ -4,19 +4,15 @@
     <description>Displays a QR code</description>
     <icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAIVJREFUWEftlNEKwCAIRXX//8+tYhMmSN0YKOKB6CEmeqYyEbV+YFr7fsY8QuFcz+2GGNAVWbyVWgbQOPEMWP9Sv68M7MZxN1AJVAKjFWdb6q622J2CFWGmQAygWAZQ/A30So4M/EWNYZ4pOCWOAXSD5TVgbTT9nsZAJVAJ1B4QAyhJDBDdQaBQGZb6/OEAAAAASUVORK5CYII=</icon>
     <properties>
-        <propertyGroup caption="Data source">
-            <propertyGroup caption="QR code value">
-                <property key="value" type="attribute" required="false">
-                    <caption>Dynamic value</caption>
+        <propertyGroup caption="General">
+            <propertyGroup caption="QR code">
+                <property key="value" type="textTemplate" required="true">
+                    <caption>Value</caption>
                     <description>Value of the QR code that will be displayed.</description>
-                    <attributeTypes>
-                        <attributeType name="String"/>
-                    </attributeTypes>
                 </property>
-                <property key="defaultValue" type="string" required="false">
-                    <caption>Static value</caption>
-                    <description>Used when no dynamic value is provided.</description>
-                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
             </propertyGroup>
         </propertyGroup>
     </properties>
