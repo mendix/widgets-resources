@@ -7,39 +7,48 @@
 import ReactNative from "react-native";
 
 /**
- * @param {string} title - This field is required.
- * @param {string} message
- * @param {string} cancelText - Set to empty to use default text 'Cancel'.
- * @param {string} okText - Set to empty to use default text 'OK'.
+ * Shows a confirmation dialog before calling a given function.
+ * @param {string} question - This field is required.
+ * @param {string} cancelButtonCaption - Set to empty to use default text 'Cancel'.
+ * @param {string} proceedButtonCaption - Set to empty to use default text 'OK'.
  * @returns {boolean}
  */
-function ShowConfirmation(title?: string, message?: string, cancelText?: string, okText?: string): Promise<boolean> {
+function ShowConfirmation(
+    question?: string,
+    cancelButtonCaption?: string,
+    proceedButtonCaption?: string
+): Promise<boolean> {
     // BEGIN USER CODE
 
-    if (!title) {
-        throw new TypeError("Input parameter 'Title' is required");
+    if (!question) {
+        throw new TypeError("Input parameter 'Question' is required");
     }
 
-    cancelText = cancelText || "Cancel";
-    okText = okText || "OK";
+    const cancel = cancelButtonCaption || "Cancel";
+    const proceed = proceedButtonCaption || "OK";
 
+    // Native platform
     if (navigator && navigator.product === "ReactNative") {
         const Alert: typeof ReactNative.Alert = require("react-native").Alert;
 
         return new Promise(resolve => {
-            Alert.alert(title, message, [
-                { text: cancelText, onPress: () => resolve(false), style: "cancel" },
-                { text: okText, onPress: () => resolve(true) }
+            Alert.alert("Confirmation", question, [
+                { text: cancel, onPress: () => resolve(false), style: "cancel" },
+                { text: proceed, onPress: () => resolve(true) }
             ]);
         });
     }
 
-    if (window && window.confirm) {
-        const result = window.confirm(`${title}\n\n${message || ""}`);
-        return Promise.resolve(result);
-    }
-
-    return Promise.resolve(false);
+    // Other platforms
+    return new Promise(resolve => {
+        mx.ui.confirmation({
+            content: question,
+            proceed,
+            cancel,
+            handler: () => resolve(true),
+            onCancel: () => resolve(false)
+        } as any);
+    });
 
     // END USER CODE
 }
