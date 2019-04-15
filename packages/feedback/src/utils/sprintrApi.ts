@@ -3,13 +3,15 @@ import { Dimensions, Platform } from "react-native";
 
 const SPRINTR_FEEDBACK_URL = "https://sprintr.home.mendix.com/submitissue/";
 
-export const sendToSprintr = (
-    data: { feedbackMsg: string; sprintrAppId: string; screenshot: string },
-    cb: (success: boolean) => void
-) => {
+export async function sendToSprintr(data: {
+    feedbackMsg: string;
+    sprintrAppId: string;
+    screenshot: string;
+}): Promise<boolean> {
     const shortname = data.feedbackMsg ? data.feedbackMsg.substring(0, 200) : "";
     const description = data.feedbackMsg ? data.feedbackMsg.substring(200) : "";
-    const dataToSend = {
+
+    const body = {
         apiversion: "1.0",
         application: data.sprintrAppId,
         username: "Native Feedback",
@@ -25,32 +27,13 @@ export const sendToSprintr = (
         documentName: "fakepath"
     };
 
-    postToSprintr(dataToSend)
-        .then(result => {
-            if (cb && typeof cb === "function") {
-                cb(result);
-            }
-        })
-        .catch(_e => {
-            if (cb && typeof cb === "function") {
-                cb(false);
-            }
-        });
-};
-
-const postToSprintr = (data: any) =>
-    fetch(SPRINTR_FEEDBACK_URL, {
+    return fetch(SPRINTR_FEEDBACK_URL, {
         method: "POST",
-        body: stringify(data),
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
+        body: stringify(body),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
         mode: "no-cors",
         referrer: "no-referrer"
     })
-        .then(response => {
-            return response.ok;
-        })
-        .catch(() => {
-            return false;
-        });
+        .then(response => response.ok)
+        .catch(() => false);
+}

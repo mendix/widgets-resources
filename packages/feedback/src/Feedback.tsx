@@ -4,17 +4,15 @@ import {
     ActivityIndicator,
     Image,
     ImageURISource,
-    Keyboard,
-    Platform,
     Switch,
     Text,
     TextInput,
-    TouchableNativeFeedback,
     TouchableOpacity,
     View
 } from "react-native";
 import Dialog from "react-native-dialog";
 import { captureScreen } from "react-native-view-shot";
+
 import { FeedbackProps } from "../typings/FeedbackProps";
 import {
     activityIndicatorStyle,
@@ -23,43 +21,36 @@ import {
     FeedbackStyle,
     floatingButtonContainer,
     imageStyle,
-    mendixLogo,
     processStyles,
     switchContainer
 } from "./ui/styles";
-import { sendToSprintr } from "./utils/form";
+import { sendToSprintr } from "./utils/sprintrApi";
 
-type Status = "todo" | "takingScreenshot" | "inprogress" | "done" | "error";
+type Status = "initial" | "takingScreenshot" | "todo" | "closingDialog" | "inprogress" | "done" | "error";
 
 interface State {
-    modalVisible: boolean;
-    sendScreenshot: boolean;
-    feedbackMsg: string;
-    screenshot: string;
     status: Status;
-    keyboardOpen: boolean;
+    nextStatus?: Status;
+    sendScreenshot: boolean;
+    feedbackMessage: string;
+    screenshot: string;
 }
 
 export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
     readonly state: State = {
-        modalVisible: false,
+        status: "initial",
         sendScreenshot: true,
-        feedbackMsg: "",
-        screenshot: "",
-        status: "todo",
-        keyboardOpen: false
+        feedbackMessage: "",
+        screenshot: ""
     };
 
-    private isAndroid = Platform.OS === "android";
-
-    private readonly onCommentButtonPressHandler = this.onCommentButtonPress.bind(this);
-    private readonly onModalCloseHandler = this.onModalClose.bind(this);
-    private readonly onScreenshotToggleChangeHandler = this.onScreenshotToggleValueChange.bind(this);
+    private readonly onFeedbackButtonPressHandler = this.onFeedbackButtonPress.bind(this);
     private readonly onChangeTextHandler = this.onChangeText.bind(this);
+    private readonly onScreenshotToggleChangeHandler = this.onScreenshotToggleValueChange.bind(this);
+    private readonly onCancelHandler = this.onCancel.bind(this);
     private readonly onSendHandler = this.onSend.bind(this);
-    private readonly onResultHandler = this.onResult.bind(this);
-    private readonly onKeyboardShowHandler = this.onKeyboardShow.bind(this);
-    private readonly onKeyboardHideHandler = this.onKeyboardHide.bind(this);
+    private readonly onDialogHideHandler = this.onDialogHide.bind(this);
+
     private readonly styles = flattenStyles(defaultFeedbackStyle, this.props.style);
     private readonly processedStyles = processStyles(this.styles);
     private readonly dialogContainerProps = {
@@ -69,213 +60,172 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
         blurStyle: this.processedStyles.blurStyle
     };
 
-    componentDidMount(): void {
-        Keyboard.addListener("keyboardWillShow", this.onKeyboardShowHandler);
-        Keyboard.addListener("keyboardWillHide", this.onKeyboardHideHandler);
-    }
-
-    componentWillUnmount(): void {
-        Keyboard.removeListener("keyboardWillShow", this.onKeyboardShowHandler);
-        Keyboard.removeListener("keyboardWillHide", this.onKeyboardHideHandler);
-    }
-
-    onKeyboardShow(): void {
-        this.setState({ keyboardOpen: true });
-    }
-
-    onKeyboardHide(): void {
-        this.setState({ keyboardOpen: false });
-    }
-
     render(): JSX.Element {
         return (
             <Fragment>
-                {this.renderDialog()}
-                {!this.state.modalVisible && this.state.status !== "takingScreenshot" && (
-                    <View style={floatingButtonContainer}>
-                        <View style={this.styles.floatingButton}>
-                            {!this.props.hideLogo ? this.renderMendixLogo() : null}
-                            {this.renderCommentIcon()}
-                        </View>
-                    </View>
-                )}
+                {this.renderFloatingButton()}
+                {this.renderTodoDialog()}
+                {this.renderInProgressDialog()}
+                {this.renderDoneDialog()}
+                {this.renderErrorDialog()}
             </Fragment>
         );
     }
 
-    renderMendixLogo(): JSX.Element {
-        return this.renderImage(mendixLogo);
+    private renderFloatingButton(): JSX.Element | null {
+        return this.state.status === "initial" ? (
+            <View style={floatingButtonContainer}>
+                <View style={this.styles.floatingButton}>
+                    <TouchableOpacity onPress={this.onFeedbackButtonPressHandler}>
+                        {this.props.logo && this.props.logo.value ? renderImage(this.props.logo.value) : null}
+                        {renderImage(commentIcon)}
+                    </TouchableOpacity>
+                </View>
+            </View>
+        ) : null;
     }
 
-    renderCommentIcon(): JSX.Element {
-        return this.isAndroid ? (
-            <TouchableNativeFeedback onPress={this.onCommentButtonPressHandler}>
-                {this.renderImage(commentIcon)}
-            </TouchableNativeFeedback>
-        ) : (
-            <TouchableOpacity onPress={this.onCommentButtonPressHandler}>
-                {this.renderImage(commentIcon)}
-            </TouchableOpacity>
+    private renderTodoDialog(): JSX.Element {
+        const { button, buttonDisabled, switchInput } = this.styles;
+        const trackColor = { true: switchInput.trackColorOn || "", false: switchInput.trackColorOff || "" };
+        const thumbColor = this.state.sendScreenshot ? switchInput.thumbColorOn : switchInput.thumbColorOff;
+        const disabled = this.state.feedbackMessage.trim().length === 0;
+        const sendButtonColor = disabled && buttonDisabled.color ? buttonDisabled.color : button.color;
+
+        return (
+            <Dialog.Container
+                visible={this.state.status === "todo"}
+                {...{ avoidKeyboard: true, onModalHide: this.onDialogHideHandler }}
+                {...this.dialogContainerProps}
+            >
+                <Dialog.Title style={this.styles.title}>Send Feedback</Dialog.Title>
+                <TextInput
+                    multiline={true}
+                    style={this.processedStyles.textAreaInputStyles}
+                    value={this.state.feedbackMessage}
+                    onChangeText={this.onChangeTextHandler}
+                    placeholder="Type your feedback here"
+                    {...this.processedStyles.textAreaInputProps}
+                />
+                {this.props.allowScreenshot && (
+                    <View style={switchContainer}>
+                        <Text style={this.styles.switchLabel}>Include Screenshot</Text>
+                        <Switch
+                            style={this.processedStyles.switchInputStyles}
+                            value={this.state.sendScreenshot}
+                            onValueChange={this.onScreenshotToggleChangeHandler}
+                            trackColor={trackColor}
+                            thumbColor={thumbColor}
+                        />
+                    </View>
+                )}
+                <Dialog.Button label="Cancel" color={this.styles.button.color} onPress={this.onCancelHandler} />
+                <Dialog.Button label="Send" disabled={disabled} color={sendButtonColor} onPress={this.onSendHandler} />
+            </Dialog.Container>
         );
     }
 
-    renderImage(source: ImageURISource): JSX.Element {
-        return <Image style={imageStyle} source={source} />;
+    private renderInProgressDialog(): JSX.Element {
+        return (
+            <Dialog.Container
+                visible={this.state.status === "inprogress"}
+                {...{ onModalHide: this.onDialogHideHandler }}
+                {...this.dialogContainerProps}
+            >
+                <Dialog.Title style={this.styles.title}>Sending...</Dialog.Title>
+                <ActivityIndicator
+                    color={this.styles.activityIndicator.color}
+                    size="large"
+                    style={activityIndicatorStyle}
+                />
+            </Dialog.Container>
+        );
     }
 
-    renderDialog(): JSX.Element | null {
-        switch (this.state.status) {
-            case "todo":
-                const containerStyle = this.state.keyboardOpen
-                    ? {
-                          marginTop: Platform.select({
-                              ios: -110,
-                              android: 0
-                          })
-                      }
-                    : { marginTop: 0 };
+    private renderDoneDialog(): JSX.Element {
+        return (
+            <Dialog.Container visible={this.state.status === "done"} {...this.dialogContainerProps}>
+                <Dialog.Title style={this.styles.title}>Result</Dialog.Title>
+                <Dialog.Description style={this.processedStyles.descriptionStyle}>
+                    Feedback successfully sent
+                </Dialog.Description>
+                <Dialog.Button label="OK" onPress={this.onCancelHandler} color={this.styles.button.color} />
+            </Dialog.Container>
+        );
+    }
 
-                const trackColor = {
-                    true: this.styles.switchInput.trackColorOn || "",
-                    false: this.styles.switchInput.trackColorOff || ""
-                };
+    private renderErrorDialog(): JSX.Element {
+        return (
+            <Dialog.Container visible={this.state.status === "error"} {...this.dialogContainerProps}>
+                <Dialog.Title style={this.styles.title}>Result</Dialog.Title>
+                <Dialog.Description style={this.processedStyles.descriptionStyle}>
+                    Error sending feedback
+                </Dialog.Description>
+                <Dialog.Button label="OK" onPress={this.onCancelHandler} color={this.styles.button.color} />
+            </Dialog.Container>
+        );
+    }
 
-                const thumbColor = this.state.sendScreenshot
-                    ? this.styles.switchInput.thumbColorOn
-                    : this.styles.switchInput.thumbColorOff;
-
-                return (
-                    <Dialog.Container
-                        style={containerStyle}
-                        visible={this.state.modalVisible}
-                        {...this.dialogContainerProps}
-                    >
-                        <Dialog.Title style={this.styles.title}>Send Feedback</Dialog.Title>
-                        <TextInput
-                            multiline={true}
-                            style={this.processedStyles.textAreaInputStyles}
-                            value={this.state.feedbackMsg}
-                            onChangeText={this.onChangeTextHandler}
-                            placeholder="Type your feedback here"
-                            {...this.processedStyles.textAreaInputProps}
-                        />
-                        {this.props.allowScreenshot ? (
-                            <View style={switchContainer}>
-                                <Text style={this.styles.switchLabel}>Include Screenshot</Text>
-                                <Switch
-                                    style={this.processedStyles.switchInputStyles}
-                                    value={this.state.sendScreenshot}
-                                    onValueChange={this.onScreenshotToggleChangeHandler}
-                                    trackColor={trackColor}
-                                    thumbColor={thumbColor}
-                                />
-                            </View>
-                        ) : null}
-                        <Dialog.Button
-                            label="Cancel"
-                            onPress={this.onModalCloseHandler}
-                            color={this.styles.button.color}
-                        />
-                        <Dialog.Button label="Send" onPress={this.onSendHandler} color={this.styles.button.color} />
-                    </Dialog.Container>
-                );
-            case "inprogress":
-                return (
-                    <Dialog.Container visible={this.state.modalVisible} {...this.dialogContainerProps}>
-                        <Dialog.Description style={this.processedStyles.descriptionStyle}>
-                            Sending...
-                        </Dialog.Description>
-                        <ActivityIndicator
-                            color={this.styles.activityIndicator.color}
-                            size="large"
-                            style={activityIndicatorStyle}
-                        />
-                    </Dialog.Container>
-                );
-            case "done":
-                return (
-                    <Dialog.Container visible={this.state.modalVisible} {...this.dialogContainerProps}>
-                        <Dialog.Title style={this.styles.title}>Result</Dialog.Title>
-                        <Dialog.Description style={this.processedStyles.descriptionStyle}>
-                            Feedback successfully sent
-                        </Dialog.Description>
-                        <Dialog.Button label="OK" onPress={this.onModalCloseHandler} color={this.styles.button.color} />
-                    </Dialog.Container>
-                );
-            case "error":
-                return (
-                    <Dialog.Container visible={this.state.modalVisible} {...this.dialogContainerProps}>
-                        <Dialog.Title style={this.styles.title}>Result</Dialog.Title>
-                        <Dialog.Description style={this.processedStyles.descriptionStyle}>
-                            Error sending feedback
-                        </Dialog.Description>
-                        <Dialog.Button label="OK" onPress={this.onModalCloseHandler} color={this.styles.button.color} />
-                    </Dialog.Container>
-                );
-            default:
-                return null;
-        }
+    private onFeedbackButtonPress(): void {
+        this.setState({ status: "takingScreenshot" }, async () => {
+            const screenshot = await this.getScreenshot();
+            this.setState({ status: "todo", screenshot });
+        });
     }
 
     private onChangeText(value: string): void {
-        this.setState({ feedbackMsg: value });
-    }
-
-    private onModalClose(): void {
-        this.setModalVisible(false);
-    }
-
-    private onCommentButtonPress(): void {
-        if (this.props.allowScreenshot) {
-            this.setStatus("takingScreenshot", this.takeScreenshot);
-        } else {
-            this.setModalVisible(true);
-        }
-    }
-
-    private onSend(): void {
-        const data = {
-            feedbackMsg: this.state.feedbackMsg,
-            sprintrAppId: this.props.sprintrapp,
-            screenshot: this.state.sendScreenshot ? this.state.screenshot : ""
-        };
-
-        this.setStatus("inprogress");
-        sendToSprintr(data, this.onResultHandler);
-    }
-
-    private onResult(success: boolean): void {
-        this.setState({ status: success ? "done" : "error", feedbackMsg: "", screenshot: "" });
+        this.setState({ feedbackMessage: value });
     }
 
     private onScreenshotToggleValueChange(value: boolean): void {
         this.setState({ sendScreenshot: value });
     }
 
-    private setModalVisible(modalVisible: boolean): void {
-        this.setState({ modalVisible, status: "todo" });
+    private onCancel(): void {
+        this.setState({ status: "initial", nextStatus: undefined });
     }
 
-    private setStatus(status: Status, callback?: () => void): void {
-        this.setState({ status }, callback);
+    private onDialogHide(): void {
+        if (this.state.status === "closingDialog" && this.state.nextStatus) {
+            this.setState({ status: this.state.nextStatus, nextStatus: undefined });
+        }
     }
 
-    private setScreenshot(screenshot: string): void {
-        this.setState({ screenshot });
-        this.setModalVisible(true);
+    private async onSend(): Promise<void> {
+        this.setState({ status: "closingDialog", nextStatus: "inprogress" });
+
+        const success = await sendToSprintr({
+            feedbackMsg: this.state.feedbackMessage,
+            sprintrAppId: this.props.sprintrapp,
+            screenshot: this.state.sendScreenshot ? this.state.screenshot : ""
+        });
+
+        this.setState({
+            status: "closingDialog",
+            nextStatus: success ? "done" : "error",
+            feedbackMessage: "",
+            screenshot: ""
+        });
     }
 
-    private takeScreenshot(): void {
-        captureScreen({
-            format: "jpg",
-            result: "base64",
-            quality: 0.4
-        }).then(
-            uri => {
-                const newImage = uri.replace(/(\r\n|\n|\r)/gm, "");
-                this.setScreenshot(newImage);
-            },
-            () => this.setScreenshot("")
-        );
+    private async getScreenshot(): Promise<string> {
+        if (!this.props.allowScreenshot) {
+            return Promise.resolve("");
+        }
+
+        try {
+            const uri = await captureScreen({
+                format: "jpg",
+                result: "base64",
+                quality: 0.4
+            });
+            return uri.replace(/(\r\n|\n|\r)/gm, "");
+        } catch {
+            return "";
+        }
     }
+}
+
+function renderImage(source: ImageURISource): JSX.Element {
+    return <Image style={imageStyle} source={source} />;
 }

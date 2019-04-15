@@ -10,7 +10,3 @@ export function only<A extends B, B extends {}>(source: A, selectionKeys: Array<
         .filter(key => source[key] !== undefined)
         .reduce((result, key) => ({ ...result, ...{ [key]: source[key] } }), {}) as B;
 }
-
-export function pluckFromList<T, K extends keyof T>(list: T[], key: K): Array<T[K]> {
-    return list.filter(item => item !== undefined && item[key] !== undefined).map(item => item[key]);
-}
