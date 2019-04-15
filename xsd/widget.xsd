@@ -81,6 +81,7 @@
             <xs:enumeration value="boolean"/>
             <xs:enumeration value="enumeration"/>
             <xs:enumeration value="expression"/>
+            <xs:enumeration value="icon"/>
             <xs:enumeration value="image"/>
             <xs:enumeration value="integer"/>
             <xs:enumeration value="object"/>

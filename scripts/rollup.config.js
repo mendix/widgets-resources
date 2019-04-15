@@ -121,7 +121,7 @@ function isExternal(id) {
         "react-native-view-shot",
         "react-native-webview"
     ];
-    const regexExternals = [/^react-native\//, /react-native-vector-icons/];
+    const regexExternals = [/^react-native\//, /react-native-vector-icons/, /^mendix\//];
 
     return externals.includes(id) || regexExternals.some(regex => regex.test(id));
 }
