@@ -9,7 +9,7 @@
                 <caption>List</caption>
                 <description/>
                 <properties>
-                    <propertyGroup caption="Marker">
+                    <propertyGroup caption="General">
                         <propertyGroup caption="Location">
                             <property key="address" type="expression" required="false">
                                 <caption>Address</caption>
@@ -41,6 +41,24 @@
                             <property key="onPress" type="action" required="false">
                                 <caption>On press</caption>
                                 <description/>
+                            </property>
+                        </propertyGroup>
+                    </propertyGroup>
+                    <propertyGroup caption="Appearance">
+                        <propertyGroup caption="Custom icon">
+                            <property key="icon" type="icon" required="false">
+                                <caption>Icon</caption>
+                                <description/>
+                            </property>
+                            <property key="iconSize" type="integer" defaultValue="32">
+                                <caption>Size</caption>
+                                <description/>
+                            </property>
+                        </propertyGroup>
+                        <propertyGroup caption="Color">
+                            <property key="color" type="string" required="false">
+                                <caption>Marker</caption>
+                                <description>Defaults to the color provided through design properties.</description>
                             </property>
                         </propertyGroup>
                     </propertyGroup>

@@ -1,4 +1,5 @@
 import { flattenStyles } from "@native-components/util-widgets";
+import { Icon } from "mendix/components/Icon";
 import { Component, createElement, createRef } from "react";
 import Geocoder, { GeocodingObject } from "react-native-geocoder";
 import MapView, { LatLng, Marker } from "react-native-maps";
@@ -67,11 +68,19 @@ export class Maps extends Component<Props, State> {
                 title={marker.title && marker.title.value}
                 description={marker.description && marker.description.value}
                 coordinate={coordinate}
-                pinColor={this.styles.marker.color}
+                pinColor={marker.color || this.styles.marker.color}
                 opacity={this.styles.marker.opacity}
                 // tslint:disable-next-line:jsx-no-lambda
                 onPress={() => onMarkerPress(marker.onPress)}
-            />
+            >
+                {marker.icon && marker.icon.value && (
+                    <Icon
+                        icon={marker.icon.value}
+                        color={marker.color || this.styles.marker.color}
+                        size={marker.iconSize}
+                    />
+                )}
+            </Marker>
         );
     }
 
