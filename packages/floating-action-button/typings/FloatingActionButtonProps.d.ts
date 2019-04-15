@@ -14,14 +14,14 @@ export type HorizontalPositionEnum = "left" | "center" | "right";
 export type VerticalPositionEnum = "top" | "bottom";
 
 export interface SpeedDialButtonsType {
-    icon: DynamicValue<ImageURISource>;
+    icon: any;
     caption?: DynamicValue<string>;
     action: ActionValue;
 }
 
 export interface FloatingActionButtonProps<Style> extends CommonProps<Style> {
-    icon: DynamicValue<ImageURISource>;
-    iconActive?: DynamicValue<ImageURISource>;
+    icon?: any;
+    iconActive?: any;
     horizontalPosition: HorizontalPositionEnum;
     verticalPosition: VerticalPositionEnum;
     onPress: ActionValue;

@@ -1,18 +1,27 @@
 import { Style } from "@native-components/util-widgets";
-import { ImageStyle, TextStyle, ViewStyle } from "react-native";
+import { TextStyle, ViewStyle } from "react-native";
+
+export interface FloatingActionButtonStyle extends Style {
+    container: ViewStyle;
+    button: PrimaryButtonStyle;
+    buttonIcon: IconStyle;
+    secondaryButton: ButtonStyle;
+    secondaryButtonIcon: IconStyle;
+    secondaryButtonCaption: TextStyle;
+    secondaryButtonCaptionContainer: ViewStyle;
+}
 
 interface ButtonStyle extends ViewStyle {
     size?: number;
 }
 
-export interface FloatingActionButtonStyle extends Style {
-    container: ViewStyle;
-    button: ButtonStyle & { rippleColor?: string };
-    buttonIcon: ImageStyle;
-    secondaryButton: ButtonStyle;
-    secondaryButtonIcon: ImageStyle;
-    secondaryButtonCaption: TextStyle;
-    secondaryButtonCaptionContainer: ViewStyle;
+interface PrimaryButtonStyle extends ButtonStyle {
+    rippleColor?: string;
+}
+
+interface IconStyle {
+    size?: number;
+    color?: string;
 }
 
 export const defaultFloatingActionButtonStyle: FloatingActionButtonStyle = {
@@ -33,8 +42,8 @@ export const defaultFloatingActionButtonStyle: FloatingActionButtonStyle = {
         elevation: 5
     },
     buttonIcon: {
-        width: 24,
-        height: 24
+        size: 18,
+        color: "#fff"
     },
     secondaryButton: {
         size: 40,
@@ -49,8 +58,8 @@ export const defaultFloatingActionButtonStyle: FloatingActionButtonStyle = {
         elevation: 5
     },
     secondaryButtonIcon: {
-        width: 24,
-        height: 24
+        size: 18,
+        color: "#000"
     },
     secondaryButtonCaption: {},
     secondaryButtonCaptionContainer: {

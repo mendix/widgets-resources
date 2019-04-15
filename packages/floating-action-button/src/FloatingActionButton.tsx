@@ -1,6 +1,7 @@
 import { flattenStyles } from "@native-components/util-widgets";
+import { Icon } from "mendix/components/Icon";
 import { Component, createElement } from "react";
-import { Image, View } from "react-native";
+import { View } from "react-native";
 import ActionButton from "react-native-action-button";
 
 import { FloatingActionButtonProps } from "../typings/FloatingActionButtonProps";
@@ -9,6 +10,9 @@ import { defaultFloatingActionButtonStyle, FloatingActionButtonStyle } from "./u
 interface State {
     active: boolean;
 }
+
+const defaultIconSource = { type: "glyph", iconClass: "glyphicon-plus" };
+const defaultActiveIconSource = { type: "glyph", iconClass: "glyphicon-remove" };
 
 export class FloatingActionButton extends Component<FloatingActionButtonProps<FloatingActionButtonStyle>, State> {
     readonly state: State = {
@@ -47,14 +51,19 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
     }
 
     private renderIcon(): JSX.Element {
-        const { icon, iconActive, speedDialButtons } = this.props;
-        const isActive = this.state.active && speedDialButtons.length > 0;
-        const source = isActive && iconActive && iconActive.value ? iconActive.value : icon && icon.value;
-        const style = isActive
-            ? { ...this.styles.buttonIcon, transform: [{ rotate: "-180deg" }] }
-            : this.styles.buttonIcon;
+        const { icon, iconActive } = this.props;
+        const iconSource = icon && icon.value ? icon.value : defaultIconSource;
+        const activeIconSource = iconActive && iconActive.value ? iconActive.value : defaultActiveIconSource;
 
-        return source ? <Image style={style} source={source} /> : <View />;
+        const isActive = this.state.active && this.props.speedDialButtons.length > 0;
+        const source = isActive ? activeIconSource : iconSource;
+        const style = isActive ? { transform: [{ rotate: "-180deg" }] } : {};
+
+        return (
+            <View style={style}>
+                <Icon icon={source} size={this.styles.buttonIcon.size} color={this.styles.buttonIcon.color} />
+            </View>
+        );
     }
 
     private renderButtons(): JSX.Element[] | undefined {
@@ -80,7 +89,11 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
                         spaceBetween={0}
                     >
                         {button.icon.value && (
-                            <Image style={this.styles.secondaryButtonIcon} source={button.icon.value} />
+                            <Icon
+                                icon={button.icon.value}
+                                size={this.styles.secondaryButtonIcon.size}
+                                color={this.styles.secondaryButtonIcon.color}
+                            />
                         )}
                     </ActionButton.Item>
                 );
