@@ -1,4 +1,4 @@
-import { contrast, background, spacing, font, brand, deviceWidth, deviceHeight } from '../core/variables';
+import { contrast, background, spacing, font, deviceHeight } from '../core/variables';
 import merge from '../core/_helperfunctions/mergeobjects';
 import { Platform } from 'react-native';
 

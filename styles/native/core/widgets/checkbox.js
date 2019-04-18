@@ -39,6 +39,7 @@ export const CheckBox = {
     validationMessage: {
         // All TextStyle properties are allowed
         ...TextBox.validationMessage,
+        alignSelf: 'stretch',
     },
 };
 

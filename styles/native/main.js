@@ -26,6 +26,7 @@ export * from './core/widgets/pagetitle';
 export * from './core/widgets/progressbar';
 export * from './core/widgets/progresscircle';
 export * from './core/widgets/rangeslider';
+export * from './core/widgets/rating';
 export * from './core/widgets/referenceselector';
 export * from './core/widgets/slider';
 export * from './core/widgets/tabcontainer';

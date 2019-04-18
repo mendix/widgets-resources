@@ -17,7 +17,7 @@ export const com_mendix_widget_native_progresscircle_ProgressCircle = (ProgressC
     fill: {
         // Only the width & backgroundColor & lineCapRounded properties are allowed
         backgroundColor: brand.primary,
-        width: 5, // (Thickness),
+        width: 5, // Thickness,
         lineCapRounded: true,
     },
     text: {

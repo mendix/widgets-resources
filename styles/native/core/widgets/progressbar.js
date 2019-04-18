@@ -11,7 +11,7 @@ import { Platform } from 'react-native';
 export const com_mendix_widget_native_progressbar_ProgressBar = (ProgressBar = {
     container: {
         // All ViewStyle properties are allowed
-        width: '100%',
+        alignSelf: 'stretch',
     },
     bar: {
         // All ViewStyle properties are allowed

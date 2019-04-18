@@ -92,37 +92,37 @@ export const textWhite = {
     },
 };
 
-export const textGrayDarkest = {
+export const textContrastLowest = {
     text: {
         color: contrast.highest,
     },
 };
-export const textGrayDarker = {
+export const textContrastLower = {
     text: {
         color: contrast.higher,
     },
 };
-export const textGrayDark = {
+export const textContrastLow = {
     text: {
         color: contrast.high,
     },
 };
-export const textGray = {
+export const textContrastDefault = {
     text: {
         color: contrast.regular,
     },
 };
-export const textGrayLight = {
+export const textContrastHigh = {
     text: {
         color: contrast.low,
     },
 };
-export const textGrayLighter = {
+export const textContrastHigher = {
     text: {
         color: contrast.lower,
     },
 };
-export const textGrayLightest = {
+export const textContrastHighest = {
     text: {
         color: contrast.lowest,
     },

@@ -11,6 +11,9 @@ export const com_mendix_widget_native_togglebuttons_ToggleButtons = (ToggleButto
     container: {
         // All ViewStyle properties are allowed
     },
+    containerDisabled: {
+        opacity: 0.6,
+    },
     button: {
         // All ViewStyle properties are allowed
         backgroundColor: background.primary,
