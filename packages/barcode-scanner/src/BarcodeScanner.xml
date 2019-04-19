@@ -20,6 +20,9 @@
                     <description/>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>
