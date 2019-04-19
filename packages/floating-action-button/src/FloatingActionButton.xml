@@ -49,7 +49,7 @@
                 <caption>Buttons</caption>
                 <description>The secondary buttons animate in when the main button is pressed.</description>
                 <properties>
-                    <propertyGroup caption="Action">
+                    <propertyGroup caption="Button">
                         <property key="icon" type="icon">
                             <caption>Icon</caption>
                             <description/>
