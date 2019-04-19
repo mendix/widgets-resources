@@ -3,7 +3,6 @@ const path = require("path");
 const rollupNodeResolve = require("rollup-plugin-node-resolve");
 const rollupTypescript2 = require("rollup-plugin-typescript2");
 const rollupBabel = require("rollup-plugin-babel");
-const rollupTerser = require("rollup-plugin-terser");
 const rollupCommonjs = require("rollup-plugin-commonjs");
 const mime = require("mime");
 
@@ -149,21 +148,13 @@ const config = {
         rollupTypescript2({
             cacheRoot: "./dist/rpt2_cache"
         }),
-        rollupBabel({
-            exclude: [/node_modules\/colorsys/],
-            plugins: [
-                "@babel/plugin-transform-react-jsx",
-                "@babel/plugin-proposal-class-properties",
-                "@babel/plugin-transform-flow-strip-types"
-            ]
-        }),
+        rollupBabel(),
         rollupCommonjs({
             include: /node_modules/,
             namedExports: {
                 "d3-interpolate-path": ["interpolatePath"]
             }
         }),
-        ...(isProduction ? [rollupTerser.terser()] : []),
         fixPreservedModules(),
         /** Replace inlineNativeAssets by copyNativeAssets when the native app supports this */
         inlineNativeAssets(),

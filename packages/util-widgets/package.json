@@ -2,8 +2,6 @@
     "name": "@native-components/util-widgets",
     "version": "0.0.1",
     "private": true,
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
     "scripts": {
         "start": "../../node_modules/.bin/tsc --watch",
         "prebuild": "rm -rf ./dist",
