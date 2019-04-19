@@ -1,33 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.feedback.Feedback" supportedPlatform="Native" needsEntityContext="true"
-        offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/@mendix/pluggable-widgets-api/widget.xsd">
+<widget id="com.mendix.widget.native.feedback.Feedback" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/@mendix/pluggable-widgets-api/widget.xsd">
     <name>Feedback</name>
     <description>Widget to send feedback and collaborate with others on your Mendix Project</description>
-    <icon>
-        /9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABkAAD/7gAOQWRvYmUAZMAAAAAB/9sAhAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAgICAgICAgICAgIDAwMDAwMDAwMDAQEBAQEBAQIBAQICAgECAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwP/wAARCAAQABADAREAAhEBAxEB/8QAbQAAAwEAAAAAAAAAAAAAAAAAAgMECgEAAgMAAAAAAAAAAAAAAAAABQYBAwcQAAICAwEBAAMAAAAAAAAAAAMFBAYBAgcRCBMUFxEAAgICAQMEAwEAAAAAAAAAAQIDBAUGERIiEwAhIwcxQhQV/9oADAMBAAIRAxEAPwDZH37uT/nTyorYiUi/pRXpv5tXJzaKCnfQkHMfywcwRWY2Qgr/AEeSvxiWsjMgx/WEUWgSSAkL6lZ7N2qNqGCOMpkvITCrMBFbXjvhWT9JeO5A4HeoALKT6ynctsyGHv1asEJjz5mJqxs4FfIpx8tVJvxFZK8SRLKq/IihTIrN6Hgva7beHtnUtq8Zh1EjaPL6QggNI5aL89KNxb4rHMnFq0/KGy9DjrcZlso6wEj1jKNqUkYAw+abjdLzuN1iHb92ZKDZRTJUrc+SaSIeydCDgLEPy88pQO5bxLIAAAWmfZNnYdhvYClA13Zq84GQ6HAo4gcfFSksEHz3QnfLFXjkIldhK0CBPTu6fNZ+lvkM9c5f63ttPkr9utzpAZE3iVAyLBLMPjabI9K/VL9bA4ErjttYpmYgnNIJIJ+voLadLr6zhdhO67FXjyeRoIWqV7HfC07e0fVEOFEMXvLL+8pVImfpckX/AGV9eZHbvFj8Xat18ndkMc2RVgJcdRA5nXHDjx17lnsrxzhDKiPJMXYxKpl4T8ySucWF22dvLAXpCWZGUf2RbIFDl915zpqQtTF2hDgZK1a7/UY2xVUprtEEzIOOKUKSLErcWr1t29rnqsccMUH+POpf+JlJWhZ5+X+F+RJBXlPEqQq5hBZo2jbxhvQ367+pn1O/NNZntDZKrrGMmj8Pl6XHwf6sZBhtXYB1V5LLRiwwRJkmTzMg/9k=
-    </icon>
+    <icon>/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABkAAD/7gAOQWRvYmUAZMAAAAAB/9sAhAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAgICAgICAgICAgIDAwMDAwMDAwMDAQEBAQEBAQIBAQICAgECAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwP/wAARCAAQABADAREAAhEBAxEB/8QAbQAAAwEAAAAAAAAAAAAAAAAAAgMECgEAAgMAAAAAAAAAAAAAAAAABQYBAwcQAAICAwEBAAMAAAAAAAAAAAMFBAYBAgcRCBMUFxEAAgICAQMEAwEAAAAAAAAAAQIDBAUGERIiEwAhIwcxQhQV/9oADAMBAAIRAxEAPwDZH37uT/nTyorYiUi/pRXpv5tXJzaKCnfQkHMfywcwRWY2Qgr/AEeSvxiWsjMgx/WEUWgSSAkL6lZ7N2qNqGCOMpkvITCrMBFbXjvhWT9JeO5A4HeoALKT6ynctsyGHv1asEJjz5mJqxs4FfIpx8tVJvxFZK8SRLKq/IihTIrN6Hgva7beHtnUtq8Zh1EjaPL6QggNI5aL89KNxb4rHMnFq0/KGy9DjrcZlso6wEj1jKNqUkYAw+abjdLzuN1iHb92ZKDZRTJUrc+SaSIeydCDgLEPy88pQO5bxLIAAAWmfZNnYdhvYClA13Zq84GQ6HAo4gcfFSksEHz3QnfLFXjkIldhK0CBPTu6fNZ+lvkM9c5f63ttPkr9utzpAZE3iVAyLBLMPjabI9K/VL9bA4ErjttYpmYgnNIJIJ+voLadLr6zhdhO67FXjyeRoIWqV7HfC07e0fVEOFEMXvLL+8pVImfpckX/AGV9eZHbvFj8Xat18ndkMc2RVgJcdRA5nXHDjx17lnsrxzhDKiPJMXYxKpl4T8ySucWF22dvLAXpCWZGUf2RbIFDl915zpqQtTF2hDgZK1a7/UY2xVUprtEEzIOOKUKSLErcWr1t29rnqsccMUH+POpf+JlJWhZ5+X+F+RJBXlPEqQq5hBZo2jbxhvQ367+pn1O/NNZntDZKrrGMmj8Pl6XHwf6sZBhtXYB1V5LLRiwwRJkmTzMg/9k=</icon>
     <properties>
         <property key="sprintrapp" type="string">
             <caption>App ID</caption>
             <category>General</category>
-            <description>The App ID is a hash that uniquely identifies your app project. You can find this ID in
-                Settings > General in the Developer Portal.
-            </description>
+            <description>The App ID is a hash that uniquely identifies your app project. You can find this ID in Settings > General in the Developer Portal.</description>
         </property>
         <property key="allowScreenshot" type="boolean" defaultValue="true">
             <caption>Allow screenshots</caption>
             <category>General</category>
-            <description>If you are not allowed to send screenshots when submitting feedback (for legal reasons,
-                etc.), set this to ‘No’.
-            </description>
+            <description>If you are not allowed to send screenshots when submitting feedback for legal reasons, set this to ‘No’.</description>
         </property>
         <property key="logo" type="image" required="false">
             <caption>Logo</caption>
             <category>General</category>
-            <description>For customized branding, add a logo to the widget. The recommended size of the image is 90 by 90 pixels.
-            </description>
+            <description>For customized branding, add a logo to the widget. The recommended size of the image is 90 by 90 pixels.</description>
         </property>
     </properties>
 </widget>
