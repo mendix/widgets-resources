@@ -1,3 +1,4 @@
+import { ValueStatus } from "@mendix/pluggable-widgets-api/properties";
 import { Component, createElement } from "react";
 import { View } from "react-native";
 import { RNCamera } from "react-native-camera";

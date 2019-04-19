@@ -1,3 +1,4 @@
+import { ValueStatus } from "@mendix/pluggable-widgets-api/properties";
 import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
 import StarRating from "react-native-star-rating";

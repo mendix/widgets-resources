@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import { ImageURISource } from "react-native";
+import { ActionValue, DynamicValue, NativeIcon } from "@mendix/pluggable-widgets-api/properties";
 
 interface CommonProps<Style> {
     style: Style[];
@@ -14,14 +14,14 @@ export type HorizontalPositionEnum = "left" | "center" | "right";
 export type VerticalPositionEnum = "top" | "bottom";
 
 export interface SpeedDialButtonsType {
-    icon: any;
+    icon: DynamicValue<NativeIcon>;
     caption?: DynamicValue<string>;
     action: ActionValue;
 }
 
 export interface FloatingActionButtonProps<Style> extends CommonProps<Style> {
-    icon?: any;
-    iconActive?: any;
+    icon?: DynamicValue<NativeIcon>;
+    iconActive?: DynamicValue<NativeIcon>;
     horizontalPosition: HorizontalPositionEnum;
     verticalPosition: VerticalPositionEnum;
     onPress: ActionValue;

@@ -1,3 +1,4 @@
+import { ValueStatus } from "@mendix/pluggable-widgets-api/properties";
 import { flattenStyles } from "@native-components/util-widgets";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";

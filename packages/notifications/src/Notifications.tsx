@@ -1,3 +1,4 @@
+import { ActionValue } from "@mendix/pluggable-widgets-api/properties";
 import { Component } from "react";
 import firebase, { RNFirebase } from "react-native-firebase";
 

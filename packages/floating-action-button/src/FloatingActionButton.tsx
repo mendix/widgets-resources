@@ -1,5 +1,6 @@
+import { Icon } from "@mendix/pluggable-widgets-api/components/Icon";
+import { ActionValue, NativeIcon } from "@mendix/pluggable-widgets-api/properties";
 import { flattenStyles } from "@native-components/util-widgets";
-import { Icon } from "mendix/components/Icon";
 import { Component, createElement } from "react";
 import { View } from "react-native";
 import ActionButton from "react-native-action-button";
@@ -56,7 +57,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
         const activeIconSource = iconActive && iconActive.value ? iconActive.value : defaultActiveIconSource;
 
         const isActive = this.state.active && this.props.speedDialButtons.length > 0;
-        const source = isActive ? activeIconSource : iconSource;
+        const source = (isActive ? activeIconSource : iconSource) as NativeIcon;
         const style = isActive ? { transform: [{ rotate: "-180deg" }] } : {};
 
         return (

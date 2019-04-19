@@ -107,6 +107,18 @@ function inlineNativeAssets() {
     };
 }
 
+function mendixExternalReferences() {
+    return {
+        name: "mendix-external-modules",
+        resolveId: id => {
+            if (id && /^@mendix\/pluggable-widgets-api\/components\//.test(id)) {
+                return id.replace("@mendix/pluggable-widgets-api/components", "mendix/components");
+            }
+            return null;
+        }
+    };
+}
+
 function isExternal(id) {
     const externals = [
         "react",
@@ -154,7 +166,8 @@ const config = {
         ...(isProduction ? [rollupTerser.terser()] : []),
         fixPreservedModules(),
         /** Replace inlineNativeAssets by copyNativeAssets when the native app supports this */
-        inlineNativeAssets()
+        inlineNativeAssets(),
+        mendixExternalReferences()
     ]
 };
 

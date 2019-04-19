@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import { ImageURISource } from "react-native";
+import { ActionValue, DynamicValue, NativeIcon } from "@mendix/pluggable-widgets-api/properties";
 
 interface CommonProps<Style> {
     style: Style[];
@@ -16,7 +16,7 @@ export interface MarkersType {
     title?: DynamicValue<string>;
     description?: DynamicValue<string>;
     onPress?: ActionValue;
-    icon?: any;
+    icon?: DynamicValue<NativeIcon>;
     iconSize: number;
     color?: string;
 }

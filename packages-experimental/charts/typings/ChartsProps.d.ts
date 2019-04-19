@@ -3,6 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
+import { ActionValue, EditableValue } from "@mendix/pluggable-widgets-api/properties";
 
 interface CommonProps<Style> {
     style: Style[];

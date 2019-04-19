@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import { ImageURISource } from "react-native";
+import { DynamicValue, NativeImage } from "@mendix/pluggable-widgets-api/properties";
 
 interface CommonProps<Style> {
     style: Style[];
@@ -12,5 +12,5 @@ interface CommonProps<Style> {
 export interface FeedbackProps<Style> extends CommonProps<Style> {
     sprintrapp: string;
     allowScreenshot: boolean;
-    logo?: DynamicValue<ImageURISource>;
+    logo?: DynamicValue<NativeImage>;
 }

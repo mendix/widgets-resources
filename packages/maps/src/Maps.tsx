@@ -1,5 +1,6 @@
+import { Icon } from "@mendix/pluggable-widgets-api/components/Icon";
+import { ActionValue, DynamicValue } from "@mendix/pluggable-widgets-api/properties";
 import { flattenStyles } from "@native-components/util-widgets";
-import { Icon } from "mendix/components/Icon";
 import { Component, createElement, createRef } from "react";
 import Geocoder, { GeocodingObject } from "react-native-geocoder";
 import MapView, { LatLng, Marker } from "react-native-maps";
