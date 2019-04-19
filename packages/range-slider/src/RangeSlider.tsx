@@ -29,7 +29,7 @@ export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, S
         );
 
         return (
-            <View onLayout={this.onLayoutHandler}>
+            <View onLayout={this.onLayoutHandler} style={this.styles.container}>
                 <MultiSlider
                     values={[
                         Number(this.props.lowerValueAttribute.value),
@@ -40,7 +40,6 @@ export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, S
                     step={step}
                     enabledOne={enabledOne}
                     enabledTwo={enabledTwo}
-                    containerStyle={this.styles.container}
                     markerStyle={enabledOne || enabledTwo ? this.styles.marker : this.styles.markerDisabled}
                     trackStyle={enabledOne || enabledTwo ? this.styles.track : this.styles.trackDisabled}
                     selectedStyle={enabledOne || enabledTwo ? this.styles.highlight : this.styles.highlightDisabled}
