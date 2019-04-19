@@ -5,17 +5,15 @@ import { RNCamera } from "react-native-camera";
 
 import { BarcodeScannerProps } from "../typings/BarcodeScannerProps";
 
-export class BarcodeScanner extends Component<BarcodeScannerProps<undefined>> {
+export type Props = BarcodeScannerProps<undefined>;
+
+export class BarcodeScanner extends Component<Props> {
     private readonly onBarCodeReadHandler = this.onBarCodeRead.bind(this);
 
     render(): JSX.Element {
         return (
             <View style={{ flex: 1, minHeight: 100, flexDirection: "column" }}>
-                <RNCamera
-                    style={{ flex: 1, justifyContent: "flex-end", alignItems: "center" }}
-                    captureAudio={false}
-                    onBarCodeRead={this.onBarCodeReadHandler}
-                />
+                <RNCamera captureAudio={false} onBarCodeRead={this.onBarCodeReadHandler} />
             </View>
         );
     }
