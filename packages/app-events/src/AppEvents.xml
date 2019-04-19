@@ -46,14 +46,6 @@
         </propertyGroup>
         <propertyGroup caption="Timer events">
             <propertyGroup caption="Timer">
-                <property key="onTimeoutAction" type="action" required="false">
-                    <caption>On timeout</caption>
-                    <description/>
-                </property>
-                <property key="delayTime" type="integer" defaultValue="30">
-                    <caption>Time</caption>
-                    <description>How many second should pass before the action is called.</description>
-                </property>
                 <property key="timerType" type="enumeration" defaultValue="once">
                     <caption>Call</caption>
                     <description/>
@@ -61,6 +53,14 @@
                         <enumerationValue key="once">Once</enumerationValue>
                         <enumerationValue key="interval">Interval (loop)</enumerationValue>
                     </enumerationValues>
+                </property>
+                <property key="delayTime" type="integer" defaultValue="30">
+                    <caption>Time</caption>
+                    <description>How many second should pass before the action is called.</description>
+                </property>
+                <property key="onTimeoutAction" type="action">
+                    <caption>On timeout</caption>
+                    <description/>
                 </property>
             </propertyGroup>
         </propertyGroup>
