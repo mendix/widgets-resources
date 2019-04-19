@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActivityIndicator renders with default styles 1`] = `
+<View
+  style={Object {}}
+>
+  <ActivityIndicator
+    animating={true}
+    color="gray"
+    hidesWhenStopped={true}
+    size="large"
+  />
+</View>
+`;
+
+exports[`ActivityIndicator renders with custom styles 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "green",
+    }
+  }
+>
+  <ActivityIndicator
+    animating={true}
+    color="green"
+    hidesWhenStopped={true}
+    size="large"
+  />
+</View>
+`;

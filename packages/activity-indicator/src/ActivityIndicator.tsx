@@ -4,7 +4,10 @@ import { ActivityIndicator as RNActivityIndicator, View } from "react-native";
 
 import { ActivityIndicatorProps } from "../typings/ActivityIndicatorProps";
 import { ActivityIndicatorStyle, defaultActivityStyle } from "./ui/Styles";
-export class ActivityIndicator extends Component<ActivityIndicatorProps<ActivityIndicatorStyle>> {
+
+export type Props = ActivityIndicatorProps<ActivityIndicatorStyle>;
+
+export class ActivityIndicator extends Component<Props> {
     private readonly styles = flattenStyles(defaultActivityStyle, this.props.style);
 
     render(): JSX.Element {
