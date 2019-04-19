@@ -12,5 +12,4 @@ interface CommonProps<Style> {
 export interface ColorPickerProps<Style> extends CommonProps<Style> {
     color: EditableValue<string>;
     onChange?: ActionValue;
-    onChangeComplete?: ActionValue;
 }

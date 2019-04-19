@@ -24,14 +24,11 @@ export class ColorPicker extends Component<ColorPickerProps<ColorPickerStyle>> {
 
     private onChange(hsv: HSV): void {
         this.setValue(hsv);
-        if (this.props.onChange && this.props.onChange.canExecute) {
-            this.props.onChange.execute();
-        }
     }
 
     private onChangeComplete(): void {
-        if (this.props.onChangeComplete && this.props.onChangeComplete.canExecute) {
-            this.props.onChangeComplete.execute();
+        if (this.props.onChange && this.props.onChange.canExecute) {
+            this.props.onChange.execute();
         }
     }
 
