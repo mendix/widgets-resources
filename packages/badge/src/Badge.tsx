@@ -5,7 +5,9 @@ import { Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from 
 import { BadgeProps } from "../typings/BadgeProps";
 import { BadgeStyle, defaultBadgeStyle, styles } from "./ui/Styles";
 
-export class Badge extends Component<BadgeProps<BadgeStyle>> {
+export type Props = BadgeProps<BadgeStyle>;
+
+export class Badge extends Component<Props> {
     private readonly onClickHandler = this.onClick.bind(this);
     private readonly styles = flattenStyles(defaultBadgeStyle, this.props.style);
 
@@ -35,7 +37,7 @@ export class Badge extends Component<BadgeProps<BadgeStyle>> {
     }
 
     private renderText(): JSX.Element {
-        const value = this.props.caption ? this.props.caption.value : "";
+        const value = this.props.caption.value || "";
 
         return <Text style={this.styles.text}>{value}</Text>;
     }
