@@ -65,7 +65,7 @@
         "tslint": "^5.13.0",
         "tslint-config-prettier": "^1.18.0",
         "tslint-react": "^3.6.0",
-        "typescript": "^3.3.3"
+        "typescript": "^3.4.4"
     },
     "husky": {
         "hooks": {

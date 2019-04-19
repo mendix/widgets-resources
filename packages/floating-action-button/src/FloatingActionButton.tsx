@@ -1,5 +1,5 @@
 import { Icon } from "@mendix/pluggable-widgets-api/components/Icon";
-import { ActionValue, NativeIcon } from "@mendix/pluggable-widgets-api/properties";
+import { ActionValue } from "@mendix/pluggable-widgets-api/properties";
 import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement } from "react";
 import { View } from "react-native";
@@ -12,8 +12,8 @@ interface State {
     active: boolean;
 }
 
-const defaultIconSource = { type: "glyph", iconClass: "glyphicon-plus" };
-const defaultActiveIconSource = { type: "glyph", iconClass: "glyphicon-remove" };
+const defaultIconSource = { type: "glyph", iconClass: "glyphicon-plus" } as const;
+const defaultActiveIconSource = { type: "glyph", iconClass: "glyphicon-remove" } as const;
 
 export class FloatingActionButton extends Component<FloatingActionButtonProps<FloatingActionButtonStyle>, State> {
     readonly state: State = {
@@ -57,7 +57,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
         const activeIconSource = iconActive && iconActive.value ? iconActive.value : defaultActiveIconSource;
 
         const isActive = this.state.active && this.props.speedDialButtons.length > 0;
-        const source = (isActive ? activeIconSource : iconSource) as NativeIcon;
+        const source = isActive ? activeIconSource : iconSource;
         const style = isActive ? { transform: [{ rotate: "-180deg" }] } : {};
 
         return (
