@@ -1,1 +1,1 @@
-export * from "./styles/mobile/main";
+export * from './styles/native/main';

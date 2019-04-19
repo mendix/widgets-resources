@@ -22,6 +22,7 @@
 @import "core/base/reset";
 @import "core/base/base";
 @import "core/base/login";
+@import "core/base/helpers";
 
 // Widgets
 @import "core/widgets/inputs";
@@ -34,7 +35,6 @@
 @import "core/widgets/header";
 @import "core/widgets/glyphicons";
 @import "core/widgets/groupbox";
-@import "core/widgets/helpers";
 @import "core/widgets/images";
 @import "core/widgets/labels";
 @import "core/widgets/listview";
