@@ -19,7 +19,7 @@ export interface AppEventsProps<Style> extends CommonProps<Style> {
     onOnlineTimeout: number;
     onOfflineAction?: ActionValue;
     onOfflineTimeout: number;
-    onTimeoutAction: ActionValue;
+    onTimeoutAction?: ActionValue;
     delayTime: number;
     timerType: TimerTypeEnum;
 }

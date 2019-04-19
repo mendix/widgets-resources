@@ -46,7 +46,7 @@
         </propertyGroup>
         <propertyGroup caption="Timer events">
             <propertyGroup caption="Timer">
-                <property key="onTimeoutAction" type="action">
+                <property key="onTimeoutAction" type="action" required="false">
                     <caption>On timeout</caption>
                     <description/>
                 </property>

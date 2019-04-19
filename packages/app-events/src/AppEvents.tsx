@@ -4,7 +4,9 @@ import { AppState, AppStateStatus, NetInfo } from "react-native";
 
 import { AppEventsProps } from "../typings/AppEventsProps";
 
-export class AppEvents extends Component<AppEventsProps<undefined>> {
+export type Props = AppEventsProps<undefined>;
+
+export class AppEvents extends Component<Props> {
     private readonly onAppStateChangeHandler = this.onAppStateChange.bind(this);
     private readonly onConnectionChangeHandler = this.onConnectionChange.bind(this);
 
@@ -93,5 +95,5 @@ function executeAction(action?: ActionValue): void {
 }
 
 function isPastTimeout(last: number, timeoutSeconds: number): boolean {
-    return Date.now() - last > timeoutSeconds * 1000;
+    return Date.now() - last >= timeoutSeconds * 1000;
 }
