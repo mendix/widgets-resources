@@ -142,7 +142,7 @@
             </property>
             <property key="provider" type="enumeration" defaultValue="default">
                 <caption>Provider</caption>
-                <description>Map provider. The default uses Apple Maps on iOS and Google Maps on Android.</description>
+                <description>The default map provider for iOS is Apple Maps, and for Android and Google Maps.</description>
                 <enumerationValues>
                     <enumerationValue key="default">Default</enumerationValue>
                     <enumerationValue key="google">Google Maps</enumerationValue>
