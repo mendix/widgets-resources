@@ -23,14 +23,13 @@ export class Slider extends Component<SliderProps<SliderStyle>, State> {
             this.props.stepSize.value && this.props.stepSize.value.gt(0) ? Number(this.props.stepSize.value) : 1;
 
         return (
-            <View onLayout={this.onLayoutHandler}>
+            <View onLayout={this.onLayoutHandler} style={this.styles.container}>
                 <MultiSlider
                     values={[Number(this.props.valueAttribute.value)]}
                     min={Number(this.props.minimumValue.value)}
                     max={Number(this.props.maximumValue.value)}
                     step={step}
                     enabledOne={enabled}
-                    containerStyle={this.styles.container}
                     markerStyle={enabled ? this.styles.marker : this.styles.markerDisabled}
                     trackStyle={enabled ? this.styles.track : this.styles.trackDisabled}
                     selectedStyle={enabled ? this.styles.highlight : this.styles.highlightDisabled}
