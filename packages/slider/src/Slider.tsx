@@ -56,10 +56,6 @@ export class Slider extends Component<Props, State> {
     private onSlide(values: number[]): void {
         if (this.props.valueAttribute.status === ValueStatus.Available) {
             this.props.valueAttribute.setTextValue(String(values[0]));
-
-            if (this.props.onSlide && this.props.onSlide.canExecute) {
-                this.props.onSlide.execute();
-            }
         }
     }
 
