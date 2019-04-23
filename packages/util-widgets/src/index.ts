@@ -1,2 +1,2 @@
-export { flattenStyles, Style } from "./Styles";
-export { only, exclude } from "./ObjectFilters";
+export { flattenStyles, Style } from "./styles";
+export { only, exclude } from "./objectFilters";
