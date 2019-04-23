@@ -148,7 +148,13 @@ const config = {
         rollupTypescript2({
             cacheRoot: "./dist/rpt2_cache"
         }),
-        rollupBabel(),
+        rollupBabel({
+            plugins: [
+                "@babel/plugin-transform-react-jsx",
+                "@babel/plugin-proposal-class-properties",
+                "@babel/plugin-transform-flow-strip-types"
+            ]
+        }),
         rollupCommonjs({
             include: /node_modules/,
             namedExports: {
