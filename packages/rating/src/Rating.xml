@@ -2,8 +2,7 @@
 <widget id="com.mendix.widget.native.rating.Rating" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/@mendix/pluggable-widgets-api/widget.xsd">
     <name>Rating</name>
     <description>This widget lets users give a rating</description>
-    <icon> iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAABNJJREFUeAHtWktrFEEQ7prdmAmKgh5UVPTi6yIoguBBPChoHsaDIiiiooiPg79ACZ58nDz4QBAFwYsKmqyJ4MWDl4B3X3gQXycRwZCN2e22Kto49M7M9is9SdyFpad7qqvq+7qqeugZxlq/FgMtBv5nBqAo8N0Do1trHK6T/XIkTlZ6Op4X4UtUhFEhBNTr7A4TYg39a3W4TWNF+FIIAT2V8XWCseX/AIsVNPavH+6qEAI451tViGljqsxk9AshQAjWQEDa2GQAVnUGJ4ByXTCxRXWExoqoA8EJ+Jvr81UCsD+/iDoQnIC8XM+7l0KYl6HgBOTlet49L2hTlAQlICv/pV9F1IGgBOTkv+QgeB0ISoBOjuvISLZ8tEEJ0MlxHRkfwKWOYAQ0y3/pUOg6EIwAjfyXHAStA8EIMMltE1nJmm0bjACT3DaRtQUu5wUhQDf/pVMh60AQAgzyX3IQrA4EIcAmp23mSPZM2nKacPeAWCJgfFHaPZsxXuddpvPwxKirq/Lrhem8LPlSve1rfy98Ue83nMN1Pq6e4Ixdw7O6hnvq5GnVBxAY7qcGe+MbSb8bUoAzcXbGgSfEuKAT2JLo8bqBAFz2j4rMjOmmYWsggLXBAWDwasag/gtkAhNiU3E1EDDUGb9fOK99AwO4jJPq6oTp1p/AgFgIE2FT/c8tdJ2Pfm3iwP+8wFBnToc+wOtIRIcHd88aznK3IQKSgjRx0dz29QBwaTpFA/lKPpPveeAJa24EJMmgaBCM38bH1LXJ8al2jeBfAYuONAMu/c6NAClELSmkPJqq0SBXnXzUBU+4tCOAhOVvqkWD6apLHNRqR0By0lSJBrnqbFbzXE/6n7y2ioCkgqKiwWXVk/5bRUBSQeho8LHqSf+dI0Aq2/tMzPs5MvYVd4kOOTYZLRIwOmd2++L72+GHD/3OESCd+Dk6tm+ywZMtskG2pF3X1hsBgovDrs7ozvdpy0sKdD6pruLj4o0uAB9yURusHuyK37rq8hIBvBZu9SVgXzadCegTIsJPPg5Kx0K1ZJNsu9pzVjBcGduG53dLXR0xnU82ybbpPFXemQCfBUl1rlnfh22nIhhq788iwsczgVMEuO79AOwl/bMANhv38UzgRIBtCOLKcfxfXLYk3kx/uqaxZoDT7tv6IHVZp4Dt3o8GP5VK7KD6cTR9PI3fD9+1KaguzwTWEWCzD+MqP4zK8ToVPK0GjdE9kpGro9va+CJ1W0UA7b/Dj6sftFcLYISBOPN0V8ctaTiv3dE/epQJuIIvM2bnycl7FFWbeuPlfWCeRlYRYLL3U5ErR2y9LngCRbI0R7dAujwTWBGgU3ioqEURu0BFrtITv5OrpdvSHJpLOnQKpI5PabaNU0Bn788qdGkO6IzpFEgkyeqcwDgCmu39eGr8IKvQ6YBNk9EpkLbPBMYEZIYaFjrM2aNDvfHeJ93wPQ2IyxjpHNod78Fj3GP42m4kTRf6dihtPG/MKAXow4lavfpJVUjFqhTBfptcV3Xp9LsHqivrXNzDj6k2qvLlUry00gOf1fGsvnEEIPs1qcy10Ek9pm1mgUz4pqvTKAJI6c7+6nHcn8/jO5VvpUicTnuo0TXuQ26iQHK4iqeFC3Bxzg3tim/60NvS0WKgxcD/wcBvI6ARwApK+xMAAAAASUVORK5CYII=
-    </icon>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAABNJJREFUeAHtWktrFEEQ7prdmAmKgh5UVPTi6yIoguBBPChoHsaDIiiiooiPg79ACZ58nDz4QBAFwYsKmqyJ4MWDl4B3X3gQXycRwZCN2e22Kto49M7M9is9SdyFpad7qqvq+7qqeugZxlq/FgMtBv5nBqAo8N0Do1trHK6T/XIkTlZ6Op4X4UtUhFEhBNTr7A4TYg39a3W4TWNF+FIIAT2V8XWCseX/AIsVNPavH+6qEAI451tViGljqsxk9AshQAjWQEDa2GQAVnUGJ4ByXTCxRXWExoqoA8EJ+Jvr81UCsD+/iDoQnIC8XM+7l0KYl6HgBOTlet49L2hTlAQlICv/pV9F1IGgBOTkv+QgeB0ISoBOjuvISLZ8tEEJ0MlxHRkfwKWOYAQ0y3/pUOg6EIwAjfyXHAStA8EIMMltE1nJmm0bjACT3DaRtQUu5wUhQDf/pVMh60AQAgzyX3IQrA4EIcAmp23mSPZM2nKacPeAWCJgfFHaPZsxXuddpvPwxKirq/Lrhem8LPlSve1rfy98Ue83nMN1Pq6e4Ixdw7O6hnvq5GnVBxAY7qcGe+MbSb8bUoAzcXbGgSfEuKAT2JLo8bqBAFz2j4rMjOmmYWsggLXBAWDwasag/gtkAhNiU3E1EDDUGb9fOK99AwO4jJPq6oTp1p/AgFgIE2FT/c8tdJ2Pfm3iwP+8wFBnToc+wOtIRIcHd88aznK3IQKSgjRx0dz29QBwaTpFA/lKPpPveeAJa24EJMmgaBCM38bH1LXJ8al2jeBfAYuONAMu/c6NAClELSmkPJqq0SBXnXzUBU+4tCOAhOVvqkWD6apLHNRqR0By0lSJBrnqbFbzXE/6n7y2ioCkgqKiwWXVk/5bRUBSQeho8LHqSf+dI0Aq2/tMzPs5MvYVd4kOOTYZLRIwOmd2++L72+GHD/3OESCd+Dk6tm+ywZMtskG2pF3X1hsBgovDrs7ozvdpy0sKdD6pruLj4o0uAB9yURusHuyK37rq8hIBvBZu9SVgXzadCegTIsJPPg5Kx0K1ZJNsu9pzVjBcGduG53dLXR0xnU82ybbpPFXemQCfBUl1rlnfh22nIhhq788iwsczgVMEuO79AOwl/bMANhv38UzgRIBtCOLKcfxfXLYk3kx/uqaxZoDT7tv6IHVZp4Dt3o8GP5VK7KD6cTR9PI3fD9+1KaguzwTWEWCzD+MqP4zK8ToVPK0GjdE9kpGro9va+CJ1W0UA7b/Dj6sftFcLYISBOPN0V8ctaTiv3dE/epQJuIIvM2bnycl7FFWbeuPlfWCeRlYRYLL3U5ErR2y9LngCRbI0R7dAujwTWBGgU3ioqEURu0BFrtITv5OrpdvSHJpLOnQKpI5PabaNU0Bn788qdGkO6IzpFEgkyeqcwDgCmu39eGr8IKvQ6YBNk9EpkLbPBMYEZIYaFjrM2aNDvfHeJ93wPQ2IyxjpHNod78Fj3GP42m4kTRf6dihtPG/MKAXow4lavfpJVUjFqhTBfptcV3Xp9LsHqivrXNzDj6k2qvLlUry00gOf1fGsvnEEIPs1qcy10Ek9pm1mgUz4pqvTKAJI6c7+6nHcn8/jO5VvpUicTnuo0TXuQ26iQHK4iqeFC3Bxzg3tim/60NvS0WKgxcD/wcBvI6ARwApK+xMAAAAASUVORK5CYII=</icon>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
@@ -17,13 +16,13 @@
                     </attributeTypes>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Rating icons">
+            <propertyGroup caption="Rating">
                 <property key="emptyIcon" type="image" required="false">
-                    <caption>Empty Icon</caption>
+                    <caption>Empty icon</caption>
                     <description/>
                 </property>
                 <property key="icon" type="image" required="false">
-                    <caption>Icon</caption>
+                    <caption>Selected icon</caption>
                     <description/>
                 </property>
                 <property key="maximumValue" type="integer" defaultValue="5">
