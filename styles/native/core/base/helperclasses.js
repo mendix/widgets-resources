@@ -45,6 +45,19 @@ export const backgroundSecondary = {
 };
 
 //== Flex layout
+export const flexMain = {
+    container: {
+        // flex 1 will take all available space not taken by flexItems.
+        flex: 1,
+    },
+};
+export const flexItem = {
+    container: {
+        // When flex is -1, the component is normally sized according width and height.
+        // However, if there's not enough space, the component will shrink to its minWidth and minHeight
+        flex: -1,
+    },
+};
 export const flexRow = {
     container: {
         flexDirection: 'row',
@@ -124,19 +137,6 @@ export const childrenCenter = {
     container: {
         ...justifyChildrenCenter,
         ...alignChildrenCenter,
-    },
-};
-export const flexMain = {
-    container: {
-        // flex 1 will take all available space not taken by flexItems.
-        flex: 1,
-    },
-};
-export const flexItem = {
-    container: {
-        // When flex is -1, the component is normally sized according width and height.
-        // However, if there's not enough space, the component will shrink to its minWidth and minHeight
-        flex: -1,
     },
 };
 export const alignSelfStretch = {

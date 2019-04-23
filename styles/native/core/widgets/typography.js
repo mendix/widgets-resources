@@ -15,6 +15,7 @@ export const Text = {
         // All TextStyle properties are allowed
         color: font.color,
         fontSize: font.size,
+        lineHeight: font.size,
     },
 };
 
@@ -94,17 +95,17 @@ export const textWhite = {
 
 export const textContrastLowest = {
     text: {
-        color: contrast.highest,
+        color: contrast.lowest,
     },
 };
 export const textContrastLower = {
     text: {
-        color: contrast.higher,
+        color: contrast.lower,
     },
 };
 export const textContrastLow = {
     text: {
-        color: contrast.high,
+        color: contrast.low,
     },
 };
 export const textContrastDefault = {
@@ -114,17 +115,17 @@ export const textContrastDefault = {
 };
 export const textContrastHigh = {
     text: {
-        color: contrast.low,
+        color: contrast.high,
     },
 };
 export const textContrastHigher = {
     text: {
-        color: contrast.lower,
+        color: contrast.higher,
     },
 };
 export const textContrastHighest = {
     text: {
-        color: contrast.lowest,
+        color: contrast.highest,
     },
 };
 

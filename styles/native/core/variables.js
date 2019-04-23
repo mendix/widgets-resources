@@ -8,8 +8,8 @@ import adjustFont from './_helperfunctions/adjustfont';
 // System defined read-only values
 export const { height: deviceHeight, width: deviceWidth } = Dimensions.get('window');
 
+// Dark Mode
 const darkMode = false;
-const backgroundColor = darkMode ? '#222' : '#FFF';
 
 // Brand Style
 export const brand = {
@@ -20,12 +20,14 @@ export const brand = {
 };
 
 // Background Colors
+const backgroundColor = darkMode ? '#222' : '#FFF';
+
 export const background = {
     primary: backgroundColor,
     secondary: setContrastScale(0.03, backgroundColor),
 };
 
-// Gray colors
+// Contrast (Gray) colors based on background.primary
 export const contrast = {
     highest: setContrastScale(0.95, background.primary),
     higher: setContrastScale(0.8, background.primary),
