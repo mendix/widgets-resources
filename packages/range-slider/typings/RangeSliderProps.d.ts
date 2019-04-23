@@ -18,6 +18,5 @@ export interface RangeSliderProps<Style> extends CommonProps<Style> {
     minimumValue: DynamicValue<BigJs.Big>;
     maximumValue: DynamicValue<BigJs.Big>;
     stepSize: DynamicValue<BigJs.Big>;
-    onSlide?: ActionValue;
     onChange?: ActionValue;
 }

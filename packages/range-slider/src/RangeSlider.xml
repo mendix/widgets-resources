@@ -54,10 +54,6 @@
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Events">
-            <property key="onSlide" type="action" required="false">
-                <caption>On slide</caption>
-                <description>Called when the value changes while the user is sliding the handle.</description>
-            </property>
             <property key="onChange" type="action" required="false">
                 <caption>On change</caption>
                 <description>Called when the user releases the handle and the value has changed.</description>

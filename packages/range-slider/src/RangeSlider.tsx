@@ -71,10 +71,6 @@ export class RangeSlider extends Component<Props, State> {
         ) {
             this.props.lowerValueAttribute.setTextValue(String(values[0]));
             this.props.upperValueAttribute.setTextValue(String(values[1]));
-
-            if (this.props.onSlide && this.props.onSlide.canExecute) {
-                this.props.onSlide.execute();
-            }
         }
     }
 
