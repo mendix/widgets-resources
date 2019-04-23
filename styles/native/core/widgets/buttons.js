@@ -138,11 +138,6 @@ export const btnIconPrimary = {
     container: {
         borderWidth: 0,
         backgroundColor: 'transparent',
-        padding: 0,
-        paddingTop: 0,
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingBottom: 0,
         paddingVertical: 0,
         paddingHorizontal: 0,
     },

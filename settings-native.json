@@ -275,6 +275,13 @@
             },
 
             {
+                "name": "Wrap children",
+                "type": "Toggle",
+                "description": "Determines if children can flow into multiple lines if they hit the end of the container.",
+                "class": "flexWrap"
+            },
+
+            {
                 "name": "Align children",
                 "type": "Dropdown",
                 "description": "Align children in the opposite direction.",
@@ -512,6 +519,13 @@
             },
 
             {
+                "name": "Wrap children",
+                "type": "Toggle",
+                "description": "Determines if children can flow into multiple lines if they hit the end of the container.",
+                "class": "flexWrap"
+            },
+
+            {
                 "name": "Align children",
                 "type": "Dropdown",
                 "description": "Align children in the opposite direction.",
@@ -663,7 +677,7 @@
                         "class": "textContrastLow"
                     },
                     {
-                        "name": "Conrast default",
+                        "name": "Contrast default",
                         "class": "textContrastDefault"
                     },
                     {
@@ -764,7 +778,7 @@
             {
                 "name": "Tab bar scroll",
                 "type": "Toggle",
-                "description": "Enable the ability to scroll the tab bar horizontally.",
+                "description": "Enable horizontal scroll for the tab bar.",
                 "class": "tabContainerScroll"
             }
         ],

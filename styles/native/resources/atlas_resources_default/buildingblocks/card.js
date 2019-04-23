@@ -11,7 +11,7 @@ export const card = {
         backgroundColor: background.primary,
 
         alignItems: 'center',
-        paddingHorizontal: spacing.regular,
+        paddingHorizontal: spacing.largest,
         paddingTop: spacing.regular,
         paddingBottom: spacing.large,
         marginHorizontal: spacing.regular,
