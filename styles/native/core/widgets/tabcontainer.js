@@ -50,7 +50,6 @@ export const tabContainerScroll = {
 // Tab container as content of page
 export const tabContainerMinimal = {
     container: {
-        tabBarPosition: 'top',
         backgroundColor: 'transparent',
     },
     tabBar: {

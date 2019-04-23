@@ -101,3 +101,9 @@ export const btnListItemTop = merge(btnListItem, {
         borderTopWidth: 1,
     },
 });
+
+export const square = {
+    container: {
+        aspectRatio: 1,
+    },
+};

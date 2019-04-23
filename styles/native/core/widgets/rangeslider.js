@@ -10,6 +10,7 @@ import { Platform } from 'react-native';
 export const com_mendix_widget_native_rangeslider_RangeSlider = (RangeSlider = {
     container: {
         // All ViewStyle properties are allowed
+        alignSelf: 'stretch',
     },
     track: {
         // All ViewStyle properties are allowed
