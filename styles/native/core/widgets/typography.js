@@ -23,6 +23,7 @@ export const TextHeading1 = {
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH1,
+        lineHeight: font.sizeH1,
         marginBottom: spacing.small,
     },
 };
@@ -30,6 +31,7 @@ export const TextHeading2 = {
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH2,
+        lineHeight: font.sizeH2,
         marginBottom: spacing.small,
     },
 };
@@ -37,6 +39,7 @@ export const TextHeading3 = {
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH3,
+        lineHeight: font.sizeH3,
         marginBottom: spacing.small,
     },
 };
@@ -44,6 +47,7 @@ export const TextHeading4 = {
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH4,
+        lineHeight: font.sizeH4,
         marginBottom: spacing.smaller,
     },
 };
@@ -51,6 +55,7 @@ export const TextHeading5 = {
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH5,
+        lineHeight: font.sizeH5,
         marginBottom: spacing.smallest,
     },
 };
@@ -58,6 +63,7 @@ export const TextHeading6 = {
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH6,
+        lineHeight: font.sizeH6,
         marginBottom: spacing.smallest,
     },
 };
@@ -175,11 +181,13 @@ export const textBold = {
 export const textSmall = {
     text: {
         fontSize: font.sizeSmall,
+        lineHeight: font.sizeSmall,
     },
 };
 export const textLarge = {
     text: {
         fontSize: font.sizeLarge,
+        lineHeight: font.sizeLarge,
     },
 };
 

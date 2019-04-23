@@ -9,7 +9,6 @@ import { border, background } from '../variables';
 export const ListView = {
     container: {
         // numColumns and all ViewStyle properties are allowed
-        numColumns: 1,
     },
     listItem: {
         // All ViewStyle properties are allowed
