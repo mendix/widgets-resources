@@ -8,10 +8,10 @@ export interface ProgressBarStyle extends Style {
         backgroundColor: string;
     };
 }
+
 export const defaultProgressBarStyle: ProgressBarStyle = {
     container: {},
     bar: {
-        width: "100%",
         height: 6,
         ...Platform.select({
             ios: {

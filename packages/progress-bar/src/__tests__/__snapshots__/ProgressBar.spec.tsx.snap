@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgressBar renders 1`] = `
+<View
+  style={Object {}}
+>
+  <View
+    animated={true}
+    animationConfig={
+      Object {
+        "bounciness": 0,
+      }
+    }
+    animationType="spring"
+    indeterminate={false}
+    indeterminateAnimationDuration={1000}
+    onLayout={[Function]}
+    progress={0.5}
+    style={
+      Array [
+        Object {
+          "backgroundColor": undefined,
+          "borderColor": "rgb(0,122,255)",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "overflow": "hidden",
+          "width": null,
+        },
+        Object {
+          "borderColor": "rgb(0,122,255)",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "height": 6,
+        },
+      ]
+    }
+    useNativeDriver={false}
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "rgb(0,122,255)",
+          "height": 6,
+          "transform": Array [
+            Object {
+              "translateX": 0,
+            },
+            Object {
+              "translateX": 0.5,
+            },
+            Object {
+              "scaleX": 0.50005,
+            },
+          ],
+        }
+      }
+    />
+  </View>
+</View>
+`;

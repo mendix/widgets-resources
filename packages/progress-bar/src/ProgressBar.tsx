@@ -6,7 +6,9 @@ import { Bar } from "react-native-progress";
 import { ProgressBarProps } from "../typings/ProgressBarProps";
 import { defaultProgressBarStyle, ProgressBarStyle } from "./ui/Styles";
 
-export class ProgressBar extends Component<ProgressBarProps<ProgressBarStyle>> {
+export type Props = ProgressBarProps<ProgressBarStyle>;
+
+export class ProgressBar extends Component<Props> {
     private readonly styles = flattenStyles(defaultProgressBarStyle, this.props.style);
 
     private get progress(): number {
@@ -23,13 +25,11 @@ export class ProgressBar extends Component<ProgressBarProps<ProgressBarStyle>> {
     }
 
     render(): JSX.Element {
-        const width = this.styles.bar.width && typeof this.styles.bar.width !== "string" ? this.styles.bar.width : null;
-
         return (
             <View style={this.styles.container}>
                 <Bar
                     height={Number(this.styles.bar.height)}
-                    width={width}
+                    width={null}
                     progress={this.progress}
                     color={this.styles.fill.backgroundColor}
                     borderWidth={this.styles.bar.borderWidth}
