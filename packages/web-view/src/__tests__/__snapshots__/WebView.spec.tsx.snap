@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WebView renders a web view when a url is provided 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "overflow": "hidden",
+    }
+  }
+>
+  <RNCWKWebView
+    cacheEnabled={true}
+    messagingEnabled={false}
+    onError={[Function]}
+    onLoad={[Function]}
+    onLoadingError={[Function]}
+    onLoadingFinish={[Function]}
+    onLoadingProgress={[Function]}
+    onLoadingStart={[Function]}
+    onMessage={[Function]}
+    onShouldStartLoadWithRequest={[Function]}
+    source={
+      Object {
+        "uri": "https://mendix.com",
+      }
+    }
+    style={
+      Array [
+        Object {
+          "flex": 1,
+          "overflow": "hidden",
+        },
+        Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "height": "100%",
+          "width": "100%",
+        },
+      ]
+    }
+    useSharedProcessPool={true}
+  />
+</View>
+`;
+
+exports[`WebView renders a web view when html content is provided 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "overflow": "hidden",
+    }
+  }
+>
+  <RNCWKWebView
+    cacheEnabled={true}
+    messagingEnabled={false}
+    onError={[Function]}
+    onLoad={[Function]}
+    onLoadingError={[Function]}
+    onLoadingFinish={[Function]}
+    onLoadingProgress={[Function]}
+    onLoadingStart={[Function]}
+    onMessage={[Function]}
+    onShouldStartLoadWithRequest={[Function]}
+    source={
+      Object {
+        "html": "Hello, world!",
+      }
+    }
+    style={
+      Array [
+        Object {
+          "flex": 1,
+          "overflow": "hidden",
+        },
+        Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "height": "100%",
+          "width": "100%",
+        },
+      ]
+    }
+    useSharedProcessPool={true}
+  />
+</View>
+`;
+
+exports[`WebView renders an error when no url or content is provided 1`] = `
+<View
+  style={Object {}}
+>
+  <Text
+    style={
+      Object {
+        "color": "red",
+        "fontWeight": "bold",
+      }
+    }
+  >
+    No URL or content was provided.
+  </Text>
+</View>
+`;
