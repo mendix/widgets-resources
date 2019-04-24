@@ -6,7 +6,9 @@ import RNQRCode from "react-native-qrcode-svg";
 import { QRCodeProps } from "../typings/QRCodeProps";
 import { defaultQRCodeStyle } from "./ui/Styles";
 
-export class QRCode extends Component<QRCodeProps<undefined>> {
+export type Props = QRCodeProps<undefined>;
+
+export class QRCode extends Component<Props> {
     private readonly styles = flattenStyles(defaultQRCodeStyle, this.props.style);
 
     render(): JSX.Element {
