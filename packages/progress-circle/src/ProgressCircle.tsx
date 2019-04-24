@@ -6,7 +6,9 @@ import { Circle } from "react-native-progress";
 import { ProgressCircleProps } from "../typings/ProgressCircleProps";
 import { defaultProgressCircleStyle, ProgressCircleStyle } from "./ui/Styles";
 
-export class ProgressCircle extends Component<ProgressCircleProps<ProgressCircleStyle>> {
+export type Props = ProgressCircleProps<ProgressCircleStyle>;
+
+export class ProgressCircle extends Component<Props> {
     private readonly formatTextHandler = this.formatText.bind(this);
     private readonly styles = flattenStyles(defaultProgressCircleStyle, this.props.style);
 
@@ -44,14 +46,12 @@ export class ProgressCircle extends Component<ProgressCircleProps<ProgressCircle
         );
     }
 
-    private formatText(): string | null {
-        switch (this.props.circleText) {
+    private formatText(): string {
+        switch (this.props.circleText as "customText" | "percentage") {
             case "customText":
                 return (this.props.customText && this.props.customText.value) || "";
             case "percentage":
                 return `${Math.round(this.progress * 100)}%`;
-            case "none":
-                return null;
         }
     }
 }

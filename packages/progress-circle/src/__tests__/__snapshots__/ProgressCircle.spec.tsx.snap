@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgressCircle renders 1`] = `
+<View
+  style={Object {}}
+>
+  <View
+    indeterminateAnimationDuration={1000}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+          "overflow": "hidden",
+        },
+        undefined,
+      ]
+    }
+  >
+    <ARTSurfaceView
+      style={
+        Array [
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          },
+          Object {
+            "height": 100,
+            "width": 100,
+          },
+        ]
+      }
+    >
+      <ARTShape
+        d={
+          Array [
+            0,
+            50,
+            2.5,
+            3,
+            76.23352561696268,
+            2.5,
+            97.5,
+            23.766474383037306,
+            97.5,
+            49.99999999999999,
+            3,
+            97.5,
+            76.23352561696268,
+            76.2335256169627,
+            97.5,
+            50.000000000000014,
+            97.5,
+          ]
+        }
+        fill={null}
+        opacity={1}
+        stroke={
+          Array [
+            0,
+            0.47843137254901963,
+            1,
+            1,
+          ]
+        }
+        strokeCap={2}
+        strokeDash={null}
+        strokeJoin={1}
+        strokeWidth={3}
+        transform={
+          Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ]
+        }
+      />
+      <ARTShape
+        d={
+          Array [
+            0,
+            50,
+            0.5,
+            4,
+            50,
+            50,
+            49.5,
+            -1.5707963267948966,
+            1.5707963267948966,
+            1,
+            4,
+            50,
+            50,
+            49.5,
+            1.5707963267948966,
+            -1.5707963267948966,
+            1,
+            1,
+          ]
+        }
+        fill={null}
+        opacity={1}
+        stroke={
+          Array [
+            0,
+            0.47843137254901963,
+            1,
+            1,
+          ]
+        }
+        strokeCap={2}
+        strokeDash={null}
+        strokeJoin={1}
+        strokeWidth={1}
+        transform={
+          Array [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+          ]
+        }
+      />
+    </ARTSurfaceView>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderRadius": 46,
+          "height": 92,
+          "justifyContent": "center",
+          "left": 4,
+          "position": "absolute",
+          "top": 4,
+          "width": 92,
+        }
+      }
+    >
+      <Text
+        allowFontScaling={true}
+        style={
+          Array [
+            Object {
+              "color": "rgb(0, 122, 255)",
+              "fontSize": 20.444444444444443,
+              "fontWeight": "300",
+            },
+            Object {
+              "color": "rgb(0, 122, 255)",
+              "fontSize": 18,
+            },
+          ]
+        }
+      >
+        50%
+      </Text>
+    </View>
+  </View>
+</View>
+`;
