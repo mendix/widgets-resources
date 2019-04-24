@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoPlayer hides the loading indicator after load 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "black",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
+exports[`VideoPlayer renders a loading indicator 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "black",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <ActivityIndicator
+    animating={true}
+    color="white"
+    hidesWhenStopped={true}
+    size="large"
+  />
+</View>
+`;
+
+exports[`VideoPlayer shows the loading indicator if the source changes 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "black",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <ActivityIndicator
+    animating={true}
+    color="white"
+    hidesWhenStopped={true}
+    size="large"
+  />
+</View>
+`;

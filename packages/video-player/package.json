@@ -15,6 +15,7 @@
         "build:release": "NODE_ENV=production npm run gulp build",
         "gulp": "../../node_modules/.bin/gulp --gulpfile ../../scripts/gulpfile.js --cwd .",
         "lint": "../../node_modules/.bin/tslint --project tsconfig.json --config ../../tslint.json",
+        "test": "../../node_modules/.bin/jest --config ../../scripts/jest.config.js",
         "version": "npm run build:release",
         "postversion": "node ../../scripts/UpdateGithubRelease.js"
     },

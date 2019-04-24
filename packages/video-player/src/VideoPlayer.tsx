@@ -6,11 +6,13 @@ import Video from "react-native-video";
 import { VideoPlayerProps } from "../typings/VideoPlayerProps";
 import { defaultVideoStyle } from "./ui/Styles";
 
+export type Props = VideoPlayerProps<undefined>;
+
 interface State {
     loading: boolean;
 }
 
-export class VideoPlayer extends Component<VideoPlayerProps<undefined>, State> {
+export class VideoPlayer extends Component<Props, State> {
     readonly state = {
         loading: true
     };
