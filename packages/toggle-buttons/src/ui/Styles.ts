@@ -10,8 +10,9 @@ export interface ToggleButtonsStyle extends Style {
     activeButtonText: TextStyle;
 }
 
-const blue = "rgb(0,122,255)";
-const purple = "rgb(98,0,238)";
+const blue = "rgb(0, 122, 255)";
+const purple = "rgb(98, 0, 238)";
+
 export const defaultToggleButtonsStyle: ToggleButtonsStyle = {
     container: {
         borderRadius: Platform.select({ ios: 5, android: 3 })
@@ -23,30 +24,26 @@ export const defaultToggleButtonsStyle: ToggleButtonsStyle = {
         borderRadius: 0,
         borderColor: Platform.select({ ios: blue, android: "#CCC" })
     },
-    text: {
-        ...(Platform.select({
-            ios: {
-                color: blue
-            },
-            android: {
-                color: "#666",
-                paddingVertical: 3,
-                fontWeight: "600"
-            }
-        }) as TextStyle)
-    },
-    activeButton: {
-        ...Platform.select({
-            ios: {
-                borderColor: blue,
-                backgroundColor: blue
-            },
-            android: {
-                borderColor: purple,
-                backgroundColor: purple
-            }
-        })
-    },
+    text: Platform.select({
+        ios: {
+            color: blue
+        },
+        android: {
+            color: "#666",
+            paddingVertical: 3,
+            fontWeight: "600"
+        }
+    }),
+    activeButton: Platform.select({
+        ios: {
+            borderColor: blue,
+            backgroundColor: blue
+        },
+        android: {
+            borderColor: purple,
+            backgroundColor: purple
+        }
+    }),
     activeButtonText: {
         color: "#fff"
     }

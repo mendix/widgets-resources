@@ -1,0 +1,7 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "include": ["../../typings", "./typings", "./src/__tests__"],
+    "compilerOptions": {
+        "types": ["jest"]
+    }
+}

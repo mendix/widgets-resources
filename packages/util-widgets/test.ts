@@ -17,7 +17,7 @@ export class EditableValueBuilder<T extends string | boolean | Date | BigJs.Big>
         validation: undefined,
         readOnly: false,
         formatter: {
-            format: jest.fn(),
+            format: jest.fn(name => `Formatted ${name}`),
             parse: jest.fn(),
             getFormatPlaceholder: jest.fn()
         },

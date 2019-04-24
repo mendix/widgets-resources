@@ -5,7 +5,9 @@ import SegmentedControlTab from "react-native-segmented-control-tab";
 import { ToggleButtonsProps } from "../typings/ToggleButtonsProps";
 import { defaultToggleButtonsStyle, ToggleButtonsStyle } from "./ui/Styles";
 
-export class ToggleButtons extends Component<ToggleButtonsProps<ToggleButtonsStyle>> {
+export type Props = ToggleButtonsProps<ToggleButtonsStyle>;
+
+export class ToggleButtons extends Component<Props> {
     private readonly onChangeHandler = this.onChange.bind(this);
     private readonly styles = flattenStyles(defaultToggleButtonsStyle, this.props.style);
 
