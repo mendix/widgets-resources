@@ -8,12 +8,16 @@ import { RNCamera } from "./__mocks__/RNCamera";
 
 jest.mock("react-native-camera", () => require.requireActual("./__mocks__/RNCamera"));
 
-const defaultProps: Props = {
-    style: [],
-    barcode: new EditableValueBuilder<string>().build()
-};
-
 describe("BarcodeScanner", () => {
+    let defaultProps: Props;
+
+    beforeEach(() => {
+        defaultProps = {
+            style: [],
+            barcode: new EditableValueBuilder<string>().build()
+        };
+    });
+
     it("renders", () => {
         const component = render(<BarcodeScanner {...defaultProps} />);
 
