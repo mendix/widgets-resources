@@ -107,3 +107,9 @@ export const square = {
         aspectRatio: 1,
     },
 };
+
+export const cardFOB = {
+    container: {
+        height: 150
+    }
+}

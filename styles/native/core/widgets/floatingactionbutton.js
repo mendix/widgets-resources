@@ -1,4 +1,4 @@
-import { brand, font, contrast } from '../variables';
+import { background, brand, font, contrast } from '../variables';
 
 export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton = (FloatingActionButton = {
     container: {
@@ -23,7 +23,7 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
     },
     secondaryButton: {
         size: 40,
-        backgroundColor: contrast.lowest,
+        backgroundColor: background.secondary,
         shadowColor: contrast.lower,
         shadowOpacity: 0.9,
         shadowRadius: 4,

@@ -1,14 +1,16 @@
 import {} from '../variables';
 
 /* ==========================================================================
-    Color Wheel
+    Color Picker
 
-    Default Class For Mendix Color Wheel Widget
+    Default Class For Mendix Color Picker Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_colorwheel_ColorWheel = (ColorWheel = {
+export const com_mendix_widget_native_colorpicker_ColorPicker = (ColorPicker = {
     container: {
         // All ViewStyle properties are allowed
+        height: 150,
+        width: 150,
     },
     thumbnail: {
         // All ViewStyle properties are allowed
