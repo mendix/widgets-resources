@@ -41,6 +41,10 @@ export const DropDown = {
         paddingHorizontal: input.paddingHorizontal,
         paddingVertical: input.paddingVertical,
     },
+    valueDisabled: {
+        // All TextStyle properties are allowed
+        backgroundColor: input.disabledBackgroundColor,
+    },
     validationMessage: {
         // All TextStyle properties are allowed
         ...TextBox.validationMessage,
