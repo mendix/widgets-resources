@@ -42,14 +42,17 @@ export class Maps extends Component<Props, State> {
                 mapType={this.props.mapType}
                 showsUserLocation={this.props.showsUserLocation}
                 showsMyLocationButton={this.props.showsUserLocation}
-                showsTraffic={this.props.mapType !== "satellite"}
+                showsTraffic={false}
                 minZoomLevel={toZoomValue(this.props.minZoomLevel)}
                 maxZoomLevel={toZoomValue(this.props.maxZoomLevel)}
-                rotateEnabled={this.props.scrollEnabled}
-                scrollEnabled={this.props.scrollEnabled}
-                pitchEnabled={this.props.scrollEnabled}
-                zoomEnabled={this.props.scrollEnabled}
+                rotateEnabled={this.props.interactive}
+                scrollEnabled={this.props.interactive}
+                pitchEnabled={false}
+                zoomEnabled={this.props.interactive}
                 style={this.styles.container}
+                liteMode={!this.props.interactive}
+                cacheEnabled={!this.props.interactive}
+                showsPointsOfInterest={false}
             >
                 {this.props.markers.map((marker, index) => this.renderMarker(marker, index))}
             </MapView>
@@ -66,13 +69,13 @@ export class Maps extends Component<Props, State> {
         return (
             <Marker
                 key={"map_marker_" + index}
-                title={marker.title && marker.title.value}
-                description={marker.description && marker.description.value}
+                title={this.props.interactive ? marker.title && marker.title.value : ""}
+                description={this.props.interactive ? marker.description && marker.description.value : ""}
                 coordinate={coordinate}
                 pinColor={marker.color || this.styles.marker.color}
                 opacity={this.styles.marker.opacity}
                 // tslint:disable-next-line:jsx-no-lambda
-                onPress={() => onMarkerPress(marker.onPress)}
+                onPress={() => (this.props.interactive ? onMarkerPress(marker.onClick) : null)}
             >
                 {marker.icon && marker.icon.value && (
                     <Icon

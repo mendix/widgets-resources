@@ -38,9 +38,9 @@
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Events">
-                            <property key="onPress" type="action" required="false">
-                                <caption>On press</caption>
-                                <description/>
+                            <property key="onClick" type="action" required="false">
+                                <caption>On click</caption>
+                                <description>To enable the click event the map 'Interactive' property should be set to 'Yes'.</description>
                             </property>
                         </propertyGroup>
                     </propertyGroup>
@@ -148,13 +148,13 @@
                     <enumerationValue key="google">Google Maps</enumerationValue>
                 </enumerationValues>
             </property>
+            <property key="interactive" type="boolean" defaultValue="false">
+                <caption>Interactive</caption>
+                <description>Enables interactive zoom and pitch and click events. Not recommended when you have multiple maps in the same page for better performance.</description>
+            </property>
             <property key="showsUserLocation" type="boolean" defaultValue="false">
                 <caption>Show user location</caption>
                 <description>Show the current location of the user, requires permission to access the user's location.</description>
-            </property>
-            <property key="scrollEnabled" type="boolean" defaultValue="true">
-                <caption>Enable scroll</caption>
-                <description>Allow the user to change the map region being displayed.</description>
             </property>
         </propertyGroup>
     </properties>

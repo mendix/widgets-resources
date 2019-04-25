@@ -15,7 +15,7 @@ export interface MarkersType {
     longitude?: DynamicValue<BigJs.Big>;
     title?: DynamicValue<string>;
     description?: DynamicValue<string>;
-    onPress?: ActionValue;
+    onClick?: ActionValue;
     icon?: DynamicValue<NativeIcon>;
     iconSize: number;
     color?: string;
@@ -42,6 +42,6 @@ export interface MapsProps<Style> extends CommonProps<Style> {
     maxZoomLevel: MaxZoomLevelEnum;
     mapType: MapTypeEnum;
     provider: ProviderEnum;
+    interactive: boolean;
     showsUserLocation: boolean;
-    scrollEnabled: boolean;
 }
