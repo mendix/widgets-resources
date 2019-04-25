@@ -6,8 +6,9 @@ module.exports = {
     rootDir: "../",
     transform: {
         "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js",
-        "\\.(ts|tsx)$": "ts-jest"
+        "^.+\\.tsx?$": "ts-jest"
     },
+    transformIgnorePatterns: ["node_modules/(?!react-native|@ptomasroos/react-native-multi-slider)"],
     testMatch: [`${cwd}/src/**/*.spec.{ts,tsx}`],
     globals: {
         "ts-jest": {

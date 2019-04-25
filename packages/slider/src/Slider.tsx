@@ -8,7 +8,9 @@ import { SliderProps } from "../typings/SliderProps";
 import { Marker } from "./Marker";
 import { defaultSliderStyle, SliderStyle, State } from "./ui/Styles";
 
-export class Slider extends Component<SliderProps<SliderStyle>, State> {
+export type Props = SliderProps<SliderStyle>;
+
+export class Slider extends Component<Props, State> {
     readonly state: State = {};
 
     private readonly onLayoutHandler = this.onLayout.bind(this);

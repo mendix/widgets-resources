@@ -1,0 +1,161 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slider renders 1`] = `
+<View
+  onLayout={[Function]}
+  style={Object {}}
+>
+  <View
+    style={
+      Array [
+        Object {
+          "height": 50,
+          "justifyContent": "center",
+          "position": "relative",
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 280,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#A7A7A7",
+              "borderRadius": 2,
+              "height": 2,
+            },
+            Object {
+              "backgroundColor": "rgba(0,122,255,0.3)",
+            },
+            Object {
+              "backgroundColor": "rgb(0,122,255)",
+            },
+            Object {
+              "width": 140,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#A7A7A7",
+              "borderRadius": 2,
+              "height": 2,
+            },
+            Object {
+              "backgroundColor": "rgba(0,122,255,0.3)",
+            },
+            undefined,
+            Object {
+              "width": 140,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "height": 48,
+              "justifyContent": "center",
+              "position": "absolute",
+              "width": 48,
+            },
+            Object {
+              "left": 116,
+              "top": -24,
+            },
+            undefined,
+            false,
+          ]
+        }
+      >
+        <View
+          onMoveShouldSetResponder={[Function]}
+          onMoveShouldSetResponderCapture={[Function]}
+          onResponderEnd={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderReject={[Function]}
+          onResponderRelease={[Function]}
+          onResponderStart={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          onStartShouldSetResponderCapture={[Function]}
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "alignSelf": "stretch",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              },
+              Object {
+                "borderRadius": 15,
+              },
+            ]
+          }
+        >
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={null}
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "#FFFFFF",
+                    "borderColor": "#DDDDDD",
+                    "borderRadius": 30,
+                    "borderWidth": 1,
+                    "height": 30,
+                    "shadowColor": "#000000",
+                    "shadowOffset": Object {
+                      "height": 3,
+                      "width": 0,
+                    },
+                    "shadowOpacity": 0.2,
+                    "shadowRadius": 1,
+                    "width": 30,
+                  },
+                  Array [
+                    undefined,
+                    Object {},
+                  ],
+                  undefined,
+                  undefined,
+                ]
+              }
+            />
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
