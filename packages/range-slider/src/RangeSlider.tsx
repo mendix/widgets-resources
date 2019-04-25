@@ -8,7 +8,9 @@ import { RangeSliderProps } from "../typings/RangeSliderProps";
 import { Marker } from "./Marker";
 import { defaultRangeSliderStyle, RangeSliderStyle, State } from "./ui/Styles";
 
-export class RangeSlider extends Component<RangeSliderProps<RangeSliderStyle>, State> {
+export type Props = RangeSliderProps<RangeSliderStyle>;
+
+export class RangeSlider extends Component<Props, State> {
     readonly state: State = {};
 
     private readonly onLayoutHandler = this.onLayout.bind(this);
