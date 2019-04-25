@@ -36,15 +36,15 @@ function hexToRgb(hex) {
 }
 
 /**
- * Converts HEX color to RGB string
+ * Converts any color format to RGB string
  *
- * @param   {string}    hex   Accepts HEX color
+ * @param   {string}    anyColor   Accepts any color format
  *
  * @return  {string} Returns RGB color; `r,g,b`
  */
-export function hexToRgbString(hex) {
-    const object = hexToRgb(hex);
-    return [object.r, object.g, object.b].join(',');
+export function anyColorToRgbString(anyColor) {
+    const { r, g, b } = checkColor(anyColor);
+    return [r, g, b].join(',');
 }
 
 /**

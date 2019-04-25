@@ -1,5 +1,5 @@
 import { Platform, Dimensions } from 'react-native';
-import { setColorBasedOnBackground, setContrastScale } from './_helperfunctions/calculatecontrast';
+import { setColorBasedOnBackground, setContrastScale } from './_helperfunctions/convertcolors';
 import adjustFont from './_helperfunctions/adjustfont';
 
 //== Global variables
