@@ -1,5 +1,5 @@
 //Custom variables
-export * from './app/custom_variables';
+export * from './app/custom-variables';
 
 //================================== CORE ==================================\\
 // Default variables
@@ -42,11 +42,11 @@ export * from './core/widgets/webview';
 //================================= CUSTOM =================================\\
 
 // Building blocks
-export * from './resources/atlas_resources_default/buildingblocks/card';
-export * from './resources/atlas_resources_default/buildingblocks/formblock';
+export * from './resources/atlas-resources-default/buildingblocks/card';
+export * from './resources/atlas-resources-default/buildingblocks/formblock';
 
 // Layouts
-// export * from "./resources/atlas_resources_default/layouts/";
+// export * from "./resources/atlas-resources-default/layouts/";
 
 // Custom
 export * from './app/custom';
