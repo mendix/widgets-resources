@@ -34,17 +34,19 @@ export const com_mendix_widget_native_slider_Slider = (Slider = {
         backgroundColor: background.secondary,
         ...Platform.select({
             ios: {
-                marginTop: 1,
-                shadowColor: '#666',
+                width: 30,
+                height: 30,
+                shadowColor: contrast.higher,
                 shadowOpacity: 0.2,
                 borderColor: contrast.lowest,
                 shadowOffset: { width: 0, height: 1 },
             },
             android: {
-                marginTop: 2,
+                width: 20,
+                height: 20,
+                borderRadius: 10,
                 elevation: 3,
                 borderColor: border.color,
-                transform: [{ scale: 1.75 }],
             },
         }),
     },
@@ -52,18 +54,20 @@ export const com_mendix_widget_native_slider_Slider = (Slider = {
         // All ViewStyle properties are allowed
         ...Platform.select({
             ios: {
-                marginTop: 1,
-                shadowOpacity: 0.2,
                 borderColor: contrast.lowest,
-                shadowOffset: { width: 0, height: 1 },
                 backgroundColor: background.secondary,
+                shadowColor: contrast.higher,
+                shadowOpacity: 0.2,
+                shadowOffset: { width: 0, height: 1 },
             },
             android: {
-                marginTop: 2,
-                borderWidth: 3,
-                transform: [{ scale: 1.5 }],
+                marginTop: 1,
                 borderColor: background.primary,
                 backgroundColor: contrast.low,
+                borderWidth: 3,
+                width: 14,
+                height: 14,
+                borderRadius: 7,
             },
         }),
     },
@@ -72,7 +76,9 @@ export const com_mendix_widget_native_slider_Slider = (Slider = {
         ...Platform.select({
             android: {
                 borderWidth: 0,
-                transform: [{ scale: 2 }],
+                width: 34,
+                height: 34,
+                borderRadius: 17,
             },
         }),
     },

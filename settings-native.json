@@ -831,6 +831,28 @@
             }
         ],
 
+        "com.mendix.widget.native.floatingactionbutton.FloatingActionButton": [
+            {
+                "name": "Style",
+                "type": "Dropdown",
+                "description": "Style of the Floating Action Button.",
+                "options": [
+                    {
+                        "name": "Success",
+                        "class": "floatingActionButtonSuccess"
+                    },
+                    {
+                        "name": "Warning",
+                        "class": "floatingActionButtonWarning"
+                    },
+                    {
+                        "name": "Danger",
+                        "class": "floatingActionButtonDanger"
+                    }
+                ]
+            }
+        ],
+
         "com.mendix.widget.native.maps.Maps": [
             {
                 "name": "Maps size",

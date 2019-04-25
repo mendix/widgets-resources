@@ -19,6 +19,7 @@ export * from './core/widgets/datepicker';
 export * from './core/widgets/dropdown';
 export * from './core/widgets/images';
 export * from './core/widgets/feedback';
+export * from './core/widgets/floatingactionbutton';
 export * from './core/widgets/listviews';
 export * from './core/widgets/maps';
 export * from './core/widgets/navigation';
