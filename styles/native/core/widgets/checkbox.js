@@ -14,6 +14,7 @@ export const CheckBox = {
         // All ViewStyle properties are allowed
         ...TextBox.container,
         paddingVertical: spacing.smallest,
+        justifyContent: 'center',
     },
     label: {
         // numberOfLines and all TextStyle properties are allowed
@@ -31,10 +32,10 @@ export const CheckBox = {
     inputError: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
         ...TextBox.inputError,
-        thumbColorOn: brand.primary,
-        trackColorOn: `rgba(${hexToRgbString(brand.primary)},0.2)`,
-        thumbColorOff: contrast.low,
-        trackColorOff: `rgba(${hexToRgbString(contrast.low)},0.2)`,
+        thumbColorOn: brand.danger,
+        trackColorOn: `rgba(${hexToRgbString(brand.danger)},0.2)`,
+        thumbColorOff: brand.danger,
+        trackColorOff: `rgba(${hexToRgbString(brand.danger)},0.2)`,
     },
     validationMessage: {
         // All TextStyle properties are allowed
