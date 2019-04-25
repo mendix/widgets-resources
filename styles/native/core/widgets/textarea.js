@@ -24,6 +24,10 @@ export const TextArea = {
         textAlignVertical: 'top',
         paddingTop: TextBox.input.paddingVertical,
     },
+    inputDisabled: {
+        // All TextStyle properties are allowed
+        backgroundColor: TextBox.inputDisabled.backgroundColor,
+    },
     inputError: {
         // All TextStyle properties are allowed
         ...TextBox.inputError,

@@ -129,6 +129,7 @@ let input = {
     errorColor: brand.danger,
     borderColor: contrast.lower,
     backgroundColor: background.primary,
+    disabledBackgroundColor: contrast.lowest,
     selectionColor: contrast.lower,
     placeholderTextColor: contrast.low,
     underlineColorAndroid: Platform.select({ android: 'transparent' }),
