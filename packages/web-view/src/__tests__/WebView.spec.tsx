@@ -1,8 +1,7 @@
 import { actionValue, dynamicValue } from "@native-components/util-widgets/test";
 import { createElement } from "react";
-import { View } from "react-native";
-import { render } from "react-native-testing-library";
-import { ReactTestInstance } from "react-test-renderer";
+import { fireEvent, render } from "react-native-testing-library";
+import { WebView as RNWebView } from "react-native-webview";
 
 import { Props, WebView } from "../WebView";
 
@@ -35,8 +34,7 @@ describe("WebView", () => {
         const onLoadAction = actionValue();
         const component = render(<WebView {...defaultProps} onLoad={onLoadAction} />);
 
-        const child = component.getByType(View).props.children[0] as ReactTestInstance;
-        child.props.onLoad();
+        fireEvent(component.getByType(RNWebView), "load");
 
         expect(onLoadAction.execute).toHaveBeenCalledTimes(1);
     });
@@ -45,8 +43,7 @@ describe("WebView", () => {
         const onErrorAction = actionValue();
         const component = render(<WebView {...defaultProps} onError={onErrorAction} />);
 
-        const child = component.getByType(View).props.children[0] as ReactTestInstance;
-        child.props.onError();
+        fireEvent(component.getByType(RNWebView), "error");
 
         expect(onErrorAction.execute).toHaveBeenCalledTimes(1);
     });

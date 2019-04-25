@@ -1,6 +1,6 @@
 import { dynamicValue } from "@native-components/util-widgets/test";
 import { createElement } from "react";
-import { render, RenderAPI } from "react-native-testing-library";
+import { fireEvent, render } from "react-native-testing-library";
 import { VideoProperties } from "react-native-video";
 
 import { Props, VideoPlayer } from "../VideoPlayer";
@@ -30,7 +30,7 @@ describe("VideoPlayer", () => {
 
     it("passes the right props to the video player", () => {
         const component = render(<VideoPlayer {...defaultProps} />);
-        const props = videoInstanceProps(component);
+        const props = component.getByType(Video).props as VideoProperties;
 
         expect(props.source).toEqual({ uri: "https://mendix.com/video.mp4" });
         expect(props.paused).toBe(true);
@@ -43,24 +43,19 @@ describe("VideoPlayer", () => {
     it("hides the loading indicator after load", () => {
         const component = render(<VideoPlayer {...defaultProps} />);
 
-        videoInstanceProps(component).onLoad!({} as any);
+        fireEvent(component.getByType(Video), "load");
 
         expect(component.toJSON()).toMatchSnapshot();
-        expect(videoInstanceProps(component).style).toEqual({ width: "100%", height: "100%" });
+        expect(component.getByType(Video).props.style).toEqual({ width: "100%", height: "100%" });
     });
 
     it("shows the loading indicator if the source changes", () => {
         const component = render(<VideoPlayer {...defaultProps} />);
 
-        videoInstanceProps(component).onLoad!({} as any);
-        videoInstanceProps(component).onLoadStart!();
+        fireEvent(component.getByType(Video), "load");
+        fireEvent(component.getByType(Video), "loadStart");
 
         expect(component.toJSON()).toMatchSnapshot();
-        expect(videoInstanceProps(component).style).toEqual({ height: 0 });
+        expect(component.getByType(Video).props.style).toEqual({ height: 0 });
     });
 });
-
-function videoInstanceProps(component: RenderAPI): VideoProperties {
-    const RNCameraInstance = component.getByType(Video);
-    return RNCameraInstance.props as VideoProperties;
-}

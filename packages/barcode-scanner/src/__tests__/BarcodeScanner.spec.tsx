@@ -1,7 +1,6 @@
 import { actionValue, EditableValueBuilder } from "@native-components/util-widgets/test";
 import { createElement } from "react";
-import { RNCameraProps } from "react-native-camera";
-import { render, RenderAPI } from "react-native-testing-library";
+import { fireEvent, render, RenderAPI } from "react-native-testing-library";
 
 import { BarcodeScanner, Props } from "../BarcodeScanner";
 import { RNCamera } from "./__mocks__/RNCamera";
@@ -43,10 +42,7 @@ describe("BarcodeScanner", () => {
 });
 
 function detectBarcode(component: RenderAPI, barcode: string): void {
-    const RNCameraInstance = component.getByType(RNCamera);
-    const instanceProps: RNCameraProps = RNCameraInstance.props;
-
-    instanceProps.onBarCodeRead!({
+    fireEvent(component.getByType(RNCamera), "barCodeRead", {
         data: barcode,
         type: "qr",
         bounds: [{ x: "", y: "" }, { x: "", y: "" }]
