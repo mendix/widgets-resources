@@ -69,8 +69,7 @@ export const defaultRangeSliderStyle: RangeSliderStyle = {
         ...Platform.select({
             android: {
                 borderWidth: 5,
-                borderColor: purpleLightest,
-                transform: [{ scale: 2 }]
+                borderColor: purpleLightest
             }
         })
     }
