@@ -120,6 +120,7 @@ function mendixExternalReferences() {
 
 function isExternal(id) {
     const externals = [
+        "big.js",
         "react",
         "react-dom",
         "react-native",
