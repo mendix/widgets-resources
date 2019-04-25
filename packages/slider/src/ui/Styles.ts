@@ -69,8 +69,7 @@ export const defaultSliderStyle: SliderStyle = {
         ...Platform.select({
             android: {
                 borderWidth: 5,
-                borderColor: purpleLightest,
-                transform: [{ scale: 2 }]
+                borderColor: purpleLightest
             }
         })
     }
