@@ -1,9 +1,10 @@
-//Custom variables
-export * from './app/custom-variables';
-
-//================================== CORE ==================================\\
 // Default variables
 export * from './core/variables';
+
+//Custom variables
+// export * from './app/custom-variables';
+
+//================================== CORE ==================================\\
 
 // Base
 export * from './core/base/helperclasses';

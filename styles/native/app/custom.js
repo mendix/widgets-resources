@@ -38,13 +38,11 @@ export const homeFooter = {
     container: {
         zIndex: 1,
         width: '100%',
-        // height: '100%',
     },
 };
 
 export const homeFooterLogo = {
     container: {
-        // width: '100%',
         alignSelf: 'center',
     },
     image: {
@@ -63,27 +61,20 @@ export const homeFooterText = {
 // Buttons
 export const btnListItem = {
     container: {
-        width: '100%',
+        flex: 1,
         borderWidth: 0,
         borderRadius: 0,
         borderBottomWidth: 1,
         borderColor: contrast.lowest,
         backgroundColor: background.primary,
         paddingHorizontal: spacing.small,
-        ...Platform.select({
-            ios: {
-                paddingVertical: spacing.smaller,
-            },
-            android: {
-                paddingVertical: spacing.small,
-            },
-        }),
+        paddingVertical: Platform.select({ ios: spacing.smaller, android: spacing.small }),
     },
     icon: {
         color: contrast.higher,
     },
     caption: {
-        width: '100%',
+        flex: 1,
         textAlign: 'left',
         fontSize: font.size,
         ...Platform.select({
@@ -110,6 +101,6 @@ export const square = {
 
 export const cardFOB = {
     container: {
-        height: 150
-    }
-}
+        height: 150,
+    },
+};

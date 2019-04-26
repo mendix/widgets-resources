@@ -1,10 +1,8 @@
 {
-    "editor.formatOnSave": true,
     "singleQuote": true,
-    "printWidth": 160,
+    "printWidth": 120,
     "proseWrap": "always",
     "tabWidth": 4,
-    "requireConfig": false,
     "useTabs": false,
     "trailingComma": "all",
     "bracketSpacing": true,
