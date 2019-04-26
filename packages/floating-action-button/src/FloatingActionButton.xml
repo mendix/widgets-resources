@@ -37,7 +37,7 @@
             <propertyGroup caption="Events">
                 <property key="onPress" type="action">
                     <caption>On click</caption>
-                    <description/>
+                    <description>This action will not be called when secondary buttons are used.</description>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">

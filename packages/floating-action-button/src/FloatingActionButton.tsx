@@ -112,6 +112,10 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
     }
 
     private onPress(): void {
+        if (this.props.speedDialButtons && this.props.speedDialButtons.length > 0) {
+            return;
+        }
+
         this.setState({ active: !this.state.active });
 
         executeAction(this.props.onPress);
