@@ -17,7 +17,7 @@ export class AppEvents extends Component<Props> {
     private lastOnOnline = 0;
     private lastOnOffline = 0;
 
-    private timeoutHandle?: number;
+    private timeoutHandle?: any;
 
     async componentDidMount(): Promise<void> {
         executeAction(this.props.onLoadAction);
@@ -89,7 +89,7 @@ export class AppEvents extends Component<Props> {
 }
 
 function executeAction(action?: ActionValue): void {
-    if (action && action.canExecute) {
+    if (action && action.canExecute && !action.isExecuting) {
         action.execute();
     }
 }

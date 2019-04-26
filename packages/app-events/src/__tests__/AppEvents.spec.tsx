@@ -36,6 +36,7 @@ describe("AppEvents", () => {
     afterEach(() => {
         appStateChangeHandler = undefined;
         connectionChangeHandler = undefined;
+        // setTimeout(); NodeJS.Timeout;
     });
 
     it("does not render anything", () => {
@@ -205,6 +206,14 @@ describe("AppEvents", () => {
             component.unmount();
             jest.advanceTimersByTime(30000);
             expect(onTimeoutAction.execute).toHaveBeenCalledTimes(1);
+        });
+
+        it("does not execute the interval on timeout action when it is already executing", () => {
+            const onTimeoutAction = actionValue(true, true);
+            render(<AppEvents {...defaultProps} onTimeoutAction={onTimeoutAction} timerType={"interval"} />);
+
+            jest.advanceTimersByTime(30000);
+            expect(onTimeoutAction.execute).not.toHaveBeenCalled();
         });
     });
 });
