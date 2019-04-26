@@ -111,7 +111,7 @@ function mendixExternalReferences() {
         name: "mendix-external-modules",
         resolveId: id => {
             if (id && /^@mendix\/pluggable-widgets-api\/components\//.test(id)) {
-                return id.replace("@mendix/pluggable-widgets-api/components", "mendix/components");
+                return id.replace("@mendix/pluggable-widgets-api/components/native", "mendix/components");
             }
             return null;
         }
