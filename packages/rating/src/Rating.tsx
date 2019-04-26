@@ -57,7 +57,7 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
 
         return (
             <StarRating
-                rating={Number(this.props.ratingAttribute.value)}
+                rating={Math.round(Number(this.props.ratingAttribute.value))}
                 disabled={disabled}
                 selectedStar={this.onChangeHandler}
                 halfStarEnabled={false}
