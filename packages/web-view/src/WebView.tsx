@@ -26,14 +26,19 @@ export class WebView extends Component<Props> {
         }
 
         return (
-            <RNWebView
-                source={html ? { html } : { uri: uri! }}
-                style={this.styles.container}
-                onLoad={this.onLoadHandler}
-                onError={this.onErrorHandler}
-                userAgent={this.props.userAgent}
-                useWebKit={true}
-            />
+            <View style={this.styles.container}>
+                <RNWebView
+                    source={html ? { html } : { uri: uri! }}
+                    style={{
+                        width: "100%",
+                        height: "100%"
+                    }}
+                    onLoad={this.onLoadHandler}
+                    onError={this.onErrorHandler}
+                    userAgent={this.props.userAgent}
+                    useWebKit={true}
+                />
+            </View>
         );
     }
 

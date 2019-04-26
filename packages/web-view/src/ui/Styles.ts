@@ -9,8 +9,9 @@ export interface WebViewStyle extends Style {
 
 export const defaultWebViewStyle: WebViewStyle = {
     container: {
-        width: "100%",
-        height: "100%"
+        flex: 1,
+        height: "100%",
+        minHeight: 300
     },
     errorContainer: {},
     errorText: {
