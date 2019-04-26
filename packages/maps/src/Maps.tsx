@@ -1,4 +1,4 @@
-import { Icon } from "@mendix/pluggable-widgets-api/components/Icon";
+import { Icon } from "@mendix/pluggable-widgets-api/components/native/Icon";
 import { ActionValue, DynamicValue } from "@mendix/pluggable-widgets-api/properties";
 import { flattenStyles } from "@native-components/util-widgets";
 import { Component, createElement, createRef } from "react";
