@@ -12,10 +12,7 @@ export interface MapsStyle extends Style {
 }
 
 export const defaultMapsStyle: MapsStyle = {
-    container: {
-        width: "100%",
-        height: "100%"
-    },
+    container: {},
     marker: {
         color: "red",
         opacity: 1

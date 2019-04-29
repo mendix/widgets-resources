@@ -2,6 +2,7 @@ import { Icon } from "@mendix/pluggable-widgets-api/components/native/Icon";
 import { ActionValue, DynamicValue } from "@mendix/pluggable-widgets-api/properties";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { Component, createElement, createRef } from "react";
+import { View } from "react-native";
 import Geocoder, { GeocodingObject } from "react-native-geocoder";
 import MapView, { LatLng, Marker } from "react-native-maps";
 
@@ -36,26 +37,29 @@ export class Maps extends Component<Props, State> {
 
     render(): JSX.Element {
         return (
-            <MapView
-                ref={this.mapViewRef}
-                provider={this.props.provider === "default" ? null : this.props.provider}
-                mapType={this.props.mapType}
-                showsUserLocation={this.props.showsUserLocation}
-                showsMyLocationButton={this.props.showsUserLocation}
-                showsTraffic={false}
-                minZoomLevel={toZoomValue(this.props.minZoomLevel)}
-                maxZoomLevel={toZoomValue(this.props.maxZoomLevel)}
-                rotateEnabled={this.props.interactive}
-                scrollEnabled={this.props.interactive}
-                pitchEnabled={false}
-                zoomEnabled={this.props.interactive}
-                style={this.styles.container}
-                liteMode={!this.props.interactive}
-                cacheEnabled={!this.props.interactive}
-                showsPointsOfInterest={false}
-            >
-                {this.props.markers.map((marker, index) => this.renderMarker(marker, index))}
-            </MapView>
+            <View style={this.styles.container}>
+                <MapView
+                    ref={this.mapViewRef}
+                    provider={this.props.provider === "default" ? null : this.props.provider}
+                    mapType={this.props.mapType}
+                    showsUserLocation={this.props.showsUserLocation}
+                    showsMyLocationButton={this.props.showsUserLocation}
+                    showsTraffic={false}
+                    minZoomLevel={toZoomValue(this.props.minZoomLevel)}
+                    maxZoomLevel={toZoomValue(this.props.maxZoomLevel)}
+                    rotateEnabled={this.props.interactive}
+                    scrollEnabled={this.props.interactive}
+                    pitchEnabled={false}
+                    zoomEnabled={this.props.interactive}
+                    style={{ flex: 1 }}
+                    liteMode={!this.props.interactive}
+                    cacheEnabled={!this.props.interactive}
+                    showsPointsOfInterest={false}
+                    mapPadding={{ top: 40, right: 20, bottom: 20, left: 20 }}
+                >
+                    {this.props.markers.map((marker, index) => this.renderMarker(marker, index))}
+                </MapView>
+            </View>
         );
     }
 
