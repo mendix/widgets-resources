@@ -58,7 +58,7 @@
                     <caption>Time</caption>
                     <description>How many second should pass before the action is called.</description>
                 </property>
-                <property key="onTimeoutAction" type="action">
+                <property key="onTimeoutAction" type="action" required="false">
                     <caption>On timeout</caption>
                     <description/>
                 </property>
