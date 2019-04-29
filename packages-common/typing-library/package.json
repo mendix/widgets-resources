@@ -2,7 +2,7 @@
   "name": "@mendix/pluggable-widgets-typing-generator",
   "version": "0.1.0",
   "description": "Mendix Pluggable Widgets typings generator",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "copyright": "Mendix 2019",
   "author": {
     "name": "Diego Antonelli",
