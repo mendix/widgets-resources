@@ -1,7 +1,12 @@
 {
     "name": "nanoflow-commons",
-    "version": "1.0.0-beta4",
+    "version": "1.0.0-beta",
     "private": true,
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mendix/nanoflow-commons.git"
+    },
     "scripts": {
         "start": "tsc --watch",
         "build": "npm run build:tsc && npm run build:babel",
