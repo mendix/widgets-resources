@@ -16,5 +16,6 @@ module.exports = {
         }
     },
     collectCoverage: true,
-    collectCoverageFrom: [`**/${packageName}/src/**/*`, "!**/*.snap", "!**/dist/**", "!**/mxproject/**"]
+    collectCoverageFrom: [`**/${packageName}/src/**/*`, "!**/*.snap", "!**/dist/**", "!**/mxproject/**"],
+    coverageDirectory: `packages/${packageName}/coverage`
 };

@@ -56,14 +56,12 @@ describe("RangeSlider", () => {
     });
 
     it("changes the lower value when swiping", () => {
-        const onSlideAction = actionValue();
         const onChangeAction = actionValue();
-        const component = render(<RangeSlider {...defaultProps} onSlide={onSlideAction} onChange={onChangeAction} />);
+        const component = render(<RangeSlider {...defaultProps} onChange={onChangeAction} />);
 
         fireEvent(getHandle(component), "responderGrant", { touchHistory: { touchBank: [] } });
         fireEvent(getHandle(component), "responderMove", responderMove(50));
 
-        expect(onSlideAction.execute).toHaveBeenCalledTimes(1);
         expect(onChangeAction.execute).not.toHaveBeenCalled();
 
         fireEvent(getHandle(component), "responderRelease", {});
@@ -74,14 +72,12 @@ describe("RangeSlider", () => {
     });
 
     it("changes the upper value when swiping", () => {
-        const onSlideAction = actionValue();
         const onChangeAction = actionValue();
-        const component = render(<RangeSlider {...defaultProps} onSlide={onSlideAction} onChange={onChangeAction} />);
+        const component = render(<RangeSlider {...defaultProps} onChange={onChangeAction} />);
 
         fireEvent(getHandle(component, 1), "responderGrant", { touchHistory: { touchBank: [] } });
         fireEvent(getHandle(component, 1), "responderMove", responderMove(-50));
 
-        expect(onSlideAction.execute).toHaveBeenCalledTimes(1);
         expect(onChangeAction.execute).not.toHaveBeenCalled();
 
         fireEvent(getHandle(component, 1), "responderRelease", {});
@@ -92,21 +88,16 @@ describe("RangeSlider", () => {
     });
 
     it("does not change the value when non editable", () => {
-        const onSlideAction = actionValue();
         const onChangeAction = actionValue();
-        const component = render(
-            <RangeSlider {...defaultProps} editable={"never"} onSlide={onSlideAction} onChange={onChangeAction} />
-        );
+        const component = render(<RangeSlider {...defaultProps} editable={"never"} onChange={onChangeAction} />);
 
         fireEvent(getHandle(component), "responderGrant", { touchHistory: { touchBank: [] } });
         fireEvent(getHandle(component), "responderMove", responderMove(50));
         fireEvent(getHandle(component), "responderRelease", {});
 
-        expect(onSlideAction.execute).not.toHaveBeenCalled();
         expect(onChangeAction.execute).not.toHaveBeenCalled();
         expect(defaultProps.lowerValueAttribute.setTextValue).not.toHaveBeenCalled();
         expect(defaultProps.upperValueAttribute.setTextValue).not.toHaveBeenCalled();
-        expect(onChangeAction.execute).not.toHaveBeenCalled();
     });
 });
 
