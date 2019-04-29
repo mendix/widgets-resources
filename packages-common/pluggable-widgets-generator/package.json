@@ -1,6 +1,6 @@
 {
   "name": "@mendix/generator-widget",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Mendix Pluggable Widget Generator",
   "license": "Apache-2.0",
   "main": "app/index.js",
@@ -13,7 +13,7 @@
     "email": "diego.antonelli@mendix.com"
   },
   "scripts": {
-    "test": "mocha ./generators/tests/*"
+    "test": "mocha ./tests/*"
   },
   "files": [
     "generators"
@@ -32,6 +32,7 @@
     "chalk": "^2.4.2",
     "each-async": "^1.1.1",
     "extfs": "^0.0.7",
+    "fs-extra": "^7.0.1",
     "indent-string": "^3.2.0",
     "semver": "^5.6.0",
     "xml2js": "^0.4.19",
@@ -39,8 +40,6 @@
   },
   "devDependencies": {
     "eslint": "^5.12.1",
-    "xml2js": "^0.4.19",
-    "fs-extra": "^7.0.1",
     "lodash": "^4.17.11",
     "mocha": "^6.0.1",
     "string-template": "1.0.0",
