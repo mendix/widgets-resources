@@ -12,7 +12,6 @@
         ],
         "no-boolean-literal-compare": true,
         "no-default-export": true,
-        "no-floating-promises": true,
         "no-for-in-array": true,
         "no-implicit-dependencies": false,
         "no-inferrable-types": [true, "ignore-params"],
