@@ -1,0 +1,11 @@
+import { Component, createElement } from "react";
+
+export interface HelloWorldSampleProps {
+    sampleText?: string;
+}
+
+export class HelloWorldSample extends Component<HelloWorldSampleProps> {
+    render(): JSX.Element {
+        return <div className="widget-hello-world">Hello {this.props.sampleText}</div>;
+    }
+}

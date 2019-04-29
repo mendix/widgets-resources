@@ -1,0 +1,14 @@
+import { Component, createElement } from "react";
+import { HelloWorldSample } from "./components/HelloWorldSample";
+import { hot } from "react-hot-loader/root";
+import { WidgetNameContainerProps } from "../typings/WidgetNameProps";
+
+import "./ui/WidgetName.css";
+
+class WidgetName extends Component<WidgetNameContainerProps> {
+    render(): JSX.Element {
+        return <HelloWorldSample sampleText={this.props.sampleText ? this.props.sampleText : "World"} />;
+    }
+}
+
+export default hot(WidgetName);

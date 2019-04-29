@@ -1,0 +1,21 @@
+import { Component, createElement } from "react";
+import { HelloWorldSample } from "./components/HelloWorldSample";
+import { WidgetNamePreviewProps, VisibilityMap } from "../typings/WidgetNameProps";
+
+declare function require(name: string): string;
+
+// eslint-disable-next-line @typescript-eslint/class-name-casing
+export class preview extends Component<WidgetNamePreviewProps> {
+    render(): JSX.Element {
+        return <HelloWorldSample sampleText={this.props.sampleText} />;
+    }
+}
+
+export function getVisibleProperties(_valueMap: WidgetNamePreviewProps, visibilityMap: VisibilityMap): VisibilityMap {
+    /* To hide any property in Web Modeler, please assign the property in visibilityMap to false */
+    return visibilityMap;
+}
+
+export function getPreviewCss(): string {
+    return require("./ui/WidgetName.css");
+}
