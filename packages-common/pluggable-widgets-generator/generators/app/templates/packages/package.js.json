@@ -1,0 +1,42 @@
+{
+  "name": "<%- packageName %>",
+  "widgetName": "<%- widgetName %>",
+  "version": "<%- version %>",
+  "description": "<%- description %>",
+  "copyright": "<%- copyright %>",
+  "author": "<%- author %>",
+  "config": {
+    "widgetPath": "<%- projectPath %>/widgets",
+    "projectPath": "<%- projectPath %>/",
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": "3000"
+  },
+  "packagePath": "<%- packagePath %>",
+  "scripts": {
+    "start": "concurrently \"npm run mx-script start:server -- --open\" \"npm:dev\"",
+    "dev": "npm run mx-script start:js",
+    "build": "npm run mx-script build:js",
+    "lint": "npm run mx-script lint",
+    "lint:fix": "npm run mx-script lint:fix",
+    "mx-script": "cd ./node_modules/@mendix/pluggable-widgets-tools && node bin/mx-scripts.js",<% if (unitTests || e2eTests) { %>
+    "pretest": "npm run lint && npm run build",<% } %><% if (unitTests) { %>
+    "test": "npm run mx-script test:unit -- --no-cache --ci<% if (e2eTests) { %> && npm run test:e2e<% } %>",
+    "test:unit": "npm run mx-script test:unit -- --coverage",<% } %><% if (e2eTests) { %>
+    "test:e2e": "export URL=https://badge.mxapps.io || set URL=https://badge.mxapps.io && npm run mx-script test:e2e:js",
+    "test:e2e:dev": "export DEBUG=true || set DEBUG=true && npm run mx-script test:e2e:js",<% } %>
+    "prerelease": "npm run lint",
+    "release": "npm run mx-script release:js"
+  },
+  "license": "<%- license %>",
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "^0.1.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-hot-loader": "^4.3.11",
+    "react-test-renderer": "^16.6.0"
+  },
+  "dependencies": {
+    "big.js": "^5.2.2",
+    "classnames": "^2.2.6"
+  }
+}

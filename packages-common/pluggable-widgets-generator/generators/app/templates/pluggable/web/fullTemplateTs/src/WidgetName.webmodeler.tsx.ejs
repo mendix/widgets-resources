@@ -1,0 +1,44 @@
+import { Component, createElement } from "react";
+import { BadgeSample, BadgeSampleProps } from "./components/BadgeSample";
+import { WidgetNamePreviewProps, VisibilityMap } from "../typings/WidgetNameProps";
+
+declare function require(name: string): string;
+
+// eslint-disable-next-line @typescript-eslint/class-name-casing
+export class preview extends Component<WidgetNamePreviewProps> {
+    render(): JSX.Element {
+        return (
+            <div ref={this.parentInline}>
+                <BadgeSample {...this.transformProps(this.props)}></BadgeSample>
+            </div>
+        );
+    }
+
+    private parentInline(node?: HTMLElement | null): void {
+        // Temporary fix, the web modeler add a containing div, to render inline we need to change it.
+        if (node && node.parentElement && node.parentElement.parentElement) {
+            node.parentElement.parentElement.style.display = "inline-block";
+        }
+    }
+
+    private transformProps(props: WidgetNamePreviewProps): BadgeSampleProps {
+        return {
+            type: props.packageNameType,
+            bootstrapStyle: props.bootstrapStyle,
+            className: props.class,
+            clickable: false,
+            style: props.style,
+            defaultValue: props.packageNameValue ? props.packageNameValue : "",
+            value: props.valueAttribute
+        };
+    }
+}
+
+export function getPreviewCss(): string {
+    return require("./ui/WidgetName.css");
+}
+
+export function getVisibleProperties(_valueMap: WidgetNamePreviewProps, visibilityMap: VisibilityMap): VisibilityMap {
+    /* To hide any property in Web Modeler, please assign the property in visibilityMap to false */
+    return visibilityMap;
+}

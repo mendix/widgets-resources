@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="packagePath.packageName.WidgetName" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Native"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/@mendix/pluggable-widgets-api/widget.xsd">
+    <name>WidgetNameCamelCase</name>
+    <description>WidgetDescription</description>
+    <icon/>
+    <properties>
+        <property key="sampleText" type="string" required="false">
+            <caption>Default value</caption>
+            <category>General</category>
+            <description>Sample text input</description>
+        </property>
+    </properties>
+</widget>

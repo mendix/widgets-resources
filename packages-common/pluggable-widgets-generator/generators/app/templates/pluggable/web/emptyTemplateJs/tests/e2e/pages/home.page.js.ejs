@@ -1,0 +1,13 @@
+class HomePage {
+
+    /**
+    * Create here your accessor to html elements. Example:
+    * div() { return browser.element(".widget-name div"); }
+    **/
+
+    open() {
+        browser.url("/");
+    }
+}
+const homepage = new HomePage();
+module.exports = homepage;

@@ -1,0 +1,42 @@
+{
+  "name": "<%- packageName %>",
+  "widgetName": "<%- widgetName %>",
+  "version": "<%- version %>",
+  "description": "<%- description %>",
+  "copyright": "<%- copyright %>",
+  "author": "<%- author %>",
+  "config": {
+    "widgetPath": "<%- projectPath %>/widgets",
+    "projectPath": "<%- projectPath %>/"
+  },
+  "packagePath": "<%- packagePath %>",
+  "scripts": {
+    "start": "npm run dev",
+    "build": "npm run mx-script build:js:native",
+    "dev": "npm run mx-script start:js:native",
+    "lint": "npm run mx-script lint",
+    "lint:fix": "npm run mx-script lint:fix",
+    "mx-script": "cd ./node_modules/@mendix/pluggable-widgets-tools && node bin/mx-scripts.js",<% if (unitTests) { %>
+    "pretest": "npm run lint && npm run build",
+    "test": "npm run mx-script test:unit:native -- --no-cache --ci",
+    "test:unit": "npm run mx-script test:unit:native -- --coverage",<% } %>
+    "prerelease": "npm run lint",
+    "release": "npm run mx-script release:js:native"
+  },<% if (unitTests) { %>
+  "jest-junit": {
+    "output": "./dist/testresults/TESTS-Jest.xml"
+  },<% } %>
+  "license": "<%- license %>",
+  "bugs": {
+    "url": "https://github.com/<%- author %>/<%- packageName %>/issues"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "^0.1.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-native": "^0.57.8"
+  },
+  "dependencies": {
+    "big.js": "^5.2.2"
+  }
+}
