@@ -14,24 +14,6 @@ export const hideOnIos = {
     },
 };
 
-//== Background sizing
-export const fullSize = {
-    container: {
-        width: '100%',
-        height: '100%',
-    },
-};
-export const fullWidth = {
-    container: {
-        width: '100%',
-    },
-};
-export const fullHeight = {
-    container: {
-        height: '100%',
-    },
-};
-
 //== Background Colors
 export const backgroundPrimary = {
     container: {
