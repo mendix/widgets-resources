@@ -34,7 +34,6 @@ export const DropDown = {
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
 
-        // fontSize: input.fontSize, //FIXME: Throws error
         borderWidth: input.borderWidth,
         borderRadius: input.radius,
 
@@ -58,7 +57,6 @@ export const DropDownVertical = {
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
 
-        // fontSize: input.fontSize, //FIXME: Throws error
         borderRadius: input.radius,
         borderWidth: input.borderWidth,
 

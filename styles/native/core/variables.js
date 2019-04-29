@@ -1,6 +1,8 @@
 import { Platform, Dimensions } from 'react-native';
 import { setColorBasedOnBackground, setContrastScale } from './_helperfunctions/convertcolors';
 import adjustFont from './_helperfunctions/adjustfont';
+import * as custom from '../app/custom-variables';
+import merge from './_helperfunctions/mergeobjects';
 
 //== Global variables
 //## Variables to be used during styling
@@ -8,27 +10,23 @@ import adjustFont from './_helperfunctions/adjustfont';
 // System defined read-only values
 export const { height: deviceHeight, width: deviceWidth } = Dimensions.get('window');
 
-// Dark Mode
-const darkMode = false;
-
 // Brand Style
-export const brand = {
+let brand = {
     primary: '#0595DB',
     success: '#76CA02',
     warning: '#f99b1d',
     danger: '#ed1c24',
 };
+brand = merge(brand, custom.brand || {});
 
-// Background Colors
-const backgroundColor = darkMode ? '#222' : '#FFF';
-
-export const background = {
-    primary: backgroundColor,
-    secondary: setContrastScale(0.03, backgroundColor),
+let background = {
+    primary: '#FFF',
+    secondary: setContrastScale(0.03, '#FFF'),
 };
+background = merge(background, custom.background || {});
 
 // Contrast (Gray) colors based on background.primary
-export const contrast = {
+let contrast = {
     highest: setContrastScale(0.95, background.primary),
     higher: setContrastScale(0.8, background.primary),
     high: setContrastScale(0.65, background.primary),
@@ -37,16 +35,18 @@ export const contrast = {
     lower: setContrastScale(0.2, background.primary),
     lowest: setContrastScale(0.05, background.primary),
 };
+contrast = merge(contrast, custom.contrast || {});
 
 // Border Style
-export const border = {
+let border = {
     color: setContrastScale(0.17, background.primary),
     width: 1,
     radius: 5,
 };
+border = merge(border, custom.border || {});
 
 // Font Styles
-export const font = {
+let font = {
     size: adjustFont(14),
     sizeSmall: adjustFont(12),
     sizeLarge: adjustFont(18),
@@ -63,9 +63,10 @@ export const font = {
     weightBold: 'bold',
     family: Platform.select({ ios: 'System', android: 'normal' }),
 };
+font = merge(font, custom.font || {});
 
 // Spacing
-export const spacing = {
+let spacing = {
     smallest: 5,
     smaller: 10,
     small: 15,
@@ -74,9 +75,10 @@ export const spacing = {
     larger: 30,
     largest: 40,
 };
+spacing = merge(spacing, custom.spacing || {});
 
 // Button Styles
-export const button = {
+let button = {
     fontSize: font.size,
     borderRadius: border.radius,
 
@@ -111,9 +113,10 @@ export const button = {
         backgroundColor: brand.danger,
     },
 };
+button = merge(button, custom.button || {});
 
 //Input Styles
-export const input = {
+let input = {
     // Colors
     color: contrast.higher,
     errorColor: brand.danger,
@@ -134,3 +137,6 @@ export const input = {
     paddingHorizontal: spacing.small,
     paddingVertical: spacing.smaller,
 };
+input = merge(input, custom.input || {});
+
+export { brand, background, border, contrast, font, spacing, button, input };
