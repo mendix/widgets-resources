@@ -3,7 +3,7 @@
 const helpers = require("yeoman-test");
 const fs = require("fs-extra");
 const path = require("path");
-const spawnCommand = require("../../node_modules/yeoman-generator/lib/actions/spawn-command");
+const spawnCommand = require("yeoman-generator/lib/actions/spawn-command");
 const assert = require("yeoman-assert");
 const deleteFolderRecursive = require("./utils").deleteFolderRecursive;
 const analizeCoverage = require("./utils").analizeCoverage;
@@ -58,7 +58,7 @@ describe("Generating tests for web", function() {
                 e2eTests: true
             };
             props.packagePath = props.organization.trim().toLowerCase();
-            return helpers.run(path.join(__dirname, "../app"))
+            return helpers.run(path.join(__dirname, "../generators/app"))
                 .withPrompts(props)
                 .then(function(dir) {
                     deleteFolderRecursive(correctPath);
