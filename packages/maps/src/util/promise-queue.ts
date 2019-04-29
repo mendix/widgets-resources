@@ -5,7 +5,7 @@ interface Item<T> {
 }
 
 export class PromiseQueue<T> {
-    private queue: Array<Item<T>> = [];
+    private readonly queue: Array<Item<T>> = [];
     private running = false;
 
     add(getPromise: () => Promise<T>): Promise<T> {
