@@ -41,7 +41,7 @@ describe("Generating tests for native", function() {
     tests.forEach(test => {
         it(`generates a ${test.programmingLanguage} ${test.boilerPlate} project for native`, function() {
             this.timeout(1000000);
-            const newPath = "../outputs/native" + test.path;
+            const newPath = "../../outputs/native" + test.path;
             const correctPath = path.join(__dirname, newPath);
             const props = {
                 widgetName: "MyWidget",

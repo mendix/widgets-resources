@@ -40,7 +40,7 @@ describe("Generating tests for web", function() {
     tests.forEach(test => {
         it(`generates a ${test.programmingLanguage} ${test.boilerPlate} project for web`, function() {
             this.timeout(1000000);
-            const newPath = "../outputs/web" + test.path;
+            const newPath = "../../outputs/web" + test.path;
             const correctPath = path.join(__dirname, newPath);
             const props = {
                 widgetName: "MyWidget",
