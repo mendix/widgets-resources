@@ -1,4 +1,6 @@
-# @mendix/generator-widget [![npm version](https://badge.fury.io/js/%40mendix%2Fgenerator-widget.svg)](https://badge.fury.io/js/%40mendix%2Fgenerator-widget) [![DAVID](https://david-dm.org/@mendix/generator-widget.svg)](https://david-dm.org/@mendix/generator-widget) [![Development Dependency Status](https://david-dm.org/@mendix/generator-widget/dev-status.svg?theme=shields.io)](https://david-dm.org/@mendix/generator-widget#info=devDependencies)
+# Pluggable Widgets Generator
+ 
+ [![npm version](https://badge.fury.io/js/%40mendix%2Fgenerator-widget.svg)](https://badge.fury.io/js/%40mendix%2Fgenerator-widget) [![DAVID](https://david-dm.org/@mendix/generator-widget.svg)](https://david-dm.org/@mendix/generator-widget) [![Development Dependency Status](https://david-dm.org/@mendix/generator-widget/dev-status.svg?theme=shields.io)](https://david-dm.org/@mendix/generator-widget#info=devDependencies)
 
 [![NPM](https://nodei.co/npm/@mendix/generator-widget.svg?downloads=true&stars=true)](https://nodei.co/npm/@mendix/generator-widget/)
 
@@ -60,6 +62,7 @@ If necessary you can run the tasks using the commands
 ```bash
 npm start
 ```
+
 ```bash
 npm run build
 ```
@@ -93,17 +96,17 @@ If `Yes` is selected, unit tests are included to ensure individual units of the 
 
 If Yes is selected, end to end tests are included to ensure that the integrated components of an application function as expected. Default value is `No`.
 
-Note: Both `Unit` and `End to end` tests apply only to the Full Boilerplate. `End to End` is exclusive for Web/Responsive platform.
+Note: Both `Unit` and `End to end` tests apply only to the Full Boilerplate. `End to End` is exclusive for web and hybrid mobile apps.
 
 The tool will then create Copied files, and run `npm install` to install development dependencies.
 
 ### NOTE
 
 To use the webpack-dev-server while in your development; 
-* start the Mendix Desktop Modeler from your Mendix project path or by default `/dist/MxTestProject`. then run:
+* start the Mendix Studio Pro from your Mendix project path or by default `/dist/MxTestProject`. then run:
 
 ```bash
-npm run start
+npm start
 ```
 
 * If you are running the generator through many OS (Using parallels or any other virtualization software), make sure you have the right privileges and use the same OS for generation and files manipulation.
