@@ -1,4 +1,3 @@
-// import * as core from '../core/variables';
 import { Platform } from 'react-native';
 import { setColorBasedOnBackground, setContrastScale } from '../core/_helperfunctions/convertcolors';
 import adjustFont from '../core/_helperfunctions/adjustfont';
