@@ -1,4 +1,4 @@
-import { dynamicValue } from "@native-components/util-widgets/test";
+import { dynamicValue } from "@native-mobile-resources/util-widgets/test";
 import { Big } from "big.js";
 import { createElement } from "react";
 import { Bar } from "react-native-progress";

@@ -1,5 +1,5 @@
 import { ValueStatus } from "@mendix/pluggable-widgets-api/properties";
-import { flattenStyles } from "@native-components/util-widgets";
+import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import MultiSlider, { MarkerProps } from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
 import { LayoutChangeEvent, View } from "react-native";

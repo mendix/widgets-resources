@@ -1,4 +1,4 @@
-import { exclude, only, Style } from "@native-components/util-widgets";
+import { exclude, only, Style } from "@native-mobile-resources/util-widgets";
 import { Dimensions, ImageStyle, ImageURISource, Platform, TextInputProps, TextStyle, ViewStyle } from "react-native";
 
 /**

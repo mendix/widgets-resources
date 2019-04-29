@@ -1,4 +1,4 @@
-import { flattenStyles } from "@native-components/util-widgets";
+import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { Component, createElement } from "react";
 import { ActivityIndicator as RNActivityIndicator, View } from "react-native";
 

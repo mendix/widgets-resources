@@ -4,7 +4,7 @@
     "license": "Apache-2.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/jobvs/native-components.git"
+        "url": "https://github.com/mendix/native-mobile-resources.git"
     },
     "config": {
         "widgetName": "Maps"
@@ -19,6 +19,6 @@
         "postversion": "node ../../scripts/UpdateGithubRelease.js"
     },
     "dependencies": {
-        "@native-components/util-widgets": "^0.0.1"
+        "@native-mobile-resources/util-widgets": "^0.0.1"
     }
 }

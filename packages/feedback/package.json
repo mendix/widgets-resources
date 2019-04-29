@@ -4,7 +4,7 @@
     "license": "Apache-2.0",
     "repository": {
         "type": "git",
-        "url": "git@ssh.gitlab.rnd.mendix.com:widget-dev-team/native-components.git"
+        "url": "https://github.com/mendix/native-mobile-resources.git"
     },
     "config": {
         "widgetName": "Feedback"
@@ -23,7 +23,7 @@
         "@types/react-native-dialog": "^5.5.0"
     },
     "dependencies": {
-        "@native-components/util-widgets": "^0.0.1",
+        "@native-mobile-resources/util-widgets": "^0.0.1",
         "querystringify": "^2.1.1",
         "react-native-dialog": "^5.6.0",
         "react-native-view-shot": "^2.5.0"

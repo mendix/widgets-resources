@@ -1,4 +1,4 @@
-import { flattenStyles } from "@native-components/util-widgets";
+import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { Component, createElement } from "react";
 import { View } from "react-native";
 import { Circle } from "react-native-progress";

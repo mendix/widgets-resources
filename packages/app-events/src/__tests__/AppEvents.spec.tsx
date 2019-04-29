@@ -1,4 +1,4 @@
-import { actionValue } from "@native-components/util-widgets/test";
+import { actionValue } from "@native-mobile-resources/util-widgets/test";
 import { createElement } from "react";
 import { AppStateStatus } from "react-native";
 import { flushMicrotasksQueue, render } from "react-native-testing-library";

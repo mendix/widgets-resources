@@ -1,4 +1,4 @@
-import { actionValue, EditableValueBuilder } from "@native-components/util-widgets/test";
+import { actionValue, EditableValueBuilder } from "@native-mobile-resources/util-widgets/test";
 import { createElement } from "react";
 import { Text } from "react-native";
 import { fireEvent, render } from "react-native-testing-library";

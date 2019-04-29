@@ -8,8 +8,8 @@
 1. Clone this repository
 
 ```sh
-$ git clone git@github.com:jobvs/native-components.git
-$ cd native-components
+$ git clone git@github.com:mendix/native-mobile-resources.git
+$ cd native-mobile-resources
 ```
 
 2. Install and link dependencies

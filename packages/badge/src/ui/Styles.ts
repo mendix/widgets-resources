@@ -1,4 +1,4 @@
-import { Style } from "@native-components/util-widgets";
+import { Style } from "@native-mobile-resources/util-widgets";
 import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 
 export interface BadgeStyle extends Style {

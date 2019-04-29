@@ -1,4 +1,4 @@
-import { dynamicValue } from "@native-components/util-widgets/test";
+import { dynamicValue } from "@native-mobile-resources/util-widgets/test";
 import { createElement } from "react";
 import { fireEvent, render } from "react-native-testing-library";
 import { VideoProperties } from "react-native-video";
