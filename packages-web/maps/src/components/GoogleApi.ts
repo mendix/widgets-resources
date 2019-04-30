@@ -17,7 +17,7 @@ const googleApiWrapper = (script: string) => <P extends GoogleMapsProps>(wrapped
         }
 
         componentDidMount() {
-            if (typeof window.google === "undefined") {
+            if (typeof window.google === "undefined" || (window.google && typeof google.maps === "undefined")) {
                 this.loadScript(script);
             } else {
                 this.setState({ scriptsLoaded: true });
