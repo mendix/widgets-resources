@@ -8,7 +8,7 @@ const rename = require("gulp-rename");
 const git = require("gulp-git");
 const rollup = require("rollup");
 const rollupConfig = require("./rollup.config");
-const typingGenerator = require("mx-widget-typing-generator");
+const typingGenerator = require("@mendix/pluggable-widgets-typing-generator");
 
 const cwd = process.cwd();
 const pkg = require(path.join(cwd, "package.json"));
