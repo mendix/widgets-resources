@@ -1,7 +1,7 @@
 {
   "name": "maps",
   "widgetName": "Maps",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Show locations on Google Maps",
   "copyright": "Mendix BV",
   "scripts": {
