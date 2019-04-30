@@ -9,7 +9,7 @@ import { brand } from '../variables';
 export const com_mendix_widget_native_maps_Maps = (Maps = {
     container: {
         // All ViewStyle properties are allowed
-        flex: 1,
+        alignSelf: 'stretch',
         aspectRatio: 4 / 3,
     },
     marker: {
@@ -49,5 +49,6 @@ export const mapsSquare = {
 export const mapsFullHeight = {
     container: {
         flex: 1,
+        aspectRatio: undefined,
     },
 };

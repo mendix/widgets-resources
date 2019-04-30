@@ -19,11 +19,13 @@ let brand = {
 };
 brand = merge(brand, custom.brand || {});
 
+
 let background = {
     primary: '#FFF',
     secondary: setContrastScale(0.03, '#FFF'),
 };
 background = merge(background, custom.background || {});
+
 
 // Contrast (Gray) colors based on background.primary
 let contrast = {
@@ -37,6 +39,7 @@ let contrast = {
 };
 contrast = merge(contrast, custom.contrast || {});
 
+
 // Border Style
 let border = {
     color: setContrastScale(0.17, background.primary),
@@ -44,6 +47,7 @@ let border = {
     radius: 5,
 };
 border = merge(border, custom.border || {});
+
 
 // Font Styles
 let font = {
@@ -65,6 +69,7 @@ let font = {
 };
 font = merge(font, custom.font || {});
 
+
 // Spacing
 let spacing = {
     smallest: 5,
@@ -76,6 +81,7 @@ let spacing = {
     largest: 40,
 };
 spacing = merge(spacing, custom.spacing || {});
+
 
 // Button Styles
 let button = {
@@ -115,6 +121,7 @@ let button = {
 };
 button = merge(button, custom.button || {});
 
+
 //Input Styles
 let input = {
     // Colors
@@ -138,5 +145,7 @@ let input = {
     paddingVertical: spacing.smaller,
 };
 input = merge(input, custom.input || {});
+
+
 
 export { brand, background, border, contrast, font, spacing, button, input };

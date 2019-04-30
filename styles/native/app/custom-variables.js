@@ -5,7 +5,7 @@ import adjustFont from '../core/_helperfunctions/adjustfont';
 /*
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)
 ==> You can freely change any value in this file.
-==> DO NOT change the core variable file, as that makes updating Atlas a lot harder in the future.
+==> DO NOT change the core variable file (or any other file in core), as that makes updating Atlas a lot harder in the future.
 */
 
 //== Global variables
@@ -20,7 +20,7 @@ export const brand = {
 };
 
 // Dark Mode
-const darkMode = true;
+const darkMode = false;
 
 // Background Colors
 const backgroundColor = darkMode ? '#000' : '#FFF';
