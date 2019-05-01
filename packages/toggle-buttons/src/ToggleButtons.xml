@@ -2,7 +2,7 @@
 <widget id="com.mendix.widget.native.togglebuttons.ToggleButtons" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/@mendix/pluggable-widgets-api/widget.xsd">
     <name>Toggle buttons</name>
     <description>Toggle buttons allow you to change an enum value</description>
-    <icon></icon>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAdUlEQVR4Ae3WMQ5CIRAEUK/3N+FuGm/oHgSlXpvNDxXvJVMygal4AAAAAAAAcKrxzitemfH8zE7WmXW29I1xRUT+MpvJdXZzX9V8fBmh9LUuW7K7r2o+uuTPheeNbOgzgAEMYAADGMAAPkK+wkcBAAAAAADgCwiAzUk+kTv8AAAAAElFTkSuQmCC</icon>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
