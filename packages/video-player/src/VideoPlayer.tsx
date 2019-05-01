@@ -1,31 +1,51 @@
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { Component, createElement } from "react";
-import { ActivityIndicator, View } from "react-native";
-import Video from "react-native-video";
-
+import { ActivityIndicator, Text, View } from "react-native";
+import Video, { OnLoadData } from "react-native-video";
 import { VideoPlayerProps } from "../typings/VideoPlayerProps";
 import { defaultVideoStyle } from "./ui/Styles";
 
 export type Props = VideoPlayerProps<undefined>;
 
+const enum StatusEnum {
+    ERROR = "error",
+    LOADING = "loading",
+    READY = "ready",
+    NOT_READY = "not-ready"
+}
+
 interface State {
-    loading: boolean;
+    aspectRatio?: number;
+    status: StatusEnum;
 }
 
 export class VideoPlayer extends Component<Props, State> {
-    readonly state = {
-        loading: true
+    readonly state: State = {
+        status: StatusEnum.NOT_READY
     };
 
     private readonly onLoadStartHandler = this.onLoadStart.bind(this);
     private readonly onLoadHandler = this.onLoad.bind(this);
+    private readonly onErrorHandler = this.onError.bind(this);
     private readonly styles = flattenStyles(defaultVideoStyle, this.props.style);
 
     render(): JSX.Element {
         const uri = this.props.videoUrl && this.props.videoUrl.value;
+
+        const styles = { ...this.styles.container };
+
+        if (this.props.aspectRatio && this.state.aspectRatio) {
+            styles.aspectRatio = this.state.aspectRatio;
+        }
+
         return (
-            <View style={this.styles.container}>
-                {this.state.loading && <ActivityIndicator color={this.styles.indicator.color} size="large" />}
+            <View style={styles}>
+                {this.state.status === StatusEnum.LOADING && (
+                    <ActivityIndicator color={this.styles.indicator.color} size="large" />
+                )}
+                {this.state.status === StatusEnum.ERROR && (
+                    <Text style={this.styles.errorMessage}>The video failed to load :(</Text>
+                )}
                 <Video
                     source={{ uri }}
                     paused={!this.props.autoStart}
@@ -34,17 +54,24 @@ export class VideoPlayer extends Component<Props, State> {
                     controls={this.props.showControls}
                     onLoadStart={this.onLoadStartHandler}
                     onLoad={this.onLoadHandler}
-                    style={this.state.loading ? { height: 0 } : this.styles.video}
+                    onError={this.onErrorHandler}
+                    style={this.state.status !== StatusEnum.READY ? { height: 0 } : this.styles.video}
+                    useTextureView={false}
+                    resizeMode="contain"
                 />
             </View>
         );
     }
 
     private onLoadStart(): void {
-        this.setState({ loading: true });
+        this.setState({ status: StatusEnum.LOADING, aspectRatio: undefined });
     }
 
-    private onLoad(): void {
-        this.setState({ loading: false });
+    private onLoad(data: OnLoadData): void {
+        this.setState({ status: StatusEnum.READY, aspectRatio: data.naturalSize.width / data.naturalSize.height });
+    }
+
+    private onError(): void {
+        this.setState({ status: StatusEnum.ERROR, aspectRatio: undefined });
     }
 }

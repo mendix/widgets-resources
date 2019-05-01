@@ -1,5 +1,6 @@
 import { dynamicValue } from "@native-mobile-resources/util-widgets/test";
 import { createElement } from "react";
+import { Text, View } from "react-native";
 import { fireEvent, render } from "react-native-testing-library";
 import { VideoProperties } from "react-native-video";
 
@@ -18,7 +19,8 @@ describe("VideoPlayer", () => {
             autoStart: false,
             muted: false,
             loop: false,
-            showControls: true
+            showControls: true,
+            aspectRatio: false
         };
     });
 
@@ -43,7 +45,7 @@ describe("VideoPlayer", () => {
     it("hides the loading indicator after load", () => {
         const component = render(<VideoPlayer {...defaultProps} />);
 
-        fireEvent(component.getByType(Video), "load");
+        fireEvent(component.getByType(Video), "load", { naturalSize: { width: 640, height: 360 } });
 
         expect(component.toJSON()).toMatchSnapshot();
         expect(component.getByType(Video).props.style).toEqual({ width: "100%", height: "100%" });
@@ -52,10 +54,33 @@ describe("VideoPlayer", () => {
     it("shows the loading indicator if the source changes", () => {
         const component = render(<VideoPlayer {...defaultProps} />);
 
-        fireEvent(component.getByType(Video), "load");
+        fireEvent(component.getByType(Video), "load", { naturalSize: { width: 640, height: 360 } });
         fireEvent(component.getByType(Video), "loadStart");
 
         expect(component.toJSON()).toMatchSnapshot();
         expect(component.getByType(Video).props.style).toEqual({ height: 0 });
+    });
+
+    it("load a video and calculate the aspect ratio", () => {
+        const component = render(<VideoPlayer {...defaultProps} aspectRatio={true} />);
+
+        fireEvent(component.getByType(Video), "load", { naturalSize: { width: 1080, height: 554 } });
+
+        expect(component.toJSON()).toMatchSnapshot();
+        expect(component.getByType(View).props.style).toEqual({
+            alignItems: "center",
+            aspectRatio: 1.9494584837545126,
+            backgroundColor: "black",
+            justifyContent: "center"
+        });
+    });
+
+    it("renders an error", () => {
+        const component = render(<VideoPlayer {...defaultProps} />);
+
+        fireEvent(component.getByType(Video), "error");
+
+        expect(component.getByType(Text).props.style).toEqual({ color: "white" });
+        expect(component.getByType(Text).props.children).toEqual("The video failed to load :(");
     });
 });

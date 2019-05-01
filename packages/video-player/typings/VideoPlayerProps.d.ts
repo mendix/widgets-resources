@@ -14,5 +14,6 @@ export interface VideoPlayerProps<Style> extends CommonProps<Style> {
     autoStart: boolean;
     muted: boolean;
     loop: boolean;
+    aspectRatio: boolean;
     showControls: boolean;
 }
