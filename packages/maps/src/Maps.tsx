@@ -2,97 +2,176 @@ import { Icon } from "@mendix/pluggable-widgets-api/components/native/Icon";
 import { ActionValue, DynamicValue } from "@mendix/pluggable-widgets-api/properties";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { Component, createElement, createRef } from "react";
-import { View } from "react-native";
-import Geocoder, { GeocodingObject } from "react-native-geocoder";
-import MapView, { LatLng, Marker } from "react-native-maps";
+import { ActivityIndicator, Platform, View } from "react-native";
+import MapView, { LatLng, Marker as MarkerView } from "react-native-maps";
 
-import { DefaultZoomLevelEnum, MapsProps, MarkersType } from "../typings/MapsProps";
+import { DefaultZoomLevelEnum, MapsProps, MarkersType as MarkerProps } from "../typings/MapsProps";
 import { defaultMapsStyle, MapsStyle } from "./ui/Styles";
-import { PromiseQueue } from "./util/promise-queue";
+import { CachedGeocoder } from "./util/CachedGeocoder";
 
 type Props = MapsProps<MapsStyle>;
 
 interface State {
-    geocodeCache: { [address: string]: LatLng | undefined };
+    status: Status;
+    markers?: Marker[];
+}
+
+const enum Status {
+    LoadingMarkers = "loadingMarkers",
+    LoadingMap = "loadingMap",
+    MapReady = "mapReady",
+    CameraAlmostReady = "cameraAlmostReady",
+    CameraReady = "cameraReady"
+}
+
+interface Marker {
+    key: string;
+    props: MarkerProps;
+    coordinate: LatLng;
 }
 
 export class Maps extends Component<Props, State> {
     readonly state: State = {
-        geocodeCache: {}
+        status: Status.LoadingMarkers
     };
 
+    private readonly onMapReadyHandler = this.onMapReady.bind(this);
+    private readonly onRegionChangeCompleteHandler = this.onRegionChangeComplete.bind(this);
     private readonly styles = flattenStyles(defaultMapsStyle, this.props.style);
     private readonly mapViewRef = createRef<MapView>();
-    private readonly geocodeQueue = new PromiseQueue<GeocodingObject[]>();
-
-    private geocodeInProgress: { [address: string]: boolean | undefined } = {};
+    private readonly geocoder = new CachedGeocoder();
 
     componentDidMount(): void {
-        this.updateCamera(false);
+        this.parseMarkers();
     }
 
     componentDidUpdate(): void {
-        this.updateCamera(true);
+        if (this.state.status === Status.LoadingMarkers) {
+            this.parseMarkers();
+        }
+    }
+
+    componentWillReceiveProps(): void {
+        if (this.state.status === Status.CameraReady) {
+            this.parseMarkers();
+        }
     }
 
     render(): JSX.Element {
         return (
             <View style={this.styles.container}>
-                <MapView
-                    ref={this.mapViewRef}
-                    provider={this.props.provider === "default" ? null : this.props.provider}
-                    mapType={this.props.mapType}
-                    showsUserLocation={this.props.showsUserLocation}
-                    showsMyLocationButton={this.props.showsUserLocation}
-                    showsTraffic={false}
-                    minZoomLevel={toZoomValue(this.props.minZoomLevel)}
-                    maxZoomLevel={toZoomValue(this.props.maxZoomLevel)}
-                    rotateEnabled={this.props.interactive}
-                    scrollEnabled={this.props.interactive}
-                    pitchEnabled={false}
-                    zoomEnabled={this.props.interactive}
-                    style={{ flex: 1 }}
-                    liteMode={!this.props.interactive}
-                    cacheEnabled={!this.props.interactive}
-                    showsPointsOfInterest={false}
-                    mapPadding={{ top: 40, right: 20, bottom: 20, left: 20 }}
-                >
-                    {this.props.markers.map((marker, index) => this.renderMarker(marker, index))}
-                </MapView>
+                {this.state.status !== Status.LoadingMarkers && (
+                    <MapView
+                        ref={this.mapViewRef}
+                        provider={this.props.provider === "default" ? null : this.props.provider}
+                        mapType={this.props.mapType}
+                        showsUserLocation={this.props.showsUserLocation}
+                        showsMyLocationButton={this.props.showsUserLocation}
+                        showsTraffic={false}
+                        minZoomLevel={toZoomValue(this.props.minZoomLevel)}
+                        maxZoomLevel={toZoomValue(this.props.maxZoomLevel)}
+                        rotateEnabled={this.props.interactive}
+                        scrollEnabled={this.props.interactive}
+                        pitchEnabled={false}
+                        zoomEnabled={this.props.interactive}
+                        style={{ flex: 1, alignSelf: "stretch" }}
+                        liteMode={!this.props.interactive}
+                        cacheEnabled={!this.props.interactive}
+                        showsPointsOfInterest={false}
+                        mapPadding={{ top: 40, right: 20, bottom: 20, left: 20 }}
+                        onMapReady={this.onMapReadyHandler}
+                        onRegionChangeComplete={this.onRegionChangeCompleteHandler}
+                    >
+                        {this.state.markers && this.state.markers.map(marker => this.renderMarker(marker))}
+                    </MapView>
+                )}
+                {this.state.status !== Status.CameraReady && (
+                    <View style={this.styles.loadingOverlay}>
+                        <ActivityIndicator color={this.styles.loadingIndicator.color} size="large" />
+                    </View>
+                )}
             </View>
         );
     }
 
-    private renderMarker(marker: MarkersType, index: number): JSX.Element | null {
-        const coordinate = this.parseCoordinate(marker.latitude, marker.longitude, marker.address);
-
-        if (!coordinate) {
-            return null;
-        }
-
+    private renderMarker({ key, props, coordinate }: Marker): JSX.Element {
         return (
-            <Marker
-                key={"map_marker_" + index}
-                title={this.props.interactive ? marker.title && marker.title.value : ""}
-                description={this.props.interactive ? marker.description && marker.description.value : ""}
+            <MarkerView
+                key={key}
                 coordinate={coordinate}
-                pinColor={marker.color || this.styles.marker.color}
+                title={this.props.interactive ? props.title && props.title.value : ""}
+                description={this.props.interactive ? props.description && props.description.value : ""}
+                onPress={this.props.interactive ? () => onMarkerPress(props.onClick) : undefined}
+                pinColor={props.color || this.styles.marker.color}
                 opacity={this.styles.marker.opacity}
-                // tslint:disable-next-line:jsx-no-lambda
-                onPress={() => (this.props.interactive ? onMarkerPress(marker.onClick) : null)}
             >
-                {marker.icon && marker.icon.value && (
+                {props.icon && props.icon.value && (
                     <Icon
-                        icon={marker.icon.value}
-                        color={marker.color || this.styles.marker.color}
-                        size={marker.iconSize}
+                        icon={props.icon.value}
+                        color={props.color || this.styles.marker.color}
+                        size={props.iconSize}
                     />
                 )}
-            </Marker>
+            </MarkerView>
         );
     }
 
-    private updateCamera(animate: boolean): void {
+    private onMapReady(): void {
+        if (Platform.OS === "android") {
+            this.updateCamera(false);
+            this.setState({ status: this.props.interactive ? Status.MapReady : Status.CameraReady });
+        }
+    }
+
+    private onRegionChangeComplete(): void {
+        if (Platform.OS === "android" && this.state.status === Status.MapReady) {
+            this.setState({ status: Status.CameraReady });
+        }
+
+        if (Platform.OS === "ios") {
+            switch (this.state.status) {
+                case Status.LoadingMap:
+                    this.setState({ status: Status.MapReady });
+                    this.updateCamera(false);
+                    break;
+                case Status.MapReady:
+                    this.setState({
+                        status: this.props.provider === "default" ? Status.CameraAlmostReady : Status.CameraReady
+                    });
+                    break;
+                case Status.CameraAlmostReady:
+                    this.setState({ status: Status.CameraReady });
+            }
+        }
+    }
+
+    private async parseMarkers(): Promise<void> {
+        const parsedMarkers = await Promise.all(
+            this.props.markers.map(async (marker, index) => ({
+                key: `map_marker_${index}`,
+                props: marker,
+                coordinate: await this.parseCoordinate(marker.latitude, marker.longitude, marker.address)
+            }))
+        );
+
+        if (parsedMarkers.some(marker => marker.coordinate == null)) {
+            return;
+        }
+
+        this.setState(
+            {
+                status: this.state.status === Status.LoadingMarkers ? Status.LoadingMap : this.state.status,
+                markers: parsedMarkers as Marker[]
+            },
+            () => {
+                if (this.state.status === Status.CameraReady) {
+                    this.updateCamera(true);
+                }
+            }
+        );
+    }
+
+    private async updateCamera(animate: boolean): Promise<void> {
         if (!this.mapViewRef.current) {
             return;
         }
@@ -102,21 +181,8 @@ export class Maps extends Component<Props, State> {
             return;
         }
 
-        const center =
-            this.props.markers.length === 1 && this.props.fitToMarkers
-                ? this.parseCoordinate(
-                      this.props.markers[0].latitude,
-                      this.props.markers[0].longitude,
-                      this.props.markers[0].address
-                  )
-                : this.parseCoordinate(this.props.centerLatitude, this.props.centerLongitude, this.props.centerAddress);
-
-        if (!center) {
-            return;
-        }
-
         const camera = {
-            center,
+            center: await this.getCenter(),
             zoom: toZoomValue(this.props.defaultZoomLevel),
             altitude: toAltitude(this.props.defaultZoomLevel)
         };
@@ -128,63 +194,44 @@ export class Maps extends Component<Props, State> {
         }
     }
 
+    private async getCenter(): Promise<LatLng> {
+        const center =
+            this.props.markers.length === 1 && this.props.fitToMarkers
+                ? await this.parseCoordinate(
+                      this.props.markers[0].latitude,
+                      this.props.markers[0].longitude,
+                      this.props.markers[0].address
+                  )
+                : await this.parseCoordinate(
+                      this.props.centerLatitude,
+                      this.props.centerLongitude,
+                      this.props.centerAddress
+                  );
+
+        return center || { latitude: 51.9066346, longitude: 4.4861703 };
+    }
+
     private parseCoordinate(
         latitudeProp?: DynamicValue<BigJs.Big>,
         longitudeProp?: DynamicValue<BigJs.Big>,
         addressProp?: DynamicValue<string>
-    ): LatLng | null {
+    ): Promise<LatLng | null> {
         if (latitudeProp && latitudeProp.value && longitudeProp && longitudeProp.value) {
             const latitude = Number(latitudeProp.value);
             const longitude = Number(longitudeProp.value);
 
-            if (isValidLatitude(latitude) && isValidLongitude(longitude)) {
-                return { latitude, longitude };
+            if (!isValidLatitude(latitude) || !isValidLongitude(longitude)) {
+                throw new Error(`Invalid coordinate provided: (${latitude}, ${longitude})`);
             }
+
+            return Promise.resolve({ latitude, longitude });
         }
 
         if (addressProp && addressProp.value) {
-            const coordinate = this.geocodeWithCache(addressProp.value);
-            if (coordinate) {
-                return coordinate;
-            }
+            return this.geocoder.geocode(addressProp.value);
         }
 
-        return null;
-    }
-
-    private geocodeWithCache(address: string): LatLng | null {
-        const cachedValue = this.state.geocodeCache[address];
-        if (cachedValue) {
-            return cachedValue;
-        }
-
-        if (!this.geocodeInProgress[address]) {
-            this.geocodeInProgress = { ...this.geocodeInProgress, [address]: true };
-
-            this.geocodeQueue
-                .add(() => Geocoder.geocodeAddress(address))
-                .then(results => {
-                    if (results.length === 0) {
-                        throw new Error(`No location found for the provided address: ${address}`);
-                    }
-
-                    const coordinate: LatLng = {
-                        latitude: results[0].position.lat,
-                        longitude: results[0].position.lng
-                    };
-
-                    if (this.mapViewRef.current) {
-                        this.setState({
-                            geocodeCache: { ...this.state.geocodeCache, [address]: coordinate }
-                        });
-                    }
-                })
-                .catch(() => {
-                    throw new Error(`Failed to retrieve a location for the provided address: ${address}`);
-                });
-        }
-
-        return null;
+        return Promise.resolve(null);
     }
 }
 
