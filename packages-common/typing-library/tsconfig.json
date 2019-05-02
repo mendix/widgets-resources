@@ -1,0 +1,25 @@
+{
+    "include": ["./src", "./typings"],
+    "compilerOptions": {
+        "target": "es2015",
+        "lib": ["es2015"],
+        "types": ["jest"],
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "strict": true,
+        "noEmitOnError": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true,
+        "outDir": "./dist",
+        "declaration": true,
+        "sourceMap": false
+    }
+}
