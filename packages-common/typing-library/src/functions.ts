@@ -8,7 +8,7 @@ import PluginError from "plugin-error";
  * @param preview
  * @param isMobile
  * @param isChild
- * @return string
+ * @returns {string}
  */
 const translateType = (
     prop: Property,
@@ -102,7 +102,7 @@ const generateChildProps = (prop: Property, childTypes: string[], preview = fals
     const hasDynamicProps = preview
         ? properties
               .map(prop => translateType(prop, [], preview, isMobile, true))
-              .filter(type => type.indexOf("DynamicValue") !== -1 || type.indexOf("EditableValue") !== -1).length > 0
+              .some(type => type.includes("DynamicValue") || type.includes("EditableValue"))
         : false;
     const typeName = capitalizeFirstLetter(prop.$.key) + (hasDynamicProps ? "PreviewType" : "Type");
     if (!preview || (preview && hasDynamicProps)) {
@@ -205,7 +205,7 @@ ${properties.map(p => `    ${p.$.key}: boolean;`).join("\n")}
 /**
  * Function to find propertyGroups and flat all properties in an array of Property
  * @param propertyElement
- * @returns Property[]
+ * @returns {Property[]}
  */
 const findProperties = (propertyElement: PropertyGroup[] | PropertyGroup): Property[] => {
     if (Array.isArray(propertyElement)) return flattenDeep(propertyElement.map(obj => findProperties(obj)));
@@ -231,7 +231,7 @@ const findProperties = (propertyElement: PropertyGroup[] | PropertyGroup): Prope
 /**
  * Deep flat an array
  * @param arr1
- * @returns Property[]
+ * @returns {Property[]}
  */
 function flattenDeep(arr1: any): Property[] {
     return arr1.reduce(
@@ -243,7 +243,7 @@ function flattenDeep(arr1: any): Property[] {
 /**
  * Extract all the properties containing propertyGroup in property
  * @param propElements
- * @returns Property[]
+ * @returns {Property[]}
  */
 function extractProperties(propElements: PropertyType): Property[] {
     let properties: Property[] = [];
@@ -257,34 +257,27 @@ function extractProperties(propElements: PropertyType): Property[] {
     return properties;
 }
 
+/**
+ * Find all imports based on the types
+ * @param mainTypes
+ * @param childTypes
+ * @returns {string}
+ */
 function findImports(mainTypes: string, childTypes: string[]): string {
-    let imports = [];
     let types = mainTypes;
     if (childTypes && childTypes.length > 0) {
         types += childTypes.join("\n");
     }
 
-    if (types.indexOf("ActionValue") !== -1) {
-        imports.push("ActionValue");
-    }
-    if (types.indexOf("DynamicValue") !== -1) {
-        imports.push("DynamicValue");
-    }
-    if (types.indexOf("EditableValue") !== -1) {
-        imports.push("EditableValue");
-    }
-    if (types.indexOf("NativeIcon") !== -1) {
-        imports.push("NativeIcon");
-    }
-    if (types.indexOf("NativeImage") !== -1) {
-        imports.push("NativeImage");
-    }
-    if (types.indexOf("WebIcon") !== -1) {
-        imports.push("WebIcon");
-    }
-    if (types.indexOf("WebImage") !== -1) {
-        imports.push("WebImage");
-    }
+    const imports = [
+        "ActionValue",
+        "DynamicValue",
+        "EditableValue",
+        "NativeIcon",
+        "NativeImage",
+        "WebIcon",
+        "WebImage"
+    ].filter(type => types.includes(type));
 
     return imports && imports.length > 0
         ? `

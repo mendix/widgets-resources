@@ -33,5 +33,4 @@ function generateTypings() {
 }
 ```
 
-Make sure to change NAMEOFYOURWIDGET for the real name of your widget and select isNative to true if you are building a
-React Native widget
+Make sure to change NAMEOFYOURWIDGET for the real name of your widget
