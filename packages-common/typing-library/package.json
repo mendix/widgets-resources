@@ -1,6 +1,6 @@
 {
   "name": "@mendix/pluggable-widgets-typing-generator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Mendix Pluggable Widgets typings generator",
   "license": "Apache-2.0",
   "copyright": "Mendix 2019",
@@ -16,6 +16,11 @@
     "typings",
     "typescript"
   ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "map-stream": "0.0.7",
     "plugin-error": "^1.0.1",
@@ -23,12 +28,23 @@
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.12",
+    "@types/node": "^11.13.8",
+    "@types/plugin-error": "^0.1.1",
+    "@types/replace-ext": "0.0.27",
+    "@types/vinyl": "^2.0.3",
+    "@types/xml2js": "^0.4.4",
     "enzyme": "^3.7.0",
     "enzyme-to-json": "^3.3.4",
     "jest": "^23.1.0",
-    "jest-junit": "^5.1.0"
+    "jest-junit": "^5.1.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.5"
   },
   "scripts": {
+    "prebuild": "rm -rf ./dist",
+    "build": "./node_modules/.bin/tsc",
+    "prepare": "npm run build",
     "test": "jest --projects ./jest.config.js --no-cache --ci"
   }
 }

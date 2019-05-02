@@ -1,4 +1,4 @@
-var iconWebOutput = `/**
+export const iconWebOutput = `/**
  * This file was generated from MyWidget.xml
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
@@ -42,7 +42,7 @@ export interface VisibilityMap {
 }
 `;
 
-var iconNativeOutput = `/**
+export const iconNativeOutput = `/**
  * This file was generated from MyWidget.xml
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
@@ -61,6 +61,4 @@ export interface IconsType {
 export interface MyWidgetProps<Style> extends CommonProps<Style> {
     icons: IconsType[];
 }
-`
-
-module.exports = {iconWebOutput, iconNativeOutput};
+`;

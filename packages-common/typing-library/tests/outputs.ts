@@ -1,4 +1,4 @@
-const nativeResult = `/**
+export const nativeResult = `/**
  * This file was generated from MyWidget.xml
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
@@ -24,7 +24,7 @@ export interface MyWidgetProps<Style> extends CommonProps<Style> {
     valueAttribute?: EditableValue<string | BigJs.Big>;
     mywidgetValue?: string;
     valueExpression?: DynamicValue<string>;
-    valueExpressionList?: DynamicValue<BigJs.Big[]>;
+    valueExpressionDecimal?: DynamicValue<BigJs.Big>;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
     tries?: number;
@@ -35,7 +35,7 @@ export interface MyWidgetProps<Style> extends CommonProps<Style> {
 }
 `;
 
-const webResult = `/**
+export const webResult = `/**
  * This file was generated from MyWidget.xml
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
@@ -80,7 +80,7 @@ export interface MyWidgetContainerProps extends CommonProps {
     valueAttribute?: EditableValue<string | BigJs.Big>;
     mywidgetValue?: string;
     valueExpression?: DynamicValue<string>;
-    valueExpressionList?: DynamicValue<BigJs.Big[]>;
+    valueExpressionDecimal?: DynamicValue<BigJs.Big>;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
     tries?: number;
@@ -94,7 +94,7 @@ export interface MyWidgetPreviewProps extends CommonProps {
     valueAttribute?: string;
     mywidgetValue?: string;
     valueExpression?: string;
-    valueExpressionList?: string;
+    valueExpressionDecimal?: BigJs.Big;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
     tries?: number;
@@ -108,7 +108,7 @@ export interface VisibilityMap {
     valueAttribute: boolean;
     mywidgetValue: boolean;
     valueExpression: boolean;
-    valueExpressionList: boolean;
+    valueExpressionDecimal: boolean;
     bootstrapStyle: boolean;
     mywidgetType: boolean;
     tries: boolean;
@@ -118,5 +118,3 @@ export interface VisibilityMap {
     actions: ActionsVisibilityType[] | boolean;
 }
 `;
-
-module.exports = {nativeResult, webResult};

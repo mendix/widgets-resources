@@ -1,11 +1,11 @@
-const listActionWebOutput = `/**
+export const listImageWebOutput = `/**
  * This file was generated from MyWidget.xml
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
 import { CSSProperties } from "react";
 import { pages } from "mendixmodelsdk";
-import { ActionValue, EditableValue } from "@mendix/pluggable-widgets-api/properties";
+import { DynamicValue, WebImage } from "@mendix/pluggable-widgets-api/properties";
 
 interface CommonProps {
     id: string;
@@ -15,18 +15,15 @@ interface CommonProps {
 }
 
 export interface ActionsType {
-    description: EditableValue<string>;
-    action: ActionValue;
+    image: DynamicValue<WebImage>;
 }
 
 export interface ActionsPreviewType {
-    description: string;
-    action: pages.ClientAction;
+    image: WebImage;
 }
 
 export interface ActionsVisibilityType {
-    description: boolean;
-    action: boolean;
+    image: boolean;
 }
 
 export interface MyWidgetContainerProps extends CommonProps {
@@ -41,25 +38,22 @@ export interface VisibilityMap {
     actions: ActionsVisibilityType[] | boolean;
 }
 `;
-const listActionNativeOutput = `/**
+export const listImageNativeOutput = `/**
  * This file was generated from MyWidget.xml
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import { ActionValue, EditableValue } from "@mendix/pluggable-widgets-api/properties";
+import { DynamicValue, NativeImage } from "@mendix/pluggable-widgets-api/properties";
 
 interface CommonProps<Style> {
     style: Style[];
 }
 
 export interface ActionsType {
-    description: EditableValue<string>;
-    action: ActionValue;
+    image: DynamicValue<NativeImage>;
 }
 
 export interface MyWidgetProps<Style> extends CommonProps<Style> {
     actions: ActionsType[];
 }
 `;
-
-module.exports = {listActionWebOutput, listActionNativeOutput};
