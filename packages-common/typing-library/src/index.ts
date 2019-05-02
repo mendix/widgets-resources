@@ -15,7 +15,7 @@ function typingGenerator(options: Options) {
             return cb(
                 new PluginError(
                     "pluggable-widgets-typing-generator",
-                    `Wrong parameters, use {widgetName: string, isNative: boolean} instead`
+                    `Wrong parameters, use {widgetName: string} instead`
                 )
             );
         }
