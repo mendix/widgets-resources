@@ -17,7 +17,7 @@ function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
     return Promise.all([createMxObject("NativeMobileActions.DeviceInfo"), DeviceInfo.getBatteryLevel()]).then(
         ([mxObject, batteryLevel]) => {
             mxObject.set("ApplicationName", DeviceInfo.getApplicationName());
-            mxObject.set("BatteryLevel", new Big(batteryLevel));
+            mxObject.set("BatteryLevel", new Big(batteryLevel.toFixed(2)));
             mxObject.set("Brand", DeviceInfo.getBrand());
             mxObject.set("BuildNumber", String(DeviceInfo.getBuildNumber()));
             mxObject.set("BundleId", DeviceInfo.getBundleId());
@@ -25,7 +25,7 @@ function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
             mxObject.set("DeviceCountry", DeviceInfo.getDeviceCountry());
             mxObject.set("DeviceId", DeviceInfo.getDeviceId());
             mxObject.set("DeviceLocale", DeviceInfo.getDeviceLocale());
-            mxObject.set("FontScale", new Big(DeviceInfo.getFontScale()));
+            mxObject.set("FontScale", new Big(DeviceInfo.getFontScale().toFixed(2)));
             mxObject.set("FreeDiskStorage", new Big(DeviceInfo.getFreeDiskStorage()));
             mxObject.set("Manufacturer", DeviceInfo.getManufacturer());
             mxObject.set("Model", DeviceInfo.getModel());
