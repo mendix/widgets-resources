@@ -2,7 +2,7 @@ import { ValueStatus } from "@mendix/pluggable-widgets-api/properties";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import MultiSlider, { MarkerProps } from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
-import { LayoutChangeEvent, View } from "react-native";
+import { LayoutChangeEvent, Text, View } from "react-native";
 
 import { RangeSliderProps } from "../typings/RangeSliderProps";
 import { Marker } from "./Marker";
@@ -54,6 +54,12 @@ export class RangeSlider extends Component<Props, State> {
                     customMarkerLeft={customMarker(enabledOne)}
                     customMarkerRight={customMarker(enabledTwo)}
                 />
+                {this.props.lowerValueAttribute.validation && (
+                    <Text style={this.styles.validationMessage}>{this.props.lowerValueAttribute.validation}</Text>
+                )}
+                {this.props.upperValueAttribute.validation && (
+                    <Text style={this.styles.validationMessage}>{this.props.upperValueAttribute.validation}</Text>
+                )}
             </View>
         );
     }

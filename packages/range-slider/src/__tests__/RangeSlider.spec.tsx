@@ -41,13 +41,23 @@ describe("RangeSlider", () => {
                         markerActive: {},
                         markerDisabled: {},
                         track: {},
-                        trackDisabled: {}
+                        trackDisabled: {},
+                        validationMessage: {}
                     }
                 ]}
             />
         );
         fireEvent(component.getByType(View), "layout", { nativeEvent: { layout: { width: 100 } } });
         expect(component.getByType(MultiSlider).props.sliderLength).toBe(100);
+    });
+
+    it("renders a validation message", () => {
+        const value = new EditableValueBuilder<BigJs.Big>().withValidation("Invalid").build();
+        const component = render(
+            <RangeSlider {...defaultProps} lowerValueAttribute={value} upperValueAttribute={value} />
+        );
+
+        expect(component.getAllByText("Invalid").length).toBe(2);
     });
 
     it("handles an invalid step size", () => {

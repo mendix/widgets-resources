@@ -1,5 +1,5 @@
 import { Style } from "@native-mobile-resources/util-widgets";
-import { Platform, ViewStyle } from "react-native";
+import { Platform, TextStyle, ViewStyle } from "react-native";
 
 export interface State {
     width?: number;
@@ -14,6 +14,7 @@ export interface RangeSliderStyle extends Style {
     marker: ViewStyle;
     markerActive: ViewStyle;
     markerDisabled: ViewStyle;
+    validationMessage: TextStyle;
 }
 
 const blue = "rgb(0,122,255)";
@@ -72,5 +73,8 @@ export const defaultRangeSliderStyle: RangeSliderStyle = {
                 borderColor: purpleLightest
             }
         })
+    },
+    validationMessage: {
+        color: "#ed1c24"
     }
 };
