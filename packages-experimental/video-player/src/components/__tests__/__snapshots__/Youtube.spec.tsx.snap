@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`YoutubePlayer Player should renders correctly 1`] = `
+<iframe
+  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen={true}
+  className="widget-video-player-iframe"
+  frameBorder="0"
+  src="https://www.youtube.com/embed/123456?modestbranding=1&rel=0&autoplay=0&controls=0&muted=0&loop=0"
+>
+  <div />
+</iframe>
+`;
+
+exports[`YoutubePlayer Player should renders correctly with aspectRatio 1`] = `[Function]`;
+
+exports[`YoutubePlayer Player should renders correctly with autoplay 1`] = `
+<iframe
+  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen={true}
+  className="widget-video-player-iframe"
+  frameBorder="0"
+  src="https://www.youtube.com/embed/123456?modestbranding=1&rel=0&autoplay=1&controls=0&muted=0&loop=0"
+>
+  <div />
+</iframe>
+`;
+
+exports[`YoutubePlayer Player should renders correctly with controls 1`] = `
+<iframe
+  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen={true}
+  className="widget-video-player-iframe"
+  frameBorder="0"
+  src="https://www.youtube.com/embed/123456?modestbranding=1&rel=0&autoplay=0&controls=1&muted=0&loop=0"
+>
+  <div />
+</iframe>
+`;
+
+exports[`YoutubePlayer Player should renders correctly with muted 1`] = `
+<iframe
+  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen={true}
+  className="widget-video-player-iframe"
+  frameBorder="0"
+  src="https://www.youtube.com/embed/123456?modestbranding=1&rel=0&autoplay=0&controls=0&muted=1&loop=0"
+>
+  <div />
+</iframe>
+`;

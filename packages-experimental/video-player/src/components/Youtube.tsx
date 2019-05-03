@@ -15,7 +15,7 @@ export interface YoutubeState {
     ratio: number;
 }
 
-export class YoutubePlayer extends Component<YoutubeProps, YoutubeState> {
+export class Youtube extends Component<YoutubeProps, YoutubeState> {
     private iframe = createRef<HTMLIFrameElement>();
     private readonly handleOnResize = this.onResize.bind(this);
     private handleAttributes = this.getUrlAttributes.bind(this);

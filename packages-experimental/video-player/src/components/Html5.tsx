@@ -12,7 +12,7 @@ export interface Html5PlayerProps {
     aspectRatio?: boolean;
 }
 
-export class Html5Player extends Component<Html5PlayerProps> {
+export class Html5 extends Component<Html5PlayerProps> {
     private videoElement = createRef<HTMLVideoElement>();
     private errorElement = createRef<HTMLDivElement>();
     private readonly handleOnResize = this.onResize.bind(this);

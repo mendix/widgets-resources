@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Player Error should renders correctly 1`] = `
+<div
+  className="widget-video-player-error-container"
+>
+  <div
+    className="video-error-label"
+  >
+    The video failed to load :(
+  </div>
+  <video
+    controls={true}
+    height="100%"
+    width="100%"
+  />
+</div>
+`;

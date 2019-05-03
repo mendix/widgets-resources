@@ -2,23 +2,23 @@ import { Component, createElement, createRef } from "react";
 import ReactResizeDetector from "react-resize-detector";
 import { fixHeightWithRatio, getRatio, validateUrl } from "../utils/Utils";
 
-export interface DailymotionProps {
+export interface VimeoProps {
     url: string;
     autoPlay: boolean;
-    controls: boolean;
+    loop: boolean;
     muted: boolean;
     aspectRatio?: boolean;
 }
 
-export interface DailymotionState {
+export interface VimeoState {
     ratio: number;
 }
 
-export class DailymotionPlayer extends Component<DailymotionProps, DailymotionState> {
+export class Vimeo extends Component<VimeoProps, VimeoState> {
     private iframe = createRef<HTMLIFrameElement>();
     private readonly handleOnResize = this.onResize.bind(this);
     private handleAttributes = this.getUrlAttributes.bind(this);
-    readonly state: DailymotionState = {
+    readonly state: VimeoState = {
         ratio: 0,
     };
 
@@ -55,14 +55,14 @@ export class DailymotionPlayer extends Component<DailymotionProps, DailymotionSt
     private generateUrl(url: string): string {
         const attributes = this.handleAttributes();
         try {
-            if (url.includes("dailymotion.com/embed")) {
-                return `${url}${attributes}`;
-            }
+            if (url.includes("player.vimeo.com")) return `${url}${attributes}`;
 
             const urlVimeoSplit = url.split("/");
             if (urlVimeoSplit.length > 0) {
                 const id = urlVimeoSplit[urlVimeoSplit.length - 1];
-                if (id) return `https://www.dailymotion.com/embed/video/${id}${attributes}`;
+                if (Number(id) > 0 && isFinite(Number(id))) {
+                    return `https://player.vimeo.com/video/${id}${attributes}`;
+                }
             }
         } catch (e) {
             return url;
@@ -71,15 +71,15 @@ export class DailymotionPlayer extends Component<DailymotionProps, DailymotionSt
     }
 
     private getUrlAttributes(): string {
-        let attributes = "?sharing-enable=false";
-        attributes += "&autoplay=" + (this.props.autoPlay ? "true" : "false");
-        attributes += "&mute=" + (this.props.muted ? "true" : "false");
-        attributes += "&controls=" + (this.props.controls ? "true" : "false");
+        let attributes = "?dnt=1";
+        attributes += "&autoplay=" + (this.props.autoPlay ? "1" : "0");
+        attributes += "&muted=" + (this.props.muted ? "1" : "0");
+        attributes += "&loop=" + (this.props.loop ? "1" : "0");
         return attributes;
     }
 
     public static canPlay(url: string): boolean {
-        if (url && validateUrl(url) && url.indexOf("dailymotion.com") > -1) {
+        if (url && validateUrl(url) && url.indexOf("vimeo.com") > -1) {
             return true;
         }
         return false;

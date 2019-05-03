@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dailymotion Player should renders correctly 1`] = `
+<iframe
+  allow="autoplay; fullscreen"
+  allowFullScreen={true}
+  className="widget-video-player-iframe"
+  frameBorder="0"
+  src="https://www.dailymotion.com/embed/video/test?sharing-enable=false&autoplay=false&mute=false&controls=false"
+>
+  <div />
+</iframe>
+`;
+
+exports[`Dailymotion Player should renders correctly with aspectRatio 1`] = `[Function]`;
+
+exports[`Dailymotion Player should renders correctly with autoplay 1`] = `
+<iframe
+  allow="autoplay; fullscreen"
+  allowFullScreen={true}
+  className="widget-video-player-iframe"
+  frameBorder="0"
+  src="https://www.dailymotion.com/embed/video/test?sharing-enable=false&autoplay=true&mute=false&controls=false"
+>
+  <div />
+</iframe>
+`;
+
+exports[`Dailymotion Player should renders correctly with controls 1`] = `
+<iframe
+  allow="autoplay; fullscreen"
+  allowFullScreen={true}
+  className="widget-video-player-iframe"
+  frameBorder="0"
+  src="https://www.dailymotion.com/embed/video/test?sharing-enable=false&autoplay=false&mute=false&controls=true"
+>
+  <div />
+</iframe>
+`;
+
+exports[`Dailymotion Player should renders correctly with muted 1`] = `
+<iframe
+  allow="autoplay; fullscreen"
+  allowFullScreen={true}
+  className="widget-video-player-iframe"
+  frameBorder="0"
+  src="https://www.dailymotion.com/embed/video/test?sharing-enable=false&autoplay=false&mute=true&controls=false"
+>
+  <div />
+</iframe>
+`;

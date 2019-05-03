@@ -2,7 +2,7 @@ import { Component, createElement } from "react";
 import classNames from "classnames";
 
 import { Alert } from "./components/Alert";
-import { PlayerError } from "./components/PlayerError";
+import { Error } from "./components/Error";
 import { SizeContainer } from "./components/SizeContainer";
 import { Video, VideoPlayerProps } from "./components/Video";
 import { validateUrl } from "./utils/Utils";
@@ -33,7 +33,7 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
 
     private renderPlayers(): JSX.Element {
         if (!validateUrl(this.props.urlAttribute || this.props.urlStatic || "")) {
-            return <PlayerError preview={true} />;
+            return <Error preview={true} />;
         }
         return <Video {...this.transformProps(this.props)} />;
     }

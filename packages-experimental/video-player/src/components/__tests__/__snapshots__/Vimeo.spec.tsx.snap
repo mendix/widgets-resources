@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VimeoPlayer Player should renders correctly 1`] = `
+<iframe
+  allow="autoplay; fullscreen"
+  allowFullScreen={true}
+  className="widget-video-player-iframe"
+  frameBorder="0"
+  src="https://player.vimeo.com/video/123456?dnt=1&autoplay=0&muted=0&loop=0"
+>
+  <div />
+</iframe>
+`;
+
+exports[`VimeoPlayer Player should renders correctly with aspectRatio 1`] = `[Function]`;
+
+exports[`VimeoPlayer Player should renders correctly with autoplay 1`] = `
+<iframe
+  allow="autoplay; fullscreen"
+  allowFullScreen={true}
+  className="widget-video-player-iframe"
+  frameBorder="0"
+  src="https://player.vimeo.com/video/123456?dnt=1&autoplay=1&muted=0&loop=0"
+>
+  <div />
+</iframe>
+`;
+
+exports[`VimeoPlayer Player should renders correctly with muted 1`] = `
+<iframe
+  allow="autoplay; fullscreen"
+  allowFullScreen={true}
+  className="widget-video-player-iframe"
+  frameBorder="0"
+  src="https://player.vimeo.com/video/123456?dnt=1&autoplay=0&muted=1&loop=0"
+>
+  <div />
+</iframe>
+`;

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert renders the structure when an alert message is specified 1`] = `
+<div
+  className="alert alert-danger widget-badge-alert"
+>
+  This is an error
+</div>
+`;

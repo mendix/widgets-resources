@@ -1,93 +1,52 @@
 import { createElement } from "react";
-import { shallow } from "enzyme";
 
-import { DailymotionPlayer } from "../DailymotionPlayer";
+import { Dailymotion, DailymotionProps } from "../Dailymotion";
+import { create } from "react-test-renderer";
 import ReactResizeDetector from "react-resize-detector";
 
-describe("DailymotionPlayer Player", () => {
-    it("Renders the structure of iframe tags and check the structure", () => {
-        const player = shallow(<DailymotionPlayer url="http://dailymotion.com/123456" controls={false} autoPlay={false} muted={false} aspectRatio={false} />);
+describe("Dailymotion Player", () => {
+    const defaultProps = {
+        url: "test",
+        autoPlay: false,
+        muted: false,
+        showControls: false,
+        aspectRatio: false,
+    };
 
-        expect(
-            player.equals(
-                <iframe
-                    className="widget-video-player-iframe"
-                    frameBorder="0"
-                    allow="autoplay; fullscreen"
-                    allowFullScreen={true}
-                    src="https://www.dailymotion.com/embed/video/123456?sharing-enable=false&autoplay=false&mute=false&controls=false"
-                >
-                    <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)} refreshMode="debounce" refreshRate={100} />
-                </iframe>,
-            ),
-        ).toEqual(true);
+    const defaulPlayer = (props: DailymotionProps) => <Dailymotion {...props} />;
+
+    it("should renders correctly", () => {
+        const player = create(defaulPlayer(defaultProps)).toJSON();
+
+        expect(player).toMatchSnapshot();
     });
 
-    it("Renders the structure of iframe tags and check classes", () => {
-        const player = shallow(<DailymotionPlayer url="http://dailymotion.com/123456" controls={true} autoPlay={false} muted={false} aspectRatio={false} />);
+    it("should renders correctly with autoplay", () => {
+        const player = create(defaulPlayer({ ...defaultProps, autoPlay: true })).toJSON();
 
-        expect(
-            player.equals(
-                <iframe
-                    className="widget-video-player-iframe"
-                    frameBorder="0"
-                    allow="autoplay; fullscreen"
-                    allowFullScreen={true}
-                    src="https://www.dailymotion.com/embed/video/123456?sharing-enable=false&autoplay=false&mute=false&controls=true"
-                >
-                    <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)} refreshMode="debounce" refreshRate={100} />
-                </iframe>,
-            ),
-        ).toEqual(true);
-        expect(player).toHaveClass("widget-video-player-iframe");
-        expect(player).toBeDefined();
+        expect(player).toMatchSnapshot();
     });
 
-    it("Renders the structure of iframe tags and check the structure with properties", () => {
-        const player = shallow(<DailymotionPlayer url="http://dailymotion.com/123456" controls={true} autoPlay={true} muted={true} aspectRatio={true} />);
+    it("should renders correctly with muted", () => {
+        const player = create(defaulPlayer({ ...defaultProps, muted: true })).toJSON();
 
-        expect(
-            player.equals(
-                <iframe
-                    className="widget-video-player-iframe"
-                    frameBorder="0"
-                    allow="autoplay; fullscreen"
-                    allowFullScreen={true}
-                    src="https://www.dailymotion.com/embed/video/123456?sharing-enable=false&autoplay=true&mute=true&controls=true"
-                >
-                    <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)} refreshMode="debounce" refreshRate={100} />
-                </iframe>,
-            ),
-        ).toEqual(true);
+        expect(player).toMatchSnapshot();
     });
 
-    it("Renders the structure of iframe tags with an embed url", () => {
-        const player = shallow(<DailymotionPlayer url="http://dailymotion.com/embed/123456" controls={true} autoPlay={true} muted={true} aspectRatio={true} />);
+    it("should renders correctly with controls", () => {
+        const player = create(defaulPlayer({ ...defaultProps, showControls: true })).toJSON();
 
-        expect(
-            player.equals(
-                <iframe
-                    className="widget-video-player-iframe"
-                    frameBorder="0"
-                    allow="autoplay; fullscreen"
-                    allowFullScreen={true}
-                    src="http://dailymotion.com/embed/123456?sharing-enable=false&autoplay=true&mute=true&controls=true"
-                >
-                    <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)} refreshMode="debounce" refreshRate={100} />
-                </iframe>,
-            ),
-        ).toEqual(true);
+        expect(player).toMatchSnapshot();
     });
 
-    it("Renders the structure of iframe tags with an invalid url", () => {
-        const player = shallow(<DailymotionPlayer url="" controls={true} autoPlay={true} muted={true} aspectRatio={true} />);
+    it("should renders correctly with aspectRatio", () => {
+        const player = create(defaulPlayer({ ...defaultProps, aspectRatio: true }));
+        window.dispatchEvent(new Event("resize"));
+        const instance = player.root;
+        const sizeDetector = instance.findByType(ReactResizeDetector);
 
-        expect(
-            player.equals(
-                <iframe className="widget-video-player-iframe" frameBorder="0" allow="autoplay; fullscreen" allowFullScreen={true} src="">
-                    <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)} refreshMode="debounce" refreshRate={100} />
-                </iframe>,
-            ),
-        ).toEqual(true);
+        expect(player.toJSON).toMatchSnapshot();
+        expect(sizeDetector).not.toBeNull();
+        expect(sizeDetector.props).toHaveProperty("onResize");
     });
 });

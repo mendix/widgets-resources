@@ -1,19 +1,21 @@
 import { createElement } from "react";
-import { create } from "react-test-renderer";
 
-import { Vimeo, VimeoProps } from "../Vimeo";
+import { Html5Player, Html5PlayerProps } from "../Html5Player";
+import { create } from "react-test-renderer";
 import ReactResizeDetector from "react-resize-detector";
 
-describe("VimeoPlayer Player", () => {
+describe("Html5 Player", () => {
     const defaultProps = {
-        url: "http://vimeo.com/123456",
+        url: "test",
         autoPlay: false,
         muted: false,
         loop: false,
+        showControls: false,
         aspectRatio: false,
+        poster: "test",
     };
 
-    const defaulPlayer = (props: VimeoProps) => <Vimeo {...props} />;
+    const defaulPlayer = (props: Html5PlayerProps) => <Html5Player {...props} />;
 
     it("should renders correctly", () => {
         const player = create(defaulPlayer(defaultProps)).toJSON();
@@ -33,6 +35,18 @@ describe("VimeoPlayer Player", () => {
         expect(player).toMatchSnapshot();
     });
 
+    it("should renders correctly with controls", () => {
+        const player = create(defaulPlayer({ ...defaultProps, showControls: true })).toJSON();
+
+        expect(player).toMatchSnapshot();
+    });
+
+    it("should renders correctly with poster", () => {
+        const player = create(defaulPlayer({ ...defaultProps, poster: "https://www.mendix.com/wp-content/themes/mendix/ui/images/homepage/air-status-app@2x.png" })).toJSON();
+
+        expect(player).toMatchSnapshot();
+    });
+
     it("should renders correctly with aspectRatio", () => {
         const player = create(defaulPlayer({ ...defaultProps, aspectRatio: true }));
         window.dispatchEvent(new Event("resize"));
@@ -43,4 +57,5 @@ describe("VimeoPlayer Player", () => {
         expect(sizeDetector).not.toBeNull();
         expect(sizeDetector.props).toHaveProperty("onResize");
     });
+
 });
