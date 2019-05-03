@@ -99,7 +99,10 @@
         "proseWrap": "always",
         "overrides": [
             {
-                "files": "CHANGELOG.md",
+                "files": [
+                    "CHANGELOG.md",
+                    ".travis.yml"
+                ],
                 "options": {
                     "proseWrap": "preserve"
                 }

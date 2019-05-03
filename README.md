@@ -1,3 +1,6 @@
+[![Build Status](https://api.travis-ci.org/mendix/native-mobile-resources.svg?branch=master)](https://travis-ci.org/mendix/native-mobile-resources)
+![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
+
 # Native mobile resources
 
 Widgets & nanoflow actions for native mobile.
