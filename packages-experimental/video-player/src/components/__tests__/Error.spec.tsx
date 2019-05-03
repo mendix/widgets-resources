@@ -1,11 +1,11 @@
 import { createElement } from "react";
 
-import { PlayerError } from "../PlayerError";
+import { Error } from "../Error";
 import { create } from "react-test-renderer";
 
 describe("Player Error", () => {
     it("should renders correctly", () => {
-        const player = create(<PlayerError />).toJSON();
+        const player = create(<Error />).toJSON();
         expect(player).toMatchSnapshot();
     });
 });

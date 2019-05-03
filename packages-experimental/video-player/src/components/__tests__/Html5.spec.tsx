@@ -1,6 +1,6 @@
 import { createElement } from "react";
 
-import { Html5Player, Html5PlayerProps } from "../Html5Player";
+import { Html5, Html5PlayerProps } from "../Html5";
 import { create } from "react-test-renderer";
 import ReactResizeDetector from "react-resize-detector";
 
@@ -15,7 +15,7 @@ describe("Html5 Player", () => {
         poster: "test",
     };
 
-    const defaulPlayer = (props: Html5PlayerProps) => <Html5Player {...props} />;
+    const defaulPlayer = (props: Html5PlayerProps) => <Html5 {...props} />;
 
     it("should renders correctly", () => {
         const player = create(defaulPlayer(defaultProps)).toJSON();
@@ -41,8 +41,16 @@ describe("Html5 Player", () => {
         expect(player).toMatchSnapshot();
     });
 
+    it("should renders correctly with loop", () => {
+        const player = create(defaulPlayer({ ...defaultProps, loop: true })).toJSON();
+
+        expect(player).toMatchSnapshot();
+    });
+
     it("should renders correctly with poster", () => {
-        const player = create(defaulPlayer({ ...defaultProps, poster: "https://www.mendix.com/wp-content/themes/mendix/ui/images/homepage/air-status-app@2x.png" })).toJSON();
+        const player = create(
+            defaulPlayer({ ...defaultProps, poster: "https://www.mendix.com/wp-content/themes/mendix/ui/images/homepage/air-status-app@2x.png" }),
+        ).toJSON();
 
         expect(player).toMatchSnapshot();
     });
