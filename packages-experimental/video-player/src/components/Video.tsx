@@ -27,7 +27,7 @@ export class Video extends Component<VideoPlayerProps> {
     private readonly handleVimeoPlayerRender = this.renderVimeoPlayer.bind(this);
     private readonly handleDailymotionPlayerRender = this.renderDailymotionPlayer.bind(this);
 
-    render() {
+    render(): JSX.Element {
         const url = this.props.url || this.props.staticUrl || "";
         if (YoutubePlayer.canPlay(url)) {
             return this.handleYoutubePlayerRender(url);

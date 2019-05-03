@@ -20,10 +20,10 @@ export class YoutubePlayer extends Component<YoutubeProps, YoutubeState> {
     private readonly handleOnResize = this.onResize.bind(this);
     private handleAttributes = this.getUrlAttributes.bind(this);
     readonly state: YoutubeState = {
-        ratio: 0
+        ratio: 0,
     };
 
-    render() {
+    render(): JSX.Element {
         return (
             <iframe
                 className="widget-video-player-iframe"
@@ -31,23 +31,24 @@ export class YoutubePlayer extends Component<YoutubeProps, YoutubeState> {
                 frameBorder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen={true}
-                ref={this.iframe}>
-                <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize}
-                                     refreshMode="debounce" refreshRate={100}/>
+                ref={this.iframe}
+            >
+                <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize} refreshMode="debounce" refreshRate={100} />
             </iframe>
         );
     }
 
-    private onResize() {
+    private onResize(): void {
         if (this.iframe && this.iframe.current && this.props.aspectRatio) {
             if (this.state.ratio) {
                 fixHeightWithRatio(this.iframe.current, this.state.ratio);
             } else {
-                getRatio(this.props.url)
-                    .then(ratio => {
-                        this.setState({ ratio });
-                        fixHeightWithRatio(this.iframe.current!, this.state.ratio);
-                    });
+                getRatio(this.props.url).then(ratio => {
+                    this.setState({ ratio });
+                    if (this.iframe && this.iframe.current) {
+                        fixHeightWithRatio(this.iframe.current, this.state.ratio);
+                    }
+                });
             }
         }
     }
@@ -88,10 +89,9 @@ export class YoutubePlayer extends Component<YoutubeProps, YoutubeState> {
     }
 
     public static canPlay(url: string): boolean {
-        if (url && validateUrl(url) && url.indexOf("youtube.com") > -1 || url.indexOf("youtu.be") > -1) {
+        if ((url && validateUrl(url) && url.indexOf("youtube.com") > -1) || url.indexOf("youtu.be") > -1) {
             return true;
         }
         return false;
     }
-
 }

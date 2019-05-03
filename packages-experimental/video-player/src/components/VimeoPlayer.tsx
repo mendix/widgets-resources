@@ -15,15 +15,14 @@ export interface VimeoState {
 }
 
 export class VimeoPlayer extends Component<VimeoProps, VimeoState> {
-
     private iframe = createRef<HTMLIFrameElement>();
     private readonly handleOnResize = this.onResize.bind(this);
     private handleAttributes = this.getUrlAttributes.bind(this);
     readonly state: VimeoState = {
-        ratio: 0
+        ratio: 0,
     };
 
-    render() {
+    render(): JSX.Element {
         return (
             <iframe
                 className="widget-video-player-iframe"
@@ -31,23 +30,24 @@ export class VimeoPlayer extends Component<VimeoProps, VimeoState> {
                 frameBorder="0"
                 allow="autoplay; fullscreen"
                 allowFullScreen={true}
-                ref={this.iframe}>
-                <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize}
-                                     refreshMode="debounce" refreshRate={100}/>
+                ref={this.iframe}
+            >
+                <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize} refreshMode="debounce" refreshRate={100} />
             </iframe>
         );
     }
 
-    private onResize() {
+    private onResize(): void {
         if (this.iframe && this.iframe.current && this.props.aspectRatio) {
             if (this.state.ratio) {
                 fixHeightWithRatio(this.iframe.current, this.state.ratio);
             } else {
-                getRatio(this.props.url)
-                    .then(ratio => {
-                        this.setState({ ratio });
-                        fixHeightWithRatio(this.iframe.current!, this.state.ratio);
-                    });
+                getRatio(this.props.url).then(ratio => {
+                    this.setState({ ratio });
+                    if (this.iframe && this.iframe.current) {
+                        fixHeightWithRatio(this.iframe.current, this.state.ratio);
+                    }
+                });
             }
         }
     }
@@ -55,8 +55,7 @@ export class VimeoPlayer extends Component<VimeoProps, VimeoState> {
     private generateUrl(url: string): string {
         const attributes = this.handleAttributes();
         try {
-            if (url.includes("player.vimeo.com"))
-                return `${url}${attributes}`;
+            if (url.includes("player.vimeo.com")) return `${url}${attributes}`;
 
             const urlVimeoSplit = url.split("/");
             if (urlVimeoSplit.length > 0) {

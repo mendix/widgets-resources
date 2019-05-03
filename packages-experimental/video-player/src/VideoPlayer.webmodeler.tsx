@@ -10,12 +10,11 @@ import { VideoPlayerPreviewProps } from "../typings/VideoPlayerProps";
 
 declare function require(name: string): string;
 
-// tslint:disable-next-line class-name
+// eslint-disable-next-line @typescript-eslint/class-name-casing
 export class preview extends Component<VideoPlayerPreviewProps, {}> {
-    render() {
+    render(): JSX.Element {
         const message = this.validateProps(this.props);
-        if (message)
-            return (<Alert message={message} className="widget-badge-alert"/>);
+        if (message) return <Alert message={message} className="widget-badge-alert" />;
 
         return (
             <SizeContainer
@@ -25,7 +24,8 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
                 width={this.props.width}
                 heightUnit={this.props.heightUnit}
                 height={this.props.height}
-                tabIndex={this.props.tabIndex}>
+                tabIndex={this.props.tabIndex}
+            >
                 {this.renderPlayers()}
             </SizeContainer>
         );
@@ -33,9 +33,9 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
 
     private renderPlayers(): JSX.Element {
         if (!validateUrl(this.props.urlAttribute || this.props.urlStatic || "")) {
-            return <PlayerError preview={true}/>;
+            return <PlayerError preview={true} />;
         }
-        return <Video {...this.transformProps(this.props)}/>;
+        return <Video {...this.transformProps(this.props)} />;
     }
 
     private transformProps(props: VideoPlayerPreviewProps): VideoPlayerProps {
@@ -49,7 +49,7 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
             loop: false,
             muted: true,
             aspectRatio: false,
-            preview: true
+            preview: true,
         };
     }
 
@@ -63,6 +63,6 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
     }
 }
 
-export function getPreviewCss() {
+export function getPreviewCss(): string {
     return require("./ui/VideoPlayer.css");
 }

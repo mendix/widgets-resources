@@ -21,12 +21,14 @@ describe("Video Player", () => {
                 loop={false}
                 muted={false}
                 aspectRatio={false}
-            />
+            />,
         );
 
-        expect(player.equals(
-            <YoutubePlayer url="http://youtube.com/video/123456" showControls={false} autoPlay={false} muted={false} loop={false} aspectRatio={false} />
-        )).toEqual(true);
+        expect(
+            player.equals(
+                <YoutubePlayer url="http://youtube.com/video/123456" showControls={false} autoPlay={false} muted={false} loop={false} aspectRatio={false} />,
+            ),
+        ).toEqual(true);
     });
 
     it("Renders the structure of vimeo tags", () => {
@@ -41,7 +43,7 @@ describe("Video Player", () => {
                 loop={false}
                 muted={false}
                 aspectRatio={false}
-            />
+            />,
         );
 
         expect(player.equals(<VimeoPlayer url="http://vimeo.com/123456" autoPlay={false} muted={false} loop={false} aspectRatio={false} />)).toEqual(true);
@@ -62,9 +64,9 @@ describe("Video Player", () => {
             />,
         );
 
-        expect(player.equals(
-            <DailymotionPlayer controls={false} url="http://dailymotion.com/123456" autoPlay={false} muted={false} aspectRatio={false} />
-        )).toEqual(true);
+        expect(
+            player.equals(<DailymotionPlayer controls={false} url="http://dailymotion.com/123456" autoPlay={false} muted={false} aspectRatio={false} />),
+        ).toEqual(true);
     });
 
     it("Renders the structure of html5 player tags", () => {
@@ -79,12 +81,14 @@ describe("Video Player", () => {
                 loop={false}
                 muted={false}
                 aspectRatio={false}
-            />
+            />,
         );
 
-        expect(player.equals(
-            <Html5Player url="http://ext.com/video.mp4" showControls={false} autoPlay={false} muted={false} loop={false} aspectRatio={false} poster="" />
-        )).toEqual(true);
+        expect(
+            player.equals(
+                <Html5Player url="http://ext.com/video.mp4" showControls={false} autoPlay={false} muted={false} loop={false} aspectRatio={false} poster="" />,
+            ),
+        ).toEqual(true);
     });
 
     it("Test fixHeightWithRatio", () => {

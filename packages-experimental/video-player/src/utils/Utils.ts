@@ -1,10 +1,10 @@
 export const fixHeightWithRatio = (element: HTMLElement, ratio: number): void => {
-    const height = element.parentElement ? element.parentElement!.offsetWidth * ratio : 0;
-    if (height > 0) {
+    const height = element.parentElement ? element.parentElement.offsetWidth * ratio : 0;
+    if (height > 0 && element.parentElement) {
         element.style.height = `${height}px`;
-        element.parentElement!.style.height = `${height}px`;
-        if (element.parentElement!.parentElement) {
-            element.parentElement!.parentElement!.style.height = `${height}px`;
+        element.parentElement.style.height = `${height}px`;
+        if (element.parentElement.parentElement) {
+            element.parentElement.parentElement.style.height = `${height}px`;
         }
     }
 };

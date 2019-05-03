@@ -19,7 +19,7 @@ export class Html5Player extends Component<Html5PlayerProps> {
     private readonly handleOnSuccess = this.handleSuccess.bind(this);
     private readonly handleOnError = this.handleError.bind(this);
 
-    render() {
+    render(): JSX.Element {
         const sizeProps: CSSProperties = {
             height: !this.props.aspectRatio ? "100%" : undefined,
         };

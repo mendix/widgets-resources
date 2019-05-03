@@ -7,7 +7,7 @@ export interface AlertProps {
     bootstrapStyle?: "default" | "primary" | "success" | "info" | "warning" | "danger";
 }
 
-export const Alert: FunctionComponent<AlertProps> = props =>
+export const Alert: FunctionComponent<AlertProps> = (props: AlertProps): JSX.Element | null =>
     props.message ? <div className={classNames(`alert alert-${props.bootstrapStyle}`, props.className)}>{props.message}</div> : null;
 
 Alert.displayName = "Alert";

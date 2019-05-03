@@ -20,7 +20,7 @@
     "lint": "npm run mx-script lint",
     "lint:fix": "npm run mx-script lint:fix",
     "mx-script": "cd ./node_modules/@mendix/pluggable-widgets-tools && node bin/mx-scripts.js",
-    "pretest": "tsc && npm run lint && npm run build",
+    "pretest": "npm run lint && npm run build",
     "test": "npm run mx-script test:unit -- --no-cache --ci && npm run test:e2e",
     "test:unit": "npm run mx-script test:unit -- --coverage",
     "test:e2e": "export URL=https://videoplayer-sandbox.mxapps.io/ || set URL=https://videoplayer-sandbox.mxapps.io/ && npm run mx-script test:e2e:ts",

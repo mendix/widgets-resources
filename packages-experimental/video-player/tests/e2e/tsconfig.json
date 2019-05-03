@@ -11,7 +11,8 @@
       "types": [
         "jasmine",
         "webdriverio"
-      ]
+      ],
+      "sourceMap": false
     },
     "exclude": [
       "node_modules"

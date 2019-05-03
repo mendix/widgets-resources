@@ -22,7 +22,7 @@ export class DailymotionPlayer extends Component<DailymotionProps, DailymotionSt
         ratio: 0,
     };
 
-    render() {
+    render(): JSX.Element {
         return (
             <iframe
                 className="widget-video-player-iframe"
@@ -37,14 +37,16 @@ export class DailymotionPlayer extends Component<DailymotionProps, DailymotionSt
         );
     }
 
-    private onResize() {
+    private onResize(): void {
         if (this.iframe && this.iframe.current && this.props.aspectRatio) {
             if (this.state.ratio) {
                 fixHeightWithRatio(this.iframe.current, this.state.ratio);
             } else {
                 getRatio(this.props.url).then(ratio => {
                     this.setState({ ratio });
-                    fixHeightWithRatio(this.iframe.current!, this.state.ratio);
+                    if (this.iframe && this.iframe.current) {
+                        fixHeightWithRatio(this.iframe.current, this.state.ratio);
+                    }
                 });
             }
         }
