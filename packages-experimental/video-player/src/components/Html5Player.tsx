@@ -1,4 +1,4 @@
-import { CSSProperties, Component, createElement } from "react";
+import { CSSProperties, Component, createElement, createRef } from "react";
 import ReactResizeDetector from "react-resize-detector";
 
 export interface Html5PlayerProps {
@@ -13,21 +13,20 @@ export interface Html5PlayerProps {
 }
 
 export class Html5Player extends Component<Html5PlayerProps> {
-
-    private videoElement: HTMLVideoElement | null = null;
-    private errorElement: HTMLDivElement;
+    private videoElement = createRef<HTMLVideoElement>();
+    private errorElement = createRef<HTMLDivElement>();
     private readonly handleOnResize = this.onResize.bind(this);
     private readonly handleOnSuccess = this.handleSuccess.bind(this);
     private readonly handleOnError = this.handleError.bind(this);
 
     render() {
         const sizeProps: CSSProperties = {
-            height: !this.props.aspectRatio ? "100%" : undefined
+            height: !this.props.aspectRatio ? "100%" : undefined,
         };
         return (
             <div className="widget-video-player-html5-container">
-                <div className="video-error-label-html5" ref={(node: HTMLDivElement) => this.errorElement = node}>We are
-                    unable to show the video content :(
+                <div className="video-error-label-html5" ref={this.errorElement}>
+                    The video failed to load :(
                 </div>
                 <video
                     className="widget-video-player-html5"
@@ -36,32 +35,31 @@ export class Html5Player extends Component<Html5PlayerProps> {
                     muted={this.props.muted}
                     loop={this.props.loop}
                     poster={this.props.poster}
-                    ref={(node: HTMLVideoElement) => this.videoElement = node}
-                    {...sizeProps}>
-                    <source src={this.props.url} type="video/mp4" onError={this.handleOnError}
-                            onLoad={this.handleOnSuccess}/>
-                    <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize}
-                                         refreshMode="debounce" refreshRate={100}/>
+                    ref={this.videoElement}
+                    {...sizeProps}
+                >
+                    <source src={this.props.url} type="video/mp4" onError={this.handleOnError} onLoad={this.handleOnSuccess} />
+                    <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize} refreshMode="debounce" refreshRate={100} />
                 </video>
             </div>
         );
     }
 
     private handleError(): void {
-        if (this.errorElement) {
-            this.errorElement.classList.add("hasError");
+        if (this.errorElement && this.errorElement.current) {
+            this.errorElement.current.classList.add("hasError");
         }
     }
 
     private handleSuccess(): void {
-        if (this.errorElement) {
-            this.errorElement.classList.remove("hasError");
+        if (this.errorElement && this.errorElement.current) {
+            this.errorElement.current.classList.remove("hasError");
         }
     }
 
     private onResize(): void {
-        if (this.videoElement && this.props.aspectRatio) {
-            this.changeHeight(this.videoElement);
+        if (this.videoElement && this.videoElement.current && this.props.aspectRatio) {
+            this.changeHeight(this.videoElement.current);
         }
     }
 

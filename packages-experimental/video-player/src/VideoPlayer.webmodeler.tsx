@@ -1,17 +1,17 @@
-import { Component, ReactElement, createElement } from "react";
-import * as classNames from "classnames";
+import { Component, createElement } from "react";
+import classNames from "classnames";
 
 import { Alert } from "./components/Alert";
 import { PlayerError } from "./components/PlayerError";
 import { SizeContainer } from "./components/SizeContainer";
-import { VideoPlayer, VideoPlayerProps } from "./components/VideoPlayer";
+import { Video, VideoPlayerProps } from "./components/Video";
 import { validateUrl } from "./utils/Utils";
-import { VideoPlayerWebModelerProps } from "../typings/VideoPlayerProps";
+import { VideoPlayerPreviewProps } from "../typings/VideoPlayerProps";
 
 declare function require(name: string): string;
 
 // tslint:disable-next-line class-name
-export class preview extends Component<VideoPlayerWebModelerProps, {}> {
+export class preview extends Component<VideoPlayerPreviewProps, {}> {
     render() {
         const message = this.validateProps(this.props);
         if (message)
@@ -31,14 +31,14 @@ export class preview extends Component<VideoPlayerWebModelerProps, {}> {
         );
     }
 
-    private renderPlayers(): ReactElement<{}> {
+    private renderPlayers(): JSX.Element {
         if (!validateUrl(this.props.urlAttribute || this.props.urlStatic || "")) {
             return <PlayerError preview={true}/>;
         }
-        return <VideoPlayer {...this.transformProps(this.props)}/>;
+        return <Video {...this.transformProps(this.props)}/>;
     }
 
-    private transformProps(props: VideoPlayerWebModelerProps): VideoPlayerProps {
+    private transformProps(props: VideoPlayerPreviewProps): VideoPlayerProps {
         return {
             url: props.urlAttribute,
             staticUrl: props.urlStatic,
@@ -53,7 +53,7 @@ export class preview extends Component<VideoPlayerWebModelerProps, {}> {
         };
     }
 
-    private validateProps(props: VideoPlayerWebModelerProps): string {
+    private validateProps(props: VideoPlayerPreviewProps): string {
         let errorMessage = "";
         if (!props.urlAttribute && !props.urlStatic) {
             errorMessage = "An URL is required for this widget";

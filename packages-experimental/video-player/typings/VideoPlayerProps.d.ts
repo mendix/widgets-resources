@@ -4,6 +4,7 @@
  * @author Mendix Widgets Team
  */
 import { CSSProperties } from "react";
+import { EditableValue } from "@mendix/pluggable-widgets-api/properties";
 
 interface CommonProps {
     id: string;
@@ -17,9 +18,9 @@ export type WidthUnitEnum = "percentage" | "pixels";
 export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
 
 export interface VideoPlayerContainerProps extends CommonProps {
-    urlAttribute?: PluginWidget.EditableValue<string>;
+    urlAttribute?: EditableValue<string>;
     urlStatic?: string;
-    posterAttribute?: PluginWidget.EditableValue<string>;
+    posterAttribute?: EditableValue<string>;
     posterImageUrl?: string;
     autoStart: boolean;
     showControls: boolean;
@@ -32,7 +33,7 @@ export interface VideoPlayerContainerProps extends CommonProps {
     height: number;
 }
 
-export interface VideoPlayerWebModelerProps extends CommonProps {
+export interface VideoPlayerPreviewProps extends CommonProps {
     urlAttribute?: string;
     urlStatic?: string;
     posterAttribute?: string;

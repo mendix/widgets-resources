@@ -1,5 +1,5 @@
 import { CSSProperties, FunctionComponent, createElement } from "react";
-import * as classNames from "classnames";
+import classNames from "classnames";
 
 export type HeightUnitType = "percentageOfWidth" | "percentageOfParent" | "pixels";
 
@@ -19,7 +19,7 @@ export interface SizeProps extends Dimensions {
     style?: CSSProperties;
 }
 
-export const SizeContainer: FunctionComponent<SizeProps> = (props) => {
+export const SizeContainer: FunctionComponent<SizeProps> = props => {
     const styleWidth = props.widthUnit === "percentage" ? `${props.width}%` : `${props.width}px`;
     const relativeStyle: CSSProperties = {
         position: "relative",
@@ -27,7 +27,7 @@ export const SizeContainer: FunctionComponent<SizeProps> = (props) => {
         ...getHeight(props.heightUnit, props.height, props.widthUnit, props.width),
         display: "flex",
         justifyContent: "center",
-        ...props.style
+        ...props.style,
     };
     const absoluteStyle: CSSProperties = {
         position: "absolute",
@@ -36,7 +36,7 @@ export const SizeContainer: FunctionComponent<SizeProps> = (props) => {
         bottom: "0",
         left: "0",
         display: "flex",
-        justifyContent: "center"
+        justifyContent: "center",
     };
 
     return (
@@ -53,7 +53,7 @@ SizeContainer.displayName = "SizeContainer";
 const getHeight = (heightUnit: HeightUnitType, height: number, widthUnit: WidthUnitType, width: number): CSSProperties => {
     const style: CSSProperties = {};
     if (heightUnit === "percentageOfWidth") {
-        const ratio = height / 100 * width;
+        const ratio = (height / 100) * width;
         if (widthUnit === "percentage") {
             style.height = "auto";
             style.paddingBottom = `${ratio}%`;

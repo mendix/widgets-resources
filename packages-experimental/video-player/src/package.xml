@@ -5,7 +5,7 @@
             <widgetFile path="VideoPlayer.xml"/>
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/custom/videoplayer"/>
+            <file path="com/mendix/widget/web/videoplayer"/>
         </files>
     </clientModule>
 </package>

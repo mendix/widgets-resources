@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, createElement, createRef } from "react";
 import ReactResizeDetector from "react-resize-detector";
 import { fixHeightWithRatio, getRatio, validateUrl } from "../utils/Utils";
 
@@ -16,7 +16,7 @@ export interface VimeoState {
 
 export class VimeoPlayer extends Component<VimeoProps, VimeoState> {
 
-    private iframe: HTMLIFrameElement;
+    private iframe = createRef<HTMLIFrameElement>();
     private readonly handleOnResize = this.onResize.bind(this);
     private handleAttributes = this.getUrlAttributes.bind(this);
     readonly state: VimeoState = {
@@ -31,7 +31,7 @@ export class VimeoPlayer extends Component<VimeoProps, VimeoState> {
                 frameBorder="0"
                 allow="autoplay; fullscreen"
                 allowFullScreen={true}
-                ref={(node: HTMLIFrameElement) => this.iframe = node}>
+                ref={this.iframe}>
                 <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize}
                                      refreshMode="debounce" refreshRate={100}/>
             </iframe>
@@ -39,14 +39,14 @@ export class VimeoPlayer extends Component<VimeoProps, VimeoState> {
     }
 
     private onResize() {
-        if (this.iframe && this.props.aspectRatio) {
+        if (this.iframe && this.iframe.current && this.props.aspectRatio) {
             if (this.state.ratio) {
-                fixHeightWithRatio(this.iframe, this.state.ratio);
+                fixHeightWithRatio(this.iframe.current, this.state.ratio);
             } else {
                 getRatio(this.props.url)
                     .then(ratio => {
                         this.setState({ ratio });
-                        fixHeightWithRatio(this.iframe, this.state.ratio);
+                        fixHeightWithRatio(this.iframe.current!, this.state.ratio);
                     });
             }
         }

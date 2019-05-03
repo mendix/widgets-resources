@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, createElement, createRef } from "react";
 import ReactResizeDetector from "react-resize-detector";
 import { fixHeightWithRatio, getRatio, validateUrl } from "../utils/Utils";
 
@@ -15,12 +15,11 @@ export interface DailymotionState {
 }
 
 export class DailymotionPlayer extends Component<DailymotionProps, DailymotionState> {
-
-    private iframe: HTMLIFrameElement;
+    private iframe = createRef<HTMLIFrameElement>();
     private readonly handleOnResize = this.onResize.bind(this);
     private handleAttributes = this.getUrlAttributes.bind(this);
     readonly state: DailymotionState = {
-        ratio: 0
+        ratio: 0,
     };
 
     render() {
@@ -31,23 +30,22 @@ export class DailymotionPlayer extends Component<DailymotionProps, DailymotionSt
                 frameBorder="0"
                 allow="autoplay; fullscreen"
                 allowFullScreen={true}
-                ref={(node: HTMLIFrameElement) => this.iframe = node}>
-                <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize}
-                                     refreshMode="debounce" refreshRate={100}/>
+                ref={this.iframe}
+            >
+                <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize} refreshMode="debounce" refreshRate={100} />
             </iframe>
         );
     }
 
     private onResize() {
-        if (this.iframe && this.props.aspectRatio) {
+        if (this.iframe && this.iframe.current && this.props.aspectRatio) {
             if (this.state.ratio) {
-                fixHeightWithRatio(this.iframe, this.state.ratio);
+                fixHeightWithRatio(this.iframe.current, this.state.ratio);
             } else {
-                getRatio(this.props.url)
-                    .then(ratio => {
-                        this.setState({ ratio });
-                        fixHeightWithRatio(this.iframe, this.state.ratio);
-                    });
+                getRatio(this.props.url).then(ratio => {
+                    this.setState({ ratio });
+                    fixHeightWithRatio(this.iframe.current!, this.state.ratio);
+                });
             }
         }
     }
@@ -62,8 +60,7 @@ export class DailymotionPlayer extends Component<DailymotionProps, DailymotionSt
             const urlVimeoSplit = url.split("/");
             if (urlVimeoSplit.length > 0) {
                 const id = urlVimeoSplit[urlVimeoSplit.length - 1];
-                if (id)
-                    return `https://www.dailymotion.com/embed/video/${id}${attributes}`;
+                if (id) return `https://www.dailymotion.com/embed/video/${id}${attributes}`;
             }
         } catch (e) {
             return url;

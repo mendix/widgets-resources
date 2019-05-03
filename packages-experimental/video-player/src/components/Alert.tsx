@@ -1,4 +1,4 @@
-import * as classNames from "classnames";
+import classNames from "classnames";
 import { FunctionComponent, createElement } from "react";
 
 export interface AlertProps {
@@ -7,10 +7,8 @@ export interface AlertProps {
     bootstrapStyle?: "default" | "primary" | "success" | "info" | "warning" | "danger";
 }
 
-export const Alert: FunctionComponent<AlertProps> = (props) =>
-    props.message
-        ? <div className={classNames(`alert alert-${props.bootstrapStyle}`, props.className)}>{props.message}</div>
-        : null;
+export const Alert: FunctionComponent<AlertProps> = props =>
+    props.message ? <div className={classNames(`alert alert-${props.bootstrapStyle}`, props.className)}>{props.message}</div> : null;
 
 Alert.displayName = "Alert";
 Alert.defaultProps = { bootstrapStyle: "danger" };

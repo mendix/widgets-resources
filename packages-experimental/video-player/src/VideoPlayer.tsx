@@ -2,14 +2,14 @@ import { Component, createElement } from "react";
 import classNames = require("classnames");
 
 import { hot } from "react-hot-loader/root";
-import { SizeContainer } from "./SizeContainer";
-import { VideoPlayer } from "./VideoPlayer";
-import { VideoPlayerContainerProps } from "../../typings/VideoPlayerProps";
+import { SizeContainer } from "./components/SizeContainer";
+import { Video } from "./components/Video";
+import { VideoPlayerContainerProps } from "../typings/VideoPlayerProps";
 
-import "../ui/VideoPlayer.css";
+import "./ui/VideoPlayer.css";
 
-class VideoPlayerContainer extends Component<VideoPlayerContainerProps> {
-    render() {
+class VideoPlayer extends Component<VideoPlayerContainerProps> {
+    render(): JSX.Element {
         return (
             <SizeContainer
                 className={classNames("widget-video-player widget-video-player-container", this.props.class)}
@@ -19,7 +19,7 @@ class VideoPlayerContainer extends Component<VideoPlayerContainerProps> {
                 heightUnit={this.props.heightUnit}
                 height={this.props.height}
                 tabIndex={this.props.tabIndex}>
-                <VideoPlayer url={this.props.urlAttribute ? this.props.urlAttribute.value! : ""}
+                <Video url={this.props.urlAttribute ? this.props.urlAttribute.value! : ""}
                              staticUrl={this.props.urlStatic || ""}
                              poster={this.props.posterAttribute ? this.props.posterAttribute.value! : ""}
                              staticPoster={this.props.posterImageUrl}
@@ -34,4 +34,4 @@ class VideoPlayerContainer extends Component<VideoPlayerContainerProps> {
     }
 }
 
-export default hot(VideoPlayerContainer);
+export default hot(VideoPlayer);
