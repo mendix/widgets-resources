@@ -1,7 +1,8 @@
-import { Component } from "react";
+import { Component, createElement } from "react";
+import { View, ViewProps } from "react-native";
 import { RNCameraProps } from "react-native-camera";
 
-export class RNCamera extends Component<RNCameraProps> {
+export class RNCamera extends Component<RNCameraProps & ViewProps> {
     static constants = {
         Aspect: {},
         BarCodeType: {},
@@ -14,7 +15,7 @@ export class RNCamera extends Component<RNCameraProps> {
         TorchMode: {}
     };
 
-    render(): null {
-        return null;
+    render(): JSX.Element {
+        return <View style={this.props.style} />;
     }
 }

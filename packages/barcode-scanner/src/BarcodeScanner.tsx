@@ -13,7 +13,11 @@ export class BarcodeScanner extends Component<Props> {
     render(): JSX.Element {
         return (
             <View style={{ flex: 1, minHeight: 100, flexDirection: "column" }}>
-                <RNCamera captureAudio={false} onBarCodeRead={this.onBarCodeReadHandler} />
+                <RNCamera
+                    style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+                    captureAudio={false}
+                    onBarCodeRead={this.onBarCodeReadHandler}
+                />
             </View>
         );
     }
