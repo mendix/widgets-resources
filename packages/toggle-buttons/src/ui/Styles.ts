@@ -8,6 +8,7 @@ export interface ToggleButtonsStyle extends Style {
     text: TextStyle;
     activeButton: ViewStyle;
     activeButtonText: TextStyle;
+    validationMessage: TextStyle;
 }
 
 const blue = "rgb(0, 122, 255)";
@@ -46,5 +47,8 @@ export const defaultToggleButtonsStyle: ToggleButtonsStyle = {
     }),
     activeButtonText: {
         color: "#fff"
+    },
+    validationMessage: {
+        color: "#ed1c24"
     }
 };

@@ -33,6 +33,16 @@ describe("ToggleButtons", () => {
         expect(textComponents[1].props.children).toEqual("Formatted b");
     });
 
+    it("renders a validation message", () => {
+        const value = new EditableValueBuilder<string>()
+            .withUniverse("a", "b")
+            .withValidation("Invalid")
+            .build();
+        const component = render(<ToggleButtons {...defaultProps} enum={value} />);
+
+        expect(component.getByText("Invalid")).toBeDefined();
+    });
+
     it("sets the value when pressed and executes the on change action", () => {
         const onChangeAction = actionValue();
         const component = render(<ToggleButtons {...defaultProps} onChange={onChangeAction} />);

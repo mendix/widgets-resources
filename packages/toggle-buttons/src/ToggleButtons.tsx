@@ -1,5 +1,6 @@
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
-import { Component, createElement } from "react";
+import { Component, createElement, Fragment } from "react";
+import { Text } from "react-native";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 
 import { ToggleButtonsProps } from "../typings/ToggleButtonsProps";
@@ -21,19 +22,24 @@ export class ToggleButtons extends Component<Props> {
         const captions = this.universe.map(name => this.props.enum.formatter.format(name));
 
         return (
-            <SegmentedControlTab
-                values={captions}
-                selectedIndex={selectedIndex}
-                enabled={this.props.editable !== "never" && !this.props.enum.readOnly}
-                onTabPress={this.onChangeHandler}
-                borderRadius={this.styles.container.borderRadius}
-                tabsContainerStyle={this.styles.container}
-                tabsContainerDisableStyle={this.styles.containerDisabled}
-                tabStyle={this.styles.button}
-                tabTextStyle={this.styles.text}
-                activeTabStyle={this.styles.activeButton}
-                activeTabTextStyle={this.styles.activeButtonText}
-            />
+            <Fragment>
+                <SegmentedControlTab
+                    values={captions}
+                    selectedIndex={selectedIndex}
+                    enabled={this.props.editable !== "never" && !this.props.enum.readOnly}
+                    onTabPress={this.onChangeHandler}
+                    borderRadius={this.styles.container.borderRadius}
+                    tabsContainerStyle={this.styles.container}
+                    tabsContainerDisableStyle={this.styles.containerDisabled}
+                    tabStyle={this.styles.button}
+                    tabTextStyle={this.styles.text}
+                    activeTabStyle={this.styles.activeButton}
+                    activeTabTextStyle={this.styles.activeButtonText}
+                />
+                {this.props.enum.validation && (
+                    <Text style={this.styles.validationMessage}>{this.props.enum.validation}</Text>
+                )}
+            </Fragment>
         );
     }
 
