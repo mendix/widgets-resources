@@ -40,13 +40,21 @@ describe("Slider", () => {
                         markerActive: {},
                         markerDisabled: {},
                         track: {},
-                        trackDisabled: {}
+                        trackDisabled: {},
+                        validationMessage: {}
                     }
                 ]}
             />
         );
         fireEvent(component.getByType(View), "layout", { nativeEvent: { layout: { width: 100 } } });
         expect(component.getByType(MultiSlider).props.sliderLength).toBe(100);
+    });
+
+    it("renders a validation message", () => {
+        const value = new EditableValueBuilder<BigJs.Big>().withValidation("Invalid").build();
+        const component = render(<Slider {...defaultProps} valueAttribute={value} />);
+
+        expect(component.getByText("Invalid")).toBeDefined();
     });
 
     it("handles an invalid step size", () => {

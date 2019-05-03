@@ -2,7 +2,7 @@ import { ValueStatus } from "@mendix/pluggable-widgets-api/properties";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
-import { LayoutChangeEvent, View } from "react-native";
+import { LayoutChangeEvent, Text, View } from "react-native";
 
 import { SliderProps } from "../typings/SliderProps";
 import { Marker } from "./Marker";
@@ -43,6 +43,9 @@ export class Slider extends Component<Props, State> {
                     allowOverlap={true}
                     customMarker={Marker}
                 />
+                {this.props.valueAttribute.validation && (
+                    <Text style={this.styles.validationMessage}>{this.props.valueAttribute.validation}</Text>
+                )}
             </View>
         );
     }
