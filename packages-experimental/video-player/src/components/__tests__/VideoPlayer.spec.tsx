@@ -24,9 +24,9 @@ describe("Video Player", () => {
             />
         );
 
-        expect(player).equals(
+        expect(player.equals(
             <YoutubePlayer url="http://youtube.com/video/123456" showControls={false} autoPlay={false} muted={false} loop={false} aspectRatio={false} />
-        ).toEqual(true);
+        )).toEqual(true);
     });
 
     it("Renders the structure of vimeo tags", () => {
@@ -44,7 +44,7 @@ describe("Video Player", () => {
             />
         );
 
-        expect(player).equals(<VimeoPlayer url="http://vimeo.com/123456" autoPlay={false} muted={false} loop={false} aspectRatio={false} />).toEqual(true);
+        expect(player.equals(<VimeoPlayer url="http://vimeo.com/123456" autoPlay={false} muted={false} loop={false} aspectRatio={false} />)).toEqual(true);
     });
 
     it("Renders the structure of dailymotion tags", () => {
@@ -62,9 +62,9 @@ describe("Video Player", () => {
             />,
         );
 
-        expect(player).equals(
+        expect(player.equals(
             <DailymotionPlayer controls={false} url="http://dailymotion.com/123456" autoPlay={false} muted={false} aspectRatio={false} />
-        ).toEqual(true);
+        )).toEqual(true);
     });
 
     it("Renders the structure of html5 player tags", () => {
@@ -82,15 +82,15 @@ describe("Video Player", () => {
             />
         );
 
-        expect(player).equals(
+        expect(player.equals(
             <Html5Player url="http://ext.com/video.mp4" showControls={false} autoPlay={false} muted={false} loop={false} aspectRatio={false} poster="" />
-        ).toEqual(true);
+        )).toEqual(true);
     });
 
     it("Test fixHeightWithRatio", () => {
         const test = fixHeightWithRatio(document.createElement("iframe"), 0);
 
-        expect(test).equals(undefined);
+        expect(test).toEqual(undefined);
     });
 
     it("Test fixHeightWithRatio with parents", () => {
@@ -102,7 +102,7 @@ describe("Video Player", () => {
         parentOfParent.appendChild(parent);
         const test = fixHeightWithRatio(child, 0.6);
 
-        expect(test.isEmptyRender()).toEqual(true);
+        expect(test).toBe(undefined);
     });
 
     it("Test getRatio", () => {
@@ -112,12 +112,12 @@ describe("Video Player", () => {
     it("Test valid url", () => {
         const provider = validateUrl("http://youtube.com");
 
-        expect(provider).equals("http://youtube.com");
+        expect(provider).toEqual("http://youtube.com");
     });
 
     it("Test invalid url", () => {
         const provider = validateUrl("http://youtube,com");
 
-        expect(provider).equals("");
+        expect(provider).toEqual("");
     });
 });

@@ -8,12 +8,12 @@ describe("Alert", () => {
         const message = "This is an error";
         const alert = shallow(<Alert bootstrapStyle="danger" className="widget-badge-alert" message={message} />);
 
-        expect(alert).equals(<div className="alert alert-danger widget-badge-alert">{message}</div>).toEqual(true);
+        expect(alert.equals(<div className="alert alert-danger widget-badge-alert">{message}</div>)).toEqual(true);
     });
 
     it("renders no structure when the alert message is not specified", () => {
         const alert = shallow(<Alert />);
 
-        expect(alert).isEmptyRender()).toEqual(true);
+        expect(alert.isEmptyRender()).toEqual(true);
     });
 });

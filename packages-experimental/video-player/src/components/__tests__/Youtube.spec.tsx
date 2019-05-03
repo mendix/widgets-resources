@@ -18,7 +18,7 @@ describe("YoutubePlayer Player", () => {
             <YoutubePlayer url="http://youtu.be/123456" autoPlay={false} muted={false} loop={false} showControls={false} aspectRatio={false} />,
         );
 
-        expect(player).equals(
+        expect(player.equals(
             <iframe
                 className="widget-video-player-iframe"
                 frameBorder="0"
@@ -28,7 +28,7 @@ describe("YoutubePlayer Player", () => {
             >
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)} refreshMode="debounce" refreshRate={100} />
             </iframe>
-        ).toEqual(true);
+        )).toEqual(true);
     });
 
     it("Renders the structure of iframe tags and check the structure with parameters true", () => {
@@ -36,7 +36,7 @@ describe("YoutubePlayer Player", () => {
             <YoutubePlayer url="http://youtube.com/watch?v=123456" autoPlay={true} muted={true} loop={true} showControls={true} aspectRatio={true} />,
         );
 
-        expect(player).equals(
+        expect(player.equals(
             <iframe
                 className="widget-video-player-iframe"
                 frameBorder="0"
@@ -46,7 +46,7 @@ describe("YoutubePlayer Player", () => {
             >
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)} refreshMode="debounce" refreshRate={100} />
             </iframe>,
-        ).toEqual(true);
+        )).toEqual(true);
     });
 
     it("Renders the structure of iframe tags and check the structure with embed URL", () => {
@@ -54,7 +54,7 @@ describe("YoutubePlayer Player", () => {
             <YoutubePlayer url="http://youtube.com/embed/123456" autoPlay={true} muted={true} loop={true} showControls={true} aspectRatio={true} />,
         );
 
-        expect(player).equals(
+        expect(player.equals(
             <iframe
                 className="widget-video-player-iframe"
                 frameBorder="0"
@@ -64,13 +64,13 @@ describe("YoutubePlayer Player", () => {
             >
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)} refreshMode="debounce" refreshRate={100} />
             </iframe>
-        ).toEqual(true);
+        )).toEqual(true);
     });
 
     it("Renders the structure of iframe tags and check the structure with empty url", () => {
         const player = shallow(<YoutubePlayer url="" autoPlay={true} muted={true} loop={true} showControls={true} aspectRatio={true} />);
 
-        expect(player).equals(
+        expect(player.equals(
             <iframe
                 className="widget-video-player-iframe"
                 frameBorder="0"
@@ -80,6 +80,6 @@ describe("YoutubePlayer Player", () => {
             >
                 <ReactResizeDetector handleWidth handleHeight onResize={jasmine.any(Function)} refreshMode="debounce" refreshRate={100} />
             </iframe>
-        ).toEqual(true);
+        )).toEqual(true);
     });
 });
