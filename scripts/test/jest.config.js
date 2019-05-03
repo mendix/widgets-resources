@@ -3,7 +3,7 @@ const packageName = process.env.npm_package_name;
 
 module.exports = {
     preset: "react-native",
-    rootDir: "../",
+    rootDir: "../../",
     transform: {
         "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js",
         "^.+\\.tsx?$": "ts-jest"

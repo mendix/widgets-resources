@@ -13,9 +13,9 @@
         "start": "npm run gulp watch",
         "build": "npm run gulp build",
         "build:release": "NODE_ENV=production npm run gulp build",
-        "gulp": "../../node_modules/.bin/gulp --gulpfile ../../scripts/gulpfile.js --cwd .",
+        "gulp": "TS_NODE_PROJECT=../../scripts/tsconfig.json ../../node_modules/.bin/gulp --gulpfile ../../scripts/build/gulpfile.ts --cwd .",
         "lint": "../../node_modules/.bin/tslint --project tsconfig.json --config ../../tslint.json",
         "version": "npm run build:release",
-        "postversion": "node ../../scripts/UpdateGithubRelease.js"
+        "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
     }
 }

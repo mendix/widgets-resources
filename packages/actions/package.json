@@ -13,6 +13,6 @@
         "postbuild": "../../node_modules/.bin/ts-node --project ./scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
         "lint": "../../node_modules/.bin/tslint --project tsconfig.json --config ../../tslint.json",
         "version": "npm run build",
-        "postversion": "node ../../scripts/UpdateGithubRelease.js"
+        "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
     }
 }

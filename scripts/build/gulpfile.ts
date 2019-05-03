@@ -1,29 +1,32 @@
-const gulp = require("gulp");
-const zip = require("gulp-zip");
-const path = require("path");
-const del = require("del");
-const xml2js = require("gulp-xml2js");
-const change = require("gulp-change");
-const rename = require("gulp-rename");
-const git = require("gulp-git");
-const rollup = require("rollup");
-const rollupConfig = require("./rollup.config");
-const typingGenerator = require("@mendix/pluggable-widgets-typing-generator");
+import typingGenerator from "@mendix/pluggable-widgets-typing-generator";
+import checkDeps from "check-dependencies";
+import del from "del";
+import gulp from "gulp";
+import change from "gulp-change";
+import git from "gulp-git";
+import rename from "gulp-rename";
+import gulpXml2js from "gulp-xml2js";
+import zip from "gulp-zip";
+import { join, resolve } from "path";
+import { rollup, RollupOutput } from "rollup";
+import xml2js from "xml2js";
+
+import { rollupConfig } from "./rollup.config";
 
 const cwd = process.cwd();
-const pkg = require(path.join(cwd, "package.json"));
+const widgetName = process.env.npm_package_config_widgetName!;
 const packageName = "com.mendix.widget.native";
 
-function checkDependencies(cb) {
-    require("check-dependencies").sync({
-        packageDir: path.join(cwd, "../../package.json"),
+function checkDependencies(cb: () => void) {
+    checkDeps.sync({
+        packageDir: join(cwd, "../../package.json"),
         scopeList: ["devDependencies"],
         install: true
     });
     cb();
 }
 
-function updatePackageVersion(cb) {
+function updatePackageVersion(cb: () => void) {
     if (process.env.NODE_ENV !== "production") {
         cb();
         return;
@@ -31,21 +34,20 @@ function updatePackageVersion(cb) {
 
     return gulp
         .src("./src/package.xml", { base: "./" })
-        .pipe(xml2js())
+        .pipe(gulpXml2js())
         .pipe(change(updateVersion))
         .pipe(rename("package.xml"))
         .pipe(gulp.dest("./src"))
         .pipe(git.add());
 
-    function updateVersion(content) {
-        content = JSON.parse(content);
-        content.package.clientModule[0].$.version = pkg.version;
-        const xml2jsLib = require("xml2js");
-        const xmlBuilder = new xml2jsLib.Builder({
+    function updateVersion(content: string) {
+        const parsed = JSON.parse(content);
+        parsed.package.clientModule[0].$.version = process.env.npm_package_version;
+        const xmlBuilder = new xml2js.Builder({
             renderOpts: { pretty: true, indent: "    " },
             xmldec: { version: "1.0", encoding: "utf-8" }
         });
-        return xmlBuilder.buildObject(content);
+        return xmlBuilder.buildObject(parsed);
     }
 }
 
@@ -55,19 +57,16 @@ function clean() {
 
 function generateTypings() {
     return gulp
-        .src(`./src/${pkg.config.widgetName}.xml`)
-        .pipe(typingGenerator({ widgetName: pkg.config.widgetName, isNative: true }))
+        .src(`./src/${widgetName}.xml`)
+        .pipe(typingGenerator({ widgetName, isNative: true }))
         .pipe(gulp.dest("./typings"));
 }
 
-async function bundle() {
-    const bundle = await rollup.rollup(rollupConfig);
-    const outputPath = path.resolve(
-        cwd,
-        `dist/tmp/widgets/com/mendix/widget/native/${pkg.config.widgetName.toLowerCase()}`
-    );
+async function bundle(): Promise<RollupOutput> {
+    const rollupBuild = await rollup(rollupConfig);
+    const outputPath = resolve(cwd, `dist/tmp/widgets/com/mendix/widget/native/${widgetName.toLowerCase()}`);
 
-    return bundle.write({
+    return rollupBuild.write({
         format: "esm",
         dir: outputPath
     });
@@ -80,7 +79,7 @@ function copyXML() {
 function createMpkFile() {
     return gulp
         .src("./dist/tmp/widgets/**/*")
-        .pipe(zip(`${packageName}.${pkg.config.widgetName}.mpk`))
+        .pipe(zip(`${packageName}.${widgetName}.mpk`))
         .pipe(gulp.dest("../../packages/test-project/mxproject/widgets"))
         .pipe(gulp.dest(`./dist/release`));
 }
@@ -106,6 +105,4 @@ function watch() {
     return gulp.watch("./src/**/*", { ignoreInitial: false }, build);
 }
 
-exports.default = watch;
-exports.watch = watch;
-exports.build = build;
+export { watch, build };
