@@ -62,7 +62,9 @@ export class Dailymotion extends Component<DailymotionProps, DailymotionState> {
             const urlVimeoSplit = url.split("/");
             if (urlVimeoSplit.length > 0) {
                 const id = urlVimeoSplit[urlVimeoSplit.length - 1];
-                if (id) return `https://www.dailymotion.com/embed/video/${id}${attributes}`;
+                if (id) {
+                    return `https://www.dailymotion.com/embed/video/${id}${attributes}`;
+                }
             }
         } catch (e) {
             return url;

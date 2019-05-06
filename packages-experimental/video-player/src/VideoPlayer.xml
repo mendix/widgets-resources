@@ -10,94 +10,74 @@
         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
     </icon>
     <properties>
-        <property key="urlAttribute" type="attribute" required="false">
-            <caption>Video URL</caption>
-            <category>General</category>
-            <description>A full URL of the video; Youtube, Vimeo, Dailymotion or MP4.</description>
-            <attributeTypes>
-                <attributeType name="String"/>
-            </attributeTypes>
-        </property>
-        <property key="urlStatic" type="string" required="false">
-            <caption>Static URL</caption>
-            <category>General</category>
-            <description>A static url ensures your video will show when there is no value provided from an attribute.
-                When there is a URL provided by an attribute, that will override the static URL.
-            </description>
-        </property>
-        <property key="posterAttribute" type="attribute" required="false">
-            <caption>Poster URL</caption>
-            <category>General</category>
-            <description>The poster image is a custom preview image that will be shown in the player until the user
-                starts the video.
-            </description>
-            <attributeTypes>
-                <attributeType name="String"/>
-            </attributeTypes>
-        </property>
-        <property key="posterImageUrl" type="string" required="false">
-            <caption>Poster Static URL</caption>
-            <category>General</category>
-            <description/>
-        </property>
-        <property key="autoStart" type="boolean" defaultValue="false">
-            <caption>Auto start</caption>
-            <category>Behavior</category>
-            <description>Automatically start playing the video when the page loads</description>
-        </property>
-        <property key="showControls" type="boolean" defaultValue="true">
-            <caption>Show Controls</caption>
-            <category>Behavior</category>
-            <description>Display video controls (control bar, display icons, dock buttons). Available for YouTube,
-                Dailymotion and external videos.
-            </description>
-        </property>
-        <property key="muted" type="boolean" defaultValue="false">
-            <caption>Muted</caption>
-            <category>Behavior</category>
-            <description>Start the video on mute</description>
-        </property>
-        <property key="loop" type="boolean" defaultValue="false">
-            <caption>Loop</caption>
-            <category>Behavior</category>
-            <description>Loop the video after it finishes. Available for YouTube, Vimeo, and external videos.
-            </description>
-        </property>
-        <property key="widthUnit" type="enumeration" defaultValue="percentage">
-            <caption>Width unit</caption>
-            <category>Size</category>
-            <description/>
-            <enumerationValues>
-                <enumerationValue key="percentage">Percentage</enumerationValue>
-                <enumerationValue key="pixels">Pixels</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="width" type="integer" defaultValue="100">
-            <caption>Width</caption>
-            <category>Size</category>
-            <description/>
-        </property>
-        <property key="aspectRatio" type="boolean" defaultValue="false">
-            <caption>Keep aspect ratio</caption>
-            <category>Size</category>
-            <description>Base aspect ratio on video height</description>
-        </property>
-        <property key="heightUnit" type="enumeration" defaultValue="pixels">
-            <caption>Height unit</caption>
-            <category>Size</category>
-            <description>Warning: when "Percentage of parent" is selected, the parent container must have an absolute
-                height, otherwise nothing will be displayed.
-            </description>
-            <enumerationValues>
-                <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
-                <enumerationValue key="pixels">Pixels</enumerationValue>
-                <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="height" type="integer" defaultValue="500">
-            <caption>Height</caption>
-            <category>Size</category>
-            <description/>
-        </property>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Data source">
+                <property key="urlExpression" type="expression">
+                    <caption>Video URL</caption>
+                    <description>A full URL of the video; Youtube, Vimeo, Dailymotion or MP4.</description>
+                    <returnType type="String"/>
+                </property>
+                <property key="posterExpression" type="expression" required="false">
+                    <caption>Poster URL</caption>
+                    <description>The poster image is a custom preview image that will be shown in the player until the user starts the video.</description>
+                    <returnType type="String"/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+                <systemProperty key="TabIndex"/>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Behavior">
+            <property key="autoStart" type="boolean" defaultValue="false">
+                <caption>Auto start</caption>
+                <description>Automatically start playing the video when the page loads</description>
+            </property>
+            <property key="showControls" type="boolean" defaultValue="true">
+                <caption>Show Controls</caption>
+                <description>Display video controls (control bar, display icons, dock buttons). Available for YouTube, Dailymotion and external videos.</description>
+            </property>
+            <property key="muted" type="boolean" defaultValue="false">
+                <caption>Muted</caption>
+                <description>Start the video on mute</description>
+            </property>
+            <property key="loop" type="boolean" defaultValue="false">
+                <caption>Loop</caption>
+                <description>Loop the video after it finishes. Available for YouTube, Vimeo, and external videos.
+                </description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Dimensions">
+            <propertyGroup caption="Width">
+                <property key="widthUnit" type="enumeration" defaultValue="percentage">
+                    <caption>Unit </caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="percentage">Percentage</enumerationValue>
+                        <enumerationValue key="pixels">Pixels</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="width" type="integer" defaultValue="100">
+                    <caption>Size </caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Height">
+                <property key="heightUnit" type="enumeration" defaultValue="aspectRatio">
+                    <caption>Unit</caption>
+                    <description>Warning: when "Percentage of parent" is selected, the parent container must have an absolute height, otherwise nothing will be displayed.</description>
+                    <enumerationValues>
+                        <enumerationValue key="aspectRatio">Aspect ratio</enumerationValue>
+                        <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
+                        <enumerationValue key="pixels">Pixels</enumerationValue>
+                        <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="height" type="integer" defaultValue="500">
+                    <caption>Size</caption>
+                    <description>If the unit is 'Aspect ratio' the height will be based on the video height.</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
     </properties>
 </widget>

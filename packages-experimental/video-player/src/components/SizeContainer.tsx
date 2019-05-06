@@ -1,7 +1,7 @@
 import { CSSProperties, Component, createElement } from "react";
 import classNames from "classnames";
 
-export type HeightUnitType = "percentageOfWidth" | "percentageOfParent" | "pixels";
+export type HeightUnitType = "percentageOfWidth" | "percentageOfParent" | "pixels" | "aspectRatio";
 
 export type WidthUnitType = "percentage" | "pixels";
 
@@ -63,6 +63,8 @@ export class SizeContainer extends Component<SizeProps> {
             style.height = `${height}px`;
         } else if (heightUnit === "percentageOfParent") {
             style.height = `${height}%`;
+        } else if (heightUnit === "aspectRatio") {
+            style.height = width * 0.5625; //Default is 16:9
         }
 
         return style;

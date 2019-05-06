@@ -13,7 +13,7 @@ describe("Dailymotion Player", () => {
         aspectRatio: false,
     };
 
-    const defaulPlayer = (props: DailymotionProps) => <Dailymotion {...props} />;
+    const defaulPlayer = (props: DailymotionProps): JSX.Element => <Dailymotion {...props} />;
 
     it("should renders correctly", () => {
         const player = create(defaulPlayer(defaultProps)).toJSON();

@@ -48,12 +48,18 @@ export class Html5 extends Component<Html5PlayerProps> {
     private handleError(): void {
         if (this.errorElement && this.errorElement.current) {
             this.errorElement.current.classList.add("hasError");
+            if (this.videoElement && this.videoElement.current) {
+                this.videoElement.current.controls = false;
+            }
         }
     }
 
     private handleSuccess(): void {
         if (this.errorElement && this.errorElement.current) {
             this.errorElement.current.classList.remove("hasError");
+            if (this.videoElement && this.videoElement.current) {
+                this.videoElement.current.controls = this.props.showControls;
+            }
         }
     }
 

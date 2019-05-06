@@ -13,7 +13,7 @@ describe("VimeoPlayer Player", () => {
         aspectRatio: false,
     };
 
-    const defaulPlayer = (props: VimeoProps) => <Vimeo {...props} />;
+    const defaulPlayer = (props: VimeoProps): JSX.Element => <Vimeo {...props} />;
 
     it("should renders correctly", () => {
         const player = create(defaulPlayer(defaultProps)).toJSON();

@@ -21,15 +21,13 @@ class VideoPlayer extends Component<VideoPlayerContainerProps> {
                 tabIndex={this.props.tabIndex}
             >
                 <Video
-                    url={this.props.urlAttribute && this.props.urlAttribute.value}
-                    staticUrl={this.props.urlStatic || ""}
-                    poster={this.props.posterAttribute && this.props.posterAttribute.value}
-                    staticPoster={this.props.posterImageUrl}
+                    url={this.props.urlExpression && this.props.urlExpression.value}
+                    poster={this.props.posterExpression && this.props.posterExpression.value}
                     autoStart={this.props.autoStart}
                     showControls={this.props.showControls}
                     loop={this.props.loop}
                     muted={this.props.muted}
-                    aspectRatio={this.props.aspectRatio}
+                    aspectRatio={this.props.heightUnit === "aspectRatio"}
                     preview={false}
                 />
             </SizeContainer>

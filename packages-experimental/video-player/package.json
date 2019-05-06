@@ -17,6 +17,7 @@
     "start": "concurrently \"npm run mx-script start:server -- --open\" \"npm:dev\"",
     "dev": "npm run mx-script start:ts",
     "build": "npm run mx-script build:ts",
+    "format": "npm run mx-script format",
     "lint": "npm run mx-script lint",
     "lint:fix": "npm run mx-script lint:fix",
     "mx-script": "cd ./node_modules/@mendix/pluggable-widgets-tools && node bin/mx-scripts.js",

@@ -4,7 +4,7 @@
  * @author Mendix Widgets Team
  */
 import { CSSProperties } from "react";
-import { EditableValue } from "@mendix/pluggable-widgets-api/properties";
+import { DynamicValue } from "@mendix/pluggable-widgets-api/properties";
 
 interface CommonProps {
     id: string;
@@ -15,52 +15,43 @@ interface CommonProps {
 
 export type WidthUnitEnum = "percentage" | "pixels";
 
-export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
+export type HeightUnitEnum = "aspectRatio" | "percentageOfWidth" | "pixels" | "percentageOfParent";
 
 export interface VideoPlayerContainerProps extends CommonProps {
-    urlAttribute?: EditableValue<string>;
-    urlStatic?: string;
-    posterAttribute?: EditableValue<string>;
-    posterImageUrl?: string;
+    urlExpression: DynamicValue<string>;
+    posterExpression?: DynamicValue<string>;
     autoStart: boolean;
     showControls: boolean;
     muted: boolean;
     loop: boolean;
     widthUnit: WidthUnitEnum;
     width: number;
-    aspectRatio: boolean;
     heightUnit: HeightUnitEnum;
     height: number;
 }
 
 export interface VideoPlayerPreviewProps extends CommonProps {
-    urlAttribute?: string;
-    urlStatic?: string;
-    posterAttribute?: string;
-    posterImageUrl?: string;
+    urlExpression: string;
+    posterExpression?: string;
     autoStart: boolean;
     showControls: boolean;
     muted: boolean;
     loop: boolean;
     widthUnit: WidthUnitEnum;
     width: number;
-    aspectRatio: boolean;
     heightUnit: HeightUnitEnum;
     height: number;
 }
 
 export interface VisibilityMap {
-    urlAttribute: boolean;
-    urlStatic: boolean;
-    posterAttribute: boolean;
-    posterImageUrl: boolean;
+    urlExpression: boolean;
+    posterExpression: boolean;
     autoStart: boolean;
     showControls: boolean;
     muted: boolean;
     loop: boolean;
     widthUnit: boolean;
     width: boolean;
-    aspectRatio: boolean;
     heightUnit: boolean;
     height: boolean;
 }

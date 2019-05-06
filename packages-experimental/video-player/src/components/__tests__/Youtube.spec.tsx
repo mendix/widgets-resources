@@ -14,7 +14,7 @@ describe("YoutubePlayer Player", () => {
         aspectRatio: false,
     };
 
-    const defaulPlayer = (props: YoutubeProps) => <Youtube {...props} />;
+    const defaulPlayer = (props: YoutubeProps): JSX.Element => <Youtube {...props} />;
 
     it("should renders correctly", () => {
         const player = create(defaulPlayer(defaultProps)).toJSON();

@@ -15,7 +15,7 @@ describe("Html5 Player", () => {
         poster: "test",
     };
 
-    const defaulPlayer = (props: Html5PlayerProps) => <Html5 {...props} />;
+    const defaulPlayer = (props: Html5PlayerProps): JSX.Element => <Html5 {...props} />;
 
     it("should renders correctly", () => {
         const player = create(defaulPlayer(defaultProps)).toJSON();
@@ -65,5 +65,4 @@ describe("Html5 Player", () => {
         expect(sizeDetector).not.toBeNull();
         expect(sizeDetector.props).toHaveProperty("onResize");
     });
-
 });

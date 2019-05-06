@@ -32,7 +32,7 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
     }
 
     private renderPlayers(): JSX.Element {
-        if (!validateUrl(this.props.urlAttribute || this.props.urlStatic || "")) {
+        if (!validateUrl(this.props.urlExpression || "")) {
             return <Error preview={true} />;
         }
         return <Video {...this.transformProps(this.props)} />;
@@ -40,10 +40,8 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
 
     private transformProps(props: VideoPlayerPreviewProps): VideoPlayerProps {
         return {
-            url: props.urlAttribute,
-            staticUrl: props.urlStatic,
-            poster: props.posterAttribute,
-            staticPoster: props.posterImageUrl,
+            url: props.urlExpression,
+            poster: props.posterExpression,
             autoStart: false,
             showControls: props.showControls,
             loop: false,
@@ -55,7 +53,7 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
 
     private validateProps(props: VideoPlayerPreviewProps): string {
         let errorMessage = "";
-        if (!props.urlAttribute && !props.urlStatic) {
+        if (!props.urlExpression) {
             errorMessage = "An URL is required for this widget";
         }
 

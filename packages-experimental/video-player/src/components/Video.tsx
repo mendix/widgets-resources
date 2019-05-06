@@ -7,10 +7,8 @@ import { Youtube } from "./Youtube";
 
 export interface VideoPlayerProps {
     url?: string;
-    staticUrl?: string;
     style?: object;
     poster?: string;
-    staticPoster?: string;
 
     autoStart: boolean;
     showControls: boolean;
@@ -28,7 +26,7 @@ export class Video extends Component<VideoPlayerProps> {
     private readonly handleDailymotionPlayerRender = this.renderDailymotionPlayer.bind(this);
 
     render(): JSX.Element {
-        const url = this.props.url || this.props.staticUrl || "";
+        const url = this.props.url || "";
         if (Youtube.canPlay(url)) {
             return this.handleYoutubePlayerRender(url);
         } else if (Vimeo.canPlay(url)) {
@@ -46,7 +44,7 @@ export class Video extends Component<VideoPlayerProps> {
                 autoPlay={this.props.autoStart}
                 muted={this.props.muted}
                 loop={this.props.loop}
-                poster={this.props.poster || this.props.staticPoster}
+                poster={this.props.poster}
                 url={url}
                 aspectRatio={this.props.aspectRatio}
             />
