@@ -17,7 +17,7 @@ Mendix widget to play videos from Youtube, Vimeo, Dailymotion and external Mp4 f
 * Set static URL & Poster when the dynamic data is not specified
 
 ## Dependencies
- Mendix 7.20
+ Mendix Studio / Mendix Studio Pro 8
 
 ## Usage
  Place the widget inside or outside a context of an object that has a value attribute.
