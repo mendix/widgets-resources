@@ -5,7 +5,9 @@
 //
 
 // Utilities
-@import "core/_utilities/bootstrap.scss";
+// @import "core/_utilities/bootstrap.scss";
+// @import "core/_utilities/mxui.scss";
+@import "lib/bootstrap/css/bootstrap.min.css";
 
 // Custom variables
 @import "app/custom-variables";
