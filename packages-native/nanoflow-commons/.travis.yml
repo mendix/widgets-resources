@@ -1,0 +1,10 @@
+dist: xenial
+language: node_js
+cache: npm
+
+jobs:
+    include:
+        - name: "Lint"
+          script: npm run lint
+        - name: "Build"
+          script: npm run build
