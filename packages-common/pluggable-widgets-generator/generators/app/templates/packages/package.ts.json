@@ -19,7 +19,7 @@
     "lint": "npm run mx-script lint",
     "lint:fix": "npm run mx-script lint:fix",
     "mx-script": "cd ./node_modules/@mendix/pluggable-widgets-tools && node bin/mx-scripts.js",<% if (unitTests || e2eTests) { %>
-    "pretest": "tsc && npm run lint && npm run build",<% } %><% if (unitTests) { %>
+    "pretest": "npm run lint && npm run build",<% } %><% if (unitTests) { %>
     "test": "npm run mx-script test:unit -- --no-cache --ci<% if (e2eTests) { %> && npm run test:e2e<% } %>",
     "test:unit": "npm run mx-script test:unit -- --coverage",<% } %><% if (e2eTests) { %>
     "test:e2e": "export URL=https://badge.mxapps.io || set URL=https://badge.mxapps.io && npm run mx-script test:e2e:ts",
@@ -29,7 +29,7 @@
   },
   "license": "<%- license %>",
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^0.1.0",
+    "@mendix/pluggable-widgets-tools": "^0.1.1",
     "@types/big.js": "^4.0.5",
     "@types/classnames": "^2.2.4",<% if (e2eTests) { %>
     "@types/webdriverio": "^4.13.0",<% } %><% if (unitTests || e2eTests) { %>
@@ -40,6 +40,7 @@
     "@types/jest": "^24.0.0",
     "@types/react": "^16.7.13",
     "@types/react-dom": "^16.0.9",
+    "@types/react-test-renderer": "^16.8.1",
     "mendixmodelsdk": "4.19.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",

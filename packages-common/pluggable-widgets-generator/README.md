@@ -1,8 +1,8 @@
 # Pluggable Widgets Generator
  
- [![npm version](https://badge.fury.io/js/%40mendix%2Fgenerator-widget.svg)](https://badge.fury.io/js/%40mendix%2Fgenerator-widget) [![DAVID](https://david-dm.org/@mendix/generator-widget.svg)](https://david-dm.org/@mendix/generator-widget) [![Development Dependency Status](https://david-dm.org/@mendix/generator-widget/dev-status.svg?theme=shields.io)](https://david-dm.org/@mendix/generator-widget#info=devDependencies)
+ ![npm version](https://badge.fury.io/js/%40mendix%2Fgenerator-widget.svg)  ![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
 
-[![NPM](https://nodei.co/npm/@mendix/generator-widget.svg?downloads=true&stars=true)](https://nodei.co/npm/@mendix/generator-widget/)
+![NPM](https://nodei.co/npm/@mendix/generator-widget.svg?downloads=true&stars=true)
 
 > [Yeoman](http://yeoman.io) generator for Mendix Pluggable Widgets.
 
