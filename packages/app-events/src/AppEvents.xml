@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget id="com.mendix.widget.native.appevents.AppEvents" supportedPlatform="Native" needsEntityContext="false" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/@mendix/pluggable-widgets-api/widget.xsd">
     <name>App events</name>
-    <description>Perform actions on all kinds of events</description>
+    <description>Trigger actions based on load, network status and timer events.</description>
     <icon></icon>
     <properties>
         <propertyGroup caption="App events">

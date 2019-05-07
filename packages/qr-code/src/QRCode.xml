@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget id="com.mendix.widget.native.qrcode.QRCode" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/@mendix/pluggable-widgets-api/widget.xsd">
     <name>QR code</name>
-    <description>Displays a QR code</description>
+    <description>Display a QR code based on a value.</description>
     <icon>iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAIVJREFUWEftlNEKwCAIRXX//8+tYhMmSN0YKOKB6CEmeqYyEbV+YFr7fsY8QuFcz+2GGNAVWbyVWgbQOPEMWP9Sv68M7MZxN1AJVAKjFWdb6q622J2CFWGmQAygWAZQ/A30So4M/EWNYZ4pOCWOAXSD5TVgbTT9nsZAJVAJ1B4QAyhJDBDdQaBQGZb6/OEAAAAASUVORK5CYII=</icon>
     <properties>
         <propertyGroup caption="General">

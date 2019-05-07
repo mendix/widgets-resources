@@ -1,1 +1,3 @@
-## Activity Indicator Widget
+# Activity indicator widget
+
+Display a circular loading indicator.
