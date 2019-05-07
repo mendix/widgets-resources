@@ -1,5 +1,12 @@
 # Pluggable Widgets Typing Generator
 
+![npm version](https://badge.fury.io/js/%40mendix%2Fpluggable-widgets-typing-generator.svg)
+![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
+
+![NPM](https://nodei.co/npm/@mendix/pluggable-widgets-typing-generator.svg?downloads=true&stars=true)
+
+## About
+
 Typescript typing generator for Pluggable Widgets
 
 ## How to install
