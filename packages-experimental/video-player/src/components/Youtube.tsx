@@ -89,9 +89,6 @@ export class Youtube extends Component<YoutubeProps, YoutubeState> {
     }
 
     public static canPlay(url: string): boolean {
-        if ((url && validateUrl(url) && url.indexOf("youtube.com") > -1) || url.indexOf("youtu.be") > -1) {
-            return true;
-        }
-        return false;
+        return !!url && !!validateUrl(url) && (url.indexOf("youtube.com") > -1 || url.indexOf("youtu.be") > -1);
     }
 }

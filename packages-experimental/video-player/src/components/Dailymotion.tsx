@@ -81,9 +81,6 @@ export class Dailymotion extends Component<DailymotionProps, DailymotionState> {
     }
 
     public static canPlay(url: string): boolean {
-        if (url && validateUrl(url) && url.indexOf("dailymotion.com") > -1) {
-            return true;
-        }
-        return false;
+        return !!url && !!validateUrl(url) && url.indexOf("dailymotion.com") > -1;
     }
 }

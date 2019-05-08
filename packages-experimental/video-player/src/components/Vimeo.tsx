@@ -79,9 +79,6 @@ export class Vimeo extends Component<VimeoProps, VimeoState> {
     }
 
     public static canPlay(url: string): boolean {
-        if (url && validateUrl(url) && url.indexOf("vimeo.com") > -1) {
-            return true;
-        }
-        return false;
+        return !!url && !!validateUrl(url) && url.indexOf("vimeo.com") > -1;
     }
 }
