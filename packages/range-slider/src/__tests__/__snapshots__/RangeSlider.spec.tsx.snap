@@ -163,7 +163,7 @@ exports[`RangeSlider renders 1`] = `
                   },
                   Array [
                     undefined,
-                    Object {},
+                    undefined,
                   ],
                   undefined,
                   undefined,
@@ -248,7 +248,7 @@ exports[`RangeSlider renders 1`] = `
                     "shadowRadius": 1,
                     "width": 30,
                   },
-                  Object {},
+                  undefined,
                   undefined,
                   undefined,
                 ]

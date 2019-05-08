@@ -1,10 +1,6 @@
 import { Style } from "@native-mobile-resources/util-widgets";
 import { Platform, TextStyle, ViewStyle } from "react-native";
 
-export interface State {
-    width?: number;
-}
-
 export interface RangeSliderStyle extends Style {
     container: ViewStyle;
     track: ViewStyle;
