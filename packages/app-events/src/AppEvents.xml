@@ -2,7 +2,7 @@
 <widget id="com.mendix.widget.native.appevents.AppEvents" supportedPlatform="Native" needsEntityContext="false" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/@mendix/pluggable-widgets-api/widget.xsd">
     <name>App events</name>
     <description>Trigger actions based on load, network status and timer events.</description>
-    <icon></icon>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACwUlEQVR4Ae2bNbTXUAzGcVhw2/GN/eAOvS3uriOyIxtuvcUnbMJ9g33FXXuLuzvlfs9faB/eW0nOydO2SX7/L6nX+ltjY2NjGzp0aFshxDrtF7W/tSwr/B+ObSMGYiFmKop3HGe2TugZEkzSEROxjRZv2/YcJGPSkYOpT74LkbsRRw7IJXEAOvAOKknt00aMGNHyf8XEtnWs6bTlkEviAHRgRZIYmSD8kUQJvgkFfKmaxPTp0xvVsOyJP5D2ibjtIRZZ9kviAGjC+Ns/BnD8j+ObB5D/+AzA9O6PATAABsBDMEsAGIC9QfW2pH8dbsugX6EADHUfttWFv7BcP4QLVwVj9oZ1CwPAlmoXCq/qwrvXoxAAHHmvOy0ebrtqVe4BQOaWVGeiAAipLkWtg/kgXHUNDpVkGQCkPx/FxvnQTapD1eXDMKytwdypXEY9neQ9bZJBAHTwRbvwggXVgHlB1x+W8/xFmQRABx9gaF9WvUB16meKEdJ/BhVkCUD04PPUvOHew/YEyqcx2541rdimqw6R9YgKMgAgavDh9/L9vi76QrW9wYa748r7Hz1PiicqSDGAmnodiqhYT6qVZG+wm/Z/nAqyCmBnze2hnkIdtP+F63+MUkGmAGDwYW9Ajw2EVE/oUSHtf+GpJSg6DmzqAejkbw517w6IWheyJ7vDNbT/0RKQfWYA/Na6MhhLlPKStgWGIiSPn3MHAIVhFxg/N9ShipmxIeiLw+I8AKBtcDIOAAZi7q8I0alP+z/3AOhRIe3/3AOACde/GN//+QdAjwpp/+cfAA6Aovo/9wDIiZOqcl5wG/1fGAAwx1O9cHlM9/5lIYM+fGMkowAYgGlnAAyAAfAQZAA5e1DyhHkAZh+VPZ72R2X9Yj8sHfG4PB5lN/+4fAFfmBg6dGhn5GTkfSHTAP78vSF+aYpfm2NjY2P7DgYfzaS2P0WyAAAAAElFTkSuQmCC</icon>
     <properties>
         <propertyGroup caption="App events">
             <propertyGroup caption="Page load">
