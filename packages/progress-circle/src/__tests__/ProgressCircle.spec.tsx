@@ -15,13 +15,33 @@ describe("ProgressCircle", () => {
     });
 
     it("renders no progress with undefined values", () => {
-        const component = render(<ProgressCircle {...createProps()} />);
+        const component = render(<ProgressCircle {...createProps()} circleText="none" />);
         expect(component.getByType(Circle).props.progress).toBe(0);
+        expect(component.queryByType(Text)).toBeNull();
     });
 
-    it("renders no progress when min and max are the same", () => {
-        const component = render(<ProgressCircle {...createProps(50, 50, 50)} />);
+    it("renders no progress and an error when minimum equals maxiumum", () => {
+        const component = render(<ProgressCircle {...createProps(50, 50, 50)} circleText="none" />);
         expect(component.getByType(Circle).props.progress).toBe(0);
+        expect(component.getByType(Text).props.children).toBe(
+            "The minimum value can not be greater than or equal to the maximum value."
+        );
+    });
+
+    it("renders no progress and an error when the value is less than the minium", () => {
+        const component = render(<ProgressCircle {...createProps(-50, 0, 100)} circleText="none" />);
+        expect(component.getByType(Circle).props.progress).toBe(0);
+        expect(component.getByType(Text).props.children).toBe(
+            "The current value can not be less than the minimum value."
+        );
+    });
+
+    it("renders no progress and an error when the value is greater than the maximum", () => {
+        const component = render(<ProgressCircle {...createProps(150, 0, 100)} circleText="none" />);
+        expect(component.getByType(Circle).props.progress).toBe(0);
+        expect(component.getByType(Text).props.children).toBe(
+            "The current value can not be greater than the maximum value."
+        );
     });
 
     it("renders correct progress with decimal values", () => {

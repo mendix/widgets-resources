@@ -14,6 +14,7 @@ export interface ProgressCircleStyle extends Style {
         lineCapRounded: boolean;
     };
     text: TextStyle;
+    validationMessage: TextStyle;
 }
 
 export const defaultProgressCircleStyle: ProgressCircleStyle = {
@@ -31,5 +32,8 @@ export const defaultProgressCircleStyle: ProgressCircleStyle = {
     text: {
         fontSize: 18,
         color: Platform.select({ ios: "rgb(0, 122, 255)", android: "rgb(98,0,238)" })
+    },
+    validationMessage: {
+        color: "#ed1c24"
     }
 };
