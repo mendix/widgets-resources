@@ -1,6 +1,7 @@
 import { dynamicValue } from "@native-mobile-resources/util-widgets/test";
 import { Big } from "big.js";
 import { createElement } from "react";
+import { Text } from "react-native";
 import { Bar } from "react-native-progress";
 import { render } from "react-native-testing-library";
 
@@ -16,21 +17,43 @@ describe("ProgressBar", () => {
     it("renders no progress with undefined values", () => {
         const component = render(<ProgressBar {...createProps()} />);
         expect(component.getByType(Bar).props.progress).toBe(0);
+        expect(component.queryByType(Text)).toBeNull();
     });
 
-    it("renders no progress when min and max are the same", () => {
+    it("renders no progress and an error when minimum equals maxiumum", () => {
         const component = render(<ProgressBar {...createProps(50, 50, 50)} />);
         expect(component.getByType(Bar).props.progress).toBe(0);
+        expect(component.getByType(Text).props.children).toBe(
+            "The minimum value can not be greater than or equal to the maximum value."
+        );
+    });
+
+    it("renders no progress and an error when the value is less than the minium", () => {
+        const component = render(<ProgressBar {...createProps(-50, 0, 100)} />);
+        expect(component.getByType(Bar).props.progress).toBe(0);
+        expect(component.getByType(Text).props.children).toBe(
+            "The current value can not be less than the minimum value."
+        );
+    });
+
+    it("renders no progress and an error when the value is greater than the maximum", () => {
+        const component = render(<ProgressBar {...createProps(150, 0, 100)} />);
+        expect(component.getByType(Bar).props.progress).toBe(0);
+        expect(component.getByType(Text).props.children).toBe(
+            "The current value can not be greater than the maximum value."
+        );
     });
 
     it("renders correct progress with decimal values", () => {
         const component = render(<ProgressBar {...createProps(2.5, 0, 10)} />);
         expect(component.getByType(Bar).props.progress).toBe(0.25);
+        expect(component.queryByType(Text)).toBeNull();
     });
 
     it("renders correct progress with negative values", () => {
         const component = render(<ProgressBar {...createProps(-30, -100, 0)} />);
         expect(component.getByType(Bar).props.progress).toBe(0.7);
+        expect(component.queryByType(Text)).toBeNull();
     });
 });
 

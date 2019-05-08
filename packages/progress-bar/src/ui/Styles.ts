@@ -1,5 +1,5 @@
 import { Style } from "@native-mobile-resources/util-widgets";
-import { Platform, ViewStyle } from "react-native";
+import { Platform, TextStyle, ViewStyle } from "react-native";
 
 export interface ProgressBarStyle extends Style {
     container: ViewStyle;
@@ -7,6 +7,7 @@ export interface ProgressBarStyle extends Style {
     fill: {
         backgroundColor: string;
     };
+    validationMessage: TextStyle;
 }
 
 export const defaultProgressBarStyle: ProgressBarStyle = {
@@ -28,5 +29,8 @@ export const defaultProgressBarStyle: ProgressBarStyle = {
     },
     fill: {
         backgroundColor: Platform.select({ ios: "rgb(0,122,255)", android: "rgb(98,0,238)" })
+    },
+    validationMessage: {
+        color: "#ed1c24"
     }
 };
