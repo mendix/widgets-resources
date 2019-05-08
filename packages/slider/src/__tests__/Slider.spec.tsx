@@ -2,7 +2,7 @@ import { actionValue, dynamicValue, EditableValueBuilder } from "@native-mobile-
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Big } from "big.js";
 import { createElement } from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { fireEvent, render, RenderAPI } from "react-native-testing-library";
 import { ReactTestInstance } from "react-test-renderer";
 
@@ -25,6 +25,49 @@ describe("Slider", () => {
     it("renders", () => {
         const component = render(<Slider {...defaultProps} />);
         expect(component.toJSON()).toMatchSnapshot();
+    });
+
+    it("renders no error while the value is resolving", () => {
+        const component = render(
+            <Slider {...defaultProps} valueAttribute={new EditableValueBuilder<BigJs.Big>().isLoading().build()} />
+        );
+        expect(component.queryByType(Text)).toBeNull();
+    });
+
+    it("renders an error when the minimum is greater than the maximum", () => {
+        const component = render(<Slider {...defaultProps} minimumValue={dynamicValue(new Big(300))} />);
+        expect(component.getByType(Text).props.children).toBe(
+            "The minimum value can not be greater than the maximum value. The current value can not be less than the minimum value."
+        );
+    });
+
+    it("renders an error when the step size is negative", () => {
+        const component = render(<Slider {...defaultProps} stepSize={dynamicValue(new Big(-10))} />);
+        expect(component.getByType(Text).props.children).toBe("The step size can not be zero or less than zero.");
+    });
+
+    it("renders an error when the value is less than the minimum", () => {
+        const component = render(
+            <Slider
+                {...defaultProps}
+                valueAttribute={new EditableValueBuilder<BigJs.Big>().withValue(new Big(-50)).build()}
+            />
+        );
+        expect(component.getByType(Text).props.children).toBe(
+            "The current value can not be less than the minimum value."
+        );
+    });
+
+    it("renders an error when the value is greater than the maximum", () => {
+        const component = render(
+            <Slider
+                {...defaultProps}
+                valueAttribute={new EditableValueBuilder<BigJs.Big>().withValue(new Big(300)).build()}
+            />
+        );
+        expect(component.getByType(Text).props.children).toBe(
+            "The current value can not be greater than the maximum value."
+        );
     });
 
     it("renders with the width of the parent view", () => {

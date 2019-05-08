@@ -1,4 +1,4 @@
-import { ValueStatus } from "@mendix/pluggable-widgets-api/properties";
+import { DynamicValue, EditableValue, ValueStatus } from "@mendix/pluggable-widgets-api/properties";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
@@ -6,10 +6,13 @@ import { LayoutChangeEvent, Text, View } from "react-native";
 
 import { SliderProps } from "../typings/SliderProps";
 import { Marker } from "./Marker";
-import { defaultSliderStyle, SliderStyle, State } from "./ui/Styles";
+import { defaultSliderStyle, SliderStyle } from "./ui/Styles";
 
 export type Props = SliderProps<SliderStyle>;
 
+export interface State {
+    width?: number;
+}
 export class Slider extends Component<Props, State> {
     readonly state: State = {};
 
@@ -18,24 +21,25 @@ export class Slider extends Component<Props, State> {
     private readonly onChangeHandler = this.onChange.bind(this);
     private readonly styles = flattenStyles(defaultSliderStyle, this.props.style);
 
-    private lastValue = Number(this.props.valueAttribute.value);
+    private lastValue = toNumber(this.props.valueAttribute);
 
     render(): JSX.Element {
-        const enabled = this.props.editable !== "never" && !this.props.valueAttribute.readOnly;
-        const step =
-            this.props.stepSize.value && this.props.stepSize.value.gt(0) ? Number(this.props.stepSize.value) : 1;
+        const value = toNumber(this.props.valueAttribute);
+        const validationMessages = this.validate();
+        const validProps = validationMessages.length === 0;
+        const editable = this.props.editable !== "never" && !this.props.valueAttribute.readOnly && validProps;
 
         return (
             <View onLayout={this.onLayoutHandler} style={this.styles.container}>
                 <MultiSlider
-                    values={[Number(this.props.valueAttribute.value)]}
-                    min={Number(this.props.minimumValue.value)}
-                    max={Number(this.props.maximumValue.value)}
-                    step={step}
-                    enabledOne={enabled}
-                    markerStyle={enabled ? this.styles.marker : this.styles.markerDisabled}
-                    trackStyle={enabled ? this.styles.track : this.styles.trackDisabled}
-                    selectedStyle={enabled ? this.styles.highlight : this.styles.highlightDisabled}
+                    values={value != null ? [value] : undefined}
+                    min={validProps ? toNumber(this.props.minimumValue) : undefined}
+                    max={validProps ? toNumber(this.props.maximumValue) : undefined}
+                    step={validProps ? toNumber(this.props.stepSize) : undefined}
+                    enabledOne={editable}
+                    markerStyle={editable ? this.styles.marker : this.styles.markerDisabled}
+                    trackStyle={editable ? this.styles.track : this.styles.trackDisabled}
+                    selectedStyle={editable ? this.styles.highlight : this.styles.highlightDisabled}
                     pressedMarkerStyle={this.styles.markerActive}
                     onValuesChange={this.onSlideHandler}
                     onValuesChangeFinish={this.onChangeHandler}
@@ -43,6 +47,7 @@ export class Slider extends Component<Props, State> {
                     allowOverlap={true}
                     customMarker={Marker}
                 />
+                {!validProps && <Text style={this.styles.validationMessage}>{validationMessages.join(" ")}</Text>}
                 {this.props.valueAttribute.validation && (
                     <Text style={this.styles.validationMessage}>{this.props.valueAttribute.validation}</Text>
                 )}
@@ -57,9 +62,7 @@ export class Slider extends Component<Props, State> {
     }
 
     private onSlide(values: number[]): void {
-        if (this.props.valueAttribute.status === ValueStatus.Available) {
-            this.props.valueAttribute.setTextValue(String(values[0]));
-        }
+        this.props.valueAttribute.setTextValue(String(values[0]));
     }
 
     private onChange(values: number[]): void {
@@ -74,4 +77,54 @@ export class Slider extends Component<Props, State> {
             this.props.onChange.execute();
         }
     }
+
+    private validate(): string[] {
+        const messages: string[] = [];
+        const { minimumValue, maximumValue, stepSize, valueAttribute } = this.props;
+
+        if (minimumValue.status === ValueStatus.Unavailable) {
+            messages.push("No minimum value provided.");
+        }
+        if (maximumValue.status === ValueStatus.Unavailable) {
+            messages.push("No maximum value provided.");
+        }
+        if (stepSize.status === ValueStatus.Unavailable) {
+            messages.push("No step size provided.");
+        }
+        if (valueAttribute.status === ValueStatus.Unavailable) {
+            messages.push("The value attribute is not readable.");
+        }
+        if (
+            minimumValue.status === ValueStatus.Available &&
+            maximumValue.status === ValueStatus.Available &&
+            minimumValue.value.gt(maximumValue.value)
+        ) {
+            messages.push("The minimum value can not be greater than the maximum value.");
+        }
+        if (stepSize.status === ValueStatus.Available && stepSize.value.lte(0)) {
+            messages.push("The step size can not be zero or less than zero.");
+        }
+        if (
+            valueAttribute.status === ValueStatus.Available &&
+            valueAttribute.value != null &&
+            minimumValue.status === ValueStatus.Available &&
+            valueAttribute.value.lt(minimumValue.value)
+        ) {
+            messages.push("The current value can not be less than the minimum value.");
+        }
+        if (
+            valueAttribute.status === ValueStatus.Available &&
+            valueAttribute.value != null &&
+            maximumValue.status === ValueStatus.Available &&
+            valueAttribute.value.gt(maximumValue.value)
+        ) {
+            messages.push("The current value can not be greater than the maximum value.");
+        }
+
+        return messages;
+    }
+}
+
+function toNumber(attribute: EditableValue<BigJs.Big> | DynamicValue<BigJs.Big>): number | undefined {
+    return attribute.status === ValueStatus.Available ? Number(attribute.value) : undefined;
 }
