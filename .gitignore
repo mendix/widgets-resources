@@ -10,3 +10,6 @@
 
 # Windows File
 .thumb
+
+# Temp
+styles/web/css/main\.css
