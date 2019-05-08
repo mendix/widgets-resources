@@ -1,10 +1,8 @@
-[![Build Status](https://travis-ci.org/mendix/video-player.svg?branch=master)](https://travis-ci.org/mendix/video-player)
-[![Dependency Status](https://david-dm.org/mendix/video-player.svg)](https://david-dm.org/mendix/video-player)
-[![Dev Dependency Status](https://david-dm.org/mendix/video-player.svg#info=devDependencies)](https://david-dm.org/mendix/video-player#info=devDependencies)
-[![codecov](https://codecov.io/gh/mendix/video-player/branch/master/graph/badge.svg)](https://codecov.io/gh/mendix/video-player)
-![badge](https://img.shields.io/badge/mendix-7.20.2-green.svg)
-
 # Video Player
+[![Build Status](https://travis-ci.org/mendix/video-player.svg?branch=master)](https://travis-ci.org/mendix/video-player)
+![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
+
+## About
 Mendix widget to play videos from Youtube, Vimeo, Dailymotion and external Mp4 files.
 
 ## Features
@@ -39,3 +37,17 @@ Please report any issue and bugs to https://support.mendix.com/
 
 ## Development and contribution
 Please follow [development guide](/development.md).
+
+### Phonegap/Cordova configuration
+If your are developing a Hybrid Mobile App, please add these line through your Sprint in Mobile App -> Custom Phonegap/Cordova configuration
+These lines are required to allow the access to YouTube, Vimeo, Dailymotion videos and Mp4 extensions. Noembed.com is the API we use to request 
+the Video Sizes to calculate Aspect Ratio.
+```xml
+<allow-navigation href="*://*youtube.com/*" />
+<allow-navigation href="*://*youtu.be/*" />
+<allow-navigation href="*://*ytimg.com/*" />
+<allow-navigation href="*://*dailymotion.com/*" />
+<allow-navigation href="*://*vimeo.com/*" />
+<allow-navigation href="*://*noembed.com/*" />
+<allow-navigation href="*://*.mp4" />
+```

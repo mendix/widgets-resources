@@ -1,5 +1,5 @@
 import { Component, createElement } from "react";
-import classNames = require("classnames");
+import classNames from "classnames";
 
 import { hot } from "react-hot-loader/root";
 import { SizeContainer } from "./components/SizeContainer";

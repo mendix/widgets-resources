@@ -37,7 +37,7 @@
     "url": "https://github.com/mendix/video-player/issues"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^0.1.0",
+    "@mendix/pluggable-widgets-tools": "^0.1.1",
     "@types/big.js": "^4.0.5",
     "@types/classnames": "^2.2.4",
     "@types/enzyme": "^3.1.10",
