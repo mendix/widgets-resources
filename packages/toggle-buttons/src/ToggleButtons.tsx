@@ -1,6 +1,6 @@
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
-import { Component, createElement, Fragment } from "react";
-import { Text } from "react-native";
+import { Component, createElement } from "react";
+import { Text, View } from "react-native";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 
 import { ToggleButtonsProps } from "../typings/ToggleButtonsProps";
@@ -20,17 +20,16 @@ export class ToggleButtons extends Component<Props> {
     render(): JSX.Element {
         const selectedIndex = this.universe.indexOf(this.props.enum.value!);
         const captions = this.universe.map(name => this.props.enum.formatter.format(name));
+        const enabled = this.props.editable !== "never" && !this.props.enum.readOnly;
 
         return (
-            <Fragment>
+            <View style={enabled ? this.styles.container : this.styles.containerDisabled}>
                 <SegmentedControlTab
                     values={captions}
                     selectedIndex={selectedIndex}
-                    enabled={this.props.editable !== "never" && !this.props.enum.readOnly}
+                    enabled={enabled}
                     onTabPress={this.onChangeHandler}
                     borderRadius={this.styles.container.borderRadius}
-                    tabsContainerStyle={this.styles.container}
-                    tabsContainerDisableStyle={this.styles.containerDisabled}
                     tabStyle={this.styles.button}
                     tabTextStyle={this.styles.text}
                     activeTabStyle={this.styles.activeButton}
@@ -39,7 +38,7 @@ export class ToggleButtons extends Component<Props> {
                 {this.props.enum.validation && (
                     <Text style={this.styles.validationMessage}>{this.props.enum.validation}</Text>
                 )}
-            </Fragment>
+            </View>
         );
     }
 

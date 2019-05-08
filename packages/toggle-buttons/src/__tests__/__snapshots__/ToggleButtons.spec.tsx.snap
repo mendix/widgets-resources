@@ -2,132 +2,138 @@
 
 exports[`ToggleButtons renders 1`] = `
 <View
-  removeClippedSubviews={false}
   style={
-    Array [
-      Object {
-        "backgroundColor": "transparent",
-        "flexDirection": "row",
-      },
-      Object {
-        "borderRadius": 5,
-      },
-    ]
+    Object {
+      "borderRadius": 5,
+    }
   }
 >
   <View
-    accessibilityLabel="Formatted a"
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
+    removeClippedSubviews={false}
     style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "rgb(0, 122, 255)",
-        "borderBottomLeftRadius": 5,
-        "borderColor": "rgb(0, 122, 255)",
-        "borderRadius": 0,
-        "borderRightWidth": 1,
-        "borderTopLeftRadius": 5,
-        "borderWidth": 1,
-        "flex": 1,
-        "justifyContent": "center",
-        "opacity": 1,
-        "paddingVertical": 5,
-      }
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+          "flexDirection": "row",
+        },
+        Object {},
+      ]
     }
   >
     <View
+      accessibilityLabel="Formatted a"
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "flexDirection": "row",
+          "alignItems": "center",
+          "backgroundColor": "rgb(0, 122, 255)",
+          "borderBottomLeftRadius": 5,
+          "borderColor": "rgb(0, 122, 255)",
+          "borderRadius": 0,
+          "borderRightWidth": 1,
+          "borderTopLeftRadius": 5,
+          "borderWidth": 1,
+          "flex": 1,
+          "justifyContent": "center",
+          "opacity": 1,
+          "paddingVertical": 5,
         }
       }
     >
-      <Text
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
+      <View
         style={
-          Array [
-            Object {
-              "color": "#0076FF",
-            },
-            Object {
-              "color": "rgb(0, 122, 255)",
-            },
+          Object {
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
             Array [
               Object {
-                "color": "white",
+                "color": "#0076FF",
               },
               Object {
-                "color": "#fff",
+                "color": "rgb(0, 122, 255)",
               },
-            ],
-          ]
-        }
-      >
-        Formatted a
-      </Text>
+              Array [
+                Object {
+                  "color": "white",
+                },
+                Object {
+                  "color": "#fff",
+                },
+              ],
+            ]
+          }
+        >
+          Formatted a
+        </Text>
+      </View>
     </View>
-  </View>
-  <View
-    accessibilityLabel="Formatted b"
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "white",
-        "borderBottomRightRadius": 5,
-        "borderColor": "rgb(0, 122, 255)",
-        "borderLeftWidth": 0,
-        "borderRadius": 0,
-        "borderTopRightRadius": 5,
-        "borderWidth": 1,
-        "flex": 1,
-        "justifyContent": "center",
-        "opacity": 1,
-        "paddingVertical": 5,
-      }
-    }
-  >
     <View
+      accessibilityLabel="Formatted b"
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "flexDirection": "row",
+          "alignItems": "center",
+          "backgroundColor": "white",
+          "borderBottomRightRadius": 5,
+          "borderColor": "rgb(0, 122, 255)",
+          "borderLeftWidth": 0,
+          "borderRadius": 0,
+          "borderTopRightRadius": 5,
+          "borderWidth": 1,
+          "flex": 1,
+          "justifyContent": "center",
+          "opacity": 1,
+          "paddingVertical": 5,
         }
       }
     >
-      <Text
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
+      <View
         style={
-          Array [
-            Object {
-              "color": "#0076FF",
-            },
-            Object {
-              "color": "rgb(0, 122, 255)",
-            },
-            Object {},
-          ]
+          Object {
+            "flexDirection": "row",
+          }
         }
       >
-        Formatted b
-      </Text>
+        <Text
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#0076FF",
+              },
+              Object {
+                "color": "rgb(0, 122, 255)",
+              },
+              Object {},
+            ]
+          }
+        >
+          Formatted b
+        </Text>
+      </View>
     </View>
   </View>
 </View>
