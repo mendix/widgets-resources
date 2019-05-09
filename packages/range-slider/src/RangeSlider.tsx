@@ -116,46 +116,30 @@ export class RangeSlider extends Component<Props, State> {
             messages.push("The upper value attribute is not readable.");
         }
         if (
-            minimumValue.status === ValueStatus.Available &&
-            maximumValue.status === ValueStatus.Available &&
-            minimumValue.value.gt(maximumValue.value)
+            available(minimumValue) &&
+            available(maximumValue) &&
+            available(stepSize) &&
+            available(lowerValueAttribute) &&
+            available(upperValueAttribute)
         ) {
-            messages.push("The minimum value can not be greater than the maximum value.");
-        }
-        if (stepSize.status === ValueStatus.Available && stepSize.value.lte(0)) {
-            messages.push("The step size can not be zero or less than zero.");
-        }
-        if (
-            lowerValueAttribute.status === ValueStatus.Available &&
-            lowerValueAttribute.value != null &&
-            minimumValue.status === ValueStatus.Available &&
-            lowerValueAttribute.value.lt(minimumValue.value)
-        ) {
-            messages.push("The lower value can not be less than the minimum value.");
-        }
-        if (
-            lowerValueAttribute.status === ValueStatus.Available &&
-            lowerValueAttribute.value != null &&
-            maximumValue.status === ValueStatus.Available &&
-            lowerValueAttribute.value.gt(maximumValue.value)
-        ) {
-            messages.push("The lower value can not be greater than the maximum value.");
-        }
-        if (
-            upperValueAttribute.status === ValueStatus.Available &&
-            upperValueAttribute.value != null &&
-            minimumValue.status === ValueStatus.Available &&
-            upperValueAttribute.value.lt(minimumValue.value)
-        ) {
-            messages.push("The upper value can not be less than the minimum value.");
-        }
-        if (
-            upperValueAttribute.status === ValueStatus.Available &&
-            upperValueAttribute.value != null &&
-            maximumValue.status === ValueStatus.Available &&
-            upperValueAttribute.value.gt(maximumValue.value)
-        ) {
-            messages.push("The upper value can not be greater than the maximum value.");
+            if (minimumValue.value!.gt(maximumValue.value!)) {
+                messages.push("The minimum value can not be greater than the maximum value.");
+            }
+            if (stepSize.value!.lte(0)) {
+                messages.push("The step size can not be zero or less than zero.");
+            }
+            if (lowerValueAttribute.value!.lt(minimumValue.value!)) {
+                messages.push("The lower value can not be less than the minimum value.");
+            }
+            if (lowerValueAttribute.value!.gt(maximumValue.value!)) {
+                messages.push("The lower value can not be greater than the maximum value.");
+            }
+            if (upperValueAttribute.value!.lt(minimumValue.value!)) {
+                messages.push("The upper value can not be less than the minimum value.");
+            }
+            if (upperValueAttribute.value!.gt(maximumValue.value!)) {
+                messages.push("The upper value can not be greater than the maximum value.");
+            }
         }
 
         return messages;
@@ -164,4 +148,8 @@ export class RangeSlider extends Component<Props, State> {
 
 function toNumber(attribute: EditableValue<BigJs.Big> | DynamicValue<BigJs.Big>): number | undefined {
     return attribute.status === ValueStatus.Available ? Number(attribute.value) : undefined;
+}
+
+function available(attribute: EditableValue<BigJs.Big> | DynamicValue<BigJs.Big>): boolean {
+    return attribute.status === ValueStatus.Available && attribute.value != null;
 }

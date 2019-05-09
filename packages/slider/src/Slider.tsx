@@ -94,31 +94,19 @@ export class Slider extends Component<Props, State> {
         if (valueAttribute.status === ValueStatus.Unavailable) {
             messages.push("The value attribute is not readable.");
         }
-        if (
-            minimumValue.status === ValueStatus.Available &&
-            maximumValue.status === ValueStatus.Available &&
-            minimumValue.value.gt(maximumValue.value)
-        ) {
-            messages.push("The minimum value can not be greater than the maximum value.");
-        }
-        if (stepSize.status === ValueStatus.Available && stepSize.value.lte(0)) {
-            messages.push("The step size can not be zero or less than zero.");
-        }
-        if (
-            valueAttribute.status === ValueStatus.Available &&
-            valueAttribute.value != null &&
-            minimumValue.status === ValueStatus.Available &&
-            valueAttribute.value.lt(minimumValue.value)
-        ) {
-            messages.push("The current value can not be less than the minimum value.");
-        }
-        if (
-            valueAttribute.status === ValueStatus.Available &&
-            valueAttribute.value != null &&
-            maximumValue.status === ValueStatus.Available &&
-            valueAttribute.value.gt(maximumValue.value)
-        ) {
-            messages.push("The current value can not be greater than the maximum value.");
+        if (available(minimumValue) && available(maximumValue) && available(stepSize) && available(valueAttribute)) {
+            if (minimumValue.value!.gt(maximumValue.value!)) {
+                messages.push("The minimum value can not be greater than the maximum value.");
+            }
+            if (stepSize.value!.lte(0)) {
+                messages.push("The step size can not be zero or less than zero.");
+            }
+            if (valueAttribute.value!.lt(minimumValue.value!)) {
+                messages.push("The current value can not be less than the minimum value.");
+            }
+            if (valueAttribute.value!.gt(maximumValue.value!)) {
+                messages.push("The current value can not be greater than the maximum value.");
+            }
         }
 
         return messages;
@@ -126,5 +114,9 @@ export class Slider extends Component<Props, State> {
 }
 
 function toNumber(attribute: EditableValue<BigJs.Big> | DynamicValue<BigJs.Big>): number | undefined {
-    return attribute.status === ValueStatus.Available ? Number(attribute.value) : undefined;
+    return available(attribute) ? Number(attribute.value) : undefined;
+}
+
+function available(attribute: EditableValue<BigJs.Big> | DynamicValue<BigJs.Big>): boolean {
+    return attribute.status === ValueStatus.Available && attribute.value != null;
 }
