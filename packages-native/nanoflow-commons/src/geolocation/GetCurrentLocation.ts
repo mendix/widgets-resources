@@ -64,20 +64,20 @@ function GetCurrentLocation(
             position: GeolocationReturnType
         ): mendix.lib.MxObject {
             mxObject.set("Timestamp", new Date(position.timestamp));
-            mxObject.set("Latitude", String(position.coords.latitude));
-            mxObject.set("Longitude", String(position.coords.longitude));
-            mxObject.set("Accuracy", String(position.coords.accuracy));
+            mxObject.set("Latitude", new Big(position.coords.latitude.toFixed(8)));
+            mxObject.set("Longitude", new Big(position.coords.longitude.toFixed(8)));
+            mxObject.set("Accuracy", new Big(position.coords.accuracy.toFixed(8)));
             if (position.coords.altitude != null) {
-                mxObject.set("Altitude", String(position.coords.altitude));
+                mxObject.set("Altitude", new Big(position.coords.altitude.toFixed(8)));
             }
             if (position.coords.altitudeAccuracy != null && position.coords.altitudeAccuracy !== -1) {
-                mxObject.set("AltitudeAccuracy", String(position.coords.altitudeAccuracy));
+                mxObject.set("AltitudeAccuracy", new Big(position.coords.altitudeAccuracy.toFixed(8)));
             }
             if (position.coords.heading != null && position.coords.heading !== -1) {
-                mxObject.set("Heading", String(position.coords.heading));
+                mxObject.set("Heading", new Big(position.coords.heading.toFixed(8)));
             }
             if (position.coords.speed != null) {
-                mxObject.set("AltitudeAccuracy", String(position.coords.speed));
+                mxObject.set("AltitudeAccuracy", new Big(position.coords.speed.toFixed(8)));
             }
             return mxObject;
         }
