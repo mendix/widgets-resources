@@ -1,5 +1,4 @@
-import { DynamicValue, EditableValue, ValueStatus } from "@mendix/pluggable-widgets-api/properties";
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { available, flattenStyles, toNumber, unavailable } from "@native-mobile-resources/util-widgets";
 import MultiSlider, { MarkerProps } from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
@@ -100,19 +99,19 @@ export class RangeSlider extends Component<Props, State> {
         const messages: string[] = [];
         const { minimumValue, maximumValue, stepSize, lowerValueAttribute, upperValueAttribute } = this.props;
 
-        if (minimumValue.status === ValueStatus.Unavailable) {
+        if (unavailable(minimumValue)) {
             messages.push("No minimum value provided.");
         }
-        if (maximumValue.status === ValueStatus.Unavailable) {
+        if (unavailable(maximumValue)) {
             messages.push("No maximum value provided.");
         }
-        if (stepSize.status === ValueStatus.Unavailable) {
+        if (unavailable(stepSize)) {
             messages.push("No step size provided.");
         }
-        if (lowerValueAttribute.status === ValueStatus.Unavailable) {
+        if (unavailable(lowerValueAttribute)) {
             messages.push("The lower value attribute is not readable.");
         }
-        if (upperValueAttribute.status === ValueStatus.Unavailable) {
+        if (unavailable(upperValueAttribute)) {
             messages.push("The upper value attribute is not readable.");
         }
         if (
@@ -145,12 +144,4 @@ export class RangeSlider extends Component<Props, State> {
 
         return messages;
     }
-}
-
-function toNumber(attribute: EditableValue<BigJs.Big> | DynamicValue<BigJs.Big>): number | undefined {
-    return attribute.status === ValueStatus.Available ? Number(attribute.value) : undefined;
-}
-
-function available(attribute: EditableValue<BigJs.Big> | DynamicValue<BigJs.Big>): boolean {
-    return attribute.status === ValueStatus.Available && attribute.value != null;
 }

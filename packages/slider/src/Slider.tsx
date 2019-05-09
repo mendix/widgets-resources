@@ -1,5 +1,4 @@
-import { DynamicValue, EditableValue, ValueStatus } from "@mendix/pluggable-widgets-api/properties";
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { available, flattenStyles, toNumber, unavailable } from "@native-mobile-resources/util-widgets";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
@@ -82,16 +81,16 @@ export class Slider extends Component<Props, State> {
         const messages: string[] = [];
         const { minimumValue, maximumValue, stepSize, valueAttribute } = this.props;
 
-        if (minimumValue.status === ValueStatus.Unavailable) {
+        if (unavailable(minimumValue)) {
             messages.push("No minimum value provided.");
         }
-        if (maximumValue.status === ValueStatus.Unavailable) {
+        if (unavailable(maximumValue)) {
             messages.push("No maximum value provided.");
         }
-        if (stepSize.status === ValueStatus.Unavailable) {
+        if (unavailable(stepSize)) {
             messages.push("No step size provided.");
         }
-        if (valueAttribute.status === ValueStatus.Unavailable) {
+        if (unavailable(valueAttribute)) {
             messages.push("The value attribute is not readable.");
         }
         if (available(minimumValue) && available(maximumValue) && available(stepSize) && available(valueAttribute)) {
@@ -112,12 +111,4 @@ export class Slider extends Component<Props, State> {
 
         return messages;
     }
-}
-
-function toNumber(attribute: EditableValue<BigJs.Big> | DynamicValue<BigJs.Big>): number | undefined {
-    return available(attribute) ? Number(attribute.value) : undefined;
-}
-
-function available(attribute: EditableValue<BigJs.Big> | DynamicValue<BigJs.Big>): boolean {
-    return attribute.status === ValueStatus.Available && attribute.value != null;
 }

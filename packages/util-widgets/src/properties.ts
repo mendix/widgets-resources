@@ -10,3 +10,7 @@ export function unavailable(property: EditableValue<any> | DynamicValue<any>): b
         (property.status === ValueStatus.Available && property.value == null)
     );
 }
+
+export function toNumber(property: EditableValue<BigJs.Big> | DynamicValue<BigJs.Big>): number | undefined {
+    return available(property) ? Number(property.value) : undefined;
+}
