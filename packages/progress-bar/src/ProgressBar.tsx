@@ -1,3 +1,4 @@
+import { ValueStatus } from "@mendix/pluggable-widgets-api/properties";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { Component, createElement } from "react";
 import { Text, View } from "react-native";
@@ -12,16 +13,8 @@ export class ProgressBar extends Component<Props> {
     private readonly styles = flattenStyles(defaultProgressBarStyle, this.props.style);
 
     render(): JSX.Element {
-        const min = this.props.minimumValue.value;
-        const max = this.props.maximumValue.value;
-        const value = this.props.progressValue.value;
-
-        const invalidPropsMessage = min != null && max != null && value != null ? validate(min, max, value) : undefined;
-
-        const progress =
-            min != null && max != null && value != null && invalidPropsMessage == null
-                ? calculateProgress(min, max, value)
-                : 0;
+        const validationMessages = this.validate();
+        const progress = validationMessages.length === 0 ? this.calculateProgress() : 0;
 
         return (
             <View style={this.styles.container}>
@@ -33,27 +26,64 @@ export class ProgressBar extends Component<Props> {
                     borderWidth={this.styles.bar.borderWidth}
                     style={this.styles.bar}
                 />
-                {invalidPropsMessage && <Text style={this.styles.validationMessage}>{invalidPropsMessage}</Text>}
+                {validationMessages.length > 0 && (
+                    <Text style={this.styles.validationMessage}>{validationMessages.join(" ")}</Text>
+                )}
             </View>
         );
     }
-}
 
-function validate(minimum: BigJs.Big, maximum: BigJs.Big, value: BigJs.Big): string | undefined {
-    if (minimum.gte(maximum)) {
-        return "The minimum value can not be greater than or equal to the maximum value.";
-    }
-    if (value.lt(minimum)) {
-        return "The current value can not be less than the minimum value.";
-    }
-    if (value.gt(maximum)) {
-        return "The current value can not be greater than the maximum value.";
-    }
-    return;
-}
+    private validate(): string[] {
+        const messages: string[] = [];
+        const { minimumValue, maximumValue, progressValue } = this.props;
 
-function calculateProgress(minimum: BigJs.Big, maximum: BigJs.Big, value: BigJs.Big): number {
-    const numerator = value.minus(minimum);
-    const denominator = maximum.minus(minimum);
-    return Number(numerator.div(denominator));
+        if (minimumValue.status === ValueStatus.Unavailable) {
+            messages.push("No minimum value provided.");
+        }
+        if (maximumValue.status === ValueStatus.Unavailable) {
+            messages.push("No maximum value provided.");
+        }
+        if (progressValue.status === ValueStatus.Unavailable) {
+            messages.push("No current value provided.");
+        }
+        if (
+            minimumValue.status === ValueStatus.Available &&
+            maximumValue.status === ValueStatus.Available &&
+            minimumValue.value.gte(maximumValue.value)
+        ) {
+            messages.push("The minimum value can not be greater than or equal to the maximum value.");
+        }
+        if (
+            progressValue.status === ValueStatus.Available &&
+            minimumValue.status === ValueStatus.Available &&
+            progressValue.value.lt(minimumValue.value)
+        ) {
+            messages.push("The current value can not be less than the minimum value.");
+        }
+        if (
+            progressValue.status === ValueStatus.Available &&
+            maximumValue.status === ValueStatus.Available &&
+            progressValue.value.gt(maximumValue.value)
+        ) {
+            messages.push("The current value can not be greater than the maximum value.");
+        }
+
+        return messages;
+    }
+
+    private calculateProgress(): number {
+        const { minimumValue, maximumValue, progressValue } = this.props;
+
+        if (
+            minimumValue.status !== ValueStatus.Available ||
+            maximumValue.status !== ValueStatus.Available ||
+            progressValue.status !== ValueStatus.Available
+        ) {
+            return 0;
+        }
+
+        const numerator = progressValue.value.minus(minimumValue.value);
+        const denominator = maximumValue.value.minus(minimumValue.value);
+        return Number(numerator.div(denominator));
+    }
 }
