@@ -41,7 +41,7 @@ describe("RangeSlider", () => {
     it("renders an error when the minimum is greater than the maximum", () => {
         const component = render(<RangeSlider {...defaultProps} minimumValue={dynamicValue(new Big(300))} />);
         expect(component.getByType(Text).props.children).toBe(
-            "The minimum value can not be greater than the maximum value. The lower value can not be less than the minimum value. The upper value can not be less than the minimum value."
+            "The minimum value can not be greater than the maximum value."
         );
     });
 

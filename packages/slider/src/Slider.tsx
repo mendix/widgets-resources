@@ -47,7 +47,7 @@ export class Slider extends Component<Props, State> {
                     allowOverlap={true}
                     customMarker={Marker}
                 />
-                {!validProps && <Text style={this.styles.validationMessage}>{validationMessages.join(" ")}</Text>}
+                {!validProps && <Text style={this.styles.validationMessage}>{validationMessages.join("\n")}</Text>}
                 {this.props.valueAttribute.validation && (
                     <Text style={this.styles.validationMessage}>{this.props.valueAttribute.validation}</Text>
                 )}
@@ -95,17 +95,18 @@ export class Slider extends Component<Props, State> {
             messages.push("The value attribute is not readable.");
         }
         if (available(minimumValue) && available(maximumValue) && available(stepSize) && available(valueAttribute)) {
-            if (minimumValue.value!.gt(maximumValue.value!)) {
-                messages.push("The minimum value can not be greater than the maximum value.");
-            }
             if (stepSize.value!.lte(0)) {
                 messages.push("The step size can not be zero or less than zero.");
             }
-            if (valueAttribute.value!.lt(minimumValue.value!)) {
-                messages.push("The current value can not be less than the minimum value.");
-            }
-            if (valueAttribute.value!.gt(maximumValue.value!)) {
-                messages.push("The current value can not be greater than the maximum value.");
+            if (minimumValue.value!.gt(maximumValue.value!)) {
+                messages.push("The minimum value can not be greater than the maximum value.");
+            } else {
+                if (valueAttribute.value!.lt(minimumValue.value!)) {
+                    messages.push("The current value can not be less than the minimum value.");
+                }
+                if (valueAttribute.value!.gt(maximumValue.value!)) {
+                    messages.push("The current value can not be greater than the maximum value.");
+                }
             }
         }
 

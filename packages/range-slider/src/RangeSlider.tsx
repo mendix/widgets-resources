@@ -64,7 +64,7 @@ export class RangeSlider extends Component<Props, State> {
                     <Text style={this.styles.validationMessage}>{this.props.upperValueAttribute.validation}</Text>
                 )}
                 {validationMessages.length > 0 && (
-                    <Text style={this.styles.validationMessage}>{validationMessages.join(" ")}</Text>
+                    <Text style={this.styles.validationMessage}>{validationMessages.join("\n")}</Text>
                 )}
             </View>
         );
@@ -122,23 +122,24 @@ export class RangeSlider extends Component<Props, State> {
             available(lowerValueAttribute) &&
             available(upperValueAttribute)
         ) {
-            if (minimumValue.value!.gt(maximumValue.value!)) {
-                messages.push("The minimum value can not be greater than the maximum value.");
-            }
             if (stepSize.value!.lte(0)) {
                 messages.push("The step size can not be zero or less than zero.");
             }
-            if (lowerValueAttribute.value!.lt(minimumValue.value!)) {
-                messages.push("The lower value can not be less than the minimum value.");
-            }
-            if (lowerValueAttribute.value!.gt(maximumValue.value!)) {
-                messages.push("The lower value can not be greater than the maximum value.");
-            }
-            if (upperValueAttribute.value!.lt(minimumValue.value!)) {
-                messages.push("The upper value can not be less than the minimum value.");
-            }
-            if (upperValueAttribute.value!.gt(maximumValue.value!)) {
-                messages.push("The upper value can not be greater than the maximum value.");
+            if (minimumValue.value!.gt(maximumValue.value!)) {
+                messages.push("The minimum value can not be greater than the maximum value.");
+            } else {
+                if (lowerValueAttribute.value!.lt(minimumValue.value!)) {
+                    messages.push("The lower value can not be less than the minimum value.");
+                }
+                if (lowerValueAttribute.value!.gt(maximumValue.value!)) {
+                    messages.push("The lower value can not be greater than the maximum value.");
+                }
+                if (upperValueAttribute.value!.lt(minimumValue.value!)) {
+                    messages.push("The upper value can not be less than the minimum value.");
+                }
+                if (upperValueAttribute.value!.gt(maximumValue.value!)) {
+                    messages.push("The upper value can not be greater than the maximum value.");
+                }
             }
         }
 
