@@ -1,18 +1,21 @@
 import { ValueStatus } from "@mendix/pluggable-widgets-api/properties";
+import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { Component, createElement } from "react";
 import { View } from "react-native";
 import { RNCamera } from "react-native-camera";
 
 import { BarcodeScannerProps } from "../typings/BarcodeScannerProps";
+import { BarcodeScannerStyle, defaultBarcodeScannerStyle } from "./ui/styles";
 
-export type Props = BarcodeScannerProps<undefined>;
+export type Props = BarcodeScannerProps<BarcodeScannerStyle>;
 
 export class BarcodeScanner extends Component<Props> {
+    private readonly styles = flattenStyles(defaultBarcodeScannerStyle, this.props.style);
     private readonly onBarCodeReadHandler = this.onBarCodeRead.bind(this);
 
     render(): JSX.Element {
         return (
-            <View style={{ flex: 1, minHeight: 100, flexDirection: "column" }}>
+            <View style={this.styles.container}>
                 <RNCamera
                     style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
                     captureAudio={false}
