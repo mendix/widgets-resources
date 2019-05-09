@@ -1,4 +1,4 @@
-import { ValueStatus } from "@mendix/pluggable-widgets-api/properties";
+import { DynamicValue, EditableValue, ValueStatus } from "@mendix/pluggable-widgets-api/properties";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { Component, createElement } from "react";
 import { Text, View } from "react-native";
@@ -32,7 +32,7 @@ export class ProgressCircle extends Component<Props> {
                     strokeCap={this.styles.fill.lineCapRounded ? "round" : "square"}
                 />
                 {validationMessages.length > 0 && (
-                    <Text style={this.styles.validationMessage}>{validationMessages.join(" ")}</Text>
+                    <Text style={this.styles.validationMessage}>{validationMessages.join("\n")}</Text>
                 )}
             </View>
         );
@@ -60,26 +60,17 @@ export class ProgressCircle extends Component<Props> {
         if (progressValue.status === ValueStatus.Unavailable) {
             messages.push("No current value provided.");
         }
-        if (
-            minimumValue.status === ValueStatus.Available &&
-            maximumValue.status === ValueStatus.Available &&
-            minimumValue.value.gte(maximumValue.value)
-        ) {
-            messages.push("The minimum value can not be greater than or equal to the maximum value.");
-        }
-        if (
-            progressValue.status === ValueStatus.Available &&
-            minimumValue.status === ValueStatus.Available &&
-            progressValue.value.lt(minimumValue.value)
-        ) {
-            messages.push("The current value can not be less than the minimum value.");
-        }
-        if (
-            progressValue.status === ValueStatus.Available &&
-            maximumValue.status === ValueStatus.Available &&
-            progressValue.value.gt(maximumValue.value)
-        ) {
-            messages.push("The current value can not be greater than the maximum value.");
+        if (available(minimumValue) && available(maximumValue) && available(progressValue)) {
+            if (minimumValue.value!.gte(maximumValue.value!)) {
+                messages.push("The minimum value can not be greater than or equal to the maximum value.");
+            } else {
+                if (progressValue.value!.lt(minimumValue.value!)) {
+                    messages.push("The current value can not be less than the minimum value.");
+                }
+                if (progressValue.value!.gt(maximumValue.value!)) {
+                    messages.push("The current value can not be greater than the maximum value.");
+                }
+            }
         }
 
         return messages;
@@ -88,16 +79,16 @@ export class ProgressCircle extends Component<Props> {
     private calculateProgress(): number {
         const { minimumValue, maximumValue, progressValue } = this.props;
 
-        if (
-            minimumValue.status !== ValueStatus.Available ||
-            maximumValue.status !== ValueStatus.Available ||
-            progressValue.status !== ValueStatus.Available
-        ) {
+        if (!available(minimumValue) || !available(maximumValue) || !available(progressValue)) {
             return 0;
         }
 
-        const numerator = progressValue.value.minus(minimumValue.value);
-        const denominator = maximumValue.value.minus(minimumValue.value);
+        const numerator = progressValue.value!.minus(minimumValue.value!);
+        const denominator = maximumValue.value!.minus(minimumValue.value!);
         return Number(numerator.div(denominator));
     }
+}
+
+function available(attribute: EditableValue<BigJs.Big> | DynamicValue<BigJs.Big>): boolean {
+    return attribute.status === ValueStatus.Available && attribute.value != null;
 }
