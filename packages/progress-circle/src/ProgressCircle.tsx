@@ -1,5 +1,4 @@
-import { DynamicValue, EditableValue, ValueStatus } from "@mendix/pluggable-widgets-api/properties";
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { available, flattenStyles, unavailable } from "@native-mobile-resources/util-widgets";
 import { Component, createElement } from "react";
 import { Text, View } from "react-native";
 import { Circle } from "react-native-progress";
@@ -51,13 +50,13 @@ export class ProgressCircle extends Component<Props> {
         const messages: string[] = [];
         const { minimumValue, maximumValue, progressValue } = this.props;
 
-        if (minimumValue.status === ValueStatus.Unavailable) {
+        if (unavailable(minimumValue)) {
             messages.push("No minimum value provided.");
         }
-        if (maximumValue.status === ValueStatus.Unavailable) {
+        if (unavailable(maximumValue)) {
             messages.push("No maximum value provided.");
         }
-        if (progressValue.status === ValueStatus.Unavailable) {
+        if (unavailable(progressValue)) {
             messages.push("No current value provided.");
         }
         if (available(minimumValue) && available(maximumValue) && available(progressValue)) {
@@ -87,8 +86,4 @@ export class ProgressCircle extends Component<Props> {
         const denominator = maximumValue.value!.minus(minimumValue.value!);
         return Number(numerator.div(denominator));
     }
-}
-
-function available(attribute: EditableValue<BigJs.Big> | DynamicValue<BigJs.Big>): boolean {
-    return attribute.status === ValueStatus.Available && attribute.value != null;
 }
