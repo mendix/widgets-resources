@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 import { button, contrast, font, input, border, brand, background } from '../variables';
-import { hexToRgbString } from '../_helperfunctions/calculatecontrast';
+import { anyColorToRgbString } from '../_helperfunctions/convertcolors';
 
 /* ==========================================================================
     Feedback
@@ -66,9 +66,9 @@ export const com_mendix_widget_native_feedback_Feedback = (Feedback = {
         padding: 0,
         marginRight: Platform.select({ ios: 0, android: -5 }),
         thumbColorOn: brand.primary,
-        trackColorOn: `rgba(${hexToRgbString(brand.primary)},0.2)`,
+        trackColorOn: `rgba(${anyColorToRgbString(brand.primary)},0.2)`,
         thumbColorOff: contrast.low,
-        trackColorOff: `rgba(${hexToRgbString(contrast.low)},0.2)`,
+        trackColorOff: `rgba(${anyColorToRgbString(contrast.low)},0.2)`,
     },
     button: {
         // Just these 3 properties are allowed

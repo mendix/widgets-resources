@@ -1,4 +1,4 @@
-//TODO: Container design property card
+import {} from '../variables';
 
 /* ==========================================================================
     Container

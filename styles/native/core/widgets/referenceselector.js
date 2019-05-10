@@ -34,8 +34,6 @@ export const ReferenceSelector = {
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
 
-        // height: 40,
-        // fontSize: input.fontSize, //FIXME: Throws error
         borderWidth: input.borderWidth,
         borderRadius: input.radius,
 
@@ -44,7 +42,7 @@ export const ReferenceSelector = {
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        color: input.errorColor,
+        ...TextBox.validationMessage,
     },
 };
 export const ReferenceSelectorVertical = {
@@ -59,11 +57,11 @@ export const ReferenceSelectorVertical = {
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
 
-        // fontSize: input.fontSize, //FIXME: Throws error
         borderRadius: input.radius,
         borderWidth: input.borderWidth,
 
         paddingVertical: input.paddingVertical,
         paddingHorizontal: input.paddingHorizontal,
     },
+    validationMessage: TextBoxVertical.validationMessage,
 };

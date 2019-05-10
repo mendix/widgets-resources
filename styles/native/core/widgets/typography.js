@@ -15,6 +15,7 @@ export const Text = {
         // All TextStyle properties are allowed
         color: font.color,
         fontSize: font.size,
+        lineHeight: font.size,
     },
 };
 
@@ -22,6 +23,7 @@ export const TextHeading1 = {
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH1,
+        lineHeight: font.sizeH1,
         marginBottom: spacing.small,
     },
 };
@@ -29,6 +31,7 @@ export const TextHeading2 = {
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH2,
+        lineHeight: font.sizeH2,
         marginBottom: spacing.small,
     },
 };
@@ -36,6 +39,7 @@ export const TextHeading3 = {
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH3,
+        lineHeight: font.sizeH3,
         marginBottom: spacing.small,
     },
 };
@@ -43,6 +47,7 @@ export const TextHeading4 = {
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH4,
+        lineHeight: font.sizeH4,
         marginBottom: spacing.smaller,
     },
 };
@@ -50,6 +55,7 @@ export const TextHeading5 = {
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH5,
+        lineHeight: font.sizeH5,
         marginBottom: spacing.smallest,
     },
 };
@@ -57,6 +63,7 @@ export const TextHeading6 = {
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH6,
+        lineHeight: font.sizeH6,
         marginBottom: spacing.smallest,
     },
 };
@@ -92,39 +99,39 @@ export const textWhite = {
     },
 };
 
-export const textGrayDarkest = {
+export const textContrastLowest = {
     text: {
-        color: contrast.highest,
+        color: contrast.lowest,
     },
 };
-export const textGrayDarker = {
-    text: {
-        color: contrast.higher,
-    },
-};
-export const textGrayDark = {
-    text: {
-        color: contrast.high,
-    },
-};
-export const textGray = {
-    text: {
-        color: contrast.regular,
-    },
-};
-export const textGrayLight = {
-    text: {
-        color: contrast.low,
-    },
-};
-export const textGrayLighter = {
+export const textContrastLower = {
     text: {
         color: contrast.lower,
     },
 };
-export const textGrayLightest = {
+export const textContrastLow = {
     text: {
-        color: contrast.lowest,
+        color: contrast.low,
+    },
+};
+export const textContrastDefault = {
+    text: {
+        color: contrast.regular,
+    },
+};
+export const textContrastHigh = {
+    text: {
+        color: contrast.high,
+    },
+};
+export const textContrastHigher = {
+    text: {
+        color: contrast.higher,
+    },
+};
+export const textContrastHighest = {
+    text: {
+        color: contrast.highest,
     },
 };
 
@@ -174,11 +181,13 @@ export const textBold = {
 export const textSmall = {
     text: {
         fontSize: font.sizeSmall,
+        lineHeight: font.sizeSmall,
     },
 };
 export const textLarge = {
     text: {
         fontSize: font.sizeLarge,
+        lineHeight: font.sizeLarge,
     },
 };
 

@@ -1,5 +1,5 @@
 import { brand } from '../variables';
-import { hexToRgbString } from '../_helperfunctions/calculatecontrast';
+import { anyColorToRgbString } from '../_helperfunctions/convertcolors';
 import { Platform } from 'react-native';
 
 /* ==========================================================================
@@ -11,7 +11,7 @@ import { Platform } from 'react-native';
 export const com_mendix_widget_native_progressbar_ProgressBar = (ProgressBar = {
     container: {
         // All ViewStyle properties are allowed
-        width: '100%',
+        alignSelf: 'stretch',
     },
     bar: {
         // All ViewStyle properties are allowed
@@ -22,7 +22,7 @@ export const com_mendix_widget_native_progressbar_ProgressBar = (ProgressBar = {
             android: {
                 borderRadius: 0,
                 borderWidth: 0,
-                backgroundColor: `rgba(${hexToRgbString(brand.primary)},0.2)`,
+                backgroundColor: `rgba(${anyColorToRgbString(brand.primary)},0.2)`,
             },
         }),
     },
@@ -40,7 +40,7 @@ export const com_mendix_widget_native_progressbar_ProgressBar = (ProgressBar = {
 export const progressBarSuccess = {
     bar: {
         borderColor: Platform.select({ ios: brand.success }),
-        backgroundColor: Platform.select({ android: `rgba(${hexToRgbString(brand.success)},0.2)` }),
+        backgroundColor: Platform.select({ android: `rgba(${anyColorToRgbString(brand.success)},0.2)` }),
     },
     fill: {
         backgroundColor: brand.success,
@@ -50,7 +50,7 @@ export const progressBarSuccess = {
 export const progressBarWarning = {
     bar: {
         borderColor: Platform.select({ ios: brand.warning }),
-        backgroundColor: Platform.select({ android: `rgba(${hexToRgbString(brand.warning)},0.2)` }),
+        backgroundColor: Platform.select({ android: `rgba(${anyColorToRgbString(brand.warning)},0.2)` }),
     },
     fill: {
         backgroundColor: brand.warning,
@@ -60,7 +60,7 @@ export const progressBarWarning = {
 export const progressBarDanger = {
     bar: {
         borderColor: Platform.select({ ios: brand.danger }),
-        backgroundColor: Platform.select({ android: `rgba(${hexToRgbString(brand.danger)},0.2)` }),
+        backgroundColor: Platform.select({ android: `rgba(${anyColorToRgbString(brand.danger)},0.2)` }),
     },
     fill: {
         backgroundColor: brand.danger,

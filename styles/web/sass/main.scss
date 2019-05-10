@@ -4,8 +4,14 @@
 // Licensed under MIT (https://github.com/mendix/Atlas-UI-Framework/blob/master/LICENSE)
 //
 
+// Utilities
+// @import "core/_utilities/bootstrap.scss";
+// @import "core/_utilities/mxui.scss";
+@import url("../../../lib/bootstrap/css/bootstrap.min.css");
+@import url("../../../mxclientsystem/mxui/ui/mxui.css");
+
 // Custom variables
-@import "app/custom_variables";
+@import "app/custom-variables";
 
 
 //================================== CORE ==================================\\

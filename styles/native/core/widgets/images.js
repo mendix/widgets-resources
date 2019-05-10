@@ -30,11 +30,18 @@ export const NativeDynamicImage = {
 //## Helper classes to change the look and feel of the widget
 //-------------------------------------------------------------------------------------------------------------------//
 // Image Sizes
-export const avatar = {
+export const avatarSmall = {
     image: {
         width: 60,
         height: 60,
         borderRadius: 30,
+    },
+};
+export const avatarLarge = {
+    image: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
     },
 };
 

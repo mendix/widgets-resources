@@ -1,34 +1,38 @@
-import { Platform, Dimensions } from 'react-native';
-import { setColorBasedOnBackground, setContrastScale } from './_helperfunctions/convertcolors';
-import adjustFont from './_helperfunctions/adjustfont';
-import * as custom from '../app/custom-variables';
-import merge from './_helperfunctions/mergeobjects';
+import { Platform } from 'react-native';
+import { setColorBasedOnBackground, setContrastScale } from '../core/_helperfunctions/convertcolors';
+import adjustFont from '../core/_helperfunctions/adjustfont';
+
+/*
+==> You can find a copy of the core variables below. (From styles/native/core/variables.js)
+==> You can freely change any value in this file.
+==> DO NOT change the core variable file (or any other file in core), as that makes updating Atlas a lot harder in the future.
+*/
 
 //== Global variables
 //## Variables to be used during styling
 //-------------------------------------------------------------------------------------------------------------------//
-// System defined read-only values
-export const { height: deviceHeight, width: deviceWidth } = Dimensions.get('window');
-
 // Brand Style
-let brand = {
+export const brand = {
     primary: '#0595DB',
     success: '#76CA02',
     warning: '#f99b1d',
     danger: '#ed1c24',
 };
-brand = merge(brand, custom.brand || {});
 
+// Dark Mode
+const darkMode = false;
 
-let background = {
-    primary: '#FFF',
-    secondary: setContrastScale(0.03, '#FFF'),
+// Background Colors
+const backgroundColor = darkMode ? '#000' : '#FFF';
+const backgroundSecondaryContrast = darkMode ? 0.11 : 0.03;
+
+export const background = {
+    primary: backgroundColor,
+    secondary: setContrastScale(backgroundSecondaryContrast, backgroundColor),
 };
-background = merge(background, custom.background || {});
-
 
 // Contrast (Gray) colors based on background.primary
-let contrast = {
+export const contrast = {
     highest: setContrastScale(0.95, background.primary),
     higher: setContrastScale(0.8, background.primary),
     high: setContrastScale(0.65, background.primary),
@@ -37,20 +41,16 @@ let contrast = {
     lower: setContrastScale(0.2, background.primary),
     lowest: setContrastScale(0.05, background.primary),
 };
-contrast = merge(contrast, custom.contrast || {});
-
 
 // Border Style
-let border = {
+export const border = {
     color: setContrastScale(0.17, background.primary),
     width: 1,
     radius: 5,
 };
-border = merge(border, custom.border || {});
-
 
 // Font Styles
-let font = {
+export const font = {
     size: adjustFont(14),
     sizeSmall: adjustFont(12),
     sizeLarge: adjustFont(18),
@@ -67,11 +67,9 @@ let font = {
     weightBold: 'bold',
     family: Platform.select({ ios: 'System', android: 'normal' }),
 };
-font = merge(font, custom.font || {});
-
 
 // Spacing
-let spacing = {
+export const spacing = {
     smallest: 5,
     smaller: 10,
     small: 15,
@@ -80,11 +78,9 @@ let spacing = {
     larger: 30,
     largest: 40,
 };
-spacing = merge(spacing, custom.spacing || {});
-
 
 // Button Styles
-let button = {
+export const button = {
     fontSize: font.size,
     borderRadius: border.radius,
 
@@ -119,11 +115,9 @@ let button = {
         backgroundColor: brand.danger,
     },
 };
-button = merge(button, custom.button || {});
-
 
 //Input Styles
-let input = {
+export const input = {
     // Colors
     color: contrast.higher,
     errorColor: brand.danger,
@@ -144,8 +138,3 @@ let input = {
     paddingHorizontal: spacing.small,
     paddingVertical: spacing.smaller,
 };
-input = merge(input, custom.input || {});
-
-
-
-export { brand, background, border, contrast, font, spacing, button, input };

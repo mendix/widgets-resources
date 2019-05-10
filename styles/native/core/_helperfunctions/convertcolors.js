@@ -36,15 +36,15 @@ function hexToRgb(hex) {
 }
 
 /**
- * Converts HEX color to RGB string
+ * Converts any color format to RGB string
  *
- * @param   {string}    hex   Accepts HEX color
+ * @param   {string}    anyColor   Accepts any color format
  *
  * @return  {string} Returns RGB color; `r,g,b`
  */
-export function hexToRgbString(hex) {
-    const object = hexToRgb(hex);
-    return [object.r, object.g, object.b].join(',');
+export function anyColorToRgbString(anyColor) {
+    const { r, g, b } = checkColor(anyColor);
+    return [r, g, b].join(',');
 }
 
 /**
@@ -192,8 +192,10 @@ export function setColorBasedOnBackground(color) {
 }
 
 /**
- * Expects a color and a contrast value between 0 and 1.
- * It will return a gray color with the desired contrast which is based on the specified color
+ * Expects a color and a contrast value between 0 and 1.'
+ * It will look at the supplied color's brightness and will start the contrast scale either from #000 (black) or #FFF (white).
+ * This function will work best when you supply a very dark or very bright color.
+ * It will return a gray color with the desired contrast which is based on the specified color.
  *
  * @param   {string}    color   Accepts any color format
  * @param   {number}    contrast   Accepts a value between 0 and 1
@@ -205,10 +207,10 @@ export function setContrastScale(contrast, color) {
     if (contrast < 0) contrast = 0;
     const max = 256;
     const c = checkColor(color);
-    const RGB = typeof c === 'object' ? c : { r: '255', g: '255', b: '255' };
+    const { r, g, b } = typeof c === 'object' ? c : { r: '255', g: '255', b: '255' };
 
     // https://www.w3.org/TR/AERT/#color-contrast
-    const brightness = Math.round((RGB.r * 299 + RGB.g * 587 + RGB.b * 114) / 1000);
+    const brightness = Math.round((r * 299 + g * 587 + b * 114) / 1000);
     const value = Math.round(brightness > max / 2 ? max - max * contrast : max * contrast);
     return RgbToHex(value, value, value);
 }

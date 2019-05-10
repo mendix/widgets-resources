@@ -275,6 +275,13 @@
             },
 
             {
+                "name": "Wrap children",
+                "type": "Toggle",
+                "description": "Determines if children can flow into multiple lines if they hit the end of the container.",
+                "class": "flexWrap"
+            },
+
+            {
                 "name": "Align children",
                 "type": "Dropdown",
                 "description": "Align children in the opposite direction.",
@@ -512,6 +519,13 @@
             },
 
             {
+                "name": "Wrap children",
+                "type": "Toggle",
+                "description": "Determines if children can flow into multiple lines if they hit the end of the container.",
+                "class": "flexWrap"
+            },
+
+            {
                 "name": "Align children",
                 "type": "Dropdown",
                 "description": "Align children in the opposite direction.",
@@ -651,32 +665,32 @@
                         "class": "textWhite"
                     },
                     {
-                        "name": "Gray lightest",
-                        "class": "textGrayLightest"
+                        "name": "Contrast lowest",
+                        "class": "textContrastLowest"
                     },
                     {
-                        "name": "Gray lighter",
-                        "class": "textGrayLighter"
+                        "name": "Contrast lower",
+                        "class": "textContrastLower"
                     },
                     {
-                        "name": "Gray light",
-                        "class": "textGrayLight"
+                        "name": "Contrast low",
+                        "class": "textContrastLow"
                     },
                     {
-                        "name": "Gray",
-                        "class": "textGray"
+                        "name": "Contrast default",
+                        "class": "textContrastDefault"
                     },
                     {
-                        "name": "Gray dark",
-                        "class": "textGrayDark"
+                        "name": "Contrast high",
+                        "class": "textContrastHigh"
                     },
                     {
-                        "name": "Gray darker",
-                        "class": "textGrayDarker"
+                        "name": "Contrast higher",
+                        "class": "textContrastHigher"
                     },
                     {
-                        "name": "Gray darkest",
-                        "class": "textGrayDarkest"
+                        "name": "Contrast highest",
+                        "class": "textContrastHighest"
                     }
                 ]
             },
@@ -764,7 +778,7 @@
             {
                 "name": "Tab bar scroll",
                 "type": "Toggle",
-                "description": "Enable the ability to scroll the tab bar horizontally.",
+                "description": "Enable horizontal scroll for the tab bar.",
                 "class": "tabContainerScroll"
             }
         ],
@@ -817,6 +831,28 @@
             }
         ],
 
+        "com.mendix.widget.native.floatingactionbutton.FloatingActionButton": [
+            {
+                "name": "Style",
+                "type": "Dropdown",
+                "description": "Style of the Floating Action Button.",
+                "options": [
+                    {
+                        "name": "Success",
+                        "class": "floatingActionButtonSuccess"
+                    },
+                    {
+                        "name": "Warning",
+                        "class": "floatingActionButtonWarning"
+                    },
+                    {
+                        "name": "Danger",
+                        "class": "floatingActionButtonDanger"
+                    }
+                ]
+            }
+        ],
+
         "com.mendix.widget.native.maps.Maps": [
             {
                 "name": "Maps size",
@@ -828,8 +864,8 @@
                         "class": "mapsSquare"
                     },
                     {
-                        "name": "Full screen",
-                        "class": "mapsFullScreen"
+                        "name": "Full height",
+                        "class": "mapsFullHeight"
                     }
                 ]
             },

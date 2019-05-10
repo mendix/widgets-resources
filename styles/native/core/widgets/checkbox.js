@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 import { brand, spacing, contrast } from '../variables';
 import { TextBox, TextBoxVertical } from './textbox';
-import { hexToRgbString } from '../_helperfunctions/calculatecontrast';
+import { anyColorToRgbString } from '../_helperfunctions/convertcolors';
 
 /* ==========================================================================
     CheckBox
@@ -14,6 +14,7 @@ export const CheckBox = {
         // All ViewStyle properties are allowed
         ...TextBox.container,
         paddingVertical: spacing.smallest,
+        justifyContent: 'center',
     },
     label: {
         // numberOfLines and all TextStyle properties are allowed
@@ -24,21 +25,22 @@ export const CheckBox = {
         backgroundColor: 'transparent',
         marginRight: Platform.select({ android: -3 }),
         thumbColorOn: brand.primary,
-        trackColorOn: `rgba(${hexToRgbString(brand.primary)},0.2)`,
+        trackColorOn: `rgba(${anyColorToRgbString(brand.primary)},0.2)`,
         thumbColorOff: contrast.low,
-        trackColorOff: `rgba(${hexToRgbString(contrast.low)},0.2)`,
+        trackColorOff: `rgba(${anyColorToRgbString(contrast.low)},0.2)`,
     },
     inputError: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
         ...TextBox.inputError,
-        thumbColorOn: brand.primary,
-        trackColorOn: `rgba(${hexToRgbString(brand.primary)},0.2)`,
-        thumbColorOff: contrast.low,
-        trackColorOff: `rgba(${hexToRgbString(contrast.low)},0.2)`,
+        thumbColorOn: brand.danger,
+        trackColorOn: `rgba(${anyColorToRgbString(brand.danger)},0.2)`,
+        thumbColorOff: brand.danger,
+        trackColorOff: `rgba(${anyColorToRgbString(brand.danger)},0.2)`,
     },
     validationMessage: {
         // All TextStyle properties are allowed
         ...TextBox.validationMessage,
+        alignSelf: 'stretch',
     },
 };
 

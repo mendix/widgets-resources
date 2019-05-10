@@ -1,9 +1,4 @@
-//Custom variables
-export * from './app/custom_variables';
-
 //================================== CORE ==================================\\
-// Default variables
-export * from './core/variables';
 
 // Base
 export * from './core/base/helperclasses';
@@ -13,19 +8,22 @@ export * from './core/widgets/activityindicator';
 export * from './core/widgets/badge';
 export * from './core/widgets/buttons';
 export * from './core/widgets/checkbox';
-export * from './core/widgets/colorwheel';
+export * from './core/widgets/colorpicker';
 export * from './core/widgets/container';
 export * from './core/widgets/datepicker';
 export * from './core/widgets/dropdown';
 export * from './core/widgets/images';
 export * from './core/widgets/feedback';
+export * from './core/widgets/floatingactionbutton';
 export * from './core/widgets/listviews';
 export * from './core/widgets/maps';
 export * from './core/widgets/navigation';
 export * from './core/widgets/pagetitle';
 export * from './core/widgets/progressbar';
 export * from './core/widgets/progresscircle';
+export * from './core/widgets/qrcode';
 export * from './core/widgets/rangeslider';
+export * from './core/widgets/rating';
 export * from './core/widgets/referenceselector';
 export * from './core/widgets/slider';
 export * from './core/widgets/tabcontainer';
@@ -39,11 +37,8 @@ export * from './core/widgets/webview';
 //================================= CUSTOM =================================\\
 
 // Building blocks
-export * from './resources/atlas_resources_default/buildingblocks/card';
-export * from './resources/atlas_resources_default/buildingblocks/formblock';
-
-// Layouts
-// export * from "./resources/atlas_resources_default/layouts/";
+export * from './resources/atlas-resources-default/buildingblocks/card';
+export * from './resources/atlas-resources-default/buildingblocks/formblock';
 
 // Custom
 export * from './app/custom';

@@ -1,4 +1,3 @@
-import { Platform } from 'react-native';
 import { TextBox, TextBoxVertical } from './textbox';
 
 /* ==========================================================================
