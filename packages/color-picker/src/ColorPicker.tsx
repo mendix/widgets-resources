@@ -136,7 +136,7 @@ export class ColorPicker extends Component<ColorPickerProps<ColorPickerStyle>, C
                 step={1}
                 maximumValue={359}
                 component={<HueGradient gradientSteps={this.defaultSteps} />}
-                thumbTintColor={colorHex!}
+                thumbTintColor={colorHex}
                 thumbStyle={this.getThumbStyle(color)}
             />
         ) : null;
