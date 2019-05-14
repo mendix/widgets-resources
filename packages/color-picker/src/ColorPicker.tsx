@@ -46,6 +46,17 @@ export class ColorPicker extends Component<ColorPickerProps<ColorPickerStyle>, C
         ) : null;
     }
 
+    componentDidUpdate(
+        prevProps: Readonly<ColorPickerProps<ColorPickerStyle>>,
+        prevState: Readonly<ColorPickerState>
+    ): void {
+        if (this.props.color.value !== prevProps.color.value) {
+            if (this.state.color === prevState.color) {
+                this.setState({ color: undefined });
+            }
+        }
+    }
+
     private onChangeHue(value: number): void {
         const color = tinycolor(this.props.color.value).toHsl();
         color.h = value;
@@ -140,7 +151,6 @@ export class ColorPicker extends Component<ColorPickerProps<ColorPickerStyle>, C
                 onValueChange={this.onChangeSaturationHandler}
                 onValueChangeComplete={this.onChangeCompleteHandler}
                 step={0.01}
-                maximumValue={1}
                 component={<SaturationGradient color={color} gradientSteps={this.defaultSteps} />}
                 thumbTintColor={colorHex}
                 thumbStyle={this.getThumbStyle(color)}
@@ -157,7 +167,6 @@ export class ColorPicker extends Component<ColorPickerProps<ColorPickerStyle>, C
                 onValueChange={this.onChangeLightnessHandler}
                 onValueChangeComplete={this.onChangeCompleteHandler}
                 step={0.01}
-                maximumValue={1}
                 component={<LightnessGradient color={color} gradientSteps={this.defaultSteps} />}
                 thumbTintColor={colorHex}
                 thumbStyle={this.getThumbStyle(color)}
@@ -174,7 +183,6 @@ export class ColorPicker extends Component<ColorPickerProps<ColorPickerStyle>, C
                 onValueChange={this.onChangeAlphaHandler}
                 onValueChangeComplete={this.onChangeCompleteHandler}
                 step={0.01}
-                maximumValue={1}
                 component={<AlphaGradient color={color} gradientSteps={this.defaultSteps} />}
                 thumbTintColor={colorHex}
                 thumbStyle={this.getThumbStyle(color)}

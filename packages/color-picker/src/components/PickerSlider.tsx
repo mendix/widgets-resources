@@ -1,38 +1,89 @@
-import { createElement } from "react";
-import { StyleSheet, View, ViewStyle } from "react-native";
+import { Component, createElement, createRef } from "react";
+import { GestureResponderEvent, StyleSheet, TouchableWithoutFeedback, View, ViewStyle } from "react-native";
 import Slider from "react-native-slider";
 
 interface PickerSlidersProps {
     value: number;
     step: number;
-    maximumValue: number;
+    minimumValue?: number;
+    maximumValue?: number;
     component: JSX.Element;
     onValueChange: (value: number) => void;
     onValueChangeComplete: () => void;
     thumbTintColor: string;
     thumbStyle?: ViewStyle;
+    trackStyle?: ViewStyle;
+    disabled?: boolean;
 }
 
-export const PickerSlider = (props: PickerSlidersProps) => {
-    return (
-        <View style={[styles.container]}>
-            <View style={styles.gradient}>{props.component}</View>
-            <Slider
-                value={props.value}
-                step={props.step}
-                animateTransitions={true}
-                animationType="spring"
-                thumbTouchSize={{ width: 48, height: 48 }}
-                maximumValue={props.maximumValue}
-                onValueChange={props.onValueChange}
-                onSlidingComplete={props.onValueChangeComplete}
-                minimumTrackTintColor="transparent"
-                maximumTrackTintColor="transparent"
-                thumbStyle={[styles.thumb, props.thumbStyle as ViewStyle, { backgroundColor: props.thumbTintColor }]}
-            />
-        </View>
-    );
-};
+export class PickerSlider extends Component<PickerSlidersProps> {
+    private readonly onTapHandler = this.onTap.bind(this);
+    private readonly onChangeHandler = this.onChange.bind(this);
+    private readonly onSlidingCompleteHandler = this.onSlidingComplete.bind(this);
+    private readonly viewRef = createRef<View>();
+    private sliding = false;
+
+    render(): JSX.Element {
+        return (
+            <View style={[styles.container]} ref={this.viewRef}>
+                <View style={styles.gradient}>{this.props.component}</View>
+                <TouchableWithoutFeedback onPressIn={this.onTapHandler}>
+                    <Slider
+                        value={this.props.value}
+                        step={this.props.step}
+                        animateTransitions={true}
+                        animationType="spring"
+                        thumbTouchSize={{ width: 48, height: 48 }}
+                        minimumValue={this.props.minimumValue}
+                        maximumValue={this.props.maximumValue}
+                        onValueChange={this.onChangeHandler}
+                        onSlidingComplete={this.onSlidingCompleteHandler}
+                        minimumTrackTintColor="transparent"
+                        maximumTrackTintColor="transparent"
+                        trackStyle={this.props.trackStyle}
+                        thumbStyle={[
+                            styles.thumb,
+                            this.props.thumbStyle as ViewStyle,
+                            { backgroundColor: this.props.thumbTintColor }
+                        ]}
+                        disabled={this.props.disabled}
+                    />
+                </TouchableWithoutFeedback>
+            </View>
+        );
+    }
+
+    private onChange(value: number): void {
+        this.sliding = true;
+        this.props.onValueChange(value);
+    }
+
+    private onSlidingComplete(): void {
+        this.sliding = false;
+        this.props.onValueChangeComplete();
+    }
+
+    private onTap(event: GestureResponderEvent): void {
+        if (!this.viewRef.current || this.props.disabled) {
+            return;
+        }
+
+        this.viewRef.current.measure((_x, _y, width, _height, _pageX, _pageY) => {
+            if (this.sliding) {
+                return;
+            }
+            const positionFraction = event.nativeEvent.locationX / width;
+            const value = (this.props.maximumValue || 1) * positionFraction;
+            const roundedValue = this.roundToMultiple(value, this.props.step);
+            this.props.onValueChange(roundedValue);
+            this.props.onValueChangeComplete();
+        });
+    }
+
+    roundToMultiple(value: number, multiple: number): number {
+        return Math.round(value / multiple) * multiple;
+    }
+}
 
 const styles = StyleSheet.create({
     container: {
