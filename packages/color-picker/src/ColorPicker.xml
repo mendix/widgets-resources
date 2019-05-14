@@ -1,23 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.colorpicker.ColorPicker" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/@mendix/pluggable-widgets-api/widget.xsd">
+<widget id="com.mendix.widget.native.colorpicker.ColorPicker" supportedPlatform="Native" needsEntityContext="true"
+        offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/@mendix/pluggable-widgets-api/widget.xsd">
     <name>Color picker</name>
     <description>Pick a color from a circular color input</description>
-    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAA5FBMVEUAAACAgIBVVVVgYGBVVVVmZmZdXV1iYmJVVVVeXl5ZWVlVVVVVVVVYWFhJtv9bW1tXV1dMs/pVVVVYWFhJs/hXV1dLtPhWVlZJsvhXV1dWVlZXV1dXV1dVVVVXV1dWVlZWVlZWVlZWVlZVVVVVVVVWVlZIsfdJsfdJsPdJsPhWVlZWVlZVVVVVVVVWVlZVVVVVVVVWVlZWVlZVVVVVVVVVVVVVVVVJsPdVVVVVVVVWVlZJsPdVVVVWVlZIsPdJsfdVVVVIsPdWVlZVVVVJsfhVVVVWVlZVVVVWVlZVVVVIsPdVVVWIl4c0AAAASnRSTlMAAgMICQoLDRITFBUYGhwcLzY2Q0ZGR0dJSUpPVWNkgoOFkpmcoaanqKyytba5vsXGx9bY293e4ODh4uPj5ebo6u3u7/Lz9Pb9/n9E/agAAAExSURBVHgB7dPZTsJAFMbxT0CpWivgIgiKslRxQUQEpbWAssic938fD4wx3KDOaWJC7O/q3Hz/pGkGke+lSs3RqFlKQSZemdLctBKHQKJBXxoJmKvSgiqMZYi1C7ZdaBPLwFSZV60kWLLFZxmmZqu8PvOzFkxNeGXp0+JzAlPEFu+/DUSBnE9L+Dn8hk9L+eED4T9h5X5j1vOyoQKeUl6ogGL/OxAFokCfR7Z+TDaffZiq8+pUP+cTPuswVeRVdxPMeuazCFNbY57d7wI7d3yMt2HsjNjbwd4rsXOYi10Re3wgdh2DwPoNfbrdgMw7aWtY2cCT3r9A6qhLzD+G3GGns48QnKFSQwdyNcVqEEuruTSkLnXgAlI9HehBKtCBAFKuDriQcgaKDRyIOW4QuD/tIx9N6qiDmf0nQgAAAABJRU5ErkJggg==</icon>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAA5FBMVEUAAACAgIBVVVVgYGBVVVVmZmZdXV1iYmJVVVVeXl5ZWVlVVVVVVVVYWFhJtv9bW1tXV1dMs/pVVVVYWFhJs/hXV1dLtPhWVlZJsvhXV1dWVlZXV1dXV1dVVVVXV1dWVlZWVlZWVlZWVlZVVVVVVVVWVlZIsfdJsfdJsPdJsPhWVlZWVlZVVVVVVVVWVlZVVVVVVVVWVlZWVlZVVVVVVVVVVVVVVVVJsPdVVVVVVVVWVlZJsPdVVVVWVlZIsPdJsfdVVVVIsPdWVlZVVVVJsfhVVVVWVlZVVVVWVlZVVVVIsPdVVVWIl4c0AAAASnRSTlMAAgMICQoLDRITFBUYGhwcLzY2Q0ZGR0dJSUpPVWNkgoOFkpmcoaanqKyytba5vsXGx9bY293e4ODh4uPj5ebo6u3u7/Lz9Pb9/n9E/agAAAExSURBVHgB7dPZTsJAFMbxT0CpWivgIgiKslRxQUQEpbWAssic938fD4wx3KDOaWJC7O/q3Hz/pGkGke+lSs3RqFlKQSZemdLctBKHQKJBXxoJmKvSgiqMZYi1C7ZdaBPLwFSZV60kWLLFZxmmZqu8PvOzFkxNeGXp0+JzAlPEFu+/DUSBnE9L+Dn8hk9L+eED4T9h5X5j1vOyoQKeUl6ogGL/OxAFokCfR7Z+TDaffZiq8+pUP+cTPuswVeRVdxPMeuazCFNbY57d7wI7d3yMt2HsjNjbwd4rsXOYi10Re3wgdh2DwPoNfbrdgMw7aWtY2cCT3r9A6qhLzD+G3GGns48QnKFSQwdyNcVqEEuruTSkLnXgAlI9HehBKtCBAFKuDriQcgaKDRyIOW4QuD/tIx9N6qiDmf0nQgAAAABJRU5ErkJggg==
+    </icon>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
                 <property key="color" type="attribute">
                     <caption>Color</caption>
-                    <description>Attribute containing a valid color like #d0d0d0. Non-code color values such as 'red' are not supported.</description>
+                    <description>Attribute containing a valid color like #d0d0d0, red, rgba(255,255,255,0).</description>
                     <attributeTypes>
                         <attributeType name="String"/>
                     </attributeTypes>
+                </property>
+                <property key="format" type="enumeration" defaultValue="hex">
+                    <caption>Color format</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="hex">Hexadecimal</enumerationValue>
+                        <enumerationValue key="hsl">HSL</enumerationValue>
+                        <enumerationValue key="hsv">HSV</enumerationValue>
+                        <enumerationValue key="rgb">RGB</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Show">
+                <property key="showPreview" type="boolean" defaultValue="true">
+                    <caption>Preview</caption>
+                    <description />
+                </property>
+                <property key="showSaturation" type="boolean" defaultValue="true">
+                    <caption>Saturation</caption>
+                    <description>The intensity of the color.</description>
+                </property>
+                <property key="showLightness" type="boolean" defaultValue="true">
+                    <caption>Lightness</caption>
+                    <description>The brightness of the color.</description>
+                </property>
+                <property key="showAlpha" type="boolean" defaultValue="false">
+                    <caption>Alpha</caption>
+                    <description>The opacity of the color. When the format is Hexadecimal this slider will not be rendered.</description>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Events">
                 <property key="onChange" type="action" required="false">
                     <caption>On change</caption>
-                    <description>Called when the user releases the handle, regardless of whether the value has changed.</description>
+                    <description>Called when the user releases the handle and the value has changed.</description>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">

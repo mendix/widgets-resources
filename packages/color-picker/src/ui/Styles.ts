@@ -12,7 +12,6 @@ export const defaultColorWheelStyle: ColorPickerStyle = {
     },
     preview: {
         flex: 1,
-        minHeight: 100,
         borderRadius: 5,
         aspectRatio: 16 / 9
     }

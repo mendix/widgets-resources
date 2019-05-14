@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ViewStyle } from "react-native";
 import Slider from "react-native-slider";
 
 interface PickerSlidersProps {
@@ -10,6 +10,7 @@ interface PickerSlidersProps {
     onValueChange: (value: number) => void;
     onValueChangeComplete: () => void;
     thumbTintColor: string;
+    thumbStyle?: ViewStyle;
 }
 
 export const PickerSlider = (props: PickerSlidersProps) => {
@@ -27,7 +28,7 @@ export const PickerSlider = (props: PickerSlidersProps) => {
                 onSlidingComplete={props.onValueChangeComplete}
                 minimumTrackTintColor="transparent"
                 maximumTrackTintColor="transparent"
-                thumbStyle={[styles.thumb, { backgroundColor: props.thumbTintColor }]}
+                thumbStyle={[styles.thumb, props.thumbStyle as ViewStyle, { backgroundColor: props.thumbTintColor }]}
             />
         </View>
     );

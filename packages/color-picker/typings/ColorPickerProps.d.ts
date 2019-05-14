@@ -9,7 +9,14 @@ interface CommonProps<Style> {
     style: Style[];
 }
 
+export type FormatEnum = "hex" | "hsl" | "hsv" | "rgb";
+
 export interface ColorPickerProps<Style> extends CommonProps<Style> {
     color: EditableValue<string>;
+    format: FormatEnum;
+    showPreview: boolean;
+    showSaturation: boolean;
+    showLightness: boolean;
+    showAlpha: boolean;
     onChange?: ActionValue;
 }
