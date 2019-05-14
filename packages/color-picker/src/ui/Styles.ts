@@ -6,7 +6,7 @@ export interface ColorPickerStyle extends Style {
     preview: ViewStyle;
 }
 
-export const defaultColorWheelStyle: ColorPickerStyle = {
+export const defaultColorPickerStyle: ColorPickerStyle = {
     container: {
         flex: 1
     },

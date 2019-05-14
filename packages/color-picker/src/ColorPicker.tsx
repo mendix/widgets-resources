@@ -8,10 +8,10 @@ import tinycolor from "tinycolor2";
 import { ColorPickerProps } from "../typings/ColorPickerProps";
 import { AlphaGradient } from "./components/AlphaGradient";
 import { PickerSlider } from "./components/PickerSlider";
-import { ColorPickerStyle, defaultColorWheelStyle } from "./ui/Styles";
+import { ColorPickerStyle, defaultColorPickerStyle } from "./ui/Styles";
 import HSL = tinycolor.ColorFormats.HSL;
 
-interface ColorPickerState {
+interface State {
     color?: HSL;
 }
 
@@ -22,13 +22,15 @@ const enum Format {
     HSL = "hsl"
 }
 
-export class ColorPicker extends Component<ColorPickerProps<ColorPickerStyle>, ColorPickerState> {
+export type Props = ColorPickerProps<ColorPickerStyle>;
+
+export class ColorPicker extends Component<Props, State> {
     private readonly onChangeHueHandler = this.onChangeHue.bind(this);
     private readonly onChangeSaturationHandler = this.onChangeSaturation.bind(this);
     private readonly onChangeLightnessHandler = this.onChangeLightness.bind(this);
     private readonly onChangeAlphaHandler = this.onChangeAlpha.bind(this);
     private readonly onChangeCompleteHandler = this.onChangeComplete.bind(this);
-    private readonly styles = flattenStyles(defaultColorWheelStyle, this.props.style);
+    private readonly styles = flattenStyles(defaultColorPickerStyle, this.props.style);
     private readonly defaultSteps = 80;
     readonly state = {
         color: undefined
@@ -46,10 +48,7 @@ export class ColorPicker extends Component<ColorPickerProps<ColorPickerStyle>, C
         ) : null;
     }
 
-    componentDidUpdate(
-        prevProps: Readonly<ColorPickerProps<ColorPickerStyle>>,
-        prevState: Readonly<ColorPickerState>
-    ): void {
+    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>): void {
         if (this.props.color.value !== prevProps.color.value) {
             if (this.state.color === prevState.color) {
                 this.setState({ color: undefined });
