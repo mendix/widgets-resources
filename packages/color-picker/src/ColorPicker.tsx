@@ -91,32 +91,34 @@ export class ColorPicker extends Component<ColorPickerProps<ColorPickerStyle>, C
     }
 
     private setColor(): void {
+        const color = tinycolor(this.state.color);
         switch (this.props.format.toString()) {
             case Format.HEX:
-                this.props.color.setValue(tinycolor(this.state.color).toHexString());
+                this.props.color.setValue(color.toHexString());
                 break;
             case Format.HSL:
-                this.props.color.setValue(tinycolor(this.state.color).toHslString());
+                this.props.color.setValue(color.toHslString());
                 break;
             case Format.HSV:
-                this.props.color.setValue(tinycolor(this.state.color).toHsvString());
+                this.props.color.setValue(color.toHsvString());
                 break;
             case Format.RGB:
-                this.props.color.setValue(tinycolor(this.state.color).toRgbString());
+                this.props.color.setValue(color.toRgbString());
                 break;
         }
     }
 
     private getColor(): string {
+        const color = tinycolor(this.state.color);
         switch (this.props.format.toString()) {
             case Format.HEX:
-                return tinycolor(this.state.color).toHexString();
+                return color.toHexString();
             case Format.HSL:
-                return tinycolor(this.state.color).toHslString();
+                return color.toHslString();
             case Format.HSV:
-                return tinycolor(this.state.color).toHsvString();
+                return color.toHsvString();
             case Format.RGB:
-                return tinycolor(this.state.color).toRgbString();
+                return color.toRgbString();
         }
         return "";
     }
