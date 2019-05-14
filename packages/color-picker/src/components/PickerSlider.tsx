@@ -21,7 +21,7 @@ export class PickerSlider extends Component<PickerSlidersProps> {
     private readonly onChangeHandler = this.onChange.bind(this);
     private readonly onSlidingCompleteHandler = this.onSlidingComplete.bind(this);
     private readonly viewRef = createRef<View>();
-    private sliding = false;
+    private isSliding = false;
 
     render(): JSX.Element {
         return (
@@ -54,12 +54,12 @@ export class PickerSlider extends Component<PickerSlidersProps> {
     }
 
     private onChange(value: number): void {
-        this.sliding = true;
+        this.isSliding = true;
         this.props.onValueChange(value);
     }
 
     private onSlidingComplete(): void {
-        this.sliding = false;
+        this.isSliding = false;
         this.props.onValueChangeComplete();
     }
 
@@ -69,7 +69,7 @@ export class PickerSlider extends Component<PickerSlidersProps> {
         }
 
         this.viewRef.current.measure((_x, _y, width, _height, _pageX, _pageY) => {
-            if (this.sliding) {
+            if (this.isSliding) {
                 return;
             }
             const positionFraction = event.nativeEvent.locationX / width;
