@@ -1,5 +1,5 @@
 import { Component, createElement, createRef } from "react";
-import { GestureResponderEvent, StyleSheet, TouchableWithoutFeedback, View, ViewStyle } from "react-native";
+import { GestureResponderEvent, Platform, StyleSheet, TouchableWithoutFeedback, View, ViewStyle } from "react-native";
 import Slider from "react-native-slider";
 
 interface PickerSlidersProps {
@@ -25,9 +25,9 @@ export class PickerSlider extends Component<PickerSlidersProps> {
 
     render(): JSX.Element {
         return (
-            <View style={[styles.container]} ref={this.viewRef}>
-                <View style={styles.gradient}>{this.props.component}</View>
-                <TouchableWithoutFeedback onPressIn={this.onTapHandler}>
+            <TouchableWithoutFeedback onPressIn={this.onTapHandler} style={{ backgroundColor: "red" }}>
+                <View style={[styles.container]} ref={this.viewRef}>
+                    <View style={styles.gradient}>{this.props.component}</View>
                     <Slider
                         value={this.props.value}
                         step={this.props.step}
@@ -48,8 +48,8 @@ export class PickerSlider extends Component<PickerSlidersProps> {
                         ]}
                         disabled={this.props.disabled}
                     />
-                </TouchableWithoutFeedback>
-            </View>
+                </View>
+            </TouchableWithoutFeedback>
         );
     }
 
@@ -68,15 +68,19 @@ export class PickerSlider extends Component<PickerSlidersProps> {
             return;
         }
 
+        const { step, maximumValue, minimumValue } = this.props;
+
         this.viewRef.current.measure((_x, _y, width, _height, _pageX, _pageY) => {
             if (this.isSliding) {
                 return;
             }
-            const positionFraction = event.nativeEvent.locationX / width;
-            const value = (this.props.maximumValue || 1) * positionFraction;
-            const roundedValue = this.roundToMultiple(value, this.props.step);
-            this.props.onValueChange(roundedValue);
-            this.props.onValueChangeComplete();
+            const positionFraction = (event.nativeEvent.locationX - 15) / width;
+            const value = (maximumValue || 1) * positionFraction;
+            const roundedValue = this.roundToMultiple(value, step);
+            if (roundedValue >= (minimumValue || 0) && roundedValue <= (maximumValue || 1)) {
+                this.props.onValueChange(roundedValue);
+                this.props.onValueChangeComplete();
+            }
         });
     }
 
@@ -93,14 +97,19 @@ const styles = StyleSheet.create({
         height: 32
     },
     thumb: {
-        width: 24,
-        height: 24,
-        borderRadius: 24 / 2,
-        shadowColor: "black",
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 4,
-        shadowOpacity: 0.1,
-        backgroundColor: "#000"
+        ...Platform.select({
+            ios: {
+                width: 24,
+                height: 24,
+                borderRadius: 12
+            },
+            android: {
+                width: 20,
+                height: 20,
+                borderRadius: 10,
+                elevation: 3
+            }
+        })
     },
     gradient: {
         position: "absolute",
