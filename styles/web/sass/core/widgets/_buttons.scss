@@ -48,9 +48,6 @@
 .mx-link {
     padding: 0;
     color: $link-color;
-    a {
-        color: inherit;
-    }
 }
 
 // Images and icons in buttons
@@ -58,17 +55,10 @@
 .mx-button,
 .mx-link {
     img {
-        //height: auto; // MXUI override who set the height on 16px default
         height: $font-size-default + 4px;
-        margin-top: -1px;
         margin-right: 5px;
+        vertical-align: text-top;
     }
-}
-
-// IE 8 only (mxui overwrites)
-.dj_ie8 .mx-link {
-    margin-right: 0;
-    white-space: normal;
 }
 
 //== Design Properties
@@ -103,7 +93,6 @@
 .btn-danger {
     @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border-color, $btn-danger-bg-hover);
 }
-
 
 // Button Sizes
 .btn-lg {

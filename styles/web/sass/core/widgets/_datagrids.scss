@@ -5,7 +5,7 @@
 ========================================================================== */
 
 .mx-datagrid {
-    .mx-datagrid-head-table {
+    table {
         border-width: 0;
         background-color: transparent;
         /* Table header */
@@ -21,17 +21,11 @@
         .mx-datagrid-head-wrapper {
             padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
             vertical-align: middle;
-            .mx-datagrid-head-caption {
-                white-space: normal;
-            }
         }
-    }
-    .mx-datagrid-body-table {
-        border-width: 0;
         /* Table Body */
-        .mx-datagrid-body tr {
+        tbody tr {
             td {
-				@include transition();
+                @include transition();
                 padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
                 vertical-align: middle;
                 border-width: 0;
@@ -54,7 +48,7 @@
             }
         }
         /* Table Footer */
-        .mx-datagrid-foot {
+        tfoot {
             > tr > th {
                 padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
                 border-width: 0;
@@ -78,13 +72,11 @@
 //-------------------------------------------------------------------------------------------------------------------//
 // Striped style
 .datagrid-striped.mx-datagrid {
-    .mx-datagrid-head-table {
+    table {
         th {
             border-width: 0;
         }
-    }
-    .mx-datagrid-body-table {
-        .mx-datagrid-body tr {
+        tbody tr {
             td {
                 border-top-width: 0;
             }
@@ -97,21 +89,19 @@
 
 // Bordered style
 .datagrid-bordered.mx-datagrid {
-    .mx-datagrid-head-table {
+    table {
         th {
             border: 1px solid $grid-border-color;
             border-bottom-width: 1px;
         }
-    }
-    .mx-datagrid-body-table {
         border: 1px solid;
-        .mx-datagrid-body tr {
+        tbody tr {
             td {
                 border: 1px solid $grid-border-color;
             }
         }
     }
-    .mx-datagrid-foot {
+    tfoot {
         > tr > th {
             border-width: 0;
             background-color: $grid-footer-bg;
@@ -124,11 +114,9 @@
 
 // Transparent style so you can see the background
 .datagrid-transparent.mx-datagrid {
-    .mx-datagrid-head-table {
+    table {
         background-color: transparent;
-    }
-    .mx-datagrid-body-table {
-        .mx-datagrid-body tr {
+        tbody tr {
             &:nth-of-type(odd) {
                 background-color: transparent;
             }
@@ -141,8 +129,8 @@
 
 // Hover style activated
 .datagrid-hover.mx-datagrid {
-    .mx-datagrid-body-table {
-        .mx-datagrid-body tr {
+    table {
+        tbody tr {
             &:hover td {
                 background-color: $grid-bg-hover !important;
             }
@@ -155,30 +143,30 @@
 
 // Datagrid Row Sizes
 .datagrid-lg.mx-datagrid {
-    .mx-datagrid-head-table {
+    table {
         .mx-datagrid-head-wrapper {
-            padding: ($grid-padding-top * 2) ($grid-padding-right * 2) ($grid-padding-bottom * 2) ($grid-padding-left * 2);
+            padding: ($grid-padding-top * 2) ($grid-padding-right * 2) ($grid-padding-bottom * 2)
+                ($grid-padding-left * 2);
         }
-    }
-    .mx-datagrid-body-table {
-        .mx-datagrid-body tr {
+        tbody tr {
             td {
-                padding: ($grid-padding-top * 2) ($grid-padding-right * 2) ($grid-padding-bottom * 2) ($grid-padding-left * 2);
+                padding: ($grid-padding-top * 2) ($grid-padding-right * 2) ($grid-padding-bottom * 2)
+                    ($grid-padding-left * 2);
             }
         }
     }
 }
 
 .datagrid-sm.mx-datagrid {
-    .mx-datagrid-head-table {
+    table {
         .mx-datagrid-head-wrapper {
-            padding: ($grid-padding-top / 2) ($grid-padding-right / 2) ($grid-padding-bottom / 2) ($grid-padding-left / 2);
+            padding: ($grid-padding-top / 2) ($grid-padding-right / 2) ($grid-padding-bottom / 2)
+                ($grid-padding-left / 2);
         }
-    }
-    .mx-datagrid-body-table {
-        .mx-datagrid-body tr {
+        tbody tr {
             td {
-                padding: ($grid-padding-top / 2) ($grid-padding-right / 2) ($grid-padding-bottom / 2) ($grid-padding-left/ 2);
+                padding: ($grid-padding-top / 2) ($grid-padding-right / 2) ($grid-padding-bottom / 2)
+                    ($grid-padding-left/ 2);
             }
         }
     }
