@@ -21,6 +21,7 @@
         .mx-datagrid-head-wrapper {
             padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
             vertical-align: middle;
+            white-space: normal;
         }
         /* Table Body */
         tbody tr {
