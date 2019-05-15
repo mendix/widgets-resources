@@ -1,6 +1,7 @@
 # SASS cache
 **/.sass-cache
 **/.sass-cache/*
+*.css.map
 
 **/directoryList*.md
 
