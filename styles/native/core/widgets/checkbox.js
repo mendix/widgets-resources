@@ -29,10 +29,6 @@ export const CheckBox = {
         thumbColorOff: contrast.low,
         trackColorOff: `rgba(${anyColorToRgbString(contrast.low)},0.2)`,
     },
-    inputDisabled: {
-        // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
-        opacity: 0.5,
-    },
     inputError: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
         ...TextBox.inputError,
