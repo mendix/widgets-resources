@@ -6,6 +6,20 @@ import { Platform } from 'react-native';
 //## Helper classes to create the desired look & feel
 //-------------------------------------------------------------------------------------------------------------------//
 // Home
+
+export const ActionButtonCustom = {
+    container: {
+        borderColor: '#f9f9f9',
+        backgroundColor: '#e9e9e9',
+    },
+    icon: {
+        color: '#444',
+    },
+    caption: {
+        color: '#444',
+    },
+};
+
 export const homeImageBackground = {
     container: {
         top: 0,
@@ -61,7 +75,6 @@ export const homeFooterText = {
 // Buttons
 export const btnListItem = {
     container: {
-        flex: 1,
         borderWidth: 0,
         borderRadius: 0,
         borderBottomWidth: 1,
@@ -74,8 +87,6 @@ export const btnListItem = {
         color: contrast.higher,
     },
     caption: {
-        flex: 1,
-        textAlign: 'left',
         fontSize: font.size,
         ...Platform.select({
             ios: {
