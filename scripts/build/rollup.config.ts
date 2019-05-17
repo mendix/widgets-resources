@@ -81,7 +81,7 @@ function mendixExternalReferences(): Plugin {
         name: "mendix-external-modules",
         resolveId: id =>
             id && /^@mendix\/pluggable-widgets-api\/components\//.test(id)
-                ? id.replace("@mendix/pluggable-widgets-api/components/native", "mendix/components")
+                ? id.replace("@mendix/pluggable-widgets-api/components", "mendix/components")
                 : undefined
     };
 }
