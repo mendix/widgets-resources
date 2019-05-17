@@ -33,6 +33,10 @@ export const TextBox = {
         paddingHorizontal: input.paddingHorizontal,
         paddingVertical: input.paddingVertical,
     },
+    inputDisabled: {
+        // All TextStyle properties are allowed
+        backgroundColor: input.disabledBackgroundColor,
+    },
     inputError: {
         // All TextStyle properties are allowed
         color: input.errorColor,
