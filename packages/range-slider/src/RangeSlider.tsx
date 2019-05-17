@@ -46,6 +46,7 @@ export class RangeSlider extends Component<Props, State> {
                     step={validProps ? toNumber(this.props.stepSize) : undefined}
                     enabledOne={enabledOne}
                     enabledTwo={enabledTwo}
+                    markerStyle={this.styles.marker}
                     trackStyle={enabledOne || enabledTwo ? this.styles.track : this.styles.trackDisabled}
                     selectedStyle={enabledOne || enabledTwo ? this.styles.highlight : this.styles.highlightDisabled}
                     pressedMarkerStyle={this.styles.markerActive}
