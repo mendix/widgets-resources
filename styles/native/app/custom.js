@@ -7,19 +7,6 @@ import { Platform } from 'react-native';
 //-------------------------------------------------------------------------------------------------------------------//
 // Home
 
-export const ActionButtonCustom = {
-    container: {
-        borderColor: '#f9f9f9',
-        backgroundColor: '#e9e9e9',
-    },
-    icon: {
-        color: '#444',
-    },
-    caption: {
-        color: '#444',
-    },
-};
-
 export const homeImageBackground = {
     container: {
         top: 0,

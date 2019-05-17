@@ -1,7 +1,6 @@
 import { Platform } from 'react-native';
 import { button, spacing, font, contrast, brand } from '../variables';
 import merge from '../_helperfunctions/mergeobjects';
-import * as custom from '../../app/custom';
 
 /* ==========================================================================
     Button
@@ -9,7 +8,7 @@ import * as custom from '../../app/custom';
     Default Class For Mendix Button Widget
 ========================================================================== */
 
-let ActionButton = {
+export const ActionButton = {
     container: {
         // Ripplecolor and all ViewStyle properties are allowed
         borderWidth: 1,
@@ -43,7 +42,7 @@ let ActionButton = {
     },
 };
 
-let ActionButtonHeader = {
+export const ActionButtonHeader = {
     container: {
         borderColor: button.header.borderColor,
         backgroundColor: button.header.backgroundColor,
@@ -58,17 +57,6 @@ let ActionButtonHeader = {
         color: button.header.color,
     },
 };
-
-if (custom['ActionButton_Custom']) {
-    ActionButton = merge(ActionButton, custom['ActionButton_Custom']);
-    custom['ActionButton_Custom'] = undefined;
-}
-if (custom['ActionButtonHeader_Custom']) {
-    ActionButton = merge(ActionButton, custom['ActionButtonHeader_Custom']);
-    custom['ActionButtonHeader_Custom'] = undefined;
-}
-
-export { ActionButton, ActionButtonHeader };
 
 //== Design Properties
 //## Helper classes to change the look and feel of the widget
