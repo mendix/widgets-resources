@@ -61,7 +61,6 @@ export const homeFooterText = {
 // Buttons
 export const btnListItem = {
     container: {
-        flex: 1,
         borderWidth: 0,
         borderRadius: 0,
         borderBottomWidth: 1,
@@ -74,7 +73,6 @@ export const btnListItem = {
         color: contrast.higher,
     },
     caption: {
-        flex: 1,
         textAlign: 'left',
         fontSize: font.size,
         ...Platform.select({
