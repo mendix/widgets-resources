@@ -13,10 +13,10 @@ export type HorizontalPositionEnum = "left" | "center" | "right";
 
 export type VerticalPositionEnum = "top" | "bottom";
 
-export interface SpeedDialButtonsType {
+export interface SecondaryButtonsType {
     icon: DynamicValue<NativeIcon>;
     caption?: DynamicValue<string>;
-    action: ActionValue;
+    onClick: ActionValue;
 }
 
 export interface FloatingActionButtonProps<Style> extends CommonProps<Style> {
@@ -24,6 +24,6 @@ export interface FloatingActionButtonProps<Style> extends CommonProps<Style> {
     iconActive?: DynamicValue<NativeIcon>;
     horizontalPosition: HorizontalPositionEnum;
     verticalPosition: VerticalPositionEnum;
-    onPress: ActionValue;
-    speedDialButtons: SpeedDialButtonsType[];
+    onClick: ActionValue;
+    secondaryButtons: SecondaryButtonsType[];
 }

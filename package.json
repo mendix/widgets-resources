@@ -19,7 +19,7 @@
         "@commitlint/config-conventional": "^7.5.0",
         "@commitlint/config-lerna-scopes": "^7.5.1",
         "@mendix/pluggable-widgets-api": "^0.1.0",
-        "@mendix/pluggable-widgets-typing-generator": "^0.1.0",
+        "@mendix/pluggable-widgets-typing-generator": "^0.1.1",
         "@types/big.js": "^4.0.5",
         "@types/ghauth": "^3.2.0",
         "@types/gulp": "^4.0.6",

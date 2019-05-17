@@ -35,7 +35,7 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Events">
-                <property key="onPress" type="action">
+                <property key="onClick" type="action">
                     <caption>On click</caption>
                     <description>This action will not be called when secondary buttons are used.</description>
                 </property>
@@ -45,7 +45,7 @@
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Secondary buttons">
-            <property key="speedDialButtons" type="object" isList="true" required="false">
+            <property key="secondaryButtons" type="object" isList="true" required="false">
                 <caption>Buttons</caption>
                 <description>The secondary buttons animate in when the main button is pressed.</description>
                 <properties>
@@ -58,7 +58,7 @@
                             <caption>Caption</caption>
                             <description/>
                         </property>
-                        <property key="action" type="action">
+                        <property key="onClick" type="action">
                             <caption>On click</caption>
                             <description/>
                         </property>

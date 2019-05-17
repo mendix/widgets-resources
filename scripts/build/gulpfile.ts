@@ -58,7 +58,7 @@ function clean() {
 function generateTypings() {
     return gulp
         .src(`./src/${widgetName}.xml`)
-        .pipe(typingGenerator({ widgetName, isNative: true }))
+        .pipe(typingGenerator({ widgetName }))
         .pipe(gulp.dest("./typings"));
 }
 

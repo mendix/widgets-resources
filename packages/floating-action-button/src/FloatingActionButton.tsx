@@ -38,7 +38,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
                 position={this.props.horizontalPosition}
                 verticalOrientation={this.verticalOrientation}
                 renderIcon={this.renderIconHandler}
-                degrees={this.props.speedDialButtons.length > 0 ? 180 : 0}
+                degrees={this.props.secondaryButtons.length > 0 ? 180 : 0}
                 onPress={this.onPressHandler}
                 fixNativeFeedbackRadius={true}
                 backgroundTappable={true}
@@ -56,7 +56,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
         const iconSource = icon && icon.value ? icon.value : defaultIconSource;
         const activeIconSource = iconActive && iconActive.value ? iconActive.value : defaultActiveIconSource;
 
-        const isActive = this.state.active && this.props.speedDialButtons.length > 0;
+        const isActive = this.state.active && this.props.secondaryButtons.length > 0;
         const source = isActive ? activeIconSource : iconSource;
         const style = isActive ? { transform: [{ rotate: "-180deg" }] } : {};
 
@@ -69,8 +69,8 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
 
     private renderButtons(): JSX.Element[] | undefined {
         return (
-            this.props.speedDialButtons &&
-            this.props.speedDialButtons.map((button, index) => {
+            this.props.secondaryButtons &&
+            this.props.secondaryButtons.map((button, index) => {
                 return (
                     <ActionButton.Item
                         key={`button${index}`}
@@ -84,7 +84,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
                         // tslint:disable-next-line:jsx-no-lambda
                         onPress={() => {
                             this.setState({ active: false });
-                            executeAction(button.action);
+                            executeAction(button.onClick);
                         }}
                         activeOpacity={0.2}
                         spaceBetween={0}
@@ -112,13 +112,13 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
     }
 
     private onPress(): void {
-        if (this.props.speedDialButtons && this.props.speedDialButtons.length > 0) {
+        if (this.props.secondaryButtons && this.props.secondaryButtons.length > 0) {
+            this.setState({ active: !this.state.active });
+
             return;
         }
 
-        this.setState({ active: !this.state.active });
-
-        executeAction(this.props.onPress);
+        executeAction(this.props.onClick);
     }
 }
 
