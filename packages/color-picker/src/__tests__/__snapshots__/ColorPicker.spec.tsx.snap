@@ -853,7 +853,7 @@ exports[`Color Picker renders 1`] = `
         renderToHardwareTextureAndroid={true}
         style={
           Object {
-            "backgroundColor": "#ff0000",
+            "backgroundColor": "hsl(0, 100%, 50%)",
             "borderColor": "#ff0000",
             "borderRadius": 12,
             "borderWidth": 1,
@@ -1733,7 +1733,7 @@ exports[`Color Picker renders 1`] = `
         renderToHardwareTextureAndroid={true}
         style={
           Object {
-            "backgroundColor": "#ff0000",
+            "backgroundColor": "hsl(0, 100%, 50%)",
             "borderColor": "#ff0000",
             "borderRadius": 12,
             "borderWidth": 1,
@@ -2613,7 +2613,7 @@ exports[`Color Picker renders 1`] = `
         renderToHardwareTextureAndroid={true}
         style={
           Object {
-            "backgroundColor": "#ff0000",
+            "backgroundColor": "hsl(0, 100%, 50%)",
             "borderColor": "#ff0000",
             "borderRadius": 12,
             "borderWidth": 1,
@@ -3518,7 +3518,7 @@ exports[`Color Picker renders with alpha slider 1`] = `
         renderToHardwareTextureAndroid={true}
         style={
           Object {
-            "backgroundColor": "#ff0000",
+            "backgroundColor": "hsl(0, 100%, 50%)",
             "borderColor": "#ff0000",
             "borderRadius": 12,
             "borderWidth": 1,
@@ -4398,7 +4398,7 @@ exports[`Color Picker renders with alpha slider 1`] = `
         renderToHardwareTextureAndroid={true}
         style={
           Object {
-            "backgroundColor": "#ff0000",
+            "backgroundColor": "hsl(0, 100%, 50%)",
             "borderColor": "#ff0000",
             "borderRadius": 12,
             "borderWidth": 1,
@@ -5278,7 +5278,7 @@ exports[`Color Picker renders with alpha slider 1`] = `
         renderToHardwareTextureAndroid={true}
         style={
           Object {
-            "backgroundColor": "#ff0000",
+            "backgroundColor": "hsl(0, 100%, 50%)",
             "borderColor": "#ff0000",
             "borderRadius": 12,
             "borderWidth": 1,
@@ -6158,7 +6158,7 @@ exports[`Color Picker renders with alpha slider 1`] = `
         renderToHardwareTextureAndroid={true}
         style={
           Object {
-            "backgroundColor": "#ff0000",
+            "backgroundColor": "hsl(0, 100%, 50%)",
             "borderColor": "#ff0000",
             "borderRadius": 12,
             "borderWidth": 1,
@@ -7064,7 +7064,7 @@ exports[`Color Picker renders with custom style 1`] = `
         renderToHardwareTextureAndroid={true}
         style={
           Object {
-            "backgroundColor": "#ff0000",
+            "backgroundColor": "hsl(0, 100%, 50%)",
             "borderColor": "#ff0000",
             "borderRadius": 12,
             "borderWidth": 1,
@@ -7944,7 +7944,7 @@ exports[`Color Picker renders with custom style 1`] = `
         renderToHardwareTextureAndroid={true}
         style={
           Object {
-            "backgroundColor": "#ff0000",
+            "backgroundColor": "hsl(0, 100%, 50%)",
             "borderColor": "#ff0000",
             "borderRadius": 12,
             "borderWidth": 1,
@@ -8824,7 +8824,7 @@ exports[`Color Picker renders with custom style 1`] = `
         renderToHardwareTextureAndroid={true}
         style={
           Object {
-            "backgroundColor": "#ff0000",
+            "backgroundColor": "hsl(0, 100%, 50%)",
             "borderColor": "#ff0000",
             "borderRadius": 12,
             "borderWidth": 1,

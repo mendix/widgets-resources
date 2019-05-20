@@ -25,7 +25,7 @@ export class PickerSlider extends Component<PickerSlidersProps> {
 
     render(): JSX.Element {
         return (
-            <TouchableWithoutFeedback onPressIn={this.onTapHandler} style={{ backgroundColor: "red" }}>
+            <TouchableWithoutFeedback onPressIn={this.onTapHandler}>
                 <View style={[styles.container]} ref={this.viewRef}>
                     <View style={styles.gradient}>{this.props.component}</View>
                     <Slider
@@ -70,11 +70,11 @@ export class PickerSlider extends Component<PickerSlidersProps> {
 
         const { step, maximumValue, minimumValue } = this.props;
 
-        this.viewRef.current.measure((_x, _y, width, _height, _pageX, _pageY) => {
+        this.viewRef.current.measure((_x, _y, width) => {
             if (this.isSliding) {
                 return;
             }
-            const positionFraction = (event.nativeEvent.locationX - 15) / width;
+            const positionFraction = event.nativeEvent.locationX / width;
             const value = (maximumValue || 1) * positionFraction;
             const roundedValue = this.roundToMultiple(value, step);
             if (roundedValue >= (minimumValue || 0) && roundedValue <= (maximumValue || 1)) {
@@ -84,9 +84,7 @@ export class PickerSlider extends Component<PickerSlidersProps> {
         });
     }
 
-    roundToMultiple(value: number, multiple: number): number {
-        return Math.round(value / multiple) * multiple;
-    }
+    private roundToMultiple = (value: number, multiple: number): number => Math.round(value / multiple) * multiple;
 }
 
 const styles = StyleSheet.create({
@@ -96,21 +94,19 @@ const styles = StyleSheet.create({
         alignItems: "stretch",
         height: 32
     },
-    thumb: {
-        ...Platform.select({
-            ios: {
-                width: 24,
-                height: 24,
-                borderRadius: 12
-            },
-            android: {
-                width: 20,
-                height: 20,
-                borderRadius: 10,
-                elevation: 3
-            }
-        })
-    },
+    thumb: Platform.select({
+        ios: {
+            width: 24,
+            height: 24,
+            borderRadius: 12
+        },
+        android: {
+            width: 20,
+            height: 20,
+            borderRadius: 10,
+            elevation: 3
+        }
+    }),
     gradient: {
         position: "absolute",
         left: 0,

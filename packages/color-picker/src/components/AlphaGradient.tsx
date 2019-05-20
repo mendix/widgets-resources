@@ -11,17 +11,11 @@ interface AlphaGradientProps {
 }
 
 export class AlphaGradient extends Component<AlphaGradientProps> {
-    shouldComponentUpdate(nextProps: AlphaGradientProps, _nextState: any): boolean {
-        if (this.props.color.h !== nextProps.color.h) {
-            return true;
-        }
-        if (this.props.color.s !== nextProps.color.s) {
-            return true;
-        }
-        if (this.props.color.l !== nextProps.color.l) {
-            return true;
-        }
-        return false;
+    shouldComponentUpdate(nextProps: AlphaGradientProps): boolean {
+        const current = this.props.color;
+        const next = nextProps.color;
+
+        return current.h !== next.h || current.s !== next.s || current.l !== next.l;
     }
 
     getStepColor = (i: number) => tinycolor({ ...this.props.color, a: i }).toHslString();

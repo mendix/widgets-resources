@@ -9,10 +9,10 @@ import { ColorPickerProps } from "../typings/ColorPickerProps";
 import { AlphaGradient } from "./components/AlphaGradient";
 import { PickerSlider } from "./components/PickerSlider";
 import { ColorPickerStyle, defaultColorPickerStyle } from "./ui/Styles";
-import HSL = tinycolor.ColorFormats.HSL;
+import HSLA = tinycolor.ColorFormats.HSLA;
 
 interface State {
-    color?: HSL;
+    color?: HSLA;
 }
 
 const enum Format {
@@ -32,27 +32,32 @@ export class ColorPicker extends Component<Props, State> {
     private readonly onChangeCompleteHandler = this.onChangeComplete.bind(this);
     private readonly styles = flattenStyles(defaultColorPickerStyle, this.props.style);
     private readonly defaultSteps = 80;
-    readonly state = {
+    readonly state: State = {
         color: undefined
     };
 
     render(): JSX.Element | null {
-        return this.props.color && this.props.color.status === ValueStatus.Available && this.props.color.value ? (
+        if (!this.props.color || this.props.color.status !== ValueStatus.Available || !this.props.color.value) {
+            return null;
+        }
+
+        const colorHex = this.state.color ? this.getColor() : this.props.color.value;
+        const color = tinycolor(colorHex!).toHsl();
+
+        return (
             <View style={this.styles.container}>
                 {this.renderPreview()}
-                {this.renderHue()}
-                {this.renderSaturation()}
-                {this.renderLightness()}
-                {this.props.format !== Format.HEX && this.renderAlpha()}
+                {this.renderHue(color)}
+                {this.renderSaturation(color)}
+                {this.renderLightness(color)}
+                {this.props.format !== Format.HEX && this.renderAlpha(color)}
             </View>
-        ) : null;
+        );
     }
 
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>): void {
-        if (this.props.color.value !== prevProps.color.value) {
-            if (this.state.color === prevState.color) {
-                this.setState({ color: undefined });
-            }
+        if (this.props.color.value !== prevProps.color.value && this.state.color === prevState.color) {
+            this.setState({ color: undefined });
         }
     }
 
@@ -126,10 +131,8 @@ export class ColorPicker extends Component<Props, State> {
         return <View style={[this.styles.preview, { backgroundColor: this.props.color.value }]} />;
     }
 
-    private renderHue(): JSX.Element | null {
-        const colorHex = this.state.color ? this.getColor() : this.props.color.value;
-        const color = tinycolor(colorHex!).toHsl();
-        return colorHex ? (
+    private renderHue(color: HSLA): JSX.Element {
+        return (
             <PickerSlider
                 value={color.h}
                 onValueChange={this.onChangeHueHandler}
@@ -137,61 +140,56 @@ export class ColorPicker extends Component<Props, State> {
                 step={1}
                 maximumValue={359}
                 component={<HueGradient gradientSteps={this.defaultSteps} />}
-                thumbTintColor={colorHex}
+                thumbTintColor={tinycolor(color).toHslString()}
                 thumbStyle={this.getThumbStyle(color)}
             />
-        ) : null;
+        );
     }
 
-    private renderSaturation(): JSX.Element | null {
-        const colorHex = this.state.color ? this.getColor() : this.props.color.value;
-        const color = tinycolor(colorHex!).toHsl();
-        return colorHex ? (
+    private renderSaturation(color: HSLA): JSX.Element {
+        return (
             <PickerSlider
                 value={color.s}
                 onValueChange={this.onChangeSaturationHandler}
                 onValueChangeComplete={this.onChangeCompleteHandler}
                 step={0.01}
                 component={<SaturationGradient color={color} gradientSteps={this.defaultSteps} />}
-                thumbTintColor={colorHex}
+                thumbTintColor={tinycolor(color).toHslString()}
                 thumbStyle={this.getThumbStyle(color)}
             />
-        ) : null;
+        );
     }
 
-    private renderLightness(): JSX.Element | null {
-        const colorHex = this.state.color ? this.getColor() : this.props.color.value;
-        const color = tinycolor(colorHex!).toHsl();
-        return colorHex ? (
+    private renderLightness(color: HSLA): JSX.Element {
+        return (
             <PickerSlider
                 value={color.l}
                 onValueChange={this.onChangeLightnessHandler}
                 onValueChangeComplete={this.onChangeCompleteHandler}
                 step={0.01}
                 component={<LightnessGradient color={color} gradientSteps={this.defaultSteps} />}
-                thumbTintColor={colorHex}
+                thumbTintColor={tinycolor(color).toHslString()}
                 thumbStyle={this.getThumbStyle(color)}
             />
-        ) : null;
+        );
     }
 
-    private renderAlpha(): JSX.Element | null {
-        const colorHex = this.state.color ? this.getColor() : this.props.color.value;
-        const color = tinycolor(colorHex!).toHsl();
-        return colorHex ? (
+    private renderAlpha(color: HSLA): JSX.Element {
+        return (
             <PickerSlider
                 value={color.a}
                 onValueChange={this.onChangeAlphaHandler}
                 onValueChangeComplete={this.onChangeCompleteHandler}
                 step={0.01}
                 component={<AlphaGradient color={color} gradientSteps={this.defaultSteps} />}
-                thumbTintColor={colorHex}
+                thumbTintColor={tinycolor(color).toHslString()}
                 thumbStyle={this.getThumbStyle(color)}
             />
-        ) : null;
+        );
     }
 
-    getThumbStyle(color: HSL): ViewStyle {
-        return { borderWidth: 1, borderColor: tinycolor(color).toHexString() };
-    }
+    private getThumbStyle = (color: HSLA): ViewStyle => ({
+        borderWidth: 1,
+        borderColor: tinycolor(color).toHexString()
+    });
 }
