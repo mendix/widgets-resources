@@ -12,7 +12,7 @@ describe("Html5 Player", () => {
         loop: false,
         showControls: false,
         aspectRatio: false,
-        poster: "test",
+        poster: "test"
     };
 
     const defaulPlayer = (props: Html5PlayerProps): JSX.Element => <Html5 {...props} />;
@@ -49,7 +49,7 @@ describe("Html5 Player", () => {
 
     it("should renders correctly with poster", () => {
         const player = create(
-            defaulPlayer({ ...defaultProps, poster: "https://www.mendix.com/wp-content/themes/mendix/ui/images/homepage/air-status-app@2x.png" }),
+            defaulPlayer({ ...defaultProps, poster: "https://www.mendix.com/wp-content/themes/mendix/ui/images/homepage/air-status-app@2x.png" })
         ).toJSON();
 
         expect(player).toMatchSnapshot();

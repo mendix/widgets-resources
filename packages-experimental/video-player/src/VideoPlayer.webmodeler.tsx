@@ -47,7 +47,7 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
             loop: false,
             muted: true,
             aspectRatio: false,
-            preview: true,
+            preview: true
         };
     }
 

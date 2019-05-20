@@ -21,7 +21,7 @@ export class Html5 extends Component<Html5PlayerProps> {
 
     render(): JSX.Element {
         const sizeProps: CSSProperties = {
-            height: !this.props.aspectRatio ? "100%" : undefined,
+            height: !this.props.aspectRatio ? "100%" : undefined
         };
         return (
             <div className="widget-video-player-html5-container">

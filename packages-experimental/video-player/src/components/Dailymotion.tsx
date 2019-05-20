@@ -19,7 +19,7 @@ export class Dailymotion extends Component<DailymotionProps, DailymotionState> {
     private readonly handleOnResize = this.onResize.bind(this);
     private handleAttributes = this.getUrlAttributes.bind(this);
     readonly state: DailymotionState = {
-        ratio: 0,
+        ratio: 0
     };
 
     render(): JSX.Element {

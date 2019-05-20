@@ -10,7 +10,7 @@ describe("Dailymotion Player", () => {
         autoPlay: false,
         muted: false,
         showControls: false,
-        aspectRatio: false,
+        aspectRatio: false
     };
 
     const defaulPlayer = (props: DailymotionProps): JSX.Element => <Dailymotion {...props} />;

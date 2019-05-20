@@ -28,7 +28,7 @@ export class SizeContainer extends Component<SizeProps> {
             ...this.getHeight(this.props.heightUnit, this.props.height, this.props.widthUnit, this.props.width),
             display: "flex",
             justifyContent: "center",
-            ...this.props.style,
+            ...this.props.style
         };
         const absoluteStyle: CSSProperties = {
             position: "absolute",
@@ -37,7 +37,7 @@ export class SizeContainer extends Component<SizeProps> {
             bottom: "0",
             left: "0",
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "center"
         };
 
         return (

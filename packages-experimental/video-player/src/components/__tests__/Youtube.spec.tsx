@@ -11,7 +11,7 @@ describe("YoutubePlayer Player", () => {
         muted: false,
         loop: false,
         showControls: false,
-        aspectRatio: false,
+        aspectRatio: false
     };
 
     const defaulPlayer = (props: YoutubeProps): JSX.Element => <Youtube {...props} />;

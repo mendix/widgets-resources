@@ -10,7 +10,7 @@ describe("VimeoPlayer Player", () => {
         autoPlay: false,
         muted: false,
         loop: false,
-        aspectRatio: false,
+        aspectRatio: false
     };
 
     const defaulPlayer = (props: VimeoProps): JSX.Element => <Vimeo {...props} />;
