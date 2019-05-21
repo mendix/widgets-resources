@@ -42,7 +42,7 @@ export class ColorPicker extends Component<Props, State> {
         }
 
         const colorHex = this.state.color ? this.getColor() : this.props.color.value;
-        const color = tinycolor(colorHex!).toHsl();
+        const color = tinycolor(colorHex).toHsl();
 
         return (
             <View style={this.styles.container}>
@@ -188,7 +188,7 @@ export class ColorPicker extends Component<Props, State> {
         );
     }
 
-    private getThumbStyle = (color: HSLA): ViewStyle => ({
+    private readonly getThumbStyle = (color: HSLA): ViewStyle => ({
         borderWidth: 1,
         borderColor: tinycolor(color).toHexString()
     });

@@ -84,7 +84,8 @@ export class PickerSlider extends Component<PickerSlidersProps> {
         });
     }
 
-    private roundToMultiple = (value: number, multiple: number): number => Math.round(value / multiple) * multiple;
+    private readonly roundToMultiple = (value: number, multiple: number): number =>
+        Math.round(value / multiple) * multiple;
 }
 
 const styles = StyleSheet.create({
