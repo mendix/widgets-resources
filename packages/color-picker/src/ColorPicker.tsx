@@ -15,13 +15,6 @@ interface State {
     color?: HSLA;
 }
 
-const Format = {
-    RGB: "rgb",
-    HEX: "hex",
-    HSV: "hsv",
-    HSL: "hsl"
-};
-
 export type Props = ColorPickerProps<ColorPickerStyle>;
 
 export class ColorPicker extends Component<Props, State> {
@@ -50,7 +43,7 @@ export class ColorPicker extends Component<Props, State> {
                 {this.renderHue(color)}
                 {this.renderSaturation(color)}
                 {this.renderLightness(color)}
-                {this.props.format !== Format.HEX && this.renderAlpha(color)}
+                {this.props.format !== "hex" && this.renderAlpha(color)}
             </View>
         );
     }
@@ -97,16 +90,16 @@ export class ColorPicker extends Component<Props, State> {
     private setColor(): void {
         const color = tinycolor(this.state.color);
         switch (this.props.format) {
-            case Format.HEX:
+            case "hex":
                 this.props.color.setValue(color.toHexString());
                 break;
-            case Format.HSL:
+            case "hsl":
                 this.props.color.setValue(color.toHslString());
                 break;
-            case Format.HSV:
+            case "hsv":
                 this.props.color.setValue(color.toHsvString());
                 break;
-            case Format.RGB:
+            case "rgb":
                 this.props.color.setValue(color.toRgbString());
                 break;
         }
@@ -115,13 +108,13 @@ export class ColorPicker extends Component<Props, State> {
     private getColor(): string {
         const color = tinycolor(this.state.color);
         switch (this.props.format) {
-            case Format.HEX:
+            case "hex":
                 return color.toHexString();
-            case Format.HSL:
+            case "hsl":
                 return color.toHslString();
-            case Format.HSV:
+            case "hsv":
                 return color.toHsvString();
-            case Format.RGB:
+            case "rgb":
                 return color.toRgbString();
         }
         return "";
