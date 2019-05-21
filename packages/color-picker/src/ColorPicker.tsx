@@ -15,12 +15,12 @@ interface State {
     color?: HSLA;
 }
 
-const enum Format {
-    RGB = "rgb",
-    HEX = "hex",
-    HSV = "hsv",
-    HSL = "hsl"
-}
+const Format = {
+    RGB: "rgb",
+    HEX: "hex",
+    HSV: "hsv",
+    HSL: "hsl"
+};
 
 export type Props = ColorPickerProps<ColorPickerStyle>;
 
@@ -96,7 +96,7 @@ export class ColorPicker extends Component<Props, State> {
 
     private setColor(): void {
         const color = tinycolor(this.state.color);
-        switch (this.props.format.toString()) {
+        switch (this.props.format) {
             case Format.HEX:
                 this.props.color.setValue(color.toHexString());
                 break;
@@ -114,7 +114,7 @@ export class ColorPicker extends Component<Props, State> {
 
     private getColor(): string {
         const color = tinycolor(this.state.color);
-        switch (this.props.format.toString()) {
+        switch (this.props.format) {
             case Format.HEX:
                 return color.toHexString();
             case Format.HSL:
