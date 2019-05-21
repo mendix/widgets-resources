@@ -1,0 +1,87 @@
+/* ==========================================================================
+   Radio Buttons
+
+   Default radio button styling
+========================================================================== */
+
+.radio {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+}
+.mx-radiobuttons.inline div[role='radiogroup'] {
+    display: flex;
+    flex-direction: row;
+    .radio {
+        display: flex;
+        margin: 0 20px 0 0;
+    }
+}
+
+input[type='radio'] {
+    position: relative !important; // Remove after mxui merge
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    outline: 0;
+    cursor: pointer;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+
+    &:before,
+    &:after {
+        color: #fff;
+        display: block;
+        position: absolute;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+    &:before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        border: 1px solid $form-input-border-color;
+        background-color: transparent;
+    }
+    &:after {
+        width: 55%;
+        height: 55%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: $form-input-border-focus-color;
+        pointer-events: none;
+    }
+    &:not(:checked):after {
+        opacity: 0;
+        transform: translate(-50%, -50%), scale(0);
+    }
+    &:checked:after,
+    &:not(:disabled):not(:checked):hover:after {
+        opacity: 1;
+        transform: translate(-50%, -50%), scale(1);
+    }
+    &:not(:disabled):not(:checked):hover:after {
+        content: '';
+        background-color: $form-input-bg-hover;
+    }
+    &:checked:before {
+        border-color: $form-input-border-focus-color;
+        background-color: #fff;
+    }
+    &:checked:after {
+        content: '';
+    }
+    &:disabled:before {
+        background-color: $form-input-bg-disabled;
+    }
+    & + label {
+        margin-left: $form-label-gutter;
+    }
+}
