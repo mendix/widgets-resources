@@ -64,6 +64,11 @@
     & > div[class*='col-'] {
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
+
+        .mx-validation-message {
+            flex-basis: 100%;
+        }
     }
     margin-bottom: $form-group-margin-bottom;
     & > [class*='col-'] {
@@ -81,6 +86,8 @@
         color: $form-label-color;
         font-size: $form-label-size;
         font-weight: $form-label-weight;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
