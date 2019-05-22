@@ -71,7 +71,6 @@ A bundle of commonly used widgets & nanoflow actions for building native mobile 
 |                | Hide keyboard                         |
 |                | Open in app browser                   |
 |                | Play sound                            |
-|                | Share                                 |
 |                | Vibrate                               |
 
 ## Documentation
