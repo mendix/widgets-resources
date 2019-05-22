@@ -53,7 +53,7 @@ function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
             mx.data.create({
                 entity,
                 callback: mxObject => resolve(mxObject),
-                error: () => reject(`Could not create '${entity}' object to store coordinates`)
+                error: () => reject(`Could not create '${entity}' object to store device info`)
             });
         });
     }
