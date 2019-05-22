@@ -4,18 +4,21 @@
    Default radio button styling
 ========================================================================== */
 
-.radio {
-    display: flex;
-    align-items: center;
-    margin-top: 0;
-}
 .mx-radiobuttons.inline div[role='radiogroup'] {
     display: flex;
     flex-direction: row;
     .radio {
-        display: flex;
         margin: 0 20px 0 0;
     }
+}
+.mx-radiobuttons .radio:last-child {
+    margin-bottom: 0;
+}
+
+.radio {
+    display: flex !important; // Remove after mxui merge
+    align-items: center;
+    margin-top: 0;
 }
 
 input[type='radio'] {
