@@ -8,7 +8,7 @@ input[type='checkbox'] {
     position: relative !important; //Remove after mxui merge
     width: 16px;
     height: 16px;
-    margin: 0;
+    margin: 0 !important; // Remove after mxui merge
     cursor: pointer;
     appearance: none;
     -moz-appearance: none;
@@ -67,7 +67,7 @@ input[type='checkbox'] {
     &:checked:disabled:after {
         border-color: $form-input-bg-disabled;
     }
-    & + label {
+    & + .control-label {
         margin-left: $form-label-gutter;
     }
 }

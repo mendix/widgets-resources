@@ -49,12 +49,14 @@
     flex: 1;
     overflow: hidden;
     min-height: auto;
-    padding-top: $form-input-padding-y;
-    padding-bottom: $form-input-padding-y;
-    padding-left: $form-input-padding-x;
+    padding: $form-input-padding-y $form-input-padding-x;
     border-bottom: 1px solid $form-input-static-border-color;
     font-size: $form-input-font-size;
     line-height: $form-input-line-height;
+
+    & + .control-label {
+        margin-left: $form-label-gutter;
+    }
 }
 
 // Form Group
@@ -76,9 +78,9 @@
         padding-left: $form-group-gutter;
     }
     // Alignment content
-    div[class*='textBox'] > label,
-    div[class*='textArea'] > label,
-    div[class*='datePicker'] > label {
+    div[class*='textBox'] > .control-label,
+    div[class*='textArea'] > .control-label,
+    div[class*='datePicker'] > .control-label {
         @extend .form-control-static;
     }
     // Label
@@ -88,6 +90,17 @@
         font-weight: $form-label-weight;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+}
+
+.form-group.label-after {
+    align-items: center;
+
+    .form-control-static {
+        flex: unset;
+    }
+    .control-label {
+        margin-bottom: 0;
     }
 }
 
@@ -104,7 +117,7 @@ select.form-control {
 }
 
 // Not editable textarea, textarea will be rendered as a label
-.mx-textarea label {
+.mx-textarea .control-label {
     height: auto;
 }
 
@@ -147,7 +160,7 @@ textarea.form-control {
 }
 
 // Form group orientation
-.form-vertical .form-group {
+.form-vertical .form-group:not(.label-after) {
     flex-direction: column;
 }
 .form-horizontal .form-group {
