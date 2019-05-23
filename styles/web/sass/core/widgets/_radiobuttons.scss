@@ -26,7 +26,6 @@ input[type='radio'] {
     width: 16px;
     height: 16px;
     margin: 0;
-    outline: 0;
     cursor: pointer;
     appearance: none;
     -moz-appearance: none;
@@ -39,7 +38,6 @@ input[type='radio'] {
 
     &:before,
     &:after {
-        color: #fff;
         display: block;
         position: absolute;
         border-radius: 50%;
@@ -65,21 +63,18 @@ input[type='radio'] {
         opacity: 0;
         transform: translate(-50%, -50%), scale(0);
     }
+    &:not(:disabled):not(:checked):hover:after {
+        background-color: $form-input-bg-hover;
+    }
     &:checked:after,
     &:not(:disabled):not(:checked):hover:after {
         opacity: 1;
-        transform: translate(-50%, -50%), scale(1);
-    }
-    &:not(:disabled):not(:checked):hover:after {
         content: '';
-        background-color: $form-input-bg-hover;
+        transform: translate(-50%, -50%), scale(1);
     }
     &:checked:before {
         border-color: $form-input-border-focus-color;
-        background-color: #fff;
-    }
-    &:checked:after {
-        content: '';
+        background-color: $form-input-bg;
     }
     &:disabled:before {
         background-color: $form-input-bg-disabled;

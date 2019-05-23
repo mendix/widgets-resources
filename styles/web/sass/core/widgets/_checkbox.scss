@@ -9,7 +9,6 @@ input[type='checkbox'] {
     width: 16px;
     height: 16px;
     margin: 0;
-    outline: 0;
     cursor: pointer;
     appearance: none;
     -moz-appearance: none;
@@ -22,7 +21,6 @@ input[type='checkbox'] {
 
     &:before,
     &:after {
-        color: #fff;
         display: block;
         position: absolute;
         transition: all 0.3s ease;
