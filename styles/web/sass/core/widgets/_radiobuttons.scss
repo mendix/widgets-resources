@@ -84,6 +84,12 @@ input[type='radio'] {
     &:disabled:before {
         background-color: $form-input-bg-disabled;
     }
+    &:checked:disabled:before {
+        border-color: rgba($form-input-border-focus-color, 0.4);
+    }
+    &:checked:disabled:after {
+        background-color: rgba($form-input-border-focus-color, 0.4);
+    }
     & + label {
         margin-left: $form-label-gutter;
     }
