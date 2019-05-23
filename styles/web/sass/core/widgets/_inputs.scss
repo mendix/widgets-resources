@@ -62,17 +62,13 @@
 // Form Group
 .form-group {
     display: flex;
+    margin-bottom: $form-group-margin-bottom;
 
     & > div[class*='col-'] {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-
-        .mx-validation-message {
-            flex-basis: 100%;
-        }
     }
-    margin-bottom: $form-group-margin-bottom;
     & > [class*='col-'] {
         padding-right: $form-group-gutter;
         padding-left: $form-group-gutter;
@@ -90,6 +86,9 @@
         font-weight: $form-label-weight;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+    .mx-validation-message {
+        flex-basis: 100%;
     }
 }
 

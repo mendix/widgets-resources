@@ -4,6 +4,14 @@
    Default checkbox styling
 ========================================================================== */
 
+.mx-checkbox.label-after {
+    flex-wrap: wrap;
+
+    .control-label {
+        padding: 0;
+    }
+}
+
 input[type='checkbox'] {
     position: relative !important; //Remove after mxui merge
     width: 16px;
