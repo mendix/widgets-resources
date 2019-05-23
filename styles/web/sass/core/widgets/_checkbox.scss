@@ -61,6 +61,14 @@ input[type='checkbox'] {
     &:disabled:before {
         background-color: $form-input-bg-disabled;
     }
+    &:checked:disabled:before {
+        border-color: transparent;
+        background-color: rgba($form-input-border-focus-color, 0.4);
+    }
+    &:disabled:after,
+    &:checked:disabled:after {
+        border-color: $form-input-bg-disabled;
+    }
     & + label {
         margin-left: $form-label-gutter;
     }
