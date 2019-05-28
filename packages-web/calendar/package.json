@@ -1,11 +1,12 @@
 {
   "name": "calendar",
   "widgetName": "Calendar",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Display and manage calendar events",
   "copyright": "Mendix BV",
   "scripts": {
     "start": "webpack-dev-server --hot --open",
+    "dev": "grunt",
     "typeCheck": "tsc --noEmit",
     "pretest": "tsc && npm run lint && npm run build",
     "test": "npm run test:unit && npm run test:conditional",
@@ -39,6 +40,8 @@
     "url": "https://github.com/mendixlabs/calendar/issues"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
     "@types/classnames": "^2.2.4",
     "@types/core-js": "^2.5.0",
     "@types/date-arithmetic": "^3.1.2",
@@ -53,6 +56,7 @@
     "@types/react-dnd-html5-backend": "^3.0.2",
     "@types/react-dom": "^16.0.11",
     "@types/webdriverio": "^4.13.0",
+    "babel-loader": "^8.0.6",
     "check-dependencies": "^1.1.0",
     "copy-webpack-plugin": "^4.6.0",
     "core-js": "^2.6.1",
