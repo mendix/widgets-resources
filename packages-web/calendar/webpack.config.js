@@ -51,10 +51,22 @@ const widgetConfig = {
         rules: [
             {
                 test: /\.ts$/,
+                exclude: /node_modules/,
                 use: {
                     loader: "ts-loader",
                     options: {
                         transpileOnly: true
+                    }
+                }
+            },
+            {
+                test: /\.jsx?$/,
+                include: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        cacheDirectory: true,
+                        presets: ["@babel/preset-env"]
                     }
                 }
             },
@@ -64,6 +76,7 @@ const widgetConfig = {
         ]
     },
     mode: "development",
+    devtool: "source-map",
     externals: [ "react", "react-dom" ],
     plugins: [
         new ForkTsCheckerWebpackPlugin(),
