@@ -31,8 +31,7 @@ export class PickerSlider extends Component<PickerSlidersProps> {
                     <Slider
                         value={this.props.value}
                         step={this.props.step}
-                        animateTransitions={true}
-                        animationType="spring"
+                        animateTransitions={false}
                         thumbTouchSize={{ width: 48, height: 48 }}
                         minimumValue={this.props.minimumValue}
                         maximumValue={this.props.maximumValue}
