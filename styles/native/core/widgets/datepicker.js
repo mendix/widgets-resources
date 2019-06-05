@@ -29,8 +29,16 @@ export const DatePicker = {
         paddingHorizontal: input.paddingHorizontal,
         paddingVertical: input.paddingVertical,
     },
+    valueDisabled: {
+        // All TextStyle properties are allowed
+        backgroundColor: input.disabledBackgroundColor,
+    },
     placeholder: {
+        // All TextStyle properties are allowed
         color: input.placeholderTextColor,
+    },
+    placeholderDisabled: {
+        // All TextStyle properties are allowed
     },
     validationMessage: {
         // All TextStyle properties are allowed

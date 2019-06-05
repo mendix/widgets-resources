@@ -61,7 +61,6 @@ export const homeFooterText = {
 // Buttons
 export const btnListItem = {
     container: {
-        flex: 1,
         borderWidth: 0,
         borderRadius: 0,
         borderBottomWidth: 1,
@@ -69,12 +68,12 @@ export const btnListItem = {
         backgroundColor: background.primary,
         paddingHorizontal: spacing.small,
         paddingVertical: Platform.select({ ios: spacing.smaller, android: spacing.small }),
+        justifyContent: 'flex-start',
     },
     icon: {
         color: contrast.higher,
     },
     caption: {
-        flex: 1,
         textAlign: 'left',
         fontSize: font.size,
         ...Platform.select({

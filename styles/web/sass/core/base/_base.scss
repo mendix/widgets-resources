@@ -59,7 +59,7 @@ div[tabindex] {
 .disabled,
 [disabled] {
     cursor: not-allowed;
-    opacity: 0.65;
+    // opacity: 0.65;
     -webkit-box-shadow: none;
     box-shadow: none;
     filter: alpha(opacity=65);
