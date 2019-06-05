@@ -5,8 +5,9 @@
 ========================================================================== */
 
 .form-control {
-    display: block;
-    width: 100%;
+    flex: 1;
+    display: flex;
+    min-width: 100px;
     height: $form-input-height;
     padding: $form-input-padding-y $form-input-padding-x;
     color: $form-input-color;
@@ -59,6 +60,38 @@
     }
 }
 
+// Dropdown input widget
+select.form-control {
+    $arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15px' height='8px'><polyline id='Line' fill='none' stroke='%23555555' points='0.5 0.5 6 6 11.545361 0.5'></polyline></svg>";
+    padding-right: 30px;
+    background-image: url($arrow);
+    background-repeat: no-repeat;
+    background-position: calc(100% - #{$form-input-padding-x}) center;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+// Not editable textarea, textarea will be rendered as a label
+.mx-textarea .control-label {
+    height: auto;
+}
+
+textarea.form-control {
+    height: auto;
+}
+
+.mx-compound-control {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+
+    .mx-validation-message {
+        flex-basis: 100%;
+        margin-top: 5px;
+    }
+}
+
 // Form Group
 .form-group {
     display: flex;
@@ -103,48 +136,10 @@
     }
 }
 
-// Dropdown input widget
-select.form-control {
-    $arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15px' height='8px'><polyline id='Line' fill='none' stroke='%23555555' points='0.5 0.5 6 6 11.545361 0.5'></polyline></svg>";
-    padding-right: 30px;
-    background-image: url($arrow);
-    background-repeat: no-repeat;
-    background-position: calc(100% - #{$form-input-padding-x}) center;
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-}
-
-// Not editable textarea, textarea will be rendered as a label
-.mx-textarea .control-label {
-    height: auto;
-}
-
-textarea.form-control {
-    height: auto;
-}
-
 .mx-dateinput,
 .mx-referenceselector,
 .mx-referencesetselector {
     flex: 1;
-}
-
-// File input widget
-.mx-fileinput {
-    .mx-wrapped-label {
-        display: inline-block;
-        width: 200px;
-    }
-    /* File input widget hover fix */
-    .mx-wrapped-form {
-        .mx-wrapped-input {
-            cursor: pointer;
-        }
-        .mx-fileinput-upload-button:hover {
-            background-color: $btn-default-bg;
-        }
-    }
 }
 
 // Orientation
