@@ -126,8 +126,6 @@ textarea.form-control {
 }
 
 .form-group.label-after {
-    align-items: center;
-
     .form-control-static {
         flex: unset;
     }
@@ -154,11 +152,14 @@ textarea.form-control {
 }
 
 // Form group orientation
+.form-horizontal .form-group,
 .form-vertical .form-group:not(.label-after) {
     flex-direction: column;
 }
-.form-horizontal .form-group {
-    flex-direction: row;
+@media only screen and (min-width: 768px) {
+    .form-horizontal .form-group {
+        flex-direction: row;
+    }
 }
 
 // Targets only webkit iOS devices
