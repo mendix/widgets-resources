@@ -68,6 +68,7 @@ export const btnListItem = {
         backgroundColor: background.primary,
         paddingHorizontal: spacing.small,
         paddingVertical: Platform.select({ ios: spacing.smaller, android: spacing.small }),
+        justifyContent: 'flex-start',
     },
     icon: {
         color: contrast.higher,
