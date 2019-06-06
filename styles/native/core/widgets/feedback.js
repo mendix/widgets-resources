@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-import { button, contrast, font, input, border, brand, background } from '../variables';
-import { anyColorToRgbString } from '../_helperfunctions/convertcolors';
+import { background, border, brand, button, contrast, font, input } from "../variables";
+import { Platform } from "react-native";
+import { anyColorToRgbString } from "../_helperfunctions/convertcolors";
 
 /* ==========================================================================
     Feedback
@@ -50,7 +50,7 @@ export const com_mendix_widget_native_feedback_Feedback = (Feedback = {
         borderBottomWidth: input.borderWidth,
         borderWidth: Platform.select({ android: border.width }),
 
-        textAlignVertical: 'top',
+        textAlignVertical: "top",
         paddingVertical: input.paddingVertical,
         paddingHorizontal: input.paddingHorizontal,
     },

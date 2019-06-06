@@ -1,5 +1,5 @@
-import { contrast, brand, background, font } from '../variables';
-import { Platform } from 'react-native';
+import { background, brand, contrast } from "../variables";
+import { Platform } from "react-native";
 
 /* ==========================================================================
     Tab Container
@@ -50,10 +50,10 @@ export const tabContainerScroll = {
 // Tab container as content of page
 export const tabContainerMinimal = {
     container: {
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
     },
     tabBar: {
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
         elevation: 0,
     },
 };

@@ -1,4 +1,4 @@
-import { brand } from '../variables';
+import { brand } from "../variables";
 
 /* ==========================================================================
     Maps
@@ -9,7 +9,7 @@ import { brand } from '../variables';
 export const com_mendix_widget_native_maps_Maps = (Maps = {
     container: {
         // All ViewStyle properties are allowed
-        alignSelf: 'stretch',
+        alignSelf: "stretch",
         aspectRatio: 4 / 3,
     },
     marker: {

@@ -1,5 +1,5 @@
-import { spacing, contrast, border, font, background } from '../../../core/variables';
-import { Platform } from 'react-native';
+import { background, border, contrast, font, spacing } from "../../../core/variables";
+import { Platform } from "react-native";
 
 /* ==========================================================================
     Cards
@@ -10,7 +10,7 @@ export const card = {
         borderRadius: border.radius,
         backgroundColor: background.primary,
 
-        alignItems: 'center',
+        alignItems: "center",
         paddingHorizontal: spacing.largest,
         paddingTop: spacing.regular,
         paddingBottom: spacing.large,

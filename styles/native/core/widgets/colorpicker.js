@@ -1,4 +1,4 @@
-import {} from '../variables';
+import {} from "../variables";
 
 /* ==========================================================================
     Color Picker

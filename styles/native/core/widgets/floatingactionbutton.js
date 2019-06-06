@@ -1,4 +1,4 @@
-import { background, brand, font, contrast } from '../variables';
+import { background, brand, contrast, font } from "../variables";
 
 export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton = (FloatingActionButton = {
     container: {

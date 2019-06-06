@@ -1,5 +1,5 @@
-import { TextHeading1 } from './typography';
-import { font } from '../variables';
+import { TextHeading1 } from "./typography";
+import { font } from "../variables";
 
 /* ==========================================================================
     Page Title

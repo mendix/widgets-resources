@@ -1,4 +1,4 @@
-import { contrast } from '../variables';
+import { contrast } from "../variables";
 
 /* ==========================================================================
     Image
@@ -12,7 +12,7 @@ export const Image = {
     },
     image: {
         // All ImageStyle properties are allowed
-        resizeMode: 'contain',
+        resizeMode: "contain",
     },
 };
 
@@ -22,7 +22,7 @@ export const NativeDynamicImage = {
     },
     image: {
         // All ImageStyle properties are allowed
-        resizeMode: 'contain',
+        resizeMode: "contain",
     },
 };
 
@@ -63,8 +63,8 @@ export const imageHeader = {
         zIndex: 10,
     },
     image: {
-        width: '100%',
+        width: "100%",
         height: 250,
-        resizeMode: 'cover',
+        resizeMode: "cover",
     },
 };

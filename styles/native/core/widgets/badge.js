@@ -1,4 +1,4 @@
-import { button, contrast } from '../variables';
+import { button, contrast } from "../variables";
 
 /* ==========================================================================
     Badge

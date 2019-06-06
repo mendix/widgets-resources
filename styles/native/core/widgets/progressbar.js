@@ -1,6 +1,6 @@
-import { brand } from '../variables';
-import { anyColorToRgbString } from '../_helperfunctions/convertcolors';
-import { Platform } from 'react-native';
+import { Platform } from "react-native";
+import { anyColorToRgbString } from "../_helperfunctions/convertcolors";
+import { brand } from "../variables";
 
 /* ==========================================================================
     Progress Bar
@@ -11,7 +11,7 @@ import { Platform } from 'react-native';
 export const com_mendix_widget_native_progressbar_ProgressBar = (ProgressBar = {
     container: {
         // All ViewStyle properties are allowed
-        alignSelf: 'stretch',
+        alignSelf: "stretch",
     },
     bar: {
         // All ViewStyle properties are allowed

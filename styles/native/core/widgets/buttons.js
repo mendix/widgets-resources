@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-import { button, spacing, font, contrast, brand } from '../variables';
-import merge from '../_helperfunctions/mergeobjects';
+import { brand, button, contrast, font, spacing } from "../variables";
+import { Platform } from "react-native";
+import merge from "../_helperfunctions/mergeobjects";
 
 /* ==========================================================================
     Button
@@ -11,12 +11,12 @@ export const ActionButton = {
     container: {
         // Ripplecolor and all ViewStyle properties are allowed
         borderWidth: 1,
-        borderStyle: 'solid',
+        borderStyle: "solid",
         // rippleColor: ,
         borderColor: button.primary.borderColor,
         backgroundColor: button.primary.backgroundColor,
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+        justifyContent: "center",
         borderRadius: button.borderRadius,
         ...Platform.select({
             ios: {
@@ -137,7 +137,7 @@ export const btnLarge = {
 export const btnIconPrimary = {
     container: {
         borderWidth: 0,
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
         paddingVertical: 0,
         paddingHorizontal: 0,
     },
@@ -174,8 +174,8 @@ export const btnAsText = {
         maxHeight: 22,
         borderWidth: 0,
         borderRadius: 0,
-        rippleColor: 'rgba(0,0,0,0.05)',
-        backgroundColor: 'transparent',
+        rippleColor: "rgba(0,0,0,0.05)",
+        backgroundColor: "transparent",
         paddingVertical: 0,
         paddingHorizontal: 0,
     },
