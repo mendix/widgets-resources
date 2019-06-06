@@ -9,21 +9,18 @@
     width: 100%;
     height: $form-input-height;
     padding: $form-input-padding-y $form-input-padding-x;
-    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    -moz-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     color: $form-input-color;
     border: 1px solid $form-input-border-color;
     border-radius: $form-input-border-radius;
     background-color: $form-input-bg;
     background-image: none;
-    -webkit-box-shadow: none;
     box-shadow: none;
     font-size: $form-input-font-size;
     line-height: $form-input-line-height;
+    appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     @if $form-input-style==lined {
         @extend .form-control-lined;
     }
@@ -33,23 +30,7 @@
     border-color: $form-input-border-focus-color;
     outline: 0;
     background-color: $form-input-bg-focus;
-    -webkit-box-shadow: none;
     box-shadow: none;
-}
-
-textarea.form-control {
-    height: auto;
-}
-
-
-select.form-control {
-    $arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15px' height='8px'><polyline id='Line' fill='none' stroke='%23555555' points='0.5 0.5 6 6 11.545361 0.5'></polyline></svg>";
-    padding-right: 30px;
-    background-image: url($arrow);
-    background-repeat: no-repeat;
-    background-position: calc(100% - #{$form-input-padding-x}) center;
-    -moz-appearance: none;
-    -webkit-appearance: none;
 }
 
 // Lined
@@ -65,19 +46,88 @@ select.form-control {
 
 // Read only fom control class
 .form-control-static {
+    flex: 1;
     overflow: hidden;
     min-height: auto;
-    padding-top: $form-input-padding-y;
-    padding-bottom: $form-input-padding-y;
-    padding-left: $form-input-padding-x;
+    padding: $form-input-padding-y $form-input-padding-x;
     border-bottom: 1px solid $form-input-static-border-color;
     font-size: $form-input-font-size;
     line-height: $form-input-line-height;
+
+    & + .control-label {
+        margin-left: $form-label-gutter;
+    }
+}
+
+// Form Group
+.form-group {
+    display: flex;
+    margin-bottom: $form-group-margin-bottom;
+
+    & > div[class*='col-'] {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    & > [class*='col-'] {
+        padding-right: $form-group-gutter;
+        padding-left: $form-group-gutter;
+    }
+    // Alignment content
+    div[class*='textBox'] > .control-label,
+    div[class*='textArea'] > .control-label,
+    div[class*='datePicker'] > .control-label {
+        @extend .form-control-static;
+    }
+    // Label
+    .control-label {
+        color: $form-label-color;
+        font-size: $form-label-size;
+        font-weight: $form-label-weight;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .mx-validation-message {
+        flex-basis: 100%;
+    }
+}
+
+.form-group.label-after {
+    align-items: center;
+
+    .form-control-static {
+        flex: unset;
+    }
+    .control-label {
+        margin-bottom: 0;
+    }
+}
+
+// Dropdown input widget
+select.form-control {
+    $arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15px' height='8px'><polyline id='Line' fill='none' stroke='%23555555' points='0.5 0.5 6 6 11.545361 0.5'></polyline></svg>";
+    padding-right: 30px;
+    background-image: url($arrow);
+    background-repeat: no-repeat;
+    background-position: calc(100% - #{$form-input-padding-x}) center;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
 }
 
 // Not editable textarea, textarea will be rendered as a label
-.mx-textarea label {
+.mx-textarea .control-label {
     height: auto;
+}
+
+textarea.form-control {
+    height: auto;
+}
+
+.mx-dateinput,
+.mx-referenceselector,
+.mx-referencesetselector {
+    flex: 1;
 }
 
 // File input widget
@@ -97,30 +147,6 @@ select.form-control {
     }
 }
 
-// Form Group
-.form-group {
-    margin-bottom: $form-group-margin-bottom;
-    & > [class*="col-"] {
-        padding-right: $form-group-gutter;
-        padding-left: $form-group-gutter;
-    }
-    // Alignment content
-    div[class*="textBox"] > label,
-    div[class*="textArea"] > label,
-    div[class*="datePicker"] > label {
-        @extend .form-control-static;
-    }
-    // Label
-    .control-label {
-        color: $form-label-color;
-        font-size: $form-label-size;
-        font-weight: $form-label-weight;
-    }
-}
-// Targets only webkit iOS devices
-.dj_webkit.dj_ios .form-control {
-    transform: translateZ(0);
-}
 // Orientation
 .form-horizontal {
     @media (min-width: $screen-sm) {
@@ -132,12 +158,32 @@ select.form-control {
     }
 }
 
+// Form group orientation
+.form-vertical .form-group:not(.label-after) {
+    flex-direction: column;
+}
+.form-horizontal .form-group {
+    flex-direction: row;
+}
+
+// Targets only webkit iOS devices
+.dj_webkit.dj_ios .form-control {
+    transform: translateZ(0);
+}
+
 // Fixes alignment bug on iPads / iPhones where datefield is not aligned vertically
 @media only screen and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 0) {
-    input[type=date],
-    input[type=time],
-    input[type=datetime-local],
-    input[type=month] {
+    input[type='date'],
+    input[type='time'],
+    input[type='datetime-local'],
+    input[type='month'] {
         line-height: 1;
+    }
+}
+
+@media (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    // Target IE10+
+    .form-group {
+        display: block;
     }
 }

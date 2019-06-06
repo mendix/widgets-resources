@@ -1,8 +1,8 @@
 //
 // ██████╗  █████╗ ███████╗██╗ ██████╗
 // ██╔══██╗██╔══██╗██╔════╝██║██╔════╝
-// ██████╔╝███████║███████╗██║██║     
-// ██╔══██╗██╔══██║╚════██║██║██║     
+// ██████╔╝███████║███████╗██║██║
+// ██╔══██╗██╔══██║╚════██║██║██║
 // ██████╔╝██║  ██║███████║██║╚██████╗
 // ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝ ╚═════╝
 //
@@ -19,9 +19,9 @@ $gray-lighter:                          #eee !default;
 
 
 //== Step 1: Brand Colors
-$brand-default:                         #DDDDDD !default;    
-$brand-primary:                         #0595DB !default;    
-$brand-inverse:                         #252C36 !default; 
+$brand-default:                         #DDDDDD !default;
+$brand-primary:                         #0595DB !default;
+$brand-inverse:                         #252C36 !default;
 $brand-info:                            #48B0F7 !default;
 $brand-success:                         #76CA02 !default;
 $brand-warning:                         #f99b1d !default;
@@ -76,12 +76,12 @@ $link-hover-color:                      darken($link-color, 15%) !default;
 
 
 //
-//  █████╗ ██████╗ ██╗   ██╗ █████╗ ███╗   ██╗ ██████╗███████╗██████╗ 
+//  █████╗ ██████╗ ██╗   ██╗ █████╗ ███╗   ██╗ ██████╗███████╗██████╗
 // ██╔══██╗██╔══██╗██║   ██║██╔══██╗████╗  ██║██╔════╝██╔════╝██╔══██╗
 // ███████║██║  ██║██║   ██║███████║██╔██╗ ██║██║     █████╗  ██║  ██║
 // ██╔══██║██║  ██║╚██╗ ██╔╝██╔══██║██║╚██╗██║██║     ██╔══╝  ██║  ██║
 // ██║  ██║██████╔╝ ╚████╔╝ ██║  ██║██║ ╚████║╚██████╗███████╗██████╔╝
-// ╚═╝  ╚═╝╚═════╝   ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝╚══════╝╚═════╝ 
+// ╚═╝  ╚═╝╚═════╝   ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝╚══════╝╚═════╝
 //
 
 
@@ -103,9 +103,9 @@ $font-size-small:                       12px !default;
 
 // Font Weights
 $font-weight-light:                     100 !default;
-$font-weight-normal:                    normal !default;         
+$font-weight-normal:                    normal !default;
 $font-weight-semibold:                  600 !default;
-$font-weight-bold:                      bold !default; 
+$font-weight-bold:                      bold !default;
 
 // Font Size Headers
 $font-size-h1:                          31px !default;
@@ -208,13 +208,14 @@ $navtopbar-border-color:                $topbar-border-color !default;
 //== Form
 //## Used in components/inputs
 
-// Values that can be used default | lined 
+// Values that can be used default | lined
 $form-input-style:                      default !default;
 
-// Form Label  
-$form-label-color:                      #666 !default;        
-$form-label-size:                       $font-size-default !default;        
-$form-label-weight:                     $font-weight-semibold !default;             
+// Form Label
+$form-label-color:                      #666 !default;
+$form-label-size:                       $font-size-default !default;
+$form-label-weight:                     $font-weight-semibold !default;
+$form-label-gutter:                     8px !default;
 
 // Form Input dimensions
 $form-input-height:                     auto !default;
@@ -227,6 +228,7 @@ $form-input-border-radius:              $border-radius-default !default;
 // Form Input styling
 $form-input-bg:                         #FFF !default;
 $form-input-bg-focus:                   #FFF !default;
+$form-input-bg-hover:                   $gray-primary !default;
 $form-input-bg-disabled:                $gray-lighter !default;
 $form-input-color:                      $font-color-default !default;
 $form-input-focus-color:                $form-input-color !default;
@@ -248,10 +250,10 @@ $form-group-gutter:                     15px !default;
 //== Buttons
 //## Define background-color, border-color and text. Used in components/buttons
 
-// Default button style 
+// Default button style
 $btn-font-size:                         14px !default;
 $btn-bordered:                          false !default; // Default value false, set to true if you want this effect
-$btn-border-radius:                     $border-radius-default !default; 
+$btn-border-radius:                     $border-radius-default !default;
 
 // Button Background Color
 $btn-default-bg:                        #FFF !default;
@@ -295,7 +297,7 @@ $btn-link-bg-hover:                     $gray-lighter !default;
 
 //== Header blocks
 //## Define look and feel over multible building blocks that serve as header
-$header-bg-color:                       $bg-color-secondary !default;           
+$header-bg-color:                       $bg-color-secondary !default;
 $header-text-color:                     #FFF !default;
 $header-text-color-detail:              rgba(0,0,0, 0.2) !default;
 
@@ -306,10 +308,10 @@ $header-text-color-detail:              rgba(0,0,0, 0.2) !default;
 //
 // ███████╗██╗  ██╗██████╗ ███████╗██████╗ ████████╗
 // ██╔════╝╚██╗██╔╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝
-// █████╗   ╚███╔╝ ██████╔╝█████╗  ██████╔╝   ██║   
-// ██╔══╝   ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗   ██║   
-// ███████╗██╔╝ ██╗██║     ███████╗██║  ██║   ██║   
-// ╚══════╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   
+// █████╗   ╚███╔╝ ██████╔╝█████╗  ██████╔╝   ██║
+// ██╔══╝   ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗   ██║
+// ███████╗██╔╝ ██╗██║     ███████╗██║  ██║   ██║
+// ╚══════╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝
 //
 
 //== Color variations
@@ -321,17 +323,17 @@ $color-default-dark:                    mix($brand-default, black, 70%) !default
 $color-default-light:                   mix($brand-default, white, 60%) !default;
 $color-default-lighter:                 mix($brand-default, white, 20%) !default;
 
-$color-inverse-darker:                  mix($brand-inverse, black, 60%) !default;    
+$color-inverse-darker:                  mix($brand-inverse, black, 60%) !default;
 $color-inverse-dark:                    mix($brand-inverse, black, 70%) !default;
 $color-inverse-light:                   mix($brand-inverse, white, 60%) !default;
 $color-inverse-lighter:                 mix($brand-inverse, white, 20%) !default;
 
-$color-primary-darker:                  mix($brand-primary, black, 60%) !default;    
+$color-primary-darker:                  mix($brand-primary, black, 60%) !default;
 $color-primary-dark:                    mix($brand-primary, black, 70%) !default;
 $color-primary-light:                   mix($brand-primary, white, 60%) !default;
 $color-primary-lighter:                 mix($brand-primary, white, 20%) !default;
 
-$color-info-darker:                     mix($brand-info, black, 60%) !default;  
+$color-info-darker:                     mix($brand-info, black, 60%) !default;
 $color-info-dark:                       mix($brand-info, black, 70%) !default;
 $color-info-light:                      mix($brand-info, white, 60%) !default;
 $color-info-lighter:                    mix($brand-info, white, 20%) !default;
@@ -339,14 +341,14 @@ $color-info-lighter:                    mix($brand-info, white, 20%) !default;
 $color-success-darker:                  mix($brand-success, black, 60%) !default;
 $color-success-dark:                    mix($brand-success, black, 70%) !default;
 $color-success-light:                   mix($brand-success, white, 60%) !default;
-$color-success-lighter:                 mix($brand-success, white, 20%) !default;  
+$color-success-lighter:                 mix($brand-success, white, 20%) !default;
 
-$color-warning-darker:                  mix($brand-warning, black, 60%) !default;   
+$color-warning-darker:                  mix($brand-warning, black, 60%) !default;
 $color-warning-dark:                    mix($brand-warning, black, 70%) !default;
 $color-warning-light:                   mix($brand-warning, white, 60%) !default;
 $color-warning-lighter:                 mix($brand-warning, white, 20%) !default;
 
-$color-danger-darker:                   mix($brand-danger, black, 60%) !default;   
+$color-danger-darker:                   mix($brand-danger, black, 60%) !default;
 $color-danger-dark:                     mix($brand-danger, black, 70%) !default;
 $color-danger-light:                    mix($brand-danger, white, 60%) !default;
 $color-danger-lighter:                  mix($brand-danger, white, 20%) !default;
@@ -362,22 +364,22 @@ $grid-border-color:                     $border-color-default !default;
 
 // Spacing
 // Default
-$grid-padding-top:                      15px !default;                   
-$grid-padding-right:                    15px !default;    
-$grid-padding-bottom:                   15px !default;    
-$grid-padding-left:                     15px !default;    
+$grid-padding-top:                      15px !default;
+$grid-padding-right:                    15px !default;
+$grid-padding-bottom:                   15px !default;
+$grid-padding-left:                     15px !default;
 
 // Listview
-$listview-padding-top:                  15px !default;                   
-$listview-padding-right:                15px !default;    
-$listview-padding-bottom:               15px !default;    
-$listview-padding-left:                 15px !default;    
+$listview-padding-top:                  15px !default;
+$listview-padding-right:                15px !default;
+$listview-padding-bottom:               15px !default;
+$listview-padding-left:                 15px !default;
 
 // Background Colors
 $grid-bg:                               #FFF !default;
 $grid-bg-header:                        transparent !default; // Grid Headers
 $grid-bg-hover:                         mix($grid-border-color, #FFF, 20%) !default;
-$grid-bg-selected:                      mix($grid-border-color, #FFF, 30%) !default;    
+$grid-bg-selected:                      mix($grid-border-color, #FFF, 30%) !default;
 $grid-bg-selected-hover:                mix($grid-border-color, #FFF, 50%) !default;
 
 // Striped Background Color
@@ -409,8 +411,8 @@ $tabs-color-active:                     $font-color-default !default;
 $tabs-lined-color-active:               $brand-primary !default;
 
 // Border Color
-$tabs-border-color:                     $border-color-default !default;    
-$tabs-lined-border-color:               $brand-primary !default;    
+$tabs-border-color:                     $border-color-default !default;
+$tabs-lined-border-color:               $brand-primary !default;
 
 // Background Color
 $tabs-bg:                               #FFF !default;
@@ -478,11 +480,11 @@ $alert-danger-border-color:             $color-danger-dark !default;
 
 // Background Color
 $label-default-bg:                      $brand-default !default;
-$label-primary-bg:                      $brand-primary !default; 
-$label-info-bg:                         $brand-info !default; 
-$label-success-bg:                      $brand-success !default; 
+$label-primary-bg:                      $brand-primary !default;
+$label-info-bg:                         $brand-info !default;
+$label-success-bg:                      $brand-success !default;
 $label-warning-bg:                      $brand-warning !default;
-$label-danger-bg:                       $brand-danger !default;     
+$label-danger-bg:                       $brand-danger !default;
 
 // Border Color
 $label-default-border-color:            $brand-default !default;
@@ -508,12 +510,12 @@ $label-danger-color:                    #FFF !default;
 
 // Background Color
 $groupbox-default-bg:                   $brand-default !default;
-$groupbox-inverse-bg:                   $brand-inverse !default; 
-$groupbox-primary-bg:                   $brand-primary !default; 
+$groupbox-inverse-bg:                   $brand-inverse !default;
+$groupbox-primary-bg:                   $brand-primary !default;
 $groupbox-info-bg:                      $brand-info !default;
-$groupbox-success-bg:                   $brand-success !default; 
+$groupbox-success-bg:                   $brand-success !default;
 $groupbox-warning-bg:                   $brand-warning !default;
-$groupbox-danger-bg:                    $brand-danger !default;     
+$groupbox-danger-bg:                    $brand-danger !default;
 $groupbox-white-bg:                     #FFF !default;
 
 // Text Color
@@ -540,10 +542,10 @@ $callout-warning-color:                 $brand-warning !default;
 $callout-danger-color:                  $brand-danger !default;
 
 // Background Color
-$callout-default-bg:                    $color-default-lighter!default; 
-$callout-info-bg:                       $color-info-lighter !default; 
-$callout-success-bg:                    $color-success-lighter !default; 
-$callout-warning-bg:                    $color-warning-lighter !default; 
+$callout-default-bg:                    $color-default-lighter!default;
+$callout-info-bg:                       $color-info-lighter !default;
+$callout-success-bg:                    $color-success-lighter !default;
+$callout-warning-bg:                    $color-warning-lighter !default;
 $callout-danger-bg:                     $color-danger-lighter !default;
 
 
@@ -582,7 +584,7 @@ $m-layout-spacing-right:               15px !default;
 $m-layout-spacing-bottom:              15px !default;
 $m-layout-spacing-left:                15px !default;
 
-// Combined layout spacing 
+// Combined layout spacing
 $layout-spacing:                       $layout-spacing-top $layout-spacing-right $layout-spacing-bottom $layout-spacing-left !default;
 $m-layout-spacing:                     $m-layout-spacing-top $m-layout-spacing-right $m-layout-spacing-bottom $m-layout-spacing-left !default;
 $t-layout-spacing:                     $t-layout-spacing-top $t-layout-spacing-right $t-layout-spacing-bottom $t-layout-spacing-left !default;
@@ -597,9 +599,9 @@ $gutter-size:                           15px !default;
 //== Tables
 //## Table spacing options (used in components/tables)
 
-$padding-table-cell-top:                8px !default;                    
-$padding-table-cell-bottom:             8px !default;                    
-$padding-table-cell-left:               8px !default;                    
+$padding-table-cell-top:                8px !default;
+$padding-table-cell-bottom:             8px !default;
+$padding-table-cell-left:               8px !default;
 $padding-table-cell-right:              8px !default;
 
 
