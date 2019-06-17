@@ -281,7 +281,7 @@ function findImports(mainTypes: string, childTypes: string[]): string {
 
     return imports && imports.length > 0
         ? `
-import { ${imports.join(", ")} } from "@mendix/pluggable-widgets-api/properties";`
+import { ${imports.join(", ")} } from "mendix";`
         : "";
 }
 
