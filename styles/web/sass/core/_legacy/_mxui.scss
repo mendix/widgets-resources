@@ -15,7 +15,7 @@
 		GENERIC PIECES
  ****/
 
-.dijitReset {
+ .dijitReset {
 	/* Use this style to null out padding, margin, border in your template elements
 		so that page specific styles don't break them.
 		- Use in all TABLE, TR and TD tags.
@@ -37,12 +37,9 @@
 		Also, apparently works on a DIV as well as a FIELDSET.
 	*/
 	display:inline-block;			/* webkit and FF3 */
-	#zoom: 1; /* set hasLayout:true to mimic inline-block */
-	#display:inline; /* don't use .dj_ie since that increases the priority */
 	border:0;
 	padding:0;
 	vertical-align:middle;
-	#vertical-align: auto;	/* makes TextBox,Button line up w/native counterparts on IE6 */
 }
 
 table.dijitInline {
@@ -70,7 +67,6 @@ table.dijitInline {
 .dj_ie6 .dijitComboBox .dijitInputContainer,
 .dijitInputContainer {
 	/* for positioning of placeHolder */
-	#zoom: 1;
 	overflow: hidden;
 	float: none !important; /* needed to squeeze the INPUT in */
 	position: relative;
@@ -272,7 +268,6 @@ TABLE.dijitSelect {
 
 .dijitRight {
 	/* Right part of a 3-element border */
-	#display:inline;				/* IE7 sizes to outer size w/o this */
 	background-position:right top;
 	background-repeat:no-repeat;
 }
@@ -338,7 +333,6 @@ td.dijitButtonContents {
 	margin:0;
 	line-height:normal;
 	vertical-align: middle;
-	#vertical-align: auto;
 	text-align:center;
 	white-space: nowrap;
 }
@@ -383,7 +377,6 @@ div.dijitArrowButton {
 
 .dijitTextBox {
 	border: solid black 1px;
-	#overflow: hidden; /* #6027, #6067 */
 	width: 15em;	/* need to set default size on outer node since inner nodes say <input style="width:100%"> and <td width=100%>.  user can override */
 	vertical-align: middle;
 }
@@ -410,7 +403,6 @@ div.dijitArrowButton {
 	position: absolute;
 	top: 0;
 	left: 0;
-	#filter: ""; /* make this show up in IE6 after the rendering of the widget */
 	white-space: nowrap;
 	pointer-events: none;   /* so cut/paste context menu shows up when right clicking */
 }
@@ -459,9 +451,6 @@ div.dijitArrowButton {
 	direction: ltr !important;
 	text-align: left !important;
 	height: auto !important;
-	#text-indent: 0 !important;
-	#letter-spacing: -5em !important;
-	#text-align: right !important;
 }
 .dj_ie .dijitSelect input,
 .dj_ie .dijitTextBox input,
@@ -497,7 +486,6 @@ div.dijitArrowButton {
 	/* (in high contrast mode) revert rules from above so character displays */
 	text-indent: 0 !important;
 	width: 1em !important;
-	#text-align: left !important;
 	color: black !important;
 }
 .dijitValidationTextBoxError .dijitValidationContainer {
@@ -610,7 +598,6 @@ div.dijitArrowButton {
 	border-top-width: 1px !important;
 }
 .dijitSpinner .dijitSpinnerButtonContainer .dijitUpArrowButton {
-	#bottom: 50%;	/* otherwise (on some machines) top arrow icon too close to splitter border (IE6/7) */
 	top: 0;
 }
 .dijitSpinner .dijitArrowButtonInner {
@@ -1502,8 +1489,6 @@ div.dijitTabDisabled, .dj_ie div.dijitTabDisabled {
 .dijitTabContainerBottom-tabs .dijitTab {
 	/* Inline-block */
 	display:inline-block;			/* webkit and FF3 */
-	#zoom: 1; /* set hasLayout:true to mimic inline-block */
-	#display:inline; /* don't use .dj_ie since that increases the priority */
 }
 
 .tabStripButton {
@@ -2217,7 +2202,6 @@ div.dijitTabDisabled, .dj_ie div.dijitTabDisabled {
 }
 .dojoDndHorizontal .dojoDndItem {
     /* make contents of horizontal container be side by side, rather than vertical */
-    #display: inline;
     display: inline-block;
 }
 
@@ -3500,6 +3484,64 @@ body[dir="rtl"] .mx-master-detail-content-hidden {
 .mx-reportmatrix tbody img {
     max-width: 16px;
     max-height: 16px;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .dijitInline {
+        zoom: 1; /* set hasLayout:true to mimic inline-block */
+        display:inline; /* don't use .dj_ie since that increases the priority */
+        vertical-align: auto;	/* makes TextBox,Button line up w/native counterparts on IE6 */
+    }
+
+    .dj_ie6 .dijitComboBox .dijitInputContainer,
+    .dijitInputContainer {
+        zoom: 1;
+    }
+
+    .dijitRight {
+        /* Right part of a 3-element border */
+        display:inline;				/* IE7 sizes to outer size w/o this */
+    }
+
+    .dijitButtonNode {
+        vertical-align: auto;
+    }
+
+    .dijitTextBox {
+        overflow: hidden; /* #6027, #6067 */
+    }
+
+    .dijitPlaceHolder {
+        filter: ""; /* make this show up in IE6 after the rendering of the widget */
+    }
+
+    .dijitValidationTextBoxError input.dijitValidationInner,
+    .dijitSelect input,
+    .dijitTextBox input.dijitArrowButtonInner {
+        text-indent: 0 !important;
+        letter-spacing: -5em !important;
+        text-align: right !important;
+    }
+
+    .dj_a11y input.dijitValidationInner,
+    .dj_a11y input.dijitArrowButtonInner {
+        text-align: left !important;
+    }
+
+    .dijitSpinner .dijitSpinnerButtonContainer .dijitUpArrowButton {
+        bottom: 50%;	/* otherwise (on some machines) top arrow icon too close to splitter border (IE6/7) */
+    }
+
+    .dijitTabContainerTop-tabs .dijitTab,
+    .dijitTabContainerBottom-tabs .dijitTab {
+        zoom: 1; /* set hasLayout:true to mimic inline-block */
+        display:inline; /* don't use .dj_ie since that increases the priority */
+    }
+
+    .dojoDndHorizontal .dojoDndItem {
+        /* make contents of horizontal container be side by side, rather than vertical */
+        display: inline;
+    }
 }
 
 
