@@ -1,4 +1,10 @@
-import { background, brand, contrast, font } from "../variables";
+import { background, brand, contrast, font } from '../variables';
+
+/* ==========================================================================
+    Floating Action Button
+
+    Default Class For Mendix Floating Action Button Widget
+========================================================================== */
 
 export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton = (FloatingActionButton = {
     container: {
