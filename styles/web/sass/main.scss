@@ -5,9 +5,9 @@
 //
 
 // Utilities
-@import url('core/_utils/bootstrap/bootstrap');
-@import url('core/_utils/bootstrap-rtl/bootstrap-rtl');
-@import url('core/_utils/mxui');
+@import 'core/_legacy/bootstrap/bootstrap';
+@import 'core/_legacy/bootstrap-rtl/bootstrap-rtl';
+@import 'core/_legacy/mxui';
 
 // Custom variables
 @import 'app/custom-variables';
