@@ -6,6 +6,12 @@ import { button, contrast } from "../variables";
     Default Class For Mendix Badge Widget
 ========================================================================== */
 
+/* ==========================================================================
+    Badge
+
+    Default Class For Mendix Badge Widget
+========================================================================== */
+
 export const com_mendix_widget_native_badge_Badge = (Badge = {
     container: {
         // All ViewStyle properties are allowed
