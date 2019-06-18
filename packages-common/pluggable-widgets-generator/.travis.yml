@@ -1,8 +1,12 @@
+dist: xenial
 language: node_js
+cache: npm
+branches:
+    only:
+        - master
 node_js:
-  - '7.7'
-  - '6.10'
-  - '6'
-  - '5'
-  - '5.1'
-  - '4.5.0'
+  - "10.15.0"
+jobs:
+    include:
+        - name: "Test"
+          script: npm run test
