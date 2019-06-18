@@ -5,7 +5,7 @@ export const iconWebOutput = `/**
  */
 import { CSSProperties } from "react";
 import { pages } from "mendixmodelsdk";
-import { DynamicValue, WebIcon } from "@mendix/pluggable-widgets-api/properties";
+import { DynamicValue, WebIcon } from "mendix";
 
 interface CommonProps {
     id: string;
@@ -47,7 +47,7 @@ export const iconNativeOutput = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import { DynamicValue, NativeIcon } from "@mendix/pluggable-widgets-api/properties";
+import { DynamicValue, NativeIcon } from "mendix";
 
 interface CommonProps<Style> {
     style: Style[];

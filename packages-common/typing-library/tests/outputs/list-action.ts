@@ -5,7 +5,7 @@ export const listActionWebOutput = `/**
  */
 import { CSSProperties } from "react";
 import { pages } from "mendixmodelsdk";
-import { ActionValue, EditableValue } from "@mendix/pluggable-widgets-api/properties";
+import { ActionValue, EditableValue } from "mendix";
 
 interface CommonProps {
     id: string;
@@ -46,7 +46,7 @@ export const listActionNativeOutput = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import { ActionValue, EditableValue } from "@mendix/pluggable-widgets-api/properties";
+import { ActionValue, EditableValue } from "mendix";
 
 interface CommonProps<Style> {
     style: Style[];

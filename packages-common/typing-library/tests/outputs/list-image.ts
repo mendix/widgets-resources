@@ -5,7 +5,7 @@ export const listImageWebOutput = `/**
  */
 import { CSSProperties } from "react";
 import { pages } from "mendixmodelsdk";
-import { DynamicValue, WebImage } from "@mendix/pluggable-widgets-api/properties";
+import { DynamicValue, WebImage } from "mendix";
 
 interface CommonProps {
     id: string;
@@ -43,7 +43,7 @@ export const listImageNativeOutput = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import { DynamicValue, NativeImage } from "@mendix/pluggable-widgets-api/properties";
+import { DynamicValue, NativeImage } from "mendix";
 
 interface CommonProps<Style> {
     style: Style[];
