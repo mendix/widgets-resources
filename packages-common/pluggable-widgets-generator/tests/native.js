@@ -77,18 +77,12 @@ describe("Generating tests for native", function() {
                     assert.file(correctPath + `/dist/${props.version}/${props.packagePath}.${props.widgetName}.mpk`);
                 })
                 .then(() => {
-                    spawnCommand.spawnCommandSync("npm", ["run", "test:unit"], { cwd: correctPath });
+                    spawnCommand.spawnCommandSync("npm", ["run", "test:unit", "--", "-u"], { cwd: correctPath });
                 })
                 .then(() => {
                     assert.file(correctPath + "/dist/coverage/clover.xml");
                     assert.equal(analizeCoverage(correctPath + "/dist/coverage/clover.xml"), true);
                 });
         });
-    });
-
-    after(function() {
-        const correctPath = path.join(__dirname, "../outputs");
-        spawnCommand.spawnCommandSync("git", ["add", "."], { cwd: correctPath });
-        spawnCommand.spawnCommandSync("git", ["commit", "-m", "aut-test: Adding files from native outputs"], { cwd: correctPath });
     });
 });
