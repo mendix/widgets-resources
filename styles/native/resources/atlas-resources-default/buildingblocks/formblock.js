@@ -1,5 +1,5 @@
-import { contrast, font, spacing } from "../../../core/variables";
-import { Platform } from "react-native";
+import { contrast, font, spacing } from '../../../core/variables';
+import { Platform } from 'react-native';
 
 /* ==========================================================================
    Form Block
@@ -17,7 +17,7 @@ export const formTitle = {
             ios: {
                 color: contrast.regular,
                 fontSize: font.sizeSmall,
-                textTransform: "uppercase",
+                textTransform: 'uppercase',
                 marginBottom: spacing.smallest,
             },
             android: {

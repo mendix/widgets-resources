@@ -7,6 +7,7 @@ import merge from "../_helperfunctions/mergeobjects";
 
     Default Class For Mendix Button Widget
 ========================================================================== */
+
 export const ActionButton = {
     container: {
         // Ripplecolor and all ViewStyle properties are allowed

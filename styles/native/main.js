@@ -12,9 +12,9 @@ export * from "./core/widgets/colorpicker";
 export * from "./core/widgets/container";
 export * from "./core/widgets/datepicker";
 export * from "./core/widgets/dropdown";
-export * from "./core/widgets/images";
 export * from "./core/widgets/feedback";
 export * from "./core/widgets/floatingactionbutton";
+export * from "./core/widgets/images";
 export * from "./core/widgets/listviews";
 export * from "./core/widgets/maps";
 export * from "./core/widgets/navigation";
@@ -39,6 +39,3 @@ export * from "./core/widgets/webview";
 // Building blocks
 export * from "./resources/atlas-resources-default/buildingblocks/card";
 export * from "./resources/atlas-resources-default/buildingblocks/formblock";
-
-// Custom
-export * from "./app/custom";

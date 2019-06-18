@@ -1,11 +1,17 @@
-import { background, brand, contrast, font } from "../variables";
+import { background, brand, contrast, font } from '../variables';
+
+/* ==========================================================================
+    Floating Action Button
+
+    Default Class For Mendix Floating Action Button Widget
+========================================================================== */
 
 export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton = (FloatingActionButton = {
     container: {
         margin: 30,
     },
     button: {
-        size: 60,
+        size: 50,
         // rippleColor: ,
         backgroundColor: brand.primary,
         shadowColor: contrast.low,
@@ -22,7 +28,7 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
         color: contrast.lowest,
     },
     secondaryButton: {
-        size: 40,
+        size: 30,
         backgroundColor: background.secondary,
         shadowColor: contrast.lower,
         shadowOpacity: 0.9,
@@ -34,11 +40,12 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
         elevation: 2,
     },
     secondaryButtonIcon: {
-        size: font.size,
+        size: font.sizeSmall,
         color: contrast.high,
     },
     secondaryButtonCaption: {},
     secondaryButtonCaptionContainer: {
+        overflow: 'hidden',
         marginHorizontal: 15,
     },
 });
