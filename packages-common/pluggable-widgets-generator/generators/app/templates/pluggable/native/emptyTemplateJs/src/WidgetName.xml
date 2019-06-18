@@ -2,7 +2,7 @@
 <widget id="packagePath.packageName.WidgetName" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
         supportedPlatform="Native"
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/@mendix/pluggable-widgets-api/widget.xsd">
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>WidgetNameCamelCase</name>
     <description>WidgetDescription</description>
     <icon/>
