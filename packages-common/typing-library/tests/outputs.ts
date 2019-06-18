@@ -3,7 +3,7 @@ export const nativeResult = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import { ActionValue, DynamicValue, EditableValue, NativeImage } from "@mendix/pluggable-widgets-api/properties";
+import { ActionValue, DynamicValue, EditableValue, NativeImage } from "mendix";
 
 interface CommonProps<Style> {
     style: Style[];
@@ -42,7 +42,7 @@ export const webResult = `/**
  */
 import { CSSProperties } from "react";
 import { pages } from "mendixmodelsdk";
-import { ActionValue, DynamicValue, EditableValue, WebImage } from "@mendix/pluggable-widgets-api/properties";
+import { ActionValue, DynamicValue, EditableValue, WebImage } from "mendix";
 
 interface CommonProps {
     id: string;

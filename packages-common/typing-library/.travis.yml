@@ -1,0 +1,16 @@
+dist: xenial
+language: node_js
+cache: npm
+branches:
+    only:
+        - master
+
+node_js:
+    - "10.15.0"
+
+script:
+    - npm install
+
+after_script:
+    - npm run build
+    - npm run test
