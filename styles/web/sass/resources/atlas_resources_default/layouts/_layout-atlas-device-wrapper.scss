@@ -1,22 +1,27 @@
 .devicephone {
-    width: 375px;
-    height: 765px;
+    width: 420px;
+    height: 992px;
     margin: auto;
     padding: 120px 40px;
     background: url(../../../resources/phone.png) no-repeat center center;
 
     .deviceframe,
     .deviceshadowwrapper {
-        border-radius: 28px;
+        border-radius: 40px;
     }
 }
 
 .devicetablet {
-    width: 1005px;
-    height: 780px;
+    width: 1210px;
+    height: 1000px;
     margin: auto;
     padding: 120px 100px;
     background: url(../../../resources/tablet.png) no-repeat center center;
+
+    .deviceframe,
+    .deviceshadowwrapper {
+        border-radius: 20px;
+    }
 }
 
 .deviceframe {
@@ -36,7 +41,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    content: "";
+    content: '';
     pointer-events: none;
     box-shadow: inset 10px 0 10px -10px black, inset -10px 0 10px -10px black;
 }
