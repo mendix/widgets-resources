@@ -4,7 +4,7 @@
    Default radio button styling
 ========================================================================== */
 
-.mx-radiobuttons.inline div[role='radiogroup'] {
+.mx-radiobuttons.inline .mx-radiogroup {
     display: flex;
     flex-direction: row;
     .radio {
