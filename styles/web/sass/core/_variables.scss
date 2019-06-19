@@ -10,12 +10,12 @@
 
 //== Gray Shades
 //## Different gray shades to be used for our variables and components
-$gray-darker:                           #222 !default;
+$gray-darker:                         #222 !default;
 $gray-dark:                             #333 !default;
 $gray:                                  #555 !default;
 $gray-light:                            #888 !default;
 $gray-primary:                          #d7d7d7 !default;
-$gray-lighter:                          #eee !default;
+$gray-lighter:                        #eee !default;
 
 
 //== Step 1: Brand Colors
@@ -197,7 +197,7 @@ $navtopbar-sub-bg-hover:                $navtopbar-sub-bg !default;
 $navtopbar-sub-bg-active:               $navtopbar-sub-bg !default;
 $navtopbar-sub-color:                   #AAA !default;
 $navtopbar-sub-color-hover:             $brand-primary !default;
-$navtopbar-sub-color-active:            #FFF !default;
+$navtopbar-sub-color-active:            $brand-primary !default;
 
 //## Used in layouts/base
 $navtopbar-border-color:                $topbar-border-color !default;
