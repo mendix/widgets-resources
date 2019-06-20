@@ -98,19 +98,19 @@ textarea.form-control {
     display: flex;
     margin-bottom: $form-group-margin-bottom;
 
-    & > div[class*="col-"] {
+    & > div[class*='col-'] {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
     }
-    & > [class*="col-"] {
+    & > [class*='col-'] {
         padding-right: $form-group-gutter;
         padding-left: $form-group-gutter;
     }
     // Alignment content
-    div[class*="textBox"] > .control-label,
-    div[class*="textArea"] > .control-label,
-    div[class*="datePicker"] > .control-label {
+    div[class*='textBox'] > .control-label,
+    div[class*='textArea'] > .control-label,
+    div[class*='datePicker'] > .control-label {
         @extend .form-control-static;
     }
     // Label
@@ -170,10 +170,10 @@ textarea.form-control {
 
 // Fixes alignment bug on iPads / iPhones where datefield is not aligned vertically
 @media only screen and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 0) {
-    input[type="date"],
-    input[type="time"],
-    input[type="datetime-local"],
-    input[type="month"] {
+    input[type='date'],
+    input[type='time'],
+    input[type='datetime-local'],
+    input[type='month'] {
         line-height: 1;
     }
 }
@@ -182,5 +182,14 @@ textarea.form-control {
     // Target IE10+
     .form-group {
         display: block;
+    }
+}
+
+[dir='rtl'] {
+    // Dropdown input widget
+    select.form-control {
+        padding-right: 0;
+        padding-left: 30px;
+        background-position: #{$form-input-padding-x} center;
     }
 }
