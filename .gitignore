@@ -9,3 +9,10 @@
 
 # Windows File
 .thumb
+
+# VS Code
+.vscode/
+
+# Git
+.gitlab/
+.github/
