@@ -1,4 +1,4 @@
-import { spacing } from '../variables';
+import { spacing } from "../variables";
 
 export const com_mendix_widget_native_rating_Rating = (Rating = {
     container: {

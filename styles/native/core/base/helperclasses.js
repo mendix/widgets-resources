@@ -1,16 +1,16 @@
-import { spacing, background } from '../variables';
-import { Platform } from 'react-native';
+import { background, spacing } from "../variables";
+import { Platform } from "react-native";
 
 // Hide on Android
 export const hideOnAndroid = {
     container: {
-        display: Platform.select({ android: 'none' }),
+        display: Platform.select({ android: "none" }),
     },
 };
 // Hide on iOS
 export const hideOnIos = {
     container: {
-        display: Platform.select({ ios: 'none' }),
+        display: Platform.select({ ios: "none" }),
     },
 };
 
@@ -42,77 +42,77 @@ export const flexItem = {
 };
 export const flexRow = {
     container: {
-        flexDirection: 'row',
+        flexDirection: "row",
     },
 };
 export const flexWrap = {
     container: {
         // flexWrap controls whether children can wrap around after they hit the end of a flex container.
-        flexWrap: 'wrap',
+        flexWrap: "wrap",
     },
 };
 export const flexSpaceBetween = {
     container: {
-        justifyContent: 'space-between',
+        justifyContent: "space-between",
     },
 };
 export const flexSpaceEvenly = {
     container: {
-        justifyContent: 'space-evenly',
+        justifyContent: "space-evenly",
     },
 };
 export const flexSpaceAround = {
     container: {
-        justifyContent: 'space-around',
+        justifyContent: "space-around",
     },
 };
 export const alignChildrenStretch = {
     container: {
         // alignItems aligns children in the cross direction.
         // For example, if children are flowing vertically, alignItems controls how they align horizontally.
-        alignItems: 'stretch',
+        alignItems: "stretch",
     },
 };
 export const alignChildrenCenter = {
     container: {
         // alignItems aligns children in the cross direction.
         // For example, if children are flowing vertically, alignItems controls how they align horizontally.
-        alignItems: 'center',
+        alignItems: "center",
     },
 };
 export const alignChildrenEnd = {
     container: {
         // alignItems aligns children in the cross direction.
         // For example, if children are flowing vertically, alignItems controls how they align horizontally.
-        alignItems: 'flex-end',
+        alignItems: "flex-end",
     },
 };
 export const justifyChildrenSpaceAround = {
     container: {
         // justifyContent aligns children in the main direction.
         // For example, if children are flowing vertically, justifyContent controls how they align vertically.
-        justifyContent: 'space-around',
+        justifyContent: "space-around",
     },
 };
 export const justifyChildrenSpaceBetween = {
     container: {
         // justifyContent aligns children in the main direction.
         // For example, if children are flowing vertically, justifyContent controls how they align vertically.
-        justifyContent: 'space-between',
+        justifyContent: "space-between",
     },
 };
 export const justifyChildrenCenter = {
     container: {
         // justifyContent aligns children in the main direction.
         // For example, if children are flowing vertically, justifyContent controls how they align vertically.
-        justifyContent: 'center',
+        justifyContent: "center",
     },
 };
 export const justifyChildrenEnd = {
     container: {
         // justifyContent aligns children in the main direction.
         // For example, if children are flowing vertically, justifyContent controls how they align vertically.
-        justifyContent: 'flex-end',
+        justifyContent: "flex-end",
     },
 };
 export const childrenCenter = {
@@ -124,25 +124,25 @@ export const childrenCenter = {
 export const alignSelfStretch = {
     container: {
         // controls how a child aligns in the cross direction, overriding the alignItems of the parent.
-        alignSelf: 'stretch',
+        alignSelf: "stretch",
     },
 };
 export const alignSelfStart = {
     container: {
         // controls how a child aligns in the cross direction, overriding the alignItems of the parent.
-        alignSelf: 'flex-start',
+        alignSelf: "flex-start",
     },
 };
 export const alignSelfCenter = {
     container: {
         // controls how a child aligns in the cross direction, overriding the alignItems of the parent.
-        alignSelf: 'center',
+        alignSelf: "center",
     },
 };
 export const alignSelfEnd = {
     container: {
         // controls how a child aligns in the cross direction, overriding the alignItems of the parent.
-        alignSelf: 'flex-end',
+        alignSelf: "flex-end",
     },
 };
 

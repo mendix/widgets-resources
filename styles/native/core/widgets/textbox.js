@@ -1,4 +1,4 @@
-import { input, spacing } from '../variables';
+import { input, spacing } from "../variables";
 
 /* ==========================================================================
     Text Box

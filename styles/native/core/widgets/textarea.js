@@ -1,4 +1,4 @@
-import { TextBox, TextBoxVertical } from './textbox';
+import { TextBox, TextBoxVertical } from "./textbox";
 
 /* ==========================================================================
     Text Area
@@ -14,14 +14,14 @@ export const TextArea = {
     label: {
         // numberOfLines and all TextStyle properties are allowed
         ...TextBox.label,
-        height: '100%',
-        textAlignVertical: 'top',
+        height: "100%",
+        textAlignVertical: "top",
         paddingVertical: TextBox.input.paddingVertical,
     },
     input: {
         // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         ...TextBox.input,
-        textAlignVertical: 'top',
+        textAlignVertical: "top",
         paddingTop: TextBox.input.paddingVertical,
     },
     inputDisabled: {

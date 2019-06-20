@@ -1,5 +1,5 @@
-import { input } from '../variables';
-import { TextBox, TextBoxVertical } from './textbox';
+import { TextBox, TextBoxVertical } from "./textbox";
+import { input } from "../variables";
 
 /* ==========================================================================
     Date Picker

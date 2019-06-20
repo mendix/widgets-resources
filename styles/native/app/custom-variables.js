@@ -1,6 +1,6 @@
-import { Platform } from 'react-native';
-import { setColorBasedOnBackground, setContrastScale } from '../core/_helperfunctions/convertcolors';
-import adjustFont from '../core/_helperfunctions/adjustfont';
+import { setColorBasedOnBackground, setContrastScale } from "../core/_helperfunctions/convertcolors";
+import { Platform } from "react-native";
+import adjustFont from "../core/_helperfunctions/adjustfont";
 
 /*
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)
@@ -13,17 +13,17 @@ import adjustFont from '../core/_helperfunctions/adjustfont';
 //-------------------------------------------------------------------------------------------------------------------//
 // Brand Style
 export const brand = {
-    primary: '#0595DB',
-    success: '#76CA02',
-    warning: '#f99b1d',
-    danger: '#ed1c24',
+    primary: "#0595DB",
+    success: "#76CA02",
+    warning: "#f99b1d",
+    danger: "#ed1c24",
 };
 
 // Dark Mode
 const darkMode = false;
 
 // Background Colors
-const backgroundColor = darkMode ? '#000' : '#FFF';
+const backgroundColor = darkMode ? "#000" : "#FFF";
 const backgroundSecondaryContrast = darkMode ? 0.11 : 0.03;
 
 export const background = {
@@ -61,11 +61,11 @@ export const font = {
     sizeH5: adjustFont(14),
     sizeH6: adjustFont(12),
     color: setColorBasedOnBackground(background.primary),
-    weightLight: '100',
-    weightNormal: 'normal',
-    weightSemiBold: '600',
-    weightBold: 'bold',
-    family: Platform.select({ ios: 'System', android: 'normal' }),
+    weightLight: "100",
+    weightNormal: "normal",
+    weightSemiBold: "600",
+    weightBold: "bold",
+    family: Platform.select({ ios: "System", android: "normal" }),
 };
 
 // Spacing
@@ -86,31 +86,31 @@ export const button = {
 
     header: {
         color: brand.primary,
-        borderColor: 'transparent',
-        backgroundColor: 'transparent',
+        borderColor: "transparent",
+        backgroundColor: "transparent",
     },
     primary: {
-        color: '#FFF',
+        color: "#FFF",
         borderColor: brand.primary,
         backgroundColor: brand.primary,
     },
     secondary: {
         color: brand.primary,
         borderColor: brand.primary,
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
     },
     success: {
-        color: '#FFF',
+        color: "#FFF",
         borderColor: brand.success,
         backgroundColor: brand.success,
     },
     warning: {
-        color: '#FFF',
+        color: "#FFF",
         borderColor: brand.warning,
         backgroundColor: brand.warning,
     },
     danger: {
-        color: '#FFF',
+        color: "#FFF",
         borderColor: brand.danger,
         backgroundColor: brand.danger,
     },
@@ -125,7 +125,7 @@ export const input = {
     backgroundColor: background.primary,
     selectionColor: contrast.lower,
     placeholderTextColor: contrast.low,
-    underlineColorAndroid: Platform.select({ android: 'transparent' }),
+    underlineColorAndroid: Platform.select({ android: "transparent" }),
 
     // Sizes
     fontSize: font.size,
@@ -134,7 +134,7 @@ export const input = {
     borderRadius: border.radius,
 
     // Alignment
-    textAlign: 'left',
+    textAlign: "left",
     paddingHorizontal: spacing.small,
     paddingVertical: spacing.smaller,
 };

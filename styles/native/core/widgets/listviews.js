@@ -1,4 +1,4 @@
-import { border, background } from '../variables';
+import { background, border } from "../variables";
 
 /* ==========================================================================
     List View

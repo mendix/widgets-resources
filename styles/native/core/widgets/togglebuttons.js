@@ -1,5 +1,5 @@
-import { contrast, brand, font, background } from '../variables';
-import { Platform } from 'react-native';
+import { background, brand, contrast } from "../variables";
+import { Platform } from "react-native";
 
 /* ==========================================================================
     Segmented Controls

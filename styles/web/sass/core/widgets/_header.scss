@@ -14,8 +14,7 @@
     color: $m-header-color;
     border-bottom: 1px solid $border-color-default;
     background-color: $m-header-bg;
-    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
-
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
 
     // Reset mxui
     div.mx-header-left,
@@ -64,7 +63,7 @@
         }
     }
 
-    // Content magic 
+    // Content magic
     .mx-link {
         display: flex;
         align-items: center;
@@ -72,9 +71,7 @@
         -webkit-transition: all 0.2s;
         -moz-transition: all 0.2s;
         transition: all 0.2s;
-        a {
-            text-decoration: none;
-        }
+        text-decoration: none;
         .glyphicon {
             top: 0;
             font-size: 23px;
@@ -102,7 +99,7 @@
 }
 
 // RTL support
-body[dir="rtl"] {
+body[dir='rtl'] {
     .mx-header-left {
         order: 3;
     }

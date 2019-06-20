@@ -1,31 +1,29 @@
-import { Platform, Dimensions } from 'react-native';
-import { setColorBasedOnBackground, setContrastScale } from './_helperfunctions/convertcolors';
-import adjustFont from './_helperfunctions/adjustfont';
-import * as custom from '../app/custom-variables';
-import merge from './_helperfunctions/mergeobjects';
+import * as custom from "../app/custom-variables";
+import { Dimensions, Platform } from "react-native";
+import { setColorBasedOnBackground, setContrastScale } from "./_helperfunctions/convertcolors";
+import adjustFont from "./_helperfunctions/adjustfont";
+import merge from "./_helperfunctions/mergeobjects";
 
 //== Global variables
 //## Variables to be used during styling
 //-------------------------------------------------------------------------------------------------------------------//
 // System defined read-only values
-export const { height: deviceHeight, width: deviceWidth } = Dimensions.get('window');
+export const { height: deviceHeight, width: deviceWidth } = Dimensions.get("window");
 
 // Brand Style
 let brand = {
-    primary: '#0595DB',
-    success: '#76CA02',
-    warning: '#f99b1d',
-    danger: '#ed1c24',
+    primary: "#0595DB",
+    success: "#76CA02",
+    warning: "#f99b1d",
+    danger: "#ed1c24",
 };
 brand = merge(brand, custom.brand || {});
 
-
 let background = {
-    primary: '#FFF',
-    secondary: setContrastScale(0.03, '#FFF'),
+    primary: "#FFF",
+    secondary: setContrastScale(0.03, "#FFF"),
 };
 background = merge(background, custom.background || {});
-
 
 // Contrast (Gray) colors based on background.primary
 let contrast = {
@@ -39,7 +37,6 @@ let contrast = {
 };
 contrast = merge(contrast, custom.contrast || {});
 
-
 // Border Style
 let border = {
     color: setContrastScale(0.17, background.primary),
@@ -47,7 +44,6 @@ let border = {
     radius: 5,
 };
 border = merge(border, custom.border || {});
-
 
 // Font Styles
 let font = {
@@ -61,14 +57,13 @@ let font = {
     sizeH5: adjustFont(14),
     sizeH6: adjustFont(12),
     color: setColorBasedOnBackground(background.primary),
-    weightLight: '100',
-    weightNormal: 'normal',
-    weightSemiBold: '600',
-    weightBold: 'bold',
-    family: Platform.select({ ios: 'System', android: 'normal' }),
+    weightLight: "100",
+    weightNormal: "normal",
+    weightSemiBold: "600",
+    weightBold: "bold",
+    family: Platform.select({ ios: "System", android: "normal" }),
 };
 font = merge(font, custom.font || {});
-
 
 // Spacing
 let spacing = {
@@ -82,7 +77,6 @@ let spacing = {
 };
 spacing = merge(spacing, custom.spacing || {});
 
-
 // Button Styles
 let button = {
     fontSize: font.size,
@@ -90,37 +84,36 @@ let button = {
 
     header: {
         color: brand.primary,
-        borderColor: 'transparent',
-        backgroundColor: 'transparent',
+        borderColor: "transparent",
+        backgroundColor: "transparent",
     },
     primary: {
-        color: '#FFF',
+        color: "#FFF",
         borderColor: brand.primary,
         backgroundColor: brand.primary,
     },
     secondary: {
         color: brand.primary,
         borderColor: brand.primary,
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
     },
     success: {
-        color: '#FFF',
+        color: "#FFF",
         borderColor: brand.success,
         backgroundColor: brand.success,
     },
     warning: {
-        color: '#FFF',
+        color: "#FFF",
         borderColor: brand.warning,
         backgroundColor: brand.warning,
     },
     danger: {
-        color: '#FFF',
+        color: "#FFF",
         borderColor: brand.danger,
         backgroundColor: brand.danger,
     },
 };
 button = merge(button, custom.button || {});
-
 
 //Input Styles
 let input = {
@@ -132,7 +125,7 @@ let input = {
     disabledBackgroundColor: contrast.lowest,
     selectionColor: contrast.lower,
     placeholderTextColor: contrast.low,
-    underlineColorAndroid: Platform.select({ android: 'transparent' }),
+    underlineColorAndroid: Platform.select({ android: "transparent" }),
 
     // Sizes
     fontSize: font.size,
@@ -141,12 +134,10 @@ let input = {
     borderRadius: border.radius,
 
     // Alignment
-    textAlign: 'left',
+    textAlign: "left",
     paddingHorizontal: spacing.small,
     paddingVertical: spacing.smaller,
 };
 input = merge(input, custom.input || {});
-
-
 
 export { brand, background, border, contrast, font, spacing, button, input };

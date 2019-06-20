@@ -1,4 +1,4 @@
-import { contrast, spacing, font } from '../../../core/variables';
+import { contrast, font, spacing } from '../../../core/variables';
 import { Platform } from 'react-native';
 
 /* ==========================================================================

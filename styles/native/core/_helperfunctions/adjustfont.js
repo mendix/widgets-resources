@@ -1,5 +1,5 @@
-import { deviceWidth, deviceHeight } from '../variables';
-import { PixelRatio } from 'react-native';
+import { deviceHeight, deviceWidth } from "../variables";
+import { PixelRatio } from "react-native";
 
 const pixelRatio = PixelRatio.get();
 

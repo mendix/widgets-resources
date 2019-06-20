@@ -1,5 +1,5 @@
-import { contrast, brand, background, border } from '../variables';
-import { Platform } from 'react-native';
+import { background, border, brand, contrast } from "../variables";
+import { Platform } from "react-native";
 
 /* ==========================================================================
     Slider
@@ -10,7 +10,7 @@ import { Platform } from 'react-native';
 export const com_mendix_widget_native_slider_Slider = (Slider = {
     container: {
         // All ViewStyle properties are allowed
-        alignSelf: 'stretch',
+        alignSelf: "stretch",
     },
     track: {
         // All ViewStyle properties are allowed

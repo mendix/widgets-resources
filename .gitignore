@@ -1,7 +1,6 @@
 # SASS cache
 **/.sass-cache
 **/.sass-cache/*
-*.css.map
 
 **/directoryList*.md
 
@@ -10,3 +9,10 @@
 
 # Windows File
 .thumb
+
+# VS Code
+.vscode/
+
+# Git
+.gitlab/
+.github/

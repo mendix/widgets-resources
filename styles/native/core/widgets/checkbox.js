@@ -1,7 +1,7 @@
-import { Platform } from 'react-native';
-import { brand, spacing, contrast } from '../variables';
-import { TextBox, TextBoxVertical } from './textbox';
-import { anyColorToRgbString } from '../_helperfunctions/convertcolors';
+import { TextBox, TextBoxVertical } from "./textbox";
+import { brand, contrast, spacing } from "../variables";
+import { Platform } from "react-native";
+import { anyColorToRgbString } from "../_helperfunctions/convertcolors";
 
 /* ==========================================================================
     CheckBox
@@ -14,7 +14,7 @@ export const CheckBox = {
         // All ViewStyle properties are allowed
         ...TextBox.container,
         paddingVertical: spacing.smallest,
-        justifyContent: 'center',
+        justifyContent: "center",
     },
     label: {
         // numberOfLines and all TextStyle properties are allowed
@@ -22,12 +22,15 @@ export const CheckBox = {
     },
     input: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
         marginRight: Platform.select({ android: -3 }),
         thumbColorOn: brand.primary,
         trackColorOn: `rgba(${anyColorToRgbString(brand.primary)},0.2)`,
         thumbColorOff: contrast.low,
         trackColorOff: `rgba(${anyColorToRgbString(contrast.low)},0.2)`,
+    },
+    inputDisabled: {
+        opacity: Platform.select({ android: 0.5 }),
     },
     inputError: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
@@ -40,7 +43,7 @@ export const CheckBox = {
     validationMessage: {
         // All TextStyle properties are allowed
         ...TextBox.validationMessage,
-        alignSelf: 'stretch',
+        alignSelf: "stretch",
     },
 };
 
@@ -48,7 +51,7 @@ export const CheckBoxVertical = {
     container: TextBoxVertical.container,
     label: TextBoxVertical.label,
     input: {
-        alignSelf: 'flex-start',
+        alignSelf: "flex-start",
     },
     inputError: TextBoxVertical.inputError,
     validationMessage: TextBoxVertical.validationMessage,

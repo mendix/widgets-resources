@@ -9,7 +9,7 @@
 export default function(...sources) {
     function mergeDeep(target, ...sources) {
         function isObject(item) {
-            return item && typeof item === 'object' && !Array.isArray(item);
+            return item && typeof item === "object" && !Array.isArray(item);
         }
 
         if (!sources.length) return target;

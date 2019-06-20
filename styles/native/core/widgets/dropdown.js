@@ -1,5 +1,5 @@
-import { input } from '../variables';
-import { TextBoxVertical, TextBox } from './textbox';
+import { TextBox, TextBoxVertical } from "./textbox";
+import { input } from "../variables";
 
 /* ==========================================================================
     Drop Down
