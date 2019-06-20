@@ -796,8 +796,8 @@ exports[`Color Picker renders 1`] = `
       </View>
     </View>
     <View
-      animateTransitions={true}
-      animationType="spring"
+      animateTransitions={false}
+      animationType="timing"
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -1676,8 +1676,8 @@ exports[`Color Picker renders 1`] = `
       </View>
     </View>
     <View
-      animateTransitions={true}
-      animationType="spring"
+      animateTransitions={false}
+      animationType="timing"
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -2556,8 +2556,8 @@ exports[`Color Picker renders 1`] = `
       </View>
     </View>
     <View
-      animateTransitions={true}
-      animationType="spring"
+      animateTransitions={false}
+      animationType="timing"
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -3461,8 +3461,8 @@ exports[`Color Picker renders with alpha slider 1`] = `
       </View>
     </View>
     <View
-      animateTransitions={true}
-      animationType="spring"
+      animateTransitions={false}
+      animationType="timing"
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -4341,8 +4341,8 @@ exports[`Color Picker renders with alpha slider 1`] = `
       </View>
     </View>
     <View
-      animateTransitions={true}
-      animationType="spring"
+      animateTransitions={false}
+      animationType="timing"
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -5221,8 +5221,8 @@ exports[`Color Picker renders with alpha slider 1`] = `
       </View>
     </View>
     <View
-      animateTransitions={true}
-      animationType="spring"
+      animateTransitions={false}
+      animationType="timing"
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -6101,8 +6101,8 @@ exports[`Color Picker renders with alpha slider 1`] = `
       </View>
     </View>
     <View
-      animateTransitions={true}
-      animationType="spring"
+      animateTransitions={false}
+      animationType="timing"
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -7007,8 +7007,8 @@ exports[`Color Picker renders with custom style 1`] = `
       </View>
     </View>
     <View
-      animateTransitions={true}
-      animationType="spring"
+      animateTransitions={false}
+      animationType="timing"
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -7887,8 +7887,8 @@ exports[`Color Picker renders with custom style 1`] = `
       </View>
     </View>
     <View
-      animateTransitions={true}
-      animationType="spring"
+      animateTransitions={false}
+      animationType="timing"
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -8767,8 +8767,8 @@ exports[`Color Picker renders with custom style 1`] = `
       </View>
     </View>
     <View
-      animateTransitions={true}
-      animationType="spring"
+      animateTransitions={false}
+      animationType="timing"
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}

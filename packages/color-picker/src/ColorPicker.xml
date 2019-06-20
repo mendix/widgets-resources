@@ -39,11 +39,11 @@
                     <description>Enables a slider to change the intensity of the color.</description>
                 </property>
                 <property key="showLightness" type="boolean" defaultValue="true">
-                    <caption>Lightness</caption>
+                    <caption>Brightness</caption>
                     <description>Enables a slider to make the color darker or lighter.</description>
                 </property>
                 <property key="showAlpha" type="boolean" defaultValue="false">
-                    <caption>Alpha</caption>
+                    <caption>Transparency</caption>
                     <description>Enables a slider to make the color more transparent or opaque.</description>
                 </property>
             </propertyGroup>
