@@ -47,6 +47,14 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
     secondaryButtonCaptionContainer: {
         overflow: 'hidden',
         marginHorizontal: 15,
+        shadowColor: contrast.lower,
+        shadowOpacity: 0.9,
+        shadowRadius: 4,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        elevation: 2,
     },
 });
 
