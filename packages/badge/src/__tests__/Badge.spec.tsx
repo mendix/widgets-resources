@@ -27,12 +27,12 @@ describe("Badge", () => {
             {
                 container: { backgroundColor: "red", borderColor: "green" },
                 badge: { backgroundColor: "red" },
-                text: { color: "red" }
+                caption: { color: "red" }
             },
             {
                 container: { backgroundColor: "green" },
                 badge: { backgroundColor: "green" },
-                text: { color: "green" }
+                caption: { color: "green" }
             }
         ];
         const component = render(<Badge {...defaultProps} style={style} />);
