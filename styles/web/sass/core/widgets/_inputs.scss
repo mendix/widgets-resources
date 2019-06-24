@@ -187,22 +187,10 @@ textarea.form-control {
 }
 
 [dir='rtl'] {
-<<<<<<< Updated upstream
     // Dropdown input widget
     select.form-control {
-        padding-right: 0;
+        padding-right: 30px;
         padding-left: 30px;
         background-position: #{$form-input-padding-x} center;
-=======
-<<<<<<< Updated upstream
-    .form-control-static + .control-label {
-        margin-left: 0;
-        margin-right: $form-label-gutter;
-=======
-    // Dropdown input widget
-    select.form-control {
-        background-position: #{$form-input-padding-x} center;
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     }
 }
