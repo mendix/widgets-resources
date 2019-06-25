@@ -1,29 +1,16 @@
-import { transformJsonContent } from "./functions";
+import { transformPackageContent } from "./functions";
 import { parseString } from "xml2js";
 import PluginError from "plugin-error";
 import File from "vinyl";
-import replaceExt from "replace-ext";
 import map from "map-stream";
 
-interface Options {
-    widgetName: string;
-}
-
-function typingGenerator(options: Options) {
-    function modifyContents(file: File, cb: (error: Error | null, file?: any) => void): void {
-        if (!options || !options.hasOwnProperty("widgetName") || !options.widgetName) {
+function typingGenerator() {
+    function modifyContents(file: File, cb: (error: Error | null) => void): void {
+        if (!file || file.isNull()) {
             return cb(
                 new PluginError(
                     "pluggable-widgets-typing-generator",
-                    `Wrong parameters, use {widgetName: string} instead`
-                )
-            );
-        }
-        if (file.isNull()) {
-            return cb(
-                new PluginError(
-                    "pluggable-widgets-typing-generator",
-                    `Empty XML, please check your src folder for file ${options.widgetName}.xml`
+                    `Empty XML, please check your src folder for file package.xml`
                 )
             );
         }
@@ -37,7 +24,6 @@ function typingGenerator(options: Options) {
             parseString(file.contents.toString("utf8"), {}, function(err: Error, result: any) {
                 if (err) cb(err);
                 content = result;
-                file.path = replaceExt(file.path, "Props.d.ts");
             });
         }
 
@@ -45,14 +31,14 @@ function typingGenerator(options: Options) {
             return cb(
                 new PluginError(
                     "pluggable-widgets-typing-generator",
-                    `Empty XML, please check your src folder for file ${options.widgetName}.xml`
+                    `Empty XML, please check your src folder for file package.xml`
                 )
             );
         }
 
-        const newContent = transformJsonContent(content, options.widgetName);
-        file.contents = Buffer.from(newContent);
-        cb(null, file);
+        transformPackageContent(content, file.base + "/");
+
+        cb(null);
     }
 
     return map(modifyContents);

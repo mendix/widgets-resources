@@ -34,10 +34,7 @@ import { typingGenerator } from "@mendix/pluggable-widgets-typing-generator";
 ```
 function generateTypings() {
     return gulp
-        .src(`./src/NAMEOFYOURWIDGET.xml`)
-        .pipe(typingGenerator({widgetName: NAMEOFYOURWIDGET}))
-        .pipe(gulp.dest("./typings"));
+        .src("./src/package.xml")
+        .pipe(typingGenerator());
 }
 ```
-
-Make sure to change NAMEOFYOURWIDGET for the real name of your widget

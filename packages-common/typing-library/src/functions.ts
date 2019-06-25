@@ -1,5 +1,9 @@
-import { AttributeTypes, MendixXML, Property, PropertyGroup, PropertyType } from "./typings";
+import { AttributeTypes, MendixXML, PackageContent, Property, PropertyGroup, PropertyType } from "./typings";
 import PluginError from "plugin-error";
+import { readFileSync, writeFileSync } from "fs";
+import { parseString } from "xml2js";
+import replaceExt from "replace-ext";
+import path from "path";
 
 /**
  * Translate the XML property type for Javascript type
@@ -402,4 +406,37 @@ export interface ${mobile ? widgetName : widgetName + "Container"}Props${mobile 
 ${mainTypes}
 }${previewContents}
 `;
+};
+
+export const transformPackageContent = (content: PackageContent, basePath: string): void => {
+    try {
+        content.package.clientModule[0].widgetFiles[0].widgetFile.forEach(file => {
+            let content: MendixXML = {};
+            let output = null;
+            if (file.$.path) {
+                const fileContent = readFileSync(path.join(basePath, file.$.path), "utf-8");
+                parseString(fileContent, {}, function(err: Error, result: MendixXML) {
+                    if (err) {
+                        throw new PluginError("Typing generation", {
+                            message: err.message
+                        });
+                    }
+                    content = result;
+                    output = replaceExt(file.$.path, "Props.d.ts");
+                });
+                const generatedContent = transformJsonContent(content, filterName(file.$.path));
+                writeFileSync(path.join(basePath, "../typings/" + output), generatedContent);
+            }
+        });
+    } catch (e) {
+        throw new PluginError("Typing generation", {
+            message: "[XML] Incorrect package.xml file, please check Mendix Documentation.."
+        });
+    }
+};
+
+const filterName = (file: string): string => {
+    file = file.replace(".xml", "");
+    const parts = file.split("/");
+    return parts.length > 0 ? parts[parts.length - 1] : "";
 };
