@@ -6,11 +6,14 @@ branches:
         - master
 
 node_js:
+    - "12.4.0"
+    - "11.15.0"
     - "10.15.0"
+    - "9.11.2"
+    - "8.16.0"
 
 script:
-    - npm install
+    - npm run build
 
 after_script:
-    - npm run build
     - npm run test
