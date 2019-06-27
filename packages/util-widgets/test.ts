@@ -1,5 +1,4 @@
-import { ActionValue, DynamicValue, EditableValue, ValueStatus } from "@mendix/pluggable-widgets-api/properties";
-import {} from "jest";
+import { ActionValue, DynamicValue, EditableValue, ValueStatus } from "mendix";
 
 export function dynamicValue<T>(value?: T): DynamicValue<T> {
     return value == null ? { status: ValueStatus.Loading, value: undefined } : { status: ValueStatus.Available, value };

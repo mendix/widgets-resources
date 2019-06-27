@@ -1,6 +1,6 @@
-import { Icon } from "@mendix/pluggable-widgets-api/components/native/Icon";
-import { ActionValue, DynamicValue } from "@mendix/pluggable-widgets-api/properties";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { ActionValue, DynamicValue } from "mendix";
+import { Icon } from "mendix/components/native/Icon";
 import { Component, createElement, createRef } from "react";
 import { ActivityIndicator, Platform, View } from "react-native";
 import MapView, { LatLng, Marker as MarkerView } from "react-native-maps";

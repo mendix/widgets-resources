@@ -76,16 +76,6 @@ function inlineNativeAssets(): Plugin {
     };
 }
 
-function mendixExternalReferences(): Plugin {
-    return {
-        name: "mendix-external-modules",
-        resolveId: id =>
-            id && /^@mendix\/pluggable-widgets-api\/components\//.test(id)
-                ? id.replace("@mendix/pluggable-widgets-api/components", "mendix/components")
-                : undefined
-    };
-}
-
 function isExternal(id: string): boolean {
     const externals = [
         "big.js",
@@ -131,7 +121,6 @@ export const rollupConfig: RollupOptions = {
             }
         }),
         fixPreservedModules(),
-        inlineNativeAssets(),
-        mendixExternalReferences()
+        inlineNativeAssets()
     ]
 };

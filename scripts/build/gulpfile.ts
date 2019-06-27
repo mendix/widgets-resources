@@ -56,10 +56,7 @@ function clean() {
 }
 
 function generateTypings() {
-    return gulp
-        .src(`./src/${widgetName}.xml`)
-        .pipe(typingGenerator({ widgetName }))
-        .pipe(gulp.dest("./typings"));
+    return gulp.src(`./src/package.xml`).pipe(typingGenerator());
 }
 
 async function bundle(): Promise<RollupOutput> {
