@@ -1,6 +1,6 @@
 import { AttributeTypes, MendixXML, PackageContent, Property, PropertyGroup, PropertyType } from "./typings";
 import PluginError from "plugin-error";
-import { readFileSync, writeFileSync } from "fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { parseString } from "xml2js";
 import replaceExt from "replace-ext";
 import path from "path";
@@ -410,6 +410,10 @@ ${mainTypes}
 
 export const transformPackageContent = (content: PackageContent, basePath: string): void => {
     try {
+        const folder = path.join(basePath, "../typings/");
+        if (!existsSync(folder)) {
+            mkdirSync(folder);
+        }
         content.package.clientModule[0].widgetFiles[0].widgetFile.forEach(file => {
             let content: MendixXML = {};
             let output = null;
@@ -425,7 +429,7 @@ export const transformPackageContent = (content: PackageContent, basePath: strin
                     output = replaceExt(file.$.path, "Props.d.ts");
                 });
                 const generatedContent = transformJsonContent(content, filterName(file.$.path));
-                writeFileSync(path.join(basePath, "../typings/" + output), generatedContent);
+                writeFileSync(folder + output, generatedContent);
             }
         });
     } catch (e) {
