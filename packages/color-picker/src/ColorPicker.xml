@@ -49,7 +49,7 @@
             </propertyGroup>
             <propertyGroup caption="Events">
                 <property key="onChange" type="action" required="false">
-                    <caption>On end change</caption>
+                    <caption>On change</caption>
                     <description>Called when the user releases the handle and the value has changed.</description>
                 </property>
             </propertyGroup>
