@@ -31,7 +31,7 @@
     "url": "https://github.com/<%- author %>/<%- packageName %>/issues"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^0.1.1",
+    "@mendix/pluggable-widgets-tools": "^0.1.5",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-native": "^0.57.8"

@@ -29,7 +29,7 @@
   },
   "license": "<%- license %>",
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^0.1.1",
+    "@mendix/pluggable-widgets-tools": "^0.1.5",
     "@types/big.js": "^4.0.5",
     "@types/classnames": "^2.2.4",<% if (e2eTests) { %>
     "@types/webdriverio": "^4.13.0",<% } %><% if (unitTests || e2eTests) { %>
