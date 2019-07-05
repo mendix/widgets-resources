@@ -181,6 +181,13 @@ export class RichText extends Component<RichTextProps> {
             }
             if (editor && props.tabAction === "indent") {
                 editor.addEventListener("keydown", event => event.stopPropagation());
+                editor.addEventListener("touchend", event => event.stopPropagation());
+            } else if (editor) {
+                editor.addEventListener("touchend", _ => {
+                    if (this.quill && !this.quill.hasFocus()) {
+                        this.quill.focus();
+                    }
+                });
             }
         }
     }
