@@ -51,3 +51,6 @@ the Video Sizes to calculate Aspect Ratio.
 <allow-navigation href="*://*noembed.com/*" />
 <allow-navigation href="*://*.mp4" />
 ```
+
+### Limitations
+- File hosted in Mendix Server cannot be played in Safari browser
