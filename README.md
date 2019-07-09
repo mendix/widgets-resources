@@ -13,6 +13,7 @@ A bundle of commonly used widgets & nanoflow actions for building native mobile 
 | [App events][]             | Trigger actions based on load, network status and timer events. |
 | [Badge][]                  | Display text or a value as a badge.                             |
 | [Barcode scanner][]        | Scan barcode and QR code values.                                |
+| [Color Picker][]           | Allows the user to select colors                                |
 | [Feedback][]               | Allow users to submit feedback directly into the app project.   |
 | [Floating action button][] | Display a circular floating icon button.                        |
 | [Maps][]                   | Show locations on an interactive map.                           |
@@ -31,6 +32,7 @@ A bundle of commonly used widgets & nanoflow actions for building native mobile 
 [app events]: https://github.com/mendix/native-mobile-resources/blob/master/packages/app-events
 [badge]: https://github.com/mendix/native-mobile-resources/blob/master/packages/badge
 [barcode scanner]: https://github.com/mendix/native-mobile-resources/blob/master/packages/barcode-scanner
+[color picker]: https://github.com/mendix/native-mobile-resources/blob/master/packages/color-picker
 [feedback]: https://github.com/mendix/native-mobile-resources/blob/master/packages/feedback
 [floating action button]: https://github.com/mendix/native-mobile-resources/blob/master/packages/floating-action-button
 [maps]: https://github.com/mendix/native-mobile-resources/blob/master/packages/maps
