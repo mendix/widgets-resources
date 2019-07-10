@@ -18,12 +18,12 @@ export const card = {
         marginBottom: spacing.regular,
 
         elevation: 1.5,
-        shadowColor: contrast.lowest,
-        shadowOpacity: 0.9,
+        shadowColor: contrast.lower,
+        shadowOpacity: 0.7,
         shadowRadius: 10,
         shadowOffset: {
             width: 0,
-            height: 5,
+            height: 2,
         },
         ...Platform.select({
             android: {
@@ -42,9 +42,28 @@ export const cardTitle = {
         marginHorizontal: spacing.small,
         fontSize: font.sizeLarge,
         marginBottom: spacing.large,
+    },
+    text: {
         color: contrast.high,
     },
 };
 
 //== Variations
 //-------------------------------------------------------------------------------------------------------------------//
+
+export const cardForm = {
+    container: {
+        borderRadius: border.radius,
+        paddingHorizontal: spacing.large,
+        paddingVertical: spacing.larger,
+        backgroundColor: background.primary,
+        elevation: 1.5,
+        shadowColor: contrast.lower,
+        shadowOpacity: 0.7,
+        shadowRadius: 10,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+    },
+};
