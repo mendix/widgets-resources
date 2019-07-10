@@ -1,4 +1,4 @@
-import { input, spacing } from "../variables";
+import { input, spacing } from '../variables';
 
 /* ==========================================================================
     Text Box
@@ -13,7 +13,7 @@ export const TextBox = {
     label: {
         // numberOfLines and all TextStyle properties are allowed
         numberOfLines: 1,
-        color: input.color,
+        color: input.labelColor,
         fontSize: input.fontSize,
         textAlign: input.textAlign,
         marginRight: spacing.small,
@@ -55,7 +55,7 @@ export const TextBoxVertical = {
     container: {},
     label: {
         numberOfLines: 1,
-        color: input.color,
+        color: input.labelColor,
         fontSize: input.fontSize,
         textAlign: input.textAlign,
         marginBottom: spacing.smallest,

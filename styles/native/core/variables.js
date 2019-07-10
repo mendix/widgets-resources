@@ -118,8 +118,9 @@ button = merge(button, custom.button || {});
 //Input Styles
 let input = {
     // Colors
-    color: contrast.higher,
+    color: contrast.lower,
     errorColor: brand.danger,
+    labelColor: contrast.low,
     borderColor: contrast.lower,
     backgroundColor: background.primary,
     disabledBackgroundColor: contrast.lowest,
@@ -136,7 +137,7 @@ let input = {
     // Alignment
     textAlign: 'left',
     paddingHorizontal: spacing.small,
-    paddingVertical: spacing.smaller,
+    paddingVertical: spacing.small,
 };
 input = merge(input, custom.input || {});
 

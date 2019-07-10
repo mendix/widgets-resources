@@ -1,5 +1,5 @@
-import { brand, contrast, font, spacing } from "../variables";
-import { Platform } from "react-native";
+import { brand, contrast, font, spacing } from '../variables';
+import { Platform } from 'react-native';
 
 /* ==========================================================================
     Text
@@ -20,51 +20,63 @@ export const Text = {
 };
 
 export const TextHeading1 = {
+    container: {
+        marginBottom: spacing.small,
+    },
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH1,
         lineHeight: font.sizeH1,
-        marginBottom: spacing.small,
     },
 };
 export const TextHeading2 = {
+    container: {
+        marginBottom: spacing.small,
+    },
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH2,
         lineHeight: font.sizeH2,
-        marginBottom: spacing.small,
     },
 };
 export const TextHeading3 = {
+    container: {
+        marginBottom: spacing.small,
+    },
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH3,
         lineHeight: font.sizeH3,
-        marginBottom: spacing.small,
     },
 };
 export const TextHeading4 = {
+    container: {
+        marginBottom: spacing.smaller,
+    },
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH4,
         lineHeight: font.sizeH4,
-        marginBottom: spacing.smaller,
     },
 };
 export const TextHeading5 = {
+    container: {
+        marginBottom: spacing.smallest,
+    },
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH5,
         lineHeight: font.sizeH5,
-        marginBottom: spacing.smallest,
     },
 };
 export const TextHeading6 = {
+    container: {
+        marginBottom: spacing.smallest,
+    },
     text: {
         fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
         fontSize: font.sizeH6,
         lineHeight: font.sizeH6,
-        marginBottom: spacing.smallest,
     },
 };
 
@@ -95,7 +107,7 @@ export const textDanger = {
 };
 export const textWhite = {
     text: {
-        color: "#FFF",
+        color: '#FFF',
     },
 };
 
@@ -138,17 +150,17 @@ export const textContrastHighest = {
 // Text Alignment
 export const textLeft = {
     text: {
-        textAlign: "left",
+        textAlign: 'left',
     },
 };
 export const textCenter = {
     text: {
-        textAlign: "center",
+        textAlign: 'center',
     },
 };
 export const textRight = {
     text: {
-        textAlign: "right",
+        textAlign: 'right',
     },
 };
 
@@ -194,16 +206,16 @@ export const textLarge = {
 // Text Transformations
 export const textLowercase = {
     text: {
-        textTransform: "lowercase",
+        textTransform: 'lowercase',
     },
 };
 export const textUppercase = {
     text: {
-        textTransform: "uppercase",
+        textTransform: 'uppercase',
     },
 };
 export const textCapitalize = {
     text: {
-        textTransform: "capitalize",
+        textTransform: 'capitalize',
     },
 };
