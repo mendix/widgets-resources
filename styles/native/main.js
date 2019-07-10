@@ -1,7 +1,9 @@
 //================================== CORE ==================================\\
 
 // Base
+export * from "./core/base/flex";
 export * from "./core/base/helperclasses";
+export * from "./core/base/spacing";
 
 // Components
 export * from "./core/widgets/activityindicator";
