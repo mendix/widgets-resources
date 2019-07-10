@@ -21,7 +21,7 @@ Displays images in a carousel.
 Mendix 7.13.1
 
 ## Test project
-https://carousel.mxapps.io/
+https://carouselwidget.mxapps.io/
 
 ## Usage
 The widget requires a context.
