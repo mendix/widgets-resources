@@ -104,6 +104,7 @@ textarea.form-control {
 // Form Group
 .form-group {
     display: flex;
+    flex-direction: row;
     margin-bottom: $form-group-margin-bottom;
 
     & > div[class*='col-'] {
@@ -133,6 +134,10 @@ textarea.form-control {
     .mx-validation-message {
         flex-basis: 100%;
     }
+
+    &.no-columns:not(.label-after) {
+        flex-direction: column;
+    }
 }
 
 .form-group.label-after {
@@ -150,12 +155,6 @@ textarea.form-control {
     flex: 1;
 }
 
-// Form group orientation
-.form-horizontal .form-group,
-.form-vertical .form-group:not(.label-after) {
-    flex-direction: column;
-}
-
 // Targets only webkit iOS devices
 .dj_webkit.dj_ios .form-control {
     transform: translateZ(0);
@@ -163,9 +162,6 @@ textarea.form-control {
 
 @media only screen and (min-width: $screen-sm) {
     .form-horizontal {
-        .form-group {
-            flex-direction: row;
-        }
         .control-label {
             padding-top: $form-input-padding-y;
             padding-bottom: $form-input-padding-y;
