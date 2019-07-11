@@ -51,6 +51,36 @@ export const cardTitle = {
 //== Variations
 //-------------------------------------------------------------------------------------------------------------------//
 
+export const cardAction = {
+    container: {
+        flex: 1,
+        flexBasis: '40%',
+        aspectRatio: 1,
+        padding: spacing.regular,
+        borderWidth: 1,
+        borderColor: border.color,
+        borderRadius: border.radius,
+    },
+};
+
+export const cardActionImageWrapper = {
+    container: {
+        marginHorizontal: spacing.smaller,
+        marginBottom: spacing.small,
+        overflow: 'hidden',
+    },
+};
+export const cardActionImage = {
+    container: {
+        // flexDirection: 'column',
+    },
+    image: {
+        maxHeight: 80,
+        // flexShrink: 1,
+        resizeMode: 'contain',
+    },
+};
+
 export const cardForm = {
     container: {
         borderRadius: border.radius,
