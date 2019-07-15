@@ -1,6 +1,6 @@
-import { brand, button, contrast, font, spacing } from "../variables";
-import { Platform } from "react-native";
-import merge from "../_helperfunctions/mergeobjects";
+import { brand, button, contrast, font, spacing } from '../variables';
+import { Platform } from 'react-native';
+import merge from '../_helperfunctions/mergeobjects';
 
 /* ==========================================================================
     Button
@@ -12,12 +12,12 @@ export const ActionButton = {
     container: {
         // Ripplecolor and all ViewStyle properties are allowed
         borderWidth: 1,
-        borderStyle: "solid",
+        borderStyle: 'solid',
         // rippleColor: ,
         borderColor: button.primary.borderColor,
         backgroundColor: button.primary.backgroundColor,
-        alignItems: "center",
-        justifyContent: "center",
+        alignItems: 'center',
+        justifyContent: 'center',
         borderRadius: button.borderRadius,
         ...Platform.select({
             ios: {
@@ -33,7 +33,7 @@ export const ActionButton = {
     icon: {
         // Size, Color and all ViewStyle properties are allowed
         color: button.primary.color,
-        fontSize: font.sizeSmall,
+        size: font.sizeSmall,
     },
     caption: {
         // All TextStyle properties are allowed
@@ -112,23 +112,23 @@ export const btnDanger = {
     },
 };
 
-// Button sizes
-export const btnSmall = {
-    icon: {
-        size: font.sizeSmall,
-    },
-    caption: {
-        fontSize: font.sizeSmall,
-    },
-};
-export const btnLarge = {
-    icon: {
-        size: font.sizeLarge,
-    },
-    caption: {
-        fontSize: font.sizeLarge,
-    },
-};
+// // Button sizes
+// export const btnSmall = {
+//     icon: {
+//         size: font.sizeSmall,
+//     },
+//     caption: {
+//         fontSize: font.sizeSmall,
+//     },
+// };
+// export const btnLarge = {
+//     icon: {
+//         size: font.sizeLarge,
+//     },
+//     caption: {
+//         fontSize: font.sizeLarge,
+//     },
+// };
 
 //== Extra Classes
 //## Helper classes to change the look and feel of the widget
@@ -138,7 +138,7 @@ export const btnLarge = {
 export const btnIconPrimary = {
     container: {
         borderWidth: 0,
-        backgroundColor: "transparent",
+        backgroundColor: 'transparent',
         paddingVertical: 0,
         paddingHorizontal: 0,
     },
@@ -175,8 +175,8 @@ export const btnAsText = {
         maxHeight: 22,
         borderWidth: 0,
         borderRadius: 0,
-        rippleColor: "rgba(0,0,0,0.05)",
-        backgroundColor: "transparent",
+        rippleColor: 'rgba(0,0,0,0.05)',
+        backgroundColor: 'transparent',
         paddingVertical: 0,
         paddingHorizontal: 0,
     },
