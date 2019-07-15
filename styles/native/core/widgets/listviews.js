@@ -1,4 +1,4 @@
-import { background, border } from "../variables";
+import { background, border } from '../variables';
 
 /* ==========================================================================
     List View
@@ -23,14 +23,12 @@ export const ListView = {
 export const listItemBorderBottom = {
     listItem: {
         borderColor: border.color,
-        backgroundColor: background.primary,
         borderBottomWidth: border.width,
     },
 };
 export const listItemBorderRight = {
     listItem: {
         borderColor: border.color,
-        backgroundColor: background.primary,
         borderRightWidth: border.width,
     },
 };
