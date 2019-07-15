@@ -5,18 +5,9 @@ import { Platform } from 'react-native';
     Cards
 
 ========================================================================== */
-export const card = {
+
+export const cardShadow = {
     container: {
-        borderRadius: border.radius,
-        backgroundColor: background.primary,
-
-        alignItems: 'center',
-        paddingHorizontal: spacing.largest,
-        paddingTop: spacing.regular,
-        paddingBottom: spacing.large,
-        marginHorizontal: spacing.regular,
-        marginBottom: spacing.regular,
-
         elevation: 1.5,
         shadowColor: contrast.lower,
         shadowOpacity: 0.7,
@@ -25,12 +16,29 @@ export const card = {
             width: 0,
             height: 2,
         },
+    },
+};
+
+export const card = {
+    container: {
+        borderRadius: border.radius,
+        backgroundColor: background.primary,
+
+        // alignItems: 'center',
+        // paddingHorizontal: spacing.large,
+        // paddingVertical: spacing.large,
+        // paddingTop: spacing.regular,
+        // paddingBottom: spacing.large,
+        // marginHorizontal: spacing.regular,
+        marginBottom: spacing.regular,
+
         ...Platform.select({
             android: {
                 borderWidth: 1,
                 borderColor: contrast.lowest,
             },
         }),
+        ...cardShadow.container,
     },
 };
 
@@ -45,6 +53,18 @@ export const cardTitle = {
     },
     text: {
         color: contrast.high,
+    },
+};
+
+export const cardImage = {
+    container: {
+        flex: -1,
+        // height: 'auto',
+    },
+    image: {
+        width: '100%',
+        height: 250,
+        resizeMode: 'contain',
     },
 };
 
@@ -71,15 +91,13 @@ export const cardActionImageWrapper = {
     },
 };
 export const cardActionImage = {
-    container: {
-        // flexDirection: 'column',
-    },
     image: {
         maxHeight: 80,
-        // flexShrink: 1,
         resizeMode: 'contain',
     },
 };
+
+//==========================================================================================\\
 
 export const cardForm = {
     container: {
@@ -87,13 +105,59 @@ export const cardForm = {
         paddingHorizontal: spacing.large,
         paddingVertical: spacing.larger,
         backgroundColor: background.primary,
-        elevation: 1.5,
-        shadowColor: contrast.lower,
-        shadowOpacity: 0.7,
-        shadowRadius: 10,
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
+        ...cardShadow.container,
     },
 };
+
+//==========================================================================================\\
+
+export const cardProduct = {
+    container: {
+        borderRadius: border.radius,
+        backgroundColor: background.primary,
+        ...cardShadow.container,
+    },
+};
+
+export const cardProductImage = {
+    container: {
+        overflow: 'hidden',
+        borderTopLeftRadius: border.radius,
+        borderTopRightRadius: border.radius,
+    },
+    image: {
+        width: '100%',
+        height: 250,
+        resizeMode: 'cover',
+    },
+};
+export const cardProductImageFull = {
+    container: {
+        ...cardProductImage.container,
+        borderBottomLeftRadius: border.radius,
+        borderBottomRightRadius: border.radius,
+    },
+    image: cardProductImage.image,
+};
+
+export const cardProductBody = {
+    container: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'transparent',
+    },
+};
+
+export const cardRating = {
+    container: {
+        flexShrink: 1,
+        justifyContent: 'flex-start',
+    },
+    icon: {
+        size: 18,
+    },
+};
+
+//==========================================================================================\\
