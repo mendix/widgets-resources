@@ -12,7 +12,7 @@ export const Image = {
     },
     image: {
         // All ImageStyle properties are allowed
-        resizeMode: 'contain',
+        resizeMode: 'cover',
     },
 };
 
@@ -22,7 +22,7 @@ export const NativeDynamicImage = {
     },
     image: {
         // All ImageStyle properties are allowed
-        resizeMode: 'contain',
+        resizeMode: 'cover',
     },
 };
 
@@ -32,39 +32,19 @@ export const NativeDynamicImage = {
 // Image Sizes
 export const avatarSmall = {
     image: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
+        width: 50,
+        height: 50,
+        borderRadius: 25,
     },
 };
 export const avatarLarge = {
     image: {
-        width: 100,
-        height: 100,
-        borderRadius: 50,
+        width: 80,
+        height: 80,
+        borderRadius: 40,
     },
 };
 
 //== Extra Classes
 //## Helper classes to change the look and feel of the widget
 //-------------------------------------------------------------------------------------------------------------------//
-// Make the image look like a header
-export const imageHeader = {
-    container: {
-        // width: '100%',
-        elevation: 2,
-        shadowColor: contrast.lowest,
-        shadowOpacity: 0.9,
-        shadowRadius: 4,
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        zIndex: 10,
-    },
-    image: {
-        width: '100%',
-        height: 250,
-        resizeMode: 'cover',
-    },
-};
