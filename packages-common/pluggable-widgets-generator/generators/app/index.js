@@ -108,7 +108,7 @@ class MxGenerator extends Generator {
     _defineProperties() {
         this.widget = {};
         this.widget.widgetName = this.props.widgetName.replace(/(^|\s)\S/g, l => l.toUpperCase()); // Capitalise first letter if its not.
-        this.widget.packageName = this.dir ? this.dir : this.props.widgetName.toLowerCase();
+        this.widget.packageName = this.dir ? this.dir.toLowerCase() : this.props.widgetName.toLowerCase();
         this.widget.description = this.props.description;
         this.widget.version = this.props.version;
         this.widget.author = this.props.author;
