@@ -1,7 +1,7 @@
-import { TextBox, TextBoxVertical } from "./textbox";
-import { brand, contrast, spacing } from "../variables";
-import { Platform } from "react-native";
-import { anyColorToRgbString } from "../_helperfunctions/convertcolors";
+import { TextBox, TextBoxVertical } from './textbox';
+import { brand, contrast, spacing, input, background } from '../variables';
+import { Platform } from 'react-native';
+import { anyColorToRgbString } from '../_helperfunctions/convertcolors';
 
 /* ==========================================================================
     CheckBox
@@ -14,20 +14,21 @@ export const CheckBox = {
         // All ViewStyle properties are allowed
         ...TextBox.container,
         paddingVertical: spacing.smallest,
-        justifyContent: "center",
+        justifyContent: 'center',
     },
     label: {
         // numberOfLines and all TextStyle properties are allowed
         ...TextBox.label,
+        color: input.color,
     },
     input: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
-        backgroundColor: "transparent",
+        backgroundColor: 'transparent',
         marginRight: Platform.select({ android: -3 }),
-        thumbColorOn: brand.primary,
-        trackColorOn: `rgba(${anyColorToRgbString(brand.primary)},0.2)`,
-        thumbColorOff: contrast.low,
-        trackColorOff: `rgba(${anyColorToRgbString(contrast.low)},0.2)`,
+        thumbColorOn: background.primary,
+        trackColorOn: brand.success,
+        thumbColorOff: background.lowest,
+        trackColorOff: contrast.lowest,
     },
     inputDisabled: {
         opacity: Platform.select({ android: 0.5 }),
@@ -35,23 +36,26 @@ export const CheckBox = {
     inputError: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
         ...TextBox.inputError,
-        thumbColorOn: brand.danger,
-        trackColorOn: `rgba(${anyColorToRgbString(brand.danger)},0.2)`,
-        thumbColorOff: brand.danger,
-        trackColorOff: `rgba(${anyColorToRgbString(brand.danger)},0.2)`,
+        thumbColorOn: background.primary,
+        trackColorOn: brand.danger,
+        thumbColorOff: background.lowest,
+        trackColorOff: contrast.lowest,
     },
     validationMessage: {
         // All TextStyle properties are allowed
         ...TextBox.validationMessage,
-        alignSelf: "stretch",
+        alignSelf: 'stretch',
     },
 };
 
 export const CheckBoxVertical = {
     container: TextBoxVertical.container,
-    label: TextBoxVertical.label,
+    label: {
+        ...TextBoxVertical.label,
+        color: input.color,
+    },
     input: {
-        alignSelf: "flex-start",
+        alignSelf: 'flex-start',
     },
     inputError: TextBoxVertical.inputError,
     validationMessage: TextBoxVertical.validationMessage,
