@@ -83,16 +83,9 @@ export const cardAction = {
     },
 };
 
-export const cardActionImageWrapper = {
-    container: {
-        marginHorizontal: spacing.smaller,
-        marginBottom: spacing.small,
-        overflow: 'hidden',
-    },
-};
 export const cardActionImage = {
     image: {
-        maxHeight: 80,
+        maxHeight: 70,
         resizeMode: 'contain',
     },
 };
