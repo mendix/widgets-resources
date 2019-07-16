@@ -37,11 +37,18 @@ export const avatarSmall = {
         borderRadius: 25,
     },
 };
-export const avatarLarge = {
+export const avatarMedium = {
     image: {
         width: 80,
         height: 80,
         borderRadius: 40,
+    },
+};
+export const avatarLarge = {
+    image: {
+        width: 120,
+        height: 120,
+        borderRadius: 60,
     },
 };
 
