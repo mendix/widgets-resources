@@ -14,12 +14,14 @@ declare function require(name: string): string;
 export class preview extends Component<VideoPlayerPreviewProps, {}> {
     render(): JSX.Element {
         const message = this.validateProps(this.props);
-        if (message) return <Alert message={message} className="widget-badge-alert" />;
+        if (message) {
+            return <Alert message={message} className="widget-badge-alert" />;
+        }
 
         return (
             <SizeContainer
                 className={classNames("video-player-container", this.props.class)}
-                style={this.props.style}
+                style={{ ...this.props.style, minHeight: "400px" }}
                 widthUnit={this.props.widthUnit}
                 width={this.props.width}
                 heightUnit={this.props.heightUnit}
@@ -33,7 +35,7 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
 
     private renderPlayers(): JSX.Element {
         if (!validateUrl(this.props.urlExpression || "")) {
-            return <Error preview={true} />;
+            return <Error preview />;
         }
         return <Video {...this.transformProps(this.props)} />;
     }
@@ -62,5 +64,5 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/VideoPlayer.css");
+    return require("./ui/VideoPlayer.css") + "";
 }

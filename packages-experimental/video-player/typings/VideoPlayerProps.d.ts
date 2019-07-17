@@ -4,7 +4,7 @@
  * @author Mendix Widgets Team
  */
 import { CSSProperties } from "react";
-import { DynamicValue } from "@mendix/pluggable-widgets-api/properties";
+import { DynamicValue } from "mendix";
 
 interface CommonProps {
     id: string;
