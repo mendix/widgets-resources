@@ -888,8 +888,8 @@
                         "class": "mapsSquare"
                     },
                     {
-                        "name": "Full height",
-                        "class": "mapsFullHeight"
+                        "name": "Maximum space",
+                        "class": "mapsMaxSpace"
                     }
                 ]
             },
