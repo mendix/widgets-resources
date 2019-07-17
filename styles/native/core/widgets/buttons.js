@@ -112,24 +112,6 @@ export const btnDanger = {
     },
 };
 
-// // Button sizes
-// export const btnSmall = {
-//     icon: {
-//         size: font.sizeSmall,
-//     },
-//     caption: {
-//         fontSize: font.sizeSmall,
-//     },
-// };
-// export const btnLarge = {
-//     icon: {
-//         size: font.sizeLarge,
-//     },
-//     caption: {
-//         fontSize: font.sizeLarge,
-//     },
-// };
-
 //== Extra Classes
 //## Helper classes to change the look and feel of the widget
 //-------------------------------------------------------------------------------------------------------------------//
@@ -151,7 +133,7 @@ export const btnIconPrimary = {
 };
 export const btnIconSecondary = merge(btnIconPrimary, {
     icon: {
-        color: contrast.low,
+        color: contrast.lower,
     },
 });
 export const btnIconSuccess = merge(btnIconPrimary, {
