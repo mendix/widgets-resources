@@ -23,13 +23,6 @@ export const card = {
     container: {
         borderRadius: border.radius,
         backgroundColor: background.primary,
-
-        // alignItems: 'center',
-        // paddingHorizontal: spacing.large,
-        // paddingVertical: spacing.large,
-        // paddingTop: spacing.regular,
-        // paddingBottom: spacing.large,
-        // marginHorizontal: spacing.regular,
         marginBottom: spacing.regular,
 
         ...Platform.select({
@@ -45,25 +38,14 @@ export const card = {
 //== Elements
 //-------------------------------------------------------------------------------------------------------------------//
 
-export const cardTitle = {
-    container: {
-        marginHorizontal: spacing.small,
-        fontSize: font.sizeLarge,
-        marginBottom: spacing.large,
-    },
-    text: {
-        color: contrast.high,
-    },
-};
-
-export const cardImage = {
+export const cardPaymentImage = {
     container: {
         flex: -1,
-        // height: 'auto',
+        maxHeight: 250,
     },
     image: {
         width: '100%',
-        height: 250,
+        maxHeight: 250,
         resizeMode: 'contain',
     },
 };
@@ -76,10 +58,10 @@ export const cardAction = {
         flex: 1,
         flexBasis: '40%',
         aspectRatio: 1,
-        padding: spacing.regular,
         borderWidth: 1,
         borderColor: border.color,
         borderRadius: border.radius,
+        padding: spacing.regular,
     },
 };
 
@@ -91,26 +73,6 @@ export const cardActionImage = {
 };
 
 //==========================================================================================\\
-
-export const cardForm = {
-    container: {
-        borderRadius: border.radius,
-        paddingHorizontal: spacing.large,
-        paddingVertical: spacing.larger,
-        backgroundColor: background.primary,
-        ...cardShadow.container,
-    },
-};
-
-//==========================================================================================\\
-
-export const cardProduct = {
-    container: {
-        borderRadius: border.radius,
-        backgroundColor: background.primary,
-        ...cardShadow.container,
-    },
-};
 
 export const cardProductImage = {
     container: {
@@ -136,8 +98,8 @@ export const cardProductImageFull = {
 export const cardProductBody = {
     container: {
         position: 'absolute',
-        left: 0,
-        right: 0,
+        end: 0,
+        start: 0,
         bottom: 0,
         backgroundColor: 'transparent',
     },
