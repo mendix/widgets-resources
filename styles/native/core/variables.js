@@ -118,7 +118,7 @@ button = merge(button, custom.button || {});
 //Input Styles
 let input = {
     // Colors
-    color: contrast.lower,
+    color: font.color,
     errorColor: brand.danger,
     labelColor: contrast.low,
     borderColor: contrast.lower,
@@ -126,7 +126,7 @@ let input = {
     disabledBackgroundColor: contrast.lowest,
     selectionColor: contrast.lower,
     placeholderTextColor: contrast.low,
-    underlineColorAndroid: Platform.select({ android: 'transparent' }),
+    underlineColorAndroid: 'transparent',
 
     // Sizes
     fontSize: font.size,
