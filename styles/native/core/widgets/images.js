@@ -1,4 +1,4 @@
-import { contrast } from '../variables';
+import { contrast, border } from '../variables';
 
 /* ==========================================================================
     Image
@@ -30,11 +30,18 @@ export const NativeDynamicImage = {
 //## Helper classes to change the look and feel of the widget
 //-------------------------------------------------------------------------------------------------------------------//
 // Image Sizes
+export const thumbnail = {
+    image: {
+        width: 120,
+        height: 100,
+        borderRadius: border.radius,
+    },
+};
 export const avatarSmall = {
     image: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
+        width: 60,
+        height: 60,
+        borderRadius: 30,
     },
 };
 export const avatarMedium = {
