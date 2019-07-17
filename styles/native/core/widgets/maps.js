@@ -1,4 +1,4 @@
-import { brand } from "../variables";
+import { brand, border } from '../variables';
 
 /* ==========================================================================
     Maps
@@ -9,7 +9,7 @@ import { brand } from "../variables";
 export const com_mendix_widget_native_maps_Maps = (Maps = {
     container: {
         // All ViewStyle properties are allowed
-        alignSelf: "stretch",
+        alignSelf: 'stretch',
         aspectRatio: 4 / 3,
     },
     marker: {
@@ -46,9 +46,17 @@ export const mapsSquare = {
     },
 };
 
-export const mapsFullHeight = {
+export const mapsMaxSpace = {
     container: {
         flex: 1,
         aspectRatio: undefined,
+    },
+};
+
+// Maps Shape
+export const mapsRounded = {
+    container: {
+        borderRadius: border.radius,
+        overflow: 'hidden',
     },
 };
