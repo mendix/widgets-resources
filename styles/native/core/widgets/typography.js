@@ -15,7 +15,7 @@ export const Text = {
         // All TextStyle properties are allowed
         color: font.color,
         fontSize: font.size,
-        lineHeight: font.size,
+        lineHeight: font.size + 2,
     },
 };
 
@@ -24,37 +24,37 @@ export const TextHeading1 = {
         marginBottom: spacing.small,
     },
     text: {
-        fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+        fontWeight: font.weightSemiBold,
         fontSize: font.sizeH1,
         lineHeight: font.sizeH1,
     },
 };
 export const TextHeading2 = {
     container: {
-        marginBottom: spacing.small,
+        marginBottom: spacing.smaller,
     },
     text: {
-        fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+        fontWeight: font.weightSemiBold,
         fontSize: font.sizeH2,
         lineHeight: font.sizeH2,
     },
 };
 export const TextHeading3 = {
     container: {
-        marginBottom: spacing.small,
+        marginBottom: spacing.smaller,
     },
     text: {
-        fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+        fontWeight: font.weightSemiBold,
         fontSize: font.sizeH3,
         lineHeight: font.sizeH3,
     },
 };
 export const TextHeading4 = {
     container: {
-        marginBottom: spacing.smaller,
+        marginBottom: spacing.smallest,
     },
     text: {
-        fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+        fontWeight: font.weightSemiBold,
         fontSize: font.sizeH4,
         lineHeight: font.sizeH4,
     },
@@ -64,7 +64,7 @@ export const TextHeading5 = {
         marginBottom: spacing.smallest,
     },
     text: {
-        fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+        fontWeight: font.weightSemiBold,
         fontSize: font.sizeH5,
         lineHeight: font.sizeH5,
     },
@@ -74,7 +74,7 @@ export const TextHeading6 = {
         marginBottom: spacing.smallest,
     },
     text: {
-        fontWeight: Platform.select({ ios: font.weightSemiBold, android: font.weightNormal }),
+        fontWeight: font.weightSemiBold,
         fontSize: font.sizeH6,
         lineHeight: font.sizeH6,
     },
