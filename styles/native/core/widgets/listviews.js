@@ -1,4 +1,4 @@
-import { background, border } from '../variables';
+import { border } from '../variables';
 
 /* ==========================================================================
     List View
@@ -30,5 +30,20 @@ export const listItemBorderRight = {
     listItem: {
         borderColor: border.color,
         borderRightWidth: border.width,
+    },
+};
+
+//== Extra Classes
+//## Helper classes to change the look and feel of the widget
+//-------------------------------------------------------------------------------------------------------------------//
+
+export const listItemIconSmall = {
+    icon: {
+        size: 20,
+    },
+};
+export const listItemIconBig = {
+    icon: {
+        size: 24,
     },
 };
