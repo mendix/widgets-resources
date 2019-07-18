@@ -40,7 +40,5 @@ export * from './core/widgets/webview';
 
 // Building blocks
 export * from './resources/atlas-resources-default/buildingblocks/card';
-export * from './resources/atlas-resources-default/buildingblocks/formblock';
 
 // Page Templates
-export * from './resources/atlas-resources-default/pagetemplates/listevent';
