@@ -249,10 +249,6 @@
                 "description": "Aligns the element. This overrides 'Align children' of the parent.",
                 "options": [
                     {
-                        "name": "Stretch",
-                        "class": "alignSelfStretch"
-                    },
-                    {
                         "name": "Start",
                         "class": "alignSelfStart"
                     },
@@ -263,6 +259,14 @@
                     {
                         "name": "End",
                         "class": "alignSelfEnd"
+                    },
+                    {
+                        "name": "Stretch",
+                        "class": "alignSelfStretch"
+                    },
+                    {
+                        "name": "Baseline",
+                        "class": "alignSelfBaseline"
                     }
                 ]
             },
@@ -297,30 +301,38 @@
                     {
                         "name": "Stretch",
                         "class": "alignChildrenStretch"
+                    },
+                    {
+                        "name": "Baseline",
+                        "class": "alignChildrenBaseline"
                     }
                 ]
             },
 
             {
-                "name": "Justify children",
+                "name": "Justify content",
                 "type": "Dropdown",
-                "description": "Justify children in the active direction.",
+                "description": "Justify content in the active direction.",
                 "options": [
                     {
                         "name": "Center",
-                        "class": "justifyChildrenCenter"
+                        "class": "justifyContentCenter"
                     },
                     {
                         "name": "End",
-                        "class": "justifyChildrenEnd"
+                        "class": "justifyContentEnd"
                     },
                     {
                         "name": "Space between",
-                        "class": "justifyChildrenSpaceBetween"
+                        "class": "justifyContentSpaceBetween"
                     },
                     {
                         "name": "Space around",
-                        "class": "justifyChildrenSpaceAround"
+                        "class": "justifyContentSpaceAround"
+                    },
+                    {
+                        "name": "Space evenly",
+                        "class": "justifyContentSpaceEvenly"
                     }
                 ]
             }
@@ -493,10 +505,6 @@
                 "description": "Aligns the element. This overrides 'Align children' of the parent.",
                 "options": [
                     {
-                        "name": "Stretch",
-                        "class": "alignSelfStretch"
-                    },
-                    {
                         "name": "Start",
                         "class": "alignSelfStart"
                     },
@@ -507,6 +515,14 @@
                     {
                         "name": "End",
                         "class": "alignSelfEnd"
+                    },
+                    {
+                        "name": "Stretch",
+                        "class": "alignSelfStretch"
+                    },
+                    {
+                        "name": "Baseline",
+                        "class": "alignSelfBaseline"
                     }
                 ]
             },
@@ -541,30 +557,34 @@
                     {
                         "name": "Stretch",
                         "class": "alignChildrenStretch"
+                    },
+                    {
+                        "name": "Baseline",
+                        "class": "alignChildrenBaseline"
                     }
                 ]
             },
 
             {
-                "name": "Justify children",
+                "name": "Justify content",
                 "type": "Dropdown",
-                "description": "Justify children in the active direction.",
+                "description": "Justify content in the active direction.",
                 "options": [
                     {
                         "name": "Center",
-                        "class": "justifyChildrenCenter"
+                        "class": "justifyContentCenter"
                     },
                     {
                         "name": "End",
-                        "class": "justifyChildrenEnd"
+                        "class": "justifyContentEnd"
                     },
                     {
                         "name": "Space between",
-                        "class": "justifyChildrenSpaceBetween"
+                        "class": "justifyContentSpaceBetween"
                     },
                     {
                         "name": "Space around",
-                        "class": "justifyChildrenSpaceAround"
+                        "class": "justifyContentSpaceAround"
                     }
                 ]
             }
@@ -601,10 +621,6 @@
                 "description": "Aligns the element. This overrides 'Align children' of the parent.",
                 "options": [
                     {
-                        "name": "Stretch",
-                        "class": "alignSelfStretch"
-                    },
-                    {
                         "name": "Start",
                         "class": "alignSelfStart"
                     },
@@ -615,6 +631,14 @@
                     {
                         "name": "End",
                         "class": "alignSelfEnd"
+                    },
+                    {
+                        "name": "Stretch",
+                        "class": "alignSelfStretch"
+                    },
+                    {
+                        "name": "Baseline",
+                        "class": "alignSelfBaseline"
                     }
                 ]
             }
@@ -864,8 +888,8 @@
                         "class": "mapsSquare"
                     },
                     {
-                        "name": "Full height",
-                        "class": "mapsFullHeight"
+                        "name": "Maximum space",
+                        "class": "mapsMaxSpace"
                     }
                 ]
             },

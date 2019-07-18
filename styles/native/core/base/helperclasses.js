@@ -1,4 +1,4 @@
-import { background, spacing } from '../variables';
+import { background, spacing, border } from '../variables';
 import { Platform } from 'react-native';
 
 // Hide on Android
@@ -23,5 +23,12 @@ export const backgroundPrimary = {
 export const backgroundSecondary = {
     container: {
         backgroundColor: background.secondary,
+    },
+};
+
+export const borderBottom = {
+    container: {
+        borderColor: border.color,
+        borderBottomWidth: border.width,
     },
 };

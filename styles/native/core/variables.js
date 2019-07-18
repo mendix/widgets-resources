@@ -118,14 +118,15 @@ button = merge(button, custom.button || {});
 //Input Styles
 let input = {
     // Colors
-    color: contrast.higher,
+    color: font.color,
     errorColor: brand.danger,
+    labelColor: contrast.low,
     borderColor: contrast.lower,
     backgroundColor: background.primary,
     disabledBackgroundColor: contrast.lowest,
     selectionColor: contrast.lower,
     placeholderTextColor: contrast.low,
-    underlineColorAndroid: Platform.select({ android: 'transparent' }),
+    underlineColorAndroid: 'transparent',
 
     // Sizes
     fontSize: font.size,
@@ -136,7 +137,7 @@ let input = {
     // Alignment
     textAlign: 'left',
     paddingHorizontal: spacing.small,
-    paddingVertical: spacing.smaller,
+    paddingVertical: spacing.small,
 };
 input = merge(input, custom.input || {});
 

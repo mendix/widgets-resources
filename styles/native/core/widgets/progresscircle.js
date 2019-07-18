@@ -1,4 +1,4 @@
-import { brand, font } from "../variables";
+import { brand, font, contrast } from '../variables';
 
 /* ==========================================================================
     Progress Circle
@@ -12,6 +12,7 @@ export const com_mendix_widget_native_progresscircle_ProgressCircle = (ProgressC
     },
     circle: {
         // Only the size & borderWidth & borderColor properties are allowed
+        size: 80,
         borderWidth: 0,
     },
     fill: {
@@ -23,7 +24,8 @@ export const com_mendix_widget_native_progresscircle_ProgressCircle = (ProgressC
     text: {
         // All TextStyle properties are allowed
         color: brand.primary,
-        fontSize: font.sizeLarge,
+        fontSize: font.size,
+        fontWeight: font.weightSemiBold,
     },
 });
 
@@ -37,7 +39,7 @@ export const progressCircleSuccess = {
         backgroundColor: brand.success,
     },
     text: {
-        color: brand.success,
+        color: contrast.regular,
     },
 };
 
@@ -46,7 +48,7 @@ export const progressCircleWarning = {
         backgroundColor: brand.warning,
     },
     text: {
-        color: brand.warning,
+        color: contrast.regular,
     },
 };
 
@@ -55,6 +57,6 @@ export const progressCircleDanger = {
         backgroundColor: brand.danger,
     },
     text: {
-        color: brand.danger,
+        color: contrast.regular,
     },
 };
