@@ -1,7 +1,6 @@
 import { TextBox, TextBoxVertical } from './textbox';
 import { brand, contrast, spacing, input, background } from '../variables';
 import { Platform } from 'react-native';
-import { anyColorToRgbString } from '../_helperfunctions/convertcolors';
 
 /* ==========================================================================
     CheckBox
@@ -19,7 +18,6 @@ export const CheckBox = {
     label: {
         // numberOfLines and all TextStyle properties are allowed
         ...TextBox.label,
-        color: input.color,
     },
     input: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
@@ -52,7 +50,6 @@ export const CheckBoxVertical = {
     container: TextBoxVertical.container,
     label: {
         ...TextBoxVertical.label,
-        color: input.color,
     },
     input: {
         alignSelf: 'flex-start',
