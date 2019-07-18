@@ -13,7 +13,7 @@ export const ActionButton = {
         // Ripplecolor and all ViewStyle properties are allowed
         borderWidth: 1,
         borderStyle: 'solid',
-        // rippleColor: ,
+        rippleColor: contrast.lowest,
         borderColor: button.primary.borderColor,
         backgroundColor: button.primary.backgroundColor,
         alignItems: 'center',
@@ -157,7 +157,7 @@ export const btnAsText = {
         maxHeight: 22,
         borderWidth: 0,
         borderRadius: 0,
-        rippleColor: 'rgba(0,0,0,0.05)',
+        rippleColor: contrast.lowest,
         backgroundColor: 'transparent',
         paddingVertical: 0,
         paddingHorizontal: 0,

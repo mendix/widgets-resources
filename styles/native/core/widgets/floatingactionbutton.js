@@ -12,7 +12,7 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
     },
     button: {
         size: 50,
-        // rippleColor: ,
+        rippleColor: contrast.lowest,
         backgroundColor: brand.primary,
         shadowColor: contrast.low,
         shadowOpacity: 0.9,
