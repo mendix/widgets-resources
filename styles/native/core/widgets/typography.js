@@ -1,5 +1,4 @@
 import { brand, contrast, font, spacing } from '../variables';
-import { Platform } from 'react-native';
 
 /* ==========================================================================
     Text
@@ -186,9 +185,6 @@ export const textBold = {
     },
 };
 
-//== Extra Classes
-//## Helper classes to change the look and feel of the widget
-//-------------------------------------------------------------------------------------------------------------------//
 // Text Sizes
 export const textSmall = {
     text: {
@@ -202,6 +198,10 @@ export const textLarge = {
         lineHeight: font.sizeLarge,
     },
 };
+
+//== Extra Classes
+//## Helper classes to change the look and feel of the widget
+//-------------------------------------------------------------------------------------------------------------------//
 
 // Text Transformations
 export const textLowercase = {
