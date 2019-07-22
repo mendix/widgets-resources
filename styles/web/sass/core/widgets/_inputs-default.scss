@@ -171,8 +171,8 @@ textarea.form-control {
     }
 }
 
-// Fixes alignment bug on iPads / iPhones where datefield is not aligned vertically
 @media only screen and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 0) {
+    // Fixes alignment bug on iPads / iPhones where datefield is not aligned vertically
     input[type='date'],
     input[type='time'],
     input[type='datetime-local'],
@@ -180,6 +180,7 @@ textarea.form-control {
         line-height: 1;
     }
 
+    // Fix shrinking of date inputs because inability of setting a placeholder
     input[type='time']:not(.has-value):before,
     input[type='date']:not(.has-value):before,
     input[type='month']:not(.has-value):before,

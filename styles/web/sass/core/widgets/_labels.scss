@@ -11,25 +11,6 @@
    Default labels combined with Bootstrap labels
 ========================================================================== */
 
-.label {
-    display: inline;
-    display: inline-block;
-    padding: 0.2em 0.6em 0.3em;
-    text-align: center;
-    vertical-align: baseline;
-    white-space: nowrap;
-    color: #ffffff;
-    border-radius: 0.25em;
-    font-size: 100%;
-    line-height: 1;
-    margin: 0;
-
-    .form-control-static {
-        all: unset;
-        font-weight: $font-weight-normal;
-    }
-}
-
 //== Design Properties
 //## Helper classes to change the look and feel of the component
 //-------------------------------------------------------------------------------------------------------------------//
