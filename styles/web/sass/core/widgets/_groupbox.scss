@@ -8,13 +8,9 @@
 /* ==========================================================================
    Groupbox
 
-   Default Mendix Groupboxes
-========================================================================== */
-
 //== Design Properties
 //## Helper classes to change the look and feel of the component
-//-------------------------------------------------------------------------------------------------------------------//
-
+========================================================================== */
 // Color variations
 .groupbox-default {
     @include groupbox-variant($groupbox-default-color, $groupbox-default-bg);

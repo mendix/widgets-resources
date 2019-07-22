@@ -8,12 +8,9 @@
 /* ==========================================================================
    Templategrid
 
-   Default Mendix Templategrid Widget. The template grid shows a list of objects in a tile view. For example, a template grid can show a list of products. The template grid has a lot in common with the data grid. The main difference is that the objects are shown in templates (a sort of small data view) instead of rows
-========================================================================== */
-
 //== Design Properties
 //## Helper classes to change the look and feel of the component
-//-------------------------------------------------------------------------------------------------------------------//
+========================================================================== */
 // Make sure your content looks selectable
 .templategrid-selectable.mx-templategrid {
     .mx-templategrid-item {

@@ -8,12 +8,9 @@
 /* ==========================================================================
    Tables
 
-   Default Mendix Table Widget. Tables can be used to lend structure to a page. They contain a number of rows (tr) and columns, the intersection of which is called a cell (td). Each cell can contain widgets
-========================================================================== */
-
 //== Design Properties
 //## Helper classes to change the look and feel of the component
-//-------------------------------------------------------------------------------------------------------------------//
+========================================================================== */
 // Lined
 table.table-lined.mx-table {
     > tbody {
