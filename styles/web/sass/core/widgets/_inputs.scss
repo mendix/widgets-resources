@@ -179,6 +179,21 @@ textarea.form-control {
     input[type='month'] {
         line-height: 1;
     }
+
+    input[type='time']:not(.has-value):before,
+    input[type='date']:not(.has-value):before,
+    input[type='month']:not(.has-value):before,
+    input[type='datetime-local']:not(.has-value):before {
+        content: attr(placeholder) !important;
+        color: #aaa;
+        margin-right: 0.5em;
+    }
+    input[type='time'].has-value:before,
+    input[type='date'].has-value:before,
+    input[type='month'].has-value:before,
+    input[type='datetime-local'].has-value:before {
+        content: '' !important;
+    }
 }
 
 @media (-ms-high-contrast: none), (-ms-high-contrast: active) {
