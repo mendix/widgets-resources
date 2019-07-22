@@ -1,4 +1,4 @@
-import { com_mendix_widget_native_slider_Slider as Slider, sliderDanger, sliderSuccess, sliderWarning } from "./slider";
+import { border } from '../variables';
 
 //
 // DISCLAIMER:
@@ -8,12 +8,16 @@ import { com_mendix_widget_native_slider_Slider as Slider, sliderDanger, sliderS
 //
 
 /* ==========================================================================
-    Range Slider
+    List View
 
-//== Design Properties
-//## Helper classes to change the look and feel of the widget
+    Default Class For Mendix List View Widget
 ========================================================================== */
-// Range Slider Color
-export const rangeSliderSuccess = sliderSuccess;
-export const rangeSliderWarning = sliderWarning;
-export const rangeSliderDanger = sliderDanger;
+
+export const ListView = {
+    container: {
+        // numColumns and all ViewStyle properties are allowed
+    },
+    listItem: {
+        // All ViewStyle properties are allowed
+    },
+};

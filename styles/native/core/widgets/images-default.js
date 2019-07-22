@@ -1,4 +1,4 @@
-import { brand } from "../variables";
+import { border } from '../variables';
 
 //
 // DISCLAIMER:
@@ -8,27 +8,27 @@ import { brand } from "../variables";
 //
 
 /* ==========================================================================
-    Activity Indicator
+    Image
 
-//== Design Properties
-//## Helper classes to change the look and feel of the widget
+    Default Class For Mendix Image Widgets
 ========================================================================== */
-// Activity indicator Colors
 
-export const activityIndicatorSuccess = {
-    indicator: {
-        color: brand.success,
+export const Image = {
+    container: {
+        // All ViewStyle properties are allowed
+    },
+    image: {
+        // All ImageStyle properties are allowed
+        resizeMode: 'cover',
     },
 };
 
-export const activityIndicatorWarning = {
-    indicator: {
-        color: brand.warning,
+export const NativeDynamicImage = {
+    container: {
+        // All ViewStyle properties are allowed
     },
-};
-
-export const activityIndicatorDanger = {
-    indicator: {
-        color: brand.danger,
+    image: {
+        // All ImageStyle properties are allowed
+        resizeMode: 'cover',
     },
 };

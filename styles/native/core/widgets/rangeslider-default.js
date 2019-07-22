@@ -10,10 +10,7 @@ import { com_mendix_widget_native_slider_Slider as Slider, sliderDanger, sliderS
 /* ==========================================================================
     Range Slider
 
-//== Design Properties
-//## Helper classes to change the look and feel of the widget
+    Default Class For Mendix Range Slider Widget
 ========================================================================== */
-// Range Slider Color
-export const rangeSliderSuccess = sliderSuccess;
-export const rangeSliderWarning = sliderWarning;
-export const rangeSliderDanger = sliderDanger;
+
+export const com_mendix_widget_native_rangeslider_RangeSlider = (RangeSlider = Slider);

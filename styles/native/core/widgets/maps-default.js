@@ -1,4 +1,4 @@
-import { com_mendix_widget_native_slider_Slider as Slider, sliderDanger, sliderSuccess, sliderWarning } from "./slider";
+import { brand, border } from '../variables';
 
 //
 // DISCLAIMER:
@@ -8,12 +8,20 @@ import { com_mendix_widget_native_slider_Slider as Slider, sliderDanger, sliderS
 //
 
 /* ==========================================================================
-    Range Slider
+    Maps
 
-//== Design Properties
-//## Helper classes to change the look and feel of the widget
+    Default Class For Mendix Maps Widget
 ========================================================================== */
-// Range Slider Color
-export const rangeSliderSuccess = sliderSuccess;
-export const rangeSliderWarning = sliderWarning;
-export const rangeSliderDanger = sliderDanger;
+
+export const com_mendix_widget_native_maps_Maps = (Maps = {
+    container: {
+        // All ViewStyle properties are allowed
+        alignSelf: 'stretch',
+        aspectRatio: 4 / 3,
+    },
+    marker: {
+        //Only color & opacity are allowed
+        color: brand.primary,
+        opacity: 1,
+    },
+});

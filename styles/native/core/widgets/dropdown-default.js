@@ -1,20 +1,39 @@
 import { TextBox, TextBoxVertical } from "./textbox";
 import { input } from "../variables";
 
-/* ==========================================================================
-    Date Picker
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
+//
 
-    Default Class For Mendix Date Picker Widget
+/* ==========================================================================
+    Drop Down
+
+    Default Class For Mendix Drop Down Widget
 ========================================================================== */
 
-export const DatePicker = {
+export const DropDown = {
     container: {
         // All ViewStyle properties are allowed
         ...TextBox.container,
     },
     label: {
-        // numberOfLines and all TextStyle properties are allowed
+        // All TextStyle properties are allowed
         ...TextBox.label,
+    },
+    pickerIOS: {
+        // All ViewStyle properties are allowed
+    },
+    pickerItemIOS: {
+        // All TextStyle properties are allowed
+    },
+    pickerBackdropIOS: {
+        // All ViewStyle properties are allowed
+    },
+    pickerTopIOS: {
+        // All ViewStyle properties are allowed
     },
     value: {
         // All TextStyle properties are allowed
@@ -22,9 +41,8 @@ export const DatePicker = {
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
 
-        fontSize: input.fontSize,
         borderWidth: input.borderWidth,
-        borderRadius: input.borderRadius,
+        borderRadius: input.radius,
 
         paddingHorizontal: input.paddingHorizontal,
         paddingVertical: input.paddingVertical,
@@ -33,36 +51,28 @@ export const DatePicker = {
         // All TextStyle properties are allowed
         backgroundColor: input.disabledBackgroundColor,
     },
-    placeholder: {
-        // All TextStyle properties are allowed
-        color: input.placeholderTextColor,
-    },
-    placeholderDisabled: {
-        // All TextStyle properties are allowed
-    },
     validationMessage: {
         // All TextStyle properties are allowed
         ...TextBox.validationMessage,
     },
 };
-
-export const DatePickerVertical = {
+export const DropDownVertical = {
     container: TextBoxVertical.container,
     label: TextBoxVertical.label,
+    pickerIOS: DropDown.pickerIOS,
+    pickerItemIOS: DropDown.pickerItemIOS,
+    pickerBackdropIOS: DropDown.pickerBackdropIOS,
+    pickerTopIOS: DropDown.pickerTopIOS,
     value: {
         color: input.color,
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
 
-        fontSize: input.fontSize,
-        borderRadius: input.borderRadius,
+        borderRadius: input.radius,
         borderWidth: input.borderWidth,
 
-        paddingHorizontal: input.paddingHorizontal,
         paddingVertical: input.paddingVertical,
-    },
-    placeholder: {
-        color: input.placeholderTextColor,
+        paddingHorizontal: input.paddingHorizontal,
     },
     validationMessage: TextBoxVertical.validationMessage,
 };

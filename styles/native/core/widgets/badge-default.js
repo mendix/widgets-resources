@@ -1,4 +1,4 @@
-import { com_mendix_widget_native_slider_Slider as Slider, sliderDanger, sliderSuccess, sliderWarning } from "./slider";
+import { button, contrast } from '../variables';
 
 //
 // DISCLAIMER:
@@ -8,12 +8,19 @@ import { com_mendix_widget_native_slider_Slider as Slider, sliderDanger, sliderS
 //
 
 /* ==========================================================================
-    Range Slider
+    Badge
 
-//== Design Properties
-//## Helper classes to change the look and feel of the widget
+    Default Class For Mendix Badge Widget
 ========================================================================== */
-// Range Slider Color
-export const rangeSliderSuccess = sliderSuccess;
-export const rangeSliderWarning = sliderWarning;
-export const rangeSliderDanger = sliderDanger;
+
+export const com_mendix_widget_native_badge_Badge = (Badge = {
+    container: {
+        // All ViewStyle properties are allowed
+        backgroundColor: contrast.lower,
+        alignSelf: 'center',
+    },
+    caption: {
+        // All TextStyle properties are allowed
+        color: contrast.higher,
+    },
+});

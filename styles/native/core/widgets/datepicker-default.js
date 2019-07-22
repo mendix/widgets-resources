@@ -1,32 +1,27 @@
 import { TextBox, TextBoxVertical } from "./textbox";
 import { input } from "../variables";
 
-/* ==========================================================================
-    Reference Selector
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
+//
 
-    Default Class For Mendix Reference Selector Widget
+/* ==========================================================================
+    Date Picker
+
+    Default Class For Mendix Date Picker Widget
 ========================================================================== */
 
-export const ReferenceSelector = {
+export const DatePicker = {
     container: {
         // All ViewStyle properties are allowed
         ...TextBox.container,
     },
     label: {
-        // All TextStyle properties are allowed
+        // numberOfLines and all TextStyle properties are allowed
         ...TextBox.label,
-    },
-    pickerIOS: {
-        // All ViewStyle properties are allowed
-    },
-    pickerItemIOS: {
-        // All TextStyle properties are allowed
-    },
-    pickerBackdropIOS: {
-        // All ViewStyle properties are allowed
-    },
-    pickerTopIOS: {
-        // All ViewStyle properties are allowed
     },
     value: {
         // All TextStyle properties are allowed
@@ -34,8 +29,9 @@ export const ReferenceSelector = {
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
 
+        fontSize: input.fontSize,
         borderWidth: input.borderWidth,
-        borderRadius: input.radius,
+        borderRadius: input.borderRadius,
 
         paddingHorizontal: input.paddingHorizontal,
         paddingVertical: input.paddingVertical,
@@ -44,28 +40,36 @@ export const ReferenceSelector = {
         // All TextStyle properties are allowed
         backgroundColor: input.disabledBackgroundColor,
     },
+    placeholder: {
+        // All TextStyle properties are allowed
+        color: input.placeholderTextColor,
+    },
+    placeholderDisabled: {
+        // All TextStyle properties are allowed
+    },
     validationMessage: {
         // All TextStyle properties are allowed
         ...TextBox.validationMessage,
     },
 };
-export const ReferenceSelectorVertical = {
+
+export const DatePickerVertical = {
     container: TextBoxVertical.container,
     label: TextBoxVertical.label,
-    pickerIOS: ReferenceSelector.pickerIOS,
-    pickerItemIOS: ReferenceSelector.pickerItemIOS,
-    pickerBackdropIOS: ReferenceSelector.pickerBackdropIOS,
-    pickerTopIOS: ReferenceSelector.pickerTopIOS,
     value: {
         color: input.color,
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
 
-        borderRadius: input.radius,
+        fontSize: input.fontSize,
+        borderRadius: input.borderRadius,
         borderWidth: input.borderWidth,
 
-        paddingVertical: input.paddingVertical,
         paddingHorizontal: input.paddingHorizontal,
+        paddingVertical: input.paddingVertical,
+    },
+    placeholder: {
+        color: input.placeholderTextColor,
     },
     validationMessage: TextBoxVertical.validationMessage,
 };
