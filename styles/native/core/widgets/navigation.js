@@ -18,7 +18,6 @@ export const navigationStyle = {
     topBar: {
         backgroundColor: background.primary,
         backButtonColor: contrast.highest,
-        backButtonFontSize: font.size,
         titleColor: contrast.highest,
         titleFontSize: font.sizeH4,
         fontWeight: Platform.select({ ios: font.weightBold, android: font.weightNormal }),
