@@ -11,26 +11,32 @@ import { Platform } from "react-native";
 /* ==========================================================================
     Tab Container
 
-//== Design Properties
-//## Helper classes to change the look and feel of the widget
+    Default Class For Mendix Tab Container Widget
 ========================================================================== */
-// Enable scroll for the tab bar
-export const tabContainerScroll = {
-    tabBar: {
-        scrollEnabled: true,
-    },
-};
 
-//== Extra Classes
-//## Helper classes to change the look and feel of the widget
-//-------------------------------------------------------------------------------------------------------------------//
-// Tab container as content of page
-export const tabContainerMinimal = {
+export const TabContainer = {
     container: {
-        backgroundColor: "transparent",
+        // All ViewStyle properties are allowed
+        flex: 1,
     },
     tabBar: {
-        backgroundColor: "transparent",
-        elevation: 0,
+        // bounces, pressColor, pressOpacity, scrollEnabled and all ViewStyle properties are allowed
+        bounces: true,
+        pressColor: contrast.lower,
+        pressOpacity: 0.8,
+        backgroundColor: background.primary,
+        scrollEnabled: false,
+    },
+    indicator: {
+        // All ViewStyle properties are allowed
+        backgroundColor: brand.primary,
+        height: Platform.select({ ios: 2, android: 2 }),
+    },
+    tab: {
+        // All ViewStyle properties are allowed
+    },
+    label: {
+        // All TextStyle properties are allowed
+        color: contrast.highest,
     },
 };

@@ -10,142 +10,78 @@ import { brand, contrast, font, spacing } from '../variables';
 /* ==========================================================================
     Text
 
-//== Design Properties
-//## Helper classes to change the look and feel of the widget
+    Default Class For Mendix Text Widget
 ========================================================================== */
-// Text Colors
-export const textPrimary = {
-    text: {
-        color: brand.primary,
+
+export const Text = {
+    container: {
+        // All ViewStyle properties are allowed
     },
-};
-export const textSuccess = {
     text: {
-        color: brand.success,
-    },
-};
-export const textWarning = {
-    text: {
-        color: brand.warning,
-    },
-};
-export const textDanger = {
-    text: {
-        color: brand.danger,
-    },
-};
-export const textWhite = {
-    text: {
-        color: '#FFF',
+        // All TextStyle properties are allowed
+        color: font.color,
+        fontSize: font.size,
+        lineHeight: font.size + 2,
     },
 };
 
-export const textContrastLowest = {
-    text: {
-        color: contrast.lowest,
+export const TextHeading1 = {
+    container: {
+        marginBottom: spacing.small,
     },
-};
-export const textContrastLower = {
-    text: {
-        color: contrast.lower,
-    },
-};
-export const textContrastLow = {
-    text: {
-        color: contrast.low,
-    },
-};
-export const textContrastDefault = {
-    text: {
-        color: contrast.regular,
-    },
-};
-export const textContrastHigh = {
-    text: {
-        color: contrast.high,
-    },
-};
-export const textContrastHigher = {
-    text: {
-        color: contrast.higher,
-    },
-};
-export const textContrastHighest = {
-    text: {
-        color: contrast.highest,
-    },
-};
-
-// Text Alignment
-export const textLeft = {
-    text: {
-        textAlign: 'left',
-    },
-};
-export const textCenter = {
-    text: {
-        textAlign: 'center',
-    },
-};
-export const textRight = {
-    text: {
-        textAlign: 'right',
-    },
-};
-
-// Text Weights
-export const textLight = {
-    text: {
-        fontWeight: font.weightLight,
-    },
-};
-export const textNormal = {
-    text: {
-        fontWeight: font.weightNormal,
-    },
-};
-export const textSemiBold = {
     text: {
         fontWeight: font.weightSemiBold,
+        fontSize: font.sizeH1,
+        lineHeight: font.sizeH1,
     },
 };
-export const textBold = {
+export const TextHeading2 = {
+    container: {
+        marginBottom: spacing.smaller,
+    },
     text: {
-        fontWeight: font.weightBold,
+        fontWeight: font.weightSemiBold,
+        fontSize: font.sizeH2,
+        lineHeight: font.sizeH2,
     },
 };
-
-// Text Sizes
-export const textSmall = {
+export const TextHeading3 = {
+    container: {
+        marginBottom: spacing.smaller,
+    },
     text: {
-        fontSize: font.sizeSmall,
-        lineHeight: font.sizeSmall,
+        fontWeight: font.weightSemiBold,
+        fontSize: font.sizeH3,
+        lineHeight: font.sizeH3,
     },
 };
-export const textLarge = {
+export const TextHeading4 = {
+    container: {
+        marginBottom: spacing.smallest,
+    },
     text: {
-        fontSize: font.sizeLarge,
-        lineHeight: font.sizeLarge,
+        fontWeight: font.weightSemiBold,
+        fontSize: font.sizeH4,
+        lineHeight: font.sizeH4,
     },
 };
-
-//== Extra Classes
-//## Helper classes to change the look and feel of the widget
-//-------------------------------------------------------------------------------------------------------------------//
-
-// Text Transformations
-export const textLowercase = {
+export const TextHeading5 = {
+    container: {
+        marginBottom: spacing.smallest,
+    },
     text: {
-        textTransform: 'lowercase',
+        fontWeight: font.weightSemiBold,
+        fontSize: font.sizeH5,
+        lineHeight: font.sizeH5,
     },
 };
-export const textUppercase = {
-    text: {
-        textTransform: 'uppercase',
+export const TextHeading6 = {
+    container: {
+        marginBottom: spacing.smallest,
     },
-};
-export const textCapitalize = {
     text: {
-        textTransform: 'capitalize',
+        fontWeight: font.weightSemiBold,
+        fontSize: font.sizeH6,
+        lineHeight: font.sizeH6,
     },
 };

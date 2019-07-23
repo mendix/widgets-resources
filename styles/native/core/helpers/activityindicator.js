@@ -1,4 +1,4 @@
-import { brand, border } from '../variables';
+import { brand } from "../variables";
 
 //
 // DISCLAIMER:
@@ -8,20 +8,27 @@ import { brand, border } from '../variables';
 //
 
 /* ==========================================================================
-    Maps
+    Activity Indicator
 
-    Default Class For Mendix Maps Widget
+//== Design Properties
+//## Helper classes to change the look and feel of the widget
 ========================================================================== */
+// Activity indicator Colors
 
-export const com_mendix_widget_native_maps_Maps = (Maps = {
-    container: {
-        // All ViewStyle properties are allowed
-        alignSelf: 'stretch',
-        aspectRatio: 4 / 3,
+export const activityIndicatorSuccess = {
+    indicator: {
+        color: brand.success,
     },
-    marker: {
-        //Only color & opacity are allowed
-        color: brand.primary,
-        opacity: 1,
+};
+
+export const activityIndicatorWarning = {
+    indicator: {
+        color: brand.warning,
     },
-});
+};
+
+export const activityIndicatorDanger = {
+    indicator: {
+        color: brand.danger,
+    },
+};

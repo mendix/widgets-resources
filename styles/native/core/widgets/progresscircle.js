@@ -10,33 +10,28 @@ import { brand, font, contrast } from '../variables';
 /* ==========================================================================
     Progress Circle
 
-//== Design Properties
-//## Helper classes to change the look and feel of the widget
+    Default Class For Mendix Progress Circle Widget
 ========================================================================== */
-// Progress Circle Color
-export const progressCircleSuccess = {
-    fill: {
-        backgroundColor: brand.success,
-    },
-    text: {
-        color: contrast.regular,
-    },
-};
 
-export const progressCircleWarning = {
+export const com_mendix_widget_native_progresscircle_ProgressCircle = (ProgressCircle = {
+    container: {
+        // All ViewStyle properties are allowed
+    },
+    circle: {
+        // Only the size & borderWidth & borderColor properties are allowed
+        size: 80,
+        borderWidth: 0,
+    },
     fill: {
-        backgroundColor: brand.warning,
+        // Only the width & backgroundColor & lineCapRounded properties are allowed
+        backgroundColor: brand.primary,
+        width: 5, // Thickness,
+        lineCapRounded: true,
     },
     text: {
-        color: contrast.regular,
+        // All TextStyle properties are allowed
+        color: brand.primary,
+        fontSize: font.size,
+        fontWeight: font.weightSemiBold,
     },
-};
-
-export const progressCircleDanger = {
-    fill: {
-        backgroundColor: brand.danger,
-    },
-    text: {
-        color: contrast.regular,
-    },
-};
+});

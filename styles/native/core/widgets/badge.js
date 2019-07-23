@@ -10,39 +10,17 @@ import { button, contrast } from '../variables';
 /* ==========================================================================
     Badge
 
-//== Design Properties
-//## Helper classes to change the look and feel of the widget
+    Default Class For Mendix Badge Widget
 ========================================================================== */
-// Badge Colors
-export const badgePrimary = {
+
+export const com_mendix_widget_native_badge_Badge = (Badge = {
     container: {
-        backgroundColor: button.primary.backgroundColor,
+        // All ViewStyle properties are allowed
+        backgroundColor: contrast.lower,
+        alignSelf: 'center',
     },
     caption: {
-        color: button.primary.color,
+        // All TextStyle properties are allowed
+        color: contrast.higher,
     },
-};
-export const badgeSuccess = {
-    container: {
-        backgroundColor: button.success.backgroundColor,
-    },
-    caption: {
-        color: button.success.color,
-    },
-};
-export const badgeWarning = {
-    container: {
-        backgroundColor: button.warning.backgroundColor,
-    },
-    caption: {
-        color: button.warning.color,
-    },
-};
-export const badgeDanger = {
-    container: {
-        backgroundColor: button.danger.backgroundColor,
-    },
-    caption: {
-        color: button.danger.color,
-    },
-};
+});

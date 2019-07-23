@@ -1,8 +1,8 @@
 import * as custom from '../app/custom-variables';
 import { Dimensions, Platform } from 'react-native';
-import { setColorBasedOnBackground, setContrastScale } from './_helperfunctions/convertcolors';
-import adjustFont from './_helperfunctions/adjustfont';
-import merge from './_helperfunctions/mergeobjects';
+import { setColorBasedOnBackground, setContrastScale } from './helpers/_helperfunctions/convertcolors';
+import adjustFont from './helpers/_helperfunctions/adjustfont';
+import merge from './helpers/_helperfunctions/mergeobjects';
 
 //== Global variables
 //## Variables to be used during styling

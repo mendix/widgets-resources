@@ -1,6 +1,6 @@
-import { setColorBasedOnBackground, setContrastScale } from "../core/_helperfunctions/convertcolors";
+import { setColorBasedOnBackground, setContrastScale } from "../core/helpers/_helperfunctions/convertcolors";
 import { Platform } from "react-native";
-import adjustFont from "../core/_helperfunctions/adjustfont";
+import adjustFont from "../core/helpers/_helperfunctions/adjustfont";
 
 /*
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)

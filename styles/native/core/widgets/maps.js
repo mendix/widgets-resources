@@ -10,47 +10,18 @@ import { brand, border } from '../variables';
 /* ==========================================================================
     Maps
 
-//== Design Properties
-//## Helper classes to change the look and feel of the widget
+    Default Class For Mendix Maps Widget
 ========================================================================== */
-// Maps Colors
-export const mapsSuccess = {
-    marker: {
-        color: brand.success,
-    },
-};
-export const mapsWarning = {
-    marker: {
-        color: brand.warning,
-    },
-};
-export const mapsDanger = {
-    marker: {
-        color: brand.danger,
-    },
-};
 
-// Maps Size
-export const mapsSquare = {
+export const com_mendix_widget_native_maps_Maps = (Maps = {
     container: {
-        aspectRatio: 1 / 1,
+        // All ViewStyle properties are allowed
+        alignSelf: 'stretch',
+        aspectRatio: 4 / 3,
     },
-};
-
-export const mapsMaxSpace = {
-    container: {
-        flex: 1,
-        aspectRatio: undefined,
+    marker: {
+        //Only color & opacity are allowed
+        color: brand.primary,
+        opacity: 1,
     },
-};
-
-//== Extra Classes
-//## Helper classes to change the look and feel of the widget
-//-------------------------------------------------------------------------------------------------------------------//
-// Maps Shape
-export const mapsRounded = {
-    container: {
-        borderRadius: border.radius,
-        overflow: 'hidden',
-    },
-};
+});
