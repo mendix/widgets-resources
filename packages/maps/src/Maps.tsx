@@ -85,7 +85,7 @@ export class Maps extends Component<Props, State> {
                         {this.state.markers && this.state.markers.map(marker => this.renderMarker(marker))}
                     </MapView>
                 )}
-                {this.state.status !== Status.CameraReady && (
+                {(this.state.status === Status.LoadingMarkers || this.state.status === Status.LoadingMap) && (
                     <View style={this.styles.loadingOverlay}>
                         <ActivityIndicator color={this.styles.loadingIndicator.color} size="large" />
                     </View>
@@ -121,6 +121,7 @@ export class Maps extends Component<Props, State> {
             this.updateCamera(false);
             this.setState({ status: this.props.interactive ? Status.MapReady : Status.CameraReady });
         }
+        this.onRegionChangeComplete();
     }
 
     private onRegionChangeComplete(): void {
