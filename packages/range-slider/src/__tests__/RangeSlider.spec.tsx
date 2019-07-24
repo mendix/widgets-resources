@@ -146,8 +146,8 @@ describe("RangeSlider", () => {
 
         fireEvent(getHandle(component), "responderRelease", {});
 
-        expect(defaultProps.lowerValueAttribute.setValue).toHaveBeenCalledWith(new Big(120));
-        expect(defaultProps.upperValueAttribute.setValue).toHaveBeenCalledWith(new Big(210));
+        expect(defaultProps.lowerValueAttribute.setTextValue).toHaveBeenCalledWith("120");
+        expect(defaultProps.upperValueAttribute.setTextValue).toHaveBeenCalledWith("210");
         expect(onChangeAction.execute).toHaveBeenCalledTimes(1);
     });
 
@@ -162,8 +162,8 @@ describe("RangeSlider", () => {
 
         fireEvent(getHandle(component, 1), "responderRelease", {});
 
-        expect(defaultProps.lowerValueAttribute.setValue).toHaveBeenCalledWith(new Big(70));
-        expect(defaultProps.upperValueAttribute.setValue).toHaveBeenCalledWith(new Big(160));
+        expect(defaultProps.lowerValueAttribute.setTextValue).toHaveBeenCalledWith("70");
+        expect(defaultProps.upperValueAttribute.setTextValue).toHaveBeenCalledWith("160");
         expect(onChangeAction.execute).toHaveBeenCalledTimes(1);
     });
 
@@ -176,8 +176,8 @@ describe("RangeSlider", () => {
         fireEvent(getHandle(component), "responderRelease", {});
 
         expect(onChangeAction.execute).not.toHaveBeenCalled();
-        expect(defaultProps.lowerValueAttribute.setValue).not.toHaveBeenCalled();
-        expect(defaultProps.upperValueAttribute.setValue).not.toHaveBeenCalled();
+        expect(defaultProps.lowerValueAttribute.setTextValue).not.toHaveBeenCalled();
+        expect(defaultProps.upperValueAttribute.setTextValue).not.toHaveBeenCalled();
     });
 });
 

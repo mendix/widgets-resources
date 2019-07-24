@@ -16,7 +16,7 @@ const outputPath = resolve(cwd, `dist/tmp/widgets/com/mendix/widget/native/${wid
 function fixPreservedModules(): Plugin {
     return {
         name: "fix-preserved-modules",
-        renderChunk,
+        renderChunk: (code: string) => code.replace(/\.[tj]sx?(["'])/g, "$1"),
         writeBundle: bundle =>
             Promise.all([
                 /**
@@ -47,12 +47,6 @@ function fixPreservedModules(): Plugin {
             res.pop();
         }
         return res.join(".");
-    }
-
-    function renderChunk(code: string): string {
-        code = code.replace(/\.[tj]sx?(["'])/g, "$1");
-        code = code.replace(/(["'])(big)(["'])/g, "'big.js'");
-        return code;
     }
 }
 
