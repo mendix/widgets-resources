@@ -73,7 +73,7 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
 
     private onChange(rating: number): void {
         if (this.props.ratingAttribute.status === ValueStatus.Available) {
-            this.props.ratingAttribute.setTextValue(String(rating));
+            this.props.ratingAttribute.setValue(new Big(rating));
 
             if (this.props.onChange && this.props.onChange.canExecute) {
                 this.props.onChange.execute();

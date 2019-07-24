@@ -116,7 +116,7 @@ describe("Slider", () => {
 
         fireEvent(getHandle(component), "responderRelease", {});
 
-        expect(defaultProps.valueAttribute.setTextValue).toHaveBeenCalledWith("190");
+        expect(defaultProps.valueAttribute.setValue).toHaveBeenCalledWith(new Big(190));
         expect(onChangeAction.execute).toHaveBeenCalledTimes(1);
     });
 
@@ -129,7 +129,7 @@ describe("Slider", () => {
         fireEvent(getHandle(component), "responderRelease", {});
 
         expect(onChangeAction.execute).not.toHaveBeenCalled();
-        expect(defaultProps.valueAttribute.setTextValue).not.toHaveBeenCalled();
+        expect(defaultProps.valueAttribute.setValue).not.toHaveBeenCalled();
     });
 });
 
