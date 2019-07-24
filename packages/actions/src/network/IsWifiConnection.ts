@@ -12,7 +12,7 @@ import ReactNative from "react-native";
 function IsWifiConnection(): Promise<boolean> {
     // BEGIN USER CODE
 
-    const NetInfo: typeof ReactNative.NetInfo = require("react-native").NetInfo;
+    const NetInfo: typeof ReactNative.NetInfo = require("@react-native-community/netinfo");
 
     return NetInfo.getConnectionInfo().then(({ type }) => type === "wifi");
 
