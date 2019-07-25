@@ -40,7 +40,7 @@ describe("Generating tests for web", function() {
     tests.forEach(test => {
         it(`generates a ${test.programmingLanguage} ${test.boilerPlate} project for web`, function() {
             this.timeout(1000000);
-            const newPath = "../outputs/web" + test.path;
+            const newPath = "../outputs/web" + test.path + "/my-widget";
             const correctPath = path.join(__dirname, newPath);
             const props = {
                 widgetName: "MyWidget",
@@ -59,29 +59,30 @@ describe("Generating tests for web", function() {
             };
             props.packagePath = props.organization.trim().toLowerCase();
             return helpers.run(path.join(__dirname, "../generators/app"))
+                .withArguments("my widget")
                 .withPrompts(props)
                 .then(function(dir) {
                     deleteFolderRecursive(correctPath);
                     fs.copySync(dir, correctPath);
                 })
                 .then(() => {
-                    spawnCommand.spawnCommandSync("npm", ["install"], { cwd: correctPath });
+                    spawnCommand.spawnCommandSync("npm", ["install"], { cwd: correctPath + "/my-widget" });
                 })
                 .then(() => {
-                    spawnCommand.spawnCommandSync("npm", ["run", "lint"], { cwd: correctPath });
+                    spawnCommand.spawnCommandSync("npm", ["run", "lint"], { cwd: correctPath + "/my-widget" });
                 })
                 .then(() => {
-                    spawnCommand.spawnCommandSync("npm", ["run", "build"], { cwd: correctPath });
+                    spawnCommand.spawnCommandSync("npm", ["run", "build"], { cwd: correctPath + "/my-widget" });
                 })
                 .then(() => {
-                    assert.file(correctPath + `/dist/${props.version}/${props.packagePath}.${props.widgetName}.mpk`);
+                    assert.file(correctPath + "/my-widget" + `/dist/${props.version}/${props.packagePath}.${props.widgetName}.mpk`);
                 })
                 .then(() => {
-                    spawnCommand.spawnCommandSync("npm", ["run", "test:unit", "--", "-u"], { cwd: correctPath });
+                    spawnCommand.spawnCommandSync("npm", ["run", "test:unit", "--", "-u"], { cwd: correctPath + "/my-widget" });
                 })
                 .then(() => {
-                    assert.file(correctPath + "/dist/coverage/clover.xml");
-                    assert.equal(analizeCoverage(correctPath + "/dist/coverage/clover.xml"), true);
+                    assert.file(correctPath + "/my-widget" + "/dist/coverage/clover.xml");
+                    assert.equal(analizeCoverage(correctPath + "/my-widget" + "/dist/coverage/clover.xml"), true);
                 });
         });
     });

@@ -31,17 +31,14 @@
     "url": "https://github.com/<%- author %>/<%- packageName %>/issues"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^0.1.5",
+    "@mendix/pluggable-widgets-tools": "^0.1.8",
     "@types/big.js": "^4.0.5",
     "@types/classnames": "^2.2.6",<% if (unitTests) { %>
     "@types/enzyme": "^3.1.14", <% } %>
     "@types/jest": "^24.0.0",
-    "@types/react": "^16.7.13",
-    "@types/react-dom": "^16.0.9",
-    "@types/react-native": "^0.57.5",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-native": "^0.57.8"
+    "@types/react": "^16.8.17",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-native": "^0.57.56"
   },
   "dependencies": {
     "big.js": "^5.2.2"

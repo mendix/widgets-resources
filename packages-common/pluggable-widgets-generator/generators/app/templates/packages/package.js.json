@@ -29,11 +29,7 @@
   },
   "license": "<%- license %>",
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^0.1.5",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-hot-loader": "^4.3.11",
-    "react-test-renderer": "^16.6.0"
+    "@mendix/pluggable-widgets-tools": "^0.1.8"
   },
   "dependencies": {
     "big.js": "^5.2.2",

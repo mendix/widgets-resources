@@ -174,7 +174,7 @@ class MxGenerator extends Generator {
                 var fileText = file.toString();
                 fileText = fileText
                     .replace(/WidgetName/g, this.widget.widgetName)
-                    .replace(/packageName/g, this.widget.packageName)
+                    .replace(/packageName/g, this.widget.widgetName.toLowerCase())
                     .replace(/WidgetDescription/g, this.widget.description);
                 return fileText;
             }.bind(this)
@@ -280,7 +280,7 @@ class MxGenerator extends Generator {
                     let fileText = file.toString();
                     fileText = fileText
                         .replace(/WidgetName/g, this.widget.widgetName)
-                        .replace(/packageName/g, this.widget.packageName)
+                        .replace(/packageName/g, this.widget.widgetName.toLowerCase())
                         .replace(/packagePath/g, this.widget.packagePath.replace(/\./g, "\/"))
                         .replace(/\{\{version\}\}/g, version);
                     return fileText;
@@ -297,7 +297,7 @@ class MxGenerator extends Generator {
                     fileText = fileText
                         .replace(/WidgetNameCamelCase/g, this.widget.widgetName.replace(/([a-z0-9])([A-Z])/g, '$1 $2'))
                         .replace(/WidgetName/g, this.widget.widgetName)
-                        .replace(/packageName/g, this.widget.packageName)
+                        .replace(/packageName/g, this.widget.widgetName.toLowerCase())
                         .replace(/packagePath/g, this.widget.packagePath.replace(/\//g, "\."))
                         .replace(/WidgetDescription/g, this.widget.description);
                     return fileText;
@@ -361,7 +361,7 @@ class MxGenerator extends Generator {
                         var fileText = file.toString();
                         fileText = fileText
                             .replace(/WidgetName/g, widgetName)
-                            .replace(/packageName/g, this.widget.packageName);
+                            .replace(/packageName/g, this.widget.widgetName.toLowerCase());
                         return fileText;
                     }.bind(this)
                 }
@@ -373,7 +373,7 @@ class MxGenerator extends Generator {
                         var fileText = file.toString();
                         fileText = fileText
                             .replace(/WidgetName/g, widgetName)
-                            .replace(/packageName/g, this.widget.packageName);
+                            .replace(/packageName/g, this.widget.widgetName.toLowerCase());
                         return fileText;
                     }.bind(this)
                 }
