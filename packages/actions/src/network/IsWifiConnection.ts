@@ -4,7 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNative from "react-native";
+import { NetInfoType } from "../../typings/NetInfo";
 
 /**
  * @returns {boolean}
@@ -12,9 +12,9 @@ import ReactNative from "react-native";
 function IsWifiConnection(): Promise<boolean> {
     // BEGIN USER CODE
 
-    const NetInfo: typeof ReactNative.NetInfo = require("@react-native-community/netinfo");
+    const NetInfo = require("@react-native-community/netinfo/lib/commonjs");
 
-    return NetInfo.getConnectionInfo().then(({ type }) => type === "wifi");
+    return NetInfo.fetch().then((info: NetInfoType) => info.type === "wifi");
 
     // END USER CODE
 }
