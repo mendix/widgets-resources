@@ -4,6 +4,7 @@
 const pkg = require(__dirname + "/../../package.json");
 const fsExtra = require("fs-extra");
 const extfs = require("extfs");
+const path = require("path");
 const Generator = require("yeoman-generator");
 
 const promptTexts = require("./lib/prompttexts.js");
@@ -88,13 +89,9 @@ class MxGenerator extends Generator {
         let currentDir = "../";
         let noContent = false;
         let i = 0;
+        const currentPath = (this.dir ? path.join(process.cwd() + "/" + this.dir) : process.cwd()) + "/";
         while (i < 5 && !noContent && dir === null) {
-            const items = fsExtra.readdirSync(currentDir);
-
-            if (items.length === 0) {
-                noContent = true;
-                break;
-            }
+            const items = fsExtra.readdirSync(path.join(currentPath + currentDir));
             if (items.find(item => item.endsWith(".mpr"))) {
                 dir = currentDir;
                 break;
