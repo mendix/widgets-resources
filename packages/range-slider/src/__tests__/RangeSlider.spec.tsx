@@ -40,14 +40,12 @@ describe("RangeSlider", () => {
 
     it("renders an error when the minimum is greater than the maximum", () => {
         const component = render(<RangeSlider {...defaultProps} minimumValue={dynamicValue(new Big(300))} />);
-        expect(component.getByType(Text).props.children).toBe(
-            "The minimum value can not be greater than the maximum value."
-        );
+        expect(component.getByType(Text).props.children).toBe("The minimum value must be less than the maximum value.");
     });
 
     it("renders an error when the step size is negative", () => {
         const component = render(<RangeSlider {...defaultProps} stepSize={dynamicValue(new Big(-10))} />);
-        expect(component.getByType(Text).props.children).toBe("The step size can not be zero or less than zero.");
+        expect(component.getByType(Text).props.children).toBe("The step size must be greater than zero.");
     });
 
     it("renders an error when the lower value is less than the minimum", () => {
@@ -58,7 +56,7 @@ describe("RangeSlider", () => {
             />
         );
         expect(component.getByType(Text).props.children).toBe(
-            "The lower value can not be less than the minimum value."
+            "The lower value must be equal or greater than the minimum value."
         );
     });
 
@@ -69,9 +67,7 @@ describe("RangeSlider", () => {
                 lowerValueAttribute={new EditableValueBuilder<BigJs.Big>().withValue(new Big(300)).build()}
             />
         );
-        expect(component.getByType(Text).props.children).toBe(
-            "The lower value can not be greater than the maximum value."
-        );
+        expect(component.getByType(Text).props.children).toBe("The lower value must be less than the maximum value.");
     });
 
     it("renders an error when the upper value is less than the minimum", () => {
@@ -82,7 +78,7 @@ describe("RangeSlider", () => {
             />
         );
         expect(component.getByType(Text).props.children).toBe(
-            "The upper value can not be less than the minimum value."
+            "The upper value bust be greater than the minimum value."
         );
     });
 
@@ -94,7 +90,7 @@ describe("RangeSlider", () => {
             />
         );
         expect(component.getByType(Text).props.children).toBe(
-            "The upper value can not be greater than the maximum value."
+            "The upper value must be equal or less than the maximum value."
         );
     });
 

@@ -47,13 +47,13 @@ export class ProgressBar extends Component<Props> {
         }
         if (available(minimumValue) && available(maximumValue) && available(progressValue)) {
             if (minimumValue.value!.gte(maximumValue.value!)) {
-                messages.push("The minimum value can not be greater than or equal to the maximum value.");
+                messages.push("The minimum value must be equal or less than the maximum value.");
             } else {
                 if (progressValue.value!.lt(minimumValue.value!)) {
-                    messages.push("The current value can not be less than the minimum value.");
+                    messages.push("The current value must be equal or greater than the minimum value.");
                 }
                 if (progressValue.value!.gt(maximumValue.value!)) {
-                    messages.push("The current value can not be greater than the maximum value.");
+                    messages.push("The current value must be equal or less than the maximum value.");
                 }
             }
         }

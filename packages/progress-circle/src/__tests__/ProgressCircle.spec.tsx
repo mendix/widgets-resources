@@ -24,7 +24,7 @@ describe("ProgressCircle", () => {
         const component = render(<ProgressCircle {...createProps(50, 50, 50)} circleText="none" />);
         expect(component.getByType(Circle).props.progress).toBe(0);
         expect(component.getByType(Text).props.children).toBe(
-            "The minimum value can not be greater than or equal to the maximum value."
+            "The minimum value must be equal or less than the maximum value."
         );
     });
 
@@ -32,7 +32,7 @@ describe("ProgressCircle", () => {
         const component = render(<ProgressCircle {...createProps(-50, 0, 100)} circleText="none" />);
         expect(component.getByType(Circle).props.progress).toBe(0);
         expect(component.getByType(Text).props.children).toBe(
-            "The current value can not be less than the minimum value."
+            "The current value must be equal or greater than the minimum value."
         );
     });
 
@@ -40,7 +40,7 @@ describe("ProgressCircle", () => {
         const component = render(<ProgressCircle {...createProps(150, 0, 100)} circleText="none" />);
         expect(component.getByType(Circle).props.progress).toBe(0);
         expect(component.getByType(Text).props.children).toBe(
-            "The current value can not be greater than the maximum value."
+            "The current value must be equal or less than the maximum value."
         );
     });
 

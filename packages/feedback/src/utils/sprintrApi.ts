@@ -14,17 +14,17 @@ export async function sendToSprintr(data: {
     const body = {
         apiversion: "1.0",
         application: data.sprintrAppId,
-        username: "Native Feedback",
-        emailaddress: "native@mendix.com",
+        username: "Unknown Native User",
+        emailaddress: "unknown@example.com",
         userroles: "",
         shortname,
         description,
         img: data.screenshot,
-        browser: "React Native for " + Platform.OS,
+        browser: "Native for " + Platform.OS,
         screensize: Dimensions.get("window").width + "x" + Dimensions.get("window").height,
         issuetype: "issue",
         documentType: "Page",
-        documentName: "fakepath"
+        documentName: "Unknown Native Page"
     };
 
     return fetch(SPRINTR_FEEDBACK_URL, {
