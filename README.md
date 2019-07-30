@@ -3,7 +3,7 @@
 Mendix Atlas UI is the foundation of making beautiful apps with Mendix. For more information about the framework go to
 [here](https://atlas.mendix.com/).
 
-##### Structure
+#### Structure
 
 Mendix is capable of creating beautiful and user-friendly UI. Our Atlas UI framework demonstrates some of its
 possibilities. Here you will find a basic overview of our framework.
@@ -50,7 +50,7 @@ theme/
 └── styles.js
 ```
 
-###### App
+#### App
 
 The app folder contains all custom styling. We recommend users to only use this directory for any custom styling.
 
@@ -59,13 +59,13 @@ These variables can be found in _styles/web/sass/core/variables.scss_ or _styles
 to change any core variable, copy it to _../app/\_custom-variables.(scss|js)_ and change it there. It will then
 overwrite the core variable. This will make updating Atlas UI much easier in the future.
 
-###### Core
+#### Core
 
 The core folder is the heart of Atlas UI. This folder includes base styling, widget styling & additional helper classes.
 The core widget styling is split in to two parts. The widget folder includes the default widget styling, as it will look
 out of the box. The helpers folder will include design properties and extra classes to change that default styling.
 
-###### UI Resources
+#### UI Resources
 
 THe UI Resources folder will contain any styling related to Building Blocks, Page Templates and Layouts.
 
@@ -78,6 +78,6 @@ like.
 Layouts are created with widgets. They are mainly used for navigation or user experiences which need to be consistent
 between pages.
 
-### License
+## License
 
 MIT
