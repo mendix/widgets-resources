@@ -6,12 +6,10 @@
 // Custom variables
 @import 'app/custom-variables';
 
-
 //================================== CORE ==================================\\
 
 // Default variables
 @import 'core/variables';
-
 
 // Base
 @import 'core/base/mixins/animations';
@@ -25,7 +23,6 @@
 @import 'core/base/reset';
 @import 'core/base/base';
 @import 'core/base/login';
-
 
 // Widgets
 @import 'core/widgets/inputs';
@@ -70,7 +67,6 @@
 @import 'core/widgets/progress';
 @import 'core/helpers/helperclasses';
 
-
 // Custom widgets
 @import 'core/widgetscustom/dijit-widgets';
 @import 'core/widgetscustom/progress-bar-theme';
@@ -79,7 +75,6 @@
 @import 'core/widgetscustom/slider-theme';
 @import 'core/widgetscustom/star-rating-theme';
 @import 'core/widgetscustom/switchwidget';
-
 
 //================================= CUSTOM =================================\\
 
@@ -99,14 +94,12 @@
 @import 'ui_resources/atlas_ui_resources/buildingblocks/wizard';
 @import 'ui_resources/atlas_ui_resources/buildingblocks/timeline';
 
-
 // Layouts
 @import 'ui_resources/atlas_ui_resources/layouts/layout-atlas';
 @import 'ui_resources/atlas_ui_resources/layouts/layout-atlas-phone';
 @import 'ui_resources/atlas_ui_resources/layouts/layout-atlas-responsive';
 @import 'ui_resources/atlas_ui_resources/layouts/layout-atlas-tablet';
 @import 'ui_resources/atlas_ui_resources/layouts/layout-atlas-device-wrapper';
-
 
 // Custom
 @import 'app/custom';

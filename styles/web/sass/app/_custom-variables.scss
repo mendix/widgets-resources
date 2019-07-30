@@ -21,6 +21,10 @@ $default-border-color:                              $gray-primary;
 
 //== Step 3: Typography
 $font-family-import:                                "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700";
+@if $font-family-import != false {
+    // Only import, if the import is set
+    @import url($font-family-import);
+}
 $font-family-base:                                  "Open Sans", sans-serif;
 $font-base-size:                                    14px;
 $font-base-color:                                   #555555;
