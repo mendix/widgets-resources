@@ -29,7 +29,8 @@ function SetStorageItemObject(key?: string, value?: mendix.lib.MxObject): Promis
 
     function setItem(key: string, value: string): Promise<void> {
         if (navigator && navigator.product === "ReactNative") {
-            const AsyncStorage: typeof ReactNative.AsyncStorage = require("react-native").AsyncStorage;
+            const AsyncStorage: typeof ReactNative.AsyncStorage = require("@react-native-community/async-storage")
+                .default;
             return AsyncStorage.setItem(key, value);
         }
 

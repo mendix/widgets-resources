@@ -37,7 +37,8 @@ function GetStorageItemObject(key?: string, entity?: string): Promise<mendix.lib
 
     function getItem(key: string): Promise<string | null> {
         if (navigator && navigator.product === "ReactNative") {
-            const AsyncStorage: typeof ReactNative.AsyncStorage = require("react-native").AsyncStorage;
+            const AsyncStorage: typeof ReactNative.AsyncStorage = require("@react-native-community/async-storage")
+                .default;
             return AsyncStorage.getItem(key);
         }
 
@@ -51,7 +52,8 @@ function GetStorageItemObject(key?: string, entity?: string): Promise<mendix.lib
 
     function setItem(key: string, value: string): Promise<void> {
         if (navigator && navigator.product === "ReactNative") {
-            const AsyncStorage: typeof ReactNative.AsyncStorage = require("react-native").AsyncStorage;
+            const AsyncStorage: typeof ReactNative.AsyncStorage = require("@react-native-community/async-storage")
+                .default;
             return AsyncStorage.setItem(key, value);
         }
 

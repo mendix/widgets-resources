@@ -21,7 +21,8 @@ function StorageItemExists(key?: string): Promise<boolean> {
 
     function getItem(key: string): Promise<string | null> {
         if (navigator && navigator.product === "ReactNative") {
-            const AsyncStorage: typeof ReactNative.AsyncStorage = require("react-native").AsyncStorage;
+            const AsyncStorage: typeof ReactNative.AsyncStorage = require("@react-native-community/async-storage")
+                .default;
             return AsyncStorage.getItem(key);
         }
 
