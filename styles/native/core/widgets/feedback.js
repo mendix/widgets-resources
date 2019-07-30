@@ -1,6 +1,13 @@
-import { background, border, brand, button, contrast, font, input } from "../variables";
-import { Platform } from "react-native";
-import { anyColorToRgbString } from "../_helperfunctions/convertcolors";
+import { background, border, brand, button, contrast, font, input } from '../variables';
+import { Platform } from 'react-native';
+import {} from '../variables';
+
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
+//
 
 /* ==========================================================================
     Feedback
@@ -15,14 +22,14 @@ export const com_mendix_widget_native_feedback_Feedback = (Feedback = {
         backgroundColor: background.secondary,
         borderTopLeftRadius: button.borderRadius,
         borderBottomLeftRadius: button.borderRadius,
+        elevation: 1.5,
         shadowColor: contrast.lower,
-        shadowOpacity: 0.9,
-        shadowRadius: 4,
+        shadowOpacity: 0.7,
+        shadowRadius: 10,
         shadowOffset: {
             width: 0,
             height: 2,
         },
-        elevation: 2,
     },
     dialog: {
         // All ViewStyle properties are allowed
@@ -50,7 +57,7 @@ export const com_mendix_widget_native_feedback_Feedback = (Feedback = {
         borderBottomWidth: input.borderWidth,
         borderWidth: Platform.select({ android: border.width }),
 
-        textAlignVertical: "top",
+        textAlignVertical: 'top',
         paddingVertical: input.paddingVertical,
         paddingHorizontal: input.paddingHorizontal,
     },
@@ -65,10 +72,10 @@ export const com_mendix_widget_native_feedback_Feedback = (Feedback = {
         margin: 0,
         padding: 0,
         marginRight: Platform.select({ ios: 0, android: -5 }),
-        thumbColorOn: brand.primary,
-        trackColorOn: `rgba(${anyColorToRgbString(brand.primary)},0.2)`,
-        thumbColorOff: contrast.low,
-        trackColorOff: `rgba(${anyColorToRgbString(contrast.low)},0.2)`,
+        thumbColorOn: background.primary,
+        trackColorOn: brand.success,
+        thumbColorOff: background.lowest,
+        trackColorOff: contrast.lowest,
     },
     button: {
         // Just these 3 properties are allowed

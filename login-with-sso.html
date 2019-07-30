@@ -6,7 +6,9 @@
         <title>Login</title>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <link rel="stylesheet" type="text/css" href="styles/web/css/main.css?{{ cachebust }}" />
+
+        {{themecss}}
+        
     </head>
 
     <body>
@@ -23,14 +25,30 @@
                             <div class="form-group">
                                 <label id="usernameLabel" for="usernameInput">User name</label>
                                 <div class="inputwrapper">
-                                    <input id="usernameInput" class="form-control" type="text" placeholder="User name" autocorrect="off" autocapitalize="none" autocomplete="off" />
+                                    <input
+                                        id="usernameInput"
+                                        class="form-control"
+                                        type="text"
+                                        placeholder="User name"
+                                        autocorrect="off"
+                                        autocapitalize="none"
+                                        autocomplete="off"
+                                    />
                                     <span class="glyphicon glyphicon-user"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label id="passwordLabel" for="passwordInput">Password</label>
                                 <div class="inputwrapper">
-                                    <input id="passwordInput" class="form-control" type="password" placeholder="Password" autocorrect="off" autocapitalize="none" autocomplete="off" />
+                                    <input
+                                        id="passwordInput"
+                                        class="form-control"
+                                        type="password"
+                                        placeholder="Password"
+                                        autocorrect="off"
+                                        autocapitalize="none"
+                                        autocomplete="off"
+                                    />
                                     <span class="glyphicon glyphicon-eye-close"></span>
                                 </div>
                             </div>
@@ -52,8 +70,19 @@
             <div class="loginpage-logo">
                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 599 187">
                     <g>
-                        <rect x="0.98" y="0.86" width="185.28" height="185.28" rx="24.72" ry="24.72" style="fill: #00aae7" />
-                        <polygon points="598.02 60 578.15 60 570.62 75.08 563.08 60 543.21 60 560.22 93.51 543.21 127.03 563.08 127.03 570.62 111.95 578.15 127.03 598.02 127.03 581.02 93.51 598.02 60" style="fill: #1a1a1a" />
+                        <rect
+                            x="0.98"
+                            y="0.86"
+                            width="185.28"
+                            height="185.28"
+                            rx="24.72"
+                            ry="24.72"
+                            style="fill: #00aae7"
+                        />
+                        <polygon
+                            points="598.02 60 578.15 60 570.62 75.08 563.08 60 543.21 60 560.22 93.51 543.21 127.03 563.08 127.03 570.62 111.95 578.15 127.03 598.02 127.03 581.02 93.51 598.02 60"
+                            style="fill: #1a1a1a"
+                        />
                         <path
                             d="M355.57,109.52a6.84,6.84,0,0,1-5.06,6l-.28.07a8.09,8.09,0,0,1-2.11.31c-4,0-6.9-1.89-7.45-6.35s-.6-12.91-.6-12.91h35.42c0-5.24.38-10-.11-14.47a29.32,29.32,0,0,0-3.54-11.53,19.51,19.51,0,0,0-8.41-7.69q-5.61-2.82-15.09-2.82t-14.82,2.63a19.21,19.21,0,0,0-8.28,7.11,25.91,25.91,0,0,0-3.61,10.44,95.45,95.45,0,0,0-.8,12.62,102.66,102.66,0,0,0,.87,13.9,26.88,26.88,0,0,0,3.74,10.88,19.19,19.19,0,0,0,8.35,7.12c3.65,1.7,8.49,2.56,14.55,2.56A36.38,36.38,0,0,0,360,125.69a23.49,23.49,0,0,0,8.28-4.61c4.54-3.93,7.21-8.86,7.21-14.34H355.62S355.67,107.6,355.57,109.52Zm-14.86-31c.38-4,3.35-7.22,7.45-7.22s7.12,2.57,7.45,7.22a56.24,56.24,0,0,1,.12,8H340.11C340.42,81.35,340.42,81.39,340.71,78.47Z"
                             style="fill: #1a1a1a"
@@ -76,7 +105,15 @@
                         />
                         <g>
                             <path d="M534.83,80.84V127H515V60h19.87V80.84Z" style="fill: #1a1a1a" />
-                            <rect x="514.96" y="32.14" width="19.87" height="18.06" rx="3.14" ry="3.14" style="fill: #1a1a1a" />
+                            <rect
+                                x="514.96"
+                                y="32.14"
+                                width="19.87"
+                                height="18.06"
+                                rx="3.14"
+                                ry="3.14"
+                                style="fill: #1a1a1a"
+                            />
                         </g>
                     </g>
                 </svg>

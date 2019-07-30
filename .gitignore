@@ -16,3 +16,6 @@
 # Git
 .gitlab/
 .github/
+
+# Zips
+**/*.zip

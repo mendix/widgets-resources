@@ -3,7 +3,9 @@
     <head>
         <meta charset="utf-8" />
         <title>Mendix - Tablet preview</title>
-        <link rel="stylesheet" type="text/css" href="styles/web/css/main.css?{{ cachebust }}" />
+
+        {{themecss}}
+
     </head>
 
     <body>
@@ -11,7 +13,8 @@
             <div class="devicetablet">
                 <iframe id="frame" class="deviceframe"></iframe>
                 <div class="devicedisclaimer">
-                    This is not a simulator but just a resized view surrounded with an image to give an impression of what the app might look like on a tablet.
+                    This is not a simulator but just a resized view surrounded with an image to give an impression of
+                    what the app might look like on a tablet.
                 </div>
             </div>
         </div>

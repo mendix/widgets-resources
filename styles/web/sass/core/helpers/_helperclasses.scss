@@ -1,0 +1,147 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+/* ==========================================================================
+   Helpers
+
+   Default Mendix Helpers
+========================================================================== */
+
+.show {
+    display: block !important;
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.invisible {
+    visibility: hidden !important;
+}
+
+.display-ie8-only:not([attr*=""]) {
+    display: none !important;
+    padding: 0 !important;
+}
+
+.list-nostyle {
+    ul {
+        margin: 0 !important;
+        padding: 0 !important;
+        li {
+            list-style-type: none !important;
+        }
+    }
+}
+
+.nowrap,
+.nowrap * {
+    overflow: hidden !important;
+    // Star for inside an element, IE8 span > a
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+}
+
+// Render DIV as Table Cells
+.table {
+    display: table !important;
+}
+
+.table-row {
+    display: table-row !important;
+}
+
+.table-cell {
+    display: table-cell !important;
+}
+
+// Quick floats
+.pull-left {
+    float: left !important;
+}
+.pull-right {
+    float: right !important;
+}
+
+// Align options
+.align-top {
+    vertical-align: top !important;
+}
+
+.align-middle {
+    vertical-align: middle !important;
+}
+
+.align-bottom {
+    vertical-align: bottom !important;
+}
+
+// Flex alignments
+.row-left {
+    display: flex !important;
+    align-items: center !important;
+    flex-flow: row !important;
+    justify-content: flex-start !important;
+}
+.row-center {
+    display: flex !important;
+    align-items: center !important;
+    flex-flow: row !important;
+    justify-content: center !important;
+}
+.row-right {
+    display: flex !important;
+    align-items: center !important;
+    flex-flow: row !important;
+    justify-content: flex-end !important;
+}
+.col-left {
+    display: flex !important;
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+.col-center {
+    display: flex !important;
+    align-items: center !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+.col-right {
+    display: flex !important;
+    align-items: flex-end !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+
+// Display properties
+.d-inline {
+    display: inline !important;
+}
+.d-inline-block {
+    display: inline-block !important;
+}
+.d-block {
+    display: block !important;
+}
+
+@media (max-width: $screen-xs-max) {
+    .hidden-xs {
+        display: none !important;
+    }
+}
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .hidden-sm {
+        display: none !important;
+    }
+}
+@media (min-width: $screen-md) {
+    .hidden-md {
+        display: none !important;
+    }
+}

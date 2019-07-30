@@ -1,0 +1,105 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+/* ==========================================================================
+   Flex
+
+   Flex classes
+========================================================================== */
+
+
+// These classes define the order of the children
+.flex-column {
+    flex-direction: column;
+}
+.flex-row-reverse {
+    flex-direction: row-reverse;
+}
+.flex-column-reverse {
+    flex-direction: column-reverse;
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+// Align children in both directions
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+// These classes define the alignment of the children
+.justify-content-center {
+    justify-content: center;
+}
+.justify-content-end {
+    justify-content: flex-end;
+}
+.justify-content-space-between {
+    justify-content: space-between;
+}
+.justify-content-space-around {
+    justify-content: space-around;
+}
+.justify-content-space-evenly {
+    justify-content: space-evenly;
+}
+
+/// These classes define the alignment of the children in the cross-direction
+.align-children-center {
+    align-items: center;
+}
+.align-children-end {
+    align-items: flex-end;
+}
+.align-children-stretch {
+    align-items: stretch;
+}
+.align-children-baseline {
+    align-items: baseline;
+}
+
+/// These classes define the alignment of the rows of children in the cross-direction
+.align-content-center {
+    align-content: center;
+}
+.align-content-end {
+    align-content: flex-end;
+}
+.align-content-between {
+    align-content: space-between;
+}
+.align-content-around {
+    align-content: space-around;
+}
+
+/// These classes allow the default alignment to be overridden for individual items
+.align-self-start {
+    align-self: flex-start;
+}
+.align-self-end {
+    align-self: flex-end;
+}
+.align-self-center {
+    align-self: center;
+}
+.align-self-baseline {
+    align-self: baseline;
+}
+.align-self-stretch {
+    align-self: stretch;
+}
+
+/// These classes define the percentage of available free space within a flex container a flex item will take.
+@mixin flex-items($number) {
+    @for $i from 1 through $number {
+        .flexitem-#{$i} {
+            flex: #{$i} #{$i} 1%;
+        }
+    }
+}
+@include flex-items($number: 12);

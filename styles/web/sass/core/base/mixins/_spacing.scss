@@ -1,9 +1,16 @@
-@mixin get-responsive-spacing-large ($type: padding, $direction: all, $is_important: false) {
-    $suffix: "";
-    $dash: "-"; // Otherwise it will be interpreted as a minus symbol. Needed for the Gonzales PE version: 3.4.7 compiler (used by the Webmodeler)
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+@mixin get-responsive-spacing-large($type: padding, $direction: all, $is_important: false) {
+    $suffix: '';
+    $dash: '-'; // Otherwise it will be interpreted as a minus symbol. Needed for the Gonzales PE version: 3.4.7 compiler (used by the Webmodeler)
 
     @if $is_important != false {
-        $suffix: " !important";
+        $suffix: ' !important';
     }
     @if $direction==all {
         @media (max-width: $screen-xs-max) {
@@ -28,12 +35,12 @@
     }
 }
 
-@mixin get-responsive-spacing-medium ($type: padding, $direction: all, $is_important: false) {
-    $suffix: "";
-    $dash: "-"; // Otherwise it will be interpreted as a minus symbol. Needed for the Gonzales PE version: 3.4.7 compiler (used by the Webmodeler)
+@mixin get-responsive-spacing-medium($type: padding, $direction: all, $is_important: false) {
+    $suffix: '';
+    $dash: '-'; // Otherwise it will be interpreted as a minus symbol. Needed for the Gonzales PE version: 3.4.7 compiler (used by the Webmodeler)
 
     @if $is_important != false {
-        $suffix: " !important";
+        $suffix: ' !important';
     }
     @if $direction==all {
         @media (max-width: $screen-xs-max) {
