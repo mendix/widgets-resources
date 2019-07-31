@@ -38,7 +38,7 @@ const translateType = (
             const type = translateAttributeType(prop.returnType[0].$.type);
             return preview && !isChild ? type : `DynamicValue<${type}>`;
         case "action":
-            return preview ? "pages.ClientAction" : "ActionValue";
+            return preview ? "ActionPreview" : "ActionValue";
         case "translatableString":
         case "textTemplate":
             return preview && !isChild ? "string" : "DynamicValue<string>";
@@ -367,7 +367,7 @@ export const transformJsonContent = (jsonContent: MendixXML, widgetName: string)
 import { CSSProperties } from "react";${
               hasAction
                   ? `
-import { pages } from "mendixmodelsdk";`
+import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/typings";`
                   : ""
           }`
         : "";

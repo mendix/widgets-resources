@@ -4,7 +4,7 @@ export const listActionWebOutput = `/**
  * @author Mendix Widgets Team
  */
 import { CSSProperties } from "react";
-import { pages } from "mendixmodelsdk";
+import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/typings";
 import { ActionValue, EditableValue } from "mendix";
 
 interface CommonProps {
@@ -21,7 +21,7 @@ export interface ActionsType {
 
 export interface ActionsPreviewType {
     description: string;
-    action: pages.ClientAction;
+    action: ActionPreview;
 }
 
 export interface ActionsVisibilityType {

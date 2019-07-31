@@ -41,7 +41,7 @@ export const webResult = `/**
  * @author Mendix Widgets Team
  */
 import { CSSProperties } from "react";
-import { pages } from "mendixmodelsdk";
+import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/typings";
 import { ActionValue, DynamicValue, EditableValue, WebImage } from "mendix";
 
 interface CommonProps {
@@ -65,7 +65,7 @@ export interface ActionsType {
 export interface ActionsPreviewType {
     name: string;
     enabled: boolean;
-    action: pages.ClientAction;
+    action: ActionPreview;
     image: WebImage;
 }
 
@@ -99,8 +99,8 @@ export interface MyWidgetPreviewProps extends CommonProps {
     mywidgetType: MywidgetTypeEnum;
     tries?: number;
     image?: WebImage;
-    onClickAction?: pages.ClientAction;
-    onChange?: pages.ClientAction;
+    onClickAction?: ActionPreview;
+    onChange?: ActionPreview;
     actions: ActionsPreviewType[];
 }
 

@@ -4,7 +4,7 @@ export const listImageWebOutput = `/**
  * @author Mendix Widgets Team
  */
 import { CSSProperties } from "react";
-import { pages } from "mendixmodelsdk";
+import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/typings";
 import { DynamicValue, WebImage } from "mendix";
 
 interface CommonProps {
