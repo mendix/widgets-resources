@@ -109,3 +109,57 @@ export interface WidgetFile {
         path: string;
     };
 }
+
+// Studio Typings
+
+export interface PageClientAction {
+    type: "PageClientAction";
+    params: {
+        page: string; // <module>.<page>
+    };
+}
+export interface MicroflowClientAction {
+    type: "MicroflowClientAction";
+    params: {
+        microflow: string; // <module>.<microflow>
+    };
+}
+export interface CallNanoflowClientAction {
+    type: "CallNanoflowClientAction";
+    params: {
+        nanoflow: string; // <module>.<nanoflow>
+    };
+}
+
+export interface OpenLinkClientAction {
+    type: "OpenLinkClientAction";
+    params: {
+        linkType: string;
+        isDynamic: boolean;
+        value: string;
+    };
+}
+
+export interface CreateObjectClientAction {
+    type: "CreateObjectClientAction";
+    params: {
+        objectType: string; // <module>.<entity>
+        page: string; // <module>.<page>
+    };
+}
+export interface OthersClientAction {
+    type:
+        | "NoClientAction"
+        | "SaveChangesClientAction"
+        | "SaveChangesClientAction"
+        | "ClosePageClientAction"
+        | "SignOutClientAction"
+        | "DeleteClientAction";
+}
+export type ActionPreview =
+    | OthersClientAction
+    | PageClientAction
+    | MicroflowClientAction
+    | CallNanoflowClientAction
+    | OpenLinkClientAction
+    | CreateObjectClientAction;

@@ -4,7 +4,7 @@ export const iconWebOutput = `/**
  * @author Mendix Widgets Team
  */
 import { CSSProperties } from "react";
-import { pages } from "mendixmodelsdk";
+import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/typings";
 import { DynamicValue, WebIcon } from "mendix";
 
 interface CommonProps {
