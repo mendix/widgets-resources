@@ -23,7 +23,7 @@
                         <div>
                             <div id="loginMessage" class="alert alert-danger"></div>
                             <div class="form-group">
-                                <label id="usernameLabel" for="usernameInput">User name</label>
+                                <label class="control-label" id="usernameLabel" for="usernameInput">User name</label>
                                 <div class="inputwrapper">
                                     <input
                                         id="usernameInput"
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label id="passwordLabel" for="passwordInput">Password</label>
+                                <label class="control-label" id="passwordLabel" for="passwordInput">Password</label>
                                 <div class="inputwrapper">
                                     <input
                                         id="passwordInput"
@@ -49,7 +49,7 @@
                                         autocapitalize="none"
                                         autocomplete="off"
                                     />
-                                    <span class="glyphicon glyphicon-eye-close"></span>
+                                    <span class="glyphicon glyphicon-eye-close" onClick="togglePassword()"></span>
                                 </div>
                             </div>
                             <button id="loginButton" type="submit" class="btn btn-success btn-lg">Sign in</button>
@@ -122,5 +122,17 @@
 
         <script src="js/login_i18n.js?{{ cachebust }}"></script>
         <script src="js/login.js?{{ cachebust }}"></script>
+        <script>
+            function togglePassword() {
+                const icon = document.querySelector('[class*=glyphicon-eye]');
+                if (icon.classList.contains('glyphicon-eye-close'))
+                    icon.classList.replace('glyphicon-eye-close', 'glyphicon-eye-open');
+                else icon.classList.replace('glyphicon-eye-open', 'glyphicon-eye-close');
+
+                const input = document.querySelector('#passwordInput');
+                if (input.type === 'password') input.type = 'text';
+                else input.type = 'password';
+            }
+        </script>
     </body>
 </html>
