@@ -12,16 +12,15 @@
   "packagePath": "<%- packagePath %>",
   "scripts": {
     "start": "npm run dev",
-    "build": "npm run mx-script build:js:native",
-    "dev": "npm run mx-script start:js:native",
-    "lint": "npm run mx-script lint",
-    "lint:fix": "npm run mx-script lint:fix",
-    "mx-script": "cd ./node_modules/@mendix/pluggable-widgets-tools && node bin/mx-scripts.js",<% if (unitTests) { %>
+    "build": "pluggable-widgets-tools build:js:native",
+    "dev": "pluggable-widgets-tools start:js:native",
+    "lint": "pluggable-widgets-tools lint",
+    "lint:fix": "pluggable-widgets-tools lint:fix",<% if (unitTests) { %>
     "pretest": "npm run lint && npm run build",
-    "test": "npm run mx-script test:unit:native -- --no-cache --ci",
-    "test:unit": "npm run mx-script test:unit:native -- --coverage",<% } %>
+    "test": "pluggable-widgets-tools test:unit:native --no-cache --ci",
+    "test:unit": "pluggable-widgets-tools test:unit:native --coverage",<% } %>
     "prerelease": "npm run lint",
-    "release": "npm run mx-script release:js:native"
+    "release": "pluggable-widgets-tools release:js:native"
   },<% if (unitTests) { %>
   "jest-junit": {
     "output": "./dist/testresults/TESTS-Jest.xml"
@@ -31,7 +30,7 @@
     "url": "https://github.com/<%- author %>/<%- packageName %>/issues"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^0.1.8"
+    "@mendix/pluggable-widgets-tools": "^8.0.0"
   },
   "dependencies": {
     "big.js": "^5.2.2"
