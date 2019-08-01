@@ -29,10 +29,16 @@ export class Dailymotion extends Component<DailymotionProps, DailymotionState> {
                 src={this.generateUrl(this.props.url)}
                 frameBorder="0"
                 allow="autoplay; fullscreen"
-                allowFullScreen={true}
+                allowFullScreen
                 ref={this.iframe}
             >
-                <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize} refreshMode="debounce" refreshRate={100} />
+                <ReactResizeDetector
+                    handleWidth
+                    handleHeight
+                    onResize={this.handleOnResize}
+                    refreshMode="debounce"
+                    refreshRate={100}
+                />
             </iframe>
         );
     }
@@ -80,6 +86,7 @@ export class Dailymotion extends Component<DailymotionProps, DailymotionState> {
         return attributes;
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
     public static canPlay(url: string): boolean {
         return !!url && !!validateUrl(url) && url.indexOf("dailymotion.com") > -1;
     }

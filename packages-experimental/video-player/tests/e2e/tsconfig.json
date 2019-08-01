@@ -9,8 +9,8 @@
       "noImplicitAny": false,
       "outDir": "../../dist/e2e",
       "types": [
-        "jasmine",
-        "webdriverio"
+        "@wdio/sync",
+        "jest"
       ],
       "sourceMap": false
     },

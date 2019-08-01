@@ -30,10 +30,16 @@ export class Youtube extends Component<YoutubeProps, YoutubeState> {
                 src={this.generateUrl(this.props.url)}
                 frameBorder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen={true}
+                allowFullScreen
                 ref={this.iframe}
             >
-                <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize} refreshMode="debounce" refreshRate={100} />
+                <ReactResizeDetector
+                    handleWidth
+                    handleHeight
+                    onResize={this.handleOnResize}
+                    refreshMode="debounce"
+                    refreshRate={100}
+                />
             </iframe>
         );
     }
@@ -88,6 +94,7 @@ export class Youtube extends Component<YoutubeProps, YoutubeState> {
         return attributes;
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
     public static canPlay(url: string): boolean {
         return !!url && !!validateUrl(url) && (url.indexOf("youtube.com") > -1 || url.indexOf("youtu.be") > -1);
     }

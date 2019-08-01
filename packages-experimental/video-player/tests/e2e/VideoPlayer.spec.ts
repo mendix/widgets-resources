@@ -2,11 +2,12 @@ import gridpage from "./pages/grid.page";
 import tabpage from "./pages/tab.page";
 import errorpage from "./pages/error.page";
 
+// @ts-ignore
 describe("Grid page", () => {
     it("should render youtube iframe", () => {
         gridpage.open();
-        gridpage.youtube.waitForVisible();
-
+        gridpage.youtube.waitForDisplayed();
+        // @ts-ignore
         const youtubePlayer = gridpage.youtube.getHTML();
         expect(youtubePlayer).toContain("class=\"widget-video-player-iframe\"");
         expect(youtubePlayer).toContain("src=\"https://www.youtube.com");
@@ -17,8 +18,9 @@ describe("Grid page", () => {
     });
 
     it("should render vimeo iframe", () => {
-        gridpage.vimeo.waitForVisible();
-
+        // @ts-ignore
+        gridpage.vimeo.waitForDisplayed();
+        // @ts-ignore
         const youtubePlayer = gridpage.vimeo.getHTML();
         expect(youtubePlayer).toContain("class=\"widget-video-player-iframe\"");
         expect(youtubePlayer).toContain("src=\"https://player.vimeo.com");
@@ -29,44 +31,54 @@ describe("Grid page", () => {
 });
 
 describe("Tab page", () => {
-
     it("should render youtube tab", () => {
         tabpage.open();
-
-        tabpage.youtubeTab.waitForVisible();
+        // @ts-ignore
+        tabpage.youtubeTab.waitForDisplayed();
+        // @ts-ignore
         tabpage.youtubeTab.click();
-        tabpage.youtube.waitForVisible();
-
+        // @ts-ignore
+        tabpage.youtube.waitForDisplayed();
+        // @ts-ignore
         const youtubePlayer = tabpage.youtube.getHTML();
         expect(youtubePlayer).toContain("class=\"widget-video-player-iframe\"");
         expect(youtubePlayer).toContain("src=\"https://www.youtube.com");
     });
 
     it("should render vimeo tab", () => {
-        tabpage.vimeoTab.waitForVisible();
+        // @ts-ignore
+        tabpage.vimeoTab.waitForDisplayed();
+        // @ts-ignore
         tabpage.vimeoTab.click();
-        tabpage.vimeo.waitForVisible();
-
+        // @ts-ignore
+        tabpage.vimeo.waitForDisplayed();
+        // @ts-ignore
         const vimeoPlayer = tabpage.vimeo.getHTML();
         expect(vimeoPlayer).toContain("class=\"widget-video-player-iframe\"");
         expect(vimeoPlayer).toContain("src=\"https://player.vimeo.com");
     });
 
     it("should render dailymotion tab", () => {
-        tabpage.dailymotionTab.waitForVisible();
+        // @ts-ignore
+        tabpage.dailymotionTab.waitForDisplayed();
+        // @ts-ignore
         tabpage.dailymotionTab.click();
-        tabpage.dailymotion.waitForVisible();
-
+        // @ts-ignore
+        tabpage.dailymotion.waitForDisplayed();
+        // @ts-ignore
         const dailymotionPlayer = tabpage.dailymotion.getHTML();
         expect(dailymotionPlayer).toContain("class=\"widget-video-player-iframe\"");
         expect(dailymotionPlayer).toContain("src=\"https://www.dailymotion.com");
     });
 
     it("should render html5 video tab", () => {
-        tabpage.html5Tab.waitForVisible();
+        // @ts-ignore
+        tabpage.html5Tab.waitForDisplayed();
+        // @ts-ignore
         tabpage.html5Tab.click();
-        tabpage.html5.waitForVisible();
-
+        // @ts-ignore
+        tabpage.html5.waitForDisplayed();
+        // @ts-ignore
         const html5Player = tabpage.html5.getHTML();
         expect(html5Player).toContain("class=\"widget-video-player-html5\"");
         expect(html5Player).toContain("<source src=");
@@ -77,8 +89,9 @@ describe("Tab page", () => {
 describe("Error page", () => {
     it("should render no content div", () => {
         errorpage.open();
-        errorpage.noContent.waitForVisible();
-
+        // @ts-ignore
+        errorpage.noContent.waitForDisplayed();
+        // @ts-ignore
         const playerError = errorpage.noContent.getHTML();
         expect(playerError).not.toBeNull();
     });

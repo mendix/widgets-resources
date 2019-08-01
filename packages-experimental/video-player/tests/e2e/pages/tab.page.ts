@@ -1,29 +1,45 @@
 class TabPage {
+    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
+    public get youtube() {
+        return $(".widget-video-player.widget-video-player-container.mx-name-videoPlayer1.size-box iframe");
+    }
 
-    public get youtube() { return browser.element(".widget-video-player.widget-video-player-container.mx-name-videoPlayer1.size-box iframe"); }
+    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
+    public get vimeo() {
+        return $(".widget-video-player.widget-video-player-container.mx-name-videoPlayer5.size-box iframe");
+    }
 
-    public get vimeo() { return browser.element(".widget-video-player.widget-video-player-container.mx-name-videoPlayer5.size-box iframe"); }
+    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
+    public get html5() {
+        return $(".widget-video-player.widget-video-player-container.mx-name-videoPlayer3.size-box video");
+    }
 
-    public get html5() { return browser.element(".widget-video-player.widget-video-player-container.mx-name-videoPlayer3.size-box video"); }
+    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
+    public get dailymotion() {
+        return $(".widget-video-player.widget-video-player-container.mx-name-videoPlayer4.size-box iframe");
+    }
 
-    public get dailymotion() { return browser.element(".widget-video-player.widget-video-player-container.mx-name-videoPlayer4.size-box iframe"); }
-
+    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
     public get youtubeTab() {
-        return browser.element(".mx-name-tabPage1");
+        return $(".mx-name-tabPage1");
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
     public get vimeoTab() {
-        return browser.element(".mx-name-tabPage5");
+        return $(".mx-name-tabPage5");
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
     public get html5Tab() {
-        return browser.element(".mx-name-tabPage3");
+        return $(".mx-name-tabPage3");
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
     public get dailymotionTab() {
-        return browser.element(".mx-name-tabPage4");
+        return $(".mx-name-tabPage4");
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
     public open(): void {
         browser.url("/p/tabs");
     }

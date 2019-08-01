@@ -41,7 +41,11 @@ export class SizeContainer extends Component<SizeProps> {
         };
 
         return (
-            <div className={classNames(this.props.className, "size-box")} style={relativeStyle} tabIndex={this.props.tabIndex}>
+            <div
+                className={classNames(this.props.className, "size-box")}
+                style={relativeStyle}
+                tabIndex={this.props.tabIndex}
+            >
                 <div className={classNames("size-box-inner", this.props.classNameInner)} style={absoluteStyle}>
                     {this.props.children}
                 </div>
@@ -49,7 +53,12 @@ export class SizeContainer extends Component<SizeProps> {
         );
     }
 
-    private getHeight(heightUnit: HeightUnitType, height: number, widthUnit: WidthUnitType, width: number): CSSProperties {
+    private getHeight(
+        heightUnit: HeightUnitType,
+        height: number,
+        widthUnit: WidthUnitType,
+        width: number
+    ): CSSProperties {
         const style: CSSProperties = {};
         if (heightUnit === "percentageOfWidth") {
             const ratio = (height / 100) * width;
@@ -64,7 +73,7 @@ export class SizeContainer extends Component<SizeProps> {
         } else if (heightUnit === "percentageOfParent") {
             style.height = `${height}%`;
         } else if (heightUnit === "aspectRatio") {
-            style.height = width * 0.5625; //Default is 16:9
+            style.height = width * 0.5625; // Default is 16:9
         }
 
         return style;

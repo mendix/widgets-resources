@@ -4,7 +4,8 @@
  * @author Mendix Widgets Team
  */
 import { CSSProperties } from "react";
-import { DynamicValue } from "mendix";
+import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/typings";
+import { ActionValue, DynamicValue } from "mendix";
 
 interface CommonProps {
     id: string;
@@ -28,6 +29,7 @@ export interface VideoPlayerContainerProps extends CommonProps {
     width: number;
     heightUnit: HeightUnitEnum;
     height: number;
+    actionTest: ActionValue;
 }
 
 export interface VideoPlayerPreviewProps extends CommonProps {
@@ -41,6 +43,7 @@ export interface VideoPlayerPreviewProps extends CommonProps {
     width: number;
     heightUnit: HeightUnitEnum;
     height: number;
+    actionTest: ActionPreview;
 }
 
 export interface VisibilityMap {
@@ -54,4 +57,5 @@ export interface VisibilityMap {
     width: boolean;
     heightUnit: boolean;
     height: boolean;
+    actionTest: boolean;
 }

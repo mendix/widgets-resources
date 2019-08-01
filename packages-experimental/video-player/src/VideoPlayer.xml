@@ -77,6 +77,10 @@
                     <caption>Size</caption>
                     <description>If the unit is 'Aspect ratio' the height will be based on the video height.</description>
                 </property>
+                <property type="action" key="actionTest">
+                    <caption>Action</caption>
+                    <description/>
+                </property>
             </propertyGroup>
         </propertyGroup>
     </properties>

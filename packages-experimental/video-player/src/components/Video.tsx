@@ -65,7 +65,15 @@ export class Video extends Component<VideoPlayerProps> {
     }
 
     private renderVimeoPlayer(url: string): JSX.Element {
-        return <Vimeo url={url} autoPlay={this.props.autoStart} muted={this.props.muted} loop={this.props.loop} aspectRatio={this.props.aspectRatio} />;
+        return (
+            <Vimeo
+                url={url}
+                autoPlay={this.props.autoStart}
+                muted={this.props.muted}
+                loop={this.props.loop}
+                aspectRatio={this.props.aspectRatio}
+            />
+        );
     }
 
     private renderDailymotionPlayer(url: string): JSX.Element {

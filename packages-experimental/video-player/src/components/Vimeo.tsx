@@ -29,10 +29,16 @@ export class Vimeo extends Component<VimeoProps, VimeoState> {
                 src={this.generateUrl(this.props.url)}
                 frameBorder="0"
                 allow="autoplay; fullscreen"
-                allowFullScreen={true}
+                allowFullScreen
                 ref={this.iframe}
             >
-                <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize} refreshMode="debounce" refreshRate={100} />
+                <ReactResizeDetector
+                    handleWidth
+                    handleHeight
+                    onResize={this.handleOnResize}
+                    refreshMode="debounce"
+                    refreshRate={100}
+                />
             </iframe>
         );
     }
@@ -55,7 +61,9 @@ export class Vimeo extends Component<VimeoProps, VimeoState> {
     private generateUrl(url: string): string {
         const attributes = this.handleAttributes();
         try {
-            if (url.includes("player.vimeo.com")) return `${url}${attributes}`;
+            if (url.includes("player.vimeo.com")) {
+                return `${url}${attributes}`;
+            }
 
             const urlVimeoSplit = url.split("/");
             if (urlVimeoSplit.length > 0) {
@@ -78,6 +86,7 @@ export class Vimeo extends Component<VimeoProps, VimeoState> {
         return attributes;
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
     public static canPlay(url: string): boolean {
         return !!url && !!validateUrl(url) && url.indexOf("vimeo.com") > -1;
     }

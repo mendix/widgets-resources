@@ -38,8 +38,19 @@ export class Html5 extends Component<Html5PlayerProps> {
                     ref={this.videoElement}
                     {...sizeProps}
                 >
-                    <source src={this.props.url} type="video/mp4" onError={this.handleOnError} onLoad={this.handleOnSuccess} />
-                    <ReactResizeDetector handleWidth handleHeight onResize={this.handleOnResize} refreshMode="debounce" refreshRate={100} />
+                    <source
+                        src={this.props.url}
+                        type="video/mp4"
+                        onError={this.handleOnError}
+                        onLoad={this.handleOnSuccess}
+                    />
+                    <ReactResizeDetector
+                        handleWidth
+                        handleHeight
+                        onResize={this.handleOnResize}
+                        refreshMode="debounce"
+                        refreshRate={100}
+                    />
                 </video>
             </div>
         );
@@ -65,11 +76,11 @@ export class Html5 extends Component<Html5PlayerProps> {
 
     private onResize(): void {
         if (this.videoElement && this.videoElement.current && this.props.aspectRatio) {
-            this.changeHeight(this.videoElement.current);
+            Html5.changeHeight(this.videoElement.current);
         }
     }
 
-    private changeHeight(element: HTMLElement): void {
+    private static changeHeight(element: HTMLElement): void {
         if (element.parentElement) {
             const height = element.clientHeight + "px";
             if (element.parentElement.parentElement) {
