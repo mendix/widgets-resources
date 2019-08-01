@@ -12,16 +12,41 @@
 ========================================================================== */
 $important-helpers-value: if($important-helpers, ' !important', '');
 
-
-.show {
-    display: block #{$important-helpers-value};
+// Display properties
+.d-flex {
+    display: flex !important;
+}
+.d-inline-flex {
+    display: inline-flex !important;
+}
+.d-inline {
+    display: inline !important;
+}
+.d-inline-block {
+    display: inline-block !important;
+}
+.show,
+.d-block {
+    display: block !important;
+}
+.table,
+.d-table {
+    display: table !important;
+}
+.table-row,
+.d-table-row {
+    display: table-row !important;
+}
+.table-cell,
+.d-table-cell {
+    display: table-cell !important;
 }
 
+.hide,
 .hidden {
     display: none #{$important-helpers-value};
     visibility: hidden #{$important-helpers-value};
 }
-
 .invisible {
     visibility: hidden #{$important-helpers-value};
 }
@@ -128,19 +153,7 @@ $important-helpers-value: if($important-helpers, ' !important', '');
     justify-content: center #{$important-helpers-value};
 }
 
-// Display properties
-.d-inline {
-    display: inline #{$important-helpers-value};
-}
-
-.d-inline-block {
-    display: inline-block #{$important-helpers-value};
-}
-
-.d-block {
-    display: block #{$important-helpers-value};
-}
-
+// Media
 @media (max-width: $screen-xs-max) {
     .hidden-xs {
         display: none #{$important-helpers-value};
