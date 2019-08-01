@@ -13,23 +13,22 @@
   },
   "packagePath": "<%- packagePath %>",
   "scripts": {
-    "start": "concurrently \"npm run mx-script start:server -- --open\" \"npm:dev\"",
-    "dev": "npm run mx-script start:ts",
-    "build": "npm run mx-script build:ts",
-    "lint": "npm run mx-script lint",
-    "lint:fix": "npm run mx-script lint:fix",
-    "mx-script": "cd ./node_modules/@mendix/pluggable-widgets-tools && node bin/mx-scripts.js",<% if (unitTests || e2eTests) { %>
+    "start": "concurrently \"pluggable-widgets-tools start:server --open\" \"npm:dev\"",
+    "dev": "pluggable-widgets-tools start:ts",
+    "build": "pluggable-widgets-tools build:ts",
+    "lint": "pluggable-widgets-tools lint",
+    "lint:fix": "pluggable-widgets-tools lint:fix",<% if (unitTests || e2eTests) { %>
     "pretest": "npm run lint && npm run build",<% } %><% if (unitTests) { %>
-    "test": "npm run mx-script test:unit -- --no-cache --ci<% if (e2eTests) { %> && npm run test:e2e<% } %>",
-    "test:unit": "npm run mx-script test:unit -- --coverage",<% } %><% if (e2eTests) { %>
-    "test:e2e": "export URL=https://badge.mxapps.io || set URL=https://badge.mxapps.io && npm run mx-script test:e2e:ts",
-    "test:e2e:dev": "export DEBUG=true || set DEBUG=true && npm run mx-script test:e2e:ts",<% } %>
+    "test": "pluggable-widgets-tools test:unit --no-cache --ci<% if (e2eTests) { %> && npm run test:e2e<% } %>",
+    "test:unit": "pluggable-widgets-tools test:unit --coverage",<% } %><% if (e2eTests) { %>
+    "test:e2e": "export URL=https://badge.mxapps.io || set URL=https://badge.mxapps.io && pluggable-widgets-tools test:e2e:ts",
+    "test:e2e:dev": "export DEBUG=true || set DEBUG=true && pluggable-widgets-tools test:e2e:ts",<% } %>
     "prerelease": "npm run lint",
-    "release": "npm run mx-script release:ts"
+    "release": "pluggable-widgets-tools release:ts"
   },
   "license": "<%- license %>",
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^0.1.8",
+    "@mendix/pluggable-widgets-tools": "^8.0.0",
     "@types/big.js": "^4.0.5",
     "@types/classnames": "^2.2.4",<% if (e2eTests) { %>
     "@types/webdriverio": "^4.13.0",<% } %><% if (unitTests || e2eTests) { %>
