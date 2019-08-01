@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, ReactNode, createElement } from "react";
 import { TextStyle, ViewStyle } from "react-native";
 import { BadgeSample } from "./components/BadgeSample";
 import { WidgetNameProps } from "../typings/WidgetNameProps";
@@ -13,7 +13,7 @@ export interface BadgeStyle extends Style {
 export class WidgetName extends Component<WidgetNameProps<BadgeStyle>> {
     private readonly onClickHandler = this.onClick.bind(this);
 
-    render(): JSX.Element {
+    render(): ReactNode {
         return (
             <BadgeSample
                 style={this.props.style}

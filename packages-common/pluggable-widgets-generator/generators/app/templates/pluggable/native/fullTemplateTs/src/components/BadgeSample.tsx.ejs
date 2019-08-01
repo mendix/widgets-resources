@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, ReactNode, createElement } from "react";
 import { Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
 import { BadgeStyle } from "../WidgetName";
 import { styles } from "../ui/styles";
@@ -19,7 +19,7 @@ const defaultBadgeStyle: BadgeStyle = {
 export class BadgeSample extends Component<BadgeSampleProps> {
     private readonly styles = flattenStyles(defaultBadgeStyle, this.props.style);
 
-    render(): JSX.Element {
+    render(): ReactNode {
         const isAndroid = Platform.OS === "android";
 
         return (

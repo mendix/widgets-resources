@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, ReactNode, createElement } from "react";
 import classNames from "classnames";
 
 export interface BadgeSampleProps {
@@ -16,7 +16,7 @@ export interface BadgeSampleProps {
 export type BootstrapStyle = "default" | "info" | "inverse" | "primary" | "danger" | "success" | "warning";
 
 export class BadgeSample extends Component<BadgeSampleProps> {
-    render(): JSX.Element {
+    render(): ReactNode {
         return (
             <span
                 className={classNames("widget-packageName", this.props.type, this.props.className, {
