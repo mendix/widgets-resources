@@ -13,44 +13,33 @@
 $important-helpers-value: if($important-helpers, ' !important', '');
 
 // Display properties
-.d-none {
-    display: none #{$important-helpers-value};
-}
-
 .d-flex {
-    display: flex #{$important-helpers-value};
+    display: flex !important;
 }
-
 .d-inline-flex {
-    display: inline-flex #{$important-helpers-value};
+    display: inline-flex !important;
 }
-
 .d-inline {
-    display: inline #{$important-helpers-value};
+    display: inline !important;
 }
-
 .d-inline-block {
-    display: inline-block #{$important-helpers-value};
+    display: inline-block !important;
 }
-
 .show,
 .d-block {
-    display: block #{$important-helpers-value};
+    display: block !important;
 }
-
 .table,
 .d-table {
-    display: table #{$important-helpers-value};
+    display: table !important;
 }
-
 .table-row,
 .d-table-row {
-    display: table-row #{$important-helpers-value};
+    display: table-row !important;
 }
-
 .table-cell,
 .d-table-cell {
-    display: table-cell #{$important-helpers-value};
+    display: table-cell !important;
 }
 
 .hide,
@@ -58,7 +47,6 @@ $important-helpers-value: if($important-helpers, ' !important', '');
     display: none #{$important-helpers-value};
     visibility: hidden #{$important-helpers-value};
 }
-
 .invisible {
     visibility: hidden #{$important-helpers-value};
 }
