@@ -1,6 +1,3 @@
 {
-  "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base.json",
-  "include": [
-    "./typings/ModuleCss.d.ts"
-  ]
+  "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base.json"
 }
