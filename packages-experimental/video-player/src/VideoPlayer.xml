@@ -3,7 +3,7 @@
         supportedPlatform="Web"
         offlineCapable="true"
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/@mendix/pluggable-widgets-api/widget.xsd">
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Video Player</name>
     <description>Shows a video from YouTube, Vimeo, Dailymotion and Mp4</description>
     <icon>
@@ -76,10 +76,6 @@
                 <property key="height" type="integer" defaultValue="500">
                     <caption>Size</caption>
                     <description>If the unit is 'Aspect ratio' the height will be based on the video height.</description>
-                </property>
-                <property type="action" key="actionTest">
-                    <caption>Action</caption>
-                    <description/>
                 </property>
             </propertyGroup>
         </propertyGroup>

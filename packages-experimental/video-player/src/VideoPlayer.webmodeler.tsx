@@ -7,10 +7,9 @@ import { SizeContainer } from "./components/SizeContainer";
 import { Video, VideoPlayerProps } from "./components/Video";
 import { validateUrl } from "./utils/Utils";
 import { VideoPlayerPreviewProps } from "../typings/VideoPlayerProps";
+// @ts-ignore
+import VideoStyles from "./ui/VideoPlayer.css";
 
-declare function require(name: string): string;
-
-// eslint-disable-next-line @typescript-eslint/class-name-casing
 export class preview extends Component<VideoPlayerPreviewProps, {}> {
     render(): JSX.Element {
         const message = this.validateProps(this.props);
@@ -64,5 +63,5 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/VideoPlayer.css") + "";
+    return VideoStyles;
 }
