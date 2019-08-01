@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, ReactNode, createElement } from "react";
 import { Text, View } from "react-native";
 
 import { CustomStyle } from "../WidgetName";
@@ -19,7 +19,7 @@ const defaultStyle: CustomStyle = {
 export class HelloWorldSample extends Component<HelloWorldSampleProps> {
     private readonly styles = flattenStyles(defaultStyle, this.props.style);
 
-    render(): JSX.Element {
+    render(): ReactNode {
         return (
             <View style={this.styles.container}>
                 <Text style={this.styles.label}>Hello {this.props.sampleText}</Text>

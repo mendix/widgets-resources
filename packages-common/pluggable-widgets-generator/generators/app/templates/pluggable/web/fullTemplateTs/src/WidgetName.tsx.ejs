@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, ReactNode, createElement } from "react";
 import { hot } from "react-hot-loader/root";
 
 import { WidgetNameContainerProps } from "../typings/WidgetNameProps";
@@ -8,7 +8,7 @@ import "./ui/WidgetName.css";
 class WidgetName extends Component<WidgetNameContainerProps> {
     private readonly onClickHandler = this.onClick.bind(this);
 
-    render(): JSX.Element {
+    render(): ReactNode {
         return (
             <BadgeSample
                 type={this.props.packageNameType}

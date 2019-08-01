@@ -1,11 +1,11 @@
-import { Component, createElement } from "react";
+import { Component, ReactNode, createElement } from "react";
 import { BadgeSample, BadgeSampleProps } from "./components/BadgeSample";
 import { WidgetNamePreviewProps } from "../typings/WidgetNameProps";
 
 declare function require(name: string): string;
 
 export class preview extends Component<WidgetNamePreviewProps> {
-    render(): JSX.Element {
+    render(): ReactNode {
         return (
             <div ref={this.parentInline}>
                 <BadgeSample {...this.transformProps(this.props)}></BadgeSample>

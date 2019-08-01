@@ -1,11 +1,11 @@
-import { Component, createElement } from "react";
+import { Component, ReactNode, createElement } from "react";
 import { HelloWorldSample } from "./components/HelloWorldSample";
 import { WidgetNamePreviewProps } from "../typings/WidgetNameProps";
 
 declare function require(name: string): string;
 
 export class preview extends Component<WidgetNamePreviewProps> {
-    render(): JSX.Element {
+    render(): ReactNode {
         return <HelloWorldSample sampleText={this.props.sampleText} />;
     }
 }
