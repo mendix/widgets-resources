@@ -1,0 +1,14 @@
+{
+    "name": "@native-mobile-resources/util-widgets",
+    "version": "0.0.1",
+    "private": true,
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "start": "tsc --watch",
+        "prebuild": "rm -rf ./dist",
+        "build": "tsc",
+        "prepare": "npm run build",
+        "lint": "tslint --project tsconfig.json --config ../../tslint.json"
+    }
+}

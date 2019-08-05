@@ -1,0 +1,44 @@
+{
+  "name": "videoplayer",
+  "widgetName": "VideoPlayer",
+  "version": "1.0.0",
+  "description": "Player for YouTube, Dailymotion, Vimeo and Mp4 videos",
+  "copyright": "2019 Mendix",
+  "author": "Mendix",
+  "license": "Apache-2.0",
+  "config": {
+    "widgetPath": "./dist/MxTestProject/widgets",
+    "projectPath": "./dist/MxTestProject",
+    "mendixHost": "http://localhost:8080/",
+    "developmentPort": "3000"
+  },
+  "packagePath": "com.mendix.widget.web",
+  "scripts": {
+    "start": "concurrently \"pluggable-widgets-tools start:server --subprojectPath \"/packages-web/video-player\" --open\" \"npm:dev\"",
+    "dev": "pluggable-widgets-tools start:ts --subprojectPath \"/packages-web/video-player\"",
+    "build": "pluggable-widgets-tools build:ts --subprojectPath \"/packages-web/video-player\"",
+    "format": "pluggable-widgets-tools format --subprojectPath \"/packages-web/video-player\"",
+    "lint": "pluggable-widgets-tools lint --subprojectPath \"/packages-web/video-player\"",
+    "lint:fix": "pluggable-widgets-tools lint:fix --subprojectPath \"/packages-web/video-player\"",
+    "pretest": "npm run lint && npm run build",
+    "test": "pluggable-widgets-tools test:unit --no-cache --ci --subprojectPath \"/packages-web/video-player\" && npm run test:e2e",
+    "test:unit": "pluggable-widgets-tools test:unit --coverage --subprojectPath \"/packages-web/video-player\"",
+    "test:e2e": "export URL=https://videoplayer-sandbox.mxapps.io/ || set URL=https://videoplayer-sandbox.mxapps.io/ && pluggable-widgets-tools test:e2e:ts --subprojectPath \"/packages-web/video-player\"",
+    "test:e2e:dev": "export DEBUG=true || set DEBUG=true && pluggable-widgets-tools test:e2e:ts --subprojectPath \"/packages-web/video-player\"",
+    "prerelease": "npm run lint",
+    "release": "pluggable-widgets-tools release:ts --subprojectPath \"/packages-web/video-player\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/video-player"
+  },
+  "bugs": {
+    "url": "https://github.com/mendix/video-player/issues"
+  },
+  "devDependencies": {
+    "@types/react-resize-detector": "^4.0.1"
+  },
+  "dependencies": {
+    "react-resize-detector": "^4.1.3"
+  }
+}

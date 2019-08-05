@@ -1,0 +1,9 @@
+{
+    "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
+    "include": ["./src"],
+    "compilerOptions": {
+        "outDir": "./dist",
+        "declaration": true,
+        "sourceMap": false
+    }
+}
