@@ -1,5 +1,6 @@
 {
     "name": "progress-circle",
+    "widgetName": "ProgressCircle",
     "version": "0.1.3",
     "license": "Apache-2.0",
     "repository": {
@@ -7,15 +8,17 @@
         "url": "https://github.com/mendix/native-mobile-resources.git"
     },
     "config": {
-        "widgetName": "ProgressCircle"
+        "widgetPath": "../test-project/mxproject/widgets",
+        "projectPath": "../test-project/mxproject",
+        "subprojectFolder": "packages-native/progress-circle"
     },
+    "packagePath": "com.mendix.widget.native",
     "scripts": {
-        "start": "npm run gulp watch",
-        "build": "npm run gulp build",
-        "build:release": "NODE_ENV=production npm run gulp build",
-        "gulp": "TS_NODE_PROJECT=../../scripts/tsconfig.json ../../node_modules/.bin/gulp --gulpfile ../../scripts/build/gulpfile.ts --cwd .",
-        "lint": "../../node_modules/.bin/tslint --project tsconfig.json --config ../../tslint.json",
-        "test": "../../node_modules/.bin/jest --config ../../scripts/test/jest.config.js",
+        "start": "pluggable-widgets-tools start:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "build": "pluggable-widgets-tools build:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "build:release": "pluggable-widgets-tools release:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "lint": "pluggable-widgets-tools lint --subprojectPath $npm_package_config_subprojectFolder",
+        "test": "pluggable-widgets-tools test:unit --coverage --subprojectPath $npm_package_config_subprojectFolder",
         "version": "npm run build:release",
         "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
     },
