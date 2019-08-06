@@ -43,7 +43,7 @@ export class Slider extends Component<Props, State> {
                     onValuesChange={this.onSlideHandler}
                     onValuesChangeFinish={this.onChangeHandler}
                     sliderLength={this.state.width}
-                    allowOverlap={true}
+                    allowOverlap
                     customMarker={Marker}
                 />
                 {!validProps && <Text style={this.styles.validationMessage}>{validationMessages.join("\n")}</Text>}

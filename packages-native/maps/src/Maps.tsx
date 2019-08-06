@@ -161,6 +161,7 @@ export class Maps extends Component<Props, State> {
 
         this.setState(
             {
+                // eslint-disable-next-line react/no-access-state-in-setstate
                 status: this.state.status === Status.LoadingMarkers ? Status.LoadingMap : this.state.status,
                 markers: parsedMarkers as Marker[]
             },

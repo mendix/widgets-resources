@@ -10,9 +10,11 @@ import ReactNativeFirebase from "react-native-firebase";
  * @param {string} notificationId - This field is required.
  * @returns {boolean}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function CancelScheduledNotification(notificationId?: string): boolean {
     // BEGIN USER CODE
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     if (!notificationId) {

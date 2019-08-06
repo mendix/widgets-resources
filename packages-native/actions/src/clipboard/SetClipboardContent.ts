@@ -10,6 +10,7 @@ import ReactNative from "react-native";
  * @param {string} content - This field is required.
  * @returns {boolean}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function SetClipboardContent(content?: string): boolean {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/clipboard#setstring

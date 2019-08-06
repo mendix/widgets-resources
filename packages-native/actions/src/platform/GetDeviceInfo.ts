@@ -9,6 +9,7 @@ import ReactNativeDeviceInfo from "react-native-device-info";
 /**
  * @returns {MxObject}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
 
@@ -53,6 +54,7 @@ function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
             mx.data.create({
                 entity,
                 callback: mxObject => resolve(mxObject),
+                // eslint-disable-next-line prefer-promise-reject-errors
                 error: () => reject(`Could not create '${entity}' object to store device info`)
             });
         });

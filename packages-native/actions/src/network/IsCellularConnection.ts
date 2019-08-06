@@ -9,9 +9,11 @@ import { NetInfoType } from "../../typings/NetInfo";
 /**
  * @returns {boolean}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function IsCellularConnection(): Promise<boolean> {
     // BEGIN USER CODE
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const NetInfo = require("@react-native-community/netinfo/lib/commonjs");
 
     return NetInfo.fetch().then((info: NetInfoType) => info.type === "cellular");

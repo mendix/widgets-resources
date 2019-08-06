@@ -10,10 +10,12 @@ import ReactNativeFirebase from "react-native-firebase";
  * Cancels all pending scheduled notifications.
  * @returns {boolean}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function CancelAllScheduledNotifications(): boolean {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/reference/Notifications#cancelAllNotifications
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     firebase.notifications().cancelAllNotifications();

@@ -10,10 +10,12 @@ import ReactNativeFirebase from "react-native-firebase";
  * @param {Big} badgeNumber - This field is required. Should be greater than or equal to 0.
  * @returns {boolean}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function SetBadgeNumber(badgeNumber?: BigJs.Big): boolean {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/reference/Notifications#setBadge
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     if (!badgeNumber) {

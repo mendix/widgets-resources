@@ -8,7 +8,7 @@
         "start": "tsc --watch",
         "prebuild": "rm -rf ./dist",
         "build": "tsc",
-        "prepare": "npm run build",
-        "lint": "tslint --project tsconfig.json --config ../../tslint.json"
+        "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "prepare": "npm run build"
     }
 }

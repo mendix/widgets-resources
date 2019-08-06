@@ -34,7 +34,7 @@ describe("Color Picker", () => {
     });
 
     it("renders with alpha slider", () => {
-        const component = render(<ColorPicker {...defaultProps} format="rgb" showAlpha={true} />);
+        const component = render(<ColorPicker {...defaultProps} format="rgb" showAlpha />);
         expect(component.toJSON()).toMatchSnapshot();
     });
 
@@ -135,9 +135,7 @@ describe("Color Picker", () => {
 
     it("changes the value when swiping alpha slider", () => {
         const onChangeAction = actionValue();
-        const component = render(
-            <ColorPicker {...defaultProps} onChange={onChangeAction} showAlpha={true} format="rgb" />
-        );
+        const component = render(<ColorPicker {...defaultProps} onChange={onChangeAction} showAlpha format="rgb" />);
 
         const alphaHandler = getAlphaHandle(component);
 

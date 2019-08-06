@@ -100,7 +100,7 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
             >
                 <Dialog.Title style={this.styles.title}>Send Feedback</Dialog.Title>
                 <TextInput
-                    multiline={true}
+                    multiline
                     style={this.processedStyles.textAreaInputStyles}
                     value={this.state.feedbackMessage}
                     onChangeText={this.onChangeTextHandler}
@@ -187,6 +187,7 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
 
     private onDialogHide(): void {
         if (this.state.status === "closingDialog" && this.state.nextStatus) {
+            // eslint-disable-next-line react/no-access-state-in-setstate
             this.setState({ status: this.state.nextStatus, nextStatus: undefined });
         }
     }

@@ -11,10 +11,12 @@ import ReactNativeFirebase from "react-native-firebase";
  * Returns true if permission is granted, false otherwise.
  * @returns {boolean}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function HasNotificationPermission(): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/receiving-notifications
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     return firebase.messaging().hasPermission();

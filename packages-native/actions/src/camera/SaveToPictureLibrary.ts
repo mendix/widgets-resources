@@ -12,6 +12,7 @@ import { mendix, mx } from "mendix-client";
  * @param {MxObject} picture - This field is required.
  * @returns {string}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function SaveToPictureLibrary(picture?: mendix.lib.MxObject): Promise<string> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/cameraroll#savetocameraroll

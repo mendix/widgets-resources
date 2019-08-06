@@ -6,10 +6,12 @@
 
 import AddCalendarEventLib from "react-native-add-calendar-event";
 
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function ViewCalendarEvent(eventId?: string): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/vonovak/react-native-add-calendar-event#viewing-an-event
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const AddCalendarEvent: typeof AddCalendarEventLib = require("react-native-add-calendar-event");
 
     if (!eventId) {

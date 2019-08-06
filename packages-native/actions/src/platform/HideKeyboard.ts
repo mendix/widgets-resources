@@ -9,6 +9,7 @@ import ReactNative from "react-native";
 /**
  * @returns {boolean}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function HideKeyboard(): boolean {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/keyboard

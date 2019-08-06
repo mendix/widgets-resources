@@ -13,10 +13,12 @@ import ReactNativeSound from "react-native-sound";
  * @param {MxObject} audioFile - This field is required. Common supported file formats are mp3, wav, m4a, mp4.
  * @returns {boolean}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function PlaySound(audioFile?: mendix.lib.MxObject): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/zmxv/react-native-sound
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const Sound: typeof ReactNativeSound = require("react-native-sound");
 
     if (!audioFile) {
@@ -43,6 +45,7 @@ function PlaySound(audioFile?: mendix.lib.MxObject): Promise<boolean> {
                 if (success) {
                     return resolve(true);
                 }
+                // eslint-disable-next-line prefer-promise-reject-errors
                 return reject("Playback failed due to an audio encoding error");
             });
         });

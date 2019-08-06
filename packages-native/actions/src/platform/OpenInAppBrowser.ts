@@ -13,6 +13,7 @@ import InAppBrowserType, { InAppBrowserOptions } from "react-native-inappbrowser
  * @param {boolean} androidShowTitle - Android only setting. Set to true to show the title of the web page in the toolbar.
  * @returns {boolean}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function OpenInAppBrowser(
     url?: string,
     toolbarColor?: string,

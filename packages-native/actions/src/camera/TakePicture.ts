@@ -19,6 +19,7 @@ type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
  * @param {Big} maximumHeight - The picture will be scaled to this maximum pixel height, while maintaing the aspect ratio.
  * @returns {boolean}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function TakePicture(
     picture?: mendix.lib.MxObject,
     pictureSource?: PictureSource,
@@ -29,6 +30,7 @@ function TakePicture(
     // BEGIN USER CODE
     // Documentation https://github.com/react-native-community/react-native-image-picker/blob/master/docs/Reference.md
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const ImagePicker: typeof ImagePickerLib = require("react-native-image-picker");
 
     if (!picture) {
@@ -87,8 +89,11 @@ function TakePicture(
                 .then(res => res.blob())
                 .then(blob => {
                     const guid = imageObject.getGuid();
+                    // eslint-disable-next-line no-useless-escape
                     const filename = /[^\/]*$/.exec(uri)![0];
+                    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
                     const onSuccess = () => resolve(true);
+                    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
                     const onError = (error: Error) => reject(error.message);
 
                     mx.data.saveDocument(guid, filename, {}, blob, onSuccess, onError);
@@ -96,7 +101,7 @@ function TakePicture(
         });
     }
 
-    // tslint:disable-next-line:typedef
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     function getPictureMethod() {
         const source = pictureSource ? pictureSource : "either";
 
@@ -111,7 +116,7 @@ function TakePicture(
         }
     }
 
-    // tslint:disable-next-line:typedef
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     function getOptions() {
         const { maxWidth, maxHeight } = getPictureQuality();
 
@@ -121,7 +126,7 @@ function TakePicture(
             maxHeight,
             noData: true,
             permissionDenied: {
-                title: `This app does not have access to your camera or photos`,
+                title: "This app does not have access to your camera or photos",
                 text: "To enable access, tap Settings > Permissions and turn on Camera and Storage.",
                 reTryTitle: "Settings",
                 okTitle: "Cancel"

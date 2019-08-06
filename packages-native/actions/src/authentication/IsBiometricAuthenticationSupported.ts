@@ -9,6 +9,7 @@ import ReactNativeTouchId from "react-native-touch-id";
 /**
  * @returns {boolean}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function IsBiometricAuthenticationSupported(): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/naoufal/react-native-touch-id

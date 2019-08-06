@@ -53,7 +53,7 @@ export class RangeSlider extends Component<Props, State> {
                     onValuesChange={this.onSlideHandler}
                     onValuesChangeFinish={this.onChangeHandler}
                     sliderLength={this.state.width}
-                    isMarkersSeparated={true}
+                    isMarkersSeparated
                     customMarkerLeft={customMarker(enabledOne)}
                     customMarkerRight={customMarker(enabledTwo)}
                 />

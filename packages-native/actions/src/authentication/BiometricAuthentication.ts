@@ -10,6 +10,7 @@ import ReactNativeTouchId from "react-native-touch-id";
  * @param {string} reason - The reason for requesting authentication. If empty, the system default message is used.
  * @returns {boolean}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function BiometricAuthentication(reason?: string): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/naoufal/react-native-touch-id

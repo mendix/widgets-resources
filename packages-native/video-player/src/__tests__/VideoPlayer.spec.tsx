@@ -62,7 +62,7 @@ describe("VideoPlayer", () => {
     });
 
     it("load a video and calculate the aspect ratio", () => {
-        const component = render(<VideoPlayer {...defaultProps} aspectRatio={true} />);
+        const component = render(<VideoPlayer {...defaultProps} aspectRatio />);
 
         fireEvent(component.getByType(Video), "load", { naturalSize: { width: 1080, height: 554 } });
 

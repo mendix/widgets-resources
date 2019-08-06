@@ -10,6 +10,7 @@ import ReactNative from "react-native";
  * @param {Big} duration - Android only setting. The time (in milliseconds) the device should vibrate. Set to empty to use the default value 500.
  * @returns {boolean}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function Vibrate(duration?: BigJs.Big): boolean {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/vibration#vibrate

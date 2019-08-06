@@ -9,6 +9,7 @@ import ReactNative from "react-native";
 /**
  * @returns {string}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function GetClipboardContent(): Promise<string> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/clipboard#getstring

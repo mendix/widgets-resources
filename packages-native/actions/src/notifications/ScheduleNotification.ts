@@ -20,6 +20,7 @@ import ReactNativeFirebase from "react-native-firebase";
  * @param {string} actionGuid
  * @returns {boolean}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function ScheduleNotification(
     date?: Date,
     body?: string,
@@ -33,6 +34,7 @@ function ScheduleNotification(
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/scheduling-notifications
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     if (!date) {

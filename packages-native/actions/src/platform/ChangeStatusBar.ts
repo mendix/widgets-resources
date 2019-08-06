@@ -18,6 +18,7 @@ type Style = "DefaultStyle" | "LightContentStyle" | "DarkContentStyle";
  * @param {"NativeMobileActions.StatusBarHideShowAnimation.none"|"NativeMobileActions.StatusBarHideShowAnimation.fade"|"NativeMobileActions.StatusBarHideShowAnimation.slide"} animateHideShow - If empty, the default value 'none' is used.
  * @returns {boolean}
  */
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function ChangeStatusBar(
     style?: Style,
     hidden?: boolean,
@@ -29,6 +30,7 @@ function ChangeStatusBar(
 ): boolean {
     // BEGIN USER CODE
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const RN: typeof ReactNative = require("react-native");
 
     if (style) {

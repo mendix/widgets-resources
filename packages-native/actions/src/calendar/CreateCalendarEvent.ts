@@ -6,6 +6,7 @@
 
 import AddCalendarEventLib from "react-native-add-calendar-event";
 
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function CreateCalendarEvent(
     title?: string,
     startDate?: Date,
@@ -17,6 +18,7 @@ function CreateCalendarEvent(
     // BEGIN USER CODE
     // Documentation https://github.com/vonovak/react-native-add-calendar-event#creating-an-event
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const AddCalendarEvent: typeof AddCalendarEventLib = require("react-native-add-calendar-event");
 
     return AddCalendarEvent.presentEventCreatingDialog({
@@ -30,7 +32,7 @@ function CreateCalendarEvent(
         if (result.action === "SAVED") {
             return result.eventIdentifier;
         }
-        return;
+        return undefined;
     });
 
     // END USER CODE

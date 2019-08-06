@@ -40,8 +40,8 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
                 renderIcon={this.renderIconHandler}
                 degrees={this.props.secondaryButtons.length > 0 ? 180 : 0}
                 onPress={this.onPressHandler}
-                fixNativeFeedbackRadius={true}
-                backgroundTappable={true}
+                fixNativeFeedbackRadius
+                backgroundTappable
                 activeOpacity={0.2}
                 offsetX={0}
                 offsetY={0}
@@ -102,6 +102,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
         );
     }
 
+    // eslint-disable-next-line getter-return
     private get verticalOrientation(): "up" | "down" {
         switch (this.props.verticalPosition) {
             case "bottom":
@@ -113,6 +114,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
 
     private onPress(): void {
         if (this.props.secondaryButtons && this.props.secondaryButtons.length > 0) {
+            // eslint-disable-next-line react/no-access-state-in-setstate
             this.setState({ active: !this.state.active });
 
             return;
