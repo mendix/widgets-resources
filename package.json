@@ -1,5 +1,5 @@
 {
-    "name": "pluggable-widgets",
+    "name": "widgets-resources",
     "private": true,
     "scripts": {
         "postinstall": "lerna bootstrap",
