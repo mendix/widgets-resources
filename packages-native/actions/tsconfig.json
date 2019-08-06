@@ -2,6 +2,11 @@
     "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
     "include": ["./typings", "./src", "../../node_modules/mendix-client/index.d.ts"],
     "compilerOptions": {
+        "target": "es2015",
+        "lib": ["es2015"],
+        "types": ["mendix-client", "big.js", "react-native"],
+        "moduleResolution": "node",
+        "module": "es2015",
         "outDir": "./dist/tsc",
         "removeComments": false,
         "alwaysStrict": false,

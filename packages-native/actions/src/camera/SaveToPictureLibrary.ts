@@ -5,8 +5,6 @@
 // Other code you write will be lost the next time you deploy the project.
 
 import ReactNative from "react-native";
-// @ts-ignore
-import { mendix, mx } from "mendix-client";
 
 /**
  * @param {MxObject} picture - This field is required.
