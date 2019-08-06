@@ -1,5 +1,5 @@
 const cwd = process.cwd();
-const packageName = process.env.npm_package_name;
+const packageName = process.env.npm_package_config_subprojectFolder;
 
 module.exports = {
     preset: "react-native",
@@ -17,5 +17,5 @@ module.exports = {
     },
     collectCoverage: true,
     collectCoverageFrom: [`**/${packageName}/src/**/*`, "!**/*.snap", "!**/dist/**", "!**/mxproject/**"],
-    coverageDirectory: `packages/${packageName}/coverage`
+    coverageDirectory: `${packageName}/coverage`
 };

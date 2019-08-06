@@ -1,6 +1,7 @@
 {
-    "extends": "../../tsconfig.base.json",
-    "include": ["./typings", "./src/__tests__"],
+    "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
+    "baseUrl": "./",
+    "include": ["./src/__tests__", "./typings"],
     "compilerOptions": {
         "types": ["jest"]
     }

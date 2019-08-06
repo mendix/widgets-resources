@@ -18,7 +18,6 @@
         "build": "pluggable-widgets-tools build:ts:native --subprojectPath $npm_package_config_subprojectFolder",
         "build:release": "pluggable-widgets-tools release:ts:native --subprojectPath $npm_package_config_subprojectFolder",
         "lint": "pluggable-widgets-tools lint --subprojectPath $npm_package_config_subprojectFolder",
-        "test": "pluggable-widgets-tools test:unit --coverage --subprojectPath $npm_package_config_subprojectFolder",
         "version": "npm run build:release",
         "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
     }
