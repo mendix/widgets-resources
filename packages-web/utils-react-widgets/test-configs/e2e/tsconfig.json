@@ -3,6 +3,7 @@
         "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
+        "types": ["node", "webdriverio", "jasmine"],
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "removeComments": true,
@@ -10,6 +11,5 @@
         "outDir": "../../dist/e2e"
     },
     "exclude": ["node_modules"],
-    "compileOnSave": false,
-    "types": ["node", "webdriverio"]
+    "compileOnSave": false
 }

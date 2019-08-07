@@ -16,8 +16,8 @@
         "test:unit": "utils-react-widgets test:unit --subprojectPath $npm_package_config_subprojectFolder",
         "test:e2e:p": "cross-env URL=https://badge.mxapps.io/ && utils-react-widgets test:e2e --subprojectPath $npm_package_config_subprojectFolder",
         "test:e2e": "tsc -p ./tests/e2e/tsconfig.json",
-        "test:e2e:0": "tsc -p ./tests/e2e/tsconfig.json && cross-env URL=https://badge.mxapps.io/ && wdio ../utils-react-widgets/tests/e2e/wdio.conf.js",
-        "test:e2e:dev": "tsc -p ../utils-react-widgets/tests/e2e/tsconfig.json && cross-env DEBUG=true && wdio ../utils-react-widgets/tests/e2e/wdio.conf.js",
+        "test:e2e:0": "tsc -p ./tests/e2e/tsconfig.json && cross-env URL=https://badge.mxapps.io/ && wdio ../utils-react-widgets/test-configs/e2e/wdio.conf.js",
+        "test:e2e:dev": "tsc -p ./tests/e2e/tsconfig.json && cross-env DEBUG=true && wdio ../utils-react-widgets/test-configs/e2e/wdio.conf.js",
         "lint": "tslint -c ../utils-react-widgets/configs/tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'",
         "lint:fix": "npm run lint -- --fix",
         "build": "utils-react-widgets build --subprojectPath $npm_package_config_subprojectFolder"
