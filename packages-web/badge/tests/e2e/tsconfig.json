@@ -1,16 +1,9 @@
 {
+    "extends": "../../../utils-react-widgets/test-configs/e2e/tsconfig",
     "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "removeComments": true,
-        "noImplicitAny": false,
-        "outDir": "../../dist/e2e",
-        "strict": false
+        "baseUrl": ".",
+        "rootDir": "./"
     },
-    "files": ["./Badge.spec.ts"],
-    "compileOnSave": false,
-    "types": ["node", "webdriverio", "jasmine"]
+    "include": ["*.spec.ts"],
+    "exclude": ["../../node_modules", "../../../../node_modules"]
 }
