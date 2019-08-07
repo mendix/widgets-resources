@@ -1,8 +1,11 @@
 # Pluggable Widgets Generator
  
- ![npm version](https://badge.fury.io/js/%40mendix%2Fgenerator-widget.svg)  ![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
-
-![NPM](https://nodei.co/npm/@mendix/generator-widget.svg?downloads=true&stars=true)
+ ![npm version](https://badge.fury.io/js/%40mendix%2Fgenerator-widget.svg) 
+ ![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
+ ![Build Status](https://travis-ci.org/mendix/pluggable-widgets-generator.svg?branch=master)
+ ![npm](https://img.shields.io/npm/dm/@mendix/generator-widget)
+ ![GitHub release](https://img.shields.io/github/release/mendix/pluggable-widgets-generator)
+ ![GitHub issues](https://img.shields.io/github/issues/mendix/pluggable-widgets-generator)
 
 > [Yeoman](http://yeoman.io) generator for Mendix Pluggable Widgets.
 
