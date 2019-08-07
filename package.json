@@ -35,6 +35,7 @@
         "@types/react-test-renderer": "^16.8.1",
         "@types/xml2js": "^0.4.4",
         "check-dependencies": "^1.1.0",
+        "cross-env": "^5.2.0",
         "gh-release": "^3.5.0",
         "gulp-change": "^1.0.2",
         "gulp-git": "^2.9.0",
