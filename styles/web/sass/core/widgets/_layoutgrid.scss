@@ -18,14 +18,6 @@
     margin-left: auto;
 }
 
-.mx-layoutgrid-fluid {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
 // Row
 .row {
     display: flex;
@@ -296,25 +288,25 @@
 }
 
 @media (min-width: $screen-xs) {
-    .mx-layoutgrid {
+    .mx-layoutgrid-fixed {
         max-width: 440px;
     }
 }
 
 @media (min-width: $screen-sm) {
-    .mx-layoutgrid {
+    .mx-layoutgrid-fixed {
         max-width: 720px;
     }
 }
 
 @media (min-width: $screen-md) {
-    .mx-layoutgrid {
+    .mx-layoutgrid-fixed {
         max-width: 960px;
     }
 }
 
 @media (min-width: $screen-lg) {
-    .mx-layoutgrid {
+    .mx-layoutgrid-fixed {
         max-width: 1140px;
     }
 }
