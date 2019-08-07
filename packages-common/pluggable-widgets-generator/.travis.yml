@@ -1,9 +1,7 @@
 dist: xenial
 language: node_js
 cache: npm
-branches:
-    only:
-        - master
+
 node_js:
   - "12.4.0"
   - "11.15.0"
