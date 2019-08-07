@@ -2,8 +2,10 @@
 
 ![npm version](https://badge.fury.io/js/%40mendix%2Fpluggable-widgets-typing-generator.svg)
 ![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
-
-![NPM](https://nodei.co/npm/@mendix/pluggable-widgets-typing-generator.svg?downloads=true&stars=true)
+![Build Status](https://travis-ci.org/mendix/pluggable-widgets-typing-generator.svg?branch=master)
+![npm](https://img.shields.io/npm/dm/@mendix/pluggable-widgets-typing-generator)
+![GitHub release](https://img.shields.io/github/release/mendix/pluggable-widgets-typing-generator)
+![GitHub issues](https://img.shields.io/github/issues/mendix/pluggable-widgets-typing-generator)
 
 ## About
 
@@ -26,7 +28,7 @@ const typingGenerator = require("@mendix/pluggable-widgets-typing-generator").ty
 or for gulp using Babel and ES2015 (gulpfile.babel.js) or Typescript (gulpfile.ts)
 
 ```
-import { typingGenerator } from "@mendix/pluggable-widgets-typing-generator";
+import typingGenerator from "@mendix/pluggable-widgets-typing-generator";
 ```
 
 -   Create a Gulp Task to read the xml file and generate your typings
