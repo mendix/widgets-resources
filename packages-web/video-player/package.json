@@ -21,7 +21,6 @@
         "format": "pluggable-widgets-tools format --subprojectPath $npm_package_config_subprojectFolder",
         "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "test": "jest --config ../../scripts/test/jest.web.config.js",
-        "test:unit": "pluggable-widgets-tools test:unit --coverage --subprojectPath $npm_package_config_subprojectFolder",
         "test:e2e": "export URL=https://videoplayer-sandbox.mxapps.io/ || set URL=https://videoplayer-sandbox.mxapps.io/ && wdio ../../configs/e2e/wdio.conf.js",
         "test:e2e:dev": "export DEBUG=true || set DEBUG=true && wdio ../../configs/e2e/wdio.conf.js",
         "prerelease": "npm run lint",
