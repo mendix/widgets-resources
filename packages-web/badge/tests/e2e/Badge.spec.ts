@@ -6,7 +6,7 @@ const testValue = "Test";
 describe("Badge", () => {
     it("should render a badge with a caption", () => {
         homepage.open();
-        homepage.badge.waitForVisible();
+        homepage.badge.waitForDisplayed();
 
         const badge = homepage.badgeSuccess.getHTML();
         expect(badge).toContain(caption);
@@ -14,24 +14,24 @@ describe("Badge", () => {
 
     it("renders with Bootstrap style success when style is sucess", () => {
         homepage.open();
-        homepage.badgeSuccess.waitForVisible();
+        homepage.badgeSuccess.waitForDisplayed();
 
-        const classname = browser.getCssProperty("#mxui_widget_ReactCustomWidgetWrapper_2", "background-color").value;
+        const classname = $("#mxui_widget_ReactCustomWidgetWrapper_2").getCSSProperty("background-color").value;
         expect(classname).toContain("rgba(140,193,82,1)");
     });
 
     it("renders with Bootstrap style danger when style is danger", () => {
         homepage.open();
-        homepage.badgeDanger.waitForVisible();
+        homepage.badgeDanger.waitForDisplayed();
 
-        const classname = browser.getCssProperty("#mxui_widget_ReactCustomWidgetWrapper_8", "background-color").value;
+        const classname = $("#mxui_widget_ReactCustomWidgetWrapper_8").getCSSProperty("background-color").value;
         expect(classname).toContain("rgba(217,83,79,1)");
     });
 
     it("caption should change when updated", () => {
         homepage.open();
-        homepage.input.waitForVisible();
-        homepage.badge.waitForVisible();
+        homepage.input.waitForDisplayed();
+        homepage.badge.waitForDisplayed();
         homepage.input.setValue(testValue);
         homepage.badge.click();
 
@@ -43,7 +43,7 @@ describe("Badge", () => {
 describe("label", () => {
     it("should render a label with a caption", () => {
         homepage.open();
-        homepage.label.waitForVisible();
+        homepage.label.waitForDisplayed();
 
         const label = homepage.labelSuccess.getHTML();
         expect(label).toContain(caption);
@@ -51,24 +51,24 @@ describe("label", () => {
 
     it("renders with Bootstrap style success when style is sucess", () => {
         homepage.open();
-        homepage.labelSuccess.waitForVisible();
+        homepage.labelSuccess.waitForDisplayed();
 
-        const classname = browser.getCssProperty("#mxui_widget_ReactCustomWidgetWrapper_3", "background-color").value;
+        const classname = $("#mxui_widget_ReactCustomWidgetWrapper_3").getCSSProperty("background-color").value;
         expect(classname).toContain("rgba(140,193,82,1)");
     });
 
     it("renders with Bootstrap style danger when style is danger", () => {
         homepage.open();
-        homepage.labelDanger.waitForVisible();
+        homepage.labelDanger.waitForDisplayed();
 
-        const classname = browser.getCssProperty("#mxui_widget_ReactCustomWidgetWrapper_9", "background-color").value;
+        const classname = $("#mxui_widget_ReactCustomWidgetWrapper_9").getCSSProperty("background-color").value;
         expect(classname).toContain("rgba(217,83,79,1)");
     });
 
     it("caption should change when updated", () => {
         homepage.open();
-        homepage.input.waitForVisible();
-        homepage.label.waitForVisible();
+        homepage.input.waitForDisplayed();
+        homepage.label.waitForDisplayed();
         homepage.input.setValue(testValue);
         homepage.label.click();
 
