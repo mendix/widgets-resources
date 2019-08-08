@@ -48,7 +48,6 @@ export const TextBox = {
         // All TextStyle properties are allowed
         color: input.errorColor,
         borderColor: input.errorColor,
-        selectionColor: input.errorColor,
         placeholderTextColor: input.errorColor,
         underlineColorAndroid: input.underlineColorAndroid,
     },
