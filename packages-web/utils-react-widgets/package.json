@@ -4,12 +4,8 @@
     "private": true,
     "scripts": {
         "start": "webpack-dev-server --config=./configs/webpack.config.dev.js --open",
-        "dev:grunt": "grunt -b ./ --gruntfile ./configs/Gruntfile.js",
         "dev": "gulp watch --gulpfile scripts/gulp.js",
-        "typeCheck": "tsc --noEmit",
-        "pretest": "tsc && npm run lint && npm run build",
-        "test": "npm run test:unit && npm run test:conditional",
-        "test:conditional": "node ./node_modules/mendix-widget-build-script/dist/CheckPullRequestFromFork.js && echo 'Skip tests on forked pull request' || npm run deployAndTest",
+        "test": "npm run test:unit",
         "test:dev": "karma start ./configs/karma.conf.js",
         "test:unit": "karma start ./configs/karma.conf.js --single-run --codeCoverage",
         "test:e2e": "wdio ./test-configs/e2e/wdio.conf.js",
