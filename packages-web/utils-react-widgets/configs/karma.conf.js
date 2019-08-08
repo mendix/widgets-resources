@@ -16,7 +16,7 @@ Object.assign(webpackConfig, {
     //     }
     // }
 });
-console.log("webpackConfig", webpackConfig);
+// console.log("webpackConfig", webpackConfig);
 
 module.exports = function(config) {
     if (config.codeCoverage) {
