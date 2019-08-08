@@ -36,7 +36,7 @@ switch (script) {
         break;
     }
     default:
-        console.log('Unknown script "' + script + '".');
+        console.log(`Unknown script ${script}".`);
         break;
 }
 
@@ -49,7 +49,7 @@ function executeScript(script) {
         args = args.concat(argsFiltered);
     }
 
-    if (/.*node_modules[\/|\\]@widgets-resources[\/|\\]utils-react-widgets[\/|\\]?$/.test(libraryPath)) {
+    if (/.*node_modules[/|\\]@widgets-resources[/|\\]utils-react-widgets[/|\\]?$/.test(libraryPath)) {
         spawnParams.cwd = libraryPath;
     }
     // console.log("libraryPath", libraryPath, spawnParams);

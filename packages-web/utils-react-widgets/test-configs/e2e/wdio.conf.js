@@ -1,4 +1,5 @@
 const path = require("path");
+const fs = require("fs");
 
 const debug = process.env.DEBUG;
 // const url = "https://badge.mxapps.io/"; // process.env.URL || "https://localhost:8080/";
@@ -6,6 +7,11 @@ const url = process.env.URL || "https://localhost:8080/";
 const variables = require("../../configs/variables");
 // console.log(process.env.URL);
 // console.log(path.resolve(variables.path, "test/e2e/tsconfig.json"));
+
+const e2ePath = path.join(variables.path, "/dist/e2e/");
+if (!fs.existsSync(e2ePath)) {
+    fs.mkdirSync(e2ePath, { recursive: true });
+}
 
 exports.config = {
     before() {
@@ -25,7 +31,6 @@ exports.config = {
     logLevel: "silent",
     coloredLogs: true,
     bail: 0,
-    screenshotPath: path.resolve(variables.path, "dist/wdio/"),
     baseUrl: url,
     waitforTimeout: 30000,
     connectionRetryTimeout: 90000,
@@ -36,12 +41,19 @@ exports.config = {
     execArgv: debug ? ["--inspect"] : undefined,
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {
-        defaultTimeoutInterval: debug ? 60 * 60 * 1000 : 30 * 1000,
-        expectationResultHandler: (passed, assertion) => {
-            if (passed) {
-                return;
-            }
-            browser.saveScreenshot(variables.path + "dist/wdio/assertionError_" + assertion.error.message + ".png");
+        defaultTimeoutInterval: debug ? 60 * 60 * 1000 : 30 * 1000
+    },
+    afterTest: test => {
+        if (test.passed) {
+            return;
         }
+        console.log(test);
+        const browserName = browser.capabilities.browserName;
+        const timestamp = new Date().toJSON().replace(/:/g, "-");
+        const testName = test.fullName.replace(/ /g, "_");
+        const filename = `TESTFAIL_${browserName}_${testName}_${timestamp}.png`;
+        const filePath = path.join(e2ePath, filename);
+        browser.saveScreenshot(filePath);
+        console.log("Saved screenshot: ", filePath);
     }
 };
