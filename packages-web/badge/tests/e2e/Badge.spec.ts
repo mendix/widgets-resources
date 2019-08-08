@@ -12,7 +12,7 @@ describe("Badge", () => {
         expect(badge).toContain(caption);
     });
 
-    it("renders with Bootstrap style success when style is sucess", () => {
+    it("renders with Bootstrap style success when style is success", () => {
         homepage.open();
         homepage.badgeSuccess.waitForDisplayed();
 

@@ -49,11 +49,10 @@ function executeScript(script) {
         args = args.concat(argsFiltered);
     }
 
-    // if (/.*node_modules[\/|\\]@widgets-resources[\/|\\]utils-react-widgets[\/|\\]?$/.test(libraryPath)) {
-    spawnParams.cwd = libraryPath;
-    // }
+    if (/.*node_modules[\/|\\]@widgets-resources[\/|\\]utils-react-widgets[\/|\\]?$/.test(libraryPath)) {
+        spawnParams.cwd = libraryPath;
+    }
     // console.log("libraryPath", libraryPath, spawnParams);
-    // console.log()
     const result = spawn(/^win/.test(process.platform) ? "npm.cmd" : "npm", args, spawnParams);
     if (result.signal) {
         if (result.signal === "SIGKILL") {
@@ -70,6 +69,8 @@ function executeScript(script) {
             );
         }
         process.exit(1);
+    } else if (result.status) {
+        console.log(result);
     }
     process.exit(result.status);
 }
