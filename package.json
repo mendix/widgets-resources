@@ -25,7 +25,6 @@
         "@types/gulp-change": "^1.0.0",
         "@types/gulp-rename": "0.0.33",
         "@types/gulp-zip": "^4.0.0",
-        "@types/jasmine": "^3.4.0",
         "@types/jest": "^24.0.11",
         "@types/mime": "^2.0.1",
         "@types/node": "^11.13.5",
@@ -57,11 +56,11 @@
         "react-native-maps": "^0.23.0",
         "react-native-sound": "^0.10.12",
         "react-native-svg": "^9.2.4",
-        "react-native-testing-library": "^1.7.0",
+        "react-native-testing-library": "^1.11.1",
         "react-native-touch-id": "^4.4.1",
         "react-native-video": "^4.4.0",
         "react-native-webview": "^5.7.0",
-        "react-test-renderer": "^16.8.6",
+        "react-test-renderer": "~16.8.6",
         "ts-node": "^8.1.0"
     },
     "dependencies": {
