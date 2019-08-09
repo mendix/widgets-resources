@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, ReactNode, createElement } from "react";
 import { hot } from "react-hot-loader/root";
 
 import { BadgeButton, BootstrapStyle } from "./BadgeButton";
@@ -51,7 +51,7 @@ class BadgeButtonContainer extends Component<BadgeButtonContainerProps, BadgeBut
         this.handleSubscriptions = this.handleSubscriptions.bind(this);
     }
 
-    render() {
+    render(): ReactNode {
         if (this.state.alertMessage) {
             return createElement(Alert, { bootstrapStyle: "danger", message: this.state.alertMessage });
         }
@@ -67,49 +67,15 @@ class BadgeButtonContainer extends Component<BadgeButtonContainerProps, BadgeBut
         });
     }
 
-    componentWillReceiveProps(newProps: BadgeButtonContainerProps) {
+    componentWillReceiveProps(newProps: BadgeButtonContainerProps): void {
         this.resetSubscriptions(newProps.mxObject);
         this.setState({
             value: this.getValue(this.props.valueAttribute, newProps.mxObject)
         });
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
-    }
-
-    public static validateProps(props: BadgeButtonContainerProps): string {
-        let errorMessage = "";
-        if (props.onClickEvent === "callMicroflow" && !props.microflow) {
-            errorMessage = "A 'Microflow' is required for 'Events' 'Call a microflow'";
-        } else if (props.onClickEvent === "callNanoflow" && !props.nanoflow.nanoflow) {
-            errorMessage = "A 'Nanoflow' is required for 'Events' 'Call a nanoflow'";
-        } else if (props.onClickEvent === "showPage" && !props.page) {
-            errorMessage = "A 'Page' is required for 'Events' 'Show a page'";
-        }
-        if (errorMessage) {
-            errorMessage = `Error in badge button configuration: ${errorMessage}`;
-        }
-
-        return errorMessage;
-    }
-
-    public static parseStyle(style = ""): { [key: string]: string } {
-        try {
-            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
-                const pair = line.split(":");
-                if (pair.length === 2) {
-                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
-                    styleObject[name] = pair[1].trim();
-                }
-                return styleObject;
-            }, {});
-        } catch (error) {
-            // tslint:disable-next-line no-console
-            console.log("Failed to parse style", style, error);
-        }
-
-        return {};
     }
 
     private getValue(attributeName: string, mxObject?: mendix.lib.MxObject): string {
@@ -124,7 +90,7 @@ class BadgeButtonContainer extends Component<BadgeButtonContainerProps, BadgeBut
         return "";
     }
 
-    private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
+    private resetSubscriptions(mxObject?: mendix.lib.MxObject): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
 
         if (mxObject) {
@@ -145,13 +111,13 @@ class BadgeButtonContainer extends Component<BadgeButtonContainerProps, BadgeBut
         }
     }
 
-    private handleSubscriptions() {
+    private handleSubscriptions(): void {
         this.setState({
             value: this.getValue(this.props.valueAttribute, this.props.mxObject)
         });
     }
 
-    private handleOnClick() {
+    private handleOnClick(): void {
         const { mxObject, onClickEvent, microflow, mxform, nanoflow, openPageAs, page } = this.props;
         if (!mxObject || !mxObject.getGuid()) {
             return;
@@ -181,6 +147,40 @@ class BadgeButtonContainer extends Component<BadgeButtonContainerProps, BadgeBut
                 location: openPageAs
             });
         }
+    }
+
+    static validateProps(props: BadgeButtonContainerProps): string {
+        let errorMessage = "";
+        if (props.onClickEvent === "callMicroflow" && !props.microflow) {
+            errorMessage = "A 'Microflow' is required for 'Events' 'Call a microflow'";
+        } else if (props.onClickEvent === "callNanoflow" && !props.nanoflow.nanoflow) {
+            errorMessage = "A 'Nanoflow' is required for 'Events' 'Call a nanoflow'";
+        } else if (props.onClickEvent === "showPage" && !props.page) {
+            errorMessage = "A 'Page' is required for 'Events' 'Show a page'";
+        }
+        if (errorMessage) {
+            errorMessage = `Error in badge button configuration: ${errorMessage}`;
+        }
+
+        return errorMessage;
+    }
+
+    static parseStyle(style = ""): { [key: string]: string } {
+        try {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log("Failed to parse style", style, error);
+        }
+
+        return {};
     }
 }
 

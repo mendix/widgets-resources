@@ -1,11 +1,12 @@
-import { shallow } from "enzyme";
+import { ShallowWrapper, shallow } from "enzyme";
 import { createElement } from "react";
 
 import { Alert, AlertProps } from "../Alert";
 
 describe("Alert", () => {
     const message = "This is an error";
-    const renderAlert = (props: AlertProps) => shallow(createElement(Alert, props));
+    const renderAlert = (props: AlertProps): ShallowWrapper<AlertProps, Readonly<{}>, React.Component<{}, {}, any>> =>
+        shallow(createElement(Alert, props));
     let defaultProps: AlertProps;
 
     beforeEach(() => {

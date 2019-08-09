@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, ReactNode, createElement } from "react";
 
 import { Badge, BootstrapStyle } from "./Badge";
 import { Alert } from "./Alert";
@@ -50,7 +50,7 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
         this.handleSubscriptions = this.handleSubscriptions.bind(this);
     }
 
-    render() {
+    render(): ReactNode {
         if (this.state.alertMessage) {
             return createElement(Alert, {
                 bootstrapStyle: "danger",
@@ -71,14 +71,14 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
         });
     }
 
-    componentWillReceiveProps(newProps: BadgeContainerProps) {
+    componentWillReceiveProps(newProps: BadgeContainerProps): void {
         this.resetSubscriptions(newProps.mxObject);
         this.setState({
             value: BadgeContainer.getValue(this.props.valueAttribute, newProps.mxObject)
         });
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
     }
 
@@ -109,7 +109,7 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
         });
     }
 
-    private handleOnClick() {
+    private handleOnClick(): void {
         const { mxObject, onClickEvent, microflow, mxform, nanoflow, openPageAs, page } = this.props;
         if (!mxObject || !mxObject.getGuid()) {
             return;

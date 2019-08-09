@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, ReactNode, createElement } from "react";
 import { BadgeButton, BadgeButtonProps } from "./components/BadgeButton";
 import { Alert } from "./components/Alert";
 import BadgeButtonContainer, { BadgeButtonContainerProps } from "./components/BadgeButtonContainer";
@@ -11,15 +11,17 @@ type VisibilityMap = {
 
 // tslint:disable-next-line class-name
 export class preview extends Component<BadgeButtonContainerProps, {}> {
-    render() {
+    render(): ReactNode {
         const message = BadgeButtonContainer.validateProps(this.props);
-        return createElement("div", { ref: this.parentInline },
+        return createElement(
+            "div",
+            { ref: this.parentInline },
             createElement(Alert, { bootstrapStyle: "danger", className: "widget-badge-button-alert", message }),
             createElement(BadgeButton, this.transformProps(this.props))
         );
     }
 
-    private parentInline(node?: HTMLElement | null) {
+    private parentInline(node?: HTMLElement | null): void {
         // Temporary fix, the web modeler add a containing div, to render inline we need to change it.
         if (node && node.parentElement) {
             node.parentElement.style.display = "inline-block";
@@ -38,11 +40,11 @@ export class preview extends Component<BadgeButtonContainerProps, {}> {
     }
 }
 
-export function getPreviewCss() {
+export function getPreviewCss(): string {
     return require("./ui/BadgeButton.css");
 }
 
-export function getVisibleProperties(props: BadgeButtonContainerProps, visibilityMap: VisibilityMap) {
+export function getVisibleProperties(props: BadgeButtonContainerProps, visibilityMap: VisibilityMap): VisibilityMap {
     visibilityMap.microflow = props.onClickEvent === "callMicroflow";
     visibilityMap.nanoflow = props.onClickEvent === "callNanoflow";
     visibilityMap.page = props.onClickEvent === "showPage";
