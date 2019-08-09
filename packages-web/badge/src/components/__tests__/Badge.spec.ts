@@ -15,7 +15,7 @@ describe("Badge", () => {
         };
         const badge = createBadge(badgeProps);
 
-        expect(badge.getElement()).toStrictEqual(
+        expect(badge.getElement()).toEqual(
             createElement(
                 "span",
                 {
