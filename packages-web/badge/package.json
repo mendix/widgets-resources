@@ -5,21 +5,23 @@
     "description": "Shows a value as a badge or a color label",
     "copyright": "Mendix BV",
     "scripts": {
-        "start": "utils-react-widgets start --subprojectPath $npm_package_config_subprojectFolder",
-        "dev": "utils-react-widgets dev --subprojectPath $npm_package_config_subprojectFolder",
+        "start": "utils-react-widgets start",
+        "dev": "utils-react-widgets dev",
         "test": "npm run test:unit",
         "test:unit": "jest --config ../../scripts/test/jest.web.config.js",
-        "test:e2e": "export URL=https://badge.mxapps.io/ && utils-react-widgets test:e2e --subprojectPath $npm_package_config_subprojectFolder",
-        "test:e2e:dev": "export DEBUG=true && utils-react-widgets test:e2e --subprojectPath $npm_package_config_subprojectFolder",
+        "test:e2e": "export URL=https://badge.mxapps.io/ && utils-react-widgets test:e2e",
+        "test:e2e:dev": "export DEBUG=true && utils-react-widgets test:e2e",
         "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "lint:fix": "npm run lint -- --fix",
-        "build": "utils-react-widgets build --subprojectPath $npm_package_config_subprojectFolder"
+        "build": "utils-react-widgets build"
     },
     "config": {
         "mendixHost": "http://localhost:8080",
         "developmentPort": 3000,
-        "projectPath": "./tests/TestProjects/Mendix7/",
-        "subprojectFolder": "packages-web/badge"
+        "projectPath": [
+            "./tests/TestProjects/Mendix7/",
+            "./tests/TestProjects/Mendix8/"
+        ]
     },
     "license": "Apache-2.0",
     "devDependencies": {

@@ -15,6 +15,10 @@ const script = args[0];
 const argsFiltered = args.length > 1 ? args.slice(1) : [];
 const gulpSlash = require("gulp-slash");
 
+const paths = process.cwd().split(path.sep);
+const projectPath = paths.slice(Math.max(paths.length - 2, 1)).join(path.sep);
+// console.log("Project Path!", projectPath);
+
 switch (script) {
     case "build":
     case "dev":
@@ -46,9 +50,15 @@ function executeScript(script) {
     let args = ["run", script];
     if (argsFiltered.length > 0) {
         args.push("--");
-        args = args.concat(argsFiltered);
+        args = args.concat(argsFiltered, ["--subProjectPath", projectPath]);
+        if (!argsFiltered.includes("--subProjectPath")) {
+            args = args.concat(["--subProjectPath", projectPath]);
+        }
+    } else if (!argsFiltered.includes("--subProjectPath")) {
+        args.push("--");
+        args = args.concat(["--subProjectPath", projectPath]);
     }
-
+    // console.log("args", args);
     if (/.*node_modules[/|\\]@widgets-resources[/|\\]utils-react-widgets[/|\\]?$/.test(libraryPath)) {
         spawnParams.cwd = libraryPath;
     }
