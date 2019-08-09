@@ -9,18 +9,18 @@ type VisibilityMap = {
     [P in keyof BadgeContainerProps]: boolean;
 };
 
-// tslint:disable-next-line class-name
 export class preview extends Component<BadgeContainerProps, {}> {
     render() {
         const message = BadgeContainer.validateProps(this.props);
-        return createElement("div", { ref: this.parentInline },
+        return createElement(
+            "div",
+            { ref: this.parentInline },
             createElement(Alert, { bootstrapStyle: "danger", message, className: "widget-badge-alert" }),
             createElement(Badge, this.transformProps(this.props))
         );
     }
 
     private parentInline(node?: HTMLElement | null) {
-        // Temporary fix, the web modeler add a containing div, to render inline we need to change it.
         if (node && node.parentElement) {
             node.parentElement.style.display = "inline-block";
         }
@@ -44,7 +44,6 @@ export function getPreviewCss() {
 }
 
 export function getVisibleProperties(valueMap: BadgeContainerProps, visibilityMap: VisibilityMap) {
-
     visibilityMap.microflow = valueMap.onClickEvent === "callMicroflow";
     visibilityMap.nanoflow = valueMap.onClickEvent === "callNanoflow";
     visibilityMap.page = valueMap.onClickEvent === "showPage";

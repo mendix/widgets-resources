@@ -3,6 +3,7 @@
     "private": true,
     "scripts": {
         "postinstall": "lerna bootstrap",
+        "prettier": "prettier --config \"./prettier.config.js\" --write \"./**/{src,test}/**/*.{js,jsx,ts,tsx}\"",
         "format": "pretty-quick",
         "lint": "npm run lint:scripts && lerna run lint",
         "lint:scripts": "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx packages-web/**/src packages-native/**/src",
