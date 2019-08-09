@@ -17,4 +17,4 @@ coverage
 **/TestProjects/*/.project
 **/TestProjects/*/.classpath
 **/TestProjects/*/*.lock
-packages-web/badge/tests/TestProjects/Mendix7/Mendix7.launch
+**/TestProjects/*/*.launch

@@ -1,5 +1,5 @@
 import { Component, createElement } from "react";
-import { hot } from "react-hot-loader";
+import { hot } from "react-hot-loader/root";
 
 import { BadgeButton, BootstrapStyle } from "./BadgeButton";
 import { Alert } from "./Alert";
@@ -34,7 +34,7 @@ interface BadgeButtonContainerState {
 }
 
 type OnClickOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
-type PageLocation = "content"| "popup" | "modal";
+type PageLocation = "content" | "popup" | "modal";
 
 class BadgeButtonContainer extends Component<BadgeButtonContainerProps, BadgeButtonContainerState> {
     private subscriptionHandles: number[];
@@ -94,9 +94,9 @@ class BadgeButtonContainer extends Component<BadgeButtonContainerProps, BadgeBut
         return errorMessage;
     }
 
-    public static parseStyle(style = ""): {[key: string]: string} {
+    public static parseStyle(style = ""): { [key: string]: string } {
         try {
-            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
                 const pair = line.split(":");
                 if (pair.length === 2) {
                     const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
@@ -128,16 +128,20 @@ class BadgeButtonContainer extends Component<BadgeButtonContainerProps, BadgeBut
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
 
         if (mxObject) {
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                callback: this.handleSubscriptions,
-                guid: mxObject.getGuid()
-            }));
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    callback: this.handleSubscriptions,
+                    guid: mxObject.getGuid()
+                })
+            );
 
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                attr: this.props.valueAttribute,
-                callback: this.handleSubscriptions,
-                guid: mxObject.getGuid()
-            }));
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    attr: this.props.valueAttribute,
+                    callback: this.handleSubscriptions,
+                    guid: mxObject.getGuid()
+                })
+            );
         }
     }
 
@@ -160,7 +164,7 @@ class BadgeButtonContainer extends Component<BadgeButtonContainerProps, BadgeBut
                 origin: mxform,
                 params: {
                     applyto: "selection",
-                    guids: [ mxObject.getGuid() ]
+                    guids: [mxObject.getGuid()]
                 }
             });
         } else if (onClickEvent === "callNanoflow" && nanoflow.nanoflow) {
@@ -180,4 +184,4 @@ class BadgeButtonContainer extends Component<BadgeButtonContainerProps, BadgeBut
     }
 }
 
-export default hot(module)(BadgeButtonContainer);
+export default hot(BadgeButtonContainer);
