@@ -69,7 +69,7 @@ function executeScript(script) {
             );
         }
         process.exit(1);
-    } else if (result.status) {
+    } else if (result.status > 1) {
         console.log(result);
     }
     process.exit(result.status);

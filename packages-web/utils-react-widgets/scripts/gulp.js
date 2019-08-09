@@ -9,6 +9,8 @@ const del = require("del");
 const gulpSlash = require("gulp-slash");
 const eslint = require("gulp-eslint");
 const tslint = require("gulp-tslint");
+const multiDestZip = require("gulp-multidest");
+const multiDestFiles = require("gulp-multi-dest");
 // const livereload = require("gulp-livereload");
 // const typingGenerator = require("@mendix/pluggable-widgets-typing-generator");
 
@@ -26,12 +28,18 @@ const COLOR = {
 };
 const END = "\x1b[0m";
 console.log("variables.package.config.projectPath", variables.package.config.projectPath);
-const projectPath = variables.package.config.projectPath
-    ? fixSlashes(checkPath(variables.package.config.projectPath))
-    : fixSlashes(path.join(__dirname, `${variables.path}/dist/MxTestProject`));
 
-const widgetsFolder = fixSlashes(path.join(projectPath, "/widgets/"));
+const projectPaths = getProjectPaths();
 
+const widgetsFolders = projectPaths.map(p => fixSlashes(path.join(p, "/widgets/")));
+function getProjectPaths() {
+    if (variables.package.config.projectPath) {
+        return Array.isArray(variables.package.config.projectPath)
+            ? variables.package.config.projectPath.map(p => fixSlashes(checkPath(p)))
+            : [fixSlashes(checkPath(variables.package.config.projectPath))];
+    }
+    return [fixSlashes(path.join(__dirname, `${variables.path}/tests/TestProject`))];
+}
 function fixSlashes(tmpPath) {
     tmpPath = gulpSlash(tmpPath);
     tmpPath = tmpPath.replace(/\/+/g, "/");
@@ -47,40 +55,40 @@ function checkPath(newProjectPath) {
 }
 
 function clean() {
+    const mpks = widgetsFolders.map(p => fixSlashes(`${p}/${variables.package.widgetName}.mpk`));
     return del(
         [
             fixSlashes(`${variables.path}/dist/${variables.package.version}/*.*`),
             fixSlashes(`${variables.path}/dist/tmp/**/*.*`),
             fixSlashes(`${variables.path}/dist/tsc/**/*.*`),
             fixSlashes(`${variables.path}/dist/testresults/**/*.*`),
-            fixSlashes(`${widgetsFolder}/${variables.package.widgetName}.mpk`)
+            ...mpks
         ],
         { force: true }
     );
 }
 
 function createMpkFile() {
+    // console.log("widgetFolder", widgetsFolders);
     return gulp
         .src(fixSlashes(`${variables.path}/dist/tmp/widgets/**/*`))
         .pipe(zip(`${variables.package.widgetName}.mpk`))
-        .pipe(gulp.dest(widgetsFolder))
+        .pipe(multiDestZip(widgetsFolders))
         .pipe(gulp.dest(fixSlashes(`${variables.path}/dist/${variables.package.version}`)))
         .on("error", handleError);
 }
 
 function copyToDeployment() {
-    console.log(`${COLOR.GREEN}Files generated in dist and ${projectPath} folder${END}`);
-    return (
-        gulp
-            .src(fixSlashes(`${variables.path}/dist/tmp/widgets/**/*`))
-            .pipe(gulp.dest(fixSlashes(`${projectPath}/deployment/web/widgets`)))
-            // .pipe(livereload())
-            .on("error", handleError)
-    );
+    console.log(`${COLOR.GREEN}Files generated in dist and ${projectPaths} folder${END}`);
+    const dest = projectPaths.map(d => fixSlashes(`${d}/deployment/web/widgets`));
+    return gulp
+        .src(fixSlashes(`${variables.path}/dist/tmp/widgets/**/*`))
+        .pipe(multiDestFiles(dest))
+        .on("error", handleError);
 }
 
 function runLint() {
-    console.log(`${COLOR.GREEN}Linting files ${projectPath} folder${END}`);
+    console.log(`${COLOR.GREEN}Linting files ${projectPaths} folder${END}`);
     return (
         gulp
             .src(fixSlashes(`${variables.path}/dist/tmp/widgets/**/*.ts`))
@@ -153,13 +161,6 @@ function checkDependencies(cb) {
     cb();
 }
 
-// function generateTypings() {
-//     return gulp
-//         .src(fixSlashes(path.join(variables.path, `/src/package.xml`)))
-//         .pipe(typingGenerator())
-//         .on("error", handleError);
-// }
-
 function handleError(err) {
     console.log(`${COLOR.RED}${err.toString()}${END}`);
     process.exit(-1);
@@ -170,27 +171,13 @@ const build = gulp.series(clean, checkDependencies, bundle, createMpkFile, copyT
 const productionBuild = gulp.series(clean, checkDependencies, productionBundle, createMpkFile);
 const lint = gulp.series(runLint);
 
-// const buildTs = gulp.series(clean, generateTypings, checkDependencies, bundle, createMpkFile, copyToDeployment);
-
-// const productionBuildTs = gulp.series(clean, generateTypings, checkDependencies, productionBundle, createMpkFile);
-
 function watch() {
     const watchPath = fixSlashes(`${variables.path}/src/**/*`);
-    // livereload.listen();
     console.log(`${COLOR.GREEN}Watching files in: ${watchPath}${END}`);
     return gulp.watch(watchPath, { ignoreInitial: false }, build);
 }
 
-// function watchTs() {
-//     const watchPath = fixSlashes(`${variables.path}/src/**/*`);
-//     console.log(`${COLOR.GREEN}Watching files in: ${watchPath}${END}`);
-//     return gulp.watch(watchPath, { ignoreInitial: false }, buildTs);
-// }
-
 exports.watch = watch;
-// exports.watchTs = watchTs;
 exports.build = build;
 exports.release = productionBuild;
 exports.lint = lint;
-// exports.buildTs = buildTs;
-// exports.releaseTs = productionBuildTs;
