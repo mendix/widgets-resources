@@ -11,7 +11,7 @@
         "test": "npm run test:unit",
         "test:dev": "utils-react-widgets test:dev --subprojectPath $npm_package_config_subprojectFolder",
         "test:unit": "utils-react-widgets test:unit --subprojectPath $npm_package_config_subprojectFolder",
-        "lint": "tslint -c ../utils-react-widgets/configs/tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'",
+        "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "lint:fix": "npm run lint -- --fix",
         "build": "utils-react-widgets build --subprojectPath $npm_package_config_subprojectFolder"
     },
