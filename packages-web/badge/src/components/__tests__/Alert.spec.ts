@@ -14,7 +14,7 @@ describe("Alert", () => {
             })
         );
 
-        expect(alert).toBeElement(
+        expect(alert.getElement()).toStrictEqual(
             createElement("div", { className: "alert alert-danger widget-badge-alert" }, message)
         );
     });
@@ -22,6 +22,6 @@ describe("Alert", () => {
     it("renders no structure when the alert message is not specified", () => {
         const alert = shallow(createElement(Alert));
 
-        expect(alert).toBeElement(null);
+        expect(alert.getElement()).toBeNull();
     });
 });
