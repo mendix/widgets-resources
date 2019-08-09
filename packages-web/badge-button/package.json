@@ -18,7 +18,10 @@
     "config": {
         "mendixHost": "http://localhost:8080",
         "developmentPort": 3000,
-        "projectPath": "./tests/TestProjects/Mendix7/",
+        "projectPath": [
+            "./tests/TestProjects/Mendix7/",
+            "./tests/TestProjects/Mendix8/"
+        ],
         "subprojectFolder": "packages-web/badge-button"
     },
     "pre-commit": [
