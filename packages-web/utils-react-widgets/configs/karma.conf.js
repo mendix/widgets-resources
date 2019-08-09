@@ -4,19 +4,11 @@ const variables = require("./variables");
 
 const libPath = process.cwd();
 const cwd = variables.path;
-// console.log("karma", cwd, "libPath", libPath);
 
 Object.assign(webpackConfig, {
     devtool: "inline-source-map",
     externals: ["react/lib/ExecutionEnvironment", "react/lib/ReactContext", "react/addons", "jsdom"]
-    // resolve: {
-    //     alias: {
-    //         source: path.resolve(cwd, "./src"),
-    //         tests: path.resolve(cwd, "./tests")
-    //     }
-    // }
 });
-// console.log("webpackConfig", webpackConfig);
 
 module.exports = function(config) {
     if (config.codeCoverage) {
