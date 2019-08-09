@@ -7,10 +7,8 @@
     "scripts": {
         "start": "utils-react-widgets start --subprojectPath $npm_package_config_subprojectFolder",
         "dev": "utils-react-widgets dev --subprojectPath $npm_package_config_subprojectFolder",
-        "pretest": "tsc && npm run lint && npm run build",
         "test": "npm run test:unit",
-        "test:dev": "utils-react-widgets test:dev --subprojectPath $npm_package_config_subprojectFolder",
-        "test:unit": "utils-react-widgets test:unit --subprojectPath $npm_package_config_subprojectFolder",
+        "test:unit": "jest --config ../../scripts/test/jest.web.config.js",
         "test:e2e": "export URL=https://badge.mxapps.io/ && utils-react-widgets test:e2e --subprojectPath $npm_package_config_subprojectFolder",
         "test:e2e:dev": "export DEBUG=true && utils-react-widgets test:e2e --subprojectPath $npm_package_config_subprojectFolder",
         "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",

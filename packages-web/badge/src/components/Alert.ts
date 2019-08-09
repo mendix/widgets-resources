@@ -1,5 +1,5 @@
 import { SFC, createElement } from "react";
-import * as classNames from "classnames";
+import classNames from "classnames";
 
 export interface AlertProps {
     message: string;

@@ -4,27 +4,26 @@ import { createElement } from "react";
 import { Badge, BadgeProps } from "../Badge";
 
 describe("Badge", () => {
-    const createBadge = (props: BadgeProps) => shallow(createElement(Badge, props));
+    const createBadge = (props: BadgeProps): any => shallow(createElement(Badge, props));
 
     it("should render the structure", () => {
         const badgeProps: BadgeProps = {
             badgeType: "badge",
             bootstrapStyle: "default",
-            onClickAction: jasmine.createSpy("onClick"),
+            onClickAction: expect.any(Function),
             value: "0"
         };
         const badge = createBadge(badgeProps);
 
-        // @ts-ignore
-        expect(badge).toBeElement(
+        expect(badge.getElement()).toStrictEqual(
             createElement(
                 "span",
                 {
                     className: "widget-badge badge label-default",
-                    onClick: jasmine.any(Function) as any,
+                    onClick: expect.any(Function),
                     style: badgeProps.style
                 },
-                jasmine.any(String)
+                expect.any(String)
             )
         );
     });
@@ -62,8 +61,8 @@ describe("Badge", () => {
     });
 
     it("with a click action should respond to click events", () => {
-        const badgeProps: BadgeProps = { onClickAction: jasmine.createSpy("onClick"), badgeType: "badge" };
-        const onClick = (badgeProps.onClickAction = jasmine.createSpy("onClick"));
+        const badgeProps: BadgeProps = { onClickAction: jest.fn(), badgeType: "badge" };
+        const onClick = (badgeProps.onClickAction = jest.fn());
         const badge = createBadge(badgeProps);
 
         badge.simulate("click");
