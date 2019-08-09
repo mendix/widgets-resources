@@ -14,7 +14,7 @@ describe("Alert", () => {
             })
         );
 
-        expect(alert.getElement()).toStrictEqual(
+        expect(alert.getElement()).toEqual(
             createElement("div", { className: "alert alert-danger widget-badge-alert" }, message)
         );
     });
