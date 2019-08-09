@@ -15,17 +15,21 @@ describe("Badge", () => {
         };
         const badge = createBadge(badgeProps);
 
+        // @ts-ignore
         expect(badge).toBeElement(
-            createElement("span",
+            createElement(
+                "span",
                 {
-                    className: ("widget-badge badge label-default"),
+                    className: "widget-badge badge label-default",
                     onClick: jasmine.any(Function) as any,
                     style: badgeProps.style
-                }, jasmine.any(String))
+                },
+                jasmine.any(String)
+            )
         );
     });
 
-    it("should show no value when no value or default value provided", () => {
+    it("should show value when value is provided", () => {
         const value = "value";
         const badge = createBadge({ badgeType: "label", value, defaultValue: "default value" });
 
@@ -59,7 +63,7 @@ describe("Badge", () => {
 
     it("with a click action should respond to click events", () => {
         const badgeProps: BadgeProps = { onClickAction: jasmine.createSpy("onClick"), badgeType: "badge" };
-        const onClick = badgeProps.onClickAction = jasmine.createSpy("onClick");
+        const onClick = (badgeProps.onClickAction = jasmine.createSpy("onClick"));
         const badge = createBadge(badgeProps);
 
         badge.simulate("click");

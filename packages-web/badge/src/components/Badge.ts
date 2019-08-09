@@ -17,13 +17,17 @@ export interface BadgeProps {
 
 export type BootstrapStyle = "default" | "info" | "inverse" | "primary" | "danger" | "success" | "warning";
 
-export const Badge: SFC<BadgeProps> = (props) => createElement("span",
-    {
-        className: classNames("widget-badge", props.badgeType, props.className, {
-            [`label-${props.bootstrapStyle}`]: !!props.bootstrapStyle,
-            "widget-badge-clickable": props.clickable
-        }),
-        onClick: props.onClickAction,
-        ref: props.getRef,
-        style: props.style
-    }, props.value || props.defaultValue);
+export const Badge: SFC<BadgeProps> = props =>
+    createElement(
+        "span",
+        {
+            className: classNames("widget-badge", props.badgeType, props.className, {
+                [`label-${props.bootstrapStyle}`]: !!props.bootstrapStyle,
+                "widget-badge-clickable": props.clickable
+            }),
+            onClick: props.onClickAction,
+            ref: props.getRef,
+            style: props.style
+        },
+        props.value || props.defaultValue
+    );

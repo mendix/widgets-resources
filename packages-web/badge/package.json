@@ -7,14 +7,13 @@
     "scripts": {
         "start": "utils-react-widgets start --subprojectPath $npm_package_config_subprojectFolder",
         "dev": "utils-react-widgets dev --subprojectPath $npm_package_config_subprojectFolder",
-        "typeCheck": "tsc --noEmit",
         "pretest": "tsc && npm run lint && npm run build",
         "test": "npm run test:unit",
         "test:dev": "utils-react-widgets test:dev --subprojectPath $npm_package_config_subprojectFolder",
         "test:unit": "utils-react-widgets test:unit --subprojectPath $npm_package_config_subprojectFolder",
         "test:e2e": "export URL=https://badge.mxapps.io/ && utils-react-widgets test:e2e --subprojectPath $npm_package_config_subprojectFolder",
         "test:e2e:dev": "export DEBUG=true && utils-react-widgets test:e2e --subprojectPath $npm_package_config_subprojectFolder",
-        "lint": "tslint -c ../utils-react-widgets/configs/tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'",
+        "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "lint:fix": "npm run lint -- --fix",
         "build": "utils-react-widgets build --subprojectPath $npm_package_config_subprojectFolder"
     },
@@ -24,18 +23,7 @@
         "projectPath": "./tests/TestProjects/Mendix7/",
         "subprojectFolder": "packages-web/badge"
     },
-    "pre-commit": [
-        "typeCheck",
-        "lint"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/mendixlabs/badge"
-    },
     "license": "Apache-2.0",
-    "bugs": {
-        "url": "https://github.com/mendixlabs/badge/issues"
-    },
     "devDependencies": {
         "@types/classnames": "^2.2.3",
         "@wdio/sync": "^5.11.13",

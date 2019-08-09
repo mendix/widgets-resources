@@ -4,7 +4,7 @@ import { Badge, BootstrapStyle } from "./Badge";
 import { Alert } from "./Alert";
 
 interface WrapperProps {
-    "class"?: string;
+    class?: string;
     mxform: mxui.lib.form._FormBase;
     mxObject?: mendix.lib.MxObject;
     style?: string;
@@ -33,7 +33,7 @@ interface Nanoflow {
 }
 
 type OnClickOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
-type PageLocation = "content"| "popup" | "modal";
+type PageLocation = "content" | "popup" | "modal";
 
 export default class BadgeContainer extends Component<BadgeContainerProps, BadgeContainerState> {
     private subscriptionHandles: number[];
@@ -82,55 +82,31 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
     }
 
-    private static getValue(attributeName: string, mxObject?: mendix.lib.MxObject): string {
-        if (mxObject && attributeName) {
-            const value = mxObject.get(attributeName);
-            if (mxObject.isEnum(attributeName)) {
-                return mxObject.getEnumCaption(attributeName, value as string);
-            }
-            return value.toString();
-        }
-
-        return "";
-    }
-
-    private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
+    private resetSubscriptions(mxObject?: mendix.lib.MxObject): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
 
         if (mxObject) {
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                callback: this.handleSubscriptions,
-                guid: mxObject.getGuid()
-            }));
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    callback: this.handleSubscriptions,
+                    guid: mxObject.getGuid()
+                })
+            );
 
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                attr: this.props.valueAttribute,
-                callback: this.handleSubscriptions,
-                guid: mxObject.getGuid()
-            }));
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    attr: this.props.valueAttribute,
+                    callback: this.handleSubscriptions,
+                    guid: mxObject.getGuid()
+                })
+            );
         }
     }
 
-    private handleSubscriptions() {
+    private handleSubscriptions(): void {
         this.setState({
             value: BadgeContainer.getValue(this.props.valueAttribute, this.props.mxObject)
         });
-    }
-
-    public static validateProps(props: BadgeContainerProps): string {
-        let errorMessage = "";
-        if (props.onClickEvent === "callMicroflow" && !props.microflow) {
-            errorMessage = "A 'Microflow' is required for 'Events' 'Call a microflow'";
-        } else if (props.onClickEvent === "callNanoflow" && !props.nanoflow.nanoflow) {
-            errorMessage = "A 'Nanoflow' is required for 'Events' 'Call a nanoflow'";
-        } else if (props.onClickEvent === "showPage" && !props.page) {
-            errorMessage = "A 'Page' is required for 'Events' 'Show a page'";
-        }
-        if (errorMessage) {
-            errorMessage = `Error in configuration: ${errorMessage}`;
-        }
-
-        return errorMessage;
     }
 
     private handleOnClick() {
@@ -146,7 +122,7 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
                 origin: mxform,
                 params: {
                     applyto: "selection",
-                    guids: [ mxObject.getGuid() ]
+                    guids: [mxObject.getGuid()]
                 }
             });
         } else if (onClickEvent === "callNanoflow" && nanoflow.nanoflow) {
@@ -165,9 +141,37 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
         }
     }
 
-    public static parseStyle(style = ""): {[key: string]: string} {
+    private static getValue(attributeName: string, mxObject?: mendix.lib.MxObject): string {
+        if (mxObject && attributeName) {
+            const value = mxObject.get(attributeName);
+            if (mxObject.isEnum(attributeName)) {
+                return mxObject.getEnumCaption(attributeName, value as string);
+            }
+            return value.toString();
+        }
+
+        return "";
+    }
+
+    static validateProps(props: BadgeContainerProps): string {
+        let errorMessage = "";
+        if (props.onClickEvent === "callMicroflow" && !props.microflow) {
+            errorMessage = "A 'Microflow' is required for 'Events' 'Call a microflow'";
+        } else if (props.onClickEvent === "callNanoflow" && !props.nanoflow.nanoflow) {
+            errorMessage = "A 'Nanoflow' is required for 'Events' 'Call a nanoflow'";
+        } else if (props.onClickEvent === "showPage" && !props.page) {
+            errorMessage = "A 'Page' is required for 'Events' 'Show a page'";
+        }
+        if (errorMessage) {
+            errorMessage = `Error in configuration: ${errorMessage}`;
+        }
+
+        return errorMessage;
+    }
+
+    static parseStyle(style = ""): { [key: string]: string } {
         try {
-            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
                 const pair = line.split(":");
                 if (pair.length === 2) {
                     const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
@@ -176,7 +180,7 @@ export default class BadgeContainer extends Component<BadgeContainerProps, Badge
                 return styleObject;
             }, {});
         } catch (error) {
-            // tslint:disable-next-line no-console
+            // eslint-disable-next-line no-console
             console.log("Failed to parse style", style, error);
         }
 
