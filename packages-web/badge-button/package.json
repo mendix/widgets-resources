@@ -6,7 +6,6 @@
     "scripts": {
         "start": "utils-react-widgets start --subprojectPath $npm_package_config_subprojectFolder",
         "dev": "utils-react-widgets dev --subprojectPath $npm_package_config_subprojectFolder",
-        "typeCheck": "tsc --noEmit",
         "test:unit": "jest --config ../../scripts/test/jest.web.config.js",
         "test": "npm run test:unit",
         "test:dev": "utils-react-widgets test:dev --subprojectPath $npm_package_config_subprojectFolder",
@@ -24,18 +23,7 @@
         ],
         "subprojectFolder": "packages-web/badge-button"
     },
-    "pre-commit": [
-        "typeCheck",
-        "lint"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/mendix/widgets-resources"
-    },
     "license": "Apache-2.0",
-    "bugs": {
-        "url": "https://github.com/mendix/widgets-resources/issues"
-    },
     "devDependencies": {
         "@types/classnames": "^2.2.7",
         "@widgets-resources/utils-react-widgets": "0.0.1"
