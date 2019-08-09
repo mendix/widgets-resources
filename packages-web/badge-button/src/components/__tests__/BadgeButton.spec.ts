@@ -1,6 +1,6 @@
 import { ShallowWrapper, shallow } from "enzyme";
 import { createElement } from "react";
-import * as classNames from "classnames";
+import classNames from "classnames";
 
 import { BadgeButton, BadgeButtonProps } from "../BadgeButton";
 
@@ -13,19 +13,19 @@ describe("BadgeButton", () => {
     it("should render the structure", () => {
         const badgeProps: BadgeButtonProps = {
             label: "Custom Label",
-            onClickAction: jasmine.createSpy("onClick"),
+            onClickAction: expect.any(Function),
             value: "0"
         };
         const badge = createBadgeButton(badgeProps);
 
-        expect(badge).toBeElement(
+        expect(badge.getElement()).toEqual(
             createElement(
                 "button",
                 {
                     className: classNames("widget-badge-button btn", {
                         [`btn-${badgeProps.bootstrapStyle}`]: !!badgeProps.bootstrapStyle
                     }),
-                    onClick: jasmine.any(Function) as any
+                    onClick: expect.any(Function)
                 },
                 createElement("span", { className: "widget-badge-button-text" }, badgeProps.label),
                 createElement("span", { className: "badge" }, badgeProps.value)

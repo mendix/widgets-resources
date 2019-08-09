@@ -16,6 +16,7 @@
         "@commitlint/config-conventional": "^7.5.0",
         "@commitlint/config-lerna-scopes": "^7.5.1",
         "@mendix/pluggable-widgets-tools": "^8.0.1",
+        "@testing-library/jest-dom": "^4.0.0",
         "@types/big.js": "^4.0.5",
         "@types/classnames": "^2.2.4",
         "@types/enzyme": "^3.10.3",
