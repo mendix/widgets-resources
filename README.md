@@ -4,7 +4,7 @@
 
 # Widgets resources
 
-A bundle of commonly used widgets & nanoflow actions for building native mobile & hybrid apps.
+A bundle of R&D Platform supported widgets & nanoflow actions for building native mobile & hybrid apps.
 
 ## Native widgets
 
@@ -29,12 +29,12 @@ A bundle of commonly used widgets & nanoflow actions for building native mobile 
 | [Video player][]           | Play a video loaded from a URL.                                 |
 | [Web view][]               | Display an external web page or load custom HTML.               |
 
-## Web widgets
+## Web & Hybrid widgets
 
-| Widget                                                                                            | Description                                                     |
-| :------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------- |
-| [Badge](https://github.com/mendix/widgets-resources/blob/master/packages-web/badge)               | Display a circular loading indicator.                           |
-| [Video player](https://github.com/mendix/widgets-resources/blob/master/packages-web/video-player) | Trigger actions based on load, network status and timer events. |
+| Widget                                                                                            | Description                         |
+| :------------------------------------------------------------------------------------------------ | :---------------------------------- |
+| [Badge](https://github.com/mendix/widgets-resources/blob/master/packages-web/badge)               | Display text or a value as a badge. |
+| [Video player](https://github.com/mendix/widgets-resources/blob/master/packages-web/video-player) | Play a video loaded from a URL.     |
 
 [activity indicator]: https://github.com/mendix/widgets-resources/blob/master/packages-native/activity-indicator
 [app events]: https://github.com/mendix/widgets-resources/blob/master/packages-native/app-events
