@@ -11,8 +11,6 @@ const eslint = require("gulp-eslint");
 const tslint = require("gulp-tslint");
 const multiDestZip = require("gulp-multidest");
 const multiDestFiles = require("gulp-multi-dest");
-// const livereload = require("gulp-livereload");
-// const typingGenerator = require("@mendix/pluggable-widgets-typing-generator");
 
 const cwd = process.cwd();
 const variables = require("../configs/variables");

@@ -1,8 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-
 const args = process.argv.slice(2);
-const indexOf = args.indexOf("--subprojectPath");
+const indexOf = args.indexOf("--subProjectPath");
 let pathToJoin = "";
 if (indexOf > -1 && args.length > indexOf + 1) {
     pathToJoin = args[indexOf + 1];
