@@ -1,11 +1,12 @@
-[![Build Status](https://api.travis-ci.org/mendix/native-mobile-resources.svg?branch=master)](https://travis-ci.org/mendix/native-mobile-resources)
+![Build Status](https://travis-ci.org/mendix/widgets-resources.svg?branch=master)
 ![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
+![GitHub issues](https://img.shields.io/github/issues/mendix/widgets-resources)
 
-# Native mobile resources
+# Widgets resources
 
-A bundle of commonly used widgets & nanoflow actions for building native mobile apps.
+A bundle of commonly used widgets & nanoflow actions for building native mobile & hybrid apps.
 
-## Included widgets
+## Native widgets
 
 | Widget                     | Description                                                     |
 | :------------------------- | :-------------------------------------------------------------- |
@@ -28,24 +29,31 @@ A bundle of commonly used widgets & nanoflow actions for building native mobile 
 | [Video player][]           | Play a video loaded from a URL.                                 |
 | [Web view][]               | Display an external web page or load custom HTML.               |
 
-[activity indicator]: https://github.com/mendix/native-mobile-resources/blob/master/packages/activity-indicator
-[app events]: https://github.com/mendix/native-mobile-resources/blob/master/packages/app-events
-[badge]: https://github.com/mendix/native-mobile-resources/blob/master/packages/badge
-[barcode scanner]: https://github.com/mendix/native-mobile-resources/blob/master/packages/barcode-scanner
-[color picker]: https://github.com/mendix/native-mobile-resources/blob/master/packages/color-picker
-[feedback]: https://github.com/mendix/native-mobile-resources/blob/master/packages/feedback
-[floating action button]: https://github.com/mendix/native-mobile-resources/blob/master/packages/floating-action-button
-[maps]: https://github.com/mendix/native-mobile-resources/blob/master/packages/maps
-[notifications]: https://github.com/mendix/native-mobile-resources/blob/master/packages/notifications
-[progress bar]: https://github.com/mendix/native-mobile-resources/blob/master/packages/progress-bar
-[progress circle]: https://github.com/mendix/native-mobile-resources/blob/master/packages/progress-circle
-[qr code]: https://github.com/mendix/native-mobile-resources/blob/master/packages/qr-code
-[range slider]: https://github.com/mendix/native-mobile-resources/blob/master/packages/range-slider
-[rating]: https://github.com/mendix/native-mobile-resources/blob/master/packages/rating
-[slider]: https://github.com/mendix/native-mobile-resources/blob/master/packages/slider
-[toggle buttons]: https://github.com/mendix/native-mobile-resources/blob/master/packages/toggle-buttons
-[video player]: https://github.com/mendix/native-mobile-resources/blob/master/packages/video-player
-[web view]: https://github.com/mendix/native-mobile-resources/blob/master/packages/web-view
+## Web widgets
+
+| Widget                                                                                            | Description                                                     |
+| :------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------- |
+| [Badge](https://github.com/mendix/widgets-resources/blob/master/packages-web/badge)               | Display a circular loading indicator.                           |
+| [Video player](https://github.com/mendix/widgets-resources/blob/master/packages-web/video-player) | Trigger actions based on load, network status and timer events. |
+
+[activity indicator]: https://github.com/mendix/widgets-resources/blob/master/packages-native/activity-indicator
+[app events]: https://github.com/mendix/widgets-resources/blob/master/packages-native/app-events
+[badge]: https://github.com/mendix/widgets-resources/blob/master/packages-native/badge
+[barcode scanner]: https://github.com/mendix/widgets-resources/blob/master/packages-native/barcode-scanner
+[color picker]: https://github.com/mendix/widgets-resources/blob/master/packages-native/color-picker
+[feedback]: https://github.com/mendix/widgets-resources/blob/master/packages-native/feedback
+[floating action button]: https://github.com/mendix/widgets-resources/blob/master/packages-native/floating-action-button
+[maps]: https://github.com/mendix/widgets-resources/blob/master/packages-native/maps
+[notifications]: https://github.com/mendix/widgets-resources/blob/master/packages-native/notifications
+[progress bar]: https://github.com/mendix/widgets-resources/blob/master/packages-native/progress-bar
+[progress circle]: https://github.com/mendix/widgets-resources/blob/master/packages-native/progress-circle
+[qr code]: https://github.com/mendix/widgets-resources/blob/master/packages-native/qr-code
+[range slider]: https://github.com/mendix/widgets-resources/blob/master/packages-native/range-slider
+[rating]: https://github.com/mendix/widgets-resources/blob/master/packages-native/rating
+[slider]: https://github.com/mendix/widgets-resources/blob/master/packages-native/slider
+[toggle buttons]: https://github.com/mendix/widgets-resources/blob/master/packages-native/toggle-buttons
+[video player]: https://github.com/mendix/widgets-resources/blob/master/packages-native/video-player
+[web view]: https://github.com/mendix/widgets-resources/blob/master/packages-native/web-view
 
 ## Included nanoflow actions
 
@@ -82,4 +90,4 @@ mobile apps.
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/mendix/native-mobile-resources/blob/master/CONTRIBUTING.md).
+See [CONTRIBUTING.md](https://github.com/mendix/widgets-resources/blob/master/CONTRIBUTING.md).
