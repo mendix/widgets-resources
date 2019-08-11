@@ -1,5 +1,5 @@
 import { SFC, createElement } from "react";
-import * as classNames from "classnames";
+import classNames from "classnames";
 
 interface LabelProps {
     className?: string;
@@ -9,14 +9,24 @@ interface LabelProps {
 }
 
 const Label: SFC<LabelProps> = ({ children, className, label, style, weight }) =>
-    createElement("div", { className: classNames("widget-switch-label", className), style },
-        createElement("div", { className: "form-group clearfix" },
-            createElement("div", { className: `col-sm-${weight} col-xs-${weight}` },
+    createElement(
+        "div",
+        { className: classNames("widget-switch-label", className), style },
+        createElement(
+            "div",
+            { className: "form-group clearfix" },
+            createElement(
+                "div",
+                { className: `col-sm-${weight} col-xs-${weight}` },
                 createElement("label", { className: "control-label" }, label)
             ),
-            createElement("div", {
-                className: `col-sm-${12 - weight} col-xs-${12 - weight}`
-            }, children)
+            createElement(
+                "div",
+                {
+                    className: `col-sm-${12 - weight} col-xs-${12 - weight}`
+                },
+                children
+            )
         )
     );
 

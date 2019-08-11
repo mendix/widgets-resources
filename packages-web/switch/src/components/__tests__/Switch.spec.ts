@@ -9,7 +9,7 @@ describe("Switch", () => {
     let checkbox: ShallowWrapper<any, any>;
     let switchButtonWrapper: ShallowWrapper<any, any>;
     let switchButton: ShallowWrapper<any, any>;
-    const createAndFindElements = (props: SwitchProps) => {
+    const createAndFindElements = (props: SwitchProps): void => {
         switchWrapper = shallow(createElement(Switch, props));
         checkbox = switchWrapper.find(".widget-switch-checkbox");
         switchButtonWrapper = switchWrapper.find(".widget-switch-btn-wrapper");
@@ -27,14 +27,17 @@ describe("Switch", () => {
         createAndFindElements(createProps({}));
 
         expect(switchWrapper).toBeElement(
-            createElement("div", { className: "widget-switch auto" },
+            createElement(
+                "div",
+                { className: "widget-switch auto" },
                 createElement("input", {
                     checked: true,
                     className: "widget-switch-checkbox enabled",
                     readOnly: true,
                     type: "checkbox"
                 }),
-                createElement("div",
+                createElement(
+                    "div",
                     {
                         className: "widget-switch-btn-wrapper enabled",
                         onClick: jasmine.any(Function) as any
@@ -114,10 +117,12 @@ describe("Switch", () => {
 
     describe("without a context", () => {
         it("should have the no-switch class", () => {
-            createAndFindElements(createProps({
-                isChecked: false,
-                status: "no-context"
-            }));
+            createAndFindElements(
+                createProps({
+                    isChecked: false,
+                    status: "no-context"
+                })
+            );
 
             expect(switchButtonWrapper).toHaveClass("no-switch");
         });
