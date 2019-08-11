@@ -18,3 +18,5 @@ coverage
 **/TestProjects/*/.classpath
 **/TestProjects/*/*.lock
 **/TestProjects/*/*.launch
+
+packages-web/switch/tests/TestProjects/*/widgets/Switch.mpk
