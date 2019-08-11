@@ -117,7 +117,10 @@ const previewConfig = {
                     }
                 }
             },
-            { test: /\.css$/, use: "raw-loader" }
+            {
+                test: /\.(sa|sc|c)ss$/,
+                use: ["raw-loader", "css-loader", "sass-loader"]
+            }
         ]
     },
     mode: "development",
