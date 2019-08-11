@@ -1,28 +1,34 @@
-import { Component, createElement } from "react";
-import * as classNames from "classnames";
+import { Component, ReactNode, createElement } from "react";
+import classNames from "classnames";
 
 import { Switch } from "./components/Switch";
 import SwitchContainer, { SwitchContainerProps } from "./components/SwitchContainer";
 
 import { Label } from "./components/Label";
 
+declare function require(name: string): string;
+
 // tslint:disable class-name
 export class preview extends Component<SwitchContainerProps, {}> {
-    render() {
+    render(): ReactNode {
         const maxLabelWidth = 11;
         if (this.props.label.trim()) {
-            return createElement(Label, {
-                className: classNames(this.props.class, this.props.deviceStyle),
-                label: this.props.label,
-                style: SwitchContainer.parseStyle(this.props.style),
-                weight: this.props.labelWidth > maxLabelWidth ? maxLabelWidth : this.props.labelWidth
-            }, this.renderSwitch(true));
+            return createElement(
+                Label,
+                {
+                    className: classNames(this.props.class, this.props.deviceStyle),
+                    label: this.props.label,
+                    style: SwitchContainer.parseStyle(this.props.style),
+                    weight: this.props.labelWidth > maxLabelWidth ? maxLabelWidth : this.props.labelWidth
+                },
+                this.renderSwitch(true)
+            );
         } else {
             return this.renderSwitch();
         }
     }
 
-    private renderSwitch(hasLabel = false) {
+    private renderSwitch(hasLabel = false): ReactNode {
         return createElement(Switch, {
             className: !hasLabel ? this.props.class : undefined,
             colorStyle: this.props.colorStyle,
@@ -35,6 +41,6 @@ export class preview extends Component<SwitchContainerProps, {}> {
     }
 }
 
-export function getPreviewCss() {
+export function getPreviewCss(): string {
     return require("./ui/Switch.scss");
 }

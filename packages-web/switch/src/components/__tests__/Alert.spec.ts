@@ -1,11 +1,13 @@
-import { shallow } from "enzyme";
-import { createElement } from "react";
+import { ShallowWrapper, shallow } from "enzyme";
+import { Component, createElement } from "react";
 
 import { Alert, AlertProps } from "../Alert";
 
 describe("Alert", () => {
     const message = "This is an error";
-    const renderAlert = (props: AlertProps) => shallow(createElement(Alert, props));
+    const renderAlert = (props: AlertProps): ShallowWrapper<AlertProps, Readonly<{}>, Component<{}, {}, any>> =>
+        shallow(createElement(Alert, props));
+
     const defaultProps: AlertProps = {
         bootstrapStyle: "danger",
         className: "widget-switch-alert",
