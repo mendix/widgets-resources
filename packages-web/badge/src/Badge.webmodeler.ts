@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, createElement, ReactNode } from "react";
 import { Badge, BadgeProps } from "./components/Badge";
 import { Alert } from "./components/Alert";
 import BadgeContainer, { BadgeContainerProps } from "./components/BadgeContainer";
@@ -10,7 +10,7 @@ type VisibilityMap = {
 };
 
 export class preview extends Component<BadgeContainerProps, {}> {
-    render() {
+    render(): ReactNode {
         const message = BadgeContainer.validateProps(this.props);
         return createElement(
             "div",
@@ -20,7 +20,7 @@ export class preview extends Component<BadgeContainerProps, {}> {
         );
     }
 
-    private parentInline(node?: HTMLElement | null) {
+    private parentInline(node?: HTMLElement | null): void {
         if (node && node.parentElement) {
             node.parentElement.style.display = "inline-block";
         }
@@ -39,11 +39,11 @@ export class preview extends Component<BadgeContainerProps, {}> {
     }
 }
 
-export function getPreviewCss() {
+export function getPreviewCss(): string {
     return require("./ui/Badge.css");
 }
 
-export function getVisibleProperties(valueMap: BadgeContainerProps, visibilityMap: VisibilityMap) {
+export function getVisibleProperties(valueMap: BadgeContainerProps, visibilityMap: VisibilityMap): VisibilityMap {
     visibilityMap.microflow = valueMap.onClickEvent === "callMicroflow";
     visibilityMap.nanoflow = valueMap.onClickEvent === "callNanoflow";
     visibilityMap.page = valueMap.onClickEvent === "showPage";

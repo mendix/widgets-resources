@@ -136,8 +136,7 @@ export const defaultFeedbackStyle: FeedbackStyle = {
     }
 };
 
-// tslint:disable-next-line:typedef
-export function processStyles(styles: FeedbackStyle) {
+export function processStyles(styles: FeedbackStyle): any {
     const textInputStylePropsKeys: Array<keyof TextInputProps> = [
         "placeholderTextColor",
         "selectionColor",

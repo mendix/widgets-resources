@@ -123,7 +123,7 @@ describe("RangeSlider", () => {
             <RangeSlider {...defaultProps} lowerValueAttribute={value} upperValueAttribute={value} />
         );
 
-        expect(component.getAllByText("Invalid").length).toBe(2);
+        expect(component.getAllByText("Invalid")).toHaveLength(2);
     });
 
     it("handles an invalid step size", () => {
@@ -181,8 +181,7 @@ function getHandle(component: RenderAPI, index = 0): ReactTestInstance {
     return component.getAllByType(View).filter(instance => instance.props.onMoveShouldSetResponder)[index];
 }
 
-// tslint:disable-next-line:typedef
-function responderMove(dx: number) {
+function responderMove(dx: number): any {
     return {
         touchHistory: {
             numberActiveTouches: 1,

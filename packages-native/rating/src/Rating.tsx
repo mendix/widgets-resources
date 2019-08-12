@@ -82,8 +82,7 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
     }
 }
 
-// tslint:disable-next-line:typedef
-function processStyles(styles: RatingStyle) {
+function processStyles(styles: RatingStyle): any {
     const keys: Array<keyof IconStyle> = ["color", "selectedColor", "size"];
     const { selectedColor, color, size }: IconStyle = styles.icon;
 

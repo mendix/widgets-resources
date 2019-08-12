@@ -179,8 +179,7 @@ describe("Color Picker", () => {
     }
 });
 
-// tslint:disable-next-line:typedef
-function responderMove(dx: number) {
+function responderMove(dx: number): any {
     return {
         touchHistory: {
             numberActiveTouches: 1,
