@@ -8,7 +8,7 @@ describe("Alert", () => {
         const message = "This is an error";
         const alert = shallow(createElement(Alert, { message }));
 
-        expect(alert).toBeElement(
+        expect(alert.getElement()).toEqual(
             createElement("div", { className: "alert alert-danger widget-validation-message" }, message)
         );
     });
@@ -16,6 +16,6 @@ describe("Alert", () => {
     it("renders no structure when the alert message is not specified", () => {
         const alert = shallow(createElement(Alert));
 
-        expect(alert).toBeElement(null);
+        expect(alert.getElement()).toEqual(null);
     });
 });

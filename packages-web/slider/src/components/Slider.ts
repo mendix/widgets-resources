@@ -1,6 +1,6 @@
 import { Component, ReactNode, createElement } from "react";
 
-import * as classNames from "classnames";
+import classNames from "classnames";
 import RcSlider, { Handle, Marks } from "rc-slider";
 import Tooltip from "rc-tooltip";
 
@@ -47,9 +47,10 @@ class Slider extends Component<SliderProps, {}> {
         value: 0
     };
 
-    render() {
+    render(): ReactNode {
         const { alertMessage, tooltipText } = this.props;
-        return createElement("div",
+        return createElement(
+            "div",
             {
                 className: classNames(
                     "widget-slider",
@@ -83,7 +84,7 @@ class Slider extends Component<SliderProps, {}> {
             if (this.isValidMinMax() && noOfMarkers >= 2) {
                 const interval = (maxValue - minValue) / (noOfMarkers - 1);
                 for (let i = 0; i < noOfMarkers; i++) {
-                    const value = parseFloat((minValue + (i * interval)).toFixed(this.props.decimalPlaces));
+                    const value = parseFloat((minValue + i * interval).toFixed(this.props.decimalPlaces));
                     marks[value] = value.toString();
                 }
             }
@@ -111,7 +112,7 @@ class Slider extends Component<SliderProps, {}> {
                 return value;
             }
             if (this.isValidMinMax()) {
-                return (minValue + (maxValue - minValue) / 2);
+                return minValue + (maxValue - minValue) / 2;
             }
         }
 
@@ -119,18 +120,18 @@ class Slider extends Component<SliderProps, {}> {
     }
 
     private createTooltip(tooltipProps: TooltipOptions): (props: TooltipProps) => ReactNode {
-        return (props) => {
-            const sliderText = tooltipProps.value === null
-                ? "--"
-                : tooltipProps.text.replace(/\{1}/, tooltipProps.value.toString());
+        return props => {
+            const sliderText =
+                tooltipProps.value === null ? "--" : tooltipProps.text.replace(/\{1}/, tooltipProps.value.toString());
 
-            return createElement(Tooltip,
+            return createElement(
+                Tooltip,
                 {
                     mouseLeaveDelay: 0,
                     overlay: createElement("div", {}, sliderText),
                     placement: "top",
                     prefixCls: "rc-slider-tooltip",
-                    trigger: [ "hover", "click", "focus" ]
+                    trigger: ["hover", "click", "focus"]
                 },
                 createElement(Handle, {
                     className: props.className,
