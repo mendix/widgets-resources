@@ -16,7 +16,7 @@ describe("Switch", () => {
         switchButton = switchWrapper.find(".widget-switch-btn");
     };
     const createProps = (props: Partial<SwitchProps>): SwitchProps => {
-        props.onClick = jasmine.createSpy("onClick");
+        props.onClick = jest.fn();
         props.isChecked = typeof props.isChecked !== "undefined" ? props.isChecked : true;
         props.status = props.status || "enabled";
 
@@ -26,7 +26,7 @@ describe("Switch", () => {
     it("should render the structure correctly", () => {
         createAndFindElements(createProps({}));
 
-        expect(switchWrapper).toBeElement(
+        expect(switchWrapper.getElement()).toEqual(
             createElement(
                 "div",
                 { className: "widget-switch auto" },
@@ -39,12 +39,12 @@ describe("Switch", () => {
                 createElement(
                     "div",
                     {
-                        className: "widget-switch-btn-wrapper enabled",
-                        onClick: jasmine.any(Function) as any
+                        className: "widget-switch-btn-wrapper widget-switch-btn-wrapper-default checked",
+                        onClick: expect.any(Function)
                     },
                     createElement("small", { className: "widget-switch-btn right" })
                 ),
-                createElement(Alert, { bootstrapStyle: "danger", message: "" })
+                createElement(Alert, { bootstrapStyle: "danger" })
             )
         );
     });
@@ -124,7 +124,7 @@ describe("Switch", () => {
                 })
             );
 
-            expect(switchButtonWrapper).toHaveClass("no-switch");
+            expect(switchButtonWrapper.hasClass("no-switch")).toBe(true);
         });
 
         it("should not handle a click event", () => {

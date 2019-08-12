@@ -13,7 +13,7 @@ describe("Label", () => {
     it("renders the structure correctly", () => {
         const labelComponent = renderLabel({ label });
 
-        expect(labelComponent).toBeElement(
+        expect(labelComponent.getElement()).toEqual(
             createElement(
                 "div",
                 { className: "widget-switch-label" },
@@ -25,7 +25,7 @@ describe("Label", () => {
                         { className: "col-sm-6 col-xs-6" },
                         createElement("label", { className: "control-label" }, label)
                     ),
-                    createElement("div", { className: "col-sm-6" })
+                    createElement("div", { className: "col-sm-6 col-xs-6" })
                 )
             )
         );
@@ -35,7 +35,7 @@ describe("Label", () => {
         const labelComponent = renderLabel({ label, weight: 3 });
         const SwitchLabel = labelComponent.childAt(0).childAt(0);
 
-        expect(SwitchLabel).toHaveClass("col-sm-3");
+        expect(SwitchLabel.hasClass("col-sm-3")).toBe(true);
     });
 
     it("renders the labeled element's wrapper with the calculated weight class", () => {
@@ -43,6 +43,6 @@ describe("Label", () => {
         const labelComponent = renderLabel({ label, weight });
         const childrenWrapper = labelComponent.childAt(0).childAt(1);
 
-        expect(childrenWrapper).toHaveClass(`col-sm-${12 - weight}`);
+        expect(childrenWrapper.hasClass(`col-sm-${12 - weight}`)).toBe(true);
     });
 });

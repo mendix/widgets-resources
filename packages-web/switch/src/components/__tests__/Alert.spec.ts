@@ -17,7 +17,7 @@ describe("Alert", () => {
     it("renders the structure when an alert message is specified", () => {
         const alert = renderAlert(defaultProps);
 
-        expect(alert).toBeElement(
+        expect(alert.getElement()).toEqual(
             createElement("div", { className: "alert alert-danger widget-switch-alert" }, message)
         );
     });
@@ -25,28 +25,28 @@ describe("Alert", () => {
     it("renders no structure when the alert message is not specified", () => {
         const alert = shallow(createElement(Alert));
 
-        expect(alert).toBeElement(null);
+        expect(alert.getElement()).toEqual(null);
     });
 
     it("renders with the class of the specified bootstrap style", () => {
         const alert = renderAlert(defaultProps);
 
-        expect(alert).toHaveClass("alert-danger");
+        expect(alert.hasClass("alert-danger")).toBe(true);
 
         alert.setProps({ bootstrapStyle: "default" });
-        expect(alert).toHaveClass("alert-default");
+        expect(alert.hasClass("alert-default")).toBe(true);
 
         alert.setProps({ bootstrapStyle: "success" });
-        expect(alert).toHaveClass("alert-success");
+        expect(alert.hasClass("alert-success")).toBe(true);
 
         alert.setProps({ bootstrapStyle: "primary" });
-        expect(alert).toHaveClass("alert-primary");
+        expect(alert.hasClass("alert-primary")).toBe(true);
 
         alert.setProps({ bootstrapStyle: "info" });
-        expect(alert).toHaveClass("alert-info");
+        expect(alert.hasClass("alert-info")).toBe(true);
 
         alert.setProps({ bootstrapStyle: "warning" });
-        expect(alert).toHaveClass("alert-warning");
+        expect(alert.hasClass("alert-warning")).toBe(true);
     });
 
     it("renders with the specified class name", () => {
@@ -54,6 +54,6 @@ describe("Alert", () => {
         const customClassProps = { ...defaultProps, className };
         const alert = renderAlert(customClassProps);
 
-        expect(alert).toHaveClass(className);
+        expect(alert.hasClass(className)).toBe(true);
     });
 });
