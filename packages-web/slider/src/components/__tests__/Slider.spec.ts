@@ -29,23 +29,26 @@ describe("Slider", () => {
             value
         };
     });
-    const renderSlider = (props: SliderProps) => shallow(createElement(Slider, props));
+    const renderSlider = (props: SliderProps): ShallowWrapper<any, any> => shallow(createElement(Slider, props));
 
     it("renders the structure", () => {
         slider = renderSlider(sliderProps);
 
-        expect(slider).toBeElement(
-            createElement("div", { className: "widget-slider widget-slider-primary" },
+        expect(slider.getElement()).toEqual(
+            createElement(
+                "div",
+                { className: "widget-slider widget-slider-primary" },
                 createElement(RcSlider, {
                     disabled: false,
-                    handle: jasmine.any(Function) as any,
+                    handle: expect.any(Function),
                     included: true,
                     max: maxValue,
                     min: minValue,
                     step: stepValue,
                     value,
                     vertical: false
-                }), createElement(Alert, { message: "" })
+                }),
+                createElement(Alert)
             )
         );
     });

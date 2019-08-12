@@ -1,7 +1,8 @@
 @import "variables";
 
 .widget-slider {
-    .rc-slider-handle, .rc-slider-dot-active {
+    .rc-slider-handle,
+    .rc-slider-dot-active {
         border: 2px solid;
         &:active {
             box-shadow: none;

@@ -1,12 +1,11 @@
-import { Component, createElement } from "react";
+import { Component, createElement, ReactNode } from "react";
 import { Slider, SliderProps } from "./components/Slider";
 import SliderContainer, { SliderContainerProps } from "./components/SliderContainer";
 
 declare function require(name: string): string;
 
-// tslint:disable-next-line:class-name
 export class preview extends Component<SliderContainerProps, {}> {
-    render() {
+    render(): ReactNode {
         return createElement(Slider, this.transformProps(this.props));
     }
 
@@ -27,8 +26,6 @@ export class preview extends Component<SliderContainerProps, {}> {
     }
 }
 
-export function getPreviewCss() {
-    return (
-        require("./ui/Slider.scss") + require("rc-slider/assets/index.css")
-    );
+export function getPreviewCss(): string {
+    return require("./ui/Slider.scss") + require("rc-slider/assets/index.css");
 }

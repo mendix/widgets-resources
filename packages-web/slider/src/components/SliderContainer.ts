@@ -1,5 +1,5 @@
-import { Component, createElement } from "react";
-import { hot } from "react-hot-loader";
+import { Component, createElement, ReactNode } from "react";
+import { hot } from "react-hot-loader/root";
 
 import { BootstrapStyle, Slider } from "./Slider";
 
@@ -63,11 +63,12 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         };
     }
 
-    render() {
+    render(): ReactNode {
         const { mxObject, readOnly, valueAttribute } = this.props;
-        const disabled = this.props.editable === "default"
-            ? (!mxObject || readOnly || !!(valueAttribute && mxObject.isReadonlyAttr(valueAttribute)))
-            : true;
+        const disabled =
+            this.props.editable === "default"
+                ? !mxObject || readOnly || !!(valueAttribute && mxObject.isReadonlyAttr(valueAttribute))
+                : true;
 
         const alertMessage = !disabled ? this.validateSettings(this.state) || this.validateValues() : "";
 
@@ -89,31 +90,13 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         });
     }
 
-    componentWillReceiveProps(newProps: SliderContainerProps) {
+    componentWillReceiveProps(newProps: SliderContainerProps): void {
         this.resetSubscriptions(newProps.mxObject);
         this.setState(this.updateValues(newProps.mxObject));
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
-    }
-
-    public static parseStyle(style = ""): {[key: string]: string} {
-        try {
-            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
-                const pair = line.split(":");
-                if (pair.length === 2) {
-                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
-                    styleObject[name] = pair[1].trim();
-                }
-                return styleObject;
-            }, {});
-        } catch (error) {
-            // tslint:disable-next-line no-console
-            console.log("Failed to parse style", style, error);
-        }
-
-        return {};
     }
 
     private validateSettings(state: SliderContainerState): string {
@@ -125,7 +108,7 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         if (maximumValue && minimumValue && stepValue) {
             const quotient = Math.floor((maximumValue - minimumValue) / stepValue);
             const product = quotient * stepValue;
-            const remainder = (maximumValue - minimumValue) - product;
+            const remainder = maximumValue - minimumValue - product;
 
             if (validMax && validMin && remainder > 0) {
                 message.push(`Step value is invalid: max - min (${maximumValue} - ${minimumValue})
@@ -139,8 +122,10 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
             message.push("Minimum value is required");
         }
         if (typeof maximumValue === "number" && typeof minimumValue === "number") {
-            if (validMin && validMax && (minimumValue > maximumValue)) {
-                message.push(`Minimum value ${minimumValue} should be less than or equal to the maximum value ${maximumValue}`); // tslint:disable:max-line-length
+            if (validMin && validMax && minimumValue > maximumValue) {
+                message.push(
+                    `Minimum value ${minimumValue} should be less than or equal to the maximum value ${maximumValue}`
+                );
             }
             if (!stepValue || stepValue <= 0) {
                 message.push(`Step value ${stepValue} should be greater than 0`);
@@ -161,7 +146,7 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         };
     }
 
-    private onUpdate(value: number) {
+    private onUpdate(value: number): void {
         const { mxObject, valueAttribute } = this.props;
         if (value !== undefined && mxObject) {
             this.setState({ value });
@@ -172,34 +157,40 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         }
     }
 
-    private validValue(value: number) {
+    private validValue(value: number): boolean {
         const { minimumValue, maximumValue } = this.state;
-        return typeof minimumValue === "number"
-            && typeof maximumValue === "number"
-            && typeof value === "number"
-            && minimumValue <= maximumValue
-            && value >= minimumValue
-            && value <= maximumValue;
+        return (
+            typeof minimumValue === "number" &&
+            typeof maximumValue === "number" &&
+            typeof value === "number" &&
+            minimumValue <= maximumValue &&
+            value >= minimumValue &&
+            value <= maximumValue
+        );
     }
 
-    private handleAction(value: number) {
+    private handleAction(value: number): void {
         if (value !== undefined && this.props.mxObject) {
-            if (this.previousValue === value) return;
+            if (this.previousValue === value) {
+                return;
+            }
             this.previousValue = value;
             this.handleChange();
         }
     }
 
-    private handleChange() {
+    private handleChange(): void {
         const { mxform, mxObject, onChangeMicroflow, onChangeNanoflow } = this.props;
         if (onChangeMicroflow) {
             window.mx.ui.action(onChangeMicroflow, {
                 error: error =>
-                    window.mx.ui.error(`An error occurred while executing microflow: ${onChangeMicroflow}: ${error.message}`),
+                    window.mx.ui.error(
+                        `An error occurred while executing microflow: ${onChangeMicroflow}: ${error.message}`
+                    ),
                 origin: mxform,
                 params: {
                     applyto: "selection",
-                    guids: [ mxObject.getGuid() ]
+                    guids: [mxObject.getGuid()]
                 }
             });
         }
@@ -209,16 +200,15 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
             context.setContext(mxObject.getEntity(), mxObject.getGuid());
             window.mx.data.callNanoflow({
                 context,
-                error: error => window.mx.ui.error(
-                    `An error occurred while executing the on change nanoflow: ${error.message}`
-                ),
+                error: error =>
+                    window.mx.ui.error(`An error occurred while executing the on change nanoflow: ${error.message}`),
                 nanoflow: onChangeNanoflow,
                 origin: mxform
             });
         }
     }
 
-    private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
+    private resetSubscriptions(mxObject?: mendix.lib.MxObject): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
         this.subscriptionHandles = [];
 
@@ -229,15 +219,19 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
                 this.props.minAttribute,
                 this.props.stepAttribute
             ];
-            this.subscriptionHandles = attributes.map(attr => window.mx.data.subscribe({
-                attr,
-                callback: this.attributeCallback(mxObject),
-                guid: mxObject.getGuid()
-            }));
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                callback: this.attributeCallback(mxObject),
-                guid: mxObject.getGuid()
-            }));
+            this.subscriptionHandles = attributes.map(attr =>
+                window.mx.data.subscribe({
+                    attr,
+                    callback: this.attributeCallback(mxObject),
+                    guid: mxObject.getGuid()
+                })
+            );
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    callback: this.attributeCallback(mxObject),
+                    guid: mxObject.getGuid()
+                })
+            );
         }
     }
 
@@ -256,7 +250,6 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         return message.join(", ");
     }
 
-    // tslint:disable-next-line:max-line-length
     private getValue(attribute: string, mxObject?: mendix.lib.MxObject, defaultValue?: number): number | undefined {
         if (mxObject && attribute) {
             if (mxObject.get(attribute)) {
@@ -266,6 +259,24 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
 
         return defaultValue;
     }
+
+    static parseStyle(style = ""): { [key: string]: string } {
+        try {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log("Failed to parse style", style, error);
+        }
+
+        return {};
+    }
 }
 
-export default hot(module)(SliderContainer);
+export default hot(SliderContainer);
