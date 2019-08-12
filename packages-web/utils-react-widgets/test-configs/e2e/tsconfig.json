@@ -3,7 +3,7 @@
         "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
-        "types": ["node", "@wdio/sync", "jasmine"],
+        "types": ["node", "@wdio/sync", "jest"],
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "removeComments": true,

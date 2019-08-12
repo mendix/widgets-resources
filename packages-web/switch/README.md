@@ -4,29 +4,37 @@
 [![codecov](https://codecov.io/gh/mendixlabs/boolean-slider/branch/master/graph/badge.svg)](https://codecov.io/gh/mendixlabs/boolean-slider)
 
 # Switch
+
 Toggle a boolean attribute.
 
 ## Features
-* Deactivate when attribute or context is read-only
-* Execute a microflow when toggled
-* Execute a nanoflow when toggled
-* Add a label to the switch
-* Display in either iOS style or android(material design)
-* Display in various bootstrap styles
+
+-   Deactivate when attribute or context is read-only
+-   Execute a microflow when toggled
+-   Execute a nanoflow when toggled
+-   Add a label to the switch
+-   Display in either iOS style or android(material design)
+-   Display in various bootstrap styles
 
 ## Dependencies
+
 Mendix 7.13.1
 
 ## Demo project
+
 http://booleansliderwidge.mxapps.io
 
 ## Usage
+
 Place the widget in the context of an object that has a boolean attribute.
 
 ## Issues, suggestions and feature requests
-We are actively maintaining this widget, please report any issues or suggestion for improvement at https://github.com/mendixlabs/boolean-slider/issues
+
+We are actively maintaining this widget, please report any issues or suggestion for improvement at
+https://github.com/mendixlabs/boolean-slider/issues
 
 ## Development
+
 Prerequisite: Install git, node package manager, webpack CLI, grunt CLI, Karma CLI
 
 To contribute, fork and clone.
@@ -41,7 +49,8 @@ To set up the development environment, run:
 
 Create a folder named `dist` in the project root.
 
-Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Changes to the widget code shall be automatically pushed to this test project.
+Create a Mendix test project in the dist folder and rename its root folder to `dist/MxTestProject`. Changes to the
+widget code shall be automatically pushed to this test project.
 
 [https://github.com/MendixLabs/boolean-slider/releases/latest](https://github.com/MendixLabs/boolean-slider/releases/latest)
 
