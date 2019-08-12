@@ -6,7 +6,6 @@
     "scripts": {
         "start": "utils-react-widgets start",
         "dev": "utils-react-widgets dev",
-        "test:unit:j": "jest --config ../../scripts/test/jest.web.config.js",
         "test": "npm run test:unit",
         "test:dev": "utils-react-widgets test:dev",
         "test:unit": "utils-react-widgets test:unit",

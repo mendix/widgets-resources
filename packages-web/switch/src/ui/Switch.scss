@@ -109,7 +109,7 @@
         box-shadow: none;
         border-radius: 100px;
         cursor: pointer;
-        transition: all .3s ease;
+        transition: all 0.3s ease;
 
         .widget-switch-btn {
             position: absolute;
@@ -120,13 +120,13 @@
             height: 26px;
             border-radius: 100px;
             background: white;
-            box-shadow: 0 1px 3px rgba(#000, .4);
-            content: '';
-            transition: all .3s ease;
+            box-shadow: 0 1px 3px rgba(#000, 0.4);
+            content: "";
+            transition: all 0.3s ease;
         }
 
         &.checked {
-            background: #6FBEB5;
+            background: #6fbeb5;
             border: none;
             box-shadow: none;
 
@@ -137,11 +137,11 @@
         }
 
         &.disabled {
-            background: #D5D5D5;
+            background: #d5d5d5;
             pointer-events: none;
 
             .widget-switch-btn {
-                background: #BCBDBC;
+                background: #bcbdbc;
             }
         }
     }
