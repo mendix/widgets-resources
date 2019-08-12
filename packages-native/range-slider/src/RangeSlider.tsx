@@ -33,7 +33,7 @@ export class RangeSlider extends Component<Props, State> {
         const enabledOne = editable && lowerValue != null && !this.props.lowerValueAttribute.readOnly;
         const enabledTwo = editable && upperValue != null && !this.props.upperValueAttribute.readOnly;
 
-        const customMarker = (markerEnabled: boolean): any => (props: MarkerProps): JSX.Element => (
+        const customMarker: Function = (markerEnabled: boolean) => (props: MarkerProps): JSX.Element => (
             <Marker {...props} markerStyle={markerEnabled ? props.markerStyle : this.styles.markerDisabled} />
         );
 
