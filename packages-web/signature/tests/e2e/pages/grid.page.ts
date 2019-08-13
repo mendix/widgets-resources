@@ -1,5 +1,8 @@
+/* eslint-disable */
 class GridPage {
-    public get signatureGrid() { return browser.element(".widget-signature-grid"); }
+    public get signatureGrid() {
+        return $(".widget-signature-grid");
+    }
 
     public open(): void {
         browser.url("/p/GridSize");

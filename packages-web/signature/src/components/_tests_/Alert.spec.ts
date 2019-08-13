@@ -1,18 +1,17 @@
-import { shallow } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 import { ReactChild, createElement } from "react";
 
 import { Alert, AlertProps } from "../Alert";
 
 describe("Alert", () => {
-    const renderAlert = (props: AlertProps, message: ReactChild) => shallow(createElement(Alert, props, message));
+    const renderAlert = (props: AlertProps, message: ReactChild): ShallowWrapper<AlertProps, any> =>
+        shallow(createElement(Alert, props, message));
     const alertMessage = "This is an error";
 
     it("renders the structure correctly", () => {
         const alert = renderAlert({}, alertMessage);
 
-        expect(alert).toBeElement(
-            createElement("div", { className: "alert alert-danger" }, alertMessage)
-        );
+        expect(alert).toBeElement(createElement("div", { className: "alert alert-danger" }, alertMessage));
     });
 
     it("renders no structure when the alert message is not specified", () => {

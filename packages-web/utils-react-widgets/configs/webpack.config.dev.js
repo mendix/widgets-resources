@@ -63,11 +63,30 @@ const widgetConfig = {
     module: {
         rules: [
             {
-                test: /\.ts$/,
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: "ts-loader",
+                        options: {
+                            transpileOnly: true
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
                 use: {
-                    loader: "ts-loader",
+                    loader: "babel-loader",
                     options: {
-                        transpileOnly: true
+                        cacheDirectory: true,
+                        presets: ["@babel/preset-env", "@babel/preset-react"],
+                        plugins: [
+                            ["@babel/plugin-proposal-class-properties", { loose: true }],
+                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }],
+                            "react-hot-loader/babel"
+                        ]
                     }
                 }
             },

@@ -1,4 +1,4 @@
-import { shallow } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 import { createElement } from "react";
 
 import { Grid, GridBackgroundProps } from "../Grid";
@@ -12,7 +12,8 @@ const defaultProps: GridBackgroundProps = {
 };
 
 describe("Grid", () => {
-    const renderGrid = (props: GridBackgroundProps) => shallow(createElement(Grid, props));
+    const renderGrid = (props: GridBackgroundProps): ShallowWrapper<GridBackgroundProps, any> =>
+        shallow(createElement(Grid, props));
 
     it("renders the structure correctly", () => {
         const grid = renderGrid(defaultProps);
@@ -20,7 +21,9 @@ describe("Grid", () => {
         expect(grid).toMatchStructure(
             createElement("svg", {
                 className: "widget-signature-grid",
-                width: "100%", height: "100%", xmlns: "http://www.w3.org/2000/svg"
+                width: "100%",
+                height: "100%",
+                xmlns: "http://www.w3.org/2000/svg"
             })
         );
     });

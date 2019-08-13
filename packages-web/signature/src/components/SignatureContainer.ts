@@ -1,12 +1,12 @@
-import { Component, createElement } from "react";
-import { hot } from "react-hot-loader";
+import { Component, createElement, ReactNode } from "react";
+import { hot } from "react-hot-loader/root";
 
-import { Signature, penOptions } from "./Signature";
 import { Dimensions } from "./SizeContainer";
 import Utils from "../utils/Utils";
+import { penOptions, Signature } from "./Signature";
 
 interface WrapperProps {
-    "class": string;
+    class: string;
     mxObject?: mendix.lib.MxObject;
     mxform: mxui.lib.form._FormBase;
     style?: string;
@@ -40,52 +40,54 @@ class SignatureContainer extends Component<SignatureContainerProps, SignatureCon
         hasSignature: false
     };
 
-    render() {
+    render(): ReactNode {
         return createElement(Signature, {
-            ...this.props as SignatureContainerProps,
+            ...(this.props as SignatureContainerProps),
             wrapperStyle: Utils.parseStyle(this.props.style),
             readOnly: this.isReadOnly(),
             alertMessage: this.state.alertMessage,
-            clearSignature: this.state.hasSignature ? true : false,
+            clearSignature: this.state.hasSignature,
             onSignEndAction: this.handleSignEnd,
             className: this.props.class
         });
     }
 
-    componentWillReceiveProps(newProps: SignatureContainerProps) {
-        const alertMessage = this.validateProps(newProps.mxObject);
+    componentWillReceiveProps(newProps: SignatureContainerProps): void {
+        if (newProps.mxObject) {
+            const alertMessage = this.validateProps(newProps.mxObject);
 
-        if (alertMessage) {
-            this.setState({ alertMessage });
+            if (alertMessage) {
+                this.setState({ alertMessage });
+            }
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(): void {
         this.resetSubscriptions(this.props.mxObject);
     }
 
-    componentDidMount() {
+    componentDidMount(): void {
         this.formHandle = this.props.mxform.listen("submit", callback => this.saveDocument(callback));
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         if (this.formHandle) {
             this.props.mxform.unlisten(this.formHandle);
         }
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
     }
 
-    private handleSignEnd = (base64Uri: string) => {
+    private handleSignEnd = (base64Uri: string): void => {
         const { mxObject } = this.props;
 
-        if (mxObject && this.state.hasSignature === false) {
+        if (mxObject && !this.state.hasSignature) {
             mxObject.set(this.props.hasSignatureAttribute, true);
         }
         this.base64Uri = base64Uri;
         if (base64Uri) {
             this.setState({ hasSignature: true });
         }
-    }
+    };
 
     private isReadOnly(): boolean {
         const { mxObject, readOnly } = this.props;
@@ -93,9 +95,12 @@ class SignatureContainer extends Component<SignatureContainerProps, SignatureCon
         return !mxObject || readOnly || mxObject.isReadonlyAttr("Contents");
     }
 
-    private saveDocument(callback: () => void) {
-        if (this.base64Uri && this.state.hasSignature) {
-            mx.data.saveDocument(this.props.mxObject.getGuid(), this.generateFileName(this.props.mxObject), { },
+    private saveDocument(callback: () => void): void {
+        if (this.base64Uri && this.state.hasSignature && this.props.mxObject) {
+            mx.data.saveDocument(
+                this.props.mxObject.getGuid(),
+                this.generateFileName(this.props.mxObject),
+                {},
                 Utils.convertUrlToBlob(this.base64Uri),
                 callback,
                 error => mx.ui.error("Error saving signature: " + error.message)
@@ -113,7 +118,7 @@ class SignatureContainer extends Component<SignatureContainerProps, SignatureCon
         return `signature${Math.floor(Math.random() * 1000000)}.png`;
     }
 
-    public validateProps(mxObject: mendix.lib.MxObject): string {
+    validateProps(mxObject: mendix.lib.MxObject): string {
         let errorMessage = "";
 
         if (mxObject && !mxObject.inheritsFrom("System.Image")) {
@@ -123,33 +128,36 @@ class SignatureContainer extends Component<SignatureContainerProps, SignatureCon
         return errorMessage;
     }
 
-    private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
+    private resetSubscriptions(mxObject?: mendix.lib.MxObject): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
         this.subscriptionHandles = [];
 
         if (mxObject) {
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                guid: mxObject.getGuid(),
-                callback: () => this.updateCanvasState()
-            }));
-            this.subscriptionHandles.push(mx.data.subscribe({
-                guid: mxObject.getGuid(),
-                attr: this.props.hasSignatureAttribute,
-                callback: () => this.updateCanvasState()
-            }));
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    guid: mxObject.getGuid(),
+                    callback: () => this.updateCanvasState()
+                })
+            );
+            this.subscriptionHandles.push(
+                mx.data.subscribe({
+                    guid: mxObject.getGuid(),
+                    attr: this.props.hasSignatureAttribute,
+                    callback: () => this.updateCanvasState()
+                })
+            );
         }
     }
 
-    private updateCanvasState = () => {
+    private updateCanvasState = (): void => {
         const { mxObject, hasSignatureAttribute } = this.props;
         if (hasSignatureAttribute) {
-            const hasSignature = !!mxObject && mxObject.get(hasSignatureAttribute) as boolean;
+            const hasSignature = !!mxObject && (mxObject.get(hasSignatureAttribute) as boolean);
             if (this.state.hasSignature !== hasSignature) {
                 this.setState({ hasSignature });
             }
         }
-    }
-
+    };
 }
 
-export default hot(module)(SignatureContainer);
+export default hot(SignatureContainer);

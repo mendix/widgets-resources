@@ -110,6 +110,7 @@ function runWebpack(config, cb) {
             config.splice(1, 1);
             console.log(`${COLOR.YELLOW}Preview file ${file} was not found. No preview will be available${END}`);
         }
+        // eslint-disable-next-line no-empty
     } catch (err) {}
     webpack(config, (err, stats) => {
         if (err) {
@@ -128,6 +129,7 @@ function bundle(cb) {
         const pathWebpack = path.join(variables.path, "webpack.config.dev.js");
         if (fs.existsSync(pathWebpack)) {
             config = require(pathWebpack);
+            console.log(JSON.stringify(config[0].module.rules));
             console.log(`${COLOR.MAGENTA}Using custom webpack configuration from ${pathWebpack}${END}`);
         }
     } catch (err) {
