@@ -1,5 +1,5 @@
 import { CSSProperties, SFC, createElement } from "react";
-import * as classNames from "classnames";
+import classNames from "classnames";
 
 export type HeightUnitType = "percentageOfWidth" | "percentageOfParent" | "pixels";
 
@@ -19,9 +19,20 @@ export interface SizeProps extends Dimensions {
     style?: CSSProperties;
 }
 
-export const SizeContainer: SFC<SizeProps> = ({ className, classNameInner, widthUnit, width, heightUnit, height, children, style, readOnly }) => {
+export const SizeContainer: SFC<SizeProps> = ({
+    className,
+    classNameInner,
+    widthUnit,
+    width,
+    heightUnit,
+    height,
+    children,
+    style,
+    readOnly
+}) => {
     const styleWidth = widthUnit === "percentage" ? `${width}%` : `${width}px`;
-    return createElement("div",
+    return createElement(
+        "div",
         {
             className: classNames(className, "size-box"),
             style: {
@@ -30,28 +41,38 @@ export const SizeContainer: SFC<SizeProps> = ({ className, classNameInner, width
                 ...getHeight(heightUnit, height, widthUnit, width),
                 ...style
             }
-        }, createElement("div", {
-            className: classNames("size-box-inner", classNameInner),
-            readOnly,
-            disabled: readOnly,
-            style: {
-                position: "absolute",
-                top: "0",
-                right: "0",
-                bottom: "0",
-                left: "0"
-            }
-        }, children)
+        },
+        createElement(
+            "div",
+            {
+                className: classNames("size-box-inner", classNameInner),
+                readOnly,
+                disabled: readOnly,
+                style: {
+                    position: "absolute",
+                    top: "0",
+                    right: "0",
+                    bottom: "0",
+                    left: "0"
+                }
+            },
+            children
+        )
     );
 };
 
 SizeContainer.displayName = "SizeContainer";
 SizeContainer.defaultProps = { readOnly: false };
 
-const getHeight = (heightUnit: HeightUnitType, height: number, widthUnit: WidthUnitType, width: number): CSSProperties => {
+const getHeight = (
+    heightUnit: HeightUnitType,
+    height: number,
+    widthUnit: WidthUnitType,
+    width: number
+): CSSProperties => {
     const style: CSSProperties = {};
     if (heightUnit === "percentageOfWidth") {
-        const ratio = height / 100 * width;
+        const ratio = (height / 100) * width;
         if (widthUnit === "percentage") {
             style.height = "auto";
             style.paddingBottom = `${ratio}%`;

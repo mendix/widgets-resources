@@ -1,5 +1,8 @@
+/* eslint-disable */
 class HomePage {
-    public get canvas() { return browser.element(".widget-signature-canvas"); }
+    public get canvas() {
+        return $(".widget-signature-canvas");
+    }
 
     public open(): void {
         browser.url("/");

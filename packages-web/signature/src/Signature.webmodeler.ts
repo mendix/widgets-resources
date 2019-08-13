@@ -1,7 +1,7 @@
-import { Component, createElement } from "react";
-import { Signature, SignatureProps } from "./components/Signature";
-import { SignatureContainerProps } from "./components/SignatureContainer";
+import { Component, createElement, ReactNode } from "react";
 import Utils from "./utils/Utils";
+import { SignatureContainerProps } from "./components/SignatureContainer";
+import { Signature, SignatureProps } from "./components/Signature";
 
 declare function require(name: string): string;
 
@@ -9,9 +9,8 @@ type VisibilityMap<T> = {
     [P in keyof T]: any;
 };
 
-// tslint:disable-next-line class-name
 export class preview extends Component<SignatureContainerProps> {
-    render() {
+    render(): ReactNode {
         return createElement(Signature, this.transformProps(this.props));
     }
 
@@ -36,11 +35,14 @@ export class preview extends Component<SignatureContainerProps> {
     }
 }
 
-export function getPreviewCss() {
+export function getPreviewCss(): string {
     return require("./ui/Signature.scss");
 }
 
-export function getVisibleProperties(valueMap: SignatureContainerProps, visibilityMap: VisibilityMap<SignatureContainerProps>) {
+export function getVisibleProperties(
+    valueMap: SignatureContainerProps,
+    visibilityMap: VisibilityMap<SignatureContainerProps>
+): VisibilityMap<SignatureContainerProps> {
     if (!valueMap.showGrid) {
         visibilityMap.gridBorderColor = false;
         visibilityMap.gridBorderWidth = false;

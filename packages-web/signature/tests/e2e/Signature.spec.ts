@@ -12,7 +12,7 @@ describe("SignatureCanvas", () => {
 
     it("renders signature grid", () => {
         GridPage.open();
-        GridPage.signatureGrid.waitForVisible();
+        GridPage.signatureGrid.waitForDisplayed();
 
         expect(GridPage.signatureGrid.getHTML()).toContain("svg");
     });

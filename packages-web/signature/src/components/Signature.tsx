@@ -1,7 +1,8 @@
-import * as React from "react";
+import { createElement, PureComponent, ReactNode } from "react";
 
+// @ts-ignore
 import SignaturePad, { IOptions } from "signature_pad";
-import * as classNames from "classnames";
+import classNames from "classnames";
 import ReactResizeDetector from "react-resize-detector";
 
 import { Alert } from "./Alert";
@@ -28,29 +29,32 @@ export interface SignatureProps extends Dimensions {
 
 export type penOptions = "fountain" | "ballpoint" | "marker";
 
-export class Signature extends React.PureComponent<SignatureProps> {
+export class Signature extends PureComponent<SignatureProps> {
     private canvasNode: HTMLCanvasElement;
     private signaturePad: SignaturePad;
 
-    render() {
+    render(): ReactNode {
         const { className, alertMessage, wrapperStyle } = this.props;
 
-        return < SizeContainer
-            {...this.props}
-            className={classNames("widget-signature", className)}
-            classNameInner="widget-signature-wrapper form-control mx-textarea-input mx-textarea"
-            style={wrapperStyle}
-        >
-            <Alert bootstrapStyle = "danger">{alertMessage}</Alert>
-            <Grid {...this.props} />
-            <canvas className="widget-signature-canvas"
-                ref={ (node: HTMLCanvasElement) => this.canvasNode = node }
-            />
-            <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
-        </SizeContainer>;
+        return (
+            <SizeContainer
+                {...this.props}
+                className={classNames("widget-signature", className)}
+                classNameInner="widget-signature-wrapper form-control mx-textarea-input mx-textarea"
+                style={wrapperStyle}
+            >
+                <Alert bootstrapStyle="danger">{alertMessage}</Alert>
+                <Grid {...this.props} />
+                <canvas
+                    className="widget-signature-canvas"
+                    ref={(node: HTMLCanvasElement) => (this.canvasNode = node)}
+                />
+                <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
+            </SizeContainer>
+        );
     }
 
-    componentDidMount() {
+    componentDidMount(): void {
         if (this.canvasNode) {
             this.signaturePad = new SignaturePad(this.canvasNode, {
                 penColor: this.props.penColor,
@@ -63,7 +67,7 @@ export class Signature extends React.PureComponent<SignatureProps> {
         }
     }
 
-    componentWillReceiveProps(nextProps: SignatureProps) {
+    componentWillReceiveProps(nextProps: SignatureProps): void {
         if (this.signaturePad) {
             const { clearSignature, readOnly } = this.props;
             if (nextProps.clearSignature !== clearSignature && clearSignature) {
@@ -79,15 +83,17 @@ export class Signature extends React.PureComponent<SignatureProps> {
         }
     }
 
-    private onResize = () => {
+    private onResize = (): void => {
         if (this.canvasNode) {
             const data = this.signaturePad.toData();
-            this.canvasNode.width = this.canvasNode.parentElement.offsetWidth;
-            this.canvasNode.height = this.canvasNode.parentElement.offsetHeight;
+            this.canvasNode.width =
+                this.canvasNode && this.canvasNode.parentElement ? this.canvasNode.parentElement.offsetWidth : 0;
+            this.canvasNode.height =
+                this.canvasNode && this.canvasNode.parentElement ? this.canvasNode.parentElement.offsetHeight : 0;
             this.signaturePad.clear();
             this.signaturePad.fromData(data);
         }
-    }
+    };
 
     private signaturePadOptions(): IOptions {
         let options: IOptions = {};
@@ -101,9 +107,9 @@ export class Signature extends React.PureComponent<SignatureProps> {
         return options;
     }
 
-    private handleSignEnd = () => {
+    private handleSignEnd = (): void => {
         if (this.props.onSignEndAction) {
             this.props.onSignEndAction(this.signaturePad.toDataURL());
         }
-    }
+    };
 }

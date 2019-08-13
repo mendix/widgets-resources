@@ -1,7 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export default class Utils {
-    static parseStyle(style = ""): {[key: string]: string} {
+    static parseStyle(style = ""): { [key: string]: string } {
         try {
-            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
                 const pair = line.split(":");
                 if (pair.length === 2) {
                     const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
@@ -10,7 +11,6 @@ export default class Utils {
                 return styleObject;
             }, {});
         } catch (error) {
-            // tslint:disable-next-line no-console
             window.console.log("Failed to parse style", style, error);
         }
         return {};
