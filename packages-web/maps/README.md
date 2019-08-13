@@ -77,6 +77,19 @@ Mendix 7.18.0
 - Add an **XPath Constraint** `Optional`
 
 ### Custom Markers
+
+---
+**NOTE**
+
+For best results (see image), your custom marker must be  
+
+- PNG  
+- 38px width 95px height 
+- The bottom pin must be on the center of the image 
+
+![customMarker](/assets/customMarkerExample.jpg)
+---
+
 -  It is used to configure how the marker icon should be look.
 - Under **locations** option on the **Map properties** tab, select the **Markers** tab 
 - For the **Default** option, the widget bundled marker will be displayed
