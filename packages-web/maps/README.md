@@ -83,8 +83,8 @@ Mendix 7.18.0
 
 For best results (see image), your custom marker must be  
 
-- PNG  
-- 38px width 95px height 
+- PNG
+- **32px** width **32px** height 
 - The bottom pin must be on the center of the image 
 
 ![customMarker](/assets/customMarkerExample.jpg)
