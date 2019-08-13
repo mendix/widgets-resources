@@ -23,7 +23,7 @@ const widgetConfig = {
         publicPath: "/"
     },
     resolve: {
-        extensions: [".ts", ".js"],
+        extensions: [".ts", ".js", ".tsx", ".jsx"],
         alias: {
             tests: path.resolve(cwd, "./tests")
         }
@@ -97,16 +97,32 @@ const previewConfig = {
         libraryTarget: "commonjs"
     },
     resolve: {
-        extensions: [".ts", ".js"]
+        extensions: [".ts", ".js", ".tsx", ".jsx"]
     },
     module: {
         rules: [
             {
-                test: /\.ts$/,
+                test: /\.tsx?$/,
                 loader: "ts-loader",
                 options: {
                     compilerOptions: {
                         module: "CommonJS"
+                    }
+                }
+            },
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        cacheDirectory: true,
+                        presets: ["@babel/preset-env", "@babel/preset-react"],
+                        plugins: [
+                            ["@babel/plugin-proposal-class-properties", { loose: true }],
+                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }],
+                            "react-hot-loader/babel"
+                        ]
                     }
                 }
             },
