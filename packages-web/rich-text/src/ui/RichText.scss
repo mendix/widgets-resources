@@ -16,7 +16,7 @@
         border-top-right-radius: 4px;
 
         &.ql-snow {
-            border-color: #DDD;
+            border-color: #ddd;
             border-bottom: 0;
 
             .ql-formats {
@@ -69,7 +69,7 @@
     }
 
     &.disabled-text {
-        .ql-editor{
+        .ql-editor {
             padding: 0;
         }
     }
@@ -120,14 +120,14 @@
                     }
 
                     &:hover {
-                        @include default-stroke
+                        @include default-stroke;
                     }
                 }
             }
         }
     }
 
-    .ql-editor{
-        flex-direction: column
+    .ql-editor {
+        flex-direction: column;
     }
 }

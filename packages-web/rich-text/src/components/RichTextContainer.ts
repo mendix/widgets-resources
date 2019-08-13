@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, createElement, ReactNode } from "react";
 import { hot } from "react-hot-loader/root";
 
 import { CommonRichTextProps, RichText, TabOptions } from "./RichText";
@@ -7,7 +7,7 @@ import { ValidateConfigs } from "./ValidateConfigs";
 import { getValue, parseStyle } from "../utils/ContainerUtils";
 
 interface WrapperProps {
-    "class": string;
+    class: string;
     mxform: mxui.lib.form._FormBase;
     mxObject?: mendix.lib.MxObject;
     style: string;
@@ -49,7 +49,7 @@ class RichTextContainer extends Component<RichTextContainerProps, RichTextContai
         };
     }
 
-    componentWillMount() {
+    componentWillMount(): void {
         this.handleOnChange = this.handleOnChange.bind(this);
         this.executeOnChangeAction = this.executeOnChangeAction.bind(this);
         this.handleSubscriptions = this.handleSubscriptions.bind(this);
@@ -57,9 +57,11 @@ class RichTextContainer extends Component<RichTextContainerProps, RichTextContai
         this.handleValidations = this.handleValidations.bind(this);
     }
 
-    render() {
+    render(): ReactNode {
         const readOnly = this.isReadOnly();
-        return createElement(ValidateConfigs, { ...this.props as RichTextContainerProps, showOnError: false },
+        return createElement(
+            ValidateConfigs,
+            { ...(this.props as RichTextContainerProps), showOnError: false },
             createElement(RichText, {
                 editorOption: this.props.editorOption,
                 tabAction: this.props.tabAction,
@@ -81,7 +83,7 @@ class RichTextContainer extends Component<RichTextContainerProps, RichTextContai
         );
     }
 
-    componentWillReceiveProps(newProps: RichTextContainerProps) {
+    componentWillReceiveProps(newProps: RichTextContainerProps): void {
         if (newProps.mxObject !== this.props.mxObject) {
             this.resetSubscriptions(newProps.mxObject);
             this.defaultValue = getValue(newProps.stringAttribute, "", newProps.mxObject) as string;
@@ -89,16 +91,20 @@ class RichTextContainer extends Component<RichTextContainerProps, RichTextContai
         }
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
     }
 
     private isReadOnly(): boolean {
-        return !this.props.mxObject || this.props.editable === "never" || this.props.readOnly ||
-            this.props.mxObject.isReadonlyAttr(this.props.stringAttribute);
+        return (
+            !this.props.mxObject ||
+            this.props.editable === "never" ||
+            this.props.readOnly ||
+            this.props.mxObject.isReadonlyAttr(this.props.stringAttribute)
+        );
     }
 
-    private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
+    private resetSubscriptions(mxObject?: mendix.lib.MxObject): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
         this.subscriptionHandles = [];
 
@@ -121,14 +127,14 @@ class RichTextContainer extends Component<RichTextContainerProps, RichTextContai
         }
     }
 
-    private handleSubscriptions() {
+    private handleSubscriptions(): void {
         const value = getValue(this.props.stringAttribute, "", this.props.mxObject) as string;
         if (value !== this.state.value) {
             this.setState({ value, alertMessage: "" });
         }
     }
 
-    private handleValidations(validations: mendix.lib.ObjectValidation[]) {
+    private handleValidations(validations: mendix.lib.ObjectValidation[]): void {
         const alertMessage = validations[0].getErrorReason(this.props.stringAttribute);
         validations[0].removeAttribute(this.props.stringAttribute);
         if (alertMessage) {
@@ -136,7 +142,7 @@ class RichTextContainer extends Component<RichTextContainerProps, RichTextContai
         }
     }
 
-    private handleOnChange(value: string) {
+    private handleOnChange(value: string): void {
         if (!this.props.mxObject) {
             return;
         }
@@ -144,7 +150,7 @@ class RichTextContainer extends Component<RichTextContainerProps, RichTextContai
         this.props.mxObject.set(this.props.stringAttribute, value);
     }
 
-    private executeOnChangeAction() {
+    private executeOnChangeAction(): void {
         if (this.props.mxObject && this.state.value !== this.defaultValue) {
             this.executeAction(this.props.mxObject);
             this.defaultValue = this.state.value;
@@ -154,24 +160,25 @@ class RichTextContainer extends Component<RichTextContainerProps, RichTextContai
         }
     }
 
-    private onFormSubmit(onSuccess: () => void) {
+    private onFormSubmit(onSuccess: () => void): void {
         if (this.isEditing) {
             this.executeOnChangeAction();
         }
         onSuccess();
     }
 
-    private executeAction(mxObject: mendix.lib.MxObject) {
+    private executeAction(mxObject: mendix.lib.MxObject): void {
         const { onChangeMicroflow, onChangeNanoflow, mxform } = this.props;
 
         if (onChangeMicroflow) {
             window.mx.ui.action(onChangeMicroflow, {
                 origin: this.props.mxform,
                 params: {
-                    guids: [ mxObject.getGuid() ],
+                    guids: [mxObject.getGuid()],
                     applyto: "selection"
                 },
-                error: error => window.mx.ui.error(`Error while executing microflow: ${onChangeMicroflow}: ${error.message}`)
+                error: error =>
+                    window.mx.ui.error(`Error while executing microflow: ${onChangeMicroflow}: ${error.message}`)
             });
         }
 

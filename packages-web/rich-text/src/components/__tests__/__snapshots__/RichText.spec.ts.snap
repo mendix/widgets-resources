@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RichText that is not read-only renders a quill editor with an alert message 1`] = `
+<div
+  className="widget-rich-text has-error notranslate"
+>
+  <div
+    style={
+      Object {
+        "whiteSpace": "pre-wrap",
+      }
+    }
+  >
+    <div
+      className="widget-rich-text-quill"
+    />
+  </div>
+  <Alert
+    message="Error message"
+  />
+</div>
+`;
+
+exports[`RichText that is not read-only renders the structure correctly 1`] = `
+<div
+  className="widget-rich-text notranslate"
+>
+  <div
+    style={
+      Object {
+        "whiteSpace": "pre-wrap",
+      }
+    }
+  >
+    <div
+      className="widget-rich-text-quill"
+    />
+  </div>
+  <Alert />
+</div>
+`;
+
+exports[`RichText that is read-only with read-only style text renders the structure correctly 1`] = `
+<div
+  className="widget-rich-text notranslate disabled-text ql-snow"
+>
+  <div
+    className="ql-editor"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "<p>Rich Text</p>",
+      }
+    }
+    style={
+      Object {
+        "whiteSpace": "pre-wrap",
+      }
+    }
+  />
+</div>
+`;

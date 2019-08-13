@@ -7,10 +7,10 @@ const resultValue = "<p><strong>Hello World!</strong></p>";
 describe("RichText", () => {
     it("content is updated by attribute", () => {
         HomePage.open();
-        HomePage.textAreaBubbleBasic.waitForVisible();
+        HomePage.textAreaBubbleBasic.waitForDisplayed();
         HomePage.textAreaBubbleBasic.click();
         HomePage.textAreaBubbleBasic.setValue(testValue);
-        HomePage.textArea3.waitForVisible();
+        HomePage.textArea3.waitForDisplayed();
         HomePage.textArea3.click();
 
         const content = HomePage.richTextBubbleBasic.getHTML(false);
@@ -19,9 +19,9 @@ describe("RichText", () => {
 
     it("change value should update the attribute", () => {
         HomePage.open();
-        HomePage.richTextBubbleBasic.waitForVisible();
+        HomePage.richTextBubbleBasic.waitForDisplayed();
         HomePage.richTextBubbleBasic.click();
-        HomePage.richTextBubbleBasic.keys(plainValue);
+        HomePage.richTextBubbleBasic.setValue(plainValue);
         const updatedValue = HomePage.richTextBubbleBasic.getHTML(false);
         HomePage.textAreaBubbleBasic.click();
 
