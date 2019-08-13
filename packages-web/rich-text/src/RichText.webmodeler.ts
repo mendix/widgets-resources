@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, createElement, ReactNode } from "react";
 
 import { RichText, RichTextProps } from "./components/RichText";
 import { RichTextContainerProps } from "./components/RichTextContainer";
@@ -6,16 +6,17 @@ import { RichTextContainerProps } from "./components/RichTextContainer";
 import { ValidateConfigs } from "./components/ValidateConfigs";
 import { parseStyle } from "./utils/ContainerUtils";
 
-// tslint:disable-next-line class-name
 export class preview extends Component<RichTextContainerProps, {}> {
-    render() {
-        return createElement(ValidateConfigs, { ...this.props as RichTextContainerProps, showOnError: true },
+    render(): ReactNode {
+        return createElement(
+            ValidateConfigs,
+            { ...(this.props as RichTextContainerProps), showOnError: true },
             createElement(RichText, preview.transformProps(this.props))
         );
     }
 
     private static transformProps(props: RichTextContainerProps): RichTextProps {
-        const valueAttribute = props.stringAttribute ? props.stringAttribute.split(".")[ 2 ] : "";
+        const valueAttribute = props.stringAttribute ? props.stringAttribute.split(".")[2] : "";
 
         return {
             editorOption: props.editorOption,
@@ -37,10 +38,8 @@ export class preview extends Component<RichTextContainerProps, {}> {
     }
 }
 
-export function getPreviewCss() {
+export function getPreviewCss(): string {
     return (
-        require("quill/dist/quill.snow.css") +
-        require("quill/dist/quill.bubble.css") +
-        require("./ui/RichText.scss")
+        require("quill/dist/quill.snow.css") + require("quill/dist/quill.bubble.css") + require("./ui/RichText.scss")
     );
 }

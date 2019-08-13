@@ -1,14 +1,17 @@
-import { ShallowWrapper, mount, shallow } from "enzyme";
+import { MutationObserver } from "./polyfills/mutation-observer";
+import { ShallowWrapper, mount, shallow, ReactWrapper } from "enzyme";
 import { createElement } from "react";
 
-import * as classNames from "classnames";
-
 import { RichText, RichTextProps } from "../RichText";
-import { Alert } from "../Alert";
+
+Object.defineProperty(window, "MutationObserver", { value: MutationObserver });
+Object.defineProperty(document, "getSelection", { value: jest.fn() });
 
 describe("RichText", () => {
-    const shallowRenderTextEditor = (props: RichTextProps) => shallow(createElement(RichText, props));
-    const fullRenderTextEditor = (props: RichTextProps) => mount(createElement(RichText, props));
+    const shallowRenderTextEditor = (props: RichTextProps): ShallowWrapper<RichTextProps, any> =>
+        shallow(createElement(RichText, props));
+    const fullRenderTextEditor = (props: RichTextProps): ReactWrapper<RichTextProps, any> =>
+        mount(createElement(RichText, props));
     let textEditor: ShallowWrapper<RichTextProps, any>;
     const defaultProps: RichTextProps = {
         customOptions: [],
@@ -17,8 +20,8 @@ describe("RichText", () => {
         minNumberOfLines: 10,
         translatable: false,
         sanitizeContent: false,
-        onChange: jasmine.any(Function),
-        onBlur: jasmine.any(Function),
+        onChange: jest.fn(),
+        onBlur: jest.fn(),
         readOnly: false,
         readOnlyStyle: "bordered",
         theme: "snow",
@@ -28,14 +31,7 @@ describe("RichText", () => {
     describe("that is not read-only", () => {
         it("renders the structure correctly", () => {
             textEditor = shallowRenderTextEditor(defaultProps);
-            expect(textEditor).toBeElement(
-                createElement("div", { className: classNames("widget-rich-text notranslate") },
-                    createElement("div", { style: { whiteSpace: "pre-wrap" } },
-                        createElement("div", { className: "widget-rich-text-quill" })
-                    ),
-                    createElement("Alert")
-                )
-            );
+            expect(textEditor).toMatchSnapshot();
         });
 
         it("renders a quill editor", () => {
@@ -73,24 +69,14 @@ describe("RichText", () => {
             };
 
             textEditor = shallowRenderTextEditor(richTextProps);
-            expect(textEditor).toBeElement(
-                createElement("div", { className: "widget-rich-text notranslate has-error" },
-                    createElement("div", {
-                            style: { whiteSpace: "pre-wrap" },
-                            dangerouslySetInnerHTML: undefined
-                        },
-                        createElement("div", { className: "widget-rich-text-quill" })
-                    ),
-                    createElement(Alert, { message: richTextProps.alertMessage })
-                )
-            );
+            expect(textEditor).toMatchSnapshot();
         });
 
         describe("with editor mode set to", () => {
             const getToolBar: any = (props: RichTextProps) => {
                 textEditor = shallowRenderTextEditor(props);
                 const textEditorInstance = textEditor.instance() as any;
-                const quillNode = textEditorInstance.quillNode = document.createElement("div");
+                const quillNode = (textEditorInstance.quillNode = document.createElement("div"));
                 document.createElement("div").appendChild(quillNode);
                 textEditorInstance.componentDidMount();
 
@@ -100,23 +86,23 @@ describe("RichText", () => {
             it("basic renders a basic text editor", () => {
                 const toolbar = getToolBar(defaultProps);
 
-                expect(toolbar.options.container.length).toBe(2);
+                expect(toolbar.options.container).toHaveLength(2);
             });
 
             it("extended renders an extended text editor", () => {
                 const toolbar = getToolBar({ ...defaultProps, editorOption: "extended" });
 
-                expect(toolbar.options.container.length).toBe(6);
+                expect(toolbar.options.container).toHaveLength(6);
             });
 
             it("custom renders a custom toolbar", () => {
                 const toolbar = getToolBar({
                     ...defaultProps,
                     editorOption: "custom",
-                    customOptions: [ { option: "bold" }, { option: "spacer" }, { option: "underline" } ]
+                    customOptions: [{ option: "bold" }, { option: "spacer" }, { option: "underline" }]
                 });
 
-                expect(toolbar.options.container.length).toBe(2);
+                expect(toolbar.options.container).toHaveLength(2);
             });
         });
     });
@@ -124,28 +110,19 @@ describe("RichText", () => {
     describe("that is read-only", () => {
         it("with read-only style text renders the structure correctly", () => {
             textEditor = shallowRenderTextEditor({ ...defaultProps, readOnly: true, readOnlyStyle: "text" });
-
-            expect(textEditor).toBeElement(
-                createElement("div", { className: "widget-rich-text notranslate disabled-text ql-snow" },
-                    createElement("div", {
-                        className: "ql-editor",
-                        style: { whiteSpace: "pre-wrap" },
-                        dangerouslySetInnerHTML: { __html: defaultProps.value }
-                    })
-                )
-            );
+            expect(textEditor).toMatchSnapshot();
         });
 
         it("with read-only style bordered has the disabled-bordered class", () => {
             textEditor = shallowRenderTextEditor({ ...defaultProps, readOnly: true, readOnlyStyle: "bordered" });
 
-            expect(textEditor).toHaveClass("disabled-bordered");
+            expect(textEditor.hasClass("disabled-bordered")).toBe(true);
         });
 
         it("with read-only style borderedToolbar has the disabled-bordered-toolbar class", () => {
             textEditor = shallowRenderTextEditor({ ...defaultProps, readOnly: true, readOnlyStyle: "borderedToolbar" });
 
-            expect(textEditor).toHaveClass("disabled-bordered-toolbar");
+            expect(textEditor.hasClass("disabled-bordered-toolbar")).toBe(true);
         });
     });
 
