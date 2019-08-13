@@ -18,7 +18,7 @@ describe("Grid", () => {
     it("renders the structure correctly", () => {
         const grid = renderGrid(defaultProps);
 
-        expect(grid).toMatchStructure(
+        expect(grid.getElement()).toMatchObject(
             createElement("svg", {
                 className: "widget-signature-grid",
                 width: "100%",

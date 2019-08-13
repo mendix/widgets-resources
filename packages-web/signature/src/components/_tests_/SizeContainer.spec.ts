@@ -21,7 +21,7 @@ describe("Grid", () => {
     it("renders structure correctly", () => {
         const grid = renderGrid(defaultProps);
 
-        expect(grid).toBeElement(
+        expect(grid.getElement()).toEqual(
             createElement(
                 "div",
                 {
@@ -57,7 +57,7 @@ describe("Grid", () => {
             height: 50
         });
 
-        expect(grid).toBeElement(
+        expect(grid.getElement()).toEqual(
             createElement(
                 "div",
                 {
@@ -94,7 +94,7 @@ describe("Grid", () => {
             height: 50
         });
 
-        expect(grid).toBeElement(
+        expect(grid.getElement()).toEqual(
             createElement(
                 "div",
                 {
@@ -130,7 +130,7 @@ describe("Grid", () => {
             height: 50
         });
 
-        expect(grid).toBeElement(
+        expect(grid.getElement()).toEqual(
             createElement(
                 "div",
                 {

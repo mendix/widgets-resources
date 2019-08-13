@@ -18,5 +18,6 @@ module.exports = {
         "\\.(css|less|scss|sass)$": "identity-obj-proxy"
     },
     collectCoverage: true,
-    coverageDirectory: `${cwd}/dist/coverage`
+    coverageDirectory: `${cwd}/dist/coverage`,
+    setupFiles: ["jest-canvas-mock"]
 };

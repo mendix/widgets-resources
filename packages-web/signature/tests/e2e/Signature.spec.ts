@@ -4,7 +4,7 @@ import GridPage from "./pages/grid.page";
 describe("SignatureCanvas", () => {
     it("renders Canvas", () => {
         HomePage.open();
-        HomePage.canvas.waitForExist();
+        HomePage.canvas.waitForDisplayed();
         const isExisting = HomePage.canvas.isExisting();
 
         expect(isExisting).toBeTruthy();
