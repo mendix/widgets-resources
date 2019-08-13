@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, createElement, ReactNode } from "react";
 
 import { BootstrapStyle, RangeSlider } from "./RangeSlider";
 
@@ -65,14 +65,14 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         };
     }
 
-    render() {
-        const disabled = !this.props.mxObject || this.props.readOnly
-            || !!(this.props.lowerBoundAttribute && this.props.mxObject.isReadonlyAttr(this.props.lowerBoundAttribute))
-            || !!(this.props.upperBoundAttribute && this.props.mxObject.isReadonlyAttr(this.props.upperBoundAttribute));
+    render(): ReactNode {
+        const disabled =
+            !this.props.mxObject ||
+            this.props.readOnly ||
+            !!(this.props.lowerBoundAttribute && this.props.mxObject.isReadonlyAttr(this.props.lowerBoundAttribute)) ||
+            !!(this.props.upperBoundAttribute && this.props.mxObject.isReadonlyAttr(this.props.upperBoundAttribute));
 
-        const alertMessage = !disabled
-            ? this.validateSettings(this.state) || this.validateValues()
-            : "";
+        const alertMessage = !disabled ? this.validateSettings(this.state) || this.validateValues() : "";
 
         return createElement(RangeSlider, {
             alertMessage,
@@ -93,31 +93,13 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         });
     }
 
-    componentWillReceiveProps(newProps: RangeSliderContainerProps) {
+    componentWillReceiveProps(newProps: RangeSliderContainerProps): void {
         this.resetSubscriptions(newProps.mxObject);
         this.setState(this.updateValues(newProps.mxObject));
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
-    }
-
-    public static parseStyle(style = ""): { [key: string]: string } {
-        try {
-            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
-                const pair = line.split(":");
-                if (pair.length === 2) {
-                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
-                    styleObject[name] = pair[1].trim();
-                }
-                return styleObject;
-            }, {});
-        } catch (error) {
-            // tslint:disable-next-line no-console
-            console.log("Failed to parse style", style, error);
-        }
-
-        return {};
     }
 
     private validateSettings(state: RangeSliderContainerState): string {
@@ -140,7 +122,7 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
             message.push("Upper bound value is required");
         }
         if (typeof maximumValue === "number" && typeof minimumValue === "number") {
-            if (validMin && validMax && (minimumValue >= maximumValue)) {
+            if (validMin && validMax && minimumValue >= maximumValue) {
                 message.push(`Minimum value ${minimumValue} should be less than the maximum value ${maximumValue}`);
             }
             if (!stepValue || stepValue <= 0) {
@@ -149,22 +131,28 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
             if (maximumValue && minimumValue && stepValue) {
                 const quotient = Math.floor((maximumValue - minimumValue) / stepValue);
                 const product = quotient * stepValue;
-                const remainder = (maximumValue - minimumValue) - product;
+                const remainder = maximumValue - minimumValue - product;
 
                 if (validMax && validMin && remainder > 0) {
                     message.push(`Step value is invalid: max - min (${maximumValue} - ${minimumValue})
                  should be evenly divisible by the step value ${stepValue}`);
                 }
             }
-            if ((!this.isDecimal(lowerBoundAttribute) || !this.isDecimal(upperBoundAttribute)) && stepValue && stepValue % 1 !== 0) {
-                message.push(`Step value ${stepValue} is invalid: it can not be a decimal as the attribute ${lowerBoundAttribute} and or attribute ${upperBoundAttribute} can not store decimals`);
+            if (
+                (!this.isDecimal(lowerBoundAttribute) || !this.isDecimal(upperBoundAttribute)) &&
+                stepValue &&
+                stepValue % 1 !== 0
+            ) {
+                message.push(
+                    `Step value ${stepValue} is invalid: it can not be a decimal as the attribute ${lowerBoundAttribute} and or attribute ${upperBoundAttribute} can not store decimals`
+                );
             }
         }
 
         return message.join(", ");
     }
 
-    private onUpdate(values: number[]) {
+    private onUpdate(values: number[]): void {
         const { mxObject, lowerBoundAttribute, upperBoundAttribute } = this.props;
         if (mxObject && this.validValues(values)) {
             if (values[0] !== this.state.lowerBoundValue) {
@@ -179,25 +167,25 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         }
     }
 
-    private validValues(values: number[]) {
+    private validValues(values: number[]): boolean {
         const { minimumValue, maximumValue } = this.state;
         const { lowerBoundAttribute, upperBoundAttribute } = this.props;
-        return Array.isArray(values)
-            && values.length === 2
-            && typeof minimumValue === "number"
-            && typeof maximumValue === "number"
-            && typeof values[0] === "number"
-            && typeof values[1] === "number"
-            && minimumValue <= maximumValue
-            && values[0] >= minimumValue
-            && values[0] <= maximumValue
-            && values[1] >= minimumValue
-            && values[1] <= maximumValue
-            && values[0] <= values[1]
-            && (this.isDecimal(lowerBoundAttribute)
-                || (!this.isDecimal(lowerBoundAttribute) && values[0] % 1 === 0))
-            && (this.isDecimal(upperBoundAttribute)
-                || (!this.isDecimal(upperBoundAttribute) && values[1] % 1 === 0));
+        return (
+            Array.isArray(values) &&
+            values.length === 2 &&
+            typeof minimumValue === "number" &&
+            typeof maximumValue === "number" &&
+            typeof values[0] === "number" &&
+            typeof values[1] === "number" &&
+            minimumValue <= maximumValue &&
+            values[0] >= minimumValue &&
+            values[0] <= maximumValue &&
+            values[1] >= minimumValue &&
+            values[1] <= maximumValue &&
+            values[0] <= values[1] &&
+            (this.isDecimal(lowerBoundAttribute) || (!this.isDecimal(lowerBoundAttribute) && values[0] % 1 === 0)) &&
+            (this.isDecimal(upperBoundAttribute) || (!this.isDecimal(upperBoundAttribute) && values[1] % 1 === 0))
+        );
     }
 
     private updateValues(mxObject?: mendix.lib.MxObject): RangeSliderContainerState {
@@ -216,7 +204,7 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         };
     }
 
-    private handleChangeAction(value: number[]) {
+    private handleChangeAction(value: number[]): void {
         if (this.previousLowerBoundValue === value[0] && this.previousUpperBoundValue === value[1]) {
             return;
         }
@@ -228,16 +216,17 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         }
     }
 
-    private callOnChangeEvents(mxObject: mendix.lib.MxObject) {
+    private callOnChangeEvents(mxObject: mendix.lib.MxObject): void {
         const { onChangeMicroflow, onChangeNanoflow, mxform } = this.props;
         if (onChangeMicroflow) {
             window.mx.ui.action(onChangeMicroflow, {
-                error: (error) => window.mx.ui.error(
-                    `An error occurred while executing microflow: ${onChangeMicroflow}: ${error.message}`
-                ),
+                error: error =>
+                    window.mx.ui.error(
+                        `An error occurred while executing microflow: ${onChangeMicroflow}: ${error.message}`
+                    ),
                 params: {
                     applyto: "selection",
-                    guids: [ mxObject.getGuid() ]
+                    guids: [mxObject.getGuid()]
                 }
             });
         }
@@ -247,16 +236,15 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
             context.setContext(mxObject.getEntity(), mxObject.getGuid());
             window.mx.data.callNanoflow({
                 context,
-                error: error => window.mx.ui.error(
-                    `An error occurred while executing the on change nanoflow: ${error.message}`
-                ),
+                error: error =>
+                    window.mx.ui.error(`An error occurred while executing the on change nanoflow: ${error.message}`),
                 nanoflow: onChangeNanoflow,
                 origin: mxform
             });
         }
     }
 
-    private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
+    private resetSubscriptions(mxObject?: mendix.lib.MxObject): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
         this.subscriptionHandles = [];
 
@@ -268,15 +256,19 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
                 this.props.minAttribute,
                 this.props.stepAttribute
             ];
-            this.subscriptionHandles = attributes.map(attr => window.mx.data.subscribe({
-                attr,
-                callback: this.subscriptionCallback(mxObject),
-                guid: mxObject.getGuid()
-            }));
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                callback: this.subscriptionCallback(mxObject),
-                guid: mxObject.getGuid()
-            }));
+            this.subscriptionHandles = attributes.map(attr =>
+                window.mx.data.subscribe({
+                    attr,
+                    callback: this.subscriptionCallback(mxObject),
+                    guid: mxObject.getGuid()
+                })
+            );
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    callback: this.subscriptionCallback(mxObject),
+                    guid: mxObject.getGuid()
+                })
+            );
         }
     }
 
@@ -305,7 +297,7 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         return message.join(", ");
     }
 
-    private isDecimal(attribute: string) {
+    private isDecimal(attribute: string): boolean {
         return this.props.mxObject.getAttributeType(attribute) === "Decimal";
     }
 
@@ -315,5 +307,23 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         }
 
         return defaultValue;
+    }
+
+    static parseStyle(style = ""): { [key: string]: string } {
+        try {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log("Failed to parse style", style, error);
+        }
+
+        return {};
     }
 }

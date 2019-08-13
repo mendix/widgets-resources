@@ -1,12 +1,11 @@
-import { Component, createElement } from "react";
+import { Component, createElement, ReactNode } from "react";
 import { RangeSlider, RangeSliderProps } from "./components/RangeSlider";
 import RangeSliderContainer, { RangeSliderContainerProps } from "./components/RangeSliderContainer";
 
 declare function require(name: string): string;
 
-// tslint:disable-next-line:class-name
 export class preview extends Component<RangeSliderContainerProps, {}> {
-    render() {
+    render(): ReactNode {
         return createElement(RangeSlider, this.transformProps(this.props));
     }
 
@@ -39,8 +38,6 @@ export class preview extends Component<RangeSliderContainerProps, {}> {
     }
 }
 
-export function getPreviewCss() {
-    return (
-        require("./ui/RangeSlider.scss") + require("rc-slider/assets/index.css")
-    );
+export function getPreviewCss(): string {
+    return require("./ui/RangeSlider.scss") + require("rc-slider/assets/index.css");
 }

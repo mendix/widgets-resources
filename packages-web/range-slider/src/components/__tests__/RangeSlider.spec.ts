@@ -33,24 +33,28 @@ describe("RangeSlider", () => {
             upperBound
         };
     });
-    const renderSlider = (props: RangeSliderProps) => shallow(createElement(RangeSlider, props));
+    const renderSlider = (props: RangeSliderProps): ShallowWrapper<RangeSliderProps, any> =>
+        shallow(createElement(RangeSlider, props));
 
     it("renders the structure", () => {
         rangeSlider = renderSlider(sliderProps);
 
-        expect(rangeSlider).toBeElement(
-            createElement("div", { className: "widget-range-slider widget-range-slider-primary" },
+        expect(rangeSlider.getElement()).toEqual(
+            createElement(
+                "div",
+                { className: "widget-range-slider widget-range-slider-primary" },
                 createElement(RcSlider.Range, {
-                    defaultValue: [ lowerBound, upperBound ],
+                    defaultValue: [lowerBound, upperBound],
                     disabled: false,
-                    handle: jasmine.any(Function) as any,
+                    handle: expect.any(Function),
                     included: true,
                     max: maxValue,
                     min: minValue,
                     step: stepValue,
-                    value: [ lowerBound, upperBound ],
+                    value: [lowerBound, upperBound],
                     vertical: false
-                }), createElement(Alert, { bootstrapStyle: "danger", message: "", className: "" })
+                }),
+                createElement(Alert, { bootstrapStyle: "danger", className: "widget-range-slider-alert" })
             )
         );
     });
@@ -60,7 +64,7 @@ describe("RangeSlider", () => {
         sliderProps.lowerBound = undefined;
         const RcSliderComponent = renderSlider(sliderProps).find(RcSlider.Range);
 
-        expect(RcSliderComponent.props().value).toEqual([ stepValue, upperBound ]);
+        expect(RcSliderComponent.props().value).toEqual([stepValue, upperBound]);
     });
 
     it("with invalid upper bound and maximum values renders with the calculated upper bound value", () => {
@@ -68,14 +72,14 @@ describe("RangeSlider", () => {
         sliderProps.upperBound = undefined;
         const RcSliderComponent = renderSlider(sliderProps).find(RcSlider.Range);
 
-        expect(RcSliderComponent.props().value).toEqual([ lowerBound, (maxValue - stepValue) ]);
+        expect(RcSliderComponent.props().value).toEqual([lowerBound, maxValue - stepValue]);
     });
 
     it("with an invalid maximum or minimum value renders with default values", () => {
         sliderProps.maxValue = undefined;
         const RcSliderComponent = renderSlider(sliderProps).find(RcSlider.Range);
 
-        expect(RcSliderComponent.props().value).toEqual([ defaultMaxValue, defaultMinValue ]);
+        expect(RcSliderComponent.props().value).toEqual([defaultMaxValue, defaultMinValue]);
     });
 
     describe("with the marker value", () => {
