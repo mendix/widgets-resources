@@ -222,8 +222,7 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
         if (url) {
             marker.setIcon(icon({
                 iconUrl: url,
-                iconSize: [ 38, 95 ],
-                iconAnchor: [ 22, 94 ],
+                iconSize: [ 32 , 32 ],
                 className: "marker"
             }));
         }
