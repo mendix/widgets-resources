@@ -20,3 +20,9 @@ coverage
 **/TestProjects/*/*.launch
 
 packages-web/switch/tests/TestProjects/*/widgets/Switch.mpk
+packages-web/badge-button/tests/TestProjects/*/widgets/BadgeButton.mpk
+packages-web/badge/tests/TestProjects/*/widgets/Badge.mpk
+packages-web/range-slider/tests/TestProjects/*/widgets/RangeSlider.mpk
+packages-web/rich-text/tests/TestProjects/*/widgets/RichText.mpk
+packages-web/signature/tests/TestProjects/*/widgets/Signature.mpk
+packages-web/slider/tests/TestProjects/*/widgets/Slider.mpk
