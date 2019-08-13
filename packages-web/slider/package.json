@@ -1,0 +1,37 @@
+{
+    "name": "slider-web",
+    "widgetName": "Slider",
+    "version": "1.3.1",
+    "description": "Change a number value using a slider",
+    "scripts": {
+        "start": "utils-react-widgets start",
+        "dev": "utils-react-widgets dev",
+        "test": "npm run test:unit",
+        "test:unit": "jest --config ../../scripts/test/jest.web.config.js",
+        "test:e2e": "export URL=https://badge.mxapps.io/ && utils-react-widgets test:e2e",
+        "test:e2e:dev": "export DEBUG=true && utils-react-widgets test:e2e",
+        "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "lint:fix": "npm run lint -- --fix",
+        "build": "utils-react-widgets build"
+    },
+    "config": {
+        "mendixHost": "http://localhost:8080",
+        "developmentPort": 3000,
+        "projectPath": [
+            "./tests/TestProjects/Mendix7/",
+            "./tests/TestProjects/Mendix8/"
+        ]
+    },
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "@types/classnames": "^2.2.7",
+        "@types/rc-slider": "^8.6.4",
+        "@types/rc-tooltip": "^3.7.1",
+        "@widgets-resources/utils-react-widgets": "0.0.1"
+    },
+    "dependencies": {
+        "classnames": "^2.2.6",
+        "rc-slider": "^8.6.6",
+        "rc-tooltip": "^3.7.3"
+    }
+}

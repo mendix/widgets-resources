@@ -1,0 +1,33 @@
+@import "variables";
+
+.widget-range-slider {
+    padding: 5px 10px;
+    margin-bottom: 15px;
+
+    .rc-slider-handle,
+    .rc-slider-dot-active {
+        border: 2px solid;
+
+        &:active {
+            box-shadow: none;
+        }
+    }
+
+    .rc-slider {
+        &.rc-slider-with-marks {
+            padding-bottom: 25px;
+        }
+
+        &.rc-slider-disabled {
+            background-color: transparent;
+        }
+    }
+}
+
+.widget-range-slider-no-value {
+    .rc-slider-track {
+        display: none;
+    }
+}
+
+@import "range-slider-theme";

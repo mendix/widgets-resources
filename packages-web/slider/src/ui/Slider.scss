@@ -1,0 +1,37 @@
+@import "variables";
+
+.widget-slider {
+    .rc-slider-handle,
+    .rc-slider-dot-active {
+        border: 2px solid;
+        &:active {
+            box-shadow: none;
+        }
+    }
+    .rc-slider {
+        &.rc-slider-with-marks {
+            padding-bottom: 25px;
+        }
+
+        &.rc-slider-disabled {
+            background-color: transparent;
+        }
+    }
+}
+
+/* Default margings and paddings */
+.widget-slider {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 15px;
+}
+
+.widget-slider-no-value {
+    .rc-slider-track {
+        display: none;
+    }
+}
+
+@import "slider-theme";

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.custom.slider.Slider" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/ ../../node_modules/mendix/custom_widget.xsd">
+    <name>Slider</name>
+    <description>Change a number value using a slider</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABABAMAAAEvQFx7AAAAIVBMVEUAAAD///9SuP+IiIhJsfdJsfhJsfeJiYlIsPhIsPeIiIjzihhCAAAACXRSTlMAARlJZb3I4/MVTrONAAAAz0lEQVRIx2NgQAMTgJhr1qpVEBZOwAmSrZy1agEDB151IMA4E6YJg8Ewk4EqgHMqLiu4Vs5cBQQLsNnOOomB3oAxwwFVIHMmWhDMRBWwWgUUWAUFy7GpwCLgOXMmwwgGLG0CqAKRMyeih9g0AkFISKAKOV4WAwVWkRNRWARmoAtMQRXQnBnAMAqGG2CKnDlzqgIeBcAsjZEUUEAnSMEMPApmggHNFFStAucApEywCjU3mONWUEwvR0JLXIzsjwJEQQoC8cWWSEab42iapQQAAD3okfmgsuelAAAAAElFTkSuQmCC</icon>
+    <properties>
+        <property key="valueAttribute" type="attribute">
+            <caption>Value attribute</caption>
+            <category>Data source</category>
+            <description>The selected value on the slider</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="minAttribute" type="attribute" required="false">
+            <caption>Range minimum attribute</caption>
+            <category>Data source</category>
+            <description>Holds the minimum slider value (when empty the 'Default minimum value' is used)</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="maxAttribute" type="attribute" required="false">
+            <caption>Range maximum attribute</caption>
+            <category>Data source</category>
+            <description>Holds the maximum slider value (when empty the 'Default maximum value' is used)</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="staticMinimumValue" type="integer" defaultValue="0">
+            <caption>Default minimum value</caption>
+            <category>Data source</category>
+            <description>The minimum slider value (when not provided through 'Range minimum attribute')</description>
+        </property>
+        <property key="staticMaximumValue" type="integer" defaultValue="100">
+            <caption>Default maximum value</caption>
+            <category>Data source</category>
+            <description>The maximum slider value (when not provided through 'Range maximum attribute')</description>
+        </property>
+        <property key="editable" type="enumeration" defaultValue="default">
+            <caption>Editable</caption>
+            <category>Data source</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="default">Default</enumerationValue>
+                <enumerationValue key="never">Never</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="onChangeMicroflow" type="microflow" required="false">
+            <caption>On change microflow</caption>
+            <category>Events</category>
+            <description>Called when the slider is clicked or changed</description>
+            <returnType type="Void"/>
+        </property>
+        <property key="onChangeNanoflow" type="nanoflow" required="false">
+            <caption>On change nanoflow</caption>
+            <category>Events</category>
+            <description>Called when the slider is clicked or changed</description>
+            <returnType type="Void" />
+        </property>
+        <property key="noOfMarkers" type="integer" defaultValue="2">
+            <caption>Number of markers</caption>
+            <category>Appearance</category>
+            <description>Marker ticks on the slider (visible when larger than 2)</description>
+        </property>
+        <property key="decimalPlaces" type="integer" defaultValue="1">
+            <caption>Decimal places</caption>
+            <category>Appearance</category>
+            <description>Number of decimal places for marker values</description>
+        </property>
+        <property key="tooltipText" type="string" required="false" defaultValue="{1}">
+            <caption>Tooltip text</caption>
+            <category>Appearance</category>
+            <description>Text to show when hovering over the slider value. Leave this empty to disable the tooltip. Use {1} as a replacement for the current value of the slider</description>
+        </property>
+        <property key="stepAttribute" type="attribute" required="false">
+            <caption>Step size attribute</caption>
+            <category>Appearance</category>
+            <description>Holds the interval between two selectable points (when empty the 'Default step size' is used)</description>
+            <attributeTypes>
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
+            </attributeTypes>
+        </property>
+        <property key="stepValue" type="integer" defaultValue="10">
+            <caption>Default step size</caption>
+            <category>Appearance</category>
+            <description>The interval between two selectable points (when not provided through 'Step size attribute') </description>
+        </property>
+        <property key="bootstrapStyle" type="enumeration" defaultValue="primary">
+            <caption>Slider style</caption>
+            <category>Appearance</category>
+            <description>Color to apply to the slider</description>
+            <enumerationValues>
+                <enumerationValue key="primary">Primary</enumerationValue>
+                <enumerationValue key="inverse">Inverse</enumerationValue>
+                <enumerationValue key="info">Info</enumerationValue>
+                <enumerationValue key="success">Success</enumerationValue>
+                <enumerationValue key="warning">Warning</enumerationValue>
+                <enumerationValue key="danger">Danger</enumerationValue>
+            </enumerationValues>
+        </property>
+    </properties>
+</widget>
