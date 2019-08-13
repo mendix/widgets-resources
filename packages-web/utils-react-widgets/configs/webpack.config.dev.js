@@ -30,7 +30,7 @@ const widgetConfig = {
         proxy: [
             {
                 target: mxHost,
-                context: ["**", `!/widgets/com/mendix/widget/custom/${name}/${widgetName}.js`],
+                context: ["**", `!/widgets/com/mendix/widget/custom/${name}/${widgetName}.${variables.extension}`],
                 onError(err, req, res) {
                     if (res && res.writeHead) {
                         res.writeHead(500, {
@@ -55,7 +55,7 @@ const widgetConfig = {
         stats: "errors-only"
     },
     resolve: {
-        extensions: [".ts", ".js"],
+        extensions: [".ts", ".js", ".tsx", ".jsx"],
         alias: {
             tests: path.resolve(cwd, "./tests")
         }
@@ -116,23 +116,39 @@ const widgetConfig = {
 };
 
 const previewConfig = {
-    entry: path.resolve(cwd, `./src/${widgetName}.webmodeler.ts`),
+    entry: path.resolve(cwd, `./src/${widgetName}.webmodeler.${variables.extension}`),
     output: {
         path: path.resolve(cwd, "dist/tmp"),
         filename: `widgets/${widgetName}.webmodeler.js`,
         libraryTarget: "commonjs"
     },
     resolve: {
-        extensions: [".ts", ".js"]
+        extensions: [".ts", ".js", ".tsx", ".jsx"]
     },
     module: {
         rules: [
             {
-                test: /\.ts$/,
+                test: /\.tsx?$/,
                 loader: "ts-loader",
                 options: {
                     compilerOptions: {
                         module: "CommonJS"
+                    }
+                }
+            },
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        cacheDirectory: true,
+                        presets: ["@babel/preset-env", "@babel/preset-react"],
+                        plugins: [
+                            ["@babel/plugin-proposal-class-properties", { loose: true }],
+                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }],
+                            "react-hot-loader/babel"
+                        ]
                     }
                 }
             },
