@@ -30,7 +30,8 @@ export interface SignatureProps extends Dimensions {
 export type penOptions = "fountain" | "ballpoint" | "marker";
 
 export class Signature extends PureComponent<SignatureProps> {
-    private canvasNode: HTMLCanvasElement;
+    // @ts-ignore
+    private canvasNode: HTMLCanvasElement = null;
     private signaturePad: SignaturePad;
 
     render(): ReactNode {
