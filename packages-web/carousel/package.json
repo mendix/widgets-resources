@@ -1,114 +1,34 @@
 {
-  "name": "carousel",
-  "widgetName": "Carousel",
-  "version": "1.4.1",
-  "description": "Displays images in a carousel",
-  "scripts": {
-    "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec grunt",
-    "typeCheck": "tsc --noEmit",
-    "emit": "tsc",
-    "pretest": "tsc && npm run lint && npm run build",
-    "test": "npm run test:unit && npm run test:conditional",
-    "test:conditional": "node ./node_modules/mendix-widget-build-script/dist/CheckPullRequestFromFork.js && echo 'Skip tests on forked pull request' || npm run deployAndTest",
-    "test:dev": "karma start",
-    "test:unit": "karma start --single-run --codeCoverage && node tests/remap.js",
-    "test:e2e": "tsc -p ./tests/e2e/tsconfig.json && wdio ./tests/e2e/wdio.conf.js",
-    "test:e2e:dev": "tsc -p ./tests/e2e/tsconfig.json && set DEBUG=true&& wdio ./tests/e2e/wdio.conf.js",
-    "lint": "tslint -c tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'",
-    "lint:fix": "npm run lint -- --fix",
-    "deploy": " npm run updateProject && npm run deployApp",
-    "build": "grunt release",
-    "updateProject": "node ./node_modules/mendix-widget-build-script/dist/UpdateMxProject.js",
-    "deployApp": "node ./node_modules/mendix-widget-build-script/dist/DeployMxApp.js",
-    "deployAndTest": "npm run deploy && npm run test:e2e"
-  },
-  "pre-commit": [
-    "typeCheck",
-    "lint"
-  ],
-  "pre-push": [
-    "test"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mendixlabs/carousel"
-  },
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/mendixlabs/carousel/issues"
-  },
-  "devDependencies": {
-    "@types/big.js": "0.0.31",
-    "@types/classnames": "^2.2.0",
-    "@types/core-js": "^0.9.43",
-    "@types/enzyme": "^3.1.5",
-    "@types/faker": "^4.1.0",
-    "@types/jasmine": "^2.8.2",
-    "@types/karma": "^1.7.3",
-    "@types/react": "^15.6.0",
-    "@types/react-dom": "^15.5.1",
-    "@types/webdriverio": "^4.8.2",
-    "base64-image-loader": "^1.2.0",
-    "big.js": "^3.1.3",
-    "check-dependencies": "^1.0.1",
-    "copy-webpack-plugin": "^4.0.1",
-    "core-js": "^2.5.1",
-    "css-loader": "^0.28.4",
-    "enzyme": "^2.9.1",
-    "extract-text-webpack-plugin": "^3.0.0",
-    "faker": "^4.1.0",
-    "grunt": "1.0.1",
-    "grunt-check-dependencies": "^1.0.0",
-    "grunt-contrib-clean": "^1.1.0",
-    "grunt-contrib-compress": "^1.4.3",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-file-append": "0.0.7",
-    "grunt-newer": "^1.3.0",
-    "grunt-webpack": "^3.0.0",
-    "istanbul": "^0.4.3",
-    "istanbul-instrumenter-loader": "^3.0.0",
-    "jasmine": "^2.7.0",
-    "jasmine-core": "^2.8.0",
-    "json-loader": "^0.5.4",
-    "karma": "^2.0.0",
-    "karma-chrome-launcher": "^2.1.1",
-    "karma-coverage": "^1.1.1",
-    "karma-jasmine": "^1.1.2",
-    "karma-jasmine3-html-reporter": "^0.2.3",
-    "karma-remap-istanbul": "^0.6.0",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^2.0.13",
-    "mendix-client": "^7.13.3",
-    "mendix-widget-build-script": "^1.0.0-rc2",
-    "node-sass": "^4.5.3",
-    "nodemon": "^1.12.1",
-    "npm-check": "^5.5.2",
-    "pre-commit": "^1.2.2",
-    "pre-push": "^0.1.1",
-    "raw-loader": "^0.5.1",
-    "react": "^15.6.1",
-    "react-addons-test-utils": "^15.6.0",
-    "react-dom": "^15.6.1",
-    "react-test-renderer": "^15.6.1",
-    "remap-istanbul": "^0.9.5",
-    "sass-loader": "^6.0.6",
-    "source-map-loader": "^0.2.1",
-    "style-loader": "^0.18.1",
-    "ts-loader": "^2.3.2",
-    "tslint": "^5.8.0",
-    "tslint-eslint-rules": "^4.1.1",
-    "typescript": "^2.6.2",
-    "wdio-dot-reporter": "0.0.9",
-    "wdio-jasmine-framework": "^0.3.2",
-    "wdio-selenium-standalone-service": "0.0.9",
-    "wdio-spec-reporter": "^0.1.1",
-    "webdriverio": "^4.10.0",
-    "webpack": "^3.4.1",
-    "webpack-dev-server": "^2.5.0",
-    "webpack-merge": "^4.1.0"
-  },
-  "dependencies": {
-    "classnames": "^2.2.5"
-  }
+    "name": "carousel",
+    "widgetName": "Carousel",
+    "version": "1.4.1",
+    "description": "Displays images in a carousel",
+    "scripts": {
+        "start": "utils-react-widgets start",
+        "dev": "utils-react-widgets dev",
+        "test": "npm run test:unit",
+        "test:unit": "jest --config ../../scripts/test/jest.web.config.js",
+        "test:e2e": "export URL=https://carousel.mxapps.io/ && utils-react-widgets test:e2e",
+        "test:e2e:dev": "export DEBUG=true && utils-react-widgets test:e2e",
+        "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "lint:fix": "npm run lint -- --fix",
+        "build": "utils-react-widgets build"
+    },
+    "config": {
+        "mendixHost": "http://localhost:8080",
+        "developmentPort": 3000,
+        "projectPath": [
+            "./tests/TestProjects/Mendix7/",
+            "./tests/TestProjects/Mendix8/"
+        ]
+    },
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "@types/classnames": "^2.2.0",
+        "base64-image-loader": "^1.2.0",
+        "@widgets-resources/utils-react-widgets": "0.0.1"
+    },
+    "dependencies": {
+        "classnames": "^2.2.5"
+    }
 }
