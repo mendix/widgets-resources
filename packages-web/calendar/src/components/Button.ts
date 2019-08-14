@@ -1,5 +1,5 @@
-import { ReactNode, SFC, createElement } from "react";
-import * as classNames from "classnames";
+import { ReactNode, createElement, FunctionComponent } from "react";
+import classNames from "classnames";
 
 export interface ButtonProps {
     renderMode: "button" | "link";
@@ -15,35 +15,35 @@ export interface ButtonProps {
 
 export type ButtonStyle = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
 
-export const addIcon = (icon?: string, iconPosition?: "left" | "right", content?: ReactNode) => {
+export const addIcon = (icon?: string, iconPosition?: "left" | "right", content?: ReactNode): ReactNode => {
     if (icon) {
         if (iconPosition === "right") {
-            return [
-                content,
-                content ? " " : null,
-                createElement("span", { className: icon })
-            ];
+            return [content, content ? " " : null, createElement("span", { className: icon })];
         } else {
-            return [
-                createElement("span", { className: icon }),
-                content ? " " : null,
-                content
-            ];
+            return [createElement("span", { className: icon }), content ? " " : null, content];
         }
     } else {
         return content;
     }
 };
 
-export const ToolbarButton: SFC<ButtonProps> = props =>
-    props.renderMode === "button"
-        ? Button(props)
-        : Link(props);
+export const ToolbarButton: FunctionComponent<ButtonProps> = props =>
+    props.renderMode === "button" ? Button(props) : Link(props);
 
 ToolbarButton.defaultProps = { buttonStyle: "default", renderMode: "button", iconPosition: "left" };
 
-export const Button: SFC<ButtonProps> = ({ title, className, caption, onClick, buttonStyle, active, icon, iconPosition }) =>
-    createElement("button",
+export const Button: FunctionComponent<ButtonProps> = ({
+    title,
+    className,
+    caption,
+    onClick,
+    buttonStyle,
+    active,
+    icon,
+    iconPosition
+}) =>
+    createElement(
+        "button",
         {
             className: classNames("btn", `btn-${buttonStyle}`, className, { active }),
             title,
@@ -52,8 +52,9 @@ export const Button: SFC<ButtonProps> = ({ title, className, caption, onClick, b
         addIcon(icon, iconPosition, caption)
     );
 
-const Link: SFC<ButtonProps> = ({ title, className, caption, onClick, active, icon, iconPosition }) =>
-    createElement("span",
+const Link: FunctionComponent<ButtonProps> = ({ title, className, caption, onClick, active, icon, iconPosition }) =>
+    createElement(
+        "span",
         {
             className: classNames("mx-link", className, { active }),
             tabindex: "0",

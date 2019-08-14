@@ -14,10 +14,10 @@ describe("Calendar", () => {
 
     it("should execute an action when a calendar event is clicked", () => {
         OnClickEventPage.open();
-        OnClickEventPage.calendar.waitForVisible();
-        OnClickEventPage.calendarEvent.waitForVisible();
+        OnClickEventPage.calendar.waitForDisplayed();
+        OnClickEventPage.calendarEvent.waitForDisplayed();
         OnClickEventPage.calendarEvent.click();
-        OnClickEventPage.eventEditPage.waitForVisible();
+        OnClickEventPage.eventEditPage.waitForDisplayed();
         const doesExist = OnClickEventPage.eventEditPage.isExisting();
 
         expect(doesExist).toBeTruthy();
@@ -25,9 +25,9 @@ describe("Calendar", () => {
 
     it("should execute an action when a slot is clicked", () => {
         OnCreateEventPage.open();
-        OnCreateEventPage.calendarSlot.waitForVisible();
+        OnCreateEventPage.calendarSlot.waitForDisplayed();
         OnCreateEventPage.calendarSlot.click();
-        OnCreateEventPage.newEventPage.waitForVisible();
+        OnCreateEventPage.newEventPage.waitForDisplayed();
         const doesExist = OnCreateEventPage.newEventPage.isExisting();
 
         expect(doesExist).toBeTruthy();

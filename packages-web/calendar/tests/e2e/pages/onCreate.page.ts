@@ -1,17 +1,17 @@
 class OnCreateEventPage {
-    public get calendar() {
-        return browser.element(".mx-name-calendar1");
+    get calendar(): WebdriverIO.Element {
+        return $(".mx-name-calendar1");
     }
 
-    public get calendarSlot() {
-        return browser.element(".mx-name-calendar1 .rbc-day-bg");
+    get calendarSlot(): WebdriverIO.Element {
+        return $(".mx-name-calendar1 .rbc-day-bg");
     }
 
-    public get newEventPage() {
-        return browser.element(".mx-window-content");
+    get newEventPage(): WebdriverIO.Element {
+        return $(".mx-window-content");
     }
 
-    public open(): void {
+    open(): void {
         browser.url("/p/onCreate");
     }
 }

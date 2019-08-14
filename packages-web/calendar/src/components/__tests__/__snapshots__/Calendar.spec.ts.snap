@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Calendar renders the structure correctly 1`] = `
+<div
+  className="widget-calendar size-box"
+  style={
+    Object {
+      "height": "100px",
+      "position": "relative",
+      "width": "100px",
+    }
+  }
+>
+  <div
+    className="size-box-inner"
+    style={
+      Object {
+        "bottom": "0",
+        "left": "0",
+        "position": "absolute",
+        "right": "0",
+        "top": "0",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Calendar should render a structure correctly with percentage 1`] = `
+<div
+  className="widget-calendar size-box"
+  style={
+    Object {
+      "height": "auto",
+      "paddingBottom": "100%",
+      "position": "relative",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="size-box-inner"
+    style={
+      Object {
+        "bottom": "0",
+        "left": "0",
+        "position": "absolute",
+        "right": "0",
+        "top": "0",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Calendar should render a structure correctly with percentage of parent 1`] = `
+<div
+  className="widget-calendar size-box"
+  style={
+    Object {
+      "height": "100%",
+      "position": "relative",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="size-box-inner"
+    style={
+      Object {
+        "bottom": "0",
+        "left": "0",
+        "position": "absolute",
+        "right": "0",
+        "top": "0",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Calendar should render a structure correctly with pixels 1`] = `
+<div
+  className="widget-calendar size-box"
+  style={
+    Object {
+      "height": "100px",
+      "position": "relative",
+      "width": "100px",
+    }
+  }
+>
+  <div
+    className="size-box-inner"
+    style={
+      Object {
+        "bottom": "0",
+        "left": "0",
+        "position": "absolute",
+        "right": "0",
+        "top": "0",
+      }
+    }
+  />
+</div>
+`;

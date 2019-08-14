@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toolbar renders the standard toolbar structure correctly 1`] = `
+<div
+  className="calendar-toolbar"
+>
+  <div
+    className="align-left btn-group"
+  />
+  <div
+    className="align-center btn-group"
+  />
+  <div
+    className="align-right btn-group"
+  />
+</div>
+`;

@@ -1,3 +1,4 @@
+/* eslint-disable */
 export namespace Container {
     export interface ToolbarProps {
         messages: ViewOptions;

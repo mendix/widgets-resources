@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToolbarButton renders a button when button is selected 1`] = `
+<button
+  className="btn btn-default"
+  onClick={Any<Function>}
+/>
+`;
+
+exports[`ToolbarButton renders a link when link is selected 1`] = `
+<span
+  className="mx-link"
+  onClick={Any<Function>}
+  tabindex="0"
+>
+  <a
+    tabindex="-1"
+  />
+</span>
+`;
