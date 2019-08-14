@@ -24,9 +24,6 @@
         ]
     },
     "license": "Apache-2.0",
-    "bugs": {
-        "url": "https://github.com/mendixlabs/color-picker/issues"
-    },
     "devDependencies": {
         "@types/classnames": "^2.2.7",
         "@types/react-color": "^2.14.1",
