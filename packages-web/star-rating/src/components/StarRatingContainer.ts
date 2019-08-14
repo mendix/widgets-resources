@@ -1,7 +1,7 @@
-import { Component, createElement } from "react";
+import { Component, ReactNode, createElement } from "react";
 import { Alert } from "./Alert";
 import { StarRating } from "./StarRating";
-import * as classNames from "classnames";
+import classNames from "classnames";
 
 interface WrapperProps {
     class: string;
@@ -28,7 +28,7 @@ interface Nanoflow {
     paramsSpec: { Progress: string };
 }
 // tslint:disable max-length-line
-export type WidgetColors = "widget" | "default" | "primary" | "success" | "info" | "warning" | "danger" | "inverse" ;
+export type WidgetColors = "widget" | "default" | "primary" | "success" | "info" | "warning" | "danger" | "inverse";
 export type StarSize = "small" | "medium" | "large" | "custom";
 
 interface ContainerState {
@@ -43,22 +43,25 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
 
         this.subscriptionHandles = [];
         this.state = {
-            initialRate: this.props.mxObject
-                ? this.props.mxObject.get(this.props.rateAttribute) as number
-                : 0
+            initialRate: this.props.mxObject ? Number(this.props.mxObject.get(this.props.rateAttribute)) : 0
         };
         this.handleOnChange = this.handleOnChange.bind(this);
         this.subscribe(this.props.mxObject);
     }
 
-    render() {
+    render(): ReactNode {
         const alertMessage = StarRatingContainer.validateProps(this.props);
         if (!alertMessage) {
             const { mxObject } = this.props;
-            const readOnly = this.props.editable === "never"
-                || (mxObject && mxObject.isReadonlyAttr(this.props.rateAttribute)) || this.props.readOnly || !mxObject;
+            const readOnly =
+                this.props.editable === "never" ||
+                (mxObject && mxObject.isReadonlyAttr(this.props.rateAttribute)) ||
+                this.props.readOnly ||
+                !mxObject;
 
-            return createElement("div", {
+            return createElement(
+                "div",
+                {
                     className: classNames("widget-star-rating", this.props.class),
                     style: StarRatingContainer.parseStyle(this.props.style)
                 },
@@ -81,16 +84,16 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
         }
     }
 
-    componentWillReceiveProps(nextProps: ContainerProps) {
+    componentWillReceiveProps(nextProps: ContainerProps): void {
         this.subscribe(nextProps.mxObject);
         this.updateRating(nextProps.mxObject);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         this.unSubscribe();
     }
 
-    private handleOnChange(rate: number) {
+    private handleOnChange(rate: number): void {
         const { mxform, mxObject, onChangeMicroflow, onChangeNanoflow, rateAttribute } = this.props;
         if (mxObject) {
             mxObject.set(rateAttribute, Number(rate));
@@ -101,7 +104,7 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
                     origin: mxform,
                     params: {
                         applyto: "selection",
-                        guids: [ mxObject.getGuid() ]
+                        guids: [mxObject.getGuid()]
                     }
                 });
             }
@@ -111,9 +114,10 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
                 context.setContext(mxObject.getEntity(), mxObject.getGuid());
                 window.mx.data.callNanoflow({
                     context,
-                    error: error => window.mx.ui.error(
-                        `An error occurred while executing the on change nanoflow: ${error.message}`
-                    ),
+                    error: error =>
+                        window.mx.ui.error(
+                            `An error occurred while executing the on change nanoflow: ${error.message}`
+                        ),
                     nanoflow: onChangeNanoflow,
                     origin: mxform
                 });
@@ -121,37 +125,40 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
         }
     }
 
-    private subscribe(contextObject?: mendix.lib.MxObject) {
+    private subscribe(contextObject?: mendix.lib.MxObject): void {
         this.unSubscribe();
 
         if (contextObject) {
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                callback: () => this.updateRating(contextObject),
-                guid: contextObject.getGuid()
-            }));
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    callback: () => this.updateRating(contextObject),
+                    guid: contextObject.getGuid()
+                })
+            );
 
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                attr: this.props.rateAttribute,
-                callback: () => this.updateRating(contextObject),
-                guid: contextObject.getGuid()
-            }));
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    attr: this.props.rateAttribute,
+                    callback: () => this.updateRating(contextObject),
+                    guid: contextObject.getGuid()
+                })
+            );
         }
     }
 
-    private unSubscribe() {
+    private unSubscribe(): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
         this.subscriptionHandles = [];
     }
 
-    private updateRating(mxObject: mendix.lib.MxObject) {
+    private updateRating(mxObject: mendix.lib.MxObject): void {
+        // bablablssc
         this.setState({
-            initialRate: mxObject
-                ? mxObject.get(this.props.rateAttribute) as number
-                : 0
+            initialRate: mxObject ? Number(mxObject.get(this.props.rateAttribute)) : 0
         });
     }
 
-    public static validateProps(props: ContainerProps) {
+    static validateProps(props: ContainerProps): string {
         const errorMessage: string[] = [];
         if (props.maximumStars < 1) {
             errorMessage.push("- Number of stars should be greater than Zero (0)");
@@ -162,7 +169,7 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
         return errorMessage.join("\n");
     }
 
-    public static parseStyle(style = ""): { [key: string]: string } {
+    static parseStyle(style = ""): { [key: string]: string } {
         try {
             return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
                 const pair = line.split(":");
@@ -173,7 +180,7 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
                 return styleObject;
             }, {});
         } catch (error) {
-            // tslint:disable-next-line no-console
+            // eslint-disable-next-line no-console
             console.error("Failed to parse style", style, error);
         }
 
