@@ -1,5 +1,5 @@
-import { Component, MouseEventHandler, SFCElement, createElement } from "react";
-import * as classNames from "classnames";
+import { Component, MouseEventHandler, SFCElement, createElement, ReactNode } from "react";
+import classNames from "classnames";
 
 import { Alert } from "./Alert";
 import { CarouselControl, CarouselControlProps } from "./CarouselControl";
@@ -61,7 +61,7 @@ class Carousel extends Component<CarouselProps, CarouselState> {
     private carouselWidth: number;
     private carouselItems: HTMLElement[];
     private onClickAction: (image: Image) => () => void;
-    private swipeStartPosition: number;
+    private swipeStartPosition: number | undefined;
 
     constructor(props: CarouselProps) {
         super(props);
@@ -82,22 +82,29 @@ class Carousel extends Component<CarouselProps, CarouselState> {
         this.addCarouselItem = this.addCarouselItem.bind(this);
         this.handleSwipeLeftEnd = (event: CustomEvent) => this.handleSwipeEnd(event, "left");
         this.handleSwipeRightEnd = (event: CustomEvent) => this.handleSwipeEnd(event, "right");
-        this.onClickAction = (image) => () => {
-            if (props.onClickAction) props.onClickAction(image);
+        this.onClickAction = image => () => {
+            if (props.onClickAction) {
+                props.onClickAction(image);
+            }
         };
     }
 
-    render() {
+    render(): ReactNode {
         const { className, images, style } = this.props;
 
-        return createElement("div", { className: classNames("widget-carousel-wrapper", className), style },
+        return createElement(
+            "div",
+            { className: classNames("widget-carousel-wrapper", className), style },
             createElement(Alert, {
                 bootstrapStyle: "danger",
                 className: "widget-carousel-alert",
                 message: this.state.alertMessage
             }),
-            createElement("div", { className: "widget-carousel" },
-                createElement("div",
+            createElement(
+                "div",
+                { className: "widget-carousel" },
+                createElement(
+                    "div",
                     {
                         className: classNames("widget-carousel-item-wrapper", { animate: this.state.animate }),
                         style: { transform: `translate3d(${this.state.position}%, 0px, 0px)` }
@@ -109,7 +116,7 @@ class Carousel extends Component<CarouselProps, CarouselState> {
         );
     }
 
-    componentWillReceiveProps(newProps: CarouselProps) {
+    componentWillReceiveProps(newProps: CarouselProps): void {
         if (this.carouselItems.length) {
             this.removeEvents();
             this.carouselItems = [];
@@ -118,7 +125,7 @@ class Carousel extends Component<CarouselProps, CarouselState> {
         this.setState({ alertMessage: newProps.alertMessage, showControls: newProps.images.length > 1 });
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         this.removeEvents();
     }
 
@@ -136,7 +143,7 @@ class Carousel extends Component<CarouselProps, CarouselState> {
         });
     }
 
-    private getItemStatus(index: number, activeIndex: number): { position: number, status: ItemStatus } {
+    private getItemStatus(index: number, activeIndex: number): { position: number; status: ItemStatus } {
         const maxPercentage = 100;
         return {
             position: (index - activeIndex) * maxPercentage,
@@ -149,11 +156,16 @@ class Carousel extends Component<CarouselProps, CarouselState> {
     }
 
     private createCarouselControls(): Array<SFCElement<CarouselControlProps>> | null {
-        if (!this.state.showControls) return null;
+        if (!this.state.showControls) {
+            return null;
+        }
 
-        const directions: Direction[] = this.state.activeIndex === this.props.images.length - 1
-            ? [ "left" ]
-            : this.state.activeIndex === 0 ? [ "right" ] : [ "right", "left" ];
+        const directions: Direction[] =
+            this.state.activeIndex === this.props.images.length - 1
+                ? ["left"]
+                : this.state.activeIndex === 0
+                ? ["right"]
+                : ["right", "left"];
 
         return directions.map((direction, index) =>
             createElement(CarouselControl, {
@@ -164,14 +176,14 @@ class Carousel extends Component<CarouselProps, CarouselState> {
         );
     }
 
-    private addCarouselItem(carouselItem: HTMLElement | null) {
-        if (carouselItem && (this.carouselItems.length < this.props.images.length)) {
+    private addCarouselItem(carouselItem: HTMLElement | null): void {
+        if (carouselItem && this.carouselItems.length < this.props.images.length) {
             this.carouselItems.push(carouselItem);
             this.registerEvents(carouselItem);
         }
     }
 
-    private moveInDirection(direction: Direction, swiping = false) {
+    private moveInDirection(direction: Direction, swiping = false): void {
         const { activeIndex } = this.state;
         const newActiveIndex = direction === "right" ? activeIndex + 1 : activeIndex - 1;
 
@@ -179,34 +191,38 @@ class Carousel extends Component<CarouselProps, CarouselState> {
             activeIndex: newActiveIndex,
             alertMessage: "",
             animate: true,
+            // eslint-disable-next-line react/no-access-state-in-setstate
             position: swiping ? this.state.position : 0
         });
     }
 
-    private registerEvents(carouselItem: HTMLElement) {
+    private registerEvents(carouselItem: HTMLElement): void {
         carouselItem.addEventListener("swipeleft", this.handleSwipe);
         carouselItem.addEventListener("swipeleftend", this.handleSwipeLeftEnd);
         carouselItem.addEventListener("swiperight", this.handleSwipe);
         carouselItem.addEventListener("swiperightend", this.handleSwipeRightEnd);
-        carouselItem.addEventListener("touchmove", (event) => event.preventDefault());
+        carouselItem.addEventListener("touchmove", event => event.preventDefault());
     }
 
-    private removeEvents() {
+    private removeEvents(): void {
         this.carouselItems.forEach((carouselItem: HTMLElement) => {
             carouselItem.removeEventListener("swipeleft", this.handleSwipe);
             carouselItem.removeEventListener("swipeleftend", this.handleSwipeLeftEnd);
             carouselItem.removeEventListener("swiperight", this.handleSwipe);
             carouselItem.removeEventListener("swiperightend", this.handleSwipeRightEnd);
-            carouselItem.removeEventListener("touchmove", (event) => event.preventDefault());
+            carouselItem.removeEventListener("touchmove", event => event.preventDefault());
         });
     }
 
-    private handleSwipe(event: CustomEvent) {
+    private handleSwipe(event: CustomEvent): void {
         const { parentElement } = event.target;
         this.carouselWidth = this.carouselWidth || (parentElement ? parentElement.offsetWidth : 0);
         const currentPercentage = this.calculateSwipePercentage(event, this.carouselWidth);
-        if (!this.shouldSwipe(currentPercentage)) { return; }
+        if (!this.shouldSwipe(currentPercentage)) {
+            return;
+        }
         this.setState({
+            // eslint-disable-next-line react/no-access-state-in-setstate
             activeIndex: this.state.activeIndex,
             animate: false,
             position: currentPercentage,
@@ -214,7 +230,7 @@ class Carousel extends Component<CarouselProps, CarouselState> {
         });
     }
 
-    private handleSwipeEnd(event: CustomEvent, direction: Direction) {
+    private handleSwipeEnd(event: CustomEvent, direction: Direction): void {
         const swipeOutThreshold = 20;
         const currentPercentage = this.calculateSwipePercentage(event, this.carouselWidth);
         if (this.shouldSwipe(currentPercentage)) {
@@ -227,6 +243,7 @@ class Carousel extends Component<CarouselProps, CarouselState> {
 
         this.swipeStartPosition = 0;
         this.setState({
+            // eslint-disable-next-line react/no-access-state-in-setstate
             activeIndex: this.state.activeIndex,
             animate: true,
             position: 0,
@@ -236,16 +253,16 @@ class Carousel extends Component<CarouselProps, CarouselState> {
 
     private calculateSwipePercentage(event: CustomEvent, width: number): number {
         const maxPercentage = 100;
-        if (!this.swipeStartPosition) this.swipeStartPosition = event.detail.pageX;
+        if (!this.swipeStartPosition) {
+            this.swipeStartPosition = event.detail.pageX;
+        }
         const swipeOffset = event.detail.pageX - this.swipeStartPosition;
 
-        return maxPercentage / width * swipeOffset;
+        return (maxPercentage / width) * swipeOffset;
     }
 
     private shouldSwipe(percentage: number): boolean {
-        return percentage > 0
-            ? this.state.activeIndex > 0
-            : this.state.activeIndex < this.carouselItems.length - 1;
+        return percentage > 0 ? this.state.activeIndex > 0 : this.state.activeIndex < this.carouselItems.length - 1;
     }
 }
 

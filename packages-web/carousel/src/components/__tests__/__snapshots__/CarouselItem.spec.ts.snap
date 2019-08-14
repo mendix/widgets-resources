@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CarouselItem renders the structure correctly 1`] = `
+<div
+  className="widget-carousel-item active"
+  style={
+    Object {
+      "transform": "translate3d(100%, 0px, 0px)",
+    }
+  }
+>
+  <img
+    alt="Carousel image"
+    className="widget-carousel-image"
+    src="http://lorempixel.com/640/480"
+  />
+</div>
+`;

@@ -1,7 +1,6 @@
 import { ShallowWrapper, shallow } from "enzyme";
 import { createElement } from "react";
 
-import { Alert } from "../Alert";
 import { Carousel, CarouselProps, Image } from "../Carousel";
 import { CarouselControl } from "../CarouselControl";
 import { CarouselItem } from "../CarouselItem";
@@ -16,43 +15,33 @@ describe("Carousel", () => {
     it("renders the structure correctly", () => {
         carousel = shallow(createElement(Carousel));
 
-        expect(carousel).toBeElement(
-            createElement("div", { className: "widget-carousel-wrapper" },
-                createElement(Alert, { bootstrapStyle: "danger", className: "widget-carousel-alert" }),
-                createElement("div", { className: "widget-carousel" },
-                    createElement("div", {
-                        className: "widget-carousel-item-wrapper",
-                        style: { transform: "translate3d(0%, 0px, 0px)" }
-                    })
-                )
-            )
-        );
+        expect(carousel).toMatchSnapshot();
     });
 
     describe("with no images", () => {
-        beforeEach(() => carousel = shallow(createElement(Carousel)));
+        beforeEach(() => (carousel = shallow(createElement(Carousel))));
 
         it("renders no carousel items", () => {
             const carouselItems = carousel.find(CarouselItem);
 
-            expect(carouselItems.length).toBe(0);
+            expect(carouselItems).toHaveLength(0);
         });
 
         it("renders no navigation controls", () => {
-            expect(carousel.find(CarouselControl).length).toBe(0);
+            expect(carousel.find(CarouselControl)).toHaveLength(0);
         });
     });
 
     describe("with one image", () => {
         beforeEach(() => {
-            images = [ { url: image.imageUrl(), openPageAs: "content" } ];
+            images = [{ url: image.imageUrl(), openPageAs: "content" }];
             carousel = shallow(createElement(Carousel, { images }));
         });
 
         it("renders one carousel item", () => {
             const carouselItem = carousel.find(CarouselItem);
 
-            expect(carouselItem.length).toBe(1);
+            expect(carouselItem).toHaveLength(1);
             expect(carouselItem.props().status).toContain("active");
             expect(carouselItem.props().url).toBe(images[0].url);
         });
@@ -60,7 +49,7 @@ describe("Carousel", () => {
         it("renders no navigation controls", () => {
             const carouselControls = carousel.find(CarouselControl);
 
-            expect(carouselControls.length).toBe(0);
+            expect(carouselControls).toHaveLength(0);
         });
     });
 
@@ -78,7 +67,7 @@ describe("Carousel", () => {
         it("renders all carousel items", () => {
             const carouselItems = carouselWrapper.find(CarouselItem);
 
-            expect(carouselItems.length).toBe(3);
+            expect(carouselItems).toHaveLength(3);
 
             expect(carouselItems.at(0).props().status).toContain("active");
             expect(carouselItems.at(0).props().url).toBe(images[0].url);
@@ -97,11 +86,11 @@ describe("Carousel", () => {
         });
 
         it("renders only one active carousel item", () => {
-            const activeItems = carouselWrapper.find(CarouselItem).filterWhere((c) => {
+            const activeItems = carouselWrapper.find(CarouselItem).filterWhere(c => {
                 return c.props().status.indexOf("active") !== -1;
             });
 
-            expect(activeItems.length).toBe(1);
+            expect(activeItems).toHaveLength(1);
         });
 
         it("moves to the next image when the right control is clicked", () => {
@@ -133,27 +122,26 @@ describe("Carousel", () => {
             carousel.setState({ activeIndex: 2 });
             const carouselControls = carousel.find(CarouselControl);
 
-            expect(carouselControls.length).toBe(1);
+            expect(carouselControls).toHaveLength(1);
             expect(carouselControls.at(0).props().direction).toBe("left");
         });
 
         it("but no image to the left renders only the right carousel control", () => {
             const carouselControls = carousel.find(CarouselControl);
 
-            expect(carouselControls.length).toBe(1);
+            expect(carouselControls).toHaveLength(1);
             expect(carouselControls.at(0).props().direction).toBe("right");
         });
     });
 
     describe("on a mobile device", () => {
-        const swipeEventMock = (swipeEvent: "right" | "left" | "rightend" | "leftend", pageX = 100) =>
+        const swipeEventMock = (swipeEvent: "right" | "left" | "rightend" | "leftend", pageX = 100): CustomEvent =>
             new CustomEvent(`swipe${swipeEvent}`, {
-                    detail: {
-                        originPageX: swipeEvent.indexOf("right") > -1 ? 12 : 180,
-                        pageX
-                    }
+                detail: {
+                    originPageX: swipeEvent.indexOf("right") > -1 ? 12 : 180,
+                    pageX
                 }
-            );
+            });
 
         const carouselItemWrapper = document.createElement("div");
         const carouselItem1Mock = document.createElement("div");
@@ -161,7 +149,7 @@ describe("Carousel", () => {
         carouselItemWrapper.appendChild(carouselItem1Mock);
         carouselItemWrapper.appendChild(carouselItem2Mock);
 
-        const addCarouselItems = (carouselInstance: any) => {
+        const addCarouselItems = (carouselInstance: any): any => {
             carouselInstance.addCarouselItem(carouselItem1Mock);
             carouselInstance.addCarouselItem(carouselItem2Mock);
             carouselInstance.carouselWidth = 500;

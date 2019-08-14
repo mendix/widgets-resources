@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, createElement, ReactNode } from "react";
 import { findDOMNode } from "react-dom";
 
 import { Carousel, Image, Nanoflow, PageLocation } from "./Carousel";
@@ -6,7 +6,7 @@ import { Alert } from "./Alert";
 import { UrlHelper } from "../UrlHelper";
 
 interface WrapperProps {
-    "class"?: string;
+    class?: string;
     mxform: mxui.lib.form._FormBase;
     mxObject?: mendix.lib.MxObject;
     style?: string;
@@ -58,7 +58,7 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
         this.getUrl = this.getUrl.bind(this);
     }
 
-    render() {
+    render(): ReactNode {
         if (this.state.showAlert) {
             return createElement(Alert, {
                 bootstrapStyle: "danger",
@@ -67,7 +67,9 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
             });
         }
         if (this.state.isLoading) {
-            return createElement("div", {},
+            return createElement(
+                "div",
+                {},
                 createElement("i", { className: "glyphicon glyphicon-cog glyph-spin" }),
                 createElement("span", {}, " Loading ...")
             );
@@ -82,9 +84,10 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
         });
     }
 
-    componentWillReceiveProps(nextProps: CarouselContainerProps) {
+    componentWillReceiveProps(nextProps: CarouselContainerProps): void {
         if (!this.widgetId) {
             const domNode = findDOMNode(this);
+            // @ts-ignore
             this.widgetId = domNode.getAttribute("widgetId") || undefined;
         }
         this.resetSubscription(nextProps.mxObject);
@@ -92,34 +95,24 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
         this.fetchData(nextProps.mxObject);
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(): void {
         if (this.widgetId) {
             const domNode = findDOMNode(this);
+            // @ts-ignore
             domNode.setAttribute("widgetId", this.widgetId);
         }
     }
 
-    componentWillUnmount() {
-        if (this.subscriptionHandle) window.mx.data.unsubscribe(this.subscriptionHandle);
+    componentWillUnmount(): void {
+        if (this.subscriptionHandle) {
+            window.mx.data.unsubscribe(this.subscriptionHandle);
+        }
     }
 
-    public static validateProps(props: CarouselContainerProps): string {
-        let message = "";
-        if (props.dataSource === "static" && !props.staticImages.length) {
-            message = "For the data source option 'Static', at least one static image should be added";
+    private resetSubscription(mxObject?: mendix.lib.MxObject): void {
+        if (this.subscriptionHandle) {
+            window.mx.data.unsubscribe(this.subscriptionHandle);
         }
-        if (props.dataSource === "XPath" && !props.imagesEntity) {
-            message = "For the data source 'XPath', the images entity is required";
-        }
-        if (props.dataSource === "microflow" && !props.dataSourceMicroflow) {
-            message = "For data source option 'microflow', a data source microflow is required";
-        }
-
-        return message;
-    }
-
-    private resetSubscription(mxObject?: mendix.lib.MxObject) {
-        if (this.subscriptionHandle) window.mx.data.unsubscribe(this.subscriptionHandle);
 
         if (mxObject) {
             this.subscriptionHandle = window.mx.data.subscribe({
@@ -127,12 +120,11 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
                 guid: mxObject.getGuid()
             });
         }
-
     }
 
-    private fetchData(mxObject?: mendix.lib.MxObject) {
+    private fetchData(mxObject?: mendix.lib.MxObject): void {
         if (this.props.dataSource === "static") {
-            const images = this.props.staticImages.map((image) => {
+            const images = this.props.staticImages.map(image => {
                 image.url = UrlHelper.getStaticResourceUrl(image.url);
                 return image;
             });
@@ -144,7 +136,7 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
         }
     }
 
-    private fetchImagesByXPath(mxObject: mendix.lib.MxObject) {
+    private fetchImagesByXPath(mxObject: mendix.lib.MxObject): void {
         const { entityConstraint } = this.props;
         const requiresContext = entityConstraint && entityConstraint.indexOf("[%CurrentObject%]") > -1;
         const contextGuid = mxObject.getGuid();
@@ -153,7 +145,7 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
             return;
         }
 
-        const constraint = entityConstraint ? entityConstraint.replace(/\[%CurrentObject%\]/g, contextGuid) : "";
+        const constraint = entityConstraint ? entityConstraint.replace(/\[%CurrentObject%]/g, contextGuid) : "";
 
         window.mx.data.get({
             callback: mxObjects => this.setImagesFromMxObjects(mxObjects),
@@ -166,7 +158,7 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
         });
     }
 
-    private fetchImagesByMicroflow(microflow: string, mxObject?: mendix.lib.MxObject) {
+    private fetchImagesByMicroflow(microflow: string, mxObject?: mendix.lib.MxObject): void {
         if (microflow) {
             window.mx.ui.action(microflow, {
                 callback: (mxObjects: mendix.lib.MxObject[]) => this.setImagesFromMxObjects(mxObjects),
@@ -178,37 +170,43 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
                     }),
                 params: {
                     applyto: "selection",
-                    guids: mxObject ? [ mxObject.getGuid() ] : []
+                    guids: mxObject ? [mxObject.getGuid()] : []
                 }
             });
         }
     }
 
-    private setImagesFromMxObjects(mxObjects: mendix.lib.MxObject[]) {
+    private setImagesFromMxObjects(mxObjects: mendix.lib.MxObject[]): void {
         mxObjects = mxObjects || [];
-        const imagesPromises = mxObjects.map(mxObject =>
-            new Promise((resolve, reject) => {
-                if (this.props.urlAttribute) {
-                    resolve(this.getImageProps(mxObject, mxObject.get(this.props.urlAttribute) as string));
-                } else {
-                    const docURL = mx.data.getDocumentUrl(mxObject.getGuid(), mxObject.get("changedDate") as number);
-                    mx.data.getImageUrl(docURL,
-                        objectUrl => {
-                            resolve(this.getImageProps(mxObject, objectUrl));
-                        },
-                        error => {
-                            reject(`Error in carousel while retrieving image url: ${error.message}`);
-                        }
-                    );
-                }
-            }));
+        const imagesPromises = mxObjects.map(
+            mxObject =>
+                new Promise((resolve, reject) => {
+                    if (this.props.urlAttribute) {
+                        resolve(this.getImageProps(mxObject, mxObject.get(this.props.urlAttribute) as string));
+                    } else {
+                        const docURL = mx.data.getDocumentUrl(mxObject.getGuid(), mxObject.get(
+                            "changedDate"
+                        ) as number);
+                        mx.data.getImageUrl(
+                            docURL,
+                            objectUrl => {
+                                resolve(this.getImageProps(mxObject, objectUrl));
+                            },
+                            error => {
+                                // eslint-disable-next-line prefer-promise-reject-errors
+                                reject(`Error in carousel while retrieving image url: ${error.message}`);
+                            }
+                        );
+                    }
+                })
+        );
 
         Promise.all(imagesPromises).then((images: Image[]) => {
             this.setState({ images, isLoading: false });
         });
     }
 
-    private getImageProps(mxObject: mendix.lib.MxObject, url: string) {
+    private getImageProps(mxObject: mendix.lib.MxObject, url: string): any {
         const { onClickOptions, onClickForm, onClickMicroflow, onClickNanoflow, openPageAs } = this.props;
 
         return {
@@ -218,33 +216,35 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
             onClickNanoflow: onClickOptions === "callNanoflow" ? onClickNanoflow : undefined,
             openPageAs,
             url
-
         };
     }
 
     private getUrl(url: string): string {
-        mx.data.getImageUrl(url,
+        mx.data.getImageUrl(
+            url,
             objectUrl => {
                 this.xpathUrl = objectUrl;
             },
-            error => this.setState({
-                alertMessage: `Error in imageviewer while retrieving image url: ${error.message}`
-            })
+            error =>
+                this.setState({
+                    alertMessage: `Error in imageviewer while retrieving image url: ${error.message}`
+                })
         );
 
         return this.xpathUrl;
     }
 
-    private executeAction(image: Image) {
+    private executeAction(image: Image): void {
         const context = this.getContext(image);
 
         if (image.onClickMicroflow) {
             window.mx.ui.action(image.onClickMicroflow, {
                 context,
                 origin: this.props.mxform,
-                error: error => window.mx.ui.error(
-                    `An error occurred while executing action ${image.onClickMicroflow} : ${error.message}`
-                )
+                error: error =>
+                    window.mx.ui.error(
+                        `An error occurred while executing action ${image.onClickMicroflow} : ${error.message}`
+                    )
             });
         } else if (image.onClickNanoflow && image.onClickNanoflow.nanoflow) {
             window.mx.data.callNanoflow({
@@ -257,9 +257,8 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
             window.mx.ui.openForm(image.onClickForm, {
                 location: image.openPageAs,
                 context,
-                error: error => window.mx.ui.error(
-                    `An error occurred while opening form ${image.onClickForm} : ${error.message}`
-                )
+                error: error =>
+                    window.mx.ui.error(`An error occurred while opening form ${image.onClickForm} : ${error.message}`)
             });
         }
     }
@@ -275,9 +274,28 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
         return context;
     }
 
-    public static parseStyle(style = "", onError: (error: string) => void): {[key: string]: string} {
+    private onParseStyleError(error: string): void {
+        this.setState({ alertMessage: error });
+    }
+
+    static validateProps(props: CarouselContainerProps): string {
+        let message = "";
+        if (props.dataSource === "static" && !props.staticImages.length) {
+            message = "For the data source option 'Static', at least one static image should be added";
+        }
+        if (props.dataSource === "XPath" && !props.imagesEntity) {
+            message = "For the data source 'XPath', the images entity is required";
+        }
+        if (props.dataSource === "microflow" && !props.dataSourceMicroflow) {
+            message = "For data source option 'microflow', a data source microflow is required";
+        }
+
+        return message;
+    }
+
+    static parseStyle(style = "", onError: (error: string) => void): { [key: string]: string } {
         try {
-            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
                 const pair = line.split(":");
                 if (pair.length === 2) {
                     const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
@@ -290,9 +308,5 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
         }
 
         return {};
-    }
-
-    private onParseStyleError(error: string) {
-        this.setState({ alertMessage: error });
     }
 }
