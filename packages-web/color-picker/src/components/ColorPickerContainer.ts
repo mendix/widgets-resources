@@ -1,5 +1,5 @@
-import { Component, createElement } from "react";
-import { ColorResult } from "react-color";
+import { Component, createElement, ReactNode } from "react";
+import { ColorState } from "react-color";
 import classNames = require("classnames");
 
 import { ColorPicker, Mode, PickerType } from "./ColorPicker";
@@ -32,7 +32,7 @@ export interface ColorPickerContainerProps extends WrapperProps {
     onChangeEvent: onChange;
     onChangeMicroflow: string;
     onChangeNanoflow: Nanoflow;
-    defaultColors: { color: string }[];
+    defaultColors: Array<{ color: string }>;
     labelOrientation: "horizontal" | "vertical";
     showLabel: boolean;
     invalidFromatMessage: string;
@@ -67,23 +67,27 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         rgba: "rgb(255,255,255,1)"
     };
 
-    render() {
+    render(): ReactNode {
         this.disabled = this.isReadOnly();
         if (this.props.showLabel) {
-            return createElement(Label, {
-                className: classNames(this.props.class, "widget-color-picker"),
-                label: this.props.label,
-                orientation: this.props.labelOrientation,
-                style: ColorPickerContainer.parseStyle(this.props.style),
-                weight: this.props.labelWidth,
-                hasError: this.state.hasValidationFeedback
-            }, this.renderColorPicker(true));
+            return createElement(
+                Label,
+                {
+                    className: classNames(this.props.class, "widget-color-picker"),
+                    label: this.props.label,
+                    orientation: this.props.labelOrientation,
+                    style: ColorPickerContainer.parseStyle(this.props.style),
+                    weight: this.props.labelWidth,
+                    hasError: this.state.hasValidationFeedback
+                },
+                this.renderColorPicker(true)
+            );
         }
 
         return this.renderColorPicker();
     }
 
-    componentDidMount() {
+    componentDidMount(): void {
         this.formHandle = this.props.mxform.listen("validate", (callback, error) => {
             const newState = this.validateColor(this.state.color);
             this.setState(newState);
@@ -95,42 +99,45 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         });
     }
 
-    componentWillReceiveProps(newProps: ColorPickerContainerProps) {
+    componentWillReceiveProps(newProps: ColorPickerContainerProps): void {
         this.resetSubscriptions(newProps.mxObject);
         this.setState(this.validateColor(this.getValue(newProps.mxObject)));
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
         if (this.formHandle) {
             this.props.mxform.unlisten(this.formHandle);
         }
     }
 
-    private renderColorPicker(hasLabel = false) {
+    private renderColorPicker(hasLabel = false): ReactNode {
         const alertMessage = this.state.alertMessage || ColorPickerContainer.validateProps(this.props);
-        const className = !hasLabel ? classNames("widget-color-picker", this.props.class, { "has-error" : this.state.hasValidationFeedback }) : undefined;
-        return createElement(ColorPicker, {
-            alertMessage,
-            className,
-            color: this.state.color || this.defaultColor[this.props.format],
-            defaultColors: this.props.defaultColors,
-            disabled: this.disabled,
-            disableAlpha: this.props.format !== "rgba",
-            displayColorPicker: this.state.displayColorPicker,
-            type: this.props.type,
-            mode: this.props.mode,
-            close: this.handleClose,
-            style: !hasLabel ? ColorPickerContainer.parseStyle(this.props.style) : undefined,
-            onChange: this.updateColorValue,
-            onChangeComplete: this.handleOnChange
-        }, this.props.mode === "input"
-                ? this.renderInput()
-                : this.renderButton()
+        const className = !hasLabel
+            ? classNames("widget-color-picker", this.props.class, { "has-error": this.state.hasValidationFeedback })
+            : undefined;
+        return createElement(
+            ColorPicker,
+            {
+                alertMessage,
+                className,
+                color: this.state.color || this.defaultColor[this.props.format],
+                defaultColors: this.props.defaultColors,
+                disabled: this.disabled,
+                disableAlpha: this.props.format !== "rgba",
+                displayColorPicker: this.state.displayColorPicker,
+                type: this.props.type,
+                mode: this.props.mode,
+                close: this.handleClose,
+                style: !hasLabel ? ColorPickerContainer.parseStyle(this.props.style) : undefined,
+                onChange: this.updateColorValue,
+                onChangeComplete: this.handleOnChange
+            },
+            this.props.mode === "input" ? this.renderInput() : this.renderButton()
         );
     }
 
-    private renderButton() {
+    private renderButton(): ReactNode {
         return createElement(Button, {
             className: this.props.mode === "input" ? "widget-color-picker-input-inner" : "widget-color-picker-inner",
             disabled: this.disabled,
@@ -141,38 +148,46 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         });
     }
 
-    private renderInput() {
-        return createElement(Input, {
-            disabled: this.disabled,
-            color: this.state.color,
-            onChange: this.handleInputChange,
-            onKeyUp: this.handleKeyUpEvent
-        }, this.renderButton());
+    private renderInput(): ReactNode {
+        return createElement(
+            Input,
+            {
+                disabled: this.disabled,
+                color: this.state.color,
+                onChange: this.handleInputChange,
+                onKeyUp: this.handleKeyUpEvent
+            },
+            this.renderButton()
+        );
     }
 
     private isReadOnly(): boolean {
         const { editable, mxObject, readOnly, colorAttribute } = this.props;
 
-        return editable !== "default" || (!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute)));
+        return (
+            editable !== "default" ||
+            (!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute)))
+        );
     }
 
-    private handleClick = () => {
+    private handleClick = (): void => {
         if (!this.disabled && this.props.mode !== "inline") {
+            // eslint-disable-next-line react/no-access-state-in-setstate
             this.setState({ displayColorPicker: !this.state.displayColorPicker });
         }
-    }
+    };
 
-    private handleClose = () => {
+    private handleClose = (): void => {
         this.setState({ displayColorPicker: false });
-    }
+    };
 
     private handleKeyUpEvent = (event: KeyboardEvent) => {
         if (event.keyCode === 40) {
             this.handleClick();
         }
-    }
+    };
 
-    private updateColorValue = (color: ColorResult) => {
+    private updateColorValue = (color: ColorState): void => {
         const { format, mxObject, colorAttribute } = this.props;
         this.previousColor = this.getValue(this.props.mxObject);
         if (color && mxObject && !this.disabled) {
@@ -184,47 +199,55 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
                 mxObject.set(colorAttribute, `rgba(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})`);
             }
         }
-    }
+    };
 
     private getValue = (mxObject?: mendix.lib.MxObject): string => {
-        return mxObject ? mxObject.get(this.props.colorAttribute) as string : "";
-    }
+        return mxObject ? (mxObject.get(this.props.colorAttribute) as string) : "";
+    };
 
-    private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
+    private resetSubscriptions(mxObject?: mendix.lib.MxObject): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
         this.subscriptionHandles = [];
 
         if (mxObject) {
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                attr: this.props.colorAttribute,
-                callback: this.handleSubscriptions,
-                guid: mxObject.getGuid()
-            }));
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                callback: this.handleSubscriptions,
-                guid: mxObject.getGuid()
-            }));
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                val: true,
-                callback: this.handleValidations,
-                guid: mxObject.getGuid()
-            }));
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    attr: this.props.colorAttribute,
+                    callback: this.handleSubscriptions,
+                    guid: mxObject.getGuid()
+                })
+            );
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    callback: this.handleSubscriptions,
+                    guid: mxObject.getGuid()
+                })
+            );
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    val: true,
+                    callback: this.handleValidations,
+                    guid: mxObject.getGuid()
+                })
+            );
         }
     }
 
-    private handleSubscriptions = () => {
+    private handleSubscriptions = (): void => {
         this.setState(this.validateColor(this.getValue(this.props.mxObject)));
-    }
+    };
 
-    private handleValidations = (validations: mendix.lib.ObjectValidation[]) => {
-        if (this.isReadOnly()) return;
+    private handleValidations = (validations: mendix.lib.ObjectValidation[]): void => {
+        if (this.isReadOnly()) {
+            return;
+        }
 
         const validation = validations.length ? validations[0].getErrorReason(this.props.colorAttribute) : undefined;
         if (validation !== undefined) {
             this.setState({ alertMessage: validation, hasValidationFeedback: true });
             validations[0].removeAttribute(this.props.colorAttribute);
         }
-    }
+    };
 
     private validateColor = (color: string): ColorPickerContainerState => {
         const validFormat = ColorPickerContainer.validateColorFormat(color, this.props.format);
@@ -235,9 +258,9 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             color,
             displayColorPicker: this.state.displayColorPicker
         };
-    }
+    };
 
-    private handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    private handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const newColor = event.target.value as string;
         if (newColor) {
             this.colorChanged = this.getValue(this.props.mxObject) !== newColor;
@@ -252,26 +275,27 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
                 hasValidationFeedback: false
             });
         }
-    }
+    };
 
-    private updateColorAttribute = (color: string, mxObject?: mendix.lib.MxObject) => {
+    private updateColorAttribute = (color: string, mxObject?: mendix.lib.MxObject): void => {
         if (mxObject) {
             mxObject.set(this.props.colorAttribute, color);
             this.handleOnChange();
         }
-    }
+    };
 
-    private handleOnChange = () => {
+    private handleOnChange = (): void => {
         const { mxform, mxObject, onChangeEvent, onChangeMicroflow, onChangeNanoflow } = this.props;
-        if (mxObject && ((this.previousColor !== this.state.color) || this.colorChanged)) {
+        if (mxObject && (this.previousColor !== this.state.color || this.colorChanged)) {
             const context = new mendix.lib.MxContext();
             context.setContext(mxObject.getEntity(), mxObject.getGuid());
             if (onChangeEvent === "callMicroflow" && onChangeMicroflow) {
                 window.mx.ui.action(onChangeMicroflow, {
-                    error: error => window.mx.ui.error(`Error while executing microflow ${onChangeMicroflow}: ${error.message}`), // tslint:disable-line max-line-length
+                    error: error =>
+                        window.mx.ui.error(`Error while executing microflow ${onChangeMicroflow}: ${error.message}`), // tslint:disable-line max-line-length
                     params: {
                         applyto: "selection",
-                        guids: [ mxObject.getGuid() ]
+                        guids: [mxObject.getGuid()]
                     },
                     origin: mxform
                 });
@@ -284,9 +308,9 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
                 });
             }
         }
-    }
+    };
 
-    public static validateColorFormat = (color: string, colorFormat: Format): string => {
+    static validateColorFormat = (color: string, colorFormat: Format): string => {
         const hexRegExp = /^#?([a-f\d]{3}|[a-f\d]{6})$/;
         const rgbRegExp = /^rgb\((0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d)\)$/;
         const rgbaRegExp = /^rgba\((0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0?\.\d*|0|1(\.0)?)\)$/;
@@ -300,14 +324,22 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         }
 
         return format;
-    }
+    };
 
-    public static validateProps(props: ColorPickerContainerProps): string {
+    static validateProps(props: ColorPickerContainerProps): string {
         const message: string[] = [];
-        const supportDefaultColors = props.type === "block" || props.type === "sketch" || props.type === "circle" || props.type === "compact" || props.type === "twitter";
+        const supportDefaultColors =
+            props.type === "block" ||
+            props.type === "sketch" ||
+            props.type === "circle" ||
+            props.type === "compact" ||
+            props.type === "twitter";
         if (props.onChangeEvent === "callMicroflow" && !props.onChangeMicroflow) {
             message.push("On change event is set to 'Call a microflow' but no microflow is selected");
-        } else if (props.onChangeEvent === "callNanoflow" && (JSON.stringify(props.onChangeNanoflow) === JSON.stringify({}))) {
+        } else if (
+            props.onChangeEvent === "callNanoflow" &&
+            JSON.stringify(props.onChangeNanoflow) === JSON.stringify({})
+        ) {
             message.push("On change event is set to 'Call a nanoflow' but no nanoflow is selected");
         }
         if (props.label.trim() && props.showLabel && (props.labelWidth > 11 || props.labelWidth < 1)) {
@@ -330,9 +362,9 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         return message.join(", ");
     }
 
-    public static parseStyle(style = ""): {[key: string]: string} {
+    static parseStyle(style = ""): { [key: string]: string } {
         try {
-            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
                 const pair = line.split(":");
                 if (pair.length === 2) {
                     const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
@@ -347,8 +379,8 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         return {};
     }
 
-    public static logError(message: string, style?: string, error?: any) {
-        // tslint:disable-next-line:no-console
+    static logError(message: string, style?: string, error?: any): void {
+        // eslint-disable-next-line no-unused-expressions,no-console
         window.logger ? window.logger.error(message) : console.log(message, style, error);
     }
 }

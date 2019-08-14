@@ -1,9 +1,10 @@
 .widget-color-picker-picker {
-    [class*='-picker'] {
+    [class*="-picker"] {
         font-family: inherit !important;
     }
 
-    .sketch-picker, .compact-picker {
+    .sketch-picker,
+    .compact-picker {
         input {
             width: 100% !important;
         }
@@ -24,7 +25,7 @@
 
     .widget-color-picker-overlay {
         z-index: 50;
-        background: rgba(255,255,255,0.5);
+        background: rgba(255, 255, 255, 0.5);
         position: absolute;
         top: 0;
         left: 0;
@@ -94,7 +95,7 @@
 .widget-color-picker-input-container {
     display: flex;
 
-    .form-group{
+    .form-group {
         margin-right: 0px;
         margin-left: 0px;
     }

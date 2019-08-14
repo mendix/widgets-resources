@@ -7,8 +7,10 @@ export interface InputProps {
     onKeyUp?: (event: KeyboardEvent) => void;
 }
 
-export const Input: SFC<InputProps> = (props) =>
-    createElement("div", { className: "widget-color-picker-input-container" },
+export const Input: SFC<InputProps> = props =>
+    createElement(
+        "div",
+        { className: "widget-color-picker-input-container" },
         createElement("input", {
             className: "form-control",
             type: "text",
