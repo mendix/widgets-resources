@@ -4,7 +4,7 @@
     "scripts": {
         "postinstall": "lerna bootstrap",
         "prettier": "prettier --config \"./prettier.config.js\" --write \"./**/{src,test}/**/*.{js,jsx,ts,tsx}\"",
-        "format": "pretty-quick",
+        "format": "pretty-quick --staged",
         "lint": "npm run lint:scripts && lerna run lint",
         "lint:scripts": "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx packages-web/**/src packages-native/**/src",
         "test": "lerna run test --ignore @widgets-resources/utils-react-widgets",

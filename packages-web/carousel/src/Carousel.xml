@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.custom.carousel.Carousel" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
+    <name>Carousel</name>
+    <description>Carousel displaying images</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAABVlBMVEUAAAD///+AgIBVVVWAgIBmZmZVVVVtbW1gYGBVVVVmZmZdXV1iYmJVVVVgYGBaWlpVVVVeXl5ZWVlZWVlcXFxKtf9ZWVlVVVVZWVlVVVVYWFhVVVVYWFhWVlZVVVVXV1dIs/hLsfhWVlZXV1dJsvhKsvhVVVVXV1dWVlZVVVVXV1dVVVVWVlZWVlZWVlZWVlZWVlZWVlZWVlZVVVVWVlZWVlZVVVVWVlZVVVVWVlZVVVVVVVVWVlZWVlZVVVVWVlZVVVVVVVVWVlZWVlZVVVVVVVVVVVVWVlZIsfhVVVVWVlZVVVVVVVVVVVVWVlZVVVVWVlZVVVVJsPhWVlZVVVVVVVVWVlZVVVVVVVVIsPdWVlZVVVVVVVVWVlZVVVVVVVVWVlZVVVVVVVVVVVVVVVVWVlZJsfhVVVVVVVVVVVVWVlZVVVVWVlZVVVVWVlZVVVVIsPdVVVW+E21XAAAAcHRSTlMAAQIDBAUGBwgJCgsNDxAREhMUFxkfKCorMDc5PURFSUpLUFVmZ2lqa29wcnN0dnd5en1+gIKEhYeIkJOUlZaanKWmqq6xt7i7wsTP0dLT1NbY2dna29zd4OLi4+fo6err7O3v8PHy8vP29/n6+/3+RiQ0SgAAAcpJREFUeNrtlmdTAjEQhteuqNg7ChYsZ8Hee8Xey9kV7C35/1/cHKwjwcSTGRg/3DNDstwu790mu+TAwcHhf+I9479w5gUd9HudAujgNki+gM6fUoHSiY2nozFXwgKeKy7YqUxQoOycR9jITEQgs3WTEx02BRpN0/cVMM8FI+5ZHFfiBXym2QgSFfeMmRRgcMGtC8pwuogXMBm7r5AEguybwI4l0AsaARaEGPwMaaGAJxyb6gBcihRaGOKXE0BNCtjGUbuIQRabBF2ggDEx6baRbkjQI1FA/q6YNYVEKRN7pEcBBZNHwnpTlrL1zHsqARn3+OnzlpGhFpBTkCg95oKlNGUK8iJKLPEIbfIiKrcxFi+Pcp4nbaOykJCceqO9IUtY2ft4aa36EcdO8lvRfk0pQ/OJMG76cwF60HivgVGcLl1SKSubqY9HOagqF7eeBih5wLlbaiZVOxv8i4dV0ZbF6B9G4ypf2c4ER2pfcXiZWQyTSisgxXdoBWz9Ix3i564WoGiBW6xnWK4hNK/tHiwfXhAErC+eaD2G/3AyTYGF1ZZz5Bu0LxAqgQjp46FlN/kKQ7YFun52DqTkcLVB0l4w7L/iODg4/Es+AYl3llPW4yqLAAAAAElFTkSuQmCC</icon>
+    <properties>
+        <property key="dataSource" type="enumeration" defaultValue="static">
+            <caption>Data source</caption>
+            <category>Data source</category>
+            <description>Where the images should be retrieved from</description>
+            <enumerationValues>
+                <enumerationValue key="static">Static</enumerationValue>
+                <enumerationValue key="XPath">Database</enumerationValue>
+                <enumerationValue key="microflow">Microflow</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="staticImages" type="object" isList="true" required="false">
+            <caption>Static images</caption>
+            <category>Data source</category>
+            <description/>
+            <properties>
+                <property key="url" type="image">
+                    <caption>Image</caption>
+                    <category>Image</category>
+                    <description>Image to add to the carousel</description>
+                </property>
+                <property key="onClickMicroflow" type="microflow" required="false">
+                    <caption>Microflow</caption>
+                    <category>On click action</category>
+                    <description>Microflow to call when the image is clicked</description>
+                    <returnType type="Void" />
+                </property>
+                <property key="onClickNanoflow" type="nanoflow" required="false">
+                    <caption>Nanoflow</caption>
+                    <category>On click action</category>
+                    <description>Nanoflow to call when the image is clicked</description>
+                    <returnType type="Void" />
+                </property>
+                <property key="onClickForm" type="form" required="false">
+                    <caption>Page</caption>
+                    <category>On click action</category>
+                    <description>Page to open when the image is clicked</description>
+                </property>
+                <property key="openPageAs" type="enumeration" defaultValue="content">
+                    <caption>Open page as</caption>
+                    <category>On click action</category>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="content">Full page</enumerationValue>
+                        <enumerationValue key="popup">Popup</enumerationValue>
+                        <enumerationValue key="modal">Blocking popup</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </properties>
+        </property>
+        <property key="imagesEntity" type="entity" required="false">
+            <caption>Images entity</caption>
+            <category>Data source</category>
+            <description>The entity from which the images will be retrieved. Should extend System.Image or provide a url attribute.</description>
+        </property>
+        <property key="entityConstraint" type="entityConstraint" entityProperty="imagesEntity" required="false">
+            <caption>XPath</caption>
+            <category>Data source</category>
+            <description>Constraint on the images entity</description>
+        </property>
+        <property key="dataSourceMicroflow" type="microflow" required="false">
+            <caption>Microflow</caption>
+            <category>Data source</category>
+            <description>Returns the images to display</description>
+            <returnType type="Object" entityProperty="imagesEntity" isList="true"/>
+        </property>
+        <property key="urlAttribute" type="attribute" required="false" entityProperty="imagesEntity">
+            <caption>URL attribute</caption>
+            <category>Data source</category>
+            <description>The attribute holding the image urls. Overwrites url generation from System.Image</description>
+            <attributeTypes>
+                <attributeType name="String"/>
+            </attributeTypes>
+        </property>
+        <property key="onClickOptions" type="enumeration" defaultValue="doNothing">
+            <caption>On click</caption>
+            <category>Behavior</category>
+            <description>The action to take when an image is clicked (Does not apply to static images)</description>
+            <enumerationValues>
+                <enumerationValue key="doNothing">Do nothing</enumerationValue>
+                <enumerationValue key="callMicroflow">Call microflow</enumerationValue>
+                <enumerationValue key="callNanoflow">Call nanoflow</enumerationValue>
+                <enumerationValue key="showPage">Show page</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="onClickMicroflow" type="microflow" required="false" entityProperty="imagesEntity">
+            <caption>On click microflow</caption>
+            <category>Behavior</category>
+            <description>The microflow to call when an image is clicked</description>
+            <returnType type="Void"/>
+        </property>
+        <property key="onClickNanoflow" type="nanoflow" required="false">
+            <caption>On click nanoflow</caption>
+            <category>Behavior</category>
+            <description>The nanoflow to call when an image is clicked</description>
+            <returnType type="Void"/>
+        </property>
+        <property key="onClickForm" type="form" required="false">
+            <caption>On click page</caption>
+            <category>Behavior</category>
+            <description>The page to open when an image is clicked</description>
+        </property>
+        <property key="openPageAs" type="enumeration" defaultValue="content">
+            <caption>Open page as</caption>
+            <category>Behavior</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="content">Full page</enumerationValue>
+                <enumerationValue key="popup">Popup</enumerationValue>
+                <enumerationValue key="modal">Blocking popup</enumerationValue>
+            </enumerationValues>
+        </property>
+    </properties>
+</widget>

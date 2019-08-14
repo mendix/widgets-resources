@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.custom.colorpicker.ColorPicker" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/">
+    <name>Color picker</name>
+    <description>Pick a color from color input</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAA5FBMVEUAAACAgIBVVVVgYGBVVVVmZmZdXV1iYmJVVVVeXl5ZWVlVVVVVVVVYWFhJtv9bW1tXV1dMs/pVVVVYWFhJs/hXV1dLtPhWVlZJsvhXV1dWVlZXV1dXV1dVVVVXV1dWVlZWVlZWVlZWVlZVVVVVVVVWVlZIsfdJsfdJsPdJsPhWVlZWVlZVVVVVVVVWVlZVVVVVVVVWVlZWVlZVVVVVVVVVVVVVVVVJsPdVVVVVVVVWVlZJsPdVVVVWVlZIsPdJsfdVVVVIsPdWVlZVVVVJsfhVVVVWVlZVVVVWVlZVVVVIsPdVVVWIl4c0AAAASnRSTlMAAgMICQoLDRITFBUYGhwcLzY2Q0ZGR0dJSUpPVWNkgoOFkpmcoaanqKyytba5vsXGx9bY293e4ODh4uPj5ebo6u3u7/Lz9Pb9/n9E/agAAAExSURBVHgB7dPZTsJAFMbxT0CpWivgIgiKslRxQUQEpbWAssic938fD4wx3KDOaWJC7O/q3Hz/pGkGke+lSs3RqFlKQSZemdLctBKHQKJBXxoJmKvSgiqMZYi1C7ZdaBPLwFSZV60kWLLFZxmmZqu8PvOzFkxNeGXp0+JzAlPEFu+/DUSBnE9L+Dn8hk9L+eED4T9h5X5j1vOyoQKeUl6ogGL/OxAFokCfR7Z+TDaffZiq8+pUP+cTPuswVeRVdxPMeuazCFNbY57d7wI7d3yMt2HsjNjbwd4rsXOYi10Re3wgdh2DwPoNfbrdgMw7aWtY2cCT3r9A6qhLzD+G3GGns48QnKFSQwdyNcVqEEuruTSkLnXgAlI9HehBKtCBAFKuDriQcgaKDRyIOW4QuD/tIx9N6qiDmf0nQgAAAABJRU5ErkJggg==</icon>
+    <properties>
+        <property key="colorAttribute" type="attribute">
+            <caption>Color attribute</caption>
+            <category>Data source</category>
+            <description>Attribute containing a valid color like #d0d0d0, rgb(115,159,159) or rgba(195,226,226,1). Non-code color values such as 'red' are not supported</description>
+            <attributeTypes>
+                <attributeType name="String"/>
+            </attributeTypes>
+        </property>
+        <property key="format" type="enumeration" defaultValue="hex">
+            <caption>Color format</caption>
+            <category>Data source</category>
+            <description>The output formatting of the selected color</description>
+            <enumerationValues>
+                <enumerationValue key="hex">HEX</enumerationValue>
+                <enumerationValue key="rgb">RGB</enumerationValue>
+                <enumerationValue key="rgba">RBGA</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="editable" type="enumeration" defaultValue="default">
+            <caption>Editable</caption>
+            <category>Data source</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="default">Default</enumerationValue>
+                <enumerationValue key="never">Never</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="mode" type="enumeration" defaultValue="input">
+            <caption>Mode</caption>
+            <category>Appearance</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="input">Input box</enumerationValue>
+                <enumerationValue key="popover">Button</enumerationValue>
+                <enumerationValue key="inline">Inline</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="type" type="enumeration" defaultValue="sketch">
+            <caption>Picker type</caption>
+            <category>Appearance</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="sketch">Sketch</enumerationValue>
+                <enumerationValue key="chrome">Chrome</enumerationValue>
+                <enumerationValue key="block">Block</enumerationValue>
+                <enumerationValue key="github">Github</enumerationValue>
+                <enumerationValue key="twitter">Twitter</enumerationValue>
+                <enumerationValue key="circle">Circle</enumerationValue>
+                <enumerationValue key="hue">Hue</enumerationValue>
+                <enumerationValue key="slider">Slider</enumerationValue>
+                <enumerationValue key="compact">Compact</enumerationValue>
+                <enumerationValue key="material">Material</enumerationValue>
+                <enumerationValue key="swatches">Swatches</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="defaultColors" type="object" isList="true" required="false">
+            <caption>Default colors</caption>
+            <category>Appearance</category>
+            <description>The list of predefined colors. This can only be used with picker type: 'Block', 'Sketch', 'Circle', 'Compact' or 'Twitter'</description>
+            <properties>
+                <property key="color" type="string">
+                    <caption>Color</caption>
+                    <category>Data source</category>
+                    <description>Valid color value: #d0d0d0, rgb(115,159,159) or rgba(195,226,226,1)</description>
+                </property>
+            </properties>
+        </property>
+        <property key="label" type="translatableString" required="false">
+            <caption>Label</caption>
+            <category>Label</category>
+            <description/>
+            <translations>
+                <translation lang="en_US">Color</translation>
+                <translation lang="nl_NL">Kleur</translation>
+            </translations>
+        </property>
+        <property key="labelWidth" type="integer" defaultValue="3">
+            <caption>Label width</caption>
+            <category>Label</category>
+            <description>The weight of the label, which must be a value between 0 and 12</description>
+        </property>
+        <property key="labelOrientation" type="enumeration" defaultValue="horizontal">
+            <caption>Label orientation</caption>
+            <category>Label</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                <enumerationValue key="vertical">Vertical</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="showLabel" type="boolean" defaultValue="true">
+            <caption>Show label</caption>
+            <category>Label</category>
+            <description/>
+        </property>
+        <property key="onChangeEvent" type="enumeration" defaultValue="doNothing">
+            <caption>On change</caption>
+            <category>Events</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="doNothing">Do nothing</enumerationValue>
+                <enumerationValue key="callMicroflow">Call a microflow</enumerationValue>
+                <enumerationValue key="callNanoflow">Call a nanoflow</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="onChangeMicroflow" type="microflow" required="false">
+            <caption>Microflow</caption>
+            <category>Events</category>
+            <description>The microflow that will be executed on color change</description>
+            <returnType type="Void"/>
+        </property>
+        <property key="onChangeNanoflow" type="nanoflow" required="false">
+            <caption>Nanoflow</caption>
+            <category>Events</category>
+            <description>The nanoflow that will be executed on color change</description>
+            <returnType type="Void"/>
+        </property>
+        <property key="invalidFromatMessage" type="translatableString" required="false">
+            <caption>Invalid format message</caption>
+            <category>Validation</category>
+            <description>Message shown when the user provides a wrong input, {1} will be replaced by a sample format</description>
+            <translations>
+                <translation lang="en_US">Invalid format, color value should be of format like {1}</translation>
+                <translation lang="nl_NL">De opgeven kleur code is incorrect, voorbeeld {1}</translation>
+            </translations>
+        </property>
+    </properties>
+</widget>

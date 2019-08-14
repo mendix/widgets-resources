@@ -1,15 +1,15 @@
 {
-    "name": "badge-web",
-    "widgetName": "Badge",
-    "version": "1.4.0",
-    "description": "Shows a value as a badge or a color label",
+    "name": "color-picker-web",
+    "widgetName": "ColorPicker",
+    "version": "1.1.0",
+    "description": "Change a color using a color input",
     "copyright": "Mendix BV",
     "scripts": {
         "start": "utils-react-widgets start",
         "dev": "utils-react-widgets dev",
         "test": "npm run test:unit",
         "test:unit": "jest --config ../../scripts/test/jest.web.config.js",
-        "test:e2e": "export URL=https://badge.mxapps.io/ && utils-react-widgets test:e2e",
+        "test:e2e": "export URL=https://colorpicker.mxapps.io/ && utils-react-widgets test:e2e",
         "test:e2e:dev": "export DEBUG=true && utils-react-widgets test:e2e",
         "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "lint:fix": "npm run lint -- --fix",
@@ -25,10 +25,12 @@
     },
     "license": "Apache-2.0",
     "devDependencies": {
-        "@types/classnames": "^2.2.3",
+        "@types/classnames": "^2.2.7",
+        "@types/react-color": "^2.14.1",
         "@widgets-resources/utils-react-widgets": "0.0.1"
     },
     "dependencies": {
-        "classnames": "^2.2.5"
+        "classnames": "^2.2.6",
+        "react-color": "^2.17.0"
     }
 }

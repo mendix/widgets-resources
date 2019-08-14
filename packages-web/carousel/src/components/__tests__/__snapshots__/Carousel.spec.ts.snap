@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Carousel renders the structure correctly 1`] = `
+<div
+  className="widget-carousel-wrapper"
+>
+  <Alert
+    bootstrapStyle="danger"
+    className="widget-carousel-alert"
+  />
+  <div
+    className="widget-carousel"
+  >
+    <div
+      className="widget-carousel-item-wrapper"
+      style={
+        Object {
+          "transform": "translate3d(0%, 0px, 0px)",
+        }
+      }
+    />
+  </div>
+</div>
+`;
