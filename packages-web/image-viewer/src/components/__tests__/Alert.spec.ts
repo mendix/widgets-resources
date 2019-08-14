@@ -11,15 +11,13 @@ describe("Alert", () => {
         const message = "This is an error";
         const alert = shallow(createElement(Alert, { bootstrapStyle: "danger", message }));
 
-        expect(alert).toBeElement(
-            createElement("div", { className: "alert alert-danger" }, message)
-        );
+        expect(alert.getElement()).toEqual(createElement("div", { className: "alert alert-danger" }, message));
     });
 
     it("renders no structure when the alert message is not specified", () => {
         const alert = shallow(createElement(Alert, { bootstrapStyle: "danger" }));
 
-        expect(alert).toBeElement(null);
+        expect(alert.getElement()).toEqual(null);
     });
 
     it("contains additional class name", () => {
@@ -27,7 +25,7 @@ describe("Alert", () => {
         const className = "widget-imageviewer";
         const alert = shallow(createElement(Alert, { bootstrapStyle: "danger", message, className }));
 
-        expect(alert).toBeElement(
+        expect(alert.getElement()).toEqual(
             createElement("div", { className: "alert alert-danger widget-imageviewer" }, message)
         );
     });
@@ -37,45 +35,35 @@ describe("Alert", () => {
             const message = "This is an alert";
             const alert = shallow(createElement(Alert, { bootstrapStyle: "success", message }));
 
-            expect(alert).toBeElement(
-                createElement("div", { className: "alert alert-success" }, message)
-            );
+            expect(alert.getElement()).toEqual(createElement("div", { className: "alert alert-success" }, message));
         });
 
         it("alert", () => {
             const message = "This is an alert";
             const alert = shallow(createElement(Alert, { bootstrapStyle: "danger", message }));
 
-            expect(alert).toBeElement(
-                createElement("div", { className: "alert alert-danger" }, message)
-            );
+            expect(alert.getElement()).toEqual(createElement("div", { className: "alert alert-danger" }, message));
         });
 
         it("info", () => {
             const message = "This is an alert";
             const alert = shallow(createElement(Alert, { bootstrapStyle: "info", message }));
 
-            expect(alert).toBeElement(
-                createElement("div", { className: "alert alert-info" }, message)
-            );
+            expect(alert.getElement()).toEqual(createElement("div", { className: "alert alert-info" }, message));
         });
 
         it("warning", () => {
             const message = "This is an alert";
             const alert = shallow(createElement(Alert, { bootstrapStyle: "warning", message }));
 
-            expect(alert).toBeElement(
-                createElement("div", { className: "alert alert-warning" }, message)
-            );
+            expect(alert.getElement()).toEqual(createElement("div", { className: "alert alert-warning" }, message));
         });
 
         it("inverse", () => {
             const message = "This is an alert";
             const alert = shallow(createElement(Alert, { bootstrapStyle: "inverse", message }));
 
-            expect(alert).toBeElement(
-                createElement("div", { className: "alert alert-inverse" }, message)
-            );
+            expect(alert.getElement()).toEqual(createElement("div", { className: "alert alert-inverse" }, message));
         });
     });
 });

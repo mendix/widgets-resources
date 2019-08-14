@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, createElement, ReactNode } from "react";
 
 import { Alert } from "./Alert";
 import { ImageViewer } from "./ImageViewer";
@@ -62,7 +62,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         this.setImageUrl = this.setImageUrl.bind(this);
     }
 
-    render() {
+    render(): ReactNode {
         const { height, heightUnit, width, widthUnit, onClickOption, responsive } = this.props;
         const { imageUrl } = this.state;
         if (this.state.alertMessage) {
@@ -83,7 +83,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         });
     }
 
-    componentWillReceiveProps(newProps: ImageViewerContainerProps) {
+    componentWillReceiveProps(newProps: ImageViewerContainerProps): void {
         this.resetSubscriptions(newProps.mxObject);
         this.setState({
             alertMessage: ImageViewerContainer.validateProps(newProps)
@@ -91,13 +91,99 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         this.setImageUrl(newProps.mxObject);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
     }
 
-    public static parseStyle(style = ""): {[key: string]: string} {
+    private resetSubscriptions(mxObject?: mendix.lib.MxObject): void {
+        this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
+        this.subscriptionHandles = [];
+
+        if (mxObject) {
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    attr: this.props.dynamicUrlAttribute,
+                    callback: this.attributeCallback(mxObject),
+                    guid: mxObject.getGuid()
+                })
+            );
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    callback: this.attributeCallback(mxObject),
+                    guid: mxObject.getGuid()
+                })
+            );
+        }
+    }
+
+    private setImageUrl(mxObject?: mendix.lib.MxObject): void {
+        if (mxObject && this.props.source === "urlAttribute") {
+            mxObject.fetch(this.props.dynamicUrlAttribute, (imageUrl: string) => {
+                this.setState({ imageUrl });
+            });
+        } else if (mxObject && this.props.source === "systemImage") {
+            const url = mx.data.getDocumentUrl(mxObject.getGuid(), mxObject.get("changedDate") as number);
+            mx.data.getImageUrl(
+                url,
+                objectUrl => {
+                    this.setState({ imageUrl: objectUrl });
+                },
+                error =>
+                    this.setState({
+                        alertMessage: `Error in imageviewer while retrieving image url: ${error.message}`
+                    })
+            );
+        } else if (!mxObject && (this.props.source === "systemImage" || this.props.source === "urlAttribute")) {
+            this.setState({ imageUrl: "" });
+        } else if (this.props.source === "staticUrl") {
+            this.setState({ imageUrl: this.props.urlStatic });
+        } else if (this.props.source === "staticImage") {
+            this.setState({ imageUrl: UrlHelper.getStaticResourceUrl(this.props.imageStatic) });
+        }
+    }
+
+    private executeAction(): void {
+        const { onClickMicroflow, onClickNanoflow, onClickOption, onClickForm, mxform, openPageAs } = this.props;
+        const context = this.getContext();
+        if (onClickOption === "callMicroflow" && onClickMicroflow) {
+            window.mx.ui.action(onClickMicroflow, {
+                context,
+                error: error =>
+                    window.mx.ui.error(
+                        `An error occurred while executing action ${onClickMicroflow} : ${error.message}`
+                    ),
+                origin: mxform
+            });
+        } else if (onClickOption === "callNanoflow" && onClickNanoflow.nanoflow) {
+            window.mx.data.callNanoflow({
+                context,
+                error: error =>
+                    window.mx.ui.error(`An error occurred while executing the on click nanoflow: ${error.message}`),
+                nanoflow: onClickNanoflow,
+                origin: mxform
+            });
+        } else if (onClickOption === "showPage" && onClickForm) {
+            window.mx.ui.openForm(onClickForm, {
+                context,
+                error: error =>
+                    window.mx.ui.error(`An error occurred while opening form ${onClickForm} : ${error.message}`),
+                location: openPageAs
+            });
+        }
+    }
+
+    private getContext(): mendix.lib.MxContext {
+        const context = new window.mendix.lib.MxContext();
+        if (this.props.mxObject) {
+            context.setContext(this.props.mxObject.getEntity(), this.props.mxObject.getGuid());
+        }
+
+        return context;
+    }
+
+    static parseStyle(style = ""): { [key: string]: string } {
         try {
-            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
                 const pair = line.split(":");
                 if (pair.length === 2) {
                     const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
@@ -106,33 +192,16 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
                 return styleObject;
             }, {});
         } catch (error) {
-            // tslint:disable-next-line no-console
+            // eslint-disable-next-line no-console
             console.log("Failed to parse style", style, error);
         }
 
         return {};
     }
 
-    private resetSubscriptions(mxObject?: mendix.lib.MxObject) {
-        this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
-        this.subscriptionHandles = [];
-
-        if (mxObject) {
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                attr: this.props.dynamicUrlAttribute,
-                callback: this.attributeCallback(mxObject),
-                guid: mxObject.getGuid()
-            }));
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                callback: this.attributeCallback(mxObject),
-                guid: mxObject.getGuid()
-            }));
-        }
-    }
-
-    public static validateProps(props: ImageViewerContainerProps): string {
+    static validateProps(props: ImageViewerContainerProps): string {
         let message = "";
-        if (props.source === "systemImage" && props.mxObject && !(props.mxObject.isA("System.Image"))) {
+        if (props.source === "systemImage" && props.mxObject && !props.mxObject.isA("System.Image")) {
             message = "for data source option 'System image' the context object should inherit system.image";
         }
         if (props.source === "urlAttribute" && !props.dynamicUrlAttribute) {
@@ -155,66 +224,6 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         }
 
         return message && `Error in imageviewer configuration: ${message}`;
-    }
-
-    private setImageUrl(mxObject?: mendix.lib.MxObject) {
-        if (mxObject && this.props.source === "urlAttribute") {
-            mxObject.fetch(this.props.dynamicUrlAttribute, (imageUrl: string) => {
-                this.setState({ imageUrl });
-            });
-        } else if (mxObject && this.props.source === "systemImage") {
-            const url = mx.data.getDocumentUrl(mxObject.getGuid(), mxObject.get("changedDate") as number);
-            mx.data.getImageUrl(url,
-                objectUrl => {
-                    this.setState({ imageUrl: objectUrl });
-                },
-                error => this.setState({
-                    alertMessage: `Error in imageviewer while retrieving image url: ${error.message}`
-                })
-            );
-        } else if (!mxObject && (this.props.source === "systemImage" || this.props.source === "urlAttribute")) {
-            this.setState({ imageUrl: "" });
-        } else if (this.props.source === "staticUrl") {
-            this.setState({ imageUrl: this.props.urlStatic });
-        } else if (this.props.source === "staticImage") {
-            this.setState({ imageUrl: UrlHelper.getStaticResourceUrl(this.props.imageStatic) });
-        }
-    }
-
-    private executeAction() {
-        const { onClickMicroflow, onClickNanoflow, onClickOption, onClickForm, mxform, openPageAs } = this.props;
-        const context = this.getContext();
-        if (onClickOption === "callMicroflow" && onClickMicroflow) {
-            window.mx.ui.action(onClickMicroflow, {
-                context,
-                error: error => window.mx.ui.error(`An error occurred while executing action ${onClickMicroflow} : ${error.message}`),
-                origin: mxform
-            });
-        } else if (onClickOption === "callNanoflow" && onClickNanoflow.nanoflow) {
-            window.mx.data.callNanoflow({
-                context,
-                error: error => window.mx.ui.error(`An error occurred while executing the on click nanoflow: ${error.message}`),
-                nanoflow: onClickNanoflow,
-                origin: mxform
-            });
-        } else if (onClickOption === "showPage" && onClickForm) {
-            window.mx.ui.openForm(onClickForm, {
-                context,
-                error: error => window.mx.ui.error(
-                    `An error occurred while opening form ${onClickForm} : ${error.message}`
-                ),
-                location: openPageAs
-            });
-        }
-    }
-
-    private getContext(): mendix.lib.MxContext {
-        const context = new window.mendix.lib.MxContext();
-        if (this.props.mxObject) {
-            context.setContext(this.props.mxObject.getEntity(), this.props.mxObject.getGuid());
-        }
-
-        return context;
     }
 }
 

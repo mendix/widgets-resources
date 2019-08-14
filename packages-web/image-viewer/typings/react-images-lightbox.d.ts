@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 declare module "react-image-lightbox" {
     interface LightboxProps {
         mainSrc: string;
@@ -29,6 +29,6 @@ declare module "react-image-lightbox" {
 
     interface Lightbox extends React.ComponentClass<LightboxProps> {}
 
-    var LightboxInstance: Lightbox;
+    const LightboxInstance: Lightbox;
     export = LightboxInstance;
 }

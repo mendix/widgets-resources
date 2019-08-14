@@ -1,7 +1,7 @@
-import { Component, createElement } from "react";
+import { Component, createElement, ReactNode } from "react";
 
-import * as classNames from "classnames";
-import * as Lightbox from "react-image-lightbox";
+import classNames from "classnames";
+import Lightbox from "react-image-lightbox";
 import { Units, onClickOptions } from "./ImageViewerContainer";
 
 import "../ui/ImageViewer.css";
@@ -25,7 +25,6 @@ interface ImageViewerState {
 }
 
 class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
-
     constructor(props: ImageViewerProps) {
         super(props);
 
@@ -35,8 +34,9 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
         this.toggleLightBox = this.toggleLightBox.bind(this);
     }
 
-    render() {
-        return createElement("div",
+    render(): ReactNode {
+        return createElement(
+            "div",
             {
                 className: classNames(
                     "widget-image-viewer",
@@ -55,16 +55,18 @@ class ImageViewer extends Component<ImageViewerProps, ImageViewerState> {
                     width: this.getStyle(this.props.width, this.props.widthUnit)
                 }
             }),
-            this.state.isOpen && createElement(Lightbox, {
-                mainSrc: this.props.imageUrl,
-                onCloseRequest: this.toggleLightBox
-            })
+            this.state.isOpen &&
+                createElement(Lightbox, {
+                    mainSrc: this.props.imageUrl,
+                    onCloseRequest: this.toggleLightBox
+                })
         );
     }
 
-    private toggleLightBox() {
+    private toggleLightBox(): void {
         if (this.props.onClickOption === "openFullScreen") {
             this.setState({
+                // eslint-disable-next-line react/no-access-state-in-setstate
                 isOpen: !this.state.isOpen
             });
         } else if (this.props.onClick) {
