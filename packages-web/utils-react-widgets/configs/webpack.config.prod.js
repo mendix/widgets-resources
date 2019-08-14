@@ -120,8 +120,7 @@ const previewConfig = {
                         presets: ["@babel/preset-env", "@babel/preset-react"],
                         plugins: [
                             ["@babel/plugin-proposal-class-properties", { loose: true }],
-                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }],
-                            "react-hot-loader/babel"
+                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]
                         ]
                     }
                 }
