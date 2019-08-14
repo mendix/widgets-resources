@@ -41,7 +41,7 @@ describe("Calendar", () => {
                 }
             },
             parser: {
-                formatValue: () => jasmine.any(Function)
+                formatValue: () => jest.fn()
             }
         };
     });
@@ -80,7 +80,7 @@ describe("Calendar", () => {
 
     describe("event handler", () => {
         it("#onSelectSlot() calls the parent onSelectSlot handler", () => {
-            calendarProps.onSelectSlotAction = jasmine.createSpy("onClick");
+            calendarProps.onSelectSlotAction = jest.fn();
             const calendar = renderCalendar(calendarProps);
             (calendar.instance() as any).onSelectSlot();
 
@@ -88,7 +88,7 @@ describe("Calendar", () => {
         });
 
         it("#onSelectEvent() calls the parent onSelectEvent handler", () => {
-            calendarProps.onSelectEventAction = jasmine.createSpy("onClick");
+            calendarProps.onSelectEventAction = jest.fn();
             const calendar = renderCalendar(calendarProps);
             (calendar.instance() as any).onSelectEvent();
 
@@ -102,7 +102,7 @@ describe("Calendar", () => {
                     start: new Date(new Date().valueOf() + 1000 * 3600 * 24)
                 }
             };
-            calendarProps.onEventDropAction = jasmine.createSpy("onDrop");
+            calendarProps.onEventDropAction = jest.fn();
             const calendar = renderCalendar(calendarProps);
             (calendar.instance() as any).onEventDrop(eventInfo);
 
@@ -117,7 +117,7 @@ describe("Calendar", () => {
                     end: new Date(new Date().valueOf() + 1000 * 3600 * 24)
                 }
             };
-            calendarProps.onEventResizeAction = jasmine.createSpy("onDrop");
+            calendarProps.onEventResizeAction = jest.fn();
             const calendar = renderCalendar(calendarProps);
             (calendar.instance() as any).onEventResize(resizeType, eventInfo);
 
