@@ -34,6 +34,12 @@ A bundle of R&D Platform supported widgets & nanoflow actions for building nativ
 | Widget                                                                                            | Description                         |
 | :------------------------------------------------------------------------------------------------ | :---------------------------------- |
 | [Badge](https://github.com/mendix/widgets-resources/blob/master/packages-web/badge)               | Display text or a value as a badge. |
+| [Badge Button](https://github.com/mendix/widgets-resources/blob/master/packages-web/badge-button) | Display a button with a badge.      |
+| [Range Slider](https://github.com/mendix/widgets-resources/blob/master/packages-web/range-slider) | Displays a slider with min and max. |
+| [Rich Text](https://github.com/mendix/widgets-resources/blob/master/packages-web/rich-text)       | Display a full text editor.         |
+| [Signature](https://github.com/mendix/widgets-resources/blob/master/packages-web/signature)       | Displays a signature pad.           |
+| [Slider](https://github.com/mendix/widgets-resources/blob/master/packages-web/slider)             | Display a slider.                   |
+| [Switch](https://github.com/mendix/widgets-resources/blob/master/packages-web/switch)             | Displays a switch.                  |
 | [Video player](https://github.com/mendix/widgets-resources/blob/master/packages-web/video-player) | Play a video loaded from a URL.     |
 
 [activity indicator]: https://github.com/mendix/widgets-resources/blob/master/packages-native/activity-indicator
