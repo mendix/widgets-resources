@@ -1,9 +1,8 @@
-import { Component, createElement } from "react";
+import { Component, createElement, ReactNode } from "react";
 import { ImageViewer, ImageViewerProps } from "./components/ImageViewer";
 import ImageViewerContainer, { ImageViewerContainerProps } from "./components/ImageViewerContainer";
 import { Alert } from "./components/Alert";
 
-// tslint:disable-next-line
 const image = require("base64-image-loader!./img/imageviewerpreview.png");
 
 declare function require(name: string): string;
@@ -12,15 +11,15 @@ type VisibilityMap = {
     [P in keyof ImageViewerContainerProps]: boolean;
 };
 
-// tslint:disable-next-line:class-name
 export class preview extends Component<ImageViewerContainerProps, {}> {
-
-    render() {
+    render(): ReactNode {
         const message = ImageViewerContainer.validateProps(this.props);
         if (!message) {
             return createElement(ImageViewer, this.transformProps(this.props));
         } else {
-            return createElement("div", {},
+            return createElement(
+                "div",
+                {},
                 createElement(Alert, { className: "widget-image-viewer-alert-danger", message }),
                 createElement(ImageViewer, this.transformProps(this.props))
             );
@@ -51,11 +50,11 @@ export class preview extends Component<ImageViewerContainerProps, {}> {
     }
 }
 
-export function getPreviewCss() {
+export function getPreviewCss(): string {
     return require("./ui/ImageViewer.css");
 }
 
-export function getVisibleProperties(valueMap: ImageViewerContainerProps, visibilityMap: VisibilityMap) {
+export function getVisibleProperties(valueMap: ImageViewerContainerProps, visibilityMap: VisibilityMap): VisibilityMap {
     visibilityMap.dynamicUrlAttribute = valueMap.source === "urlAttribute";
     visibilityMap.urlStatic = valueMap.source === "staticUrl";
     visibilityMap.imageStatic = valueMap.source === "staticImage";

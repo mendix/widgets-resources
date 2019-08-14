@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageViewer renders the structure 1`] = `
+<div
+  className="widget-image-viewer widget-image-viewer-responsive"
+>
+  <img
+    onClick={[Function]}
+    src="https://pbs.twimg.com/profile_images/1905729715/llamas_1_.jpg"
+    style={
+      Object {
+        "height": 300,
+        "width": 300,
+      }
+    }
+  />
+</div>
+`;
+
+exports[`ImageViewer returns the style value as % when height or width units is set to percentage 1`] = `
+<div
+  className="widget-image-viewer widget-image-viewer-responsive"
+>
+  <img
+    onClick={[Function]}
+    src="https://pbs.twimg.com/profile_images/1905729715/llamas_1_.jpg"
+    style={
+      Object {
+        "height": 300,
+        "width": "50%",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`ImageViewer returns the style value as as an empty string when the height or width units is set to auto 1`] = `
+<div
+  className="widget-image-viewer widget-image-viewer-responsive"
+>
+  <img
+    onClick={[Function]}
+    src="https://pbs.twimg.com/profile_images/1905729715/llamas_1_.jpg"
+    style={
+      Object {
+        "height": "",
+        "width": "",
+      }
+    }
+  />
+</div>
+`;
