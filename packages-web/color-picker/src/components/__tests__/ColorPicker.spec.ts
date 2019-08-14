@@ -1,83 +1,44 @@
-import { mount, shallow } from "enzyme";
+import { mount, ReactWrapper, shallow, ShallowWrapper } from "enzyme";
 import { createElement } from "react";
 
-import * as Picker from "react-color";
-import { ColorPicker, ColorPickerProps, PickerType } from "../ColorPicker";
-import { Alert } from "../Alert";
+import { ColorPicker, ColorPickerProps } from "../ColorPicker";
 
 describe("ColorPicker", () => {
-    const renderColorPicker = (props: ColorPickerProps) => shallow(createElement(ColorPicker, props));
-    const fullRenderColorPicker = (props: ColorPickerProps) => mount(createElement(ColorPicker, props));
+    const renderColorPicker = (props: ColorPickerProps): ShallowWrapper<ColorPickerProps, any> =>
+        shallow(createElement(ColorPicker, props));
+    const fullRenderColorPicker = (props: ColorPickerProps): ReactWrapper<ColorPickerProps, any> =>
+        mount(createElement(ColorPicker, props));
     const colorPickerProps: ColorPickerProps = {
         color: "#000000",
         disabled: false,
         displayColorPicker: false,
-        defaultColors: [ ],
+        defaultColors: [],
         mode: "popover",
         type: "sketch",
         onChange: jasmine.createSpy("onClick")
     };
 
-    const components: { [P in PickerType]: any } = {
-        sketch: Picker.SketchPicker,
-        chrome: Picker.ChromePicker,
-        block: Picker.BlockPicker,
-        github: Picker.GithubPicker,
-        twitter: Picker.TwitterPicker,
-        circle: Picker.CirclePicker,
-        hue: Picker.HuePicker,
-        slider: Picker.SliderPicker,
-        compact: Picker.CompactPicker,
-        material: Picker.MaterialPicker,
-        swatches: Picker.SwatchesPicker
-    };
-
     it("renders the structure correctly", () => {
         const colorPickerComponent = renderColorPicker(colorPickerProps);
 
-        expect(colorPickerComponent).toBeElement(
-            createElement("div", { className: "widget-color-picker-picker" },
-                createElement(Alert, { className: "widget-color-picker-alert" })
-            )
-        );
+        expect(colorPickerComponent).toMatchSnapshot();
     });
 
     it("that is disabled renders with the structure", () => {
         const colorPickerComponent = renderColorPicker(colorPickerProps);
         colorPickerComponent.setProps({ displayColorPicker: true, disabled: true });
 
-        expect(colorPickerComponent).toBeElement(
-            createElement("div", { className: "widget-color-picker-picker widget-color-picker-disabled" },
-                createElement("div", { className: "widget-color-picker-popover widget-color-picker-no-popover" },
-                    createElement("div", { className: "widget-color-picker-cover" }),
-                    createElement("div", { className: "widget-color-picker-overlay" }),
-                    createElement(components[colorPickerProps.type])
-                ),
-                createElement(Alert, { className: "widget-color-picker-alert" })
-            )
-        );
+        expect(colorPickerComponent).toMatchSnapshot();
     });
 
     it("renders picker with pre-defined default colors", () => {
         const colorPickerComponent = renderColorPicker(colorPickerProps);
         colorPickerComponent.setProps({
-            mode: "inline", defaultColors: [ { color: "#2CCCE4" }, { color: "#555555" } ] as any
+            mode: "inline",
+            defaultColors: [{ color: "#2CCCE4" }, { color: "#555555" }] as any
         });
 
-        expect(colorPickerComponent).toBeElement(
-            createElement("div", { className: "widget-color-picker-picker" },
-                createElement("div", { className: "" },
-                    createElement(components[colorPickerProps.type], {
-                        color: colorPickerProps.color,
-                        colors: [ "#2CCCE4", "#555555" ],
-                        presetColors: [ "#2CCCE4", "#555555" ],
-                        triangle: "hide",
-                        onChange: jasmine.any(Function) as any
-                    })
-                ),
-                createElement(Alert, { className: "widget-color-picker-alert" })
-            )
-        );
+        expect(colorPickerComponent).toMatchSnapshot();
     });
 
     it("should handle on change event", () => {
@@ -95,77 +56,77 @@ describe("ColorPicker", () => {
             const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
             colorPickerComponent.setProps({ displayColorPicker: true });
 
-            expect(colorPickerComponent.find(".sketch-picker").length).toBe(1);
+            expect(colorPickerComponent.find(".sketch-picker")).toHaveLength(1);
         });
 
         it("chrome", () => {
             const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
             colorPickerComponent.setProps({ type: "chrome", displayColorPicker: true });
 
-            expect(colorPickerComponent.find(".chrome-picker").length).toBe(1);
+            expect(colorPickerComponent.find(".chrome-picker")).toHaveLength(1);
         });
 
         it("block", () => {
             const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
             colorPickerComponent.setProps({ type: "block", displayColorPicker: true });
 
-            expect(colorPickerComponent.find(".block-picker").length).toBe(1);
+            expect(colorPickerComponent.find(".block-picker")).toHaveLength(1);
         });
 
         it("github", () => {
             const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
             colorPickerComponent.setProps({ type: "github", displayColorPicker: true });
 
-            expect(colorPickerComponent.find(".github-picker").length).toBe(1);
+            expect(colorPickerComponent.find(".github-picker")).toHaveLength(1);
         });
 
         it("twitter", () => {
             const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
             colorPickerComponent.setProps({ type: "twitter", displayColorPicker: true });
 
-            expect(colorPickerComponent.find(".twitter-picker").length).toBe(1);
+            expect(colorPickerComponent.find(".twitter-picker")).toHaveLength(1);
         });
 
         it("circle", () => {
             const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
             colorPickerComponent.setProps({ type: "circle", displayColorPicker: true });
 
-            expect(colorPickerComponent.find(".circle-picker").length).toBe(1);
+            expect(colorPickerComponent.find(".circle-picker")).toHaveLength(1);
         });
 
         it("hue", () => {
             const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
             colorPickerComponent.setProps({ type: "hue", displayColorPicker: true });
 
-            expect(colorPickerComponent.find(".hue-picker").length).toBe(1);
+            expect(colorPickerComponent.find(".hue-picker")).toHaveLength(1);
         });
 
         it("slider", () => {
             const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
             colorPickerComponent.setProps({ type: "slider", displayColorPicker: true });
 
-            expect(colorPickerComponent.find(".slider-picker").length).toBe(1);
+            expect(colorPickerComponent.find(".slider-picker")).toHaveLength(1);
         });
 
         it("compact", () => {
             const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
             colorPickerComponent.setProps({ type: "compact", displayColorPicker: true });
 
-            expect(colorPickerComponent.find(".compact-picker").length).toBe(1);
+            expect(colorPickerComponent.find(".compact-picker")).toHaveLength(1);
         });
 
         it("material", () => {
             const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
             colorPickerComponent.setProps({ type: "material", displayColorPicker: true });
 
-            expect(colorPickerComponent.find(".material-picker").length).toBe(1);
+            expect(colorPickerComponent.find(".material-picker")).toHaveLength(1);
         });
 
         it("swatches", () => {
             const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
             colorPickerComponent.setProps({ type: "swatches", displayColorPicker: true });
 
-            expect(colorPickerComponent.find(".swatches-picker").length).toBe(1);
+            expect(colorPickerComponent.find(".swatches-picker")).toHaveLength(1);
         });
     });
 
@@ -174,33 +135,14 @@ describe("ColorPicker", () => {
             const colorPickerComponent = renderColorPicker(colorPickerProps);
             colorPickerComponent.setProps({ displayColorPicker: true });
 
-            expect(colorPickerComponent).toBeElement(
-                createElement("div", { className: "widget-color-picker-picker" },
-                    createElement("div", { className: "widget-color-picker-popover widget-color-picker-no-popover" },
-                        createElement("div", { className: "widget-color-picker-cover" }),
-                        createElement(components[colorPickerProps.type])
-                    ),
-                    createElement(Alert, { className: "widget-color-picker-alert" })
-                )
-            );
+            expect(colorPickerComponent).toMatchSnapshot();
         });
 
         it("inline renders with the structure", () => {
             const colorPickerComponent = renderColorPicker(colorPickerProps);
             colorPickerComponent.setProps({ mode: "inline" });
 
-            expect(colorPickerComponent).toBeElement(
-                createElement("div", { className: "widget-color-picker-picker" },
-                    createElement("div", { className: "" },
-                        createElement(components[colorPickerProps.type], {
-                            color: colorPickerProps.color,
-                            triangle: "hide",
-                            onChange: jasmine.any(Function) as any
-                        })
-                    ),
-                    createElement(Alert, { className: "widget-color-picker-alert" })
-                )
-            );
+            expect(colorPickerComponent).toMatchSnapshot();
         });
     });
 });

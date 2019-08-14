@@ -1,0 +1,182 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ColorPicker renders picker with pre-defined default colors 1`] = `
+<div
+  className="widget-color-picker-picker"
+>
+  <div
+    className=""
+  >
+    <ColorPicker
+      color="#000000"
+      colors={
+        Array [
+          "#2CCCE4",
+          "#555555",
+        ]
+      }
+      disableAlpha={false}
+      onChange={[Function]}
+      presetColors={
+        Array [
+          "#2CCCE4",
+          "#555555",
+        ]
+      }
+      styles={Object {}}
+      triangle="hide"
+      width={200}
+    />
+  </div>
+  <Alert
+    bootstrapStyle="danger"
+    className="widget-color-picker-alert"
+  />
+</div>
+`;
+
+exports[`ColorPicker renders the structure correctly 1`] = `
+<div
+  className="widget-color-picker-picker"
+>
+  <Alert
+    bootstrapStyle="danger"
+    className="widget-color-picker-alert"
+  />
+</div>
+`;
+
+exports[`ColorPicker that is disabled renders with the structure 1`] = `
+<div
+  className="widget-color-picker-picker widget-color-picker-disabled"
+>
+  <div
+    className="widget-color-picker-popover widget-color-picker-no-popover"
+  >
+    <div
+      className="widget-color-picker-cover"
+    />
+    <div
+      className="widget-color-picker-overlay"
+    />
+    <ColorPicker
+      color="#000000"
+      disableAlpha={false}
+      onChange={[Function]}
+      presetColors={
+        Array [
+          "#D0021B",
+          "#F5A623",
+          "#F8E71C",
+          "#8B572A",
+          "#7ED321",
+          "#417505",
+          "#BD10E0",
+          "#9013FE",
+          "#4A90E2",
+          "#50E3C2",
+          "#B8E986",
+          "#000000",
+          "#4A4A4A",
+          "#9B9B9B",
+          "#FFFFFF",
+        ]
+      }
+      styles={Object {}}
+      triangle="hide"
+      width={200}
+    />
+  </div>
+  <Alert
+    bootstrapStyle="danger"
+    className="widget-color-picker-alert"
+  />
+</div>
+`;
+
+exports[`ColorPicker with a mode as inline renders with the structure 1`] = `
+<div
+  className="widget-color-picker-picker"
+>
+  <div
+    className=""
+  >
+    <ColorPicker
+      color="#000000"
+      disableAlpha={false}
+      onChange={[Function]}
+      presetColors={
+        Array [
+          "#D0021B",
+          "#F5A623",
+          "#F8E71C",
+          "#8B572A",
+          "#7ED321",
+          "#417505",
+          "#BD10E0",
+          "#9013FE",
+          "#4A90E2",
+          "#50E3C2",
+          "#B8E986",
+          "#000000",
+          "#4A4A4A",
+          "#9B9B9B",
+          "#FFFFFF",
+        ]
+      }
+      styles={Object {}}
+      triangle="hide"
+      width={200}
+    />
+  </div>
+  <Alert
+    bootstrapStyle="danger"
+    className="widget-color-picker-alert"
+  />
+</div>
+`;
+
+exports[`ColorPicker with a mode as popover or input renders with the structure 1`] = `
+<div
+  className="widget-color-picker-picker"
+>
+  <div
+    className="widget-color-picker-popover widget-color-picker-no-popover"
+  >
+    <div
+      className="widget-color-picker-cover"
+    />
+    <ColorPicker
+      color="#000000"
+      disableAlpha={false}
+      onChange={[Function]}
+      presetColors={
+        Array [
+          "#D0021B",
+          "#F5A623",
+          "#F8E71C",
+          "#8B572A",
+          "#7ED321",
+          "#417505",
+          "#BD10E0",
+          "#9013FE",
+          "#4A90E2",
+          "#50E3C2",
+          "#B8E986",
+          "#000000",
+          "#4A4A4A",
+          "#9B9B9B",
+          "#FFFFFF",
+        ]
+      }
+      styles={Object {}}
+      triangle="hide"
+      width={200}
+    />
+  </div>
+  <Alert
+    bootstrapStyle="danger"
+    className="widget-color-picker-alert"
+  />
+</div>
+`;

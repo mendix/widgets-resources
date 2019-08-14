@@ -1,5 +1,5 @@
 import { SFC, createElement } from "react";
-import * as classNames from "classnames";
+import classNames from "classnames";
 
 export interface LabelProps {
     className?: string;
@@ -11,12 +11,14 @@ export interface LabelProps {
 }
 
 export const Label: SFC<LabelProps> = ({ children, className, label, style, weight, orientation, hasError }) => {
-    weight = (weight > 11 || weight < 1) ? 3 : weight;
-    const labelWeight = orientation === "horizontal" ? `col-sm-${weight}` : "";
+    weight = weight > 11 || weight < 1 ? 3 : weight;
+    const labelWeight = orientation === "horizontal" ? ` col-sm-${weight}` : "";
     const childrenWeight = orientation === "horizontal" ? `col-sm-${12 - weight}` : "";
 
-    return createElement("div", { className: classNames("form-group", className, { "has-error" : hasError }), style },
-        createElement("label", { className: `control-label ${labelWeight}` }, label),
+    return createElement(
+        "div",
+        { className: classNames("form-group", className, { "has-error": hasError }), style },
+        createElement("label", { className: `control-label${labelWeight}` }, label),
         createElement("div", { className: `${childrenWeight}` }, children)
     );
 };

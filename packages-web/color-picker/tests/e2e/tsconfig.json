@@ -1,16 +1,9 @@
 {
+    "extends": "../../../utils-react-widgets/test-configs/e2e/tsconfig",
     "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "removeComments": true,
-        "noImplicitAny": false,
-        "outDir": "../../dist/e2e"
+        "baseUrl": ".",
+        "rootDir": "./"
     },
-    "exclude": [
-        "node_modules"
-    ],
-    "compileOnSave": false
+    "include": ["*.spec.ts"],
+    "exclude": ["../../node_modules", "../../../../node_modules"]
 }

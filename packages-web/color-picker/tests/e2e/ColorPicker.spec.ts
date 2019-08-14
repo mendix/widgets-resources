@@ -3,14 +3,15 @@ import colorFormatPage from "./pages/colorFormatPage";
 
 describe("Color picker", () => {
     it("changes color when a new color is picked", () => {
+        const id = ".mx-name-colorPicker17 input";
         colorFormatPage.open();
-        colorFormatPage.skethInput.waitForVisible();
+        colorFormatPage.skethInput.waitForDisplayed();
         colorFormatPage.rgbTab.click();
-        colorFormatPage.circleColorPicker.waitForVisible();
-        const initialColorValue = browser.getValue(".mx-name-colorPicker17 input");
+        colorFormatPage.circleColorPicker.waitForDisplayed();
+        const initialColorValue = $(id).getValue();
         colorFormatPage.circleColorPickerButton.click();
-        colorFormatPage.circleColorPickerButtonValue.waitForValue();
-        const newColorValue = browser.getValue(".mx-name-colorPicker17 input");
+        colorFormatPage.circleColorPickerButtonValue.waitForEnabled();
+        const newColorValue = $(id).getValue();
 
         expect(initialColorValue).toEqual("rgb(42,94,210)");
         expect(newColorValue).toEqual("rgb(233,30,99)");
@@ -23,18 +24,20 @@ describe("Color picker", () => {
         });
 
         it("button", () => {
-            modePage.button.waitForVisible();
-            modePage.buttonColor.waitForVisible();
+            modePage.button.waitForDisplayed();
+            modePage.buttonColor.waitForDisplayed();
 
-            const buttonBackgroundColor = browser.getCssProperty(".mx-name-colorPicker3 .widget-color-picker-inner", "background").value;
+            const buttonBackgroundColor = $(".mx-name-colorPicker3 .widget-color-picker-inner").getCSSProperty(
+                "background"
+            ).value;
             expect(buttonBackgroundColor).toContain("rgb(76,175,80)");
         });
 
         it("input box", () => {
             modePage.inPutBoxTab.click();
-            modePage.inPutBox.waitForVisible();
+            modePage.inPutBox.waitForDisplayed();
 
-            const inPutBoxValue = browser.getValue(".mx-name-colorPicker17 input");
+            const inPutBoxValue = $(".mx-name-colorPicker17 input").getValue();
             expect(inPutBoxValue).toContain("#4caf50");
         });
 
@@ -42,73 +45,73 @@ describe("Color picker", () => {
             modePage.inlineTab.click();
             modePage.inLineColorPicker.waitForExist();
 
-            const inPutBoxValue: boolean = browser.isExisting(".mx-name-colorPicker27 .sketch-picker");
+            const inPutBoxValue: boolean = $(".mx-name-colorPicker27 .sketch-picker").isExisting();
             expect(inPutBoxValue).toBe(true);
         });
     });
 
     describe("renders a picker of type", () => {
         it("sketch", () => {
-            const doesExist: boolean = browser.isExisting(".mx-name-colorPicker27 .sketch-picker");
+            const doesExist: boolean = $(".mx-name-colorPicker27 .sketch-picker").isExisting();
             expect(doesExist).toBe(true);
         });
 
         it("block", () => {
-            const doesExist: boolean = browser.isExisting(".mx-name-colorPicker28 .block-picker ");
+            const doesExist: boolean = $(".mx-name-colorPicker28 .block-picker ").isExisting();
 
             expect(doesExist).toBe(true);
         });
 
         it("chrome", () => {
-            const doesExist: boolean = browser.isExisting(".mx-name-colorPicker29 .chrome-picker");
+            const doesExist: boolean = $(".mx-name-colorPicker29 .chrome-picker").isExisting();
 
             expect(doesExist).toBe(true);
         });
 
         it("github", () => {
-            const doesExist: boolean = browser.isExisting(".mx-name-colorPicker30 .github-picker");
+            const doesExist: boolean = $(".mx-name-colorPicker30 .github-picker").isExisting();
 
             expect(doesExist).toBe(true);
         });
 
         it("material", () => {
-            const doesExist: boolean = browser.isExisting(".mx-name-colorPicker31 .material-picker");
+            const doesExist: boolean = $(".mx-name-colorPicker31 .material-picker").isExisting();
 
             expect(doesExist).toBe(true);
         });
 
         it("swatches", () => {
-            const doesExist: boolean = browser.isExisting(".mx-name-colorPicker32 .swatches-picker");
+            const doesExist: boolean = $(".mx-name-colorPicker32 .swatches-picker").isExisting();
 
             expect(doesExist).toBe(true);
         });
 
         it("twitter", () => {
-            const doesExist: boolean = browser.isExisting(".mx-name-colorPicker33 .twitter-picker");
+            const doesExist: boolean = $(".mx-name-colorPicker33 .twitter-picker").isExisting();
 
             expect(doesExist).toBe(true);
         });
 
         it("circle", () => {
-            const doesExist: boolean = browser.isExisting(".mx-name-colorPicker34 .circle-picker");
+            const doesExist: boolean = $(".mx-name-colorPicker34 .circle-picker").isExisting();
 
             expect(doesExist).toBe(true);
         });
 
         it("hue", () => {
-            const doesExist: boolean = browser.isExisting(".mx-name-colorPicker35 .hue-picker");
+            const doesExist: boolean = $(".mx-name-colorPicker35 .hue-picker").isExisting();
 
             expect(doesExist).toBe(true);
         });
 
         it("slider", () => {
-            const doesExist: boolean = browser.isExisting(".mx-name-colorPicker37 .slider-picker");
+            const doesExist: boolean = $(".mx-name-colorPicker37 .slider-picker").isExisting();
 
             expect(doesExist).toBe(true);
         });
 
         it("compact", () => {
-            const doesExist: boolean = browser.element(".mx-name-colorPicker26 .compact-picker").isExisting();
+            const doesExist: boolean = $(".mx-name-colorPicker26 .compact-picker").isExisting();
 
             expect(doesExist).toBe(true);
         });
@@ -120,25 +123,25 @@ describe("Color picker", () => {
         });
 
         it("hex", () => {
-            colorFormatPage.skethInput.waitForVisible();
-            const buttonBackgroundColor = browser.getValue(".mx-name-colorPicker24 input");
+            colorFormatPage.skethInput.waitForDisplayed();
+            const buttonBackgroundColor = $(".mx-name-colorPicker24 input").getValue();
 
             expect(buttonBackgroundColor).toContain("#4caf50");
         });
 
         it("rgb", () => {
             colorFormatPage.rgbTab.click();
-            colorFormatPage.sketchRgb.waitForVisible();
+            colorFormatPage.sketchRgb.waitForDisplayed();
 
-            const inPutBoxValue = browser.getValue(".mx-name-colorPicker17 input");
+            const inPutBoxValue = $(".mx-name-colorPicker17 input").getValue();
             expect(inPutBoxValue).toContain("rgb(42,94,210)");
         });
 
         it("rgba", () => {
             colorFormatPage.rgbaTab.click();
-            colorFormatPage.sketchRgba.waitForVisible();
+            colorFormatPage.sketchRgba.waitForDisplayed();
 
-            const inPutBoxValue = browser.getValue(".mx-name-colorPicker27 input");
+            const inPutBoxValue = $(".mx-name-colorPicker27 input").getValue();
             expect(inPutBoxValue).toContain("rgba(39,255,238,0.49)");
         });
     });

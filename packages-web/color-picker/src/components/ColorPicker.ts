@@ -1,7 +1,7 @@
-import { Component, createElement } from "react";
+import { Component, createElement, ReactNode } from "react";
 
 import { Alert } from "./Alert";
-import * as classNames from "classnames";
+import classNames from "classnames";
 import * as Picker from "react-color";
 
 import "../ui/ColorPicker.scss";
@@ -19,11 +19,21 @@ export interface ColorPickerProps {
     close?: () => void;
     alertMessage?: string;
     onChangeComplete?: Picker.ColorChangeHandler;
-    defaultColors: { color: string }[];
+    defaultColors: Array<{ color: string }>;
 }
 
-export type PickerType = "sketch" | "chrome" | "block" | "github" | "twitter" | "circle" | "hue" |
-    "slider" | "compact" | "material" | "swatches";
+export type PickerType =
+    | "sketch"
+    | "chrome"
+    | "block"
+    | "github"
+    | "twitter"
+    | "circle"
+    | "hue"
+    | "slider"
+    | "compact"
+    | "material"
+    | "swatches";
 
 export type Mode = "popover" | "input" | "inline";
 
@@ -42,41 +52,41 @@ export class ColorPicker extends Component<ColorPickerProps, {}> {
         swatches: Picker.SwatchesPicker
     };
 
-    render() {
-        return createElement("div", {
-            className: classNames(
-                "widget-color-picker-picker",
-                this.props.className,
-                { "widget-color-picker-disabled": this.props.disabled }
-            ),
-            style: this.props.style
-        },
+    render(): ReactNode {
+        return createElement(
+            "div",
+            {
+                className: classNames("widget-color-picker-picker", this.props.className, {
+                    "widget-color-picker-disabled": this.props.disabled
+                }),
+                style: this.props.style
+            },
             this.props.children,
-            (this.props.displayColorPicker || this.props.mode === "inline")
-                ? this.renderPicker()
-                : null,
+            this.props.displayColorPicker || this.props.mode === "inline" ? this.renderPicker() : null,
             createElement(Alert, { className: "widget-color-picker-alert" }, this.props.alertMessage)
         );
     }
 
-    private renderPicker() {
+    private renderPicker(): ReactNode {
         const { defaultColors, disabled, mode, type } = this.props;
-        const colors = defaultColors.map((color) => color.color);
+        const colors = defaultColors.map(color => color.color);
         const supportPopover = mode !== "inline" && type !== "hue" && type !== "slider";
 
-        return createElement("div", {
-            className: classNames({
-                "widget-color-picker-popover" : supportPopover,
-                "widget-color-picker-no-popover": mode !== "inline"
-            })
-        },
+        return createElement(
+            "div",
+            {
+                className: classNames({
+                    "widget-color-picker-popover": supportPopover,
+                    "widget-color-picker-no-popover": mode !== "inline"
+                })
+            },
             mode !== "inline"
                 ? createElement("div", { className: "widget-color-picker-cover", onClick: this.props.close })
                 : null,
             disabled ? createElement("div", { className: "widget-color-picker-overlay" }) : null,
             createElement(this.components[type], {
                 color: this.props.color,
-                colors: (defaultColors.length > 0 && type !== "swatches") ? colors : undefined,
+                colors: defaultColors.length > 0 && type !== "swatches" ? colors : undefined,
                 onChange: this.props.onChange,
                 onChangeComplete: this.props.onChangeComplete,
                 presetColors: defaultColors.length > 0 ? colors : undefined,

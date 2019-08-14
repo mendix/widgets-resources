@@ -1,5 +1,5 @@
 import { SFC, createElement } from "react";
-import * as classNames from "classnames";
+import classNames from "classnames";
 
 import { Mode } from "./ColorPicker";
 
@@ -12,18 +12,19 @@ export interface ButtonProps {
     tabIndex?: number;
 }
 
-export const Button: SFC<ButtonProps> = (props) =>
-    createElement("button", {
-        className: classNames(
-            "btn",
-            {
+export const Button: SFC<ButtonProps> = props =>
+    createElement(
+        "button",
+        {
+            className: classNames("btn", {
                 "widget-color-picker-input": props.mode === "input",
-                "hidden": props.mode === "inline",
-                "disabled": props.disabled
-            }
-        ),
-        onClick: props.onClick,
-        tabIndex: props.tabIndex
-    }, createElement("div", { className: props.className, style: { background: props.color } }));
+                hidden: props.mode === "inline",
+                disabled: props.disabled
+            }),
+            onClick: props.onClick,
+            tabIndex: props.tabIndex
+        },
+        createElement("div", { className: props.className, style: { background: props.color } })
+    );
 
 Button.displayName = "Button";
