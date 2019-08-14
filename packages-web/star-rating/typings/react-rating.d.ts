@@ -1,15 +1,13 @@
-
 declare module "react-rating" {
-
     interface RateProps {
         start?: number;
         stop?: number;
         step?: number;
         placeholderRate?: number;
         initialRate?: number;
-        empty?: (string | object | React.ReactElement<any>)[] | string | object;
-        placeholder?: (string | object | React.ReactElement<any>)[] | string | object;
-        full?: (string | object | React.ReactElement <any>)[] | string | object;
+        empty?: Array<string | object | React.ReactElement<any>> | string | object;
+        placeholder?: Array<string | object | React.ReactElement<any>> | string | object;
+        full?: Array<string | object | React.ReactElement<any>> | string | object;
         readonly?: boolean;
         quiet?: boolean;
         fractions?: number;

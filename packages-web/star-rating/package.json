@@ -1,114 +1,33 @@
 {
-  "name": "star-rating",
-  "widgetName": "StarRating",
-  "version": "1.3.0",
-  "description": "This widget lets users rate an object with stars or custom icons.",
-  "scripts": {
-    "start": "nodemon --watch webpack.config.js --watch Gruntfile.js --exec grunt",
-    "typeCheck": "tsc --noEmit",
-    "emit": "tsc",
-    "pretest": "tsc && npm run lint && grunt release",
-    "test": "karma start --single-run --codeCoverage && node tests/remap.js",
-    "test:conditional": "node ./node_modules/mendix-widget-build-script/dist/CheckPullRequestFromFork.js && echo 'Skip tests on forked pull request' || npm run deployAndTest",
-    "test:dev": "karma start",
-    "test:unit": "karma start --single-run --codeCoverage && node tests/remap.js",
-    "test:e2e": "tsc -p ./tests/e2e/tsconfig.json && wdio ./tests/e2e/wdio.conf.js",
-    "test:e2e:dev": "tsc -p ./tests/e2e/tsconfig.json && set DEBUG=true&& wdio ./tests/e2e/wdio.conf.js",
-    "lint": "tslint -c tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'",
-    "lint:fix": "npm run lint -- --fix",
-    "deploy": " npm run updateProject && npm run deployApp",
-    "build": "grunt release",
-    "updateProject": "node ./node_modules/mendix-widget-build-script/dist/UpdateMxProject.js",
-    "deployApp": "node ./node_modules/mendix-widget-build-script/dist/DeployMxApp.js",
-    "deployAndTest": "npm run deploy && npm run test:e2e"
-  },
-  "pre-commit": [
-    "typeCheck",
-    "lint"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mendixlabs/star-rating"
-  },
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/mendixlabs/star-rating/issues"
-  },
-  "babel": {
-    "presets": [
-      "react",
-      "es2015",
-      "stage-0"
-    ]
-  },
-  "devDependencies": {
-    "@types/classnames": "^2.2.0",
-    "@types/core-js": "^0.9.42",
-    "@types/enzyme": "^2.8.4",
-    "@types/jasmine": "^2.5.47",
-    "@types/karma": "^1.7.3",
-    "@types/react": "^15.6.0",
-    "@types/react-dom": "^15.5.0",
-    "@types/webdriverio": "^4.8.2",
-    "babel-core": "^6.22.1",
-    "babel-loader": "^7.0.0",
-    "babel-preset-es2015": "^6.22.0",
-    "babel-preset-react": "^6.22.0",
-    "babel-preset-stage-0": "^6.22.0",
-    "copy-webpack-plugin": "^4.0.1",
-    "css-loader": "^0.28.1",
-    "enzyme": "^2.7.1",
-    "extract-text-webpack-plugin": "^3.0.0",
-    "grunt": "1.0.1",
-    "grunt-check-dependencies": "^1.0.0",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-compress": "^1.4.0",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-file-append": "0.0.7",
-    "grunt-newer": "^1.1.1",
-    "grunt-webpack": "^3.0.2",
-    "istanbul": "^0.4.3",
-    "istanbul-instrumenter-loader": "^3.0.0",
-    "jasmine": "^2.7.0",
-    "json-loader": "^0.5.7",
-    "karma": "^2.0.0",
-    "karma-chrome-launcher": "^2.1.1",
-    "karma-coverage": "^1.1.1",
-    "karma-jasmine": "^1.1.1",
-    "karma-jasmine-html-reporter": "^0.2.2",
-    "karma-remap-istanbul": "^0.6.0",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^2.0.9",
-    "mendix-client": "^7.13.2",
-    "mendix-widget-build-script": "^1.0.0-rc2",
-    "node-sass": "^4.5.3",
-    "nodemon": "^1.11.0",
-    "pre-commit": "^1.2.2",
-    "raw-loader": "^0.5.1",
-    "react": "^15.4.2",
-    "react-addons-test-utils": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "remap-istanbul": "^0.9.1",
-    "sass-loader": "^6.0.5",
-    "source-map-loader": "^0.2.0",
-    "style-loader": "^0.18.2",
-    "ts-loader": "^2.3.2",
-    "tslint": "^5.5.0",
-    "tslint-eslint-rules": "^4.1.1",
-    "typescript": "^2.4.2",
-    "wdio-dot-reporter": "0.0.9",
-    "wdio-jasmine-framework": "^0.3.2",
-    "wdio-selenium-standalone-service": "0.0.9",
-    "wdio-spec-reporter": "^0.1.2",
-    "webdriverio": "^4.12.0",
-    "webpack": "^3.4.1",
-    "webpack-dev-server": "^2.6.1",
-    "webpack-merge": "^4.1.0"
-  },
-  "dependencies": {
-    "classnames": "^2.2.5",
-    "mendix-widget-build-script": "^1.0.0-rc2",
-    "react-rating": "^0.8.1"
-  }
+    "name": "star-rating",
+    "widgetName": "StarRating",
+    "version": "1.3.0",
+    "description": "This widget lets users rate an object with stars or custom icons.",
+    "scripts": {
+        "start": "utils-react-widgets start",
+        "dev": "utils-react-widgets dev",
+        "test:dev": "utils-react-widgets test:dev",
+        "test:unit": "jest --config ../../scripts/test/jest.web.config.js",
+        "test:e2e": "export URL=https://booleansliderwidge.mxapps.io/ && utils-react-widgets test:e2e",
+        "test:e2e:dev": "export DEBUG=true && utils-react-widgets test:e2e",
+        "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "lint:fix": "npm run lint -- --fix",
+        "build": "utils-react-widgets build"
+    },
+    "config": {
+        "mendixHost": "http://localhost:8080",
+        "developmentPort": 3000,
+        "projectPath": [
+            "./tests/TestProjects/Mendix7/",
+            "./tests/TestProjects/Mendix8/"
+        ]
+    },
+    "devDependencies": {
+        "@types/classnames": "^2.2.0",
+        "@widgets-resources/utils-react-widgets": "0.0.1"
+    },
+    "dependencies": {
+        "classnames": "^2.2.5",
+        "react-rating": "^0.8.1"
+    }
 }

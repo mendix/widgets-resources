@@ -20,6 +20,7 @@ coverage
 **/TestProjects/*/*.launch
 
 packages-web/switch/tests/TestProjects/*/widgets/Switch.mpk
+packages-web/star-rating/tests/TestProjects/*/widgets/StarRating.mpk
 packages-web/badge-button/tests/TestProjects/*/widgets/BadgeButton.mpk
 packages-web/badge/tests/TestProjects/*/widgets/Badge.mpk
 packages-web/range-slider/tests/TestProjects/*/widgets/RangeSlider.mpk
