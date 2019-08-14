@@ -4,7 +4,6 @@ import { createElement } from "react";
 import { CarouselControl, CarouselControlProps } from "../CarouselControl";
 
 describe("CarouselControl", () => {
-
     let carouselControl: ShallowWrapper<CarouselControlProps, any>;
     let onClickSpy: jasmine.Spy;
 
@@ -14,8 +13,10 @@ describe("CarouselControl", () => {
     });
 
     it("renders the structure correctly", () => {
-        expect(carouselControl).toBeElement(
-            createElement("div", { className: "widget-carousel-control right", onClick: onClickSpy },
+        expect(carouselControl.getElement()).toEqual(
+            createElement(
+                "div",
+                { className: "widget-carousel-control right", onClick: onClickSpy },
                 createElement("span", { className: "glyphicon glyphicon-chevron-right" })
             )
         );
@@ -27,11 +28,11 @@ describe("CarouselControl", () => {
         });
 
         it("renders the right css class", () => {
-            expect(carouselControl).toHaveClass("right");
+            expect(carouselControl.hasClass("right")).toBe(true);
         });
 
         it("renders the correct glyphicon", () => {
-            expect(carouselControl.find(".glyphicon.glyphicon-chevron-right").length).toBe(1);
+            expect(carouselControl.find(".glyphicon.glyphicon-chevron-right")).toHaveLength(1);
         });
     });
 
@@ -41,11 +42,11 @@ describe("CarouselControl", () => {
         });
 
         it("renders the left css class", () => {
-            expect(carouselControl).toHaveClass("left");
+            expect(carouselControl.hasClass("left")).toBe(true);
         });
 
         it("renders the correct glyphicon", () => {
-            expect(carouselControl.find(".glyphicon.glyphicon-chevron-left").length).toBe(1);
+            expect(carouselControl.find(".glyphicon.glyphicon-chevron-left")).toHaveLength(1);
         });
     });
 

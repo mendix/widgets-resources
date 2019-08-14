@@ -26,3 +26,5 @@ packages-web/range-slider/tests/TestProjects/*/widgets/RangeSlider.mpk
 packages-web/rich-text/tests/TestProjects/*/widgets/RichText.mpk
 packages-web/signature/tests/TestProjects/*/widgets/Signature.mpk
 packages-web/slider/tests/TestProjects/*/widgets/Slider.mpk
+packages-web/color-picker/tests/TestProjects/*/widgets/ColorPicker.mpk
+packages-web/carousel/tests/TestProjects/*/widgets/Carousel.mpk

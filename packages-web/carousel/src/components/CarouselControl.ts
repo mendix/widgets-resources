@@ -1,13 +1,14 @@
 import { MouseEventHandler, SFC, createElement } from "react";
-import * as classNames from "classnames";
+import classNames from "classnames";
 
 export interface CarouselControlProps {
     direction: "right" | "left";
     onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
-export const CarouselControl: SFC<CarouselControlProps> = (props) =>
-    createElement("div",
+export const CarouselControl: SFC<CarouselControlProps> = props =>
+    createElement(
+        "div",
         {
             className: classNames("widget-carousel-control", props.direction),
             onClick: props.onClick
