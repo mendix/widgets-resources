@@ -1,11 +1,11 @@
-import { Component, ReactChild, createElement } from "react";
+import { Component, ReactChild, createElement, ReactNode } from "react";
 import { hot } from "react-hot-loader/root";
 
 import { Calendar, CalendarEvent } from "./Calendar";
 import { fetchData } from "../utils/data";
 import { Container } from "../utils/namespaces";
-import * as dateMath from "date-arithmetic";
-import * as moment from "moment";
+import dateMath from "date-arithmetic";
+import moment from "moment";
 
 export interface CalendarContainerState {
     alertMessage: ReactChild;
@@ -34,19 +34,21 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         startPosition: new Date()
     };
 
-    componentWillMount() {
+    componentWillMount(): void {
         moment.updateLocale(window.mx.session.sessionData.locale.code, {
             week: { dow: window.mx.session.sessionData.locale.firstDayOfWeek, doy: 6 }
         });
     }
 
-    render() {
+    render(): ReactNode {
         const readOnly = this.isReadOnly();
-        const alertMessage = this.state.alertMessage
-            || CalendarContainer.validateProps(this.props)
-            || CalendarContainer.validateCustomFormats(this.props);
+        const alertMessage =
+            this.state.alertMessage ||
+            CalendarContainer.validateProps(this.props) ||
+            CalendarContainer.validateCustomFormats(this.props);
 
-        return createElement("div",
+        return createElement(
+            "div",
             {
                 style: this.state.loading ? { ...parseStyle(this.props.style) } : undefined
             },
@@ -78,11 +80,11 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         );
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
     }
 
-    componentWillReceiveProps(nextProps: Container.CalendarContainerProps) {
+    componentWillReceiveProps(nextProps: Container.CalendarContainerProps): void {
         if (nextProps.mxObject) {
             if (!this.state.alertMessage) {
                 this.loadEvents(nextProps.mxObject);
@@ -91,14 +93,13 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         } else {
             this.setState({ events: [], loading: false });
         }
-
     }
 
     private isReadOnly(): boolean {
         return !this.props.mxObject || !this.props.editable || this.props.readOnly;
     }
 
-    private getStartPosition = (mxObject: mendix.lib.MxObject) => {
+    private getStartPosition = (mxObject: mendix.lib.MxObject): Date => {
         if (mxObject && mxObject.get(this.props.startDateAttribute) !== "") {
             const startPosition = this.props.startDateAttribute
                 ? new Date(mxObject.get(this.props.startDateAttribute) as number)
@@ -108,14 +109,16 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         }
 
         return new Date();
-    }
+    };
 
-    private loadEvents = (mxObject: mendix.lib.MxObject) => {
-        if (!mxObject) return;
+    private loadEvents = (mxObject: mendix.lib.MxObject): void => {
+        if (!mxObject) {
+            return;
+        }
         this.setViewDates(mxObject);
         const guid = mxObject ? mxObject.getGuid() : "";
         if (this.props.dataSource === "context" && mxObject) {
-            this.setCalendarEvents([ mxObject ]);
+            this.setCalendarEvents([mxObject]);
         } else {
             fetchData({
                 guid,
@@ -133,14 +136,14 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
                 }
             });
         }
-    }
+    };
 
-    private setViewDates(mxObject: mendix.lib.MxObject) {
+    private setViewDates(mxObject: mendix.lib.MxObject): void {
         const startPosition = this.getStartPosition(mxObject);
         if (
-            this.props.executeOnViewChange
-            && mxObject.get(this.props.viewStartAttribute) === ""
-            && mxObject.get(this.props.viewEndAttribute) === ""
+            this.props.executeOnViewChange &&
+            mxObject.get(this.props.viewStartAttribute) === "" &&
+            mxObject.get(this.props.viewEndAttribute) === ""
         ) {
             const viewStart = new Date(startPosition.getFullYear(), startPosition.getMonth(), 1);
             const viewEnd = new Date(startPosition.getFullYear(), startPosition.getMonth() + 1, 0);
@@ -150,15 +153,18 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
             } else if (this.props.defaultView === "week" || this.props.defaultView === "work_week") {
                 mxObject.set(
                     this.props.viewStartAttribute,
-                    dateMath.startOf(
-                        startPosition,
-                        "week",
-                        [ window.mx.session.sessionData.locale.firstDayOfWeek ]
-                    )
+                    dateMath.startOf(startPosition, "week", [window.mx.session.sessionData.locale.firstDayOfWeek])
                 );
+                // eslint-disable-next-line no-unused-expressions
                 this.props.defaultView === "week"
-                    ? mxObject.set(this.props.viewEndAttribute, dateMath.endOf(new Date(startPosition.setDate(startPosition.getDate() + 6)), "day"))
-                    : mxObject.set(this.props.viewEndAttribute, dateMath.endOf(new Date(startPosition.setDate(startPosition.getDate() + 4)), "day"));
+                    ? mxObject.set(
+                          this.props.viewEndAttribute,
+                          dateMath.endOf(new Date(startPosition.setDate(startPosition.getDate() + 6)), "day")
+                      )
+                    : mxObject.set(
+                          this.props.viewEndAttribute,
+                          dateMath.endOf(new Date(startPosition.setDate(startPosition.getDate() + 4)), "day")
+                      );
             } else {
                 mxObject.set(this.props.viewStartAttribute, dateMath.startOf(viewStart, "month"));
                 mxObject.set(this.props.viewEndAttribute, dateMath.endOf(viewEnd, "month"));
@@ -167,10 +173,10 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         this.setState({ startPosition });
     }
 
-    private setCalendarEvents = (mxObjects: mendix.lib.MxObject[]) => {
+    private setCalendarEvents = (mxObjects: mendix.lib.MxObject[]): void => {
         if (mxObjects) {
             const events = mxObjects.map(mxObject => ({
-                title: mxObject.get(this.props.titleAttribute) as string || " ",
+                title: (mxObject.get(this.props.titleAttribute) as string) || " ",
                 allDay: mxObject.get(this.props.allDayAttribute) as boolean,
                 start: new Date(mxObject.get(this.props.startAttribute) as number),
                 end: new Date(mxObject.get(this.props.endAttribute) as number),
@@ -179,26 +185,32 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
             }));
             this.setState({ events, eventCache: mxObjects, loading: false });
         }
-    }
+    };
 
-    private resetSubscriptions = (mxObject: mendix.lib.MxObject) => {
+    private resetSubscriptions = (mxObject: mendix.lib.MxObject): void => {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
         this.subscriptionHandles = [];
 
         if (mxObject) {
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                guid: mxObject.getGuid(),
-                attr: this.props.startDateAttribute,
-                callback: () => this.getStartPosition(mxObject)
-            }));
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                entity: this.props.eventEntity,
-                callback: () => this.loadEvents(mxObject)
-            }));
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                guid: mxObject.getGuid(),
-                callback: () => this.loadEvents(mxObject)
-            }));
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    guid: mxObject.getGuid(),
+                    attr: this.props.startDateAttribute,
+                    callback: () => this.getStartPosition(mxObject)
+                })
+            );
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    entity: this.props.eventEntity,
+                    callback: () => this.loadEvents(mxObject)
+                })
+            );
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    guid: mxObject.getGuid(),
+                    callback: () => this.loadEvents(mxObject)
+                })
+            );
             if (this.props.dataSource === "context" && mxObject.getEntity() === this.props.eventEntity) {
                 [
                     this.props.allDayAttribute,
@@ -206,50 +218,64 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
                     this.props.startAttribute,
                     this.props.endAttribute,
                     this.props.eventColor
-                ].forEach(attr => this.subscriptionHandles.push(window.mx.data.subscribe({
-                    attr,
-                    callback: () => this.loadEvents(mxObject),
-                    guid: mxObject.getGuid()
-                })));
+                ].forEach(attr =>
+                    this.subscriptionHandles.push(
+                        window.mx.data.subscribe({
+                            attr,
+                            callback: () => this.loadEvents(mxObject),
+                            guid: mxObject.getGuid()
+                        })
+                    )
+                );
             }
         }
-    }
+    };
 
     private setCustomViews = () => {
-        return this.props.customViews.reduce((accumulator: Container.ViewOptions, customView: Container.CustomViews) => {
-            if (customView.customView === "agenda") {
-                accumulator.allDay = customView.allDayText;
-                accumulator.date = customView.textHeaderDate;
-                accumulator.time = customView.textHeaderTime;
-                accumulator.event = customView.textHeaderEvent;
-            }
+        return this.props.customViews.reduce(
+            (accumulator: Container.ViewOptions, customView: Container.CustomViews) => {
+                if (customView.customView === "agenda") {
+                    accumulator.allDay = customView.allDayText;
+                    accumulator.date = customView.textHeaderDate;
+                    accumulator.time = customView.textHeaderTime;
+                    accumulator.event = customView.textHeaderEvent;
+                }
 
-            return accumulator;
-        }, {});
-    }
+                return accumulator;
+            },
+            {}
+        );
+    };
 
     private setCalendarFormats = () => {
-        return this.props.customViews.reduce((accumulator: Container.ViewOptions, customView: Container.CustomViews) => {
-            accumulator.dateFormat = customView.customView === "month"
-                ? this.customFormat(customView.cellDateFormat, "date")
-                : accumulator.dateFormat;
-            accumulator.dayFormat = customView.customView === "day"
-                || customView.customView === "week"
-                || customView.customView === "work_week"
-                    ? this.customFormat(customView.gutterDateFormat, "day")
-                    : accumulator.dayFormat;
-            accumulator.weekdayFormat = customView.customView === "month"
-                ? this.customFormat(customView.headerFormat, "weekday")
-                : accumulator.weekdayFormat;
-            accumulator.timeGutterFormat = customView.customView === "week"
-                || customView.customView === "day"
-                || customView.customView === "work_week"
-                    ? this.customFormat(customView.gutterTimeFormat, "timeGutter")
-                    : accumulator.timeGutterFormat;
+        return this.props.customViews.reduce(
+            (accumulator: Container.ViewOptions, customView: Container.CustomViews) => {
+                accumulator.dateFormat =
+                    customView.customView === "month"
+                        ? this.customFormat(customView.cellDateFormat, "date")
+                        : accumulator.dateFormat;
+                accumulator.dayFormat =
+                    customView.customView === "day" ||
+                    customView.customView === "week" ||
+                    customView.customView === "work_week"
+                        ? this.customFormat(customView.gutterDateFormat, "day")
+                        : accumulator.dayFormat;
+                accumulator.weekdayFormat =
+                    customView.customView === "month"
+                        ? this.customFormat(customView.headerFormat, "weekday")
+                        : accumulator.weekdayFormat;
+                accumulator.timeGutterFormat =
+                    customView.customView === "week" ||
+                    customView.customView === "day" ||
+                    customView.customView === "work_week"
+                        ? this.customFormat(customView.gutterTimeFormat, "timeGutter")
+                        : accumulator.timeGutterFormat;
 
-            return accumulator;
-        }, {});
-    }
+                return accumulator;
+            },
+            {}
+        );
+    };
 
     private customFormat = (dateFormat: string, dateType: Container.DateType) => {
         let datePattern = "";
@@ -264,10 +290,12 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         }
 
         return (date: Date) => window.mx.parser.formatValue(date, "datetime", { datePattern });
-    }
+    };
 
     private onRangeChange = (date: ViewDate) => {
-        if (!this.props.executeOnViewChange) { return; }
+        if (!this.props.executeOnViewChange) {
+            return;
+        }
         if (date.start) {
             const middle = new Date((date.start.getTime() + date.end.getTime()) / 2);
 
@@ -287,7 +315,7 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
             this.progressHandle = mx.ui.showProgress();
         }
         this.loadEvents(this.props.mxObject);
-    }
+    };
 
     private handleOnClickEvent = (eventInfo: Container.EventInfo) => {
         mx.data.get({
@@ -295,22 +323,26 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
             callback: this.executeEventAction,
             error: error => window.mx.ui.error(`Error while executing action: ${error.message}`)
         });
-    }
+    };
 
     private executeEventAction = (mxObject: mendix.lib.MxObject) => {
         const { onClickEvent, onClickMicroflow, mxform, onClickNanoflow } = this.props;
         if (mxObject) {
             this.executeAction(mxObject, onClickEvent, onClickMicroflow, mxform, onClickNanoflow);
         }
-    }
+    };
 
     private onClickSlot = (slotInfo: Container.EventInfo) => {
         mx.data.create({
             entity: this.props.eventEntity,
-            callback: (newEvent) => {
+            callback: newEvent => {
                 newEvent.set(this.props.startAttribute, dateMath.startOf(slotInfo.start, "day"));
                 newEvent.set(this.props.endAttribute, dateMath.endOf(slotInfo.end, "day"));
-                if (this.props.mxObject && this.props.newEventContextPath && this.props.newEventContextPath.split("/")[1] === this.props.mxObject.getEntity()) {
+                if (
+                    this.props.mxObject &&
+                    this.props.newEventContextPath &&
+                    this.props.newEventContextPath.split("/")[1] === this.props.mxObject.getEntity()
+                ) {
                     newEvent.set(this.props.newEventContextPath.split("/")[0], this.props.mxObject.getGuid());
                 } else {
                     window.logger.warn("Event entity should not be same as context entity");
@@ -319,9 +351,9 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
             },
             error: error => window.mx.ui.error(`Error while creating a new event: ${error.message}`)
         });
-    }
+    };
 
-    private executeSlotAction(mxObject: mendix.lib.MxObject) {
+    private executeSlotAction(mxObject: mendix.lib.MxObject): void {
         const { onCreate, onCreateMicroflow, mxform, onCreateNanoflow } = this.props;
         this.executeAction(mxObject, onCreate, onCreateMicroflow, mxform, onCreateNanoflow);
     }
@@ -337,7 +369,7 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
             guid: eventInfo.event.guid,
             color: eventInfo.event.color
         };
-        const nextEvents = [ ...events ];
+        const nextEvents = [...events];
         nextEvents.splice(eventPosition, 1, updatedEvent);
         this.setState({ events: nextEvents });
         const mxEventObject = this.state.eventCache.filter(object => object.getGuid() === eventInfo.event.guid)[0];
@@ -348,16 +380,22 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
             mxEventObject.set(this.props.endAttribute, eventInfo.end);
             this.executeOnDropAction(mxEventObject);
         }
-    }
+    };
 
     private executeOnDropAction = (mxObject: mendix.lib.MxObject) => {
         const { onChangeEvent, onChangeMicroflow, mxform, onChangeNanoflow } = this.props;
         if (mxObject && mxObject.getGuid()) {
             this.executeAction(mxObject, onChangeEvent, onChangeMicroflow, mxform, onChangeNanoflow);
         }
-    }
+    };
 
-    private executeAction(mxObject: mendix.lib.MxObject, action: Container.OnClickEventOptions, microflow: string, mxform: mxui.lib.form._FormBase, nanoflow: mx.Nanoflow) {
+    private executeAction(
+        mxObject: mendix.lib.MxObject,
+        action: Container.OnClickEventOptions,
+        microflow: string,
+        mxform: mxui.lib.form._FormBase,
+        nanoflow: mx.Nanoflow
+    ): void {
         const context = new mendix.lib.MxContext();
         context.setContext(mxObject.getEntity(), mxObject.getGuid());
         if (action === "callMicroflow" && microflow && mxObject.getGuid()) {
@@ -376,7 +414,7 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         }
     }
 
-    public static validateProps(props: Container.CalendarContainerProps): ReactChild {
+    static validateProps(props: Container.CalendarContainerProps): ReactChild {
         const errorMessages: string[] = [];
 
         if (props.onClickEvent === "callMicroflow" && !props.onClickMicroflow) {
@@ -409,7 +447,9 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
             errorMessages.push(`${props.friendlyId}: ${props.defaultView} is only available in custom view`);
         }
         if (errorMessages.length) {
-            return createElement("div", {},
+            return createElement(
+                "div",
+                {},
                 "Error in calendar configuration:",
                 errorMessages.map((message, key) => createElement("p", { key }, message))
             );
@@ -418,7 +458,7 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         return "";
     }
 
-    public static validateCustomFormats(props: Container.CalendarContainerProps): ReactChild {
+    static validateCustomFormats(props: Container.CalendarContainerProps): ReactChild {
         const errorMessages: string[] = [];
 
         try {
@@ -435,7 +475,9 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
             errorMessages.push(`${props.friendlyId}: Invalid format value`);
         }
         if (errorMessages.length) {
-            return createElement("div", {},
+            return createElement(
+                "div",
+                {},
                 "Error in calendar configuration:",
                 errorMessages.map((message, key) => createElement("p", { key }, message))
             );
@@ -444,8 +486,8 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         return "";
     }
 
-    public static logError(message: string, style?: string, error?: any) {
-        // tslint:disable-next-line:no-console
+    static logError(message: string, style?: string, error?: any): void {
+        // eslint-disable-next-line no-unused-expressions,no-console
         window.logger ? window.logger.error(message) : console.log(message, style, error);
     }
 }

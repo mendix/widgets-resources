@@ -1,12 +1,14 @@
-import { shallow } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 import { createElement } from "react";
 
 import { CalendarProps, MyCalendar } from "../Calendar";
 import { SizeContainer, SizeProps } from "../SizeContainer";
 
 describe("Calendar", () => {
-    const renderCalendar = (props: CalendarProps) => shallow(createElement(MyCalendar, props));
-    const renderCalendarSizeComponent = (props: SizeProps) => shallow(createElement(SizeContainer, props));
+    const renderCalendar = (props: CalendarProps): ShallowWrapper<CalendarProps, any> =>
+        shallow(createElement(MyCalendar, props));
+    const renderCalendarSizeComponent = (props: SizeProps): ShallowWrapper<SizeProps, any> =>
+        shallow(createElement(SizeContainer, props));
     const sizeProps: SizeProps = {
         className: "widget-calendar",
         widthUnit: "pixels",
@@ -46,60 +48,34 @@ describe("Calendar", () => {
 
     it("renders the structure correctly", () => {
         const calendar = renderCalendarSizeComponent(sizeProps);
-        const style = { position: "relative", width: "100px", height: "100px" };
-        const boxSizeInnerStyle = { position: "absolute", top: "0", right: "0", bottom: "0", left: "0" };
 
-        expect(calendar).toBeElement(
-            createElement("div", { className: "widget-calendar size-box", style },
-                createElement("div", { className: "size-box-inner", style: boxSizeInnerStyle }
-                )
-            )
-        );
+        expect(calendar).toMatchSnapshot();
     });
 
     it("should render a structure correctly with pixels", () => {
         const calendar = renderCalendarSizeComponent(sizeProps);
-        const style = { position: "relative", width: "100px", height: "100px" };
-        const boxSizeInnerStyle = { position: "absolute", top: "0", right: "0", bottom: "0", left: "0" };
 
-        expect(calendar).toBeElement(
-            createElement("div", { className: "widget-calendar size-box", style },
-                createElement("div", { className: "size-box-inner", style: boxSizeInnerStyle }
-                )
-            )
-        );
+        expect(calendar).toMatchSnapshot();
     });
 
     it("should render a structure correctly with percentage", () => {
         const calendar = renderCalendarSizeComponent(sizeProps);
-        const style = { position: "relative", width: "100%", height: "auto", paddingBottom: "100%" };
-        const boxSizeInnerStyle = { position: "absolute", top: "0", right: "0", bottom: "0", left: "0" };
         calendar.setProps({
             heightUnit: "percentageOfWidth",
             widthUnit: "percentage"
         });
 
-        expect(calendar).toBeElement(
-            createElement("div", { className: "widget-calendar size-box", style },
-                createElement("div", { className: "size-box-inner", style: boxSizeInnerStyle })
-            )
-        );
+        expect(calendar).toMatchSnapshot();
     });
 
     it("should render a structure correctly with percentage of parent", () => {
         const calendar = renderCalendarSizeComponent(sizeProps);
-        const style = { position: "relative", width: "100%", height: "100%" };
-        const boxSizeInnerStyle = { position: "absolute", top: "0", right: "0", bottom: "0", left: "0" };
         calendar.setProps({
             heightUnit: "percentageOfParent",
             widthUnit: "percentage"
         });
 
-        expect(calendar).toBeElement(
-            createElement("div", { className: "widget-calendar size-box", style },
-                createElement("div", { className: "size-box-inner", style: boxSizeInnerStyle })
-            )
-        );
+        expect(calendar).toMatchSnapshot();
     });
 
     describe("event handler", () => {
@@ -123,7 +99,7 @@ describe("Calendar", () => {
             const eventInfo = {
                 start: new Date(),
                 event: {
-                    start: new Date((new Date()).valueOf() + 1000 * 3600 * 24)
+                    start: new Date(new Date().valueOf() + 1000 * 3600 * 24)
                 }
             };
             calendarProps.onEventDropAction = jasmine.createSpy("onDrop");
@@ -138,7 +114,7 @@ describe("Calendar", () => {
             const eventInfo = {
                 end: new Date(),
                 event: {
-                    end: new Date((new Date()).valueOf() + 1000 * 3600 * 24)
+                    end: new Date(new Date().valueOf() + 1000 * 3600 * 24)
                 }
             };
             calendarProps.onEventResizeAction = jasmine.createSpy("onDrop");
@@ -150,6 +126,7 @@ describe("Calendar", () => {
     });
 
     afterAll(() => {
+        // @ts-ignore
         (window.mx as any) = undefined;
     });
 });

@@ -1,5 +1,5 @@
-import { CSSProperties, SFC, createElement } from "react";
-import * as classNames from "classnames";
+import { CSSProperties, createElement, FunctionComponent } from "react";
+import classNames from "classnames";
 
 export type HeightUnitType = "percentageOfWidth" | "percentageOfParent" | "pixels";
 
@@ -17,10 +17,19 @@ export interface SizeProps extends Dimensions {
     style?: CSSProperties;
 }
 
-export const SizeContainer: SFC<SizeProps> = ({ className, widthUnit, width, heightUnit, height, children, style }) => {
+export const SizeContainer: FunctionComponent<SizeProps> = ({
+    className,
+    widthUnit,
+    width,
+    heightUnit,
+    height,
+    children,
+    style
+}) => {
     const styleWidth = widthUnit === "percentage" ? `${width}%` : `${width}px`;
 
-    return createElement("div",
+    return createElement(
+        "div",
         {
             className: classNames(className, "size-box"),
             style: {
@@ -30,20 +39,25 @@ export const SizeContainer: SFC<SizeProps> = ({ className, widthUnit, width, hei
                 ...style
             },
             ref: parentHeight
-        }, createElement("div", {
-            className: "size-box-inner",
-            style: {
-                position: "absolute",
-                top: "0",
-                right: "0",
-                bottom: "0",
-                left: "0"
-            }
-        }, children)
+        },
+        createElement(
+            "div",
+            {
+                className: "size-box-inner",
+                style: {
+                    position: "absolute",
+                    top: "0",
+                    right: "0",
+                    bottom: "0",
+                    left: "0"
+                }
+            },
+            children
+        )
     );
 };
 
-const parentHeight = (node?: HTMLElement | null) => {
+const parentHeight = (node?: HTMLElement | null): void => {
     // Fix for percentage height of parent.
     // There no other way to control widget wrapper style
     if (node && node.parentElement) {

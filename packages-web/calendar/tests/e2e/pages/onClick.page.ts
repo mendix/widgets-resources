@@ -1,17 +1,17 @@
 class OnClickEventPage {
-    public get calendar() {
-        return browser.element(".mx-name-calendar1");
+    get calendar(): WebdriverIO.Element {
+        return $(".mx-name-calendar1");
     }
 
-    public get calendarEvent() {
-        return browser.element(".mx-name-calendar1 .rbc-event-content");
+    get calendarEvent(): WebdriverIO.Element {
+        return $(".mx-name-calendar1 .rbc-event-content");
     }
 
-    public get eventEditPage() {
-        return browser.element(".modal-content");
+    get eventEditPage(): WebdriverIO.Element {
+        return $(".modal-content");
     }
 
-    public open(): void {
+    open(): void {
         browser.url("/p/onClick");
     }
 }

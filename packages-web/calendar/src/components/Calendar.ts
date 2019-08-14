@@ -1,11 +1,11 @@
-import { CSSProperties, Component, ReactChild, createElement } from "react";
+import { CSSProperties, Component, ReactChild, createElement, ReactNode } from "react";
 
 import { Alert } from "./Alert";
 import { Container, Style } from "../utils/namespaces";
-import * as classNames from "classnames";
-import * as BigCalendar from "react-big-calendar";
-import * as moment from "moment";
-import * as withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
+import classNames from "classnames";
+import BigCalendar from "react-big-calendar";
+import moment from "moment";
+import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import CustomToolbar from "./Toolbar";
 import { SizeContainer } from "./SizeContainer";
 
@@ -52,7 +52,7 @@ export interface CalendarProps {
 }
 
 interface HOCToolbarProps {
-    customViews: Container.CustomViews[] | Partial<Container.ButtonConfig>[];
+    customViews: Container.CustomViews[] | Array<Partial<Container.ButtonConfig>>;
     onClickToolbarButton: (date: object) => void;
 }
 
@@ -66,9 +66,9 @@ export interface CalendarEvent {
 }
 
 class Calendar extends Component<CalendarProps> {
-
-    render() {
-        return createElement(SizeContainer,
+    render(): ReactNode {
+        return createElement(
+            SizeContainer,
             {
                 className: classNames("widget-calendar", this.props.className),
                 style: this.props.style,
@@ -82,7 +82,7 @@ class Calendar extends Component<CalendarProps> {
         );
     }
 
-    private getDefaultToolbar(): Partial<Container.ButtonConfig>[] {
+    private getDefaultToolbar(): Array<Partial<Container.ButtonConfig>> {
         return [
             {
                 customView: "previous",
@@ -121,18 +121,20 @@ class Calendar extends Component<CalendarProps> {
         ];
     }
 
-    private renderAlert() {
+    private renderAlert(): ReactNode {
         return createElement(Alert, { className: "widget-calendar-alert" }, this.props.alertMessage);
     }
 
-    private renderCalendar() {
-        const wrapToolbar = (injectedProps: HOCToolbarProps) =>
-            (toolbarProps: Container.ToolbarProps) => createElement(CustomToolbar as any, { ...injectedProps, ...toolbarProps });
+    private renderCalendar(): ReactNode {
+        const wrapToolbar = (injectedProps: HOCToolbarProps): Function => (toolbarProps: Container.ToolbarProps) =>
+            createElement(CustomToolbar as any, { ...injectedProps, ...toolbarProps });
 
         const props = {
             events: this.props.events,
             allDayAccessor: this.allDayAccessor,
-            components: { toolbar: wrapToolbar({ customViews: this.getToolbarProps(), onClickToolbarButton: this.onRangeChange }) },
+            components: {
+                toolbar: wrapToolbar({ customViews: this.getToolbarProps(), onClickToolbarButton: this.onRangeChange })
+            },
             eventPropGetter: this.eventColor,
             defaultDate: this.props.startPosition,
             defaultView: this.defaultView(),
@@ -145,7 +147,7 @@ class Calendar extends Component<CalendarProps> {
             onRangeChange: this.onRangeChange,
             onSelectEvent: this.onSelectEvent,
             onSelectSlot: this.onSelectSlot,
-            views: [ "month", "day", "week", "work_week", "month", "agenda" ]
+            views: ["month", "day", "week", "work_week", "month", "agenda"]
         };
 
         if (this.props.loading) {
@@ -161,18 +163,19 @@ class Calendar extends Component<CalendarProps> {
         }
     }
 
-    private defaultView() {
-        if (this.props.viewOption === "standard" && (this.props.defaultView === "work_week" || this.props.defaultView === "agenda")) {
+    private defaultView(): Style.View {
+        if (
+            this.props.viewOption === "standard" &&
+            (this.props.defaultView === "work_week" || this.props.defaultView === "agenda")
+        ) {
             return "month";
         }
 
         return this.props.defaultView;
     }
 
-    private getToolbarProps(): Partial<Container.ButtonConfig>[] {
-        const toolbarProps = this.props.viewOption === "standard"
-            ? this.getDefaultToolbar()
-            : this.props.customViews;
+    private getToolbarProps(): Array<Partial<Container.ButtonConfig>> {
+        const toolbarProps = this.props.viewOption === "standard" ? this.getDefaultToolbar() : this.props.customViews;
 
         return toolbarProps.map(customView => ({ ...customView, onClickToolbarButton: this.onRangeChange }));
     }
@@ -185,27 +188,39 @@ class Calendar extends Component<CalendarProps> {
         if (this.props.onRangeChangeAction && date) {
             this.props.onRangeChangeAction(date);
         }
-    }
+    };
 
     private onEventDrop = (eventInfo: Container.EventInfo) => {
-        if (eventInfo.start.getDate() !== eventInfo.event.start.getDate() && this.props.editable === "default" && this.props.onEventDropAction) {
+        if (
+            eventInfo.start.getDate() !== eventInfo.event.start.getDate() &&
+            this.props.editable === "default" &&
+            this.props.onEventDropAction
+        ) {
             this.props.onEventDropAction(eventInfo);
         }
-    }
+    };
 
     private onEventResize = (_resizeType: string, eventInfo: Container.EventInfo) => {
-        if (eventInfo.end.getDate() !== eventInfo.event.end.getDate() && this.props.editable && this.props.onEventResizeAction) {
+        if (
+            eventInfo.end.getDate() !== eventInfo.event.end.getDate() &&
+            this.props.editable &&
+            this.props.onEventResizeAction
+        ) {
             this.props.onEventResizeAction(eventInfo);
         }
-    }
+    };
 
     private onSelectEvent = (eventInfo: object) => {
-        if (this.props.onSelectEventAction) { this.props.onSelectEventAction(eventInfo); }
-    }
+        if (this.props.onSelectEventAction) {
+            this.props.onSelectEventAction(eventInfo);
+        }
+    };
 
     private onSelectSlot = (slotInfo: object) => {
-        if (this.props.onSelectSlotAction) { this.props.onSelectSlotAction(slotInfo); }
-    }
+        if (this.props.onSelectSlotAction) {
+            this.props.onSelectSlotAction(slotInfo);
+        }
+    };
 }
 
-export { Calendar as Calendar, Calendar as MyCalendar };
+export { Calendar, Calendar as MyCalendar };

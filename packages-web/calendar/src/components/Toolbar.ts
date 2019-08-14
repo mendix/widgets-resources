@@ -1,18 +1,17 @@
 import { ReactNode, createElement } from "react";
-import * as classNames from "classnames";
-import * as Toolbar from "react-big-calendar/lib/Toolbar";
+import classNames from "classnames";
+import Toolbar from "react-big-calendar/lib/Toolbar";
 import { Container, Style } from "../utils/namespaces";
-import { ToolbarButton } from "../components/Button";
+import { ToolbarButton } from "./Button";
 
 export default class CustomToolbar extends Toolbar {
-
-    render() {
-        const isView = (customView: Container.ButtonConfig) =>
-            customView.customView === "day"
-            || customView.customView === "week"
-            || customView.customView === "month"
-            || customView.customView === "work_week"
-            || customView.customView === "agenda";
+    render(): ReactNode {
+        const isView = (customView: Container.ButtonConfig): boolean =>
+            customView.customView === "day" ||
+            customView.customView === "week" ||
+            customView.customView === "month" ||
+            customView.customView === "work_week" ||
+            customView.customView === "agenda";
         let activeViews: Container.ButtonConfig[] = this.props.customViews;
         const countViews = activeViews.filter(customView => isView(customView)).length;
         if (countViews === 1) {
@@ -26,24 +25,28 @@ export default class CustomToolbar extends Toolbar {
         const centerButton = this.filterPosition(activeViews, "center");
         const rightButton = this.filterPosition(activeViews, "right");
 
-        return createElement("div", { className: classNames("calendar-toolbar") },
+        return createElement(
+            "div",
+            { className: classNames("calendar-toolbar") },
             this.createGroupButton(leftButton, "left"),
             this.createGroupButton(centerButton, "center"),
             this.createGroupButton(rightButton, "right")
         );
     }
 
-    private filterPosition(customViews: Container.ButtonConfig[], position: string) {
+    private filterPosition(customViews: Container.ButtonConfig[], position: string): Container.ButtonConfig[] {
         return customViews.filter((customView: Container.ButtonConfig) => customView.position === position);
     }
 
     private createGroupButton(views: Container.ButtonConfig[], position: Style.Position): ReactNode {
-        return createElement("div", { className: classNames(`align-${position}`, { "btn-group": true }) },
+        return createElement(
+            "div",
+            { className: classNames(`align-${position}`, { "btn-group": true }) },
             views.map(view => this.createToolbarElement(view))
         );
     }
 
-    private createToolbarElement(view: Container.ButtonConfig) {
+    private createToolbarElement(view: Container.ButtonConfig): ReactNode {
         if (view.customView === "title") {
             return createElement("span", { className: "calendar-label" }, this.props.label);
         }
@@ -60,21 +63,27 @@ export default class CustomToolbar extends Toolbar {
         });
     }
 
-    private getOnClickFunction(view: Container.ButtonConfig) {
+    private getOnClickFunction(view: Container.ButtonConfig): () => void {
         if (view.customView === "previous") {
             return () => {
                 this.props.onNavigate("PREV");
-                if (this.props.onClickToolbarButton) this.props.onClickToolbarButton();
+                if (this.props.onClickToolbarButton) {
+                    this.props.onClickToolbarButton();
+                }
             };
         } else if (view.customView === "next") {
             return () => {
                 this.props.onNavigate("NEXT");
-                if (this.props.onClickToolbarButton) this.props.onClickToolbarButton();
+                if (this.props.onClickToolbarButton) {
+                    this.props.onClickToolbarButton();
+                }
             };
         } else if (view.customView === "today") {
             return () => {
                 this.props.onNavigate("TODAY");
-                if (this.props.onClickToolbarButton) this.props.onClickToolbarButton();
+                if (this.props.onClickToolbarButton) {
+                    this.props.onClickToolbarButton();
+                }
             };
         }
 
@@ -85,7 +94,7 @@ export default class CustomToolbar extends Toolbar {
         };
     }
 
-    private getIcon(view: Container.ButtonConfig) {
+    private getIcon(view: Container.ButtonConfig): string | undefined {
         if (view.customView === "previous") {
             return "glyphicon glyphicon-backward";
         } else if (view.customView === "next") {
@@ -95,7 +104,7 @@ export default class CustomToolbar extends Toolbar {
         return undefined;
     }
 
-    private getIconPosition(view: Container.ButtonConfig) {
+    private getIconPosition(view: Container.ButtonConfig): "left" | "right" | undefined {
         if (view.customView === "previous") {
             return "left";
         } else if (view.customView === "next") {
