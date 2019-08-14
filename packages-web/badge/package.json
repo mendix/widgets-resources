@@ -26,9 +26,7 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "@types/classnames": "^2.2.3",
-        "@wdio/sync": "^5.11.13",
-        "@widgets-resources/utils-react-widgets": "0.0.1",
-        "cross-env": "^5.2.0"
+        "@widgets-resources/utils-react-widgets": "0.0.1"
     },
     "dependencies": {
         "classnames": "^2.2.5"
