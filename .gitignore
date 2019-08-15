@@ -29,3 +29,6 @@ packages-web/slider/tests/TestProjects/*/widgets/Slider.mpk
 packages-web/color-picker/tests/TestProjects/*/widgets/ColorPicker.mpk
 packages-web/carousel/tests/TestProjects/*/widgets/Carousel.mpk
 packages-web/maps/tests/TestProjects/*/widgets/Maps.mpk
+packages-web/progress-circle/tests/TestProjects/*/widgets/ProgressCircle.mpk
+packages-web/calendar/tests/TestProjects/*/widgets/Calendar.mpk
+packages-web/image-viewer/tests/TestProjects/*/widgets/ImageViewer.mpk
