@@ -28,3 +28,4 @@ packages-web/signature/tests/TestProjects/*/widgets/Signature.mpk
 packages-web/slider/tests/TestProjects/*/widgets/Slider.mpk
 packages-web/color-picker/tests/TestProjects/*/widgets/ColorPicker.mpk
 packages-web/carousel/tests/TestProjects/*/widgets/Carousel.mpk
+packages-web/maps/tests/TestProjects/*/widgets/Maps.mpk
