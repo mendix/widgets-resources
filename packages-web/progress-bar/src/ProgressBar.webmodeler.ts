@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, createElement, ReactNode } from "react";
 import { ProgressBar, ProgressBarProps } from "./components/ProgressBar";
 import ProgressBarContainer, { ProgressBarContainerProps } from "./components/ProgressBarContainer";
 import { Alert } from "./components/Alert";
@@ -9,16 +9,12 @@ type VisibilityMap = {
     [P in keyof ProgressBarContainerProps]: boolean;
 };
 
-// tslint:disable-next-line:class-name
 export class preview extends Component<ProgressBarContainerProps, {}> {
-    render() {
+    render(): ReactNode {
         const warnings = ProgressBarContainer.validateProps(this.props);
         const bar = createElement(ProgressBar, this.transformProps(this.props));
         if (warnings) {
-            return createElement("div", {},
-                createElement(Alert, { bootstrapStyle: "danger", message: warnings }),
-                bar
-            );
+            return createElement("div", {}, createElement(Alert, { bootstrapStyle: "danger", message: warnings }), bar);
         }
         return bar;
     }
@@ -37,7 +33,7 @@ export class preview extends Component<ProgressBarContainerProps, {}> {
         };
     }
 
-    private getDisplayTextValue() {
+    private getDisplayTextValue(): string {
         if (this.props.displayText === "attribute") {
             return `{ ${this.props.displayTextAttribute} }`;
         } else if (this.props.displayText === "static") {
@@ -48,11 +44,11 @@ export class preview extends Component<ProgressBarContainerProps, {}> {
     }
 }
 
-export function getPreviewCss() {
+export function getPreviewCss(): string {
     return require("./ui/ProgressBar.scss");
 }
 
-export function getVisibleProperties(valueMap: ProgressBarContainerProps, visibilityMap: VisibilityMap) {
+export function getVisibleProperties(valueMap: ProgressBarContainerProps, visibilityMap: VisibilityMap): VisibilityMap {
     visibilityMap.onClickMicroflow = valueMap.onClickOption === "callMicroflow";
     visibilityMap.onClickNanoflow = valueMap.onClickOption === "callNanoflow";
     visibilityMap.onClickPage = valueMap.onClickOption === "showPage";

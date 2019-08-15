@@ -1,5 +1,5 @@
-import { Component, createElement } from "react";
-import * as classNames from "classnames";
+import { Component, createElement, ReactNode } from "react";
+import classNames from "classnames";
 
 import { Alert } from "./Alert";
 import { DisplayText } from "./ProgressBarContainer";
@@ -31,12 +31,23 @@ class ProgressBar extends Component<ProgressBarProps, {}> {
         maximumValue: 100
     };
 
-    render() {
-        const { barType, bootstrapStyle, colorSwitch, displayText, displayTextValue, maximumValue, onClickAction, progress } = this.props;
+    render(): ReactNode {
+        const {
+            barType,
+            bootstrapStyle,
+            colorSwitch,
+            displayText,
+            displayTextValue,
+            maximumValue,
+            onClickAction,
+            progress
+        } = this.props;
         const percentage = this.progressValue(maximumValue as number, progress);
-        return createElement("div",
-         { className: classNames("widget-progress-bar", this.props.className), style: this.props.style },
-            createElement("div",
+        return createElement(
+            "div",
+            { className: classNames("widget-progress-bar", this.props.className), style: this.props.style },
+            createElement(
+                "div",
                 {
                     className: classNames("progress", {
                         "widget-progress-bar-alert": !maximumValue || maximumValue < 1,
@@ -45,10 +56,11 @@ class ProgressBar extends Component<ProgressBarProps, {}> {
                     }),
                     onClick: this.props.onClickAction
                 },
-                createElement("div",
+                createElement(
+                    "div",
                     {
                         className: classNames("progress-bar", `progress-bar-${bootstrapStyle || "default"}`, {
-                            "active": barType === "animated",
+                            active: barType === "animated",
                             "progress-bar-striped": barType === "striped" || barType === "animated",
                             "widget-progress-bar-negative": percentage < 0
                         }),
@@ -79,7 +91,12 @@ class ProgressBar extends Component<ProgressBarProps, {}> {
         return Math.round((progress / maximumValue) * 100);
     }
 
-    private getProgressText(maximumValue: number, value: number | undefined, text?: DisplayText, displayTextValue?: string): string {
+    private getProgressText(
+        maximumValue: number,
+        value: number | undefined,
+        text?: DisplayText,
+        displayTextValue?: string
+    ): string {
         let progressText: string;
 
         if (value === null || typeof value === "undefined" || text === "none") {

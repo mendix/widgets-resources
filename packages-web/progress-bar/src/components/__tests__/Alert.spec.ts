@@ -6,13 +6,15 @@ import { Alert } from "../Alert";
 describe("Alert", () => {
     it("renders the structure when an alert message is specified", () => {
         const message = "This is an error";
-        const alert = shallow(createElement(Alert, {
-            bootstrapStyle: "danger",
-            className: "widget-progressbar-alert",
-            message
-        }));
+        const alert = shallow(
+            createElement(Alert, {
+                bootstrapStyle: "danger",
+                className: "widget-progressbar-alert",
+                message
+            })
+        );
 
-        expect(alert).toBeElement(
+        expect(alert.getElement()).toEqual(
             createElement("div", { className: "alert alert-danger widget-progressbar-alert" }, message)
         );
     });
@@ -20,6 +22,6 @@ describe("Alert", () => {
     it("renders no structure when the alert message is not specified", () => {
         const alert = shallow(createElement(Alert));
 
-        expect(alert).toBeElement(null);
+        expect(alert.getElement()).toEqual(null);
     });
 });

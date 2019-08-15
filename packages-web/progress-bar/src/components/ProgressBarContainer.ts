@@ -1,5 +1,5 @@
-import { Component, createElement } from "react";
-import { hot } from "react-hot-loader";
+import { Component, createElement, ReactNode } from "react";
+import { hot } from "react-hot-loader/root";
 import { BarStyle, BarType, ProgressBar } from "./ProgressBar";
 import { Alert } from "./Alert";
 
@@ -45,29 +45,12 @@ interface Nanoflow {
 
 export type DisplayText = "none" | "value" | "percentage" | "static" | "attribute";
 type OnClickOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
-type PageLocation = "content"| "popup" | "modal";
+type PageLocation = "content" | "popup" | "modal";
 
 class ProgressBarContainer extends Component<ProgressBarContainerProps, ProgressBarContainerState> {
     private subscriptionHandles: number[];
     private subscriptionCallback: (mxObject: mendix.lib.MxObject) => () => void;
     private defaultMaximumValue = 100;
-
-    static parseStyle(style = ""): {[key: string]: string} {
-        try {
-            return style.split(";").reduce<{[key: string]: string}>((styleObject, line) => {
-                const pair = line.split(":");
-                if (pair.length === 2) {
-                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
-                    styleObject[name] = pair[1].trim();
-                }
-                return styleObject;
-            }, {});
-        } catch (error) {
-            // tslint:disable-next-line:no-console
-            console.log("Failed to parse style", style, error);
-        }
-        return {};
-    }
 
     constructor(props: ProgressBarContainerProps) {
         super(props);
@@ -82,7 +65,7 @@ class ProgressBarContainer extends Component<ProgressBarContainerProps, Progress
         this.subscriptionCallback = mxObject => () => this.setState(this.updateValues(mxObject));
     }
 
-    render() {
+    render(): ReactNode {
         if (this.state.showAlert) {
             return createElement(Alert as any, {
                 bootstrapStyle: "danger",
@@ -100,34 +83,20 @@ class ProgressBarContainer extends Component<ProgressBarContainerProps, Progress
             displayText: this.props.displayText,
             displayTextValue: this.getDisplayTextValue(),
             maximumValue: this.props.maximumValueAttribute ? this.state.maximumValue : this.props.staticMaximumValue,
-            onClickAction: this.props.onClickOption !== "doNothing" && this.props.mxObject
-                ? this.handleClick
-                : undefined,
+            onClickAction:
+                this.props.onClickOption !== "doNothing" && this.props.mxObject ? this.handleClick : undefined,
             progress: this.props.progressAttribute ? this.state.progressValue || 0 : this.props.staticValue,
             style: ProgressBarContainer.parseStyle(this.props.style)
         });
     }
 
-    componentWillReceiveProps(newProps: ProgressBarContainerProps) {
+    componentWillReceiveProps(newProps: ProgressBarContainerProps): void {
         this.resetSubscription(newProps.mxObject);
         this.setState(this.updateValues(newProps.mxObject));
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
-    }
-
-    public static validateProps(props: ProgressBarContainerProps) {
-        let errorMessage = "";
-        if (props.onClickOption === "callMicroflow" && !props.onClickMicroflow) {
-            errorMessage = "on click microflow is required in the 'Events' tab, 'Microflow' property";
-        } else if (props.onClickOption === "callNanoflow" && !props.onClickNanoflow.nanoflow) {
-            errorMessage = "on click nanoflow is required in the 'Events' tab, 'Nanoflow' property";
-        } else if (props.onClickOption === "showPage" && !props.onClickPage) {
-            errorMessage = "on click page is required in the 'Events' tab, 'Page' property";
-        }
-
-        return errorMessage && `Error in progress bar configuration: ${errorMessage}`;
     }
 
     private getValue<T>(attribute: string, defaultValue: T, mxObject?: mendix.lib.MxObject): T | number {
@@ -151,14 +120,14 @@ class ProgressBarContainer extends Component<ProgressBarContainerProps, Progress
 
     private updateValues(mxObject?: mendix.lib.MxObject): ProgressBarContainerState {
         return {
-            displayTextAttributeValue: mxObject ? mxObject.get(this.props.displayTextAttribute) as string : "",
+            displayTextAttributeValue: mxObject ? (mxObject.get(this.props.displayTextAttribute) as string) : "",
             maximumValue: this.getValue(this.props.maximumValueAttribute, this.defaultMaximumValue, mxObject),
             progressValue: this.getValue(this.props.progressAttribute, undefined, mxObject),
-            themeStyle: this.getBarStyle (mxObject)
+            themeStyle: this.getBarStyle(mxObject)
         };
     }
 
-    private getDisplayTextValue() {
+    private getDisplayTextValue(): string | undefined {
         if (this.props.displayText === "attribute") {
             return this.state.displayTextAttributeValue;
         } else if (this.props.displayText === "static") {
@@ -168,33 +137,44 @@ class ProgressBarContainer extends Component<ProgressBarContainerProps, Progress
         return "";
     }
 
-    private resetSubscription(mxObject?: mendix.lib.MxObject) {
+    private resetSubscription(mxObject?: mendix.lib.MxObject): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
         this.subscriptionHandles = [];
 
         if (mxObject) {
-            this.subscriptionHandles.push(window.mx.data.subscribe({
-                callback: this.subscriptionCallback(mxObject),
-                guid: mxObject.getGuid()
-            }));
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    callback: this.subscriptionCallback(mxObject),
+                    guid: mxObject.getGuid()
+                })
+            );
             [
                 this.props.progressAttribute,
                 this.props.displayTextAttribute,
                 this.props.maximumValueAttribute,
                 this.props.bootstrapStyleAttribute
             ].forEach(attr => {
-                this.subscriptionHandles.push(window.mx.data.subscribe({
-                    attr,
-                    callback: this.subscriptionCallback(mxObject),
-                    guid: mxObject.getGuid()
-                }));
+                this.subscriptionHandles.push(
+                    window.mx.data.subscribe({
+                        attr,
+                        callback: this.subscriptionCallback(mxObject),
+                        guid: mxObject.getGuid()
+                    })
+                );
             });
         }
-
     }
 
-    private handleClick() {
-        const { mxform, mxObject, onClickMicroflow, onClickNanoflow, onClickOption, onClickPage, openPageAs } = this.props;
+    private handleClick(): void {
+        const {
+            mxform,
+            mxObject,
+            onClickMicroflow,
+            onClickNanoflow,
+            onClickOption,
+            onClickPage,
+            openPageAs
+        } = this.props;
         if (!mxObject || !mxObject.getGuid()) {
             return;
         }
@@ -211,7 +191,8 @@ class ProgressBarContainer extends Component<ProgressBarContainerProps, Progress
         } else if (onClickOption === "callNanoflow" && onClickNanoflow.nanoflow) {
             window.mx.data.callNanoflow({
                 context,
-                error: error => mx.ui.error(`An error occurred while executing the on click nanoflow: ${error.message}`),
+                error: error =>
+                    mx.ui.error(`An error occurred while executing the on click nanoflow: ${error.message}`),
                 nanoflow: onClickNanoflow,
                 origin: mxform
             });
@@ -223,6 +204,35 @@ class ProgressBarContainer extends Component<ProgressBarContainerProps, Progress
             });
         }
     }
+
+    static parseStyle(style = ""): { [key: string]: string } {
+        try {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+                return styleObject;
+            }, {});
+        } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log("Failed to parse style", style, error);
+        }
+        return {};
+    }
+    static validateProps(props: ProgressBarContainerProps): string {
+        let errorMessage = "";
+        if (props.onClickOption === "callMicroflow" && !props.onClickMicroflow) {
+            errorMessage = "on click microflow is required in the 'Events' tab, 'Microflow' property";
+        } else if (props.onClickOption === "callNanoflow" && !props.onClickNanoflow.nanoflow) {
+            errorMessage = "on click nanoflow is required in the 'Events' tab, 'Nanoflow' property";
+        } else if (props.onClickOption === "showPage" && !props.onClickPage) {
+            errorMessage = "on click page is required in the 'Events' tab, 'Page' property";
+        }
+
+        return errorMessage && `Error in progress bar configuration: ${errorMessage}`;
+    }
 }
 
-export default hot(module)(ProgressBarContainer);
+export default hot(ProgressBarContainer);
