@@ -1,98 +1,34 @@
 {
-  "name": "progressbar",
-  "widgetName": "ProgressBar",
-  "version": "1.2.0",
-  "description": "Displays a progress bar",
-  "scripts": {
-    "start": "webpack-dev-server --hot --open",
-    "typeCheck": "tsc --noEmit",
-    "pretest": "tsc && npm run lint && grunt release",
-    "test": "npm run test:unit",
-    "test:dev": "karma start",
-    "test:unit": "karma start --single-run --codeCoverage && node tests/remap.js",
-    "pack": "webpack",
-    "lint": "tslint -c tslint.json '**/*.ts' --exclude '**/node_modules/**' --exclude '**/dist/**'",
-    "build": "grunt build"
-  },
-  "config": {
-    "mendixHost": "http://localhost:8080",
-    "developmentPort": 3000
-  },
-  "pre-commit": [
-    "typeCheck",
-    "lint"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mendixlabs/progress-bar"
-  },
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/mendixlabs/progress-bar/issues"
-  },
-  "devDependencies": {
-    "@types/big.js": "^4.0.5",
-    "@types/classnames": "^2.2.7",
-    "@types/core-js": "^2.5.0",
-    "@types/dojo": "^1.9.41",
-    "@types/enzyme": "^3.9.0",
-    "@types/jasmine": "^3.3.9",
-    "@types/karma": "^3.0.2",
-    "@types/node": "^11.11.3",
-    "@types/react": "^16.8.8",
-    "@types/react-dom": "^16.8.2",
-    "check-dependencies": "^1.1.0",
-    "copy-webpack-plugin": "^5.0.1",
-    "core-js": "^2.6.5",
-    "css-loader": "^2.1.1",
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "1.10.0",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "fork-ts-checker-webpack-plugin": "^1.0.0",
-    "grunt": "^1.0.3",
-    "grunt-check-dependencies": "^1.0.0",
-    "grunt-contrib-clean": "^2.0.0",
-    "grunt-contrib-compress": "^1.4.3",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-watch": "^1.1.0",
-    "grunt-file-append": "^0.0.7",
-    "grunt-newer": "^1.3.0",
-    "grunt-webpack": "^3.1.3",
-    "istanbul": "^0.4.5",
-    "istanbul-instrumenter-loader": "^3.0.1",
-    "jasmine": "^3.3.1",
-    "jasmine-core": "^3.3.0",
-    "json-loader": "^0.5.7",
-    "karma": "^4.0.1",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-coverage": "^1.1.2",
-    "karma-jasmine": "^2.0.1",
-    "karma-jasmine-html-reporter": "^1.4.0",
-    "karma-remap-istanbul": "^0.6.0",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^3.0.5",
-    "mendix-client": "^7.15.7",
-    "node-sass": "^4.11.0",
-    "pre-commit": "^1.2.2",
-    "raw-loader": "^1.0.0",
-    "react": "^16.8.4",
-    "react-addons-test-utils": "^15.6.2",
-    "react-dom": "^16.8.4",
-    "react-hot-loader": "^4.8.0",
-    "remap-istanbul": "^0.13.0",
-    "sass-loader": "^7.1.0",
-    "source-map-loader": "^0.2.4",
-    "style-loader": "^0.23.1",
-    "ts-loader": "^5.3.3",
-    "tslint": "^5.14.0",
-    "tslint-eslint-rules": "^5.4.0",
-    "typescript": "^3.3.3333",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.1",
-    "webpack-merge": "^4.2.1"
-  },
-  "dependencies": {
-    "classnames": "^2.2.6"
-  }
+    "name": "progress-bar-web",
+    "widgetName": "ProgressBar",
+    "version": "1.2.0",
+    "description": "Displays a progress bar",
+    "scripts": {
+        "start": "utils-react-widgets start",
+        "dev": "utils-react-widgets dev",
+        "format": "prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+        "test": "npm run test:unit",
+        "test:unit": "jest --config ../../scripts/test/jest.web.config.js",
+        "test:e2e": "export URL=https://badge.mxapps.io/ && utils-react-widgets test:e2e",
+        "test:e2e:dev": "export DEBUG=true && utils-react-widgets test:e2e",
+        "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "lint:fix": "npm run lint -- --fix",
+        "build": "utils-react-widgets build"
+    },
+    "config": {
+        "mendixHost": "http://localhost:8080",
+        "developmentPort": 3000,
+        "projectPath": [
+            "./tests/TestProjects/Mendix7/",
+            "./tests/TestProjects/Mendix8/"
+        ]
+    },
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "@types/classnames": "^2.2.7",
+        "@widgets-resources/utils-react-widgets": "0.0.1"
+    },
+    "dependencies": {
+        "classnames": "^2.2.6"
+    }
 }

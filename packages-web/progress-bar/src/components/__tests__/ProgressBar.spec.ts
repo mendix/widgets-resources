@@ -1,34 +1,20 @@
-import { shallow } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 import { createElement } from "react";
 
 import { ProgressBar, ProgressBarProps } from "../ProgressBar";
-import { Alert } from "../Alert";
 
 describe("Progress bar", () => {
-    const renderWrapper = (props: ProgressBarProps) => shallow(createElement(ProgressBar, props));
-    const getProgressbar = (props: ProgressBarProps) => renderWrapper(props).childAt(0);
+    const renderWrapper = (props: ProgressBarProps): ShallowWrapper<ProgressBarProps, any> =>
+        shallow(createElement(ProgressBar, props));
+    const getProgressbar = (props: ProgressBarProps): any => renderWrapper(props).childAt(0);
     const progress = 23;
     const maximumValue = 100;
     const displayTextValue = "test1";
-    const onClickSpy = jasmine.createSpy("onClick");
+    const onClickSpy = jest.fn();
 
     it("has progress bar structure", () => {
         const progressbar = shallow(createElement(ProgressBar, { maximumValue, onClickAction: onClickSpy, progress }));
-        expect(progressbar).toBeElement(
-            createElement("div", { className: "widget-progress-bar" },
-                createElement("div",
-                    {
-                        className: "progress widget-progress-bar-text-contrast widget-progress-bar-clickable",
-                        onClick: jasmine.any(Function) as any
-                    },
-                    createElement("div",
-                        { className: "progress-bar progress-bar-default", style: { width: jasmine.any(String) } },
-                        jasmine.any(String) as any
-                    )
-                ),
-                createElement(Alert)
-            )
-        );
+        expect(progressbar).toMatchSnapshot();
     });
 
     it("should render positive progress", () => {
@@ -56,13 +42,23 @@ describe("Progress bar", () => {
     });
 
     it("should render the progress label from a static value when the display text is static", () => {
-        const progressbar = getProgressbar({ maximumValue: 100, progress, displayText: "static", displayTextValue }).childAt(0);
+        const progressbar = getProgressbar({
+            maximumValue: 100,
+            progress,
+            displayText: "static",
+            displayTextValue
+        }).childAt(0);
 
         expect(progressbar.text()).toEqual(displayTextValue);
     });
 
     it("should render the progress label from an attribute when the display text is attribute", () => {
-        const progressbar = getProgressbar({ maximumValue: 100, progress, displayText: "attribute", displayTextValue }).childAt(0);
+        const progressbar = getProgressbar({
+            maximumValue: 100,
+            progress,
+            displayText: "attribute",
+            displayTextValue
+        }).childAt(0);
 
         expect(progressbar.text()).toEqual(displayTextValue);
     });
