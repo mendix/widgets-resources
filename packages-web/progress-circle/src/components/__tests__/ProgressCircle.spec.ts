@@ -26,8 +26,10 @@ describe("ProgressCircle", () => {
     it("renders the structure correctly", () => {
         const progress = renderProgressCircle({ value: 60, positiveValueColor });
 
-        expect(progress).toBeElement(
-            createElement("div", { className: "widget-progress-circle" },
+        expect(progress.getElement()).toEqual(
+            createElement(
+                "div",
+                { className: "widget-progress-circle" },
                 createElement(Alert, { bootstrapStyle: "danger" }),
                 createElement("div", { className: "h2" })
             )
@@ -174,19 +176,19 @@ describe("ProgressCircle", () => {
         it("widget-progress-circle-alert when the maximum value is less than one", () => {
             const progress = renderProgressCircle({ value: 20, maximumValue: 0 });
 
-            expect(progress.find(".widget-progress-circle-alert").length).toBe(1);
+            expect(progress.find(".widget-progress-circle-alert")).toHaveLength(1);
         });
 
         it("mx-text when the text style is text", () => {
             const progress = renderProgressCircle({ textSize: "text", value: 20 });
 
-            expect(progress.find(".mx-text").length).toBe(1);
+            expect(progress.find(".mx-text")).toHaveLength(1);
         });
 
         it("of type heading when the text style is of type heading", () => {
             const progress = renderProgressCircle({ textSize: "h1", value: 20 });
 
-            expect(progress.find(".h1").length).toBe(1);
+            expect(progress.find(".h1")).toHaveLength(1);
         });
     });
 });

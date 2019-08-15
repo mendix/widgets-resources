@@ -1,16 +1,15 @@
-import { Component, createElement } from "react";
+import { Component, createElement, ReactNode } from "react";
 import { ProgressCircle, ProgressCircleProps } from "./components/ProgressCircle";
 import ProgressCircleContainer, { ContainerProps } from "./components/ProgressCircleContainer";
 
 declare function require(name: string): string;
 
 type VisibilityMap = {
-    [ P in keyof ContainerProps ]: boolean;
+    [P in keyof ContainerProps]: boolean;
 };
 
-// tslint:disable-next-line:class-name
 export class preview extends Component<ContainerProps, {}> {
-    render() {
+    render(): ReactNode {
         return createElement(ProgressCircle, this.transformProps(this.props));
     }
 
@@ -30,7 +29,7 @@ export class preview extends Component<ContainerProps, {}> {
         };
     }
 
-    private getDisplayTextValue() {
+    private getDisplayTextValue(): string {
         if (this.props.displayText === "attribute") {
             return `{ ${this.props.displayTextAttribute} }`;
         } else if (this.props.displayText === "static") {
@@ -41,11 +40,11 @@ export class preview extends Component<ContainerProps, {}> {
     }
 }
 
-export function getPreviewCss() {
+export function getPreviewCss(): string {
     return require("./ui/ProgressCircle.scss");
 }
 
-export function getVisibleProperties(valueMap: ContainerProps, visibilityMap: VisibilityMap) {
+export function getVisibleProperties(valueMap: ContainerProps, visibilityMap: VisibilityMap): VisibilityMap {
     visibilityMap.microflow = valueMap.onClickEvent === "callMicroflow";
     visibilityMap.nanoflow = valueMap.onClickEvent === "callNanoflow";
     visibilityMap.page = valueMap.onClickEvent === "showPage";

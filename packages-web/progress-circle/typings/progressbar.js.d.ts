@@ -1,6 +1,4 @@
-// tslint:disable no-namespace
 declare namespace progressbar {
-
     export class Circle {
         path: SVGPathElement;
         trail: SVGPathElement;

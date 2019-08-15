@@ -1,104 +1,35 @@
 {
-  "name": "progresscircle",
-  "widgetName": "ProgressCircle",
-  "version": "1.7.0",
-  "description": "Displays a progress in a circle",
-  "scripts": {
-    "start": "grunt",
-    "typeCheck": "tsc --noEmit",
-    "pretest": "tsc && npm run lint && npm run build",
-    "test": "npm run test:unit && npm run test:conditional",
-    "test:conditional": "node ./node_modules/mendix-widget-build-script/dist/CheckPullRequestFromFork.js && echo 'Skip tests on forked pull request' || npm run deployAndTest",
-    "test:dev": "karma start",
-    "test:unit": "karma start --single-run --codeCoverage && node tests/remap.js",
-    "test:e2e": "tsc -p ./tests/e2e/tsconfig.json && wdio ./tests/e2e/wdio.conf.js",
-    "test:e2e:dev": "tsc -p ./tests/e2e/tsconfig.json && set DEBUG=true&& wdio ./tests/e2e/wdio.conf.js",
-    "lint": "tslint -c tslint.json '**/*.ts' '**/*.tsx' --exclude '**/node_modules/**'",
-    "lint:fix": "npm run lint -- --fix",
-    "deploy": " npm run updateProject && npm run deployApp",
-    "build": "grunt release",
-    "updateProject": "node ./node_modules/mendix-widget-build-script/dist/UpdateMxProject.js",
-    "deployApp": "node ./node_modules/mendix-widget-build-script/dist/DeployMxApp.js",
-    "deployAndTest": "npm run deploy && npm run test:e2e"
-  },
-  "pre-commit": [
-    "typeCheck",
-    "lint"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mendixlabs/progress-circle"
-  },
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/mendixlabs/progress-circle/issues"
-  },
-  "devDependencies": {
-    "@types/big.js": "0.0.31",
-    "@types/classnames": "^2.2.6",
-    "@types/core-js": "^0.9.42",
-    "@types/dojo": "^1.9.38",
-    "@types/enzyme": "^2.8.8",
-    "@types/jasmine": "^2.8.8",
-    "@types/karma": "^1.7.6",
-    "@types/react": "^15.0.38",
-    "@types/react-dom": "^15.5.4",
-    "@types/webdriverio": "^4.10.4",
-    "check-dependencies": "^1.1.0",
-    "copy-webpack-plugin": "^4.5.2",
-    "core-js": "^2.5.7",
-    "css-loader": "^0.28.1",
-    "enzyme": "^2.9.1",
-    "extract-text-webpack-plugin": "^3.0.0",
-    "grunt": "^1.0.3",
-    "grunt-check-dependencies": "^1.0.0",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-compress": "^1.4.1",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-watch": "^1.1.0",
-    "grunt-file-append": "0.0.7",
-    "grunt-newer": "^1.1.1",
-    "grunt-webpack": "^3.1.3",
-    "istanbul": "^0.4.3",
-    "istanbul-instrumenter-loader": "^3.0.0",
-    "jasmine": "^2.8.0",
-    "json-loader": "^0.5.4",
-    "karma": "^2.0.0",
-    "karma-chrome-launcher": "^2.1.1",
-    "karma-coverage": "^1.1.2",
-    "karma-jasmine": "^1.1.2",
-    "karma-jasmine3-html-reporter": "^0.2.3",
-    "karma-remap-istanbul": "^0.6.0",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^2.0.13",
-    "mendix-client": "^7.13.3",
-    "mendix-widget-build-script": "^1.0.3",
-    "node-sass": "^4.9.3",
-    "pre-commit": "^1.2.2",
-    "raw-loader": "^0.5.1",
-    "react": "^15.6.2",
-    "react-addons-test-utils": "^15.6.2",
-    "react-dom": "^15.6.2",
-    "react-test-renderer": "^15.6.2",
-    "remap-istanbul": "^0.9.1",
-    "sass-loader": "^6.0.3",
-    "source-map-loader": "^0.2.0",
-    "style-loader": "^0.18.2",
-    "ts-loader": "^2.3.7",
-    "tslint": "^5.9.1",
-    "tslint-eslint-rules": "^4.0.0",
-    "typescript": "^3.3.3333",
-    "url-loader": "^0.5.8",
-    "wdio-dot-reporter": "0.0.9",
-    "wdio-jasmine-framework": "^0.3.2",
-    "wdio-selenium-standalone-service": "0.0.10",
-    "wdio-spec-reporter": "^0.1.3",
-    "webdriverio": "^4.13.2",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.8.2"
-  },
-  "dependencies": {
-    "classnames": "^2.2.6",
-    "progressbar.js": "^1.0.1"
-  }
+    "name": "progress-circle-web",
+    "widgetName": "ProgressCircle",
+    "version": "1.7.0",
+    "description": "Displays a progress in a circle",
+    "scripts": {
+        "start": "utils-react-widgets start",
+        "dev": "utils-react-widgets dev",
+        "format": "prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+        "test": "npm run test:unit",
+        "test:unit": "jest --config ../../scripts/test/jest.web.config.js",
+        "test:e2e": "export URL=https://progresscircle.mxapps.io/ && utils-react-widgets test:e2e",
+        "test:e2e:dev": "export DEBUG=true && utils-react-widgets test:e2e",
+        "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "lint:fix": "npm run lint -- --fix",
+        "build": "utils-react-widgets build"
+    },
+    "config": {
+        "mendixHost": "http://localhost:8080",
+        "developmentPort": 3000,
+        "projectPath": [
+            "./tests/TestProjects/Mendix7/",
+            "./tests/TestProjects/Mendix8/"
+        ]
+    },
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "@types/classnames": "^2.2.6",
+        "@widgets-resources/utils-react-widgets": "0.0.1"
+    },
+    "dependencies": {
+        "classnames": "^2.2.6",
+        "progressbar.js": "^1.0.1"
+    }
 }
