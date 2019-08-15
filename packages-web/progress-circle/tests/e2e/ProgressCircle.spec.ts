@@ -4,16 +4,16 @@ import playgroundPage from "./pages/playground.page";
 describe("ProgressCircle", () => {
     it("renders with a value", () => {
         homePage.open();
-        homePage.progressText.waitForVisible();
+        homePage.progressText.waitForDisplayed();
 
         expect(homePage.progressText.getText()).toBe("-60%");
     });
 
     it("updates the progress percentage when the value is changed", () => {
         playgroundPage.open();
-        playgroundPage.progressTextBox.waitForVisible();
+        playgroundPage.progressTextBox.waitForDisplayed();
         playgroundPage.progressTextBox.setValue(67);
-        playgroundPage.maximumValueTextBox.waitForVisible();
+        playgroundPage.maximumValueTextBox.waitForDisplayed();
         playgroundPage.maximumValueTextBox.click();
 
         expect(homePage.progressText.getText()).toBe("67%");

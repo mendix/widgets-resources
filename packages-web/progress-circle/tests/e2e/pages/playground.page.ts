@@ -1,11 +1,13 @@
 class PlaygroundPage {
-    public get progressTextBox() { return browser.elements(".mx-name-textBox1 .form-control"); }
-
-    public get maximumValueTextBox() {
-        return browser.element(".mx-name-textBox2 .form-control");
+    get progressTextBox(): WebdriverIO.Element {
+        return $(".mx-name-textBox1 .form-control");
     }
 
-    public open(): void {
+    get maximumValueTextBox(): WebdriverIO.Element {
+        return $(".mx-name-textBox2 .form-control");
+    }
+
+    open(): void {
         browser.url("/p/Playground");
     }
 }

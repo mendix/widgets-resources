@@ -7,8 +7,6 @@
         "start": "utils-react-widgets start",
         "dev": "utils-react-widgets dev",
         "format": "prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-        "test": "npm run test:unit",
-        "test:unit": "jest --config ../../scripts/test/jest.web.config.js",
         "test:e2e": "export URL=https://progresscircle.mxapps.io/ && utils-react-widgets test:e2e",
         "test:e2e:dev": "export DEBUG=true && utils-react-widgets test:e2e",
         "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
