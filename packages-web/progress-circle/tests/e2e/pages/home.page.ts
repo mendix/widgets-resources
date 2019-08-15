@@ -1,9 +1,9 @@
 class HomePage {
-    public get progressText() {
-        return browser.element(".progressbar-text");
+    get progressText(): WebdriverIO.Element {
+        return $(".progressbar-text");
     }
 
-    public open(): void {
+    open(): void {
         browser.url("/p/Home");
     }
 }
