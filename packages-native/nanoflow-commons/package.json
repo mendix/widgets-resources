@@ -1,44 +1,17 @@
 {
     "name": "nanoflow-commons",
-    "version": "1.0.0-beta2",
+    "version": "1.0.0",
     "private": true,
     "license": "Apache-2.0",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/mendix/nanoflow-commons.git"
-    },
     "scripts": {
         "start": "tsc --watch",
         "build": "npm run build:tsc && npm run build:babel",
-        "prebuild:tsc": "rm -rf dist/tsc",
-        "build:tsc": "tsc --project src/tsconfig.json",
-        "prebuild:babel": "rm -rf dist/babel",
+        "prebuild:tsc": "rm -rf ./dist/tsc",
+        "build:tsc": "tsc --project ./src/tsconfig.json",
+        "prebuild:babel": "rm -rf ./dist/babel",
         "build:babel": "babel dist/tsc --out-dir dist/babel",
-        "postbuild": "ts-node --project scripts/tsconfig.json scripts/copyActionsToTestProject.ts",
-        "lint": "npm run lint:src && npm run lint:scripts",
-        "lint:src": "tslint --project src/tsconfig.json --config src/tslint.json",
-        "lint:scripts": "tslint --project scripts/tsconfig.json --config scripts/tslint.json"
-    },
-    "devDependencies": {
-        "@babel/cli": "^7.4.4",
-        "@babel/core": "^7.4.4",
-        "@babel/preset-env": "^7.4.4",
-        "@commitlint/cli": "^7.6.1",
-        "@commitlint/config-conventional": "^7.6.0",
-        "@types/big.js": "^4.0.5",
-        "@types/node": "^12.0.2",
-        "@types/react-native": "^0.57.58",
-        "conventional-changelog-cli": "^2.0.21",
-        "husky": "^2.3.0",
-        "lint-staged": "^8.1.7",
-        "mendix-client": "^7.15.7",
-        "prettier": "^1.17.1",
-        "pretty-quick": "^1.11.0",
-        "ts-node": "^8.1.0",
-        "tslint": "^5.16.0",
-        "tslint-config-prettier": "^1.18.0",
-        "tslint-react": "^4.0.0",
-        "typescript": "^3.4.5"
+        "postbuild": "ts-node --project ./tsconfig.json scripts/copyActionsToTestProject.ts",
+        "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/"
     },
     "babel": {
         "presets": [
@@ -59,37 +32,5 @@
         ],
         "sourceType": "script",
         "retainLines": true
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged && pretty-quick --staged",
-            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-        }
-    },
-    "lint-staged": {
-        "src/*.{ts,tsx}": [
-            "tslint --config src/tslint.json"
-        ],
-        "scripts/*.ts": [
-            "tslint --config scripts/tslint.json"
-        ]
-    },
-    "commitlint": {
-        "extends": [
-            "@commitlint/config-conventional"
-        ]
-    },
-    "prettier": {
-        "printWidth": 120,
-        "tabWidth": 4,
-        "proseWrap": "always",
-        "overrides": [
-            {
-                "files": "CHANGELOG.md",
-                "options": {
-                    "proseWrap": "preserve"
-                }
-            }
-        ]
     }
 }
