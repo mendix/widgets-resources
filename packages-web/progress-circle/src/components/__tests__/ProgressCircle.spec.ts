@@ -13,12 +13,13 @@ describe("ProgressCircle", () => {
     const Circle = progressbar.Circle;
     const positiveValueColor: BootstrapStyle = "primary";
     const spyOnCircle = () =>
-        spyOn(progressbar, "Circle").and.callFake(() => {
+        // @ts-ignore
+        jest.spyOn(progressbar, "Circle").mockImplementation(() => {
             progressCircle = new Circle(document.createElement("div"), {
                 strokeWidth: 6,
                 trailWidth: 6
             });
-            spyOn(progressCircle, "animate").and.callThrough();
+            jest.spyOn(progressCircle, "animate");
 
             return progressCircle;
         });
@@ -46,8 +47,8 @@ describe("ProgressCircle", () => {
     });
 
     it("sets the progress percentage", () => {
-        spyOn(progressbar.Circle.prototype, "setText").and.callThrough();
-        const setText = progressbar.Circle.prototype.setText as jasmine.Spy;
+        jest.spyOn(progressbar.Circle.prototype, "setText");
+        const setText = progressbar.Circle.prototype.setText;
         spyOnCircle();
 
         const progress = newCircleInstance({ animate: false, value: 80, displayText: "percentage" });
@@ -57,8 +58,8 @@ describe("ProgressCircle", () => {
     });
 
     it("updates the progress percentage when the values are changed", () => {
-        spyOn(progressbar.Circle.prototype, "setText").and.callThrough();
-        const setText = progressbar.Circle.prototype.setText as jasmine.Spy;
+        jest.spyOn(progressbar.Circle.prototype, "setText");
+        const setText = progressbar.Circle.prototype.setText;
         spyOnCircle();
 
         const progress = renderProgressCircle({ value: 80 });
@@ -70,8 +71,8 @@ describe("ProgressCircle", () => {
     });
 
     it("recreates the progress circle when the circle thickness values are changed", () => {
-        spyOn(progressbar.Circle.prototype, "destroy").and.callThrough();
-        const destroy = progressbar.Circle.prototype.destroy as jasmine.Spy;
+        jest.spyOn(progressbar.Circle.prototype, "destroy");
+        const destroy = progressbar.Circle.prototype.destroy();
         spyOnCircle();
 
         const progress = renderProgressCircle({ value: 80, circleThickness: 50 });
@@ -95,12 +96,12 @@ describe("ProgressCircle", () => {
         progressInstance.componentDidMount();
         progressInstance.componentWillReceiveProps({ value: 60, alertMessage: "" });
 
-        expect(progress.state().alertMessage).toEqual("");
+        expect(progress.props().alertMessage).toEqual("");
     });
 
     it("destroys progress circle on unmount", () => {
-        spyOn(progressbar.Circle.prototype, "destroy").and.callThrough();
-        const destroy = progressbar.Circle.prototype.destroy as jasmine.Spy;
+        jest.spyOn(progressbar.Circle.prototype, "destroy");
+        const destroy = progressbar.Circle.prototype.destroy();
         spyOnCircle();
 
         const progress = newCircleInstance({ value: 80 });
