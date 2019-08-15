@@ -1,5 +1,5 @@
-import { Component, createElement } from "react";
-import * as classNames from "classnames";
+import { Component, createElement, ReactNode } from "react";
+import classNames from "classnames";
 import ReactResizeDetector from "react-resize-detector";
 
 import { Alert } from "./Alert";
@@ -38,16 +38,23 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
         resized: false
     };
 
-    render() {
-        return createElement("div", {
+    render(): ReactNode {
+        return createElement(
+            "div",
+            {
                 className: classNames("widget-maps", this.props.className),
                 style: { ...this.props.divStyles, ...Utils.getDimensions(this.props) }
             },
-            createElement(Alert, {
-                bootstrapStyle: "danger",
-                className: "widget-google-maps-alert"
-            }, this.state.alertMessage),
-            createElement("div",
+            createElement(
+                Alert,
+                {
+                    bootstrapStyle: "danger",
+                    className: "widget-google-maps-alert"
+                },
+                this.state.alertMessage
+            ),
+            createElement(
+                "div",
                 {
                     className: "widget-google-maps-wrapper"
                 },
@@ -66,13 +73,13 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
         );
     }
 
-    componentDidMount() {
+    componentDidMount(): void {
         if (this.props.scriptsLoaded) {
             this.createUpdateMap(this.props);
         }
     }
 
-    componentWillReceiveProps(nextProps: GoogleMapsProps) {
+    componentWillReceiveProps(nextProps: GoogleMapsProps): void {
         if (nextProps.alertMessage !== this.props.alertMessage) {
             this.setState({ alertMessage: nextProps.alertMessage });
         }
@@ -82,7 +89,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
         }
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(): void {
         if (this.map && !this.props.fetchingData && !this.state.resized) {
             this.map.setCenter(this.state.center);
         }
@@ -104,7 +111,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
         return this.defaultCenterLocation;
     }
 
-    private onResize() {
+    private onResize(): void {
         // When map is placed on the non default tab, the maps has no size.
         // Therefor it need to update on the first view.
         if (this.map && !this.state.resized) {
@@ -115,7 +122,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
 
     private getRef = (node: HTMLDivElement) => {
         this.googleMapsNode = node;
-    }
+    };
 
     private createUpdateMap = (props: GoogleMapsProps) => {
         const mapOptions = {
@@ -137,13 +144,13 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
             this.map.setOptions({ ...mapOptions });
         }
         this.setDefaultCenter(props);
-    }
+    };
 
     private setDefaultCenter = (props: GoogleMapsProps) => {
         if (!props.fetchingData) {
             this.addMarkers(props.allLocations);
         }
-    }
+    };
 
     private addMarkers = (mapLocations?: Location[]) => {
         this.markers.forEach(marker => marker.setMap(null));
@@ -178,7 +185,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
             this.setMapOnMarkers(this.map);
             this.setBounds(this.bounds);
         }
-    }
+    };
 
     private setBounds = (mapBounds?: google.maps.LatLngBounds) => {
         const { defaultCenterLatitude, defaultCenterLongitude, zoomLevel, autoZoom } = this.props;
@@ -200,13 +207,13 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
                 }
             }
         }, 0);
-    }
+    };
 
     private setMapOnMarkers = (map?: google.maps.Map) => {
         if (this.markers && this.markers.length && map) {
             this.markers.forEach(marker => marker.setMap(map));
         }
-    }
+    };
 
     private getMapStyles(): google.maps.MapTypeStyle[] {
         if (this.props.mapStyles && this.props.mapStyles.trim()) {
@@ -217,13 +224,14 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
             }
         }
 
-        return [ {
-            featureType: "poi",
-            elementType: "labels",
-            stylers: [ { visibility: "off" } ]
-        } ];
+        return [
+            {
+                featureType: "poi",
+                elementType: "labels",
+                stylers: [{ visibility: "off" }]
+            }
+        ];
     }
-
 }
 
-export default googleApiWrapper(`https://maps.googleapis.com/maps/api/js?key=`)(GoogleMap);
+export default googleApiWrapper("https://maps.googleapis.com/maps/api/js?key=")(GoogleMap);

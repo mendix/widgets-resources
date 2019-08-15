@@ -1,4 +1,4 @@
-import { Component, ComponentType, createElement } from "react";
+import { Component, ComponentType, createElement, ReactNode } from "react";
 import { GoogleMapsProps } from "./GoogleMap";
 
 export interface GoogleApiWrapperState {
@@ -6,20 +6,23 @@ export interface GoogleApiWrapperState {
     alertMessage?: string;
 }
 
-const googleApiWrapper = (script: string) => <P extends GoogleMapsProps>(wrappedComponent: ComponentType<P>) => {
+const googleApiWrapper: Function = (script: string) => <P extends GoogleMapsProps>(
+    wrappedComponent: ComponentType<P>
+) => {
     class GoogleApiWrapperComponent extends Component<P, GoogleApiWrapperState> {
         readonly state: GoogleApiWrapperState = { scriptsLoaded: false, alertMessage: "" };
 
-        render() {
-            const props = { ...this.state, ...this.props as GoogleMapsProps };
+        render(): ReactNode {
+            const props = { ...this.state, ...(this.props as GoogleMapsProps) };
 
-            return createElement(wrappedComponent, { ...props as any });
+            return createElement(wrappedComponent, { ...(props as any) });
         }
 
-        componentDidMount() {
+        componentDidMount(): void {
             if (typeof window.google === "undefined" || (window.google && typeof google.maps === "undefined")) {
                 this.loadScript(script);
             } else {
+                // eslint-disable-next-line react/no-did-mount-set-state
                 this.setState({ scriptsLoaded: true });
             }
         }
@@ -34,7 +37,7 @@ const googleApiWrapper = (script: string) => <P extends GoogleMapsProps>(wrapped
                     scriptElement.defer = true;
                     scriptElement.type = "text/javascript";
                     scriptElement.id = "googleScript";
-                    scriptElement.src = googleScript + this.props.mapsToken + `&libraries=places`;
+                    scriptElement.src = googleScript + this.props.mapsToken + "&libraries=places";
                     scriptElement.onerror = error => reject(new Error(`There is no internet connection ${error}`));
                     scriptElement.onload = () => {
                         if (typeof google === "object" && typeof google.maps === "object") {
@@ -48,14 +51,15 @@ const googleApiWrapper = (script: string) => <P extends GoogleMapsProps>(wrapped
             }
 
             return (window as any)[googleApiID];
-        }
+        };
 
         private loadScript = (googleScript: string) => {
             this.addScript(googleScript)
                 .then(() => this.setState({ scriptsLoaded: true }))
-                .catch((error: Error) => this.setState({ alertMessage: `Failed load external maps script, due to ${error.message}` }));
-        }
-
+                .catch((error: Error) =>
+                    this.setState({ alertMessage: `Failed load external maps script, due to ${error.message}` })
+                );
+        };
     }
 
     return GoogleApiWrapperComponent;

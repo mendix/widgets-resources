@@ -1,4 +1,4 @@
-import { Component, createElement } from "react";
+import { Component, createElement, ReactNode } from "react";
 import { LeafletEvent } from "leaflet";
 
 import GoogleMap from "./GoogleMap";
@@ -7,7 +7,7 @@ import { Container } from "../utils/namespace";
 import { fetchData, fetchMarkerObjectUrl, parseStaticLocations } from "../utils/Data";
 import Utils from "../utils/Utils";
 import { validLocation, validateLocationProps } from "../utils/Validations";
-import { hot } from "react-hot-loader";
+import { hot } from "react-hot-loader/root";
 
 import "leaflet/dist/leaflet.css";
 // Re-uses images from ~leaflet package
@@ -36,10 +36,10 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
         isFetchingData: false
     };
 
-    render() {
+    render(): ReactNode {
         const mapsApiToken = this.props.apiToken ? this.props.apiToken.replace(/ /g, "") : undefined;
         const commonProps = {
-            ...this.props as MapProps,
+            ...(this.props as MapProps),
             allLocations: this.state.locations,
             fetchingData: this.state.isFetchingData,
             className: this.props.class,
@@ -55,7 +55,7 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
             : createElement(LeafletMap, { ...commonProps });
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps: MapsContainerProps) {
+    UNSAFE_componentWillReceiveProps(nextProps: MapsContainerProps): void {
         this.resetSubscriptions(nextProps.mxObject);
         const validationMessage = validateLocationProps(nextProps);
         if (validationMessage) {
@@ -65,42 +65,49 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
         }
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         this.unsubscribeAll();
     }
 
-    private resetSubscriptions(contextObject?: mendix.lib.MxObject) {
+    private resetSubscriptions(contextObject?: mendix.lib.MxObject): void {
         this.unsubscribeAll();
         if (this.props.locations && this.props.locations.length && contextObject) {
-                this.subscriptionHandles.push(window.mx.data.subscribe({
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
                     guid: contextObject.getGuid(),
                     callback: () => {
                         if (!this.state.isFetchingData === true) {
                             this.fetchData(contextObject);
                         }
                     }
-                }));
-                this.props.locations.forEach(location => {
-                    this.subscriptionHandles.push(window.mx.data.subscribe({
+                })
+            );
+            this.props.locations.forEach(location => {
+                this.subscriptionHandles.push(
+                    window.mx.data.subscribe({
                         entity: location.locationsEntity as string,
                         callback: () => this.fetchData(contextObject)
-                    }));
-                    [
-                        location.latitudeAttribute,
-                        location.longitudeAttribute,
-                        location.staticMarkerIcon,
-                        location.markerImageAttribute
-                    ].forEach(attr => this.subscriptionHandles.push(window.mx.data.subscribe({
+                    })
+                );
+                [
+                    location.latitudeAttribute,
+                    location.longitudeAttribute,
+                    location.staticMarkerIcon,
+                    location.markerImageAttribute
+                ].forEach(attr =>
+                    this.subscriptionHandles.push(
+                        window.mx.data.subscribe({
                             attr,
                             callback: () => this.fetchData(contextObject),
                             guid: contextObject.getGuid()
-                        }))
-                    );
-                });
-            }
+                        })
+                    )
+                );
+            });
         }
+    }
 
-    private unsubscribeAll() {
+    private unsubscribeAll(): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
         this.subscriptionHandles = [];
     }
@@ -110,12 +117,15 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
         Promise.all(this.props.locations.map(locationAttr => this.retrieveData(locationAttr, contextObject)))
             .then(allLocations => {
                 const alertMessage: string[] = [];
-                const locations = allLocations.reduce((loc1, loc2) => loc1.concat(loc2), [])
+                const locations = allLocations
+                    .reduce((loc1, loc2) => loc1.concat(loc2), [])
                     .filter(location => {
                         if (validLocation(location)) {
                             return true;
                         }
-                        alertMessage.push(`invalid location: latitude '${location.latitude}', longitude '${location.longitude}'`);
+                        alertMessage.push(
+                            `invalid location: latitude '${location.latitude}', longitude '${location.longitude}'`
+                        );
 
                         return false;
                     });
@@ -132,73 +142,84 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
                     isFetchingData: false
                 });
             });
-    }
+    };
 
-    private retrieveData(locationOptions: DataSourceLocationProps, contextObject?: mendix.lib.MxObject): Promise<Location[]> {
+    private retrieveData(
+        locationOptions: DataSourceLocationProps,
+        contextObject?: mendix.lib.MxObject
+    ): Promise<Location[]> {
         const { dataSourceType, entityConstraint } = locationOptions;
-        const requiresContext = dataSourceType === "microflow" || dataSourceType === "nanoflow"
-            || (dataSourceType === "XPath" && entityConstraint.indexOf("[%CurrentObject%]") !== -1);
+        const requiresContext =
+            dataSourceType === "microflow" ||
+            dataSourceType === "nanoflow" ||
+            (dataSourceType === "XPath" && entityConstraint.indexOf("[%CurrentObject%]") !== -1);
 
         if (dataSourceType === "static") {
-            const staticLocation = parseStaticLocations([ locationOptions ]);
+            const staticLocation = parseStaticLocations([locationOptions]);
 
             return Promise.resolve(staticLocation);
         }
         if (dataSourceType === "context") {
             if (contextObject) {
-                return this.setLocationsFromMxObjects([ contextObject ], locationOptions);
+                return this.setLocationsFromMxObjects([contextObject], locationOptions);
             }
 
             return Promise.resolve([]);
         }
         if (contextObject || !requiresContext) {
             return fetchData({
-                    type: dataSourceType,
-                    entity: locationOptions.locationsEntity,
-                    constraint: entityConstraint,
-                    microflow: locationOptions.dataSourceMicroflow,
-                    mxform: this.props.mxform,
-                    nanoflow: locationOptions.dataSourceNanoflow,
-                    contextObject,
-                    inputParameterEntity: locationOptions.inputParameterEntity,
-                    requiresContext
-                })
-                .then(mxObjects => this.setLocationsFromMxObjects(mxObjects, locationOptions));
+                type: dataSourceType,
+                entity: locationOptions.locationsEntity,
+                constraint: entityConstraint,
+                microflow: locationOptions.dataSourceMicroflow,
+                mxform: this.props.mxform,
+                nanoflow: locationOptions.dataSourceNanoflow,
+                contextObject,
+                inputParameterEntity: locationOptions.inputParameterEntity,
+                requiresContext
+            }).then(mxObjects => this.setLocationsFromMxObjects(mxObjects, locationOptions));
         }
 
         return Promise.resolve([]);
     }
 
-    private setLocationsFromMxObjects(mxObjects: mendix.lib.MxObject[] | null, locationAttr: DataSourceLocationProps): Promise<Location[]> {
+    private setLocationsFromMxObjects(
+        mxObjects: mendix.lib.MxObject[] | null,
+        locationAttr: DataSourceLocationProps
+    ): Promise<Location[]> {
         if (!mxObjects) {
             return Promise.resolve([]);
         }
 
-        return Promise.all(mxObjects.map(mxObject =>
-            fetchMarkerObjectUrl({
-                type: locationAttr.markerImage,
-                markerIcon: locationAttr.staticMarkerIcon,
-                imageAttribute: locationAttr.markerImageAttribute,
-                systemImagePath: locationAttr.systemImagePath,
-                markerEnumImages: this.props.markerImages
-            }, mxObject)
-            .then(markerUrl => {
-                return {
-                    latitude: Number(mxObject.get(locationAttr.latitudeAttribute)),
-                    longitude: Number(mxObject.get(locationAttr.longitudeAttribute)),
-                    mxObject,
-                    url: markerUrl,
-                    locationAttr
-                };
-            })
-        ));
+        return Promise.all(
+            mxObjects.map(mxObject =>
+                fetchMarkerObjectUrl(
+                    {
+                        type: locationAttr.markerImage,
+                        markerIcon: locationAttr.staticMarkerIcon,
+                        imageAttribute: locationAttr.markerImageAttribute,
+                        systemImagePath: locationAttr.systemImagePath,
+                        markerEnumImages: this.props.markerImages
+                    },
+                    mxObject
+                ).then(markerUrl => {
+                    return {
+                        latitude: Number(mxObject.get(locationAttr.latitudeAttribute)),
+                        longitude: Number(mxObject.get(locationAttr.longitudeAttribute)),
+                        mxObject,
+                        url: markerUrl,
+                        locationAttr
+                    };
+                })
+            )
+        );
     }
 
     private onClickMarker = (event: LeafletEvent & google.maps.MouseEvent, locationAttr: DataSourceLocationProps) => {
         const { locations } = this.state;
         const latitude = this.props.mapProvider === "googleMaps" ? event.latLng.lat() : event.target.getLatLng().lat;
         this.executeAction(locations[locations.findIndex(targetLoc => targetLoc.latitude === latitude)], locationAttr);
-    }
+    };
 
     private executeAction = (markerLocation: Location, locationAttr: DataSourceLocationProps) => {
         const object = markerLocation.mxObject;
@@ -213,7 +234,8 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
                 mx.ui.action(onClickMicroflow, {
                     context,
                     origin: mxform,
-                    error: error => mx.ui.error(`Error while executing on click microflow ${onClickMicroflow} : ${error.message}`)
+                    error: error =>
+                        mx.ui.error(`Error while executing on click microflow ${onClickMicroflow} : ${error.message}`)
                 });
             } else if (onClickEvent === "callNanoflow" && onClickNanoflow.nanoflow) {
                 window.mx.data.callNanoflow({
@@ -221,7 +243,9 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
                     origin: mxform,
                     context,
                     error: error => {
-                        logger.error(`${this.props.friendlyId}: Error while executing on click nanoflow: ${error.message}`);
+                        logger.error(
+                            `${this.props.friendlyId}: Error while executing on click nanoflow: ${error.message}`
+                        );
                         mx.ui.error(`Error while executing on click nanoflow: ${error.message}`);
                     }
                 });
@@ -236,7 +260,7 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
                 });
             }
         }
-    }
+    };
 }
 
-export default hot(module)(MapsContainer);
+export default hot(MapsContainer);
