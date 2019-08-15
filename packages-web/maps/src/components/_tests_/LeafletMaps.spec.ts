@@ -1,9 +1,7 @@
-import { mount, shallow } from "enzyme";
+import { mount, ReactWrapper, shallow, ShallowWrapper } from "enzyme";
 import { createElement } from "react";
-import ReactResizeDetector from "react-resize-detector";
 
 import { LeafletMap, LeafletMapProps } from "../LeafletMap";
-import { Alert } from "../../components/Alert";
 
 describe("Leaflet maps", () => {
     const defaultProps: LeafletMapProps = {
@@ -23,80 +21,48 @@ describe("Leaflet maps", () => {
         inPreviewMode: false
     };
 
-    const renderLeafletMap = (props: LeafletMapProps) => shallow(createElement(LeafletMap, props));
-    const fullRenderLeafletMap = (props: LeafletMapProps) => mount(createElement(LeafletMap, props));
+    const renderLeafletMap = (props: LeafletMapProps): ShallowWrapper<LeafletMapProps, any> =>
+        shallow(createElement(LeafletMap, props));
+    const fullRenderLeafletMap = (props: LeafletMapProps): ReactWrapper<LeafletMapProps, any> =>
+        mount(createElement(LeafletMap, props));
 
     it("renders structure correctly", () => {
         const leafletMap = renderLeafletMap(defaultProps);
-        const mapStyle = { width: "50px", height: "37.5px" };
         leafletMap.setProps({
             heightUnit: "percentageOfWidth",
             widthUnit: "pixels"
         });
 
-        expect(leafletMap).toBeElement(
-            createElement("div", { className: "widget-maps", style: mapStyle },
-                createElement(Alert, { className: "widget-leaflet-maps-alert leaflet-control" }),
-                createElement("div", { className: "widget-leaflet-maps-wrapper" },
-                    createElement("div", { className: "widget-leaflet-maps" }),
-                    createElement(ReactResizeDetector)
-                )
-            )
-        );
+        expect(leafletMap).toMatchSnapshot();
     });
 
     it("with pixels renders structure correctly", () => {
         const leafletMap = renderLeafletMap(defaultProps);
-        const mapStyle = { width: "50px", height: "75px" };
         leafletMap.setProps({
             heightUnit: "pixels",
             widthUnit: "pixels"
         });
 
-        expect(leafletMap).toBeElement(
-            createElement("div", { className: "widget-maps", style: mapStyle },
-                createElement(Alert, { className: "widget-leaflet-maps-alert leaflet-control" }),
-                createElement("div", { className: "widget-leaflet-maps-wrapper" },
-                    createElement("div", { className: "widget-leaflet-maps" })
-                )
-            )
-        );
+        expect(leafletMap).toMatchSnapshot();
     });
 
     it("with percentage of width and height units renders the structure correctly", () => {
         const leafletMap = renderLeafletMap(defaultProps);
-        const mapStyle = { width: "50%", paddingBottom: "37.5%", height: "auto" };
         leafletMap.setProps({
             heightUnit: "percentageOfWidth",
             widthUnit: "percentage"
         });
 
-        expect(leafletMap).toBeElement(
-            createElement("div", { className: "widget-maps", style: mapStyle },
-                createElement(Alert, { className: "widget-leaflet-maps-alert leaflet-control" }),
-                createElement("div", { className: "widget-leaflet-maps-wrapper" },
-                    createElement("div", { className: "widget-leaflet-maps" })
-                )
-            )
-        );
+        expect(leafletMap).toMatchSnapshot();
     });
 
     it("with percentage of parent units renders the structure correctly", () => {
         const leafletMap = renderLeafletMap(defaultProps);
-        const mapStyle = { width: "50%", height: "75%" };
         leafletMap.setProps({
             heightUnit: "percentageOfParent",
             widthUnit: "percentage"
         });
-
-        expect(leafletMap).toBeElement(
-            createElement("div", { className: "widget-maps", style: mapStyle },
-                createElement(Alert, { className: "widget-leaflet-maps-alert leaflet-control" }),
-                createElement("div", { className: "widget-leaflet-maps-wrapper" },
-                    createElement("div", { className: "widget-leaflet-maps" })
-                )
-            )
-        );
+        expect(leafletMap).toMatchSnapshot();
     });
 
     it("without default center Latitude and Longitude sets default center location based on the default configured location", () => {
@@ -123,7 +89,9 @@ describe("Leaflet maps", () => {
     it("creates markers from given locations with a url", () => {
         const customProps = {
             ...defaultProps,
-            allLocations: [ { latitude: 40.759011, longitude: -73.9844722, mxObject: undefined, url: "http://dummy.url" } ],
+            allLocations: [
+                { latitude: 40.759011, longitude: -73.9844722, mxObject: undefined, url: "http://dummy.url" }
+            ],
             fetchingData: false,
             autoZoom: false
         };
@@ -138,7 +106,7 @@ describe("Leaflet maps", () => {
     it("creates markers from given locations with default icon", () => {
         const customProps = {
             ...defaultProps,
-            allLocations: [ { latitude: 40.759011, longitude: -73.9844722, mxObject: undefined } ],
+            allLocations: [{ latitude: 40.759011, longitude: -73.9844722, mxObject: undefined }],
             fetchingData: false,
             autoZoom: false
         };

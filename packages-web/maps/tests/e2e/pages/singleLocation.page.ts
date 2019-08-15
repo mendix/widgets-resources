@@ -1,21 +1,26 @@
-import { BasePage } from "./base.page";
-
-class SingleLocationPage extends BasePage {
-
-    public get latitudeInput() {
-        return browser.element(".mx-name-textBox1 input");
+class SingleLocationPage {
+    get latitudeInput(): WebdriverIO.Element {
+        return $(".mx-name-textBox1 input");
     }
-    public get longitudeInput() {
-        return browser.element(".mx-name-textBox2 input");
+    get longitudeInput(): WebdriverIO.Element {
+        return $(".mx-name-textBox2 input");
     }
-    public get longitudeLabel() {
-        return browser.element(".mx-name-textBox2 label");
+    get longitudeLabel(): WebdriverIO.Element {
+        return $(".mx-name-textBox2 label");
     }
-    public get alert() {
-        return browser.element(".widget-leaflet-maps-alert");
+    get alert(): WebdriverIO.Element {
+        return $(".widget-leaflet-maps-alert");
     }
 
-    public open(): void {
+    get map(): WebdriverIO.Element {
+        return $(".widget-leaflet-maps");
+    }
+
+    get markers(): WebdriverIO.Element[] {
+        return this.map.$$(".leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive");
+    }
+
+    open(): void {
         browser.url("/p/Playground");
     }
 }

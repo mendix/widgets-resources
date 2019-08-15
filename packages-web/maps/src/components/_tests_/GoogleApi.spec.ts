@@ -1,11 +1,10 @@
 import { shallow } from "enzyme";
-import { createElement } from "react";
+import { createElement, ReactNode } from "react";
 
 import googleApiWrapper from "../GoogleApi";
 
 describe("Google maps wrapper", () => {
-
-    const myComponent = () => createElement("div", {});
+    const myComponent = (): ReactNode => createElement("div", {});
     const wrapperComponent = googleApiWrapper("https://dummy.url")(myComponent);
 
     it("should render a component when a script exists", () => {
@@ -14,5 +13,4 @@ describe("Google maps wrapper", () => {
 
         expect(wrapper.html()).not.toBe("");
     });
-
 });

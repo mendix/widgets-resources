@@ -2,7 +2,7 @@ import { CSSProperties } from "react";
 import { MapUtils } from "./namespace";
 
 type Dimensions = MapUtils.Dimensions;
-
+/* eslint-disable */
 export default class Utils {
     static customUrls: MapUtils.CustomTypeUrls = {
         openStreetMap: `https://{s}.tile.osm.org/{z}/{x}/{y}.png`,
@@ -22,7 +22,7 @@ export default class Utils {
             width: props.widthUnit === "percentage" ? `${props.width}%` : `${props.width}px`
         };
         if (props.heightUnit === "percentageOfWidth") {
-            const ratio = props.height / 100 * props.width;
+            const ratio = (props.height / 100) * props.width;
             if (props.widthUnit === "percentage") {
                 style.height = "auto";
                 style.paddingBottom = `${ratio}%`;
@@ -38,7 +38,8 @@ export default class Utils {
         return style;
     }
 
-    static parseStyle(style = ""): CSSProperties { // Doesn't support a few stuff.
+    static parseStyle(style = ""): CSSProperties {
+        // Doesn't support a few stuff.
         try {
             return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
                 const pair = line.split(":");
@@ -50,11 +51,9 @@ export default class Utils {
                 return styleObject;
             }, {});
         } catch (error) {
-            // tslint:disable-next-line no-console
             window.console.log("Failed to parse style", style, error);
         }
 
         return {};
     }
-
 }

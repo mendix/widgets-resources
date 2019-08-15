@@ -7,9 +7,13 @@ describe("Maps", () => {
 
         it("should show a single location", () => {
             singleLocationPage.open();
-            singleLocationPage.markers.waitForVisible();
+            singleLocationPage.map.waitForDisplayed();
 
-            const markerList: WebdriverIO.Element[] = singleLocationPage.markers.value;
+            expect(singleLocationPage.map).toBeDefined();
+
+            const markerList: WebdriverIO.Element[] = singleLocationPage.markers || [];
+
+            // eslint-disable-next-line jest/prefer-to-have-length
             expect(markerList.length).toBe(1);
         });
 
@@ -26,22 +30,26 @@ describe("Maps", () => {
             singleLocationPage.alert.waitForExist();
             const alert = singleLocationPage.alert.getText();
 
-            expect (alert).toContain(alertValue);
+            expect(alert).toContain(alertValue);
         });
 
         describe("when XPath data source is selected", () => {
             it("it should show multiple locations", () => {
                 xpathPage.open();
-                xpathPage.getGrid(1).waitForVisible();
-                xpathPage.getGridRow(0).waitForVisible();
+                xpathPage.getGrid(1).waitForDisplayed();
+                xpathPage.getGridRow(0).waitForDisplayed();
                 xpathPage.getGridRow(0).click();
-                xpathPage.markers.waitForVisible();
+                xpathPage.map.waitForDisplayed();
 
-                browser.waitUntil(() => {
-                    const markerList: WebdriverIO.Element[] = xpathPage.markers.value;
+                browser.waitUntil(
+                    () => {
+                        const markerList: WebdriverIO.Element[] = xpathPage.markers;
 
-                    return markerList.length > 1;
-                }, 5000, "expected more than 1 marker to be populated");
+                        return markerList.length > 1;
+                    },
+                    5000,
+                    "expected more than 1 marker to be populated"
+                );
             });
         });
     });

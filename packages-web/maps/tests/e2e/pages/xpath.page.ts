@@ -1,18 +1,15 @@
-import { Client, Element, RawResult } from "webdriverio";
-
 import { BasePage } from "./base.page";
 
 class XpathPage extends BasePage {
-
-    public getGrid(gridNumber: number): Client<RawResult<Element>> & RawResult<Element> {
-        return browser.element(`.mx-name-grid${gridNumber}`);
+    getGrid(gridNumber: number): WebdriverIO.Element {
+        return $(`.mx-name-grid${gridNumber}`);
     }
 
-    public getGridRow(rowNumber: number): Client<RawResult<Element>> & RawResult<Element> {
-        return browser.element(`.mx-name-index-${rowNumber}`);
+    getGridRow(rowNumber: number): WebdriverIO.Element {
+        return $(`.mx-name-index-${rowNumber}`);
     }
 
-    public open(): void {
+    open(): void {
         browser.url("/p/MarkerMicroflow");
     }
 }

@@ -6,7 +6,6 @@ type locationDataProps = Container.DataSourceLocationProps;
 type mapContainerProps = Container.MapsContainerProps;
 
 describe("utils/Data", () => {
-
     describe("#validateLocationProps", () => {
         const defaultProps: Partial<locationDataProps> = {
             locationsEntity: "location",
@@ -50,7 +49,7 @@ describe("utils/Data", () => {
                 ...validationProps,
                 defaultCenterLatitude: "-200",
                 defaultCenterLongitude: "200",
-                locations: [ ]
+                locations: []
             });
 
             expect(validationMessage).toBe("Invalid default center: latitude '-200', longitude '200'");
@@ -65,25 +64,43 @@ describe("utils/Data", () => {
         it("returns alert if data source type is context and there is no latitude or longitude", () => {
             const validationMessage = validateLocationProps({
                 ...validationProps,
-                locations: [ { ...defaultProps as locationDataProps, longitudeAttribute: "" } ]
+                locations: [{ ...(defaultProps as locationDataProps), longitudeAttribute: "" }]
             });
 
-            expect(validationMessage).toBe(`Latitude and longitude attributes are required for data source context at location 1`);
+            expect(validationMessage).toBe(
+                "Latitude and longitude attributes are required for data source context at location 1"
+            );
         });
 
         it("returns alert if data source type is static and there is no latitude or longitude", () => {
             const validationMessage = validateLocationProps({
                 ...validationProps,
-                locations: [ { ...defaultProps as locationDataProps, dataSourceType: "static", staticLatitude: "0", staticLongitude: "" } ]
+                locations: [
+                    {
+                        ...(defaultProps as locationDataProps),
+                        dataSourceType: "static",
+                        staticLatitude: "0",
+                        staticLongitude: ""
+                    }
+                ]
             });
 
-            expect(validationMessage).toBe("Invalid static location: Latitude and longitude are required at location 1");
+            expect(validationMessage).toBe(
+                "Invalid static location: Latitude and longitude are required at location 1"
+            );
         });
 
-        it("returns alert if data source type is static and there is no latitude or longitude invalid", () => {
+        it("returns alert if data source type is static and there is no latitude or longitude invalid 2", () => {
             const validationMessage = validateLocationProps({
                 ...validationProps,
-                locations: [ { ...defaultProps as locationDataProps, dataSourceType: "static", staticLatitude: "1000", staticLongitude: "1000" } ]
+                locations: [
+                    {
+                        ...(defaultProps as locationDataProps),
+                        dataSourceType: "static",
+                        staticLatitude: "1000",
+                        staticLongitude: "1000"
+                    }
+                ]
             });
 
             expect(validationMessage).toBe("Invalid static location: latitude '1000', longitude '1000' at location 1");
@@ -92,7 +109,7 @@ describe("utils/Data", () => {
         it("returns alert if data source type is microflow and there is no microflow", () => {
             const validationMessage = validateLocationProps({
                 ...validationProps,
-                locations: [ { ...defaultProps as locationDataProps, dataSourceType: "microflow" } ]
+                locations: [{ ...(defaultProps as locationDataProps), dataSourceType: "microflow" }]
             });
 
             expect(validationMessage).toBe("A Microflow is required for Data source Microflow at location 1");
@@ -101,7 +118,7 @@ describe("utils/Data", () => {
         it("return an alert if marker image is selected and there are no marker images", () => {
             const validationMessage = validateLocationProps({
                 ...validationProps,
-                locations: [ { ...defaultProps as locationDataProps, markerImage: "enumImage" } ]
+                locations: [{ ...(defaultProps as locationDataProps), markerImage: "enumImage" }]
             });
 
             expect(validationMessage).toBe("Marker images are required for image attribute at location 1");
@@ -110,7 +127,7 @@ describe("utils/Data", () => {
         it("return an alert if marker image type is 'system image path' and there is no 'system image path'", () => {
             const validationMessage = validateLocationProps({
                 ...validationProps,
-                locations: [ { ...defaultProps as locationDataProps, markerImage: "systemImage" } ]
+                locations: [{ ...(defaultProps as locationDataProps), markerImage: "systemImage" }]
             });
 
             expect(validationMessage).toBe("System image path is required at location 1");
@@ -119,7 +136,7 @@ describe("utils/Data", () => {
         it("return an alert if on click event is call microflow and there is no microflow", () => {
             const validationMessage = validateLocationProps({
                 ...validationProps,
-                locations: [ { ...defaultProps as locationDataProps, onClickEvent: "callMicroflow" } ]
+                locations: [{ ...(defaultProps as locationDataProps), onClickEvent: "callMicroflow" }]
             });
 
             expect(validationMessage).toBe("A Microflow is required for on click Microflow at location 1");
@@ -127,7 +144,7 @@ describe("utils/Data", () => {
         it("return an alert if on click event is call nanoflow and there is no nanoflow", () => {
             const validationMessage = validateLocationProps({
                 ...validationProps,
-                locations: [ { ...defaultProps as locationDataProps, onClickEvent: "callNanoflow" } ]
+                locations: [{ ...(defaultProps as locationDataProps), onClickEvent: "callNanoflow" }]
             });
 
             expect(validationMessage).toBe("A Nanoflow is required for on click Nanoflow at location 1");
@@ -136,7 +153,7 @@ describe("utils/Data", () => {
         it("return an alert if on click event is show page and there is no page", () => {
             const validationMessage = validateLocationProps({
                 ...validationProps,
-                locations: [ { ...defaultProps as locationDataProps, onClickEvent: "showPage" } ]
+                locations: [{ ...(defaultProps as locationDataProps), onClickEvent: "showPage" }]
             });
 
             expect(validationMessage).toBe("A page is required for on click show page at location 1");
@@ -145,7 +162,7 @@ describe("utils/Data", () => {
         it("return no alert if on click event is do nothing", () => {
             const validationMessage = validateLocationProps({
                 ...validationProps,
-                locations: [ { ...defaultProps as locationDataProps, onClickEvent: "doNothing" } ]
+                locations: [{ ...(defaultProps as locationDataProps), onClickEvent: "doNothing" }]
             });
 
             expect(validationMessage).toBe("");
@@ -154,7 +171,7 @@ describe("utils/Data", () => {
 
     describe("#ValidLocation", () => {
         it("returns location if valid", () => {
-            const location = { latitude:  51.9107963, longitude: 4.4789878 };
+            const location = { latitude: 51.9107963, longitude: 4.4789878 };
             const valid = validLocation(location);
 
             expect(valid).toEqual(true);

@@ -1,13 +1,12 @@
-import { SFC, createElement } from "react";
-import * as classNames from "classnames";
+import { createElement, FunctionComponent } from "react";
+import classNames from "classnames";
 
 export interface AlertProps {
     className?: string;
     bootstrapStyle?: "default" | "primary" | "success" | "info" | "warning" | "danger";
 }
 
-// tslint:disable-next-line:variable-name
-export const Alert: SFC<AlertProps> = ({ className, bootstrapStyle, children }) =>
+export const Alert: FunctionComponent<AlertProps> = ({ className, bootstrapStyle, children }) =>
     children
         ? createElement("div", { className: classNames(`alert alert-${bootstrapStyle}`, className) }, children)
         : null;

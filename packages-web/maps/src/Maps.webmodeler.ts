@@ -1,4 +1,4 @@
-import { PureComponent, createElement } from "react";
+import { PureComponent, createElement, ReactNode } from "react";
 import { LeafletMap } from "./components/LeafletMap";
 import GoogleMap from "./components/GoogleMap";
 import { validateLocationProps } from "./utils/Validations";
@@ -16,15 +16,15 @@ type VisibilityMap<T> = {
     [P in keyof T]: any;
 };
 
-// tslint:disable-next-line:class-name
-export class preview extends PureComponent<MapsContainerProps, {}> {
+declare function require(name: string): string;
 
-    render() {
+export class preview extends PureComponent<MapsContainerProps, {}> {
+    render(): ReactNode {
         const mapsApiToken = this.props.apiToken ? this.props.apiToken.replace(/ /g, "") : undefined;
         const validationMessage = validateLocationProps(this.props);
         const allLocations = this.getLocations(this.props);
         const commonProps = {
-            ...this.props as MapProps,
+            ...(this.props as MapProps),
             allLocations,
             alertMessage: validationMessage,
             className: this.props.class,
@@ -54,15 +54,17 @@ export class preview extends PureComponent<MapsContainerProps, {}> {
         }
         // Mx office Netherlands
 
-        return [ {
-            latitude: 51.9066313,
-            longitude: 4.4861703,
-            url: ""
-        } ];
+        return [
+            {
+                latitude: 51.9066313,
+                longitude: 4.4861703,
+                url: ""
+            }
+        ];
     }
 }
 
-export function getPreviewCss() {
+export function getPreviewCss(): string {
     return (
         require("leaflet/dist/leaflet.css") +
         require("leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css") +
@@ -71,7 +73,10 @@ export function getPreviewCss() {
     );
 }
 
-export function getVisibleProperties(valueMap: MapsContainerProps, visibilityMap: VisibilityMap<MapsContainerProps>) {
+export function getVisibleProperties(
+    valueMap: MapsContainerProps,
+    visibilityMap: VisibilityMap<MapsContainerProps>
+): VisibilityMap<MapsContainerProps> {
     if (valueMap.locations && Array.isArray(valueMap.locations)) {
         valueMap.locations.forEach((location, index) => {
             if (location.dataSourceType) {

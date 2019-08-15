@@ -1,6 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class UrlHelper {
-
-    static getStaticResourceUrlFromPath(path: string) {
+    static getStaticResourceUrlFromPath(path: string): string {
         if (this.startsWith(path, "data:")) {
             return path;
         }
@@ -9,7 +9,7 @@ export class UrlHelper {
         return mx.appUrl + path;
     }
 
-    static getStaticResourceUrl(url: string) {
+    static getStaticResourceUrl(url: string): string {
         if (this.startsWith(url, "data:") || !window.mx) {
             return url;
         }
@@ -25,11 +25,8 @@ export class UrlHelper {
         return url;
     }
 
-    static getDynamicResourcePath(guid: string, changedDate: number, isThumbnail: boolean) {
-        let url = "file?" + [
-            "guid=" + guid,
-            "changedDate=" + changedDate
-        ].join("&");
+    static getDynamicResourcePath(guid: string, changedDate: number, isThumbnail: boolean): string {
+        let url = "file?" + ["guid=" + guid, "changedDate=" + changedDate].join("&");
 
         if (isThumbnail) {
             url += "&thumb=true";
@@ -38,15 +35,15 @@ export class UrlHelper {
         return url;
     }
 
-    static getDynamicResourceUrl(guid: string, changedDate: number, isThumbnail = false) {
+    static getDynamicResourceUrl(guid: string, changedDate: number, isThumbnail = false): string {
         return `${mx.remoteUrl} ${this.getDynamicResourcePath(guid, changedDate, isThumbnail)}`;
     }
 
-    private static startsWith(searchString: string, prefix: string) {
+    private static startsWith(searchString: string, prefix: string): boolean {
         return searchString.indexOf(prefix) === 0;
     }
 
-    private static endsWith(searchString: string, suffix: string) {
+    private static endsWith(searchString: string, suffix: string): boolean {
         return searchString.indexOf(suffix, searchString.length - suffix.length) !== -1;
     }
 }

@@ -1,5 +1,5 @@
+/* eslint-disable */
 export namespace Container {
-
     export type MarKerImages = "systemImage" | "staticImage" | "enumImage";
     export type DataSource = "static" | "XPath" | "microflow" | "context" | "nanoflow";
     export type OnClickOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
@@ -7,7 +7,7 @@ export namespace Container {
     export type mapProviders = "openStreet" | "mapBox" | "hereMaps" | "googleMaps";
 
     export interface WrapperProps {
-        "class"?: string;
+        class?: string;
         friendlyId: string;
         mxform: mxui.lib.form._FormBase;
         mxObject?: mendix.lib.MxObject;
@@ -19,7 +19,11 @@ export namespace Container {
         markerImages: EnumerationImages[];
     }
 
-    export interface DataSourceLocationProps extends DatabaseLocationProps, StaticLocationProps, MarkerIconProps, MarkerEvents {
+    export interface DataSourceLocationProps
+        extends DatabaseLocationProps,
+            StaticLocationProps,
+            MarkerIconProps,
+            MarkerEvents {
         dataSourceType: DataSource;
         locationsEntity: string;
         entityConstraint: string;
@@ -90,7 +94,6 @@ export namespace Container {
 }
 
 export namespace Data {
-
     export interface FetchDataOptions {
         type: Container.DataSource;
         entity?: string;
@@ -124,7 +127,6 @@ export namespace Data {
 }
 
 export namespace MapUtils {
-
     export interface SharedProps {
         allLocations?: Container.Location[];
         className?: string;
