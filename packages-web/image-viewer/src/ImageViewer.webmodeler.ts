@@ -3,7 +3,7 @@ import { ImageViewer, ImageViewerProps } from "./components/ImageViewer";
 import ImageViewerContainer, { ImageViewerContainerProps } from "./components/ImageViewerContainer";
 import { Alert } from "./components/Alert";
 
-const image = require("base64-image-loader!./img/imageviewerpreview.png");
+const image = require("./img/imageviewerpreview.png");
 
 declare function require(name: string): string;
 
