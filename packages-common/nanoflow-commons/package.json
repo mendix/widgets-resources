@@ -1,16 +1,15 @@
 {
     "name": "nanoflow-commons",
     "version": "1.0.0",
-    "private": true,
     "license": "Apache-2.0",
     "scripts": {
         "start": "tsc --watch",
         "build": "npm run build:tsc && npm run build:babel",
-        "prebuild:tsc": "rm -rf ./dist/tsc",
-        "build:tsc": "tsc --project ./src/tsconfig.json",
-        "prebuild:babel": "rm -rf ./dist/babel",
+        "prebuild:tsc": "rm -rf dist/tsc",
+        "build:tsc": "tsc --project src/tsconfig.json",
+        "prebuild:babel": "rm -rf dist/babel",
         "build:babel": "babel dist/tsc --out-dir dist/babel",
-        "postbuild": "ts-node --project ./scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
+        "postbuild": "ts-node --project scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
         "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/"
     },
     "devDependencies": {
