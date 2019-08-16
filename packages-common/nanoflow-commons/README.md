@@ -1,6 +1,3 @@
-[![Build Status](https://api.travis-ci.org/mendix/nanoflow-commons.svg?branch=master)](https://travis-ci.org/mendix/nanoflow-commons)
-![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
-
 # Nanoflow commons
 
 A collection of commonly used nanoflow actions that are usable across all platforms: web, hybrid mobile and native
@@ -39,7 +36,3 @@ mobile.
 
 Please visit the [Mendix Docs](https://docs.mendix.com/howto/extensibility/write-javascript-actions) for more
 information on writing your own custom nanoflow actions.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
