@@ -9,7 +9,8 @@
         "lint:scripts": "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx packages-web/**/src packages-native/**/src",
         "test": "lerna run test --ignore @widgets-resources/utils-react-widgets",
         "build": "lerna run build --ignore @widgets-resources/utils-react-widgets",
-        "release": "lerna version --conventional-commits"
+        "release": "lerna version --conventional-commits",
+        "version": "ts-node --project scripts/tsconfig.json ./scripts/release/BumpVersion.ts"
     },
     "devDependencies": {
         "@commitlint/cli": "^7.5.2",
