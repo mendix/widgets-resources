@@ -34,6 +34,7 @@ function releaseWithAuth(auth: TokenData) {
         : false;
 
     const options = {
+        // eslint-disable-next-line @typescript-eslint/camelcase
         tag_name: tagName,
         name: tagName,
         assets,
@@ -44,6 +45,7 @@ function releaseWithAuth(auth: TokenData) {
         if (error) {
             return handleError(error);
         }
+        // eslint-disable-next-line no-console
         console.log(result.html_url);
         process.exit(0);
     });
@@ -51,6 +53,7 @@ function releaseWithAuth(auth: TokenData) {
 
 function handleError(error: { msg: string } | string) {
     const msg = typeof error === "object" ? error.msg : error;
+    // eslint-disable-next-line no-console
     console.error(msg);
     process.exit(1);
 }
