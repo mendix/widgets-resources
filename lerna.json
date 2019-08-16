@@ -1,6 +1,6 @@
 {
     "version": "independent",
-    "packages": ["packages-native/*", "packages-web/*"],
+    "packages": ["packages-common/*", "packages-native/*", "packages-web/*"],
     "command": {
         "version": {
             "ignoreChanges": ["*.md"],
