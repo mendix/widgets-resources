@@ -6,7 +6,7 @@
         "url": "https://github.com/mendix/widgets-resources.git"
     },
     "scripts": {
-        "postinstall": "lerna bootstrap",
+        "postinstall": "lerna bootstrap --no-ci",
         "prettier": "prettier --config \"./prettier.config.js\" --write \"./**/{src,test}/**/*.{js,jsx,ts,tsx}\"",
         "format": "pretty-quick --staged",
         "lint": "npm run lint:scripts && lerna run lint",

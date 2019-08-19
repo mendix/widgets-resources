@@ -12,8 +12,6 @@ env:
         - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" == "" ] && [ "$TRAVIS_PULL_REQUEST" == "true" ]; then echo "true"; else echo "false"; fi)
         # Set arguments so lerna only runs scripts in changed packages
         - SCRIPT_ARGS=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
-before_script:
-    - npm install
 jobs:
     include:
         - name: "Lint"
