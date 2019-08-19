@@ -82,7 +82,7 @@ function releaseWithAuth(auth: TokenData, projectPackage: any) {
         auth,
         workpath: projectPackage.path,
         // eslint-disable-next-line @typescript-eslint/camelcase
-        target_commitish: "feat/publish-version",
+        target_commitish: "master",
         draft: true
     };
 
