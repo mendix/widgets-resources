@@ -3,8 +3,11 @@
     "widgetName": "VideoPlayer",
     "version": "1.0.0",
     "description": "Player for YouTube, Dailymotion, Vimeo and Mp4 videos",
-    "copyright": "2019 Mendix",
-    "author": "Mendix",
+    "copyright": "Mendix BV",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mendix/widgets-resources.git"
+    },
     "license": "Apache-2.0",
     "config": {
         "widgetPath": "../test-project/mxproject/widgets",
@@ -24,13 +27,6 @@
         "test:e2e": "export URL=https://videoplayer-sandbox.mxapps.io/ || set URL=https://videoplayer-sandbox.mxapps.io/ && wdio ../../configs/e2e/wdio.conf.js",
         "test:e2e:dev": "export DEBUG=true || set DEBUG=true && wdio ../../configs/e2e/wdio.conf.js",
         "release": "pluggable-widgets-tools release:ts --subprojectPath $npm_package_config_subprojectFolder"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/mendix/video-player"
-    },
-    "bugs": {
-        "url": "https://github.com/mendix/video-player/issues"
     },
     "devDependencies": {
         "@types/react-resize-detector": "^4.0.1"

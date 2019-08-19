@@ -3,6 +3,11 @@
     "widgetName": "Switch",
     "version": "2.1.1",
     "description": "Toggle a boolean attribute",
+    "copyright": "Mendix BV",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mendix/widgets-resources.git"
+    },
     "scripts": {
         "start": "utils-react-widgets start",
         "dev": "utils-react-widgets dev",

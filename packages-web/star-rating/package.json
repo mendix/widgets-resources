@@ -3,6 +3,11 @@
     "widgetName": "StarRating",
     "version": "1.3.0",
     "description": "This widget lets users rate an object with stars or custom icons.",
+    "copyright": "Mendix BV",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mendix/widgets-resources.git"
+    },
     "scripts": {
         "start": "utils-react-widgets start",
         "dev": "utils-react-widgets dev",
