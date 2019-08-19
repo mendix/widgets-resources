@@ -4,8 +4,6 @@ cache: npm
 branches:
     only:
         - master
-install:
-    - npm i
 env:
     global:
         # List of all touched files, excluding paths starting with 'packages'
