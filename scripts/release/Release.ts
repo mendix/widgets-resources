@@ -1,7 +1,7 @@
 // @ts-ignore
 import ghRelease from "gh-release";
 import ghauth, { AuthOptions, TokenData } from "ghauth";
-import { promises as fs } from "fs";
+import { promises as fs, existsSync } from "fs";
 import { join } from "path";
 import { spawnSync } from "child_process";
 
@@ -10,15 +10,15 @@ main().catch(handleError);
 async function main(): Promise<void> {
     const args = process.argv.slice(2);
     const target = args[0];
+    const description = args.length > 1 ? args[1] : "No notes";
     const packages = ["packages-common", "packages-native", "packages-web"];
-    // await fs.mkdir(testProjectDir, { recursive: true });
     // eslint-disable-next-line no-console
     console.log("Target", target);
 
     const projectPackage = await findPackage(packages, target);
 
-    spawnSync("lerna", ["version", `--conventional-commits=${projectPackage.name}`]);
     spawnSync("npm", ["run", "release"], { cwd: projectPackage.path });
+    await createChangeLog(description, projectPackage.version, projectPackage.path);
 
     releaseWithAuth(await getAuth(), projectPackage);
 
@@ -64,16 +64,26 @@ function getAuth() {
 }
 
 function releaseWithAuth(auth: TokenData, projectPackage: any) {
-    const tagName = `${projectPackage.name}@${projectPackage.version}`;
-    const assets = [`${projectPackage.path}/dist/${projectPackage.version}/${projectPackage.widgetName}.mpk`];
+    const tagName = `AppStore release ${projectPackage.name.replace(/^\w/, (c: string) => c.toUpperCase())} v${
+        projectPackage.version
+    }`;
+
+    const assets = [
+        `dist/${projectPackage.version}/${projectPackage.widgetName}.mpk`,
+        `tests/TestProjects/Mendix7/${projectPackage.widgetName}.mpr`,
+        `tests/TestProjects/Mendix8/${projectPackage.widgetName}.mpr`
+    ];
 
     const options = {
         // eslint-disable-next-line @typescript-eslint/camelcase
-        tag_name: `v${projectPackage.version}`,
+        tag_name: `${projectPackage.name}-v${projectPackage.version}`,
         name: tagName,
-        assets,
+        assets: assets.filter(asset => existsSync(projectPackage.path + "/" + asset)),
         auth,
-        workpath: projectPackage.path
+        workpath: projectPackage.path,
+        // eslint-disable-next-line @typescript-eslint/camelcase
+        target_commitish: "feat/publish-version",
+        draft: true
     };
 
     ghRelease(options, (error: string, result: { html_url: string }) => {
@@ -90,4 +100,11 @@ function handleError(error: any) {
     // eslint-disable-next-line no-console
     console.error(error);
     process.exit(1);
+}
+
+function createChangeLog(description: string, version: string, path: string): Promise<void> {
+    const date = new Date();
+    const body = `## [${version}] - ${date.toISOString()}
+    ${description}`;
+    return fs.appendFile(`${path}/CHANGELOG.md`, body);
 }
