@@ -1,5 +1,5 @@
-import { background, spacing, border } from '../variables';
-import { Platform } from 'react-native';
+import { Platform }           from "react-native";
+import { background, border } from "../variables";
 
 //
 // DISCLAIMER:
@@ -11,13 +11,13 @@ import { Platform } from 'react-native';
 // Hide on Android
 export const hideOnAndroid = {
     container: {
-        display: Platform.select({ android: 'none' }),
+        display: Platform.select({ android: "none" }),
     },
 };
 // Hide on iOS
 export const hideOnIos = {
     container: {
-        display: Platform.select({ ios: 'none' }),
+        display: Platform.select({ ios: "none" }),
     },
 };
 

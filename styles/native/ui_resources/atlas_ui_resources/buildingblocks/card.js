@@ -1,5 +1,5 @@
-import { background, border, contrast, font, spacing } from '../../../core/variables';
-import { Platform } from 'react-native';
+import { Platform }                              from "react-native";
+import { background, border, contrast, spacing } from "../../../core/variables";
 
 /* ==========================================================================
     Cards
@@ -44,7 +44,7 @@ export const card = {
 export const cardAction = {
     container: {
         flex: 1,
-        flexBasis: '40%',
+        flexBasis: "40%",
         aspectRatio: 1,
         borderWidth: 1,
         borderColor: border.color,
@@ -56,7 +56,7 @@ export const cardAction = {
 export const cardActionImage = {
     image: {
         maxHeight: 70,
-        resizeMode: 'contain',
+        resizeMode: "contain",
     },
 };
 
@@ -64,14 +64,14 @@ export const cardActionImage = {
 // Card Product
 export const cardProductImage = {
     container: {
-        overflow: 'hidden',
+        overflow: "hidden",
         borderTopLeftRadius: border.radius,
         borderTopRightRadius: border.radius,
     },
     image: {
-        width: '100%',
+        width: "100%",
         height: 250,
-        resizeMode: 'cover',
+        resizeMode: "cover",
     },
 };
 export const cardProductImageFull = {
@@ -85,18 +85,18 @@ export const cardProductImageFull = {
 
 export const cardProductBody = {
     container: {
-        position: 'absolute',
+        position: "absolute",
         end: 0,
         start: 0,
         bottom: 0,
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
     },
 };
 
 export const cardRating = {
     container: {
         flexShrink: 1,
-        justifyContent: 'flex-start',
+        justifyContent: "flex-start",
     },
     icon: {
         size: 18,
@@ -111,8 +111,8 @@ export const cardPaymentImage = {
         maxHeight: 250,
     },
     image: {
-        width: '100%',
+        width: "100%",
         maxHeight: 250,
-        resizeMode: 'contain',
+        resizeMode: "contain",
     },
 };

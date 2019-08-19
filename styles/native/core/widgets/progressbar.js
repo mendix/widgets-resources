@@ -1,6 +1,6 @@
-import { Platform } from "react-native";
+import { Platform }            from "react-native";
 import { anyColorToRgbString } from "../helpers/_helperfunctions/convertcolors";
-import { brand } from "../variables";
+import { brand }               from "../variables";
 
 //
 // DISCLAIMER:

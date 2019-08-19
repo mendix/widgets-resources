@@ -1,6 +1,5 @@
-import { brand, button, contrast, font, spacing } from '../variables';
-import { Platform } from 'react-native';
-import merge from '../helpers/_helperfunctions/mergeobjects';
+import merge                             from "../helpers/_helperfunctions/mergeobjects";
+import { brand, button, contrast, font } from "../variables";
 
 //
 // DISCLAIMER:
@@ -73,7 +72,7 @@ export const btnDanger = {
 export const btnIconPrimary = {
     container: {
         borderWidth: 0,
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
         paddingVertical: 0,
         paddingHorizontal: 0,
     },
@@ -111,7 +110,7 @@ export const btnAsText = {
         borderWidth: 0,
         borderRadius: 0,
         rippleColor: contrast.lowest,
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
         paddingVertical: 0,
         paddingHorizontal: 0,
     },

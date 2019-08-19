@@ -1,6 +1,6 @@
-import { TextBox, TextBoxVertical } from './textbox';
-import { brand, contrast, spacing, input, background } from '../variables';
-import { Platform } from 'react-native';
+import { Platform }                             from "react-native";
+import { background, brand, contrast, spacing } from "../variables";
+import { TextBox, TextBoxVertical }             from "./textbox";
 
 //
 // DISCLAIMER:
@@ -20,7 +20,7 @@ export const CheckBox = {
         // All ViewStyle properties are allowed
         ...TextBox.container,
         paddingVertical: spacing.smallest,
-        justifyContent: 'center',
+        justifyContent: "center",
     },
     label: {
         // numberOfLines and all TextStyle properties are allowed
@@ -28,7 +28,7 @@ export const CheckBox = {
     },
     input: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
         marginRight: Platform.select({ android: -3 }),
         thumbColorOn: background.primary,
         trackColorOn: brand.success,
@@ -49,7 +49,7 @@ export const CheckBox = {
     validationMessage: {
         // All TextStyle properties are allowed
         ...TextBox.validationMessage,
-        alignSelf: 'stretch',
+        alignSelf: "stretch",
     },
 };
 
@@ -59,7 +59,7 @@ export const CheckBoxVertical = {
         ...TextBoxVertical.label,
     },
     input: {
-        alignSelf: 'flex-start',
+        alignSelf: "flex-start",
     },
     inputError: TextBoxVertical.inputError,
     validationMessage: TextBoxVertical.validationMessage,

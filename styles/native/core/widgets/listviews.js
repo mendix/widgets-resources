@@ -1,5 +1,3 @@
-import { border } from '../variables';
-
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.

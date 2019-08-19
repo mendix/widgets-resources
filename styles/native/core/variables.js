@@ -1,27 +1,27 @@
-import * as custom from '../app/custom-variables';
-import { Dimensions, Platform } from 'react-native';
-import { setColorBasedOnBackground, setContrastScale } from './helpers/_helperfunctions/convertcolors';
-import adjustFont from './helpers/_helperfunctions/adjustfont';
-import merge from './helpers/_helperfunctions/mergeobjects';
+import { Dimensions, Platform }                        from "react-native";
+import * as custom                                     from "../app/custom-variables";
+import adjustFont                                      from "./helpers/_helperfunctions/adjustfont";
+import { setColorBasedOnBackground, setContrastScale } from "./helpers/_helperfunctions/convertcolors";
+import merge                                           from "./helpers/_helperfunctions/mergeobjects";
 
 //== Global variables
 //## Variables to be used during styling
 //-------------------------------------------------------------------------------------------------------------------//
 // System defined read-only values
-export const { height: deviceHeight, width: deviceWidth } = Dimensions.get('window');
+export const { height: deviceHeight, width: deviceWidth } = Dimensions.get("window");
 
 // Brand Style
 let brand = {
-    primary: '#0595DB',
-    success: '#76CA02',
-    warning: '#f99b1d',
-    danger: '#ed1c24',
+    primary: "#0595DB",
+    success: "#76CA02",
+    warning: "#f99b1d",
+    danger: "#ed1c24",
 };
 brand = merge(brand, custom.brand || {});
 
 let background = {
-    primary: '#FFF',
-    secondary: setContrastScale(0.03, '#FFF'),
+    primary: "#FFF",
+    secondary: setContrastScale(0.03, "#FFF"),
 };
 background = merge(background, custom.background || {});
 
@@ -57,11 +57,11 @@ let font = {
     sizeH5: adjustFont(14),
     sizeH6: adjustFont(12),
     color: setColorBasedOnBackground(background.primary),
-    weightLight: '100',
-    weightNormal: 'normal',
-    weightSemiBold: '600',
-    weightBold: 'bold',
-    family: Platform.select({ ios: 'System', android: 'normal' }),
+    weightLight: "100",
+    weightNormal: "normal",
+    weightSemiBold: "600",
+    weightBold: "bold",
+    family: Platform.select({ ios: "System", android: "normal" }),
 };
 font = merge(font, custom.font || {});
 
@@ -84,31 +84,31 @@ let button = {
 
     header: {
         color: brand.primary,
-        borderColor: 'transparent',
-        backgroundColor: 'transparent',
+        borderColor: "transparent",
+        backgroundColor: "transparent",
     },
     primary: {
-        color: '#FFF',
+        color: "#FFF",
         borderColor: brand.primary,
         backgroundColor: brand.primary,
     },
     secondary: {
         color: brand.primary,
         borderColor: brand.primary,
-        backgroundColor: 'transparent',
+        backgroundColor: "transparent",
     },
     success: {
-        color: '#FFF',
+        color: "#FFF",
         borderColor: brand.success,
         backgroundColor: brand.success,
     },
     warning: {
-        color: '#FFF',
+        color: "#FFF",
         borderColor: brand.warning,
         backgroundColor: brand.warning,
     },
     danger: {
-        color: '#FFF',
+        color: "#FFF",
         borderColor: brand.danger,
         backgroundColor: brand.danger,
     },
@@ -126,7 +126,7 @@ let input = {
     disabledBackgroundColor: contrast.lowest,
     selectionColor: contrast.lower,
     placeholderTextColor: contrast.low,
-    underlineColorAndroid: 'transparent',
+    underlineColorAndroid: "transparent",
 
     // Sizes
     fontSize: font.size,
@@ -135,7 +135,7 @@ let input = {
     borderRadius: border.radius,
 
     // Alignment
-    textAlign: 'left',
+    textAlign: "left",
     paddingHorizontal: spacing.small,
     paddingVertical: spacing.small,
 };

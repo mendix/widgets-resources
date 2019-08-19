@@ -1,6 +1,3 @@
-import { background, brand, contrast } from "../variables";
-import { Platform } from "react-native";
-
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.

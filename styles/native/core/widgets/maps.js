@@ -1,4 +1,4 @@
-import { brand, border } from '../variables';
+import { brand } from "../variables";
 
 //
 // DISCLAIMER:
@@ -16,7 +16,7 @@ import { brand, border } from '../variables';
 export const com_mendix_widget_native_maps_Maps = (Maps = {
     container: {
         // All ViewStyle properties are allowed
-        alignSelf: 'stretch',
+        alignSelf: "stretch",
         aspectRatio: 4 / 3,
     },
     marker: {

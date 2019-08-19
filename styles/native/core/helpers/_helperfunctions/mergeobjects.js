@@ -6,7 +6,7 @@
  *
  * @return  {object} Returns merged object
  */
-export default function(...sources) {
+export default function (...sources) {
     function mergeDeep(target, ...sources) {
         function isObject(item) {
             return item && typeof item === "object" && !Array.isArray(item);

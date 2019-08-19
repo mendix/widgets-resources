@@ -1,6 +1,5 @@
-import { brand, button, contrast, font, spacing } from '../variables';
-import { Platform } from 'react-native';
-import merge from '../helpers/_helperfunctions/mergeobjects';
+import { Platform }                        from "react-native";
+import { button, contrast, font, spacing } from "../variables";
 
 //
 // DISCLAIMER:
@@ -19,12 +18,12 @@ export const ActionButton = {
     container: {
         // Ripplecolor and all ViewStyle properties are allowed
         borderWidth: 1,
-        borderStyle: 'solid',
+        borderStyle: "solid",
         rippleColor: contrast.lowest,
         borderColor: button.primary.borderColor,
         backgroundColor: button.primary.backgroundColor,
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+        justifyContent: "center",
         borderRadius: button.borderRadius,
         ...Platform.select({
             ios: {

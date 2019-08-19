@@ -1,4 +1,4 @@
-import { background, brand, contrast, font } from '../variables';
+import { background, brand, contrast, font } from "../variables";
 
 //
 // DISCLAIMER:
@@ -52,7 +52,7 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
     },
     secondaryButtonCaption: {},
     secondaryButtonCaptionContainer: {
-        overflow: 'hidden',
+        overflow: "hidden",
         marginHorizontal: 15,
         shadowColor: contrast.lower,
         shadowOpacity: 0.9,

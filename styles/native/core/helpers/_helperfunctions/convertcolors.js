@@ -12,7 +12,7 @@ import colors from "./colorwords.js";
 function RgbToHex(r, g, b) {
     if (typeof r === "string" && !g && !b) {
         const color = r.replace(/rgb[(]|[)]/gm, "");
-        [ r, g, b ] = color.split(",");
+        [r, g, b] = color.split(",");
     }
     return "#" + ((1 << 24) + (Number(r) << 16) + (Number(g) << 8) + Number(b)).toString(16).slice(1);
 }
@@ -26,7 +26,7 @@ function RgbToHex(r, g, b) {
  */
 function hexToRgb(hex) {
     hex = hex.substring(1);
-    hex = hex.length === 3 || hex.length === 4 ? [ ...hex ].map(x => x + x).join("") : hex;
+    hex = hex.length === 3 || hex.length === 4 ? [...hex].map(x => x + x).join("") : hex;
     return rgbaToRgb({
         r: parseInt("0x" + hex[0] + hex[1], 16),
         g: parseInt("0x" + hex[2] + hex[3], 16),
@@ -44,7 +44,7 @@ function hexToRgb(hex) {
  */
 export function anyColorToRgbString(anyColor) {
     const { r, g, b } = checkColor(anyColor);
-    return [ r, g, b ].join(",");
+    return [r, g, b].join(",");
 }
 
 /**
@@ -55,8 +55,8 @@ export function anyColorToRgbString(anyColor) {
  * @return  {object} Returns RGB color; {r,g,b}
  */
 function hslToRgb(hsl) {
-    let [ h, s, l, a = "1" ] = hsl.replace(/hsla?[(]|[%]|[)]/gm, "").split(",");
-    [ h, s, l, a ].forEach(x => Number(x.trim()));
+    let [h, s, l, a = "1"] = hsl.replace(/hsla?[(]|[%]|[)]/gm, "").split(",");
+    [h, s, l, a].forEach(x => Number(x.trim()));
     s /= 100;
     l /= 100;
 
@@ -119,8 +119,8 @@ function rgbStringToRgb(rgb) {
     else if (!(/\d/).test(rgb)) return colors[color.toLowerCase()];
     // if RGB has RGB color definition
     else {
-        const [ r, g, b ] = color.split(",");
-        [ r, g, b ].forEach(x => x.trim());
+        const [r, g, b] = color.split(",");
+        [r, g, b].forEach(x => x.trim());
         return { r, g, b };
     }
 }
@@ -148,8 +148,8 @@ function rgbaToRgb(rgba) {
         else if (!(/\d/).test(color)) RGB = colors[color.toLowerCase()];
         // if RGBA has RGB color definition
         else {
-            const [ r, g, b ] = color.split(",");
-            [ r, g, b ].forEach(x => Number(x.trim()));
+            const [r, g, b] = color.split(",");
+            [r, g, b].forEach(x => Number(x.trim()));
             RGB = { r, g, b };
         }
         // RGB.a = alpha;

@@ -1,4 +1,4 @@
-import { com_mendix_widget_native_slider_Slider as Slider, sliderDanger, sliderSuccess, sliderWarning } from "./slider";
+import { com_mendix_widget_native_slider_Slider as Slider } from "./slider";
 
 //
 // DISCLAIMER:

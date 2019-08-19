@@ -1,5 +1,5 @@
+import { Platform }                    from "react-native";
 import { background, brand, contrast } from "../variables";
-import { Platform } from "react-native";
 
 //
 // DISCLAIMER:
@@ -17,11 +17,11 @@ import { Platform } from "react-native";
 export const com_mendix_widget_native_togglebuttons_ToggleButtons = (ToggleButtons = {
     container: {
         // All ViewStyle properties are allowed
-        alignSelf: 'stretch',
+        alignSelf: "stretch",
     },
     containerDisabled: {
         opacity: 0.6,
-        alignSelf: 'stretch',
+        alignSelf: "stretch",
     },
     button: {
         // All ViewStyle properties are allowed

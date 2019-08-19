@@ -1,4 +1,4 @@
-import { brand, contrast, font, spacing } from '../variables';
+import { font, spacing } from "../variables";
 
 //
 // DISCLAIMER:
