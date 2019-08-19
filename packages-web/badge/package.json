@@ -4,6 +4,10 @@
     "version": "1.4.0",
     "description": "Shows a value as a badge or a color label",
     "copyright": "Mendix BV",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mendix/widgets-resources.git"
+    },
     "scripts": {
         "start": "utils-react-widgets start",
         "dev": "utils-react-widgets dev",
@@ -13,7 +17,8 @@
         "test:e2e:dev": "export DEBUG=true && utils-react-widgets test:e2e",
         "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "lint:fix": "npm run lint -- --fix",
-        "build": "utils-react-widgets build"
+        "build": "utils-react-widgets build",
+        "release": "utils-react-widgets release"
     },
     "config": {
         "mendixHost": "http://localhost:8080",
