@@ -9,8 +9,8 @@
 1. Clone this repository
 
 ```sh
-$ git clone git@github.com:mendix/native-mobile-resources.git
-$ cd native-mobile-resources
+$ git clone git@github.com:mendix/widgets-resources.git
+$ cd widgets-resources
 ```
 
 2. Install and link dependencies
