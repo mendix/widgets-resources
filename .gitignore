@@ -6,6 +6,9 @@ node_modules
 *.launch
 mxproject
 coverage
+packages-web/**/package-lock.json
+packages-native/**/package-lock.json
+packages-common/**/package-lock.json
 
 **/TestProjects/*/.mendix-cache/
 **/TestProjects/*/.svn/
