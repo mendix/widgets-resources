@@ -104,7 +104,8 @@ function handleError(error: any) {
 
 function createChangeLog(description: string, version: string, path: string): Promise<void> {
     const date = new Date();
-    const body = `## [${version}] - ${date.toISOString()}
-    ${description}`;
+    const body = `## [${version}] - ${date.getFullYear()}-${date.getMonth()}-${date.getDay()}
+    ${description}
+`;
     return fs.appendFile(`${path}/CHANGELOG.md`, body);
 }
