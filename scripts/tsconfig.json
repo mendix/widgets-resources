@@ -1,4 +1,5 @@
 {
+    "include": ["./release", "./types", "../node_modules/gh-release"],
     "compilerOptions": {
         "strict": true,
         "noEmitOnError": true,
@@ -9,6 +10,7 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "forceConsistentCasingInFileNames": true,
-        "types": ["node"]
+        "types": ["node"],
+        "esModuleInterop": true
     }
 }

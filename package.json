@@ -1,6 +1,9 @@
 {
     "name": "widgets-resources",
-    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mendix/widgets-resources.git"
+    },
     "scripts": {
         "postinstall": "lerna bootstrap",
         "prettier": "prettier --config \"./prettier.config.js\" --write \"./**/{src,test}/**/*.{js,jsx,ts,tsx}\"",
@@ -9,7 +12,7 @@
         "lint:scripts": "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx packages-web/**/src packages-native/**/src",
         "test": "lerna run test --ignore @widgets-resources/utils-react-widgets",
         "build": "lerna run build --ignore @widgets-resources/utils-react-widgets",
-        "release": "lerna version --conventional-commits",
+        "publish": "ts-node --project scripts/tsconfig.json ./scripts/release/Release.ts",
         "version": "ts-node --project scripts/tsconfig.json ./scripts/release/BumpVersion.ts"
     },
     "devDependencies": {
