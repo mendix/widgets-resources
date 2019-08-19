@@ -3,6 +3,11 @@
     "widgetName": "ProgressBar",
     "version": "1.2.0",
     "description": "Displays a progress bar",
+    "copyright": "Mendix BV",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mendix/widgets-resources.git"
+    },
     "scripts": {
         "start": "utils-react-widgets start",
         "dev": "utils-react-widgets dev",

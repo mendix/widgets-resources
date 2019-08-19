@@ -3,6 +3,11 @@
     "widgetName": "Carousel",
     "version": "1.4.1",
     "description": "Displays images in a carousel",
+    "copyright": "Mendix BV",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mendix/widgets-resources.git"
+    },
     "scripts": {
         "start": "utils-react-widgets start",
         "dev": "utils-react-widgets dev",

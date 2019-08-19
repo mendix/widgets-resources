@@ -4,6 +4,10 @@
     "version": "1.0.2",
     "description": "Display and manage calendar events",
     "copyright": "Mendix BV",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mendix/widgets-resources.git"
+    },
     "scripts": {
         "start": "utils-react-widgets start",
         "dev": "utils-react-widgets dev",
