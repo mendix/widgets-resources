@@ -6,7 +6,8 @@ main().catch(console.error);
 declare function require(name: string): string;
 
 async function main(): Promise<void> {
-    const svnService = new SvnService("username", "password");
+    const { SPRINTR_USERNAME, SPRINTR_PASSWORD } = process.env;
+    const svnService = new SvnService(SPRINTR_USERNAME || "", SPRINTR_PASSWORD || "");
     const cwd = process.cwd();
 
     if (cwd) {
