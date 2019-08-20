@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.custom.colorpicker.ColorPicker" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/">
+<widget id="com.mendix.widget.custom.colorpicker.ColorPicker" needsEntityContext="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Color picker</name>
     <description>Pick a color from color input</description>
-    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAA5FBMVEUAAACAgIBVVVVgYGBVVVVmZmZdXV1iYmJVVVVeXl5ZWVlVVVVVVVVYWFhJtv9bW1tXV1dMs/pVVVVYWFhJs/hXV1dLtPhWVlZJsvhXV1dWVlZXV1dXV1dVVVVXV1dWVlZWVlZWVlZWVlZVVVVVVVVWVlZIsfdJsfdJsPdJsPhWVlZWVlZVVVVVVVVWVlZVVVVVVVVWVlZWVlZVVVVVVVVVVVVVVVVJsPdVVVVVVVVWVlZJsPdVVVVWVlZIsPdJsfdVVVVIsPdWVlZVVVVJsfhVVVVWVlZVVVVWVlZVVVVIsPdVVVWIl4c0AAAASnRSTlMAAgMICQoLDRITFBUYGhwcLzY2Q0ZGR0dJSUpPVWNkgoOFkpmcoaanqKyytba5vsXGx9bY293e4ODh4uPj5ebo6u3u7/Lz9Pb9/n9E/agAAAExSURBVHgB7dPZTsJAFMbxT0CpWivgIgiKslRxQUQEpbWAssic938fD4wx3KDOaWJC7O/q3Hz/pGkGke+lSs3RqFlKQSZemdLctBKHQKJBXxoJmKvSgiqMZYi1C7ZdaBPLwFSZV60kWLLFZxmmZqu8PvOzFkxNeGXp0+JzAlPEFu+/DUSBnE9L+Dn8hk9L+eED4T9h5X5j1vOyoQKeUl6ogGL/OxAFokCfR7Z+TDaffZiq8+pUP+cTPuswVeRVdxPMeuazCFNbY57d7wI7d3yMt2HsjNjbwd4rsXOYi10Re3wgdh2DwPoNfbrdgMw7aWtY2cCT3r9A6qhLzD+G3GGns48QnKFSQwdyNcVqEEuruTSkLnXgAlI9HehBKtCBAFKuDriQcgaKDRyIOW4QuD/tIx9N6qiDmf0nQgAAAABJRU5ErkJggg==</icon>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAA5FBMVEUAAACAgIBVVVVgYGBVVVVmZmZdXV1iYmJVVVVeXl5ZWVlVVVVVVVVYWFhJtv9bW1tXV1dMs/pVVVVYWFhJs/hXV1dLtPhWVlZJsvhXV1dWVlZXV1dXV1dVVVVXV1dWVlZWVlZWVlZWVlZVVVVVVVVWVlZIsfdJsfdJsPdJsPhWVlZWVlZVVVVVVVVWVlZVVVVVVVVWVlZWVlZVVVVVVVVVVVVVVVVJsPdVVVVVVVVWVlZJsPdVVVVWVlZIsPdJsfdVVVVIsPdWVlZVVVVJsfhVVVVWVlZVVVVWVlZVVVVIsPdVVVWIl4c0AAAASnRSTlMAAgMICQoLDRITFBUYGhwcLzY2Q0ZGR0dJSUpPVWNkgoOFkpmcoaanqKyytba5vsXGx9bY293e4ODh4uPj5ebo6u3u7/Lz9Pb9/n9E/agAAAExSURBVHgB7dPZTsJAFMbxT0CpWivgIgiKslRxQUQEpbWAssic938fD4wx3KDOaWJC7O/q3Hz/pGkGke+lSs3RqFlKQSZemdLctBKHQKJBXxoJmKvSgiqMZYi1C7ZdaBPLwFSZV60kWLLFZxmmZqu8PvOzFkxNeGXp0+JzAlPEFu+/DUSBnE9L+Dn8hk9L+eED4T9h5X5j1vOyoQKeUl6ogGL/OxAFokCfR7Z+TDaffZiq8+pUP+cTPuswVeRVdxPMeuazCFNbY57d7wI7d3yMt2HsjNjbwd4rsXOYi10Re3wgdh2DwPoNfbrdgMw7aWtY2cCT3r9A6qhLzD+G3GGns48QnKFSQwdyNcVqEEuruTSkLnXgAlI9HehBKtCBAFKuDriQcgaKDRyIOW4QuD/tIx9N6qiDmf0nQgAAAABJRU5ErkJggg==
+    </icon>
     <properties>
         <property key="colorAttribute" type="attribute">
             <caption>Color attribute</caption>
             <category>Data source</category>
-            <description>Attribute containing a valid color like #d0d0d0, rgb(115,159,159) or rgba(195,226,226,1). Non-code color values such as 'red' are not supported</description>
+            <description>Attribute containing a valid color like #d0d0d0, rgb(115,159,159) or rgba(195,226,226,1).
+                Non-code color values such as 'red' are not supported
+            </description>
             <attributeTypes>
                 <attributeType name="String"/>
             </attributeTypes>
@@ -62,7 +69,9 @@
         <property key="defaultColors" type="object" isList="true" required="false">
             <caption>Default colors</caption>
             <category>Appearance</category>
-            <description>The list of predefined colors. This can only be used with picker type: 'Block', 'Sketch', 'Circle', 'Compact' or 'Twitter'</description>
+            <description>The list of predefined colors. This can only be used with picker type: 'Block', 'Sketch',
+                'Circle', 'Compact' or 'Twitter'
+            </description>
             <properties>
                 <property key="color" type="string">
                     <caption>Color</caption>
@@ -124,7 +133,8 @@
         <property key="invalidFromatMessage" type="translatableString" required="false">
             <caption>Invalid format message</caption>
             <category>Validation</category>
-            <description>Message shown when the user provides a wrong input, {1} will be replaced by a sample format</description>
+            <description>Message shown when the user provides a wrong input, {1} will be replaced by a sample format
+            </description>
             <translations>
                 <translation lang="en_US">Invalid format, color value should be of format like {1}</translation>
                 <translation lang="nl_NL">De opgeven kleur code is incorrect, voorbeeld {1}</translation>

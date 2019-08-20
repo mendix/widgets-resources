@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.custom.RangeSlider.RangeSlider" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/">
+<widget id="com.mendix.widget.custom.RangeSlider.RangeSlider" needsEntityContext="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Range Slider</name>
     <description>Change range of values using a slider</description>
-    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAoRJREFUeAHtmU9qwkAUxk02qdAeQPAGvYV00XYhpaAuKt0oPVSpm5IuVCilC+tCvIU3EHqAFqwb0/dsApk/iXkjFKJfNpM388375v0ykZhUKjhAAARAAARAAARAAARAAARAAARAAARAAASOi4DnWm4URd71+0+f5vfo9JzzeF60oGYwaZ48eRRw374H+3Q6nT61Pcq19aF2QfkHw+Fwbx8nALfTqLZar0NaVMNWIC1uXg2C7uul92kbL9rX7XZra/IhvdWH+ucB+YRh6OzjF11MouMrklc86xhMrHECHOfwdhTPsgZreE0cuBxiALzts658egGsiW+RdHfhc972JM668uk8jVib7it8LgZAmfleLHpItEpOAlh4rkSrmFAgBpD84OmJbLFEa5mf/OBZhowuiVaZLAZAd/ipkiE3kGiNRAKfikSrGDkAUOaXPgCA0l/CPQvADtgTYOmnG09Q9FBxtdlsHqmyuq26r7tnW3dm39nLfebYPw8sfd9/oP8PH2lf4xbIKz49sYTn9bg2ZekGAGX0CAIDAG8Tqnt5gLVvbwG9LuM3QBfo8eXbSvQ/f3pTFXuwZ6vVEvmMx2MnH2MH6AUfegwAh36Fd9WHHbCL0KGPO+wA77s4FInWyCrwqUi0ipEYQPzqW0mSFUi0lhz8ir3oIdEqOcUAaPZAyZAfSLRKJn7vr3TkBBKtnkb88EAvIOmDyHrGb331ZOmYvw1MmsEFtaIHmiQH+7Tb7RnFuT40Ph+NRs4+4h3ABfFHDy4wWaze8liscSqe87EPf/Sg00wfHmMNa3mOyyHeAYnJ304o/6expB60IAACIAACIAACIAACIAACIAACIAACIAACx0LgF7FjzreN3sQFAAAAAElFTkSuQmCC</icon>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAoRJREFUeAHtmU9qwkAUxk02qdAeQPAGvYV00XYhpaAuKt0oPVSpm5IuVCilC+tCvIU3EHqAFqwb0/dsApk/iXkjFKJfNpM388375v0ykZhUKjhAAARAAARAAARAAARAAARAAARAAARAAASOi4DnWm4URd71+0+f5vfo9JzzeF60oGYwaZ48eRRw374H+3Q6nT61Pcq19aF2QfkHw+Fwbx8nALfTqLZar0NaVMNWIC1uXg2C7uul92kbL9rX7XZra/IhvdWH+ucB+YRh6OzjF11MouMrklc86xhMrHECHOfwdhTPsgZreE0cuBxiALzts658egGsiW+RdHfhc972JM668uk8jVib7it8LgZAmfleLHpItEpOAlh4rkSrmFAgBpD84OmJbLFEa5mf/OBZhowuiVaZLAZAd/ipkiE3kGiNRAKfikSrGDkAUOaXPgCA0l/CPQvADtgTYOmnG09Q9FBxtdlsHqmyuq26r7tnW3dm39nLfebYPw8sfd9/oP8PH2lf4xbIKz49sYTn9bg2ZekGAGX0CAIDAG8Tqnt5gLVvbwG9LuM3QBfo8eXbSvQ/f3pTFXuwZ6vVEvmMx2MnH2MH6AUfegwAh36Fd9WHHbCL0KGPO+wA77s4FInWyCrwqUi0ipEYQPzqW0mSFUi0lhz8ir3oIdEqOcUAaPZAyZAfSLRKJn7vr3TkBBKtnkb88EAvIOmDyHrGb331ZOmYvw1MmsEFtaIHmiQH+7Tb7RnFuT40Ph+NRs4+4h3ABfFHDy4wWaze8liscSqe87EPf/Sg00wfHmMNa3mOyyHeAYnJ304o/6expB60IAACIAACIAACIAACIAACIAACIAACIAACx0LgF7FjzreN3sQFAAAAAElFTkSuQmCC
+    </icon>
     <properties>
         <property key="minAttribute" type="attribute" required="false">
             <caption>Range minimum attribute</caption>
@@ -64,7 +69,7 @@
             <caption>On change nanoflow</caption>
             <category>Events</category>
             <description>Called when the slider is clicked or changed</description>
-            <returnType type="Void" />
+            <returnType type="Void"/>
         </property>
         <property key="noOfMarkers" type="integer" defaultValue="2">
             <caption>Number of Markers</caption>
@@ -74,12 +79,15 @@
         <property key="tooltipText" type="string" required="false" defaultValue="{1}">
             <caption>Tooltip text</caption>
             <category>Appearance</category>
-            <description>Text to show when hovering over the slider value. Leave this empty to disable the tooltip. Use {1} as a replacement for the current value of the slider</description>
+            <description>Text to show when hovering over the slider value. Leave this empty to disable the tooltip. Use
+                {1} as a replacement for the current value of the slider
+            </description>
         </property>
         <property key="stepAttribute" type="attribute" required="false">
             <caption>Step size attribute</caption>
             <category>Appearance</category>
-            <description>Holds the interval between two selectable points (when empty the 'Default step size' is used)</description>
+            <description>Holds the interval between two selectable points (when empty the 'Default step size' is used)
+            </description>
             <attributeTypes>
                 <attributeType name="Integer"/>
                 <attributeType name="Long"/>
@@ -89,7 +97,8 @@
         <property key="stepValue" type="integer" defaultValue="1">
             <caption>Default step size</caption>
             <category>Appearance</category>
-            <description>The interval between two selectable points (when not provided through 'Step size attribute')</description>
+            <description>The interval between two selectable points (when not provided through 'Step size attribute')
+            </description>
         </property>
         <property key="decimalPlaces" type="integer" defaultValue="1">
             <caption>Decimal places</caption>

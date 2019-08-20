@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.progressbar.ProgressBar" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
+<widget id="com.mendix.widget.custom.progressbar.ProgressBar" needsEntityContext="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Progress Bar</name>
     <description>The widget lets you display a percentage as a bar</description>
     <icon>
@@ -9,11 +12,12 @@
         <property key="progressAttribute" type="attribute" required="false">
             <caption>Progress attribute</caption>
             <category>Values</category>
-            <description>When no attribute is provided the 'Static value' will be used to calculate the progress</description>
+            <description>When no attribute is provided the 'Static value' will be used to calculate the progress
+            </description>
             <attributeTypes>
-                <attributeType name="Integer" />
-                <attributeType name="Long" />
-                <attributeType name="Decimal" />
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
             </attributeTypes>
         </property>
         <property key="staticValue" type="integer" defaultValue="50">
@@ -24,11 +28,13 @@
         <property key="maximumValueAttribute" type="attribute" required="false">
             <caption>Maximum value attribute</caption>
             <category>Values</category>
-            <description>Holds the highest progress value which must be greater than 0. If not set, the maximum default value is set to 'Maximum value static'</description>
+            <description>Holds the highest progress value which must be greater than 0. If not set, the maximum default
+                value is set to 'Maximum value static'
+            </description>
             <attributeTypes>
-                <attributeType name="Integer" />
-                <attributeType name="Long" />
-                <attributeType name="Decimal" />
+                <attributeType name="Integer"/>
+                <attributeType name="Long"/>
+                <attributeType name="Decimal"/>
             </attributeTypes>
         </property>
         <property key="staticMaximumValue" type="integer" defaultValue="100">
@@ -39,12 +45,13 @@
         <property key="textColorSwitch" type="integer" defaultValue="50">
             <caption>Color switch value</caption>
             <category>Appearance</category>
-            <description>The percentage at which the text gets a contrast color (class) from black to white</description>
+            <description>The percentage at which the text gets a contrast color (class) from black to white
+            </description>
         </property>
         <property key="barType" type="enumeration" defaultValue="default">
             <caption>Type</caption>
             <category>Appearance</category>
-            <description>Render the type of progress bar: default, striped or animated </description>
+            <description>Render the type of progress bar: default, striped or animated</description>
             <enumerationValues>
                 <enumerationValue key="default">Plain</enumerationValue>
                 <enumerationValue key="striped">Striped</enumerationValue>
@@ -81,18 +88,20 @@
             <caption>Microflow</caption>
             <category>Events</category>
             <description>Microflow to execute when the progress bar is clicked</description>
-            <returnType type="Void" />
+            <returnType type="Void"/>
         </property>
         <property key="onClickNanoflow" type="nanoflow" required="false">
             <caption>Nanoflow</caption>
             <category>Events</category>
             <description>Nanoflow to execute when the progress bar is clicked</description>
-            <returnType type="Void" />
+            <returnType type="Void"/>
         </property>
         <property key="bootstrapStyle" type="enumeration" defaultValue="default">
             <caption>Bar style</caption>
             <category>Appearance</category>
-            <description>The color of the progress bar using as set in the theme. Only used when 'Style attribute' is not set</description>
+            <description>The color of the progress bar using as set in the theme. Only used when 'Style attribute' is
+                not set
+            </description>
             <enumerationValues>
                 <enumerationValue key="default">Default</enumerationValue>
                 <enumerationValue key="primary">Primary</enumerationValue>
@@ -106,10 +115,12 @@
         <property key="bootstrapStyleAttribute" type="attribute" required="false">
             <caption>Bar style attribute</caption>
             <category>Appearance</category>
-            <description>Value of attribute should be: default, primary, info, warning, danger, success. Alternatively use the display 'Bar style' property in the `Appearance` tab</description>
+            <description>Value of attribute should be: default, primary, info, warning, danger, success. Alternatively
+                use the display 'Bar style' property in the `Appearance` tab
+            </description>
             <attributeTypes>
-                <attributeType name="Enum" />
-                <attributeType name="String" />
+                <attributeType name="Enum"/>
+                <attributeType name="String"/>
             </attributeTypes>
         </property>
         <property key="displayText" type="enumeration" defaultValue="percentage">
@@ -129,7 +140,7 @@
             <category>Display text</category>
             <description/>
         </property>
-        <property key="displayTextAttribute" type="attribute" required="false" >
+        <property key="displayTextAttribute" type="attribute" required="false">
             <caption>Text attribute</caption>
             <category>Display text</category>
             <description/>

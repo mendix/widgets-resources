@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget id="com.mendix.widget.web.videoplayer.VideoPlayer" pluginWidget="true" needsEntityContext="true"
         supportedPlatform="Web"
-        offlineCapable="true"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../node_modules/mendix/custom_widget.xsd">
+        offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Video Player</name>
     <description>Shows a video from YouTube, Vimeo, Dailymotion and Mp4</description>
     <icon>
@@ -19,7 +19,9 @@
                 </property>
                 <property key="posterExpression" type="expression" required="false">
                     <caption>Poster URL</caption>
-                    <description>The poster image is a custom preview image that will be shown in the player until the user starts the video.</description>
+                    <description>The poster image is a custom preview image that will be shown in the player until the
+                        user starts the video.
+                    </description>
                     <returnType type="String"/>
                 </property>
             </propertyGroup>
@@ -35,7 +37,9 @@
             </property>
             <property key="showControls" type="boolean" defaultValue="true">
                 <caption>Show Controls</caption>
-                <description>Display video controls (control bar, display icons, dock buttons). Available for YouTube, Dailymotion and external videos.</description>
+                <description>Display video controls (control bar, display icons, dock buttons). Available for YouTube,
+                    Dailymotion and external videos.
+                </description>
             </property>
             <property key="muted" type="boolean" defaultValue="false">
                 <caption>Muted</caption>
@@ -50,7 +54,7 @@
         <propertyGroup caption="Dimensions">
             <propertyGroup caption="Width">
                 <property key="widthUnit" type="enumeration" defaultValue="percentage">
-                    <caption>Unit </caption>
+                    <caption>Unit</caption>
                     <description/>
                     <enumerationValues>
                         <enumerationValue key="percentage">Percentage</enumerationValue>
@@ -58,14 +62,16 @@
                     </enumerationValues>
                 </property>
                 <property key="width" type="integer" defaultValue="100">
-                    <caption>Size </caption>
+                    <caption>Size</caption>
                     <description/>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Height">
                 <property key="heightUnit" type="enumeration" defaultValue="aspectRatio">
                     <caption>Unit</caption>
-                    <description>Warning: when "Percentage of parent" is selected, the parent container must have an absolute height, otherwise nothing will be displayed.</description>
+                    <description>Warning: when "Percentage of parent" is selected, the parent container must have an
+                        absolute height, otherwise nothing will be displayed.
+                    </description>
                     <enumerationValues>
                         <enumerationValue key="aspectRatio">Aspect ratio</enumerationValue>
                         <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
@@ -75,7 +81,8 @@
                 </property>
                 <property key="height" type="integer" defaultValue="500">
                     <caption>Size</caption>
-                    <description>If the unit is 'Aspect ratio' the height will be based on the video height.</description>
+                    <description>If the unit is 'Aspect ratio' the height will be based on the video height.
+                    </description>
                 </property>
             </propertyGroup>
         </propertyGroup>

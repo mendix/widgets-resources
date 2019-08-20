@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.badge.Badge" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../node_modules/mendix/custom_widget.xsd">
+<widget id="com.mendix.widget.custom.badge.Badge" needsEntityContext="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Badge</name>
     <description>Shows a value as a badge or a color label</description>
     <icon>
@@ -11,11 +14,11 @@
             <category>General</category>
             <description>The attribute that contains the badge value</description>
             <attributeTypes>
-                <attributeType name="String" />
-                <attributeType name="Enum" />
-                <attributeType name="Integer" />
-                <attributeType name="Decimal" />
-                <attributeType name="Long" />
+                <attributeType name="String"/>
+                <attributeType name="Enum"/>
+                <attributeType name="Integer"/>
+                <attributeType name="Decimal"/>
+                <attributeType name="Long"/>
             </attributeTypes>
         </property>
         <property key="badgeValue" type="translatableString" required="false">
@@ -48,7 +51,7 @@
             <enumerationValues>
                 <enumerationValue key="badge">Badge</enumerationValue>
                 <enumerationValue key="label">Label</enumerationValue>
-                </enumerationValues>
+            </enumerationValues>
         </property>
         <property key="onClickEvent" type="enumeration" defaultValue="doNothing">
             <caption>On click</caption>
@@ -80,13 +83,13 @@
             <caption>Microflow</caption>
             <category>Events</category>
             <description>The microflow that will be executed on click</description>
-            <returnType type="Void" />
+            <returnType type="Void"/>
         </property>
         <property key="nanoflow" type="nanoflow" required="false">
             <caption>Nanoflow</caption>
             <category>Events</category>
             <description>The nanoflow that will be executed on click</description>
-            <returnType type="Void" />
+            <returnType type="Void"/>
         </property>
     </properties>
 </widget>

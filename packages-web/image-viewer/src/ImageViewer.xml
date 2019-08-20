@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.custom.imageviewer.ImageViewer" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/">
+<widget id="com.mendix.widget.custom.imageviewer.ImageViewer" needsEntityContext="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Image viewer</name>
     <description>Display an image and enlarge it on click</description>
-    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAABnlBMVEUAAAD///+A//9V//+Av/9mzP9gv/9Vxv9Ns/9duf9Vv/9Osf9Jtv9Vu/9Qv/9LtP9RvP9Jtv9Osf9Ktf9Ms/9Puf9Ns/9Ktf9Ms/hKtfhOsfhNs/lLtPlLtPlKtflIsflMs/pJsfpNs/pIsvpKsPpLtPtKsftJsvtJsvdJs/hLtPhKsfhJsvhXV1dLsflKsvlKsvlKsvlKsvpKsvdKs/dJsfdIsvhKsPhJsfhKsPhJsvhKsfhIsPlKsflJsPlKsflIsflJsvdKsvdJsfhJsPhJsfhKsvhIsvhJsfhIsPhKsfhJsvlJsfdJsfdIsPdKsfdJsfdJsfdIsfdIsfhIsfhIsfhJsfhJsfhIsPhJsPhIsfhJsfdJsfdJsfdJsfdIsPdJsfdJsPhIsfhJsfhIsfhJsfhIsfhJsfhJsPhJsfhJsfhIsfhIsPhJsfdIsPdJsPdVVVVJsfdJsfdJsfdIsPdJsfdIsPdIsPdJsfhJsPhIsPhJsfhIsPhIsfhJsfhJsPhIsfhJsfhJsPhIsPhIsfhJsPhJsPhIsfhIsPdVVVU8lPiOAAAAiHRSTlMAAQIDBAUICQoLDA0ODxARExUXGBsdHh8lJicoKSwtLi8xMjU3PT4/QkZHSElJUlNWWV1gZGVqa2xucHV4eXt8f4SHiYuMjpGTm5yeoKGio6SnqaqtsbO2uLm+wMHEyMnLzM3O0NHU1dba3d7f4eLj4+Tn6Onr7O3u7/Dy8/T19vf4+fr7/P3+LOCsiQAAAeRJREFUeAHt1/lTEmEYwPHHhYyiLEjtPtLu0siOsLL7MLtNOjRLs8MyU7Q7K4hyv/7Xve/sLrAzArPvMFPT7Oen9wf4MsDz7OyKI9QxvWBgukM8Ru9XBfEsGKpvQAL6/wORY48+5ieu7zIN7HiG4+5yo0B7Hs/oMoNA4i0lN4IHkreA+Ssbmva/BOztAQP7nqL1iBJ7BfQGCxy30WYt0Q4C44ECbb9Qih+7BpgLFLgN2BOF0WbTQBboFEsUs6/wDXBnx+xHfAKcXuKcV5j8jZdwmQ7SqhlcpqO8e5Yi/zJt6ZvMTfXvrBWQRO+YOws/feucLqDZFwwvKJ02rrRRIPkBz/dmk8AAkDsU3/sJuGkQSKGcVIejgN1eM9DYfX/yx+uH3S3iSLwHHkfUyXoODNcKdGVx/L62VrR+IL9JtD0oqaoB6yIlubS7UpwSRwZ401gl0HAHn0xs9TtgJCKOdQWgp0rgPEr+3PrYxhMv0IYH9FBtFs9l4GuyYqALJeu83Dr8GdcZKWrSI9FXKdAyB0y1iqt1BI2xqJSkgfltFQL39Ki1SVF8CKWwVcpEx4HBxQMplCNSZukgcFZ8DqAsGojPAEMNUm5l5svVqPg9cAP/2D1SeJcWBsLA398F84euOj32hf4AR3v7uNFLZj0AAAAASUVORK5CYII=</icon>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAABnlBMVEUAAAD///+A//9V//+Av/9mzP9gv/9Vxv9Ns/9duf9Vv/9Osf9Jtv9Vu/9Qv/9LtP9RvP9Jtv9Osf9Ktf9Ms/9Puf9Ns/9Ktf9Ms/hKtfhOsfhNs/lLtPlLtPlKtflIsflMs/pJsfpNs/pIsvpKsPpLtPtKsftJsvtJsvdJs/hLtPhKsfhJsvhXV1dLsflKsvlKsvlKsvlKsvpKsvdKs/dJsfdIsvhKsPhJsfhKsPhJsvhKsfhIsPlKsflJsPlKsflIsflJsvdKsvdJsfhJsPhJsfhKsvhIsvhJsfhIsPhKsfhJsvlJsfdJsfdIsPdKsfdJsfdJsfdIsfdIsfhIsfhIsfhJsfhJsfhIsPhJsPhIsfhJsfdJsfdJsfdJsfdIsPdJsfdJsPhIsfhJsfhIsfhJsfhIsfhJsfhJsPhJsfhJsfhIsfhIsPhJsfdIsPdJsPdVVVVJsfdJsfdJsfdIsPdJsfdIsPdIsPdJsfhJsPhIsPhJsfhIsPhIsfhJsfhJsPhIsfhJsfhJsPhIsPhIsfhJsPhJsPhIsfhIsPdVVVU8lPiOAAAAiHRSTlMAAQIDBAUICQoLDA0ODxARExUXGBsdHh8lJicoKSwtLi8xMjU3PT4/QkZHSElJUlNWWV1gZGVqa2xucHV4eXt8f4SHiYuMjpGTm5yeoKGio6SnqaqtsbO2uLm+wMHEyMnLzM3O0NHU1dba3d7f4eLj4+Tn6Onr7O3u7/Dy8/T19vf4+fr7/P3+LOCsiQAAAeRJREFUeAHt1/lTEmEYwPHHhYyiLEjtPtLu0siOsLL7MLtNOjRLs8MyU7Q7K4hyv/7Xve/sLrAzArPvMFPT7Oen9wf4MsDz7OyKI9QxvWBgukM8Ru9XBfEsGKpvQAL6/wORY48+5ieu7zIN7HiG4+5yo0B7Hs/oMoNA4i0lN4IHkreA+Ssbmva/BOztAQP7nqL1iBJ7BfQGCxy30WYt0Q4C44ECbb9Qih+7BpgLFLgN2BOF0WbTQBboFEsUs6/wDXBnx+xHfAKcXuKcV5j8jZdwmQ7SqhlcpqO8e5Yi/zJt6ZvMTfXvrBWQRO+YOws/feucLqDZFwwvKJ02rrRRIPkBz/dmk8AAkDsU3/sJuGkQSKGcVIejgN1eM9DYfX/yx+uH3S3iSLwHHkfUyXoODNcKdGVx/L62VrR+IL9JtD0oqaoB6yIlubS7UpwSRwZ401gl0HAHn0xs9TtgJCKOdQWgp0rgPEr+3PrYxhMv0IYH9FBtFs9l4GuyYqALJeu83Dr8GdcZKWrSI9FXKdAyB0y1iqt1BI2xqJSkgfltFQL39Ki1SVF8CKWwVcpEx4HBxQMplCNSZukgcFZ8DqAsGojPAEMNUm5l5svVqPg9cAP/2D1SeJcWBsLA398F84euOj32hf4AR3v7uNFLZj0AAAAASUVORK5CYII=
+    </icon>
     <properties>
         <property key="source" type="enumeration" defaultValue="staticUrl">
             <caption>Data source</caption>
@@ -18,9 +23,9 @@
         <property key="dynamicUrlAttribute" type="attribute" required="false" isPath="optional" pathType="reference">
             <caption>Dynamic URL attribute</caption>
             <category>Data source</category>
-            <description>Image URL based on context string attribute</description> 
+            <description>Image URL based on context string attribute</description>
             <attributeTypes>
-                <attributeType name="String"/> 
+                <attributeType name="String"/>
             </attributeTypes>
         </property>
         <property key="urlStatic" type="string" required="false">

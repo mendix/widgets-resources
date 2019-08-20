@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.richtext.RichText" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
+<widget id="com.mendix.widget.custom.richtext.RichText" needsEntityContext="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Rich Text</name>
     <description>Rich inline or toolbar text editing</description>
-    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAA2tJREFUeAHtW72OEzEQ3g1IQJn+gI4WpGsQT0AaREESeIGrrsxrnES9DbRJQDrRHC0010JDjY68ANLBQZPc571dnT32xo4zXhzWadZjz+839uyPnSxLv4RAQqDLCOQ0+OFweAN9h3meP8FVtG2/89Vq9WY+n3+yMXKOj8fjwXK5LKBzz1HvotfrHUyn0xOZ/6ZMVO1DXF8jKMNQY9dLAPcAIJw1cjAPbBi8sL5XydyVXenJhGhXmafdNvoWGPZtTMzjrpmXzWoyGgDgdpn2stKyDeBMujS+2DpMS0DxEYEdoeNU6bwiJlgmj+t+tO9jXT6s6dBXTGfFBJafVs8EA5bm2rVsBQA6Tmez2XvFGojRaPSK9B1Rp8h4lOROTltOJDsPgMsScAIcteI7GH86MTMwoeaw1Bs2ABDTxFQrGGI1qrAVN6OQodMFgImh4GXyHcCgt/UuX0CsAMQWKDeypiJ47mMEQP3ykdtCZuEhq8loAOCF4S0U/91Q+bd+v/95Q5mt2MWLDRRoAa1RWr4M0fGmp6d7YNyXH2+R4XeyMMZeCFpkXgRfFMVvQQ8+/Blky1WBxy/tuVuM+/7g6CLr5Qcnz24rb3O1PloDmp4Ma/76aqwB1VvdWc0krjAgk1ljxQ8QvDAsAM2hG03lbU5xyoPQloCHDkWEO/Oy8hC62QGQHd6FtnEJcDr+8fkdY515enyBhF7/XPmuJXhanZ8B7ACU1bpKjtz2zZesQ2776qNy7ACIW5VwtHQWbWpwY5pbH3GAvQZU92m2WxW3PhJ/xj8DqIXI6QRA5AkK7l6aAcEhjtxAmgGRJyi4e2kGBIc4cgNpBkSeoODupRkQHOLIDaQZEHmCgrvX+gwQ+waD44sfNDLRV+4p0IHAdOsANG2alJ+8r777Bw5ZVd8+AKr9f061D0D1jY9GzvYNkSq20LCr/rhOYKpa+SkuP7UZsMUJTP4o12jk8lMDADZ9dnV9ZNaE5zTkY1OTYfssjmM0X5zcZmLCtjyLJisATfvsdD8eDrGc2vKNytVPqt+0BCjPf013HgDrEnBNP87sPHLl5eDDXYCl5rABgH9ifOUIzFUHPbLjKkf50hKgiFCaVns6Hgvt62fnZ4AJgIVHVn1kPMwoIj42NRkNAK4TmIqrAYhd8TNA6EllQiAhwIjAJSEj9lh5/+kBAAAAAElFTkSuQmCC</icon>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAA2tJREFUeAHtW72OEzEQ3g1IQJn+gI4WpGsQT0AaREESeIGrrsxrnES9DbRJQDrRHC0010JDjY68ANLBQZPc571dnT32xo4zXhzWadZjz+839uyPnSxLv4RAQqDLCOQ0+OFweAN9h3meP8FVtG2/89Vq9WY+n3+yMXKOj8fjwXK5LKBzz1HvotfrHUyn0xOZ/6ZMVO1DXF8jKMNQY9dLAPcAIJw1cjAPbBi8sL5XydyVXenJhGhXmafdNvoWGPZtTMzjrpmXzWoyGgDgdpn2stKyDeBMujS+2DpMS0DxEYEdoeNU6bwiJlgmj+t+tO9jXT6s6dBXTGfFBJafVs8EA5bm2rVsBQA6Tmez2XvFGojRaPSK9B1Rp8h4lOROTltOJDsPgMsScAIcteI7GH86MTMwoeaw1Bs2ABDTxFQrGGI1qrAVN6OQodMFgImh4GXyHcCgt/UuX0CsAMQWKDeypiJ47mMEQP3ykdtCZuEhq8loAOCF4S0U/91Q+bd+v/95Q5mt2MWLDRRoAa1RWr4M0fGmp6d7YNyXH2+R4XeyMMZeCFpkXgRfFMVvQQ8+/Blky1WBxy/tuVuM+/7g6CLr5Qcnz24rb3O1PloDmp4Ma/76aqwB1VvdWc0krjAgk1ljxQ8QvDAsAM2hG03lbU5xyoPQloCHDkWEO/Oy8hC62QGQHd6FtnEJcDr+8fkdY515enyBhF7/XPmuJXhanZ8B7ACU1bpKjtz2zZesQ2776qNy7ACIW5VwtHQWbWpwY5pbH3GAvQZU92m2WxW3PhJ/xj8DqIXI6QRA5AkK7l6aAcEhjtxAmgGRJyi4e2kGBIc4cgNpBkSeoODupRkQHOLIDaQZEHmCgrvX+gwQ+waD44sfNDLRV+4p0IHAdOsANG2alJ+8r777Bw5ZVd8+AKr9f061D0D1jY9GzvYNkSq20LCr/rhOYKpa+SkuP7UZsMUJTP4o12jk8lMDADZ9dnV9ZNaE5zTkY1OTYfssjmM0X5zcZmLCtjyLJisATfvsdD8eDrGc2vKNytVPqt+0BCjPf013HgDrEnBNP87sPHLl5eDDXYCl5rABgH9ifOUIzFUHPbLjKkf50hKgiFCaVns6Hgvt62fnZ4AJgIVHVn1kPMwoIj42NRkNAK4TmIqrAYhd8TNA6EllQiAhwIjAJSEj9lh5/+kBAAAAAElFTkSuQmCC
+    </icon>
     <properties>
         <property key="stringAttribute" type="attribute">
             <caption>Value attribute</caption>
@@ -15,13 +20,16 @@
         <property key="sanitizeContent" type="boolean" defaultValue="true">
             <caption>Sanitize content</caption>
             <category>Data source</category>
-            <description>The strict sanitize rules will remove all unsupported HTML tags and attributes before displaying.
-WARNING disabling this option is a security risk for XSS attacks</description>
+            <description>The strict sanitize rules will remove all unsupported HTML tags and attributes before
+                displaying.
+                WARNING disabling this option is a security risk for XSS attacks
+            </description>
         </property>
         <property key="theme" type="enumeration" defaultValue="snow">
             <caption>Show as</caption>
             <category>Appearance</category>
-            <description>Display the editor formatting options in a toolbar or a bubble when text is selected</description>
+            <description>Display the editor formatting options in a toolbar or a bubble when text is selected
+            </description>
             <enumerationValues>
                 <enumerationValue key="snow">Toolbar</enumerationValue>
                 <enumerationValue key="bubble">Bubble</enumerationValue>
@@ -30,7 +38,9 @@ WARNING disabling this option is a security risk for XSS attacks</description>
         <property key="editorOption" type="enumeration" defaultValue="basic">
             <caption>Text formatting options</caption>
             <category>Appearance</category>
-            <description>Formatting options shown in the toolbar or bubble. More options can be set in the 'Custom options'</description>
+            <description>Formatting options shown in the toolbar or bubble. More options can be set in the 'Custom
+                options'
+            </description>
             <enumerationValues>
                 <enumerationValue key="basic">Basic</enumerationValue>
                 <enumerationValue key="extended">Extended</enumerationValue>
@@ -64,7 +74,9 @@ WARNING disabling this option is a security risk for XSS attacks</description>
         <property key="maxNumberOfLines" type="integer" defaultValue="10">
             <caption>Maximum number of lines</caption>
             <category>Appearance</category>
-            <description>When greater that the minimum, the input will auto grow, until the specified lines are reached. When set to 0, the maximum number of lines won't be set</description>
+            <description>When greater that the minimum, the input will auto grow, until the specified lines are reached.
+                When set to 0, the maximum number of lines won't be set
+            </description>
         </property>
         <property key="customOptions" type="object" isList="true" required="false">
             <caption>Formatting options</caption>
@@ -119,7 +131,7 @@ WARNING disabling this option is a security risk for XSS attacks</description>
             <caption>On change nanoflow</caption>
             <category>Events</category>
             <description>Nanoflow will be triggered when focus is lost and the content has changed</description>
-            <returnType type="Void" />
+            <returnType type="Void"/>
         </property>
     </properties>
 </widget>

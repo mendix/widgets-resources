@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.badgebutton.BadgeButton" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../node_modules/mendix/custom_widget.xsd">
+<widget id="com.mendix.widget.custom.badgebutton.BadgeButton" needsEntityContext="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Badge button</name>
     <description>A special distinctive mark or token put on any display as a button</description>
-    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAACplBMVEUAAAD///+AgIBVVVVV//+AgICAv/9mZmZmzP9VVVVgv/9VVVVmZmZduf9Vv/9Osf9iYmJJtv9bW1taWlpVVVVVuP9eXl5ZWVlJtv9VVVVZWVlKtf9SZmZOsf9Ms/9VVVVbW1tPuf9YWFhYWFhVVVVLtPhJtvhVVVVMs/hNsvlZWVlIsflZWVlXV1dKtfpYWFhXV1dLtPpVVVVYWFhXV1dVVVVXV1dVVVVWVlZLtPtYWFhWVlZVVVVMs/dVVVVLtPhJsvhIs/hWVlZVVVVKsvVVVVVKsvlWVlZIsflWVlZJs/lXV1dXV1dWVlZKsvpXV1dOgaRKsvdXV1dWVlZVVVVWVlZJsvhVVVVWVlZVVVVWVlZXV1dJsfhWVlZWVlZWVlZWVlZIsPlVVVVKsflWVlZJsPlVVVVWVlZVVVVVVVVWVlZWVlZVVVVVVVVWVlZWVlZWVlZVVVVWVlZVVVVWVlZWVlZVVVVWVlZQcYdWVlZWVlZWVlZSdItJsvlWVlZJsfdWVlZIsfdWVlZWVlZJsfhVVVVVVVVJsPhIsfhVVVVWVlZIsfhJsPhWVlZVVVVVVVVIsPhJsPhVVVVIsfhVVVVWVlZVVVVVVVVWVlZVVVVJsfdVVVVIsfhWVlZLnNRTXmZWVlZVVVVJsPhWVlZIsfhWVlZIsfhWVlZIsfhWVlZVVVVWVlZVVVVWVlZVVVVJsfdVVVVVW15WVlZIsPdJsfdJsfdWVlZJsfdJsfdWVlZIsPdVVVVVVVVUZnJWVlZVVVVVVVVWVlZVW15VVVVWVlZJsfhVVVVKpOFVVVVIsfhJo+BKpeRVW19WVlZVVVVVVVVIsPhWVlZVVVVVVVVJsPhWVlZIsfhVVVVIsPdKodxKpOFLm9FMlchQepZTaHZUXWNVVVVVWl19DoylAAAA2HRSTlMAAQIDAwQEBQUGCAkKCwwNDQ4OERISExQVFRcYGRobGxwdHSAhIiMkJSsrLi4vMDEyMzM0NTY4OTs9PT4/QEJHSUpKS0xRU1NVVldYW1xdXl9gYWJjZWZmaGxucHNzdHZ3eHh5eXt7fX6BgoOEh4iJjI2PkJGSk5SVlZqbnJ6eoaSmpqerq62vsLGytLW1tre4ubq+v8HCw8TFy8zNzc/Q0NLT09TW19nb3N7f4OLj5OTk5ebn6Ojq6+vs7O3u7u/w8fLz9PX19vb39/f39/j5+vr7/P39/v7kR+qdAAACxElEQVR42u2V+VdNURTHv0+eSkSEzFPmDCVkJjJEpooMmYeHpJQpZA6ROfNMRApF9NBAMkaGp0No+0/s895qPe+t5XmnfuCHPmvdde7Z6+7PvfuedfZBNdX8XzQMT842kF08OhvhCWuCc0mFdyscYEEkqZLkaPF+Umf97/Xnyq/SeWlhD5pO03KIqNTHHJot831hP80yOGO7eZ7MUx1UGMEZBeb/mM1TL6igfcEpbVCBXH8tlLjAKT1RATFQ4zSn+FgL6sTGxkSEuPOdV1zc2hqAX2xs9IzekHjptsTPbc8RJvhPAneSZDYBYshAA4EwksRrgPkfifE3RRJsCKaEysc06ZRIa6Qgb+xOohD4GujEuIlRNWTE37+XDUH4Mipuij5UOIQyNfx4NpBCiYik9w0ctFopyA8K6mq7hPHASjrgXER+JsEGuogEOoZiosOmEhbaEESvJkM/XKfjS2/TKpPgJO1nyQ0cTTMKnurWTbIhGOBcSHO6k5F0DQscR3+gxZhOFICZLJBKvd6GICWbSgctp7zQ0CVEfcPIUEB0zQUuN4nScowCQ4YQNgT0cFsAUuRCOeRTFFf89nJUfQDt9hTRk9fnnDhCRsH5sm/Wgr+gaez6QOx24jsp8HguyhQFTA+92MVDaircrogv5SxQ3UxsaA64umK4eFXOm0l9O7cdDNTuXBO1Rr7hlNaVaiiTn4ms/tYNJdyOlhb4UgixDx1KeMhqcecrD/puKk3VKNiLCULy+KdZoNjWvwvJD8u2zkQqC5IcrY82JYE82tQPV7Ngoycqy1Qh8ca/Flxa0BHq1A0cWs8k+MzXqVmuUOSQEPdGGQUmx61WUKKlTPp0UJjZBCXcSlhgwVWosVlYcQZqeNy3EmyFImOEZRHzoMoOYcEwoGpF8DJWqQg9mKoUcQSVwOOuWbAIlaGRdwVdNKimmgp+AfwMb+k/OIPLAAAAAElFTkSuQmCC</icon>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAACplBMVEUAAAD///+AgIBVVVVV//+AgICAv/9mZmZmzP9VVVVgv/9VVVVmZmZduf9Vv/9Osf9iYmJJtv9bW1taWlpVVVVVuP9eXl5ZWVlJtv9VVVVZWVlKtf9SZmZOsf9Ms/9VVVVbW1tPuf9YWFhYWFhVVVVLtPhJtvhVVVVMs/hNsvlZWVlIsflZWVlXV1dKtfpYWFhXV1dLtPpVVVVYWFhXV1dVVVVXV1dVVVVWVlZLtPtYWFhWVlZVVVVMs/dVVVVLtPhJsvhIs/hWVlZVVVVKsvVVVVVKsvlWVlZIsflWVlZJs/lXV1dXV1dWVlZKsvpXV1dOgaRKsvdXV1dWVlZVVVVWVlZJsvhVVVVWVlZVVVVWVlZXV1dJsfhWVlZWVlZWVlZWVlZIsPlVVVVKsflWVlZJsPlVVVVWVlZVVVVVVVVWVlZWVlZVVVVVVVVWVlZWVlZWVlZVVVVWVlZVVVVWVlZWVlZVVVVWVlZQcYdWVlZWVlZWVlZSdItJsvlWVlZJsfdWVlZIsfdWVlZWVlZJsfhVVVVVVVVJsPhIsfhVVVVWVlZIsfhJsPhWVlZVVVVVVVVIsPhJsPhVVVVIsfhVVVVWVlZVVVVVVVVWVlZVVVVJsfdVVVVIsfhWVlZLnNRTXmZWVlZVVVVJsPhWVlZIsfhWVlZIsfhWVlZIsfhWVlZVVVVWVlZVVVVWVlZVVVVJsfdVVVVVW15WVlZIsPdJsfdJsfdWVlZJsfdJsfdWVlZIsPdVVVVVVVVUZnJWVlZVVVVVVVVWVlZVW15VVVVWVlZJsfhVVVVKpOFVVVVIsfhJo+BKpeRVW19WVlZVVVVVVVVIsPhWVlZVVVVVVVVJsPhWVlZIsfhVVVVIsPdKodxKpOFLm9FMlchQepZTaHZUXWNVVVVVWl19DoylAAAA2HRSTlMAAQIDAwQEBQUGCAkKCwwNDQ4OERISExQVFRcYGRobGxwdHSAhIiMkJSsrLi4vMDEyMzM0NTY4OTs9PT4/QEJHSUpKS0xRU1NVVldYW1xdXl9gYWJjZWZmaGxucHNzdHZ3eHh5eXt7fX6BgoOEh4iJjI2PkJGSk5SVlZqbnJ6eoaSmpqerq62vsLGytLW1tre4ubq+v8HCw8TFy8zNzc/Q0NLT09TW19nb3N7f4OLj5OTk5ebn6Ojq6+vs7O3u7u/w8fLz9PX19vb39/f39/j5+vr7/P39/v7kR+qdAAACxElEQVR42u2V+VdNURTHv0+eSkSEzFPmDCVkJjJEpooMmYeHpJQpZA6ROfNMRApF9NBAMkaGp0No+0/s895qPe+t5XmnfuCHPmvdde7Z6+7PvfuedfZBNdX8XzQMT842kF08OhvhCWuCc0mFdyscYEEkqZLkaPF+Umf97/Xnyq/SeWlhD5pO03KIqNTHHJot831hP80yOGO7eZ7MUx1UGMEZBeb/mM1TL6igfcEpbVCBXH8tlLjAKT1RATFQ4zSn+FgL6sTGxkSEuPOdV1zc2hqAX2xs9IzekHjptsTPbc8RJvhPAneSZDYBYshAA4EwksRrgPkfifE3RRJsCKaEysc06ZRIa6Qgb+xOohD4GujEuIlRNWTE37+XDUH4Mipuij5UOIQyNfx4NpBCiYik9w0ctFopyA8K6mq7hPHASjrgXER+JsEGuogEOoZiosOmEhbaEESvJkM/XKfjS2/TKpPgJO1nyQ0cTTMKnurWTbIhGOBcSHO6k5F0DQscR3+gxZhOFICZLJBKvd6GICWbSgctp7zQ0CVEfcPIUEB0zQUuN4nScowCQ4YQNgT0cFsAUuRCOeRTFFf89nJUfQDt9hTRk9fnnDhCRsH5sm/Wgr+gaez6QOx24jsp8HguyhQFTA+92MVDaircrogv5SxQ3UxsaA64umK4eFXOm0l9O7cdDNTuXBO1Rr7hlNaVaiiTn4ms/tYNJdyOlhb4UgixDx1KeMhqcecrD/puKk3VKNiLCULy+KdZoNjWvwvJD8u2zkQqC5IcrY82JYE82tQPV7Ngoycqy1Qh8ca/Flxa0BHq1A0cWs8k+MzXqVmuUOSQEPdGGQUmx61WUKKlTPp0UJjZBCXcSlhgwVWosVlYcQZqeNy3EmyFImOEZRHzoMoOYcEwoGpF8DJWqQg9mKoUcQSVwOOuWbAIlaGRdwVdNKimmgp+AfwMb+k/OIPLAAAAAElFTkSuQmCC
+    </icon>
     <properties>
         <property key="label" type="translatableString" required="false">
             <caption>Caption</caption>
@@ -31,11 +36,11 @@
             <category>Badge</category>
             <description>The attribute that contains the badge button value</description>
             <attributeTypes>
-                <attributeType name="String" />
-                <attributeType name="Enum" />
-                <attributeType name="Integer" />
-                <attributeType name="Decimal" />
-                <attributeType name="Long" />
+                <attributeType name="String"/>
+                <attributeType name="Enum"/>
+                <attributeType name="Integer"/>
+                <attributeType name="Decimal"/>
+                <attributeType name="Long"/>
             </attributeTypes>
         </property>
         <property key="badgeButtonValue" type="translatableString" required="false">
@@ -77,13 +82,13 @@
             <caption>Microflow</caption>
             <category>Events</category>
             <description>The microflow that will be executed on click</description>
-            <returnType type="Void" />
+            <returnType type="Void"/>
         </property>
         <property key="nanoflow" type="nanoflow" required="false">
             <caption>Nanoflow</caption>
             <category>Events</category>
             <description>The nanoflow that will be executed on click</description>
-            <returnType type="Void" />
+            <returnType type="Void"/>
         </property>
     </properties>
 </widget>

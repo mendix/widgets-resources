@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.switch.Switch" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../node_modules/mendix/custom_widget.xsd">
+<widget id="com.mendix.widget.custom.switch.Switch" needsEntityContext="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Switch</name>
     <description>Toggle a boolean attribute</description>
     <icon>
@@ -35,7 +38,8 @@
         <property key="labelWidth" type="integer" defaultValue="9">
             <caption>Label width (weight)</caption>
             <category>Appearance</category>
-            <description>How much of the total row width (12) the label should occupy. Should not be greater than 11</description>
+            <description>How much of the total row width (12) the label should occupy. Should not be greater than 11
+            </description>
         </property>
         <property key="deviceStyle" type="enumeration" defaultValue="auto">
             <caption>Platform</caption>
