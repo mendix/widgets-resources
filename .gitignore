@@ -10,6 +10,8 @@ packages-web/**/package-lock.json
 packages-native/**/package-lock.json
 packages-common/**/package-lock.json
 
+**/calendar/**/TestProjects
+
 **/TestProjects/*/.mendix-cache/
 **/TestProjects/*/.svn/
 **/TestProjects/*/GPUCache/
