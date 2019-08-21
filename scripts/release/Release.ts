@@ -4,6 +4,7 @@ import ghauth, { AuthOptions, TokenData } from "ghauth";
 import { promises as fs, existsSync } from "fs";
 import { join } from "path";
 import { spawnSync } from "child_process";
+import zipFolder from "zip-folder";
 
 main().catch(handleError);
 
@@ -20,6 +21,7 @@ async function main(): Promise<void> {
     spawnSync("npm", ["run", "release"], { cwd: projectPackage.path });
     await createChangeLog(description, projectPackage.version, projectPackage.path);
 
+    zipTestProjects(projectPackage.path);
     releaseWithAuth(await getAuth(), projectPackage);
 
     // eslint-disable-next-line no-console
@@ -68,11 +70,7 @@ function releaseWithAuth(auth: TokenData, projectPackage: any) {
         projectPackage.version
     }`;
 
-    const assets = [
-        `dist/${projectPackage.version}/${projectPackage.widgetName}.mpk`,
-        `tests/TestProjects/Mendix7/${projectPackage.widgetName}.mpr`,
-        `tests/TestProjects/Mendix8/${projectPackage.widgetName}.mpr`
-    ];
+    const assets = [`dist/${projectPackage.version}/${projectPackage.widgetName}.mpk`, "dist/tmp/TestProjects.zip"];
 
     const options = {
         // eslint-disable-next-line @typescript-eslint/camelcase
@@ -108,4 +106,21 @@ function createChangeLog(description: string, version: string, path: string): Pr
     ${description}
 `;
     return fs.appendFile(`${path}/CHANGELOG.md`, body);
+}
+
+function zipTestProjects(path: string): boolean {
+    const source = join(path, "tests", "TestProjects");
+    const destination = join(path, "dist", "tmp", "TestProjects.zip");
+    zipFolder(source, destination, (err: string) => {
+        if (err) {
+            // eslint-disable-next-line no-console
+            console.log("Error trying to zip testProjects");
+        } else {
+            // eslint-disable-next-line no-console
+            console.log("Successfully ziped the TestProjects");
+            return true;
+        }
+        return false;
+    });
+    return false;
 }
