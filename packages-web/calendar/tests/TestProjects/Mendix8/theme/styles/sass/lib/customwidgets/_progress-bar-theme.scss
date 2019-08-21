@@ -1,0 +1,36 @@
+/* Based on https://github.com/mendixlabs/star-rating/blob/v1.1.1/src/ui/StarRating.scss */
+div.widget-progress-bar .progress-bar-default {
+    background-color: $brand-default;
+}
+
+div.widget-progress-bar .progress-bar-primary {
+    background-color: $brand-primary;
+}
+
+div.widget-progress-bar .progress-bar-success {
+    background-color: $brand-success;
+}
+
+div.widget-progress-bar .progress-bar-info {
+    background-color: $brand-info;
+}
+
+div.widget-progress-bar .progress-bar-warning {
+    background-color: $brand-warning;
+}
+
+div.widget-progress-bar .progress-bar-danger {
+    background-color: $brand-danger;
+}
+
+div.widget-progress-bar .progress-bar-inverse {
+    background-color: $brand-inverse;
+}
+
+div.widget-progress-bar-alert.widget-progress-bar-text-contrast .progress-bar {
+    color: $color-danger-darker;
+}
+
+div.widget-progress-bar-text-contrast .progress-bar {
+    color: $font-base-color;
+}

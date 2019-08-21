@@ -97,3 +97,14 @@ mobile apps.
 ## Contributing
 
 See [CONTRIBUTING.md](https://github.com/mendix/widgets-resources/blob/master/CONTRIBUTING.md).
+
+## SVN Checkout
+
+To checkout, you need to add the following environment variables to your OS
+
+```
+SPRINTR_USERNAME
+SPRINTR_PASSWORD
+```
+
+With the corresponding username and password at Sprintr.

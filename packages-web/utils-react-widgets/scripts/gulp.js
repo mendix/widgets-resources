@@ -25,9 +25,9 @@ const COLOR = {
     WHITE: "\x1b[37m"
 };
 const END = "\x1b[0m";
-console.log("variables.package.config.projectPath", variables.package.config.projectPath);
 
 const projectPaths = getProjectPaths();
+console.log("TestProjectsPath: ", projectPaths);
 
 const widgetsFolders = projectPaths.map(p => fixSlashes(path.join(p, "/widgets/")));
 function getProjectPaths() {
@@ -35,6 +35,8 @@ function getProjectPaths() {
         return Array.isArray(variables.package.config.projectPath)
             ? variables.package.config.projectPath.map(p => fixSlashes(checkPath(p)))
             : [fixSlashes(checkPath(variables.package.config.projectPath))];
+    } else if (variables.package.config.testProjects) {
+        return variables.package.config.testProjects.map(testProject => fixSlashes(checkPath(testProject.path)));
     }
     return [fixSlashes(path.join(__dirname, `${variables.path}/tests/TestProject`))];
 }

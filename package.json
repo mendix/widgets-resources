@@ -14,13 +14,14 @@
         "test": "lerna run test --ignore @widgets-resources/utils-react-widgets",
         "build": "lerna run build --ignore @widgets-resources/utils-react-widgets",
         "publish": "ts-node --project scripts/tsconfig.json ./scripts/release/Release.ts",
-        "version": "ts-node --project scripts/tsconfig.json ./scripts/release/BumpVersion.ts"
+        "version": "ts-node --project scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
+        "checkout": "lerna run checkout"
     },
     "devDependencies": {
         "@commitlint/cli": "^7.5.2",
         "@commitlint/config-conventional": "^7.5.0",
         "@commitlint/config-lerna-scopes": "^7.5.1",
-        "@mendix/pluggable-widgets-tools": "^8.0.1",
+        "@mendix/pluggable-widgets-tools": "^8.0.4",
         "@types/big.js": "^4.0.5",
         "@types/classnames": "^2.2.4",
         "@types/enzyme": "^3.10.3",
@@ -52,6 +53,7 @@
         "lint-staged": "^9.2.1",
         "mendix-client": "^7.15.7",
         "mime": "^2.4.2",
+        "node-svn-ultimate": "^1.2.0",
         "prettier": "^1.18.2",
         "pretty-quick": "^1.11.1",
         "react-native-add-calendar-event": "^2.3.0",

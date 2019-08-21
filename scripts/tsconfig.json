@@ -1,5 +1,5 @@
 {
-    "include": ["./release", "./types", "../node_modules/gh-release"],
+    "include": ["./release", "./svn", "./types"],
     "compilerOptions": {
         "strict": true,
         "noEmitOnError": true,
