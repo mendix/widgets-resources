@@ -13,8 +13,8 @@
         "lint:scripts": "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx packages-web/**/src packages-native/**/src",
         "test": "lerna run test --ignore @widgets-resources/utils-react-widgets",
         "build": "lerna run build --ignore @widgets-resources/utils-react-widgets",
-        "publish": "ts-node --project scripts/tsconfig.json ./scripts/release/Release.ts",
-        "version": "ts-node --project scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
+        "publish": "ts-node --project ./scripts/tsconfig.json ./scripts/release/Release.ts",
+        "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
         "checkout": "lerna run checkout"
     },
     "devDependencies": {
@@ -70,7 +70,8 @@
         "react-native-video": "^4.4.0",
         "react-native-webview": "^5.7.0",
         "react-test-renderer": "~16.8.6",
-        "ts-node": "^8.1.0"
+        "ts-node": "^8.1.0",
+        "zip-folder": "^1.0.0"
     },
     "dependencies": {
         "classnames": "^2.2.6"
