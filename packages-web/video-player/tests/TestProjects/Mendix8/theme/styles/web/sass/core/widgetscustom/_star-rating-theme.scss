@@ -1,0 +1,28 @@
+/* Based on https://github.com/mendixlabs/star-rating/blob/v1.1.1/src/ui/StarRating.scss */
+span.widget-star-rating-full-default {
+    color: $brand-default;
+}
+
+span.widget-star-rating-full-primary {
+    color: $brand-primary;
+}
+
+span.widget-star-rating-full-success {
+    color: $brand-success;
+}
+
+span.widget-star-rating-full-info {
+    color: $brand-info;
+}
+
+span.widget-star-rating-full-warning {
+    color: $brand-warning;
+}
+
+span.widget-star-rating-full-danger {
+    color: $brand-danger;
+}
+
+span.widget-star-rating-full-inverse {
+    color: $brand-inverse;
+}

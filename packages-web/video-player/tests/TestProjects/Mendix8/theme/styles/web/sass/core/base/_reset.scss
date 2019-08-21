@@ -1,0 +1,31 @@
+// Basic styling Scroll container
+.mx-scrollcontainer {
+    .mx-scrollcontainer-wrapper {
+        padding: 0;
+        // Convert width to max-width when in scroll container to make sure you dont get scrollbars
+        .mx-layoutgrid-fixed {
+            width: 100%;
+            margin: auto;
+            @media (min-width: $screen-sm) {
+                max-width: 750px;
+            }
+            @media (min-width: $screen-md) {
+                max-width: 970px;
+            }
+            @media (min-width: $screen-lg) {
+                max-width: 1170px;
+            }
+        }
+    }
+}
+
+.mx-scrollcontainer .mx-placeholder {
+    width: 100%;
+    height: 100%;
+    .mx-layoutgrid {
+        @include layout-spacing($type: padding, $direction: all, $device: responsive);
+        .mx-layoutgrid {
+            padding: 0;
+        }
+    }
+}

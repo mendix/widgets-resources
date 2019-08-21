@@ -1,0 +1,308 @@
+/* ==========================================================================
+   Navigation
+
+   Default Mendix Navigation Bar
+========================================================================== */
+.mx-navbar {
+    margin: 0;
+    border-style: none;
+    border-radius: 0;
+    background-color: $navigation-bg;
+    ul.nav {
+        margin: 0; // weird -margin if screen gets small (bootstrap)
+
+        /* Navigation item */
+        & > li.mx-navbar-item > a {
+            display: flex;
+            align-items: center;
+            min-height: $topbar-minimalheight;
+            padding: $navigation-item-padding;
+            vertical-align: middle;
+            color: $navigation-color;
+            border-radius: 0;
+            font-size: $navigation-font-size;
+            font-weight: $font-weight-normal;
+
+            /* Dropdown arrow */
+            .caret {
+                border-top-color: $navigation-color;
+                border-bottom-color: $navigation-color;
+            }
+            &:hover,
+            &:focus,
+            &.active {
+                text-decoration: none;
+                color: $navigation-color-hover;
+                background-color: $navigation-bg-hover;
+                .caret {
+                    border-top-color: $navigation-color-active;
+                    border-bottom-color: $navigation-color-active;
+                }
+            }
+            &.active {
+                color: $navigation-color-active;
+                background-color: $navigation-bg-active;
+            }
+
+            /* Dropdown */
+            .mx-navbar-submenu::before {
+                position: absolute;
+                top: -9px;
+                left: 15px;
+                width: 0;
+                height: 0;
+                content: "";
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+                border-width: 0 9px 9px 9px;
+                border-style: solid;
+                border-color: transparent transparent $navigation-border-color transparent;
+            }
+
+            // Image
+            img {
+                width: 20px; // Default size (so it looks good)
+                height: auto;
+                margin-right: 0.5em;
+            }
+            .glyphicon {
+                top: 0;
+                margin-right: 0.5em;
+                vertical-align: middle;
+                font-size: $navigation-glyph-size;
+            }
+        }
+
+        /* When hovering or the dropdown is open */
+        & > .mx-navbar-item > a:hover,
+        & > .mx-navbar-item > a:focus,
+        & > .mx-navbar-item.active a,
+        & > .mx-navbar-item.open > a,
+        & > .mx-navbar-item.open > a:hover,
+        & > .mx-navbar-item.open > a:focus {
+            text-decoration: none;
+            color: $navigation-color-hover;
+            background-color: $navigation-bg-hover;
+            .caret {
+                border-top-color: $navigation-color-hover;
+                border-bottom-color: $navigation-color-hover;
+            }
+        }
+        & > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
+            color: $navigation-sub-color-active;
+            background-color: $navigation-sub-bg-active;
+            .caret {
+                border-top-color: $navigation-sub-color-active;
+                border-bottom-color: $navigation-sub-color-active;
+            }
+        }
+    }
+    @media (max-width: $screen-sm) {
+        ul.nav > li.mx-navbar-item > a {
+            padding: 10px 20px;
+        }
+        .mx-navbar-item.open .dropdown-menu {
+            padding: 0;
+            border-radius: 0;
+            background-color: $navigation-sub-bg;
+            & > li.mx-navbar-subitem > a {
+                padding: 10px 20px;
+                color: $navigation-sub-color;
+                border-radius: 0;
+                font-size: $navigation-sub-font-size;
+                font-weight: $font-weight-normal;
+                &:hover,
+                &:focus {
+                    color: $navigation-sub-color-hover;
+                    background-color: $navigation-sub-bg-hover;
+                }
+                &.active {
+                    color: $navigation-sub-color-active;
+                    background-color: $navigation-sub-bg-active;
+                }
+            }
+        }
+    }
+
+    /* remove focus */
+    &:focus {
+        outline: 0;
+    }
+}
+
+//== Regions
+//## Behavior in the different regions
+//-------------------------------------------------------------------------------------------------------------------//
+// When used in topbar
+.region-topbar {
+    .mx-navbar {
+        background-color: $navtopbar-bg;
+        ul.nav {
+            /* Navigation item */
+            & > li.mx-navbar-item > a {
+                color: $navtopbar-color;
+                font-size: $navtopbar-font-size;
+
+                /* Dropdown arrow */
+                .caret {
+                    border-top-color: $navtopbar-color;
+                    border-bottom-color: $navtopbar-color;
+                }
+                &:hover,
+                &:focus,
+                &.active {
+                    color: $navtopbar-color-hover;
+                    background-color: $navtopbar-bg-hover;
+                    .caret {
+                        border-top-color: $navtopbar-color-active;
+                        border-bottom-color: $navtopbar-color-active;
+                    }
+                }
+                &.active {
+                    color: $navtopbar-color-active;
+                    background-color: $navtopbar-bg-active;
+                }
+
+                /* Dropdown */
+                .mx-navbar-submenu::before {
+                    border-color: transparent transparent $navtopbar-border-color transparent;
+                }
+
+                // Image
+                .glyphicon {
+                    font-size: $navtopbar-glyph-size;
+                }
+            }
+
+            /* When hovering or the dropdown is open */
+            & > .mx-navbar-item > a:hover,
+            & > .mx-navbar-item > a:focus,
+            & > .mx-navbar-item.active a,
+            & > .mx-navbar-item.open > a,
+            & > .mx-navbar-item.open > a:hover,
+            & > .mx-navbar-item.open > a:focus {
+                color: $navtopbar-color-hover;
+                background-color: $navtopbar-bg-hover;
+                .caret {
+                    border-top-color: $navtopbar-color-hover;
+                    border-bottom-color: $navtopbar-color-hover;
+                }
+            }
+            & > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
+                color: $navtopbar-sub-color-active;
+                background-color: $navtopbar-sub-bg-active;
+                .caret {
+                    border-top-color: $navtopbar-sub-color-active;
+                    border-bottom-color: $navtopbar-sub-color-active;
+                }
+            }
+        }
+        @media (max-width: $screen-sm) {
+            ul.nav > li.mx-navbar-item > a {
+            }
+            .mx-navbar-item.open .dropdown-menu {
+                background-color: $navtopbar-sub-bg;
+                & > li.mx-navbar-subitem > a {
+                    color: $navtopbar-sub-color;
+                    font-size: $navtopbar-sub-font-size;
+                    &:hover,
+                    &:focus {
+                        color: $navtopbar-sub-color-hover;
+                        background-color: $navtopbar-sub-bg-hover;
+                    }
+                    &.active {
+                        color: $navtopbar-sub-color-active;
+                        background-color: $navtopbar-sub-bg-active;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// When used in sidebar
+.region-sidebar {
+    .mx-navbar {
+        background-color: $navsidebar-bg;
+        ul.nav {
+            /* Navigation item */
+            & > li.mx-navbar-item > a {
+                color: $navsidebar-color;
+                font-size: $navsidebar-font-size;
+
+                /* Dropdown arrow */
+                .caret {
+                    border-top-color: $navsidebar-color;
+                    border-bottom-color: $navsidebar-color;
+                }
+                &:hover,
+                &:focus,
+                &.active {
+                    color: $navsidebar-color-hover;
+                    background-color: $navsidebar-bg-hover;
+                    .caret {
+                        border-top-color: $navsidebar-color-active;
+                        border-bottom-color: $navsidebar-color-active;
+                    }
+                }
+                &.active {
+                    color: $navsidebar-color-active;
+                    background-color: $navsidebar-bg-active;
+                }
+
+                /* Dropdown */
+                .mx-navbar-submenu::before {
+                    border-color: transparent transparent $navsidebar-border-color transparent;
+                }
+
+                // Image
+                .glyphicon {
+                    font-size: $navsidebar-glyph-size;
+                }
+            }
+
+            /* When hovering or the dropdown is open */
+            & > .mx-navbar-item > a:hover,
+            & > .mx-navbar-item > a:focus,
+            & > .mx-navbar-item.active a,
+            & > .mx-navbar-item.open > a,
+            & > .mx-navbar-item.open > a:hover,
+            & > .mx-navbar-item.open > a:focus {
+                color: $navsidebar-color-hover;
+                background-color: $navsidebar-bg-hover;
+                .caret {
+                    border-top-color: $navsidebar-color-hover;
+                    border-bottom-color: $navsidebar-color-hover;
+                }
+            }
+            & > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
+                color: $navsidebar-sub-color-active;
+                background-color: $navsidebar-sub-bg-active;
+                .caret {
+                    border-top-color: $navsidebar-sub-color-active;
+                    border-bottom-color: $navsidebar-sub-color-active;
+                }
+            }
+        }
+        @media (max-width: $screen-sm) {
+            ul.nav > li.mx-navbar-item > a {
+            }
+            .mx-navbar-item.open .dropdown-menu {
+                background-color: $navtopbar-sub-bg;
+                & > li.mx-navbar-subitem > a {
+                    color: $navsidebar-sub-color;
+                    font-size: $navsidebar-sub-font-size;
+                    &:hover,
+                    &:focus {
+                        color: $navsidebar-sub-color-hover;
+                        background-color: $navsidebar-sub-bg-hover;
+                    }
+                    &.active {
+                        color: $navsidebar-sub-color-active;
+                        background-color: $navsidebar-sub-bg-active;
+                    }
+                }
+            }
+        }
+    }
+}

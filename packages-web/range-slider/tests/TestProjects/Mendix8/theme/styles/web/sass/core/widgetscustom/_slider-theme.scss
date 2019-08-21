@@ -1,0 +1,45 @@
+// Based on https://github.com/mendixlabs/slider/tree/master/src/ui/_slider-theme.scss
+
+div.widget-slider {
+    .rc-slider-handle,
+    .rc-slider-dot-active {
+        border-color: $brand-default;
+        &:active {
+            border-color: $brand-default;
+        }
+        &:hover {
+            border-color: $brand-default;
+        }
+    }
+
+    &.has-error {
+        .rc-slider-track,
+        .rc-slider-rail {
+            background-color: $brand-danger;
+        }
+    }
+}
+
+div.widget-slider-primary .rc-slider-track {
+    background-color: $brand-primary;
+}
+
+div.widget-slider-info .rc-slider-track {
+    background-color: $brand-info;
+}
+
+div.widget-slider-success .rc-slider-track {
+    background-color: $brand-success;
+}
+
+div.widget-slider-warning .rc-slider-track {
+    background-color: $brand-warning;
+}
+
+div.widget-slider-danger .rc-slider-track {
+    background-color: $brand-danger;
+}
+
+div.widget-slider-inverse .rc-slider-track {
+    background-color: $brand-inverse;
+}
