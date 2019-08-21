@@ -15,7 +15,7 @@ export interface StarRatingProps {
 }
 
 export class StarRating extends Component<StarRatingProps, {}> {
-    private start = 1;
+    private start = 0;
     private step = 1;
     private stop: number;
     private fractions = 1;
