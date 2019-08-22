@@ -13,7 +13,7 @@ export class SvnService {
     checkOutBranch(projectId: string, branch: string, destination: string, revision: number): Promise<void> {
         const branchUrl = this.getBranchUrl(projectId, branch);
         this.log(`Checking out ${branchUrl} to ${destination}`);
-        return new Promise<void>((resolve, reject) => {
+        return new Promise<void>(resolve => {
             svnUltimate.commands.checkout(
                 branchUrl,
                 destination,
@@ -27,8 +27,7 @@ export class SvnService {
                         resolve();
                     } else {
                         this.cleanup(destination);
-                        // eslint-disable-next-line prefer-promise-reject-errors
-                        reject("failed to checkout" + error);
+                        throw new Error("failed to checkout" + error);
                     }
                 }
             );
