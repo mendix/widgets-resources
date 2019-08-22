@@ -1,4 +1,4 @@
-import merge                             from "../helpers/_helperfunctions/mergeobjects";
+import merge                             from "./_functions/mergeobjects";
 import { brand, button, contrast, font } from "../variables";
 
 //
