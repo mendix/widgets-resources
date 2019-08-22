@@ -80,7 +80,7 @@ describe("StarRating", () => {
         starProps.initialRate = -1;
         const starRating = renderStarRating(starProps).find(Rating);
 
-        expect(starRating.props().initialRate).toEqual(1);
+        expect(starRating.props().initialRate).toEqual(0);
     });
 
     it("should render max stars for large positive rating", () => {

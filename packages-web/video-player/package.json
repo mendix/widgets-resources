@@ -14,7 +14,15 @@
         "projectPath": "../test-project/mxproject",
         "mendixHost": "http://localhost:8080/",
         "developmentPort": "3000",
-        "subprojectFolder": "packages-web/video-player"
+        "subprojectFolder": "packages-web/video-player",
+        "testProjectId": "25c71ec6-4eb0-4324-8299-4e1948f0c165",
+        "testProjects": [
+            {
+                "revision": 138,
+                "branch": "trunk",
+                "path": "./tests/TestProjects/Mendix8/"
+            }
+        ]
     },
     "packagePath": "com.mendix.widget.web",
     "scripts": {
@@ -26,7 +34,8 @@
         "test": "jest --config ../../scripts/test/jest.web.config.js",
         "test:e2e": "export URL=https://videoplayer-sandbox.mxapps.io/ || set URL=https://videoplayer-sandbox.mxapps.io/ && wdio ../../configs/e2e/wdio.conf.js",
         "test:e2e:dev": "export DEBUG=true || set DEBUG=true && wdio ../../configs/e2e/wdio.conf.js",
-        "release": "pluggable-widgets-tools release:ts --subprojectPath $npm_package_config_subprojectFolder"
+        "release": "pluggable-widgets-tools release:ts --subprojectPath $npm_package_config_subprojectFolder",
+        "checkout": "ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
     },
     "devDependencies": {
         "@types/react-resize-detector": "^4.0.1"

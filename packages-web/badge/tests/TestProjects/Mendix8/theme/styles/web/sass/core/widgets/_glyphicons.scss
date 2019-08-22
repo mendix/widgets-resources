@@ -1,0 +1,20 @@
+/* ==========================================================================
+   Glyphicons
+
+   Glyphicons alternaed to use with Mendix
+========================================================================== */
+
+.mx-glyphicon {
+    &:before {
+        display: inline-block;
+        margin-top: -0.2em;
+        margin-right: 0.4555555em;
+        vertical-align: middle;
+        font-family: "Glyphicons Halflings";
+        font-weight: $font-weight-normal;
+        font-style: normal;
+        line-height: inherit;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}

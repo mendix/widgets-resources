@@ -1,0 +1,157 @@
+/* ==========================================================================
+   Backgrounds
+
+   Different background components, all managed by variables
+========================================================================== */
+
+.background-main {
+    background-color: $bg-color !important;
+}
+
+.background-secondary {
+    background-color: $bg-color-secondary !important;
+}
+
+.background-default {
+    background-color: $brand-default !important;
+}
+
+.background-default-darker {
+    background-color: $color-default-darker !important;
+}
+
+.background-default-dark {
+    background-color: $color-default-dark !important;
+}
+
+.background-default-light {
+    background-color: $color-default-light !important;
+}
+
+.background-default-lighter {
+    background-color: $color-default-lighter !important;
+}
+
+.background-inverse {
+    background-color: $brand-inverse !important;
+}
+
+.background-inverse-darker {
+    background-color: $color-inverse-darker !important;
+}
+
+.background-inverse-dark {
+    background-color: $color-inverse-dark !important;
+}
+
+.background-inverse-light {
+    background-color: $color-inverse-light !important;
+}
+
+.background-inverse-lighter {
+    background-color: $color-inverse-lighter !important;
+}
+
+.background-primary {
+    background-color: $brand-primary !important;
+}
+
+.background-primary-darker {
+    background-color: $color-primary-darker !important;
+}
+
+.background-primary-dark {
+    background-color: $color-primary-dark !important;
+}
+
+.background-primary-light {
+    background-color: $color-primary-light !important;
+}
+
+.background-primary-lighter {
+    background-color: $color-primary-lighter !important;
+}
+
+.background-info {
+    background-color: $brand-info !important;
+}
+
+.background-info-darker {
+    background-color: $color-info-darker !important;
+}
+
+.background-info-dark {
+    background-color: $color-info-dark !important;
+}
+
+.background-info-light {
+    background-color: $color-info-light !important;
+}
+
+.background-info-lighter {
+    background-color: $color-info-lighter !important;
+}
+
+.background-success {
+    background-color: $brand-success !important;
+}
+
+.background-success-darker {
+    background-color: $color-success-darker !important;
+}
+
+.background-success-dark {
+    background-color: $color-success-dark !important;
+}
+
+.background-success-light {
+    background-color: $color-success-light !important;
+}
+
+.background-success-lighter {
+    background-color: $color-success-lighter !important;
+}
+
+.background-warning {
+    background-color: $brand-warning !important;
+}
+
+.background-warning-darker {
+    background-color: $color-warning-darker !important;
+}
+
+.background-warning-dark {
+    background-color: $color-warning-dark !important;
+}
+
+.background-warning-light {
+    background-color: $color-warning-light !important;
+}
+
+.background-warning-lighter {
+    background-color: $color-warning-lighter !important;
+}
+
+.background-danger {
+    background-color: $brand-danger !important;
+}
+
+.background-danger-darker {
+    background-color: $color-danger-darker !important;
+}
+
+.background-danger-dark {
+    background-color: $color-danger-dark !important;
+}
+
+.background-danger-light {
+    background-color: $color-danger-light !important;
+}
+
+.background-danger-lighter {
+    background-color: $color-danger-lighter !important;
+}
+
+.background-brand-gradient {
+    background-image: $brand-gradient !important;
+}

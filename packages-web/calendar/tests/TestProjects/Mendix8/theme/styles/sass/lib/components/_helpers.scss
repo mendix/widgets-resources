@@ -1,0 +1,289 @@
+/* ==========================================================================
+   Helpers
+
+   Default Mendix Helpers
+========================================================================== */
+
+.show {
+    display: block !important;
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.invisible {
+    visibility: hidden !important;
+}
+
+.display-ie8-only:not([attr*=""]) {
+    display: none !important;
+    padding: 0 !important;
+}
+
+.list-nostyle {
+    ul {
+        margin: 0 !important;
+        padding: 0 !important;
+        li {
+            list-style-type: none !important;
+        }
+    }
+}
+
+.nowrap,
+.nowrap * {
+    overflow: hidden;
+    // Star for inside an element, IE8 span > a
+    white-space: nowrap !important;
+    text-overflow: ellipsis;
+}
+
+// Render DIV as Table Cells
+.table {
+    display: table !important;
+}
+
+.table-row {
+    display: table-row !important;
+}
+
+.table-cell {
+    display: table-cell !important;
+}
+
+// Quick floats
+.pull-left {
+    float: left !important;
+}
+.pull-right {
+    float: right !important;
+}
+
+// Align options
+.align-top {
+    vertical-align: top !important;
+}
+
+.align-middle {
+    vertical-align: middle !important;
+}
+
+.align-bottom {
+    vertical-align: bottom !important;
+}
+
+// Flex alignments
+.row-left {
+    display: flex !important;
+    align-items: center !important;
+    flex-flow: row !important;
+    justify-content: flex-start !important;
+}
+.row-center {
+    display: flex !important;
+    align-items: center !important;
+    flex-flow: row !important;
+    justify-content: center !important;
+}
+.row-right {
+    display: flex !important;
+    align-items: center !important;
+    flex-flow: row !important;
+    justify-content: flex-end !important;
+}
+.col-left {
+    display: flex !important;
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+.col-center {
+    display: flex !important;
+    align-items: center !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+.col-right {
+    display: flex !important;
+    align-items: flex-end !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+
+// Spacing none
+.spacing-inner-none {
+    padding: 0 !important;
+}
+.spacing-inner-top-none {
+    padding-top: 0 !important;
+}
+.spacing-inner-right-none {
+    padding-right: 0 !important;
+}
+.spacing-inner-bottom-none {
+    padding-bottom: 0 !important;
+}
+.spacing-inner-left-none {
+    padding-left: 0 !important;
+}
+
+.spacing-outer-none {
+    margin: 0 !important;
+}
+.spacing-outer-top-none {
+    margin-top: 0 !important;
+}
+.spacing-outer-right-none {
+    margin-right: 0 !important;
+}
+.spacing-outer-bottom-none {
+    margin-bottom: 0 !important;
+}
+.spacing-outer-left-none {
+    margin-left: 0 !important;
+}
+
+// Spacing small
+.spacing-inner {
+    padding: $spacing-small !important;
+}
+.spacing-inner-top {
+    padding-top: $spacing-small !important;
+}
+.spacing-inner-right {
+    padding-right: $spacing-small !important;
+}
+.spacing-inner-bottom {
+    padding-bottom: $spacing-small !important;
+}
+.spacing-inner-left {
+    padding-left: $spacing-small !important;
+}
+
+.spacing-outer {
+    margin: $spacing-small !important;
+}
+.spacing-outer-top {
+    margin-top: $spacing-small !important;
+}
+.spacing-outer-right {
+    margin-right: $spacing-small !important;
+}
+.spacing-outer-bottom {
+    margin-bottom: $spacing-small !important;
+}
+.spacing-outer-left {
+    margin-left: $spacing-small !important;
+}
+
+// Spacing Medium
+.spacing-inner-medium {
+    @include get-responsive-spacing-medium($type: padding, $direction: all, $is_important: true);
+}
+.spacing-inner-top-medium {
+    @include get-responsive-spacing-medium($type: padding, $direction: top, $is_important: true);
+}
+.spacing-inner-right-medium {
+    @include get-responsive-spacing-medium($type: padding, $direction: right, $is_important: true);
+}
+.spacing-inner-bottom-medium {
+    @include get-responsive-spacing-medium($type: padding, $direction: bottom, $is_important: true);
+}
+.spacing-inner-left-medium {
+    @include get-responsive-spacing-medium($type: padding, $direction: left, $is_important: true);
+}
+
+.spacing-outer-medium {
+    @include get-responsive-spacing-medium($type: margin, $direction: all, $is_important: true);
+}
+.spacing-outer-top-medium {
+    @include get-responsive-spacing-medium($type: margin, $direction: top, $is_important: true);
+}
+.spacing-outer-right-medium {
+    @include get-responsive-spacing-medium($type: margin, $direction: right, $is_important: true);
+}
+.spacing-outer-bottom-medium {
+    @include get-responsive-spacing-medium($type: margin, $direction: bottom, $is_important: true);
+}
+.spacing-outer-left-medium {
+    @include get-responsive-spacing-medium($type: margin, $direction: left, $is_important: true);
+}
+
+// Spacing Large
+.spacing-inner-large {
+    @include get-responsive-spacing-large($type: padding, $direction: all, $is_important: true);
+}
+.spacing-inner-top-large {
+    @include get-responsive-spacing-large($type: padding, $direction: top, $is_important: true);
+}
+.spacing-inner-right-large {
+    @include get-responsive-spacing-large($type: padding, $direction: right, $is_important: true);
+}
+.spacing-inner-bottom-large {
+    @include get-responsive-spacing-large($type: padding, $direction: bottom, $is_important: true);
+}
+.spacing-inner-left-large {
+    @include get-responsive-spacing-large($type: padding, $direction: left, $is_important: true);
+}
+
+.spacing-outer-large {
+    @include get-responsive-spacing-large($type: margin, $direction: all, $is_important: true);
+}
+.spacing-outer-top-large {
+    @include get-responsive-spacing-large($type: margin, $direction: top, $is_important: true);
+}
+.spacing-outer-right-large {
+    @include get-responsive-spacing-large($type: margin, $direction: right, $is_important: true);
+}
+.spacing-outer-bottom-large {
+    @include get-responsive-spacing-large($type: margin, $direction: bottom, $is_important: true);
+}
+.spacing-outer-left-large {
+    @include get-responsive-spacing-large($type: margin, $direction: left, $is_important: true);
+}
+
+// Spacing layouts
+.spacing-inner-layout {
+    @include layout-spacing($type: padding, $direction: all, $device: responsive, $is_important: true);
+}
+.spacing-inner-top-layout {
+    @include layout-spacing($type: padding, $direction: top, $device: responsive, $is_important: true);
+}
+.spacing-inner-right-layout {
+    @include layout-spacing($type: padding, $direction: right, $device: responsive, $is_important: true);
+}
+.spacing-inner-bottom-layout {
+    @include layout-spacing($type: padding, $direction: bottom, $device: responsive, $is_important: true);
+}
+.spacing-inner-left-layout {
+    @include layout-spacing($type: padding, $direction: left, $device: responsive, $is_important: true);
+}
+
+.spacing-outer-layout {
+    @include layout-spacing($type: margin, $direction: all, $device: responsive, $is_important: true);
+}
+.spacing-outer-top-layout {
+    @include layout-spacing($type: margin, $direction: top, $device: responsive, $is_important: true);
+}
+.spacing-outer-right-layout {
+    @include layout-spacing($type: margin, $direction: right, $device: responsive, $is_important: true);
+}
+.spacing-outer-bottom-layout {
+    @include layout-spacing($type: margin, $direction: bottom, $device: responsive, $is_important: true);
+}
+.spacing-outer-left-layout {
+    @include layout-spacing($type: margin, $direction: left, $device: responsive, $is_important: true);
+}
+
+// Display properties
+.d-inline {
+    display: inline !important;
+}
+.d-inline-block {
+    display: inline-block !important;
+}
+.d-block {
+    display: block !important;
+}

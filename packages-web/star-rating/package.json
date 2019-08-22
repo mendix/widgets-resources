@@ -11,21 +11,26 @@
     "scripts": {
         "start": "utils-react-widgets start",
         "dev": "utils-react-widgets dev",
-        "test:dev": "utils-react-widgets test:dev",
+        "test": "npm run test:unit",
         "test:unit": "jest --config ../../scripts/test/jest.web.config.js",
-        "test:e2e": "export URL=https://booleansliderwidge.mxapps.io/ && utils-react-widgets test:e2e",
+        "test:e2e": "export URL=https://rating100.mxapps.io/ && utils-react-widgets test:e2e",
         "test:e2e:dev": "export DEBUG=true && utils-react-widgets test:e2e",
         "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "lint:fix": "npm run lint -- --fix",
         "build": "utils-react-widgets build",
-        "release": "utils-react-widgets release"
+        "release": "utils-react-widgets release",
+        "checkout": "ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
     },
     "config": {
         "mendixHost": "http://localhost:8080",
         "developmentPort": 3000,
-        "projectPath": [
-            "./tests/TestProjects/Mendix7/",
-            "./tests/TestProjects/Mendix8/"
+        "testProjectId": "609089fc-64db-474c-b994-f682e21291c2",
+        "testProjects": [
+            {
+                "revision": 164,
+                "branch": "trunk",
+                "path": "./tests/TestProjects/Mendix7/"
+            }
         ]
     },
     "devDependencies": {
