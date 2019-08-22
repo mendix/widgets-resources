@@ -1,7 +1,7 @@
 {
     "name": "color-picker-web",
     "widgetName": "ColorPicker",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Change a color using a color input",
     "copyright": "Mendix BV",
     "repository": {
