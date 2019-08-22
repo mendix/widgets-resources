@@ -17,7 +17,15 @@ export const Label: SFC<LabelProps> = ({ children, className, label, style, weig
 
     return createElement(
         "div",
-        { className: classNames("form-group", className, { "has-error": hasError }), style },
+        {
+            className: classNames(
+                "form-group",
+                className,
+                { "has-error": hasError },
+                orientation === "vertical" ? "no-columns " : ""
+            ),
+            style
+        },
         createElement("label", { className: `control-label${labelWeight}` }, label),
         createElement("div", { className: `${childrenWeight}` }, children)
     );
