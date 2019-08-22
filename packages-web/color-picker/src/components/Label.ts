@@ -22,7 +22,7 @@ export const Label: SFC<LabelProps> = ({ children, className, label, style, weig
                 "form-group",
                 className,
                 { "has-error": hasError },
-                orientation === "vertical" ? "no-columns " : ""
+                orientation === "vertical" ? "no-columns" : ""
             ),
             style
         },
