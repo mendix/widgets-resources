@@ -79,13 +79,16 @@ spacing = merge(spacing, custom.spacing || {});
 
 // Button Styles
 let button = {
-    fontSize: font.size,
+    fontSize: font.sizeSmall,
+    fontSizeIcon: font.sizeSmall,
     borderRadius: border.radius,
 
     header: {
         color: brand.primary,
         borderColor: "transparent",
         backgroundColor: "transparent",
+        fontSize: font.size,
+        fontSizeIcon: font.size,
     },
     primary: {
         color: "#FFF",

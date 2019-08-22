@@ -39,12 +39,12 @@ export const ActionButton = {
     icon: {
         // Size, Color and all ViewStyle properties are allowed
         color: button.primary.color,
-        size: font.sizeSmall,
+        size: button.fontSizeIcon,
     },
     caption: {
         // All TextStyle properties are allowed
         color: button.primary.color,
-        fontSize: font.sizeSmall,
+        fontSize: button.fontSize,
     },
 };
 
@@ -57,10 +57,11 @@ export const ActionButtonHeader = {
         paddingHorizontal: 0,
     },
     icon: {
-        size: font.size,
         color: button.header.color,
+        size: button.header.fontSizeIcon,
     },
     caption: {
         color: button.header.color,
+        size: button.header.fontSize,
     },
 };
