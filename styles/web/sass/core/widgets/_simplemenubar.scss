@@ -4,7 +4,6 @@
 // Customizing core files will make updating Atlas much more difficult in the future.
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
-
 /* ==========================================================================
    Navigation
 
@@ -13,12 +12,15 @@
 .mx-menubar {
     padding: 0;
     background-color: $navigation-bg;
+
     ul.mx-menubar-list {
         display: flex;
         width: 100%;
         min-height: 50px;
+
         li.mx-menubar-item {
             margin: 0;
+
             > a {
                 display: flex;
                 overflow: hidden;
@@ -31,9 +33,11 @@
                 border-radius: 0;
                 font-size: $navigation-font-size;
                 font-weight: $font-weight-normal;
+
                 img {
                     margin-right: 0.5em;
                 }
+
                 .glyphicon {
                     top: -1px;
                     margin-right: 0.5em;
@@ -41,6 +45,7 @@
                     font-size: $navigation-glyph-size;
                 }
             }
+
             a:hover,
             a:focus,
             &:hover a,
@@ -50,6 +55,7 @@
                 color: $navigation-color-hover;
                 background-color: $navigation-bg-hover;
             }
+
             &.active a {
                 color: $navigation-color-active;
                 background-color: $navigation-bg-active;
@@ -66,10 +72,13 @@
 // Vertical variation specifics
 .mx-menubar-vertical {
     background-color: $navigation-bg;
+
     ul.mx-menubar-list {
         display: flex;
+
         li.mx-menubar-item {
             display: block;
+
             a {
                 border-bottom: 1px solid $navigation-border-color;
             }
@@ -80,9 +89,11 @@
 // Horizontal variation specifics
 .mx-menubar-horizontal {
     box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.14);
+
     ul.mx-menubar-list {
         li.mx-menubar-item {
             width: auto;
+
             a {
                 width: 100%;
             }
@@ -117,15 +128,18 @@
 .region-topbar {
     .mx-menubar {
         background-color: $navtopbar-bg;
+
         ul.mx-menubar-list {
             li.mx-menubar-item {
                 a {
                     color: $navtopbar-color;
                     font-size: $navtopbar-font-size;
+
                     .glyphicon {
                         font-size: $navtopbar-glyph-size;
                     }
                 }
+
                 a:hover,
                 a:focus,
                 &:hover a,
@@ -134,6 +148,7 @@
                     color: $navtopbar-color-hover;
                     background-color: $navtopbar-bg-hover;
                 }
+
                 &.active a {
                     color: $navtopbar-color-active;
                     background-color: $navtopbar-bg-active;
@@ -145,6 +160,7 @@
     // Vertical variation specifics
     .mx-menubar-vertical {
         background-color: $navtopbar-bg;
+
         ul.mx-menubar-list {
             li.mx-menubar-item {
                 a {
@@ -160,15 +176,18 @@
 .region-sidebar {
     .mx-menubar {
         background-color: $navsidebar-bg;
+
         ul.mx-menubar-list {
             li.mx-menubar-item {
                 a {
                     color: $navsidebar-color;
                     font-size: $navsidebar-font-size;
+
                     .glyphicon {
                         font-size: $navsidebar-glyph-size;
                     }
                 }
+
                 a:hover,
                 a:focus,
                 &:hover a,
@@ -177,6 +196,7 @@
                     color: $navsidebar-color-hover;
                     background-color: $navsidebar-bg-hover;
                 }
+
                 &.active a {
                     color: $navsidebar-color-active;
                     background-color: $navsidebar-bg-active;
@@ -188,6 +208,7 @@
     // Vertical variation specifics
     .mx-menubar-vertical {
         background-color: $navsidebar-bg;
+
         ul.mx-menubar-list {
             li.mx-menubar-item {
                 a {
@@ -195,5 +216,11 @@
                 }
             }
         }
+    }
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .mx-menubar {
+        padding-bottom: env(safe-area-inset-bottom);
     }
 }

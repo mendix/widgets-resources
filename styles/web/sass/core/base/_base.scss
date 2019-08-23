@@ -4,13 +4,11 @@
 // Customizing core files will make updating Atlas much more difficult in the future.
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
-
 /* ==========================================================================
    Base
 
    Default settings
 ========================================================================== */
-
 html {
     height: 100%;
 }
@@ -26,9 +24,9 @@ body {
 }
 
 a {
-    -webkit-transition: 0.25s;
     -moz-transition: 0.25s;
     -o-transition: 0.25s;
+    -webkit-transition: 0.25s;
     transition: 0.25s;
     color: $link-color;
     -webkit-backface-visibility: hidden;
