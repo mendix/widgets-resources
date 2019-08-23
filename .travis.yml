@@ -14,6 +14,7 @@ env:
         - SCRIPT_ARGS=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
 before_script:
     - echo $TRAVIS_COMMIT_RANGE
+    - echo $CHANGED_GLOBAL_FILES
     - echo $PARTIAL_BUILD
     - echo $SCRIPT_ARGS
 jobs:
