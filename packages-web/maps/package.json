@@ -31,6 +31,11 @@
                 "revision": 514,
                 "branch": "trunk",
                 "path": "./tests/TestProjects/Mendix7/"
+            },
+            {
+                "revision": 518,
+                "branch": "MX_8",
+                "path": "./tests/TestProjects/Mendix8/"
             }
         ]
     },
