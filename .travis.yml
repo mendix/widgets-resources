@@ -17,6 +17,7 @@ before_script:
     - echo $CHANGED_GLOBAL_FILES
     - echo $PARTIAL_BUILD
     - echo $SCRIPT_ARGS
+    - echo $TRAVIS_BRANCH
 jobs:
     include:
         - name: "Lint"
