@@ -7,7 +7,7 @@
 import ReactNative from "react-native";
 
 /**
- * Shows a confirmation dialog before calling a given function.
+ * Shows a confirmation dialog during the execution of a nanoflow, to make perform actions based on the user input.
  * @param {string} question - This field is required.
  * @param {string} cancelButtonCaption - Set to empty to use default text 'Cancel'.
  * @param {string} proceedButtonCaption - Set to empty to use default text 'OK'.

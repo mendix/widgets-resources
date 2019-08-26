@@ -7,6 +7,7 @@
 import ReactNative from "react-native";
 
 /**
+ * Retrieve a local stored string value identified by a unique key. This could be set via the SetStorageItemString JavaScript action.
  * @param {string} key - This field is required.
  * @returns {string}
  */
