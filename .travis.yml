@@ -8,16 +8,14 @@ env:
     global:
         # List of all touched files, excluding paths starting with 'packages'
         - CHANGED_GLOBAL_FILES=$(git diff --name-only $TRAVIS_COMMIT_RANGE)
+        - PR_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH
         # Build only touched packages for pull requests when no shared files were touched
-        - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" != "" ] && [ "$TRAVIS_PULL_REQUEST" == "true" ]; then echo "true"; else echo "false"; fi)
+        - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" != "" ] && [ "$TRAVIS_PULL_REQUEST" == "true" ] && [ "$PR_BRANCH" != "master"]; then echo "true"; else echo "false"; fi)
         # Set arguments so lerna only runs scripts in changed packages
-        - SCRIPT_ARGS=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
+        - SCRIPT_ARGS=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since PR_BRANCH"; else echo ""; fi)
 before_script:
-    - echo $TRAVIS_COMMIT_RANGE
-    - echo $CHANGED_GLOBAL_FILES
-    - echo $PARTIAL_BUILD
+    - echo $PR_BRANCH
     - echo $SCRIPT_ARGS
-    - echo $TRAVIS_BRANCH
 jobs:
     include:
         - name: "Lint"
