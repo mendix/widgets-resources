@@ -7,6 +7,7 @@
 type Platform = "Web" | "Native_mobile" | "Hybrid_mobile";
 
 /**
+ * Get the client platform (NanoflowCommons.Platform) where the action is running.
  * @returns {"NanoflowCommons.Platform.Web"|"NanoflowCommons.Platform.Native_mobile"|"NanoflowCommons.Platform.Hybrid_mobile"}
  */
 // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars

@@ -7,7 +7,8 @@
 import ReactNative from "react-native";
 import { StorageValue } from "./StorageValue";
 
-/**
+/*
+ * Retrieve a local stored list of Mendix objects identified by a unique key. When objects are the client state it will be returned, if not they will be re-created. Note: when re-creating the local Mendix object the Mendix Object ID will never be the same.
  * @returns {MxObject}
  */
 // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars

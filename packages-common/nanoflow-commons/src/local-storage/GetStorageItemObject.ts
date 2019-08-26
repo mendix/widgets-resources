@@ -8,6 +8,7 @@ import ReactNative from "react-native";
 import { StorageValue } from "./StorageValue";
 
 /**
+ * Retrieve a local stored Mendix object identified by a unique key. When object is the client state it will be returned, if not it will be re-created. Note: when re-creating the local mendix object the Mendix Object ID will never be the same.
  * @param {string} key - This field is required.
  * @param {string} entity - This field is required.
  * @returns {MxObject}

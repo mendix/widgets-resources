@@ -7,6 +7,7 @@
 import ReactNative from "react-native";
 
 /**
+ * Remove a content identified by a unique key. This could be set via any of the Set Storage Item JavaScript actions.
  * @returns {boolean}
  */
 // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
