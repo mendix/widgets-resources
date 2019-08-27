@@ -81,13 +81,16 @@ export const spacing = {
 
 // Button Styles
 export const button = {
-    fontSize: font.size,
+    fontSize: font.sizeSmall,
+    fontSizeIcon: font.sizeSmall,
     borderRadius: border.radius,
 
     header: {
         color: brand.primary,
         borderColor: "transparent",
         backgroundColor: "transparent",
+        fontSize: font.size,
+        fontSizeIcon: font.size,
     },
     primary: {
         color: "#FFF",
