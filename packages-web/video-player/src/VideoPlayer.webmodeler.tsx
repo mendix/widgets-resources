@@ -7,8 +7,8 @@ import { SizeContainer } from "./components/SizeContainer";
 import { Video, VideoPlayerProps } from "./components/Video";
 import { validateUrl } from "./utils/Utils";
 import { VideoPlayerPreviewProps } from "../typings/VideoPlayerProps";
-// @ts-ignore
-import VideoStyles from "./ui/VideoPlayer.css";
+
+declare function require(name: string): string;
 
 export class preview extends Component<VideoPlayerPreviewProps, {}> {
     render(): JSX.Element {
@@ -63,5 +63,5 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
 }
 
 export function getPreviewCss(): string {
-    return VideoStyles;
+    return require("./ui/VideoPlayer.css");
 }
