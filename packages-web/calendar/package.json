@@ -41,20 +41,18 @@
     },
     "license": "Apache-2.0",
     "devDependencies": {
+        "@babel/core": "^7.5.5",
+        "@babel/preset-env": "^7.5.5",
         "@types/classnames": "^2.2.4",
         "@types/date-arithmetic": "^3.1.2",
-        "@types/globalize": "0.0.34",
-        "@types/react-big-calendar": "0.20.20",
-        "@types/react-dnd": "^3.0.2",
-        "@types/react-dnd-html5-backend": "^3.0.2",
-        "@widgets-resources/utils-react-widgets": "0.0.1"
+        "@types/react-big-calendar": "0.22.1",
+        "@widgets-resources/utils-react-widgets": "0.0.1",
+        "babel-loader": "^8.0.6"
     },
     "dependencies": {
         "classnames": "2.2.6",
-        "date-arithmetic": "3.1.0",
-        "moment": "^2.23.0",
-        "react-big-calendar": "0.20.4",
-        "react-dnd": "2.6.0",
-        "react-dnd-html5-backend": "^5.0.1"
+        "date-arithmetic": "^3.1.0",
+        "moment": "^2.24.0",
+        "react-big-calendar": "https://github.com/Andries-Smit/react-big-calendar/releases/download/v0.22.1/react-big-calendar-0.22.1.tgz"
     }
 }
