@@ -34,6 +34,7 @@ export const ReferenceSelector = {
     },
     pickerTopIOS: {
         // All ViewStyle properties are allowed
+        backgroundColor: input.backgroundColor,
     },
     value: {
         // All TextStyle properties are allowed
