@@ -1,0 +1,54 @@
+/* ==========================================================================
+   Section Header
+========================================================================== */
+
+.sectionheader {
+    margin-bottom: $default-spacing-bottom;
+    border-bottom: 1px solid $default-border-color;
+    padding-bottom: $default-spacing-bottom / 2;
+}
+
+.sectionheader-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.sectionheader-subtitle {
+    color: $font-color-detail;
+    margin-bottom: 10px;
+}
+
+.sectionheader-avatar {
+    padding: 4px;
+    border: 2px solid $default-border-color;
+    background-color: #fff;
+}
+
+.sectionheader-hotel {
+    margin: 50px 0;
+    text-align: center;
+    .section-title-prefix {
+        font-size: 23px;
+        font-weight: 700;
+        display: inline-block;
+        margin-right: 5px;
+        color: #003f9e;
+    }
+    .section-title-suffix {
+        font-size: 23px;
+        font-weight: 400;
+        display: inline-block;
+        color: #057dfd;
+    }
+    .section-intro {
+        font-size: 16px;
+        /* margin-top: 30px; */
+        font-weight: 100;
+        line-height: 31px;
+        display: block;
+        width: 60%;
+        margin: 20px auto;
+        letter-spacing: 0;
+        color: #b2b2b2;
+    }
+}

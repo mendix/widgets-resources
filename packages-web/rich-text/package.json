@@ -30,6 +30,16 @@
                 "revision": 887,
                 "branch": "trunk",
                 "path": "./tests/TestProjects/Mendix7/"
+            },
+            {
+                "revision": 859,
+                "branch": "TestUpgradeMx8",
+                "path": "./tests/TestProjects/Mendix8/"
+            },
+            {
+                "revision": 891,
+                "branch": "MX_8.1",
+                "path": "./tests/TestProjects/Mendix8.1/"
             }
         ]
     },

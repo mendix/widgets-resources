@@ -1,0 +1,25 @@
+/* ==========================================================================
+   Master Detail Listview
+========================================================================== */
+.masterdetail-listview {
+    background-color: $bg-color-secondary;
+    .mx-listview {
+        height: 100%;
+        margin: 0;
+        .mx-listview-item {
+            background-color: transparent;
+
+            &.selected {
+                color: #fff;
+                .mx-link {
+                    color: #fff;
+                }
+
+                &:hover,
+                &:active {
+                    background-color: $grid-bg-selected !important;
+                }
+            }
+        }
+    }
+}

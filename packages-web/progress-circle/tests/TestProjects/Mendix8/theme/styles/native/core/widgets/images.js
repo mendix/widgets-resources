@@ -1,4 +1,11 @@
-import { contrast } from "../variables";
+import { border } from '../variables';
+
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
+//
 
 /* ==========================================================================
     Image
@@ -12,8 +19,8 @@ export const Image = {
     },
     image: {
         // All ImageStyle properties are allowed
-        resizeMode: "contain"
-    }
+        resizeMode: 'cover',
+    },
 };
 
 export const NativeDynamicImage = {
@@ -22,49 +29,6 @@ export const NativeDynamicImage = {
     },
     image: {
         // All ImageStyle properties are allowed
-        resizeMode: "contain"
-    }
-};
-
-//== Design Properties
-//## Helper classes to change the look and feel of the widget
-//-------------------------------------------------------------------------------------------------------------------//
-// Image Sizes
-export const avatarSmall = {
-    image: {
-        width: 60,
-        height: 60,
-        borderRadius: 30
-    }
-};
-export const avatarLarge = {
-    image: {
-        width: 100,
-        height: 100,
-        borderRadius: 50
-    }
-};
-
-//== Extra Classes
-//## Helper classes to change the look and feel of the widget
-//-------------------------------------------------------------------------------------------------------------------//
-// Make the image look like a header
-export const imageHeader = {
-    container: {
-        // width: '100%',
-        elevation: 2,
-        shadowColor: contrast.lowest,
-        shadowOpacity: 0.9,
-        shadowRadius: 4,
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        zIndex: 10
+        resizeMode: 'cover',
     },
-    image: {
-        width: "100%",
-        height: 250,
-        resizeMode: "cover"
-    }
 };

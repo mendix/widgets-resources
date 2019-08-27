@@ -11,6 +11,8 @@ packages-native/**/package-lock.json
 packages-common/**/package-lock.json
 
 **/TestProjects/*/.mendix-cache/
+**/TestProjects/*/*.lock
+**/TestProjects/*/*.bak
 **/TestProjects/*/.svn/
 **/TestProjects/*/GPUCache/
 **/TestProjects/*/deployment/

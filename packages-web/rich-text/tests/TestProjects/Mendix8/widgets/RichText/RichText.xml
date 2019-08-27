@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.custom.richtext.RichText" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
+    <name>Rich Text</name>
+    <description>Rich inline or toolbar text editing</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAA2tJREFUeAHtW72OEzEQ3g1IQJn+gI4WpGsQT0AaREESeIGrrsxrnES9DbRJQDrRHC0010JDjY68ANLBQZPc571dnT32xo4zXhzWadZjz+839uyPnSxLv4RAQqDLCOQ0+OFweAN9h3meP8FVtG2/89Vq9WY+n3+yMXKOj8fjwXK5LKBzz1HvotfrHUyn0xOZ/6ZMVO1DXF8jKMNQY9dLAPcAIJw1cjAPbBi8sL5XydyVXenJhGhXmafdNvoWGPZtTMzjrpmXzWoyGgDgdpn2stKyDeBMujS+2DpMS0DxEYEdoeNU6bwiJlgmj+t+tO9jXT6s6dBXTGfFBJafVs8EA5bm2rVsBQA6Tmez2XvFGojRaPSK9B1Rp8h4lOROTltOJDsPgMsScAIcteI7GH86MTMwoeaw1Bs2ABDTxFQrGGI1qrAVN6OQodMFgImh4GXyHcCgt/UuX0CsAMQWKDeypiJ47mMEQP3ykdtCZuEhq8loAOCF4S0U/91Q+bd+v/95Q5mt2MWLDRRoAa1RWr4M0fGmp6d7YNyXH2+R4XeyMMZeCFpkXgRfFMVvQQ8+/Blky1WBxy/tuVuM+/7g6CLr5Qcnz24rb3O1PloDmp4Ma/76aqwB1VvdWc0krjAgk1ljxQ8QvDAsAM2hG03lbU5xyoPQloCHDkWEO/Oy8hC62QGQHd6FtnEJcDr+8fkdY515enyBhF7/XPmuJXhanZ8B7ACU1bpKjtz2zZesQ2776qNy7ACIW5VwtHQWbWpwY5pbH3GAvQZU92m2WxW3PhJ/xj8DqIXI6QRA5AkK7l6aAcEhjtxAmgGRJyi4e2kGBIc4cgNpBkSeoODupRkQHOLIDaQZEHmCgrvX+gwQ+waD44sfNDLRV+4p0IHAdOsANG2alJ+8r777Bw5ZVd8+AKr9f061D0D1jY9GzvYNkSq20LCr/rhOYKpa+SkuP7UZsMUJTP4o12jk8lMDADZ9dnV9ZNaE5zTkY1OTYfssjmM0X5zcZmLCtjyLJisATfvsdD8eDrGc2vKNytVPqt+0BCjPf013HgDrEnBNP87sPHLl5eDDXYCl5rABgH9ifOUIzFUHPbLjKkf50hKgiFCaVns6Hgvt62fnZ4AJgIVHVn1kPMwoIj42NRkNAK4TmIqrAYhd8TNA6EllQiAhwIjAJSEj9lh5/+kBAAAAAElFTkSuQmCC</icon>
+    <properties>
+        <property key="stringAttribute" type="attribute">
+            <caption>Value attribute</caption>
+            <category>Data source</category>
+            <description>Rich text HTML content</description>
+            <attributeTypes>
+                <attributeType name="String"/>
+            </attributeTypes>
+        </property>
+        <property key="sanitizeContent" type="boolean" defaultValue="true">
+            <caption>Sanitize content</caption>
+            <category>Data source</category>
+            <description>The strict sanitize rules will remove all unsupported HTML tags and attributes before displaying.
+WARNING disabling this option is a security risk for XSS attacks</description>
+        </property>
+        <property key="theme" type="enumeration" defaultValue="snow">
+            <caption>Show as</caption>
+            <category>Appearance</category>
+            <description>Display the editor formatting options in a toolbar or a bubble when text is selected</description>
+            <enumerationValues>
+                <enumerationValue key="snow">Toolbar</enumerationValue>
+                <enumerationValue key="bubble">Bubble</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="editorOption" type="enumeration" defaultValue="basic">
+            <caption>Text formatting options</caption>
+            <category>Appearance</category>
+            <description>Formatting options shown in the toolbar or bubble. More options can be set in the 'Custom options'</description>
+            <enumerationValues>
+                <enumerationValue key="basic">Basic</enumerationValue>
+                <enumerationValue key="extended">Extended</enumerationValue>
+                <enumerationValue key="custom">Custom</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="editable" type="enumeration" defaultValue="default">
+            <caption>Editable</caption>
+            <category>Appearance</category>
+            <description>The default option is based on the page settings and the attribute's write access</description>
+            <enumerationValues>
+                <enumerationValue key="default">Default</enumerationValue>
+                <enumerationValue key="never">Never</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="readOnlyStyle" type="enumeration" defaultValue="text">
+            <caption>Read-only style</caption>
+            <category>Appearance</category>
+            <description/>
+            <enumerationValues>
+                <enumerationValue key="text">Rich text</enumerationValue>
+                <enumerationValue key="bordered">Bordered</enumerationValue>
+                <enumerationValue key="borderedToolbar">Bordered toolbar</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="minNumberOfLines" type="integer" defaultValue="10">
+            <caption>Minimum number of lines</caption>
+            <category>Appearance</category>
+            <description>When set to 0, the minimum number of lines won't be set</description>
+        </property>
+        <property key="maxNumberOfLines" type="integer" defaultValue="10">
+            <caption>Maximum number of lines</caption>
+            <category>Appearance</category>
+            <description>When greater that the minimum, the input will auto grow, until the specified lines are reached. When set to 0, the maximum number of lines won't be set</description>
+        </property>
+        <property key="customOptions" type="object" isList="true" required="false">
+            <caption>Formatting options</caption>
+            <category>Custom options</category>
+            <description>Options when the 'Text formatting options' is set to 'Custom'</description>
+            <properties>
+                <property key="option" type="enumeration" defaultValue="bold">
+                    <caption>Options</caption>
+                    <category>Options</category>
+                    <description>Use the spacer to group the options</description>
+                    <enumerationValues>
+                        <enumerationValue key="bold">Bold</enumerationValue>
+                        <enumerationValue key="italic">Italic</enumerationValue>
+                        <enumerationValue key="underline">Underline</enumerationValue>
+                        <enumerationValue key="strike">Strike</enumerationValue>
+                        <enumerationValue key="link">Link</enumerationValue>
+                        <enumerationValue key="headings">Headings</enumerationValue>
+                        <enumerationValue key="orderedList">Ordered list</enumerationValue>
+                        <enumerationValue key="bulletList">Bullet list</enumerationValue>
+                        <enumerationValue key="blockQuote">Block quote</enumerationValue>
+                        <enumerationValue key="codeBlock">Code block</enumerationValue>
+                        <enumerationValue key="subScript">Subscript</enumerationValue>
+                        <enumerationValue key="superScript">Superscript</enumerationValue>
+                        <enumerationValue key="indent">Indent</enumerationValue>
+                        <enumerationValue key="outdent">Outdent</enumerationValue>
+                        <enumerationValue key="direction">Direction</enumerationValue>
+                        <enumerationValue key="textColor">Text color</enumerationValue>
+                        <enumerationValue key="fillColor">Fill color</enumerationValue>
+                        <enumerationValue key="align">Align</enumerationValue>
+                        <enumerationValue key="clean">Clear formatting</enumerationValue>
+                        <enumerationValue key="spacer">-- Spacer --</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </properties>
+        </property>
+        <property key="tabAction" type="enumeration" defaultValue="indent">
+            <caption>Tab key behavior</caption>
+            <category>Events</category>
+            <description>Press 'Tab' to indent text or to move focus to the next element</description>
+            <enumerationValues>
+                <enumerationValue key="indent">Indent</enumerationValue>
+                <enumerationValue key="changeFocus">Focus next</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="onChangeMicroflow" type="microflow" required="false">
+            <caption>On change microflow</caption>
+            <category>Events</category>
+            <description>Microflow will be triggered when focus is lost and the content has changed</description>
+            <returnType type="Void"/>
+        </property>
+        <property key="onChangeNanoflow" type="nanoflow" required="false">
+            <caption>On change nanoflow</caption>
+            <category>Events</category>
+            <description>Nanoflow will be triggered when focus is lost and the content has changed</description>
+            <returnType type="Void" />
+        </property>
+    </properties>
+</widget>

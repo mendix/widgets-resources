@@ -1,4 +1,11 @@
-import { brand, font } from "../variables";
+import { brand, font, contrast } from '../variables';
+
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
+//
 
 /* ==========================================================================
     Progress Circle
@@ -12,49 +19,19 @@ export const com_mendix_widget_native_progresscircle_ProgressCircle = (ProgressC
     },
     circle: {
         // Only the size & borderWidth & borderColor properties are allowed
-        borderWidth: 0
+        size: 80,
+        borderWidth: 0,
     },
     fill: {
         // Only the width & backgroundColor & lineCapRounded properties are allowed
         backgroundColor: brand.primary,
         width: 5, // Thickness,
-        lineCapRounded: true
+        lineCapRounded: true,
     },
     text: {
         // All TextStyle properties are allowed
         color: brand.primary,
-        fontSize: font.sizeLarge
-    }
+        fontSize: font.size,
+        fontWeight: font.weightSemiBold,
+    },
 });
-
-//== Design Properties
-//## Helper classes to change the look and feel of the widget
-//-------------------------------------------------------------------------------------------------------------------//
-// Progress Circle Color
-
-export const progressCircleSuccess = {
-    fill: {
-        backgroundColor: brand.success
-    },
-    text: {
-        color: brand.success
-    }
-};
-
-export const progressCircleWarning = {
-    fill: {
-        backgroundColor: brand.warning
-    },
-    text: {
-        color: brand.warning
-    }
-};
-
-export const progressCircleDanger = {
-    fill: {
-        backgroundColor: brand.danger
-    },
-    text: {
-        color: brand.danger
-    }
-};

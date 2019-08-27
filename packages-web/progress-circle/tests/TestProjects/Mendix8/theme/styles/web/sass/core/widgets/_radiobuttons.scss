@@ -1,7 +1,14 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
 /* ==========================================================================
    Radio Buttons
 
-   Default radio button styling
+   Default Mendix Radio Button Widget
 ========================================================================== */
 
 .mx-radiobuttons.inline .mx-radiogroup {
@@ -21,7 +28,7 @@
     margin-top: 0;
 }
 
-input[type="radio"] {
+input[type='radio'] {
     position: relative !important; // Remove after mxui merge
     width: 16px;
     height: 16px;
@@ -44,7 +51,7 @@ input[type="radio"] {
         transition: all 0.3s ease;
     }
     &:before {
-        content: "";
+        content: '';
         width: 100%;
         height: 100%;
         border: 1px solid $form-input-border-color;
@@ -69,7 +76,7 @@ input[type="radio"] {
     &:checked:after,
     &:not(:disabled):not(:checked):hover:after {
         opacity: 1;
-        content: "";
+        content: '';
         transform: translate(-50%, -50%), scale(1);
     }
     &:checked:before {

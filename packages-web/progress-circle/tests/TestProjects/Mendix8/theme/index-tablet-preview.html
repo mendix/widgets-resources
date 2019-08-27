@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <title>Mendix - Tablet preview</title>
-        <link rel="stylesheet" type="text/css" href="styles/web/css/main.css?{{ cachebust }}" />
+
+        {{themecss}}
     </head>
 
     <body>
@@ -20,7 +21,7 @@
         <script type="text/javascript">
             // Firefox does not add a history item if the page is not loaded
             // from the cache, and the src is set as attribute on the iframe
-            document.getElementById("frame").src = "index.html" + window.location.search + window.location.hash;
+            document.getElementById('frame').src = 'index.html' + window.location.search + window.location.hash;
         </script>
     </body>
 </html>

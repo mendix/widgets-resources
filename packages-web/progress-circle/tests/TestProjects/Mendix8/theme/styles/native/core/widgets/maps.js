@@ -1,4 +1,11 @@
-import { brand } from "../variables";
+import { brand, border } from '../variables';
+
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
+//
 
 /* ==========================================================================
     Maps
@@ -9,46 +16,12 @@ import { brand } from "../variables";
 export const com_mendix_widget_native_maps_Maps = (Maps = {
     container: {
         // All ViewStyle properties are allowed
-        alignSelf: "stretch",
-        aspectRatio: 4 / 3
+        alignSelf: 'stretch',
+        aspectRatio: 4 / 3,
     },
     marker: {
         //Only color & opacity are allowed
         color: brand.primary,
-        opacity: 1
-    }
+        opacity: 1,
+    },
 });
-
-//== Design Properties
-//## Helper classes to change the look and feel of the widget
-//-------------------------------------------------------------------------------------------------------------------//
-// Maps Colors
-export const mapsSuccess = {
-    marker: {
-        color: brand.success
-    }
-};
-export const mapsWarning = {
-    marker: {
-        color: brand.warning
-    }
-};
-export const mapsDanger = {
-    marker: {
-        color: brand.danger
-    }
-};
-
-// Maps Size
-export const mapsSquare = {
-    container: {
-        aspectRatio: 1 / 1
-    }
-};
-
-export const mapsFullHeight = {
-    container: {
-        flex: 1,
-        aspectRatio: undefined
-    }
-};
