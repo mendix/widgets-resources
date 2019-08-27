@@ -23,7 +23,7 @@ export class EditableValueBuilder<T extends string | boolean | Date | BigJs.Big>
         setValidator: jest.fn(),
         setValue: jest.fn((value: T) => this.withValue(value)),
         setTextValue: jest.fn(),
-        setFormatting: jest.fn()
+        setFormatter: jest.fn()
     };
 
     withValue(value?: T): EditableValueBuilder<T> {
