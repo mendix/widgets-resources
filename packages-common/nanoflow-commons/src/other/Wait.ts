@@ -5,6 +5,7 @@
 // Other code you write will be lost the next time you deploy the project.
 
 /**
+ * Wait for number of milliseconds before continuing nanoflow execution.
  * @param {Big} delay - The number of milliseconds to wait. This field is required.
  * @returns {boolean}
  */

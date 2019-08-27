@@ -5,6 +5,7 @@
 // Other code you write will be lost the next time you deploy the project.
 
 /**
+ * Get the Mendix Object GUID.
  * @param {MxObject} entityObject - This field is required.
  * @returns {string}
  */
