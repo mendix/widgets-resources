@@ -84,6 +84,8 @@ export const button = {
     fontSize: font.sizeSmall,
     fontSizeIcon: font.sizeSmall,
     borderRadius: border.radius,
+    paddingVertical: Platform.select({ android: spacing.smaller, ios: spacing.smaller }),
+    paddingHorizontal: Platform.select({ android: spacing.small, ios: spacing.regular }),
 
     header: {
         color: brand.primary,
@@ -91,6 +93,8 @@ export const button = {
         backgroundColor: "transparent",
         fontSize: font.size,
         fontSizeIcon: font.size,
+        paddingVertical: 0,
+        paddingHorizontal: 0,
     },
     primary: {
         color: "#FFF",

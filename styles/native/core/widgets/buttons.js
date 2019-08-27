@@ -1,5 +1,4 @@
-import { Platform }                        from "react-native";
-import { button, contrast, font, spacing } from "../variables";
+import { button, contrast } from "../variables";
 
 //
 // DISCLAIMER:
@@ -25,16 +24,8 @@ export const ActionButton = {
         alignItems: "center",
         justifyContent: "center",
         borderRadius: button.borderRadius,
-        ...Platform.select({
-            ios: {
-                paddingVertical: spacing.smaller,
-                paddingHorizontal: spacing.regular,
-            },
-            android: {
-                paddingVertical: spacing.smaller,
-                paddingHorizontal: spacing.small,
-            },
-        }),
+        paddingVertical: button.paddingVertical,
+        paddingHorizontal: button.paddingHorizontal,
     },
     icon: {
         // Size, Color and all ViewStyle properties are allowed
@@ -53,8 +44,8 @@ export const ActionButtonHeader = {
     container: {
         borderColor: button.header.borderColor,
         backgroundColor: button.header.backgroundColor,
-        paddingVertical: 0,
-        paddingHorizontal: 0,
+        paddingVertical: button.header.paddingVertical,
+        paddingHorizontal: button.header.paddingHorizontal,
     },
     icon: {
         color: button.header.color,
