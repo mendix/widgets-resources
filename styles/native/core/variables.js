@@ -123,12 +123,12 @@ let input = {
     // Colors
     color: font.color,
     errorColor: brand.danger,
-    labelColor: contrast.low,
+    labelColor: font.color,
     borderColor: contrast.lower,
     backgroundColor: background.primary,
     disabledBackgroundColor: contrast.lowest,
     selectionColor: contrast.lower,
-    placeholderTextColor: contrast.low,
+    placeholderTextColor: contrast.regular,
     underlineColorAndroid: "transparent",
 
     // Sizes
