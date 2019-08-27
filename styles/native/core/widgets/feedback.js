@@ -50,7 +50,6 @@ export const com_mendix_widget_native_feedback_Feedback = (Feedback = {
         height: 100,
         fontSize: input.fontSize,
         fontFamily: input.fontFamily,
-        borderWidth: input.width,
         borderRadius: input.borderRadius,
         borderTopWidth: input.borderWidth,
         borderBottomWidth: input.borderWidth,
