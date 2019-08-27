@@ -1,0 +1,16 @@
+/* ==========================================================================
+   Atlas layout
+   
+   Extra styling for phone layouts
+========================================================================== */
+.layout-atlas-phone {
+    .region-topbar {
+        min-height: $m-header-height;
+        border-style: none;
+        background-color: $m-header-bg;
+
+        &::before {
+            display: none;
+        }
+    }
+}

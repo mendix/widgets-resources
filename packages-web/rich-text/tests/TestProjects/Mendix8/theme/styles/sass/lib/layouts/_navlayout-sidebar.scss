@@ -1,0 +1,11 @@
+/* ==========================================================================
+   Region Sidebar
+
+   Specific sidebar styling
+========================================================================== */
+.region-sidebar {
+    background-color: $navsidebar-bg;
+    > .mx-layoutcontainer-wrapper {
+        padding: 0;
+    }
+}

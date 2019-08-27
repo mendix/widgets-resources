@@ -1261,7 +1261,7 @@ body .dijitAlignClient {
 }
 
 /* workaround for webkit bug #8427, remove this when it is fixed upstream */
-.dj_webkit .dijitMenuTable td[colspan="2"] {
+.dj_webkit .dijitMenuTable td[colspan='2'] {
     border-right: hidden;
 }
 
@@ -2088,7 +2088,7 @@ div.dijitTabDisabled,
 }
 .dj_ie6 .dijitToggleButtonIconChar,
 .dj_ie6 .tabStripButton .dijitButtonText {
-    font-family: "Arial Unicode MS"; /* otherwise the a11y character (checkmark, arrow, etc.) appears as a box */
+    font-family: 'Arial Unicode MS'; /* otherwise the a11y character (checkmark, arrow, etc.) appears as a box */
 }
 .dj_a11y .dijitToggleButtonChecked .dijitToggleButtonIconChar {
     display: inline !important; /* In high contrast mode, display the check symbol */
@@ -2340,21 +2340,21 @@ body,
 }
 
 /* Bacause we use checkboxes without labels, align them with other widgets. */
-input[type="checkbox"] {
+input[type='checkbox'] {
     margin: 9px 0;
 }
 
-.mx-checkbox input[type="checkbox"] {
+.mx-checkbox input[type='checkbox'] {
     margin-left: 0;
     margin-right: 8px;
     position: static;
 }
 
-.form-vertical .form-group.mx-checkbox input[type="checkbox"] {
+.form-vertical .form-group.mx-checkbox input[type='checkbox'] {
     display: block;
 }
 
-.form-vertical .form-group.mx-checkbox.label-after input[type="checkbox"] {
+.form-vertical .form-group.mx-checkbox.label-after input[type='checkbox'] {
     display: inline-block;
 }
 
@@ -2368,7 +2368,7 @@ input[type="checkbox"] {
     margin-right: 20px;
 }
 
-.mx-radiobuttons .radio input[type="radio"] {
+.mx-radiobuttons .radio input[type='radio'] {
     /* Reset bootstrap rules */
     position: static;
     margin-right: 8px;
@@ -2394,7 +2394,7 @@ input[type="checkbox"] {
     margin-left: 5px;
 }
 
-[dir="rtl"] .mx-compound-control button {
+[dir='rtl'] .mx-compound-control button {
     margin-left: 0;
     margin-right: 5px;
 }
@@ -2471,8 +2471,8 @@ input[type="checkbox"] {
     margin-left: 0.3em;
 }
 
-[dir="rtl"] .mx-grid-search-controls .mx-button + .mx-button,
-[dir="rtl"] .mx-grid-controlbar .mx-button + .mx-button {
+[dir='rtl'] .mx-grid-search-controls .mx-button + .mx-button,
+[dir='rtl'] .mx-grid-controlbar .mx-button + .mx-button {
     margin-left: 0;
     margin-right: 0.3em;
 }
@@ -2491,13 +2491,13 @@ input[type="checkbox"] {
     flex: 1;
 }
 
-[dir="rtl"] .mx-grid-toolbar,
-[dir="rtl"] .mx-grid-search-inputs {
+[dir='rtl'] .mx-grid-toolbar,
+[dir='rtl'] .mx-grid-search-inputs {
     margin-left: 5px;
     margin-right: 0px;
 }
-[dir="rtl"] .mx-grid-pagingbar,
-[dir="rtl"] .mx-grid-search-controls {
+[dir='rtl'] .mx-grid-pagingbar,
+[dir='rtl'] .mx-grid-search-controls {
     margin-left: 0px;
     margin-right: auto;
 }
@@ -2520,7 +2520,7 @@ input[type="checkbox"] {
     vertical-align: top;
     overflow: hidden;
 }
-[dir="rtl"] .mx-grid-search-label {
+[dir='rtl'] .mx-grid-search-label {
     text-align: left;
 }
 .mx-grid-search-input {
@@ -2605,7 +2605,7 @@ input[type="checkbox"] {
     float: right;
     padding-left: 5px;
 }
-[dir="rtl"] .mx-datagrid-sort-icon {
+[dir='rtl'] .mx-datagrid-sort-icon {
     float: left;
     padding: 0 5px 0 0;
 }
@@ -2617,7 +2617,7 @@ input[type="checkbox"] {
     height: 100%;
     cursor: col-resize;
 }
-[dir="rtl"] .mx-datagrid-column-resizer {
+[dir='rtl'] .mx-datagrid-column-resizer {
     left: auto;
     right: -6px;
 }
@@ -2809,7 +2809,7 @@ input[type="checkbox"] {
     margin-left: 8px;
     padding: 5px 0;
 }
-[dir="rtl"] .mx-navigationtree ul li ul li {
+[dir='rtl'] .mx-navigationtree ul li ul li {
     margin-left: auto;
     margin-right: 8px;
 }
@@ -2864,7 +2864,7 @@ input[type="checkbox"] {
 .mx-groupbox-collapse-icon {
     float: right;
 }
-[dir="rtl"] .mx-groupbox-collapse-icon {
+[dir='rtl'] .mx-groupbox-collapse-icon {
     float: left;
 }
 
@@ -2969,7 +2969,7 @@ input[type="checkbox"] {
     vertical-align: middle;
     margin-right: 10px;
 }
-[dir="rtl"] .mx-dropdown-list img {
+[dir='rtl'] .mx-dropdown-list img {
     margin-left: 10px;
     margin-right: auto;
 }
@@ -3011,14 +3011,14 @@ input[type="checkbox"] {
     color: #eee;
     line-height: 30px; /* height of buttons */
 }
-body[dir="ltr"] .mx-header-left,
-body[dir="rtl"] .mx-header-right {
+body[dir='ltr'] .mx-header-left,
+body[dir='rtl'] .mx-header-right {
     position: absolute;
     top: 9px;
     left: 9px;
 }
-body[dir="ltr"] .mx-header-right,
-body[dir="rtl"] .mx-header-left {
+body[dir='ltr'] .mx-header-right,
+body[dir='rtl'] .mx-header-left {
     position: absolute;
     top: 9px;
     right: 9px;
@@ -3083,7 +3083,7 @@ body[dir="rtl"] .mx-header-left {
 .mx-listview-searchbar > button {
     margin-left: 5px;
 }
-[dir="rtl"] .mx-listview-searchbar > button {
+[dir='rtl'] .mx-listview-searchbar > button {
     margin-left: 0;
     margin-right: 5px;
 }
@@ -3092,7 +3092,7 @@ body[dir="rtl"] .mx-header-left {
     vertical-align: middle;
     padding: 0 15px 0 5px;
 }
-[dir="rtl"] .mx-listview-selection {
+[dir='rtl'] .mx-listview-selection {
     padding: 0 5px 0 15px;
 }
 .mx-listview-selectable .mx-listview-content {
@@ -3340,6 +3340,7 @@ body[dir="rtl"] .mx-header-left {
 
 .mx-demouserswitcher {
     position: fixed;
+    top: 0;
     right: 0;
     width: 360px;
     height: 100%;
@@ -3446,13 +3447,13 @@ body[dir="rtl"] .mx-header-left {
     color: #007aff;
 }
 
-body[dir="rtl"] .mx-master-detail-screen-header-close {
+body[dir='rtl'] .mx-master-detail-screen-header-close {
     right: 0;
     left: auto;
 }
 
 .mx-master-detail-screen-header-close::before {
-    content: "\2039";
+    content: '\2039';
     font-size: 52px;
     line-height: 24px;
 }
@@ -3467,7 +3468,7 @@ body[dir="rtl"] .mx-master-detail-screen-header-close {
     transform: translateX(-200%);
 }
 
-body[dir="rtl"] .mx-master-detail-content-hidden {
+body[dir='rtl'] .mx-master-detail-content-hidden {
     transform: translateX(200%);
 }
 .reportingReport {
@@ -3549,7 +3550,7 @@ body[dir="rtl"] .mx-master-detail-content-hidden {
     }
 
     .dijitPlaceHolder {
-        filter: ""; /* make this show up in IE6 after the rendering of the widget */
+        filter: ''; /* make this show up in IE6 after the rendering of the widget */
     }
 
     .dijitValidationTextBoxError input.dijitValidationInner,

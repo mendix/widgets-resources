@@ -10,8 +10,8 @@
     },
     "license": "Apache-2.0",
     "config": {
-        "widgetPath": "../test-project/mxproject/widgets",
-        "projectPath": "../test-project/mxproject",
+        "widgetPath": "./tests/TestProjects/Mendix8/widgets",
+        "projectPath": "./tests/TestProjects/Mendix8",
         "mendixHost": "http://localhost:8080/",
         "developmentPort": "3000",
         "subprojectFolder": "packages-web/video-player",

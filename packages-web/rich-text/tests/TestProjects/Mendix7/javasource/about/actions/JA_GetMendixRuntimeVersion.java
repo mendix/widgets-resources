@@ -21,7 +21,7 @@ public class JA_GetMendixRuntimeVersion extends CustomJavaAction<java.lang.Strin
 		super(context);
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.String executeAction() throws Exception
 	{
 		// BEGIN USER CODE
@@ -37,7 +37,7 @@ public class JA_GetMendixRuntimeVersion extends CustomJavaAction<java.lang.Strin
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "JA_GetMendixRuntimeVersion";

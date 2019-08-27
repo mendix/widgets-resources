@@ -1,0 +1,45 @@
+@mixin button-variant($color, $background, $border, $hover) {
+    color: $color;
+    border-color: $border;
+    background-color: $background;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active,
+    .open > &.dropdown-toggle {
+        color: $color;
+        border-color: $hover;
+        background-color: $hover;
+    }
+    &:active,
+    &.active,
+    .open > &.dropdown-toggle {
+        background-image: none;
+    }
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] {
+        &,
+        &:hover,
+        &:focus,
+        &:active,
+        &.active {
+            border-color: $border;
+            background-color: $background;
+        }
+    }
+    &.btn-bordered {
+        color: $border;
+        background-color: transparent;
+        &:hover,
+        &:focus,
+        &:active,
+        &.active,
+        .open > &.dropdown-toggle {
+            color: $color;
+            border-color: $border;
+            background-color: $background;
+        }
+    }
+}

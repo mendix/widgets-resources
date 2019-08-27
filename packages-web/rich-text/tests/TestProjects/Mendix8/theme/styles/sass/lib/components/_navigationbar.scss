@@ -1,0 +1,121 @@
+/* ==========================================================================
+   Navigation
+
+   Default Mendix Navigation Bar
+========================================================================== */
+
+.mx-navbar {
+    border-radius: 0;
+    margin: 0;
+    border-style: none;
+    background-color: $navtopbar-bg;
+    ul.nav {
+        margin: 0; // weird -margin if screen gets small (bootstrap)
+        /* Navigation item */
+        > li.mx-navbar-item > a {
+            @include font(normal);
+            border-radius: 0;
+            padding: 15px 20px;
+            color: $navtopbar-color;
+            font-size: $navtopbar-font-size;
+            vertical-align: middle;
+            /* Dropdown arrow */
+            .caret {
+                border-top-color: $navtopbar-color;
+                border-bottom-color: $navtopbar-color;
+            }
+            &:hover,
+            &:focus,
+            &.active {
+                background-color: $navtopbar-bg-hover;
+                color: $navtopbar-color-hover;
+                text-decoration: none;
+                .caret {
+                    border-top-color: $navtopbar-color-active;
+                    border-bottom-color: $navtopbar-color-active;
+                }
+            }
+            &.active {
+                color: $navtopbar-color-active;
+                background-color: $navtopbar-bg-active;
+            }
+            /* Dropdown */
+            .mx-navbar-submenu:before {
+                position: absolute;
+                top: -9px;
+                left: 15px;
+                width: 0;
+                height: 0;
+                border-width: 0 9px 9px 9px;
+                border-style: solid;
+                border-color: transparent transparent $navtopbar-border-color transparent;
+                content: "";
+                transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+            }
+            // Image
+            img {
+                width: 20px; // Default size (so it looks good)
+                height: auto;
+            }
+            .glyphicon {
+                vertical-align: middle;
+                font-size: $navtopbar-glyph-size;
+                top: -1px;
+            }
+        }
+        /* When hovering or the dropdown is open */
+        > .mx-navbar-item > a:hover,
+        > .mx-navbar-item > a:focus,
+        > .mx-navbar-item.active a,
+        > .mx-navbar-item.open > a,
+        > .mx-navbar-item.open > a:hover,
+        > .mx-navbar-item.open > a:focus {
+            background-color: $navtopbar-bg-hover;
+            color: $navtopbar-color-hover;
+            text-decoration: none;
+            .caret {
+                border-top-color: $navtopbar-color-hover;
+                border-bottom-color: $navtopbar-color-hover;
+            }
+        }
+        > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
+            background-color: $navtopbar-sub-bg-active;
+            color: $navtopbar-sub-color-active;
+            .caret {
+                border-top-color: $navtopbar-sub-color-active;
+                border-bottom-color: $navtopbar-sub-color-active;
+            }
+        }
+    }
+    @media (max-width: $screen-sm) {
+        ul.nav > li.mx-navbar-item > a {
+            padding: 10px 20px;
+        }
+        .mx-navbar-item.open .dropdown-menu {
+            background-color: $navtopbar-sub-bg;
+            border-radius: 0;
+            padding: 0;
+            > li.mx-navbar-subitem > a {
+                @include font(normal);
+                padding: 10px 20px;
+                border-radius: 0;
+                color: $navtopbar-sub-color;
+                font-size: $navtopbar-sub-font-size;
+                &:hover,
+                &:focus {
+                    color: $navtopbar-sub-color-hover;
+                    background-color: $navtopbar-sub-bg-hover;
+                }
+                &.active {
+                    color: $navtopbar-sub-color-active;
+                    background-color: $navtopbar-sub-bg-active;
+                }
+            }
+        }
+    }
+    /* remove focus */
+    &:focus {
+        outline: 0;
+    }
+}

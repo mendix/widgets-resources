@@ -1,7 +1,14 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
 /* ==========================================================================
    Glyphicons
 
-   Glyphicons alternaed to use with Mendix
+   Default Mendix Glyphicons
 ========================================================================== */
 
 .mx-glyphicon {
@@ -10,7 +17,7 @@
         margin-top: -0.2em;
         margin-right: 0.4555555em;
         vertical-align: middle;
-        font-family: "Glyphicons Halflings";
+        font-family: 'Glyphicons Halflings';
         font-weight: $font-weight-normal;
         font-style: normal;
         line-height: inherit;

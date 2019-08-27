@@ -1,4 +1,11 @@
 //
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+//
 // ██████╗  █████╗ ███████╗██╗ ██████╗
 // ██╔══██╗██╔══██╗██╔════╝██║██╔════╝
 // ██████╔╝███████║███████╗██║██║
@@ -77,14 +84,14 @@ $link-hover-color: darken($link-color, 15%) !default;
 //## Change your font family, weight, line-height, headings and more (used in components/typography)
 
 // Font Family Import (Used for google font plugin in theme creater https://ux.mendix.com/theme-creator.html)
-$font-family-import: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" !default;
+$font-family-import: 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' !default;
 @if $font-family-import != false {
     // Only import, if the import is set
     @import url($font-family-import);
 }
 
 // Font Family / False = fallback from Bootstrap (Helvetica Neue)
-$font-family-base: "Open Sans", sans-serif !default;
+$font-family-base: 'Open Sans', sans-serif !default;
 
 // Font Sizes
 $font-size-large: 16px !default;

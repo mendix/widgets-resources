@@ -1,7 +1,14 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
 /* ==========================================================================
    Checkbox
 
-   Default checkbox styling
+   Default Mendix Checkbox Widget
 ========================================================================== */
 
 .mx-checkbox.label-after {
@@ -12,7 +19,7 @@
     }
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
     position: relative !important; //Remove after mxui merge
     width: 16px;
     height: 16px;
@@ -35,7 +42,7 @@ input[type="checkbox"] {
     }
     &:before {
         // Checkbox
-        content: "";
+        content: '';
         width: 100%;
         height: 100%;
         border-radius: $form-input-border-radius;
@@ -54,7 +61,7 @@ input[type="checkbox"] {
         transform: rotate(-45deg);
     }
     &:not(:disabled):not(:checked):hover:after {
-        content: "";
+        content: '';
         border-color: $form-input-bg-hover; // color of checkmark on hover
     }
     &:checked:before {
@@ -62,7 +69,7 @@ input[type="checkbox"] {
         background-color: $form-input-border-focus-color;
     }
     &:checked:after {
-        content: "";
+        content: '';
     }
     &:disabled:before {
         background-color: $form-input-bg-disabled;

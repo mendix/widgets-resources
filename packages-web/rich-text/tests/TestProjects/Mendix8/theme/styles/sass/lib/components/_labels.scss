@@ -1,0 +1,52 @@
+/* ==========================================================================
+   Labels
+
+   Default labels combined with Bootstrap labels
+========================================================================== */
+
+.label {
+    @include font(bold);
+    border-radius: 0.25em;
+    display: inline;
+    padding: 0.2em 0.6em 0.3em !important;
+    color: #fff;
+    vertical-align: baseline;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 100%;
+    line-height: 1;
+}
+
+//== Design Properties
+//## Helper classes to change the look and feel of the component
+//-------------------------------------------------------------------------------------------------------------------//
+// Color variations
+.label-default {
+    background-color: $label-default-bg;
+    color: $label-default-color;
+}
+
+.label-primary {
+    background-color: $label-primary-bg;
+    color: $label-primary-color;
+}
+
+.label-success {
+    background-color: $label-success-bg;
+    color: $label-success-color;
+}
+
+.label-info {
+    background-color: $label-info-bg;
+    color: $label-info-color;
+}
+
+.label-warning {
+    background-color: $label-warning-bg;
+    color: $label-warning-color;
+}
+
+.label-danger {
+    background-color: $label-danger-bg;
+    color: $label-danger-color;
+}

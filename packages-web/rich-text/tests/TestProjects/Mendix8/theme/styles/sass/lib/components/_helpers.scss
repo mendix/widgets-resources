@@ -1,0 +1,105 @@
+/* ==========================================================================
+   Helpers
+
+   Default Mendix Helpers
+========================================================================== */
+
+.show {
+    display: block !important;
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.display-ie8-only:not([attr*=""]) {
+    display: none;
+    padding: 0;
+}
+
+.list-nostyle {
+    ul {
+        padding: 0;
+        margin: 0;
+        li {
+            list-style-type: none !important;
+        }
+    }
+}
+
+.nowrap,
+.nowrap * {
+    // Star for inside an element, IE8 span > a
+    white-space: nowrap;
+}
+
+.form-disabled p {
+    @extend .form-control;
+    background-color: $form-input-bg-disabled !important;
+}
+
+.padding-bottom-none {
+    padding-bottom: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+// Vertical Align Elements in a bootstrap grid (place on container)
+.v-center {
+    display: table;
+    width: 100%;
+    &:before,
+    &:after {
+        display: none;
+    }
+    .row {
+        display: table-row;
+    }
+    div[class*="col-"] {
+        display: table-cell;
+        vertical-align: middle;
+        float: none;
+
+        &:first-child {
+            padding-left: 0;
+        }
+        &:last-child {
+            padding-right: 0;
+        }
+    }
+}
+
+// Remove padding for Bootstrap columns, add class on row
+.no-gutter > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+// Render DIV as Table Cells
+.table {
+    display: table;
+}
+
+.table-cell {
+    display: table-cell;
+}
+
+// Align options
+.align-top {
+    vertical-align: top;
+}
+
+.align-middle {
+    vertical-align: middle;
+}
+
+.align-bottom {
+    vertical-align: bottom;
+}

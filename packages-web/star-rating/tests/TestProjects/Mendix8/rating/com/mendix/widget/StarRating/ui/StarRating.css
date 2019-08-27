@@ -1,0 +1,9 @@
+.custom {
+    font-size: 30px;
+}
+.custom-empty {
+    color: #ccc;
+}
+.custom-full {
+    color: yellow;
+}

@@ -1,3 +1,10 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
 body {
     height: 100%;
 }
@@ -145,36 +152,36 @@ body {
             .loginpage-image {
                 height: 100%;
                 animation: makePointer 1s ease-out both;
-                background: left / cover no-repeat url("../../../resources/work-do-more.jpeg"); // Microsoft EDGE
+                background: left / cover no-repeat url('../../../resources/work-do-more.jpeg'); // Microsoft EDGE
                 background: left / cover no-repeat
                         linear-gradient(to right, rgba($brand-primary, 0.9) 0%, rgba($brand-primary, 0.6) 100%),
-                    left / cover no-repeat url("../../../resources/work-do-more.jpeg");
+                    left / cover no-repeat url('../../../resources/work-do-more.jpeg');
                 background: left / cover no-repeat -moz-linear-gradient(left, rgba($brand-primary, 0.9) 0%, rgba(
                                     $brand-primary,
                                     0.6
                                 )
                                 100%),
-                    left / cover no-repeat url("../../../resources/work-do-more.jpeg");
+                    left / cover no-repeat url('../../../resources/work-do-more.jpeg');
                 background: left / cover no-repeat -webkit-gradient(linear, left bottom, right bottom, color-stop(0%, rgba($brand-primary, 0.9)), color-stop(100%, rgba($brand-primary, 0.6))),
-                    left / cover no-repeat url("../../../resources/work-do-more.jpeg");
+                    left / cover no-repeat url('../../../resources/work-do-more.jpeg');
                 background: left / cover no-repeat -webkit-linear-gradient(left, rgba($brand-primary, 0.9) 0%, rgba(
                                     $brand-primary,
                                     0.6
                                 )
                                 100%),
-                    left / cover no-repeat url("../../../resources/work-do-more.jpeg");
+                    left / cover no-repeat url('../../../resources/work-do-more.jpeg');
                 background: left / cover no-repeat -o-linear-gradient(left, rgba($brand-primary, 0.9) 0%, rgba(
                                     $brand-primary,
                                     0.6
                                 )
                                 100%),
-                    left / cover no-repeat url("../../../resources/work-do-more.jpeg");
+                    left / cover no-repeat url('../../../resources/work-do-more.jpeg');
                 background: left / cover no-repeat -ms-linear-gradient(left, rgba($brand-primary, 0.9) 0%, rgba(
                                     $brand-primary,
                                     0.6
                                 )
                                 100%),
-                    left / cover no-repeat url("../../../resources/work-do-more.jpeg");
+                    left / cover no-repeat url('../../../resources/work-do-more.jpeg');
                 -webkit-clip-path: polygon(0% 0%, 100% 0, 100% 50%, 100% 100%, 0% 100%);
                 clip-path: polygon(0% 0%, 100% 0, 100% 50%, 100% 100%, 0% 100%);
             }

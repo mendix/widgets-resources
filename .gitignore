@@ -8,6 +8,8 @@ mxproject
 coverage
 
 **/TestProjects/*/.mendix-cache/
+**/TestProjects/*/*.lock
+**/TestProjects/*/*.bak
 **/TestProjects/*/.svn/
 **/TestProjects/*/GPUCache/
 **/TestProjects/*/deployment/

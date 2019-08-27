@@ -1,5 +1,12 @@
-import { TextBox, TextBoxVertical } from "./textbox";
-import { input } from "../variables";
+import { TextBox, TextBoxVertical } from './textbox';
+import { input } from '../variables';
+
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
+//
 
 /* ==========================================================================
     Drop Down
@@ -10,11 +17,11 @@ import { input } from "../variables";
 export const DropDown = {
     container: {
         // All ViewStyle properties are allowed
-        ...TextBox.container
+        ...TextBox.container,
     },
     label: {
         // All TextStyle properties are allowed
-        ...TextBox.label
+        ...TextBox.label,
     },
     pickerIOS: {
         // All ViewStyle properties are allowed
@@ -38,16 +45,16 @@ export const DropDown = {
         borderRadius: input.radius,
 
         paddingHorizontal: input.paddingHorizontal,
-        paddingVertical: input.paddingVertical
+        paddingVertical: input.paddingVertical,
     },
     valueDisabled: {
         // All TextStyle properties are allowed
-        backgroundColor: input.disabledBackgroundColor
+        backgroundColor: input.disabledBackgroundColor,
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        ...TextBox.validationMessage
-    }
+        ...TextBox.validationMessage,
+    },
 };
 export const DropDownVertical = {
     container: TextBoxVertical.container,
@@ -65,7 +72,7 @@ export const DropDownVertical = {
         borderWidth: input.borderWidth,
 
         paddingVertical: input.paddingVertical,
-        paddingHorizontal: input.paddingHorizontal
+        paddingHorizontal: input.paddingHorizontal,
     },
-    validationMessage: TextBoxVertical.validationMessage
+    validationMessage: TextBoxVertical.validationMessage,
 };
