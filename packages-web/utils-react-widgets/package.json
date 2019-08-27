@@ -6,8 +6,6 @@
         "start": "webpack-dev-server --config=./configs/webpack.config.dev.js --open",
         "dev": "gulp watch --gulpfile scripts/gulp.js",
         "test:e2e": "wdio ./test-configs/e2e/wdio.conf.js",
-        "lint": "gulp lint --gulpfile scripts/gulp.js --subProjectPath packages-web/badge",
-        "lint:fix": "npm run lint -- --fix",
         "deploy": " npm run updateProject && npm run deployApp",
         "build": "gulp build --gulpfile scripts/gulp.js",
         "release": "gulp release --gulpfile scripts/gulp.js --silent"
