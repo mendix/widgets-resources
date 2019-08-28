@@ -12,7 +12,7 @@
 ========================================================================== */
 // Bordered
 .listview-bordered.mx-listview {
-    li {
+    & > ul > li {
         border: 1px solid $grid-border-color;
         border-top: 0;
 
@@ -29,14 +29,14 @@
 
 // Striped
 .listview-striped.mx-listview {
-    li:nth-child(2n + 1) {
+    & > ul > li:nth-child(2n + 1) {
         background-color: $grid-bg-striped;
     }
 }
 
 // Items as seperated blocks
 .listview-seperated.mx-listview {
-    li {
+    & > ul > li {
         margin-bottom: $gutter-size;
         border-width: 1px;
         border-style: solid;
@@ -46,7 +46,7 @@
 
 // Remove all styling
 .listview-stylingless.mx-listview {
-    li {
+    & > ul > li {
         padding: 0;
         cursor: default;
         border: 0;
@@ -72,7 +72,7 @@
 
 // Hover style activated
 .listview-hover.mx-listview {
-    li {
+    & > ul > li {
         &:hover,
         &:focus,
         &:active {
@@ -91,13 +91,13 @@
 
 // Templategrid Row Sizes
 .listview-lg.mx-listview {
-    li {
+    & > ul > li {
         padding: ($grid-padding-top * 2) ($grid-padding-right * 2) ($grid-padding-bottom * 2) ($grid-padding-left * 2);
     }
 }
 
 .listview-sm.mx-listview {
-    li {
+    & > ul > li {
         padding: ($grid-padding-top / 2) ($grid-padding-right / 2) ($grid-padding-bottom / 2) ($grid-padding-left / 2);
     }
 }
