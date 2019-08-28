@@ -1,5 +1,5 @@
-import { deviceHeight, deviceWidth } from '../../variables';
-import { PixelRatio } from 'react-native';
+import { PixelRatio }                from "react-native";
+import { deviceHeight, deviceWidth } from "../../variables";
 
 const pixelRatio = PixelRatio.get();
 
@@ -10,7 +10,7 @@ const pixelRatio = PixelRatio.get();
  *
  * @return  {number} Returns adjusted font size
  */
-export default function(size) {
+export default function (size) {
     if (pixelRatio === 2) {
         // iphone 5s and older Androids
         if (deviceWidth < 360) return size * 0.95;

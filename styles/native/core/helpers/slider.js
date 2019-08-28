@@ -1,5 +1,5 @@
-import { background, border, brand, contrast } from "../variables";
-import { Platform } from "react-native";
+import { Platform }        from "react-native";
+import { brand, contrast } from "../variables";
 
 //
 // DISCLAIMER:

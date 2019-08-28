@@ -1,6 +1,6 @@
-import { setColorBasedOnBackground, setContrastScale } from "../core/_helperfunctions/convertcolors";
-import { Platform } from "react-native";
-import adjustFont from "../core/_helperfunctions/adjustfont";
+import { Platform }                                    from "react-native";
+import adjustFont                                      from "../core/helpers/_functions/adjustfont";
+import { setColorBasedOnBackground, setContrastScale } from "../core/helpers/_functions/convertcolors";
 
 /*
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)
@@ -16,7 +16,7 @@ export const brand = {
     primary: "#0595DB",
     success: "#76CA02",
     warning: "#f99b1d",
-    danger: "#ed1c24"
+    danger: "#ed1c24",
 };
 
 // Dark Mode
@@ -28,7 +28,7 @@ const backgroundSecondaryContrast = darkMode ? 0.11 : 0.03;
 
 export const background = {
     primary: backgroundColor,
-    secondary: setContrastScale(backgroundSecondaryContrast, backgroundColor)
+    secondary: setContrastScale(backgroundSecondaryContrast, backgroundColor),
 };
 
 // Contrast (Gray) colors based on background.primary
@@ -39,14 +39,14 @@ export const contrast = {
     regular: setContrastScale(0.5, background.primary),
     low: setContrastScale(0.35, background.primary),
     lower: setContrastScale(0.2, background.primary),
-    lowest: setContrastScale(0.05, background.primary)
+    lowest: setContrastScale(0.05, background.primary),
 };
 
 // Border Style
 export const border = {
     color: setContrastScale(0.17, background.primary),
     width: 1,
-    radius: 5
+    radius: 5,
 };
 
 // Font Styles
@@ -65,7 +65,7 @@ export const font = {
     weightNormal: "normal",
     weightSemiBold: "600",
     weightBold: "bold",
-    family: Platform.select({ ios: "System", android: "normal" })
+    family: Platform.select({ ios: "System", android: "normal" }),
 };
 
 // Spacing
@@ -76,7 +76,7 @@ export const spacing = {
     regular: 20,
     large: 25,
     larger: 30,
-    largest: 40
+    largest: 40,
 };
 
 // Button Styles
@@ -87,33 +87,33 @@ export const button = {
     header: {
         color: brand.primary,
         borderColor: "transparent",
-        backgroundColor: "transparent"
+        backgroundColor: "transparent",
     },
     primary: {
         color: "#FFF",
         borderColor: brand.primary,
-        backgroundColor: brand.primary
+        backgroundColor: brand.primary,
     },
     secondary: {
         color: brand.primary,
         borderColor: brand.primary,
-        backgroundColor: "transparent"
+        backgroundColor: "transparent",
     },
     success: {
         color: "#FFF",
         borderColor: brand.success,
-        backgroundColor: brand.success
+        backgroundColor: brand.success,
     },
     warning: {
         color: "#FFF",
         borderColor: brand.warning,
-        backgroundColor: brand.warning
+        backgroundColor: brand.warning,
     },
     danger: {
         color: "#FFF",
         borderColor: brand.danger,
-        backgroundColor: brand.danger
-    }
+        backgroundColor: brand.danger,
+    },
 };
 
 //Input Styles
@@ -137,5 +137,5 @@ export const input = {
     // Alignment
     textAlign: "left",
     paddingHorizontal: spacing.small,
-    paddingVertical: spacing.small
+    paddingVertical: spacing.small,
 };

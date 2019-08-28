@@ -4,7 +4,6 @@
 // Customizing core files will make updating Atlas much more difficult in the future.
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
-
 /* ==========================================================================
    Listview
 
@@ -16,10 +15,12 @@
     li {
         border: 1px solid $grid-border-color;
         border-top: 0;
+
         &:first-child {
             border-top: 1px solid $grid-border-color;
             border-radius: 0;
         }
+
         &:last-child {
             border-radius: 0;
         }
@@ -50,17 +51,39 @@
         cursor: default;
         border: 0;
         background-color: transparent;
+
         &:hover,
         &:focus,
         &:active {
             background-color: transparent;
         }
+
         &.selected {
             background-color: transparent !important;
+
             &:hover,
             &:focus,
             &:active {
                 background-color: transparent !important;
+            }
+        }
+    }
+}
+
+// Hover style activated
+.listview-hover.mx-listview {
+    li {
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: $grid-bg-hover !important;
+        }
+
+        &.selected {
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: $grid-bg-selected-hover !important;
             }
         }
     }
@@ -86,6 +109,7 @@
         display: block; // normal a table
         margin-right: -1 * $gutter-size;
         margin-left: -1 * $gutter-size;
+
         &::before,
         &::after {
             // clearfix
@@ -93,6 +117,7 @@
             clear: both;
             content: ' ';
         }
+
         & > li {
             // bootstrap col
             position: relative;
@@ -105,47 +130,61 @@
             @media (max-width: $screen-sm-max) {
                 width: 100% !important;
             }
+
             & > .mx-dataview {
                 overflow: hidden;
             }
         }
     }
+
     &.lv-col-xs-12 > ul > li {
         width: 100% !important;
     }
+
     &.lv-col-xs-11 > ul > li {
         width: 91.66666667% !important;
     }
+
     &.lv-col-xs-10 > ul > li {
         width: 83.33333333% !important;
     }
+
     &.lv-col-xs-9 > ul > li {
         width: 75% !important;
     }
+
     &.lv-col-xs-8 > ul > li {
         width: 66.66666667% !important;
     }
+
     &.lv-col-xs-7 > ul > li {
         width: 58.33333333% !important;
     }
+
     &.lv-col-xs-6 > ul > li {
         width: 50% !important;
     }
+
     &.lv-col-xs-5 > ul > li {
         width: 41.66666667% !important;
     }
+
     &.lv-col-xs-4 > ul > li {
         width: 33.33333333% !important;
     }
+
     &.lv-col-xs-3 > ul > li {
         width: 25% !important;
     }
+
     &.lv-col-xs-2 > ul > li {
         width: 16.66666667% !important;
     }
+
     &.lv-col-xs-1 > ul > li {
         width: 8.33333333% !important;
     }
+
     @media (min-width: $screen-sm) {
         &.lv-col-sm-12 > ul > li {
             width: 100% !important;

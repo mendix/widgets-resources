@@ -4,7 +4,6 @@
 // Customizing core files will make updating Atlas much more difficult in the future.
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
-
 /* ==========================================================================
    Datagrid Default
 
@@ -17,10 +16,12 @@
         th {
             border-width: 0;
         }
+
         tbody tr {
             td {
                 border-top-width: 0;
             }
+
             &:nth-child(odd) td {
                 background-color: $grid-bg-striped;
             }
@@ -31,22 +32,25 @@
 // Bordered style
 .datagrid-bordered.mx-datagrid {
     table {
+        border: 1px solid;
+
         th {
             border: 1px solid $grid-border-color;
-            border-bottom-width: 1px;
         }
-        border: 1px solid;
+
         tbody tr {
             td {
                 border: 1px solid $grid-border-color;
             }
         }
     }
+
     tfoot {
         > tr > th {
             border-width: 0;
             background-color: $grid-footer-bg;
         }
+
         > tr > td {
             border-width: 1px;
         }
@@ -57,12 +61,29 @@
 .datagrid-transparent.mx-datagrid {
     table {
         background-color: transparent;
+
         tbody tr {
             &:nth-of-type(odd) {
                 background-color: transparent;
             }
+
             td {
                 background-color: transparent;
+            }
+        }
+    }
+}
+
+// Hover style activated
+.datagrid-hover.mx-datagrid {
+    table {
+        tbody tr {
+            &:hover td {
+                background-color: $grid-bg-hover !important;
+            }
+
+            &.selected:hover td {
+                background-color: $grid-bg-selected-hover !important;
             }
         }
     }
@@ -72,13 +93,12 @@
 .datagrid-lg.mx-datagrid {
     table {
         th {
-            padding: ($grid-padding-top * 2) ($grid-padding-right * 2) ($grid-padding-bottom * 2)
-                ($grid-padding-left * 2);
+            padding: ($grid-padding-top * 2) ($grid-padding-right * 2) ($grid-padding-bottom * 2) ($grid-padding-left * 2);
         }
+
         tbody tr {
             td {
-                padding: ($grid-padding-top * 2) ($grid-padding-right * 2) ($grid-padding-bottom * 2)
-                    ($grid-padding-left * 2);
+                padding: ($grid-padding-top * 2) ($grid-padding-right * 2) ($grid-padding-bottom * 2) ($grid-padding-left * 2);
             }
         }
     }
@@ -87,13 +107,12 @@
 .datagrid-sm.mx-datagrid {
     table {
         th {
-            padding: ($grid-padding-top / 2) ($grid-padding-right / 2) ($grid-padding-bottom / 2)
-                ($grid-padding-left / 2);
+            padding: ($grid-padding-top / 2) ($grid-padding-right / 2) ($grid-padding-bottom / 2) ($grid-padding-left / 2);
         }
+
         tbody tr {
             td {
-                padding: ($grid-padding-top / 2) ($grid-padding-right / 2) ($grid-padding-bottom / 2)
-                    ($grid-padding-left/ 2);
+                padding: ($grid-padding-top / 2) ($grid-padding-right / 2) ($grid-padding-bottom / 2) ($grid-padding-left/ 2);
             }
         }
     }
@@ -105,23 +124,29 @@
     .mx-grid-search-button {
         @extend .btn-primary;
     }
+
     .mx-grid-reset-button {
         display: none;
     }
+
     .mx-grid-search-item {
         display: block;
     }
+
     .mx-grid-search-label {
         display: none;
     }
+
     .mx-grid-searchbar {
         .mx-grid-search-controls {
             position: absolute;
             right: 0;
         }
+
         .mx-grid-search-input {
             width: 80%;
             padding-left: 0;
+
             .form-control {
                 height: 35px;
                 font-size: 12px;

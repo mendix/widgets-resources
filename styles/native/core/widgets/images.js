@@ -1,5 +1,3 @@
-import { border } from '../variables';
-
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.
@@ -19,7 +17,7 @@ export const Image = {
     },
     image: {
         // All ImageStyle properties are allowed
-        resizeMode: 'cover',
+        resizeMode: "cover",
     },
 };
 
@@ -29,6 +27,6 @@ export const NativeDynamicImage = {
     },
     image: {
         // All ImageStyle properties are allowed
-        resizeMode: 'cover',
+        resizeMode: "cover",
     },
 };

@@ -11,87 +11,136 @@
    Flex classes
 ========================================================================== */
 
-
 // These classes define the order of the children
+.flex-row {
+    flex-direction: row !important;
+}
+
 .flex-column {
-    flex-direction: column;
+    flex-direction: column !important;
 }
+
 .flex-row-reverse {
-    flex-direction: row-reverse;
+    flex-direction: row-reverse !important;
 }
+
 .flex-column-reverse {
-    flex-direction: column-reverse;
+    flex-direction: column-reverse !important;
 }
+
 .flex-wrap {
-    flex-wrap: wrap;
+    flex-wrap: wrap !important;
+}
+
+.flex-nowrap {
+    flex-wrap: nowrap !important;
+}
+
+.flex-wrap-reverse {
+    flex-wrap: wrap-reverse !important;
 }
 
 // Align children in both directions
 .flex-center {
-    justify-content: center;
-    align-items: center;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 // These classes define the alignment of the children
-.justify-content-center {
-    justify-content: center;
+.justify-content-start {
+    justify-content: flex-start !important;
 }
+
 .justify-content-end {
-    justify-content: flex-end;
+    justify-content: flex-end !important;
 }
-.justify-content-space-between {
-    justify-content: space-between;
+
+.justify-content-center {
+    justify-content: center !important;
 }
-.justify-content-space-around {
-    justify-content: space-around;
+
+.justify-content-between {
+    justify-content: space-between !important;
 }
-.justify-content-space-evenly {
-    justify-content: space-evenly;
+
+.justify-content-around {
+    justify-content: space-around !important;
+}
+
+.justify-content-evenly {
+    // Not Supported in IE11
+    justify-content: space-evenly !important;
 }
 
 /// These classes define the alignment of the children in the cross-direction
-.align-children-center {
-    align-items: center;
+.align-children-start {
+    align-items: flex-start !important;
 }
+
 .align-children-end {
-    align-items: flex-end;
+    align-items: flex-end !important;
 }
-.align-children-stretch {
-    align-items: stretch;
+
+.align-children-center {
+    align-items: center !important;
 }
+
 .align-children-baseline {
-    align-items: baseline;
+    align-items: baseline !important;
+}
+
+.align-children-stretch {
+    align-items: stretch !important;
 }
 
 /// These classes define the alignment of the rows of children in the cross-direction
-.align-content-center {
-    align-content: center;
+.align-content-start {
+    align-content: flex-start !important;
 }
+
 .align-content-end {
-    align-content: flex-end;
+    align-content: flex-end !important;
 }
+
+.align-content-center {
+    align-content: center !important;
+}
+
 .align-content-between {
-    align-content: space-between;
+    align-content: space-between !important;
 }
+
 .align-content-around {
-    align-content: space-around;
+    align-content: space-around !important;
+}
+
+.align-content-stretch {
+    align-content: stretch !important;
 }
 
 /// These classes allow the default alignment to be overridden for individual items
+.align-self-auto {
+    align-self: auto !important;
+}
+
 .align-self-start {
-    align-self: flex-start;
+    align-self: flex-start !important;
 }
+
 .align-self-end {
-    align-self: flex-end;
+    align-self: flex-end !important;
 }
+
 .align-self-center {
-    align-self: center;
+    align-self: center !important;
 }
+
 .align-self-baseline {
-    align-self: baseline;
+    align-self: baseline !important;
 }
+
 .align-self-stretch {
-    align-self: stretch;
+    align-self: stretch !important;
 }
 
 /// These classes define the percentage of available free space within a flex container a flex item will take.

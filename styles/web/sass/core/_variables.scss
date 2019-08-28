@@ -97,7 +97,8 @@ $link-hover-color:                      darken($link-color, 15%) !default;
 
 // Font Family Import (Used for google font plugin in theme creater https://ux.mendix.com/theme-creator.html)
 $font-family-import:                    "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" !default;
-@if $font-family-import != false { // Only import, if the import is set
+@if $font-family-import != false {
+    // Only import, if the import is set
     @import url($font-family-import);
 }
 

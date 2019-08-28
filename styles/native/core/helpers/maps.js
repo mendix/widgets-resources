@@ -1,4 +1,4 @@
-import { brand, border } from '../variables';
+import { border, brand } from "../variables";
 
 //
 // DISCLAIMER:
@@ -51,6 +51,6 @@ export const mapsMaxSpace = {
 export const mapsRounded = {
     container: {
         borderRadius: border.radius,
-        overflow: 'hidden',
+        overflow: "hidden",
     },
 };

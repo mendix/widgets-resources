@@ -1,4 +1,4 @@
-import { brand, contrast, font, spacing } from '../variables';
+import { brand, contrast, font } from "../variables";
 
 //
 // DISCLAIMER:
@@ -36,7 +36,7 @@ export const textDanger = {
 };
 export const textWhite = {
     text: {
-        color: '#FFF',
+        color: "#FFF",
     },
 };
 
@@ -79,17 +79,17 @@ export const textContrastHighest = {
 // Text Alignment
 export const textLeft = {
     text: {
-        textAlign: 'left',
+        textAlign: "left",
     },
 };
 export const textCenter = {
     text: {
-        textAlign: 'center',
+        textAlign: "center",
     },
 };
 export const textRight = {
     text: {
-        textAlign: 'right',
+        textAlign: "right",
     },
 };
 
@@ -136,16 +136,16 @@ export const textLarge = {
 // Text Transformations
 export const textLowercase = {
     text: {
-        textTransform: 'lowercase',
+        textTransform: "lowercase",
     },
 };
 export const textUppercase = {
     text: {
-        textTransform: 'uppercase',
+        textTransform: "uppercase",
     },
 };
 export const textCapitalize = {
     text: {
-        textTransform: 'capitalize',
+        textTransform: "capitalize",
     },
 };

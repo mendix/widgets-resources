@@ -1,4 +1,4 @@
-import { spacing } from '../variables';
+import { spacing } from "../variables";
 
 //
 // DISCLAIMER:
