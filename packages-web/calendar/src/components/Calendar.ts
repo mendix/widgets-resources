@@ -3,7 +3,7 @@ import { CSSProperties, Component, ReactChild, createElement, ReactNode } from "
 import { Alert } from "./Alert";
 import { Container, Style } from "../utils/namespaces";
 import classNames from "classnames";
-import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
+import BigCalendar from "react-big-calendar";
 import moment from "moment";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import CustomToolbar from "./Toolbar";
@@ -15,9 +15,8 @@ import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "../ui/Calendar.scss";
 import "../ui/CalendarLoader.scss";
-import "../utils/polyfill";
 
-const localizer = momentLocalizer(moment);
+const localizer = BigCalendar.momentLocalizer(moment);
 const DragAndDropCalendar = withDragAndDrop(BigCalendar);
 
 export interface CalendarProps {
@@ -202,7 +201,7 @@ class Calendar extends Component<CalendarProps> {
         }
     };
 
-    private onEventResize = (eventInfo: Container.EventInfo) => {
+    private onEventResize = (_resizeType: string, eventInfo: Container.EventInfo) => {
         if (
             (eventInfo.start.getDate() !== eventInfo.event.start.getDate() ||
                 eventInfo.end.getDate() !== eventInfo.event.end.getDate()) &&
