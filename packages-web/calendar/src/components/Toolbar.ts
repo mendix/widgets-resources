@@ -89,7 +89,7 @@ export default class CustomToolbar extends Toolbar {
 
         return () => {
             if (this.props.view !== view.customView) {
-                this.props.onView(view.customView);
+                this.props.onViewChange(view.customView);
             }
         };
     }
