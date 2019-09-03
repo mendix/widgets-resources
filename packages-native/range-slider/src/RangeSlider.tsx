@@ -2,6 +2,7 @@ import { available, flattenStyles, toNumber, unavailable } from "@native-mobile-
 import MultiSlider, { MarkerProps } from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
+import { Big } from "big.js";
 
 import { RangeSliderProps } from "../typings/RangeSliderProps";
 import { Marker } from "./Marker";
@@ -77,8 +78,8 @@ export class RangeSlider extends Component<Props, State> {
     }
 
     private onSlide(values: number[]): void {
-        this.props.lowerValueAttribute.setTextValue(String(values[0]));
-        this.props.upperValueAttribute.setTextValue(String(values[1]));
+        this.props.lowerValueAttribute.setValue(new Big(values[0]));
+        this.props.upperValueAttribute.setValue(new Big(values[1]));
     }
 
     private onChange(values: number[]): void {
@@ -88,8 +89,8 @@ export class RangeSlider extends Component<Props, State> {
 
         this.lastLowerValue = values[0];
         this.lastUpperValue = values[1];
-        this.props.lowerValueAttribute.setTextValue(String(values[0]));
-        this.props.upperValueAttribute.setTextValue(String(values[1]));
+        this.props.lowerValueAttribute.setValue(new Big(values[0]));
+        this.props.upperValueAttribute.setValue(new Big(values[1]));
 
         if (this.props.onChange && this.props.onChange.canExecute) {
             this.props.onChange.execute();
