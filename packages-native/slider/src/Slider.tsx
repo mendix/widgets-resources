@@ -2,6 +2,7 @@ import { available, flattenStyles, toNumber, unavailable } from "@native-mobile-
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
+import { Big } from "big.js";
 
 import { SliderProps } from "../typings/SliderProps";
 import { Marker } from "./Marker";
@@ -61,7 +62,7 @@ export class Slider extends Component<Props, State> {
     }
 
     private onSlide(values: number[]): void {
-        this.props.valueAttribute.setTextValue(String(values[0]));
+        this.props.valueAttribute.setValue(new Big(values[0]));
     }
 
     private onChange(values: number[]): void {
@@ -70,7 +71,7 @@ export class Slider extends Component<Props, State> {
         }
 
         this.lastValue = values[0];
-        this.props.valueAttribute.setTextValue(String(values[0]));
+        this.props.valueAttribute.setValue(new Big(values[0]));
 
         if (this.props.onChange && this.props.onChange.canExecute) {
             this.props.onChange.execute();
