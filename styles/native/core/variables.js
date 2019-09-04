@@ -148,6 +148,7 @@ let input = {
 };
 input = merge(input, custom.input || {});
 
+// Navigation Styles
 let navigation = {
     topBar: {
         backgroundColor: background.primary,

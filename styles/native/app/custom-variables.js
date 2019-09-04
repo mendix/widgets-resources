@@ -148,15 +148,16 @@ export const input = {
     paddingVertical: spacing.small,
 };
 
+// Navigation Styles
 export const navigation = {
     topBar: {
         backgroundColor: background.primary,
         backButtonColor: contrast.highest,
-        titleColor: contrast.highest
+        titleColor: contrast.highest,
     },
     bottomBar: {
         color: contrast.high,
         selectedColor: brand.primary,
         backgroundColor: background.primary,
-    }
+    },
 };
