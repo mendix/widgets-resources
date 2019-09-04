@@ -144,4 +144,18 @@ let input = {
 };
 input = merge(input, custom.input || {});
 
-export { brand, background, border, contrast, font, spacing, button, input };
+let navigation = {
+    topBar: {
+        backgroundColor: background.primary,
+        backButtonColor: contrast.highest,
+        titleColor: contrast.highest
+    },
+    bottomBar: {
+        color: contrast.high,
+        selectedColor: brand.primary,
+        backgroundColor: background.primary,
+    }
+};
+navigation = merge(navigation, custom.navigation || {});
+
+export { brand, background, border, contrast, font, spacing, button, input, navigation };
