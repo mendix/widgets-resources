@@ -82,6 +82,8 @@ let button = {
     fontSize: font.sizeSmall,
     fontSizeIcon: font.sizeSmall,
     borderRadius: border.radius,
+    paddingVertical: Platform.select({ android: spacing.smaller, ios: spacing.smaller }),
+    paddingHorizontal: Platform.select({ android: spacing.small, ios: spacing.regular }),
 
     header: {
         color: brand.primary,
@@ -89,6 +91,8 @@ let button = {
         backgroundColor: "transparent",
         fontSize: font.size,
         fontSizeIcon: font.size,
+        paddingVertical: 0,
+        paddingHorizontal: 0,
     },
     primary: {
         color: "#FFF",
@@ -123,12 +127,12 @@ let input = {
     // Colors
     color: font.color,
     errorColor: brand.danger,
-    labelColor: contrast.low,
+    labelColor: font.color,
     borderColor: contrast.lower,
     backgroundColor: background.primary,
     disabledBackgroundColor: contrast.lowest,
     selectionColor: contrast.lower,
-    placeholderTextColor: contrast.low,
+    placeholderTextColor: contrast.regular,
     underlineColorAndroid: "transparent",
 
     // Sizes
