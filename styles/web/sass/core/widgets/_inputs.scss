@@ -82,6 +82,7 @@ select.form-control {
 .form-control.mx-selectbox {
     flex-direction: row-reverse;
     justify-content: space-between;
+    align-items: center;
 }
 
 // Not editable textarea, textarea will be rendered as a label
