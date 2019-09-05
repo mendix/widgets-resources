@@ -4,7 +4,6 @@
 // Customizing core files will make updating Atlas much more difficult in the future.
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
-
 /* ==========================================================================
    Navigation List
    
@@ -13,7 +12,8 @@
 .mx-navigationlist {
     margin: 0;
     padding: 0;
-
+    list-style: none;
+    
     li.mx-navigationlist-item {
         @include transition();
         padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
@@ -28,6 +28,7 @@
             color: inherit;
             background-color: $grid-bg-hover;
         }
+
         &.active {
             color: inherit;
             background-color: $grid-bg-selected;

@@ -32,8 +32,8 @@ export const CheckBox = {
         marginRight: Platform.select({ android: -3 }),
         thumbColorOn: background.primary,
         trackColorOn: brand.success,
-        thumbColorOff: background.lowest,
-        trackColorOff: contrast.lowest,
+        thumbColorOff: contrast.regular,
+        trackColorOff: contrast.lower,
     },
     inputDisabled: {
         opacity: Platform.select({ android: 0.5 }),
@@ -59,8 +59,19 @@ export const CheckBoxVertical = {
         ...TextBoxVertical.label,
     },
     input: {
+        ...CheckBox.input,
         alignSelf: "flex-start",
     },
-    inputError: TextBoxVertical.inputError,
-    validationMessage: TextBoxVertical.validationMessage,
+    inputDisabled: CheckBox.inputDisabled,
+    inputError: {
+        ...TextBoxVertical.inputError,
+        thumbColorOn: background.primary,
+        trackColorOn: brand.danger,
+        thumbColorOff: background.lowest,
+        trackColorOff: contrast.lowest,
+    },
+    validationMessage: {
+        ...TextBoxVertical.validationMessage,
+        alignSelf: "stretch",
+    },
 };

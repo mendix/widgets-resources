@@ -81,13 +81,20 @@ export const spacing = {
 
 // Button Styles
 export const button = {
-    fontSize: font.size,
+    fontSize: font.sizeSmall,
+    fontSizeIcon: font.sizeSmall,
     borderRadius: border.radius,
+    paddingVertical: Platform.select({ android: spacing.smaller, ios: spacing.smaller }),
+    paddingHorizontal: Platform.select({ android: spacing.small, ios: spacing.regular }),
 
     header: {
         color: brand.primary,
         borderColor: "transparent",
         backgroundColor: "transparent",
+        fontSize: font.size,
+        fontSizeIcon: font.size,
+        paddingVertical: 0,
+        paddingHorizontal: 0,
     },
     primary: {
         color: "#FFF",
@@ -118,14 +125,15 @@ export const button = {
 
 //Input Styles
 export const input = {
+    // Colors
     color: font.color,
     errorColor: brand.danger,
-    labelColor: contrast.low,
+    labelColor: font.color,
     borderColor: contrast.lower,
     backgroundColor: background.primary,
     disabledBackgroundColor: contrast.lowest,
     selectionColor: contrast.lower,
-    placeholderTextColor: contrast.low,
+    placeholderTextColor: contrast.regular,
     underlineColorAndroid: "transparent",
 
     // Sizes
@@ -138,4 +146,18 @@ export const input = {
     textAlign: "left",
     paddingHorizontal: spacing.small,
     paddingVertical: spacing.small,
+};
+
+// Navigation Styles
+export const navigation = {
+    topBar: {
+        backgroundColor: background.primary,
+        backButtonColor: contrast.highest,
+        titleColor: contrast.highest,
+    },
+    bottomBar: {
+        color: contrast.high,
+        selectedColor: brand.primary,
+        backgroundColor: background.primary,
+    },
 };

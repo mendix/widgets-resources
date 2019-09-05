@@ -52,6 +52,13 @@ export const childrenCenter = {
         ...alignChildrenCenter,
     },
 };
+export const justifyContentStart = {
+    container: {
+        // justifyContent aligns children in the main direction.
+        // For example, if children are flowing vertically, justifyContent controls how they align vertically.
+        justifyContent: "flex-start",
+    },
+};
 export const justifyContentCenter = {
     container: {
         // justifyContent aligns children in the main direction.
@@ -87,6 +94,13 @@ export const justifyContentSpaceEvenly = {
         justifyContent: "space-evenly",
     },
 };
+export const alignChildrenStart = {
+    container: {
+        // alignItems aligns children in the cross direction.
+        // For example, if children are flowing vertically, alignItems controls how they align horizontally.
+        alignItems: "flex-start",
+    },
+};
 export const alignChildrenCenter = {
     container: {
         // alignItems aligns children in the cross direction.
@@ -113,6 +127,13 @@ export const alignChildrenBaseline = {
         // alignContent aligns children in the cross direction.
         // For example, if children are flowing vertically, alignContent controls how they align horizontally.
         alignContent: "baseline",
+    },
+};
+export const alignContentStart = {
+    container: {
+        // alignContent aligns rows of children in the cross direction.
+        // For example, if children are flowing vertically, alignContent controls how they align horizontally.
+        alignContent: "flex-start",
     },
 };
 export const alignContentCenter = {
