@@ -161,3 +161,11 @@ export const navigation = {
         backgroundColor: background.primary,
     },
 };
+
+// Listview Styles
+export const listview = {
+    border: {
+        color: border.color,
+        width: border.width,
+    },
+};

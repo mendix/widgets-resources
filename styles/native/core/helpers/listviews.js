@@ -1,4 +1,4 @@
-import { border } from "../variables";
+import { listview } from "../variables";
 
 //
 // DISCLAIMER:
@@ -16,14 +16,14 @@ import { border } from "../variables";
 // List item dividers
 export const listItemBorderBottom = {
     listItem: {
-        borderColor: border.color,
-        borderBottomWidth: border.width,
+        borderColor: listview.border.color,
+        borderBottomWidth: listview.border.width,
     },
 };
 export const listItemBorderRight = {
     listItem: {
-        borderColor: border.color,
-        borderRightWidth: border.width,
+        borderColor: listview.border.color,
+        borderRightWidth: listview.border.width,
     },
 };
 
