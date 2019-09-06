@@ -19,7 +19,8 @@ theme/
 |       |   ├── base/
 |       |   ├── helpers/
 |       |   ├── widgets/
-|       |   └── _variables.js
+|       |   | _variables.js
+|       |   └── manifest.json
 |       ├── ui_resources/
 |       |   └── atlas_ui_resources/
 |       |       ├── buildingblocks/
@@ -38,7 +39,8 @@ theme/
 |           |   ├── helpers/
 |           |   ├── widgets/
 |           |   ├── widgetscustom/
-|           |   └── _variables.scss
+|           |   |   _variables.scss
+|           |   └── manifest.json
 |           ├── ui_resources/
 |           |   └── atlas_ui_resources/
 |           |       ├── buildingblocks/

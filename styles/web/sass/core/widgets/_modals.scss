@@ -52,6 +52,9 @@
 // Default Mendix Window Modal
 .mx-window {
     // If popup direct child is a dataview it gets the class mx-window-view
+    &.mx-window-view.mx-window-active .mx-window-body {
+        overflow:hidden; // hide second scrollbar in edit page
+    }
     &.mx-window-view .mx-window-body {
         padding: 0;
         // Dataview in popup

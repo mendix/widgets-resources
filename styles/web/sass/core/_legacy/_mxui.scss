@@ -2925,9 +2925,9 @@ input[type="checkbox"] {
 .mx-window-header {
     cursor: move;
 }
-//.mx-window-body {
-//    overflow: auto;
-//}
+.mx-window-body {
+    overflow: auto;
+}
 
 .mx-dropdown-list * {
     cursor: pointer;
