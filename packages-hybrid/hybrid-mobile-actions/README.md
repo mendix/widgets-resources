@@ -22,3 +22,31 @@ A collection of nanoflow actions for hybrid mobile applications.
 | Network        | Is connected                          |
 |                | Is cellular connection                |
 |                | Is Wi-Fi connection                   |
+
+## Dependencies
+
+The actions are dependent on cordova phonegap plugins. Most dependencies are already provided in the standard template.
+When building your [Hybrid mobile apps](https://docs.mendix.com/developerportal/deploy/mobileapp) Please make sure you
+add and enabled the decencies by:
+
+Enabling in the `Permissions` by selecting:
+
+-   Calendar
+-   Camera
+-   Photo Library
+-   Contacts
+
+And add to the `Custom Phonegap/Cordova configuration` the following snippet.
+
+```xml
+    <plugin name="cordova-plugin-android-fingerprint-auth" source="npm" spec="1.5.0" />
+    <plugin name="cordova-plugin-touch-id" source="npm" spec="3.4.0" />
+    <plugin name="cordova-clipboard" source="npm" spec="1.3.0" />
+```
+
+Please note that the above plugins are not available in the in standard
+[Mendix Mobile app](https://docs.mendix.com/refguide/getting-the-mendix-app) and can only be test with a
+[custom build app](https://docs.mendix.com/developerportal/deploy/mobileapp).
+
+These configurations can also be set when
+[building a custom phonegap package](https://docs.mendix.com/refguide/customizing-phonegap-build-packages#1-introduction).
