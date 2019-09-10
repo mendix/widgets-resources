@@ -153,14 +153,23 @@ let navigation = {
     topBar: {
         backgroundColor: background.primary,
         backButtonColor: contrast.highest,
-        titleColor: contrast.highest
+        titleColor: contrast.highest,
     },
     bottomBar: {
         color: contrast.high,
         selectedColor: brand.primary,
         backgroundColor: background.primary,
-    }
+    },
 };
 navigation = merge(navigation, custom.navigation || {});
 
-export { brand, background, border, contrast, font, spacing, button, input, navigation };
+// Listview Styles
+let listview = {
+    border: {
+        color: border.color,
+        width: border.width,
+    },
+};
+listview = merge(listview, custom.listview || {});
+
+export { brand, background, border, contrast, font, spacing, button, input, navigation, listview };
