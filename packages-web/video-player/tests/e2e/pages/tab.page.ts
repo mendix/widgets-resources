@@ -1,46 +1,37 @@
 class TabPage {
-    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
-    public get youtube() {
+    get youtube(): WebdriverIO.Element {
         return $(".widget-video-player.widget-video-player-container.mx-name-videoPlayer1.size-box iframe");
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
-    public get vimeo() {
+    get vimeo(): WebdriverIO.Element {
         return $(".widget-video-player.widget-video-player-container.mx-name-videoPlayer5.size-box iframe");
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
-    public get html5() {
+    get html5(): WebdriverIO.Element {
         return $(".widget-video-player.widget-video-player-container.mx-name-videoPlayer3.size-box video");
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
-    public get dailymotion() {
+    get dailymotion(): WebdriverIO.Element {
         return $(".widget-video-player.widget-video-player-container.mx-name-videoPlayer4.size-box iframe");
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
-    public get youtubeTab() {
+    get youtubeTab(): WebdriverIO.Element {
         return $(".mx-name-tabPage1");
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
-    public get vimeoTab() {
+    get vimeoTab(): WebdriverIO.Element {
         return $(".mx-name-tabPage5");
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
-    public get html5Tab() {
+    get html5Tab(): WebdriverIO.Element {
         return $(".mx-name-tabPage3");
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility,@typescript-eslint/explicit-function-return-type
-    public get dailymotionTab() {
+    get dailymotionTab(): WebdriverIO.Element {
         return $(".mx-name-tabPage4");
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
-    public open(): void {
+    open(): void {
         browser.url("/p/tabs");
     }
 }
