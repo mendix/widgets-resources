@@ -1,3 +1,9 @@
+//== Settings
+//## Enable or disable your desired framework features
+$important-flex:                                    true;
+$important-spacing:                                 true;
+$important-helpers:                                 true; // Classes in ./helpers/helperclasses.scss
+
 //== Gray Shades
 //## Different gray shades to be used for our variables and components
 $gray-darker:                                       #222222;
