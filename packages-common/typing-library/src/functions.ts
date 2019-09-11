@@ -385,8 +385,7 @@ ${modelerVisibilityMap}
 }`
         : "";
     const commonProps = !mobile
-        ? `id: string;
-    class: string;
+        ? `class: string;
     style?: CSSProperties;
     tabIndex: number;`
         : "style: Style[];";
@@ -397,6 +396,7 @@ ${modelerVisibilityMap}
  */${imports}
 
 interface CommonProps${mobile ? "<Style>" : ""} {
+    name: string;
     ${commonProps}
 }${childTypes.length > 0 ? "\n\n" + childTypes.join("\n\n") : ""}
 

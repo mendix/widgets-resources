@@ -6,6 +6,7 @@ export const nativeResult = `/**
 import { ActionValue, DynamicValue, EditableValue, NativeImage } from "mendix";
 
 interface CommonProps<Style> {
+    name: string;
     style: Style[];
 }
 
@@ -45,7 +46,7 @@ import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/t
 import { ActionValue, DynamicValue, EditableValue, WebImage } from "mendix";
 
 interface CommonProps {
-    id: string;
+    name: string;
     class: string;
     style?: CSSProperties;
     tabIndex: number;

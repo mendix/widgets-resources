@@ -8,7 +8,7 @@ import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/t
 import { ActionValue, EditableValue } from "mendix";
 
 interface CommonProps {
-    id: string;
+    name: string;
     class: string;
     style?: CSSProperties;
     tabIndex: number;
@@ -49,6 +49,7 @@ export const listActionNativeOutput = `/**
 import { ActionValue, EditableValue } from "mendix";
 
 interface CommonProps<Style> {
+    name: string;
     style: Style[];
 }
 

@@ -8,7 +8,7 @@ import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/t
 import { DynamicValue, WebIcon } from "mendix";
 
 interface CommonProps {
-    id: string;
+    name: string;
     class: string;
     style?: CSSProperties;
     tabIndex: number;
@@ -50,6 +50,7 @@ export const iconNativeOutput = `/**
 import { DynamicValue, NativeIcon } from "mendix";
 
 interface CommonProps<Style> {
+    name: string;
     style: Style[];
 }
 
