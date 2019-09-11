@@ -44,7 +44,7 @@
         "pretty-quick": "^1.10.0",
         "tslint": "^5.20.0",
         "ts-jest": "^24.0.2",
-        "typescript": "^3.4.5"
+        "typescript": "^3.6.3"
     },
     "scripts": {
         "prebuild": "rm -rf ./dist",
