@@ -9,7 +9,7 @@
       "noImplicitAny": false,
       "outDir": "../../dist/e2e",
       "types": [
-        "jest",
+        "jasmine",
         "@wdio/sync"
       ]
     },
