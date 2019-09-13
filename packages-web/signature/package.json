@@ -1,7 +1,7 @@
 {
     "name": "signature",
     "widgetName": "Signature",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "A signature pad for capturing signatures",
     "copyright": "Mendix BV",
     "repository": {
