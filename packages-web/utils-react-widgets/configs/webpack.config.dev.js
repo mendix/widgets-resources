@@ -154,7 +154,7 @@ const previewConfig = {
             },
             {
                 test: /\.(sa|sc|c)ss$/,
-                use: ["raw-loader", "css-loader", "sass-loader"]
+                use: ["to-string-loader", "css-loader", "sass-loader"]
             }
         ]
     },
