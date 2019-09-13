@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.animation.Animation" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Native"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Animation</name>
+    <description>Container for animating content</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Content">
+                <property key="content" type="widgets" required="true">
+                    <caption>Content</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+
+            <propertyGroup caption="Effect">
+                <property key="animation" type="enumeration" defaultValue="fadeIn">
+                    <caption>Animation</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="bounce">Bounce</enumerationValue>
+                        <enumerationValue key="flash">Flash</enumerationValue>
+                        <enumerationValue key="jello">Jello</enumerationValue>
+                        <enumerationValue key="pulse">Pulse</enumerationValue>
+                        <enumerationValue key="rotate">Rotate</enumerationValue>
+                        <enumerationValue key="rubberBand">Rubber Band</enumerationValue>
+                        <enumerationValue key="shake">Shake</enumerationValue>
+                        <enumerationValue key="swing">Swing</enumerationValue>
+                        <enumerationValue key="tada">Tada</enumerationValue>
+                        <enumerationValue key="wobble">Wobble</enumerationValue>
+                        <enumerationValue key="bounceIn">Bounce In</enumerationValue>
+                        <enumerationValue key="bounceInDown">Bounce In Down</enumerationValue>
+                        <enumerationValue key="bounceInUp">Bounce In Up</enumerationValue>
+                        <enumerationValue key="bounceInLeft">Bounce In Left</enumerationValue>
+                        <enumerationValue key="bounceInRight">Bounce In Right</enumerationValue>
+                        <enumerationValue key="bounceOut">Bounce Out</enumerationValue>
+                        <enumerationValue key="bounceOutDown">Bounce Out Down</enumerationValue>
+                        <enumerationValue key="bounceOutUp">Bounce Out Up</enumerationValue>
+                        <enumerationValue key="bounceOutLeft">Bounce Out Left</enumerationValue>
+                        <enumerationValue key="bounceOutRight">Bounce Out Right</enumerationValue>
+                        <enumerationValue key="fadeIn">Fade In</enumerationValue>
+                        <enumerationValue key="fadeInDown">Fade In Down</enumerationValue>
+                        <enumerationValue key="fadeInDownBig">Fade In Down Big</enumerationValue>
+                        <enumerationValue key="fadeInUp">Fade In Up</enumerationValue>
+                        <enumerationValue key="fadeInUpBig">Fade In Up Big</enumerationValue>
+                        <enumerationValue key="fadeInLeft">Fade In Left</enumerationValue>
+                        <enumerationValue key="fadeInLeftBig">Fade In Left Big</enumerationValue>
+                        <enumerationValue key="fadeInRight">Fade In Right</enumerationValue>
+                        <enumerationValue key="fadeInRightBig">Fade In Right Big</enumerationValue>
+                        <enumerationValue key="fadeOut">Fade Out</enumerationValue>
+                        <enumerationValue key="fadeOutDown">Fade Out Down</enumerationValue>
+                        <enumerationValue key="fadeOutDownBig">Fade Out Down Big</enumerationValue>
+                        <enumerationValue key="fadeOutUp">Fade Out Up</enumerationValue>
+                        <enumerationValue key="fadeOutUpBig">Fade Out Up Big</enumerationValue>
+                        <enumerationValue key="fadeOutLeft">Fade Out Left</enumerationValue>
+                        <enumerationValue key="fadeOutLeftBig">Fade Out Left Big</enumerationValue>
+                        <enumerationValue key="fadeOutRight">Fade Out Right</enumerationValue>
+                        <enumerationValue key="fadeOutRightBig">Fade Out Right Big</enumerationValue>
+                        <enumerationValue key="flipInX">Flip In X</enumerationValue>
+                        <enumerationValue key="flipInY">Flip In Y</enumerationValue>
+                        <enumerationValue key="flipOutX">Flip Out X</enumerationValue>
+                        <enumerationValue key="flipOutY">Flip Out Y</enumerationValue>
+                        <enumerationValue key="lightSpeedIn">Light Speed In</enumerationValue>
+                        <enumerationValue key="lightSpeedOut">Light Speed Out</enumerationValue>
+                        <enumerationValue key="slideInDown">Slide In Down</enumerationValue>
+                        <enumerationValue key="slideInUp">Slide In Up</enumerationValue>
+                        <enumerationValue key="slideInLeft">Slide In Left</enumerationValue>
+                        <enumerationValue key="slideInRight">Slide In Right</enumerationValue>
+                        <enumerationValue key="slideOutDown">Slide Out Down</enumerationValue>
+                        <enumerationValue key="slideOutUp">Slide Out Up</enumerationValue>
+                        <enumerationValue key="slideOutLeft">Slide Out Left</enumerationValue>
+                        <enumerationValue key="slideOutRight">Slide Out Right</enumerationValue>
+                        <enumerationValue key="zoomIn">Zoom In</enumerationValue>
+                        <enumerationValue key="zoomInDown">Zoom In Down</enumerationValue>
+                        <enumerationValue key="zoomInUp">Zoom In Up</enumerationValue>
+                        <enumerationValue key="zoomInLeft">Zoom In Left</enumerationValue>
+                        <enumerationValue key="zoomInRight">Zoom In Right</enumerationValue>
+                        <enumerationValue key="zoomOut">Zoom Out</enumerationValue>
+                        <enumerationValue key="zoomOutDown">Zoom Out Down</enumerationValue>
+                        <enumerationValue key="zoomOutUp">Zoom Out Up</enumerationValue>
+                        <enumerationValue key="zoomOutLeft">Zoom Out Left</enumerationValue>
+                        <enumerationValue key="zoomOutRight">Zoom Out Right</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="easing" type="enumeration" defaultValue="ease">
+                    <caption>Easing</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="linear">Linear</enumerationValue>
+                        <enumerationValue key="ease">Ease</enumerationValue>
+                        <enumerationValue key="ease_in">Ease in</enumerationValue>
+                        <enumerationValue key="ease_out">Ease ou</enumerationValue>
+                        <enumerationValue key="ease_in_out">Ease in out</enumerationValue>
+                        <enumerationValue key="ease_in_cubic">Ease in cubic</enumerationValue>
+                        <enumerationValue key="ease_out_cubic">Ease out cubic</enumerationValue>
+                        <enumerationValue key="ease_in_out_cubic">Ease in out cubic</enumerationValue>
+                        <enumerationValue key="ease_in_circ">Ease in circle</enumerationValue>
+                        <enumerationValue key="ease_out_circ">Ease out circle</enumerationValue>
+                        <enumerationValue key="ease_in_out_circ">Ease in out circle</enumerationValue>
+                        <enumerationValue key="ease_in_expo">Ease in exponential</enumerationValue>
+                        <enumerationValue key="ease_out_expo">Ease out exponential</enumerationValue>
+                        <enumerationValue key="ease_in_out_expo">Ease in out exponential</enumerationValue>
+                        <enumerationValue key="ease_in_quad">Ease in quardatic</enumerationValue>
+                        <enumerationValue key="ease_out_quad">Ease out quardatic</enumerationValue>
+                        <enumerationValue key="ease_in_out_quad">Ease in out quardatic</enumerationValue>
+                        <enumerationValue key="ease_in_quart">Ease in quartic</enumerationValue>
+                        <enumerationValue key="ease_out_quart">Ease out quartic</enumerationValue>
+                        <enumerationValue key="ease_in_out_quart">Ease in out quartic</enumerationValue>
+                        <enumerationValue key="ease_in_quint">Ease in quintic</enumerationValue>
+                        <enumerationValue key="ease_out_quint">Ease out quintic</enumerationValue>
+                        <enumerationValue key="ease_in_out_quint">Ease in out quintic</enumerationValue>
+                        <enumerationValue key="ease_in_sine">Ease in sine</enumerationValue>
+                        <enumerationValue key="ease_out_sine">Ease out sine</enumerationValue>
+                        <enumerationValue key="ease_in_out_sine">Ease in out sine</enumerationValue>
+                        <enumerationValue key="ease_in_back">Ease in back</enumerationValue>
+                        <enumerationValue key="ease_out_back">Ease out back</enumerationValue>
+                        <enumerationValue key="ease_in_out_back">Ease in out back</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="direction" type="enumeration" defaultValue="normal">
+                    <caption>Direction</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="normal">Normal</enumerationValue>
+                        <enumerationValue key="reverse">Reverse</enumerationValue>
+                        <enumerationValue key="alternate">Alternate</enumerationValue>
+                        <enumerationValue key="alternate_reverse">Alternate reverse</enumerationValue>
+                    </enumerationValues>
+                </property> 
+            </propertyGroup>
+
+            <propertyGroup caption="Timing">
+                <property key="duration" type="integer" defaultValue="200">
+                    <caption>Duration</caption>
+                    <description/>
+                </property>
+                <property key="delay" type="integer" defaultValue="0">
+                    <caption>Delay</caption>
+                    <description/>
+                </property>
+                <property key="count" type="integer" defaultValue="1">
+                    <caption>Count</caption>
+                    <description>0 is infinite</description>
+                </property>
+                <property key="condition" type="expression" required="false" defaultValue="true">
+                    <caption>Condition</caption>
+                    <description/>
+                    <returnType type="Boolean" />
+                </property>
+            </propertyGroup>
+
+            <propertyGroup caption="Events">
+                <property key="afterAnimationAction" type="action" required="false">
+                    <caption>After animation</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
