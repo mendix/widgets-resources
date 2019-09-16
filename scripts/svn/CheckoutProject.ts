@@ -1,6 +1,6 @@
 import { join } from "path";
 import { SvnService } from "./SvnService";
-import readline from "readline-sync";
+import { question } from "readline-sync";
 import { config } from "dotenv";
 
 main().catch(reason => {
@@ -17,10 +17,10 @@ async function main(): Promise<void> {
     let username = SPRINTR_USERNAME;
     let password = SPRINTR_PASSWORD;
     if (!username) {
-        username = readline.question("Insert your Sprintr username: ");
+        username = question("Insert your Sprintr username: ");
     }
     if (!password) {
-        password = readline.question("Insert your Sprintr password: ", {
+        password = question("Insert your Sprintr password: ", {
             hideEchoBack: true
         });
     }
