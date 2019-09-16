@@ -15,9 +15,9 @@
         "build": "lerna run build --ignore @widgets-resources/utils-react-widgets",
         "publish": "ts-node --project ./scripts/tsconfig.json ./scripts/release/Release.ts",
         "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
-        "precheckout": "ts-node --project ./scripts/tsconfig.json ./scripts/svn/Authentication.ts",
-        "checkout": "lerna run checkout --stream --concurrency 1",
-        "postcheckout": "rm .env"
+        "presvncheckout": "ts-node --project ./scripts/tsconfig.json ./scripts/svn/Authentication.ts",
+        "svncheckout": "lerna run svncheckout --stream --concurrency 1",
+        "postsvncheckout": "rm .env"
     },
     "devDependencies": {
         "@commitlint/cli": "^7.5.2",
