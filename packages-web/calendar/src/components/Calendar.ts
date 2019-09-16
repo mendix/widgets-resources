@@ -205,6 +205,7 @@ class Calendar extends Component<CalendarProps> {
         if (
             (eventInfo.start.getDate() !== eventInfo.event.start.getDate() ||
                 eventInfo.end.getDate() !== eventInfo.event.end.getDate()) &&
+            eventInfo.start.getDate() < eventInfo.end.getDate() &&
             this.props.editable &&
             this.props.onEventResizeAction
         ) {
