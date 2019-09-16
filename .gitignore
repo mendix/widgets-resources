@@ -2,6 +2,7 @@ dist
 node_modules
 .idea
 .env
+.vscode
 *.log
 *.bak
 *.launch
