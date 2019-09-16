@@ -1,13 +1,50 @@
 import { join } from "path";
 import { SvnService } from "./SvnService";
+import readline from "readline";
 // eslint-disable-next-line no-console
 main().catch(console.error);
 
 declare function require(name: string): string;
 
+async function showQuestion(query: string, hidden: boolean): Promise<string> {
+    return new Promise<string>(resolve => {
+        const rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        });
+        const stdin = process.openStdin();
+        process.stdin.on("data", char => {
+            char = char + "";
+            switch (char) {
+                case "\n":
+                case "\r":
+                case "\u0004":
+                    stdin.pause();
+                    break;
+                default:
+                    if (hidden) {
+                        // @ts-ignore
+                        process.stdout.clearLine();
+                        readline.cursorTo(process.stdout, 0);
+                        // @ts-ignore
+                        process.stdout.write(query + Array(rl.line.length + 1).join("*"));
+                    }
+                    break;
+            }
+        });
+        rl.question(query, value => {
+            // @ts-ignore
+            rl.history = rl.history.slice(1);
+            resolve(value);
+        });
+    });
+}
+
 async function main(): Promise<void> {
-    const { SPRINTR_USERNAME, SPRINTR_PASSWORD } = process.env;
-    const svnService = new SvnService(SPRINTR_USERNAME || "", SPRINTR_PASSWORD || "");
+    const username = await showQuestion("Insert your Sprintr username: ", false);
+    const password = await showQuestion("Insert your Sprintr password: ", true);
+    // const { SPRINTR_USERNAME, SPRINTR_PASSWORD } = process.env;
+    const svnService = new SvnService(username || "", password || "");
     const cwd = process.cwd();
 
     if (cwd) {
