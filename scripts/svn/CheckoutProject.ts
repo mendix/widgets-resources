@@ -1,49 +1,33 @@
 import { join } from "path";
 import { SvnService } from "./SvnService";
-import readline from "readline";
-// eslint-disable-next-line no-console
-main().catch(console.error);
+import readline from "readline-sync";
+import { config } from "dotenv";
+
+main().catch(reason => {
+    // eslint-disable-next-line no-console
+    console.error(reason);
+    process.exit(-1);
+});
 
 declare function require(name: string): string;
 
-async function showQuestion(query: string, hidden: boolean): Promise<string> {
-    return new Promise<string>(resolve => {
-        const rl = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout
-        });
-        const stdin = process.openStdin();
-        process.stdin.on("data", char => {
-            char = char + "";
-            switch (char) {
-                case "\n":
-                case "\r":
-                case "\u0004":
-                    stdin.pause();
-                    break;
-                default:
-                    if (hidden) {
-                        // @ts-ignore
-                        process.stdout.clearLine();
-                        readline.cursorTo(process.stdout, 0);
-                        // @ts-ignore
-                        process.stdout.write(query + Array(rl.line.length + 1).join("*"));
-                    }
-                    break;
-            }
-        });
-        rl.question(query, value => {
-            // @ts-ignore
-            rl.history = rl.history.slice(1);
-            resolve(value);
-        });
-    });
-}
-
 async function main(): Promise<void> {
-    const username = await showQuestion("Insert your Sprintr username: ", false);
-    const password = await showQuestion("Insert your Sprintr password: ", true);
-    // const { SPRINTR_USERNAME, SPRINTR_PASSWORD } = process.env;
+    config({ path: "../../.env" });
+    const { SPRINTR_USERNAME, SPRINTR_PASSWORD } = process.env;
+    let username = SPRINTR_USERNAME;
+    let password = SPRINTR_PASSWORD;
+    if (!username) {
+        username = readline.question("Insert your Sprintr username: ");
+    }
+    if (!password) {
+        password = readline.question("Insert your Sprintr password: ", {
+            hideEchoBack: true
+        });
+    }
+
+    if (!username || !password) {
+        process.exit(-1);
+    }
     const svnService = new SvnService(username || "", password || "");
     const cwd = process.cwd();
 
