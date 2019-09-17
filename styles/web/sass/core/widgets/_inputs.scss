@@ -181,6 +181,12 @@ textarea.form-control {
     }
 }
 
+@media only screen and (max-width: $screen-sm-max) {
+    .form-group {
+        flex-direction: column;
+    }
+}
+
 @media only screen and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 0) {
     // Fixes alignment bug on iPads / iPhones where datefield is not aligned vertically
     input[type='date'],
