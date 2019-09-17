@@ -97,3 +97,39 @@ mobile apps.
 ## Contributing
 
 See [CONTRIBUTING.md](https://github.com/mendix/widgets-resources/blob/master/CONTRIBUTING.md).
+
+## Developing
+
+-   `npm install` on root
+
+### For developing in `packages-native`:
+
+-   Create a simple Mendix project in Studio
+-   Copy all of it's contents to `packages-native/test-project`.
+-   Run `npm run build` on a desired widget folder. For ex: `packages-native/badge/`. This will build and copy the mpk
+    to the test-project's correct widget folder.
+-   Open and run the project in `packages-native/test-project` with Mendix Studio
+
+### For developing in `packages-web`:
+
+-   Mendix projects for each widget already comes with repo with folder called
+    `packages-web/**WIDGETNAME**/tests/TestProjects/Mendix*`
+-   Run `npm run build` on a desired widget folder. For ex: `packages-web/badge`. This will build and copy the mpk to
+    each Mendix project's correct widget folder.
+-   Open and run the project in `packages-native/test-project` with Mendix Studio
+
+### For developing in `packages-common/nanoflow-commons`:
+
+-   Create a simple Mendix project in Studio.
+-   Copy all of it's contents to `packages-common/nanoflow-commons/dist/mxproject`.
+-   Run `npm run build` on `packages-common/nanoflow-commons`. This will build and copy the mpk to dist/mxproject's
+    correct folder.
+
+Please bear in mind that when you develop JSActions, creation process is not automatically picked up by Modeler. Which
+means:
+
+-   First you have to create the ts file in `nanoflow-commons/src/.../ExampleName.ts` with desired content. Please take
+    a look at examples in `src/client`.
+-   Second you have to create a JsAction with name `ExampleName` and `parameters` in Studio.
+-   Then every time `npm run build` is run, the code piece between `// BEGIN USER CODE` and `// END USER CODE` will be
+    changed. After you close and open the JSAction in Studiom changes will be picked up automatically.
