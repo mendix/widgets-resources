@@ -9,11 +9,18 @@ interface CommonProps<Style> {
     style: Style[];
 }
 
+export type LeftRenderModeEnum = "disabled" | "action" | "buttons";
+
+export type RightRenderModeEnum = "disabled" | "action" | "buttons";
+
 export interface ListViewSwipeProps<Style> extends CommonProps<Style> {
     content: any;
+    animateOnStart: boolean;
     onPress?: ActionValue;
+    leftRenderMode: LeftRenderModeEnum;
     left?: any;
     onSwipeLeft?: ActionValue;
+    rightRenderMode: RightRenderModeEnum;
     right?: any;
     onSwipeRight?: ActionValue;
 }
