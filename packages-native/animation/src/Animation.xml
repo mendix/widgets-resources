@@ -124,7 +124,7 @@
 
             <propertyGroup caption="Condition">
                 <systemProperty key="Visibility"/>
-                <property key="condition" type="expression" required="false" defaultValue="true">
+                <property key="condition" type="expression" required="false">
                     <caption>Expression</caption>
                     <description>The animation will start after it becomes visible while also obeying its timing delay. For already-visible content, an expression can be used to start the animation.</description>
                     <returnType type="Boolean" />
