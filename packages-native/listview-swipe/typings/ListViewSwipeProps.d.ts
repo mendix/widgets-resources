@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import { ActionValue } from "mendix";
+import { ActionValue, DynamicValue } from "mendix";
 
 interface CommonProps<Style> {
     style: Style[];
@@ -18,9 +18,11 @@ export interface ListViewSwipeProps<Style> extends CommonProps<Style> {
     animateOnStart: boolean;
     onPress?: ActionValue;
     leftRenderMode: LeftRenderModeEnum;
+    leftBackgroundColor: DynamicValue<string>;
     left?: any;
     onSwipeLeft?: ActionValue;
     rightRenderMode: RightRenderModeEnum;
+    rightBackgroundColor: DynamicValue<string>;
     right?: any;
     onSwipeRight?: ActionValue;
 }

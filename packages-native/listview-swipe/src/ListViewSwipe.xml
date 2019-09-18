@@ -31,6 +31,11 @@
                     <enumerationValue key="buttons">Buttons</enumerationValue>
                 </enumerationValues>
             </property>
+            <property key="leftBackgroundColor" type="expression">
+                <caption>Background color</caption>
+                <description>Background color on swipe</description>
+                <returnType type="String" />
+            </property>
             <property key="left" type="widgets" required="false">
                 <caption>Left options</caption>
                 <description>Sample text input</description>
@@ -49,6 +54,11 @@
                     <enumerationValue key="action">Action</enumerationValue>
                     <enumerationValue key="buttons">Buttons</enumerationValue>
                 </enumerationValues>
+            </property>
+            <property key="rightBackgroundColor" type="expression">
+                <caption>Background color</caption>
+                <description>Background color on swipe</description>
+                <returnType type="String" />
             </property>
             <property key="right" type="widgets" required="false">
                 <caption>Right options</caption>

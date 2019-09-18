@@ -23,6 +23,6 @@
     },
     "dependencies": {
         "@native-mobile-resources/util-widgets": "^0.0.1",
-        "react-native-swipeable-row": "^0.8.1"
+        "react-native-swipeable": "^0.6.0"
     }
 }
