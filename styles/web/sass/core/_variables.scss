@@ -14,13 +14,6 @@
 // ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝ ╚═════╝
 //
 
-//== Settings
-//## Enable or disable your desired framework features
-// Use of !important
-$important-flex:                        true !default; // ./base/flex.scss
-$important-spacing:                     true !default; // ./base/spacing.scss
-$important-helpers:                     true !default; // ./helpers/helperclasses.scss
-
 
 //== Gray Shades
 //## Different gray shades to be used for our variables and components
@@ -641,3 +634,11 @@ $screen-lg:                             1200px !default;
 $screen-xs-max:                         ($screen-sm - 1) !default;
 $screen-sm-max:                         ($screen-md - 1) !default;
 $screen-md-max:                         ($screen-lg - 1) !default;
+
+
+//== Settings
+//## Enable or disable your desired framework features
+// Use of !important
+$important-flex:                        true !default; // ./base/flex.scss
+$important-spacing:                     true !default; // ./base/spacing.scss
+$important-helpers:                     true !default; // ./helpers/helperclasses.scss

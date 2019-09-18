@@ -1,9 +1,3 @@
-//== Settings
-//## Enable or disable your desired framework features
-$important-flex:                                    true;
-$important-spacing:                                 true;
-$important-helpers:                                 true; // Classes in ./helpers/helperclasses.scss
-
 //== Gray Shades
 //## Different gray shades to be used for our variables and components
 $gray-darker:                                       #222222;
@@ -68,3 +62,11 @@ $font-size-default:                                 $font-base-size;
 $font-color-default:                                $font-base-color;
 $border-color-default:                              $default-border-color;
 $font-color-header:				                    $font-color-headers;
+
+
+//== Settings
+//## Enable or disable your desired framework features
+// Use of !important
+$important-flex:                        true !default; // ./base/flex.scss
+$important-spacing:                     true !default; // ./base/spacing.scss
+$important-helpers:                     true !default; // ./helpers/helperclasses.scss
