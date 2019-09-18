@@ -9,6 +9,8 @@ import { listImageNativeOutput, listImageWebOutput } from "./outputs/list-image"
 import { iconInput, iconInputNative } from "./inputs/icon";
 import { iconNativeOutput, iconWebOutput } from "./outputs/icon";
 import { MendixXML } from "../src/typings";
+import { containmentInput, containmentInputNative } from "./inputs/containment";
+import { containmentNativeOutput, containmentWebOutput } from "./outputs/containment";
 
 describe("Generating tests", function() {
     it(`Generates a parsed typing from XML for native`, function() {
@@ -59,6 +61,16 @@ describe("Generating tests", function() {
     it(`Generates a parsed typing from XML for web using icons`, function() {
         const newContent = transformJsonContent(convertXmltoJson(iconInput), "MyWidget");
         expect(newContent).toBe(iconWebOutput);
+    });
+
+    it(`Generates a parsed typing from XML for web using containment`, function() {
+        const newContent = transformJsonContent(convertXmltoJson(containmentInput), "MyWidget");
+        expect(newContent).toBe(containmentWebOutput);
+    });
+
+    it(`Generates a parsed typing from XML for native using containment`, function() {
+        const newContent = transformJsonContent(convertXmltoJson(containmentInputNative), "MyWidget");
+        expect(newContent).toBe(containmentNativeOutput);
     });
 });
 
