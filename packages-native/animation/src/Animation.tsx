@@ -1,11 +1,12 @@
 import { Component, ReactNode, createElement } from "react";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
-import { Animation as AnimationType, View, Easing, Direction } from "react-native-animatable";
+import { Animation as AnimationType, View, Easing } from "react-native-animatable";
 
 import { AnimationProps } from "../typings/AnimationProps";
 import { defaultAnimationStyle, AnimationStyle } from "./ui/Styles";
 
 export type Props = AnimationProps<AnimationStyle>;
+type Direction = "normal" | "reverse" | "alternate" | "alternate-reverse";
 
 export class Animation extends Component<Props> {
     private readonly animationEndHandle = this.onAnimationEnd.bind(this);
@@ -22,13 +23,13 @@ export class Animation extends Component<Props> {
             <View
                 animation={this.getAnimation()}
                 duration={duration}
-                useNativeDriver
-                easing={easingValue}
-                direction={directionValue}
                 delay={delay}
-                style={this.styles.container}
+                direction={directionValue}
+                easing={easingValue}
                 iterationCount={countValue}
                 onAnimationEnd={this.animationEndHandle}
+                style={this.styles.container}
+                useNativeDriver
             >
                 {content}
             </View>
@@ -38,22 +39,23 @@ export class Animation extends Component<Props> {
     private validateProps(props: Props): void {
         const { afterAnimationAction, count } = props;
         if (afterAnimationAction && count === 0) {
-            // eslint-disable-next-line no-console
-            console.warn("After animation action can not be triggered by infinite count");
+            this.log("After animation action can not be triggered by infinite count");
         }
         const { animationType, animationIn, animationOut, animationAttention } = this.props;
         if (animationType === "in" && animationIn === "none") {
-            // eslint-disable-next-line no-console
-            console.warn("No 'Entry animation' is selected for animation type 'Entry'");
+            this.log("No 'Entry animation' is selected for animation type 'Entry'");
         }
         if (animationType === "attention" && animationAttention === "none") {
-            // eslint-disable-next-line no-console
-            console.warn("No 'Attention animation' is selected for animation type 'Attention'");
+            this.log("No 'Attention animation' is selected for animation type 'Attention'");
         }
         if (animationType === "out" && animationOut === "none") {
-            // eslint-disable-next-line no-console
-            console.warn("No 'Exit animation' is selected for animation type 'Exit'");
+            this.log("No 'Exit animation' is selected for animation type 'Exit'");
         }
+    }
+
+    private log(message: string): void {
+        // eslint-disable-next-line no-console
+        console.warn(message);
     }
 
     private getAnimation(): AnimationType | undefined {
@@ -61,11 +63,10 @@ export class Animation extends Component<Props> {
         const animation =
             animationType === "in" ? animationIn : animationType === "out" ? animationOut : animationAttention;
 
-        return !condition || (condition.status === "available" && condition.value === true)
-            ? animation === "none"
-                ? undefined
-                : animation
-            : undefined;
+        if (!condition || (condition.status === "available" && condition.value === true)) {
+            return animation === "none" ? undefined : animation;
+        }
+        return undefined;
     }
 
     private onAnimationEnd(): void {
