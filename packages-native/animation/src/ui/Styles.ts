@@ -7,6 +7,6 @@ export interface AnimationStyle extends Style {
 
 export const defaultAnimationStyle: AnimationStyle = {
     container: {
-        // backgroundColor: "green"
+         // All ViewStyle properties are allowed
     }
 };
