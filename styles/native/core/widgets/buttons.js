@@ -53,6 +53,6 @@ export const ActionButtonHeader = {
     },
     caption: {
         color: button.header.color,
-        size: button.header.fontSize,
+        fontSize: button.header.fontSize,
     },
 };
