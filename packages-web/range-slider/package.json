@@ -19,7 +19,7 @@
         "lint:fix": "npm run lint -- --fix",
         "build": "utils-react-widgets build",
         "release": "utils-react-widgets release",
-        "checkout": "ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+        "svncheckout": "ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
     },
     "config": {
         "mendixHost": "http://localhost:8080",

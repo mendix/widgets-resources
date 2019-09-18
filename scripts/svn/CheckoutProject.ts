@@ -1,13 +1,34 @@
 import { join } from "path";
 import { SvnService } from "./SvnService";
-// eslint-disable-next-line no-console
-main().catch(console.error);
+import { question } from "readline-sync";
+import { config } from "dotenv";
+
+main().catch(reason => {
+    // eslint-disable-next-line no-console
+    console.error(reason);
+    process.exit(-1);
+});
 
 declare function require(name: string): string;
 
 async function main(): Promise<void> {
+    config({ path: "../../.env" });
     const { SPRINTR_USERNAME, SPRINTR_PASSWORD } = process.env;
-    const svnService = new SvnService(SPRINTR_USERNAME || "", SPRINTR_PASSWORD || "");
+    let username = SPRINTR_USERNAME;
+    let password = SPRINTR_PASSWORD;
+    if (!username) {
+        username = question("Insert your Sprintr username: ");
+    }
+    if (!password) {
+        password = question("Insert your Sprintr password: ", {
+            hideEchoBack: true
+        });
+    }
+
+    if (!username || !password) {
+        process.exit(-1);
+    }
+    const svnService = new SvnService(username || "", password || "");
     const cwd = process.cwd();
 
     if (cwd) {

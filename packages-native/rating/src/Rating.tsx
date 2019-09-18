@@ -2,6 +2,7 @@ import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { ValueStatus } from "mendix";
 import { Component, createElement } from "react";
 import StarRating from "react-native-star-rating";
+import { Big } from "big.js";
 
 import { RatingProps } from "../typings/RatingProps";
 import { defaultRatingStyle, IconStyle, RatingStyle } from "./ui/Styles";
@@ -74,7 +75,7 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
 
     private onChange(rating: number): void {
         if (this.props.ratingAttribute.status === ValueStatus.Available) {
-            this.props.ratingAttribute.setTextValue(String(rating));
+            this.props.ratingAttribute.setValue(new Big(rating));
 
             if (this.props.onChange && this.props.onChange.canExecute) {
                 this.props.onChange.execute();

@@ -1,7 +1,7 @@
 {
     "name": "progress-bar-web",
     "widgetName": "ProgressBar",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "Displays a progress bar",
     "copyright": "Mendix BV",
     "repository": {
@@ -20,7 +20,7 @@
         "lint:fix": "npm run lint -- --fix",
         "build": "utils-react-widgets build",
         "release": "utils-react-widgets release",
-        "checkout": "ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+        "svncheckout": "ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
     },
     "config": {
         "mendixHost": "http://localhost:8080",
