@@ -1,41 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.listviewswipe.ListViewSwipe" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+<widget id="com.mendix.widget.native.listviewswipe.ListViewSwipe" supportedPlatform="Native" needsEntityContext="true"
+        offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>List View Swipe</name>
     <description/>
-    <icon />
+    <icon/>
     <properties>
-        <property key="content" type="widgets">
-            <caption>Content</caption>
-            <category>General</category>
-            <description>Sample text input</description>
-        </property>
-
-        <property key="onPress" type="action" required="false">
-            <caption>onPress</caption>
-            <category>General</category>
-            <description/>
-        </property>
-
-        <property key="left" type="widgets" required="false">
-            <caption>Left options</caption>
-            <category>General</category>
-            <description>Sample text input</description>
-        </property>
-        <property key="onSwipeLeft" type="action" required="false">
-            <caption>On swipe left</caption>
-            <category>General</category>
-            <description/>
-        </property>
-
-        <property key="right" type="widgets" required="false">
-            <caption>Right options</caption>
-            <category>General</category>
-            <description>Sample text input</description>
-        </property>
-        <property key="onSwipeRight" type="action" required="false">
-            <caption>On swipe right</caption>
-            <category>General</category>
-            <description/>
-        </property>
+        <propertyGroup caption="General">
+            <property key="content" type="widgets">
+                <caption>Content</caption>
+                <description>Sample text input</description>
+            </property>
+            <property key="animateOnStart" type="boolean" defaultValue="false">
+                <caption>Animate on start</caption>
+                <description>Animates on start to show the possibilities of the list view</description>
+            </property>
+            <property key="onPress" type="action" required="false">
+                <caption>onPress</caption>
+                <description/>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Left">
+            <property key="leftRenderMode" type="enumeration" defaultValue="disabled">
+                <caption>Render mode</caption>
+                <description />
+                <enumerationValues>
+                    <enumerationValue key="disabled">Disabled</enumerationValue>
+                    <enumerationValue key="action">Action</enumerationValue>
+                    <enumerationValue key="buttons">Buttons</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="left" type="widgets" required="false">
+                <caption>Left options</caption>
+                <description>Sample text input</description>
+            </property>
+            <property key="onSwipeLeft" type="action" required="false">
+                <caption>On swipe left</caption>
+                <description/>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Right">
+            <property key="rightRenderMode" type="enumeration" defaultValue="disabled">
+                <caption>Render mode</caption>
+                <description />
+                <enumerationValues>
+                    <enumerationValue key="disabled">Disabled</enumerationValue>
+                    <enumerationValue key="action">Action</enumerationValue>
+                    <enumerationValue key="buttons">Buttons</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="right" type="widgets" required="false">
+                <caption>Right options</caption>
+                <description>Sample text input</description>
+            </property>
+            <property key="onSwipeRight" type="action" required="false">
+                <caption>On swipe right</caption>
+                <description/>
+            </property>
+        </propertyGroup>
     </properties>
 </widget>

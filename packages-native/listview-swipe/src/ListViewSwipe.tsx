@@ -14,13 +14,36 @@ export class ListViewSwipe extends Component<ListViewSwipeProps<ListViewSwipeSty
     render(): ReactNode {
         const Touchable: ComponentClass<any> = Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
 
+        const { leftRenderMode, rightRenderMode } = this.props;
+
+        const leftRenderOptions =
+            leftRenderMode === "action"
+                ? {
+                      leftContent: this.props.left,
+                      onLeftActionRelease: this.onSwipeLeftHandler
+                  }
+                : leftRenderMode === "buttons"
+                ? {
+                      leftButtons: this.props.left,
+                      onLeftActionRelease: this.onSwipeLeftHandler
+                  }
+                : {};
+
+        const rightRenderOptions =
+            rightRenderMode === "action"
+                ? {
+                      rightContent: this.props.right,
+                      onRightActionRelease: this.onSwipeRightHandler
+                  }
+                : rightRenderMode === "buttons"
+                ? {
+                      rightButtons: this.props.right,
+                      onRightActionRelease: this.onSwipeRightHandler
+                  }
+                : {};
+
         return (
-            <Swipeable
-                leftButtons={this.props.left}
-                onLeftActionRelease={this.onSwipeLeftHandler}
-                rightButtons={this.props.right}
-                onRightActionRelease={this.onSwipeRightHandler}
-            >
+            <Swipeable {...leftRenderOptions} {...rightRenderOptions} bounceOnMount={this.props.animateOnStart}>
                 <Touchable onPress={this.onPressHandler}>{this.props.content}</Touchable>
             </Swipeable>
         );
