@@ -60,6 +60,8 @@ const translateType = (
         case "boolean":
         case "string":
             return prop.$.type;
+        case "widgets":
+            return "ReactNode";
         default:
             return "any";
     }
@@ -360,6 +362,9 @@ export const transformJsonContent = (jsonContent: MendixXML, widgetName: string)
         (properties.filter(prop => prop.$.type === "action").length > 0 ||
             properties.filter(prop => prop.$.type === "object").map(prop => extractVisibilityMap(prop, [])).length > 0)
     );
+    const hasContainment =
+        properties.filter(prop => prop.$.type === "widgets").length > 0 ||
+        properties.filter(prop => prop.$.type === "widgets").map(prop => extractVisibilityMap(prop, [])).length > 0;
 
     const propertyImports = findImports(mainTypes, childTypes);
     let imports = !mobile
@@ -372,6 +377,10 @@ import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/t
           }`
         : "";
     imports += propertyImports;
+    if (hasContainment) {
+        imports += `
+import { ReactNode } from "react";`;
+    }
 
     const previewContents = !mobile
         ? `
