@@ -1,4 +1,4 @@
-declare module "react-native-swipeable-row" {
+declare module "react-native-swipeable" {
     import { ReactNode } from "react";
     import { ViewStyle } from "react-native";
 
@@ -64,12 +64,12 @@ declare module "react-native-swipeable-row" {
          * @default null
          */
         disable?: boolean;
-        style?: ViewStyle;
-        leftContainerStyle?: ViewStyle;
-        leftButtonContainerStyle?: ViewStyle;
-        rightContainerStyle?: ViewStyle;
-        rightButtonContainerStyle?: ViewStyle;
-        contentContainerStyle?: ViewStyle;
+        style?: ViewStyle | ViewStyle[];
+        leftContainerStyle?: ViewStyle | ViewStyle[];
+        leftButtonContainerStyle?: ViewStyle | ViewStyle[];
+        rightContainerStyle?: ViewStyle | ViewStyle[];
+        rightButtonContainerStyle?: ViewStyle | ViewStyle[];
+        contentContainerStyle?: ViewStyle | ViewStyle[];
 
         /**
          * Gets the reference to the object
@@ -80,7 +80,10 @@ declare module "react-native-swipeable-row" {
         onSwipeStart?: () => void;
         onSwipeMove?: () => void;
         onSwipeRelease?: () => void;
-        onSwipeComplete?: () => void;
+        onSwipeComplete?: (event: any, gestureState: any) => void;
+
+        swipeStartMinLeftEdgeClearance?: number;
+        swipeStartMinRightEdgeClearance?: number;
     }
 
     const Swipeable: (props: SwipeableProps) => JSX.Element;
