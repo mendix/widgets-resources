@@ -45,8 +45,6 @@
                         <enumerationValue key="fadeInLeftBig">Fade left big</enumerationValue>
                         <enumerationValue key="fadeInRight">Fade right</enumerationValue>
                         <enumerationValue key="fadeInRightBig">Fade right big</enumerationValue>
-                        <enumerationValue key="flipInX">Flip X</enumerationValue>
-                        <enumerationValue key="flipInY">Flip Y</enumerationValue>
                         <enumerationValue key="lightSpeedIn">Light speed</enumerationValue>
                         <enumerationValue key="slideInDown">Slide down</enumerationValue>
                         <enumerationValue key="slideInUp">Slide up</enumerationValue>
@@ -95,8 +93,6 @@
                         <enumerationValue key="fadeOutLeftBig">Fade left big</enumerationValue>
                         <enumerationValue key="fadeOutRight">Fade right</enumerationValue>
                         <enumerationValue key="fadeOutRightBig">Fade right big</enumerationValue>
-                        <enumerationValue key="flipOutX">Flip X</enumerationValue>
-                        <enumerationValue key="flipOutY">Flip Y</enumerationValue>
                         <enumerationValue key="lightSpeedOut">Light speed</enumerationValue>
                         <enumerationValue key="slideOutDown">Slide down</enumerationValue>
                         <enumerationValue key="slideOutUp">Slide up</enumerationValue>
