@@ -7,6 +7,6 @@ export interface AnimationStyle extends Style {
 
 export const defaultAnimationStyle: AnimationStyle = {
     container: {
-         // All ViewStyle properties are allowed
+        // All ViewStyle properties are allowed
     }
 };

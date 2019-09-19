@@ -13,9 +13,8 @@
     "packagePath": "com.mendix.widget.native",
     "scripts": {
         "start": "npm run dev",
-        "build": "pluggable-widgets-tools build:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "build": "pluggable-widgets-tools build:ts:native",
         "dev": "pluggable-widgets-tools start:ts:native",
-        "devx": "pluggable-widgets-tools start:ts:native --subprojectPath $npm_package_config_subprojectFolder",
         "lint": "pluggable-widgets-tools lint",
         "lint:fix": "pluggable-widgets-tools lint:fix",
         "pretest": "npm run lint && npm run build",

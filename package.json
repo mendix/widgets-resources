@@ -85,14 +85,9 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged && pretty-quick --staged",
+            "pre-commit": "pretty-quick --staged",
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
         }
-    },
-    "lint-staged": {
-        "*.{ts,tsx}": [
-            "eslint"
-        ]
     },
     "commitlint": {
         "extends": [
