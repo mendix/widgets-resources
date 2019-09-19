@@ -1,4 +1,4 @@
-import { input }                    from "../variables";
+import { font, input }              from "../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
 
 //
@@ -30,6 +30,7 @@ export const DatePicker = {
         backgroundColor: input.backgroundColor,
 
         fontSize: input.fontSize,
+        fontFamily: font.family,
         borderWidth: input.borderWidth,
         borderRadius: input.borderRadius,
 
@@ -62,6 +63,7 @@ export const DatePickerVertical = {
         backgroundColor: input.backgroundColor,
 
         fontSize: input.fontSize,
+        fontFamily: font.family,
         borderRadius: input.borderRadius,
         borderWidth: input.borderWidth,
 

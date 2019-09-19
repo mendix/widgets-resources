@@ -33,5 +33,6 @@ export const com_mendix_widget_native_progresscircle_ProgressCircle = (ProgressC
         color: brand.primary,
         fontSize: font.size,
         fontWeight: font.weightSemiBold,
+        fontFamily: font.family,
     },
 });

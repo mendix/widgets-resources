@@ -1,4 +1,4 @@
-import { button, contrast } from "../variables";
+import { button, contrast, font } from "../variables";
 
 //
 // DISCLAIMER:
@@ -36,6 +36,7 @@ export const ActionButton = {
         // All TextStyle properties are allowed
         color: button.primary.color,
         fontSize: button.fontSize,
+        fontFamily: font.family,
     },
 };
 
@@ -54,5 +55,6 @@ export const ActionButtonHeader = {
     caption: {
         color: button.header.color,
         fontSize: button.header.fontSize,
+        fontFamily: font.family,
     },
 };

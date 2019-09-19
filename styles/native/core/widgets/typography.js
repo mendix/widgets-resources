@@ -21,6 +21,7 @@ export const Text = {
         // All TextStyle properties are allowed
         color: font.color,
         fontSize: font.size,
+        fontFamily: font.family,
         lineHeight: font.size + 2,
     },
 };
@@ -32,6 +33,7 @@ export const TextHeading1 = {
     text: {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH1,
+        fontFamily: font.family,
         lineHeight: font.sizeH1,
     },
 };
@@ -42,6 +44,7 @@ export const TextHeading2 = {
     text: {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH2,
+        fontFamily: font.family,
         lineHeight: font.sizeH2,
     },
 };
@@ -52,6 +55,7 @@ export const TextHeading3 = {
     text: {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH3,
+        fontFamily: font.family,
         lineHeight: font.sizeH3,
     },
 };
@@ -62,6 +66,7 @@ export const TextHeading4 = {
     text: {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH4,
+        fontFamily: font.family,
         lineHeight: font.sizeH4,
     },
 };
@@ -72,6 +77,7 @@ export const TextHeading5 = {
     text: {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH5,
+        fontFamily: font.family,
         lineHeight: font.sizeH5,
     },
 };
@@ -82,6 +88,7 @@ export const TextHeading6 = {
     text: {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH6,
+        fontFamily: font.family,
         lineHeight: font.sizeH6,
     },
 };

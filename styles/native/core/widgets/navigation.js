@@ -20,10 +20,12 @@ export const navigationStyle = {
         backButtonColor: navigation.topBar.backButtonColor,
         titleColor: navigation.topBar.titleColor,
         titleFontSize: font.sizeH4,
+        fontFamily: font.family,
         fontWeight: Platform.select({ ios: font.weightBold, android: font.weightNormal }),
     },
     bottomBar: {
         fontSize: font.sizeSmall,
+        fontFamily: font.family,
         backgroundColor: navigation.bottomBar.backgroundColor,
         color: navigation.bottomBar.color,
         selectedColor: navigation.bottomBar.selectedColor,
@@ -40,6 +42,7 @@ export const navigationStyle = {
             color: "#FFF",
             marginTop: spacing.small,
             fontSize: font.size,
+            fontFamily: font.family,
         },
     },
 };
