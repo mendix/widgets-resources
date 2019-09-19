@@ -11,11 +11,12 @@ type Direction = "normal" | "reverse" | "alternate" | "alternate-reverse";
 export class Animation extends Component<Props> {
     private readonly animationEndHandle = this.onAnimationEnd.bind(this);
     private readonly styles = flattenStyles(defaultAnimationStyle, this.props.style);
+    // handleViewRef = (ref: View) => (this.view = ref);
 
     render(): ReactNode {
         const { count, duration, content, easing, delay, direction } = this.props;
-        const easingValue = easing.replace("_", "-") as Easing;
-        const directionValue = direction.replace("_", "-") as Direction;
+        const easingValue = easing.replace(/_/g, "-") as Easing;
+        const directionValue = direction.replace(/_/g, "-") as Direction;
         const countValue = count === 0 ? "infinite" : count;
         this.validateProps(this.props);
 
