@@ -3,33 +3,28 @@ import { ListViewSwipeProps } from "../typings/ListViewSwipeProps";
 import { flattenStyles, Style } from "@native-mobile-resources/util-widgets";
 import Swipeable from "react-native-swipeable";
 import { Platform, TouchableNativeFeedback, TouchableOpacity, ViewStyle } from "react-native";
-import { ValueStatus } from "mendix";
 
 interface ListViewSwipeStyle extends Style {
     container: ViewStyle;
     listItem: ViewStyle;
-    leftSwipeItem: ViewStyle;
-    rightSwipeItem: ViewStyle;
+    leftSwipeItem: ViewStyle & {
+        itemWidth: number;
+    };
+    rightSwipeItem: ViewStyle & {
+        itemWidth: number;
+    };
 }
 
 const defaultListViewSwipeStyle: ListViewSwipeStyle = {
-    container: {
-        flex: 1
-    },
+    container: {},
     listItem: {
-        minHeight: 75,
-        alignItems: "flex-start",
-        justifyContent: "center"
+        minHeight: 75
     },
     leftSwipeItem: {
-        flex: 1,
-        alignItems: "flex-end",
-        justifyContent: "center"
+        itemWidth: 75
     },
     rightSwipeItem: {
-        flex: 1,
-        alignItems: "flex-start",
-        justifyContent: "center"
+        itemWidth: 75
     }
 };
 
@@ -44,31 +39,22 @@ export class ListViewSwipe extends Component<ListViewSwipeProps<ListViewSwipeSty
 
         const { leftRenderMode, rightRenderMode } = this.props;
 
-        const leftStyles = [
-            this.styles.leftSwipeItem,
-            this.props.leftBackgroundColor && this.props.leftBackgroundColor.status === ValueStatus.Available
-                ? { backgroundColor: this.props.leftBackgroundColor.value }
-                : {}
-        ];
-
-        const rightStyles = [
-            this.styles.rightSwipeItem,
-            this.props.rightBackgroundColor && this.props.rightBackgroundColor.status === ValueStatus.Available
-                ? { backgroundColor: this.props.rightBackgroundColor.value }
-                : {}
-        ];
-
         const leftRenderOptions =
             leftRenderMode === "action"
                 ? {
                       leftContent: this.props.left,
                       onLeftActionRelease: this.onSwipeLeftHandler,
-                      leftContainerStyle: leftStyles
+                      leftContainerStyle: this.styles.leftSwipeItem
                   }
                 : leftRenderMode === "buttons"
                 ? {
                       leftButtons: this.props.left,
-                      leftButtonContainerStyle: leftStyles
+                      leftButtonContainerStyle: {
+                          ...this.styles.leftSwipeItem,
+                          maxWidth: this.styles.leftSwipeItem.itemWidth
+                      },
+                      leftButtonWidth: this.styles.leftSwipeItem.itemWidth,
+                      leftButtonsActivationDistance: this.styles.leftSwipeItem.itemWidth
                   }
                 : {};
 
@@ -77,12 +63,17 @@ export class ListViewSwipe extends Component<ListViewSwipeProps<ListViewSwipeSty
                 ? {
                       rightContent: this.props.right,
                       onRightActionRelease: this.onSwipeRightHandler,
-                      rightContainerStyle: rightStyles
+                      rightContainerStyle: this.styles.rightSwipeItem
                   }
                 : rightRenderMode === "buttons"
                 ? {
                       rightButtons: this.props.right,
-                      rightButtonContainerStyle: rightStyles
+                      rightButtonContainerStyle: {
+                          ...this.styles.rightSwipeItem,
+                          maxWidth: this.styles.rightSwipeItem.itemWidth
+                      },
+                      rightButtonWidth: this.styles.rightSwipeItem.itemWidth,
+                      rightButtonsActivationDistance: this.styles.rightSwipeItem.itemWidth
                   }
                 : {};
 
