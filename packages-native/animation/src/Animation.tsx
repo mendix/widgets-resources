@@ -51,6 +51,21 @@ export class Animation extends Component<Props> {
         if (animationType === "out" && animationOut === "none") {
             this.log("No 'Exit animation' is selected for animation type 'Exit'");
         }
+        if (animationType === "in" && (animationOut !== "none" || animationAttention !== "none")) {
+            this.log(
+                "The 'Attention' an 'Exit' animation is ignored and should be set to 'None' when effect 'type' 'Entry' is selected"
+            );
+        }
+        if (animationType === "attention" && (animationOut !== "none" || animationIn !== "none")) {
+            this.log(
+                "The 'Entrance' and 'Exit' animation is ignored and should be set to 'None' when effect 'type' 'Attention' is selected"
+            );
+        }
+        if (animationType === "out" && (animationIn !== "none" || animationAttention !== "none")) {
+            this.log(
+                "The 'Entry' and 'Attention' animation is ignored and should be set to 'None' when effect 'type' 'Exit' is selected"
+            );
+        }
     }
 
     private log(message: string): void {
