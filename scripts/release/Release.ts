@@ -70,8 +70,11 @@ function releaseWithAuth(auth: TokenData, projectPackage: any) {
         projectPackage.version
     }`;
 
-    const assets = [`dist/${projectPackage.version}/${projectPackage.widgetName}.mpk`, "dist/tmp/TestProjects.zip"];
-
+    const assets = [
+        `dist/${projectPackage.version}/${projectPackage.widgetName}.mpk`,
+        `dist/${projectPackage.version}/${projectPackage.packagePath}.${projectPackage.widgetName}.mpk`,
+        "dist/tmp/TestProjects.zip"
+    ];
     const options = {
         // eslint-disable-next-line @typescript-eslint/camelcase
         tag_name: `${projectPackage.name}-v${projectPackage.version}`,
