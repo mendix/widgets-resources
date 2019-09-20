@@ -45,7 +45,6 @@
                         <enumerationValue key="fadeInLeftBig">Fade left big</enumerationValue>
                         <enumerationValue key="fadeInRight">Fade right</enumerationValue>
                         <enumerationValue key="fadeInRightBig">Fade right big</enumerationValue>
-                        <enumerationValue key="lightSpeedIn">Light speed</enumerationValue>
                         <enumerationValue key="slideInDown">Slide down</enumerationValue>
                         <enumerationValue key="slideInUp">Slide up</enumerationValue>
                         <enumerationValue key="slideInLeft">Slide left</enumerationValue>
@@ -64,7 +63,6 @@
                         <enumerationValue key="none">None</enumerationValue>
                         <enumerationValue key="bounce">Bounce</enumerationValue>
                         <enumerationValue key="flash">Flash</enumerationValue>
-                        <enumerationValue key="jello">Jello</enumerationValue>
                         <enumerationValue key="pulse">Pulse</enumerationValue>
                         <enumerationValue key="rotate">Rotate</enumerationValue>
                         <enumerationValue key="rubberBand">Rubber band</enumerationValue>
@@ -93,7 +91,6 @@
                         <enumerationValue key="fadeOutLeftBig">Fade left big</enumerationValue>
                         <enumerationValue key="fadeOutRight">Fade right</enumerationValue>
                         <enumerationValue key="fadeOutRightBig">Fade right big</enumerationValue>
-                        <enumerationValue key="lightSpeedOut">Light speed</enumerationValue>
                         <enumerationValue key="slideOutDown">Slide down</enumerationValue>
                         <enumerationValue key="slideOutUp">Slide up</enumerationValue>
                         <enumerationValue key="slideOutLeft">Slide left</enumerationValue>

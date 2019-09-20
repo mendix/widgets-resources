@@ -11,7 +11,6 @@ type Direction = "normal" | "reverse" | "alternate" | "alternate-reverse";
 export class Animation extends Component<Props> {
     private readonly animationEndHandle = this.onAnimationEnd.bind(this);
     private readonly styles = flattenStyles(defaultAnimationStyle, this.props.style);
-    // handleViewRef = (ref: View) => (this.view = ref);
 
     render(): ReactNode {
         const { count, duration, content, easing, delay, direction } = this.props;
