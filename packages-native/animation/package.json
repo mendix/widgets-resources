@@ -12,23 +12,19 @@
     },
     "packagePath": "com.mendix.widget.native",
     "scripts": {
-        "start": "npm run dev",
-        "build": "pluggable-widgets-tools build:ts:native",
-        "dev": "pluggable-widgets-tools start:ts:native",
-        "lint": "pluggable-widgets-tools lint",
-        "lint:fix": "pluggable-widgets-tools lint:fix",
-        "pretest": "npm run lint && npm run build",
-        "test": "pluggable-widgets-tools test:unit:native --no-cache --ci",
-        "test:unit": "pluggable-widgets-tools test:unit:native --coverage",
-        "prerelease": "npm run lint",
-        "release": "pluggable-widgets-tools release:ts:native"
+        "start": "pluggable-widgets-tools start:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "build": "pluggable-widgets-tools build:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "build:release": "pluggable-widgets-tools release:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "test": "jest --config ../../scripts/test/jest.native.config.js",
+        "version": "npm run build:release",
+        "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
     },
     "jest-junit": {
         "output": "./dist/testresults/TESTS-Jest.xml"
     },
     "license": "Apache-2.0",
     "devDependencies": {
-        "@mendix/pluggable-widgets-tools": "^8.0.4",
         "@types/big.js": "^4.0.5",
         "@types/classnames": "^2.2.6",
         "@types/enzyme": "^3.1.14",
