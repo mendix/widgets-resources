@@ -1,3 +1,6 @@
 {
-  "extends": "./node_modules/@mendix/pluggable-widgets-tools/configs/tsconfig.base.json"
+    "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base.json",
+    "baseUrl": "./",
+    "include": ["./src"],
+    "exclude": ["./dist/", "./node_modules/", "./src/**/__tests__"]
 }
