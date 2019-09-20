@@ -42,6 +42,7 @@ export const DropDown = {
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
 
+        fontFamily: input.fontFamily,
         borderWidth: input.borderWidth,
         borderRadius: input.radius,
 
@@ -69,6 +70,7 @@ export const DropDownVertical = {
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
 
+        fontFamily: input.fontFamily,
         borderRadius: input.radius,
         borderWidth: input.borderWidth,
 

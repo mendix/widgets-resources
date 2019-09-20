@@ -1,3 +1,4 @@
+import { font } from "../variables";
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.
@@ -11,6 +12,7 @@
     Default Class For Mendix Web View Widget
 ========================================================================== */
 
+
 export const com_mendix_widget_native_webview_WebView = (WebView = {
     container: {
         // All ViewStyle properties are allowed
@@ -20,5 +22,7 @@ export const com_mendix_widget_native_webview_WebView = (WebView = {
     },
     errorText: {
         // All TextStyle properties are allowed
+        fontSize: font.size,
+        fontFamily: font.family,
     },
 });

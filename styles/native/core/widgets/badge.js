@@ -1,4 +1,4 @@
-import { contrast } from "../variables";
+import { contrast, font } from "../variables";
 
 //
 // DISCLAIMER:
@@ -22,5 +22,6 @@ export const com_mendix_widget_native_badge_Badge = (Badge = {
     caption: {
         // All TextStyle properties are allowed
         color: contrast.higher,
+        fontFamily: font.family,
     },
 });

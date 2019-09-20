@@ -80,9 +80,9 @@ select.form-control {
 }
 
 .form-control.mx-selectbox {
+    align-items: center;
     flex-direction: row-reverse;
     justify-content: space-between;
-    align-items: center;
 }
 
 // Not editable textarea, textarea will be rendered as a label
@@ -91,7 +91,7 @@ select.form-control {
 }
 
 textarea.form-control {
-    height: auto;
+    flex-basis: auto;
 }
 
 .mx-compound-control {
@@ -178,6 +178,12 @@ textarea.form-control {
             padding-bottom: $form-input-padding-y;
             line-height: $form-input-line-height;
         }
+    }
+}
+
+@media only screen and (max-width: $screen-sm-max) {
+    .form-group {
+        flex-direction: column;
     }
 }
 

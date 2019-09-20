@@ -1,5 +1,5 @@
-import { Platform }                    from "react-native";
-import { background, brand, contrast } from "../variables";
+import { Platform }                          from "react-native";
+import { background, brand, contrast, font } from "../variables";
 
 //
 // DISCLAIMER:
@@ -31,6 +31,8 @@ export const com_mendix_widget_native_togglebuttons_ToggleButtons = (ToggleButto
     text: {
         // All TextStyle properties are allowed
         color: Platform.select({ ios: brand.primary, android: contrast.high }),
+        fontSize: font.size,
+        fontFamily: font.family,
     },
     activeButton: {
         // All ViewStyle properties are allowed
@@ -47,5 +49,7 @@ export const com_mendix_widget_native_togglebuttons_ToggleButtons = (ToggleButto
     },
     activeButtonText: {
         // All TextStyle properties are allowed
+        fontSize: font.size,
+        fontFamily: font.family,
     },
 });

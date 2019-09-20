@@ -37,6 +37,7 @@ export const com_mendix_widget_native_feedback_Feedback = (Feedback = {
     title: {
         // All TextStyle properties are allowed
         color: font.color,
+        fontFamily: font.family,
     },
     textAreaInput: {
         // All TextStyle properties are allowed

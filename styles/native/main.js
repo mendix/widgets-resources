@@ -9,6 +9,7 @@ export * from "./core/base/spacing";
 // Components
 export * from "./core/widgets/activityindicator";
 export * from "./core/helpers/activityindicator";
+export * from "./core/widgets/animation";
 export * from "./core/widgets/badge";
 export * from "./core/helpers/badge";
 export * from "./core/widgets/buttons";

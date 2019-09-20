@@ -1,6 +1,3 @@
-import { font }         from "../variables";
-import { TextHeading1 } from "./typography";
-
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.
@@ -9,18 +6,11 @@ import { TextHeading1 } from "./typography";
 //
 
 /* ==========================================================================
-    Page Title
+    Animation
 
-    Default Class For Mendix Page Title Widget
+    Default Class For Mendix Animation Widget
 ========================================================================== */
 
-export const PageTitle = {
-    container: {
-        // All ViewStyle properties are allowed
-    },
-    text: {
-        // All TextStyle properties are allowed
-        ...TextHeading1.text,
-        color: font.color,
-    },
-};
+export const com_mendix_widget_native_animation_Animation = (Animation = {
+    container: {},
+});

@@ -1,5 +1,5 @@
-import { Platform }                    from "react-native";
-import { background, brand, contrast } from "../variables";
+import { Platform }                          from "react-native";
+import { background, brand, contrast, font } from "../variables";
 
 //
 // DISCLAIMER:
@@ -38,5 +38,6 @@ export const TabContainer = {
     label: {
         // All TextStyle properties are allowed
         color: contrast.highest,
+        fontFamily: font.family,
     },
 };

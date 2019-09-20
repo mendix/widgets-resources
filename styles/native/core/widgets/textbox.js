@@ -1,4 +1,4 @@
-import { input, spacing } from "../variables";
+import { font, input, spacing } from "../variables";
 
 //
 // DISCLAIMER:
@@ -22,6 +22,7 @@ export const TextBox = {
         numberOfLines: 1,
         color: input.labelColor,
         fontSize: input.fontSize,
+        fontFamily: font.family,
         textAlign: input.textAlign,
         marginRight: spacing.small,
     },
@@ -34,6 +35,7 @@ export const TextBox = {
         placeholderTextColor: input.placeholderTextColor,
 
         fontSize: input.fontSize,
+        fontFamily: input.fontFamily,
         borderWidth: input.borderWidth,
         borderRadius: input.borderRadius,
 
@@ -54,6 +56,8 @@ export const TextBox = {
     validationMessage: {
         // All TextStyle properties are allowed
         color: input.errorColor,
+        fontSize: font.size,
+        fontFamily: font.family,
     },
 };
 
@@ -63,6 +67,7 @@ export const TextBoxVertical = {
         numberOfLines: 1,
         color: input.labelColor,
         fontSize: input.fontSize,
+        fontFamily: font.family,
         textAlign: input.textAlign,
         marginBottom: spacing.smallest,
     },
@@ -74,6 +79,7 @@ export const TextBoxVertical = {
         placeholderTextColor: input.placeholderTextColor,
 
         fontSize: input.fontSize,
+        fontFamily: input.fontFamily,
         borderRadius: input.borderRadius,
         borderWidth: input.borderWidth,
 
