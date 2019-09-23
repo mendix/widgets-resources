@@ -12,10 +12,6 @@
                 <caption>Content</caption>
                 <description>Sample text input</description>
             </property>
-            <property key="animateOnStart" type="boolean" defaultValue="false">
-                <caption>Animate on start</caption>
-                <description>Animates on start to show the possibilities of the list view</description>
-            </property>
             <property key="onPress" type="action" required="false">
                 <caption>onPress</caption>
                 <description/>
@@ -39,6 +35,10 @@
                 <caption>On swipe left</caption>
                 <description/>
             </property>
+            <property key="closeOnFinishLeft" type="boolean" defaultValue="false">
+                <caption>Close after swipe?</caption>
+                <description>Automatically close the left options when the action finishes. *Available only for "Action"</description>
+            </property>
         </propertyGroup>
         <propertyGroup caption="Right">
             <property key="rightRenderMode" type="enumeration" defaultValue="disabled">
@@ -57,6 +57,10 @@
             <property key="onSwipeRight" type="action" required="false">
                 <caption>On swipe right</caption>
                 <description/>
+            </property>
+            <property key="closeOnFinishRight" type="boolean" defaultValue="false">
+                <caption>Close after swipe?</caption>
+                <description>Automatically close the right options when the action finishes. *Available only for "Action"</description>
             </property>
         </propertyGroup>
     </properties>
