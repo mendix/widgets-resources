@@ -1,109 +1,111 @@
-import { Component, ComponentClass, createElement, ReactNode } from "react";
+import { Component, createElement, ReactNode } from "react";
 import { ListViewSwipeProps } from "../typings/ListViewSwipeProps";
-import { flattenStyles, Style } from "@native-mobile-resources/util-widgets";
-import Swipeable from "react-native-swipeable";
-import { Platform, TouchableNativeFeedback, TouchableOpacity, ViewStyle } from "react-native";
-
-interface ListViewSwipeStyle extends Style {
-    container: ViewStyle;
-    listItem: ViewStyle;
-    leftSwipeItem: ViewStyle & {
-        itemWidth: number;
-    };
-    rightSwipeItem: ViewStyle & {
-        itemWidth: number;
-    };
-}
-
-const defaultListViewSwipeStyle: ListViewSwipeStyle = {
-    container: {},
-    listItem: {
-        minHeight: 75
-    },
-    leftSwipeItem: {
-        itemWidth: 75
-    },
-    rightSwipeItem: {
-        itemWidth: 75
-    }
-};
+import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { View } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import { defaultListViewSwipeStyle, ListViewSwipeStyle, PanelStyle } from "./ui/styles";
 
 export class ListViewSwipe extends Component<ListViewSwipeProps<ListViewSwipeStyle>> {
-    private readonly onSwipeLeftHandler = this.onSwipeLeft.bind(this);
-    private readonly onSwipeRightHandler = this.onSwipeRight.bind(this);
+    private row: any;
     private readonly onPressHandler = this.onPress.bind(this);
     private readonly styles = flattenStyles(defaultListViewSwipeStyle, this.props.style);
+    private readonly onSwipeLeftHandler = this.onSwipeLeft.bind(this);
+    private readonly onSwipeRightHandler = this.onSwipeRight.bind(this);
+
+    private readonly isLeftSideAction = this.props.leftRenderMode === "action";
+    private readonly isRightSideAction = this.props.rightRenderMode === "action";
+    private readonly isLeftDisabled = this.props.leftRenderMode === "disabled";
+    private readonly isRightDisabled = this.props.rightRenderMode === "disabled";
 
     render(): ReactNode {
-        const Touchable: ComponentClass<any> = Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
-
-        const { leftRenderMode, rightRenderMode } = this.props;
-
-        const leftRenderOptions =
-            leftRenderMode === "action"
-                ? {
-                      leftContent: this.props.left,
-                      onLeftActionRelease: this.onSwipeLeftHandler,
-                      leftContainerStyle: this.styles.leftSwipeItem
-                  }
-                : leftRenderMode === "buttons"
-                ? {
-                      leftButtons: this.props.left,
-                      leftButtonContainerStyle: {
-                          ...this.styles.leftSwipeItem,
-                          maxWidth: this.styles.leftSwipeItem.itemWidth
-                      },
-                      leftButtonWidth: this.styles.leftSwipeItem.itemWidth,
-                      leftButtonsActivationDistance: this.styles.leftSwipeItem.itemWidth
-                  }
-                : {};
-
-        const rightRenderOptions =
-            rightRenderMode === "action"
-                ? {
-                      rightContent: this.props.right,
-                      onRightActionRelease: this.onSwipeRightHandler,
-                      rightContainerStyle: this.styles.rightSwipeItem
-                  }
-                : rightRenderMode === "buttons"
-                ? {
-                      rightButtons: this.props.right,
-                      rightButtonContainerStyle: {
-                          ...this.styles.rightSwipeItem,
-                          maxWidth: this.styles.rightSwipeItem.itemWidth
-                      },
-                      rightButtonWidth: this.styles.rightSwipeItem.itemWidth,
-                      rightButtonsActivationDistance: this.styles.rightSwipeItem.itemWidth
-                  }
-                : {};
-
         return (
             <Swipeable
-                leftActionActivationDistance={200}
-                {...leftRenderOptions}
-                {...rightRenderOptions}
-                contentContainerStyle={this.styles.listItem}
-                bounceOnMount={this.props.animateOnStart}
+                ref={this.updateRef}
+                friction={1}
+                leftThreshold={this.isLeftSideAction ? 100 : 40}
+                rightThreshold={this.isRightSideAction ? 100 : 40}
+                renderLeftActions={this.renderLeftActions}
+                renderRightActions={this.renderRightActions}
+                onSwipeableLeftOpen={this.onSwipeLeftHandler}
+                onSwipeableRightOpen={this.onSwipeRightHandler}
+                overshootLeft={false}
+                overshootRight={false}
+                useNativeAnimations
             >
-                <Touchable onPress={this.onPressHandler}>{this.props.content}</Touchable>
+                <RectButton style={this.styles.container} onPress={this.onPressHandler}>
+                    {this.props.content}
+                </RectButton>
             </Swipeable>
         );
     }
 
+    renderLeftActions = (): ReactNode => {
+        if (this.isLeftDisabled) {
+            return undefined;
+        } else if (this.isLeftSideAction) {
+            return this.renderAction(this.styles.leftAction, this.props.left);
+        } else {
+            return this.renderButtons(this.styles.leftAction, this.props.left);
+        }
+    };
+
+    renderRightActions = (): ReactNode => {
+        if (this.isRightDisabled) {
+            return undefined;
+        } else if (this.isRightSideAction) {
+            return this.renderAction(this.styles.rightAction, this.props.right);
+        } else {
+            return this.renderButtons(this.styles.rightAction, this.props.right);
+        }
+    };
+
+    updateRef = (ref: any) => {
+        this.row = ref;
+    };
+    close = () => {
+        this.row.close();
+    };
+
+    private renderAction = (style: PanelStyle, content: ReactNode) => {
+        return (
+            <RectButton style={style} onPress={this.close}>
+                {content}
+            </RectButton>
+        );
+    };
+
+    private renderButtons = (style: PanelStyle, content: ReactNode) => {
+        const actionStyle = { ...style };
+        delete actionStyle.panelSize;
+        return (
+            <View style={{ width: style.panelSize, flexDirection: "row" }}>
+                <View style={actionStyle}>{content}</View>
+            </View>
+        );
+    };
+
     private onSwipeLeft(): void {
-        if (this.props.onSwipeLeft && this.props.onSwipeLeft.canExecute) {
+        if (this.isLeftSideAction && this.props.onSwipeLeft && this.props.onSwipeLeft.canExecute) {
+            if (this.props.closeOnFinishLeft) {
+                this.row.close();
+            }
             this.props.onSwipeLeft.execute();
         }
     }
 
     private onSwipeRight(): void {
-        if (this.props.onSwipeRight && this.props.onSwipeRight.canExecute) {
+        if (this.isRightSideAction && this.props.onSwipeRight && this.props.onSwipeRight.canExecute) {
+            if (this.props.closeOnFinishRight) {
+                this.row.close();
+            }
             this.props.onSwipeRight.execute();
         }
     }
 
     private onPress(): void {
         if (this.props.onPress && this.props.onPress.canExecute) {
+            this.row.close();
             this.props.onPress.execute();
         }
     }
