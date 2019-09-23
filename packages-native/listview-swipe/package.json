@@ -18,6 +18,7 @@
         "build": "pluggable-widgets-tools build:ts:native --subprojectPath $npm_package_config_subprojectFolder",
         "build:release": "pluggable-widgets-tools release:ts:native --subprojectPath $npm_package_config_subprojectFolder",
         "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "test": "jest --config ../../scripts/test/jest.native.config.js",
         "version": "npm run build:release",
         "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
     },

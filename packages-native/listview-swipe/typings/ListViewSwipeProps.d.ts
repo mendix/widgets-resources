@@ -15,12 +15,13 @@ export type RightRenderModeEnum = "disabled" | "action" | "buttons";
 
 export interface ListViewSwipeProps<Style> extends CommonProps<Style> {
     content: any;
-    animateOnStart: boolean;
     onPress?: ActionValue;
     leftRenderMode: LeftRenderModeEnum;
     left?: any;
     onSwipeLeft?: ActionValue;
+    closeOnFinishLeft: boolean;
     rightRenderMode: RightRenderModeEnum;
     right?: any;
     onSwipeRight?: ActionValue;
+    closeOnFinishRight: boolean;
 }
