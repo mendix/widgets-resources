@@ -35,7 +35,7 @@
         "test:e2e": "export URL=https://videoplayer-sandbox.mxapps.io/ || set URL=https://videoplayer-sandbox.mxapps.io/ && wdio ../../configs/e2e/wdio.conf.js",
         "test:e2e:dev": "export DEBUG=true || set DEBUG=true && wdio ../../configs/e2e/wdio.conf.js",
         "release": "pluggable-widgets-tools release:ts --subprojectPath $npm_package_config_subprojectFolder",
-        "checkout": "ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+        "svncheckout": "ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
     },
     "devDependencies": {
         "@types/react-resize-detector": "^4.0.1"

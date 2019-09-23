@@ -8,6 +8,8 @@ mobile.
 | Client activities   | Show confirmation            |
 |                     | Sign in                      |
 |                     | Sign out                     |
+|                     | Show Process                 |
+|                     | Hide Process                 |
 | External activities | Call phone number            |
 |                     | Draft email                  |
 |                     | Navigate to                  |
