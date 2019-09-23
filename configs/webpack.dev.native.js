@@ -16,7 +16,6 @@ const customConfig = {
         "react-native-video",
         "react-native-view-shot",
         "react-native-webview",
-        "react-native-gesture-handler",
         "react-navigation"
     ],
     module: {
