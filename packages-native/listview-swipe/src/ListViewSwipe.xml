@@ -8,20 +8,10 @@
     <icon/>
     <properties>
         <propertyGroup caption="General">
-            <propertyGroup caption="General">
-                <property key="content" type="widgets">
-                    <caption>Foreground</caption>
-                    <description>Sample text input</description>
-                </property>
-                <property key="onPress" type="action" required="false">
-                    <caption>On click</caption>
-                    <description>Event on click should be used instead of listview on click</description>
-                </property>
-            </propertyGroup>
-            <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
-                <systemProperty key="Visibility"/>
-            </propertyGroup>
+            <property key="content" type="widgets">
+                <caption>Foreground</caption>
+                <description>Sample text input</description>
+            </property>
         </propertyGroup>
         <propertyGroup caption="Left">
             <propertyGroup caption="Action">
