@@ -135,7 +135,7 @@
                         <enumerationValue key="linear">Linear</enumerationValue>
                         <enumerationValue key="ease">Ease</enumerationValue>
                         <enumerationValue key="ease_in">Ease in</enumerationValue>
-                        <enumerationValue key="ease_out">Ease ou</enumerationValue>
+                        <enumerationValue key="ease_out">Ease out</enumerationValue>
                         <enumerationValue key="ease_in_out">Ease in out</enumerationValue>
                         <enumerationValue key="ease_in_cubic">Ease in cubic</enumerationValue>
                         <enumerationValue key="ease_out_cubic">Ease out cubic</enumerationValue>
