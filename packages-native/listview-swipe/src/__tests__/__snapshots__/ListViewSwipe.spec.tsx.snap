@@ -113,47 +113,19 @@ exports[`List View Swipe render with  left and right with actions 1`] = `
       }
     }
   >
-    <RNGestureHandlerButton
-      activeOpacity={0.105}
-      collapsable={false}
-      onActiveStateChange={[Function]}
-      onGestureEvent={[Function]}
-      onGestureHandlerEvent={[Function]}
-      onGestureHandlerStateChange={[Function]}
-      onHandlerStateChange={[Function]}
-      onPress={[Function]}
+    <View
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Object {
-            "backgroundColor": "white",
-            "flex": 1,
-            "flexDirection": "column",
-            "height": 80,
-            "justifyContent": "space-between",
-            "paddingHorizontal": 20,
-            "paddingVertical": 10,
-          },
-        ]
-      }
-      underlayColor="black"
-    >
-      <View
-        style={
-          Object {
-            "backgroundColor": "black",
-            "bottom": 0,
-            "left": 0,
-            "opacity": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          }
+        Object {
+          "backgroundColor": "white",
+          "flex": 1,
+          "flexDirection": "column",
+          "height": 80,
+          "justifyContent": "space-between",
+          "paddingHorizontal": 20,
+          "paddingVertical": 10,
         }
-      />
-    </RNGestureHandlerButton>
+      }
+    />
   </View>
 </View>
 `;
@@ -271,47 +243,19 @@ exports[`List View Swipe render with left and action 1`] = `
       }
     }
   >
-    <RNGestureHandlerButton
-      activeOpacity={0.105}
-      collapsable={false}
-      onActiveStateChange={[Function]}
-      onGestureEvent={[Function]}
-      onGestureHandlerEvent={[Function]}
-      onGestureHandlerStateChange={[Function]}
-      onHandlerStateChange={[Function]}
-      onPress={[Function]}
+    <View
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Object {
-            "backgroundColor": "white",
-            "flex": 1,
-            "flexDirection": "column",
-            "height": 80,
-            "justifyContent": "space-between",
-            "paddingHorizontal": 20,
-            "paddingVertical": 10,
-          },
-        ]
-      }
-      underlayColor="black"
-    >
-      <View
-        style={
-          Object {
-            "backgroundColor": "black",
-            "bottom": 0,
-            "left": 0,
-            "opacity": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          }
+        Object {
+          "backgroundColor": "white",
+          "flex": 1,
+          "flexDirection": "column",
+          "height": 80,
+          "justifyContent": "space-between",
+          "paddingHorizontal": 20,
+          "paddingVertical": 10,
         }
-      />
-    </RNGestureHandlerButton>
+      }
+    />
   </View>
 </View>
 `;
@@ -429,47 +373,19 @@ exports[`List View Swipe render with right and action 1`] = `
       }
     }
   >
-    <RNGestureHandlerButton
-      activeOpacity={0.105}
-      collapsable={false}
-      onActiveStateChange={[Function]}
-      onGestureEvent={[Function]}
-      onGestureHandlerEvent={[Function]}
-      onGestureHandlerStateChange={[Function]}
-      onHandlerStateChange={[Function]}
-      onPress={[Function]}
+    <View
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Object {
-            "backgroundColor": "white",
-            "flex": 1,
-            "flexDirection": "column",
-            "height": 80,
-            "justifyContent": "space-between",
-            "paddingHorizontal": 20,
-            "paddingVertical": 10,
-          },
-        ]
-      }
-      underlayColor="black"
-    >
-      <View
-        style={
-          Object {
-            "backgroundColor": "black",
-            "bottom": 0,
-            "left": 0,
-            "opacity": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          }
+        Object {
+          "backgroundColor": "white",
+          "flex": 1,
+          "flexDirection": "column",
+          "height": 80,
+          "justifyContent": "space-between",
+          "paddingHorizontal": 20,
+          "paddingVertical": 10,
         }
-      />
-    </RNGestureHandlerButton>
+      }
+    />
   </View>
 </View>
 `;
@@ -587,47 +503,19 @@ exports[`List View Swipe renders 1`] = `
       }
     }
   >
-    <RNGestureHandlerButton
-      activeOpacity={0.105}
-      collapsable={false}
-      onActiveStateChange={[Function]}
-      onGestureEvent={[Function]}
-      onGestureHandlerEvent={[Function]}
-      onGestureHandlerStateChange={[Function]}
-      onHandlerStateChange={[Function]}
-      onPress={[Function]}
+    <View
       style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Object {
-            "backgroundColor": "white",
-            "flex": 1,
-            "flexDirection": "column",
-            "height": 80,
-            "justifyContent": "space-between",
-            "paddingHorizontal": 20,
-            "paddingVertical": 10,
-          },
-        ]
-      }
-      underlayColor="black"
-    >
-      <View
-        style={
-          Object {
-            "backgroundColor": "black",
-            "bottom": 0,
-            "left": 0,
-            "opacity": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          }
+        Object {
+          "backgroundColor": "white",
+          "flex": 1,
+          "flexDirection": "column",
+          "height": 80,
+          "justifyContent": "space-between",
+          "paddingHorizontal": 20,
+          "paddingVertical": 10,
         }
-      />
-    </RNGestureHandlerButton>
+      }
+    />
   </View>
 </View>
 `;
