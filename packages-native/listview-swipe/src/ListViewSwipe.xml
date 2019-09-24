@@ -8,60 +8,70 @@
     <icon/>
     <properties>
         <propertyGroup caption="General">
-            <property key="content" type="widgets">
-                <caption>Content</caption>
-                <description>Sample text input</description>
-            </property>
-            <property key="onPress" type="action" required="false">
-                <caption>onPress</caption>
-                <description/>
-            </property>
+            <propertyGroup caption="General">
+                <property key="content" type="widgets">
+                    <caption>Foreground</caption>
+                    <description>Sample text input</description>
+                </property>
+                <property key="onPress" type="action" required="false">
+                    <caption>On click</caption>
+                    <description>Event on click should be used instead of listview on click</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+                <systemProperty key="Visibility"/>
+            </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Left">
-            <property key="leftRenderMode" type="enumeration" defaultValue="disabled">
-                <caption>Render mode</caption>
-                <description />
-                <enumerationValues>
-                    <enumerationValue key="disabled">Disabled</enumerationValue>
-                    <enumerationValue key="action">Action</enumerationValue>
-                    <enumerationValue key="buttons">Buttons</enumerationValue>
-                </enumerationValues>
-            </property>
-            <property key="left" type="widgets" required="false">
-                <caption>Left options</caption>
-                <description>Sample text input</description>
-            </property>
-            <property key="onSwipeLeft" type="action" required="false">
-                <caption>On swipe left</caption>
-                <description/>
-            </property>
-            <property key="closeOnFinishLeft" type="boolean" defaultValue="false">
-                <caption>Close after swipe?</caption>
-                <description>Automatically close the left options when the action finishes. *Available only for "Action"</description>
-            </property>
+            <propertyGroup caption="Action">
+                <property key="leftRenderMode" type="enumeration" defaultValue="disabled">
+                    <caption>Swipe</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="disabled">Disabled</enumerationValue>
+                        <enumerationValue key="action">Call action</enumerationValue>
+                        <enumerationValue key="buttons">Show buttons</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="left" type="widgets" required="false">
+                    <caption>Left background</caption>
+                    <description>Sample text input</description>
+                </property>
+                <property key="onSwipeLeft" type="action" required="false">
+                    <caption>On swipe action</caption>
+                    <description/>
+                </property>
+                <property key="closeOnFinishLeft" type="boolean" defaultValue="false">
+                    <caption>Reset after swipe</caption>
+                    <description>Return to original state after swipe (available only for "Call action")</description>
+                </property>
+            </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Right">
-            <property key="rightRenderMode" type="enumeration" defaultValue="disabled">
-                <caption>Render mode</caption>
-                <description />
-                <enumerationValues>
-                    <enumerationValue key="disabled">Disabled</enumerationValue>
-                    <enumerationValue key="action">Action</enumerationValue>
-                    <enumerationValue key="buttons">Buttons</enumerationValue>
-                </enumerationValues>
-            </property>
-            <property key="right" type="widgets" required="false">
-                <caption>Right options</caption>
-                <description>Sample text input</description>
-            </property>
-            <property key="onSwipeRight" type="action" required="false">
-                <caption>On swipe right</caption>
-                <description/>
-            </property>
-            <property key="closeOnFinishRight" type="boolean" defaultValue="false">
-                <caption>Close after swipe?</caption>
-                <description>Automatically close the right options when the action finishes. *Available only for "Action"</description>
-            </property>
+            <propertyGroup caption="Action">
+                <property key="rightRenderMode" type="enumeration" defaultValue="disabled">
+                    <caption>Swipe</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="disabled">Disabled</enumerationValue>
+                        <enumerationValue key="action">Call action</enumerationValue>
+                        <enumerationValue key="buttons">Show buttons</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="right" type="widgets" required="false">
+                    <caption>Right background</caption>
+                    <description>Sample text input</description>
+                </property>
+                <property key="onSwipeRight" type="action" required="false">
+                    <caption>On swipe action</caption>
+                    <description/>
+                </property>
+                <property key="closeOnFinishRight" type="boolean" defaultValue="false">
+                    <caption>Reset after swipe</caption>
+                    <description>Return to original state after swipe (available only for "Call action")</description>
+                </property>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>
