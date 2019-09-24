@@ -14,7 +14,6 @@ coverage
 **/TestProjects/*/.svn/
 **/TestProjects/*/GPUCache/
 **/TestProjects/*/deployment/
-**/TestProjects/Mendix7/theme/
 **/TestProjects/Mendix7/rating/
 **/TestProjects/**/TestProject2/
 **/TestProjects/**/theme_old/
