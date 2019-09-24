@@ -8,7 +8,6 @@ import { defaultListViewSwipeStyle, ListViewSwipeStyle, PanelStyle } from "./ui/
 
 export class ListViewSwipe extends Component<ListViewSwipeProps<ListViewSwipeStyle>> {
     private row: any;
-    private readonly onPressHandler = this.onPress.bind(this);
     private readonly styles = flattenStyles(defaultListViewSwipeStyle, this.props.style);
     private readonly onSwipeLeftHandler = this.onSwipeLeft.bind(this);
     private readonly onSwipeRightHandler = this.onSwipeRight.bind(this);
@@ -33,9 +32,7 @@ export class ListViewSwipe extends Component<ListViewSwipeProps<ListViewSwipeSty
                 overshootRight={false}
                 useNativeAnimations
             >
-                <RectButton style={this.styles.container} onPress={this.onPressHandler}>
-                    {this.props.content}
-                </RectButton>
+                <View style={this.styles.container}>{this.props.content}</View>
             </Swipeable>
         );
     }
@@ -100,13 +97,6 @@ export class ListViewSwipe extends Component<ListViewSwipeProps<ListViewSwipeSty
                 this.row.close();
             }
             this.props.onSwipeRight.execute();
-        }
-    }
-
-    private onPress(): void {
-        if (this.props.onPress && this.props.onPress.canExecute) {
-            this.row.close();
-            this.props.onPress.execute();
         }
     }
 }
