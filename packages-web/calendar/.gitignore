@@ -10,8 +10,8 @@
 !/tests/TestProjects/**/widgets/HTMLSnippet.mpk
 
 /tests/TestProjects/**/theme/styles/native
-/tests/TestProjects/**/theme/styles/web/sass
-/tests/TestProjects/**/theme/styles/web/sass
+/tests/TestProjects/Mendix7/theme/styles/sass
+/tests/TestProjects/Mendix8/theme/styles/web/sass
 /tests/TestProjects/**/theme/styles/web/css/main.css.map
 /tests/TestProjects/**/theme/*.*
 !/tests/TestProjects/**/theme/components.json
