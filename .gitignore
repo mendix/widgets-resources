@@ -1,9 +1,6 @@
 dist
 node_modules
-.idea
 .env
-.vscode
-.DS_Store
 *.log
 *.bak
 *.launch
