@@ -16,6 +16,9 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "../ui/Calendar.scss";
 import "../ui/CalendarLoader.scss";
 
+const localizer = BigCalendar.momentLocalizer(moment);
+const DragAndDropCalendar = withDragAndDrop(BigCalendar);
+
 export interface CalendarProps {
     alertMessage?: ReactChild;
     className?: string;
@@ -63,9 +66,6 @@ export interface CalendarEvent {
 }
 
 class Calendar extends Component<CalendarProps> {
-    private localizer = BigCalendar.momentLocalizer(moment);
-    private dragAndDropCalendar = withDragAndDrop(BigCalendar);
-
     render(): ReactNode {
         return createElement(
             SizeContainer,
@@ -130,7 +130,7 @@ class Calendar extends Component<CalendarProps> {
             createElement(CustomToolbar as any, { ...injectedProps, ...toolbarProps });
 
         const props = {
-            localizer: this.localizer,
+            localizer,
             events: this.props.events,
             allDayAccessor: this.allDayAccessor,
             components: {
@@ -154,7 +154,7 @@ class Calendar extends Component<CalendarProps> {
         if (this.props.loading) {
             return createElement(CalendarLoader);
         } else if (this.props.enableCreate && this.props.editable === "default") {
-            return createElement(this.dragAndDropCalendar, {
+            return createElement(DragAndDropCalendar, {
                 ...props,
                 onEventDrop: this.onEventDrop,
                 onEventResize: this.onEventResize
