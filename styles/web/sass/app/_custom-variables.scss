@@ -67,6 +67,6 @@ $font-color-header:				                    $font-color-headers;
 //== Settings
 //## Enable or disable your desired framework features
 // Use of !important
-$important-flex:                        true !default; // ./base/flex.scss
-$important-spacing:                     true !default; // ./base/spacing.scss
-$important-helpers:                     true !default; // ./helpers/helperclasses.scss
+$important-flex:                                    true; // ./base/flex.scss
+$important-spacing:                                 true; // ./base/spacing.scss
+$important-helpers:                                 true; // ./helpers/helperclasses.scss
