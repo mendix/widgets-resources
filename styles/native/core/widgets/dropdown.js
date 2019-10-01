@@ -42,9 +42,10 @@ export const DropDown = {
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
 
+        fontSize: input.fontSize,
         fontFamily: input.fontFamily,
         borderWidth: input.borderWidth,
-        borderRadius: input.radius,
+        borderRadius: input.borderRadius,
 
         paddingHorizontal: input.paddingHorizontal,
         paddingVertical: input.paddingVertical,
@@ -65,17 +66,6 @@ export const DropDownVertical = {
     pickerItemIOS: DropDown.pickerItemIOS,
     pickerBackdropIOS: DropDown.pickerBackdropIOS,
     pickerTopIOS: DropDown.pickerTopIOS,
-    value: {
-        color: input.color,
-        borderColor: input.borderColor,
-        backgroundColor: input.backgroundColor,
-
-        fontFamily: input.fontFamily,
-        borderRadius: input.radius,
-        borderWidth: input.borderWidth,
-
-        paddingVertical: input.paddingVertical,
-        paddingHorizontal: input.paddingHorizontal,
-    },
+    value: DropDown.value,
     validationMessage: TextBoxVertical.validationMessage,
 };
