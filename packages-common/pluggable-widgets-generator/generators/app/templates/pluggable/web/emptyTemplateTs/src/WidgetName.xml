@@ -7,10 +7,11 @@
     <description>WidgetDescription</description>
     <icon/>
     <properties>
-        <property key="sampleText" type="string" required="false">
-            <caption>Default value</caption>
-            <category>General</category>
-            <description>Sample text input</description>
-        </property>
+        <propertyGroup caption="General">
+            <property key="sampleText" type="string" required="false">
+                <caption>Default value</caption>
+                <description>Sample text input</description>
+            </property>
+        </propertyGroup>
     </properties>
 </widget>

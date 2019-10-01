@@ -1,6 +1,6 @@
 {
   "name": "@mendix/generator-widget",
-  "version": "8.1.0",
+  "version": "8.2.0",
   "description": "Mendix Pluggable Widget Generator",
   "license": "Apache-2.0",
   "main": "app/index.js",
