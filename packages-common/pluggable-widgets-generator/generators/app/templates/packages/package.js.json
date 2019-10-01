@@ -28,7 +28,7 @@
   },
   "license": "<%- license %>",
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^8.1.0"
+    "@mendix/pluggable-widgets-tools": "^8.2.0"
   },
   "dependencies": {
     "big.js": "^5.2.2",
