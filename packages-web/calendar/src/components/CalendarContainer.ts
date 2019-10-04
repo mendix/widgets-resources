@@ -22,7 +22,8 @@ interface ViewDate {
 }
 
 class CalendarContainer extends Component<Container.CalendarContainerProps, CalendarContainerState> {
-    private subscriptionHandles: number[] = [];
+    private subscriptionContextHandles: number[] = [];
+    private subscriptionEventHandles: number[] = [];
     private progressHandle?: number;
 
     readonly state: CalendarContainerState = {
@@ -81,7 +82,8 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
     }
 
     componentWillUnmount(): void {
-        this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
+        this.subscriptionContextHandles.forEach(window.mx.data.unsubscribe);
+        this.subscriptionEventHandles.forEach(window.mx.data.unsubscribe);
     }
 
     componentWillReceiveProps(nextProps: Container.CalendarContainerProps): void {
@@ -112,6 +114,8 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
     };
 
     private loadEvents = (mxObject: mendix.lib.MxObject): void => {
+        this.subscriptionEventHandles.forEach(window.mx.data.unsubscribe);
+        this.subscriptionEventHandles = [];
         if (!mxObject) {
             return;
         }
@@ -128,8 +132,16 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
                 microflow: this.props.dataSourceMicroflow,
                 mxform: this.props.mxform,
                 nanoflow: this.props.dataSourceNanoflow
-            }).then(mxObjects => {
-                this.setCalendarEvents(mxObjects);
+            }).then(mxEventObjects => {
+                mxEventObjects.forEach(
+                    mxEventObject =>
+                        (this.subscriptionEventHandles = [
+                            ...this.subscriptionEventHandles,
+                            ...this.subscribeToEventAttributes(mxEventObject)
+                        ])
+                );
+                this.setCalendarEvents(mxEventObjects);
+
                 if (this.progressHandle) {
                     mx.ui.hideProgress(this.progressHandle);
                     this.progressHandle = undefined;
@@ -187,46 +199,51 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         }
     };
 
+    private subscribeToEventAttributes(mxEventObject: mendix.lib.MxObject): number[] {
+        return [
+            this.props.allDayAttribute,
+            this.props.titleAttribute,
+            this.props.startAttribute,
+            this.props.endAttribute,
+            this.props.eventColor
+        ].map(attr =>
+            window.mx.data.subscribe({
+                attr,
+                callback: () => this.loadEvents(this.props.mxObject),
+                guid: mxEventObject.getGuid()
+            })
+        );
+    }
+
     private resetSubscriptions = (mxObject: mendix.lib.MxObject): void => {
-        this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
-        this.subscriptionHandles = [];
+        this.subscriptionContextHandles.forEach(window.mx.data.unsubscribe);
+        this.subscriptionContextHandles = [];
 
         if (mxObject) {
-            this.subscriptionHandles.push(
+            this.subscriptionContextHandles.push(
                 window.mx.data.subscribe({
                     guid: mxObject.getGuid(),
                     attr: this.props.startDateAttribute,
                     callback: () => this.getStartPosition(mxObject)
                 })
             );
-            this.subscriptionHandles.push(
+            this.subscriptionContextHandles.push(
                 window.mx.data.subscribe({
                     entity: this.props.eventEntity,
                     callback: () => this.loadEvents(mxObject)
                 })
             );
-            this.subscriptionHandles.push(
+            this.subscriptionContextHandles.push(
                 window.mx.data.subscribe({
                     guid: mxObject.getGuid(),
                     callback: () => this.loadEvents(mxObject)
                 })
             );
             if (this.props.dataSource === "context" && mxObject.getEntity() === this.props.eventEntity) {
-                [
-                    this.props.allDayAttribute,
-                    this.props.titleAttribute,
-                    this.props.startAttribute,
-                    this.props.endAttribute,
-                    this.props.eventColor
-                ].forEach(attr =>
-                    this.subscriptionHandles.push(
-                        window.mx.data.subscribe({
-                            attr,
-                            callback: () => this.loadEvents(mxObject),
-                            guid: mxObject.getGuid()
-                        })
-                    )
-                );
+                this.subscriptionContextHandles = [
+                    ...this.subscriptionContextHandles,
+                    ...this.subscribeToEventAttributes(mxObject)
+                ];
             }
         }
     };

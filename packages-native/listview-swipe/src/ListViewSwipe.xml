@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.native.listviewswipe.ListViewSwipe" supportedPlatform="Native" needsEntityContext="true"
+        offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>List View Swipe</name>
+    <description/>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <property key="content" type="widgets">
+                <caption>Foreground</caption>
+                <description>Sample text input</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Left">
+            <propertyGroup caption="Action">
+                <property key="leftRenderMode" type="enumeration" defaultValue="disabled">
+                    <caption>Swipe</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="disabled">Disabled</enumerationValue>
+                        <enumerationValue key="action">Call action</enumerationValue>
+                        <enumerationValue key="buttons">Show buttons</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="left" type="widgets" required="false">
+                    <caption>Left background</caption>
+                    <description>Sample text input</description>
+                </property>
+                <property key="onSwipeLeft" type="action" required="false">
+                    <caption>On swipe action</caption>
+                    <description/>
+                </property>
+                <property key="closeOnFinishLeft" type="boolean" defaultValue="false">
+                    <caption>Reset after swipe</caption>
+                    <description>Return to original state after swipe (available only for "Call action")</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Right">
+            <propertyGroup caption="Action">
+                <property key="rightRenderMode" type="enumeration" defaultValue="disabled">
+                    <caption>Swipe</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="disabled">Disabled</enumerationValue>
+                        <enumerationValue key="action">Call action</enumerationValue>
+                        <enumerationValue key="buttons">Show buttons</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="right" type="widgets" required="false">
+                    <caption>Right background</caption>
+                    <description>Sample text input</description>
+                </property>
+                <property key="onSwipeRight" type="action" required="false">
+                    <caption>On swipe action</caption>
+                    <description/>
+                </property>
+                <property key="closeOnFinishRight" type="boolean" defaultValue="false">
+                    <caption>Reset after swipe</caption>
+                    <description>Return to original state after swipe (available only for "Call action")</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

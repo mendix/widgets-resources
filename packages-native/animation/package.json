@@ -1,0 +1,45 @@
+{
+    "name": "animation",
+    "widgetName": "Animation",
+    "version": "1.0.0",
+    "description": "Container for animations",
+    "copyright": "Mendix 2019",
+    "author": "Widget Team",
+    "config": {
+        "widgetPath": "../test-project/mxproject/widgets",
+        "projectPath": "../test-project/mxproject",
+        "subprojectFolder": "packages-native/animation"
+    },
+    "packagePath": "com.mendix.widget.native",
+    "scripts": {
+        "start": "../../node_modules/.bin/pluggable-widgets-tools start:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "build": "../../node_modules/.bin/pluggable-widgets-tools build:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "release": "../../node_modules/.bin/pluggable-widgets-tools release:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "test": "../../node_modules/.bin/jest --config ../../scripts/test/jest.native.config.js",
+        "version": "npm run build:release",
+        "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
+    },
+    "jest-junit": {
+        "output": "./dist/testresults/TESTS-Jest.xml"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mendix/widgets-resources.git"
+    },
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "@types/big.js": "^4.0.5",
+        "@types/classnames": "^2.2.6",
+        "@types/enzyme": "^3.1.14",
+        "@types/jest": "^24.0.0",
+        "@types/react": "^16.8.17",
+        "@types/react-dom": "^16.8.4",
+        "@types/react-native": "^0.57.56"
+    },
+    "dependencies": {
+        "big.js": "^5.2.2",
+        "react-native-animatable": "^1.3.2",
+        "@native-mobile-resources/util-widgets": "^0.0.1"
+    }
+}

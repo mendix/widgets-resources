@@ -28,6 +28,8 @@ A bundle of R&D Platform supported widgets & nanoflow actions for building nativ
 | [Toggle buttons][]         | Change an enumeration value using a group of buttons.           |
 | [Video player][]           | Play a video loaded from a URL.                                 |
 | [Web view][]               | Display an external web page or load custom HTML.               |
+| [Animation][]              | Provides default animations for contents and widgets.           |
+| [List view swipe][]        | Show controls on swipe for an interactive list view.            |
 
 ## Web & Hybrid widgets
 
@@ -60,6 +62,8 @@ A bundle of R&D Platform supported widgets & nanoflow actions for building nativ
 [toggle buttons]: https://github.com/mendix/widgets-resources/blob/master/packages-native/toggle-buttons
 [video player]: https://github.com/mendix/widgets-resources/blob/master/packages-native/video-player
 [web view]: https://github.com/mendix/widgets-resources/blob/master/packages-native/web-view
+[animation]: https://github.com/mendix/widgets-resources/blob/master/packages-native/animation
+[list view swipe]: https://github.com/mendix/widgets-resources/blob/master/packages-native/listview-swipe
 
 ## Included nanoflow actions
 
@@ -98,13 +102,38 @@ mobile apps.
 
 See [CONTRIBUTING.md](https://github.com/mendix/widgets-resources/blob/master/CONTRIBUTING.md).
 
-## SVN Checkout
+## Developing
 
-To checkout, you need to add the following environment variables to your OS
+-   `npm install` on root
 
-```
-SPRINTR_USERNAME
-SPRINTR_PASSWORD
-```
+### For developing in `packages-native`:
 
-With the corresponding username and password at Sprintr.
+-   Create a simple Mendix project in Studio
+-   Copy all of it's contents to `packages-native/test-project`.
+-   Run `npm run build` on a desired widget folder. For ex: `packages-native/badge/`. This will build and copy the mpk
+    to the test-project's correct widget folder.
+-   Open and run the project in `packages-native/test-project` with Mendix Studio
+
+### For developing in `packages-web`:
+
+-   Mendix projects for each widget already comes with repo with folder called
+    `packages-web/**WIDGETNAME**/tests/TestProjects/Mendix*`
+-   Run `npm run build` on a desired widget folder. For ex: `packages-web/badge`. This will build and copy the mpk to
+    each Mendix project's correct widget folder.
+-   Open and run the project in `packages-native/test-project` with Mendix Studio
+
+### For developing in `packages-common/nanoflow-commons`:
+
+-   Create a simple Mendix project in Studio.
+-   Copy all of it's contents to `packages-common/nanoflow-commons/dist/mxproject`.
+-   Run `npm run build` on `packages-common/nanoflow-commons`. This will build and copy the mpk to dist/mxproject's
+    correct folder.
+
+Please bear in mind that when you develop JSActions, creation process is not automatically picked up by Modeler. Which
+means:
+
+-   First you have to create the ts file in `nanoflow-commons/src/.../ExampleName.ts` with desired content. Please take
+    a look at examples in `src/client`.
+-   Second you have to create a JsAction with name `ExampleName` and `parameters` in Studio.
+-   Then every time `npm run build` is run, the code piece between `// BEGIN USER CODE` and `// END USER CODE` will be
+    changed. After you close and open the JSAction in Studiom changes will be picked up automatically.

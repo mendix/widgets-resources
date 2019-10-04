@@ -1,0 +1,47 @@
+{
+    "name": "hybrid-mobile-actions",
+    "version": "0.0.1",
+    "license": "Apache-2.0",
+    "scripts": {
+        "start": "../../node_modules/.bin/tsc --watch",
+        "build": "npm run build:tsc && npm run build:babel",
+        "prebuild:tsc": "rm -rf dist/tsc",
+        "build:tsc": "../../node_modules/.bin/tsc --project src/tsconfig.json",
+        "prebuild:babel": "rm -rf dist/babel",
+        "build:babel": "../../node_modules/.bin/babel dist/tsc --out-dir dist/babel",
+        "postbuild": "../../node_modules/.bin/ts-node --project scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
+        "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/"
+    },
+    "devDependencies": {
+        "@types/big.js": "^4.0.5",
+        "@types/cordova": "^0.0.34",
+        "@types/cordova-plugin-app-version": "^0.1.35",
+        "@types/node": "^12.0.2",
+        "cordova-plugin-camera": "^4.1.0",
+        "cordova-plugin-contacts": "^3.0.1",
+        "cordova-plugin-file": "^6.0.2",
+        "cordova-plugin-media": "^5.0.3",
+        "cordova-plugin-network-information": "^2.0.2",
+        "cordova-plugin-statusbar": "^2.4.3"
+    },
+    "babel": {
+        "presets": [
+            [
+                "@babel/preset-env",
+                {
+                    "targets": {
+                        "chrome": "49",
+                        "firefox": "52",
+                        "edge": "16",
+                        "safari": "9",
+                        "ie": "11",
+                        "ios": "9",
+                        "android": "5"
+                    }
+                }
+            ]
+        ],
+        "sourceType": "script",
+        "retainLines": true
+    }
+}

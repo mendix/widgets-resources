@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.animation.Animation" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Native"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Animation</name>
+    <description>Container for animating content</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAA0BJREFUeAHtmLGPEkEUxmGJEi2EVgsbK0NCdZ2dJCZ2pwkQEqxOSYhWJmcsKY0kVhoSclcYMQTI6VWanMHwB1wp2EhzxVnQQIkG8Htk97I7MzvMLUdyeG8Twsyb730z89vZZYZQiC8mwASYABNgAkyACTABJsAEmAATYAJMgAkwASbABJgAE7g4BMLrONVCoXBpNBptTqfTzXA4vDGbzW7QPFA+RvnQsqz9WCy2X61W/y6a39oBSKfTDzDRMiZ6Szc5aPrQbLdarc9ana7xLNpyuVxiMpk8xmDuwe+m7XmEAR5EIpGder3eNemnVCpZ3W73FbTbJnqXppxIJF4if+qKnRRXtgJwpy5jkm/QUxGTt056dBXQToOqoP057tQfV5NUhN9rBE87ecenDP8XTsX97QsAgwpns1m6c1tISNhJXQx6t9Fo7OB75jZyl2nyqH/F5647ril/R9t9Pwi07NH+SZNv0vQQ/tLjoASQz+evj8fjD3BN+Ti3o9Hoo1qt9lvVnslk3gLcU1WbXwxA3zWbzWdiO73whsPhT/hpn3kxT6zDvx+Px2+LL0ZpadKdXzB58k6RhrRiR/TMI1YU4wb1op3rkdLbftnJkyF5kJfHHBUJAC17xP3uvDs/ZWvdsZD9wpN8PSJFBQO0KFdsop86MRa0rvKSBoqBbJl2oNIiRm/7QJcqF0t3I5CZIknlJQFAnvPCU1hIIZXW+amTxAYBKRdQ5pscg9yFEpWXCsBCo/9JoAJgtDGxIai0R0sAknKxbI+X8POkqrwkABDterI0FR/tN02Ktgl+B6IAy/ZQjAWtq7wkALTJQQdtg07attYjxUGENkm0wzvVRTm0NRaT6GAjxoLWVV4SAAxkRpscdKKDMN8IkVYcDKD8QKwixg3qFdW5gE516KdvkK+VkAd5iSJpI+MIsFwu7lbYgbDM97ochiLLTFKX2+v1Jji+fkkmk3tYTXTSu4bPFXyo/AtL8iOe+Sd4ZN6TFjHthfNFezAYXIXojlYoN86Pw51OR3pcSer7CMg+5yNCJ0PAW58/RFaB7Sz/ElvF+NiTCTABJsAEmAATYAJMgAkwASbABJgAE2ACTIAJMAEmwATOK4F/LkNXt8iCraQAAAAASUVORK5CYII=</icon>
+    <properties>
+        <propertyGroup caption="General">
+
+            <propertyGroup caption="Content">
+                <property key="content" type="widgets" required="true">
+                    <caption>Content</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+
+            <propertyGroup caption="Effect">
+                <property key="animationType" type="enumeration" defaultValue="in">
+                    <caption>Type</caption>
+                    <description>An entrance animation goes from invisible to visible. An attention animation stays visible and returns to its original state. An exit animation goes from visible to invisible.</description>
+                    <enumerationValues>
+                        <enumerationValue key="in">Entrance</enumerationValue>
+                        <enumerationValue key="attention">Attention</enumerationValue>
+                        <enumerationValue key="out">Exit</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="animationIn" type="enumeration" defaultValue="fadeIn">
+                    <caption>Entry animation</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="none">None</enumerationValue>
+                        <enumerationValue key="bounceIn">Bounce</enumerationValue>
+                        <enumerationValue key="bounceInDown">Bounce down</enumerationValue>
+                        <enumerationValue key="bounceInUp">Bounce up</enumerationValue>
+                        <enumerationValue key="bounceInLeft">Bounce left</enumerationValue>
+                        <enumerationValue key="bounceInRight">Bounce right</enumerationValue>
+                        <enumerationValue key="fadeIn">Fade</enumerationValue>
+                        <enumerationValue key="fadeInDown">Fade down</enumerationValue>
+                        <enumerationValue key="fadeInDownBig">Fade down big</enumerationValue>
+                        <enumerationValue key="fadeInUp">Fade up</enumerationValue>
+                        <enumerationValue key="fadeInUpBig">Fade up big</enumerationValue>
+                        <enumerationValue key="fadeInLeft">Fade left</enumerationValue>
+                        <enumerationValue key="fadeInLeftBig">Fade left big</enumerationValue>
+                        <enumerationValue key="fadeInRight">Fade right</enumerationValue>
+                        <enumerationValue key="fadeInRightBig">Fade right big</enumerationValue>
+                        <enumerationValue key="slideInDown">Slide down</enumerationValue>
+                        <enumerationValue key="slideInUp">Slide up</enumerationValue>
+                        <enumerationValue key="slideInLeft">Slide left</enumerationValue>
+                        <enumerationValue key="slideInRight">Slide right</enumerationValue>
+                        <enumerationValue key="zoomIn">Zoom</enumerationValue>
+                        <enumerationValue key="zoomInDown">Zoom down</enumerationValue>
+                        <enumerationValue key="zoomInUp">Zoom up</enumerationValue>
+                        <enumerationValue key="zoomInLeft">Zoom left</enumerationValue>
+                        <enumerationValue key="zoomInRight">Zoom right</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="animationAttention" type="enumeration" defaultValue="none">
+                    <caption>Attention animation</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="none">None</enumerationValue>
+                        <enumerationValue key="bounce">Bounce</enumerationValue>
+                        <enumerationValue key="flash">Flash</enumerationValue>
+                        <enumerationValue key="pulse">Pulse</enumerationValue>
+                        <enumerationValue key="rotate">Rotate</enumerationValue>
+                        <enumerationValue key="rubberBand">Rubber band</enumerationValue>
+                        <enumerationValue key="shake">Shake</enumerationValue>
+                        <enumerationValue key="swing">Swing</enumerationValue>
+                        <enumerationValue key="tada">Tada</enumerationValue>
+                        <enumerationValue key="wobble">Wobble</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="animationOut" type="enumeration" defaultValue="none">
+                    <caption>Exit animation</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="none">None</enumerationValue>
+                        <enumerationValue key="bounceOut">Bounce</enumerationValue>
+                        <enumerationValue key="bounceOutDown">Bounce down</enumerationValue>
+                        <enumerationValue key="bounceOutUp">Bounce up</enumerationValue>
+                        <enumerationValue key="bounceOutLeft">Bounce left</enumerationValue>
+                        <enumerationValue key="bounceOutRight">Bounce right</enumerationValue>
+                        <enumerationValue key="fadeOut">Fade</enumerationValue>
+                        <enumerationValue key="fadeOutDown">Fade down</enumerationValue>
+                        <enumerationValue key="fadeOutDownBig">Fade down big</enumerationValue>
+                        <enumerationValue key="fadeOutUp">Fade up</enumerationValue>
+                        <enumerationValue key="fadeOutUpBig">Fade up big</enumerationValue>
+                        <enumerationValue key="fadeOutLeft">Fade left</enumerationValue>
+                        <enumerationValue key="fadeOutLeftBig">Fade left big</enumerationValue>
+                        <enumerationValue key="fadeOutRight">Fade right</enumerationValue>
+                        <enumerationValue key="fadeOutRightBig">Fade right big</enumerationValue>
+                        <enumerationValue key="slideOutDown">Slide down</enumerationValue>
+                        <enumerationValue key="slideOutUp">Slide up</enumerationValue>
+                        <enumerationValue key="slideOutLeft">Slide left</enumerationValue>
+                        <enumerationValue key="slideOutRight">Slide right</enumerationValue>
+                        <enumerationValue key="zoomOut">Zoom</enumerationValue>
+                        <enumerationValue key="zoomOutDown">Zoom down</enumerationValue>
+                        <enumerationValue key="zoomOutUp">Zoom up</enumerationValue>
+                        <enumerationValue key="zoomOutLeft">Zoom left</enumerationValue>
+                        <enumerationValue key="zoomOutRight">Zoom right</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+
+            <propertyGroup caption="Timing">
+                <property key="duration" type="integer" defaultValue="200">
+                    <caption>Duration (ms)</caption>
+                    <description/>
+                </property>
+                <property key="delay" type="integer" defaultValue="0">
+                    <caption>Delay (ms)</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+
+            <propertyGroup caption="Condition">
+                <systemProperty key="Visibility"/>
+                <property key="condition" type="expression" required="false">
+                    <caption>Expression</caption>
+                    <description>The animation will start after it becomes visible while also obeying its timing delay. For already-visible content, an expression can be used to start the animation.</description>
+                    <returnType type="Boolean" />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+
+        <propertyGroup caption="Advanced">
+
+            <propertyGroup caption="Animation">
+                <property key="easing" type="enumeration" defaultValue="ease">
+                    <caption>Easing</caption>
+                    <description>Specifies an animation's rate of change over time.</description>
+                    <enumerationValues>
+                        <enumerationValue key="linear">Linear</enumerationValue>
+                        <enumerationValue key="ease">Ease</enumerationValue>
+                        <enumerationValue key="ease_in">Ease in</enumerationValue>
+                        <enumerationValue key="ease_out">Ease out</enumerationValue>
+                        <enumerationValue key="ease_in_out">Ease in out</enumerationValue>
+                        <enumerationValue key="ease_in_cubic">Ease in cubic</enumerationValue>
+                        <enumerationValue key="ease_out_cubic">Ease out cubic</enumerationValue>
+                        <enumerationValue key="ease_in_out_cubic">Ease in out cubic</enumerationValue>
+                        <enumerationValue key="ease_in_circ">Ease in circle</enumerationValue>
+                        <enumerationValue key="ease_out_circ">Ease out circle</enumerationValue>
+                        <enumerationValue key="ease_in_out_circ">Ease in out circle</enumerationValue>
+                        <enumerationValue key="ease_in_expo">Ease in exponential</enumerationValue>
+                        <enumerationValue key="ease_out_expo">Ease out exponential</enumerationValue>
+                        <enumerationValue key="ease_in_out_expo">Ease in out exponential</enumerationValue>
+                        <enumerationValue key="ease_in_quad">Ease in quardatic</enumerationValue>
+                        <enumerationValue key="ease_out_quad">Ease out quardatic</enumerationValue>
+                        <enumerationValue key="ease_in_out_quad">Ease in out quardatic</enumerationValue>
+                        <enumerationValue key="ease_in_quart">Ease in quartic</enumerationValue>
+                        <enumerationValue key="ease_out_quart">Ease out quartic</enumerationValue>
+                        <enumerationValue key="ease_in_out_quart">Ease in out quartic</enumerationValue>
+                        <enumerationValue key="ease_in_quint">Ease in quintic</enumerationValue>
+                        <enumerationValue key="ease_out_quint">Ease out quintic</enumerationValue>
+                        <enumerationValue key="ease_in_out_quint">Ease in out quintic</enumerationValue>
+                        <enumerationValue key="ease_in_sine">Ease in sine</enumerationValue>
+                        <enumerationValue key="ease_out_sine">Ease out sine</enumerationValue>
+                        <enumerationValue key="ease_in_out_sine">Ease in out sine</enumerationValue>
+                        <enumerationValue key="ease_in_back">Ease in back</enumerationValue>
+                        <enumerationValue key="ease_out_back">Ease out back</enumerationValue>
+                        <enumerationValue key="ease_in_out_back">Ease in out back</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="count" type="integer" defaultValue="1">
+                    <caption>Cycles</caption>
+                    <description>Specifies the number of times the animation is played (0 signifies an infinite loop).</description>
+                </property>
+                <property key="direction" type="enumeration" defaultValue="normal">
+                    <caption>Direction</caption>
+                    <description>Alternating direction will reverse the animation every even-numbered repeating cycle.</description>
+                    <enumerationValues>
+                        <enumerationValue key="normal">Normal</enumerationValue>
+                        <enumerationValue key="alternate">Alternating</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+
+            <propertyGroup caption="Events">
+                <property key="afterAnimationAction" type="action" required="false">
+                    <caption>After animation</caption>
+                    <description>Specifies an action triggered after the animation has completed (cannot be used with infinitely repeating animations).</description>
+                </property>
+            </propertyGroup>
+
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+            </propertyGroup>
+        </propertyGroup>
+
+    </properties>
+</widget>
