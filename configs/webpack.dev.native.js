@@ -15,7 +15,8 @@ const customConfig = {
         "react-native-svg",
         "react-native-video",
         "react-native-view-shot",
-        "react-native-webview"
+        "react-native-webview",
+        "react-navigation"
     ],
     module: {
         rules: [
@@ -28,8 +29,8 @@ const customConfig = {
                         cacheDirectory: true,
                         presets: ["@babel/preset-env", "@babel/preset-react"],
                         plugins: [
-                            ["@babel/plugin-proposal-class-properties", { "loose": true }],
-                            ["@babel/plugin-transform-react-jsx", { "pragma": "createElement" }],
+                            ["@babel/plugin-proposal-class-properties", { loose: true }],
+                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }],
                             "@babel/plugin-transform-flow-strip-types"
                         ]
                     }
@@ -44,7 +45,7 @@ const customConfig = {
                         cacheDirectory: true,
                         presets: ["@babel/preset-env", "@babel/preset-react"],
                         plugins: [
-                            ["@babel/plugin-proposal-class-properties", { "loose": true }],
+                            ["@babel/plugin-proposal-class-properties", { loose: true }],
                             "@babel/plugin-transform-react-jsx",
                             "@babel/plugin-transform-flow-strip-types"
                         ]

@@ -7,11 +7,11 @@
         "url": "https://github.com/mendix/native-mobile-resources.git"
     },
     "scripts": {
-        "start": "tsc --watch",
+        "start": "../../node_modules/.bin/tsc --watch",
         "prebuild": "rm -rf ./dist/tsc",
-        "build": "tsc",
-        "postbuild": "ts-node --project ./scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
+        "build": "../../node_modules/.bin/tsc",
+        "postbuild": "../../node_modules/.bin/ts-node --project ./scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
         "version": "npm run build",
-        "postversion": "ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
+        "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
     }
 }

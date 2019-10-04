@@ -12,14 +12,14 @@
         "start": "utils-react-widgets start",
         "dev": "utils-react-widgets dev",
         "test:dev": "utils-react-widgets test:dev",
-        "test:unit": "jest --config ../../scripts/test/jest.web.config.js",
+        "test:unit": "../../node_modules/.bin/jest --config ../../scripts/test/jest.web.config.js",
         "test:e2e": "export URL=https://booleansliderwidge.mxapps.io/ && utils-react-widgets test:e2e",
         "test:e2e:dev": "export DEBUG=true && utils-react-widgets test:e2e",
-        "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "lint:fix": "npm run lint -- --fix",
         "build": "utils-react-widgets build",
         "release": "utils-react-widgets release",
-        "svncheckout": "ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+        "svncheckout": "../../node_modules/.bin/ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
     },
     "license": "Apache-2.0",
     "config": {
