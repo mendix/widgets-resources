@@ -28,6 +28,8 @@ A bundle of R&D Platform supported widgets & nanoflow actions for building nativ
 | [Toggle buttons][]         | Change an enumeration value using a group of buttons.           |
 | [Video player][]           | Play a video loaded from a URL.                                 |
 | [Web view][]               | Display an external web page or load custom HTML.               |
+| [Animation][]              | Provides default animations for contents and widgets.           |
+| [List View Swipe][]        | Show controls on swipe for an interactive list view.            |
 
 ## Web & Hybrid widgets
 
