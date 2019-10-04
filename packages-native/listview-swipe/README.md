@@ -1,3 +1,3 @@
-# Maps widget
+# ListView Swipe widget
 
-Show locations on an interactive map.
+Show controls on swipe for an interactive list view.
