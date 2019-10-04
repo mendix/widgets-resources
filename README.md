@@ -29,7 +29,7 @@ A bundle of R&D Platform supported widgets & nanoflow actions for building nativ
 | [Video player][]           | Play a video loaded from a URL.                                 |
 | [Web view][]               | Display an external web page or load custom HTML.               |
 | [Animation][]              | Provides default animations for contents and widgets.           |
-| [List View Swipe][]        | Show controls on swipe for an interactive list view.            |
+| [List view swipe][]        | Show controls on swipe for an interactive list view.            |
 
 ## Web & Hybrid widgets
 
@@ -62,6 +62,8 @@ A bundle of R&D Platform supported widgets & nanoflow actions for building nativ
 [toggle buttons]: https://github.com/mendix/widgets-resources/blob/master/packages-native/toggle-buttons
 [video player]: https://github.com/mendix/widgets-resources/blob/master/packages-native/video-player
 [web view]: https://github.com/mendix/widgets-resources/blob/master/packages-native/web-view
+[animation]: https://github.com/mendix/widgets-resources/blob/master/packages-native/animation
+[list view swipe]: https://github.com/mendix/widgets-resources/blob/master/packages-native/listview-swipe
 
 ## Included nanoflow actions
 
