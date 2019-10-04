@@ -60,21 +60,20 @@ export class ListViewSwipe extends Component<ListViewSwipeProps<ListViewSwipeSty
     updateRef = (ref: any) => {
         this.row = ref;
     };
+
     close = () => {
         this.row.close();
     };
 
-    private renderAction = (style: PanelStyle, content: ReactNode) => {
-        return (
-            <RectButton style={style} onPress={this.close}>
-                {content}
-            </RectButton>
-        );
-    };
+    private renderAction = (style: PanelStyle, content: ReactNode) => (
+        <RectButton style={style} onPress={this.close}>
+            {content}
+        </RectButton>
+    );
 
     private renderButtons = (style: PanelStyle, content: ReactNode) => {
         const actionStyle = { ...style };
-        delete actionStyle.panelSize;
+        delete actionStyle.panelSize; // Deleting this property to avoid warnings
         return (
             <View style={{ width: style.panelSize, flexDirection: "row" }}>
                 <View style={actionStyle}>{content}</View>
