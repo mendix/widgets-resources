@@ -53,12 +53,10 @@
                 border-radius: 0; // Reset mxui listview style
             }
 
-            &:hover {
-                background-color: $grid-bg-hover;
-            }
-
+            &:hover,
             &:focus,
             &:active {
+                outline: 0;
                 background-color: $grid-bg-hover;
             }
 
