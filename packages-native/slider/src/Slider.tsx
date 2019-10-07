@@ -101,6 +101,9 @@ export class Slider extends Component<Props, State> {
             if (minimumValue.value!.gt(maximumValue.value!)) {
                 messages.push("The minimum value can not be greater than the maximum value.");
             } else {
+                if (minimumValue.value!.eq(maximumValue.value!)) {
+                    messages.push("The minimum value can not be equal to the maximum value.");
+                }
                 if (valueAttribute.value!.lt(minimumValue.value!)) {
                     messages.push("The current value can not be less than the minimum value.");
                 }
