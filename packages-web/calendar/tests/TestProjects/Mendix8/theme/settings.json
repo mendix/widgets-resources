@@ -1,11 +1,12 @@
-﻿{
+{
     "pageTemplates": "WebModeler",
+    "cssFiles": ["styles/web/css/main.css"],
     "designProperties": {
         "Widget": [
             {
                 "name": "Spacing top",
                 "type": "Dropdown",
-                "description": "The outer top margin of an element.",
+                "description": "The spacing above this element.",
                 "options": [
                     {
                         "name": "None",
@@ -22,17 +23,13 @@
                     {
                         "name": "Large",
                         "class": "spacing-outer-top-large"
-                    },
-                    {
-                        "name": "Layout",
-                        "class": "spacing-outer-top-layout"
                     }
                 ]
             },
             {
                 "name": "Spacing bottom",
                 "type": "Dropdown",
-                "description": "The outer bottom margin of an element.",
+                "description": "The spacing below this element.",
                 "options": [
                     {
                         "name": "None",
@@ -49,17 +46,13 @@
                     {
                         "name": "Large",
                         "class": "spacing-outer-bottom-large"
-                    },
-                    {
-                        "name": "Layout",
-                        "class": "spacing-outer-bottom-layout"
                     }
                 ]
             },
             {
                 "name": "Spacing left",
                 "type": "Dropdown",
-                "description": "The outer left margin of an element.",
+                "description": "The spacing to the left of this element.",
                 "options": [
                     {
                         "name": "None",
@@ -76,17 +69,13 @@
                     {
                         "name": "Large",
                         "class": "spacing-outer-left-large"
-                    },
-                    {
-                        "name": "Layout",
-                        "class": "spacing-outer-left-layout"
                     }
                 ]
             },
             {
                 "name": "Spacing right",
                 "type": "Dropdown",
-                "description": "The outer right margin of an element.",
+                "description": "The spacing to the right of this element.",
                 "options": [
                     {
                         "name": "None",
@@ -103,17 +92,13 @@
                     {
                         "name": "Large",
                         "class": "spacing-outer-right-large"
-                    },
-                    {
-                        "name": "Layout",
-                        "class": "spacing-outer-right-layout"
                     }
                 ]
             },
             {
                 "name": "Align self",
                 "type": "Dropdown",
-                "description": "Float an element to the left or right.",
+                "description": "Float the element to the left or to the right.",
                 "options": [
                     {
                         "name": "Left",
@@ -124,36 +109,54 @@
                         "class": "pull-right"
                     }
                 ]
+            },
+            {
+                "name": "Hide on phone",
+                "type": "Toggle",
+                "description": "Hide element on phone.",
+                "class": "hidden-xs"
+            },
+            {
+                "name": "Hide on tablet",
+                "type": "Toggle",
+                "description": "Hide element on tablet.",
+                "class": "hidden-sm"
+            },
+            {
+                "name": "Hide on desktop",
+                "type": "Toggle",
+                "description": "Hide element on desktop.",
+                "class": "hidden-md"
             }
         ],
         "DivContainer": [
             {
                 "name": "Align content",
                 "type": "Dropdown",
-                "description": "Align content of the element left, right, or center as a row or column.",
+                "description": "Align content of this element left, right or center it. Align elements inside the container as a row or as a column.",
                 "options": [
                     {
-                        "name": "Left align as row",
+                        "name": "Left align as a row",
                         "class": "row-left"
                     },
                     {
-                        "name": "Center align as row",
+                        "name": "Center align as a row",
                         "class": "row-center"
                     },
                     {
-                        "name": "Right align as row",
+                        "name": "Right align as a row",
                         "class": "row-right"
                     },
                     {
-                        "name": "Left align as column",
+                        "name": "Left align as a column",
                         "class": "col-left"
                     },
                     {
-                        "name": "Center align as column",
+                        "name": "Center align as a column",
                         "class": "col-center"
                     },
                     {
-                        "name": "Right align as column",
+                        "name": "Right align as a column",
                         "class": "col-right"
                     }
                 ]
@@ -161,31 +164,43 @@
             {
                 "name": "Background color",
                 "type": "Dropdown",
-                "description": "Choose one of the following colors to change the background color of the container.",
+                "description": "Change the background color of the container.",
                 "options": [
                     {
-                        "name": "Default",
+                        "name": "Brand Default",
                         "class": "background-default"
                     },
                     {
-                        "name": "Primary",
+                        "name": "Brand Primary",
                         "class": "background-primary"
                     },
                     {
-                        "name": "Inverse",
+                        "name": "Brand Inverse",
                         "class": "background-inverse"
                     },
                     {
-                        "name": "Success",
+                        "name": "Brand Info",
+                        "class": "background-info"
+                    },
+                    {
+                        "name": "Brand Success",
                         "class": "background-success"
                     },
                     {
-                        "name": "Warning",
+                        "name": "Brand Warning",
                         "class": "background-warning"
                     },
                     {
-                        "name": "Danger",
+                        "name": "Brand Danger",
                         "class": "background-danger"
+                    },
+                    {
+                        "name": "Background Default",
+                        "class": "background-main"
+                    },
+                    {
+                        "name": "Background Dashboard",
+                        "class": "background-secondary"
                     }
                 ]
             }
@@ -194,7 +209,7 @@
             {
                 "name": "Size",
                 "type": "Dropdown",
-                "description": "Size of buttons",
+                "description": "Size of the buttons",
                 "options": [
                     {
                         "name": "Small",
@@ -209,19 +224,20 @@
             {
                 "name": "Full width",
                 "type": "Toggle",
-                "description": "Create block-level buttons (buttons that span the full width of a parent).",
+                "description": "Extend the button to the full width of the container it is placed in.",
                 "class": "btn-block"
             },
+
             {
-                "name": "Bordered",
+                "name": "Border",
                 "type": "Toggle",
-                "description": "Buttons styled with a transparent background, colored border, and colored text.",
+                "description": "Style the button with a transparent background, a colored border, and colored text.",
                 "class": "btn-bordered"
             },
             {
                 "name": "Align icon",
                 "type": "Dropdown",
-                "description": "Align an icon to the left or right of an element.",
+                "description": "Place the icon to the left or on top of the button.",
                 "options": [
                     {
                         "name": "Right",
@@ -238,7 +254,7 @@
             {
                 "name": "Style",
                 "type": "Dropdown",
-                "description": "Choose one of the following styles to change the appearance of the listview.",
+                "description": "Change the appearance of rows in the list view.",
                 "options": [
                     {
                         "name": "Striped",
@@ -261,13 +277,13 @@
             {
                 "name": "Hover style",
                 "type": "Toggle",
-                "description": "Enable listview hover to make the rows hoverable.",
+                "description": "Highlight a row when hovering over it. Only useful when the row is clickable.",
                 "class": "listview-hover"
             },
             {
                 "name": "Row Size",
                 "type": "Dropdown",
-                "description": "Increase or decrease the row spacing of the listview.",
+                "description": "Change the row spacing of the list view.",
                 "options": [
                     {
                         "name": "Small",
@@ -360,27 +376,31 @@
                 "description": "Choose one of the following styles to change the appearance of the groupbox.",
                 "options": [
                     {
-                        "name": "Default",
+                        "name": "Brand Default",
                         "class": "groupbox-default"
                     },
                     {
-                        "name": "Primary",
+                        "name": "Brand Primary",
                         "class": "groupbox-primary"
                     },
                     {
-                        "name": "Inverse",
+                        "name": "Brand Inverse",
                         "class": "groupbox-inverse"
                     },
                     {
-                        "name": "Success",
+                        "name": "Brand Info",
+                        "class": "groupbox-info"
+                    },
+                    {
+                        "name": "Brand Success",
                         "class": "groupbox-success"
                     },
                     {
-                        "name": "Warning",
+                        "name": "Brand Warning",
                         "class": "groupbox-warning"
                     },
                     {
-                        "name": "Danger",
+                        "name": "Brand Danger",
                         "class": "groupbox-danger"
                     },
                     {
@@ -430,27 +450,31 @@
                 "description": "Change the appearance of a label.",
                 "options": [
                     {
-                        "name": "Default",
+                        "name": "Brand Default",
                         "class": "label-default"
                     },
                     {
-                        "name": "Primary",
+                        "name": "Brand Primary",
                         "class": "label-primary"
                     },
                     {
-                        "name": "Inverse",
+                        "name": "Brand Inverse",
                         "class": "label-inverse"
                     },
                     {
-                        "name": "Success",
+                        "name": "Brand Info",
+                        "class": "label-info"
+                    },
+                    {
+                        "name": "Brand Success",
                         "class": "label-success"
                     },
                     {
-                        "name": "Warning",
+                        "name": "Brand Warning",
                         "class": "label-warning"
                     },
                     {
-                        "name": "Danger",
+                        "name": "Brand Danger",
                         "class": "label-danger"
                     }
                 ]
@@ -458,9 +482,9 @@
         ],
         "DynamicText": [
             {
-                "name": "Weight",
+                "name": "Font Weight",
                 "type": "Dropdown",
-                "description": "Emphasize a snippet of text with a heavier or lighter font weight.",
+                "description": "Emphasize the text with a heavier or lighter font weight",
                 "options": [
                     {
                         "name": "Light",
@@ -483,7 +507,7 @@
             {
                 "name": "Color",
                 "type": "Dropdown",
-                "description": "Change the color of a snippet of text.",
+                "description": "Change the color of text.",
                 "options": [
                     {
                         "name": "Header color",
@@ -494,27 +518,31 @@
                         "class": "text-detail"
                     },
                     {
-                        "name": "Default",
+                        "name": "Brand Default",
                         "class": "text-default"
                     },
                     {
-                        "name": "Primary",
+                        "name": "Brand Primary",
                         "class": "text-primary"
                     },
                     {
-                        "name": "Inverse",
+                        "name": "Brand Inverse",
                         "class": "text-inverse"
                     },
                     {
-                        "name": "Success",
+                        "name": "Brand Info",
+                        "class": "text-info"
+                    },
+                    {
+                        "name": "Brand Success",
                         "class": "text-success"
                     },
                     {
-                        "name": "Warning",
+                        "name": "Brand Warning",
                         "class": "text-warning"
                     },
                     {
-                        "name": "Danger",
+                        "name": "Brand Danger",
                         "class": "text-danger"
                     }
                 ]
@@ -522,7 +550,7 @@
             {
                 "name": "Alignment",
                 "type": "Dropdown",
-                "description": "Align text to components.",
+                "description": "Align the text.",
                 "options": [
                     {
                         "name": "Left",
@@ -541,7 +569,7 @@
             {
                 "name": "Transform",
                 "type": "Dropdown",
-                "description": "Change the letter case of your text.",
+                "description": "Change the letter case of the text.",
                 "options": [
                     {
                         "name": "Lowercase",
@@ -573,6 +601,5 @@
                 ]
             }
         ]
-    },
-    "cssFiles": ["styles/css/lib/lib.css", "styles/css/custom/custom.css"]
+    }
 }
