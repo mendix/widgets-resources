@@ -1,4 +1,4 @@
-import { Platform }                                    from "react-native";
+import { NativeModules, Platform }                     from "react-native";
 import adjustFont                                      from "../core/helpers/_functions/adjustfont";
 import { setColorBasedOnBackground, setContrastScale } from "../core/helpers/_functions/convertcolors";
 
