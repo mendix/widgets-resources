@@ -1,5 +1,5 @@
-import { Platform }                          from "react-native";
-import { background, brand, contrast, font } from "../variables";
+import { Platform }                                 from "react-native";
+import { background, brand, contrast, font, input } from "../variables";
 
 //
 // DISCLAIMER:
@@ -52,4 +52,10 @@ export const com_mendix_widget_native_togglebuttons_ToggleButtons = (ToggleButto
         fontSize: font.size,
         fontFamily: font.family,
     },
+    validationMessage: {
+        // All TextStyle properties are allowed
+        color: input.errorColor,
+        fontSize: font.size,
+        fontFamily: font.family,
+    }
 });
