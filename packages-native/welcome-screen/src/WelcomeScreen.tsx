@@ -81,6 +81,6 @@ export function WelcomeScreen(props: WelcomeScreenProps<WelcomeScreenStyle>) {
             {...renderButton("renderPrevButton", props.prevIcon, props.prevCaption)}
             {...renderButton("renderNextButton", props.nextIcon, props.nextCaption)}
             {...renderButton("renderDoneButton", props.doneIcon, props.doneCaption)}
-        ></AppIntroSlider>
+        />
     );
 }
