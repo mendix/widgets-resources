@@ -19,8 +19,10 @@ export const brand = {
     danger: "#ed1c24",
 };
 
-// Dark Mode
-const darkMode = false;
+// Dark Mode - Inherits OS theme if possible
+const darkMode = NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode
+                 ? NativeModules.RNDarkMode.initialMode === "dark"
+                 : false;
 
 // Background Colors
 const backgroundColor = darkMode ? "#000" : "#FFF";
