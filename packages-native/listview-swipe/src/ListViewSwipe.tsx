@@ -1,77 +1,66 @@
-import { Component, createElement, ReactNode } from "react";
+import { createElement, ReactNode, useCallback, useState } from "react";
 import { ListViewSwipeProps } from "../typings/ListViewSwipeProps";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
-import { View } from "react-native";
+import { Animated, View } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { defaultListViewSwipeStyle, ListViewSwipeStyle, PanelStyle } from "./ui/styles";
 
-export class ListViewSwipe extends Component<ListViewSwipeProps<ListViewSwipeStyle>> {
-    private row: any;
-    private readonly styles = flattenStyles(defaultListViewSwipeStyle, this.props.style);
-    private readonly onSwipeLeftHandler = this.onSwipeLeft.bind(this);
-    private readonly onSwipeRightHandler = this.onSwipeRight.bind(this);
+export function ListViewSwipe(props: ListViewSwipeProps<ListViewSwipeStyle>) {
+    let row: any;
+    const styles = flattenStyles(defaultListViewSwipeStyle, props.style);
+    const [animation, setAnimation] = useState(new Animated.Value(0));
+    const [animate, setAnimate] = useState(false);
 
-    private readonly isLeftSideAction = this.props.leftRenderMode === "action";
-    private readonly isRightSideAction = this.props.rightRenderMode === "action";
-    private readonly isLeftDisabled = this.props.leftRenderMode === "disabled";
-    private readonly isRightDisabled = this.props.rightRenderMode === "disabled";
+    const isLeftSideAction = props.leftRenderMode !== "buttons";
+    const isRightSideAction = props.rightRenderMode !== "buttons";
+    const isLeftDisabled = props.leftRenderMode === "disabled";
+    const isRightDisabled = props.rightRenderMode === "disabled";
 
-    render(): ReactNode {
-        return (
-            <Swipeable
-                ref={this.updateRef}
-                friction={1}
-                leftThreshold={this.isLeftSideAction ? 100 : 40}
-                rightThreshold={this.isRightSideAction ? 100 : 40}
-                renderLeftActions={this.renderLeftActions}
-                renderRightActions={this.renderRightActions}
-                onSwipeableLeftOpen={this.onSwipeLeftHandler}
-                onSwipeableRightOpen={this.onSwipeRightHandler}
-                overshootLeft={false}
-                overshootRight={false}
-                useNativeAnimations
-            >
-                <View style={this.styles.container}>{this.props.content}</View>
-            </Swipeable>
-        );
-    }
+    const setAnimationDefinitions = useCallback((event: any) => {
+        setAnimation(new Animated.Value(event.nativeEvent.layout.height));
+    }, []);
 
-    renderLeftActions = (): ReactNode => {
-        if (this.isLeftDisabled) {
+    // const animationEffect = new Animated.Value(0);
+    // const interpolateEffect = animationEffect.interpolate({ inputRange: [0, 1], outputRange: ['100%', '0%'] });
+    // const animation = Animated.timing(animationEffect, { toValue: 1, duration: 500 });
+    // const [animationStyle, setAnimationStyle] = useState({});
+
+    const renderLeftActions = (): ReactNode => {
+        if (isLeftDisabled) {
             return undefined;
-        } else if (this.isLeftSideAction) {
-            return this.renderAction(this.styles.leftAction, this.props.left);
+        } else if (isLeftSideAction) {
+            return renderAction(styles.leftAction, props.left);
         } else {
-            return this.renderButtons(this.styles.leftAction, this.props.left);
+            return renderButtons(styles.leftAction, props.left);
         }
     };
 
-    renderRightActions = (): ReactNode => {
-        if (this.isRightDisabled) {
+    const renderRightActions = (): ReactNode => {
+        if (isRightDisabled) {
             return undefined;
-        } else if (this.isRightSideAction) {
-            return this.renderAction(this.styles.rightAction, this.props.right);
+        } else if (isRightSideAction) {
+            return renderAction(styles.rightAction, props.right);
         } else {
-            return this.renderButtons(this.styles.rightAction, this.props.right);
+            return renderButtons(styles.rightAction, props.right);
         }
     };
 
-    updateRef = (ref: any) => {
-        this.row = ref;
+    const updateRef = (ref: any) => {
+        row = ref;
     };
 
-    close = () => {
-        this.row.close();
+    const close = () => {
+        row.close();
     };
 
-    private renderAction = (style: PanelStyle, content: ReactNode) => (
-        <RectButton style={style} onPress={this.close}>
+    const renderAction = (style: PanelStyle, content: ReactNode) => (
+        <RectButton style={style} onPress={close}>
             {content}
         </RectButton>
     );
 
-    private renderButtons = (style: PanelStyle, content: ReactNode) => {
+    const renderButtons = (style: PanelStyle, content: ReactNode) => {
         const actionStyle = { ...style };
         delete actionStyle.panelSize; // Deleting this property to avoid warnings
         return (
@@ -81,21 +70,80 @@ export class ListViewSwipe extends Component<ListViewSwipeProps<ListViewSwipeSty
         );
     };
 
-    private onSwipeLeft(): void {
-        if (this.isLeftSideAction && this.props.onSwipeLeft && this.props.onSwipeLeft.canExecute) {
-            if (this.props.closeOnFinishLeft) {
-                this.row.close();
-            }
-            this.props.onSwipeLeft.execute();
-        }
-    }
+    // const triggerShrinkAnimation = () => {
+    //     const animationEffect = new Animated.Value(0);
+    //     const interpolateEffect = animationEffect.interpolate({inputRange:[0,1],outputRange:['100%','0%']});
+    //     // setAnimation({ height: interpolateEffect })
+    //
+    // };
 
-    private onSwipeRight(): void {
-        if (this.isRightSideAction && this.props.onSwipeRight && this.props.onSwipeRight.canExecute) {
-            if (this.props.closeOnFinishRight) {
-                this.row.close();
+    const onSwipeLeft = () => {
+        if (isLeftSideAction && props.onSwipeLeft && props.onSwipeLeft.canExecute) {
+            if (props.leftRenderMode === "swipeOutReset") {
+                row.close();
             }
-            this.props.onSwipeRight.execute();
+            if (props.leftRenderMode === "archive") {
+                setAnimate(true);
+                Animated.timing(
+                    //Step 4
+                    animation,
+                    {
+                        toValue: 0,
+                        duration: 200
+                    }
+                ).start(() => {
+                    // @ts-ignore
+                    props.onSwipeLeft.execute();
+                });
+            } else {
+                props.onSwipeLeft.execute();
+            }
         }
-    }
+    };
+
+    const onSwipeRight = () => {
+        if (isRightSideAction && props.onSwipeRight && props.onSwipeRight.canExecute) {
+            if (props.rightRenderMode === "swipeOutReset") {
+                row.close();
+            }
+            if (props.rightRenderMode === "archive") {
+                setAnimate(true);
+                Animated.timing(
+                    //Step 4
+                    animation,
+                    {
+                        toValue: 0,
+                        duration: 200
+                    }
+                ).start(() => {
+                    // @ts-ignore
+                    props.onSwipeRight.execute();
+                });
+            } else {
+                props.onSwipeRight.execute();
+            }
+        }
+    };
+
+    return (
+        <Animated.View style={animate ? { height: animation } : {}}>
+            <Swipeable
+                ref={updateRef}
+                friction={1}
+                leftThreshold={isLeftSideAction ? 100 : 40}
+                rightThreshold={isRightSideAction ? 100 : 40}
+                renderLeftActions={renderLeftActions}
+                renderRightActions={renderRightActions}
+                onSwipeableLeftOpen={onSwipeLeft}
+                onSwipeableRightOpen={onSwipeRight}
+                overshootLeft={false}
+                overshootRight={false}
+                useNativeAnimations
+            >
+                <View style={styles.container} onLayout={setAnimationDefinitions}>
+                    {props.content}
+                </View>
+            </Swipeable>
+        </Animated.View>
+    );
 }

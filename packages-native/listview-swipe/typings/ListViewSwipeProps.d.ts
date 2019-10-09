@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import { ActionValue } from "mendix";
+import { ActionValue, EditableValue } from "mendix";
 import { ReactNode } from "react";
 
 interface CommonProps<Style> {
@@ -11,18 +11,18 @@ interface CommonProps<Style> {
     style: Style[];
 }
 
-export type LeftRenderModeEnum = "disabled" | "action" | "buttons";
+export type LeftRenderModeEnum = "disabled" | "buttons" | "archive" | "toggle" | "swipeOutReset" | "swipeOut";
 
-export type RightRenderModeEnum = "disabled" | "action" | "buttons";
+export type RightRenderModeEnum = "disabled" | "buttons" | "archive" | "toggle" | "swipeOutReset" | "swipeOut";
 
 export interface ListViewSwipeProps<Style> extends CommonProps<Style> {
     content: ReactNode;
-    leftRenderMode: LeftRenderModeEnum;
     left?: ReactNode;
+    leftRenderMode: LeftRenderModeEnum;
     onSwipeLeft?: ActionValue;
-    closeOnFinishLeft: boolean;
-    rightRenderMode: RightRenderModeEnum;
+    leftThresholdAttribute?: EditableValue<boolean>;
     right?: ReactNode;
+    rightRenderMode: RightRenderModeEnum;
     onSwipeRight?: ActionValue;
-    closeOnFinishRight: boolean;
+    rightThresholdAttribute?: EditableValue<boolean>;
 }
