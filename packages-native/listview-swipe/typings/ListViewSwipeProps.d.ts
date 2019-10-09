@@ -4,8 +4,10 @@
  * @author Mendix Widgets Team
  */
 import { ActionValue } from "mendix";
+import { ReactNode } from "react";
 
 interface CommonProps<Style> {
+    name: string;
     style: Style[];
 }
 
@@ -14,13 +16,13 @@ export type LeftRenderModeEnum = "disabled" | "action" | "buttons";
 export type RightRenderModeEnum = "disabled" | "action" | "buttons";
 
 export interface ListViewSwipeProps<Style> extends CommonProps<Style> {
-    content: any;
+    content: ReactNode;
     leftRenderMode: LeftRenderModeEnum;
-    left?: any;
+    left?: ReactNode;
     onSwipeLeft?: ActionValue;
     closeOnFinishLeft: boolean;
     rightRenderMode: RightRenderModeEnum;
-    right?: any;
+    right?: ReactNode;
     onSwipeRight?: ActionValue;
     closeOnFinishRight: boolean;
 }
