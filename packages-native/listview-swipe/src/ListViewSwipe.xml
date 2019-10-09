@@ -5,9 +5,7 @@
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>List View Swipe</name>
     <description/>
-    <icon>
-        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABlmWCKAAADxUlEQVR4Ae1aP2siQRR/SgqFHFoYEkKusZDUfgUrQxCbxOIkZbDyE+QziGCqlAdXKGJxRXJFqpAidUhSpRQRFEXO4hDU29m4y+4+d9+4u+PuJjsQMjPvzfvzmzf/ngsQlhCBEIGvjEDE6HypVMovFosbqf/ISAtYuxuNRi+bzeadld1RI/GTOM/cOlr5YnRR10YA6KjBb5BRjABgYSP53Q2+73weoD2Ab5j7XGdnZ0ut1L8/fmqbtut/inFLH1EE2NYU0IE7lN353//ysFjeSNOzdj1J8HYhGrm8K8Qsd1tKj1d0OgIsnGdGy8BIPF454FQvCYDZzGsV8/Bo+f1UJwHwk7EibAkBEIFqkGSSESDv8oRHPDyECM/IJADsiLNyUDkGPfPAoWLyHrA637871OPb4XQE+NZ0dwxDEeCXfMC3XxfueEhIQRHwifIBhOsfZAQA16jgMJHPegTAJ8oHyCmx4MxVaKk3CEj3GOvidj7Aw1NmbZYY7QEIDpfzAR6eMmuzxCQAPG99Hh4NsGszSxq6yCrSTQIg0ho/yEY3wW0b1Wq1hKo8Pz+3lP/lI4AEwOoprEDLw6Pw+u0/vQRYPsDiJHA7H1Cr1VSM0uk0FItFuf3+/g739/fw+voK4/EYdnd34fDwEDKZjMwTi8XUcZtUSAC2nQ94enpS7X95eYFCoQDtdhs6nQ5IR6hKG41GwP4Yz8PDA1SrVTg+PlbpvBVyCfAKEsE3nU7h+vpaBkDrvFHXcDiERqMBs9nMSCLbKAIE3NTW3sBIy1YMj4+PKmskEoFEIgGTyQSWS+n2oSmDwQBub2/VJaMhWVYRAAJuasoNzHZaTXqhQrlchlwuB/F4HFhk1Ot1eH5+1jn39va2MQC+XgKKd8z509NT2XnWxzbASqUCDBht6ff72iZXXS9BGiIgH+DoXb63twcnJyfImVQqBQcHB7p+tgw2LWgJrL6psR2umxpA8bOwN860MiaZTEKv11OaMJ/P1TpvBUUA78Bt8WWzWVNVOzto/kx5zQikBLfzAWaGmPXv7++bkVzppyPA4hbILJCfwgK/D2C7vshCAsDz1ufhEemEE9kkAE6EB2FsCEAQZkmkjWQE8Lz1eXhEOuFENglA+H3Ax/d/nt0M2auPvQJFFfIiJEqxmdxNkqRXV1dmYrj7EQB+ywdwe2KTEe0BAvMBNk0UOwxFgFh1WDqVt8cj3O1BEeC3fIC77mJpKAK2kA/oSmag3+iwaUJ6mG5dQRGgowpoCIgwXisdZaZ4lYR8IQIhAiECIQJBQuA/4awjBiNddXEAAAAASUVORK5CYII=
-    </icon>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABlmWCKAAADxUlEQVR4Ae1aP2siQRR/SgqFHFoYEkKusZDUfgUrQxCbxOIkZbDyE+QziGCqlAdXKGJxRXJFqpAidUhSpRQRFEXO4hDU29m4y+4+d9+4u+PuJjsQMjPvzfvzmzf/ngsQlhCBEIGvjEDE6HypVMovFosbqf/ISAtYuxuNRi+bzeadld1RI/GTOM/cOlr5YnRR10YA6KjBb5BRjABgYSP53Q2+73weoD2Ab5j7XGdnZ0ut1L8/fmqbtut/inFLH1EE2NYU0IE7lN353//ysFjeSNOzdj1J8HYhGrm8K8Qsd1tKj1d0OgIsnGdGy8BIPF454FQvCYDZzGsV8/Bo+f1UJwHwk7EibAkBEIFqkGSSESDv8oRHPDyECM/IJADsiLNyUDkGPfPAoWLyHrA637871OPb4XQE+NZ0dwxDEeCXfMC3XxfueEhIQRHwifIBhOsfZAQA16jgMJHPegTAJ8oHyCmx4MxVaKk3CEj3GOvidj7Aw1NmbZYY7QEIDpfzAR6eMmuzxCQAPG99Hh4NsGszSxq6yCrSTQIg0ho/yEY3wW0b1Wq1hKo8Pz+3lP/lI4AEwOoprEDLw6Pw+u0/vQRYPsDiJHA7H1Cr1VSM0uk0FItFuf3+/g739/fw+voK4/EYdnd34fDwEDKZjMwTi8XUcZtUSAC2nQ94enpS7X95eYFCoQDtdhs6nQ5IR6hKG41GwP4Yz8PDA1SrVTg+PlbpvBVyCfAKEsE3nU7h+vpaBkDrvFHXcDiERqMBs9nMSCLbKAIE3NTW3sBIy1YMj4+PKmskEoFEIgGTyQSWS+n2oSmDwQBub2/VJaMhWVYRAAJuasoNzHZaTXqhQrlchlwuB/F4HFhk1Ot1eH5+1jn39va2MQC+XgKKd8z509NT2XnWxzbASqUCDBht6ff72iZXXS9BGiIgH+DoXb63twcnJyfImVQqBQcHB7p+tgw2LWgJrL6psR2umxpA8bOwN860MiaZTEKv11OaMJ/P1TpvBUUA78Bt8WWzWVNVOzto/kx5zQikBLfzAWaGmPXv7++bkVzppyPA4hbILJCfwgK/D2C7vshCAsDz1ufhEemEE9kkAE6EB2FsCEAQZkmkjWQE8Lz1eXhEOuFENglA+H3Ax/d/nt0M2auPvQJFFfIiJEqxmdxNkqRXV1dmYrj7EQB+ywdwe2KTEe0BAvMBNk0UOwxFgFh1WDqVt8cj3O1BEeC3fIC77mJpKAK2kA/oSmag3+iwaUJ6mG5dQRGgowpoCIgwXisdZaZ4lYR8IQIhAiECIQJBQuA/4awjBiNddXEAAAAASUVORK5CYII=</icon>
     <properties>
         <propertyGroup caption="General">
             <property key="content" type="widgets">
@@ -15,53 +13,69 @@
                 <description>Sample text input</description>
             </property>
         </propertyGroup>
-        <propertyGroup caption="Left">
-            <propertyGroup caption="Action">
-                <property key="leftRenderMode" type="enumeration" defaultValue="disabled">
-                    <caption>Swipe</caption>
-                    <description/>
-                    <enumerationValues>
-                        <enumerationValue key="disabled">Disabled</enumerationValue>
-                        <enumerationValue key="action">Call action</enumerationValue>
-                        <enumerationValue key="buttons">Show buttons</enumerationValue>
-                    </enumerationValues>
-                </property>
+        <propertyGroup caption="Left to Right">
+            <propertyGroup caption="Swipe">
                 <property key="left" type="widgets" required="false">
                     <caption>Left background</caption>
-                    <description>Sample text input</description>
-                </property>
-                <property key="onSwipeLeft" type="action" required="false">
-                    <caption>On swipe action</caption>
                     <description/>
                 </property>
-                <property key="closeOnFinishLeft" type="boolean" defaultValue="false">
-                    <caption>Reset after swipe</caption>
-                    <description>Return to original state after swipe (available only for "Call action")</description>
+                <property key="leftRenderMode" type="enumeration" defaultValue="disabled">
+                    <caption>Pattern</caption>
+                    <description>"Show options" will show the background buttons. "Archive" will collapses the item after animating out, "Toggle" animates the item back to the initial state. "Swipe out" animates the item out of the list.</description>
+                    <enumerationValues>
+                        <enumerationValue key="disabled">Disabled</enumerationValue>
+                        <enumerationValue key="buttons">Show options (buttons)</enumerationValue>
+                        <enumerationValue key="archive">Archive</enumerationValue>
+                        <enumerationValue key="toggle">Toggle</enumerationValue>
+                        <enumerationValue key="swipeOutReset">Swipe out and reset</enumerationValue>
+                        <enumerationValue key="swipeOut">Swipe out</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onSwipeLeft" type="action" required="false">
+                    <caption>On swipe action</caption>
+                    <description>Action triggerd for pattern: "Archive" after the item is collapesed, "Toggle" when item passed the threshold, "Swipe out" after the item is animated out of the list.</description>
+                </property>
+                <property key="leftThresholdAttribute" type="attribute" required="false">
+                    <caption>Threshold attribute</caption>
+                    <description>Attribute will be set when the item is passed the action threshold.</description>
+                    <attributeTypes>
+                        <attributeType name="Boolean" />
+                    </attributeTypes>
                 </property>
             </propertyGroup>
         </propertyGroup>
-        <propertyGroup caption="Right">
-            <propertyGroup caption="Action">
-                <property key="rightRenderMode" type="enumeration" defaultValue="disabled">
-                    <caption>Swipe</caption>
+        <propertyGroup caption="Right to Left">
+         <propertyGroup caption="Swipe">
+                <property key="right" type="widgets" required="false">
+                    <caption>Left background</caption>
                     <description/>
+                </property>
+                <property key="rightRenderMode" type="enumeration" defaultValue="disabled">
+                    <caption>Pattern</caption>
+                    <description>"Show options" will show the background buttons. "Archive" will collapses the item after animating out, "Toggle" animates the item back to the initial state. "Swipe out" animates the item out of the list.</description>
                     <enumerationValues>
                         <enumerationValue key="disabled">Disabled</enumerationValue>
-                        <enumerationValue key="action">Call action</enumerationValue>
-                        <enumerationValue key="buttons">Show buttons</enumerationValue>
+                        <enumerationValue key="buttons">Show options (buttons)</enumerationValue>
+                        <enumerationValue key="archive">Archive</enumerationValue>
+                        <enumerationValue key="toggle">Toggle</enumerationValue>
+                        <enumerationValue key="swipeOutReset">Swipe out and reset</enumerationValue>
+                        <enumerationValue key="swipeOut">Swipe out</enumerationValue>
                     </enumerationValues>
                 </property>
-                <property key="right" type="widgets" required="false">
-                    <caption>Right background</caption>
-                    <description>Sample text input</description>
-                </property>
+            </propertyGroup>
+            <propertyGroup caption="Events">
                 <property key="onSwipeRight" type="action" required="false">
                     <caption>On swipe action</caption>
-                    <description/>
+                    <description>Action triggerd for pattern: "Archive" after the item is collapesed, "Toggle" when item passed the threshold, "Swipe out" after the item is animated out of the list.</description>
                 </property>
-                <property key="closeOnFinishRight" type="boolean" defaultValue="false">
-                    <caption>Reset after swipe</caption>
-                    <description>Return to original state after swipe (available only for "Call action")</description>
+                <property key="rightThresholdAttribute" type="attribute" required="false">
+                    <caption>Threshold attribute</caption>
+                    <description>Attribute will be set when the item is passed the action threshold.</description>
+                    <attributeTypes>
+                        <attributeType name="Boolean" />
+                    </attributeTypes>
                 </property>
             </propertyGroup>
         </propertyGroup>
