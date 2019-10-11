@@ -150,16 +150,29 @@ input = merge(input, custom.input || {});
 
 // Navigation Styles
 let navigation = {
+    statusBar: {
+        backgroundColor: background.primary,
+        barStyle: custom.darkMode ?  "light-content" : "dark-content",
+    },
     topBar: {
         backgroundColor: background.primary,
         backButtonColor: contrast.highest,
         titleColor: contrast.highest,
+        titleFontSize: font.sizeH4,
     },
     bottomBar: {
         color: contrast.high,
-        selectedColor: brand.primary,
+        selectedTextColor: contrast.high,
+        selectedIconColor: brand.primary,
         backgroundColor: background.primary,
+        fontSize: font.sizeSmall
     },
+    progressOverlay: {
+        color:  '#FFF',
+        activityIndicatorColor: '#FFF',
+        backgroundColor: `rgba(0, 0, 0, 0.5)`,
+        fontSize: font.size,
+    }
 };
 navigation = merge(navigation, custom.navigation || {});
 

@@ -1,4 +1,4 @@
-import { Platform }                                    from "react-native";
+import { NativeModules, Platform }                     from "react-native";
 import adjustFont                                      from "../core/helpers/_functions/adjustfont";
 import { setColorBasedOnBackground, setContrastScale } from "../core/helpers/_functions/convertcolors";
 
@@ -19,8 +19,10 @@ export const brand = {
     danger: "#ed1c24",
 };
 
-// Dark Mode
-const darkMode = false;
+// Dark Mode - Inherits OS theme if possible
+export const darkMode = NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode
+                 ? NativeModules.RNDarkMode.initialMode === "dark"
+                 : false;
 
 // Background Colors
 const backgroundColor = darkMode ? "#000" : "#FFF";

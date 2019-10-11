@@ -15,34 +15,82 @@ import { font, navigation, spacing } from "../variables";
 ========================================================================== */
 
 export const navigationStyle = {
+    statusBar: {
+        // Android only
+        backgroundColor: navigation.statusBar.backgroundColor,
+        barStyle: navigation.statusBar.barStyle,
+    },
     topBar: {
-        backgroundColor: navigation.topBar.backgroundColor,
-        backButtonColor: navigation.topBar.backButtonColor,
-        titleColor: navigation.topBar.titleColor,
-        titleFontSize: font.sizeH4,
-        fontFamily: font.family,
-        fontWeight: Platform.select({ ios: font.weightBold, android: font.weightNormal }),
+        container: {
+            // All ViewStyle properties are allowed
+            backgroundColor: navigation.topBar.backgroundColor,
+        },
+        title: {
+            // All TextStyle properties are allowed
+            color: navigation.topBar.titleColor,
+            fontSize: navigation.topBar.titleFontSize,
+            fontFamily: font.family,
+            fontWeight: Platform.select({ ios: font.weightBold, android: font.weightNormal }),
+        },
+        backButtonText: {
+            // All TextStyle properties are allowed
+            color: navigation.topBar.backButtonColor,
+            fontFamily: font.family,
+        },
+        backButtonIcon: {
+            // All ImageStyle properties are allowed
+            tintColor: navigation.topBar.backButtonColor,
+        },
+        // backButtonIconSource: {},
     },
     bottomBar: {
-        fontSize: font.sizeSmall,
-        fontFamily: font.family,
-        backgroundColor: navigation.bottomBar.backgroundColor,
-        color: navigation.bottomBar.color,
-        selectedColor: navigation.bottomBar.selectedColor,
+        container: {
+            // All ViewStyle properties are allowed
+            backgroundColor: navigation.bottomBar.backgroundColor,
+        },
+        label: {
+            // All TextStyle properties are allowed
+            color: navigation.bottomBar.color,
+            fontFamily: font.family,
+            fontSize: navigation.bottomBar.fontSize,
+
+        },
+        selectedLabel: {
+            // All TextStyle properties are allowed
+            color: navigation.bottomBar.selectedTextColor,
+            fontFamily: font.family,
+            fontSize: navigation.bottomBar.fontSize,
+        },
+        icon: {
+            // All TextStyle properties are allowed
+            color: navigation.bottomBar.color,
+            fontSize: navigation.bottomBar.fontSize,
+        },
+        selectedIcon: {
+            // All TextStyle properties are allowed
+            color: navigation.bottomBar.selectedIconColor,
+            fontSize: navigation.bottomBar.fontSize,
+        },
     },
     progressOverlay: {
         background: {
-            backgroundColor: `rgba(0, 0, 0, 0.5)`,
+            // All ViewStyle properties are allowed
+            backgroundColor: navigation.progressOverlay.backgroundColor,
         },
-        container: {},
+        container: {
+            // All ViewStyle properties are allowed
+
+        },
         activityIndicator: {
-            color: "#FFF",
+            // Color, Size & All ViewStyle properties are allowed
+            color: navigation.progressOverlay.activityIndicatorColor,
         },
         text: {
-            color: "#FFF",
+            // All TextStyle properties are allowed
+            color: navigation.progressOverlay.color,
             marginTop: spacing.small,
-            fontSize: font.size,
             fontFamily: font.family,
+            fontSize: navigation.progressOverlay.fontSize,
         },
     },
 };

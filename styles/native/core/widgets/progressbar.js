@@ -1,6 +1,6 @@
 import { Platform }            from "react-native";
 import { anyColorToRgbString } from "../helpers/_functions/convertcolors";
-import { brand }               from "../variables";
+import { brand, font, input }  from "../variables";
 
 //
 // DISCLAIMER:
@@ -37,4 +37,10 @@ export const com_mendix_widget_native_progressbar_ProgressBar = (ProgressBar = {
         //Only the backgroundColor property is allowed
         backgroundColor: brand.primary,
     },
+    validationMessage: {
+        // All TextStyle properties are allowed
+        color: input.errorColor,
+        fontSize: font.size,
+        fontFamily: font.family,
+    }
 });

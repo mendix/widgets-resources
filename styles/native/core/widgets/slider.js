@@ -1,5 +1,5 @@
-import { Platform }                            from "react-native";
-import { background, border, brand, contrast } from "../variables";
+import { Platform }                                         from "react-native";
+import { background, border, brand, contrast, font, input } from "../variables";
 
 //
 // DISCLAIMER:
@@ -57,6 +57,17 @@ export const com_mendix_widget_native_slider_Slider = (Slider = {
             },
         }),
     },
+    markerActive: {
+        // All ViewStyle properties are allowed
+        ...Platform.select({
+            android: {
+                borderWidth: 0,
+                width: 34,
+                height: 34,
+                borderRadius: 17,
+            },
+        }),
+    },
     markerDisabled: {
         // All ViewStyle properties are allowed
         ...Platform.select({
@@ -78,15 +89,10 @@ export const com_mendix_widget_native_slider_Slider = (Slider = {
             },
         }),
     },
-    markerActive: {
-        // All ViewStyle properties are allowed
-        ...Platform.select({
-            android: {
-                borderWidth: 0,
-                width: 34,
-                height: 34,
-                borderRadius: 17,
-            },
-        }),
-    },
+    validationMessage: {
+        // All TextStyle properties are allowed
+        color: input.errorColor,
+        fontSize: font.size,
+        fontFamily: font.family,
+    }
 });

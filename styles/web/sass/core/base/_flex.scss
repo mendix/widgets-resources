@@ -11,6 +11,27 @@
 ========================================================================== */
 $important-flex-value: if($important-flex, ' !important', '');
 
+// Flex layout
+.flexcontainer {
+    display: flex;
+    overflow: hidden;
+    flex: 1;
+    flex-direction: row;
+
+    .flexitem {
+        margin-right: $gutter-size;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    .flexitem-main {
+        overflow: hidden;
+        flex: 1;
+    }
+}
+
 // These classes define the order of the children
 .flex-row {
     flex-direction: row #{$important-flex-value};
@@ -70,6 +91,10 @@ $important-flex-value: if($important-flex, ' !important', '');
 .justify-content-evenly {
     // Not Supported in IE11
     justify-content: space-evenly #{$important-flex-value};
+}
+
+.justify-content-stretch {
+    justify-content: stretch #{$important-flex-value};
 }
 
 /// These classes define the alignment of the children in the cross-direction

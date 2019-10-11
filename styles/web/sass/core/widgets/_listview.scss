@@ -53,21 +53,19 @@
                 border-radius: 0; // Reset mxui listview style
             }
 
-            &:nth-child(2n + 1) {
-                background-color: $grid-bg;
-            }
-
-            &:hover {
-                background-color: $grid-bg;
-            }
-
+            &:hover,
             &:focus,
             &:active {
+                outline: 0;
                 background-color: $grid-bg-hover;
             }
 
             &.selected {
-                background-color: $grid-bg-selected !important;
+                background-color: $grid-bg-selected;
+
+                &:hover {
+                    background-color: $grid-bg-selected-hover;
+                }
             }
         }
     }

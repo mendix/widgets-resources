@@ -1,3 +1,5 @@
+import { contrast } from "../variables.js";
+
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.
@@ -13,7 +15,8 @@
 
 export const Image = {
     container: {
-        // All ViewStyle properties are allowed
+        // RippleColor & All ViewStyle properties are allowed
+        rippleColor: contrast.lowest,
     },
     image: {
         // All ImageStyle properties are allowed
@@ -21,9 +24,10 @@ export const Image = {
     },
 };
 
-export const NativeDynamicImage = {
+export const ImageViewer = {
     container: {
-        // All ViewStyle properties are allowed
+        // RippleColor & All ViewStyle properties are allowed
+        rippleColor: contrast.lowest,
     },
     image: {
         // All ImageStyle properties are allowed

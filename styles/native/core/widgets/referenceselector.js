@@ -1,4 +1,5 @@
 import { input }                    from "../variables";
+import { DropDown }                 from "./dropdown.js";
 import { TextBox, TextBoxVertical } from "./textbox";
 
 //
@@ -42,9 +43,10 @@ export const ReferenceSelector = {
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
 
+        fontSize: input.fontSize,
         fontFamily: input.fontFamily,
         borderWidth: input.borderWidth,
-        borderRadius: input.radius,
+        borderRadius: input.borderRadius,
 
         paddingHorizontal: input.paddingHorizontal,
         paddingVertical: input.paddingVertical,
@@ -65,17 +67,6 @@ export const ReferenceSelectorVertical = {
     pickerItemIOS: ReferenceSelector.pickerItemIOS,
     pickerBackdropIOS: ReferenceSelector.pickerBackdropIOS,
     pickerTopIOS: ReferenceSelector.pickerTopIOS,
-    value: {
-        color: input.color,
-        borderColor: input.borderColor,
-        backgroundColor: input.backgroundColor,
-
-        fontFamily: input.fontFamily,
-        borderRadius: input.radius,
-        borderWidth: input.borderWidth,
-
-        paddingVertical: input.paddingVertical,
-        paddingHorizontal: input.paddingHorizontal,
-    },
+    value: DropDown.value,
     validationMessage: TextBoxVertical.validationMessage,
 };
