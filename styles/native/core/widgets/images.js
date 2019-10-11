@@ -27,7 +27,7 @@ export const Image = {
 export const ImageViewer = {
     container: {
         // RippleColor & All ViewStyle properties are allowed
-        rippleColor: "red",
+        rippleColor: contrast.lowest,
     },
     image: {
         // All ImageStyle properties are allowed
