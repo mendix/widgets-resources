@@ -20,7 +20,7 @@ export const brand = {
 };
 
 // Dark Mode - Inherits OS theme if possible
-const darkMode = NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode
+export const darkMode = NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode
                  ? NativeModules.RNDarkMode.initialMode === "dark"
                  : false;
 
