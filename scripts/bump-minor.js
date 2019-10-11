@@ -6,7 +6,7 @@ const { writeVersionFiles } = require("./lib/writeFile.js");
     const files = readVersionFiles(paths);
     const versionNumbers = files.pkg.version.split(".");
     const minorNumber = Number(versionNumbers[1]) + 1;
-    const minorVersion = versionNumbers[0] + "." + minorNumber + "." + versionNumbers[2];
+    const minorVersion = versionNumbers[0] + "." + minorNumber + "." + 0;
     files.pkg.version = files.manifest.js.version = files.manifest.sass.version = minorVersion;
     writeVersionFiles(files, paths);
 })();
