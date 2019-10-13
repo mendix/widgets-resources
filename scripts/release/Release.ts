@@ -12,7 +12,7 @@ async function main(): Promise<void> {
     const args = process.argv.slice(2);
     const target = args[0];
     const description = args.length > 1 ? args[1] : "No notes";
-    const packages = ["packages-common", "packages-native", "packages-web"];
+    const packages = ["packages-common", "packages-native", "packages-web", "packages-hybrid"];
     // eslint-disable-next-line no-console
     console.log("Target", target);
 
@@ -52,7 +52,7 @@ async function findPackage(packages: string[], target: string): Promise<any> {
     throw Error(`Package for ${target} not found`);
 }
 
-function getAuth() {
+function getAuth(): Promise<TokenData> {
     return new Promise<TokenData>((resolve, reject) => {
         const options: AuthOptions = {
             configName: "gh-release",
@@ -65,7 +65,7 @@ function getAuth() {
     });
 }
 
-function releaseWithAuth(auth: TokenData, projectPackage: any) {
+function releaseWithAuth(auth: TokenData, projectPackage: any): void {
     const tagName = `AppStore release ${projectPackage.name.replace(/^\w/, (c: string) => c.toUpperCase())} v${
         projectPackage.version
     }`;
@@ -97,7 +97,7 @@ function releaseWithAuth(auth: TokenData, projectPackage: any) {
     });
 }
 
-function handleError(error: any) {
+function handleError(error: any): void {
     // eslint-disable-next-line no-console
     console.error(error);
     process.exit(1);

@@ -13,7 +13,7 @@ async function main(): Promise<void> {
     const args = process.argv.slice(2);
     const target = args[0];
     const version = args[1];
-    const packages = ["packages-common", "packages-native", "packages-web"];
+    const packages = ["packages-common", "packages-native", "packages-web", "packages-hybrid"];
     // await fs.mkdir(testProjectDir, { recursive: true });
     // eslint-disable-next-line no-console
     console.log("Target", target, "Version", version);
