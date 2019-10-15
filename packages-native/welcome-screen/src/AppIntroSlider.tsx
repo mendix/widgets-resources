@@ -10,7 +10,8 @@ import {
     I18nManager,
     ViewStyle,
     TextStyle,
-    NativeSyntheticEvent
+    NativeSyntheticEvent,
+    LayoutChangeEvent
 } from "react-native";
 import DeviceInfo from "react-native-device-info";
 
@@ -48,7 +49,6 @@ interface SwipeableContainerProps {
 export const SwipeableContainer = (props: SwipeableContainerProps) => {
     const dimensions = Dimensions.get("window");
     const [width, setWidth] = useState(dimensions.width);
-    const [height, setHeight] = useState(dimensions.height);
     const [activeIndex, setActiveIndex] = useState(0);
     let flatList: FlatList<any>;
 
@@ -146,7 +146,8 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
         return (
             <View style={[styles.paginationContainer, props.paginationStyle]}>
                 <View style={styles.paginationDots}>
-                    {props.slides.length > 1 &&
+                    {!props.hidePagination &&
+                        props.slides.length > 1 &&
                         props.slides.map((_, i) => (
                             <TouchableOpacity
                                 key={i}
@@ -185,23 +186,17 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
         [activeIndex, width]
     );
 
-    const _onLayout = useCallback(() => {
-        const dimensions = Dimensions.get("window");
-        if (dimensions.width !== width || dimensions.height !== height) {
-            // Set new width to update rendering of pages
-            setWidth(dimensions.width);
-            setHeight(dimensions.height);
-            // Set new scroll position
-            const func = () => {
-                flatList &&
-                    flatList.scrollToOffset({
-                        offset: _rtlSafeIndex(activeIndex) * dimensions.width,
-                        animated: false
-                    });
-            };
-            Platform.OS === "android" ? setTimeout(func, 0) : func();
-        }
-    }, []);
+    const _onLayout = useCallback(
+        (e: LayoutChangeEvent) => {
+            const newWidth = e.nativeEvent.layout.width;
+            console.warn(width, newWidth);
+            if (newWidth !== width) {
+                // Set new width to update rendering of pages
+                setWidth(newWidth);
+            }
+        },
+        [width]
+    );
 
     const {
         hidePagination,
@@ -234,7 +229,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
                 onLayout={_onLayout}
                 {...otherProps}
             />
-            {!hidePagination && _renderPagination()}
+            {_renderPagination()}
         </View>
     );
 };
