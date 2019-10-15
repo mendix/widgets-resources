@@ -29,6 +29,7 @@ export interface MyWidgetProps<Style> extends CommonProps<Style> {
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
     tries?: number;
+    amount?: BigJs.Big;
     image?: DynamicValue<NativeImage>;
     onClickAction?: ActionValue;
     onChange?: ActionValue;
@@ -85,6 +86,7 @@ export interface MyWidgetContainerProps extends CommonProps {
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
     tries?: number;
+    amount?: BigJs.Big;
     image?: DynamicValue<WebImage>;
     onClickAction?: ActionValue;
     onChange?: ActionValue;
@@ -99,6 +101,7 @@ export interface MyWidgetPreviewProps extends CommonProps {
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
     tries?: number;
+    amount?: BigJs.Big;
     image?: WebImage;
     onClickAction?: ActionPreview;
     onChange?: ActionPreview;
@@ -113,6 +116,7 @@ export interface VisibilityMap {
     bootstrapStyle: boolean;
     mywidgetType: boolean;
     tries: boolean;
+    amount: boolean;
     image: boolean;
     onClickAction: boolean;
     onChange: boolean;

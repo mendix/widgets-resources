@@ -57,6 +57,10 @@ export const contentGroup: string = `<?xml version="1.0" encoding="utf-8"?>
                     <caption>Number of tries</caption>
                     <description />
                 </property>
+                <property key="amount" type="decimal" required="false">
+                    <caption>The amount of stuff</caption>
+                    <description />
+                </property>
                 <property key="image" type="image" required="false">
                     <caption>Image</caption>
                     <description />
@@ -176,6 +180,11 @@ export const content: string = `<?xml version="1.0" encoding="utf-8"?>
             <category>Display</category>
             <description />
         </property>
+        <property key="amount" type="decimal" required="false">
+            <caption>The amount of stuff</caption>
+            <category>Display</category>
+            <description />
+        </property>
         <property key="image" type="image" required="false">
             <caption>Image</caption>
             <category>Display</category>
@@ -277,6 +286,10 @@ export const contentGroupNative: string = `<?xml version="1.0" encoding="utf-8"?
                 </property>
                 <property key="tries" type="integer" required="false">
                     <caption>Number of tries</caption>
+                    <description />
+                </property>
+                <property key="amount" type="decimal" required="false">
+                    <caption>The amount of stuff</caption>
                     <description />
                 </property>
                 <property key="image" type="image" required="false">
@@ -395,6 +408,11 @@ export const contentNative: string = `<?xml version="1.0" encoding="utf-8"?>
         </property>
         <property key="tries" type="integer" required="false">
             <caption>Number of tries</caption>
+            <category>Display</category>
+            <description />
+        </property>
+        <property key="amount" type="decimal" required="false">
+            <caption>The amount of stuff</caption>
             <category>Display</category>
             <description />
         </property>

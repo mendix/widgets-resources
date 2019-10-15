@@ -44,6 +44,8 @@ const translateType = (
             return preview && !isChild ? "string" : "DynamicValue<string>";
         case "integer":
             return "number";
+        case "decimal":
+            return "BigJs.Big";
         case "icon":
             return isMobile ? "DynamicValue<NativeIcon>" : preview && !isChild ? "WebIcon" : "DynamicValue<WebIcon>";
         case "image":
