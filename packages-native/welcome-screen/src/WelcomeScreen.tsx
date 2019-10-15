@@ -1,16 +1,20 @@
-import { createElement, useCallback } from "react";
-import AppIntroSlider from "react-native-app-intro-slider";
-import { WelcomeScreenStyle } from "./ui/Styles";
+import { createElement, useCallback, useState } from "react";
+import { defaultWelcomeScreenStyle, WelcomeScreenStyle } from "./ui/Styles";
 import { WelcomeScreenProps } from "../typings/WelcomeScreenProps";
-import { Text, View } from "react-native";
+import { Text, View, Modal } from "react-native";
 import { Icon } from "mendix/components/native/Icon";
 import { NativeIcon, DynamicValue, ValueStatus } from "mendix";
+import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { SwipeableContainer } from "./AppIntroSlider";
 
 export function WelcomeScreen(props: WelcomeScreenProps<WelcomeScreenStyle>) {
+    const [visible, setVisible] = useState(true);
+    const styles = flattenStyles(defaultWelcomeScreenStyle, props.style);
     const onDone = useCallback(() => {
         if (props.onEnds && props.onEnds.canExecute) {
             props.onEnds.execute();
         }
+        setVisible(false);
     }, []);
     const onSlideChange = useCallback(() => {
         if (props.onSwipe && props.onSwipe.canExecute) {
@@ -21,6 +25,7 @@ export function WelcomeScreen(props: WelcomeScreenProps<WelcomeScreenStyle>) {
         if (props.onSkip && props.onSkip.canExecute) {
             props.onSkip.execute();
         }
+        setVisible(false);
     }, []);
     const slides = props.slides.map(slide => ({
         key: "id_" + Math.random(),
@@ -60,27 +65,28 @@ export function WelcomeScreen(props: WelcomeScreenProps<WelcomeScreenStyle>) {
     };
 
     return (
-        <AppIntroSlider
-            slides={slides}
-            renderItem={({ item }) => {
-                return <View style={[{ flex: 1, alignContent: "stretch" }]}>{item.content}</View>;
-            }}
-            onDone={onDone}
-            onSlideChange={onSlideChange}
-            onSkip={onSkip}
-            showSkipButton={props.showSkipButton}
-            showNextButton={props.showNextButton}
-            showPrevButton={props.showPrevButton}
-            showDoneButton={props.showDoneButton}
-            hidePagination={!props.showPagination}
-            skipLabel={renderLabel(props.skipCaption, "Skip")}
-            prevLabel={renderLabel(props.prevCaption, "Prev")}
-            nextLabel={renderLabel(props.nextCaption, "Next")}
-            doneLabel={renderLabel(props.doneCaption, "Done")}
-            {...renderButton("renderSkipButton", props.skipIcon, props.skipCaption)}
-            {...renderButton("renderPrevButton", props.prevIcon, props.prevCaption)}
-            {...renderButton("renderNextButton", props.nextIcon, props.nextCaption)}
-            {...renderButton("renderDoneButton", props.doneIcon, props.doneCaption)}
-        />
+        <Modal visible={visible} transparent={false}>
+            <View style={props.mode === "fullscreen" ? styles.fullscreenContainer : styles.cardContainer}>
+                <SwipeableContainer
+                    slides={slides}
+                    onDone={onDone}
+                    onSlideChange={onSlideChange}
+                    onSkip={onSkip}
+                    showSkipButton={props.showSkipButton}
+                    showNextButton={props.showNextButton}
+                    showPrevButton={props.showPrevButton}
+                    showDoneButton={props.showDoneButton}
+                    hidePagination={!props.showPagination}
+                    skipLabel={renderLabel(props.skipCaption, "Skip")}
+                    prevLabel={renderLabel(props.prevCaption, "Prev")}
+                    nextLabel={renderLabel(props.nextCaption, "Next")}
+                    doneLabel={renderLabel(props.doneCaption, "Done")}
+                    {...renderButton("renderSkipButton", props.skipIcon, props.skipCaption)}
+                    {...renderButton("renderPrevButton", props.prevIcon, props.prevCaption)}
+                    {...renderButton("renderNextButton", props.nextIcon, props.nextCaption)}
+                    {...renderButton("renderDoneButton", props.doneIcon, props.doneCaption)}
+                />
+            </View>
+        </Modal>
     );
 }

@@ -15,8 +15,11 @@ export interface SlidesType {
     name: string;
 }
 
+export type ModeEnum = "fullscreen" | "card";
+
 export interface WelcomeScreenProps<Style> extends CommonProps<Style> {
     slides: SlidesType[];
+    mode: ModeEnum;
     showPagination: boolean;
     showSkipButton: boolean;
     skipCaption?: DynamicValue<string>;

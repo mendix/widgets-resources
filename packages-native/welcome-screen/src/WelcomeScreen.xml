@@ -29,10 +29,21 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Behavior">
+                <property key="mode" type="enumeration" defaultValue="fullscreen">
+                    <caption>Render mode</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="fullscreen">Fullscreen</enumerationValue>
+                        <enumerationValue key="card">Card</enumerationValue>
+                    </enumerationValues>
+                </property>
                 <property key="showPagination" type="boolean" defaultValue="true">
                     <caption>Show pagination</caption>
                     <description/>
                 </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Visibility" />
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Buttons">

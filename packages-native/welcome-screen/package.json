@@ -26,7 +26,6 @@
         "@types/react-native-app-intro-slider": "^3.0.0"
     },
     "dependencies": {
-        "@native-mobile-resources/util-widgets": "^0.0.1",
-        "react-native-app-intro-slider": "^3.0.0"
+        "@native-mobile-resources/util-widgets": "^0.0.1"
     }
 }
