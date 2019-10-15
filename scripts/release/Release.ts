@@ -1,7 +1,7 @@
 // @ts-ignore
 import ghRelease from "gh-release";
 import ghauth, { AuthOptions, TokenData } from "ghauth";
-import { promises as fs, existsSync } from "fs";
+import { promises as fs, existsSync, mkdirSync } from "fs";
 import { join } from "path";
 import { spawnSync } from "child_process";
 import zipFolder from "zip-folder";
@@ -21,11 +21,12 @@ async function main(): Promise<void> {
     spawnSync("npm", ["run", "release"], { cwd: projectPackage.path });
     await createChangeLog(description, projectPackage.version, projectPackage.path);
 
-    zipTestProjects(projectPackage.path);
-    releaseWithAuth(await getAuth(), projectPackage);
+    await zipTestProjects(projectPackage.path);
+    const url = await releaseWithAuth(await getAuth(), projectPackage);
 
     // eslint-disable-next-line no-console
-    console.log(`Version ${projectPackage.version} of ${projectPackage.name} successfully published`);
+    console.log(`Version ${projectPackage.version} of ${projectPackage.name} successfully published @ ${url}`);
+    process.exit(0);
 }
 
 async function findPackage(packages: string[], target: string): Promise<any> {
@@ -65,16 +66,20 @@ function getAuth(): Promise<TokenData> {
     });
 }
 
-function releaseWithAuth(auth: TokenData, projectPackage: any): void {
+async function releaseWithAuth(auth: TokenData, projectPackage: any): Promise<string> {
+    const assets = [
+        `dist/${projectPackage.version}/${projectPackage.widgetName}.mpk`,
+        `dist/${projectPackage.version}/module/${projectPackage.config.moduleName}.mpk`,
+        `dist/${projectPackage.version}/${projectPackage.packagePath}.${projectPackage.widgetName}.mpk`,
+        "dist/tmp/TestProjects.zip"
+    ];
+    // eslint-disable-next-line no-console
+    console.log("Assets", assets.filter(asset => existsSync(projectPackage.path + "/" + asset)));
+
     const tagName = `AppStore release ${projectPackage.name.replace(/^\w/, (c: string) => c.toUpperCase())} v${
         projectPackage.version
     }`;
 
-    const assets = [
-        `dist/${projectPackage.version}/${projectPackage.widgetName}.mpk`,
-        `dist/${projectPackage.version}/${projectPackage.packagePath}.${projectPackage.widgetName}.mpk`,
-        "dist/tmp/TestProjects.zip"
-    ];
     const options = {
         // eslint-disable-next-line @typescript-eslint/camelcase
         tag_name: `${projectPackage.name}-v${projectPackage.version}`,
@@ -87,13 +92,13 @@ function releaseWithAuth(auth: TokenData, projectPackage: any): void {
         draft: true
     };
 
-    ghRelease(options, (error: string, result: { html_url: string }) => {
-        if (error) {
-            return handleError(error);
-        }
-        // eslint-disable-next-line no-console
-        console.log(result.html_url);
-        process.exit(0);
+    return new Promise(resolve => {
+        ghRelease(options, (error: string, result: { html_url: string }) => {
+            if (error) {
+                return handleError(error);
+            }
+            resolve(result.html_url);
+        });
     });
 }
 
@@ -111,19 +116,26 @@ function createChangeLog(description: string, version: string, path: string): Pr
     return fs.appendFile(`${path}/CHANGELOG.md`, body);
 }
 
-function zipTestProjects(path: string): boolean {
+function zipTestProjects(path: string): Promise<boolean> {
     const source = join(path, "tests", "TestProjects");
-    const destination = join(path, "dist", "tmp", "TestProjects.zip");
-    zipFolder(source, destination, (err: string) => {
-        if (err) {
-            // eslint-disable-next-line no-console
-            console.log("Error trying to zip testProjects");
+    return new Promise(resolve => {
+        if (existsSync(source)) {
+            const destination = join(path, "dist", "tmp");
+            if (!existsSync(destination)) {
+                mkdirSync(destination, { recursive: true });
+            }
+            zipFolder(source, join(destination, "TestProjects.zip"), (error: string) => {
+                if (error) {
+                    // eslint-disable-next-line no-console
+                    console.log("Error trying to zip testProjects", error);
+                    return resolve(false);
+                }
+                // eslint-disable-next-line no-console
+                console.log("Successfully zipped the TestProjects");
+                resolve(true);
+            });
         } else {
-            // eslint-disable-next-line no-console
-            console.log("Successfully ziped the TestProjects");
-            return true;
+            return resolve(false);
         }
-        return false;
     });
-    return false;
 }
