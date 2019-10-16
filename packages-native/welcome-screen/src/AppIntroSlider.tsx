@@ -9,27 +9,22 @@ import {
     Platform,
     I18nManager,
     ViewStyle,
-    TextStyle,
     NativeSyntheticEvent,
     LayoutChangeEvent,
     TouchableNativeFeedback
 } from "react-native";
 import DeviceInfo from "react-native-device-info";
+import { WelcomeScreenStyle } from "./ui/Styles";
 
-const isIphoneX = Platform.OS === "ios" && DeviceInfo.hasNotch();
+const isIphoneWithNotch = Platform.OS === "ios" && DeviceInfo.hasNotch();
 
 const isAndroidRTL = I18nManager.isRTL && Platform.OS === "android";
 
 interface SwipeableContainerProps {
-    activeDotStyle: ViewStyle;
-    dotStyle: ViewStyle;
     skipLabel: string;
     doneLabel: string;
     nextLabel: string;
     prevLabel: string;
-    // buttonStyle: ViewStyle;
-    buttonTextStyle: TextStyle;
-    paginationStyle: ViewStyle;
     showDoneButton: boolean;
     showSkipButton: boolean;
     showNextButton: boolean;
@@ -45,6 +40,7 @@ interface SwipeableContainerProps {
     onSkip: () => void;
     slides: [];
     hidePagination: boolean;
+    styles: WelcomeScreenStyle;
 }
 
 export const SwipeableContainer = (props: SwipeableContainerProps) => {
@@ -85,46 +81,69 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
         return <View style={[{ width, flex: 1, alignContent: "stretch" }]}>{props.item.content}</View>;
     };
 
-    const _renderButton = (name: string, onPress: () => void) => {
-        // @ts-ignore
-        const show: boolean = props[`show${name}Button`];
-        // @ts-ignore
-        const content: ReactNode = props[`render${name}Button`]
-            ? props[`render${name}Button`]()
-            : _renderDefaultButton(name);
-        return show && _renderOuterButton(content, name, onPress);
-    };
-
-    const _renderDefaultButton = (name: string): ReactNode => {
-        // @ts-ignore
-        let content = (
-            <Text style={[styles.buttonText, props.buttonTextStyle]}>{props[`${name.toLowerCase()}Label`]}</Text>
-        );
+    const _renderDefaultButton = (label: string, bottomStyle: ViewStyle): ReactNode => {
+        let content = <Text style={props.styles.buttonText}>{label}</Text>;
         if (props.bottomButton) {
-            // @ts-ignore
-            content = <View style={[styles.bottomButtonDefault, styles[`button${name}`]]}>{content}</View>;
+            content = <View style={[styles.bottomButtonDefault, bottomStyle]}>{content}</View>;
         }
         return content;
     };
 
-    const _renderOuterButton = (content: ReactNode, name: string, onPress: () => void) => {
-        const style = name === "Skip" || name === "Prev" ? styles.leftButtonContainer : styles.rightButtonContainer;
+    const _renderButton = (
+        label: string,
+        content: () => ReactNode,
+        onPress: () => void,
+        normalButtonStyle: ViewStyle,
+        bottomButtonStyle: ViewStyle
+    ) => {
         return (
-            <View style={!props.bottomButton ? style : styles.flexOne}>
-                <Touchable onPress={onPress}>{content}</Touchable>
+            <View style={!props.bottomButton ? normalButtonStyle : styles.flexOne}>
+                <Touchable onPress={onPress}>
+                    {content ? content() : _renderDefaultButton(label, bottomButtonStyle)}
+                </Touchable>
             </View>
         );
     };
 
-    const _renderNextButton = () => _renderButton("Next", _onNextPress);
+    const _renderNextButton = () =>
+        props.showNextButton &&
+        _renderButton(
+            props.nextLabel,
+            props.renderNextButton,
+            _onNextPress,
+            props.styles.rightButton,
+            props.styles.buttonNext
+        );
 
-    const _renderPrevButton = () => _renderButton("Prev", _onPrevPress);
+    const _renderPrevButton = () =>
+        props.showPrevButton &&
+        _renderButton(
+            props.prevLabel,
+            props.renderPrevButton,
+            _onPrevPress,
+            props.styles.leftButton,
+            props.styles.buttonPrev
+        );
 
-    const _renderDoneButton = () => _renderButton("Done", props.onDone && props.onDone);
+    const _renderDoneButton = () =>
+        props.showDoneButton &&
+        _renderButton(
+            props.doneLabel,
+            props.renderDoneButton,
+            props.onDone && props.onDone,
+            props.styles.rightButton,
+            props.styles.buttonDone
+        );
 
     const _renderSkipButton = () =>
-        // scrollToEnd does not work in RTL so use goToSlide instead
-        _renderButton("Skip", () => (props.onSkip ? props.onSkip() : goToSlide(props.slides.length - 1)));
+        props.showSkipButton &&
+        _renderButton(
+            props.skipLabel,
+            props.renderSkipButton,
+            () => (props.onSkip ? props.onSkip() : goToSlide(props.slides.length - 1)),
+            props.styles.leftButton,
+            props.styles.buttonSkip
+        );
 
     const _renderPagination = () => {
         const isLastSlide = activeIndex === props.slides.length - 1;
@@ -134,8 +153,8 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
         const btn = isLastSlide ? _renderDoneButton() : _renderNextButton();
 
         return (
-            <View style={[styles.paginationContainer, props.paginationStyle]}>
-                <View style={styles.paginationDots}>
+            <View style={[styles.paginationContainer, props.styles.paginationContainer]}>
+                <View style={[styles.paginationDots, props.styles.paginationDots]}>
                     {!props.hidePagination &&
                         props.slides.length > 1 &&
                         props.slides.map((_, i) => (
@@ -143,7 +162,9 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
                                 key={i}
                                 style={[
                                     styles.dot,
-                                    _rtlSafeIndex(i) === activeIndex ? props.activeDotStyle : props.dotStyle
+                                    _rtlSafeIndex(i) === activeIndex
+                                        ? props.styles.activeDotStyle
+                                        : props.styles.dotStyle
                                 ]}
                                 onPress={() => _onPaginationPress(i)}
                             />
@@ -199,17 +220,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
         [width]
     );
 
-    const {
-        hidePagination,
-        activeDotStyle,
-        dotStyle,
-        skipLabel,
-        doneLabel,
-        nextLabel,
-        prevLabel,
-        buttonTextStyle,
-        ...otherProps
-    } = props;
+    const { hidePagination, skipLabel, doneLabel, nextLabel, prevLabel, ...otherProps } = props;
 
     const _setRef = useCallback((ref: FlatList<any>) => (flatList = ref), []);
 
@@ -262,7 +273,7 @@ const styles = StyleSheet.create({
     },
     paginationContainer: {
         position: "absolute",
-        bottom: 16 + (isIphoneX ? 34 : 0),
+        bottom: 16 + (isIphoneWithNotch ? 34 : 0),
         left: 16,
         right: 16
     },
@@ -279,27 +290,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginHorizontal: 4
     },
-    leftButtonContainer: {
-        position: "absolute",
-        left: 0
-    },
-    rightButtonContainer: {
-        position: "absolute",
-        right: 0
-    },
-    // bottomButton: {
-    //     flex: 1,
-    //     backgroundColor: "rgba(0, 0, 0, .3)",
-    //     alignItems: "center",
-    //     justifyContent: "center"
-    // },
-    buttonText: {
-        backgroundColor: "transparent",
-        color: "white",
-        fontSize: 18,
-        padding: 12,
-        alignSelf: "center"
-    },
     bottomButtonsContainer: {
         flex: 1,
         flexDirection: isAndroidRTL ? "row-reverse" : "row",
@@ -309,17 +299,5 @@ const styles = StyleSheet.create({
     bottomButtonDefault: {
         flex: 1,
         justifyContent: "center"
-    },
-    buttonSkip: {
-        backgroundColor: "red"
-    },
-    buttonDone: {
-        backgroundColor: "blue"
-    },
-    buttonPrev: {
-        backgroundColor: "brown"
-    },
-    buttonNext: {
-        backgroundColor: "brown"
     }
 });

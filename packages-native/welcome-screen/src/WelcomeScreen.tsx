@@ -83,6 +83,7 @@ export function WelcomeScreen(props: WelcomeScreenProps<WelcomeScreenStyle>) {
                     prevLabel={renderLabel(props.prevCaption, "Prev")}
                     nextLabel={renderLabel(props.nextCaption, "Next")}
                     doneLabel={renderLabel(props.doneCaption, "Done")}
+                    styles={styles}
                     {...renderButton("renderSkipButton", props.skipIcon, props.skipCaption)}
                     {...renderButton("renderPrevButton", props.prevIcon, props.prevCaption)}
                     {...renderButton("renderNextButton", props.nextIcon, props.nextCaption)}
