@@ -31,7 +31,6 @@ exports[`Intro Screens renders 1`] = `
           Array [
             Object {
               "content": <View />,
-              "key": "id_0.0807103293465341",
               "name": "Page 1",
             },
           ]
@@ -69,7 +68,6 @@ exports[`Intro Screens renders 1`] = `
           Array [
             Object {
               "content": <View />,
-              "key": "id_0.0807103293465341",
               "name": "Page 1",
             },
           ]
@@ -264,7 +262,6 @@ exports[`Intro Screens renders with 1 bottom button 1`] = `
           Array [
             Object {
               "content": <View />,
-              "key": "id_0.6303085549881269",
               "name": "Page 1",
             },
           ]
@@ -302,7 +299,6 @@ exports[`Intro Screens renders with 1 bottom button 1`] = `
           Array [
             Object {
               "content": <View />,
-              "key": "id_0.6303085549881269",
               "name": "Page 1",
             },
           ]
@@ -519,7 +515,6 @@ exports[`Intro Screens renders with 2 bottom button 1`] = `
           Array [
             Object {
               "content": <View />,
-              "key": "id_0.7341508127728833",
               "name": "Page 1",
             },
           ]
@@ -557,7 +552,6 @@ exports[`Intro Screens renders with 2 bottom button 1`] = `
           Array [
             Object {
               "content": <View />,
-              "key": "id_0.7341508127728833",
               "name": "Page 1",
             },
           ]

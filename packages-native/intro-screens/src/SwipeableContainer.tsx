@@ -232,6 +232,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
                 onMomentumScrollEnd={_onMomentumScrollEnd}
                 extraData={width}
                 onLayout={_onLayout}
+                keyExtractor={(_item: any, index: number) => "screen_key_" + index}
                 {...otherProps}
             />
             {_renderPagination()}

@@ -27,10 +27,6 @@ export function IntroScreens(props: IntroScreensProps<IntroScreensStyle>) {
         }
         setVisible(false);
     }, []);
-    const slides = props.slides.map(slide => ({
-        key: "id_" + Math.random(),
-        ...slide
-    }));
 
     const renderText = (icon?: DynamicValue<NativeIcon>, caption?: DynamicValue<string>) => {
         if (caption && caption.status === ValueStatus.Available && caption.value) {
@@ -68,7 +64,7 @@ export function IntroScreens(props: IntroScreensProps<IntroScreensStyle>) {
         <Modal visible={visible} transparent={true}>
             <View style={props.mode === "fullscreen" ? styles.fullscreenContainer : styles.cardContainer}>
                 <SwipeableContainer
-                    slides={slides}
+                    slides={props.slides}
                     onDone={onDone}
                     onSlideChange={onSlideChange}
                     onSkip={onSkip}
