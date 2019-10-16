@@ -1,13 +1,13 @@
 import { createElement, useCallback, useState } from "react";
-import { defaultWelcomeScreenStyle, WelcomeScreenStyle } from "./ui/Styles";
-import { WelcomeScreenProps } from "../typings/WelcomeScreenProps";
+import { defaultWelcomeScreenStyle, IntroScreensStyle } from "./ui/Styles";
+import { IntroScreensProps } from "../typings/IntroScreensProps";
 import { Text, View, Modal } from "react-native";
 import { Icon } from "mendix/components/native/Icon";
 import { NativeIcon, DynamicValue, ValueStatus } from "mendix";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { SwipeableContainer } from "./AppIntroSlider";
 
-export function WelcomeScreen(props: WelcomeScreenProps<WelcomeScreenStyle>) {
+export function IntroScreens(props: IntroScreensProps<IntroScreensStyle>) {
     const [visible, setVisible] = useState(true);
     const styles = flattenStyles(defaultWelcomeScreenStyle, props.style);
     const onDone = useCallback(() => {

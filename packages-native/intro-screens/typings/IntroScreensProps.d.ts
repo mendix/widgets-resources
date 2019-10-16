@@ -1,5 +1,5 @@
 /**
- * This file was generated from WelcomeScreen.xml
+ * This file was generated from IntroScreens.xml
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
@@ -19,7 +19,7 @@ export type ModeEnum = "fullscreen" | "card";
 
 export type NumberOfButtonsEnum = "one" | "two";
 
-export interface WelcomeScreenProps<Style> extends CommonProps<Style> {
+export interface IntroScreensProps<Style> extends CommonProps<Style> {
     slides: SlidesType[];
     mode: ModeEnum;
     showPagination: boolean;
