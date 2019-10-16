@@ -38,8 +38,8 @@ export const defaultWelcomeScreenStyle: IntroScreensStyle = {
     cardContainer: {
         ...absoluteFillObject,
         paddingHorizontal: 50,
-        paddingVertical: 100,
-        backgroundColor: "rgba(0,0,0,0.4)"
+        paddingVertical: 150,
+        backgroundColor: "rgba(0, 0, 0, 0.5)"
     },
     bottomButtonsContainer: {},
     buttonSkip: {},
