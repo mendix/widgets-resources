@@ -1,3 +1,3 @@
-# Web view widget
+# Intro screens widget
 
-Display an external web page or load custom HTML.
+Displays swipeable contents with buttons to proceed or go back and pagination.
