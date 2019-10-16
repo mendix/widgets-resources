@@ -246,19 +246,10 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
 };
 
 SwipeableContainer.defaultProps = {
-    activeDotStyle: {
-        backgroundColor: "rgba(255, 255, 255, .9)"
-    },
-    dotStyle: {
-        backgroundColor: "rgba(0, 0, 0, .2)"
-    },
     skipLabel: "Skip",
     doneLabel: "Done",
     nextLabel: "Next",
     prevLabel: "Back",
-    buttonStyle: null,
-    buttonTextStyle: null,
-    paginationStyle: null,
     showDoneButton: true,
     showNextButton: true
 };

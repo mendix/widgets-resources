@@ -65,7 +65,7 @@ export function WelcomeScreen(props: WelcomeScreenProps<WelcomeScreenStyle>) {
     };
 
     return (
-        <Modal visible={visible} transparent={false}>
+        <Modal visible={visible} transparent={true}>
             <View style={props.mode === "fullscreen" ? styles.fullscreenContainer : styles.cardContainer}>
                 <SwipeableContainer
                     slides={slides}

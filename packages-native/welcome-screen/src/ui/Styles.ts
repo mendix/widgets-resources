@@ -37,9 +37,9 @@ export const defaultWelcomeScreenStyle: WelcomeScreenStyle = {
     },
     cardContainer: {
         ...absoluteFillObject,
-        padding: 50,
-        borderWidth: 1,
-        borderRadius: 10
+        paddingHorizontal: 50,
+        paddingVertical: 100,
+        backgroundColor: "rgba(0,0,0,0.4)"
     },
     bottomButtonsContainer: {},
     buttonSkip: {},
@@ -63,6 +63,10 @@ export const defaultWelcomeScreenStyle: WelcomeScreenStyle = {
     },
     paginationContainer: {},
     paginationDots: {},
-    dotStyle: {},
-    activeDotStyle: {}
+    dotStyle: {
+        backgroundColor: "rgba(0, 0, 0, .2)"
+    },
+    activeDotStyle: {
+        backgroundColor: "rgba(255, 255, 255, .9)"
+    }
 };
