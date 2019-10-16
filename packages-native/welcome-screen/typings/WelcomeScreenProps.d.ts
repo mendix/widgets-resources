@@ -17,10 +17,14 @@ export interface SlidesType {
 
 export type ModeEnum = "fullscreen" | "card";
 
+export type NumberOfButtonsEnum = "one" | "two";
+
 export interface WelcomeScreenProps<Style> extends CommonProps<Style> {
     slides: SlidesType[];
     mode: ModeEnum;
     showPagination: boolean;
+    showBottomButtons: boolean;
+    numberOfButtons: NumberOfButtonsEnum;
     showSkipButton: boolean;
     skipCaption?: DynamicValue<string>;
     skipIcon?: DynamicValue<NativeIcon>;

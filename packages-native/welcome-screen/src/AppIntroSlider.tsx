@@ -1,4 +1,4 @@
-import { useState, createElement, ReactNode, useCallback } from "react";
+import { useState, createElement, ReactNode, useCallback, ComponentClass, Fragment } from "react";
 import {
     StyleSheet,
     FlatList,
@@ -11,7 +11,8 @@ import {
     ViewStyle,
     TextStyle,
     NativeSyntheticEvent,
-    LayoutChangeEvent
+    LayoutChangeEvent,
+    TouchableNativeFeedback
 } from "react-native";
 import DeviceInfo from "react-native-device-info";
 
@@ -26,7 +27,7 @@ interface SwipeableContainerProps {
     doneLabel: string;
     nextLabel: string;
     prevLabel: string;
-    buttonStyle: ViewStyle;
+    // buttonStyle: ViewStyle;
     buttonTextStyle: TextStyle;
     paginationStyle: ViewStyle;
     showDoneButton: boolean;
@@ -34,8 +35,8 @@ interface SwipeableContainerProps {
     showNextButton: boolean;
     showPrevButton: boolean;
     onSlideChange: (next: number, previous: number) => void;
-    // renderItem: (props: {item: any}) => ReactNode;
-    bottomButton: any;
+    bottomButton: boolean;
+    numberOfButtons: number;
     renderDoneButton: () => ReactNode;
     renderSkipButton: () => ReactNode;
     renderPrevButton: () => ReactNode;
@@ -51,6 +52,8 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
     const [width, setWidth] = useState(dimensions.width);
     const [activeIndex, setActiveIndex] = useState(0);
     let flatList: FlatList<any>;
+
+    const Touchable: ComponentClass<any> = Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
 
     const goToSlide = useCallback(
         (pageNum: number) => {
@@ -98,19 +101,8 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
             <Text style={[styles.buttonText, props.buttonTextStyle]}>{props[`${name.toLowerCase()}Label`]}</Text>
         );
         if (props.bottomButton) {
-            content = (
-                <View
-                    style={[
-                        styles.bottomButton,
-                        (name === "Skip" || name === "Prev") && {
-                            backgroundColor: "transparent"
-                        },
-                        props.buttonStyle
-                    ]}
-                >
-                    {content}
-                </View>
-            );
+            // @ts-ignore
+            content = <View style={[styles.bottomButtonDefault, styles[`button${name}`]]}>{content}</View>;
         }
         return content;
     };
@@ -118,10 +110,8 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
     const _renderOuterButton = (content: ReactNode, name: string, onPress: () => void) => {
         const style = name === "Skip" || name === "Prev" ? styles.leftButtonContainer : styles.rightButtonContainer;
         return (
-            <View style={!props.bottomButton && style}>
-                <TouchableOpacity onPress={onPress} style={props.bottomButton ? styles.flexOne : props.buttonStyle}>
-                    {content}
-                </TouchableOpacity>
+            <View style={!props.bottomButton ? style : styles.flexOne}>
+                <Touchable onPress={onPress}>{content}</Touchable>
             </View>
         );
     };
@@ -149,7 +139,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
                     {!props.hidePagination &&
                         props.slides.length > 1 &&
                         props.slides.map((_, i) => (
-                            <TouchableOpacity
+                            <Touchable
                                 key={i}
                                 style={[
                                     styles.dot,
@@ -159,8 +149,18 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
                             />
                         ))}
                 </View>
-                {btn}
-                {skipBtn}
+                {!props.bottomButton && (
+                    <Fragment>
+                        {btn}
+                        {skipBtn}
+                    </Fragment>
+                )}
+                {props.bottomButton && (
+                    <View style={styles.bottomButtonsContainer}>
+                        {props.numberOfButtons === 2 && skipBtn}
+                        {btn}
+                    </View>
+                )}
             </View>
         );
     };
@@ -186,12 +186,13 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
         [activeIndex, width]
     );
 
+    /**
+     * Readjust the size of the slides if the size is different than the device dimensions
+     */
     const _onLayout = useCallback(
         (e: LayoutChangeEvent) => {
             const newWidth = e.nativeEvent.layout.width;
-            console.warn(width, newWidth);
             if (newWidth !== width) {
-                // Set new width to update rendering of pages
                 setWidth(newWidth);
             }
         },
@@ -206,7 +207,6 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
         doneLabel,
         nextLabel,
         prevLabel,
-        buttonStyle,
         buttonTextStyle,
         ...otherProps
     } = props;
@@ -287,16 +287,39 @@ const styles = StyleSheet.create({
         position: "absolute",
         right: 0
     },
-    bottomButton: {
-        flex: 1,
-        backgroundColor: "rgba(0, 0, 0, .3)",
-        alignItems: "center",
-        justifyContent: "center"
-    },
+    // bottomButton: {
+    //     flex: 1,
+    //     backgroundColor: "rgba(0, 0, 0, .3)",
+    //     alignItems: "center",
+    //     justifyContent: "center"
+    // },
     buttonText: {
         backgroundColor: "transparent",
         color: "white",
         fontSize: 18,
-        padding: 12
+        padding: 12,
+        alignSelf: "center"
+    },
+    bottomButtonsContainer: {
+        flex: 1,
+        flexDirection: isAndroidRTL ? "row-reverse" : "row",
+        alignItems: "stretch",
+        justifyContent: "center"
+    },
+    bottomButtonDefault: {
+        flex: 1,
+        justifyContent: "center"
+    },
+    buttonSkip: {
+        backgroundColor: "red"
+    },
+    buttonDone: {
+        backgroundColor: "blue"
+    },
+    buttonPrev: {
+        backgroundColor: "brown"
+    },
+    buttonNext: {
+        backgroundColor: "brown"
     }
 });

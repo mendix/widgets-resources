@@ -72,6 +72,8 @@ export function WelcomeScreen(props: WelcomeScreenProps<WelcomeScreenStyle>) {
                     onDone={onDone}
                     onSlideChange={onSlideChange}
                     onSkip={onSkip}
+                    bottomButton={props.showBottomButtons}
+                    numberOfButtons={props.numberOfButtons === "one" ? 1 : 2}
                     showSkipButton={props.showSkipButton}
                     showNextButton={props.showNextButton}
                     showPrevButton={props.showPrevButton}

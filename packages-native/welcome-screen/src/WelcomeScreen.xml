@@ -47,6 +47,20 @@
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Buttons">
+            <propertyGroup caption="General">
+                <property key="showBottomButtons" type="boolean" defaultValue="false">
+                    <caption>Show as bottom buttons</caption>
+                    <description>Show the options (prev, next, skip and done) in the bottom</description>
+                </property>
+                <property key="numberOfButtons" type="enumeration" defaultValue="one">
+                    <caption>Number of buttons</caption>
+                    <description>Number of buttons will be shown in the bottom</description>
+                    <enumerationValues>
+                        <enumerationValue key="one">One</enumerationValue>
+                        <enumerationValue key="two">Two</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
             <propertyGroup caption="Skip Button">
                 <property key="showSkipButton" type="boolean" defaultValue="false">
                     <caption>Show skip button</caption>
