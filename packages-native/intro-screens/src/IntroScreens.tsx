@@ -5,7 +5,7 @@ import { Text, View, Modal } from "react-native";
 import { Icon } from "mendix/components/native/Icon";
 import { NativeIcon, DynamicValue, ValueStatus } from "mendix";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
-import { SwipeableContainer } from "./AppIntroSlider";
+import { SwipeableContainer } from "./SwipeableContainer";
 
 export function IntroScreens(props: IntroScreensProps<IntroScreensStyle>) {
     const [visible, setVisible] = useState(true);
