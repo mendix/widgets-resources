@@ -4,6 +4,12 @@ import { createElement } from "react";
 import { CalendarProps, MyCalendar } from "../Calendar";
 import { SizeContainer, SizeProps } from "../SizeContainer";
 
+interface Window {
+    mx: any;
+}
+
+declare const window: Window;
+
 describe("Calendar", () => {
     const renderCalendar = (props: CalendarProps): ShallowWrapper<CalendarProps, any> =>
         shallow(createElement(MyCalendar, props));
@@ -132,7 +138,6 @@ describe("Calendar", () => {
     });
 
     afterAll(() => {
-        // @ts-ignore
         (window.mx as any) = undefined;
     });
 });

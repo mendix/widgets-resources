@@ -45,7 +45,7 @@ interface SwipeableContainerProps {
 
 const Touchable: ComponentClass<any> = Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
 
-export const SwipeableContainer = (props: SwipeableContainerProps) => {
+export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element => {
     const dimensions = Dimensions.get("window");
     const [width, setWidth] = useState(dimensions.width);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -54,34 +54,41 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
     const goToSlide = useCallback(
         (pageNum: number) => {
             setActiveIndex(pageNum);
-            flatList &&
+            if (flatList) {
                 flatList.scrollToOffset({
                     offset: _rtlSafeIndex(pageNum) * width
                 });
+            }
         },
         [width, flatList]
     );
 
-    const _onNextPress = () => {
+    const _onNextPress = (): void => {
         goToSlide(activeIndex + 1);
-        props.onSlideChange && props.onSlideChange(activeIndex + 1, activeIndex);
+        if (props.onSlideChange) {
+            props.onSlideChange(activeIndex + 1, activeIndex);
+        }
     };
-    const _onPrevPress = () => {
+    const _onPrevPress = (): void => {
         goToSlide(activeIndex - 1);
-        props.onSlideChange && props.onSlideChange(activeIndex - 1, activeIndex);
+        if (props.onSlideChange) {
+            props.onSlideChange(activeIndex - 1, activeIndex);
+        }
     };
 
-    const _onPaginationPress = (index: number) => {
+    const _onPaginationPress = (index: number): void => {
         const activeIndexBeforeChange = activeIndex;
         goToSlide(index);
-        props.onSlideChange && props.onSlideChange(index, activeIndexBeforeChange);
+        if (props.onSlideChange) {
+            props.onSlideChange(index, activeIndexBeforeChange);
+        }
     };
 
-    const _renderItem = ({ item }: any) => {
+    const _renderItem = ({ item }: any): JSX.Element => {
         return <View style={[{ width, flex: 1, alignContent: "stretch" }]}>{item.content}</View>;
     };
 
-    const _renderDefaultButton = (label: string, bottomStyle: ViewStyle): ReactNode => {
+    const _renderDefaultButton = (label: string, bottomStyle: ViewStyle): JSX.Element => {
         let content = <Text style={props.styles.buttonText}>{label}</Text>;
         if (props.bottomButton) {
             content = <View style={[styles.bottomButtonDefault, bottomStyle]}>{content}</View>;
@@ -95,7 +102,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
         onPress: () => void,
         normalButtonStyle: ViewStyle,
         bottomButtonStyle: ViewStyle
-    ) => {
+    ): JSX.Element => {
         return (
             <View style={!props.bottomButton ? normalButtonStyle : styles.flexOne}>
                 <Touchable onPress={onPress}>
@@ -105,11 +112,21 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
         );
     };
 
-    const _renderNextButton = ({ showNextButton, nextLabel, renderNextButton, styles }: SwipeableContainerProps) =>
+    const _renderNextButton = ({
+        showNextButton,
+        nextLabel,
+        renderNextButton,
+        styles
+    }: SwipeableContainerProps): ReactNode =>
         showNextButton &&
         _renderButton(nextLabel, renderNextButton, _onNextPress, styles.rightButton, styles.buttonNext);
 
-    const _renderPrevButton = ({ showPrevButton, prevLabel, renderPrevButton, styles }: SwipeableContainerProps) =>
+    const _renderPrevButton = ({
+        showPrevButton,
+        prevLabel,
+        renderPrevButton,
+        styles
+    }: SwipeableContainerProps): ReactNode =>
         showPrevButton &&
         _renderButton(prevLabel, renderPrevButton, _onPrevPress, styles.leftButton, styles.buttonPrev);
 
@@ -119,7 +136,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
         renderDoneButton,
         onDone,
         styles
-    }: SwipeableContainerProps) =>
+    }: SwipeableContainerProps): ReactNode =>
         showDoneButton &&
         _renderButton(doneLabel, renderDoneButton, onDone && onDone, styles.rightButton, styles.buttonDone);
 
@@ -130,7 +147,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
         onSkip,
         slides,
         styles
-    }: SwipeableContainerProps) =>
+    }: SwipeableContainerProps): ReactNode =>
         showSkipButton &&
         _renderButton(
             skipLabel,
@@ -140,7 +157,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
             styles.buttonSkip
         );
 
-    const _renderPagination = () => {
+    const _renderPagination = (): JSX.Element => {
         const isLastSlide = activeIndex === props.slides.length - 1;
         const isFirstSlide = activeIndex === 0;
 
@@ -181,7 +198,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
         );
     };
 
-    const _rtlSafeIndex = (i: number) => (isAndroidRTL ? props.slides.length - 1 - i : i);
+    const _rtlSafeIndex = (i: number): number => (isAndroidRTL ? props.slides.length - 1 - i : i);
 
     const _onMomentumScrollEnd = useCallback(
         (e: NativeSyntheticEvent<any>) => {
@@ -192,7 +209,9 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
             }
             const lastIndex = activeIndex;
             setActiveIndex(newIndex);
-            props.onSlideChange && props.onSlideChange(newIndex, lastIndex);
+            if (props.onSlideChange) {
+                props.onSlideChange(newIndex, lastIndex);
+            }
         },
         [activeIndex, width]
     );
@@ -210,6 +229,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps) => {
         [width]
     );
 
+    // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
     const { hidePagination, skipLabel, doneLabel, nextLabel, prevLabel, ...otherProps } = props;
 
     const _setRef = useCallback((ref: any) => {

@@ -86,8 +86,7 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
 
     componentWillReceiveProps(nextProps: CarouselContainerProps): void {
         if (!this.widgetId) {
-            const domNode = findDOMNode(this);
-            // @ts-ignore
+            const domNode: any = findDOMNode(this);
             this.widgetId = domNode.getAttribute("widgetId") || undefined;
         }
         this.resetSubscription(nextProps.mxObject);
@@ -97,8 +96,7 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
 
     componentDidUpdate(): void {
         if (this.widgetId) {
-            const domNode = findDOMNode(this);
-            // @ts-ignore
+            const domNode: any = findDOMNode(this);
             domNode.setAttribute("widgetId", this.widgetId);
         }
     }

@@ -61,7 +61,7 @@ export function IntroScreens(props: IntroScreensProps<IntroScreensStyle>) {
     };
 
     return (
-        <Modal visible={visible} transparent={true}>
+        <Modal visible={visible} transparent>
             <View style={props.mode === "fullscreen" ? styles.fullscreenContainer : styles.cardContainer}>
                 <SwipeableContainer
                     slides={props.slides}

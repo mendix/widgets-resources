@@ -48,6 +48,7 @@
         "check-dependencies": "^1.1.0",
         "cross-env": "^5.2.0",
         "dotenv": "^8.1.0",
+        "deepmerge": "^4.1.1",
         "gh-release": "^3.5.0",
         "gulp-change": "^1.0.2",
         "gulp-git": "^2.9.0",

@@ -35,7 +35,6 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
         textSize: "h2"
     };
     private progressNode: HTMLElement | null | undefined;
-    // @ts-ignore
     private progressCircle: Circle;
     private setProgressNode: (node: HTMLElement | null) => void;
     private progressCircleColorClass: string | undefined;

@@ -41,12 +41,12 @@ describe("Intro Screens", () => {
     });
 
     it("renders with 1 bottom button", () => {
-        const component = render(<IntroScreens {...defaultProps} showBottomButtons={true} numberOfButtons={"one"} />);
+        const component = render(<IntroScreens {...defaultProps} showBottomButtons numberOfButtons={"one"} />);
         expect(component.toJSON()).toMatchSnapshot();
     });
 
     it("renders with 2 bottom button", () => {
-        const component = render(<IntroScreens {...defaultProps} showBottomButtons={true} numberOfButtons={"two"} />);
+        const component = render(<IntroScreens {...defaultProps} showBottomButtons numberOfButtons={"two"} />);
         expect(component.toJSON()).toMatchSnapshot();
     });
 });
