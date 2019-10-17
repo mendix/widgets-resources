@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { render } from "react-native-testing-library";
-import { IntroScreens } from "../IntroScreens";
+import { IntroScreen } from "../IntroScreen";
 import { IntroScreensProps } from "../../typings/IntroScreensProps";
 import { IntroScreensStyle } from "../ui/Styles";
 import { View } from "react-native";
@@ -36,17 +36,17 @@ describe("Intro Screens", () => {
     });
 
     it("renders", () => {
-        const component = render(<IntroScreens {...defaultProps} />);
+        const component = render(<IntroScreen {...defaultProps} />);
         expect(component.toJSON()).toMatchSnapshot();
     });
 
     it("renders with 1 bottom button", () => {
-        const component = render(<IntroScreens {...defaultProps} showBottomButtons numberOfButtons={"one"} />);
+        const component = render(<IntroScreen {...defaultProps} showBottomButtons numberOfButtons={"one"} />);
         expect(component.toJSON()).toMatchSnapshot();
     });
 
     it("renders with 2 bottom button", () => {
-        const component = render(<IntroScreens {...defaultProps} showBottomButtons numberOfButtons={"two"} />);
+        const component = render(<IntroScreen {...defaultProps} showBottomButtons numberOfButtons={"two"} />);
         expect(component.toJSON()).toMatchSnapshot();
     });
 });

@@ -2,7 +2,7 @@ import { Style } from "@native-mobile-resources/util-widgets";
 import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 import absoluteFillObject = StyleSheet.absoluteFillObject;
 
-export interface IntroScreensStyle extends Style {
+export interface IntroScreenStyle extends Style {
     fullscreenContainer: ViewStyle;
     cardContainer: ViewStyle;
     /**
@@ -31,7 +31,7 @@ export interface IntroScreensStyle extends Style {
     activeDotStyle: ViewStyle;
 }
 
-export const defaultWelcomeScreenStyle: IntroScreensStyle = {
+export const defaultWelcomeScreenStyle: IntroScreenStyle = {
     fullscreenContainer: {
         ...absoluteFillObject
     },

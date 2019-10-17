@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.native.introscreens.IntroScreens" supportedPlatform="Native" offlineCapable="true"
+<widget id="com.mendix.widget.native.introscreen.IntroScreen" supportedPlatform="Native" offlineCapable="true"
         pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
@@ -28,7 +28,7 @@
                     </properties>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Presentation">
+            <propertyGroup caption="Display">
                 <property key="showMode" type="enumeration" defaultValue="fullscreen">
                     <caption>Show as</caption>
                     <description />
@@ -37,26 +37,17 @@
                         <enumerationValue key="popup">Popup</enumerationValue>
                     </enumerationValues>
                 </property>
-                <property key="buttonPattern" type="enumeration" defaultValue="split">
-                    <caption>Button pattern</caption>
-                    <description />
+                <property key="buttonPattern" type="enumeration" defaultValue="all">
+                    <caption>Buttons</caption>
+                    <description>The caption and icon of the buttons change dynamically based on which slide the user is. For example on the first page a skip button is shown but now a previous button.</description>
                     <enumerationValues>
-                        <enumerationValue key="split">Split</enumerationValue>
-                        <enumerationValue key="single">Single</enumerationValue>
-                        <enumerationValue key="double">Double</enumerationValue>
-                        <enumerationValue key="custom">Custom</enumerationValue>
+                        <enumerationValue key="all">Skip / Previous and Next / Done</enumerationValue>
+                        <enumerationValue key="next_done">Only Next / Done</enumerationValue>
+                        <enumerationValue key="none">None</enumerationValue>
                     </enumerationValues>
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Common">
-                <systemProperty key="Visibility" />
-                <systemProperty key="Name"/>
-            </propertyGroup>
-        </propertyGroup>
-        <propertyGroup caption="Custom">
-            <propertyGroup caption="Slide indicator">
                 <property key="slideIndicators" type="enumeration" defaultValue="between">
-                    <caption>Show</caption>
+                    <caption>Show indicator</caption>
                     <description/>
                     <enumerationValues>
                         <enumerationValue key="between">Between buttons</enumerationValue>
@@ -65,25 +56,14 @@
                     </enumerationValues>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Visibility" />
+                <systemProperty key="Name"/>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Buttons">
+
             <propertyGroup caption="Skip button">
-                <property key="showSkipButton" type="enumeration" defaultValue="untilLast">
-                    <caption>Show</caption>
-                    <description>Skips the introduction before the it is done.</description>
-                    <enumerationValues>
-                        <enumerationValue key="untilLast">Untill last slide</enumerationValue>
-                        <enumerationValue key="first">On first slide</enumerationValue>
-                        <enumerationValue key="always">Always</enumerationValue>
-                        <enumerationValue key="never">Never</enumerationValue>
-                    </enumerationValues>
-                </property>
-                <property key="skipPopsition" type="enumeration" defaultValue="bottom">
-                    <caption>Position</caption>
-                    <description/>
-                    <enumerationValues>
-                        <enumerationValue key="bottom">Bottom</enumerationValue>
-                        <enumerationValue key="top">Top</enumerationValue>
-                    </enumerationValues>
-                </property>
                 <property key="skipCaption" type="textTemplate" required="false">
                     <caption>Caption</caption>
                     <description/>
@@ -94,10 +74,6 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Previous button">
-                <property key="showPreviousButton" type="boolean" defaultValue="false">
-                    <caption>Show</caption>
-                    <description>Move to the previous slide. Only shown after the first slide.</description>
-                </property>
                 <property key="previousCaption" type="textTemplate" required="false">
                     <caption>Caption</caption>
                     <description/>
@@ -108,10 +84,6 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Next button">
-                <property key="showNextButton" type="boolean" defaultValue="true">
-                    <caption>Show</caption>
-                    <description>Move to the next slide. Only shown untill the last slide.</description>
-                </property>
                 <property key="nextCaption" type="textTemplate" required="false">
                     <caption>Caption</caption>
                     <description/>
@@ -122,10 +94,6 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Done button">
-                <property key="showDoneButton" type="boolean" defaultValue="true">
-                    <caption>Show</caption>
-                    <description>Close the introduction. Only shown on the last slide.</description>
-                </property> 
                 <property key="doneCaption" type="textTemplate" required="false">
                     <caption>Caption</caption>
                     <description/>

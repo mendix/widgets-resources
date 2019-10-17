@@ -1,6 +1,6 @@
 {
-    "name": "intro-screens",
-    "widgetName": "IntroScreens",
+    "name": "intro-screen",
+    "widgetName": "IntroScreen",
     "version": "1.0.0",
     "license": "Apache-2.0",
     "repository": {
@@ -10,7 +10,7 @@
     "config": {
         "widgetPath": "../test-project/mxproject/widgets",
         "projectPath": "../test-project/mxproject",
-        "subprojectFolder": "packages-native/intro-screens"
+        "subprojectFolder": "packages-native/intro-screen"
     },
     "packagePath": "com.mendix.widget.native",
     "scripts": {

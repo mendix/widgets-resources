@@ -14,7 +14,7 @@ import {
     TouchableNativeFeedback
 } from "react-native";
 import DeviceInfo from "react-native-device-info";
-import { IntroScreensStyle } from "./ui/Styles";
+import { IntroScreenStyle } from "./ui/Styles";
 
 const isIphoneWithNotch = Platform.OS === "ios" && DeviceInfo.hasNotch();
 
@@ -40,7 +40,8 @@ interface SwipeableContainerProps {
     onSkip: () => void;
     slides: [];
     hidePagination: boolean;
-    styles: IntroScreensStyle;
+    styles: IntroScreenStyle;
+    showMode: string;
 }
 
 const Touchable: ComponentClass<any> = Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
