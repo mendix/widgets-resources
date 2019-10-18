@@ -1,4 +1,4 @@
-import { useState, createElement, ReactNode, useCallback, ComponentClass, Fragment } from "react";
+import { useState, createElement, ReactNode, useCallback, ComponentClass, Fragment, useRef } from "react";
 import {
     StyleSheet,
     FlatList,
@@ -51,13 +51,13 @@ export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element 
     const dimensions = Dimensions.get("window");
     const [width, setWidth] = useState(dimensions.width);
     const [activeIndex, setActiveIndex] = useState(0);
-    const [flatList, setFlatList] = useState();
+    const flatList = useRef<FlatList<any>>(null);
 
     const goToSlide = useCallback(
         (pageNum: number) => {
             setActiveIndex(pageNum);
-            if (flatList) {
-                flatList.scrollToOffset({
+            if (flatList && flatList.current) {
+                flatList.current.scrollToOffset({
                     offset: rtlSafeIndex(pageNum) * width
                 });
             }
@@ -250,16 +250,10 @@ export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element 
         [width]
     );
 
-    const setRef = useCallback((ref: any) => {
-        if (ref) {
-            setFlatList(ref);
-        }
-    }, []);
-
     return (
         <View style={styles.flexOne}>
             <FlatList
-                ref={setRef}
+                ref={flatList}
                 data={props.slides}
                 horizontal
                 pagingEnabled
