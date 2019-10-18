@@ -44,7 +44,7 @@ export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Elem
         style: ViewStyle,
         icon?: DynamicValue<NativeIcon>,
         caption?: DynamicValue<string>
-    ): any => {
+    ): RenderButtonProperty => {
         const returnObject: RenderButtonProperty = {};
         if (!icon || !icon.value) {
             return returnObject;
