@@ -13,13 +13,13 @@
 //         .mx-layoutgrid-fixed {
 //             width: 100%;
 //             margin: auto;
-//             @media (min-width: $screen-sm) {
+//             @media (min-width: $screen-md) {
 //                 max-width: 750px;
 //             }
-//             @media (min-width: $screen-md) {
+//             @media (min-width: $screen-lg) {
 //                 max-width: 970px;
 //             }
-//             @media (min-width: $screen-lg) {
+//             @media (min-width: $screen-xl) {
 //                 max-width: 1170px;
 //             }
 //         }

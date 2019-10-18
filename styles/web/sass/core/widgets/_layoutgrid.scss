@@ -12,10 +12,10 @@
 ========================================================================== */
 .mx-layoutgrid {
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 // Row
@@ -288,31 +288,31 @@
 }
 
 // Responsiveness
-@media (min-width: $screen-xs) {
-    .mx-layoutgrid-fixed {
-        max-width: 440px;
-    }
-}
-
 @media (min-width: $screen-sm) {
     .mx-layoutgrid-fixed {
-        max-width: 720px;
+        max-width: 540px;
     }
 }
 
 @media (min-width: $screen-md) {
     .mx-layoutgrid-fixed {
-        max-width: 960px;
+        max-width: 720px;
     }
 }
 
 @media (min-width: $screen-lg) {
     .mx-layoutgrid-fixed {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: $screen-xl) {
+    .mx-layoutgrid-fixed {
         max-width: 1140px;
     }
 }
 
-@media (min-width: $screen-xs) {
+@media (min-width: $screen-sm) {
     .col-sm {
         flex-basis: 0;
         flex-grow: 1;
@@ -454,7 +454,7 @@
     }
 }
 
-@media (min-width: $screen-sm) {
+@media (min-width: $screen-md) {
     .col-md {
         flex-basis: 0;
         flex-grow: 1;
@@ -596,7 +596,7 @@
     }
 }
 
-@media (min-width: $screen-md) {
+@media (min-width: $screen-lg) {
     .col-lg {
         flex-basis: 0;
         flex-grow: 1;
@@ -738,7 +738,7 @@
     }
 }
 
-@media (min-width: $screen-lg) {
+@media (min-width: $screen-xl) {
     .col-xl {
         flex-basis: 0;
         flex-grow: 1;

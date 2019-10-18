@@ -1,11 +1,11 @@
 /* ==========================================================================
    Master Detail
-   
+
     A list with a listening dataview
 ========================================================================== */
 .masterdetail {
     position: relative;
-    @media (min-width: $screen-md) {
+    @media (min-width: $screen-lg) {
         .mx-layoutgrid {
             padding: 0 $gutter-size !important;
         }
@@ -14,7 +14,7 @@
         .controlgroup {
             margin-bottom: $gutter-size;
         }
-        @media (min-width: $screen-md) {
+        @media (min-width: $screen-lg) {
             position: absolute;
             top: 0;
             bottom: 0;
@@ -33,7 +33,7 @@
         }
     }
     .masterdetail-detail {
-        @media (min-width: $screen-md) {
+        @media (min-width: $screen-lg) {
             @include layout-spacing($type: padding, $direction: all, $device: responsive);
         }
     }
