@@ -287,7 +287,7 @@
     }
 }
 
-@media screen and (max-width: $screen-sm-max) {
+@media screen and (max-width: $screen-md-max) {
     .widget-charts:not([height]),
     .widget-charts-line:not([height]) {
         padding-bottom: 80% !important;
@@ -295,7 +295,7 @@
 }
 
 
-@media screen and (max-width: $screen-md-max) {
+@media screen and (max-width: $screen-lg-max) {
     .cardprogress {
         .cardprogress-state {
             width: 60px;
