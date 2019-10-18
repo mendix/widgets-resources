@@ -1,4 +1,4 @@
-import { useState, createElement, ReactNode, useCallback, ComponentClass, Fragment, useRef } from "react";
+import { useState, createElement, ReactNode, useCallback, ComponentClass, Fragment, useRef, ReactElement } from "react";
 import {
     StyleSheet,
     FlatList,
@@ -47,7 +47,7 @@ const isIphoneWithNotch = Platform.OS === "ios" && DeviceInfo.hasNotch();
 const isAndroidRTL = I18nManager.isRTL && Platform.OS === "android";
 const Touchable: ComponentClass<any> = Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
 
-export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element => {
+export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement => {
     const dimensions = Dimensions.get("window");
     const [width, setWidth] = useState(dimensions.width);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -86,11 +86,11 @@ export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element 
         }
     };
 
-    const renderItem = ({ item }: any): JSX.Element => {
+    const renderItem = ({ item }: any): ReactElement => {
         return <View style={[{ width, flex: 1, alignContent: "stretch" }]}>{item.content}</View>;
     };
 
-    const renderDefaultButton = (label: Option<string>, bottomStyle: ViewStyle, icon: string): JSX.Element => {
+    const renderDefaultButton = (label: Option<string>, bottomStyle: ViewStyle, icon: string): ReactElement => {
         const iconSource = { type: "glyph", iconClass: `glyphicon-${icon}` } as const;
         let content = label ? (
             <Text style={props.styles.buttonText}>{label}</Text>
@@ -115,7 +115,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element 
         normalButtonStyle: ViewStyle,
         bottomButtonStyle: ViewStyle,
         defaultIcon: string
-    ): JSX.Element => {
+    ): ReactElement => {
         return (
             <View style={!props.bottomButton ? normalButtonStyle : styles.flexOne}>
                 <Touchable onPress={onPress}>
@@ -178,7 +178,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element 
             "remove"
         );
 
-    const renderPagination = (): JSX.Element => {
+    const renderPagination = (): ReactElement => {
         const isLastSlide = activeIndex === props.slides.length - 1;
         const isFirstSlide = activeIndex === 0;
 
