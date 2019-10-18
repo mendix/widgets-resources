@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Intro Screens renders 1`] = `
+exports[`Intro Screen renders 1`] = `
 <Modal
   hardwareAccelerated={false}
   transparent={true}
@@ -25,7 +25,6 @@ exports[`Intro Screens renders 1`] = `
       }
     >
       <RCTScrollView
-        bottomButton={false}
         bounces={false}
         data={
           Array [
@@ -44,88 +43,23 @@ exports[`Intro Screens renders 1`] = `
         keyExtractor={[Function]}
         maxToRenderPerBatch={10}
         numColumns={1}
-        numberOfButtons={2}
         onContentSizeChange={[Function]}
-        onDone={[Function]}
         onEndReachedThreshold={2}
         onLayout={[Function]}
         onMomentumScrollEnd={[Function]}
         onScroll={[Function]}
         onScrollBeginDrag={[Function]}
         onScrollEndDrag={[Function]}
-        onSkip={[Function]}
-        onSlideChange={[Function]}
         pagingEnabled={true}
         removeClippedSubviews={false}
         renderItem={[Function]}
         scrollEventThrottle={50}
-        showDoneButton={true}
-        showNextButton={true}
-        showPrevButton={true}
-        showSkipButton={true}
         showsHorizontalScrollIndicator={false}
-        slides={
-          Array [
-            Object {
-              "content": <View />,
-              "name": "Page 1",
-            },
-          ]
-        }
         stickyHeaderIndices={Array []}
         style={
           Object {
             "flex": 1,
             "flexDirection": "row",
-          }
-        }
-        styles={
-          Object {
-            "activeDotStyle": Object {
-              "backgroundColor": "rgba(255, 255, 255, .9)",
-            },
-            "bottomButtonsContainer": Object {},
-            "buttonDone": Object {},
-            "buttonNext": Object {},
-            "buttonPrev": Object {},
-            "buttonSkip": Object {},
-            "buttonText": Object {
-              "alignSelf": "center",
-              "backgroundColor": "transparent",
-              "color": "white",
-              "fontSize": 18,
-              "padding": 12,
-            },
-            "cardContainer": Object {
-              "backgroundColor": "rgba(0, 0, 0, 0.5)",
-              "bottom": 0,
-              "left": 0,
-              "paddingHorizontal": 50,
-              "paddingVertical": 150,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            },
-            "dotStyle": Object {
-              "backgroundColor": "rgba(0, 0, 0, .2)",
-            },
-            "fullscreenContainer": Object {
-              "bottom": 0,
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            },
-            "leftButton": Object {
-              "left": 0,
-              "position": "absolute",
-            },
-            "paginationContainer": Object {},
-            "paginationDots": Object {},
-            "rightButton": Object {
-              "position": "absolute",
-              "right": 0,
-            },
           }
         }
         updateCellsBatchingPeriod={50}
@@ -210,19 +144,13 @@ exports[`Intro Screens renders 1`] = `
               }
             }
           >
-            <Text
+            <View
               style={
                 Object {
                   "alignSelf": "center",
-                  "backgroundColor": "transparent",
-                  "color": "white",
-                  "fontSize": 18,
-                  "padding": 12,
                 }
               }
-            >
-              Done
-            </Text>
+            />
           </View>
         </View>
       </View>
@@ -231,7 +159,7 @@ exports[`Intro Screens renders 1`] = `
 </Modal>
 `;
 
-exports[`Intro Screens renders with 1 bottom button 1`] = `
+exports[`Intro Screen renders with 1 bottom button 1`] = `
 <Modal
   hardwareAccelerated={false}
   transparent={true}
@@ -256,7 +184,6 @@ exports[`Intro Screens renders with 1 bottom button 1`] = `
       }
     >
       <RCTScrollView
-        bottomButton={true}
         bounces={false}
         data={
           Array [
@@ -275,88 +202,23 @@ exports[`Intro Screens renders with 1 bottom button 1`] = `
         keyExtractor={[Function]}
         maxToRenderPerBatch={10}
         numColumns={1}
-        numberOfButtons={1}
         onContentSizeChange={[Function]}
-        onDone={[Function]}
         onEndReachedThreshold={2}
         onLayout={[Function]}
         onMomentumScrollEnd={[Function]}
         onScroll={[Function]}
         onScrollBeginDrag={[Function]}
         onScrollEndDrag={[Function]}
-        onSkip={[Function]}
-        onSlideChange={[Function]}
         pagingEnabled={true}
         removeClippedSubviews={false}
         renderItem={[Function]}
         scrollEventThrottle={50}
-        showDoneButton={true}
-        showNextButton={true}
-        showPrevButton={false}
-        showSkipButton={false}
         showsHorizontalScrollIndicator={false}
-        slides={
-          Array [
-            Object {
-              "content": <View />,
-              "name": "Page 1",
-            },
-          ]
-        }
         stickyHeaderIndices={Array []}
         style={
           Object {
             "flex": 1,
             "flexDirection": "row",
-          }
-        }
-        styles={
-          Object {
-            "activeDotStyle": Object {
-              "backgroundColor": "rgba(255, 255, 255, .9)",
-            },
-            "bottomButtonsContainer": Object {},
-            "buttonDone": Object {},
-            "buttonNext": Object {},
-            "buttonPrev": Object {},
-            "buttonSkip": Object {},
-            "buttonText": Object {
-              "alignSelf": "center",
-              "backgroundColor": "transparent",
-              "color": "white",
-              "fontSize": 18,
-              "padding": 12,
-            },
-            "cardContainer": Object {
-              "backgroundColor": "rgba(0, 0, 0, 0.5)",
-              "bottom": 0,
-              "left": 0,
-              "paddingHorizontal": 50,
-              "paddingVertical": 150,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            },
-            "dotStyle": Object {
-              "backgroundColor": "rgba(0, 0, 0, .2)",
-            },
-            "fullscreenContainer": Object {
-              "bottom": 0,
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            },
-            "leftButton": Object {
-              "left": 0,
-              "position": "absolute",
-            },
-            "paginationContainer": Object {},
-            "paginationDots": Object {},
-            "rightButton": Object {
-              "position": "absolute",
-              "right": 0,
-            },
           }
         }
         updateCellsBatchingPeriod={50}
@@ -461,19 +323,13 @@ exports[`Intro Screens renders with 1 bottom button 1`] = `
                   ]
                 }
               >
-                <Text
+                <View
                   style={
                     Object {
                       "alignSelf": "center",
-                      "backgroundColor": "transparent",
-                      "color": "white",
-                      "fontSize": 18,
-                      "padding": 12,
                     }
                   }
-                >
-                  Done
-                </Text>
+                />
               </View>
             </View>
           </View>
@@ -484,7 +340,7 @@ exports[`Intro Screens renders with 1 bottom button 1`] = `
 </Modal>
 `;
 
-exports[`Intro Screens renders with 2 bottom button 1`] = `
+exports[`Intro Screen renders with 2 bottom button 1`] = `
 <Modal
   hardwareAccelerated={false}
   transparent={true}
@@ -509,7 +365,6 @@ exports[`Intro Screens renders with 2 bottom button 1`] = `
       }
     >
       <RCTScrollView
-        bottomButton={true}
         bounces={false}
         data={
           Array [
@@ -528,88 +383,23 @@ exports[`Intro Screens renders with 2 bottom button 1`] = `
         keyExtractor={[Function]}
         maxToRenderPerBatch={10}
         numColumns={1}
-        numberOfButtons={2}
         onContentSizeChange={[Function]}
-        onDone={[Function]}
         onEndReachedThreshold={2}
         onLayout={[Function]}
         onMomentumScrollEnd={[Function]}
         onScroll={[Function]}
         onScrollBeginDrag={[Function]}
         onScrollEndDrag={[Function]}
-        onSkip={[Function]}
-        onSlideChange={[Function]}
         pagingEnabled={true}
         removeClippedSubviews={false}
         renderItem={[Function]}
         scrollEventThrottle={50}
-        showDoneButton={true}
-        showNextButton={true}
-        showPrevButton={true}
-        showSkipButton={true}
         showsHorizontalScrollIndicator={false}
-        slides={
-          Array [
-            Object {
-              "content": <View />,
-              "name": "Page 1",
-            },
-          ]
-        }
         stickyHeaderIndices={Array []}
         style={
           Object {
             "flex": 1,
             "flexDirection": "row",
-          }
-        }
-        styles={
-          Object {
-            "activeDotStyle": Object {
-              "backgroundColor": "rgba(255, 255, 255, .9)",
-            },
-            "bottomButtonsContainer": Object {},
-            "buttonDone": Object {},
-            "buttonNext": Object {},
-            "buttonPrev": Object {},
-            "buttonSkip": Object {},
-            "buttonText": Object {
-              "alignSelf": "center",
-              "backgroundColor": "transparent",
-              "color": "white",
-              "fontSize": 18,
-              "padding": 12,
-            },
-            "cardContainer": Object {
-              "backgroundColor": "rgba(0, 0, 0, 0.5)",
-              "bottom": 0,
-              "left": 0,
-              "paddingHorizontal": 50,
-              "paddingVertical": 150,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            },
-            "dotStyle": Object {
-              "backgroundColor": "rgba(0, 0, 0, .2)",
-            },
-            "fullscreenContainer": Object {
-              "bottom": 0,
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            },
-            "leftButton": Object {
-              "left": 0,
-              "position": "absolute",
-            },
-            "paginationContainer": Object {},
-            "paginationDots": Object {},
-            "rightButton": Object {
-              "position": "absolute",
-              "right": 0,
-            },
           }
         }
         updateCellsBatchingPeriod={50}
@@ -714,19 +504,13 @@ exports[`Intro Screens renders with 2 bottom button 1`] = `
                   ]
                 }
               >
-                <Text
+                <View
                   style={
                     Object {
                       "alignSelf": "center",
-                      "backgroundColor": "transparent",
-                      "color": "white",
-                      "fontSize": 18,
-                      "padding": 12,
                     }
                   }
-                >
-                  Done
-                </Text>
+                />
               </View>
             </View>
           </View>
