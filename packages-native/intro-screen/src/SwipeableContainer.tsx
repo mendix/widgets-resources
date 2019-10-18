@@ -16,6 +16,7 @@ import {
 import DeviceInfo from "react-native-device-info";
 import { IntroScreenStyle } from "./ui/Styles";
 import { Icon } from "mendix/components/native/Icon";
+import { SlidesType } from "../typings/IntroScreenProps";
 
 interface SwipeableContainerProps {
     skipLabel?: string;
@@ -29,16 +30,15 @@ interface SwipeableContainerProps {
     onSlideChange: (next: number, previous: number) => void;
     bottomButton: boolean;
     numberOfButtons: number;
-    renderDoneButton: () => ReactNode;
-    renderSkipButton: () => ReactNode;
-    renderPreviousButton: () => ReactNode;
-    renderNextButton: () => ReactNode;
+    renderDoneButton?: () => ReactNode;
+    renderSkipButton?: () => ReactNode;
+    renderPreviousButton?: () => ReactNode;
+    renderNextButton?: () => ReactNode;
     onDone: () => void;
     onSkip: () => void;
-    slides: [];
+    slides: SlidesType[];
     hidePagination: boolean;
     styles: IntroScreenStyle;
-    showMode: string;
 }
 
 declare type Option<T> = T | undefined;
@@ -110,7 +110,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
 
     const renderButton = (
         label: Option<string>,
-        content: () => ReactNode,
+        content: Option<() => ReactNode>,
         onPress: () => void,
         normalButtonStyle: ViewStyle,
         bottomButtonStyle: ViewStyle,
@@ -264,7 +264,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
                 onMomentumScrollEnd={onMomentumScrollEnd}
                 extraData={width}
                 onLayout={onLayout}
-                keyExtractor={(_item: any, index: number) => "screen_key_" + index}
+                keyExtractor={(_: any, index: number) => "screen_key_" + index}
             />
             {renderPagination()}
         </View>
