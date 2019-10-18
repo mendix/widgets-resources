@@ -280,8 +280,6 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
             const newWidth = event.nativeEvent.layout.width;
             if (newWidth !== width) {
                 setWidth(newWidth);
-            } else if (activeSlide !== 0) {
-                goToSlide(activeSlide);
             }
         },
         [width]
