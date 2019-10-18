@@ -26,7 +26,7 @@
         "@babel/plugin-transform-flow-strip-types": "^7.4.4"
     },
     "dependencies": {
-        "@native-mobile-resources/util-widgets": "^0.0.1",
+        "@native-mobile-resources/util-widgets": "^1.0.0",
         "react-native-segmented-control-tab": "^3.4.0"
     }
 }
