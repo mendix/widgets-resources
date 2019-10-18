@@ -16,30 +16,38 @@ $important-helpers-value: if($important-helpers, ' !important', '');
 .d-none {
     display: none !important;
 }
+
 .d-flex {
     display: flex !important;
 }
+
 .d-inline-flex {
     display: inline-flex !important;
 }
+
 .d-inline {
     display: inline !important;
 }
+
 .d-inline-block {
     display: inline-block !important;
 }
+
 .show,
 .d-block {
     display: block !important;
 }
+
 .table,
 .d-table {
     display: table !important;
 }
+
 .table-row,
 .d-table-row {
     display: table-row !important;
 }
+
 .table-cell,
 .d-table-cell {
     display: table-cell !important;
@@ -50,6 +58,7 @@ $important-helpers-value: if($important-helpers, ' !important', '');
     display: none #{$important-helpers-value};
     visibility: hidden #{$important-helpers-value};
 }
+
 .invisible {
     visibility: hidden #{$important-helpers-value};
 }
@@ -239,6 +248,7 @@ $important-helpers-value: if($important-helpers, ' !important', '');
         display: table-cell #{$important-helpers-value};
     }
 }
+
 @media (min-width: $screen-md) and (max-width: $screen-md-max) {
     .hide-md,
     .hidden-md,
