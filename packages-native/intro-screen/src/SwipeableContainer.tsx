@@ -15,26 +15,23 @@ import {
 } from "react-native";
 import DeviceInfo from "react-native-device-info";
 import { IntroScreenStyle } from "./ui/Styles";
-
-const isIphoneWithNotch = Platform.OS === "ios" && DeviceInfo.hasNotch();
-
-const isAndroidRTL = I18nManager.isRTL && Platform.OS === "android";
+import { Icon } from "mendix/components/native/Icon";
 
 interface SwipeableContainerProps {
-    skipLabel: string;
-    doneLabel: string;
-    nextLabel: string;
-    prevLabel: string;
+    skipLabel?: string;
+    doneLabel?: string;
+    nextLabel?: string;
+    previousLabel?: string;
     showDoneButton: boolean;
     showSkipButton: boolean;
     showNextButton: boolean;
-    showPrevButton: boolean;
+    showPreviousButton: boolean;
     onSlideChange: (next: number, previous: number) => void;
     bottomButton: boolean;
     numberOfButtons: number;
     renderDoneButton: () => ReactNode;
     renderSkipButton: () => ReactNode;
-    renderPrevButton: () => ReactNode;
+    renderPreviousButton: () => ReactNode;
     renderNextButton: () => ReactNode;
     onDone: () => void;
     onSkip: () => void;
@@ -44,6 +41,10 @@ interface SwipeableContainerProps {
     showMode: string;
 }
 
+declare type Option<T> = T | undefined;
+
+const isIphoneWithNotch = Platform.OS === "ios" && DeviceInfo.hasNotch();
+const isAndroidRTL = I18nManager.isRTL && Platform.OS === "android";
 const Touchable: ComponentClass<any> = Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
 
 export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element => {
@@ -57,27 +58,27 @@ export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element 
             setActiveIndex(pageNum);
             if (flatList) {
                 flatList.scrollToOffset({
-                    offset: _rtlSafeIndex(pageNum) * width
+                    offset: rtlSafeIndex(pageNum) * width
                 });
             }
         },
         [width, flatList]
     );
 
-    const _onNextPress = (): void => {
+    const onNextPress = (): void => {
         goToSlide(activeIndex + 1);
         if (props.onSlideChange) {
             props.onSlideChange(activeIndex + 1, activeIndex);
         }
     };
-    const _onPrevPress = (): void => {
+    const onPrevPress = (): void => {
         goToSlide(activeIndex - 1);
         if (props.onSlideChange) {
             props.onSlideChange(activeIndex - 1, activeIndex);
         }
     };
 
-    const _onPaginationPress = (index: number): void => {
+    const onPaginationPress = (index: number): void => {
         const activeIndexBeforeChange = activeIndex;
         goToSlide(index);
         if (props.onSlideChange) {
@@ -85,53 +86,71 @@ export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element 
         }
     };
 
-    const _renderItem = ({ item }: any): JSX.Element => {
+    const renderItem = ({ item }: any): JSX.Element => {
         return <View style={[{ width, flex: 1, alignContent: "stretch" }]}>{item.content}</View>;
     };
 
-    const _renderDefaultButton = (label: string, bottomStyle: ViewStyle): JSX.Element => {
-        let content = <Text style={props.styles.buttonText}>{label}</Text>;
+    const renderDefaultButton = (label: Option<string>, bottomStyle: ViewStyle, icon: string): JSX.Element => {
+        const iconSource = { type: "glyph", iconClass: `glyphicon-${icon}` } as const;
+        let content = label ? (
+            <Text style={props.styles.buttonText}>{label}</Text>
+        ) : (
+            <View style={{ alignSelf: "center" }}>
+                <Icon
+                    icon={iconSource}
+                    color={props.styles.buttonText.color ? props.styles.buttonText.color : "black"}
+                />
+            </View>
+        );
         if (props.bottomButton) {
             content = <View style={[styles.bottomButtonDefault, bottomStyle]}>{content}</View>;
         }
         return content;
     };
 
-    const _renderButton = (
-        label: string,
+    const renderButton = (
+        label: Option<string>,
         content: () => ReactNode,
         onPress: () => void,
         normalButtonStyle: ViewStyle,
-        bottomButtonStyle: ViewStyle
+        bottomButtonStyle: ViewStyle,
+        defaultIcon: string
     ): JSX.Element => {
         return (
             <View style={!props.bottomButton ? normalButtonStyle : styles.flexOne}>
                 <Touchable onPress={onPress}>
-                    {content ? content() : _renderDefaultButton(label, bottomButtonStyle)}
+                    {content ? content() : renderDefaultButton(label, bottomButtonStyle, defaultIcon)}
                 </Touchable>
             </View>
         );
     };
 
-    const _renderNextButton = ({
+    const renderNextButton = ({
         showNextButton,
         nextLabel,
         renderNextButton,
         styles
     }: SwipeableContainerProps): ReactNode =>
         showNextButton &&
-        _renderButton(nextLabel, renderNextButton, _onNextPress, styles.rightButton, styles.buttonNext);
+        renderButton(nextLabel, renderNextButton, onNextPress, styles.rightButton, styles.buttonNext, "chevron-right");
 
-    const _renderPrevButton = ({
-        showPrevButton,
-        prevLabel,
-        renderPrevButton,
+    const renderPrevButton = ({
+        showPreviousButton,
+        previousLabel,
+        renderPreviousButton,
         styles
     }: SwipeableContainerProps): ReactNode =>
-        showPrevButton &&
-        _renderButton(prevLabel, renderPrevButton, _onPrevPress, styles.leftButton, styles.buttonPrev);
+        showPreviousButton &&
+        renderButton(
+            previousLabel,
+            renderPreviousButton,
+            onPrevPress,
+            styles.leftButton,
+            styles.buttonPrev,
+            "chevron-left"
+        );
 
-    const _renderDoneButton = ({
+    const renderDoneButton = ({
         showDoneButton,
         doneLabel,
         renderDoneButton,
@@ -139,9 +158,9 @@ export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element 
         styles
     }: SwipeableContainerProps): ReactNode =>
         showDoneButton &&
-        _renderButton(doneLabel, renderDoneButton, onDone && onDone, styles.rightButton, styles.buttonDone);
+        renderButton(doneLabel, renderDoneButton, onDone && onDone, styles.rightButton, styles.buttonDone, "ok");
 
-    const _renderSkipButton = ({
+    const renderSkipButton = ({
         showSkipButton,
         skipLabel,
         renderSkipButton,
@@ -150,20 +169,21 @@ export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element 
         styles
     }: SwipeableContainerProps): ReactNode =>
         showSkipButton &&
-        _renderButton(
+        renderButton(
             skipLabel,
             renderSkipButton,
             () => (onSkip ? onSkip() : goToSlide(slides.length - 1)),
             styles.leftButton,
-            styles.buttonSkip
+            styles.buttonSkip,
+            "remove"
         );
 
-    const _renderPagination = (): JSX.Element => {
+    const renderPagination = (): JSX.Element => {
         const isLastSlide = activeIndex === props.slides.length - 1;
         const isFirstSlide = activeIndex === 0;
 
-        const skipBtn = (!isFirstSlide && _renderPrevButton(props)) || (!isLastSlide && _renderSkipButton(props));
-        const btn = isLastSlide ? _renderDoneButton(props) : _renderNextButton(props);
+        const leftButton = (!isFirstSlide && renderPrevButton(props)) || (!isLastSlide && renderSkipButton(props));
+        const rightButton = isLastSlide ? renderDoneButton(props) : renderNextButton(props);
 
         return (
             <View style={[styles.paginationContainer, props.styles.paginationContainer]}>
@@ -175,36 +195,36 @@ export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element 
                                 key={i}
                                 style={[
                                     styles.dot,
-                                    _rtlSafeIndex(i) === activeIndex
+                                    rtlSafeIndex(i) === activeIndex
                                         ? props.styles.activeDotStyle
                                         : props.styles.dotStyle
                                 ]}
-                                onPress={() => _onPaginationPress(i)}
+                                onPress={() => onPaginationPress(i)}
                             />
                         ))}
                 </View>
                 {!props.bottomButton && (
                     <Fragment>
-                        {btn}
-                        {skipBtn}
+                        {leftButton}
+                        {rightButton}
                     </Fragment>
                 )}
                 {props.bottomButton && (
                     <View style={styles.bottomButtonsContainer}>
-                        {props.numberOfButtons === 2 && skipBtn}
-                        {btn}
+                        {props.numberOfButtons === 2 && leftButton}
+                        {rightButton}
                     </View>
                 )}
             </View>
         );
     };
 
-    const _rtlSafeIndex = (i: number): number => (isAndroidRTL ? props.slides.length - 1 - i : i);
+    const rtlSafeIndex = (i: number): number => (isAndroidRTL ? props.slides.length - 1 - i : i);
 
-    const _onMomentumScrollEnd = useCallback(
-        (e: NativeSyntheticEvent<any>) => {
-            const offset = e.nativeEvent.contentOffset.x;
-            const newIndex = _rtlSafeIndex(Math.round(offset / width));
+    const onMomentumScrollEnd = useCallback(
+        (event: NativeSyntheticEvent<any>) => {
+            const offset = event.nativeEvent.contentOffset.x;
+            const newIndex = rtlSafeIndex(Math.round(offset / width));
             if (newIndex === activeIndex) {
                 return;
             }
@@ -220,9 +240,9 @@ export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element 
     /**
      * Readjust the size of the slides if the size is different than the device dimensions
      */
-    const _onLayout = useCallback(
-        (e: LayoutChangeEvent) => {
-            const newWidth = e.nativeEvent.layout.width;
+    const onLayout = useCallback(
+        (event: LayoutChangeEvent) => {
+            const newWidth = event.nativeEvent.layout.width;
             if (newWidth !== width) {
                 setWidth(newWidth);
             }
@@ -230,10 +250,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element 
         [width]
     );
 
-    // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-    const { hidePagination, skipLabel, doneLabel, nextLabel, prevLabel, ...otherProps } = props;
-
-    const _setRef = useCallback((ref: any) => {
+    const setRef = useCallback((ref: any) => {
         if (ref) {
             setFlatList(ref);
         }
@@ -242,30 +259,25 @@ export const SwipeableContainer = (props: SwipeableContainerProps): JSX.Element 
     return (
         <View style={styles.flexOne}>
             <FlatList
-                ref={_setRef}
+                ref={setRef}
                 data={props.slides}
                 horizontal
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
                 bounces={false}
                 style={styles.flatList}
-                renderItem={_renderItem}
-                onMomentumScrollEnd={_onMomentumScrollEnd}
+                renderItem={renderItem}
+                onMomentumScrollEnd={onMomentumScrollEnd}
                 extraData={width}
-                onLayout={_onLayout}
+                onLayout={onLayout}
                 keyExtractor={(_item: any, index: number) => "screen_key_" + index}
-                {...otherProps}
             />
-            {_renderPagination()}
+            {renderPagination()}
         </View>
     );
 };
 
 SwipeableContainer.defaultProps = {
-    skipLabel: "Skip",
-    doneLabel: "Done",
-    nextLabel: "Next",
-    prevLabel: "Back",
     showDoneButton: true,
     showNextButton: true
 };

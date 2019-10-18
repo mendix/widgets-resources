@@ -42,7 +42,7 @@
                     <description>The caption and icon of the buttons change dynamically based on which slide the user is. For example on the first page a skip button is shown but now a previous button.</description>
                     <enumerationValues>
                         <enumerationValue key="all">Skip / Previous and Next / Done</enumerationValue>
-                        <enumerationValue key="next_done">Only Next / Done</enumerationValue>
+                        <enumerationValue key="nextDone">Only Next / Done</enumerationValue>
                         <enumerationValue key="none">None</enumerationValue>
                     </enumerationValues>
                 </property>
@@ -62,14 +62,13 @@
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Buttons">
-
             <propertyGroup caption="Skip button">
                 <property key="skipCaption" type="textTemplate" required="false">
                     <caption>Caption</caption>
                     <description/>
                 </property>
                 <property key="skipIcon" type="icon" required="false">
-                    <caption>Skip Icon</caption>
+                    <caption>Icon</caption>
                     <description/>
                 </property>
             </propertyGroup>
@@ -106,6 +105,13 @@
         </propertyGroup>
         <propertyGroup caption="Events">
             <propertyGroup caption="Events">
+                <property key="activeSlideAttribute" type="attribute" required="false">
+                    <caption>Active slide attribute</caption>
+                    <description>Attribute with the active slide number. This can be used in the "On slide change" nanoflow or for changing the active page via a nanoflow.</description>
+                    <attributeTypes>
+                        <attributeType name="Integer" />
+                    </attributeTypes>
+                </property>
                 <property key="onSlideChange" type="action" required="false">
                     <caption>On slide change</caption>
                     <description>Triggers when a new slide is showing, after animation. When "Active slide attribute" is set, this can be used the nanoflow.</description>
@@ -117,13 +123,6 @@
                 <property key="onSkip" type="action" required="false">
                     <caption>On skip</caption>
                     <description>Triggers when the user clicks the "Skip button".</description>
-                </property>
-                <property key="activeSlideAttribute" type="attribute" required="false">
-                    <caption>Active slide attribute</caption>
-                    <description>Attribute with the active slide number. This can be used in the "On slide change" nanoflow or for changing the active page via a nanoflow.</description>
-                    <attributeTypes>
-                        <attributeType name="Integer" />
-                    </attributeTypes>
                 </property>
             </propertyGroup>
         </propertyGroup>

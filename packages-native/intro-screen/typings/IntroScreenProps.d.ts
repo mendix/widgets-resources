@@ -17,7 +17,7 @@ export interface SlidesType {
 
 export type ShowModeEnum = "fullscreen" | "popup";
 
-export type ButtonPatternEnum = "all" | "next_done" | "none";
+export type ButtonPatternEnum = "all" | "nextDone" | "none";
 
 export type SlideIndicatorsEnum = "between" | "above" | "never";
 
@@ -34,8 +34,8 @@ export interface IntroScreenProps<Style> extends CommonProps<Style> {
     nextIcon?: DynamicValue<NativeIcon>;
     doneCaption?: DynamicValue<string>;
     doneIcon?: DynamicValue<NativeIcon>;
+    activeSlideAttribute?: EditableValue<BigJs.Big>;
     onSlideChange?: ActionValue;
     onDone?: ActionValue;
     onSkip?: ActionValue;
-    activeSlideAttribute?: EditableValue<BigJs.Big>;
 }

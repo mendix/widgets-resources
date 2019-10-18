@@ -11,7 +11,7 @@ jest.mock("react-native-device-info", () => ({
     hasNotch: jest.fn()
 }));
 
-describe("Intro Screens", () => {
+describe("Intro Screen", () => {
     let defaultProps: IntroScreenProps<IntroScreenStyle>;
 
     beforeEach(() => {
@@ -37,7 +37,7 @@ describe("Intro Screens", () => {
 
     it("renders with 1 bottom button", () => {
         const component = render(
-            <IntroScreen {...defaultProps} slideIndicators={"above"} buttonPattern={"next_done"} />
+            <IntroScreen {...defaultProps} slideIndicators={"above"} buttonPattern={"nextDone"} />
         );
         expect(component.toJSON()).toMatchSnapshot();
     });

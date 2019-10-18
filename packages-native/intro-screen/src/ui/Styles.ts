@@ -5,26 +5,19 @@ import absoluteFillObject = StyleSheet.absoluteFillObject;
 export interface IntroScreenStyle extends Style {
     fullscreenContainer: ViewStyle;
     cardContainer: ViewStyle;
-    /**
-     * Styles for bottom buttons
-     */
+    // Styles for bottom buttons
     bottomButtonsContainer: ViewStyle;
     buttonSkip: ViewStyle;
     buttonDone: ViewStyle;
-    buttonPrev: ViewStyle;
+    buttonPrevious: ViewStyle;
     buttonNext: ViewStyle;
-    /**
-     * Style for both texts
-     */
+    // Style for both texts
     buttonText: TextStyle;
-    /**
-     * Styles for normal left/right button aligned to the pagination
-     */
+    buttonIconText: TextStyle;
+    // Styles for normal left/right button aligned to the pagination
     leftButton: ViewStyle;
     rightButton: ViewStyle;
-    /**
-     * Styles for pagination
-     */
+    // Styles for pagination
     paginationContainer: ViewStyle;
     paginationDots: ViewStyle;
     dotStyle: ViewStyle;
@@ -44,13 +37,21 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
     bottomButtonsContainer: {},
     buttonSkip: {},
     buttonDone: {},
-    buttonPrev: {},
+    buttonPrevious: {},
     buttonNext: {},
     buttonText: {
         backgroundColor: "transparent",
         color: "white",
         fontSize: 18,
         padding: 12,
+        alignSelf: "center"
+    },
+    buttonIconText: {
+        backgroundColor: "transparent",
+        color: "white",
+        fontSize: 18,
+        padding: 12,
+        marginLeft: 5,
         alignSelf: "center"
     },
     leftButton: {
