@@ -14,9 +14,7 @@ export interface ListViewSwipeStyle extends Style {
 export const defaultListViewSwipeStyle: ListViewSwipeStyle = {
     container: {
         flex: 1,
-        height: 80,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
+        alignItems: "stretch",
         justifyContent: "space-between",
         flexDirection: "column",
         backgroundColor: "white"
