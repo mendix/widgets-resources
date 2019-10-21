@@ -49,7 +49,7 @@ describe("Intro Screen", () => {
         expect(component.toJSON()).toMatchSnapshot();
     });
 
-    it("renders with active layout attribute", () => {
+    it("renders with active slide attribute", () => {
         const component = render(
             <IntroScreen
                 {...defaultProps}

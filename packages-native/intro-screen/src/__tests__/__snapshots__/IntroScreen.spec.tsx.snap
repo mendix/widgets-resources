@@ -521,7 +521,7 @@ exports[`Intro Screen renders with 2 bottom button 1`] = `
 </Modal>
 `;
 
-exports[`Intro Screen renders with active layout attribute 1`] = `
+exports[`Intro Screen renders with active slide attribute 1`] = `
 <Modal
   hardwareAccelerated={false}
   transparent={true}
