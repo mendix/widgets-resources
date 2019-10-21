@@ -74,31 +74,34 @@ export const ListViewSwipe = (props: ListViewSwipeProps<ListViewSwipeStyle>): Re
         if (isLeftSideAction && props.onSwipeLeft && props.onSwipeLeft.canExecute) {
             triggerAction(props.leftRenderMode, props.onSwipeLeft);
         }
-    }, []);
+    }, [animation]);
 
     const onSwipeRight = useCallback((): void => {
         changeAttributeValue(props.rightThresholdAttribute, true);
         if (isRightSideAction && props.onSwipeRight && props.onSwipeRight.canExecute) {
             triggerAction(props.rightRenderMode, props.onSwipeRight);
         }
-    }, []);
+    }, [animation]);
 
-    const triggerAction = (renderMode: string, action: ActionValue): void => {
-        if (renderMode === "swipeOutReset" || renderMode === "toggle") {
-            close();
-        }
-        if (renderMode === "archive") {
-            setAnimate(true);
-            Animated.timing(animation, {
-                toValue: 0,
-                duration: 200
-            }).start(() => {
+    const triggerAction = useCallback(
+        (renderMode: string, action: ActionValue): void => {
+            if (renderMode === "swipeOutReset" || renderMode === "toggle") {
+                close();
+            }
+            if (renderMode === "archive") {
+                setAnimate(true);
+                Animated.timing(animation, {
+                    toValue: 0,
+                    duration: 200
+                }).start(() => {
+                    action.execute();
+                });
+            } else {
                 action.execute();
-            });
-        } else {
-            action.execute();
-        }
-    };
+            }
+        },
+        [animation]
+    );
 
     const changeAttributeValue = (attribute?: EditableValue<boolean>, value?: boolean): void => {
         if (attribute && !attribute.readOnly) {
