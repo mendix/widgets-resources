@@ -103,6 +103,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
         goToSlide(activeIndex + 1);
         onSlideChange(activeIndex + 1, activeIndex);
     };
+
     const onPrevPress = (): void => {
         goToSlide(activeIndex - 1);
         onSlideChange(activeIndex - 1, activeIndex);
