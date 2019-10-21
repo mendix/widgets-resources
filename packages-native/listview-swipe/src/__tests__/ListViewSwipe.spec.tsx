@@ -4,7 +4,7 @@ import { render } from "react-native-testing-library";
 import { ListViewSwipe } from "../ListViewSwipe";
 import { ListViewSwipeProps } from "../../typings/ListViewSwipeProps";
 import { ListViewSwipeStyle } from "../ui/styles";
-import { actionValue } from "../../../util-widgets/test";
+import { actionValue } from "@native-mobile-resources/util-widgets";
 
 jest.mock("NativeModules", () => ({
     UIManager: {

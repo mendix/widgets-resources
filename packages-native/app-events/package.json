@@ -23,6 +23,6 @@
         "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
     },
     "devDependencies": {
-        "@native-mobile-resources/util-widgets": "^0.0.1"
+        "@native-mobile-resources/util-widgets": "^1.0.0"
     }
 }

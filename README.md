@@ -30,6 +30,7 @@ A bundle of R&D Platform supported widgets & nanoflow actions for building nativ
 | [Web view][]               | Display an external web page or load custom HTML.               |
 | [Animation][]              | Provides default animations for contents and widgets.           |
 | [List view swipe][]        | Show controls on swipe for an interactive list view.            |
+| [Intro screen][]           | Show swipeable containers to show contents as intros            |
 
 ## Web & Hybrid widgets
 
@@ -64,6 +65,7 @@ A bundle of R&D Platform supported widgets & nanoflow actions for building nativ
 [web view]: https://github.com/mendix/widgets-resources/blob/master/packages-native/web-view
 [animation]: https://github.com/mendix/widgets-resources/blob/master/packages-native/animation
 [list view swipe]: https://github.com/mendix/widgets-resources/blob/master/packages-native/listview-swipe
+[intro screen]: https://github.com/mendix/widgets-resources/blob/master/packages-native/intro-screen
 
 ## Included nanoflow actions
 

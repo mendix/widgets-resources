@@ -1,4 +1,4 @@
-import { actionValue, EditableValueBuilder } from "@native-mobile-resources/util-widgets/test";
+import { actionValue, EditableValueBuilder } from "@native-mobile-resources/util-widgets";
 import { createElement } from "react";
 import { View } from "react-native";
 import Slider from "react-native-slider";
