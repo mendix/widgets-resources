@@ -36,18 +36,17 @@ describe("List View Swipe", () => {
 
     beforeEach(() => {
         defaultProps = {
+            name: "lvtest",
             style: [],
             content: null,
-            leftRenderMode: "action",
+            leftRenderMode: "swipeOut",
             left: (
                 <View>
                     <Text>Test</Text>
                 </View>
             ),
-            closeOnFinishLeft: false,
             right: null,
-            rightRenderMode: "disabled",
-            closeOnFinishRight: false
+            rightRenderMode: "disabled"
         };
     });
 
