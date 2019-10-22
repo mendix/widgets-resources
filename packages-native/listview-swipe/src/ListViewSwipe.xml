@@ -35,7 +35,7 @@
             <propertyGroup caption="Events">
                 <property key="onSwipeLeft" type="action" required="false">
                     <caption>On swipe action</caption>
-                    <description>Action triggerd for pattern: "Archive" after the item is collapesed, "Toggle" when item passed the threshold, "Swipe out" after the item is animated out of the list.</description>
+                    <description>Action triggered for pattern: "Archive" after the item is collapsed, "Toggle" when item passed the threshold, "Swipe out" after the item is animated out of the list.</description>
                 </property>
                 <property key="leftThresholdAttribute" type="attribute" required="false">
                     <caption>Threshold attribute</caption>
@@ -68,7 +68,7 @@
             <propertyGroup caption="Events">
                 <property key="onSwipeRight" type="action" required="false">
                     <caption>On swipe action</caption>
-                    <description>Action triggerd for pattern: "Archive" after the item is collapesed, "Toggle" when item passed the threshold, "Swipe out" after the item is animated out of the list.</description>
+                    <description>Action triggered for pattern: "Archive" after the item is collapsed, "Toggle" when item passed the threshold, "Swipe out" after the item is animated out of the list.</description>
                 </property>
                 <property key="rightThresholdAttribute" type="attribute" required="false">
                     <caption>Threshold attribute</caption>
