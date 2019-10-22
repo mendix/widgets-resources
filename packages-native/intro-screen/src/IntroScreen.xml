@@ -55,6 +55,10 @@
                         <enumerationValue key="never">Never</enumerationValue>
                     </enumerationValues>
                 </property>
+                <property key="hideIndicatorLastSlide" type="boolean" defaultValue="false">
+                    <caption>Hide indicator in last slide</caption>
+                    <description />
+                </property>
             </propertyGroup>
             <propertyGroup caption="Common">
                 <systemProperty key="Visibility" />

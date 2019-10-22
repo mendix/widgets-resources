@@ -97,6 +97,7 @@ export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Elem
                     doneLabel={renderLabel(props.doneCaption)}
                     styles={styles}
                     activeSlide={props.activeSlideAttribute}
+                    hideIndicatorLastSlide={props.hideIndicatorLastSlide}
                     {...renderButtonsProperties}
                 />
             </View>

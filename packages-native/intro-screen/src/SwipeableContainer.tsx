@@ -49,6 +49,7 @@ interface SwipeableContainerProps {
     onSkip: () => void;
     slides: SlidesType[];
     hidePagination: boolean;
+    hideIndicatorLastSlide: boolean;
     styles: IntroScreenStyle;
     activeSlide?: EditableValue<BigJs.Big>;
 }
@@ -220,11 +221,12 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
         const leftButton = (!isFirstSlide && renderPrevButton(props)) || (!isLastSlide && renderSkipButton(props));
         const rightButton = isLastSlide ? renderDoneButton(props) : renderNextButton(props);
         const paginationOverflow = props.slides.length > 5;
+        const hidePagination = props.hidePagination || (isLastSlide && props.hideIndicatorLastSlide);
 
         return (
             <View style={[styles.paginationContainer, props.styles.paginationContainer]}>
                 <View style={[styles.paginationDots, props.styles.paginationDots]}>
-                    {!props.hidePagination &&
+                    {!hidePagination &&
                         !paginationOverflow &&
                         props.slides.length > 1 &&
                         props.slides.map((_, i) => (
@@ -239,7 +241,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
                                 onPress={() => onPaginationPress(i)}
                             />
                         ))}
-                    {paginationOverflow && (
+                    {!hidePagination && paginationOverflow && (
                         <Text style={props.styles.paginationText}>
                             {activeIndex + 1}/{props.slides.length}
                         </Text>
