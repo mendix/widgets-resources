@@ -77,7 +77,7 @@ export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Elem
     };
 
     return (
-        <Modal visible={visible} transparent>
+        <Modal visible={visible} transparent={props.showMode === "popup"}>
             <View style={props.showMode === "fullscreen" ? styles.fullscreenContainer : styles.cardContainer}>
                 <SwipeableContainer
                     slides={props.slides}
