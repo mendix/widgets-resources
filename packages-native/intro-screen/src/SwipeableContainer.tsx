@@ -10,7 +10,6 @@ import {
     useState
 } from "react";
 import {
-    Dimensions,
     FlatList,
     I18nManager,
     LayoutChangeEvent,
@@ -61,7 +60,7 @@ const isAndroidRTL = I18nManager.isRTL && Platform.OS === "android";
 const Touchable: ComponentClass<any> = Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
 
 const refreshActiveSlideAttribute = (slides: SlidesType[], activeSlide?: EditableValue<BigJs.Big>): number => {
-    if (activeSlide && activeSlide.status === ValueStatus.Available) {
+    if (activeSlide && activeSlide.status === ValueStatus.Available && slides && slides.length > 0) {
         const slide = Number(activeSlide.value) - 1;
         if (slide < 0) {
             return 0;
@@ -74,15 +73,13 @@ const refreshActiveSlideAttribute = (slides: SlidesType[], activeSlide?: Editabl
 };
 
 export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement => {
-    const activeSlide = refreshActiveSlideAttribute(props.slides, props.activeSlide);
-    const dimensions = Dimensions.get("window");
-    const [width, setWidth] = useState(dimensions.width);
-    const [activeIndex, setActiveIndex] = useState(activeSlide);
+    const [width, setWidth] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(0);
     const flatList = useRef<FlatList<any>>(null);
 
     useEffect(() => {
         const slide = refreshActiveSlideAttribute(props.slides, props.activeSlide);
-        if (slide !== activeIndex) {
+        if (width && props.activeSlide && props.activeSlide.status === ValueStatus.Available && slide !== activeIndex) {
             goToSlide(slide);
         }
     }, [props.activeSlide, activeIndex, width]);
@@ -138,7 +135,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
     };
 
     const onSlideChange = (newIndex: number, lastIndex: number): void => {
-        if (props.activeSlide) {
+        if (props.activeSlide && !props.activeSlide.readOnly) {
             props.activeSlide.setValue(new Big(newIndex + 1));
         }
         if (props.onSlideChange) {
@@ -222,14 +219,16 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
 
         const leftButton = (!isFirstSlide && renderPrevButton(props)) || (!isLastSlide && renderSkipButton(props));
         const rightButton = isLastSlide ? renderDoneButton(props) : renderNextButton(props);
+        const paginationOverflow = props.slides.length > 5;
 
         return (
             <View style={[styles.paginationContainer, props.styles.paginationContainer]}>
                 <View style={[styles.paginationDots, props.styles.paginationDots]}>
                     {!props.hidePagination &&
+                        !paginationOverflow &&
                         props.slides.length > 1 &&
                         props.slides.map((_, i) => (
-                            <Touchable
+                            <TouchableOpacity
                                 key={i}
                                 style={[
                                     styles.dot,
@@ -240,6 +239,11 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
                                 onPress={() => onPaginationPress(i)}
                             />
                         ))}
+                    {paginationOverflow && (
+                        <Text style={props.styles.paginationText}>
+                            {activeIndex + 1}/{props.slides.length}
+                        </Text>
+                    )}
                 </View>
                 {!props.bottomButton && (
                     <Fragment>

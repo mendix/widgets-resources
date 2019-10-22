@@ -19,7 +19,7 @@ export interface IntroScreenStyle extends Style {
     rightButton: ViewStyle;
     // Styles for pagination
     paginationContainer: ViewStyle;
-    paginationDots: ViewStyle;
+    paginationText: TextStyle;
     dotStyle: ViewStyle;
     activeDotStyle: ViewStyle;
 }
@@ -63,7 +63,10 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
         right: 0
     },
     paginationContainer: {},
-    paginationDots: {},
+    paginationText: {
+        fontSize: 12,
+        color: "black"
+    },
     dotStyle: {
         backgroundColor: "rgba(0, 0, 0, .2)"
     },
