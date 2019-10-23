@@ -4,12 +4,16 @@ import { IntroScreenProps } from "../typings/IntroScreenProps";
 import { Modal, View } from "react-native";
 import { DynamicValue, ValueStatus } from "mendix";
 import { SwipeableContainer } from "./SwipeableContainer";
-import deepmerge from "deepmerge";
 import AsyncStorage from "@react-native-community/async-storage";
+import deepmerge from "deepmerge";
 
 export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Element {
     const [visible, setVisible] = useState(false);
-    const styles = deepmerge.all<IntroScreenStyle>([defaultWelcomeScreenStyle, ...props.style]);
+    const customStyles = props.style ? props.style.filter(o => o != null) : [];
+    const styles =
+        customStyles && customStyles.length > 0
+            ? deepmerge.all<IntroScreenStyle>([defaultWelcomeScreenStyle, ...customStyles])
+            : defaultWelcomeScreenStyle;
 
     useEffect(() => {
         if (props.identifier) {
