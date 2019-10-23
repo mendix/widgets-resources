@@ -14,7 +14,7 @@ const defaultButtonBetweenContainer: ViewStyle = {
     alignItems: "center"
 };
 
-const defaultButtonBellowContainer: ViewStyle = {
+const defaultButtonBelowContainer: ViewStyle = {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center"
@@ -88,7 +88,7 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
         },
         buttonSkip: {
             container: {
-                ...defaultButtonBellowContainer
+                ...defaultButtonBelowContainer
             },
             caption: {
                 ...defaultButtonCaption
@@ -99,7 +99,7 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
         },
         buttonDone: {
             container: {
-                ...defaultButtonBellowContainer
+                ...defaultButtonBelowContainer
             },
             caption: {
                 ...defaultButtonCaption
@@ -110,7 +110,7 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
         },
         buttonPrevious: {
             container: {
-                ...defaultButtonBellowContainer
+                ...defaultButtonBelowContainer
             },
             caption: {
                 ...defaultButtonCaption
@@ -121,7 +121,7 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
         },
         buttonNext: {
             container: {
-                ...defaultButtonBellowContainer
+                ...defaultButtonBelowContainer
             },
             caption: {
                 ...defaultButtonCaption
