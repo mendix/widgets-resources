@@ -13,4 +13,4 @@ import { com_mendix_widget_native_slider_Slider as Slider } from "./slider";
     Default Class For Mendix Range Slider Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_rangeslider_RangeSlider = (RangeSlider = Slider);
+export const com_mendix_widget_native_rangeslider_RangeSlider = Slider;

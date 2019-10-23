@@ -14,7 +14,7 @@ import { background, border, brand, contrast, font, input } from "../variables";
     Default Class For Mendix Slider Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_slider_Slider = (Slider = {
+export const com_mendix_widget_native_slider_Slider = {
     container: {
         // All ViewStyle properties are allowed
         alignSelf: "stretch",
@@ -95,4 +95,4 @@ export const com_mendix_widget_native_slider_Slider = (Slider = {
         fontSize: font.size,
         fontFamily: font.family,
     }
-});
+};

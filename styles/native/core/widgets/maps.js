@@ -13,7 +13,7 @@ import { brand } from "../variables";
     Default Class For Mendix Maps Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_maps_Maps = (Maps = {
+export const com_mendix_widget_native_maps_Maps = {
     container: {
         // All ViewStyle properties are allowed
         alignSelf: "stretch",
@@ -31,4 +31,4 @@ export const com_mendix_widget_native_maps_Maps = (Maps = {
         color: brand.primary,
         opacity: 1,
     },
-});
+};

@@ -11,7 +11,7 @@
     Default Class For Mendix Video Player Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_videoplayer_VideoPlayer = (VideoPlayer = {
+export const com_mendix_widget_native_videoplayer_VideoPlayer = {
     container: {
         // All ViewStyle properties are allowed
     },
@@ -21,4 +21,4 @@ export const com_mendix_widget_native_videoplayer_VideoPlayer = (VideoPlayer = {
     video: {
         // All ViewStyle properties are allowed
     },
-});
+};

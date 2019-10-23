@@ -11,6 +11,6 @@
     Default Class For Mendix Animation Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_animation_Animation = (Animation = {
+export const com_mendix_widget_native_animation_Animation = {
     container: {},
-});
+};

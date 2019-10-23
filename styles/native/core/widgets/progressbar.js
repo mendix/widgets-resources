@@ -15,7 +15,7 @@ import { brand, font, input }  from "../variables";
     Default Class For Mendix Progress Bar Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_progressbar_ProgressBar = (ProgressBar = {
+export const com_mendix_widget_native_progressbar_ProgressBar = {
     container: {
         // All ViewStyle properties are allowed
         alignSelf: "stretch",
@@ -43,4 +43,4 @@ export const com_mendix_widget_native_progressbar_ProgressBar = (ProgressBar = {
         fontSize: font.size,
         fontFamily: font.family,
     }
-});
+};

@@ -14,7 +14,7 @@ import { background, brand, contrast, font, input } from "../variables";
     Default Class For Mendix Segmented Controls Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_togglebuttons_ToggleButtons = (ToggleButtons = {
+export const com_mendix_widget_native_togglebuttons_ToggleButtons = {
     container: {
         // All ViewStyle properties are allowed
         alignSelf: "stretch",
@@ -58,4 +58,4 @@ export const com_mendix_widget_native_togglebuttons_ToggleButtons = (ToggleButto
         fontSize: font.size,
         fontFamily: font.family,
     }
-});
+};
