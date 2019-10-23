@@ -22,6 +22,11 @@ brand = merge(brand, custom.brand || {});
 let background = {
     primary: "#FFF",
     secondary: setContrastScale(0.03, "#FFF"),
+    gray: "#c6c6cc",
+    brandPrimary: brand.primary,
+    brandSuccess: brand.success,
+    brandWarning: brand.warning,
+    brandDanger: brand.danger,
 };
 background = merge(background, custom.background || {});
 
@@ -152,7 +157,7 @@ input = merge(input, custom.input || {});
 let navigation = {
     statusBar: {
         backgroundColor: background.primary,
-        barStyle: custom.darkMode ?  "light-content" : "dark-content",
+        barStyle: custom.darkMode ? "light-content" : "dark-content",
     },
     topBar: {
         backgroundColor: background.primary,
@@ -165,14 +170,14 @@ let navigation = {
         selectedTextColor: contrast.high,
         selectedIconColor: brand.primary,
         backgroundColor: background.primary,
-        fontSize: font.sizeSmall
+        fontSize: font.sizeSmall,
     },
     progressOverlay: {
-        color:  '#FFF',
-        activityIndicatorColor: '#FFF',
+        color: "#FFF",
+        activityIndicatorColor: "#FFF",
         backgroundColor: `rgba(0, 0, 0, 0.5)`,
         fontSize: font.size,
-    }
+    },
 };
 navigation = merge(navigation, custom.navigation || {});
 

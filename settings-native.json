@@ -20,7 +20,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Spacing bottom",
                 "type": "Dropdown",
@@ -40,7 +39,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Spacing left",
                 "type": "Dropdown",
@@ -60,7 +58,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Spacing right",
                 "type": "Dropdown",
@@ -81,7 +78,6 @@
                 ]
             }
         ],
-
         "DivContainer": [
             {
                 "name": "Spacing top",
@@ -114,7 +110,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Spacing bottom",
                 "type": "Dropdown",
@@ -146,7 +141,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Spacing left",
                 "type": "Dropdown",
@@ -178,7 +172,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Spacing right",
                 "type": "Dropdown",
@@ -210,7 +203,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Size",
                 "type": "Dropdown",
@@ -226,7 +218,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Background color",
                 "type": "Dropdown",
@@ -239,10 +230,29 @@
                     {
                         "name": "Secondary",
                         "class": "backgroundSecondary"
+                    },
+                    {
+                        "name": "Gray",
+                        "class": "backgroundGray"
+                    },
+                    {
+                        "name": "Brand Primary",
+                        "class": "backgroundBrandPrimary"
+                    },
+                    {
+                        "name": "Brand Success",
+                        "class": "backgroundBrandSuccess"
+                    },
+                    {
+                        "name": "Brand Warning",
+                        "class": "backgroundBrandWarning"
+                    },
+                    {
+                        "name": "Brand Danger",
+                        "class": "backgroundBrandDanger"
                     }
                 ]
             },
-
             {
                 "name": "Align",
                 "type": "Dropdown",
@@ -270,26 +280,27 @@
                     }
                 ]
             },
-
             {
                 "name": "Render children horizontal",
                 "type": "Toggle",
                 "description": "Determines the direction in which children are rendered.",
                 "class": "flexRow"
             },
-
             {
                 "name": "Wrap children",
                 "type": "Toggle",
                 "description": "Determines if children can flow into multiple lines if they hit the end of the container.",
                 "class": "flexWrap"
             },
-
             {
                 "name": "Align children",
                 "type": "Dropdown",
                 "description": "Align children in the opposite direction.",
                 "options": [
+                    {
+                        "name": "Start",
+                        "class": "alignChildrenStart"
+                    },
                     {
                         "name": "Center",
                         "class": "alignChildrenCenter"
@@ -308,7 +319,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Justify content",
                 "type": "Dropdown",
@@ -337,7 +347,6 @@
                 ]
             }
         ],
-
         "ScrollContainer": [
             {
                 "name": "Spacing top",
@@ -370,7 +379,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Spacing bottom",
                 "type": "Dropdown",
@@ -402,7 +410,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Spacing left",
                 "type": "Dropdown",
@@ -434,7 +441,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Spacing right",
                 "type": "Dropdown",
@@ -466,7 +472,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Size",
                 "type": "Dropdown",
@@ -482,7 +487,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Background color",
                 "type": "Dropdown",
@@ -495,10 +499,29 @@
                     {
                         "name": "Secondary",
                         "class": "backgroundSecondary"
+                    },
+                    {
+                        "name": "Gray",
+                        "class": "backgroundGray"
+                    },
+                    {
+                        "name": "Brand Primary",
+                        "class": "backgroundBrandPrimary"
+                    },
+                    {
+                        "name": "Brand Success",
+                        "class": "backgroundBrandSuccess"
+                    },
+                    {
+                        "name": "Brand Warning",
+                        "class": "backgroundBrandWarning"
+                    },
+                    {
+                        "name": "Brand Danger",
+                        "class": "backgroundBrandDanger"
                     }
                 ]
             },
-
             {
                 "name": "Align",
                 "type": "Dropdown",
@@ -526,26 +549,27 @@
                     }
                 ]
             },
-
             {
                 "name": "Render children horizontal",
                 "type": "Toggle",
                 "description": "Determines the direction in which children are rendered.",
                 "class": "flexRow"
             },
-
             {
                 "name": "Wrap children",
                 "type": "Toggle",
                 "description": "Determines if children can flow into multiple lines if they hit the end of the container.",
                 "class": "flexWrap"
             },
-
             {
                 "name": "Align children",
                 "type": "Dropdown",
                 "description": "Align children in the opposite direction.",
                 "options": [
+                    {
+                        "name": "Start",
+                        "class": "alignChildrenStart"
+                    },
                     {
                         "name": "Center",
                         "class": "alignChildrenCenter"
@@ -564,7 +588,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Justify content",
                 "type": "Dropdown",
@@ -589,7 +612,6 @@
                 ]
             }
         ],
-
         "ActionButton": [
             {
                 "name": "Button style",
@@ -614,7 +636,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Align",
                 "type": "Dropdown",
@@ -643,7 +664,6 @@
                 ]
             }
         ],
-
         "Image": [
             {
                 "name": "Avatar",
@@ -652,7 +672,6 @@
                 "class": "avatar"
             }
         ],
-
         "DynamicImage": [
             {
                 "name": "Avatar",
@@ -661,7 +680,6 @@
                 "class": "avatar"
             }
         ],
-
         "DynamicText": [
             {
                 "name": "Color",
@@ -718,7 +736,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Size",
                 "type": "Dropdown",
@@ -734,7 +751,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Weight",
                 "type": "Dropdown",
@@ -758,7 +774,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Alignment",
                 "type": "Dropdown",
@@ -779,7 +794,6 @@
                 ]
             }
         ],
-
         "ListView": [
             {
                 "name": "List item divider",
@@ -797,7 +811,6 @@
                 ]
             }
         ],
-
         "TabContainer": [
             {
                 "name": "Tab bar scroll",
@@ -806,7 +819,6 @@
                 "class": "tabContainerScroll"
             }
         ],
-
         "com.mendix.widget.native.activityindicator.ActivityIndicator": [
             {
                 "name": "Activity indicator style",
@@ -828,7 +840,6 @@
                 ]
             }
         ],
-
         "com.mendix.widget.native.animation.Animation": [
             {
                 "name": "Spacing top",
@@ -861,7 +872,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Spacing bottom",
                 "type": "Dropdown",
@@ -893,7 +903,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Spacing left",
                 "type": "Dropdown",
@@ -925,7 +934,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Spacing right",
                 "type": "Dropdown",
@@ -957,7 +965,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Size",
                 "type": "Dropdown",
@@ -973,7 +980,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Background color",
                 "type": "Dropdown",
@@ -986,10 +992,29 @@
                     {
                         "name": "Secondary",
                         "class": "backgroundSecondary"
+                    },
+                    {
+                        "name": "Gray",
+                        "class": "backgroundGray"
+                    },
+                    {
+                        "name": "Brand Primary",
+                        "class": "backgroundBrandPrimary"
+                    },
+                    {
+                        "name": "Brand Success",
+                        "class": "backgroundBrandSuccess"
+                    },
+                    {
+                        "name": "Brand Warning",
+                        "class": "backgroundBrandWarning"
+                    },
+                    {
+                        "name": "Brand Danger",
+                        "class": "backgroundBrandDanger"
                     }
                 ]
             },
-
             {
                 "name": "Align",
                 "type": "Dropdown",
@@ -1013,26 +1038,27 @@
                     }
                 ]
             },
-
             {
                 "name": "Render children horizontal",
                 "type": "Toggle",
                 "description": "Determines the direction in which children are rendered.",
                 "class": "flexRow"
             },
-
             {
                 "name": "Wrap children",
                 "type": "Toggle",
                 "description": "Determines if children can flow into multiple lines if they hit the end of the container.",
                 "class": "flexWrap"
             },
-
             {
                 "name": "Align children",
                 "type": "Dropdown",
                 "description": "Align children in the opposite direction.",
                 "options": [
+                    {
+                        "name": "Start",
+                        "class": "alignChildrenStart"
+                    },
                     {
                         "name": "Center",
                         "class": "alignChildrenCenter"
@@ -1047,7 +1073,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Justify children",
                 "type": "Dropdown",
@@ -1072,7 +1097,6 @@
                 ]
             }
         ],
-
         "com.mendix.widget.native.badge.Badge": [
             {
                 "name": "Badge style",
@@ -1098,7 +1122,6 @@
                 ]
             }
         ],
-
         "com.mendix.widget.native.floatingactionbutton.FloatingActionButton": [
             {
                 "name": "Style",
@@ -1120,7 +1143,6 @@
                 ]
             }
         ],
-
         "com.mendix.widget.native.maps.Maps": [
             {
                 "name": "Maps size",
@@ -1137,7 +1159,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Maps marker style",
                 "type": "Dropdown",
@@ -1158,7 +1179,6 @@
                 ]
             }
         ],
-
         "com.mendix.widget.native.progressbar.ProgressBar": [
             {
                 "name": "Progress bar style",
@@ -1179,7 +1199,6 @@
                     }
                 ]
             },
-
             {
                 "name": "Progress bar size",
                 "type": "Dropdown",
@@ -1196,7 +1215,6 @@
                 ]
             }
         ],
-
         "com.mendix.widget.native.progresscircle.ProgressCircle": [
             {
                 "name": "Progress circle style",
@@ -1218,7 +1236,6 @@
                 ]
             }
         ],
-
         "com.mendix.widget.native.rangeslider.RangeSlider": [
             {
                 "name": "Range Slider style",
@@ -1240,7 +1257,6 @@
                 ]
             }
         ],
-
         "com.mendix.widget.native.slider.Slider": [
             {
                 "name": "Slider style",
