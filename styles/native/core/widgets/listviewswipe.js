@@ -18,14 +18,25 @@ import { background } from "../variables.js";
 export const com_mendix_widget_native_listviewswipe_ListViewSwipe = {
     container: {
         // All ViewStyle properties are allowed
+        flex: 1,
+        alignItems: "stretch",
+        justifyContent: "space-between",
         backgroundColor: background.primary,
     },
     leftAction: {
-        // All ViewStyle properties are allowed
+        // PanelSize & All ViewStyle properties are allowed
+        panelSize: 192,
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "stretch",
         backgroundColor: background.primary,
     },
     rightAction: {
-        // All ViewStyle properties are allowed
+        // PanelSize & All ViewStyle properties are allowed
+        panelSize: 192,
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "stretch",
         backgroundColor: background.primary,
     },
 };

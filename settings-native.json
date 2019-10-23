@@ -1143,6 +1143,23 @@
                 ]
             }
         ],
+        "com.mendix.widget.native.listviewswipe.ListViewSwipe": [
+            {
+                "name": "Panel size",
+                "type": "Dropdown",
+                "description": "Size of the left and right panel.",
+                "options": [
+                    {
+                        "name": "Small",
+                        "class": "listViewSwipeSmallPanels"
+                    },
+                    {
+                        "name": "Large",
+                        "class": "listViewSwipeLargePanels"
+                    }
+                ]
+            }
+        ],
         "com.mendix.widget.native.maps.Maps": [
             {
                 "name": "Maps size",
