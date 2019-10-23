@@ -26,6 +26,8 @@ export * from "./core/widgets/images";
 export * from "./core/helpers/images";
 export * from "./core/widgets/listviews";
 export * from "./core/helpers/listviews";
+export * from "./core/widgets/listviewswipe";
+export * from "./core/helpers/listviewswipe";
 export * from "./core/widgets/maps";
 export * from "./core/helpers/maps";
 export * from "./core/widgets/navigation";
