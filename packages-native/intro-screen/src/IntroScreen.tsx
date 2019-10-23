@@ -1,19 +1,14 @@
-import { createElement, ReactNode, useCallback, useState } from "react";
+import { createElement, useCallback, useState } from "react";
 import { defaultWelcomeScreenStyle, IntroScreenStyle } from "./ui/Styles";
 import { IntroScreenProps } from "../typings/IntroScreenProps";
-import { Modal, Text, View, ViewStyle } from "react-native";
-import { Icon } from "mendix/components/native/Icon";
-import { DynamicValue, NativeIcon, ValueStatus } from "mendix";
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { Modal, View } from "react-native";
+import { DynamicValue, ValueStatus } from "mendix";
 import { SwipeableContainer } from "./SwipeableContainer";
-
-interface RenderButtonProperty {
-    [key: string]: ReactNode;
-}
+import deepmerge from "deepmerge";
 
 export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Element {
     const [visible, setVisible] = useState(true);
-    const styles = flattenStyles(defaultWelcomeScreenStyle, props.style);
+    const styles = deepmerge.all<IntroScreenStyle>([defaultWelcomeScreenStyle, ...props.style]);
     const onDone = useCallback(() => {
         if (props.onDone && props.onDone.canExecute) {
             props.onDone.execute();
@@ -32,34 +27,6 @@ export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Elem
         setVisible(false);
     }, []);
 
-    const renderText = (caption?: DynamicValue<string>): ReactNode => {
-        if (caption && caption.status === ValueStatus.Available && caption.value) {
-            return <Text style={styles.buttonIconText}>{caption.value}</Text>;
-        }
-        return undefined;
-    };
-
-    const renderButton = (
-        property: string,
-        style: ViewStyle,
-        icon?: DynamicValue<NativeIcon>,
-        caption?: DynamicValue<string>
-    ): RenderButtonProperty => {
-        const returnObject: RenderButtonProperty = {};
-        if (!icon || !icon.value) {
-            return returnObject;
-        }
-
-        returnObject[property] = () => (
-            <View style={[{ flexDirection: "row", justifyContent: "center", alignItems: "center" }, style]}>
-                <Icon icon={icon!.value} color={styles.buttonIconText.color ? styles.buttonIconText.color : "black"} />
-                {renderText(caption)}
-            </View>
-        );
-
-        return returnObject;
-    };
-
     const renderLabel = (label?: DynamicValue<string>): string | undefined => {
         if (label && label.value && label.status === ValueStatus.Available) {
             return label.value;
@@ -69,16 +36,10 @@ export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Elem
 
     const showSkipPrevious = props.buttonPattern === "all";
     const showNextDone = props.buttonPattern !== "none";
-    const renderButtonsProperties = {
-        ...renderButton("renderSkipButton", styles.buttonSkip, props.skipIcon, props.skipCaption),
-        ...renderButton("renderPreviousButton", styles.buttonPrevious, props.previousIcon, props.previousCaption),
-        ...renderButton("renderNextButton", styles.buttonNext, props.nextIcon, props.nextCaption),
-        ...renderButton("renderDoneButton", styles.buttonDone, props.doneIcon, props.doneCaption)
-    };
 
     return (
         <Modal visible={visible} transparent={props.showMode === "popup"}>
-            <View style={props.showMode === "fullscreen" ? styles.fullscreenContainer : styles.cardContainer}>
+            <View style={props.showMode === "fullscreen" ? styles.fullscreenContainer : styles.popupContainer}>
                 <SwipeableContainer
                     slides={props.slides}
                     onDone={onDone}
@@ -92,13 +53,16 @@ export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Elem
                     showDoneButton={showNextDone}
                     hidePagination={props.slideIndicators === "never"}
                     skipLabel={renderLabel(props.skipCaption)}
+                    skipIcon={props.skipIcon}
                     previousLabel={renderLabel(props.previousCaption)}
+                    previousIcon={props.previousIcon}
                     nextLabel={renderLabel(props.nextCaption)}
+                    nextIcon={props.nextIcon}
                     doneLabel={renderLabel(props.doneCaption)}
+                    doneIcon={props.doneIcon}
                     styles={styles}
                     activeSlide={props.activeSlideAttribute}
                     hideIndicatorLastSlide={props.hideIndicatorLastSlide}
-                    {...renderButtonsProperties}
                 />
             </View>
         </Modal>
