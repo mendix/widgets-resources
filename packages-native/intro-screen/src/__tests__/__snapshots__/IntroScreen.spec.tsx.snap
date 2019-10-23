@@ -137,6 +137,7 @@ exports[`Intro Screen renders 1`] = `
                 "bottom": 0,
                 "flexDirection": "row",
                 "justifyContent": "center",
+                "paddingVertical": 12,
                 "position": "absolute",
                 "right": 0,
               }
@@ -310,6 +311,7 @@ exports[`Intro Screen renders with 1 bottom button 1`] = `
                     "alignItems": "center",
                     "flexDirection": "row",
                     "justifyContent": "center",
+                    "paddingVertical": 12,
                   }
                 }
               >
@@ -483,6 +485,7 @@ exports[`Intro Screen renders with 2 bottom button 1`] = `
                     "alignItems": "center",
                     "flexDirection": "row",
                     "justifyContent": "center",
+                    "paddingVertical": 12,
                   }
                 }
               >
@@ -640,6 +643,165 @@ exports[`Intro Screen renders with active slide attribute 1`] = `
                 "bottom": 0,
                 "flexDirection": "row",
                 "justifyContent": "center",
+                "paddingVertical": 12,
+                "position": "absolute",
+                "right": 0,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignSelf": "center",
+                }
+              }
+            />
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`Intro Screen renders with async storage identifier 1`] = `
+<Modal
+  hardwareAccelerated={false}
+  transparent={false}
+  visible={false}
+>
+  <View
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <RCTScrollView
+        bounces={false}
+        data={
+          Array [
+            Object {
+              "content": <View />,
+              "name": "Page 1",
+            },
+          ]
+        }
+        disableVirtualization={false}
+        extraData={0}
+        getItem={[Function]}
+        getItemCount={[Function]}
+        horizontal={true}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onContentSizeChange={[Function]}
+        onEndReachedThreshold={2}
+        onLayout={[Function]}
+        onMomentumScrollEnd={[Function]}
+        onScroll={[Function]}
+        onScrollBeginDrag={[Function]}
+        onScrollEndDrag={[Function]}
+        pagingEnabled={true}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={50}
+        showsHorizontalScrollIndicator={false}
+        stickyHeaderIndices={Array []}
+        style={
+          Object {
+            "flex": 1,
+            "flexDirection": "row",
+          }
+        }
+        updateCellsBatchingPeriod={50}
+        viewabilityConfigCallbackPairs={Array []}
+        windowSize={21}
+      >
+        <View>
+          <View
+            onLayout={[Function]}
+            style={
+              Array [
+                Object {
+                  "flexDirection": "row",
+                },
+                null,
+              ]
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "alignContent": "stretch",
+                    "flex": 1,
+                    "width": 0,
+                  },
+                ]
+              }
+            >
+              <View />
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+      <View
+        style={
+          Object {
+            "bottom": 16,
+            "left": 16,
+            "position": "absolute",
+            "right": 16,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "height": 16,
+              "justifyContent": "center",
+              "margin": 16,
+            }
+          }
+        />
+        <View
+          accessible={true}
+          isTVSelectable={true}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "bottom": 0,
+                "flexDirection": "row",
+                "justifyContent": "center",
+                "paddingVertical": 12,
                 "position": "absolute",
                 "right": 0,
               }

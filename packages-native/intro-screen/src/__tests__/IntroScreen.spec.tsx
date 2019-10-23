@@ -13,6 +13,11 @@ jest.mock("react-native-device-info", () => ({
     hasNotch: jest.fn()
 }));
 
+jest.mock("@react-native-community/async-storage", () => ({
+    getItem: jest.fn().mockResolvedValue("gone"),
+    setValue: jest.fn().mockResolvedValue(null)
+}));
+
 describe("Intro Screen", () => {
     let defaultProps: IntroScreenProps<IntroScreenStyle>;
 
@@ -28,7 +33,8 @@ describe("Intro Screen", () => {
             buttonPattern: "all",
             showMode: "fullscreen",
             slideIndicators: "between",
-            style: []
+            style: [],
+            hideIndicatorLastSlide: false
         };
     });
 
@@ -56,6 +62,11 @@ describe("Intro Screen", () => {
                 activeSlideAttribute={new EditableValueBuilder<BigJs.Big>().withValue(new Big(1)).build()}
             />
         );
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+
+    it("renders with async storage identifier", () => {
+        const component = render(<IntroScreen {...defaultProps} identifier="test1" />);
         expect(component.toJSON()).toMatchSnapshot();
     });
 });

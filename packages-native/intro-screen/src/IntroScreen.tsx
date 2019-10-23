@@ -1,37 +1,59 @@
-import { createElement, useCallback, useState } from "react";
+import { createElement, useCallback, useEffect, useState } from "react";
 import { defaultWelcomeScreenStyle, IntroScreenStyle } from "./ui/Styles";
 import { IntroScreenProps } from "../typings/IntroScreenProps";
 import { Modal, View } from "react-native";
 import { DynamicValue, ValueStatus } from "mendix";
 import { SwipeableContainer } from "./SwipeableContainer";
 import deepmerge from "deepmerge";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Element {
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(false);
     const styles = deepmerge.all<IntroScreenStyle>([defaultWelcomeScreenStyle, ...props.style]);
+
+    useEffect(() => {
+        if (props.identifier) {
+            AsyncStorage.getItem(props.identifier).then(value => {
+                setVisible(value === "" || value === null);
+            });
+        } else {
+            setVisible(true);
+        }
+    }, []);
+
     const onDone = useCallback(() => {
         if (props.onDone && props.onDone.canExecute) {
             props.onDone.execute();
         }
-        setVisible(false);
+        hideModal();
     }, []);
+
     const onSlideChange = useCallback(() => {
         if (props.onSlideChange && props.onSlideChange.canExecute) {
             props.onSlideChange.execute();
         }
     }, []);
+
     const onSkip = useCallback(() => {
         if (props.onSkip && props.onSkip.canExecute) {
             props.onSkip.execute();
         }
-        setVisible(false);
+        hideModal();
     }, []);
 
-    const renderLabel = (label?: DynamicValue<string>): string | undefined => {
+    const checkLabel = (label?: DynamicValue<string>): string | undefined => {
         if (label && label.value && label.status === ValueStatus.Available) {
             return label.value;
         }
         return undefined;
+    };
+
+    const hideModal = (): void => {
+        if (props.identifier) {
+            AsyncStorage.setItem(props.identifier, "gone").then(() => setVisible(false));
+        } else {
+            setVisible(false);
+        }
     };
 
     const showSkipPrevious = props.buttonPattern === "all";
@@ -52,13 +74,13 @@ export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Elem
                     showPreviousButton={showSkipPrevious}
                     showDoneButton={showNextDone}
                     hidePagination={props.slideIndicators === "never"}
-                    skipLabel={renderLabel(props.skipCaption)}
+                    skipLabel={checkLabel(props.skipCaption)}
                     skipIcon={props.skipIcon}
-                    previousLabel={renderLabel(props.previousCaption)}
+                    previousLabel={checkLabel(props.previousCaption)}
                     previousIcon={props.previousIcon}
-                    nextLabel={renderLabel(props.nextCaption)}
+                    nextLabel={checkLabel(props.nextCaption)}
                     nextIcon={props.nextIcon}
-                    doneLabel={renderLabel(props.doneCaption)}
+                    doneLabel={checkLabel(props.doneCaption)}
                     doneIcon={props.doneIcon}
                     styles={styles}
                     activeSlide={props.activeSlideAttribute}

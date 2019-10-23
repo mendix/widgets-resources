@@ -27,6 +27,7 @@ export interface IntroScreenProps<Style> extends CommonProps<Style> {
     buttonPattern: ButtonPatternEnum;
     slideIndicators: SlideIndicatorsEnum;
     hideIndicatorLastSlide: boolean;
+    identifier?: string;
     skipCaption?: DynamicValue<string>;
     skipIcon?: DynamicValue<NativeIcon>;
     previousCaption?: DynamicValue<string>;

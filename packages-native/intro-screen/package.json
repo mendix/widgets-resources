@@ -26,6 +26,7 @@
         "@types/react-native-app-intro-slider": "^3.0.0"
     },
     "dependencies": {
+        "@react-native-community/async-storage": "^1.6.2",
         "@native-mobile-resources/util-widgets": "^1.0.0"
     }
 }

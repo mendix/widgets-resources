@@ -59,6 +59,10 @@
                     <caption>Hide indicator in last slide</caption>
                     <description />
                 </property>
+                <property key="identifier" type="string" required="false">
+                    <caption>Show once identifier</caption>
+                    <description>If this value is set, the intro screens will automatically be shown the first time the user opens the current page. This identifier is used to store locally whether the intro screen with this identifier is already shown. When the identifier is changed, the intro screen will be shown again for one time.</description>
+                </property>
             </propertyGroup>
             <propertyGroup caption="Common">
                 <systemProperty key="Visibility" />
