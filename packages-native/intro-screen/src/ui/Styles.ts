@@ -11,20 +11,21 @@ const defaultButtonBetweenContainer: ViewStyle = {
     bottom: 0,
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    paddingVertical: 12
 };
 
 const defaultButtonBelowContainer: ViewStyle = {
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    paddingVertical: 12
 };
 
 const defaultButtonCaption: TextStyle = {
     backgroundColor: "transparent",
     color: "black",
     fontSize: 18,
-    padding: 12,
     alignSelf: "center"
 };
 
@@ -91,7 +92,8 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
                 ...defaultButtonBelowContainer
             },
             caption: {
-                ...defaultButtonCaption
+                ...defaultButtonCaption,
+                paddingHorizontal: 5
             },
             icon: {
                 color: "black"
@@ -102,7 +104,8 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
                 ...defaultButtonBelowContainer
             },
             caption: {
-                ...defaultButtonCaption
+                ...defaultButtonCaption,
+                paddingHorizontal: 5
             },
             icon: {
                 color: "black"
@@ -113,7 +116,8 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
                 ...defaultButtonBelowContainer
             },
             caption: {
-                ...defaultButtonCaption
+                ...defaultButtonCaption,
+                paddingHorizontal: 5
             },
             icon: {
                 color: "black"
@@ -124,7 +128,8 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
                 ...defaultButtonBelowContainer
             },
             caption: {
-                ...defaultButtonCaption
+                ...defaultButtonCaption,
+                paddingHorizontal: 5
             },
             icon: {
                 color: "black"
@@ -138,7 +143,8 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
                 ...defaultButtonBetweenContainer
             },
             caption: {
-                ...defaultButtonCaption
+                ...defaultButtonCaption,
+                paddingHorizontal: 5
             },
             icon: {
                 color: "black"
@@ -150,7 +156,8 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
                 ...defaultButtonBetweenContainer
             },
             caption: {
-                ...defaultButtonCaption
+                ...defaultButtonCaption,
+                paddingHorizontal: 5
             },
             icon: {
                 color: "black"
@@ -162,7 +169,8 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
                 ...defaultButtonBetweenContainer
             },
             caption: {
-                ...defaultButtonCaption
+                ...defaultButtonCaption,
+                paddingHorizontal: 5
             },
             icon: {
                 color: "black"
@@ -174,7 +182,8 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
                 ...defaultButtonBetweenContainer
             },
             caption: {
-                ...defaultButtonCaption
+                ...defaultButtonCaption,
+                paddingHorizontal: 5
             },
             icon: {
                 color: "black"
