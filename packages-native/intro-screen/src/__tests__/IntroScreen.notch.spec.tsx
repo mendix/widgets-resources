@@ -10,8 +10,8 @@ import { Big } from "big.js";
 jest.mock("mendix/components/native/Icon", () => require.requireActual("./__mocks__/mendix/components/native/Icon"));
 
 jest.mock("react-native-device-info", () => ({
-    hasNotch: jest.fn(),
-    getDeviceId: jest.fn().mockReturnValue("")
+    hasNotch: jest.fn().mockReturnValue(true),
+    getDeviceId: jest.fn().mockReturnValue("iPhone10,6")
 }));
 
 jest.mock("@react-native-community/async-storage", () => ({
@@ -37,11 +37,6 @@ describe("Intro Screen", () => {
             style: [],
             hideIndicatorLastSlide: false
         };
-
-        jest.mock("react-native-device-info", () => ({
-            hasNotch: jest.fn(),
-            getDeviceId: jest.fn().mockReturnValue("iPhone")
-        }));
     });
 
     it("renders", () => {

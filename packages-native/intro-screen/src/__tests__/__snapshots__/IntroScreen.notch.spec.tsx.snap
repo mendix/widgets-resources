@@ -97,7 +97,7 @@ exports[`Intro Screen renders 1`] = `
       <View
         style={
           Object {
-            "bottom": 0,
+            "bottom": 22,
             "left": 0,
             "position": "absolute",
             "right": 0,
@@ -255,7 +255,7 @@ exports[`Intro Screen renders with 1 bottom button 1`] = `
       <View
         style={
           Object {
-            "bottom": 0,
+            "bottom": 22,
             "left": 0,
             "position": "absolute",
             "right": 0,
@@ -429,7 +429,7 @@ exports[`Intro Screen renders with 2 bottom button 1`] = `
       <View
         style={
           Object {
-            "bottom": 0,
+            "bottom": 22,
             "left": 0,
             "position": "absolute",
             "right": 0,
@@ -603,7 +603,7 @@ exports[`Intro Screen renders with active slide attribute 1`] = `
       <View
         style={
           Object {
-            "bottom": 0,
+            "bottom": 22,
             "left": 0,
             "position": "absolute",
             "right": 0,
@@ -761,7 +761,7 @@ exports[`Intro Screen renders with async storage identifier 1`] = `
       <View
         style={
           Object {
-            "bottom": 0,
+            "bottom": 22,
             "left": 0,
             "position": "absolute",
             "right": 0,
