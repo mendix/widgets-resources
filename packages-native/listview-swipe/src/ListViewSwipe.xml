@@ -21,14 +21,13 @@
                 </property>
                 <property key="leftRenderMode" type="enumeration" defaultValue="disabled">
                     <caption>Pattern</caption>
-                    <description>"Show options" will show the background buttons. "Archive" will collapses the item after animating out, "Toggle" animates the item back to the initial state. "Swipe out" animates the item out of the list.</description>
+                    <description>"Show options" will show the background buttons. "Toggle" animates the item back to the initial state. "Swipe out" animates the item out of the list.</description>
                     <enumerationValues>
                         <enumerationValue key="disabled">Disabled</enumerationValue>
                         <enumerationValue key="buttons">Show options (buttons)</enumerationValue>
-                        <enumerationValue key="archive">Archive</enumerationValue>
+                        <enumerationValue key="archive">Swipe out and collapse</enumerationValue>
                         <enumerationValue key="toggle">Toggle</enumerationValue>
                         <enumerationValue key="swipeOutReset">Swipe out and reset</enumerationValue>
-                        <enumerationValue key="swipeOut">Swipe out</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>
@@ -37,31 +36,23 @@
                     <caption>On swipe action</caption>
                     <description>Action triggered for pattern: "Archive" after the item is collapsed, "Toggle" when item passed the threshold, "Swipe out" after the item is animated out of the list.</description>
                 </property>
-                <property key="leftThresholdAttribute" type="attribute" required="false">
-                    <caption>Threshold attribute</caption>
-                    <description>Attribute will be set when the item is passed the action threshold.</description>
-                    <attributeTypes>
-                        <attributeType name="Boolean" />
-                    </attributeTypes>
-                </property>
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Right to Left">
          <propertyGroup caption="Swipe">
                 <property key="right" type="widgets" required="false">
-                    <caption>Left background</caption>
+                    <caption>Right background</caption>
                     <description/>
                 </property>
                 <property key="rightRenderMode" type="enumeration" defaultValue="disabled">
                     <caption>Pattern</caption>
-                    <description>"Show options" will show the background buttons. "Archive" will collapses the item after animating out, "Toggle" animates the item back to the initial state. "Swipe out" animates the item out of the list.</description>
+                    <description>"Show options" will show the background buttons. "Toggle" animates the item back to the initial state. "Swipe out" animates the item out of the list.</description>
                     <enumerationValues>
                         <enumerationValue key="disabled">Disabled</enumerationValue>
                         <enumerationValue key="buttons">Show options (buttons)</enumerationValue>
-                        <enumerationValue key="archive">Archive</enumerationValue>
+                        <enumerationValue key="archive">Swipe out and collapse</enumerationValue>
                         <enumerationValue key="toggle">Toggle</enumerationValue>
                         <enumerationValue key="swipeOutReset">Swipe out and reset</enumerationValue>
-                        <enumerationValue key="swipeOut">Swipe out</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>
@@ -69,13 +60,6 @@
                 <property key="onSwipeRight" type="action" required="false">
                     <caption>On swipe action</caption>
                     <description>Action triggered for pattern: "Archive" after the item is collapsed, "Toggle" when item passed the threshold, "Swipe out" after the item is animated out of the list.</description>
-                </property>
-                <property key="rightThresholdAttribute" type="attribute" required="false">
-                    <caption>Threshold attribute</caption>
-                    <description>Attribute will be set when the item is passed the action threshold.</description>
-                    <attributeTypes>
-                        <attributeType name="Boolean" />
-                    </attributeTypes>
                 </property>
             </propertyGroup>
         </propertyGroup>

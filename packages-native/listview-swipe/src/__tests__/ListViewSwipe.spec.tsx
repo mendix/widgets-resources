@@ -1,10 +1,11 @@
-import { createElement } from "react";
+import { createElement, Fragment } from "react";
 import { View, Text } from "react-native";
 import { render } from "react-native-testing-library";
 import { ListViewSwipe } from "../ListViewSwipe";
 import { ListViewSwipeProps } from "../../typings/ListViewSwipeProps";
 import { ListViewSwipeStyle } from "../ui/styles";
 import { actionValue } from "@native-mobile-resources/util-widgets";
+import { RectButton } from "react-native-gesture-handler";
 
 jest.mock("NativeModules", () => ({
     UIManager: {
@@ -39,7 +40,7 @@ describe("List View Swipe", () => {
             name: "lvtest",
             style: [],
             content: null,
-            leftRenderMode: "swipeOut",
+            leftRenderMode: "swipeOutReset",
             left: (
                 <View>
                     <Text>Test</Text>
@@ -79,7 +80,7 @@ describe("List View Swipe", () => {
         expect(component.toJSON()).toMatchSnapshot();
     });
 
-    it("render with  left and right with actions", () => {
+    it("render with left and right with actions", () => {
         const onChangeAction = actionValue();
         const left = (
             <View>
@@ -100,6 +101,30 @@ describe("List View Swipe", () => {
                 onSwipeRight={onChangeAction}
             />
         );
+
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+
+    it("render with archive animation", () => {
+        const component = render(<ListViewSwipe {...defaultProps} leftRenderMode={"archive"} />);
+
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+
+    it("render with buttons option", () => {
+        const left = (
+            <Fragment>
+                <RectButton>Button 1</RectButton>
+                <RectButton>Button 2</RectButton>
+            </Fragment>
+        );
+        const component = render(<ListViewSwipe {...defaultProps} left={left} leftRenderMode={"buttons"} />);
+
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+
+    it("render with toggle animation", () => {
+        const component = render(<ListViewSwipe {...defaultProps} leftRenderMode={"toggle"} />);
 
         expect(component.toJSON()).toMatchSnapshot();
     });
