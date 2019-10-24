@@ -11,9 +11,9 @@ interface CommonProps<Style> {
     style: Style[];
 }
 
-export type LeftRenderModeEnum = "disabled" | "buttons" | "archive" | "toggle" | "swipeOutReset";
+export type LeftRenderModeEnum = "disabled" | "buttons" | "archive" | "swipeOutReset" | "toggle";
 
-export type RightRenderModeEnum = "disabled" | "buttons" | "archive" | "toggle" | "swipeOutReset";
+export type RightRenderModeEnum = "disabled" | "buttons" | "archive" | "swipeOutReset" | "toggle";
 
 export interface ListViewSwipeProps<Style> extends CommonProps<Style> {
     content: ReactNode;

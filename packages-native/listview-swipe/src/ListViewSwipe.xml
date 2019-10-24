@@ -21,20 +21,20 @@
                 </property>
                 <property key="leftRenderMode" type="enumeration" defaultValue="disabled">
                     <caption>Pattern</caption>
-                    <description>"Show options" will show the background buttons. "Toggle" animates the item back to the initial state. "Swipe out" animates the item out of the list.</description>
+                    <description>"Show options" will show the background buttons. "Toggle" animates the item back to the initial state. "Swipe out and reset" animates the item out of the list.</description>
                     <enumerationValues>
                         <enumerationValue key="disabled">Disabled</enumerationValue>
                         <enumerationValue key="buttons">Show options (buttons)</enumerationValue>
                         <enumerationValue key="archive">Swipe out and collapse</enumerationValue>
-                        <enumerationValue key="toggle">Toggle</enumerationValue>
                         <enumerationValue key="swipeOutReset">Swipe out and reset</enumerationValue>
+                        <enumerationValue key="toggle">Toggle</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Events">
                 <property key="onSwipeLeft" type="action" required="false">
                     <caption>On swipe action</caption>
-                    <description>Action triggered for pattern: "Archive" after the item is collapsed, "Toggle" when item passed the threshold, "Swipe out" after the item is animated out of the list.</description>
+                    <description>Action triggered for pattern: "Swipe out and collapse" after the item is collapsed, "Toggle" when item passed the threshold, "Swipe out and reset" after the item is animated out of the list.</description>
                 </property>
             </propertyGroup>
         </propertyGroup>
@@ -46,20 +46,20 @@
                 </property>
                 <property key="rightRenderMode" type="enumeration" defaultValue="disabled">
                     <caption>Pattern</caption>
-                    <description>"Show options" will show the background buttons. "Toggle" animates the item back to the initial state. "Swipe out" animates the item out of the list.</description>
+                    <description>"Show options" will show the background buttons. "Toggle" animates the item back to the initial state. "Swipe out and reset" animates the item out of the list.</description>
                     <enumerationValues>
                         <enumerationValue key="disabled">Disabled</enumerationValue>
                         <enumerationValue key="buttons">Show options (buttons)</enumerationValue>
                         <enumerationValue key="archive">Swipe out and collapse</enumerationValue>
-                        <enumerationValue key="toggle">Toggle</enumerationValue>
                         <enumerationValue key="swipeOutReset">Swipe out and reset</enumerationValue>
+                        <enumerationValue key="toggle">Toggle</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Events">
                 <property key="onSwipeRight" type="action" required="false">
                     <caption>On swipe action</caption>
-                    <description>Action triggered for pattern: "Archive" after the item is collapsed, "Toggle" when item passed the threshold, "Swipe out" after the item is animated out of the list.</description>
+                    <description>Action triggered for pattern: "Swipe out and collapse" after the item is collapsed, "Toggle" when item passed the threshold, "Swipe out and reset" after the item is animated out of the list.</description>
                 </property>
             </propertyGroup>
         </propertyGroup>
