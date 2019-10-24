@@ -72,18 +72,10 @@ exports[`List View Swipe render with archive animation 1`] = `
             }
           }
         />
-        <View
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
-        >
-          <View>
-            <Text>
-              Test
-            </Text>
-          </View>
+        <View>
+          <Text>
+            Test
+          </Text>
         </View>
       </RNGestureHandlerButton>
       <View
@@ -179,7 +171,7 @@ exports[`List View Swipe render with buttons option 1`] = `
         style={
           Object {
             "flexDirection": "row",
-            "width": 192,
+            "width": 128,
           }
         }
       >
@@ -390,18 +382,10 @@ exports[`List View Swipe render with left and action 1`] = `
             }
           }
         />
-        <View
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
-        >
-          <View>
-            <Text>
-              Test
-            </Text>
-          </View>
+        <View>
+          <Text>
+            Test
+          </Text>
         </View>
       </RNGestureHandlerButton>
       <View
@@ -533,18 +517,10 @@ exports[`List View Swipe render with left and right with actions 1`] = `
             }
           }
         />
-        <View
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
-        >
-          <View>
-            <Text>
-              Left Side
-            </Text>
-          </View>
+        <View>
+          <Text>
+            Left Side
+          </Text>
         </View>
       </RNGestureHandlerButton>
       <View
@@ -676,18 +652,10 @@ exports[`List View Swipe render with right and action 1`] = `
             }
           }
         />
-        <View
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
-        >
-          <View>
-            <Text>
-              Test
-            </Text>
-          </View>
+        <View>
+          <Text>
+            Test
+          </Text>
         </View>
       </RNGestureHandlerButton>
       <View
@@ -802,7 +770,7 @@ exports[`List View Swipe render with toggle animation 1`] = `
               },
               Object {
                 "flex": 0,
-                "width": 192,
+                "width": 128,
               },
             ],
           ]
@@ -822,18 +790,10 @@ exports[`List View Swipe render with toggle animation 1`] = `
             }
           }
         />
-        <View
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
-        >
-          <View>
-            <Text>
-              Test
-            </Text>
-          </View>
+        <View>
+          <Text>
+            Test
+          </Text>
         </View>
       </RNGestureHandlerButton>
       <View
@@ -965,18 +925,10 @@ exports[`List View Swipe renders 1`] = `
             }
           }
         />
-        <View
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
-        >
-          <View>
-            <Text>
-              Test
-            </Text>
-          </View>
+        <View>
+          <Text>
+            Test
+          </Text>
         </View>
       </RNGestureHandlerButton>
       <View
