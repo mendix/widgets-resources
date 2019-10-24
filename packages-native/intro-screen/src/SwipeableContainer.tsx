@@ -111,7 +111,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
     };
 
     const renderItem = ({ item }: any): ReactElement => {
-        return <View style={[{ width, flex: 1, alignContent: "stretch" }]}>{item.content}</View>;
+        return <View style={[{ width, flex: 1 }]}>{item.content}</View>;
     };
 
     const renderButton = (
@@ -152,7 +152,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
         return (
             <Container {...containerProps}>
                 <Touchable onPress={onPress}>
-                    <View style={style.container}>
+                    <View style={[style.container, !props.bottomButton ? { width: width / 3 } : {}]}>
                         {iconContent}
                         {caption && <Text style={style.caption}>{caption}</Text>}
                     </View>
@@ -238,8 +238,9 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
         const hidePagination = props.hidePagination || (isLastSlide && props.hideIndicatorLastSlide);
 
         return (
-            <View style={props.styles.paginationContainer}>
-                <View style={styles.paginationDots}>
+            <View style={[props.styles.paginationContainer, !props.bottomButton ? { flexDirection: "row" } : {}]}>
+                {!props.bottomButton && leftButton}
+                <View style={[styles.paginationDots, props.bottomButton ? { width: "100%" } : { width: width / 3 }]}>
                     {!hidePagination &&
                         !paginationOverflow &&
                         props.slides.length > 1 &&
@@ -261,12 +262,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
                         </Text>
                     )}
                 </View>
-                {!props.bottomButton && (
-                    <Fragment>
-                        {leftButton}
-                        {rightButton}
-                    </Fragment>
-                )}
+                {!props.bottomButton && rightButton}
                 {props.bottomButton && (
                     <View style={props.styles.paginationAbove.buttonsContainer}>
                         {props.numberOfButtons === 2 && leftButton}
@@ -341,8 +337,6 @@ const styles = StyleSheet.create({
         flexDirection: isAndroidRTL ? "row-reverse" : "row"
     },
     paginationDots: {
-        height: 16,
-        margin: 16,
         flexDirection: isAndroidRTL ? "row-reverse" : "row",
         justifyContent: "center",
         alignItems: "center"

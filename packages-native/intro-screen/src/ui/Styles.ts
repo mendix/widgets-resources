@@ -27,12 +27,11 @@ const isAndroidRTL = I18nManager.isRTL && Platform.OS === "android";
 const isIphoneWithNotch = DeviceInfo.hasNotch() || (Platform.OS === "ios" && isiPhoneModelWithNotch());
 
 const defaultButtonBetweenContainer: ViewStyle = {
-    position: "absolute",
-    bottom: 0,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 12
+    paddingVertical: 12,
+    alignSelf: "stretch"
 };
 
 const defaultButtonBelowContainer: ViewStyle = {
@@ -94,7 +93,9 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
         position: "absolute",
         bottom: isIphoneWithNotch ? 22 : 0,
         left: 0,
-        right: 0
+        right: 0,
+        justifyContent: "space-between",
+        alignItems: "center"
     },
     paginationText: {
         fontSize: 12,
@@ -104,8 +105,8 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
         buttonsContainer: {
             flex: 1,
             flexDirection: isAndroidRTL ? "row-reverse" : "row",
-            alignItems: "stretch",
-            justifyContent: "center"
+            justifyContent: "center",
+            marginTop: 16
         },
         buttonSkip: {
             container: {
@@ -159,7 +160,6 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
     paginationBetween: {
         buttonSkip: {
             container: {
-                left: 0,
                 ...defaultButtonBetweenContainer
             },
             caption: {
@@ -172,7 +172,6 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
         },
         buttonDone: {
             container: {
-                right: 0,
                 ...defaultButtonBetweenContainer
             },
             caption: {
@@ -185,7 +184,6 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
         },
         buttonPrevious: {
             container: {
-                left: 0,
                 ...defaultButtonBetweenContainer
             },
             caption: {
@@ -198,7 +196,6 @@ export const defaultWelcomeScreenStyle: IntroScreenStyle = {
         },
         buttonNext: {
             container: {
-                right: 0,
                 ...defaultButtonBetweenContainer
             },
             caption: {

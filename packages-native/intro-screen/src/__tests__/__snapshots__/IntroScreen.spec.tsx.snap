@@ -82,7 +82,6 @@ exports[`Intro Screen renders 1`] = `
               style={
                 Array [
                   Object {
-                    "alignContent": "stretch",
                     "flex": 1,
                     "width": 0,
                   },
@@ -96,23 +95,33 @@ exports[`Intro Screen renders 1`] = `
       </RCTScrollView>
       <View
         style={
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-          }
+          Array [
+            Object {
+              "alignItems": "center",
+              "bottom": 0,
+              "justifyContent": "space-between",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+            },
+            Object {
+              "flexDirection": "row",
+            },
+          ]
         }
       >
         <View
           style={
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "height": 16,
-              "justifyContent": "center",
-              "margin": 16,
-            }
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
+              },
+              Object {
+                "width": 0,
+              },
+            ]
           }
         />
         <View
@@ -132,15 +141,18 @@ exports[`Intro Screen renders 1`] = `
         >
           <View
             style={
-              Object {
-                "alignItems": "center",
-                "bottom": 0,
-                "flexDirection": "row",
-                "justifyContent": "center",
-                "paddingVertical": 12,
-                "position": "absolute",
-                "right": 0,
-              }
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "alignSelf": "stretch",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "paddingVertical": 12,
+                },
+                Object {
+                  "width": 0,
+                },
+              ]
             }
           >
             <View
@@ -240,7 +252,6 @@ exports[`Intro Screen renders with 1 bottom button 1`] = `
               style={
                 Array [
                   Object {
-                    "alignContent": "stretch",
                     "flex": 1,
                     "width": 0,
                   },
@@ -254,32 +265,40 @@ exports[`Intro Screen renders with 1 bottom button 1`] = `
       </RCTScrollView>
       <View
         style={
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-          }
+          Array [
+            Object {
+              "alignItems": "center",
+              "bottom": 0,
+              "justifyContent": "space-between",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+            },
+            Object {},
+          ]
         }
       >
         <View
           style={
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "height": 16,
-              "justifyContent": "center",
-              "margin": 16,
-            }
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
+              },
+              Object {
+                "width": "100%",
+              },
+            ]
           }
         />
         <View
           style={
             Object {
-              "alignItems": "stretch",
               "flex": 1,
               "flexDirection": "row",
               "justifyContent": "center",
+              "marginTop": 16,
             }
           }
         >
@@ -307,12 +326,15 @@ exports[`Intro Screen renders with 1 bottom button 1`] = `
             >
               <View
                 style={
-                  Object {
-                    "alignItems": "center",
-                    "flexDirection": "row",
-                    "justifyContent": "center",
-                    "paddingVertical": 12,
-                  }
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "center",
+                      "paddingVertical": 12,
+                    },
+                    Object {},
+                  ]
                 }
               >
                 <View
@@ -414,7 +436,6 @@ exports[`Intro Screen renders with 2 bottom button 1`] = `
               style={
                 Array [
                   Object {
-                    "alignContent": "stretch",
                     "flex": 1,
                     "width": 0,
                   },
@@ -428,32 +449,40 @@ exports[`Intro Screen renders with 2 bottom button 1`] = `
       </RCTScrollView>
       <View
         style={
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-          }
+          Array [
+            Object {
+              "alignItems": "center",
+              "bottom": 0,
+              "justifyContent": "space-between",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+            },
+            Object {},
+          ]
         }
       >
         <View
           style={
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "height": 16,
-              "justifyContent": "center",
-              "margin": 16,
-            }
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
+              },
+              Object {
+                "width": "100%",
+              },
+            ]
           }
         />
         <View
           style={
             Object {
-              "alignItems": "stretch",
               "flex": 1,
               "flexDirection": "row",
               "justifyContent": "center",
+              "marginTop": 16,
             }
           }
         >
@@ -481,12 +510,15 @@ exports[`Intro Screen renders with 2 bottom button 1`] = `
             >
               <View
                 style={
-                  Object {
-                    "alignItems": "center",
-                    "flexDirection": "row",
-                    "justifyContent": "center",
-                    "paddingVertical": 12,
-                  }
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "center",
+                      "paddingVertical": 12,
+                    },
+                    Object {},
+                  ]
                 }
               >
                 <View
@@ -588,7 +620,6 @@ exports[`Intro Screen renders with active slide attribute 1`] = `
               style={
                 Array [
                   Object {
-                    "alignContent": "stretch",
                     "flex": 1,
                     "width": 0,
                   },
@@ -602,23 +633,33 @@ exports[`Intro Screen renders with active slide attribute 1`] = `
       </RCTScrollView>
       <View
         style={
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-          }
+          Array [
+            Object {
+              "alignItems": "center",
+              "bottom": 0,
+              "justifyContent": "space-between",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+            },
+            Object {
+              "flexDirection": "row",
+            },
+          ]
         }
       >
         <View
           style={
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "height": 16,
-              "justifyContent": "center",
-              "margin": 16,
-            }
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
+              },
+              Object {
+                "width": 0,
+              },
+            ]
           }
         />
         <View
@@ -638,15 +679,18 @@ exports[`Intro Screen renders with active slide attribute 1`] = `
         >
           <View
             style={
-              Object {
-                "alignItems": "center",
-                "bottom": 0,
-                "flexDirection": "row",
-                "justifyContent": "center",
-                "paddingVertical": 12,
-                "position": "absolute",
-                "right": 0,
-              }
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "alignSelf": "stretch",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "paddingVertical": 12,
+                },
+                Object {
+                  "width": 0,
+                },
+              ]
             }
           >
             <View
@@ -746,7 +790,6 @@ exports[`Intro Screen renders with async storage identifier 1`] = `
               style={
                 Array [
                   Object {
-                    "alignContent": "stretch",
                     "flex": 1,
                     "width": 0,
                   },
@@ -760,23 +803,33 @@ exports[`Intro Screen renders with async storage identifier 1`] = `
       </RCTScrollView>
       <View
         style={
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-          }
+          Array [
+            Object {
+              "alignItems": "center",
+              "bottom": 0,
+              "justifyContent": "space-between",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+            },
+            Object {
+              "flexDirection": "row",
+            },
+          ]
         }
       >
         <View
           style={
-            Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "height": 16,
-              "justifyContent": "center",
-              "margin": 16,
-            }
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "justifyContent": "center",
+              },
+              Object {
+                "width": 0,
+              },
+            ]
           }
         />
         <View
@@ -796,15 +849,18 @@ exports[`Intro Screen renders with async storage identifier 1`] = `
         >
           <View
             style={
-              Object {
-                "alignItems": "center",
-                "bottom": 0,
-                "flexDirection": "row",
-                "justifyContent": "center",
-                "paddingVertical": 12,
-                "position": "absolute",
-                "right": 0,
-              }
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "alignSelf": "stretch",
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                  "paddingVertical": 12,
+                },
+                Object {
+                  "width": 0,
+                },
+              ]
             }
           >
             <View
