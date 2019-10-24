@@ -32,6 +32,8 @@ jest.mock("NativeModules", () => ({
     }
 }));
 
+jest.mock("NativeAnimatedHelper");
+
 describe("List View Swipe", () => {
     let defaultProps: ListViewSwipeProps<ListViewSwipeStyle>;
 
