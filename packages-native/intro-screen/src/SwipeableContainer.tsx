@@ -125,13 +125,21 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
         let iconContent =
             !icon && !caption ? (
                 <View style={{ alignSelf: "center" }}>
-                    <Icon icon={iconSource} color={style.icon.color ? style.icon.color : "black"} />
+                    <Icon
+                        icon={iconSource}
+                        color={style.icon.color ? style.icon.color : "black"}
+                        size={style.icon.size ? style.icon.size : undefined}
+                    />
                 </View>
             ) : null;
         if (icon && icon.status === ValueStatus.Available && icon.value) {
             iconContent = (
                 <View style={{ alignSelf: "center" }}>
-                    <Icon icon={icon!.value} color={style.icon.color ? style.icon.color : "black"} />
+                    <Icon
+                        icon={icon!.value}
+                        color={style.icon.color ? style.icon.color : "black"}
+                        size={style.icon.size ? style.icon.size : undefined}
+                    />
                 </View>
             );
         }
