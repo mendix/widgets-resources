@@ -29,9 +29,8 @@ export const ListViewSwipe = (props: ListViewSwipeProps<ListViewSwipeStyle>): Re
             return undefined;
         } else if (isLeftSideAction) {
             return renderAction(styles.leftAction, props.left, isLeftToggle);
-        } else {
-            return renderButtons(styles.leftAction, props.left);
         }
+        return renderButtons(styles.leftAction, props.left);
     };
 
     const renderRightActions = (): ReactNode => {
@@ -39,9 +38,8 @@ export const ListViewSwipe = (props: ListViewSwipeProps<ListViewSwipeStyle>): Re
             return undefined;
         } else if (isRightSideAction) {
             return renderAction(styles.rightAction, props.right, isRightToggle);
-        } else {
-            return renderButtons(styles.rightAction, props.right);
         }
+        return renderButtons(styles.rightAction, props.right);
     };
 
     const close = useCallback((): void => {

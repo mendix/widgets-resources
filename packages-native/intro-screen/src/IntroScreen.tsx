@@ -26,10 +26,10 @@ export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Elem
     }, []);
 
     const onDone = useCallback(() => {
+        hideModal();
         if (props.onDone && props.onDone.canExecute) {
             props.onDone.execute();
         }
-        hideModal();
     }, []);
 
     const onSlideChange = useCallback(() => {
@@ -39,10 +39,10 @@ export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Elem
     }, []);
 
     const onSkip = useCallback(() => {
+        hideModal();
         if (props.onSkip && props.onSkip.canExecute) {
             props.onSkip.execute();
         }
-        hideModal();
     }, []);
 
     const checkLabel = (label?: DynamicValue<string>): string | undefined => {
