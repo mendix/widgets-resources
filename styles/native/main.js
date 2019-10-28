@@ -24,6 +24,7 @@ export * from "./core/widgets/floatingactionbutton";
 export * from "./core/helpers/floatingactionbutton";
 export * from "./core/widgets/images";
 export * from "./core/helpers/images";
+export * from "./core/widgets/introscreen";
 export * from "./core/widgets/listviews";
 export * from "./core/helpers/listviews";
 export * from "./core/widgets/listviewswipe";
