@@ -1,5 +1,5 @@
-import merge                             from "./_functions/mergeobjects";
 import { brand, button, contrast, font } from "../variables";
+import merge                             from "./_functions/mergeobjects";
 
 //
 // DISCLAIMER:
@@ -101,6 +101,11 @@ export const btnIconWarning = merge(btnIconPrimary, {
 export const btnIconDanger = merge(btnIconPrimary, {
     icon: {
         color: button.danger.backgroundColor,
+    },
+});
+export const btnIconWhite = merge(btnIconPrimary, {
+    icon: {
+        color: "#FFF",
     },
 });
 

@@ -14,7 +14,7 @@ import { background, border, brand, button, contrast, font, input } from "../var
     Default Class For Mendix Feedback Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_feedback_Feedback = (Feedback = {
+export const com_mendix_widget_native_feedback_Feedback = {
     floatingButton: {
         // All ViewStyle properties are allowed
         borderRadius: 0,
@@ -85,4 +85,4 @@ export const com_mendix_widget_native_feedback_Feedback = (Feedback = {
     activityIndicator: {
         color: font.color,
     },
-});
+};

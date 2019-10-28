@@ -13,7 +13,7 @@ import { brand } from "../variables";
     Default Class For Mendix Activity Indicator Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_activityindicator_ActivityIndicator = (ActivityIndicator = {
+export const com_mendix_widget_native_activityindicator_ActivityIndicator = {
     container: {
         // All ViewStyle properties are allowed
     },
@@ -21,4 +21,4 @@ export const com_mendix_widget_native_activityindicator_ActivityIndicator = (Act
         // Just this property
         color: brand.primary,
     },
-});
+};

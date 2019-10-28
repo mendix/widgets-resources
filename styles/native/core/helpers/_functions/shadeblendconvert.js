@@ -15,19 +15,19 @@
  *
  *
  * @param   {number}    p   Amount of change. Value between -1 and 1
- * @param   {string}    from   HEX / RGB / RGBA Color
- * @param   {string}    to   HEX / RGB / RGBA Color to blend with. If (to === 'c') return value will be RGB Color
+ * @param   {string}    fromValue   HEX / RGB / RGBA Color
+ * @param   {string}    toValue   HEX / RGB / RGBA Color to blend with. If (to === 'c') return value will be RGB Color
  *
  * @return  {string} Returns HEX color or RGB color if parameter to === 'c'
  */
-export default function (p, from, to) {
+export function shadeBlendConvert(p, fromValue, toValue = undefined) {
     if (
         typeof p != "number" ||
         p < -1 ||
         p > 1 ||
-        typeof from != "string" ||
-        (from[0] != "r" && from[0] != "#") ||
-        (to && typeof to != "string")
+        typeof fromValue != "string" ||
+        (fromValue[0] != "r" && fromValue[0] != "#") ||
+        (toValue && typeof toValue != "string")
     ) return null; //ErrorCheck
     if (!this.sbcRip) this.sbcRip = d => {
         const l = d.length,
@@ -56,12 +56,12 @@ export default function (p, from, to) {
     };
     var i = parseInt,
         r = Math.round,
-        h = from.length > 9,
-        h = typeof to == "string" ? (to.length > 9 ? true : to == "c" ? !h : false) : h,
+        h = fromValue.length > 9,
+        h = typeof toValue == "string" ? (toValue.length > 9 ? true : toValue == "c" ? !h : false) : h,
         b = p < 0,
         p = b ? p * -1 : p,
-        to = to && to != "c" ? to : b ? "#000000" : "#FFFFFF",
-        f = this.sbcRip(from),
+        to = toValue && toValue != "c" ? toValue : b ? "#000000" : "#FFFFFF",
+        f = this.sbcRip(fromValue),
         t = this.sbcRip(to);
     if (!f || !t) return null; //ErrorCheck
     if (h) return (

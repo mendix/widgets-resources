@@ -13,7 +13,7 @@ import { contrast, font } from "../variables";
     Default Class For Mendix Badge Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_badge_Badge = (Badge = {
+export const com_mendix_widget_native_badge_Badge = {
     container: {
         // All ViewStyle properties are allowed
         backgroundColor: contrast.lower,
@@ -24,4 +24,4 @@ export const com_mendix_widget_native_badge_Badge = (Badge = {
         color: contrast.higher,
         fontFamily: font.family,
     },
-});
+};

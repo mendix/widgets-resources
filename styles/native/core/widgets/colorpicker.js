@@ -11,7 +11,7 @@
     Default Class For Mendix Color Picker Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_colorpicker_ColorPicker = (ColorPicker = {
+export const com_mendix_widget_native_colorpicker_ColorPicker = {
     container: {
         // All ViewStyle properties are allowed
         height: 150,
@@ -20,4 +20,4 @@ export const com_mendix_widget_native_colorpicker_ColorPicker = (ColorPicker = {
     thumbnail: {
         // All ViewStyle properties are allowed
     },
-});
+};

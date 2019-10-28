@@ -13,7 +13,7 @@ import { background, brand, contrast, font } from "../variables";
     Default Class For Mendix Floating Action Button Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton = (FloatingActionButton = {
+export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton = {
     container: {
         margin: 30,
     },
@@ -63,4 +63,4 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
         },
         elevation: 2,
     },
-});
+};

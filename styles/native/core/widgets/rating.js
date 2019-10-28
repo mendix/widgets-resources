@@ -7,7 +7,7 @@ import { spacing } from "../variables";
 // To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 //
 
-export const com_mendix_widget_native_rating_Rating = (Rating = {
+export const com_mendix_widget_native_rating_Rating = {
     container: {
         // All ViewStyle properties are allowed
     },
@@ -20,4 +20,4 @@ export const com_mendix_widget_native_rating_Rating = (Rating = {
         size: 30,
         marginRight: spacing.smaller,
     },
-});
+};

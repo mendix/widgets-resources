@@ -1,4 +1,4 @@
-import { font, spacing } from "../variables";
+import { font } from "../variables";
 
 //
 // DISCLAIMER:
@@ -27,9 +27,7 @@ export const Text = {
 };
 
 export const TextHeading1 = {
-    container: {
-        marginBottom: spacing.small,
-    },
+    container: {},
     text: {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH1,
@@ -38,9 +36,7 @@ export const TextHeading1 = {
     },
 };
 export const TextHeading2 = {
-    container: {
-        marginBottom: spacing.smaller,
-    },
+    container: {},
     text: {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH2,
@@ -49,9 +45,7 @@ export const TextHeading2 = {
     },
 };
 export const TextHeading3 = {
-    container: {
-        marginBottom: spacing.smaller,
-    },
+    container: {},
     text: {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH3,
@@ -60,9 +54,7 @@ export const TextHeading3 = {
     },
 };
 export const TextHeading4 = {
-    container: {
-        marginBottom: spacing.smallest,
-    },
+    container: {},
     text: {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH4,
@@ -71,9 +63,7 @@ export const TextHeading4 = {
     },
 };
 export const TextHeading5 = {
-    container: {
-        marginBottom: spacing.smallest,
-    },
+    container: {},
     text: {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH5,
@@ -82,9 +72,7 @@ export const TextHeading5 = {
     },
 };
 export const TextHeading6 = {
-    container: {
-        marginBottom: spacing.smallest,
-    },
+    container: {},
     text: {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH6,
