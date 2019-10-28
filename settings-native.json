@@ -8,7 +8,7 @@
                 "options": [
                     {
                         "name": "Small",
-                        "class": "spacingOuterTop"
+                        "class": "spacingOuterTopSmaller"
                     },
                     {
                         "name": "Medium",
@@ -16,7 +16,7 @@
                     },
                     {
                         "name": "Large",
-                        "class": "spacingOuterTopLarge"
+                        "class": "spacingOuterTopLarger"
                     }
                 ]
             },
@@ -27,7 +27,7 @@
                 "options": [
                     {
                         "name": "Small",
-                        "class": "spacingOuterBottom"
+                        "class": "spacingOuterBottomSmaller"
                     },
                     {
                         "name": "Medium",
@@ -35,7 +35,7 @@
                     },
                     {
                         "name": "Large",
-                        "class": "spacingOuterBottomLarge"
+                        "class": "spacingOuterBottomLarger"
                     }
                 ]
             },
@@ -46,7 +46,7 @@
                 "options": [
                     {
                         "name": "Small",
-                        "class": "spacingOuterLeft"
+                        "class": "spacingOuterLeftSmaller"
                     },
                     {
                         "name": "Medium",
@@ -54,7 +54,7 @@
                     },
                     {
                         "name": "Large",
-                        "class": "spacingOuterLeftLarge"
+                        "class": "spacingOuterLeftLarger"
                     }
                 ]
             },
@@ -65,7 +65,7 @@
                 "options": [
                     {
                         "name": "Small",
-                        "class": "spacingOuterRight"
+                        "class": "spacingOuterRightSmaller"
                     },
                     {
                         "name": "Medium",
@@ -73,7 +73,7 @@
                     },
                     {
                         "name": "Large",
-                        "class": "spacingOuterRightLarge"
+                        "class": "spacingOuterRightLarger"
                     }
                 ]
             }
@@ -86,7 +86,7 @@
                 "options": [
                     {
                         "name": "Inner small",
-                        "class": "spacingInnerTop"
+                        "class": "spacingInnerTopSmaller"
                     },
                     {
                         "name": "Inner medium",
@@ -94,11 +94,11 @@
                     },
                     {
                         "name": "Inner large",
-                        "class": "spacingInnerTopLarge"
+                        "class": "spacingInnerTopLarger"
                     },
                     {
                         "name": "Outer small",
-                        "class": "spacingOuterTop"
+                        "class": "spacingOuterTopSmaller"
                     },
                     {
                         "name": "Outer medium",
@@ -106,7 +106,7 @@
                     },
                     {
                         "name": "Outer large",
-                        "class": "spacingOuterTopLarge"
+                        "class": "spacingOuterTopLarger"
                     }
                 ]
             },
@@ -117,7 +117,7 @@
                 "options": [
                     {
                         "name": "Inner small",
-                        "class": "spacingInnerBottom"
+                        "class": "spacingInnerBottomSmaller"
                     },
                     {
                         "name": "Inner medium",
@@ -125,11 +125,11 @@
                     },
                     {
                         "name": "Inner large",
-                        "class": "spacingInnerBottomLarge"
+                        "class": "spacingInnerBottomLarger"
                     },
                     {
                         "name": "Outer small",
-                        "class": "spacingOuterBottom"
+                        "class": "spacingOuterBottomSmaller"
                     },
                     {
                         "name": "Outer medium",
@@ -137,7 +137,7 @@
                     },
                     {
                         "name": "Outer large",
-                        "class": "spacingOuterBottomLarge"
+                        "class": "spacingOuterBottomLarger"
                     }
                 ]
             },
@@ -148,7 +148,7 @@
                 "options": [
                     {
                         "name": "Inner small",
-                        "class": "spacingInnerLeft"
+                        "class": "spacingInnerLeftSmaller"
                     },
                     {
                         "name": "Inner medium",
@@ -156,11 +156,11 @@
                     },
                     {
                         "name": "Inner large",
-                        "class": "spacingInnerLeftLarge"
+                        "class": "spacingInnerLeftLarger"
                     },
                     {
                         "name": "Outer small",
-                        "class": "spacingOuterLeft"
+                        "class": "spacingOuterLeftSmaller"
                     },
                     {
                         "name": "Outer medium",
@@ -168,7 +168,7 @@
                     },
                     {
                         "name": "Outer large",
-                        "class": "spacingOuterLeftLarge"
+                        "class": "spacingOuterLeftLarger"
                     }
                 ]
             },
@@ -179,7 +179,7 @@
                 "options": [
                     {
                         "name": "Inner small",
-                        "class": "spacingInnerRight"
+                        "class": "spacingInnerRightSmaller"
                     },
                     {
                         "name": "Inner medium",
@@ -187,11 +187,11 @@
                     },
                     {
                         "name": "Inner large",
-                        "class": "spacingInnerRightLarge"
+                        "class": "spacingInnerRightLarger"
                     },
                     {
                         "name": "Outer small",
-                        "class": "spacingOuterRight"
+                        "class": "spacingOuterRightSmaller"
                     },
                     {
                         "name": "Outer medium",
@@ -199,7 +199,7 @@
                     },
                     {
                         "name": "Outer large",
-                        "class": "spacingOuterRightLarge"
+                        "class": "spacingOuterRightLarger"
                     }
                 ]
             },
@@ -351,7 +351,7 @@
                 "options": [
                     {
                         "name": "Inner small",
-                        "class": "spacingInnerTop"
+                        "class": "spacingInnerTopSmaller"
                     },
                     {
                         "name": "Inner medium",
@@ -359,11 +359,11 @@
                     },
                     {
                         "name": "Inner large",
-                        "class": "spacingInnerTopLarge"
+                        "class": "spacingInnerTopLarger"
                     },
                     {
                         "name": "Outer small",
-                        "class": "spacingOuterTop"
+                        "class": "spacingOuterTopSmaller"
                     },
                     {
                         "name": "Outer medium",
@@ -371,7 +371,7 @@
                     },
                     {
                         "name": "Outer large",
-                        "class": "spacingOuterTopLarge"
+                        "class": "spacingOuterTopLarger"
                     }
                 ]
             },
@@ -382,7 +382,7 @@
                 "options": [
                     {
                         "name": "Inner small",
-                        "class": "spacingInnerBottom"
+                        "class": "spacingInnerBottomSmaller"
                     },
                     {
                         "name": "Inner medium",
@@ -390,11 +390,11 @@
                     },
                     {
                         "name": "Inner large",
-                        "class": "spacingInnerBottomLarge"
+                        "class": "spacingInnerBottomLarger"
                     },
                     {
                         "name": "Outer small",
-                        "class": "spacingOuterBottom"
+                        "class": "spacingOuterBottomSmaller"
                     },
                     {
                         "name": "Outer medium",
@@ -402,7 +402,7 @@
                     },
                     {
                         "name": "Outer large",
-                        "class": "spacingOuterBottomLarge"
+                        "class": "spacingOuterBottomLarger"
                     }
                 ]
             },
@@ -413,7 +413,7 @@
                 "options": [
                     {
                         "name": "Inner small",
-                        "class": "spacingInnerLeft"
+                        "class": "spacingInnerLeftSmaller"
                     },
                     {
                         "name": "Inner medium",
@@ -421,11 +421,11 @@
                     },
                     {
                         "name": "Inner large",
-                        "class": "spacingInnerLeftLarge"
+                        "class": "spacingInnerLeftLarger"
                     },
                     {
                         "name": "Outer small",
-                        "class": "spacingOuterLeft"
+                        "class": "spacingOuterLeftSmaller"
                     },
                     {
                         "name": "Outer medium",
@@ -433,7 +433,7 @@
                     },
                     {
                         "name": "Outer large",
-                        "class": "spacingOuterLeftLarge"
+                        "class": "spacingOuterLeftLarger"
                     }
                 ]
             },
@@ -444,7 +444,7 @@
                 "options": [
                     {
                         "name": "Inner small",
-                        "class": "spacingInnerRight"
+                        "class": "spacingInnerRightSmaller"
                     },
                     {
                         "name": "Inner medium",
@@ -452,11 +452,11 @@
                     },
                     {
                         "name": "Inner large",
-                        "class": "spacingInnerRightLarge"
+                        "class": "spacingInnerRightLarger"
                     },
                     {
                         "name": "Outer small",
-                        "class": "spacingOuterRight"
+                        "class": "spacingOuterRightSmaller"
                     },
                     {
                         "name": "Outer medium",
@@ -464,7 +464,7 @@
                     },
                     {
                         "name": "Outer large",
-                        "class": "spacingOuterRightLarge"
+                        "class": "spacingOuterRightLarger"
                     }
                 ]
             },
@@ -840,7 +840,7 @@
                 "options": [
                     {
                         "name": "Inner small",
-                        "class": "spacingInnerTop"
+                        "class": "spacingInnerTopSmaller"
                     },
                     {
                         "name": "Inner medium",
@@ -848,11 +848,11 @@
                     },
                     {
                         "name": "Inner large",
-                        "class": "spacingInnerTopLarge"
+                        "class": "spacingInnerTopLarger"
                     },
                     {
                         "name": "Outer small",
-                        "class": "spacingOuterTop"
+                        "class": "spacingOuterTopSmaller"
                     },
                     {
                         "name": "Outer medium",
@@ -860,7 +860,7 @@
                     },
                     {
                         "name": "Outer large",
-                        "class": "spacingOuterTopLarge"
+                        "class": "spacingOuterTopLarger"
                     }
                 ]
             },
@@ -871,7 +871,7 @@
                 "options": [
                     {
                         "name": "Inner small",
-                        "class": "spacingInnerBottom"
+                        "class": "spacingInnerBottomSmaller"
                     },
                     {
                         "name": "Inner medium",
@@ -879,11 +879,11 @@
                     },
                     {
                         "name": "Inner large",
-                        "class": "spacingInnerBottomLarge"
+                        "class": "spacingInnerBottomLarger"
                     },
                     {
                         "name": "Outer small",
-                        "class": "spacingOuterBottom"
+                        "class": "spacingOuterBottomSmaller"
                     },
                     {
                         "name": "Outer medium",
@@ -891,7 +891,7 @@
                     },
                     {
                         "name": "Outer large",
-                        "class": "spacingOuterBottomLarge"
+                        "class": "spacingOuterBottomLarger"
                     }
                 ]
             },
@@ -902,7 +902,7 @@
                 "options": [
                     {
                         "name": "Inner small",
-                        "class": "spacingInnerLeft"
+                        "class": "spacingInnerLeftSmaller"
                     },
                     {
                         "name": "Inner medium",
@@ -910,11 +910,11 @@
                     },
                     {
                         "name": "Inner large",
-                        "class": "spacingInnerLeftLarge"
+                        "class": "spacingInnerLeftLarger"
                     },
                     {
                         "name": "Outer small",
-                        "class": "spacingOuterLeft"
+                        "class": "spacingOuterLeftSmaller"
                     },
                     {
                         "name": "Outer medium",
@@ -922,7 +922,7 @@
                     },
                     {
                         "name": "Outer large",
-                        "class": "spacingOuterLeftLarge"
+                        "class": "spacingOuterLeftLarger"
                     }
                 ]
             },
@@ -933,7 +933,7 @@
                 "options": [
                     {
                         "name": "Inner small",
-                        "class": "spacingInnerRight"
+                        "class": "spacingInnerRightSmaller"
                     },
                     {
                         "name": "Inner medium",
@@ -941,11 +941,11 @@
                     },
                     {
                         "name": "Inner large",
-                        "class": "spacingInnerRightLarge"
+                        "class": "spacingInnerRightLarger"
                     },
                     {
                         "name": "Outer small",
-                        "class": "spacingOuterRight"
+                        "class": "spacingOuterRightSmaller"
                     },
                     {
                         "name": "Outer medium",
@@ -953,7 +953,7 @@
                     },
                     {
                         "name": "Outer large",
-                        "class": "spacingOuterRightLarge"
+                        "class": "spacingOuterRightLarger"
                     }
                 ]
             },
