@@ -49,8 +49,8 @@ export const ListViewSwipe = (props: ListViewSwipeProps<ListViewSwipeStyle>): Re
     }, [row]);
 
     const renderAction = (style: PanelStyle, content: ReactNode, isToggle: boolean): ReactElement => {
-        // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-        const { panelSize, threshold, ...normalStyle } = style;
+        const { panelSize, ...normalStyle } = style;
+        delete normalStyle.threshold;
         return (
             <RectButton style={[normalStyle, isToggle && { flex: 0, width: panelSize }]} onPress={close}>
                 {content}
@@ -59,8 +59,8 @@ export const ListViewSwipe = (props: ListViewSwipeProps<ListViewSwipeStyle>): Re
     };
 
     const renderButtons = (style: PanelStyle, content: ReactNode): ReactElement => {
-        // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-        const { panelSize, threshold, ...normalStyle } = style;
+        const { panelSize, ...normalStyle } = style;
+        delete normalStyle.threshold;
         return (
             <View style={{ width: panelSize, flexDirection: "row" }}>
                 <View style={normalStyle}>{content}</View>

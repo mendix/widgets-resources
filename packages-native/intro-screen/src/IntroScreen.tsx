@@ -11,7 +11,7 @@ export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Elem
     const [visible, setVisible] = useState(false);
     const customStyles = props.style ? props.style.filter(o => o != null) : [];
     const styles =
-        customStyles && customStyles.length > 0
+        customStyles.length > 0
             ? deepmerge.all<IntroScreenStyle>([defaultWelcomeScreenStyle, ...customStyles])
             : defaultWelcomeScreenStyle;
 
