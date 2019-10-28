@@ -23,7 +23,7 @@
         "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
     },
     "dependencies": {
-        "react-native-qrcode-svg": "^5.1.2",
+        "react-native-qrcode-svg": "^5.3.1",
         "@native-mobile-resources/util-widgets": "^1.0.0"
     }
 }

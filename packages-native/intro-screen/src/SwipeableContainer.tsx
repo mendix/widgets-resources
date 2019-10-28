@@ -10,7 +10,6 @@ import {
     useState
 } from "react";
 import {
-    Dimensions,
     FlatList,
     I18nManager,
     LayoutChangeEvent,
@@ -20,21 +19,23 @@ import {
     Text,
     TouchableNativeFeedback,
     TouchableOpacity,
-    View,
-    ViewStyle
+    View
 } from "react-native";
-import DeviceInfo from "react-native-device-info";
-import { IntroScreenStyle } from "./ui/Styles";
+import { ButtonStyle, IntroScreenStyle } from "./ui/Styles";
 import { Icon } from "mendix/components/native/Icon";
 import { SlidesType } from "../typings/IntroScreenProps";
-import { EditableValue, ValueStatus } from "mendix";
+import { EditableValue, ValueStatus, DynamicValue, NativeIcon } from "mendix";
 import { Big } from "big.js";
 
 interface SwipeableContainerProps {
     skipLabel?: string;
+    skipIcon?: DynamicValue<NativeIcon>;
     doneLabel?: string;
+    doneIcon?: DynamicValue<NativeIcon>;
     nextLabel?: string;
+    nextIcon?: DynamicValue<NativeIcon>;
     previousLabel?: string;
+    previousIcon?: DynamicValue<NativeIcon>;
     showDoneButton: boolean;
     showSkipButton: boolean;
     showNextButton: boolean;
@@ -42,26 +43,22 @@ interface SwipeableContainerProps {
     onSlideChange: (next: number, previous: number) => void;
     bottomButton: boolean;
     numberOfButtons: number;
-    renderDoneButton?: () => ReactNode;
-    renderSkipButton?: () => ReactNode;
-    renderPreviousButton?: () => ReactNode;
-    renderNextButton?: () => ReactNode;
     onDone: () => void;
     onSkip: () => void;
     slides: SlidesType[];
     hidePagination: boolean;
+    hideIndicatorLastSlide: boolean;
     styles: IntroScreenStyle;
     activeSlide?: EditableValue<BigJs.Big>;
 }
 
 declare type Option<T> = T | undefined;
 
-const isIphoneWithNotch = Platform.OS === "ios" && DeviceInfo.hasNotch();
 const isAndroidRTL = I18nManager.isRTL && Platform.OS === "android";
 const Touchable: ComponentClass<any> = Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
 
 const refreshActiveSlideAttribute = (slides: SlidesType[], activeSlide?: EditableValue<BigJs.Big>): number => {
-    if (activeSlide && activeSlide.status === ValueStatus.Available) {
+    if (activeSlide && activeSlide.status === ValueStatus.Available && slides && slides.length > 0) {
         const slide = Number(activeSlide.value) - 1;
         if (slide < 0) {
             return 0;
@@ -74,15 +71,13 @@ const refreshActiveSlideAttribute = (slides: SlidesType[], activeSlide?: Editabl
 };
 
 export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement => {
-    const activeSlide = refreshActiveSlideAttribute(props.slides, props.activeSlide);
-    const dimensions = Dimensions.get("window");
-    const [width, setWidth] = useState(dimensions.width);
-    const [activeIndex, setActiveIndex] = useState(activeSlide);
+    const [width, setWidth] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(0);
     const flatList = useRef<FlatList<any>>(null);
 
     useEffect(() => {
         const slide = refreshActiveSlideAttribute(props.slides, props.activeSlide);
-        if (slide !== activeIndex) {
+        if (width && props.activeSlide && props.activeSlide.status === ValueStatus.Available && slide !== activeIndex) {
             goToSlide(slide);
         }
     }, [props.activeSlide, activeIndex, width]);
@@ -116,29 +111,58 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
     };
 
     const renderItem = ({ item }: any): ReactElement => {
-        return <View style={[{ width, flex: 1, alignContent: "stretch" }]}>{item.content}</View>;
+        return <View style={[{ width, flex: 1 }]}>{item.content}</View>;
     };
 
-    const renderDefaultButton = (label: Option<string>, bottomStyle: ViewStyle, icon: string): ReactElement => {
-        const iconSource = { type: "glyph", iconClass: `glyphicon-${icon}` } as const;
-        let content = label ? (
-            <Text style={props.styles.buttonText}>{label}</Text>
-        ) : (
-            <View style={{ alignSelf: "center" }}>
-                <Icon
-                    icon={iconSource}
-                    color={props.styles.buttonText.color ? props.styles.buttonText.color : "black"}
-                />
-            </View>
-        );
-        if (props.bottomButton) {
-            content = <View style={[styles.bottomButtonDefault, bottomStyle]}>{content}</View>;
+    const renderButton = (
+        caption: Option<string>,
+        icon: Option<DynamicValue<NativeIcon>>,
+        defaultIcon: string,
+        style: ButtonStyle,
+        onPress: () => void
+    ): ReactElement => {
+        const iconSource = { type: "glyph", iconClass: `glyphicon-${defaultIcon}` } as const;
+        let iconContent =
+            !icon && !caption ? (
+                <View style={{ alignSelf: "center" }}>
+                    <Icon
+                        icon={iconSource}
+                        color={style.icon.color ? style.icon.color : "black"}
+                        size={style.icon.size ? style.icon.size : undefined}
+                    />
+                </View>
+            ) : null;
+        if (icon && icon.status === ValueStatus.Available && icon.value) {
+            iconContent = (
+                <View style={{ alignSelf: "center" }}>
+                    <Icon
+                        icon={icon!.value}
+                        color={style.icon.color ? style.icon.color : "black"}
+                        size={style.icon.size ? style.icon.size : undefined}
+                    />
+                </View>
+            );
         }
-        return content;
+        const Container = props.bottomButton ? View : Fragment;
+        const containerProps = props.bottomButton
+            ? {
+                  style: styles.flexOne
+              }
+            : {};
+        return (
+            <Container {...containerProps}>
+                <Touchable onPress={onPress}>
+                    <View style={[style.container, !props.bottomButton ? { width: width / 3 } : {}]}>
+                        {iconContent}
+                        {caption && <Text style={style.caption}>{caption}</Text>}
+                    </View>
+                </Touchable>
+            </Container>
+        );
     };
 
     const onSlideChange = (newIndex: number, lastIndex: number): void => {
-        if (props.activeSlide) {
+        if (props.activeSlide && !props.activeSlide.readOnly) {
             props.activeSlide.setValue(new Big(newIndex + 1));
         }
         if (props.onSlideChange) {
@@ -146,62 +170,51 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
         }
     };
 
-    const renderButton = (
-        label: Option<string>,
-        content: Option<() => ReactNode>,
-        onPress: () => void,
-        normalButtonStyle: ViewStyle,
-        bottomButtonStyle: ViewStyle,
-        defaultIcon: string
-    ): ReactElement => {
-        return (
-            <View style={!props.bottomButton ? normalButtonStyle : styles.flexOne}>
-                <Touchable onPress={onPress}>
-                    {content ? content() : renderDefaultButton(label, bottomButtonStyle, defaultIcon)}
-                </Touchable>
-            </View>
-        );
-    };
-
-    const renderNextButton = ({
-        showNextButton,
-        nextLabel,
-        renderNextButton,
-        styles
-    }: SwipeableContainerProps): ReactNode =>
+    const renderNextButton = ({ showNextButton, nextLabel, nextIcon, styles }: SwipeableContainerProps): ReactNode =>
         showNextButton &&
-        renderButton(nextLabel, renderNextButton, onNextPress, styles.rightButton, styles.buttonNext, "chevron-right");
+        renderButton(
+            nextLabel,
+            nextIcon,
+            "chevron-right",
+            props.bottomButton ? styles.paginationAbove.buttonNext : styles.paginationBetween.buttonNext,
+            onNextPress
+        );
 
     const renderPrevButton = ({
         showPreviousButton,
         previousLabel,
-        renderPreviousButton,
+        previousIcon,
         styles
     }: SwipeableContainerProps): ReactNode =>
         showPreviousButton &&
         renderButton(
             previousLabel,
-            renderPreviousButton,
-            onPrevPress,
-            styles.leftButton,
-            styles.buttonPrevious,
-            "chevron-left"
+            previousIcon,
+            "chevron-left",
+            props.bottomButton ? styles.paginationAbove.buttonPrevious : styles.paginationBetween.buttonPrevious,
+            onPrevPress
         );
 
     const renderDoneButton = ({
         showDoneButton,
         doneLabel,
-        renderDoneButton,
+        doneIcon,
         onDone,
         styles
     }: SwipeableContainerProps): ReactNode =>
         showDoneButton &&
-        renderButton(doneLabel, renderDoneButton, onDone && onDone, styles.rightButton, styles.buttonDone, "ok");
+        renderButton(
+            doneLabel,
+            doneIcon,
+            "ok",
+            props.bottomButton ? styles.paginationAbove.buttonDone : styles.paginationBetween.buttonDone,
+            onDone && onDone
+        );
 
     const renderSkipButton = ({
         showSkipButton,
         skipLabel,
-        renderSkipButton,
+        skipIcon,
         onSkip,
         slides,
         styles
@@ -209,11 +222,10 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
         showSkipButton &&
         renderButton(
             skipLabel,
-            renderSkipButton,
-            () => (onSkip ? onSkip() : goToSlide(slides.length - 1)),
-            styles.leftButton,
-            styles.buttonSkip,
-            "remove"
+            skipIcon,
+            "remove",
+            props.bottomButton ? styles.paginationAbove.buttonSkip : styles.paginationBetween.buttonSkip,
+            () => (onSkip ? onSkip() : goToSlide(slides.length - 1))
         );
 
     const renderPagination = (): ReactElement => {
@@ -222,14 +234,18 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
 
         const leftButton = (!isFirstSlide && renderPrevButton(props)) || (!isLastSlide && renderSkipButton(props));
         const rightButton = isLastSlide ? renderDoneButton(props) : renderNextButton(props);
+        const paginationOverflow = props.slides.length > 5;
+        const hidePagination = props.hidePagination || (isLastSlide && props.hideIndicatorLastSlide);
 
         return (
-            <View style={[styles.paginationContainer, props.styles.paginationContainer]}>
-                <View style={[styles.paginationDots, props.styles.paginationDots]}>
-                    {!props.hidePagination &&
+            <View style={[props.styles.paginationContainer, !props.bottomButton ? { flexDirection: "row" } : {}]}>
+                {!props.bottomButton && leftButton}
+                <View style={[styles.paginationDots, props.bottomButton ? { width: "100%" } : { width: width / 3 }]}>
+                    {!hidePagination &&
+                        !paginationOverflow &&
                         props.slides.length > 1 &&
                         props.slides.map((_, i) => (
-                            <Touchable
+                            <TouchableOpacity
                                 key={i}
                                 style={[
                                     styles.dot,
@@ -240,15 +256,15 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
                                 onPress={() => onPaginationPress(i)}
                             />
                         ))}
+                    {!hidePagination && paginationOverflow && (
+                        <Text style={props.styles.paginationText}>
+                            {activeIndex + 1}/{props.slides.length}
+                        </Text>
+                    )}
                 </View>
-                {!props.bottomButton && (
-                    <Fragment>
-                        {leftButton}
-                        {rightButton}
-                    </Fragment>
-                )}
+                {!props.bottomButton && rightButton}
                 {props.bottomButton && (
-                    <View style={styles.bottomButtonsContainer}>
+                    <View style={props.styles.paginationAbove.buttonsContainer}>
                         {props.numberOfButtons === 2 && leftButton}
                         {rightButton}
                     </View>
@@ -320,15 +336,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: isAndroidRTL ? "row-reverse" : "row"
     },
-    paginationContainer: {
-        position: "absolute",
-        bottom: 16 + (isIphoneWithNotch ? 34 : 0),
-        left: 16,
-        right: 16
-    },
     paginationDots: {
-        height: 16,
-        margin: 16,
         flexDirection: isAndroidRTL ? "row-reverse" : "row",
         justifyContent: "center",
         alignItems: "center"
@@ -338,12 +346,6 @@ const styles = StyleSheet.create({
         height: 10,
         borderRadius: 5,
         marginHorizontal: 4
-    },
-    bottomButtonsContainer: {
-        flex: 1,
-        flexDirection: isAndroidRTL ? "row-reverse" : "row",
-        alignItems: "stretch",
-        justifyContent: "center"
     },
     bottomButtonDefault: {
         flex: 1,

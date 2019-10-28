@@ -4,23 +4,23 @@
  * @author Mendix Widgets Team
  */
 import { ActionValue } from "mendix";
+import { ReactNode } from "react";
 
 interface CommonProps<Style> {
+    name: string;
     style: Style[];
 }
 
-export type LeftRenderModeEnum = "disabled" | "action" | "buttons";
+export type LeftRenderModeEnum = "disabled" | "buttons" | "archive" | "swipeOutReset" | "toggle";
 
-export type RightRenderModeEnum = "disabled" | "action" | "buttons";
+export type RightRenderModeEnum = "disabled" | "buttons" | "archive" | "swipeOutReset" | "toggle";
 
 export interface ListViewSwipeProps<Style> extends CommonProps<Style> {
-    content: any;
+    content: ReactNode;
+    left?: ReactNode;
     leftRenderMode: LeftRenderModeEnum;
-    left?: any;
     onSwipeLeft?: ActionValue;
-    closeOnFinishLeft: boolean;
+    right?: ReactNode;
     rightRenderMode: RightRenderModeEnum;
-    right?: any;
     onSwipeRight?: ActionValue;
-    closeOnFinishRight: boolean;
 }

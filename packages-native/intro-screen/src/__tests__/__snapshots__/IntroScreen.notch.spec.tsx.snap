@@ -98,7 +98,7 @@ exports[`Intro Screen renders 1`] = `
           Array [
             Object {
               "alignItems": "center",
-              "bottom": 0,
+              "bottom": 22,
               "justifyContent": "space-between",
               "left": 0,
               "position": "absolute",
@@ -268,7 +268,7 @@ exports[`Intro Screen renders with 1 bottom button 1`] = `
           Array [
             Object {
               "alignItems": "center",
-              "bottom": 0,
+              "bottom": 22,
               "justifyContent": "space-between",
               "left": 0,
               "position": "absolute",
@@ -452,7 +452,7 @@ exports[`Intro Screen renders with 2 bottom button 1`] = `
           Array [
             Object {
               "alignItems": "center",
-              "bottom": 0,
+              "bottom": 22,
               "justifyContent": "space-between",
               "left": 0,
               "position": "absolute",
@@ -636,7 +636,7 @@ exports[`Intro Screen renders with active slide attribute 1`] = `
           Array [
             Object {
               "alignItems": "center",
-              "bottom": 0,
+              "bottom": 22,
               "justifyContent": "space-between",
               "left": 0,
               "position": "absolute",
@@ -806,7 +806,7 @@ exports[`Intro Screen renders with async storage identifier 1`] = `
           Array [
             Object {
               "alignItems": "center",
-              "bottom": 0,
+              "bottom": 22,
               "justifyContent": "space-between",
               "left": 0,
               "position": "absolute",

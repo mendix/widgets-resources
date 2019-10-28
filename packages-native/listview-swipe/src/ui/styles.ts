@@ -3,6 +3,7 @@ import { Style } from "@native-mobile-resources/util-widgets";
 
 export interface PanelStyle extends ViewStyle {
     panelSize: number;
+    threshold: number;
 }
 
 export interface ListViewSwipeStyle extends Style {
@@ -14,9 +15,7 @@ export interface ListViewSwipeStyle extends Style {
 export const defaultListViewSwipeStyle: ListViewSwipeStyle = {
     container: {
         flex: 1,
-        height: 80,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
+        alignItems: "stretch",
         justifyContent: "space-between",
         flexDirection: "column",
         backgroundColor: "white"
@@ -26,13 +25,15 @@ export const defaultListViewSwipeStyle: ListViewSwipeStyle = {
         alignItems: "stretch",
         flex: 1,
         justifyContent: "center",
-        panelSize: 192
+        panelSize: 128,
+        threshold: 64
     },
     rightAction: {
         flexDirection: "row",
         alignItems: "stretch",
         flex: 1,
         justifyContent: "center",
-        panelSize: 192
+        panelSize: 128,
+        threshold: 64
     }
 };
