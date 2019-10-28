@@ -232,10 +232,6 @@
                         "class": "backgroundSecondary"
                     },
                     {
-                        "name": "Gray",
-                        "class": "backgroundGray"
-                    },
-                    {
                         "name": "Brand Primary",
                         "class": "backgroundBrandPrimary"
                     },
@@ -499,10 +495,6 @@
                     {
                         "name": "Secondary",
                         "class": "backgroundSecondary"
-                    },
-                    {
-                        "name": "Gray",
-                        "class": "backgroundGray"
                     },
                     {
                         "name": "Brand Primary",
@@ -992,10 +984,6 @@
                     {
                         "name": "Secondary",
                         "class": "backgroundSecondary"
-                    },
-                    {
-                        "name": "Gray",
-                        "class": "backgroundGray"
                     },
                     {
                         "name": "Brand Primary",
