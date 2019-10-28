@@ -1,3 +1,4 @@
+import { isIphoneWithNotch }                 from "../helpers/_functions/device.js";
 import { shadeBlendConvert }                 from "../helpers/_functions/shadeblendconvert.js";
 import { background, button, font, spacing } from "../variables.js";
 
@@ -19,7 +20,8 @@ import { background, button, font, spacing } from "../variables.js";
 export const introScreenButtonPaginationAbove = {
     container: {
         // Ripplecolor and all ViewStyle properties are allowed
-        flex: 1,
+        flexDirection: "row",
+        alignSelf: "stretch",
         alignItems: "center",
         justifyContent: "center",
         paddingVertical: spacing.regular,
@@ -37,12 +39,14 @@ export const introScreenButtonPaginationAbove = {
         fontFamily: font.family,
         fontWeight: font.weightBold,
         textTransform: "uppercase",
+        paddingHorizontal: spacing.smallest,
     },
 };
 // Button styles when the chose to show the indicator between the buttons
 export const introScreenButtonPaginationBetween = {
     container: {
         // Ripplecolor and all ViewStyle properties are allowed
+        flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
     },
@@ -58,6 +62,7 @@ export const introScreenButtonPaginationBetween = {
         fontFamily: font.family,
         fontWeight: font.weightBold,
         textTransform: "uppercase",
+        paddingHorizontal: spacing.smallest,
     },
 };
 
@@ -77,6 +82,12 @@ export const com_mendix_widget_native_introscreen_IntroScreen = {
     // Pagination styles
     paginationContainer: {
         // All ViewStyle properties are allowed
+        position: "absolute",
+        left: 0,
+        right: 0,
+        bottom: isIphoneWithNotch ? 22 : 0,
+        justifyContent: "space-between",
+        alignItems: "center",
     },
     paginationText: {
         // All TextStyle properties are allowed
@@ -100,6 +111,8 @@ export const com_mendix_widget_native_introscreen_IntroScreen = {
             // All ViewStyle properties are allowed
             flex: 1,
             marginTop: 30,
+            flexDirection: "row",
+            justifyContent: "center",
         },
         buttonSkip: introScreenButtonPaginationAbove,
         buttonPrevious: introScreenButtonPaginationAbove,
