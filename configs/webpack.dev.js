@@ -3,11 +3,12 @@ const baseConfig = require("@mendix/pluggable-widgets-tools/configs/webpack.conf
 
 const customConfig = {
     // Custom configuration goes here
-    devtool: "source-map"
+    devtool: "source-map",
+    externals: ["mendix"]
 };
 const previewConfig = {
     // Custom configuration goes here
-    devtool: "source-map"
+    devtool: "inline-source-map"
 };
 
 module.exports = [merge(baseConfig[0], customConfig), merge(baseConfig[1], previewConfig)];
