@@ -21,8 +21,8 @@ export const brand = {
 
 // Dark Mode - Inherits OS theme if possible
 export const darkMode = NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode
-                        ? NativeModules.RNDarkMode.initialMode === "dark"
-                        : false;
+                 ? NativeModules.RNDarkMode.initialMode === "dark"
+                 : false;
 
 // Background Colors
 const backgroundColor = darkMode ? "#000" : "#FFF";

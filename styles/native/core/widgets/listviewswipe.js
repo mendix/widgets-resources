@@ -25,7 +25,7 @@ export const com_mendix_widget_native_listviewswipe_ListViewSwipe = {
     },
     leftAction: {
         // PanelSize & All ViewStyle properties are allowed
-        panelSize: 192,
+        panelSize: 200,
         flex: 1,
         flexDirection: "row",
         alignItems: "stretch",
@@ -33,7 +33,7 @@ export const com_mendix_widget_native_listviewswipe_ListViewSwipe = {
     },
     rightAction: {
         // PanelSize & All ViewStyle properties are allowed
-        panelSize: 192,
+        panelSize: 200,
         flex: 1,
         flexDirection: "row",
         alignItems: "stretch",

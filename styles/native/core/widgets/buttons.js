@@ -28,7 +28,7 @@ export const ActionButton = {
         paddingHorizontal: button.paddingHorizontal,
     },
     icon: {
-        // Size, Color and all ViewStyle properties are allowed
+        // Size and color are allowed
         color: button.primary.color,
         size: button.fontSizeIcon,
     },
