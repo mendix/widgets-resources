@@ -39,6 +39,10 @@
                     <description />
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name" />
+                <systemProperty key="Visibility" />
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>
