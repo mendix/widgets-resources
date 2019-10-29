@@ -20,7 +20,7 @@ Mendix 8.0
 
 ## Usage
 
-Just drag and drop inside or outside a context
+Just drag and drop the badge button inside or outside a context.
 
 The data source attribute specified in the `Badge` tab is optional. If not set, static data should be specified in the
 `Button` tab.

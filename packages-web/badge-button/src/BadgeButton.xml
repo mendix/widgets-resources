@@ -11,7 +11,7 @@
                     <description>The caption of the button</description>
                     <translations>
                         <translation lang="en_US">Button</translation>
-                        <translation lang="nl_NL">Button</translation>
+                        <translation lang="nl_NL">Knop</translation>
                     </translations>
                 </property>
                 <property key="bootstrapStyle" type="enumeration" defaultValue="default">
