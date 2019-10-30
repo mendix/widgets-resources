@@ -10,6 +10,7 @@ describe("WebView", () => {
 
     beforeEach(() => {
         defaultProps = {
+            name: "webview-test",
             style: [],
             url: dynamicValue("https://mendix.com")
         };

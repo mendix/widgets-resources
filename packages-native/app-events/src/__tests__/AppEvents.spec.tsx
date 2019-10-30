@@ -24,6 +24,7 @@ jest.mock("react-native", () => ({
 }));
 
 const defaultProps: Props = {
+    name: "app-events-test",
     onResumeTimeout: 0,
     onOnlineTimeout: 0,
     onOfflineTimeout: 0,

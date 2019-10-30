@@ -80,6 +80,7 @@ describe("ProgressCircle", () => {
 
 function createProps(progressValue?: number, minimumValue?: number, maximumValue?: number): Props {
     return {
+        name: "progress-circle-test",
         style: [],
         circleText: "percentage",
         progressValue: dynamicValue(progressValue != null ? new Big(progressValue) : undefined),

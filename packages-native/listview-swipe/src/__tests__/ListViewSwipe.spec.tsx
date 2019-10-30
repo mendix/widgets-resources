@@ -39,7 +39,7 @@ describe("List View Swipe", () => {
 
     beforeEach(() => {
         defaultProps = {
-            name: "lvtest",
+            name: "list-view-swipe-test",
             style: [],
             content: null,
             leftRenderMode: "swipeOutReset",

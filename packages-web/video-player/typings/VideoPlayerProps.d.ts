@@ -7,7 +7,7 @@ import { CSSProperties } from "react";
 import { DynamicValue } from "mendix";
 
 interface CommonProps {
-    id: string;
+    name: string;
     class: string;
     style?: CSSProperties;
     tabIndex: number;

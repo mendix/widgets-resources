@@ -6,6 +6,7 @@
 import { ActionValue, DynamicValue, NativeIcon } from "mendix";
 
 interface CommonProps<Style> {
+    name: string;
     style: Style[];
 }
 

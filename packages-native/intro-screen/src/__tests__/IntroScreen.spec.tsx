@@ -24,7 +24,7 @@ describe("Intro Screen", () => {
 
     beforeEach(() => {
         defaultProps = {
-            name: "introscreen",
+            name: "intro-screen-test",
             slides: [
                 {
                     name: "Page 1",

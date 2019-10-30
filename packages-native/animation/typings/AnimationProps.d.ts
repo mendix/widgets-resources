@@ -4,8 +4,10 @@
  * @author Mendix Widgets Team
  */
 import { ActionValue, DynamicValue } from "mendix";
+import { ReactNode } from "react";
 
 interface CommonProps<Style> {
+    name: string;
     style: Style[];
 }
 
@@ -109,7 +111,7 @@ export type EasingEnum =
 export type DirectionEnum = "normal" | "alternate";
 
 export interface AnimationProps<Style> extends CommonProps<Style> {
-    content: any;
+    content: ReactNode;
     animationType: AnimationTypeEnum;
     animationIn: AnimationInEnum;
     animationAttention: AnimationAttentionEnum;

@@ -15,7 +15,6 @@
     "dependencies": {
         "eslint": "^6.1.0",
         "typescript": "^3.5.3",
-        "classnames": "^2.2.6",
-        "mendix": "^8.3.61600"
+        "classnames": "^2.2.6"
     }
 }

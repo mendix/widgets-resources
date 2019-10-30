@@ -12,6 +12,7 @@ describe("BarcodeScanner", () => {
 
     beforeEach(() => {
         defaultProps = {
+            name: "barcode-scanner-test",
             style: [],
             barcode: new EditableValueBuilder<string>().build()
         };
