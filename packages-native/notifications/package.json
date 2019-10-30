@@ -20,5 +20,8 @@
         "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "version": "npm run build:release",
         "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
+    },
+    "dependencies": {
+        "@widgets-resources/piw-utils": "^1.0.0"
     }
 }

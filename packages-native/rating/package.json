@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "@native-mobile-resources/util-widgets": "^1.0.0",
+        "@widgets-resources/piw-utils": "^1.0.0",
         "react-native-star-rating": "^1.1.0"
     },
     "devDependencies": {

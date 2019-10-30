@@ -5,6 +5,7 @@ import SegmentedControlTab from "react-native-segmented-control-tab";
 
 import { ToggleButtonsProps } from "../typings/ToggleButtonsProps";
 import { defaultToggleButtonsStyle, ToggleButtonsStyle } from "./ui/Styles";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 export type Props = ToggleButtonsProps<ToggleButtonsStyle>;
 
@@ -46,8 +47,6 @@ export class ToggleButtons extends Component<Props> {
         const value = this.universe[index];
         this.props.enum.setValue(value);
 
-        if (this.props.onChange && this.props.onChange.canExecute) {
-            this.props.onChange.execute();
-        }
+        executeAction(this.props.onChange);
     }
 }

@@ -6,6 +6,7 @@ import { RectButton } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { defaultListViewSwipeStyle, ListViewSwipeStyle, PanelStyle } from "./ui/styles";
 import { ActionValue } from "mendix";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 export const ListViewSwipe = (props: ListViewSwipeProps<ListViewSwipeStyle>): ReactElement => {
     const row = useRef<Swipeable>(null);
@@ -80,27 +81,21 @@ export const ListViewSwipe = (props: ListViewSwipeProps<ListViewSwipeStyle>): Re
         (renderMode: string, action?: ActionValue): void => {
             if (renderMode === "swipeOutReset" || renderMode === "toggle") {
                 close();
-                triggerAction(action);
+                executeAction(action);
             } else if (renderMode === "archive") {
                 setAnimate(true);
                 Animated.timing(animation, {
                     toValue: 0,
                     duration: 200
                 }).start(() => {
-                    triggerAction(action);
+                    executeAction(action);
                 });
             } else {
-                triggerAction(action);
+                executeAction(action);
             }
         },
         [animation]
     );
-
-    const triggerAction = (action?: ActionValue): void => {
-        if (action && action.canExecute) {
-            action.execute();
-        }
-    };
 
     return (
         <Animated.View style={animate ? { height: animation } : {}}>

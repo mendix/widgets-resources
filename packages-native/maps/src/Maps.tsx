@@ -8,6 +8,7 @@ import MapView, { LatLng, Marker as MarkerView } from "react-native-maps";
 import { DefaultZoomLevelEnum, MapsProps, MarkersType as MarkerProps } from "../typings/MapsProps";
 import { defaultMapsStyle, MapsStyle } from "./ui/Styles";
 import { CachedGeocoder } from "./util/CachedGeocoder";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 type Props = MapsProps<MapsStyle>;
 
@@ -246,9 +247,7 @@ function isValidLongitude(longitude: number): boolean {
 }
 
 function onMarkerPress(action?: ActionValue): void {
-    if (action && action.canExecute) {
-        action.execute();
-    }
+    executeAction(action);
 }
 
 function toZoomValue(level: DefaultZoomLevelEnum): number {

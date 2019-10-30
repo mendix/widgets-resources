@@ -4,6 +4,7 @@ import { Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from 
 
 import { BadgeProps } from "../typings/BadgeProps";
 import { BadgeStyle, defaultBadgeStyle } from "./ui/Styles";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 export type Props = BadgeProps<BadgeStyle>;
 
@@ -41,8 +42,6 @@ export class Badge extends Component<Props> {
     }
 
     private onClick(): void {
-        if (this.props.onClick && this.props.onClick.canExecute) {
-            this.props.onClick.execute();
-        }
+        executeAction(this.props.onClick);
     }
 }
