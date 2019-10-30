@@ -6,10 +6,22 @@
 import { ActionValue, DynamicValue, EditableValue, NativeImage } from "mendix";
 
 interface CommonProps<Style> {
+    name: string;
     style: Style[];
 }
 
-export type AnimationEnum = "pulse" | "bounce" | "flash" | "jello" | "rotate" | "rubberBand" | "shake" | "swing" | "tada" | "wobble" | "none";
+export type AnimationEnum =
+    | "pulse"
+    | "bounce"
+    | "flash"
+    | "jello"
+    | "rotate"
+    | "rubberBand"
+    | "shake"
+    | "swing"
+    | "tada"
+    | "wobble"
+    | "none";
 
 export type EditableEnum = "default" | "never";
 

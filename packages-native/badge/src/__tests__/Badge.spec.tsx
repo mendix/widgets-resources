@@ -11,6 +11,7 @@ jest.mock("Platform", () => ({
 }));
 
 const defaultProps: Props = {
+    name: "badge-test",
     style: [],
     caption: dynamicValue<string>()
 };

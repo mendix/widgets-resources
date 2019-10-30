@@ -59,6 +59,7 @@ describe("ProgressBar", () => {
 
 function createProps(progressValue?: number, minimumValue?: number, maximumValue?: number): Props {
     return {
+        name: "progress-bar-test",
         style: [],
         progressValue: dynamicValue(progressValue != null ? new Big(progressValue) : undefined),
         minimumValue: dynamicValue(minimumValue != null ? new Big(minimumValue) : undefined),

@@ -6,6 +6,7 @@
 import { DynamicValue } from "mendix";
 
 interface CommonProps<Style> {
+    name: string;
     style: Style[];
 }
 

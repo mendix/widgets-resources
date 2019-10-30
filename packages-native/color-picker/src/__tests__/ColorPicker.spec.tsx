@@ -11,6 +11,7 @@ describe("Color Picker", () => {
 
     beforeEach(() => {
         defaultProps = {
+            name: "color-picker-test",
             style: [],
             format: "hex",
             color: new EditableValueBuilder<string>().withValue("#ff0000").build(),

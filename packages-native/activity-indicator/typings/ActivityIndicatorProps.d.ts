@@ -5,9 +5,8 @@
  */
 
 interface CommonProps<Style> {
+    name: string;
     style: Style[];
 }
 
-export interface ActivityIndicatorProps<Style> extends CommonProps<Style> {
-
-}
+export interface ActivityIndicatorProps<Style> extends CommonProps<Style> {}

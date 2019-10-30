@@ -13,6 +13,7 @@ describe("Slider", () => {
 
     beforeEach(() => {
         defaultProps = {
+            name: "slider-test",
             style: [],
             valueAttribute: new EditableValueBuilder<BigJs.Big>().withValue(new Big(140)).build(),
             editable: "default",
