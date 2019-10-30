@@ -14,7 +14,7 @@ interface CommonProps {
     tabIndex: number;
 }
 
-export type BootstrapStyleEnum = "default" | "primary" | "success" | "info" | "warning" | "danger";
+export type BootstrapStyleEnum = "default" | "inverse" | "primary" | "info" | "success" | "warning" | "danger";
 
 export interface BadgeButtonContainerProps extends CommonProps {
     label?: DynamicValue<string>;
