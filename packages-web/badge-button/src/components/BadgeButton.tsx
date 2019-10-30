@@ -2,17 +2,16 @@ import { createElement, ReactElement } from "react";
 import classNames from "classnames";
 
 import "../ui/BadgeButton.css";
+import { BootstrapStyleEnum } from "../../typings/BadgeButtonProps";
 
 export interface BadgeButtonProps {
     className?: string;
     style?: object;
     label?: string;
     value?: string;
-    bootstrapStyle?: BootstrapStyle;
+    bootstrapStyle?: BootstrapStyleEnum;
     onClickAction?: () => void;
 }
-
-export type BootstrapStyle = "default" | "info" | "primary" | "danger" | "success" | "warning";
 
 export const BadgeButton = (props: BadgeButtonProps): ReactElement => (
     <button
