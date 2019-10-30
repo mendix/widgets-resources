@@ -7,6 +7,7 @@ import { Big } from "big.js";
 import { RangeSliderProps } from "../typings/RangeSliderProps";
 import { Marker } from "./Marker";
 import { defaultRangeSliderStyle, RangeSliderStyle } from "./ui/Styles";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 export type Props = RangeSliderProps<RangeSliderStyle>;
 
@@ -92,9 +93,7 @@ export class RangeSlider extends Component<Props, State> {
         this.props.lowerValueAttribute.setValue(new Big(values[0]));
         this.props.upperValueAttribute.setValue(new Big(values[1]));
 
-        if (this.props.onChange && this.props.onChange.canExecute) {
-            this.props.onChange.execute();
-        }
+        executeAction(this.props.onChange);
     }
 
     private validate(): string[] {

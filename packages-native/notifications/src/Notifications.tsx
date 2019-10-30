@@ -3,6 +3,7 @@ import { Component } from "react";
 import firebase, { RNFirebase } from "react-native-firebase";
 
 import { ActionsType, NotificationsProps } from "../typings/NotificationsProps";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 interface NotificationData {
     actionName?: string;
@@ -65,9 +66,7 @@ export class Notifications extends Component<NotificationsProps<undefined>> {
 
         actions.forEach(action => {
             const handler = getHandler(action);
-            if (handler && handler.canExecute) {
-                handler.execute();
-            }
+            executeAction(handler);
         });
 
         if (notification.notificationId) {

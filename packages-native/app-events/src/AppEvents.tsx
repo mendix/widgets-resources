@@ -1,8 +1,8 @@
-import { ActionValue } from "mendix";
 import { Component } from "react";
 import { AppState, AppStateStatus, NetInfo } from "react-native";
 
 import { AppEventsProps } from "../typings/AppEventsProps";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 export type Props = AppEventsProps<undefined>;
 
@@ -85,12 +85,6 @@ export class AppEvents extends Component<Props> {
         }
 
         this.isConnected = nextIsConnected;
-    }
-}
-
-function executeAction(action?: ActionValue): void {
-    if (action && action.canExecute && !action.isExecuting) {
-        action.execute();
     }
 }
 

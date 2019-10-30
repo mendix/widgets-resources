@@ -6,6 +6,7 @@ import { RNCamera } from "react-native-camera";
 
 import { BarcodeScannerProps } from "../typings/BarcodeScannerProps";
 import { BarcodeScannerStyle, defaultBarcodeScannerStyle } from "./ui/styles";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 export type Props = BarcodeScannerProps<BarcodeScannerStyle>;
 
@@ -32,8 +33,6 @@ export class BarcodeScanner extends Component<Props> {
 
         this.props.barcode.setValue(event.data);
 
-        if (this.props.onDetect && this.props.onDetect.canExecute) {
-            this.props.onDetect.execute();
-        }
+        executeAction(this.props.onDetect);
     }
 }

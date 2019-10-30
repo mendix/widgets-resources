@@ -6,6 +6,7 @@ import { DynamicValue, ValueStatus } from "mendix";
 import { SwipeableContainer } from "./SwipeableContainer";
 import AsyncStorage from "@react-native-community/async-storage";
 import deepmerge from "deepmerge";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Element {
     const [visible, setVisible] = useState(false);
@@ -27,23 +28,15 @@ export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Elem
 
     const onDone = useCallback(() => {
         hideModal();
-        if (props.onDone && props.onDone.canExecute) {
-            props.onDone.execute();
-        }
-    }, []);
+        executeAction(props.onDone);
+    }, [props.onDone]);
 
-    const onSlideChange = useCallback(() => {
-        if (props.onSlideChange && props.onSlideChange.canExecute) {
-            props.onSlideChange.execute();
-        }
-    }, []);
+    const onSlideChange = useCallback(() => executeAction(props.onSlideChange), [props.onSlideChange]);
 
     const onSkip = useCallback(() => {
         hideModal();
-        if (props.onSkip && props.onSkip.canExecute) {
-            props.onSkip.execute();
-        }
-    }, []);
+        executeAction(props.onSkip);
+    }, [props.onSkip]);
 
     const checkLabel = (label?: DynamicValue<string>): string | undefined => {
         if (label && label.value && label.status === ValueStatus.Available) {

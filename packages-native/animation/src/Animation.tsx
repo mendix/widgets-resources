@@ -4,6 +4,7 @@ import { Animation as AnimationType, View, Easing } from "react-native-animatabl
 
 import { AnimationProps } from "../typings/AnimationProps";
 import { defaultAnimationStyle, AnimationStyle } from "./ui/Styles";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 export type Props = AnimationProps<AnimationStyle>;
 type Direction = "normal" | "reverse" | "alternate" | "alternate-reverse";
@@ -85,8 +86,6 @@ export class Animation extends Component<Props> {
     }
 
     private onAnimationEnd(): void {
-        if (this.props.afterAnimationAction && this.props.afterAnimationAction.canExecute) {
-            this.props.afterAnimationAction.execute();
-        }
+        executeAction(this.props.afterAnimationAction);
     }
 }

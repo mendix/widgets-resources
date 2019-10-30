@@ -10,6 +10,7 @@ import { AlphaGradient } from "./components/AlphaGradient";
 import { PickerSlider } from "./components/PickerSlider";
 import { ColorPickerStyle, defaultColorPickerStyle } from "./ui/Styles";
 import HSLA = tinycolor.ColorFormats.HSLA;
+import { executeAction } from "@widgets-resources/piw-utils";
 
 interface State {
     color?: HSLA;
@@ -82,9 +83,8 @@ export class ColorPicker extends Component<Props, State> {
         if (this.state.color && this.props.color.value !== this.getColor()) {
             this.setColor();
         }
-        if (this.props.onChange && this.props.onChange.canExecute) {
-            this.props.onChange.execute();
-        }
+
+        executeAction(this.props.onChange);
     }
 
     private setColor(): void {
