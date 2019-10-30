@@ -5,7 +5,7 @@
     "license": "Apache-2.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/mendix/native-mobile-resources.git"
+        "url": "https://github.com/mendix/widgets-resources.git"
     },
     "config": {
         "widgetPath": "../test-project/mxproject/widgets",
