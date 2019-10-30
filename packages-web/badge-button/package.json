@@ -41,6 +41,7 @@
         "@types/classnames": "^2.2.9"
     },
     "dependencies": {
+        "@widgets-resources/piw-utils": "^1.0.0",
         "classnames": "^2.2.6"
     }
 }
