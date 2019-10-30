@@ -3,12 +3,11 @@ import { hot } from "react-hot-loader/root";
 
 import { BadgeButton as BadgeButtonComponent } from "./components/BadgeButton";
 import { BadgeButtonContainerProps } from "../typings/BadgeButtonProps";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 const BadgeButton = (props: BadgeButtonContainerProps): ReactNode => {
     const onClick = useCallback(() => {
-        if (props.onClickEvent && props.onClickEvent.canExecute) {
-            props.onClickEvent.execute();
-        }
+        executeAction(props.onClickEvent);
     }, [props.onClickEvent]);
 
     return (
