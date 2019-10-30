@@ -11,10 +11,5 @@
         "build": "tsc",
         "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "prepare": "npm run build"
-    },
-    "dependencies": {
-        "eslint": "^6.1.0",
-        "typescript": "^3.5.3",
-        "classnames": "^2.2.6"
     }
 }
