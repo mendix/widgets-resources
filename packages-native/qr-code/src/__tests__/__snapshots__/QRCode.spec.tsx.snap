@@ -7,6 +7,7 @@ exports[`QRCode renders a qr code 1`] = `
   <RNSVGSvgView
     bbHeight={100}
     bbWidth={100}
+    focusable={false}
     height={100}
     id="rn-qr-svg-container"
     style={
@@ -16,7 +17,9 @@ exports[`QRCode renders a qr code 1`] = `
           "borderWidth": 0,
         },
         undefined,
-        null,
+        Object {
+          "opacity": 1,
+        },
         Object {
           "flex": 0,
           "height": 100,
@@ -96,8 +99,6 @@ exports[`QRCode renders a qr code 1`] = `
           ]
         }
         rotation={0}
-        rx={0}
-        ry={0}
         scaleX={1}
         scaleY={1}
         skewX={0}
@@ -119,6 +120,7 @@ exports[`QRCode renders a qr code 1`] = `
         align="xMidYMid"
         bbHeight={100}
         bbWidth={100}
+        focusable={false}
         height={100}
         id="qr-container"
         meetOrSlice={0}
@@ -131,7 +133,9 @@ exports[`QRCode renders a qr code 1`] = `
               "borderWidth": 0,
             },
             undefined,
-            null,
+            Object {
+              "opacity": 1,
+            },
             Object {
               "flex": 0,
               "height": 100,
@@ -186,7 +190,45 @@ exports[`QRCode renders a qr code 1`] = `
         >
           <RNSVGDefs>
             <RNSVGClipPath
+              fill={
+                Array [
+                  0,
+                  4278190080,
+                ]
+              }
+              fillOpacity={1}
+              fillRule={1}
+              matrix={
+                Array [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                ]
+              }
               name="clip-wrapper"
+              opacity={1}
+              originX={0}
+              originY={0}
+              propList={Array []}
+              rotation={0}
+              scaleX={1}
+              scaleY={1}
+              skewX={0}
+              skewY={0}
+              stroke={null}
+              strokeDasharray={null}
+              strokeDashoffset={null}
+              strokeLinecap={0}
+              strokeLinejoin={0}
+              strokeMiterlimit={4}
+              strokeOpacity={1}
+              strokeWidth={1}
+              vectorEffect={0}
+              x={0}
+              y={0}
             >
               <RNSVGRect
                 fill={
@@ -234,7 +276,45 @@ exports[`QRCode renders a qr code 1`] = `
               />
             </RNSVGClipPath>
             <RNSVGClipPath
+              fill={
+                Array [
+                  0,
+                  4278190080,
+                ]
+              }
+              fillOpacity={1}
+              fillRule={1}
+              matrix={
+                Array [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                ]
+              }
               name="clip-logo"
+              opacity={1}
+              originX={0}
+              originY={0}
+              propList={Array []}
+              rotation={0}
+              scaleX={1}
+              scaleY={1}
+              skewX={0}
+              skewY={0}
+              stroke={null}
+              strokeDasharray={null}
+              strokeDashoffset={null}
+              strokeLinecap={0}
+              strokeLinejoin={0}
+              strokeMiterlimit={4}
+              strokeOpacity={1}
+              strokeWidth={1}
+              vectorEffect={0}
+              x={0}
+              y={0}
             >
               <RNSVGRect
                 fill={
