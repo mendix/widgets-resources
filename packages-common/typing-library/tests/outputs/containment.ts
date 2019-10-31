@@ -21,7 +21,10 @@ export interface MyWidgetContainerProps extends CommonProps {
     action: ActionValue;
 }
 
-export interface MyWidgetPreviewProps extends CommonProps {
+export interface MyWidgetPreviewProps {
+    class: string;
+    style: string;
+    styleObject: CSSProperties;
     content: ReactNode;
     description: string;
     action: ActionPreview;

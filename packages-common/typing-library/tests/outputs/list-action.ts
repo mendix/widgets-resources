@@ -33,7 +33,10 @@ export interface MyWidgetContainerProps extends CommonProps {
     actions: ActionsType[];
 }
 
-export interface MyWidgetPreviewProps extends CommonProps {
+export interface MyWidgetPreviewProps {
+    class: string;
+    style: string;
+    styleObject: CSSProperties;
     actions: ActionsPreviewType[];
 }
 
