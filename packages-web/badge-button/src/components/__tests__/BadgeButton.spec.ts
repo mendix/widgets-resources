@@ -13,7 +13,7 @@ describe("BadgeButton", () => {
     it("should render the structure", () => {
         const badgeProps: BadgeButtonProps = {
             label: "Custom Label",
-            onClickAction: expect.any(Function),
+            onClick: expect.any(Function),
             value: "0"
         };
         const badge = createBadgeButton(badgeProps);
@@ -34,12 +34,12 @@ describe("BadgeButton", () => {
     });
 
     it("with a click action should respond to click events", () => {
-        const badgeProps: BadgeButtonProps = { onClickAction: jasmine.createSpy("onClick") };
+        const badgeProps: BadgeButtonProps = { onClick: jasmine.createSpy("onClick") };
         const badge = createBadgeButton(badgeProps);
 
         badge.simulate("click");
 
-        expect(badgeProps.onClickAction).toHaveBeenCalled();
+        expect(badgeProps.onClick).toHaveBeenCalled();
     });
 
     it("with the bootstrap style default should have the class btn-default", () => {
