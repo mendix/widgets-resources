@@ -10,7 +10,7 @@ export interface BadgeButtonProps {
     label?: string;
     value?: string;
     bootstrapStyle?: BootstrapStyleEnum;
-    onClickAction?: () => void;
+    onClick?: () => void;
 }
 
 export const BadgeButton = (props: BadgeButtonProps): ReactElement => (
@@ -18,7 +18,7 @@ export const BadgeButton = (props: BadgeButtonProps): ReactElement => (
         className={classNames("widget-badge-button btn", props.className, {
             [`btn-${props.bootstrapStyle}`]: !!props.bootstrapStyle
         })}
-        onClick={props.onClickAction}
+        onClick={props.onClick}
         style={props.style}
     >
         <span className="widget-badge-button-text">{props.label}</span>

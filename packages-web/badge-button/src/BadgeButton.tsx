@@ -15,7 +15,7 @@ const BadgeButton = (props: BadgeButtonContainerProps): ReactNode => {
             bootstrapStyle={props.bootstrapStyle}
             className={props.class}
             label={props.label && props.label.status === "available" ? props.label.value : ""}
-            onClickAction={onClick}
+            onClick={onClick}
             style={props.style}
             value={props.value && props.value.status === "available" ? props.value.value : ""}
         />
