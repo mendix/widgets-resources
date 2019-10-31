@@ -1,5 +1,5 @@
 {
-    "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
+    "extends": "../../configs/e2e/tsconfig.json",
     "baseUrl": "./",
     "include": ["./src", "./typings"],
     "exclude": ["./dist/", "./node_modules/", "./src/**/__tests__"]
