@@ -30,7 +30,10 @@ export interface VideoPlayerContainerProps extends CommonProps {
     height: number;
 }
 
-export interface VideoPlayerPreviewProps extends CommonProps {
+export interface VideoPlayerPreviewProps {
+    class: string;
+    style: string;
+    styleObject: CSSProperties;
     urlExpression: string;
     posterExpression?: string;
     autoStart: boolean;
