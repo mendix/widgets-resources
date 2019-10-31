@@ -20,12 +20,12 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
         return (
             <SizeContainer
                 className={classNames("video-player-container", this.props.class)}
-                style={{ ...this.props.style, minHeight: "400px" }}
+                style={{ ...this.props.styleObject, minHeight: "400px" }}
                 widthUnit={this.props.widthUnit}
                 width={this.props.width}
                 heightUnit={this.props.heightUnit}
                 height={this.props.height}
-                tabIndex={this.props.tabIndex}
+                tabIndex={0}
             >
                 {this.renderPlayers()}
             </SizeContainer>
