@@ -387,7 +387,10 @@ import { ReactNode } from "react";`;
     const previewContents = !mobile
         ? `
 
-export interface ${widgetName}PreviewProps extends CommonProps {
+export interface ${widgetName}PreviewProps {
+    class: string;
+    style: string;
+    styleObject: CSSProperties;
 ${modelerTypes}
 }
 

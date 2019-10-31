@@ -33,7 +33,10 @@ export interface MyWidgetContainerProps extends CommonProps {
     icons: IconsType[];
 }
 
-export interface MyWidgetPreviewProps extends CommonProps {
+export interface MyWidgetPreviewProps {
+    class: string;
+    style: string;
+    styleObject: CSSProperties;
     icons: IconsPreviewType[];
 }
 
