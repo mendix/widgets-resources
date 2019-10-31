@@ -6,7 +6,7 @@ exports.config = {
     },
     host: "127.0.0.1",
     port: 4444,
-    specs: ["./tests/e2e/*.spec.ts"],
+    specs: ["./tests/e2e/specs/*.spec.ts"],
     maxInstances: debug ? 1 : 5,
     capabilities: [
         {
@@ -15,8 +15,9 @@ exports.config = {
         }
     ],
     sync: true,
-    logLevel: "silent",
+    logLevel: "debug",
     coloredLogs: true,
+    seleniumLogs: "./results",
     bail: 0,
     screenshotPath: "./dist/wdio/",
     baseUrl: debug ? "http://localhost:8080/" : process.env.URL,
