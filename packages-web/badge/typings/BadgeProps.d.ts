@@ -26,7 +26,10 @@ export interface BadgeContainerProps extends CommonProps {
     onClick: ActionValue;
 }
 
-export interface BadgePreviewProps extends CommonProps {
+export interface BadgePreviewProps {
+    class: string;
+    style: string;
+    styleObject: CSSProperties;
     type: TypeEnum;
     defaultValue?: string;
     valueAttribute?: string;
