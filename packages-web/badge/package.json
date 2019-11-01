@@ -24,6 +24,7 @@
             }
         ]
     },
+    "packagePath": "com.mendix.widget.web",
     "scripts": {
         "start": "../../node_modules/.bin/concurrently \"../../node_modules/.bin/pluggable-widgets-tools start:server --open --subprojectPath $npm_package_config_subprojectFolder\" \"npm:dev\"",
         "dev": "../../node_modules/.bin/pluggable-widgets-tools start:ts --subprojectPath $npm_package_config_subprojectFolder",
@@ -37,10 +38,10 @@
         "svncheckout": "../../node_modules/.bin/ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
     },
     "devDependencies": {
-        "@types/classnames": "^2.2.9",
-        "@widgets-resources/utils-react-widgets": "0.0.1"
+        "@types/classnames": "^2.2.9"
     },
     "dependencies": {
+        "@widgets-resources/piw-utils": "^1.0.0",
         "classnames": "^2.2.6"
     }
 }
