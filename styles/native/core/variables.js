@@ -171,6 +171,7 @@ let navigation = {
         selectedIconColor: brand.primary,
         backgroundColor: background.primary,
         fontSize: font.sizeSmall,
+        iconSize: font.sizeSmall,
     },
     progressOverlay: {
         color: "#FFF",

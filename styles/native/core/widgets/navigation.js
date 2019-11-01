@@ -64,12 +64,12 @@ export const navigationStyle = {
         icon: {
             // All TextStyle properties are allowed
             color: navigation.bottomBar.color,
-            fontSize: navigation.bottomBar.fontSize,
+            fontSize: navigation.bottomBar.iconSize,
         },
         selectedIcon: {
             // All TextStyle properties are allowed
             color: navigation.bottomBar.selectedIconColor,
-            fontSize: navigation.bottomBar.fontSize,
+            fontSize: navigation.bottomBar.iconSize,
         },
     },
     progressOverlay: {
