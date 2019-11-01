@@ -53,6 +53,7 @@
         <propertyGroup caption="Events">
             <property key="onClick" type="action">
                 <caption>On click</caption>
+                <description />
             </property>
         </propertyGroup>
         <propertyGroup caption="Visibility">
