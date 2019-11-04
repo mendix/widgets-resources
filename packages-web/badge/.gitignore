@@ -7,10 +7,10 @@
 
 /tests/TestProjects/**/widgets/*
 !/tests/TestProjects/**/widgets/Badge.mpk
+!/tests/TestProjects/**/widgets/com.mendix.widget.web.Badge.mpk
 
 /tests/TestProjects/Mendix8/theme/styles/native
 /tests/TestProjects/Mendix8/theme/styles/web/sass
-/tests/TestProjects/Mendix8/theme/styles/web/css/main.css.map
 /tests/TestProjects/Mendix8/theme/*.*
 !/tests/TestProjects/Mendix8/theme/components.json
 !/tests/TestProjects/Mendix8/theme/favicon.ico
