@@ -27,7 +27,7 @@
     "packagePath": "com.mendix.widget.web",
     "scripts": {
         "start": "../../node_modules/.bin/concurrently \"../../node_modules/.bin/pluggable-widgets-tools start:server --open --subprojectPath $npm_package_config_subprojectFolder\" \"npm:dev\"",
-        "dev": "../../node_modules/.bin/pluggable-widgets-tools start:ts --subprojectPath $npm_package_config_subprojectFolder",
+        "dev": "../../node_modules/.bin/pluggable-widgets-tools start:ts -- --subprojectPath $npm_package_config_subprojectFolder",
         "build": "../../node_modules/.bin/pluggable-widgets-tools build:ts --subprojectPath $npm_package_config_subprojectFolder",
         "format": "../../node_modules/.bin/pluggable-widgets-tools format --subprojectPath $npm_package_config_subprojectFolder",
         "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
