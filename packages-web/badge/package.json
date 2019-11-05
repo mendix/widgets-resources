@@ -33,7 +33,7 @@
         "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "test": "../../node_modules/.bin/jest --config ../../scripts/test/jest.web.config.js",
         "test:e2e": "URL=https://badge.mxapps.io ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
-        "test:e2e:dev": "URL=https://badge.mxapps.io DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+        "test:e2e:dev": "DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
         "release": "../../node_modules/.bin/pluggable-widgets-tools release:ts --subprojectPath $npm_package_config_subprojectFolder",
         "svncheckout": "../../node_modules/.bin/ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
     },
