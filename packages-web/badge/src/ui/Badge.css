@@ -15,10 +15,15 @@
 .widget-badge.label:empty {
     display: initial;
     /* Fix padding to stay square */
-    padding: .2em .8em .3em;
+    padding: 0.2em 0.8em 0.3em;
 }
 
 .widget-badge.badge {
     min-width: 18px;
     min-height: 18px;
+}
+
+/* Fix missing label-inverse style in Atlas UI */
+.label-inverse {
+    background-color: #252c36;
 }
