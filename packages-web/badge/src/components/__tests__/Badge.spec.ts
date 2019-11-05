@@ -6,11 +6,11 @@ import { Badge, BadgeProps } from "../Badge";
 describe("Badge", () => {
     const createBadge = (props: BadgeProps): ShallowWrapper<any, any> => shallow(createElement(Badge, props));
 
-    it("should render the structure", () => {
+    fit("should render the structure", () => {
         const badgeProps: BadgeProps = {
             type: "badge",
             bootstrapStyle: "default",
-            onClick: expect.any(Function),
+            onClick: jest.fn(),
             value: "0"
         };
         const badge = createBadge(badgeProps);
@@ -20,10 +20,10 @@ describe("Badge", () => {
                 "span",
                 {
                     className: "widget-badge badge label-default",
-                    onClick: expect.any(Function),
+                    onClick: badgeProps.onClick,
                     style: badgeProps.style
                 },
-                expect.any(String)
+                badgeProps.value
             )
         );
     });
