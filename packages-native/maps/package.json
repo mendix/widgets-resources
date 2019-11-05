@@ -14,7 +14,7 @@
     },
     "packagePath": "com.mendix.widget.native",
     "scripts": {
-        "start": "../../node_modules/.bin/pluggable-widgets-tools start:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "start": "../../node_modules/.bin/pluggable-widgets-tools start:ts:native -- --subprojectPath $npm_package_config_subprojectFolder",
         "build": "../../node_modules/.bin/pluggable-widgets-tools build:ts:native --subprojectPath $npm_package_config_subprojectFolder",
         "release": "../../node_modules/.bin/pluggable-widgets-tools release:ts:native --subprojectPath $npm_package_config_subprojectFolder",
         "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
