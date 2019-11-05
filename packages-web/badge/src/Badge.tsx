@@ -4,6 +4,8 @@ import { BadgeContainerProps } from "../typings/BadgeProps";
 import { Badge as DisplayBadge } from "./components/Badge";
 import { executeAction } from "@widgets-resources/piw-utils";
 
+import "./ui/BadgeContainer.css";
+
 const Badge = (props: BadgeContainerProps): ReactNode => {
     const onClick = useCallback(() => {
         executeAction(props.onClick);

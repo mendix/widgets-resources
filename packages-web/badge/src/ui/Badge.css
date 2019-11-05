@@ -22,8 +22,3 @@
     min-width: 18px;
     min-height: 18px;
 }
-
-/* Fix missing label-inverse style in Atlas UI */
-.label-inverse {
-    background-color: #252c36;
-}
