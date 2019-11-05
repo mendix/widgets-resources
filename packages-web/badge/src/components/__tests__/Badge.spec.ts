@@ -6,7 +6,7 @@ import { Badge, BadgeProps } from "../Badge";
 describe("Badge", () => {
     const createBadge = (props: BadgeProps): ShallowWrapper<any, any> => shallow(createElement(Badge, props));
 
-    fit("should render the structure", () => {
+    it("should render the structure", () => {
         const badgeProps: BadgeProps = {
             type: "badge",
             bootstrapStyle: "default",
