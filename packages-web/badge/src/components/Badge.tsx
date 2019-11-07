@@ -17,17 +17,20 @@ export interface BadgeProps {
 
 export type BootstrapStyle = "default" | "info" | "inverse" | "primary" | "danger" | "success" | "warning";
 
-export const Badge = (props: BadgeProps): ReactElement =>
-    createElement(
-        "span",
-        {
-            className: classNames("widget-badge", props.type, props.className, {
-                [`label-${props.bootstrapStyle}`]: !!props.bootstrapStyle,
-                "widget-badge-clickable": props.clickable
-            }),
-            onClick: props.onClick,
-            ref: props.getRef,
-            style: props.style
-        },
-        props.value || props.defaultValue
+export const Badge = (props: BadgeProps): ReactElement => {
+    const { type, defaultValue, className, style, value, bootstrapStyle, clickable, onClick, getRef } = props;
+
+    return (
+        <span
+            className={classNames("widget-badge", type, className, {
+                [`label-${bootstrapStyle}`]: !!bootstrapStyle,
+                "widget-badge-clickable": clickable
+            })}
+            onClick={onClick}
+            ref={getRef}
+            style={style}
+        >
+            {value || defaultValue}
+        </span>
     );
+};
