@@ -1,8 +1,10 @@
 import { hot } from "react-hot-loader/root";
 import { ReactNode, useCallback, createElement } from "react";
+import { executeAction } from "@widgets-resources/piw-utils";
+import { ValueStatus } from "mendix";
+
 import { BadgeContainerProps } from "../typings/BadgeProps";
 import { Badge as DisplayBadge } from "./components/Badge";
-import { executeAction } from "@widgets-resources/piw-utils";
 
 import "./ui/BadgeContainer.css";
 
@@ -15,12 +17,12 @@ const Badge = (props: BadgeContainerProps): ReactNode => {
         <DisplayBadge
             type={props.type}
             defaultValue={
-                // TODO: Use ValueStatus enum from Mendix when it is properly exposed to widgets
-                props.defaultValue && props.defaultValue.status === "available" ? props.defaultValue.value : undefined
+                props.defaultValue && props.defaultValue.status === ValueStatus.Available
+                    ? props.defaultValue.value
+                    : undefined
             }
             value={
-                // TODO: Use ValueStatus enum from Mendix when it is properly exposed to widgets
-                props.valueAttribute && props.valueAttribute.status === "available"
+                props.valueAttribute && props.valueAttribute.status === ValueStatus.Available
                     ? String(props.valueAttribute.value)
                     : undefined
             }
