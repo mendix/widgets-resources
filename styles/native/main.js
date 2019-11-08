@@ -60,6 +60,7 @@ export * from "./core/helpers/helperclasses";
 
 // Building blocks
 export * from "./ui_resources/atlas_ui_resources/buildingblocks/card";
+export * from "./ui_resources/atlas_ui_resources/buildingblocks/header";
 
 
 // Page Templates
