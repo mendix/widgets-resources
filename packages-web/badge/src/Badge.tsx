@@ -26,7 +26,7 @@ const Badge = (props: BadgeContainerProps): ReactNode => {
                     ? String(props.valueAttribute.value)
                     : undefined
             }
-            bootstrapStyle={props.bootstrapStyle}
+            bootstrapStyle={props.brandStyle}
             clickable={props.onClick && props.onClick.canExecute}
             onClick={onClick}
             className={props.class}

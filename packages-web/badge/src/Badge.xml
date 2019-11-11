@@ -34,9 +34,9 @@
                         <attributeType name="Long" />
                     </attributeTypes>
                 </property>
-                <property key="bootstrapStyle" type="enumeration" defaultValue="default">
-                    <caption>Badge style</caption>
-                    <description>The appearance of the badge</description>
+                <property key="brandStyle" type="enumeration" defaultValue="default">
+                    <caption>Brand style</caption>
+                    <description>The brand style that is applied</description>
                     <enumerationValues>
                         <enumerationValue key="default">Default</enumerationValue>
                         <enumerationValue key="primary">Primary</enumerationValue>
