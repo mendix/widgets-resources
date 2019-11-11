@@ -6,13 +6,12 @@ import { Badge } from "./components/Badge";
 declare function require(name: string): string;
 
 export const preview = (props: BadgePreviewProps): ReactElement => {
-    const { class: classname, styleObject, type, defaultValue, valueAttribute, brandStyle, onClick } = props;
+    const { class: classname, styleObject, type, value, brandStyle, onClick } = props;
 
     return (
         <Badge
             type={type}
-            defaultValue={defaultValue}
-            value={valueAttribute}
+            value={value}
             clickable={onClick.type !== "NoClientAction"}
             bootstrapStyle={brandStyle}
             className={classname}

@@ -5,7 +5,7 @@
  */
 import { CSSProperties } from "react";
 import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/typings";
-import { ActionValue, DynamicValue, EditableValue } from "mendix";
+import { ActionValue, DynamicValue } from "mendix";
 
 interface CommonProps {
     name: string;
@@ -20,8 +20,7 @@ export type BrandStyleEnum = "default" | "primary" | "success" | "info" | "inver
 
 export interface BadgeContainerProps extends CommonProps {
     type: TypeEnum;
-    defaultValue?: DynamicValue<string>;
-    valueAttribute?: EditableValue<string | BigJs.Big>;
+    value?: DynamicValue<string>;
     brandStyle: BrandStyleEnum;
     onClick: ActionValue;
 }
@@ -31,16 +30,14 @@ export interface BadgePreviewProps {
     style: string;
     styleObject: CSSProperties;
     type: TypeEnum;
-    defaultValue?: string;
-    valueAttribute?: string;
+    value?: string;
     brandStyle: BrandStyleEnum;
     onClick: ActionPreview;
 }
 
 export interface VisibilityMap {
     type: boolean;
-    defaultValue: boolean;
-    valueAttribute: boolean;
+    value: boolean;
     brandStyle: boolean;
     onClick: boolean;
 }
