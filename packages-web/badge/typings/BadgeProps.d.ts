@@ -16,13 +16,13 @@ interface CommonProps {
 
 export type TypeEnum = "badge" | "label";
 
-export type BootstrapStyleEnum = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
+export type BrandStyleEnum = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
 
 export interface BadgeContainerProps extends CommonProps {
     type: TypeEnum;
     defaultValue?: DynamicValue<string>;
     valueAttribute?: EditableValue<string | BigJs.Big>;
-    bootstrapStyle: BootstrapStyleEnum;
+    brandStyle: BrandStyleEnum;
     onClick: ActionValue;
 }
 
@@ -33,7 +33,7 @@ export interface BadgePreviewProps {
     type: TypeEnum;
     defaultValue?: string;
     valueAttribute?: string;
-    bootstrapStyle: BootstrapStyleEnum;
+    brandStyle: BrandStyleEnum;
     onClick: ActionPreview;
 }
 
@@ -41,6 +41,6 @@ export interface VisibilityMap {
     type: boolean;
     defaultValue: boolean;
     valueAttribute: boolean;
-    bootstrapStyle: boolean;
+    brandStyle: boolean;
     onClick: boolean;
 }
