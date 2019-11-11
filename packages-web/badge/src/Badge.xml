@@ -15,24 +15,13 @@
                         <enumerationValue key="label">Label</enumerationValue>
                     </enumerationValues>
                 </property>
-                <property key="defaultValue" type="textTemplate" required="false">
-                    <caption>Default value</caption>
-                    <description>The badge value shown when no value is provided via the attribute</description>
+                <property key="value" type="textTemplate" required="false">
+                    <caption>Value</caption>
+                    <description />
                     <translations>
                         <translation lang="en_US">Badge</translation>
                         <translation lang="nl_NL">Badge</translation>
                     </translations>
-                </property>
-                <property key="valueAttribute" type="attribute" required="false">
-                    <caption>Value attribute</caption>
-                    <description>The attribute that contains the badge value</description>
-                    <attributeTypes>
-                        <attributeType name="String" />
-                        <attributeType name="Enum" />
-                        <attributeType name="Integer" />
-                        <attributeType name="Decimal" />
-                        <attributeType name="Long" />
-                    </attributeTypes>
                 </property>
                 <property key="brandStyle" type="enumeration" defaultValue="default">
                     <caption>Brand style</caption>

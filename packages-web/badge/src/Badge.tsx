@@ -16,16 +16,7 @@ const Badge = (props: BadgeContainerProps): ReactNode => {
     return (
         <DisplayBadge
             type={props.type}
-            defaultValue={
-                props.defaultValue && props.defaultValue.status === ValueStatus.Available
-                    ? props.defaultValue.value
-                    : undefined
-            }
-            value={
-                props.valueAttribute && props.valueAttribute.status === ValueStatus.Available
-                    ? String(props.valueAttribute.value)
-                    : undefined
-            }
+            value={props.value && props.value.status === ValueStatus.Available ? props.value.value : undefined}
             bootstrapStyle={props.brandStyle}
             clickable={props.onClick && props.onClick.canExecute}
             onClick={onClick}

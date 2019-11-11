@@ -5,7 +5,6 @@ import "../ui/Badge.css";
 
 export interface BadgeProps {
     type: "badge" | "label";
-    defaultValue?: string;
     className?: string;
     style?: object;
     value?: string;
@@ -18,7 +17,7 @@ export interface BadgeProps {
 export type BootstrapStyle = "default" | "info" | "inverse" | "primary" | "danger" | "success" | "warning";
 
 export const Badge = (props: BadgeProps): ReactElement => {
-    const { type, defaultValue, className, style, value, bootstrapStyle, clickable, onClick, getRef } = props;
+    const { type, className, style, value, bootstrapStyle, clickable, onClick, getRef } = props;
 
     return (
         <span
@@ -30,7 +29,7 @@ export const Badge = (props: BadgeProps): ReactElement => {
             ref={getRef}
             style={style}
         >
-            {value || defaultValue}
+            {value}
         </span>
     );
 };
