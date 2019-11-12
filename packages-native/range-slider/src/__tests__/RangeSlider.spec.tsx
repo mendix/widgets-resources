@@ -1,4 +1,4 @@
-import { actionValue, dynamicValue, EditableValueBuilder } from "@native-mobile-resources/util-widgets/test";
+import { actionValue, dynamicValue, EditableValueBuilder } from "@native-mobile-resources/util-widgets";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Big } from "big.js";
 import { createElement } from "react";
@@ -13,6 +13,7 @@ describe("RangeSlider", () => {
 
     beforeEach(() => {
         defaultProps = {
+            name: "range-slider-test",
             style: [],
             lowerValueAttribute: new EditableValueBuilder<BigJs.Big>().withValue(new Big(70)).build(),
             upperValueAttribute: new EditableValueBuilder<BigJs.Big>().withValue(new Big(210)).build(),

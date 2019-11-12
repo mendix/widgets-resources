@@ -7,7 +7,7 @@ import { CSSProperties } from "react";
 import { DynamicValue } from "mendix";
 
 interface CommonProps {
-    id: string;
+    name: string;
     class: string;
     style?: CSSProperties;
     tabIndex: number;
@@ -30,7 +30,10 @@ export interface VideoPlayerContainerProps extends CommonProps {
     height: number;
 }
 
-export interface VideoPlayerPreviewProps extends CommonProps {
+export interface VideoPlayerPreviewProps {
+    class: string;
+    style: string;
+    styleObject: CSSProperties;
     urlExpression: string;
     posterExpression?: string;
     autoStart: boolean;

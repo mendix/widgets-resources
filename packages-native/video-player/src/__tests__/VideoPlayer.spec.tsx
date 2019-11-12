@@ -1,4 +1,4 @@
-import { dynamicValue } from "@native-mobile-resources/util-widgets/test";
+import { dynamicValue } from "@native-mobile-resources/util-widgets";
 import { createElement } from "react";
 import { Text, View } from "react-native";
 import { fireEvent, render } from "react-native-testing-library";
@@ -14,6 +14,7 @@ describe("VideoPlayer", () => {
 
     beforeEach(() => {
         defaultProps = {
+            name: "video-player-test",
             style: [],
             videoUrl: dynamicValue("https://mendix.com/video.mp4"),
             autoStart: false,

@@ -1,4 +1,5 @@
 import { available, flattenStyles, toNumber, unavailable } from "@native-mobile-resources/util-widgets";
+import { executeAction } from "@widgets-resources/piw-utils";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
@@ -73,9 +74,7 @@ export class Slider extends Component<Props, State> {
         this.lastValue = values[0];
         this.props.valueAttribute.setValue(new Big(values[0]));
 
-        if (this.props.onChange && this.props.onChange.canExecute) {
-            this.props.onChange.execute();
-        }
+        executeAction(this.props.onChange);
     }
 
     private validate(): string[] {
@@ -101,6 +100,9 @@ export class Slider extends Component<Props, State> {
             if (minimumValue.value!.gt(maximumValue.value!)) {
                 messages.push("The minimum value can not be greater than the maximum value.");
             } else {
+                if (minimumValue.value!.eq(maximumValue.value!)) {
+                    messages.push("The minimum value can not be equal to the maximum value.");
+                }
                 if (valueAttribute.value!.lt(minimumValue.value!)) {
                     messages.push("The current value can not be less than the minimum value.");
                 }

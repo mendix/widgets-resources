@@ -11,6 +11,5 @@ const customConfig = {
         ]
     }
 };
-const previewConfig = {};
 
-module.exports = [merge(baseConfig[0], customConfig), merge(baseConfig[1], previewConfig)];
+module.exports = [merge(baseConfig[0], customConfig), merge(baseConfig[1], customConfig)];

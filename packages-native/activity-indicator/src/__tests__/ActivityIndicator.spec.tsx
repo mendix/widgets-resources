@@ -4,6 +4,7 @@ import { render } from "react-native-testing-library";
 import { ActivityIndicator, Props } from "../ActivityIndicator";
 
 const defaultProps: Props = {
+    name: "activity-indicator-test",
     style: []
 };
 
@@ -25,7 +26,7 @@ describe("ActivityIndicator", () => {
                 indicator: { size: "large" as const, color: "green" }
             }
         ];
-        const component = render(<ActivityIndicator style={style} />);
+        const component = render(<ActivityIndicator {...defaultProps} style={style} />);
 
         expect(component.toJSON()).toMatchSnapshot();
     });

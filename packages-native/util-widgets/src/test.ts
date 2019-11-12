@@ -1,4 +1,4 @@
-import { ActionValue, DynamicValue, EditableValue, ValueStatus } from "mendix";
+import { ActionValue, DynamicValue, ValueStatus } from "mendix";
 
 export function dynamicValue<T>(value?: T): DynamicValue<T> {
     return value == null ? { status: ValueStatus.Loading, value: undefined } : { status: ValueStatus.Available, value };
@@ -6,6 +6,26 @@ export function dynamicValue<T>(value?: T): DynamicValue<T> {
 
 export function actionValue(canExecute = true, isExecuting = false): ActionValue {
     return { canExecute, isExecuting, execute: jest.fn() };
+}
+
+declare type Option<T> = T | undefined;
+
+declare interface EditableValue<T> {
+    status: ValueStatus;
+    readOnly: boolean;
+    value: Option<T>;
+    displayValue: string;
+    validation: Option<string>;
+    formatter: {
+        format: any;
+        parse: any;
+        getFormatPlaceholder: any;
+    };
+    setValidator: () => void;
+    setValue: (value: T) => void;
+    setTextValue: (value: string) => void;
+    setFormatter: (formatter: any) => void;
+    universe?: T[];
 }
 
 export class EditableValueBuilder<T extends string | boolean | Date | BigJs.Big> {

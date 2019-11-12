@@ -5,6 +5,7 @@ import { WebView as RNWebView } from "react-native-webview";
 
 import { WebViewProps } from "../typings/WebViewProps";
 import { defaultWebViewStyle, WebViewStyle } from "./ui/Styles";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 export type Props = WebViewProps<WebViewStyle>;
 
@@ -43,14 +44,10 @@ export class WebView extends Component<Props> {
     }
 
     private onLoad(): void {
-        if (this.props.onLoad && this.props.onLoad.canExecute) {
-            this.props.onLoad.execute();
-        }
+        executeAction(this.props.onLoad);
     }
 
     private onError(): void {
-        if (this.props.onError && this.props.onError.canExecute) {
-            this.props.onError.execute();
-        }
+        executeAction(this.props.onError);
     }
 }

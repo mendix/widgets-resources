@@ -1,49 +1,47 @@
 {
     "name": "badge-button",
     "widgetName": "BadgeButton",
-    "version": "1.3.0",
+    "version": "2.0.0",
     "description": "A special distinctive mark or token put on any display as a button",
     "copyright": "Mendix BV",
     "repository": {
         "type": "git",
         "url": "https://github.com/mendix/widgets-resources.git"
     },
-    "scripts": {
-        "start": "utils-react-widgets start",
-        "dev": "utils-react-widgets dev",
-        "test:unit": "../../node_modules/.bin/jest --config ../../scripts/test/jest.web.config.js",
-        "test": "npm run test:unit",
-        "test:dev": "utils-react-widgets test:dev",
-        "test:unit:k": "utils-react-widgets test:unit",
-        "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-        "lint:fix": "npm run lint -- --fix",
-        "build": "utils-react-widgets build",
-        "release": "utils-react-widgets release",
-        "svncheckout": "../../node_modules/.bin/ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
-    },
+    "license": "Apache-2.0",
     "config": {
+        "widgetPath": "./tests/TestProjects/Mendix8/widgets",
+        "projectPath": "./tests/TestProjects/Mendix8",
         "mendixHost": "http://localhost:8080",
         "developmentPort": 3000,
+        "subprojectFolder": "packages-web/badge-button",
         "testProjectId": "52d48d8a-38ba-44c6-b297-1a0216c10d28",
         "testProjects": [
             {
-                "revision": 120,
-                "branch": "trunk",
-                "path": "./tests/TestProjects/Mendix7/"
-            },
-            {
-                "revision": 128,
+                "revision": 130,
                 "branch": "MX_8",
                 "path": "./tests/TestProjects/Mendix8/"
             }
         ]
     },
-    "license": "Apache-2.0",
+    "packagePath": "com.mendix.widget.web",
+    "scripts": {
+        "start": "../../node_modules/.bin/concurrently \"../../node_modules/.bin/pluggable-widgets-tools start:server --open --subprojectPath $npm_package_config_subprojectFolder\" \"npm:dev\"",
+        "dev": "../../node_modules/.bin/pluggable-widgets-tools start:ts --subprojectPath $npm_package_config_subprojectFolder",
+        "build": "../../node_modules/.bin/pluggable-widgets-tools build:ts --subprojectPath $npm_package_config_subprojectFolder",
+        "format": "../../node_modules/.bin/pluggable-widgets-tools format --subprojectPath $npm_package_config_subprojectFolder",
+        "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "test": "../../node_modules/.bin/jest --config ../../scripts/test/jest.web.config.js",
+        "test:e2e": "export URL=https://badgebutton.mxapps.io || set URL=https://badgebutton.mxapps.io && wdio ../../configs/e2e/wdio.conf.js",
+        "test:e2e:dev": "export DEBUG=true || set DEBUG=true && wdio ../../configs/e2e/wdio.conf.js",
+        "release": "../../node_modules/.bin/pluggable-widgets-tools release:ts --subprojectPath $npm_package_config_subprojectFolder",
+        "svncheckout": "../../node_modules/.bin/ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+    },
     "devDependencies": {
-        "@types/classnames": "^2.2.7",
-        "@widgets-resources/utils-react-widgets": "0.0.1"
+        "@types/classnames": "^2.2.9"
     },
     "dependencies": {
+        "@widgets-resources/piw-utils": "^1.0.0",
         "classnames": "^2.2.6"
     }
 }

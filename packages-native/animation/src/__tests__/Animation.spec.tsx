@@ -12,6 +12,7 @@ jest.mock("Platform", () => ({
 const textContent = <Text>Hello</Text>;
 
 const defaultProps: Props = {
+    name: "animation-test",
     content: textContent,
     animationType: "in",
     animationIn: "none",

@@ -1,5 +1,4 @@
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
-import { ActionValue } from "mendix";
 import { Icon } from "mendix/components/native/Icon";
 import { Component, createElement } from "react";
 import { View } from "react-native";
@@ -7,6 +6,7 @@ import ActionButton from "react-native-action-button";
 
 import { FloatingActionButtonProps } from "../typings/FloatingActionButtonProps";
 import { defaultFloatingActionButtonStyle, FloatingActionButtonStyle } from "./ui/styles";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 interface State {
     active: boolean;
@@ -121,11 +121,5 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
         }
 
         executeAction(this.props.onClick);
-    }
-}
-
-function executeAction(action?: ActionValue): void {
-    if (action && action.canExecute) {
-        action.execute();
     }
 }

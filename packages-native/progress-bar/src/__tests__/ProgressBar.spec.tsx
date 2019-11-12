@@ -1,4 +1,4 @@
-import { dynamicValue } from "@native-mobile-resources/util-widgets/test";
+import { dynamicValue } from "@native-mobile-resources/util-widgets";
 import { Big } from "big.js";
 import { createElement } from "react";
 import { Text } from "react-native";
@@ -59,6 +59,7 @@ describe("ProgressBar", () => {
 
 function createProps(progressValue?: number, minimumValue?: number, maximumValue?: number): Props {
     return {
+        name: "progress-bar-test",
         style: [],
         progressValue: dynamicValue(progressValue != null ? new Big(progressValue) : undefined),
         minimumValue: dynamicValue(minimumValue != null ? new Big(minimumValue) : undefined),

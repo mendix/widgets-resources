@@ -1,4 +1,4 @@
-import { dynamicValue } from "@native-mobile-resources/util-widgets/test";
+import { dynamicValue } from "@native-mobile-resources/util-widgets";
 import { createElement } from "react";
 import { render } from "react-native-testing-library";
 
@@ -9,6 +9,7 @@ describe("QRCode", () => {
 
     beforeEach(() => {
         defaultProps = {
+            name: "qr-code-test",
             style: [],
             value: dynamicValue("Hello, world!")
         };

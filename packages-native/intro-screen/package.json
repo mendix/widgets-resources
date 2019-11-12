@@ -1,0 +1,33 @@
+{
+    "name": "intro-screen",
+    "widgetName": "IntroScreen",
+    "version": "1.0.1",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mendix/widgets-resources.git"
+    },
+    "config": {
+        "widgetPath": "../test-project/mxproject/widgets",
+        "projectPath": "../test-project/mxproject",
+        "subprojectFolder": "packages-native/intro-screen"
+    },
+    "packagePath": "com.mendix.widget.native",
+    "scripts": {
+        "start": "../../node_modules/.bin/pluggable-widgets-tools start:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "build": "../../node_modules/.bin/pluggable-widgets-tools build:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "release": "../../node_modules/.bin/pluggable-widgets-tools release:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "test": "../../node_modules/.bin/jest --config ../../scripts/test/jest.native.config.js",
+        "version": "npm run release",
+        "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
+    },
+    "devDependencies": {
+        "@types/react-native-app-intro-slider": "^3.0.0"
+    },
+    "dependencies": {
+        "@react-native-community/async-storage": "^1.6.2",
+        "@native-mobile-resources/util-widgets": "^1.0.0",
+        "@widgets-resources/piw-utils": "^1.0.0"
+    }
+}

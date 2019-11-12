@@ -4,8 +4,10 @@
  * @author Mendix Widgets Team
  */
 import { ActionValue, DynamicValue } from "mendix";
+import { ReactNode } from "react";
 
 interface CommonProps<Style> {
+    name: string;
     style: Style[];
 }
 
@@ -27,9 +29,6 @@ export type AnimationInEnum =
     | "fadeInLeftBig"
     | "fadeInRight"
     | "fadeInRightBig"
-    | "flipInX"
-    | "flipInY"
-    | "lightSpeedIn"
     | "slideInDown"
     | "slideInUp"
     | "slideInLeft"
@@ -44,7 +43,6 @@ export type AnimationAttentionEnum =
     | "none"
     | "bounce"
     | "flash"
-    | "jello"
     | "pulse"
     | "rotate"
     | "rubberBand"
@@ -69,9 +67,6 @@ export type AnimationOutEnum =
     | "fadeOutLeftBig"
     | "fadeOutRight"
     | "fadeOutRightBig"
-    | "flipOutX"
-    | "flipOutY"
-    | "lightSpeedOut"
     | "slideOutDown"
     | "slideOutUp"
     | "slideOutLeft"
@@ -116,7 +111,7 @@ export type EasingEnum =
 export type DirectionEnum = "normal" | "alternate";
 
 export interface AnimationProps<Style> extends CommonProps<Style> {
-    content: any;
+    content: ReactNode;
     animationType: AnimationTypeEnum;
     animationIn: AnimationInEnum;
     animationAttention: AnimationAttentionEnum;

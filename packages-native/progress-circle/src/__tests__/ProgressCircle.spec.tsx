@@ -1,4 +1,4 @@
-import { dynamicValue } from "@native-mobile-resources/util-widgets/test";
+import { dynamicValue } from "@native-mobile-resources/util-widgets";
 import { Big } from "big.js";
 import { createElement } from "react";
 import { Text } from "react-native";
@@ -80,6 +80,7 @@ describe("ProgressCircle", () => {
 
 function createProps(progressValue?: number, minimumValue?: number, maximumValue?: number): Props {
     return {
+        name: "progress-circle-test",
         style: [],
         circleText: "percentage",
         progressValue: dynamicValue(progressValue != null ? new Big(progressValue) : undefined),

@@ -1,7 +1,11 @@
+const deepmerge = require("deepmerge");
+
 const base = require("@mendix/pluggable-widgets-tools/configs/eslint.ts.base.json");
 
-base.parserOptions.project = "./tsconfig.json";
+delete base.parserOptions.project;
 
-module.exports = {
-    ...base
-};
+module.exports = deepmerge(base, {
+    rules: {
+        "@typescript-eslint/ban-ts-ignore": "off"
+    }
+});

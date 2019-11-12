@@ -1,4 +1,4 @@
-import { actionValue, dynamicValue } from "@native-mobile-resources/util-widgets/test";
+import { actionValue, dynamicValue } from "@native-mobile-resources/util-widgets";
 import { createElement } from "react";
 import { Platform, Text } from "react-native";
 import { fireEvent, render } from "react-native-testing-library";
@@ -11,6 +11,7 @@ jest.mock("Platform", () => ({
 }));
 
 const defaultProps: Props = {
+    name: "badge-test",
     style: [],
     caption: dynamicValue<string>()
 };

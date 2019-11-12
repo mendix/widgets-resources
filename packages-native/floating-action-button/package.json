@@ -1,11 +1,11 @@
 {
     "name": "floating-action-button",
     "widgetName": "FloatingActionButton",
-    "version": "0.0.2",
+    "version": "0.0.1",
     "license": "Apache-2.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/mendix/native-mobile-resources.git"
+        "url": "https://github.com/mendix/widgets-resources.git"
     },
     "config": {
         "widgetPath": "../test-project/mxproject/widgets",
@@ -16,13 +16,14 @@
     "scripts": {
         "start": "../../node_modules/.bin/pluggable-widgets-tools start:ts:native --subprojectPath $npm_package_config_subprojectFolder",
         "build": "../../node_modules/.bin/pluggable-widgets-tools build:ts:native --subprojectPath $npm_package_config_subprojectFolder",
-        "build:release": "../../node_modules/.bin/pluggable-widgets-tools release:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "release": "../../node_modules/.bin/pluggable-widgets-tools release:ts:native --subprojectPath $npm_package_config_subprojectFolder",
         "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-        "version": "npm run build:release",
+        "version": "npm run release",
         "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
     },
     "dependencies": {
-        "@native-mobile-resources/util-widgets": "^0.0.1",
+        "@native-mobile-resources/util-widgets": "^1.0.0",
+        "@widgets-resources/piw-utils": "^1.0.0",
         "react-native-action-button": "^2.8.5"
     }
 }

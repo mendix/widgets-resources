@@ -1,4 +1,4 @@
-import { actionValue, EditableValueBuilder } from "@native-mobile-resources/util-widgets/test";
+import { actionValue, EditableValueBuilder } from "@native-mobile-resources/util-widgets";
 import { createElement } from "react";
 import { fireEvent, render, RenderAPI } from "react-native-testing-library";
 
@@ -12,6 +12,7 @@ describe("BarcodeScanner", () => {
 
     beforeEach(() => {
         defaultProps = {
+            name: "barcode-scanner-test",
             style: [],
             barcode: new EditableValueBuilder<string>().build()
         };

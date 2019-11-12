@@ -1,4 +1,4 @@
-import { actionValue, dynamicValue } from "@native-mobile-resources/util-widgets/test";
+import { actionValue, dynamicValue } from "@native-mobile-resources/util-widgets";
 import { createElement } from "react";
 import { fireEvent, render } from "react-native-testing-library";
 import { WebView as RNWebView } from "react-native-webview";
@@ -10,6 +10,7 @@ describe("WebView", () => {
 
     beforeEach(() => {
         defaultProps = {
+            name: "webview-test",
             style: [],
             url: dynamicValue("https://mendix.com")
         };

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.introscreen.IntroScreen" supportedPlatform="Native" offlineCapable="true"
+        pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>Intro screen</name>
+    <description />
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABlmWCKAAAER0lEQVR4Ae1bzUsbQRR/m8Q2FgWpSRUpLc1BhH4QcuutxUuxVjx58lao2oN/gT31LoLSYP8EEaGUSg+eRKinEiR6EovtRRo/wEoP1sTmt2XjZDb7Nbuzu+nmQdyZnXkz7/ebN28+TJTLqlCEJRZh7Cr0FgFR94CEKAGFQoEWFxfp6OhItAlP9Lq7u2liYoKy2axQe8JTIAzggRgDAFtERZiAoEeeBezGFmECWAOaOS0cA3jQS0tL/Cup+bGxMU/ab3kAT6NVdPd7pHn7rPJGnmG0Wug8ICzR3Qqo03Kj1UJHgJuI6tQov+s3wqYjwG+jgu7PchUI+5znCeTtNYoJml7kPaBFgOYKUX1axgCvifn+65I+75fpa6lCP3//u4y6dUOhXDpGz+7G6U6n4nWXpu35RsBFFev74gV9+lamCncLt396SfunFfqwV6bn9+L06kGCEj7x4AsBAP/myx8qlMqmowFiPu5d0I+ql7x93OYLCb4EQYy8FXiWGdSFjh8inQDMebi9U4EOdGWLdAIQ8Pg5bwcUdKArW6QTgGgvKm507fYpnQBtqbNrEFvPjS7bjllaOgFmnYehTDoB2OSIihtdu31K3wdgh4dNDiupJNHL+230KBWjm0kxgvhTH9s+m7aqJ90DsL2NKVcgAf7d0+v05HZcGDwL0G1augdgb4/tLXZ4EIx85zWFrO4e3QIz0ufvBqV7AAzB3j6bjqs2we0hQd098neDvhCAgw329i8yiZrbN7qfU5nx4Q/bty8EABNIeP1Q+oxzTF9oLLKK1o6RcQpGd4O+eQBnT2iykScgNFOAd4nZ2dnaq0wmQ6Ojo2p+d3eX1tbWaHt7m05OTqijo4P6+vqov79frZNMVjcaDiS0BGxubtZgFItFGhkZoeXlZVpZWaFK5WpneXx8TPigzvr6Ok1PT9PAwEBN1yrRFFPg7OyMFhYWVAJY8Dy4w8NDmp+fp/Pzc77IMN8UBMD6jY2NGgilurXu6uoiPHkplUq0urrKvzbMh3YKNLI4FovR+Pg4DQ4OUnt7O8Ez5ubmaGtrq676zs5OLWbUFTTINI0HwHaAHx4eVsEjjwA4OTlJIIaVg4MDNmuartc0rRpsYTqdpqGhIZ0RqVSKent7695jGtgVaQTgtDc1NaV+kHYrcHt+pLU2EQ9YKZftX6ZKI0A77fGnL9ZQJ+lcLmdYPZEQD2XSCDC0VrCgp6dHUNNcTRoB+PoqLh+0CwhzM6xLEfVliLjvWFiD7+7m83mLWsEXS/OA4KHZs8DSA/hztOxzuz2zvasVeQ/QEYCgFSXREaBF76iQoIsBYY3e+HFbo9Of24HSEeC2Qa/0nQTbmZkZ4W49I4BfLYwscgLMqA0v3+tigJeNN0Nbwh6A1YL9D4tbsHY9yG0/vL6wB/wvq4WwB7hdLbz2IH5kzfLsXkfYA8w6sFMWlAcBPPrWRGn9elyjIqLPv2IVWb6hRW3vAAAAAElFTkSuQmCC
+    </icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Content">
+                <property key="slides" type="object" isList="true">
+                    <caption>Slides</caption>
+                    <description>Each slide will add a drop zone.</description>
+                    <properties>
+                        <propertyGroup caption="Slide">
+                            <property key="name" type="string">
+                                <caption>Name</caption>
+                                <description />
+                            </property>
+                            <property key="content" type="widgets">
+                                <caption>Content</caption>
+                                <description/>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Display">
+                <property key="showMode" type="enumeration" defaultValue="fullscreen">
+                    <caption>Show as</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="fullscreen">Fullscreen</enumerationValue>
+                        <enumerationValue key="popup">Popup</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="buttonPattern" type="enumeration" defaultValue="all">
+                    <caption>Buttons</caption>
+                    <description>The caption and icon of the buttons change dynamically based on which slide the user is. For example on the first page a skip button is shown but now a previous button.</description>
+                    <enumerationValues>
+                        <enumerationValue key="all">Skip / Previous and Next / Done</enumerationValue>
+                        <enumerationValue key="nextDone">Only Next / Done</enumerationValue>
+                        <enumerationValue key="none">None</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="slideIndicators" type="enumeration" defaultValue="between">
+                    <caption>Show indicator</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="between">Between buttons</enumerationValue>
+                        <enumerationValue key="above">Above buttons</enumerationValue>
+                        <enumerationValue key="never">Never</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="hideIndicatorLastSlide" type="boolean" defaultValue="false">
+                    <caption>Hide indicator in last slide</caption>
+                    <description />
+                </property>
+                <property key="identifier" type="string" required="false">
+                    <caption>Show once identifier</caption>
+                    <description>If this value is set, the intro screens will automatically be shown the first time the user opens the current page. This identifier is used to store locally whether the intro screen with this identifier is already shown. When the identifier is changed, the intro screen will be shown again for one time.</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Visibility" />
+                <systemProperty key="Name"/>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Buttons">
+            <propertyGroup caption="Skip button">
+                <property key="skipCaption" type="textTemplate" required="false">
+                    <caption>Caption</caption>
+                    <description/>
+                </property>
+                <property key="skipIcon" type="icon" required="false">
+                    <caption>Icon</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Previous button">
+                <property key="previousCaption" type="textTemplate" required="false">
+                    <caption>Caption</caption>
+                    <description/>
+                </property>
+                <property key="previousIcon" type="icon" required="false">
+                    <caption>Icon</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Next button">
+                <property key="nextCaption" type="textTemplate" required="false">
+                    <caption>Caption</caption>
+                    <description/>
+                </property>
+                <property key="nextIcon" type="icon" required="false">
+                    <caption>Icon</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Done button">
+                <property key="doneCaption" type="textTemplate" required="false">
+                    <caption>Caption</caption>
+                    <description/>
+                </property>
+                <property key="doneIcon" type="icon" required="false">
+                    <caption>Icon</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <propertyGroup caption="Events">
+                <property key="activeSlideAttribute" type="attribute" required="false">
+                    <caption>Active slide attribute</caption>
+                    <description>Attribute with the active slide number. This can be used in the "On slide change" nanoflow or for changing the active page via a nanoflow.</description>
+                    <attributeTypes>
+                        <attributeType name="Integer" />
+                    </attributeTypes>
+                </property>
+                <property key="onSlideChange" type="action" required="false">
+                    <caption>On slide change</caption>
+                    <description>Triggers when a new slide is showing, after animation. When "Active slide attribute" is set, this can be used the nanoflow.</description>
+                </property>
+                <property key="onDone" type="action" required="false">
+                    <caption>On done</caption>
+                    <description>Triggers when the user clicks the "Done button".</description>
+                </property>
+                <property key="onSkip" type="action" required="false">
+                    <caption>On skip</caption>
+                    <description>Triggers when the user clicks the "Skip button".</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

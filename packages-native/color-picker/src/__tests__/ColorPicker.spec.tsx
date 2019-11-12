@@ -1,4 +1,4 @@
-import { actionValue, EditableValueBuilder } from "@native-mobile-resources/util-widgets/test";
+import { actionValue, EditableValueBuilder } from "@native-mobile-resources/util-widgets";
 import { createElement } from "react";
 import { View } from "react-native";
 import Slider from "react-native-slider";
@@ -11,6 +11,7 @@ describe("Color Picker", () => {
 
     beforeEach(() => {
         defaultProps = {
+            name: "color-picker-test",
             style: [],
             format: "hex",
             color: new EditableValueBuilder<string>().withValue("#ff0000").build(),

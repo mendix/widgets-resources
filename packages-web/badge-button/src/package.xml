@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <package xmlns="http://www.mendix.com/package/1.0/">
-    <clientModule name="BadgeButton" version="1.3.0" xmlns="http://www.mendix.com/clientModule/1.0/">
+    <clientModule name="BadgeButton" version="2.0.0" xmlns="http://www.mendix.com/clientModule/1.0/">
         <widgetFiles>
             <widgetFile path="BadgeButton.xml"/>
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/custom/badgebutton/"/>
+            <file path="com/mendix/widget/web/badgebutton/"/>
         </files>
     </clientModule>
 </package>
