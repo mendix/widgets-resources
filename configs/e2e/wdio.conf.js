@@ -1,12 +1,20 @@
+const path = require("path");
+const fs = require("fs");
 const debug = process.env.DEBUG;
+const basePath = process.cwd();
+
+const e2ePath = path.join(basePath, "/dist/e2e/");
+if (!fs.existsSync(e2ePath)) {
+    fs.mkdirSync(e2ePath, { recursive: true });
+}
 
 exports.config = {
     before() {
-        require("ts-node").register({ files: true, project: "./tests/e2e/tsconfig.json" });
+        require("ts-node").register({ files: true, project: path.join(basePath, "tests/e2e/tsconfig.json") });
     },
     host: "127.0.0.1",
     port: 4444,
-    specs: ["./tests/e2e/specs/*.spec.ts"],
+    specs: [basePath + "/tests/e2e/specs/*.spec.ts"],
     maxInstances: debug ? 1 : 5,
     capabilities: [
         {
@@ -15,17 +23,15 @@ exports.config = {
         }
     ],
     sync: true,
-    logLevel: "debug",
+    logLevel: "trace",
     coloredLogs: true,
-    seleniumLogs: "./results",
     bail: 0,
-    screenshotPath: "./dist/wdio/",
+    screenshotPath: basePath + "/dist/wdio/",
     baseUrl: debug ? "http://localhost:8080/" : process.env.URL,
     waitforTimeout: 30000,
     connectionRetryTimeout: 90000,
     connectionRetryCount: 0,
     services: ["selenium-standalone"],
-
     framework: "jasmine",
     reporters: ["spec"],
     execArgv: debug ? ["--inspect"] : undefined,
@@ -38,5 +44,18 @@ exports.config = {
             }
             browser.saveScreenshot(`./dist/wdio/assertionError_${assertion.error.message}.png`);
         }
+    },
+    afterTest: test => {
+        if (test.passed) {
+            return;
+        }
+        console.log(test);
+        const browserName = browser.capabilities.browserName;
+        const timestamp = new Date().toJSON().replace(/:/g, "-");
+        const testName = test.fullName.replace(/ /g, "_");
+        const filename = `TESTFAIL_${browserName}_${testName}_${timestamp}.png`;
+        const filePath = path.join(e2ePath, filename);
+        browser.saveScreenshot(filePath);
+        console.log("Saved screenshot: ", filePath);
     }
 };
