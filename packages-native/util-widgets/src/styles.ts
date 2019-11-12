@@ -11,16 +11,13 @@ export interface Style {
 export function flattenStyles<T extends Style>(defaultStyle: T, overrideStyles: Array<T | undefined>): T {
     const styles = [defaultStyle, ...overrideStyles.filter((object): object is T => object !== undefined)];
 
-    return Object.keys(defaultStyle).reduce(
-        (flattened, currentKey) => {
-            const styleItems = styles.map(object => object[currentKey]);
-            return {
-                ...flattened,
-                [currentKey]: flattenObjects(styleItems)
-            };
-        },
-        {} as T
-    );
+    return Object.keys(defaultStyle).reduce((flattened, currentKey) => {
+        const styleItems = styles.map(object => object[currentKey]);
+        return {
+            ...flattened,
+            [currentKey]: flattenObjects(styleItems)
+        };
+    }, {} as T);
 }
 
 function flattenObjects<T extends object>(objects: T[]): T {

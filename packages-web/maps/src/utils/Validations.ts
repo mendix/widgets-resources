@@ -12,7 +12,7 @@ export const validateLocationProps = <T extends Partial<Container.MapsContainerP
         defaultCenterLongitude
     } = locationData;
     const errorMessage: string[] = [];
-    if (!autoZoom && (zoomLevel && zoomLevel < 2)) {
+    if (!autoZoom && zoomLevel && zoomLevel < 2) {
         errorMessage.push("Zoom Level should be greater than one");
     }
     if (!(mapProvider === "openStreet") && !apiToken) {

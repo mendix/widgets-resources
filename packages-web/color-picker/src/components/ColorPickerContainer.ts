@@ -166,7 +166,9 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
 
         return (
             editable !== "default" ||
-            (!mxObject || readOnly || !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute)))
+            !mxObject ||
+            readOnly ||
+            !!(colorAttribute && mxObject.isReadonlyAttr(colorAttribute))
         );
     }
 

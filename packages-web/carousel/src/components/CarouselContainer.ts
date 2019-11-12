@@ -182,9 +182,10 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
                     if (this.props.urlAttribute) {
                         resolve(this.getImageProps(mxObject, mxObject.get(this.props.urlAttribute) as string));
                     } else {
-                        const docURL = mx.data.getDocumentUrl(mxObject.getGuid(), mxObject.get(
-                            "changedDate"
-                        ) as number);
+                        const docURL = mx.data.getDocumentUrl(
+                            mxObject.getGuid(),
+                            mxObject.get("changedDate") as number
+                        );
                         mx.data.getImageUrl(
                             docURL,
                             objectUrl => {
