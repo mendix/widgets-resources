@@ -1,39 +1,35 @@
-/* eslint-disable */
 class HomePage {
-    public get badge() {
-        return $("#mxui_widget_ReactCustomWidgetWrapper_4");
+    public open(): void {
+        browser.url("/");
+    }
+
+    private getWidget(widgetName: string): WebdriverIO.Element {
+        const badge = $(`.mx-name-${widgetName}`);
+        badge.waitForDisplayed();
+        return badge;
     }
 
     public get badgeSuccess() {
-        return $(".mx-name-badge6");
+        return this.getWidget("badgeStaticSuccess");
     }
 
     public get badgeDanger() {
-        return $("#mxui_widget_ReactCustomWidgetWrapper_8");
+        return this.getWidget("badgeDanger");
     }
 
     public get labelSuccess() {
-        return $("#mxui_widget_ReactCustomWidgetWrapper_3");
+        return this.getWidget("labelStaticSuccess");
     }
 
     public get labelDanger() {
-        return $("#mxui_widget_ReactCustomWidgetWrapper_9");
+        return this.getWidget("labelDanger");
     }
 
     public get input() {
-        return $("#mxui_widget_TextInput_0_input");
-    }
-
-    public get label() {
-        return $("#mxui_widget_ReactCustomWidgetWrapper_1");
-    }
-
-    public get saveButton() {
-        return $("##mxui_widget_ActionButton_0");
-    }
-
-    public open(): void {
-        browser.url("/");
+        const inputWidget = this.getWidget("dataInput");
+        const inputElement = inputWidget.$("input");
+        inputElement.waitForDisplayed();
+        return inputElement;
     }
 }
 
