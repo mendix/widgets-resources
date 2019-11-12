@@ -17,7 +17,7 @@ export type MywidgetTypeEnum = "badge" | "label";
 export interface ActionsType {
     name: string;
     enabled: boolean;
-    action: ActionValue;
+    action?: ActionValue;
     image: DynamicValue<NativeImage>;
 }
 
@@ -60,7 +60,7 @@ export type MywidgetTypeEnum = "badge" | "label";
 export interface ActionsType {
     name: string;
     enabled: boolean;
-    action: ActionValue;
+    action?: ActionValue;
     image: DynamicValue<WebImage>;
 }
 
