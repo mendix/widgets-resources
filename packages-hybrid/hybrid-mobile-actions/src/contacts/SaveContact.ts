@@ -47,7 +47,10 @@ function SaveContact(
     }
 
     return new Promise((resolve, reject) => {
-        contact.save(() => resolve(true), error => reject(new Error(errorMessage(error))));
+        contact.save(
+            () => resolve(true),
+            error => reject(new Error(errorMessage(error)))
+        );
     });
 
     function errorMessage(error: ContactError): string {

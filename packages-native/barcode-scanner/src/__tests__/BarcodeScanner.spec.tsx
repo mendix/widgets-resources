@@ -46,6 +46,9 @@ function detectBarcode(component: RenderAPI, barcode: string): void {
     fireEvent(component.getByType(RNCamera), "barCodeRead", {
         data: barcode,
         type: "qr",
-        bounds: [{ x: "", y: "" }, { x: "", y: "" }]
+        bounds: [
+            { x: "", y: "" },
+            { x: "", y: "" }
+        ]
     });
 }

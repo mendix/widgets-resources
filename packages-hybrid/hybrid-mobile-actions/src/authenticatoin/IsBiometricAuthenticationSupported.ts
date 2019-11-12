@@ -18,7 +18,10 @@ function IsBiometricAuthenticationSupported(): Promise<boolean> {
         }
         if (window.device.platform === "iOS") {
             if (window.plugins && window.plugins.touchid) {
-                window.plugins.touchid.isAvailable(() => resolve(true), () => resolve(false));
+                window.plugins.touchid.isAvailable(
+                    () => resolve(true),
+                    () => resolve(false)
+                );
             } else {
                 reject(
                     new Error(

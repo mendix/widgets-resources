@@ -94,9 +94,10 @@ export const fetchMarkerObjectUrl = (options: Data.FetchMarkerIcons, mxObject: m
         } else if (type === "systemImage" && mxObject && options.systemImagePath) {
             mxObject.fetch(options.systemImagePath, (imagePathObj: MxObject) => {
                 if (imagePathObj.get("HasContents")) {
-                    const url = window.mx.data.getDocumentUrl(imagePathObj.getGuid(), imagePathObj.get(
-                        "changedDate"
-                    ) as number);
+                    const url = window.mx.data.getDocumentUrl(
+                        imagePathObj.getGuid(),
+                        imagePathObj.get("changedDate") as number
+                    );
 
                     return window.mx.data.getImageUrl(
                         url,

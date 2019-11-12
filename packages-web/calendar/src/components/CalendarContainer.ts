@@ -454,7 +454,7 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         } else if (props.dataSource === "nanoflow" && !props.dataSourceNanoflow.nanoflow) {
             errorMessages.push("Datasource is set to 'nanoflow' but no nanoflow is selected");
         }
-        if (props.dataSource === "context" && (props.mxObject && props.mxObject.getEntity() !== props.eventEntity)) {
+        if (props.dataSource === "context" && props.mxObject && props.mxObject.getEntity() !== props.eventEntity) {
             errorMessages.push(`${props.friendlyId}: Context entity does not match the event entity`);
         }
         if (props.view === "custom" && props.customViews.length <= 0) {
