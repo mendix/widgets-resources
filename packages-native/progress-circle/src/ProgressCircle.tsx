@@ -43,6 +43,8 @@ export class ProgressCircle extends Component<Props> {
                 return (this.props.customText && this.props.customText.value) || "";
             case "percentage":
                 return `${Math.round(progress * 100)}%`;
+            default:
+                return "";
         }
     }
 
