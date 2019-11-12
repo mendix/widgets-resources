@@ -16,7 +16,7 @@ interface CommonProps {
 
 export interface ActionsType {
     description: EditableValue<string>;
-    action: ActionValue;
+    action?: ActionValue;
 }
 
 export interface ActionsPreviewType {
@@ -58,7 +58,7 @@ interface CommonProps<Style> {
 
 export interface ActionsType {
     description: EditableValue<string>;
-    action: ActionValue;
+    action?: ActionValue;
 }
 
 export interface MyWidgetProps<Style> extends CommonProps<Style> {

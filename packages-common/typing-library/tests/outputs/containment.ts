@@ -18,7 +18,7 @@ interface CommonProps {
 export interface MyWidgetContainerProps extends CommonProps {
     content: ReactNode;
     description: EditableValue<string>;
-    action: ActionValue;
+    action?: ActionValue;
 }
 
 export interface MyWidgetPreviewProps {
@@ -52,6 +52,6 @@ interface CommonProps<Style> {
 export interface MyWidgetProps<Style> extends CommonProps<Style> {
     content: ReactNode;
     description: EditableValue<string>;
-    action: ActionValue;
+    action?: ActionValue;
 }
 `;

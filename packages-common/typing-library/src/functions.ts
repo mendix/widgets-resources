@@ -118,7 +118,10 @@ const generateChildProps = (prop: Property, childTypes: string[], preview = fals
 ${properties
     .map(prop => {
         let name = prop.$.key;
-        if (prop.$.hasOwnProperty("required") && prop.$.required === "false") {
+        if (
+            (prop.$.required && prop.$.required === "false" && prop.$.type !== "object") ||
+            (prop.$.type === "action" && !preview)
+        ) {
             name += "?";
         }
         const type = translateType(prop, childTypes, preview, isMobile);
@@ -329,7 +332,10 @@ export const transformJsonContent = (jsonContent: MendixXML, widgetName: string)
     const mainTypes = properties
         .map(prop => {
             let name = prop.$.key;
-            if (prop.$.required && prop.$.required === "false" && prop.$.type !== "object") {
+            if (
+                (prop.$.required && prop.$.required === "false" && prop.$.type !== "object") ||
+                prop.$.type === "action"
+            ) {
                 name += "?";
             }
             const type = translateType(prop, childTypes, false, mobile);
