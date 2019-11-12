@@ -1,10 +1,16 @@
 /* eslint-disable */
 class HomePage {
     public get badgeButton() {
-        return $("#mx-name-badgeButton2");
+        return this.getWidget("badgeButton2");
     }
     open(): void {
         browser.url("/");
+    }
+
+    private getWidget(widgetName: string): WebdriverIO.Element {
+        const badge = $(`.mx-name-${widgetName}`);
+        badge.waitForDisplayed();
+        return badge;
     }
 }
 
