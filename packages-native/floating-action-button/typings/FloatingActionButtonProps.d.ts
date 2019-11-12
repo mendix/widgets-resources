@@ -17,7 +17,7 @@ export type VerticalPositionEnum = "top" | "bottom";
 export interface SecondaryButtonsType {
     icon: DynamicValue<NativeIcon>;
     caption?: DynamicValue<string>;
-    onClick: ActionValue;
+    onClick?: ActionValue;
 }
 
 export interface FloatingActionButtonProps<Style> extends CommonProps<Style> {
@@ -25,6 +25,6 @@ export interface FloatingActionButtonProps<Style> extends CommonProps<Style> {
     iconActive?: DynamicValue<NativeIcon>;
     horizontalPosition: HorizontalPositionEnum;
     verticalPosition: VerticalPositionEnum;
-    onClick: ActionValue;
+    onClick?: ActionValue;
     secondaryButtons: SecondaryButtonsType[];
 }
