@@ -21,7 +21,7 @@
                 </property>
                 <property key="leftRenderMode" type="enumeration" defaultValue="disabled">
                     <caption>Pattern</caption>
-                    <description>"Disabled" ensures your list view items will have no animation or action. "Swipe to show options" enables a partial swipe to show SOMETHING mentioning buttons. "Full swipe to collapse" enables a full swipe to one side which collapses the list item. "Full swipe to reset" enables a full swipe to one side which SOMETHING. "Toggle" enables a partial swipe which switches an item between two states. </description>
+                    <description>"Disabled" ensures your list view items will have no animation or action. "Swipe to show options" enables a partial swipe to show modeled buttons. "Full swipe to collapse" enables a full swipe which collapses the list item. "Full swipe to reset" enables a full swipe to one side which executes specified actions. "Toggle" enables a partial swipe which switches an item between two states. </description>
                     <enumerationValues>
                         <enumerationValue key="disabled">Disabled</enumerationValue>
                         <enumerationValue key="buttons">Swipe to show options</enumerationValue>
@@ -46,12 +46,12 @@
                 </property>
                 <property key="rightRenderMode" type="enumeration" defaultValue="disabled">
                     <caption>Pattern</caption>
-                    <description>"Show options" will show the background buttons. "Toggle" animates the item back to the initial state. "Swipe out and reset" animates the item out of the list.</description>
+                    <description>"Disabled" ensures your list view items will have no animation or action. "Swipe to show options" enables a partial swipe to show modeled buttons. "Full swipe to collapse" enables a full swipe which collapses the list item. "Full swipe to reset" enables a full swipe to one side which executes specified actions. "Toggle" enables a partial swipe which switches an item between two states. </description>
                     <enumerationValues>
                         <enumerationValue key="disabled">Disabled</enumerationValue>
-                        <enumerationValue key="buttons">Show options (buttons)</enumerationValue>
-                        <enumerationValue key="archive">Swipe out and collapse</enumerationValue>
-                        <enumerationValue key="swipeOutReset">Swipe out and reset</enumerationValue>
+                        <enumerationValue key="buttons">Swipe to show options</enumerationValue>
+                        <enumerationValue key="archive">Full swipe to collapse</enumerationValue>
+                        <enumerationValue key="swipeOutReset">Full swipe to reset</enumerationValue>
                         <enumerationValue key="toggle">Toggle</enumerationValue>
                     </enumerationValues>
                 </property>
