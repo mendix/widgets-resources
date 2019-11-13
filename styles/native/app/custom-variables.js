@@ -146,7 +146,7 @@ export const input = {
 
     // Alignment
     textAlign: "left",
-    paddingHorizontal: spacing.small,
+    paddingHorizontal: spacing.smaller,
     paddingVertical: spacing.small,
 };
 
@@ -154,7 +154,7 @@ export const input = {
 export const navigation = {
     statusBar: {
         backgroundColor: background.primary,
-        barStyle: custom.darkMode ? "light-content" : "dark-content",
+        barStyle: darkMode ? "light-content" : "dark-content",
     },
     topBar: {
         backgroundColor: background.primary,

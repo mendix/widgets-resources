@@ -148,7 +148,7 @@ let input = {
 
     // Alignment
     textAlign: "left",
-    paddingHorizontal: spacing.small,
+    paddingHorizontal: spacing.smaller,
     paddingVertical: spacing.small,
 };
 input = merge(input, custom.input || {});
