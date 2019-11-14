@@ -17,11 +17,11 @@
     },
     "config": {
         "moduleName": "HybridMobileActions",
-        "testProjectId": "31f24d63-fc22-4661-8c03-2a6eb1a03a9d",
+        "testProjectId": "0bfcffca-d976-4389-b93b-582c90a1a898",
         "projectName": "HybridMobileActionsTestProject.mpr",
         "testProjects": [
             {
-                "revision": 165,
+                "revision": 10,
                 "branch": "trunk",
                 "path": "./tests/TestProjects/Mendix8",
                 "mendixVersion": "8.3.0.61600"
