@@ -1,0 +1,347 @@
+body {
+    margin: 0;
+    font-family: helvetica, arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+button, input, select {
+    overflow: visible;
+}
+
+button, input, select, textarea {
+    font: inherit;
+    margin: 0;
+}
+
+.mx-hybridapp {
+    height: 100vh;
+}
+
+.mx-main-container, .mx-hybridapp-wrapper {
+    background-color: {{theme.background}};
+    color: {{theme.text}};
+}
+
+.mx-hybridapp-button {
+    color: {{theme.buttonCaption}};
+    background-color: {{theme.button}};
+}
+
+.mx-hybridapp-login,
+.mx-hybridapp-title,
+.mx-hybridapp-forget-button {
+    background: none;
+    color: #fff;
+}
+
+{{#loaderCss}}
+{{{loaderCss}}}
+{{/loaderCss}}
+{{^loaderCss}}
+#mx-loader-container {
+    font-weight: 400;
+}
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#loader {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: rgba(255,255,255, 0.7);
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+#loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: rgba(255,255,255, 0.5);
+    -webkit-animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite;
+}
+
+#loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    border-top-color: rgba(255,255,255, 0.3);
+    -webkit-animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+{{/loaderCss}}
+
+.mx-main-container, .mx-hybridapp-wrapper {
+    font-family: helvetica, arial, sans-serif;
+
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+}
+
+.mx-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: 0;
+    border: 0;
+}
+
+.mx-valign-table {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.mx-valign-cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.mx-alert-footer {
+    text-align: center;
+    position: absolute;
+    bottom: 5vh;
+    width: 100%;
+    border: 0;
+    padding: 0px 5vh 0px 5vh;
+}
+
+#mxalert_message,
+#mx-loader-container .mx-message {
+    position: absolute;
+    bottom: 15vh;
+    padding: 0px 5vh;
+    width: 100%;
+    text-align: center;
+}
+
+#mxalert {
+    display: none;
+    font-weight: 400;
+}
+
+#mxalert img {
+    display: block;
+    max-width: calc(100% - 10vh);
+    margin: 0 auto;
+}
+
+.mx-hybridapp-wrapper {
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 5vh;
+}
+
+.mx-hybridapp-login {
+    position: relative;
+    max-width: 340px;
+    width: 100%;
+    font-weight: 400;
+    animation: fadein 2s;
+    -moz-animation: fadein 2s;
+    -webkit-animation: fadein 2s;
+    -o-animation: fadein 2s;
+}
+
+.mx-hybridapp-button {
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+    display: block;
+    border-style: none;
+    width: 100%;
+    font-size: 16px;
+    padding: 15px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    -moz-transition-property: all;
+    -o-transition-property: all;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -moz-transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    -moz-transition-timing-function: ease-in-out;
+    -o-transition-timing-function: ease-in-out;
+    -webkit-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+}
+
+.mx-hybridapp-title {
+    /* can be removed after moving to base */
+    font-weight: normal;
+}
+
+.mx-hybridapp-formgroup {
+    margin: 20px 0;
+}
+
+.mx-hybridapp-formgroup-pins .mx-hybridapp-formgroup-input {
+    font-size: 31px;
+    padding: 6px 10px;
+}
+
+.mx-hybridapp-formgroup-input {
+    font-size: 16px;
+    display: block;
+    padding: 15px 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    border: 1px solid #d7d7d7;
+    transition: border-width 0.2s ease;
+    border-radius: 4px;
+    color: #ccc;
+}
+
+.mx-hybridapp-formgroup-input:focus,
+.mx-hybridapp-formgroup-input.active {
+    outline: none;
+    color: #555;
+    border-color: #555;
+    transition: border-width 0.2s ease;
+}
+
+.mx-hybridapp-formgroup-pins {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.mx-hybridapp-formgroup-pins .mx-hybridapp-formgroup-input {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    text-align: center;
+    display: inline-block;
+    margin: 5px;
+}
+
+.mx-hybridapp-formgroup-input-protected {
+    -webkit-text-security: disc;
+}
+
+.mx-hybridapp-formgroup-pins .mx-hybridapp-formgroup-input:first-child {
+    margin-left: 0;
+}
+
+.mx-hybridapp-formgroup-pins .mx-hybridapp-formgroup-input:last-child {
+    margin-right: 0;
+}
+
+.mx-hybridapp-pin-wrapper {
+    display: none;
+    margin: 20px 0 0 0;
+}
+
+.mx-hybridapp-forget-button {
+    border-style: none;
+    background: none;
+}
+
+/* Keyframers for animation
+/*******************/
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+{{{customCss}}}

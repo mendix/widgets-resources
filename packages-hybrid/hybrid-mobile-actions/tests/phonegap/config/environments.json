@@ -1,0 +1,27 @@
+{
+    "sandbox": {
+        "name": "HybridMobileActionsTestProject",
+        "identifier": "io.mxapps.hybridmobileaction",
+        "url": "https://hybridmobileaction-sandbox.mxapps.io"
+    },
+    "localMendix": {
+        "name": "HybridMobileActionsTestProject",
+        "identifier": "local.hybridmobileaction",
+        "url": "http://10.201.200.111:8080"
+    },
+    "localHome": {
+        "name": "HybridMobileActionsTestProject",
+        "identifier": "local.hybridmobileaction",
+        "url": "http://192.168.1.169:8080"
+    },
+    "emulatorAndroid": {
+        "name": "HybridMobileActionsTestProject",
+        "identifier": "local.hybridmobileaction",
+        "url": "http://10.0.2.2:8080"
+    },
+    "emulatorIOS": {
+        "name": "HybridMobileActionsTestProject",
+        "identifier": "local.hybridmobileaction",
+        "url": "http://localhost:8080"
+    }
+}

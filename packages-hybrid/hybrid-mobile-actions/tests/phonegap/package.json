@@ -1,0 +1,71 @@
+{
+    "name": "@mendix/mendix-hybrid-app-template",
+    "version": "4.1.3",
+    "description": "Mendix PhoneGap Build app template",
+    "scripts": {
+        "init": "node init",
+        "install": "npm run init",
+        "package": "webpack",
+        "phonegap": "cd build && phonegap",
+        "plugin": "npm run phonegap -- plugin",
+        "platform": "npm run phonegap -- platform",
+        "build": "npm run phonegap -- build",
+        "start": "npm run phonegap -- run",
+        "package:x86": "npm run package -- --env.x86",
+        "package:x86_64": "npm run package -- --env.x86_64",
+        "package:arm": "npm run package -- --env.arm",
+        "package:arm64": "npm run package -- --env.arm64",
+        "package:watch": "npm run package -- --watch",
+        "platform:android": "npm run platform -- add android",
+        "platform:ios": "npm run platform -- add ios && cd build/platforms/ios && pod install || true",
+        "platform:all": "npm run platform:android && npm run platform:ios",
+        "prepare:all": "npm run prepare:android && npm run prepare:ios",
+        "prepare:android": "npm run phonegap -- prepare android",
+        "prepare:ios": "npm run phonegap -- prepare ios && cd build/platforms/ios && pod install || true",
+        "build:release": "npm run build -- --release",
+        "start:emulator": "npm run start -- --emulator",
+        "start:device": "npm run start -- --device",
+        "phonegap:login": "npm run phonegap -- remote login",
+        "phonegap:logout": "npm run phonegap -- remote logout",
+        "phonegap:build": "npm run phonegap -- remote build",
+        "phonegap:build:android": "npm run phonegap -- remote build android",
+        "phonegap:build:ios": "npm run phonegap -- remote build ios",
+        "phonegap:start": "npm run phonegap -- remote run",
+        "phonegap:start:android": "npm run phonegap -- remote run android",
+        "phonegap:start:ios": "npm run phonegap -- remote run ios"
+    },
+    "main": "src/www/scripts/entry.js",
+    "directories": {
+        "lib": "src"
+    },
+    "files": [
+        "/config/**/.gitkeep",
+        "/src/www/scripts/entry.js",
+        "/src/www/styles/**/*.css[.mustache]",
+        "/src/**/.gitkeep",
+        "/init.js",
+        "/*.js",
+        "/*.md"
+    ],
+    "dependencies": {
+        "@mendix/mendix-hybrid-app-base": "^4.1.3",
+        "global": "^4.3.2",
+        "mustache-loader": "^1.4.0"
+    },
+    "devDependencies": {
+        "phonegap": "8.2.2",
+        "shelljs": "^0.7.7",
+        "webpack": "^3.4.1",
+        "webpack-merge": "^4.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:mendix/hybrid-app-template.git"
+    },
+    "license": "Apache-2.0",
+    "author": {
+        "name": "Kevin Vlaanderen",
+        "email": "kevin.vlaanderen@mendix.com",
+        "url": "https://developer.mendixcloud.com/link/profile/15218"
+    }
+}
