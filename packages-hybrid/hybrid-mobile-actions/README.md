@@ -42,6 +42,7 @@ And add to the `Custom Phonegap/Cordova configuration` the following snippet.
     <plugin name="cordova-plugin-android-fingerprint-auth" source="npm" spec="1.5.0" />
     <plugin name="cordova-plugin-touch-id" source="npm" spec="3.4.0" />
     <plugin name="cordova-clipboard" source="npm" spec="1.3.0" />
+    <plugin name="cordova-plugin-media" source="npm" spec="5.0.2" />
 ```
 
 Please note that the above plugins are not available in the in standard
