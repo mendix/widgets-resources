@@ -4,9 +4,15 @@
 // WARNING: Only the following code will be retained when actions are regenerated:
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
+import { Big } from "big.js";
+
+// BEGIN EXTRA CODE
+// END EXTRA CODE
+
 /**
+ * Returns true when authenticated.
  * @param {string} reason - The reason for requesting authentication. If empty, the system default message is used.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function BiometricAuthentication(reason) {

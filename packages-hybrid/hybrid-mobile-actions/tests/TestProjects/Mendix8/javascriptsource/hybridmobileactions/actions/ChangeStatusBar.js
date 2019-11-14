@@ -9,7 +9,7 @@
  * @param {boolean} hidden
  * @param {string} backgroundColor - If empty, the current background color is not changed. Use a hex value here including the #
  * @param {"HybridMobileActions.OverlaysWebView.Yes"|"HybridMobileActions.OverlaysWebView.No"} overlaysWebView - If empty, current value is not changed.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function ChangeStatusBar(style, hidden, backgroundColor, overlaysWebView) {

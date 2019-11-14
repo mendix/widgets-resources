@@ -4,9 +4,15 @@
 // WARNING: Only the following code will be retained when actions are regenerated:
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
+import { Big } from "big.js";
+
+// BEGIN EXTRA CODE
+// END EXTRA CODE
+
 /**
+ * Find contact in device addressbook.
  * @param {string} searchQuery
- * @returns {boolean}
+ * @returns {Promise.<MxObject[]>}
  */
 // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 function SearchContacts(searchQuery) {
