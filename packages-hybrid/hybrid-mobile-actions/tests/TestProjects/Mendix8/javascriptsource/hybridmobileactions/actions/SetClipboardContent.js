@@ -5,7 +5,13 @@
 // WARNING: Only the following code will be retained when actions are regenerated:
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
+import { Big } from "big.js";
+
+// BEGIN EXTRA CODE
+// END EXTRA CODE
+
 /**
+ * Store text content in top device clipboard.x
  * @param {string} content - This field is required.
  * @returns {boolean}
  */
