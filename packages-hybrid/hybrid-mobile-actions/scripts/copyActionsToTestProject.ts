@@ -2,8 +2,17 @@ import { promises as fs } from "fs";
 import { basename, join } from "path";
 
 const cwd = process.cwd();
-const actionsDir = join(cwd, "dist/babel/");
-const testProjectDir = join(cwd, "dist/mxproject/javascriptsource/hybridmobileactions/actions/");
+const actionsDir = join(cwd, "dist/tsc/");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const packageContent: any = require(join(cwd, "package.json"));
+
+const testProjectDir = join(
+    cwd,
+    packageContent.config.testProjects[0].path,
+    "/javascriptsource",
+    packageContent.config.moduleName.toLowerCase(),
+    "actions/"
+);
 
 // eslint-disable-next-line no-console
 main().catch(console.error);
@@ -19,7 +28,7 @@ async function main(): Promise<void> {
     }
 }
 
-async function walk(dirPath: string, filelist: string[] = []): Promise<string[]> {
+async function walk(dirPath: string, fileList: string[] = []): Promise<string[]> {
     const files = await fs.readdir(dirPath);
 
     for (const file of files) {
@@ -27,11 +36,11 @@ async function walk(dirPath: string, filelist: string[] = []): Promise<string[]>
         const stat = await fs.stat(filePath);
 
         if (stat.isDirectory()) {
-            filelist = await walk(filePath + "/", filelist);
+            fileList = await walk(filePath + "/", fileList);
         } else {
-            filelist.push(filePath);
+            fileList.push(filePath);
         }
     }
 
-    return filelist;
+    return fileList;
 }
