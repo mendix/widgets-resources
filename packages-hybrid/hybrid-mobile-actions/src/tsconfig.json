@@ -1,9 +1,9 @@
 {
-    "extends": "../tsconfig.json",
+    "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
     "compilerOptions": {
         "outDir": "../dist/tsc",
-        "target": "es2015",
-        "lib": ["es2015", "dom"],
+        "target": "es2017",
+        "lib": ["es2017", "dom"],
         "types": [
             "mendix-client",
             "big.js",
@@ -20,9 +20,9 @@
         "sourceMap": false,
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
-        "noUnusedLocals": false,
-        "skipLibCheck": true,
-        "removeComments": false,
-        "alwaysStrict": false
-    }
+        "removeComments": false
+    },
+    "baseUrl": "./",
+    "include": ["./"],
+    "exclude": []
 }
