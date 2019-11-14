@@ -1,0 +1,26 @@
+{
+    "url": "https://hybridmobileaction-sandbox.mxapps.io",
+    "identifier": "io.mxapps.hybridmobileaction-sandbox",
+    "version": "0.0.3",
+    "name": "HybridMobileActionsTestProject",
+    "description": null,
+    "iosEnabled": true,
+    "androidEnabled": true,
+    "requirePin": false,
+    "enableOffline": false,
+    "permissions": {
+        "calendar": true,
+        "camera": true,
+        "photoLibrary": true,
+        "contacts": true,
+        "microphone": false,
+        "geoLocation": false,
+        "push": false
+    },
+    "theme": {
+        "background": "#0595DB",
+        "text": "#ffffff",
+        "button": "#76CA02",
+        "buttonCaption": "#ffffff"
+    }
+}

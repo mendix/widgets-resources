@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{htmlWebpackPlugin.options.name}}</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+    </head>
+    <body dir="ltr" class="mx-hybridapp">
+        <div id="content"></div>
+
+        <div id="mx-app" class="mx-main-container">
+            <div id="mxalert" class="mx-container">
+                <div class="mx-valign-table">
+                    <div class="mx-valign-cell">
+                        <img src="img/error.png">
+                    </div>
+                </div>
+                <p id="mxalert_message">Could not load app</p>
+                <div class="mx-alert-footer">
+                    <button id="mxalert_button" class="mx-hybridapp-button">OK</button>
+                </div>
+            </div>
+
+            <div id="mx-loader-container" class="mx-container">
+                <div class="mx-valign-table">
+                    <div class="mx-valign-cell">
+                        {{#htmlWebpackPlugin.options.loaderHtml}}
+                        {{{htmlWebpackPlugin.options.loaderHtml}}}
+                        {{/htmlWebpackPlugin.options.loaderHtml}}
+                        {{^htmlWebpackPlugin.options.loaderHtml}}
+                        <div id="preloader">
+                            <div id="loader"></div>
+                        </div>
+                        {{/htmlWebpackPlugin.options.loaderHtml}}
+                    </div>
+                </div>
+                <div class="mx-message"></div>
+            </div>
+        </div>
+
+        <div id="mx-login-container" class="mx-hybridapp-wrapper">
+          <div class="mx-hybridapp-login">
+            <div id="mx-login-error" class="mx-hybridapp-title">Sign in</div>
+            <div class="mx-hybridapp-formgroup">
+              <input id="mx-username" class="mx-hybridapp-formgroup-input" type="text" autocorrect="off" autocapitalize="none" placeholder="User name">
+              <input id="mx-password" class="mx-hybridapp-formgroup-input" type="password" autocorrect="off" autocapitalize="none" placeholder="Password">
+            </div>
+            <button id="mx-execute-login" class="mx-hybridapp-button">Sign in</button>
+          </div>
+        </div>
+
+        <div id="mx-pin-container" class="mx-hybridapp-wrapper">
+          <div class="mx-hybridapp-login">
+            <div id="mx-pin-error" class="mx-hybridapp-title"></div>
+
+            <div class="mx-hybridapp-formgroup mx-hybridapp-formgroup-pins">
+              <input class="mx-hybridapp-formgroup-input" type="number" autocorrect="off" autocapitalize="none" maxlength="1">
+              <input class="mx-hybridapp-formgroup-input" type="number" autocorrect="off" autocapitalize="none" maxlength="1">
+              <input class="mx-hybridapp-formgroup-input" type="number" autocorrect="off" autocapitalize="none" maxlength="1">
+              <input class="mx-hybridapp-formgroup-input" type="number" autocorrect="off" autocapitalize="none" maxlength="1">
+              <input class="mx-hybridapp-formgroup-input" type="number" autocorrect="off" autocapitalize="none" maxlength="1">
+            </div>
+
+            <button id="mx-confirm-pin" class="mx-hybridapp-button">Confirm</button>
+            <button id="mx-forgot-pin" class="mx-hybridapp-forget-button mx-hybridapp-link">Forgot my PIN</button>
+          </div>
+        </div>
+
+        <script src="cordova.js"></script>
+    </body>
+</html>
