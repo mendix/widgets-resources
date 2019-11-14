@@ -1,4 +1,4 @@
-import homepage from "./pages/home.page";
+import homepage from "../pages/home.page";
 
 describe("badge-web", () => {
     beforeEach(() => {
