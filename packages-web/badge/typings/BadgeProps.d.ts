@@ -22,7 +22,7 @@ export interface BadgeContainerProps extends CommonProps {
     type: TypeEnum;
     value?: DynamicValue<string>;
     brandStyle: BrandStyleEnum;
-    onClick: ActionValue;
+    onClick?: ActionValue;
 }
 
 export interface BadgePreviewProps {
