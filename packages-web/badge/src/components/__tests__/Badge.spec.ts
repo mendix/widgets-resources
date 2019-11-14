@@ -35,26 +35,26 @@ describe("Badge", () => {
         expect(badge.text()).toBe(value);
     });
 
-    it("should show no value when no value or default value provided", () => {
-        const badge = createBadge({ type: "label", value: undefined });
+    it("should show no value when no empty string is passed", () => {
+        const badge = createBadge({ type: "label", value: "" });
 
         expect(badge.text()).toBe("");
     });
 
     it("configured as a label should have the class label", () => {
-        const badge = createBadge({ type: "label" });
+        const badge = createBadge({ type: "label", value: "" });
 
         expect(badge.hasClass("label")).toBe(true);
     });
 
     it("configured as a badge should have the class badge", () => {
-        const badge = createBadge({ type: "badge" });
+        const badge = createBadge({ type: "badge", value: "" });
 
         expect(badge.hasClass("badge")).toBe(true);
     });
 
     it("with a click action should respond to click events", () => {
-        const badgeProps: BadgeProps = { onClick: jest.fn(), type: "badge" };
+        const badgeProps: BadgeProps = { onClick: jest.fn(), type: "badge", value: "" };
         const onClick = (badgeProps.onClick = jest.fn());
         const badge = createBadge(badgeProps);
 
@@ -64,38 +64,44 @@ describe("Badge", () => {
     });
 
     it("with the Bootstrap style default should have the class label-default", () => {
-        const badge = createBadge({ bootstrapStyle: "default", type: "badge" });
+        const badge = createBadge({ bootstrapStyle: "default", type: "badge", value: "" });
 
         expect(badge.hasClass("label-default")).toBe(true);
     });
 
     it("with the Bootstrap style primary should have the class label-primary", () => {
-        const badge = createBadge({ bootstrapStyle: "primary", type: "badge" });
+        const badge = createBadge({ bootstrapStyle: "primary", type: "badge", value: "" });
 
         expect(badge.hasClass("label-primary")).toBe(true);
     });
 
     it("with the Bootstrap style success should have the class label-success", () => {
-        const badge = createBadge({ bootstrapStyle: "success", type: "badge" });
+        const badge = createBadge({ bootstrapStyle: "success", type: "badge", value: "" });
 
         expect(badge.hasClass("label-success")).toBe(true);
     });
 
     it("with the Bootstrap style info should have the class label-info", () => {
-        const badge = createBadge({ bootstrapStyle: "info", type: "badge" });
+        const badge = createBadge({ bootstrapStyle: "info", type: "badge", value: "" });
 
         expect(badge.hasClass("label-info")).toBe(true);
     });
 
     it("with the Bootstrap style warning should have the class label-warning", () => {
-        const badge = createBadge({ bootstrapStyle: "warning", type: "badge" });
+        const badge = createBadge({ bootstrapStyle: "warning", type: "badge", value: "" });
 
         expect(badge.hasClass("label-warning")).toBe(true);
     });
 
     it("with the Bootstrap style danger should have the class label-danger", () => {
-        const badge = createBadge({ bootstrapStyle: "danger", type: "badge" });
+        const badge = createBadge({ bootstrapStyle: "danger", type: "badge", value: "" });
 
         expect(badge.hasClass("label-danger")).toBe(true);
+    });
+
+    it("with the Bootstrap style inverse should have the class label-inverse", () => {
+        const badge = createBadge({ bootstrapStyle: "inverse", type: "badge", value: "" });
+
+        expect(badge.hasClass("label-inverse")).toBe(true);
     });
 });
