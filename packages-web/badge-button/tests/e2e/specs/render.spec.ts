@@ -37,19 +37,45 @@ describe("BadgeButton rendering", () => {
         expect(badgeButton.getColors()).toEqual(badgeButton.defaultStyles.PrimaryBackground);
     });
 
+    it("should display correctly default style", () => {
+        const badgeButton = new badgeButtonWidget("badgeButtonDynamic");
+
+        badgeButton.element.waitForDisplayed();
+        expect(badgeButton.getColors()).toEqual(badgeButton.defaultStyles.DefaultBackground);
+    });
+
     it("should display correctly success style", () => {
         const badgeButton = new badgeButtonWidget("badgeButtonSuccess");
 
         badgeButton.element.waitForDisplayed();
-        console.log(badgeButton.getColors());
         expect(badgeButton.getColors()).toEqual(badgeButton.defaultStyles.SuccessBackground);
+    });
+
+    it("should display correctly info style", () => {
+        const badgeButton = new badgeButtonWidget("badgeButtonInfo");
+
+        badgeButton.element.waitForDisplayed();
+        expect(badgeButton.getColors()).toEqual(badgeButton.defaultStyles.InfoBackground);
+    });
+
+    it("should display correctly warning style", () => {
+        const badgeButton = new badgeButtonWidget("badgeButtonWarning");
+
+        badgeButton.element.waitForDisplayed();
+        expect(badgeButton.getColors()).toEqual(badgeButton.defaultStyles.WarningBackground);
+    });
+
+    it("should display correctly danger style", () => {
+        const badgeButton = new badgeButtonWidget("badgeButtonDanger");
+
+        badgeButton.element.waitForDisplayed();
+        expect(badgeButton.getColors()).toEqual(badgeButton.defaultStyles.DangerBackground);
     });
 
     it("should display correctly inverse style", () => {
         const badgeButton = new badgeButtonWidget("badgeButtonInverse");
 
         badgeButton.element.waitForDisplayed();
-        console.log(badgeButton.getColors());
         expect(badgeButton.getColors()).toEqual(badgeButton.defaultStyles.InverseBackground);
     });
 });
