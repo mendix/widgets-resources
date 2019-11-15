@@ -84,10 +84,12 @@ export const spacing = {
 // Button Styles
 export const button = {
     fontSize: font.sizeSmall,
-    fontSizeIcon: font.sizeSmall,
+    fontSizeIcon: font.size,
+    fontSizeIconSmall: font.sizeSmall,
+    fontSizeIconLarge: font.sizeLarge,
     borderRadius: border.radius,
-    paddingVertical: Platform.select({ android: spacing.smaller, ios: spacing.smaller }),
-    paddingHorizontal: Platform.select({ android: spacing.small, ios: spacing.regular }),
+    paddingVertical: spacing.smaller,
+    paddingHorizontal: spacing.regular,
 
     header: {
         color: brand.primary,
@@ -160,7 +162,7 @@ export const navigation = {
         backgroundColor: background.primary,
         backButtonColor: contrast.highest,
         titleColor: contrast.highest,
-        titleFontSize: font.sizeH4,
+        titleFontSize: font.sizeH5,
     },
     bottomBar: {
         color: contrast.high,
