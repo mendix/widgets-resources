@@ -15,10 +15,9 @@ exports.config = {
     host: "127.0.0.1",
     port: 4444,
     specs: [basePath + "/tests/e2e/specs/*.spec.ts"],
-    maxInstances: debug ? 1 : 5,
+    maxInstances: 1,
     capabilities: [
         {
-            maxInstances: debug ? 1 : 5,
             browserName: "chrome"
         }
     ],

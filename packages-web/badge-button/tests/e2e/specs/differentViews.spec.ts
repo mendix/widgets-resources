@@ -61,8 +61,6 @@ describe("BadgeButton different views", () => {
             const badgeButton = new badgeButtonWidget("badgeButtonSnippetHorizontalTab2");
 
             expect(badgeButton.getAllBadges().length).toBeGreaterThan(1);
-            // @ts-ignore
-            console.log(templateGrid.rowCount);
             expect(templateGrid.rowCount).toEqual(3);
         });
     });
