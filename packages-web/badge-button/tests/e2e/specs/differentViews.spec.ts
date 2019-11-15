@@ -80,7 +80,7 @@ describe("BadgeButton different views", () => {
 
             expect(badgeButton.getText()).toEqual("");
             expect(badgeButton.getBadgeText()).toEqual("New");
-            expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles["PrimaryBackground"]);
+            expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles.PrimaryBackground);
         });
 
         it("should display correctly in second tab", () => {
@@ -89,7 +89,7 @@ describe("BadgeButton different views", () => {
 
             expect(badgeButton.getText()).toEqual("");
             expect(badgeButton.getBadgeText()).toEqual("New");
-            expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles["SuccessBackground"]);
+            expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles.SuccessBackground);
         });
     });
 });

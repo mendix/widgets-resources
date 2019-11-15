@@ -18,7 +18,7 @@ describe("BadgeButton on click", () => {
         });
     });
 
-    describe("call microflow", () => {
+    describe("call nanoflow", () => {
         beforeAll(() => {
             page.open("p/callNanoflow");
         });
@@ -33,8 +33,6 @@ describe("BadgeButton on click", () => {
             dialog.waitForDisplayed();
 
             expect(dialog.isDisplayed()).toBeTruthy();
-            // const text = page.getElement(".mx-dataview-content").$(".mx-text").getText();
-            // expect(text).toContain("Nanoflow called");
 
             // Verify it passes a parameter
             const data = page.getElement(".form-control-static").getText();
