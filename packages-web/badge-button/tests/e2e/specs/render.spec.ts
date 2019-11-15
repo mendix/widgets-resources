@@ -34,7 +34,7 @@ describe("BadgeButton rendering", () => {
         const badgeButton = new badgeButtonWidget("badgeButtonStatic");
 
         badgeButton.element.waitForDisplayed();
-        expect(badgeButton.getColors()).toEqual(badgeButton.defaultStyles["PrimaryBackground"]);
+        expect(badgeButton.getColors()).toEqual(badgeButton.defaultStyles.PrimaryBackground);
     });
 
     it("should display correctly success style", () => {
@@ -42,7 +42,7 @@ describe("BadgeButton rendering", () => {
 
         badgeButton.element.waitForDisplayed();
         console.log(badgeButton.getColors());
-        expect(badgeButton.getColors()).toEqual(badgeButton.defaultStyles["SuccessBackground"]);
+        expect(badgeButton.getColors()).toEqual(badgeButton.defaultStyles.SuccessBackground);
     });
 
     it("should display correctly inverse style", () => {
@@ -50,6 +50,6 @@ describe("BadgeButton rendering", () => {
 
         badgeButton.element.waitForDisplayed();
         console.log(badgeButton.getColors());
-        expect(badgeButton.getColors()).toEqual(badgeButton.defaultStyles["InverseBackground"]);
+        expect(badgeButton.getColors()).toEqual(badgeButton.defaultStyles.InverseBackground);
     });
 });

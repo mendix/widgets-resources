@@ -12,7 +12,7 @@ describe("BadgeButton different data types", () => {
 
         expect(badgeButton.getText()).toEqual("Button");
         expect(badgeButton.getBadgeText()).toEqual("140");
-        expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles["PrimaryBackground"]);
+        expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles.PrimaryBackground);
     });
 
     it("should display correctly Data, Caption, Default Style", () => {
@@ -21,7 +21,7 @@ describe("BadgeButton different data types", () => {
 
         expect(badgeButton.getText()).toEqual("Button");
         expect(badgeButton.getBadgeText()).toEqual("New");
-        expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles["DefaultBackground"]);
+        expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles.DefaultBackground);
     });
 
     it("should display correctly Data, No Caption, Default Style", () => {
@@ -30,7 +30,7 @@ describe("BadgeButton different data types", () => {
 
         expect(badgeButton.getText()).toEqual("");
         expect(badgeButton.getBadgeText()).toEqual("New");
-        expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles["DefaultBackground"]);
+        expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles.DefaultBackground);
     });
 
     it("should display correctly Data, No Caption, Success Style", () => {
@@ -39,7 +39,7 @@ describe("BadgeButton different data types", () => {
 
         expect(badgeButton.getText()).toEqual("");
         expect(badgeButton.getBadgeText()).toEqual("140");
-        expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles["SuccessBackground"]);
+        expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles.SuccessBackground);
     });
 
     it("should display correctly No Data, Info Style", () => {
@@ -48,7 +48,7 @@ describe("BadgeButton different data types", () => {
 
         expect(badgeButton.getText()).toEqual("");
         expect(badgeButton.getBadgeText()).toEqual("");
-        expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles["InfoBackground"]);
+        expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles.InfoBackground);
     });
 
     it("should display correctly Static Data", () => {
@@ -57,6 +57,6 @@ describe("BadgeButton different data types", () => {
 
         expect(badgeButton.getText()).toEqual("");
         expect(badgeButton.getBadgeText()).toEqual("Static");
-        expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles["DefaultBackground"]);
+        expect(badgeButton.getColors()).toBe(badgeButton.defaultStyles.DefaultBackground);
     });
 });

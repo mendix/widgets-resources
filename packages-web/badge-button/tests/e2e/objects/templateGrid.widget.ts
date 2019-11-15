@@ -1,7 +1,7 @@
 import page from "../pages/page";
 
 class TemplateGrid {
-    public get rowCount(): number {
+    get rowCount(): number {
         return page.getElements(".mx-templategrid-row").length;
     }
 }

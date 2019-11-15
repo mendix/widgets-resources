@@ -1,6 +1,14 @@
 import page from "../pages/page";
 
-const DefaultStyles = {
+interface DefaultStyle {
+    DefaultBackground: string;
+    PrimaryBackground: string;
+    SuccessBackground: string;
+    InfoBackground: string;
+    InverseBackground: string;
+}
+
+const DefaultStyles: DefaultStyle = {
     DefaultBackground: "rgba(255,255,255,1)",
     PrimaryBackground: "rgba(5,149,219,1)",
     SuccessBackground: "rgba(118,202,2,1)",
@@ -11,7 +19,7 @@ const DefaultStyles = {
 class BadgeButtonWidget {
     name: string;
     element: WebdriverIO.Element;
-    defaultStyles: {};
+    defaultStyles: DefaultStyle;
 
     constructor(name) {
         this.name = name;
@@ -19,20 +27,20 @@ class BadgeButtonWidget {
         this.defaultStyles = DefaultStyles;
     }
 
-    public getAllBadges(): any {
+    getAllBadges(): any {
         return page.getWidgets(this.name);
     }
-    public getText(): string {
+    getText(): string {
         const BadgeButtonTextElement = this.element.$(".widget-badge-button-text");
         return BadgeButtonTextElement.getText();
     }
 
-    public getBadgeText(): string {
+    getBadgeText(): string {
         const BadgeTextElement = this.element.$(".badge");
         return BadgeTextElement.getText();
     }
 
-    public getColors(): any {
+    getColors(): any {
         return this.element.getCSSProperty("background-color").value;
     }
 }
