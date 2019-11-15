@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Safe area view renders with content 1`] = `
+Array [
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "backgroundColor": "#FFF",
+        "flex": 0,
+      }
+    }
+  />,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "backgroundColor": "#FFF",
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#FFF",
+          "flex": 1,
+        }
+      }
+    >
+      <Text>
+        Content
+      </Text>
+    </View>
+  </RCTSafeAreaView>,
+]
+`;
+
+exports[`Safe area view renders with custom styling 1`] = `
+Array [
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "backgroundColor": "orange",
+        "flex": 0,
+      }
+    }
+  />,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "backgroundColor": "yellow",
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "green",
+          "flex": 1,
+        }
+      }
+    >
+      <Text>
+        Content
+      </Text>
+    </View>
+  </RCTSafeAreaView>,
+]
+`;
+
+exports[`Safe area view renders without content 1`] = `
+Array [
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "backgroundColor": "#FFF",
+        "flex": 0,
+      }
+    }
+  />,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "backgroundColor": "#FFF",
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#FFF",
+          "flex": 1,
+        }
+      }
+    />
+  </RCTSafeAreaView>,
+]
+`;
