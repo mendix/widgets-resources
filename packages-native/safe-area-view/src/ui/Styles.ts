@@ -13,13 +13,13 @@ export interface SafeAreaViewStyle extends Style {
 
 export const defaultSafeAreaViewStyle: SafeAreaViewStyle = {
     unsafeAreaTop: {
-        backgroundColor: "red"
+        backgroundColor: "#FFF"
     },
     unsafeAreaBottom: {
-        backgroundColor: "blue"
+        backgroundColor: "#FFF"
     },
     container: {
         flex: 1,
-        backgroundColor: "white"
+        backgroundColor: "#FFF"
     }
 };
