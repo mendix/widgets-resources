@@ -14,8 +14,8 @@
     width: 100%;
     margin-right: auto;
     margin-left: auto;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: $gutter-size;
+    padding-left: $gutter-size;
 }
 
 // Row
@@ -26,10 +26,13 @@
     margin-left: -$gutter-size;
 }
 
-// Remove padding for Bootstrap columns, add class on row
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+
 .no-gutters > .col,
-.no-gutters > [class*='col-'],
-.no-gutter > [class*='col-'] {
+.no-gutters > [class*="col-"] {
     padding-right: 0;
     padding-left: 0;
 }
