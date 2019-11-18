@@ -13,12 +13,32 @@ describe("badge-web", () => {
             expect(badge).toContain(caption);
         });
 
-        it("renders with Bootstrap style success when style is success", () => {
+        it("renders with brand style success", () => {
             const backgroundColor = homepage.badgeSuccess.getCSSProperty("background-color").value;
             expect(backgroundColor).toContain("rgba(118,202,2,1)");
         });
 
-        it("renders with Bootstrap style danger when style is danger", () => {
+        it("renders with brand style info", () => {
+            const backgroundColor = homepage.badgeInfo.getCSSProperty("background-color").value;
+            expect(backgroundColor).toContain("rgba(72,176,247,1)");
+        });
+
+        it("renders with brand style default", () => {
+            const backgroundColor = homepage.badgeDefault.getCSSProperty("background-color").value;
+            expect(backgroundColor).toContain("rgba(221,221,221,1)");
+        });
+
+        it("renders with brand style inverse", () => {
+            const backgroundColor = homepage.badgeInverse.getCSSProperty("background-color").value;
+            expect(backgroundColor).toContain("rgba(37,44,54,1)");
+        });
+
+        it("renders with brand style warning", () => {
+            const backgroundColor = homepage.badgeWarning.getCSSProperty("background-color").value;
+            expect(backgroundColor).toContain("rgba(249,155,29,1)");
+        });
+
+        it("renders with brand style danger", () => {
             const backgroundColor = homepage.badgeDanger.getCSSProperty("background-color").value;
             expect(backgroundColor).toContain("rgba(237,28,36,1)");
         });
@@ -42,12 +62,32 @@ describe("badge-web", () => {
             expect(badge).toContain(caption);
         });
 
-        it("renders with Bootstrap style success when style is success", () => {
+        it("renders with brand style success", () => {
             const backgroundColor = homepage.labelSuccess.getCSSProperty("background-color").value;
             expect(backgroundColor).toContain("rgba(118,202,2,1)");
         });
 
-        it("renders with Bootstrap style danger when style is danger", () => {
+        it("renders with brand style info", () => {
+            const backgroundColor = homepage.labelInfo.getCSSProperty("background-color").value;
+            expect(backgroundColor).toContain("rgba(72,176,247,1)");
+        });
+
+        it("renders with brand style default", () => {
+            const backgroundColor = homepage.labelDefault.getCSSProperty("background-color").value;
+            expect(backgroundColor).toContain("rgba(221,221,221,1)");
+        });
+
+        it("renders with brand style inverse", () => {
+            const backgroundColor = homepage.labelInverse.getCSSProperty("background-color").value;
+            expect(backgroundColor).toContain("rgba(37,44,54,1)");
+        });
+
+        it("renders with brand style warning", () => {
+            const backgroundColor = homepage.labelWarning.getCSSProperty("background-color").value;
+            expect(backgroundColor).toContain("rgba(249,155,29,1)");
+        });
+
+        it("renders with brand style danger", () => {
             const backgroundColor = homepage.labelDanger.getCSSProperty("background-color").value;
             expect(backgroundColor).toContain("rgba(237,28,36,1)");
         });
