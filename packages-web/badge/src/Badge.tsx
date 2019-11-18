@@ -17,7 +17,7 @@ const Badge = (props: BadgeContainerProps): ReactNode => {
         <DisplayBadge
             type={props.type}
             value={props.value && props.value.status === ValueStatus.Available ? props.value.value : ""}
-            bootstrapStyle={props.brandStyle}
+            brandStyle={props.brandStyle}
             clickable={props.onClick && props.onClick.canExecute}
             onClick={onClick}
             className={props.class}

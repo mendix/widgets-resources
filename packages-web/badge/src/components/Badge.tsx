@@ -9,18 +9,18 @@ export interface BadgeProps {
     className?: string;
     style?: object;
     value: string;
-    bootstrapStyle?: BrandStyleEnum;
+    brandStyle?: BrandStyleEnum;
     clickable?: boolean;
     onClick?: () => void;
 }
 
 export const Badge = (props: BadgeProps): ReactElement => {
-    const { type, className, style, value, bootstrapStyle, clickable, onClick } = props;
+    const { type, className, style, value, brandStyle, clickable, onClick } = props;
 
     return (
         <span
             className={classNames("widget-badge", type, className, {
-                [`label-${bootstrapStyle}`]: !!bootstrapStyle,
+                [`label-${brandStyle}`]: !!brandStyle,
                 "widget-badge-clickable": clickable
             })}
             onClick={onClick}
