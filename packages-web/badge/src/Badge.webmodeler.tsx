@@ -11,7 +11,7 @@ export const preview = (props: BadgePreviewProps): ReactElement => {
     return (
         <Badge
             type={type}
-            value={value}
+            value={value ? value : ""}
             clickable={onClick.type !== "NoClientAction"}
             bootstrapStyle={brandStyle}
             className={classname}
