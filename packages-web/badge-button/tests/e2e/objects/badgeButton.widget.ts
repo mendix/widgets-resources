@@ -5,6 +5,8 @@ interface DefaultStyle {
     PrimaryBackground: string;
     SuccessBackground: string;
     InfoBackground: string;
+    WarningBackground: string;
+    DangerBackground: string;
     InverseBackground: string;
 }
 
@@ -13,6 +15,8 @@ const DefaultStyles: DefaultStyle = {
     PrimaryBackground: "rgba(5,149,219,1)",
     SuccessBackground: "rgba(118,202,2,1)",
     InfoBackground: "rgba(72,176,247,1)",
+    WarningBackground: "rgba(249,155,29,1)",
+    DangerBackground: "rgba(237,28,36,1)",
     InverseBackground: "rgba(37,44,54,1)"
 };
 
