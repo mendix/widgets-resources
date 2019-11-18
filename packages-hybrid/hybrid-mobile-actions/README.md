@@ -45,9 +45,16 @@ And add to the `Custom Phonegap/Cordova configuration` the following snippet.
     <plugin name="cordova-plugin-media" source="npm" spec="5.0.2" />
 ```
 
+Note: the standard template `config.xml` is already including `cordova-plugin-contacts` due to an permission structure
+change for Android, cause crashes on saving, it has to be replaced by:
+
+```xml
+    <plugin name="cordova-plugin-contacts" spec="https://github.com/mendixlabs/cordova-plugin-contacts.git#3.0.2" />
+```
+
 Please note that the above plugins are not available in the in standard
 [Mendix Mobile app](https://docs.mendix.com/refguide/getting-the-mendix-app) and can only be test with a
-[custom build app](https://docs.mendix.com/developerportal/deploy/mobileapp).
+[Custom build app](https://docs.mendix.com/developerportal/deploy/mobileapp).
 
 These configurations can also be set when
 [building a custom phonegap package](https://docs.mendix.com/refguide/customizing-phonegap-build-packages#1-introduction).
