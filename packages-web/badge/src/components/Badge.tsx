@@ -2,18 +2,17 @@ import { createElement, ReactElement } from "react";
 import classNames from "classnames";
 
 import "../ui/Badge.css";
+import { BrandStyleEnum } from "../../typings/BadgeProps";
 
 export interface BadgeProps {
     type: "badge" | "label";
     className?: string;
     style?: object;
     value: string;
-    bootstrapStyle?: BootstrapStyle;
+    bootstrapStyle?: BrandStyleEnum;
     clickable?: boolean;
     onClick?: () => void;
 }
-
-export type BootstrapStyle = "default" | "info" | "inverse" | "primary" | "danger" | "success" | "warning";
 
 export const Badge = (props: BadgeProps): ReactElement => {
     const { type, className, style, value, bootstrapStyle, clickable, onClick } = props;
