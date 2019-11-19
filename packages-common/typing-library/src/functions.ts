@@ -408,7 +408,7 @@ ${modelerVisibilityMap}
         ? `class: string;
     style?: CSSProperties;
     tabIndex: number;`
-        : "style: Style[];";
+        : "style: Partial<Style>[];";
     return `/**
  * This file was generated from ${widgetName}.xml
  * WARNING: All changes made to this file will be overwritten

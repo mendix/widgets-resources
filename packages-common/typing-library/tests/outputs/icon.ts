@@ -54,7 +54,7 @@ import { DynamicValue, NativeIcon } from "mendix";
 
 interface CommonProps<Style> {
     name: string;
-    style: Style[];
+    style: Partial<Style>[];
 }
 
 export interface IconsType {
