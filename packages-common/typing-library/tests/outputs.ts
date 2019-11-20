@@ -7,7 +7,7 @@ import { ActionValue, DynamicValue, EditableValue, NativeImage } from "mendix";
 
 interface CommonProps<Style> {
     name: string;
-    style: Partial<Style>[];
+    style: Array<Partial<Style>>;
 }
 
 export type BootstrapStyleEnum = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";

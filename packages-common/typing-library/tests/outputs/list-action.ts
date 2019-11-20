@@ -53,7 +53,7 @@ import { ActionValue, EditableValue } from "mendix";
 
 interface CommonProps<Style> {
     name: string;
-    style: Partial<Style>[];
+    style: Array<Partial<Style>>;
 }
 
 export interface ActionsType {
