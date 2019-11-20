@@ -35,12 +35,22 @@ export const headerImageFull = {
     },
 };
 
+export const headerImageOverlay = {
+    container: {
+        zIndex: 10,
+        width: "100%",
+        height: "100%",
+        position: "absolute",
+        backgroundColor: "rgba(0,0,0,0.4)",
+    },
+};
+
 export const headerBody = {
     container: {
-        position: "absolute",
-        end: 0,
-        start: 0,
         bottom: 0,
+        zIndex: 11,
+        width: "100%",
+        position: "absolute",
         backgroundColor: "transparent",
     },
 };
