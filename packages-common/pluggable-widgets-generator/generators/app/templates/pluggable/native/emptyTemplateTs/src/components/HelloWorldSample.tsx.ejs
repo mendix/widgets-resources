@@ -6,7 +6,7 @@ import { flattenStyles } from "../utils/common";
 
 export interface HelloWorldSampleProps {
     sampleText?: string;
-    style: CustomStyle[];
+    style: Array<Partial<CustomStyle>>;
 }
 
 const defaultStyle: CustomStyle = {
