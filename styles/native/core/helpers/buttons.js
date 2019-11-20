@@ -112,9 +112,9 @@ export const btnIconWhite = merge(btnIconPrimary, {
 // Round Button Icon With Background
 export const btnIconPrimaryBackground = {
     container: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
+        width: 40,
+        height: 40,
+        borderRadius: 20,
         paddingVertical: 0,
         paddingHorizontal: 0,
     },
@@ -123,7 +123,7 @@ export const btnIconPrimaryBackground = {
         height: "100%",
         alignItems: "center",
         justifyContent: "center",
-        size: button.fontSizeIcon,
+        size: button.fontSizeIconLarge,
         color: button.primary.color,
     },
 };

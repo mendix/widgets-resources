@@ -321,6 +321,10 @@
                 "description": "Justify content in the active direction.",
                 "options": [
                     {
+                        "name": "Start",
+                        "class": "justifyContentStart"
+                    },
+                    {
                         "name": "Center",
                         "class": "justifyContentCenter"
                     },
@@ -585,6 +589,10 @@
                 "type": "Dropdown",
                 "description": "Justify content in the active direction.",
                 "options": [
+                    {
+                        "name": "Start",
+                        "class": "justifyContentStart"
+                    },
                     {
                         "name": "Center",
                         "class": "justifyContentCenter"

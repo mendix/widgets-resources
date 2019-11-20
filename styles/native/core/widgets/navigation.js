@@ -30,7 +30,7 @@ export const navigationStyle = {
             color: navigation.topBar.titleColor,
             fontSize: navigation.topBar.titleFontSize,
             fontFamily: font.family,
-            fontWeight: Platform.select({ ios: font.weightBold, android: font.weightNormal }),
+            fontWeight: font.weightBold,
         },
         backButtonText: {
             // All TextStyle properties are allowed
