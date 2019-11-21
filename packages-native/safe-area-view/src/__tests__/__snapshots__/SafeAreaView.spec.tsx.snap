@@ -20,19 +20,19 @@ Array [
       }
     }
   >
-    <View
-      style={
-        Object {
-          "backgroundColor": "transperant",
-          "flex": 1,
-        }
-      }
-    >
-      <Text>
-        Content
-      </Text>
-    </View>
+    <Text>
+      Content
+    </Text>
   </RCTSafeAreaView>,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "backgroundColor": "transperant",
+        "flex": 0,
+      }
+    }
+  />,
 ]
 `;
 
@@ -51,24 +51,24 @@ Array [
     emulateUnlessSupported={true}
     style={
       Object {
-        "backgroundColor": "yellow",
+        "backgroundColor": "green",
         "flex": 1,
       }
     }
   >
-    <View
-      style={
-        Object {
-          "backgroundColor": "green",
-          "flex": 1,
-        }
-      }
-    >
-      <Text>
-        Content
-      </Text>
-    </View>
+    <Text>
+      Content
+    </Text>
   </RCTSafeAreaView>,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "backgroundColor": "yellow",
+        "flex": 0,
+      }
+    }
+  />,
 ]
 `;
 
@@ -91,15 +91,15 @@ Array [
         "flex": 1,
       }
     }
-  >
-    <View
-      style={
-        Object {
-          "backgroundColor": "transperant",
-          "flex": 1,
-        }
+  />,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "backgroundColor": "transperant",
+        "flex": 0,
       }
-    />
-  </RCTSafeAreaView>,
+    }
+  />,
 ]
 `;
