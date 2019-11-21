@@ -45,8 +45,6 @@ export async function BiometricAuthentication(reason: string): Promise<boolean> 
             if (window.FingerprintAuth) {
                 const encryptConfig: EncryptionConfig = {
                     clientId: "mxApp",
-                    username: "",
-                    password: "",
                     maxAttempts: 3,
                     encryptNoAuth: false,
                     dialogTitle: reason
