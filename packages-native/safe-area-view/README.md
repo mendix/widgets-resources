@@ -1,103 +1,51 @@
-# Safe area view widget (template)
+# Safe area view widget
 
-Displays swipeable contents with buttons to proceed or go back and pagination.
+Prevents content being rendered in an unsafe areas like rounded screen corners or a notch. Currently, this widget only
+supports iOS.
 
-## Available patterns
+## Custom styling
 
-### Pagination above
+You can define your custom styles through Atlas. These styles should adhere to the following interface:
 
-![Above](./assets/above.gif)
-
-### Pagination between
-
-![Between](./assets/between.gif)
-
-## Using Custom styles
-
-![Between](./assets/custom_styles.gif)
-
-You can define your styles through Atlas using the following properties:
-
-```$js
-export const myCustomStyle = {
-    fullscreenContainer: ViewStyle;
-    popupContainer: ViewStyle;
-    paginationContainer: ViewStyle;
-    paginationText: TextStyle;
-    dotStyle: ViewStyle;
-    activeDotStyle: ViewStyle;
-    paginationAbove: {
-        buttonsContainer: ViewStyle;
-        buttonSkip: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
-        buttonDone: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
-        buttonPrevious: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
-        buttonNext: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
+```ts
+interface SafeAreaViewStyle {
+    unsafeAreaTop?: {
+        backgroundColor?: string;
     };
-    paginationBetween: {
-        buttonSkip: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
-        buttonDone: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
-        buttonPrevious: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
-        buttonNext: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
+    unsafeAreaBottom?: {
+        backgroundColor?: string;
     };
+    container?: ViewStyle;
 }
 ```
 
-Check the official documentation for further information about ViewStyle and TextStyle
-`https://facebook.github.io/react-native/docs/view-style-props` and
-`https://facebook.github.io/react-native/docs/text-style-props`
+An example of a default custom style:
+
+```js
+export const com_mendix_widget_native_safeareaview_SafeAreaView = {
+    unsafeAreaTop: {
+        backgroundColor: "#FFF"
+    },
+    unsafeAreaBottom: {
+        backgroundColor: "#FFF"
+    },
+    container: {
+        flex: 1,
+        backgroundColor: "#FFF"
+    }
+};
+```
+
+An example of a class custom style:
+
+```js
+export const transperantUnsafeArea = {
+    container: {
+        flex: 1,
+        backgroundColor: "#FFF"
+    }
+};
+```
+
+Check the official documentation for further information about ViewStyle :
+`https://facebook.github.io/react-native/docs/view-style-props`
