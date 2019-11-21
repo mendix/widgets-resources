@@ -7,7 +7,7 @@ import { ReactNode } from "react";
 
 interface CommonProps<Style> {
     name: string;
-    style: Partial<Style>[];
+    style: Array<Partial<Style>>;
 }
 
 export interface SafeAreaViewProps<Style> extends CommonProps<Style> {
