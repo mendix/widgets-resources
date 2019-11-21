@@ -57,7 +57,7 @@ export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Elem
     const showNextDone = props.buttonPattern !== "none";
 
     return (
-        <Modal visible={visible} transparent={props.showMode === "popup"} hardwareAccelerated>
+        <Modal visible={visible} transparent={props.showMode === "popup"}>
             <View style={props.showMode === "fullscreen" ? styles.fullscreenContainer : styles.popupContainer}>
                 <SwipeableContainer
                     slides={props.slides}

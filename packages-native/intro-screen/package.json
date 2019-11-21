@@ -1,7 +1,7 @@
 {
     "name": "intro-screen",
     "widgetName": "IntroScreen",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "license": "Apache-2.0",
     "repository": {
         "type": "git",
@@ -21,9 +21,6 @@
         "test": "../../node_modules/.bin/jest --config ../../scripts/test/jest.native.config.js",
         "version": "npm run release",
         "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
-    },
-    "devDependencies": {
-        "@types/react-native-app-intro-slider": "^3.0.0"
     },
     "dependencies": {
         "@react-native-community/async-storage": "^1.6.2",
