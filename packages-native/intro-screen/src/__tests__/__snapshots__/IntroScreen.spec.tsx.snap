@@ -2,7 +2,7 @@
 
 exports[`Intro Screen renders 1`] = `
 <Modal
-  hardwareAccelerated={true}
+  hardwareAccelerated={false}
   transparent={false}
   visible={true}
 >
@@ -172,7 +172,7 @@ exports[`Intro Screen renders 1`] = `
 
 exports[`Intro Screen renders with 1 bottom button 1`] = `
 <Modal
-  hardwareAccelerated={true}
+  hardwareAccelerated={false}
   transparent={false}
   visible={true}
 >
@@ -356,7 +356,7 @@ exports[`Intro Screen renders with 1 bottom button 1`] = `
 
 exports[`Intro Screen renders with 2 bottom button 1`] = `
 <Modal
-  hardwareAccelerated={true}
+  hardwareAccelerated={false}
   transparent={false}
   visible={true}
 >
@@ -540,7 +540,7 @@ exports[`Intro Screen renders with 2 bottom button 1`] = `
 
 exports[`Intro Screen renders with active slide attribute 1`] = `
 <Modal
-  hardwareAccelerated={true}
+  hardwareAccelerated={false}
   transparent={false}
   visible={true}
 >
@@ -710,7 +710,7 @@ exports[`Intro Screen renders with active slide attribute 1`] = `
 
 exports[`Intro Screen renders with async storage identifier 1`] = `
 <Modal
-  hardwareAccelerated={true}
+  hardwareAccelerated={false}
   transparent={false}
   visible={false}
 >
