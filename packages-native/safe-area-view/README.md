@@ -1,6 +1,6 @@
 # Safe area view widget
 
-Prevents content being rendered in an unsafe areas like rounded screen corners or a notch. Currently, this widget only
+Prevents content being rendered in unsafe areas like rounded screen corners or a notch. Currently, this widget only
 supports iOS.
 
 ## Custom styling
@@ -19,7 +19,7 @@ interface SafeAreaViewStyle {
 }
 ```
 
-An example of a default custom style:
+An example of a default custom style class:
 
 ```js
 export const com_mendix_widget_native_safeareaview_SafeAreaView = {
@@ -36,7 +36,7 @@ export const com_mendix_widget_native_safeareaview_SafeAreaView = {
 };
 ```
 
-An example of a class custom style:
+An example of a custom style class:
 
 ```js
 export const transparentUnsafeArea = {
