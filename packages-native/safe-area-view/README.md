@@ -39,7 +39,7 @@ export const com_mendix_widget_native_safeareaview_SafeAreaView = {
 An example of a class custom style:
 
 ```js
-export const transperantUnsafeArea = {
+export const transparentUnsafeArea = {
     container: {
         flex: 1,
         backgroundColor: "#FFF"
