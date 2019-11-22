@@ -6,7 +6,7 @@ Array [
     emulateUnlessSupported={true}
     style={
       Object {
-        "backgroundColor": "transperant",
+        "backgroundColor": "transparent",
         "flex": 0,
       }
     }
@@ -15,7 +15,7 @@ Array [
     emulateUnlessSupported={true}
     style={
       Object {
-        "backgroundColor": "transperant",
+        "backgroundColor": "transparent",
         "flex": 1,
       }
     }
@@ -28,7 +28,7 @@ Array [
     emulateUnlessSupported={true}
     style={
       Object {
-        "backgroundColor": "transperant",
+        "backgroundColor": "transparent",
         "flex": 0,
       }
     }
@@ -78,7 +78,7 @@ Array [
     emulateUnlessSupported={true}
     style={
       Object {
-        "backgroundColor": "transperant",
+        "backgroundColor": "transparent",
         "flex": 0,
       }
     }
@@ -87,7 +87,7 @@ Array [
     emulateUnlessSupported={true}
     style={
       Object {
-        "backgroundColor": "transperant",
+        "backgroundColor": "transparent",
         "flex": 1,
       }
     }
@@ -96,7 +96,7 @@ Array [
     emulateUnlessSupported={true}
     style={
       Object {
-        "backgroundColor": "transperant",
+        "backgroundColor": "transparent",
         "flex": 0,
       }
     }
