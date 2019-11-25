@@ -64,3 +64,4 @@ export * from "./ui_resources/atlas_ui_resources/buildingblocks/header";
 
 
 // Page Templates
+export * from "./ui_resources/atlas_ui_resources/pagetemplates/maps";
