@@ -1,4 +1,3 @@
-import { Platform }                              from "react-native";
 import { background, border, contrast, spacing } from "../../../core/variables.js";
 
 
@@ -18,7 +17,6 @@ export const mapContainerBottom = {
         alignItems: "center",
         bottom: 0,
         position: "absolute",
-        marginBottom: Platform.select({ ios: 30 }),
     },
 };
 
