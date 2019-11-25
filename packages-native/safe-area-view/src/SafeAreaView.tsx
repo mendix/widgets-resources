@@ -1,4 +1,4 @@
-import { createElement, Fragment } from "react";
+import { createElement } from "react";
 import { SafeAreaView as ReactSaveAreaView } from "react-native";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 
@@ -9,11 +9,5 @@ export const SafeAreaView = (props: SafeAreaViewProps<SafeAreaViewStyle>): JSX.E
     const customStyles = props.style.filter(o => o != null);
     const styles = flattenStyles(defaultSafeAreaViewStyle, customStyles);
 
-    return (
-        <Fragment>
-            <ReactSaveAreaView style={{ flex: 0, backgroundColor: styles.unsafeAreaTop.backgroundColor }} />
-            <ReactSaveAreaView style={{ ...styles.container, flex: 1 }}>{props.content}</ReactSaveAreaView>
-            <ReactSaveAreaView style={{ flex: 0, backgroundColor: styles.unsafeAreaBottom.backgroundColor }} />
-        </Fragment>
-    );
+    return <ReactSaveAreaView style={{ ...styles.container }}>{props.content}</ReactSaveAreaView>;
 };
