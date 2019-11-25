@@ -1,105 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Safe area view renders with content 1`] = `
-Array [
-  <RCTSafeAreaView
-    emulateUnlessSupported={true}
-    style={
-      Object {
-        "backgroundColor": "transparent",
-        "flex": 0,
-      }
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "flex": 1,
     }
-  />,
-  <RCTSafeAreaView
-    emulateUnlessSupported={true}
-    style={
-      Object {
-        "backgroundColor": "transparent",
-        "flex": 1,
-      }
-    }
-  >
-    <Text>
-      Content
-    </Text>
-  </RCTSafeAreaView>,
-  <RCTSafeAreaView
-    emulateUnlessSupported={true}
-    style={
-      Object {
-        "backgroundColor": "transparent",
-        "flex": 0,
-      }
-    }
-  />,
-]
+  }
+>
+  <Text>
+    Content
+  </Text>
+</RCTSafeAreaView>
 `;
 
 exports[`Safe area view renders with custom styling 1`] = `
-Array [
-  <RCTSafeAreaView
-    emulateUnlessSupported={true}
-    style={
-      Object {
-        "backgroundColor": "orange",
-        "flex": 0,
-      }
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "backgroundColor": "green",
+      "flex": 1,
     }
-  />,
-  <RCTSafeAreaView
-    emulateUnlessSupported={true}
-    style={
-      Object {
-        "backgroundColor": "green",
-        "flex": 1,
-      }
-    }
-  >
-    <Text>
-      Content
-    </Text>
-  </RCTSafeAreaView>,
-  <RCTSafeAreaView
-    emulateUnlessSupported={true}
-    style={
-      Object {
-        "backgroundColor": "yellow",
-        "flex": 0,
-      }
-    }
-  />,
-]
+  }
+>
+  <Text>
+    Content
+  </Text>
+</RCTSafeAreaView>
 `;
 
 exports[`Safe area view renders without content 1`] = `
-Array [
-  <RCTSafeAreaView
-    emulateUnlessSupported={true}
-    style={
-      Object {
-        "backgroundColor": "transparent",
-        "flex": 0,
-      }
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "flex": 1,
     }
-  />,
-  <RCTSafeAreaView
-    emulateUnlessSupported={true}
-    style={
-      Object {
-        "backgroundColor": "transparent",
-        "flex": 1,
-      }
-    }
-  />,
-  <RCTSafeAreaView
-    emulateUnlessSupported={true}
-    style={
-      Object {
-        "backgroundColor": "transparent",
-        "flex": 0,
-      }
-    }
-  />,
-]
+  }
+/>
 `;
