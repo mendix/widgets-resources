@@ -5,7 +5,7 @@
             <widgetFile path="Maps.xml"/>
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/custom/Maps"/>
+            <file path="com/mendix/widget/custom/maps"/>
         </files>
     </clientModule>
 </package>
