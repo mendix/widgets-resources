@@ -8,16 +8,14 @@ A collection of nanoflow actions for hybrid mobile applications.
 |                | Biometric authentication              |
 | Calendar       | Open calendar                         |
 |                | Save calendar event                   |
-| Camera         | Scan barcode                          |
-|                | Take picture                          |
-| Clipboard      | Scan barcode                          |
-|                | Take picture                          |
+| Camera         | Take picture                          |
+|                | Scan barcode                          |
+| Clipboard      | Get clipboard content                 |
+|                | Set clipboard content                 |
 | Contacts       | Save contact                          |
 |                | Search contacts                       |
 |                | Select contact                        |
-| Mobile         | Change status bar                     |
-|                | Search contacts                       |
-|                | Get device info                       |
+| Mobile         | Get device info                       |
 |                | Vibrate                               |
 | Network        | Is connected                          |
 |                | Is cellular connection                |
@@ -46,7 +44,7 @@ And add to the `Custom Phonegap/Cordova configuration` the following snippet.
 ```
 
 Note: the standard template `config.xml` is already including `cordova-plugin-contacts` due to an permission structure
-change for Android, cause crashes on saving, it has to be replaced by:
+change for Android 9, it cause crashes on saving, it has to be replaced by:
 
 ```xml
     <plugin name="cordova-plugin-contacts" spec="https://github.com/mendixlabs/cordova-plugin-contacts.git#3.0.2" />
