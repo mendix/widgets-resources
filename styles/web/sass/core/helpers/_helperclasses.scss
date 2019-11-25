@@ -14,43 +14,43 @@ $important-helpers-value: if($important-helpers, ' !important', '');
 
 // Display properties
 .d-none {
-    display: none !important;
+    display: none #{$important-helpers-value};
 }
 
 .d-flex {
-    display: flex !important;
+    display: flex #{$important-helpers-value};
 }
 
 .d-inline-flex {
-    display: inline-flex !important;
+    display: inline-flex #{$important-helpers-value};
 }
 
 .d-inline {
-    display: inline !important;
+    display: inline #{$important-helpers-value};
 }
 
 .d-inline-block {
-    display: inline-block !important;
+    display: inline-block #{$important-helpers-value};
 }
 
 .show,
 .d-block {
-    display: block !important;
+    display: block #{$important-helpers-value};
 }
 
 .table,
 .d-table {
-    display: table !important;
+    display: table #{$important-helpers-value};
 }
 
 .table-row,
 .d-table-row {
-    display: table-row !important;
+    display: table-row #{$important-helpers-value};
 }
 
 .table-cell,
 .d-table-cell {
-    display: table-cell !important;
+    display: table-cell #{$important-helpers-value};
 }
 
 .hide,
@@ -253,31 +253,31 @@ $important-helpers-value: if($important-helpers, ' !important', '');
     .hide-md,
     .hidden-md,
     .d-md-none {
-        display: none !important;
+        display: none #{$important-helpers-value};
     }
     .d-md-flex {
-        display: flex !important;
+        display: flex #{$important-helpers-value};
     }
     .d-md-inline-flex {
-        display: inline-flex !important;
+        display: inline-flex #{$important-helpers-value};
     }
     .d-md-inline {
-        display: inline !important;
+        display: inline #{$important-helpers-value};
     }
     .d-md-inline-block {
-        display: inline-block !important;
+        display: inline-block #{$important-helpers-value};
     }
     .d-md-block {
-        display: block !important;
+        display: block #{$important-helpers-value};
     }
     .d-md-table {
-        display: table !important;
+        display: table #{$important-helpers-value};
     }
     .d-md-table-row {
-        display: table-row !important;
+        display: table-row #{$important-helpers-value};
     }
     .d-md-table-cell {
-        display: table-cell !important;
+        display: table-cell #{$important-helpers-value};
     }
 }
 
