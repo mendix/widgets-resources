@@ -32,9 +32,7 @@ describe("Safe area view", () => {
     it("renders with custom styling", () => {
         defaultProps.style = [
             {
-                container: { backgroundColor: "blue" },
-                unsafeAreaTop: { backgroundColor: "orange" },
-                unsafeAreaBottom: { backgroundColor: "yellow" }
+                container: { backgroundColor: "blue" }
             },
             { container: { backgroundColor: "green" } }
         ];
