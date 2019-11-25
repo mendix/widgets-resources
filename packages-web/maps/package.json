@@ -1,7 +1,7 @@
 {
     "name": "maps-web",
     "widgetName": "Maps",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Show locations on Google Maps",
     "copyright": "Mendix BV",
     "repository": {
