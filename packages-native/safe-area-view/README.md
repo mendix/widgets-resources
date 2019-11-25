@@ -5,14 +5,13 @@ only supports iOS.
 
 ## Usage
 
-Place the Safe are view widget onto an empty page or inside a maximum sized container and place other widgets inside its
-content area.
+Place the Safe are view widget onto a fullscreen page and place other widgets inside its content area.
 
 ### Custom styling
 
-By default the widgets' background color is transparent, so the background color of the page or container is visible.
-It's possible to style the widget differently by defining custom style classes through Atlas. These classes should
-adhere to the following interface:
+By default the widgets' background color is transparent, so the background color of the page is visible. It's possible
+to style the widget differently by defining custom style classes through Atlas. These classes should adhere to the
+following interface:
 
 ```ts
 interface SafeAreaViewStyle {
@@ -42,5 +41,5 @@ export const customSafeAreaViewBackground = {
 
 Both classes will apply an orange background to the safe and unsafe areas of the widget.
 
-Check the official documentation for further information about ViewStyle :
+Check the official documentation for further information about ViewStyle:
 `https://facebook.github.io/react-native/docs/view-style-props`
