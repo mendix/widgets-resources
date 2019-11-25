@@ -20,7 +20,8 @@
         "sourceMap": false,
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
-        "removeComments": false
+        "removeComments": false,
+        "newLine": "CRLF"
     },
     "baseUrl": "./",
     "include": ["./"],
