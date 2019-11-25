@@ -5,7 +5,7 @@ only supports iOS.
 
 ## Usage
 
-Place the Safe are view widget onto a fullscreen page and place other widgets inside its content area.
+Place the Safe area view widget onto a fullscreen page and place other widgets inside its content area.
 
 ### Custom styling
 
