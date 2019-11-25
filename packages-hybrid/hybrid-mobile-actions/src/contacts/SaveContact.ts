@@ -50,7 +50,10 @@ export async function SaveContact(
     }
 
     return new Promise((resolve, reject) => {
-        contact.save(() => resolve(), error => reject(new Error(errorMessage(error))));
+        contact.save(
+            () => resolve(),
+            error => reject(new Error(errorMessage(error)))
+        );
     });
 
     function errorMessage(error: ContactError): string {
