@@ -14,43 +14,43 @@ $important-helpers-value: if($important-helpers, ' !important', '');
 
 // Display properties
 .d-none {
-    display: none !important;
+    display: none #{$important-helpers-value};
 }
 
 .d-flex {
-    display: flex !important;
+    display: flex #{$important-helpers-value};
 }
 
 .d-inline-flex {
-    display: inline-flex !important;
+    display: inline-flex #{$important-helpers-value};
 }
 
 .d-inline {
-    display: inline !important;
+    display: inline #{$important-helpers-value};
 }
 
 .d-inline-block {
-    display: inline-block !important;
+    display: inline-block #{$important-helpers-value};
 }
 
 .show,
 .d-block {
-    display: block !important;
+    display: block #{$important-helpers-value};
 }
 
 .table,
 .d-table {
-    display: table !important;
+    display: table #{$important-helpers-value};
 }
 
 .table-row,
 .d-table-row {
-    display: table-row !important;
+    display: table-row #{$important-helpers-value};
 }
 
 .table-cell,
 .d-table-cell {
-    display: table-cell !important;
+    display: table-cell #{$important-helpers-value};
 }
 
 .hide,
@@ -170,31 +170,31 @@ $important-helpers-value: if($important-helpers, ' !important', '');
     .hide-xs,
     .hidden-xs,
     .d-xs-none {
-        display: none !important;
+        display: none #{$important-helpers-value};
     }
     .d-xs-flex {
-        display: flex !important;
+        display: flex #{$important-helpers-value};
     }
     .d-xs-inline-flex {
-        display: inline-flex !important;
+        display: inline-flex #{$important-helpers-value};
     }
     .d-xs-inline {
-        display: inline !important;
+        display: inline #{$important-helpers-value};
     }
     .d-xs-inline-block {
-        display: inline-block !important;
+        display: inline-block #{$important-helpers-value};
     }
     .d-xs-block {
-        display: block !important;
+        display: block #{$important-helpers-value};
     }
     .d-xs-table {
-        display: table !important;
+        display: table #{$important-helpers-value};
     }
     .d-xs-table-row {
-        display: table-row !important;
+        display: table-row #{$important-helpers-value};
     }
     .d-xs-table-cell {
-        display: table-cell !important;
+        display: table-cell #{$important-helpers-value};
     }
 }
 
@@ -202,31 +202,31 @@ $important-helpers-value: if($important-helpers, ' !important', '');
     .hide-sm,
     .hidden-sm,
     .d-sm-none {
-        display: none !important;
+        display: none #{$important-helpers-value};
     }
     .d-sm-flex {
-        display: flex !important;
+        display: flex #{$important-helpers-value};
     }
     .d-sm-inline-flex {
-        display: inline-flex !important;
+        display: inline-flex #{$important-helpers-value};
     }
     .d-sm-inline {
-        display: inline !important;
+        display: inline #{$important-helpers-value};
     }
     .d-sm-inline-block {
-        display: inline-block !important;
+        display: inline-block #{$important-helpers-value};
     }
     .d-sm-block {
-        display: block !important;
+        display: block #{$important-helpers-value};
     }
     .d-sm-table {
-        display: table !important;
+        display: table #{$important-helpers-value};
     }
     .d-sm-table-row {
-        display: table-row !important;
+        display: table-row #{$important-helpers-value};
     }
     .d-sm-table-cell {
-        display: table-cell !important;
+        display: table-cell #{$important-helpers-value};
     }
 }
 
@@ -234,31 +234,31 @@ $important-helpers-value: if($important-helpers, ' !important', '');
     .hide-md,
     .hidden-md,
     .d-md-none {
-        display: none !important;
+        display: none #{$important-helpers-value};
     }
     .d-md-flex {
-        display: flex !important;
+        display: flex #{$important-helpers-value};
     }
     .d-md-inline-flex {
-        display: inline-flex !important;
+        display: inline-flex #{$important-helpers-value};
     }
     .d-md-inline {
-        display: inline !important;
+        display: inline #{$important-helpers-value};
     }
     .d-md-inline-block {
-        display: inline-block !important;
+        display: inline-block #{$important-helpers-value};
     }
     .d-md-block {
-        display: block !important;
+        display: block #{$important-helpers-value};
     }
     .d-md-table {
-        display: table !important;
+        display: table #{$important-helpers-value};
     }
     .d-md-table-row {
-        display: table-row !important;
+        display: table-row #{$important-helpers-value};
     }
     .d-md-table-cell {
-        display: table-cell !important;
+        display: table-cell #{$important-helpers-value};
     }
 }
 
@@ -266,31 +266,31 @@ $important-helpers-value: if($important-helpers, ' !important', '');
     .hide-lg,
     .hidden-lg,
     .d-lg-none {
-        display: none !important;
+        display: none #{$important-helpers-value};
     }
     .d-lg-flex {
-        display: flex !important;
+        display: flex #{$important-helpers-value};
     }
     .d-lg-inline-flex {
-        display: inline-flex !important;
+        display: inline-flex #{$important-helpers-value};
     }
     .d-lg-inline {
-        display: inline !important;
+        display: inline #{$important-helpers-value};
     }
     .d-lg-inline-block {
-        display: inline-block !important;
+        display: inline-block #{$important-helpers-value};
     }
     .d-lg-block {
-        display: block !important;
+        display: block #{$important-helpers-value};
     }
     .d-lg-table {
-        display: table !important;
+        display: table #{$important-helpers-value};
     }
     .d-lg-table-row {
-        display: table-row !important;
+        display: table-row #{$important-helpers-value};
     }
     .d-lg-table-cell {
-        display: table-cell !important;
+        display: table-cell #{$important-helpers-value};
     }
 }
 
@@ -298,30 +298,30 @@ $important-helpers-value: if($important-helpers, ' !important', '');
     .hide-xl,
     .hidden-xl,
     .d-xl-none {
-        display: none !important;
+        display: none #{$important-helpers-value};
     }
     .d-xl-flex {
-        display: flex !important;
+        display: flex #{$important-helpers-value};
     }
     .d-xl-inline-flex {
-        display: inline-flex !important;
+        display: inline-flex #{$important-helpers-value};
     }
     .d-xl-inline {
-        display: inline !important;
+        display: inline #{$important-helpers-value};
     }
     .d-xl-inline-block {
-        display: inline-block !important;
+        display: inline-block #{$important-helpers-value};
     }
     .d-xl-block {
-        display: block !important;
+        display: block #{$important-helpers-value};
     }
     .d-xl-table {
-        display: table !important;
+        display: table #{$important-helpers-value};
     }
     .d-xl-table-row {
-        display: table-row !important;
+        display: table-row #{$important-helpers-value};
     }
     .d-xl-table-cell {
-        display: table-cell !important;
+        display: table-cell #{$important-helpers-value};
     }
 }
