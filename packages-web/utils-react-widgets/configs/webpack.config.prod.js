@@ -2,7 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const variables = require("./variables");
 // console.log("variables", variables);
 
@@ -59,19 +59,16 @@ const widgetConfig = {
             },
             {
                 test: /\.(sa|sc|c)ss$/,
-                loader: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: ["css-loader", "sass-loader"]
-                })
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
             }
         ]
     },
     mode: "production",
-    devtool: "source-map",
     externals: ["react", "react-dom"],
     plugins: [
-        new ExtractTextPlugin({
-            filename: `./widgets/com/mendix/widget/custom/${name}/ui/${widgetName}.css`
+        new MiniCssExtractPlugin({
+            filename: `./widgets/com/mendix/widget/custom/${name}/ui/${widgetName}.css`,
+            ignoreOrder: false
         }),
         new ForkTsCheckerWebpackPlugin(),
         new CopyWebpackPlugin(
