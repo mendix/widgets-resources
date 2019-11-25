@@ -40,3 +40,6 @@ packages-web/actions/tests/TestProjects/*/theme/settings-native.json
 packages-web/actions/tests/TestProjects/*/theme/styles.js
 packages-web/actions/tests/TestProjects/*/theme/styles/web/css/main.css.map
 
+packages-web/progress-bar/tests/TestProjects/Mendix8.3/
+packages-web/progress-bar/tests/TestProjects/Mendix_MX_8/
+packages-web/badge-button/tests/TestProjects/Mendix_MX_8/*
