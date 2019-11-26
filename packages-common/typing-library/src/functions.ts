@@ -452,9 +452,9 @@ export const transformPackageContent = (content: PackageContent, basePath: strin
                 writeFileSync(folder + output, generatedContent);
             }
         });
-    } catch (e) {
+    } catch (error) {
         throw new PluginError("Typing generation", {
-            message: "[XML] Incorrect package.xml file, please check Mendix Documentation.."
+            message: "[XML] Incorrect widget property .xml file, please check Mendix Documentation: " + error.message
         });
     }
 };
