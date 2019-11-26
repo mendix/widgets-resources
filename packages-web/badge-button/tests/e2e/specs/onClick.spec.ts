@@ -53,6 +53,10 @@ describe("BadgeButton on click", () => {
 
             const header = page.header;
             expect(header).toBe("ClickedPage");
+
+            // Verify it passes a parameter
+            const data = page.getElement(".form-control-static").getText();
+            expect(data).toBe("New");
         });
 
         it("should open a popup page", () => {
@@ -63,6 +67,10 @@ describe("BadgeButton on click", () => {
 
             const header = page.header;
             expect(header).toBe("ClickedPagePopup");
+
+            // Verify it passes a parameter
+            const data = page.getElement(".form-control-static").getText();
+            expect(data).toBe("New");
         });
 
         it("should open modal popup page", () => {
@@ -73,6 +81,10 @@ describe("BadgeButton on click", () => {
 
             const header = page.header;
             expect(header).toBe("ModalPopupPage");
+
+            // Verify it passes a parameter
+            const data = page.getElement(".form-control-static").getText();
+            expect(data).toBe("New");
         });
     });
 
