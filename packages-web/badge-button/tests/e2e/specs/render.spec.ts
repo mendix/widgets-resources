@@ -22,6 +22,30 @@ describe("BadgeButton rendering", () => {
         expect(badgeButton.getBadgeText()).toEqual("");
     });
 
+    it("should update text value", () => {
+        const textInput = page.getWidget("textBox1");
+        textInput.$(".form-control").setValue("er");
+        textInput.$(".control-label").click();
+
+        const badgeButton = new badgeButtonWidget("badgeButtonDynamic");
+
+        badgeButton.element.waitForDisplayed();
+        expect(badgeButton.getText()).toEqual("Button");
+        expect(badgeButton.getBadgeText()).toEqual("Newer");
+    });
+
+    it("should update number value", () => {
+        const textInput = page.getWidget("textBox2");
+        textInput.$(".form-control").setValue("0987654");
+        textInput.$(".control-label").click();
+
+        const badgeButton = new badgeButtonWidget("badgeButtonFallback");
+
+        badgeButton.element.waitForDisplayed();
+        expect(badgeButton.getText()).toEqual("Button");
+        expect(badgeButton.getBadgeText()).toEqual("987654");
+    });
+
     it("should display correctly static data", () => {
         const badgeButton = new badgeButtonWidget("badgeButtonStatic");
 
