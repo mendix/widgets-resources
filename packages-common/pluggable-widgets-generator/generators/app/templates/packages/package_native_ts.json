@@ -30,7 +30,7 @@
     "url": "https://github.com/<%- author %>/<%- packageName %>/issues"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^8.4.0",
+    "@mendix/pluggable-widgets-tools": "^8.3.1",
     "@types/big.js": "^4.0.5",
     "@types/classnames": "^2.2.6",<% if (unitTests) { %>
     "@types/enzyme": "^3.1.14", <% } %>
