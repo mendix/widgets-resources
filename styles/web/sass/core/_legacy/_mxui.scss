@@ -2681,9 +2681,10 @@ input[type="checkbox"] {
     display: table-cell;
     vertical-align: top;
 }
-.mx-scrollcontainer-wrapper {
-    padding: 10px;
-}
+//.mx-scrollcontainer-wrapper {
+//    padding: 10px;
+//}
+
 .mx-scrollcontainer-nested {
     padding: 0;
 }
@@ -3027,9 +3028,9 @@ body[dir="rtl"] .mx-header-left {
 //    background: #f5f5f5;
 //}
 .mx-listview > ul > li.selected {
-    background: #eee;
+//    background: #eee;
 }
-.mx-listview-clickable ul * {
+.mx-listview-clickable > ul > li {
     cursor: pointer;
 }
 .mx-listview-empty {

@@ -85,10 +85,12 @@ spacing = merge(spacing, custom.spacing || {});
 // Button Styles
 let button = {
     fontSize: font.sizeSmall,
-    fontSizeIcon: font.sizeSmall,
+    fontSizeIcon: font.size,
+    fontSizeIconSmall: font.sizeSmall,
+    fontSizeIconLarge: font.sizeLarge,
     borderRadius: border.radius,
-    paddingVertical: Platform.select({ android: spacing.smaller, ios: spacing.smaller }),
-    paddingHorizontal: Platform.select({ android: spacing.small, ios: spacing.regular }),
+    paddingVertical: spacing.smaller,
+    paddingHorizontal: spacing.regular,
 
     header: {
         color: brand.primary,
@@ -148,7 +150,7 @@ let input = {
 
     // Alignment
     textAlign: "left",
-    paddingHorizontal: spacing.small,
+    paddingHorizontal: spacing.smaller,
     paddingVertical: spacing.small,
 };
 input = merge(input, custom.input || {});
@@ -163,7 +165,7 @@ let navigation = {
         backgroundColor: background.primary,
         backButtonColor: contrast.highest,
         titleColor: contrast.highest,
-        titleFontSize: font.sizeH4,
+        titleFontSize: Platform.select({ android: font.sizeH4, ios: font.sizeH5 }),
     },
     bottomBar: {
         color: contrast.high,
@@ -171,6 +173,7 @@ let navigation = {
         selectedIconColor: brand.primary,
         backgroundColor: background.primary,
         fontSize: font.sizeSmall,
+        iconSize: font.sizeSmall,
     },
     progressOverlay: {
         color: "#FFF",

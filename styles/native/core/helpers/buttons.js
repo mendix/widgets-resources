@@ -109,6 +109,27 @@ export const btnIconWhite = merge(btnIconPrimary, {
     },
 });
 
+// Round Button Icon With Background
+export const btnIconPrimaryBackground = {
+    container: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        paddingVertical: 0,
+        paddingHorizontal: 0,
+    },
+    icon: {
+        width: "100%",
+        height: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+        size: button.fontSizeIconLarge,
+        color: button.primary.color,
+    },
+};
+
+
+// Text only
 export const btnAsText = {
     container: {
         maxHeight: 22,
@@ -122,7 +143,7 @@ export const btnAsText = {
     icon: {
         color: brand.primary,
         fontWeight: font.weightSemiBold,
-        size: button.fontSizeIcon,
+        size: button.fontSizeIconSmall,
     },
     caption: {
         color: brand.primary,

@@ -30,7 +30,7 @@ export const ActionButton = {
     icon: {
         // Size and color are allowed
         color: button.primary.color,
-        size: button.fontSizeIcon,
+        size: button.fontSizeIconSmall,
     },
     caption: {
         // All TextStyle properties are allowed
@@ -50,7 +50,7 @@ export const ActionButtonHeader = {
     },
     icon: {
         color: button.header.color,
-        size: button.header.fontSizeIcon,
+        size: button.header.fontSizeIconSmall,
     },
     caption: {
         color: button.header.color,

@@ -21,8 +21,8 @@ export const brand = {
 
 // Dark Mode - Inherits OS theme if possible
 export const darkMode = NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode
-                 ? NativeModules.RNDarkMode.initialMode === "dark"
-                 : false;
+                        ? NativeModules.RNDarkMode.initialMode === "dark"
+                        : false;
 
 // Background Colors
 const backgroundColor = darkMode ? "#000" : "#FFF";
@@ -84,10 +84,12 @@ export const spacing = {
 // Button Styles
 export const button = {
     fontSize: font.sizeSmall,
-    fontSizeIcon: font.sizeSmall,
+    fontSizeIcon: font.size,
+    fontSizeIconSmall: font.sizeSmall,
+    fontSizeIconLarge: font.sizeLarge,
     borderRadius: border.radius,
-    paddingVertical: Platform.select({ android: spacing.smaller, ios: spacing.smaller }),
-    paddingHorizontal: Platform.select({ android: spacing.small, ios: spacing.regular }),
+    paddingVertical: spacing.smaller,
+    paddingHorizontal: spacing.regular,
 
     header: {
         color: brand.primary,
@@ -146,21 +148,35 @@ export const input = {
 
     // Alignment
     textAlign: "left",
-    paddingHorizontal: spacing.small,
+    paddingHorizontal: spacing.smaller,
     paddingVertical: spacing.small,
 };
 
 // Navigation Styles
 export const navigation = {
+    statusBar: {
+        backgroundColor: background.primary,
+        barStyle: darkMode ? "light-content" : "dark-content",
+    },
     topBar: {
         backgroundColor: background.primary,
         backButtonColor: contrast.highest,
         titleColor: contrast.highest,
+        titleFontSize: Platform.select({ android: font.sizeH4, ios: font.sizeH5 }),
     },
     bottomBar: {
         color: contrast.high,
-        selectedColor: brand.primary,
+        selectedTextColor: contrast.high,
+        selectedIconColor: brand.primary,
         backgroundColor: background.primary,
+        fontSize: font.sizeSmall,
+        iconSize: font.sizeSmall,
+    },
+    progressOverlay: {
+        color: "#FFF",
+        activityIndicatorColor: "#FFF",
+        backgroundColor: `rgba(0, 0, 0, 0.5)`,
+        fontSize: font.size,
     },
 };
 
