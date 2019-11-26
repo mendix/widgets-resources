@@ -50,7 +50,7 @@ import { DynamicValue, NativeImage } from "mendix";
 
 interface CommonProps<Style> {
     name: string;
-    style: Array<Partial<Style>>;
+    style: Style[];
 }
 
 export interface ActionsType {
