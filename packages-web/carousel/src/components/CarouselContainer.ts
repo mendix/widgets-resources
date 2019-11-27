@@ -56,6 +56,7 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
         this.subscriptionCallback = mxObject => () => this.fetchData(mxObject);
         this.onParseStyleError = this.onParseStyleError.bind(this);
         this.getUrl = this.getUrl.bind(this);
+        this.resetSubscription(props.mxObject);
     }
 
     render(): ReactNode {
