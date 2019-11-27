@@ -15,6 +15,8 @@ import { fileInput, fileInputNative } from "./inputs/file";
 import { fileNativeOutput, fileWebOutput } from "./outputs/file";
 import { listFileInput, listFileInputNative } from "./inputs/list-files";
 import { listFileNativeOutput, listFileWebOutput } from "./outputs/list-files";
+import { datasourceInput, datasourceInputNative } from "./inputs/datasource";
+import { datasourceNativeOutput, datasourceWebOutput } from "./outputs/datasource";
 
 describe("Generating tests", function() {
     it(`Generates a parsed typing from XML for native`, function() {
@@ -95,6 +97,16 @@ describe("Generating tests", function() {
     it(`Generates a parsed typing from XML for native using a list of file`, function() {
         const newContent = transformJsonContent(convertXmltoJson(listFileInputNative), "MyWidget");
         expect(newContent).toBe(listFileNativeOutput);
+    });
+
+    it(`Generates a parsed typing from XML for web using datasource`, function() {
+        const newContent = transformJsonContent(convertXmltoJson(datasourceInput), "MyWidget");
+        expect(newContent).toBe(datasourceWebOutput);
+    });
+
+    it(`Generates a parsed typing from XML for native using datasource`, function() {
+        const newContent = transformJsonContent(convertXmltoJson(datasourceInputNative), "MyWidget");
+        expect(newContent).toBe(datasourceNativeOutput);
     });
 });
 
