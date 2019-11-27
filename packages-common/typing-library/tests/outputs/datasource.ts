@@ -51,7 +51,7 @@ export interface DataSource {
         totalCount: number;
         hasMoreItems: boolean;
         version: number;
-    }
+    };
 }
 `;
 export const datasourceNativeOutput = `/**
@@ -86,6 +86,6 @@ export interface DataSource {
         totalCount: number;
         hasMoreItems: boolean;
         version: number;
-    }
+    };
 }
 `;

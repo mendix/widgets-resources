@@ -421,7 +421,7 @@ export interface DataSource {
         totalCount: number;
         hasMoreItems: boolean;
         version: number;
-    }
+    };
 }`;
     }
 
