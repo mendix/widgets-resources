@@ -1,0 +1,31 @@
+{
+    "name": "native-carousel",
+    "widgetName": "NativeCarousel",
+    "version": "0.0.1",
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mendix/widgets-resources.git"
+    },
+    "config": {
+        "widgetPath": "/Users/mehmet/Documents/Mendix/NativeSlider/widgets",
+        "projectPath": "/Users/mehmet/Documents/Mendix/NativeSlider/",
+        "subprojectFolder": "packages-native/native-carousel"
+    },
+    "packagePath": "com.mendix.widget.native",
+    "scripts": {
+        "start": "../../node_modules/.bin/pluggable-widgets-tools start:ts:native -- --subprojectPath $npm_package_config_subprojectFolder",
+        "build": "../../node_modules/.bin/pluggable-widgets-tools build:ts:native --subprojectPath $npm_package_config_subprojectFolder",
+        "release": "../../node_modules/.bin/pluggable-widgets-tools release:ts:native -- --subprojectPath $npm_package_config_subprojectFolder",
+        "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "test": "../../node_modules/.bin/jest --config ../../scripts/test/jest.native.config.js",
+        "version": "npm run release",
+        "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
+    },
+    "dependencies": {
+        "@native-mobile-resources/util-widgets": "^1.0.0",
+        "@types/react-native-snap-carousel": "^3.7.4",
+        "@widgets-resources/piw-utils": "^1.0.0",
+        "react-native-snap-carousel": "^3.8.4"
+    }
+}
