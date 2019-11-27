@@ -1,7 +1,7 @@
 {
     "name": "progress-circle-web",
     "widgetName": "ProgressCircle",
-    "version": "1.7.0",
+    "version": "1.7.1",
     "description": "Displays a progress in a circle",
     "copyright": "Mendix BV",
     "repository": {
