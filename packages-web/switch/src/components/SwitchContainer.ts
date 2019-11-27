@@ -46,6 +46,7 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
         this.handleToggle = this.handleToggle.bind(this);
         this.subscriptionCallback = this.subscriptionCallback.bind(this);
         this.handleValidations = this.handleValidations.bind(this);
+        this.resetSubscriptions(props.mxObject);
     }
 
     render(): ReactNode {
