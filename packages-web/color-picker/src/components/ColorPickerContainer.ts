@@ -67,6 +67,11 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         rgba: "rgb(255,255,255,1)"
     };
 
+    constructor(props: ColorPickerContainerProps) {
+        super(props);
+        this.resetSubscriptions(props.mxObject);
+    }
+
     render(): ReactNode {
         this.disabled = this.isReadOnly();
         if (this.props.showLabel) {
