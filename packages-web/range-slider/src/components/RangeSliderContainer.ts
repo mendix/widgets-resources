@@ -53,7 +53,6 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         super(props);
 
         this.state = this.updateValues(props.mxObject);
-        this.subscriptionHandles = [];
         this.handleChangeAction = this.handleChangeAction.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
         this.subscriptionCallback = mxObject => () => {
@@ -63,6 +62,8 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
             }
             this.setState(this.updateValues(mxObject));
         };
+        this.subscriptionHandles = [];
+        this.resetSubscriptions(props.mxObject);
     }
 
     render(): ReactNode {
