@@ -35,6 +35,11 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         startPosition: new Date()
     };
 
+    constructor(props: Container.CalendarContainerProps) {
+        super(props);
+        this.resetSubscriptions(props.mxObject);
+    }
+
     componentWillMount(): void {
         moment.updateLocale(window.mx.session.sessionData.locale.code, {
             week: { dow: window.mx.session.sessionData.locale.firstDayOfWeek, doy: 6 }
