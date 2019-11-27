@@ -1,7 +1,7 @@
 {
     "name": "carousel",
     "widgetName": "Carousel",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "description": "Displays images in a carousel",
     "copyright": "Mendix BV",
     "repository": {
