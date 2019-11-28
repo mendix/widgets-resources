@@ -218,7 +218,13 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
     private onClickMarker = (event: LeafletEvent & google.maps.MouseEvent, locationAttr: DataSourceLocationProps) => {
         const { locations } = this.state;
         const latitude = this.props.mapProvider === "googleMaps" ? event.latLng.lat() : event.target.getLatLng().lat;
-        this.executeAction(locations[locations.findIndex(targetLoc => targetLoc.latitude === latitude)], locationAttr);
+        const longitude = this.props.mapProvider === "googleMaps" ? event.latLng.lng() : event.target.getLatLng().lng;
+        this.executeAction(
+            locations[
+                locations.findIndex(targetLoc => targetLoc.latitude === latitude && targetLoc.longitude === longitude)
+            ],
+            locationAttr
+        );
     };
 
     private executeAction = (markerLocation: Location, locationAttr: DataSourceLocationProps) => {
