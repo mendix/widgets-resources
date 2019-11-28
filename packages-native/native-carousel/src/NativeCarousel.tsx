@@ -1,84 +1,101 @@
-import { createElement, ReactElement, ReactNode } from "react";
-import { TouchableOpacity, View } from "react-native";
-import { NativeCarouselProps } from "../typings/NativeCarouselProps";
-import {
-    defaultNativeCarouselEntryStyle,
-    defaultNativeCarouselStyle,
-    itemWidth,
-    NativeCarouselStyle,
-    slideHeight,
-    slideWidth
-} from "./styles/styles";
-import { flattenStyles, toNumber } from "@native-mobile-resources/util-widgets";
-import Carousel from "react-native-snap-carousel";
+import { createElement, ReactNode, useCallback, useRef, useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import { DataSourceItem, LayoutEnum, NativeCarouselProps } from "../typings/NativeCarouselProps";
+import { defaultNativeCarouselFullWidthStyle, defaultNativeCarouselStyle, NativeCarouselStyle } from "./styles/styles";
+import { toNumber } from "@native-mobile-resources/util-widgets";
+import { executeAction, setAttributeValue } from "@widgets-resources/piw-utils";
+import Carousel, { Pagination } from "react-native-snap-carousel";
+import { Big } from "big.js";
+import deepmerge from "deepmerge";
+import { ValueStatus } from "mendix";
 
-export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>): ReactElement => {
-    const styles = flattenStyles(defaultNativeCarouselStyle, props.style);
-    // TODO: entry styles also should be customizable but how ?
-    const entryStyles = flattenStyles(defaultNativeCarouselEntryStyle, props.style);
-    // const entries = [
-    //     {
-    //         title: "Beautiful and dramatic Antelope Canyon",
-    //         subtitle: "Lorem ipsum dolor sit amet et nuncat mergitur",
-    //         illustration: "https://i.imgur.com/UYiroysl.jpg"
-    //     },
-    //     {
-    //         title: "Earlier this morning, NYC",
-    //         subtitle: "Lorem ipsum dolor sit amet",
-    //         illustration: "https://i.imgur.com/UPrs1EWl.jpg"
-    //     },
-    //     {
-    //         title: "White Pocket Sunset",
-    //         subtitle: "Lorem ipsum dolor sit amet et nuncat ",
-    //         illustration: "https://i.imgur.com/MABUbpDl.jpg"
-    //     },
-    //     {
-    //         title: "Acrocorinth, Greece",
-    //         subtitle: "Lorem ipsum dolor sit amet et nuncat mergitur",
-    //         illustration: "https://i.imgur.com/KZsmUi2l.jpg"
-    //     },
-    //     {
-    //         title: "The lone tree, majestic landscape of New Zealand",
-    //         subtitle: "Lorem ipsum dolor sit amet",
-    //         illustration: "https://i.imgur.com/2nCt3Sbl.jpg"
-    //     },
-    //     {
-    //         title: "Middle Earth, Germany",
-    //         subtitle: "Lorem ipsum dolor sit amet",
-    //         illustration: "https://i.imgur.com/lceHsT6l.jpg"
-    //     }
-    // ];
+export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>): ReactNode => {
+    const carousel = useRef<any>(null);
 
-    // @ts-ignore
-    const _renderItem = ({ item, index }): ReactNode => {
-        return (
-            <TouchableOpacity
-                key={index}
-                activeOpacity={1}
-                style={entryStyles.slideInnerContainer}
-                onPress={() => {
-                    alert(`You've clicked '${item.title}'`);
-                }}
-            >
-                {props.content(item)}
-                {/* <View style={entryStyles.imageContainer}>*/}
-                {/*    <Image source={{ uri: item.illustration }} style={entryStyles.image} />*/}
-                {/*    <View style={entryStyles.radiusMask} />*/}
-                {/* </View>*/}
-                {/* <View style={entryStyles.textContainer}>*/}
-                {/*    <Text style={entryStyles.subtitle} numberOfLines={2}>*/}
-                {/*        {item.title}*/}
-                {/*        {item.subtitle}*/}
-                {/*    </Text>*/}
-                {/* </View>*/}
-            </TouchableOpacity>
-        );
+    const customStyles = props.style ? props.style.filter(o => o != null) : [];
+    const styles =
+        customStyles.length > 0
+            ? deepmerge.all<NativeCarouselStyle>([
+                  defaultNativeCarouselStyle,
+                  ...customStyles,
+                  props.layout === "fullScreen" ? defaultNativeCarouselFullWidthStyle : {}
+              ])
+            : defaultNativeCarouselStyle;
+
+    const onPress = useCallback(() => {
+        executeAction(props.onPress);
+    }, [props.onPress]);
+
+    const [activeSlide, setActiveSlide] = useState(0);
+
+    const onSnap = useCallback(
+        (index: number) => {
+            setActiveSlide(index);
+            setAttributeValue(props.currentIndex, new Big(index));
+        },
+        [props.currentIndex]
+    );
+
+    const _renderItem = useCallback(
+        ({ item, index }: { item: DataSourceItem; index: number }) => {
+            return (
+                <TouchableOpacity
+                    key={index}
+                    activeOpacity={1}
+                    style={styles.slideItem.touchableStyle}
+                    onPress={onPress}
+                >
+                    {props.content(item)}
+                </TouchableOpacity>
+            );
+        },
+        [props.content]
+    );
+
+    const normalizeLayoutProp = (layout: LayoutEnum): any => {
+        return layout === undefined || layout === "fullScreen" || layout === "fullWidth" || layout === "default"
+            ? "default"
+            : layout;
     };
 
-    console.warn("rerendered");
+    const renderPagination = useCallback(() => {
+        const contentLength =
+            props.contentSource && props.contentSource.value ? props.contentSource.value.items.length : 0;
+        const paginationOverflow = contentLength > 5;
 
+        if (!props.showPagination) {
+            return undefined;
+        }
+        if (paginationOverflow) {
+            return (
+                <View style={styles.pagination.container}>
+                    <Text style={styles.pagination.textStyle}>
+                        {activeSlide + 1}/{contentLength}
+                    </Text>
+                </View>
+            );
+        }
+        return (
+            <Pagination
+                dotsLength={contentLength}
+                activeDotIndex={activeSlide}
+                containerStyle={styles.pagination.container}
+                dotColor={styles.pagination.dotColor}
+                dotStyle={styles.pagination.dotStyle}
+                inactiveDotColor={styles.pagination.inactiveDotColor}
+                inactiveDotOpacity={styles.pagination.inactiveDotOpacity}
+                inactiveDotScale={styles.pagination.inactiveDotScale}
+                carouselRef={carousel.current}
+                tappableDots={!!carousel}
+            />
+        );
+    }, [activeSlide, carousel, props.contentSource, props.showPagination]);
+
+    if (!(props.contentSource && props.contentSource.status === ValueStatus.Available)) {
+        return null;
+    }
     return (
-        <View style={styles.exampleContainer}>
+        <View style={styles.container}>
             <Carousel
                 inverted={props.inverted}
                 vertical={props.vertical === "vertical"}
@@ -92,22 +109,24 @@ export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>):
                 enableSnap={props.enableSnap}
                 swipeThreshold={props.swipeThreshold !== 0 ? props.swipeThreshold : undefined}
                 activeSlideAlignment={props.activeSlideAlignment}
-                layout={props.layout}
+                layout={normalizeLayoutProp(props.layout)}
                 layoutCardOffset={props.layoutCardOffset !== 0 ? props.layoutCardOffset : undefined}
                 firstItem={toNumber(props.firstItem)}
-                // TODO: get this from modeler
-                // data={entries}
                 data={props.contentSource ? (props.contentSource.value ? props.contentSource.value.items : []) : []}
-                // TODO: get this from modeler
                 renderItem={_renderItem}
-                sliderWidth={slideWidth}
-                sliderHeight={slideHeight}
-                itemWidth={itemWidth}
-                inactiveSlideScale={0.94}
-                inactiveSlideOpacity={0.7}
-                containerCustomStyle={styles.slider}
+                sliderWidth={styles.carousel.sliderWidth}
+                sliderHeight={styles.carousel.sliderHeight}
+                slideStyle={styles.slideItem.slideStyle}
+                itemWidth={styles.slideItem.itemWidth}
+                itemHeight={styles.slideItem.itemHeight}
+                inactiveSlideScale={styles.carousel.inactiveSlideScale}
+                inactiveSlideOpacity={styles.carousel.inactiveSlideOpacity}
+                containerCustomStyle={styles.containerCustomStyle}
                 contentContainerCustomStyle={styles.sliderContentContainer}
+                onSnapToItem={onSnap}
+                ref={carousel}
             />
+            {renderPagination()}
         </View>
     );
 };

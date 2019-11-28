@@ -22,10 +22,12 @@
         "version": "npm run release",
         "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
     },
-    "dependencies": {
+    "devDependencies": {
         "@native-mobile-resources/util-widgets": "^1.0.0",
         "@types/react-native-snap-carousel": "^3.7.4",
-        "@widgets-resources/piw-utils": "^1.0.0",
+        "@widgets-resources/piw-utils": "^1.0.0"
+    },
+    "dependencies": {
         "react-native-snap-carousel": "^3.8.4"
     }
 }

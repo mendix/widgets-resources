@@ -8,6 +8,7 @@
     <icon/>
     <properties>
 <!--        Put data and render item-->
+
         <propertyGroup caption="General">
             <propertyGroup caption="Display">
 
@@ -53,83 +54,7 @@
             </propertyGroup>
 
 
-            <propertyGroup caption="Loop / Autoplay">
-                <property key="loop" type="boolean" defaultValue="false">
-                    <caption>Loop</caption>
-                    <description>Enable infinite loop mode. Does not work if `enableSnap` is `false`</description>
-                </property>
 
-<!--                TODO: experiment with this-->
-                <property key="loopClonesPerSide" type="integer" defaultValue="2">
-                    <caption>Loop clones per side</caption>
-                    <description>Number of clones to render at the beginning and end of the list. Default</description>
-                </property>
-
-                <property key="autoplay" type="boolean" defaultValue="false">
-                    <caption>Autoplay</caption>
-                    <description>Trigger autoplay on mount</description>
-                </property>
-
-                <property key="autoplayDelay" type="integer" defaultValue="0">
-                    <caption>Autoplay delay</caption>
-                    <description>Delay before enabling autoplay on startup and after releasing the touch</description>
-                </property>
-
-                <property key="autoplayInterval" type="integer" defaultValue="0">
-                    <caption>Autoplay interval</caption>
-                    <description>Delay in ms until navigating to the next item</description>
-                </property>
-            </propertyGroup>
-
-
-
-
-<!--            TODO: These props must come via styling-->
-<!--            itemWidth?: number;-->
-<!--            /**-->
-<!--            * Height in pixels of carousel's items, must be the same for all of them-->
-<!--            * Note: Required with vertical carousel-->
-<!--            */-->
-<!--            itemHeight?: number;-->
-<!--            /**-->
-<!--            * Width in pixels of your slider-->
-<!--            * Note: Required with horizontal carousel-->
-<!--            */-->
-<!--            sliderWidth?: number;-->
-<!--            /**-->
-<!--            * Height in pixels of the carousel itself-->
-<!--            * Note: Required with vertical carousel-->
-<!--            */-->
-<!--            sliderHeight?: number;-->
-<!--            /**-->
-<!--            * Optional styles for Scrollview's global wrapper-->
-<!--            */-->
-<!--            containerCustomStyle?: StyleProp<ViewStyle>;-->
-<!--            /**-->
-<!--            * Optional styles for Scrollview's items container-->
-<!--            */-->
-<!--            contentContainerCustomStyle?: StyleProp<ViewStyle>;-->
-<!--            /**-->
-<!--            * Used to define custom interpolations-->
-<!--            */-->
-<!--            slideInterpolatedStyle?(index: number, animatedValue: Animated.AnimatedValue, carouselProps: CarouselProps<any>): StyleProp<ViewStyle>;-->
-<!--            /**-->
-<!--            * Optional style for each item's container (the one whose scale and opacity are animated)-->
-<!--            */-->
-<!--            slideStyle?: StyleProp<ViewStyle>;-->
-<!--            /**-->
-<!--            * Value of the opacity effect applied to inactive slides-->
-<!--            */-->
-<!--            inactiveSlideOpacity?: number;-->
-<!--            /**-->
-<!--            * Value of the 'scale' transform applied to inactive slides-->
-<!--            */-->
-<!--            inactiveSlideScale?: number;-->
-<!--            /**-->
-<!--            * Value of the 'translate' transform applied to inactive slides. Not recommended with-->
-<!--            * `customAnimationOptions`-->
-<!--            */-->
-<!--            inactiveSlideShift?: number;-->
 
             <propertyGroup caption="Behaviour">
                 <property key="enableMomentum" type="boolean" defaultValue="false">
@@ -247,6 +172,8 @@
                     <description>Define the way items are rendered and animated. If you have a large data set, don't use stack or tinder</description>
                     <enumerationValues>
                         <enumerationValue key="default">Default</enumerationValue>
+                        <enumerationValue key="fullWidth">Full width</enumerationValue>
+                        <enumerationValue key="fullScreen">Full screen</enumerationValue>
                         <enumerationValue key="stack">Stack</enumerationValue>
                         <enumerationValue key="tinder">Tinder</enumerationValue>
                     </enumerationValues>
@@ -257,8 +184,6 @@
                     <description>Use to increase or decrease the default card offset in both 'stack' and 'tinder' layouts</description>
                 </property>
             </propertyGroup>
-
-
 
 
 <!--            // Callbacks-->
@@ -309,5 +234,51 @@
 
 
         </propertyGroup>
+        <propertyGroup caption="Loop">
+            <propertyGroup caption="Loop / Autoplay">
+                <property key="loop" type="boolean" defaultValue="false">
+                    <caption>Loop</caption>
+                    <description>Enable infinite loop mode. Does not work if `enableSnap` is `false`</description>
+                </property>
+
+                <!--                TODO: experiment with this-->
+                <property key="loopClonesPerSide" type="integer" defaultValue="2">
+                    <caption>Loop clones per side</caption>
+                    <description>Number of clones to render at the beginning and end of the list. Default</description>
+                </property>
+
+                <property key="autoplay" type="boolean" defaultValue="false">
+                    <caption>Autoplay</caption>
+                    <description>Trigger autoplay on mount</description>
+                </property>
+
+                <property key="autoplayDelay" type="integer" defaultValue="0">
+                    <caption>Autoplay delay</caption>
+                    <description>Delay before enabling autoplay on startup and after releasing the touch</description>
+                </property>
+
+                <property key="autoplayInterval" type="integer" defaultValue="0">
+                    <caption>Autoplay interval</caption>
+                    <description>Delay in ms until navigating to the next item</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <propertyGroup caption="Events">
+                <property key="onPress" type="action" required="false">
+                    <caption>On press event</caption>
+                    <description>Fired when user taps on the slide</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Pagination">
+            <propertyGroup caption="Pagination">
+                <property key="showPagination" type="boolean" defaultValue="true">
+                    <caption>Show pagination</caption>
+                    <description>If pagination buttons should be shown or not</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
     </properties>
+
 </widget>
