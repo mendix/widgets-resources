@@ -5,8 +5,10 @@ exports[`Safe area view renders with content 1`] = `
   emulateUnlessSupported={true}
   style={
     Object {
-      "backgroundColor": "transparent",
+      "alignItems": "stretch",
       "flex": 1,
+      "flexDirection": "row",
+      "overflow": "hidden",
     }
   }
 >
@@ -21,8 +23,11 @@ exports[`Safe area view renders with custom styling 1`] = `
   emulateUnlessSupported={true}
   style={
     Object {
+      "alignItems": "stretch",
       "backgroundColor": "green",
       "flex": 1,
+      "flexDirection": "row",
+      "overflow": "hidden",
     }
   }
 >
@@ -37,8 +42,10 @@ exports[`Safe area view renders without content 1`] = `
   emulateUnlessSupported={true}
   style={
     Object {
-      "backgroundColor": "transparent",
+      "alignItems": "stretch",
       "flex": 1,
+      "flexDirection": "row",
+      "overflow": "hidden",
     }
   }
 />
