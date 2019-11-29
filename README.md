@@ -24,6 +24,7 @@ A bundle of R&D Platform supported widgets & nanoflow actions for building nativ
 | [QR code][]                | Display a QR code based on a value.                             |
 | [Range slider][]           | Change a range of values using a slider.                        |
 | [Rating][]                 | Give a rating by selecting stars.                               |
+| [Safe area view][]         | Prevent content being rendered in unsafe areas (iOS only).      |
 | [Slider][]                 | Change a numeric value using a slider.                          |
 | [Toggle buttons][]         | Change an enumeration value using a group of buttons.           |
 | [Video player][]           | Play a video loaded from a URL.                                 |
