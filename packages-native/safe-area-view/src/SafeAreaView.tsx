@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { SafeAreaView as ReactSaveAreaView } from "react-native";
+import { SafeAreaView as ReactSaveAreaView, ViewStyle } from "react-native";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 
 import { SafeAreaViewStyle, defaultSafeAreaViewStyle } from "./ui/Styles";
@@ -9,5 +9,7 @@ export const SafeAreaView = (props: SafeAreaViewProps<SafeAreaViewStyle>): JSX.E
     const customStyles = props.style.filter(o => o != null);
     const styles = flattenStyles(defaultSafeAreaViewStyle, customStyles);
 
-    return <ReactSaveAreaView style={{ ...styles.container }}>{props.content}</ReactSaveAreaView>;
+    const overflowStyleFix: ViewStyle = { flexDirection: "row", flex: 1, alignItems: "stretch", overflow: "hidden" };
+
+    return <ReactSaveAreaView style={{ ...styles.container, ...overflowStyleFix }}>{props.content}</ReactSaveAreaView>;
 };
