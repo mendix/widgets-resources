@@ -4,20 +4,18 @@ exports[`Safe area view renders with content 1`] = `
 <RCTSafeAreaView
   emulateUnlessSupported={true}
   style={
-    Array [
-      Object {},
-      Object {
-        "alignItems": "stretch",
-        "flex": 1,
-        "flexDirection": "row",
-        "overflow": "hidden",
-      },
-    ]
+    Object {
+      "flex": 1,
+    }
   }
 >
-  <Text>
-    Content
-  </Text>
+  <View
+    style={Object {}}
+  >
+    <Text>
+      Content
+    </Text>
+  </View>
 </RCTSafeAreaView>
 `;
 
@@ -25,22 +23,22 @@ exports[`Safe area view renders with custom styling 1`] = `
 <RCTSafeAreaView
   emulateUnlessSupported={true}
   style={
-    Array [
-      Object {
-        "backgroundColor": "green",
-      },
-      Object {
-        "alignItems": "stretch",
-        "flex": 1,
-        "flexDirection": "row",
-        "overflow": "hidden",
-      },
-    ]
+    Object {
+      "flex": 1,
+    }
   }
 >
-  <Text>
-    Content
-  </Text>
+  <View
+    style={
+      Object {
+        "backgroundColor": "green",
+      }
+    }
+  >
+    <Text>
+      Content
+    </Text>
+  </View>
 </RCTSafeAreaView>
 `;
 
@@ -48,15 +46,13 @@ exports[`Safe area view renders without content 1`] = `
 <RCTSafeAreaView
   emulateUnlessSupported={true}
   style={
-    Array [
-      Object {},
-      Object {
-        "alignItems": "stretch",
-        "flex": 1,
-        "flexDirection": "row",
-        "overflow": "hidden",
-      },
-    ]
+    Object {
+      "flex": 1,
+    }
   }
-/>
+>
+  <View
+    style={Object {}}
+  />
+</RCTSafeAreaView>
 `;
