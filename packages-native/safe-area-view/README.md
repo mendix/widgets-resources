@@ -9,7 +9,7 @@ Place the Safe area view widget onto a fullscreen page and place other widgets i
 
 ### Custom styling
 
-By default the widgets' background color is transparent, so the background color of the page is visible. It's possible
+By default the widget's background color is transparent, so the background color of the page is visible. It's possible
 to style the widget differently, like applying a different background color, by defining custom style classes through
 Atlas. These classes should adhere to the following interface:
 

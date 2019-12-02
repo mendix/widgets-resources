@@ -11,5 +11,5 @@ export const SafeAreaView = (props: SafeAreaViewProps<SafeAreaViewStyle>): JSX.E
 
     const overflowStyleFix: ViewStyle = { flexDirection: "row", flex: 1, alignItems: "stretch", overflow: "hidden" };
 
-    return <ReactSaveAreaView style={{ ...styles.container, ...overflowStyleFix }}>{props.content}</ReactSaveAreaView>;
+    return <ReactSaveAreaView style={[styles.container, overflowStyleFix]}>{props.content}</ReactSaveAreaView>;
 };
