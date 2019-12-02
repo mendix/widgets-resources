@@ -98,18 +98,15 @@ export const col12 = {
 };
 export const noGutters = {
     container: {
-        padding: 0,
         paddingLeft: 0,
         paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 0,
-        paddingVertical: 0,
         paddingHorizontal: 0,
     },
 };
-
-export const rowGutters = {
+export const noGuttersRow = {
     container: {
-        paddingVertical: gutterSize,
+        marginLeft: 0,
+        marginRight: 0,
+        marginHorizontal: 0,
     },
 };
