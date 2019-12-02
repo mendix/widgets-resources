@@ -1,17 +1,17 @@
 # Safe area view widget
 
-Prevents content being rendered in unsafe areas like behind rounded screen corners or notches. Currently this widget
-only supports iOS.
+The safe area view widget prevents content from being rendered in unsafe areas like behind rounded screen corners or
+notches. Currently this widget only supports iOS.
 
 ## Usage
 
-Place the Safe area view widget onto a fullscreen page and place other widgets inside its content area.
+Place the safe area view widget onto a fullscreen page and place other widgets inside its content area.
 
 ### Custom styling
 
-By default the widget's background color is transparent, so the background color of the page is visible. It's possible
-to style the widget differently, like applying a different background color, by defining custom style classes through
-Atlas. These classes should adhere to the following interface:
+The style of the container that is rendered within the safe area and that contains all content is fully customizable.
+Apply custom styles by defining custom style classes through Atlas. These classes should adhere to the following
+interface:
 
 ```ts
 interface SafeAreaViewStyle {
@@ -39,7 +39,8 @@ export const customSafeAreaViewBackground = {
 };
 ```
 
-Both classes will apply an orange background to the safe and unsafe areas of the widget.
+Both classes will apply an orange background to the container that is rendered within the safe area and that contains
+all content.
 
 Check the official documentation for further information about ViewStyle:
 `https://facebook.github.io/react-native/docs/view-style-props`
