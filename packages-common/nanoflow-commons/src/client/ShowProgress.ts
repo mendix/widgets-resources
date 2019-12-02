@@ -12,12 +12,14 @@
  * @param {boolean} blocking - Block the user interface immediately.
  * @returns {Big}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function ShowProgress(message?: string, blocking?: boolean): BigJs.Big {
+export async function ShowProgress(message?: string, blocking?: boolean): Promise<BigJs.Big> {
     // BEGIN USER CODE
 
     const id = mx.ui.showProgress(message, blocking);
-    return new Big(id);
+    if (id !== undefined) {
+        return Promise.resolve(new Big(id));
+    }
+    throw new Error("Could not open the loading dialog");
 
     // END USER CODE
 }

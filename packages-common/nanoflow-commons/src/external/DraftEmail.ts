@@ -15,8 +15,13 @@ import ReactNative from "react-native";
  * @param {string} body
  * @returns {boolean}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function DraftEmail(recipient?: string, cc?: string, bcc?: string, subject?: string, body?: string): Promise<boolean> {
+export async function DraftEmail(
+    recipient?: string,
+    cc?: string,
+    bcc?: string,
+    subject?: string,
+    body?: string
+): Promise<boolean> {
     // BEGIN USER CODE
 
     let url = "mailto:";

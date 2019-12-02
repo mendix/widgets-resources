@@ -11,8 +11,7 @@ import { StorageValue } from "./StorageValue";
  * Retrieve a local stored list of Mendix objects identified by a unique key. When objects are the client state it will be returned, if not they will be re-created. Note: when re-creating the local Mendix object the Mendix Object ID will never be the same.
  * @returns {MxObject}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function GetStorageItemObjectList(key?: string, entity?: string): Promise<mendix.lib.MxObject[]> {
+export async function GetStorageItemObjectList(key?: string, entity?: string): Promise<mendix.lib.MxObject[]> {
     // BEGIN USER CODE
 
     if (!key) {
@@ -98,8 +97,7 @@ function GetStorageItemObjectList(key?: string, entity?: string): Promise<mendix
                         });
                     resolve(mxObject);
                 },
-                // eslint-disable-next-line prefer-promise-reject-errors
-                error: () => reject(`Could not create '${entity}' object`)
+                error: () => reject(new Error(`Could not create '${entity}' object`))
             });
         });
     }

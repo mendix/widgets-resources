@@ -4,8 +4,8 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNative from "react-native";
-import ImagePickerLib from "react-native-image-picker";
+import { Alert, Linking } from "react-native";
+import ImagePicker from "react-native-image-picker";
 
 type PictureSource = "camera" | "imageLibrary" | "either";
 
@@ -19,8 +19,7 @@ type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
  * @param {Big} maximumHeight - The picture will be scaled to this maximum pixel height, while maintaing the aspect ratio.
  * @returns {boolean}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function TakePicture(
+export async function TakePicture(
     picture?: mendix.lib.MxObject,
     pictureSource?: PictureSource,
     pictureQuality?: PictureQuality,
@@ -29,9 +28,6 @@ function TakePicture(
 ): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/react-native-community/react-native-image-picker/blob/master/docs/Reference.md
-
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const ImagePicker: typeof ImagePickerLib = require("react-native-image-picker");
 
     if (!picture) {
         throw new TypeError("Input parameter 'Picture' is required");
@@ -61,7 +57,7 @@ function TakePicture(
         });
 
     function takePicture(): Promise<string | undefined> {
-        return new Promise((resolve, reject) => {
+        return new Promise(resolve => {
             const options = getOptions();
             const method = getPictureMethod();
 
@@ -75,7 +71,7 @@ function TakePicture(
                     if (!unhandledError) {
                         return resolve();
                     }
-                    return reject(response.error);
+                    throw new Error(response.error);
                 }
 
                 return resolve(response.uri);
@@ -84,7 +80,7 @@ function TakePicture(
     }
 
     function storeFile(imageObject: mendix.lib.MxObject, uri: string): Promise<boolean> {
-        return new Promise((resolve, reject) => {
+        return new Promise(resolve => {
             fetch(uri)
                 .then(res => res.blob())
                 .then(blob => {
@@ -94,7 +90,9 @@ function TakePicture(
                     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
                     const onSuccess = () => resolve(true);
                     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-                    const onError = (error: Error) => reject(error.message);
+                    const onError = (error: Error) => {
+                        throw new Error(error.message);
+                    };
 
                     mx.data.saveDocument(guid, filename, {}, blob, onSuccess, onError);
                 });
@@ -192,9 +190,6 @@ function TakePicture(
     }
 
     function showiOSPermissionAlert(title: string, message: string): void {
-        const Alert: typeof ReactNative.Alert = require("react-native").Alert;
-        const Linking: typeof ReactNative.Linking = require("react-native").Linking;
-
         Alert.alert(
             title,
             message,

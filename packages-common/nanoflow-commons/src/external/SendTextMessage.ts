@@ -11,8 +11,7 @@ import ReactNative from "react-native";
  * @param {string} phoneNumber - This field is required.
  * @returns {boolean}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function SendTextMessage(phoneNumber?: string): Promise<boolean> {
+export async function SendTextMessage(phoneNumber?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!phoneNumber) {

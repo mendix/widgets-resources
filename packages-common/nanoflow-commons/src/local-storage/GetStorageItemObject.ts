@@ -13,8 +13,7 @@ import { StorageValue } from "./StorageValue";
  * @param {string} entity - This field is required.
  * @returns {MxObject}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function GetStorageItemObject(key?: string, entity?: string): Promise<mendix.lib.MxObject> {
+export async function GetStorageItemObject(key?: string, entity?: string): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
 
     if (!key) {
@@ -100,8 +99,7 @@ function GetStorageItemObject(key?: string, entity?: string): Promise<mendix.lib
                         });
                     resolve(mxObject);
                 },
-                // eslint-disable-next-line prefer-promise-reject-errors
-                error: () => reject(`Could not create '${entity}' object`)
+                error: () => reject(new Error(`Could not create '${entity}' object`))
             });
         });
     }

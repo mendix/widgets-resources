@@ -13,8 +13,7 @@ import ReactNative from "react-native";
  * @param {string} title - Title of the message to share. Only some share targets use this value.
  * @returns {boolean}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function Share(url?: string, text?: string, title?: string): Promise<boolean> {
+export async function Share(url?: string, text?: string, title?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!text && !url) {
