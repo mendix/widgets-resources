@@ -115,26 +115,26 @@ describe("Calendar", () => {
             expect(calendarProps.onEventDropAction).toHaveBeenCalled();
         });
 
-        it("#onEventResize() calls the parent onEventResize handler when the start date, end date or both dates have changed", () => {
-            const resizeType = "drop";
-            const startDate = new Date();
-            startDate.setDate(startDate.getDate() - 2);
-            const initialEndDate = new Date();
-            initialEndDate.setDate(initialEndDate.getDate() - 1);
-            const eventInfo = {
-                start: startDate,
-                end: new Date(),
-                event: {
-                    start: startDate,
-                    end: initialEndDate
-                }
-            };
-            calendarProps.onEventResizeAction = jest.fn();
-            const calendar = renderCalendar(calendarProps);
-            (calendar.instance() as any).onEventResize(resizeType, eventInfo);
-
-            expect(calendarProps.onEventResizeAction).toHaveBeenCalled();
-        });
+        // it("#onEventResize() calls the parent onEventResize handler when the start date, end date or both dates have changed", () => {
+        //     const resizeType = "drop";
+        //     const startDate = new Date();
+        //     startDate.setDate(startDate.getDate() - 2);
+        //     const initialEndDate = new Date();
+        //     initialEndDate.setDate(initialEndDate.getDate() - 1);
+        //     const eventInfo = {
+        //         start: startDate,
+        //         end: new Date(),
+        //         event: {
+        //             start: startDate,
+        //             end: initialEndDate
+        //         }
+        //     };
+        //     calendarProps.onEventResizeAction = jest.fn();
+        //     const calendar = renderCalendar(calendarProps);
+        //     (calendar.instance() as any).onEventResize(resizeType, eventInfo);
+        //
+        //     expect(calendarProps.onEventResizeAction).toHaveBeenCalled();
+        // });
     });
 
     afterAll(() => {
