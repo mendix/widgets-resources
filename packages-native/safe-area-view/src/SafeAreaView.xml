@@ -2,7 +2,7 @@
 <widget id="com.mendix.widget.native.safeareaview.SafeAreaView" supportedPlatform="Native" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Safe area view</name>
     <description />
-    <icon></icon>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABlmWCKAAACr0lEQVR4Ae1WPYsaURS9TgxIElADWgS7VH6kS5dCUAvtNgEN+AO0stwqjW1IFyv9CQrJ9lGxDaQUt4qVhIiFCimERc29ooMzODtPfcnmZu+DYea+j3PPO/e8pwDSRAFRQBQQBUQBUeC+KuA5ZeOlUunhfD6/WK1WFx6P5+V6vX6GOE9OwTpjzS/M/QNzfzMM48rv9181Go2bY/GOFiCfz7/GxB8w8fNjk/3J+cjpO3K6bLVan4/J80B1crVaNUKh0Huc/xGfp6rr/uI84vQ2Ho8/LhQKnV6vt1bJrSzAdvOXKqB3POfVZDJ5NBgMvqjwUDoCZHsE+7QPiJaDdDoNqVQKIpEI+Hy+/WHAKljic4Nms2mBWCwWMBqNoNvtQqfTAbS/ZRyDNyrHwVUAuvBms9n1/pkPBoNQqVQgkUjYk5pxuVyG6XRqxud8UL56ve4I0e/3oVarWfLRnRAIBKJuF6PhiLodoNt+f/NUebfN09JkMukGrTzuhkWFIE7EbdeIM3HfxU5v1zsgFou9w8UvdgCZTAZyudwudHxHo1FYLpcwHo+B7HpKo8pns9nNccKfulshwuHwxgHD4dCchyLc4F1gObrm4PbDa++wx6gq/c6b3XTmVZrX64Visbh5VObrmEPc2u22CUXczcDh43ZZcRFunv7kmI0uvH+12bnZuR/i7SoALrL8w7Pf9odA76rvADcL90O8VAQ4tO6/6XO9A+w7/fpzae9iHd97B4gArP2rgbw4QIOIrCHEAazLp4G8OECDiKwhxAGsy6eBvDhAg4isIcQBrMungbw4QIOIrCHEAazLp4G8OECDiKwhxAGsy6eBvDhAg4isIcQBrMungbw4QIOIrCHEAazLp4G8OECDiKwhxAGsy6eBvDhAg4isIcQBrMsn5EUBUUAUOFOB3waIo05YRm8gAAAAAElFTkSuQmCC</icon>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
