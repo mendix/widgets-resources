@@ -115,7 +115,7 @@ export async function Geocode(
     }
 
     function createMxObject(lat: string, long: string): Promise<mendix.lib.MxObject> {
-        return new Promise((resolve, reject) => {
+        return new Promise(resolve => {
             mx.data.create({
                 entity: "NanoflowCommons.Position",
                 callback: mxObject => {
@@ -124,7 +124,7 @@ export async function Geocode(
                     resolve(mxObject);
                 },
                 error: () => {
-                    reject(new Error("Could not create 'NanoflowCommons.Position' object to store coordinates"));
+                    throw new Error("Could not create 'NanoflowCommons.Position' object to store coordinates");
                 }
             });
         });
