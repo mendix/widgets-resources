@@ -4,7 +4,8 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import Firebase from "react-native-firebase";
+import { NativeModules } from "react-native";
+import ReactNativeFirebase from "react-native-firebase";
 
 /**
  * @param {string} notificationId - This field is required.
@@ -13,11 +14,17 @@ import Firebase from "react-native-firebase";
 export async function CancelScheduledNotification(notificationId?: string): Promise<void> {
     // BEGIN USER CODE
 
+    if (NativeModules && !NativeModules.RNFirebase) {
+        return Promise.reject(new Error("Firebase library is not currently imported in your app"));
+    }
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
+
     if (!notificationId) {
         throw new TypeError("Input parameter 'Notification id' is required");
     }
 
-    Firebase.notifications().cancelNotification(notificationId);
+    firebase.notifications().cancelNotification(notificationId);
     return Promise.resolve();
 
     // END USER CODE

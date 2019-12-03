@@ -4,7 +4,8 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import Firebase from "react-native-firebase";
+import { NativeModules } from "react-native";
+import ReactNativeFirebase from "react-native-firebase";
 
 /**
  * Displays the specified notification straight away.
@@ -29,18 +30,24 @@ export async function DisplayNotification(
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/displaying-notifications
 
+    if (NativeModules && !NativeModules.RNFirebase) {
+        return Promise.reject(new Error("Firebase library is not currently imported in your app"));
+    }
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
+
     if (!body) {
         throw new TypeError("Input parameter 'Body' is required");
     }
 
-    const channel = new Firebase.notifications.Android.Channel(
+    const channel = new firebase.notifications.Android.Channel(
         "mendix-local-notifications",
         "Local notifications",
-        Firebase.notifications.Android.Importance.Default
+        firebase.notifications.Android.Importance.Default
     );
-    await Firebase.notifications().android.createChannel(channel);
+    await firebase.notifications().android.createChannel(channel);
 
-    const notification = new Firebase.notifications.Notification()
+    const notification = new firebase.notifications.Notification()
         .setBody(body)
         .android.setChannelId("mendix-local-notifications");
 
@@ -63,7 +70,7 @@ export async function DisplayNotification(
         });
     }
 
-    return Firebase.notifications().displayNotification(notification);
+    return firebase.notifications().displayNotification(notification);
 
     // END USER CODE
 }
