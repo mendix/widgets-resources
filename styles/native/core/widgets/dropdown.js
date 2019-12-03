@@ -25,6 +25,7 @@ export const DropDown = {
     },
     pickerIOS: {
         // All ViewStyle properties are allowed
+        backgroundColor: input.backgroundColor,
     },
     pickerItemIOS: {
         // All TextStyle properties are allowed
