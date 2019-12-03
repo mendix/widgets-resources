@@ -25,7 +25,7 @@ export async function GetStorageItemString(key?: string): Promise<string> {
         return result;
     });
 
-    function getItem(key: string): Promise<string | null> {
+    async function getItem(key: string): Promise<string | null> {
         if (navigator && navigator.product === "ReactNative") {
             const AsyncStorage: typeof ReactNative.AsyncStorage = require("@react-native-community/async-storage")
                 .default;

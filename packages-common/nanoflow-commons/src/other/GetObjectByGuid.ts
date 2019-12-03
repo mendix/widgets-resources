@@ -20,14 +20,14 @@ export async function GetObjectByGuid(entity: string, objectGuid: string): Promi
         throw new TypeError("Input parameter 'Object guid' is required.");
     }
 
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
         mx.data.get({
             guid: objectGuid,
             callback: object => {
                 if (object) {
                     resolve(object);
                 } else {
-                    reject(new Error("'Object guid' not found"));
+                    throw new Error("'Object guid' not found");
                 }
             }
         });
