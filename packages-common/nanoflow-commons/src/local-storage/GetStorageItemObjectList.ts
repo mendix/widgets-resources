@@ -24,7 +24,7 @@ export async function GetStorageItemObjectList(key?: string, entity?: string): P
 
     return getItem(key).then(result => {
         if (result === null) {
-            throw new Error(`Storage item '${key}' does not exist`);
+            return Promise.reject(new Error(`Storage item '${key}' does not exist`));
         }
         const values: StorageValue[] = JSON.parse(result);
 
@@ -46,7 +46,7 @@ export async function GetStorageItemObjectList(key?: string, entity?: string): P
             return Promise.resolve(value);
         }
 
-        throw new Error("No storage API available");
+        return Promise.reject(new Error("No storage API available"));
     }
 
     function setItem(key: string, value: string): Promise<void> {
@@ -61,7 +61,7 @@ export async function GetStorageItemObjectList(key?: string, entity?: string): P
             return Promise.resolve();
         }
 
-        throw new Error("No storage API available");
+        return Promise.reject(new Error("No storage API available"));
     }
 
     function getOrCreateMxObject(entity: string, value: StorageValue): Promise<mendix.lib.MxObject> {
@@ -75,19 +75,19 @@ export async function GetStorageItemObjectList(key?: string, entity?: string): P
     }
 
     function getMxObject(guid: string): Promise<mendix.lib.MxObject | undefined> {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             mx.data.get({
                 guid,
                 callback: mxObject => resolve(mxObject),
                 error: (error: Error) => {
-                    throw new Error(error.message);
+                    reject(new Error(error.message));
                 }
             });
         });
     }
 
     function createMxObject(entity: string, value: StorageValue): Promise<mendix.lib.MxObject> {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             mx.data.create({
                 entity,
                 callback: mxObject => {
@@ -100,7 +100,7 @@ export async function GetStorageItemObjectList(key?: string, entity?: string): P
                     resolve(mxObject);
                 },
                 error: () => {
-                    throw new Error(`Could not create '${entity}' object`);
+                    reject(new Error(`Could not create '${entity}' object`));
                 }
             });
         });

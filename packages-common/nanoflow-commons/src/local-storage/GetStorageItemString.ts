@@ -20,7 +20,7 @@ export async function GetStorageItemString(key?: string): Promise<string> {
 
     return getItem(key).then(result => {
         if (result === null) {
-            throw new Error(`Storage item '${key}' does not exist`);
+            return Promise.reject(new Error(`Storage item '${key}' does not exist`));
         }
         return result;
     });
@@ -37,7 +37,7 @@ export async function GetStorageItemString(key?: string): Promise<string> {
             return Promise.resolve(value);
         }
 
-        throw new Error("No storage API available");
+        return Promise.reject(new Error("No storage API available"));
     }
 
     // END USER CODE

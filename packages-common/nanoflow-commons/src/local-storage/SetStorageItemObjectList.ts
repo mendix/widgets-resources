@@ -40,7 +40,7 @@ export async function SetStorageItemObjectList(key?: string, value?: mendix.lib.
             return Promise.resolve();
         }
 
-        throw new Error("No storage API available");
+        return Promise.reject(new Error("No storage API available"));
     }
 
     function serializeMxObject(object: mendix.lib.MxObject): StorageValue {
