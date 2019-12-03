@@ -11,32 +11,23 @@ interface CommonProps<Style> {
     style: Style[];
 }
 
-export type VerticalEnum = "vertical" | "horizontal";
-
 export type ActiveSlideAlignmentEnum = "start" | "center" | "end";
 
-export type LayoutEnum = "default" | "fullWidth" | "fullScreen" | "stack" | "tinder";
+export type LayoutEnum = "card" | "fullWidth";
 
 export interface NativeCarouselProps<Style> extends CommonProps<Style> {
     contentSource: DataSource;
     content: (item: DataSourceItem) => ReactNode;
-    inverted: boolean;
-    vertical: VerticalEnum;
     currentIndex?: EditableValue<BigJs.Big>;
     firstItem: DynamicValue<BigJs.Big>;
-    enableMomentum: boolean;
-    lockScrollWhileSnapping: boolean;
-    enableSnap: boolean;
-    swipeThreshold: number;
     activeSlideAlignment: ActiveSlideAlignmentEnum;
     layout: LayoutEnum;
-    layoutCardOffset: number;
     loop: boolean;
-    loopClonesPerSide: number;
     autoplay: boolean;
     autoplayDelay: number;
     autoplayInterval: number;
     onPress?: ActionValue;
+    onSnap?: ActionValue;
     showPagination: boolean;
 }
 
