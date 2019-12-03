@@ -10,7 +10,11 @@ exports[`Safe area view renders with content 1`] = `
   }
 >
   <View
-    style={Object {}}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
   >
     <Text>
       Content
@@ -32,6 +36,7 @@ exports[`Safe area view renders with custom styling 1`] = `
     style={
       Object {
         "backgroundColor": "green",
+        "flex": 1,
       }
     }
   >
@@ -52,7 +57,11 @@ exports[`Safe area view renders without content 1`] = `
   }
 >
   <View
-    style={Object {}}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
   />
 </RCTSafeAreaView>
 `;
