@@ -79,9 +79,7 @@ export async function GetStorageItemObjectList(key?: string, entity?: string): P
             mx.data.get({
                 guid,
                 callback: mxObject => resolve(mxObject),
-                error: (error: Error) => {
-                    reject(new Error(error.message));
-                }
+                error: (error: Error) => reject(new Error(error.message))
             });
         });
     }
@@ -99,9 +97,7 @@ export async function GetStorageItemObjectList(key?: string, entity?: string): P
                         });
                     resolve(mxObject);
                 },
-                error: () => {
-                    reject(new Error(`Could not create '${entity}' object`));
-                }
+                error: () => reject(new Error(`Could not create '${entity}' object`))
             });
         });
     }
