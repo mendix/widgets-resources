@@ -4,7 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import RNGeocoder from "react-native-geocoder";
+import Geocoder from "react-native-geocoder";
 
 type ReverseGeocodingProvider = "Google" | "Geocodio" | "LocationIQ" | "MapQuest";
 
@@ -16,8 +16,7 @@ type ReverseGeocodingProvider = "Google" | "Geocodio" | "LocationIQ" | "MapQuest
  * @param {string} providerApiKey - This field is required for use on web. Note that the keys are accessible by the end users and should be protected in other ways; for example restricted domain name.
  * @returns {string}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function ReverseGeocode(
+export async function ReverseGeocode(
     latitude?: string,
     longitude?: string,
     geocodingProvider?: ReverseGeocodingProvider,
@@ -42,8 +41,6 @@ function ReverseGeocode(
     }
 
     if (navigator && navigator.product === "ReactNative") {
-        const Geocoder: typeof RNGeocoder = require("react-native-geocoder").default;
-
         const position = { lat: Number(latitude), lng: Number(longitude) };
 
         return Geocoder.geocodePosition(position).then(results => {

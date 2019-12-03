@@ -11,8 +11,7 @@ import ReactNative from "react-native";
  * @param {string} location - This field is required.
  * @returns {boolean}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function OpenMap(location?: string): Promise<boolean> {
+export async function OpenMap(location?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!location) {

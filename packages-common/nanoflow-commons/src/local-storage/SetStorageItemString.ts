@@ -10,10 +10,9 @@ import ReactNative from "react-native";
  * Store a string value in the device storage, identified by a unique key. Can be accessed by the GetStorageItemObject action. Please note that users can clear the device storage.
  * @param {string} key - This field is required.
  * @param {string} value - This field is required.
- * @returns {boolean}
+ * @returns {void}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function SetStorageItemString(key?: string, value?: string): Promise<boolean> {
+export async function SetStorageItemString(key?: string, value?: string): Promise<void> {
     // BEGIN USER CODE
 
     if (!key) {
@@ -24,7 +23,7 @@ function SetStorageItemString(key?: string, value?: string): Promise<boolean> {
         throw new TypeError("Input parameter 'Value' is required");
     }
 
-    return setItem(key, value).then(() => true);
+    return setItem(key, value);
 
     function setItem(key: string, value: string): Promise<void> {
         if (navigator && navigator.product === "ReactNative") {

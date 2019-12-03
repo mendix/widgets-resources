@@ -11,8 +11,7 @@ import ReactNative from "react-native";
  * @param {string} url - This field is required.
  * @returns {boolean}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function OpenURL(url?: string): Promise<boolean> {
+export async function OpenURL(url?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!url) {

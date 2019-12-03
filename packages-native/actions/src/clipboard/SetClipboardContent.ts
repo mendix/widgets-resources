@@ -4,25 +4,22 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNative from "react-native";
+import { Clipboard } from "react-native";
 
 /**
  * @param {string} content - This field is required.
- * @returns {boolean}
+ * @returns {void}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function SetClipboardContent(content?: string): boolean {
+export async function SetClipboardContent(content?: string): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/clipboard#setstring
-
-    const Clipboard: typeof ReactNative.Clipboard = require("react-native").Clipboard;
 
     if (!content) {
         throw new TypeError("Input parameter 'Content' is required");
     }
 
     Clipboard.setString(content);
-    return true;
+    return Promise.resolve();
 
     // END USER CODE
 }

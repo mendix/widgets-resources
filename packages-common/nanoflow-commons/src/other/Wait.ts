@@ -7,17 +7,17 @@
 /**
  * Wait for number of milliseconds before continuing nanoflow execution.
  * @param {Big} delay - The number of milliseconds to wait. This field is required.
- * @returns {boolean}
+ * @returns {void}
  */
 // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function Wait(delay?: BigJs.Big): Promise<boolean> {
+function Wait(delay?: BigJs.Big): Promise<void> {
     // BEGIN USER CODE
     if (delay == null) {
         throw new TypeError("Input parameter 'delay' is required.");
     }
 
     return new Promise(resolve => {
-        setTimeout(() => resolve(true), Number(delay));
+        setTimeout(() => resolve(), Number(delay));
     });
     // END USER CODE
 }

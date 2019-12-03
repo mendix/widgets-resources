@@ -20,8 +20,7 @@ import { GeolocationError, GeolocationReturnType, GeoOptions } from "react-nativ
  * @param {boolean} highAccuracy - Use a higher accuracy method to determine the current location. Setting this to false saves battery life.
  * @returns {MxObject}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function GetCurrentLocation(
+export async function GetCurrentLocation(
     timeout?: BigJs.Big,
     maximumAge?: BigJs.Big,
     highAccuracy?: boolean
@@ -40,8 +39,7 @@ function GetCurrentLocation(
                     resolve(geolocation);
                 },
                 error: () => {
-                    // eslint-disable-next-line prefer-promise-reject-errors
-                    reject("Could not create 'NanoflowCommons.Geolocation' object to store location");
+                    reject(new Error("Could not create 'NanoflowCommons.Geolocation' object to store location"));
                 }
             });
         }

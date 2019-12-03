@@ -4,21 +4,17 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNativeFirebase from "react-native-firebase";
+import Firebase from "react-native-firebase";
 
 /**
  * This generated registration token is used to identify the app instance and periodically sends data to the backend.
  * @returns {string}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function getPushNotificationToken(): Promise<string> {
+export async function getPushNotificationToken(): Promise<string> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/messaging/reference/Messaging#getToken
 
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
-
-    return firebase.messaging().getToken();
+    return Firebase.messaging().getToken();
 
     // END USER CODE
 }

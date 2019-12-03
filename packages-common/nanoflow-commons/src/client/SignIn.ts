@@ -16,8 +16,7 @@
  * @param {string} password - This field is required.
  * @returns {Big}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function SignIn(username?: string, password?: string): Promise<BigJs.Big> {
+export async function SignIn(username?: string, password?: string): Promise<BigJs.Big> {
     // BEGIN USER CODE
     if (!username || !password) {
         return Promise.resolve(new Big(401));
