@@ -45,7 +45,7 @@ export async function Share(url?: string, text?: string, title?: string): Promis
     // Hybrid platform
     // Documentation https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin
     if (window && window.plugins && window.plugins.socialsharing) {
-        return new Promise((resolve, reject) => {
+        return new Promise(resolve => {
             window!.plugins!.socialsharing!.shareWithOptions(
                 {
                     message: text,
@@ -53,7 +53,9 @@ export async function Share(url?: string, text?: string, title?: string): Promis
                     url
                 },
                 result => resolve(result.completed),
-                error => reject(error)
+                error => {
+                    throw new Error(error);
+                }
             );
         });
     }

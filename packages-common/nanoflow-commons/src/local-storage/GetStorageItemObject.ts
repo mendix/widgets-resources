@@ -77,17 +77,19 @@ export async function GetStorageItemObject(key?: string, entity?: string): Promi
     }
 
     function getMxObject(guid: string): Promise<mendix.lib.MxObject | undefined> {
-        return new Promise((resolve, reject) => {
+        return new Promise(resolve => {
             mx.data.get({
                 guid,
                 callback: mxObject => resolve(mxObject),
-                error: (error: Error) => reject(error)
+                error: (error: Error) => {
+                    throw new Error(error.message);
+                }
             });
         });
     }
 
     function createMxObject(entity: string, value: StorageValue): Promise<mendix.lib.MxObject> {
-        return new Promise((resolve, reject) => {
+        return new Promise(resolve => {
             mx.data.create({
                 entity,
                 callback: mxObject => {
@@ -99,7 +101,9 @@ export async function GetStorageItemObject(key?: string, entity?: string): Promi
                         });
                     resolve(mxObject);
                 },
-                error: () => reject(new Error(`Could not create '${entity}' object`))
+                error: () => {
+                    throw new Error(`Could not create '${entity}' object`);
+                }
             });
         });
     }

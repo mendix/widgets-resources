@@ -47,11 +47,13 @@ export async function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
     );
 
     function createMxObject(entity: string): Promise<mendix.lib.MxObject> {
-        return new Promise((resolve, reject) => {
+        return new Promise(resolve => {
             mx.data.create({
                 entity,
                 callback: mxObject => resolve(mxObject),
-                error: () => reject(new Error(`Could not create '${entity}' object to store device info`))
+                error: () => {
+                    throw new Error(`Could not create '${entity}' object to store device info`);
+                }
             });
         });
     }
