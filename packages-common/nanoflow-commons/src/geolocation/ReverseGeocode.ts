@@ -4,7 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import Geocoder from "react-native-geocoder";
+import RNGeocoder from "react-native-geocoder";
 
 type ReverseGeocodingProvider = "Google" | "Geocodio" | "LocationIQ" | "MapQuest";
 
@@ -41,6 +41,8 @@ export async function ReverseGeocode(
     }
 
     if (navigator && navigator.product === "ReactNative") {
+        const Geocoder: typeof RNGeocoder = require("react-native-geocoder").default;
+
         const position = { lat: Number(latitude), lng: Number(longitude) };
 
         return Geocoder.geocodePosition(position).then(results => {
