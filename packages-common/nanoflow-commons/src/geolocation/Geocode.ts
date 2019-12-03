@@ -4,7 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import RNGeocoder from "react-native-geocoder";
+import Geocoder from "react-native-geocoder";
 
 type GeocodingProvider = "Google" | "Geocodio" | "LocationIQ" | "MapQuest";
 
@@ -15,8 +15,7 @@ type GeocodingProvider = "Google" | "Geocodio" | "LocationIQ" | "MapQuest";
  * @param {string} providerApiKey - This field is required for use on web. Note that the keys are accessible by the end users and should be protected in other ways; for example with a domain name restriction.
  * @returns {MxObject}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function Geocode(
+export async function Geocode(
     address?: string,
     geocodingProvider?: GeocodingProvider,
     providerApiKey?: string
@@ -36,8 +35,6 @@ function Geocode(
     }
 
     if (navigator && navigator.product === "ReactNative") {
-        const Geocoder: typeof RNGeocoder = require("react-native-geocoder").default;
-
         return Geocoder.geocodeAddress(address).then(results => {
             if (results.length === 0) {
                 throw new Error("No results found");
@@ -127,8 +124,7 @@ function Geocode(
                     resolve(mxObject);
                 },
                 error: () => {
-                    // eslint-disable-next-line prefer-promise-reject-errors
-                    reject("Could not create 'NanoflowCommons.Position' object to store coordinates");
+                    reject(new Error("Could not create 'NanoflowCommons.Position' object to store coordinates"));
                 }
             });
         });

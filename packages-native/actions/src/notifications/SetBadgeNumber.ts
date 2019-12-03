@@ -4,19 +4,15 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNativeFirebase from "react-native-firebase";
+import Firebase from "react-native-firebase";
 
 /**
  * @param {Big} badgeNumber - This field is required. Should be greater than or equal to 0.
  * @returns {boolean}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function SetBadgeNumber(badgeNumber?: BigJs.Big): boolean {
+export async function SetBadgeNumber(badgeNumber?: BigJs.Big): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/reference/Notifications#setBadge
-
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     if (!badgeNumber) {
         throw new TypeError("Input parameter 'Badge number' is required");
@@ -26,8 +22,8 @@ function SetBadgeNumber(badgeNumber?: BigJs.Big): boolean {
         throw new TypeError("Input parameter 'Badge number' should be zero or greater");
     }
 
-    firebase.notifications().setBadge(Number(badgeNumber));
-    return true;
+    Firebase.notifications().setBadge(Number(badgeNumber));
+    return Promise.resolve();
 
     // END USER CODE
 }

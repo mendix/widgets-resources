@@ -4,7 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNativeFirebase from "react-native-firebase";
+import Firebase from "react-native-firebase";
 
 /**
  * Displays the specified notification at a future moment in time.
@@ -18,10 +18,9 @@ import ReactNativeFirebase from "react-native-firebase";
  * @param {string} notificationId - This ID can be used to cancel the scheduled notification later.
  * @param {string} actionName
  * @param {string} actionGuid
- * @returns {boolean}
+ * @returns {void}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function ScheduleNotification(
+export async function ScheduleNotification(
     date?: Date,
     body?: string,
     title?: string,
@@ -30,12 +29,9 @@ function ScheduleNotification(
     notificationId?: string,
     actionName?: string,
     actionGuid?: string
-): Promise<boolean> {
+): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/scheduling-notifications
-
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     if (!date) {
         throw new TypeError("Input parameter 'Date' is required");
@@ -45,14 +41,14 @@ function ScheduleNotification(
         throw new TypeError("Input parameter 'Body' is required");
     }
 
-    const channel = new firebase.notifications.Android.Channel(
+    const channel = new Firebase.notifications.Android.Channel(
         "mendix-local-notifications",
         "Local notifications",
-        firebase.notifications.Android.Importance.Default
+        Firebase.notifications.Android.Importance.Default
     );
-    firebase.notifications().android.createChannel(channel);
+    await Firebase.notifications().android.createChannel(channel);
 
-    const notification = new firebase.notifications.Notification()
+    const notification = new Firebase.notifications.Notification()
         .setBody(body)
         .android.setChannelId("mendix-local-notifications");
 
@@ -79,12 +75,11 @@ function ScheduleNotification(
         notification.setNotificationId(notificationId);
     }
 
-    return firebase
-        .notifications()
-        .scheduleNotification(notification, {
-            fireDate: date.getTime()
-        })
-        .then(() => true);
+    Firebase.notifications().scheduleNotification(notification, {
+        fireDate: date.getTime()
+    });
+
+    return Promise.resolve();
 
     // END USER CODE
 }

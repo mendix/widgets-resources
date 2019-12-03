@@ -1,6 +1,6 @@
 {
     "name": "actions",
-    "version": "0.1.2",
+    "version": "1.0.1",
     "license": "Apache-2.0",
     "repository": {
         "type": "git",
@@ -9,7 +9,8 @@
     "scripts": {
         "start": "../../node_modules/.bin/tsc --watch",
         "prebuild": "rm -rf ./dist/tsc",
-        "build": "../../node_modules/.bin/tsc",
+        "build": "npm run build:tsc",
+        "build:tsc": "../../node_modules/.bin/tsc --project src/tsconfig.json",
         "postbuild": "../../node_modules/.bin/ts-node --project ./scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
         "version": "npm run build",
         "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
