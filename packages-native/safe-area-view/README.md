@@ -9,9 +9,8 @@ Place the safe area view widget onto a fullscreen page and place other widgets i
 
 ### Custom styling
 
-The style of the container that is rendered within the safe area and that contains all content is fully customizable.
-Apply custom styles by defining custom style classes through Atlas. These classes should adhere to the following
-interface:
+The style of the safe area is fully customizable. Apply custom styles by defining custom style classes through Atlas.
+These classes should adhere to the following interface:
 
 ```ts
 interface SafeAreaViewStyle {
@@ -39,8 +38,7 @@ export const customSafeAreaViewBackground = {
 };
 ```
 
-Both classes will apply an orange background to the container that is rendered within the safe area and that contains
-all content.
+Both classes will apply an orange background to the safe area.
 
 Check the official documentation for further information about ViewStyle:
 `https://facebook.github.io/react-native/docs/view-style-props`
