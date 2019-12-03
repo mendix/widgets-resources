@@ -47,7 +47,7 @@ export async function ReverseGeocode(
 
         return Geocoder.geocodePosition(position).then(results => {
             if (results.length === 0) {
-                throw new Error("No results found");
+                return Promise.reject(new Error("No results found"));
             }
             return results[0].formattedAddress;
         });
@@ -71,7 +71,7 @@ export async function ReverseGeocode(
         .then(response =>
             response.json().catch(() =>
                 response.text().then(text => {
-                    throw new Error(text);
+                    return Promise.reject(new Error(text));
                 })
             )
         )

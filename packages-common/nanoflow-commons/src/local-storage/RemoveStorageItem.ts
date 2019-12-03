@@ -31,7 +31,7 @@ export async function RemoveStorageItem(key?: string): Promise<boolean> {
             return Promise.resolve();
         }
 
-        throw new Error("No storage API available");
+        return Promise.reject(new Error("No storage API available"));
     }
     // END USER CODE
 }

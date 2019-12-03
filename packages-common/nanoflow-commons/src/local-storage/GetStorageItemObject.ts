@@ -26,7 +26,7 @@ export async function GetStorageItemObject(key?: string, entity?: string): Promi
 
     return getItem(key).then(result => {
         if (result === null) {
-            throw new Error(`Storage item '${key}' does not exist`);
+            return Promise.reject(new Error(`Storage item '${key}' does not exist`));
         }
         const value: StorageValue = JSON.parse(result);
 
@@ -48,7 +48,7 @@ export async function GetStorageItemObject(key?: string, entity?: string): Promi
             return Promise.resolve(value);
         }
 
-        throw new Error("No storage API available");
+        return Promise.reject(new Error("No storage API available"));
     }
 
     function setItem(key: string, value: string): Promise<void> {
@@ -63,7 +63,7 @@ export async function GetStorageItemObject(key?: string, entity?: string): Promi
             return Promise.resolve();
         }
 
-        throw new Error("No storage API available");
+        return Promise.reject(new Error("No storage API available"));
     }
 
     function getOrCreateMxObject(entity: string, value: StorageValue): Promise<mendix.lib.MxObject> {
@@ -77,19 +77,19 @@ export async function GetStorageItemObject(key?: string, entity?: string): Promi
     }
 
     function getMxObject(guid: string): Promise<mendix.lib.MxObject | undefined> {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             mx.data.get({
                 guid,
                 callback: mxObject => resolve(mxObject),
                 error: (error: Error) => {
-                    throw new Error(error.message);
+                    reject(new Error(error.message));
                 }
             });
         });
     }
 
     function createMxObject(entity: string, value: StorageValue): Promise<mendix.lib.MxObject> {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             mx.data.create({
                 entity,
                 callback: mxObject => {
@@ -102,7 +102,7 @@ export async function GetStorageItemObject(key?: string, entity?: string): Promi
                     resolve(mxObject);
                 },
                 error: () => {
-                    throw new Error(`Could not create '${entity}' object`);
+                    reject(new Error(`Could not create '${entity}' object`));
                 }
             });
         });

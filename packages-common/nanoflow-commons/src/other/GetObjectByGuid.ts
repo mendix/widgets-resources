@@ -27,7 +27,7 @@ export async function GetObjectByGuid(entity: string, objectGuid: string): Promi
                 if (object) {
                     resolve(object);
                 } else {
-                    throw new Error("'Object guid' not found");
+                    return Promise.reject(new Error("'Object guid' not found"));
                 }
             }
         });
