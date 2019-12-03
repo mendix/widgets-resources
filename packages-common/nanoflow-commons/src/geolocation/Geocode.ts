@@ -39,7 +39,7 @@ export async function Geocode(
 
         return Geocoder.geocodeAddress(address).then(results => {
             if (results.length === 0) {
-                throw new Error("No results found");
+                return Promise.reject(new Error("No results found"));
             }
             return createMxObject(String(results[0].position.lat), String(results[0].position.lng));
         });
@@ -59,7 +59,7 @@ export async function Geocode(
         .then(response =>
             response.json().catch(() =>
                 response.text().then(text => {
-                    throw new Error(text);
+                    return Promise.reject(new Error(text));
                 })
             )
         )
@@ -117,7 +117,7 @@ export async function Geocode(
     }
 
     function createMxObject(lat: string, long: string): Promise<mendix.lib.MxObject> {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             mx.data.create({
                 entity: "NanoflowCommons.Position",
                 callback: mxObject => {
@@ -126,7 +126,7 @@ export async function Geocode(
                     resolve(mxObject);
                 },
                 error: () => {
-                    throw new Error("Could not create 'NanoflowCommons.Position' object to store coordinates");
+                    reject(new Error("Could not create 'NanoflowCommons.Position' object to store coordinates"));
                 }
             });
         });

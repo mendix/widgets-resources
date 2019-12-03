@@ -27,7 +27,7 @@ export async function GetCurrentLocation(
 ): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
 
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
         const options = getOptions();
         navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 
@@ -39,13 +39,13 @@ export async function GetCurrentLocation(
                     resolve(geolocation);
                 },
                 error: () => {
-                    throw new Error("Could not create 'NanoflowCommons.Geolocation' object to store location");
+                    reject(new Error("Could not create 'NanoflowCommons.Geolocation' object to store location"));
                 }
             });
         }
 
         function onError(error: GeolocationError): void {
-            throw new Error(error.message);
+            Promise.reject(new Error(error.message));
         }
 
         function getOptions(): GeoOptions {

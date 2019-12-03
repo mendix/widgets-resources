@@ -19,7 +19,7 @@ export async function ShowProgress(message?: string, blocking?: boolean): Promis
     if (id !== undefined) {
         return Promise.resolve(new Big(id));
     }
-    throw new Error("Could not open the loading dialog");
+    return Promise.reject(new Error("Could not open the loading dialog"));
 
     // END USER CODE
 }
