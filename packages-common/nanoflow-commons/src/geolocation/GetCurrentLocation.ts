@@ -38,14 +38,13 @@ export async function GetCurrentLocation(
                     const geolocation = mapPositionToMxObject(mxObject, position);
                     resolve(geolocation);
                 },
-                error: () => {
-                    reject(new Error("Could not create 'NanoflowCommons.Geolocation' object to store location"));
-                }
+                error: () =>
+                    reject(new Error("Could not create 'NanoflowCommons.Geolocation' object to store location"))
             });
         }
 
         function onError(error: GeolocationError): void {
-            Promise.reject(new Error(error.message));
+            return reject(new Error(error.message));
         }
 
         function getOptions(): GeoOptions {

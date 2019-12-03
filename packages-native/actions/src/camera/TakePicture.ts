@@ -57,7 +57,7 @@ export async function TakePicture(
         });
 
     function takePicture(): Promise<string | undefined> {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             const options = getOptions();
             const method = getPictureMethod();
 
@@ -71,7 +71,7 @@ export async function TakePicture(
                     if (!unhandledError) {
                         return resolve();
                     }
-                    throw new Error(response.error);
+                    return reject(new Error(response.error));
                 }
 
                 return resolve(response.uri);
@@ -80,19 +80,15 @@ export async function TakePicture(
     }
 
     function storeFile(imageObject: mendix.lib.MxObject, uri: string): Promise<boolean> {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             fetch(uri)
                 .then(res => res.blob())
                 .then(blob => {
                     const guid = imageObject.getGuid();
                     // eslint-disable-next-line no-useless-escape
                     const filename = /[^\/]*$/.exec(uri)![0];
-                    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-                    const onSuccess = () => resolve(true);
-                    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-                    const onError = (error: Error) => {
-                        throw new Error(error.message);
-                    };
+                    const onSuccess = (): void => resolve(true);
+                    const onError = (error: Error): void => reject(error);
 
                     mx.data.saveDocument(guid, filename, {}, blob, onSuccess, onError);
                 });
