@@ -4,34 +4,30 @@
     A list with a listening dataview
 ========================================================================== */
 .masterdetail {
-    position: relative;
-    @media (min-width: $screen-lg) {
-        .mx-layoutgrid {
-            padding: 0 $gutter-size !important;
-        }
-    }
+    //@media (min-width: $screen-lg) {
+    //    .mx-layoutgrid {
+    //        padding: 0 $gutter-size !important;
+    //    }
+    //}
+
     .masterdetail-master {
         .controlgroup {
             margin-bottom: $gutter-size;
         }
+
         @media (min-width: $screen-lg) {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            padding: 0;
             border-right: 1px solid $border-color-default;
 
             .mx-listview-searchbar {
                 margin: $gutter-size;
             }
             .controlgroup {
-                margin: 0;
                 padding: $gutter-size;
                 border-bottom: 1px solid $border-color-default;
             }
         }
     }
+
     .masterdetail-detail {
         @media (min-width: $screen-lg) {
             @include layout-spacing($type: padding, $direction: all, $device: responsive);
@@ -45,6 +41,7 @@
     .masterdetail-master {
         @include layout-spacing($type: margin, $direction: bottom, $device: responsive);
     }
+
     .masterdetail-detail {
         @include layout-spacing($type: padding, $direction: top, $device: responsive);
     }
