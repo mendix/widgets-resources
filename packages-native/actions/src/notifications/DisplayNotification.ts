@@ -4,7 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNativeFirebase from "react-native-firebase";
+import Firebase from "react-native-firebase";
 
 /**
  * Displays the specified notification straight away.
@@ -18,33 +18,29 @@ import ReactNativeFirebase from "react-native-firebase";
  * @param {string} actionGuid
  * @returns {boolean}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function DisplayNotification(
+export async function DisplayNotification(
     body?: string,
     title?: string,
     subtitle?: string,
     playSound?: boolean,
     actionName?: string,
     actionGuid?: string
-): Promise<boolean> {
+): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/displaying-notifications
-
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     if (!body) {
         throw new TypeError("Input parameter 'Body' is required");
     }
 
-    const channel = new firebase.notifications.Android.Channel(
+    const channel = new Firebase.notifications.Android.Channel(
         "mendix-local-notifications",
         "Local notifications",
-        firebase.notifications.Android.Importance.Default
+        Firebase.notifications.Android.Importance.Default
     );
-    firebase.notifications().android.createChannel(channel);
+    await Firebase.notifications().android.createChannel(channel);
 
-    const notification = new firebase.notifications.Notification()
+    const notification = new Firebase.notifications.Notification()
         .setBody(body)
         .android.setChannelId("mendix-local-notifications");
 
@@ -67,10 +63,7 @@ function DisplayNotification(
         });
     }
 
-    return firebase
-        .notifications()
-        .displayNotification(notification)
-        .then(() => true);
+    return Firebase.notifications().displayNotification(notification);
 
     // END USER CODE
 }

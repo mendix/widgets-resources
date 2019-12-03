@@ -11,10 +11,9 @@ import { StorageValue } from "./StorageValue";
  * Store a Mendix object in device storage, identified by a unique key. Can be accessed by the GetStorageItemObject action. Please note that users can clear the device storage.
  * @param {string} key - This field is required.
  * @param {MxObject} value - This field is required.
- * @returns {boolean}
+ * @returns {void}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function SetStorageItemObject(key?: string, value?: mendix.lib.MxObject): Promise<boolean> {
+export async function SetStorageItemObject(key?: string, value?: mendix.lib.MxObject): Promise<void> {
     // BEGIN USER CODE
 
     if (!key) {
@@ -27,7 +26,7 @@ function SetStorageItemObject(key?: string, value?: mendix.lib.MxObject): Promis
 
     const serializedObject = serializeMxObject(value);
 
-    return setItem(key, JSON.stringify(serializedObject)).then(() => true);
+    return setItem(key, JSON.stringify(serializedObject));
 
     function setItem(key: string, value: string): Promise<void> {
         if (navigator && navigator.product === "ReactNative") {

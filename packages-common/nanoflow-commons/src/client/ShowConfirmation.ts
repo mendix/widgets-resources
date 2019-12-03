@@ -13,8 +13,7 @@ import ReactNative from "react-native";
  * @param {string} proceedButtonCaption - Set to empty to use default text 'OK'.
  * @returns {boolean}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function ShowConfirmation(
+export async function ShowConfirmation(
     question?: string,
     cancelButtonCaption?: string,
     proceedButtonCaption?: string

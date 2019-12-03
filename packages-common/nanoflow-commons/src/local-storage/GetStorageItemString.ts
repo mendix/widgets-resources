@@ -11,8 +11,7 @@ import ReactNative from "react-native";
  * @param {string} key - This field is required.
  * @returns {string}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function GetStorageItemString(key?: string): Promise<string> {
+export async function GetStorageItemString(key?: string): Promise<string> {
     // BEGIN USER CODE
 
     if (!key) {

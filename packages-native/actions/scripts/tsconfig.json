@@ -1,5 +1,14 @@
 {
     "compilerOptions": {
-        "types": ["node"]
+        "types": ["node"],
+        "strict": true,
+        "noEmitOnError": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "forceConsistentCasingInFileNames": true
     }
 }

@@ -10,8 +10,7 @@ import ReactNative from "react-native";
  * On the native platform a request for permission should be made before the `GetCurrentLocation` action would work.
  * @returns {boolean}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function RequestLocationPermission(): Promise<boolean> {
+export async function RequestLocationPermission(): Promise<boolean> {
     // BEGIN USER CODE
 
     if (navigator && navigator.product === "ReactNative") {
