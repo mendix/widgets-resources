@@ -6,5 +6,7 @@ export interface SafeAreaViewStyle extends Style {
 }
 
 export const defaultSafeAreaViewStyle: SafeAreaViewStyle = {
-    container: {}
+    container: {
+        flex: 1
+    }
 };
