@@ -4,7 +4,8 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import Firebase from "react-native-firebase";
+import { NativeModules } from "react-native";
+import ReactNativeFirebase from "react-native-firebase";
 
 /**
  * Checks if the user has granted the appropriate permissions to be able to send and receive messages.
@@ -15,7 +16,13 @@ export async function HasNotificationPermission(): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/receiving-notifications
 
-    return Firebase.messaging().hasPermission();
+    if (NativeModules && !NativeModules.RNFirebase) {
+        return Promise.reject(new Error("Firebase library is not currently imported in your app"));
+    }
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
+
+    return firebase.messaging().hasPermission();
 
     // END USER CODE
 }
