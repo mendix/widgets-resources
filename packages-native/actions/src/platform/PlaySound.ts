@@ -32,7 +32,7 @@ export async function PlaySound(audioFile?: mendix.lib.MxObject): Promise<void> 
 
     const audio = new Sound(url, undefined, error => {
         if (error) {
-            Promise.reject(new Error(error));
+            return Promise.reject(new Error(error));
         }
 
         audio.play(success => {
