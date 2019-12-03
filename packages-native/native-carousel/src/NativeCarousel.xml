@@ -7,12 +7,8 @@
     <description>My widget description</description>
     <icon/>
     <properties>
-<!--        Put data and render item-->
-
         <propertyGroup caption="General">
             <propertyGroup caption="Display">
-
-
                 <property key="contentSource" type="datasource" isList="true">
                     <caption>Content data source</caption>
                     <description>Whatever</description>
@@ -23,20 +19,6 @@
                     <description>Whatever</description>
                 </property>
 
-                <property key="inverted" type="boolean" defaultValue="false">
-                    <caption>Reverse direction</caption>
-                    <description>Reverses the direction of scroll</description>
-                </property>
-
-                <property key="vertical" type="enumeration" defaultValue="horizontal">
-                    <caption>Scroll direction</caption>
-                    <description>Determine slide's scroll direction. You need to specify both `sliderHeight` and `itemHeight` for vertical carousels</description>
-                    <enumerationValues>
-                        <enumerationValue key="vertical">Vertical</enumerationValue>
-                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
-                    </enumerationValues>
-                </property>
-
                 <property key="currentIndex" type="attribute" required="false">
                     <caption>Current index</caption>
                     <description>Current active item (int, starts at 0)</description>
@@ -44,118 +26,13 @@
                         <attributeType name="Integer" />
                     </attributeTypes>
                 </property>
-
-                <!-- TODO: should this must be dataSource / or an expression ? or normal integer ?-->
+                
                 <property key="firstItem" type="expression" defaultValue="0">
                     <caption>First item index</caption>
                     <description>Index of the first item to display.</description>
                     <returnType type="Integer"/>
                 </property>
             </propertyGroup>
-
-
-
-
-            <propertyGroup caption="Behaviour">
-                <property key="enableMomentum" type="boolean" defaultValue="false">
-                    <caption>Enable momentum</caption>
-                    <description>The snapping effect can be based on momentum instead of when you're releasing your finger. It means that the component will wait until the ScrollView isn't moving anymore to snap</description>
-                </property>
-                <property key="lockScrollWhileSnapping" type="boolean" defaultValue="false">
-                    <caption>Lock scroll while snapping</caption>
-                    <description>Prevent the user from interacting with the carousel while it is snapping. Ignored if `enableMomentum` is `true`</description>
-                </property>
-
-                <property key="enableSnap" type="boolean" defaultValue="true">
-                    <caption>Enable snap</caption>
-                    <description>If enabled, releasing the touch will scroll to the center of the nearest/active item</description>
-                </property>
-                <property key="swipeThreshold" type="integer" defaultValue="0">
-                    <caption>Swipe threshold</caption>
-                    <description>Delta x when swiping to trigger the snap</description>
-                </property>
-            </propertyGroup>
-
-
-
-<!--            TODO: I dont think these props are necessary to set by user-->
-<!--            * Duration of time while component is hidden after mounting. NOTE: May cause rendering-->
-<!--            * issues on Android. Defaults to 0-->
-<!--            */-->
-<!--            apparitionDelay?: number;-->
-<!--            /**-->
-<!--            * Defines a small margin for callbacks firing from scroll events.  Increase this value-->
-<!--            * if you experience missed callbacks. Defaults to 5-->
-<!--            */-->
-<!--            callbackOffsetMargin?: number;-->
-<!--            <property key="initialNumToRender" type="integer" required="false">-->
-<!--                <caption>Initial number of items to render</caption>-->
-<!--                <description>How many items should be rendered at the start</description>-->
-<!--            </property>-->
-<!--            <property key="activeSlideOffset" type="integer">-->
-<!--                <caption>Active slide offset</caption>-->
-<!--                <description>From slider's center, minimum slide distance to be scrolled before being set to active</description>-->
-<!--            </property>-->
-
-
-
-<!--            TODO: Should we implement parallax yet ?/**-->
-<!--            * Flag to indicate whether the carousel contains `<ParallaxImage />`. Parallax data-->
-<!--            * will not be passed to carousel items if this is false-->
-<!--            */-->
-<!--            hasParallaxImages?: boolean;-->
-
-
-
-
-<!--            TODO: EXPERIMENT/**-->
-<!--            /**-->
-<!--            * Changes default lock's timeout duration in ms.-->
-<!--            */-->
-<!--            lockScrollTimeoutDuration?: number;-->
-<!--            /**-->
-<!--            * When momentum is disabled, this prop defines the timeframe during which multiple-->
-<!--            * callback calls should be "grouped" into a single one. This debounce also helps-->
-<!--            * smoothing the snap effect by providing a bit of inertia when touch is released..-->
-<!--            * Note that this will delay callback's execution.-->
-<!--            */-->
-<!--            scrollEndDragDebounceValue?: number;-->
-<!--            /**-->
-<!--            * Allow scroll independently of user interaction on carousel. `false` as default.-->
-<!--            */-->
-<!--            scrollEnabled?: boolean;-->
-<!--            /**-->
-<!--            * Whether to implement a shouldComponentUpdate strategy to minimize updates-->
-<!--            */-->
-<!--            shouldOptimizeUpdates?: boolean;-->
-<!--            /**-->
-
-
-<!--            TODO: this shouldn't be setted by user, technical./Whether to use a ScrollView component instead of the default FlatList one. The advantages are to avoid rendering issues that can arise with FlatList and to provide compatibility with React Native pre- 0.43. The major drawbacks are that you won't benefit from any of FlatList's advanced optimizations and that you won't be able to use either VirtualizedList or FlatList's specific props. We recommend activating it only with a small set of slides and to test performance thoroughly in production mode. Since version 3.7.6, this prop also accepts a custom scroll component (see #498 for more info).**-->
-<!--            * Determines whether to use `ScrollView` instead of `FlatList`. May cause-->
-<!--            * rendering performance issues due to losing `FlatList`'s performance-->
-<!--            * optimizations-->
-<!--            */-->
-<!--            useScrollView?: boolean;-->
-<!--            /**-->
-<!--            * Custom animation options.-->
-<!--            * Note that useNativeDriver will be enabled by default and that opacity's easing will always be kept linear.-->
-<!--            * Setting this prop to something other than null will trigger custom animations and will completely change-->
-<!--            * the way items are animated: rather than having their opacity and scale interpolated based the scroll value (default behavior),-->
-<!--            * they will now play the custom animation you provide as soon as they become active.-->
-<!--            * This means you cannot use props layout, scrollInterpolator or slideInterpolatedStyle in conjunction with activeAnimationOptions-->
-<!--            */-->
-<!--            activeAnimationOptions?: Animated.DecayAnimationConfig | Animated.TimingAnimationConfig | Animated.SpringAnimationConfig;-->
-<!--            /**-->
-<!--            * Custom animation type: either 'decay, 'spring' or 'timing'.-->
-<!--            * Note that it will only be applied to the scale animation since opacity's animation type will always be set-->
-<!--            * to timing (no one wants the opacity to 'bounce' around)-->
-<!--            */-->
-<!--            activeAnimationType?: 'decay' | 'spring' | 'timing';-->
-<!--            * Used to define custom interpolations-->
-<!--            */-->
-<!--            scrollInterpolator?(index: number, carouselProps: CarouselProps<any>): { inputRange: number[], outputRange: number[] };-->
-
             <propertyGroup caption="layout">
                 <property key="activeSlideAlignment" type="enumeration" defaultValue="center">
                     <caption>Active slide's alignment</caption>
@@ -167,84 +44,21 @@
                     </enumerationValues>
                 </property>
 
-                <property key="layout" type="enumeration" defaultValue="default">
+                <property key="layout" type="enumeration" defaultValue="card">
                     <caption>Layout</caption>
                     <description>Define the way items are rendered and animated. If you have a large data set, don't use stack or tinder</description>
                     <enumerationValues>
-                        <enumerationValue key="default">Default</enumerationValue>
+                        <enumerationValue key="card">Card</enumerationValue>
                         <enumerationValue key="fullWidth">Full width</enumerationValue>
-                        <enumerationValue key="fullScreen">Full screen</enumerationValue>
-                        <enumerationValue key="stack">Stack</enumerationValue>
-                        <enumerationValue key="tinder">Tinder</enumerationValue>
                     </enumerationValues>
                 </property>
-
-                <property key="layoutCardOffset" type="integer" defaultValue="0">
-                    <caption>Layout card offset</caption>
-                    <description>Use to increase or decrease the default card offset in both 'stack' and 'tinder' layouts</description>
-                </property>
             </propertyGroup>
-
-
-<!--            // Callbacks-->
-<!--            TODO: this is not necessary callback-->
-<!--            /**-->
-<!--            * Exposed View callback; invoked on mount and layout changes-->
-<!--            */-->
-<!--            onLayout?(event: LayoutChangeEvent): void;-->
-
-<!--            /**-->
-<!--            * Exposed ScrollView callback; fired while scrolling-->
-<!--            */-->
-<!--            onScroll?(event: NativeSyntheticEvent<NativeScrollEvent>): void;-->
-
-<!--            /**-->
-<!--            * Callback fired when navigating to an item-->
-<!--            */-->
-<!--            onSnapToItem?(slideIndex: number): void;-->
-
-<!--            /**-->
-<!--            * Callback fired before navigating to an item-->
-<!--            */-->
-<!--            onBeforeSnapToItem?(slideIndex: number): void;-->
-
-
-<!--            /**-->
-<!--            * Start the autoplay manually-->
-<!--            */-->
-<!--            startAutoplay(instantly?: boolean): void;-->
-<!--            /**-->
-<!--            * Stop the autoplay manually-->
-<!--            */-->
-<!--            stopAutoplay(): void;-->
-<!--            /**-->
-<!--            * Snap to an item manually-->
-<!--            */-->
-<!--            snapToItem(index: number, animated?: boolean, fireCallback?: boolean): void;-->
-<!--            /**-->
-<!--            * Snap to next item manually-->
-<!--            */-->
-<!--            snapToNext(animated?: boolean, fireCallback?: boolean): void;-->
-<!--            /**-->
-<!--            * Snap to previous item manually-->
-<!--            */-->
-<!--            snapToPrev(animated?: boolean, fireCallback?: boolean): void;-->
-
-
-
-
         </propertyGroup>
         <propertyGroup caption="Loop">
             <propertyGroup caption="Loop / Autoplay">
                 <property key="loop" type="boolean" defaultValue="false">
                     <caption>Loop</caption>
                     <description>Enable infinite loop mode. Does not work if `enableSnap` is `false`</description>
-                </property>
-
-                <!--                TODO: experiment with this-->
-                <property key="loopClonesPerSide" type="integer" defaultValue="2">
-                    <caption>Loop clones per side</caption>
-                    <description>Number of clones to render at the beginning and end of the list. Default</description>
                 </property>
 
                 <property key="autoplay" type="boolean" defaultValue="false">
@@ -268,6 +82,10 @@
                 <property key="onPress" type="action" required="false">
                     <caption>On press event</caption>
                     <description>Fired when user taps on the slide</description>
+                </property>
+                <property key="onSnap" type="action" required="false">
+                    <caption>On snap event</caption>
+                    <description>Fired when user changes the slide item</description>
                 </property>
             </propertyGroup>
         </propertyGroup>
