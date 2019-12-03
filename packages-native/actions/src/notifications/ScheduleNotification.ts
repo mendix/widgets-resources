@@ -75,7 +75,7 @@ export async function ScheduleNotification(
         notification.setNotificationId(notificationId);
     }
 
-    Firebase.notifications().scheduleNotification(notification, {
+    await Firebase.notifications().scheduleNotification(notification, {
         fireDate: date.getTime()
     });
 
