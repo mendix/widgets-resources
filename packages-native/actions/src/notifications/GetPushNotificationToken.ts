@@ -4,7 +4,8 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import Firebase from "react-native-firebase";
+import { NativeModules } from "react-native";
+import ReactNativeFirebase from "react-native-firebase";
 
 /**
  * This generated registration token is used to identify the app instance and periodically sends data to the backend.
@@ -14,7 +15,13 @@ export async function getPushNotificationToken(): Promise<string> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/messaging/reference/Messaging#getToken
 
-    return Firebase.messaging().getToken();
+    if (NativeModules && !NativeModules.RNFirebase) {
+        return Promise.reject(new Error("Firebase library is not currently imported in your app"));
+    }
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
+
+    return firebase.messaging().getToken();
 
     // END USER CODE
 }
