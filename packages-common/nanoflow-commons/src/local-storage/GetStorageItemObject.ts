@@ -81,9 +81,7 @@ export async function GetStorageItemObject(key?: string, entity?: string): Promi
             mx.data.get({
                 guid,
                 callback: mxObject => resolve(mxObject),
-                error: (error: Error) => {
-                    reject(new Error(error.message));
-                }
+                error: (error: Error) => reject(error)
             });
         });
     }
@@ -101,9 +99,7 @@ export async function GetStorageItemObject(key?: string, entity?: string): Promi
                         });
                     resolve(mxObject);
                 },
-                error: () => {
-                    reject(new Error(`Could not create '${entity}' object`));
-                }
+                error: () => reject(new Error(`Could not create '${entity}' object`))
             });
         });
     }
