@@ -29,8 +29,7 @@ export async function SetBadgeNumber(badgeNumber?: BigJs.Big): Promise<void> {
         throw new TypeError("Input parameter 'Badge number' should be zero or greater");
     }
 
-    firebase.notifications().setBadge(Number(badgeNumber));
-    return Promise.resolve();
+    return firebase.notifications().setBadge(Number(badgeNumber));
 
     // END USER CODE
 }
