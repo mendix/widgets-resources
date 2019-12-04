@@ -82,11 +82,9 @@ export async function ScheduleNotification(
         notification.setNotificationId(notificationId);
     }
 
-    await firebase.notifications().scheduleNotification(notification, {
+    return firebase.notifications().scheduleNotification(notification, {
         fireDate: date.getTime()
     });
-
-    return Promise.resolve();
 
     // END USER CODE
 }
