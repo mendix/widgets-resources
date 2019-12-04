@@ -17,11 +17,11 @@ export async function SetStorageItemObject(key?: string, value?: mendix.lib.MxOb
     // BEGIN USER CODE
 
     if (!key) {
-        throw new TypeError("Input parameter 'Key' is required");
+        return Promise.reject(new TypeError("Input parameter 'Key' is required"));
     }
 
     if (!value) {
-        throw new TypeError("Input parameter 'Value' is required");
+        return Promise.reject(new TypeError("Input parameter 'Value' is required"));
     }
 
     const serializedObject = serializeMxObject(value);

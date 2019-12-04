@@ -17,7 +17,9 @@ export async function Share(url?: string, text?: string, title?: string): Promis
     // BEGIN USER CODE
 
     if (!text && !url) {
-        throw new TypeError("It is required to provide at least one of input parameters 'Text' and 'Url'");
+        return Promise.reject(
+            new TypeError("It is required to provide at least one of input parameters 'Text' and 'Url'")
+        );
     }
 
     // Native platform

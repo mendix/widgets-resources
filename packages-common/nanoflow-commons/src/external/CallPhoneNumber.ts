@@ -14,7 +14,7 @@ export async function CallPhoneNumber(phoneNumber?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!phoneNumber) {
-        throw new TypeError("Input parameter 'Phone number' is required");
+        return Promise.reject(new TypeError("Input parameter 'Phone number' is required"));
     }
 
     const url = `tel:${encodeURI(phoneNumber)}`;

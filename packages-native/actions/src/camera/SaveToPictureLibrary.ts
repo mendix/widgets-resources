@@ -15,12 +15,12 @@ export async function SaveToPictureLibrary(picture?: mendix.lib.MxObject): Promi
     // Documentation https://facebook.github.io/react-native/docs/cameraroll#savetocameraroll
 
     if (!picture) {
-        throw new TypeError("Input parameter 'Picture' is required");
+        return Promise.reject(new TypeError("Input parameter 'Picture' is required"));
     }
 
     if (!picture.inheritsFrom("System.FileDocument")) {
         const entity = picture.getEntity();
-        throw new TypeError(`Entity ${entity} does not inherit from 'System.FileDocument'`);
+        return Promise.reject(new TypeError(`Entity ${entity} does not inherit from 'System.FileDocument'`));
     }
 
     const guid = picture.getGuid();

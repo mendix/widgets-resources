@@ -14,7 +14,7 @@ export async function RemoveStorageItem(key?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!key) {
-        throw new TypeError("Input parameter 'Key' is required");
+        return Promise.reject(new TypeError("Input parameter 'Key' is required"));
     }
 
     return removeItem(key).then(() => true);

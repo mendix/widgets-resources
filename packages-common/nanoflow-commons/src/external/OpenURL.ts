@@ -15,7 +15,7 @@ export async function OpenURL(url?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!url) {
-        throw new TypeError("Input parameter 'Url' is required");
+        return Promise.reject(new TypeError("Input parameter 'Url' is required"));
     }
 
     // Native platform
