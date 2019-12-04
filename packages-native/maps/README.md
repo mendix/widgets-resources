@@ -1,4 +1,4 @@
-# Maps widget
+## Maps widget
 
 Use maps widget to show list of locations on an interactive map in your native apps.
 
@@ -8,8 +8,7 @@ You can find the example module at `example/Maps.mpk`. Simply
 [import](https://docs.mendix.com/howto/integration/importing-and-exporting-objects#2-2-importing-module-packages) the
 module package to your project.
 
-Example is provided in order to give a baseline on how Maps widget can be implemented in a simple fashion. Please dont
-forget to update the widget itself once the Module is imported.
+Example is provided in order to give a baseline on how Maps widget can be implemented in a simple fashion.
 
 ### Features
 
