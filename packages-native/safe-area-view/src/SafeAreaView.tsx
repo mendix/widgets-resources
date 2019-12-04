@@ -11,7 +11,7 @@ export const SafeAreaView = (props: SafeAreaViewProps<SafeAreaViewStyle>): JSX.E
 
     return (
         <ReactSaveAreaView style={{ flex: 1 }}>
-            <View style={{ ...styles.container }}>{props.content}</View>
+            <View style={styles.container}>{props.content}</View>
         </ReactSaveAreaView>
     );
 };
