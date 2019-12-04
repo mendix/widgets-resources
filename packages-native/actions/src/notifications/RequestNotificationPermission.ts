@@ -10,7 +10,7 @@ import ReactNativeFirebase from "react-native-firebase";
 /**
  * Notification permissions are required to send a user push messages. Calling this action displays the permission dialog to the user.
  * Returns true if permission is granted, otherwise it returns false.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 export async function RequestNotificationPermission(): Promise<boolean> {
     // BEGIN USER CODE

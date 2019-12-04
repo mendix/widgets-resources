@@ -7,7 +7,7 @@
 import { Keyboard } from "react-native";
 
 /**
- * @returns {boolean}
+ * @returns {Promise.<void>}
  */
 export async function HideKeyboard(): Promise<void> {
     // BEGIN USER CODE
