@@ -31,7 +31,7 @@ export async function Geocode(
      */
 
     if (!address) {
-        throw new TypeError("Input parameter 'Address' is required");
+        return Promise.reject(new TypeError("Input parameter 'Address' is required"));
     }
 
     if (navigator && navigator.product === "ReactNative") {
@@ -46,11 +46,11 @@ export async function Geocode(
     }
 
     if (!geocodingProvider) {
-        throw new TypeError("Input parameter 'Geocoding provider' is required for use on web");
+        return Promise.reject(new TypeError("Input parameter 'Geocoding provider' is required for use on web"));
     }
 
     if (!providerApiKey) {
-        throw new TypeError("Input parameter 'Provider api key' is required for use on web");
+        return Promise.reject(new TypeError("Input parameter 'Provider api key' is required for use on web"));
     }
 
     const url = getApiUrl(geocodingProvider, address, providerApiKey);
@@ -64,7 +64,8 @@ export async function Geocode(
             )
         )
         .then(response => getLatLong(geocodingProvider, response))
-        .then(latLong => createMxObject(latLong[0], latLong[1]));
+        .then(latLong => createMxObject(latLong[0], latLong[1]))
+        .catch(error => Promise.reject(error));
 
     function getApiUrl(provider: GeocodingProvider, query: string, key: string): string {
         query = encodeURIComponent(query);

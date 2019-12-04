@@ -15,7 +15,7 @@ export async function SetClipboardContent(content?: string): Promise<void> {
     // Documentation https://facebook.github.io/react-native/docs/clipboard#setstring
 
     if (!content) {
-        throw new TypeError("Input parameter 'Content' is required");
+        return Promise.reject(new TypeError("Input parameter 'Content' is required"));
     }
 
     Clipboard.setString(content);

@@ -15,7 +15,7 @@ export async function StorageItemExists(key?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!key) {
-        throw new TypeError("Input parameter 'Key' is required");
+        return Promise.reject(new TypeError("Input parameter 'Key' is required"));
     }
 
     return getItem(key).then(result => result !== null);
