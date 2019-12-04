@@ -15,7 +15,7 @@ export async function OpenMap(location?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!location) {
-        throw new TypeError("Input parameter 'Location' is required");
+        return Promise.reject(new TypeError("Input parameter 'Location' is required"));
     }
 
     location = encodeURIComponent(location);

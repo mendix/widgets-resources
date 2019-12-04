@@ -18,12 +18,12 @@ export async function PlaySound(audioFile?: mendix.lib.MxObject): Promise<void> 
     // Documentation https://github.com/zmxv/react-native-sound
 
     if (!audioFile) {
-        throw new TypeError("Input parameter 'Audio file' is required");
+        return Promise.reject(new TypeError("Input parameter 'Audio file' is required"));
     }
 
     if (!audioFile.inheritsFrom("System.FileDocument")) {
         const entity = audioFile.getEntity();
-        throw new TypeError(`Entity ${entity} does not inherit from 'System.FileDocument'`);
+        return Promise.reject(new TypeError(`Entity ${entity} does not inherit from 'System.FileDocument'`));
     }
 
     const guid = audioFile.getGuid();

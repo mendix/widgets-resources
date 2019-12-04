@@ -33,11 +33,11 @@ export async function ReverseGeocode(
      */
 
     if (!latitude) {
-        throw new TypeError("Input parameter 'Latitude' is required");
+        return Promise.reject(new TypeError("Input parameter 'Latitude' is required"));
     }
 
     if (!longitude) {
-        throw new TypeError("Input parameter 'Longitude' is required");
+        return Promise.reject(new TypeError("Input parameter 'Longitude' is required"));
     }
 
     if (navigator && navigator.product === "ReactNative") {
@@ -54,11 +54,11 @@ export async function ReverseGeocode(
     }
 
     if (!geocodingProvider) {
-        throw new TypeError("Input parameter 'Geocoding provider' is required for use on web");
+        return Promise.reject(new TypeError("Input parameter 'Geocoding provider' is required for use on web"));
     }
 
     if (!providerApiKey) {
-        throw new TypeError("Input parameter 'Provider api key' is required for use on web");
+        return Promise.reject(new TypeError("Input parameter 'Provider api key' is required for use on web"));
     }
 
     latitude = encodeURIComponent(latitude);
@@ -75,7 +75,8 @@ export async function ReverseGeocode(
                 })
             )
         )
-        .then(response => getAddress(geocodingProvider, response));
+        .then(response => getAddress(geocodingProvider, response))
+        .catch(error => Promise.reject(error));
 
     function getApiUrl(provider: ReverseGeocodingProvider, lat: string, long: string, key: string): string {
         switch (provider) {

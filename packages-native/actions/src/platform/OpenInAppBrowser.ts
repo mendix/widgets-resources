@@ -23,7 +23,7 @@ export async function OpenInAppBrowser(
     // Documentation https://github.com/proyecto26/react-native-inappbrowser
 
     if (!url) {
-        throw new TypeError("Input parameter 'Url' is required");
+        return Promise.reject(new TypeError("Input parameter 'Url' is required"));
     }
 
     const options: InAppBrowserOptions = {

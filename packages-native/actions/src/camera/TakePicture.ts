@@ -30,16 +30,18 @@ export async function TakePicture(
     // Documentation https://github.com/react-native-community/react-native-image-picker/blob/master/docs/Reference.md
 
     if (!picture) {
-        throw new TypeError("Input parameter 'Picture' is required");
+        return Promise.reject(new TypeError("Input parameter 'Picture' is required"));
     }
 
     if (!picture.inheritsFrom("System.FileDocument")) {
         const entity = picture.getEntity();
-        throw new TypeError(`Entity ${entity} does not inherit from 'System.FileDocument'`);
+        return Promise.reject(new TypeError(`Entity ${entity} does not inherit from 'System.FileDocument'`));
     }
 
     if (pictureQuality === "custom" && !maximumHeight && !maximumWidth) {
-        throw new TypeError("Picture quality is set to 'Custom', but no maximum width or height was provided");
+        return Promise.reject(
+            new TypeError("Picture quality is set to 'Custom', but no maximum width or height was provided")
+        );
     }
 
     return takePicture()
