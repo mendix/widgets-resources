@@ -9,7 +9,7 @@ import ReactNative from "react-native";
 /**
  * Check if an item exists in a device storage, identified by a unique key. The value could be set by a Set Storage Item action.
  * @param {string} key - This field is required.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 export async function StorageItemExists(key?: string): Promise<boolean> {
     // BEGIN USER CODE

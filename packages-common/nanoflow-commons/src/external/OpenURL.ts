@@ -9,7 +9,7 @@ import ReactNative from "react-native";
 /**
  * Opens the provided URL in the web browser.
  * @param {string} url - This field is required.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 export async function OpenURL(url?: string): Promise<boolean> {
     // BEGIN USER CODE

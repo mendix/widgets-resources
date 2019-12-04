@@ -13,7 +13,7 @@ import ReactNative from "react-native";
  * @param {string} bcc - The Blind Carbon Copy recipient, or recipients, separated by comma's.
  * @param {string} subject
  * @param {string} body
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 export async function DraftEmail(
     recipient?: string,

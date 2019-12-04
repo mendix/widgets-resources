@@ -7,7 +7,7 @@
 /**
  * Hides a loading dialog.
  * @param {Big} identifier - This field is required.
- * @returns {void}
+ * @returns {Promise.<void>}
  */
 export async function HideProgress(identifier?: BigJs.Big): Promise<void> {
     // BEGIN USER CODE

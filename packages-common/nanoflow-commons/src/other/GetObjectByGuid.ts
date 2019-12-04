@@ -8,7 +8,7 @@
  * Get a Mendix object by its GUID.
  * @param {string} entity - This field is required.
  * @param {string} objectGuid - This field is required.
- * @returns {MxObject}
+ * @returns {Promise.<MxObject>}
  */
 export async function GetObjectByGuid(entity: string, objectGuid: string): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE

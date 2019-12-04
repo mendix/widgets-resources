@@ -13,7 +13,7 @@ type GeocodingProvider = "Google" | "Geocodio" | "LocationIQ" | "MapQuest";
  * @param {string} address - This field is required.
  * @param {"NanoflowCommons.GeocodingProvider.Google"|"NanoflowCommons.GeocodingProvider.Geocodio"|"NanoflowCommons.GeocodingProvider.LocationIQ"|"NanoflowCommons.GeocodingProvider.MapQuest"} geocodingProvider - This field is required for use on web.
  * @param {string} providerApiKey - This field is required for use on web. Note that the keys are accessible by the end users and should be protected in other ways; for example with a domain name restriction.
- * @returns {MxObject}
+ * @returns {Promise.<MxObject>}
  */
 export async function Geocode(
     address?: string,

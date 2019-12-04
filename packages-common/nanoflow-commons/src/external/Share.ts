@@ -11,7 +11,7 @@ import ReactNative from "react-native";
  * @param {string} url - The url to share.
  * @param {string} text - The text to share.
  * @param {string} title - Title of the message to share. Only some share targets use this value.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 export async function Share(url?: string, text?: string, title?: string): Promise<boolean> {
     // BEGIN USER CODE

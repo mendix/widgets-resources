@@ -9,7 +9,7 @@
  *
  * If the user is not logged in, the return value is false.
  *
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 export async function SignOut(): Promise<boolean> {
     // BEGIN USER CODE

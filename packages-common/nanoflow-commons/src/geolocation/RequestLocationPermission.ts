@@ -8,7 +8,7 @@ import ReactNative from "react-native";
 
 /**
  * On the native platform a request for permission should be made before the `GetCurrentLocation` action would work.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 export async function RequestLocationPermission(): Promise<boolean> {
     // BEGIN USER CODE

@@ -10,7 +10,7 @@ import ReactNative from "react-native";
  * Store a string value in the device storage, identified by a unique key. Can be accessed by the GetStorageItemObject action. Please note that users can clear the device storage.
  * @param {string} key - This field is required.
  * @param {string} value - This field is required.
- * @returns {void}
+ * @returns {Promise.<void>}
  */
 export async function SetStorageItemString(key?: string, value?: string): Promise<void> {
     // BEGIN USER CODE
