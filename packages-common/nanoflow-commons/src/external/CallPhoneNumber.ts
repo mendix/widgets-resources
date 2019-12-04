@@ -8,7 +8,7 @@ import ReactNative from "react-native";
 
 /**
  * @param {string} phoneNumber - This field is required.
- * @returns {string}
+ * @returns {Promise.<boolean>}
  */
 export async function CallPhoneNumber(phoneNumber?: string): Promise<boolean> {
     // BEGIN USER CODE

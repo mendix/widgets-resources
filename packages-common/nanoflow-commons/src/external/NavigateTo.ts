@@ -9,7 +9,7 @@ import ReactNative from "react-native";
 /**
  * Opens a navigation application on your device or a web browser showing Google Maps directions.
  * @param {string} location - This field is required.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 export async function NavigateTo(location?: string): Promise<boolean> {
     // BEGIN USER CODE

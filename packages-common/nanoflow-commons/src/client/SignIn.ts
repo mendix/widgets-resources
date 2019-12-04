@@ -14,7 +14,7 @@
  *
  * @param {string} username - This field is required.
  * @param {string} password - This field is required.
- * @returns {Big}
+ * @returns {Promise.<Big>}
  */
 export async function SignIn(username?: string, password?: string): Promise<BigJs.Big> {
     // BEGIN USER CODE

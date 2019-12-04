@@ -8,7 +8,7 @@ type Platform = "Web" | "Native_mobile" | "Hybrid_mobile";
 
 /**
  * Get the client platform (NanoflowCommons.Platform) where the action is running.
- * @returns {"NanoflowCommons.Platform.Web"|"NanoflowCommons.Platform.Native_mobile"|"NanoflowCommons.Platform.Hybrid_mobile"}
+ * @returns {Promise.<"NanoflowCommons.Platform.Web"|"NanoflowCommons.Platform.Native_mobile"|"NanoflowCommons.Platform.Hybrid_mobile">}
  */
 export async function GetPlatform(): Promise<Platform> {
     // BEGIN USER CODE

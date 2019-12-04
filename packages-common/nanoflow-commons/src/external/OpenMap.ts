@@ -9,7 +9,7 @@ import ReactNative from "react-native";
 /**
  * Opens a map application on your device or a web browser showing Google Maps.
  * @param {string} location - This field is required.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 export async function OpenMap(location?: string): Promise<boolean> {
     // BEGIN USER CODE

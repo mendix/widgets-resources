@@ -10,7 +10,7 @@
  * Returns an identifier that can be used to close the dialog.
  * @param {string} message - The text to show while loading.
  * @param {boolean} blocking - Block the user interface immediately.
- * @returns {Big}
+ * @returns {Promise.<Big>}
  */
 export async function ShowProgress(message?: string, blocking?: boolean): Promise<BigJs.Big> {
     // BEGIN USER CODE
