@@ -9,7 +9,7 @@ import ReactNativeFirebase from "react-native-firebase";
 
 /**
  * @param {Big} badgeNumber - This field is required. Should be greater than or equal to 0.
- * @returns {boolean}
+ * @returns {Promise.<void>}
  */
 export async function SetBadgeNumber(badgeNumber?: BigJs.Big): Promise<void> {
     // BEGIN USER CODE

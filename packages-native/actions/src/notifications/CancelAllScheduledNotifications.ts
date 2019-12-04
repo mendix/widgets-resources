@@ -9,7 +9,7 @@ import { NativeModules } from "react-native";
 
 /**
  * Cancels all pending scheduled notifications.
- * @returns {void}
+ * @returns {Promise.<void>}
  */
 export async function CancelAllScheduledNotifications(): Promise<void> {
     // BEGIN USER CODE

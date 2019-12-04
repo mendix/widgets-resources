@@ -8,7 +8,7 @@ import { fetch } from "@react-native-community/netinfo";
 import { NetInfoType } from "../../typings/NetInfo";
 
 /**
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 export async function IsCellularConnection(): Promise<boolean> {
     // BEGIN USER CODE

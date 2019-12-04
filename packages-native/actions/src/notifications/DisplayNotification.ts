@@ -17,7 +17,7 @@ import ReactNativeFirebase from "react-native-firebase";
  * @param {boolean} playSound
  * @param {string} actionName
  * @param {string} actionGuid
- * @returns {boolean}
+ * @returns {Promise.<void>}
  */
 export async function DisplayNotification(
     body?: string,

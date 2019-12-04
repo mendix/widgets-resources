@@ -9,7 +9,7 @@ import ReactNativeFirebase from "react-native-firebase";
 
 /**
  * This generated registration token is used to identify the app instance and periodically sends data to the backend.
- * @returns {string}
+ * @returns {Promise.<string>}
  */
 export async function getPushNotificationToken(): Promise<string> {
     // BEGIN USER CODE

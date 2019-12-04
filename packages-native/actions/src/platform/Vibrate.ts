@@ -8,7 +8,7 @@ import { Vibration } from "react-native";
 
 /**
  * @param {Big} duration - Android only setting. The time (in milliseconds) the device should vibrate. Set to empty to use the default value 500.
- * @returns {boolean}
+ * @returns {Promise.<void>}
  */
 export async function Vibrate(duration?: BigJs.Big): Promise<void> {
     // BEGIN USER CODE

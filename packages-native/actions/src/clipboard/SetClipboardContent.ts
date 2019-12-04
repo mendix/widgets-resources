@@ -8,7 +8,7 @@ import { Clipboard } from "react-native";
 
 /**
  * @param {string} content - This field is required.
- * @returns {void}
+ * @returns {Promise.<void>}
  */
 export async function SetClipboardContent(content?: string): Promise<void> {
     // BEGIN USER CODE

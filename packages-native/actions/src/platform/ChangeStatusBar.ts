@@ -16,7 +16,7 @@ type Style = "DefaultStyle" | "LightContentStyle" | "DarkContentStyle";
  * @param {boolean} translucent
  * @param {boolean} networkActivityIndicatorVisible
  * @param {"NativeMobileActions.StatusBarHideShowAnimation.none"|"NativeMobileActions.StatusBarHideShowAnimation.fade"|"NativeMobileActions.StatusBarHideShowAnimation.slide"} animateHideShow - If empty, the default value 'none' is used.
- * @returns {boolean}
+ * @returns {Promise.<void>}
  */
 export async function ChangeStatusBar(
     style?: Style,

@@ -7,7 +7,7 @@
 import TouchID from "react-native-touch-id";
 
 /**
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 export async function IsBiometricAuthenticationSupported(): Promise<boolean> {
     // BEGIN USER CODE

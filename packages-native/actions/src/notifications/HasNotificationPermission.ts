@@ -10,7 +10,7 @@ import ReactNativeFirebase from "react-native-firebase";
 /**
  * Checks if the user has granted the appropriate permissions to be able to send and receive messages.
  * Returns true if permission is granted, false otherwise.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 export async function HasNotificationPermission(): Promise<boolean> {
     // BEGIN USER CODE
