@@ -17,7 +17,7 @@ export async function HasNotificationPermission(): Promise<boolean> {
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/receiving-notifications
 
     if (NativeModules && !NativeModules.RNFirebase) {
-        return Promise.reject(new Error("Firebase library is not currently imported in your app"));
+        return Promise.reject(new Error("Firebase module is not available in your app"));
     }
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
