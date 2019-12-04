@@ -7,7 +7,7 @@
 import { Clipboard } from "react-native";
 
 /**
- * @returns {string}
+ * @returns {Promise.<string>}
  */
 export async function GetClipboardContent(): Promise<string> {
     // BEGIN USER CODE

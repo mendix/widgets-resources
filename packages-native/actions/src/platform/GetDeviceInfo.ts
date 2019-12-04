@@ -7,7 +7,7 @@
 import DeviceInfo from "react-native-device-info";
 
 /**
- * @returns {MxObject}
+ * @returns {Promise.<MxObject>}
  */
 export async function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE

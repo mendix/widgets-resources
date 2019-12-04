@@ -8,7 +8,7 @@ import { CameraRoll } from "react-native";
 
 /**
  * @param {MxObject} picture - This field is required.
- * @returns {string}
+ * @returns {Promise.<string>}
  */
 export async function SaveToPictureLibrary(picture?: mendix.lib.MxObject): Promise<string> {
     // BEGIN USER CODE

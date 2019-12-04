@@ -11,7 +11,7 @@ import Sound from "react-native-sound";
  * - iOS: https://developer.apple.com/library/content/documentation/MusicAudio/Conceptual/CoreAudioOverview/SupportedAudioFormatsMacOSX/SupportedAudioFormatsMacOSX.html
  * - Android: https://developer.android.com/guide/topics/media/media-formats.html
  * @param {MxObject} audioFile - This field is required. Common supported file formats are mp3, wav, m4a, mp4.
- * @returns {void}
+ * @returns {Promise.<void>}
  */
 export async function PlaySound(audioFile?: mendix.lib.MxObject): Promise<void> {
     // BEGIN USER CODE

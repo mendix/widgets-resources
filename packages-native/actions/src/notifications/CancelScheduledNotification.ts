@@ -9,7 +9,7 @@ import ReactNativeFirebase from "react-native-firebase";
 
 /**
  * @param {string} notificationId - This field is required.
- * @returns {void}
+ * @returns {Promise.<void>}
  */
 export async function CancelScheduledNotification(notificationId?: string): Promise<void> {
     // BEGIN USER CODE
