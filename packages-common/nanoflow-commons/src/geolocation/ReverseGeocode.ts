@@ -14,7 +14,7 @@ type ReverseGeocodingProvider = "Google" | "Geocodio" | "LocationIQ" | "MapQuest
  * @param {string} longitude - This field is required.
  * @param {"NanoflowCommons.GeocodingProvider.Google"|"NanoflowCommons.GeocodingProvider.Geocodio"|"NanoflowCommons.GeocodingProvider.LocationIQ"|"NanoflowCommons.GeocodingProvider.MapQuest"} geocodingProvider - This field is required for use on web.
  * @param {string} providerApiKey - This field is required for use on web. Note that the keys are accessible by the end users and should be protected in other ways; for example restricted domain name.
- * @returns {string}
+ * @returns {Promise.<string>}
  */
 export async function ReverseGeocode(
     latitude?: string,

@@ -11,7 +11,7 @@ import { StorageValue } from "./StorageValue";
  * Store a list of Mendix objects in device storage, identified by a unique key. Can be accessed by the GetStorageItemObject action. Please note that users can clear the device storage.
  * @param {string} key - This field is required.
  * @param {MxObject[]} value - This field is required.
- * @returns {void}
+ * @returns {Promise.<void>}
  */
 export async function SetStorageItemObjectList(key?: string, value?: mendix.lib.MxObject[]): Promise<void> {
     // BEGIN USER CODE

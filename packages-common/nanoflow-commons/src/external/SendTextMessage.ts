@@ -9,7 +9,7 @@ import ReactNative from "react-native";
 /**
  * Launches the text messaging app on your device.
  * @param {string} phoneNumber - This field is required.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 export async function SendTextMessage(phoneNumber?: string): Promise<boolean> {
     // BEGIN USER CODE

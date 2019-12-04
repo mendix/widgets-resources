@@ -11,7 +11,7 @@ import ReactNative from "react-native";
  * @param {string} question - This field is required.
  * @param {string} cancelButtonCaption - Set to empty to use default text 'Cancel'.
  * @param {string} proceedButtonCaption - Set to empty to use default text 'OK'.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 export async function ShowConfirmation(
     question?: string,

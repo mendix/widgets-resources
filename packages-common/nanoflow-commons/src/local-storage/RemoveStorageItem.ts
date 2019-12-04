@@ -8,7 +8,7 @@ import ReactNative from "react-native";
 
 /**
  * Remove a content identified by a unique key. This could be set via any of the Set Storage Item JavaScript actions.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
 export async function RemoveStorageItem(key?: string): Promise<boolean> {
     // BEGIN USER CODE
