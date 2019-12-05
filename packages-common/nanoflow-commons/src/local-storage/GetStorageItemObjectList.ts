@@ -79,7 +79,7 @@ export async function GetStorageItemObjectList(key?: string, entity?: string): P
             mx.data.get({
                 guid,
                 callback: mxObject => resolve(mxObject),
-                error: (error: Error) => reject(new Error(error.message))
+                error: error => reject(error)
             });
         });
     }

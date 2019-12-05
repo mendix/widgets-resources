@@ -81,7 +81,7 @@ export async function GetStorageItemObject(key?: string, entity?: string): Promi
             mx.data.get({
                 guid,
                 callback: mxObject => resolve(mxObject),
-                error: (error: Error) => reject(error)
+                error: error => reject(error)
             });
         });
     }

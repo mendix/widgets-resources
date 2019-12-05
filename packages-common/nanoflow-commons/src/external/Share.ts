@@ -53,7 +53,7 @@ export async function Share(url?: string, text?: string, title?: string): Promis
                     url
                 },
                 result => resolve(result.completed),
-                error => reject(new Error(error))
+                errorMessage => reject(new Error(errorMessage))
             );
         });
     }
