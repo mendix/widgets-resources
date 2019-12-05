@@ -21,7 +21,7 @@ export async function CancelScheduledNotification(notificationId?: string): Prom
     const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     if (!notificationId) {
-        return Promise.reject(new TypeError("Input parameter 'Notification id' is required"));
+        return Promise.reject(new Error("Input parameter 'Notification id' is required"));
     }
 
     firebase.notifications().cancelNotification(notificationId);

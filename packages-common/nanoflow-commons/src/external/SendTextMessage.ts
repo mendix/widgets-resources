@@ -15,7 +15,7 @@ export async function SendTextMessage(phoneNumber?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!phoneNumber) {
-        return Promise.reject(new TypeError("Input parameter 'Phone number' is required"));
+        return Promise.reject(new Error("Input parameter 'Phone number' is required"));
     }
 
     const url = `sms:${encodeURI(phoneNumber)}`;

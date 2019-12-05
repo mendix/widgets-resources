@@ -41,11 +41,11 @@ export async function ScheduleNotification(
     const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     if (!date) {
-        return Promise.reject(new TypeError("Input parameter 'Date' is required"));
+        return Promise.reject(new Error("Input parameter 'Date' is required"));
     }
 
     if (!body) {
-        return Promise.reject(new TypeError("Input parameter 'Body' is required"));
+        return Promise.reject(new Error("Input parameter 'Body' is required"));
     }
 
     const channel = new firebase.notifications.Android.Channel(

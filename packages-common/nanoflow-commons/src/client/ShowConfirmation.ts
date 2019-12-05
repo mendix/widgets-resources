@@ -21,7 +21,7 @@ export async function ShowConfirmation(
     // BEGIN USER CODE
 
     if (!question) {
-        return Promise.reject(new TypeError("Input parameter 'Question' is required"));
+        return Promise.reject(new Error("Input parameter 'Question' is required"));
     }
 
     const cancel = cancelButtonCaption || "Cancel";
