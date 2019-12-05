@@ -1,6 +1,8 @@
 {
     "pageTemplates": "WebModeler",
-    "cssFiles": ["styles/web/css/main.css"],
+    "cssFiles": [
+        "styles/web/css/main.css"
+    ],
     "designProperties": {
         "Widget": [
             {
@@ -114,19 +116,19 @@
                 "name": "Hide on phone",
                 "type": "Toggle",
                 "description": "Hide element on phone.",
-                "class": "hidden-xs"
+                "class": "hide-phone"
             },
             {
                 "name": "Hide on tablet",
                 "type": "Toggle",
                 "description": "Hide element on tablet.",
-                "class": "hidden-sm"
+                "class": "hide-tablet"
             },
             {
                 "name": "Hide on desktop",
                 "type": "Toggle",
                 "description": "Hide element on desktop.",
-                "class": "hidden-md"
+                "class": "hide-desktop"
             }
         ],
         "DivContainer": [
@@ -227,7 +229,6 @@
                 "description": "Extend the button to the full width of the container it is placed in.",
                 "class": "btn-block"
             },
-
             {
                 "name": "Border",
                 "type": "Toggle",

@@ -166,6 +166,25 @@ $important-helpers-value: if($important-helpers, ' !important', '');
 }
 
 // Media
+@media (max-width: $screen-sm-max) {
+    .hide-phone {
+        display: none #{$important-helpers-value};
+    }
+}
+
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    .hide-tablet {
+        display: none #{$important-helpers-value};
+    }
+}
+
+@media (min-width: $screen-lg) {
+    .hide-desktop {
+        display: none #{$important-helpers-value};
+    }
+}
+
+
 @media (max-width: $screen-xs-max) {
     .hide-xs,
     .hidden-xs,
