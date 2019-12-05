@@ -28,11 +28,16 @@ export async function RequestLocationPermission(): Promise<boolean> {
                       )
             );
         } else if (navigator.geolocation && navigator.geolocation.requestAuthorization) {
-            navigator.geolocation.requestAuthorization();
+            try {
+                navigator.geolocation.requestAuthorization();
+                return Promise.resolve(true);
+            } catch (error) {
+                return Promise.reject(error);
+            }
         }
     }
 
-    return Promise.resolve(true);
+    return Promise.reject(new Error("No permission request for location is required for web/hybrid platform"));
 
     // END USER CODE
 }
