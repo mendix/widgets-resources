@@ -12,7 +12,7 @@
 export async function GetGuid(entityObject: mendix.lib.MxObject): Promise<string> {
     // BEGIN USER CODE
     if (!entityObject) {
-        return Promise.reject(new TypeError("Input parameter 'Entity object' is required."));
+        return Promise.reject(new Error("Input parameter 'Entity object' is required."));
     }
 
     return Promise.resolve(entityObject.getGuid());

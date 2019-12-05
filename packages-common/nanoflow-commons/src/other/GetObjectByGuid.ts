@@ -13,11 +13,11 @@
 export async function GetObjectByGuid(entity: string, objectGuid: string): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
     if (!entity) {
-        return Promise.reject(new TypeError("Input parameter 'Entity' is required."));
+        return Promise.reject(new Error("Input parameter 'Entity' is required."));
     }
 
     if (!objectGuid) {
-        return Promise.reject(new TypeError("Input parameter 'Object guid' is required."));
+        return Promise.reject(new Error("Input parameter 'Object guid' is required."));
     }
 
     return new Promise((resolve, reject) => {

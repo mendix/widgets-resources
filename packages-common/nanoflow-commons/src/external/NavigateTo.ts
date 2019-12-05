@@ -15,7 +15,7 @@ export async function NavigateTo(location?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!location) {
-        return Promise.reject(new TypeError("Input parameter 'Location' is required"));
+        return Promise.reject(new Error("Input parameter 'Location' is required"));
     }
 
     location = encodeURIComponent(location);
