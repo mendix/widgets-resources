@@ -49,15 +49,11 @@
 
 .heroheadermap {
     padding: 0 !important;
+}
 
-    .heroheadermap-map {
-        height: 350px;
-    }
-
-    .heroheadermap-controls {
-        padding: $spacing-large;
-        background: $header-bg-color;
-    }
+.heroheadermap-controls {
+    padding: $spacing-large;
+    background: $header-bg-color;
 }
 
 .heroheaderproduct {
