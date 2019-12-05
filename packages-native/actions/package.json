@@ -7,7 +7,6 @@
         "url": "https://github.com/mendix/widgets-resources.git"
     },
     "scripts": {
-        "start": "../../node_modules/.bin/tsc --watch",
         "prebuild": "rm -rf ./dist/tsc",
         "build": "npm run build:tsc",
         "build:tsc": "../../node_modules/.bin/tsc --project src/tsconfig.json",
