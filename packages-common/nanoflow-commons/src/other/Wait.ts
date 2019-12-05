@@ -13,7 +13,7 @@
 function Wait(delay?: BigJs.Big): Promise<void> {
     // BEGIN USER CODE
     if (delay == null) {
-        return Promise.reject(new TypeError("Input parameter 'delay' is required."));
+        return Promise.reject(new Error("Input parameter 'delay' is required."));
     }
 
     return new Promise(resolve => {

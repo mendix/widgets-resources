@@ -16,11 +16,11 @@ export async function SetStorageItemString(key?: string, value?: string): Promis
     // BEGIN USER CODE
 
     if (!key) {
-        return Promise.reject(new TypeError("Input parameter 'Key' is required"));
+        return Promise.reject(new Error("Input parameter 'Key' is required"));
     }
 
     if (!value) {
-        return Promise.reject(new TypeError("Input parameter 'Value' is required"));
+        return Promise.reject(new Error("Input parameter 'Value' is required"));
     }
 
     return setItem(key, value);

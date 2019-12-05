@@ -17,11 +17,11 @@ export async function GetStorageItemObject(key?: string, entity?: string): Promi
     // BEGIN USER CODE
 
     if (!key) {
-        return Promise.reject(new TypeError("Input parameter 'Key' is required"));
+        return Promise.reject(new Error("Input parameter 'Key' is required"));
     }
 
     if (!entity) {
-        return Promise.reject(new TypeError("Input parameter 'Entity' is required"));
+        return Promise.reject(new Error("Input parameter 'Entity' is required"));
     }
 
     return getItem(key).then(result => {

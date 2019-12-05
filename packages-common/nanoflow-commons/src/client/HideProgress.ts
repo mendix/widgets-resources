@@ -13,7 +13,7 @@ export async function HideProgress(identifier?: BigJs.Big): Promise<void> {
     // BEGIN USER CODE
 
     if (identifier == null) {
-        return Promise.reject(new TypeError("Input parameter 'Identifier' is required"));
+        return Promise.reject(new Error("Input parameter 'Identifier' is required"));
     }
 
     mx.ui.hideProgress(Number(identifier));
