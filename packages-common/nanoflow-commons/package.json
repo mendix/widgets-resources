@@ -3,7 +3,6 @@
     "version": "1.0.1",
     "license": "Apache-2.0",
     "scripts": {
-        "start": "tsc --watch",
         "build": "npm run build:tsc",
         "prebuild:tsc": "rm -rf dist/tsc",
         "build:tsc": "../../node_modules/.bin/tsc --project src/tsconfig.json",
