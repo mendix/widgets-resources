@@ -41,8 +41,6 @@ matrix:
         - name: "IE11 Automated Tests"
           os: windows
           before_install:
-              - npm i -g cross-env
-          install:
               - powershell set-executionpolicy unrestricted
           before_script:
               - npm config set script-shell powershell
