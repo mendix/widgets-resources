@@ -36,10 +36,26 @@ matrix:
           language: objective-c
           os: osx
           osx_image: xcode11.2
+          env:
+              - REACT_NATIVE_VERSION=0.59.9
+              - PATH=$PATH:~/Library/Python/2.7/bin
+              - CODE_SIGNING_REQUIRED=NO
+          install:
+              - npm install -g react-native-cli
+              - npm install -g detox-cli
+              - gem install xcpretty
+              - brew tap wix/brew
+              - brew install applesimutils --HEAD
           script:
-              - npm run test:native -- $SCRIPT_ARGS
+              - npm run test:e2e:native -- $SCRIPT_ARGS
         - name: "Android Automated tests"
           language: android
+          env:
+              - REACT_NATIVE_VERSION=0.59.9
+          install:
+              - npm install -g react-native-cli
+              - npm install -g detox-cli
+              - gem install xcpretty
           android:
               components:
                   - tools
@@ -52,16 +68,20 @@ matrix:
                   - sys-img-x86-android-26
                   - sys-img-x86-android-28
           script:
-              - npm run test:native -- $SCRIPT_ARGS
+              - npm run test:e2e:native -- $SCRIPT_ARGS
 notifications:
     email:
+        enabled: true
         recipients:
             - diego.antonelli@mendix.com
             - mehmet.izci@mendix.com
             - andries.smit@mendix.com
             - isa.isaku@mendix.com
             - olga.shprygova@mendix.com
+        on_success: always
+        on_failure: always
     slack:
+        enabled: true
         template:
             - "Build <%{build_url}|#%{build_number}> of %{repository_slug}@%{branch} in PR <%{pull_request_url}|#%{pull_request_number}> by %{author} %{result} in %{duration}"
         rooms:

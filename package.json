@@ -12,6 +12,9 @@
         "lint": "npm run lint:scripts && lerna run lint --stream --concurrency 1",
         "lint:scripts": "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx packages-web/**/src packages-native/**/src",
         "test": "lerna run test --ignore @widgets-resources/utils-react-widgets --stream --concurrency 1",
+        "test:e2e": "lerna run test:e2e --stream --concurrency 1",
+        "test:e2e:ie11": "cross-env BROWSER=ie11 lerna run test:e2e --stream --concurrency 1",
+        "test:e2e:native": "lerna run test:e2e:native --stream --concurrency 1",
         "build": "lerna run build --ignore @widgets-resources/utils-react-widgets",
         "publish": "ts-node --project ./scripts/tsconfig.json ./scripts/release/Release.ts",
         "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
@@ -84,6 +87,7 @@
         "readline-sync": "^1.4.10",
         "to-string-loader": "^1.1.5",
         "ts-node": "^8.1.0",
+        "wdio-iedriver-service": "^0.1.0",
         "zip-folder": "^1.0.0"
     },
     "dependencies": {

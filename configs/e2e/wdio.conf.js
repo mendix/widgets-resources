@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const debug = process.env.DEBUG;
+const browser = process.env.BROWSER;
 const basePath = process.cwd();
 
 const e2ePath = path.join(basePath, "/dist/e2e/");
@@ -18,7 +19,7 @@ exports.config = {
     maxInstances: 1,
     capabilities: [
         {
-            browserName: "chrome"
+            browserName: browser ? (browser === "ie11" ? "internet explorer" : browser) : "chrome"
         }
     ],
     sync: true,
@@ -30,7 +31,7 @@ exports.config = {
     waitforTimeout: 30000,
     connectionRetryTimeout: 90000,
     connectionRetryCount: 0,
-    services: ["selenium-standalone"],
+    services: [browser === "ie11" ? "iedriver" : "selenium-standalone"],
     framework: "jasmine",
     reporters: ["spec"],
     execArgv: debug ? ["--inspect"] : undefined,
