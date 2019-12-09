@@ -11,14 +11,14 @@
     "scripts": {
         "start": "utils-react-widgets start",
         "dev": "utils-react-widgets dev",
-        "format": "node ../../node_modules/.bin/prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-        "test:e2e": "node ../../node_modules/.bin/cross-env URL=https://progresscircle.mxapps.io/ utils-react-widgets test:e2e",
-        "test:e2e:dev": "node ../../node_modules/.bin/cross-env DEBUG=true utils-react-widgets test:e2e",
-        "lint": "node ../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "format": "../../node_modules/.bin/prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+        "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://progresscircle.mxapps.io/ utils-react-widgets test:e2e",
+        "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true utils-react-widgets test:e2e",
+        "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "lint:fix": "npm run lint -- --fix",
         "build": "utils-react-widgets build",
         "release": "utils-react-widgets release",
-        "svncheckout": "node ../../node_modules/.bin/ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+        "svncheckout": "../../node_modules/.bin/ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
     },
     "config": {
         "mendixHost": "http://localhost:8080",

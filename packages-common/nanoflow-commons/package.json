@@ -5,8 +5,8 @@
     "scripts": {
         "build": "npm run build:tsc",
         "prebuild:tsc": "rm -rf dist/tsc",
-        "build:tsc": "node ../../node_modules/.bin/tsc --project src/tsconfig.json",
-        "postbuild": "node ../../node_modules/.bin/ts-node --project scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
+        "build:tsc": "..\"/../node_modules/.bin/tsc\" --project src/tsconfig.json",
+        "postbuild": "..\"/../node_modules/.bin/ts-node\" --project scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
         "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/"
     },
     "devDependencies": {

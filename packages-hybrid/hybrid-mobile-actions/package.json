@@ -4,16 +4,16 @@
     "license": "Apache-2.0",
     "scripts": {
         "start": "concurrently \"npm:watch-*\"",
-        "watch-ts": "node ../../node_modules/.bin/tsc --project src/tsconfig.json --watch ",
+        "watch-ts": "../../node_modules/.bin/tsc --project src/tsconfig.json --watch ",
         "watch-copy": "npm-watch",
         "build": "npm run build:tsc",
         "prebuild:tsc": "rm -rf dist/tsc",
-        "build:tsc": "node ../../node_modules/.bin/tsc --project src/tsconfig.json",
-        "postbuild": "node ../../node_modules/.bin/ts-node --project scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
-        "lint": "node ../../node_modules/.bin/eslint --config ../../.eslintrc.js --parser-options=project:src/tsconfig.json --ext .ts src/",
-        "lint:scripts": "node ../../node_modules/.bin/eslint --config ../../.eslintrc.js --parser-options=project:scripts/tsconfig.json --ext .ts scripts/",
+        "build:tsc": "../../node_modules/.bin/tsc --project src/tsconfig.json",
+        "postbuild": "../../node_modules/.bin/ts-node --project scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
+        "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --parser-options=project:src/tsconfig.json --ext .ts src/",
+        "lint:scripts": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --parser-options=project:scripts/tsconfig.json --ext .ts scripts/",
         "lint:fix": "npm run lint -- --fix",
-        "release": "node ../../node_modules/.bin/ts-node --project scripts/tsconfig.json ./scripts/exportModule.ts"
+        "release": "../../node_modules/.bin/ts-node --project scripts/tsconfig.json ./scripts/exportModule.ts"
     },
     "config": {
         "moduleName": "HybridMobileActions",
