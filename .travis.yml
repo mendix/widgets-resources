@@ -20,20 +20,51 @@ before_script:
 
 matrix:
     include:
-        - name: "Linux Job"
+        - name: "Lint, Build & Unit tests"
           script:
               - npm run lint -- $SCRIPT_ARGS
               - npm run build -- $SCRIPT_ARGS
               - npm test -- $SCRIPT_ARGS
-        - name: "Windows Job"
+        - name: "Automated Tests"
+          script:
+              - npm test:e2e -- $SCRIPT_ARGS
+        - name: "IE11 Automated Tests"
           os: windows
           script:
-              - npm run lint -- $SCRIPT_ARGS
-              - npm run build -- $SCRIPT_ARGS
-              - npm test -- $SCRIPT_ARGS
-        - name: "MacOSX Job"
+              - npm test:e2e:ie11 -- $SCRIPT_ARGS
+        - name: "iOS Automated tests"
           language: objective-c
           os: osx
           osx_image: xcode11.2
           script:
               - npm run test:native -- $SCRIPT_ARGS
+        - name: "Android Automated tests"
+          language: android
+          android:
+              components:
+                  - tools
+                  - platform-tools
+                  - build-tools-27.0.3
+                  - android-26
+                  - extra-google-google_play_services
+                  - extra-google-m2repository
+                  - extra-android-m2repository
+                  - sys-img-x86-android-26
+                  - sys-img-x86-android-28
+          script:
+              - npm run test:native -- $SCRIPT_ARGS
+notifications:
+    email:
+        recipients:
+            - diego.antonelli@mendix.com
+            - mehmet.izci@mendix.com
+            - andries.smit@mendix.com
+            - isa.isaku@mendix.com
+            - olga.shprygova@mendix.com
+    slack:
+        template:
+            - "Build <%{build_url}|#%{build_number}> of %{repository_slug}@%{branch} in PR <%{pull_request_url}|#%{pull_request_number}> by %{author} %{result} in %{duration}"
+        rooms:
+            - mendix:$SLACK_KEY#widget-team-private
+        on_success: always
+        on_failure: always
