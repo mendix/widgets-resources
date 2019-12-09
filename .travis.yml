@@ -24,14 +24,14 @@ matrix:
           script:
               - npm run lint -- $SCRIPT_ARGS
               - npm run build -- $SCRIPT_ARGS
-              - npm test -- $SCRIPT_ARGS
+              - npm run test -- $SCRIPT_ARGS
         - name: "Automated Tests"
           script:
-              - npm test:e2e -- $SCRIPT_ARGS
+              - npm run test:e2e -- $SCRIPT_ARGS
         - name: "IE11 Automated Tests"
           os: windows
           script:
-              - npm test:e2e:ie11 -- $SCRIPT_ARGS
+              - npm run test:e2e:ie11 -- $SCRIPT_ARGS
         - name: "iOS Automated tests"
           language: objective-c
           os: osx
@@ -52,6 +52,8 @@ matrix:
           language: android
           env:
               - REACT_NATIVE_VERSION=0.59.9
+          before_install:
+              - sudo apt-get install nodejs
           install:
               - npm install -g react-native-cli
               - npm install -g detox-cli
