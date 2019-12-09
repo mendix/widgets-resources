@@ -28,11 +28,11 @@ jobs:
           stage: "Lint"
           script:
               - npm run lint -- $SCRIPT_ARGS
-        - name: "Build widgets using Pluggable Tools"
+        - name: "Building widgets using Tools"
           stage: "Build"
           script:
               - npm run build -- $SCRIPT_ARGS
-        - name: "Build"
+        - name: "Executing Jest unit tests"
           stage: "Unit Tests"
           script:
               - npm run test -- $SCRIPT_ARGS
