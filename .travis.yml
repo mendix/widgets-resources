@@ -37,8 +37,6 @@ matrix:
               - export DISPLAY=:99.0
               - sh -e /etc/init.d/xvfb start
               - sleep 3
-          allow_failures:
-              - travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS
           script:
               - travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS
         #        - name: "IE11 Automated Tests"

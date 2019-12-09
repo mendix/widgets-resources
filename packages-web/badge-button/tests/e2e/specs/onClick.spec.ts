@@ -101,7 +101,7 @@ describe("BadgeButton on click", () => {
             badgeButton.element.click();
 
             const header = page.header;
-            expect(header).toBe("OnClickClosePage");
+            expect(header).toBe("ClosePage");
         });
 
         it("should close a popup page", () => {
