@@ -9,23 +9,22 @@ import { StorageValue } from "./StorageValue";
 
 /*
  * Retrieve a local stored list of Mendix objects identified by a unique key. When objects are the client state it will be returned, if not they will be re-created. Note: when re-creating the local Mendix object the Mendix Object ID will never be the same.
- * @returns {MxObject}
+ * @returns {Promise.<MxObject[]>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function GetStorageItemObjectList(key?: string, entity?: string): Promise<mendix.lib.MxObject[]> {
+export async function GetStorageItemObjectList(key?: string, entity?: string): Promise<mendix.lib.MxObject[]> {
     // BEGIN USER CODE
 
     if (!key) {
-        throw new TypeError("Input parameter 'Key' is required");
+        return Promise.reject(new Error("Input parameter 'Key' is required"));
     }
 
     if (!entity) {
-        throw new TypeError("Input parameter 'Entity' is required");
+        return Promise.reject(new Error("Input parameter 'Entity' is required"));
     }
 
     return getItem(key).then(result => {
         if (result === null) {
-            throw new Error(`Storage item '${key}' does not exist`);
+            return Promise.reject(new Error(`Storage item '${key}' does not exist`));
         }
         const values: StorageValue[] = JSON.parse(result);
 
@@ -47,7 +46,7 @@ function GetStorageItemObjectList(key?: string, entity?: string): Promise<mendix
             return Promise.resolve(value);
         }
 
-        throw new Error("No storage API available");
+        return Promise.reject(new Error("No storage API available"));
     }
 
     function setItem(key: string, value: string): Promise<void> {
@@ -62,7 +61,7 @@ function GetStorageItemObjectList(key?: string, entity?: string): Promise<mendix
             return Promise.resolve();
         }
 
-        throw new Error("No storage API available");
+        return Promise.reject(new Error("No storage API available"));
     }
 
     function getOrCreateMxObject(entity: string, value: StorageValue): Promise<mendix.lib.MxObject> {
@@ -80,7 +79,7 @@ function GetStorageItemObjectList(key?: string, entity?: string): Promise<mendix
             mx.data.get({
                 guid,
                 callback: mxObject => resolve(mxObject),
-                error: (error: Error) => reject(error)
+                error: error => reject(error)
             });
         });
     }
@@ -98,8 +97,7 @@ function GetStorageItemObjectList(key?: string, entity?: string): Promise<mendix
                         });
                     resolve(mxObject);
                 },
-                // eslint-disable-next-line prefer-promise-reject-errors
-                error: () => reject(`Could not create '${entity}' object`)
+                error: () => reject(new Error(`Could not create '${entity}' object`))
             });
         });
     }

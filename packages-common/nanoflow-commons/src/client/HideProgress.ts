@@ -7,18 +7,17 @@
 /**
  * Hides a loading dialog.
  * @param {Big} identifier - This field is required.
- * @returns {boolean}
+ * @returns {Promise.<void>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function HideProgress(identifier?: BigJs.Big): boolean {
+export async function HideProgress(identifier?: BigJs.Big): Promise<void> {
     // BEGIN USER CODE
 
     if (identifier == null) {
-        throw new TypeError("Input parameter 'Identifier' is required");
+        return Promise.reject(new Error("Input parameter 'Identifier' is required"));
     }
 
     mx.ui.hideProgress(Number(identifier));
-    return true;
+    return Promise.resolve();
 
     // END USER CODE
 }

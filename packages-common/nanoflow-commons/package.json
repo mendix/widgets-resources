@@ -1,15 +1,12 @@
 {
     "name": "nanoflow-commons",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "Apache-2.0",
     "scripts": {
-        "start": "tsc --watch",
-        "build": "npm run build:tsc && npm run build:babel",
+        "build": "npm run build:tsc",
         "prebuild:tsc": "rm -rf dist/tsc",
-        "build:tsc": "tsc --project src/tsconfig.json",
-        "prebuild:babel": "rm -rf dist/babel",
-        "build:babel": "babel dist/tsc --out-dir dist/babel",
-        "postbuild": "ts-node --project scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
+        "build:tsc": "../../node_modules/.bin/tsc --project src/tsconfig.json",
+        "postbuild": "../../node_modules/.bin/ts-node --project scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
         "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/"
     },
     "devDependencies": {
@@ -17,25 +14,5 @@
         "@babel/core": "^7.6.0",
         "@types/node": "^12.0.2",
         "ts-node": "^8.4.1"
-    },
-    "babel": {
-        "presets": [
-            [
-                "@babel/preset-env",
-                {
-                    "targets": {
-                        "chrome": "49",
-                        "firefox": "52",
-                        "edge": "16",
-                        "safari": "9",
-                        "ie": "11",
-                        "ios": "9",
-                        "android": "5"
-                    }
-                }
-            ]
-        ],
-        "sourceType": "script",
-        "retainLines": true
     }
 }

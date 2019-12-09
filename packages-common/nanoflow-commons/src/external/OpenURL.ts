@@ -9,14 +9,13 @@ import ReactNative from "react-native";
 /**
  * Opens the provided URL in the web browser.
  * @param {string} url - This field is required.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function OpenURL(url?: string): Promise<boolean> {
+export async function OpenURL(url?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!url) {
-        throw new TypeError("Input parameter 'Url' is required");
+        return Promise.reject(new Error("Input parameter 'Url' is required"));
     }
 
     // Native platform

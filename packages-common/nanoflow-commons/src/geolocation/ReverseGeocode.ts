@@ -14,10 +14,9 @@ type ReverseGeocodingProvider = "Google" | "Geocodio" | "LocationIQ" | "MapQuest
  * @param {string} longitude - This field is required.
  * @param {"NanoflowCommons.GeocodingProvider.Google"|"NanoflowCommons.GeocodingProvider.Geocodio"|"NanoflowCommons.GeocodingProvider.LocationIQ"|"NanoflowCommons.GeocodingProvider.MapQuest"} geocodingProvider - This field is required for use on web.
  * @param {string} providerApiKey - This field is required for use on web. Note that the keys are accessible by the end users and should be protected in other ways; for example restricted domain name.
- * @returns {string}
+ * @returns {Promise.<string>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function ReverseGeocode(
+export async function ReverseGeocode(
     latitude?: string,
     longitude?: string,
     geocodingProvider?: ReverseGeocodingProvider,
@@ -34,11 +33,11 @@ function ReverseGeocode(
      */
 
     if (!latitude) {
-        throw new TypeError("Input parameter 'Latitude' is required");
+        return Promise.reject(new Error("Input parameter 'Latitude' is required"));
     }
 
     if (!longitude) {
-        throw new TypeError("Input parameter 'Longitude' is required");
+        return Promise.reject(new Error("Input parameter 'Longitude' is required"));
     }
 
     if (navigator && navigator.product === "ReactNative") {
@@ -48,18 +47,18 @@ function ReverseGeocode(
 
         return Geocoder.geocodePosition(position).then(results => {
             if (results.length === 0) {
-                throw new Error("No results found");
+                return Promise.reject(new Error("No results found"));
             }
             return results[0].formattedAddress;
         });
     }
 
     if (!geocodingProvider) {
-        throw new TypeError("Input parameter 'Geocoding provider' is required for use on web");
+        return Promise.reject(new Error("Input parameter 'Geocoding provider' is required for use on web"));
     }
 
     if (!providerApiKey) {
-        throw new TypeError("Input parameter 'Provider api key' is required for use on web");
+        return Promise.reject(new Error("Input parameter 'Provider api key' is required for use on web"));
     }
 
     latitude = encodeURIComponent(latitude);
@@ -72,11 +71,12 @@ function ReverseGeocode(
         .then(response =>
             response.json().catch(() =>
                 response.text().then(text => {
-                    throw new Error(text);
+                    return Promise.reject(new Error(text));
                 })
             )
         )
-        .then(response => getAddress(geocodingProvider, response));
+        .then(response => getAddress(geocodingProvider, response))
+        .catch(error => Promise.reject(error));
 
     function getApiUrl(provider: ReverseGeocodingProvider, lat: string, long: string, key: string): string {
         switch (provider) {

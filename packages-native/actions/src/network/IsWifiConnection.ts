@@ -4,19 +4,16 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
+import { fetch } from "@react-native-community/netinfo";
 import { NetInfoType } from "../../typings/NetInfo";
 
 /**
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function IsWifiConnection(): Promise<boolean> {
+export async function IsWifiConnection(): Promise<boolean> {
     // BEGIN USER CODE
 
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const NetInfo = require("@react-native-community/netinfo/lib/commonjs");
-
-    return NetInfo.fetch().then((info: NetInfoType) => info.type === "wifi");
+    return fetch().then((info: NetInfoType) => info.type === "wifi");
 
     // END USER CODE
 }

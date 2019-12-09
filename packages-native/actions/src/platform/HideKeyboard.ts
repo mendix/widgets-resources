@@ -4,20 +4,17 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNative from "react-native";
+import { Keyboard } from "react-native";
 
 /**
- * @returns {boolean}
+ * @returns {Promise.<void>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function HideKeyboard(): boolean {
+export async function HideKeyboard(): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/keyboard
 
-    const Keyboard: typeof ReactNative.Keyboard = require("react-native").Keyboard;
-
     Keyboard.dismiss();
-    return true;
+    return Promise.resolve();
 
     // END USER CODE
 }

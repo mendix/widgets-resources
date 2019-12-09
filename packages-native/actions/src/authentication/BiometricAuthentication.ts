@@ -4,18 +4,15 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNativeTouchId from "react-native-touch-id";
+import TouchID from "react-native-touch-id";
 
 /**
  * @param {string} reason - The reason for requesting authentication. If empty, the system default message is used.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function BiometricAuthentication(reason?: string): Promise<boolean> {
+export async function BiometricAuthentication(reason?: string): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/naoufal/react-native-touch-id
-
-    const TouchID: typeof ReactNativeTouchId = require("react-native-touch-id").default;
 
     return TouchID.authenticate(reason)
         .then(() => true)

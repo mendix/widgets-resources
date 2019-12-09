@@ -31,6 +31,7 @@ A bundle of R&D Platform supported widgets & nanoflow actions for building nativ
 | [Animation][]              | Provides default animations for contents and widgets.           |
 | [List view swipe][]        | Show controls on swipe for an interactive list view.            |
 | [Intro screen][]           | Show swipeable containers to show contents as intros            |
+| [Safe area view][]         | Prevent content being rendered in unsafe areas (iOS only).      |
 
 ## Web & Hybrid widgets
 
@@ -66,6 +67,7 @@ A bundle of R&D Platform supported widgets & nanoflow actions for building nativ
 [animation]: https://github.com/mendix/widgets-resources/blob/master/packages-native/animation
 [list view swipe]: https://github.com/mendix/widgets-resources/blob/master/packages-native/listview-swipe
 [intro screen]: https://github.com/mendix/widgets-resources/blob/master/packages-native/intro-screen
+[safe area view]: https://github.com/mendix/widgets-resources/blob/master/packages-native/safe-area-view
 
 ## Included nanoflow actions
 

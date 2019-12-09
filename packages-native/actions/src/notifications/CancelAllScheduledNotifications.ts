@@ -5,21 +5,23 @@
 // Other code you write will be lost the next time you deploy the project.
 
 import ReactNativeFirebase from "react-native-firebase";
+import { NativeModules } from "react-native";
 
 /**
  * Cancels all pending scheduled notifications.
- * @returns {boolean}
+ * @returns {Promise.<void>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function CancelAllScheduledNotifications(): boolean {
+export async function CancelAllScheduledNotifications(): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/reference/Notifications#cancelAllNotifications
-
+    if (NativeModules && !NativeModules.RNFirebase) {
+        return Promise.reject(new Error("Firebase module is not available in your app"));
+    }
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     firebase.notifications().cancelAllNotifications();
-    return true;
+    return Promise.resolve();
 
     // END USER CODE
 }

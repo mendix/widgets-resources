@@ -9,14 +9,13 @@ import ReactNative from "react-native";
 /**
  * Launches the text messaging app on your device.
  * @param {string} phoneNumber - This field is required.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function SendTextMessage(phoneNumber?: string): Promise<boolean> {
+export async function SendTextMessage(phoneNumber?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!phoneNumber) {
-        throw new TypeError("Input parameter 'Phone number' is required");
+        return Promise.reject(new Error("Input parameter 'Phone number' is required"));
     }
 
     const url = `sms:${encodeURI(phoneNumber)}`;

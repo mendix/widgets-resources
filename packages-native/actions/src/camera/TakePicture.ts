@@ -4,8 +4,8 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNative from "react-native";
-import ImagePickerLib from "react-native-image-picker";
+import { Alert, Linking } from "react-native";
+import ImagePicker from "react-native-image-picker";
 
 type PictureSource = "camera" | "imageLibrary" | "either";
 
@@ -17,10 +17,9 @@ type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
  * @param {"NativeMobileActions.PictureQuality.original"|"NativeMobileActions.PictureQuality.low"|"NativeMobileActions.PictureQuality.medium"|"NativeMobileActions.PictureQuality.high"|"NativeMobileActions.PictureQuality.custom"} pictureQuality - The default picture quality is 'Medium'.
  * @param {Big} maximumWidth - The picture will be scaled to this maximum pixel width, while maintaing the aspect ratio.
  * @param {Big} maximumHeight - The picture will be scaled to this maximum pixel height, while maintaing the aspect ratio.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function TakePicture(
+export async function TakePicture(
     picture?: mendix.lib.MxObject,
     pictureSource?: PictureSource,
     pictureQuality?: PictureQuality,
@@ -30,20 +29,19 @@ function TakePicture(
     // BEGIN USER CODE
     // Documentation https://github.com/react-native-community/react-native-image-picker/blob/master/docs/Reference.md
 
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const ImagePicker: typeof ImagePickerLib = require("react-native-image-picker");
-
     if (!picture) {
-        throw new TypeError("Input parameter 'Picture' is required");
+        return Promise.reject(new Error("Input parameter 'Picture' is required"));
     }
 
     if (!picture.inheritsFrom("System.FileDocument")) {
         const entity = picture.getEntity();
-        throw new TypeError(`Entity ${entity} does not inherit from 'System.FileDocument'`);
+        return Promise.reject(new Error(`Entity ${entity} does not inherit from 'System.FileDocument'`));
     }
 
     if (pictureQuality === "custom" && !maximumHeight && !maximumWidth) {
-        throw new TypeError("Picture quality is set to 'Custom', but no maximum width or height was provided");
+        return Promise.reject(
+            new Error("Picture quality is set to 'Custom', but no maximum width or height was provided")
+        );
     }
 
     return takePicture()
@@ -75,7 +73,7 @@ function TakePicture(
                     if (!unhandledError) {
                         return resolve();
                     }
-                    return reject(response.error);
+                    return reject(new Error(response.error));
                 }
 
                 return resolve(response.uri);
@@ -91,10 +89,8 @@ function TakePicture(
                     const guid = imageObject.getGuid();
                     // eslint-disable-next-line no-useless-escape
                     const filename = /[^\/]*$/.exec(uri)![0];
-                    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-                    const onSuccess = () => resolve(true);
-                    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-                    const onError = (error: Error) => reject(error.message);
+                    const onSuccess = (): void => resolve(true);
+                    const onError = (error: Error): void => reject(error);
 
                     mx.data.saveDocument(guid, filename, {}, blob, onSuccess, onError);
                 });
@@ -192,9 +188,6 @@ function TakePicture(
     }
 
     function showiOSPermissionAlert(title: string, message: string): void {
-        const Alert: typeof ReactNative.Alert = require("react-native").Alert;
-        const Linking: typeof ReactNative.Linking = require("react-native").Linking;
-
         Alert.alert(
             title,
             message,

@@ -9,14 +9,13 @@ import ReactNative from "react-native";
 /**
  * Opens a navigation application on your device or a web browser showing Google Maps directions.
  * @param {string} location - This field is required.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function NavigateTo(location?: string): Promise<boolean> {
+export async function NavigateTo(location?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!location) {
-        throw new TypeError("Input parameter 'Location' is required");
+        return Promise.reject(new Error("Input parameter 'Location' is required"));
     }
 
     location = encodeURIComponent(location);

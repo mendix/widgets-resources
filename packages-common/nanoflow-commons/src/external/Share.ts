@@ -11,14 +11,13 @@ import ReactNative from "react-native";
  * @param {string} url - The url to share.
  * @param {string} text - The text to share.
  * @param {string} title - Title of the message to share. Only some share targets use this value.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function Share(url?: string, text?: string, title?: string): Promise<boolean> {
+export async function Share(url?: string, text?: string, title?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!text && !url) {
-        throw new TypeError("It is required to provide at least one of input parameters 'Text' and 'Url'");
+        return Promise.reject(new Error("It is required to provide at least one of input parameters 'Text' and 'Url'"));
     }
 
     // Native platform
@@ -54,16 +53,16 @@ function Share(url?: string, text?: string, title?: string): Promise<boolean> {
                     url
                 },
                 result => resolve(result.completed),
-                error => reject(error)
+                errorMessage => reject(new Error(errorMessage))
             );
         });
     }
 
     if (document && document.location && document.location.protocol === "http:") {
-        throw new Error("This action requires a secure https: connection");
+        return Promise.reject(new Error("This action requires a secure https: connection"));
     }
 
-    throw new Error("This action is not supported by this browser");
+    return Promise.reject(new Error("This action is not supported by this browser"));
 
     // END USER CODE
 }

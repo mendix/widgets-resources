@@ -4,26 +4,23 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNative from "react-native";
+import { CameraRoll } from "react-native";
 
 /**
  * @param {MxObject} picture - This field is required.
- * @returns {string}
+ * @returns {Promise.<string>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function SaveToPictureLibrary(picture?: mendix.lib.MxObject): Promise<string> {
+export async function SaveToPictureLibrary(picture?: mendix.lib.MxObject): Promise<string> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/cameraroll#savetocameraroll
 
-    const CameraRoll: typeof ReactNative.CameraRoll = require("react-native").CameraRoll;
-
     if (!picture) {
-        throw new TypeError("Input parameter 'Picture' is required");
+        return Promise.reject(new Error("Input parameter 'Picture' is required"));
     }
 
     if (!picture.inheritsFrom("System.FileDocument")) {
         const entity = picture.getEntity();
-        throw new TypeError(`Entity ${entity} does not inherit from 'System.FileDocument'`);
+        return Promise.reject(new Error(`Entity ${entity} does not inherit from 'System.FileDocument'`));
     }
 
     const guid = picture.getGuid();

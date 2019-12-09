@@ -4,7 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNative, { StatusBarAnimation, StatusBarStyle } from "react-native";
+import { Platform, StatusBar, StatusBarAnimation, StatusBarStyle } from "react-native";
 
 type Style = "DefaultStyle" | "LightContentStyle" | "DarkContentStyle";
 
@@ -16,10 +16,9 @@ type Style = "DefaultStyle" | "LightContentStyle" | "DarkContentStyle";
  * @param {boolean} translucent
  * @param {boolean} networkActivityIndicatorVisible
  * @param {"NativeMobileActions.StatusBarHideShowAnimation.none"|"NativeMobileActions.StatusBarHideShowAnimation.fade"|"NativeMobileActions.StatusBarHideShowAnimation.slide"} animateHideShow - If empty, the default value 'none' is used.
- * @returns {boolean}
+ * @returns {Promise.<void>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function ChangeStatusBar(
+export async function ChangeStatusBar(
     style?: Style,
     hidden?: boolean,
     animateChanges?: boolean,
@@ -27,33 +26,30 @@ function ChangeStatusBar(
     translucent?: boolean,
     networkActivityIndicatorVisible?: boolean,
     animateHideShow?: StatusBarAnimation
-): boolean {
+): Promise<void> {
     // BEGIN USER CODE
 
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const RN: typeof ReactNative = require("react-native");
-
     if (style) {
-        RN.StatusBar.setBarStyle(mapStyleEnum(style), animateChanges);
+        StatusBar.setBarStyle(mapStyleEnum(style), animateChanges);
     }
 
     if (hidden !== undefined) {
-        RN.StatusBar.setHidden(hidden, animateHideShow);
+        StatusBar.setHidden(hidden, animateHideShow);
     }
 
-    if (backgroundColor && RN.Platform.OS === "android") {
-        RN.StatusBar.setBackgroundColor(backgroundColor, animateChanges);
+    if (backgroundColor && Platform.OS === "android") {
+        StatusBar.setBackgroundColor(backgroundColor, animateChanges);
     }
 
-    if (translucent !== undefined && RN.Platform.OS === "android") {
-        RN.StatusBar.setTranslucent(translucent);
+    if (translucent !== undefined && Platform.OS === "android") {
+        StatusBar.setTranslucent(translucent);
     }
 
-    if (networkActivityIndicatorVisible && RN.Platform.OS === "ios") {
-        RN.StatusBar.setNetworkActivityIndicatorVisible(networkActivityIndicatorVisible);
+    if (networkActivityIndicatorVisible && Platform.OS === "ios") {
+        StatusBar.setNetworkActivityIndicatorVisible(networkActivityIndicatorVisible);
     }
 
-    return true;
+    return Promise.resolve();
 
     function mapStyleEnum(styleEnum: Style): StatusBarStyle {
         switch (styleEnum) {

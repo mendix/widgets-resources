@@ -10,14 +10,16 @@
  * Returns an identifier that can be used to close the dialog.
  * @param {string} message - The text to show while loading.
  * @param {boolean} blocking - Block the user interface immediately.
- * @returns {Big}
+ * @returns {Promise.<Big>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function ShowProgress(message?: string, blocking?: boolean): BigJs.Big {
+export async function ShowProgress(message?: string, blocking?: boolean): Promise<BigJs.Big> {
     // BEGIN USER CODE
 
     const id = mx.ui.showProgress(message, blocking);
-    return new Big(id);
+    if (id !== undefined) {
+        return Promise.resolve(new Big(id));
+    }
+    return Promise.reject(new Error("Could not open the loading dialog"));
 
     // END USER CODE
 }

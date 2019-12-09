@@ -8,10 +8,9 @@ import ReactNative from "react-native";
 
 /**
  * On the native platform a request for permission should be made before the `GetCurrentLocation` action would work.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function RequestLocationPermission(): Promise<boolean> {
+export async function RequestLocationPermission(): Promise<boolean> {
     // BEGIN USER CODE
 
     if (navigator && navigator.product === "ReactNative") {
@@ -29,11 +28,16 @@ function RequestLocationPermission(): Promise<boolean> {
                       )
             );
         } else if (navigator.geolocation && navigator.geolocation.requestAuthorization) {
-            navigator.geolocation.requestAuthorization();
+            try {
+                navigator.geolocation.requestAuthorization();
+                return Promise.resolve(true);
+            } catch (error) {
+                return Promise.reject(error);
+            }
         }
     }
 
-    return Promise.resolve(true);
+    return Promise.reject(new Error("No permission request for location is required for web/hybrid platform"));
 
     // END USER CODE
 }

@@ -8,17 +8,16 @@
  * Get a Mendix object by its GUID.
  * @param {string} entity - This field is required.
  * @param {string} objectGuid - This field is required.
- * @returns {MxObject}
+ * @returns {Promise.<MxObject>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function GetObjectByGuid(entity: string, objectGuid: string): Promise<mendix.lib.MxObject> {
+export async function GetObjectByGuid(entity: string, objectGuid: string): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
     if (!entity) {
-        throw new TypeError("Input parameter 'Entity' is required.");
+        return Promise.reject(new Error("Input parameter 'Entity' is required."));
     }
 
     if (!objectGuid) {
-        throw new TypeError("Input parameter 'Object guid' is required.");
+        return Promise.reject(new Error("Input parameter 'Object guid' is required."));
     }
 
     return new Promise((resolve, reject) => {
@@ -28,8 +27,7 @@ function GetObjectByGuid(entity: string, objectGuid: string): Promise<mendix.lib
                 if (object) {
                     resolve(object);
                 } else {
-                    // eslint-disable-next-line prefer-promise-reject-errors
-                    reject();
+                    reject(new Error("'Object guid' not found"));
                 }
             }
         });

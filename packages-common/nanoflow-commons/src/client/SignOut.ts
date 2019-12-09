@@ -9,10 +9,9 @@
  *
  * If the user is not logged in, the return value is false.
  *
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function SignOut(): Promise<boolean> {
+export async function SignOut(): Promise<boolean> {
     // BEGIN USER CODE
     if (!mx.session.isGuest()) {
         mx.logout();

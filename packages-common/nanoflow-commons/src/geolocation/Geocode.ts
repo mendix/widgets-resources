@@ -13,10 +13,9 @@ type GeocodingProvider = "Google" | "Geocodio" | "LocationIQ" | "MapQuest";
  * @param {string} address - This field is required.
  * @param {"NanoflowCommons.GeocodingProvider.Google"|"NanoflowCommons.GeocodingProvider.Geocodio"|"NanoflowCommons.GeocodingProvider.LocationIQ"|"NanoflowCommons.GeocodingProvider.MapQuest"} geocodingProvider - This field is required for use on web.
  * @param {string} providerApiKey - This field is required for use on web. Note that the keys are accessible by the end users and should be protected in other ways; for example with a domain name restriction.
- * @returns {MxObject}
+ * @returns {Promise.<MxObject>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function Geocode(
+export async function Geocode(
     address?: string,
     geocodingProvider?: GeocodingProvider,
     providerApiKey?: string
@@ -32,7 +31,7 @@ function Geocode(
      */
 
     if (!address) {
-        throw new TypeError("Input parameter 'Address' is required");
+        return Promise.reject(new Error("Input parameter 'Address' is required"));
     }
 
     if (navigator && navigator.product === "ReactNative") {
@@ -40,18 +39,18 @@ function Geocode(
 
         return Geocoder.geocodeAddress(address).then(results => {
             if (results.length === 0) {
-                throw new Error("No results found");
+                return Promise.reject(new Error("No results found"));
             }
             return createMxObject(String(results[0].position.lat), String(results[0].position.lng));
         });
     }
 
     if (!geocodingProvider) {
-        throw new TypeError("Input parameter 'Geocoding provider' is required for use on web");
+        return Promise.reject(new Error("Input parameter 'Geocoding provider' is required for use on web"));
     }
 
     if (!providerApiKey) {
-        throw new TypeError("Input parameter 'Provider api key' is required for use on web");
+        return Promise.reject(new Error("Input parameter 'Provider api key' is required for use on web"));
     }
 
     const url = getApiUrl(geocodingProvider, address, providerApiKey);
@@ -60,12 +59,13 @@ function Geocode(
         .then(response =>
             response.json().catch(() =>
                 response.text().then(text => {
-                    throw new Error(text);
+                    return Promise.reject(new Error(text));
                 })
             )
         )
         .then(response => getLatLong(geocodingProvider, response))
-        .then(latLong => createMxObject(latLong[0], latLong[1]));
+        .then(latLong => createMxObject(latLong[0], latLong[1]))
+        .catch(error => Promise.reject(error));
 
     function getApiUrl(provider: GeocodingProvider, query: string, key: string): string {
         query = encodeURIComponent(query);
@@ -127,8 +127,7 @@ function Geocode(
                     resolve(mxObject);
                 },
                 error: () => {
-                    // eslint-disable-next-line prefer-promise-reject-errors
-                    reject("Could not create 'NanoflowCommons.Position' object to store coordinates");
+                    reject(new Error("Could not create 'NanoflowCommons.Position' object to store coordinates"));
                 }
             });
         });

@@ -11,10 +11,9 @@ import ReactNative from "react-native";
  * @param {string} question - This field is required.
  * @param {string} cancelButtonCaption - Set to empty to use default text 'Cancel'.
  * @param {string} proceedButtonCaption - Set to empty to use default text 'OK'.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function ShowConfirmation(
+export async function ShowConfirmation(
     question?: string,
     cancelButtonCaption?: string,
     proceedButtonCaption?: string
@@ -22,7 +21,7 @@ function ShowConfirmation(
     // BEGIN USER CODE
 
     if (!question) {
-        throw new TypeError("Input parameter 'Question' is required");
+        return Promise.reject(new Error("Input parameter 'Question' is required"));
     }
 
     const cancel = cancelButtonCaption || "Cancel";

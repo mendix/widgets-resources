@@ -4,6 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
+import { NativeModules } from "react-native";
 import ReactNativeFirebase from "react-native-firebase";
 
 /**
@@ -18,10 +19,9 @@ import ReactNativeFirebase from "react-native-firebase";
  * @param {string} notificationId - This ID can be used to cancel the scheduled notification later.
  * @param {string} actionName
  * @param {string} actionGuid
- * @returns {boolean}
+ * @returns {Promise.<void>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function ScheduleNotification(
+export async function ScheduleNotification(
     date?: Date,
     body?: string,
     title?: string,
@@ -30,19 +30,22 @@ function ScheduleNotification(
     notificationId?: string,
     actionName?: string,
     actionGuid?: string
-): Promise<boolean> {
+): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/scheduling-notifications
 
+    if (NativeModules && !NativeModules.RNFirebase) {
+        return Promise.reject(new Error("Firebase module is not available in your app"));
+    }
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     if (!date) {
-        throw new TypeError("Input parameter 'Date' is required");
+        return Promise.reject(new Error("Input parameter 'Date' is required"));
     }
 
     if (!body) {
-        throw new TypeError("Input parameter 'Body' is required");
+        return Promise.reject(new Error("Input parameter 'Body' is required"));
     }
 
     const channel = new firebase.notifications.Android.Channel(
@@ -50,7 +53,7 @@ function ScheduleNotification(
         "Local notifications",
         firebase.notifications.Android.Importance.Default
     );
-    firebase.notifications().android.createChannel(channel);
+    await firebase.notifications().android.createChannel(channel);
 
     const notification = new firebase.notifications.Notification()
         .setBody(body)
@@ -79,12 +82,9 @@ function ScheduleNotification(
         notification.setNotificationId(notificationId);
     }
 
-    return firebase
-        .notifications()
-        .scheduleNotification(notification, {
-            fireDate: date.getTime()
-        })
-        .then(() => true);
+    return firebase.notifications().scheduleNotification(notification, {
+        fireDate: date.getTime()
+    });
 
     // END USER CODE
 }

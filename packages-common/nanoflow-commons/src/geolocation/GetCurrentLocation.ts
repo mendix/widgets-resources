@@ -18,10 +18,9 @@ import { GeolocationError, GeolocationReturnType, GeoOptions } from "react-nativ
  * @param {Big} timeout - The maximum length of time (in milliseconds) the device is allowed to take in order to return a location. If empty, there is no timeout.
  * @param {Big} maximumAge - The maximum age (in milliseconds) of a possible cached position that is acceptable to return. If set to 0, it means that the device cannot use a cached position and must attempt to retrieve the real current position. By default the device will always return a cached position regardless of its age.
  * @param {boolean} highAccuracy - Use a higher accuracy method to determine the current location. Setting this to false saves battery life.
- * @returns {MxObject}
+ * @returns {Promise.<MxObject>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function GetCurrentLocation(
+export async function GetCurrentLocation(
     timeout?: BigJs.Big,
     maximumAge?: BigJs.Big,
     highAccuracy?: boolean
@@ -39,15 +38,13 @@ function GetCurrentLocation(
                     const geolocation = mapPositionToMxObject(mxObject, position);
                     resolve(geolocation);
                 },
-                error: () => {
-                    // eslint-disable-next-line prefer-promise-reject-errors
-                    reject("Could not create 'NanoflowCommons.Geolocation' object to store location");
-                }
+                error: () =>
+                    reject(new Error("Could not create 'NanoflowCommons.Geolocation' object to store location"))
             });
         }
 
         function onError(error: GeolocationError): void {
-            return reject(error.message);
+            return reject(new Error(error.message));
         }
 
         function getOptions(): GeoOptions {

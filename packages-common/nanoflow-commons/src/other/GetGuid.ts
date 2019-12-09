@@ -7,15 +7,14 @@
 /**
  * Get the Mendix Object GUID.
  * @param {MxObject} entityObject - This field is required.
- * @returns {string}
+ * @returns {Promise.<string>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function GetGuid(entityObject: mendix.lib.MxObject): string {
+export async function GetGuid(entityObject: mendix.lib.MxObject): Promise<string> {
     // BEGIN USER CODE
     if (!entityObject) {
-        throw new TypeError("Input parameter 'Entity object' is required.");
+        return Promise.reject(new Error("Input parameter 'Entity object' is required."));
     }
 
-    return entityObject.getGuid();
+    return Promise.resolve(entityObject.getGuid());
     // END USER CODE
 }

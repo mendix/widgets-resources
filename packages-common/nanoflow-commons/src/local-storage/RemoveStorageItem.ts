@@ -8,14 +8,13 @@ import ReactNative from "react-native";
 
 /**
  * Remove a content identified by a unique key. This could be set via any of the Set Storage Item JavaScript actions.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function RemoveStorageItem(key?: string): Promise<boolean> {
+export async function RemoveStorageItem(key?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!key) {
-        throw new TypeError("Input parameter 'Key' is required");
+        return Promise.reject(new Error("Input parameter 'Key' is required"));
     }
 
     return removeItem(key).then(() => true);
@@ -32,7 +31,7 @@ function RemoveStorageItem(key?: string): Promise<boolean> {
             return Promise.resolve();
         }
 
-        throw new Error("No storage API available");
+        return Promise.reject(new Error("No storage API available"));
     }
     // END USER CODE
 }

@@ -9,14 +9,13 @@ import ReactNative from "react-native";
 /**
  * Check if an item exists in a device storage, identified by a unique key. The value could be set by a Set Storage Item action.
  * @param {string} key - This field is required.
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function StorageItemExists(key?: string): Promise<boolean> {
+export async function StorageItemExists(key?: string): Promise<boolean> {
     // BEGIN USER CODE
 
     if (!key) {
-        throw new TypeError("Input parameter 'Key' is required");
+        return Promise.reject(new Error("Input parameter 'Key' is required"));
     }
 
     return getItem(key).then(result => result !== null);
@@ -33,7 +32,7 @@ function StorageItemExists(key?: string): Promise<boolean> {
             return Promise.resolve(value);
         }
 
-        throw new Error("No storage API available");
+        return Promise.reject(new Error("No storage API available"));
     }
     // END USER CODE
 }

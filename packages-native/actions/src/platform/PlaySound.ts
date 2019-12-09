@@ -4,50 +4,43 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNativeSound from "react-native-sound";
+import Sound from "react-native-sound";
 
 /**
  * Info about supported audio file formats:
  * - iOS: https://developer.apple.com/library/content/documentation/MusicAudio/Conceptual/CoreAudioOverview/SupportedAudioFormatsMacOSX/SupportedAudioFormatsMacOSX.html
  * - Android: https://developer.android.com/guide/topics/media/media-formats.html
  * @param {MxObject} audioFile - This field is required. Common supported file formats are mp3, wav, m4a, mp4.
- * @returns {boolean}
+ * @returns {Promise.<void>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function PlaySound(audioFile?: mendix.lib.MxObject): Promise<boolean> {
+export async function PlaySound(audioFile?: mendix.lib.MxObject): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://github.com/zmxv/react-native-sound
 
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const Sound: typeof ReactNativeSound = require("react-native-sound");
-
     if (!audioFile) {
-        throw new TypeError("Input parameter 'Audio file' is required");
+        return Promise.reject(new Error("Input parameter 'Audio file' is required"));
     }
 
     if (!audioFile.inheritsFrom("System.FileDocument")) {
         const entity = audioFile.getEntity();
-        throw new TypeError(`Entity ${entity} does not inherit from 'System.FileDocument'`);
+        return Promise.reject(new Error(`Entity ${entity} does not inherit from 'System.FileDocument'`));
     }
 
-    return new Promise((resolve, reject) => {
-        const guid = audioFile.getGuid();
-        const changedDate = audioFile.get("changedDate") as number;
-        const url = mx.data.getDocumentUrl(guid, changedDate);
+    const guid = audioFile.getGuid();
+    const changedDate = audioFile.get("changedDate") as number;
+    const url = mx.data.getDocumentUrl(guid, changedDate);
 
-        const audio = new Sound(url, undefined, error => {
-            if (error) {
-                return reject(error);
+    const audio = new Sound(url, undefined, error => {
+        if (error) {
+            return Promise.reject(new Error(error));
+        }
+
+        audio.play(success => {
+            audio.release();
+            if (success) {
+                return Promise.resolve();
             }
-
-            audio.play(success => {
-                audio.release();
-                if (success) {
-                    return resolve(true);
-                }
-                // eslint-disable-next-line prefer-promise-reject-errors
-                return reject("Playback failed due to an audio encoding error");
-            });
+            return Promise.reject(new Error("Playback failed due to an audio encoding error"));
         });
     });
 

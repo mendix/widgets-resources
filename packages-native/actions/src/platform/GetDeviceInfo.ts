@@ -4,16 +4,13 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNativeDeviceInfo from "react-native-device-info";
+import DeviceInfo from "react-native-device-info";
 
 /**
- * @returns {MxObject}
+ * @returns {Promise.<MxObject>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
+export async function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
-
-    const DeviceInfo: typeof ReactNativeDeviceInfo = require("react-native-device-info").default;
 
     return Promise.all([createMxObject("NativeMobileActions.DeviceInfo"), DeviceInfo.getBatteryLevel()]).then(
         ([mxObject, batteryLevel]) => {
@@ -54,8 +51,7 @@ function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
             mx.data.create({
                 entity,
                 callback: mxObject => resolve(mxObject),
-                // eslint-disable-next-line prefer-promise-reject-errors
-                error: () => reject(`Could not create '${entity}' object to store device info`)
+                error: () => reject(new Error(`Could not create '${entity}' object to store device info`))
             });
         });
     }

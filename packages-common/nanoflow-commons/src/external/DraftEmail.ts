@@ -13,10 +13,15 @@ import ReactNative from "react-native";
  * @param {string} bcc - The Blind Carbon Copy recipient, or recipients, separated by comma's.
  * @param {string} subject
  * @param {string} body
- * @returns {boolean}
+ * @returns {Promise.<boolean>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function DraftEmail(recipient?: string, cc?: string, bcc?: string, subject?: string, body?: string): Promise<boolean> {
+export async function DraftEmail(
+    recipient?: string,
+    cc?: string,
+    bcc?: string,
+    subject?: string,
+    body?: string
+): Promise<boolean> {
     // BEGIN USER CODE
 
     let url = "mailto:";

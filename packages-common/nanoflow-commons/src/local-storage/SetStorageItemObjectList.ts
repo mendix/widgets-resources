@@ -11,23 +11,22 @@ import { StorageValue } from "./StorageValue";
  * Store a list of Mendix objects in device storage, identified by a unique key. Can be accessed by the GetStorageItemObject action. Please note that users can clear the device storage.
  * @param {string} key - This field is required.
  * @param {MxObject[]} value - This field is required.
- * @returns {boolean}
+ * @returns {Promise.<void>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function SetStorageItemObjectList(key?: string, value?: mendix.lib.MxObject[]): Promise<boolean> {
+export async function SetStorageItemObjectList(key?: string, value?: mendix.lib.MxObject[]): Promise<void> {
     // BEGIN USER CODE
 
     if (!key) {
-        throw new TypeError("Input parameter 'Key' is required");
+        return Promise.reject(new Error("Input parameter 'Key' is required"));
     }
 
     if (!value) {
-        throw new TypeError("Input parameter 'Value' is required");
+        return Promise.reject(new Error("Input parameter 'Value' is required"));
     }
 
     const serializedObjects = value.map(serializeMxObject);
 
-    return setItem(key, JSON.stringify(serializedObjects)).then(() => true);
+    return setItem(key, JSON.stringify(serializedObjects));
 
     function setItem(key: string, value: string): Promise<void> {
         if (navigator && navigator.product === "ReactNative") {
@@ -41,7 +40,7 @@ function SetStorageItemObjectList(key?: string, value?: mendix.lib.MxObject[]): 
             return Promise.resolve();
         }
 
-        throw new Error("No storage API available");
+        return Promise.reject(new Error("No storage API available"));
     }
 
     function serializeMxObject(object: mendix.lib.MxObject): StorageValue {

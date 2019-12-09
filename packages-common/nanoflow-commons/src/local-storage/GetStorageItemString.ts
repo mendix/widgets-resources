@@ -9,24 +9,23 @@ import ReactNative from "react-native";
 /**
  * Retrieve a local stored string value identified by a unique key. This could be set via the SetStorageItemString JavaScript action.
  * @param {string} key - This field is required.
- * @returns {string}
+ * @returns {Promise.<string>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function GetStorageItemString(key?: string): Promise<string> {
+export async function GetStorageItemString(key?: string): Promise<string> {
     // BEGIN USER CODE
 
     if (!key) {
-        throw new TypeError("Input parameter 'Key' is required");
+        return Promise.reject(new Error("Input parameter 'Key' is required"));
     }
 
     return getItem(key).then(result => {
         if (result === null) {
-            throw new Error(`Storage item '${key}' does not exist`);
+            return Promise.reject(new Error(`Storage item '${key}' does not exist`));
         }
         return result;
     });
 
-    function getItem(key: string): Promise<string | null> {
+    async function getItem(key: string): Promise<string | null> {
         if (navigator && navigator.product === "ReactNative") {
             const AsyncStorage: typeof ReactNative.AsyncStorage = require("@react-native-community/async-storage")
                 .default;
@@ -38,7 +37,7 @@ function GetStorageItemString(key?: string): Promise<string> {
             return Promise.resolve(value);
         }
 
-        throw new Error("No storage API available");
+        return Promise.reject(new Error("No storage API available"));
     }
 
     // END USER CODE
