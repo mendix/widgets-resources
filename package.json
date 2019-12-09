@@ -87,7 +87,6 @@
         "readline-sync": "^1.4.10",
         "to-string-loader": "^1.1.5",
         "ts-node": "^8.1.0",
-        "wdio-iedriver-service": "^0.1.0",
         "zip-folder": "^1.0.0"
     },
     "dependencies": {
