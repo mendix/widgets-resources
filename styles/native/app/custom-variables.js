@@ -1,6 +1,7 @@
 import { NativeModules, Platform }                     from "react-native";
 import adjustFont                                      from "../core/helpers/_functions/adjustfont";
 import { setColorBasedOnBackground, setContrastScale } from "../core/helpers/_functions/convertcolors";
+import { shadeBlendConvert }                           from "../core/helpers/_functions/shadeblendconvert.js";
 
 /*
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)
@@ -173,9 +174,11 @@ export const navigation = {
         iconSize: font.sizeSmall,
     },
     progressOverlay: {
-        color: "#FFF",
-        activityIndicatorColor: "#FFF",
+        color: font.color,
+        activityIndicatorColor: font.color,
         backgroundColor: `rgba(0, 0, 0, 0.5)`,
+        containerBackgroundColor: background.secondary,
+        shadowColor: shadeBlendConvert(-0.6, background.primary), // Only for iOS
         fontSize: font.size,
     },
 };

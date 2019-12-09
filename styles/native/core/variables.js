@@ -3,6 +3,7 @@ import * as custom                                     from "../app/custom-varia
 import adjustFont                                      from "./helpers/_functions/adjustfont";
 import { setColorBasedOnBackground, setContrastScale } from "./helpers/_functions/convertcolors";
 import merge                                           from "./helpers/_functions/mergeobjects";
+import { shadeBlendConvert }                           from "./helpers/_functions/shadeblendconvert.js";
 
 //== Global variables
 //## Variables to be used during styling
@@ -176,9 +177,11 @@ let navigation = {
         iconSize: font.sizeSmall,
     },
     progressOverlay: {
-        color: "#FFF",
-        activityIndicatorColor: "#FFF",
+        color: font.color,
+        activityIndicatorColor: font.color,
         backgroundColor: `rgba(0, 0, 0, 0.5)`,
+        containerBackgroundColor: background.secondary,
+        shadowColor: shadeBlendConvert(-0.6, background.primary), // Only for iOS
         fontSize: font.size,
     },
 };
