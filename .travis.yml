@@ -45,7 +45,6 @@ matrix:
               - PATH=$PATH:~/Library/Python/2.7/bin
               - CODE_SIGNING_REQUIRED=NO
           install:
-              - npm install -g react-native-cli
               - npm install -g detox-cli
               - gem install xcpretty
               - brew tap wix/brew
@@ -62,7 +61,6 @@ matrix:
           before_install:
               - sudo apt-get install npm
           install:
-              - npm install -g react-native-cli
               - npm install -g detox-cli
               - gem install xcpretty
               - npm install
