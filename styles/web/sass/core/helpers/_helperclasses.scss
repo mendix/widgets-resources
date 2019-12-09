@@ -281,38 +281,6 @@ $important-helpers-value: if($important-helpers, ' !important', '');
     }
 }
 
-@media (min-width: $screen-md) and (max-width: $screen-md-max) {
-    .hide-md,
-    .hidden-md,
-    .d-md-none {
-        display: none #{$important-helpers-value};
-    }
-    .d-md-flex {
-        display: flex #{$important-helpers-value};
-    }
-    .d-md-inline-flex {
-        display: inline-flex #{$important-helpers-value};
-    }
-    .d-md-inline {
-        display: inline #{$important-helpers-value};
-    }
-    .d-md-inline-block {
-        display: inline-block #{$important-helpers-value};
-    }
-    .d-md-block {
-        display: block #{$important-helpers-value};
-    }
-    .d-md-table {
-        display: table #{$important-helpers-value};
-    }
-    .d-md-table-row {
-        display: table-row #{$important-helpers-value};
-    }
-    .d-md-table-cell {
-        display: table-cell #{$important-helpers-value};
-    }
-}
-
 @media (min-width: $screen-lg) and (max-width: $screen-xl) {
     .hide-lg,
     .hidden-lg,
