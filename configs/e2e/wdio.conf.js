@@ -18,9 +18,16 @@ exports.config = {
     specs: [basePath + "/tests/e2e/specs/*.spec.ts"],
     maxInstances: 1,
     capabilities: [
-        {
-            browserName: browser ? (browser === "ie11" ? "internet explorer" : browser) : "chrome"
-        }
+        browser && browser === "ie11"
+            ? {
+                  browserName: "internet explorer"
+              }
+            : {
+                  browserName: "chrome",
+                  "goog:chromeOptions": {
+                      args: ["--no-sandbox"]
+                  }
+              }
     ],
     sync: true,
     logLevel: "silent",
@@ -32,6 +39,7 @@ exports.config = {
     connectionRetryTimeout: 90000,
     connectionRetryCount: 0,
     services: [browser === "ie11" ? "iedriver" : "selenium-standalone"],
+    chromeOptions: ["--no-sandbox"],
     framework: "jasmine",
     reporters: ["spec"],
     execArgv: debug ? ["--inspect"] : undefined,

@@ -27,14 +27,7 @@ matrix:
               - npm run test -- $SCRIPT_ARGS
         - name: "Automated Tests"
           addons:
-              apt:
-                  sources:
-                      - google-chrome
-                  packages:
-                      - google-chrome-stable
-          before_install:
-              - export CHROME_BIN=chromium-browser
-              - export DISPLAY=:99.0
+              chrome: stable
           script:
               - travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS
         - name: "IE11 Automated Tests"
