@@ -109,7 +109,7 @@
 // Fix Safari issue of sidebar disappearing
 .profile-tablet {
     .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
-        overflow-y: auto;
+        overflow-y: hidden;
 
         .mx-scrollcontainer-wrapper {
             overflow: visible;
