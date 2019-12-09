@@ -9,6 +9,10 @@
             margin-bottom: $gutter-size;
         }
 
+        @media (max-width: $screen-lg) {
+            @include layout-spacing($type: margin, $direction: bottom, $device: responsive);
+        }
+
         @media (min-width: $screen-lg) {
             border-right: 1px solid $border-color-default;
 
