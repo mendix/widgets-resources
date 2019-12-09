@@ -9,8 +9,8 @@
     "scripts": {
         "prebuild": "rm -rf ./dist/tsc",
         "build": "npm run build:tsc",
-        "build:tsc": "../../node_modules/.bin/tsc --project src/tsconfig.json",
-        "postbuild": "../../node_modules/.bin/ts-node --project ./scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
+        "build:tsc": "node ../../node_modules/.bin/tsc --project src/tsconfig.json",
+        "postbuild": "node ../../node_modules/.bin/ts-node --project ./scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
         "version": "npm run build",
         "postversion": "node ../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
     }
