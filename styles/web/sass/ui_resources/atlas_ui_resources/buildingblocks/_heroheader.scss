@@ -1,6 +1,6 @@
 /* ==========================================================================
    Pageheader
-   
+
 ========================================================================== */
 .heroheader {
     border-bottom: 1px solid $border-color-default;
@@ -12,9 +12,11 @@
 .heroheader-title {
     margin: 0 0 10px 0;
 }
+
 .heroheader-subtitle {
     margin: 0;
     padding: 0 15px;
+
     &::before {
         display: block;
         max-width: 330px;
@@ -34,9 +36,11 @@
         margin-bottom: 10px;
         color: #FFFFFF;
     }
+
     .heroheader-subtitle {
         padding: 0;
         color: #FFFFFF;
+
         &::before {
             display: none;
         }
@@ -44,12 +48,12 @@
 }
 
 .heroheadermap {
-    .heroheadermap-map {
-        height: 350px;
-    }
-    .heroheadermap-controls {
-        background: $header-bg-color;
-    }
+    padding: 0 !important;
+}
+
+.heroheadermap-controls {
+    padding: $spacing-large;
+    background: $header-bg-color;
 }
 
 .heroheaderproduct {
@@ -57,6 +61,7 @@
     overflow: hidden;
     height: 300px;
     background-color: #000000;
+
     .heroheaderproduct-backgroundimage {
         position: absolute;
         z-index: 0;
@@ -65,6 +70,7 @@
         opacity: 0.7;
         filter: blur(5px);
     }
+
     .heroheaderproduct-overlay {
         position: absolute;
         z-index: 1;
@@ -78,8 +84,10 @@
     .heroheaderexpense-title {
         font-size: 72px;
     }
+
     .heroheaderexpense-type {
         align-items: center;
+
         &::before {
             flex-grow: 1;
             height: 1px;

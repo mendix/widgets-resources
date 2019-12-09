@@ -115,8 +115,7 @@
             }
         }
     }
-
-    @media (max-width: $screen-sm) {
+    @media (max-width: $screen-md) {
         ul.nav > li.mx-navbar-item > a {
             padding: 10px 20px;
         }

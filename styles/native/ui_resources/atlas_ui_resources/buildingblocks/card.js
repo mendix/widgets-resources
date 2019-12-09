@@ -72,13 +72,13 @@ export const cardBody = {
 // Card Action
 export const cardAction = {
     container: {
-        flex: 1,
-        flexBasis: "40%",
+        maxWidth: "100%",
         aspectRatio: 1,
         borderWidth: 1,
         borderColor: border.color,
         borderRadius: border.radius,
         padding: spacing.regular,
+        alignItems: "center",
     },
 };
 

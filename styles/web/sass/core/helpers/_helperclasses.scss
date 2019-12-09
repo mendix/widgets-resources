@@ -12,11 +12,48 @@
 ========================================================================== */
 $important-helpers-value: if($important-helpers, ' !important', '');
 
+// Display properties
+.d-none {
+    display: none #{$important-helpers-value};
+}
 
-.show {
+.d-flex {
+    display: flex #{$important-helpers-value};
+}
+
+.d-inline-flex {
+    display: inline-flex #{$important-helpers-value};
+}
+
+.d-inline {
+    display: inline #{$important-helpers-value};
+}
+
+.d-inline-block {
+    display: inline-block #{$important-helpers-value};
+}
+
+.show,
+.d-block {
     display: block #{$important-helpers-value};
 }
 
+.table,
+.d-table {
+    display: table #{$important-helpers-value};
+}
+
+.table-row,
+.d-table-row {
+    display: table-row #{$important-helpers-value};
+}
+
+.table-cell,
+.d-table-cell {
+    display: table-cell #{$important-helpers-value};
+}
+
+.hide,
 .hidden {
     display: none #{$important-helpers-value};
     visibility: hidden #{$important-helpers-value};
@@ -128,33 +165,182 @@ $important-helpers-value: if($important-helpers, ' !important', '');
     justify-content: center #{$important-helpers-value};
 }
 
-// Display properties
-.d-inline {
-    display: inline #{$important-helpers-value};
+// Media
+@media (max-width: $screen-sm-max) {
+    .hide-phone {
+        display: none #{$important-helpers-value};
+    }
 }
 
-.d-inline-block {
-    display: inline-block #{$important-helpers-value};
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    .hide-tablet {
+        display: none #{$important-helpers-value};
+    }
 }
 
-.d-block {
-    display: block #{$important-helpers-value};
+@media (min-width: $screen-lg) {
+    .hide-desktop {
+        display: none #{$important-helpers-value};
+    }
 }
+
 
 @media (max-width: $screen-xs-max) {
-    .hidden-xs {
+    .hide-xs,
+    .hidden-xs,
+    .d-xs-none {
         display: none #{$important-helpers-value};
+    }
+    .d-xs-flex {
+        display: flex #{$important-helpers-value};
+    }
+    .d-xs-inline-flex {
+        display: inline-flex #{$important-helpers-value};
+    }
+    .d-xs-inline {
+        display: inline #{$important-helpers-value};
+    }
+    .d-xs-inline-block {
+        display: inline-block #{$important-helpers-value};
+    }
+    .d-xs-block {
+        display: block #{$important-helpers-value};
+    }
+    .d-xs-table {
+        display: table #{$important-helpers-value};
+    }
+    .d-xs-table-row {
+        display: table-row #{$important-helpers-value};
+    }
+    .d-xs-table-cell {
+        display: table-cell #{$important-helpers-value};
     }
 }
 
 @media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
-    .hidden-sm {
+    .hide-sm,
+    .hidden-sm,
+    .d-sm-none {
         display: none #{$important-helpers-value};
+    }
+    .d-sm-flex {
+        display: flex #{$important-helpers-value};
+    }
+    .d-sm-inline-flex {
+        display: inline-flex #{$important-helpers-value};
+    }
+    .d-sm-inline {
+        display: inline #{$important-helpers-value};
+    }
+    .d-sm-inline-block {
+        display: inline-block #{$important-helpers-value};
+    }
+    .d-sm-block {
+        display: block #{$important-helpers-value};
+    }
+    .d-sm-table {
+        display: table #{$important-helpers-value};
+    }
+    .d-sm-table-row {
+        display: table-row #{$important-helpers-value};
+    }
+    .d-sm-table-cell {
+        display: table-cell #{$important-helpers-value};
     }
 }
 
-@media (min-width: $screen-md) {
-    .hidden-md {
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    .hide-md,
+    .hidden-md,
+    .d-md-none {
         display: none #{$important-helpers-value};
+    }
+    .d-md-flex {
+        display: flex #{$important-helpers-value};
+    }
+    .d-md-inline-flex {
+        display: inline-flex #{$important-helpers-value};
+    }
+    .d-md-inline {
+        display: inline #{$important-helpers-value};
+    }
+    .d-md-inline-block {
+        display: inline-block #{$important-helpers-value};
+    }
+    .d-md-block {
+        display: block #{$important-helpers-value};
+    }
+    .d-md-table {
+        display: table #{$important-helpers-value};
+    }
+    .d-md-table-row {
+        display: table-row #{$important-helpers-value};
+    }
+    .d-md-table-cell {
+        display: table-cell #{$important-helpers-value};
+    }
+}
+
+@media (min-width: $screen-lg) and (max-width: $screen-xl) {
+    .hide-lg,
+    .hidden-lg,
+    .d-lg-none {
+        display: none #{$important-helpers-value};
+    }
+    .d-lg-flex {
+        display: flex #{$important-helpers-value};
+    }
+    .d-lg-inline-flex {
+        display: inline-flex #{$important-helpers-value};
+    }
+    .d-lg-inline {
+        display: inline #{$important-helpers-value};
+    }
+    .d-lg-inline-block {
+        display: inline-block #{$important-helpers-value};
+    }
+    .d-lg-block {
+        display: block #{$important-helpers-value};
+    }
+    .d-lg-table {
+        display: table #{$important-helpers-value};
+    }
+    .d-lg-table-row {
+        display: table-row #{$important-helpers-value};
+    }
+    .d-lg-table-cell {
+        display: table-cell #{$important-helpers-value};
+    }
+}
+
+@media (min-width: $screen-xl) {
+    .hide-xl,
+    .hidden-xl,
+    .d-xl-none {
+        display: none #{$important-helpers-value};
+    }
+    .d-xl-flex {
+        display: flex #{$important-helpers-value};
+    }
+    .d-xl-inline-flex {
+        display: inline-flex #{$important-helpers-value};
+    }
+    .d-xl-inline {
+        display: inline #{$important-helpers-value};
+    }
+    .d-xl-inline-block {
+        display: inline-block #{$important-helpers-value};
+    }
+    .d-xl-block {
+        display: block #{$important-helpers-value};
+    }
+    .d-xl-table {
+        display: table #{$important-helpers-value};
+    }
+    .d-xl-table-row {
+        display: table-row #{$important-helpers-value};
+    }
+    .d-xl-table-cell {
+        display: table-cell #{$important-helpers-value};
     }
 }
