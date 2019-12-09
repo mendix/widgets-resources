@@ -50,7 +50,10 @@ matrix:
               - gem install xcpretty
               - brew tap wix/brew
               - brew install applesimutils --HEAD
+              - npm install
           script:
+              - node -v
+              - npm -v
               - npm run test:e2e:native -- $SCRIPT_ARGS
         - name: "Android Automated tests"
           language: android
@@ -62,6 +65,7 @@ matrix:
               - npm install -g react-native-cli
               - npm install -g detox-cli
               - gem install xcpretty
+              - npm install
           android:
               components:
                   - tools
@@ -74,6 +78,8 @@ matrix:
                   - sys-img-x86-android-26
                   - sys-img-x86-android-28
           script:
+              - node -v
+              - npm -v
               - npm run test:e2e:native -- $SCRIPT_ARGS
 notifications:
     email:
