@@ -40,6 +40,8 @@ matrix:
               - travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS
         - name: "IE11 Automated Tests"
           os: windows
+          before_install:
+              - npm i -g cross-env
           install:
               - powershell set-executionpolicy unrestricted
           before_script:
