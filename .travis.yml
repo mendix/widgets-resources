@@ -26,6 +26,7 @@ matrix:
               - npm run build -- $SCRIPT_ARGS
               - npm run test -- $SCRIPT_ARGS
         - name: "Automated Tests"
+          allow_failures:
           dist: trusty
           addons:
               chrome: stable
@@ -39,6 +40,7 @@ matrix:
           script:
               - travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS
         - name: "IE11 Automated Tests"
+          allow_failures:
           os: windows
           #          before_install:
           #              - powershell set-executionpolicy unrestricted
