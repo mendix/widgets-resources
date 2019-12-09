@@ -40,6 +40,8 @@ matrix:
               - travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS
         - name: "IE11 Automated Tests"
           os: windows
+          before_script:
+              - npm config set script-shell powershell
           script:
               - travis_wait 30 npm run test:e2e:ie11 -- $SCRIPT_ARGS
         - name: "iOS Automated tests"
