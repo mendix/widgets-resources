@@ -38,6 +38,8 @@ matrix:
               - sleep 3
           allow_failures:
               - travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS
+          script:
+              - travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS
         #        - name: "IE11 Automated Tests"
         #          allow_failures:
         #          os: windows
