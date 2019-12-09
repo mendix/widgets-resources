@@ -31,11 +31,11 @@ matrix:
           before_install:
               - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
           script:
-              - npm run test:e2e -- $SCRIPT_ARGS
+              - travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS
         - name: "IE11 Automated Tests"
           os: windows
           script:
-              - npm run test:e2e:ie11 -- $SCRIPT_ARGS
+              - travis_wait 30 npm run test:e2e:ie11 -- $SCRIPT_ARGS
         - name: "iOS Automated tests"
           language: objective-c
           os: osx
