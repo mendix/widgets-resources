@@ -26,12 +26,15 @@ matrix:
               - npm run build -- $SCRIPT_ARGS
               - npm run test -- $SCRIPT_ARGS
         - name: "Automated Tests"
+          addons:
+              apt:
+                  sources:
+                      - google-chrome
+                  packages:
+                      - google-chrome-stable
           before_install:
-              - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-              - sudo dpkg -i google-chrome*.deb
               - export CHROME_BIN=chromium-browser
               - export DISPLAY=:99.0
-              - sh -e /etc/init.d/xvfb start
           script:
               - travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS
         - name: "IE11 Automated Tests"
@@ -46,15 +49,14 @@ matrix:
               - REACT_NATIVE_VERSION=0.59.9
               - PATH=$PATH:~/Library/Python/2.7/bin
               - CODE_SIGNING_REQUIRED=NO
+          before_install:
+              - travis_wait 30 npm install
           install:
               - npm install -g detox-cli
               - gem install xcpretty
               - brew tap wix/brew
               - brew install applesimutils --HEAD
-              - npm install
           script:
-              - node -v
-              - npm -v
               - npm run test:e2e:native -- $SCRIPT_ARGS
         - name: "Android Automated tests"
           sudo: required
@@ -63,10 +65,11 @@ matrix:
               - REACT_NATIVE_VERSION=0.59.9
           before_install:
               - sudo apt-get install npm
+              - node -v
+              - npm -v
+              - travis_wait 30 npm install
           install:
               - npm install -g detox-cli
-              - gem install xcpretty
-              - npm install
           android:
               components:
                   - tools
@@ -79,8 +82,6 @@ matrix:
                   - sys-img-x86-android-26
                   - sys-img-x86-android-28
           script:
-              - node -v
-              - npm -v
               - npm run test:e2e:native -- $SCRIPT_ARGS
 notifications:
     email:
