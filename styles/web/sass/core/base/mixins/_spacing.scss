@@ -13,23 +13,23 @@
         $suffix: ' !important';
     }
     @if $direction==all {
-        @media (max-width: $screen-xs-max) {
+        @media (max-width: $screen-sm-max) {
             #{$type}: #{$m-spacing-large}#{$suffix};
         }
-        @media (min-width: $screen-sm) {
+        @media (min-width: $screen-md) {
             #{$type}: #{$t-spacing-large}#{$suffix};
         }
-        @media (min-width: $screen-md) {
+        @media (min-width: $screen-lg) {
             #{$type}: #{$spacing-large}#{$suffix};
         }
     } @else {
-        @media (max-width: $screen-xs-max) {
+        @media (max-width: $screen-sm-max) {
             #{$type}#{$dash}#{$direction}: #{$m-spacing-large}#{$suffix};
         }
-        @media (min-width: $screen-sm) {
+        @media (min-width: $screen-md) {
             #{$type}#{$dash}#{$direction}: #{$t-spacing-large}#{$suffix};
         }
-        @media (min-width: $screen-md) {
+        @media (min-width: $screen-lg) {
             #{$type}#{$dash}#{$direction}: #{$spacing-large}#{$suffix};
         }
     }
@@ -43,23 +43,23 @@
         $suffix: ' !important';
     }
     @if $direction==all {
-        @media (max-width: $screen-xs-max) {
+        @media (max-width: $screen-sm-max) {
             #{$type}: #{$m-spacing-medium}#{$suffix};
         }
-        @media (min-width: $screen-sm) {
+        @media (min-width: $screen-md) {
             #{$type}: #{$t-spacing-medium}#{$suffix};
         }
-        @media (min-width: $screen-md) {
+        @media (min-width: $screen-lg) {
             #{$type}: #{$spacing-medium}#{$suffix};
         }
     } @else {
-        @media (max-width: $screen-xs-max) {
+        @media (max-width: $screen-sm-max) {
             #{$type}#{$dash}#{$direction}: #{$m-spacing-medium}#{$suffix};
         }
-        @media (min-width: $screen-sm) {
+        @media (min-width: $screen-md) {
             #{$type}#{$dash}#{$direction}: #{$t-spacing-medium}#{$suffix};
         }
-        @media (min-width: $screen-md) {
+        @media (min-width: $screen-lg) {
             #{$type}#{$dash}#{$direction}: #{$spacing-medium}#{$suffix};
         }
     }

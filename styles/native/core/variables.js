@@ -165,7 +165,7 @@ let navigation = {
         backgroundColor: background.primary,
         backButtonColor: contrast.highest,
         titleColor: contrast.highest,
-        titleFontSize: font.sizeH5,
+        titleFontSize: Platform.select({ android: font.sizeH4, ios: font.sizeH5 }),
     },
     bottomBar: {
         color: contrast.high,

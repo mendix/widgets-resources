@@ -127,7 +127,7 @@
             padding-right: $gutter-size;
             padding-left: $gutter-size;
             border: 0;
-            @media (max-width: $screen-sm-max) {
+            @media (max-width: $screen-md-max) {
                 width: 100% !important;
             }
 
@@ -185,7 +185,7 @@
         width: 8.33333333% !important;
     }
 
-    @media (min-width: $screen-sm) {
+    @media (min-width: $screen-md) {
         &.lv-col-sm-12 > ul > li {
             width: 100% !important;
         }
@@ -223,7 +223,7 @@
             width: 8.33333333% !important;
         }
     }
-    @media (min-width: $screen-md) {
+    @media (min-width: $screen-lg) {
         &.lv-col-md-12 > ul > li {
             width: 100% !important;
         }
@@ -261,7 +261,7 @@
             width: 16.66666667% !important;
         }
     }
-    @media (min-width: $screen-lg) {
+    @media (min-width: $screen-xl) {
         &.lv-col-lg-12 > ul > li {
             width: 100% !important;
         }

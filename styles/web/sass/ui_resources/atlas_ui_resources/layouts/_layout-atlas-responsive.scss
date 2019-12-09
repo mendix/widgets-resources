@@ -1,12 +1,12 @@
 /* ==========================================================================
    Atlas layout
-   
+
    Extra styling for responsive layouts
 ========================================================================== */
 .layout-atlas-responsive-default {
     $sidebar-width: 60px;
 
-    @media (min-width: $screen-sm) {
+    @media (min-width: $screen-md) {
         .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
             width: $sidebar-width !important;
 
@@ -40,7 +40,7 @@
     }
 
     // Push aside for mobile
-    @media (max-width: $screen-xs-max) {
+    @media (max-width: $screen-sm-max) {
         .mx-scrollcontainer-open {
             width: 1100px;
         }
@@ -99,7 +99,7 @@
         .toggle-btn {
             display: none;
 
-            @media (max-width: $screen-xs-max) {
+            @media (max-width: $screen-sm-max) {
                 display: inline-block;
             }
         }
@@ -109,7 +109,7 @@
 // Fix Safari issue of sidebar disappearing
 .profile-tablet {
     .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
-        overflow-y: auto;
+        overflow-y: hidden;
 
         .mx-scrollcontainer-wrapper {
             overflow: visible;
