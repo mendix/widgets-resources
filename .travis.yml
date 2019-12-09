@@ -17,27 +17,23 @@ before_script:
     - echo $CHANGED_GLOBAL_FILES
     - echo $PARTIAL_BUILD
     - echo $SCRIPT_ARGS
-#stages:
-#    - "Lint"
-#    - "Build"
-#    - "Unit Tests"
-#    - "E2E Tests"
+stages:
+    - build
+    - tests
 jobs:
     include:
-        - name: "Linting code using ESLint"
-          stage: "Lint"
+        - stage: build
+          name: "Lint"
           script:
               - npm run lint -- $SCRIPT_ARGS
-        - name: "Building widgets using Tools"
-          stage: "Build"
+        - name: "Build"
           script:
               - npm run build -- $SCRIPT_ARGS
-        - name: "Executing Jest unit tests"
-          stage: "Unit Tests"
+        - stage: tests
+          name: "Jest unit tests"
           script:
               - npm run test -- $SCRIPT_ARGS
-        - stage: "E2E Tests"
-          name: "Web Automated Tests"
+        - name: "Web Automated Tests"
           fast_finish: true
           dist: trusty
           addons:
