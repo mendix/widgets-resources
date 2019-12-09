@@ -26,6 +26,7 @@ matrix:
               - npm run build -- $SCRIPT_ARGS
               - npm run test -- $SCRIPT_ARGS
         - name: "Automated Tests"
+          fast_finish: true
           dist: trusty
           addons:
               chrome: stable
