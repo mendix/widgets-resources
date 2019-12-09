@@ -17,11 +17,11 @@ before_script:
     - echo $CHANGED_GLOBAL_FILES
     - echo $PARTIAL_BUILD
     - echo $SCRIPT_ARGS
-stages:
-    - "Lint"
-    - "Build"
-    - "Unit Tests"
-    - "E2E Tests"
+#stages:
+#    - "Lint"
+#    - "Build"
+#    - "Unit Tests"
+#    - "E2E Tests"
 jobs:
     include:
         - name: "Linting code using ESLint"
