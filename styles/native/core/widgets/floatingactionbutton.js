@@ -1,3 +1,4 @@
+import { shadeBlendConvert }                 from "../helpers/_functions/shadeblendconvert.js";
 import { background, brand, contrast, font } from "../variables";
 
 //
@@ -21,7 +22,7 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
         size: 50,
         rippleColor: contrast.lowest,
         backgroundColor: brand.primary,
-        shadowColor: contrast.low,
+        shadowColor: shadeBlendConvert(-0.3, background.primary),
         shadowOpacity: 0.9,
         shadowRadius: 4,
         shadowOffset: {
@@ -37,7 +38,7 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
     secondaryButton: {
         size: 30,
         backgroundColor: background.secondary,
-        shadowColor: contrast.lower,
+        shadowColor: shadeBlendConvert(-0.2, background.primary),
         shadowOpacity: 0.9,
         shadowRadius: 4,
         shadowOffset: {
@@ -52,9 +53,8 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
     },
     secondaryButtonCaption: {},
     secondaryButtonCaptionContainer: {
-        overflow: "hidden",
-        marginHorizontal: 15,
-        shadowColor: contrast.lower,
+        marginHorizontal: 5,
+        shadowColor: shadeBlendConvert(-0.2, background.primary),
         shadowOpacity: 0.9,
         shadowRadius: 4,
         shadowOffset: {

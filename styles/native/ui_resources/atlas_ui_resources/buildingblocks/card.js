@@ -1,4 +1,5 @@
 import { Platform }                              from "react-native";
+import { shadeBlendConvert }                     from "../../../core/helpers/_functions/shadeblendconvert.js";
 import { background, border, contrast, spacing } from "../../../core/variables";
 
 /* ==========================================================================
@@ -19,7 +20,7 @@ export const card = {
             },
         }),
         elevation: 1.5,
-        shadowColor: contrast.lower,
+        shadowColor: shadeBlendConvert(-0.2, background.primary),
         shadowOpacity: 0.7,
         shadowRadius: 10,
         shadowOffset: {
