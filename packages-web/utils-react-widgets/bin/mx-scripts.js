@@ -17,7 +17,7 @@ const gulpSlash = require("gulp-slash");
 
 const paths = process.cwd().split(path.sep);
 const projectPath = paths.slice(Math.max(paths.length - 2, 1)).join(path.sep);
-console.log("Project Path!", projectPath, paths);
+// console.log("Project Path!", projectPath, paths);
 
 switch (script) {
     case "build":
