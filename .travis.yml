@@ -8,12 +8,16 @@ env:
     global:
         # List of all touched files, excluding paths starting with 'packages'
         - CHANGED_GLOBAL_FILES=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep -v "^packages")
+        - NATIVE_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep -v "packages-native") != ""
+        - WEB_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep -v "packages-web") != ""
         # Build only touched packages for pull requests when no shared files were touched
         - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" == "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
         # Set arguments so lerna only runs scripts in changed packages
         - SCRIPT_ARGS=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
 before_script:
     - echo $TRAVIS_COMMIT_RANGE
+    - echo $NATIVE_PROJECTS
+    - echo $WEB_PROJECTS
     - echo $CHANGED_GLOBAL_FILES
     - echo $PARTIAL_BUILD
     - echo $SCRIPT_ARGS
@@ -33,7 +37,7 @@ jobs:
           name: "Jest unit tests"
           script:
               - npm run test -- $SCRIPT_ARGS
-        - if: $PARTIAL_BUILD = true
+        - if: $PARTIAL_BUILD = true && $WEB_PROJECTS = true
           name: "Web Automated Tests"
           fast_finish: true
           dist: trusty
@@ -59,7 +63,8 @@ jobs:
         #              - dism /online /Enable-Feature /FeatureName:Internet-Explorer-Optional-amd64
         #          script:
         #              - travis_wait 30 npm run test:e2e:ie11 -- $SCRIPT_ARGS
-        - name: "iOS Automated tests"
+        - if: $NATIVE_PROJECTS = true
+          name: "iOS Automated tests"
           language: objective-c
           os: osx
           osx_image: xcode11.2
@@ -75,7 +80,8 @@ jobs:
               - brew install applesimutils --HEAD
           script:
               - npm run test:e2e:native -- $SCRIPT_ARGS
-        - name: "Android Automated tests"
+        - if: $NATIVE_PROJECTS = true
+          name: "Android Automated tests"
           sudo: required
           language: android
           env:
