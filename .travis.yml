@@ -25,7 +25,6 @@ before_script:
     - echo $SCRIPT_ARGS
 stages:
     - build
-    - "Build on Windows"
     - tests
 jobs:
     include:
@@ -36,8 +35,7 @@ jobs:
         - name: "Build"
           script:
               - npm run build -- $SCRIPT_ARGS
-        - stage: "Build on Windows"
-          name: "Build"
+        - name: "Build on Windows"
           os: windows
           script:
               - npm run build -- $SCRIPT_ARGS
