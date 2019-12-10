@@ -146,7 +146,7 @@
                 "testBinaryPath": "./detox/android/developerapp-androidTest.apk",
                 "type": "android.emulator",
                 "device": {
-                    "avdName": "Pixel_XL_API_28"
+                    "avdName": "EMULATOR"
                 }
             }
         }
