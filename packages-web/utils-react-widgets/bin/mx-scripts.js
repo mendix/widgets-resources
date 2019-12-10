@@ -17,7 +17,7 @@ const gulpSlash = require("gulp-slash");
 
 const paths = process.cwd().split(path.sep);
 const projectPath = paths.slice(Math.max(paths.length - 2, 1)).join(path.sep);
-// console.log("Project Path!", projectPath);
+console.log("Project Path!", projectPath, paths);
 
 switch (script) {
     case "build":
@@ -48,7 +48,7 @@ function executeScript(script) {
     const libraryPath = getLibraryPath();
     const spawnParams = { stdio: "inherit" };
     let args = ["run", script];
-    if (argsFiltered.length > 0) {
+    if (argsFiltered.length > 0 && argsFiltered.indexOf("--subProjectPath") === -1) {
         args.push("--");
         args = args.concat(argsFiltered, ["--subProjectPath", projectPath]);
         if (!argsFiltered.includes("--subProjectPath")) {
