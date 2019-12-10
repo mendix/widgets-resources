@@ -93,15 +93,15 @@ jobs:
               components:
                   - tools
                   - platform-tools
-                  - build-tools-27.0.3
-                  - android-26
+                  - build-tools-28.0.3
+                  - android-28
                   - extra-google-google_play_services
                   - extra-google-m2repository
                   - extra-android-m2repository
                   - sys-img-x86-android-26
                   - sys-img-x86-android-28
           before_script:
-              - echo no | android create avd --force -n EMULATOR -t android-26 --abi default/armeabi-v7a -c 100M
+              - echo no | android create avd --force -n EMULATOR -k 'system-images;android-28;google_apis;x86' -f -d 'pixel_xl'
               - emulator -avd EMULATOR -no-audio -no-window &
               - android-wait-for-emulator
           script:

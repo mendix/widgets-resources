@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Runtime url</key>
+    <string>https://nativecomponentste-sandbox.mxapps.io/</string>
+    <key>UIRequiredDeviceCapabilities</key>
+    <array>
+      <string>armv7</string>
+    </array>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>DTPlatformVersion</key>
+    <string>13.2</string>
+    <key>CFBundleName</key>
+    <string>nativeTemplate</string>
+    <key>DTSDKName</key>
+    <string>iphoneos13.2</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>To use that feature the app needs access to your photo library.</string>
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
+    <key>CFBundleIcons</key>
+    <dict>
+      <key>CFBundlePrimaryIcon</key>
+      <dict>
+        <key>CFBundleIconFiles</key>
+        <array>
+          <string>AppIcon20x20</string>
+          <string>AppIcon29x29</string>
+          <string>AppIcon40x40</string>
+          <string>AppIcon60x60</string>
+        </array>
+        <key>CFBundleIconName</key>
+        <string>AppIcon</string>
+      </dict>
+    </dict>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>This app may need access to your Bluetooth connection</string>
+    <key>CFBundleDisplayName</key>
+    <string>Native Components App</string>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>To use that feature the app needs access to your location.</string>
+    <key>DTSDKBuild</key>
+    <string>17B102</string>
+    <key>NSCameraUsageDescription</key>
+    <string>The camera can be used to open apps by scanning a QR code.</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0.0</string>
+    <key>CFBundleSupportedPlatforms</key>
+    <array>
+      <string>iPhoneOS</string>
+    </array>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>To use that feature the app needs access to your location.</string>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+    </array>
+    <key>BuildMachineOSBuild</key>
+    <string>18G1012</string>
+    <key>CodePushKey</key>
+    <string>Qzo1BM0O6aPJ7gdhzAL-jFnhllM_nc4HhPRky</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>DTPlatformBuild</key>
+    <string>17B102</string>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>DTXcodeBuild</key>
+    <string>11B500</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>MinimumOSVersion</key>
+    <string>10.0</string>
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>This app may need access to your Bluetooth connection</string>
+    <key>UIAppFonts</key>
+    <array>
+      <string>glyphicons-halflings-regular.ttf</string>
+    </array>
+    <key>UIDeviceFamily</key>
+    <array>
+      <integer>1</integer>
+    </array>
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>To use that feature the app needs access to your microphone.</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.mendix.qa.nativecomponents</string>
+    <key>DTXcode</key>
+    <string>1120</string>
+    <key>NSCalendarsUsageDescription</key>
+    <string>This app requires access to the calendar</string>
+    <key>CFBundleExecutable</key>
+    <string>nativeTemplate</string>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
+      <key>NSExceptionDomains</key>
+      <dict>
+        <key>localhost</key>
+        <dict>
+          <key>NSExceptionAllowsInsecureHTTPLoads</key>
+          <true/>
+        </dict>
+      </dict>
+    </dict>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>NSFaceIDUsageDescription</key>
+    <string>Enabling Face ID allows you quick and secure access to your account.</string>
+    <key>DTPlatformName</key>
+    <string>iphoneos</string>
+    <key>DTCompiler</key>
+    <string>com.apple.compilers.llvm.clang.1_0</string>
+    <key>DTAppStoreToolsBuild</key>
+    <string>11B500</string>
+  </dict>
+</plist>
