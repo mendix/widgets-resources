@@ -52,7 +52,7 @@ jobs:
               - sh -e /etc/init.d/xvfb start
               - sleep 3
           script:
-              - if [ "$WEB_PROJECTS" == "true" ]; then travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS; fi
+              - if [ "$WEB_PROJECTS" == "true" ] && [ "$PARTIAL_BUILD" == "true" ]; then travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS; else echo "No individuals web package changed. Skipping tests"; fi
         #        - name: "IE11 Automated Tests"
         #          allow_failures:
         #          os: windows
@@ -79,7 +79,7 @@ jobs:
               - brew tap wix/brew
               - brew install applesimutils --HEAD
           script:
-              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:native -- $SCRIPT_ARGS; fi
+              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:native -- $SCRIPT_ARGS; else echo "No native package changed. Skipping ios tests"; fi
         - name: "Android Automated tests"
           sudo: required
           language: android
@@ -104,7 +104,7 @@ jobs:
                   - sys-img-x86-android-26
                   - sys-img-x86-android-28
           script:
-              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:native -- $SCRIPT_ARGS; fi
+              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:native -- $SCRIPT_ARGS; else echo "No native package changed. Skipping android tests"; fi
 notifications:
     email:
         recipients:
