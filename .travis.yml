@@ -13,7 +13,7 @@ env:
         # Build only touched packages for pull requests when no shared files were touched
         - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" == "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
         # Set arguments so lerna only runs scripts in changed packages
-        - SCRIPT_ARGS=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
+        - SCRIPT_ARGS=$(if [ "$PARTIAL_BUILD" == "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
 before_script:
     - echo $TRAVIS_COMMIT_RANGE
     - echo $NATIVE_PROJECTS
@@ -37,7 +37,7 @@ jobs:
           name: "Jest unit tests"
           script:
               - npm run test -- $SCRIPT_ARGS
-        - if: $PARTIAL_BUILD = true && $WEB_PROJECTS != ""
+        - if: $PARTIAL_BUILD == "true" && $WEB_PROJECTS != ""
           name: "Web Automated Tests"
           fast_finish: true
           dist: trusty
