@@ -72,7 +72,7 @@ jobs:
               - node -v
               - npm -v
           install:
-              - travis_wait 30 npm install
+              - travis_wait 30 npm ci
               - npm install -g detox-cli
               - gem install xcpretty
               - brew tap wix/brew
@@ -89,7 +89,7 @@ jobs:
               - node -v
               - npm -v
           install:
-              - travis_wait 30 npm install
+              - travis_wait 30 npm ci
               - npm install -g detox-cli
           android:
               components:
