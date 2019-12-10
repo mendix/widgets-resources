@@ -1,0 +1,13 @@
+{
+    "include": ["specs/**/*"],
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "module": "es6",
+        "target": "esnext",
+        "moduleResolution": "node",
+        "noEmit": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "types": ["detox", "jest"]
+    }
+}
