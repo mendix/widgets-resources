@@ -58,7 +58,10 @@ function executeScript(script) {
         args = args.concat(["--subProjectPath", projectPath]);
     }
     // console.log("args", args);
-    if (/.*node_modules[/|\\]@widgets-resources[/|\\]utils-react-widgets[/|\\]?$/.test(libraryPath)) {
+    if (
+        /.*node_modules[\/|\\]@widgets-resources[\/|\\]utils-react-widgets[\/|\\]?$/.test(libraryPath) ||
+        /^win/.test(process.platform)
+    ) {
         spawnParams.cwd = libraryPath;
     }
     // console.log("libraryPath", libraryPath, spawnParams);
