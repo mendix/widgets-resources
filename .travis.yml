@@ -8,8 +8,8 @@ env:
     global:
         # List of all touched files, excluding paths starting with 'packages'
         - CHANGED_GLOBAL_FILES=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep -v "^packages")
-        - NATIVE_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep -v "packages-native") != ""
-        - WEB_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep -v "packages-web") != ""
+        - NATIVE_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep -v "packages-native")
+        - WEB_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep -v "packages-web")
         # Build only touched packages for pull requests when no shared files were touched
         - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" == "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
         # Set arguments so lerna only runs scripts in changed packages
@@ -37,7 +37,7 @@ jobs:
           name: "Jest unit tests"
           script:
               - npm run test -- $SCRIPT_ARGS
-        - if: $PARTIAL_BUILD = true && $WEB_PROJECTS = true
+        - if: $PARTIAL_BUILD = true && $WEB_PROJECTS != ""
           name: "Web Automated Tests"
           fast_finish: true
           dist: trusty
@@ -63,7 +63,7 @@ jobs:
         #              - dism /online /Enable-Feature /FeatureName:Internet-Explorer-Optional-amd64
         #          script:
         #              - travis_wait 30 npm run test:e2e:ie11 -- $SCRIPT_ARGS
-        - if: $NATIVE_PROJECTS = true
+        - if: $NATIVE_PROJECTS != ""
           name: "iOS Automated tests"
           language: objective-c
           os: osx
@@ -80,7 +80,7 @@ jobs:
               - brew install applesimutils --HEAD
           script:
               - npm run test:e2e:native -- $SCRIPT_ARGS
-        - if: $NATIVE_PROJECTS = true
+        - if: $NATIVE_PROJECTS != ""
           name: "Android Automated tests"
           sudo: required
           language: android
