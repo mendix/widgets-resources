@@ -33,7 +33,8 @@ jobs:
           name: "Jest unit tests"
           script:
               - npm run test -- $SCRIPT_ARGS
-        - name: "Web Automated Tests"
+        - if: $PARTIAL_BUILD = true
+          name: "Web Automated Tests"
           fast_finish: true
           dist: trusty
           addons:
