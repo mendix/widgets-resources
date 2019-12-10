@@ -101,7 +101,7 @@ jobs:
                   - sys-img-x86-android-26
                   - sys-img-x86-android-28
           before_script:
-              - echo no | android create avd --force -n EMULATOR -t android-26 --abi default/x86 -c 100M
+              - echo no | android create avd --force -n EMULATOR -t android-26 --abi default/armeabi-v7a -c 100M
               - emulator -avd EMULATOR -no-audio -no-window &
               - android-wait-for-emulator
           script:
