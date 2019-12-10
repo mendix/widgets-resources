@@ -39,7 +39,8 @@ jobs:
           name: "Jest unit tests"
           script:
               - npm run test -- $SCRIPT_ARGS
-        - name: "Web Automated Tests"
+        - if: $WEB_PROJECTS == "true"
+          name: "Web Automated Tests"
           fast_finish: true
           dist: trusty
           addons:
@@ -64,7 +65,8 @@ jobs:
         #              - dism /online /Enable-Feature /FeatureName:Internet-Explorer-Optional-amd64
         #          script:
         #              - travis_wait 30 npm run test:e2e:ie11 -- $SCRIPT_ARGS
-        - name: "iOS Automated tests"
+        - if: $NATIVE_PROJECTS == "true"
+          name: "iOS Automated tests"
           language: objective-c
           os: osx
           osx_image: xcode11.2
@@ -80,7 +82,8 @@ jobs:
               - brew install applesimutils --HEAD
           script:
               - npm run test:e2e:native -- $SCRIPT_ARGS
-        - name: "Android Automated tests"
+        - if: $NATIVE_PROJECTS == "true"
+          name: "Android Automated tests"
           sudo: required
           language: android
           env:
