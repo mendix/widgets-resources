@@ -70,7 +70,7 @@ jobs:
               - node -v
               - npm -v
           install:
-              - travis_wait 30 npm ci
+              - npm ci
               - npm install -g detox-cli
               - gem install xcpretty
               - brew tap wix/brew
@@ -87,19 +87,24 @@ jobs:
               - node -v
               - npm -v
           install:
-              - travis_wait 30 npm ci
+              - npm ci
               - npm install -g detox-cli
           android:
               components:
                   - tools
                   - platform-tools
-                  - build-tools-27.0.3
-                  - android-26
+                  - build-tools-28.0.3
+                  - android-28
                   - extra-google-google_play_services
                   - extra-google-m2repository
                   - extra-android-m2repository
                   - sys-img-x86-android-26
                   - sys-img-x86-android-28
+          before_script:
+              - echo no | android create avd --force -n Pixel_XL_API_28 -t android-28 --abi armeabi-v7a -c 100M
+              - emulator -avd Pixel_XL_API_28 -no-audio -no-window &
+              - android-wait-for-emulator
+              - adb shell input keyevent 82 &
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:android; else echo "No native package changed. Skipping android tests"; fi
 notifications:
