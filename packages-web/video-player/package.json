@@ -14,7 +14,6 @@
         "projectPath": "./tests/TestProjects/Mendix8",
         "mendixHost": "http://localhost:8080/",
         "developmentPort": "3000",
-        "subprojectFolder": "packages-web/video-player",
         "testProjectId": "25c71ec6-4eb0-4324-8299-4e1948f0c165",
         "testProjects": [
             {
@@ -27,15 +26,15 @@
     "packagePath": "com.mendix.widget.web",
     "scripts": {
         "start": "..\"/../node_modules/.bin/concurrently\" \"npm:start:server\"  \"npm:dev\"",
-        "start:server": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:server --open --subprojectPath $npm_package_config_subprojectFolder",
-        "dev": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:ts -- --subprojectPath $npm_package_config_subprojectFolder",
-        "build": "..\"/../node_modules/.bin/pluggable-widgets-tools\" build:ts --subprojectPath $npm_package_config_subprojectFolder",
-        "format": "..\"/../node_modules/.bin/pluggable-widgets-tools\" format --subprojectPath $npm_package_config_subprojectFolder",
+        "start:server": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:server --open --subprojectPath packages-web/video-player",
+        "dev": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:ts -- --subprojectPath packages-web/video-player",
+        "build": "..\"/../node_modules/.bin/pluggable-widgets-tools\" build:ts --subprojectPath packages-web/video-player",
+        "format": "..\"/../node_modules/.bin/pluggable-widgets-tools\" format --subprojectPath packages-web/video-player",
         "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
         "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://videoplayer-sandbox.mxapps.io/ ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
         "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
-        "release": "..\"/../node_modules/.bin/pluggable-widgets-tools\" release:ts --subprojectPath $npm_package_config_subprojectFolder",
+        "release": "..\"/../node_modules/.bin/pluggable-widgets-tools\" release:ts --subprojectPath packages-web/video-player",
         "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
     },
     "devDependencies": {
