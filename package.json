@@ -13,8 +13,9 @@
         "lint:scripts": "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx packages-web/**/src packages-native/**/src",
         "test": "lerna run test --ignore @widgets-resources/utils-react-widgets --stream --concurrency 1",
         "test:e2e": "lerna run test:e2e --ignore @widgets-resources/utils-react-widgets --stream --concurrency 1",
-        "test:e2e:ie11": "cross-env BROWSER=ie11 lerna run test:e2e --ignore @widgets-resources/utils-react-widgets --stream --concurrency 1",
-        "test:e2e:native": "lerna run test:e2e:native --stream --concurrency 1",
+        "pretest:e2e:ios": "cd detox/ios && tar -xzf developerapp.app.tar.gz",
+        "test:e2e:ios": "detox test --configuration ios.simulator ./detox",
+        "test:e2e:android": "detox test --configuration android.emulator ./detox",
         "build": "lerna run build --ignore @widgets-resources/utils-react-widgets",
         "publish": "ts-node --project ./scripts/tsconfig.json ./scripts/release/Release.ts",
         "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
@@ -53,8 +54,9 @@
         "@types/xml2js": "^0.4.4",
         "check-dependencies": "^1.1.0",
         "cross-env": "^5.2.0",
-        "dotenv": "^8.1.0",
         "deepmerge": "^4.1.1",
+        "detox": "^14.8.5",
+        "dotenv": "^8.1.0",
         "es-abstract": "^1.15.0",
         "gh-release": "^3.5.0",
         "gulp-change": "^1.0.2",
@@ -126,5 +128,26 @@
                 }
             }
         ]
+    },
+    "detox": {
+        "test-runner": "jest",
+        "runner-config": "./detox/jest.config.json",
+        "configurations": {
+            "ios.simulator": {
+                "binaryPath": "./detox/ios/DeveloperApp.app",
+                "type": "ios.simulator",
+                "device": {
+                    "type": "iPhone 11 Pro Max"
+                }
+            },
+            "android.emulator": {
+                "binaryPath": "./detox/android/developerapp-emulator.apk",
+                "testBinaryPath": "./detox/android/developerapp-androidTest.apk",
+                "type": "android.emulator",
+                "device": {
+                    "avdName": "Pixel_XL_API_28"
+                }
+            }
+        }
     }
 }

@@ -76,7 +76,7 @@ jobs:
               - brew tap wix/brew
               - brew install applesimutils --HEAD
           script:
-              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:native -- $SCRIPT_ARGS; else echo "No native package changed. Skipping ios tests"; fi
+              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:ios; else echo "No native package changed. Skipping ios tests"; fi
         - name: "Android Automated tests"
           sudo: required
           language: android
@@ -101,7 +101,7 @@ jobs:
                   - sys-img-x86-android-26
                   - sys-img-x86-android-28
           script:
-              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:native -- $SCRIPT_ARGS; else echo "No native package changed. Skipping android tests"; fi
+              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:android; else echo "No native package changed. Skipping android tests"; fi
 notifications:
     email:
         recipients:
