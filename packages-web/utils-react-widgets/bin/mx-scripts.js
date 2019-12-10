@@ -48,9 +48,8 @@ function executeScript(script) {
     const libraryPath = getLibraryPath();
     const spawnParams = { stdio: "inherit" };
     let args = ["run", script];
-    if (argsFiltered.length > 0 && argsFiltered.indexOf("--subProjectPath") === -1) {
+    if (argsFiltered.length > 0) {
         args.push("--");
-        args = args.concat(argsFiltered, ["--subProjectPath", projectPath]);
         if (!argsFiltered.includes("--subProjectPath")) {
             args = args.concat(["--subProjectPath", projectPath]);
         }
