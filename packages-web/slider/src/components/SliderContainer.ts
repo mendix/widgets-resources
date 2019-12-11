@@ -151,7 +151,7 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         const { mxObject, valueAttribute } = this.props;
         if (value !== undefined && mxObject) {
             this.setState({ value });
-            if (this.validValue(value)) {
+            if (this.validValue(value) && !mxObject.isReadonlyAttr(valueAttribute)) {
                 this.selfUpdate = true;
                 mxObject.set(valueAttribute, value);
             }
