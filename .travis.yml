@@ -101,7 +101,7 @@ jobs:
                   - extra-google-google_play_services
                   - sys-img-armeabi-v7a-google_apis-28
           before_script:
-              - echo no | android create avd --force -n test -t android-28 --abi armeabi-v7a
+              - echo no | android create avd --force -n test -t android-28
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:android; else echo "No native package changed. Skipping android tests"; fi
 notifications:
