@@ -3,7 +3,7 @@ import ghRelease from "gh-release";
 import ghauth, { AuthOptions, TokenData } from "ghauth";
 import { promises as fs, existsSync, mkdirSync } from "fs";
 import { join } from "path";
-import { spawnSync } from "child_process";
+import { spawnSync, exec } from "child_process";
 import zipFolder from "zip-folder";
 
 main().catch(handleError);
@@ -53,7 +53,7 @@ async function findPackage(packages: string[], target: string): Promise<any> {
     throw Error(`Package for ${target} not found`);
 }
 
-function getAuth(): Promise<TokenData> {
+function getAuth(): Promise<ghauth.TokenData> {
     return new Promise<TokenData>((resolve, reject) => {
         const options: AuthOptions = {
             configName: "gh-release",
@@ -66,20 +66,18 @@ function getAuth(): Promise<TokenData> {
     });
 }
 
-async function releaseWithAuth(auth: TokenData, projectPackage: any): Promise<string> {
+async function releaseWithAuth(auth: TokenData, projectPackage: any): Promise<void> {
+    const tagName = `AppStore release ${projectPackage.name.replace(/^\w/, (c: string) => c.toUpperCase())} v${
+        projectPackage.version
+    }`;
+
     const assets = [
         `dist/${projectPackage.version}/${projectPackage.widgetName}.mpk`,
         `dist/${projectPackage.version}/module/${projectPackage.config.moduleName}.mpk`,
         `dist/${projectPackage.version}/${projectPackage.packagePath}.${projectPackage.widgetName}.mpk`,
         "dist/tmp/TestProjects.zip"
     ];
-    // eslint-disable-next-line no-console
-    console.log("Assets", assets.filter(asset => existsSync(projectPackage.path + "/" + asset)));
-
-    const tagName = `AppStore release ${projectPackage.name.replace(/^\w/, (c: string) => c.toUpperCase())} v${
-        projectPackage.version
-    }`;
-
+    const branch = await getBranchName();
     const options = {
         // eslint-disable-next-line @typescript-eslint/camelcase
         tag_name: `${projectPackage.name}-v${projectPackage.version}`,
@@ -88,17 +86,17 @@ async function releaseWithAuth(auth: TokenData, projectPackage: any): Promise<st
         auth,
         workpath: projectPackage.path,
         // eslint-disable-next-line @typescript-eslint/camelcase
-        target_commitish: "master",
+        target_commitish: branch,
         draft: true
     };
 
-    return new Promise(resolve => {
-        ghRelease(options, (error: string, result: { html_url: string }) => {
-            if (error) {
-                return handleError(error);
-            }
-            resolve(result.html_url);
-        });
+    ghRelease(options, (error: string, result: { html_url: string }) => {
+        if (error) {
+            return handleError(error);
+        }
+        // eslint-disable-next-line no-console
+        console.log(result.html_url);
+        return Promise.resolve();
     });
 }
 
@@ -106,6 +104,18 @@ function handleError(error: any): void {
     // eslint-disable-next-line no-console
     console.error(error);
     process.exit(1);
+}
+
+function execute(command: string): Promise<string> {
+    return new Promise(resolve => {
+        exec(command, (_error, stdout) => {
+            resolve(stdout);
+        });
+    });
+}
+
+function getBranchName(): Promise<string> {
+    return execute("git rev-parse --abbrev-ref HEAD");
 }
 
 function createChangeLog(description: string, version: string, path: string): Promise<void> {
@@ -135,7 +145,11 @@ function zipTestProjects(path: string): Promise<boolean> {
                 resolve(true);
             });
         } else {
-            return resolve(false);
+            // eslint-disable-next-line no-console
+            console.log("Successfully ziped the TestProjects");
+            return Promise.resolve(true);
         }
+        return Promise.resolve(true);
     });
+    return Promise.resolve(false);
 }
