@@ -98,6 +98,9 @@ jobs:
                   - android-28
           before_script:
               - android list targets
+              - mkdir ~/.android
+              - echo 'count=0' > ~/.android/repositories.cfg;
+              - yes | sdkmanager --licenses >/dev/null
               - echo y | sdkmanager --no_https "platforms;android-28" >/dev/null
               - echo y | sdkmanager --no_https "system-images;android-28;default;x86_64" >/dev/null
               - echo no | avdmanager create avd --force -n test -k "system-images;android-28;default;x86_64" -c 100M
