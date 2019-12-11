@@ -1,13 +1,15 @@
 {
     "include": ["specs/**/*"],
     "compilerOptions": {
+        "module": "commonjs",
+        "allowJs": true,
         "allowSyntheticDefaultImports": true,
-        "module": "es6",
-        "target": "esnext",
+        "esModuleInterop": true,
+        "jsx": "react-native",
+        "lib": ["es6"],
         "moduleResolution": "node",
         "noEmit": true,
-        "skipLibCheck": true,
         "strict": true,
-        "types": ["detox", "jest"]
+        "target": "esnext"
     }
 }

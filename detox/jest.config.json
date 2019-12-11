@@ -1,10 +1,5 @@
 {
     "preset": "ts-jest",
-    "globals": {
-        "ts-jest": {
-            "tsConfig": "./tsconfig.json"
-        }
-    },
     "testEnvironment": "node",
     "setupFilesAfterEnv": ["./jest.startup.js"],
     "reporters": ["detox/runners/jest/streamlineReporter", ["jest-junit", { "outputDirectory": "./results" }]],
