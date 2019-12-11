@@ -43,6 +43,7 @@ export * from "./core/widgets/rangeslider";
 export * from "./core/helpers/rangeslider";
 export * from "./core/widgets/rating";
 export * from "./core/widgets/referenceselector";
+export * from "./core/widgets/safeareaview";
 export * from "./core/widgets/slider";
 export * from "./core/helpers/slider";
 export * from "./core/widgets/tabcontainer";
