@@ -104,7 +104,7 @@ jobs:
                   - sys-img-x86-google_apis-28
           before_script:
               - android list sdk --extended --no-ui --all
-              - echo no | android create avd --force -n EMULATOR -t android-28
+              - echo no | android create avd --force -n EMULATOR -t android-28 -b google_apis/x86
               - emulator -avd EMULATOR -no-audio -no-window &
               - android-wait-for-emulator
           script:
