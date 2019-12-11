@@ -100,10 +100,11 @@ jobs:
                   - extra-google-m2repository
                   - extra-android-m2repository
                   - sys-img-x86-android-28
-                  - sys-img-armeabi-v7a-google_apis-28
+                  - sys-img-x86_64-google_apis-28
+                  - sys-img-x86-google_apis-28
           before_script:
               - android list sdk --extended --no-ui --all
-              - echo no | android create avd --force -n EMULATOR -t android-28 --abi google_apis/armeabi-v7a
+              - echo no | android create avd --force -n EMULATOR -t android-28
               - emulator -avd EMULATOR -no-audio -no-window &
               - android-wait-for-emulator
           script:
