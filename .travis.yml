@@ -80,6 +80,7 @@ jobs:
         - name: "Android Automated tests"
           sudo: required
           language: android
+          dist: trusty
           env:
               - REACT_NATIVE_VERSION=0.59.9
           before_install:
@@ -98,10 +99,11 @@ jobs:
                   - extra-google-google_play_services
                   - extra-google-m2repository
                   - extra-android-m2repository
-                  - sys-img-x86-android-26
                   - sys-img-x86-android-28
+                  - sys-img-armeabi-v7a-google_apis-28
           before_script:
-              - echo no | android create avd --force -n EMULATOR -t android-28
+              - android list sdk --extended --no-ui --all
+              - echo no | android create avd --force -n EMULATOR -t android-28 --abi google_apis/armeabi-v7a
               - emulator -avd EMULATOR -no-audio -no-window &
               - android-wait-for-emulator
           script:
