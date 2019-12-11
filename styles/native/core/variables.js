@@ -63,9 +63,9 @@ let font = {
     sizeH5: adjustFont(14),
     sizeH6: adjustFont(12),
     color: setColorBasedOnBackground(background.primary),
-    weightLight: "100",
+    weightLight: "100",  // Only supported on iOS, will be 'Normal' on Android
     weightNormal: "normal",
-    weightSemiBold: "600",
+    weightSemiBold: "600", // Only supported on iOS, will be 'Bold' on Android
     weightBold: "bold",
     family: Platform.select({ ios: "System", android: "normal" }),
 };
@@ -198,8 +198,8 @@ listview = merge(listview, custom.listview || {});
 
 // Layoutgrid Styles
 let layoutgrid = {
-    gutterSize: 15
+    gutterSize: 15,
 };
 layoutgrid = merge(layoutgrid, custom.layoutgrid || {});
 
-export { brand, background, border, contrast, font, spacing, button, input, navigation, listview , layoutgrid};
+export { brand, background, border, contrast, font, spacing, button, input, navigation, listview, layoutgrid };
