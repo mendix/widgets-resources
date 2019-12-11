@@ -155,12 +155,13 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
 
     private onUpdate(values: number[]): void {
         const { mxObject, lowerBoundAttribute, upperBoundAttribute } = this.props;
+
         if (mxObject && this.validValues(values)) {
-            if (values[0] !== this.state.lowerBoundValue) {
+            if (values[0] !== this.state.lowerBoundValue && !mxObject.isReadonlyAttr(lowerBoundAttribute)) {
                 this.selfUpdate = true;
                 mxObject.set(lowerBoundAttribute, values[0]);
             }
-            if (values[1] !== this.state.upperBoundValue) {
+            if (values[1] !== this.state.upperBoundValue && !mxObject.isReadonlyAttr(upperBoundAttribute)) {
                 this.selfUpdate = true;
                 mxObject.set(upperBoundAttribute, values[1]);
             }
