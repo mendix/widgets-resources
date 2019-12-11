@@ -107,7 +107,7 @@ jobs:
                   - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
                   - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
           before_script:
-              - echo no | android create avd --force -n test -t android-$ANDROID_API_LEVEL --abi armeabi-v7a
+              - echo no | android create avd --force -n test -t android-28 --abi armeabi-v7a
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:android; else echo "No native package changed. Skipping android tests"; fi
 notifications:
