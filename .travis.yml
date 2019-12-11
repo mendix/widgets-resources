@@ -99,7 +99,7 @@ jobs:
                   - sys-img-x86-google_apis-29
           before_script:
               - android list sdk --extended --no-ui --all
-              - echo no | android create avd --force -n EMULATOR -t android-29
+              - android create avd --force -n EMULATOR -t android-29 --abi default/x86
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:android; else echo "No native package changed. Skipping android tests"; fi
 notifications:
