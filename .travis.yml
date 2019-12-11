@@ -102,6 +102,9 @@ jobs:
               - nvm install node
               - node -v
               - npm -v
+          install:
+              - npm ci
+              - npm install -g detox-cli
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:android; else echo "No native package changed. Skipping android tests"; fi
 notifications:
