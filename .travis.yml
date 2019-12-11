@@ -78,6 +78,7 @@ jobs:
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:ios; else echo "No native package changed. Skipping ios tests"; fi
         - name: "Android Automated tests"
+          language: java
           env:
               - ANDROID_HOME=${HOME}/android-sdk
               - ANDROID_TOOLS_URL="https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip"
@@ -100,14 +101,6 @@ jobs:
               - nvm install node
               - node -v
               - npm -v
-          #          android:
-          #              components:
-          #                  - tools
-          #                  - platform-tools
-          #                  - build-tools-28.0.3
-          #                  - android-28
-          before_script:
-              - echo no | avdmanager create avd --force -n EMULATOR -k "system-images;android-28;default;x86_64" -c 100M
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:android; else echo "No native package changed. Skipping android tests"; fi
 notifications:
