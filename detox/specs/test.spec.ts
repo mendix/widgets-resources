@@ -1,11 +1,18 @@
-import { device, element, by } from "detox";
+import { device, element, by, expect } from "detox";
 
-describe("A test", () => {
+describe("A simple test", () => {
     beforeEach(async () => {
         await device.reloadReactNative();
     });
 
-    it("should work", async () => {
-        await expect(element(by.id("welcome"))).not.toBeDefined();
+    it("should click on badge button", async () => {
+        await element(by.id("actionButton18")).tap();
+        const inputText = await element(by.id("textBox1"));
+        const badgeStyleText = await element(by.id("text2"));
+        await inputText.tap();
+        await inputText.clearText();
+        await inputText.typeText("123");
+        await badgeStyleText.tap();
+        expect(inputText).toHaveText("123");
     });
 });
