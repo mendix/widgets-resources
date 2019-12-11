@@ -98,7 +98,7 @@ jobs:
               - echo y | sdkmanager --no_https "platforms;android-28" >/dev/null
               - echo y | sdkmanager --no_https "system-images;android-28;default;x86_64" >/dev/null
               - echo y | sdkmanager --no_https "emulator" >/dev/null
-              - echo no | avdmanager create avd --force -n EMULATOR -k "system-images;android-28;default;x86_64" -d 'pixel_xl' -c 256
+              - echo no | avdmanager create avd --force -n EMULATOR -k "system-images;android-28;default;x86_64" -d 'pixel_xl' -c 256M
               - emulator -avd EMULATOR -no-window -no-audio
               - nvm install node
               - node -v
