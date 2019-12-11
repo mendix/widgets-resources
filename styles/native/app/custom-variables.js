@@ -190,3 +190,8 @@ export const listview = {
         width: border.width,
     },
 };
+
+// Layoutgrid Styles
+export const layoutgrid = {
+    gutterSize: 15
+};

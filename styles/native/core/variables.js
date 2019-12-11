@@ -196,4 +196,10 @@ let listview = {
 };
 listview = merge(listview, custom.listview || {});
 
-export { brand, background, border, contrast, font, spacing, button, input, navigation, listview };
+// Layoutgrid Styles
+let layoutgrid = {
+    gutterSize: 15
+};
+layoutgrid = merge(layoutgrid, custom.layoutgrid || {});
+
+export { brand, background, border, contrast, font, spacing, button, input, navigation, listview , layoutgrid};
