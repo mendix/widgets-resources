@@ -16,6 +16,10 @@ env:
         - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" == "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
         # Set arguments so lerna only runs scripts in changed packages
         - SCRIPT_ARGS=$(if [ "$PARTIAL_BUILD" == "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
+        - ANDROID_API=28
+        - EMULATOR_API=28
+        - ANDROID_BUILD_TOOLS=28.0.3
+        - ADB_INSTALL_TIMEOUT=5 # minutes
 before_script:
     - echo $TRAVIS_COMMIT_RANGE
     - echo $NATIVE_PROJECTS
@@ -94,12 +98,16 @@ jobs:
               components:
                   - tools
                   - platform-tools
-                  - build-tools-29.0.2
-                  - android-29
-                  - sys-img-x86-google_apis-29
+                  - build-tools-$ANDROID_BUILD_TOOLS
+                  - android-$ANDROID_API
+                  - android-$EMULATOR_API_LEVEL
+                  - extra-google-m2repository
+                  - extra-android-m2repository
+                  - addon-google_apis-google-$ANDROID_API_LEVEL
+                  - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
+                  - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
           before_script:
-              - android list sdk --extended --no-ui --all
-              - android create avd --force -n EMULATOR -t android-29 --abi default/x86
+              - echo no | android create avd --force -n test -t android-$ANDROID_API_LEVEL --abi armeabi-v7a
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:android; else echo "No native package changed. Skipping android tests"; fi
 notifications:
