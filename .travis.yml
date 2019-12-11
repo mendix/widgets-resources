@@ -79,8 +79,7 @@ jobs:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:ios; else echo "No native package changed. Skipping ios tests"; fi
         - name: "Android Automated tests"
           language: java
-          jdk:
-              - oraclejdk8
+          dist: trusty
           env:
               - ANDROID_HOME=${HOME}/android-sdk
               - ANDROID_TOOLS_URL="https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip"
