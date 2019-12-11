@@ -96,16 +96,11 @@ jobs:
                   - platform-tools
                   - build-tools-28.0.3
                   - android-28
-                  - extra-google-google_play_services
-                  - extra-google-m2repository
-                  - extra-android-m2repository
-                  - sys-img-x86-android-28
           before_script:
-              - echo y | sdkmanager "ndk-bundle"
-              - echo y | sdkmanager "platforms;android-28"
-              - export ANDROID_NDK_HOME=$ANDROID_HOME/ndk-bundle
               - android list targets
-              - echo no | android create avd --force -n EMULATOR -t android-28 --abi x86
+              - echo y | sdkmanager --no_https "platforms;android-28" >/dev/null
+              - echo y | sdkmanager --no_https "system-images;android-28;default;x86_64" >/dev/null
+              - echo no | avdmanager create avd --force -n test -k "system-images;android-28;default;x86_64" -c 100M
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:android; else echo "No native package changed. Skipping android tests"; fi
 notifications:
