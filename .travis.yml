@@ -78,9 +78,7 @@ jobs:
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:ios; else echo "No native package changed. Skipping ios tests"; fi
         - name: "Android Automated tests"
-          language: android
           env:
-              - REACT_NATIVE_VERSION=0.59.9
               - ANDROID_HOME=${HOME}/android-sdk
               - ANDROID_TOOLS_URL="https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip"
               - TOOLS=${ANDROID_HOME}/tools
@@ -89,6 +87,7 @@ jobs:
               - wget -q "${ANDROID_TOOLS_URL}" -O android-sdk-tools.zip
               - unzip -q android-sdk-tools.zip -d ${ANDROID_HOME}
               - rm android-sdk-tools.zip
+              - mkdir ~/.android
               - echo 'count=0' > ~/.android/repositories.cfg
               - yes | sdkmanager --licenses >/dev/null
               - echo y | sdkmanager --no_https "platform-tools" >/dev/null
