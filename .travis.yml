@@ -87,9 +87,6 @@ jobs:
               - nvm install node
               - node -v
               - npm -v
-          install:
-              - npm ci
-              - npm install -g detox-cli
           android:
               components:
                   - tools
@@ -98,7 +95,6 @@ jobs:
                   - android-28
           before_script:
               - android list targets
-              - mkdir ~/.android
               - echo 'count=0' > ~/.android/repositories.cfg;
               - yes | sdkmanager --licenses >/dev/null
               - echo y | sdkmanager --no_https "platforms;android-28" >/dev/null
