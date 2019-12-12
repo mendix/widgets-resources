@@ -76,23 +76,23 @@ jobs:
               - brew install applesimutils --HEAD
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:ios; else echo "No native package changed. Skipping ios tests"; fi
-        - name: "Android Automated tests"
-          language: android
-          dist: trusty
-          android:
-              components:
-                  - build-tools-25.0.2
-                  - android-25
-                  - sys-img-armeabi-v7a-google_apis-25
-          before_install:
-              - echo no | android create avd --force -n EMULATOR -t android-25 --abi google_apis/armeabi-v7a -c 100M
-              - nvm install node
-              - node -v
-              - npm -v
-          install:
-              - npm install -g detox-cli
-          script:
-              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:android; else echo "No native package changed. Skipping android tests"; fi
+#        - name: "Android Automated tests"
+#          language: android
+#          dist: trusty
+#          android:
+#              components:
+#                  - build-tools-25.0.2
+#                  - android-25
+#                  - sys-img-armeabi-v7a-google_apis-25
+#          before_install:
+#              - echo no | android create avd --force -n EMULATOR -t android-25 --abi google_apis/armeabi-v7a -c 100M
+#              - nvm install node
+#              - node -v
+#              - npm -v
+#          install:
+#              - npm install -g detox-cli
+#          script:
+#              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:android; else echo "No native package changed. Skipping android tests"; fi
 notifications:
     email:
         recipients:
