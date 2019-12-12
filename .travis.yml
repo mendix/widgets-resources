@@ -76,8 +76,31 @@ jobs:
               - brew install applesimutils --HEAD
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:ios; else echo "No native package changed. Skipping ios tests"; fi
-#        - name: "Android Automated tests"
-#          language: android
+        - name: "Android Automated tests"
+          language: node
+          os: osx
+          osx_image: xcode11.2
+          env:
+              - PATH=$PATH:~/Library/Python/2.7/bin
+          before_install:
+              - nvm install node
+              - node -v
+              - npm -v
+          install:
+              - npm install -g detox-cli
+              - gem install xcpretty
+              - brew tap wix/brew
+              - brew install android-platform-tools
+          before_script:
+              - yes | sdkmanager --licenses >/dev/null
+              - echo y | sdkmanager --no_https "platform-tools" >/dev/null
+              - echo y | sdkmanager --no_https "tools" >/dev/null
+              - echo y | sdkmanager --no_https "build-tools;28.0.3" >/dev/null
+              - echo y | sdkmanager --no_https "platforms;android-28" >/dev/null
+              - echo y | sdkmanager --no_https "system-images;android-28;google_apis;x86" >/dev/null
+              - avdmanager -s create avd -n EMULATOR -k 'system-images;android-28;google_apis;x86' -f -d 'pixel_xl'
+          script:
+              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:android; else echo "No native package changed. Skipping android tests"; fi
 #          dist: trusty
 #          android:
 #              components:
