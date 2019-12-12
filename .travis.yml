@@ -69,11 +69,11 @@ jobs:
               - nvm install node
               - node -v
               - npm -v
-          install:
               - npm install -g detox-cli
               - gem install xcpretty
               - brew tap wix/brew
               - brew install applesimutils --HEAD
+              - cd detox
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:ios; else echo "No native package changed. Skipping ios tests"; fi
         - name: "Android Automated tests"
@@ -85,11 +85,11 @@ jobs:
               - nvm install node
               - node -v
               - npm -v
-          install:
               - brew tap wix/brew
               - mkdir ~/.android
               - echo 'count=0' > ~/.android/repositories.cfg
               - brew cask install android-sdk
+              - cd detox
           before_script:
               - yes | sdkmanager --licenses >/dev/null
               - echo y | sdkmanager --no_https "platform-tools" >/dev/null
@@ -99,7 +99,7 @@ jobs:
               - echo y | sdkmanager --no_https "system-images;android-28;google_apis;x86" >/dev/null
               - avdmanager -s create avd -n EMULATOR -k 'system-images;android-28;google_apis;x86' -f -d 'pixel_xl'
           script:
-              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:android; else echo "No native package changed. Skipping android tests"; fi
+              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:android; else echo "No native package changed. Skipping android tests"; fi
 #          dist: trusty
 #          android:
 #              components:
