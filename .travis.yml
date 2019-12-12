@@ -79,7 +79,7 @@ jobs:
         - name: "Android Automated tests"
           language: node
           os: osx
-          osx_image: xcode11.2
+          osx_image: xcode9.3
           env:
               - PATH=$PATH:~/Library/Python/2.7/bin
           before_install:
