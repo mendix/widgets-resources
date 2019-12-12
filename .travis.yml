@@ -94,11 +94,11 @@ jobs:
               - yes | sdkmanager --licenses >/dev/null
               - echo y | sdkmanager --no_https "platform-tools" >/dev/null
               - echo y | sdkmanager --no_https "tools" >/dev/null
-              - echo y | sdkmanager --no_https "build-tools;28.0.3" >/dev/null
-              - echo y | sdkmanager --no_https "platforms;android-28" >/dev/null
-              - echo y | sdkmanager --no_https "system-images;android-28;google_apis;x86" >/dev/null
+              - echo y | sdkmanager --no_https "build-tools;26.0.2" >/dev/null
+              - echo y | sdkmanager --no_https "platforms;android-26" >/dev/null
+              - echo y | sdkmanager --no_https "system-images;android-26;google_apis;x86" >/dev/null
               - echo y | sdkmanager --no_https "emulator" >/dev/null
-              - echo no | avdmanager -s create avd --force -n EMULATOR -k "system-images;android-28;google_apis;x86" -d 'pixel_xl'
+              - echo no | avdmanager -s create avd --force -n EMULATOR -k "system-images;android-26;google_apis;x86" -d 'pixel_xl'
               - nvm install node
               - node -v
               - npm -v
