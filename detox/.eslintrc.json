@@ -1,0 +1,26 @@
+{
+    "plugins": ["@typescript-eslint", "import", "promise", "jest"],
+    "extends": [
+        "eslint:recommended",
+        "prettier",
+        "prettier/@typescript-eslint",
+        "plugin:import/typescript",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:promise/recommended",
+        "plugin:jest/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "./tsconfig.json",
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-restricted-globals": ["error", "device", "by", "waitFor", "element", "detox"],
+        "jest/expect-expect": [
+            "error",
+            {
+                "assertFunctionNames": ["expect", "detoxExpect"]
+            }
+        ]
+    }
+}
