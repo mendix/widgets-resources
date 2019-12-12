@@ -79,10 +79,11 @@ jobs:
         - name: "Android Automated tests"
           os: osx
           osx_image: xcode9.3
+          language: objective-c
           env:
               - PATH=$PATH:~/Library/Python/2.7/bin
           before_install:
-              - nvm install node
+              - nvm install 10.17.0
               - node -v
               - npm -v
               - brew tap wix/brew
