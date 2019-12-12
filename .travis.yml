@@ -87,10 +87,7 @@ jobs:
               - node -v
               - npm -v
           install:
-              - npm install -g detox-cli
-              - gem install xcpretty
-              - brew tap wix/brew
-              - brew install android-platform-tools
+              - brew cask install android-platform-tools
           before_script:
               - yes | sdkmanager --licenses >/dev/null
               - echo y | sdkmanager --no_https "platform-tools" >/dev/null
