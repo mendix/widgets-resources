@@ -87,6 +87,7 @@ jobs:
               - node -v
               - npm -v
           install:
+              - brew cask install android-sdk
               - brew cask install android-platform-tools
           before_script:
               - yes | sdkmanager --licenses >/dev/null
