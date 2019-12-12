@@ -75,7 +75,7 @@ jobs:
               - brew install applesimutils --HEAD
               - cd detox
           script:
-              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:ios; else echo "No native package changed. Skipping ios tests"; fi
+              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:ios; else echo "No native package changed. Skipping ios tests"; fi
         - name: "Android Automated tests"
           os: osx
           osx_image: xcode9.3
