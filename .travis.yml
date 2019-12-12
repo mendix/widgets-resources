@@ -91,6 +91,8 @@ jobs:
               - echo 'count=0' > ~/.android/repositories.cfg
               - brew cask install android-sdk
               - cd detox
+          install:
+              - eval npm ci
           before_script:
               - yes | sdkmanager --licenses >/dev/null
               - echo y | sdkmanager --no_https "platform-tools" >/dev/null
