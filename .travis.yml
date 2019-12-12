@@ -86,8 +86,6 @@ jobs:
                   - sys-img-armeabi-v7a-google_apis-25
           before_install:
               - echo no | android create avd --force -n EMULATOR -t android-25 --abi google_apis/armeabi-v7a -c 100M
-              - emulator -avd EMULATOR -no-audio -no-window &
-              - android-wait-for-emulator
               - nvm install node
               - node -v
               - npm -v
