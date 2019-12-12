@@ -77,7 +77,6 @@ jobs:
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:ios; else echo "No native package changed. Skipping ios tests"; fi
         - name: "Android Automated tests"
-          language: node
           os: osx
           osx_image: xcode9.3
           env:
@@ -87,6 +86,7 @@ jobs:
               - node -v
               - npm -v
           install:
+              - brew tap wix/brew
               - brew cask install android-sdk
           before_script:
               - echo 'count=0' > ~/.android/repositories.cfg
