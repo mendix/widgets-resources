@@ -70,7 +70,6 @@ jobs:
               - node -v
               - npm -v
           install:
-              - npm ci
               - npm install -g detox-cli
               - gem install xcpretty
               - brew tap wix/brew
@@ -85,15 +84,15 @@ jobs:
                   - build-tools-26.0.2
                   - android-26
                   - extra
+                  - sys-img-x86-google_apis-26
           before_install:
-              - echo no | avdmanager -s create avd --force -n EMULATOR -k "system-images;android-26;google_apis;x86" -d 'pixel_xl'
+              - echo no | android create avd --force -n EMULATOR -k "system-images;android-26;google_apis;x86" -d 'pixel_xl'
               - emulator -avd test -no-audio -no-window &
               - android-wait-for-emulator
               - nvm install node
               - node -v
               - npm -v
           install:
-              - npm ci
               - npm install -g detox-cli
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:android; else echo "No native package changed. Skipping android tests"; fi

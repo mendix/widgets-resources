@@ -1,0 +1,39 @@
+{
+    "name": "widgets-resources-detox",
+    "copyright": "Mendix BV",
+    "scripts": {
+        "compress:ios": "cd ./ios && tar -cvzf NativeComponents.taz.gz NativeComponents.app",
+        "decompress:ios": "cd ./ios && tar -xvf NativeComponents.taz.gz",
+        "pretest:ios": "npm run decompress:ios",
+        "test:ios": "detox test --configuration ios.simulator --loglevel trace ./specs",
+        "test:android": "detox test --configuration android.emulator --loglevel trace ./specs"
+    },
+    "devDependencies": {
+        "@types/detox": "^14.5.1",
+        "@types/jasmine": "^3.4.4",
+        "detox": "^14.8.5",
+        "jest": "^24.9.0",
+        "typescript": "^3.7.3",
+        "ts-node": "^8.5.4"
+    },
+    "detox": {
+        "test-runner": "jest",
+        "runner-config": "jest.config.json",
+        "configurations": {
+            "ios.simulator": {
+                "binaryPath": "./ios/NativeComponents.app",
+                "type": "ios.simulator",
+                "device": {
+                    "type": "iPhone 11 Pro Max"
+                }
+            },
+            "android.emulator": {
+                "binaryPath": "./android/NativeComponents.apk",
+                "type": "android.emulator",
+                "device": {
+                    "avdName": "EMULATOR"
+                }
+            }
+        }
+    }
+}
