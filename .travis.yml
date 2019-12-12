@@ -78,27 +78,17 @@ jobs:
           script:
               - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:e2e:ios; else echo "No native package changed. Skipping ios tests"; fi
         - name: "Android Automated tests"
-          language: java
+          language: android
           dist: trusty
-          env:
-              - ANDROID_HOME=${HOME}/android-sdk
-              - ANDROID_TOOLS_URL="https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip"
-              - TOOLS=${ANDROID_HOME}/tools
-              - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
+          android:
+              components:
+                  - build-tools-26.0.2
+                  - android-26
+                  - extra
           before_install:
-              - wget -q "${ANDROID_TOOLS_URL}" -O android-sdk-tools.zip
-              - unzip -q android-sdk-tools.zip -d ${ANDROID_HOME}
-              - rm android-sdk-tools.zip
-              - mkdir ~/.android
-              - echo 'count=0' > ~/.android/repositories.cfg
-              - yes | sdkmanager --licenses >/dev/null
-              - echo y | sdkmanager --no_https "platform-tools" >/dev/null
-              - echo y | sdkmanager --no_https "tools" >/dev/null
-              - echo y | sdkmanager --no_https "build-tools;26.0.2" >/dev/null
-              - echo y | sdkmanager --no_https "platforms;android-26" >/dev/null
-              - echo y | sdkmanager --no_https "system-images;android-26;google_apis;x86" >/dev/null
-              - echo y | sdkmanager --no_https "emulator" >/dev/null
               - echo no | avdmanager -s create avd --force -n EMULATOR -k "system-images;android-26;google_apis;x86" -d 'pixel_xl'
+              - emulator -avd test -no-audio -no-window &
+              - android-wait-for-emulator
               - nvm install node
               - node -v
               - npm -v
