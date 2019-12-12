@@ -83,8 +83,8 @@ jobs:
               components:
                   - build-tools-26.0.2
                   - android-26
-                  - extra
-                  - sys-img-armeabi-v7a-google_apis-26
+                  - sys-img-x86-android-26
+                  - sys-img-armeabi-v7a-android-26
           before_install:
               - echo no | android create avd --force -n EMULATOR -t android-26 --abi armeabi-v7a -c 100M
               - emulator -avd test -no-audio -no-window &
