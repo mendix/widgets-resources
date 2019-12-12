@@ -84,9 +84,9 @@ jobs:
                   - build-tools-26.0.2
                   - android-26
                   - extra
-                  - sys-img-x86-google_apis-26
+                  - sys-img-armeabi-v7a-google_apis-26
           before_install:
-              - echo no | android create avd --force -n EMULATOR -k "system-images;android-26;google_apis;x86" -d 'pixel_xl'
+              - echo no | android create avd --force -n EMULATOR -t android-26 --abi armeabi-v7a -c 100M
               - emulator -avd test -no-audio -no-window &
               - android-wait-for-emulator
               - nvm install node
