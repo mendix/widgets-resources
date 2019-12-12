@@ -89,6 +89,7 @@ jobs:
           install:
               - brew cask install android-sdk
           before_script:
+              - echo 'count=0' > ~/.android/repositories.cfg
               - yes | sdkmanager --licenses >/dev/null
               - echo y | sdkmanager --no_https "platform-tools" >/dev/null
               - echo y | sdkmanager --no_https "tools" >/dev/null
