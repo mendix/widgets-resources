@@ -81,12 +81,11 @@ jobs:
           dist: trusty
           android:
               components:
-                  - build-tools-26.0.2
-                  - android-26
-                  - sys-img-x86-android-26
-                  - sys-img-armeabi-v7a-android-26
+                  - build-tools-25.0.2
+                  - android-25
+                  - sys-img-armeabi-v7a-google_apis-25
           before_install:
-              - echo no | android create avd --force -n EMULATOR -t android-26 --abi armeabi-v7a -c 100M
+              - echo no | android create avd --force -n EMULATOR -t android-25 -c 100M
               - emulator -avd test -no-audio -no-window &
               - android-wait-for-emulator
               - nvm install node
