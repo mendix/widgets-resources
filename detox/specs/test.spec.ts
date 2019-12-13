@@ -1,8 +1,10 @@
-import { element, by, expect } from "detox";
+import { element, by, expect, waitFor } from "detox";
 
 describe("A simple test", () => {
     it("should click on badge button", async () => {
-        await element(by.id("actionButton18")).tap();
+        const badgeButton = element(by.id("actionButton18"));
+        await waitFor(badgeButton).toBeVisible();
+        await badgeButton.tap();
         const inputText = await element(by.id("textBox1"));
         const badgeStyleText = await element(by.id("text2"));
         await inputText.tap();

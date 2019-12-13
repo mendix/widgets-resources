@@ -82,9 +82,8 @@ jobs:
           os: osx
           osx_image: xcode11.2
           language: node
-          dist: trusty
           jdk:
-              - oraclejdk8
+              - oraclejdk11
           env:
               - PATH=$PATH:~/Library/Python/2.7/bin
           before_install:
