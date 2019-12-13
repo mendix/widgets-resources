@@ -86,7 +86,7 @@ jobs:
               - PATH=$PATH:~/Library/Python/2.7/bin
           before_install:
               - brew cask uninstall java
-              - brew cask install java8
+              - brew cask install homebrew/cask-versions/adoptopenjdk8
               - nvm install node
               - node -v
               - npm -v
