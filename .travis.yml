@@ -84,6 +84,7 @@ jobs:
           language: objective-c
           env:
               - PATH=$PATH:~/Library/Python/2.7/bin
+              - ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
           before_install:
               - brew cask uninstall java
               - brew cask install homebrew/cask-versions/adoptopenjdk8
