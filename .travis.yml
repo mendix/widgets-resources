@@ -109,8 +109,8 @@ jobs:
               - echo y | sdkmanager "emulator" >/dev/null
               - echo y | sdkmanager "extras;android;m2repository" >/dev/null
               - echo y | sdkmanager "system-images;android-28;google_apis;x86_64" >/dev/null
-              - mv /usr/local/share/android-sdk/emulator /usr/local/share/android-sdk/emulator-backup
-              - mv /usr/local/share/android-sdk/emulator-headless /usr/local/share/android-sdk/emulator
+              - mv /usr/local/share/android-sdk/emulator/emulator /usr/local/share/android-sdk/emulator/emulator-backup
+              - mv /usr/local/share/android-sdk/emulator/emulator-headless /usr/local/share/android-sdk/emulator/emulator
               #              - echo y | sdkmanager "system-images;android-25;google_apis;armeabi-v7a" >/dev/null
               #              - avdmanager -s create avd -n EMULATOR -k 'system-images;android-25;google_apis;armeabi-v7a' -f -d 'pixel_xl'
               - avdmanager -s create avd -n EMULATOR -k 'system-images;android-28;google_apis;x86_64' -f -d 'pixel_xl'
