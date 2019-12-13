@@ -82,6 +82,7 @@ jobs:
           os: osx
           osx_image: xcode11.2
           language: node
+          dist: trusty
           jdk:
               - oraclejdk8
           env:
