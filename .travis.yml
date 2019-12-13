@@ -82,11 +82,12 @@ jobs:
           os: osx
           osx_image: xcode11.2
           language: node
-          jdk:
-              - oraclejdk11
           env:
               - PATH=$PATH:~/Library/Python/2.7/bin
           before_install:
+              - brew cask uninstall java
+              - brew tap caskroom/versions
+              - brew cask install java8
               - nvm install node
               - node -v
               - npm -v
