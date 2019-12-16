@@ -18,15 +18,17 @@ env:
         - SCRIPT_ARGS=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
         - ADB_INSTALL_TIMEOUT=8
 stages:
+    - pre-build
     - build
     - tests
 jobs:
     include:
-        - stage: build
+        - stage: pre-build
           name: "Lint"
           script:
               - npm run lint -- $SCRIPT_ARGS
-        - name: "Build"
+        - stage: build
+          name: "Build"
           script:
               - npm run build -- $SCRIPT_ARGS
         - name: "Build on Windows"
