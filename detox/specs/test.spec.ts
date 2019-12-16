@@ -6,8 +6,8 @@ describe("A simple test", () => {
     });
     
     it("should click on badge button", async () => {
-        const badgeButton = await element(by.id("actionButton18"));
-        await waitFor(badgeButton).toBeVisible();
+        const badgeButton = element(by.id("actionButton18"));
+        await waitFor(badgeButton).toExist().withTimeout(2000);
         await badgeButton.tap();
 
         const inputText = await element(by.id("textBox1"));
