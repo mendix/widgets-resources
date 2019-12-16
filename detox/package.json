@@ -6,8 +6,7 @@
         "decompress:ios": "cd ./ios && tar -xvf NativeComponents.taz.gz",
         "pretest:ios": "npm run decompress:ios",
         "test:ios": "detox test --configuration ios.simulator --loglevel trace ./specs",
-        "test:android": "echo 'Skipped'",
-        "test:android:local": "detox test --headless --cleanup --configuration android.emulator --loglevel trace ./specs"
+        "test:android": "detox test --headless --cleanup --configuration android.emulator --loglevel trace ./specs"
     },
     "devDependencies": {
         "@babel/core": "^7.7.2",
@@ -34,6 +33,7 @@
             },
             "android.emulator": {
                 "binaryPath": "./android/NativeComponents.apk",
+                "testBinaryPath": "./android/NativeComponents-androidTest.apk",
                 "type": "android.emulator",
                 "device": {
                     "avdName": "EMULATOR"
