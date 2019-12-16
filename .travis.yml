@@ -17,6 +17,8 @@ env:
         # Set arguments so lerna only runs scripts in changed packages
         - SCRIPT_ARGS=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
         - ADB_INSTALL_TIMEOUT=8
+before_script:
+    - echo $(git diff --name-only $TRAVIS_COMMIT_RANGE)
 stages:
     - pre-build
     - build
@@ -51,6 +53,8 @@ jobs:
               - export DISPLAY=:99.0
               - sh -e /etc/init.d/xvfb start
               - sleep 3
+          before_script:
+              - echo $WEB_PROJECTS
           script:
               - if [ "$WEB_PROJECTS" = "true" ] && [ "$PARTIAL_BUILD" = "true" ]; then travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS; else echo "No individuals web package changed. Skipping tests"; fi
         - name: "iOS Automated tests"
