@@ -61,6 +61,7 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
             }
             this.setState(this.updateValues(mxObject));
         };
+        this.resetSubscriptions(props.mxObject);
     }
 
     render(): ReactNode {

@@ -36,6 +36,11 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
         isFetchingData: false
     };
 
+    constructor(props: MapsContainerProps) {
+        super(props);
+        this.resetSubscriptions(props.mxObject);
+    }
+
     render(): ReactNode {
         const mapsApiToken = this.props.apiToken ? this.props.apiToken.replace(/ /g, "") : undefined;
         const commonProps = {

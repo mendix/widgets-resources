@@ -60,9 +60,10 @@ class ProgressBarContainer extends Component<ProgressBarContainerProps, Progress
         defaultState.showAlert = !!defaultState.alertMessage;
         defaultState.displayTextAttributeValue = "";
         this.state = defaultState;
-        this.subscriptionHandles = [];
         this.handleClick = this.handleClick.bind(this);
         this.subscriptionCallback = mxObject => () => this.setState(this.updateValues(mxObject));
+        this.subscriptionHandles = [];
+        this.resetSubscription(props.mxObject);
     }
 
     render(): ReactNode {

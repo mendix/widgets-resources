@@ -47,6 +47,7 @@ class RichTextContainer extends Component<RichTextContainerProps, RichTextContai
             alertMessage: "",
             value: getValue(props.stringAttribute, "", props.mxObject) as string
         };
+        this.resetSubscriptions(props.mxObject);
     }
 
     componentWillMount(): void {

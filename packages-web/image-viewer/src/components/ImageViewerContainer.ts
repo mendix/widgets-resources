@@ -60,6 +60,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         this.attributeCallback = mxObject => () => this.setImageUrl(mxObject);
         this.executeAction = this.executeAction.bind(this);
         this.setImageUrl = this.setImageUrl.bind(this);
+        this.resetSubscriptions(props.mxObject);
     }
 
     render(): ReactNode {

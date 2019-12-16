@@ -65,6 +65,7 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
         this.subscriptionHandles = [];
         this.handleOnClick = this.handleOnClick.bind(this);
         this.attributeCallback = mxObject => () => this.updateAttributeValues(mxObject);
+        this.resetSubscription(props.mxObject);
     }
 
     render(): ReactNode {
