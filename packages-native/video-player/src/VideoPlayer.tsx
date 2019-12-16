@@ -47,6 +47,7 @@ export class VideoPlayer extends Component<Props, State> {
                     <Text style={this.styles.errorMessage}>The video failed to load :(</Text>
                 )}
                 <Video
+                    testID={this.props.name}
                     source={{ uri }}
                     paused={!this.props.autoStart}
                     muted={this.props.muted}

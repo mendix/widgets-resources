@@ -60,6 +60,7 @@ export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Elem
         <Modal visible={visible} transparent={props.showMode === "popup"}>
             <View style={props.showMode === "fullscreen" ? styles.fullscreenContainer : styles.popupContainer}>
                 <SwipeableContainer
+                    testID={props.name}
                     slides={props.slides}
                     onDone={onDone}
                     onSlideChange={onSlideChange}
