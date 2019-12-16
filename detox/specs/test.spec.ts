@@ -8,8 +8,6 @@ describe("A simple test", () => {
 
         const inputText = await element(by.id("textBox1"));
         const badgeStyleText = await element(by.id("text2"));
-        await waitFor(inputText).toBeVisible();
-        await waitFor(badgeStyleText).toBeVisible();
         await inputText.tap();
         await inputText.clearText();
         await inputText.typeText("123");
