@@ -28,7 +28,7 @@ jobs:
           script:
               - npm run lint -- $SCRIPT_ARGS
         - stage: build
-          name: "Build"
+          name: "Build on Linux"
           script:
               - npm run build -- $SCRIPT_ARGS
         - name: "Build on Windows"
