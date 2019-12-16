@@ -71,37 +71,37 @@ jobs:
               - npm ci
           script:
               - if [ "$NATIVE_PROJECTS" = "true" ]; then npm run test:ios; else echo "No native package changed. Skipping ios tests"; fi
-        - name: "Android Automated tests"
-          os: osx
-          osx_image: xcode11.2
-          language: objective-c
-          env:
-              - PATH=$PATH:~/Library/Python/2.7/bin
-              - ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
-          before_install:
-              - brew cask uninstall java
-              - brew cask install homebrew/cask-versions/adoptopenjdk8
-              - nvm install node
-              - brew tap wix/brew
-              - mkdir ~/.android
-              - echo 'count=0' > ~/.android/repositories.cfg
-              - brew cask install android-sdk
-              - cd detox
-          install:
-              - npm ci
-          before_script:
-              - echo y | sdkmanager --licenses >/dev/null
-              - echo y | sdkmanager "platform-tools" >/dev/null
-              - echo y | sdkmanager "tools" >/dev/null
-              - echo y | sdkmanager "build-tools;28.0.3" >/dev/null
-              - echo y | sdkmanager "platforms;android-28" >/dev/null
-              - echo y | sdkmanager "platforms;android-25" >/dev/null
-              - echo y | sdkmanager "emulator" >/dev/null
-              - echo y | sdkmanager "extras;android;m2repository" >/dev/null
-              - echo y | sdkmanager "system-images;android-25;google_apis;armeabi-v7a" >/dev/null
-              - avdmanager -s create avd -n EMULATOR -k 'system-images;android-25;google_apis;armeabi-v7a' -f -d 'pixel_xl'
-          script:
-              - if [ "$NATIVE_PROJECTS" = "true" ]; then npm run test:android; else echo "No native package changed. Skipping android tests"; fi
+#        - name: "Android Automated tests"
+#          os: osx
+#          osx_image: xcode11.2
+#          language: objective-c
+#          env:
+#              - PATH=$PATH:~/Library/Python/2.7/bin
+#              - ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
+#          before_install:
+#              - brew cask uninstall java
+#              - brew cask install homebrew/cask-versions/adoptopenjdk8
+#              - nvm install node
+#              - brew tap wix/brew
+#              - mkdir ~/.android
+#              - echo 'count=0' > ~/.android/repositories.cfg
+#              - brew cask install android-sdk
+#              - cd detox
+#          install:
+#              - npm ci
+#          before_script:
+#              - echo y | sdkmanager --licenses >/dev/null
+#              - echo y | sdkmanager "platform-tools" >/dev/null
+#              - echo y | sdkmanager "tools" >/dev/null
+#              - echo y | sdkmanager "build-tools;28.0.3" >/dev/null
+#              - echo y | sdkmanager "platforms;android-28" >/dev/null
+#              - echo y | sdkmanager "platforms;android-25" >/dev/null
+#              - echo y | sdkmanager "emulator" >/dev/null
+#              - echo y | sdkmanager "extras;android;m2repository" >/dev/null
+#              - echo y | sdkmanager "system-images;android-25;google_apis;armeabi-v7a" >/dev/null
+#              - avdmanager -s create avd -n EMULATOR -k 'system-images;android-25;google_apis;armeabi-v7a' -f -d 'pixel_xl'
+#          script:
+#              - if [ "$NATIVE_PROJECTS" = "true" ]; then npm run test:android; else echo "No native package changed. Skipping android tests"; fi
 notifications:
     slack:
         template:
