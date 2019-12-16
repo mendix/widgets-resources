@@ -1,0 +1,44 @@
+{
+    "name": "widgets-resources-detox",
+    "copyright": "Mendix BV",
+    "scripts": {
+        "compress:ios": "cd ./ios && tar -cvzf NativeComponents.taz.gz NativeComponents.app",
+        "decompress:ios": "cd ./ios && tar -xvf NativeComponents.taz.gz",
+        "pretest:ios": "npm run decompress:ios",
+        "test:ios": "detox test --configuration ios.simulator --loglevel trace ./specs",
+        "test:android": "detox test --headless --configuration android.emulator ./specs"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.7.2",
+        "@babel/preset-env": "^7.7.1",
+        "@types/detox": "^14.5.1",
+        "@types/jest": "^24.0.23",
+        "babel-jest": "^24.9.0",
+        "detox": "^14.9.1",
+        "jest": "^24.9.0",
+        "jest-junit": "^9.0.0",
+        "ts-jest": "^24.1.0",
+        "typescript": "^3.7.2"
+    },
+    "detox": {
+        "test-runner": "jest",
+        "runner-config": "./jest.config.json",
+        "configurations": {
+            "ios.simulator": {
+                "binaryPath": "./ios/NativeComponents.app",
+                "type": "ios.simulator",
+                "device": {
+                    "type": "iPhone 11 Pro Max"
+                }
+            },
+            "android.emulator": {
+                "binaryPath": "./android/NativeComponents.apk",
+                "testBinaryPath": "./android/NativeComponents-androidTest.apk",
+                "type": "android.emulator",
+                "device": {
+                    "avdName": "EMULATOR"
+                }
+            }
+        }
+    }
+}

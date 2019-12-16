@@ -1,0 +1,8 @@
+{
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": ["./jest.startup.js"],
+    "reporters": ["detox/runners/jest/streamlineReporter", ["jest-junit", { "outputDirectory": "./results" }]],
+    "verbose": true,
+    "forceExit": true
+}

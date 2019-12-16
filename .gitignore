@@ -27,3 +27,7 @@ coverage
 packages-hybrid/hybrid-mobile-actions/tests/TestProjects/*/theme/styles/native/
 packages-hybrid/hybrid-mobile-actions/tests/TestProjects/*/theme/settings-native.json
 packages-hybrid/hybrid-mobile-actions/tests/TestProjects/*/theme/styles.js
+
+detox/ios/NativeComponents.app
+detox/*.log
+detox/results

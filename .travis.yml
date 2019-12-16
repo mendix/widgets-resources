@@ -8,20 +8,73 @@ env:
     global:
         # List of all touched files, excluding paths starting with 'packages'
         - CHANGED_GLOBAL_FILES=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep -v "^packages")
+        - CHANGED_WEB_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "packages-web")
+        - CHANGED_NATIVE_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "packages-native")
+        - NATIVE_PROJECTS=$(if [ "$CHANGED_NATIVE_PROJECTS" != "" ]; then echo "true"; else echo "false"; fi)
+        - WEB_PROJECTS=$(if [ "$CHANGED_WEB_PROJECTS" != "" ]; then echo "true"; else echo "false"; fi)
         # Build only touched packages for pull requests when no shared files were touched
-        - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" == "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
+        - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
         # Set arguments so lerna only runs scripts in changed packages
         - SCRIPT_ARGS=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
-before_script:
-    - echo $TRAVIS_COMMIT_RANGE
-    - echo $CHANGED_GLOBAL_FILES
-    - echo $PARTIAL_BUILD
-    - echo $SCRIPT_ARGS
+        - ADB_INSTALL_TIMEOUT=8
+stages:
+    - pre-build
+    - build
+    - tests
 jobs:
     include:
-        - name: "Lint"
-          script: npm run lint -- $SCRIPT_ARGS
-        - name: "Build"
-          script: npm run build -- $SCRIPT_ARGS
-        - name: "Unit tests"
-          script: npm test -- $SCRIPT_ARGS
+        - stage: pre-build
+          name: "Lint"
+          script:
+              - npm run lint -- $SCRIPT_ARGS
+        - stage: build
+          name: "Build on Linux"
+          script:
+              - npm run build -- $SCRIPT_ARGS
+        - name: "Build on Windows"
+          os: windows
+          script:
+              - npm run build -- $SCRIPT_ARGS
+        - stage: tests
+          name: "Jest unit tests"
+          script:
+              - npm run test -- $SCRIPT_ARGS
+        - name: "Web Automated Tests"
+          fast_finish: true
+          dist: trusty
+          addons:
+              chrome: stable
+          services:
+              - xvfb
+          before_install:
+              - export CHROME_BIN=chromium-browser
+              - export DISPLAY=:99.0
+              - sh -e /etc/init.d/xvfb start
+              - sleep 3
+          script:
+              - if [ "$WEB_PROJECTS" = "true" ] && [ "$PARTIAL_BUILD" = "true" ]; then travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS; else echo "No individuals web package changed. Skipping tests"; fi
+        - name: "iOS Automated tests"
+          language: objective-c
+          os: osx
+          osx_image: xcode11.2
+          env:
+              - REACT_NATIVE_VERSION=0.59.9
+              - PATH=$PATH:~/Library/Python/2.7/bin
+              - CODE_SIGNING_REQUIRED=NO
+          before_install:
+              - nvm install node
+              - gem install xcpretty
+              - brew tap wix/brew
+              - brew install applesimutils --HEAD
+              - cd detox
+          install:
+              - npm ci
+          script:
+              - if [ "$NATIVE_PROJECTS" = "true" ]; then npm run test:ios; else echo "No native package changed. Skipping ios tests"; fi
+notifications:
+    slack:
+        template:
+            - "Build <%{build_url}|#%{build_number}> of %{repository_slug}@%{branch} in PR <%{pull_request_url}|#%{pull_request_number}> by %{author} %{result} in %{duration}"
+        rooms:
+            - mendix:${SLACK_KEY}#widget-team-private
+        on_pull_requests: true

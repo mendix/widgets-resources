@@ -9,17 +9,16 @@
     },
     "config": {
         "widgetPath": "../test-project/mxproject/widgets",
-        "projectPath": "../test-project/mxproject",
-        "subprojectFolder": "packages-native/notifications"
+        "projectPath": "../test-project/mxproject"
     },
     "packagePath": "com.mendix.widget.native",
     "scripts": {
-        "start": "../../node_modules/.bin/pluggable-widgets-tools start:ts:native -- --subprojectPath $npm_package_config_subprojectFolder",
-        "build": "../../node_modules/.bin/pluggable-widgets-tools build:ts:native --subprojectPath $npm_package_config_subprojectFolder",
-        "release": "../../node_modules/.bin/pluggable-widgets-tools release:ts:native --subprojectPath $npm_package_config_subprojectFolder",
-        "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "start": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:ts:native -- --subprojectPath packages-native/notifications",
+        "build": "..\"/../node_modules/.bin/pluggable-widgets-tools\" build:ts:native --subprojectPath packages-native/notifications",
+        "release": "..\"/../node_modules/.bin/pluggable-widgets-tools\" release:ts:native packages-native/notifications",
+        "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "version": "npm run release",
-        "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
+        "postversion": "..\"/../node_modules/.bin/ts-node\" ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
     },
     "dependencies": {
         "@widgets-resources/piw-utils": "^1.0.0"

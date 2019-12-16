@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const debug = process.env.DEBUG;
+const browser = process.env.BROWSER;
 const basePath = process.cwd();
 
 const e2ePath = path.join(basePath, "/dist/e2e/");
@@ -17,9 +18,16 @@ exports.config = {
     specs: [basePath + "/tests/e2e/specs/*.spec.ts"],
     maxInstances: 1,
     capabilities: [
-        {
-            browserName: "chrome"
-        }
+        browser && browser === "ie11"
+            ? {
+                  browserName: "internet explorer"
+              }
+            : {
+                  browserName: "chrome",
+                  "goog:chromeOptions": {
+                      args: ["--no-sandbox"]
+                  }
+              }
     ],
     sync: true,
     logLevel: "silent",

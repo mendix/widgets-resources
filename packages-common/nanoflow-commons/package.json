@@ -5,14 +5,13 @@
     "scripts": {
         "build": "npm run build:tsc",
         "prebuild:tsc": "rm -rf dist/tsc",
-        "build:tsc": "../../node_modules/.bin/tsc --project src/tsconfig.json",
-        "postbuild": "../../node_modules/.bin/ts-node --project scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
-        "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/"
+        "build:tsc": "..\"/../node_modules/.bin/tsc\" --project src/tsconfig.json",
+        "postbuild": "..\"/../node_modules/.bin/ts-node\" --project scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
+        "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/"
     },
     "devDependencies": {
         "@babel/cli": "^7.6.0",
         "@babel/core": "^7.6.0",
-        "@types/node": "^12.0.2",
-        "ts-node": "^8.4.1"
+        "@types/node": "^12.0.2"
     }
 }

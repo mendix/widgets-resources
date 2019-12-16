@@ -17,7 +17,6 @@ const gulpSlash = require("gulp-slash");
 
 const paths = process.cwd().split(path.sep);
 const projectPath = paths.slice(Math.max(paths.length - 2, 1)).join(path.sep);
-// console.log("Project Path!", projectPath);
 
 switch (script) {
     case "build":
@@ -50,7 +49,6 @@ function executeScript(script) {
     let args = ["run", script];
     if (argsFiltered.length > 0) {
         args.push("--");
-        args = args.concat(argsFiltered, ["--subProjectPath", projectPath]);
         if (!argsFiltered.includes("--subProjectPath")) {
             args = args.concat(["--subProjectPath", projectPath]);
         }
@@ -58,11 +56,12 @@ function executeScript(script) {
         args.push("--");
         args = args.concat(["--subProjectPath", projectPath]);
     }
-    // console.log("args", args);
-    if (/.*node_modules[/|\\]@widgets-resources[/|\\]utils-react-widgets[/|\\]?$/.test(libraryPath)) {
+    if (
+        /.*node_modules[\/|\\]@widgets-resources[\/|\\]utils-react-widgets[\/|\\]?$/.test(libraryPath) ||
+        /^win/.test(process.platform)
+    ) {
         spawnParams.cwd = libraryPath;
     }
-    // console.log("libraryPath", libraryPath, spawnParams);
     const result = spawn(/^win/.test(process.platform) ? "npm.cmd" : "npm", args, spawnParams);
     if (result.signal) {
         if (result.signal === "SIGKILL") {

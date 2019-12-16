@@ -5,14 +5,10 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "start": "tsc --watch",
+        "start": "..\"/../node_modules/.bin/tsc\" --watch",
         "prebuild": "rm -rf ./dist",
-        "build": "tsc",
-        "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "build": "..\"/../node_modules/.bin/tsc\"",
+        "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "prepare": "npm run build"
-    },
-    "dependencies": {
-        "eslint": "^6.1.0",
-        "typescript": "^3.5.3"
     }
 }
