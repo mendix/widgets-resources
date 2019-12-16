@@ -40,6 +40,11 @@ class SignatureContainer extends Component<SignatureContainerProps, SignatureCon
         hasSignature: false
     };
 
+    constructor(props: SignatureContainerProps) {
+        super(props);
+        this.resetSubscriptions(props.mxObject);
+    }
+
     render(): ReactNode {
         return createElement(Signature, {
             ...(this.props as SignatureContainerProps),
