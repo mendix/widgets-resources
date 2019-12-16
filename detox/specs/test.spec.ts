@@ -1,6 +1,10 @@
-import { element, by, expect, waitFor } from "detox";
+import { by, device, element, expect, waitFor } from "detox";
 
 describe("A simple test", () => {
+    beforeEach(async () => {
+        await device.reloadReactNative();
+    });
+    
     it("should click on badge button", async () => {
         const badgeButton = await element(by.id("actionButton18"));
         await waitFor(badgeButton).toBeVisible();
