@@ -29,3 +29,5 @@ packages-hybrid/hybrid-mobile-actions/tests/TestProjects/*/theme/settings-native
 packages-hybrid/hybrid-mobile-actions/tests/TestProjects/*/theme/styles.js
 
 detox/ios/NativeComponents.app
+detox/*.log
+detox/results

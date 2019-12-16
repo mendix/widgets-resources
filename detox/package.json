@@ -7,7 +7,7 @@
         "pretest:ios": "npm run decompress:ios",
         "test:ios": "detox test --configuration ios.simulator --loglevel trace ./specs",
         "test:android": "echo 'Skipped'",
-        "test:android2": "detox test --headless --cleanup --configuration android.emulator --loglevel trace ./specs"
+        "test:android:local": "detox test --headless --cleanup --configuration android.emulator --loglevel trace ./specs"
     },
     "devDependencies": {
         "@babel/core": "^7.7.2",

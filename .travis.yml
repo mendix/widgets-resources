@@ -13,17 +13,10 @@ env:
         - NATIVE_PROJECTS=$(if [ "$CHANGED_NATIVE_PROJECTS" != "" ]; then echo "true"; else echo "false"; fi)
         - WEB_PROJECTS=$(if [ "$CHANGED_WEB_PROJECTS" != "" ]; then echo "true"; else echo "false"; fi)
         # Build only touched packages for pull requests when no shared files were touched
-        - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" == "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
+        - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
         # Set arguments so lerna only runs scripts in changed packages
-        - SCRIPT_ARGS=$(if [ "$PARTIAL_BUILD" == "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
+        - SCRIPT_ARGS=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
         - ADB_INSTALL_TIMEOUT=8
-before_script:
-    - echo $TRAVIS_COMMIT_RANGE
-    - echo $NATIVE_PROJECTS
-    - echo $WEB_PROJECTS
-    - echo $CHANGED_GLOBAL_FILES
-    - echo $PARTIAL_BUILD
-    - echo $SCRIPT_ARGS
 stages:
     - build
     - tests
@@ -57,7 +50,7 @@ jobs:
               - sh -e /etc/init.d/xvfb start
               - sleep 3
           script:
-              - if [ "$WEB_PROJECTS" == "true" ] && [ "$PARTIAL_BUILD" == "true" ]; then travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS; else echo "No individuals web package changed. Skipping tests"; fi
+              - if [ "$WEB_PROJECTS" = "true" ] && [ "$PARTIAL_BUILD" = "true" ]; then travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS; else echo "No individuals web package changed. Skipping tests"; fi
         - name: "iOS Automated tests"
           language: objective-c
           os: osx
@@ -68,9 +61,6 @@ jobs:
               - CODE_SIGNING_REQUIRED=NO
           before_install:
               - nvm install node
-              - node -v
-              - npm -v
-              - npm install -g detox-cli
               - gem install xcpretty
               - brew tap wix/brew
               - brew install applesimutils --HEAD
@@ -78,7 +68,7 @@ jobs:
           install:
               - npm ci
           script:
-              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:ios; else echo "No native package changed. Skipping ios tests"; fi
+              - if [ "$NATIVE_PROJECTS" = "true" ]; then npm run test:ios; else echo "No native package changed. Skipping ios tests"; fi
         - name: "Android Automated tests"
           os: osx
           osx_image: xcode11.2
@@ -90,8 +80,6 @@ jobs:
               - brew cask uninstall java
               - brew cask install homebrew/cask-versions/adoptopenjdk8
               - nvm install node
-              - node -v
-              - npm -v
               - brew tap wix/brew
               - mkdir ~/.android
               - echo 'count=0' > ~/.android/repositories.cfg
@@ -100,7 +88,7 @@ jobs:
           install:
               - npm ci
           before_script:
-              - yes | sdkmanager --licenses >/dev/null
+              - echo y | sdkmanager --licenses >/dev/null
               - echo y | sdkmanager "platform-tools" >/dev/null
               - echo y | sdkmanager "tools" >/dev/null
               - echo y | sdkmanager "build-tools;28.0.3" >/dev/null
@@ -111,15 +99,8 @@ jobs:
               - echo y | sdkmanager "system-images;android-25;google_apis;armeabi-v7a" >/dev/null
               - avdmanager -s create avd -n EMULATOR -k 'system-images;android-25;google_apis;armeabi-v7a' -f -d 'pixel_xl'
           script:
-              - if [ "$NATIVE_PROJECTS" == "true" ]; then npm run test:android; else echo "No native package changed. Skipping android tests"; fi
+              - if [ "$NATIVE_PROJECTS" = "true" ]; then npm run test:android; else echo "No native package changed. Skipping android tests"; fi
 notifications:
-    email:
-        recipients:
-            - diego.antonelli@mendix.com
-            - mehmet.izci@mendix.com
-            - andries.smit@mendix.com
-            - isa.isaku@mendix.com
-            - olga.shprygova@mendix.com
     slack:
         template:
             - "Build <%{build_url}|#%{build_number}> of %{repository_slug}@%{branch} in PR <%{pull_request_url}|#%{pull_request_number}> by %{author} %{result} in %{duration}"
