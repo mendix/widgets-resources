@@ -45,6 +45,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
                 activeOpacity={0.2}
                 offsetX={0}
                 offsetY={0}
+                testID={this.props.name}
             >
                 {this.renderButtons()}
             </ActionButton>
@@ -73,6 +74,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
             this.props.secondaryButtons.map((button, index) => {
                 return (
                     <ActionButton.Item
+                        testID={`${this.props.name}$button${index}`}
                         key={`button${index}`}
                         size={this.styles.secondaryButton.size}
                         title={button.caption && button.caption.value}

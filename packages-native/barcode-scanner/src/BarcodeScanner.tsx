@@ -18,6 +18,7 @@ export class BarcodeScanner extends Component<Props> {
         return (
             <View style={this.styles.container}>
                 <RNCamera
+                    testID={this.props.name}
                     style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
                     captureAudio={false}
                     onBarCodeRead={this.onBarCodeReadHandler}

@@ -28,6 +28,7 @@ import { EditableValue, ValueStatus, DynamicValue, NativeIcon } from "mendix";
 import { Big } from "big.js";
 
 interface SwipeableContainerProps {
+    testID?: string;
     skipLabel?: string;
     skipIcon?: DynamicValue<NativeIcon>;
     doneLabel?: string;
@@ -119,7 +120,8 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
         icon: Option<DynamicValue<NativeIcon>>,
         defaultIcon: string,
         style: ButtonStyle,
-        onPress: () => void
+        onPress: () => void,
+        testID: string
     ): ReactElement => {
         const iconSource = { type: "glyph", iconClass: `glyphicon-${defaultIcon}` } as const;
         let iconContent =
@@ -151,7 +153,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
             : {};
         return (
             <Container {...containerProps}>
-                <Touchable onPress={onPress}>
+                <Touchable onPress={onPress} testID={`${props.testID}$${testID}`}>
                     <View style={[style.container, !props.bottomButton ? { width: width / 3 } : {}]}>
                         {iconContent}
                         {caption && <Text style={style.caption}>{caption}</Text>}
@@ -177,7 +179,8 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
             nextIcon,
             "chevron-right",
             props.bottomButton ? styles.paginationAbove.buttonNext : styles.paginationBetween.buttonNext,
-            onNextPress
+            onNextPress,
+            "buttonNext"
         );
 
     const renderPrevButton = ({
@@ -192,7 +195,8 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
             previousIcon,
             "chevron-left",
             props.bottomButton ? styles.paginationAbove.buttonPrevious : styles.paginationBetween.buttonPrevious,
-            onPrevPress
+            onPrevPress,
+            "buttonPrevious"
         );
 
     const renderDoneButton = ({
@@ -208,7 +212,8 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
             doneIcon,
             "ok",
             props.bottomButton ? styles.paginationAbove.buttonDone : styles.paginationBetween.buttonDone,
-            onDone && onDone
+            onDone && onDone,
+            "buttonDone"
         );
 
     const renderSkipButton = ({
@@ -225,7 +230,8 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
             skipIcon,
             "remove",
             props.bottomButton ? styles.paginationAbove.buttonSkip : styles.paginationBetween.buttonSkip,
-            () => (onSkip ? onSkip() : goToSlide(slides.length - 1))
+            () => (onSkip ? onSkip() : goToSlide(slides.length - 1)),
+            "buttonSkip"
         );
 
     const renderPagination = (): ReactElement => {
@@ -246,6 +252,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
                         props.slides.length > 1 &&
                         props.slides.map((_, i) => (
                             <TouchableOpacity
+                                testID={`${props.testID}$dot${i}`}
                                 key={i}
                                 style={[
                                     styles.dot,
@@ -257,7 +264,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
                             />
                         ))}
                     {!hidePagination && paginationOverflow && (
-                        <Text style={props.styles.paginationText}>
+                        <Text style={props.styles.paginationText} testID={`${props.testID}$paginationText`}>
                             {activeIndex + 1}/{props.slides.length}
                         </Text>
                     )}
@@ -305,6 +312,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
     return (
         <View style={styles.flexOne}>
             <FlatList
+                testID={props.testID}
                 ref={flatList}
                 data={props.slides}
                 horizontal

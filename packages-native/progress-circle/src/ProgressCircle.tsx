@@ -19,6 +19,7 @@ export class ProgressCircle extends Component<Props> {
         return (
             <View style={this.styles.container}>
                 <Circle
+                    testID={this.props.name}
                     progress={progress}
                     textStyle={this.styles.text}
                     color={this.styles.fill.backgroundColor}
@@ -31,7 +32,9 @@ export class ProgressCircle extends Component<Props> {
                     strokeCap={this.styles.fill.lineCapRounded ? "round" : "square"}
                 />
                 {validationMessages.length > 0 && (
-                    <Text style={this.styles.validationMessage}>{validationMessages.join("\n")}</Text>
+                    <Text testID={`${this.props.name}$caption`} style={this.styles.validationMessage}>
+                        {validationMessages.join("\n")}
+                    </Text>
                 )}
             </View>
         );

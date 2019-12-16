@@ -74,7 +74,7 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
 
     private renderFloatingButton(): JSX.Element | null {
         return this.state.status === "initial" ? (
-            <View style={floatingButtonContainer}>
+            <View style={floatingButtonContainer} testID={`${this.props.name}$button`}>
                 <View style={this.styles.floatingButton}>
                     <TouchableOpacity onPress={this.onFeedbackButtonPressHandler}>
                         {this.props.logo && this.props.logo.value ? renderImage(this.props.logo.value) : null}
@@ -100,6 +100,7 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
             >
                 <Dialog.Title style={this.styles.title}>Send Feedback</Dialog.Title>
                 <TextInput
+                    testID={`${this.props.name}$input`}
                     multiline
                     style={this.processedStyles.textAreaInputStyles}
                     value={this.state.feedbackMessage}
@@ -111,6 +112,7 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
                     <View style={switchContainer}>
                         <Text style={this.styles.switchLabel}>Include Screenshot</Text>
                         <Switch
+                            testID={`${this.props.name}$switch`}
                             style={this.processedStyles.switchInputStyles}
                             value={this.state.sendScreenshot}
                             onValueChange={this.onScreenshotToggleChangeHandler}
@@ -119,8 +121,19 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
                         />
                     </View>
                 )}
-                <Dialog.Button label="Cancel" color={this.styles.button.color} onPress={this.onCancelHandler} />
-                <Dialog.Button label="Send" disabled={disabled} color={sendButtonColor} onPress={this.onSendHandler} />
+                <Dialog.Button
+                    label="Cancel"
+                    color={this.styles.button.color}
+                    onPress={this.onCancelHandler}
+                    testID={`${this.props.name}$cancel`}
+                />
+                <Dialog.Button
+                    label="Send"
+                    disabled={disabled}
+                    color={sendButtonColor}
+                    onPress={this.onSendHandler}
+                    testID={`${this.props.name}$send`}
+                />
             </Dialog.Container>
         );
     }
@@ -146,7 +159,7 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
         return (
             <Dialog.Container visible={this.state.status === "done"} {...this.dialogContainerProps}>
                 <Dialog.Title style={this.styles.title}>Result</Dialog.Title>
-                <Dialog.Description style={this.processedStyles.descriptionStyle}>
+                <Dialog.Description style={this.processedStyles.descriptionStyle} testID={`${this.props.name}$success`}>
                     Feedback successfully sent
                 </Dialog.Description>
                 <Dialog.Button label="OK" onPress={this.onCancelHandler} color={this.styles.button.color} />
@@ -158,7 +171,7 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
         return (
             <Dialog.Container visible={this.state.status === "error"} {...this.dialogContainerProps}>
                 <Dialog.Title style={this.styles.title}>Result</Dialog.Title>
-                <Dialog.Description style={this.processedStyles.descriptionStyle}>
+                <Dialog.Description style={this.processedStyles.descriptionStyle} testID={`${this.props.name}$error`}>
                     Error sending feedback
                 </Dialog.Description>
                 <Dialog.Button label="OK" onPress={this.onCancelHandler} color={this.styles.button.color} />

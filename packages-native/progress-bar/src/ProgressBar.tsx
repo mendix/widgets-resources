@@ -18,6 +18,7 @@ export class ProgressBar extends Component<Props> {
         return (
             <View style={this.styles.container}>
                 <Bar
+                    testID={this.props.name}
                     height={Number(this.styles.bar.height)}
                     width={null}
                     progress={progress}
@@ -26,7 +27,9 @@ export class ProgressBar extends Component<Props> {
                     style={this.styles.bar}
                 />
                 {validationMessages.length > 0 && (
-                    <Text style={this.styles.validationMessage}>{validationMessages.join("\n")}</Text>
+                    <Text testID={`${this.props.name}$caption`} style={this.styles.validationMessage}>
+                        {validationMessages.join("\n")}
+                    </Text>
                 )}
             </View>
         );

@@ -14,6 +14,7 @@ interface PickerSlidersProps {
     thumbStyle?: ViewStyle;
     trackStyle?: ViewStyle;
     disabled?: boolean;
+    testID?: string;
 }
 
 export class PickerSlider extends Component<PickerSlidersProps> {
@@ -25,7 +26,7 @@ export class PickerSlider extends Component<PickerSlidersProps> {
 
     render(): JSX.Element {
         return (
-            <TouchableWithoutFeedback onPressIn={this.onTapHandler}>
+            <TouchableWithoutFeedback onPressIn={this.onTapHandler} testID={this.props.testID}>
                 <View style={[styles.container]} ref={this.viewRef}>
                     <View style={styles.gradient}>{this.props.component}</View>
                     <Slider
