@@ -34,6 +34,7 @@ exports[`ProgressBar renders 1`] = `
         },
       ]
     }
+    testID="progress-bar-test"
     useNativeDriver={false}
   >
     <View
