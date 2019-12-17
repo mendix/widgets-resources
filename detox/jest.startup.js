@@ -18,7 +18,7 @@ beforeAll(async () => {
 
 beforeEach(async () => {
     await waitFor(element(by.id("NativeHome.Widgets")))
-        .toBeVisible()
+        .toExist()
         .withTimeout(20000);
     await adapter.beforeEach();
 });
