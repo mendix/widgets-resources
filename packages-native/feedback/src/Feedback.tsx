@@ -162,7 +162,12 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
                 <Dialog.Description style={this.processedStyles.descriptionStyle} testID={`${this.props.name}$success`}>
                     Feedback successfully sent
                 </Dialog.Description>
-                <Dialog.Button label="OK" onPress={this.onCancelHandler} color={this.styles.button.color} />
+                <Dialog.Button
+                    label="OK"
+                    onPress={this.onCancelHandler}
+                    color={this.styles.button.color}
+                    testID={`${this.props.name}$success$ok`}
+                />
             </Dialog.Container>
         );
     }
@@ -174,7 +179,12 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
                 <Dialog.Description style={this.processedStyles.descriptionStyle} testID={`${this.props.name}$error`}>
                     Error sending feedback
                 </Dialog.Description>
-                <Dialog.Button label="OK" onPress={this.onCancelHandler} color={this.styles.button.color} />
+                <Dialog.Button
+                    label="OK"
+                    onPress={this.onCancelHandler}
+                    color={this.styles.button.color}
+                    testID={`${this.props.name}$error$ok`}
+                />
             </Dialog.Container>
         );
     }
