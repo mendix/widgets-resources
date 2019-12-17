@@ -32,9 +32,7 @@ export class ProgressCircle extends Component<Props> {
                     strokeCap={this.styles.fill.lineCapRounded ? "round" : "square"}
                 />
                 {validationMessages.length > 0 && (
-                    <Text testID={`${this.props.name}$caption`} style={this.styles.validationMessage}>
-                        {validationMessages.join("\n")}
-                    </Text>
+                    <Text style={this.styles.validationMessage}>{validationMessages.join("\n")}</Text>
                 )}
             </View>
         );
