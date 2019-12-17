@@ -15,6 +15,7 @@ exports[`ProgressCircle renders 1`] = `
         undefined,
       ]
     }
+    testID="progress-circle-test"
   >
     <ARTSurfaceView
       style={

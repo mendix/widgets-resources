@@ -8,6 +8,7 @@ exports[`Safe area view renders with content 1`] = `
       "flex": 1,
     }
   }
+  testID="safe-area-view-test"
 >
   <View
     style={
@@ -31,6 +32,7 @@ exports[`Safe area view renders with custom styling 1`] = `
       "flex": 1,
     }
   }
+  testID="safe-area-view-test"
 >
   <View
     style={
@@ -55,6 +57,7 @@ exports[`Safe area view renders without content 1`] = `
       "flex": 1,
     }
   }
+  testID="safe-area-view-test"
 >
   <View
     style={
