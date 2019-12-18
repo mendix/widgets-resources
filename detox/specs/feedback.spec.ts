@@ -36,6 +36,7 @@ describe("Feedback", () => {
 
         const checkbox = await feedback.getSwitch();
         await expect(checkbox).toBeVisible();
+        await expect(checkbox).toHaveValue(0);
         await checkbox.tap();
 
         const sendButton = await feedback.getSendButton();
