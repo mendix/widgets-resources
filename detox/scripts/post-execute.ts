@@ -22,7 +22,7 @@ async function readDir(path: string): Promise<string[]> {
 
 async function main(): Promise<void> {
     const path = join(process.cwd(), "./artifacts");
-    if (await fs.stat(path)) {
+    if ((await fs.stat(path)) && process.env.TRAVIS_PULL_REQUEST && process.env.TRAVIS_COMMIT) {
         const results = await readDir(path);
 
         const body =
@@ -39,6 +39,8 @@ async function main(): Promise<void> {
             commit_id: String(process.env.TRAVIS_COMMIT),
             path: "detox/jest.startup.js"
         });
+    } else {
+        console.log("None of tests failed");
     }
 }
 
