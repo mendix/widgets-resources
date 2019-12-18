@@ -63,9 +63,8 @@ jobs:
               - CODE_SIGNING_REQUIRED=NO
           before_install:
               - nvm install node
-              - gem install xcpretty
               - brew tap wix/brew
-              - brew install applesimutils --HEAD
+              - brew install applesimutils
               - cd detox
           install:
               - npm ci
