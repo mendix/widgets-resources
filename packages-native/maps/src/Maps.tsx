@@ -60,7 +60,7 @@ export class Maps extends Component<Props, State> {
 
     render(): JSX.Element {
         return (
-            <View style={this.styles.container}>
+            <View style={this.styles.container} testID={this.props.name}>
                 {this.state.status !== Status.LoadingMarkers && (
                     <MapView
                         ref={this.mapViewRef}
