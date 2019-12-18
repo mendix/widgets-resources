@@ -62,6 +62,7 @@ exports[`Intro Screen renders 1`] = `
             "flexDirection": "row",
           }
         }
+        testID="intro-screen-test"
         updateCellsBatchingPeriod={50}
         viewabilityConfigCallbackPairs={Array []}
         windowSize={21}
@@ -138,6 +139,7 @@ exports[`Intro Screen renders 1`] = `
               "opacity": 1,
             }
           }
+          testID="intro-screen-test$buttonDone"
         >
           <View
             style={
@@ -232,6 +234,7 @@ exports[`Intro Screen renders with 1 bottom button 1`] = `
             "flexDirection": "row",
           }
         }
+        testID="intro-screen-test"
         updateCellsBatchingPeriod={50}
         viewabilityConfigCallbackPairs={Array []}
         windowSize={21}
@@ -323,6 +326,7 @@ exports[`Intro Screen renders with 1 bottom button 1`] = `
                   "opacity": 1,
                 }
               }
+              testID="intro-screen-test$buttonDone"
             >
               <View
                 style={
@@ -416,6 +420,7 @@ exports[`Intro Screen renders with 2 bottom button 1`] = `
             "flexDirection": "row",
           }
         }
+        testID="intro-screen-test"
         updateCellsBatchingPeriod={50}
         viewabilityConfigCallbackPairs={Array []}
         windowSize={21}
@@ -507,6 +512,7 @@ exports[`Intro Screen renders with 2 bottom button 1`] = `
                   "opacity": 1,
                 }
               }
+              testID="intro-screen-test$buttonDone"
             >
               <View
                 style={
@@ -600,6 +606,7 @@ exports[`Intro Screen renders with active slide attribute 1`] = `
             "flexDirection": "row",
           }
         }
+        testID="intro-screen-test"
         updateCellsBatchingPeriod={50}
         viewabilityConfigCallbackPairs={Array []}
         windowSize={21}
@@ -676,6 +683,7 @@ exports[`Intro Screen renders with active slide attribute 1`] = `
               "opacity": 1,
             }
           }
+          testID="intro-screen-test$buttonDone"
         >
           <View
             style={
@@ -770,6 +778,7 @@ exports[`Intro Screen renders with async storage identifier 1`] = `
             "flexDirection": "row",
           }
         }
+        testID="intro-screen-test"
         updateCellsBatchingPeriod={50}
         viewabilityConfigCallbackPairs={Array []}
         windowSize={21}
@@ -846,6 +855,7 @@ exports[`Intro Screen renders with async storage identifier 1`] = `
               "opacity": 1,
             }
           }
+          testID="intro-screen-test$buttonDone"
         >
           <View
             style={

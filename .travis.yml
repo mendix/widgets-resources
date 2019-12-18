@@ -76,5 +76,5 @@ notifications:
         template:
             - "Build <%{build_url}|#%{build_number}> of %{repository_slug}@%{branch} in PR <%{pull_request_url}|#%{pull_request_number}> by %{author} %{result} in %{duration}"
         rooms:
-            - mendix:${SLACK_KEY}#widget-team-private
+            - "mendix:$SLACK_KEY#widget-team-private"
         on_pull_requests: true

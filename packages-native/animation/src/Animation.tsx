@@ -22,6 +22,7 @@ export class Animation extends Component<Props> {
 
         return (
             <View
+                testID={this.props.name}
                 animation={this.getAnimation()}
                 duration={duration}
                 delay={delay}

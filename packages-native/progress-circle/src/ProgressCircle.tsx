@@ -19,6 +19,7 @@ export class ProgressCircle extends Component<Props> {
         return (
             <View style={this.styles.container}>
                 <Circle
+                    testID={this.props.name}
                     progress={progress}
                     textStyle={this.styles.text}
                     color={this.styles.fill.backgroundColor}

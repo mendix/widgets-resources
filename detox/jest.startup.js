@@ -1,4 +1,4 @@
-const { cleanup, init, device } = require("detox");
+const { by, cleanup, init, device, element, waitFor } = require("detox");
 const adapter = require("detox/runners/jest/adapter");
 const specReporter = require("detox/runners/jest/specReporter");
 const config = require("./package.json").detox;
@@ -17,6 +17,9 @@ beforeAll(async () => {
 }, 120000);
 
 beforeEach(async () => {
+    await waitFor(element(by.id("NativeHome.Widgets")))
+        .toBeVisible()
+        .withTimeout(20000);
     await adapter.beforeEach();
 });
 

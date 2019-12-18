@@ -29,6 +29,7 @@ export class WebView extends Component<Props> {
         return (
             <View style={this.styles.container}>
                 <RNWebView
+                    testID={this.props.name}
                     source={html ? { html } : { uri: uri! }}
                     style={{
                         width: "100%",

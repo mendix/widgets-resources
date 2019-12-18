@@ -16,7 +16,7 @@ export class Badge extends Component<Props> {
         const isAndroid = Platform.OS === "android";
 
         return (
-            <View style={this.styles.container}>
+            <View style={this.styles.container} testID={this.props.name}>
                 {this.props.onClick ? (
                     isAndroid ? (
                         <TouchableNativeFeedback
@@ -38,7 +38,11 @@ export class Badge extends Component<Props> {
     private renderText(): JSX.Element {
         const value = this.props.caption.value || "";
 
-        return <Text style={this.styles.caption}>{value}</Text>;
+        return (
+            <Text testID={`${this.props.name}$caption`} style={this.styles.caption}>
+                {value}
+            </Text>
+        );
     }
 
     private onClick(): void {

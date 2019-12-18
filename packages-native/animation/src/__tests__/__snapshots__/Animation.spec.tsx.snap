@@ -3,6 +3,7 @@
 exports[`Animation renders 1`] = `
 <View
   style={Object {}}
+  testID="animation-test"
 >
   <Text>
     Hello

@@ -18,6 +18,7 @@ export class ProgressBar extends Component<Props> {
         return (
             <View style={this.styles.container}>
                 <Bar
+                    testID={this.props.name}
                     height={Number(this.styles.bar.height)}
                     width={null}
                     progress={progress}

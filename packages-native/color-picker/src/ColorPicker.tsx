@@ -39,7 +39,7 @@ export class ColorPicker extends Component<Props, State> {
         const color = tinycolor(colorHex).toHsl();
 
         return (
-            <View style={this.styles.container}>
+            <View style={this.styles.container} testID={`${this.props.name}`}>
                 {this.renderPreview()}
                 {this.renderHue(color)}
                 {this.renderSaturation(color)}
@@ -121,12 +121,18 @@ export class ColorPicker extends Component<Props, State> {
     }
 
     private renderPreview(): JSX.Element {
-        return <View style={[this.styles.preview, { backgroundColor: this.props.color.value }]} />;
+        return (
+            <View
+                testID={`${this.props.name}$preview`}
+                style={[this.styles.preview, { backgroundColor: this.props.color.value }]}
+            />
+        );
     }
 
     private renderHue(color: HSLA): JSX.Element {
         return (
             <PickerSlider
+                testID={`${this.props.name}$hue`}
                 value={color.h}
                 onValueChange={this.onChangeHueHandler}
                 onValueChangeComplete={this.onChangeCompleteHandler}
@@ -142,6 +148,7 @@ export class ColorPicker extends Component<Props, State> {
     private renderSaturation(color: HSLA): JSX.Element {
         return (
             <PickerSlider
+                testID={`${this.props.name}$saturation`}
                 value={color.s}
                 onValueChange={this.onChangeSaturationHandler}
                 onValueChangeComplete={this.onChangeCompleteHandler}
@@ -156,6 +163,7 @@ export class ColorPicker extends Component<Props, State> {
     private renderLightness(color: HSLA): JSX.Element {
         return (
             <PickerSlider
+                testID={`${this.props.name}$lightness`}
                 value={color.l}
                 onValueChange={this.onChangeLightnessHandler}
                 onValueChangeComplete={this.onChangeCompleteHandler}
@@ -170,6 +178,7 @@ export class ColorPicker extends Component<Props, State> {
     private renderAlpha(color: HSLA): JSX.Element {
         return (
             <PickerSlider
+                testID={`${this.props.name}$alpha`}
                 value={color.a}
                 onValueChange={this.onChangeAlphaHandler}
                 onValueChangeComplete={this.onChangeCompleteHandler}
