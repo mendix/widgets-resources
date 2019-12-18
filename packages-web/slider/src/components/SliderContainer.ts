@@ -6,7 +6,7 @@ import { BootstrapStyle, Slider } from "./Slider";
 interface WrapperProps {
     class: string;
     mxform: mxui.lib.form._FormBase;
-    mxObject: mendix.lib.MxObject;
+    mxObject?: mendix.lib.MxObject;
     style: string;
     readOnly: boolean;
 }
@@ -67,9 +67,7 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
     render(): ReactNode {
         const { mxObject, readOnly, valueAttribute } = this.props;
         const disabled =
-            this.props.editable === "default"
-                ? !mxObject || readOnly || !!(valueAttribute && mxObject.isReadonlyAttr(valueAttribute))
-                : true;
+            this.props.editable === "default" ? readOnly || !mxObject || mxObject.isReadonlyAttr(valueAttribute) : true;
 
         const alertMessage = !disabled ? this.validateSettings(this.state) || this.validateValues() : "";
 
@@ -182,7 +180,7 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
 
     private handleChange(): void {
         const { mxform, mxObject, onChangeMicroflow, onChangeNanoflow } = this.props;
-        if (onChangeMicroflow) {
+        if (onChangeMicroflow && mxObject) {
             window.mx.ui.action(onChangeMicroflow, {
                 error: error =>
                     window.mx.ui.error(
@@ -196,7 +194,7 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
             });
         }
 
-        if (onChangeNanoflow.nanoflow) {
+        if (onChangeNanoflow.nanoflow && mxObject) {
             const context = new mendix.lib.MxContext();
             context.setContext(mxObject.getEntity(), mxObject.getGuid());
             window.mx.data.callNanoflow({
