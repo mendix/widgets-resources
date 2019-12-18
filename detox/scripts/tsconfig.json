@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "noEmitOnError": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": false,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "forceConsistentCasingInFileNames": true,
+        "esModuleInterop": true,
+        "types": ["node"],
+        "typeRoots": ["../node_modules/@types"]
+    }
+}
