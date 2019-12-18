@@ -5,7 +5,7 @@ import { BootstrapStyle, RangeSlider } from "./RangeSlider";
 interface WrapperProps {
     class?: string;
     mxform: mxui.lib.form._FormBase;
-    mxObject: mendix.lib.MxObject;
+    mxObject?: mendix.lib.MxObject;
     style?: string;
     readOnly: boolean;
 }
@@ -70,8 +70,8 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         const disabled =
             !this.props.mxObject ||
             this.props.readOnly ||
-            !!(this.props.lowerBoundAttribute && this.props.mxObject.isReadonlyAttr(this.props.lowerBoundAttribute)) ||
-            !!(this.props.upperBoundAttribute && this.props.mxObject.isReadonlyAttr(this.props.upperBoundAttribute));
+            this.props.mxObject.isReadonlyAttr(this.props.lowerBoundAttribute) ||
+            this.props.mxObject.isReadonlyAttr(this.props.upperBoundAttribute);
 
         const alertMessage = !disabled ? this.validateSettings(this.state) || this.validateValues() : "";
 
@@ -300,7 +300,7 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
     }
 
     private isDecimal(attribute: string): boolean {
-        return this.props.mxObject.getAttributeType(attribute) === "Decimal";
+        return this.props.mxObject ? this.props.mxObject.getAttributeType(attribute) === "Decimal" : false;
     }
 
     private getValue(attributeName: string, mxObject?: mendix.lib.MxObject, defaultValue?: number): number | undefined {
