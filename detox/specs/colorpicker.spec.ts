@@ -1,7 +1,7 @@
 import { ColorPicker, Pages } from "./elements";
 import { by, device, element, expect } from "detox";
 
-describe("Badge", () => {
+describe("Color Picker", () => {
     beforeEach(async () => {
         await Pages().openColorPicker();
     });
