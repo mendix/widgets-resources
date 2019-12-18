@@ -30,14 +30,15 @@ describe("Feedback", () => {
         await expect(input).toBeVisible();
         await input.tap();
         await input.clearText();
-        await input.typeText("Testing feedback on Detox");
+        await input.typeText("Detox");
 
-        await expect(input).toHaveText("Testing feedback on Detox");
+        await expect(input).toHaveText("Detox");
 
         const checkbox = await feedback.getSwitch();
         await expect(checkbox).toBeVisible();
-        await expect(checkbox).toHaveValue(0);
+        await expect(checkbox).toHaveValue("1");
         await checkbox.tap();
+        await expect(checkbox).toHaveValue("0");
 
         const sendButton = await feedback.getSendButton();
         await expect(sendButton).toBeVisible();
@@ -60,9 +61,9 @@ describe("Feedback", () => {
         await expect(input).toBeVisible();
         await input.tap();
         await input.clearText();
-        await input.typeText("Testing feedback with screenshot on Detox");
+        await input.typeText("Detox");
 
-        await expect(input).toHaveText("Testing feedback with screenshot on Detox");
+        await expect(input).toHaveText("Detox");
 
         const sendButton = await feedback.getSendButton();
         await expect(sendButton).toBeVisible();
