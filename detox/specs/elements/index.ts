@@ -1,3 +1,4 @@
+export * from "./ActivityIndicator";
 export * from "./Alert";
 export * from "./Badge";
 export * from "./ColorPicker";
