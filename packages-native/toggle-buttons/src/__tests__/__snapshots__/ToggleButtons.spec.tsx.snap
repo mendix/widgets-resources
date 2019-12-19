@@ -7,6 +7,7 @@ exports[`ToggleButtons renders 1`] = `
       "borderRadius": 5,
     }
   }
+  testID="toggle-buttons-test"
 >
   <View
     removeClippedSubviews={false}

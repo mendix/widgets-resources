@@ -24,7 +24,7 @@ export class ToggleButtons extends Component<Props> {
         const enabled = this.props.editable !== "never" && !this.props.enum.readOnly;
 
         return (
-            <View style={enabled ? this.styles.container : this.styles.containerDisabled}>
+            <View style={enabled ? this.styles.container : this.styles.containerDisabled} testID={this.props.name}>
                 <SegmentedControlTab
                     values={captions}
                     selectedIndex={selectedIndex}
