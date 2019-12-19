@@ -31,7 +31,7 @@ export class Slider extends Component<Props, State> {
         const editable = this.props.editable !== "never" && !this.props.valueAttribute.readOnly && validProps;
 
         return (
-            <View onLayout={this.onLayoutHandler} style={this.styles.container}>
+            <View onLayout={this.onLayoutHandler} style={this.styles.container} testID={this.props.name}>
                 <MultiSlider
                     values={value != null ? [value] : undefined}
                     min={validProps ? toNumber(this.props.minimumValue) : undefined}

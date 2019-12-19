@@ -5,7 +5,7 @@ import { Platform, StyleSheet, TouchableHighlight, View } from "react-native";
 export class Marker extends Component<MarkerProps> {
     render(): JSX.Element {
         return (
-            <TouchableHighlight>
+            <TouchableHighlight testID={"sliderMarker"}>
                 <View
                     style={
                         this.props.enabled
