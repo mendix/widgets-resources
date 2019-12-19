@@ -1,7 +1,7 @@
 import { Style } from "@native-mobile-resources/util-widgets";
 import { Dimensions, TextStyle, ViewStyle } from "react-native";
 
-const { width: viewportWidth, height: viewportHeigth } = Dimensions.get("window");
+const { width: viewportWidth, height: viewportHeight } = Dimensions.get("window");
 
 interface DotStyle {
     opacity?: number;
@@ -17,8 +17,8 @@ interface ContainerStyle extends ViewStyle {
 }
 
 interface SlideStyle extends ViewStyle {
-    width?: number;
-    height?: number;
+    width?: number | string;
+    height?: number | string;
 }
 
 export interface NativeCarouselStyle extends Style {
@@ -28,7 +28,8 @@ export interface NativeCarouselStyle extends Style {
         opacity?: number;
         scale?: number;
     };
-    slideItem: SlideStyle;
+    slideItemContainer: SlideStyle;
+    slideItem: ViewStyle;
     paginationContainer: ViewStyle;
     paginationText: TextStyle;
     dotStyle: DotStyle;
@@ -39,11 +40,15 @@ export const defaultNativeCarouselStyle: NativeCarouselStyle = {
     container: {},
     carousel: {
         width: viewportWidth,
-        height: viewportHeigth
+        height: viewportHeight
+    },
+    slideItemContainer: {
+        width: viewportWidth * 0.8,
+        // Should accept a percentage and get the coraousels' actual height /width and do the calculation
+        height: viewportWidth * 0.8
     },
     slideItem: {
-        width: viewportHeigth * 0.8,
-        height: viewportHeigth * 0.8
+        width: "100%"
     },
     inactiveSlideItem: {
         opacity: 0.7,
@@ -66,8 +71,11 @@ export const defaultNativeCarouselStyle: NativeCarouselStyle = {
 export const defaultNativeCarouselFullWidthStyle: NativeCarouselStyle = {
     container: {},
     carousel: {},
+    slideItemContainer: {
+        width: viewportWidth
+    },
     slideItem: {
-        width: viewportHeigth
+        width: viewportWidth
     },
     pagination: {},
     inactiveSlideItem: {

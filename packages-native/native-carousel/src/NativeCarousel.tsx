@@ -11,16 +11,14 @@ import { ValueStatus } from "mendix";
 
 export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>): ReactNode => {
     const carousel = useRef<any>(null);
-
+    const [slideItemContainerDimensions, setSlideItemContainerDimensions] = useState({ width: 0, height: 0 });
     const customStyles = props.style ? props.style.filter(o => o != null) : [];
-    const styles =
-        customStyles.length > 0
-            ? deepmerge.all<NativeCarouselStyle>([
-                  defaultNativeCarouselStyle,
-                  ...customStyles,
-                  props.layout === "fullWidth" ? defaultNativeCarouselFullWidthStyle : {}
-              ])
-            : defaultNativeCarouselStyle;
+
+    const styles = deepmerge.all<NativeCarouselStyle>([
+        defaultNativeCarouselStyle,
+        ...customStyles,
+        props.layout === "fullWidth" ? defaultNativeCarouselFullWidthStyle : {}
+    ]);
 
     const onPress = useCallback(() => {
         executeAction(props.onPress);
@@ -40,6 +38,7 @@ export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>):
     const _renderItem = useCallback(
         ({ item, index }: { item: DataSourceItem; index: number }) => {
             const Touchable: ComponentClass<any> = Platform.OS === "ios" ? TouchableOpacity : TouchableNativeFeedback;
+            // Touchable styles are ignored if android
             const innerContent =
                 Platform.OS === "ios" ? (
                     props.content(item)
@@ -47,12 +46,7 @@ export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>):
                     <View style={styles.slideItem}>{props.content(item)}</View>
                 );
             return (
-                <Touchable
-                    key={index}
-                    activeOpacity={1}
-                    style={Platform.OS === "ios" ? styles.slideItem : {}}
-                    onPress={onPress}
-                >
+                <Touchable key={index} activeOpacity={1} style={styles.slideItem} onPress={onPress}>
                     {innerContent}
                 </Touchable>
             );
@@ -101,8 +95,24 @@ export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>):
         return null;
     }
 
+    const onLayout = (event: any) => {
+        let realWidth = event.nativeEvent.layout.width as number;
+        let realHeight = event.nativeEvent.layout.height as number;
+        if (typeof styles.slideItemContainer?.width === "string" && styles.slideItemContainer.width.includes("%")) {
+            const percentage = +styles.slideItemContainer.width.split("%")[0];
+            realWidth = Math.round((realWidth * percentage) / 100);
+        }
+        if (typeof styles.slideItemContainer?.height === "string" && styles.slideItemContainer.height.includes("%")) {
+            const percentage = +styles.slideItemContainer.height.split("%")[0];
+            realHeight = Math.round((realHeight * percentage) / 100);
+        }
+        setSlideItemContainerDimensions({ width: realWidth, height: realHeight });
+    };
+
+    console.warn(slideItemContainerDimensions);
+
     return (
-        <View style={styles.container}>
+        <View style={styles.container} onLayout={onLayout}>
             <Carousel
                 loop={props.loop}
                 autoplay={props.autoplay}
@@ -115,8 +125,7 @@ export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>):
                 renderItem={_renderItem}
                 sliderWidth={styles.carousel.width}
                 sliderHeight={styles.carousel.height}
-                itemWidth={styles.slideItem.width}
-                itemHeight={styles.slideItem.height}
+                itemWidth={slideItemContainerDimensions.width}
                 inactiveSlideScale={styles.inactiveSlideItem.scale}
                 inactiveSlideOpacity={styles.inactiveSlideItem.opacity}
                 onSnapToItem={onSnap}
