@@ -5,9 +5,9 @@
         "compress:ios": "cd ./ios && tar -cvzf NativeComponents.taz.gz NativeComponents.app",
         "decompress:ios": "cd ./ios && tar -xvf NativeComponents.taz.gz",
         "pretest:ios": "npm run decompress:ios",
-        "test:ios": "detox test --cleanup --record-videos failing --configuration ios.simulator --loglevel trace ./specs",
+        "test:ios": "detox test --cleanup --record-videos failing --configuration ios.simulator ./specs",
         "posttest:ios": "ts-node --project ./scripts/tsconfig.json ./scripts/post-execute.ts",
-        "test:android": "detox test --cleanup --record-videos all --configuration android.emulator --loglevel trace ./specs"
+        "test:android": "detox test --cleanup --record-videos all --configuration android.emulator ./specs"
     },
     "devDependencies": {
         "@babel/core": "^7.7.2",
