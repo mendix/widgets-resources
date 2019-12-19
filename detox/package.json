@@ -3,7 +3,7 @@
     "copyright": "Mendix BV",
     "scripts": {
         "compress:ios": "cd ./ios && tar -cvzf NativeComponents.taz.gz NativeComponents.app",
-        "decompress:ios": "cd ./ios && tar -xvf NativeComponents.taz.gz",
+        "decompress:ios": "cd ./ios && tar -xvf NativeComponents.taz.gz &>/dev/null",
         "pretest:ios": "npm run decompress:ios",
         "test:ios": "detox test --cleanup --record-videos failing --configuration ios.simulator ./specs",
         "posttest:ios": "ts-node --project ./scripts/tsconfig.json ./scripts/post-execute.ts",
