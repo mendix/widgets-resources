@@ -1,5 +1,5 @@
 import { ComponentClass, createElement, ReactNode, useCallback, useRef, useState } from "react";
-import { Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
+import { LayoutChangeEvent, Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
 import { DataSourceItem, LayoutEnum, NativeCarouselProps } from "../typings/NativeCarouselProps";
 import { defaultNativeCarouselFullWidthStyle, defaultNativeCarouselStyle, NativeCarouselStyle } from "./styles/styles";
 import { toNumber } from "@native-mobile-resources/util-widgets";
@@ -11,7 +11,10 @@ import { ValueStatus } from "mendix";
 
 export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>): ReactNode => {
     const carousel = useRef<any>(null);
-    const [slideItemContainerDimensions, setSlideItemContainerDimensions] = useState({ width: 0, height: 0 });
+    const [sliderDimensions, setSliderDimensions] = useState({
+        slider: { width: 0, height: 0 },
+        slideItem: { width: 0, height: 0 }
+    });
     const customStyles = props.style ? props.style.filter(o => o != null) : [];
 
     const styles = deepmerge.all<NativeCarouselStyle>([
@@ -39,12 +42,17 @@ export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>):
         ({ item, index }: { item: DataSourceItem; index: number }) => {
             const Touchable: ComponentClass<any> = Platform.OS === "ios" ? TouchableOpacity : TouchableNativeFeedback;
             // Touchable styles are ignored if android
+            // We dont want to pass already processed item width and height to the touchable
+            delete styles.slideItem.width;
+            delete styles.slideItem.height;
+
             const innerContent =
                 Platform.OS === "ios" ? (
                     props.content(item)
                 ) : (
                     <View style={styles.slideItem}>{props.content(item)}</View>
                 );
+
             return (
                 <Touchable key={index} activeOpacity={1} style={styles.slideItem} onPress={onPress}>
                     {innerContent}
@@ -91,46 +99,66 @@ export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>):
         );
     }, [activeSlide, carousel, props.contentSource, props.showPagination]);
 
-    if (!(props.contentSource && props.contentSource.status === ValueStatus.Available)) {
+    if (!(props.contentSource?.status === ValueStatus.Available)) {
         return null;
     }
 
-    const onLayout = (event: any) => {
-        let realWidth = event.nativeEvent.layout.width as number;
-        let realHeight = event.nativeEvent.layout.height as number;
-        if (typeof styles.slideItemContainer?.width === "string" && styles.slideItemContainer.width.includes("%")) {
-            const percentage = +styles.slideItemContainer.width.split("%")[0];
-            realWidth = Math.round((realWidth * percentage) / 100);
+    const getPaddingCalculatedValue = (sizeToCalculate: number): number => {
+        if (styles.slideItem?.padding !== undefined) {
+            return sizeToCalculate - Number(styles.slideItem.padding) * 2;
+        } else if (styles.slideItem?.paddingHorizontal !== undefined) {
+            return sizeToCalculate - Number(styles.slideItem.paddingHorizontal) * 2;
+        } else if (styles.slideItem?.paddingLeft !== undefined) {
+            return sizeToCalculate - Number(styles.slideItem.paddingLeft);
+        } else if (styles.slideItem?.paddingRight !== undefined) {
+            return sizeToCalculate - Number(styles.slideItem.paddingRight);
         }
-        if (typeof styles.slideItemContainer?.height === "string" && styles.slideItemContainer.height.includes("%")) {
-            const percentage = +styles.slideItemContainer.height.split("%")[0];
-            realHeight = Math.round((realHeight * percentage) / 100);
-        }
-        setSlideItemContainerDimensions({ width: realWidth, height: realHeight });
+        return sizeToCalculate;
     };
 
-    console.warn(slideItemContainerDimensions);
+    const onLayout = (event: LayoutChangeEvent) => {
+        // Slider dimensions will be always as big as the view around it
+        // Item dimensions will be calculated from values slideItem.width + height
+        const realWidth = getPaddingCalculatedValue(event.nativeEvent.layout.width as number);
+        const realHeight = event.nativeEvent.layout.height as number;
+
+        let itemWidth = 0;
+        let itemHeight = 0;
+        if (typeof styles.slideItem?.width === "string" && styles.slideItem.width.includes("%")) {
+            const percentage = +styles.slideItem.width.split("%")[0];
+            itemWidth = Math.round((realWidth * percentage) / 100);
+        }
+        if (typeof styles.slideItem?.height === "string" && styles.slideItem.height.includes("%")) {
+            const percentage = +styles.slideItem.height.split("%")[0];
+            itemHeight = Math.round((realHeight * percentage) / 100);
+        }
+        setSliderDimensions({
+            slider: { width: realWidth, height: realHeight },
+            slideItem: { width: itemWidth, height: itemHeight }
+        });
+    };
 
     return (
         <View style={styles.container} onLayout={onLayout}>
-            <Carousel
-                loop={props.loop}
-                autoplay={props.autoplay}
-                autoplayDelay={props.autoplayDelay !== 0 ? props.autoplayDelay : undefined}
-                autoplayInterval={props.autoplayInterval !== 0 ? props.autoplayInterval : undefined}
-                activeSlideAlignment={props.activeSlideAlignment}
-                layout={normalizeLayoutProp(props.layout)}
-                firstItem={toNumber(props.firstItem)}
-                data={props.contentSource ? (props.contentSource.value ? props.contentSource.value.items : []) : []}
-                renderItem={_renderItem}
-                sliderWidth={styles.carousel.width}
-                sliderHeight={styles.carousel.height}
-                itemWidth={slideItemContainerDimensions.width}
-                inactiveSlideScale={styles.inactiveSlideItem.scale}
-                inactiveSlideOpacity={styles.inactiveSlideItem.opacity}
-                onSnapToItem={onSnap}
-                ref={carousel}
-            />
+            {sliderDimensions.slider.width > 0 && (
+                <Carousel
+                    loop={props.loop}
+                    autoplay={props.autoplay}
+                    autoplayDelay={props.autoplayDelay !== 0 ? props.autoplayDelay : undefined}
+                    autoplayInterval={props.autoplayInterval !== 0 ? props.autoplayInterval : undefined}
+                    activeSlideAlignment={props.activeSlideAlignment}
+                    layout={normalizeLayoutProp(props.layout)}
+                    firstItem={toNumber(props.firstItem)}
+                    data={props.contentSource.value.items}
+                    renderItem={_renderItem}
+                    sliderWidth={sliderDimensions.slider.width > 0 ? sliderDimensions.slider.width : 1}
+                    itemWidth={sliderDimensions.slideItem.width > 0 ? sliderDimensions.slideItem.width : 1}
+                    inactiveSlideScale={styles.inactiveSlideItem.scale}
+                    inactiveSlideOpacity={styles.inactiveSlideItem.opacity}
+                    onSnapToItem={onSnap}
+                    ref={carousel}
+                />
+            )}
             {renderPagination()}
         </View>
     );

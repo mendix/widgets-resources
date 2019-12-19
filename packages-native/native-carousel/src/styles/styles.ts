@@ -1,7 +1,5 @@
 import { Style } from "@native-mobile-resources/util-widgets";
-import { Dimensions, TextStyle, ViewStyle } from "react-native";
-
-const { width: viewportWidth, height: viewportHeight } = Dimensions.get("window");
+import { TextStyle, ViewStyle } from "react-native";
 
 interface DotStyle {
     opacity?: number;
@@ -16,11 +14,6 @@ interface ContainerStyle extends ViewStyle {
     height?: number;
 }
 
-interface SlideStyle extends ViewStyle {
-    width?: number | string;
-    height?: number | string;
-}
-
 export interface NativeCarouselStyle extends Style {
     container: ViewStyle;
     carousel: ContainerStyle;
@@ -28,7 +21,6 @@ export interface NativeCarouselStyle extends Style {
         opacity?: number;
         scale?: number;
     };
-    slideItemContainer: SlideStyle;
     slideItem: ViewStyle;
     paginationContainer: ViewStyle;
     paginationText: TextStyle;
@@ -37,18 +29,12 @@ export interface NativeCarouselStyle extends Style {
 }
 
 export const defaultNativeCarouselStyle: NativeCarouselStyle = {
-    container: {},
-    carousel: {
-        width: viewportWidth,
-        height: viewportHeight
-    },
-    slideItemContainer: {
-        width: viewportWidth * 0.8,
-        // Should accept a percentage and get the coraousels' actual height /width and do the calculation
-        height: viewportWidth * 0.8
-    },
-    slideItem: {
+    container: {
         width: "100%"
+    },
+    carousel: {},
+    slideItem: {
+        width: "70%"
     },
     inactiveSlideItem: {
         opacity: 0.7,
@@ -57,10 +43,12 @@ export const defaultNativeCarouselStyle: NativeCarouselStyle = {
     paginationContainer: {},
     paginationText: {},
     dotStyle: {
+        color: "gray",
         opacity: 0.4,
         scale: 0.5
     },
     activeDotStyle: {
+        color: "black",
         width: 8,
         height: 8,
         borderRadius: 4,
@@ -71,11 +59,8 @@ export const defaultNativeCarouselStyle: NativeCarouselStyle = {
 export const defaultNativeCarouselFullWidthStyle: NativeCarouselStyle = {
     container: {},
     carousel: {},
-    slideItemContainer: {
-        width: viewportWidth
-    },
     slideItem: {
-        width: viewportWidth
+        width: "100%"
     },
     pagination: {},
     inactiveSlideItem: {
