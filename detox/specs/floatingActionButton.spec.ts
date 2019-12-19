@@ -2,19 +2,14 @@ import { Alert, FloatingActionButton, Pages } from "./elements";
 import { device, expect } from "detox";
 
 describe("Floating Action Button", () => {
-    beforeEach(async () => {
+    beforeAll(async () => {
         await Pages().openFloatingActionButton();
-    });
-
-    afterEach(async () => {
-        await device.reloadReactNative();
     });
 
     it("should render an action button in the top left corner", async () => {
         const floatingActionButton = FloatingActionButton("floatingActionButton4");
-        const button = await floatingActionButton.getMainButton();
-        await expect(button).toBeVisible();
-        await button.tap();
+        await expect(floatingActionButton.getMainButton()).toBeVisible();
+        await floatingActionButton.getMainButton().tap();
 
         const firstChild = await floatingActionButton.getFloatingButton(0);
         await expect(firstChild).toBeVisible();
@@ -26,9 +21,8 @@ describe("Floating Action Button", () => {
 
     it("should render an action button in the top right corner", async () => {
         const floatingActionButton = FloatingActionButton("floatingActionButton2");
-        const button = await floatingActionButton.getMainButton();
-        await expect(button).toBeVisible();
-        await button.tap();
+        await expect(floatingActionButton.getMainButton()).toBeVisible();
+        await floatingActionButton.getMainButton().tap();
 
         const firstChild = await floatingActionButton.getFloatingButton(0);
         await expect(firstChild).toNotExist();
@@ -39,21 +33,19 @@ describe("Floating Action Button", () => {
 
     it("should render an action button in the bottom left corner", async () => {
         const floatingActionButton = FloatingActionButton("floatingActionButton5");
-        const button = await floatingActionButton.getMainButton();
-        await expect(button).toBeVisible();
-        await button.tap();
+        await expect(floatingActionButton.getMainButton()).toBeVisible();
+        await floatingActionButton.getMainButton().tap();
 
         const firstChild = await floatingActionButton.getFloatingButton(0);
         await expect(firstChild).toBeVisible();
-        await button.tap();
+        await floatingActionButton.getMainButton().tap();
         await expect(firstChild).toBeNotVisible();
     });
 
     it("should render an action button in the bottom center", async () => {
         const floatingActionButton = FloatingActionButton("floatingActionButton3");
-        const button = await floatingActionButton.getMainButton();
-        await expect(button).toBeVisible();
-        await button.tap();
+        await expect(floatingActionButton.getMainButton()).toBeVisible();
+        await floatingActionButton.getMainButton().tap();
 
         const firstChild = await floatingActionButton.getFloatingButton(0);
         await expect(firstChild).toBeVisible();
@@ -63,9 +55,8 @@ describe("Floating Action Button", () => {
 
     it("should render an action button in the bottom right corner", async () => {
         const floatingActionButton = FloatingActionButton("floatingActionButton1");
-        const button = await floatingActionButton.getMainButton();
-        await expect(button).toBeVisible();
-        await button.tap();
+        await expect(floatingActionButton.getMainButton()).toBeVisible();
+        await floatingActionButton.getMainButton().tap();
 
         const firstChild = await floatingActionButton.getFloatingButton(0);
         await expect(firstChild).toBeVisible();
@@ -74,5 +65,9 @@ describe("Floating Action Button", () => {
         await secondChild.tap();
         await expect(firstChild).toBeNotVisible();
         await expect(secondChild).toBeNotVisible();
+    });
+
+    afterAll(async () => {
+        await device.reloadReactNative();
     });
 });

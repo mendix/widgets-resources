@@ -2,12 +2,8 @@ import { ActivityIndicator, Pages } from "./elements";
 import { device, expect } from "detox";
 
 describe("Activity Indicator", () => {
-    beforeEach(async () => {
+    beforeAll(async () => {
         await Pages().openActivityIndicator();
-    });
-
-    afterEach(async () => {
-        await device.reloadReactNative();
     });
 
     it("should render the default indicator", async () => {
@@ -16,5 +12,9 @@ describe("Activity Indicator", () => {
 
     it("should render the custom indicator", async () => {
         await expect(ActivityIndicator("activityIndicator2")).toBeVisible();
+    });
+
+    afterAll(async () => {
+        await device.reloadReactNative();
     });
 });

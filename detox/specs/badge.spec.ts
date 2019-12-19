@@ -2,7 +2,7 @@ import { by, device, element, expect, waitFor } from "detox";
 import { Alert, Badge, Pages } from "./elements";
 
 describe("Badge", () => {
-    beforeEach(async () => {
+    beforeAll(async () => {
         await Pages().openBadge();
 
         const textbox = await element(by.id("textBox1"));
@@ -14,34 +14,30 @@ describe("Badge", () => {
         await textbox.typeText("Detox");
     });
 
-    afterEach(async () => {
-        await device.reloadReactNative();
-    });
-
     it("should render normal badge", async () => {
         const badge = Badge("badge1");
-        const badgeContainer = await badge.getBadge();
-        await expect(badgeContainer).toBeVisible();
-        await badgeContainer.tap();
+        await expect(badge.getBadge()).toBeVisible();
+        await badge.getBadge().tap();
 
-        const badgeCaption = badge.getCaption();
-        await expect(badgeCaption).toBeVisible();
-        await expect(badgeCaption).toHaveText("Detox");
+        await expect(badge.getCaption()).toBeVisible();
+        await expect(badge.getCaption()).toHaveText("Detox");
     });
 
     it("should render a badge with actions", async () => {
         const text = await element(by.id("text2"));
         const badge = Badge("badge4");
-        const badgeContainer = await badge.getBadge();
-        await expect(badgeContainer).toBeVisible();
+        await expect(badge.getBadge()).toBeVisible();
         await text.tap();
 
-        const badgeCaption = badge.getCaption();
-        await expect(badgeCaption).toBeVisible();
-        await expect(badgeCaption).toHaveText("Detox");
+        await expect(badge.getCaption()).toBeVisible();
+        await expect(badge.getCaption()).toHaveText("Detox");
 
-        await badgeContainer.tap();
+        await badge.getBadge().tap();
         await expect(Alert().getMessage("Action test: Detox")).toBeVisible();
         await Alert().confirm();
+    });
+
+    afterAll(async () => {
+        await device.reloadReactNative();
     });
 });
