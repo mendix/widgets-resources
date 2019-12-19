@@ -40,7 +40,7 @@ export const ListViewSwipe = (props: ListViewSwipeProps<ListViewSwipeStyle>): Re
         } else if (isRightSideAction) {
             return renderAction(styles.rightAction, props.right, isRightToggle, "rightAction");
         }
-        return renderButtons(styles.rightAction, props.right, "leftButtons");
+        return renderButtons(styles.rightAction, props.right, "rightButtons");
     };
 
     const close = useCallback((): void => {
