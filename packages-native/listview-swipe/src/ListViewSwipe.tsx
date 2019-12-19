@@ -29,18 +29,18 @@ export const ListViewSwipe = (props: ListViewSwipeProps<ListViewSwipeStyle>): Re
         if (isLeftDisabled) {
             return undefined;
         } else if (isLeftSideAction) {
-            return renderAction(styles.leftAction, props.left, isLeftToggle);
+            return renderAction(styles.leftAction, props.left, isLeftToggle, "leftAction");
         }
-        return renderButtons(styles.leftAction, props.left);
+        return renderButtons(styles.leftAction, props.left, "leftButtons");
     };
 
     const renderRightActions = (): ReactNode => {
         if (isRightDisabled) {
             return undefined;
         } else if (isRightSideAction) {
-            return renderAction(styles.rightAction, props.right, isRightToggle);
+            return renderAction(styles.rightAction, props.right, isRightToggle, "rightAction");
         }
-        return renderButtons(styles.rightAction, props.right);
+        return renderButtons(styles.rightAction, props.right, "leftButtons");
     };
 
     const close = useCallback((): void => {
@@ -49,21 +49,25 @@ export const ListViewSwipe = (props: ListViewSwipeProps<ListViewSwipeStyle>): Re
         }
     }, [row]);
 
-    const renderAction = (style: PanelStyle, content: ReactNode, isToggle: boolean): ReactElement => {
+    const renderAction = (style: PanelStyle, content: ReactNode, isToggle: boolean, testID: string): ReactElement => {
         const { panelSize, ...normalStyle } = style;
         delete normalStyle.threshold;
         return (
-            <RectButton style={[normalStyle, isToggle && { flex: 0, width: panelSize }]} onPress={close}>
+            <RectButton
+                style={[normalStyle, isToggle && { flex: 0, width: panelSize }]}
+                onPress={close}
+                testID={`${props.name}$${testID}`}
+            >
                 {content}
             </RectButton>
         );
     };
 
-    const renderButtons = (style: PanelStyle, content: ReactNode): ReactElement => {
+    const renderButtons = (style: PanelStyle, content: ReactNode, testID: string): ReactElement => {
         const { panelSize, ...normalStyle } = style;
         delete normalStyle.threshold;
         return (
-            <View style={{ width: panelSize, flexDirection: "row" }}>
+            <View style={{ width: panelSize, flexDirection: "row" }} testID={`${props.name}$${testID}`}>
                 <View style={normalStyle}>{content}</View>
             </View>
         );
@@ -114,7 +118,7 @@ export const ListViewSwipe = (props: ListViewSwipeProps<ListViewSwipeStyle>): Re
                 overshootRight={false}
                 useNativeAnimations
             >
-                <View style={styles.container} onLayout={setAnimationDefinitions}>
+                <View style={styles.container} onLayout={setAnimationDefinitions} testID={props.name}>
                     {props.content}
                 </View>
             </Swipeable>
