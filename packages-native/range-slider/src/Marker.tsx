@@ -2,10 +2,10 @@ import { MarkerProps } from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
 import { Platform, StyleSheet, TouchableHighlight, View } from "react-native";
 
-export class Marker extends Component<MarkerProps> {
+export class Marker extends Component<MarkerProps & { testID: string }> {
     render(): JSX.Element {
         return (
-            <TouchableHighlight>
+            <TouchableHighlight testID={this.props.testID}>
                 <View
                     style={
                         this.props.enabled

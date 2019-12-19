@@ -4,6 +4,7 @@ exports[`RangeSlider renders 1`] = `
 <View
   onLayout={[Function]}
   style={Object {}}
+  testID="range-slider-test"
 >
   <View
     style={
@@ -142,6 +143,7 @@ exports[`RangeSlider renders 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={null}
+            testID="range-slider-test$leftMarker"
           >
             <View
               style={
@@ -229,6 +231,7 @@ exports[`RangeSlider renders 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={null}
+            testID="range-slider-test$rightMarker"
           >
             <View
               style={
