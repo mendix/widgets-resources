@@ -1,6 +1,7 @@
 import { NativeModules, Platform }                     from "react-native";
 import adjustFont                                      from "../core/helpers/_functions/adjustfont";
 import { setColorBasedOnBackground, setContrastScale } from "../core/helpers/_functions/convertcolors";
+import { shadeBlendConvert }                           from "../core/helpers/_functions/shadeblendconvert.js";
 
 /*
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)
@@ -63,9 +64,9 @@ export const font = {
     sizeH5: adjustFont(14),
     sizeH6: adjustFont(12),
     color: setColorBasedOnBackground(background.primary),
-    weightLight: "100",
+    weightLight: "100",  // Only supported on iOS, will be 'Normal' on Android
     weightNormal: "normal",
-    weightSemiBold: "600",
+    weightSemiBold: "600", // Only supported on iOS, will be 'Bold' on Android
     weightBold: "bold",
     family: Platform.select({ ios: "System", android: "normal" }),
 };
@@ -173,9 +174,11 @@ export const navigation = {
         iconSize: font.sizeSmall,
     },
     progressOverlay: {
-        color: "#FFF",
-        activityIndicatorColor: "#FFF",
+        color: font.color,
+        activityIndicatorColor: font.color,
         backgroundColor: `rgba(0, 0, 0, 0.5)`,
+        containerBackgroundColor: background.secondary,
+        shadowColor: shadeBlendConvert(-0.6, background.primary), // Only for iOS
         fontSize: font.size,
     },
 };
@@ -186,4 +189,9 @@ export const listview = {
         color: border.color,
         width: border.width,
     },
+};
+
+// Layoutgrid Styles
+export const layoutgrid = {
+    gutterSize: 15,
 };

@@ -118,7 +118,7 @@ body {
 }
 
 // Show only on wide screens
-@media screen and (min-width: $screen-lg) {
+@media screen and (min-width: $screen-xl) {
     .loginpage-logo {
         width: 150px;
     }

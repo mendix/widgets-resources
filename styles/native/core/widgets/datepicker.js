@@ -23,6 +23,17 @@ export const DatePicker = {
         // numberOfLines and all TextStyle properties are allowed
         ...TextBox.label,
     },
+    pickerIOS: {
+        // All ViewStyle properties are allowed
+        backgroundColor: input.backgroundColor,
+    },
+    pickerBackdropIOS: {
+        // All ViewStyle properties are allowed
+    },
+    pickerTopIOS: {
+        // All ViewStyle properties are allowed
+        backgroundColor: input.backgroundColor,
+    },
     value: {
         // All TextStyle properties are allowed
         color: input.color,

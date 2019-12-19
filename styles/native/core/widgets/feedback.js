@@ -1,4 +1,5 @@
 import { Platform }                                                 from "react-native";
+import { shadeBlendConvert }                                        from "../helpers/_functions/shadeblendconvert.js";
 import { background, border, brand, button, contrast, font, input } from "../variables";
 
 //
@@ -22,7 +23,7 @@ export const com_mendix_widget_native_feedback_Feedback = {
         borderTopLeftRadius: button.borderRadius,
         borderBottomLeftRadius: button.borderRadius,
         elevation: 1.5,
-        shadowColor: contrast.lower,
+        shadowColor: shadeBlendConvert(-0.2, background.primary),
         shadowOpacity: 0.7,
         shadowRadius: 10,
         shadowOffset: {

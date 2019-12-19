@@ -1,6 +1,6 @@
 /* ==========================================================================
    Full page blocks
-   
+
    Blocks that take up the full width and height
 ========================================================================== */
 
@@ -12,6 +12,7 @@
     // Helper to make it fullheight
     .fullheight {
         height: 100% !important;
+
         & > .mx-dataview-content {
             height: inherit !important;
         }

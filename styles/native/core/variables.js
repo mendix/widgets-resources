@@ -3,6 +3,7 @@ import * as custom                                     from "../app/custom-varia
 import adjustFont                                      from "./helpers/_functions/adjustfont";
 import { setColorBasedOnBackground, setContrastScale } from "./helpers/_functions/convertcolors";
 import merge                                           from "./helpers/_functions/mergeobjects";
+import { shadeBlendConvert }                           from "./helpers/_functions/shadeblendconvert.js";
 
 //== Global variables
 //## Variables to be used during styling
@@ -62,9 +63,9 @@ let font = {
     sizeH5: adjustFont(14),
     sizeH6: adjustFont(12),
     color: setColorBasedOnBackground(background.primary),
-    weightLight: "100",
+    weightLight: "100",  // Only supported on iOS, will be 'Normal' on Android
     weightNormal: "normal",
-    weightSemiBold: "600",
+    weightSemiBold: "600", // Only supported on iOS, will be 'Bold' on Android
     weightBold: "bold",
     family: Platform.select({ ios: "System", android: "normal" }),
 };
@@ -176,9 +177,11 @@ let navigation = {
         iconSize: font.sizeSmall,
     },
     progressOverlay: {
-        color: "#FFF",
-        activityIndicatorColor: "#FFF",
+        color: font.color,
+        activityIndicatorColor: font.color,
         backgroundColor: `rgba(0, 0, 0, 0.5)`,
+        containerBackgroundColor: background.secondary,
+        shadowColor: shadeBlendConvert(-0.6, background.primary), // Only for iOS
         fontSize: font.size,
     },
 };
@@ -193,4 +196,10 @@ let listview = {
 };
 listview = merge(listview, custom.listview || {});
 
-export { brand, background, border, contrast, font, spacing, button, input, navigation, listview };
+// Layoutgrid Styles
+let layoutgrid = {
+    gutterSize: 15,
+};
+layoutgrid = merge(layoutgrid, custom.layoutgrid || {});
+
+export { brand, background, border, contrast, font, spacing, button, input, navigation, listview, layoutgrid };

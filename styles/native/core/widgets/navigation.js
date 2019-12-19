@@ -1,5 +1,4 @@
-import { Platform }                  from "react-native";
-import { font, navigation, spacing } from "../variables";
+import { border, font, navigation, spacing } from "../variables";
 
 //
 // DISCLAIMER:
@@ -79,6 +78,18 @@ export const navigationStyle = {
         },
         container: {
             // All ViewStyle properties are allowed
+            backgroundColor: navigation.progressOverlay.containerBackgroundColor,
+            paddingHorizontal: spacing.largest,
+            paddingVertical: spacing.large,
+            borderRadius: border.radius,
+            elevation: 1.5,
+            shadowColor: navigation.progressOverlay.shadowColor,
+            shadowOpacity: 0.7,
+            shadowRadius: 10,
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
 
         },
         activityIndicator: {
