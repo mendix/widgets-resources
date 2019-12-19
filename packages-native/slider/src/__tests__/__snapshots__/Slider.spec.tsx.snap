@@ -125,7 +125,7 @@ exports[`Slider renders 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={null}
-            testID="sliderMarker"
+            testID="slider-test$marker"
           >
             <View
               style={
