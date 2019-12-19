@@ -52,6 +52,9 @@ export function Pages() {
         },
         async openSafeAreaView() {
             await clickOnButton("actionButton5");
+        },
+        async openListViewSwipe() {
+            await scrollAndClickOnButton("actionButton2");
         }
     };
 }
