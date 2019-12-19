@@ -6,3 +6,4 @@ export * from "./Feedback";
 export * from "./FloatingActionButton";
 export * from "./Pages";
 export * from "./ProgressCircle";
+export * from "./VideoPlayer";

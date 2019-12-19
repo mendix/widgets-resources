@@ -42,7 +42,7 @@ export function Pages() {
             await clickOnButton("actionButton16");
         },
         async openVideoPlayer() {
-            await clickOnButton("actionButton24");
+            await scrollAndClickOnButton("actionButton24");
         },
         async openWebView() {
             await clickOnButton("actionButton28");
