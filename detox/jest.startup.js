@@ -13,6 +13,8 @@ beforeAll(async () => {
         newInstance: true,
         launchArgs: { detoxPrintBusyIdleResources: "YES", detoxURLBlacklistRegex: ".*firestore.*" }
     });
+    await device.setBiometricEnrollment(true);
+    await device.setURLBlacklist(["https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"]);
     await waitFor(element(by.id("NativeHome.Widgets")))
         .toBeVisible()
         .withTimeout(120000);
