@@ -1,5 +1,5 @@
 import { Pages, VideoPlayer } from "./elements";
-import { expect, waitFor } from "detox";
+import { expect } from "detox";
 
 describe("Video Player", () => {
     beforeAll(async () => {
@@ -8,9 +8,6 @@ describe("Video Player", () => {
 
     it("should render the default video player", async () => {
         const videoPlayer = VideoPlayer("videoPlayer1");
-        await waitFor(videoPlayer)
-            .toBeVisible()
-            .withTimeout(120000);
         await expect(videoPlayer).toBeVisible();
         await videoPlayer.tap();
     });
