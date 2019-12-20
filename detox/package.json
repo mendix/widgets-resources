@@ -5,7 +5,7 @@
         "compress:ios": "cd ./ios && tar -cvzf NativeComponents.taz.gz NativeComponents.app",
         "decompress:ios": "cd ./ios && tar -xvf NativeComponents.taz.gz &>/dev/null",
         "pretest:ios": "npm run decompress:ios",
-        "test:ios": "detox test --record-videos failing --configuration ios.simulator ./specs",
+        "test:ios": "detox test --record-videos failing --configuration ios.simulator --loglevel trace ./specs",
         "test:android": "detox test --record-videos all --configuration android.emulator ./specs"
     },
     "devDependencies": {

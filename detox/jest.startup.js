@@ -9,8 +9,10 @@ jasmine.getEnv().addReporter(specReporter);
 
 beforeAll(async () => {
     await init(config, { initGlobals: false, launchApp: false });
-    await device.launchApp({ newInstance: true, launchArgs: { detoxPrintBusyIdleResources: "YES" } });
-    await device.setURLBlacklist([".*googleapis.com*"]);
+    await device.launchApp({
+        newInstance: true,
+        launchArgs: { detoxPrintBusyIdleResources: "YES", detoxURLBlacklistRegex: ".*firestore.*" }
+    });
     await waitFor(element(by.id("NativeHome.Widgets")))
         .toBeVisible()
         .withTimeout(120000);
