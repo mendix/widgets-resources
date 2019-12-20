@@ -13,5 +13,9 @@
         "postbuild": "..\"/../node_modules/.bin/ts-node\" --project ./scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
         "version": "npm run build",
         "postversion": "..\"/../node_modules/.bin/ts-node\" ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
+    },
+    "devDependencies": {
+        "@types/querystringify": "^2.0.0",
+        "@types/url-parse": "^1.4.3"
     }
 }
