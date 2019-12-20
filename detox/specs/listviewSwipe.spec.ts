@@ -18,8 +18,4 @@ describe("Listview Swipe", () => {
         await listviewSwipe.getListViewSwipe().swipe("left");
         await listviewSwipe.getListViewSwipe().tap();
     });
-
-    afterAll(async () => {
-        await device.reloadReactNative();
-    });
 });

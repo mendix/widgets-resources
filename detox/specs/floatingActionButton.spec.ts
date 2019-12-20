@@ -66,8 +66,4 @@ describe("Floating Action Button", () => {
         await expect(firstChild).toBeNotVisible();
         await expect(secondChild).toBeNotVisible();
     });
-
-    afterAll(async () => {
-        await device.reloadReactNative();
-    });
 });

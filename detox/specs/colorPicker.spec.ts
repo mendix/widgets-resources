@@ -51,8 +51,4 @@ describe("Color Picker", () => {
         await colorPicker.getAlpha().tapAtPoint({ x: 100, y: 20 });
         await expect(textBox).toHaveText("hsla(268, 75%, 75%, 0.75)");
     });
-
-    afterAll(async () => {
-        await device.reloadReactNative();
-    });
 });

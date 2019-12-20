@@ -13,8 +13,4 @@ describe("Activity Indicator", () => {
     it("should render the custom indicator", async () => {
         await expect(ActivityIndicator("activityIndicator2")).toBeVisible();
     });
-
-    afterAll(async () => {
-        await device.reloadReactNative();
-    });
 });

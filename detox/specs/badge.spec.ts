@@ -36,8 +36,4 @@ describe("Badge", () => {
         await expect(Alert().getMessage("Action test: Detox")).toBeVisible();
         await Alert().confirm();
     });
-
-    afterAll(async () => {
-        await device.reloadReactNative();
-    });
 });

@@ -24,8 +24,4 @@ describe("Progress Circle", () => {
         await progressCircle.getProgressCircle().tap();
         await expect(progressCircle.getText()).toHaveText("75/100");
     });
-
-    afterAll(async () => {
-        await device.reloadReactNative();
-    });
 });

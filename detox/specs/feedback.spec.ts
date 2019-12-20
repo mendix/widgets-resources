@@ -35,8 +35,4 @@ describe("Feedback", () => {
         await expect(feedback.getSuccessOkButton()).toBeVisible();
         await feedback.getSuccessOkButton().tap();
     });
-
-    afterAll(async () => {
-        await device.reloadReactNative();
-    });
 });
