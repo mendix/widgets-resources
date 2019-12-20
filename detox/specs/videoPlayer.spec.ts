@@ -15,15 +15,6 @@ describe("Video Player", () => {
         await videoPlayer.tap();
     });
 
-    it("should render the custom video player", async () => {
-        const videoPlayer = VideoPlayer("videoPlayer2");
-        await waitFor(videoPlayer)
-            .toBeVisible()
-            .withTimeout(120000);
-        await expect(videoPlayer).toBeVisible();
-        await videoPlayer.tap();
-    });
-
     afterAll(async () => {
         await device.reloadReactNative();
     });
