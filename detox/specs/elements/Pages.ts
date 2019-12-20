@@ -55,6 +55,12 @@ export function Pages() {
         },
         async openListViewSwipe() {
             await scrollAndClickOnButton("actionButton2");
+        },
+        async openJSActions() {
+            await clickOnButton("bottomBarItem$Actions");
+        },
+        async openNanoflowCommons() {
+            await clickOnButton("bottomBarItem$Commons");
         }
     };
 }
