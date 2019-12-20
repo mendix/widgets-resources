@@ -4,6 +4,7 @@ export * from "./Badge";
 export * from "./ColorPicker";
 export * from "./Feedback";
 export * from "./FloatingActionButton";
+export * from "./IntroScreen";
 export * from "./ListViewSwipe";
 export * from "./Pages";
 export * from "./ProgressCircle";
