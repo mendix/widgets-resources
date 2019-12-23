@@ -11,11 +11,11 @@ describe("Listview Swipe", () => {
     });
 
     it("should render the list view swipe", async () => {
-        const listviewSwipe = ListViewSwipe("listViewSwipe3");
-        await expect(listviewSwipe.getListViewSwipe()).toBeVisible();
-        await listviewSwipe.getListViewSwipe().swipe("right");
-        await listviewSwipe.getListViewSwipe().tap();
-        await listviewSwipe.getListViewSwipe().swipe("left");
-        await listviewSwipe.getListViewSwipe().tap();
+        const listviewSwipe = ListViewSwipe("listViewSwipe3", "listView2");
+        await expect(listviewSwipe.getListViewSwipe(0)).toBeVisible();
+        await listviewSwipe.getListViewSwipe(0).swipe("right");
+        await listviewSwipe.getListViewSwipe(0).tap();
+        await listviewSwipe.getListViewSwipe(0).swipe("left");
+        await listviewSwipe.getListViewSwipe(0).tap();
     });
 });

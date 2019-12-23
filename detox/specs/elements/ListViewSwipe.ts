@@ -1,9 +1,9 @@
 import { by, element } from "detox";
 
-export function ListViewSwipe(testID: string, matcher = by.id(testID)) {
+export function ListViewSwipe(testID: string, listViewTestID: string, matcher = by.id(testID)) {
     return {
-        getListViewSwipe() {
-            return element(matcher);
+        getListViewSwipe(index: 0) {
+            return element(matcher.withAncestor(by.id(`${listViewTestID}$item${index}`)));
         },
         getLeftAction() {
             return element(by.id(`${testID}$leftAction`));
