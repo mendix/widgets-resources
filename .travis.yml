@@ -54,6 +54,7 @@ jobs:
           script:
               - if [ "$WEB_PROJECTS" = "true" ] && [ "$PARTIAL_BUILD" = "true" ]; then travis_wait 30 npm run test:e2e -- $SCRIPT_ARGS; else echo "No individuals web package changed. Skipping tests"; fi
         - name: "iOS Automated tests"
+          fast_finish: true
           language: objective-c
           os: osx
           osx_image: xcode11.2
@@ -63,9 +64,8 @@ jobs:
               - CODE_SIGNING_REQUIRED=NO
           before_install:
               - nvm install node
-              - gem install xcpretty
               - brew tap wix/brew
-              - brew install applesimutils --HEAD
+              - brew install applesimutils
               - cd detox
           install:
               - npm ci

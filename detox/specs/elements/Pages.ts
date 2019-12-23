@@ -8,6 +8,14 @@ export function Pages() {
             .withTimeout(2000);
         await button.tap();
     };
+    const scrollAndClickOnButton = async (buttonName: string, step?: number) => {
+        const button = element(by.id(buttonName));
+        await waitFor(button)
+            .toBeVisible()
+            .whileElement(by.id("scrollContainer1"))
+            .scroll(step || 250, "down");
+        await button.tap();
+    };
     return {
         async openActivityIndicator() {
             await clickOnButton("actionButton15");
@@ -34,16 +42,25 @@ export function Pages() {
             await clickOnButton("actionButton16");
         },
         async openVideoPlayer() {
-            await clickOnButton("actionButton24");
+            await scrollAndClickOnButton("actionButton24");
         },
         async openWebView() {
             await clickOnButton("actionButton28");
         },
         async openIntroScreen() {
-            await clickOnButton("actionButton4");
+            await scrollAndClickOnButton("actionButton4");
         },
         async openSafeAreaView() {
             await clickOnButton("actionButton5");
+        },
+        async openListViewSwipe() {
+            await scrollAndClickOnButton("actionButton2");
+        },
+        async openJSActions() {
+            await clickOnButton("bottomBarItem$Actions");
+        },
+        async openNanoflowCommons() {
+            await clickOnButton("bottomBarItem$Commons");
         }
     };
 }

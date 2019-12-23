@@ -3,17 +3,14 @@
     "copyright": "Mendix BV",
     "scripts": {
         "compress:ios": "cd ./ios && tar -cvzf NativeComponents.taz.gz NativeComponents.app",
-        "decompress:ios": "cd ./ios && tar -xvf NativeComponents.taz.gz",
+        "decompress:ios": "cd ./ios && tar -xvf NativeComponents.taz.gz &>/dev/null",
         "pretest:ios": "npm run decompress:ios",
-        "test:ios": "detox test --configuration ios.simulator ./specs",
+        "test:ios": "detox test --configuration ios.simulator --debug-synchronization 1000 ./specs",
         "test:android": "detox test --configuration android.emulator ./specs"
     },
     "devDependencies": {
-        "@babel/core": "^7.7.2",
-        "@babel/preset-env": "^7.7.1",
         "@types/detox": "^14.5.1",
         "@types/jest": "^24.0.23",
-        "babel-jest": "^24.9.0",
         "detox": "^14.9.1",
         "jest": "^24.9.0",
         "jest-junit": "^9.0.0",

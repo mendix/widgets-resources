@@ -35,12 +35,18 @@ export class RangeSlider extends Component<Props, State> {
         const enabledOne = editable && lowerValue != null && !this.props.lowerValueAttribute.readOnly;
         const enabledTwo = editable && upperValue != null && !this.props.upperValueAttribute.readOnly;
 
-        const customMarker: Function = (markerEnabled: boolean) => (props: MarkerProps): JSX.Element => (
-            <Marker {...props} markerStyle={markerEnabled ? props.markerStyle : this.styles.markerDisabled} />
+        const customMarker: Function = (markerEnabled: boolean, testID: string) => (
+            props: MarkerProps
+        ): JSX.Element => (
+            <Marker
+                {...props}
+                markerStyle={markerEnabled ? props.markerStyle : this.styles.markerDisabled}
+                testID={`${this.props.name}$${testID}`}
+            />
         );
 
         return (
-            <View onLayout={this.onLayoutHandler} style={this.styles.container}>
+            <View onLayout={this.onLayoutHandler} style={this.styles.container} testID={this.props.name}>
                 <MultiSlider
                     values={lowerValue != null && upperValue != null ? [lowerValue, upperValue] : undefined}
                     min={validProps ? toNumber(this.props.minimumValue) : undefined}
@@ -56,8 +62,8 @@ export class RangeSlider extends Component<Props, State> {
                     onValuesChangeFinish={this.onChangeHandler}
                     sliderLength={this.state.width}
                     isMarkersSeparated
-                    customMarkerLeft={customMarker(enabledOne)}
-                    customMarkerRight={customMarker(enabledTwo)}
+                    customMarkerLeft={customMarker(enabledOne, "leftMarker")}
+                    customMarkerRight={customMarker(enabledTwo, "rightMarker")}
                 />
                 {this.props.lowerValueAttribute.validation && (
                     <Text style={this.styles.validationMessage}>{this.props.lowerValueAttribute.validation}</Text>

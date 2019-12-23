@@ -4,6 +4,7 @@ exports[`Slider renders 1`] = `
 <View
   onLayout={[Function]}
   style={Object {}}
+  testID="slider-test"
 >
   <View
     style={
@@ -124,6 +125,7 @@ exports[`Slider renders 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={null}
+            testID="slider-test$marker"
           >
             <View
               style={

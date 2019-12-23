@@ -1,6 +1,6 @@
 import { available, flattenStyles, toNumber, unavailable } from "@native-mobile-resources/util-widgets";
 import { executeAction } from "@widgets-resources/piw-utils";
-import MultiSlider from "@ptomasroos/react-native-multi-slider";
+import MultiSlider, { MarkerProps } from "@ptomasroos/react-native-multi-slider";
 import { Component, createElement } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
 import { Big } from "big.js";
@@ -30,8 +30,12 @@ export class Slider extends Component<Props, State> {
         const validProps = validationMessages.length === 0;
         const editable = this.props.editable !== "never" && !this.props.valueAttribute.readOnly && validProps;
 
+        const customMarker: Function = () => (props: MarkerProps): JSX.Element => (
+            <Marker {...props} testID={`${this.props.name}$marker`} />
+        );
+
         return (
-            <View onLayout={this.onLayoutHandler} style={this.styles.container}>
+            <View onLayout={this.onLayoutHandler} style={this.styles.container} testID={this.props.name}>
                 <MultiSlider
                     values={value != null ? [value] : undefined}
                     min={validProps ? toNumber(this.props.minimumValue) : undefined}
@@ -46,7 +50,7 @@ export class Slider extends Component<Props, State> {
                     onValuesChangeFinish={this.onChangeHandler}
                     sliderLength={this.state.width}
                     allowOverlap
-                    customMarker={Marker}
+                    customMarker={customMarker()}
                 />
                 {!validProps && <Text style={this.styles.validationMessage}>{validationMessages.join("\n")}</Text>}
                 {this.props.valueAttribute.validation && (

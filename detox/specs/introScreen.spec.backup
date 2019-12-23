@@ -1,0 +1,18 @@
+import { IntroScreen, Pages } from "./elements";
+import { device, expect } from "detox";
+
+describe("Intro Screen", () => {
+    beforeAll(async () => {
+        await Pages().openIntroScreen();
+        await device.disableSynchronization();
+    });
+
+    it("should render correctly", async () => {
+        const introScreen = IntroScreen("introScreen1");
+        await expect(introScreen.getIntroScreen()).toBeVisible();
+    });
+
+    afterAll(async () => {
+        await device.reloadReactNative();
+    });
+});
