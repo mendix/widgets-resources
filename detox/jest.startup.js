@@ -10,7 +10,7 @@ jasmine.getEnv().addReporter(specReporter);
 beforeAll(async () => {
     await init(config, { initGlobals: false, launchApp: false });
     await device.launchApp({
-        newInstance: false,
+        newInstance: true,
         launchArgs: {
             detoxPrintBusyIdleResources: "YES",
             detoxURLBlacklistRegex: ".*firestore.*"
@@ -31,5 +31,6 @@ beforeEach(async () => {
 
 afterAll(async () => {
     await adapter.afterAll();
+    await device.reloadReactNative();
     await cleanup();
 });
