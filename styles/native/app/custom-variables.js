@@ -110,6 +110,7 @@ export const button = {
         color: brand.primary,
         borderColor: brand.primary,
         backgroundColor: "transparent",
+        inversedColor: "#FFF",
     },
     success: {
         color: "#FFF",

@@ -63,6 +63,30 @@ export const btnDanger = {
         color: button.danger.color,
     },
 };
+export const btnPrimaryInversed = {
+    container: {
+        borderColor: button.primary.color,
+        backgroundColor: button.primary.color,
+    },
+    icon: {
+        color: button.primary.backgroundColor,
+    },
+    caption: {
+        color: button.primary.backgroundColor,
+    },
+};
+export const btnSecondaryInversed = {
+    container: {
+        borderColor: button.secondary.inversedColor,
+        backgroundColor: button.secondary.backgroundColor,
+    },
+    icon: {
+        color: button.secondary.inversedColor,
+    },
+    caption: {
+        color: button.secondary.inversedColor,
+    },
+};
 
 //== Extra Classes
 //## Helper classes to change the look and feel of the widget

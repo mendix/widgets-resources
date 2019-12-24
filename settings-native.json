@@ -633,6 +633,14 @@
                     {
                         "name": "Danger",
                         "class": "btnDanger"
+                    },
+                    {
+                        "name": "Inversed",
+                        "class": "btnPrimaryInversed"
+                    },
+                    {
+                        "name": "Secondary Inversed",
+                        "class": "btnSecondaryInversed"
                     }
                 ]
             },
