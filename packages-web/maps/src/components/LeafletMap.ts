@@ -224,9 +224,7 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
 
     private createMarker = (location: Location): Marker => {
         const { latitude, longitude, url } = location;
-        // @ts-ignore
         const marker = new Marker([Number(latitude), Number(longitude)], {
-            // @ts-ignore
             GUID: location.mxObject!.getGuid()
         });
         if (url) {

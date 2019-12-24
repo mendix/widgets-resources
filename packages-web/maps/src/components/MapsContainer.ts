@@ -1,7 +1,7 @@
 import { Component, createElement, ReactNode } from "react";
 import { LeafletEvent } from "leaflet";
 
-import GoogleMap from "./GoogleMap";
+import GoogleMap, { GoogleMapsClickEvent } from "./GoogleMap";
 import { LeafletMap } from "./LeafletMap";
 import { Container } from "../utils/namespace";
 import { fetchData, fetchMarkerObjectUrl, parseStaticLocations } from "../utils/Data";
@@ -220,13 +220,9 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
         );
     }
 
-    private onClickMarker = (
-        event: LeafletEvent & google.maps.MouseEvent & { options: { GUID: string } },
-        locationAttr: DataSourceLocationProps
-    ) => {
+    private onClickMarker = (event: LeafletEvent & GoogleMapsClickEvent, locationAttr: DataSourceLocationProps) => {
         const { locations } = this.state;
         const GUID = this.props.mapProvider === "googleMaps" ? event.options.GUID : event.target.options.GUID;
-        console.log("GUID", GUID);
         this.executeAction(
             locations[locations.findIndex(targetLoc => targetLoc.mxObject!.getGuid() === GUID)],
             locationAttr
