@@ -172,7 +172,13 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
                 if (currentLocation.locationAttr && currentLocation.locationAttr.onClickEvent !== "doNothing") {
                     marker.addListener("click", (event: google.maps.MouseEvent) => {
                         if (this.props.onClickMarker && currentLocation.locationAttr) {
-                            this.props.onClickMarker(event, currentLocation.locationAttr);
+                            const options = {
+                                options: {
+                                    GUID: currentLocation.mxObject!.getGuid()
+                                }
+                            };
+                            // @ts-ignore
+                            this.props.onClickMarker({ ...event, ...options }, currentLocation.locationAttr);
                         }
                     });
                 } else {

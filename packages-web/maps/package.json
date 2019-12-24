@@ -1,7 +1,7 @@
 {
     "name": "maps-web",
     "widgetName": "Maps",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "Show locations on Google Maps",
     "copyright": "Mendix BV",
     "repository": {
@@ -45,6 +45,7 @@
         "@types/googlemaps": "3.30.19",
         "@types/faker": "^4.1.5",
         "@types/leaflet": "^1.4.4",
+        "@types/react": "~16.8.13",
         "@types/react-resize-detector": "^4.0.1",
         "@widgets-resources/utils-react-widgets": "0.0.1",
         "faker": "^4.1.0"
