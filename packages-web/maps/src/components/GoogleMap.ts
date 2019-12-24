@@ -13,9 +13,15 @@ type DataSourceLocationProps = Container.DataSourceLocationProps;
 type Location = Container.Location;
 type SharedProps = MapUtils.SharedProps;
 
+export interface GoogleMapsClickEvent extends google.maps.MouseEvent {
+    options: {
+        GUID: string;
+    };
+}
+
 export interface GoogleMapsProps extends SharedProps, MapProps {
     scriptsLoaded?: boolean;
-    onClickMarker?: (event: google.maps.MouseEvent, locationAttr: DataSourceLocationProps) => void;
+    onClickMarker?: (event: GoogleMapsClickEvent, locationAttr: DataSourceLocationProps) => void;
 }
 
 export interface GoogleMapState {
@@ -177,7 +183,6 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
                                     GUID: currentLocation.mxObject!.getGuid()
                                 }
                             };
-                            // @ts-ignore
                             this.props.onClickMarker({ ...event, ...options }, currentLocation.locationAttr);
                         }
                     });
