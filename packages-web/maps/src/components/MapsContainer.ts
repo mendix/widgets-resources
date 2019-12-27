@@ -223,10 +223,15 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
     private onClickMarker = (event: LeafletEvent & GoogleMapsClickEvent, locationAttr: DataSourceLocationProps) => {
         const { locations } = this.state;
         const GUID = this.props.mapProvider === "googleMaps" ? event.options.GUID : event.target.options.GUID;
-        this.executeAction(
-            locations[locations.findIndex(targetLoc => targetLoc.mxObject!.getGuid() === GUID)],
-            locationAttr
-        );
+
+        if (GUID) {
+            this.executeAction(
+                locations[
+                    locations.findIndex(targetLoc => targetLoc.mxObject && targetLoc.mxObject!.getGuid() === GUID)
+                ],
+                locationAttr
+            );
+        }
     };
 
     private executeAction = (markerLocation: Location, locationAttr: DataSourceLocationProps) => {

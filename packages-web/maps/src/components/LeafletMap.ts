@@ -225,7 +225,7 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
     private createMarker = (location: Location): Marker => {
         const { latitude, longitude, url } = location;
         const marker = new Marker([Number(latitude), Number(longitude)], {
-            GUID: location.mxObject!.getGuid()
+            GUID: location.mxObject ? location.mxObject.getGuid() : undefined
         });
         if (url) {
             marker.setIcon(
