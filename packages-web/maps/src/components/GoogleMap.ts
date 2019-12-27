@@ -15,7 +15,7 @@ type SharedProps = MapUtils.SharedProps;
 
 export interface GoogleMapsClickEvent extends google.maps.MouseEvent {
     options: {
-        GUID?: string;
+        Guid?: string;
     };
 }
 
@@ -180,7 +180,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
                         if (this.props.onClickMarker && currentLocation.locationAttr) {
                             const options = {
                                 options: {
-                                    GUID: currentLocation.mxObject ? currentLocation.mxObject.getGuid() : undefined
+                                    Guid: currentLocation.mxObject ? currentLocation.mxObject.getGuid() : undefined
                                 }
                             };
                             this.props.onClickMarker({ ...event, ...options }, currentLocation.locationAttr);
