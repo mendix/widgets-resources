@@ -222,12 +222,12 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
 
     private onClickMarker = (event: LeafletEvent & GoogleMapsClickEvent, locationAttr: DataSourceLocationProps) => {
         const { locations } = this.state;
-        const GUID = this.props.mapProvider === "googleMaps" ? event.options.GUID : event.target.options.GUID;
+        const Guid = this.props.mapProvider === "googleMaps" ? event.options.Guid : event.target.options.Guid;
 
-        if (GUID) {
+        if (Guid) {
             this.executeAction(
                 locations[
-                    locations.findIndex(targetLoc => targetLoc.mxObject && targetLoc.mxObject.getGuid() === GUID)
+                    locations.findIndex(targetLoc => targetLoc.mxObject && targetLoc.mxObject.getGuid() === Guid)
                 ],
                 locationAttr
             );
