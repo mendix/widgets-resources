@@ -227,7 +227,7 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
         if (GUID) {
             this.executeAction(
                 locations[
-                    locations.findIndex(targetLoc => targetLoc.mxObject && targetLoc.mxObject!.getGuid() === GUID)
+                    locations.findIndex(targetLoc => targetLoc.mxObject && targetLoc.mxObject.getGuid() === GUID)
                 ],
                 locationAttr
             );
