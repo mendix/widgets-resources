@@ -28,6 +28,8 @@ export interface MapsContainerState {
     isFetchingData?: boolean;
 }
 
+declare type Option<T> = T | undefined;
+
 class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
     private subscriptionHandles: number[] = [];
     readonly state: MapsContainerState = {
@@ -220,22 +222,23 @@ class MapsContainer extends Component<MapsContainerProps, MapsContainerState> {
         );
     }
 
-    private onClickMarker = (event: LeafletEvent & GoogleMapsClickEvent, locationAttr: DataSourceLocationProps) => {
+    private onClickMarker = (
+        event: LeafletEvent & GoogleMapsClickEvent,
+        locationAttr: DataSourceLocationProps
+    ): void => {
         const { locations } = this.state;
         const Guid = this.props.mapProvider === "googleMaps" ? event.options.Guid : event.target.options.Guid;
 
         if (Guid) {
             this.executeAction(
-                locations[
-                    locations.findIndex(targetLoc => targetLoc.mxObject && targetLoc.mxObject.getGuid() === Guid)
-                ],
+                locations.find(targetLoc => targetLoc.mxObject && targetLoc.mxObject.getGuid() === Guid),
                 locationAttr
             );
         }
     };
 
-    private executeAction = (markerLocation: Location, locationAttr: DataSourceLocationProps) => {
-        const object = markerLocation.mxObject;
+    private executeAction = (markerLocation: Option<Location>, locationAttr: DataSourceLocationProps): void => {
+        const object = markerLocation ? markerLocation.mxObject : undefined;
 
         if (object) {
             const { mxform } = this.props;
