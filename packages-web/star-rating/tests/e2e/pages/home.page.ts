@@ -1,4 +1,3 @@
-// browser typings are declared globally
 class HomePage {
     private modalWindow: WebdriverIO.Element;
     get usernameInput(): WebdriverIO.Element {
