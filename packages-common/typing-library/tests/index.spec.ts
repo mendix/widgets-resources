@@ -11,6 +11,10 @@ import { iconNativeOutput, iconWebOutput } from "./outputs/icon";
 import { MendixXML } from "../src/typings";
 import { containmentInput, containmentInputNative } from "./inputs/containment";
 import { containmentNativeOutput, containmentWebOutput } from "./outputs/containment";
+import { fileInput, fileInputNative } from "./inputs/file";
+import { fileNativeOutput, fileWebOutput } from "./outputs/file";
+import { listFileInput, listFileInputNative } from "./inputs/list-files";
+import { listFileNativeOutput, listFileWebOutput } from "./outputs/list-files";
 
 describe("Generating tests", function() {
     it(`Generates a parsed typing from XML for native`, function() {
@@ -71,6 +75,26 @@ describe("Generating tests", function() {
     it(`Generates a parsed typing from XML for native using containment`, function() {
         const newContent = transformJsonContent(convertXmltoJson(containmentInputNative), "MyWidget");
         expect(newContent).toBe(containmentNativeOutput);
+    });
+
+    it(`Generates a parsed typing from XML for web using file`, function() {
+        const newContent = transformJsonContent(convertXmltoJson(fileInput), "MyWidget");
+        expect(newContent).toBe(fileWebOutput);
+    });
+
+    it(`Generates a parsed typing from XML for native using file`, function() {
+        const newContent = transformJsonContent(convertXmltoJson(fileInputNative), "MyWidget");
+        expect(newContent).toBe(fileNativeOutput);
+    });
+
+    it(`Generates a parsed typing from XML for web using a list of file`, function() {
+        const newContent = transformJsonContent(convertXmltoJson(listFileInput), "MyWidget");
+        expect(newContent).toBe(listFileWebOutput);
+    });
+
+    it(`Generates a parsed typing from XML for native using a list of file`, function() {
+        const newContent = transformJsonContent(convertXmltoJson(listFileInputNative), "MyWidget");
+        expect(newContent).toBe(listFileNativeOutput);
     });
 });
 

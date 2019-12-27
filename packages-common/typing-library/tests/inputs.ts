@@ -30,6 +30,10 @@ export const contentGroup: string = `<?xml version="1.0" encoding="utf-8"?>
                     <description/>
                     <returnType type="Decimal"/>
                 </property>
+                <property key="file" type="file">
+                    <caption>File</caption>
+                    <description />
+                </property>
             </propertyGroup>
             <propertyGroup caption="Appearance">
                 <property key="bootstrapStyle" type="enumeration" defaultValue="default">
@@ -152,6 +156,11 @@ export const content: string = `<?xml version="1.0" encoding="utf-8"?>
             <description/>
             <returnType type="Decimal"/>
         </property>
+        <property key="file" type="file">
+            <caption>File</caption>
+            <category>General</category>
+            <description />
+        </property>
         <property key="bootstrapStyle" type="enumeration" defaultValue="default">
             <caption>MyWidget style</caption>
             <category>Display</category>
@@ -260,6 +269,10 @@ export const contentGroupNative: string = `<?xml version="1.0" encoding="utf-8"?
                     <caption>Expression decimal value</caption>
                     <description/>
                     <returnType type="Decimal"/>
+                </property>
+                <property key="file" type="file">
+                    <caption>File</caption>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Appearance">
@@ -382,6 +395,11 @@ export const contentNative: string = `<?xml version="1.0" encoding="utf-8"?>
             <category>General</category>
             <description/>
             <returnType type="Decimal"/>
+        </property>
+        <property key="file" type="file">
+            <caption>File</caption>
+            <category>General</category>
+            <description />
         </property>
         <property key="bootstrapStyle" type="enumeration" defaultValue="default">
             <caption>MyWidget style</caption>
