@@ -64,6 +64,8 @@ const translateType = (
             return prop.$.type;
         case "widgets":
             return "ReactNode";
+        case "file":
+            return preview && !isChild ? "FileValue" : "DynamicValue<FileValue>";
         default:
             return "any";
     }
@@ -284,6 +286,7 @@ function findImports(mainTypes: string, childTypes: string[]): string {
         "ActionValue",
         "DynamicValue",
         "EditableValue",
+        "FileValue",
         "NativeIcon",
         "NativeImage",
         "WebIcon",

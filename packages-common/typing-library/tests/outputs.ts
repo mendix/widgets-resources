@@ -3,7 +3,7 @@ export const nativeResult = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import { ActionValue, DynamicValue, EditableValue, NativeImage } from "mendix";
+import { ActionValue, DynamicValue, EditableValue, FileValue, NativeImage } from "mendix";
 
 interface CommonProps<Style> {
     name: string;
@@ -26,6 +26,7 @@ export interface MyWidgetProps<Style> extends CommonProps<Style> {
     mywidgetValue?: string;
     valueExpression?: DynamicValue<string>;
     valueExpressionDecimal?: DynamicValue<BigJs.Big>;
+    file: DynamicValue<FileValue>;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
     tries?: number;
@@ -44,7 +45,7 @@ export const webResult = `/**
  */
 import { CSSProperties } from "react";
 import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/typings";
-import { ActionValue, DynamicValue, EditableValue, WebImage } from "mendix";
+import { ActionValue, DynamicValue, EditableValue, FileValue, WebImage } from "mendix";
 
 interface CommonProps {
     name: string;
@@ -83,6 +84,7 @@ export interface MyWidgetContainerProps extends CommonProps {
     mywidgetValue?: string;
     valueExpression?: DynamicValue<string>;
     valueExpressionDecimal?: DynamicValue<BigJs.Big>;
+    file: DynamicValue<FileValue>;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
     tries?: number;
@@ -101,6 +103,7 @@ export interface MyWidgetPreviewProps {
     mywidgetValue?: string;
     valueExpression?: string;
     valueExpressionDecimal?: BigJs.Big;
+    file: FileValue;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
     tries?: number;
@@ -116,6 +119,7 @@ export interface VisibilityMap {
     mywidgetValue: boolean;
     valueExpression: boolean;
     valueExpressionDecimal: boolean;
+    file: boolean;
     bootstrapStyle: boolean;
     mywidgetType: boolean;
     tries: boolean;
