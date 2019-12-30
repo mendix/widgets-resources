@@ -1,32 +1,31 @@
-// browser typings are declared globally
 class HomePage {
     private modalWindow: WebdriverIO.Element;
-    get usernameInput() {
+    get usernameInput(): WebdriverIO.Element {
         return $("#usernameInput");
     }
 
-    get passwordInput() {
+    get passwordInput(): WebdriverIO.Element {
         return $("#passwordInput");
     }
 
-    get loginButton() {
+    get loginButton(): WebdriverIO.Element {
         return $("#loginButton");
     }
 
-    get rateMeButton() {
+    get rateMeButton(): WebdriverIO.Element {
         return $(".mx-name-actionButton1");
     }
 
-    get rateMePage() {
+    get rateMePage(): WebdriverIO.Element {
         this.modalWindow = $("div.modal-content.mx-window-content");
         return this.modalWindow;
     }
 
-    rateOnPosition(position: number) {
+    rateOnPosition(position: number): WebdriverIO.Element {
         return $("div.modal-content.mx-window-content .widget-star-rating > span >" + `span:nth-child(${position})`);
     }
 
-    emptyStarOnPosition(position: number) {
+    emptyStarOnPosition(position: number): WebdriverIO.Element {
         return $(
             "div.modal-content.mx-window-content .widget-star-rating > span >" +
                 `span:nth-child(${position}) > span:nth-child(1)`
@@ -34,7 +33,7 @@ class HomePage {
     }
 
     // when the fullStar width is 0%, then empty star is still visible and that star is not rated.
-    fullStarOnPosition(position: number) {
+    fullStarOnPosition(position: number): WebdriverIO.Element {
         return $(
             "div.modal-content.mx-window-content .widget-star-rating > span >" +
                 `span:nth-child(${position}) > span:nth-child(2)`
@@ -42,7 +41,7 @@ class HomePage {
     }
 
     open(): void {
-        browser.url("/");
+        browser.url("/login.html");
     }
 }
 const page = new HomePage();

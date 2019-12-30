@@ -1,6 +1,6 @@
-import gridpage from "./pages/grid.page";
-import tabpage from "./pages/tab.page";
-import errorpage from "./pages/error.page";
+import gridpage from "../pages/grid.page";
+import tabpage from "../pages/tab.page";
+import errorpage from "../pages/error.page";
 
 describe("Grid page", () => {
     it("should render youtube iframe", () => {
