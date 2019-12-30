@@ -54,6 +54,14 @@ export const validateLocationProps = <T extends Partial<Container.MapsContainerP
                             location.staticLongitude
                         }' at location ${index + 1}`
                     );
+                } else {
+                    if (location.onClickEvent && location.onClickEvent !== "doNothing") {
+                        errorMessage.push(
+                            `Static location does not allow to trigger onclick events: latitude '${
+                                location.staticLatitude
+                            }', longitude '${location.staticLongitude}' at location ${index + 1}`
+                        );
+                    }
                 }
             }
             if (location.markerImage === "enumImage" && !(markerImages && markerImages.length)) {

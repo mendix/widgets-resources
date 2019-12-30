@@ -179,15 +179,19 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
             locations.forEach(location => {
                 const marker = this.createMarker(location);
                 const layer = this.markerGroup.addLayer(
-                    marker.on("click", event => {
-                        if (
-                            this.props.onClickMarker &&
-                            location.locationAttr &&
-                            location.locationAttr.onClickEvent !== "doNothing"
-                        ) {
-                            this.props.onClickMarker(event, location.locationAttr);
-                        }
-                    })
+                    this.props.onClickMarker &&
+                        location.locationAttr &&
+                        location.locationAttr.onClickEvent !== "doNothing"
+                        ? marker.on("click", event => {
+                              if (
+                                  this.props.onClickMarker &&
+                                  location.locationAttr &&
+                                  location.locationAttr.onClickEvent !== "doNothing"
+                              ) {
+                                  this.props.onClickMarker(event, location.locationAttr);
+                              }
+                          })
+                        : marker
                 );
                 this.map!.addLayer(layer);
             });
