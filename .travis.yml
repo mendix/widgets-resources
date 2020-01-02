@@ -71,6 +71,39 @@ jobs:
               - npm ci
           script:
               - if [ "$NATIVE_PROJECTS" = "true" ]; then npm run test:ios; else echo "No native package changed. Skipping ios tests"; fi
+        - name: "Android Automated tests"
+          language: android
+          fast_finish: true
+          android:
+              components:
+                  - android-28
+                  - android-26
+                  - build-tools-28.0.3
+                  - tools
+                  - platform-tools
+                  - extra-google-google_play_services
+                  - extra-google-m2repository
+                  - extra-android-m2repository
+                  - sys-img-x86_64-android-26
+          before_install:
+              - echo yes | sdkmanager ndk-bundle
+              - export ANDROID_NDK="$ANDROID_HOME/ndk-bundle"
+              # Need to update the tools so we'd have a decent 'emulator' bin and the newer 'avdmanager' (instead of the 'android' bin)
+              - echo yes | sdkmanager --update
+              - sdkmanager --list
+              # Set up emulator
+              - avdmanager create avd --force --name EMULATOR --abi x86_64 --device "Nexus 5X" -k "system-images;android-26;default;x86_64"
+              - echo "skin.name=1080x1920" >> ~/.android/avd/EMULATOR.avd/config.ini
+              - echo "vm.heapSize=512" >> ~/.android/avd/EMULATOR.avd/config.ini
+              - echo "hw.ramSize=1024" >> ~/.android/avd/EMULATOR.avd/config.ini
+              - nvm install node
+              - cd detox
+          install:
+              - npm ci
+          before_script:
+              - /usr/local/android-sdk/tools/emulator @EMULATOR -verbose -no-window -no-snapshot -no-boot-anim -no-accel -noaudio -gpu swiftshader_indirect &
+          script:
+              - npm run test:android
 notifications:
     slack:
         template:
