@@ -57,9 +57,8 @@ export const validateLocationProps = <T extends Partial<Container.MapsContainerP
                 } else {
                     if (location.onClickEvent && location.onClickEvent !== "doNothing") {
                         errorMessage.push(
-                            `Static location does not allow to trigger onclick events: latitude '${
-                                location.staticLatitude
-                            }', longitude '${location.staticLongitude}' at location ${index + 1}`
+                            `Static location items (at location ${index +
+                                1}) does not support maker events. The On click can only be set to "Do nothing"`
                         );
                     }
                 }
