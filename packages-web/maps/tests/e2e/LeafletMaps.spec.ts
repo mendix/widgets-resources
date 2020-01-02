@@ -21,11 +21,8 @@ describe("Maps", () => {
             singleLocationPage.latitudeInput.waitForExist();
             singleLocationPage.longitudeInput.waitForExist();
 
-            singleLocationPage.latitudeInput.click();
             singleLocationPage.latitudeInput.setValue(190);
-            singleLocationPage.longitudeInput.click();
             singleLocationPage.longitudeInput.setValue(200);
-            singleLocationPage.longitudeLabel.click();
 
             singleLocationPage.alert.waitForExist();
             const alert = singleLocationPage.alert.getText();
