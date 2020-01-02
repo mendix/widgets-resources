@@ -74,6 +74,7 @@ jobs:
         - name: "Android Automated tests"
           language: android
           fast_finish: true
+          dist: trusty
           android:
               components:
                   - android-28
