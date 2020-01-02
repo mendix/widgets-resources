@@ -7,11 +7,7 @@ fi
 
 ### Wait for emulator
 if [[ "$TRAVIS" == "true" ]]; then
-    run_f "$(dirname "$0")/ci.android-waitforemulator.sh"
+    $(dirname "$0")/ci.android-waitforemulator.sh
 fi
 
-### Run e2e's
-pushd detox/test
-run_f "npm run test:android"
-# run_f "npm run verify-artifacts:android"
-popd
+npm run test:android
