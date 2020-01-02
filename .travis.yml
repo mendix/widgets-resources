@@ -100,10 +100,9 @@ jobs:
               - cd detox
           install:
               - npm ci
-          before_script:
               - /usr/local/android-sdk/tools/emulator @EMULATOR -verbose -no-window -no-snapshot -no-boot-anim -no-accel -noaudio -gpu swiftshader_indirect &
           script:
-              - npm run test:android
+              - ./scripts/ci.android.sh
 notifications:
     slack:
         template:
