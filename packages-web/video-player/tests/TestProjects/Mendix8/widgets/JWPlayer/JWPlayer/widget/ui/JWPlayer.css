@@ -1,4 +1,0 @@
-/* fix share overlay conflict with logo URL */
-.jw-plugin-sharing .jw-sharing-container {
-    z-index: 10;
-}
