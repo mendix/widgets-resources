@@ -24,6 +24,11 @@
     flex-wrap: wrap;
     margin-right: -$gutter-size;
     margin-left: -$gutter-size;
+
+    &::before,
+    &::after {
+        content: normal;
+    }
 }
 
 .no-gutters {
