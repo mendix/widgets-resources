@@ -37,6 +37,7 @@ export const ActionButton = {
         color: button.primary.color,
         fontSize: button.fontSize,
         fontFamily: font.family,
+        fontWeight: button.fontWeight,
     },
 };
 

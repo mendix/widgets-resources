@@ -133,6 +133,23 @@ export const btnIconWhite = merge(btnIconPrimary, {
     },
 });
 
+export const btnIconGrayRounded = {
+    container: {
+        flex: 0,
+        padding: 10,
+        borderRadius: 20,
+        borderWidth: 0,
+        backgroundColor: contrast.lower,
+    },
+    icon: {
+        size: 30,
+        color: contrast.higher,
+    },
+    caption: {
+        fontSize: 0,
+    },
+};
+
 // Round Button Icon With Background
 export const btnIconPrimaryBackground = {
     container: {

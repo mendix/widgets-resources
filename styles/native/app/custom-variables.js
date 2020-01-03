@@ -85,6 +85,7 @@ export const spacing = {
 // Button Styles
 export const button = {
     fontSize: font.sizeSmall,
+    fontWeight: font.weightBold,
     fontSizeIcon: font.size,
     fontSizeIconSmall: font.sizeSmall,
     fontSizeIconLarge: font.sizeLarge,

@@ -86,6 +86,7 @@ spacing = merge(spacing, custom.spacing || {});
 // Button Styles
 let button = {
     fontSize: font.sizeSmall,
+    fontWeight: font.weightBold,
     fontSizeIcon: font.size,
     fontSizeIconSmall: font.sizeSmall,
     fontSizeIconLarge: font.sizeLarge,
