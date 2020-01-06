@@ -1,6 +1,6 @@
 {
     "name": "@mendix/pluggable-widgets-typing-generator",
-    "version": "8.5.0",
+    "version": "8.6.0",
     "description": "Mendix Pluggable Widgets typings generator",
     "license": "Apache-2.0",
     "copyright": "Mendix 2019",
