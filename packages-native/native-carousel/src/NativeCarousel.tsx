@@ -1,7 +1,7 @@
 import { ComponentClass, createElement, ReactNode, useCallback, useRef, useState } from "react";
 import { LayoutChangeEvent, Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
 import { DataSourceItem, LayoutEnum, NativeCarouselProps } from "../typings/NativeCarouselProps";
-import { defaultNativeCarouselFullWidthStyle, defaultNativeCarouselStyle, NativeCarouselStyle } from "./styles/styles";
+import { defaultCarouselStyle, CarouselStyle } from "./styles/styles";
 import { toNumber } from "@native-mobile-resources/util-widgets";
 import { executeAction, setAttributeValue } from "@widgets-resources/piw-utils";
 import Carousel, { Pagination } from "react-native-snap-carousel";
@@ -9,19 +9,17 @@ import { Big } from "big.js";
 import deepmerge from "deepmerge";
 import { ValueStatus } from "mendix";
 
-export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>): ReactNode => {
+export const NativeCarousel = (props: NativeCarouselProps<CarouselStyle>): ReactNode => {
     const carousel = useRef<any>(null);
     const [sliderDimensions, setSliderDimensions] = useState({
         slider: { width: 0, height: 0 },
-        slideItem: { width: 0, height: 0 }
+        slide: { width: 0, height: 0 }
     });
     const customStyles = props.style ? props.style.filter(o => o != null) : [];
 
-    const styles = deepmerge.all<NativeCarouselStyle>([
-        defaultNativeCarouselStyle,
-        ...customStyles,
-        props.layout === "fullWidth" ? defaultNativeCarouselFullWidthStyle : {}
-    ]);
+    let styles = deepmerge.all<CarouselStyle>([defaultCarouselStyle, ...customStyles]);
+
+    const layoutSpecificStyle = props.layout === "fullWidth" ? styles.fullWidthLayout : styles.cardLayout;
 
     const onPress = useCallback(() => {
         executeAction(props.onPress);
@@ -43,18 +41,18 @@ export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>):
             const Touchable: ComponentClass<any> = Platform.OS === "ios" ? TouchableOpacity : TouchableNativeFeedback;
             // Touchable styles are ignored if android
             // We dont want to pass already processed item width and height to the touchable
-            delete styles.slideItem.width;
-            delete styles.slideItem.height;
+            delete layoutSpecificStyle.activeSlideItem?.width;
+            delete layoutSpecificStyle.activeSlideItem?.height;
 
             const innerContent =
                 Platform.OS === "ios" ? (
                     props.content(item)
                 ) : (
-                    <View style={styles.slideItem}>{props.content(item)}</View>
+                    <View style={layoutSpecificStyle.activeSlideItem}>{props.content(item)}</View>
                 );
 
             return (
-                <Touchable key={index} activeOpacity={1} style={styles.slideItem} onPress={onPress}>
+                <Touchable key={index} activeOpacity={1} style={layoutSpecificStyle.activeSlideItem} onPress={onPress}>
                     {innerContent}
                 </Touchable>
             );
@@ -76,8 +74,8 @@ export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>):
         }
         if (paginationOverflow) {
             return (
-                <View style={styles.paginationContainer}>
-                    <Text style={styles.paginationText}>
+                <View style={layoutSpecificStyle.paginationContainer}>
+                    <Text style={layoutSpecificStyle.paginationText}>
                         {activeSlide + 1}/{contentLength}
                     </Text>
                 </View>
@@ -87,12 +85,12 @@ export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>):
             <Pagination
                 dotsLength={contentLength}
                 activeDotIndex={activeSlide}
-                containerStyle={styles.paginationContainer}
-                dotColor={styles.activeDotStyle.color}
-                dotStyle={styles.activeDotStyle}
-                inactiveDotColor={styles.dotStyle.color}
-                inactiveDotOpacity={styles.dotStyle.opacity}
-                inactiveDotScale={styles.dotStyle.scale}
+                containerStyle={layoutSpecificStyle.paginationContainer}
+                dotColor={layoutSpecificStyle.activeDotStyle?.color}
+                dotStyle={layoutSpecificStyle.activeDotStyle}
+                inactiveDotColor={layoutSpecificStyle.dotStyle?.color}
+                inactiveDotOpacity={layoutSpecificStyle.dotStyle?.opacity}
+                inactiveDotScale={layoutSpecificStyle.dotStyle?.scale}
                 carouselRef={carousel.current}
                 tappableDots={!!carousel}
             />
@@ -104,14 +102,14 @@ export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>):
     }
 
     const getPaddingCalculatedValue = (sizeToCalculate: number): number => {
-        if (styles.slideItem?.padding !== undefined) {
-            return sizeToCalculate - Number(styles.slideItem.padding) * 2;
-        } else if (styles.slideItem?.paddingHorizontal !== undefined) {
-            return sizeToCalculate - Number(styles.slideItem.paddingHorizontal) * 2;
-        } else if (styles.slideItem?.paddingLeft !== undefined) {
-            return sizeToCalculate - Number(styles.slideItem.paddingLeft);
-        } else if (styles.slideItem?.paddingRight !== undefined) {
-            return sizeToCalculate - Number(styles.slideItem.paddingRight);
+        if (layoutSpecificStyle.activeSlideItem?.padding !== undefined) {
+            return sizeToCalculate - Number(layoutSpecificStyle.activeSlideItem.padding) * 2;
+        } else if (layoutSpecificStyle.activeSlideItem?.paddingHorizontal !== undefined) {
+            return sizeToCalculate - Number(layoutSpecificStyle.activeSlideItem.paddingHorizontal) * 2;
+        } else if (layoutSpecificStyle.activeSlideItem?.paddingLeft !== undefined) {
+            return sizeToCalculate - Number(layoutSpecificStyle.activeSlideItem.paddingLeft);
+        } else if (layoutSpecificStyle.activeSlideItem?.paddingRight !== undefined) {
+            return sizeToCalculate - Number(layoutSpecificStyle.activeSlideItem.paddingRight);
         }
         return sizeToCalculate;
     };
@@ -124,22 +122,28 @@ export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>):
 
         let itemWidth = 0;
         let itemHeight = 0;
-        if (typeof styles.slideItem?.width === "string" && styles.slideItem.width.includes("%")) {
-            const percentage = +styles.slideItem.width.split("%")[0];
+        if (
+            typeof layoutSpecificStyle.activeSlideItem?.width === "string" &&
+            layoutSpecificStyle.activeSlideItem.width.includes("%")
+        ) {
+            const percentage = +layoutSpecificStyle.activeSlideItem.width.split("%")[0];
             itemWidth = Math.round((realWidth * percentage) / 100);
         }
-        if (typeof styles.slideItem?.height === "string" && styles.slideItem.height.includes("%")) {
-            const percentage = +styles.slideItem.height.split("%")[0];
+        if (
+            typeof layoutSpecificStyle.activeSlideItem?.height === "string" &&
+            layoutSpecificStyle.activeSlideItem.height.includes("%")
+        ) {
+            const percentage = +layoutSpecificStyle.activeSlideItem.height.split("%")[0];
             itemHeight = Math.round((realHeight * percentage) / 100);
         }
         setSliderDimensions({
             slider: { width: realWidth, height: realHeight },
-            slideItem: { width: itemWidth, height: itemHeight }
+            slide: { width: itemWidth, height: itemHeight }
         });
     };
 
     return (
-        <View style={styles.container} onLayout={onLayout}>
+        <View style={layoutSpecificStyle.container} onLayout={onLayout}>
             {sliderDimensions.slider.width > 0 && (
                 <Carousel
                     loop={props.loop}
@@ -152,9 +156,9 @@ export const NativeCarousel = (props: NativeCarouselProps<NativeCarouselStyle>):
                     data={props.contentSource.value.items}
                     renderItem={_renderItem}
                     sliderWidth={sliderDimensions.slider.width > 0 ? sliderDimensions.slider.width : 1}
-                    itemWidth={sliderDimensions.slideItem.width > 0 ? sliderDimensions.slideItem.width : 1}
-                    inactiveSlideScale={styles.inactiveSlideItem.scale}
-                    inactiveSlideOpacity={styles.inactiveSlideItem.opacity}
+                    itemWidth={sliderDimensions.slide.width > 0 ? sliderDimensions.slide.width : 1}
+                    inactiveSlideScale={layoutSpecificStyle.slideItem?.scale}
+                    inactiveSlideOpacity={layoutSpecificStyle.slideItem?.opacity}
                     onSnapToItem={onSnap}
                     ref={carousel}
                 />
