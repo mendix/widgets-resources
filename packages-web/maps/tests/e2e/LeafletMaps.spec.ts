@@ -18,8 +18,8 @@ describe("Maps", () => {
         });
 
         it("with wrong coordinates should show an alert message", () => {
-            singleLocationPage.latitudeInput.waitForExist();
-            singleLocationPage.longitudeInput.waitForExist();
+            singleLocationPage.latitudeInput.waitForDisplayed();
+            singleLocationPage.longitudeInput.waitForDisplayed();
 
             singleLocationPage.latitudeInput.click();
             singleLocationPage.latitudeInput.setValue(190);
@@ -27,7 +27,7 @@ describe("Maps", () => {
             singleLocationPage.longitudeInput.setValue(200);
             singleLocationPage.longitudeLabel.click();
 
-            singleLocationPage.alert.waitForExist();
+            singleLocationPage.alert.waitForDisplayed();
             const alert = singleLocationPage.alert.getText();
 
             expect(alert).toContain(alertValue);
