@@ -3,98 +3,53 @@
         supportedPlatform="Native"
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
-    <name>Native Carousel</name>
-    <description>My widget description</description>
+    <name>Carousel</name>
+    <description/>
     <icon/>
     <properties>
         <propertyGroup caption="General">
-            <propertyGroup caption="Display">
+            <propertyGroup caption="Data source">
                 <property key="contentSource" type="datasource" isList="true">
-                    <caption>Content data source</caption>
-                    <description>Whatever</description>
+                    <caption>Source</caption>
+                    <description/>
                 </property>
-
                 <property key="content" type="widgets" dataSource="contentSource">
                     <caption>Content</caption>
-                    <description>Whatever</description>
-                </property>
-
-                <property key="currentIndex" type="attribute" required="false">
-                    <caption>Current index</caption>
-                    <description>Current active item (int, starts at 0)</description>
-                    <attributeTypes>
-                        <attributeType name="Integer" />
-                    </attributeTypes>
-                </property>
-                
-                <property key="firstItem" type="expression" defaultValue="0">
-                    <caption>First item index</caption>
-                    <description>Index of the first item to display.</description>
-                    <returnType type="Integer"/>
+                    <description/>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="layout">
-                <property key="activeSlideAlignment" type="enumeration" defaultValue="center">
-                    <caption>Active slide's alignment</caption>
-                    <description>Determine active slide's alignment relative to the carousel</description>
-                    <enumerationValues>
-                        <enumerationValue key="start">Start</enumerationValue>
-                        <enumerationValue key="center">Center</enumerationValue>
-                        <enumerationValue key="end">End</enumerationValue>
-                    </enumerationValues>
-                </property>
-
+            <propertyGroup caption="Display">
                 <property key="layout" type="enumeration" defaultValue="card">
                     <caption>Layout</caption>
-                    <description>Define the way items are rendered and animated. If you have a large data set, don't use stack or tinder</description>
+                    <description>Define the way items are rendered and animated.</description>
                     <enumerationValues>
                         <enumerationValue key="card">Card</enumerationValue>
                         <enumerationValue key="fullWidth">Full width</enumerationValue>
                     </enumerationValues>
                 </property>
+                <property key="showPagination" type="boolean" defaultValue="true">
+                    <caption>Pagination</caption>
+                    <description>Show pagination indicator; dotted for 5 or less items, else show the number of items</description>
+                </property>
+                <!-- ???? -->
+                <property key="activeSlideAlignment" type="enumeration" defaultValue="center">
+                    <caption>Card alignment</caption>
+                    <description>Align current card to provide space to display next and previous card. (Only available for Layout type card)</description>
+                    <enumerationValues>
+                        <enumerationValue key="center">Center</enumerationValue>
+                        <enumerationValue key="start">Beginning</enumerationValue>
+                    </enumerationValues>
+                </property>
             </propertyGroup>
-        </propertyGroup>
-        <propertyGroup caption="Loop">
-            <propertyGroup caption="Loop / Autoplay">
+            <propertyGroup caption="Behaviour">
                 <property key="loop" type="boolean" defaultValue="false">
                     <caption>Loop</caption>
-                    <description>Enable infinite loop mode. Does not work if `enableSnap` is `false`</description>
-                </property>
-
-                <property key="autoplay" type="boolean" defaultValue="false">
-                    <caption>Autoplay</caption>
-                    <description>Trigger autoplay on mount</description>
-                </property>
-
-                <property key="autoplayDelay" type="integer" defaultValue="0">
-                    <caption>Autoplay delay</caption>
-                    <description>Delay before enabling autoplay on startup and after releasing the touch</description>
-                </property>
-
-                <property key="autoplayInterval" type="integer" defaultValue="0">
-                    <caption>Autoplay interval</caption>
-                    <description>Delay in ms until navigating to the next item</description>
+                    <description>After the last item the carousel continues to the first item.</description>
                 </property>
             </propertyGroup>
-        </propertyGroup>
-        <propertyGroup caption="Events">
-            <propertyGroup caption="Events">
-                <property key="onPress" type="action" required="false">
-                    <caption>On press event</caption>
-                    <description>Fired when user taps on the slide</description>
-                </property>
-                <property key="onSnap" type="action" required="false">
-                    <caption>On snap event</caption>
-                    <description>Fired when user changes the slide item</description>
-                </property>
-            </propertyGroup>
-        </propertyGroup>
-        <propertyGroup caption="Pagination">
-            <propertyGroup caption="Pagination">
-                <property key="showPagination" type="boolean" defaultValue="true">
-                    <caption>Show pagination</caption>
-                    <description>If pagination buttons should be shown or not</description>
-                </property>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+                <systemProperty key="Visibility"/>
             </propertyGroup>
         </propertyGroup>
     </properties>
