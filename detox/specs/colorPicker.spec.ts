@@ -1,5 +1,5 @@
 import { ColorPicker, Pages } from "./elements";
-import { by, device, element, expect } from "detox";
+import { by, element, expect } from "detox";
 
 let colorPicker: any = null;
 let textBox: any = null;

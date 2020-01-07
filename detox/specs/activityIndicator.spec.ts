@@ -1,5 +1,5 @@
 import { ActivityIndicator, Pages } from "./elements";
-import { device, expect } from "detox";
+import { expect } from "detox";
 
 describe("Activity Indicator", () => {
     beforeAll(async () => {

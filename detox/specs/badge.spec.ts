@@ -1,4 +1,4 @@
-import { by, device, element, expect, waitFor } from "detox";
+import { by, element, expect, waitFor } from "detox";
 import { Alert, Badge, Pages } from "./elements";
 
 describe("Badge", () => {

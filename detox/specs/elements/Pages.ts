@@ -18,40 +18,40 @@ export function Pages() {
     };
     return {
         async openActivityIndicator() {
-            await clickOnButton("actionButton15");
+            await scrollAndClickOnButton("actionButton15");
         },
         async openAnimation() {
-            await clickOnButton("actionButton3");
+            await scrollAndClickOnButton("actionButton3");
         },
         async openBadge() {
-            await clickOnButton("actionButton18");
+            await scrollAndClickOnButton("actionButton18");
         },
         async openColorPicker() {
-            await clickOnButton("actionButton21");
+            await scrollAndClickOnButton("actionButton21");
         },
         async openFeedback() {
-            await clickOnButton("actionButton22");
+            await scrollAndClickOnButton("actionButton22");
         },
         async openFloatingActionButton() {
-            await clickOnButton("actionButton23");
+            await scrollAndClickOnButton("actionButton23");
         },
         async openProgressBar() {
-            await clickOnButton("actionButton14");
+            await scrollAndClickOnButton("actionButton14");
         },
         async openProgressCircle() {
-            await clickOnButton("actionButton16");
+            await scrollAndClickOnButton("actionButton16");
         },
         async openVideoPlayer() {
             await scrollAndClickOnButton("actionButton24");
         },
         async openWebView() {
-            await clickOnButton("actionButton28");
+            await scrollAndClickOnButton("actionButton28");
         },
         async openIntroScreen() {
             await scrollAndClickOnButton("actionButton4");
         },
         async openSafeAreaView() {
-            await clickOnButton("actionButton5");
+            await scrollAndClickOnButton("actionButton5");
         },
         async openListViewSwipe() {
             await scrollAndClickOnButton("actionButton2");
