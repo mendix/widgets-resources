@@ -6,8 +6,9 @@ import { View, ViewStyle } from "react-native";
 import { HueGradient, LightnessGradient, SaturationGradient } from "react-native-color";
 import tinycolor from "tinycolor2";
 import { ColorPickerProps } from "../typings/ColorPickerProps";
-import { AlphaGradient } from "./components/AlphaGradient";
 import { PickerSlider } from "./components/PickerSlider";
+import { AlphaGradient } from "./components/AlphaGradient";
+import { DisabledHueGradient } from "./components/DisabledHueGradient";
 import { ColorPickerStyle, defaultColorPickerStyle } from "./ui/Styles";
 import HSLA = tinycolor.ColorFormats.HSLA;
 import { executeAction } from "@widgets-resources/piw-utils";
@@ -140,16 +141,24 @@ export class ColorPicker extends Component<Props, State> {
                 onValueChangeComplete={this.onChangeCompleteHandler}
                 step={1}
                 maximumValue={359}
-                component={<HueGradient gradientSteps={this.defaultSteps} />}
+                component={
+                    this.props.color.readOnly ? (
+                        <DisabledHueGradient color={color} />
+                    ) : (
+                        <HueGradient gradientSteps={this.defaultSteps} />
+                    )
+                }
                 thumbTintColor={tinycolor(color).toHslString()}
                 thumbStyle={this.getThumbStyle(color)}
+                disabled={this.props.color.readOnly}
             />
         );
     }
 
     private renderSaturation(color: HSLA): ReactNode {
         return (
-            this.props.showSaturation && (
+            this.props.showSaturation &&
+            !this.props.color.readOnly && (
                 <PickerSlider
                     testID={`${this.props.name}$saturation`}
                     value={color.s}
@@ -159,6 +168,7 @@ export class ColorPicker extends Component<Props, State> {
                     component={<SaturationGradient color={color} gradientSteps={this.defaultSteps} />}
                     thumbTintColor={tinycolor(color).toHslString()}
                     thumbStyle={this.getThumbStyle(color)}
+                    disabled={this.props.color.readOnly}
                 />
             )
         );
@@ -166,7 +176,8 @@ export class ColorPicker extends Component<Props, State> {
 
     private renderLightness(color: HSLA): ReactNode {
         return (
-            this.props.showLightness && (
+            this.props.showLightness &&
+            !this.props.color.readOnly && (
                 <PickerSlider
                     testID={`${this.props.name}$lightness`}
                     value={color.l}
@@ -176,6 +187,7 @@ export class ColorPicker extends Component<Props, State> {
                     component={<LightnessGradient color={color} gradientSteps={this.defaultSteps} />}
                     thumbTintColor={tinycolor(color).toHslString()}
                     thumbStyle={this.getThumbStyle(color)}
+                    disabled={this.props.color.readOnly}
                 />
             )
         );
@@ -183,7 +195,8 @@ export class ColorPicker extends Component<Props, State> {
 
     private renderAlpha(color: HSLA): ReactNode {
         return (
-            this.props.showAlpha && (
+            this.props.showAlpha &&
+            !this.props.color.readOnly && (
                 <PickerSlider
                     testID={`${this.props.name}$alpha`}
                     value={color.a}
@@ -193,6 +206,7 @@ export class ColorPicker extends Component<Props, State> {
                     component={<AlphaGradient color={color} gradientSteps={this.defaultSteps} />}
                     thumbTintColor={tinycolor(color).toHslString()}
                     thumbStyle={this.getThumbStyle(color)}
+                    disabled={this.props.color.readOnly}
                 />
             )
         );
