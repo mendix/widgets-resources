@@ -109,7 +109,7 @@ export const btnIconPrimary = {
 };
 export const btnIconSecondary = merge(btnIconPrimary, {
     icon: {
-        color: contrast.lower,
+        color: contrast.regular,
     },
 });
 export const btnIconSuccess = merge(btnIconPrimary, {
@@ -184,11 +184,21 @@ export const btnAsText = {
     icon: {
         color: brand.primary,
         fontWeight: font.weightSemiBold,
-        size: button.fontSizeIconSmall,
+        size: button.fontSizeIcon,
     },
     caption: {
         color: brand.primary,
         fontWeight: font.weightSemiBold,
         fontSize: button.fontSize,
+    },
+};
+
+// Button sizes
+export const btnLarge = {
+    icon: {
+        size: button.fontSizeIconLarge,
+    },
+    caption: {
+        fontSize: button.fontSizeLarge,
     },
 };
