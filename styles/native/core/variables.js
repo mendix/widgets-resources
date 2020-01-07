@@ -2,6 +2,7 @@ import { Dimensions, Platform }                        from "react-native";
 import * as custom                                     from "../app/custom-variables";
 import adjustFont                                      from "./helpers/_functions/adjustfont";
 import { setColorBasedOnBackground, setContrastScale } from "./helpers/_functions/convertcolors";
+import { anyColorToRgbString }                         from "./helpers/_functions/convertcolors.js";
 import merge                                           from "./helpers/_functions/mergeobjects";
 import { shadeBlendConvert }                           from "./helpers/_functions/shadeblendconvert.js";
 
@@ -17,6 +18,10 @@ let brand = {
     success: "#76CA02",
     warning: "#f99b1d",
     danger: "#ed1c24",
+    primaryLight: `rgba(${anyColorToRgbString("#0595DB")}, 0.14)`,
+    successLight: `rgba(${anyColorToRgbString("#76CA02")}, 0.14)`,
+    warningLight: `rgba(${anyColorToRgbString("#f99b1d")}, 0.14)`,
+    dangerLight: `rgba(${anyColorToRgbString("#ed1c24")}, 0.14)`,
 };
 brand = merge(brand, custom.brand || {});
 
@@ -86,22 +91,22 @@ spacing = merge(spacing, custom.spacing || {});
 // Button Styles
 let button = {
     fontSize: font.sizeSmall,
+    fontSizeLarge: font.size,
     fontWeight: font.weightBold,
-    fontSizeIcon: font.size,
-    fontSizeIconSmall: font.sizeSmall,
-    fontSizeIconLarge: font.sizeLarge,
+    fontSizeIcon: font.sizeSmall,
+    fontSizeIconLarge: font.size,
     borderRadius: border.radius,
     paddingVertical: spacing.smaller,
     paddingHorizontal: spacing.regular,
 
     header: {
-        color: brand.primary,
+        color: contrast.highest,
         borderColor: "transparent",
         backgroundColor: "transparent",
-        fontSize: font.size,
-        fontSizeIcon: font.size,
-        paddingVertical: 0,
-        paddingHorizontal: 0,
+        fontSize: font.sizeSmall,
+        fontSizeIcon: font.sizeSmall,
+        paddingLeft: 0,
+        paddingRight: 10,
     },
     primary: {
         color: "#FFF",
@@ -189,6 +194,23 @@ let navigation = {
 };
 navigation = merge(navigation, custom.navigation || {});
 
+// Tabcontainer Styles
+let tabcontainer = {
+    tabBar: {
+        pressColor: contrast.lower,
+        backgroundColor: background.primary,
+    },
+    indicator: {
+        backgroundColor: brand.primary,
+        height: Platform.select({ ios: 2, android: 2 }),
+    },
+    label: {
+        color: contrast.highest,
+        fontWeight: font.weightBold,
+    },
+};
+tabcontainer = merge(tabcontainer, custom.tabcontainer || {});
+
 // Listview Styles
 let listview = {
     border: {
@@ -204,4 +226,50 @@ let layoutgrid = {
 };
 layoutgrid = merge(layoutgrid, custom.layoutgrid || {});
 
-export { brand, background, border, contrast, font, spacing, button, input, navigation, listview, layoutgrid };
+//## Pluggable Widgets
+//-------------------------------------------------------------------------------------------------------------------//
+// Badge Styles
+let badge = {
+    fontWeight: font.weightBold,
+    borderRadius: 30,
+    paddingVertical: 3,
+    paddingHorizontal: spacing.smaller,
+
+    default: {
+        color: contrast.higher,
+        backgroundColor: contrast.lower,
+    },
+    primary: {
+        color: brand.primary,
+        backgroundColor: brand.primaryLight,
+    },
+    success: {
+        color: brand.success,
+        backgroundColor: brand.successLight,
+    },
+    warning: {
+        color: brand.warning,
+        backgroundColor: brand.warningLight,
+    },
+    danger: {
+        color: brand.danger,
+        backgroundColor: brand.dangerLight,
+    },
+};
+badge = merge(badge, custom.badge || {});
+
+export {
+    brand,
+    background,
+    border,
+    contrast,
+    font,
+    spacing,
+    button,
+    input,
+    navigation,
+    tabcontainer,
+    listview,
+    layoutgrid,
+    badge,
+};
