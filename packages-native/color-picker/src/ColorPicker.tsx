@@ -1,6 +1,6 @@
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { ValueStatus } from "mendix";
-import { Component, createElement } from "react";
+import { Component, createElement, ReactElement, ReactNode } from "react";
 import { View, ViewStyle } from "react-native";
 
 import { HueGradient, LightnessGradient, SaturationGradient } from "react-native-color";
@@ -120,16 +120,18 @@ export class ColorPicker extends Component<Props, State> {
         return "";
     }
 
-    private renderPreview(): JSX.Element {
+    private renderPreview(): ReactNode {
         return (
-            <View
-                testID={`${this.props.name}$preview`}
-                style={[this.styles.preview, { backgroundColor: this.props.color.value }]}
-            />
+            this.props.showPreview && (
+                <View
+                    testID={`${this.props.name}$preview`}
+                    style={[this.styles.preview, { backgroundColor: this.props.color.value }]}
+                />
+            )
         );
     }
 
-    private renderHue(color: HSLA): JSX.Element {
+    private renderHue(color: HSLA): ReactElement {
         return (
             <PickerSlider
                 testID={`${this.props.name}$hue`}
@@ -145,48 +147,54 @@ export class ColorPicker extends Component<Props, State> {
         );
     }
 
-    private renderSaturation(color: HSLA): JSX.Element {
+    private renderSaturation(color: HSLA): ReactNode {
         return (
-            <PickerSlider
-                testID={`${this.props.name}$saturation`}
-                value={color.s}
-                onValueChange={this.onChangeSaturationHandler}
-                onValueChangeComplete={this.onChangeCompleteHandler}
-                step={0.01}
-                component={<SaturationGradient color={color} gradientSteps={this.defaultSteps} />}
-                thumbTintColor={tinycolor(color).toHslString()}
-                thumbStyle={this.getThumbStyle(color)}
-            />
+            this.props.showSaturation && (
+                <PickerSlider
+                    testID={`${this.props.name}$saturation`}
+                    value={color.s}
+                    onValueChange={this.onChangeSaturationHandler}
+                    onValueChangeComplete={this.onChangeCompleteHandler}
+                    step={0.01}
+                    component={<SaturationGradient color={color} gradientSteps={this.defaultSteps} />}
+                    thumbTintColor={tinycolor(color).toHslString()}
+                    thumbStyle={this.getThumbStyle(color)}
+                />
+            )
         );
     }
 
-    private renderLightness(color: HSLA): JSX.Element {
+    private renderLightness(color: HSLA): ReactNode {
         return (
-            <PickerSlider
-                testID={`${this.props.name}$lightness`}
-                value={color.l}
-                onValueChange={this.onChangeLightnessHandler}
-                onValueChangeComplete={this.onChangeCompleteHandler}
-                step={0.01}
-                component={<LightnessGradient color={color} gradientSteps={this.defaultSteps} />}
-                thumbTintColor={tinycolor(color).toHslString()}
-                thumbStyle={this.getThumbStyle(color)}
-            />
+            this.props.showLightness && (
+                <PickerSlider
+                    testID={`${this.props.name}$lightness`}
+                    value={color.l}
+                    onValueChange={this.onChangeLightnessHandler}
+                    onValueChangeComplete={this.onChangeCompleteHandler}
+                    step={0.01}
+                    component={<LightnessGradient color={color} gradientSteps={this.defaultSteps} />}
+                    thumbTintColor={tinycolor(color).toHslString()}
+                    thumbStyle={this.getThumbStyle(color)}
+                />
+            )
         );
     }
 
-    private renderAlpha(color: HSLA): JSX.Element {
+    private renderAlpha(color: HSLA): ReactNode {
         return (
-            <PickerSlider
-                testID={`${this.props.name}$alpha`}
-                value={color.a}
-                onValueChange={this.onChangeAlphaHandler}
-                onValueChangeComplete={this.onChangeCompleteHandler}
-                step={0.01}
-                component={<AlphaGradient color={color} gradientSteps={this.defaultSteps} />}
-                thumbTintColor={tinycolor(color).toHslString()}
-                thumbStyle={this.getThumbStyle(color)}
-            />
+            this.props.showAlpha && (
+                <PickerSlider
+                    testID={`${this.props.name}$alpha`}
+                    value={color.a}
+                    onValueChange={this.onChangeAlphaHandler}
+                    onValueChangeComplete={this.onChangeCompleteHandler}
+                    step={0.01}
+                    component={<AlphaGradient color={color} gradientSteps={this.defaultSteps} />}
+                    thumbTintColor={tinycolor(color).toHslString()}
+                    thumbStyle={this.getThumbStyle(color)}
+                />
+            )
         );
     }
 
