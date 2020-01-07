@@ -28,6 +28,7 @@
                         <enumerationValue key="rgb">RGB</enumerationValue>
                     </enumerationValues>
                 </property>
+                <systemProperty key="Editability" />
             </propertyGroup>
             <propertyGroup caption="Show">
                 <property key="showPreview" type="boolean" defaultValue="true">
@@ -54,6 +55,7 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
+                <systemProperty key="Visibility" />
                 <systemProperty key="Name"/>
             </propertyGroup>
         </propertyGroup>
