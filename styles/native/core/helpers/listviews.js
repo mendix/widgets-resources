@@ -36,7 +36,7 @@ export const listItemIconSmall = {
         size: 20,
     },
 };
-export const listItemIconBig = {
+export const listItemIconLarge = {
     icon: {
         size: 24,
     },
