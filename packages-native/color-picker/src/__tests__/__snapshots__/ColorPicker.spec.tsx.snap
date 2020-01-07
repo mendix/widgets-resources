@@ -801,6 +801,7 @@ exports[`Color Picker renders 1`] = `
     <View
       animateTransitions={false}
       animationType="timing"
+      disabled={false}
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -1682,6 +1683,7 @@ exports[`Color Picker renders 1`] = `
     <View
       animateTransitions={false}
       animationType="timing"
+      disabled={false}
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -2563,6 +2565,7 @@ exports[`Color Picker renders 1`] = `
     <View
       animateTransitions={false}
       animationType="timing"
+      disabled={false}
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -3471,6 +3474,7 @@ exports[`Color Picker renders with alpha slider 1`] = `
     <View
       animateTransitions={false}
       animationType="timing"
+      disabled={false}
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -4352,6 +4356,7 @@ exports[`Color Picker renders with alpha slider 1`] = `
     <View
       animateTransitions={false}
       animationType="timing"
+      disabled={false}
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -5233,6 +5238,7 @@ exports[`Color Picker renders with alpha slider 1`] = `
     <View
       animateTransitions={false}
       animationType="timing"
+      disabled={false}
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -6114,6 +6120,7 @@ exports[`Color Picker renders with alpha slider 1`] = `
     <View
       animateTransitions={false}
       animationType="timing"
+      disabled={false}
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -7023,6 +7030,7 @@ exports[`Color Picker renders with custom style 1`] = `
     <View
       animateTransitions={false}
       animationType="timing"
+      disabled={false}
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -7904,6 +7912,7 @@ exports[`Color Picker renders with custom style 1`] = `
     <View
       animateTransitions={false}
       animationType="timing"
+      disabled={false}
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
@@ -8785,6 +8794,7 @@ exports[`Color Picker renders with custom style 1`] = `
     <View
       animateTransitions={false}
       animationType="timing"
+      disabled={false}
       onLayout={[Function]}
       onSlidingComplete={[Function]}
       onValueChange={[Function]}
