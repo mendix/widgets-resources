@@ -31,7 +31,7 @@ export async function OpenInAppBrowser(
         preferredBarTintColor: toolbarColor,
         dismissButtonStyle: iosDismissButtonStyle,
         showTitle: androidShowTitle
-    };
+    } as InAppBrowserOptions;
 
     await InAppBrowser.open(url, options);
 
