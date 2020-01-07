@@ -38,7 +38,6 @@ export class WebView extends Component<Props> {
                     onLoad={this.onLoadHandler}
                     onError={this.onErrorHandler}
                     userAgent={this.props.userAgent}
-                    useWebKit
                 />
             </View>
         );
