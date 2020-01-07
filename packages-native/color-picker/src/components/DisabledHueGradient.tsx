@@ -8,7 +8,7 @@ interface DisabledHueGradientProps {
 }
 
 export class DisabledHueGradient extends Component<DisabledHueGradientProps> {
-    getStepColor = (_: number) => tinycolor(this.props.color).toHslString();
+    getStepColor = () => tinycolor(this.props.color).toHslString();
 
     render(): JSX.Element {
         return <Gradient gradientSteps={1} getStepColor={this.getStepColor} maximumValue={1} />;
