@@ -1,5 +1,5 @@
 import { Alert, FloatingActionButton, Pages } from "./elements";
-import { device, expect } from "detox";
+import { expect } from "detox";
 
 describe("Floating Action Button", () => {
     beforeAll(async () => {
