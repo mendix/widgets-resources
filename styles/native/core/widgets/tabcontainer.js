@@ -1,5 +1,4 @@
-import { Platform }                          from "react-native";
-import { background, brand, contrast, font } from "../variables";
+import { font, tabcontainer } from "../variables";
 
 //
 // DISCLAIMER:
@@ -22,22 +21,23 @@ export const TabContainer = {
     tabBar: {
         // bounces, pressColor, pressOpacity, scrollEnabled and all ViewStyle properties are allowed
         bounces: true,
-        pressColor: contrast.lower,
+        pressColor: tabcontainer.tabBar.pressColor,
         pressOpacity: 0.8,
-        backgroundColor: background.primary,
+        backgroundColor: tabcontainer.tabBar.backgroundColor,
         scrollEnabled: false,
     },
     indicator: {
         // All ViewStyle properties are allowed
-        backgroundColor: brand.primary,
-        height: Platform.select({ ios: 2, android: 2 }),
+        backgroundColor: tabcontainer.indicator.backgroundColor,
+        height: tabcontainer.indicator.height,
     },
     tab: {
         // All ViewStyle properties are allowed
     },
     label: {
         // All TextStyle properties are allowed
-        color: contrast.highest,
+        color: tabcontainer.label.color,
         fontFamily: font.family,
+        fontWeight: tabcontainer.label.fontWeight,
     },
 };
