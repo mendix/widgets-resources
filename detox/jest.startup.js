@@ -10,7 +10,6 @@ jasmine.getEnv().addReporter(specReporter);
 beforeAll(async () => {
     await init(config, { initGlobals: false, launchApp: false });
     await device.launchApp({
-        newInstance: true,
         launchArgs: {
             detoxPrintBusyIdleResources: "YES",
             detoxURLBlacklistRegex: ".*firestore.*"
