@@ -7,7 +7,6 @@ interface PickerSlidersProps {
     step: number;
     minimumValue?: number;
     maximumValue?: number;
-    component: JSX.Element;
     onValueChange: (value: number) => void;
     onValueChangeComplete: () => void;
     thumbTintColor: string;
@@ -32,7 +31,7 @@ export class PickerSlider extends Component<PickerSlidersProps> {
                 disabled={this.props.disabled}
             >
                 <View style={[styles.container]} ref={this.viewRef}>
-                    <View style={styles.gradient}>{this.props.component}</View>
+                    <View style={styles.gradient}>{this.props.children}</View>
                     <Slider
                         value={this.props.value}
                         step={this.props.step}
