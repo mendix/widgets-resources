@@ -9,4 +9,5 @@ export * from "./JSActionsPages";
 export * from "./ListViewSwipe";
 export * from "./Pages";
 export * from "./ProgressCircle";
+export * from "./TabContainer";
 export * from "./VideoPlayer";
