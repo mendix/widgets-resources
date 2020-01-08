@@ -3,6 +3,9 @@ import { by, device, element, expect } from "detox";
 
 describe("JS Actions", () => {
     beforeAll(async () => {
+        if (device.getPlatform() === "ios") {
+            await device.setBiometricEnrollment(true);
+        }
         await Pages().openJSActions();
     });
 
