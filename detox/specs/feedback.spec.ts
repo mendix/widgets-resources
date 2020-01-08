@@ -1,4 +1,4 @@
-import { expect } from "detox";
+import { device, expect } from "detox";
 import { Feedback, Pages } from "./elements";
 
 describe("Feedback", () => {
