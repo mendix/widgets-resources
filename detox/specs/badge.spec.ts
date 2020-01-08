@@ -1,4 +1,4 @@
-import { by, element, expect, waitFor } from "detox";
+import { by, device, element, expect, waitFor } from "detox";
 import { Alert, Badge, Pages } from "./elements";
 
 describe("Badge", () => {
@@ -35,5 +35,9 @@ describe("Badge", () => {
         await badge.getBadge().tap();
         await expect(Alert().getMessage("Action test: Detox")).toBeVisible();
         await Alert().confirm();
+    });
+
+    afterAll(async () => {
+        await device.reloadReactNative();
     });
 });

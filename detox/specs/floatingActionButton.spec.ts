@@ -1,5 +1,5 @@
 import { Alert, FloatingActionButton, Pages } from "./elements";
-import { expect } from "detox";
+import { device, expect } from "detox";
 
 describe("Floating Action Button", () => {
     beforeAll(async () => {
@@ -65,5 +65,9 @@ describe("Floating Action Button", () => {
         await secondChild.tap();
         await expect(firstChild).toBeNotVisible();
         await expect(secondChild).toBeNotVisible();
+    });
+
+    afterAll(async () => {
+        await device.reloadReactNative();
     });
 });

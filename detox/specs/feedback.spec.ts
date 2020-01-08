@@ -1,4 +1,4 @@
-import { expect } from "detox";
+import { device, expect } from "detox";
 import { Feedback, Pages } from "./elements";
 
 describe("Feedback", () => {
@@ -34,5 +34,9 @@ describe("Feedback", () => {
 
         await expect(feedback.getSuccessOkButton()).toBeVisible();
         await feedback.getSuccessOkButton().tap();
+    });
+
+    afterAll(async () => {
+        await device.reloadReactNative();
     });
 });
