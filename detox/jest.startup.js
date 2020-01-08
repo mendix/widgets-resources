@@ -16,9 +16,6 @@ beforeAll(async () => {
         },
         permissions: { faceid: "YES" }
     });
-    if (device.getPlatform() === "ios") {
-        await device.setBiometricEnrollment(true);
-    }
     await waitFor(element(by.id("NativeHome.Widgets")))
         .toBeVisible()
         .withTimeout(120000);
