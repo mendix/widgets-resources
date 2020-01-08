@@ -1,5 +1,5 @@
 import { Pages, ProgressCircle } from "./elements";
-import { by, element, expect } from "detox";
+import { by, device, element, expect } from "detox";
 
 describe("Progress Circle", () => {
     beforeAll(async () => {
@@ -23,5 +23,9 @@ describe("Progress Circle", () => {
         await expect(progressCircle.getProgressCircle()).toBeVisible();
         await progressCircle.getProgressCircle().tap();
         await expect(progressCircle.getText()).toHaveText("75/100");
+    });
+
+    afterAll(async () => {
+        await device.reloadReactNative();
     });
 });

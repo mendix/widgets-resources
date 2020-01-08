@@ -1,5 +1,5 @@
 import { Pages, ListViewSwipe } from "./elements";
-import { by, element, expect } from "detox";
+import { by, device, element, expect } from "detox";
 
 describe("Listview Swipe", () => {
     beforeAll(async () => {
@@ -17,5 +17,9 @@ describe("Listview Swipe", () => {
         await listviewSwipe.getListViewSwipe(0).tap();
         await listviewSwipe.getListViewSwipe(0).swipe("left");
         await listviewSwipe.getListViewSwipe(0).tap();
+    });
+
+    afterAll(async () => {
+        await device.reloadReactNative();
     });
 });
