@@ -2,11 +2,7 @@
 
 exports[`Color Picker renders 1`] = `
 <View
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
+  style={Object {}}
   testID="color-picker-test"
 >
   <View
@@ -14,7 +10,6 @@ exports[`Color Picker renders 1`] = `
       Array [
         Object {
           "borderRadius": 5,
-          "flex": 1,
           "minHeight": 50,
         },
         Object {
@@ -2675,11 +2670,7 @@ exports[`Color Picker renders 1`] = `
 
 exports[`Color Picker renders with alpha slider 1`] = `
 <View
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
+  style={Object {}}
   testID="color-picker-test"
 >
   <View
@@ -2687,7 +2678,6 @@ exports[`Color Picker renders with alpha slider 1`] = `
       Array [
         Object {
           "borderRadius": 5,
-          "flex": 1,
           "minHeight": 50,
         },
         Object {
@@ -6230,11 +6220,7 @@ exports[`Color Picker renders with alpha slider 1`] = `
 
 exports[`Color Picker renders with custom style 1`] = `
 <View
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
+  style={Object {}}
   testID="color-picker-test"
 >
   <View
@@ -6243,7 +6229,6 @@ exports[`Color Picker renders with custom style 1`] = `
         Object {
           "aspectRatio": 1,
           "borderRadius": 50,
-          "flex": 1,
           "minHeight": 50,
         },
         Object {

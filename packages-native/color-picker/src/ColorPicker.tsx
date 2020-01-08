@@ -31,7 +31,7 @@ export class ColorPicker extends Component<Props, State> {
         color: undefined
     };
 
-    render(): JSX.Element | null {
+    render(): ReactNode {
         if (!this.props.color || this.props.color.status !== ValueStatus.Available || !this.props.color.value) {
             return null;
         }
@@ -156,7 +156,7 @@ export class ColorPicker extends Component<Props, State> {
 
     private renderSaturation(color: HSLA): ReactNode {
         if (!this.props.showSaturation || this.props.color.readOnly) {
-            return;
+            return null;
         }
         return (
             <PickerSlider
@@ -176,7 +176,7 @@ export class ColorPicker extends Component<Props, State> {
 
     private renderLightness(color: HSLA): ReactNode {
         if (!this.props.showLightness || this.props.color.readOnly) {
-            return;
+            return null;
         }
         return (
             <PickerSlider
@@ -196,7 +196,7 @@ export class ColorPicker extends Component<Props, State> {
 
     private renderAlpha(color: HSLA): ReactNode {
         if (!this.props.showAlpha || this.props.color.readOnly) {
-            return;
+            return null;
         }
         return (
             <PickerSlider
