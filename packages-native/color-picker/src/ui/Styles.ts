@@ -7,11 +7,8 @@ export interface ColorPickerStyle extends Style {
 }
 
 export const defaultColorPickerStyle: ColorPickerStyle = {
-    container: {
-        flex: 1
-    },
+    container: {},
     preview: {
-        flex: 1,
         borderRadius: 5,
         minHeight: 50
     }
