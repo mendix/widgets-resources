@@ -118,7 +118,6 @@ export class ColorPicker extends Component<Props, State> {
             case "rgb":
                 return color.toRgbString();
         }
-        return "";
     }
 
     private renderPreview(): ReactNode {
@@ -146,11 +145,12 @@ export class ColorPicker extends Component<Props, State> {
                 onValueChangeComplete={this.onChangeCompleteHandler}
                 step={1}
                 maximumValue={359}
-                component={component}
                 thumbTintColor={tinycolor(color).toHslString()}
                 thumbStyle={this.getThumbStyle(color)}
                 disabled={this.props.color.readOnly}
-            />
+            >
+                {component}
+            </PickerSlider>
         );
     }
 
@@ -158,7 +158,6 @@ export class ColorPicker extends Component<Props, State> {
         if (!this.props.showSaturation || this.props.color.readOnly) {
             return;
         }
-        const component = <SaturationGradient color={color} gradientSteps={this.defaultSteps} />;
         return (
             <PickerSlider
                 testID={`${this.props.name}$saturation`}
@@ -166,11 +165,12 @@ export class ColorPicker extends Component<Props, State> {
                 onValueChange={this.onChangeSaturationHandler}
                 onValueChangeComplete={this.onChangeCompleteHandler}
                 step={0.01}
-                component={component}
                 thumbTintColor={tinycolor(color).toHslString()}
                 thumbStyle={this.getThumbStyle(color)}
                 disabled={this.props.color.readOnly}
-            />
+            >
+                <SaturationGradient color={color} gradientSteps={this.defaultSteps} />
+            </PickerSlider>
         );
     }
 
@@ -178,7 +178,6 @@ export class ColorPicker extends Component<Props, State> {
         if (!this.props.showLightness || this.props.color.readOnly) {
             return;
         }
-        const component = <LightnessGradient color={color} gradientSteps={this.defaultSteps} />;
         return (
             <PickerSlider
                 testID={`${this.props.name}$lightness`}
@@ -186,11 +185,12 @@ export class ColorPicker extends Component<Props, State> {
                 onValueChange={this.onChangeLightnessHandler}
                 onValueChangeComplete={this.onChangeCompleteHandler}
                 step={0.01}
-                component={component}
                 thumbTintColor={tinycolor(color).toHslString()}
                 thumbStyle={this.getThumbStyle(color)}
                 disabled={this.props.color.readOnly}
-            />
+            >
+                <LightnessGradient color={color} gradientSteps={this.defaultSteps} />
+            </PickerSlider>
         );
     }
 
@@ -198,7 +198,6 @@ export class ColorPicker extends Component<Props, State> {
         if (!this.props.showAlpha || this.props.color.readOnly) {
             return;
         }
-        const component = <AlphaGradient color={color} gradientSteps={this.defaultSteps} />;
         return (
             <PickerSlider
                 testID={`${this.props.name}$alpha`}
@@ -206,11 +205,12 @@ export class ColorPicker extends Component<Props, State> {
                 onValueChange={this.onChangeAlphaHandler}
                 onValueChangeComplete={this.onChangeCompleteHandler}
                 step={0.01}
-                component={component}
                 thumbTintColor={tinycolor(color).toHslString()}
                 thumbStyle={this.getThumbStyle(color)}
                 disabled={this.props.color.readOnly}
-            />
+            >
+                <AlphaGradient color={color} gradientSteps={this.defaultSteps} />
+            </PickerSlider>
         );
     }
 
