@@ -2,7 +2,7 @@ import { by, element } from "detox";
 
 export function ListViewSwipe(testID: string, listViewTestID: string, matcher = by.id(testID)) {
     return {
-        getListViewSwipe(index: 0) {
+        getListViewSwipe(index: number) {
             return element(matcher.withAncestor(by.id(`${listViewTestID}$item${index}`)));
         },
         getLeftAction() {

@@ -7,11 +7,11 @@ describe("Activity Indicator", () => {
     });
 
     it("should render the default indicator", async () => {
-        await expect(ActivityIndicator("activityIndicator1")).toBeVisible();
+        await expect(ActivityIndicator("activityIndicatorDefault")).toBeVisible();
     });
 
     it("should render the custom indicator", async () => {
-        await expect(ActivityIndicator("activityIndicator2")).toBeVisible();
+        await expect(ActivityIndicator("activityIndicatorCustomStyle")).toBeVisible();
     });
 
     afterAll(async () => {
