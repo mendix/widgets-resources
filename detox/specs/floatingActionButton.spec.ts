@@ -7,7 +7,7 @@ describe("Floating Action Button", () => {
     });
 
     it("should render an action button in the top left corner", async () => {
-        const floatingActionButton = FloatingActionButton("floatingActionButton4");
+        const floatingActionButton = FloatingActionButton("floatingActionButtonTopLeft");
         await expect(floatingActionButton.getMainButton()).toBeVisible();
         await floatingActionButton.getMainButton().tap();
 
@@ -20,7 +20,7 @@ describe("Floating Action Button", () => {
     });
 
     it("should render an action button in the top right corner", async () => {
-        const floatingActionButton = FloatingActionButton("floatingActionButton2");
+        const floatingActionButton = FloatingActionButton("floatingActionButtonTopRight");
         await expect(floatingActionButton.getMainButton()).toBeVisible();
         await floatingActionButton.getMainButton().tap();
 
@@ -32,7 +32,7 @@ describe("Floating Action Button", () => {
     });
 
     it("should render an action button in the bottom left corner", async () => {
-        const floatingActionButton = FloatingActionButton("floatingActionButton5");
+        const floatingActionButton = FloatingActionButton("floatingActionButtonBottomLeft");
         await expect(floatingActionButton.getMainButton()).toBeVisible();
         await floatingActionButton.getMainButton().tap();
 
@@ -43,7 +43,7 @@ describe("Floating Action Button", () => {
     });
 
     it("should render an action button in the bottom center", async () => {
-        const floatingActionButton = FloatingActionButton("floatingActionButton3");
+        const floatingActionButton = FloatingActionButton("floatingActionButtonBottomCenter");
         await expect(floatingActionButton.getMainButton()).toBeVisible();
         await floatingActionButton.getMainButton().tap();
 
@@ -54,7 +54,7 @@ describe("Floating Action Button", () => {
     });
 
     it("should render an action button in the bottom right corner", async () => {
-        const floatingActionButton = FloatingActionButton("floatingActionButton1");
+        const floatingActionButton = FloatingActionButton("floatingActionButtonBottomRight");
         await expect(floatingActionButton.getMainButton()).toBeVisible();
         await floatingActionButton.getMainButton().tap();
 

@@ -5,7 +5,7 @@ describe("Badge", () => {
     beforeAll(async () => {
         await Pages().openBadge();
 
-        const textbox = await element(by.id("textBox1"));
+        const textbox = await element(by.id("textBoxBadge"));
         await waitFor(textbox)
             .toBeVisible()
             .withTimeout(20000);
@@ -15,7 +15,7 @@ describe("Badge", () => {
     });
 
     it("should render normal badge", async () => {
-        const badge = Badge("badge1");
+        const badge = Badge("badgeNormal");
         await expect(badge.getBadge()).toBeVisible();
         await badge.getBadge().tap();
 
@@ -24,8 +24,8 @@ describe("Badge", () => {
     });
 
     it("should render a badge with actions", async () => {
-        const text = await element(by.id("text2"));
-        const badge = Badge("badge4");
+        const text = await element(by.id("actionLabel"));
+        const badge = Badge("badgeAction");
         await expect(badge.getBadge()).toBeVisible();
         await text.tap();
 
