@@ -70,7 +70,7 @@ jobs:
           install:
               - npm ci
           script:
-              - if [ "$NATIVE_PROJECTS" = "true" ]; then npm run test:ios; else echo "No native package changed. Skipping ios tests"; fi
+              - if [ "$NATIVE_PROJECTS" = "true" ]; then npm run test:ios:debug; else echo "No native package changed. Skipping ios tests"; fi
 notifications:
     slack:
         template:

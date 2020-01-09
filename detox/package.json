@@ -5,8 +5,9 @@
         "compress:ios": "cd ./ios && tar -cvzf NativeComponents.taz.gz NativeComponents.app",
         "decompress:ios": "cd ./ios && tar -xvf NativeComponents.taz.gz &>/dev/null",
         "pretest:ios": "npm run decompress:ios",
-        "test:ios": "detox test --configuration ios.simulator --debug-synchronization 1000 ./specs",
-        "test:ios:unit": "detox test --configuration ios.simulator --debug-synchronization 1000",
+        "test:ios": "detox test --configuration ios.simulator ./specs",
+        "test:ios:debug": "detox test --configuration ios.simulator --debug-synchronization 1000 ./specs",
+        "test:ios:unit": "detox test --configuration ios.simulator",
         "test:android": "detox test --configuration android.emulator ./specs"
     },
     "devDependencies": {
