@@ -1,4 +1,4 @@
-import { ColorPicker, Pages, TabContainer } from "./elements";
+import { Alert, ColorPicker, Pages, TabContainer } from "./elements";
 import { by, device, element, expect, waitFor } from "detox";
 
 describe("Color Picker", () => {
@@ -143,6 +143,52 @@ describe("Color Picker", () => {
                 .toBeVisible()
                 .withTimeout(1000);
             await expect(colorPicker.getHue()).toBeVisible();
+        });
+
+        afterAll(async () => {
+            await device.reloadReactNative();
+        });
+    });
+
+    describe("On change color picker", () => {
+        beforeAll(async () => {
+            await Pages().openColorPicker();
+            await TabContainer("tabContainerColorPicker")
+                .tab("tabColorPickerOnChange")
+                .header()
+                .tap();
+        });
+
+        it("should trigger nanoflow on change hue", async () => {
+            const colorPicker = ColorPicker("colorPickerOnChange");
+            await expect(colorPicker.getHue()).toBeVisible();
+            await colorPicker.getHue().tapAtPoint({ x: 50, y: 20 });
+            await expect(Alert().getMessage("On change executed successfully")).toBeVisible();
+            await Alert().confirm();
+        });
+
+        it("should trigger nanoflow on change saturation", async () => {
+            const colorPicker = ColorPicker("colorPickerOnChange");
+            await expect(colorPicker.getSaturation()).toBeVisible();
+            await colorPicker.getSaturation().tapAtPoint({ x: 50, y: 20 });
+            await expect(Alert().getMessage("On change executed successfully")).toBeVisible();
+            await Alert().confirm();
+        });
+
+        it("should trigger nanoflow on change lightness", async () => {
+            const colorPicker = ColorPicker("colorPickerOnChange");
+            await expect(colorPicker.getLightness()).toBeVisible();
+            await colorPicker.getLightness().tapAtPoint({ x: 50, y: 20 });
+            await expect(Alert().getMessage("On change executed successfully")).toBeVisible();
+            await Alert().confirm();
+        });
+
+        it("should trigger nanoflow on change alpha", async () => {
+            const colorPicker = ColorPicker("colorPickerOnChange");
+            await expect(colorPicker.getAlpha()).toBeVisible();
+            await colorPicker.getAlpha().tapAtPoint({ x: 50, y: 20 });
+            await expect(Alert().getMessage("On change executed successfully")).toBeVisible();
+            await Alert().confirm();
         });
 
         afterAll(async () => {
