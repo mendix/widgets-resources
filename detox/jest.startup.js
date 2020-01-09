@@ -15,12 +15,12 @@ beforeAll(async () => {
             detoxPrintBusyIdleResources: "YES",
             detoxURLBlacklistRegex: ".*firestore.*"
         },
-        permissions: { faceid: "YES" }
+        permissions: { faceid: "YES", location: "inuse", camera: "YES", photos: "YES" }
     });
     await waitFor(element(by.id("NativeHome.Widgets")))
         .toBeVisible()
-        .withTimeout(120000);
-}, 120000);
+        .withTimeout(300000);
+}, 300000);
 
 beforeEach(async () => {
     await adapter.beforeEach();
