@@ -8,53 +8,51 @@ export function Pages() {
             .withTimeout(2000);
         await button.tap();
     };
-    const scrollAndClickOnButton = async (buttonName: string, step?: number) => {
-        const button = element(by.id(buttonName));
-        await waitFor(button)
-            .toBeVisible()
-            .whileElement(by.id("scrollContainer1"))
-            .scroll(step || 250, "down");
-        await button.tap();
-    };
     return {
         async openActivityIndicator() {
-            await scrollAndClickOnButton("actionButton15");
+            await clickOnButton("btnActivityIndicator");
         },
         async openAnimation() {
-            await scrollAndClickOnButton("actionButton3");
+            await clickOnButton("btnAnimation");
         },
         async openBadge() {
-            await scrollAndClickOnButton("actionButton18");
+            await clickOnButton("btnBadge");
         },
         async openColorPicker() {
-            await scrollAndClickOnButton("actionButton21");
+            await clickOnButton("btnColorPicker");
         },
         async openFeedback() {
-            await scrollAndClickOnButton("actionButton22");
+            await clickOnButton("btnFeedback");
         },
         async openFloatingActionButton() {
-            await scrollAndClickOnButton("actionButton23");
+            await clickOnButton("btnFloatingActionButton");
         },
         async openProgressBar() {
-            await scrollAndClickOnButton("actionButton14");
+            await clickOnButton("btnProgressBar");
         },
         async openProgressCircle() {
-            await scrollAndClickOnButton("actionButton16");
+            await clickOnButton("btnProgressCircle");
         },
         async openVideoPlayer() {
-            await scrollAndClickOnButton("actionButton24");
+            await clickOnButton("btnVideoPlayer");
         },
         async openWebView() {
-            await scrollAndClickOnButton("actionButton28");
+            await clickOnButton("btnWebView");
         },
         async openIntroScreen() {
-            await scrollAndClickOnButton("actionButton4");
+            await clickOnButton("btnIntroScreen");
         },
         async openSafeAreaView() {
-            await scrollAndClickOnButton("actionButton5");
+            await clickOnButton("btnSafeAreaView");
+        },
+        async openRating() {
+            await clickOnButton("btnRating");
+        },
+        async openToggleButtons() {
+            await clickOnButton("btnToggleButtons");
         },
         async openListViewSwipe() {
-            await scrollAndClickOnButton("actionButton2");
+            await clickOnButton("btnListViewSwipe");
         },
         async openJSActions() {
             await clickOnButton("bottomBarItem$Actions");
