@@ -14,34 +14,6 @@ import { border, font, navigation, spacing } from "../variables";
 ========================================================================== */
 
 export const navigationStyle = {
-    statusBar: {
-        // Android only
-        backgroundColor: navigation.statusBar.backgroundColor,
-        barStyle: navigation.statusBar.barStyle,
-    },
-    topBar: {
-        container: {
-            // All ViewStyle properties are allowed
-            backgroundColor: navigation.topBar.backgroundColor,
-        },
-        title: {
-            // All TextStyle properties are allowed
-            color: navigation.topBar.titleColor,
-            fontSize: navigation.topBar.titleFontSize,
-            fontFamily: font.family,
-            fontWeight: font.weightBold,
-        },
-        backButtonText: {
-            // All TextStyle properties are allowed
-            color: navigation.topBar.backButtonColor,
-            fontFamily: font.family,
-        },
-        backButtonIcon: {
-            // All ImageStyle properties are allowed
-            tintColor: navigation.topBar.backButtonColor,
-        },
-        // backButtonIconSource: {},
-    },
     bottomBar: {
         container: {
             // All ViewStyle properties are allowed
