@@ -76,7 +76,7 @@ export const com_mendix_widget_native_introscreen_IntroScreen = {
         // All ViewStyle properties are allowed
         paddingVertical: 150,
         paddingHorizontal: 50,
-        backgroundColor: background.primary,
+        backgroundColor: `rgba(0, 0, 0, 0.5)`,
     },
 
     // Pagination styles
