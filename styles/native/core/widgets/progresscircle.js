@@ -1,4 +1,4 @@
-import { brand, font, input } from "../variables";
+import { brand, contrast, font, input } from "../variables";
 
 //
 // DISCLAIMER:
@@ -30,7 +30,7 @@ export const com_mendix_widget_native_progresscircle_ProgressCircle = {
     },
     text: {
         // All TextStyle properties are allowed
-        color: brand.primary,
+        color: contrast.regular,
         fontSize: font.size,
         fontWeight: font.weightSemiBold,
         fontFamily: font.family,
@@ -40,5 +40,5 @@ export const com_mendix_widget_native_progresscircle_ProgressCircle = {
         color: input.errorColor,
         fontSize: font.size,
         fontFamily: font.family,
-    }
+    },
 };

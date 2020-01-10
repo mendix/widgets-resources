@@ -58,6 +58,12 @@ export const backgroundGray = {
     },
 };
 
+export const borderTop = {
+    container: {
+        borderColor: border.color,
+        borderTopWidth: border.width,
+    },
+};
 export const borderBottom = {
     container: {
         borderColor: border.color,

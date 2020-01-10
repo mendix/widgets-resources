@@ -417,7 +417,34 @@
                 "class": "groupbox-callout"
             }
         ],
-        "Image": [
+        "StaticImageViewer": [
+            {
+                "name": "Style",
+                "type": "Dropdown",
+                "description": "Choose the style of your image.",
+                "options": [
+                    {
+                        "name": "Rounded",
+                        "class": "img-rounded"
+                    },
+                    {
+                        "name": "Thumbnail",
+                        "class": "img-thumbnail"
+                    },
+                    {
+                        "name": "Circle",
+                        "class": "img-circle"
+                    }
+                ]
+            },
+            {
+                "name": "Center",
+                "type": "Toggle",
+                "description": "Align the image in the center of an element.",
+                "class": "img-center"
+            }
+        ],
+        "DynamicImageViewer": [
             {
                 "name": "Style",
                 "type": "Dropdown",

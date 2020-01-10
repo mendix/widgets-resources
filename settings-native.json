@@ -7,6 +7,10 @@
                 "description": "The spacing above this element.",
                 "options": [
                     {
+                        "name": "Smallest",
+                        "class": "spacingOuterTopSmallest"
+                    },
+                    {
                         "name": "Small",
                         "class": "spacingOuterTopSmaller"
                     },
@@ -17,6 +21,10 @@
                     {
                         "name": "Large",
                         "class": "spacingOuterTopLarger"
+                    },
+                    {
+                        "name": "Largest",
+                        "class": "spacingOuterTopLargest"
                     }
                 ]
             },
@@ -25,6 +33,10 @@
                 "type": "Dropdown",
                 "description": "The spacing below this element.",
                 "options": [
+                    {
+                        "name": "Smallest",
+                        "class": "spacingOuterBottomSmallest"
+                    },
                     {
                         "name": "Small",
                         "class": "spacingOuterBottomSmaller"
@@ -36,6 +48,10 @@
                     {
                         "name": "Large",
                         "class": "spacingOuterBottomLarger"
+                    },
+                    {
+                        "name": "Largest",
+                        "class": "spacingOuterBottomLargest"
                     }
                 ]
             },
@@ -44,6 +60,10 @@
                 "type": "Dropdown",
                 "description": "The spacing to the left of this element.",
                 "options": [
+                    {
+                        "name": "Smallest",
+                        "class": "spacingOuterLeftSmallest"
+                    },
                     {
                         "name": "Small",
                         "class": "spacingOuterLeftSmaller"
@@ -55,6 +75,10 @@
                     {
                         "name": "Large",
                         "class": "spacingOuterLeftLarger"
+                    },
+                    {
+                        "name": "Largest",
+                        "class": "spacingOuterLeftLargest"
                     }
                 ]
             },
@@ -63,6 +87,10 @@
                 "type": "Dropdown",
                 "description": "The spacing to the right of this element.",
                 "options": [
+                    {
+                        "name": "Smallest",
+                        "class": "spacingOuterRightSmallest"
+                    },
                     {
                         "name": "Small",
                         "class": "spacingOuterRightSmaller"
@@ -74,6 +102,10 @@
                     {
                         "name": "Large",
                         "class": "spacingOuterRightLarger"
+                    },
+                    {
+                        "name": "Largest",
+                        "class": "spacingOuterRightLargest"
                     }
                 ]
             }
@@ -633,6 +665,10 @@
                     {
                         "name": "Danger",
                         "class": "btnDanger"
+                    },
+                    {
+                        "name": "Inversed",
+                        "class": "btnPrimaryInversed"
                     }
                 ]
             },

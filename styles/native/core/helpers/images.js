@@ -21,8 +21,9 @@ import { border } from "../variables";
 // Image Sizes
 export const thumbnail = {
     image: {
-        width: 120,
-        height: 100,
+        width: "100%",
+        height: "auto",
+        aspectRatio: 1,
         borderRadius: border.radius,
     },
 };

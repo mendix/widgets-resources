@@ -33,10 +33,10 @@ export const listItemBorderRight = {
 
 export const listItemIconSmall = {
     icon: {
-        size: 20,
+        size: 16,
     },
 };
-export const listItemIconBig = {
+export const listItemIconLarge = {
     icon: {
         size: 24,
     },

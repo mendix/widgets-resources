@@ -39,10 +39,35 @@
         }
     }
 
+
+    .mx-scrollcontainer-slide {
+        &:not(.mx-scrollcontainer-open) > .region-sidebar {
+            overflow: hidden;
+        }
+
+        &.mx-scrollcontainer-open > .region-sidebar {
+            width: $sidebar-width !important;
+
+            & > .mx-scrollcontainer-wrapper {
+                position: relative;
+            }
+        }
+
+        .region-sidebar > .mx-scrollcontainer-wrapper {
+            z-index: 2;
+            left: 0 !important;
+            background-color: inherit;
+        }
+    }
+
     // Push aside for mobile
     @media (max-width: $screen-sm-max) {
-        .mx-scrollcontainer-open {
+        .mx-scrollcontainer-open:not(.mx-scrollcontainer-slide) {
             width: 1100px;
+        }
+
+        .mx-scrollcontainer-slide .toggle-btn {
+            display: inline-block !important;
         }
     }
 

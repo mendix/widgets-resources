@@ -1,4 +1,4 @@
-import { brand, contrast } from "../variables";
+import { brand, contrast, font } from "../variables";
 
 //
 // DISCLAIMER:
@@ -38,5 +38,27 @@ export const progressCircleDanger = {
     },
     text: {
         color: contrast.regular,
+    },
+};
+
+export const progressCircleGray = {
+    fill: {
+        backgroundColor: contrast.regular,
+    },
+    text: {
+        color: contrast.regular,
+    },
+};
+
+// Sizes
+export const progressCircleSmall = {
+    circle: {
+        size: 50,
+    },
+    fill: {
+        width: 3,
+    },
+    text: {
+        fontSize: font.sizeSmall,
     },
 };

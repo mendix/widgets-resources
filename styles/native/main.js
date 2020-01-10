@@ -60,10 +60,17 @@ export * from "./core/helpers/helperclasses";
 
 //================================= CUSTOM =================================\\
 
+// Layouts
+export * from "./ui_resources/atlas_ui_resources/layouts/layout";
+
+
+// Page Templates
+export * from "./ui_resources/atlas_ui_resources/pagetemplates/maps";
+
+
 // Building blocks
 export * from "./ui_resources/atlas_ui_resources/buildingblocks/card";
 export * from "./ui_resources/atlas_ui_resources/buildingblocks/header";
 
 
-// Page Templates
-export * from "./ui_resources/atlas_ui_resources/pagetemplates/maps";
+

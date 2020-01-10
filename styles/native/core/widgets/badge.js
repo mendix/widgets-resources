@@ -1,4 +1,4 @@
-import { contrast, font } from "../variables";
+import { badge, font } from "../variables";
 
 //
 // DISCLAIMER:
@@ -16,12 +16,15 @@ import { contrast, font } from "../variables";
 export const com_mendix_widget_native_badge_Badge = {
     container: {
         // All ViewStyle properties are allowed
-        backgroundColor: contrast.lower,
-        alignSelf: "center",
+        backgroundColor: badge.default.backgroundColor,
+        paddingVertical: badge.paddingVertical,
+        paddingHorizontal: badge.paddingHorizontal,
     },
     caption: {
         // All TextStyle properties are allowed
-        color: contrast.higher,
+        color: badge.default.color,
         fontFamily: font.family,
+        fontWeight: badge.fontWeight,
+        marginTop: -1,
     },
 };

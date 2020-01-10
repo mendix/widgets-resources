@@ -30,13 +30,14 @@ export const ActionButton = {
     icon: {
         // Size and color are allowed
         color: button.primary.color,
-        size: button.fontSizeIconSmall,
+        size: button.fontSizeIcon,
     },
     caption: {
         // All TextStyle properties are allowed
         color: button.primary.color,
         fontSize: button.fontSize,
         fontFamily: font.family,
+        fontWeight: button.fontWeight,
     },
 };
 
@@ -45,12 +46,13 @@ export const ActionButtonHeader = {
     container: {
         borderColor: button.header.borderColor,
         backgroundColor: button.header.backgroundColor,
-        paddingVertical: button.header.paddingVertical,
-        paddingHorizontal: button.header.paddingHorizontal,
+        paddingLeft: button.header.paddingLeft,
+        paddingRight: button.header.paddingRight,
+
     },
     icon: {
         color: button.header.color,
-        size: button.header.fontSizeIconSmall,
+        size: button.header.fontSizeIcon,
     },
     caption: {
         color: button.header.color,
