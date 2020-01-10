@@ -669,10 +669,6 @@
                     {
                         "name": "Inversed",
                         "class": "btnPrimaryInversed"
-                    },
-                    {
-                        "name": "Secondary Inversed",
-                        "class": "btnSecondaryInversed"
                     }
                 ]
             },

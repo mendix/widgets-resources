@@ -75,6 +75,10 @@ export const btnPrimaryInversed = {
         color: button.primary.backgroundColor,
     },
 };
+
+//== Extra Classes
+//## Helper classes to change the look and feel of the widget
+//-------------------------------------------------------------------------------------------------------------------//
 export const btnSecondaryInversed = {
     container: {
         borderColor: button.secondary.inversedColor,
@@ -88,11 +92,7 @@ export const btnSecondaryInversed = {
     },
 };
 
-//== Extra Classes
-//## Helper classes to change the look and feel of the widget
-//-------------------------------------------------------------------------------------------------------------------//
 // Button Icon Only
-
 export const btnIconPrimary = {
     container: {
         borderWidth: 0,
