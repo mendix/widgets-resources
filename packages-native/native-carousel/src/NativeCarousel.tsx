@@ -1,11 +1,8 @@
-import { ComponentClass, createElement, ReactNode, useCallback, useRef, useState } from "react";
-import { LayoutChangeEvent, Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
+import { createElement, ReactNode, useCallback, useRef, useState } from "react";
+import { LayoutChangeEvent, Text, View } from "react-native";
 import { DataSourceItem, LayoutEnum, NativeCarouselProps } from "../typings/NativeCarouselProps";
-import { defaultCarouselStyle, CarouselStyle } from "./styles/styles";
-import { toNumber } from "@native-mobile-resources/util-widgets";
-import { executeAction, setAttributeValue } from "@widgets-resources/piw-utils";
+import { CarouselStyle, defaultCarouselStyle } from "./styles/styles";
 import Carousel, { Pagination } from "react-native-snap-carousel";
-import { Big } from "big.js";
 import deepmerge from "deepmerge";
 import { ValueStatus } from "mendix";
 
@@ -17,44 +14,26 @@ export const NativeCarousel = (props: NativeCarouselProps<CarouselStyle>): React
     });
     const customStyles = props.style ? props.style.filter(o => o != null) : [];
 
-    let styles = deepmerge.all<CarouselStyle>([defaultCarouselStyle, ...customStyles]);
+    const styles = deepmerge.all<CarouselStyle>([defaultCarouselStyle, ...customStyles]);
 
     const layoutSpecificStyle = props.layout === "fullWidth" ? styles.fullWidthLayout : styles.cardLayout;
 
-    const onPress = useCallback(() => {
-        executeAction(props.onPress);
-    }, [props.onPress]);
-
     const [activeSlide, setActiveSlide] = useState(0);
 
-    const onSnap = useCallback(
-        (index: number) => {
-            setActiveSlide(index);
-            setAttributeValue(props.currentIndex, new Big(index));
-            executeAction(props.onSnap);
-        },
-        [props.currentIndex, props.onSnap]
-    );
+    const onSnap = useCallback((index: number) => {
+        setActiveSlide(index);
+    }, []);
 
     const _renderItem = useCallback(
         ({ item, index }: { item: DataSourceItem; index: number }) => {
-            const Touchable: ComponentClass<any> = Platform.OS === "ios" ? TouchableOpacity : TouchableNativeFeedback;
-            // Touchable styles are ignored if android
-            // We dont want to pass already processed item width and height to the touchable
-            delete layoutSpecificStyle.activeSlideItem?.width;
-            delete layoutSpecificStyle.activeSlideItem?.height;
-
-            const innerContent =
-                Platform.OS === "ios" ? (
-                    props.content(item)
-                ) : (
-                    <View style={layoutSpecificStyle.activeSlideItem}>{props.content(item)}</View>
-                );
-
+            if (layoutSpecificStyle.activeSlideItem) {
+                delete layoutSpecificStyle.activeSlideItem.width;
+                delete layoutSpecificStyle.activeSlideItem.height;
+            }
             return (
-                <Touchable key={index} activeOpacity={1} style={layoutSpecificStyle.activeSlideItem} onPress={onPress}>
-                    {innerContent}
-                </Touchable>
+                <View key={index} style={{ ...layoutSpecificStyle.activeSlideItem }}>
+                    {props.content(item)}
+                </View>
             );
         },
         [props.content]
@@ -147,12 +126,9 @@ export const NativeCarousel = (props: NativeCarouselProps<CarouselStyle>): React
             {sliderDimensions.slider.width > 0 && (
                 <Carousel
                     loop={props.loop}
-                    autoplay={props.autoplay}
-                    autoplayDelay={props.autoplayDelay !== 0 ? props.autoplayDelay : undefined}
-                    autoplayInterval={props.autoplayInterval !== 0 ? props.autoplayInterval : undefined}
                     activeSlideAlignment={props.activeSlideAlignment}
                     layout={normalizeLayoutProp(props.layout)}
-                    firstItem={toNumber(props.firstItem)}
+                    firstItem={0}
                     data={props.contentSource.value.items}
                     renderItem={_renderItem}
                     sliderWidth={sliderDimensions.slider.width > 0 ? sliderDimensions.slider.width : 1}
