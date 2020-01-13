@@ -41,7 +41,7 @@ export class ColorPicker extends Component<Props, State> {
 
         return (
             <View style={this.styles.container} testID={`${this.props.name}`}>
-                {this.renderPreview()}
+                {this.renderPreview(color)}
                 {this.renderHue(color)}
                 {this.renderSaturation(color)}
                 {this.renderLightness(color)}
@@ -120,12 +120,12 @@ export class ColorPicker extends Component<Props, State> {
         }
     }
 
-    private renderPreview(): ReactNode {
+    private renderPreview(color: HSLA): ReactNode {
         return (
             this.props.showPreview && (
                 <View
                     testID={`${this.props.name}$preview`}
-                    style={[this.styles.preview, { backgroundColor: this.props.color.value }]}
+                    style={[this.styles.preview, { backgroundColor: tinycolor(color).toHslString() }]}
                 />
             )
         );
