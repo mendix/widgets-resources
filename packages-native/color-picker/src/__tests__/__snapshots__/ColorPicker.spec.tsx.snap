@@ -13,7 +13,7 @@ exports[`Color Picker renders 1`] = `
           "minHeight": 50,
         },
         Object {
-          "backgroundColor": "#ff0000",
+          "backgroundColor": "hsl(0, 100%, 50%)",
         },
       ]
     }
@@ -2681,7 +2681,7 @@ exports[`Color Picker renders with alpha slider 1`] = `
           "minHeight": 50,
         },
         Object {
-          "backgroundColor": "#ff0000",
+          "backgroundColor": "hsl(0, 100%, 50%)",
         },
       ]
     }
@@ -6232,7 +6232,7 @@ exports[`Color Picker renders with custom style 1`] = `
           "minHeight": 50,
         },
         Object {
-          "backgroundColor": "#ff0000",
+          "backgroundColor": "hsl(0, 100%, 50%)",
         },
       ]
     }

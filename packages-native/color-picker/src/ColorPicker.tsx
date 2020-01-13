@@ -82,28 +82,10 @@ export class ColorPicker extends Component<Props, State> {
 
     private onChangeComplete(): void {
         if (this.state.color && this.props.color.value !== this.getColor()) {
-            this.setColor();
+            this.props.color.setValue(this.getColor());
         }
 
         executeAction(this.props.onChange);
-    }
-
-    private setColor(): void {
-        const color = tinycolor(this.state.color);
-        switch (this.props.format) {
-            case "hex":
-                this.props.color.setValue(color.toHexString());
-                break;
-            case "hsl":
-                this.props.color.setValue(color.toHslString());
-                break;
-            case "hsv":
-                this.props.color.setValue(color.toHsvString());
-                break;
-            case "rgb":
-                this.props.color.setValue(color.toRgbString());
-                break;
-        }
     }
 
     private getColor(): string {
