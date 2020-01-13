@@ -113,6 +113,7 @@ export const com_mendix_widget_native_introscreen_IntroScreen = {
             marginTop: 30,
             flexDirection: "row",
             justifyContent: "center",
+            width: "100%",
         },
         buttonSkip: introScreenButtonPaginationAbove,
         buttonPrevious: introScreenButtonPaginationAbove,
