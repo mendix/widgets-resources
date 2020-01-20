@@ -40,7 +40,7 @@ describe("#Leaflet maps rendering", () => {
             mapPage.leafletMap.waitForDisplayed();
 
             expect(mapPage.googleMaps.length).toBe(5);
-            // TODO: google markers: expect(mapPage.leafletMarkers.length).toBe(6);
+            expect(mapPage.googleMarkers.length).toBe(6);
         });
     });
 

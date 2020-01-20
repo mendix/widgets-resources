@@ -1,4 +1,4 @@
-import page from "../../../../badge/tests/e2e/pages/page";
+import page from "../pages/page";
 import mapPage from "../pages/baseMap.page";
 import dataGrid from "../objects/dataGrid";
 
@@ -21,18 +21,36 @@ describe("Events are handled in maps", () => {
     });
 
     describe("show page", () => {
-        beforeAll(() => {
+        beforeEach(() => {
             page.open("p/ShowPage"); // opens page
         });
 
-        xit("should show page when click leaflet marker", () => {
+        it("should show full page when click leaflet marker", () => {
             mapPage.leafletMap.waitForDisplayed();
             dataGrid.getGridRow(2).waitForDisplayed();
             dataGrid.getGridRow(2).click();
+
+            mapPage.leafletMarkers[4].click();
+            page.waitTitleToBeDisplayed();
+            expect(page.title).toBe("Event triggered");
         });
 
+        // Unable to locate clickable of a google maps marker
         xit("should show page when click google marker", () => {
+            mapPage.leafletMap.waitForDisplayed();
+            page.tab(1).click();
             mapPage.googleMap.waitForDisplayed();
+
+            dataGrid.getGrid(3).waitForDisplayed();
+            dataGrid.getGrid(3).click();
+
+            const markerImage = mapPage.googleMarkers[4];
+            const div = markerImage.$("..").$(":last-child");
+            div.waitForClickable();
+            div.click();
+
+            page.waitTitleToBeDisplayed();
+            expect(page.title).toBe("Event triggered");
         });
     });
 });

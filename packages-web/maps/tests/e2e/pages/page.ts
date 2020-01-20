@@ -23,6 +23,14 @@ export class Page {
         return this.getElements(`.mx-name-${widgetName}`);
     }
 
+    waitTitleToBeDisplayed(): boolean {
+        return this.getWidget("pageTitle1").waitForDisplayed();
+    }
+
+    get title(): string {
+        return this.getWidget("pageTitle1").getText();
+    }
+
     get input(): WebdriverIO.Element {
         const inputWidget = this.getWidget("dataInput");
         const inputElement = inputWidget.$("input");
@@ -30,8 +38,8 @@ export class Page {
         return inputElement;
     }
 
-    get header(): string {
-        return this.getWidget("pageTitle1").getText();
+    tab(index: number): WebdriverIO.Element {
+        return this.getWidget(`tabPage${index}`);
     }
 }
 
