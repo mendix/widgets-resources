@@ -22,7 +22,7 @@ export class BaseMapPage extends Page {
     }
 
     get googleMarkers(): WebdriverIO.Element[] {
-        return this.getElements(".leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive");
+        return this.getElements('[src="https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png"]');
     }
 
     get leafletAlert(): WebdriverIO.Element {
