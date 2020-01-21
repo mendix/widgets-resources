@@ -18,7 +18,7 @@ export class BaseMapPage extends Page {
     }
 
     get leafletMarker(): WebdriverIO.Element {
-        return this.getElement(".leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive");
+        return this.getElement(".leaflet-marker-icon");
     }
 
     expectFewLeafletMarkers(): boolean {
@@ -35,7 +35,7 @@ export class BaseMapPage extends Page {
     }
 
     get leafletMarkers(): WebdriverIO.Element[] {
-        return this.getElements(".leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive");
+        return this.getElements(".leaflet-marker-icon");
     }
 
     get googleMarkers(): WebdriverIO.Element[] {
