@@ -21,6 +21,17 @@ export class BaseMapPage extends Page {
         return this.getElement(".leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive");
     }
 
+    expectFewLeafletMarkers(): boolean {
+        browser.waitUntil(
+            () => {
+                const markerList = this.getElements(".leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive");
+                return markerList.length > 1;
+            },
+            5000,
+            "expected more than 1 marker to be populated"
+        );
+    }
+
     get leafletMarkers(): WebdriverIO.Element[] {
         return this.getElements(".leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive");
     }
