@@ -32,7 +32,7 @@ exports.config = {
               }
     ],
     sync: true,
-    logLevel: "silent",
+    logLevel: "trace",
     coloredLogs: true,
     bail: 0,
     screenshotPath: basePath + "/dist/wdio/",
