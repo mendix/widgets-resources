@@ -17,6 +17,10 @@ export class BaseMapPage extends Page {
         return this.getElements(".widget-google-maps");
     }
 
+    get leafletMarker(): WebdriverIO.Element {
+        return this.getElement(".leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive");
+    }
+
     get leafletMarkers(): WebdriverIO.Element[] {
         return this.getElements(".leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive");
     }
