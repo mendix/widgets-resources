@@ -30,6 +30,16 @@ describe("Events are handled in maps", () => {
             mapPage.leafletMap.waitForDisplayed();
             dataGrid.getGridRow(2).waitForDisplayed();
             dataGrid.getGridRow(2).click();
+            // const text = page.getWidget("textBox1 input").getText();
+            let value = "";
+            browser.waitUntil(
+                () => {
+                    value = page.getWidget("textBox1 input").getValue();
+                    return value === "China";
+                },
+                5000,
+                "expected more than 1 marker to be populated"
+            );
 
             mapPage.expectFewLeafletMarkers();
             const markerList = mapPage.leafletMarkers || [];
