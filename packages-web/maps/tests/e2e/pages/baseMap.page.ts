@@ -22,14 +22,16 @@ export class BaseMapPage extends Page {
     }
 
     expectFewLeafletMarkers(): boolean {
+        let markerList = this.leafletMarkers;
         browser.waitUntil(
             () => {
-                const markerList = this.getElements(".leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive");
+                markerList = this.leafletMarkers;
                 return markerList.length > 1;
             },
             5000,
             "expected more than 1 marker to be populated"
         );
+        return markerList.length > 1;
     }
 
     get leafletMarkers(): WebdriverIO.Element[] {
