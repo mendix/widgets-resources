@@ -30,6 +30,7 @@ describe("Events are handled in maps", () => {
             dataGrid.getGridRow(2).waitForDisplayed();
             dataGrid.getGridRow(2).click();
 
+            mapPage.leafletMarkers[4].waitForDisplayed();
             mapPage.leafletMarkers[4].click();
             page.waitTitleToBeDisplayed();
             expect(page.title).toBe("Event triggered");
