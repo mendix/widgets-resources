@@ -41,6 +41,10 @@ export class Page {
     tab(index: number): WebdriverIO.Element {
         return this.getWidget(`tabPage${index}`);
     }
+
+    wait(ms: number): void {
+        browser.pause(ms);
+    }
 }
 
 const page = new Page();
