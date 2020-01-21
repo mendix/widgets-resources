@@ -70,12 +70,11 @@ jobs:
               - cd detox
           install:
               - npm ci
+          before_script:
+              - echo $CHANGED_DETOX_TESTS
+              - echo $NATIVE_PROJECTS
           script:
               - if [ "$NATIVE_PROJECTS" = "true" ]; then npm run test:ios:debug; else echo "No native package changed. Skipping ios tests"; fi
 notifications:
     slack:
-        template:
-            - "Build <%{build_url}|#%{build_number}> of %{repository_slug}@%{branch} in PR <%{pull_request_url}|#%{pull_request_number}> by %{author} %{result} in %{duration}"
-        rooms:
-            - "mendix:$SLACK_KEY#widget-team-private"
-        on_pull_requests: true
+        secure: DjpkK0j6qCssXhI8Ym/pPQ9L+vQU8RMjaIhYmkNHDgKQIPifQib1nIDpUSVFWmCq/A+0cihu514MVvrFKE5rpg99QmwXTBsR0+KGG6wJrBXrBpxjndL4T8vqVvnpaOWU1k8Ky1ECdbfsHmkEUzk97JoekifvFr9k7g4bQyEtZufh4Y3L5UD9DSM6Q+AbR9tp7E/mUNyncB71VStscHDSv5MAD2uHmfn9PtyO3PQW2Y/YquhdR3lWi7GcjuSjZYH4A3s5V9LejUNxTMt7klztpnWRP9zRvh3pBPnol1L8mIJO5bAHoxSVg/djFLxXb7RmhwsuzJApZGXiYK6I3zRUlf2cEN6sjuW/vvXPo6nferd6/lCl10GljuqAm4Fw7yGdbh7L6wlZtUrCzkNs3VJYScqkRv0sXs1+8xx35Ge3uJGr7DOLIsg/TgSOOBpegc3XARILHBra07iDqGGSdm5x3xM0aVpqEJhMYPOOBmT6pJ1GO5AQOKyYooNT+mpY5ZjSjr3rXmzlPDHNqd12Bn6SXFa2VWZ8fVcCh43tDHVDvsUXpPJPukbfRV+0oSzQKQ1+yjvAbZJpuvOnf/AI5ZK88HcrRPCi3h2Q4ryaIXRlDdDqRrHGphTAJxvYrAuJEEU3oCv1VAAAxd82zZfnzy8ERc7Ck6kd8HL71TCBc3T19TY=
