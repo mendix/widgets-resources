@@ -23,6 +23,9 @@
     },
     "dependencies": {
         "@native-mobile-resources/util-widgets": "^1.0.0",
-        "@widgets-resources/piw-utils": "^1.0.0"
+        "@widgets-resources/piw-utils": "^1.0.0",
+        "react-native-gesture-handler": "^1.5.3",
+        "react-native-reanimated": "^1.7.0",
+        "reanimated-bottom-sheet": "^1.0.0-alpha.18"
     }
 }
