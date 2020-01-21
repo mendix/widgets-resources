@@ -11,7 +11,8 @@ env:
         - CHANGED_WEB_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "packages-web")
         - CHANGED_NATIVE_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "packages-native")
         - CHANGED_DETOX_TESTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "detox")
-        - NATIVE_PROJECTS=$(if [ "$CHANGED_NATIVE_PROJECTS" != "" || "$CHANGED_DETOX_TESTS" != "" ]; then echo "true"; else echo "false"; fi)
+        - NATIVE_PROJECTS=$(if [ "$CHANGED_NATIVE_PROJECTS" != "" ]; then echo "true"; else echo "false"; fi)
+        - DETOX_PROJECT=$(if [ "$CHANGED_DETOX_TESTS" != "" ]; then echo "true"; else echo "false"; fi)
         - WEB_PROJECTS=$(if [ "$CHANGED_WEB_PROJECTS" != "" ]; then echo "true"; else echo "false"; fi)
         # Build only touched packages for pull requests when no shared files were touched
         - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
@@ -71,10 +72,10 @@ jobs:
           install:
               - npm ci
           before_script:
-              - echo $CHANGED_DETOX_TESTS
+              - echo $DETOX_PROJECT
               - echo $NATIVE_PROJECTS
           script:
-              - if [ "$NATIVE_PROJECTS" = "true" ]; then npm run test:ios:debug; else echo "No native package changed. Skipping ios tests"; fi
+              - if [ "$NATIVE_PROJECTS" = "true" ] || [ "$DETOX_PROJECT" = "true" ]; then npm run test:ios:debug; else echo "No native package changed. Skipping ios tests"; fi
 notifications:
     slack:
         on_cancel: never
