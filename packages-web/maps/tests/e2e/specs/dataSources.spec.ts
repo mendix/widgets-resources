@@ -13,16 +13,8 @@ describe("Maps", () => {
             dataGrid.getGridRow(0).waitForDisplayed();
             dataGrid.getGridRow(0).click();
             mapPage.leafletMap.waitForDisplayed();
-            let markerList: WebdriverIO.Element[] = mapPage.leafletMarkers;
-            browser.waitUntil(
-                () => {
-                    markerList = mapPage.leafletMarkers;
-                    return markerList.length > 1;
-                },
-                5000,
-                "expected more than 1 marker to be populated"
-            );
-            expect(markerList.length).toBeGreaterThan(1);
+            const moreThanOneMarker = mapPage.expectFewLeafletMarkers();
+            expect(moreThanOneMarker).toBeTruthy();
         });
     });
     describe("when there are multiple data sources", () => {
