@@ -1,6 +1,7 @@
 import page from "../pages/page";
 import mapPage from "../pages/baseMap.page";
 import dataGrid from "../objects/dataGrid";
+import { getMxObjectMarkerUrl } from "../../../src/utils/Data";
 
 describe("Events are handled in maps", () => {
     describe("static locations", () => {
@@ -31,7 +32,10 @@ describe("Events are handled in maps", () => {
             dataGrid.getGridRow(2).click();
 
             mapPage.expectFewLeafletMarkers();
-            mapPage.leafletMarkers[0].click();
+            const markerList = mapPage.leafletMarkers || [];
+            if (markerList.length > 0) {
+                mapPage.leafletMarkers[0].click();
+            }
             page.waitTitleToBeDisplayed();
             expect(page.title).toBe("Event triggered");
         });
