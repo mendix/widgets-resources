@@ -41,7 +41,7 @@ describe("Events are handled in maps", () => {
                 "expected more than 1 marker to be populated"
             );
 
-            mapPage.expectFewLeafletMarkers();
+            mapPage.leafletMarker.waitForDisplayed();
             const markerList = mapPage.leafletMarkers || [];
             if (markerList.length > 0) {
                 mapPage.leafletMarkers[0].click();
