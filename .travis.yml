@@ -11,10 +11,10 @@ env:
         - CHANGED_WEB_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "packages-web")
         - CHANGED_NATIVE_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "packages-native")
         - CHANGED_DETOX_TESTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "detox")
-        - NATIVE_PROJECTS=$(if [ "$CHANGED_NATIVE_PROJECTS" != "" ] || [ "$CHANGED_DETOX_TESTS" != ""]; then echo "true"; else echo "false"; fi)
+        - NATIVE_PROJECTS=$(if [ "$CHANGED_NATIVE_PROJECTS" != "" ] OR [ "$CHANGED_DETOX_TESTS" != "" ]; then echo "true"; else echo "false"; fi)
         - WEB_PROJECTS=$(if [ "$CHANGED_WEB_PROJECTS" != "" ]; then echo "true"; else echo "false"; fi)
         # Build only touched packages for pull requests when no shared files were touched
-        - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
+        - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] AND [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
         # Set arguments so lerna only runs scripts in changed packages
         - SCRIPT_ARGS=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
         - ADB_INSTALL_TIMEOUT=8
