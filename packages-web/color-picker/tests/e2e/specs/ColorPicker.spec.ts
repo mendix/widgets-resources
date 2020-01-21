@@ -1,5 +1,5 @@
-import modePage from "./pages/modePage";
-import colorFormatPage from "./pages/colorFormatPage";
+import modePage from "../pages/modePage";
+import colorFormatPage from "../pages/colorFormatPage";
 
 describe("Color picker", () => {
     it("changes color when a new color is picked", () => {
