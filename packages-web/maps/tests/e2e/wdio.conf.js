@@ -9,8 +9,6 @@ if (!fs.existsSync(e2ePath)) {
     fs.mkdirSync(e2ePath, { recursive: true });
 }
 
-const chromeArgs = debug ? ["--no-sandbox"] : ["--no-sandbox", "--headless", "--disable-gpu", "--disable-extensions"];
-
 exports.config = {
     before() {
         require("ts-node").register({ files: true, project: path.join(basePath, "tests/e2e/tsconfig.json") });
@@ -27,12 +25,12 @@ exports.config = {
             : {
                   browserName: "chrome",
                   "goog:chromeOptions": {
-                      args: chromeArgs
+                      args: ["--no-sandbox"]
                   }
               }
     ],
     sync: true,
-    logLevel: "silent",
+    logLevel: "debug",
     coloredLogs: true,
     bail: 0,
     screenshotPath: basePath + "/dist/wdio/",
