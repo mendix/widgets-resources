@@ -1,11 +1,11 @@
-import page from "../../../../badge/tests/e2e/pages/page";
+import page from "../pages/page";
 import dataGrid from "../objects/dataGrid";
 import mapPage from "../pages/baseMap.page";
 
 describe("Maps", () => {
     describe("when XPath data source is selected", () => {
         beforeAll(() => {
-            page.open("p/MarkerMicroflow"); // opens page
+            page.open("p/MarkerMicroflow");
         });
 
         it("it should show multiple locations", () => {
@@ -19,7 +19,7 @@ describe("Maps", () => {
     });
     describe("when there are multiple data sources", () => {
         beforeAll(() => {
-            page.open("p/MultipleDataSources"); // opens page
+            page.open("p/MultipleDataSources");
         });
 
         it("it should show map correctly", () => {
@@ -32,7 +32,7 @@ describe("Maps", () => {
     });
     describe("when nanoflow over association data source", () => {
         beforeAll(() => {
-            page.open("p/Nanoflow-Association"); // opens page
+            page.open("p/Nanoflow-Association");
         });
 
         it("it should show map correctly", () => {
