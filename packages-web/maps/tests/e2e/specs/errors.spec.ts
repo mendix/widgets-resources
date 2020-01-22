@@ -1,4 +1,4 @@
-import page from "../../../../badge/tests/e2e/pages/page";
+import page from "../pages/page";
 import mapPage from "../pages/baseMap.page";
 
 describe("Handle errors", () => {
@@ -6,7 +6,7 @@ describe("Handle errors", () => {
         const alertValue = "invalid location";
 
         beforeAll(() => {
-            page.open("p/InvalidLocation"); // opens page
+            page.open("p/InvalidLocation");
         });
 
         it("show an alert message", () => {
@@ -22,7 +22,7 @@ describe("Handle errors", () => {
         const alertValue = "Latitude and longitude attributes are required for data source context at location 1";
 
         beforeAll(() => {
-            page.open("p/GoogleMapsConfigErrors"); // opens page
+            page.open("p/GoogleMapsConfigErrors");
         });
         it("should show an alert message", () => {
             mapPage.googleMap.waitForDisplayed();
@@ -38,7 +38,7 @@ describe("Handle errors", () => {
         const alertValue = "An 'Access token' for 'Map provider' mapBox is required";
 
         beforeAll(() => {
-            page.open("p/NoToken"); // opens page
+            page.open("p/NoToken");
         });
         it("should show an alert message", () => {
             mapPage.googleMap.waitForDisplayed();

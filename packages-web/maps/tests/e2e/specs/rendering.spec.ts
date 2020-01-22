@@ -1,10 +1,10 @@
-import page from "../../../../badge/tests/e2e/pages/page";
+import page from "../pages/page";
 import mapPage from "../pages/baseMap.page";
 
-describe("#Leaflet maps rendering", () => {
+describe("Leaflet maps rendering", () => {
     describe("should render simple case", () => {
         beforeAll(() => {
-            page.open("p/Playground"); // opens page
+            page.open("p/Playground");
         });
 
         it("should show a single location", () => {
@@ -14,13 +14,12 @@ describe("#Leaflet maps rendering", () => {
 
             const markerList = mapPage.leafletMarkers || [];
 
-            // eslint-disable-next-line jest/prefer-to-have-length
             expect(markerList.length).toBe(1);
         });
     });
     describe("should render custom", () => {
         beforeAll(() => {
-            page.open("p/CustomMarkers"); // opens page
+            page.open("p/CustomMarkers");
         });
 
         it("should show no alerts", () => {
@@ -40,14 +39,12 @@ describe("#Leaflet maps rendering", () => {
             mapPage.leafletMap.waitForDisplayed();
 
             expect(mapPage.googleMaps.length).toBe(5);
-            // Need better way to locate google markers
-            // expect(mapPage.googleMarkers.length).toBe(6);
         });
     });
 
     describe("should handle no context", () => {
         beforeAll(() => {
-            page.open("p/no-context"); // opens page
+            page.open("p/no-context");
         });
 
         it("should not show any alert messages", () => {
