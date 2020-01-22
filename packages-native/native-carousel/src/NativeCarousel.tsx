@@ -1,10 +1,11 @@
 import { createElement, ReactNode, useCallback, useRef, useState } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
 import { DataSourceItem, LayoutEnum, NativeCarouselProps } from "../typings/NativeCarouselProps";
-import { CarouselStyle, defaultCarouselStyle } from "./styles/styles";
+import { ActiveDotStyle, CarouselStyle, defaultCarouselStyle } from "./styles/styles";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import deepmerge from "deepmerge";
 import { ValueStatus } from "mendix";
+import { exclude, only } from "@native-mobile-resources/util-widgets";
 
 export const NativeCarousel = (props: NativeCarouselProps<CarouselStyle>): ReactNode => {
     const carousel = useRef<any>(null);
@@ -44,12 +45,14 @@ export const NativeCarousel = (props: NativeCarouselProps<CarouselStyle>): React
     };
 
     const renderPagination = useCallback(() => {
-        const contentLength =
-            props.contentSource && props.contentSource.value ? props.contentSource.value.items.length : 0;
+        const contentLength = props.contentSource.items.length;
         const paginationOverflow = contentLength > 5;
 
+        const dotContainerStyle = only<ActiveDotStyle, any>(layoutSpecificStyle.dotStyle!, ["container"]);
+        const dotStyle = exclude<ActiveDotStyle, any>(layoutSpecificStyle.dotStyle!, ["container"]);
+
         if (!props.showPagination) {
-            return undefined;
+            return null;
         }
         if (paginationOverflow) {
             return (
@@ -65,11 +68,13 @@ export const NativeCarousel = (props: NativeCarouselProps<CarouselStyle>): React
                 dotsLength={contentLength}
                 activeDotIndex={activeSlide}
                 containerStyle={layoutSpecificStyle.paginationContainer}
+                dotContainerStyle={dotContainerStyle?.container}
                 dotColor={layoutSpecificStyle.activeDotStyle?.color}
                 dotStyle={layoutSpecificStyle.activeDotStyle}
-                inactiveDotColor={layoutSpecificStyle.dotStyle?.color}
-                inactiveDotOpacity={layoutSpecificStyle.dotStyle?.opacity}
-                inactiveDotScale={layoutSpecificStyle.dotStyle?.scale}
+                inactiveDotStyle={dotStyle}
+                inactiveDotColor={dotStyle?.color}
+                inactiveDotOpacity={dotStyle?.opacity}
+                inactiveDotScale={dotStyle?.scale}
                 carouselRef={carousel.current}
                 tappableDots={!!carousel}
             />
@@ -129,7 +134,7 @@ export const NativeCarousel = (props: NativeCarouselProps<CarouselStyle>): React
                     activeSlideAlignment={props.activeSlideAlignment}
                     layout={normalizeLayoutProp(props.layout)}
                     firstItem={0}
-                    data={props.contentSource.value.items}
+                    data={props.contentSource.items}
                     renderItem={_renderItem}
                     sliderWidth={sliderDimensions.slider.width > 0 ? sliderDimensions.slider.width : 1}
                     itemWidth={sliderDimensions.slide.width > 0 ? sliderDimensions.slide.width : 1}
