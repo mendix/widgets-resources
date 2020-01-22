@@ -29,11 +29,9 @@ export interface DataSourceItem {
 
 export interface DataSource {
     status: string;
-    value: {
-        items: DataSourceItem[];
-        offset: number;
-        totalCount: number;
-        hasMoreItems: boolean;
-        version: number;
-    };
+    items: DataSourceItem[];
+    offset: number;
+    totalCount: number;
+    hasMoreItems: boolean;
+    version: number;
 }

@@ -1,12 +1,13 @@
 import { TextStyle, ViewStyle } from "react-native";
 
 interface DotStyle {
+    container?: ViewStyle;
     opacity?: number;
     scale?: number;
     color?: string;
 }
 
-interface ActiveDotStyle extends ViewStyle, DotStyle {}
+export interface ActiveDotStyle extends ViewStyle, DotStyle {}
 
 interface ContainerStyle extends ViewStyle {
     width?: number;
@@ -23,7 +24,7 @@ interface LayoutStyle {
     activeSlideItem?: ViewStyle;
     paginationContainer?: ViewStyle;
     paginationText?: TextStyle;
-    dotStyle?: DotStyle;
+    dotStyle?: ActiveDotStyle;
     activeDotStyle?: ActiveDotStyle;
 }
 
@@ -39,6 +40,18 @@ export const defaultCarouselStyle: CarouselStyle = {
         },
         activeSlideItem: {
             width: "70%"
+        },
+        paginationContainer: {
+            marginHorizontal: 0
+        },
+        activeDotStyle: {
+            marginHorizontal: 0
+        },
+        dotStyle: {
+            container: {
+                marginHorizontal: 0
+            },
+            marginHorizontal: 0
         }
     },
     fullWidthLayout: {
@@ -51,6 +64,18 @@ export const defaultCarouselStyle: CarouselStyle = {
         slideItem: {
             opacity: 1,
             scale: 1
+        },
+        paginationContainer: {
+            marginHorizontal: 0
+        },
+        activeDotStyle: {
+            marginHorizontal: 0
+        },
+        dotStyle: {
+            container: {
+                marginHorizontal: 0
+            },
+            marginHorizontal: 0
         }
     }
 };
