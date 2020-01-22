@@ -33,49 +33,40 @@ export interface CarouselStyle {
     fullWidthLayout: LayoutStyle;
 }
 
+const sharedStyles: LayoutStyle = {
+    container: {
+        width: "100%"
+    },
+    paginationContainer: {
+        paddingHorizontal: 0,
+        paddingVertical: 0
+    },
+    activeDotStyle: {
+        marginHorizontal: 0
+    },
+    dotStyle: {
+        container: {
+            marginHorizontal: 0
+        },
+        marginHorizontal: 0
+    }
+};
+
 export const defaultCarouselStyle: CarouselStyle = {
     cardLayout: {
-        container: {
-            width: "100%"
-        },
+        ...sharedStyles,
         activeSlideItem: {
             width: "70%"
-        },
-        paginationContainer: {
-            marginHorizontal: 0
-        },
-        activeDotStyle: {
-            marginHorizontal: 0
-        },
-        dotStyle: {
-            container: {
-                marginHorizontal: 0
-            },
-            marginHorizontal: 0
         }
     },
     fullWidthLayout: {
-        container: {
-            width: "100%"
-        },
+        ...sharedStyles,
         activeSlideItem: {
             width: "100%"
         },
         slideItem: {
             opacity: 1,
             scale: 1
-        },
-        paginationContainer: {
-            marginHorizontal: 0
-        },
-        activeDotStyle: {
-            marginHorizontal: 0
-        },
-        dotStyle: {
-            container: {
-                marginHorizontal: 0
-            },
-            marginHorizontal: 0
         }
     }
 };
