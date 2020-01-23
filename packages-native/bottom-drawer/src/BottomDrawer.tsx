@@ -1,47 +1,45 @@
-import { ReactNode, createElement, useRef, useEffect, useCallback } from "react";
+import { ReactNode, createElement, useRef, useEffect, useCallback, useMemo } from "react";
 import BottomSheet from "reanimated-bottom-sheet";
-import { View, Text, ViewStyle } from "react-native";
+import { View } from "react-native";
 import { BottomDrawerProps } from "../typings/BottomDrawerProps";
-import { Style, flattenStyles } from "@native-mobile-resources/util-widgets";
-
-interface BottomDrawerStyle extends Style {
-    container: ViewStyle;
-}
+import { BottomDrawerStyle, defaultBottomDrawerStyle } from "./ui/Styles";
+import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { ValueStatus } from "mendix";
 
 export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): ReactNode {
-    const styles = flattenStyles({ container: { flex: 1, backgroundColor: "#FFF" } }, props.style);
+    const styles = flattenStyles(defaultBottomDrawerStyle, props.style);
 
     const bottomSheetRef = useRef<BottomSheet>(null);
 
-    const renderHeader = useCallback(() => {
-        return (
-            <View style={{ backgroundColor: "blue" }}>
-                <Text>Header</Text>
-            </View>
+    const renderHeader = useCallback(() => props.headerContent, [props.headerContent]);
+    const renderContent = useCallback(() => props.mainContent, [props.mainContent]);
+
+    const snapPoints = useMemo(() => {
+        return props.snapPoints.map(snapPoint =>
+            snapPoint.percentage ? snapPoint.distance + "%" : snapPoint.distance
         );
-    }, []);
-    const renderContent = useCallback(() => {
-        return (
-            <View style={{ backgroundColor: "green" }}>
-                <Text>Content</Text>
-            </View>
-        );
-    }, []);
+    }, [props.snapPoints]);
+
+    console.warn(snapPoints);
 
     useEffect(() => {
         console.warn("test");
         console.warn(!!bottomSheetRef.current);
-        bottomSheetRef.current!.snapTo(0);
+        // bottomSheetRef.current!.snapTo(0);
     }, []);
 
     return (
         <View style={styles.container}>
             <BottomSheet
-                snapPoints={["20%", "70%"]}
-                initialSnap={0}
-                renderContent={renderContent}
-                renderHeader={renderHeader}
                 ref={bottomSheetRef}
+                snapPoints={snapPoints}
+                initialSnap={
+                    props.initialSnapPoint.status === ValueStatus.Available
+                        ? Number(props.initialSnapPoint.value.toFixed(0))
+                        : undefined
+                }
+                renderHeader={renderHeader}
+                renderContent={renderContent}
             />
         </View>
     );
