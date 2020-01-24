@@ -1,6 +1,6 @@
 {
     "name": "native-carousel",
-    "widgetName": "NativeCarousel",
+    "widgetName": "Carousel",
     "version": "0.0.1",
     "license": "Apache-2.0",
     "repository": {
@@ -8,9 +8,9 @@
         "url": "https://github.com/mendix/widgets-resources.git"
     },
     "config": {
-        "widgetPath": "/Users/mehmet/Documents/Mendix/NativeSlider/widgets",
-        "projectPath": "/Users/mehmet/Documents/Mendix/NativeSlider/",
-        "subprojectFolder": "packages-native/native-carousel"
+        "widgetPath": "/Users/mehmet/Documents/Mendix/NativeSlider-main/widgets",
+        "projectPath": "/Users/mehmet/Documents/Mendix/NativeSlider-main/",
+        "subprojectFolder": "packages-native/carousel"
     },
     "packagePath": "com.mendix.widget.native",
     "scripts": {

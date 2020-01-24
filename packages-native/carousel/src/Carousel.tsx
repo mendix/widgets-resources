@@ -1,13 +1,13 @@
-import { createElement, ReactNode, useCallback, useRef, useState } from "react";
+import { createElement, ReactElement, useCallback, useRef, useState } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
-import { DataSourceItem, LayoutEnum, NativeCarouselProps } from "../typings/NativeCarouselProps";
-import { ActiveDotStyle, CarouselStyle, defaultCarouselStyle } from "./styles/styles";
-import Carousel, { Pagination } from "react-native-snap-carousel";
+import { CarouselProps, DataSourceItem, LayoutEnum } from "../typings/CarouselProps";
+import { ActiveDotStyle, CarouselStyle, defaultCarouselStyle } from "./ui/styles";
+import { default as NativeCarousel, Pagination } from "react-native-snap-carousel";
 import deepmerge from "deepmerge";
 import { ValueStatus } from "mendix";
 import { exclude, only } from "@native-mobile-resources/util-widgets";
 
-export const NativeCarousel = (props: NativeCarouselProps<CarouselStyle>): ReactNode => {
+export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement | null => {
     const carousel = useRef<any>(null);
     const [sliderDimensions, setSliderDimensions] = useState({
         slider: { width: 0, height: 0 },
@@ -52,8 +52,9 @@ export const NativeCarousel = (props: NativeCarouselProps<CarouselStyle>): React
         const dotStyle = exclude<ActiveDotStyle, any>(layoutSpecificStyle.dotStyle!, ["container"]);
 
         if (!props.showPagination) {
-            return null;
+            return undefined;
         }
+
         if (paginationOverflow) {
             return (
                 <View style={layoutSpecificStyle.paginationContainer}>
@@ -99,13 +100,12 @@ export const NativeCarousel = (props: NativeCarouselProps<CarouselStyle>): React
     };
 
     const onLayout = (event: LayoutChangeEvent) => {
-        // Slider dimensions will be always as big as the view around it
-        // Item dimensions will be calculated from values slideItem.width + height
         const realWidth = getPaddingCalculatedValue(event.nativeEvent.layout.width as number);
         const realHeight = event.nativeEvent.layout.height as number;
 
         let itemWidth = 0;
         let itemHeight = 0;
+        // Allow users to set width and height as percentage since lib only accepts numbers
         if (
             typeof layoutSpecificStyle.activeSlideItem?.width === "string" &&
             layoutSpecificStyle.activeSlideItem.width.includes("%")
@@ -128,8 +128,8 @@ export const NativeCarousel = (props: NativeCarouselProps<CarouselStyle>): React
 
     return (
         <View style={layoutSpecificStyle.container} onLayout={onLayout}>
-            {sliderDimensions.slider.width > 0 && (
-                <Carousel
+            {
+                <NativeCarousel
                     loop={props.loop}
                     activeSlideAlignment={props.activeSlideAlignment}
                     layout={normalizeLayoutProp(props.layout)}
@@ -143,7 +143,7 @@ export const NativeCarousel = (props: NativeCarouselProps<CarouselStyle>): React
                     onSnapToItem={onSnap}
                     ref={carousel}
                 />
-            )}
+            }
             {renderPagination()}
         </View>
     );

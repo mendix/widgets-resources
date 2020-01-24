@@ -1,5 +1,5 @@
 /**
- * This file was generated from NativeCarousel.xml
+ * This file was generated from Carousel.xml
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
@@ -14,7 +14,7 @@ export type LayoutEnum = "card" | "fullWidth";
 
 export type ActiveSlideAlignmentEnum = "center" | "start";
 
-export interface NativeCarouselProps<Style> extends CommonProps<Style> {
+export interface CarouselProps<Style> extends CommonProps<Style> {
     contentSource: DataSource;
     content: (item: DataSourceItem) => ReactNode;
     layout: LayoutEnum;
