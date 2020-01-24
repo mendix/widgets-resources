@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Carousel</name>
     <description/>
-    <icon/>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAAHdbkFIAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABlmWCKAAAB9UlEQVR4Ae2aS07DMBCG46iLZMMJYMldmopHWXMLLgBcgFuwpkDV9C4s4QRskkWVkL9oKifNO7jU7W+psj22Z8ZfJolj13F2k8Yv0QMsjWdRKr91PZO7KNSlxg51g/emTQkDRzn3Oa9S53F54x8Lh9zUtysKog2qrAw0CJntrr+S5dTfoG2FsUqRyAeH22AF4glzqwnkQrlLGGPWBxLKg++Fv1eQXZavurhyXfVd1842EjhGAuvHGSauv51Rxw2zuPaeUA7e4iBN0gXKbRNuyHDqn6H/xXt8vlqlt/pYPApRr3wUJEl6IgO6Gse4bG1xKuOLxkWOvNIBvZPJMh0gAZPxRd0kQAIkQAIkYAeBykXpaKSe55feB6YRzKJPfY3XZmrKVZPwygvRd/Ia3+lrTMgaF6X6QrKrcRjQF7JF42iXxBURCZAACZDA/hIYuqXYtGUp7wLmJEACJEACJEACJEACJEACJEAC/0Vgsz8pDhQPz0Wu5/qBusj77GHK2K65fiAvY8v2QKVNz2VfVGS9PsrL9jv77KGKE13zMltlPrXR2wtAG8W29CEAW66UKT8ZAabI2qKXEWDLlTLlJyPAFFlb9DICbLlSpvzsHAH4EMIfOYoO4c8ZuzgTgw3YKtqHT0PP9Io6WScBEiABEiABEiCBgybwA06NjAe1lcwrAAAAAElFTkSuQmCC</icon>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
