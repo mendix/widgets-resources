@@ -19,13 +19,17 @@
                     <description />
                     <properties>
                         <propertyGroup caption="Snap points">
-                            <property key="distance" type="integer" defaultValue="50">
+                            <property key="distance" type="integer" defaultValue="0" required="true">
                                 <caption>Distance</caption>
                                 <description>The distance from the bottom of the screen (default unit: pixels).</description>
                             </property>
-                            <property key="percentage" type="boolean" defaultValue="false">
-                                <caption>Percentage</caption>
-                                <description>Distance defined as percentage?</description>
+                            <property key="distanceUnit" type="enumeration" defaultValue="pixel" required="true">
+                                <caption>Unit</caption>
+                                <description>The unit of the defined distance value.</description>
+                                <enumerationValues>
+                                    <enumerationValue key="pixel">Pixel</enumerationValue>
+                                    <enumerationValue key="percentage">Percentage</enumerationValue>
+                                </enumerationValues>
                             </property>
                         </propertyGroup>
                     </properties>

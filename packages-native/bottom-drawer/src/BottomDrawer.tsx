@@ -16,7 +16,7 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
 
     const snapPoints = useMemo(() => {
         return props.snapPoints.map(snapPoint =>
-            snapPoint.percentage ? snapPoint.distance + "%" : snapPoint.distance
+            snapPoint.distanceUnit === "percentage" ? snapPoint.distance + "%" : snapPoint.distance
         );
     }, [props.snapPoints]);
 

@@ -11,9 +11,11 @@ interface CommonProps<Style> {
     style: Style[];
 }
 
+export type DistanceUnitEnum = "pixel" | "percentage";
+
 export interface SnapPointsType {
     distance: number;
-    percentage: boolean;
+    distanceUnit: DistanceUnitEnum;
 }
 
 export interface BottomDrawerProps<Style> extends CommonProps<Style> {
