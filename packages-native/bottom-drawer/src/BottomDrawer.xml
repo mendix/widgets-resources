@@ -21,7 +21,7 @@
                         <propertyGroup caption="Snap points">
                             <property key="distance" type="integer" defaultValue="0" required="true">
                                 <caption>Distance</caption>
-                                <description>The distance from the bottom of the screen (default unit: pixels).</description>
+                                <description>The distance from the bottom of the screen.</description>
                             </property>
                             <property key="distanceUnit" type="enumeration" defaultValue="pixel" required="true">
                                 <caption>Unit</caption>
