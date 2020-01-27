@@ -3,6 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
+import { ListValue, ObjectItem } from "mendix";
 import { ReactNode } from "react";
 
 interface CommonProps<Style> {
@@ -15,23 +16,10 @@ export type LayoutEnum = "card" | "fullWidth";
 export type ActiveSlideAlignmentEnum = "center" | "start";
 
 export interface CarouselProps<Style> extends CommonProps<Style> {
-    contentSource: DataSource;
-    content: (item: DataSourceItem) => ReactNode;
+    contentSource: ListValue;
+    content: (item: ObjectItem) => ReactNode;
     layout: LayoutEnum;
     showPagination: boolean;
     activeSlideAlignment: ActiveSlideAlignmentEnum;
     loop: boolean;
-}
-
-export interface DataSourceItem {
-    id: string;
-}
-
-export interface DataSource {
-    status: string;
-    items: DataSourceItem[];
-    offset: number;
-    totalCount: number;
-    hasMoreItems: boolean;
-    version: number;
 }

@@ -1,10 +1,10 @@
-import { createElement, useCallback, useRef, useState } from "react";
-import { LayoutChangeEvent, Text, View } from "react-native";
-import { CarouselProps, DataSourceItem } from "../typings/CarouselProps";
+import { createElement, Fragment, useCallback, useRef, useState } from "react";
+import { ActivityIndicator, LayoutChangeEvent, Text, View } from "react-native";
+import { CarouselProps } from "../typings/CarouselProps";
 import { ActiveDotStyle, CarouselStyle, defaultCarouselStyle } from "./ui/styles";
 import { default as NativeCarousel, Pagination } from "react-native-snap-carousel";
 import deepmerge from "deepmerge";
-import { ValueStatus } from "mendix";
+import { ObjectItem, ValueStatus } from "mendix";
 import { exclude, only } from "@native-mobile-resources/util-widgets";
 
 export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
@@ -27,7 +27,7 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
     }, []);
 
     const renderItem = useCallback(
-        ({ item, index }: { item: DataSourceItem; index: number }) => {
+        ({ item, index }: { item: ObjectItem; index: number }) => {
             if (layoutSpecificStyle.activeSlideItem) {
                 delete layoutSpecificStyle.activeSlideItem.width;
                 delete layoutSpecificStyle.activeSlideItem.height;
@@ -46,11 +46,11 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
             return null;
         }
 
-        const contentLength = props.contentSource.items.length;
+        const contentLength = props.contentSource.items!.length;
         const paginationOverflow = contentLength > 5;
 
-        const dotContainerStyle = only<ActiveDotStyle, any>(layoutSpecificStyle.dotStyle, ["container"]);
-        const dotStyle = exclude<ActiveDotStyle, any>(layoutSpecificStyle.dotStyle, ["container"]);
+        const dotContainerStyle = only<ActiveDotStyle, any>(layoutSpecificStyle.dot!, ["container"]);
+        const dotStyle = exclude<ActiveDotStyle, any>(layoutSpecificStyle.dot!, ["container"]);
 
         if (paginationOverflow) {
             return (
@@ -61,23 +61,24 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
                 </View>
             );
         }
+
         return (
             <Pagination
                 dotsLength={contentLength}
                 activeDotIndex={activeSlide}
                 containerStyle={layoutSpecificStyle.paginationContainer}
                 dotContainerStyle={dotContainerStyle?.container}
-                dotColor={layoutSpecificStyle.activeDotStyle?.color}
-                dotStyle={layoutSpecificStyle.activeDotStyle}
+                dotColor={layoutSpecificStyle.activeDot?.color}
+                dotStyle={layoutSpecificStyle.activeDot}
                 inactiveDotStyle={dotStyle}
                 inactiveDotColor={dotStyle?.color}
                 inactiveDotOpacity={dotStyle?.opacity}
                 inactiveDotScale={dotStyle?.scale}
                 carouselRef={carousel.current}
-                tappableDots={!!carousel}
+                tappableDots
             />
         );
-    }, [activeSlide, carousel, props.contentSource, props.showPagination]);
+    }, [activeSlide, carousel.current, props.contentSource, props.showPagination]);
 
     const getCalculatedWidth = (sizeToCalculate: number): number => {
         if (layoutSpecificStyle.activeSlideItem) {
@@ -127,29 +128,31 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
         });
     };
 
-    if (props.contentSource?.status !== ValueStatus.Available) {
-        return <View style={{ width: sliderDimensions.slider.width, height: sliderDimensions.slider.height }} />;
-    }
-
     return (
         <View style={layoutSpecificStyle.container} onLayout={onLayout}>
-            {
-                <NativeCarousel
-                    loop={props.loop}
-                    activeSlideAlignment={props.activeSlideAlignment}
-                    layout="default"
-                    firstItem={0}
-                    data={props.contentSource.items}
-                    renderItem={renderItem}
-                    sliderWidth={sliderDimensions.slider.width > 0 ? sliderDimensions.slider.width : 1}
-                    itemWidth={sliderDimensions.slide.width > 0 ? sliderDimensions.slide.width : 1}
-                    inactiveSlideScale={layoutSpecificStyle.slideItem?.scale}
-                    inactiveSlideOpacity={layoutSpecificStyle.slideItem?.opacity}
-                    onSnapToItem={onSnap}
-                    ref={carousel}
-                />
-            }
-            {renderPagination()}
+            {props.contentSource?.status !== ValueStatus.Available || !props.contentSource.items ? (
+                <View style={layoutSpecificStyle.indicator}>
+                    <ActivityIndicator color={layoutSpecificStyle.indicator!.indicatorColor} size="large" />
+                </View>
+            ) : (
+                <Fragment>
+                    <NativeCarousel
+                        loop={props.loop}
+                        activeSlideAlignment={props.activeSlideAlignment}
+                        layout="default"
+                        firstItem={0}
+                        data={props.contentSource.items}
+                        renderItem={renderItem}
+                        sliderWidth={sliderDimensions.slider.width > 0 ? sliderDimensions.slider.width : 1}
+                        itemWidth={sliderDimensions.slide.width > 0 ? sliderDimensions.slide.width : 1}
+                        inactiveSlideScale={layoutSpecificStyle.slideItem?.scale}
+                        inactiveSlideOpacity={layoutSpecificStyle.slideItem?.opacity}
+                        onSnapToItem={onSnap}
+                        ref={carousel}
+                    />
+                    {renderPagination()}
+                </Fragment>
+            )}
         </View>
     );
 };
