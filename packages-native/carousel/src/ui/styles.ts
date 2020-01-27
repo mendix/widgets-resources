@@ -14,18 +14,23 @@ interface ContainerStyle extends ViewStyle {
     height?: number;
 }
 
+interface LoadingIndicatorStyle extends ViewStyle {
+    indicatorColor?: string;
+}
+
 interface LayoutStyle {
-    container: ViewStyle;
+    container?: ViewStyle;
     carousel?: ContainerStyle;
     slideItem?: {
         opacity?: number;
         scale?: number;
     };
     activeSlideItem?: ViewStyle;
-    paginationContainer: ViewStyle;
+    paginationContainer?: ViewStyle;
     paginationText?: TextStyle;
-    dotStyle: ActiveDotStyle;
-    activeDotStyle: ActiveDotStyle;
+    dot?: ActiveDotStyle;
+    activeDot?: ActiveDotStyle;
+    indicator?: LoadingIndicatorStyle;
 }
 
 export interface CarouselStyle {
@@ -41,14 +46,18 @@ const sharedStyles: LayoutStyle = {
         paddingHorizontal: 0,
         paddingVertical: 0
     },
-    activeDotStyle: {
+    activeDot: {
         marginHorizontal: 0
     },
-    dotStyle: {
+    dot: {
         container: {
             marginHorizontal: 0
         },
         marginHorizontal: 0
+    },
+    indicator: {
+        width: "100%",
+        indicatorColor: "blue"
     }
 };
 
@@ -56,7 +65,7 @@ export const defaultCarouselStyle: CarouselStyle = {
     cardLayout: {
         ...sharedStyles,
         activeSlideItem: {
-            width: "70%"
+            width: "50%"
         }
     },
     fullWidthLayout: {
