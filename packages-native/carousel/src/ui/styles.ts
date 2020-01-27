@@ -15,17 +15,17 @@ interface ContainerStyle extends ViewStyle {
 }
 
 interface LayoutStyle {
-    container?: ViewStyle;
+    container: ViewStyle;
     carousel?: ContainerStyle;
     slideItem?: {
         opacity?: number;
         scale?: number;
     };
     activeSlideItem?: ViewStyle;
-    paginationContainer?: ViewStyle;
+    paginationContainer: ViewStyle;
     paginationText?: TextStyle;
-    dotStyle?: ActiveDotStyle;
-    activeDotStyle?: ActiveDotStyle;
+    dotStyle: ActiveDotStyle;
+    activeDotStyle: ActiveDotStyle;
 }
 
 export interface CarouselStyle {

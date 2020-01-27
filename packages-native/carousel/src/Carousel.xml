@@ -41,7 +41,7 @@
                     </enumerationValues>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Behaviour">
+            <propertyGroup caption="Behavior">
                 <property key="loop" type="boolean" defaultValue="false">
                     <caption>Loop</caption>
                     <description>After the last item the carousel continues to the first item.</description>
