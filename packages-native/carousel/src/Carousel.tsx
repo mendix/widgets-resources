@@ -1,18 +1,19 @@
-import { createElement, ReactElement, useCallback, useRef, useState } from "react";
+import { createElement, useCallback, useRef, useState } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
-import { CarouselProps, DataSourceItem, LayoutEnum } from "../typings/CarouselProps";
+import { CarouselProps, DataSourceItem } from "../typings/CarouselProps";
 import { ActiveDotStyle, CarouselStyle, defaultCarouselStyle } from "./ui/styles";
 import { default as NativeCarousel, Pagination } from "react-native-snap-carousel";
 import deepmerge from "deepmerge";
 import { ValueStatus } from "mendix";
 import { exclude, only } from "@native-mobile-resources/util-widgets";
 
-export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement | null => {
+export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
     const carousel = useRef<any>(null);
     const [sliderDimensions, setSliderDimensions] = useState({
         slider: { width: 0, height: 0 },
         slide: { width: 0, height: 0 }
     });
+
     const customStyles = props.style ? props.style.filter(o => o != null) : [];
 
     const styles = deepmerge.all<CarouselStyle>([defaultCarouselStyle, ...customStyles]);
@@ -25,7 +26,7 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement | nu
         setActiveSlide(index);
     }, []);
 
-    const _renderItem = useCallback(
+    const renderItem = useCallback(
         ({ item, index }: { item: DataSourceItem; index: number }) => {
             if (layoutSpecificStyle.activeSlideItem) {
                 delete layoutSpecificStyle.activeSlideItem.width;
@@ -40,20 +41,16 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement | nu
         [props.content]
     );
 
-    const normalizeLayoutProp = (layout: LayoutEnum): any => {
-        return layout === undefined || layout === "fullWidth" || layout === "card" ? "default" : layout;
-    };
-
     const renderPagination = useCallback(() => {
+        if (!props.showPagination) {
+            return null;
+        }
+
         const contentLength = props.contentSource.items.length;
         const paginationOverflow = contentLength > 5;
 
-        const dotContainerStyle = only<ActiveDotStyle, any>(layoutSpecificStyle.dotStyle!, ["container"]);
-        const dotStyle = exclude<ActiveDotStyle, any>(layoutSpecificStyle.dotStyle!, ["container"]);
-
-        if (!props.showPagination) {
-            return undefined;
-        }
+        const dotContainerStyle = only<ActiveDotStyle, any>(layoutSpecificStyle.dotStyle, ["container"]);
+        const dotStyle = exclude<ActiveDotStyle, any>(layoutSpecificStyle.dotStyle, ["container"]);
 
         if (paginationOverflow) {
             return (
@@ -82,49 +79,57 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement | nu
         );
     }, [activeSlide, carousel, props.contentSource, props.showPagination]);
 
-    if (!(props.contentSource?.status === ValueStatus.Available)) {
-        return null;
-    }
-
-    const getPaddingCalculatedValue = (sizeToCalculate: number): number => {
-        if (layoutSpecificStyle.activeSlideItem?.padding !== undefined) {
-            return sizeToCalculate - Number(layoutSpecificStyle.activeSlideItem.padding) * 2;
-        } else if (layoutSpecificStyle.activeSlideItem?.paddingHorizontal !== undefined) {
-            return sizeToCalculate - Number(layoutSpecificStyle.activeSlideItem.paddingHorizontal) * 2;
-        } else if (layoutSpecificStyle.activeSlideItem?.paddingLeft !== undefined) {
-            return sizeToCalculate - Number(layoutSpecificStyle.activeSlideItem.paddingLeft);
-        } else if (layoutSpecificStyle.activeSlideItem?.paddingRight !== undefined) {
-            return sizeToCalculate - Number(layoutSpecificStyle.activeSlideItem.paddingRight);
+    const getCalculatedWidth = (sizeToCalculate: number): number => {
+        if (layoutSpecificStyle.activeSlideItem) {
+            const { padding, paddingHorizontal, paddingLeft, paddingRight } = layoutSpecificStyle.activeSlideItem;
+            if (padding) {
+                return sizeToCalculate - Number(padding) * 2;
+            }
+            if (paddingHorizontal) {
+                return sizeToCalculate - Number(paddingHorizontal) * 2;
+            }
+            if (paddingLeft) {
+                return sizeToCalculate - Number(paddingLeft);
+            }
+            if (paddingRight) {
+                return sizeToCalculate - Number(paddingRight);
+            }
         }
+
         return sizeToCalculate;
     };
 
     const onLayout = (event: LayoutChangeEvent) => {
-        const realWidth = getPaddingCalculatedValue(event.nativeEvent.layout.width as number);
-        const realHeight = event.nativeEvent.layout.height as number;
+        const { width, height } = event.nativeEvent.layout;
+
+        const realWidth = getCalculatedWidth(width as number);
+        const realHeight = height as number;
 
         let itemWidth = 0;
         let itemHeight = 0;
-        // Allow users to set width and height as percentage since lib only accepts numbers
-        if (
-            typeof layoutSpecificStyle.activeSlideItem?.width === "string" &&
-            layoutSpecificStyle.activeSlideItem.width.includes("%")
-        ) {
-            const percentage = +layoutSpecificStyle.activeSlideItem.width.split("%")[0];
-            itemWidth = Math.round((realWidth * percentage) / 100);
+
+        if (layoutSpecificStyle.activeSlideItem) {
+            const { width: layoutWidth, height: layoutHeight } = layoutSpecificStyle.activeSlideItem;
+            // Allow users to set width and height as percentage since lib only accepts numbers
+            if (typeof layoutWidth === "string" && layoutWidth.includes("%")) {
+                const percentage = +layoutWidth.replace("%", "");
+                itemWidth = (realWidth * percentage) / 100;
+            }
+            if (typeof layoutHeight === "string" && layoutHeight.includes("%")) {
+                const percentage = +layoutHeight.replace("%", "");
+                itemHeight = (realHeight * percentage) / 100;
+            }
         }
-        if (
-            typeof layoutSpecificStyle.activeSlideItem?.height === "string" &&
-            layoutSpecificStyle.activeSlideItem.height.includes("%")
-        ) {
-            const percentage = +layoutSpecificStyle.activeSlideItem.height.split("%")[0];
-            itemHeight = Math.round((realHeight * percentage) / 100);
-        }
+
         setSliderDimensions({
             slider: { width: realWidth, height: realHeight },
             slide: { width: itemWidth, height: itemHeight }
         });
     };
+
+    if (props.contentSource?.status !== ValueStatus.Available) {
+        return <View style={{ width: sliderDimensions.slider.width, height: sliderDimensions.slider.height }} />;
+    }
 
     return (
         <View style={layoutSpecificStyle.container} onLayout={onLayout}>
@@ -132,10 +137,10 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement | nu
                 <NativeCarousel
                     loop={props.loop}
                     activeSlideAlignment={props.activeSlideAlignment}
-                    layout={normalizeLayoutProp(props.layout)}
+                    layout="default"
                     firstItem={0}
                     data={props.contentSource.items}
-                    renderItem={_renderItem}
+                    renderItem={renderItem}
                     sliderWidth={sliderDimensions.slider.width > 0 ? sliderDimensions.slider.width : 1}
                     itemWidth={sliderDimensions.slide.width > 0 ? sliderDimensions.slide.width : 1}
                     inactiveSlideScale={layoutSpecificStyle.slideItem?.scale}
