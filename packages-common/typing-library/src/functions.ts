@@ -64,7 +64,7 @@ const translateType = (
             return prop.$.type;
         case "widgets":
             if (prop.$.hasOwnProperty("dataSource")) {
-                return "(item: DataSourceItem) => ReactNode";
+                return "(item: ObjectItem) => ReactNode";
             }
             return "ReactNode";
         case "file":
@@ -72,7 +72,7 @@ const translateType = (
         case "datasource":
             if (prop.$.hasOwnProperty("isList")) {
                 if (prop.$.isList) {
-                    return "DataSource";
+                    return "ListValue";
                 }
             }
             return "";
@@ -297,8 +297,10 @@ function findImports(mainTypes: string, childTypes: string[]): string {
         "DynamicValue",
         "EditableValue",
         "FileValue",
+        "ListValue",
         "NativeIcon",
         "NativeImage",
+        "ObjectItem",
         "WebIcon",
         "WebImage"
     ].filter(type => types.includes(type));
@@ -386,9 +388,6 @@ export const transformJsonContent = (jsonContent: MendixXML, widgetName: string)
     const hasContainment =
         properties.filter(prop => prop.$.type === "widgets").length > 0 ||
         properties.filter(prop => prop.$.type === "widgets").map(prop => extractVisibilityMap(prop, [])).length > 0;
-    const hasDatasource =
-        properties.filter(prop => prop.$.type === "datasource").length > 0 ||
-        properties.filter(prop => prop.$.type === "datasource").map(prop => extractVisibilityMap(prop, [])).length > 0;
 
     const propertyImports = findImports(mainTypes, childTypes);
     let imports = !mobile
@@ -404,23 +403,6 @@ import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/t
     if (hasContainment) {
         imports += `
 import { ReactNode } from "react";`;
-    }
-    let datasourceTypes = "";
-    if (hasDatasource) {
-        datasourceTypes = `
-
-export interface DataSourceItem {
-    id: string;
-}
-
-export interface DataSource {
-    status: string;
-    items: DataSourceItem[];
-    offset: number;
-    totalCount: number;
-    hasMoreItems: boolean;
-    version: number;
-}`;
     }
 
     const previewContents = !mobile
@@ -457,7 +439,7 @@ export interface ${mobile ? widgetName : widgetName + "Container"}Props${mobile 
         mobile ? "<Style>" : ""
     } {
 ${mainTypes}
-}${previewContents}${datasourceTypes}
+}${previewContents}
 `;
 };
 
