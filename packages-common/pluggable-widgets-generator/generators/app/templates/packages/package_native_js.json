@@ -30,7 +30,7 @@
     "url": "https://github.com/<%- author %>/<%- packageName %>/issues"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "~8.5.0"
+    "@mendix/pluggable-widgets-tools": "~8.6.0"
   },
   "dependencies": {
     "big.js": "^5.2.2"
