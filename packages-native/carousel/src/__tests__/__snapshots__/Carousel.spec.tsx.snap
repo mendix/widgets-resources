@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Carousel renders 1`] = `
-<View
+<RCTView
   onLayout={[Function]}
   style={
     Object {
@@ -131,15 +131,20 @@ exports[`Carousel renders 1`] = `
             }
           }
         >
-          <View
+          <RCTView
             style={Object {}}
           >
-            <View>
-              <Text>
+            <RCTView>
+              <RCTText
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                forwardedRef={null}
+              >
                 MyContent
-              </Text>
-            </View>
-          </View>
+              </RCTText>
+            </RCTView>
+          </RCTView>
         </View>
       </View>
       <View
@@ -167,20 +172,25 @@ exports[`Carousel renders 1`] = `
             }
           }
         >
-          <View
+          <RCTView
             style={Object {}}
           >
-            <View>
-              <Text>
+            <RCTView>
+              <RCTText
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                forwardedRef={null}
+              >
                 MyContent
-              </Text>
-            </View>
-          </View>
+              </RCTText>
+            </RCTView>
+          </RCTView>
         </View>
       </View>
     </View>
   </RCTScrollView>
-  <View
+  <RCTView
     accessible={false}
     pointerEvents="box-none"
     style={
@@ -273,12 +283,12 @@ exports[`Carousel renders 1`] = `
         }
       />
     </View>
-  </View>
-</View>
+  </RCTView>
+</RCTView>
 `;
 
 exports[`Carousel renders full width 1`] = `
-<View
+<RCTView
   onLayout={[Function]}
   style={
     Object {
@@ -394,7 +404,7 @@ exports[`Carousel renders full width 1`] = `
           ]
         }
       >
-        <View
+        <RCTView
           pointerEvents="box-none"
           style={
             Array [
@@ -406,16 +416,21 @@ exports[`Carousel renders full width 1`] = `
             ]
           }
         >
-          <View
+          <RCTView
             style={Object {}}
           >
-            <View>
-              <Text>
+            <RCTView>
+              <RCTText
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                forwardedRef={null}
+              >
                 MyContent
-              </Text>
-            </View>
-          </View>
-        </View>
+              </RCTText>
+            </RCTView>
+          </RCTView>
+        </RCTView>
       </View>
       <View
         onLayout={[Function]}
@@ -428,7 +443,7 @@ exports[`Carousel renders full width 1`] = `
           ]
         }
       >
-        <View
+        <RCTView
           pointerEvents="box-none"
           style={
             Array [
@@ -440,20 +455,25 @@ exports[`Carousel renders full width 1`] = `
             ]
           }
         >
-          <View
+          <RCTView
             style={Object {}}
           >
-            <View>
-              <Text>
+            <RCTView>
+              <RCTText
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                forwardedRef={null}
+              >
                 MyContent
-              </Text>
-            </View>
-          </View>
-        </View>
+              </RCTText>
+            </RCTView>
+          </RCTView>
+        </RCTView>
       </View>
     </View>
   </RCTScrollView>
-  <View
+  <RCTView
     accessible={false}
     pointerEvents="box-none"
     style={
@@ -546,12 +566,12 @@ exports[`Carousel renders full width 1`] = `
         }
       />
     </View>
-  </View>
-</View>
+  </RCTView>
+</RCTView>
 `;
 
 exports[`Carousel renders numbered pagination if item size is more than 5 1`] = `
-<View
+<RCTView
   onLayout={[Function]}
   style={
     Object {
@@ -584,6 +604,9 @@ exports[`Carousel renders numbered pagination if item size is more than 5 1`] = 
     data={
       Array [
         Object {
+          "id": "0",
+        },
+        Object {
           "id": "1",
         },
         Object {
@@ -597,9 +620,6 @@ exports[`Carousel renders numbered pagination if item size is more than 5 1`] = 
         },
         Object {
           "id": "5",
-        },
-        Object {
-          "id": "6",
         },
       ]
     }
@@ -693,15 +713,20 @@ exports[`Carousel renders numbered pagination if item size is more than 5 1`] = 
             }
           }
         >
-          <View
+          <RCTView
             style={Object {}}
           >
-            <View>
-              <Text>
+            <RCTView>
+              <RCTText
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                forwardedRef={null}
+              >
                 MyContent
-              </Text>
-            </View>
-          </View>
+              </RCTText>
+            </RCTView>
+          </RCTView>
         </View>
       </View>
       <View
@@ -729,15 +754,20 @@ exports[`Carousel renders numbered pagination if item size is more than 5 1`] = 
             }
           }
         >
-          <View
+          <RCTView
             style={Object {}}
           >
-            <View>
-              <Text>
+            <RCTView>
+              <RCTText
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                forwardedRef={null}
+              >
                 MyContent
-              </Text>
-            </View>
-          </View>
+              </RCTText>
+            </RCTView>
+          </RCTView>
         </View>
       </View>
       <View
@@ -765,15 +795,20 @@ exports[`Carousel renders numbered pagination if item size is more than 5 1`] = 
             }
           }
         >
-          <View
+          <RCTView
             style={Object {}}
           >
-            <View>
-              <Text>
+            <RCTView>
+              <RCTText
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                forwardedRef={null}
+              >
                 MyContent
-              </Text>
-            </View>
-          </View>
+              </RCTText>
+            </RCTView>
+          </RCTView>
         </View>
       </View>
       <View
@@ -801,15 +836,20 @@ exports[`Carousel renders numbered pagination if item size is more than 5 1`] = 
             }
           }
         >
-          <View
+          <RCTView
             style={Object {}}
           >
-            <View>
-              <Text>
+            <RCTView>
+              <RCTText
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                forwardedRef={null}
+              >
                 MyContent
-              </Text>
-            </View>
-          </View>
+              </RCTText>
+            </RCTView>
+          </RCTView>
         </View>
       </View>
       <View
@@ -837,15 +877,20 @@ exports[`Carousel renders numbered pagination if item size is more than 5 1`] = 
             }
           }
         >
-          <View
+          <RCTView
             style={Object {}}
           >
-            <View>
-              <Text>
+            <RCTView>
+              <RCTText
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                forwardedRef={null}
+              >
                 MyContent
-              </Text>
-            </View>
-          </View>
+              </RCTText>
+            </RCTView>
+          </RCTView>
         </View>
       </View>
       <View
@@ -873,20 +918,25 @@ exports[`Carousel renders numbered pagination if item size is more than 5 1`] = 
             }
           }
         >
-          <View
+          <RCTView
             style={Object {}}
           >
-            <View>
-              <Text>
+            <RCTView>
+              <RCTText
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                forwardedRef={null}
+              >
                 MyContent
-              </Text>
-            </View>
-          </View>
+              </RCTText>
+            </RCTView>
+          </RCTView>
         </View>
       </View>
     </View>
   </RCTScrollView>
-  <View
+  <RCTView
     style={
       Object {
         "paddingHorizontal": 0,
@@ -894,11 +944,16 @@ exports[`Carousel renders numbered pagination if item size is more than 5 1`] = 
       }
     }
   >
-    <Text>
+    <RCTText
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      forwardedRef={null}
+    >
       1
       /
       6
-    </Text>
-  </View>
-</View>
+    </RCTText>
+  </RCTView>
+</RCTView>
 `;
