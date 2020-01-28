@@ -3,22 +3,36 @@ import { Carousel } from "../Carousel";
 import { CarouselProps } from "../../typings/CarouselProps";
 import { CarouselStyle } from "../ui/styles";
 import { createElement } from "react";
-import { ValueStatus } from "mendix";
 import { Text, View } from "react-native";
+import { ListValueBuilder } from "@widgets-resources/piw-utils";
+
+jest.mock("react-native", () => ({
+    InteractionManager: require.requireActual("InteractionManager"),
+    Platform: require.requireActual("Platform"),
+    Animated: require.requireActual("Animated"),
+    I18nManager: require.requireActual("I18nManager"),
+    View: require.requireActual("View"),
+    Text: require.requireActual("Text"),
+    ViewPropTypes: {
+        style: jest.fn()
+    },
+    TouchableOpacity: require.requireActual("TouchableOpacity"),
+    Easing: require.requireActual("Easing"),
+    FlatList: require.requireActual("FlatList"),
+    ScrollView: require.requireActual("ScrollView"),
+    StyleSheet: require.requireActual("StyleSheet"),
+    Image: require.requireActual("Image")
+}));
+
+jest.mock("prop-types", () => require.requireActual("prop-types"));
 
 describe("Carousel", () => {
     let defaultProps: CarouselProps<CarouselStyle>;
+    const listValueBuilder = ListValueBuilder();
     beforeEach(() => {
         defaultProps = {
             name: "carousel",
-            contentSource: {
-                status: ValueStatus.Available,
-                items: [{ id: "1" }, { id: "2" }],
-                offset: 0,
-                totalCount: 1,
-                hasMoreItems: false,
-                version: 1
-            },
+            contentSource: listValueBuilder.simple(),
             content: jest.fn(() => (
                 <View>
                     <Text>MyContent</Text>
@@ -35,22 +49,18 @@ describe("Carousel", () => {
         expect(render(<Carousel {...defaultProps} />).toJSON()).toMatchSnapshot();
     });
 
+    it("renders without pagination", () => {
+        expect(render(<Carousel {...defaultProps} showPagination={false} />).toJSON()).toMatchSnapshot();
+    });
+
     it("renders full width", () => {
         expect(render(<Carousel {...defaultProps} layout={"fullWidth"} />).toJSON()).toMatchSnapshot();
     });
 
     it("renders numbered pagination if item size is more than 5", () => {
-        const fiveItems = [{ id: "1" }, { id: "2" }, { id: "3" }, { id: "4" }, { id: "5" }, { id: "6" }];
         const props = {
             ...defaultProps,
-            contentSource: {
-                status: ValueStatus.Available,
-                items: fiveItems,
-                offset: 0,
-                totalCount: 1,
-                hasMoreItems: false,
-                version: 1
-            }
+            contentSource: listValueBuilder.withAmountOfItems(6)
         };
         expect(render(<Carousel {...props} />).toJSON()).toMatchSnapshot();
     });
