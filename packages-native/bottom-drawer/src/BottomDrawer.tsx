@@ -5,6 +5,7 @@ import { BottomDrawerProps } from "../typings/BottomDrawerProps";
 import { BottomDrawerStyle, defaultBottomDrawerStyle } from "./ui/Styles";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { ValueStatus } from "mendix";
+import Animated from "react-native-reanimated";
 
 export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): ReactNode {
     const styles = flattenStyles(defaultBottomDrawerStyle, props.style);
@@ -22,10 +23,32 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
 
     console.warn(
         "Sorted snap points",
-        (snapPoints.map(e => e) as Array<number>)
-            .sort((a, b) => b - a)
-            .map((e, _i, a) => 1 - (e - a[a.length - 1]) / (a[0] - a[a.length - 1]))
+        snapPoints
+            .map((e, i) => {
+                return { distance: e as number, originalIndex: i };
+            })
+            .sort((a, b) => b.distance - a.distance)
+            .map((e, _i, a) => {
+                return {
+                    distance: 1 - (e.distance - a[a.length - 1].distance) / (a[0].distance - a[a.length - 1].distance),
+                    originalIndex: e.originalIndex
+                };
+            })
     );
+
+    const bottomSheetPosition = useMemo(() => new Animated.Value(0), []);
+    const callBack = useCallback(([value]) => console.warn("snap point", value), []);
+
+    // const renderSnapPointListeners = useCallback(() => {
+    //     <Animated.Code
+    //         exec={Animated.block([
+    //             Animated.cond(
+    //                 Animated.eq(bottomSheetPosition, 0.7777777777777778),
+    //                 Animated.call([bottomSheetPosition], callBack)
+    //             )
+    //         ])}
+    //     />;
+    // }, []);
 
     useEffect(() => {
         if (props.currentSnapPointIndex.status === ValueStatus.Available) {
@@ -40,6 +63,15 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
                 snapPoints={snapPoints}
                 renderHeader={renderHeader}
                 renderContent={renderContent}
+                callbackNode={bottomSheetPosition}
+            />
+            <Animated.Code
+                exec={Animated.block([
+                    Animated.cond(
+                        Animated.eq(bottomSheetPosition, 0.7777777777777778),
+                        Animated.call([bottomSheetPosition], callBack)
+                    )
+                ])}
             />
         </View>
     );
