@@ -1,11 +1,10 @@
 import { createElement, Fragment, useCallback, useRef, useState } from "react";
 import { ActivityIndicator, LayoutChangeEvent, Text, View } from "react-native";
 import { CarouselProps } from "../typings/CarouselProps";
-import { ActiveDotStyle, CarouselStyle, defaultCarouselStyle } from "./ui/styles";
+import { CarouselStyle, defaultCarouselStyle } from "./ui/styles";
 import { default as NativeCarousel, Pagination } from "react-native-snap-carousel";
 import deepmerge from "deepmerge";
 import { ObjectItem, ValueStatus } from "mendix";
-import { exclude, only } from "@native-mobile-resources/util-widgets";
 
 export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
     const carousel = useRef<any>(null);
@@ -28,12 +27,12 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
 
     const renderItem = useCallback(
         ({ item, index }: { item: ObjectItem; index: number }) => {
-            if (layoutSpecificStyle.activeSlideItem) {
-                delete layoutSpecificStyle.activeSlideItem.width;
-                delete layoutSpecificStyle.activeSlideItem.height;
+            if (layoutSpecificStyle.slideItem) {
+                delete layoutSpecificStyle.slideItem.width;
+                delete layoutSpecificStyle.slideItem.height;
             }
             return (
-                <View key={index} style={{ ...layoutSpecificStyle.activeSlideItem }}>
+                <View key={index} style={{ ...layoutSpecificStyle.slideItem }}>
                     {props.content(item)}
                 </View>
             );
@@ -48,14 +47,18 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
 
         const contentLength = props.contentSource.items!.length;
         const paginationOverflow = contentLength > 5;
+        const { pagination } = layoutSpecificStyle;
 
-        const dotContainerStyle = only<ActiveDotStyle, any>(layoutSpecificStyle.dot!, ["container"]);
-        const dotStyle = exclude<ActiveDotStyle, any>(layoutSpecificStyle.dot!, ["container"]);
+        /* User styles as activeDot and dot style, but library expects different
+         |Lib -- User|
+         |inactiveDotStyle <-> dot|
+         |dotStyle <-> activeDot|
+        */
 
         if (paginationOverflow) {
             return (
-                <View style={layoutSpecificStyle.paginationContainer}>
-                    <Text style={layoutSpecificStyle.paginationText}>
+                <View style={pagination.container}>
+                    <Text style={pagination.text}>
                         {activeSlide + 1}/{contentLength}
                     </Text>
                 </View>
@@ -66,14 +69,14 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
             <Pagination
                 dotsLength={contentLength}
                 activeDotIndex={activeSlide}
-                containerStyle={layoutSpecificStyle.paginationContainer}
-                dotContainerStyle={dotContainerStyle?.container}
-                dotColor={layoutSpecificStyle.activeDot?.color}
-                dotStyle={layoutSpecificStyle.activeDot}
-                inactiveDotStyle={dotStyle}
-                inactiveDotColor={dotStyle?.color}
-                inactiveDotOpacity={dotStyle?.opacity}
-                inactiveDotScale={dotStyle?.scale}
+                containerStyle={pagination.container}
+                dotContainerStyle={pagination.dotContainerStyle}
+                dotColor={pagination.activeDotStyle?.color}
+                dotStyle={pagination.activeDotStyle}
+                inactiveDotStyle={pagination.dotStyle}
+                inactiveDotColor={pagination.dotStyle?.inactiveColor}
+                inactiveDotOpacity={pagination.dotStyle?.inactiveOpacity}
+                inactiveDotScale={pagination.dotStyle?.inactiveScale}
                 carouselRef={carousel.current}
                 tappableDots
             />
@@ -81,8 +84,8 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
     }, [activeSlide, carousel.current, props.contentSource, props.showPagination]);
 
     const getCalculatedWidth = (sizeToCalculate: number): number => {
-        if (layoutSpecificStyle.activeSlideItem) {
-            const { padding, paddingHorizontal, paddingLeft, paddingRight } = layoutSpecificStyle.activeSlideItem;
+        if (layoutSpecificStyle.slideItem) {
+            const { padding, paddingHorizontal, paddingLeft, paddingRight } = layoutSpecificStyle.slideItem;
             if (padding) {
                 return sizeToCalculate - Number(padding) * 2;
             }
@@ -109,8 +112,8 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
         let itemWidth = 0;
         let itemHeight = 0;
 
-        if (layoutSpecificStyle.activeSlideItem) {
-            const { width: layoutWidth, height: layoutHeight } = layoutSpecificStyle.activeSlideItem;
+        if (layoutSpecificStyle.slideItem) {
+            const { width: layoutWidth, height: layoutHeight } = layoutSpecificStyle.slideItem;
             // Allow users to set width and height as percentage since lib only accepts numbers
             if (typeof layoutWidth === "string" && layoutWidth.includes("%")) {
                 const percentage = +layoutWidth.replace("%", "");
@@ -131,9 +134,7 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
     return (
         <View style={layoutSpecificStyle.container} onLayout={onLayout}>
             {props.contentSource?.status !== ValueStatus.Available || !props.contentSource.items ? (
-                <View style={layoutSpecificStyle.indicator}>
-                    <ActivityIndicator color={layoutSpecificStyle.indicator!.indicatorColor} size="large" />
-                </View>
+                <ActivityIndicator color={layoutSpecificStyle.indicator!.color} size="large" />
             ) : (
                 <Fragment>
                     <NativeCarousel
@@ -145,8 +146,8 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
                         renderItem={renderItem}
                         sliderWidth={sliderDimensions.slider.width > 0 ? sliderDimensions.slider.width : 1}
                         itemWidth={sliderDimensions.slide.width > 0 ? sliderDimensions.slide.width : 1}
-                        inactiveSlideScale={layoutSpecificStyle.slideItem?.scale}
-                        inactiveSlideOpacity={layoutSpecificStyle.slideItem?.opacity}
+                        inactiveSlideScale={layoutSpecificStyle.slideItem?.inactiveSlideScale}
+                        inactiveSlideOpacity={layoutSpecificStyle.slideItem?.inactiveSlideOpacity}
                         onSnapToItem={onSnap}
                         ref={carousel}
                     />

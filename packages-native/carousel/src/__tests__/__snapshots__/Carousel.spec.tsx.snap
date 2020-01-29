@@ -417,7 +417,12 @@ exports[`Carousel renders full width 1`] = `
           }
         >
           <RCTView
-            style={Object {}}
+            style={
+              Object {
+                "inactiveSlideOpacity": 1,
+                "inactiveSlideScale": 1,
+              }
+            }
           >
             <RCTView>
               <RCTText
@@ -456,7 +461,12 @@ exports[`Carousel renders full width 1`] = `
           }
         >
           <RCTView
-            style={Object {}}
+            style={
+              Object {
+                "inactiveSlideOpacity": 1,
+                "inactiveSlideScale": 1,
+              }
+            }
           >
             <RCTView>
               <RCTText
@@ -955,5 +965,198 @@ exports[`Carousel renders numbered pagination if item size is more than 5 1`] = 
       6
     </RCTText>
   </RCTView>
+</RCTView>
+`;
+
+exports[`Carousel renders without pagination 1`] = `
+<RCTView
+  onLayout={[Function]}
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <RCTScrollView
+    activeAnimationOptions={null}
+    activeAnimationType="timing"
+    activeSlideAlignment="center"
+    activeSlideOffset={20}
+    apparitionDelay={0}
+    automaticallyAdjustContentInsets={false}
+    autoplay={false}
+    autoplayDelay={1000}
+    autoplayInterval={3000}
+    callbackOffsetMargin={5}
+    containerCustomStyle={Object {}}
+    contentContainerCustomStyle={Object {}}
+    contentContainerStyle={
+      Array [
+        Object {
+          "paddingLeft": 0,
+          "paddingRight": 0,
+        },
+        Object {},
+      ]
+    }
+    data={
+      Array [
+        Object {
+          "id": "1",
+        },
+        Object {
+          "id": "2",
+        },
+      ]
+    }
+    decelerationRate="fast"
+    directionalLockEnabled={true}
+    disableVirtualization={false}
+    enableMomentum={false}
+    enableSnap={true}
+    firstItem={0}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    hasParallaxImages={false}
+    horizontal={true}
+    inactiveSlideOpacity={0.7}
+    inactiveSlideScale={0.9}
+    inactiveSlideShift={0}
+    initialNumToRender={6}
+    invertStickyHeaders={false}
+    inverted={false}
+    itemWidth={1}
+    keyExtractor={[Function]}
+    layout="default"
+    lockScrollTimeoutDuration={1000}
+    lockScrollWhileSnapping={false}
+    loop={false}
+    loopClonesPerSide={3}
+    maxToRenderPerBatch={13}
+    numColumns={1}
+    onContentSizeChange={[Function]}
+    onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onResponderRelease={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    onSnapToItem={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    onTouchEnd={[Function]}
+    onTouchStart={[Function]}
+    overScrollMode="never"
+    pinchGestureEnabled={false}
+    removeClippedSubviews={true}
+    renderItem={[Function]}
+    scrollEnabled={true}
+    scrollEventThrottle={1}
+    scrollsToTop={false}
+    shouldOptimizeUpdates={true}
+    showsHorizontalScrollIndicator={false}
+    showsVerticalScrollIndicator={false}
+    slideStyle={Object {}}
+    sliderWidth={1}
+    stickyHeaderIndices={Array []}
+    style={
+      Object {
+        "flexDirection": "row",
+        "opacity": 0,
+        "width": 1,
+      }
+    }
+    swipeThreshold={20}
+    updateCellsBatchingPeriod={50}
+    useScrollView={false}
+    vertical={false}
+    viewabilityConfigCallbackPairs={Array []}
+    windowSize={13}
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          pointerEvents="box-none"
+          style={
+            Object {
+              "opacity": 1,
+              "transform": Array [
+                Object {
+                  "scale": 1,
+                },
+              ],
+              "width": 1,
+            }
+          }
+        >
+          <RCTView
+            style={Object {}}
+          >
+            <RCTView>
+              <RCTText
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                forwardedRef={null}
+              >
+                MyContent
+              </RCTText>
+            </RCTView>
+          </RCTView>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            null,
+          ]
+        }
+      >
+        <View
+          pointerEvents="box-none"
+          style={
+            Object {
+              "opacity": 0.7,
+              "transform": Array [
+                Object {
+                  "scale": 0.9,
+                },
+              ],
+              "width": 1,
+            }
+          }
+        >
+          <RCTView
+            style={Object {}}
+          >
+            <RCTView>
+              <RCTText
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                forwardedRef={null}
+              >
+                MyContent
+              </RCTText>
+            </RCTView>
+          </RCTView>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
 </RCTView>
 `;
