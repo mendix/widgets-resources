@@ -1,36 +1,33 @@
 import { TextStyle, ViewStyle } from "react-native";
 
-interface DotStyle {
-    container?: ViewStyle;
-    opacity?: number;
-    scale?: number;
+export interface DotStyle extends ViewStyle {
+    inactiveOpacity?: number;
+    inactiveScale?: number;
+    inactiveColor?: string;
+}
+
+export interface ActiveDotStyle extends ViewStyle {
     color?: string;
 }
 
-export interface ActiveDotStyle extends ViewStyle, DotStyle {}
-
-interface ContainerStyle extends ViewStyle {
-    width?: number;
-    height?: number;
-}
-
-interface LoadingIndicatorStyle extends ViewStyle {
-    indicatorColor?: string;
+export interface SlideStyle extends ViewStyle {
+    inactiveSlideOpacity?: number;
+    inactiveSlideScale?: number;
 }
 
 interface LayoutStyle {
     container?: ViewStyle;
-    carousel?: ContainerStyle;
-    slideItem?: {
-        opacity?: number;
-        scale?: number;
+    slideItem?: SlideStyle;
+    pagination: {
+        container?: ViewStyle;
+        text?: TextStyle;
+        dotStyle?: DotStyle;
+        activeDotStyle?: ActiveDotStyle;
+        dotContainerStyle?: ViewStyle;
     };
-    activeSlideItem?: ViewStyle;
-    paginationContainer?: ViewStyle;
-    paginationText?: TextStyle;
-    dot?: ActiveDotStyle;
-    activeDot?: ActiveDotStyle;
-    indicator?: LoadingIndicatorStyle;
+    indicator?: {
+        color?: string;
+    };
 }
 
 export interface CarouselStyle {
@@ -42,40 +39,39 @@ const sharedStyles: LayoutStyle = {
     container: {
         width: "100%"
     },
-    paginationContainer: {
-        paddingHorizontal: 0,
-        paddingVertical: 0
-    },
-    activeDot: {
-        marginHorizontal: 0
-    },
-    dot: {
+    pagination: {
         container: {
+            paddingHorizontal: 0,
+            paddingVertical: 0
+        },
+        activeDotStyle: {
             marginHorizontal: 0
         },
-        marginHorizontal: 0
+        dotStyle: {
+            marginHorizontal: 0
+        },
+        dotContainerStyle: {
+            marginHorizontal: 0
+        }
     },
     indicator: {
-        width: "100%",
-        indicatorColor: "blue"
+        color: "blue"
     }
 };
 
 export const defaultCarouselStyle: CarouselStyle = {
     cardLayout: {
         ...sharedStyles,
-        activeSlideItem: {
+        slideItem: {
             width: "50%"
         }
     },
     fullWidthLayout: {
         ...sharedStyles,
-        activeSlideItem: {
-            width: "100%"
-        },
         slideItem: {
-            opacity: 1,
-            scale: 1
+            width: "100%",
+            inactiveSlideOpacity: 1,
+            inactiveSlideScale: 1
         }
     }
 };
