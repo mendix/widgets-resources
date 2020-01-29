@@ -20,6 +20,13 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
         );
     }, [props.snapPoints]);
 
+    console.warn(
+        "Sorted snap points",
+        (snapPoints.map(e => e) as Array<number>)
+            .sort((a, b) => b - a)
+            .map((e, _i, a) => 1 - (e - a[a.length - 1]) / (a[0] - a[a.length - 1]))
+    );
+
     useEffect(() => {
         if (props.currentSnapPointIndex.status === ValueStatus.Available) {
             bottomSheetRef.current!.snapTo(Number(props.currentSnapPointIndex.value.toFixed(0)));
