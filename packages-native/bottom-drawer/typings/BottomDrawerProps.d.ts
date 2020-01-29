@@ -22,5 +22,5 @@ export interface BottomDrawerProps<Style> extends CommonProps<Style> {
     headerContent?: ReactNode;
     mainContent?: ReactNode;
     snapPoints: SnapPointsType[];
-    initialSnapPoint: DynamicValue<BigJs.Big>;
+    currentSnapPointIndex: DynamicValue<BigJs.Big>;
 }

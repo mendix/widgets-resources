@@ -34,9 +34,9 @@
                         </propertyGroup>
                     </properties>
                 </property>
-                <property key="initialSnapPoint" type="expression" defaultValue="0" required="true">
-                    <caption>Initial snap point</caption>
-                    <description>Index of snap point that's used on initial load.</description>
+                <property key="currentSnapPointIndex" type="expression" defaultValue="0" required="true">
+                    <caption>Current snap point</caption>
+                    <description>Index of snap point that the bottom sheet is currently snapped to.</description>
                     <returnType type="Integer" />
                 </property>
             </propertyGroup>

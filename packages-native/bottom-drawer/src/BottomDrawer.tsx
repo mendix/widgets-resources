@@ -1,4 +1,4 @@
-import { ReactNode, createElement, useRef, useEffect, useCallback, useMemo } from "react";
+import { createElement, ReactNode, useRef, useCallback, useMemo, useEffect } from "react";
 import BottomSheet from "reanimated-bottom-sheet";
 import { View } from "react-native";
 import { BottomDrawerProps } from "../typings/BottomDrawerProps";
@@ -20,24 +20,17 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
         );
     }, [props.snapPoints]);
 
-    console.warn(snapPoints);
-
     useEffect(() => {
-        console.warn("test");
-        console.warn(!!bottomSheetRef.current);
-        // bottomSheetRef.current!.snapTo(0);
-    }, []);
+        if (props.currentSnapPointIndex.status === ValueStatus.Available) {
+            bottomSheetRef.current!.snapTo(Number(props.currentSnapPointIndex.value.toFixed(0)));
+        }
+    }, [props.currentSnapPointIndex]);
 
     return (
         <View style={styles.container}>
             <BottomSheet
                 ref={bottomSheetRef}
                 snapPoints={snapPoints}
-                initialSnap={
-                    props.initialSnapPoint.status === ValueStatus.Available
-                        ? Number(props.initialSnapPoint.value.toFixed(0))
-                        : undefined
-                }
                 renderHeader={renderHeader}
                 renderContent={renderContent}
             />
