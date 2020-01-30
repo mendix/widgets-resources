@@ -14,7 +14,7 @@ describe("RichText", () => {
         HomePage.textArea3.click();
 
         const content = HomePage.richTextBubbleBasic.getHTML(false);
-        expect(content).toBe(resultValue);
+        expect(content).toContain(resultValue);
     });
 
     it("change value should update the attribute", () => {
