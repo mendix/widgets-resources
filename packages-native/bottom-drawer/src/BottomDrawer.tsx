@@ -11,44 +11,48 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
     const styles = flattenStyles(defaultBottomDrawerStyle, props.style);
 
     const bottomSheetRef = useRef<BottomSheet>(null);
+    const currentBottomSheetPosition = useMemo(() => new Animated.Value(0), []);
 
     const renderHeader = useCallback(() => props.headerContent, [props.headerContent]);
     const renderContent = useCallback(() => props.mainContent, [props.mainContent]);
 
-    const snapPoints = useMemo(() => {
-        return props.snapPoints.map(snapPoint =>
+    const [snapPoints, normalizedSnapPointsDesc] = useMemo(() => {
+        const snapPoints = props.snapPoints.map(snapPoint =>
             snapPoint.distanceUnit === "percentage" ? snapPoint.distance + "%" : snapPoint.distance
         );
-    }, [props.snapPoints]);
 
-    console.warn(
-        "Sorted snap points",
-        snapPoints
+        const snapPointsDesc = snapPoints
             .map((e, i) => {
                 return { distance: e as number, originalIndex: i };
             })
-            .sort((a, b) => b.distance - a.distance)
-            .map((e, _i, a) => {
-                return {
-                    distance: 1 - (e.distance - a[a.length - 1].distance) / (a[0].distance - a[a.length - 1].distance),
-                    originalIndex: e.originalIndex
-                };
-            })
-    );
+            .sort((a, b) => b.distance - a.distance);
 
-    const bottomSheetPosition = useMemo(() => new Animated.Value(0), []);
-    const callBack = useCallback(([value]) => console.warn("snap point", value), []);
+        const normalizedSnapPointsDesc = snapPointsDesc.map((e, _i, a) => {
+            return {
+                distance: 1 - (e.distance - a[a.length - 1].distance) / (a[0].distance - a[a.length - 1].distance),
+                originalIndex: e.originalIndex
+            };
+        });
 
-    // const renderSnapPointListeners = useCallback(() => {
-    //     <Animated.Code
-    //         exec={Animated.block([
-    //             Animated.cond(
-    //                 Animated.eq(bottomSheetPosition, 0.7777777777777778),
-    //                 Animated.call([bottomSheetPosition], callBack)
-    //             )
-    //         ])}
-    //     />;
-    // }, []);
+        return [snapPoints, normalizedSnapPointsDesc];
+    }, [props.snapPoints]);
+
+    const test = (index: number) => {
+        return () => {
+            console.warn("snap point index", index);
+        };
+    };
+
+    const renderSnapPointListeners = useCallback(() => {
+        const conditions = normalizedSnapPointsDesc.map(snapPoint => {
+            return Animated.cond(
+                Animated.eq(currentBottomSheetPosition, snapPoint.distance),
+                Animated.call([currentBottomSheetPosition], test(snapPoint.originalIndex))
+            );
+        });
+
+        return <Animated.Code exec={Animated.block(conditions)} />;
+    }, [normalizedSnapPointsDesc]);
 
     useEffect(() => {
         if (props.currentSnapPointIndex.status === ValueStatus.Available) {
@@ -63,16 +67,9 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
                 snapPoints={snapPoints}
                 renderHeader={renderHeader}
                 renderContent={renderContent}
-                callbackNode={bottomSheetPosition}
+                callbackNode={currentBottomSheetPosition}
             />
-            <Animated.Code
-                exec={Animated.block([
-                    Animated.cond(
-                        Animated.eq(bottomSheetPosition, 0.7777777777777778),
-                        Animated.call([bottomSheetPosition], callBack)
-                    )
-                ])}
-            />
+            {renderSnapPointListeners()}
         </View>
     );
 }
