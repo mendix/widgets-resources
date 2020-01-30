@@ -34,7 +34,7 @@
                 "path": "./tests/TestProjects/Mendix7/"
             },
             {
-                "revision": 484,
+                "revision": 486,
                 "branch": "MX_8",
                 "path": "./tests/TestProjects/Mendix8/"
             }
