@@ -41,7 +41,7 @@ class HomePage {
     }
 
     open(): void {
-        browser.url("/login.html");
+        browser.url("");
     }
 }
 const page = new HomePage();

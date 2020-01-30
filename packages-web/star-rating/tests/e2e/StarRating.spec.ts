@@ -3,12 +3,6 @@ import page from "./pages/home.page";
 describe("Star rating", () => {
     beforeAll(() => {
         page.open();
-        page.usernameInput.waitForDisplayed();
-        page.usernameInput.setValue("x");
-        page.passwordInput.waitForDisplayed();
-        page.passwordInput.setValue("1");
-        page.loginButton.waitForDisplayed();
-        page.loginButton.click();
     });
 
     // Note: cssProperty %age comparisons are not possible eg: width = 100% is always converted to pixels.
