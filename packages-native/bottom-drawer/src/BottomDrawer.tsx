@@ -39,7 +39,7 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
         };
     };
 
-    const renderHeaderListeners = useCallback(() => {
+    const renderHeaderPositionListeners = useCallback(() => {
         const conditions = snapPointsInDp.map(snapPoint => {
             return Animated.cond(
                 Animated.eq(currentHeaderPosition, Dimensions.get("window").height - snapPoint),
@@ -51,8 +51,8 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
     }, [snapPointsInDp]);
 
     useEffect(() => {
-        if (bottomSheetRef.current && props.currentSnapPointIndex.status === ValueStatus.Available) {
-            bottomSheetRef.current.snapTo(Number(props.currentSnapPointIndex.value.toFixed(0)));
+        if (props.currentSnapPointIndex.status === ValueStatus.Available) {
+            bottomSheetRef.current?.snapTo(Number(props.currentSnapPointIndex.value.toFixed(0)));
         }
     }, [props.currentSnapPointIndex]);
 
@@ -65,7 +65,7 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
                 renderContent={renderContent}
                 headerPosition={currentHeaderPosition}
             />
-            {renderHeaderListeners()}
+            {renderHeaderPositionListeners()}
         </View>
     );
 }
