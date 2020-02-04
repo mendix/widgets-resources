@@ -15,6 +15,7 @@
     "scripts": {
         "start": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:ts:native -- --subprojectPath packages-native/floating-action-button",
         "build": "..\"/../node_modules/.bin/pluggable-widgets-tools\" build:ts:native --subprojectPath packages-native/floating-action-button",
+        "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.native.config.js",
         "release": "..\"/../node_modules/.bin/pluggable-widgets-tools\" release:ts:native --subprojectPath packages-native/floating-action-button",
         "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "version": "npm run release",
