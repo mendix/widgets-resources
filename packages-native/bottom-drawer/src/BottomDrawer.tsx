@@ -7,6 +7,11 @@ import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { ValueStatus } from "mendix";
 import Animated from "react-native-reanimated";
 
+/*
+Known issues:
+- Android pixel 3 100 percent snap point not tracked 
+*/
+
 export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): ReactNode {
     const styles = flattenStyles(defaultBottomDrawerStyle, props.style);
 
