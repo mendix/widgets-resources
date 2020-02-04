@@ -1,6 +1,6 @@
 import { createElement, ReactNode, useRef, useCallback, useMemo, useEffect } from "react";
 import BottomSheet from "reanimated-bottom-sheet";
-import { View } from "react-native";
+import { View, Dimensions } from "react-native";
 import { BottomDrawerProps } from "../typings/BottomDrawerProps";
 import { BottomDrawerStyle, defaultBottomDrawerStyle } from "./ui/Styles";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
@@ -16,7 +16,7 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
     const renderHeader = useCallback(() => props.headerContent, [props.headerContent]);
     const renderContent = useCallback(() => props.mainContent, [props.mainContent]);
 
-    const [snapPoints, normalizedSnapPointsDesc] = useMemo(() => {
+    const [snapPoints, snapPointsInPoints, normalizedSnapPointsDesc] = useMemo(() => {
         const snapPoints = props.snapPoints.map(snapPoint =>
             snapPoint.distanceUnit === "percentage" ? snapPoint.distance + "%" : snapPoint.distance
         );
@@ -47,7 +47,7 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
             };
         });
 
-        return [snapPoints, normalizedSnapPointsDesc];
+        return [snapPoints, snapPointsInPoints, normalizedSnapPointsDesc];
     }, [props.snapPoints]);
 
     console.warn("Normalized snap points desc", normalizedSnapPointsDesc);
@@ -57,25 +57,46 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
             () => {
                 console.warn("snap point index", index);
             },
-            100,
+            0,
             undefined
         );
     };
 
-    const renderSnapPointListeners = useCallback(() => {
-        const conditions = normalizedSnapPointsDesc.map(snapPoint => {
+    // const renderSnapPointListeners = useCallback(() => {
+    //     const conditions = normalizedSnapPointsDesc.map(snapPoint => {
+    //         return Animated.cond(
+    //             Animated.and(
+    //                 Animated.greaterOrEq(currentBottomSheetPosition, snapPoint.distance - snapPoint.inaccuracyDistance),
+    //                 Animated.lessOrEq(currentBottomSheetPosition, snapPoint.distance + snapPoint.inaccuracyDistance)
+    //             ),
+    //             // Animated.eq(currentBottomSheetPosition, snapPoint.distance),
+    //             Animated.call([currentBottomSheetPosition], test(snapPoint.originalIndex))
+    //         );
+    //     });
+
+    //     return <Animated.Code exec={Animated.block(conditions)} />;
+    // }, [normalizedSnapPointsDesc]);
+
+    // === headerPosition ===
+
+    const currentHeaderPosition = useMemo(() => new Animated.Value(0), []);
+    const renderHeaderListeners = useCallback(() => {
+        console.warn("renderHeaderListeners", snapPointsInPoints);
+        const conditions = snapPointsInPoints.map(snapPoint => {
             return Animated.cond(
-                Animated.and(
-                    Animated.greaterOrEq(currentBottomSheetPosition, snapPoint.distance - snapPoint.inaccuracyDistance),
-                    Animated.lessOrEq(currentBottomSheetPosition, snapPoint.distance + snapPoint.inaccuracyDistance)
-                ),
-                // Animated.eq(currentBottomSheetPosition, snapPoint.distance),
-                Animated.call([currentBottomSheetPosition], test(snapPoint.originalIndex))
+                // Animated.and(
+                //     Animated.greaterOrEq(currentHeaderPosition, snapPoint - 25),
+                //     Animated.lessOrEq(currentHeaderPosition, snapPoint + 25)
+                // ),
+                Animated.eq(currentHeaderPosition, Dimensions.get("window").height - snapPoint),
+                Animated.call([currentHeaderPosition], test(snapPoint))
             );
         });
 
         return <Animated.Code exec={Animated.block(conditions)} />;
     }, [normalizedSnapPointsDesc]);
+
+    // ======================
 
     useEffect(() => {
         if (props.currentSnapPointIndex.status === ValueStatus.Available) {
@@ -91,8 +112,10 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
                 renderHeader={renderHeader}
                 renderContent={renderContent}
                 callbackNode={currentBottomSheetPosition}
+                headerPosition={currentHeaderPosition}
             />
-            {renderSnapPointListeners()}
+            {/* {renderSnapPointListeners()} */}
+            {renderHeaderListeners()}
         </View>
     );
 }
