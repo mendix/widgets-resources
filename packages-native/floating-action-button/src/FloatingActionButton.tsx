@@ -45,6 +45,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
                 activeOpacity={0.2}
                 offsetX={0}
                 offsetY={0}
+                zIndex={999}
                 testID={this.props.name}
             >
                 {this.renderButtons()}
