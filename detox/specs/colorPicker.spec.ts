@@ -80,8 +80,6 @@ describe("Color Picker", () => {
             await expect(colorPicker.getPreview()).toBeNotVisible();
             await expect(colorPicker.getHue()).toBeVisible();
             await expect(colorPicker.getSaturation()).toBeNotVisible();
-            await expect(colorPicker.getLightness()).toBeNotVisible();
-            await expect(colorPicker.getAlpha()).toBeNotVisible();
         });
 
         afterAll(async () => {
@@ -113,7 +111,7 @@ describe("Color Picker", () => {
             await expect(colorPicker.getPreview()).toBeVisible();
             await expect(colorPicker.getHue()).toBeVisible();
             await colorPicker.getHue().tapAtPoint({ x: 50, y: 20 });
-            await expect(textBox).toHaveText("#ff00ff");
+            await expect(textBox).toHaveText("fa9886");
         });
 
         afterAll(async () => {
