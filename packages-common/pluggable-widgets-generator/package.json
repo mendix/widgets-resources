@@ -3,6 +3,7 @@
   "version": "8.6.0",
   "description": "Mendix Pluggable Widget Generator",
   "license": "Apache-2.0",
+  "copyright": "Mendix 2020",
   "main": "app/index.js",
   "repository": {
     "type": "git",
