@@ -33,7 +33,7 @@ function _promptWidgetProperties(dir, widgetName) {
             type: "input",
             name: "copyright",
             message: "Add a copyright",
-            default: "Mendix 2019",
+            default: "Mendix 2020",
             store: true
         },
         {
