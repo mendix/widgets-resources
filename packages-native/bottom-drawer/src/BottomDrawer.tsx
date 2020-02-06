@@ -1,4 +1,4 @@
-import { createElement, ReactNode, useRef, useCallback, useMemo, useEffect } from "react";
+import { createElement, ReactNode, useRef, useCallback, useMemo, useState, useEffect } from "react";
 import BottomSheet from "reanimated-bottom-sheet";
 import { View, Dimensions } from "react-native";
 import { BottomDrawerProps } from "../typings/BottomDrawerProps";
@@ -6,6 +6,7 @@ import { BottomDrawerStyle, defaultBottomDrawerStyle } from "./ui/Styles";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { ValueStatus } from "mendix";
 import Animated from "react-native-reanimated";
+import Big from "big.js";
 
 /*
 Known issues:
@@ -16,7 +17,10 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
     const styles = flattenStyles(defaultBottomDrawerStyle, props.style);
 
     const bottomSheetRef = useRef<BottomSheet>(null);
-    const currentHeaderPosition = useMemo(() => new Animated.Value(0), []);
+    const currentSnapPointIndexRef = useRef(props.currentSnapPointIndex);
+    currentSnapPointIndexRef.current = props.currentSnapPointIndex;
+    const currentHeaderPosition = useMemo(() => new Animated.Value(-1), []);
+    const [snappedToIndex, setSnappedToIndex] = useState(0);
 
     const renderHeader = useCallback(() => props.headerContent, [props.headerContent]);
     const renderContent = useCallback(() => props.mainContent, [props.mainContent]);
@@ -38,17 +42,24 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
         return [snapPoints, snapPointsInDp];
     }, [props.snapPoints]);
 
-    const test = (snapPoint: number) => {
-        return () => {
-            console.warn("snap point index", snapPoint);
-        };
-    };
+    const test = useCallback((snapPoint: number, index: number) => {
+        console.warn("snap point", snapPoint);
+        console.warn("snap point index", index);
+        console.warn(snappedToIndex);
+        if (index !== snappedToIndex) {
+            setSnappedToIndex(index);
+            currentSnapPointIndexRef.current.setValue(new Big(index));
+        }
+    }, []);
 
     const renderHeaderPositionListeners = useCallback(() => {
-        const conditions = snapPointsInDp.map(snapPoint => {
+        const conditions = snapPointsInDp.map((snapPoint, index) => {
             return Animated.cond(
                 Animated.eq(currentHeaderPosition, Dimensions.get("window").height - snapPoint),
-                Animated.call([currentHeaderPosition], test(snapPoint))
+                Animated.call([], () => {
+                    console.warn("calling");
+                    test(snapPoint, index);
+                })
             );
         });
 
@@ -56,10 +67,19 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
     }, [snapPointsInDp]);
 
     useEffect(() => {
-        if (props.currentSnapPointIndex.status === ValueStatus.Available) {
-            bottomSheetRef.current?.snapTo(Number(props.currentSnapPointIndex.value.toFixed(0)));
+        if (currentSnapPointIndexRef.current.status === ValueStatus.Available) {
+            console.warn("useEffect update snap point");
+            console.warn("bottomSheetRef.current", !!bottomSheetRef.current);
+            console.warn("currentSnapPointIndexRef.current.value", currentSnapPointIndexRef.current.value);
+
+            const value = Number(currentSnapPointIndexRef.current.value?.toFixed(0));
+
+            if (value !== snappedToIndex) {
+                setSnappedToIndex(value);
+                bottomSheetRef.current?.snapTo(Number(currentSnapPointIndexRef.current.value?.toFixed(0)));
+            }
         }
-    }, [props.currentSnapPointIndex]);
+    }, [currentSnapPointIndexRef.current]);
 
     return (
         <View style={styles.container}>

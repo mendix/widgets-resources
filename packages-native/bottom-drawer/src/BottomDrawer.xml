@@ -34,10 +34,21 @@
                         </propertyGroup>
                     </properties>
                 </property>
-                <property key="currentSnapPointIndex" type="expression" defaultValue="0" required="true">
+                <!-- <property key="currentSnapPointIndex" type="expression" defaultValue="0" required="true">
                     <caption>Current snap point</caption>
                     <description>Index of snap point that the bottom sheet is currently snapped to.</description>
                     <returnType type="Integer" />
+                </property> -->
+                <property key="currentSnapPointIndex" type="attribute" onChange="onCurrentSnapPointIndexChange">
+                    <caption>Current snap point</caption>
+                    <description>Index of snap point that the bottom sheet is currently snapped to.</description>
+                    <attributeTypes>
+                        <attributeType name="Integer"/>
+                    </attributeTypes>
+                </property>
+                <property key="onCurrentSnapPointIndexChange" type="action">
+                    <caption>On change</caption>
+                    <description/>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">

@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import { DynamicValue } from "mendix";
+import { ActionValue, EditableValue } from "mendix";
 import { ReactNode } from "react";
 
 interface CommonProps<Style> {
@@ -22,5 +22,6 @@ export interface BottomDrawerProps<Style> extends CommonProps<Style> {
     headerContent?: ReactNode;
     mainContent?: ReactNode;
     snapPoints: SnapPointsType[];
-    currentSnapPointIndex: DynamicValue<BigJs.Big>;
+    currentSnapPointIndex: EditableValue<BigJs.Big>;
+    onCurrentSnapPointIndexChange?: ActionValue;
 }
