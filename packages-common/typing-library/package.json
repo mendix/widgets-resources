@@ -3,7 +3,7 @@
     "version": "8.6.0",
     "description": "Mendix Pluggable Widgets typings generator",
     "license": "Apache-2.0",
-    "copyright": "Mendix 2019",
+    "copyright": "Mendix 2020",
     "author": {
         "name": "Diego Antonelli",
         "email": "diego.antonelli@mendix.com"
