@@ -1,4 +1,4 @@
-import { createElement, ReactNode, useRef, useCallback, useMemo, useState, useEffect } from "react";
+import { createElement, ReactNode, useRef, useCallback, useMemo, useEffect } from "react";
 import BottomSheet from "reanimated-bottom-sheet";
 import { View, Dimensions } from "react-native";
 import { BottomDrawerProps } from "../typings/BottomDrawerProps";
@@ -20,7 +20,7 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
     const currentSnapPointIndexRef = useRef(props.currentSnapPointIndex);
     currentSnapPointIndexRef.current = props.currentSnapPointIndex;
     const currentHeaderPosition = useMemo(() => new Animated.Value(-1), []);
-    const [snappedToIndex, setSnappedToIndex] = useState(0);
+    const snappedToIndexRef = useRef(0);
 
     const renderHeader = useCallback(() => props.headerContent, [props.headerContent]);
     const renderContent = useCallback(() => props.mainContent, [props.mainContent]);
@@ -42,12 +42,9 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
         return [snapPoints, snapPointsInDp];
     }, [props.snapPoints]);
 
-    const test = useCallback((snapPoint: number, index: number) => {
-        console.warn("snap point", snapPoint);
-        console.warn("snap point index", index);
-        console.warn(snappedToIndex);
-        if (index !== snappedToIndex) {
-            setSnappedToIndex(index);
+    const test = useCallback((index: number) => {
+        if (index !== snappedToIndexRef.current) {
+            snappedToIndexRef.current = index;
             currentSnapPointIndexRef.current.setValue(new Big(index));
         }
     }, []);
@@ -55,10 +52,9 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
     const renderHeaderPositionListeners = useCallback(() => {
         const conditions = snapPointsInDp.map((snapPoint, index) => {
             return Animated.cond(
-                Animated.eq(currentHeaderPosition, Dimensions.get("window").height - snapPoint),
+                Animated.eq(currentHeaderPosition, Dimensions.get("window").height - snapPoint), // Only works when there is a snap point of 100%, height of biggest snappoint minus snap point, find highest snap point
                 Animated.call([], () => {
-                    console.warn("calling");
-                    test(snapPoint, index);
+                    test(index);
                 })
             );
         });
@@ -68,15 +64,11 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
 
     useEffect(() => {
         if (currentSnapPointIndexRef.current.status === ValueStatus.Available) {
-            console.warn("useEffect update snap point");
-            console.warn("bottomSheetRef.current", !!bottomSheetRef.current);
-            console.warn("currentSnapPointIndexRef.current.value", currentSnapPointIndexRef.current.value);
-
             const value = Number(currentSnapPointIndexRef.current.value?.toFixed(0));
 
-            if (value !== snappedToIndex) {
-                setSnappedToIndex(value);
-                bottomSheetRef.current?.snapTo(Number(currentSnapPointIndexRef.current.value?.toFixed(0)));
+            if (value !== snappedToIndexRef.current) {
+                snappedToIndexRef.current = value;
+                bottomSheetRef.current?.snapTo(value);
             }
         }
     }, [currentSnapPointIndexRef.current]);
@@ -86,6 +78,7 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
             <BottomSheet
                 ref={bottomSheetRef}
                 snapPoints={snapPoints}
+                initialSnap={snappedToIndexRef.current}
                 renderHeader={renderHeader}
                 renderContent={renderContent}
                 headerPosition={currentHeaderPosition}
