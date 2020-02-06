@@ -1,6 +1,6 @@
 {
     "name": "widgets-resources",
-    "copyright": "Mendix Technology BV",
+    "copyright": "2020 Mendix Technology BV",
     "repository": {
         "type": "git",
         "url": "https://github.com/mendix/widgets-resources.git"
