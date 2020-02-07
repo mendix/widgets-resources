@@ -135,15 +135,16 @@ export const btnIconWhite = merge(btnIconPrimary, {
 
 export const btnIconGrayRounded = {
     container: {
-        flex: 0,
+        height: 80,
+        width: 80,
         padding: 10,
         borderRadius: 20,
         borderWidth: 0,
-        backgroundColor: contrast.lower,
+        backgroundColor: contrast.lowest,
     },
     icon: {
         size: 30,
-        color: contrast.higher,
+        color: contrast.high,
     },
     caption: {
         fontSize: 0,
