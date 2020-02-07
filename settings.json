@@ -99,6 +99,9 @@
             },
             {
                 "name": "Align self",
+                "oldNames": [
+                    "Align Self"
+                ],
                 "type": "Dropdown",
                 "description": "Float the element to the left or to the right.",
                 "options": [
@@ -114,18 +117,27 @@
             },
             {
                 "name": "Hide on phone",
+                "oldNames": [
+                    "Hide On Phone"
+                ],
                 "type": "Toggle",
                 "description": "Hide element on phone.",
                 "class": "hide-phone"
             },
             {
                 "name": "Hide on tablet",
+                "oldNames": [
+                    "Hide On Tablet"
+                ],
                 "type": "Toggle",
                 "description": "Hide element on tablet.",
                 "class": "hide-tablet"
             },
             {
                 "name": "Hide on desktop",
+                "oldNames": [
+                    "Hide On Desktop"
+                ],
                 "type": "Toggle",
                 "description": "Hide element on desktop.",
                 "class": "hide-desktop"
@@ -139,26 +151,44 @@
                 "options": [
                     {
                         "name": "Left align as a row",
+                        "oldNames": [
+                            "Left align as row"
+                        ],
                         "class": "row-left"
                     },
                     {
                         "name": "Center align as a row",
+                        "oldNames": [
+                            "Center align as row"
+                        ],
                         "class": "row-center"
                     },
                     {
                         "name": "Right align as a row",
+                        "oldNames": [
+                            "Right align as row"
+                        ],
                         "class": "row-right"
                     },
                     {
                         "name": "Left align as a column",
+                        "oldNames": [
+                            "Left align as column"
+                        ],
                         "class": "col-left"
                     },
                     {
                         "name": "Center align as a column",
+                        "oldNames": [
+                            "Center align as column"
+                        ],
                         "class": "col-center"
                     },
                     {
                         "name": "Right align as a column",
+                        "oldNames": [
+                            "Right align as column"
+                        ],
                         "class": "col-right"
                     }
                 ]
@@ -170,30 +200,51 @@
                 "options": [
                     {
                         "name": "Brand Default",
+                        "oldNames": [
+                            "Default"
+                        ],
                         "class": "background-default"
                     },
                     {
                         "name": "Brand Primary",
+                        "oldNames": [
+                            "Primary"
+                        ],
                         "class": "background-primary"
                     },
                     {
                         "name": "Brand Inverse",
+                        "oldNames": [
+                            "Inverse"
+                        ],
                         "class": "background-inverse"
                     },
                     {
                         "name": "Brand Info",
+                        "oldNames": [
+                            "Info"
+                        ],
                         "class": "background-info"
                     },
                     {
                         "name": "Brand Success",
+                        "oldNames": [
+                            "Success"
+                        ],
                         "class": "background-success"
                     },
                     {
                         "name": "Brand Warning",
+                        "oldNames": [
+                            "Warning"
+                        ],
                         "class": "background-warning"
                     },
                     {
                         "name": "Brand Danger",
+                        "oldNames": [
+                            "Danger"
+                        ],
                         "class": "background-danger"
                     },
                     {
@@ -231,6 +282,9 @@
             },
             {
                 "name": "Border",
+                "oldNames": [
+                    "Bordered"
+                ],
                 "type": "Toggle",
                 "description": "Style the button with a transparent background, a colored border, and colored text.",
                 "class": "btn-bordered"
@@ -378,30 +432,51 @@
                 "options": [
                     {
                         "name": "Brand Default",
+                        "oldNames": [
+                            "Default"
+                        ],
                         "class": "groupbox-default"
                     },
                     {
                         "name": "Brand Primary",
+                        "oldNames": [
+                            "Primary"
+                        ],
                         "class": "groupbox-primary"
                     },
                     {
                         "name": "Brand Inverse",
+                        "oldNames": [
+                            "Inverse"
+                        ],
                         "class": "groupbox-inverse"
                     },
                     {
                         "name": "Brand Info",
+                        "oldNames": [
+                            "Info"
+                        ],
                         "class": "groupbox-info"
                     },
                     {
                         "name": "Brand Success",
+                        "oldNames": [
+                            "Success"
+                        ],
                         "class": "groupbox-success"
                     },
                     {
                         "name": "Brand Warning",
+                        "oldNames": [
+                            "Warning"
+                        ],
                         "class": "groupbox-warning"
                     },
                     {
                         "name": "Brand Danger",
+                        "oldNames": [
+                            "Danger"
+                        ],
                         "class": "groupbox-danger"
                     },
                     {
@@ -479,30 +554,51 @@
                 "options": [
                     {
                         "name": "Brand Default",
+                        "oldNames": [
+                            "Default"
+                        ],
                         "class": "label-default"
                     },
                     {
                         "name": "Brand Primary",
+                        "oldNames": [
+                            "Primary"
+                        ],
                         "class": "label-primary"
                     },
                     {
                         "name": "Brand Inverse",
+                        "oldNames": [
+                            "Inverse"
+                        ],
                         "class": "label-inverse"
                     },
                     {
                         "name": "Brand Info",
+                        "oldNames": [
+                            "Info"
+                        ],
                         "class": "label-info"
                     },
                     {
                         "name": "Brand Success",
+                        "oldNames": [
+                            "Success"
+                        ],
                         "class": "label-success"
                     },
                     {
                         "name": "Brand Warning",
+                        "oldNames": [
+                            "Warning"
+                        ],
                         "class": "label-warning"
                     },
                     {
                         "name": "Brand Danger",
+                        "oldNames": [
+                            "Danger"
+                        ],
                         "class": "label-danger"
                     }
                 ]
@@ -511,6 +607,9 @@
         "DynamicText": [
             {
                 "name": "Font Weight",
+                "oldNames": [
+                    "Weight"
+                ],
                 "type": "Dropdown",
                 "description": "Emphasize the text with a heavier or lighter font weight",
                 "options": [
@@ -547,30 +646,51 @@
                     },
                     {
                         "name": "Brand Default",
+                        "oldNames": [
+                            "Default"
+                        ],
                         "class": "text-default"
                     },
                     {
                         "name": "Brand Primary",
+                        "oldNames": [
+                            "Primary"
+                        ],
                         "class": "text-primary"
                     },
                     {
                         "name": "Brand Inverse",
+                        "oldNames": [
+                            "Inverse"
+                        ],
                         "class": "text-inverse"
                     },
                     {
                         "name": "Brand Info",
+                        "oldNames": [
+                            "Info"
+                        ],
                         "class": "text-info"
                     },
                     {
                         "name": "Brand Success",
+                        "oldNames": [
+                            "Success"
+                        ],
                         "class": "text-success"
                     },
                     {
                         "name": "Brand Warning",
+                        "oldNames": [
+                            "Warning"
+                        ],
                         "class": "text-warning"
                     },
                     {
                         "name": "Brand Danger",
+                        "oldNames": [
+                            "Danger"
+                        ],
                         "class": "text-danger"
                     }
                 ]
