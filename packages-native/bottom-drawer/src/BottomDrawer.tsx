@@ -1,6 +1,6 @@
 import { createElement, ReactNode, useRef, useCallback, useMemo, useEffect } from "react";
 import BottomSheet from "reanimated-bottom-sheet";
-import { View, Dimensions } from "react-native";
+import { View } from "react-native";
 import { BottomDrawerProps } from "../typings/BottomDrawerProps";
 import { BottomDrawerStyle, defaultBottomDrawerStyle } from "./ui/Styles";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
@@ -50,9 +50,10 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
     }, []);
 
     const renderHeaderPositionListeners = useCallback(() => {
+        const highestSnapPoint = Math.max(...snapPointsInDp);
         const conditions = snapPointsInDp.map((snapPoint, index) => {
             return Animated.cond(
-                Animated.eq(currentHeaderPosition, Dimensions.get("window").height - snapPoint), // Only works when there is a snap point of 100%, height of biggest snappoint minus snap point, find highest snap point
+                Animated.eq(currentHeaderPosition, highestSnapPoint - snapPoint),
                 Animated.call([], () => {
                     test(index);
                 })
