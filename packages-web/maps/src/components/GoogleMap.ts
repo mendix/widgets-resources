@@ -140,7 +140,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
             mapTypeControl: props.mapTypeControl,
             fullscreenControl: props.fullScreenControl,
             rotateControl: props.rotateControl,
-            minZoom: 2,
+            minZoom: 1,
             maxZoom: 20,
             styles: this.getMapStyles()
         };

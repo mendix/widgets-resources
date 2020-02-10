@@ -43,15 +43,13 @@ export function getProperties(
         if (target === "web") {
             return defaultProperties;
         }
-        removePropertyByKey("shape", defaultProperties);
-        removePropertyByKey("customMarker", defaultProperties);
+        hideProperty("shape", defaultProperties);
+        hideProperty("customMarker", defaultProperties);
         changeProperty("type", "description", "Now the map is configured for Cate", defaultProperties);
     } else {
         changeProperty("type", "description", "Now the map is configured for Tom", defaultProperties);
-        if (values.shape === "image") {
-            includeKey("shape", defaultProperties, customMarkerConfig);
-        } else {
-            removePropertyByKey("customMarker", defaultProperties);
+        if (values.shape === "default") {
+            hideProperty("customMarker", defaultProperties);
         }
     }
     return defaultProperties;
@@ -78,16 +76,16 @@ export function check(values: MapsPreviewProps): Problem[] {
     return errors;
 }
 
-function removePropertyByKey(key: keyof MapsPreviewProps, properties?: Option<Properties>): void {
+function hideProperty(key: keyof MapsPreviewProps, properties?: Option<Properties>): void {
     properties?.forEach(property => {
         property?.properties?.forEach((prop, index, array) => {
             if (prop.key === key) {
                 array.splice(index, 1);
             } else {
-                prop.properties?.forEach(propArray => removePropertyByKey(key, propArray));
+                prop.properties?.forEach(propArray => hideProperty(key, propArray));
             }
         });
-        removePropertyByKey(key, property.propertyGroups);
+        hideProperty(key, property.propertyGroups);
     });
 }
 
