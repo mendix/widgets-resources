@@ -6,6 +6,7 @@ delete base.parserOptions.project;
 
 module.exports = deepmerge(base, {
     rules: {
-        "@typescript-eslint/ban-ts-ignore": "off"
+        "@typescript-eslint/ban-ts-ignore": "off",
+        "no-unused-expressions": "off"
     }
 });

@@ -1,29 +1,17 @@
 {
     "name": "maps-web",
     "widgetName": "Maps",
-    "version": "1.0.9",
-    "description": "Show locations on Google Maps",
-    "copyright": "Mendix BV",
+    "version": "2.0.0",
+    "description": "Show locations on Maps",
+    "copyright": "Mendix Technology B.V.",
+    "license": "Apache-2.0",
     "repository": {
         "type": "git",
         "url": "https://github.com/mendix/widgets-resources.git"
     },
-    "scripts": {
-        "start": ".\"/node_modules/.bin/utils-react-widgets\" start",
-        "dev": ".\"/node_modules/.bin/utils-react-widgets\" dev",
-        "format": "../../node_modules/.bin/prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-        "test": "npm run test:unit",
-        "test:unit": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
-        "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://leafletmaps.mxapps.io ../../scripts/test/projectup.sh",
-        "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://leafletmaps.mxapps.io ..\"/../node_modules/.bin/wdio\" ../../configs/e2e/wdio.conf.js",
-        "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ..\"/../node_modules/.bin/wdio\" ../../configs/e2e/wdio.conf.js",
-        "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-        "lint:fix": "npm run lint -- --fix",
-        "build": ".\"/node_modules/.bin/utils-react-widgets\" build",
-        "release": ".\"/node_modules/.bin/utils-react-widgets\" release",
-        "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
-    },
     "config": {
+        "widgetPath": "./tests/TestProjects/Mendix8/widgets",
+        "projectPath": "./tests/TestProjects/Mendix8",
         "mendixHost": "http://localhost:8080",
         "developmentPort": 3000,
         "testProjectId": "b16057e9-012a-4d19-8484-34caebdc3eb2",
@@ -40,7 +28,21 @@
             }
         ]
     },
-    "license": "Apache-2.0",
+    "packagePath": "com.mendix.widget.custom.Maps",
+    "scripts": {
+        "start": "..\"/../node_modules/.bin/concurrently\" \"npm:start:server\"  \"npm:dev\"",
+        "start:server": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:server --open --subprojectPath packages-web/maps",
+        "dev": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:ts -- --subprojectPath packages-web/maps",
+        "build": "..\"/../node_modules/.bin/pluggable-widgets-tools\" build:ts --subprojectPath packages-web/maps",
+        "format": "..\"/../node_modules/.bin/pluggable-widgets-tools\" format --subprojectPath packages-web/maps",
+        "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
+        "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://badge.mxapps.io ../../scripts/test/projectup.sh",
+        "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://badge.mxapps.io ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+        "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+        "release": "..\"/../node_modules/.bin/pluggable-widgets-tools\" release:ts --subprojectPath packages-web/maps",
+        "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+    },
     "devDependencies": {
         "@types/classnames": "^2.2.7",
         "@types/googlemaps": "3.30.19",
@@ -48,10 +50,10 @@
         "@types/leaflet": "^1.4.4",
         "@types/react": "~16.8.13",
         "@types/react-resize-detector": "^4.0.1",
-        "@widgets-resources/utils-react-widgets": "0.0.1",
         "faker": "^4.1.0"
     },
     "dependencies": {
+        "@widgets-resources/piw-utils": "^1.0.0",
         "classnames": "^2.2.6",
         "leaflet": "^1.4.0",
         "leaflet-defaulticon-compatibility": "^0.1.1",

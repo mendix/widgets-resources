@@ -126,11 +126,11 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
         }
     }
 
-    private getRef = (node: HTMLDivElement) => {
+    private getRef = (node: HTMLDivElement): void => {
         this.googleMapsNode = node;
     };
 
-    private createUpdateMap = (props: GoogleMapsProps) => {
+    private createUpdateMap = (props: GoogleMapsProps): void => {
         const mapOptions = {
             zoom: props.zoomLevel,
             zoomControl: props.optionZoomControl,
@@ -152,13 +152,13 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
         this.setDefaultCenter(props);
     };
 
-    private setDefaultCenter = (props: GoogleMapsProps) => {
+    private setDefaultCenter = (props: GoogleMapsProps): void => {
         if (!props.fetchingData) {
             this.addMarkers(props.allLocations);
         }
     };
 
-    private addMarkers = (mapLocations?: Location[]) => {
+    private addMarkers = (mapLocations?: Location[]): void => {
         this.markers.forEach(marker => marker.setMap(null));
         this.markers = [];
         if (mapLocations && mapLocations.length) {
@@ -220,7 +220,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
         }, 0);
     };
 
-    private setMapOnMarkers = (map?: google.maps.Map) => {
+    private setMapOnMarkers = (map?: google.maps.Map): void => {
         if (this.markers && this.markers.length && map) {
             this.markers.forEach(marker => marker.setMap(map));
         }
