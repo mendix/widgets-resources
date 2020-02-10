@@ -1,5 +1,5 @@
 const merge = require("webpack-merge");
-const baseConfig = require("../utils-react-widgets/configs/webpack.config.prod");
+const baseConfig = require("../../configs/webpack.prod.js");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const customConfig = {
@@ -33,4 +33,6 @@ const customPreviewConfig = {
     }
 };
 
-module.exports = [merge(baseConfig[0], customConfig), merge(baseConfig[1], customPreviewConfig)];
+const editorConfig = baseConfig.length === 3 ? baseConfig[2] : undefined;
+
+module.exports = [merge(baseConfig[0], customConfig), merge(baseConfig[1], customPreviewConfig), editorConfig];
