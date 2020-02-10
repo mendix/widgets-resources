@@ -5,7 +5,7 @@
  */
 import { CSSProperties } from "react";
 import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/typings";
-import { DynamicValue, WebImage } from "mendix";
+import { ActionValue, DynamicValue, WebImage } from "mendix";
 
 interface CommonProps {
     name: string;
@@ -18,16 +18,21 @@ export type TypeEnum = "basic" | "advanced";
 
 export interface MarkersType {
     location: DynamicValue<string>;
+    onClick?: ActionValue;
 }
 
 export type ShapeEnum = "default" | "image";
 
+export type ZoomEnum = "world" | "continent" | "city" | "street" | "buildings";
+
 export interface MarkersPreviewType {
     location: string;
+    onClick: ActionPreview;
 }
 
 export interface MarkersVisibilityType {
     location: boolean;
+    onClick: boolean;
 }
 
 export interface MapsContainerProps extends CommonProps {
@@ -35,6 +40,7 @@ export interface MapsContainerProps extends CommonProps {
     markers: MarkersType[];
     shape: ShapeEnum;
     customMarker?: DynamicValue<WebImage>;
+    zoom: ZoomEnum;
     apiKey?: DynamicValue<string>;
 }
 
@@ -46,6 +52,7 @@ export interface MapsPreviewProps {
     markers: MarkersPreviewType[];
     shape: ShapeEnum;
     customMarker?: WebImage;
+    zoom: ZoomEnum;
     apiKey?: string;
 }
 
@@ -54,5 +61,6 @@ export interface VisibilityMap {
     markers: MarkersVisibilityType[] | boolean;
     shape: boolean;
     customMarker: boolean;
+    zoom: boolean;
     apiKey: boolean;
 }

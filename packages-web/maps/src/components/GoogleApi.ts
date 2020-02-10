@@ -53,7 +53,7 @@ const googleApiWrapper: Function = (script: string) => <P extends GoogleMapsProp
             return (window as any)[googleApiID];
         };
 
-        private loadScript = (googleScript: string) => {
+        private loadScript = (googleScript: string): void => {
             this.addScript(googleScript)
                 .then(() => this.setState({ scriptsLoaded: true }))
                 .catch((error: Error) =>

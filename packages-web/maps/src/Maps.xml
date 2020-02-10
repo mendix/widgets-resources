@@ -48,6 +48,17 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Configurations">
+                <property key="zoom" type="enumeration" defaultValue="city">
+                    <caption>Zoom</caption>
+                    <description>Zoom level for single marker, no marker or when fit to markers is disabled.</description>
+                    <enumerationValues>
+                        <enumerationValue key="world">World</enumerationValue>
+                        <enumerationValue key="continent">Continent</enumerationValue>
+                        <enumerationValue key="city">City</enumerationValue>
+                        <enumerationValue key="street">Street</enumerationValue>
+                        <enumerationValue key="buildings">Buildings</enumerationValue>
+                    </enumerationValues>
+                </property>
                 <property key="apiKey" type="textTemplate" required="false">
                     <caption>API Key</caption>
                     <description>Please insert your Google API Key</description>
