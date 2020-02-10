@@ -56,4 +56,6 @@ const customConfig = {
     }
 };
 
-module.exports = [merge(baseConfig[0], customConfig)];
+const editorConfig = baseConfig.length === 2 ? baseConfig[1] : undefined;
+
+module.exports = [merge(baseConfig[0], customConfig), editorConfig];

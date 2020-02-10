@@ -1,5 +1,5 @@
 const merge = require("webpack-merge");
-const baseConfig = require("../utils-react-widgets/configs/webpack.config.dev");
+const baseConfig = require("../../configs/webpack.dev.js");
 
 const customConfig = {
     module: {
@@ -12,4 +12,6 @@ const customConfig = {
     }
 };
 
-module.exports = [merge(baseConfig[0], customConfig), merge(baseConfig[1], customConfig)];
+const editorConfig = baseConfig.length === 3 ? baseConfig[2] : undefined;
+
+module.exports = [merge(baseConfig[0], customConfig), merge(baseConfig[1], customConfig), editorConfig];

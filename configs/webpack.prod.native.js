@@ -29,8 +29,8 @@ const customConfig = {
                         cacheDirectory: true,
                         presets: ["@babel/preset-env", "@babel/preset-react"],
                         plugins: [
-                            ["@babel/plugin-proposal-class-properties", { "loose": true }],
-                            ["@babel/plugin-transform-react-jsx", { "pragma": "createElement" }],
+                            ["@babel/plugin-proposal-class-properties", { loose: true }],
+                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }],
                             "@babel/plugin-transform-flow-strip-types"
                         ]
                     }
@@ -45,7 +45,7 @@ const customConfig = {
                         cacheDirectory: true,
                         presets: ["@babel/preset-env", "@babel/preset-react"],
                         plugins: [
-                            ["@babel/plugin-proposal-class-properties", { "loose": true }],
+                            ["@babel/plugin-proposal-class-properties", { loose: true }],
                             "@babel/plugin-transform-react-jsx",
                             "@babel/plugin-transform-flow-strip-types"
                         ]
@@ -56,4 +56,6 @@ const customConfig = {
     }
 };
 
-module.exports = [merge(baseConfig[0], customConfig)];
+const editorConfig = baseConfig.length === 2 ? baseConfig[1] : undefined;
+
+module.exports = [merge(baseConfig[0], customConfig), editorConfig];
