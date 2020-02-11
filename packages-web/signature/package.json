@@ -28,12 +28,12 @@
         "testProjectId": "a48ab6ca-82a2-4b82-8286-eddd07eae0b9",
         "testProjects": [
             {
-                "revision": 158,
+                "revision": 160,
                 "branch": "trunk",
                 "path": "./tests/TestProjects/Mendix7/"
             },
             {
-                "revision": 157,
+                "revision": 159,
                 "branch": "MX_8",
                 "path": "./tests/TestProjects/Mendix8/"
             }
