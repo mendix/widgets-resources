@@ -5,10 +5,13 @@
 /tests/TestProjects/**/resources
 /tests/TestProjects/**/userlib
 
+/tests/TestProjects/Mendix7/theme/styles/sass
+/tests/TestProjects/Mendix7/theme/styles/login.css
 /tests/TestProjects/Mendix8/theme/styles/native
 /tests/TestProjects/Mendix8/theme/styles/web/sass
-/tests/TestProjects/Mendix8/theme/*.*
-!/tests/TestProjects/Mendix8/theme/components.json
-!/tests/TestProjects/Mendix8/theme/favicon.ico
-!/tests/TestProjects/Mendix8/theme/LICENSE
-!/tests/TestProjects/Mendix8/theme/settings.json
+/tests/TestProjects/**/theme/*.*
+!/tests/TestProjects/**/theme/components.json
+!/tests/TestProjects/**/theme/favicon.ico
+!/tests/TestProjects/**/theme/LICENSE
+!/tests/TestProjects/**/theme/settings.json
+!/tests/TestProjects/Mendix7/theme/index.html
