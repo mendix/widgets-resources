@@ -1,3 +1,5 @@
+import { NativeModules }            from "react-native";
+import { darkMode }                 from "../../app/custom-variables";
 import { font, input }              from "../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
 
@@ -14,6 +16,13 @@ import { TextBox, TextBoxVertical } from "./textbox";
     Default Class For Mendix Date Picker Widget
 ========================================================================== */
 
+// Font color of native iOS datepicker can not be changed.
+// To fix this we change the background color of the picker if OS theme is dark and app theme is light.
+const isOSDarkMode = NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode && NativeModules.RNDarkMode.initialMode === "dark";
+const pickerBackgroundColor = !darkMode && isOSDarkMode ?
+                              "rgba(0, 0, 0, 1)" :
+                              darkMode && !isOSDarkMode ? "rgba(255, 255, 255, 1)" : input.backgroundColor;
+
 export const DatePicker = {
     container: {
         // All ViewStyle properties are allowed
@@ -25,14 +34,14 @@ export const DatePicker = {
     },
     pickerIOS: {
         // All ViewStyle properties are allowed
-        backgroundColor: input.backgroundColor,
+        backgroundColor: pickerBackgroundColor,
     },
     pickerBackdropIOS: {
         // All ViewStyle properties are allowed
     },
     pickerTopIOS: {
         // All ViewStyle properties are allowed
-        backgroundColor: input.backgroundColor,
+        backgroundColor: pickerBackgroundColor,
     },
     value: {
         // All TextStyle properties are allowed
