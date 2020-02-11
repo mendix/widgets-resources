@@ -1,5 +1,5 @@
-import HomePage from "./pages/home.page";
-import GridPage from "./pages/grid.page";
+import HomePage from "../pages/home.page";
+import GridPage from "../pages/grid.page";
 
 describe("SignatureCanvas", () => {
     it("renders Canvas", () => {
