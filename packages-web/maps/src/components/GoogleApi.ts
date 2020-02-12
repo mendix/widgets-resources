@@ -13,6 +13,9 @@ const googleApiWrapper: Function = (script: string) => <P extends GoogleMapsProp
         readonly state: GoogleApiWrapperState = { scriptsLoaded: false, alertMessage: "" };
 
         render(): ReactNode {
+            if (!this.state.scriptsLoaded) {
+                return null;
+            }
             const props = { ...this.state, ...(this.props as GoogleMapsProps) };
 
             return createElement(wrappedComponent, { ...(props as any) });
