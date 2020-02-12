@@ -12,6 +12,6 @@ const customConfig = {
     }
 };
 
-const editorConfig = baseConfig.length === 3 ? baseConfig[2] : undefined;
+const editorConfig = baseConfig.length === 3 ? baseConfig[2] : {};
 
 module.exports = [merge(baseConfig[0], customConfig), merge(baseConfig[1], customConfig), editorConfig];

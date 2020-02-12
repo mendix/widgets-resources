@@ -6,7 +6,15 @@ import { translateZoom } from "./utils/Utils";
 declare function require(name: string): string;
 
 export const preview = (props: MapsPreviewProps): ReactNode => {
-    return <GoogleMap zoomLevel={translateZoom(props.zoom)} mapsToken="" inPreviewMode />;
+    return (
+        <GoogleMap
+            autoZoom
+            zoomLevel={translateZoom(props.zoom)}
+            mapsToken={props.apiKey}
+            defaultCenterLatitude={51.906855}
+            defaultCenterLongitude={4.488367}
+        />
+    );
 };
 
 export function getPreviewCss(): string {
