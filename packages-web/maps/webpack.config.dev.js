@@ -1,17 +1,19 @@
 const merge = require("webpack-merge");
 const baseConfig = require("../../configs/webpack.dev.js");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const customConfig = {
-    module: {
-        rules: [
-            {
-                test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-                loader: "url-loader"
-            }
-        ]
-    }
+    output: {
+        filename: "widgets/com/mendix/widget/custom/Maps/Maps.js"
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "./widgets/com/mendix/widget/custom/Maps/ui/Maps.css",
+            ignoreOrder: false
+        })
+    ]
 };
 
 const editorConfig = baseConfig.length === 3 ? baseConfig[2] : {};
 
-module.exports = [merge(baseConfig[0], customConfig), merge(baseConfig[1], customConfig), editorConfig];
+module.exports = [merge(baseConfig[0], customConfig), baseConfig[1], editorConfig];

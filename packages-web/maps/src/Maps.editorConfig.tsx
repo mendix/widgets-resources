@@ -45,7 +45,7 @@ export function check(values: MapsPreviewProps): Problem[] {
             property: "apiKey",
             severity: "error",
             message: "To avoid errors during map rendering it's necessary to include an Api Key",
-            url: "https://github.com/mendix/widgets-resources/blob/master/packages-web/maps/README.md"
+            url: "https://github.com/mendix/widgets-resources/blob/master/packages-web/maps/README.md#limitations"
         });
     }
     return errors;
