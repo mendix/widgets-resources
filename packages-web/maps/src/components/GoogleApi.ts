@@ -7,7 +7,7 @@ export interface GoogleApiWrapperState {
 }
 
 const googleApiWrapper: Function = (script: string) => <P extends GoogleMapsProps>(
-    WrappedElement: ComponentType<P>
+    wrappedComponent: ComponentType<P>
 ) => {
     class GoogleApiWrapperComponent extends Component<P, GoogleApiWrapperState> {
         readonly state: GoogleApiWrapperState = { scriptsLoaded: false, alertMessage: "" };
@@ -15,7 +15,7 @@ const googleApiWrapper: Function = (script: string) => <P extends GoogleMapsProp
         render(): ReactNode {
             const props = { ...this.state, ...(this.props as GoogleMapsProps) };
 
-            return createElement(WrappedElement, { ...(props as any) });
+            return createElement(wrappedComponent, { ...(props as any) });
         }
 
         componentDidMount(): void {
@@ -27,7 +27,7 @@ const googleApiWrapper: Function = (script: string) => <P extends GoogleMapsProp
             }
         }
 
-        private addScript = (googleScript: string) => {
+        private addScript: Function = (googleScript: string): void => {
             const googleApiID = "_com.mendix.widget.custom.Maps.Maps";
             if (!(window as any)[googleApiID]) {
                 (window as any)[googleApiID] = new Promise((resolve, reject) => {
