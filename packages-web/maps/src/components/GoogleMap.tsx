@@ -12,18 +12,19 @@ interface GoogleMapState {
     resized: boolean;
     fetchingData?: boolean;
     locations?: Marker[];
+    currentLocation?: Marker;
 }
 
 interface Marker {
     latitude: number;
     longitude: number;
     url: string;
-    onClick: () => void;
+    onClick?: () => void;
 }
 
-interface ModeledMarker {
+export interface ModeledMarker {
     location: string;
-    action: () => void;
+    action?: () => void;
 }
 
 export interface GoogleMapsProps {
@@ -51,7 +52,9 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
     readonly state: GoogleMapState = {
         center: this.getDefaultCenter(this.props),
         validationMessage: this.props.validationMessage,
-        resized: false
+        resized: false,
+        locations: [],
+        currentLocation: undefined
     };
 
     render(): ReactNode {
@@ -63,7 +66,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
                     </Alert>
                 )}
                 <div className="widget-google-maps-wrapper">
-                    <div className="widget-google-maps" ref={this.getRef} />
+                    <div className="widget-google-maps" style={{ minHeight: "500px" }} ref={this.getRef} />
                 </div>
                 <ReactResizeDetector
                     handleWidth
@@ -77,7 +80,9 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
     }
 
     componentDidMount(): void {
+        console.debug(this.props.scriptsLoaded);
         if (this.props.scriptsLoaded) {
+            this.getCurrentUserLocation();
             this.createUpdateMap(this.props);
         }
     }
@@ -90,25 +95,32 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
             this.createUpdateMap(nextProps);
             this.setState({ resized: false });
         }
-        if ((!this.props.locations && nextProps.locations) || this.props.locations !== nextProps.locations) {
-            this.analyzeLocations(nextProps.locations!);
-        }
     }
 
     componentDidUpdate(): void {
         if (this.map && !this.state.fetchingData && !this.state.resized) {
-            this.map.setCenter(this.state.center);
+            if (!this.state.currentLocation) {
+                this.map.setCenter(this.state.center);
+            } else {
+                const { latitude: lat, longitude: lng } = this.state.currentLocation;
+                this.map.setCenter({
+                    lat,
+                    lng
+                });
+            }
         }
     }
 
-    private analyzeLocations(locations: ModeledMarker[]): void {
-        const unknownLatitudeLongitudes = locations.filter(l => {
-            const latLong = l.location.split(",");
-            return !!(latLong.length === 2 && parseFloat(latLong[0]) && parseFloat(latLong[1]));
-        });
-        const latitudeLongitudes = locations.filter(
-            location => !unknownLatitudeLongitudes.find(uLocation => uLocation.location === location.location)
-        );
+    private analyzeLocations(): void {
+        const unknownLatitudeLongitudes =
+            this.props.locations?.filter(l => {
+                const latLong = l.location.split(",");
+                return !(latLong.length === 2 && parseFloat(latLong[0]) > 0 && parseFloat(latLong[1]) > 0);
+            }) || [];
+        const latitudeLongitudes =
+            this.props.locations?.filter(
+                location => !unknownLatitudeLongitudes.find(uLocation => uLocation.location === location.location)
+            ) || [];
 
         if (unknownLatitudeLongitudes.length > 0) {
             if (!this.props.mapsToken) {
@@ -132,7 +144,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
                 });
                 results.push(
                     ...r
-                        .filter((result: any) => result.results.length > 0)
+                        .filter((result: any) => result.results && result.results.length > 0)
                         .map((googleResult: any) => {
                             const decodedLocation = googleResult.results[0].geometry.location;
                             const newObject: Marker = {
@@ -146,21 +158,42 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
                             return newObject;
                         })
                 );
-                return results;
+                if (this.state.currentLocation) {
+                    results.push(this.state.currentLocation);
+                }
+                console.debug("Setting state to 1", results);
+                this.setState({ locations: results }, () => {
+                    this.addMarkers(this.state.locations);
+                });
             });
         } else {
-            this.setState({
-                locations: latitudeLongitudes.map(location => {
-                    const latLong = location.location.split(",");
-                    const newObject: Marker = {
-                        latitude: parseFloat(latLong[0]),
-                        longitude: parseFloat(latLong[1]),
-                        url: "",
-                        onClick: location.action
-                    };
-                    return newObject;
-                })
+            const locations = latitudeLongitudes.map(location => {
+                const latLong = location.location.split(",");
+                const newObject: Marker = {
+                    latitude: parseFloat(latLong[0]),
+                    longitude: parseFloat(latLong[1]),
+                    url: "",
+                    onClick: location.action
+                };
+                return newObject;
             });
+            if (this.state.currentLocation) {
+                console.debug("Setting current location");
+                locations.push(this.state.currentLocation);
+            } else {
+                console.debug("Current location not available");
+            }
+
+            console.debug("Setting state to 2", locations);
+
+            this.setState(
+                {
+                    locations
+                },
+                () => {
+                    this.addMarkers(this.state.locations);
+                }
+            );
         }
     }
 
@@ -240,7 +273,9 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
                 });
                 if (currentLocation.onClick) {
                     marker.addListener("click", () => {
-                        currentLocation.onClick();
+                        if (currentLocation.onClick) {
+                            currentLocation.onClick();
+                        }
                     });
                 } else {
                     marker.setClickable(false);
@@ -304,6 +339,33 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
         return `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(address)}&key=${
             this.props.mapsToken
         }`;
+    }
+
+    private getCurrentUserLocation(): void {
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    this.setState(
+                        {
+                            currentLocation: {
+                                latitude: position.coords.latitude,
+                                longitude: position.coords.longitude,
+                                url:
+                                    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAHdElNRQfkAgwQECuLT1eNAAACtUlEQVRIx43Vy29VVRQG8F8r2LT0Vm2kDTUmgh1Zqsx0hpSZeuNIozMeiYaADhggjHwkRonGKbb9A6TKyCghJpRHIYoDH0QeI0tbiiFO1LaJ1LbLwd3cnn3vEbvu5J5vfWuvtb69zjotyqziBUOe8pgH8YdJPxv3tTlrsE2OWRAlvwWj+hvpLdlTuyMO2gCWXTbrFvo84kn3gX984m13ynP3u5xynbPLw5lvo93OJ+9FvWXh29wWwhXP/2d7VVeFMG1rc/Za+Gfa76lQhzEhTOVVtKfiP2jQpMxaHE2NtK2C76Xs/x9eO+LzlK5+cfPClabiWwyqqhpsOrjDNeGOx2uPx4RokG69N03XJ2DKAesb5AxhBCoWhHOZu9vZpjE6ozvjTAjzOnlVCLuy7GfTZR2y3XZvmUlHFKvYI4SXGRWWsrF5QwgnddaRilNC2F9g9VgShvle+CGTbkqY1omdxowZQsVNYTJr4ifhO34XvizAg0I4hJ1WhLBiCIeF8ESB+ZVwu1UXbhXgzeASXk/X1+K1hLClwJzFA62JsmpRR6IBy/+lqFZ/oa8A3wBPYzjRV4ziGchU6MOfXCoVcUYFQ447bge6zAq/Non4LSPCko0FxwEhnFKpI12+EcK+7BqXhU95RQi7s0EaF8KMw561wxGzQjhtXYG1Vwgv3R3l81lx3c40jfJpD2WcC8Jcbf2NCqGaudfZ70Y9eNK+LDsvitocQr9F4aoOjTagqmqgCd/guvB3mhl8KISxNS+UE0J4fxVqc1EIR9e00j4SwoT7i3BvWh9flDSSF3+ibKnC1nTEtQY5c+mup/CBMndvaiRM2JONFj32ulD39hQ7KlqbdxxMvS37xYzfsMmjBtVeu0Ufe9fivbrcYsR86cd1zvDqxZVXcNc6PWfINpvrn/cfjTtpoZn6LyulNWLKSWq8AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIwLTAyLTEyVDE2OjE2OjQzKzAwOjAwPPYLaAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMC0wMi0xMlQxNjoxNjo0MyswMDowME2rs9QAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC"
+                            }
+                        },
+                        () => {
+                            this.analyzeLocations();
+                        }
+                    );
+                },
+                () => {
+                    console.debug("Current user location is not available");
+                    this.analyzeLocations();
+                }
+            );
+        }
     }
 }
 
