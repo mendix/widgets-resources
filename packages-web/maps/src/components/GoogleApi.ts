@@ -7,7 +7,7 @@ export interface GoogleApiWrapperState {
 }
 
 const googleApiWrapper: Function = (script: string) => <P extends GoogleMapsProps>(
-    wrappedComponent: ComponentType<P>
+    WrappedElement: ComponentType<P>
 ) => {
     class GoogleApiWrapperComponent extends Component<P, GoogleApiWrapperState> {
         readonly state: GoogleApiWrapperState = { scriptsLoaded: false, alertMessage: "" };
@@ -15,7 +15,7 @@ const googleApiWrapper: Function = (script: string) => <P extends GoogleMapsProp
         render(): ReactNode {
             const props = { ...this.state, ...(this.props as GoogleMapsProps) };
 
-            return createElement(wrappedComponent, { ...(props as any) });
+            return createElement(WrappedElement, { ...(props as any) });
         }
 
         componentDidMount(): void {

@@ -5,8 +5,15 @@ import GoogleMap from "./components/GoogleMap";
 import { translateZoom } from "./utils/Utils";
 
 const Maps = (props: MapsContainerProps): ReactNode => {
-    console.log(props);
-    return <GoogleMap zoomLevel={translateZoom(props.zoom)} />;
+    return (
+        <GoogleMap
+            autoZoom
+            zoomLevel={translateZoom(props.zoom)}
+            mapsToken={props.apiKey}
+            defaultCenterLatitude={51.906855}
+            defaultCenterLongitude={4.488367}
+        />
+    );
 };
 
 export default hot(Maps);
