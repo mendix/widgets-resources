@@ -23,6 +23,8 @@ coverage
 **/TestProjects/**/theme/styles/web/sass/
 **/TestProjects/**/theme/scripts/
 **/TestProjects/**/javasource/*/proxies/
+**/TestProjects/**/.classpath
+**/TestProjects/**/.project
 
 packages-hybrid/hybrid-mobile-actions/tests/TestProjects/*/theme/styles/native/
 packages-hybrid/hybrid-mobile-actions/tests/TestProjects/*/theme/settings-native.json
@@ -31,3 +33,10 @@ packages-hybrid/hybrid-mobile-actions/tests/TestProjects/*/theme/styles.js
 detox/ios/NativeComponents.app
 detox/*.log
 detox/results
+
+packages-web/actions/tests/TestProjects/*/javasource/
+packages-web/actions/tests/TestProjects/*/theme/styles/native
+packages-web/actions/tests/TestProjects/*/theme/settings-native.json
+packages-web/actions/tests/TestProjects/*/theme/styles.js
+packages-web/actions/tests/TestProjects/*/theme/styles/web/css/main.css.map
+
