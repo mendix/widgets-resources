@@ -1,7 +1,7 @@
-import { createElement, Fragment, useCallback, useRef, useState } from "react";
+import { createElement, Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { ActivityIndicator, LayoutChangeEvent, Text, View } from "react-native";
 import { CarouselProps } from "../typings/CarouselProps";
-import { CarouselStyle, defaultCarouselStyle } from "./ui/styles";
+import { CarouselStyle, defaultCarouselStyle, LayoutStyle } from "./ui/styles";
 import { default as NativeCarousel, Pagination } from "react-native-snap-carousel";
 import deepmerge from "deepmerge";
 import { ObjectItem, ValueStatus } from "mendix";
@@ -17,9 +17,22 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
 
     const styles = deepmerge.all<CarouselStyle>([defaultCarouselStyle, ...customStyles]);
 
-    const layoutSpecificStyle = props.layout === "fullWidth" ? styles.fullWidthLayout : styles.cardLayout;
+    const layoutSpecificStyle: LayoutStyle =
+        props.layout === "fullWidth" ? styles.fullWidthLayout! : styles.cardLayout!;
 
     const [activeSlide, setActiveSlide] = useState(0);
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (
+            props.contentSource?.status === ValueStatus.Available &&
+            props.contentSource.items?.length &&
+            props.contentSource.items.length > 0
+        ) {
+            setLoading(false);
+        }
+    }, [props.contentSource]);
 
     const onSnap = useCallback((index: number) => {
         setActiveSlide(index);
@@ -49,12 +62,6 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
         const paginationOverflow = contentLength > 5;
         const { pagination } = layoutSpecificStyle;
 
-        /* User styles as activeDot and dot style, but library expects different
-         |Lib -- User|
-         |inactiveDotStyle <-> dot|
-         |dotStyle <-> activeDot|
-        */
-
         if (paginationOverflow) {
             return (
                 <View style={pagination.container}>
@@ -71,12 +78,12 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
                 activeDotIndex={activeSlide}
                 containerStyle={pagination.container}
                 dotContainerStyle={pagination.dotContainerStyle}
-                dotColor={pagination.activeDotStyle?.color}
-                dotStyle={pagination.activeDotStyle}
-                inactiveDotStyle={pagination.dotStyle}
-                inactiveDotColor={pagination.dotStyle?.inactiveColor}
-                inactiveDotOpacity={pagination.dotStyle?.inactiveOpacity}
-                inactiveDotScale={pagination.dotStyle?.inactiveScale}
+                dotColor={pagination.dotStyle?.color}
+                dotStyle={pagination.dotStyle}
+                inactiveDotStyle={pagination.inactiveDotStyle}
+                inactiveDotColor={pagination.inactiveDotStyle?.color}
+                inactiveDotOpacity={pagination.inactiveDotStyle?.opacity}
+                inactiveDotScale={pagination.inactiveDotStyle?.scale}
                 carouselRef={carousel.current}
                 tappableDots
             />
@@ -118,10 +125,14 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
             if (typeof layoutWidth === "string" && layoutWidth.includes("%")) {
                 const percentage = +layoutWidth.replace("%", "");
                 itemWidth = (realWidth * percentage) / 100;
+            } else {
+                itemWidth = Number(layoutWidth);
             }
             if (typeof layoutHeight === "string" && layoutHeight.includes("%")) {
                 const percentage = +layoutHeight.replace("%", "");
                 itemHeight = (realHeight * percentage) / 100;
+            } else {
+                itemHeight = Number(layoutHeight);
             }
         }
 
@@ -132,27 +143,31 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
     };
 
     return (
-        <View style={layoutSpecificStyle.container} onLayout={onLayout}>
-            {props.contentSource?.status !== ValueStatus.Available || !props.contentSource.items ? (
+        <View style={styles.container} onLayout={onLayout}>
+            {loading ? (
                 <ActivityIndicator color={layoutSpecificStyle.indicator!.color} size="large" />
             ) : (
-                <Fragment>
-                    <NativeCarousel
-                        loop={props.loop}
-                        activeSlideAlignment={props.activeSlideAlignment}
-                        layout="default"
-                        firstItem={0}
-                        data={props.contentSource.items}
-                        renderItem={renderItem}
-                        sliderWidth={sliderDimensions.slider.width > 0 ? sliderDimensions.slider.width : 1}
-                        itemWidth={sliderDimensions.slide.width > 0 ? sliderDimensions.slide.width : 1}
-                        inactiveSlideScale={layoutSpecificStyle.slideItem?.inactiveSlideScale}
-                        inactiveSlideOpacity={layoutSpecificStyle.slideItem?.inactiveSlideOpacity}
-                        onSnapToItem={onSnap}
-                        ref={carousel}
-                    />
-                    {renderPagination()}
-                </Fragment>
+                sliderDimensions.slide.width > 0 &&
+                sliderDimensions.slider.width > 0 && (
+                    <Fragment>
+                        <NativeCarousel
+                            loop={props.loop}
+                            activeSlideAlignment={props.activeSlideAlignment}
+                            layout="default"
+                            firstItem={0}
+                            initialNumToRender={props.contentSource.items?.length}
+                            data={props.contentSource.items ?? []}
+                            renderItem={renderItem}
+                            sliderWidth={sliderDimensions.slider.width}
+                            itemWidth={sliderDimensions.slide.width}
+                            inactiveSlideScale={layoutSpecificStyle.inactiveSlideItem?.scale}
+                            inactiveSlideOpacity={layoutSpecificStyle.inactiveSlideItem?.opacity}
+                            onSnapToItem={onSnap}
+                            ref={carousel}
+                        />
+                        {renderPagination()}
+                    </Fragment>
+                )
             )}
         </View>
     );

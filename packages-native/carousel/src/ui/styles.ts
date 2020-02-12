@@ -1,28 +1,27 @@
 import { TextStyle, ViewStyle } from "react-native";
 
-export interface DotStyle extends ViewStyle {
-    inactiveOpacity?: number;
-    inactiveScale?: number;
-    inactiveColor?: string;
+export interface InactiveDotStyle extends DotStyle {
+    opacity?: number;
+    scale?: number;
 }
 
-export interface ActiveDotStyle extends ViewStyle {
+export interface DotStyle extends ViewStyle {
     color?: string;
 }
 
-export interface SlideStyle extends ViewStyle {
-    inactiveSlideOpacity?: number;
-    inactiveSlideScale?: number;
+export interface InactiveSlideStyle {
+    opacity?: number;
+    scale?: number;
 }
 
-interface LayoutStyle {
-    container?: ViewStyle;
-    slideItem?: SlideStyle;
+export interface LayoutStyle {
+    slideItem?: ViewStyle;
+    inactiveSlideItem?: InactiveSlideStyle;
     pagination: {
         container?: ViewStyle;
         text?: TextStyle;
+        inactiveDotStyle?: InactiveDotStyle;
         dotStyle?: DotStyle;
-        activeDotStyle?: ActiveDotStyle;
         dotContainerStyle?: ViewStyle;
     };
     indicator?: {
@@ -31,23 +30,21 @@ interface LayoutStyle {
 }
 
 export interface CarouselStyle {
-    cardLayout: LayoutStyle;
-    fullWidthLayout: LayoutStyle;
+    container?: ViewStyle;
+    cardLayout?: LayoutStyle;
+    fullWidthLayout?: LayoutStyle;
 }
 
 const sharedStyles: LayoutStyle = {
-    container: {
-        width: "100%"
-    },
     pagination: {
         container: {
             paddingHorizontal: 0,
             paddingVertical: 0
         },
-        activeDotStyle: {
+        dotStyle: {
             marginHorizontal: 0
         },
-        dotStyle: {
+        inactiveDotStyle: {
             marginHorizontal: 0
         },
         dotContainerStyle: {
@@ -60,18 +57,25 @@ const sharedStyles: LayoutStyle = {
 };
 
 export const defaultCarouselStyle: CarouselStyle = {
+    container: {
+        width: "100%"
+    },
     cardLayout: {
         ...sharedStyles,
         slideItem: {
-            width: "50%"
+            width: "50%",
+            height: "100%"
         }
     },
     fullWidthLayout: {
         ...sharedStyles,
         slideItem: {
             width: "100%",
-            inactiveSlideOpacity: 1,
-            inactiveSlideScale: 1
+            height: "100%"
+        },
+        inactiveSlideItem: {
+            opacity: 1,
+            scale: 1
         }
     }
 };
