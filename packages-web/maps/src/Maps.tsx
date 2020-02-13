@@ -8,7 +8,9 @@ import { ValueStatus } from "mendix";
 const Maps = (props: MapsContainerProps): ReactNode => {
     const locations: ModeledMarker[] = props.markers.map(location => ({
         location: location.location.value!,
-        action: location.onClick?.execute
+        action: location.onClick?.execute,
+        description: location.description?.value,
+        customMarker: location.customMarker?.value?.uri
     }));
     return (
         <GoogleMap
