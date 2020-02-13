@@ -63,7 +63,7 @@ export const defaultCarouselStyle: CarouselStyle = {
     cardLayout: {
         ...sharedStyles,
         slideItem: {
-            width: "50%",
+            width: "70%",
             height: "100%"
         }
     },

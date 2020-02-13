@@ -38,20 +38,13 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
         setActiveSlide(index);
     }, []);
 
-    const renderItem = useCallback(
-        ({ item, index }: { item: ObjectItem; index: number }) => {
-            if (layoutSpecificStyle.slideItem) {
-                delete layoutSpecificStyle.slideItem.width;
-                delete layoutSpecificStyle.slideItem.height;
-            }
-            return (
-                <View key={index} style={{ ...layoutSpecificStyle.slideItem }}>
-                    {props.content(item)}
-                </View>
-            );
-        },
-        [props.content]
-    );
+    const renderItem = ({ item, index }: { item: ObjectItem; index: number }) => {
+        return (
+            <View key={index} style={{ ...layoutSpecificStyle.slideItem }}>
+                {props.content(item)}
+            </View>
+        );
+    };
 
     const renderPagination = useCallback(() => {
         if (!props.showPagination) {
@@ -90,54 +83,41 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
         );
     }, [activeSlide, carousel.current, props.contentSource, props.showPagination]);
 
-    const getCalculatedWidth = (sizeToCalculate: number): number => {
-        if (layoutSpecificStyle.slideItem) {
-            const { padding, paddingHorizontal, paddingLeft, paddingRight } = layoutSpecificStyle.slideItem;
-            if (padding) {
-                return sizeToCalculate - Number(padding) * 2;
-            }
-            if (paddingHorizontal) {
-                return sizeToCalculate - Number(paddingHorizontal) * 2;
-            }
-            if (paddingLeft) {
-                return sizeToCalculate - Number(paddingLeft);
-            }
-            if (paddingRight) {
-                return sizeToCalculate - Number(paddingRight);
-            }
-        }
-
-        return sizeToCalculate;
-    };
-
     const onLayout = (event: LayoutChangeEvent) => {
-        const { width, height } = event.nativeEvent.layout;
-
-        const realWidth = getCalculatedWidth(width as number);
-        const realHeight = height as number;
+        let viewHeight = event.nativeEvent.layout.height;
+        const viewWidth = event.nativeEvent.layout.width;
 
         let itemWidth = 0;
         let itemHeight = 0;
 
         if (layoutSpecificStyle.slideItem) {
-            const { width: layoutWidth, height: layoutHeight } = layoutSpecificStyle.slideItem;
-            // Allow users to set width and height as percentage since lib only accepts numbers
-            if (typeof layoutWidth === "string" && layoutWidth.includes("%")) {
-                const percentage = +layoutWidth.replace("%", "");
-                itemWidth = (realWidth * percentage) / 100;
+            const { width: slideItemWidth, height: slideItemHeight } = layoutSpecificStyle.slideItem;
+            // We calculate the actual number value in order to
+            // allow users to set width and height as percentage since lib only accepts numbers
+
+            if (typeof slideItemWidth === "string" && slideItemWidth.includes("%")) {
+                const percentage = +slideItemWidth.replace("%", "");
+                itemWidth = (viewWidth * percentage) / 100;
             } else {
-                itemWidth = Number(layoutWidth);
+                itemWidth = Number(slideItemWidth);
             }
-            if (typeof layoutHeight === "string" && layoutHeight.includes("%")) {
-                const percentage = +layoutHeight.replace("%", "");
-                itemHeight = (realHeight * percentage) / 100;
+            if (typeof slideItemHeight === "string" && slideItemHeight.includes("%")) {
+                const percentage = +slideItemHeight.replace("%", "");
+                itemHeight = (viewWidth * percentage) / 100;
             } else {
-                itemHeight = Number(layoutHeight);
+                itemHeight = Number(slideItemHeight);
+            }
+
+            // We don't want to pass the already processed height to the item container
+            delete layoutSpecificStyle.slideItem.height;
+
+            if (styles.container?.height === undefined && itemHeight > 0) {
+                viewHeight = itemHeight;
             }
         }
 
         setSliderDimensions({
-            slider: { width: realWidth, height: realHeight },
+            slider: { width: viewWidth, height: viewHeight },
             slide: { width: itemWidth, height: itemHeight }
         });
     };
@@ -147,11 +127,13 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
             {loading ? (
                 <ActivityIndicator color={layoutSpecificStyle.indicator!.color} size="large" />
             ) : (
+                /* library ignores width/height if its vertical/horizontal */
                 sliderDimensions.slide.width > 0 &&
                 sliderDimensions.slider.width > 0 && (
                     <Fragment>
                         <NativeCarousel
                             loop={props.loop}
+                            useScrollView
                             activeSlideAlignment={props.activeSlideAlignment}
                             layout="default"
                             firstItem={0}
@@ -159,7 +141,9 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
                             data={props.contentSource.items ?? []}
                             renderItem={renderItem}
                             sliderWidth={sliderDimensions.slider.width}
+                            sliderHeight={sliderDimensions.slider.height}
                             itemWidth={sliderDimensions.slide.width}
+                            itemHeight={sliderDimensions.slide.height}
                             inactiveSlideScale={layoutSpecificStyle.inactiveSlideItem?.scale}
                             inactiveSlideOpacity={layoutSpecificStyle.inactiveSlideItem?.opacity}
                             onSnapToItem={onSnap}
