@@ -23,6 +23,10 @@
                     <description />
                     <properties>
                         <propertyGroup caption="Locations">
+                            <property key="description" type="textTemplate" required="false">
+                                <caption>Description</caption>
+                                <description />
+                            </property>
                             <property key="location" type="textTemplate">
                                 <caption>Location</caption>
                                 <description>Full address or latitude,longitude</description>
@@ -31,20 +35,20 @@
                                 <caption>On click</caption>
                                 <description>Action on click</description>
                             </property>
+                            <property key="shape" type="enumeration" defaultValue="default">
+                                <caption>Shape</caption>
+                                <description />
+                                <enumerationValues>
+                                    <enumerationValue key="default">Default</enumerationValue>
+                                    <enumerationValue key="image">Image</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="customMarker" type="image" required="false">
+                                <caption>Custom marker image</caption>
+                                <description />
+                            </property>
                         </propertyGroup>
                     </properties>
-                </property>
-                <property key="shape" type="enumeration" defaultValue="default" required="true">
-                    <caption>Shape</caption>
-                    <description />
-                    <enumerationValues>
-                        <enumerationValue key="default">Default</enumerationValue>
-                        <enumerationValue key="image">Image</enumerationValue>
-                    </enumerationValues>
-                </property>
-                <property key="customMarker" type="image" required="false">
-                    <caption>Custom marker image</caption>
-                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Configurations">

@@ -16,30 +16,37 @@ interface CommonProps {
 
 export type TypeEnum = "basic" | "advanced";
 
+export type ShapeEnum = "default" | "image";
+
 export interface MarkersType {
+    description?: DynamicValue<string>;
     location: DynamicValue<string>;
     onClick?: ActionValue;
+    shape: ShapeEnum;
+    customMarker?: DynamicValue<WebImage>;
 }
-
-export type ShapeEnum = "default" | "image";
 
 export type ZoomEnum = "world" | "continent" | "city" | "street" | "buildings";
 
 export interface MarkersPreviewType {
+    description?: string;
     location: string;
     onClick: ActionPreview;
+    shape: ShapeEnum;
+    customMarker?: WebImage;
 }
 
 export interface MarkersVisibilityType {
+    description: boolean;
     location: boolean;
     onClick: boolean;
+    shape: boolean;
+    customMarker: boolean;
 }
 
 export interface MapsContainerProps extends CommonProps {
     type: TypeEnum;
     markers: MarkersType[];
-    shape: ShapeEnum;
-    customMarker?: DynamicValue<WebImage>;
     zoom: ZoomEnum;
     apiKey?: DynamicValue<string>;
 }
@@ -50,8 +57,6 @@ export interface MapsPreviewProps {
     styleObject: CSSProperties;
     type: TypeEnum;
     markers: MarkersPreviewType[];
-    shape: ShapeEnum;
-    customMarker?: WebImage;
     zoom: ZoomEnum;
     apiKey?: string;
 }
@@ -59,8 +64,6 @@ export interface MapsPreviewProps {
 export interface VisibilityMap {
     type: boolean;
     markers: MarkersVisibilityType[] | boolean;
-    shape: boolean;
-    customMarker: boolean;
     zoom: boolean;
     apiKey: boolean;
 }
