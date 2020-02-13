@@ -1,4 +1,4 @@
-import { MapsPreviewProps } from "../typings/MapsProps";
+import { MapsPreviewProps, MarkersType } from "../typings/MapsProps";
 import { Problem, Properties } from "../typings/PageEditor";
 import { changeProperty, hideProperty } from "./utils/PageEditorUtils";
 
@@ -13,8 +13,8 @@ export function getProperties(
         if (target === "web") {
             return defaultProperties;
         }
-        hideProperty<MapsPreviewProps>("shape", defaultProperties);
-        hideProperty<MapsPreviewProps>("customMarker", defaultProperties);
+        hideProperty<MarkersType>("shape", defaultProperties);
+        hideProperty<MarkersType>("customMarker", defaultProperties);
         changeProperty<MapsPreviewProps>(
             "type",
             "description",
@@ -23,23 +23,31 @@ export function getProperties(
         );
     } else {
         changeProperty<MapsPreviewProps>("type", "description", "Now the map is configured for Tom", defaultProperties);
-        if (values.shape === "default") {
-            hideProperty<MapsPreviewProps>("customMarker", defaultProperties);
-        }
+        values.markers.forEach((f, index) => {
+            if (f.shape === "default") {
+                hideProperty<MarkersType>(
+                    "customMarker",
+                    defaultProperties?.[0].propertyGroups?.[1].properties?.[0].properties?.[index]
+                );
+            }
+        });
     }
     return defaultProperties;
 }
 
 export function check(values: MapsPreviewProps): Problem[] {
     const errors: Problem[] = [];
-    if (values.type === "advanced" && values.shape === "image" && !values.customMarker) {
-        errors.push({
-            property: "customMarker",
-            severity: "error",
-            message: "Custom marker image is required when shape is 'image'",
-            url: "https://mendix.com"
+    values.markers
+        .filter(marker => values.type === "advanced" && marker.shape === "image" && !marker.customMarker)
+        .forEach(marker => {
+            errors.push({
+                property: "customMarker",
+                severity: "error",
+                message: `Custom marker image is required when shape is 'image' for location "${marker.description ||
+                    marker.location}"`,
+                url: "https://mendix.com"
+            });
         });
-    }
     if (!values.apiKey) {
         errors.push({
             property: "apiKey",

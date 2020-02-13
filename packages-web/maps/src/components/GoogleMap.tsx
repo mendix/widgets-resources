@@ -20,10 +20,13 @@ interface Marker {
     longitude: number;
     url: string;
     onClick?: () => void;
+    description?: string;
 }
 
 export interface ModeledMarker {
     location: string;
+    description?: string;
+    customMarker?: string;
     action?: () => void;
 }
 
@@ -130,50 +133,56 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
             this.setState({ fetchingData: true });
             Promise.all(
                 unknownLatitudeLongitudes.map(location => fetch(this.obtainGeodecodeApiAddress(location.location)))
-            ).then((r: any) => {
-                // const results = [...r, ...latitudeLongitudes];
-                const results = latitudeLongitudes.map(location => {
-                    const latLong = location.location.split(",");
-                    const newObject: Marker = {
-                        latitude: parseFloat(latLong[0]),
-                        longitude: parseFloat(latLong[1]),
-                        url: "",
-                        onClick: location.action
-                    };
-                    return newObject;
+            )
+                .then(responses => Promise.all(responses.map(res => res.json())))
+                .then((r: any) => {
+                    // const results = [...r, ...latitudeLongitudes];
+                    const results = latitudeLongitudes.map(location => {
+                        const latLong = location.location.split(",");
+                        const newObject: Marker = {
+                            latitude: parseFloat(latLong[0]),
+                            longitude: parseFloat(latLong[1]),
+                            url: location.customMarker || "",
+                            onClick: location.action,
+                            description: location.description
+                        };
+                        return newObject;
+                    });
+                    results.push(
+                        ...r
+                            .filter((result: any) => result.results && result.results.length > 0)
+                            .map((googleResult: any) => {
+                                console.debug(googleResult);
+                                const decodedLocation = googleResult.results[0].geometry.location;
+                                const newObject: Marker = {
+                                    latitude: decodedLocation.lat,
+                                    longitude: decodedLocation.lng,
+                                    url: "", // TODO: Match the location
+                                    description: "Test", // TODO: Match the location
+                                    onClick: () => {
+                                        console.log("Pressed");
+                                    }
+                                };
+                                return newObject;
+                            })
+                    );
+                    if (this.state.currentLocation) {
+                        results.push(this.state.currentLocation);
+                    }
+                    console.debug("Setting state to 1", results);
+                    this.setState({ locations: results }, () => {
+                        this.addMarkers(this.state.locations);
+                    });
                 });
-                results.push(
-                    ...r
-                        .filter((result: any) => result.results && result.results.length > 0)
-                        .map((googleResult: any) => {
-                            const decodedLocation = googleResult.results[0].geometry.location;
-                            const newObject: Marker = {
-                                latitude: decodedLocation.lat,
-                                longitude: decodedLocation.lng,
-                                url: "",
-                                onClick: () => {
-                                    console.log("Pressed");
-                                }
-                            };
-                            return newObject;
-                        })
-                );
-                if (this.state.currentLocation) {
-                    results.push(this.state.currentLocation);
-                }
-                console.debug("Setting state to 1", results);
-                this.setState({ locations: results }, () => {
-                    this.addMarkers(this.state.locations);
-                });
-            });
         } else {
             const locations = latitudeLongitudes.map(location => {
                 const latLong = location.location.split(",");
                 const newObject: Marker = {
                     latitude: parseFloat(latLong[0]),
                     longitude: parseFloat(latLong[1]),
-                    url: "",
-                    onClick: location.action
+                    url: location.customMarker || "",
+                    onClick: location.action,
+                    description: location.description
                 };
                 return newObject;
             });
@@ -231,7 +240,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
             zoom: props.zoomLevel,
             zoomControl: true,
             scrollwheel: true,
-            draggable: false,
+            draggable: true,
             streetViewControl: false,
             mapTypeControl: true,
             fullscreenControl: true,
@@ -269,13 +278,26 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
                         lat: currentLocation.latitude,
                         lng: currentLocation.longitude
                     },
-                    icon: currentLocation.url
+                    icon: currentLocation.url,
+                    title: currentLocation.description
                 });
+                const infoContent = document.createElement("span");
+                infoContent.innerHTML = currentLocation.description || "";
+                infoContent.style.cursor = "pointer";
                 if (currentLocation.onClick) {
-                    marker.addListener("click", () => {
+                    infoContent.onclick = () => {
                         if (currentLocation.onClick) {
                             currentLocation.onClick();
                         }
+                    };
+                }
+                const infowindow = new google.maps.InfoWindow({
+                    content: infoContent
+                });
+
+                if (currentLocation.description) {
+                    marker.addListener("click", () => {
+                        infowindow.open(this.map, marker);
                     });
                 } else {
                     marker.setClickable(false);
