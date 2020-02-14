@@ -1,4 +1,4 @@
-import { createElement, Fragment, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, Fragment, useCallback, useEffect, useState } from "react";
 import { ActivityIndicator, LayoutChangeEvent, Text, View } from "react-native";
 import { CarouselProps } from "../typings/CarouselProps";
 import { CarouselStyle, defaultCarouselStyle, LayoutStyle } from "./ui/styles";
@@ -7,7 +7,6 @@ import deepmerge from "deepmerge";
 import { ObjectItem, ValueStatus } from "mendix";
 
 export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
-    const carousel = useRef<any>(null);
     const [sliderDimensions, setSliderDimensions] = useState({
         slider: { width: 0, height: 0 },
         slide: { width: 0, height: 0 }
@@ -19,6 +18,8 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
 
     const layoutSpecificStyle: LayoutStyle =
         props.layout === "fullWidth" ? styles.fullWidthLayout! : styles.cardLayout!;
+
+    const [carouselRef, setCarouselRef] = useState(undefined);
 
     const [activeSlide, setActiveSlide] = useState(0);
 
@@ -38,16 +39,22 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
         setActiveSlide(index);
     }, []);
 
-    const renderItem = ({ item, index }: { item: ObjectItem; index: number }) => {
+    const renderItem = useCallback(({ item, index }: { item: ObjectItem; index: number }) => {
+        const viewStyle = layoutSpecificStyle.slideItem;
+        if (viewStyle) {
+            // We don't want to pass the already processed height to the item container
+            delete viewStyle.width;
+        }
+
         return (
-            <View key={index} style={{ ...layoutSpecificStyle.slideItem }}>
+            <View key={index} style={{ ...viewStyle }}>
                 {props.content(item)}
             </View>
         );
-    };
+    }, []);
 
     const renderPagination = useCallback(() => {
-        if (!props.showPagination) {
+        if (!props.showPagination || carouselRef == undefined) {
             return null;
         }
 
@@ -55,9 +62,11 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
         const paginationOverflow = contentLength > 5;
         const { pagination } = layoutSpecificStyle;
 
+        const a11yProps = { accessibilityLabel: `${props.name}$pagination` };
+
         if (paginationOverflow) {
             return (
-                <View style={pagination.container}>
+                <View style={pagination.container} {...a11yProps}>
                     <Text style={pagination.text}>
                         {activeSlide + 1}/{contentLength}
                     </Text>
@@ -77,11 +86,12 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
                 inactiveDotColor={pagination.inactiveDotStyle?.color}
                 inactiveDotOpacity={pagination.inactiveDotStyle?.opacity}
                 inactiveDotScale={pagination.inactiveDotStyle?.scale}
-                carouselRef={carousel.current}
+                carouselRef={carouselRef}
                 tappableDots
+                {...a11yProps}
             />
         );
-    }, [activeSlide, carousel.current, props.contentSource, props.showPagination]);
+    }, [activeSlide, carouselRef, props.contentSource, props.showPagination]);
 
     const onLayout = (event: LayoutChangeEvent) => {
         let viewHeight = event.nativeEvent.layout.height;
@@ -108,9 +118,6 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
                 itemHeight = Number(slideItemHeight);
             }
 
-            // We don't want to pass the already processed height to the item container
-            delete layoutSpecificStyle.slideItem.height;
-
             if (styles.container?.height === undefined && itemHeight > 0) {
                 viewHeight = itemHeight;
             }
@@ -132,6 +139,7 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
                 sliderDimensions.slider.width > 0 && (
                     <Fragment>
                         <NativeCarousel
+                            testID={props.name}
                             loop={props.loop}
                             useScrollView
                             activeSlideAlignment={props.activeSlideAlignment}
@@ -147,7 +155,7 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
                             inactiveSlideScale={layoutSpecificStyle.inactiveSlideItem?.scale}
                             inactiveSlideOpacity={layoutSpecificStyle.inactiveSlideItem?.opacity}
                             onSnapToItem={onSnap}
-                            ref={carousel}
+                            ref={(r: any) => setCarouselRef(r)}
                         />
                         {renderPagination()}
                     </Fragment>
