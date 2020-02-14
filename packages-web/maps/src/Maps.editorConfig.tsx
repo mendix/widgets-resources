@@ -21,16 +21,32 @@ export function getProperties(
             "Now the map is configured for Cate",
             defaultProperties
         );
+    }
+    if (values.dataSourceType === "dynamic") {
+        hideProperty<MapsPreviewProps>("markers", defaultProperties);
+        changeProperty<MapsPreviewProps>(
+            "dataSourceType",
+            "description",
+            "Dynamic properties are not available at the moment.",
+            defaultProperties
+        );
     } else {
-        changeProperty<MapsPreviewProps>("type", "description", "Now the map is configured for Tom", defaultProperties);
-        values.markers.forEach((f, index) => {
-            if (f.shape === "default") {
-                hideProperty<MarkersType>(
-                    "customMarker",
-                    defaultProperties?.[0].propertyGroups?.[1].properties?.[0].properties?.[index]
-                );
-            }
-        });
+        if (values.type === "advanced") {
+            changeProperty<MapsPreviewProps>(
+                "type",
+                "description",
+                "Now the map is configured for Tom",
+                defaultProperties
+            );
+            values.markers.forEach((f, index) => {
+                if (f.shape === "default") {
+                    hideProperty<MarkersType>(
+                        "customMarker",
+                        defaultProperties?.[0].propertyGroups?.[1].properties?.[1].properties?.[index] // First config, second group, second property
+                    );
+                }
+            });
+        }
     }
     return defaultProperties;
 }
