@@ -9,15 +9,23 @@
         <propertyGroup caption="General">
             <propertyGroup caption="General">
                 <property key="type" type="enumeration" defaultValue="basic">
-                    <caption>Type</caption>
+                    <caption>Advanced</caption>
                     <description />
                     <enumerationValues>
-                        <enumerationValue key="basic">Basic</enumerationValue>
-                        <enumerationValue key="advanced">Advanced</enumerationValue>
+                        <enumerationValue key="advanced">On</enumerationValue>
+                        <enumerationValue key="basic">Off</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Markers">
+            <propertyGroup caption="Locations">
+                <property key="dataSourceType" type="enumeration" defaultValue="static">
+                    <caption>Data source</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="static">Static</enumerationValue>
+                        <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                    </enumerationValues>
+                </property>
                 <property key="markers" type="object" isList="true" required="false">
                     <caption>Markers</caption>
                     <description />
