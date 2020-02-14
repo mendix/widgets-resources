@@ -59,6 +59,9 @@ export function Pages() {
         },
         async openNanoflowCommons() {
             await clickOnButton("bottomBarItem$Commons");
+        },
+        async openCarousel() {
+            await clickOnButton("btnCarousel");
         }
     };
 }
