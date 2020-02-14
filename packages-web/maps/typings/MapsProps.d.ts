@@ -14,7 +14,9 @@ interface CommonProps {
     tabIndex: number;
 }
 
-export type TypeEnum = "basic" | "advanced";
+export type TypeEnum = "advanced" | "basic";
+
+export type DataSourceTypeEnum = "static" | "dynamic";
 
 export type ShapeEnum = "default" | "image";
 
@@ -46,6 +48,7 @@ export interface MarkersVisibilityType {
 
 export interface MapsContainerProps extends CommonProps {
     type: TypeEnum;
+    dataSourceType: DataSourceTypeEnum;
     markers: MarkersType[];
     zoom: ZoomEnum;
     apiKey?: DynamicValue<string>;
@@ -56,6 +59,7 @@ export interface MapsPreviewProps {
     style: string;
     styleObject: CSSProperties;
     type: TypeEnum;
+    dataSourceType: DataSourceTypeEnum;
     markers: MarkersPreviewType[];
     zoom: ZoomEnum;
     apiKey?: string;
@@ -63,6 +67,7 @@ export interface MapsPreviewProps {
 
 export interface VisibilityMap {
     type: boolean;
+    dataSourceType: boolean;
     markers: MarkersVisibilityType[] | boolean;
     zoom: boolean;
     apiKey: boolean;
