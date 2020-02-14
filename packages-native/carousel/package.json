@@ -14,8 +14,8 @@
     "packagePath": "com.mendix.widget.native",
     "scripts": {
         "start": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:ts:native -- --subprojectPath packages-native/carousel",
-        "build": "..\"/../node_modules/.bin/pluggable-widgets-tools\" build:ts:native -- --subprojectPath packages-native/carousel",
-        "release": "..\"/../node_modules/.bin/pluggable-widgets-tools\" release:ts:native -- --subprojectPath packages-native/carousel",
+        "build": "..\"/../node_modules/.bin/pluggable-widgets-tools\" build:ts:native --subprojectPath packages-native/carousel",
+        "release": "..\"/../node_modules/.bin/pluggable-widgets-tools\" release:ts:native --subprojectPath packages-native/carousel",
         "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.native.config.js",
         "version": "npm run release",
