@@ -2,10 +2,7 @@
 
 ## 1. Introduction
 
-URLs are used to open a web site, but they can also be used to open an installed app. With this tutorial you will learn
-how to link `app://myapp` URL to start your application on an Android or iOS device, after is was installed. It is also
-possible to pass additional data via path, query parameters and hashes, for example
-`app://myapp/task/123?action=close#info`
+URLs are used to open a web site, but they can also be used to open an installed app. With this tutorial you will learn how to link `app://myapp` URL to start your application on an Android or iOS device, after is was installed. It is also possible to pass additional data via path, query parameters and hashes, for example `app://myapp/task/123?action=close#info`
 
 A URL is constructed by various parts, as pictured below. [TODO align with implementation names]
 
@@ -17,17 +14,11 @@ https://john.doe@www.example.com:123/forum/questions/?tag=networking&order=newes
 scheme          authority                  path                 query           hash
 ```
 
-If you want to register the handling of normal weblink starting `http(s)://` is possible too, but requires some more
-work for iOS, and is not covered in this tutorial. In that case you could check
-https://www.raywenderlich.com/6080-universal-links-make-the-connection
+If you want to register the handling of normal weblink starting `http(s)://` is possible too, but requires some more work for iOS, and is not covered in this tutorial. In that case you could check https://www.raywenderlich.com/6080-universal-links-make-the-connection
 
-During installation of the application it registers the `schema` and `host`, so the operating system will know what
-application should be opened, for which URL. The application could either be closed or running in the background. Both
-cases will be handled in the same way, but will look a bit different when executed, as the app needs to startup first.
+During installation of the application it registers the `schema` and `host`, so the operating system will know what application should be opened, for which URL. The application could either be closed or running in the background. Both cases will be handled in the same way, but will look a bit different when executed, as the app needs to startup first.
 
-**NOTE** Please note that deep linking will only work on a custom build Native app. The Make it native app has as a
-registration schema `makeitnative://`. And does not required step chapter 3, unless you want change this you can build
-your own [custom developer app](https://docs.mendix.com/howto/mobile/how-to-devapps).
+**NOTE** Please note that deep linking will only work on a custom build Native app. The Make it native app has as a registration schema `makeitnative://`. And does not required step chapter 3, unless you want change this you can build your own [custom developer app](https://docs.mendix.com/howto/mobile/how-to-devapps).
 
 ## 2. Prerequisites
 
@@ -44,9 +35,7 @@ If you don’t have a native template for your app yet, you can create one.
 1. Create a shell app with Native Builder.
 1. Checkout your native builder template form GitHub
 
-For development and this tutorial it is recommend to run the app from source against the local running Mendix Studio
-Pro. This will save you a lot of time re-building and re-deploying the app. Please follow the steps from
-https://docs.mendix.com/refguide/native-builder#4-advanced-usage
+For development and this tutorial it is recommend to run the app from source against the local running Mendix Studio Pro. This will save you a lot of time re-building and re-deploying the app. Please follow the steps from https://docs.mendix.com/refguide/native-builder#4-advanced-usage
 
 ### 3.1 For Android apps
 
@@ -68,9 +57,9 @@ The manifest registers the schema and host that will be associated with your And
 
 The **plist** registers the schema and host, so that they will be associated with your app By iOS
 
-1. Open the file `ios/NativeTemplate/Info.plist` file, and add `URL types` therein add `URL Schemes` and
-   `URL identifier`, as shown in the picture below. ![ios info plist](attachments/ios-info-plist.png) When viewing the
-   **Info.plist** as a text file you would see that a section is added:
+1.  Open the file `ios/NativeTemplate/Info.plist` file, and add `URL types` therein add `URL Schemes` and `URL identifier`, as shown in the picture below.
+    ![ios info plist](attachments/ios-info-plist.png)
+    When viewing the **Info.plist** as a text file you would see that a section is added:
 
     ```xml
     <key>CFBundleURLTypes</key>
@@ -86,8 +75,7 @@ The **plist** registers the schema and host, so that they will be associated wit
     </array>
     ```
 
-1. Open the `ios/AppDelegate.swift` file and add inside the `class AppDelegate` a new method: TODO: check if still is
-   needed
+1.  Open the `ios/AppDelegate.swift` file and add inside the `class AppDelegate` a new method: TODO: check if still is needed.
     ```swift
     public func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         return RCTLinkingManager.application(app, open: url, options: options)
@@ -104,26 +92,19 @@ When running locally from source you have launch your app again, or us the Nativ
 
 ## 4 Use deep linking in your app
 
-When your app is ready to use links we can setup the handling. When no handling is set the app will just be opened, but
-nothing is done with additional data available in URL.
+When your app is ready to use links we can setup the handling. When no handling is set the app will just be opened, but nothing is done with additional data available in URL.
 
 ### 4.1 JavaScript Actions
 
-We now have an app with a registered URL, that can be handled. Now we have to tell it how to connect you Mendix
-application with an incoming URL. We can make use of the provide JavaScript Action register and handle the deeplink. The
-actions are part of thee [Native Mobile Resource](https://appstore.home.mendix.com/link/app/109513/) or on of the
-up-to-date Starter App.
+We now have an app with a registered URL, that can be handled. Now we have to tell it how to connect you Mendix application with an incoming URL. We can make use of the provide JavaScript Action register and handle the deeplink. The actions are part of thee [Native Mobile Resource](https://appstore.home.mendix.com/link/app/109513/) or on of the up-to-date Starter App.
 
 #### 4.1.1 Register Deep Link
 
-This JavaScript actions registers a callback nanoflow which is called very time the app is opened with an URL. The
-Callback URL Handers nanoflow will receive the URL (type string) as input parameter. Please note that the name of the
-input parameter is case sensitive and should not be changed.
+This JavaScript actions registers a callback nanoflow which is called very time the app is opened with an URL. The Callback URL Handers nanoflow will receive the URL (type string) as input parameter. Please note that the name of the input parameter is case sensitive and should not be changed.
 
 #### 4.1.2 Parse Url To Object
 
-This JavaScript action will create a new Mendix object and set all available attributes with their values. For example
-the URL: https://john.doe:secret@www.example.com:123/forum/questions/?tag=networking&order=newest#top
+This JavaScript action will create a new Mendix object and set all available attributes with their values. For example the URL: https://john.doe:secret@www.example.com:123/forum/questions/?tag=networking&order=newest#top
 
 | Attribute                                                   | Value                                                                                        |
 | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
@@ -150,28 +131,20 @@ the URL: https://john.doe:secret@www.example.com:123/forum/questions/?tag=networ
 
 Now we have the utilities to register and process a URL. We have to use them in our application.
 
-1. In your app add the **App events** widget on your home page, and select the `Page load on load` a nanoflow, create a
-   new one named **OL_RegisterDeepLink** ![app event register deeplink](attachments/app-events-register-deeplink.png)
+1. In your app add the **App events** widget on your home page, and select the `Page load on load` a nanoflow, create a new one named **OL_RegisterDeepLink**
+   ![app event register deeplink](attachments/app-events-register-deeplink.png)
 
-1. Implement this nanoflow, and add a Call a JavaScript Action that use the **RegisterDeepLink**, In the _Url handler_,
-   create an nanoflow name **DL_ShowUrlDetails.**
+1. Implement this nanoflow, and add a Call a JavaScript Action that use the **RegisterDeepLink**, In the _Url handler_, create an nanoflow name **DL_ShowUrlDetails.**
    ![nanoflow register deeplink](attachments/nanoflow-register-deeplink.png)
 
-1. To parse the URL into is parameter parts we should create a non persistent entity named **DeepLinkParameter**, the
-   attributes are all optional and you should only add the attributes that are need for you implementation. Beside the
-   standard list of possible URL parts, you can also add the keys of the query string. (For example
-   `?name=Jhon&title=sir`) The attributes are not case sensitive. You can add attributes for path segments of the URL,
-   they will be split into `Path0` , `Path1` etc. ![parameter entity](attachments/entity-parameter.png)
+1. To parse the URL into is parameter parts we should create a non persistent entity named **DeepLinkParameter**, the attributes are all optional and you should only add the attributes that are need for you implementation. Beside the standard list of possible URL parts, you can also add the keys of the query string. (For example `?name=Jhon&title=sir`) The attributes are not case sensitive. You can add attributes for path segments of the URL, they will be split into `Path0` , `Path1` etc. ![parameter entity](attachments/entity-parameter.png)
 
-1. Implement the Deep link handler nanoflow, like the image below. The nanoflow has one input parameter named **URL**
-   and is of type `string` . (Case sensitive). Call the `ParseIUrlToObject` JavaScript action, provide the URL and the
-   entity of the parameter object. The Show message action will display a message with the details of the URL.
+1. Implement the Deep link handler nanoflow, like the image below. The nanoflow has one input parameter named **URL** and is of type `string` . (Case sensitive). Call the `ParseIUrlToObject` JavaScript action, provide the URL and the entity of the parameter object. The Show message action will display a message with the details of the URL.
    ![nanoflow handle deep link](attachments/nanoflow-handle-deeplink.png)
 
 ### 4.3 Let Test It.
 
-Go add some test links on your Mendix response or mobile web page, and open it in your browser of your device... click
-and test!
+Go add some test links on your Mendix response or mobile web page, and open it in your browser of your device... click and test!
 
 ![test page](attachments/page-test-deeplink.png)
 
