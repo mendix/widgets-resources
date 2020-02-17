@@ -54,7 +54,7 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
     }, []);
 
     const renderPagination = useCallback(() => {
-        if (!props.showPagination || carouselRef == undefined) {
+        if (!props.showPagination || carouselRef === undefined) {
             return null;
         }
 
@@ -140,13 +140,12 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
                     <Fragment>
                         <NativeCarousel
                             testID={props.name}
-                            loop={props.loop}
-                            useScrollView
                             activeSlideAlignment={props.activeSlideAlignment}
                             layout="default"
                             firstItem={0}
-                            initialNumToRender={props.contentSource.items?.length}
-                            data={props.contentSource.items ?? []}
+                            useScrollView
+                            enableSnap
+                            data={props.contentSource.items!}
                             renderItem={renderItem}
                             sliderWidth={sliderDimensions.slider.width}
                             sliderHeight={sliderDimensions.slider.height}
