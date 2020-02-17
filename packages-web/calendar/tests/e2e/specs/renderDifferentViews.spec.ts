@@ -4,12 +4,13 @@ import Calendar from "../objects/calendar.widget";
 describe("Calendar", () => {
     const calendar = new Calendar("calendar1");
 
-    it("renders month view", () => {
+    beforeAll(() => {
         page.open();
+    });
 
+    it("renders month view", () => {
         calendar.element.waitForExist();
         calendar.monthView.waitForExist();
-
         expect(calendar.monthView.isExisting).toBeTruthy();
     });
 

@@ -14,7 +14,7 @@ describe("Calendar", () => {
     });
 
     it("should render with a xpath datasource", () => {
-        page.open("");
+        page.open();
 
         const calendar = new Calendar("calendar1");
 
