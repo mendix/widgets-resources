@@ -41,12 +41,16 @@
                     </enumerationValues>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Behavior">
-                <property key="loop" type="boolean" defaultValue="false">
-                    <caption>Loop</caption>
-                    <description>After the last item the carousel continues to the first item.</description>
-                </property>
-            </propertyGroup>
+<!--            Library has a bug with loops-->
+<!--            https://github.com/archriss/react-native-snap-carousel/issues/653 - -->
+<!--            https://github.com/archriss/react-native-snap-carousel/issues/608-->
+<!--            Also not working properly with Mobx-->
+<!--            <propertyGroup caption="Behavior">-->
+<!--                <property key="loop" type="boolean" defaultValue="false">-->
+<!--                    <caption>Loop</caption>-->
+<!--                    <description>After the last item the carousel continues to the first item.</description>-->
+<!--                </property>-->
+<!--            </propertyGroup>-->
             <propertyGroup caption="Common">
                 <systemProperty key="Name"/>
                 <systemProperty key="Visibility"/>

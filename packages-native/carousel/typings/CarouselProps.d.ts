@@ -21,5 +21,4 @@ export interface CarouselProps<Style> extends CommonProps<Style> {
     layout: LayoutEnum;
     showPagination: boolean;
     activeSlideAlignment: ActiveSlideAlignmentEnum;
-    loop: boolean;
 }
