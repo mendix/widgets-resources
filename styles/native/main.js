@@ -67,6 +67,7 @@ export * from "./ui_resources/atlas_ui_resources/layouts/layout";
 
 // Page Templates
 export * from "./ui_resources/atlas_ui_resources/pagetemplates/maps";
+export * from "./ui_resources/atlas_ui_resources/pagetemplates/inspectiondetails";
 
 
 // Building blocks
