@@ -1,4 +1,4 @@
-import page from "../pages/page";
+import page from "../../../../../configs/e2e/src/pages/page";
 
 interface DefaultStyle {
     DefaultBackground: string;

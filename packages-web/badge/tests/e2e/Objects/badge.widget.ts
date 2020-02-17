@@ -1,4 +1,4 @@
-import page from "../pages/page";
+import page from "../../../../../configs/e2e/src/pages/page";
 
 interface DefaultStyle {
     DefaultBackground: string;
@@ -25,7 +25,7 @@ class BadgeWidget {
     element: WebdriverIO.Element;
     defaultStyles: DefaultStyle;
 
-    constructor(name) {
+    constructor(name: string) {
         this.name = name;
         this.element = page.getWidget(this.name);
         this.defaultStyles = DefaultStyles;
@@ -34,6 +34,7 @@ class BadgeWidget {
     getAllBadges(): any {
         return page.getWidgets(this.name);
     }
+
     getText(): string {
         const BadgeTextElement = this.element;
         return BadgeTextElement.getText();

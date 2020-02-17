@@ -1,4 +1,4 @@
-import page from "../pages/page";
+import page from "../../../../../configs/e2e/src/pages/page";
 import badgeWidget from "../Objects/badge.widget";
 
 describe("badge-web", () => {
