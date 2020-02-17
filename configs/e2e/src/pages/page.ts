@@ -26,6 +26,14 @@ class Page {
     get header(): string {
         return this.getWidget("pageTitle1").getText();
     }
+
+    get modalDialog(): WebdriverIO.Element {
+        return $(".modal-dialog");
+    }
+
+    get modalDialogHeader(): WebdriverIO.Element {
+        return this.modalDialog.$("#mxui_widget_Window_0_caption");
+    }
 }
 
 const page = new Page();

@@ -1,5 +1,6 @@
-import page from "../pages/page";
+import page from "../../../../../configs/e2e/src/pages/page";
 import badgeWidget from "../Objects/badge.widget";
+import input from "../Objects/input.widget";
 
 describe("badge-web", () => {
     beforeAll(() => {
@@ -47,7 +48,7 @@ describe("badge-web", () => {
             const badge = new badgeWidget("badgeDanger");
             expect(badge.getText()).not.toContain(newAttributeValue);
 
-            page.input.setValue(newAttributeValue); // setValue isn't working correctly with inputs in the Mendix Client, therefore, newAttributeValue gets appended to existing value
+            input.inputElement.setValue(newAttributeValue); // setValue isn't working correctly with inputs in the Mendix Client, therefore, newAttributeValue gets appended to existing value
             browser.keys("\uE007");
             expect(badge.getText()).toContain(newAttributeValue); // Badge text: NewSuccessTest
         });
@@ -93,7 +94,7 @@ describe("badge-web", () => {
             const newAttributeValue = "Test";
             const badge = new badgeWidget("labelDanger");
 
-            page.input.setValue(newAttributeValue); // setValue isn't working correctly with inputs in the Mendix Client, therefore, newAttributeValue gets appended to existing value
+            input.inputElement.setValue(newAttributeValue); // setValue isn't working correctly with inputs in the Mendix Client, therefore, newAttributeValue gets appended to existing value
             browser.keys("\uE007");
             expect(badge.getText()).toContain(newAttributeValue); // Badge text: NewSuccessTest
         });
