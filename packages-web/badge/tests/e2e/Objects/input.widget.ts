@@ -9,5 +9,4 @@ class InputWidget {
     }
 }
 
-const input = new InputWidget();
-export default input;
+export default new InputWidget();

@@ -36,5 +36,4 @@ class Page {
     }
 }
 
-const page = new Page();
-export default page;
+export default new Page();
