@@ -11,3 +11,4 @@ export * from "./Pages";
 export * from "./ProgressCircle";
 export * from "./TabContainer";
 export * from "./VideoPlayer";
+export * from "./Carousel";

@@ -47,7 +47,7 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
         }
 
         return (
-            <View key={index} style={{ ...viewStyle }}>
+            <View key={index} style={{ ...viewStyle }} testID={`${props.name}$content$${index}`} accessible>
                 {props.content(item)}
             </View>
         );
