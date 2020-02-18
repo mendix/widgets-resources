@@ -66,7 +66,7 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
 
         if (paginationOverflow) {
             return (
-                <View style={pagination.container} {...a11yProps}>
+                <View style={pagination.container} testID={`${props.name}$pagination`}>
                     <Text style={pagination.text}>
                         {activeSlide + 1}/{contentLength}
                     </Text>

@@ -10,7 +10,7 @@
         "test:ios": "detox test --configuration ios.simulator ./specs",
         "test:ios:debug": "npm run pretest:ios && detox test --configuration ios.simulator --debug-synchronization 1000 --loglevel trace ./specs",
         "test:ios:unit": "npm run pretest:ios && detox test --configuration ios.simulator",
-        "test:ios:local": "detox test --configuration ios.simulator.local ./specs/carousel.spec.ts",
+        "test:ios:local": "detox test --configuration ios.simulator.local",
         "test:android": "detox test --configuration android.emulator ./specs"
     },
     "devDependencies": {
