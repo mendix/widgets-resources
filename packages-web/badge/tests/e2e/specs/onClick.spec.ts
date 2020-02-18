@@ -22,6 +22,8 @@ describe("badge-web", () => {
     });
 
     it("should call nanoflow on click label", () => {
+        page.open("p/callNanoflow"); // resets page
+
         const badge = new badgeWidget("labelCallNanoflow");
         badge.element.waitForDisplayed();
         badge.element.click();
