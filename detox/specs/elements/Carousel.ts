@@ -8,7 +8,7 @@ export function Carousel(testID: string) {
         getSlideContent(slideIndex: number) {
             return element(by.id(`${testID}$content$${slideIndex}`));
         },
-        getElementInsideSlideContent(slideIndex: number, desiredElementId: string) {
+        getParticularElementInsideSlideContent(slideIndex: number, desiredElementId: string) {
             return element(by.id(desiredElementId).withAncestor(by.id(`${testID}$content$${slideIndex}`)));
         },
         getPaginationButton() {
