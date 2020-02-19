@@ -20,6 +20,11 @@
                 "revision": 326,
                 "branch": "MX_8",
                 "path": "./tests/TestProjects/Mendix8/"
+            },
+            {
+                "revision": 330,
+                "branch": "nightly",
+                "path": "./tests/TestProjects/Nightly/"
             }
         ]
     },
