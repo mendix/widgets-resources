@@ -64,7 +64,7 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
     }, [snapPointsInDp]);
 
     useEffect(() => {
-        if (currentSnapPointIndexRef.current.status === ValueStatus.Available) {
+        if (bottomSheetRef.current && currentSnapPointIndexRef.current.status === ValueStatus.Available) {
             const value = Number(currentSnapPointIndexRef.current.value?.toFixed(0));
 
             if (value !== snappedToIndexRef.current) {
@@ -72,7 +72,7 @@ export function BottomDrawer(props: BottomDrawerProps<BottomDrawerStyle>): React
                 bottomSheetRef.current?.snapTo(value);
             }
         }
-    }, [currentSnapPointIndexRef.current]);
+    }, [bottomSheetRef.current, currentSnapPointIndexRef.current]);
 
     return (
         <View style={styles.container}>
