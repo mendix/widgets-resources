@@ -33,6 +33,12 @@ const customPreviewConfig = {
     }
 };
 
-const editorConfig = baseConfig.length === 3 ? baseConfig[2] : {};
+const editorConfig = baseConfig.length === 3 ? baseConfig[2] : undefined;
 
-module.exports = [merge(baseConfig[0], customConfig), merge(baseConfig[1], customPreviewConfig), editorConfig];
+const customConfigurations = [merge(baseConfig[0], customConfig), merge(baseConfig[1], customPreviewConfig)];
+
+if (editorConfig) {
+    customConfigurations.push(editorConfig);
+}
+
+module.exports = customConfigurations;
