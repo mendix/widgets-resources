@@ -4,13 +4,13 @@
     "scripts": {
         "compress:ios": "cd ./ios && tar -cvzf NativeComponents.taz.gz NativeComponents.app && tar -cvzf nativeTemplate.taz.gz nativeTemplate.app",
         "compress:ios:local": "cd ./ios && tar -cvzf nativeTemplate.taz.gz nativeTemplate.app",
-        "decompress:ios": "cd ./ios && tar -xvf NativeComponents.taz.gz &>/dev/null && tar -xvf nativeTemplate.taz.gz &>/dev/null",
-        "decompress:ios:local": "cd ./ios tar -xvf nativeTemplate.taz.gz &>/dev/null",
+        "decompress:ios": "cd ./ios && tar -xvf NativeComponents.taz.gz &>/dev/null",
+        "decompress:ios:local": "cd ./ios && tar -xvf nativeTemplate.taz.gz &>/dev/null",
         "pretest:ios": "npm run decompress:ios",
         "test:ios": "detox test --configuration ios.simulator ./specs",
         "test:ios:debug": "npm run pretest:ios && detox test --configuration ios.simulator --debug-synchronization 1000 --loglevel trace ./specs",
         "test:ios:unit": "npm run pretest:ios && detox test --configuration ios.simulator",
-        "test:ios:local": "detox test --configuration ios.simulator.local",
+        "test:ios:local": "detox test --configuration ios.simulator.local ./specs",
         "test:android": "detox test --configuration android.emulator ./specs"
     },
     "devDependencies": {
