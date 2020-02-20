@@ -26,11 +26,7 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (
-            props.contentSource?.status === ValueStatus.Available &&
-            props.contentSource.items?.length &&
-            props.contentSource.items.length > 0
-        ) {
+        if (props.contentSource?.status === ValueStatus.Available) {
             setLoading(false);
         }
     }, [props.contentSource]);
@@ -136,7 +132,8 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
             ) : (
                 /* library ignores width/height if its vertical/horizontal */
                 sliderDimensions.slide.width > 0 &&
-                sliderDimensions.slider.width > 0 && (
+                sliderDimensions.slider.width > 0 &&
+                props.contentSource.items!.length > 0 && (
                     <Fragment>
                         <NativeCarousel
                             testID={props.name}
