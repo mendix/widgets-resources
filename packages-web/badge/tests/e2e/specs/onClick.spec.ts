@@ -8,7 +8,7 @@ describe("badge-web", () => {
 
     it("should call nanoflow on click badge", () => {
         const badge = new badgeWidget("badgeCallNanoflow");
-        badge.element.waitForDisplayed("3000");
+        badge.element.waitForDisplayed(3000);
         badge.element.click();
 
         const dialog = page.getElement(".modal-body");
