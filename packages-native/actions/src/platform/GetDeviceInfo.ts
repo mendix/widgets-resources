@@ -21,7 +21,7 @@ export async function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
     ) {
         return Promise.reject(
             new Error(
-                "Some functions are not available using this version of JS Action. Please update the NanoFlow commons module."
+                "Some functions are not available using this version of GetDeviceInfo JS Action. Please update 'Native Mobile Resources' module using the App Store."
             )
         );
     }
