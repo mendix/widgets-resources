@@ -12,16 +12,22 @@ exports[`WebView renders a web view when a url is provided 1`] = `
 >
   <View
     style={
-      Object {
-        "flex": 1,
-        "overflow": "hidden",
-      }
+      Array [
+        Object {
+          "flex": 1,
+          "overflow": "hidden",
+        },
+        undefined,
+      ]
     }
   >
-    <RNCWKWebView
+    <RNCWebView
       cacheEnabled={true}
+      javaScriptEnabled={true}
       messagingEnabled={false}
+      onContentProcessDidTerminate={[Function]}
       onError={[Function]}
+      onHttpError={[Function]}
       onLoad={[Function]}
       onLoadingError={[Function]}
       onLoadingFinish={[Function]}
@@ -68,16 +74,22 @@ exports[`WebView renders a web view when html content is provided 1`] = `
 >
   <View
     style={
-      Object {
-        "flex": 1,
-        "overflow": "hidden",
-      }
+      Array [
+        Object {
+          "flex": 1,
+          "overflow": "hidden",
+        },
+        undefined,
+      ]
     }
   >
-    <RNCWKWebView
+    <RNCWebView
       cacheEnabled={true}
+      javaScriptEnabled={true}
       messagingEnabled={false}
+      onContentProcessDidTerminate={[Function]}
       onError={[Function]}
+      onHttpError={[Function]}
       onLoad={[Function]}
       onLoadingError={[Function]}
       onLoadingFinish={[Function]}
