@@ -12,6 +12,20 @@ import DeviceInfo from "react-native-device-info";
 export async function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
 
+    if (
+        typeof DeviceInfo.getDeviceCountry === "undefined" ||
+        typeof DeviceInfo.getDeviceLocale === "undefined" ||
+        typeof DeviceInfo.getTimezone === "undefined" ||
+        typeof DeviceInfo.getUniqueID === "undefined" ||
+        typeof DeviceInfo.is24Hour === "undefined"
+    ) {
+        return Promise.reject(
+            new Error(
+                "Some functions are not available using this version of JS Action. Please update the NanoFlow commons module."
+            )
+        );
+    }
+
     return Promise.all([createMxObject("NativeMobileActions.DeviceInfo"), DeviceInfo.getBatteryLevel()]).then(
         ([mxObject, batteryLevel]) => {
             mxObject.set("ApplicationName", DeviceInfo.getApplicationName());
