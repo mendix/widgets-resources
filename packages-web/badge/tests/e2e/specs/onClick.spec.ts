@@ -6,7 +6,7 @@ describe("badge-web", () => {
         page.open("p/callNanoflow"); // resets page
     });
 
-    it("should call nanoflow on click badge", () => {
+    xit("should call nanoflow on click badge", () => {
         const badge = new badgeWidget("badgeCallNanoflow");
         badge.element.waitForDisplayed(3000);
         badge.element.click();
