@@ -33,7 +33,6 @@ describe("Carousel ", () => {
         carousel.rightArrow.waitForDisplayed();
         carousel.rightArrow.click();
 
-        // defaultPage.lastImage.waitForDisplayed(10000);
         expect(carousel.rightArrow.isExisting()).toBeFalsy();
     });
 });
