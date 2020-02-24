@@ -32,7 +32,7 @@ packages-hybrid/hybrid-mobile-actions/tests/TestProjects/*/theme/styles.js
 
 detox/ios/NativeComponents.app
 detox/*.log
-detox/results
+**/results
 
 packages-web/actions/tests/TestProjects/*/javasource/
 packages-web/actions/tests/TestProjects/*/theme/styles/native
