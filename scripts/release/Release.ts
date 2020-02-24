@@ -18,6 +18,9 @@ async function main(): Promise<void> {
 
     const projectPackage = await findPackage(packages, target);
 
+    if (projectPackage.path.indexOf("packages-web") !== -1) {
+        spawnSync("npm", ["run", "svncheckout"], { cwd: projectPackage.path });
+    }
     spawnSync("npm", ["run", "release"], { cwd: projectPackage.path });
     await createChangeLog(description, projectPackage.version, projectPackage.path);
 
@@ -74,7 +77,10 @@ async function releaseWithAuth(auth: TokenData, projectPackage: any): Promise<st
         "dist/tmp/TestProjects.zip"
     ];
     // eslint-disable-next-line no-console
-    console.log("Assets", assets.filter(asset => existsSync(projectPackage.path + "/" + asset)));
+    console.log(
+        "Assets",
+        assets.filter(asset => existsSync(projectPackage.path + "/" + asset))
+    );
 
     const tagName = `AppStore release ${projectPackage.name.replace(/^\w/, (c: string) => c.toUpperCase())} v${
         projectPackage.version
