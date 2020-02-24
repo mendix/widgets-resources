@@ -1,5 +1,6 @@
 import readline from "readline-sync";
 import { promises as fs } from "fs";
+import { config } from "dotenv";
 
 main().catch(reason => {
     // eslint-disable-next-line no-console
@@ -8,6 +9,7 @@ main().catch(reason => {
 });
 
 async function main(): Promise<void> {
+    config({ path: "../../.env" });
     const { SPRINTR_USERNAME, SPRINTR_PASSWORD } = process.env;
     let username = SPRINTR_USERNAME;
     let password = SPRINTR_PASSWORD;
