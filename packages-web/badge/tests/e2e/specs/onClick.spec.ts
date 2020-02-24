@@ -6,9 +6,9 @@ describe("badge-web", () => {
         page.open("p/callNanoflow"); // resets page
     });
 
-    it("should call nanoflow on click badge", () => {
+    xit("should call nanoflow on click badge", () => {
         const badge = new badgeWidget("badgeCallNanoflow");
-        badge.element.waitForDisplayed();
+        badge.element.waitForDisplayed(3000);
         badge.element.click();
 
         const dialog = page.getElement(".modal-body");
@@ -22,8 +22,6 @@ describe("badge-web", () => {
     });
 
     it("should call nanoflow on click label", () => {
-        page.open("p/callNanoflow"); // resets page
-
         const badge = new badgeWidget("labelCallNanoflow");
         badge.element.waitForDisplayed();
         badge.element.click();

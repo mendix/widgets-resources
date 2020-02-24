@@ -1,6 +1,6 @@
 {
-    "name": "hybrid-mobile-actions",
-    "version": "1.0.0",
+    "name": "web-nanoflow-actions",
+    "version": "0.0.1",
     "license": "Apache-2.0",
     "scripts": {
         "start": "..\"/../node_modules/.bin/concurrently\" \"npm:watch-*\"",
@@ -16,15 +16,15 @@
         "release": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/modules/tsconfig.json ../../scripts/modules/exportModule.ts"
     },
     "config": {
-        "moduleName": "HybridMobileActions",
-        "testProjectId": "0bfcffca-d976-4389-b93b-582c90a1a898",
-        "projectName": "HybridMobileActionsTestProject.mpr",
+        "moduleName": "WebNanoflowActions",
+        "testProjectId": "7e5f29da-6253-45d6-af2b-ac949c926d08",
+        "projectName": "WebNanoflowActions.mpr",
         "testProjects": [
             {
-                "revision": 10,
+                "revision": 2,
                 "branch": "trunk",
                 "path": "./tests/TestProjects/Mendix8",
-                "mendixVersion": "8.3.0.61600"
+                "mendixVersion": "8.4.4.5"
             }
         ]
     },
@@ -37,14 +37,6 @@
     },
     "devDependencies": {
         "@types/big.js": "^4.0.5",
-        "@types/cordova": "^0.0.34",
-        "@types/cordova-plugin-app-version": "^0.1.35",
-        "cordova-plugin-camera": "^4.1.0",
-        "cordova-plugin-contacts": "^3.0.1",
-        "cordova-plugin-file": "^6.0.2",
-        "cordova-plugin-media": "^5.0.3",
-        "cordova-plugin-network-information": "^2.0.2",
-        "cordova-plugin-statusbar": "^2.4.3",
         "npm-watch": "^0.6.0"
     },
     "dependencies": {}

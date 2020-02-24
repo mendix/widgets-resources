@@ -120,7 +120,7 @@ function unzip(src: string, dest: string, ignore: string): Promise<void> {
                 if (error) {
                     return reject(error);
                 }
-                console.log("Decompress done!");
+                console.log("Decompress done");
                 resolve();
             }
         );
