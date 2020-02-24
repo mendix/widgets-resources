@@ -7,36 +7,8 @@ node_modules
 mxproject
 coverage
 
-**/TestProjects/*/.mendix-cache/
-**/TestProjects/*/*.lock
-**/TestProjects/*/*.bak
-**/TestProjects/*/.svn/
-**/TestProjects/*/GPUCache/
-**/TestProjects/*/deployment/
-**/TestProjects/Mendix7/rating/
-**/TestProjects/**/TestProject2/
-**/TestProjects/**/theme_old/
-**/TestProjects/**/TestBadge.mpk
-**/TestProjects/**/.htaccess
-**/TestProjects/**/dummy
-**/badge-button/**/TestProjects/**/badge.mpk
-**/TestProjects/**/theme/styles/web/sass/
-**/TestProjects/**/theme/scripts/
-**/TestProjects/**/javasource/*/proxies/
-**/TestProjects/**/.classpath
-**/TestProjects/**/.project
-
-packages-hybrid/hybrid-mobile-actions/tests/TestProjects/*/theme/styles/native/
-packages-hybrid/hybrid-mobile-actions/tests/TestProjects/*/theme/settings-native.json
-packages-hybrid/hybrid-mobile-actions/tests/TestProjects/*/theme/styles.js
+**/TestProjects
 
 detox/ios/NativeComponents.app
 detox/*.log
 **/results
-
-packages-web/actions/tests/TestProjects/*/javasource/
-packages-web/actions/tests/TestProjects/*/theme/styles/native
-packages-web/actions/tests/TestProjects/*/theme/settings-native.json
-packages-web/actions/tests/TestProjects/*/theme/styles.js
-packages-web/actions/tests/TestProjects/*/theme/styles/web/css/main.css.map
-
