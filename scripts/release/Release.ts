@@ -19,7 +19,9 @@ async function main(): Promise<void> {
     const projectPackage = await findPackage(packages, target);
 
     if (projectPackage.path.indexOf("packages-web") !== -1) {
+        console.log("CHECKOUT: Checking out SVN project to upload together with the widget");
         spawnSync("npm", ["run", "svncheckout"], { cwd: projectPackage.path });
+        console.log("CHECKOUT: Checkout done");
     }
     spawnSync("npm", ["run", "release"], { cwd: projectPackage.path });
     await createChangeLog(description, projectPackage.version, projectPackage.path);
