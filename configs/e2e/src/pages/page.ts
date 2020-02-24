@@ -4,23 +4,27 @@ class Page {
     }
 
     getElement(name: string): WebdriverIO.Element {
+        return $(name);
+    }
+
+    waitForElement(name: string): WebdriverIO.Element {
         const element = $(name);
         element.waitForDisplayed();
         return element;
     }
 
-    getElements(name: string): WebdriverIO.Element[] {
+    waitForElements(name: string): WebdriverIO.Element[] {
         $(name).waitForDisplayed();
         const elements = $$(name);
         return elements;
     }
 
     getWidget(widgetName: string): WebdriverIO.Element {
-        return this.getElement(`.mx-name-${widgetName}`);
+        return this.waitForElement(`.mx-name-${widgetName}`);
     }
 
     getWidgets(widgetName: string): WebdriverIO.Element[] {
-        return this.getElements(`.mx-name-${widgetName}`);
+        return this.waitForElements(`.mx-name-${widgetName}`);
     }
 
     get header(): string {

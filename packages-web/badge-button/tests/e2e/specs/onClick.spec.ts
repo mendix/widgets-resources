@@ -12,8 +12,7 @@ describe("BadgeButton on click", () => {
             badgeButton.element.waitForDisplayed();
             badgeButton.element.click();
 
-            const dialog = page.getElement(".mx-dialog-body");
-            dialog.waitForDisplayed();
+            const dialog = page.waitForElement(".mx-dialog-body");
             expect(dialog.getText()).toEqual("Microflow Successfully Called With badge New");
         });
     });
@@ -29,13 +28,12 @@ describe("BadgeButton on click", () => {
             badgeButton.element.waitForDisplayed();
             badgeButton.element.click();
 
-            const dialog = page.getElement(".modal-body");
-            dialog.waitForDisplayed();
+            const dialog = page.waitForElement(".modal-body");
 
             expect(dialog.isDisplayed()).toBeTruthy();
 
             // Verify it passes a parameter
-            const data = page.getElement(".form-control-static").getText();
+            const data = page.waitForElement(".form-control-static").getText();
             expect(data).toBe("New");
         });
     });
@@ -55,7 +53,7 @@ describe("BadgeButton on click", () => {
             expect(header).toBe("ClickedPage");
 
             // Verify it passes a parameter
-            const data = page.getElement(".form-control-static").getText();
+            const data = page.waitForElement(".form-control-static").getText();
             expect(data).toBe("New");
         });
 
@@ -69,7 +67,7 @@ describe("BadgeButton on click", () => {
             expect(header).toBe("ClickedPagePopup");
 
             // Verify it passes a parameter
-            const data = page.getElement(".form-control-static").getText();
+            const data = page.waitForElement(".form-control-static").getText();
             expect(data).toBe("New");
         });
 
@@ -83,7 +81,7 @@ describe("BadgeButton on click", () => {
             expect(header).toBe("ModalPopupPage");
 
             // Verify it passes a parameter
-            const data = page.getElement(".form-control-static").getText();
+            const data = page.waitForElement(".form-control-static").getText();
             expect(data).toBe("New");
         });
     });
@@ -127,11 +125,10 @@ describe("BadgeButton on click", () => {
             badgeButton.element.waitForDisplayed();
             badgeButton.element.click();
 
-            const dialog = page.getElement(".modal-body");
-            dialog.waitForDisplayed();
+            const dialog = page.waitForElement(".modal-body");
 
             expect(dialog.isDisplayed()).toBeTruthy();
-            const text = page.getElement(".mx-dialog-body").getText();
+            const text = page.waitForElement(".mx-dialog-body").getText();
             expect(text).toContain("An error occured, please contact your system administrator");
         });
     });

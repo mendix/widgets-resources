@@ -2,7 +2,7 @@ import page from "../../../../../configs/e2e/src/pages/page";
 
 class TemplateGrid {
     get rowCount(): number {
-        return page.getElements(".mx-templategrid-row").length;
+        return page.waitForElements(".mx-templategrid-row").length;
     }
 }
 
