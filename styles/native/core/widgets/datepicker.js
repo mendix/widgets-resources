@@ -17,7 +17,7 @@ import { TextBox, TextBoxVertical } from "./textbox";
 ========================================================================== */
 
 // Font color of native iOS datepicker can not be changed.
-// To fix this we change the background color of the picker if OS theme is dark and app theme is light.
+// To fix this we change the background color of the picker if OS theme is dark and app theme is light (And the other way around).
 const isOSDarkMode = NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode && NativeModules.RNDarkMode.initialMode === "dark";
 const pickerBackgroundColor = !darkMode && isOSDarkMode ?
                               "rgba(0, 0, 0, 1)" :
