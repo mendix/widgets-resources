@@ -16,7 +16,8 @@ import { brand } from "../variables";
 export const com_mendix_widget_native_maps_Maps = {
     container: {
         // All ViewStyle properties are allowed
-        width: "100%",
+        flex: 1,
+        maxWidth: "100%",
         aspectRatio: 4 / 2,
     },
     loadingOverlay: {
