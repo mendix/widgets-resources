@@ -26,12 +26,12 @@ class Page {
         return this.getElements(`.mx-name-${widgetName}`);
     }
 
-    get headerElement(pageTitle = "pageTitle1"): WebdriverIO.Element {
+    headerElement(pageTitle = "pageTitle1"): WebdriverIO.Element {
         return this.getWidget(pageTitle);
     }
 
-    get header(pageTitle = "pageTitle1"): string {
-        return this.getWidget(pageTitle).getText();
+    header(pageTitle = "pageTitle1"): string {
+        return this.headerElement(pageTitle).getText();
     }
 
     get modalDialog(): WebdriverIO.Element {
