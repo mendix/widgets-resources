@@ -26,13 +26,14 @@ describe("Carousel", () => {
         beforeEach(() => {
             page.open("p/staticOnClickOpenPage");
         });
+
         it("open full page", () => {
             const carousel = new Carousel("carouselFullPage");
 
             carousel.element.waitForDisplayed();
             carousel.element.click();
-            page.getWidget("label5").waitForDisplayed();
-            expect(page.getWidget("label5").getText()).toContain("Page 1 Opened");
+            page.getWidget("labelPage1Opened").waitForDisplayed();
+            expect(page.getWidget("labelPage1Opened").getText()).toContain("Page 1 Opened");
         });
 
         it("open popup page", () => {
@@ -77,8 +78,8 @@ describe("Carousel", () => {
 
         carousel.element.waitForDisplayed();
         carousel.element.click();
-        page.getWidget("label5").waitForDisplayed();
-        expect(page.getWidget("label5").getText()).toContain("Page 2 Opened");
+        page.getWidget("labelPage2Opened").waitForDisplayed();
+        expect(page.getWidget("labelPage2Opened").getText()).toContain("Page 2 Opened");
         expect(
             page
                 .getWidget("textBox2")
@@ -108,12 +109,12 @@ describe("Carousel", () => {
     it("should show page on click XPath datasource carousel", () => {
         page.open("p/dsXPathOnClickOpenPage");
 
-        const carousel = new Carousel("carousel4");
+        const carousel = new Carousel("carousel3");
         carousel.element.waitForDisplayed();
         carousel.element.click();
         page.modalDialog.waitForDisplayed();
-        page.getWidget("label5").waitForDisplayed();
-        expect(page.getWidget("label5").getText()).toContain("DS XPath: show page on click");
+        page.modalDialog.waitForDisplayed();
+        expect(page.modalDialogHeader.getText()).toContain("Popup opened");
     });
 
     it("should trigger microflow with error on click XPath datasource carousel", () => {
