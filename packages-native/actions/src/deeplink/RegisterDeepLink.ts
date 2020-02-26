@@ -7,8 +7,8 @@
 // Other code you write will be lost the next time you deploy the project.
 import { Linking } from "react-native";
 
-// BEGIN EXTRA CODE
 type Nanoflow = (params: Record<string, any>) => Promise<void>;
+// BEGIN EXTRA CODE
 // END EXTRA CODE
 
 /**

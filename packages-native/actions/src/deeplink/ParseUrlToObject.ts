@@ -7,9 +7,9 @@
 // Other code you write will be lost the next time you deploy the project.
 import UrlParse from "url-parse";
 
-// BEGIN EXTRA CODE
 type Records = Record<string, string | undefined>;
 
+// BEGIN EXTRA CODE
 async function createParamObject(entity: string, url: string): Promise<mendix.lib.MxObject> {
     const data = splitUrlToObject(url);
     const mxObject = await createMxObject(entity);
