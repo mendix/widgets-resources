@@ -51,7 +51,7 @@ describe("BadgeButton on click", () => {
             badgeButton.element.waitForDisplayed();
             badgeButton.element.click();
 
-            const header = page.header;
+            const header = page.header();
             expect(header).toBe("ClickedPage");
 
             // Verify it passes a parameter
@@ -65,7 +65,7 @@ describe("BadgeButton on click", () => {
             badgeButton.element.waitForDisplayed();
             badgeButton.element.click();
 
-            const header = page.header;
+            const header = page.header();
             expect(header).toBe("ClickedPagePopup");
 
             // Verify it passes a parameter
@@ -79,7 +79,7 @@ describe("BadgeButton on click", () => {
             badgeButton.element.waitForDisplayed();
             badgeButton.element.click();
 
-            const header = page.header;
+            const header = page.header();
             expect(header).toBe("ModalPopupPage");
 
             // Verify it passes a parameter
@@ -100,7 +100,7 @@ describe("BadgeButton on click", () => {
             badgeButton.element.waitForDisplayed();
             badgeButton.element.click();
 
-            const header = page.header;
+            const header = page.header();
             expect(header).toBe("OnClickClosePage");
         });
 
@@ -111,7 +111,7 @@ describe("BadgeButton on click", () => {
             badgeButton.element.waitForDisplayed();
             badgeButton.element.click();
 
-            const header = page.header;
+            const header = page.header();
             expect(header).toBe("OnClickClosePage");
         });
     });

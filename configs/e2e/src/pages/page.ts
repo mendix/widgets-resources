@@ -3,15 +3,18 @@ class Page {
         browser.url("/" + url);
     }
 
-    getElement(name: string): WebdriverIO.Element {
-        const element = $(name);
+    existing(selector: string): boolean {
+        return $(selector).isExisting();
+    }
+    getElement(selector: string): WebdriverIO.Element {
+        const element = $(selector);
         element.waitForDisplayed();
         return element;
     }
 
-    getElements(name: string): WebdriverIO.Element[] {
-        $(name).waitForDisplayed();
-        const elements = $$(name);
+    getElements(selector: string): WebdriverIO.Element[] {
+        $(selector).waitForDisplayed();
+        const elements = $$(selector);
         return elements;
     }
 
@@ -23,8 +26,12 @@ class Page {
         return this.getElements(`.mx-name-${widgetName}`);
     }
 
-    get header(): string {
-        return this.getWidget("pageTitle1").getText();
+    headerElement(pageTitle = "pageTitle1"): WebdriverIO.Element {
+        return this.getWidget(pageTitle);
+    }
+
+    header(pageTitle = "pageTitle1"): string {
+        return this.headerElement(pageTitle).getText();
     }
 
     get modalDialog(): WebdriverIO.Element {
