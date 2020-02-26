@@ -11,13 +11,13 @@ describe("badge-web", () => {
         badge.element.waitForDisplayed(3000);
         badge.element.click();
 
-        const dialog = page.getElement(".modal-body");
+        const dialog = page.waitForElement(".modal-body");
         dialog.waitForDisplayed();
 
         expect(dialog.isDisplayed()).toBeTruthy();
 
         // Verify it passes a parameter
-        const data = page.getElement(".form-control-static").getText();
+        const data = page.waitForElement(".form-control-static").getText();
         expect(data).toBe("NewSuccess");
     });
 
@@ -26,13 +26,12 @@ describe("badge-web", () => {
         badge.element.waitForDisplayed();
         badge.element.click();
 
-        const dialog = page.getElement(".modal-body");
-        dialog.waitForDisplayed();
+        const dialog = page.waitForElement(".modal-body");
 
         expect(dialog.isDisplayed()).toBeTruthy();
 
         // Verify it passes a parameter
-        const data = page.getElement(".form-control-static").getText();
+        const data = page.waitForElement(".form-control-static").getText();
         expect(data).toBe("NewSuccess");
     });
 });

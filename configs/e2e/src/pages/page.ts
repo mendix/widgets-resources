@@ -1,29 +1,38 @@
 class Page {
+    get url(): string {
+        return browser.getUrl();
+    }
+
     open(url = ""): void {
         browser.url("/" + url);
     }
 
-    existing(selector: string): boolean {
-        return $(selector).isExisting();
-    }
     getElement(selector: string): WebdriverIO.Element {
-        const element = $(selector);
+        return $(selector);
+    }
+
+    existing(selector: string): boolean {
+        return this.getElement(selector).isExisting();
+    }
+
+    waitForElement(selector: string): WebdriverIO.Element {
+        const element = this.getElement(selector);
         element.waitForDisplayed();
         return element;
     }
 
-    getElements(selector: string): WebdriverIO.Element[] {
-        $(selector).waitForDisplayed();
+    waitForElements(selector: string): WebdriverIO.Element[] {
+        this.getElement(selector).waitForDisplayed();
         const elements = $$(selector);
         return elements;
     }
 
     getWidget(widgetName: string): WebdriverIO.Element {
-        return this.getElement(`.mx-name-${widgetName}`);
+        return this.waitForElement(`.mx-name-${widgetName}`);
     }
 
     getWidgets(widgetName: string): WebdriverIO.Element[] {
-        return this.getElements(`.mx-name-${widgetName}`);
+        return this.waitForElements(`.mx-name-${widgetName}`);
     }
 
     headerElement(pageTitle = "pageTitle1"): WebdriverIO.Element {

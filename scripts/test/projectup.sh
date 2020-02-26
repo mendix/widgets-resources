@@ -1,7 +1,7 @@
 #!/bin/bash
 
 attempt_counter=0
-max_attempts=12
+max_attempts=60
 
 echo "Booting up" $URL
 until $(curl --output /dev/null --silent --head --fail $URL); do

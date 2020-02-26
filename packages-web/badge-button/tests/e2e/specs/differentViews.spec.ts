@@ -84,7 +84,7 @@ describe("BadgeButton different views", () => {
         });
 
         it("should display correctly in second tab", () => {
-            page.getElement(".mx-name-tabPage2").click();
+            page.waitForElement(".mx-name-tabPage2").click();
             const badgeButton = new badgeButtonWidget("badgeButtonSnippetHorizontalTab2");
 
             expect(badgeButton.getText()).toEqual("");
