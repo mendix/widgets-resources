@@ -1,4 +1,8 @@
 class Page {
+    get url(): string {
+        return browser.getUrl();
+    }
+
     open(url = ""): void {
         browser.url("/" + url);
     }

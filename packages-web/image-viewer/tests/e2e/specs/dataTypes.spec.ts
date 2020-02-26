@@ -26,7 +26,7 @@ describe("Image viewer", () => {
 
         const imageViewer = new ImageViewer("imageViewer1");
         const content = imageViewer.imageSrcHidden;
-        expect(content).toContain(html.dynamicImageNoUrl);
+        expect(content).toContain(page.url);
     });
 
     it("loads an image from a static image", () => {
