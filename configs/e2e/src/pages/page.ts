@@ -2,7 +2,7 @@ class Page {
     open(url = ""): void {
         browser.url("/" + url);
     }
- 
+
     getElement(selector: string): WebdriverIO.Element {
         return $(selector);
     }
@@ -10,9 +10,11 @@ class Page {
     existing(selector: string): boolean {
         return this.getElement(selector).isExisting();
     }
-  
+
     waitForElement(selector: string): WebdriverIO.Element {
-        return this.getElement(selector).waitForDisplayed();
+        const element = this.getElement(selector);
+        element.waitForDisplayed();
+        return element;
     }
 
     waitForElements(selector: string): WebdriverIO.Element[] {
