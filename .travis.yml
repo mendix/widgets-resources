@@ -7,10 +7,10 @@ branches:
 env:
     global:
         # List of all touched files, excluding paths starting with 'packages'
-        - CHANGED_GLOBAL_FILES="" #$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep -v "^packages")
-        - CHANGED_WEB_PROJECTS="" #$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "packages-web")
-        - CHANGED_NATIVE_PROJECTS="" #$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "packages-native")
-        - CHANGED_DETOX_TESTS="" #$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "detox")
+        - CHANGED_GLOBAL_FILES=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep -v "^packages")
+        - CHANGED_WEB_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "packages-web")
+        - CHANGED_NATIVE_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "packages-native")
+        - CHANGED_DETOX_TESTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "detox")
         - NATIVE_PROJECTS=$(if [ "$CHANGED_NATIVE_PROJECTS" != "" ]; then echo "true"; else echo "false"; fi)
         - DETOX_PROJECT=$(if [ "$CHANGED_DETOX_TESTS" != "" ]; then echo "true"; else echo "false"; fi)
         - WEB_PROJECTS=$(if [ "$CHANGED_WEB_PROJECTS" != "" ]; then echo "true"; else echo "false"; fi)

@@ -2,20 +2,22 @@ class Page {
     open(url = ""): void {
         browser.url("/" + url);
     }
-
-    getElement(name: string): WebdriverIO.Element {
-        return $(name);
+ 
+    getElement(selector: string): WebdriverIO.Element {
+        return $(selector);
     }
 
-    waitForElement(name: string): WebdriverIO.Element {
-        const element = $(name);
-        element.waitForDisplayed();
-        return element;
+    existing(selector: string): boolean {
+        return this.getElement(selector).isExisting();
+    }
+  
+    waitForElement(selector: string): WebdriverIO.Element {
+        return this.getElement(selector).waitForDisplayed();
     }
 
-    waitForElements(name: string): WebdriverIO.Element[] {
-        $(name).waitForDisplayed();
-        const elements = $$(name);
+    waitForElements(selector: string): WebdriverIO.Element[] {
+        this.getElement(selector).waitForDisplayed();
+        const elements = $$(selector);
         return elements;
     }
 
@@ -27,8 +29,12 @@ class Page {
         return this.waitForElements(`.mx-name-${widgetName}`);
     }
 
-    get header(): string {
-        return this.getWidget("pageTitle1").getText();
+    headerElement(pageTitle = "pageTitle1"): WebdriverIO.Element {
+        return this.getWidget(pageTitle);
+    }
+
+    header(pageTitle = "pageTitle1"): string {
+        return this.headerElement(pageTitle).getText();
     }
 
     get modalDialog(): WebdriverIO.Element {

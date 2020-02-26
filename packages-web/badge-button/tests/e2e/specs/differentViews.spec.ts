@@ -12,7 +12,7 @@ describe("BadgeButton different views", () => {
             const badgeButton = new badgeButtonWidget("badgeButtonSnippetVertical");
 
             badgeButton.element.waitForDisplayed();
-            expect(page.header).toEqual("ListenToGrid"); // Double check if it's a correct page
+            expect(page.header()).toEqual("ListenToGrid"); // Double check if it's a correct page
 
             const listViewItem = page.getWidget("index-1");
             listViewItem.waitForDisplayed();
@@ -31,7 +31,7 @@ describe("BadgeButton different views", () => {
             const badgeButton = new badgeButtonWidget("badgeButtonSnippetHorizontal");
 
             badgeButton.element.waitForDisplayed();
-            expect(page.header).toEqual("ListView"); // Double check if it's a correct page
+            expect(page.header()).toEqual("ListView"); // Double check if it's a correct page
 
             expect(badgeButton.getText()).toEqual("");
             expect(badgeButton.getBadgeText()).toEqual("New");
@@ -53,7 +53,7 @@ describe("BadgeButton different views", () => {
             const badgeButton = new badgeButtonWidget("badgeButtonSnippetHorizontalTab2");
 
             badgeButton.element.waitForDisplayed();
-            expect(page.header).toEqual("TemplateGrid"); // Double check if it's a correct page
+            expect(page.header()).toEqual("TemplateGrid"); // Double check if it's a correct page
 
             expect(badgeButton.getText()).toEqual("");
             expect(badgeButton.getBadgeText()).toEqual("New");
@@ -76,7 +76,7 @@ describe("BadgeButton different views", () => {
             const badgeButton = new badgeButtonWidget("badgeButtonSnippetHorizontal");
 
             badgeButton.element.waitForDisplayed();
-            expect(page.header).toEqual("TabContainer"); // Double check if it's a correct page
+            expect(page.header()).toEqual("TabContainer"); // Double check if it's a correct page
 
             expect(badgeButton.getText()).toEqual("");
             expect(badgeButton.getBadgeText()).toEqual("New");
