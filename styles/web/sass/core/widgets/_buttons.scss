@@ -46,6 +46,13 @@
         box-shadow: none;
     }
 
+    &[aria-disabled] {
+        cursor: not-allowed;
+        pointer-events: none;
+        opacity: 0.65;
+        filter: alpha(opacity=65);
+    }
+
     @if $btn-bordered != false {
         @extend .btn-bordered;
     }
@@ -55,6 +62,13 @@
 .mx-link {
     padding: 0;
     color: $link-color;
+
+    &[aria-disabled] {
+        cursor: not-allowed;
+        pointer-events: none;
+        opacity: 0.65;
+        filter: alpha(opacity=65);
+    }
 }
 
 // Images and icons in buttons

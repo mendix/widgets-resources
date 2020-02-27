@@ -14,6 +14,7 @@ export * from "./core/widgets/badge";
 export * from "./core/helpers/badge";
 export * from "./core/widgets/buttons";
 export * from "./core/helpers/buttons";
+export * from "./core/widgets/carousel";
 export * from "./core/widgets/checkbox";
 export * from "./core/widgets/colorpicker";
 export * from "./core/widgets/container";
@@ -66,6 +67,7 @@ export * from "./ui_resources/atlas_ui_resources/layouts/layout";
 
 // Page Templates
 export * from "./ui_resources/atlas_ui_resources/pagetemplates/maps";
+export * from "./ui_resources/atlas_ui_resources/pagetemplates/inspectiondetails";
 
 
 // Building blocks

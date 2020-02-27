@@ -1,3 +1,5 @@
+import { NativeModules }                from "react-native";
+import { darkMode }                     from "../../../app/custom-variables.js";
 import { background, font, navigation } from "../../../core/variables";
 
 //
@@ -13,19 +15,27 @@ import { background, font, navigation } from "../../../core/variables";
     Default Class For Mendix TopBar, BottomBar and ProgressOverlay
 ========================================================================== */
 
+// backgroundColor of the native iOS statusbar can not be changed.
+// To fix this we change the barStyle of the statusbar if OS theme is dark and app theme is light (And the other way around).
+const isOSDarkMode = NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode && NativeModules.RNDarkMode.initialMode === "dark";
+const statusBarStyle = !darkMode && isOSDarkMode ?
+                       "dark-content" :
+                       darkMode && !isOSDarkMode ? "light-content" : navigation.statusBar.barStyle;
+
 export const Layout = {
     sidebar: {
         // All ViewStyle properties are allowed
     },
     statusBar: {
-        // Android only
-        backgroundColor: navigation.statusBar.backgroundColor,
-        barStyle: navigation.statusBar.barStyle,
+        // Only backgroundColor and barStyle are allowed
+        backgroundColor: navigation.statusBar.backgroundColor, // Android only
+        barStyle: statusBarStyle,
     },
     header: {
         container: {
             // All ViewStyle properties are allowed
             backgroundColor: navigation.topBar.backgroundColor,
+            borderBottomWidth: undefined,
         },
         title: {
             // All TextStyle properties are allowed
