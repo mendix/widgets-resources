@@ -1,17 +1,21 @@
 {
-    "name": "actions",
-    "version": "1.0.1",
-    "license": "Apache-2.0",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/mendix/widgets-resources.git"
-    },
-    "scripts": {
-        "prebuild": "rm -rf ./dist/tsc",
-        "build": "npm run build:tsc",
-        "build:tsc": "..\"/../node_modules/.bin/tsc\" --project src/tsconfig.json",
-        "postbuild": "..\"/../node_modules/.bin/ts-node\" --project ./scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
-        "version": "npm run build",
-        "postversion": "..\"/../node_modules/.bin/ts-node\" ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
-    }
+  "name": "actions",
+  "version": "1.0.1",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "scripts": {
+    "prebuild": "rm -rf ./dist/tsc",
+    "build": "npm run build:tsc",
+    "build:tsc": "..\"/../node_modules/.bin/tsc\" --project src/tsconfig.json",
+    "postbuild": "..\"/../node_modules/.bin/ts-node\" --project ./scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
+    "version": "npm run build",
+    "postversion": "..\"/../node_modules/.bin/ts-node\" ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/querystringify": "^2.0.0",
+    "@types/url-parse": "^1.4.3"
+  }
 }
