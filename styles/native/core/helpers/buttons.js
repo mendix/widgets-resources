@@ -109,7 +109,7 @@ export const btnIconPrimary = {
 };
 export const btnIconSecondary = merge(btnIconPrimary, {
     icon: {
-        color: contrast.regular,
+        color: contrast.low,
     },
 });
 export const btnIconSuccess = merge(btnIconPrimary, {
