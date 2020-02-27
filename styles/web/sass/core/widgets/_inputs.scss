@@ -32,11 +32,23 @@
     }
 }
 
-.form-control:focus {
+.form-control:not([readonly]):focus {
     border-color: $form-input-border-focus-color;
     outline: 0;
     background-color: $form-input-bg-focus;
     box-shadow: none;
+}
+
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+    opacity: 1;
+    background-color: #EEEEEE;
+}
+
+.form-control[disabled],
+fieldset[disabled] .form-control {
+    cursor: not-allowed;
 }
 
 // Lined
@@ -221,8 +233,8 @@ textarea.form-control {
 [dir='rtl'] {
     // Dropdown input widget
     select.form-control {
-        padding-left: 0;
         padding-right: 30px;
+        padding-left: 0;
         background-position: #{$form-input-padding-x} center;
     }
 }
