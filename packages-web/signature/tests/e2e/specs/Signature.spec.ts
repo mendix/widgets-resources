@@ -1,19 +1,21 @@
-import HomePage from "../pages/home.page";
-import GridPage from "../pages/grid.page";
+import page from "../../../../../configs/e2e/src/pages/page";
+import Signature from "../objects/signature.widget";
 
 describe("SignatureCanvas", () => {
     it("renders Canvas", () => {
-        HomePage.open();
-        HomePage.canvas.waitForDisplayed();
-        const isExisting = HomePage.canvas.isExisting();
+        page.open();
+        const canvas = new Signature("canvas");
+        canvas.element.waitForDisplayed();
 
-        expect(isExisting).toBeTruthy();
+        expect(canvas.element.isExisting()).toBeTruthy();
     });
 
     it("renders signature grid", () => {
-        GridPage.open();
-        GridPage.signatureGrid.waitForDisplayed();
+        page.open("p/GridSize");
 
-        expect(GridPage.signatureGrid.getHTML()).toContain("svg");
+        const grid = new Signature("grid");
+        grid.element.waitForDisplayed();
+
+        expect(grid.element.getHTML()).toContain("svg");
     });
 });

@@ -1,58 +1,63 @@
 {
-    "name": "signature",
-    "widgetName": "Signature",
-    "version": "1.0.4",
-    "description": "A signature pad for capturing signatures",
-    "copyright": "Mendix BV",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/mendix/widgets-resources.git"
-    },
-    "scripts": {
-        "start": ".\"/node_modules/.bin/utils-react-widgets\" start",
-        "dev": ".\"/node_modules/.bin/utils-react-widgets\" dev",
-        "test": "npm run test:unit",
-        "test:unit": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
-        "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://signature101.mxapps.io ../../scripts/test/projectup.sh",
-        "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://signature101.mxapps.io/ ..\"/../node_modules/.bin/wdio\" ../../configs/e2e/wdio.conf.js",
-        "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ..\"/../node_modules/.bin/wdio\" ../../configs/e2e/wdio.conf.js",
-        "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-        "lint:fix": "npm run lint -- --fix",
-        "build": ".\"/node_modules/.bin/utils-react-widgets\" build",
-        "release": ".\"/node_modules/.bin/utils-react-widgets\" release",
-        "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
-    },
-    "config": {
-        "mendixHost": "http://localhost:8080",
-        "developmentPort": 3000,
-        "testProjectId": "a48ab6ca-82a2-4b82-8286-eddd07eae0b9",
-        "testProjects": [
-            {
-                "revision": 160,
-                "branch": "trunk",
-                "path": "./tests/TestProjects/Mendix7/"
-            },
-            {
-                "revision": 159,
-                "branch": "MX_8",
-                "path": "./tests/TestProjects/Mendix8/"
-            }
-        ]
-    },
-    "license": "Apache-2.0",
-    "devDependencies": {
-        "@types/classnames": "^2.2.4",
-        "@types/react-resize-detector": "^3.1.1",
-        "@widgets-resources/utils-react-widgets": "0.0.1"
-    },
-    "dependencies": {
-        "classnames": "^2.2.6",
-        "react-resize-detector": "^3.2.0",
-        "signature_pad": "https://github.com/Andries-Smit/signature_pad/releases/download/v3.0.0-beta.4/signature_pad.tar.gz"
-    },
-    "jest": {
-        "setupFiles": [
-            "jest-canvas-mock"
-        ]
-    }
+  "name": "signature",
+  "widgetName": "Signature",
+  "version": "1.0.4",
+  "description": "A signature pad for capturing signatures",
+  "copyright": "Mendix BV",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "scripts": {
+    "start": ".\"/node_modules/.bin/utils-react-widgets\" start",
+    "dev": ".\"/node_modules/.bin/utils-react-widgets\" dev",
+    "test": "npm run test:unit",
+    "test:unit": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
+    "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://signature101.mxapps.io ../../scripts/test/projectup.sh",
+    "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://signature101.mxapps.io/ ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint:fix": "npm run lint -- --fix",
+    "build": ".\"/node_modules/.bin/utils-react-widgets\" build",
+    "release": ".\"/node_modules/.bin/utils-react-widgets\" release",
+    "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+  },
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000,
+    "testProjectId": "a48ab6ca-82a2-4b82-8286-eddd07eae0b9",
+    "testProjects": [
+      {
+        "revision": 160,
+        "branch": "trunk",
+        "path": "./tests/TestProjects/Mendix7/"
+      },
+      {
+        "revision": 159,
+        "branch": "MX_8",
+        "path": "./tests/TestProjects/Mendix8/"
+      },
+      {
+        "revision": 163,
+        "branch": "nightly",
+        "path": "./tests/TestProjects/Nightly/"
+      }
+    ]
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/classnames": "^2.2.4",
+    "@types/react-resize-detector": "^3.1.1",
+    "@widgets-resources/utils-react-widgets": "0.0.1"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "react-resize-detector": "^3.2.0",
+    "signature_pad": "https://github.com/Andries-Smit/signature_pad/releases/download/v3.0.0-beta.4/signature_pad.tar.gz"
+  },
+  "jest": {
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
+  }
 }
