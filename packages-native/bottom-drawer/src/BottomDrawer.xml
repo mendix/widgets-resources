@@ -6,44 +6,73 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
-                <property key="headerContent" type="widgets" required="false">
-                    <caption>Header content</caption>
-                    <description />
+                <property key="type" type="enumeration" defaultValue="modal">
+                    <caption>Render mode</caption>
+                    <description>Select the way the bottom drawer will be rendered</description>
+                    <enumerationValues>
+                        <enumerationValue key="modal">Modal</enumerationValue>
+                        <enumerationValue key="expanding">Expanding</enumerationValue>
+                    </enumerationValues>
                 </property>
-                <property key="mainContent" type="widgets" required="false">
-                    <caption>Main content</caption>
-                    <description />
-                </property>
-                <property key="snapPoints" type="object" isList="true">
-                    <caption>Snap points</caption>
-                    <description />
-                    <properties>
-                        <propertyGroup caption="Snap points">
-                            <property key="distance" type="integer" defaultValue="0" required="true">
-                                <caption>Distance</caption>
-                                <description>The distance from the bottom of the screen.</description>
-                            </property>
-                            <property key="distanceUnit" type="enumeration" defaultValue="pixel" required="true">
-                                <caption>Unit</caption>
-                                <description>The unit of the defined distance value.</description>
-                                <enumerationValues>
-                                    <enumerationValue key="pixel">Pixel</enumerationValue>
-                                    <enumerationValue key="percentage">Percentage</enumerationValue>
-                                </enumerationValues>
-                            </property>
-                        </propertyGroup>
-                    </properties>
-                </property>
-                <property key="currentSnapPointIndex" type="attribute" onChange="onCurrentSnapPointIndexChange">
-                    <caption>Current snap point</caption>
-                    <description>Index of snap point that the bottom sheet is currently snapped to.</description>
+                <property key="triggerAttribute" type="attribute" required="false">
+                    <caption>Trigger attribute</caption>
+                    <description>Define if the bottom sheet is open or not</description>
                     <attributeTypes>
-                        <attributeType name="Integer"/>
+                        <attributeType name="Boolean"/>
                     </attributeTypes>
                 </property>
-                <property key="onCurrentSnapPointIndexChange" type="action">
-                    <caption>On change</caption>
-                    <description/>
+                <property key="modalRendering" type="enumeration" defaultValue="basic">
+                    <caption>Rendering</caption>
+                    <description>Rendering of modal</description>
+                    <enumerationValues>
+                        <enumerationValue key="basic">Basic</enumerationValue>
+                        <enumerationValue key="custom">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="itemsBasic" type="object" isList="true" required="false">
+                    <caption>Items</caption>
+                    <description />
+                    <properties>
+                        <property key="caption" type="textTemplate" required="false">
+                            <caption>Caption</caption>
+                            <category>General</category>
+                            <description />
+                        </property>
+                        <property key="action" type="action" required="false">
+                            <caption>Action</caption>
+                            <category>General</category>
+                            <description />
+                        </property>
+                        <property key="nativeImplementation" type="boolean" defaultValue="true">
+                            <caption>Use native for iOS</caption>
+                            <category>General</category>
+                            <description />
+                        </property>
+                    </properties>
+                </property>
+                <property key="smallContent" type="widgets" required="false">
+                    <caption>Small content</caption>
+                    <description />
+                </property>
+                <property key="largeContent" type="widgets" required="false">
+                    <caption>Large content</caption>
+                    <description />
+                </property>
+                <property key="showFullscreenContent" type="boolean" defaultValue="true">
+                    <caption>Show full screen placeholder</caption>
+                    <description />
+                </property>
+                <property key="fullscreenContent" type="widgets" required="false">
+                    <caption>Full screen content</caption>
+                    <description />
+                </property>
+                <property key="onOpen" type="action" required="false">
+                    <caption>On open</caption>
+                    <description />
+                </property>
+                <property key="onClose" type="action" required="false">
+                    <caption>On close</caption>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">

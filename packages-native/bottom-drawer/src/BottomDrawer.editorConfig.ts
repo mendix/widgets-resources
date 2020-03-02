@@ -1,27 +1,46 @@
 import { Problem, Properties } from "../typings/PageEditor";
-import { hideProperty } from "./utils/PageEditorUtils";
+import { changeProperty, hideProperty } from "./utils/PageEditorUtils";
 
-export function getProperties(values: any, defaultProperties: Properties, target: "web" | "desktop"): Properties {
-    // console.log(JSON.stringify(defaultProperties));
+export function getProperties(values: any, defaultProperties: Properties): Properties {
+    console.log(JSON.stringify(defaultProperties));
     // console.log(target); The epic is still waiting to be merged by PageEditor
-    if (values.type === "basic") {
-        if (target === "web") {
-            return defaultProperties;
+    if (values.type === "modal") {
+        if (values.modalRendering === "basic") {
+            hideProperty<any>("smallContent", defaultProperties);
+            hideProperty<any>("largeContent", defaultProperties);
+            hideProperty<any>("fullscreenContent", defaultProperties);
+        } else {
+            hideProperty<any>("smallContent", defaultProperties);
+            hideProperty<any>("fullscreenContent", defaultProperties);
+            hideProperty<any>("itemsBasic", defaultProperties);
+            changeProperty<any>("largeContent", "caption", "Content", defaultProperties);
         }
-        hideProperty("shape", defaultProperties);
+        hideProperty<any>("showFullscreenContent", defaultProperties);
+        hideProperty<any>("onOpen", defaultProperties);
+        hideProperty<any>("onClose", defaultProperties);
+    } else {
+        hideProperty<any>("itemsBasic", defaultProperties);
+        hideProperty<any>("triggerAttribute", defaultProperties);
+        hideProperty<any>("modalRendering", defaultProperties);
+        if (!values.showFullscreenContent) {
+            hideProperty<any>("fullscreenContent", defaultProperties);
+        }
     }
     return defaultProperties;
 }
 
 export function check(values: any): Problem[] {
     const errors: Problem[] = [];
-    if (!values.apiKey) {
-        errors.push({
-            property: "apiKey",
-            severity: "error",
-            message: "To avoid errors during map rendering it's necessary to include an Api Key",
-            url: "https://github.com/mendix/widgets-resources/blob/master/packages-web/maps/README.md#limitations"
-        });
+    console.log(values, errors);
+    if (values.type === "modal") {
+        if (!values.triggerAttribute) {
+            errors.push({
+                property: "triggerAttribute",
+                severity: "error",
+                message: "Trigger is required for 'Modal' bottom drawer",
+                url: ""
+            });
+        }
     }
     return errors;
 }

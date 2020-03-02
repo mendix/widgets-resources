@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import { ActionValue, EditableValue } from "mendix";
+import { ActionValue, DynamicValue, EditableValue } from "mendix";
 import { ReactNode } from "react";
 
 interface CommonProps<Style> {
@@ -11,17 +11,25 @@ interface CommonProps<Style> {
     style: Style[];
 }
 
-export type DistanceUnitEnum = "pixel" | "percentage";
+export type TypeEnum = "modal" | "expanding";
 
-export interface SnapPointsType {
-    distance: number;
-    distanceUnit: DistanceUnitEnum;
+export type ModalRenderingEnum = "basic" | "custom";
+
+export interface ItemsBasicType {
+    caption?: DynamicValue<string>;
+    action?: ActionValue;
+    nativeImplementation: boolean;
 }
 
 export interface BottomDrawerProps<Style> extends CommonProps<Style> {
-    headerContent?: ReactNode;
-    mainContent?: ReactNode;
-    snapPoints: SnapPointsType[];
-    currentSnapPointIndex: EditableValue<BigJs.Big>;
-    onCurrentSnapPointIndexChange?: ActionValue;
+    type: TypeEnum;
+    triggerAttribute?: EditableValue<boolean>;
+    modalRendering: ModalRenderingEnum;
+    itemsBasic: ItemsBasicType[];
+    smallContent?: ReactNode;
+    largeContent?: ReactNode;
+    showFullscreenContent: boolean;
+    fullscreenContent?: ReactNode;
+    onOpen?: ActionValue;
+    onClose?: ActionValue;
 }
