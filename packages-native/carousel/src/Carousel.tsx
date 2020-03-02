@@ -1,4 +1,4 @@
-import { createElement, Fragment, useCallback, useEffect, useState } from "react";
+import { createElement, Fragment, ReactElement, useCallback, useEffect, useState } from "react";
 import { ActivityIndicator, LayoutChangeEvent, Text, View } from "react-native";
 import { CarouselProps } from "../typings/CarouselProps";
 import { CarouselStyle, defaultCarouselStyle, LayoutStyle } from "./ui/styles";
@@ -6,7 +6,7 @@ import { default as NativeCarousel, Pagination } from "react-native-snap-carouse
 import deepmerge from "deepmerge";
 import { ObjectItem, ValueStatus } from "mendix";
 
-export const Carousel = (props: CarouselProps<CarouselStyle>): JSX.Element => {
+export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement => {
     const [sliderDimensions, setSliderDimensions] = useState({
         slider: { width: 0, height: 0 },
         slide: { width: 0, height: 0 }
