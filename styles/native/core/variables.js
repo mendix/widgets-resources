@@ -1,6 +1,6 @@
-import { Dimensions, Platform }                        from "react-native";
+import { Platform }                                    from "react-native";
 import * as custom                                     from "../app/custom-variables";
-import adjustFont                                      from "./helpers/_functions/adjustfont";
+import { adjustFont, height, width }                   from "./helpers/_functions/adjustfont";
 import { setColorBasedOnBackground, setContrastScale } from "./helpers/_functions/convertcolors";
 import { anyColorToRgbString }                         from "./helpers/_functions/convertcolors.js";
 import merge                                           from "./helpers/_functions/mergeobjects";
@@ -10,7 +10,8 @@ import { shadeBlendConvert }                           from "./helpers/_function
 //## Variables to be used during styling
 //-------------------------------------------------------------------------------------------------------------------//
 // System defined read-only values
-export const { height: deviceHeight, width: deviceWidth } = Dimensions.get("window");
+export const deviceHeight = height;
+export const deviceWidth = width;
 
 // Brand Style
 let brand = {
