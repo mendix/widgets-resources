@@ -42,7 +42,6 @@ describe("Carousel", () => {
             layout: "card",
             showPagination: true,
             activeSlideAlignment: "center",
-            loop: false,
             style: []
         };
     });
