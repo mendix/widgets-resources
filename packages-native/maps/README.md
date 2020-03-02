@@ -2,6 +2,18 @@
 
 Use maps widget to show list of locations on an interactive map in your native apps.
 
+### Using in Native Builder Generated Apps
+
+In order to use this widget with google maps you will need a Google Maps API key. Simply open `android/app/src/main/AndroidManifest.xml` and add
+
+```
+<meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="YourApiKey" />
+```
+
+inside of your `<application>` tag.
+
 ### Example
 
 You can find the example module at `example/Maps.mpk`. Simply
