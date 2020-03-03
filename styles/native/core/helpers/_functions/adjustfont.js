@@ -49,4 +49,4 @@ function adjustFont(size) {
 }
 
 
-export { adjustFont, height, width };
+export { adjustFont as default, height, width };
