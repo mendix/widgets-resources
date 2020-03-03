@@ -1,53 +1,53 @@
 {
-    "name": "widgets-resources-detox",
-    "copyright": "Mendix BV",
-    "scripts": {
-        "compress:ios": "cd ./ios && tar -cvzf NativeComponents.taz.gz NativeComponents.app && tar -cvzf nativeTemplate.taz.gz nativeTemplate.app",
-        "compress:ios:local": "cd ./ios && tar -cvzf nativeTemplate.taz.gz nativeTemplate.app",
-        "decompress:ios": "cd ./ios && tar -xvf NativeComponents.taz.gz &>/dev/null",
-        "decompress:ios:local": "cd ./ios && tar -xvf nativeTemplate.taz.gz &>/dev/null",
-        "pretest:ios": "npm run decompress:ios",
-        "test:ios": "detox test --configuration ios.simulator ./specs",
-        "test:ios:debug": "npm run pretest:ios && detox test --configuration ios.simulator --debug-synchronization 1000 --loglevel trace ./specs",
-        "test:ios:unit": "npm run pretest:ios && detox test --configuration ios.simulator",
-        "test:ios:local": "detox test --configuration ios.simulator.local ./specs",
-        "test:android": "detox test --configuration android.emulator ./specs"
-    },
-    "devDependencies": {
-        "@types/detox": "^14.5.1",
-        "@types/jest": "^24.0.23",
-        "detox": "^14.9.1",
-        "jest": "^24.9.0",
-        "jest-junit": "^9.0.0",
-        "ts-jest": "^24.1.0",
-        "typescript": "^3.7.2"
-    },
-    "detox": {
-        "test-runner": "jest",
-        "runner-config": "./jest.config.json",
-        "configurations": {
-            "ios.simulator": {
-                "binaryPath": "./ios/NativeComponents.app",
-                "type": "ios.simulator",
-                "device": {
-                    "type": "iPhone 11 Pro Max"
-                }
-            },
-            "ios.simulator.local": {
-                "binaryPath": "./ios/nativeTemplate.app",
-                "type": "ios.simulator",
-                "device": {
-                    "type": "iPhone 11 Pro Max"
-                }
-            },
-            "android.emulator": {
-                "binaryPath": "./android/NativeComponents.apk",
-                "testBinaryPath": "./android/NativeComponents-androidTest.apk",
-                "type": "android.emulator",
-                "device": {
-                    "avdName": "EMULATOR"
-                }
-            }
+  "name": "widgets-resources-detox",
+  "copyright": "Mendix BV",
+  "scripts": {
+    "compress:ios": "cd ./ios && tar -cvzf NativeComponents.taz.gz NativeComponents.app && tar -cvzf nativeTemplate.taz.gz nativeTemplate.app",
+    "compress:ios:local": "cd ./ios && tar -cvzf nativeTemplate.taz.gz nativeTemplate.app",
+    "decompress:ios": "cd ./ios && tar -xvf NativeComponents.taz.gz &>/dev/null",
+    "decompress:ios:local": "cd ./ios && tar -xvf nativeTemplate.taz.gz &>/dev/null",
+    "pretest:ios": "npm run decompress:ios && URL=https://nativecomponentste-sandbox.mxapps.io/ ../scripts/test/projectup.sh",
+    "test:ios": "detox test --configuration ios.simulator ./specs",
+    "test:ios:debug": "npm run pretest:ios && detox test --configuration ios.simulator --debug-synchronization 1000 --loglevel trace ./specs",
+    "test:ios:unit": "npm run pretest:ios && detox test --configuration ios.simulator",
+    "test:ios:local": "detox test --configuration ios.simulator.local ./specs",
+    "test:android": "detox test --configuration android.emulator ./specs"
+  },
+  "devDependencies": {
+    "@types/detox": "^14.5.1",
+    "@types/jest": "^24.0.23",
+    "detox": "^14.9.1",
+    "jest": "^24.9.0",
+    "jest-junit": "^9.0.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.7.2"
+  },
+  "detox": {
+    "test-runner": "jest",
+    "runner-config": "./jest.config.json",
+    "configurations": {
+      "ios.simulator": {
+        "binaryPath": "./ios/NativeComponents.app",
+        "type": "ios.simulator",
+        "device": {
+          "type": "iPhone 11 Pro Max"
         }
+      },
+      "ios.simulator.local": {
+        "binaryPath": "./ios/nativeTemplate.app",
+        "type": "ios.simulator",
+        "device": {
+          "type": "iPhone 11 Pro Max"
+        }
+      },
+      "android.emulator": {
+        "binaryPath": "./android/NativeComponents.apk",
+        "testBinaryPath": "./android/NativeComponents-androidTest.apk",
+        "type": "android.emulator",
+        "device": {
+          "avdName": "EMULATOR"
+        }
+      }
     }
+  }
 }
