@@ -13,9 +13,9 @@
     },
     "packagePath": "com.mendix.widget.native",
     "scripts": {
-        "start": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:ts:native -- --subprojectPath packages-native/bottom-drawer",
-        "build": "..\"/../node_modules/.bin/pluggable-widgets-tools\" build:ts:native --subprojectPath packages-native/bottom-drawer",
-        "release": "..\"/../node_modules/.bin/pluggable-widgets-tools\" release:ts:native --subprojectPath packages-native/bottom-drawer",
+        "start": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:ts:native -- --subprojectPath packages-native/bottom-sheet",
+        "build": "..\"/../node_modules/.bin/pluggable-widgets-tools\" build:ts:native --subprojectPath packages-native/bottom-sheet",
+        "release": "..\"/../node_modules/.bin/pluggable-widgets-tools\" release:ts:native --subprojectPath packages-native/bottom-sheet",
         "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.native.config.js",
         "version": "npm run release",
@@ -29,6 +29,7 @@
         "reanimated-bottom-sheet": "^1.0.0-alpha.19"
     },
     "devDependencies": {
+        "@types/react-native-actionsheet": "^2.4.1",
         "react-native-gesture-handler": "1.3.0"
     }
 }
