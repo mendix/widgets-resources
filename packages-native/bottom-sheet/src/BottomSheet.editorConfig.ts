@@ -11,6 +11,7 @@ export function getProperties(values: any, defaultProperties: Properties): Prope
             hideProperty<any>("fullscreenContent", defaultProperties);
         } else {
             hideProperty<any>("smallContent", defaultProperties);
+            hideProperty<any>("nativeImplementation", defaultProperties);
             hideProperty<any>("fullscreenContent", defaultProperties);
             hideProperty<any>("itemsBasic", defaultProperties);
             changeProperty<any>("largeContent", "caption", "Content", defaultProperties);
@@ -19,6 +20,7 @@ export function getProperties(values: any, defaultProperties: Properties): Prope
         hideProperty<any>("onOpen", defaultProperties);
         hideProperty<any>("onClose", defaultProperties);
     } else {
+        hideProperty<any>("nativeImplementation", defaultProperties);
         hideProperty<any>("itemsBasic", defaultProperties);
         hideProperty<any>("triggerAttribute", defaultProperties);
         hideProperty<any>("modalRendering", defaultProperties);

@@ -68,9 +68,10 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
                 ref={bottomSheetRef}
                 snapPoints={
                     props.fullscreenContent
-                        ? [maxHeight, heightContent + heightHeader, heightHeader, 0]
-                        : [heightContent + heightHeader, heightHeader, 0]
+                        ? [maxHeight, heightContent + heightHeader, heightHeader]
+                        : [heightContent + heightHeader, heightHeader]
                 }
+                initialSnap={props.fullscreenContent && props.largeContent && props.smallContent ? 2 : 1}
                 renderHeader={renderHeader}
                 renderContent={
                     !props.fullscreenContent

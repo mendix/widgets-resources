@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.native.bottomdrawer.BottomDrawer" supportedPlatform="Native" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
-    <name>Bottom drawer</name>
+<widget id="com.mendix.widget.native.bottomsheet.BottomSheet" supportedPlatform="Native" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>Bottom sheet</name>
     <description />
     <icon />
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
                 <property key="type" type="enumeration" defaultValue="modal">
-                    <caption>Render mode</caption>
+                    <caption>Type</caption>
                     <description>Select the way the bottom drawer will be rendered</description>
                     <enumerationValues>
                         <enumerationValue key="modal">Modal</enumerationValue>
@@ -29,22 +29,26 @@
                         <enumerationValue key="custom">Custom</enumerationValue>
                     </enumerationValues>
                 </property>
+                <property key="nativeImplementation" type="boolean" defaultValue="true">
+                    <caption>Use native for iOS</caption>
+                    <description />
+                </property>
                 <property key="itemsBasic" type="object" isList="true" required="false">
                     <caption>Items</caption>
                     <description />
                     <properties>
-                        <property key="caption" type="textTemplate" required="false">
+                        <property key="caption" type="string">
                             <caption>Caption</caption>
                             <category>General</category>
                             <description />
                         </property>
+                        <property key="color" type="string" required="false">
+                            <caption>Color</caption>
+                            <category>General</category>
+                            <description>Hex, rgb or named color (Only for Android and not native iOS)</description>
+                        </property>
                         <property key="action" type="action" required="false">
                             <caption>Action</caption>
-                            <category>General</category>
-                            <description />
-                        </property>
-                        <property key="nativeImplementation" type="boolean" defaultValue="true">
-                            <caption>Use native for iOS</caption>
                             <category>General</category>
                             <description />
                         </property>

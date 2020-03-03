@@ -1,9 +1,9 @@
 /**
- * This file was generated from BottomDrawer.xml
+ * This file was generated from BottomSheet.xml
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Team
  */
-import { ActionValue, DynamicValue, EditableValue } from "mendix";
+import { ActionValue, EditableValue } from "mendix";
 import { ReactNode } from "react";
 
 interface CommonProps<Style> {
@@ -16,15 +16,16 @@ export type TypeEnum = "modal" | "expanding";
 export type ModalRenderingEnum = "basic" | "custom";
 
 export interface ItemsBasicType {
-    caption?: DynamicValue<string>;
+    caption: string;
+    color?: string;
     action?: ActionValue;
-    nativeImplementation: boolean;
 }
 
-export interface BottomDrawerProps<Style> extends CommonProps<Style> {
+export interface BottomSheetProps<Style> extends CommonProps<Style> {
     type: TypeEnum;
     triggerAttribute?: EditableValue<boolean>;
     modalRendering: ModalRenderingEnum;
+    nativeImplementation: boolean;
     itemsBasic: ItemsBasicType[];
     smallContent?: ReactNode;
     largeContent?: ReactNode;

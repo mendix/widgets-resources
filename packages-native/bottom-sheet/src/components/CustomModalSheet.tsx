@@ -1,6 +1,6 @@
-import { createElement, ReactElement, ReactNode, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import BottomSheet from "reanimated-bottom-sheet";
-import { Dimensions, LayoutChangeEvent, Text, View } from "react-native";
+import { Dimensions, LayoutChangeEvent, View } from "react-native";
 import { EditableValue, ValueStatus } from "mendix";
 import { BottomDrawerStyle } from "../ui/Styles";
 
@@ -45,13 +45,29 @@ export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => 
         }
     };
 
+    const onOpenHandler = useCallback(() => {
+        console.warn("ON OPEN");
+        if (props.triggerAttribute && props.triggerAttribute.status === ValueStatus.Available) {
+            props.triggerAttribute.setValue(true);
+        }
+    }, [props.triggerAttribute]);
+
+    const onCloseHandler = useCallback(() => {
+        console.warn("ON CLOSE");
+        if (props.triggerAttribute && props.triggerAttribute.status === ValueStatus.Available) {
+            props.triggerAttribute.setValue(false);
+        }
+    }, [props.triggerAttribute]);
+
     return (
         <View style={props.styles.container}>
             <BottomSheet
                 ref={bottomSheetRef}
-                snapPoints={[heightContent, 0]}
-                renderHeader={() => <Text>Test</Text>}
+                snapPoints={[heightContent + 20, 0]}
+                renderHeader={() => <View style={{ height: 20 }} />}
                 renderContent={() => <View onLayout={onLayoutHandlerContent}>{props.content}</View>}
+                onOpenEnd={onOpenHandler}
+                onCloseEnd={onCloseHandler}
             />
         </View>
     );
