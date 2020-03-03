@@ -8,6 +8,9 @@ describe("Carousel", () => {
 
     it("should render carousel", async () => {
         const carousel = Carousel("mycarousel");
+        waitFor(carousel.getCarousel())
+            .toBeVisible()
+            .withTimeout(2000);
         await expect(carousel.getCarousel()).toBeVisible();
     });
 
