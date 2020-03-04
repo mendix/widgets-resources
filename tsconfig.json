@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "rootDir": "./",
+        "module": "es2015",
+        "target": "es2017",
+        "typeRoots": [
+            "../script/node_modules/@types"
+        ],
+        "types": [
+            "react-native"
+        ],
+        "lib": [
+            "es2017"
+        ],
+        "moduleResolution": "node",
+        "outDir": "./styles/native/js",
+        "newLine": "CRLF"
+    },
+    "include": [
+        "./styles/native/ts/**/*.ts"
+    ],
+    "exclude": [
+        //        "./node_modules"
+    ]
+}
