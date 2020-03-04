@@ -17,5 +17,6 @@
     "bugs": {
         "url": "https://github.com/mendix/Atlas-UI-Framework/issues"
     },
-    "homepage": "https://github.com/mendix/Atlas-UI-Framework#readme"
+    "homepage": "https://github.com/mendix/Atlas-UI-Framework#readme",
+    "devDependencies": {}
 }
