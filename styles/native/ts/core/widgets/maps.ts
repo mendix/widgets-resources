@@ -1,4 +1,5 @@
-import { brand } from "../variables";
+import { brand }    from "../variables";
+import { MapsType } from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -13,7 +14,7 @@ import { brand } from "../variables";
     Default Class For Mendix Maps Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_maps_Maps = {
+export const com_mendix_widget_native_maps_Maps: MapsType = {
     container: {
         // All ViewStyle properties are allowed
         flex: 1,

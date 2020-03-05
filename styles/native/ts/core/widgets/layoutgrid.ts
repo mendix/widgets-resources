@@ -1,4 +1,6 @@
-import { layoutgrid } from "../variables.js";
+import { layoutGrid }     from "../variables";
+import { HelperClass }    from "../../types/helperclass";
+import { LayoutGridType } from "../../types/widgets";
 
 
 //
@@ -14,109 +16,109 @@ import { layoutgrid } from "../variables.js";
     Default Class For Mendix Layoutgrid Widget
 ========================================================================== */
 
-export const LayoutGrid = {
+export const LayoutGrid: LayoutGridType = {
     container: {},
 };
 
-export const row = {
+export const row: HelperClass = {
     container: {
         flexDirection: "row",
         flexWrap: "wrap",
-        marginHorizontal: -layoutgrid.gutterSize,
+        marginHorizontal: -layoutGrid.gutterSize,
     },
 };
-export const col = {
+export const col: HelperClass = {
     container: {
         flex: 1,
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
-export const colFitToContent = {
+export const colFitToContent: HelperClass = {
     container: {
         flex: -1,
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
-export const col1 = {
+export const col1: HelperClass = {
     container: {
         flexBasis: "8.333%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
-export const col2 = {
+export const col2: HelperClass = {
     container: {
         flexBasis: "16.666%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
-export const col3 = {
+export const col3: HelperClass = {
     container: {
         flexBasis: "25%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
-export const col4 = {
+export const col4: HelperClass = {
     container: {
         flexBasis: "33.333%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
-export const col5 = {
+export const col5: HelperClass = {
     container: {
         flexBasis: "41.666%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
-export const col6 = {
+export const col6: HelperClass = {
     container: {
         flexBasis: "50%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
-export const col7 = {
+export const col7: HelperClass = {
     container: {
         flexBasis: "58.333%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
-export const col8 = {
+export const col8: HelperClass = {
     container: {
         flexBasis: "66.666%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
-export const col9 = {
+export const col9: HelperClass = {
     container: {
         flexBasis: "75%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
-export const col10 = {
+export const col10: HelperClass = {
     container: {
         flexBasis: "83.333%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
-export const col11 = {
+export const col11: HelperClass = {
     container: {
         flexBasis: "91.666%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
-export const col12 = {
+export const col12: HelperClass = {
     container: {
         flexBasis: "100%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
-export const noGutters = {
+export const noGutters: HelperClass = {
     container: {
         paddingLeft: 0,
         paddingRight: 0,
         paddingHorizontal: 0,
     },
 };
-export const noGuttersRow = {
+export const noGuttersRow: HelperClass = {
     container: {
         marginLeft: 0,
         marginRight: 0,

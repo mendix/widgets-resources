@@ -1,4 +1,5 @@
 import { border, font, navigation, spacing } from "../variables";
+import { NavigationType }                    from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -13,7 +14,7 @@ import { border, font, navigation, spacing } from "../variables";
     Default Class For Mendix TopBar, BottomBar and ProgressOverlay
 ========================================================================== */
 
-export const navigationStyle = {
+export const navigationStyle: NavigationType = {
     bottomBar: {
         container: {
             // All ViewStyle properties are allowed

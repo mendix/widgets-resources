@@ -1,4 +1,5 @@
 import { button, contrast, font } from "../variables";
+import { ActionButtonType }       from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -13,7 +14,7 @@ import { button, contrast, font } from "../variables";
     Default Class For Mendix Button Widget
 ========================================================================== */
 
-export const ActionButton = {
+export const ActionButton: ActionButtonType = {
     container: {
         // Ripplecolor and all ViewStyle properties are allowed
         borderWidth: 1,
@@ -42,7 +43,7 @@ export const ActionButton = {
 };
 
 // Default style for button inside a header
-export const ActionButtonHeader = {
+export const ActionButtonHeader: ActionButtonType = {
     container: {
         borderColor: button.header.borderColor,
         backgroundColor: button.header.backgroundColor,

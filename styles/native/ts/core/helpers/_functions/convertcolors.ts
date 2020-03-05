@@ -1,5 +1,16 @@
 import colors from "./colorwords.js";
 
+
+interface RGB {
+    r: number,
+    g: number,
+    b: number,
+}
+
+interface RGBA extends RGB {
+    a: number,
+}
+
 /**
  * Converts RGB color to HEX
  *
@@ -9,7 +20,7 @@ import colors from "./colorwords.js";
  *
  * @return  {string} Returns HEX color
  */
-function RgbToHex(r, g, b) {
+function RgbToHex(r: string | number, g: string | number | undefined, b: string | number | undefined): string {
     if (typeof r === "string" && !g && !b) {
         const color = r.replace(/rgb[(]|[)]/gm, "");
         [r, g, b] = color.split(",");
@@ -24,7 +35,7 @@ function RgbToHex(r, g, b) {
  *
  * @return  {object} Returns RGB color; {r,g,b}
  */
-function hexToRgb(hex) {
+function hexToRgb(hex: string): RGB {
     hex = hex.substring(1);
     hex = hex.length === 3 || hex.length === 4 ? [...hex].map(x => x + x).join("") : hex;
     return rgbaToRgb({
@@ -42,8 +53,8 @@ function hexToRgb(hex) {
  *
  * @return  {string} Returns RGB color; `r,g,b`
  */
-export function anyColorToRgbString(anyColor) {
-    const { r, g, b } = checkColor(anyColor);
+export function anyColorToRgbString(anyColor: string): string {
+    const {r, g, b} = checkColor(anyColor);
     return [r, g, b].join(",");
 }
 
@@ -54,7 +65,7 @@ export function anyColorToRgbString(anyColor) {
  *
  * @return  {object} Returns RGB color; {r,g,b}
  */
-function hslToRgb(hsl) {
+function hslToRgb(hsl: string): RGB {
     let [h, s, l, a = "1"] = hsl.replace(/hsla?[(]|[%]|[)]/gm, "").split(",");
     [h, s, l, a].forEach(x => Number(x.trim()));
     s /= 100;
@@ -111,7 +122,7 @@ function hslToRgb(hsl) {
  *
  * @return  {object} Returns RGB color; {r,g,b}
  */
-function rgbStringToRgb(rgb) {
+function rgbStringToRgb(rgb: string): RGB {
     const color = rgb.replace(/rgb[(]|[)]/gm, "");
     // if RGB has hex color definition
     if (~rgb.indexOf("#")) return hexToRgb(color);
@@ -121,7 +132,7 @@ function rgbStringToRgb(rgb) {
     else {
         const [r, g, b] = color.split(",");
         [r, g, b].forEach(x => x.trim());
-        return { r, g, b };
+        return {r: Number(r), g: Number(g), b: Number(b)};
     }
 }
 
@@ -132,9 +143,10 @@ function rgbStringToRgb(rgb) {
  *
  * @return  {object} Returns RGB color; {r,g,b}
  */
-function rgbaToRgb(rgba) {
-    let RGB = typeof rgba === "object" ? rgba : {};
-    const calc = val => Math.round(RGB.a * (val / 255) * 255); // Calc best color contrast values
+function rgbaToRgb(rgba: RGBA | string) {
+    let newAlpha = 1;
+    let RGB = typeof rgba === "object" ? rgba : {r: 0, g: 0, b: 0};
+    const calc = (val: number) => Math.round(newAlpha * (val / 255) * 255); // Calc best color contrast values
     // const calc = val => Math.round((RGB.a * (val / 255) + (RGB.a * ( 0 / 255))) * 255); // Calc best color contrast values
 
     if (typeof rgba === "string") {
@@ -150,12 +162,12 @@ function rgbaToRgb(rgba) {
         else {
             const [r, g, b] = color.split(",");
             [r, g, b].forEach(x => Number(x.trim()));
-            RGB = { r, g, b };
+            RGB = {r: Number(r), g: Number(g), b: Number(b)};
         }
         // RGB.a = alpha;
-        RGB.a = alpha === 1 ? 1 : (1 - alpha).toPrecision(2);
+        newAlpha = alpha === 1 ? 1 : Number((1 - alpha).toPrecision(2));
     }
-    return { r: calc(RGB.r), g: calc(RGB.g), b: calc(RGB.b) };
+    return {r: calc(RGB.r), g: calc(RGB.g), b: calc(RGB.b)};
 }
 
 /**
@@ -165,14 +177,12 @@ function rgbaToRgb(rgba) {
  *
  * @return  {object} Returns RGB color; {r,g,b}
  */
-function checkColor(color) {
-    if (typeof color === "string") {
-        if (color in colors) return colors[color.toLowerCase()];
-        else if (color[0] === "#") return hexToRgb(color);
-        else if (~color.indexOf("hsl")) return hslToRgb(color);
-        else if (~color.indexOf("rgba")) return rgbaToRgb(color);
-        else if (~color.indexOf("rgb")) return rgbStringToRgb(color);
-    }
+function checkColor(color: string) {
+    if (color in colors) return colors[color.toLowerCase()];
+    else if (color[0] === "#") return hexToRgb(color);
+    else if (~color.indexOf("hsl")) return hslToRgb(color);
+    else if (~color.indexOf("rgba")) return rgbaToRgb(color);
+    else if (~color.indexOf("rgb")) return rgbStringToRgb(color);
 }
 
 /**
@@ -182,9 +192,9 @@ function checkColor(color) {
  *
  * @return  {string} Returns RGB Alpha color
  */
-export function setColorBasedOnBackground(color) {
+export function setColorBasedOnBackground(color: string) {
     const c = checkColor(color);
-    const RGB = typeof c === "object" ? c : { r: "255", g: "255", b: "255" };
+    const RGB = typeof c === "object" ? c : {r: "255", g: "255", b: "255"};
 
     // https://www.w3.org/TR/AERT/#color-contrast
     const o = Math.round((RGB.r * 299 + RGB.g * 587 + RGB.b * 114) / 1000);
@@ -202,12 +212,12 @@ export function setColorBasedOnBackground(color) {
  *
  * @return  {string} Returns HEX color
  */
-export function setContrastScale(contrast, color) {
+export function setContrastScale(contrast: number, color: string) {
     if (contrast > 1) contrast = 1;
     if (contrast < 0) contrast = 0;
     const max = 256;
     const c = checkColor(color);
-    const { r, g, b } = typeof c === "object" ? c : { r: "255", g: "255", b: "255" };
+    const {r, g, b} = typeof c === "object" ? c : {r: "255", g: "255", b: "255"};
 
     // https://www.w3.org/TR/AERT/#color-contrast
     const brightness = Math.round((r * 299 + g * 587 + b * 114) / 1000);

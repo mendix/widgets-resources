@@ -1,4 +1,5 @@
-import { spacing } from "../variables";
+import { spacing }    from "../variables";
+import { RatingType } from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -7,7 +8,7 @@ import { spacing } from "../variables";
 // To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 //
 
-export const com_mendix_widget_native_rating_Rating = {
+export const com_mendix_widget_native_rating_Rating: RatingType = {
     container: {
         // All ViewStyle properties are allowed
     },

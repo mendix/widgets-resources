@@ -1,4 +1,5 @@
 import { background, contrast } from "../variables";
+import { QRCodeType }           from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -7,7 +8,7 @@ import { background, contrast } from "../variables";
 // To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 //
 
-export const com_mendix_widget_native_qrcode_QRCode = {
+export const com_mendix_widget_native_qrcode_QRCode: QRCodeType = {
     container: {
         // All ViewStyle properties are allowed
     },

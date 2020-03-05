@@ -1,4 +1,5 @@
 import { TextBox, TextBoxVertical } from "./textbox";
+import { TextBoxType }              from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -13,7 +14,7 @@ import { TextBox, TextBoxVertical } from "./textbox";
     Default Class For Mendix Text Area Widget
 ========================================================================== */
 
-export const TextArea = {
+export const TextArea: TextBoxType = {
     container: {
         // All ViewStyle properties are allowed
         ...TextBox.container,
@@ -23,20 +24,20 @@ export const TextArea = {
         ...TextBox.label,
         height: "100%",
         textAlignVertical: "top",
-        paddingVertical: TextBox.input.paddingVertical,
+        paddingVertical: TextBox.input?.paddingVertical,
     },
     input: {
         // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         ...TextBox.input,
         textAlignVertical: "top",
-        paddingTop: TextBox.input.paddingVertical,
+        paddingTop: TextBox.input?.paddingVertical,
     },
     inputDisabled: {
-        // All TextStyle properties are allowed
-        backgroundColor: TextBox.inputDisabled.backgroundColor,
+        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
+        backgroundColor: TextBox.inputDisabled?.backgroundColor,
     },
     inputError: {
-        // All TextStyle properties are allowed
+        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         ...TextBox.inputError,
     },
     validationMessage: {
@@ -45,13 +46,13 @@ export const TextArea = {
     },
 };
 
-export const TextAreaVertical = {
+export const TextAreaVertical: TextBoxType = {
     container: TextBoxVertical.container,
     label: {
         ...TextBoxVertical.label,
-        height: null,
-        paddingVertical: null,
-        textAlignVertical: null,
+        height: undefined,
+        paddingVertical: undefined,
+        textAlignVertical: undefined,
     },
     input: TextBoxVertical.input,
     inputError: TextBoxVertical.inputError,

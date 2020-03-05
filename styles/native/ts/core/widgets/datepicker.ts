@@ -2,6 +2,7 @@ import { NativeModules }            from "react-native";
 import { darkMode }                 from "../../app/custom-variables";
 import { font, input }              from "../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
+import { DatePickerType }           from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -23,7 +24,7 @@ const pickerBackgroundColor = !darkMode && isOSDarkMode ?
                               "rgba(0, 0, 0, 1)" :
                               darkMode && !isOSDarkMode ? "rgba(255, 255, 255, 1)" : input.backgroundColor;
 
-export const DatePicker = {
+export const DatePicker: DatePickerType = {
     container: {
         // All ViewStyle properties are allowed
         ...TextBox.container,
@@ -74,7 +75,7 @@ export const DatePicker = {
     },
 };
 
-export const DatePickerVertical = {
+export const DatePickerVertical: DatePickerType = {
     container: TextBoxVertical.container,
     label: TextBoxVertical.label,
     value: {

@@ -1,5 +1,6 @@
 import { Platform }           from "react-native";
 import { background, border } from "../variables";
+import { HelperClass }        from "../../types/helperclass";
 
 //
 // DISCLAIMER:
@@ -9,63 +10,63 @@ import { background, border } from "../variables";
 //
 
 // Hide on Android
-export const hideOnAndroid = {
+export const hideOnAndroid: HelperClass = {
     container: {
-        display: Platform.select({ android: "none" }),
+        display: Platform.select({ios: "flex", android: "none"}),
     },
 };
 // Hide on iOS
-export const hideOnIos = {
+export const hideOnIos: HelperClass = {
     container: {
-        display: Platform.select({ ios: "none" }),
+        display: Platform.select({ios: "none", android: "flex"}),
     },
 };
 
 //== Background Colors
-export const backgroundPrimary = {
+export const backgroundPrimary: HelperClass = {
     container: {
         backgroundColor: background.primary,
     },
 };
-export const backgroundSecondary = {
+export const backgroundSecondary: HelperClass = {
     container: {
         backgroundColor: background.secondary,
     },
 };
-export const backgroundBrandPrimary = {
+export const backgroundBrandPrimary: HelperClass = {
     container: {
         backgroundColor: background.brandPrimary,
     },
 };
-export const backgroundBrandSuccess = {
+export const backgroundBrandSuccess: HelperClass = {
     container: {
         backgroundColor: background.brandSuccess,
     },
 };
-export const backgroundBrandWarning = {
+export const backgroundBrandWarning: HelperClass = {
     container: {
         backgroundColor: background.brandWarning,
     },
 };
-export const backgroundBrandDanger = {
+export const backgroundBrandDanger: HelperClass = {
     container: {
         backgroundColor: background.brandDanger,
     },
 };
-export const backgroundGray = {
+export const backgroundGray: HelperClass = {
     container: {
         backgroundColor: background.gray,
     },
 };
 
 // borders
-export const borderTop = {
+export const borderTop: HelperClass = {
     container: {
         borderColor: border.color,
         borderTopWidth: border.width,
     },
 };
-export const borderBottom = {
+export const borderBottom: HelperClass = {
     container: {
         borderColor: border.color,
         borderBottomWidth: border.width,

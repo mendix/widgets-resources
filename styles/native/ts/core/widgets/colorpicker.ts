@@ -1,3 +1,5 @@
+import { ColorPickerType } from "../../types/widgets";
+
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.
@@ -11,7 +13,8 @@
     Default Class For Mendix Color Picker Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_colorpicker_ColorPicker = {
+
+export const com_mendix_widget_native_colorpicker_ColorPicker: ColorPickerType = {
     container: {
         // All ViewStyle properties are allowed
     },

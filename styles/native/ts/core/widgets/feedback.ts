@@ -1,5 +1,7 @@
 import { Platform }                                                 from "react-native";
+import { shadeBlendConvert }                                        from "../helpers/_functions/shadeblendconvert";
 import { background, border, brand, button, contrast, font, input } from "../variables";
+import { FeedbackType }                                             from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -14,7 +16,7 @@ import { background, border, brand, button, contrast, font, input } from "../var
     Default Class For Mendix Feedback Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_feedback_Feedback = {
+export const com_mendix_widget_native_feedback_Feedback: FeedbackType = {
     floatingButton: {
         // All ViewStyle properties are allowed
         borderRadius: 0,
@@ -54,7 +56,7 @@ export const com_mendix_widget_native_feedback_Feedback = {
         borderRadius: input.borderRadius,
         borderTopWidth: input.borderWidth,
         borderBottomWidth: input.borderWidth,
-        borderWidth: Platform.select({ android: border.width }),
+        borderWidth: Platform.select({android: border.width}),
 
         textAlignVertical: "top",
         paddingVertical: input.paddingVertical,
@@ -67,13 +69,13 @@ export const com_mendix_widget_native_feedback_Feedback = {
         fontFamily: input.fontFamily,
     },
     switchInput: {
-        // All TextStyle properties are allowed
+        // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
         margin: 0,
         padding: 0,
-        marginRight: Platform.select({ ios: 0, android: -5 }),
+        marginRight: Platform.select({ios: 0, android: -5}),
         thumbColorOn: background.primary,
         trackColorOn: brand.success,
-        thumbColorOff: contrast.lower,
+        thumbColorOff: contrast.low,
         trackColorOff: contrast.lowest,
     },
     button: {
@@ -83,6 +85,7 @@ export const com_mendix_widget_native_feedback_Feedback = {
         borderWidth: border.width, // Required for IOS
     },
     activityIndicator: {
+        // Only color is allowed
         color: font.color,
     },
 };

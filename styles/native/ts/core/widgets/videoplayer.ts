@@ -1,3 +1,5 @@
+import { VideoPlayerType } from "../../types/widgets";
+
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.
@@ -11,7 +13,8 @@
     Default Class For Mendix Video Player Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_videoplayer_VideoPlayer = {
+
+export const com_mendix_widget_native_videoplayer_VideoPlayer: VideoPlayerType = {
     container: {
         // All ViewStyle properties are allowed
     },

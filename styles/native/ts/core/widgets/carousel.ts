@@ -1,4 +1,6 @@
-import { brand, contrast, font, spacing } from "../variables.js";
+import { background, brand, contrast, font, spacing } from "../variables";
+import { CarouselLayoutType, CarouselType }           from "../../types/widgets";
+import { shadeBlendConvert }                          from "../helpers/_functions/shadeblendconvert";
 
 //
 // DISCLAIMER:
@@ -14,7 +16,7 @@ import { brand, contrast, font, spacing } from "../variables.js";
 ========================================================================== */
 
 // Card
-const carouselFullWidthLayout = {
+const carouselFullWidthLayout: CarouselLayoutType = {
     slideItem: {
         // All ViewStyle properties are allowed
         height: 250,
@@ -61,7 +63,7 @@ const carouselFullWidthLayout = {
     },
 };
 
-const carouselCardLayout = {
+const carouselCardLayout: CarouselLayoutType = {
     slideItem: {
         // All ViewStyle properties are allowed
         width: "70%",
@@ -111,7 +113,7 @@ const carouselCardLayout = {
 };
 
 
-export const com_mendix_widget_native_carousel_Carousel = {
+export const com_mendix_widget_native_carousel_Carousel: CarouselType = {
     container: {
         // All ViewStyle properties are allowed
     },

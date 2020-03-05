@@ -6,27 +6,28 @@
  *
  * @return  {object} Returns merged object
  */
-export default function (...sources) {
-    function mergeDeep(target, ...sources) {
-        function isObject(item) {
+
+export default function <T extends { [k: string]: any }>(...sources: T[]): T {
+    function mergeDeep(target: T, ...sources: T[]): T {
+        function isObject(item: T): boolean {
             return item && typeof item === "object" && !Array.isArray(item);
         }
 
         if (!sources.length) return target;
-        const source = sources.shift();
+        const source: T = sources.shift()!;
 
         if (isObject(target) && isObject(source)) {
-            for (const key in source) {
-                if (isObject(source[key])) {
-                    if (!target[key]) Object.assign(target, { [key]: {} });
-                    mergeDeep(target[key], source[key]);
+            Object.keys(source).forEach((key) => {
+                if (isObject(source[key] as T)) {
+                    if (!target[key]) Object.assign(target, {[key]: {}});
+                    mergeDeep(target[key] as T, source[key] as T);
                 } else {
-                    Object.assign(target, { [key]: source[key] });
+                    Object.assign(target, {[key]: source[key]});
                 }
-            }
+            });
         }
         return mergeDeep(target, ...sources);
     }
 
-    return mergeDeep({}, ...sources);
+    return mergeDeep({} as T, ...sources);
 }

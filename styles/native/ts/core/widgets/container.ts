@@ -1,3 +1,5 @@
+import { ContainerType } from "../../types/widgets";
+
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.
@@ -11,13 +13,14 @@
     Default Class For Mendix Container Widget
 ========================================================================== */
 
-export const Container = {
+
+export const Container: ContainerType = {
     container: {
         // All ViewStyle properties are allowed
     },
 };
 
-export const ScrollContainer = {
+export const ScrollContainer: ContainerType = {
     container: {
         // All ViewStyle properties are allowed
     },

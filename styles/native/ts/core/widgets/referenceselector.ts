@@ -1,6 +1,7 @@
 import { input }                    from "../variables";
 import { DropDown }                 from "./dropdown.js";
 import { TextBox, TextBoxVertical } from "./textbox";
+import { DropDownType }             from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -15,13 +16,13 @@ import { TextBox, TextBoxVertical } from "./textbox";
     Default Class For Mendix Reference Selector Widget
 ========================================================================== */
 
-export const ReferenceSelector = {
+export const ReferenceSelector: DropDownType = {
     container: {
         // All ViewStyle properties are allowed
         ...TextBox.container,
     },
     label: {
-        // All TextStyle properties are allowed
+        // numberOfLines and all TextStyle properties are allowed
         ...TextBox.label,
     },
     pickerIOS: {
@@ -61,7 +62,7 @@ export const ReferenceSelector = {
         ...TextBox.validationMessage,
     },
 };
-export const ReferenceSelectorVertical = {
+export const ReferenceSelectorVertical: DropDownType = {
     container: TextBoxVertical.container,
     label: TextBoxVertical.label,
     pickerIOS: ReferenceSelector.pickerIOS,

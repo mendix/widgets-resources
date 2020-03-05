@@ -1,4 +1,5 @@
 import { com_mendix_widget_native_slider_Slider as Slider } from "./slider";
+import { SliderType }                                       from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -13,4 +14,4 @@ import { com_mendix_widget_native_slider_Slider as Slider } from "./slider";
     Default Class For Mendix Range Slider Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_rangeslider_RangeSlider = Slider;
+export const com_mendix_widget_native_rangeslider_RangeSlider: SliderType = Slider;

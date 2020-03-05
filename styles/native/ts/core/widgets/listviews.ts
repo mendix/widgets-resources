@@ -1,3 +1,5 @@
+import { ListViewType } from "../../types/widgets";
+
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.
@@ -11,7 +13,7 @@
     Default Class For Mendix List View Widget
 ========================================================================== */
 
-export const ListView = {
+export const ListView: ListViewType = {
     container: {
         // numColumns and all ViewStyle properties are allowed
     },

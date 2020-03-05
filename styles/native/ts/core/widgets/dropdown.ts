@@ -1,5 +1,6 @@
 import { input }                    from "../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
+import { DropDownType }             from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -14,13 +15,13 @@ import { TextBox, TextBoxVertical } from "./textbox";
     Default Class For Mendix Drop Down Widget
 ========================================================================== */
 
-export const DropDown = {
+export const DropDown: DropDownType = {
     container: {
         // All ViewStyle properties are allowed
         ...TextBox.container,
     },
     label: {
-        // All TextStyle properties are allowed
+        // numberOfLines and all TextStyle properties are allowed
         ...TextBox.label,
     },
     pickerIOS: {
@@ -60,7 +61,7 @@ export const DropDown = {
         ...TextBox.validationMessage,
     },
 };
-export const DropDownVertical = {
+export const DropDownVertical: DropDownType = {
     container: TextBoxVertical.container,
     label: TextBoxVertical.label,
     pickerIOS: DropDown.pickerIOS,

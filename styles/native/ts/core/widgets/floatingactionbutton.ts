@@ -1,4 +1,6 @@
+import { shadeBlendConvert }                 from "../helpers/_functions/shadeblendconvert";
 import { background, brand, contrast, font } from "../variables";
+import { FloatingActionButtonType }          from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -13,11 +15,13 @@ import { background, brand, contrast, font } from "../variables";
     Default Class For Mendix Floating Action Button Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton = {
+export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton: FloatingActionButtonType = {
     container: {
+        // All ViewStyle properties are allowed
         margin: 30,
     },
     button: {
+        // Size, ripplecolor and all ViewStyle properties are allowed
         size: 50,
         rippleColor: contrast.lowest,
         backgroundColor: brand.primary,
@@ -31,10 +35,12 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
         },
     },
     buttonIcon: {
+        // Size and color are allowed
         size: font.sizeLarge,
         color: contrast.lowest,
     },
     secondaryButton: {
+        // Size and all ViewStyle properties are allowed
         size: 30,
         backgroundColor: background.secondary,
         elevation: 2,
@@ -47,11 +53,15 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
         },
     },
     secondaryButtonIcon: {
+        // Size and color are allowed
         size: font.sizeSmall,
         color: contrast.high,
     },
-    secondaryButtonCaption: {},
+    secondaryButtonCaption: {
+        // All TextStyle properties are allowed
+    },
     secondaryButtonCaptionContainer: {
+        // All ViewStyle properties are allowed
         marginHorizontal: 5,
         elevation: 2,
         shadowOpacity: 0.3,

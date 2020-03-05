@@ -1,4 +1,5 @@
 import { brand, contrast, font, input } from "../variables";
+import { ProgressCircleType }           from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -13,7 +14,7 @@ import { brand, contrast, font, input } from "../variables";
     Default Class For Mendix Progress Circle Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_progresscircle_ProgressCircle = {
+export const com_mendix_widget_native_progresscircle_ProgressCircle: ProgressCircleType = {
     container: {
         // All ViewStyle properties are allowed
     },

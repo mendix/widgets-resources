@@ -1,4 +1,5 @@
-import { font } from "../variables";
+import { font }     from "../variables";
+import { TextType } from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -13,7 +14,7 @@ import { font } from "../variables";
     Default Class For Mendix Text Widget
 ========================================================================== */
 
-export const Text = {
+export const Text: TextType = {
     container: {
         // All ViewStyle properties are allowed
     },
@@ -26,7 +27,7 @@ export const Text = {
     },
 };
 
-export const TextHeading1 = {
+export const TextHeading1: TextType = {
     container: {},
     text: {
         fontWeight: font.weightSemiBold,
@@ -35,7 +36,7 @@ export const TextHeading1 = {
         lineHeight: font.sizeH1,
     },
 };
-export const TextHeading2 = {
+export const TextHeading2: TextType = {
     container: {},
     text: {
         fontWeight: font.weightSemiBold,
@@ -44,7 +45,7 @@ export const TextHeading2 = {
         lineHeight: font.sizeH2,
     },
 };
-export const TextHeading3 = {
+export const TextHeading3: TextType = {
     container: {},
     text: {
         fontWeight: font.weightSemiBold,
@@ -53,7 +54,7 @@ export const TextHeading3 = {
         lineHeight: font.sizeH3,
     },
 };
-export const TextHeading4 = {
+export const TextHeading4: TextType = {
     container: {},
     text: {
         fontWeight: font.weightSemiBold,
@@ -62,7 +63,7 @@ export const TextHeading4 = {
         lineHeight: font.sizeH4,
     },
 };
-export const TextHeading5 = {
+export const TextHeading5: TextType = {
     container: {},
     text: {
         fontWeight: font.weightSemiBold,
@@ -71,7 +72,7 @@ export const TextHeading5 = {
         lineHeight: font.sizeH5,
     },
 };
-export const TextHeading6 = {
+export const TextHeading6: TextType = {
     container: {},
     text: {
         fontWeight: font.weightSemiBold,

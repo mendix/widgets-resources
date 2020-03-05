@@ -1,6 +1,7 @@
 import { Platform }            from "react-native";
 import { anyColorToRgbString } from "../helpers/_functions/convertcolors";
 import { brand, font, input }  from "../variables";
+import { ProgressBarType }     from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -15,7 +16,7 @@ import { brand, font, input }  from "../variables";
     Default Class For Mendix Progress Bar Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_progressbar_ProgressBar = {
+export const com_mendix_widget_native_progressbar_ProgressBar: ProgressBarType = {
     container: {
         // All ViewStyle properties are allowed
         alignSelf: "stretch",
@@ -42,5 +43,5 @@ export const com_mendix_widget_native_progressbar_ProgressBar = {
         color: input.errorColor,
         fontSize: font.size,
         fontFamily: font.family,
-    }
+    },
 };

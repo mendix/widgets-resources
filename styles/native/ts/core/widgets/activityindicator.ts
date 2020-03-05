@@ -1,4 +1,5 @@
-import { brand } from "../variables";
+import { brand }                 from "../variables";
+import { ActivityIndicatorType } from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -13,12 +14,13 @@ import { brand } from "../variables";
     Default Class For Mendix Activity Indicator Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_activityindicator_ActivityIndicator = {
+export const com_mendix_widget_native_activityindicator_ActivityIndicator: ActivityIndicatorType = {
     container: {
         // All ViewStyle properties are allowed
     },
     indicator: {
-        // Just this property
+        // Color and size are allowed
         color: brand.primary,
+        size: "large",
     },
 };

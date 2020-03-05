@@ -1,4 +1,5 @@
 import { badge, font } from "../variables";
+import { BadgeType }   from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -13,7 +14,7 @@ import { badge, font } from "../variables";
     Default Class For Mendix Badge Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_badge_Badge = {
+export const com_mendix_widget_native_badge_Badge: BadgeType = {
     container: {
         // All ViewStyle properties are allowed
         backgroundColor: badge.default.backgroundColor,

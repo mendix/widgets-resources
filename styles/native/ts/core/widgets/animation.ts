@@ -1,3 +1,5 @@
+import { AnimationType } from "../../types/widgets";
+
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.
@@ -11,6 +13,7 @@
     Default Class For Mendix Animation Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_animation_Animation = {
+
+export const com_mendix_widget_native_animation_Animation: AnimationType = {
     container: {},
 };

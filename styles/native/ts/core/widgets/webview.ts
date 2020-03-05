@@ -1,4 +1,5 @@
-import { font } from "../variables";
+import { font }        from "../variables";
+import { WebViewType } from "../../types/widgets";
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.
@@ -13,7 +14,7 @@ import { font } from "../variables";
 ========================================================================== */
 
 
-export const com_mendix_widget_native_webview_WebView = {
+export const com_mendix_widget_native_webview_WebView: WebViewType = {
     container: {
         // All ViewStyle properties are allowed
     },

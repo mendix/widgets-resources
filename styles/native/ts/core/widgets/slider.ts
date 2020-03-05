@@ -1,5 +1,6 @@
 import { Platform }                                         from "react-native";
 import { background, border, brand, contrast, font, input } from "../variables";
+import { SliderType }                                       from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -14,7 +15,7 @@ import { background, border, brand, contrast, font, input } from "../variables";
     Default Class For Mendix Slider Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_slider_Slider = {
+export const com_mendix_widget_native_slider_Slider: SliderType = {
     container: {
         // All ViewStyle properties are allowed
         alignSelf: "stretch",

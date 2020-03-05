@@ -1,5 +1,6 @@
 import { brand, button, contrast, font } from "../variables";
 import merge                             from "./_functions/mergeobjects";
+import { ActionButtonType }              from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -15,7 +16,7 @@ import merge                             from "./_functions/mergeobjects";
 //## Helper classes to change the look and feel of the widget
 ========================================================================== */
 // Button Colors
-export const btnSecondary = {
+export const btnSecondary: ActionButtonType = {
     container: {
         borderColor: button.secondary.borderColor,
         backgroundColor: button.secondary.backgroundColor,
@@ -27,7 +28,7 @@ export const btnSecondary = {
         color: button.secondary.color,
     },
 };
-export const btnSuccess = {
+export const btnSuccess: ActionButtonType = {
     container: {
         borderColor: button.success.borderColor,
         backgroundColor: button.success.backgroundColor,
@@ -39,7 +40,7 @@ export const btnSuccess = {
         color: button.success.color,
     },
 };
-export const btnWarning = {
+export const btnWarning: ActionButtonType = {
     container: {
         borderColor: button.warning.borderColor,
         backgroundColor: button.warning.backgroundColor,
@@ -51,7 +52,7 @@ export const btnWarning = {
         color: button.warning.color,
     },
 };
-export const btnDanger = {
+export const btnDanger: ActionButtonType = {
     container: {
         borderColor: button.danger.borderColor,
         backgroundColor: button.danger.backgroundColor,
@@ -63,7 +64,7 @@ export const btnDanger = {
         color: button.danger.color,
     },
 };
-export const btnPrimaryInversed = {
+export const btnPrimaryInversed: ActionButtonType = {
     container: {
         borderColor: button.primary.color,
         backgroundColor: button.primary.color,
@@ -79,7 +80,7 @@ export const btnPrimaryInversed = {
 //== Extra Classes
 //## Helper classes to change the look and feel of the widget
 //-------------------------------------------------------------------------------------------------------------------//
-export const btnSecondaryInversed = {
+export const btnSecondaryInversed: ActionButtonType = {
     container: {
         borderColor: button.secondary.inversedColor,
         backgroundColor: button.secondary.backgroundColor,
@@ -93,7 +94,7 @@ export const btnSecondaryInversed = {
 };
 
 // Button Icon Only
-export const btnIcon = {
+export const btnIconPrimary: ActionButtonType = {
     container: {
         borderWidth: 0,
         backgroundColor: "transparent",
@@ -107,7 +108,7 @@ export const btnIcon = {
         fontSize: 0,
     },
 };
-export const btnIconPrimary = merge(btnIcon, {
+export const btnIconSecondary: ActionButtonType = merge(btnIconPrimary, {
     icon: {
         color: button.primary.backgroundColor,
     },
@@ -117,28 +118,28 @@ export const btnIconSecondary = merge(btnIcon, {
         color: contrast.low,
     },
 });
-export const btnIconSuccess = merge(btnIcon, {
+export const btnIconSuccess: ActionButtonType = merge(btnIconPrimary, {
     icon: {
         color: button.success.backgroundColor,
     },
 });
-export const btnIconWarning = merge(btnIcon, {
+export const btnIconWarning: ActionButtonType = merge(btnIconPrimary, {
     icon: {
         color: button.warning.backgroundColor,
     },
 });
-export const btnIconDanger = merge(btnIcon, {
+export const btnIconDanger: ActionButtonType = merge(btnIconPrimary, {
     icon: {
         color: button.danger.backgroundColor,
     },
 });
-export const btnIconWhite = merge(btnIcon, {
+export const btnIconWhite: ActionButtonType = merge(btnIconPrimary, {
     icon: {
         color: "#FFF",
     },
 });
 
-export const btnIconGrayRounded = {
+export const btnIconGrayRounded: ActionButtonType = {
     container: {
         height: 80,
         width: 80,
@@ -157,7 +158,7 @@ export const btnIconGrayRounded = {
 };
 
 // Round Button Icon With Background
-export const btnIconPrimaryBackground = {
+export const btnIconPrimaryBackground: ActionButtonType = {
     container: {
         width: 40,
         height: 40,
@@ -177,7 +178,7 @@ export const btnIconPrimaryBackground = {
 
 
 // Text only
-export const btnAsText = {
+export const btnAsText: ActionButtonType = {
     container: {
         maxHeight: 22,
         borderWidth: 0,
@@ -189,7 +190,6 @@ export const btnAsText = {
     },
     icon: {
         color: brand.primary,
-        fontWeight: font.weightSemiBold,
         size: button.fontSizeIcon,
     },
     caption: {
@@ -200,7 +200,7 @@ export const btnAsText = {
 };
 
 // Button sizes
-export const btnLarge = {
+export const btnLarge: ActionButtonType = {
     icon: {
         size: button.fontSizeIconLarge,
     },

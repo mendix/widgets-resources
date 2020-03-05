@@ -1,4 +1,6 @@
-import { spacing } from "../variables";
+import { spacing }     from "../variables";
+import { HelperClass } from "../../types/helperclass";
+
 
 //
 // DISCLAIMER:
@@ -8,247 +10,247 @@ import { spacing } from "../variables";
 //
 
 //== Inner Spacing
-export const spacingInnerSmallest = {
+export const spacingInnerSmallest: HelperClass = {
     container: {
         padding: spacing.smallest,
     },
 };
-export const spacingInnerVerticalSmallest = {
+export const spacingInnerVerticalSmallest: HelperClass = {
     container: {
         paddingVertical: spacing.smallest,
     },
 };
-export const spacingInnerHorizontalSmallest = {
+export const spacingInnerHorizontalSmallest: HelperClass = {
     container: {
         paddingHorizontal: spacing.smallest,
     },
 };
-export const spacingInnerTopSmallest = {
+export const spacingInnerTopSmallest: HelperClass = {
     container: {
         paddingTop: spacing.smallest,
     },
 };
-export const spacingInnerRightSmallest = {
+export const spacingInnerRightSmallest: HelperClass = {
     container: {
         paddingRight: spacing.smallest,
     },
 };
-export const spacingInnerLeftSmallest = {
+export const spacingInnerLeftSmallest: HelperClass = {
     container: {
         paddingLeft: spacing.smallest,
     },
 };
-export const spacingInnerBottomSmallest = {
+export const spacingInnerBottomSmallest: HelperClass = {
     container: {
         paddingBottom: spacing.smallest,
     },
 };
-export const spacingInnerSmaller = {
+export const spacingInnerSmaller: HelperClass = {
     container: {
         padding: spacing.smaller,
     },
 };
-export const spacingInnerVerticalSmaller = {
+export const spacingInnerVerticalSmaller: HelperClass = {
     container: {
         paddingVertical: spacing.smaller,
     },
 };
-export const spacingInnerHorizontalSmaller = {
+export const spacingInnerHorizontalSmaller: HelperClass = {
     container: {
         paddingHorizontal: spacing.smaller,
     },
 };
-export const spacingInnerTopSmaller = {
+export const spacingInnerTopSmaller: HelperClass = {
     container: {
         paddingTop: spacing.smaller,
     },
 };
-export const spacingInnerRightSmaller = {
+export const spacingInnerRightSmaller: HelperClass = {
     container: {
         paddingRight: spacing.smaller,
     },
 };
-export const spacingInnerLeftSmaller = {
+export const spacingInnerLeftSmaller: HelperClass = {
     container: {
         paddingLeft: spacing.smaller,
     },
 };
-export const spacingInnerBottomSmaller = {
+export const spacingInnerBottomSmaller: HelperClass = {
     container: {
         paddingBottom: spacing.smaller,
     },
 };
-export const spacingInnerSmall = {
+export const spacingInnerSmall: HelperClass = {
     container: {
         padding: spacing.small,
     },
 };
-export const spacingInnerVerticalSmall = {
+export const spacingInnerVerticalSmall: HelperClass = {
     container: {
         paddingVertical: spacing.small,
     },
 };
-export const spacingInnerHorizontalSmall = {
+export const spacingInnerHorizontalSmall: HelperClass = {
     container: {
         paddingHorizontal: spacing.small,
     },
 };
-export const spacingInnerTopSmall = {
+export const spacingInnerTopSmall: HelperClass = {
     container: {
         paddingTop: spacing.small,
     },
 };
-export const spacingInnerRightSmall = {
+export const spacingInnerRightSmall: HelperClass = {
     container: {
         paddingRight: spacing.small,
     },
 };
-export const spacingInnerLeftSmall = {
+export const spacingInnerLeftSmall: HelperClass = {
     container: {
         paddingLeft: spacing.small,
     },
 };
-export const spacingInnerBottomSmall = {
+export const spacingInnerBottomSmall: HelperClass = {
     container: {
         paddingBottom: spacing.small,
     },
 };
-export const spacingInnerMedium = {
+export const spacingInnerMedium: HelperClass = {
     container: {
         padding: spacing.regular,
     },
 };
-export const spacingInnerVerticalMedium = {
+export const spacingInnerVerticalMedium: HelperClass = {
     container: {
         paddingVertical: spacing.regular,
     },
 };
-export const spacingInnerHorizontalMedium = {
+export const spacingInnerHorizontalMedium: HelperClass = {
     container: {
         paddingHorizontal: spacing.regular,
     },
 };
-export const spacingInnerTopMedium = {
+export const spacingInnerTopMedium: HelperClass = {
     container: {
         paddingTop: spacing.regular,
     },
 };
-export const spacingInnerRightMedium = {
+export const spacingInnerRightMedium: HelperClass = {
     container: {
         paddingRight: spacing.regular,
     },
 };
-export const spacingInnerLeftMedium = {
+export const spacingInnerLeftMedium: HelperClass = {
     container: {
         paddingLeft: spacing.regular,
     },
 };
-export const spacingInnerBottomMedium = {
+export const spacingInnerBottomMedium: HelperClass = {
     container: {
         paddingBottom: spacing.regular,
     },
 };
-export const spacingInnerLarge = {
+export const spacingInnerLarge: HelperClass = {
     container: {
         padding: spacing.large,
     },
 };
-export const spacingInnerVerticalLarge = {
+export const spacingInnerVerticalLarge: HelperClass = {
     container: {
         paddingVertical: spacing.large,
     },
 };
-export const spacingInnerHorizontalLarge = {
+export const spacingInnerHorizontalLarge: HelperClass = {
     container: {
         paddingHorizontal: spacing.large,
     },
 };
-export const spacingInnerTopLarge = {
+export const spacingInnerTopLarge: HelperClass = {
     container: {
         paddingTop: spacing.large,
     },
 };
-export const spacingInnerRightLarge = {
+export const spacingInnerRightLarge: HelperClass = {
     container: {
         paddingRight: spacing.large,
     },
 };
-export const spacingInnerLeftLarge = {
+export const spacingInnerLeftLarge: HelperClass = {
     container: {
         paddingLeft: spacing.large,
     },
 };
-export const spacingInnerBottomLarge = {
+export const spacingInnerBottomLarge: HelperClass = {
     container: {
         paddingBottom: spacing.large,
     },
 };
-export const spacingInnerLarger = {
+export const spacingInnerLarger: HelperClass = {
     container: {
         padding: spacing.larger,
     },
 };
-export const spacingInnerVerticalLarger = {
+export const spacingInnerVerticalLarger: HelperClass = {
     container: {
         paddingVertical: spacing.larger,
     },
 };
-export const spacingInnerHorizontalLarger = {
+export const spacingInnerHorizontalLarger: HelperClass = {
     container: {
         paddingHorizontal: spacing.larger,
     },
 };
-export const spacingInnerTopLarger = {
+export const spacingInnerTopLarger: HelperClass = {
     container: {
         paddingTop: spacing.larger,
     },
 };
-export const spacingInnerRightLarger = {
+export const spacingInnerRightLarger: HelperClass = {
     container: {
         paddingRight: spacing.larger,
     },
 };
-export const spacingInnerLeftLarger = {
+export const spacingInnerLeftLarger: HelperClass = {
     container: {
         paddingLeft: spacing.larger,
     },
 };
-export const spacingInnerBottomLarger = {
+export const spacingInnerBottomLarger: HelperClass = {
     container: {
         paddingBottom: spacing.larger,
     },
 };
-export const spacingInnerLargest = {
+export const spacingInnerLargest: HelperClass = {
     container: {
         padding: spacing.largest,
     },
 };
-export const spacingInnerVerticalLargest = {
+export const spacingInnerVerticalLargest: HelperClass = {
     container: {
         paddingVertical: spacing.largest,
     },
 };
-export const spacingInnerHorizontalLargest = {
+export const spacingInnerHorizontalLargest: HelperClass = {
     container: {
         paddingHorizontal: spacing.largest,
     },
 };
-export const spacingInnerTopLargest = {
+export const spacingInnerTopLargest: HelperClass = {
     container: {
         paddingTop: spacing.largest,
     },
 };
-export const spacingInnerRightLargest = {
+export const spacingInnerRightLargest: HelperClass = {
     container: {
         paddingRight: spacing.largest,
     },
 };
-export const spacingInnerLeftLargest = {
+export const spacingInnerLeftLargest: HelperClass = {
     container: {
         paddingLeft: spacing.largest,
     },
 };
-export const spacingInnerBottomLargest = {
+export const spacingInnerBottomLargest: HelperClass = {
     container: {
         paddingBottom: spacing.largest,
     },
@@ -256,247 +258,247 @@ export const spacingInnerBottomLargest = {
 
 
 //== Outer Spacing
-export const spacingOuterSmallest = {
+export const spacingOuterSmallest: HelperClass = {
     container: {
         margin: spacing.smallest,
     },
 };
-export const spacingOuterVerticalSmallest = {
+export const spacingOuterVerticalSmallest: HelperClass = {
     container: {
         marginVertical: spacing.smallest,
     },
 };
-export const spacingOuterHorizontalSmallest = {
+export const spacingOuterHorizontalSmallest: HelperClass = {
     container: {
         marginHorizontal: spacing.smallest,
     },
 };
-export const spacingOuterTopSmallest = {
+export const spacingOuterTopSmallest: HelperClass = {
     container: {
         marginTop: spacing.smallest,
     },
 };
-export const spacingOuterRightSmallest = {
+export const spacingOuterRightSmallest: HelperClass = {
     container: {
         marginRight: spacing.smallest,
     },
 };
-export const spacingOuterLeftSmallest = {
+export const spacingOuterLeftSmallest: HelperClass = {
     container: {
         marginLeft: spacing.smallest,
     },
 };
-export const spacingOuterBottomSmallest = {
+export const spacingOuterBottomSmallest: HelperClass = {
     container: {
         marginBottom: spacing.smallest,
     },
 };
-export const spacingOuterSmaller = {
+export const spacingOuterSmaller: HelperClass = {
     container: {
         margin: spacing.smaller,
     },
 };
-export const spacingOuterVerticalSmaller = {
+export const spacingOuterVerticalSmaller: HelperClass = {
     container: {
         marginVertical: spacing.smaller,
     },
 };
-export const spacingOuterHorizontalSmaller = {
+export const spacingOuterHorizontalSmaller: HelperClass = {
     container: {
         marginHorizontal: spacing.smaller,
     },
 };
-export const spacingOuterTopSmaller = {
+export const spacingOuterTopSmaller: HelperClass = {
     container: {
         marginTop: spacing.smaller,
     },
 };
-export const spacingOuterRightSmaller = {
+export const spacingOuterRightSmaller: HelperClass = {
     container: {
         marginRight: spacing.smaller,
     },
 };
-export const spacingOuterLeftSmaller = {
+export const spacingOuterLeftSmaller: HelperClass = {
     container: {
         marginLeft: spacing.smaller,
     },
 };
-export const spacingOuterBottomSmaller = {
+export const spacingOuterBottomSmaller: HelperClass = {
     container: {
         marginBottom: spacing.smaller,
     },
 };
-export const spacingOuterSmall = {
+export const spacingOuterSmall: HelperClass = {
     container: {
         margin: spacing.small,
     },
 };
-export const spacingOuterVerticalSmall = {
+export const spacingOuterVerticalSmall: HelperClass = {
     container: {
         marginVertical: spacing.small,
     },
 };
-export const spacingOuterHorizontalSmall = {
+export const spacingOuterHorizontalSmall: HelperClass = {
     container: {
         marginHorizontal: spacing.small,
     },
 };
-export const spacingOuterTopSmall = {
+export const spacingOuterTopSmall: HelperClass = {
     container: {
         marginTop: spacing.small,
     },
 };
-export const spacingOuterRightSmall = {
+export const spacingOuterRightSmall: HelperClass = {
     container: {
         marginRight: spacing.small,
     },
 };
-export const spacingOuterLeftSmall = {
+export const spacingOuterLeftSmall: HelperClass = {
     container: {
         marginLeft: spacing.small,
     },
 };
-export const spacingOuterBottomSmall = {
+export const spacingOuterBottomSmall: HelperClass = {
     container: {
         marginBottom: spacing.small,
     },
 };
-export const spacingOuterMedium = {
+export const spacingOuterMedium: HelperClass = {
     container: {
         margin: spacing.regular,
     },
 };
-export const spacingOuterVerticalMedium = {
+export const spacingOuterVerticalMedium: HelperClass = {
     container: {
         marginVertical: spacing.regular,
     },
 };
-export const spacingOuterHorizontalMedium = {
+export const spacingOuterHorizontalMedium: HelperClass = {
     container: {
         marginHorizontal: spacing.regular,
     },
 };
-export const spacingOuterTopMedium = {
+export const spacingOuterTopMedium: HelperClass = {
     container: {
         marginTop: spacing.regular,
     },
 };
-export const spacingOuterRightMedium = {
+export const spacingOuterRightMedium: HelperClass = {
     container: {
         marginRight: spacing.regular,
     },
 };
-export const spacingOuterLeftMedium = {
+export const spacingOuterLeftMedium: HelperClass = {
     container: {
         marginLeft: spacing.regular,
     },
 };
-export const spacingOuterBottomMedium = {
+export const spacingOuterBottomMedium: HelperClass = {
     container: {
         marginBottom: spacing.regular,
     },
 };
-export const spacingOuterLarge = {
+export const spacingOuterLarge: HelperClass = {
     container: {
         margin: spacing.large,
     },
 };
-export const spacingOuterVerticalLarge = {
+export const spacingOuterVerticalLarge: HelperClass = {
     container: {
         marginVertical: spacing.large,
     },
 };
-export const spacingOuterHorizontalLarge = {
+export const spacingOuterHorizontalLarge: HelperClass = {
     container: {
         marginHorizontal: spacing.large,
     },
 };
-export const spacingOuterTopLarge = {
+export const spacingOuterTopLarge: HelperClass = {
     container: {
         marginTop: spacing.large,
     },
 };
-export const spacingOuterRightLarge = {
+export const spacingOuterRightLarge: HelperClass = {
     container: {
         marginRight: spacing.large,
     },
 };
-export const spacingOuterLeftLarge = {
+export const spacingOuterLeftLarge: HelperClass = {
     container: {
         marginLeft: spacing.large,
     },
 };
-export const spacingOuterBottomLarge = {
+export const spacingOuterBottomLarge: HelperClass = {
     container: {
         marginBottom: spacing.large,
     },
 };
-export const spacingOuterLarger = {
+export const spacingOuterLarger: HelperClass = {
     container: {
         margin: spacing.larger,
     },
 };
-export const spacingOuterVerticalLarger = {
+export const spacingOuterVerticalLarger: HelperClass = {
     container: {
         marginVertical: spacing.larger,
     },
 };
-export const spacingOuterHorizontalLarger = {
+export const spacingOuterHorizontalLarger: HelperClass = {
     container: {
         marginHorizontal: spacing.larger,
     },
 };
-export const spacingOuterTopLarger = {
+export const spacingOuterTopLarger: HelperClass = {
     container: {
         marginTop: spacing.larger,
     },
 };
-export const spacingOuterRightLarger = {
+export const spacingOuterRightLarger: HelperClass = {
     container: {
         marginRight: spacing.larger,
     },
 };
-export const spacingOuterLeftLarger = {
+export const spacingOuterLeftLarger: HelperClass = {
     container: {
         marginLeft: spacing.larger,
     },
 };
-export const spacingOuterBottomLarger = {
+export const spacingOuterBottomLarger: HelperClass = {
     container: {
         marginBottom: spacing.larger,
     },
 };
-export const spacingOuterLargest = {
+export const spacingOuterLargest: HelperClass = {
     container: {
         margin: spacing.largest,
     },
 };
-export const spacingOuterVerticalLargest = {
+export const spacingOuterVerticalLargest: HelperClass = {
     container: {
         marginVertical: spacing.largest,
     },
 };
-export const spacingOuterHorizontalLargest = {
+export const spacingOuterHorizontalLargest: HelperClass = {
     container: {
         marginHorizontal: spacing.largest,
     },
 };
-export const spacingOuterTopLargest = {
+export const spacingOuterTopLargest: HelperClass = {
     container: {
         marginTop: spacing.largest,
     },
 };
-export const spacingOuterRightLargest = {
+export const spacingOuterRightLargest: HelperClass = {
     container: {
         marginRight: spacing.largest,
     },
 };
-export const spacingOuterLeftLargest = {
+export const spacingOuterLeftLargest: HelperClass = {
     container: {
         marginLeft: spacing.largest,
     },
 };
-export const spacingOuterBottomLargest = {
+export const spacingOuterBottomLargest: HelperClass = {
     container: {
         marginBottom: spacing.largest,
     },

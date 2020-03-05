@@ -1,4 +1,5 @@
-import { background } from "../variables.js";
+import { background }        from "../variables";
+import { ListViewSwipeType } from "../../types/widgets";
 
 
 //
@@ -15,7 +16,7 @@ import { background } from "../variables.js";
 ========================================================================== */
 
 
-export const com_mendix_widget_native_listviewswipe_ListViewSwipe = {
+export const com_mendix_widget_native_listviewswipe_ListViewSwipe: ListViewSwipeType = {
     container: {
         // All ViewStyle properties are allowed
         flex: 1,

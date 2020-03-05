@@ -1,5 +1,6 @@
 import { Platform }                                 from "react-native";
 import { background, brand, contrast, font, input } from "../variables";
+import { ToggleButtonsType }                        from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -14,7 +15,7 @@ import { background, brand, contrast, font, input } from "../variables";
     Default Class For Mendix Segmented Controls Widget
 ========================================================================== */
 
-export const com_mendix_widget_native_togglebuttons_ToggleButtons = {
+export const com_mendix_widget_native_togglebuttons_ToggleButtons: ToggleButtonsType = {
     container: {
         // All ViewStyle properties are allowed
         alignSelf: "stretch",
@@ -26,11 +27,11 @@ export const com_mendix_widget_native_togglebuttons_ToggleButtons = {
     button: {
         // All ViewStyle properties are allowed
         backgroundColor: background.primary,
-        borderColor: Platform.select({ ios: brand.primary, android: contrast.lower }),
+        borderColor: Platform.select({ios: brand.primary, android: contrast.lower}),
     },
     text: {
         // All TextStyle properties are allowed
-        color: Platform.select({ ios: brand.primary, android: contrast.high }),
+        color: Platform.select({ios: brand.primary, android: contrast.high}),
         fontSize: font.size,
         fontFamily: font.family,
     },
@@ -57,5 +58,5 @@ export const com_mendix_widget_native_togglebuttons_ToggleButtons = {
         color: input.errorColor,
         fontSize: font.size,
         fontFamily: font.family,
-    }
+    },
 };

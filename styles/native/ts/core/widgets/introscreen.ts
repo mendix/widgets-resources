@@ -1,5 +1,6 @@
-import { isIphoneWithNotch }                           from "../helpers/_functions/device.js";
-import { background, button, contrast, font, spacing } from "../variables.js";
+import { isIphoneWithNotch }                      from "../helpers/_functions/device";
+import { background, button, font, spacing }      from "../variables";
+import { IntroScreenButtonType, IntroScreenType } from "../../types/widgets";
 
 
 //
@@ -16,7 +17,7 @@ import { background, button, contrast, font, spacing } from "../variables.js";
 ========================================================================== */
 
 // Button styles when the chose to show the indicator above the buttons
-const introScreenButtonPaginationAbove = {
+export const introScreenButtonPaginationAbove: IntroScreenButtonType = {
     container: {
         // Ripplecolor and all ViewStyle properties are allowed
         flexDirection: "row",
@@ -42,7 +43,7 @@ const introScreenButtonPaginationAbove = {
     },
 };
 // Button styles when the chose to show the indicator between the buttons
-const introScreenButtonPaginationBetween = {
+export const introScreenButtonPaginationBetween: IntroScreenButtonType = {
     container: {
         // Ripplecolor and all ViewStyle properties are allowed
         flexDirection: "row",
@@ -66,7 +67,7 @@ const introScreenButtonPaginationBetween = {
 };
 
 // Default styles
-export const com_mendix_widget_native_introscreen_IntroScreen = {
+export const com_mendix_widget_native_introscreen_IntroScreen: IntroScreenType = {
     fullscreenContainer: {
         // All ViewStyle properties are allowed
         backgroundColor: background.primary,

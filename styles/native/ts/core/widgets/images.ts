@@ -1,4 +1,5 @@
-import { contrast } from "../variables.js";
+import { contrast }  from "../variables";
+import { ImageType } from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -13,7 +14,7 @@ import { contrast } from "../variables.js";
     Default Class For Mendix Image Widgets
 ========================================================================== */
 
-export const Image = {
+export const Image: ImageType = {
     container: {
         // RippleColor & All ViewStyle properties are allowed
         rippleColor: contrast.lowest,
@@ -26,7 +27,7 @@ export const Image = {
     },
 };
 
-export const ImageViewer = {
+export const ImageViewer: ImageType = {
     container: {
         // RippleColor & All ViewStyle properties are allowed
         rippleColor: contrast.lowest,

@@ -1,6 +1,7 @@
 import { Platform }                             from "react-native";
 import { background, brand, contrast, spacing } from "../variables";
 import { TextBox, TextBoxVertical }             from "./textbox";
+import { CheckBoxType }                         from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -15,7 +16,7 @@ import { TextBox, TextBoxVertical }             from "./textbox";
     Default Class For Mendix CheckBox Widget
 ========================================================================== */
 
-export const CheckBox = {
+export const CheckBox: CheckBoxType = {
     container: {
         // All ViewStyle properties are allowed
         ...TextBox.container,
@@ -29,22 +30,23 @@ export const CheckBox = {
     input: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
         backgroundColor: "transparent",
-        marginRight: Platform.select({ android: -3 }),
+        marginRight: Platform.select({android: -3}),
         thumbColorOn: background.primary,
         trackColorOn: brand.success,
         thumbColorOff: contrast.regular,
         trackColorOff: contrast.lower,
     },
     inputDisabled: {
-        opacity: Platform.select({ android: 0.5 }),
+        // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
+        opacity: Platform.select({android: 0.5}),
     },
     inputError: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
         ...TextBox.inputError,
         thumbColorOn: background.primary,
         trackColorOn: brand.danger,
-        thumbColorOff: contrast.lower,
-        trackColorOff: contrast.lowest,
+        thumbColorOff: contrast.lowest,
+        trackColorOff: brand.danger,
     },
     validationMessage: {
         // All TextStyle properties are allowed
@@ -53,7 +55,7 @@ export const CheckBox = {
     },
 };
 
-export const CheckBoxVertical = {
+export const CheckBoxVertical: CheckBoxType = {
     container: TextBoxVertical.container,
     label: {
         ...TextBoxVertical.label,
@@ -67,8 +69,8 @@ export const CheckBoxVertical = {
         ...TextBoxVertical.inputError,
         thumbColorOn: background.primary,
         trackColorOn: brand.danger,
-        thumbColorOff: contrast.lower,
-        trackColorOff: contrast.lowest,
+        thumbColorOff: contrast.lowest,
+        trackColorOff: brand.danger,
     },
     validationMessage: {
         ...TextBoxVertical.validationMessage,

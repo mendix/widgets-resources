@@ -1,9 +1,25 @@
-import { Platform }                                    from "react-native";
-import * as custom                                     from "../app/custom-variables";
-import adjustFont, { height, width }                   from "./helpers/_functions/adjustfont";
-import { setColorBasedOnBackground, setContrastScale } from "./helpers/_functions/convertcolors";
-import { anyColorToRgbString }                         from "./helpers/_functions/convertcolors.js";
-import merge                                           from "./helpers/_functions/mergeobjects";
+import { Platform }                                                         from "react-native";
+import * as custom                                                          from "../app/custom-variables";
+import adjustFont, { height, width }                                        from "./helpers/_functions/adjustfont";
+import { anyColorToRgbString, setColorBasedOnBackground, setContrastScale } from "./helpers/_functions/convertcolors";
+import merge                                                                from "./helpers/_functions/mergeobjects";
+import { shadeBlendConvert }                                                from "./helpers/_functions/shadeblendconvert";
+import {
+    VariablesBackground,
+    VariablesBadge,
+    VariablesBorder,
+    VariablesBrand,
+    VariablesButton,
+    VariablesContrast,
+    VariablesFont,
+    VariablesInput,
+    VariablesLayoutgrid,
+    VariablesListView,
+    VariablesNavigation,
+    VariablesSpacing,
+    VariablesTabContainer,
+}                                                                           from "../types/variables";
+
 
 //== Global variables
 //## Variables to be used during styling
@@ -13,7 +29,7 @@ export const deviceHeight = height;
 export const deviceWidth = width;
 
 // Brand Style
-let brand = {
+let brand: VariablesBrand = {
     primary: "#0595DB",
     success: "#76CA02",
     warning: "#f99b1d",
@@ -25,7 +41,7 @@ let brand = {
 };
 brand = merge(brand, custom.brand || {});
 
-let background = {
+let background: VariablesBackground = {
     primary: "#FFF",
     secondary: setContrastScale(0.03, "#FFF"),
     gray: "#c6c6cc",
@@ -37,7 +53,7 @@ let background = {
 background = merge(background, custom.background || {});
 
 // Contrast (Gray) colors based on background.primary
-let contrast = {
+let contrast: VariablesContrast = {
     highest: setContrastScale(0.95, background.primary),
     higher: setContrastScale(0.8, background.primary),
     high: setContrastScale(0.65, background.primary),
@@ -49,7 +65,7 @@ let contrast = {
 contrast = merge(contrast, custom.contrast || {});
 
 // Border Style
-let border = {
+let border: VariablesBorder = {
     color: setContrastScale(0.17, background.primary),
     width: 1,
     radius: 5,
@@ -57,7 +73,7 @@ let border = {
 border = merge(border, custom.border || {});
 
 // Font Styles
-let font = {
+let font: VariablesFont = {
     size: adjustFont(14),
     sizeSmall: adjustFont(12),
     sizeLarge: adjustFont(18),
@@ -72,12 +88,12 @@ let font = {
     weightNormal: "normal",
     weightSemiBold: "600", // Only supported on iOS, will be 'Bold' on Android
     weightBold: "bold",
-    family: Platform.select({ ios: "System", android: "normal" }),
+    family: Platform.select({ios: "System", android: "normal"}) as string,
 };
 font = merge(font, custom.font || {});
 
 // Spacing
-let spacing = {
+let spacing: VariablesSpacing = {
     smallest: 5,
     smaller: 10,
     small: 15,
@@ -89,7 +105,7 @@ let spacing = {
 spacing = merge(spacing, custom.spacing || {});
 
 // Button Styles
-let button = {
+let button: VariablesButton = {
     fontSize: font.sizeSmall,
     fontSizeLarge: font.size,
     fontWeight: font.weightBold,
@@ -138,7 +154,7 @@ let button = {
 button = merge(button, custom.button || {});
 
 //Input Styles
-let input = {
+let input: VariablesInput = {
     // Colors
     color: font.color,
     errorColor: brand.danger,
@@ -164,7 +180,7 @@ let input = {
 input = merge(input, custom.input || {});
 
 // Navigation Styles
-let navigation = {
+let navigation: VariablesNavigation = {
     statusBar: {
         backgroundColor: background.primary,
         barStyle: custom.darkMode ? "light-content" : "dark-content",
@@ -173,7 +189,7 @@ let navigation = {
         backgroundColor: background.primary,
         backButtonColor: contrast.highest,
         titleColor: contrast.highest,
-        titleFontSize: Platform.select({ android: font.sizeH4, ios: font.sizeH5 }),
+        titleFontSize: Platform.select({android: font.sizeH4, ios: font.sizeH5}) as number,
     },
     bottomBar: {
         color: contrast.high,
@@ -195,14 +211,14 @@ let navigation = {
 navigation = merge(navigation, custom.navigation || {});
 
 // Tabcontainer Styles
-let tabcontainer = {
+let tabContainer: VariablesTabContainer = {
     tabBar: {
         pressColor: contrast.lower,
         backgroundColor: background.primary,
     },
     indicator: {
         backgroundColor: brand.primary,
-        height: Platform.select({ ios: 2, android: 2 }),
+        height: Platform.select({ios: 2, android: 2}) as number,
     },
     label: {
         color: contrast.highest,
@@ -215,27 +231,27 @@ let tabcontainer = {
         textTransform: "uppercase",
     },
 };
-tabcontainer = merge(tabcontainer, custom.tabcontainer || {});
+tabContainer = merge(tabContainer, custom.tabContainer || {});
 
 // Listview Styles
-let listview = {
+let listView: VariablesListView = {
     border: {
         color: border.color,
         width: border.width,
     },
 };
-listview = merge(listview, custom.listview || {});
+listView = merge(listView, custom.listView || {});
 
 // Layoutgrid Styles
-let layoutgrid = {
+let layoutGrid: VariablesLayoutgrid = {
     gutterSize: 15,
 };
-layoutgrid = merge(layoutgrid, custom.layoutgrid || {});
+layoutGrid = merge(layoutGrid, custom.layoutGrid || {});
 
 //## Pluggable Widgets
 //-------------------------------------------------------------------------------------------------------------------//
 // Badge Styles
-let badge = {
+let badge: VariablesBadge = {
     fontWeight: font.weightBold,
     borderRadius: 30,
     paddingVertical: 3,
@@ -274,8 +290,8 @@ export {
     button,
     input,
     navigation,
-    tabcontainer,
-    listview,
-    layoutgrid,
+    tabContainer,
+    listView,
+    layoutGrid,
     badge,
 };

@@ -1,5 +1,6 @@
 import { font }         from "../variables";
 import { TextHeading1 } from "./typography";
+import { PageTitleType }    from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -14,7 +15,7 @@ import { TextHeading1 } from "./typography";
     Default Class For Mendix Page Title Widget
 ========================================================================== */
 
-export const PageTitle = {
+export const PageTitle: PageTitleType = {
     container: {
         // All ViewStyle properties are allowed
     },

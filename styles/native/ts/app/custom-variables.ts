@@ -5,6 +5,21 @@ import {
     setColorBasedOnBackground,
     setContrastScale,
 }                                  from "../core/helpers/_functions/convertcolors";
+import { shadeBlendConvert }       from "../core/helpers/_functions/shadeblendconvert";
+import {
+    VariablesBackground,
+    VariablesBadge,
+    VariablesBorder,
+    VariablesBrand,
+    VariablesButton,
+    VariablesContrast,
+    VariablesFont,
+    VariablesInput,
+    VariablesListView,
+    VariablesNavigation,
+    VariablesSpacing,
+    VariablesTabContainer,
+}                                  from "../types/variables";
 
 /*
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)
@@ -16,7 +31,7 @@ import {
 //## Variables to be used during styling
 //-------------------------------------------------------------------------------------------------------------------//
 // Brand Style
-export const brand = {
+export const brand: VariablesBrand = {
     primary: "#0595DB",
     success: "#76CA02",
     warning: "#f99b1d",
@@ -36,13 +51,18 @@ export const darkMode = NativeModules && NativeModules.RNDarkMode && NativeModul
 const backgroundColor = darkMode ? "#000" : "#FFF";
 const backgroundSecondaryContrast = darkMode ? 0.11 : 0.03;
 
-export const background = {
+export const background: VariablesBackground = {
     primary: backgroundColor,
     secondary: setContrastScale(backgroundSecondaryContrast, backgroundColor),
+    gray: "#c6c6cc",
+    brandPrimary: brand.primary,
+    brandSuccess: brand.success,
+    brandWarning: brand.warning,
+    brandDanger: brand.danger,
 };
 
 // Contrast (Gray) colors based on background.primary
-export const contrast = {
+export const contrast: VariablesContrast = {
     highest: setContrastScale(0.95, background.primary),
     higher: setContrastScale(0.8, background.primary),
     high: setContrastScale(0.65, background.primary),
@@ -53,14 +73,14 @@ export const contrast = {
 };
 
 // Border Style
-export const border = {
+export const border: VariablesBorder = {
     color: setContrastScale(0.17, background.primary),
     width: 1,
     radius: 5,
 };
 
 // Font Styles
-export const font = {
+export const font: VariablesFont = {
     size: adjustFont(14),
     sizeSmall: adjustFont(12),
     sizeLarge: adjustFont(18),
@@ -75,11 +95,11 @@ export const font = {
     weightNormal: "normal",
     weightSemiBold: "600", // Only supported on iOS, will be 'Bold' on Android
     weightBold: "bold",
-    family: Platform.select({ ios: "System", android: "normal" }),
+    family: Platform.select({ios: "System", android: "normal"}) as string,
 };
 
 // Spacing
-export const spacing = {
+export const spacing: VariablesSpacing = {
     smallest: 5,
     smaller: 10,
     small: 15,
@@ -90,7 +110,7 @@ export const spacing = {
 };
 
 // Button Styles
-export const button = {
+export const button: VariablesButton = {
     fontSize: font.sizeSmall,
     fontSizeLarge: font.size,
     fontWeight: font.weightBold,
@@ -138,7 +158,7 @@ export const button = {
 };
 
 //Input Styles
-export const input = {
+export const input: VariablesInput = {
     // Colors
     color: font.color,
     errorColor: brand.danger,
@@ -163,7 +183,7 @@ export const input = {
 };
 
 // Navigation Styles
-export const navigation = {
+export const navigation: VariablesNavigation = {
     statusBar: {
         backgroundColor: background.primary,
         barStyle: darkMode ? "light-content" : "dark-content",
@@ -172,7 +192,7 @@ export const navigation = {
         backgroundColor: background.primary,
         backButtonColor: contrast.highest,
         titleColor: contrast.highest,
-        titleFontSize: Platform.select({ android: font.sizeH4, ios: font.sizeH5 }),
+        titleFontSize: Platform.select({android: font.sizeH4, ios: font.sizeH5}) as number,
     },
     bottomBar: {
         color: contrast.high,
@@ -193,14 +213,14 @@ export const navigation = {
 };
 
 // Tabcontainer Styles
-export const tabcontainer = {
+export const tabContainer: VariablesTabContainer = {
     tabBar: {
         pressColor: contrast.lower,
         backgroundColor: background.primary,
     },
     indicator: {
         backgroundColor: brand.primary,
-        height: Platform.select({ ios: 2, android: 2 }),
+        height: Platform.select({ios: 2, android: 2}) as number,
     },
     label: {
         color: contrast.highest,
@@ -214,8 +234,8 @@ export const tabcontainer = {
     },
 };
 
-// Listview Styles
-export const listview = {
+// ListView Styles
+export const listView: VariablesListView = {
     border: {
         color: border.color,
         width: border.width,
@@ -223,7 +243,7 @@ export const listview = {
 };
 
 // Layoutgrid Styles
-export const layoutgrid = {
+export const layoutGrid = {
     gutterSize: 15,
 };
 
@@ -231,7 +251,7 @@ export const layoutgrid = {
 //## Pluggable Widgets
 //-------------------------------------------------------------------------------------------------------------------//
 // Badge Styles
-export const badge = {
+export const badge: VariablesBadge = {
     fontWeight: font.weightBold,
     borderRadius: 30,
     paddingVertical: 3,

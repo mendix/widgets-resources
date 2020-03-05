@@ -1,6 +1,6 @@
 import { Dimensions, PixelRatio } from "react-native";
 
-const { height, width } = Dimensions.get("window");
+const {height, width} = Dimensions.get("window");
 const pixelRatio = PixelRatio.get();
 
 /**
@@ -10,7 +10,7 @@ const pixelRatio = PixelRatio.get();
  *
  * @return  {number} Returns adjusted font size
  */
-function adjustFont(size) {
+function adjustFont(size: number) {
     if (pixelRatio === 2) {
         // iphone 5s and older Androids
         if (width < 360) return size * 0.95;
