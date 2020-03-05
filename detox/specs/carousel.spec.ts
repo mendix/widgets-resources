@@ -1,5 +1,5 @@
 import { Alert, Carousel, Pages } from "./elements";
-import { expect, element, by, device, waitFor } from "detox";
+import { expect, element, by, device } from "detox";
 
 describe("Carousel", () => {
     beforeAll(async () => {
@@ -8,14 +8,11 @@ describe("Carousel", () => {
 
     it("should render carousel", async () => {
         const carousel = Carousel("mycarousel");
-        waitFor(carousel.getCarousel())
-            .toBeVisible()
-            .withTimeout(2000);
         await expect(carousel.getCarousel()).toBeVisible();
     });
 
     it("should render pagination", async () => {
-        await expect(element(by.type("RCTView").and(by.label("mycarousel$pagination")))).toBeVisible();
+        await expect(element(by.label("mycarousel$pagination"))).toBeVisible();
     });
 
     it("should pass right context when combined with clickable container", async () => {
@@ -50,25 +47,16 @@ describe("Carousel swipes", () => {
     it("left and right", async () => {
         const carousel = Carousel("mycarousel");
 
-        const firstItem = carousel.getSlideContent(0);
-        await waitFor(firstItem)
-            .toBeVisible()
-            .withTimeout(1000);
-        await firstItem.swipe("left");
+        await carousel.waitForSlideAndSwipe(carousel, 0, "left");
         await expect(element(by.text("image2"))).toBeVisible(); // Read the textbox connected to the second item
 
-        const secondItem = carousel.getSlideContent(1);
-        await secondItem.swipe("right");
+        await carousel.waitForSlideAndSwipe(carousel, 1, "right");
         await expect(element(by.text("image1"))).toBeVisible(); // Read the textbox connected to the first item
     });
 
     it("and combined with clickable container, it passes right context", async () => {
         const carousel = Carousel("mycarousel");
-        const firstItem = carousel.getSlideContent(0);
-        await waitFor(firstItem)
-            .toBeVisible()
-            .withTimeout(1000);
-        await firstItem.swipe("left"); // Swipe to second element because tests are that random
+        await carousel.waitForSlideAndSwipe(carousel, 0, "left");
         await carousel.getParticularElementInsideSlideContent(1, "carouselImage").tap(); // Tap the clickable container around carousel item
 
         await expect(Alert().getMessage("You passed image2"));
@@ -77,12 +65,9 @@ describe("Carousel swipes", () => {
 
     it("and combined with clickable image, it passes right context", async () => {
         const carousel = Carousel("mycarousel");
-        const firstItem = carousel.getSlideContent(0);
-        await waitFor(firstItem)
-            .toBeVisible()
-            .withTimeout(1000);
-        await firstItem.swipe("left");
-        await carousel.getSlideContent(1).swipe("left"); // Swipe to third element because tests are that random
+
+        await carousel.waitForSlideAndSwipe(carousel, 0, "left");
+        await carousel.waitForSlideAndSwipe(carousel, 1, "left");
         await carousel.getParticularElementInsideSlideContent(2, "staticImage").tap(); // Tap the static clickable image on carousel item
 
         await expect(Alert().getMessage("You passed image3"));
