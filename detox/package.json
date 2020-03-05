@@ -7,10 +7,10 @@
     "decompress:ios": "cd ./ios && tar -xvf NativeComponents.taz.gz &>/dev/null",
     "decompress:ios:local": "cd ./ios && tar -xvf nativeTemplate.taz.gz &>/dev/null",
     "pretest:ios": "npm run decompress:ios && URL=https://nativecomponentste-sandbox.mxapps.io/ ../scripts/test/projectup.sh",
-    "test:ios": "detox test --configuration ios.simulator ./specs",
+    "test:ios": "detox test --configuration ios.simulator --debug-synchronization 1000 ./specs",
     "test:ios:debug": "npm run pretest:ios && detox test --configuration ios.simulator --debug-synchronization 1000 --loglevel trace ./specs",
     "test:ios:unit": "npm run pretest:ios && detox test --configuration ios.simulator",
-    "test:ios:local": "detox test --configuration ios.simulator.local ./specs",
+    "test:ios:local": "npm run decompress:ios:local && detox test --configuration ios.simulator.local ./specs --debug-synchronization 1000",
     "test:android": "detox test --configuration android.emulator ./specs"
   },
   "devDependencies": {
