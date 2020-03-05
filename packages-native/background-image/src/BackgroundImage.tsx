@@ -11,11 +11,13 @@ export function BackgroundImage(props: BackgroundImageProps<BackgroundImageStyle
     const backgroundImage =
         props.backgroundImage.status === ValueStatus.Available ? props.backgroundImage.value : undefined;
 
+    if (!backgroundImage) {
+        return null;
+    }
+
     return (
-        backgroundImage && (
-            <ImageBackground source={backgroundImage} style={styles.container}>
-                {props.content}
-            </ImageBackground>
-        )
+        <ImageBackground source={backgroundImage} style={styles.container}>
+            {props.content}
+        </ImageBackground>
     );
 }
