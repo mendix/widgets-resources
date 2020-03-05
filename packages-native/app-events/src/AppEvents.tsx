@@ -16,12 +16,10 @@ export class AppEvents extends Component<Props> {
     private isConnected?: boolean;
     private lastOnOnline = 0;
     private lastOnOffline = 0;
-
+    private onLoadTriggered = false;
     private timeoutHandle?: any;
 
     async componentDidMount(): Promise<void> {
-        executeAction(this.props.onLoadAction);
-
         if (this.props.onResumeAction) {
             AppState.addEventListener("change", this.onAppStateChangeHandler);
         }
@@ -34,6 +32,13 @@ export class AppEvents extends Component<Props> {
         if (this.props.onOnlineAction || this.props.onOfflineAction) {
             this.isConnected = await NetInfo.isConnected.fetch();
             NetInfo.isConnected.addEventListener("connectionChange", this.onConnectionChangeHandler);
+        }
+    }
+
+    componentDidUpdate(): void {
+        if (!this.onLoadTriggered && this.props.onLoadAction?.canExecute) {
+            this.onLoadTriggered = true;
+            executeAction(this.props.onLoadAction);
         }
     }
 
