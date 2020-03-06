@@ -2,8 +2,6 @@ import { Problem, Properties } from "../typings/PageEditor";
 import { changeProperty, hideProperty } from "./utils/PageEditorUtils";
 
 export function getProperties(values: any, defaultProperties: Properties): Properties {
-    console.log(JSON.stringify(defaultProperties));
-    // console.log(target); The epic is still waiting to be merged by PageEditor
     if (values.type === "modal") {
         if (values.modalRendering === "basic") {
             hideProperty<any>("smallContent", defaultProperties);
@@ -33,13 +31,30 @@ export function getProperties(values: any, defaultProperties: Properties): Prope
 
 export function check(values: any): Problem[] {
     const errors: Problem[] = [];
-    console.log(values, errors);
     if (values.type === "modal") {
         if (!values.triggerAttribute) {
             errors.push({
                 property: "triggerAttribute",
                 severity: "error",
                 message: "Trigger is required for 'Modal' bottom drawer",
+                url: ""
+            });
+        }
+    }
+    if (values.type === "expanding") {
+        if (values.showFullscreenContent && (!values.fullscreenContent || values.fullscreenContent.widgetCount === 0)) {
+            errors.push({
+                property: "fullscreenContent",
+                severity: "error",
+                message: "You need to include some widgets/content in the full screen content placeholder",
+                url: ""
+            });
+        }
+        if (!values.showFullscreenContent && (!values.largeContent || values.largeContent.widgetCount === 0)) {
+            errors.push({
+                property: "largeContent",
+                severity: "error",
+                message: "You need to include some widgets/content in the large content placeholder",
                 url: ""
             });
         }
