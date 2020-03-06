@@ -20,7 +20,6 @@ export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement =
             bottomSheetRef.current
         ) {
             if (props.triggerAttribute.value) {
-                console.warn("Opening bottom sheet");
                 bottomSheetRef.current.show();
             }
         }

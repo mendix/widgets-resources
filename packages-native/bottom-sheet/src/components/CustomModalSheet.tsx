@@ -23,10 +23,8 @@ export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => 
             heightContent > 0
         ) {
             if (props.triggerAttribute.value) {
-                console.warn("Snapping to first value");
                 bottomSheetRef.current.snapTo(0);
             } else {
-                console.warn("Snapping to last value");
                 bottomSheetRef.current.snapTo(1);
             }
         }
@@ -37,27 +35,31 @@ export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => 
         if (height > 0) {
             if (height <= maxHeight) {
                 setHeightContent(height);
-                console.warn(`Content height ${height}`);
             } else {
                 setHeightContent(maxHeight);
-                console.warn(`Content height is max height ${maxHeight}`);
             }
         }
     };
 
     const onOpenHandler = useCallback(() => {
-        console.warn("ON OPEN");
         if (props.triggerAttribute && props.triggerAttribute.status === ValueStatus.Available) {
             props.triggerAttribute.setValue(true);
         }
     }, [props.triggerAttribute]);
 
     const onCloseHandler = useCallback(() => {
-        console.warn("ON CLOSE");
         if (props.triggerAttribute && props.triggerAttribute.status === ValueStatus.Available) {
             props.triggerAttribute.setValue(false);
         }
     }, [props.triggerAttribute]);
+
+    if (heightContent === 0) {
+        return (
+            <View style={{ position: "absolute", bottom: -maxHeight }}>
+                <View onLayout={onLayoutHandlerContent}>{props.content}</View>
+            </View>
+        );
+    }
 
     return (
         <View style={props.styles.container}>

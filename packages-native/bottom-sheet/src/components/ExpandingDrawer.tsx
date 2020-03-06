@@ -21,7 +21,6 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
         if (height > 0) {
             if (height <= maxHeight) {
                 setHeightHeader(height);
-                console.warn(`Header height ${height}`);
             }
         }
     };
@@ -31,7 +30,8 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
         if (height > 0) {
             if (height <= maxHeight) {
                 setHeightContent(height);
-                console.warn(`Content height ${height}`);
+            } else if (!props.fullscreenContent) {
+                setHeightContent(maxHeight);
             }
         }
     };
