@@ -31,8 +31,11 @@ export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement =
             if (action && action.canExecute) {
                 action.execute();
             }
+            if (props.triggerAttribute && !props.triggerAttribute.readOnly) {
+                props.triggerAttribute.setValue(false);
+            }
         },
-        [props.itemsBasic]
+        [props.itemsBasic, props.triggerAttribute]
     );
 
     if (Platform.OS === "android" || !props.useNative) {
