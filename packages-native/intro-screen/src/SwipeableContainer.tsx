@@ -212,7 +212,7 @@ export const SwipeableContainer = (props: SwipeableContainerProps): ReactElement
             doneIcon,
             "ok",
             props.bottomButton ? styles.paginationAbove.buttonDone : styles.paginationBetween.buttonDone,
-            onDone && onDone,
+            onDone,
             "buttonDone"
         );
 

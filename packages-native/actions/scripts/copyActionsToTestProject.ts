@@ -5,12 +5,8 @@ const cwd = process.cwd();
 const actionsDir = join(cwd, "dist/tsc/");
 const testProjectDir = join(cwd, "../test-project/mxproject/javascriptsource/nativemobileactions/actions/");
 
-try {
-    main();
-} catch (exception) {
-    // tslint:disable-next-line:no-console
-    console.error(exception);
-}
+// eslint-disable-next-line no-console
+main().catch(console.error);
 
 async function main(): Promise<void> {
     await fs.mkdir(testProjectDir, { recursive: true });
