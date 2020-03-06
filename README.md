@@ -143,3 +143,12 @@ means:
 -   Second you have to create a JsAction with name `ExampleName` and `parameters` in Studio.
 -   Then every time `npm run build` is run, the code piece between `// BEGIN USER CODE` and `// END USER CODE` will be
     changed. After you close and open the JSAction in Studiom changes will be picked up automatically.
+
+## Releasing Native Mobile Resources
+
+-   Bump the version of the necessary widget by running `npm run version your-widget-name desired-version`
+-   Create draft tag in github repo which will also create release mpk for the necessary widget `npm run publish your-widget-name`
+-   Add notes to your draft
+-   Update the necessary widgets to the Mendix `Native Mobile Resources` app and push the changes
+-   Export the module, include every dependency
+-   Create a manual tag for the exported module "Native Mobile Resources - AppStore release vx.x.x" and add the Exported Module as asset
