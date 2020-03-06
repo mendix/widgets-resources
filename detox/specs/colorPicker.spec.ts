@@ -139,7 +139,7 @@ describe("Color Picker", () => {
             await element(by.id("checkBoxColorPickerConditional")).tap();
             await waitFor(colorPicker.getHue())
                 .toBeVisible()
-                .withTimeout(3000);
+                .withTimeout(5000);
             await expect(colorPicker.getHue()).toBeVisible();
         });
 
