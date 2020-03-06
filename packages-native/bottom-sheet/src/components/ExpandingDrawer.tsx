@@ -2,15 +2,12 @@ import { BottomDrawerStyle } from "../ui/Styles";
 import { createElement, ReactNode, useCallback, useRef, useState, Fragment, ReactElement } from "react";
 import BottomSheet from "reanimated-bottom-sheet";
 import { Dimensions, LayoutChangeEvent, View } from "react-native";
-import { ActionValue } from "mendix";
 
 interface ExpandingDrawerProps {
     smallContent?: ReactNode;
     largeContent?: ReactNode;
     fullscreenContent?: ReactNode;
     styles: BottomDrawerStyle;
-    onOpen?: ActionValue;
-    onClose?: ActionValue;
 }
 
 export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
@@ -19,72 +16,80 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
     const [heightHeader, setHeightHeader] = useState(0);
     const maxHeight = Dimensions.get("window").height - 100;
 
-    const onLayoutHandlerContent = (event: LayoutChangeEvent): void => {
-        const height = event.nativeEvent.layout.height;
-        if (height > 0) {
-            if (height + heightHeader <= maxHeight) {
-                setHeightContent(height);
-                console.warn(`Content height ${height}`);
-            }
-        }
-    };
-
     const onLayoutHandlerHeader = (event: LayoutChangeEvent): void => {
         const height = event.nativeEvent.layout.height;
         if (height > 0) {
-            if (height + heightContent <= maxHeight) {
+            if (height <= maxHeight) {
                 setHeightHeader(height);
                 console.warn(`Header height ${height}`);
             }
         }
     };
 
-    const renderContent = useCallback(
-        (): ReactNode => <View onLayout={onLayoutHandlerContent}>{props.largeContent}</View>,
-        [props.largeContent]
-    );
+    const onLayoutHandlerContent = (event: LayoutChangeEvent): void => {
+        const height = event.nativeEvent.layout.height;
+        if (height > 0) {
+            if (height <= maxHeight) {
+                setHeightContent(height);
+                console.warn(`Content height ${height}`);
+            }
+        }
+    };
+
     const renderHeader = useCallback(
-        (): ReactNode => <View onLayout={onLayoutHandlerHeader}>{props.smallContent}</View>,
+        (): ReactNode => (
+            <View onLayout={onLayoutHandlerHeader} style={props.smallContent ? null : { height: 20 }}>
+                {props.smallContent}
+            </View>
+        ),
         [props.smallContent]
     );
 
-    const onOpenHandler = useCallback(() => {
-        console.warn("ON OPEN");
-        if (props.onOpen && props.onOpen.canExecute) {
-            props.onOpen.execute();
+    const renderContent = useCallback((): ReactNode => {
+        const content = <View onLayout={onLayoutHandlerContent}>{props.largeContent}</View>;
+        if (props.fullscreenContent) {
+            return (
+                <Fragment>
+                    {content}
+                    {props.fullscreenContent}
+                </Fragment>
+            );
         }
-    }, [props.onOpen]);
+        return content;
+    }, [props.largeContent, props.fullscreenContent]);
 
-    const onCloseHandler = useCallback(() => {
-        console.warn("ON CLOSE");
-        if (props.onClose && props.onClose.canExecute) {
-            props.onClose.execute();
-        }
-    }, [props.onClose]);
+    if (heightHeader === 0 || (props.smallContent && heightContent === 0)) {
+        return (
+            <View style={{ position: "absolute", bottom: -maxHeight }}>
+                {renderHeader()}
+                {renderContent()}
+            </View>
+        );
+    }
+
+    const initialSnap =
+        props.fullscreenContent && props.largeContent && props.smallContent
+            ? 2
+            : props.largeContent && props.smallContent
+            ? 1
+            : 0;
+    const snapPoints =
+        props.fullscreenContent && heightContent
+            ? [maxHeight, heightContent + heightHeader, heightHeader]
+            : props.fullscreenContent
+            ? [maxHeight, heightHeader]
+            : props.largeContent
+            ? [heightContent + heightHeader, heightHeader]
+            : [heightHeader];
 
     return (
         <View style={props.styles.container}>
             <BottomSheet
                 ref={bottomSheetRef}
-                snapPoints={
-                    props.fullscreenContent
-                        ? [maxHeight, heightContent + heightHeader, heightHeader]
-                        : [heightContent + heightHeader, heightHeader]
-                }
-                initialSnap={props.fullscreenContent && props.largeContent && props.smallContent ? 2 : 1}
+                snapPoints={snapPoints}
+                initialSnap={initialSnap}
                 renderHeader={renderHeader}
-                renderContent={
-                    !props.fullscreenContent
-                        ? renderContent
-                        : () => (
-                              <Fragment>
-                                  {renderContent()}
-                                  {props.fullscreenContent}
-                              </Fragment>
-                          )
-                }
-                onOpenEnd={onOpenHandler}
-                onCloseEnd={onCloseHandler}
+                renderContent={renderContent}
             />
         </View>
     );
