@@ -1,5 +1,5 @@
 import { BottomDrawerStyle } from "../ui/Styles";
-import { createElement, ReactNode, useCallback, useRef, useState, Fragment, ReactElement, Children } from "react";
+import { createElement, ReactNode, useCallback, useState, Fragment, ReactElement, Children } from "react";
 import BottomSheet from "reanimated-bottom-sheet";
 import { Dimensions, LayoutChangeEvent, View } from "react-native";
 
@@ -11,7 +11,6 @@ interface ExpandingDrawerProps {
 }
 
 export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
-    const bottomSheetRef = useRef<BottomSheet>(null);
     const [heightContent, setHeightContent] = useState(0);
     const [heightHeader, setHeightHeader] = useState(0);
     const maxHeight = Dimensions.get("window").height - 100;
@@ -82,13 +81,13 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
             ? [heightContent + heightHeader, heightHeader]
             : [heightHeader];
 
-    console.warn("Snap points", snapPoints);
-
     return (
         <View style={props.styles.container}>
             {snapPoints.length > 1 && (
                 <BottomSheet
-                    ref={bottomSheetRef}
+                    enabledManualSnapping={false}
+                    enabledBottomInitialAnimation={true}
+                    enabledContentTapInteraction={false}
                     snapPoints={snapPoints}
                     initialSnap={snapPoints.length - 1}
                     renderHeader={renderHeader}

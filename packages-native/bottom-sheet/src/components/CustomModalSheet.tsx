@@ -65,9 +65,10 @@ export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => 
         <View style={props.styles.container}>
             <BottomSheet
                 ref={bottomSheetRef}
-                snapPoints={[heightContent + 20, 0]}
-                renderHeader={() => <View style={{ height: 20 }} />}
+                snapPoints={[heightContent, -50]}
                 renderContent={() => <View onLayout={onLayoutHandlerContent}>{props.content}</View>}
+                enabledContentTapInteraction={false}
+                enabledHeaderGestureInteraction={false}
                 onOpenEnd={onOpenHandler}
                 onCloseEnd={onCloseHandler}
             />
