@@ -1,10 +1,9 @@
 import { Platform } from "react-native";
 import * as custom from "../app/custom-variables";
 import adjustFont, { height, width } from "./helpers/_functions/adjustfont";
-import { setColorBasedOnBackground, setContrastScale } from "./helpers/_functions/convertcolors";
-import { anyColorToRgbString } from "./helpers/_functions/convertcolors.js";
+import { anyColorToRgbString, setColorBasedOnBackground, setContrastScale } from "./helpers/_functions/convertcolors";
 import merge from "./helpers/_functions/mergeobjects";
-import { shadeBlendConvert } from "./helpers/_functions/shadeblendconvert.js";
+import { shadeBlendConvert } from "./helpers/_functions/shadeblendconvert";
 //== Global variables
 //## Variables to be used during styling
 //-------------------------------------------------------------------------------------------------------------------//
@@ -182,7 +181,7 @@ let navigation = {
 };
 navigation = merge(navigation, custom.navigation || {});
 // Tabcontainer Styles
-let tabcontainer = {
+let tabContainer = {
     tabBar: {
         pressColor: contrast.lower,
         backgroundColor: background.primary,
@@ -196,20 +195,20 @@ let tabcontainer = {
         fontWeight: font.weightBold,
     },
 };
-tabcontainer = merge(tabcontainer, custom.tabcontainer || {});
+tabContainer = merge(tabContainer, custom.tabContainer || {});
 // Listview Styles
-let listview = {
+let listView = {
     border: {
         color: border.color,
         width: border.width,
     },
 };
-listview = merge(listview, custom.listview || {});
+listView = merge(listView, custom.listView || {});
 // Layoutgrid Styles
-let layoutgrid = {
+let layoutGrid = {
     gutterSize: 15,
 };
-layoutgrid = merge(layoutgrid, custom.layoutgrid || {});
+layoutGrid = merge(layoutGrid, custom.layoutGrid || {});
 //## Pluggable Widgets
 //-------------------------------------------------------------------------------------------------------------------//
 // Badge Styles
@@ -240,4 +239,4 @@ let badge = {
     },
 };
 badge = merge(badge, custom.badge || {});
-export { brand, background, border, contrast, font, spacing, button, input, navigation, tabcontainer, listview, layoutgrid, badge, };
+export { brand, background, border, contrast, font, spacing, button, input, navigation, tabContainer, listView, layoutGrid, badge, };

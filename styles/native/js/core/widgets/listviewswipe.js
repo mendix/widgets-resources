@@ -1,4 +1,4 @@
-import { background } from "../variables.js";
+import { background } from "../variables";
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.

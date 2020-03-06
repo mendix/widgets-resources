@@ -176,7 +176,6 @@ export const btnAsText = {
     },
     icon: {
         color: brand.primary,
-        fontWeight: font.weightSemiBold,
         size: button.fontSizeIcon,
     },
     caption: {

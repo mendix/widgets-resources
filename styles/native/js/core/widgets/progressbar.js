@@ -36,5 +36,5 @@ export const com_mendix_widget_native_progressbar_ProgressBar = {
         color: input.errorColor,
         fontSize: font.size,
         fontFamily: font.family,
-    }
+    },
 };

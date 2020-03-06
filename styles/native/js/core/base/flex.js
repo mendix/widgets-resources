@@ -44,9 +44,6 @@ export const flexWrap = {
         flexWrap: "wrap",
     },
 };
-export const childrenCenter = {
-    container: Object.assign({}, justifyContentCenter, alignChildrenCenter),
-};
 export const justifyContentStart = {
     container: {
         // justifyContent aligns children in the main direction.
@@ -121,8 +118,11 @@ export const alignChildrenBaseline = {
     container: {
         // alignContent aligns children in the cross direction.
         // For example, if children are flowing vertically, alignContent controls how they align horizontally.
-        alignContent: "baseline",
+        alignItems: "baseline",
     },
+};
+export const childrenCenter = {
+    container: Object.assign(Object.assign({}, justifyContentCenter.container), alignChildrenCenter.container),
 };
 export const alignContentStart = {
     container: {

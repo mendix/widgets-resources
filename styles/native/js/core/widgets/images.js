@@ -1,4 +1,4 @@
-import { contrast } from "../variables.js";
+import { contrast } from "../variables";
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.

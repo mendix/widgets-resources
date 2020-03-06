@@ -1,5 +1,5 @@
 import { Platform } from "react-native";
-import { shadeBlendConvert } from "../helpers/_functions/shadeblendconvert.js";
+import { shadeBlendConvert } from "../helpers/_functions/shadeblendconvert";
 import { background, border, brand, button, contrast, font, input } from "../variables";
 //
 // DISCLAIMER:
@@ -63,13 +63,13 @@ export const com_mendix_widget_native_feedback_Feedback = {
         fontFamily: input.fontFamily,
     },
     switchInput: {
-        // All TextStyle properties are allowed
+        // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
         margin: 0,
         padding: 0,
         marginRight: Platform.select({ ios: 0, android: -5 }),
         thumbColorOn: background.primary,
         trackColorOn: brand.success,
-        thumbColorOff: background.lowest,
+        thumbColorOff: contrast.low,
         trackColorOff: contrast.lowest,
     },
     button: {
@@ -79,6 +79,7 @@ export const com_mendix_widget_native_feedback_Feedback = {
         borderWidth: border.width,
     },
     activityIndicator: {
+        // Only color is allowed
         color: font.color,
     },
 };

@@ -38,11 +38,11 @@ export const TextBox = {
         paddingVertical: input.paddingVertical,
     },
     inputDisabled: {
-        // All TextStyle properties are allowed
+        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         backgroundColor: input.disabledBackgroundColor,
     },
     inputError: {
-        // All TextStyle properties are allowed
+        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         color: input.errorColor,
         borderColor: input.errorColor,
         placeholderTextColor: input.errorColor,

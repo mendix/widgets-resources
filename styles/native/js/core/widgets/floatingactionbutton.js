@@ -1,4 +1,4 @@
-import { shadeBlendConvert } from "../helpers/_functions/shadeblendconvert.js";
+import { shadeBlendConvert } from "../helpers/_functions/shadeblendconvert";
 import { background, brand, contrast, font } from "../variables";
 //
 // DISCLAIMER:
@@ -13,9 +13,11 @@ import { background, brand, contrast, font } from "../variables";
 ========================================================================== */
 export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton = {
     container: {
+        // All ViewStyle properties are allowed
         margin: 30,
     },
     button: {
+        // Size, ripplecolor and all ViewStyle properties are allowed
         size: 50,
         rippleColor: contrast.lowest,
         backgroundColor: brand.primary,
@@ -29,10 +31,12 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
         elevation: 2,
     },
     buttonIcon: {
+        // Size and color are allowed
         size: font.sizeLarge,
         color: contrast.lowest,
     },
     secondaryButton: {
+        // Size and all ViewStyle properties are allowed
         size: 30,
         backgroundColor: background.secondary,
         shadowColor: shadeBlendConvert(-0.2, background.primary),
@@ -45,11 +49,15 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
         elevation: 2,
     },
     secondaryButtonIcon: {
+        // Size and color are allowed
         size: font.sizeSmall,
         color: contrast.high,
     },
-    secondaryButtonCaption: {},
+    secondaryButtonCaption: {
+    // All TextStyle properties are allowed
+    },
     secondaryButtonCaptionContainer: {
+        // All ViewStyle properties are allowed
         marginHorizontal: 5,
         shadowColor: shadeBlendConvert(-0.2, background.primary),
         shadowOpacity: 0.9,

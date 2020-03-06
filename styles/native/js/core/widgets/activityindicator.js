@@ -15,7 +15,8 @@ export const com_mendix_widget_native_activityindicator_ActivityIndicator = {
     // All ViewStyle properties are allowed
     },
     indicator: {
-        // Just this property
+        // Color and size are allowed
         color: brand.primary,
+        size: "large",
     },
 };

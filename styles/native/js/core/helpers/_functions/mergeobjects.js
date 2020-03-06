@@ -15,7 +15,7 @@ export default function (...sources) {
             return target;
         const source = sources.shift();
         if (isObject(target) && isObject(source)) {
-            for (const key in source) {
+            Object.keys(source).forEach((key) => {
                 if (isObject(source[key])) {
                     if (!target[key])
                         Object.assign(target, { [key]: {} });
@@ -24,7 +24,7 @@ export default function (...sources) {
                 else {
                     Object.assign(target, { [key]: source[key] });
                 }
-            }
+            });
         }
         return mergeDeep(target, ...sources);
     }

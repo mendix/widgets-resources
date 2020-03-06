@@ -51,20 +51,19 @@ export function anyColorToRgbString(anyColor) {
  * @return  {object} Returns RGB color; {r,g,b}
  */
 function hslToRgb(hsl) {
-    let [h, s, l, a = "1"] = hsl.replace(/hsla?[(]|[%]|[)]/gm, "").split(",");
-    [h, s, l, a].forEach(x => Number(x.trim()));
-    s /= 100;
-    l /= 100;
+    let hslArray = hsl.replace(/hsla?[(]|[%]|[)]/gm, "").split(",").map(x => x.trim());
+    let h = hslArray[0], s = Number(hslArray[1]) / 100, l = Number(hslArray[2]) / 100, a = 1;
     // Strip label and convert to degrees (if necessary)
     if (~h.indexOf("deg"))
         h = h.substr(0, h.length - 3);
     else if (~h.indexOf("rad"))
-        h = Math.round(h.substr(0, h.length - 3) * (180 / Math.PI));
+        h = Math.round(Number(h.substr(0, h.length - 3)) * (180 / Math.PI));
     else if (~h.indexOf("turn"))
-        h = Math.round(h.substr(0, h.length - 4) * 360);
+        h = Math.round(Number(h.substr(0, h.length - 4)) * 360);
+    h = Number(h);
     if (h >= 360)
         h %= 360; // Keep hue fraction of 360 if h is higher than 360
-    let r, g, b;
+    let r = 255, g = 255, b = 255;
     const c = (1 - Math.abs(2 * l - 1)) * s; // chroma -> color intensity
     const x = c * (1 - Math.abs(((h / 60) % 2) - 1)); // Second largest component (first being chroma)
     const m = l - c / 2; // Amount to add to each channel to match lightness
@@ -124,7 +123,7 @@ function rgbStringToRgb(rgb) {
     else {
         const [r, g, b] = color.split(",");
         [r, g, b].forEach(x => x.trim());
-        return { r, g, b };
+        return { r: Number(r), g: Number(g), b: Number(b) };
     }
 }
 /**
@@ -135,8 +134,9 @@ function rgbStringToRgb(rgb) {
  * @return  {object} Returns RGB color; {r,g,b}
  */
 function rgbaToRgb(rgba) {
-    let RGB = typeof rgba === "object" ? rgba : {};
-    const calc = val => Math.round(RGB.a * (val / 255) * 255); // Calc best color contrast values
+    let newAlpha = 1;
+    let RGB = typeof rgba === "object" ? rgba : { r: 255, g: 255, b: 255 };
+    const calc = (val) => Math.round(newAlpha * (val / 255) * 255); // Calc best color contrast values
     // const calc = val => Math.round((RGB.a * (val / 255) + (RGB.a * ( 0 / 255))) * 255); // Calc best color contrast values
     if (typeof rgba === "string") {
         const val = rgba.replace(/rgba[(]|[)]/gm, "");
@@ -152,10 +152,10 @@ function rgbaToRgb(rgba) {
         else {
             const [r, g, b] = color.split(",");
             [r, g, b].forEach(x => Number(x.trim()));
-            RGB = { r, g, b };
+            RGB = { r: Number(r), g: Number(g), b: Number(b) };
         }
         // RGB.a = alpha;
-        RGB.a = alpha === 1 ? 1 : (1 - alpha).toPrecision(2);
+        newAlpha = alpha === 1 ? 1 : Number((1 - alpha).toPrecision(2));
     }
     return { r: calc(RGB.r), g: calc(RGB.g), b: calc(RGB.b) };
 }
@@ -167,18 +167,17 @@ function rgbaToRgb(rgba) {
  * @return  {object} Returns RGB color; {r,g,b}
  */
 function checkColor(color) {
-    if (typeof color === "string") {
-        if (color in colors)
-            return colors[color.toLowerCase()];
-        else if (color[0] === "#")
-            return hexToRgb(color);
-        else if (~color.indexOf("hsl"))
-            return hslToRgb(color);
-        else if (~color.indexOf("rgba"))
-            return rgbaToRgb(color);
-        else if (~color.indexOf("rgb"))
-            return rgbStringToRgb(color);
-    }
+    if (color in colors)
+        return colors[color.toLowerCase()];
+    else if (color[0] === "#")
+        return hexToRgb(color);
+    else if (~color.indexOf("hsl"))
+        return hslToRgb(color);
+    else if (~color.indexOf("rgba"))
+        return rgbaToRgb(color);
+    else if (~color.indexOf("rgb"))
+        return rgbStringToRgb(color);
+    return { r: 255, g: 255, b: 255 };
 }
 /**
  * Set best contrast color based on a (background) color
@@ -189,7 +188,7 @@ function checkColor(color) {
  */
 export function setColorBasedOnBackground(color) {
     const c = checkColor(color);
-    const RGB = typeof c === "object" ? c : { r: "255", g: "255", b: "255" };
+    const RGB = typeof c === "object" ? c : { r: 255, g: 255, b: 255 };
     // https://www.w3.org/TR/AERT/#color-contrast
     const o = Math.round((RGB.r * 299 + RGB.g * 587 + RGB.b * 114) / 1000);
     return o > 125 ? "rgba(0,0,0,.87)" : "rgba(255,255,255,.87)";
@@ -212,7 +211,7 @@ export function setContrastScale(contrast, color) {
         contrast = 0;
     const max = 256;
     const c = checkColor(color);
-    const { r, g, b } = typeof c === "object" ? c : { r: "255", g: "255", b: "255" };
+    const { r, g, b } = typeof c === "object" ? c : { r: 255, g: 255, b: 255 };
     // https://www.w3.org/TR/AERT/#color-contrast
     const brightness = Math.round((r * 299 + g * 587 + b * 114) / 1000);
     const value = Math.round(brightness > max / 2 ? max - max * contrast : max * contrast);

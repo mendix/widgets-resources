@@ -1,6 +1,6 @@
-import { isIphoneWithNotch } from "../helpers/_functions/device.js";
-import { shadeBlendConvert } from "../helpers/_functions/shadeblendconvert.js";
-import { background, button, font, spacing } from "../variables.js";
+import { isIphoneWithNotch } from "../helpers/_functions/device";
+import { shadeBlendConvert } from "../helpers/_functions/shadeblendconvert";
+import { background, button, font, spacing } from "../variables";
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.

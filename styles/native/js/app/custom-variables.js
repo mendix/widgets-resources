@@ -1,7 +1,7 @@
 import { NativeModules, Platform } from "react-native";
 import adjustFont from "../core/helpers/_functions/adjustfont";
 import { anyColorToRgbString, setColorBasedOnBackground, setContrastScale, } from "../core/helpers/_functions/convertcolors";
-import { shadeBlendConvert } from "../core/helpers/_functions/shadeblendconvert.js";
+import { shadeBlendConvert } from "../core/helpers/_functions/shadeblendconvert";
 /*
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)
 ==> You can freely change any value in this file.
@@ -31,6 +31,11 @@ const backgroundSecondaryContrast = darkMode ? 0.11 : 0.03;
 export const background = {
     primary: backgroundColor,
     secondary: setContrastScale(backgroundSecondaryContrast, backgroundColor),
+    gray: "#c6c6cc",
+    brandPrimary: brand.primary,
+    brandSuccess: brand.success,
+    brandWarning: brand.warning,
+    brandDanger: brand.danger,
 };
 // Contrast (Gray) colors based on background.primary
 export const contrast = {
@@ -174,7 +179,7 @@ export const navigation = {
     },
 };
 // Tabcontainer Styles
-export const tabcontainer = {
+export const tabContainer = {
     tabBar: {
         pressColor: contrast.lower,
         backgroundColor: background.primary,
@@ -188,15 +193,15 @@ export const tabcontainer = {
         fontWeight: font.weightBold,
     },
 };
-// Listview Styles
-export const listview = {
+// ListView Styles
+export const listView = {
     border: {
         color: border.color,
         width: border.width,
     },
 };
 // Layoutgrid Styles
-export const layoutgrid = {
+export const layoutGrid = {
     gutterSize: 15,
 };
 //## Pluggable Widgets

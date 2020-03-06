@@ -1,4 +1,4 @@
-export default {
+const colors = {
     aliceblue: { r: 240, g: 248, b: 255 },
     antiquewhite: { r: 250, g: 235, b: 215 },
     aqua: { r: 0, g: 255, b: 255 },
@@ -148,3 +148,4 @@ export default {
     yellow: { r: 255, g: 255, b: 0 },
     yellowgreen: { r: 154, g: 205, b: 50 },
 };
+export default colors;

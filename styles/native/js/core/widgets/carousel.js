@@ -1,5 +1,5 @@
-import { shadeBlendConvert } from "../helpers/_functions/shadeblendconvert.js";
-import { background, brand, contrast, font, spacing } from "../variables.js";
+import { shadeBlendConvert } from "../helpers/_functions/shadeblendconvert";
+import { background, brand, contrast, font, spacing } from "../variables";
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.

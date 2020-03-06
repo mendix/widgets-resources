@@ -51,5 +51,5 @@ export const com_mendix_widget_native_togglebuttons_ToggleButtons = {
         color: input.errorColor,
         fontSize: font.size,
         fontFamily: font.family,
-    }
+    },
 };

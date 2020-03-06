@@ -6,12 +6,12 @@ import { background, border, contrast, spacing } from "../../../core/variables";
 
 ========================================================================== */
 export const card = {
-    container: Object.assign({ borderRadius: border.radius, backgroundColor: background.primary, marginBottom: spacing.regular }, Platform.select({
+    container: Object.assign(Object.assign({ borderRadius: border.radius, backgroundColor: background.primary, marginBottom: spacing.regular }, Platform.select({
         android: {
             borderWidth: 1,
             borderColor: contrast.lowest,
         },
-    }), { elevation: 1.5, shadowColor: shadeBlendConvert(-0.2, background.primary), shadowOpacity: 0.7, shadowRadius: 10, shadowOffset: {
+    })), { elevation: 1.5, shadowColor: shadeBlendConvert(-0.2, background.primary), shadowOpacity: 0.7, shadowRadius: 10, shadowOffset: {
             width: 0,
             height: 2,
         } }),
@@ -31,7 +31,7 @@ export const cardImage = {
     },
 };
 export const cardImageFull = {
-    container: Object.assign({}, cardImage.container, { borderBottomLeftRadius: border.radius, borderBottomRightRadius: border.radius }),
+    container: Object.assign(Object.assign({}, cardImage.container), { borderBottomLeftRadius: border.radius, borderBottomRightRadius: border.radius }),
     image: {
         width: "100%",
         height: 300,

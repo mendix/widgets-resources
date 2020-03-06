@@ -1,4 +1,4 @@
-import { font, tabcontainer } from "../variables";
+import { font, tabContainer } from "../variables";
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.
@@ -18,23 +18,23 @@ export const TabContainer = {
     tabBar: {
         // bounces, pressColor, pressOpacity, scrollEnabled and all ViewStyle properties are allowed
         bounces: true,
-        pressColor: tabcontainer.tabBar.pressColor,
+        pressColor: tabContainer.tabBar.pressColor,
         pressOpacity: 0.8,
-        backgroundColor: tabcontainer.tabBar.backgroundColor,
+        backgroundColor: tabContainer.tabBar.backgroundColor,
         scrollEnabled: false,
     },
     indicator: {
         // All ViewStyle properties are allowed
-        backgroundColor: tabcontainer.indicator.backgroundColor,
-        height: tabcontainer.indicator.height,
+        backgroundColor: tabContainer.indicator.backgroundColor,
+        height: tabContainer.indicator.height,
     },
     tab: {
     // All ViewStyle properties are allowed
     },
     label: {
         // All TextStyle properties are allowed
-        color: tabcontainer.label.color,
+        color: tabContainer.label.color,
         fontFamily: font.family,
-        fontWeight: tabcontainer.label.fontWeight,
+        fontWeight: tabContainer.label.fontWeight,
     },
 };

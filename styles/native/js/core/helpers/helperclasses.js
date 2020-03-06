@@ -9,13 +9,13 @@ import { background, border } from "../variables";
 // Hide on Android
 export const hideOnAndroid = {
     container: {
-        display: Platform.select({ android: "none" }),
+        display: Platform.select({ ios: "flex", android: "none" }),
     },
 };
 // Hide on iOS
 export const hideOnIos = {
     container: {
-        display: Platform.select({ ios: "none" }),
+        display: Platform.select({ ios: "none", android: "flex" }),
     },
 };
 //== Background Colors

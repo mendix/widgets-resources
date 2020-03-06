@@ -1,4 +1,4 @@
-import { layoutgrid } from "../variables.js";
+import { layoutGrid } from "../variables";
 //
 // DISCLAIMER:
 // Do not change this file because it is core styling.
@@ -17,91 +17,91 @@ export const row = {
     container: {
         flexDirection: "row",
         flexWrap: "wrap",
-        marginHorizontal: -layoutgrid.gutterSize,
+        marginHorizontal: -layoutGrid.gutterSize,
     },
 };
 export const col = {
     container: {
         flex: 1,
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
 export const colFitToContent = {
     container: {
         flex: -1,
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
 export const col1 = {
     container: {
         flexBasis: "8.333%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
 export const col2 = {
     container: {
         flexBasis: "16.666%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
 export const col3 = {
     container: {
         flexBasis: "25%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
 export const col4 = {
     container: {
         flexBasis: "33.333%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
 export const col5 = {
     container: {
         flexBasis: "41.666%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
 export const col6 = {
     container: {
         flexBasis: "50%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
 export const col7 = {
     container: {
         flexBasis: "58.333%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
 export const col8 = {
     container: {
         flexBasis: "66.666%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
 export const col9 = {
     container: {
         flexBasis: "75%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
 export const col10 = {
     container: {
         flexBasis: "83.333%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
 export const col11 = {
     container: {
         flexBasis: "91.666%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
 export const col12 = {
     container: {
         flexBasis: "100%",
-        paddingHorizontal: layoutgrid.gutterSize,
+        paddingHorizontal: layoutGrid.gutterSize,
     },
 };
 export const noGutters = {
