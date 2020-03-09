@@ -1,7 +1,10 @@
 import { ActionValue, DynamicValue, ValueStatus } from "mendix";
 
-export function dynamicValue<T>(value?: T): DynamicValue<T> {
-    return value == null ? { status: ValueStatus.Loading, value: undefined } : { status: ValueStatus.Available, value };
+export function dynamicValue<T>(loading: boolean, value?: T): DynamicValue<T> {
+    if (loading) {
+        return { status: ValueStatus.Loading, value };
+    }
+    return value ? { status: ValueStatus.Available, value } : { status: ValueStatus.Unavailable, value: undefined };
 }
 
 export function actionValue(canExecute = true, isExecuting = false): ActionValue {
