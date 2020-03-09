@@ -56,4 +56,10 @@ const customConfig = {
     }
 };
 
-module.exports = [merge(baseConfig[0], customConfig)];
+const customConfigurations = [merge(baseConfig[0], customConfig)];
+
+if (baseConfig.length === 2) {
+    customConfigurations.push(baseConfig[1]);
+}
+
+module.exports = customConfigurations;
