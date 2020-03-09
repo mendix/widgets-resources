@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Bottom sheet renders a custom modal 1`] = `
+<View
+  style={
+    Object {
+      "bottom": -1234,
+      "position": "absolute",
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+  >
+    <Text />
+  </View>
+</View>
+`;
+
+exports[`Bottom sheet renders a expanding 1`] = `
+<View
+  style={
+    Object {
+      "bottom": -1234,
+      "position": "absolute",
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    style={null}
+  >
+    <Text>
+      Header
+    </Text>
+  </View>
+  <View
+    onLayout={[Function]}
+  >
+    <Text>
+      Content
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Bottom sheet renders a expanding fullscreen 1`] = `
+<View
+  style={
+    Object {
+      "bottom": -1234,
+      "position": "absolute",
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    style={null}
+  >
+    <Text>
+      Header
+    </Text>
+  </View>
+  <View
+    onLayout={[Function]}
+  >
+    <Text>
+      Content
+    </Text>
+  </View>
+  <Text>
+    Full screen content
+  </Text>
+</View>
+`;
+
+exports[`Bottom sheet renders a native bottom action sheet for ios (Basic modal) 1`] = `null`;

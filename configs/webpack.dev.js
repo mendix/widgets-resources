@@ -11,4 +11,10 @@ const previewConfig = {
     devtool: "inline-source-map"
 };
 
-module.exports = [merge(baseConfig[0], customConfig), merge(baseConfig[1], previewConfig)];
+const customConfigurations = [merge(baseConfig[0], customConfig), merge(baseConfig[1], previewConfig)];
+
+if (baseConfig.length === 3) {
+    customConfigurations.push(baseConfig[2]);
+}
+
+module.exports = customConfigurations;
