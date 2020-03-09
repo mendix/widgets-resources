@@ -1,6 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`BackgroundImage renders nothing when image is loading for the first time 1`] = `null`;
+
 exports[`BackgroundImage renders nothing when image is unavailable 1`] = `null`;
+
+exports[`BackgroundImage renders previous image when image is reloading 1`] = `
+<View
+  accessibilityIgnoresInvertColors={true}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": "path/to/image",
+      }
+    }
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "height": undefined,
+          "width": undefined,
+        },
+        undefined,
+      ]
+    }
+  />
+  <Text>
+    Content
+  </Text>
+</View>
+`;
 
 exports[`BackgroundImage renders wihtout content 1`] = `
 <View
