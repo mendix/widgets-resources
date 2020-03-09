@@ -1,4 +1,4 @@
-import { createElement, ReactNode, Fragment } from "react";
+import { createElement, Fragment, ReactElement } from "react";
 import { BottomDrawerStyle, defaultBottomDrawerStyle } from "./ui/Styles";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { CustomModalSheet } from "./components/CustomModalSheet";
@@ -6,7 +6,7 @@ import { ExpandingDrawer } from "./components/ExpandingDrawer";
 import { NativeBottomSheet } from "./components/NativeBottomSheet";
 import { BottomSheetProps } from "../typings/BottomSheetProps";
 
-export function BottomSheet(props: BottomSheetProps<BottomDrawerStyle>): ReactNode {
+export function BottomSheet(props: BottomSheetProps<BottomDrawerStyle>): ReactElement {
     const styles = flattenStyles(defaultBottomDrawerStyle, props.style);
 
     if (props.type === "modal" && props.modalRendering === "custom") {
