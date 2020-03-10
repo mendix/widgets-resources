@@ -1,5 +1,4 @@
-import { Problem, Properties } from "../typings/PageEditor";
-import { changeProperty, hideProperty } from "./utils/PageEditorUtils";
+import { changeProperty, hideProperty, Problem, Properties } from "@widgets-resources/piw-utils";
 
 export function getProperties(values: any, defaultProperties: Properties): Properties {
     if (values.type === "modal") {

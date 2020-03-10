@@ -1,4 +1,5 @@
-import { Properties, Property } from "../../typings/PageEditor";
+/* eslint-disable */
+import { Properties, Property } from "../typings/PageEditor";
 
 declare type Option<T> = T | undefined;
 
