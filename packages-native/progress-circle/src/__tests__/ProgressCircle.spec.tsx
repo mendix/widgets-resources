@@ -59,7 +59,7 @@ describe("ProgressCircle", () => {
             <ProgressCircle
                 {...createProps(50, 0, 100)}
                 circleText={"customText"}
-                customText={dynamicValue("Custom")}
+                customText={dynamicValue(false, "Custom")}
             />
         );
         expect(component.getByType(Text).props.children).toBe("Custom");
@@ -67,7 +67,11 @@ describe("ProgressCircle", () => {
 
     it("renders empty custom text", () => {
         const component = render(
-            <ProgressCircle {...createProps(50, 0, 100)} circleText={"customText"} customText={dynamicValue()} />
+            <ProgressCircle
+                {...createProps(50, 0, 100)}
+                circleText={"customText"}
+                customText={dynamicValue<string>(true)}
+            />
         );
         expect(component.getByType(Text).props.children).toBe("");
     });
@@ -83,8 +87,8 @@ function createProps(progressValue?: number, minimumValue?: number, maximumValue
         name: "progress-circle-test",
         style: [],
         circleText: "percentage",
-        progressValue: dynamicValue(progressValue != null ? new Big(progressValue) : undefined),
-        minimumValue: dynamicValue(minimumValue != null ? new Big(minimumValue) : undefined),
-        maximumValue: dynamicValue(maximumValue != null ? new Big(maximumValue) : undefined)
+        progressValue: progressValue != null ? dynamicValue(false, new Big(progressValue)) : dynamicValue<Big>(true),
+        minimumValue: minimumValue != null ? dynamicValue(false, new Big(minimumValue)) : dynamicValue<Big>(true),
+        maximumValue: maximumValue != null ? dynamicValue(false, new Big(maximumValue)) : dynamicValue<Big>(true)
     };
 }
