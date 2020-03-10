@@ -1,6 +1,6 @@
 import { brand, button, contrast, font } from "../variables";
-import merge                             from "./_functions/mergeobjects";
-import { ActionButtonType }              from "../../types/widgets";
+import merge                from "./_functions/mergeobjects";
+import { ActionButtonType } from "../../types/widgets";
 
 //
 // DISCLAIMER:

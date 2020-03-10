@@ -1,6 +1,6 @@
-import { ViewStyle } from "react-native";
+import { ViewStyle } from "./rn";
 
-export interface HelperClass {
+export interface Helperclass {
     container: ViewStyle
 }
 

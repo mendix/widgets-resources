@@ -18,7 +18,7 @@ import {
     VariablesNavigation,
     VariablesSpacing,
     VariablesTabContainer,
-}                                                                           from "../types/variables";
+} from "../types/variables";
 
 
 //== Global variables

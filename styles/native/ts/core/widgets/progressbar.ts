@@ -1,7 +1,7 @@
 import { Platform }            from "react-native";
 import { anyColorToRgbString } from "../helpers/_functions/convertcolors";
-import { brand, font, input }  from "../variables";
-import { ProgressBarType }     from "../../types/widgets";
+import { brand, font, input } from "../variables";
+import { ProgressBarType }    from "../../types/widgets";
 
 //
 // DISCLAIMER:
