@@ -86,7 +86,7 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
             {snapPoints.length > 1 && (
                 <BottomSheet
                     enabledManualSnapping={false}
-                    enabledBottomInitialAnimation={true}
+                    enabledBottomInitialAnimation
                     enabledContentTapInteraction={false}
                     snapPoints={snapPoints}
                     initialSnap={snapPoints.length - 1}

@@ -68,7 +68,7 @@ describe("Bottom sheet", () => {
                 type="expanding"
                 smallContent={<Text>Header</Text>}
                 largeContent={<Text>Content</Text>}
-                showFullscreenContent={true}
+                showFullscreenContent
                 fullscreenContent={<Text>Full screen content</Text>}
             />
         );

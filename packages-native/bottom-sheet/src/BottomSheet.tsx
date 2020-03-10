@@ -17,6 +17,7 @@ export function BottomSheet(props: BottomSheetProps<BottomDrawerStyle>): ReactEl
     if (props.type === "modal" && props.modalRendering === "basic") {
         return (
             <NativeBottomSheet
+                name={props.name}
                 itemsBasic={props.itemsBasic}
                 triggerAttribute={props.triggerAttribute}
                 useNative={props.nativeImplementation}
