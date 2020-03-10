@@ -16,7 +16,7 @@ describe("VideoPlayer", () => {
         defaultProps = {
             name: "video-player-test",
             style: [],
-            videoUrl: dynamicValue("https://mendix.com/video.mp4"),
+            videoUrl: dynamicValue(false, "https://mendix.com/video.mp4"),
             autoStart: false,
             muted: false,
             loop: false,

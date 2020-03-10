@@ -4,6 +4,7 @@ import { render } from "react-native-testing-library";
 import { createElement } from "react";
 import { FloatingActionButton } from "../FloatingActionButton";
 import { actionValue, dynamicValue } from "@native-mobile-resources/util-widgets";
+import { NativeIcon } from "mendix";
 
 describe("FloatingActionButton", () => {
     let defaultProps: FloatingActionButtonProps<FloatingActionButtonStyle>;
@@ -26,18 +27,18 @@ describe("FloatingActionButton", () => {
     it("renders with secondary buttons", () => {
         const secondarybuttons = [
             {
-                icon: dynamicValue(undefined),
-                caption: dynamicValue("caption1"),
+                icon: dynamicValue<NativeIcon>(true),
+                caption: dynamicValue(false, "caption1"),
                 onClick: actionValue(true, false)
             },
             {
-                icon: dynamicValue(undefined),
-                caption: dynamicValue("caption2"),
+                icon: dynamicValue<NativeIcon>(true),
+                caption: dynamicValue(false, "caption2"),
                 onClick: actionValue(true, false)
             },
             {
-                icon: dynamicValue(undefined),
-                caption: dynamicValue("caption3"),
+                icon: dynamicValue<NativeIcon>(true),
+                caption: dynamicValue(false, "caption3"),
                 onClick: actionValue(true, false)
             }
         ];

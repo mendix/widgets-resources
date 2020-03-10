@@ -12,7 +12,7 @@ describe("WebView", () => {
         defaultProps = {
             name: "webview-test",
             style: [],
-            url: dynamicValue("https://mendix.com")
+            url: dynamicValue(false, "https://mendix.com")
         };
     });
 
@@ -22,12 +22,14 @@ describe("WebView", () => {
     });
 
     it("renders a web view when html content is provided", () => {
-        const component = render(<WebView {...defaultProps} content={dynamicValue("Hello, world!")} />);
+        const component = render(<WebView {...defaultProps} content={dynamicValue(false, "Hello, world!")} />);
         expect(component.toJSON()).toMatchSnapshot();
     });
 
     it("renders an error when no url or content is provided", () => {
-        const component = render(<WebView {...defaultProps} url={dynamicValue()} content={dynamicValue()} />);
+        const component = render(
+            <WebView {...defaultProps} url={dynamicValue<string>(true)} content={dynamicValue<string>(true)} />
+        );
         expect(component.toJSON()).toMatchSnapshot();
     });
 
