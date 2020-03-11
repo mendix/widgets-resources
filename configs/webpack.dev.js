@@ -13,7 +13,9 @@ const previewConfig = {
 
 const customConfigurations = [merge(baseConfig[0], customConfig), merge(baseConfig[1], previewConfig)];
 
-if (baseConfig.length === 3) {
+const hasEditorConfig = baseConfig.length === 3;
+
+if (hasEditorConfig) {
     customConfigurations.push(baseConfig[2]);
 }
 
