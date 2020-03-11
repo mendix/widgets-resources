@@ -58,7 +58,9 @@ const customConfig = {
 
 const customConfigurations = [merge(baseConfig[0], customConfig)];
 
-if (baseConfig.length === 2) {
+const hasEditorConfig = baseConfig.length === 2;
+
+if (hasEditorConfig) {
     customConfigurations.push(baseConfig[1]);
 }
 
