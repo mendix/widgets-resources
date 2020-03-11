@@ -207,6 +207,10 @@ export const tabcontainer = {
         color: contrast.highest,
         fontWeight: font.weightBold,
     },
+    activeLabel: {
+        color: brand.primary,
+        fontWeight: font.weightBold,
+    },
 };
 
 // Listview Styles
