@@ -74,7 +74,7 @@ export const com_mendix_widget_native_feedback_Feedback = {
         marginRight: Platform.select({ ios: 0, android: -5 }),
         thumbColorOn: background.primary,
         trackColorOn: brand.success,
-        thumbColorOff: background.lowest,
+        thumbColorOff: contrast.lower,
         trackColorOff: contrast.lowest,
     },
     button: {
