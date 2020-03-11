@@ -1,5 +1,3 @@
-/// <reference path="./badge.d.ts" />
-
 import { badge, font } from "../variables";
 //
 // DISCLAIMER:
@@ -18,7 +16,6 @@ export const com_mendix_widget_native_badge_Badge = {
         backgroundColor: badge.default.backgroundColor,
         paddingVertical: badge.paddingVertical,
         paddingHorizontal: badge.paddingHorizontal,
-
     },
     caption: {
         // All TextStyle properties are allowed

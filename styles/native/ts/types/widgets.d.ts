@@ -1,4 +1,4 @@
-import { ImageStyle, TextStyle, ViewStyle } from "./rn";
+import { ImageStyle, TextStyle, ViewStyle } from "react-native";
 
 declare type ActivityIndicatorSizeType = "small" | "large";
 

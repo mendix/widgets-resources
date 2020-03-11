@@ -1,6 +1,9 @@
+/* ==========================================================================
+    Types
+========================================================================== */
+
 declare type FontWeight = "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
 declare type TextAlign = "auto" | "left" | "right" | "center" | "justify";
-
 
 export interface VariablesBrand {
     primary: string,

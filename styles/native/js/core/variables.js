@@ -1,3 +1,4 @@
+/// <reference path="../types/variables.d.ts" />
 import { Platform } from "react-native";
 import * as custom from "../app/custom-variables";
 import adjustFont, { height, width } from "./helpers/_functions/adjustfont";

@@ -1,4 +1,8 @@
-import { VariablesBackground, VariablesBadge, VariablesBorder, VariablesBrand, VariablesButton, VariablesContrast, VariablesFont, VariablesInput, VariablesLayoutgrid, VariablesListView, VariablesNavigation, VariablesSpacing, VariablesTabContainer } from "../types/variables";
+/// <reference path="../types/variables.d.ts" />
+/* ==========================================================================
+    Variables
+========================================================================== */
+
 export declare const deviceHeight: number;
 export declare const deviceWidth: number;
 declare let brand: VariablesBrand;
@@ -14,4 +18,19 @@ declare let tabContainer: VariablesTabContainer;
 declare let listView: VariablesListView;
 declare let layoutGrid: VariablesLayoutgrid;
 declare let badge: VariablesBadge;
-export { brand, background, border, contrast, font, spacing, button, input, navigation, tabContainer, listView, layoutGrid, badge, };
+export {
+    brand,
+    background,
+    border,
+    contrast,
+    font,
+    spacing,
+    button,
+    input,
+    navigation,
+    tabContainer,
+    listView,
+    layoutGrid,
+    badge,
+};
+

@@ -1,50 +1,76 @@
+//
 export interface ShadowStyleIOS {
     shadowColor?: string;
-    shadowOffset?: {
-        width: number;
-        height: number;
-    };
+    shadowOffset?: { width: number; height: number };
     shadowOpacity?: number;
     shadowRadius?: number;
 }
+
+
+//
 interface PerspectiveTransform {
     perspective: number;
 }
+
 interface RotateTransform {
     rotate: string;
 }
+
 interface RotateXTransform {
     rotateX: string;
 }
+
 interface RotateYTransform {
     rotateY: string;
 }
+
 interface RotateZTransform {
     rotateZ: string;
 }
+
 interface ScaleTransform {
     scale: number;
 }
+
 interface ScaleXTransform {
     scaleX: number;
 }
+
 interface ScaleYTransform {
     scaleY: number;
 }
+
 interface TranslateXTransform {
     translateX: number;
 }
+
 interface TranslateYTransform {
     translateY: number;
 }
+
 interface SkewXTransform {
     skewX: string;
 }
+
 interface SkewYTransform {
     skewY: string;
 }
+
 export interface TransformsStyle {
-    transform?: (PerspectiveTransform | RotateTransform | RotateXTransform | RotateYTransform | RotateZTransform | ScaleTransform | ScaleXTransform | ScaleYTransform | TranslateXTransform | TranslateYTransform | SkewXTransform | SkewYTransform)[];
+    transform?: (
+        | PerspectiveTransform
+        | RotateTransform
+        | RotateXTransform
+        | RotateYTransform
+        | RotateZTransform
+        | ScaleTransform
+        | ScaleXTransform
+        | ScaleYTransform
+        | TranslateXTransform
+        | TranslateYTransform
+        | SkewXTransform
+        | SkewYTransform
+        )[];
     transformMatrix?: Array<number>;
     rotation?: number;
     scaleX?: number;
@@ -52,13 +78,16 @@ export interface TransformsStyle {
     translateX?: number;
     translateY?: number;
 }
+
+
 /**
  * Flex Prop Types
  * @see https://facebook.github.io/react-native/docs/flexbox.html#proptypes
  * @see https://facebook.github.io/react-native/docs/layout-props.html
  * @see https://github.com/facebook/react-native/blob/master/Libraries/StyleSheet/LayoutPropTypes.js
  */
-declare type FlexAlignType = "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
+type FlexAlignType = "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
+
 export interface FlexStyle {
     alignContent?: "flex-start" | "flex-end" | "center" | "stretch" | "space-between" | "space-around";
     alignItems?: FlexAlignType;
@@ -112,11 +141,14 @@ export interface FlexStyle {
     top?: number | string;
     width?: number | string;
     zIndex?: number;
+
     /**
      * @platform ios
      */
     direction?: "inherit" | "ltr" | "rtl";
 }
+
+
 /**
  * @see https://facebook.github.io/react-native/docs/view.html#style
  * @see https://github.com/facebook/react-native/blob/master/Libraries/Components/View/ViewStylePropTypes.js
@@ -158,7 +190,9 @@ export interface ViewStyle extends FlexStyle, ShadowStyleIOS, TransformsStyle {
      */
     elevation?: number;
 }
-export declare type FontVariant = "small-caps" | "oldstyle-nums" | "lining-nums" | "tabular-nums" | "proportional-nums";
+
+export type FontVariant = "small-caps" | "oldstyle-nums" | "lining-nums" | "tabular-nums" | "proportional-nums";
+
 export interface TextStyleIOS extends ViewStyle {
     fontVariant?: FontVariant[];
     letterSpacing?: number;
@@ -166,10 +200,13 @@ export interface TextStyleIOS extends ViewStyle {
     textDecorationStyle?: "solid" | "double" | "dotted" | "dashed";
     writingDirection?: "auto" | "ltr" | "rtl";
 }
+
 export interface TextStyleAndroid extends ViewStyle {
     textAlignVertical?: "auto" | "top" | "bottom" | "center";
     includeFontPadding?: boolean;
 }
+
+// @see https://facebook.github.io/react-native/docs/text.html#style
 export interface TextStyle extends TextStyleIOS, TextStyleAndroid, ViewStyle {
     color?: string;
     fontFamily?: string;
@@ -188,20 +225,20 @@ export interface TextStyle extends TextStyleIOS, TextStyleAndroid, ViewStyle {
     textDecorationStyle?: "solid" | "double" | "dotted" | "dashed";
     textDecorationColor?: string;
     textShadowColor?: string;
-    textShadowOffset?: {
-        width: number;
-        height: number;
-    };
+    textShadowOffset?: { width: number; height: number };
     textShadowRadius?: number;
     textTransform?: "none" | "capitalize" | "uppercase" | "lowercase";
     testID?: string;
 }
+
+
 /**
  * Image style
  * @see https://facebook.github.io/react-native/docs/image.html#style
  * @see https://github.com/facebook/react-native/blob/master/Libraries/Image/ImageStylePropTypes.js
  */
-export declare type ImageResizeMode = "cover" | "contain" | "stretch" | "repeat" | "center";
+export type ImageResizeMode = "cover" | "contain" | "stretch" | "repeat" | "center";
+
 export interface ImageStyle extends FlexStyle, ShadowStyleIOS, TransformsStyle {
     resizeMode?: ImageResizeMode;
     backfaceVisibility?: "visible" | "hidden";
@@ -218,4 +255,4 @@ export interface ImageStyle extends FlexStyle, ShadowStyleIOS, TransformsStyle {
     tintColor?: string;
     opacity?: number;
 }
-export {};
+
