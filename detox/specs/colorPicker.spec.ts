@@ -135,11 +135,15 @@ describe("Color Picker", () => {
 
         it("should render", async () => {
             const colorPicker = ColorPicker("colorPickerConditional");
+            const checkBox = element(by.id("checkBoxColorPickerConditional"));
             await expect(colorPicker.getHue()).toBeNotVisible();
-            await element(by.id("checkBoxColorPickerConditional")).tap();
-            await waitFor(colorPicker.getHue())
+            await waitFor(checkBox)
                 .toBeVisible()
                 .withTimeout(5000);
+            await checkBox.tap();
+            await waitFor(colorPicker.getHue())
+                .toBeVisible()
+                .withTimeout(10000);
             await expect(colorPicker.getHue()).toBeVisible();
         });
 

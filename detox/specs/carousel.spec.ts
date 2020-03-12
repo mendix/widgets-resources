@@ -1,9 +1,13 @@
 import { Alert, Carousel, Pages } from "./elements";
-import { expect, element, by, device } from "detox";
+import { expect, element, by, device, waitFor } from "detox";
 
 describe("Carousel", () => {
     beforeAll(async () => {
         await Pages().openCarousel();
+
+        await waitFor(Carousel("mycarousel").getCarousel())
+            .toBeVisible()
+            .withTimeout(10000);
     });
 
     it("should render carousel", async () => {
@@ -18,14 +22,14 @@ describe("Carousel", () => {
     it("should pass right context when combined with clickable container", async () => {
         const carousel = Carousel("mycarousel");
         await carousel.getParticularElementInsideSlideContent(0, "carouselImage").tap(); // Tap the clickable container around carousel item
-        await expect(Alert().getMessage("You passed image1"));
+        await expect(Alert().getMessage("You passed image1")).toBeVisible();
         await Alert().confirm();
     });
 
     it("should pass right context when combined with clickable image", async () => {
         const carousel = Carousel("mycarousel");
         await carousel.getParticularElementInsideSlideContent(0, "staticImage").tap(); // Tap the static clickable image on carousel item
-        await expect(Alert().getMessage("You passed image1"));
+        await expect(Alert().getMessage("You passed image1")).toBeVisible();
         await Alert().confirm();
     });
 
@@ -42,6 +46,10 @@ describe("Carousel", () => {
 describe("Carousel swipes", () => {
     beforeEach(async () => {
         await Pages().openCarousel();
+
+        await waitFor(Carousel("mycarousel").getCarousel())
+            .toBeVisible()
+            .withTimeout(10000);
     });
 
     it("left and right", async () => {
@@ -59,7 +67,7 @@ describe("Carousel swipes", () => {
         await carousel.waitForSlideAndSwipe(carousel, 0, "left");
         await carousel.getParticularElementInsideSlideContent(1, "carouselImage").tap(); // Tap the clickable container around carousel item
 
-        await expect(Alert().getMessage("You passed image2"));
+        await expect(Alert().getMessage("You passed image2")).toBeVisible();
         await Alert().confirm();
     });
 
@@ -70,7 +78,7 @@ describe("Carousel swipes", () => {
         await carousel.waitForSlideAndSwipe(carousel, 1, "left");
         await carousel.getParticularElementInsideSlideContent(2, "staticImage").tap(); // Tap the static clickable image on carousel item
 
-        await expect(Alert().getMessage("You passed image3"));
+        await expect(Alert().getMessage("You passed image3")).toBeVisible();
         await Alert().confirm();
         await expect(element(by.text("image3"))).toBeVisible(); // Read the textbox connected to the first second
     });
