@@ -119,37 +119,37 @@ describe("Color Picker", () => {
         });
     });
 
-    // describe("Conditional visible color picker", () => {
-    //     beforeAll(async () => {
-    //         await Pages().openColorPicker();
-    //         await TabContainer("tabContainerColorPicker")
-    //             .tab("tabColorPickerConditional")
-    //             .header()
-    //             .tap();
-    //     });
-    //
-    //     it("should not render", async () => {
-    //         const colorPicker = ColorPicker("colorPickerConditional");
-    //         await expect(colorPicker.getHue()).toBeNotVisible();
-    //     });
-    //
-    //     it("should render", async () => {
-    //         const checkBox = element(by.id("checkBoxColorPickerConditional"));
-    //         await expect(ColorPicker("colorPickerConditional").getHue()).toBeNotVisible();
-    //         await waitFor(checkBox)
-    //             .toBeVisible()
-    //             .withTimeout(5000);
-    //         await checkBox.tap();
-    //         await waitFor(ColorPicker("colorPickerConditional").getHue())
-    //             .toBeVisible()
-    //             .withTimeout(10000);
-    //         await expect(ColorPicker("colorPickerConditional").getHue()).toBeVisible();
-    //     });
-    //
-    //     afterAll(async () => {
-    //         await device.reloadReactNative();
-    //     });
-    // });
+    describe("Conditional visible color picker", () => {
+        beforeAll(async () => {
+            await Pages().openColorPicker();
+            await TabContainer("tabContainerColorPicker")
+                .tab("tabColorPickerConditional")
+                .header()
+                .tap();
+        });
+
+        it("should not render", async () => {
+            const colorPicker = ColorPicker("colorPickerConditional");
+            await expect(colorPicker.getHue()).toBeNotVisible();
+        });
+
+        it("should render", async () => {
+            const checkBox = element(by.id("checkBoxColorPickerConditional"));
+            await expect(ColorPicker("colorPickerConditional").getHue()).toBeNotVisible();
+            await waitFor(checkBox)
+                .toBeVisible()
+                .withTimeout(5000);
+            await checkBox.tap();
+            await waitFor(ColorPicker("colorPickerConditional").getHue())
+                .toBeVisible()
+                .withTimeout(10000);
+            await expect(ColorPicker("colorPickerConditional").getHue()).toBeVisible();
+        });
+
+        afterAll(async () => {
+            await device.reloadReactNative();
+        });
+    });
 
     describe("On change color picker", () => {
         beforeAll(async () => {
