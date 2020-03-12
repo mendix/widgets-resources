@@ -3,6 +3,8 @@ import { expect, element, by, device, waitFor } from "detox";
 
 describe("Carousel", () => {
     beforeAll(async () => {
+        await device.disableSynchronization();
+        await device.setURLBlacklist([]);
         await Pages().openCarousel();
 
         await waitFor(Carousel("mycarousel").getCarousel())
@@ -45,15 +47,17 @@ describe("Carousel", () => {
 
 describe("Carousel swipes", () => {
     beforeEach(async () => {
+        await device.disableSynchronization();
+        await device.setURLBlacklist([]);
         await Pages().openCarousel();
-
-        await waitFor(Carousel("mycarousel").getCarousel())
-            .toBeVisible()
-            .withTimeout(10000);
     });
 
     it("left and right", async () => {
         const carousel = Carousel("mycarousel");
+
+        await waitFor(carousel.getCarousel())
+            .toBeVisible()
+            .withTimeout(10000);
 
         await carousel.waitForSlideAndSwipe(carousel, 0, "left");
         await expect(element(by.text("image2"))).toBeVisible(); // Read the textbox connected to the second item
@@ -64,6 +68,11 @@ describe("Carousel swipes", () => {
 
     it("and combined with clickable container, it passes right context", async () => {
         const carousel = Carousel("mycarousel");
+
+        await waitFor(carousel.getCarousel())
+            .toBeVisible()
+            .withTimeout(10000);
+
         await carousel.waitForSlideAndSwipe(carousel, 0, "left");
         await carousel.getParticularElementInsideSlideContent(1, "carouselImage").tap(); // Tap the clickable container around carousel item
 
@@ -73,6 +82,10 @@ describe("Carousel swipes", () => {
 
     it("and combined with clickable image, it passes right context", async () => {
         const carousel = Carousel("mycarousel");
+
+        await waitFor(carousel.getCarousel())
+            .toBeVisible()
+            .withTimeout(10000);
 
         await carousel.waitForSlideAndSwipe(carousel, 0, "left");
         await carousel.waitForSlideAndSwipe(carousel, 1, "left");
