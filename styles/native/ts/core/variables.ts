@@ -19,15 +19,15 @@ import {
     VariablesSpacing,
     VariablesTabContainer,
 }                                                                           from "../types/variables";
-
-
+//
+//
 //== Global variables
 //## Variables to be used during styling
 //-------------------------------------------------------------------------------------------------------------------//
 // System defined read-only values
 export const deviceHeight = height;
 export const deviceWidth = width;
-
+//
 // Brand Style
 let brand: VariablesBrand = {
     primary: "#0595DB",
@@ -40,7 +40,8 @@ let brand: VariablesBrand = {
     dangerLight: `rgba(${anyColorToRgbString("#ed1c24")}, 0.14)`,
 };
 brand = merge(brand, custom.brand || {});
-
+//
+// Background colors
 let background: VariablesBackground = {
     primary: "#FFF",
     secondary: setContrastScale(0.03, "#FFF"),
@@ -51,7 +52,7 @@ let background: VariablesBackground = {
     brandDanger: brand.danger,
 };
 background = merge(background, custom.background || {});
-
+//
 // Contrast (Gray) colors based on background.primary
 let contrast: VariablesContrast = {
     highest: setContrastScale(0.95, background.primary),
@@ -63,7 +64,7 @@ let contrast: VariablesContrast = {
     lowest: setContrastScale(0.05, background.primary),
 };
 contrast = merge(contrast, custom.contrast || {});
-
+//
 // Border Style
 let border: VariablesBorder = {
     color: setContrastScale(0.17, background.primary),
@@ -71,7 +72,7 @@ let border: VariablesBorder = {
     radius: 5,
 };
 border = merge(border, custom.border || {});
-
+//
 // Font Styles
 let font: VariablesFont = {
     size: adjustFont(14),
@@ -91,7 +92,7 @@ let font: VariablesFont = {
     family: Platform.select({ios: "System", android: "normal"}) as string,
 };
 font = merge(font, custom.font || {});
-
+//
 // Spacing
 let spacing: VariablesSpacing = {
     smallest: 5,
@@ -103,7 +104,7 @@ let spacing: VariablesSpacing = {
     largest: 40,
 };
 spacing = merge(spacing, custom.spacing || {});
-
+//
 // Button Styles
 let button: VariablesButton = {
     fontSize: font.sizeSmall,
@@ -152,7 +153,7 @@ let button: VariablesButton = {
     },
 };
 button = merge(button, custom.button || {});
-
+//
 //Input Styles
 let input: VariablesInput = {
     // Colors
@@ -178,7 +179,7 @@ let input: VariablesInput = {
     paddingVertical: spacing.small,
 };
 input = merge(input, custom.input || {});
-
+//
 // Navigation Styles
 let navigation: VariablesNavigation = {
     statusBar: {
@@ -209,7 +210,7 @@ let navigation: VariablesNavigation = {
     },
 };
 navigation = merge(navigation, custom.navigation || {});
-
+//
 // Tabcontainer Styles
 let tabContainer: VariablesTabContainer = {
     tabBar: {
@@ -232,7 +233,7 @@ let tabContainer: VariablesTabContainer = {
     },
 };
 tabContainer = merge(tabContainer, custom.tabContainer || {});
-
+//
 // Listview Styles
 let listView: VariablesListView = {
     border: {
@@ -241,13 +242,13 @@ let listView: VariablesListView = {
     },
 };
 listView = merge(listView, custom.listView || {});
-
+//
 // Layoutgrid Styles
 let layoutGrid: VariablesLayoutgrid = {
     gutterSize: 15,
 };
 layoutGrid = merge(layoutGrid, custom.layoutGrid || {});
-
+//
 //## Pluggable Widgets
 //-------------------------------------------------------------------------------------------------------------------//
 // Badge Styles
@@ -279,7 +280,7 @@ let badge: VariablesBadge = {
     },
 };
 badge = merge(badge, custom.badge || {});
-
+//
 export {
     brand,
     background,

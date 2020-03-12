@@ -1,11 +1,12 @@
 import { border, font, navigation, spacing } from "../variables";
-//
-// DISCLAIMER:
-// Do not change this file because it is core styling.
-// Customizing core files will make updating Atlas much more difficult in the future.
-// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
-//
-/* ==========================================================================
+/*
+
+DISCLAIMER:
+Do not change this file because it is core styling.
+Customizing core files will make updating Atlas much more difficult in the future.
+To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
+
+==========================================================================
     TopBar / BottomBar / ProgressOverlay
 
     Default Class For Mendix TopBar, BottomBar and ProgressOverlay

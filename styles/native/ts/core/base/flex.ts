@@ -1,14 +1,13 @@
 import { Helperclass } from "../../types/helperclass";
+/*
 
-//
-// DISCLAIMER:
-// Do not change this file because it is core styling.
-// Customizing core files will make updating Atlas much more difficult in the future.
-// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
-//
+DISCLAIMER:
+Do not change this file because it is core styling.
+Customizing core files will make updating Atlas much more difficult in the future.
+To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 
+*/
 //== Flex layout
-
 export const flexMain: Helperclass = {
     container: {
         // flex 1 will take all available space not taken by flexItems.
@@ -48,7 +47,6 @@ export const flexWrap: Helperclass = {
         flexWrap: "wrap",
     },
 };
-
 export const justifyContentStart: Helperclass = {
     container: {
         // justifyContent aligns children in the main direction.

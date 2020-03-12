@@ -1,11 +1,11 @@
 import { Platform }                              from "react-native";
 import { background, border, contrast, spacing } from "../../../core/variables";
-
-/* ==========================================================================
+/*
+==========================================================================
     Cards
 
-========================================================================== */
-
+==========================================================================
+*/
 export const card = {
     container: {
         borderRadius: border.radius,
@@ -28,10 +28,9 @@ export const card = {
         },
     },
 };
-
+//
 //== Elements
 //-------------------------------------------------------------------------------------------------------------------//
-
 export const cardImage = {
     container: {
         overflow: "hidden",
@@ -56,7 +55,6 @@ export const cardImageFull = {
         resizeMode: "cover",
     },
 };
-
 export const cardBody = {
     container: {
         position: "absolute",
@@ -66,7 +64,7 @@ export const cardBody = {
         backgroundColor: "transparent",
     },
 };
-
+//
 //== Variations
 //-------------------------------------------------------------------------------------------------------------------//
 // Card Action
@@ -88,7 +86,7 @@ export const cardActionImage = {
         resizeMode: "contain",
     },
 };
-
+//
 //-------------------------------------------------------------------------------------------------------------------//
 // Card Payment
 export const cardPaymentImage = {

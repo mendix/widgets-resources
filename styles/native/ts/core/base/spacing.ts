@@ -1,14 +1,13 @@
 import { spacing }     from "../variables";
 import { Helperclass } from "../../types/helperclass";
+/*
 
+DISCLAIMER:
+Do not change this file because it is core styling.
+Customizing core files will make updating Atlas much more difficult in the future.
+To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 
-//
-// DISCLAIMER:
-// Do not change this file because it is core styling.
-// Customizing core files will make updating Atlas much more difficult in the future.
-// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
-//
-
+*/
 //== Inner Spacing
 export const spacingInnerSmallest: Helperclass = {
     container: {
@@ -255,8 +254,8 @@ export const spacingInnerBottomLargest: Helperclass = {
         paddingBottom: spacing.largest,
     },
 };
-
-
+//
+//
 //== Outer Spacing
 export const spacingOuterSmallest: Helperclass = {
     container: {

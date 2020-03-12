@@ -19,6 +19,7 @@
  * @param   {string}    toValue   HEX / RGB / RGBA Color to blend with. If (to === 'c') return value will be RGB Color
  *
  * @return  {string} Returns HEX color or RGB color if parameter to === 'c'
+ *
  */
 export function shadeBlendConvert(c, fromValue, toValue = undefined) {
     if (typeof c != "number" ||

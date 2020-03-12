@@ -1,17 +1,17 @@
 import colors from "./colorwords.js";
-
-
+//
+//
 interface RGB {
     r: number,
     g: number,
     b: number,
 }
-
+//
 interface RGBA extends RGB {
     a: number,
 }
-
 /**
+ *
  * Converts RGB color to HEX
  *
  * @param   {number || string}    r   Accepts RGB as string || Accepts R as string or number
@@ -27,8 +27,8 @@ function RgbToHex(r: string | number, g: string | number | undefined, b: string 
     }
     return "#" + ((1 << 24) + (Number(r) << 16) + (Number(g) << 8) + Number(b)).toString(16).slice(1);
 }
-
 /**
+ *
  * Converts HEX or HEX Alpha to RGB
  *
  * @param   {string}    hex   Accepts HEX color
@@ -45,8 +45,8 @@ function hexToRgb(hex: string): RGB {
         a: parseInt("0x" + hex[6] + hex[7], 16) / 255 || 1,
     });
 }
-
 /**
+ *
  * Converts any color format to RGB string
  *
  * @param   {string}    anyColor   Accepts any color format
@@ -57,8 +57,8 @@ export function anyColorToRgbString(anyColor: string): string {
     const {r, g, b} = checkColor(anyColor);
     return [r, g, b].join(",");
 }
-
 /**
+ *
  * Converts HSL to RGB color
  *
  * @param   {string}    hsl   Accepts HSL color
@@ -118,8 +118,8 @@ function hslToRgb(hsl: string): RGB {
         a,
     });
 }
-
 /**
+ *
  * Convert RGB string with HEX or Word inside to RGB object
  *
  * @param   {string}    rgb   Accepts RGB color as string
@@ -139,8 +139,8 @@ function rgbStringToRgb(rgb: string): RGB {
         return {r: Number(r), g: Number(g), b: Number(b)};
     }
 }
-
 /**
+ *
  * Converts RGB Alpha to RGB object
  *
  * @param   {string}    rgba   Accepts RGB Alpha color
@@ -173,8 +173,8 @@ function rgbaToRgb(rgba: RGBA | string): RGB {
     }
     return {r: calc(RGB.r), g: calc(RGB.g), b: calc(RGB.b)};
 }
-
 /**
+ *
  * Check what color format is being used.
  *
  * @param   {string}    color   Accepts any color format
@@ -189,8 +189,8 @@ function checkColor(color: string): RGB {
     else if (~color.indexOf("rgb")) return rgbStringToRgb(color);
     return {r: 255, g: 255, b: 255};
 }
-
 /**
+ *
  * Set best contrast color based on a (background) color
  *
  * @param   {string}    color   Accepts any color format
@@ -205,8 +205,8 @@ export function setColorBasedOnBackground(color: string): string {
     const o = Math.round((RGB.r * 299 + RGB.g * 587 + RGB.b * 114) / 1000);
     return o > 125 ? "rgba(0,0,0,.87)" : "rgba(255,255,255,.87)";
 }
-
 /**
+ *
  * Expects a color and a contrast value between 0 and 1.'
  * It will look at the supplied color's brightness and will start the contrast scale either from #000 (black) or #FFF (white).
  * This function will work best when you supply a very dark or very bright color.

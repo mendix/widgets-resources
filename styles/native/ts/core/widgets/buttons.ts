@@ -1,19 +1,17 @@
 import { button, contrast, font } from "../variables";
 import { ActionButtonType }       from "../../types/widgets";
+/*
 
-//
-// DISCLAIMER:
-// Do not change this file because it is core styling.
-// Customizing core files will make updating Atlas much more difficult in the future.
-// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
-//
+DISCLAIMER:
+Do not change this file because it is core styling.
+Customizing core files will make updating Atlas much more difficult in the future.
+To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 
-/* ==========================================================================
+==========================================================================
     Button
 
     Default Class For Mendix Button Widget
 ========================================================================== */
-
 export const ActionButton: ActionButtonType = {
     container: {
         // Ripplecolor and all ViewStyle properties are allowed
@@ -41,7 +39,7 @@ export const ActionButton: ActionButtonType = {
         fontWeight: button.fontWeight,
     },
 };
-
+//
 // Default style for button inside a header
 export const ActionButtonHeader: ActionButtonType = {
     container: {
@@ -49,7 +47,6 @@ export const ActionButtonHeader: ActionButtonType = {
         backgroundColor: button.header.backgroundColor,
         paddingLeft: button.header.paddingLeft,
         paddingRight: button.header.paddingRight,
-
     },
     icon: {
         color: button.header.color,

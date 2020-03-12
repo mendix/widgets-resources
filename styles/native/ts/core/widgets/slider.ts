@@ -1,20 +1,18 @@
 import { Platform }                                         from "react-native";
 import { background, border, brand, contrast, font, input } from "../variables";
 import { SliderType }                                       from "../../types/widgets";
+/*
 
-//
-// DISCLAIMER:
-// Do not change this file because it is core styling.
-// Customizing core files will make updating Atlas much more difficult in the future.
-// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
-//
+DISCLAIMER:
+Do not change this file because it is core styling.
+Customizing core files will make updating Atlas much more difficult in the future.
+To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 
-/* ==========================================================================
+==========================================================================
     Slider
 
     Default Class For Mendix Slider Widget
 ========================================================================== */
-
 export const com_mendix_widget_native_slider_Slider: SliderType = {
     container: {
         // All ViewStyle properties are allowed

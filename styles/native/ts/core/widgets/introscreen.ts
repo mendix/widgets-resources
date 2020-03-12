@@ -1,21 +1,18 @@
 import { isIphoneWithNotch }                      from "../helpers/_functions/device";
 import { background, button, font, spacing }      from "../variables";
 import { IntroScreenButtonType, IntroScreenType } from "../../types/widgets";
+/*
 
+DISCLAIMER:
+Do not change this file because it is core styling.
+Customizing core files will make updating Atlas much more difficult in the future.
+To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 
-//
-// DISCLAIMER:
-// Do not change this file because it is core styling.
-// Customizing core files will make updating Atlas much more difficult in the future.
-// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
-//
-
-/* ==========================================================================
+==========================================================================
     Intro Screen
 
     Default Class For Mendix Intro Screen Widget
 ========================================================================== */
-
 // Button styles when the chose to show the indicator above the buttons
 export const introScreenButtonPaginationAbove: IntroScreenButtonType = {
     container: {
@@ -65,7 +62,6 @@ export const introScreenButtonPaginationBetween: IntroScreenButtonType = {
         paddingHorizontal: spacing.smallest,
     },
 };
-
 // Default styles
 export const com_mendix_widget_native_introscreen_IntroScreen: IntroScreenType = {
     fullscreenContainer: {

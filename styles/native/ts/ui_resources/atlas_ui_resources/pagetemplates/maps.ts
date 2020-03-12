@@ -1,15 +1,13 @@
 import { background, border, contrast, spacing } from "../../../core/variables.js";
-
-
-/* ==========================================================================
+/*
+==========================================================================
     Maps
 
-========================================================================== */
-
-
+==========================================================================
+*/
+//
 //== Elements
 //-------------------------------------------------------------------------------------------------------------------//
-
 export const mapsBackground = {
     container: {
         position: "absolute",
@@ -18,14 +16,12 @@ export const mapsBackground = {
         zIndex: 0,
     },
 };
-
 export const mapsFooter = {
     container: {
         bottom: 0,
         position: "absolute",
     },
 };
-
 export const mapsFooterSendLocation = {
     container: {
         flex: 1,
@@ -44,14 +40,11 @@ export const mapsFooterSendLocation = {
         },
     },
 };
-
-
 export const mapsList = {
     container: {
         paddingHorizontal: spacing.regular,
     },
 };
-
 export const mapsListItemImage = {
     container: {
         backgroundColor: background.primary,
@@ -72,7 +65,7 @@ export const mapsListItemImage = {
         borderRadius: border.radius,
     },
 };
-
+//
 //== Variations
 //-------------------------------------------------------------------------------------------------------------------//
 //

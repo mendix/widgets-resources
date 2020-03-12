@@ -1,15 +1,14 @@
 import { brand, button, contrast, font } from "../variables";
 import merge                from "./_functions/mergeobjects";
 import { ActionButtonType } from "../../types/widgets";
+/*
 
-//
-// DISCLAIMER:
-// Do not change this file because it is core styling.
-// Customizing core files will make updating Atlas much more difficult in the future.
-// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
-//
+DISCLAIMER:
+Do not change this file because it is core styling.
+Customizing core files will make updating Atlas much more difficult in the future.
+To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 
-/* ==========================================================================
+==========================================================================
     Button
 
 //== Design Properties
@@ -76,7 +75,7 @@ export const btnPrimaryInversed: ActionButtonType = {
         color: button.primary.backgroundColor,
     },
 };
-
+//
 //== Extra Classes
 //## Helper classes to change the look and feel of the widget
 //-------------------------------------------------------------------------------------------------------------------//
@@ -92,7 +91,7 @@ export const btnSecondaryInversed: ActionButtonType = {
         color: button.secondary.inversedColor,
     },
 };
-
+//
 // Button Icon Only
 export const btnIconPrimary: ActionButtonType = {
     container: {
@@ -138,7 +137,7 @@ export const btnIconWhite: ActionButtonType = merge(btnIconPrimary, {
         color: "#FFF",
     },
 });
-
+//
 export const btnIconGrayRounded: ActionButtonType = {
     container: {
         height: 80,
@@ -156,7 +155,7 @@ export const btnIconGrayRounded: ActionButtonType = {
         fontSize: 0,
     },
 };
-
+//
 // Round Button Icon With Background
 export const btnIconPrimaryBackground: ActionButtonType = {
     container: {
@@ -175,8 +174,8 @@ export const btnIconPrimaryBackground: ActionButtonType = {
         color: button.primary.color,
     },
 };
-
-
+//
+//
 // Text only
 export const btnAsText: ActionButtonType = {
     container: {
@@ -198,7 +197,7 @@ export const btnAsText: ActionButtonType = {
         fontSize: button.fontSize,
     },
 };
-
+//
 // Button sizes
 export const btnLarge: ActionButtonType = {
     icon: {

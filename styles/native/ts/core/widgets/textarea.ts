@@ -1,19 +1,17 @@
 import { TextBox, TextBoxVertical } from "./textbox";
 import { TextBoxType }              from "../../types/widgets";
+/*
 
-//
-// DISCLAIMER:
-// Do not change this file because it is core styling.
-// Customizing core files will make updating Atlas much more difficult in the future.
-// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
-//
+DISCLAIMER:
+Do not change this file because it is core styling.
+Customizing core files will make updating Atlas much more difficult in the future.
+To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 
-/* ==========================================================================
+==========================================================================
     Text Area
 
     Default Class For Mendix Text Area Widget
 ========================================================================== */
-
 export const TextArea: TextBoxType = {
     container: {
         // All ViewStyle properties are allowed
@@ -45,7 +43,6 @@ export const TextArea: TextBoxType = {
         ...TextBox.validationMessage,
     },
 };
-
 export const TextAreaVertical: TextBoxType = {
     container: TextBoxVertical.container,
     label: {

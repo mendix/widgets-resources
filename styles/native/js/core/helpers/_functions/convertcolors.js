@@ -1,5 +1,6 @@
 import colors from "./colorwords.js";
 /**
+ *
  * Converts RGB color to HEX
  *
  * @param   {number || string}    r   Accepts RGB as string || Accepts R as string or number
@@ -16,6 +17,7 @@ function RgbToHex(r, g, b) {
     return "#" + ((1 << 24) + (Number(r) << 16) + (Number(g) << 8) + Number(b)).toString(16).slice(1);
 }
 /**
+ *
  * Converts HEX or HEX Alpha to RGB
  *
  * @param   {string}    hex   Accepts HEX color
@@ -33,6 +35,7 @@ function hexToRgb(hex) {
     });
 }
 /**
+ *
  * Converts any color format to RGB string
  *
  * @param   {string}    anyColor   Accepts any color format
@@ -44,6 +47,7 @@ export function anyColorToRgbString(anyColor) {
     return [r, g, b].join(",");
 }
 /**
+ *
  * Converts HSL to RGB color
  *
  * @param   {string}    hsl   Accepts HSL color
@@ -105,6 +109,7 @@ function hslToRgb(hsl) {
     });
 }
 /**
+ *
  * Convert RGB string with HEX or Word inside to RGB object
  *
  * @param   {string}    rgb   Accepts RGB color as string
@@ -127,6 +132,7 @@ function rgbStringToRgb(rgb) {
     }
 }
 /**
+ *
  * Converts RGB Alpha to RGB object
  *
  * @param   {string}    rgba   Accepts RGB Alpha color
@@ -160,6 +166,7 @@ function rgbaToRgb(rgba) {
     return { r: calc(RGB.r), g: calc(RGB.g), b: calc(RGB.b) };
 }
 /**
+ *
  * Check what color format is being used.
  *
  * @param   {string}    color   Accepts any color format
@@ -180,6 +187,7 @@ function checkColor(color) {
     return { r: 255, g: 255, b: 255 };
 }
 /**
+ *
  * Set best contrast color based on a (background) color
  *
  * @param   {string}    color   Accepts any color format
@@ -194,6 +202,7 @@ export function setColorBasedOnBackground(color) {
     return o > 125 ? "rgba(0,0,0,.87)" : "rgba(255,255,255,.87)";
 }
 /**
+ *
  * Expects a color and a contrast value between 0 and 1.'
  * It will look at the supplied color's brightness and will start the contrast scale either from #000 (black) or #FFF (white).
  * This function will work best when you supply a very dark or very bright color.

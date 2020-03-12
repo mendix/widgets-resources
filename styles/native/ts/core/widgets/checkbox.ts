@@ -2,20 +2,18 @@ import { Platform }                             from "react-native";
 import { background, brand, contrast, spacing } from "../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
 import { CheckBoxType }             from "../../types/widgets";
+/*
 
-//
-// DISCLAIMER:
-// Do not change this file because it is core styling.
-// Customizing core files will make updating Atlas much more difficult in the future.
-// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
-//
+DISCLAIMER:
+Do not change this file because it is core styling.
+Customizing core files will make updating Atlas much more difficult in the future.
+To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 
-/* ==========================================================================
+==========================================================================
     CheckBox
 
     Default Class For Mendix CheckBox Widget
 ========================================================================== */
-
 export const CheckBox: CheckBoxType = {
     container: {
         // All ViewStyle properties are allowed
@@ -54,7 +52,6 @@ export const CheckBox: CheckBoxType = {
         alignSelf: "stretch",
     },
 };
-
 export const CheckBoxVertical: CheckBoxType = {
     container: TextBoxVertical.container,
     label: {

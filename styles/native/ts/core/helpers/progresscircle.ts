@@ -1,13 +1,12 @@
 import { brand, contrast, font } from "../variables";
+/*
 
-//
-// DISCLAIMER:
-// Do not change this file because it is core styling.
-// Customizing core files will make updating Atlas much more difficult in the future.
-// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
-//
+DISCLAIMER:
+Do not change this file because it is core styling.
+Customizing core files will make updating Atlas much more difficult in the future.
+To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 
-/* ==========================================================================
+==========================================================================
     Progress Circle
 
 //== Design Properties
@@ -22,7 +21,6 @@ export const progressCircleSuccess = {
         color: contrast.regular,
     },
 };
-
 export const progressCircleWarning = {
     fill: {
         backgroundColor: brand.warning,
@@ -31,7 +29,6 @@ export const progressCircleWarning = {
         color: contrast.regular,
     },
 };
-
 export const progressCircleDanger = {
     fill: {
         backgroundColor: brand.danger,
@@ -40,7 +37,6 @@ export const progressCircleDanger = {
         color: contrast.regular,
     },
 };
-
 export const progressCircleGray = {
     fill: {
         backgroundColor: contrast.regular,
@@ -49,7 +45,7 @@ export const progressCircleGray = {
         color: contrast.regular,
     },
 };
-
+//
 // Sizes
 export const progressCircleSmall = {
     circle: {

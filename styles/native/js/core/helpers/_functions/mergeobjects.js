@@ -5,6 +5,7 @@
  * @param   {object[]}    sources   Array of 2 objects
  *
  * @return  {object} Returns merged object
+ *
  */
 export default function (...sources) {
     function mergeDeep(target, ...sources) {

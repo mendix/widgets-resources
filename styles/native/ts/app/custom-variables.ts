@@ -20,13 +20,13 @@ import {
     VariablesSpacing,
     VariablesTabContainer,
 }                                  from "../types/variables";
-
 /*
+
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)
 ==> You can freely change any value in this file.
 ==> DO NOT change the core variable file (or any other file in core), as that makes updating Atlas a lot harder in the future.
-*/
 
+*/
 //== Global variables
 //## Variables to be used during styling
 //-------------------------------------------------------------------------------------------------------------------//
@@ -41,16 +41,16 @@ export const brand: VariablesBrand = {
     warningLight: `rgba(${anyColorToRgbString("#f99b1d")}, 0.14)`,
     dangerLight: `rgba(${anyColorToRgbString("#ed1c24")}, 0.14)`,
 };
-
+//
 // Dark Mode - Inherits OS theme if possible
 export const darkMode = NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode
                         ? NativeModules.RNDarkMode.initialMode === "dark"
                         : false;
-
+//
 // Background Colors
 const backgroundColor = darkMode ? "#000" : "#FFF";
 const backgroundSecondaryContrast = darkMode ? 0.11 : 0.03;
-
+//
 export const background: VariablesBackground = {
     primary: backgroundColor,
     secondary: setContrastScale(backgroundSecondaryContrast, backgroundColor),
@@ -60,7 +60,7 @@ export const background: VariablesBackground = {
     brandWarning: brand.warning,
     brandDanger: brand.danger,
 };
-
+//
 // Contrast (Gray) colors based on background.primary
 export const contrast: VariablesContrast = {
     highest: setContrastScale(0.95, background.primary),
@@ -71,14 +71,14 @@ export const contrast: VariablesContrast = {
     lower: setContrastScale(0.2, background.primary),
     lowest: setContrastScale(0.05, background.primary),
 };
-
+//
 // Border Style
 export const border: VariablesBorder = {
     color: setContrastScale(0.17, background.primary),
     width: 1,
     radius: 5,
 };
-
+//
 // Font Styles
 export const font: VariablesFont = {
     size: adjustFont(14),
@@ -97,7 +97,7 @@ export const font: VariablesFont = {
     weightBold: "bold",
     family: Platform.select({ios: "System", android: "normal"}) as string,
 };
-
+//
 // Spacing
 export const spacing: VariablesSpacing = {
     smallest: 5,
@@ -108,7 +108,7 @@ export const spacing: VariablesSpacing = {
     larger: 30,
     largest: 40,
 };
-
+//
 // Button Styles
 export const button: VariablesButton = {
     fontSize: font.sizeSmall,
@@ -156,8 +156,8 @@ export const button: VariablesButton = {
         backgroundColor: brand.danger,
     },
 };
-
-//Input Styles
+//
+// Input Styles
 export const input: VariablesInput = {
     // Colors
     color: font.color,
@@ -181,7 +181,7 @@ export const input: VariablesInput = {
     paddingHorizontal: spacing.smaller,
     paddingVertical: spacing.small,
 };
-
+//
 // Navigation Styles
 export const navigation: VariablesNavigation = {
     statusBar: {
@@ -211,7 +211,7 @@ export const navigation: VariablesNavigation = {
         fontSize: font.size,
     },
 };
-
+//
 // Tabcontainer Styles
 export const tabContainer: VariablesTabContainer = {
     tabBar: {
@@ -233,7 +233,7 @@ export const tabContainer: VariablesTabContainer = {
         textTransform: "uppercase",
     },
 };
-
+//
 // ListView Styles
 export const listView: VariablesListView = {
     border: {
@@ -241,14 +241,14 @@ export const listView: VariablesListView = {
         width: border.width,
     },
 };
-
+//
 // Layoutgrid Styles
 export const layoutGrid = {
     gutterSize: 15,
 };
-
-
-//## Pluggable Widgets
+//
+//
+//== Pluggable Widgets
 //-------------------------------------------------------------------------------------------------------------------//
 // Badge Styles
 export const badge: VariablesBadge = {

@@ -1,10 +1,12 @@
 import { Platform } from "react-native";
 import { shadeBlendConvert } from "../../../core/helpers/_functions/shadeblendconvert.js";
 import { background, border, contrast, spacing } from "../../../core/variables";
-/* ==========================================================================
+/*
+==========================================================================
     Cards
 
-========================================================================== */
+==========================================================================
+*/
 export const card = {
     container: Object.assign(Object.assign({ borderRadius: border.radius, backgroundColor: background.primary, marginBottom: spacing.regular }, Platform.select({
         android: {
@@ -16,6 +18,7 @@ export const card = {
             height: 2,
         } }),
 };
+//
 //== Elements
 //-------------------------------------------------------------------------------------------------------------------//
 export const cardImage = {
@@ -47,6 +50,7 @@ export const cardBody = {
         backgroundColor: "transparent",
     },
 };
+//
 //== Variations
 //-------------------------------------------------------------------------------------------------------------------//
 // Card Action
@@ -67,6 +71,7 @@ export const cardActionImage = {
         resizeMode: "contain",
     },
 };
+//
 //-------------------------------------------------------------------------------------------------------------------//
 // Card Payment
 export const cardPaymentImage = {

@@ -2,13 +2,14 @@ import { NativeModules } from "react-native";
 import { darkMode } from "../../app/custom-variables";
 import { font, input } from "../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
-//
-// DISCLAIMER:
-// Do not change this file because it is core styling.
-// Customizing core files will make updating Atlas much more difficult in the future.
-// To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
-//
-/* ==========================================================================
+/*
+
+DISCLAIMER:
+Do not change this file because it is core styling.
+Customizing core files will make updating Atlas much more difficult in the future.
+To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
+
+==========================================================================
     Date Picker
 
     Default Class For Mendix Date Picker Widget
@@ -19,6 +20,7 @@ const isOSDarkMode = NativeModules && NativeModules.RNDarkMode && NativeModules.
 const pickerBackgroundColor = !darkMode && isOSDarkMode ?
     "rgba(0, 0, 0, 1)" :
     darkMode && !isOSDarkMode ? "rgba(255, 255, 255, 1)" : input.backgroundColor;
+//
 export const DatePicker = {
     container: Object.assign({}, TextBox.container),
     label: Object.assign({}, TextBox.label),

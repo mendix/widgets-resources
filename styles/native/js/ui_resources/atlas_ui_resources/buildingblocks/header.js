@@ -1,9 +1,11 @@
 import { Platform } from "react-native";
 import { background, border, contrast, spacing } from "../../../core/variables";
-/* ==========================================================================
+/*
+==========================================================================
     Cards
 
-========================================================================== */
+==========================================================================
+*/
 export const header = {
     container: Object.assign({ borderRadius: border.radius, backgroundColor: background.primary, marginBottom: spacing.regular }, Platform.select({
         android: {
@@ -12,6 +14,7 @@ export const header = {
         },
     })),
 };
+//
 //== Elements
 //-------------------------------------------------------------------------------------------------------------------//
 export const headerImageFull = {
@@ -42,5 +45,6 @@ export const headerBody = {
         backgroundColor: "transparent",
     },
 };
+//
 //== Variations
 //-------------------------------------------------------------------------------------------------------------------//

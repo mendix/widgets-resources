@@ -5,8 +5,8 @@
  * @param   {object[]}    sources   Array of 2 objects
  *
  * @return  {object} Returns merged object
+ *
  */
-
 export default function <T extends { [k: string]: any }>(...sources: T[]): T {
     function mergeDeep(target: T, ...sources: T[]): T {
         function isObject(item: T): boolean {

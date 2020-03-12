@@ -1,5 +1,6 @@
 import { Platform } from "react-native";
 import DeviceInfo from "react-native-device-info";
+//
 const isiPhoneModelWithNotch = () => {
     const model = DeviceInfo.getDeviceId();
     if (model.includes("iPhone")) {
@@ -19,4 +20,5 @@ const isiPhoneModelWithNotch = () => {
     }
     return false;
 };
+//
 export const isIphoneWithNotch = DeviceInfo.hasNotch() || (Platform.OS === "ios" && isiPhoneModelWithNotch());
