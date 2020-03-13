@@ -1,15 +1,19 @@
 import colors from "./colorwords.js";
 //
 //
+declare type ColorPartial = string | number;
+
 interface RGB {
     r: number,
     g: number,
     b: number,
 }
+
 //
 interface RGBA extends RGB {
     a: number,
 }
+
 /**
  *
  * Converts RGB color to HEX
@@ -20,13 +24,14 @@ interface RGBA extends RGB {
  *
  * @return  {string} Returns HEX color
  */
-function RgbToHex(r: string | number, g: string | number | undefined, b: string | number | undefined): string {
+function RgbToHex(r: ColorPartial, g: ColorPartial | undefined, b: ColorPartial | undefined): string {
     if (typeof r === "string" && !g && !b) {
         const color = r.replace(/rgb[(]|[)]/gm, "");
         [r, g, b] = color.split(",");
     }
     return "#" + ((1 << 24) + (Number(r) << 16) + (Number(g) << 8) + Number(b)).toString(16).slice(1);
 }
+
 /**
  *
  * Converts HEX or HEX Alpha to RGB
@@ -45,6 +50,7 @@ function hexToRgb(hex: string): RGB {
         a: parseInt("0x" + hex[6] + hex[7], 16) / 255 || 1,
     });
 }
+
 /**
  *
  * Converts any color format to RGB string
@@ -57,6 +63,7 @@ export function anyColorToRgbString(anyColor: string): string {
     const {r, g, b} = checkColor(anyColor);
     return [r, g, b].join(",");
 }
+
 /**
  *
  * Converts HSL to RGB color
@@ -68,10 +75,10 @@ export function anyColorToRgbString(anyColor: string): string {
 function hslToRgb(hsl: string): RGB {
     let hslArray: string[] = hsl.replace(/hsla?[(]|[%]|[)]/gm, "").split(",").map(x => x.trim());
 
-    let h: string | number = hslArray[0],
-        s: string | number = Number(hslArray[1]) / 100,
-        l: string | number = Number(hslArray[2]) / 100,
-        a: string | number = 1;
+    let h: ColorPartial = hslArray[0],
+        s: ColorPartial = Number(hslArray[1]) / 100,
+        l: ColorPartial = Number(hslArray[2]) / 100,
+        a: ColorPartial = 1;
 
     // Strip label and convert to degrees (if necessary)
     if (~h.indexOf("deg")) h = h.substr(0, h.length - 3);
@@ -118,6 +125,7 @@ function hslToRgb(hsl: string): RGB {
         a,
     });
 }
+
 /**
  *
  * Convert RGB string with HEX or Word inside to RGB object
@@ -139,6 +147,7 @@ function rgbStringToRgb(rgb: string): RGB {
         return {r: Number(r), g: Number(g), b: Number(b)};
     }
 }
+
 /**
  *
  * Converts RGB Alpha to RGB object
@@ -173,6 +182,7 @@ function rgbaToRgb(rgba: RGBA | string): RGB {
     }
     return {r: calc(RGB.r), g: calc(RGB.g), b: calc(RGB.b)};
 }
+
 /**
  *
  * Check what color format is being used.
@@ -189,6 +199,7 @@ function checkColor(color: string): RGB {
     else if (~color.indexOf("rgb")) return rgbStringToRgb(color);
     return {r: 255, g: 255, b: 255};
 }
+
 /**
  *
  * Set best contrast color based on a (background) color
@@ -205,6 +216,7 @@ export function setColorBasedOnBackground(color: string): string {
     const o = Math.round((RGB.r * 299 + RGB.g * 587 + RGB.b * 114) / 1000);
     return o > 125 ? "rgba(0,0,0,.87)" : "rgba(255,255,255,.87)";
 }
+
 /**
  *
  * Expects a color and a contrast value between 0 and 1.'
