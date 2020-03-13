@@ -73,8 +73,8 @@ export const com_mendix_widget_native_feedback_Feedback: FeedbackType = {
         marginRight: Platform.select({ios: 0, android: -5}),
         thumbColorOn: background.primary,
         trackColorOn: brand.success,
-        thumbColorOff: contrast.low,
-        trackColorOff: contrast.lowest,
+        thumbColorOff: contrast.regular,
+        trackColorOff: contrast.lower,
     },
     button: {
         // Just these 3 properties are allowed

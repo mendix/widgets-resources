@@ -43,7 +43,7 @@ export const CheckBox: CheckBoxType = {
         ...TextBox.inputError,
         thumbColorOn: background.primary,
         trackColorOn: brand.danger,
-        thumbColorOff: contrast.lowest,
+        thumbColorOff: contrast.regular,
         trackColorOff: brand.danger,
     },
     validationMessage: {
@@ -66,7 +66,7 @@ export const CheckBoxVertical: CheckBoxType = {
         ...TextBoxVertical.inputError,
         thumbColorOn: background.primary,
         trackColorOn: brand.danger,
-        thumbColorOff: contrast.lowest,
+        thumbColorOff: contrast.regular,
         trackColorOff: brand.danger,
     },
     validationMessage: {
