@@ -36,7 +36,7 @@ describe("ProgressBar", () => {
         );
     });
 
-    it("renders no progress and an error when the value is greater than the maximum", () => {
+    it("renders progress bar with max value when the value is greater than maximum", () => {
         const component = render(<ProgressBar {...createProps(150, 0, 100)} />);
         expect(component.getByType(Bar).props.progress).toBe(1);
         expect(component.getByType(Text).props.children).toBe(
