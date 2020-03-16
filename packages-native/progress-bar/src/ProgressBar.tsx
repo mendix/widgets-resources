@@ -14,7 +14,7 @@ export class ProgressBar extends Component<Props> {
 
     render(): JSX.Element {
         const validationMessages = this.validate();
-        const progress = validationMessages.length === 0 ? this.calculateProgress() : 0;
+        const progress = this.calculateProgress();
 
         return (
             <View style={this.styles.container}>
@@ -66,7 +66,12 @@ export class ProgressBar extends Component<Props> {
     private calculateProgress(): number {
         const { minimumValue, maximumValue, progressValue } = this.props;
 
-        if (!isAvailable(minimumValue) || !isAvailable(maximumValue) || !isAvailable(progressValue)) {
+        if (
+            !isAvailable(minimumValue) ||
+            !isAvailable(maximumValue) ||
+            !isAvailable(progressValue) ||
+            minimumValue.value!.gte(maximumValue.value!)
+        ) {
             return 0;
         }
 

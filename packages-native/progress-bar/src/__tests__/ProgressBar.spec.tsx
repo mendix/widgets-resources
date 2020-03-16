@@ -20,7 +20,7 @@ describe("ProgressBar", () => {
         expect(component.queryByType(Text)).toBeDefined();
     });
 
-    it("renders no progress and an error when minimum equals maxiumum", () => {
+    it("renders no progress and an error when minimum equals maximum", () => {
         const component = render(<ProgressBar {...createProps(50, 50, 50)} />);
         expect(component.getByType(Bar).props.progress).toBe(0);
         expect(component.getByType(Text).props.children).toBe(
@@ -28,7 +28,7 @@ describe("ProgressBar", () => {
         );
     });
 
-    it("renders no progress and an error when the value is less than the minium", () => {
+    it("renders no progress and an error when the value is less than the minimum", () => {
         const component = render(<ProgressBar {...createProps(-50, 0, 100)} />);
         expect(component.getByType(Bar).props.progress).toBe(0);
         expect(component.getByType(Text).props.children).toBe(
@@ -38,7 +38,7 @@ describe("ProgressBar", () => {
 
     it("renders no progress and an error when the value is greater than the maximum", () => {
         const component = render(<ProgressBar {...createProps(150, 0, 100)} />);
-        expect(component.getByType(Bar).props.progress).toBe(0);
+        expect(component.getByType(Bar).props.progress).toBe(1);
         expect(component.getByType(Text).props.children).toBe(
             "The current value must be equal or less than the maximum value."
         );
