@@ -7,5 +7,5 @@ export const executeAction = (action?: ActionValue): void => {
 };
 
 export const isAvailable = (property: DynamicValue<any> | EditableValue<any>): boolean => {
-    return property.status === ValueStatus.Available && property.value != null;
+    return property && property.status === ValueStatus.Available && property.value;
 };
