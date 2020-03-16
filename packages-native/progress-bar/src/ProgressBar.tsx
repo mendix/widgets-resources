@@ -1,4 +1,5 @@
-import { available, flattenStyles, unavailable } from "@native-mobile-resources/util-widgets";
+import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { isAvailable } from "@widgets-resources/piw-utils";
 import { Component, createElement } from "react";
 import { Text, View } from "react-native";
 import { Bar } from "react-native-progress";
@@ -37,16 +38,16 @@ export class ProgressBar extends Component<Props> {
         const messages: string[] = [];
         const { minimumValue, maximumValue, progressValue } = this.props;
 
-        if (unavailable(minimumValue)) {
+        if (!isAvailable(minimumValue)) {
             messages.push("No minimum value provided.");
         }
-        if (unavailable(maximumValue)) {
+        if (!isAvailable(maximumValue)) {
             messages.push("No maximum value provided.");
         }
-        if (unavailable(progressValue)) {
+        if (!isAvailable(progressValue)) {
             messages.push("No current value provided.");
         }
-        if (available(minimumValue) && available(maximumValue) && available(progressValue)) {
+        if (isAvailable(minimumValue) && isAvailable(maximumValue) && isAvailable(progressValue)) {
             if (minimumValue.value!.gte(maximumValue.value!)) {
                 messages.push("The minimum value must be equal or less than the maximum value.");
             } else {
@@ -65,10 +66,15 @@ export class ProgressBar extends Component<Props> {
     private calculateProgress(): number {
         const { minimumValue, maximumValue, progressValue } = this.props;
 
-        if (!available(minimumValue) || !available(maximumValue) || !available(progressValue)) {
+        if (!isAvailable(minimumValue) || !isAvailable(maximumValue) || !isAvailable(progressValue)) {
             return 0;
         }
 
+        if (progressValue.value! > maximumValue.value!) {
+            return Number(maximumValue.value!);
+        } else if (progressValue.value! < minimumValue.value!) {
+            return Number(minimumValue.value!);
+        }
         const numerator = progressValue.value!.minus(minimumValue.value!);
         const denominator = maximumValue.value!.minus(minimumValue.value!);
         return Number(numerator.div(denominator));
