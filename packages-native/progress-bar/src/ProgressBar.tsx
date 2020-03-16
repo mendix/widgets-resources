@@ -70,10 +70,10 @@ export class ProgressBar extends Component<Props> {
             return 0;
         }
 
-        if (progressValue.value! > maximumValue.value!) {
-            return Number(maximumValue.value!);
-        } else if (progressValue.value! < minimumValue.value!) {
-            return Number(minimumValue.value!);
+        if (progressValue.value!.gt(maximumValue.value!)) {
+            return 1;
+        } else if (progressValue.value!.lt(minimumValue.value!)) {
+            return 0;
         }
         const numerator = progressValue.value!.minus(minimumValue.value!);
         const denominator = maximumValue.value!.minus(minimumValue.value!);

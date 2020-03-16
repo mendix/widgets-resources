@@ -17,7 +17,7 @@ describe("ProgressBar", () => {
     it("renders no progress with undefined values", () => {
         const component = render(<ProgressBar {...createProps()} />);
         expect(component.getByType(Bar).props.progress).toBe(0);
-        expect(component.queryByType(Text)).toBeNull();
+        expect(component.queryByType(Text)).toBeDefined();
     });
 
     it("renders no progress and an error when minimum equals maxiumum", () => {
