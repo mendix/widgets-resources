@@ -167,6 +167,10 @@ export interface VariablesTabContainer {
         color: string,
         fontWeight: FontWeight
     }
+    activeLabel: {
+        color: string,
+        fontWeight: FontWeight,
+    },
 }
 
 export interface VariablesListView {

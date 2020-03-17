@@ -232,6 +232,10 @@ export const tabContainer: VariablesTabContainer = {
         fontWeight: font.weightBold,
         textTransform: "uppercase",
     },
+    activeLabel: {
+        color: brand.primary,
+        fontWeight: font.weightBold,
+    },
 };
 //
 // ListView Styles
