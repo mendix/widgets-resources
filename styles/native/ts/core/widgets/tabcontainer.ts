@@ -54,5 +54,6 @@ export const TabContainer: TabContainerType = {
         color: tabContainer.activeLabel.color,
         fontFamily: font.family,
         fontWeight: tabContainer.activeLabel.fontWeight,
+        textTransform: "uppercase",
     },
 };
