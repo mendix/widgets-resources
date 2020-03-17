@@ -8,7 +8,7 @@
             <propertyGroup caption="General">
                 <property key="type" type="enumeration" defaultValue="modal">
                     <caption>Type</caption>
-                    <description>Select the way the bottom drawer will be rendered</description>
+                    <description>Modal: a modal menu which is visible and triggered based on the trigger attribute. Expanding: a collapsed surface that can be expanded manually by the user.</description>
                     <enumerationValues>
                         <enumerationValue key="modal">Modal</enumerationValue>
                         <enumerationValue key="expanding">Expanding</enumerationValue>
@@ -16,14 +16,14 @@
                 </property>
                 <property key="triggerAttribute" type="attribute" required="false">
                     <caption>Trigger attribute</caption>
-                    <description>Define if the bottom sheet is open or not</description>
+                    <description>Defines if the modal bottom sheet is visible or not. Initially this value should be false and when set to true, the bottom sheet will be shown.</description>
                     <attributeTypes>
                         <attributeType name="Boolean"/>
                     </attributeTypes>
                 </property>
                 <property key="modalRendering" type="enumeration" defaultValue="basic">
-                    <caption>Rendering</caption>
-                    <description>Rendering of modal</description>
+                    <caption>Render</caption>
+                    <description>Basic: creates the menu based on the configured options. Custom: free to model menu.</description>
                     <enumerationValues>
                         <enumerationValue key="basic">Basic</enumerationValue>
                         <enumerationValue key="custom">Custom</enumerationValue>
@@ -55,19 +55,19 @@
                     </properties>
                 </property>
                 <property key="smallContent" type="widgets" required="false">
-                    <caption>Small content</caption>
+                    <caption>Always visible</caption>
                     <description />
                 </property>
                 <property key="largeContent" type="widgets" required="false">
-                    <caption>Large content</caption>
+                    <caption>Visible on first drag</caption>
                     <description />
                 </property>
                 <property key="showFullscreenContent" type="boolean" defaultValue="true">
-                    <caption>Show full screen placeholder</caption>
+                    <caption>Enable full screen</caption>
                     <description />
                 </property>
                 <property key="fullscreenContent" type="widgets" required="false">
-                    <caption>Full screen content</caption>
+                    <caption>Visible on drag to top of screen</caption>
                     <description />
                 </property>
                 <property key="onOpen" type="action" required="false">

@@ -45,7 +45,8 @@ export function check(values: any): Problem[] {
             errors.push({
                 property: "fullscreenContent",
                 severity: "error",
-                message: "You need to include some widgets/content in the full screen content placeholder",
+                message:
+                    "You need to include some widgets/content in the 'Visible on drag to top of screen' placeholder",
                 url: ""
             });
         }
@@ -53,7 +54,7 @@ export function check(values: any): Problem[] {
             errors.push({
                 property: "largeContent",
                 severity: "error",
-                message: "You need to include some widgets/content in the large content placeholder",
+                message: "You need to include some widgets/content in the 'Visible on first drag' placeholder",
                 url: ""
             });
         }
