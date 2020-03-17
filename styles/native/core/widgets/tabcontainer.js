@@ -40,11 +40,13 @@ export const TabContainer = {
         color: tabcontainer.label.color,
         fontFamily: font.family,
         fontWeight: tabcontainer.label.fontWeight,
+        textTransform: tabcontainer.label.textTransform,
     },
     activeLabel: {
         // All TextStyle properties are allowed
         color: tabcontainer.activeLabel.color,
         fontFamily: font.family,
         fontWeight: tabcontainer.activeLabel.fontWeight,
+        textTransform: tabcontainer.activeLabel.textTransform,
     },
 };

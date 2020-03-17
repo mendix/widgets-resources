@@ -208,10 +208,12 @@ let tabcontainer = {
     label: {
         color: contrast.highest,
         fontWeight: font.weightBold,
+        textTransform: "uppercase"
     },
     activeLabel: {
         color: brand.primary,
         fontWeight: font.weightBold,
+        textTransform: "uppercase"
     },
 };
 tabcontainer = merge(tabcontainer, custom.tabcontainer || {});
