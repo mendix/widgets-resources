@@ -29,7 +29,7 @@ export const CheckBox = {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
         opacity: Platform.select({ android: 0.5 }),
     },
-    inputError: Object.assign(Object.assign({}, TextBox.inputError), { thumbColorOn: background.primary, trackColorOn: brand.danger, thumbColorOff: contrast.lowest, trackColorOff: brand.danger }),
+    inputError: Object.assign(Object.assign({}, TextBox.inputError), { thumbColorOn: background.primary, trackColorOn: brand.danger, thumbColorOff: contrast.regular, trackColorOff: brand.danger }),
     validationMessage: Object.assign(Object.assign({}, TextBox.validationMessage), { alignSelf: "stretch" }),
 };
 export const CheckBoxVertical = {
@@ -37,6 +37,6 @@ export const CheckBoxVertical = {
     label: Object.assign({}, TextBoxVertical.label),
     input: Object.assign(Object.assign({}, CheckBox.input), { alignSelf: "flex-start" }),
     inputDisabled: CheckBox.inputDisabled,
-    inputError: Object.assign(Object.assign({}, TextBoxVertical.inputError), { thumbColorOn: background.primary, trackColorOn: brand.danger, thumbColorOff: contrast.lowest, trackColorOff: brand.danger }),
+    inputError: Object.assign(Object.assign({}, TextBoxVertical.inputError), { thumbColorOn: background.primary, trackColorOn: brand.danger, thumbColorOff: contrast.regular, trackColorOff: brand.danger }),
     validationMessage: Object.assign(Object.assign({}, TextBoxVertical.validationMessage), { alignSelf: "stretch" }),
 };

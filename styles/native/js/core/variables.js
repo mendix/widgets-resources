@@ -207,6 +207,10 @@ let tabContainer = {
         color: contrast.highest,
         fontWeight: font.weightBold,
     },
+    activeLabel: {
+        color: brand.primary,
+        fontWeight: font.weightBold,
+    },
 };
 tabContainer = merge(tabContainer, custom.tabContainer || {});
 //

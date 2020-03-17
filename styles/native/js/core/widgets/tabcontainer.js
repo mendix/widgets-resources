@@ -1,4 +1,4 @@
-import { font, tabContainer } from "../variables";
+import { font, spacing, tabContainer } from "../variables";
 /*
 
 DISCLAIMER:
@@ -23,6 +23,7 @@ export const TabContainer = {
         pressOpacity: 0.8,
         backgroundColor: tabContainer.tabBar.backgroundColor,
         scrollEnabled: false,
+        paddingVertical: spacing.smaller,
     },
     indicator: {
         // All ViewStyle properties are allowed
@@ -37,5 +38,13 @@ export const TabContainer = {
         color: tabContainer.label.color,
         fontFamily: font.family,
         fontWeight: tabContainer.label.fontWeight,
+        textTransform: "uppercase",
+    },
+    activeLabel: {
+        // All TextStyle properties are allowed
+        color: tabContainer.activeLabel.color,
+        fontFamily: font.family,
+        fontWeight: tabContainer.activeLabel.fontWeight,
+        textTransform: "uppercase",
     },
 };
