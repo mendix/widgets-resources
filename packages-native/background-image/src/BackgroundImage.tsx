@@ -9,22 +9,19 @@ import { BackgroundImageProps } from "../typings/BackgroundImageProps";
 
 export function BackgroundImage(props: BackgroundImageProps<BackgroundImageStyle>): JSX.Element | null {
     const styles = flattenStyles(defaultBackgroundImageStyle, props.style);
-    const backgroundImage = props.backgroundImage;
+    const image = props.image;
 
-    if (
-        backgroundImage.status === ValueStatus.Unavailable ||
-        (backgroundImage.status === ValueStatus.Loading && !backgroundImage.value)
-    ) {
+    if (image.status === ValueStatus.Unavailable || (image.status === ValueStatus.Loading && !image.value)) {
         return null;
     }
 
     return (
         <View style={styles.container}>
             {Image({
-                source: backgroundImage.value,
+                source: image.value,
                 style: [
                     StyleSheet.absoluteFill,
-                    typeof backgroundImage.value === "number" ? { width: undefined, height: undefined } : undefined,
+                    typeof image.value === "number" ? { width: undefined, height: undefined } : undefined,
                     styles.image
                 ]
             })}
