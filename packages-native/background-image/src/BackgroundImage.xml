@@ -5,14 +5,20 @@
     <icon />
     <properties>
         <propertyGroup caption="General">
-            <property key="backgroundImage" type="image" required="true">
-                <caption>Background image</caption>
-                <description />
-            </property>
-            <property key="content" type="widgets" required="false">
-                <caption>Content</caption>
-                <description />
-            </property>
+            <propertyGroup caption="General">
+                <property key="image" type="image" required="true">
+                    <caption>Image</caption>
+                    <description />
+                </property>
+                <property key="content" type="widgets" required="false">
+                    <caption>Content</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name" />
+                <systemProperty key="Visibility" />
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>

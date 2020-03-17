@@ -12,6 +12,6 @@ interface CommonProps<Style> {
 }
 
 export interface BackgroundImageProps<Style> extends CommonProps<Style> {
-    backgroundImage: DynamicValue<NativeImage>;
+    image: DynamicValue<NativeImage>;
     content?: ReactNode;
 }
