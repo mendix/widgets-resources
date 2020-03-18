@@ -27,8 +27,8 @@ export interface BottomSheetProps<Style> extends CommonProps<Style> {
     type: TypeEnum;
     triggerAttribute?: EditableValue<boolean>;
     modalRendering: ModalRenderingEnum;
-    nativeImplementation: boolean;
     itemsBasic: ItemsBasicType[];
+    nativeImplementation: boolean;
     smallContent?: ReactNode;
     largeContent?: ReactNode;
     showFullscreenContent: boolean;
