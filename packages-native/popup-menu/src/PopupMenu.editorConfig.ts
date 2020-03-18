@@ -7,6 +7,8 @@ export function getProperties(values: any, defaultProperties: Properties): Prope
         console.log("item type:", values);
         console.log("properties", defaultProperties);
         if (values.itemsBasic.length > 0) {
+            // TODO: This wont work because we want to hide the specific item's
+            // properties, which means extending hideProperty
             values.itemsBasic.forEach((item: ItemsBasicType) => {
                 if (item.itemType === "divider") {
                     hideProperty<any>("caption", defaultProperties);
