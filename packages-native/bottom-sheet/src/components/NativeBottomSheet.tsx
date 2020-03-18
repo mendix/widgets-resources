@@ -1,16 +1,16 @@
 import { createElement, ReactElement, useCallback, useEffect, useRef } from "react";
 import ActionSheet, { ActionSheetCustom } from "react-native-actionsheet";
 import { Platform, Text } from "react-native";
-import { ItemsBasicType } from "../../typings/BottomSheetProps";
 import { EditableValue, ValueStatus } from "mendix";
-import { BottomDrawerStyle } from "../ui/Styles";
+import { ItemsBasicType } from "../../typings/BottomSheetProps";
+import { BottomSheetStyle } from "../ui/Styles";
 
 interface NativeBottomSheetProps {
     name: string;
     triggerAttribute?: EditableValue<boolean>;
     itemsBasic: ItemsBasicType[];
     useNative: boolean;
-    styles: BottomDrawerStyle;
+    styles: BottomSheetStyle;
 }
 
 export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement => {

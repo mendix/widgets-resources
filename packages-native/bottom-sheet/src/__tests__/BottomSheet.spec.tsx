@@ -3,7 +3,7 @@ import { render } from "react-native-testing-library";
 import { createElement } from "react";
 import { BottomSheet } from "../BottomSheet";
 import { BottomSheetProps } from "../../typings/BottomSheetProps";
-import { BottomDrawerStyle } from "../ui/Styles";
+import { BottomSheetStyle } from "../ui/Styles";
 import { Text } from "react-native";
 
 jest.mock("Platform", () => ({
@@ -17,7 +17,7 @@ jest.mock("react-native-gesture-handler", () => {
     jest.requireActual("../../node_modules/react-native-gesture-handler/__mocks__/RNGestureHandlerModule");
 });
 
-const defaultProps: BottomSheetProps<BottomDrawerStyle> = {
+const defaultProps: BottomSheetProps<BottomSheetStyle> = {
     name: "bottom-sheet-test",
     style: [],
     nativeImplementation: true,
@@ -25,10 +25,12 @@ const defaultProps: BottomSheetProps<BottomDrawerStyle> = {
     modalRendering: "basic",
     itemsBasic: [
         {
-            caption: "Item 1"
+            caption: "Item 1",
+            styleClass: "defaultStyle"
         },
         {
-            caption: "Item 2"
+            caption: "Item 2",
+            styleClass: "defaultStyle"
         }
     ],
     showFullscreenContent: false,
@@ -38,6 +40,21 @@ const defaultProps: BottomSheetProps<BottomDrawerStyle> = {
 describe("Bottom sheet", () => {
     it("renders a native bottom action sheet for ios (Basic modal)", () => {
         const component = render(<BottomSheet {...defaultProps} />);
+
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+
+    it("renders a custom bottom action sheet for ios (Basic modal) with custom style", () => {
+        const style: BottomSheetStyle = {
+            container: {},
+            modalItems: {
+                defaultStyle: {
+                    color: "red",
+                    fontSize: 60
+                }
+            }
+        };
+        const component = render(<BottomSheet {...defaultProps} nativeImplementation={false} style={[style]} />);
 
         expect(component.toJSON()).toMatchSnapshot();
     });
