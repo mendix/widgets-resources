@@ -3,12 +3,14 @@ import ActionSheet, { ActionSheetCustom } from "react-native-actionsheet";
 import { Platform, Text } from "react-native";
 import { ItemsBasicType } from "../../typings/BottomSheetProps";
 import { EditableValue, ValueStatus } from "mendix";
+import { BottomDrawerStyle } from "../ui/Styles";
 
 interface NativeBottomSheetProps {
     name: string;
     triggerAttribute?: EditableValue<boolean>;
     itemsBasic: ItemsBasicType[];
     useNative: boolean;
+    styles: BottomDrawerStyle;
 }
 
 export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement => {
@@ -41,7 +43,7 @@ export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement =
 
     if (Platform.OS === "android" || !props.useNative) {
         const options = props.itemsBasic.map((item, index) => (
-            <Text key={`${props.name}_item_${index}`} style={{ color: item.color, fontSize: 16 }}>
+            <Text key={`${props.name}_item_${index}`} style={props.styles.modalItems[item.styleClass]}>
                 {item.caption}
             </Text>
         ));

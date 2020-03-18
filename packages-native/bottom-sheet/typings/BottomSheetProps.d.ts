@@ -15,10 +15,12 @@ export type TypeEnum = "modal" | "expanding";
 
 export type ModalRenderingEnum = "basic" | "custom";
 
+export type StyleClassEnum = "defaultStyle" | "primaryStyle" | "dangerStyle" | "customStyle";
+
 export interface ItemsBasicType {
     caption: string;
-    color?: string;
     action?: ActionValue;
+    styleClass: StyleClassEnum;
 }
 
 export interface BottomSheetProps<Style> extends CommonProps<Style> {
