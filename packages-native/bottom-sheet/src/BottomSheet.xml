@@ -16,7 +16,7 @@
                 </property>
                 <property key="triggerAttribute" type="attribute" required="false">
                     <caption>Trigger attribute</caption>
-                    <description>Defines if the modal bottom sheet is visible or not. Initially this value should be false and when set to true, the bottom sheet will be shown.</description>
+                    <description>Defines if the modal bottom sheet is visible or not. Initially this value should be false. When set to true, the bottom sheet will be shown. When the bottom sheet is hidden, the trigger attribute value is set to false.</description>
                     <attributeTypes>
                         <attributeType name="Boolean"/>
                     </attributeTypes>
@@ -28,10 +28,6 @@
                         <enumerationValue key="basic">Basic</enumerationValue>
                         <enumerationValue key="custom">Custom</enumerationValue>
                     </enumerationValues>
-                </property>
-                <property key="nativeImplementation" type="boolean" defaultValue="true">
-                    <caption>Native iOS variant</caption>
-                    <description>If set to Yes, on iOS the native Action sheet is shown. If set to No, a uniform version will be shown on iOS, similar to Android.</description>
                 </property>
                 <property key="itemsBasic" type="object" isList="true" required="false">
                     <caption>Items</caption>
@@ -59,6 +55,10 @@
                             </enumerationValues>
                         </property>
                     </properties>
+                </property>
+                <property key="nativeImplementation" type="boolean" defaultValue="true">
+                    <caption>Native iOS variant</caption>
+                    <description>If set to Yes, on iOS the native Action sheet is shown. If set to No, a uniform version will be shown on iOS, similar to Android.</description>
                 </property>
                 <property key="smallContent" type="widgets" required="false">
                     <caption>Always visible</caption>
