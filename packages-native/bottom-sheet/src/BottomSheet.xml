@@ -30,8 +30,8 @@
                     </enumerationValues>
                 </property>
                 <property key="nativeImplementation" type="boolean" defaultValue="true">
-                    <caption>Use native for iOS</caption>
-                    <description />
+                    <caption>Native iOS variant</caption>
+                    <description>If set to Yes, on iOS the native Action sheet is shown. If set to No, a uniform version will be shown on iOS, similar to Android.</description>
                 </property>
                 <property key="itemsBasic" type="object" isList="true" required="false">
                     <caption>Items</caption>
@@ -42,15 +42,21 @@
                             <category>General</category>
                             <description />
                         </property>
-                        <property key="color" type="string" required="false">
-                            <caption>Color</caption>
-                            <category>General</category>
-                            <description>Hex, rgb or named color (Only for Android and not native iOS)</description>
-                        </property>
                         <property key="action" type="action" required="false">
                             <caption>Action</caption>
                             <category>General</category>
                             <description />
+                        </property>
+                        <property key="styleClass" type="enumeration" defaultValue="defaultStyle">
+                            <caption>Style</caption>
+                            <category>General</category>
+                            <description />
+                            <enumerationValues>
+                                <enumerationValue key="defaultStyle">Default</enumerationValue>
+                                <enumerationValue key="primaryStyle">Primary</enumerationValue>
+                                <enumerationValue key="dangerStyle">Danger</enumerationValue>
+                                <enumerationValue key="customStyle">Custom</enumerationValue>
+                            </enumerationValues>
                         </property>
                     </properties>
                 </property>

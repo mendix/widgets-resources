@@ -21,6 +21,7 @@ export function BottomSheet(props: BottomSheetProps<BottomDrawerStyle>): ReactEl
                 itemsBasic={props.itemsBasic}
                 triggerAttribute={props.triggerAttribute}
                 useNative={props.nativeImplementation}
+                styles={styles}
             />
         );
     }
