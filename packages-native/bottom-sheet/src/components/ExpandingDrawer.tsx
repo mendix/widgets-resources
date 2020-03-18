@@ -1,4 +1,4 @@
-import { BottomDrawerStyle } from "../ui/Styles";
+import { BottomSheetStyle } from "../ui/Styles";
 import { createElement, ReactNode, useCallback, useState, Fragment, ReactElement, Children } from "react";
 import BottomSheet from "reanimated-bottom-sheet";
 import { Dimensions, LayoutChangeEvent, View } from "react-native";
@@ -7,7 +7,7 @@ interface ExpandingDrawerProps {
     smallContent?: ReactNode;
     largeContent?: ReactNode;
     fullscreenContent?: ReactNode;
-    styles: BottomDrawerStyle;
+    styles: BottomSheetStyle;
 }
 
 export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {

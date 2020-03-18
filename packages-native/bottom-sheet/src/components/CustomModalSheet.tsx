@@ -2,12 +2,12 @@ import { createElement, ReactElement, ReactNode, useCallback, useEffect, useRef,
 import BottomSheet from "reanimated-bottom-sheet";
 import { Dimensions, LayoutChangeEvent, View } from "react-native";
 import { EditableValue, ValueStatus } from "mendix";
-import { BottomDrawerStyle } from "../ui/Styles";
+import { BottomSheetStyle } from "../ui/Styles";
 
 interface CustomModalSheetProps {
     triggerAttribute?: EditableValue<boolean>;
     content?: ReactNode;
-    styles: BottomDrawerStyle;
+    styles: BottomSheetStyle;
 }
 
 export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => {

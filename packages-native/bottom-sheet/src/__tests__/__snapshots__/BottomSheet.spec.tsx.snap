@@ -1,5 +1,133 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Bottom sheet renders a custom bottom action sheet for ios (Basic modal) with custom style 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  transparent={true}
+  visible={false}
+>
+  <View
+    style={
+      Array [
+        Array [
+          Object {
+            "flex": 1,
+            "flexDirection": "row",
+          },
+        ],
+      ]
+    }
+  >
+    <Text
+      onPress={[Function]}
+      style={
+        Array [
+          Array [
+            Object {
+              "backgroundColor": "#000",
+              "bottom": 0,
+              "left": 0,
+              "opacity": 0.4,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+          ],
+        ]
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignSelf": "flex-end",
+          "backgroundColor": "#e5e5e5",
+          "flex": 1,
+          "height": 101,
+          "transform": Array [
+            Object {
+              "translateY": 101,
+            },
+          ],
+        }
+      }
+    >
+      <RCTScrollView
+        scrollEnabled={false}
+      >
+        <View>
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "height": 50,
+                  "justifyContent": "center",
+                  "marginTop": 0.5,
+                },
+              ]
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "red",
+                  "fontSize": 60,
+                }
+              }
+            >
+              Item 1
+            </Text>
+          </View>
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#fff",
+                  "height": 50,
+                  "justifyContent": "center",
+                  "marginTop": 0.5,
+                },
+              ]
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "red",
+                  "fontSize": 60,
+                }
+              }
+            >
+              Item 2
+            </Text>
+          </View>
+        </View>
+      </RCTScrollView>
+    </View>
+  </View>
+</Modal>
+`;
+
 exports[`Bottom sheet renders a custom modal 1`] = `
 <View
   style={

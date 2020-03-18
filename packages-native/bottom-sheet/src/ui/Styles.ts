@@ -8,12 +8,12 @@ export interface ModalItemsStyle {
     customStyle?: TextStyle;
 }
 
-export interface BottomDrawerStyle extends Style {
+export interface BottomSheetStyle extends Style {
     container: ViewStyle;
     modalItems: ModalItemsStyle;
 }
 
-export const defaultBottomDrawerStyle: BottomDrawerStyle = {
+export const defaultBottomDrawerStyle: BottomSheetStyle = {
     container: {
         flex: 1
     },
