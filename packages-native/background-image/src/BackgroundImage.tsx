@@ -16,7 +16,10 @@ export function BackgroundImage(props: BackgroundImageProps<BackgroundImageStyle
         console.warn(`Background image "${props.name}": image opacity property out of range`);
     }
 
-    if (image.status === ValueStatus.Unavailable || (image.status === ValueStatus.Loading && !image.value)) {
+    if (image.status === ValueStatus.Unavailable) {
+        console.warn(`Background image "${props.name}": image unavailable`);
+        return null;
+    } else if (image.status === ValueStatus.Loading && !image.value) {
         return null;
     }
 
