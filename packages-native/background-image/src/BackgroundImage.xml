@@ -12,7 +12,7 @@
                 </property>
                 <property key="imageResizeMode" type="enumeration" defaultValue="cover">
                     <caption>Image resize mode</caption>
-                    <description>Determines how to resize the image when the widget dimensions don't match the raw image dimensions.</description>
+                    <description>Determines how to resize the image when the widget dimensions don't match the raw image dimensions. For an SVG image it's always "stretch".</description>
                     <enumerationValues>
                         <enumerationValue key="cover">Cover</enumerationValue>
                         <enumerationValue key="contain">Contain</enumerationValue>
