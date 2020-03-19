@@ -4,7 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNative from "react-native";
+import { AsyncStorageStatic } from "@react-native-community/async-storage";
 import { StorageValue } from "./StorageValue";
 
 /**
@@ -30,8 +30,7 @@ export async function SetStorageItemObject(key?: string, value?: mendix.lib.MxOb
 
     function setItem(key: string, value: string): Promise<void> {
         if (navigator && navigator.product === "ReactNative") {
-            const AsyncStorage: typeof ReactNative.AsyncStorage = require("@react-native-community/async-storage")
-                .default;
+            const AsyncStorage: AsyncStorageStatic = require("@react-native-community/async-storage").default;
             return AsyncStorage.setItem(key, value);
         }
 

@@ -4,7 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNative from "react-native";
+import { AsyncStorageStatic } from "@react-native-community/async-storage";
 
 /**
  * Retrieve a local stored string value identified by a unique key. This could be set via the SetStorageItemString JavaScript action.
@@ -27,8 +27,7 @@ export async function GetStorageItemString(key?: string): Promise<string> {
 
     async function getItem(key: string): Promise<string | null> {
         if (navigator && navigator.product === "ReactNative") {
-            const AsyncStorage: typeof ReactNative.AsyncStorage = require("@react-native-community/async-storage")
-                .default;
+            const AsyncStorage: AsyncStorageStatic = require("@react-native-community/async-storage").default;
             return AsyncStorage.getItem(key);
         }
 

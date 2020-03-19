@@ -4,7 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNative from "react-native";
+import { AsyncStorageStatic } from "@react-native-community/async-storage";
 
 /**
  * Remove a content identified by a unique key. This could be set via any of the Set Storage Item JavaScript actions.
@@ -21,8 +21,7 @@ export async function RemoveStorageItem(key?: string): Promise<boolean> {
 
     function removeItem(key: string): Promise<void> {
         if (navigator && navigator.product === "ReactNative") {
-            const AsyncStorage: typeof ReactNative.AsyncStorage = require("@react-native-community/async-storage")
-                .default;
+            const AsyncStorage: AsyncStorageStatic = require("@react-native-community/async-storage").default;
             return AsyncStorage.removeItem(key);
         }
 
