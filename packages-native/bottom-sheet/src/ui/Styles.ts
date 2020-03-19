@@ -1,5 +1,5 @@
 import { Style } from "@native-mobile-resources/util-widgets";
-import { TextStyle, ViewStyle } from "react-native";
+import { TextStyle } from "react-native";
 
 export interface ModalItemsStyle {
     defaultStyle?: TextStyle;
@@ -9,14 +9,10 @@ export interface ModalItemsStyle {
 }
 
 export interface BottomSheetStyle extends Style {
-    container: ViewStyle;
     modalItems: ModalItemsStyle;
 }
 
 export const defaultBottomDrawerStyle: BottomSheetStyle = {
-    container: {
-        flex: 1
-    },
     modalItems: {
         defaultStyle: {
             fontSize: 16,

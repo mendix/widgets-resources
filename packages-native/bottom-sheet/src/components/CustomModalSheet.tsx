@@ -1,6 +1,7 @@
 import { createElement, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import BottomSheet from "reanimated-bottom-sheet";
-import { Dimensions, LayoutChangeEvent, View } from "react-native";
+import { Dimensions, LayoutChangeEvent, SafeAreaView, View } from "react-native";
+import Modal from "react-native-modal";
 import { EditableValue, ValueStatus } from "mendix";
 import { BottomSheetStyle } from "../ui/Styles";
 
@@ -13,7 +14,7 @@ interface CustomModalSheetProps {
 export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => {
     const bottomSheetRef = useRef<BottomSheet>(null);
     const [heightContent, setHeightContent] = useState(0);
-    const maxHeight = Dimensions.get("window").height - 100;
+    const maxHeight = Dimensions.get("screen").height - 200;
 
     useEffect(() => {
         if (
@@ -62,16 +63,25 @@ export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => 
     }
 
     return (
-        <View style={props.styles.container}>
-            <BottomSheet
-                ref={bottomSheetRef}
-                snapPoints={[heightContent, -50]}
-                renderContent={() => <View onLayout={onLayoutHandlerContent}>{props.content}</View>}
-                enabledContentTapInteraction={false}
-                enabledHeaderGestureInteraction={false}
-                onOpenEnd={onOpenHandler}
-                onCloseEnd={onCloseHandler}
-            />
-        </View>
+        <Modal
+            isVisible={props.triggerAttribute?.value ?? false}
+            coverScreen={false}
+            backdropOpacity={0.5}
+            onDismiss={onCloseHandler}
+            onBackButtonPress={onCloseHandler}
+            onBackdropPress={onCloseHandler}
+        >
+            <SafeAreaView style={{ flex: 1 }} pointerEvents="box-none">
+                <BottomSheet
+                    ref={bottomSheetRef}
+                    snapPoints={[heightContent, -50]}
+                    renderContent={() => <View onLayout={onLayoutHandlerContent}>{props.content}</View>}
+                    enabledContentTapInteraction={false}
+                    enabledHeaderGestureInteraction={false}
+                    onOpenEnd={onOpenHandler}
+                    onCloseEnd={onCloseHandler}
+                />
+            </SafeAreaView>
+        </Modal>
     );
 };
