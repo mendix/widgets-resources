@@ -5,14 +5,18 @@ const customConfig = {
     // Custom configuration goes here
     devtool: false,
     externals: [
+        "@react-native-community/async-storage",
         "big.js",
         "react",
         "react-dom",
         "react-native",
         "react-native-camera",
+        "react-native-device-info",
         "react-native-firebase",
         "react-native-geocoder",
+        "react-native-gesture-handler",
         "react-native-maps",
+        "react-native-reanimated",
         "react-native-svg",
         "react-native-video",
         "react-native-view-shot",
