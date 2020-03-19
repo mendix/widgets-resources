@@ -12,7 +12,7 @@
                 </property>
                 <property key="imageResizeMode" type="enumeration" defaultValue="cover">
                     <caption>Image resize mode</caption>
-                    <description>Determines how to resize the image when the widget dimensions don't match the raw image dimensions. For an SVG image it's always "stretch".</description>
+                    <description>Determines how to resize the image when the widget dimensions don't match the raw image dimensions. For an SVG image it's always "stretch". "Cover" maintains the image's aspect ratio and both dimensions will be equal to or larger than the corresponding dimension of the widget. "Contain" maintains the image's aspect ratio and both dimensions will be equal to or smaller than the corresponding dimension of the widget. "Stretch" adapts to the dimensions of the widget and may effect the image's aspect ratio. "Repeat" covers the widget by repeating the image and keeping its size and aspect ratio, unless it is larger than the widget, in which case it will downsize by maintaining the aspect ratio, so that it will be contained by the widget. "Center" centers the image in the widget along both dimensions, unless it is larger than the widget, in which case it will downsize by maintaining the aspect ratio, so that it will be contained by the widget.</description>
                     <enumerationValues>
                         <enumerationValue key="cover">Cover</enumerationValue>
                         <enumerationValue key="contain">Contain</enumerationValue>
