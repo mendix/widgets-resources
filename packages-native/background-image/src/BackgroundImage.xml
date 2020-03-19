@@ -12,7 +12,7 @@
                 </property>
                 <property key="imageResizeMode" type="enumeration" defaultValue="cover">
                     <caption>Image resize mode</caption>
-                    <description>Determines how to resize the image when the widget dimensions don't match the raw image dimensions</description>
+                    <description>Determines how to resize the image when the widget dimensions don't match the raw image dimensions.</description>
                     <enumerationValues>
                         <enumerationValue key="cover">Cover</enumerationValue>
                         <enumerationValue key="contain">Contain</enumerationValue>
@@ -20,6 +20,10 @@
                         <enumerationValue key="repeat">Repeat</enumerationValue>
                         <enumerationValue key="center">Center</enumerationValue>
                     </enumerationValues>
+                </property>
+                <property key="imageOpacity" type="decimal" defaultValue="1.0">
+                    <caption>Image opacity</caption>
+                    <description>Takes a value from 0.0 - 1.0. The lower the value, the more transparent.</description>
                 </property>
                 <property key="content" type="widgets" required="false">
                     <caption>Content</caption>

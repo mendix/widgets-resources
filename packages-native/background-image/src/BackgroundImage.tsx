@@ -10,6 +10,11 @@ import { BackgroundImageProps } from "../typings/BackgroundImageProps";
 export function BackgroundImage(props: BackgroundImageProps<BackgroundImageStyle>): JSX.Element | null {
     const styles = flattenStyles(defaultBackgroundImageStyle, props.style);
     const image = props.image;
+    const imageOpacity = Number(props.imageOpacity.toFixed());
+
+    if (imageOpacity < 0 || imageOpacity > 1) {
+        console.warn(`Background image "${props.name}": image opacity property out of range`);
+    }
 
     if (image.status === ValueStatus.Unavailable || (image.status === ValueStatus.Loading && !image.value)) {
         return null;
@@ -23,7 +28,7 @@ export function BackgroundImage(props: BackgroundImageProps<BackgroundImageStyle
                     StyleSheet.absoluteFill,
                     typeof image.value === "number" ? { width: undefined, height: undefined } : undefined,
                     styles.image,
-                    { resizeMode: props.imageResizeMode }
+                    { opacity: imageOpacity, resizeMode: props.imageResizeMode }
                 ]}
             />
 
