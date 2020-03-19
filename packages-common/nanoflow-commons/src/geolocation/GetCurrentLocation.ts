@@ -28,7 +28,7 @@ export async function GetCurrentLocation(
     // BEGIN USER CODE
 
     if (navigator && navigator.product === "ReactNative" && !navigator.geolocation) {
-        navigator.geolocation = require("@react-native-community/geolocation");
+        (navigator.geolocation as any) = require("@react-native-community/geolocation");
     }
 
     return new Promise((resolve, reject) => {

@@ -18,7 +18,7 @@ export async function RequestLocationPermission(): Promise<boolean> {
         const RN: typeof ReactNative = require("react-native");
 
         if (!navigator.geolocation) {
-            navigator.geolocation = require("@react-native-community/geolocation");
+            (navigator.geolocation as any) = require("@react-native-community/geolocation");
         }
 
         if (RN.Platform.OS === "android") {

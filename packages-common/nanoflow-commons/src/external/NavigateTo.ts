@@ -30,7 +30,7 @@ export async function NavigateTo(location?: string): Promise<boolean> {
 
         const url = Platform.select({
             ios: iosUrl,
-            android: androidUrl
+            default: androidUrl
         });
 
         return Linking.canOpenURL(url).then(supported => {

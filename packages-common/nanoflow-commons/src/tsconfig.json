@@ -3,7 +3,7 @@
     "compilerOptions": {
         "outDir": "../dist/tsc",
         "target": "es2017",
-        "lib": ["es2017"],
+        "lib": ["es2017", "DOM"],
         "types": ["mendix-client", "big.js", "react-native"],
         "moduleResolution": "node",
         "module": "es2015",
