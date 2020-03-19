@@ -15,8 +15,8 @@ const defaultProps: BackgroundImageProps<BackgroundImageStyle> = {
     name: "backgroundImageTest",
     style: [],
     image: dynamicValue<NativeImage>(false, { uri: "path/to/image" }),
-    imageResizeMode: "cover",
-    imageOpacity: new Big(0.3333),
+    resizeMode: "cover",
+    opacity: new Big(0.3333),
     content: <Text>Content</Text>
 };
 
@@ -88,8 +88,8 @@ describe("BackgroundImage", () => {
         const negativeImageOpacity = new Big(-0.333);
         const positiveImageOpacity = new Big(1.333);
 
-        render(<BackgroundImage {...defaultProps} imageOpacity={negativeImageOpacity} />);
-        render(<BackgroundImage {...defaultProps} imageOpacity={positiveImageOpacity} />);
+        render(<BackgroundImage {...defaultProps} opacity={negativeImageOpacity} />);
+        render(<BackgroundImage {...defaultProps} opacity={positiveImageOpacity} />);
 
         expect(consoleWarn.mock.calls[0][0]).toBe(
             'Background image "backgroundImageTest": image opacity property out of range'

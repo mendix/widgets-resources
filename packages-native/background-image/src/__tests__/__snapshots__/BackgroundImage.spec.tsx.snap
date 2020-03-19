@@ -24,11 +24,12 @@ exports[`BackgroundImage renders previous image when image is reloading 1`] = `
           "top": 0,
         },
         undefined,
-        Object {},
+        undefined,
         Object {
           "opacity": 0.3333,
           "resizeMode": "cover",
         },
+        Object {},
       ]
     }
   />
@@ -58,11 +59,12 @@ exports[`BackgroundImage renders wihtout content 1`] = `
           "top": 0,
         },
         undefined,
-        Object {},
+        undefined,
         Object {
           "opacity": 0.3333,
           "resizeMode": "cover",
         },
+        Object {},
       ]
     }
   />
@@ -93,13 +95,14 @@ exports[`BackgroundImage renders with custom styles 1`] = `
           "top": 0,
         },
         undefined,
-        Object {
-          "height": "100%",
-          "width": "100%",
-        },
+        undefined,
         Object {
           "opacity": 0.3333,
           "resizeMode": "cover",
+        },
+        Object {
+          "height": "100%",
+          "width": "100%",
         },
       ]
     }
@@ -130,11 +133,12 @@ exports[`BackgroundImage renders with default styles 1`] = `
           "top": 0,
         },
         undefined,
-        Object {},
+        undefined,
         Object {
           "opacity": 0.3333,
           "resizeMode": "cover",
         },
+        Object {},
       ]
     }
   />
