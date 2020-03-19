@@ -4,7 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import { CameraRoll } from "react-native";
+import CameraRoll from "@react-native-community/cameraroll";
 
 /**
  * @param {MxObject} picture - This field is required.
