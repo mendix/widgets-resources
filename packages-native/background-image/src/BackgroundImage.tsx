@@ -17,14 +17,14 @@ export function BackgroundImage(props: BackgroundImageProps<BackgroundImageStyle
 
     return (
         <View style={styles.container}>
-            {Image({
-                source: image.value,
-                style: [
+            <Image
+                source={image.value}
+                style={[
                     StyleSheet.absoluteFill,
                     typeof image.value === "number" ? { width: undefined, height: undefined } : undefined,
                     styles.image
-                ]
-            })}
+                ]}
+            />
 
             {props.content}
         </View>
