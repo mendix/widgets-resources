@@ -1,6 +1,6 @@
 import { createElement, ReactElement, useCallback, useEffect, useRef } from "react";
 import ActionSheet, { ActionSheetCustom } from "react-native-actionsheet";
-import { Platform, Text } from "react-native";
+import { Platform, SafeAreaView, Text } from "react-native";
 import { EditableValue, ValueStatus } from "mendix";
 import { ItemsBasicType } from "../../typings/BottomSheetProps";
 import { BottomSheetStyle } from "../ui/Styles";
@@ -47,7 +47,11 @@ export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement =
                 {item.caption}
             </Text>
         ));
-        return <ActionSheetCustom ref={bottomSheetRef} options={options} onPress={actionHandler} />;
+        return (
+            <SafeAreaView>
+                <ActionSheetCustom ref={bottomSheetRef} options={options} onPress={actionHandler} />
+            </SafeAreaView>
+        );
     }
     const options = props.itemsBasic.map(item => item.caption);
     return <ActionSheet ref={bottomSheetRef} options={options} onPress={actionHandler} />;

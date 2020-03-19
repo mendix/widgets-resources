@@ -1,138 +1,142 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Bottom sheet renders a custom bottom action sheet for ios (Basic modal) with custom style 1`] = `
-<Modal
-  animationType="none"
-  hardwareAccelerated={false}
-  onRequestClose={[Function]}
-  transparent={true}
-  visible={false}
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
 >
-  <View
-    style={
-      Array [
-        Array [
-          Object {
-            "flex": 1,
-            "flexDirection": "row",
-          },
-        ],
-      ]
-    }
+  <Modal
+    animationType="none"
+    hardwareAccelerated={false}
+    onRequestClose={[Function]}
+    transparent={true}
+    visible={false}
   >
-    <Text
-      onPress={[Function]}
+    <View
       style={
         Array [
           Array [
             Object {
-              "backgroundColor": "#000",
-              "bottom": 0,
-              "left": 0,
-              "opacity": 0.4,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
+              "flex": 1,
+              "flexDirection": "row",
             },
           ],
         ]
       }
-    />
-    <View
-      style={
-        Object {
-          "alignSelf": "flex-end",
-          "backgroundColor": "#e5e5e5",
-          "flex": 1,
-          "height": 101,
-          "transform": Array [
-            Object {
-              "translateY": 101,
-            },
-          ],
-        }
-      }
     >
-      <RCTScrollView
-        scrollEnabled={false}
+      <Text
+        onPress={[Function]}
+        style={
+          Array [
+            Array [
+              Object {
+                "backgroundColor": "#000",
+                "bottom": 0,
+                "left": 0,
+                "opacity": 0.4,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+            ],
+          ]
+        }
+      />
+      <View
+        style={
+          Object {
+            "alignSelf": "flex-end",
+            "backgroundColor": "#e5e5e5",
+            "flex": 1,
+            "height": 101,
+            "transform": Array [
+              Object {
+                "translateY": 101,
+              },
+            ],
+          }
+        }
       >
-        <View>
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#fff",
-                  "height": 50,
-                  "justifyContent": "center",
-                  "marginTop": 0.5,
-                },
-              ]
-            }
-          >
-            <Text
+        <RCTScrollView
+          scrollEnabled={false}
+        >
+          <View>
+            <View
+              accessible={true}
+              isTVSelectable={true}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
-                Object {
-                  "color": "red",
-                  "fontSize": 60,
-                }
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#fff",
+                    "height": 50,
+                    "justifyContent": "center",
+                    "marginTop": 0.5,
+                  },
+                ]
               }
             >
-              Item 1
-            </Text>
-          </View>
-          <View
-            accessible={true}
-            isTVSelectable={true}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#fff",
-                  "height": 50,
-                  "justifyContent": "center",
-                  "marginTop": 0.5,
-                },
-              ]
-            }
-          >
-            <Text
-              style={
-                Object {
-                  "color": "red",
-                  "fontSize": 60,
+              <Text
+                style={
+                  Object {
+                    "color": "red",
+                    "fontSize": 60,
+                  }
                 }
+              >
+                Item 1
+              </Text>
+            </View>
+            <View
+              accessible={true}
+              isTVSelectable={true}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Array [
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#fff",
+                    "height": 50,
+                    "justifyContent": "center",
+                    "marginTop": 0.5,
+                  },
+                ]
               }
             >
-              Item 2
-            </Text>
+              <Text
+                style={
+                  Object {
+                    "color": "red",
+                    "fontSize": 60,
+                  }
+                }
+              >
+                Item 2
+              </Text>
+            </View>
           </View>
-        </View>
-      </RCTScrollView>
+        </RCTScrollView>
+      </View>
     </View>
-  </View>
-</Modal>
+  </Modal>
+</RCTSafeAreaView>
 `;
 
 exports[`Bottom sheet renders a custom modal 1`] = `
 <View
   style={
     Object {
-      "bottom": -1234,
+      "bottom": -1134,
       "position": "absolute",
     }
   }
@@ -149,7 +153,7 @@ exports[`Bottom sheet renders a expanding 1`] = `
 <View
   style={
     Object {
-      "bottom": -1234,
+      "bottom": -1134,
       "position": "absolute",
     }
   }
@@ -176,7 +180,7 @@ exports[`Bottom sheet renders a expanding fullscreen 1`] = `
 <View
   style={
     Object {
-      "bottom": -1234,
+      "bottom": -1134,
       "position": "absolute",
     }
   }
