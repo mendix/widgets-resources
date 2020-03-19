@@ -126,7 +126,7 @@ export const defaultFeedbackStyle: FeedbackStyle = {
     button: {
         borderColor: "#eee",
         borderWidth: 1,
-        color: Platform.select({ ios: "#007ff9", android: "#169689" })
+        color: Platform.select({ ios: "#007ff9", default: "#169689" })
     },
     buttonDisabled: {
         color: "gray"

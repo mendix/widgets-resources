@@ -16,20 +16,20 @@ const purple = "rgb(98, 0, 238)";
 
 export const defaultToggleButtonsStyle: ToggleButtonsStyle = {
     container: {
-        borderRadius: Platform.select({ ios: 5, android: 3 })
+        borderRadius: Platform.select({ ios: 5, default: 3 })
     },
     containerDisabled: {
         opacity: 0.5
     },
     button: {
         borderRadius: 0,
-        borderColor: Platform.select({ ios: blue, android: "#CCC" })
+        borderColor: Platform.select({ ios: blue, default: "#CCC" })
     },
     text: Platform.select({
         ios: {
             color: blue
         },
-        android: {
+        default: {
             color: "#666",
             paddingVertical: 3,
             fontWeight: "600"
@@ -40,7 +40,7 @@ export const defaultToggleButtonsStyle: ToggleButtonsStyle = {
             borderColor: blue,
             backgroundColor: blue
         },
-        android: {
+        default: {
             borderColor: purple,
             backgroundColor: purple
         }

@@ -6,27 +6,6 @@ import { Text, View } from "react-native";
 import { ListValueBuilder } from "@widgets-resources/piw-utils";
 import { Carousel } from "../Carousel";
 
-jest.mock("react-native", () => ({
-    InteractionManager: require.requireActual("InteractionManager"),
-    Platform: require.requireActual("Platform"),
-    Animated: require.requireActual("Animated"),
-    I18nManager: require.requireActual("I18nManager"),
-    View: require.requireActual("View"),
-    Text: require.requireActual("Text"),
-    ViewPropTypes: {
-        style: jest.fn()
-    },
-    TouchableOpacity: require.requireActual("TouchableOpacity"),
-    Easing: require.requireActual("Easing"),
-    FlatList: require.requireActual("FlatList"),
-    ScrollView: require.requireActual("ScrollView"),
-    StyleSheet: require.requireActual("StyleSheet"),
-    Image: require.requireActual("Image"),
-    ActivityIndicator: require.requireActual("ActivityIndicator")
-}));
-
-jest.mock("prop-types", () => require.requireActual("prop-types"));
-
 describe("Carousel", () => {
     let defaultProps: CarouselProps<CarouselStyle>;
     const listValueBuilder = ListValueBuilder();

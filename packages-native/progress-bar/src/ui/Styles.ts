@@ -28,7 +28,7 @@ export const defaultProgressBarStyle: ProgressBarStyle = {
         })
     },
     fill: {
-        backgroundColor: Platform.select({ ios: "rgb(0,122,255)", android: "rgb(98,0,238)" })
+        backgroundColor: Platform.select({ ios: "rgb(0,122,255)", default: "rgb(98,0,238)" })
     },
     validationMessage: {
         color: "#ed1c24"

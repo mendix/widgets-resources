@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
             height: 24,
             borderRadius: 12
         },
-        android: {
+        default: {
             width: 20,
             height: 20,
             borderRadius: 10,

@@ -105,7 +105,9 @@ exports[`FloatingActionButton renders floating action button 1`] = `
     >
       <View
         accessible={true}
+        focusable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -264,7 +266,9 @@ exports[`FloatingActionButton renders with secondary buttons 1`] = `
     >
       <View
         accessible={true}
+        focusable={true}
         isTVSelectable={true}
+        onClick={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}

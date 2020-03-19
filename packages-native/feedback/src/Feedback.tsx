@@ -1,15 +1,7 @@
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { Image } from "mendix/components/native/Image";
 import { Component, createElement, Fragment } from "react";
-import {
-    ActivityIndicator,
-    Image,
-    ImageURISource,
-    Switch,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View
-} from "react-native";
+import { ActivityIndicator, ImageURISource, Switch, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Dialog from "react-native-dialog";
 import { captureScreen } from "react-native-view-shot";
 
@@ -250,6 +242,6 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
     }
 }
 
-function renderImage(source: ImageURISource): JSX.Element {
+function renderImage(source: string | number | ImageURISource): JSX.Element {
     return <Image style={imageStyle} source={source} />;
 }

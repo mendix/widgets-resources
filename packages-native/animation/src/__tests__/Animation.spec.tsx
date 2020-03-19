@@ -4,7 +4,7 @@ import { render } from "react-native-testing-library";
 
 import { Animation, Props } from "../Animation";
 
-jest.mock("Platform", () => ({
+jest.mock("react-native/Libraries/Utilities/Platform", () => ({
     OS: "ios",
     select: jest.fn(dict => dict.ios)
 }));
