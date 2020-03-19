@@ -1,5 +1,5 @@
-import { background, brand, contrast, font, spacing } from "../variables";
-import { CarouselLayoutType, CarouselType }           from "../../types/widgets";
+import { brand, contrast, font, spacing }   from "../variables";
+import { CarouselLayoutType, CarouselType } from "../../types/widgets";
 /*
 
 DISCLAIMER:

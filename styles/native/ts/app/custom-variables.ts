@@ -5,7 +5,6 @@ import {
     setColorBasedOnBackground,
     setContrastScale,
 }                                  from "../core/helpers/_functions/convertcolors";
-import { shadeBlendConvert }       from "../core/helpers/_functions/shadeblendconvert";
 import {
     VariablesBackground,
     VariablesBadge,

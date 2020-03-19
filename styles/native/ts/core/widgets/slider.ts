@@ -25,7 +25,7 @@ export const com_mendix_widget_native_slider_Slider: SliderType = {
     trackDisabled: {
         // All ViewStyle properties are allowed
         backgroundColor: contrast.lower,
-        opacity: Platform.select({ ios: 0.4 }),
+        opacity: Platform.select({ios: 0.4}),
     },
     highlight: {
         // All ViewStyle properties are allowed
@@ -33,7 +33,7 @@ export const com_mendix_widget_native_slider_Slider: SliderType = {
     },
     highlightDisabled: {
         // All ViewStyle properties are allowed
-        backgroundColor: Platform.select({ ios: brand.primary, android: contrast.low }),
+        backgroundColor: Platform.select({ios: brand.primary, android: contrast.low}),
     },
     marker: {
         // All ViewStyle properties are allowed
@@ -45,7 +45,7 @@ export const com_mendix_widget_native_slider_Slider: SliderType = {
                 shadowColor: "#000",
                 shadowOpacity: 0.2,
                 borderColor: contrast.lowest,
-                shadowOffset: { width: 0, height: 1 },
+                shadowOffset: {width: 0, height: 1},
             },
             android: {
                 width: 20,
@@ -75,7 +75,7 @@ export const com_mendix_widget_native_slider_Slider: SliderType = {
                 backgroundColor: background.secondary,
                 shadowColor: "#000",
                 shadowOpacity: 0.2,
-                shadowOffset: { width: 0, height: 1 },
+                shadowOffset: {width: 0, height: 1},
             },
             android: {
                 marginTop: 1,

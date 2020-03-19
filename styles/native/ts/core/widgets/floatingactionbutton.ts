@@ -1,4 +1,3 @@
-import { shadeBlendConvert }                 from "../helpers/_functions/shadeblendconvert";
 import { background, brand, contrast, font } from "../variables";
 import { FloatingActionButtonType }          from "../../types/widgets";
 /*

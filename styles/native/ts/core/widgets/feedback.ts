@@ -1,5 +1,4 @@
 import { Platform }                                                 from "react-native";
-import { shadeBlendConvert }                                        from "../helpers/_functions/shadeblendconvert";
 import { background, border, brand, button, contrast, font, input } from "../variables";
 import { FeedbackType }                                             from "../../types/widgets";
 /*

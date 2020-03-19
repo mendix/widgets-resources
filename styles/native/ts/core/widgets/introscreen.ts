@@ -1,6 +1,6 @@
-import { isIphoneWithNotch }                      from "../helpers/_functions/device";
-import { background, button, font, spacing }      from "../variables";
-import { IntroScreenButtonType, IntroScreenType } from "../../types/widgets";
+import { isIphoneWithNotch }                           from "../helpers/_functions/device";
+import { background, button, contrast, font, spacing } from "../variables";
+import { IntroScreenButtonType, IntroScreenType }      from "../../types/widgets";
 /*
 
 DISCLAIMER:
@@ -94,7 +94,7 @@ export const com_mendix_widget_native_introscreen_IntroScreen: IntroScreenType =
     dotStyle: {
         // All ViewStyle properties are allowed
         backgroundColor: contrast.lower,
-        transform: [{ scale: 0.5 }],
+        transform: [{scale: 0.5}],
     },
     activeDotStyle: {
         // All ViewStyle properties are allowed

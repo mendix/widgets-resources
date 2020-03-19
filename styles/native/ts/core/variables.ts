@@ -3,7 +3,6 @@ import * as custom                                                          from
 import adjustFont, { height, width }                                        from "./helpers/_functions/adjustfont";
 import { anyColorToRgbString, setColorBasedOnBackground, setContrastScale } from "./helpers/_functions/convertcolors";
 import merge                                                                from "./helpers/_functions/mergeobjects";
-import { shadeBlendConvert }                                                from "./helpers/_functions/shadeblendconvert";
 import {
     VariablesBackground,
     VariablesBadge,
