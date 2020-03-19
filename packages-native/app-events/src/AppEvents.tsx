@@ -1,5 +1,6 @@
+import NetInfo, { NetInfoSubscription, NetInfoState } from "@react-native-community/netinfo";
 import { Component } from "react";
-import { AppState, AppStateStatus, NetInfo } from "react-native";
+import { AppState, AppStateStatus } from "react-native";
 
 import { AppEventsProps } from "../typings/AppEventsProps";
 import { executeAction } from "@widgets-resources/piw-utils";
@@ -18,6 +19,7 @@ export class AppEvents extends Component<Props> {
     private lastOnOffline = 0;
     private onLoadTriggered = false;
     private timeoutHandle?: any;
+    private unsubscribeNetworkEventListener?: NetInfoSubscription;
 
     async componentDidMount(): Promise<void> {
         if (this.props.onResumeAction) {
@@ -30,8 +32,8 @@ export class AppEvents extends Component<Props> {
         }
 
         if (this.props.onOnlineAction || this.props.onOfflineAction) {
-            this.isConnected = await NetInfo.isConnected.fetch();
-            NetInfo.isConnected.addEventListener("connectionChange", this.onConnectionChangeHandler);
+            this.isConnected = (await NetInfo.fetch()).isConnected;
+            this.unsubscribeNetworkEventListener = NetInfo.addEventListener(this.onConnectionChangeHandler);
         }
     }
 
@@ -47,8 +49,8 @@ export class AppEvents extends Component<Props> {
             AppState.removeEventListener("change", this.onAppStateChangeHandler);
         }
 
-        if (this.props.onOnlineAction || this.props.onOfflineAction) {
-            NetInfo.isConnected.removeEventListener("connectionChange", this.onConnectionChangeHandler);
+        if (this.unsubscribeNetworkEventListener) {
+            this.unsubscribeNetworkEventListener();
         }
 
         if (this.props.onTimeoutAction && this.timeoutHandle != null) {
@@ -74,22 +76,22 @@ export class AppEvents extends Component<Props> {
         this.appState = nextAppState;
     }
 
-    private onConnectionChange(nextIsConnected: boolean): void {
-        if (this.isConnected === nextIsConnected) {
+    private onConnectionChange(nextState: NetInfoState): void {
+        if (this.isConnected === nextState.isConnected) {
             return;
         }
 
-        if (nextIsConnected && isPastTimeout(this.lastOnOnline, this.props.onOnlineTimeout)) {
+        if (nextState.isConnected && isPastTimeout(this.lastOnOnline, this.props.onOnlineTimeout)) {
             executeAction(this.props.onOnlineAction);
             this.lastOnOnline = Date.now();
         }
 
-        if (!nextIsConnected && isPastTimeout(this.lastOnOffline, this.props.onOfflineTimeout)) {
+        if (!nextState.isConnected && isPastTimeout(this.lastOnOffline, this.props.onOfflineTimeout)) {
             executeAction(this.props.onOfflineAction);
             this.lastOnOffline = Date.now();
         }
 
-        this.isConnected = nextIsConnected;
+        this.isConnected = nextState.isConnected;
     }
 }
 
