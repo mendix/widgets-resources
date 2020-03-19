@@ -25,6 +25,7 @@ export const TabContainer = {
         pressOpacity: 0.8,
         backgroundColor: tabcontainer.tabBar.backgroundColor,
         scrollEnabled: false,
+        paddingVertical: spacing.smaller,
     },
     indicator: {
         // All ViewStyle properties are allowed
