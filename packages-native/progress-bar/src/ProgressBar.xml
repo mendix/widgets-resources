@@ -13,12 +13,12 @@
                 </property>
                 <property key="minimumValue" type="expression" defaultValue="0">
                     <caption>Minimum value</caption>
-                    <description>The lowest possible progress value.</description>
+                    <description>The lowest possible progress value. If current value is lower than this value, progress will be still minimum value</description>
                     <returnType type="Decimal"/>
                 </property>
                 <property key="maximumValue" type="expression" defaultValue="100">
                     <caption>Maximum value</caption>
-                    <description>The highest possible progress value.</description>
+                    <description>The highest possible progress value. If current value is higher than this value, progress will be still maximum value</description>
                     <returnType type="Decimal"/>
                 </property>
             </propertyGroup>

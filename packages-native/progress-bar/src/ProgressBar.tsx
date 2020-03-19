@@ -1,6 +1,6 @@
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { isAvailable } from "@widgets-resources/piw-utils";
-import { Component, createElement } from "react";
+import { createElement } from "react";
 import { Text, View } from "react-native";
 import { Bar } from "react-native-progress";
 
@@ -9,34 +9,12 @@ import { defaultProgressBarStyle, ProgressBarStyle } from "./ui/Styles";
 
 export type Props = ProgressBarProps<ProgressBarStyle>;
 
-export class ProgressBar extends Component<Props> {
-    private readonly styles = flattenStyles(defaultProgressBarStyle, this.props.style);
+export function ProgressBar(props: ProgressBarProps<ProgressBarStyle>): JSX.Element {
+    const styles = flattenStyles(defaultProgressBarStyle, props.style);
 
-    render(): JSX.Element {
-        const validationMessages = this.validate();
-        const progress = this.calculateProgress();
-
-        return (
-            <View style={this.styles.container}>
-                <Bar
-                    testID={this.props.name}
-                    height={Number(this.styles.bar.height)}
-                    width={null}
-                    progress={progress}
-                    color={this.styles.fill.backgroundColor}
-                    borderWidth={this.styles.bar.borderWidth}
-                    style={this.styles.bar}
-                />
-                {validationMessages.length > 0 && (
-                    <Text style={this.styles.validationMessage}>{validationMessages.join("\n")}</Text>
-                )}
-            </View>
-        );
-    }
-
-    private validate(): string[] {
+    const validate = (): string[] => {
         const messages: string[] = [];
-        const { minimumValue, maximumValue, progressValue } = this.props;
+        const { minimumValue, maximumValue, progressValue } = props;
 
         if (!isAvailable(minimumValue)) {
             messages.push("No minimum value provided.");
@@ -47,24 +25,11 @@ export class ProgressBar extends Component<Props> {
         if (!isAvailable(progressValue)) {
             messages.push("No current value provided.");
         }
-        if (isAvailable(minimumValue) && isAvailable(maximumValue) && isAvailable(progressValue)) {
-            if (minimumValue.value!.gte(maximumValue.value!)) {
-                messages.push("The minimum value must be equal or less than the maximum value.");
-            } else {
-                if (progressValue.value!.lt(minimumValue.value!)) {
-                    messages.push("The current value must be equal or greater than the minimum value.");
-                }
-                if (progressValue.value!.gt(maximumValue.value!)) {
-                    messages.push("The current value must be equal or less than the maximum value.");
-                }
-            }
-        }
-
         return messages;
-    }
+    };
 
-    private calculateProgress(): number {
-        const { minimumValue, maximumValue, progressValue } = this.props;
+    const calculateProgress = (): number => {
+        const { minimumValue, maximumValue, progressValue } = props;
 
         if (
             !isAvailable(minimumValue) ||
@@ -83,5 +48,25 @@ export class ProgressBar extends Component<Props> {
         const numerator = progressValue.value!.minus(minimumValue.value!);
         const denominator = maximumValue.value!.minus(minimumValue.value!);
         return Number(numerator.div(denominator));
-    }
+    };
+
+    const validationMessages = validate();
+    const progress = calculateProgress();
+
+    return (
+        <View style={styles.container}>
+            <Bar
+                testID={props.name}
+                height={Number(styles.bar.height)}
+                width={null}
+                progress={progress}
+                color={styles.fill.backgroundColor}
+                borderWidth={styles.bar.borderWidth}
+                style={styles.bar}
+            />
+            {validationMessages.length > 0 && (
+                <Text style={styles.validationMessage}>{validationMessages.join("\n")}</Text>
+            )}
+        </View>
+    );
 }

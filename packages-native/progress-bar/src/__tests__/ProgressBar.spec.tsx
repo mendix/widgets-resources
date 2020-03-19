@@ -14,34 +14,25 @@ describe("ProgressBar", () => {
         expect(component.getByType(Bar).props.progress).toBe(0.5);
     });
 
-    it("renders no progress with undefined values", () => {
+    it("renders progress bar with minimum value with undefined values", () => {
         const component = render(<ProgressBar {...createProps()} />);
         expect(component.getByType(Bar).props.progress).toBe(0);
         expect(component.queryByType(Text)).toBeDefined();
     });
 
-    it("renders no progress and an error when minimum equals maximum", () => {
+    it("renders progress bar with minimum value when minimum equals maximum", () => {
         const component = render(<ProgressBar {...createProps(50, 50, 50)} />);
         expect(component.getByType(Bar).props.progress).toBe(0);
-        expect(component.getByType(Text).props.children).toBe(
-            "The minimum value must be equal or less than the maximum value."
-        );
     });
 
-    it("renders no progress and an error when the value is less than the minimum", () => {
+    it("renders progress bar with minimum value when the value is less than the minimum", () => {
         const component = render(<ProgressBar {...createProps(-50, 0, 100)} />);
         expect(component.getByType(Bar).props.progress).toBe(0);
-        expect(component.getByType(Text).props.children).toBe(
-            "The current value must be equal or greater than the minimum value."
-        );
     });
 
     it("renders progress bar with max value when the value is greater than maximum", () => {
         const component = render(<ProgressBar {...createProps(150, 0, 100)} />);
         expect(component.getByType(Bar).props.progress).toBe(1);
-        expect(component.getByType(Text).props.children).toBe(
-            "The current value must be equal or less than the maximum value."
-        );
     });
 
     it("renders correct progress with decimal values", () => {
