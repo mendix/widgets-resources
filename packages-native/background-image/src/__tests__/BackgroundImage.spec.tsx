@@ -14,6 +14,7 @@ const defaultProps: BackgroundImageProps<BackgroundImageStyle> = {
     name: "backgroundImageTest",
     style: [],
     image: dynamicValue<NativeImage>(false, { uri: "path/to/image" }),
+    imageResizeMode: "cover",
     content: <Text>Content</Text>
 };
 
@@ -25,7 +26,7 @@ describe("BackgroundImage", () => {
     });
 
     it("renders with custom styles", () => {
-        const style = [
+        const style: BackgroundImageStyle[] = [
             {
                 container: { height: "50%" },
                 image: { width: "100%", height: "100%" }
