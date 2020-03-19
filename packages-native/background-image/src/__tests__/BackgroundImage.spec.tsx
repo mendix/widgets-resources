@@ -8,10 +8,12 @@ import { BackgroundImageProps } from "../../typings/BackgroundImageProps";
 import { BackgroundImageStyle } from "../ui/Styles";
 import { NativeImage } from "mendix";
 
+jest.mock("mendix/components/native/Image", () => require.requireActual("./__mocks__/mendix/components/native/Image"));
+
 const defaultProps: BackgroundImageProps<BackgroundImageStyle> = {
     name: "backgroundImageTest",
     style: [],
-    backgroundImage: dynamicValue<NativeImage>(false, { uri: "path/to/image" }),
+    image: dynamicValue<NativeImage>(false, { uri: "path/to/image" }),
     content: <Text>Content</Text>
 };
 
@@ -25,10 +27,12 @@ describe("BackgroundImage", () => {
     it("renders with custom styles", () => {
         const style = [
             {
-                container: { height: "50%" }
+                container: { height: "50%" },
+                image: { width: "100%", height: "100%" }
             },
             {
-                container: { height: "80%" }
+                container: { height: "80%" },
+                image: {}
             }
         ];
 
@@ -38,25 +42,25 @@ describe("BackgroundImage", () => {
     });
 
     it("renders nothing when image is loading for the first time", () => {
-        const backgroundImage = dynamicValue<NativeImage>(true);
+        const image = dynamicValue<NativeImage>(true);
 
-        const component = render(<BackgroundImage {...defaultProps} backgroundImage={backgroundImage} />);
+        const component = render(<BackgroundImage {...defaultProps} image={image} />);
 
         expect(component.toJSON()).toMatchSnapshot();
     });
 
     it("renders previous image when image is reloading", () => {
-        const backgroundImage = dynamicValue<NativeImage>(true, { uri: "path/to/image" });
+        const image = dynamicValue<NativeImage>(true, { uri: "path/to/image" });
 
-        const component = render(<BackgroundImage {...defaultProps} backgroundImage={backgroundImage} />);
+        const component = render(<BackgroundImage {...defaultProps} image={image} />);
 
         expect(component.toJSON()).toMatchSnapshot();
     });
 
     it("renders nothing when image is unavailable", () => {
-        const backgroundImage = dynamicValue<NativeImage>(false);
+        const image = dynamicValue<NativeImage>(false);
 
-        const component = render(<BackgroundImage {...defaultProps} backgroundImage={backgroundImage} />);
+        const component = render(<BackgroundImage {...defaultProps} image={image} />);
 
         expect(component.toJSON()).toMatchSnapshot();
     });
