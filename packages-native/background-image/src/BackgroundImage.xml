@@ -10,6 +10,17 @@
                     <caption>Image</caption>
                     <description />
                 </property>
+                <property key="imageResizeMode" type="enumeration" defaultValue="cover">
+                    <caption>Image resize mode</caption>
+                    <description>Determines how to resize the image when the widget dimensions don't match the raw image dimensions</description>
+                    <enumerationValues>
+                        <enumerationValue key="cover">Cover</enumerationValue>
+                        <enumerationValue key="contain">Contain</enumerationValue>
+                        <enumerationValue key="stretch">Stretch</enumerationValue>
+                        <enumerationValue key="repeat">Repeat</enumerationValue>
+                        <enumerationValue key="center">Center</enumerationValue>
+                    </enumerationValues>
+                </property>
                 <property key="content" type="widgets" required="false">
                     <caption>Content</caption>
                     <description />

@@ -22,7 +22,8 @@ export function BackgroundImage(props: BackgroundImageProps<BackgroundImageStyle
                 style={[
                     StyleSheet.absoluteFill,
                     typeof image.value === "number" ? { width: undefined, height: undefined } : undefined,
-                    styles.image
+                    styles.image,
+                    { resizeMode: props.imageResizeMode }
                 ]}
             />
 

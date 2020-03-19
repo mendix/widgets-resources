@@ -25,6 +25,9 @@ exports[`BackgroundImage renders previous image when image is reloading 1`] = `
         },
         undefined,
         Object {},
+        Object {
+          "resizeMode": "cover",
+        },
       ]
     }
   />
@@ -55,6 +58,9 @@ exports[`BackgroundImage renders wihtout content 1`] = `
         },
         undefined,
         Object {},
+        Object {
+          "resizeMode": "cover",
+        },
       ]
     }
   />
@@ -89,6 +95,9 @@ exports[`BackgroundImage renders with custom styles 1`] = `
           "height": "100%",
           "width": "100%",
         },
+        Object {
+          "resizeMode": "cover",
+        },
       ]
     }
   />
@@ -119,6 +128,9 @@ exports[`BackgroundImage renders with default styles 1`] = `
         },
         undefined,
         Object {},
+        Object {
+          "resizeMode": "cover",
+        },
       ]
     }
   />

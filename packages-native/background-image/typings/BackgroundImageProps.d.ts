@@ -11,7 +11,10 @@ interface CommonProps<Style> {
     style: Style[];
 }
 
+export type ImageResizeModeEnum = "cover" | "contain" | "stretch" | "repeat" | "center";
+
 export interface BackgroundImageProps<Style> extends CommonProps<Style> {
     image: DynamicValue<NativeImage>;
+    imageResizeMode: ImageResizeModeEnum;
     content?: ReactNode;
 }
