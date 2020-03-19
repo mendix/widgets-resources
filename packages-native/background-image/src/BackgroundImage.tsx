@@ -34,6 +34,7 @@ export function BackgroundImage(props: BackgroundImageProps<BackgroundImageStyle
                     { opacity: imageOpacity, resizeMode: props.imageResizeMode },
                     styles.image
                 ]}
+                color={styles.image.svgColor}
             />
 
             {props.content}
