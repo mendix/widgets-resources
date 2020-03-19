@@ -4,8 +4,6 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import CameraRoll from "@react-native-community/cameraroll";
-
 /**
  * @param {MxObject} picture - This field is required.
  * @returns {Promise.<string>}
@@ -13,6 +11,8 @@ import CameraRoll from "@react-native-community/cameraroll";
 export async function SaveToPictureLibrary(picture?: mendix.lib.MxObject): Promise<string> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/cameraroll#savetocameraroll
+
+    const CameraRoll = require("@react-native-community/cameraroll") ?? require("react-native").CameraRoll;
 
     if (!picture) {
         return Promise.reject(new Error("Input parameter 'Picture' is required"));
