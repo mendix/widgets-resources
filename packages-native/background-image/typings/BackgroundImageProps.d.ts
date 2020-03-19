@@ -11,11 +11,11 @@ interface CommonProps<Style> {
     style: Style[];
 }
 
-export type ImageResizeModeEnum = "cover" | "contain" | "stretch" | "repeat" | "center";
+export type ResizeModeEnum = "cover" | "contain" | "stretch" | "repeat" | "center";
 
 export interface BackgroundImageProps<Style> extends CommonProps<Style> {
     image: DynamicValue<NativeImage>;
-    imageResizeMode: ImageResizeModeEnum;
-    imageOpacity: BigJs.Big;
+    resizeMode: ResizeModeEnum;
+    opacity: BigJs.Big;
     content?: ReactNode;
 }
