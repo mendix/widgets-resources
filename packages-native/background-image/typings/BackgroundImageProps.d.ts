@@ -16,5 +16,6 @@ export type ImageResizeModeEnum = "cover" | "contain" | "stretch" | "repeat" | "
 export interface BackgroundImageProps<Style> extends CommonProps<Style> {
     image: DynamicValue<NativeImage>;
     imageResizeMode: ImageResizeModeEnum;
+    imageOpacity: BigJs.Big;
     content?: ReactNode;
 }
