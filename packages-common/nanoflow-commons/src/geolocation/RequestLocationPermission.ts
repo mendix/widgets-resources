@@ -17,6 +17,10 @@ export async function RequestLocationPermission(): Promise<boolean> {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const RN: typeof ReactNative = require("react-native");
 
+        if (!navigator.geolocation) {
+            navigator.geolocation = require("@react-native-community/geolocation");
+        }
+
         if (RN.Platform.OS === "android") {
             const locationPermission = RN.PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION;
 
