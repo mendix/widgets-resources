@@ -61,11 +61,17 @@ describe("BackgroundImage", () => {
     });
 
     it("renders nothing when image is unavailable", () => {
+        const originalConsoleWarn = console.warn;
+        const consoleWarn = jest.spyOn(console, "warn");
+
         const image = dynamicValue<NativeImage>(false);
 
         const component = render(<BackgroundImage {...defaultProps} image={image} />);
 
+        expect(consoleWarn.mock.calls[0][0]).toBe('Background image "backgroundImageTest": image unavailable');
         expect(component.toJSON()).toMatchSnapshot();
+
+        console.warn = originalConsoleWarn;
     });
 
     it("renders wihtout content", () => {
@@ -74,5 +80,24 @@ describe("BackgroundImage", () => {
         const component = render(<BackgroundImage {...defaultProps} content={content} />);
 
         expect(component.toJSON()).toMatchSnapshot();
+    });
+
+    it("warns when image opacity is out of range", () => {
+        const originalConsoleWarn = console.warn;
+        const consoleWarn = jest.spyOn(console, "warn");
+        const negativeImageOpacity = new Big(-0.333);
+        const positiveImageOpacity = new Big(1.333);
+
+        render(<BackgroundImage {...defaultProps} imageOpacity={negativeImageOpacity} />);
+        render(<BackgroundImage {...defaultProps} imageOpacity={positiveImageOpacity} />);
+
+        expect(consoleWarn.mock.calls[0][0]).toBe(
+            'Background image "backgroundImageTest": image opacity property out of range'
+        );
+        expect(consoleWarn.mock.calls[1][0]).toBe(
+            'Background image "backgroundImageTest": image opacity property out of range'
+        );
+
+        console.warn = originalConsoleWarn;
     });
 });
