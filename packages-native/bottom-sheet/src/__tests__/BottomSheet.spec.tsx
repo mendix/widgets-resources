@@ -6,6 +6,10 @@ import { BottomSheetProps } from "../../typings/BottomSheetProps";
 import { BottomSheetStyle } from "../ui/Styles";
 import { Text } from "react-native";
 
+jest.mock("react-native-device-info", () => ({
+    getDeviceId: () => "iPhone10,6"
+}));
+
 jest.mock("Platform", () => ({
     OS: "ios",
     select: jest.fn(dict => dict.ios)
@@ -47,6 +51,7 @@ describe("Bottom sheet", () => {
     it("renders a custom bottom action sheet for ios (Basic modal) with custom style", () => {
         const style: BottomSheetStyle = {
             container: {},
+            modal: {},
             modalItems: {
                 defaultStyle: {
                     color: "red",
