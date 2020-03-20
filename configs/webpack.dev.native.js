@@ -4,6 +4,7 @@ const baseConfig = require("@mendix/pluggable-widgets-tools/configs/webpack.nati
 const customConfig = {
     // Custom configuration goes here
     externals: [
+        "@react-native-community/art",
         "@react-native-community/async-storage",
         "big.js",
         "react",

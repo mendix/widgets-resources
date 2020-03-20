@@ -5,6 +5,7 @@ const customConfig = {
     // Custom configuration goes here
     devtool: false,
     externals: [
+        "@react-native-community/art",
         "@react-native-community/async-storage",
         "big.js",
         "react",

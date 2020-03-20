@@ -7,7 +7,9 @@ module.exports = {
         "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js",
         "^.+\\.tsx?$": "ts-jest"
     },
-    transformIgnorePatterns: ["node_modules/(?!react-native|@ptomasroos/react-native-multi-slider)"],
+    transformIgnorePatterns: [
+        "node_modules/(?!react-native|@ptomasroos/react-native-multi-slider|@react-native-community)"
+    ],
     testMatch: [`${cwd}/src/**/*.spec.{ts,tsx}`],
     globals: {
         "ts-jest": {
