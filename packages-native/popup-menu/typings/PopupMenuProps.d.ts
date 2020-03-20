@@ -19,14 +19,14 @@ export type StyleClassEnum = "defaultStyle" | "primaryStyle" | "dangerStyle" | "
 
 export interface ItemsBasicType {
     itemType: ItemTypeEnum;
-    caption: string;
+    caption?: string;
     action?: ActionValue;
     styleClass: StyleClassEnum;
 }
 
 export interface ItemsComplexType {
-    name: string;
     content: ReactNode;
+    action?: ActionValue;
 }
 
 export type TypePopUpEnum = "ContextMenu" | "Popover";
