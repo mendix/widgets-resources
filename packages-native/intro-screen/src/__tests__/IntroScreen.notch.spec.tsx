@@ -37,6 +37,8 @@ describe("Intro Screen", () => {
             style: [],
             hideIndicatorLastSlide: false
         };
+
+        jest.useFakeTimers();
     });
 
     it("renders", () => {
