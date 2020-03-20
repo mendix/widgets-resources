@@ -33,7 +33,7 @@
                             <enumerationValue key="divider">Divider</enumerationValue>
                         </enumerationValues>
                     </property>
-                    <property key="caption" type="string">
+                    <property key="caption" type="string" required="false">
                         <caption>Caption</caption>
                         <category>General</category>
                         <description />
@@ -60,13 +60,13 @@
                 <caption>Items Complex</caption>
                 <description />
                 <properties>
-                    <property key="name" type="string">
-                        <caption>Name</caption>
+                    <property key="content" type="widgets">
+                        <caption>Content</caption>
                         <category>General</category>
                         <description />
                     </property>
-                    <property key="content" type="widgets">
-                        <caption>Content</caption>
+                    <property key="action" type="action" required="false">
+                        <caption>Action</caption>
                         <category>General</category>
                         <description />
                     </property>
