@@ -57,9 +57,7 @@ export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => 
     if (heightContent === 0) {
         return (
             <View style={{ position: "absolute", bottom: -maxHeight }}>
-                <View onLayout={onLayoutHandlerContent} style={props.styles.container}>
-                    {props.content}
-                </View>
+                <View onLayout={onLayoutHandlerContent}>{props.content}</View>
             </View>
         );
     }
@@ -72,22 +70,21 @@ export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => 
             onDismiss={onCloseHandler}
             onBackButtonPress={onCloseHandler}
             onBackdropPress={onCloseHandler}
+            style={{ margin: 0 }}
         >
-            <SafeAreaView style={{ flex: 1 }} pointerEvents="box-none">
-                <BottomSheet
-                    ref={bottomSheetRef}
-                    snapPoints={[heightContent, -50]}
-                    renderContent={() => (
-                        <View onLayout={onLayoutHandlerContent} style={props.styles.container}>
-                            {props.content}
-                        </View>
-                    )}
-                    enabledContentTapInteraction={false}
-                    enabledHeaderGestureInteraction={false}
-                    onOpenEnd={onOpenHandler}
-                    onCloseEnd={onCloseHandler}
-                />
-            </SafeAreaView>
+            <View style={[props.styles.container, { flex: 1 }]} pointerEvents="box-none">
+                <SafeAreaView style={{ flex: 1 }} pointerEvents="box-none">
+                    <BottomSheet
+                        ref={bottomSheetRef}
+                        snapPoints={[heightContent, -50]}
+                        renderContent={() => props.content}
+                        enabledContentTapInteraction={false}
+                        enabledHeaderGestureInteraction={false}
+                        onOpenEnd={onOpenHandler}
+                        onCloseEnd={onCloseHandler}
+                    />
+                </SafeAreaView>
+            </View>
         </Modal>
     );
 };
