@@ -1,9 +1,8 @@
-import { createElement, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from "react";
-import BottomSheet from "reanimated-bottom-sheet";
-import { Dimensions, LayoutChangeEvent, SafeAreaView, View } from "react-native";
-import Modal from "react-native-modal";
+import { createElement, ReactElement, ReactNode, useCallback } from "react";
+import { View } from "react-native";
+import Modal, { OnSwipeCompleteParams } from "react-native-modal";
 import { EditableValue, ValueStatus } from "mendix";
-import { BottomSheetStyle } from "../ui/Styles";
+import { BottomSheetStyle, defaultPaddings } from "../ui/Styles";
 
 interface CustomModalSheetProps {
     triggerAttribute?: EditableValue<boolean>;
@@ -12,36 +11,6 @@ interface CustomModalSheetProps {
 }
 
 export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => {
-    const bottomSheetRef = useRef<BottomSheet>(null);
-    const [heightContent, setHeightContent] = useState(0);
-    const maxHeight = Dimensions.get("screen").height - 200;
-
-    useEffect(() => {
-        if (
-            props.triggerAttribute &&
-            props.triggerAttribute.status === ValueStatus.Available &&
-            bottomSheetRef.current &&
-            heightContent > 0
-        ) {
-            if (props.triggerAttribute.value) {
-                bottomSheetRef.current.snapTo(0);
-            } else {
-                bottomSheetRef.current.snapTo(1);
-            }
-        }
-    }, [props.triggerAttribute, bottomSheetRef.current, heightContent]);
-
-    const onLayoutHandlerContent = (event: LayoutChangeEvent): void => {
-        const height = event.nativeEvent.layout.height;
-        if (height > 0) {
-            if (height <= maxHeight) {
-                setHeightContent(height);
-            } else {
-                setHeightContent(maxHeight);
-            }
-        }
-    };
-
     const onOpenHandler = useCallback(() => {
         if (props.triggerAttribute && props.triggerAttribute.status === ValueStatus.Available) {
             props.triggerAttribute.setValue(true);
@@ -54,14 +23,14 @@ export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => 
         }
     }, [props.triggerAttribute]);
 
-    if (heightContent === 0) {
-        return (
-            <View style={{ position: "absolute", bottom: -maxHeight }}>
-                <View onLayout={onLayoutHandlerContent}>{props.content}</View>
-            </View>
-        );
-    }
-
+    const onSwipeDown = useCallback(
+        (params: OnSwipeCompleteParams): void => {
+            if (params.swipingDirection === "down") {
+                onCloseHandler();
+            }
+        },
+        [props.triggerAttribute]
+    );
     return (
         <Modal
             isVisible={props.triggerAttribute?.value ?? false}
@@ -70,20 +39,12 @@ export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => 
             onDismiss={onCloseHandler}
             onBackButtonPress={onCloseHandler}
             onBackdropPress={onCloseHandler}
+            onModalShow={onOpenHandler}
+            onSwipeComplete={onSwipeDown}
             style={props.styles.modal}
         >
-            <View style={[props.styles.container, { flex: 1 }]} pointerEvents="box-none">
-                <SafeAreaView style={{ flex: 1 }} pointerEvents="box-none">
-                    <BottomSheet
-                        ref={bottomSheetRef}
-                        snapPoints={[heightContent, -50]}
-                        renderContent={() => props.content}
-                        enabledContentTapInteraction={false}
-                        enabledHeaderGestureInteraction={false}
-                        onOpenEnd={onOpenHandler}
-                        onCloseEnd={onCloseHandler}
-                    />
-                </SafeAreaView>
+            <View style={[props.styles.container, defaultPaddings]} pointerEvents="box-none">
+                {props.content}
             </View>
         </Modal>
     );
