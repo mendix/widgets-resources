@@ -57,7 +57,9 @@ export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => 
     if (heightContent === 0) {
         return (
             <View style={{ position: "absolute", bottom: -maxHeight }}>
-                <View onLayout={onLayoutHandlerContent}>{props.content}</View>
+                <View onLayout={onLayoutHandlerContent} style={props.styles.container}>
+                    {props.content}
+                </View>
             </View>
         );
     }
@@ -75,7 +77,11 @@ export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => 
                 <BottomSheet
                     ref={bottomSheetRef}
                     snapPoints={[heightContent, -50]}
-                    renderContent={() => <View onLayout={onLayoutHandlerContent}>{props.content}</View>}
+                    renderContent={() => (
+                        <View onLayout={onLayoutHandlerContent} style={props.styles.container}>
+                            {props.content}
+                        </View>
+                    )}
                     enabledContentTapInteraction={false}
                     enabledHeaderGestureInteraction={false}
                     onOpenEnd={onOpenHandler}
