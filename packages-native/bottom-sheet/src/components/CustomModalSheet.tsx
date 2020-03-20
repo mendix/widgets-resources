@@ -70,7 +70,7 @@ export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => 
             onDismiss={onCloseHandler}
             onBackButtonPress={onCloseHandler}
             onBackdropPress={onCloseHandler}
-            style={{ margin: 0 }}
+            style={props.styles.modal}
         >
             <View style={[props.styles.container, { flex: 1 }]} pointerEvents="box-none">
                 <SafeAreaView style={{ flex: 1 }} pointerEvents="box-none">
