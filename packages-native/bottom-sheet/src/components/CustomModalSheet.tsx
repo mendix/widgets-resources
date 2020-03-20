@@ -65,7 +65,7 @@ export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => 
     return (
         <Modal
             isVisible={props.triggerAttribute?.value ?? false}
-            coverScreen={false}
+            coverScreen
             backdropOpacity={0.5}
             onDismiss={onCloseHandler}
             onBackButtonPress={onCloseHandler}
