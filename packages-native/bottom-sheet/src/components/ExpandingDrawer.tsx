@@ -72,7 +72,7 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
             : [heightHeader];
 
     return (
-        <Modal isVisible={snapPoints.length > 1} coverScreen={false} hasBackdrop={false} style={{ margin: 0 }}>
+        <Modal isVisible={snapPoints.length > 1} coverScreen={false} hasBackdrop={false} style={props.styles.modal}>
             <View style={[props.styles.container, { flex: 1 }]} pointerEvents="box-none">
                 <SafeAreaView style={{ flex: 1 }} pointerEvents="box-none">
                     {snapPoints.length > 1 && (

@@ -10,11 +10,16 @@ export interface ModalItemsStyle {
 
 export interface BottomSheetStyle extends Style {
     container: ViewStyle;
+    modal: ViewStyle;
     modalItems: ModalItemsStyle;
 }
 
 export const defaultBottomDrawerStyle: BottomSheetStyle = {
     container: {},
+    modal: {
+        margin: 0,
+        justifyContent: "flex-end"
+    },
     modalItems: {
         defaultStyle: {
             fontSize: 16,
