@@ -5,9 +5,8 @@ import { fireEvent, render } from "react-native-testing-library";
 import { VideoProperties } from "react-native-video";
 
 import { Props, VideoPlayer } from "../VideoPlayer";
-import Video from "./__mocks__/Video";
 
-jest.mock("react-native-video", () => require.requireActual("./__mocks__/Video"));
+jest.mock("react-native-video", () => "Video");
 
 describe("VideoPlayer", () => {
     let defaultProps: Props;
@@ -33,7 +32,7 @@ describe("VideoPlayer", () => {
 
     it("passes the right props to the video player", () => {
         const component = render(<VideoPlayer {...defaultProps} />);
-        const props = component.getByType(Video).props as VideoProperties;
+        const props = component.getByTestId("video-player-test").props as VideoProperties;
 
         expect(props.source).toEqual({ uri: "https://mendix.com/video.mp4" });
         expect(props.paused).toBe(true);
@@ -46,26 +45,26 @@ describe("VideoPlayer", () => {
     it("hides the loading indicator after load", () => {
         const component = render(<VideoPlayer {...defaultProps} />);
 
-        fireEvent(component.getByType(Video), "load", { naturalSize: { width: 640, height: 360 } });
+        fireEvent(component.getByTestId("video-player-test"), "load", { naturalSize: { width: 640, height: 360 } });
 
         expect(component.toJSON()).toMatchSnapshot();
-        expect(component.getByType(Video).props.style).toEqual({ width: "100%", height: "100%" });
+        expect(component.getByTestId("video-player-test").props.style).toEqual({ width: "100%", height: "100%" });
     });
 
     it("shows the loading indicator if the source changes", () => {
         const component = render(<VideoPlayer {...defaultProps} />);
 
-        fireEvent(component.getByType(Video), "load", { naturalSize: { width: 640, height: 360 } });
-        fireEvent(component.getByType(Video), "loadStart");
+        fireEvent(component.getByTestId("video-player-test"), "load", { naturalSize: { width: 640, height: 360 } });
+        fireEvent(component.getByTestId("video-player-test"), "loadStart");
 
         expect(component.toJSON()).toMatchSnapshot();
-        expect(component.getByType(Video).props.style).toEqual({ height: 0 });
+        expect(component.getByTestId("video-player-test").props.style).toEqual({ height: 0 });
     });
 
     it("load a video and calculate the aspect ratio", () => {
         const component = render(<VideoPlayer {...defaultProps} aspectRatio />);
 
-        fireEvent(component.getByType(Video), "load", { naturalSize: { width: 1080, height: 554 } });
+        fireEvent(component.getByTestId("video-player-test"), "load", { naturalSize: { width: 1080, height: 554 } });
 
         expect(component.toJSON()).toMatchSnapshot();
         expect(component.getByType(View).props.style).toEqual({
@@ -79,7 +78,7 @@ describe("VideoPlayer", () => {
     it("renders an error", () => {
         const component = render(<VideoPlayer {...defaultProps} />);
 
-        fireEvent(component.getByType(Video), "error");
+        fireEvent(component.getByTestId("video-player-test"), "error");
 
         expect(component.getByType(Text).props.style).toEqual({ color: "white" });
         expect(component.getByType(Text).props.children).toEqual("The video failed to load :(");
