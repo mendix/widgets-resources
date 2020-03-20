@@ -40,7 +40,7 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
 
     const renderContent = useCallback((): ReactNode => {
         const content = (
-            <View onLayout={onLayoutHandlerContent} style={props.styles.container}>
+            <View onLayout={onLayoutHandlerContent}>
                 <View onLayout={onLayoutHandlerHeader} style={isSmallContentValid ? null : { height: 20 }}>
                     {props.smallContent}
                 </View>
@@ -72,20 +72,22 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
             : [heightHeader];
 
     return (
-        <Modal isVisible={snapPoints.length > 1} coverScreen={false} hasBackdrop={false}>
-            <SafeAreaView style={{ flex: 1 }} pointerEvents="box-none">
-                {snapPoints.length > 1 && (
-                    <BottomSheet
-                        enabledManualSnapping={false}
-                        enabledBottomInitialAnimation
-                        enabledContentTapInteraction={false}
-                        enabledHeaderGestureInteraction={false}
-                        snapPoints={snapPoints}
-                        initialSnap={snapPoints.length - 1}
-                        renderContent={renderContent}
-                    />
-                )}
-            </SafeAreaView>
+        <Modal isVisible={snapPoints.length > 1} coverScreen={false} hasBackdrop={false} style={{ margin: 0 }}>
+            <View style={[props.styles.container, { flex: 1 }]} pointerEvents="box-none">
+                <SafeAreaView style={{ flex: 1 }} pointerEvents="box-none">
+                    {snapPoints.length > 1 && (
+                        <BottomSheet
+                            enabledManualSnapping={false}
+                            enabledBottomInitialAnimation
+                            enabledContentTapInteraction={false}
+                            enabledHeaderGestureInteraction={false}
+                            snapPoints={snapPoints}
+                            initialSnap={snapPoints.length - 1}
+                            renderContent={renderContent}
+                        />
+                    )}
+                </SafeAreaView>
+            </View>
         </Modal>
     );
 };
