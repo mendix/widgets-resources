@@ -9,7 +9,7 @@ import { BackgroundImageProps } from "../typings/BackgroundImageProps";
 
 export function BackgroundImage(props: BackgroundImageProps<BackgroundImageStyle>): JSX.Element | null {
     const styles = flattenStyles(defaultBackgroundImageStyle, props.style);
-    const { image, resizeMode } = props;
+    const { image, name, resizeMode } = props;
     const opacity = Number(props.opacity.toFixed());
 
     if (opacity < 0 || opacity > 1) {
@@ -24,7 +24,7 @@ export function BackgroundImage(props: BackgroundImageProps<BackgroundImageStyle
     }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} testID={name}>
             <Image
                 source={image.value}
                 style={[
@@ -35,6 +35,7 @@ export function BackgroundImage(props: BackgroundImageProps<BackgroundImageStyle
                     styles.image
                 ]}
                 color={styles.image.svgColor}
+                testID={`${name}$image`}
             />
 
             {props.content}
