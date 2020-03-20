@@ -62,6 +62,20 @@ export function Pages() {
         },
         async openCarousel() {
             await clickOnButton("btnCarousel");
+        },
+        async openBackgroundImage(imagesPage?: "static" | "staticSvg" | "dynamic") {
+            await clickOnButton("btnBackgroundImage");
+            switch (imagesPage) {
+                case "static":
+                    await clickOnButton("btnStaticImages");
+                    break;
+                case "staticSvg":
+                    await clickOnButton("btnStaticSvgImages");
+                    break;
+                case "dynamic":
+                    await clickOnButton("btnDynamicImages");
+                    break;
+            }
         }
     };
 }

@@ -12,3 +12,4 @@ export * from "./ProgressCircle";
 export * from "./TabContainer";
 export * from "./VideoPlayer";
 export * from "./Carousel";
+export * from "./BackgroundImage";
