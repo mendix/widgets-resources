@@ -30,7 +30,7 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
     const onLayoutHandlerContent = (event: LayoutChangeEvent): void => {
         const height = event.nativeEvent.layout.height;
         if (height > 0) {
-            if (height + heightHeader <= maxHeight) {
+            if (height <= maxHeight) {
                 setHeightContent(height);
             } else if (!props.fullscreenContent) {
                 setHeightContent(maxHeight);
@@ -38,18 +38,12 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
         }
     };
 
-    const renderHeader = useCallback(
-        (): ReactNode => (
-            <View onLayout={onLayoutHandlerHeader} style={isSmallContentValid ? null : { height: 20 }}>
-                {props.smallContent}
-            </View>
-        ),
-        [props.smallContent]
-    );
-
     const renderContent = useCallback((): ReactNode => {
         const content = (
-            <View onLayout={onLayoutHandlerContent} key="large-content-container">
+            <View onLayout={onLayoutHandlerContent} style={props.styles.container}>
+                <View onLayout={onLayoutHandlerHeader} style={isSmallContentValid ? null : { height: 20 }}>
+                    {props.smallContent}
+                </View>
                 {props.largeContent}
             </View>
         );
@@ -62,24 +56,19 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
             );
         }
         return content;
-    }, [props.largeContent, props.fullscreenContent]);
+    }, [props.smallContent, props.largeContent, props.fullscreenContent]);
 
     if (heightHeader === 0 || (isLargeContentValid && heightContent === 0)) {
-        return (
-            <View style={{ position: "absolute", bottom: -maxHeight }}>
-                {renderHeader()}
-                {renderContent()}
-            </View>
-        );
+        return <View style={{ position: "absolute", bottom: -maxHeight }}>{renderContent()}</View>;
     }
 
     const snapPoints =
         props.fullscreenContent && heightContent
-            ? [maxHeight, heightContent + heightHeader, heightHeader]
+            ? [maxHeight, heightContent, heightHeader]
             : props.fullscreenContent
             ? [maxHeight, heightHeader]
             : isLargeContentValid
-            ? [heightContent + heightHeader, heightHeader]
+            ? [heightContent, heightHeader]
             : [heightHeader];
 
     return (
@@ -90,9 +79,9 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
                         enabledManualSnapping={false}
                         enabledBottomInitialAnimation
                         enabledContentTapInteraction={false}
+                        enabledHeaderGestureInteraction={false}
                         snapPoints={snapPoints}
                         initialSnap={snapPoints.length - 1}
-                        renderHeader={renderHeader}
                         renderContent={renderContent}
                     />
                 )}
