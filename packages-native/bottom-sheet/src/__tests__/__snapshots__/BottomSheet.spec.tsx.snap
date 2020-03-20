@@ -133,20 +133,15 @@ exports[`Bottom sheet renders a custom bottom action sheet for ios (Basic modal)
 `;
 
 exports[`Bottom sheet renders a custom modal 1`] = `
-<View
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  onLayout={[Function]}
   style={
     Object {
-      "bottom": -1134,
-      "position": "absolute",
+      "flex": 1,
     }
   }
->
-  <View
-    onLayout={[Function]}
-  >
-    <Text />
-  </View>
-</View>
+/>
 `;
 
 exports[`Bottom sheet renders a expanding 1`] = `
@@ -160,15 +155,15 @@ exports[`Bottom sheet renders a expanding 1`] = `
 >
   <View
     onLayout={[Function]}
-    style={null}
   >
-    <Text>
-      Header
-    </Text>
-  </View>
-  <View
-    onLayout={[Function]}
-  >
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text>
+        Header
+      </Text>
+    </View>
     <Text>
       Content
     </Text>
@@ -187,15 +182,15 @@ exports[`Bottom sheet renders a expanding fullscreen 1`] = `
 >
   <View
     onLayout={[Function]}
-    style={null}
   >
-    <Text>
-      Header
-    </Text>
-  </View>
-  <View
-    onLayout={[Function]}
-  >
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text>
+        Header
+      </Text>
+    </View>
     <Text>
       Content
     </Text>

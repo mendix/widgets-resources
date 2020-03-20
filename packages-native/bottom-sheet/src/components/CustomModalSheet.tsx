@@ -1,5 +1,5 @@
-import { createElement, ReactElement, ReactNode, useCallback } from "react";
-import { View } from "react-native";
+import { createElement, ReactElement, ReactNode, useCallback, useState, Fragment } from "react";
+import { LayoutChangeEvent, Platform, SafeAreaView, View } from "react-native";
 import Modal, { OnSwipeCompleteParams } from "react-native-modal";
 import { EditableValue, ValueStatus } from "mendix";
 import { BottomSheetStyle, defaultPaddings } from "../ui/Styles";
@@ -11,6 +11,8 @@ interface CustomModalSheetProps {
 }
 
 export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => {
+    const isAndroid = Platform.OS === "android";
+    const [height, setHeight] = useState(0);
     const onOpenHandler = useCallback(() => {
         if (props.triggerAttribute && props.triggerAttribute.status === ValueStatus.Available) {
             props.triggerAttribute.setValue(true);
@@ -31,21 +33,40 @@ export const CustomModalSheet = (props: CustomModalSheetProps): ReactElement => 
         },
         [props.triggerAttribute]
     );
+
+    const onSafeAreaHandler = (event: LayoutChangeEvent): void => {
+        const height = event.nativeEvent.layout.height;
+        if (height > 0) {
+            setHeight(height);
+        }
+    };
     return (
-        <Modal
-            isVisible={props.triggerAttribute?.value ?? false}
-            coverScreen
-            backdropOpacity={0.5}
-            onDismiss={onCloseHandler}
-            onBackButtonPress={onCloseHandler}
-            onBackdropPress={onCloseHandler}
-            onModalShow={onOpenHandler}
-            onSwipeComplete={onSwipeDown}
-            style={props.styles.modal}
-        >
-            <View style={[props.styles.container, defaultPaddings]} pointerEvents="box-none">
-                {props.content}
-            </View>
-        </Modal>
+        <Fragment>
+            {!isAndroid && height === 0 && <SafeAreaView style={{ flex: 1 }} onLayout={onSafeAreaHandler} />}
+            {(height > 0 || isAndroid) && (
+                <Modal
+                    isVisible={props.triggerAttribute?.value ?? false}
+                    coverScreen
+                    backdropOpacity={0.5}
+                    onDismiss={onCloseHandler}
+                    onBackButtonPress={onCloseHandler}
+                    onBackdropPress={onCloseHandler}
+                    onModalShow={onOpenHandler}
+                    onSwipeComplete={onSwipeDown}
+                    style={props.styles.modal}
+                >
+                    <View
+                        style={[
+                            props.styles.container,
+                            defaultPaddings,
+                            !isAndroid ? { maxHeight: height - Number(defaultPaddings.paddingBottom) } : {}
+                        ]}
+                        pointerEvents="box-none"
+                    >
+                        {props.content}
+                    </View>
+                </Modal>
+            )}
+        </Fragment>
     );
 };

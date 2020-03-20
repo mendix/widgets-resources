@@ -35,7 +35,7 @@ const isiPhoneModelWithNotch = (): boolean => {
     return false;
 };
 
-export const defaultPaddings = isiPhoneModelWithNotch() ? { paddingTop: 44, paddingBottom: 24 } : {};
+export const defaultPaddings = isiPhoneModelWithNotch() ? { paddingBottom: 24 } : {};
 
 export const defaultBottomDrawerStyle: BottomSheetStyle = {
     container: {},
