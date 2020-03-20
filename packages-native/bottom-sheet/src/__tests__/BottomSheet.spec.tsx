@@ -17,10 +17,6 @@ jest.mock("react-native/Libraries/Utilities/Platform", () => ({
 
 jest.mock("react-native-reanimated", () => jest.requireActual("react-native-reanimated/mock"));
 
-jest.mock("react-native-gesture-handler", () => {
-    jest.requireActual("react-native-gesture-handler/__mocks__/RNGestureHandlerModule");
-});
-
 const defaultProps: BottomSheetProps<BottomSheetStyle> = {
     name: "bottom-sheet-test",
     style: [],

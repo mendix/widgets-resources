@@ -7,33 +7,6 @@ import { ListViewSwipeStyle } from "../ui/styles";
 import { actionValue } from "@native-mobile-resources/util-widgets";
 import { RectButton } from "react-native-gesture-handler";
 
-jest.mock("NativeModules", () => ({
-    UIManager: {
-        RCTView: () => ({
-            directEventTypes: {}
-        })
-    },
-    KeyboardObserver: {},
-    RNGestureHandlerModule: {
-        attachGestureHandler: jest.fn(),
-        createGestureHandler: jest.fn(),
-        dropGestureHandler: jest.fn(),
-        updateGestureHandler: jest.fn(),
-        Direction: {
-            RIGHT: 1,
-            LEFT: 2,
-            UP: 4,
-            DOWN: 8
-        },
-        State: { BEGAN: "BEGAN", FAILED: "FAILED", ACTIVE: "ACTIVE", END: "END" }
-    },
-    PlatformConstants: {
-        forceTouchAvailable: false
-    }
-}));
-
-jest.mock("NativeAnimatedHelper");
-
 describe("List View Swipe", () => {
     let defaultProps: ListViewSwipeProps<ListViewSwipeStyle>;
 
