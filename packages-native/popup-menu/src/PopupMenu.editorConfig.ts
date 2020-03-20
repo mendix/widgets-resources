@@ -4,19 +4,13 @@ import { ItemsBasicType } from "../typings/PopupMenuProps";
 export function getProperties(values: any, defaultProperties: Properties): Properties {
     if (values.renderMode === "basic") {
         hideProperty<any>("itemsComplex", defaultProperties);
-        console.log("item type:", values);
-        console.log("properties", defaultProperties);
-        if (values.itemsBasic.length > 0) {
-            // TODO: This wont work because we want to hide the specific item's
-            // properties, which means extending hideProperty
-            values.itemsBasic.forEach((item: ItemsBasicType) => {
-                if (item.itemType === "divider") {
-                    hideProperty<any>("caption", defaultProperties);
-                    hideProperty<any>("action", defaultProperties);
-                    hideProperty<any>("styleClass", defaultProperties);
-                }
-            });
-        }
+        values.itemsBasic.forEach((item: ItemsBasicType, index: number) => {
+            if (item.itemType === "divider") {
+                hideProperty<any>("caption", defaultProperties?.[0].properties?.[2].properties?.[index]);
+                hideProperty<any>("action", defaultProperties?.[0].properties?.[2].properties?.[index]);
+                hideProperty<any>("styleClass", defaultProperties?.[0].properties?.[2].properties?.[index]);
+            }
+        });
     } else {
         hideProperty<any>("itemsBasic", defaultProperties);
     }
