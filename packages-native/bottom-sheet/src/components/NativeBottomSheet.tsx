@@ -1,9 +1,9 @@
-import { createElement, ReactElement, useCallback, useEffect, useRef } from "react";
+import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import ActionSheet, { ActionSheetCustom } from "react-native-actionsheet";
-import { Platform, SafeAreaView, Text } from "react-native";
+import { Platform, Text } from "react-native";
 import { EditableValue, ValueStatus } from "mendix";
 import { ItemsBasicType } from "../../typings/BottomSheetProps";
-import { BottomSheetStyle } from "../ui/Styles";
+import { BottomSheetStyle, defaultPaddings } from "../ui/Styles";
 
 interface NativeBottomSheetProps {
     name: string;
@@ -15,6 +15,7 @@ interface NativeBottomSheetProps {
 
 export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement => {
     const bottomSheetRef = useRef<ActionSheet>(null);
+    const [currentStatus, setCurrentStatus] = useState(false);
 
     useEffect(() => {
         if (
@@ -22,11 +23,12 @@ export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement =
             props.triggerAttribute.status === ValueStatus.Available &&
             bottomSheetRef.current
         ) {
-            if (props.triggerAttribute.value) {
+            if (props.triggerAttribute.value && !currentStatus) {
                 bottomSheetRef.current.show();
+                setCurrentStatus(true);
             }
         }
-    }, [props.triggerAttribute, bottomSheetRef.current]);
+    }, [props.triggerAttribute, bottomSheetRef.current, currentStatus]);
 
     const actionHandler = useCallback(
         (index: number) => {
@@ -34,11 +36,12 @@ export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement =
             if (action && action.canExecute) {
                 action.execute();
             }
-            if (props.triggerAttribute && !props.triggerAttribute.readOnly) {
+            if (props.triggerAttribute && !props.triggerAttribute.readOnly && currentStatus) {
                 props.triggerAttribute.setValue(false);
+                setCurrentStatus(false);
             }
         },
-        [props.itemsBasic, props.triggerAttribute]
+        [props.itemsBasic, props.triggerAttribute, currentStatus]
     );
 
     if (Platform.OS === "android" || !props.useNative) {
@@ -48,9 +51,12 @@ export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement =
             </Text>
         ));
         return (
-            <SafeAreaView>
-                <ActionSheetCustom ref={bottomSheetRef} options={options} onPress={actionHandler} />
-            </SafeAreaView>
+            <ActionSheetCustom
+                ref={bottomSheetRef}
+                options={options}
+                onPress={actionHandler}
+                styles={{ wrapper: defaultPaddings }}
+            />
         );
     }
     const options = props.itemsBasic.map(item => item.caption);
