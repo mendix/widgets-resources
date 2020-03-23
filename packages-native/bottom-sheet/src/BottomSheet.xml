@@ -46,7 +46,7 @@
                         <property key="styleClass" type="enumeration" defaultValue="defaultStyle">
                             <caption>Style</caption>
                             <category>General</category>
-                            <description />
+                            <description>Styles are not supported on iOS when Native iOS variant is selected.</description>
                             <enumerationValues>
                                 <enumerationValue key="defaultStyle">Default</enumerationValue>
                                 <enumerationValue key="primaryStyle">Primary</enumerationValue>
