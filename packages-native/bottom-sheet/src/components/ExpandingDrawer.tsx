@@ -1,8 +1,7 @@
 import { BottomSheetStyle } from "../ui/Styles";
-import { createElement, ReactNode, useCallback, useState, Fragment, ReactElement, Children } from "react";
+import { createElement, ReactNode, useCallback, useState, ReactElement, Children } from "react";
 import BottomSheet from "reanimated-bottom-sheet";
-import { Dimensions, LayoutChangeEvent, SafeAreaView, View } from "react-native";
-import Modal from "react-native-modal";
+import { Dimensions, LayoutChangeEvent, View } from "react-native";
 
 interface ExpandingDrawerProps {
     smallContent?: ReactNode;
@@ -40,7 +39,7 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
 
     const renderContent = useCallback((): ReactNode => {
         const content = (
-            <View onLayout={onLayoutHandlerContent}>
+            <View onLayout={onLayoutHandlerContent} style={!props.fullscreenContent ? props.styles.container : {}}>
                 <View onLayout={onLayoutHandlerHeader} style={isSmallContentValid ? null : { height: 20 }}>
                     {props.smallContent}
                 </View>
@@ -49,10 +48,10 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
         );
         if (props.fullscreenContent) {
             return (
-                <Fragment>
+                <View style={props.styles.container}>
                     {content}
                     {props.fullscreenContent}
-                </Fragment>
+                </View>
             );
         }
         return content;
@@ -72,22 +71,18 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
             : [heightHeader];
 
     return (
-        <Modal isVisible={snapPoints.length > 1} coverScreen={false} hasBackdrop={false} style={props.styles.modal}>
-            <View style={[props.styles.container, { flex: 1 }]} pointerEvents="box-none">
-                <SafeAreaView style={{ flex: 1 }} pointerEvents="box-none">
-                    {snapPoints.length > 1 && (
-                        <BottomSheet
-                            enabledManualSnapping={false}
-                            enabledBottomInitialAnimation
-                            enabledContentTapInteraction={false}
-                            enabledHeaderGestureInteraction={false}
-                            snapPoints={snapPoints}
-                            initialSnap={snapPoints.length - 1}
-                            renderContent={renderContent}
-                        />
-                    )}
-                </SafeAreaView>
-            </View>
-        </Modal>
+        <View style={{ flex: 1 }} pointerEvents="box-none">
+            {snapPoints.length > 1 && (
+                <BottomSheet
+                    enabledManualSnapping={false}
+                    enabledBottomInitialAnimation
+                    enabledContentTapInteraction={false}
+                    enabledHeaderGestureInteraction={false}
+                    snapPoints={snapPoints}
+                    initialSnap={snapPoints.length - 1}
+                    renderContent={renderContent}
+                />
+            )}
+        </View>
     );
 };

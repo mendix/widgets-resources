@@ -97,4 +97,27 @@ describe("Bottom sheet", () => {
 
         expect(component.toJSON()).toMatchSnapshot();
     });
+
+    it("renders a expanding fullscreen with custom styles", () => {
+        const style: BottomSheetStyle = {
+            container: {
+                backgroundColor: "blue"
+            },
+            modal: {},
+            modalItems: {}
+        };
+        const component = render(
+            <BottomSheet
+                {...defaultProps}
+                type="expanding"
+                smallContent={<Text>Header</Text>}
+                largeContent={<Text>Content</Text>}
+                showFullscreenContent
+                fullscreenContent={<Text>Full screen content</Text>}
+                style={[style]}
+            />
+        );
+
+        expect(component.toJSON()).toMatchSnapshot();
+    });
 });
