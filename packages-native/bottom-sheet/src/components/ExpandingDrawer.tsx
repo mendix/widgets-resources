@@ -1,7 +1,7 @@
 import { BottomSheetStyle } from "../ui/Styles";
 import { createElement, ReactNode, useCallback, useState, ReactElement, Children } from "react";
 import BottomSheet from "reanimated-bottom-sheet";
-import { Dimensions, LayoutChangeEvent, View } from "react-native";
+import { Dimensions, LayoutChangeEvent, SafeAreaView, StyleSheet, View } from "react-native";
 
 interface ExpandingDrawerProps {
     smallContent?: ReactNode;
@@ -13,15 +13,17 @@ interface ExpandingDrawerProps {
 export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
     const [heightContent, setHeightContent] = useState(0);
     const [heightHeader, setHeightHeader] = useState(0);
-    const maxHeight = Dimensions.get("screen").height - 200;
+    const [fullscreenHeight, setFullscreenHeight] = useState(0);
+    const maxHeight = Dimensions.get("screen").height;
     const isSmallContentValid = Children.count(props.smallContent) > 0;
     const isLargeContentValid = Children.count(props.largeContent) > 0;
+    const defaultMarginTop = 50;
 
     const onLayoutHandlerHeader = (event: LayoutChangeEvent): void => {
         const height = event.nativeEvent.layout.height;
         if (height > 0) {
             if (height <= maxHeight) {
-                setHeightHeader(height);
+                setHeightHeader(height + defaultMarginTop);
             }
         }
     };
@@ -30,17 +32,37 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
         const height = event.nativeEvent.layout.height;
         if (height > 0) {
             if (height <= maxHeight) {
-                setHeightContent(height);
+                console.warn("Setting size to " + height);
+                setHeightContent(height + defaultMarginTop);
             } else if (!props.fullscreenContent) {
                 setHeightContent(maxHeight);
             }
         }
     };
 
+    const onLayoutFullscreenHandler = (event: LayoutChangeEvent): void => {
+        const height = event.nativeEvent.layout.height;
+        if (height > 0) {
+            setFullscreenHeight(height + defaultMarginTop);
+        }
+    };
+
     const renderContent = useCallback((): ReactNode => {
+        const containerStyles = {
+            ...props.styles.container,
+            marginTop: defaultMarginTop
+        };
         const content = (
-            <View onLayout={onLayoutHandlerContent} style={!props.fullscreenContent ? props.styles.container : {}}>
-                <View onLayout={onLayoutHandlerHeader} style={isSmallContentValid ? null : { height: 20 }}>
+            <View
+                onLayout={onLayoutHandlerContent}
+                style={!props.fullscreenContent ? containerStyles : {}}
+                pointerEvents="box-none"
+            >
+                <View
+                    onLayout={onLayoutHandlerHeader}
+                    style={!isSmallContentValid ? { height: 20 } : {}}
+                    pointerEvents="box-none"
+                >
                     {props.smallContent}
                 </View>
                 {props.largeContent}
@@ -48,7 +70,7 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
         );
         if (props.fullscreenContent) {
             return (
-                <View style={props.styles.container}>
+                <View style={containerStyles} pointerEvents="box-none">
                     {content}
                     {props.fullscreenContent}
                 </View>
@@ -57,18 +79,28 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
         return content;
     }, [props.smallContent, props.largeContent, props.fullscreenContent]);
 
+    if (props.fullscreenContent && fullscreenHeight === 0) {
+        return (
+            <View style={{ ...StyleSheet.absoluteFillObject, opacity: 0 }}>
+                <SafeAreaView style={{ flex: 1 }} onLayout={onLayoutFullscreenHandler} />
+            </View>
+        );
+    }
+
     if (heightHeader === 0 || (isLargeContentValid && heightContent === 0)) {
         return <View style={{ position: "absolute", bottom: -maxHeight }}>{renderContent()}</View>;
     }
 
     const snapPoints =
         props.fullscreenContent && heightContent
-            ? [maxHeight, heightContent, heightHeader]
+            ? [fullscreenHeight, heightContent, heightHeader]
             : props.fullscreenContent
-            ? [maxHeight, heightHeader]
+            ? [fullscreenHeight, heightHeader]
             : isLargeContentValid
             ? [heightContent, heightHeader]
             : [heightHeader];
+
+    console.warn(snapPoints);
 
     return (
         <View style={{ flex: 1 }} pointerEvents="box-none">
@@ -81,6 +113,7 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
                     snapPoints={snapPoints}
                     initialSnap={snapPoints.length - 1}
                     renderContent={renderContent}
+                    enabledInnerScrolling={false}
                 />
             )}
         </View>

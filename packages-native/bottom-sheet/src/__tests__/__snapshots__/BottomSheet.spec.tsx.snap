@@ -132,33 +132,52 @@ exports[`Bottom sheet renders a custom bottom action sheet for ios (Basic modal)
 `;
 
 exports[`Bottom sheet renders a custom modal 1`] = `
-<RCTSafeAreaView
-  emulateUnlessSupported={true}
-  onLayout={[Function]}
+<View
   style={
     Object {
-      "flex": 1,
+      "bottom": 0,
+      "left": 0,
+      "opacity": 0,
+      "position": "absolute",
+      "right": 0,
+      "top": 0,
     }
   }
-/>
+>
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    onLayout={[Function]}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  />
+</View>
 `;
 
 exports[`Bottom sheet renders a expanding 1`] = `
 <View
   style={
     Object {
-      "bottom": -1134,
+      "bottom": -1334,
       "position": "absolute",
     }
   }
 >
   <View
     onLayout={[Function]}
-    style={Object {}}
+    pointerEvents="box-none"
+    style={
+      Object {
+        "marginTop": 50,
+      }
+    }
   >
     <View
       onLayout={[Function]}
-      style={null}
+      pointerEvents="box-none"
+      style={Object {}}
     >
       <Text>
         Header
@@ -175,34 +194,24 @@ exports[`Bottom sheet renders a expanding fullscreen 1`] = `
 <View
   style={
     Object {
-      "bottom": -1134,
+      "bottom": 0,
+      "left": 0,
+      "opacity": 0,
       "position": "absolute",
+      "right": 0,
+      "top": 0,
     }
   }
 >
-  <View
-    style={Object {}}
-  >
-    <View
-      onLayout={[Function]}
-      style={Object {}}
-    >
-      <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <Text>
-          Header
-        </Text>
-      </View>
-      <Text>
-        Content
-      </Text>
-    </View>
-    <Text>
-      Full screen content
-    </Text>
-  </View>
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    onLayout={[Function]}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  />
 </View>
 `;
 
@@ -210,38 +219,24 @@ exports[`Bottom sheet renders a expanding fullscreen with custom styles 1`] = `
 <View
   style={
     Object {
-      "bottom": -1134,
+      "bottom": 0,
+      "left": 0,
+      "opacity": 0,
       "position": "absolute",
+      "right": 0,
+      "top": 0,
     }
   }
 >
-  <View
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    onLayout={[Function]}
     style={
       Object {
-        "backgroundColor": "blue",
+        "flex": 1,
       }
     }
-  >
-    <View
-      onLayout={[Function]}
-      style={Object {}}
-    >
-      <View
-        onLayout={[Function]}
-        style={null}
-      >
-        <Text>
-          Header
-        </Text>
-      </View>
-      <Text>
-        Content
-      </Text>
-    </View>
-    <Text>
-      Full screen content
-    </Text>
-  </View>
+  />
 </View>
 `;
 
