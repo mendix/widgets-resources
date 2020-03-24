@@ -69,7 +69,7 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
         );
         if (props.fullscreenContent) {
             return (
-                <View style={containerStyles} pointerEvents="box-none">
+                <View style={[containerStyles, { height: "100%" }]} pointerEvents="box-none">
                     {content}
                     {props.fullscreenContent}
                 </View>
