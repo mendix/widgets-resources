@@ -32,7 +32,6 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
         const height = event.nativeEvent.layout.height;
         if (height > 0) {
             if (height <= maxHeight) {
-                console.warn("Setting size to " + height);
                 setHeightContent(height + defaultMarginTop);
             } else if (!props.fullscreenContent) {
                 setHeightContent(maxHeight);
