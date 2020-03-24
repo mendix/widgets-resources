@@ -99,8 +99,6 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
             ? [heightContent, heightHeader]
             : [heightHeader];
 
-    console.warn(snapPoints);
-
     return (
         <View style={{ flex: 1 }} pointerEvents="box-none">
             {snapPoints.length > 1 && (
