@@ -168,11 +168,7 @@ exports[`Bottom sheet renders a expanding 1`] = `
   <View
     onLayout={[Function]}
     pointerEvents="box-none"
-    style={
-      Object {
-        "marginTop": 50,
-      }
-    }
+    style={Object {}}
   >
     <View
       onLayout={[Function]}
