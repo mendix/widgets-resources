@@ -1,103 +1,84 @@
-# Background image widget [template]
+# Background image widget
 
-Displays swipeable contents with buttons to proceed or go back and pagination.
+The background image widget allows to layer other widgets on top of an image.
 
-## Available patterns
+## Usage
 
-### Pagination above
+Place the background image widget onto a page or inside another widget and fill it with other widgets that should layer on top of an image. Configure the widget by selecting the static or dynamic image that should be used as a background image, setting the opacity and preferred resize mode.
 
-![Above](./assets/above.gif)
+### Properties
 
-### Pagination between
+#### Content
 
-![Between](./assets/between.gif)
+The widgets to be layered on top of the background image.
 
-## Using Custom styles
+#### Image
 
-![Between](./assets/custom_styles.gif)
+The static or dynamic image to be used as the background.
 
-You can define your styles through Atlas using the following properties:
+#### Resize mode
 
-```$js
-export const myCustomStyle = {
-    fullscreenContainer: ViewStyle;
-    popupContainer: ViewStyle;
-    paginationContainer: ViewStyle;
-    paginationText: TextStyle;
-    dotStyle: ViewStyle;
-    activeDotStyle: ViewStyle;
-    paginationAbove: {
-        buttonsContainer: ViewStyle;
-        buttonSkip: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
-        buttonDone: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
-        buttonPrevious: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
-        buttonNext: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
-    };
-    paginationBetween: {
-        buttonSkip: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
-        buttonDone: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
-        buttonPrevious: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
-        buttonNext: {
-            container: ViewStyle;
-            caption: TextStyle;
-            icon: {
-                color: string;
-                size?: number;
-            };
-        }
-    };
+The resize mode determines how to resize the image when the widget dimensions don't match the raw image dimensions. The following modes are supported:
+
+-   Cover: Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width and height) of the image will be equal to or larger than the corresponding dimension of the widget (minus inner spacing).
+
+-   Contain: Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width and height) of the image will be equal to or less than the corresponding dimension of the widget (minus inner spacing).
+
+-   Stretch: Scale both dimensions (width and height) of the image independently, which may change the image's aspect ratio.
+
+-   Repeat: Repeat the image to cover the widget. The image will keep its size and aspect ratio, unless it is larger than the widget, in which case it will be scaled down uniformly so that it is contained in the widget.
+
+-   Center: Center the image in the widget along both dimensions. If the image is larger than the widget, scale it down uniformly so that it is contained in the widget.
+
+Important notes:
+
+-   The resize mode for an SVG image is always stretch.
+-   The resize mode repeat is only supported on iOS.
+
+#### Opacity
+
+The opacity determines the transparency of the background image. The property takes a value from 0.0 - 1.0. The lower the value, the more transparent the background image.
+
+### Custom styling
+
+The style of the safe area is fully customizable. Apply custom styles by defining custom style classes through Atlas.
+These classes should adhere to the following interface:
+
+```ts
+interface customImageStyle extends ImageStyle {
+    svgColor?: string;
+}
+
+interface BackgroundImageStyle extends Style {
+    container: ViewStyle;
+    image: customImageStyle;
 }
 ```
 
-Check the official documentation for further information about ViewStyle and TextStyle
-`https://facebook.github.io/react-native/docs/view-style-props` and
-`https://facebook.github.io/react-native/docs/text-style-props`
+An example of a default custom style class:
+
+```js
+export const com_mendix_widget_native_backgroundimage_BackgroundImage = {
+    container: {
+        flex: 1
+    },
+    image: {
+        borderRadius: 5,
+        svgColor: "blue"
+    }
+};
+```
+
+An example of a custom style class:
+
+```js
+export const customBackgroundImage = {
+    image: {
+        resizeMode: "center",
+        opacity: 0.8,
+        svgColor: "orange"
+    }
+};
+```
+
+Check the official React Native documentation for further information about [ViewStyle](https://reactnative.dev/docs/view-style-props) & [ImageStyle](https://reactnative.dev/docs/image-style-props).

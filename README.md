@@ -11,12 +11,16 @@ A bundle of R&D Platform supported widgets & nanoflow actions for building nativ
 | Widget                     | Description                                                     |
 | :------------------------- | :-------------------------------------------------------------- |
 | [Activity indicator][]     | Display a circular loading indicator.                           |
+| [Animation][]              | Provides default animations for contents and widgets.           |
 | [App events][]             | Trigger actions based on load, network status and timer events. |
+| [Background image][]       | Layer other widgets on top of an image.                         |
 | [Badge][]                  | Display text or a value as a badge.                             |
 | [Barcode scanner][]        | Scan barcode and QR code values.                                |
 | [Color Picker][]           | Allows the user to select colors                                |
 | [Feedback][]               | Allow users to submit feedback directly into the app project.   |
 | [Floating action button][] | Display a circular floating icon button.                        |
+| [Intro screen][]           | Show swipeable containers to show contents as intros            |
+| [List view swipe][]        | Show controls on swipe for an interactive list view.            |
 | [Maps][]                   | Show locations on an interactive map.                           |
 | [Notifications][]          | Trigger actions based on incoming notifications.                |
 | [Progress bar][]           | Display progress in a horizontal bar.                           |
@@ -24,14 +28,11 @@ A bundle of R&D Platform supported widgets & nanoflow actions for building nativ
 | [QR code][]                | Display a QR code based on a value.                             |
 | [Range slider][]           | Change a range of values using a slider.                        |
 | [Rating][]                 | Give a rating by selecting stars.                               |
+| [Safe area view][]         | Prevent content being rendered in unsafe areas (iOS only).      |
 | [Slider][]                 | Change a numeric value using a slider.                          |
 | [Toggle buttons][]         | Change an enumeration value using a group of buttons.           |
 | [Video player][]           | Play a video loaded from a URL.                                 |
 | [Web view][]               | Display an external web page or load custom HTML.               |
-| [Animation][]              | Provides default animations for contents and widgets.           |
-| [List view swipe][]        | Show controls on swipe for an interactive list view.            |
-| [Intro screen][]           | Show swipeable containers to show contents as intros            |
-| [Safe area view][]         | Prevent content being rendered in unsafe areas (iOS only).      |
 
 ## Web & Hybrid widgets
 
@@ -48,6 +49,7 @@ A bundle of R&D Platform supported widgets & nanoflow actions for building nativ
 
 [activity indicator]: https://github.com/mendix/widgets-resources/blob/master/packages-native/activity-indicator
 [app events]: https://github.com/mendix/widgets-resources/blob/master/packages-native/app-events
+[background image]: https://github.com/mendix/widgets-resources/blob/master/packages-native/background-image
 [badge]: https://github.com/mendix/widgets-resources/blob/master/packages-native/badge
 [barcode scanner]: https://github.com/mendix/widgets-resources/blob/master/packages-native/barcode-scanner
 [color picker]: https://github.com/mendix/widgets-resources/blob/master/packages-native/color-picker
