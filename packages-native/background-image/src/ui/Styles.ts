@@ -1,13 +1,13 @@
 import { ViewStyle, ImageStyle } from "react-native";
 import { Style } from "@native-mobile-resources/util-widgets";
 
-interface customImageStyle extends ImageStyle {
+interface CustomImageStyle extends ImageStyle {
     svgColor?: string;
 }
 
 export interface BackgroundImageStyle extends Style {
     container: ViewStyle;
-    image: customImageStyle;
+    image: CustomImageStyle;
 }
 
 export const defaultBackgroundImageStyle: BackgroundImageStyle = {
