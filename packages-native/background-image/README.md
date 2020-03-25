@@ -45,13 +45,13 @@ The style of the safe area is fully customizable. Apply custom styles by definin
 These classes should adhere to the following interface:
 
 ```ts
-interface customImageStyle extends ImageStyle {
+interface CustomImageStyle extends ImageStyle {
     svgColor?: string;
 }
 
-interface BackgroundImageStyle extends Style {
+interface BackgroundImageStyle {
     container: ViewStyle;
-    image: customImageStyle;
+    image: CustomImageStyle;
 }
 ```
 
