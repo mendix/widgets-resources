@@ -15,7 +15,7 @@ interface NativeBottomSheetProps {
 
 export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement => {
     const bottomSheetRef = useRef<ActionSheet>(null);
-    const [currentStatus, setCurrentStatus] = useState(false);
+    const [currentStatus, setCurrentStatus] = useState<boolean>(false);
 
     useEffect(() => {
         if (
@@ -24,8 +24,8 @@ export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement =
             bottomSheetRef.current
         ) {
             if (props.triggerAttribute.value && !currentStatus) {
-                bottomSheetRef.current.show();
                 setCurrentStatus(true);
+                bottomSheetRef.current.show();
             }
         }
     }, [props.triggerAttribute, bottomSheetRef.current, currentStatus]);
@@ -36,7 +36,7 @@ export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement =
             if (action && action.canExecute) {
                 action.execute();
             }
-            if (props.triggerAttribute && !props.triggerAttribute.readOnly && currentStatus) {
+            if (props.triggerAttribute && !props.triggerAttribute.readOnly) {
                 props.triggerAttribute.setValue(false);
                 setCurrentStatus(false);
             }
