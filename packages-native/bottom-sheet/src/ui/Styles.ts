@@ -11,6 +11,7 @@ export interface ModalItemsStyle {
 
 export interface BottomSheetStyle extends Style {
     container: ViewStyle;
+    containerWhenExpandedFullscreen: ViewStyle;
     modal: ViewStyle;
     modalItems: ModalItemsStyle;
 }
@@ -39,6 +40,7 @@ export const defaultPaddings = { paddingBottom: isiPhoneModelWithNotch() ? 24 : 
 
 export const defaultBottomDrawerStyle: BottomSheetStyle = {
     container: {},
+    containerWhenExpandedFullscreen: {},
     modal: {
         margin: 0,
         justifyContent: "flex-end"

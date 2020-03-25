@@ -51,6 +51,7 @@ describe("Bottom sheet", () => {
     it("renders a custom bottom action sheet for ios (Basic modal) with custom style", () => {
         const style: BottomSheetStyle = {
             container: {},
+            containerWhenExpandedFullscreen: {},
             modal: {},
             modalItems: {
                 defaultStyle: {
@@ -103,6 +104,7 @@ describe("Bottom sheet", () => {
             container: {
                 backgroundColor: "blue"
             },
+            containerWhenExpandedFullscreen: {},
             modal: {},
             modalItems: {}
         };
