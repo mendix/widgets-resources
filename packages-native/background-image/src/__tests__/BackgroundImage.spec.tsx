@@ -60,7 +60,7 @@ describe("BackgroundImage", () => {
         expect(component.toJSON()).toMatchSnapshot();
     });
 
-    it("renders nothing when image is unavailable", () => {
+    it("renders content only when image is unavailable", () => {
         const originalConsoleWarn = console.warn;
         const consoleWarn = jest.spyOn(console, "warn");
 
