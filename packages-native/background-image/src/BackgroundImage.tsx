@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, NativeModules } from "react-native";
 import { ValueStatus } from "mendix";
 import { Image } from "mendix/components/native/Image";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
@@ -16,9 +16,16 @@ export function BackgroundImage(props: BackgroundImageProps<BackgroundImageStyle
         console.warn(`Background image "${props.name}": image opacity property out of range`);
     }
 
+    if (
+        typeof image.value !== "string" &&
+        (styles.image.resizeMode === "repeat" || resizeMode === "repeat") &&
+        NativeModules.FastImageView !== null
+    ) {
+        throw Error(`Background image "${props.name}": resize mode "repeat" is not supported on this platform`);
+    }
+
     if (image.status === ValueStatus.Unavailable) {
         console.warn(`Background image "${props.name}": image unavailable`);
-        return null;
     } else if (image.status === ValueStatus.Loading && !image.value) {
         return null;
     }
