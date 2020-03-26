@@ -9,11 +9,6 @@ interface Window {
     open(url?: string, target?: string, features?: string, replace?: boolean): Window | null;
     alert(message?: any): void;
     confirm(message?: string): boolean;
-    mx: mx & {
-        ui: mx.ui & {
-            toggleSidebar: () => void;
-        };
-    };
 }
 
 interface Location {
