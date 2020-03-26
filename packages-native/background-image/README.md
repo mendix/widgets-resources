@@ -26,8 +26,6 @@ The resize mode determines how to resize the image when the widget dimensions do
 
 -   Stretch: Scale both dimensions (width and height) of the image independently, which may change the image's aspect ratio.
 
--   Repeat: Repeat the image to cover the widget. The image will keep its size and aspect ratio, unless it is larger than the widget, in which case it will be scaled down uniformly so that it is contained in the widget.
-
 -   Center: Center the image in the widget along both dimensions. If the image is larger than the widget, scale it down uniformly so that it is contained in the widget.
 
 Important notes:
