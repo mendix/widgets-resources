@@ -18,16 +18,20 @@ export const com_mendix_widget_native_bottomsheet_BottomSheet = {
     container: {
         // All ViewStyle properties are allowed
         backgroundColor: background.primary,
-        flex: 1,
         borderRadius: border.radius,
-        elevation: 1.5,
+        elevation: 20,
         shadowColor: "#000",
-        shadowOpacity: 0.3,
+        shadowOpacity: 0.1,
         shadowRadius: 6,
         shadowOffset: {
             width: 0,
             height: -4,
         },
+    },
+    containerWhenExpandedFullscreen: {
+        height: "100%",
+        alignSelf: "stretch",
+        backgroundColor: background.primary,
     },
 };
 
