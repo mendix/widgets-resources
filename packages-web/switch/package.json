@@ -1,7 +1,7 @@
 {
   "name": "switch",
   "widgetName": "Switch",
-  "version": "2.1.3",
+  "version": "2.1.2",
   "description": "Toggle a boolean attribute",
   "copyright": "Mendix BV",
   "repository": {
