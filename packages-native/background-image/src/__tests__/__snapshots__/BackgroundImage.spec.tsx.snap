@@ -151,3 +151,75 @@ exports[`BackgroundImage renders without content 1`] = `
   />
 </View>
 `;
+
+exports[`BackgroundImage use correct opacity when image opacity is out of range 1`] = `
+<View
+  style={Object {}}
+  testID="backgroundImageTest"
+>
+  <Image
+    source={
+      Object {
+        "uri": "path/to/image",
+      }
+    }
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        undefined,
+        Object {},
+        Object {
+          "opacity": 0,
+          "resizeMode": "cover",
+        },
+      ]
+    }
+    testID="backgroundImageTest$image"
+  />
+  <Text>
+    Content
+  </Text>
+</View>
+`;
+
+exports[`BackgroundImage use correct opacity when image opacity is out of range 2`] = `
+<View
+  style={Object {}}
+  testID="backgroundImageTest"
+>
+  <Image
+    source={
+      Object {
+        "uri": "path/to/image",
+      }
+    }
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        undefined,
+        Object {},
+        Object {
+          "opacity": 1,
+          "resizeMode": "cover",
+        },
+      ]
+    }
+    testID="backgroundImageTest$image"
+  />
+  <Text>
+    Content
+  </Text>
+</View>
+`;
