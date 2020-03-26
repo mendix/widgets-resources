@@ -11,7 +11,7 @@ describe("QRCode", () => {
         defaultProps = {
             name: "qr-code-test",
             style: [],
-            value: dynamicValue(false, "Hello, world!")
+            value: dynamicValue("Hello, world!")
         };
     });
 
@@ -21,7 +21,7 @@ describe("QRCode", () => {
     });
 
     it("renders an empty container when there is no value", () => {
-        const component = render(<QRCode {...defaultProps} value={dynamicValue<string>(true)} />);
+        const component = render(<QRCode {...defaultProps} value={dynamicValue()} />);
         expect(component.toJSON()).toMatchSnapshot();
     });
 });

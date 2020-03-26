@@ -13,7 +13,7 @@ jest.mock("Platform", () => ({
 const defaultProps: Props = {
     name: "badge-test",
     style: [],
-    caption: dynamicValue<string>(true)
+    caption: dynamicValue<string>()
 };
 
 describe("Badge", () => {
@@ -42,7 +42,7 @@ describe("Badge", () => {
     });
 
     describe("renders a caption", () => {
-        const component = render(<Badge {...defaultProps} caption={dynamicValue(false, "Caption")} />);
+        const component = render(<Badge {...defaultProps} caption={dynamicValue("Caption")} />);
 
         expect(component.toJSON()).toMatchSnapshot();
     });

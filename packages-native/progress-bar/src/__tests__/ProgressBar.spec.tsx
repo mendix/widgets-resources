@@ -52,8 +52,8 @@ function createProps(progressValue?: number, minimumValue?: number, maximumValue
     return {
         name: "progress-bar-test",
         style: [],
-        progressValue: progressValue != null ? dynamicValue(false, new Big(progressValue)) : dynamicValue<Big>(true),
-        minimumValue: minimumValue != null ? dynamicValue(false, new Big(minimumValue)) : dynamicValue<Big>(true),
-        maximumValue: maximumValue != null ? dynamicValue(false, new Big(maximumValue)) : dynamicValue<Big>(true)
+        progressValue: dynamicValue(progressValue != null ? new Big(progressValue) : undefined),
+        minimumValue: dynamicValue(minimumValue != null ? new Big(minimumValue) : undefined),
+        maximumValue: dynamicValue(maximumValue != null ? new Big(maximumValue) : undefined)
     };
 }

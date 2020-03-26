@@ -1,6 +1,6 @@
 import { ActionValue, DynamicValue, ValueStatus } from "mendix";
 
-export function dynamicValue<T>(loading: boolean, value?: T): DynamicValue<T> {
+export function dynamicValue<T>(value?: T, loading?: boolean): DynamicValue<T> {
     if (loading) {
         return { status: ValueStatus.Loading, value };
     }
