@@ -80,7 +80,9 @@ describe("BackgroundImage", () => {
         const negativeImageOpacity = new Big(-0.333);
         const positiveImageOpacity = new Big(1.333);
 
-        render(<BackgroundImage {...defaultProps} opacity={negativeImageOpacity} />);
-        render(<BackgroundImage {...defaultProps} opacity={positiveImageOpacity} />);
+        const component1 = render(<BackgroundImage {...defaultProps} opacity={negativeImageOpacity} />);
+        expect(component1.toJSON()).toMatchSnapshot();
+        const component2 = render(<BackgroundImage {...defaultProps} opacity={positiveImageOpacity} />);
+        expect(component2.toJSON()).toMatchSnapshot();
     });
 });
