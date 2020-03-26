@@ -17,9 +17,9 @@ describe("Slider", () => {
             style: [],
             valueAttribute: new EditableValueBuilder<BigJs.Big>().withValue(new Big(140)).build(),
             editable: "default",
-            minimumValue: dynamicValue(false, new Big(0)),
-            maximumValue: dynamicValue(false, new Big(280)),
-            stepSize: dynamicValue(false, new Big(1))
+            minimumValue: dynamicValue<BigJs.Big>(new Big(0)),
+            maximumValue: dynamicValue<BigJs.Big>(new Big(280)),
+            stepSize: dynamicValue<BigJs.Big>(new Big(1))
         };
     });
 
@@ -36,14 +36,14 @@ describe("Slider", () => {
     });
 
     it("renders an error when the minimum is greater than the maximum", () => {
-        const component = render(<Slider {...defaultProps} minimumValue={dynamicValue(false, new Big(300))} />);
+        const component = render(<Slider {...defaultProps} minimumValue={dynamicValue(new Big(300))} />);
         expect(component.getByType(Text).props.children).toBe(
             "The minimum value can not be greater than the maximum value."
         );
     });
 
     it("renders an error when the step size is negative", () => {
-        const component = render(<Slider {...defaultProps} stepSize={dynamicValue(false, new Big(-10))} />);
+        const component = render(<Slider {...defaultProps} stepSize={dynamicValue(new Big(-10))} />);
         expect(component.getByType(Text).props.children).toBe("The step size can not be zero or less than zero.");
     });
 
@@ -102,7 +102,7 @@ describe("Slider", () => {
     });
 
     it("handles an invalid step size", () => {
-        const component = render(<Slider {...defaultProps} stepSize={dynamicValue(false, new Big(-10))} />);
+        const component = render(<Slider {...defaultProps} stepSize={dynamicValue(new Big(-10))} />);
         expect(component.getByType(MultiSlider).props.step).toBe(1);
     });
 
