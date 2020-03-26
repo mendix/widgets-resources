@@ -173,11 +173,12 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
         const { onChangeMicroflow, onChangeNanoflow, mxform } = this.props;
 
         if (onChangeMicroflow) {
-            window.mx.ui.action(onChangeMicroflow, {
+            window.mx.data.action({
                 error: error =>
                     window.mx.ui.error(`Error while executing microflow ${onChangeMicroflow}: ${error.message}`),
                 origin: mxform,
                 params: {
+                    actionname: onChangeMicroflow,
                     applyto: "selection",
                     guids: [mxObject.getGuid()]
                 }
