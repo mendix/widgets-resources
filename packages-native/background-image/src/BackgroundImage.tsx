@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { View, StyleSheet, NativeModules } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { ValueStatus } from "mendix";
 import { Image } from "mendix/components/native/Image";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
@@ -10,41 +10,32 @@ import { BackgroundImageProps } from "../typings/BackgroundImageProps";
 export function BackgroundImage(props: BackgroundImageProps<BackgroundImageStyle>): JSX.Element | null {
     const styles = flattenStyles(defaultBackgroundImageStyle, props.style);
     const { image, name, resizeMode } = props;
-    const opacity = Number(props.opacity.toFixed());
+    let opacity = Number(props.opacity.toFixed());
 
-    if (opacity < 0 || opacity > 1) {
-        console.warn(`Background image "${props.name}": image opacity property out of range`);
+    if (opacity < 0) {
+        opacity = 0;
+    } else if (opacity > 1) {
+        opacity = 1;
     }
 
-    if (
-        typeof image.value !== "string" &&
-        (styles.image.resizeMode === "repeat" || resizeMode === "repeat") &&
-        NativeModules.FastImageView !== null
-    ) {
-        throw Error(`Background image "${props.name}": resize mode "repeat" is not supported on this platform`);
-    }
-
-    if (image.status === ValueStatus.Unavailable) {
-        console.warn(`Background image "${props.name}": image unavailable`);
-    } else if (image.status === ValueStatus.Loading && !image.value) {
+    if (image.status !== ValueStatus.Available || !image.value) {
         return null;
     }
 
+    const imageStyle = [
+        StyleSheet.absoluteFill,
+        typeof image.value === "number"
+            ? { width: undefined, height: undefined }
+            : typeof image.value === "string"
+            ? { width: "100%", height: "100%" }
+            : undefined,
+        styles.image,
+        { opacity, resizeMode }
+    ];
+
     return (
         <View style={styles.container} testID={name}>
-            <Image
-                source={image.value}
-                style={[
-                    StyleSheet.absoluteFill,
-                    typeof image.value === "number" ? { width: undefined, height: undefined } : undefined,
-                    typeof image.value === "string" ? { width: "100%", height: "100%" } : undefined,
-                    { opacity, resizeMode },
-                    styles.image
-                ]}
-                color={styles.image.svgColor}
-                testID={`${name}$image`}
-            />
-
+            <Image source={image.value} style={imageStyle} color={styles.image.svgColor} testID={`${name}$image`} />
             {props.content}
         </View>
     );

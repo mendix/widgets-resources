@@ -6,6 +6,11 @@ exports[`BackgroundImage renders content only when image is unavailable 1`] = `
   testID="backgroundImageTest"
 >
   <Image
+    source={
+      Object {
+        "uri": "path/to/image",
+      }
+    }
     style={
       Array [
         Object {
@@ -16,12 +21,11 @@ exports[`BackgroundImage renders content only when image is unavailable 1`] = `
           "top": 0,
         },
         undefined,
-        undefined,
+        Object {},
         Object {
           "opacity": 0.3333,
           "resizeMode": "cover",
         },
-        Object {},
       ]
     }
     testID="backgroundImageTest$image"
@@ -34,76 +38,7 @@ exports[`BackgroundImage renders content only when image is unavailable 1`] = `
 
 exports[`BackgroundImage renders nothing when image is loading for the first time 1`] = `null`;
 
-exports[`BackgroundImage renders previous image when image is reloading 1`] = `
-<View
-  style={Object {}}
-  testID="backgroundImageTest"
->
-  <Image
-    source={
-      Object {
-        "uri": "path/to/image",
-      }
-    }
-    style={
-      Array [
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        },
-        undefined,
-        undefined,
-        Object {
-          "opacity": 0.3333,
-          "resizeMode": "cover",
-        },
-        Object {},
-      ]
-    }
-    testID="backgroundImageTest$image"
-  />
-  <Text>
-    Content
-  </Text>
-</View>
-`;
-
-exports[`BackgroundImage renders wihtout content 1`] = `
-<View
-  style={Object {}}
-  testID="backgroundImageTest"
->
-  <Image
-    source={
-      Object {
-        "uri": "path/to/image",
-      }
-    }
-    style={
-      Array [
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        },
-        undefined,
-        undefined,
-        Object {
-          "opacity": 0.3333,
-          "resizeMode": "cover",
-        },
-        Object {},
-      ]
-    }
-    testID="backgroundImageTest$image"
-  />
-</View>
-`;
+exports[`BackgroundImage renders previous image when image is reloading 1`] = `null`;
 
 exports[`BackgroundImage renders with custom styles 1`] = `
 <View
@@ -130,14 +65,13 @@ exports[`BackgroundImage renders with custom styles 1`] = `
           "top": 0,
         },
         undefined,
-        undefined,
-        Object {
-          "opacity": 0.3333,
-          "resizeMode": "cover",
-        },
         Object {
           "height": "100%",
           "width": "100%",
+        },
+        Object {
+          "opacity": 0.3333,
+          "resizeMode": "cover",
         },
       ]
     }
@@ -170,12 +104,11 @@ exports[`BackgroundImage renders with default styles 1`] = `
           "top": 0,
         },
         undefined,
-        undefined,
+        Object {},
         Object {
           "opacity": 0.3333,
           "resizeMode": "cover",
         },
-        Object {},
       ]
     }
     testID="backgroundImageTest$image"
@@ -183,5 +116,38 @@ exports[`BackgroundImage renders with default styles 1`] = `
   <Text>
     Content
   </Text>
+</View>
+`;
+
+exports[`BackgroundImage renders without content 1`] = `
+<View
+  style={Object {}}
+  testID="backgroundImageTest"
+>
+  <Image
+    source={
+      Object {
+        "uri": "path/to/image",
+      }
+    }
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        undefined,
+        Object {},
+        Object {
+          "opacity": 0.3333,
+          "resizeMode": "cover",
+        },
+      ]
+    }
+    testID="backgroundImageTest$image"
+  />
 </View>
 `;

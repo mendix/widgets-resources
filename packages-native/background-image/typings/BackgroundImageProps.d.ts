@@ -11,7 +11,7 @@ interface CommonProps<Style> {
     style: Style[];
 }
 
-export type ResizeModeEnum = "cover" | "contain" | "stretch" | "repeat" | "center";
+export type ResizeModeEnum = "cover" | "contain" | "stretch" | "center";
 
 export interface BackgroundImageProps<Style> extends CommonProps<Style> {
     image: DynamicValue<NativeImage>;
