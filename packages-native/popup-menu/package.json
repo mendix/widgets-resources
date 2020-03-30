@@ -24,6 +24,10 @@
   "dependencies": {
     "@native-mobile-resources/util-widgets": "^1.0.0",
     "@widgets-resources/piw-utils": "^1.0.0",
+    "react-native-material-menu": "^1.1.0",
     "react-native-popup-menu": "^0.15.7"
+  },
+  "devDependencies": {
+    "@types/react-native-material-menu": "^1.0.0"
   }
 }
