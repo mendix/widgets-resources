@@ -30,6 +30,7 @@
     "@commitlint/config-conventional": "^7.5.0",
     "@commitlint/config-lerna-scopes": "^7.5.1",
     "@mendix/pluggable-widgets-tools": "^8.7.1",
+    "@mendix/pluggable-widgets-typing-generator": "mendix/pluggable-widgets-typing-generator#feat/datasource-attributes",
     "@react-native-community/async-storage": "1.5.1",
     "@react-native-community/netinfo": "3.2.1",
     "@types/big.js": "^4.0.5",

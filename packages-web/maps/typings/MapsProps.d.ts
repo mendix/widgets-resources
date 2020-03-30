@@ -5,7 +5,7 @@
  */
 import { CSSProperties } from "react";
 import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/typings";
-import { ActionValue, DynamicValue, WebImage } from "mendix";
+import { ActionValue, DynamicValue, EditableValue, ListValue, ObjectItem, WebImage } from "mendix";
 
 interface CommonProps {
     name: string;
@@ -14,61 +14,181 @@ interface CommonProps {
     tabIndex: number;
 }
 
-export type TypeEnum = "advanced" | "basic";
-
 export type DataSourceTypeEnum = "static" | "dynamic";
 
-export type ShapeEnum = "default" | "image";
+export type LocationTypeEnum = "address" | "latlng";
+
+export type PropertyContextEnum = "attribute" | "expression";
+
+export type MarkerStyleEnum = "default" | "image";
 
 export interface MarkersType {
-    description?: DynamicValue<string>;
-    location: DynamicValue<string>;
+    dataSourceType: DataSourceTypeEnum;
+    locationType: LocationTypeEnum;
+    propertyContext: PropertyContextEnum;
+    address?: string;
+    addressAttribute?: EditableValue<string>;
+    addressExpression?: DynamicValue<string>;
+    latitude: BigJs.Big;
+    latitudeAttribute?: EditableValue<BigJs.Big>;
+    latitudeExpression?: DynamicValue<BigJs.Big>;
+    longitude: BigJs.Big;
+    longitudeAttribute?: EditableValue<BigJs.Big>;
+    longitudeExpression?: DynamicValue<BigJs.Big>;
     onClick?: ActionValue;
-    shape: ShapeEnum;
+    markerStyle: MarkerStyleEnum;
     customMarker?: DynamicValue<WebImage>;
+}
+
+export type LocationTypeEnum = "address" | "latlng";
+
+export type MarkerStyleDynamicEnum = "default" | "image";
+
+export interface DynamicMarkersType {
+    markersDS?: ListValue;
+    locationType: LocationTypeEnum;
+    address?: (item: ObjectItem) => EditableValue<string>;
+    latitude?: (item: ObjectItem) => EditableValue<BigJs.Big>;
+    longitude?: (item: ObjectItem) => EditableValue<BigJs.Big>;
+    onClickAttribute?: (item: ObjectItem) => ActionValue;
+    markerStyleDynamic: MarkerStyleDynamicEnum;
+    customMarkerDynamic?: DynamicValue<WebImage>;
 }
 
 export type ZoomEnum = "world" | "continent" | "city" | "street" | "buildings";
 
+export type WidthUnitEnum = "percentage" | "pixels";
+
+export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
+
+export type MapProviderEnum = "googleMaps" | "openStreet" | "mapBox" | "hereMaps";
+
 export interface MarkersPreviewType {
-    description?: string;
-    location: string;
-    onClick: ActionPreview;
-    shape: ShapeEnum;
+    dataSourceType: DataSourceTypeEnum;
+    locationType: LocationTypeEnum;
+    propertyContext: PropertyContextEnum;
+    address?: string;
+    addressAttribute?: string;
+    addressExpression?: string;
+    latitude: BigJs.Big;
+    latitudeAttribute?: string;
+    latitudeExpression?: BigJs.Big;
+    longitude: BigJs.Big;
+    longitudeAttribute?: string;
+    longitudeExpression?: BigJs.Big;
+    onClick?: ActionPreview;
+    markerStyle: MarkerStyleEnum;
     customMarker?: WebImage;
 }
 
+export interface DynamicMarkersPreviewType {
+    markersDS?: ListValue;
+    locationType: LocationTypeEnum;
+    address?: (item: ObjectItem) => string;
+    latitude?: (item: ObjectItem) => string;
+    longitude?: (item: ObjectItem) => string;
+    onClickAttribute?: (item: ObjectItem) => ActionPreview;
+    markerStyleDynamic: MarkerStyleDynamicEnum;
+    customMarkerDynamic?: WebImage;
+}
+
 export interface MarkersVisibilityType {
-    description: boolean;
-    location: boolean;
+    dataSourceType: boolean;
+    locationType: boolean;
+    propertyContext: boolean;
+    address: boolean;
+    addressAttribute: boolean;
+    addressExpression: boolean;
+    latitude: boolean;
+    latitudeAttribute: boolean;
+    latitudeExpression: boolean;
+    longitude: boolean;
+    longitudeAttribute: boolean;
+    longitudeExpression: boolean;
     onClick: boolean;
-    shape: boolean;
+    markerStyle: boolean;
     customMarker: boolean;
 }
 
+export interface DynamicMarkersVisibilityType {
+    markersDS: boolean;
+    locationType: boolean;
+    address: boolean;
+    latitude: boolean;
+    longitude: boolean;
+    onClickAttribute: boolean;
+    markerStyleDynamic: boolean;
+    customMarkerDynamic: boolean;
+}
+
 export interface MapsContainerProps extends CommonProps {
-    type: TypeEnum;
-    dataSourceType: DataSourceTypeEnum;
     markers: MarkersType[];
-    zoom: ZoomEnum;
+    dynamicMarkers: DynamicMarkersType[];
     apiKey?: DynamicValue<string>;
+    zoom: ZoomEnum;
+    showCurrentLocation: boolean;
+    optionDrag: boolean;
+    optionScroll: boolean;
+    optionZoomControl: boolean;
+    attributionControl: boolean;
+    optionStreetView: boolean;
+    mapTypeControl: boolean;
+    fullScreenControl: boolean;
+    rotateControl: boolean;
+    widthUnit: WidthUnitEnum;
+    width: number;
+    heightUnit: HeightUnitEnum;
+    height: number;
+    advanced: boolean;
+    mapProvider: MapProviderEnum;
+    mapStyles?: string;
 }
 
 export interface MapsPreviewProps {
     class: string;
     style: string;
     styleObject: CSSProperties;
-    type: TypeEnum;
-    dataSourceType: DataSourceTypeEnum;
     markers: MarkersPreviewType[];
-    zoom: ZoomEnum;
+    dynamicMarkers: DynamicMarkersPreviewType[];
     apiKey?: string;
+    zoom: ZoomEnum;
+    showCurrentLocation: boolean;
+    optionDrag: boolean;
+    optionScroll: boolean;
+    optionZoomControl: boolean;
+    attributionControl: boolean;
+    optionStreetView: boolean;
+    mapTypeControl: boolean;
+    fullScreenControl: boolean;
+    rotateControl: boolean;
+    widthUnit: WidthUnitEnum;
+    width: number;
+    heightUnit: HeightUnitEnum;
+    height: number;
+    advanced: boolean;
+    mapProvider: MapProviderEnum;
+    mapStyles?: string;
 }
 
 export interface VisibilityMap {
-    type: boolean;
-    dataSourceType: boolean;
     markers: MarkersVisibilityType[] | boolean;
-    zoom: boolean;
+    dynamicMarkers: DynamicMarkersVisibilityType[] | boolean;
     apiKey: boolean;
+    zoom: boolean;
+    showCurrentLocation: boolean;
+    optionDrag: boolean;
+    optionScroll: boolean;
+    optionZoomControl: boolean;
+    attributionControl: boolean;
+    optionStreetView: boolean;
+    mapTypeControl: boolean;
+    fullScreenControl: boolean;
+    rotateControl: boolean;
+    widthUnit: boolean;
+    width: boolean;
+    heightUnit: boolean;
+    height: boolean;
+    advanced: boolean;
+    mapProvider: boolean;
+    mapStyles: boolean;
 }
