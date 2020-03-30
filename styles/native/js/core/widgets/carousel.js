@@ -1,5 +1,4 @@
-import { shadeBlendConvert } from "../helpers/_functions/shadeblendconvert";
-import { background, brand, contrast, font, spacing } from "../variables";
+import { brand, contrast, font, spacing } from "../variables";
 /*
 
 DISCLAIMER:
@@ -67,8 +66,8 @@ const carouselCardLayout = {
         padding: 8,
         paddingBottom: spacing.regular,
         elevation: 1.5,
-        shadowColor: shadeBlendConvert(-0.5, background.primary),
-        shadowOpacity: 0.6,
+        shadowColor: "#000",
+        shadowOpacity: 0.5,
         shadowRadius: 6,
         shadowOffset: {
             width: 0,

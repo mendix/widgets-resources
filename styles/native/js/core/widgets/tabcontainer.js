@@ -38,13 +38,13 @@ export const TabContainer = {
         color: tabContainer.label.color,
         fontFamily: font.family,
         fontWeight: tabContainer.label.fontWeight,
-        textTransform: "uppercase",
+        textTransform: tabContainer.label.textTransform,
     },
     activeLabel: {
         // All TextStyle properties are allowed
         color: tabContainer.activeLabel.color,
         fontFamily: font.family,
         fontWeight: tabContainer.activeLabel.fontWeight,
-        textTransform: "uppercase",
+        textTransform: tabContainer.activeLabel.textTransform,
     },
 };

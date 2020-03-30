@@ -3,7 +3,6 @@ import * as custom from "../app/custom-variables";
 import adjustFont, { height, width } from "./helpers/_functions/adjustfont";
 import { anyColorToRgbString, setColorBasedOnBackground, setContrastScale } from "./helpers/_functions/convertcolors";
 import merge from "./helpers/_functions/mergeobjects";
-import { shadeBlendConvert } from "./helpers/_functions/shadeblendconvert";
 //
 //
 //== Global variables
@@ -187,7 +186,7 @@ let navigation = {
         activityIndicatorColor: font.color,
         backgroundColor: `rgba(0, 0, 0, 0.5)`,
         containerBackgroundColor: background.secondary,
-        shadowColor: shadeBlendConvert(-0.6, background.primary),
+        shadowColor: "#000",
         fontSize: font.size,
     },
 };
@@ -206,10 +205,12 @@ let tabContainer = {
     label: {
         color: contrast.highest,
         fontWeight: font.weightBold,
+        textTransform: "uppercase",
     },
     activeLabel: {
         color: brand.primary,
         fontWeight: font.weightBold,
+        textTransform: "uppercase",
     },
 };
 tabContainer = merge(tabContainer, custom.tabContainer || {});

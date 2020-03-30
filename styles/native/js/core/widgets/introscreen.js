@@ -1,6 +1,5 @@
 import { isIphoneWithNotch } from "../helpers/_functions/device";
-import { shadeBlendConvert } from "../helpers/_functions/shadeblendconvert";
-import { background, button, font, spacing } from "../variables";
+import { background, button, contrast, font, spacing } from "../variables";
 /*
 
 DISCLAIMER:
@@ -92,7 +91,7 @@ export const com_mendix_widget_native_introscreen_IntroScreen = {
     },
     dotStyle: {
         // All ViewStyle properties are allowed
-        backgroundColor: shadeBlendConvert(0.5, background.brandPrimary),
+        backgroundColor: contrast.lower,
         transform: [{ scale: 0.5 }],
     },
     activeDotStyle: {

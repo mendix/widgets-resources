@@ -92,7 +92,7 @@ export const btnSecondaryInversed = {
 };
 //
 // Button Icon Only
-export const btnIconPrimary = {
+export const btnIcon = {
     container: {
         borderWidth: 0,
         backgroundColor: "transparent",
@@ -100,33 +100,38 @@ export const btnIconPrimary = {
         paddingHorizontal: 0,
     },
     icon: {
-        color: button.primary.backgroundColor,
+        color: font.color,
     },
     caption: {
         fontSize: 0,
     },
 };
-export const btnIconSecondary = merge(btnIconPrimary, {
+export const btnIconPrimary = merge(btnIcon, {
+    icon: {
+        color: button.primary.backgroundColor,
+    },
+});
+export const btnIconSecondary = merge(btnIcon, {
     icon: {
         color: contrast.low,
     },
 });
-export const btnIconSuccess = merge(btnIconPrimary, {
+export const btnIconSuccess = merge(btnIcon, {
     icon: {
         color: button.success.backgroundColor,
     },
 });
-export const btnIconWarning = merge(btnIconPrimary, {
+export const btnIconWarning = merge(btnIcon, {
     icon: {
         color: button.warning.backgroundColor,
     },
 });
-export const btnIconDanger = merge(btnIconPrimary, {
+export const btnIconDanger = merge(btnIcon, {
     icon: {
         color: button.danger.backgroundColor,
     },
 });
-export const btnIconWhite = merge(btnIconPrimary, {
+export const btnIconWhite = merge(btnIcon, {
     icon: {
         color: "#FFF",
     },
