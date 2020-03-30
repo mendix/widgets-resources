@@ -1,6 +1,6 @@
 import { brand, button, contrast, font } from "../variables";
-import merge                from "./_functions/mergeobjects";
-import { ActionButtonType } from "../../types/widgets";
+import merge                             from "./_functions/mergeobjects";
+import { ActionButtonType }              from "../../types/widgets";
 /*
 
 DISCLAIMER:
@@ -93,7 +93,7 @@ export const btnSecondaryInversed: ActionButtonType = {
 };
 //
 // Button Icon Only
-export const btnIconPrimary: ActionButtonType = {
+export const btnIcon: ActionButtonType = {
     container: {
         borderWidth: 0,
         backgroundColor: "transparent",
@@ -107,7 +107,12 @@ export const btnIconPrimary: ActionButtonType = {
         fontSize: 0,
     },
 };
-export const btnIconSecondary: ActionButtonType = merge(btnIconPrimary, {
+export const btnIconPrimary: ActionButtonType = merge(btnIcon, {
+    icon: {
+        color: button.primary.backgroundColor,
+    },
+});
+export const btnIconSecondary: ActionButtonType = merge(btnIcon, {
     icon: {
         color: button.primary.backgroundColor,
     },
@@ -117,22 +122,22 @@ export const btnIconSecondary = merge(btnIcon, {
         color: contrast.low,
     },
 });
-export const btnIconSuccess: ActionButtonType = merge(btnIconPrimary, {
+export const btnIconSuccess: ActionButtonType = merge(btnIcon, {
     icon: {
         color: button.success.backgroundColor,
     },
 });
-export const btnIconWarning: ActionButtonType = merge(btnIconPrimary, {
+export const btnIconWarning: ActionButtonType = merge(btnIcon, {
     icon: {
         color: button.warning.backgroundColor,
     },
 });
-export const btnIconDanger: ActionButtonType = merge(btnIconPrimary, {
+export const btnIconDanger: ActionButtonType = merge(btnIcon, {
     icon: {
         color: button.danger.backgroundColor,
     },
 });
-export const btnIconWhite: ActionButtonType = merge(btnIconPrimary, {
+export const btnIconWhite: ActionButtonType = merge(btnIcon, {
     icon: {
         color: "#FFF",
     },

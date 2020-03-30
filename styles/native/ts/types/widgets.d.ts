@@ -32,6 +32,11 @@ export interface BadgeType {
     caption?: TextStyle
 }
 
+// Bottom Sheet
+export interface BottomSheetType {
+    container?: ViewStyle,
+    containerWhenExpandedFullscreen?: ViewStyle
+}
 // Action Button
 interface ButtonContainerType extends ViewStyle {
     rippleColor?: string
