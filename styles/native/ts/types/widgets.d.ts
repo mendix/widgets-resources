@@ -26,6 +26,14 @@ export interface AnimationType {
     container?: ViewStyle
 }
 
+// Background Image
+export interface BackgroundImageType {
+    container?: ViewStyle,
+    image?: ImageStyle & {
+        svgColor?: string
+    }
+}
+
 // Badge
 export interface BadgeType {
     container?: ViewStyle,
@@ -37,6 +45,7 @@ export interface BottomSheetType {
     container?: ViewStyle,
     containerWhenExpandedFullscreen?: ViewStyle
 }
+
 // Action Button
 interface ButtonContainerType extends ViewStyle {
     rippleColor?: string
