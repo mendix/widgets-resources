@@ -12,9 +12,6 @@ export function getProperties(
     // console.log(JSON.stringify(defaultProperties));
     // console.log(target); The epic is still waiting to be merged by PageEditor
     if (!values.advanced) {
-        if (target === "web") {
-            return defaultProperties;
-        }
         hideProperty<MarkersType>("markerStyle", defaultProperties);
         hideProperty<DynamicMarkersType>("markerStyleDynamic", defaultProperties);
         hideProperty<MarkersType>("customMarker", defaultProperties);
@@ -110,12 +107,14 @@ export function check(values: MapsPreviewProps): Problem[] {
 
     values.markers.forEach(marker => {
         if (marker.dataSourceType === "static") {
-            if (marker.locationType === "address" && !marker.address) {
-                errors.push({
-                    property: "markers.address",
-                    severity: "error",
-                    message: "A static marker requires an address"
-                });
+            if (marker.locationType === "address") {
+                if (!marker.address) {
+                    errors.push({
+                        property: "markers.address",
+                        severity: "error",
+                        message: "A static marker requires an address"
+                    });
+                }
             } else {
                 if (!marker.latitude) {
                     errors.push({
@@ -133,12 +132,14 @@ export function check(values: MapsPreviewProps): Problem[] {
                 }
             }
         } else if (marker.propertyContext === "attribute") {
-            if (marker.locationType === "address" && !marker.addressAttribute) {
-                errors.push({
-                    property: "markers.addressAttribute",
-                    severity: "error",
-                    message: "A static marker requires an address attribute"
-                });
+            if (marker.locationType === "address") {
+                if (!marker.addressAttribute) {
+                    errors.push({
+                        property: "markers.addressAttribute",
+                        severity: "error",
+                        message: "A static marker requires an address attribute"
+                    });
+                }
             } else {
                 if (!marker.latitudeAttribute) {
                     errors.push({
@@ -156,12 +157,14 @@ export function check(values: MapsPreviewProps): Problem[] {
                 }
             }
         } else {
-            if (marker.locationType === "address" && !marker.addressExpression) {
-                errors.push({
-                    property: "markers.addressExpression",
-                    severity: "error",
-                    message: "A static marker requires an address expression"
-                });
+            if (marker.locationType === "address") {
+                if (!marker.addressExpression) {
+                    errors.push({
+                        property: "markers.addressExpression",
+                        severity: "error",
+                        message: "A static marker requires an address expression"
+                    });
+                }
             } else {
                 if (!marker.latitudeExpression) {
                     errors.push({
