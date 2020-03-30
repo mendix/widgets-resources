@@ -1,38 +1,55 @@
-import { createElement, ReactElement } from "react";
+import { ComponentType, createElement, ReactElement, useCallback, useRef } from "react";
 import { PopupMenuProps } from "../typings/PopupMenuProps";
-import { dividerStyle, PopUpMenuStyle } from "./ui/Styles";
-import { Menu, MenuOption, MenuOptions, MenuProvider, MenuTrigger, renderers } from "react-native-popup-menu";
+import { defaultPopupMenuStyles, PopupMenuStyle } from "./ui/Styles";
 import { executeAction } from "@widgets-resources/piw-utils";
-import { View } from "react-native";
+import { Platform, TouchableNativeFeedback, TouchableNativeFeedbackProps, TouchableOpacity, View } from "react-native";
+import { ActionValue } from "mendix";
+import Menu, { MenuDivider, MenuItem } from "react-native-material-menu";
 
-export function PopupMenu(props: PopupMenuProps<PopUpMenuStyle>): ReactElement {
+export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
+    const menuRef = useRef<any>(null);
+
+    const showMenu = useCallback(() => {
+        menuRef.current?.show();
+    }, [menuRef.current]);
+
+    const handlePress = (action?: ActionValue) => {
+        if (props.closeMenuOnItemClick) {
+            menuRef.current?.hide();
+        }
+        executeAction(action);
+    };
+
     const renderMenuOptions = () => {
         if (props.renderMode === "basic") {
-            return props.itemsBasic.map(item => {
+            return props.itemsBasic.map((item, index) => {
                 if (item.itemType === "divider") {
-                    return <View style={dividerStyle} />;
+                    return <MenuDivider />;
                 }
                 return (
-                    <MenuOption value={item.caption} text={item.caption} onSelect={() => executeAction(item.action)} />
+                    <MenuItem key={index} onPress={() => handlePress(item.action)}>
+                        {item.caption}
+                    </MenuItem>
                 );
             });
-        } else {
-            return props.itemsComplex.map(item => (
-                <MenuOption onSelect={() => executeAction(item.action)}>{item.content}</MenuOption>
-            ));
         }
+
+        const Touchable: ComponentType<TouchableNativeFeedbackProps> =
+            Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
+
+        const touchableProps =
+            Platform.OS === "android" ? { background: TouchableNativeFeedback.SelectableBackground() } : {};
+
+        return props.itemsComplex.map((item, index) => (
+            <Touchable key={index} onPress={() => handlePress(item.action)} {...touchableProps}>
+                <View style={defaultPopupMenuStyles.customItemContainer}>{item.content}</View>
+            </Touchable>
+        ));
     };
-    // TODO: styling is off, they are adding flex:1
+
     return (
-        <MenuProvider backHandler={props.handleBackButtonAndroid}>
-            <Menu
-                onSelect={value => alert(`Selected number: ${value}`)}
-                renderer={renderers[props.typePopUp]}
-                rendererProps={{ placement: props.preferredLocation ? props.preferredLocation : "auto" }}
-            >
-                <MenuTrigger children={props.menuTriggerer} />
-                <MenuOptions>{renderMenuOptions()}</MenuOptions>
-            </Menu>
-        </MenuProvider>
+        <Menu ref={menuRef} button={<TouchableOpacity onPress={showMenu}>{props.menuTriggerer}</TouchableOpacity>}>
+            {renderMenuOptions()}
+        </Menu>
     );
 }

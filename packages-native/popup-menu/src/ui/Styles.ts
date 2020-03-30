@@ -1,9 +1,12 @@
 import { Style } from "@native-mobile-resources/util-widgets";
-export interface PopUpMenuStyle extends Style {}
 
-export const dividerStyle = {
-    marginVertical: 5,
-    marginHorizontal: 2,
-    borderBottomWidth: 1,
-    borderColor: "#ccc"
+export interface PopupMenuStyle extends Style {}
+
+export const defaultPopupMenuStyles: PopupMenuStyle = {
+    customItemContainer: {
+        height: 48,
+        justifyContent: "center",
+        maxWidth: 248,
+        minWidth: 124
+    }
 };

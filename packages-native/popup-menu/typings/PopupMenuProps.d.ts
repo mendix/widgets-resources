@@ -29,17 +29,11 @@ export interface ItemsComplexType {
     action?: ActionValue;
 }
 
-export type TypePopUpEnum = "ContextMenu" | "Popover";
-
-export type PreferredLocationEnum = "auto" | "bottom" | "left" | "right" | "top";
-
 export interface PopupMenuProps<Style> extends CommonProps<Style> {
     menuTriggerer?: ReactNode;
     renderMode: RenderModeEnum;
     itemsBasic: ItemsBasicType[];
     itemsComplex: ItemsComplexType[];
-    typePopUp: TypePopUpEnum;
-    animate: boolean;
-    preferredLocation: PreferredLocationEnum;
+    closeMenuOnItemClick: boolean;
     handleBackButtonAndroid: boolean;
 }
