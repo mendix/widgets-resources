@@ -1,5 +1,7 @@
 import { CSSProperties } from "react";
-import { HeightUnitEnum, WidthUnitEnum } from "../../typings/MapsProps";
+import { DynamicMarkersType, HeightUnitEnum, MarkersType, WidthUnitEnum } from "../../typings/MapsProps";
+import { ModeledMarker } from "../components/GoogleMap";
+import { ObjectItem } from "mendix";
 
 export interface Dimensions {
     widthUnit: WidthUnitEnum;
@@ -64,3 +66,51 @@ export function translateZoom(level: string) {
             return 20;
     }
 }
+
+export const analyzeStaticMarker = (marker: MarkersType): ModeledMarker => {
+    console.warn("Analyzing static marker");
+    let location;
+    if (marker.dataSourceType === "static") {
+        if (marker.locationType === "address") {
+            location = marker.address!;
+        } else {
+            location = `${marker.latitude},${marker.longitude}`;
+        }
+    } else {
+        if (marker.locationType === "address") {
+            if (marker.propertyContext === "attribute") {
+                location = marker.addressAttribute?.value!;
+            } else {
+                location = marker.addressExpression?.value!;
+            }
+        } else {
+            if (marker.propertyContext === "attribute") {
+                location = `${marker.latitudeAttribute?.value},${marker.longitudeAttribute?.value}`;
+            } else {
+                location = `${marker.latitudeExpression?.value},${marker.longitudeExpression?.value}`;
+            }
+        }
+    }
+
+    return {
+        location,
+        action: marker.onClick?.execute,
+        customMarker: marker.customMarker?.value?.uri
+    };
+};
+
+export const analyzeDynamicMarker = (marker: DynamicMarkersType, item: ObjectItem): ModeledMarker => {
+    console.warn("Analyzing dynamic marker");
+    const { locationType, address, latitude, longitude, onClickAttribute } = marker;
+    let location;
+    if (locationType === "address") {
+        location = address ? address(item).value! : "";
+    } else {
+        location = `${latitude ? latitude(item).value : 0},${longitude ? longitude(item).value : 0}`;
+    }
+    return {
+        location,
+        action: onClickAttribute ? onClickAttribute(item).execute : undefined,
+        customMarker: marker.customMarkerDynamic?.value?.uri
+    };
+};
