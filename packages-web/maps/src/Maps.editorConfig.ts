@@ -96,8 +96,7 @@ export function check(values: MapsPreviewProps): Problem[] {
                 severity: "error",
                 message: `Custom marker image is required when shape is 'image' for address ${marker.address ??
                     marker.addressAttribute ??
-                    marker.addressExpression}`,
-                url: "https://mendix.com"
+                    marker.addressExpression}`
             });
         });
     if (!values.apiKey) {
@@ -108,15 +107,90 @@ export function check(values: MapsPreviewProps): Problem[] {
             url: "https://github.com/mendix/widgets-resources/blob/master/packages-web/maps/README.md#limitations"
         });
     }
-    // if (values.markersDS) {
-    //     if (!values.locationAttribute) {
-    //         errors.push({
-    //             property: "locationAttribute",
-    //             severity: "error",
-    //             message: "Location attribute is required for Dynamic data source",
-    //             url: ""
-    //         });
-    //     }
-    // }
+
+    values.markers.forEach(marker => {
+        if (marker.dataSourceType === "static") {
+            if (marker.locationType === "address" && !marker.address) {
+                errors.push({
+                    property: "markers.address",
+                    severity: "error",
+                    message: "A static marker requires an address"
+                });
+            } else {
+                if (!marker.latitude) {
+                    errors.push({
+                        property: "markers.latitude",
+                        severity: "error",
+                        message: "A static marker requires latitude"
+                    });
+                }
+                if (!marker.longitude) {
+                    errors.push({
+                        property: "markers.longitude",
+                        severity: "error",
+                        message: "A static marker requires longitude"
+                    });
+                }
+            }
+        } else if (marker.propertyContext === "attribute") {
+            if (marker.locationType === "address" && !marker.addressAttribute) {
+                errors.push({
+                    property: "markers.addressAttribute",
+                    severity: "error",
+                    message: "A static marker requires an address attribute"
+                });
+            } else {
+                if (!marker.latitudeAttribute) {
+                    errors.push({
+                        property: "markers.latitudeAttribute",
+                        severity: "error",
+                        message: "A static marker requires latitude attribute"
+                    });
+                }
+                if (!marker.longitudeAttribute) {
+                    errors.push({
+                        property: "markers.longitudeAttribute",
+                        severity: "error",
+                        message: "A static marker requires longitude attribute"
+                    });
+                }
+            }
+        } else {
+            if (marker.locationType === "address" && !marker.addressExpression) {
+                errors.push({
+                    property: "markers.addressExpression",
+                    severity: "error",
+                    message: "A static marker requires an address expression"
+                });
+            } else {
+                if (!marker.latitudeExpression) {
+                    errors.push({
+                        property: "markers.latitudeExpression",
+                        severity: "error",
+                        message: "A static marker requires latitude expression"
+                    });
+                }
+                if (!marker.longitudeExpression) {
+                    errors.push({
+                        property: "markers.longitudeExpression",
+                        severity: "error",
+                        message: "A static marker requires longitude expression"
+                    });
+                }
+            }
+        }
+    });
+
+    values.dynamicMarkers.forEach(marker => {
+        // @ts-ignore
+        if (marker.markersDS?.type === "null") {
+            errors.push({
+                property: "dynamicMarkers.markersDS",
+                severity: "error",
+                message: "A data source should be selected in order to retrieve a list of markers"
+            });
+        }
+    });
+
     return errors;
 }
