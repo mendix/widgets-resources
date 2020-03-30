@@ -5,6 +5,8 @@ import ReactResizeDetector from "react-resize-detector";
 import googleApiWrapper from "./GoogleApi";
 import { validLocation } from "../utils/Validations";
 import { Alert } from "@widgets-resources/piw-utils";
+import Utils from "../utils/Utils";
+import { HeightUnitEnum, WidthUnitEnum } from "../../typings/MapsProps";
 
 interface GoogleMapState {
     center: google.maps.LatLngLiteral;
@@ -42,6 +44,11 @@ export interface GoogleMapsProps {
     locations?: ModeledMarker[];
     mapStyles?: string;
     divStyles?: CSSProperties;
+
+    widthUnit: WidthUnitEnum;
+    width: number;
+    heightUnit: HeightUnitEnum;
+    height: number;
 }
 
 export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
@@ -62,14 +69,17 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
 
     render(): ReactNode {
         return (
-            <div className={classNames("widget-maps", this.props.className)} style={this.props.divStyles}>
+            <div
+                className={classNames("widget-maps", this.props.className)}
+                style={{ ...this.props.divStyles, ...Utils.getDimensions(this.props) }}
+            >
                 {this.state.validationMessage && (
                     <Alert bootstrapStyle="danger" className="widget-google-maps-alert">
                         {this.state.validationMessage}
                     </Alert>
                 )}
                 <div className="widget-google-maps-wrapper">
-                    <div className="widget-google-maps" style={{ minHeight: "500px" }} ref={this.getRef} />
+                    <div className="widget-google-maps" ref={this.getRef} />
                 </div>
                 <ReactResizeDetector
                     handleWidth
@@ -83,7 +93,6 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
     }
 
     componentDidMount(): void {
-        console.debug(this.props.scriptsLoaded);
         if (this.props.scriptsLoaded) {
             this.getCurrentUserLocation();
             this.createUpdateMap(this.props);

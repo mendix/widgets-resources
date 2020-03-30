@@ -1,5 +1,12 @@
 import { CSSProperties } from "react";
+import { HeightUnitEnum, WidthUnitEnum } from "../../typings/MapsProps";
 
+export interface Dimensions {
+    widthUnit: WidthUnitEnum;
+    width: number;
+    heightUnit: HeightUnitEnum;
+    height: number;
+}
 /* eslint-disable */
 export default class Utils {
     static parseStyle(style = ""): CSSProperties {
@@ -19,6 +26,27 @@ export default class Utils {
         }
 
         return {};
+    }
+
+    static getDimensions<T extends Dimensions>(props: T): CSSProperties {
+        const style: CSSProperties = {
+            width: props.widthUnit === "percentage" ? `${props.width}%` : `${props.width}px`
+        };
+        if (props.heightUnit === "percentageOfWidth") {
+            const ratio = (props.height / 100) * props.width;
+            if (props.widthUnit === "percentage") {
+                style.height = "auto";
+                style.paddingBottom = `${ratio}%`;
+            } else {
+                style.height = `${ratio}px`;
+            }
+        } else if (props.heightUnit === "pixels") {
+            style.height = `${props.height}px`;
+        } else if (props.heightUnit === "percentageOfParent") {
+            style.height = `${props.height}%`;
+        }
+
+        return style;
     }
 }
 
