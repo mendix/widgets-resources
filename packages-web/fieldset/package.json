@@ -1,0 +1,53 @@
+{
+  "name": "fieldset",
+  "widgetName": "Fieldset",
+  "version": "1.0.0",
+  "description": "A container to group several controls within a web form",
+  "copyright": "Mendix B.V.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "license": "Apache-2.0",
+  "config": {
+    "widgetPath": "./tests/TestProjects/Mendix8/widgets",
+    "projectPath": "./tests/TestProjects/Mendix8",
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000,
+    "testProjectId": "52d48d8a-38ba-44c6-b297-1a0216c10d28",
+    "testProjects": [
+      {
+        "revision": 137,
+        "branch": "MX_8",
+        "path": "./tests/TestProjects/Mendix8/"
+      },
+      {
+        "revision": 140,
+        "branch": "nightly",
+        "path": "./tests/TestProjects/Nightly/"
+      }
+    ]
+  },
+  "packagePath": "com.mendix.widget.web",
+  "scripts": {
+    "start": "..\"/../node_modules/.bin/concurrently\" \"npm:start:server\"  \"npm:dev\"",
+    "start:server": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:server --open --subprojectPath packages-web/fieldset",
+    "dev": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:ts -- --subprojectPath packages-web/fieldset",
+    "build": "..\"/../node_modules/.bin/pluggable-widgets-tools\" build:ts --subprojectPath packages-web/fieldset",
+    "format": "..\"/../node_modules/.bin/pluggable-widgets-tools\" format --subprojectPath packages-web/fieldset",
+    "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
+    "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://badgebutton.mxapps.io ../../scripts/test/projectup.sh",
+    "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://badgebutton.mxapps.io ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true node ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "release": "..\"/../node_modules/.bin/pluggable-widgets-tools\" release:ts --subprojectPath packages-web/fieldset",
+    "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.9"
+  },
+  "dependencies": {
+    "@widgets-resources/piw-utils": "^1.0.0",
+    "classnames": "^2.2.6"
+  }
+}
