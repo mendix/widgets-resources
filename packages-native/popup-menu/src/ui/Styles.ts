@@ -1,8 +1,25 @@
-import { Style } from "@native-mobile-resources/util-widgets";
+import { TextStyle, ViewStyle } from "react-native";
 
-export interface PopupMenuStyle extends Style {}
+export interface PopupMenuStyle {
+    customItemContainer?: ViewStyle;
+    dividerColor?: string;
+    menuItem?: PopupItemStyle;
+}
+
+interface PopupItemStyle {
+    // Only for ios
+    underlayColor?: string;
+    textStyle?: TextStyle;
+}
 
 export const defaultPopupMenuStyles: PopupMenuStyle = {
+    dividerColor: "green",
+    menuItem: {
+        underlayColor: "yellow",
+        textStyle: {
+            color: "red"
+        }
+    },
     customItemContainer: {
         height: 48,
         justifyContent: "center",
@@ -10,3 +27,5 @@ export const defaultPopupMenuStyles: PopupMenuStyle = {
         minWidth: 124
     }
 };
+
+// TODO: request default,primary,danger
