@@ -72,10 +72,6 @@
                     </property>
                 </properties>
             </property>
-            <property key="closeMenuOnItemClick" type="boolean" defaultValue="true">
-                <caption>Hide on Click</caption>
-                <description>Closes pop up menu when one of the items are clicked</description>
-            </property>
             <property key="handleBackButtonAndroid" type="boolean" defaultValue="true">
                 <caption>Close with back button</caption>
                 <description>Determines if the back button on Android devices can close the menu</description>
