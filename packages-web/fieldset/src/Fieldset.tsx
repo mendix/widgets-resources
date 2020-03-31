@@ -5,7 +5,7 @@ import { ValueStatus } from "mendix";
 import { FieldsetContainerProps } from "../typings/FieldsetProps";
 
 const Fieldset = (props: FieldsetContainerProps): ReactNode => {
-    const { legend, content } = props;
+    const { legend, content, name, tabIndex, style, class: className } = props;
 
     const renderLegend = useCallback(() => {
         if (
@@ -20,7 +20,7 @@ const Fieldset = (props: FieldsetContainerProps): ReactNode => {
     }, [legend]);
 
     return (
-        <fieldset>
+        <fieldset name={name} tabIndex={tabIndex} style={style} className={className}>
             {renderLegend()}
             {content}
         </fieldset>
