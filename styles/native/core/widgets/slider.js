@@ -1,5 +1,4 @@
 import { Platform }                                         from "react-native";
-import { shadeBlendConvert }                                from "../helpers/_functions/shadeblendconvert.js";
 import { background, border, brand, contrast, font, input } from "../variables";
 
 //
@@ -44,7 +43,7 @@ export const com_mendix_widget_native_slider_Slider = {
             ios: {
                 width: 30,
                 height: 30,
-                shadowColor: shadeBlendConvert(-0.3, background.primary),
+                shadowColor: "#000",
                 shadowOpacity: 0.2,
                 borderColor: contrast.lowest,
                 shadowOffset: { width: 0, height: 1 },
@@ -75,7 +74,7 @@ export const com_mendix_widget_native_slider_Slider = {
             ios: {
                 borderColor: contrast.lowest,
                 backgroundColor: background.secondary,
-                shadowColor: shadeBlendConvert(-0.3, background.primary),
+                shadowColor: "#000",
                 shadowOpacity: 0.2,
                 shadowOffset: { width: 0, height: 1 },
             },
