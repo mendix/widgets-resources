@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 import googleApiWrapper from "./GoogleApi";
 import { Alert } from "@widgets-resources/piw-utils";
-import { getCurrentUserLocation, getDimensions, validLocation } from "../utils";
+import { getCurrentUserLocation, getDimensions } from "../utils";
 import { HeightUnitEnum, Marker, ModeledMarker, WidthUnitEnum } from "../../typings";
 import { analyzeLocations } from "../utils";
 
@@ -20,8 +20,6 @@ export interface GoogleMapsProps {
     zoomLevel: number;
     mapsToken?: string;
     className?: string;
-    defaultCenterLatitude: number;
-    defaultCenterLongitude: number;
     locations?: ModeledMarker[];
     showCurrentLocation: boolean;
     mapStyles?: string;
@@ -41,7 +39,7 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
     private googleMapsNode?: HTMLDivElement;
 
     readonly state: GoogleMapState = {
-        center: this.getDefaultCenter(this.props),
+        center: this.defaultCenterLocation,
         validationMessage: this.props.validationMessage,
         currentLocation: undefined
     };
@@ -106,22 +104,6 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
         } else {
             this.createUpdateMap(this.props);
         }
-    }
-
-    private getDefaultCenter(props: GoogleMapsProps): google.maps.LatLngLiteral {
-        const { defaultCenterLatitude, defaultCenterLongitude } = props;
-        const location = {
-            latitude: defaultCenterLatitude,
-            longitude: defaultCenterLongitude
-        };
-        if (validLocation(location)) {
-            return {
-                lat: defaultCenterLatitude,
-                lng: defaultCenterLongitude
-            };
-        }
-
-        return this.defaultCenterLocation;
     }
 
     private getRef = (node: HTMLDivElement): void => {
