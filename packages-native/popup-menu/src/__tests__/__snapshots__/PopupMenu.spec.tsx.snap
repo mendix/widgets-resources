@@ -1,0 +1,703 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Popup menu renders menu triggerer 1`] = `
+<View
+  collapsable={false}
+>
+  <View>
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View>
+        <Text>
+          Menu Triggerer
+        </Text>
+      </View>
+    </View>
+  </View>
+  <Modal
+    hardwareAccelerated={false}
+    onDismiss={[Function]}
+    onRequestClose={[Function]}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "portrait-upside-down",
+        "landscape",
+        "landscape-left",
+        "landscape-right",
+      ]
+    }
+    transparent={true}
+    visible={false}
+  >
+    <View
+      accessible={false}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        onLayout={[Function]}
+        style={
+          Object {
+            "backgroundColor": "white",
+            "borderRadius": 4,
+            "left": 8,
+            "opacity": 0,
+            "position": "absolute",
+            "shadowColor": "black",
+            "shadowOffset": Object {
+              "height": 2,
+              "width": 0,
+            },
+            "shadowOpacity": 0.14,
+            "shadowRadius": 2,
+            "top": 8,
+            "transform": Array [],
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "overflow": "hidden",
+            }
+          }
+        >
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={null}
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 48,
+                    "justifyContent": "center",
+                    "maxWidth": 248,
+                    "minWidth": 124,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                ellipsizeMode="clip"
+                numberOfLines={1}
+                style={
+                  Array [
+                    Object {
+                      "fontSize": 14,
+                      "fontWeight": "400",
+                      "paddingHorizontal": 16,
+                      "textAlign": "left",
+                    },
+                    false,
+                    Object {
+                      "color": "red",
+                    },
+                  ]
+                }
+              >
+                yolo
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "borderBottomWidth": 0.5,
+                  "flex": 1,
+                },
+                Object {
+                  "borderBottomColor": "green",
+                },
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>
+</View>
+`;
+
+exports[`Popup menu with basic items renders 1`] = `
+<View
+  collapsable={false}
+>
+  <View>
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View />
+    </View>
+  </View>
+  <Modal
+    hardwareAccelerated={false}
+    onDismiss={[Function]}
+    onRequestClose={[Function]}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "portrait-upside-down",
+        "landscape",
+        "landscape-left",
+        "landscape-right",
+      ]
+    }
+    transparent={true}
+    visible={false}
+  >
+    <View
+      accessible={false}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        onLayout={[Function]}
+        style={
+          Object {
+            "backgroundColor": "white",
+            "borderRadius": 4,
+            "left": 8,
+            "opacity": 0,
+            "position": "absolute",
+            "shadowColor": "black",
+            "shadowOffset": Object {
+              "height": 2,
+              "width": 0,
+            },
+            "shadowOpacity": 0.14,
+            "shadowRadius": 2,
+            "top": 8,
+            "transform": Array [],
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "overflow": "hidden",
+            }
+          }
+        >
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={null}
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 48,
+                    "justifyContent": "center",
+                    "maxWidth": 248,
+                    "minWidth": 124,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                ellipsizeMode="clip"
+                numberOfLines={1}
+                style={
+                  Array [
+                    Object {
+                      "fontSize": 14,
+                      "fontWeight": "400",
+                      "paddingHorizontal": 16,
+                      "textAlign": "left",
+                    },
+                    false,
+                    Object {
+                      "color": "red",
+                    },
+                  ]
+                }
+              >
+                yolo
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "borderBottomWidth": 0.5,
+                  "flex": 1,
+                },
+                Object {
+                  "borderBottomColor": "green",
+                },
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>
+</View>
+`;
+
+exports[`Popup menu with basic items renders with custom styles 1`] = `
+<View
+  collapsable={false}
+>
+  <View>
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View />
+    </View>
+  </View>
+  <Modal
+    hardwareAccelerated={false}
+    onDismiss={[Function]}
+    onRequestClose={[Function]}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "portrait-upside-down",
+        "landscape",
+        "landscape-left",
+        "landscape-right",
+      ]
+    }
+    transparent={true}
+    visible={false}
+  >
+    <View
+      accessible={false}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        onLayout={[Function]}
+        style={
+          Object {
+            "backgroundColor": "white",
+            "borderRadius": 4,
+            "left": 8,
+            "opacity": 0,
+            "position": "absolute",
+            "shadowColor": "black",
+            "shadowOffset": Object {
+              "height": 2,
+              "width": 0,
+            },
+            "shadowOpacity": 0.14,
+            "shadowRadius": 2,
+            "top": 8,
+            "transform": Array [],
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "overflow": "hidden",
+            }
+          }
+        >
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={null}
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "height": 48,
+                    "justifyContent": "center",
+                    "maxWidth": 248,
+                    "minWidth": 124,
+                  },
+                  undefined,
+                ]
+              }
+            >
+              <Text
+                ellipsizeMode="clip"
+                numberOfLines={1}
+                style={
+                  Array [
+                    Object {
+                      "fontSize": 14,
+                      "fontWeight": "400",
+                      "paddingHorizontal": 16,
+                      "textAlign": "left",
+                    },
+                    false,
+                    Object {
+                      "color": "green",
+                    },
+                  ]
+                }
+              >
+                yolo
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "borderBottomWidth": 0.5,
+                  "flex": 1,
+                },
+                Object {
+                  "borderBottomColor": "green",
+                },
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </Modal>
+</View>
+`;
+
+exports[`Popup menu with complex items renders 1`] = `
+<View
+  collapsable={false}
+>
+  <View>
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View />
+    </View>
+  </View>
+  <Modal
+    hardwareAccelerated={false}
+    onDismiss={[Function]}
+    onRequestClose={[Function]}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "portrait-upside-down",
+        "landscape",
+        "landscape-left",
+        "landscape-right",
+      ]
+    }
+    transparent={true}
+    visible={false}
+  >
+    <View
+      accessible={false}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        onLayout={[Function]}
+        style={
+          Object {
+            "backgroundColor": "white",
+            "borderRadius": 4,
+            "left": 8,
+            "opacity": 0,
+            "position": "absolute",
+            "shadowColor": "black",
+            "shadowOffset": Object {
+              "height": 2,
+              "width": 0,
+            },
+            "shadowOpacity": 0.14,
+            "shadowRadius": 2,
+            "top": 8,
+            "transform": Array [],
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "overflow": "hidden",
+            }
+          }
+        >
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "height": 48,
+                  "justifyContent": "center",
+                  "maxWidth": 248,
+                  "minWidth": 124,
+                }
+              }
+            >
+              <Text>
+                Yolo
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </Modal>
+</View>
+`;
+
+exports[`Popup menu with complex items renders with custom styles 1`] = `
+<View
+  collapsable={false}
+>
+  <View>
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View />
+    </View>
+  </View>
+  <Modal
+    hardwareAccelerated={false}
+    onDismiss={[Function]}
+    onRequestClose={[Function]}
+    supportedOrientations={
+      Array [
+        "portrait",
+        "portrait-upside-down",
+        "landscape",
+        "landscape-left",
+        "landscape-right",
+      ]
+    }
+    transparent={true}
+    visible={false}
+  >
+    <View
+      accessible={false}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        onLayout={[Function]}
+        style={
+          Object {
+            "backgroundColor": "white",
+            "borderRadius": 4,
+            "left": 8,
+            "opacity": 0,
+            "position": "absolute",
+            "shadowColor": "black",
+            "shadowOffset": Object {
+              "height": 2,
+              "width": 0,
+            },
+            "shadowOpacity": 0.14,
+            "shadowRadius": 2,
+            "top": 8,
+            "transform": Array [],
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "overflow": "hidden",
+            }
+          }
+        >
+          <View
+            accessible={true}
+            isTVSelectable={true}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "backgroundColor": "yellow",
+                  "height": 48,
+                  "justifyContent": "center",
+                  "maxWidth": 248,
+                  "minWidth": 124,
+                }
+              }
+            >
+              <Text>
+                Yolo
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </Modal>
+</View>
+`;
