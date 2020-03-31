@@ -29,6 +29,9 @@ export interface MarkersType {
     address?: string;
     addressAttribute?: EditableValue<string>;
     addressExpression?: DynamicValue<string>;
+    title?: string;
+    titleAttribute?: EditableValue<string>;
+    titleExpression?: DynamicValue<string>;
     latitude: BigJs.Big;
     latitudeAttribute?: EditableValue<BigJs.Big>;
     latitudeExpression?: DynamicValue<BigJs.Big>;
@@ -48,6 +51,7 @@ export interface DynamicMarkersType {
     markersDS?: ListValue;
     locationType: LocationTypeEnum;
     address?: (item: ObjectItem) => EditableValue<string>;
+    title?: (item: ObjectItem) => EditableValue<string>;
     latitude?: (item: ObjectItem) => EditableValue<BigJs.Big>;
     longitude?: (item: ObjectItem) => EditableValue<BigJs.Big>;
     onClickAttribute?: (item: ObjectItem) => ActionValue;
@@ -70,6 +74,9 @@ export interface MarkersPreviewType {
     address?: string;
     addressAttribute?: string;
     addressExpression?: string;
+    title?: string;
+    titleAttribute?: string;
+    titleExpression?: string;
     latitude: BigJs.Big;
     latitudeAttribute?: string;
     latitudeExpression?: BigJs.Big;
@@ -85,6 +92,7 @@ export interface DynamicMarkersPreviewType {
     markersDS?: ListValue;
     locationType: LocationTypeEnum;
     address?: (item: ObjectItem) => string;
+    title?: (item: ObjectItem) => string;
     latitude?: (item: ObjectItem) => string;
     longitude?: (item: ObjectItem) => string;
     onClickAttribute?: (item: ObjectItem) => ActionPreview;
@@ -99,6 +107,9 @@ export interface MarkersVisibilityType {
     address: boolean;
     addressAttribute: boolean;
     addressExpression: boolean;
+    title: boolean;
+    titleAttribute: boolean;
+    titleExpression: boolean;
     latitude: boolean;
     latitudeAttribute: boolean;
     latitudeExpression: boolean;
@@ -114,6 +125,7 @@ export interface DynamicMarkersVisibilityType {
     markersDS: boolean;
     locationType: boolean;
     address: boolean;
+    title: boolean;
     latitude: boolean;
     longitude: boolean;
     onClickAttribute: boolean;

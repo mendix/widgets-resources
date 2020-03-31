@@ -1,8 +1,8 @@
 import { hot } from "react-hot-loader/root";
 import { createElement, ReactNode, useState } from "react";
 import { MapsContainerProps } from "../typings/MapsProps";
-import GoogleMap, { ModeledMarker } from "./components/GoogleMap";
-import { analyzeDynamicMarker, analyzeStaticMarker, translateZoom } from "./utils/Utils";
+import GoogleMap from "./components/GoogleMap";
+import { analyzeDynamicMarker, analyzeStaticMarker, ModeledMarker, translateZoom } from "./utils/Utils";
 import { ValueStatus } from "mendix";
 import "./ui/Maps.css";
 
@@ -13,7 +13,6 @@ const Maps = (props: MapsContainerProps): ReactNode => {
     currentMarkers.push(...props.markers.map(marker => analyzeStaticMarker(marker)));
     props.dynamicMarkers.forEach(marker => {
         if (marker.markersDS && marker.markersDS.status === ValueStatus.Available) {
-            console.warn("Extracting markers");
             marker.markersDS.items?.forEach(item => {
                 currentMarkers.push(analyzeDynamicMarker(marker, item));
             });
@@ -37,6 +36,7 @@ const Maps = (props: MapsContainerProps): ReactNode => {
             width={props.width}
             heightUnit={props.heightUnit}
             height={props.height}
+            showCurrentLocation={props.showCurrentLocation}
         />
     );
 };

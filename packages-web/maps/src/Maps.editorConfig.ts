@@ -22,21 +22,26 @@ export function getProperties(
             hideProperty<MarkersType>("propertyContext", defaultPropertiesForMarkers?.[index]);
             hideProperty<MarkersType>("addressAttribute", defaultPropertiesForMarkers?.[index]);
             hideProperty<MarkersType>("addressExpression", defaultPropertiesForMarkers?.[index]);
+            hideProperty<MarkersType>("titleAttribute", defaultPropertiesForMarkers?.[index]);
+            hideProperty<MarkersType>("titleExpression", defaultPropertiesForMarkers?.[index]);
             hideProperty<MarkersType>("latitudeAttribute", defaultPropertiesForMarkers?.[index]);
             hideProperty<MarkersType>("latitudeExpression", defaultPropertiesForMarkers?.[index]);
             hideProperty<MarkersType>("longitudeAttribute", defaultPropertiesForMarkers?.[index]);
             hideProperty<MarkersType>("longitudeExpression", defaultPropertiesForMarkers?.[index]);
         } else {
             hideProperty<MarkersType>("address", defaultPropertiesForMarkers?.[index]);
+            hideProperty<MarkersType>("title", defaultPropertiesForMarkers?.[index]);
             hideProperty<MarkersType>("latitude", defaultPropertiesForMarkers?.[index]);
             hideProperty<MarkersType>("longitude", defaultPropertiesForMarkers?.[index]);
             if (f.propertyContext === "attribute" || target === "web") {
                 // Studio doesnt support expression
                 hideProperty<MarkersType>("addressExpression", defaultPropertiesForMarkers?.[index]);
+                hideProperty<MarkersType>("titleExpression", defaultPropertiesForMarkers?.[index]);
                 hideProperty<MarkersType>("latitudeExpression", defaultPropertiesForMarkers?.[index]);
                 hideProperty<MarkersType>("longitudeExpression", defaultPropertiesForMarkers?.[index]);
             } else {
                 hideProperty<MarkersType>("addressAttribute", defaultPropertiesForMarkers?.[index]);
+                hideProperty<MarkersType>("titleAttribute", defaultPropertiesForMarkers?.[index]);
                 hideProperty<MarkersType>("latitudeAttribute", defaultPropertiesForMarkers?.[index]);
                 hideProperty<MarkersType>("longitudeAttribute", defaultPropertiesForMarkers?.[index]);
             }
