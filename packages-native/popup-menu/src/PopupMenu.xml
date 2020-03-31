@@ -48,10 +48,9 @@
                         <category>General</category>
                         <description />
                         <enumerationValues>
-                            <enumerationValue key="defaultStyle">Default</enumerationValue>
-                            <enumerationValue key="primaryStyle">Primary</enumerationValue>
-                            <enumerationValue key="dangerStyle">Danger</enumerationValue>
-                            <enumerationValue key="customStyle">Custom</enumerationValue>
+                            <enumerationValue key="default">Default</enumerationValue>
+                            <enumerationValue key="primary">Primary</enumerationValue>
+                            <enumerationValue key="danger">Danger</enumerationValue>
                         </enumerationValues>
                     </property>
                 </properties>

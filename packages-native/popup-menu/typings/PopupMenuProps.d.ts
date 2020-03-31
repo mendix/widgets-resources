@@ -15,7 +15,7 @@ export type RenderModeEnum = "basic" | "custom";
 
 export type ItemTypeEnum = "item" | "divider";
 
-export type StyleClassEnum = "defaultStyle" | "primaryStyle" | "dangerStyle" | "customStyle";
+export type StyleClassEnum = "default" | "primary" | "danger";
 
 export interface ItemsBasicType {
     itemType: ItemTypeEnum;
