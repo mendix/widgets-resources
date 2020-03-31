@@ -1,6 +1,5 @@
-import { DynamicMarkersType, MapsPreviewProps, MarkersType } from "../typings/MapsProps";
-import { Problem, Properties } from "../typings/PageEditor";
-import { hideProperty } from "./utils/PageEditorUtils";
+import { DynamicMarkersType, MapsPreviewProps, MarkersType } from "../typings";
+import { hideProperty, Problem, Properties } from "@widgets-resources/piw-utils";
 
 export function getProperties(
     values: MapsPreviewProps,

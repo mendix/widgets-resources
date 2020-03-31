@@ -1,7 +1,7 @@
 import { createElement, ReactNode } from "react";
-import { MapsPreviewProps } from "../typings/MapsProps";
+import { MapsPreviewProps } from "../typings";
 import GoogleMap from "./components/GoogleMap";
-import { translateZoom } from "./utils/Utils";
+import { translateZoom } from "./utils";
 
 declare function require(name: string): string;
 

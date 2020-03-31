@@ -1,14 +1,13 @@
 import { hot } from "react-hot-loader/root";
-import { createElement, ReactNode, useState } from "react";
-import { MapsContainerProps } from "../typings/MapsProps";
+import { createElement, ReactNode } from "react";
+import { MapsContainerProps, ModeledMarker } from "../typings";
 import GoogleMap from "./components/GoogleMap";
-import { analyzeDynamicMarker, analyzeStaticMarker, ModeledMarker, translateZoom } from "./utils/Utils";
 import { ValueStatus } from "mendix";
 import "./ui/Maps.css";
+import { analyzeDynamicMarker, analyzeStaticMarker, translateZoom } from "./utils";
 
 const Maps = (props: MapsContainerProps): ReactNode => {
     const currentMarkers: ModeledMarker[] = [];
-    const [locations, setLocations] = useState<ModeledMarker[]>(currentMarkers);
 
     currentMarkers.push(...props.markers.map(marker => analyzeStaticMarker(marker)));
     props.dynamicMarkers.forEach(marker => {
@@ -19,19 +18,14 @@ const Maps = (props: MapsContainerProps): ReactNode => {
         }
     });
 
-    if (currentMarkers.length !== locations.length) {
-        setLocations(currentMarkers);
-    }
-
-    console.warn(locations);
     return (
         <GoogleMap
-            autoZoom
+            autoZoom={props.zoom === "automatic"}
             zoomLevel={translateZoom(props.zoom)}
             mapsToken={props.apiKey && props.apiKey.status === ValueStatus.Available ? props.apiKey.value : undefined}
             defaultCenterLatitude={51.906855}
             defaultCenterLongitude={4.488367}
-            locations={locations}
+            locations={currentMarkers}
             widthUnit={props.widthUnit}
             width={props.width}
             heightUnit={props.heightUnit}

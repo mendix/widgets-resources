@@ -59,7 +59,7 @@ export interface DynamicMarkersType {
     customMarkerDynamic?: DynamicValue<WebImage>;
 }
 
-export type ZoomEnum = "world" | "continent" | "city" | "street" | "buildings";
+export type ZoomEnum = "automatic" | "world" | "continent" | "city" | "street" | "buildings";
 
 export type WidthUnitEnum = "percentage" | "pixels";
 

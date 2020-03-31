@@ -196,11 +196,12 @@
                     <caption>Google maps API Key</caption>
                     <description>Please insert your Google API Key</description>
                 </property>
-                <property key="zoom" type="enumeration" defaultValue="city">
+                <property key="zoom" type="enumeration" defaultValue="automatic">
                     <caption>Zoom</caption>
                     <description>Zoom level for single marker, no marker or when fit to markers is disabled.
                     </description>
                     <enumerationValues>
+                        <enumerationValue key="automatic">Automatic</enumerationValue>
                         <enumerationValue key="world">World</enumerationValue>
                         <enumerationValue key="continent">Continent</enumerationValue>
                         <enumerationValue key="city">City</enumerationValue>
