@@ -10,6 +10,7 @@ export * from "./core/base/spacing";
 export * from "./core/widgets/activityindicator";
 export * from "./core/helpers/activityindicator";
 export * from "./core/widgets/animation";
+export * from "./core/widgets/backgroundimage";
 export * from "./core/widgets/badge";
 export * from "./core/helpers/badge";
 export * from "./core/widgets/bottomsheet";

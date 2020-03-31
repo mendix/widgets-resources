@@ -44,13 +44,6 @@ export const TabContainer: TabContainerType = {
     },
     activeLabel: {
         // All TextStyle properties are allowed
-        color: tabcontainer.activeLabel.color,
-        fontFamily: font.family,
-        fontWeight: tabcontainer.activeLabel.fontWeight,
-        textTransform: tabcontainer.activeLabel.textTransform,
-    },
-    activeLabel: {
-        // All TextStyle properties are allowed
         color: tabContainer.activeLabel.color,
         fontFamily: font.family,
         fontWeight: tabContainer.activeLabel.fontWeight,

@@ -230,10 +230,6 @@ let tabContainer: VariablesTabContainer = {
         fontWeight: font.weightBold,
         textTransform: "uppercase",
     },
-    activeLabel: {
-        color: brand.primary,
-        fontWeight: font.weightBold,
-    },
 };
 tabContainer = merge(tabContainer, custom.tabContainer || {});
 //

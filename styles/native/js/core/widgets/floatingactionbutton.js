@@ -21,6 +21,7 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
         size: 50,
         rippleColor: contrast.lowest,
         backgroundColor: brand.primary,
+        elevation: 2,
         shadowColor: "#000",
         shadowOpacity: 0.3,
         shadowRadius: 4,
@@ -28,7 +29,6 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
             width: 0,
             height: 2,
         },
-        elevation: 2,
     },
     buttonIcon: {
         // Size and color are allowed
@@ -39,6 +39,7 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
         // Size and all ViewStyle properties are allowed
         size: 30,
         backgroundColor: background.secondary,
+        elevation: 2,
         shadowColor: "#000",
         shadowOpacity: 0.3,
         shadowRadius: 4,
@@ -46,7 +47,6 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
             width: 0,
             height: 2,
         },
-        elevation: 2,
     },
     secondaryButtonIcon: {
         // Size and color are allowed
@@ -59,13 +59,12 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton 
     secondaryButtonCaptionContainer: {
         // All ViewStyle properties are allowed
         marginHorizontal: 5,
-        shadowColor: "#000",
+        elevation: 2,
         shadowOpacity: 0.3,
         shadowRadius: 4,
         shadowOffset: {
             width: 0,
             height: 2,
         },
-        elevation: 2,
     },
 };

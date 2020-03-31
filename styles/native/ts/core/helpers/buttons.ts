@@ -114,11 +114,6 @@ export const btnIconPrimary: ActionButtonType = merge(btnIcon, {
 });
 export const btnIconSecondary: ActionButtonType = merge(btnIcon, {
     icon: {
-        color: button.primary.backgroundColor,
-    },
-});
-export const btnIconSecondary = merge(btnIcon, {
-    icon: {
         color: contrast.low,
     },
 });

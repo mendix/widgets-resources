@@ -31,7 +31,8 @@ export const TabContainer = {
         height: tabContainer.indicator.height,
     },
     tab: {
-    // All ViewStyle properties are allowed
+        // All ViewStyle properties are allowed
+        paddingVertical: spacing.smaller,
     },
     label: {
         // All TextStyle properties are allowed
