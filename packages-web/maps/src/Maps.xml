@@ -57,6 +57,22 @@
                                 <description/>
                                 <returnType type="String"/>
                             </property>
+                            <property key="title" type="string" required="false">
+                                <caption>Title</caption>
+                                <description/>
+                            </property>
+                            <property key="titleAttribute" type="attribute" required="false">
+                                <caption>Title</caption>
+                                <description/>
+                                <attributeTypes>
+                                    <attributeType name="String"/>
+                                </attributeTypes>
+                            </property>
+                            <property key="titleExpression" type="expression" required="false">
+                                <caption>Title</caption>
+                                <description/>
+                                <returnType type="String"/>
+                            </property>
                             <property key="latitude" type="decimal" defaultValue="0">
                                 <caption>Latitude</caption>
                                 <description/>
@@ -127,6 +143,13 @@
                             </property>
                             <property key="address" type="attribute" dataSource="markersDS" required="false">
                                 <caption>Address</caption>
+                                <description/>
+                                <attributeTypes>
+                                    <attributeType name="String"/>
+                                </attributeTypes>
+                            </property>
+                            <property key="title" type="attribute" dataSource="markersDS" required="false">
+                                <caption>Title</caption>
                                 <description/>
                                 <attributeTypes>
                                     <attributeType name="String"/>
