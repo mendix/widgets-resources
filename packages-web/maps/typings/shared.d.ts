@@ -24,3 +24,13 @@ export interface Marker {
     onClick?: () => void;
     title?: string;
 }
+
+export interface SharedProps extends Dimensions {
+    autoZoom: boolean;
+    optionZoomControl: boolean;
+    zoomLevel: number;
+    optionDrag: boolean;
+    optionScroll: boolean;
+    showCurrentLocation: boolean;
+    locations?: ModeledMarker[];
+}

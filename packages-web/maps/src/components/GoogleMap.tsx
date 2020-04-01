@@ -4,7 +4,7 @@ import classNames from "classnames";
 import googleApiWrapper from "./GoogleApi";
 import { Alert } from "@widgets-resources/piw-utils";
 import { getCurrentUserLocation, getDimensions } from "../utils";
-import { HeightUnitEnum, Marker, ModeledMarker, WidthUnitEnum } from "../../typings";
+import { Marker, SharedProps } from "../../typings";
 import { analyzeLocations } from "../utils";
 
 interface GoogleMapState {
@@ -13,22 +13,18 @@ interface GoogleMapState {
     currentLocation?: Marker;
 }
 
-export interface GoogleMapsProps {
+export interface GoogleMapsProps extends SharedProps {
     scriptsLoaded?: boolean;
     validationMessage?: string;
-    autoZoom: boolean;
-    zoomLevel: number;
     mapsToken?: string;
     className?: string;
-    locations?: ModeledMarker[];
-    showCurrentLocation: boolean;
     mapStyles?: string;
     divStyles?: CSSProperties;
 
-    widthUnit: WidthUnitEnum;
-    width: number;
-    heightUnit: HeightUnitEnum;
-    height: number;
+    optionStreetView: boolean;
+    mapTypeControl: boolean;
+    fullScreenControl: boolean;
+    rotateControl: boolean;
 }
 
 export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
@@ -113,13 +109,13 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
     private createUpdateMap = (props: GoogleMapsProps): void => {
         const mapOptions: google.maps.MapOptions = {
             zoom: props.zoomLevel,
-            zoomControl: true,
-            scrollwheel: true,
-            draggable: true,
-            streetViewControl: false,
-            mapTypeControl: true,
-            fullscreenControl: true,
-            rotateControl: true,
+            zoomControl: props.optionZoomControl,
+            scrollwheel: props.optionScroll,
+            draggable: props.optionDrag,
+            streetViewControl: props.optionStreetView,
+            mapTypeControl: props.mapTypeControl,
+            fullscreenControl: props.fullScreenControl,
+            rotateControl: props.rotateControl,
             minZoom: 1,
             maxZoom: 20,
             styles: this.getMapStyles()
@@ -200,7 +196,6 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
             if (mapBounds && this.map) {
                 try {
                     if (!autoZoom) {
-                        console.log(this.markers[0]);
                         this.map.setCenter({
                             lat: this.markers[0].getPosition()?.lat() ?? this.state.center.lat,
                             lng: this.markers[0].getPosition()?.lng() ?? this.state.center.lng

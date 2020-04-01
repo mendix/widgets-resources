@@ -31,6 +31,13 @@ const Maps = (props: MapsContainerProps): ReactNode => {
             heightUnit={props.heightUnit}
             height={props.height}
             showCurrentLocation={props.showCurrentLocation}
+            optionZoomControl={props.optionZoomControl}
+            optionScroll={props.optionScroll}
+            optionDrag={props.optionDrag}
+            optionStreetView={props.optionStreetView}
+            mapTypeControl={props.mapTypeControl}
+            fullScreenControl={props.fullScreenControl}
+            rotateControl={props.rotateControl}
         />
     );
 };
