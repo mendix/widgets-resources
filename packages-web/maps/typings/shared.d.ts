@@ -8,7 +8,6 @@ export interface Dimensions {
 }
 
 export interface ModeledMarker {
-    uuid: string;
     address?: string;
     latitude?: number;
     longitude?: number;

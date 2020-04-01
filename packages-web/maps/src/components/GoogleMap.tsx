@@ -1,17 +1,12 @@
-import { Component, createElement, CSSProperties, ReactNode } from "react";
+import { createElement, CSSProperties, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 
 import googleApiWrapper from "./GoogleApi";
 import { Alert } from "@widgets-resources/piw-utils";
 import { getCurrentUserLocation, getDimensions } from "../utils";
-import { Marker, SharedProps } from "../../typings";
+import { Marker, ModeledMarker, SharedProps } from "../../typings";
 import { analyzeLocations } from "../utils";
-
-interface GoogleMapState {
-    center: google.maps.LatLngLiteral;
-    validationMessage?: string;
-    currentLocation?: Marker;
-}
+import deepEqual from "deep-equal";
 
 export interface GoogleMapsProps extends SharedProps {
     scriptsLoaded?: boolean;
@@ -27,86 +22,56 @@ export interface GoogleMapsProps extends SharedProps {
     rotateControl: boolean;
 }
 
-export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
-    private map!: google.maps.Map;
-    private defaultCenterLocation: google.maps.LatLngLiteral = { lat: 51.9066346, lng: 4.4861703 };
-    private markers: google.maps.Marker[] = [];
-    private bounds!: google.maps.LatLngBounds;
-    private googleMapsNode?: HTMLDivElement;
+export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
+    const map = useRef<google.maps.Map>();
+    const googleMapsRef = useRef<HTMLDivElement>(null);
+    const defaultCenterLocation: google.maps.LatLngLiteral = { lat: 51.9066346, lng: 4.4861703 };
+    let bounds!: google.maps.LatLngBounds;
 
-    readonly state: GoogleMapState = {
-        center: this.defaultCenterLocation,
-        validationMessage: this.props.validationMessage,
-        currentLocation: undefined
-    };
+    const [markers, setMarkers] = useState<google.maps.Marker[]>([]);
+    const [validationMessage, setValidationMessage] = useState(props.validationMessage);
+    const [currentLocation, setCurrentLocation] = useState<Marker>();
+    const [locations, setLocations] = useState<ModeledMarker[]>([]);
 
-    render(): ReactNode {
-        console.log("RENDER");
-        return (
-            <div
-                className={classNames("widget-maps", this.props.className)}
-                style={{ ...this.props.divStyles, ...getDimensions(this.props) }}
-            >
-                {this.state.validationMessage && (
-                    <Alert bootstrapStyle="danger" className="widget-google-maps-alert">
-                        {this.state.validationMessage}
-                    </Alert>
-                )}
-                <div className="widget-google-maps-wrapper">
-                    <div className="widget-google-maps" ref={this.getRef} />
-                </div>
-            </div>
-        );
-    }
-
-    componentDidMount(): void {
+    useEffect(() => {
         console.log("DID MOUNT");
-        if (this.props.scriptsLoaded) {
-            if (this.props.showCurrentLocation) {
+        if (props.scriptsLoaded) {
+            if (props.showCurrentLocation) {
                 getCurrentUserLocation().then(marker => {
-                    this.setState({ currentLocation: marker }, () => this.updateMarkers());
+                    setCurrentLocation(marker);
+                    updateMarkers();
                 });
             }
-            this.createUpdateMap(this.props);
+            createUpdateMap();
         }
-    }
+    }, [locations]);
 
-    updateMarkers() {
-        console.log("UPDATE MARKERS");
-        analyzeLocations(this.props.locations, this.props.mapsToken)
-            .then(markers => {
-                this.addMarkers(markers);
-            })
-            .catch(error => {
-                this.setState({ validationMessage: error.message });
-            });
-    }
-
-    componentDidUpdate(prevProps: Readonly<GoogleMapsProps>): void {
-        console.log("DID UPDATE", this.state);
-        if (this.map) {
-            if (prevProps.locations !== this.props.locations) {
-                this.updateMarkers();
-            }
-            if (!this.state.currentLocation) {
-                this.map.setCenter(this.state.center);
-            } else {
-                const { latitude: lat, longitude: lng } = this.state.currentLocation;
-                this.map.setCenter({
-                    lat,
-                    lng
-                });
+    useEffect(() => {
+        console.log("DID UPDATE");
+        if (map && map.current) {
+            if (props.locations && !checkLocations(locations, props.locations)) {
+                console.warn("Locations are different.. updating..");
+                setLocations(props.locations);
+                updateMarkers();
             }
         } else {
-            this.createUpdateMap(this.props);
+            createUpdateMap();
         }
-    }
+    }, [props.locations]);
 
-    private getRef = (node: HTMLDivElement): void => {
-        this.googleMapsNode = node;
+    const checkLocations = (previousLocations: ModeledMarker[], newLocations: ModeledMarker[]): boolean => {
+        const previous = previousLocations.map(l => {
+            const { action, ...rest } = l;
+            return rest;
+        });
+        const news = newLocations.map(l => {
+            const { action, ...rest } = l;
+            return rest;
+        });
+        return deepEqual(previous, news, { strict: true });
     };
 
-    private createUpdateMap = (props: GoogleMapsProps): void => {
+    const createUpdateMap = (): void => {
         const mapOptions: google.maps.MapOptions = {
             zoom: props.zoomLevel,
             zoomControl: props.optionZoomControl,
@@ -118,111 +83,126 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
             rotateControl: props.rotateControl,
             minZoom: 1,
             maxZoom: 20,
-            styles: this.getMapStyles()
+            styles: getMapStyles()
         };
-        if (this.googleMapsNode && !this.map) {
-            this.map = new google.maps.Map(this.googleMapsNode, mapOptions);
-        } else if (this.map) {
-            this.map.setOptions(mapOptions);
+        if (googleMapsRef.current && !map.current) {
+            console.warn("CREATING NEW MAP");
+            map.current = new google.maps.Map(googleMapsRef.current, mapOptions);
+        } else if (map.current) {
+            console.warn("SETTING NEW OPTIONS");
+            map.current.setOptions(mapOptions);
         }
-        this.updateMarkers();
     };
 
-    private addMarkers = (mapLocations?: Marker[]): void => {
+    const updateMarkers = useCallback(() => {
+        console.log("UPDATE MARKERS");
+        analyzeLocations(locations, props.mapsToken)
+            .then(markers => {
+                addMarkers(markers);
+            })
+            .catch(error => {
+                setValidationMessage(error.message);
+            });
+    }, [locations]);
+
+    const addMarkers = (mapLocations?: Marker[]): void => {
         console.log("ADD MARKERS", mapLocations?.length ?? 0);
-        this.markers.forEach(marker => marker.setMap(null));
-        this.markers = [];
+        markers.forEach(marker => marker.setMap(null));
+        setMarkers([]);
         if (mapLocations && mapLocations.length) {
-            this.bounds = new google.maps.LatLngBounds();
-            this.markers = mapLocations.reduce<google.maps.Marker[]>((markerArray, currentLocation) => {
-                const marker = this.addMarker(currentLocation);
-                markerArray.push(marker);
-
-                return markerArray;
-            }, []);
-            if (this.state.currentLocation) {
-                this.markers.push(this.addMarker(this.state.currentLocation));
+            bounds = new google.maps.LatLngBounds();
+            setMarkers(
+                mapLocations.reduce<google.maps.Marker[]>((markerArray, currentLocation) => {
+                    const marker = addMarker(currentLocation);
+                    if (marker) {
+                        markerArray.push(marker);
+                    }
+                    return markerArray;
+                }, [])
+            );
+            if (currentLocation) {
+                const currentLocationMarker = addMarker(currentLocation);
+                if (currentLocationMarker) {
+                    markers.push(currentLocationMarker);
+                }
             }
-            this.setMapOnMarkers(this.map);
-            this.setBounds(this.bounds);
+            updateCamera();
         }
     };
 
-    private addMarker(marker: Marker): google.maps.Marker {
-        this.bounds.extend({
-            lat: marker.latitude,
-            lng: marker.longitude
-        });
-        const mapMarker = new google.maps.Marker({
-            position: {
+    const addMarker = (marker: Marker): google.maps.Marker | undefined => {
+        if (map.current) {
+            bounds.extend({
                 lat: marker.latitude,
                 lng: marker.longitude
-            },
-            icon: marker.url,
-            title: marker.title
-        });
-        if (marker.title) {
-            const infoContent = document.createElement("span");
-            infoContent.innerHTML = marker.title || "";
-            infoContent.style.cursor = "pointer";
-            if (marker.onClick) {
-                infoContent.onclick = () => {
-                    if (marker.onClick) {
-                        marker.onClick();
-                    }
-                };
-            }
-            const infoWindow = new google.maps.InfoWindow({
-                content: infoContent
             });
-            mapMarker.addListener("click", () => {
-                infoWindow.open(this.map, mapMarker);
+            const mapMarker = new google.maps.Marker({
+                position: {
+                    lat: marker.latitude,
+                    lng: marker.longitude
+                },
+                icon: marker.url,
+                title: marker.title
             });
-        } else {
-            if (marker.onClick) {
+            if (marker.title) {
+                const infoContent = document.createElement("span");
+                infoContent.innerHTML = marker.title || "";
+                //TODO: Marker on click is refreshing the entire component
+                if (marker.onClick) {
+                    infoContent.style.cursor = "pointer";
+                    infoContent.onclick = marker.onClick;
+                }
+                const infoWindow = new google.maps.InfoWindow({
+                    content: infoContent
+                });
                 mapMarker.addListener("click", () => {
-                    marker.onClick!();
+                    infoWindow.open(map.current, mapMarker);
                 });
             } else {
-                mapMarker.setClickable(false);
+                if (marker.onClick) {
+                    //TODO: Marker on click is refreshing the entire component
+                    mapMarker.addListener("click", () => {
+                        marker.onClick!();
+                    });
+                } else {
+                    mapMarker.setClickable(false);
+                }
             }
+            mapMarker.setMap(map.current);
+            return mapMarker;
         }
-        return mapMarker;
-    }
+        return undefined;
+    };
 
-    private setBounds = (mapBounds?: google.maps.LatLngBounds): void => {
-        const { zoomLevel, autoZoom } = this.props;
+    const updateCamera = (): void => {
+        console.log("UPDATING CAMERA");
+        const { zoomLevel, autoZoom } = props;
         setTimeout(() => {
-            if (mapBounds && this.map) {
+            if (bounds && map.current) {
                 try {
                     if (!autoZoom) {
-                        this.map.setCenter({
-                            lat: this.markers[0].getPosition()?.lat() ?? this.state.center.lat,
-                            lng: this.markers[0].getPosition()?.lng() ?? this.state.center.lng
+                        map.current.setCenter({
+                            lat: markers[0].getPosition()?.lat() ?? defaultCenterLocation.lat,
+                            lng: markers[0].getPosition()?.lng() ?? defaultCenterLocation.lng
                         });
-                        this.map.setZoom(zoomLevel);
+                        map.current.setZoom(zoomLevel);
                     } else {
-                        this.map.fitBounds(mapBounds);
+                        map.current.fitBounds(bounds);
                     }
                 } catch (error) {
-                    this.setState({ validationMessage: `Invalid map bounds ${error.message}` });
+                    setValidationMessage(`Invalid map bounds ${error.message}`);
                 }
             }
         }, 0);
     };
 
-    private setMapOnMarkers = (map?: google.maps.Map): void => {
-        if (this.markers && this.markers.length && map) {
-            this.markers.forEach(marker => marker.setMap(map));
-        }
-    };
-
-    private getMapStyles(): google.maps.MapTypeStyle[] {
-        if (this.props.mapStyles && this.props.mapStyles.trim()) {
+    const getMapStyles = (): google.maps.MapTypeStyle[] => {
+        console.log("GETTING MAPS STYLES");
+        if (props.mapStyles && props.mapStyles.trim()) {
             try {
-                return JSON.parse(this.props.mapStyles);
+                return JSON.parse(props.mapStyles);
             } catch (error) {
-                this.setState({ validationMessage: `invalid Map styles, ${error.message}` });
+                setValidationMessage(`invalid Map styles, ${error.message}`);
             }
         }
 
@@ -233,7 +213,24 @@ export class GoogleMap extends Component<GoogleMapsProps, GoogleMapState> {
                 stylers: [{ visibility: "off" }]
             }
         ];
-    }
-}
+    };
+
+    console.log("RENDER");
+    return (
+        <div
+            className={classNames("widget-maps", props.className)}
+            style={{ ...props.divStyles, ...getDimensions(props) }}
+        >
+            {validationMessage && (
+                <Alert bootstrapStyle="danger" className="widget-google-maps-alert">
+                    {validationMessage}
+                </Alert>
+            )}
+            <div className="widget-google-maps-wrapper">
+                <div className="widget-google-maps" ref={googleMapsRef} />
+            </div>
+        </div>
+    );
+};
 
 export default googleApiWrapper("https://maps.googleapis.com/maps/api/js?key=")(GoogleMap);

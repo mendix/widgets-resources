@@ -1,6 +1,5 @@
 import { DynamicMarkersType, MarkersType } from "../../typings";
 import { DynamicValue, EditableValue, ObjectItem, ValueStatus } from "mendix";
-import { v4 as uuid } from "uuid";
 import { ModeledMarker } from "../../typings";
 import { Option } from "./index";
 
@@ -35,7 +34,6 @@ export const analyzeStaticMarker = (marker: MarkersType): ModeledMarker => {
     }
 
     return {
-        uuid: uuid(),
         address,
         latitude,
         longitude,
@@ -55,7 +53,6 @@ export const analyzeDynamicMarker = (marker: DynamicMarkersType, item: ObjectIte
         longitude = lng ? getValue(lng(item)) : undefined;
     }
     return {
-        uuid: item.id,
         address,
         latitude,
         longitude,

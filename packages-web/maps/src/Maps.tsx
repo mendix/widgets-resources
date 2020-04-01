@@ -38,6 +38,7 @@ const Maps = (props: MapsContainerProps): ReactNode => {
             mapTypeControl={props.mapTypeControl}
             fullScreenControl={props.fullScreenControl}
             rotateControl={props.rotateControl}
+            mapStyles={props.mapStyles}
         />
     );
 };

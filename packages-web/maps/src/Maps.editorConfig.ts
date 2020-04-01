@@ -17,63 +17,65 @@ export function getProperties(
     }
 
     values.markers.forEach((f, index) => {
+        const properties = defaultPropertiesForMarkers?.[index];
         if (f.dataSourceType === "static") {
-            hideProperty<MarkersType>("propertyContext", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("addressAttribute", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("addressExpression", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("titleAttribute", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("titleExpression", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("latitudeAttribute", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("latitudeExpression", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("longitudeAttribute", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("longitudeExpression", defaultPropertiesForMarkers?.[index]);
+            hideProperty<MarkersType>("propertyContext", properties);
+            hideProperty<MarkersType>("addressAttribute", properties);
+            hideProperty<MarkersType>("addressExpression", properties);
+            hideProperty<MarkersType>("titleAttribute", properties);
+            hideProperty<MarkersType>("titleExpression", properties);
+            hideProperty<MarkersType>("latitudeAttribute", properties);
+            hideProperty<MarkersType>("latitudeExpression", properties);
+            hideProperty<MarkersType>("longitudeAttribute", properties);
+            hideProperty<MarkersType>("longitudeExpression", properties);
         } else {
-            hideProperty<MarkersType>("address", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("title", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("latitude", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("longitude", defaultPropertiesForMarkers?.[index]);
+            hideProperty<MarkersType>("address", properties);
+            hideProperty<MarkersType>("title", properties);
+            hideProperty<MarkersType>("latitude", properties);
+            hideProperty<MarkersType>("longitude", properties);
             if (f.propertyContext === "attribute" || target === "web") {
                 // Studio doesnt support expression
-                hideProperty<MarkersType>("addressExpression", defaultPropertiesForMarkers?.[index]);
-                hideProperty<MarkersType>("titleExpression", defaultPropertiesForMarkers?.[index]);
-                hideProperty<MarkersType>("latitudeExpression", defaultPropertiesForMarkers?.[index]);
-                hideProperty<MarkersType>("longitudeExpression", defaultPropertiesForMarkers?.[index]);
+                hideProperty<MarkersType>("addressExpression", properties);
+                hideProperty<MarkersType>("titleExpression", properties);
+                hideProperty<MarkersType>("latitudeExpression", properties);
+                hideProperty<MarkersType>("longitudeExpression", properties);
             } else {
-                hideProperty<MarkersType>("addressAttribute", defaultPropertiesForMarkers?.[index]);
-                hideProperty<MarkersType>("titleAttribute", defaultPropertiesForMarkers?.[index]);
-                hideProperty<MarkersType>("latitudeAttribute", defaultPropertiesForMarkers?.[index]);
-                hideProperty<MarkersType>("longitudeAttribute", defaultPropertiesForMarkers?.[index]);
+                hideProperty<MarkersType>("addressAttribute", properties);
+                hideProperty<MarkersType>("titleAttribute", properties);
+                hideProperty<MarkersType>("latitudeAttribute", properties);
+                hideProperty<MarkersType>("longitudeAttribute", properties);
             }
         }
         if (f.locationType === "address") {
-            hideProperty<MarkersType>("latitude", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("latitudeAttribute", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("latitudeExpression", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("longitude", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("longitudeAttribute", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("longitudeExpression", defaultPropertiesForMarkers?.[index]);
+            hideProperty<MarkersType>("latitude", properties);
+            hideProperty<MarkersType>("latitudeAttribute", properties);
+            hideProperty<MarkersType>("latitudeExpression", properties);
+            hideProperty<MarkersType>("longitude", properties);
+            hideProperty<MarkersType>("longitudeAttribute", properties);
+            hideProperty<MarkersType>("longitudeExpression", properties);
         } else {
-            hideProperty<MarkersType>("address", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("addressAttribute", defaultPropertiesForMarkers?.[index]);
-            hideProperty<MarkersType>("addressExpression", defaultPropertiesForMarkers?.[index]);
+            hideProperty<MarkersType>("address", properties);
+            hideProperty<MarkersType>("addressAttribute", properties);
+            hideProperty<MarkersType>("addressExpression", properties);
         }
         if (f.markerStyle === "default") {
             hideProperty<MarkersType>(
                 "customMarker",
-                defaultPropertiesForMarkers?.[index] // First config, first group, first property
+                properties // First config, first group, first property
             );
         }
     });
 
     values.dynamicMarkers.forEach((f, index) => {
+        const properties = defaultPropertiesForDynamicMarkers?.[index];
         if (f.locationType === "address") {
-            hideProperty<DynamicMarkersType>("latitude", defaultPropertiesForDynamicMarkers?.[index]);
-            hideProperty<DynamicMarkersType>("longitude", defaultPropertiesForDynamicMarkers?.[index]);
+            hideProperty<DynamicMarkersType>("latitude", properties);
+            hideProperty<DynamicMarkersType>("longitude", properties);
         } else {
-            hideProperty<DynamicMarkersType>("address", defaultPropertiesForDynamicMarkers?.[index]);
+            hideProperty<DynamicMarkersType>("address", properties);
         }
         if (f.markerStyleDynamic === "default") {
-            hideProperty<DynamicMarkersType>("customMarkerDynamic", defaultPropertiesForDynamicMarkers?.[index]);
+            hideProperty<DynamicMarkersType>("customMarkerDynamic", properties);
         }
     });
 

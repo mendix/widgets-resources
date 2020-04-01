@@ -30,8 +30,7 @@
   },
   "packagePath": "com.mendix.widget.custom.Maps",
   "scripts": {
-    "start": "..\"/../node_modules/.bin/concurrently\" \"npm:start:server\"  \"npm:dev\"",
-    "start:server": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:server --open --subprojectPath packages-web/maps",
+    "start": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:server --open --subprojectPath packages-web/maps",
     "dev": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:ts -- --subprojectPath packages-web/maps",
     "build": "..\"/../node_modules/.bin/pluggable-widgets-tools\" build:ts --subprojectPath packages-web/maps",
     "format": "..\"/../node_modules/.bin/pluggable-widgets-tools\" format --subprojectPath packages-web/maps",
@@ -46,17 +45,17 @@
   "devDependencies": {
     "@types/classnames": "^2.2.7",
     "@types/googlemaps": "^3.39.2",
+    "@types/deep-equal": "^1.0.1",
     "@types/faker": "^4.1.5",
     "@types/leaflet": "^1.4.4",
     "@types/react": "~16.8.13",
-    "@types/uuid": "^7.0.2",
     "faker": "^4.1.0"
   },
   "dependencies": {
     "@widgets-resources/piw-utils": "^1.0.0",
     "classnames": "^2.2.6",
+    "deep-equal": "^2.0.2",
     "leaflet": "^1.4.0",
-    "leaflet-defaulticon-compatibility": "^0.1.1",
-    "uuid": "^7.0.2"
+    "leaflet-defaulticon-compatibility": "^0.1.1"
   }
 }
