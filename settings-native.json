@@ -1034,6 +1034,56 @@
                 "class": "tabContainerScroll"
             }
         ],
+        "TextBox": [
+            {
+                "name": "Capitalize",
+                "type": "Dropdown",
+                "description": "Change the capitalization of the input.",
+                "options": [
+                    {
+                        "name": "None",
+                        "class": "textInputCapitalizeNone"
+                    },
+                    {
+                        "name": "Characters",
+                        "class": "textInputCapitalizeCharacters"
+                    },
+                    {
+                        "name": "Words",
+                        "class": "textInputCapitalizeWords"
+                    },
+                    {
+                        "name": "Sentences",
+                        "class": "textInputCapitalizeSentences"
+                    }
+                ]
+            }
+        ],
+        "TextArea": [
+            {
+                "name": "Capitalize",
+                "type": "Dropdown",
+                "description": "Change the capitalization of the input.",
+                "options": [
+                    {
+                        "name": "None",
+                        "class": "textInputCapitalizeNone"
+                    },
+                    {
+                        "name": "Characters",
+                        "class": "textInputCapitalizeCharacters"
+                    },
+                    {
+                        "name": "Words",
+                        "class": "textInputCapitalizeWords"
+                    },
+                    {
+                        "name": "Sentences",
+                        "class": "textInputCapitalizeSentences"
+                    }
+                ]
+            }
+        ],
         "com.mendix.widget.native.activityindicator.ActivityIndicator": [
             {
                 "name": "Activity indicator style",

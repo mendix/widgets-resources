@@ -53,6 +53,7 @@ export * from "./core/widgets/tabcontainer";
 export * from "./core/helpers/tabcontainer";
 export * from "./core/widgets/textarea";
 export * from "./core/widgets/textbox";
+export * from "./core/helpers/textbox";
 export * from "./core/widgets/togglebuttons";
 export * from "./core/widgets/typography";
 export * from "./core/helpers/typography";

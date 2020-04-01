@@ -7,6 +7,7 @@ interface InputLabelType extends TextStyle {
 }
 
 interface InputType extends TextStyle {
+    autoCapitalize?: string,
     selectionColor?: string,
     placeholderTextColor?: string,
     underlineColorAndroid?: string,
