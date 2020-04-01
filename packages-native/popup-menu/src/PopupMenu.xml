@@ -43,7 +43,7 @@
                         <category>General</category>
                         <description />
                     </property>
-                    <property key="styleClass" type="enumeration" defaultValue="defaultStyle">
+                    <property key="styleClass" type="enumeration" defaultValue="default">
                         <caption>Style</caption>
                         <category>General</category>
                         <description />
