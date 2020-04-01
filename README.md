@@ -12,20 +12,22 @@ possibilities. Here you will find a basic overview of our framework.
 theme/
 ├── styles/
 |   ├── native/
-|       ├── app/
-|       |   ├── _custom-variables.js
-|       |   └── _custom.js
-|       ├── core/
-|       |   ├── base/
-|       |   ├── helpers/
-|       |   ├── widgets/
-|       |   | _variables.js
-|       |   └── manifest.json
-|       ├── ui_resources/
-|       |   └── atlas_ui_resources/
-|       |       ├── buildingblocks/
-|       |       └── layouts/
-|       └── main.js
+|   |   ├── ts/     // Will not be in the Atlas UI Resources module
+|   |   ├── js/
+|   |       ├── app/
+|   |       |   ├── _custom-variables.js
+|   |       |   └── _custom.js
+|   |       ├── core/
+|   |       |   ├── base/
+|   |       |   ├── helpers/
+|   |       |   ├── widgets/
+|   |       |   | _variables.js
+|   |       |   └── manifest.json
+|   |       ├── ui_resources/
+|   |       |   └── atlas_ui_resources/
+|   |       |       ├── buildingblocks/
+|   |       |       └── layouts/
+|   |       └── main.js
 |   └── web/
 |       ├── css/
 |       │   ├── * all output files
