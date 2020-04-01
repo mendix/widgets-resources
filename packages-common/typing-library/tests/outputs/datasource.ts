@@ -6,7 +6,7 @@ export const datasourceWebOutput = `/**
 import { CSSProperties } from "react";
 import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/typings";
 import { ActionValue, EditableValue, ListValue, ObjectItem } from "mendix";
-import { ReactNode } from "react";
+import { Component, ReactNode } from "react";
 
 interface CommonProps {
     name: string;
@@ -27,7 +27,7 @@ export interface MyWidgetPreviewProps {
     style: string;
     styleObject: CSSProperties;
     contentSource: ListValue;
-    content: (item: ObjectItem) => ReactNode;
+    content: (item: ObjectItem) => ({ widgetCount: number; renderer: Component });
     description: string;
     action: ActionPreview;
 }

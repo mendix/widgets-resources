@@ -64,9 +64,11 @@ const translateType = (
             return prop.$.type;
         case "widgets":
             if (prop.$.hasOwnProperty("dataSource")) {
-                return "(item: ObjectItem) => ReactNode";
+                return `(item: ObjectItem) => ${
+                    preview ? "({ widgetCount: number; renderer: Component })" : "ReactNode"
+                }`;
             }
-            return "ReactNode";
+            return preview ? "{ widgetCount: number; renderer: Component }" : "ReactNode";
         case "file":
             return preview && !isChild ? "FileValue" : "DynamicValue<FileValue>";
         case "datasource":
@@ -402,7 +404,7 @@ import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/t
     imports += propertyImports;
     if (hasContainment) {
         imports += `
-import { ReactNode } from "react";`;
+import { ${!mobile ? "Component, " : ""}ReactNode } from "react";`;
     }
 
     const previewContents = !mobile

@@ -6,7 +6,7 @@ export const containmentWebOutput = `/**
 import { CSSProperties } from "react";
 import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/typings";
 import { ActionValue, EditableValue } from "mendix";
-import { ReactNode } from "react";
+import { Component, ReactNode } from "react";
 
 interface CommonProps {
     name: string;
@@ -25,7 +25,7 @@ export interface MyWidgetPreviewProps {
     class: string;
     style: string;
     styleObject: CSSProperties;
-    content: ReactNode;
+    content: { widgetCount: number; renderer: Component };
     description: string;
     action: ActionPreview;
 }
