@@ -25,17 +25,17 @@ export const TextArea: TextBoxType = {
         paddingVertical: TextBox.input?.paddingVertical,
     },
     input: {
-        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
+        // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         ...TextBox.input,
         textAlignVertical: "top",
         paddingTop: TextBox.input?.paddingVertical,
     },
     inputDisabled: {
-        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
+        // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         backgroundColor: TextBox.inputDisabled?.backgroundColor,
     },
     inputError: {
-        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
+        // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         ...TextBox.inputError,
     },
     validationMessage: {

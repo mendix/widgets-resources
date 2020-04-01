@@ -26,7 +26,7 @@ export const TextBox: TextBoxType = {
         marginRight: spacing.small,
     },
     input: {
-        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
+        // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         color: input.color,
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
@@ -42,11 +42,11 @@ export const TextBox: TextBoxType = {
         paddingVertical: input.paddingVertical,
     },
     inputDisabled: {
-        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
+        // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         backgroundColor: input.disabledBackgroundColor,
     },
     inputError: {
-        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
+        // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         color: input.errorColor,
         borderColor: input.errorColor,
         placeholderTextColor: input.errorColor,
