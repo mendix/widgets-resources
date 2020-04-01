@@ -6,9 +6,7 @@ export interface GoogleApiWrapperState {
     alertMessage?: string;
 }
 
-const googleApiWrapper: Function = (script: string) => <P extends GoogleMapsProps>(
-    wrappedComponent: ComponentType<P>
-) => {
+const googleApiWrapper = (script: string) => <P extends GoogleMapsProps>(wrappedComponent: ComponentType<P>) => {
     class GoogleApiWrapperComponent extends Component<P, GoogleApiWrapperState> {
         readonly state: GoogleApiWrapperState = { scriptsLoaded: false, alertMessage: "" };
 

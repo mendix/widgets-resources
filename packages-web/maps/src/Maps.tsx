@@ -23,8 +23,6 @@ const Maps = (props: MapsContainerProps): ReactNode => {
             autoZoom={props.zoom === "automatic"}
             zoomLevel={translateZoom(props.zoom)}
             mapsToken={props.apiKey && props.apiKey.status === ValueStatus.Available ? props.apiKey.value : undefined}
-            defaultCenterLatitude={51.906855}
-            defaultCenterLongitude={4.488367}
             locations={currentMarkers}
             widthUnit={props.widthUnit}
             width={props.width}

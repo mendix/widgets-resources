@@ -11,8 +11,19 @@ export const preview = (props: MapsPreviewProps): ReactNode => {
             autoZoom
             zoomLevel={translateZoom(props.zoom)}
             mapsToken={props.apiKey}
-            defaultCenterLatitude={51.906855}
-            defaultCenterLongitude={4.488367}
+            widthUnit={props.widthUnit}
+            width={props.width}
+            heightUnit={props.heightUnit}
+            height={props.height}
+            showCurrentLocation={props.showCurrentLocation}
+            optionZoomControl={props.optionZoomControl}
+            optionScroll={props.optionScroll}
+            optionDrag={props.optionDrag}
+            optionStreetView={props.optionStreetView}
+            mapTypeControl={props.mapTypeControl}
+            fullScreenControl={props.fullScreenControl}
+            rotateControl={props.rotateControl}
+            mapStyles={props.mapStyles}
         />
     );
 };
