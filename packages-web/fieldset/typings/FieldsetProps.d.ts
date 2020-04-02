@@ -16,7 +16,7 @@ interface CommonProps {
 
 export interface FieldsetContainerProps extends CommonProps {
     legend?: DynamicValue<string>;
-    content?: ReactNode;
+    content: ReactNode;
 }
 
 export interface FieldsetPreviewProps {
@@ -24,7 +24,7 @@ export interface FieldsetPreviewProps {
     style: string;
     styleObject: CSSProperties;
     legend?: string;
-    content?: ReactNode;
+    content: ReactNode;
 }
 
 export interface VisibilityMap {

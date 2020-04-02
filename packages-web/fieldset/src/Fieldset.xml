@@ -10,7 +10,7 @@
                     <caption>Legend</caption>
                     <description/>
                 </property>
-                <property key="content" type="widgets" required="false">
+                <property key="content" type="widgets">
                     <caption>Content</caption>
                     <description />
                 </property>
