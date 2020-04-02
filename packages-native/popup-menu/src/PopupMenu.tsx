@@ -46,7 +46,7 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
 
     let menuOptions: ReactElement[];
     if (props.renderMode === "basic") {
-        menuOptions = props.itemsBasic.map((item, index) =>
+        menuOptions = props.basicItems.map((item, index) =>
             item.itemType === "divider" ? (
                 <MenuDivider key={index} color={styles.dividerColor} />
             ) : (
@@ -68,7 +68,7 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
                       underlayColor: styles.menuItem?.underlayColor
                   }
                 : {};
-        menuOptions = props.itemsComplex.map((item, index) => (
+        menuOptions = props.complexItems.map((item, index) => (
             <Touchable key={index} onPress={() => handlePress(item.action)} {...touchableProps}>
                 <View style={styles.customItemContainer}>{item.content}</View>
             </Touchable>
