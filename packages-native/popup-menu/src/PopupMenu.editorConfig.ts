@@ -1,10 +1,11 @@
 import { hideProperty, Properties } from "@widgets-resources/piw-utils";
-import { ItemsBasicType } from "../typings/PopupMenuProps";
+import { BasicItemsType, PopupMenuProps } from "../typings/PopupMenuProps";
+import { PopupMenuStyle } from "./ui/Styles";
 
-export function getProperties(values: any, defaultProperties: Properties): Properties {
+export function getProperties(values: PopupMenuProps<PopupMenuStyle>, defaultProperties: Properties): Properties {
     if (values.renderMode === "basic") {
-        hideProperty<any>("itemsComplex", defaultProperties);
-        values.itemsBasic.forEach((item: ItemsBasicType, index: number) => {
+        hideProperty<any>("complexItems", defaultProperties);
+        values.basicItems.forEach((item: BasicItemsType, index: number) => {
             if (item.itemType === "divider") {
                 hideProperty<any>("caption", defaultProperties?.[0].properties?.[2].properties?.[index]);
                 hideProperty<any>("action", defaultProperties?.[0].properties?.[2].properties?.[index]);
@@ -12,12 +13,7 @@ export function getProperties(values: any, defaultProperties: Properties): Prope
             }
         });
     } else {
-        hideProperty<any>("itemsBasic", defaultProperties);
-    }
-    if (values.typePopUp !== "Popover") {
-        hideProperty<any>("preferredLocation", defaultProperties);
-    } else {
-        hideProperty<any>("animate", defaultProperties);
+        hideProperty<any>("basicItems", defaultProperties);
     }
     return defaultProperties;
 }
