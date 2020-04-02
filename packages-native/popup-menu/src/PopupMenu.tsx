@@ -1,9 +1,8 @@
-import { ComponentType, createElement, ReactElement, useCallback, useEffect, useMemo, useRef } from "react";
+import { ComponentType, createElement, ReactElement, useCallback, useMemo, useRef } from "react";
 import { PopupMenuProps } from "../typings/PopupMenuProps";
 import { defaultPopupMenuStyles, PopupMenuStyle } from "./ui/Styles";
 import { executeAction } from "@widgets-resources/piw-utils";
 import {
-    BackHandler,
     Platform,
     TouchableNativeFeedback,
     TouchableNativeFeedbackProps,
@@ -32,14 +31,6 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
         },
         [menuRef]
     );
-
-    useEffect(() => {
-        const subscription = BackHandler.addEventListener("hardwareBackPress", () => {
-            menuRef.current?.hide();
-            return undefined;
-        });
-        return () => subscription.remove();
-    }, [menuRef]);
 
     const Touchable: ComponentType<TouchableNativeFeedbackProps | TouchableOpacityProps> =
         Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
