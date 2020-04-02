@@ -49,6 +49,7 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
                     textStyle={styles.menuItem?.textStyle}
                     ellipsizeMode={styles.menuItem?.ellipsizeMode}
                     style={styles.menuItem?.basicItemContainer}
+                    disabledTextColor={styles.menuItem?.disabledTextColor}
                 >
                     {item.caption}
                 </MenuItem>

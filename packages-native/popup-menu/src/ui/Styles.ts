@@ -42,6 +42,7 @@ interface PopupItemStyle {
     ellipsizeMode?: EllipsizeMode;
     complexItemContainer?: ViewStyle;
     basicItemContainer?: ViewStyle;
+    disabledTextColor?: string;
 }
 
 export const defaultPopupMenuStyles: PopupMenuStyle = {
