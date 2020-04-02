@@ -34,5 +34,4 @@ export interface PopupMenuProps<Style> extends CommonProps<Style> {
     renderMode: RenderModeEnum;
     basicItems: BasicItemsType[];
     complexItems: ComplexItemsType[];
-    handleBackButtonAndroid: boolean;
 }

@@ -71,10 +71,6 @@
                     </property>
                 </properties>
             </property>
-            <property key="handleBackButtonAndroid" type="boolean" defaultValue="true">
-                <caption>Close with back button</caption>
-                <description>Determines if the back button on Android devices can close the menu</description>
-            </property>
         </propertyGroup>
 
     </properties>
