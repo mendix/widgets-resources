@@ -14,13 +14,11 @@ exports[`Popup menu renders menu triggerer 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
+      style={null}
     >
-      <View>
+      <View
+        style={null}
+      >
         <Text>
           Menu Triggerer
         </Text>
@@ -169,13 +167,11 @@ exports[`Popup menu with basic items renders 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
+      style={null}
     >
-      <View />
+      <View
+        style={null}
+      />
     </View>
   </View>
   <Modal
@@ -320,13 +316,11 @@ exports[`Popup menu with basic items renders with custom styles 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
+      style={null}
     >
-      <View />
+      <View
+        style={null}
+      />
     </View>
   </View>
   <Modal
@@ -471,13 +465,11 @@ exports[`Popup menu with complex items renders 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
+      style={null}
     >
-      <View />
+      <View
+        style={null}
+      />
     </View>
   </View>
   <Modal
@@ -551,15 +543,12 @@ exports[`Popup menu with complex items renders 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "opacity": 1,
-              }
-            }
+            style={null}
           >
             <View
               style={
                 Object {
+                  "backgroundColor": "yellow",
                   "height": 48,
                   "justifyContent": "center",
                   "maxWidth": 248,
@@ -593,13 +582,11 @@ exports[`Popup menu with complex items renders with custom styles 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
-      style={
-        Object {
-          "opacity": 1,
-        }
-      }
+      style={null}
     >
-      <View />
+      <View
+        style={null}
+      />
     </View>
   </View>
   <Modal
@@ -673,11 +660,7 @@ exports[`Popup menu with complex items renders with custom styles 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "opacity": 1,
-              }
-            }
+            style={null}
           >
             <View
               style={
