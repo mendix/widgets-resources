@@ -20,7 +20,7 @@
                     <enumerationValue key="custom">Custom</enumerationValue>
                 </enumerationValues>
             </property>
-            <property key="itemsBasic" type="object" isList="true" required="false">
+            <property key="basicItems" type="object" isList="true" required="false">
                 <caption>Items</caption>
                 <description />
                 <properties>
@@ -55,7 +55,7 @@
                     </property>
                 </properties>
             </property>
-            <property key="itemsComplex" type="object" isList="true" required="false">
+            <property key="complexItems" type="object" isList="true" required="false">
                 <caption>Items Complex</caption>
                 <description />
                 <properties>

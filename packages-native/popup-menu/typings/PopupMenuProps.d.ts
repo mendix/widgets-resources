@@ -17,14 +17,14 @@ export type ItemTypeEnum = "item" | "divider";
 
 export type StyleClassEnum = "default" | "primary" | "danger";
 
-export interface ItemsBasicType {
+export interface BasicItemsType {
     itemType: ItemTypeEnum;
     caption?: string;
     action?: ActionValue;
     styleClass: StyleClassEnum;
 }
 
-export interface ItemsComplexType {
+export interface ComplexItemsType {
     content: ReactNode;
     action?: ActionValue;
 }
@@ -32,7 +32,7 @@ export interface ItemsComplexType {
 export interface PopupMenuProps<Style> extends CommonProps<Style> {
     menuTriggerer?: ReactNode;
     renderMode: RenderModeEnum;
-    itemsBasic: ItemsBasicType[];
-    itemsComplex: ItemsComplexType[];
+    basicItems: BasicItemsType[];
+    complexItems: ComplexItemsType[];
     handleBackButtonAndroid: boolean;
 }
