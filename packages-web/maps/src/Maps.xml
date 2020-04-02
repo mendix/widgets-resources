@@ -30,7 +30,7 @@
                                 <description/>
                                 <enumerationValues>
                                     <enumerationValue key="address">Based on address</enumerationValue>
-                                    <enumerationValue key="latlng">Based on latitude &amp; longitude</enumerationValue>
+                                    <enumerationValue key="latlng">Based on latitude and longitude</enumerationValue>
                                 </enumerationValues>
                             </property>
                             <property key="propertyContext" type="enumeration" defaultValue="attribute">
@@ -54,22 +54,6 @@
                             </property>
                             <property key="addressExpression" type="expression" required="false">
                                 <caption>Address</caption>
-                                <description/>
-                                <returnType type="String"/>
-                            </property>
-                            <property key="title" type="string" required="false">
-                                <caption>Title</caption>
-                                <description/>
-                            </property>
-                            <property key="titleAttribute" type="attribute" required="false">
-                                <caption>Title</caption>
-                                <description/>
-                                <attributeTypes>
-                                    <attributeType name="String"/>
-                                </attributeTypes>
-                            </property>
-                            <property key="titleExpression" type="expression" required="false">
-                                <caption>Title</caption>
                                 <description/>
                                 <returnType type="String"/>
                             </property>
@@ -105,6 +89,22 @@
                                 <description/>
                                 <returnType type="Decimal"/>
                             </property>
+                            <property key="title" type="string" required="false">
+                                <caption>Title</caption>
+                                <description/>
+                            </property>
+                            <property key="titleAttribute" type="attribute" required="false">
+                                <caption>Title</caption>
+                                <description/>
+                                <attributeTypes>
+                                    <attributeType name="String"/>
+                                </attributeTypes>
+                            </property>
+                            <property key="titleExpression" type="expression" required="false">
+                                <caption>Title</caption>
+                                <description/>
+                                <returnType type="String"/>
+                            </property>
                             <property key="onClick" type="action" required="false">
                                 <caption>On click</caption>
                                 <description>Action on click</description>
@@ -138,18 +138,11 @@
                                 <description/>
                                 <enumerationValues>
                                     <enumerationValue key="address">Based on address</enumerationValue>
-                                    <enumerationValue key="latlng">Based on latitude &amp; longitude</enumerationValue>
+                                    <enumerationValue key="latlng">Based on latitude and longitude</enumerationValue>
                                 </enumerationValues>
                             </property>
                             <property key="address" type="attribute" dataSource="markersDS" required="false">
                                 <caption>Address</caption>
-                                <description/>
-                                <attributeTypes>
-                                    <attributeType name="String"/>
-                                </attributeTypes>
-                            </property>
-                            <property key="title" type="attribute" dataSource="markersDS" required="false">
-                                <caption>Title</caption>
                                 <description/>
                                 <attributeTypes>
                                     <attributeType name="String"/>
@@ -171,8 +164,15 @@
                                     <attributeType name="Decimal"/>
                                 </attributeTypes>
                             </property>
+                            <property key="title" type="attribute" dataSource="markersDS" required="false">
+                                <caption>Title</caption>
+                                <description/>
+                                <attributeTypes>
+                                    <attributeType name="String"/>
+                                </attributeTypes>
+                            </property>
                             <property key="onClickAttribute" type="action" dataSource="markersDS" required="false">
-                                <caption>On click attribute</caption>
+                                <caption>On click</caption>
                                 <description>Action on click</description>
                             </property>
                             <property key="markerStyleDynamic" type="enumeration" defaultValue="default">

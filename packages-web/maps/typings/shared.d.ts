@@ -31,5 +31,6 @@ export interface SharedProps extends Dimensions {
     optionDrag: boolean;
     optionScroll: boolean;
     showCurrentLocation: boolean;
+    currentLocation?: Marker;
     locations?: ModeledMarker[];
 }

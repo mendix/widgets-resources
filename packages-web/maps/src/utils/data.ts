@@ -1,7 +1,6 @@
 import { DynamicMarkersType, MarkersType } from "../../typings";
-import { DynamicValue, EditableValue, ObjectItem, ValueStatus } from "mendix";
+import { ObjectItem, ValueStatus } from "mendix";
 import { ModeledMarker } from "../../typings";
-import { Option } from "./index";
 
 export const analyzeStaticMarker = (marker: MarkersType): ModeledMarker => {
     let address, title, latitude, longitude;
@@ -10,25 +9,25 @@ export const analyzeStaticMarker = (marker: MarkersType): ModeledMarker => {
         if (marker.locationType === "address") {
             address = marker.address;
         } else {
-            latitude = marker.latitude;
-            longitude = marker.longitude;
+            latitude = Number(marker.latitude);
+            longitude = Number(marker.longitude);
         }
     } else {
         if (marker.propertyContext === "attribute") {
-            title = getValue(marker.titleAttribute);
+            title = marker.titleAttribute?.value;
             if (marker.locationType === "address") {
-                address = getValue(marker.addressAttribute);
+                address = marker.addressAttribute?.value;
             } else {
-                latitude = getValue(marker.latitudeAttribute);
-                longitude = getValue(marker.longitudeAttribute);
+                latitude = Number(marker.latitudeAttribute?.value);
+                longitude = Number(marker.longitudeAttribute?.value);
             }
         } else {
-            title = getValue(marker.titleExpression);
+            title = marker.titleExpression?.value;
             if (marker.locationType === "address") {
-                address = getValue(marker.addressExpression);
+                address = marker.addressExpression?.value;
             } else {
-                latitude = getValue(marker.latitudeExpression);
-                longitude = getValue(marker.longitudeExpression);
+                latitude = Number(marker.latitudeExpression?.value);
+                longitude = Number(marker.longitudeExpression?.value);
             }
         }
     }
@@ -47,16 +46,16 @@ export const analyzeDynamicMarker = (marker: DynamicMarkersType, item: ObjectIte
     const { locationType, address: addr, latitude: lat, longitude: lng, onClickAttribute, title } = marker;
     let address, latitude, longitude;
     if (locationType === "address") {
-        address = addr ? getValue(addr(item)) : "";
+        address = addr ? addr(item).value : undefined;
     } else {
-        latitude = lat ? getValue(lat(item)) : undefined;
-        longitude = lng ? getValue(lng(item)) : undefined;
+        latitude = lat ? Number(lat(item).value) : undefined;
+        longitude = lng ? Number(lng(item).value) : undefined;
     }
     return {
         address,
         latitude,
         longitude,
-        title: title ? getValue(title(item)) : "",
+        title: title ? title(item).value : "",
         action: onClickAttribute ? onClickAttribute(item).execute : undefined,
         customMarker: marker.customMarkerDynamic?.value?.uri
     };
@@ -69,17 +68,27 @@ export const analyzeDataSource = (marker: DynamicMarkersType): ModeledMarker[] =
     return [];
 };
 
-export const countTotalMarkers = (markers: MarkersType[], markersDynamic: DynamicMarkersType[]): number => {
-    const count = markers.length;
-    const dynamicCount =
-        markersDynamic
-            .filter(m => m.markersDS && m.markersDS.items)
-            .map(marker => marker.markersDS!.items!.length)
-            .reduce((a, b) => a + b, 0) || 0;
-    console.warn("Total amount of locations", count + dynamicCount);
-    return count + dynamicCount;
+export const analyzeMarkers = (staticMarkers: MarkersType[], dynamicMarkers: DynamicMarkersType[]) => {
+    const markers: ModeledMarker[] = [];
+    markers.push(...staticMarkers.map(marker => analyzeStaticMarker(marker)));
+    markers.push(
+        ...dynamicMarkers.map(marker => analyzeDataSource(marker)).reduce((prev, current) => [...prev, ...current], [])
+    );
+    console.warn("analyzeMarkers: ", markers);
+    return markers;
 };
 
-export const getValue = (property?: DynamicValue<any> | EditableValue<any>): Option<any> => {
-    return property && property.status === ValueStatus.Available && property.value ? property.value : undefined;
-};
+// export const countTotalMarkers = (markers: MarkersType[], markersDynamic: DynamicMarkersType[]): number => {
+//     const count = markers.length;
+//     const dynamicCount =
+//         markersDynamic
+//             .filter(m => m.markersDS && m.markersDS.items)
+//             .map(marker => marker.markersDS!.items!.length)
+//             .reduce((a, b) => a + b, 0) || 0;
+//     console.warn("Total amount of locations", count + dynamicCount);
+//     return count + dynamicCount;
+// };
+
+// export const getValue = (property?: DynamicValue<any> | EditableValue<any>): Option<any> => {
+//     return property && property.status === ValueStatus.Available && property.value ? property.value : undefined;
+// };

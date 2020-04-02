@@ -1,9 +1,9 @@
-import { createElement, CSSProperties, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, CSSProperties, ReactElement, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 
 import googleApiWrapper from "./GoogleApi";
 import { Alert } from "@widgets-resources/piw-utils";
-import { getCurrentUserLocation, getDimensions } from "../utils";
+import { getDimensions } from "../utils";
 import { Marker, ModeledMarker, SharedProps } from "../../typings";
 import { analyzeLocations } from "../utils";
 import deepEqual from "deep-equal";
@@ -28,20 +28,13 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
     const defaultCenterLocation: google.maps.LatLngLiteral = { lat: 51.9066346, lng: 4.4861703 };
     let bounds!: google.maps.LatLngBounds;
 
-    const [markers, setMarkers] = useState<google.maps.Marker[]>([]);
+    const [markers, setMarkers] = useState<google.maps.Marker[]>([]); //Used to manage and remove markers from the map
     const [validationMessage, setValidationMessage] = useState(props.validationMessage);
-    const [currentLocation, setCurrentLocation] = useState<Marker>();
     const [locations, setLocations] = useState<ModeledMarker[]>([]);
 
     useEffect(() => {
         console.log("DID MOUNT");
         if (props.scriptsLoaded) {
-            if (props.showCurrentLocation) {
-                getCurrentUserLocation().then(marker => {
-                    setCurrentLocation(marker);
-                    updateMarkers();
-                });
-            }
             createUpdateMap();
         }
     }, [locations]);
@@ -57,7 +50,15 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
         } else {
             createUpdateMap();
         }
-    }, [props.locations]);
+    }, [props.locations, props.currentLocation]);
+
+    useEffect(() => {
+        console.log("GoogleMaps: ADDING CURRENT LOCATION MARKER", props.currentLocation);
+        //TODO: Current marker is not being added to the current map because of bounds
+        if (map && map.current && props.currentLocation) {
+            updateMarkers();
+        }
+    }, [props.currentLocation]);
 
     const checkLocations = (previousLocations: ModeledMarker[], newLocations: ModeledMarker[]): boolean => {
         const previous = previousLocations.map(l => {
@@ -86,15 +87,13 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
             styles: getMapStyles()
         };
         if (googleMapsRef.current && !map.current) {
-            console.warn("CREATING NEW MAP");
             map.current = new google.maps.Map(googleMapsRef.current, mapOptions);
         } else if (map.current) {
-            console.warn("SETTING NEW OPTIONS");
             map.current.setOptions(mapOptions);
         }
     };
 
-    const updateMarkers = useCallback(() => {
+    const updateMarkers = () => {
         console.log("UPDATE MARKERS");
         analyzeLocations(locations, props.mapsToken)
             .then(markers => {
@@ -103,7 +102,7 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
             .catch(error => {
                 setValidationMessage(error.message);
             });
-    }, [locations]);
+    };
 
     const addMarkers = (mapLocations?: Marker[]): void => {
         console.log("ADD MARKERS", mapLocations?.length ?? 0);
@@ -120,13 +119,17 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
                     return markerArray;
                 }, [])
             );
-            if (currentLocation) {
-                const currentLocationMarker = addMarker(currentLocation);
-                if (currentLocationMarker) {
-                    markers.push(currentLocationMarker);
-                }
+        }
+        addCurrentLocation();
+        updateCamera();
+    };
+
+    const addCurrentLocation = () => {
+        if (props.currentLocation) {
+            const currentLocationMarker = addMarker(props.currentLocation);
+            if (currentLocationMarker) {
+                markers.push(currentLocationMarker);
             }
-            updateCamera();
         }
     };
 
