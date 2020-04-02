@@ -1,3 +1,3 @@
-interface Window {
+export interface GoogleMapsWindow {
     google: any;
 }

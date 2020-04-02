@@ -62,6 +62,24 @@ export const analyzeDynamicMarker = (marker: DynamicMarkersType, item: ObjectIte
     };
 };
 
+export const analyzeDataSource = (marker: DynamicMarkersType): ModeledMarker[] => {
+    if (marker.markersDS && marker.markersDS.status === ValueStatus.Available) {
+        return marker.markersDS.items?.map(item => analyzeDynamicMarker(marker, item)) ?? [];
+    }
+    return [];
+};
+
+export const countTotalMarkers = (markers: MarkersType[], markersDynamic: DynamicMarkersType[]): number => {
+    const count = markers.length;
+    const dynamicCount =
+        markersDynamic
+            .filter(m => m.markersDS && m.markersDS.items)
+            .map(marker => marker.markersDS!.items!.length)
+            .reduce((a, b) => a + b, 0) || 0;
+    console.warn("Total amount of locations", count + dynamicCount);
+    return count + dynamicCount;
+};
+
 export const getValue = (property?: DynamicValue<any> | EditableValue<any>): Option<any> => {
     return property && property.status === ValueStatus.Available && property.value ? property.value : undefined;
 };

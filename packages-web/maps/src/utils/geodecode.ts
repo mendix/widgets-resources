@@ -7,7 +7,6 @@ export interface LatLng {
 }
 
 const queue = new PromiseQueue<any>();
-const cache = new Map<string, LatLng>();
 
 export const analyzeLocations = (locations?: ModeledMarker[], mapToken?: string): Promise<Marker[]> => {
     return new Promise<Marker[]>(async (resolve, reject) => {
@@ -48,16 +47,18 @@ export const analyzeLocations = (locations?: ModeledMarker[], mapToken?: string)
 };
 
 const geocode = (address: string, mapToken: string): Promise<LatLng> => {
-    const cachedValue = cache.get(address);
-    if (cachedValue) {
-        console.warn("Using cached value for", address);
-        return Promise.resolve(cachedValue);
+    if (!window.locationsCache) {
+        window.locationsCache = {};
     }
-
-    return queuedGeocode(address, mapToken).then(coordinate => {
-        cache.set(address, coordinate);
-        return coordinate;
-    });
+    if (window.locationsCache.hasOwnProperty(address)) {
+        console.warn("Using cache value for", address);
+        return Promise.resolve(window.locationsCache[address]);
+    } else {
+        return queuedGeocode(address, mapToken).then(coordinate => {
+            window.locationsCache[address] = coordinate;
+            return coordinate;
+        });
+    }
 };
 
 const queuedGeocode = (address: string, mapToken: string): Promise<LatLng> => {

@@ -4,19 +4,17 @@ import { MapsContainerProps, ModeledMarker } from "../typings";
 import GoogleMap from "./components/GoogleMap";
 import { ValueStatus } from "mendix";
 import "./ui/Maps.css";
-import { analyzeDynamicMarker, analyzeStaticMarker, translateZoom } from "./utils";
+import { analyzeDataSource, analyzeStaticMarker, translateZoom } from "./utils";
 
 const Maps = (props: MapsContainerProps): ReactNode => {
     const currentMarkers: ModeledMarker[] = [];
 
     currentMarkers.push(...props.markers.map(marker => analyzeStaticMarker(marker)));
-    props.dynamicMarkers.forEach(marker => {
-        if (marker.markersDS && marker.markersDS.status === ValueStatus.Available) {
-            marker.markersDS.items?.forEach(item => {
-                currentMarkers.push(analyzeDynamicMarker(marker, item));
-            });
-        }
-    });
+    currentMarkers.push(
+        ...props.dynamicMarkers
+            .map(marker => analyzeDataSource(marker))
+            .reduce((prev, current) => [...prev, ...current], [])
+    );
 
     return (
         <GoogleMap
@@ -37,6 +35,7 @@ const Maps = (props: MapsContainerProps): ReactNode => {
             fullScreenControl={props.fullScreenControl}
             rotateControl={props.rotateControl}
             mapStyles={props.mapStyles}
+            divStyles={props.style}
         />
     );
 };
