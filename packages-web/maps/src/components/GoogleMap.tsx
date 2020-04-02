@@ -4,8 +4,7 @@ import classNames from "classnames";
 import googleApiWrapper from "./GoogleApi";
 import { Alert } from "@widgets-resources/piw-utils";
 import { getDimensions } from "../utils";
-import { Marker, ModeledMarker, SharedProps } from "../../typings";
-import { analyzeLocations } from "../utils";
+import { Marker, SharedProps } from "../../typings";
 import deepEqual from "deep-equal";
 
 export interface GoogleMapsProps extends SharedProps {
@@ -30,22 +29,21 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
 
     const [markers, setMarkers] = useState<google.maps.Marker[]>([]); //Used to manage and remove markers from the map
     const [validationMessage, setValidationMessage] = useState(props.validationMessage);
-    const [locations, setLocations] = useState<ModeledMarker[]>([]);
+    const [locations, setLocations] = useState<Marker[]>([]);
 
     useEffect(() => {
-        console.log("DID MOUNT");
+        console.log("GoogleMap: DID MOUNT");
         if (props.scriptsLoaded) {
             createUpdateMap();
         }
-    }, [locations]);
+    }, []);
 
     useEffect(() => {
-        console.log("DID UPDATE");
+        console.log("GoogleMap: DID UPDATE");
         if (map && map.current) {
             if (props.locations && !checkLocations(locations, props.locations)) {
-                console.warn("Locations are different.. updating..");
                 setLocations(props.locations);
-                updateMarkers();
+                addMarkers(props.locations);
             }
         } else {
             createUpdateMap();
@@ -53,26 +51,26 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
     }, [props.locations, props.currentLocation]);
 
     useEffect(() => {
-        console.log("GoogleMaps: ADDING CURRENT LOCATION MARKER", props.currentLocation);
-        //TODO: Current marker is not being added to the current map because of bounds
         if (map && map.current && props.currentLocation) {
-            updateMarkers();
+            console.log("GoogleMap: ADDING CURRENT LOCATION MARKER");
+            addMarkers(locations);
         }
-    }, [props.currentLocation]);
+    }, [props.currentLocation, locations]);
 
-    const checkLocations = (previousLocations: ModeledMarker[], newLocations: ModeledMarker[]): boolean => {
+    const checkLocations = (previousLocations: Marker[], newLocations: Marker[]): boolean => {
         const previous = previousLocations.map(l => {
-            const { action, ...rest } = l;
+            const { onClick, ...rest } = l;
             return rest;
         });
         const news = newLocations.map(l => {
-            const { action, ...rest } = l;
+            const { onClick, ...rest } = l;
             return rest;
         });
         return deepEqual(previous, news, { strict: true });
     };
 
     const createUpdateMap = (): void => {
+        console.log("GoogleMap: CREATE UPDATE MAP");
         const mapOptions: google.maps.MapOptions = {
             zoom: props.zoomLevel,
             zoomControl: props.optionZoomControl,
@@ -93,25 +91,25 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
         }
     };
 
-    const updateMarkers = () => {
-        console.log("UPDATE MARKERS");
-        analyzeLocations(locations, props.mapsToken)
-            .then(markers => {
-                addMarkers(markers);
-            })
-            .catch(error => {
-                setValidationMessage(error.message);
-            });
-    };
+    // const updateMarkers = () => {
+    //     console.log("UPDATE MARKERS");
+    //     analyzeLocations(locations, props.mapsToken)
+    //         .then(markers => {
+    //             addMarkers(markers);
+    //         })
+    //         .catch(error => {
+    //             setValidationMessage(error.message);
+    //         });
+    // };
 
-    const addMarkers = (mapLocations?: Marker[]): void => {
-        console.log("ADD MARKERS", mapLocations?.length ?? 0);
-        markers.forEach(marker => marker.setMap(null));
-        setMarkers([]);
-        if (mapLocations && mapLocations.length) {
+    const addMarkers = (locations: Marker[]): void => {
+        console.log("GoogleMap: ADD MARKERS", locations?.length ?? 0);
+        if (locations && locations.length > 0) {
+            markers.forEach(marker => marker.setMap(null));
+            setMarkers([]);
             bounds = new google.maps.LatLngBounds();
             setMarkers(
-                mapLocations.reduce<google.maps.Marker[]>((markerArray, currentLocation) => {
+                locations.reduce<google.maps.Marker[]>((markerArray, currentLocation) => {
                     const marker = addMarker(currentLocation);
                     if (marker) {
                         markerArray.push(marker);
@@ -126,6 +124,7 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
 
     const addCurrentLocation = () => {
         if (props.currentLocation) {
+            console.log("GoogleMap: ADDING CURRENT LOCATION");
             const currentLocationMarker = addMarker(props.currentLocation);
             if (currentLocationMarker) {
                 markers.push(currentLocationMarker);
@@ -150,7 +149,6 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
             if (marker.title) {
                 const infoContent = document.createElement("span");
                 infoContent.innerHTML = marker.title || "";
-                //TODO: Marker on click is refreshing the entire component
                 if (marker.onClick) {
                     infoContent.style.cursor = "pointer";
                     infoContent.onclick = marker.onClick;
@@ -163,7 +161,6 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
                 });
             } else {
                 if (marker.onClick) {
-                    //TODO: Marker on click is refreshing the entire component
                     mapMarker.addListener("click", () => {
                         marker.onClick!();
                     });
@@ -178,7 +175,7 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
     };
 
     const updateCamera = (): void => {
-        console.log("UPDATING CAMERA");
+        console.log("GoogleMap: UPDATING CAMERA");
         const { zoomLevel, autoZoom } = props;
         setTimeout(() => {
             if (bounds && map.current) {
@@ -200,7 +197,6 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
     };
 
     const getMapStyles = (): google.maps.MapTypeStyle[] => {
-        console.log("GETTING MAPS STYLES");
         if (props.mapStyles && props.mapStyles.trim()) {
             try {
                 return JSON.parse(props.mapStyles);
@@ -218,7 +214,7 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
         ];
     };
 
-    console.log("RENDER");
+    console.log("GoogleMap: RENDER");
     return (
         <div
             className={classNames("widget-maps", props.className)}
