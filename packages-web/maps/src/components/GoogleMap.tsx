@@ -5,7 +5,6 @@ import googleApiWrapper from "./GoogleApi";
 import { Alert } from "@widgets-resources/piw-utils";
 import { getDimensions } from "../utils";
 import { Marker, SharedProps } from "../../typings";
-import deepEqual from "deep-equal";
 
 export interface GoogleMapsProps extends SharedProps {
     scriptsLoaded?: boolean;
@@ -29,48 +28,18 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
 
     const [markers, setMarkers] = useState<google.maps.Marker[]>([]); //Used to manage and remove markers from the map
     const [validationMessage, setValidationMessage] = useState(props.validationMessage);
-    const [locations, setLocations] = useState<Marker[]>([]);
 
     useEffect(() => {
-        console.log("GoogleMap: DID MOUNT");
         if (props.scriptsLoaded) {
             createUpdateMap();
         }
     }, []);
 
     useEffect(() => {
-        console.log("GoogleMap: DID UPDATE");
-        if (map && map.current) {
-            if (props.locations && !checkLocations(locations, props.locations)) {
-                setLocations(props.locations);
-                addMarkers(props.locations);
-            }
-        } else {
-            createUpdateMap();
-        }
+        createUpdateMap();
     }, [props.locations, props.currentLocation]);
 
-    useEffect(() => {
-        if (map && map.current && props.currentLocation) {
-            console.log("GoogleMap: ADDING CURRENT LOCATION MARKER");
-            addMarkers(locations);
-        }
-    }, [props.currentLocation, locations]);
-
-    const checkLocations = (previousLocations: Marker[], newLocations: Marker[]): boolean => {
-        const previous = previousLocations.map(l => {
-            const { onClick, ...rest } = l;
-            return rest;
-        });
-        const news = newLocations.map(l => {
-            const { onClick, ...rest } = l;
-            return rest;
-        });
-        return deepEqual(previous, news, { strict: true });
-    };
-
     const createUpdateMap = (): void => {
-        console.log("GoogleMap: CREATE UPDATE MAP");
         const mapOptions: google.maps.MapOptions = {
             zoom: props.zoomLevel,
             zoomControl: props.optionZoomControl,
@@ -89,27 +58,16 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
         } else if (map.current) {
             map.current.setOptions(mapOptions);
         }
+        addMarkers();
     };
 
-    // const updateMarkers = () => {
-    //     console.log("UPDATE MARKERS");
-    //     analyzeLocations(locations, props.mapsToken)
-    //         .then(markers => {
-    //             addMarkers(markers);
-    //         })
-    //         .catch(error => {
-    //             setValidationMessage(error.message);
-    //         });
-    // };
-
-    const addMarkers = (locations: Marker[]): void => {
-        console.log("GoogleMap: ADD MARKERS", locations?.length ?? 0);
-        if (locations && locations.length > 0) {
+    const addMarkers = (): void => {
+        if (props.locations && props.locations.length > 0) {
             markers.forEach(marker => marker.setMap(null));
             setMarkers([]);
             bounds = new google.maps.LatLngBounds();
             setMarkers(
-                locations.reduce<google.maps.Marker[]>((markerArray, currentLocation) => {
+                props.locations.reduce<google.maps.Marker[]>((markerArray, currentLocation) => {
                     const marker = addMarker(currentLocation);
                     if (marker) {
                         markerArray.push(marker);
@@ -124,7 +82,6 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
 
     const addCurrentLocation = () => {
         if (props.currentLocation) {
-            console.log("GoogleMap: ADDING CURRENT LOCATION");
             const currentLocationMarker = addMarker(props.currentLocation);
             if (currentLocationMarker) {
                 markers.push(currentLocationMarker);
@@ -175,7 +132,6 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
     };
 
     const updateCamera = (): void => {
-        console.log("GoogleMap: UPDATING CAMERA");
         const { zoomLevel, autoZoom } = props;
         setTimeout(() => {
             if (bounds && map.current) {
@@ -214,7 +170,6 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
         ];
     };
 
-    console.log("GoogleMap: RENDER");
     return (
         <div
             className={classNames("widget-maps", props.className)}

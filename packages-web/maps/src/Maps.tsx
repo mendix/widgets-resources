@@ -1,19 +1,14 @@
 import { hot } from "react-hot-loader/root";
-import { createElement, ReactNode, useEffect, useMemo, useState } from "react";
-import { MapsContainerProps, Marker, ModeledMarker } from "../typings";
+import { createElement, ReactNode, useEffect, useState } from "react";
+import { MapsContainerProps, Marker } from "../typings";
 import GoogleMap from "./components/GoogleMap";
 import { ValueStatus } from "mendix";
 import "./ui/Maps.css";
-import {
-    analyzeDataSource,
-    analyzeLocations,
-    analyzeStaticMarker,
-    getCurrentUserLocation,
-    translateZoom
-} from "./utils";
+import { getCurrentUserLocation, translateZoom, useLocationResolver } from "./utils";
 
 const Maps = (props: MapsContainerProps): ReactNode => {
-    const [locations, setLocations] = useState<Marker[]>([]);
+    // const [locations, setLocations] = useState<Marker[]>([]);
+    const [locations] = useLocationResolver(props.markers, props.dynamicMarkers, props.apiKey?.value);
     const [currentLocation, setCurrentLocation] = useState<Marker>();
 
     useEffect(() => {
@@ -27,34 +22,11 @@ const Maps = (props: MapsContainerProps): ReactNode => {
         }
     }, []);
 
-    // Code defined inside analyzeMarkers
-    const markers = useMemo(() => {
-        const markers: ModeledMarker[] = [];
-        markers.push(...props.markers.map(marker => analyzeStaticMarker(marker)));
-        markers.push(
-            ...props.dynamicMarkers
-                .map(marker => analyzeDataSource(marker))
-                .reduce((prev, current) => [...prev, ...current], [])
-        );
-        return markers;
-    }, [props.markers, props.dynamicMarkers]);
-
-    const promise = useMemo(() => analyzeLocations(markers, props.apiKey?.value), [markers, props.apiKey]);
-
-    useEffect(() => {
-        console.log("Maps: COMPONENT DID UPDATE");
-        //TODO: Race condition right here
-        promise
-            .then(locations => {
-                console.warn("ALL PROMISES RESOLVED");
-                setLocations(locations);
-            })
-            .catch(() => setLocations([]));
-
-        // analyzeMarkers(props.markers, props.dynamicMarkers, props.apiKey?.value).then(locations => {
-        //     setLocations(locations);
-        // }).catch(() => setLocations([]));
-    }, [promise]);
+    // useEffect(() => {
+    //     if(!loading){
+    //         setLocations(resolvedLocations);
+    //     }
+    // }, [loading, resolvedLocations]);
 
     return (
         <GoogleMap

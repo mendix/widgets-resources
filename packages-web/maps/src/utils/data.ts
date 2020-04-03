@@ -1,8 +1,6 @@
 import { DynamicMarkersType, MarkersType } from "../../typings";
 import { ObjectItem, ValueStatus } from "mendix";
 import { ModeledMarker } from "../../typings";
-import { analyzeLocations } from "./geodecode";
-import { useMemo } from "react";
 
 export const analyzeStaticMarker = (marker: MarkersType): ModeledMarker => {
     let address, title, latitude, longitude;
@@ -70,27 +68,27 @@ export const analyzeDataSource = (marker: DynamicMarkersType): ModeledMarker[] =
     return [];
 };
 
-export const analyzeMarkers = async (
-    staticMarkers: MarkersType[],
-    dynamicMarkers: DynamicMarkersType[],
-    googleApiKey?: string
-) => {
-    const markers = useMemo(() => {
-        const markers: ModeledMarker[] = [];
-        markers.push(...staticMarkers.map(marker => analyzeStaticMarker(marker)));
-        markers.push(
-            ...dynamicMarkers
-                .map(marker => analyzeDataSource(marker))
-                .reduce((prev, current) => [...prev, ...current], [])
-        );
-        return markers;
-    }, []);
-    try {
-        return await analyzeLocations(markers, googleApiKey);
-    } catch (e) {
-        return [];
-    }
-};
+// export const analyzeMarkers = async (
+//     staticMarkers: MarkersType[],
+//     dynamicMarkers: DynamicMarkersType[],
+//     googleApiKey?: string
+// ) => {
+//     const markers = useMemo(() => {
+//         const markers: ModeledMarker[] = [];
+//         markers.push(...staticMarkers.map(marker => analyzeStaticMarker(marker)));
+//         markers.push(
+//             ...dynamicMarkers
+//                 .map(marker => analyzeDataSource(marker))
+//                 .reduce((prev, current) => [...prev, ...current], [])
+//         );
+//         return markers;
+//     }, []);
+//     try {
+//         return await analyzeLocations(markers, googleApiKey);
+//     } catch (e) {
+//         return [];
+//     }
+// };
 
 // export const countTotalMarkers = (markers: MarkersType[], markersDynamic: DynamicMarkersType[]): number => {
 //     const count = markers.length;

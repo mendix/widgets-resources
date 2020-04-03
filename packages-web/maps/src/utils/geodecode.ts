@@ -47,7 +47,6 @@ export const analyzeLocations = (locations?: ModeledMarker[], mapToken?: string)
 };
 
 const geocode = (address: string, mapToken: string): Promise<LatLng> => {
-    console.warn("GeoCache: Current cache", { ...window.locationsCache });
     if (!window.locationsCache) {
         console.log("GeoCache: CREATING NEW CACHE");
         window.locationsCache = {};
@@ -56,8 +55,8 @@ const geocode = (address: string, mapToken: string): Promise<LatLng> => {
         console.warn(`GeoCache: Using cache value for" ${address}`);
         return Promise.resolve(window.locationsCache[address]);
     } else {
+        console.log(`GeoCache: ADDING ${address}`);
         return queuedGeocode(address, mapToken).then(coordinate => {
-            console.log(`GeoCache: ADDING ${address}`);
             window.locationsCache[address] = coordinate;
             return coordinate;
         });
