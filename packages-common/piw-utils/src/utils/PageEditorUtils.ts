@@ -2,52 +2,73 @@
 /**
  * TODO: Include tests for methods
  */
-import { Properties, Property } from "../typings";
+import { Property, PropertyGroup } from "../typings";
 
 declare type Option<T> = T | undefined;
 
-export function hideProperty<T>(key: keyof T, properties?: Option<Properties>): void {
-    properties?.forEach(property => {
-        property?.properties?.forEach((prop, index, array) => {
-            if (prop.key === key) {
-                array.splice(index, 1);
-            } else {
-                prop.properties?.forEach(propArray => hideProperty(key, propArray));
-            }
-        });
-        hideProperty(key, property.propertyGroups);
-    });
-}
-
-export function includeKey<T>(key: keyof T, properties: Option<Properties>, newItem: Property, after = true): void {
-    properties?.forEach(property => {
-        property?.properties?.forEach((prop, index, array) => {
-            if (prop.key === key) {
-                if (!array.some(p => p.key === newItem.key)) {
-                    array.splice(after ? index : index - 1, 0, newItem);
-                }
-            } else {
-                prop.properties?.forEach(propArray => includeKey(key, propArray, newItem));
-            }
-        });
-        includeKey(key, property.propertyGroups, newItem);
-    });
-}
-
-export function changeProperty<T>(
-    key: keyof T,
-    targetKey: keyof Property,
-    value: any,
-    properties: Option<Properties>
+export function hidePropertyIn(propertyGroups: PropertyGroup[], key: string): void;
+export function hidePropertyIn(
+    propertyGroups: PropertyGroup[],
+    key: string,
+    nestedPropIndex: number,
+    nestedPropKey: string
+): void;
+export function hidePropertyIn(
+    propertyGroups: PropertyGroup[],
+    key: string,
+    nestedPropIndex?: number,
+    nestedPropKey?: string
 ): void {
-    properties?.forEach(property => {
-        property?.properties?.forEach(prop => {
+    modifyProperty(
+        (_, index, container) => container.splice(index, 1),
+        propertyGroups,
+        key,
+        nestedPropIndex,
+        nestedPropKey
+    );
+}
+
+export function changePropertyIn(propertyGroups: PropertyGroup[], modify: (prop: Property) => void, key: string): void;
+export function changePropertyIn(
+    propertyGroups: PropertyGroup[],
+    modify: (prop: Property) => void,
+    key: string,
+    nestedPropIndex: number,
+    nestedPropKey: string
+): void;
+export function changePropertyIn(
+    propertyGroups: PropertyGroup[],
+    modify: (prop: Property) => void,
+    key: string,
+    nestedPropIndex?: number,
+    nestedPropKey?: string
+): void {
+    modifyProperty(modify, propertyGroups, key, nestedPropIndex, nestedPropKey);
+}
+
+function modifyProperty(
+    modify: (prop: Property, index: number, container: Property[]) => void,
+    propertyGroups: PropertyGroup[],
+    key: string,
+    nestedPropIndex?: number,
+    nestedPropKey?: string
+) {
+    propertyGroups.forEach(propGroup => {
+        if (propGroup.propertyGroups) {
+            modifyProperty(modify, propGroup.propertyGroups, key, nestedPropIndex, nestedPropKey);
+        }
+
+        propGroup.properties?.forEach((prop, index, array) => {
             if (prop.key === key) {
-                prop[targetKey] = value;
-            } else {
-                prop.properties?.forEach(propArray => changeProperty(key, targetKey, value, propArray));
+                if (nestedPropIndex === undefined || nestedPropKey === undefined) {
+                    modify(prop, index, array);
+                } else {
+                    if (!prop.properties) {
+                        throw new Error("Wrong parameters");
+                    }
+                    modifyProperty(modify, prop.properties[nestedPropIndex], nestedPropKey);
+                }
             }
         });
-        changeProperty(key, targetKey, value, property.propertyGroups);
     });
 }
