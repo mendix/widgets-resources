@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fieldset renders children and legend 1`] = `
+<fieldset
+  className="className"
+  name="fieldset"
+  style={Object {}}
+  tabIndex={0}
+>
+  <legend>
+    legend
+  </legend>
+  <label>
+    Name:
+  </label>
+  <br />
+  <input
+    id="employee_name"
+    name="employee_name"
+    type="text"
+  />
+</fieldset>
+`;
+
+exports[`Fieldset renders nothing when no children are passed 1`] = `""`;
+
+exports[`Fieldset renders only children when no legend is passed 1`] = `
+<fieldset
+  className="className"
+  name="fieldset"
+  style={Object {}}
+  tabIndex={0}
+>
+  <label>
+    Name:
+  </label>
+  <br />
+  <input
+    id="employee_name"
+    name="employee_name"
+    type="text"
+  />
+</fieldset>
+`;
