@@ -1,58 +1,39 @@
-import { TextStyle, TouchableHighlightProps, ViewStyle } from "react-native";
-
-interface Touchable extends TouchableHighlightProps, ViewStyle {
-    container?: ViewStyle;
-}
+import { TextProps, TextStyle, ViewStyle } from "react-native";
 
 export interface PopupMenuStyle {
-    dividerColor?: string;
-    menuItem?: PopupItemStyle;
-    touchable?: Touchable;
+    basicItem?: BasicItemStyle;
+    complexItem?: ComplexItemStyle;
+    buttonContainer?: ViewStyle;
+    // Only for ios
+    buttonUnderlayColor?: string;
 }
 
-/**
- *
- * - `head` - The line is displayed so that the end fits in the container and the missing text
- * at the beginning of the line is indicated by an ellipsis glyph. e.g., "...wxyz"
- * - `middle` - The line is displayed so that the beginning and end fit in the container and the
- * missing text in the middle is indicated by an ellipsis glyph. "ab...yz"
- * - `tail` - The line is displayed so that the beginning fits in the container and the
- * missing text at the end of the line is indicated by an ellipsis glyph. e.g., "abcd..."
- * - `clip` - Lines are not drawn past the edge of the text container.
- *
- * The default is `tail`.
- *
- * `numberOfLines` must be set in conjunction with this prop.
- *
- * > `clip` is working only for iOS
- */
-enum EllipsizeMode {
-    "head",
-    "middle",
-    "tail",
-    "clip"
-}
-
-interface PopupItemStyle {
+interface BasicItemStyle {
+    container?: ViewStyle;
+    textStyle?: TextStyle;
     // Only for ios
     underlayColor?: string;
-    // Item text style
-    textStyle?: TextStyle;
-    // View surrounding the menu item excluding touchable
-    ellipsizeMode?: EllipsizeMode;
-    complexItemContainer?: ViewStyle;
-    basicItemContainer?: ViewStyle;
-    disabledTextColor?: string;
+    ellipsizeMode?: TextProps["ellipsizeMode"];
+    dividerColor?: string;
+}
+
+interface ComplexItemStyle {
+    container?: ViewStyle;
+    // Only for ios
+    underlayColor?: string;
 }
 
 export const defaultPopupMenuStyles: PopupMenuStyle = {
-    dividerColor: "green",
-    menuItem: {
+    basicItem: {
         underlayColor: "#e0e0e0",
+        dividerColor: "green",
         textStyle: {
             color: "red"
-        },
-        complexItemContainer: {
+        }
+    },
+    complexItem: {
+        underlayColor: "#e0e0e0",
+        container: {
             backgroundColor: "yellow",
             height: 48,
             justifyContent: "center",
@@ -60,9 +41,7 @@ export const defaultPopupMenuStyles: PopupMenuStyle = {
             minWidth: 124
         }
     },
-    touchable: {
-        underlayColor: "#e0e0e0"
-    }
+    buttonUnderlayColor: "#e0e0e0"
 };
 
 // TODO: request default,primary,danger

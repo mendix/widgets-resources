@@ -39,17 +39,15 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
     if (props.renderMode === "basic") {
         menuOptions = props.basicItems.map((item, index) =>
             item.itemType === "divider" ? (
-                <MenuDivider key={index} color={styles.dividerColor} />
+                <MenuDivider key={index} color={styles.basicItem?.dividerColor} />
             ) : (
-                // @ts-ignore since types are not correct
                 <MenuItem
                     key={index}
                     onPress={() => handlePress(item.action)}
-                    underlayColor={styles.menuItem?.underlayColor}
-                    textStyle={styles.menuItem?.textStyle}
-                    ellipsizeMode={styles.menuItem?.ellipsizeMode}
-                    style={styles.menuItem?.basicItemContainer}
-                    disabledTextColor={styles.menuItem?.disabledTextColor}
+                    underlayColor={styles.basicItem?.underlayColor}
+                    textStyle={styles.basicItem?.textStyle}
+                    ellipsizeMode={styles.basicItem?.ellipsizeMode as any}
+                    style={styles.basicItem?.container as any}
                 >
                     {item.caption}
                 </MenuItem>
@@ -60,14 +58,14 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
             <Touchable
                 key={index}
                 onPress={() => handlePress(item.action)}
-                underlayColor={styles.menuItem?.underlayColor}
+                underlayColor={styles.complexItem?.underlayColor}
                 {...(Platform.OS === "android"
                     ? {
                           background: TouchableNativeFeedback.SelectableBackground()
                       }
                     : {})}
             >
-                <View style={styles.menuItem?.complexItemContainer}>{item.content}</View>
+                <View style={styles.complexItem?.container}>{item.content}</View>
             </Touchable>
         ));
     }
@@ -76,8 +74,8 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
         <Menu
             ref={menuRef}
             button={
-                <Touchable onPress={showMenu} underlayColor={styles.touchable?.underlayColor}>
-                    <View style={styles.touchable?.container}>{props.menuTriggerer}</View>
+                <Touchable onPress={showMenu} underlayColor={styles.buttonUnderlayColor}>
+                    <View style={styles.buttonContainer}>{props.menuTriggerer}</View>
                 </Touchable>
             }
         >
