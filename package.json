@@ -23,7 +23,9 @@
     "release": "lerna run release",
     "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
     "presvncheckout": "ts-node --project ./scripts/tsconfig.json ./scripts/svn/Authentication.ts",
-    "svncheckout": "lerna run svncheckout --stream --concurrency 1"
+    "svncheckout": "lerna run svncheckout --stream --concurrency 1",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.0.0",
@@ -94,7 +96,8 @@
     "zip-folder": "^1.0.0"
   },
   "dependencies": {
-    "classnames": "^2.2.6"
+    "classnames": "^2.2.6",
+    "snyk": "^1.305.0"
   },
   "husky": {
     "hooks": {
@@ -107,5 +110,6 @@
       "@commitlint/config-lerna-scopes",
       "@commitlint/config-conventional"
     ]
-  }
+  },
+  "snyk": true
 }
