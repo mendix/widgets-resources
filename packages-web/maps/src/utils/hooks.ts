@@ -4,6 +4,12 @@ import { analyzeDataSource, analyzeStaticMarker } from "./data";
 import { analyzeLocations } from "./geodecode";
 import deepEqual from "deep-equal";
 
+interface MarkerQueue {
+    //TODO: REMOVE timestamp
+    timestamp: number;
+    markers: ModeledMarker[];
+}
+
 export const useLocationResolver = (
     staticMarkers: MarkersType[],
     dynamicMarkers: DynamicMarkersType[],
@@ -27,20 +33,23 @@ export const useLocationResolver = (
 
     useEffect(() => {
         if (!isIdenticalLocations(modeledMarkers, markers)) {
-            pushItem(analyzeLocations(markers, googleApiKey));
+            pushItem(markers);
             setModeledMarkers(markers);
         }
     }, [markers]);
 
     useEffect(() => {
         if (queue.length > 0 && !loading) {
-            const promise = queue.pop();
-            if (promise) {
+            const toBeQueued = queue.pop();
+            if (toBeQueued) {
                 setLoading(true);
-                console.warn("Executing promise", promise);
+                //TODO: REMOVE timestamp
+                console.warn("Executing promise", toBeQueued.timestamp);
+                const promise = analyzeLocations(toBeQueued.markers, googleApiKey);
                 promise
                     .then(newLocations => {
-                        console.warn("Promise executed", promise);
+                        //TODO: REMOVE timestamp
+                        console.warn("Promise executed", toBeQueued.timestamp);
                         setLocations(newLocations);
                         popItem();
                         setLoading(false);
@@ -56,10 +65,10 @@ export const useLocationResolver = (
     return [locations];
 };
 
-const useQueue = (): [Promise<Marker[]>[], (newItem: Promise<Marker[]>) => void, () => void] => {
-    const [queue, setQueue] = useState<Promise<Marker[]>[]>([]);
-    const pushItem = (newItem: Promise<Marker[]>) => {
-        setQueue(oldQueue => [newItem, ...oldQueue]);
+const useQueue = (): [MarkerQueue[], (newItem: ModeledMarker[]) => void, () => void] => {
+    const [queue, setQueue] = useState<MarkerQueue[]>([]);
+    const pushItem = (newItem: ModeledMarker[]) => {
+        setQueue(oldQueue => [{ timestamp: Date.now(), markers: newItem }, ...oldQueue]);
     };
 
     const popItem = () => {

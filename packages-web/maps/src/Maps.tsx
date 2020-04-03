@@ -7,7 +7,6 @@ import "./ui/Maps.css";
 import { getCurrentUserLocation, translateZoom, useLocationResolver } from "./utils";
 
 const Maps = (props: MapsContainerProps): ReactNode => {
-    // const [locations, setLocations] = useState<Marker[]>([]);
     const [locations] = useLocationResolver(props.markers, props.dynamicMarkers, props.apiKey?.value);
     const [currentLocation, setCurrentLocation] = useState<Marker>();
 
@@ -21,12 +20,6 @@ const Maps = (props: MapsContainerProps): ReactNode => {
                 .catch(error => console.error(error.message));
         }
     }, []);
-
-    // useEffect(() => {
-    //     if(!loading){
-    //         setLocations(resolvedLocations);
-    //     }
-    // }, [loading, resolvedLocations]);
 
     return (
         <GoogleMap
