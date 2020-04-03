@@ -11,19 +11,8 @@ export const useLocationResolver = (
 ): [Marker[]] => {
     const [locations, setLocations] = useState<Marker[]>([]);
     const [modeledMarkers, setModeledMarkers] = useState<ModeledMarker[]>([]);
-    const [queue, setQueue] = useState<Promise<Marker[]>[]>([]);
-    const pushItem = (newItem: Promise<Marker[]>) => {
-        setQueue(oldQueue => [...oldQueue, newItem]);
-    };
-
-    const popItem = () => {
-        if (queue.length > 0) {
-            setQueue(prevQueue => {
-                prevQueue.pop();
-                return prevQueue;
-            });
-        }
-    };
+    const [loading, setLoading] = useState(false);
+    const [queue, pushItem, popItem] = useQueue();
 
     const markers = useMemo(() => {
         const markers: ModeledMarker[] = [];
@@ -44,18 +33,44 @@ export const useLocationResolver = (
     }, [markers]);
 
     useEffect(() => {
-        if (queue.length > 0) {
+        if (queue.length > 0 && !loading) {
             const promise = queue.pop();
             if (promise) {
-                promise.then(newLocations => {
-                    setLocations(newLocations);
-                    popItem();
-                });
+                setLoading(true);
+                console.warn("Executing promise", promise);
+                promise
+                    .then(newLocations => {
+                        console.warn("Promise executed", promise);
+                        setLocations(newLocations);
+                        popItem();
+                        setLoading(false);
+                    })
+                    .catch(() => {
+                        popItem();
+                        setLoading(false);
+                    });
             }
         }
-    }, [queue]);
+    }, [queue, loading]);
 
     return [locations];
+};
+
+const useQueue = (): [Promise<Marker[]>[], (newItem: Promise<Marker[]>) => void, () => void] => {
+    const [queue, setQueue] = useState<Promise<Marker[]>[]>([]);
+    const pushItem = (newItem: Promise<Marker[]>) => {
+        setQueue(oldQueue => [newItem, ...oldQueue]);
+    };
+
+    const popItem = () => {
+        if (queue.length > 0) {
+            setQueue(prevQueue => {
+                prevQueue.pop();
+                return prevQueue;
+            });
+        }
+    };
+    return [queue, pushItem, popItem];
 };
 
 const isIdenticalLocations = (previousLocations: ModeledMarker[], newLocations: ModeledMarker[]): boolean => {
