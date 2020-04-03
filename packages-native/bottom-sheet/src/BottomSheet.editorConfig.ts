@@ -1,28 +1,28 @@
-import { changeProperty, hideProperty, Problem, Properties } from "@widgets-resources/piw-utils";
+import { changePropertyIn, hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-utils";
 
 export function getProperties(values: any, defaultProperties: Properties): Properties {
     if (values.type === "modal") {
         if (values.modalRendering === "basic") {
-            hideProperty<any>("smallContent", defaultProperties);
-            hideProperty<any>("largeContent", defaultProperties);
-            hideProperty<any>("fullscreenContent", defaultProperties);
+            hidePropertyIn(defaultProperties, "smallContent");
+            hidePropertyIn(defaultProperties, "largeContent");
+            hidePropertyIn(defaultProperties, "fullscreenContent");
         } else {
-            hideProperty<any>("smallContent", defaultProperties);
-            hideProperty<any>("nativeImplementation", defaultProperties);
-            hideProperty<any>("fullscreenContent", defaultProperties);
-            hideProperty<any>("itemsBasic", defaultProperties);
-            changeProperty<any>("largeContent", "caption", "Content", defaultProperties);
+            hidePropertyIn(defaultProperties, "smallContent");
+            hidePropertyIn(defaultProperties, "nativeImplementation");
+            hidePropertyIn(defaultProperties, "fullscreenContent");
+            hidePropertyIn(defaultProperties, "itemsBasic");
+            changePropertyIn(defaultProperties, x => (x.caption = "Content"), "largeContent");
         }
-        hideProperty<any>("showFullscreenContent", defaultProperties);
-        hideProperty<any>("onOpen", defaultProperties);
-        hideProperty<any>("onClose", defaultProperties);
+        hidePropertyIn(defaultProperties, "showFullscreenContent");
+        hidePropertyIn(defaultProperties, "onOpen");
+        hidePropertyIn(defaultProperties, "onClose");
     } else {
-        hideProperty<any>("nativeImplementation", defaultProperties);
-        hideProperty<any>("itemsBasic", defaultProperties);
-        hideProperty<any>("triggerAttribute", defaultProperties);
-        hideProperty<any>("modalRendering", defaultProperties);
+        hidePropertyIn(defaultProperties, "nativeImplementation");
+        hidePropertyIn(defaultProperties, "itemsBasic");
+        hidePropertyIn(defaultProperties, "triggerAttribute");
+        hidePropertyIn(defaultProperties, "modalRendering");
         if (!values.showFullscreenContent) {
-            hideProperty<any>("fullscreenContent", defaultProperties);
+            hidePropertyIn(defaultProperties, "fullscreenContent");
         }
     }
     return defaultProperties;
