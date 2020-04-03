@@ -4,14 +4,6 @@ import { createElement, Fragment, ReactNode } from "react";
 
 import { Fieldset, FieldsetProps } from "../components/Fieldset";
 
-// export interface FieldsetProps {
-//     name?: string;
-//     className: string;
-//     style?: CSSProperties;
-//     tabIndex?: number;
-//     legend?: string;
-// }
-
 describe("Fieldset", () => {
     const defaultFieldsetProps: FieldsetProps = {
         name: "fieldset",
