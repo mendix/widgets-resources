@@ -7,11 +7,10 @@ import "./ui/Maps.css";
 import { getCurrentUserLocation, translateZoom, useLocationResolver } from "./utils";
 
 const Maps = (props: MapsContainerProps): ReactNode => {
-    const [locations] = useLocationResolver(props.markers, props.dynamicMarkers, props.apiKey?.value);
+    const [, locations] = useLocationResolver(props.markers, props.dynamicMarkers, props.apiKey?.value);
     const [currentLocation, setCurrentLocation] = useState<Marker>();
 
     useEffect(() => {
-        console.log("Maps: COMPONENT DID MOUNT");
         if (props.showCurrentLocation) {
             getCurrentUserLocation()
                 .then(marker => {

@@ -3,8 +3,8 @@ import { GoogleMapsWindow } from "./google";
 
 declare global {
     interface Window extends GoogleMapsWindow {
-        locationsCache: {
-            [key: string]: LatLng;
+        mxGMLocationCache: {
+            [key: string]: Promise<LatLng>;
         };
     }
 }

@@ -1,12 +1,9 @@
 import { Marker, ModeledMarker } from "../../typings";
-import { PromiseQueue } from "./PromiseQueue";
 
 export interface LatLng {
     latitude: number;
     longitude: number;
 }
-
-const queue = new PromiseQueue<any>();
 
 export const analyzeLocations = (locations?: ModeledMarker[], mapToken?: string): Promise<Marker[]> => {
     return new Promise<Marker[]>(async (resolve, reject) => {
@@ -28,17 +25,22 @@ export const analyzeLocations = (locations?: ModeledMarker[], mapToken?: string)
 
             const resolvedMarkers = await Promise.all(
                 unknownLatitudeLongitudes.map(async location => {
-                    const decodedAddress = await geocode(location.address!, mapToken!);
-                    return {
-                        latitude: decodedAddress.latitude,
-                        longitude: decodedAddress.longitude,
-                        url: location.customMarker ?? "",
-                        title: location.title ?? "",
-                        onClick: location.action ?? undefined
-                    } as Marker;
+                    try {
+                        const decodedAddress = await geocode(location.address!, mapToken!);
+                        return {
+                            latitude: decodedAddress.latitude,
+                            longitude: decodedAddress.longitude,
+                            url: location.customMarker ?? "",
+                            title: location.title ?? "",
+                            onClick: location.action ?? undefined
+                        } as Marker;
+                    } catch (e) {
+                        console.error(`Failed to retrieve a location for the provided address: ${location.address}`, e);
+                        return undefined;
+                    }
                 })
             );
-            markerLocations.push(...resolvedMarkers);
+            markerLocations.push(...(resolvedMarkers.filter(r => !!r) as Marker[]));
             resolve(markerLocations);
         } else {
             resolve(markerLocations);
@@ -47,43 +49,26 @@ export const analyzeLocations = (locations?: ModeledMarker[], mapToken?: string)
 };
 
 const geocode = (address: string, mapToken: string): Promise<LatLng> => {
-    if (!window.locationsCache) {
-        console.log("GeoCache: CREATING NEW CACHE");
-        window.locationsCache = {};
+    if (!window.mxGMLocationCache) {
+        window.mxGMLocationCache = {};
     }
-    if (window.locationsCache.hasOwnProperty(address)) {
-        console.warn(`GeoCache: Using cache value for" ${address}`);
-        return Promise.resolve(window.locationsCache[address]);
+    if (window.mxGMLocationCache.hasOwnProperty(address)) {
+        return window.mxGMLocationCache[address];
     } else {
-        console.log(`GeoCache: ADDING ${address}`);
-        return queuedGeocode(address, mapToken).then(coordinate => {
-            window.locationsCache[address] = coordinate;
-            return coordinate;
-        });
+        return (window.mxGMLocationCache[address] = queuedGeocode(address, mapToken));
     }
 };
 
-const queuedGeocode = (address: string, mapToken: string): Promise<LatLng> => {
-    return queue
-        .add(() =>
-            fetch(obtainGeodecodeApiAddress(address, mapToken))
-                .then(result => result.json())
-                .catch(() => {
-                    throw new Error(`Failed to retrieve a location for the provided address: ${address}`);
-                })
-        )
-        .then(resolvedAddress => {
-            if (resolvedAddress.results.length === 0) {
-                throw new Error(`No location found for the provided address: ${address}`);
-            }
+const queuedGeocode = async (address: string, mapToken: string): Promise<LatLng> => {
+    const response = await fetch(obtainGeodecodeApiAddress(address, mapToken));
+    const resolvedAddress = await response.json();
 
-            const decodedLocation = resolvedAddress.results[0].geometry.location;
+    const decodedLocation = resolvedAddress.results[0].geometry.location;
 
-            return {
-                latitude: decodedLocation.lat,
-                longitude: decodedLocation.lng
-            };
-        });
+    return {
+        latitude: decodedLocation.lat,
+        longitude: decodedLocation.lng
+    };
 };
 
 export const obtainGeodecodeApiAddress = (address: string, mapsToken: string): string => {
