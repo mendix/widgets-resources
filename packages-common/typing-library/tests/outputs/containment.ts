@@ -1,21 +1,16 @@
 export const containmentWebOutput = `/**
  * This file was generated from MyWidget.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix Content Team
  */
-import { CSSProperties } from "react";
-import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/typings";
+import { Component, CSSProperties, ReactNode } from "react";
 import { ActionValue, EditableValue } from "mendix";
-import { Component, ReactNode } from "react";
 
-interface CommonProps {
+export interface MyWidgetContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex: number;
-}
-
-export interface MyWidgetContainerProps extends CommonProps {
     content: ReactNode;
     description: EditableValue<string>;
     action?: ActionValue;
@@ -24,10 +19,9 @@ export interface MyWidgetContainerProps extends CommonProps {
 export interface MyWidgetPreviewProps {
     class: string;
     style: string;
-    styleObject: CSSProperties;
     content: { widgetCount: number; renderer: Component };
     description: string;
-    action: ActionPreview;
+    action: {} | null;
 }
 
 export interface VisibilityMap {
@@ -39,17 +33,14 @@ export interface VisibilityMap {
 export const containmentNativeOutput = `/**
  * This file was generated from MyWidget.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix Content Team
  */
-import { ActionValue, EditableValue } from "mendix";
 import { ReactNode } from "react";
+import { ActionValue, EditableValue } from "mendix";
 
-interface CommonProps<Style> {
+export interface MyWidgetProps<Style> {
     name: string;
     style: Style[];
-}
-
-export interface MyWidgetProps<Style> extends CommonProps<Style> {
     content: ReactNode;
     description: EditableValue<string>;
     action?: ActionValue;
