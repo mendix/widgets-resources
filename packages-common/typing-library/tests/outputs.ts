@@ -1,14 +1,9 @@
 export const nativeResult = `/**
  * This file was generated from MyWidget.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix Content Team
  */
 import { ActionValue, DynamicValue, EditableValue, FileValue, NativeImage } from "mendix";
-
-interface CommonProps<Style> {
-    name: string;
-    style: Style[];
-}
 
 export type BootstrapStyleEnum = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
 
@@ -21,7 +16,9 @@ export interface ActionsType {
     image: DynamicValue<NativeImage>;
 }
 
-export interface MyWidgetProps<Style> extends CommonProps<Style> {
+export interface MyWidgetProps<Style> {
+    name: string;
+    style: Style[];
     valueAttribute?: EditableValue<string | BigJs.Big>;
     mywidgetValue?: string;
     valueExpression?: DynamicValue<string>;
@@ -29,7 +26,7 @@ export interface MyWidgetProps<Style> extends CommonProps<Style> {
     file: DynamicValue<FileValue>;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
-    tries?: number;
+    tries?: BigJs.Big;
     amount?: BigJs.Big;
     image?: DynamicValue<NativeImage>;
     onClickAction?: ActionValue;
@@ -41,18 +38,10 @@ export interface MyWidgetProps<Style> extends CommonProps<Style> {
 export const webResult = `/**
  * This file was generated from MyWidget.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix Content Team
  */
 import { CSSProperties } from "react";
-import { ActionPreview } from "@mendix/pluggable-widgets-typing-generator/dist/typings";
 import { ActionValue, DynamicValue, EditableValue, FileValue, WebImage } from "mendix";
-
-interface CommonProps {
-    name: string;
-    class: string;
-    style?: CSSProperties;
-    tabIndex: number;
-}
 
 export type BootstrapStyleEnum = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
 
@@ -68,18 +57,15 @@ export interface ActionsType {
 export interface ActionsPreviewType {
     name: string;
     enabled: boolean;
-    action: ActionPreview;
-    image: WebImage;
+    action: {} | null;
+    image: ImagePreview;
 }
 
-export interface ActionsVisibilityType {
-    name: boolean;
-    enabled: boolean;
-    action: boolean;
-    image: boolean;
-}
-
-export interface MyWidgetContainerProps extends CommonProps {
+export interface MyWidgetContainerProps {
+    name: string;
+    class: string;
+    style?: CSSProperties;
+    tabIndex: number;
     valueAttribute?: EditableValue<string | BigJs.Big>;
     mywidgetValue?: string;
     valueExpression?: DynamicValue<string>;
@@ -87,7 +73,7 @@ export interface MyWidgetContainerProps extends CommonProps {
     file: DynamicValue<FileValue>;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
-    tries?: number;
+    tries?: BigJs.Big;
     amount?: BigJs.Big;
     image?: DynamicValue<WebImage>;
     onClickAction?: ActionValue;
@@ -98,19 +84,18 @@ export interface MyWidgetContainerProps extends CommonProps {
 export interface MyWidgetPreviewProps {
     class: string;
     style: string;
-    styleObject: CSSProperties;
-    valueAttribute?: string;
-    mywidgetValue?: string;
-    valueExpression?: string;
-    valueExpressionDecimal?: BigJs.Big;
-    file: FileValue;
+    valueAttribute: string;
+    mywidgetValue: string;
+    valueExpression: string;
+    valueExpressionDecimal: string;
+    file: string;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
-    tries?: number;
-    amount?: BigJs.Big;
-    image?: WebImage;
-    onClickAction?: ActionPreview;
-    onChange?: ActionPreview;
+    tries: number | null;
+    amount: number | null;
+    image: ImagePreview;
+    onClickAction: {} | null;
+    onChange: {} | null;
     actions: ActionsPreviewType[];
 }
 
@@ -127,6 +112,11 @@ export interface VisibilityMap {
     image: boolean;
     onClickAction: boolean;
     onChange: boolean;
-    actions: ActionsVisibilityType[] | boolean;
+    actions: boolean | Array<{
+        name: boolean;
+        enabled: boolean;
+        action: boolean;
+        image: boolean;
+    }>;
 }
 `;
