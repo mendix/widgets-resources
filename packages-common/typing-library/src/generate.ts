@@ -25,7 +25,13 @@ export function generateForWidget(widgetXml: WidgetXml, widgetName: string) {
         })
         .join("\n");
 
-    const modelerTypes = properties.map((prop) => `    ${prop.$.key}?: ${generateModelerType(prop)};`).join("\n");
+    const modelerTypes = properties
+        .map((prop) => {
+            const isAlwaysPresent =
+                prop.$.type === "enumeration" || (prop.$.type === "object" && prop.$.isList === "true");
+            return `    ${prop.$.key}${!isAlwaysPresent ? "?" : ""}: ${generateModelerType(prop)};`;
+        })
+        .join("\n");
 
     const mxImports = [
         "ActionValue",
@@ -43,33 +49,46 @@ export function generateForWidget(widgetXml: WidgetXml, widgetName: string) {
         .concat(/\WComponent\W/.test(modelerTypes) ? ["Component"] : [])
         .concat(!isNative ? ["CSSProperties"] : [])
         .concat(/\WReactNode\W/.test(clientTypes) ? ["ReactNode"] : []);
+    const imports = [
+        `import { ${reactImports.join(", ")} } from "react";`,
+        `import { ${mxImports.join(", ")} } from "mendix";`,
+    ].filter((line) => line.indexOf("{  }") === -1);
+
+    if (isNative) {
+        return `/**
+ * This file was generated from ${widgetName}.xml
+ * WARNING: All changes made to this file will be overwritten
+ * @author Mendix Content Team
+ */
+${imports.length ? imports.join("\n") + "\n\n" : ""}${enumTypes.length ? enumTypes.join("\n\n") + "\n\n" : ""}
+export interface ${widgetName}Props<Style> {
+    name: string;
+    style: Style[];
+${clientTypes}
+}
+`;
+    }
     return `/**
  * This file was generated from ${widgetName}.xml
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Content Team
  */
-import { ${reactImports.join(", ")} } from "react";
-import { ${mxImports.join(", ")} } from "mendix";
-
-export interface ${isNative ? widgetName : widgetName + "Container"}Props${isNative ? "<Style>" : ""} {
+${imports.length ? imports.join("\n") + "\n\n" : ""}${enumTypes.length ? enumTypes.join("\n\n") + "\n\n" : ""}
+export interface ${widgetName}ContainerProps {
     name: string;
-${
-    !isNative
-        ? `class: string;
-    style?: CSSProperties;`
-        : `style: Style[];`
-}
+    class: string;
+    style?: CSSProperties;
     tabIndex: number;
-    ${clientTypes}
+${clientTypes}
 }
 
 export interface ${widgetName}PreviewProps {
-    class: string;
-    style: string;
-    ${modelerTypes}
+    class?: string;
+    style?: string;
+${modelerTypes}
 }
 
-${!isNative ? `export interface VisibilityMap ${generateVisibilityMap(properties, "")}` : ""}
+export interface VisibilityMap ${generateVisibilityMap(properties, "")}
 `;
 }
 
@@ -105,11 +124,12 @@ function generateClientType(prop: Property, enumTypes: string[], isNative: boole
             }
             return `DynamicValue<${toClientType(prop.returnType[0].$.type)}>`;
         case "enumeration":
-            return generateEnums(prop, enumTypes);
+            generateEnums(prop, enumTypes);
+            return capitalizeFirstLetter(prop.$.key) + "Enum";
         case "object":
             const childType = capitalizeFirstLetter(prop.$.key) + "Type";
             // todo
-            return prop.$.isList === "true" ? `${childType}}[]` : childType;
+            return prop.$.isList === "true" ? `${childType}[]` : childType;
         case "widgets":
             return !!prop.$.dataSource ? "(item: ObjectItem) => ReactNode" : "ReactNode";
         default:
@@ -140,12 +160,13 @@ function generateModelerType(prop: Property): string {
             return "ListValue"; // todo
         case "attribute":
         case "expression":
-        case "enumeration":
             return "string";
+        case "enumeration":
+            return capitalizeFirstLetter(prop.$.key) + "Enum";
         case "object":
             const childType = capitalizeFirstLetter(prop.$.key) + "PreviewType";
             // todo
-            return prop.$.isList === "true" ? `${childType}}[]` : childType;
+            return prop.$.isList === "true" ? `${childType}[]` : childType;
         case "widgets":
             return "({ widgetCount: number; renderer: Component<{}> })";
         default:
@@ -153,14 +174,13 @@ function generateModelerType(prop: Property): string {
     }
 }
 
-function generateEnums(prop: Property, childTypes: string[]): string {
+function generateEnums(prop: Property, childTypes: string[]) {
     if (!prop.enumerationValues?.length || !prop.enumerationValues[0].enumerationValue?.length) {
         throw new Error("[XML] Enumeration property requires enumerations element");
     }
     const typeName = capitalizeFirstLetter(prop.$.key) + "Enum";
     const members = prop.enumerationValues[0].enumerationValue.map((type) => `"${type.$.key}"`);
     childTypes.push(`export type ${typeName} = ${members.join(" | ")};`);
-    return typeName;
 }
 
 function generateVisibilityMap(properties: Property[], indent: string): string {
@@ -178,7 +198,7 @@ function generateVisibilityMap(properties: Property[], indent: string): string {
                 }
             })
             .join("\n") +
-        `${indent}}`
+        `\n${indent}}`
     );
 }
 

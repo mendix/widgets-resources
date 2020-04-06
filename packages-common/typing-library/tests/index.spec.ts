@@ -1,5 +1,5 @@
 import { parseString } from "xml2js";
-import { generateForWidget } from "../src/functions";
+import { generateForWidget } from "../src/generate";
 import { content, contentGroup, contentGroupNative, contentNative } from "./inputs";
 import { nativeResult, webResult } from "./outputs";
 import { listActionInput, listActionInputNative } from "./inputs/list-action";

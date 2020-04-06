@@ -5,7 +5,7 @@ import { parseString } from "xml2js";
 import replaceExt from "replace-ext";
 import { PackageXml } from "./PackageXml";
 import { WidgetXml } from "./WidgetXml";
-import { generateForWidget } from "./functions";
+import { generateForWidget } from "./generate";
 
 const { mkdir, readFile, stat, writeFile } = promises;
 const parseStringAsync = promisify(parseString);
