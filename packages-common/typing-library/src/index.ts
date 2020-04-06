@@ -3,6 +3,7 @@ import { parseString } from "xml2js";
 import PluginError from "plugin-error";
 import File from "vinyl";
 import map from "map-stream";
+import { PackageContent } from "./PackageContent";
 
 function generateTypings(file: File, cb: (error: Error | null) => void): void {
     if (!file || file.isNull() || !file.contents) {
@@ -17,7 +18,7 @@ function generateTypings(file: File, cb: (error: Error | null) => void): void {
         return cb(new PluginError("pluggable-widgets-typing-generator", "Streaming not supported"));
     }
 
-    parseString(file.contents.toString("utf8"), {}, function (err: Error, content: any) {
+    parseString(file.contents!.toString("utf8"), {}, function (err: Error, content?: PackageContent) {
         if (err) cb(err);
 
         if (!content) {
