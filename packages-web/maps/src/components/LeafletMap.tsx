@@ -55,7 +55,6 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
         } else if (map.current) {
             //TODO: Test it
             map.current.options = mapOptions;
-            map.current.setZoom(props.zoomLevel);
         }
         addMarkers();
     };
@@ -74,7 +73,10 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
     };
 
     const addMarker = (marker: Marker): LeafletMarker => {
-        const mapMarker = new LeafletMarker([Number(marker.latitude), Number(marker.longitude)]);
+        const mapMarker = new LeafletMarker([Number(marker.latitude), Number(marker.longitude)], {
+            title: marker.title,
+            alt: marker.title
+        });
         if (marker.title) {
             mapMarker.setTooltipContent(marker.title);
             if (marker.onClick) {
