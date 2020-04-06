@@ -21,13 +21,12 @@ export function generateForWidget(widgetXml: WidgetXml, widgetName: string) {
     const clientTypes = generateClientTypes(widgetName, properties, isNative);
     const modelerTypes = generatePreviewTypes(widgetName, properties);
     const visibiltyMap = `export interface VisibilityMap ${generateVisibilityMap(properties, "")}`;
-    const allTypes = isNative
-        ? clientTypes.join("\n\n")
-        : clientTypes
-              .slice(0, clientTypes.length - 1) // all client auxiliary types
-              .concat(modelerTypes.slice(0, modelerTypes.length - 1)) // all preview auxiliary types
-              .concat([clientTypes[clientTypes.length - 1], modelerTypes[modelerTypes.length - 1], visibiltyMap])
-              .join("\n\n");
+    const allTypes = clientTypes
+        .slice(0, clientTypes.length - 1) // all client auxiliary types
+        .concat(modelerTypes.slice(0, modelerTypes.length - 1)) // all preview auxiliary types
+        .concat([clientTypes[clientTypes.length - 1], modelerTypes[modelerTypes.length - 1]])
+        .concat(!isNative ? [visibiltyMap] : [])
+        .join("\n\n");
 
     const mxImports = [
         "ActionValue",

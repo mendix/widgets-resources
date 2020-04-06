@@ -48,4 +48,13 @@ export interface MyWidgetProps<Style> {
     description: EditableValue<string>;
     action?: ActionValue;
 }
+
+export interface MyWidgetPreviewProps {
+    class: string;
+    style: string;
+    file: string;
+    file2: string;
+    description: string;
+    action: {} | null;
+}
 `;
