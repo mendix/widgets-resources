@@ -8,7 +8,7 @@ import { listImageInput, listImageInputNative } from "./inputs/list-image";
 import { listImageNativeOutput, listImageWebOutput } from "./outputs/list-image";
 import { iconInput, iconInputNative } from "./inputs/icon";
 import { iconNativeOutput, iconWebOutput } from "./outputs/icon";
-import { MendixXML } from "../src/typings";
+import { WidgetXML } from "../src/WidgetXML";
 import { containmentInput, containmentInputNative } from "./inputs/containment";
 import { containmentNativeOutput, containmentWebOutput } from "./outputs/containment";
 import { fileInput, fileInputNative } from "./inputs/file";
@@ -110,12 +110,12 @@ describe("Generating tests", function () {
     });
 });
 
-function convertXmltoJson(xml: string): MendixXML {
-    let content: MendixXML = {};
+function convertXmltoJson(xml: string): WidgetXML {
+    let content: WidgetXML = {};
     if (xml) {
         parseString(xml, {}, function (err: Error, result: any) {
             if (err) throw err;
-            content = result as MendixXML;
+            content = result as WidgetXML;
         });
     }
     return content;

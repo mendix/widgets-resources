@@ -1,9 +1,10 @@
-import { AttributeTypes, MendixXML, PackageContent, Property, PropertyGroup, PropertyType } from "./typings";
+import { AttributeTypes, WidgetXML, Property, PropertyGroup, PropertyType } from "./WidgetXML";
 import PluginError from "plugin-error";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { parseString } from "xml2js";
 import replaceExt from "replace-ext";
 import path from "path";
+import { PackageContent } from "./PackageContent";
 
 /**
  * Translate the XML property type for Javascript type
@@ -319,7 +320,7 @@ import { ${imports.join(", ")} } from "mendix";`
  * @param widgetName
  * @returns {string}
  */
-export const transformJsonContent = (jsonContent: MendixXML, widgetName: string): string => {
+export const transformJsonContent = (jsonContent: WidgetXML, widgetName: string): string => {
     if (!jsonContent || !jsonContent.widget || !jsonContent.widget.properties) {
         throw new PluginError("Typing generation", {
             message: "[XML] XML doesn't contains <properties> element",
@@ -453,11 +454,11 @@ export const transformPackageContent = (content: PackageContent, basePath: strin
             mkdirSync(folder);
         }
         content.package.clientModule[0].widgetFiles[0].widgetFile.forEach((file) => {
-            let content: MendixXML = {};
+            let content: WidgetXML = {};
             let output = null;
             if (file.$.path) {
                 const fileContent = readFileSync(path.join(basePath, file.$.path), "utf-8");
-                parseString(fileContent, {}, function (err: Error, result: MendixXML) {
+                parseString(fileContent, {}, function (err: Error, result: WidgetXML) {
                     if (err) {
                         throw new PluginError("Typing generation", {
                             message: err.message,
