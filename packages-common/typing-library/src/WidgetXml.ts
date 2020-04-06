@@ -25,11 +25,27 @@ export interface Properties {
 export interface Property {
     $: {
         key: string;
-        type: any;
+        type:
+            | "boolean"
+            | "string"
+            | "action"
+            | "textTemplate"
+            | "integer"
+            | "decimal"
+            | "icon"
+            | "image"
+            | "file"
+            | "datasource"
+            | "attribute"
+            | "expression"
+            | "enumeration"
+            | "object"
+            | "widgets";
         isList?: string;
         defaultValue?: string;
         required?: string;
         isDefault?: string;
+        dataSource?: string;
     };
     caption?: string[];
     category?: string[];
