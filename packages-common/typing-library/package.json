@@ -28,7 +28,7 @@
         "xml2js": "^0.4.19"
     },
     "devDependencies": {
-        "@types/jest": "^24.0.12",
+        "@types/jest": "^25.2.1",
         "@types/node": "^11.13.8",
         "@types/plugin-error": "^0.1.1",
         "@types/replace-ext": "0.0.27",
@@ -36,14 +36,14 @@
         "@types/xml2js": "^0.4.4",
         "enzyme": "^3.7.0",
         "enzyme-to-json": "^3.3.4",
-        "husky": "^2.2.0",
-        "jest": "^24.8.0",
-        "jest-junit": "^6.4.0",
-        "lint-staged": "^8.1.5",
-        "prettier": "^1.17.0",
-        "pretty-quick": "^1.10.0",
-        "tslint": "^5.20.0",
-        "ts-jest": "^24.0.2",
+        "husky": "^4.2.3",
+        "jest": "^25.2.7",
+        "jest-junit": "^10.0.0",
+        "lint-staged": "^10.1.2",
+        "prettier": "^2.0.3",
+        "pretty-quick": "^2.0.1",
+        "ts-jest": "^25.3.1",
+        "tslint": "^6.1.1",
         "typescript": "^3.6.3"
     },
     "scripts": {
