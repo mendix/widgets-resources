@@ -7,7 +7,8 @@ import {
     Marker as LeafletMarker,
     icon,
     tileLayer,
-    TileLayerOptions
+    TileLayerOptions,
+    CRS
 } from "leaflet";
 import { MapProviderEnum, Marker, SharedProps } from "../../typings";
 import { Alert } from "@widgets-resources/piw-utils";
@@ -46,7 +47,8 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
             // Work around for page scroll down to bottom on first click on map in Chrome and IE
             // https://github.com/Leaflet/Leaflet/issues/5392
             keyboard: false,
-            dragging: props.optionDrag
+            dragging: props.optionDrag,
+            crs: CRS.EPSG4326
         };
         if (leafletRef.current && !map.current) {
             map.current = new Map(leafletRef.current, mapOptions).addLayer(baseMapLayer());
@@ -59,7 +61,7 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
     };
 
     const addMarkers = (): void => {
-        if (map.current) {
+        if (map.current && markerGroup) {
             //TODO: Implementation of marker logic
             markerGroup.clearLayers();
             if (props.locations && props.locations.length) {
@@ -77,7 +79,17 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
     const addMarker = (marker: Marker): LeafletMarker => {
         const mapMarker = new LeafletMarker([Number(marker.latitude), Number(marker.longitude)]);
         if (marker.title) {
+            mapMarker.setTooltipContent(marker.title);
             if (marker.onClick) {
+                const infoContent = document.createElement("span");
+                infoContent.innerHTML = marker.title || "";
+                if (marker.onClick) {
+                    infoContent.style.cursor = "pointer";
+                    infoContent.onclick = marker.onClick;
+                }
+                mapMarker.bindPopup(infoContent).openPopup();
+            } else {
+                mapMarker.bindPopup(marker.title).openPopup();
             }
         } else {
             if (marker.onClick) {
@@ -101,7 +113,7 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
     const updateCamera = (): void => {
         const { zoomLevel, autoZoom } = props;
         setTimeout(() => {
-            if (map.current && markerGroup) {
+            if (map.current && markerGroup && markerGroup.getLayers().length > 0) {
                 const bounds = markerGroup.getBounds();
                 try {
                     if (!autoZoom) {
@@ -121,16 +133,17 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
 
     const getCenter = (): LatLngLiteral => {
         return {
-            lat: props.locations?.[0].latitude ?? defaultCenterLocation.lat,
-            lng: props.locations?.[0].longitude ?? defaultCenterLocation.lng
+            lat: props.locations?.[0]?.latitude ?? defaultCenterLocation.lat,
+            lng: props.locations?.[0]?.longitude ?? defaultCenterLocation.lng
         };
     };
 
     const addCurrentLocation = () => {
-        if (props.currentLocation) {
+        if (map.current && props.currentLocation) {
             const currentLocationMarker = addMarker(props.currentLocation);
             if (currentLocationMarker) {
-                markerGroup.addLayer(currentLocationMarker);
+                const layer = markerGroup.addLayer(currentLocationMarker);
+                map.current.addLayer(layer);
             }
         }
     };

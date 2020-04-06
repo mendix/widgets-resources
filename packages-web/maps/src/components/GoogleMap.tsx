@@ -16,7 +16,7 @@ export interface GoogleMapsProps extends SharedProps {
     rotateControl: boolean;
 }
 
-export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
+const GoogleMap = (props: GoogleMapsProps): ReactElement => {
     const map = useRef<google.maps.Map>();
     const googleMapsRef = useRef<HTMLDivElement>(null);
     const defaultCenterLocation: google.maps.LatLngLiteral = { lat: 51.9066346, lng: 4.4861703 };
@@ -51,6 +51,7 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
         };
         if (googleMapsRef.current && !map.current) {
             map.current = new google.maps.Map(googleMapsRef.current, mapOptions);
+            bounds = new google.maps.LatLngBounds().extend(defaultCenterLocation);
         } else if (map.current) {
             map.current.setOptions(mapOptions);
         }
@@ -87,6 +88,9 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
 
     const addMarker = (marker: Marker): google.maps.Marker | undefined => {
         if (map.current) {
+            if (!bounds) {
+                bounds = bounds = new google.maps.LatLngBounds();
+            }
             bounds.extend({
                 lat: marker.latitude,
                 lng: marker.longitude
@@ -147,8 +151,8 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
 
     const getCenter = (): google.maps.LatLngLiteral => {
         return {
-            lat: markers[0].getPosition()?.lat() ?? defaultCenterLocation.lat,
-            lng: markers[0].getPosition()?.lng() ?? defaultCenterLocation.lng
+            lat: markers[0]?.getPosition()?.lat() ?? defaultCenterLocation.lat,
+            lng: markers[0]?.getPosition()?.lng() ?? defaultCenterLocation.lng
         };
     };
 
