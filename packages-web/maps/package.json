@@ -47,7 +47,7 @@
     "@types/googlemaps": "^3.39.2",
     "@types/deep-equal": "^1.0.1",
     "@types/faker": "^4.1.5",
-    "@types/leaflet": "^1.4.4",
+    "@types/leaflet": "^1.5.12",
     "@types/react": "~16.8.13",
     "faker": "^4.1.0"
   },
@@ -55,7 +55,7 @@
     "@widgets-resources/piw-utils": "^1.0.0",
     "classnames": "^2.2.6",
     "deep-equal": "^2.0.2",
-    "leaflet": "^1.4.0",
+    "leaflet": "^1.6.0",
     "leaflet-defaulticon-compatibility": "^0.1.1"
   }
 }

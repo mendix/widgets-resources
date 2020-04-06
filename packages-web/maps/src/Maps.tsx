@@ -1,10 +1,10 @@
 import { hot } from "react-hot-loader/root";
 import { createElement, ReactNode, useEffect, useState } from "react";
 import { MapsContainerProps, Marker } from "../typings";
-import GoogleMap from "./components/GoogleMap";
 import { ValueStatus } from "mendix";
-import "./ui/Maps.css";
+
 import { getCurrentUserLocation, translateZoom, useLocationResolver } from "./utils";
+import { MapSwitcher } from "./components/MapSwitcher";
 
 const Maps = (props: MapsContainerProps): ReactNode => {
     const [, locations] = useLocationResolver(props.markers, props.dynamicMarkers, props.apiKey?.value);
@@ -21,11 +21,12 @@ const Maps = (props: MapsContainerProps): ReactNode => {
     }, []);
 
     return (
-        <GoogleMap
+        <MapSwitcher
+            mapProvider={props.mapProvider}
+            locations={locations}
             autoZoom={props.zoom === "automatic"}
             zoomLevel={translateZoom(props.zoom)}
             mapsToken={props.apiKey && props.apiKey.status === ValueStatus.Available ? props.apiKey.value : undefined}
-            locations={locations}
             widthUnit={props.widthUnit}
             width={props.width}
             heightUnit={props.heightUnit}
@@ -39,8 +40,10 @@ const Maps = (props: MapsContainerProps): ReactNode => {
             mapTypeControl={props.mapTypeControl}
             fullScreenControl={props.fullScreenControl}
             rotateControl={props.rotateControl}
+            className={props.class}
             mapStyles={props.mapStyles}
-            divStyles={props.style}
+            style={props.style}
+            attributionControl={props.attributionControl}
         />
     );
 };

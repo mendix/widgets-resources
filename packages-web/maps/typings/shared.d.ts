@@ -1,4 +1,5 @@
 import { HeightUnitEnum, WidthUnitEnum } from "./MapsProps";
+import { CSSProperties } from "react";
 
 export interface Dimensions {
     widthUnit: WidthUnitEnum;
@@ -33,4 +34,8 @@ export interface SharedProps extends Dimensions {
     showCurrentLocation: boolean;
     currentLocation?: Marker;
     locations?: Marker[];
+    validationMessage?: string;
+    mapsToken?: string;
+    className?: string;
+    style?: CSSProperties;
 }

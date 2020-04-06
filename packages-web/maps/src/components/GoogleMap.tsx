@@ -1,4 +1,4 @@
-import { createElement, CSSProperties, ReactElement, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 
 import googleApiWrapper from "./GoogleApi";
@@ -8,11 +8,7 @@ import { Marker, SharedProps } from "../../typings";
 
 export interface GoogleMapsProps extends SharedProps {
     scriptsLoaded?: boolean;
-    validationMessage?: string;
-    mapsToken?: string;
-    className?: string;
     mapStyles?: string;
-    divStyles?: CSSProperties;
 
     optionStreetView: boolean;
     mapTypeControl: boolean;
@@ -62,8 +58,8 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
     };
 
     const addMarkers = (): void => {
+        markers.forEach(marker => marker.setMap(null));
         if (props.locations && props.locations.length > 0) {
-            markers.forEach(marker => marker.setMap(null));
             setMarkers([]);
             bounds = new google.maps.LatLngBounds();
             setMarkers(
@@ -137,10 +133,7 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
             if (bounds && map.current) {
                 try {
                     if (!autoZoom) {
-                        map.current.setCenter({
-                            lat: markers[0].getPosition()?.lat() ?? defaultCenterLocation.lat,
-                            lng: markers[0].getPosition()?.lng() ?? defaultCenterLocation.lng
-                        });
+                        map.current.setCenter(getCenter());
                         map.current.setZoom(zoomLevel);
                     } else {
                         map.current.fitBounds(bounds);
@@ -150,6 +143,13 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
                 }
             }
         }, 0);
+    };
+
+    const getCenter = (): google.maps.LatLngLiteral => {
+        return {
+            lat: markers[0].getPosition()?.lat() ?? defaultCenterLocation.lat,
+            lng: markers[0].getPosition()?.lng() ?? defaultCenterLocation.lng
+        };
     };
 
     const getMapStyles = (): google.maps.MapTypeStyle[] => {
@@ -171,10 +171,7 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
     };
 
     return (
-        <div
-            className={classNames("widget-maps", props.className)}
-            style={{ ...props.divStyles, ...getDimensions(props) }}
-        >
+        <div className={classNames("widget-maps", props.className)} style={{ ...props.style, ...getDimensions(props) }}>
             {validationMessage && (
                 <Alert bootstrapStyle="danger" className="widget-google-maps-alert">
                     {validationMessage}

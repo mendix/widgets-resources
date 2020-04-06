@@ -14,6 +14,8 @@ export function getProperties(
         hideProperty<MarkersType>("markerStyle", defaultProperties);
         hideProperty<DynamicMarkersType>("markerStyleDynamic", defaultProperties);
         hideProperty<MarkersType>("customMarker", defaultProperties);
+        hideProperty<MapsPreviewProps>("mapProvider", defaultProperties);
+        hideProperty<MapsPreviewProps>("mapStyles", defaultProperties);
     }
 
     values.markers.forEach((f, index) => {
@@ -84,6 +86,7 @@ export function getProperties(
         hideProperty<MapsPreviewProps>("mapTypeControl", defaultProperties);
         hideProperty<MapsPreviewProps>("fullScreenControl", defaultProperties);
         hideProperty<MapsPreviewProps>("rotateControl", defaultProperties);
+        hideProperty<MapsPreviewProps>("mapStyles", defaultProperties);
     }
 
     return defaultProperties;
