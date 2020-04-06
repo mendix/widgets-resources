@@ -1,4 +1,4 @@
-export interface PackageContent {
+export interface PackageXml {
     package: Package;
 }
 

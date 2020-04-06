@@ -3,15 +3,15 @@ import { join } from "path";
 import { promisify } from "util";
 import { parseString } from "xml2js";
 import replaceExt from "replace-ext";
-import { PackageContent } from "./PackageContent";
-import { WidgetXML } from "./WidgetXML";
-import { transformJsonContent } from "./functions";
+import { PackageXml } from "./PackageXml";
+import { WidgetXml } from "./WidgetXml";
+import { generateForWidget } from "./functions";
 
 const { mkdir, readFile, stat, writeFile } = promises;
 const parseStringAsync = promisify(parseString);
 
 export async function transformPackage(content: string, basePath: string) {
-    const contentXml = (await parseStringAsync(content)) as PackageContent;
+    const contentXml = (await parseStringAsync(content)) as PackageXml;
     if (!contentXml) {
         throw new Error("Empty XML, please check your src folder for file package.xml");
     }
@@ -30,18 +30,17 @@ export async function transformPackage(content: string, basePath: string) {
 
     for (const widgetFileXml of widgetFileXmls) {
         const sourcePath = widgetFileXml.$.path;
+        const source = await readFile(join(basePath, sourcePath), "utf-8");
 
-        let source = await readFile(join(basePath, sourcePath), "utf-8");
-        let sourceXml;
+        let generatedContent;
         try {
-            sourceXml = (await parseStringAsync(source)) as WidgetXML;
+            const sourceXml = (await parseStringAsync(source)) as WidgetXml;
+            generatedContent = generateForWidget(sourceXml, toWidgetName(sourcePath));
         } catch (err) {
             throw new Error(
                 `Incorrect widget xml file ${sourcePath}, please check Mendix Documentation: ${err.message}`
             );
         }
-
-        const generatedContent = transformJsonContent(sourceXml, toWidgetName(sourcePath));
 
         const resultPath = replaceExt(sourcePath, "Props.d.ts");
         await writeFile(join(resultBasePath, resultPath), generatedContent);
