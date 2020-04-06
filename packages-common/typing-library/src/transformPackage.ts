@@ -23,11 +23,13 @@ export async function transformPackage(content: string, basePath: string) {
         await mkdir(resultBasePath);
     }
 
-    for (const widgetFileXml of contentXml.package.clientModule[0].widgetFiles[0].widgetFile) {
+    const widgetFileXmls = contentXml.package.clientModule[0].widgetFiles
+        .map((wf) => wf.widgetFile)
+        .reduce((a, e) => a.concat(e), [])
+        .filter((wfXml) => wfXml.$.path);
+
+    for (const widgetFileXml of widgetFileXmls) {
         const sourcePath = widgetFileXml.$.path;
-        if (!sourcePath) {
-            continue;
-        }
 
         let source = await readFile(join(basePath, sourcePath), "utf-8");
         let sourceXml;
