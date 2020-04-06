@@ -27,12 +27,6 @@ export interface MyWidgetPreviewProps {
     style: string;
     actions: ActionsPreviewType[];
 }
-
-export interface VisibilityMap {
-    actions: boolean | Array<{
-        image: boolean;
-    }>;
-}
 `;
 export const listImageNativeOutput = `export interface ActionsType {
     image: DynamicValue<NativeImage>;

@@ -1,6 +1,5 @@
 import { generateClientTypes } from "./generateClientTypes";
 import { generatePreviewTypes } from "./generatePreviewTypes";
-import { generateVisibilityMapType } from "./generateVisibilityTypes";
 import { extractProperties } from "./helpers";
 import { WidgetXml } from "./WidgetXml";
 
@@ -34,13 +33,11 @@ export function generateForWidget(widgetXml: WidgetXml, widgetName: string) {
 
     const clientTypes = generateClientTypes(widgetName, properties, isNative);
     const modelerTypes = generatePreviewTypes(widgetName, properties);
-    const visibiltyMap = generateVisibilityMapType(properties);
 
     const generatedTypesCode = clientTypes
         .slice(0, clientTypes.length - 1) // all client auxiliary types
         .concat(modelerTypes.slice(0, modelerTypes.length - 1)) // all preview auxiliary types
         .concat([clientTypes[clientTypes.length - 1], modelerTypes[modelerTypes.length - 1]])
-        .concat(!isNative ? [visibiltyMap] : [])
         .join("\n\n");
 
     const imports = [

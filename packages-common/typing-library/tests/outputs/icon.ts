@@ -29,13 +29,6 @@ export interface MyWidgetPreviewProps {
     style: string;
     icons: IconsPreviewType[];
 }
-
-export interface VisibilityMap {
-    icons: boolean | Array<{
-        firstIcon: boolean;
-        secondIcon: boolean;
-    }>;
-}
 `;
 
 export const iconNativeOutput = `export interface IconsType {

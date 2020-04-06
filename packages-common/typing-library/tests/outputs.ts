@@ -123,25 +123,4 @@ export interface MyWidgetPreviewProps {
     onChange: {} | null;
     actions: ActionsPreviewType[];
 }
-
-export interface VisibilityMap {
-    valueAttribute: boolean;
-    mywidgetValue: boolean;
-    valueExpression: boolean;
-    valueExpressionDecimal: boolean;
-    file: boolean;
-    bootstrapStyle: boolean;
-    mywidgetType: boolean;
-    tries: boolean;
-    amount: boolean;
-    image: boolean;
-    onClickAction: boolean;
-    onChange: boolean;
-    actions: boolean | Array<{
-        name: boolean;
-        enabled: boolean;
-        action: boolean;
-        image: boolean;
-    }>;
-}
 `;

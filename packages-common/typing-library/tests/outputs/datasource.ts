@@ -25,13 +25,6 @@ export interface MyWidgetPreviewProps {
     description: string;
     action: {} | null;
 }
-
-export interface VisibilityMap {
-    contentSource: boolean;
-    content: boolean;
-    description: boolean;
-    action: boolean;
-}
 `;
 export const datasourceNativeOutput = `export interface MyWidgetProps<Style> {
     name: string;
