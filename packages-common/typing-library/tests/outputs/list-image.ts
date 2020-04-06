@@ -45,9 +45,19 @@ export interface ActionsType {
     image: DynamicValue<NativeImage>;
 }
 
+export interface ActionsPreviewType {
+    image: string;
+}
+
 export interface MyWidgetProps<Style> {
     name: string;
     style: Style[];
     actions: ActionsType[];
+}
+
+export interface MyWidgetPreviewProps {
+    class: string;
+    style: string;
+    actions: ActionsPreviewType[];
 }
 `;

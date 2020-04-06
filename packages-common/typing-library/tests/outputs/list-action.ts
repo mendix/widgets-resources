@@ -49,9 +49,20 @@ export interface ActionsType {
     action?: ActionValue;
 }
 
+export interface ActionsPreviewType {
+    description: string;
+    action: {} | null;
+}
+
 export interface MyWidgetProps<Style> {
     name: string;
     style: Style[];
     actions: ActionsType[];
+}
+
+export interface MyWidgetPreviewProps {
+    class: string;
+    style: string;
+    actions: ActionsPreviewType[];
 }
 `;

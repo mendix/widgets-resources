@@ -45,9 +45,19 @@ export interface ActionsType {
     file: DynamicValue<FileValue>;
 }
 
+export interface ActionsPreviewType {
+    file: string;
+}
+
 export interface MyWidgetProps<Style> {
     name: string;
     style: Style[];
     actions: ActionsType[];
+}
+
+export interface MyWidgetPreviewProps {
+    class: string;
+    style: string;
+    actions: ActionsPreviewType[];
 }
 `;

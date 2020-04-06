@@ -35,7 +35,7 @@ export const containmentNativeOutput = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Content Team
  */
-import { ReactNode } from "react";
+import { Component, ReactNode } from "react";
 import { ActionValue, EditableValue } from "mendix";
 
 export interface MyWidgetProps<Style> {
@@ -44,5 +44,13 @@ export interface MyWidgetProps<Style> {
     content: ReactNode;
     description: EditableValue<string>;
     action?: ActionValue;
+}
+
+export interface MyWidgetPreviewProps {
+    class: string;
+    style: string;
+    content: { widgetCount: number; renderer: Component };
+    description: string;
+    action: {} | null;
 }
 `;

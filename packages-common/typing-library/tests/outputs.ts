@@ -16,6 +16,13 @@ export interface ActionsType {
     image: DynamicValue<NativeImage>;
 }
 
+export interface ActionsPreviewType {
+    name: string;
+    enabled: boolean;
+    action: {} | null;
+    image: string;
+}
+
 export interface MyWidgetProps<Style> {
     name: string;
     style: Style[];
@@ -32,6 +39,24 @@ export interface MyWidgetProps<Style> {
     onClickAction?: ActionValue;
     onChange?: ActionValue;
     actions: ActionsType[];
+}
+
+export interface MyWidgetPreviewProps {
+    class: string;
+    style: string;
+    valueAttribute: string;
+    mywidgetValue: string;
+    valueExpression: string;
+    valueExpressionDecimal: string;
+    file: string;
+    bootstrapStyle: BootstrapStyleEnum;
+    mywidgetType: MywidgetTypeEnum;
+    tries: number | null;
+    amount: number | null;
+    image: string;
+    onClickAction: {} | null;
+    onChange: {} | null;
+    actions: ActionsPreviewType[];
 }
 `;
 

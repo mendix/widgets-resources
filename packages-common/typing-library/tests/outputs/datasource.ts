@@ -38,7 +38,7 @@ export const datasourceNativeOutput = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Content Team
  */
-import { ReactNode } from "react";
+import { Component, ReactNode } from "react";
 import { ActionValue, EditableValue, ListValue, ObjectItem } from "mendix";
 
 export interface MyWidgetProps<Style> {
@@ -48,5 +48,14 @@ export interface MyWidgetProps<Style> {
     content: (item: ObjectItem) => ReactNode;
     description: EditableValue<string>;
     action?: ActionValue;
+}
+
+export interface MyWidgetPreviewProps {
+    class: string;
+    style: string;
+    contentSource: {} | null;
+    content: { widgetCount: number; renderer: Component };
+    description: string;
+    action: {} | null;
 }
 `;

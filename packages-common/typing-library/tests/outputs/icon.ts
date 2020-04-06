@@ -50,9 +50,20 @@ export interface IconsType {
     secondIcon: DynamicValue<NativeIcon>;
 }
 
+export interface IconsPreviewType {
+    firstIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    secondIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+}
+
 export interface MyWidgetProps<Style> {
     name: string;
     style: Style[];
     icons: IconsType[];
+}
+
+export interface MyWidgetPreviewProps {
+    class: string;
+    style: string;
+    icons: IconsPreviewType[];
 }
 `;
