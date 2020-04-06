@@ -58,7 +58,7 @@ export interface ActionsPreviewType {
     name: string;
     enabled: boolean;
     action: {} | null;
-    image: ImagePreview;
+    image: string;
 }
 
 export interface MyWidgetContainerProps {
@@ -93,7 +93,7 @@ export interface MyWidgetPreviewProps {
     mywidgetType: MywidgetTypeEnum;
     tries: number | null;
     amount: number | null;
-    image: ImagePreview;
+    image: string;
     onClickAction: {} | null;
     onChange: {} | null;
     actions: ActionsPreviewType[];
