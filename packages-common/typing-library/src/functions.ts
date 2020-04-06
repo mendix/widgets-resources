@@ -25,14 +25,14 @@ const translateType = (
         case "attribute":
             if (!prop.attributeTypes || prop.attributeTypes.length === 0) {
                 throw new PluginError("Typing generation", {
-                    message: "[XML] Attribute property requires attributeTypes element"
+                    message: "[XML] Attribute property requires attributeTypes element",
                 });
             }
             return preview && !isChild ? "string" : `EditableValue<${findTypes(prop.attributeTypes[0])}>`;
         case "expression":
             if (!prop.returnType || prop.returnType.length === 0) {
                 throw new PluginError("Typing generation", {
-                    message: "[XML] Expression property requires returnType element"
+                    message: "[XML] Expression property requires returnType element",
                 });
             }
             const type = translateAttributeType(prop.returnType[0].$.type);
@@ -97,11 +97,11 @@ const generateEnums = (prop: Property, childTypes: string[]): string => {
         prop.enumerationValues[0].enumerationValue.length === 0
     ) {
         throw new PluginError("Typing generation", {
-            message: "[XML] Enumeration property requires enumerations element"
+            message: "[XML] Enumeration property requires enumerations element",
         });
     }
     const typeName = capitalizeFirstLetter(prop.$.key) + "Enum";
-    const types = prop.enumerationValues[0].enumerationValue.map(type => `"${type.$.key}"`);
+    const types = prop.enumerationValues[0].enumerationValue.map((type) => `"${type.$.key}"`);
     childTypes.push(`export type ${typeName} = ${types.join(" | ")};`);
     return typeName;
 };
@@ -117,20 +117,20 @@ const generateEnums = (prop: Property, childTypes: string[]): string => {
 const generateChildProps = (prop: Property, childTypes: string[], preview = false, isMobile = false): string => {
     if (!prop.properties || prop.properties.length === 0) {
         throw new PluginError("Typing generation", {
-            message: "[XML] Object property requires <properties> element"
+            message: "[XML] Object property requires <properties> element",
         });
     }
     const properties = extractProperties(prop.properties[0]);
     const hasDynamicProps = preview
         ? properties
-              .map(prop => translateType(prop, [], preview, isMobile, true))
-              .some(type => type.includes("DynamicValue") || type.includes("EditableValue"))
+              .map((prop) => translateType(prop, [], preview, isMobile, true))
+              .some((type) => type.includes("DynamicValue") || type.includes("EditableValue"))
         : false;
     const typeName = capitalizeFirstLetter(prop.$.key) + (hasDynamicProps ? "PreviewType" : "Type");
     if (!preview || (preview && hasDynamicProps)) {
         childTypes.push(`export interface ${typeName} {
 ${properties
-    .map(prop => {
+    .map((prop) => {
         let name = prop.$.key;
         if (
             (prop.$.required && prop.$.required === "false" && prop.$.type !== "object") ||
@@ -164,15 +164,15 @@ const capitalizeFirstLetter = (text: string): string => {
 const findTypes = (attributeTypes: AttributeTypes): string => {
     if (!attributeTypes.attributeType || attributeTypes.attributeType.length === 0) {
         throw new PluginError("Typing generation", {
-            message: "[XML] Attribute property requires attributeTypes element"
+            message: "[XML] Attribute property requires attributeTypes element",
         });
     }
     let types = attributeTypes.attributeType
-        .filter(type => type.$ && type.$.name)
-        .map(type => type.$.name)
-        .map(type => translateAttributeType(type));
+        .filter((type) => type.$ && type.$.name)
+        .map((type) => type.$.name)
+        .map((type) => translateAttributeType(type));
     const uniqueTypes = new Set();
-    types.forEach(type => {
+    types.forEach((type) => {
         !uniqueTypes.has(type) ? uniqueTypes.add(type) : null;
     });
     return Array.from(uniqueTypes).join(` | `);
@@ -212,7 +212,7 @@ const translateAttributeType = (type: string): string => {
 const extractVisibilityMap = (prop: Property, childTypesVisibility: string[]): string => {
     if (!prop.properties || prop.properties.length === 0) {
         throw new PluginError("Typing generation", {
-            message: "[XML] Object property requires <properties> element"
+            message: "[XML] Object property requires <properties> element",
         });
     }
     const properties = extractProperties(prop.properties[0]);
@@ -220,7 +220,7 @@ const extractVisibilityMap = (prop: Property, childTypesVisibility: string[]): s
     if (prop.$.hasOwnProperty("isList")) {
         if (prop.$.isList) {
             childTypesVisibility.push(`export interface ${name} {
-${properties.map(p => `    ${p.$.key}: boolean;`).join("\n")}
+${properties.map((p) => `    ${p.$.key}: boolean;`).join("\n")}
 }`);
         }
     }
@@ -233,17 +233,17 @@ ${properties.map(p => `    ${p.$.key}: boolean;`).join("\n")}
  * @returns {Property[]}
  */
 const findProperties = (propertyElement: PropertyGroup[] | PropertyGroup): Property[] => {
-    if (Array.isArray(propertyElement)) return flattenDeep(propertyElement.map(obj => findProperties(obj)));
+    if (Array.isArray(propertyElement)) return flattenDeep(propertyElement.map((obj) => findProperties(obj)));
     if (typeof propertyElement === "object") {
         if (propertyElement.propertyGroup) {
             const array = propertyElement.propertyGroup;
             if (array && array.length > 0) {
-                if (array.filter(obj => obj.hasOwnProperty("propertyGroup")).length > 0) {
+                if (array.filter((obj) => obj.hasOwnProperty("propertyGroup")).length > 0) {
                     return flattenDeep(
-                        array.filter(obj => obj.hasOwnProperty("propertyGroup")).map(obj => findProperties(obj))
+                        array.filter((obj) => obj.hasOwnProperty("propertyGroup")).map((obj) => findProperties(obj))
                     );
                 }
-                return flattenDeep(array.map(obj => obj.property));
+                return flattenDeep(array.map((obj) => obj.property));
             }
         }
         if (propertyElement.property) {
@@ -304,8 +304,8 @@ function findImports(mainTypes: string, childTypes: string[]): string {
         "NativeImage",
         "ObjectItem",
         "WebIcon",
-        "WebImage"
-    ].filter(type => types.includes(type));
+        "WebImage",
+    ].filter((type) => types.includes(type));
 
     return imports && imports.length > 0
         ? `
@@ -322,19 +322,19 @@ import { ${imports.join(", ")} } from "mendix";`
 export const transformJsonContent = (jsonContent: MendixXML, widgetName: string): string => {
     if (!jsonContent || !jsonContent.widget || !jsonContent.widget.properties) {
         throw new PluginError("Typing generation", {
-            message: "[XML] XML doesn't contains <properties> element"
+            message: "[XML] XML doesn't contains <properties> element",
         });
     }
 
     if (!jsonContent.widget.$.hasOwnProperty("pluginWidget") || jsonContent.widget.$.pluginWidget === "false") {
         throw new PluginError("Typing generation", {
-            message: "[XML] Attribute pluginWidget=true not found. Please review your XML"
+            message: "[XML] Attribute pluginWidget=true not found. Please review your XML",
         });
     }
 
     if (jsonContent.widget.$.hasOwnProperty("supportedPlatform") && jsonContent.widget.$.supportedPlatform === "All") {
         throw new PluginError("Typing generation", {
-            message: "[XML] We are unable to handle widget`s XML for both platforms yet.."
+            message: "[XML] We are unable to handle widget`s XML for both platforms yet..",
         });
     }
 
@@ -343,11 +343,11 @@ export const transformJsonContent = (jsonContent: MendixXML, widgetName: string)
     let properties =
         jsonContent.widget.properties.length > 0 ? extractProperties(jsonContent.widget.properties[0]) : [];
 
-    properties = properties.filter(prop => prop && prop.$ && prop.$.key);
+    properties = properties.filter((prop) => prop && prop.$ && prop.$.key);
 
     const childTypes = Array.of<string>();
     const mainTypes = properties
-        .map(prop => {
+        .map((prop) => {
             let name = prop.$.key;
             if (
                 (prop.$.required && prop.$.required === "false" && prop.$.type !== "object") ||
@@ -361,7 +361,7 @@ export const transformJsonContent = (jsonContent: MendixXML, widgetName: string)
         .join("\n");
     const modelerTypes = !mobile
         ? properties
-              .map(prop => {
+              .map((prop) => {
                   let name = prop.$.key;
                   if (prop.$.required && prop.$.required === "false" && prop.$.type !== "object") {
                       name += "?";
@@ -373,7 +373,7 @@ export const transformJsonContent = (jsonContent: MendixXML, widgetName: string)
         : [];
     const modelerVisibilityMap = !mobile
         ? properties
-              .map(prop => {
+              .map((prop) => {
                   if (prop.$.type !== "object") {
                       return `    ${prop.$.key}: boolean;`;
                   } else {
@@ -384,12 +384,13 @@ export const transformJsonContent = (jsonContent: MendixXML, widgetName: string)
         : [];
     const hasAction = !!(
         !mobile &&
-        (properties.filter(prop => prop.$.type === "action").length > 0 ||
-            properties.filter(prop => prop.$.type === "object").map(prop => extractVisibilityMap(prop, [])).length > 0)
+        (properties.filter((prop) => prop.$.type === "action").length > 0 ||
+            properties.filter((prop) => prop.$.type === "object").map((prop) => extractVisibilityMap(prop, [])).length >
+                0)
     );
     const hasContainment =
-        properties.filter(prop => prop.$.type === "widgets").length > 0 ||
-        properties.filter(prop => prop.$.type === "widgets").map(prop => extractVisibilityMap(prop, [])).length > 0;
+        properties.filter((prop) => prop.$.type === "widgets").length > 0 ||
+        properties.filter((prop) => prop.$.type === "widgets").map((prop) => extractVisibilityMap(prop, [])).length > 0;
 
     const propertyImports = findImports(mainTypes, childTypes);
     let imports = !mobile
@@ -451,15 +452,15 @@ export const transformPackageContent = (content: PackageContent, basePath: strin
         if (!existsSync(folder)) {
             mkdirSync(folder);
         }
-        content.package.clientModule[0].widgetFiles[0].widgetFile.forEach(file => {
+        content.package.clientModule[0].widgetFiles[0].widgetFile.forEach((file) => {
             let content: MendixXML = {};
             let output = null;
             if (file.$.path) {
                 const fileContent = readFileSync(path.join(basePath, file.$.path), "utf-8");
-                parseString(fileContent, {}, function(err: Error, result: MendixXML) {
+                parseString(fileContent, {}, function (err: Error, result: MendixXML) {
                     if (err) {
                         throw new PluginError("Typing generation", {
-                            message: err.message
+                            message: err.message,
                         });
                     }
                     content = result;
@@ -471,7 +472,7 @@ export const transformPackageContent = (content: PackageContent, basePath: strin
         });
     } catch (error) {
         throw new PluginError("Typing generation", {
-            message: "[XML] Incorrect widget property .xml file, please check Mendix Documentation: " + error.message
+            message: "[XML] Incorrect widget property .xml file, please check Mendix Documentation: " + error.message,
         });
     }
 };

@@ -21,7 +21,7 @@ function typingGenerator() {
         let content = null;
 
         if (file.contents) {
-            parseString(file.contents.toString("utf8"), {}, function(err: Error, result: any) {
+            parseString(file.contents.toString("utf8"), {}, function (err: Error, result: any) {
                 if (err) cb(err);
                 content = result;
             });
