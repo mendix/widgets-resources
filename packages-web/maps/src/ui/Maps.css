@@ -47,7 +47,3 @@ Leaflet maps
     z-index: 10;
     width: 100%;
 }
-
-.widget-leaflet-maps .marker {
-    cursor: pointer;
-}

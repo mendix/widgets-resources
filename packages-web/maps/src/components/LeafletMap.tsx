@@ -13,7 +13,7 @@ import {
 import { MapProviderEnum, Marker, SharedProps } from "../../typings";
 import { Alert } from "@widgets-resources/piw-utils";
 import classNames from "classnames";
-import { customUrls, getDimensions, mapAttr, translateZoom } from "../utils";
+import { customUrls, getDimensions, mapAttr } from "../utils";
 
 export interface LeafletProps extends SharedProps {
     mapProvider: MapProviderEnum;
@@ -44,10 +44,8 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
             zoom: props.zoomLevel,
             minZoom: 1,
             maxZoom: 20,
-            // Work around for page scroll down to bottom on first click on map in Chrome and IE
-            // https://github.com/Leaflet/Leaflet/issues/5392
-            keyboard: false,
             dragging: props.optionDrag,
+            center: defaultCenterLocation,
             crs: CRS.EPSG3857 //OSM 3857
         };
         if (leafletRef.current && !map.current) {
@@ -115,16 +113,12 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
             if (map.current) {
                 const bounds = markerGroup.current.getBounds();
                 try {
+                    if (bounds.isValid()) {
+                        map.current.fitBounds(bounds, { animate: false }).invalidateSize();
+                    }
                     if (!autoZoom) {
                         map.current.panTo(getCenter(), { animate: false });
                         map.current.setZoom(zoomLevel);
-                    } else {
-                        if (bounds.isValid()) {
-                            map.current.fitBounds(bounds, { animate: false }).invalidateSize();
-                        } else {
-                            map.current.panTo(getCenter(), { animate: false });
-                            map.current.setZoom(translateZoom("city"));
-                        }
                     }
                 } catch (error) {
                     setValidationMessage(`Invalid map bounds ${error.message}`);

@@ -100,7 +100,10 @@ const GoogleMap = (props: GoogleMapsProps): ReactElement => {
                     lat: marker.latitude,
                     lng: marker.longitude
                 },
-                icon: marker.url,
+                icon: {
+                    url: marker.url,
+                    scaledSize: new google.maps.Size(32, 32)
+                },
                 title: marker.title
             });
             if (marker.title) {
