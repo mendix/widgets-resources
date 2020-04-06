@@ -1,8 +1,8 @@
-export interface WidgetXML {
-    widget?: MendixXmlElement;
+export interface WidgetXml {
+    widget?: Widget;
 }
 
-export interface MendixXmlElement {
+export interface Widget {
     $: {
         id: string;
         supportedPlatform?: string;
@@ -13,7 +13,13 @@ export interface MendixXmlElement {
     name: string;
     description: string;
     icon: string;
-    properties: PropertyType[];
+    properties: Properties[];
+}
+
+export interface Properties {
+    property?: Property[];
+    propertyGroup?: PropertyGroup[];
+    systemProperty?: SystemProperty[];
 }
 
 export interface Property {
@@ -30,14 +36,8 @@ export interface Property {
     description?: string[];
     attributeTypes?: AttributeTypes[];
     returnType?: ReturnType[];
-    properties?: PropertyType[];
+    properties?: Properties[];
     enumerationValues?: Enumeration[];
-}
-
-export interface PropertyType {
-    property?: Property[];
-    propertyGroup?: PropertyGroup[];
-    systemProperty?: SystemProperty[];
 }
 
 export interface AttributeType {
