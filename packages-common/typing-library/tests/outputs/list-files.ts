@@ -34,30 +34,12 @@ export interface VisibilityMap {
     }>;
 }
 `;
-export const listFileNativeOutput = `/**
- * This file was generated from MyWidget.xml
- * WARNING: All changes made to this file will be overwritten
- * @author Mendix Content Team
- */
-import { DynamicValue, FileValue } from "mendix";
-
-export interface ActionsType {
+export const listFileNativeOutput = `export interface ActionsType {
     file: DynamicValue<FileValue>;
-}
-
-export interface ActionsPreviewType {
-    file: string;
 }
 
 export interface MyWidgetProps<Style> {
     name: string;
     style: Style[];
     actions: ActionsType[];
-}
-
-export interface MyWidgetPreviewProps {
-    class: string;
-    style: string;
-    actions: ActionsPreviewType[];
-}
-`;
+}`;

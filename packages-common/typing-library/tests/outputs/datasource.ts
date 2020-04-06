@@ -33,29 +33,11 @@ export interface VisibilityMap {
     action: boolean;
 }
 `;
-export const datasourceNativeOutput = `/**
- * This file was generated from MyWidget.xml
- * WARNING: All changes made to this file will be overwritten
- * @author Mendix Content Team
- */
-import { Component, ReactNode } from "react";
-import { ActionValue, EditableValue, ListValue, ObjectItem } from "mendix";
-
-export interface MyWidgetProps<Style> {
+export const datasourceNativeOutput = `export interface MyWidgetProps<Style> {
     name: string;
     style: Style[];
     contentSource: ListValue;
     content: (item: ObjectItem) => ReactNode;
     description: EditableValue<string>;
     action?: ActionValue;
-}
-
-export interface MyWidgetPreviewProps {
-    class: string;
-    style: string;
-    contentSource: {} | null;
-    content: { widgetCount: number; renderer: Component };
-    description: string;
-    action: {} | null;
-}
-`;
+}`;

@@ -30,27 +30,10 @@ export interface VisibilityMap {
     action: boolean;
 }
 `;
-export const containmentNativeOutput = `/**
- * This file was generated from MyWidget.xml
- * WARNING: All changes made to this file will be overwritten
- * @author Mendix Content Team
- */
-import { Component, ReactNode } from "react";
-import { ActionValue, EditableValue } from "mendix";
-
-export interface MyWidgetProps<Style> {
+export const containmentNativeOutput = `export interface MyWidgetProps<Style> {
     name: string;
     style: Style[];
     content: ReactNode;
     description: EditableValue<string>;
     action?: ActionValue;
-}
-
-export interface MyWidgetPreviewProps {
-    class: string;
-    style: string;
-    content: { widgetCount: number; renderer: Component };
-    description: string;
-    action: {} | null;
-}
-`;
+}`;
