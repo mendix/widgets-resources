@@ -23,12 +23,6 @@ export interface MyWidgetPreviewProps {
     description: string;
     action: {} | null;
 }
-
-export interface VisibilityMap {
-    content: boolean;
-    description: boolean;
-    action: boolean;
-}
 `;
 export const containmentNativeOutput = `export interface MyWidgetProps<Style> {
     name: string;

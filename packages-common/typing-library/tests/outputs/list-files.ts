@@ -27,12 +27,6 @@ export interface MyWidgetPreviewProps {
     style: string;
     actions: ActionsPreviewType[];
 }
-
-export interface VisibilityMap {
-    actions: boolean | Array<{
-        file: boolean;
-    }>;
-}
 `;
 export const listFileNativeOutput = `export interface ActionsType {
     file: DynamicValue<FileValue>;

@@ -29,13 +29,6 @@ export interface MyWidgetPreviewProps {
     style: string;
     actions: ActionsPreviewType[];
 }
-
-export interface VisibilityMap {
-    actions: boolean | Array<{
-        description: boolean;
-        action: boolean;
-    }>;
-}
 `;
 export const listActionNativeOutput = `export interface ActionsType {
     description: EditableValue<string>;

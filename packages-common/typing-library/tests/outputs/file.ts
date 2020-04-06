@@ -25,13 +25,6 @@ export interface MyWidgetPreviewProps {
     description: string;
     action: {} | null;
 }
-
-export interface VisibilityMap {
-    file: boolean;
-    file2: boolean;
-    description: boolean;
-    action: boolean;
-}
 `;
 export const fileNativeOutput = `export interface MyWidgetProps<Style> {
     name: string;
