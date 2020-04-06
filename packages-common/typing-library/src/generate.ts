@@ -1,7 +1,21 @@
 import { generateClientTypes } from "./generateClientTypes";
 import { generatePreviewTypes } from "./generatePreviewTypes";
+import { generateVisibilityMapType } from "./generateVisibilityTypes";
 import { extractProperties } from "./helpers";
-import { Property, WidgetXml } from "./WidgetXml";
+import { WidgetXml } from "./WidgetXml";
+
+const mxExports = [
+    "ActionValue",
+    "DynamicValue",
+    "EditableValue",
+    "FileValue",
+    "ListValue",
+    "NativeIcon",
+    "NativeImage",
+    "ObjectItem",
+    "WebIcon",
+    "WebImage",
+];
 
 export function generateForWidget(widgetXml: WidgetXml, widgetName: string) {
     if (!widgetXml?.widget?.properties) {
@@ -20,35 +34,20 @@ export function generateForWidget(widgetXml: WidgetXml, widgetName: string) {
 
     const clientTypes = generateClientTypes(widgetName, properties, isNative);
     const modelerTypes = generatePreviewTypes(widgetName, properties);
-    const visibiltyMap = `export interface VisibilityMap ${generateVisibilityMap(properties, "")}`;
-    const allTypes = clientTypes
+    const visibiltyMap = generateVisibilityMapType(properties);
+
+    const generatedTypesCode = clientTypes
         .slice(0, clientTypes.length - 1) // all client auxiliary types
         .concat(modelerTypes.slice(0, modelerTypes.length - 1)) // all preview auxiliary types
         .concat([clientTypes[clientTypes.length - 1], modelerTypes[modelerTypes.length - 1]])
         .concat(!isNative ? [visibiltyMap] : [])
         .join("\n\n");
 
-    const mxImports = [
-        "ActionValue",
-        "DynamicValue",
-        "EditableValue",
-        "FileValue",
-        "ListValue",
-        "NativeIcon",
-        "NativeImage",
-        "ObjectItem",
-        "WebIcon",
-        "WebImage",
-    ].filter((type) => new RegExp(`\\W${type}\\W`).test(allTypes));
-    const reactImports = Array.of<string>()
-        .concat(/\WComponent\W/.test(allTypes) ? ["Component"] : [])
-        .concat(!isNative ? ["CSSProperties"] : [])
-        .concat(/\WReactNode\W/.test(allTypes) ? ["ReactNode"] : []);
     const imports = [
-        `import { ${reactImports.join(", ")} } from "react";`,
-        `import { ${mxImports.join(", ")} } from "mendix";`,
+        generateImport("react", generatedTypesCode, ["Component", "CSSProperties", "ReactNode"]),
+        generateImport("mendix", generatedTypesCode, mxExports),
     ]
-        .filter((line) => line.indexOf("{  }") === -1)
+        .filter((line) => line)
         .join("\n");
 
     return `/**
@@ -56,25 +55,11 @@ export function generateForWidget(widgetXml: WidgetXml, widgetName: string) {
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Content Team
  */
-${imports.length ? imports + "\n\n" : ""}${allTypes}
+${imports.length ? imports + "\n\n" : ""}${generatedTypesCode}
 `;
 }
 
-function generateVisibilityMap(properties: Property[], indent: string): string {
-    return (
-        "{\n" +
-        properties
-            .map((prop) => {
-                if (prop.$.type !== "object") {
-                    return `${indent}    ${prop.$.key}: boolean;`;
-                } else {
-                    return `${indent}    ${prop.$.key}: boolean | Array<${generateVisibilityMap(
-                        extractProperties(prop.properties![0]),
-                        indent + "    "
-                    )}>;`;
-                }
-            })
-            .join("\n") +
-        `\n${indent}}`
-    );
+function generateImport(from: string, code: string, availableNames: string[]) {
+    const usedNames = availableNames.filter((type) => new RegExp(`\\W${type}\\W`).test(code));
+    return usedNames.length ? `import { ${usedNames.join(", ")} } from "${from}";` : "";
 }
