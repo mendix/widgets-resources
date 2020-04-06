@@ -13,7 +13,7 @@ import {
 import { MapProviderEnum, Marker, SharedProps } from "../../typings";
 import { Alert } from "@widgets-resources/piw-utils";
 import classNames from "classnames";
-import { customUrls, getDimensions, mapAttr } from "../utils";
+import { customUrls, getDimensions, mapAttr, translateZoom } from "../utils";
 
 export interface LeafletProps extends SharedProps {
     mapProvider: MapProviderEnum;
@@ -24,7 +24,7 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
     const map = useRef<Map>();
     const leafletRef = useRef<HTMLDivElement>(null);
     const defaultCenterLocation: LatLngLiteral = { lat: 51.9066346, lng: 4.4861703 };
-    const markerGroup = new FeatureGroup();
+    const markerGroup = useRef<FeatureGroup>(new FeatureGroup());
 
     const [validationMessage, setValidationMessage] = useState(props.validationMessage);
 
@@ -48,7 +48,7 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
             // https://github.com/Leaflet/Leaflet/issues/5392
             keyboard: false,
             dragging: props.optionDrag,
-            crs: CRS.EPSG4326
+            crs: CRS.EPSG3857 //OSM 3857
         };
         if (leafletRef.current && !map.current) {
             map.current = new Map(leafletRef.current, mapOptions).addLayer(baseMapLayer());
@@ -61,19 +61,16 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
     };
 
     const addMarkers = (): void => {
-        if (map.current && markerGroup) {
-            //TODO: Implementation of marker logic
-            markerGroup.clearLayers();
-            if (props.locations && props.locations.length) {
-                props.locations.forEach(location => {
-                    const marker = addMarker(location);
-                    const layer = markerGroup.addLayer(marker);
-                    map.current!.addLayer(layer);
-                });
-            }
-            addCurrentLocation();
-            updateCamera();
+        markerGroup.current.clearLayers();
+        if (props.locations && props.locations.length) {
+            props.locations.forEach(location => {
+                const marker = addMarker(location);
+                const layer = markerGroup.current.addLayer(marker);
+                map.current!.addLayer(layer);
+            });
         }
+        addCurrentLocation();
+        updateCamera();
     };
 
     const addMarker = (marker: Marker): LeafletMarker => {
@@ -113,8 +110,8 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
     const updateCamera = (): void => {
         const { zoomLevel, autoZoom } = props;
         setTimeout(() => {
-            if (map.current && markerGroup && markerGroup.getLayers().length > 0) {
-                const bounds = markerGroup.getBounds();
+            if (map.current) {
+                const bounds = markerGroup.current.getBounds();
                 try {
                     if (!autoZoom) {
                         map.current.panTo(getCenter(), { animate: false });
@@ -122,6 +119,9 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
                     } else {
                         if (bounds.isValid()) {
                             map.current.fitBounds(bounds, { animate: false }).invalidateSize();
+                        } else {
+                            map.current.panTo(getCenter(), { animate: false });
+                            map.current.setZoom(translateZoom("city"));
                         }
                     }
                 } catch (error) {
@@ -142,7 +142,7 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
         if (map.current && props.currentLocation) {
             const currentLocationMarker = addMarker(props.currentLocation);
             if (currentLocationMarker) {
-                const layer = markerGroup.addLayer(currentLocationMarker);
+                const layer = markerGroup.current.addLayer(currentLocationMarker);
                 map.current.addLayer(layer);
             }
         }
