@@ -13,7 +13,7 @@ export interface MarkersType {
     description?: DynamicValue<string>;
     onClick?: ActionValue;
     icon?: DynamicValue<NativeIcon>;
-    iconSize: BigJs.Big;
+    iconSize: number;
     color?: string;
 }
 

@@ -22,9 +22,9 @@ export interface VideoPlayerContainerProps {
     muted: boolean;
     loop: boolean;
     widthUnit: WidthUnitEnum;
-    width: BigJs.Big;
+    width: number;
     heightUnit: HeightUnitEnum;
-    height: BigJs.Big;
+    height: number;
 }
 
 export interface VideoPlayerPreviewProps {

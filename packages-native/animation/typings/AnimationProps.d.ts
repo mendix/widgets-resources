@@ -113,11 +113,11 @@ export interface AnimationProps<Style> {
     animationIn: AnimationInEnum;
     animationAttention: AnimationAttentionEnum;
     animationOut: AnimationOutEnum;
-    duration: BigJs.Big;
-    delay: BigJs.Big;
+    duration: number;
+    delay: number;
     condition?: DynamicValue<boolean>;
     easing: EasingEnum;
-    count: BigJs.Big;
+    count: number;
     direction: DirectionEnum;
     afterAnimationAction?: ActionValue;
 }

@@ -26,7 +26,7 @@ export interface RatingProps<Style> {
     ratingAttribute: EditableValue<BigJs.Big>;
     emptyIcon?: DynamicValue<NativeImage>;
     icon?: DynamicValue<NativeImage>;
-    maximumValue: BigJs.Big;
+    maximumValue: number;
     animation: AnimationEnum;
     editable: EditableEnum;
     onChange?: ActionValue;

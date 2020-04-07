@@ -12,13 +12,13 @@ export interface AppEventsProps<Style> {
     style: Style[];
     onLoadAction?: ActionValue;
     onResumeAction?: ActionValue;
-    onResumeTimeout: BigJs.Big;
+    onResumeTimeout: number;
     onOnlineAction?: ActionValue;
-    onOnlineTimeout: BigJs.Big;
+    onOnlineTimeout: number;
     onOfflineAction?: ActionValue;
-    onOfflineTimeout: BigJs.Big;
+    onOfflineTimeout: number;
     timerType: TimerTypeEnum;
-    delayTime: BigJs.Big;
+    delayTime: number;
     onTimeoutAction?: ActionValue;
 }
 
