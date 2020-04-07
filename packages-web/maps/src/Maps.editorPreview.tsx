@@ -4,6 +4,8 @@ import { MapSwitcher } from "./components/MapSwitcher";
 import { parseStyle } from "@widgets-resources/piw-utils";
 import { translateZoom } from "./utils";
 
+import "leaflet-defaulticon-compatibility";
+
 declare function require(name: string): string;
 
 export const preview = (props: MapsPreviewProps): ReactNode => {
@@ -12,7 +14,7 @@ export const preview = (props: MapsPreviewProps): ReactNode => {
             latitude: 51.906688,
             longitude: 4.48837,
             title: "Mendix Office Rotterdam",
-            url: "https://developers.google.com/maps/documentation/javascript/examples/full/images/info-i_maps.png"
+            url: ""
         }
     ];
     return (
@@ -22,7 +24,6 @@ export const preview = (props: MapsPreviewProps): ReactNode => {
             autoZoom={false}
             zoomLevel={props.zoom === "automatic" ? translateZoom("street") : translateZoom(props.zoom)}
             mapsToken={props.apiKey}
-            geodecodeToken={props.geodecodeApiKey}
             widthUnit={props.widthUnit}
             width={Number(props.width)}
             heightUnit={props.heightUnit}

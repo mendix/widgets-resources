@@ -6,6 +6,11 @@ import { ValueStatus } from "mendix";
 import { getCurrentUserLocation, translateZoom, useLocationResolver } from "./utils";
 import { MapSwitcher } from "./components/MapSwitcher";
 
+import "leaflet/dist/leaflet.css";
+import "./ui/Maps.css";
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
+import "leaflet-defaulticon-compatibility";
+
 const Maps = (props: MapsContainerProps): ReactNode => {
     const [, locations] = useLocationResolver(props.markers, props.dynamicMarkers, props.geodecodeApiKey?.value);
     const [currentLocation, setCurrentLocation] = useState<Marker>();
@@ -27,11 +32,6 @@ const Maps = (props: MapsContainerProps): ReactNode => {
             autoZoom={props.zoom === "automatic"}
             zoomLevel={translateZoom(props.zoom)}
             mapsToken={props.apiKey && props.apiKey.status === ValueStatus.Available ? props.apiKey.value : undefined}
-            geodecodeToken={
-                props.geodecodeApiKey && props.geodecodeApiKey.status === ValueStatus.Available
-                    ? props.geodecodeApiKey.value
-                    : undefined
-            }
             widthUnit={props.widthUnit}
             width={Number(props.width)}
             heightUnit={props.heightUnit}

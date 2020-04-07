@@ -6,14 +6,6 @@ const customConfig = {
     output: {
         filename: "widgets/com/mendix/widget/custom/Maps/Maps.js"
     },
-    module: {
-        rules: [
-            {
-                test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-                loader: "url-loader"
-            }
-        ]
-    },
     plugins: [
         new MiniCssExtractPlugin({
             filename: "./widgets/com/mendix/widget/custom/Maps/ui/Maps.css",

@@ -36,7 +36,6 @@ export interface SharedProps extends Dimensions {
     locations?: Marker[];
     validationMessage?: string;
     mapsToken?: string;
-    geodecodeToken?: string;
     className?: string;
     style?: CSSProperties;
 }
