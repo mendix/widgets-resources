@@ -54,6 +54,7 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
             maxZoom: 20,
             dragging: props.optionDrag,
             center: defaultCenterLocation,
+            closePopupOnClick: false,
             crs: CRS.EPSG3857 // OSM 3857
         };
         if (leafletRef.current && !map.current) {
