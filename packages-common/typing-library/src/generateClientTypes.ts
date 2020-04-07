@@ -59,9 +59,10 @@ function toClientPropType(prop: Property, isNative: boolean, generatedTypes: str
                 .map((ats) => ats.attributeType)
                 .reduce((a, i) => a.concat(i), [])
                 .map((at) => toClientType(at.$.name));
+            const uniqueTypes = Array.from(new Set(types));
             return !!prop.$.dataSource
-                ? `(item: ObjectItem) => EditableValue<${Array.from(new Set(types)).join(" | ")}>`
-                : `EditableValue<${Array.from(new Set(types)).join(" | ")}>`;
+                ? `(item: ObjectItem) => EditableValue<${uniqueTypes.join(" | ")}>`
+                : `EditableValue<${uniqueTypes.join(" | ")}>`;
         case "expression":
             if (!prop.returnType || prop.returnType.length === 0) {
                 throw new Error("[XML] Expression property requires returnType element");
