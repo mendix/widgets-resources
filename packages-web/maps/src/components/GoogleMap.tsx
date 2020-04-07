@@ -27,15 +27,15 @@ const GoogleMap = (props: GoogleMapsProps): ReactElement => {
 
     useEffect(() => {
         if (props.scriptsLoaded) {
-            createUpdateMap();
+            createMap();
         }
     }, []);
 
     useEffect(() => {
-        createUpdateMap();
+        addMarkers();
     }, [props.locations, props.currentLocation]);
 
-    const createUpdateMap = (): void => {
+    const createMap = (): void => {
         const mapOptions: google.maps.MapOptions = {
             zoom: props.zoomLevel,
             zoomControl: props.optionZoomControl,

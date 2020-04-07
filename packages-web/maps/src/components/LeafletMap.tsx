@@ -25,19 +25,26 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
     const map = useRef<Map>();
     const leafletRef = useRef<HTMLDivElement>(null);
     const defaultCenterLocation: LatLngLiteral = { lat: 51.906688, lng: 4.48837 };
-    const markerGroup = useRef<FeatureGroup>(new FeatureGroup());
+    const markerGroup = new FeatureGroup();
 
     const [validationMessage, setValidationMessage] = useState(props.validationMessage);
 
     useEffect(() => {
-        createUpdateMap();
+        createMap();
+
+        return () => {
+            if (map.current) {
+                map.current.off();
+                map.current.remove();
+            }
+        };
     }, []);
 
     useEffect(() => {
-        createUpdateMap();
+        addMarkers();
     }, [props.locations, props.currentLocation]);
 
-    const createUpdateMap = (): void => {
+    const createMap = (): void => {
         const mapOptions: MapOptions = {
             scrollWheelZoom: props.optionScroll,
             zoomControl: props.optionZoomControl,
@@ -51,19 +58,16 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
         };
         if (leafletRef.current && !map.current) {
             map.current = new Map(leafletRef.current, mapOptions).addLayer(baseMapLayer());
-        } else if (map.current) {
-            // TODO: Test it
-            map.current.options = mapOptions;
         }
         addMarkers();
     };
 
     const addMarkers = (): void => {
-        markerGroup.current.clearLayers();
+        markerGroup.clearLayers();
         if (props.locations && props.locations.length) {
             props.locations.forEach(location => {
                 const marker = addMarker(location);
-                const layer = markerGroup.current.addLayer(marker);
+                const layer = markerGroup.addLayer(marker);
                 map.current!.addLayer(layer);
             });
         }
@@ -112,7 +116,7 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
         const { zoomLevel, autoZoom } = props;
         setTimeout(() => {
             if (map.current) {
-                const bounds = markerGroup.current.getBounds();
+                const bounds = markerGroup.getBounds();
                 try {
                     if (bounds.isValid()) {
                         map.current.fitBounds(bounds, { animate: false }).invalidateSize();
@@ -139,7 +143,7 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
         if (map.current && props.currentLocation) {
             const currentLocationMarker = addMarker(props.currentLocation);
             if (currentLocationMarker) {
-                const layer = markerGroup.current.addLayer(currentLocationMarker);
+                const layer = markerGroup.addLayer(currentLocationMarker);
                 map.current.addLayer(layer);
             }
         }
