@@ -7,9 +7,9 @@ export type WidthUnitType = "percentage" | "pixels";
 
 export interface Dimensions {
     widthUnit: WidthUnitType;
-    width: BigJs.Big;
+    width: number;
     heightUnit: HeightUnitType;
-    height: BigJs.Big;
+    height: number;
     tabIndex: number;
 }
 
@@ -55,13 +55,13 @@ export class SizeContainer extends Component<SizeProps> {
 
     private getHeight(
         heightUnit: HeightUnitType,
-        height: BigJs.Big,
+        height: number,
         widthUnit: WidthUnitType,
-        width: BigJs.Big
+        width: number
     ): CSSProperties {
         const style: CSSProperties = {};
         if (heightUnit === "percentageOfWidth") {
-            const ratio = Number(height.div(100).times(width));
+            const ratio = (height / 100) * width;
             if (widthUnit === "percentage") {
                 style.height = "auto";
                 style.paddingBottom = `${ratio}%`;
@@ -73,7 +73,7 @@ export class SizeContainer extends Component<SizeProps> {
         } else if (heightUnit === "percentageOfParent") {
             style.height = `${height}%`;
         } else if (heightUnit === "aspectRatio") {
-            style.height = Number(width.times(0.5625)); // Default is 16:9
+            style.height = width * 0.5625; // Default is 16:9
         }
 
         return style;

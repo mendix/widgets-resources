@@ -17,15 +17,15 @@ export class Animation extends Component<Props> {
         const { count, duration, content, easing, delay, direction } = this.props;
         const easingValue = easing.replace(/_/g, "-") as Easing;
         const directionValue = direction.replace(/_/g, "-") as Direction;
-        const countValue = count.eq(0) ? "infinite" : Number(count);
+        const countValue = count === 0 ? "infinite" : count;
         this.validateProps(this.props);
 
         return (
             <View
                 testID={this.props.name}
                 animation={this.getAnimation()}
-                duration={Number(duration)}
-                delay={Number(delay)}
+                duration={duration}
+                delay={delay}
                 direction={directionValue}
                 easing={easingValue}
                 iterationCount={countValue}
@@ -40,7 +40,7 @@ export class Animation extends Component<Props> {
 
     private validateProps(props: Props): void {
         const { afterAnimationAction, count } = props;
-        if (afterAnimationAction && count.eq(0)) {
+        if (afterAnimationAction && count === 0) {
             this.log("After animation action can not be triggered by infinite count");
         }
         const { animationType, animationIn, animationOut, animationAttention } = this.props;

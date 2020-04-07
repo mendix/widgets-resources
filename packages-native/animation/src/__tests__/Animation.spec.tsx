@@ -1,4 +1,3 @@
-import { Big } from "big.js";
 import { createElement } from "react";
 import { Text } from "react-native";
 import { render } from "react-native-testing-library";
@@ -19,10 +18,10 @@ const defaultProps: Props = {
     animationIn: "none",
     animationAttention: "none",
     animationOut: "none",
-    duration: new Big(100),
-    delay: new Big(0),
+    duration: 100,
+    delay: 0,
     easing: "ease",
-    count: new Big(1),
+    count: 1,
     direction: "normal",
     style: []
 };

@@ -1,5 +1,4 @@
 import { actionValue } from "@native-mobile-resources/util-widgets";
-import { Big } from "big.js";
 import { createElement } from "react";
 import { AppStateStatus } from "react-native";
 import { flushMicrotasksQueue, render } from "react-native-testing-library";
@@ -29,10 +28,10 @@ jest.mock("@react-native-community/netinfo", () => ({
 
 const defaultProps: Props = {
     name: "app-events-test",
-    onResumeTimeout: new Big(0),
-    onOnlineTimeout: new Big(0),
-    onOfflineTimeout: new Big(0),
-    delayTime: new Big(30),
+    onResumeTimeout: 0,
+    onOnlineTimeout: 0,
+    onOfflineTimeout: 0,
+    delayTime: 30,
     timerType: "once",
     style: []
 };
@@ -91,7 +90,7 @@ describe("AppEvents", () => {
             const dateNowSpy = jest.spyOn(Date, "now").mockReturnValue(0);
 
             const onResumeAction = actionValue();
-            render(<AppEvents {...defaultProps} onResumeAction={onResumeAction} onResumeTimeout={new Big(5)} />);
+            render(<AppEvents {...defaultProps} onResumeAction={onResumeAction} onResumeTimeout={5} />);
 
             dateNowSpy.mockReturnValue(4000);
             appStateChangeHandler!("background");
@@ -132,7 +131,7 @@ describe("AppEvents", () => {
             const dateNowSpy = jest.spyOn(Date, "now").mockReturnValue(0);
 
             const onOnlineAction = actionValue();
-            render(<AppEvents {...defaultProps} onOnlineAction={onOnlineAction} onOnlineTimeout={new Big(5)} />);
+            render(<AppEvents {...defaultProps} onOnlineAction={onOnlineAction} onOnlineTimeout={5} />);
             await flushMicrotasksQueue();
 
             dateNowSpy.mockReturnValue(4000);
