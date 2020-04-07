@@ -1,6 +1,6 @@
 {
     "name": "@mendix/pluggable-widgets-typing-generator",
-    "version": "8.8.0",
+    "version": "8.9.0",
     "description": "Mendix Pluggable Widgets typings generator",
     "license": "Apache-2.0",
     "copyright": "2020 Mendix Technology BV",
@@ -44,11 +44,11 @@
         "pretty-quick": "^2.0.1",
         "ts-jest": "^25.3.1",
         "tslint": "^6.1.1",
-        "typescript": "^3.6.3"
+        "typescript": "^3.8.3"
     },
     "scripts": {
         "prebuild": "rm -rf ./dist",
-        "build": "./node_modules/.bin/tsc",
+        "build": "tsc",
         "format": "pretty-quick",
         "prepare": "npm run build",
         "test": "jest --projects ./jest.config.js --no-cache --ci"
