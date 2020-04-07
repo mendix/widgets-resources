@@ -13,6 +13,8 @@ export interface MyWidgetContainerProps {
     tabIndex: number;
     contentSource: ListValue;
     content: (item: ObjectItem) => ReactNode;
+    markerDataAttribute: (item: ObjectItem) => EditableValue<string | boolean | BigJs.Big>;
+    actionAttribute?: (item: ObjectItem) => ActionValue;
     description: EditableValue<string>;
     action?: ActionValue;
 }
@@ -22,6 +24,8 @@ export interface MyWidgetPreviewProps {
     style: string;
     contentSource: {} | null;
     content: { widgetCount: number; renderer: Component };
+    markerDataAttribute: string;
+    actionAttribute: {} | null;
     description: string;
     action: {} | null;
 }
@@ -31,6 +35,8 @@ export const datasourceNativeOutput = `export interface MyWidgetProps<Style> {
     style: Style[];
     contentSource: ListValue;
     content: (item: ObjectItem) => ReactNode;
+    markerDataAttribute: (item: ObjectItem) => EditableValue<string | boolean | BigJs.Big>;
+    actionAttribute?: (item: ObjectItem) => ActionValue;
     description: EditableValue<string>;
     action?: ActionValue;
 }`;

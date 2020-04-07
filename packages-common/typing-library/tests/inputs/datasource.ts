@@ -12,6 +12,19 @@ export const datasourceInput = `<?xml version="1.0" encoding="utf-8"?>
                 <caption>Content</caption>
                 <description />
             </property>
+            <property key="markerDataAttribute" type="attribute" dataSource="contentSource">
+                <caption>Marker attribute</caption>
+                <description />
+                <attributeTypes>
+                    <attributeType name="String"/>
+                    <attributeType name="Boolean"/>
+                    <attributeType name="Decimal"/>
+                </attributeTypes>
+            </property>
+            <property key="actionAttribute" type="action" dataSource="contentSource">
+                <caption>Action</caption>
+                <description />
+            </property>
         </propertyGroup>
         <propertyGroup caption="Actions">
             <property key="description" type="attribute">
@@ -45,6 +58,19 @@ export const datasourceInputNative = `<?xml version="1.0" encoding="utf-8"?>
             </property>
             <property key="content" type="widgets" dataSource="contentSource">
                 <caption>Content</caption>
+                <description />
+            </property>
+            <property key="markerDataAttribute" type="attribute" dataSource="contentSource">
+                <caption>Marker attribute</caption>
+                <description />
+                <attributeTypes>
+                    <attributeType name="String"/>
+                    <attributeType name="Boolean"/>
+                    <attributeType name="Decimal"/>
+                </attributeTypes>
+            </property>
+            <property key="actionAttribute" type="action" dataSource="contentSource">
+                <caption>Action</caption>
                 <description />
             </property>
         </propertyGroup>
