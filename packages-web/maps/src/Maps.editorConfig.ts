@@ -87,6 +87,11 @@ export function getProperties(
         hideProperty<MapsPreviewProps>("fullScreenControl", defaultProperties);
         hideProperty<MapsPreviewProps>("rotateControl", defaultProperties);
         hideProperty<MapsPreviewProps>("mapStyles", defaultProperties);
+        if (values.mapProvider === "openStreet") {
+            hideProperty<MapsPreviewProps>("apiKey", defaultProperties);
+        }
+    } else {
+        hideProperty<MapsPreviewProps>("attributionControl", defaultProperties);
     }
 
     return defaultProperties;
@@ -105,7 +110,7 @@ export function check(values: MapsPreviewProps): Problem[] {
                     marker.addressExpression}`
             });
         });
-    if (!values.apiKey) {
+    if (values.mapProvider !== "openStreet" && !values.apiKey) {
         errors.push({
             property: "apiKey",
             severity: "error",
@@ -194,8 +199,7 @@ export function check(values: MapsPreviewProps): Problem[] {
     });
 
     values.dynamicMarkers.forEach(marker => {
-        // @ts-ignore
-        if (marker.markersDS?.type === "null") {
+        if (!marker.markersDS) {
             errors.push({
                 property: "dynamicMarkers.markersDS",
                 severity: "error",

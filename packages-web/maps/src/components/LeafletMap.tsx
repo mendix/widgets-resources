@@ -8,7 +8,8 @@ import {
     icon,
     tileLayer,
     TileLayerOptions,
-    CRS
+    CRS,
+    TileLayer
 } from "leaflet";
 import { MapProviderEnum, Marker, SharedProps } from "../../typings";
 import { Alert } from "@widgets-resources/piw-utils";
@@ -23,7 +24,7 @@ export interface LeafletProps extends SharedProps {
 export const LeafletMap = (props: LeafletProps): ReactElement => {
     const map = useRef<Map>();
     const leafletRef = useRef<HTMLDivElement>(null);
-    const defaultCenterLocation: LatLngLiteral = { lat: 51.9066346, lng: 4.4861703 };
+    const defaultCenterLocation: LatLngLiteral = { lat: 51.906688, lng: 4.48837 };
     const markerGroup = useRef<FeatureGroup>(new FeatureGroup());
 
     const [validationMessage, setValidationMessage] = useState(props.validationMessage);
@@ -46,12 +47,12 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
             maxZoom: 20,
             dragging: props.optionDrag,
             center: defaultCenterLocation,
-            crs: CRS.EPSG3857 //OSM 3857
+            crs: CRS.EPSG3857 // OSM 3857
         };
         if (leafletRef.current && !map.current) {
             map.current = new Map(leafletRef.current, mapOptions).addLayer(baseMapLayer());
         } else if (map.current) {
-            //TODO: Test it
+            // TODO: Test it
             map.current.options = mapOptions;
         }
         addMarkers();
@@ -134,7 +135,7 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
         };
     };
 
-    const addCurrentLocation = () => {
+    const addCurrentLocation = (): void => {
         if (map.current && props.currentLocation) {
             const currentLocationMarker = addMarker(props.currentLocation);
             if (currentLocationMarker) {
@@ -144,11 +145,11 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
         }
     };
 
-    const baseMapLayer = () => {
+    const baseMapLayer = (): TileLayer => {
         const { mapProvider, mapsToken } = props;
 
-        let urlTemplate = "";
-        let mapAttribution = "";
+        let urlTemplate;
+        let mapAttribution;
         if (mapProvider === "mapBox") {
             urlTemplate = customUrls.mapbox + mapsToken;
             mapAttribution = mapAttr.mapboxAttr;

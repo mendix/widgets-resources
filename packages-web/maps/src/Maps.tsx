@@ -7,7 +7,7 @@ import { getCurrentUserLocation, translateZoom, useLocationResolver } from "./ut
 import { MapSwitcher } from "./components/MapSwitcher";
 
 const Maps = (props: MapsContainerProps): ReactNode => {
-    const [, locations] = useLocationResolver(props.markers, props.dynamicMarkers, props.apiKey?.value);
+    const [, locations] = useLocationResolver(props.markers, props.dynamicMarkers, props.geodecodeApiKey?.value);
     const [currentLocation, setCurrentLocation] = useState<Marker>();
 
     useEffect(() => {
@@ -27,10 +27,15 @@ const Maps = (props: MapsContainerProps): ReactNode => {
             autoZoom={props.zoom === "automatic"}
             zoomLevel={translateZoom(props.zoom)}
             mapsToken={props.apiKey && props.apiKey.status === ValueStatus.Available ? props.apiKey.value : undefined}
+            geodecodeToken={
+                props.geodecodeApiKey && props.geodecodeApiKey.status === ValueStatus.Available
+                    ? props.geodecodeApiKey.value
+                    : undefined
+            }
             widthUnit={props.widthUnit}
-            width={props.width}
+            width={Number(props.width)}
             heightUnit={props.heightUnit}
-            height={props.height}
+            height={Number(props.height)}
             showCurrentLocation={props.showCurrentLocation}
             currentLocation={currentLocation}
             optionZoomControl={props.optionZoomControl}

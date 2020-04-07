@@ -19,10 +19,10 @@ export interface GoogleMapsProps extends SharedProps {
 const GoogleMap = (props: GoogleMapsProps): ReactElement => {
     const map = useRef<google.maps.Map>();
     const googleMapsRef = useRef<HTMLDivElement>(null);
-    const defaultCenterLocation: google.maps.LatLngLiteral = { lat: 51.9066346, lng: 4.4861703 };
+    const defaultCenterLocation: google.maps.LatLngLiteral = { lat: 51.906688, lng: 4.48837 };
     let bounds!: google.maps.LatLngBounds;
 
-    const [markers, setMarkers] = useState<google.maps.Marker[]>([]); //Used to manage and remove markers from the map
+    const [markers, setMarkers] = useState<google.maps.Marker[]>([]); // Used to manage and remove markers from the map
     const [validationMessage, setValidationMessage] = useState(props.validationMessage);
 
     useEffect(() => {
@@ -77,7 +77,7 @@ const GoogleMap = (props: GoogleMapsProps): ReactElement => {
         updateCamera();
     };
 
-    const addCurrentLocation = () => {
+    const addCurrentLocation = (): void => {
         if (props.currentLocation) {
             const currentLocationMarker = addMarker(props.currentLocation);
             if (currentLocationMarker) {
@@ -129,6 +129,7 @@ const GoogleMap = (props: GoogleMapsProps): ReactElement => {
                 }
             }
             mapMarker.setMap(map.current);
+            console.warn(mapMarker);
             return mapMarker;
         }
         return undefined;
