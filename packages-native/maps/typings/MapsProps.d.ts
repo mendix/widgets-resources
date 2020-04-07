@@ -1,14 +1,9 @@
 /**
  * This file was generated from Maps.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
 import { ActionValue, DynamicValue, NativeIcon } from "mendix";
-
-interface CommonProps<Style> {
-    name: string;
-    style: Style[];
-}
 
 export interface MarkersType {
     address?: DynamicValue<string>;
@@ -18,7 +13,7 @@ export interface MarkersType {
     description?: DynamicValue<string>;
     onClick?: ActionValue;
     icon?: DynamicValue<NativeIcon>;
-    iconSize: number;
+    iconSize: BigJs.Big;
     color?: string;
 }
 
@@ -32,12 +27,43 @@ export type MapTypeEnum = "standard" | "satellite";
 
 export type ProviderEnum = "default" | "google";
 
-export interface MapsProps<Style> extends CommonProps<Style> {
+export interface MarkersPreviewType {
+    address: string;
+    latitude: string;
+    longitude: string;
+    title: string;
+    description: string;
+    onClick: {} | null;
+    icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
+    iconSize: number | null;
+    color: string;
+}
+
+export interface MapsProps<Style> {
+    name: string;
+    style: Style[];
     markers: MarkersType[];
     fitToMarkers: boolean;
     centerAddress?: DynamicValue<string>;
     centerLatitude?: DynamicValue<BigJs.Big>;
     centerLongitude?: DynamicValue<BigJs.Big>;
+    defaultZoomLevel: DefaultZoomLevelEnum;
+    minZoomLevel: MinZoomLevelEnum;
+    maxZoomLevel: MaxZoomLevelEnum;
+    mapType: MapTypeEnum;
+    provider: ProviderEnum;
+    interactive: boolean;
+    showsUserLocation: boolean;
+}
+
+export interface MapsPreviewProps {
+    class: string;
+    style: string;
+    markers: MarkersPreviewType[];
+    fitToMarkers: boolean;
+    centerAddress: string;
+    centerLatitude: string;
+    centerLongitude: string;
     defaultZoomLevel: DefaultZoomLevelEnum;
     minZoomLevel: MinZoomLevelEnum;
     maxZoomLevel: MaxZoomLevelEnum;

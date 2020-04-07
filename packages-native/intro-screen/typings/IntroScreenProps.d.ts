@@ -1,14 +1,10 @@
 /**
  * This file was generated from IntroScreen.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
+import { Component, ReactNode } from "react";
 import { ActionValue, DynamicValue, EditableValue, NativeIcon } from "mendix";
-
-interface CommonProps<Style> {
-    name: string;
-    style: Style[];
-}
 
 export interface SlidesType {
     name: string;
@@ -21,7 +17,14 @@ export type ButtonPatternEnum = "all" | "nextDone" | "none";
 
 export type SlideIndicatorsEnum = "between" | "above" | "never";
 
-export interface IntroScreenProps<Style> extends CommonProps<Style> {
+export interface SlidesPreviewType {
+    name: string;
+    content: { widgetCount: number; renderer: Component };
+}
+
+export interface IntroScreenProps<Style> {
+    name: string;
+    style: Style[];
     slides: SlidesType[];
     showMode: ShowModeEnum;
     buttonPattern: ButtonPatternEnum;
@@ -40,4 +43,27 @@ export interface IntroScreenProps<Style> extends CommonProps<Style> {
     onSlideChange?: ActionValue;
     onDone?: ActionValue;
     onSkip?: ActionValue;
+}
+
+export interface IntroScreenPreviewProps {
+    class: string;
+    style: string;
+    slides: SlidesPreviewType[];
+    showMode: ShowModeEnum;
+    buttonPattern: ButtonPatternEnum;
+    slideIndicators: SlideIndicatorsEnum;
+    hideIndicatorLastSlide: boolean;
+    identifier: string;
+    skipCaption: string;
+    skipIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
+    previousCaption: string;
+    previousIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
+    nextCaption: string;
+    nextIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
+    doneCaption: string;
+    doneIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
+    activeSlideAttribute: string;
+    onSlideChange: {} | null;
+    onDone: {} | null;
+    onSkip: {} | null;
 }

@@ -1,26 +1,38 @@
 /**
  * This file was generated from AppEvents.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
 import { ActionValue } from "mendix";
 
-interface CommonProps<Style> {
-    name: string;
-    style: Style[];
-}
-
 export type TimerTypeEnum = "once" | "interval";
 
-export interface AppEventsProps<Style> extends CommonProps<Style> {
+export interface AppEventsProps<Style> {
+    name: string;
+    style: Style[];
     onLoadAction?: ActionValue;
     onResumeAction?: ActionValue;
-    onResumeTimeout: number;
+    onResumeTimeout: BigJs.Big;
     onOnlineAction?: ActionValue;
-    onOnlineTimeout: number;
+    onOnlineTimeout: BigJs.Big;
     onOfflineAction?: ActionValue;
-    onOfflineTimeout: number;
+    onOfflineTimeout: BigJs.Big;
     timerType: TimerTypeEnum;
-    delayTime: number;
+    delayTime: BigJs.Big;
     onTimeoutAction?: ActionValue;
+}
+
+export interface AppEventsPreviewProps {
+    class: string;
+    style: string;
+    onLoadAction: {} | null;
+    onResumeAction: {} | null;
+    onResumeTimeout: number | null;
+    onOnlineAction: {} | null;
+    onOnlineTimeout: number | null;
+    onOfflineAction: {} | null;
+    onOfflineTimeout: number | null;
+    timerType: TimerTypeEnum;
+    delayTime: number | null;
+    onTimeoutAction: {} | null;
 }

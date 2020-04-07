@@ -1,23 +1,30 @@
 /**
  * This file was generated from Carousel.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
+import { Component, ReactNode } from "react";
 import { ListValue, ObjectItem } from "mendix";
-import { ReactNode } from "react";
-
-interface CommonProps<Style> {
-    name: string;
-    style: Style[];
-}
 
 export type LayoutEnum = "card" | "fullWidth";
 
 export type ActiveSlideAlignmentEnum = "center" | "start";
 
-export interface CarouselProps<Style> extends CommonProps<Style> {
+export interface CarouselProps<Style> {
+    name: string;
+    style: Style[];
     contentSource: ListValue;
     content: (item: ObjectItem) => ReactNode;
+    layout: LayoutEnum;
+    showPagination: boolean;
+    activeSlideAlignment: ActiveSlideAlignmentEnum;
+}
+
+export interface CarouselPreviewProps {
+    class: string;
+    style: string;
+    contentSource: {} | null;
+    content: { widgetCount: number; renderer: Component };
     layout: LayoutEnum;
     showPagination: boolean;
     activeSlideAlignment: ActiveSlideAlignmentEnum;

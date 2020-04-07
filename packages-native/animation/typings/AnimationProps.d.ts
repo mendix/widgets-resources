@@ -1,15 +1,10 @@
 /**
  * This file was generated from Animation.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
+import { Component, ReactNode } from "react";
 import { ActionValue, DynamicValue } from "mendix";
-import { ReactNode } from "react";
-
-interface CommonProps<Style> {
-    name: string;
-    style: Style[];
-}
 
 export type AnimationTypeEnum = "in" | "attention" | "out";
 
@@ -110,17 +105,36 @@ export type EasingEnum =
 
 export type DirectionEnum = "normal" | "alternate";
 
-export interface AnimationProps<Style> extends CommonProps<Style> {
+export interface AnimationProps<Style> {
+    name: string;
+    style: Style[];
     content: ReactNode;
     animationType: AnimationTypeEnum;
     animationIn: AnimationInEnum;
     animationAttention: AnimationAttentionEnum;
     animationOut: AnimationOutEnum;
-    duration: number;
-    delay: number;
+    duration: BigJs.Big;
+    delay: BigJs.Big;
     condition?: DynamicValue<boolean>;
     easing: EasingEnum;
-    count: number;
+    count: BigJs.Big;
     direction: DirectionEnum;
     afterAnimationAction?: ActionValue;
+}
+
+export interface AnimationPreviewProps {
+    class: string;
+    style: string;
+    content: { widgetCount: number; renderer: Component };
+    animationType: AnimationTypeEnum;
+    animationIn: AnimationInEnum;
+    animationAttention: AnimationAttentionEnum;
+    animationOut: AnimationOutEnum;
+    duration: number | null;
+    delay: number | null;
+    condition: string;
+    easing: EasingEnum;
+    count: number | null;
+    direction: DirectionEnum;
+    afterAnimationAction: {} | null;
 }

@@ -1,15 +1,18 @@
 /**
  * This file was generated from SafeAreaView.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
-import { ReactNode } from "react";
+import { Component, ReactNode } from "react";
 
-interface CommonProps<Style> {
+export interface SafeAreaViewProps<Style> {
     name: string;
     style: Style[];
+    content?: ReactNode;
 }
 
-export interface SafeAreaViewProps<Style> extends CommonProps<Style> {
-    content?: ReactNode;
+export interface SafeAreaViewPreviewProps {
+    class: string;
+    style: string;
+    content: { widgetCount: number; renderer: Component };
 }

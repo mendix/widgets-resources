@@ -1,16 +1,20 @@
 /**
  * This file was generated from Badge.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
 import { ActionValue, DynamicValue } from "mendix";
 
-interface CommonProps<Style> {
+export interface BadgeProps<Style> {
     name: string;
     style: Style[];
-}
-
-export interface BadgeProps<Style> extends CommonProps<Style> {
     caption: DynamicValue<string>;
     onClick?: ActionValue;
+}
+
+export interface BadgePreviewProps {
+    class: string;
+    style: string;
+    caption: string;
+    onClick: {} | null;
 }

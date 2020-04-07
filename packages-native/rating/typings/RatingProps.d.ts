@@ -1,14 +1,9 @@
 /**
  * This file was generated from Rating.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
 import { ActionValue, DynamicValue, EditableValue, NativeImage } from "mendix";
-
-interface CommonProps<Style> {
-    name: string;
-    style: Style[];
-}
 
 export type AnimationEnum =
     | "pulse"
@@ -25,12 +20,26 @@ export type AnimationEnum =
 
 export type EditableEnum = "default" | "never";
 
-export interface RatingProps<Style> extends CommonProps<Style> {
+export interface RatingProps<Style> {
+    name: string;
+    style: Style[];
     ratingAttribute: EditableValue<BigJs.Big>;
     emptyIcon?: DynamicValue<NativeImage>;
     icon?: DynamicValue<NativeImage>;
-    maximumValue: number;
+    maximumValue: BigJs.Big;
     animation: AnimationEnum;
     editable: EditableEnum;
     onChange?: ActionValue;
+}
+
+export interface RatingPreviewProps {
+    class: string;
+    style: string;
+    ratingAttribute: string;
+    emptyIcon: string;
+    icon: string;
+    maximumValue: number | null;
+    animation: AnimationEnum;
+    editable: EditableEnum;
+    onChange: {} | null;
 }
