@@ -37,7 +37,7 @@ function toClientPropType(prop: Property, isNative: boolean, generatedTypes: str
         case "string":
             return "string";
         case "action":
-            return "ActionValue";
+            return !!prop.$.dataSource ? "(item: ObjectItem) => ActionValue" : "ActionValue";
         case "textTemplate":
             return "DynamicValue<string>";
         case "integer":
@@ -59,7 +59,9 @@ function toClientPropType(prop: Property, isNative: boolean, generatedTypes: str
                 .map((ats) => ats.attributeType)
                 .reduce((a, i) => a.concat(i), [])
                 .map((at) => toClientType(at.$.name));
-            return `EditableValue<${Array.from(new Set(types)).join(" | ")}>`;
+            return !!prop.$.dataSource
+                ? `(item: ObjectItem) => EditableValue<${Array.from(new Set(types)).join(" | ")}>`
+                : `EditableValue<${Array.from(new Set(types)).join(" | ")}>`;
         case "expression":
             if (!prop.returnType || prop.returnType.length === 0) {
                 throw new Error("[XML] Expression property requires returnType element");
