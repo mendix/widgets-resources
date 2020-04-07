@@ -41,6 +41,7 @@ function toClientPropType(prop: Property, isNative: boolean, generatedTypes: str
         case "textTemplate":
             return "DynamicValue<string>";
         case "integer":
+            return "number";
         case "decimal":
             return "BigJs.Big";
         case "icon":

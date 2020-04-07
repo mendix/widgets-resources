@@ -33,7 +33,7 @@ export interface MyWidgetProps<Style> {
     file: DynamicValue<FileValue>;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
-    tries?: BigJs.Big;
+    tries?: number;
     amount?: BigJs.Big;
     image?: DynamicValue<NativeImage>;
     onClickAction?: ActionValue;
@@ -98,7 +98,7 @@ export interface MyWidgetContainerProps {
     file: DynamicValue<FileValue>;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
-    tries?: BigJs.Big;
+    tries?: number;
     amount?: BigJs.Big;
     image?: DynamicValue<WebImage>;
     onClickAction?: ActionValue;
