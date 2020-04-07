@@ -1,10 +1,22 @@
 export const datasourceWebOutput = `/**
  * This file was generated from MyWidget.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Content Team
+ * @author Mendix UI Content Team
  */
 import { Component, CSSProperties, ReactNode } from "react";
 import { ActionValue, EditableValue, ListValue, ObjectItem } from "mendix";
+
+export interface DatasourcePropertiesType {
+    contentAttribute: (item: ObjectItem) => ReactNode;
+    markerAttribute: (item: ObjectItem) => EditableValue<string | boolean | BigJs.Big>;
+    actionAttribute?: (item: ObjectItem) => ActionValue;
+}
+
+export interface DatasourcePropertiesPreviewType {
+    contentAttribute: { widgetCount: number; renderer: Component };
+    markerAttribute: string;
+    actionAttribute: {} | null;
+}
 
 export interface MyWidgetContainerProps {
     name: string;
@@ -15,6 +27,7 @@ export interface MyWidgetContainerProps {
     content: (item: ObjectItem) => ReactNode;
     markerDataAttribute: (item: ObjectItem) => EditableValue<string | boolean | BigJs.Big>;
     actionAttribute?: (item: ObjectItem) => ActionValue;
+    datasourceProperties: DatasourcePropertiesType[];
     description: EditableValue<string>;
     action?: ActionValue;
 }
@@ -26,17 +39,26 @@ export interface MyWidgetPreviewProps {
     content: { widgetCount: number; renderer: Component };
     markerDataAttribute: string;
     actionAttribute: {} | null;
+    datasourceProperties: DatasourcePropertiesPreviewType[];
     description: string;
     action: {} | null;
 }
 `;
-export const datasourceNativeOutput = `export interface MyWidgetProps<Style> {
+
+export const datasourceNativeOutput = `export interface DatasourcePropertiesType {
+    contentAttribute: (item: ObjectItem) => ReactNode;
+    markerAttribute: (item: ObjectItem) => EditableValue<string | boolean | BigJs.Big>;
+    actionAttribute?: (item: ObjectItem) => ActionValue;
+}
+
+export interface MyWidgetProps<Style> {
     name: string;
     style: Style[];
     contentSource: ListValue;
     content: (item: ObjectItem) => ReactNode;
     markerDataAttribute: (item: ObjectItem) => EditableValue<string | boolean | BigJs.Big>;
     actionAttribute?: (item: ObjectItem) => ActionValue;
+    datasourceProperties: DatasourcePropertiesType[];
     description: EditableValue<string>;
     action?: ActionValue;
 }`;
