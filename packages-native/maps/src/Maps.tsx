@@ -110,7 +110,7 @@ export class Maps extends Component<Props, State> {
                     <Icon
                         icon={props.icon.value}
                         color={props.color || this.styles.marker.color}
-                        size={props.iconSize}
+                        size={Number(props.iconSize)}
                     />
                 )}
             </MarkerView>

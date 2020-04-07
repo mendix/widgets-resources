@@ -59,7 +59,7 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
 
         return (
             <StarRating
-                maxStars={this.props.maximumValue}
+                maxStars={Number(this.props.maximumValue)}
                 rating={Math.round(Number(this.props.ratingAttribute.value))}
                 disabled={disabled}
                 selectedStar={this.onChangeHandler}

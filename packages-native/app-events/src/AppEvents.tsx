@@ -1,4 +1,5 @@
 import NetInfo, { NetInfoSubscription, NetInfoState } from "@react-native-community/netinfo";
+import { Big } from "big.js";
 import { Component } from "react";
 import { AppState, AppStateStatus } from "react-native";
 
@@ -28,7 +29,10 @@ export class AppEvents extends Component<Props> {
 
         if (this.props.onTimeoutAction) {
             const schedule = this.props.timerType === "once" ? setTimeout : setInterval;
-            this.timeoutHandle = schedule(() => executeAction(this.props.onTimeoutAction), this.props.delayTime * 1000);
+            this.timeoutHandle = schedule(
+                () => executeAction(this.props.onTimeoutAction),
+                Number(this.props.delayTime.times(1000))
+            );
         }
 
         if (this.props.onOnlineAction || this.props.onOfflineAction) {
@@ -95,6 +99,6 @@ export class AppEvents extends Component<Props> {
     }
 }
 
-function isPastTimeout(last: number, timeoutSeconds: number): boolean {
-    return Date.now() - last >= timeoutSeconds * 1000;
+function isPastTimeout(last: number, timeoutSeconds: BigJs.Big): boolean {
+    return new Big(Date.now()).minus(last).gte(timeoutSeconds.times(1000));
 }
