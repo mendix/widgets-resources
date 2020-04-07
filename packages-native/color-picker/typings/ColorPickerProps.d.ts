@@ -1,18 +1,15 @@
 /**
  * This file was generated from ColorPicker.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
 import { ActionValue, EditableValue } from "mendix";
 
-interface CommonProps<Style> {
-    name: string;
-    style: Style[];
-}
-
 export type FormatEnum = "hex" | "hsl" | "hsv" | "rgb";
 
-export interface ColorPickerProps<Style> extends CommonProps<Style> {
+export interface ColorPickerProps<Style> {
+    name: string;
+    style: Style[];
     color: EditableValue<string>;
     format: FormatEnum;
     showPreview: boolean;
@@ -20,4 +17,16 @@ export interface ColorPickerProps<Style> extends CommonProps<Style> {
     showLightness: boolean;
     showAlpha: boolean;
     onChange?: ActionValue;
+}
+
+export interface ColorPickerPreviewProps {
+    class: string;
+    style: string;
+    color: string;
+    format: FormatEnum;
+    showPreview: boolean;
+    showSaturation: boolean;
+    showLightness: boolean;
+    showAlpha: boolean;
+    onChange: {} | null;
 }

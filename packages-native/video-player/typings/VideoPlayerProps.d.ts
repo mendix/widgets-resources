@@ -1,17 +1,25 @@
 /**
  * This file was generated from VideoPlayer.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
 import { DynamicValue } from "mendix";
 
-interface CommonProps<Style> {
+export interface VideoPlayerProps<Style> {
     name: string;
     style: Style[];
+    videoUrl: DynamicValue<string>;
+    autoStart: boolean;
+    muted: boolean;
+    loop: boolean;
+    aspectRatio: boolean;
+    showControls: boolean;
 }
 
-export interface VideoPlayerProps<Style> extends CommonProps<Style> {
-    videoUrl: DynamicValue<string>;
+export interface VideoPlayerPreviewProps {
+    class: string;
+    style: string;
+    videoUrl: string;
     autoStart: boolean;
     muted: boolean;
     loop: boolean;

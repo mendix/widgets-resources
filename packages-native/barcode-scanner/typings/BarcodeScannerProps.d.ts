@@ -1,16 +1,20 @@
 /**
  * This file was generated from BarcodeScanner.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
 import { ActionValue, EditableValue } from "mendix";
 
-interface CommonProps<Style> {
+export interface BarcodeScannerProps<Style> {
     name: string;
     style: Style[];
-}
-
-export interface BarcodeScannerProps<Style> extends CommonProps<Style> {
     barcode: EditableValue<string>;
     onDetect?: ActionValue;
+}
+
+export interface BarcodeScannerPreviewProps {
+    class: string;
+    style: string;
+    barcode: string;
+    onDetect: {} | null;
 }
