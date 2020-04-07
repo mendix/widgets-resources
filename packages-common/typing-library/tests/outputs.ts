@@ -1,7 +1,7 @@
 export const nativeResult = `/**
  * This file was generated from MyWidget.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Content Team
+ * @author Mendix UI Content Team
  */
 import { ActionValue, DynamicValue, EditableValue, FileValue, NativeImage } from "mendix";
 
@@ -63,7 +63,7 @@ export interface MyWidgetPreviewProps {
 export const webResult = `/**
  * This file was generated from MyWidget.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Content Team
+ * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue, FileValue, WebImage } from "mendix";

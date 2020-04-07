@@ -1,7 +1,7 @@
 export const fileWebOutput = `/**
  * This file was generated from MyWidget.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Content Team
+ * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue, FileValue } from "mendix";
