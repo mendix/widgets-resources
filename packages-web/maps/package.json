@@ -14,16 +14,11 @@
     "projectPath": "./tests/TestProjects/Mendix8",
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000,
-    "testProjectId": "b16057e9-012a-4d19-8484-34caebdc3eb2",
+    "testProjectId": "3c9356a0-e646-434a-be37-52ab7d402d4e",
     "testProjects": [
       {
-        "revision": 514,
+        "revision": 4,
         "branch": "trunk",
-        "path": "./tests/TestProjects/Mendix7/"
-      },
-      {
-        "revision": 528,
-        "branch": "MX_8",
         "path": "./tests/TestProjects/Mendix8/"
       }
     ]
