@@ -10,9 +10,8 @@ export class Page {
     }
 
     getElements(name: string): WebdriverIO.Element[] {
-        $(name).waitForDisplayed();
-        const elements = $$(name);
-        return elements;
+        $(name).waitForDisplayed(5000);
+        return $$(name);
     }
 
     getWidget(widgetName: string): WebdriverIO.Element {

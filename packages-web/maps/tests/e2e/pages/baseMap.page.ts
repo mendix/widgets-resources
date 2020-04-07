@@ -39,7 +39,7 @@ export class BaseMapPage extends Page {
     }
 
     get googleMarkers(): WebdriverIO.Element[] {
-        return this.getElements('[src="https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png"]');
+        return this.getElements("img[src*='gstatic.com/mapfiles/api-3/images/spotlight-poi']");
     }
 
     get leafletAlert(): WebdriverIO.Element {
