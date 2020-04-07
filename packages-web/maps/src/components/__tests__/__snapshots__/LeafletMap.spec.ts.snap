@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Leaflet maps renders a map with HERE maps as provider 1`] = `
+<div
+  className="widget-maps"
+  style={
+    Object {
+      "height": "75px",
+      "width": "50%",
+    }
+  }
+>
+  <div
+    className="widget-leaflet-maps-wrapper"
+  >
+    <div
+      className="widget-leaflet-maps"
+    />
+  </div>
+</div>
+`;
+
+exports[`Leaflet maps renders a map with MapBox maps as provider 1`] = `
+<div
+  className="widget-maps"
+  style={
+    Object {
+      "height": "75px",
+      "width": "50%",
+    }
+  }
+>
+  <div
+    className="widget-leaflet-maps-wrapper"
+  >
+    <div
+      className="widget-leaflet-maps"
+    />
+  </div>
+</div>
+`;
+
+exports[`Leaflet maps renders a map with attribution 1`] = `
+<div
+  className="widget-maps"
+  style={
+    Object {
+      "height": "75px",
+      "width": "50%",
+    }
+  }
+>
+  <div
+    className="widget-leaflet-maps-wrapper"
+  >
+    <div
+      className="widget-leaflet-maps"
+    />
+  </div>
+</div>
+`;
+
+exports[`Leaflet maps renders a map with percentage of parent units renders the structure correctly 1`] = `
+<div
+  className="widget-maps"
+  style={
+    Object {
+      "height": "75%",
+      "width": "50%",
+    }
+  }
+>
+  <div
+    className="widget-leaflet-maps-wrapper"
+  >
+    <div
+      className="widget-leaflet-maps"
+    />
+  </div>
+</div>
+`;
+
+exports[`Leaflet maps renders a map with percentage of width and height units renders the structure correctly 1`] = `
+<div
+  className="widget-maps"
+  style={
+    Object {
+      "height": "auto",
+      "paddingBottom": "37.5%",
+      "width": "50%",
+    }
+  }
+>
+  <div
+    className="widget-leaflet-maps-wrapper"
+  >
+    <div
+      className="widget-leaflet-maps"
+    />
+  </div>
+</div>
+`;
+
+exports[`Leaflet maps renders a map with pixels renders structure correctly 1`] = `
+<div
+  className="widget-maps"
+  style={
+    Object {
+      "height": "75px",
+      "width": "50px",
+    }
+  }
+>
+  <div
+    className="widget-leaflet-maps-wrapper"
+  >
+    <div
+      className="widget-leaflet-maps"
+    />
+  </div>
+</div>
+`;
+
+exports[`Leaflet maps renders a map with right structure 1`] = `
+<div
+  className="widget-maps"
+  style={
+    Object {
+      "height": "37.5px",
+      "width": "50px",
+    }
+  }
+>
+  <div
+    className="widget-leaflet-maps-wrapper"
+  >
+    <div
+      className="widget-leaflet-maps"
+    />
+  </div>
+</div>
+`;

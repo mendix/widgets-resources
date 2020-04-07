@@ -1,41 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Google maps renders structure correctly 1`] = `
-<div
-  className="widget-maps"
-  style={
-    Object {
-      "height": "37.5px",
-      "width": "50px",
-    }
-  }
->
-  <Alert
-    bootstrapStyle="danger"
-    className="widget-google-maps-alert"
-  />
-  <div
-    className="widget-google-maps-wrapper"
-  >
-    <div
-      className="widget-google-maps"
-    />
-  </div>
-  <ResizeDetector
-    handleHeight={true}
-    handleWidth={true}
-    nodeType="div"
-    onResize={[Function]}
-    querySelector={null}
-    refreshMode="throttle"
-    refreshRate={100}
-    skipOnMount={false}
-    targetDomEl={null}
-  />
-</div>
-`;
-
-exports[`Google maps with percentage of parent units renders the structure correctly 1`] = `
+exports[`Google maps renders a map with percentage of parent units renders the structure correctly 1`] = `
 <div
   className="widget-maps"
   style={
@@ -45,10 +10,6 @@ exports[`Google maps with percentage of parent units renders the structure corre
     }
   }
 >
-  <Alert
-    bootstrapStyle="danger"
-    className="widget-google-maps-alert"
-  />
   <div
     className="widget-google-maps-wrapper"
   >
@@ -56,21 +17,10 @@ exports[`Google maps with percentage of parent units renders the structure corre
       className="widget-google-maps"
     />
   </div>
-  <ResizeDetector
-    handleHeight={true}
-    handleWidth={true}
-    nodeType="div"
-    onResize={[Function]}
-    querySelector={null}
-    refreshMode="throttle"
-    refreshRate={100}
-    skipOnMount={false}
-    targetDomEl={null}
-  />
 </div>
 `;
 
-exports[`Google maps with percentage of width and height units renders the structure correctly 1`] = `
+exports[`Google maps renders a map with percentage of width and height units renders the structure correctly 1`] = `
 <div
   className="widget-maps"
   style={
@@ -81,10 +31,6 @@ exports[`Google maps with percentage of width and height units renders the struc
     }
   }
 >
-  <Alert
-    bootstrapStyle="danger"
-    className="widget-google-maps-alert"
-  />
   <div
     className="widget-google-maps-wrapper"
   >
@@ -92,21 +38,10 @@ exports[`Google maps with percentage of width and height units renders the struc
       className="widget-google-maps"
     />
   </div>
-  <ResizeDetector
-    handleHeight={true}
-    handleWidth={true}
-    nodeType="div"
-    onResize={[Function]}
-    querySelector={null}
-    refreshMode="throttle"
-    refreshRate={100}
-    skipOnMount={false}
-    targetDomEl={null}
-  />
 </div>
 `;
 
-exports[`Google maps with pixels renders structure correctly 1`] = `
+exports[`Google maps renders a map with pixels renders structure correctly 1`] = `
 <div
   className="widget-maps"
   style={
@@ -116,10 +51,6 @@ exports[`Google maps with pixels renders structure correctly 1`] = `
     }
   }
 >
-  <Alert
-    bootstrapStyle="danger"
-    className="widget-google-maps-alert"
-  />
   <div
     className="widget-google-maps-wrapper"
   >
@@ -127,16 +58,25 @@ exports[`Google maps with pixels renders structure correctly 1`] = `
       className="widget-google-maps"
     />
   </div>
-  <ResizeDetector
-    handleHeight={true}
-    handleWidth={true}
-    nodeType="div"
-    onResize={[Function]}
-    querySelector={null}
-    refreshMode="throttle"
-    refreshRate={100}
-    skipOnMount={false}
-    targetDomEl={null}
-  />
+</div>
+`;
+
+exports[`Google maps renders a map with right structure 1`] = `
+<div
+  className="widget-maps"
+  style={
+    Object {
+      "height": "37.5px",
+      "width": "50px",
+    }
+  }
+>
+  <div
+    className="widget-google-maps-wrapper"
+  >
+    <div
+      className="widget-google-maps"
+    />
+  </div>
 </div>
 `;

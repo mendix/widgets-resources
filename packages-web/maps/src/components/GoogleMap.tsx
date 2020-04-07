@@ -16,7 +16,7 @@ export interface GoogleMapsProps extends SharedProps {
     rotateControl: boolean;
 }
 
-const GoogleMap = (props: GoogleMapsProps): ReactElement => {
+export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
     const map = useRef<google.maps.Map>();
     const googleMapsRef = useRef<HTMLDivElement>(null);
     const defaultCenterLocation: google.maps.LatLngLiteral = { lat: 51.906688, lng: 4.48837 };

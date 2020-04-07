@@ -1,13 +1,11 @@
-import { mount, ReactWrapper, shallow, ShallowWrapper } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 import { createElement } from "react";
 import { GoogleMap, GoogleMapsProps } from "../GoogleMap";
-import { mockGoogleMaps } from "../../../tests/mocks/GoogleMaps";
+import { initialize } from "@googlemaps/jest-mocks";
 
 describe("Google maps", () => {
     const defaultProps: GoogleMapsProps = {
         autoZoom: true,
-        defaultCenterLatitude: "",
-        defaultCenterLongitude: "",
         height: 75,
         heightUnit: "pixels",
         scriptsLoaded: true,
@@ -18,21 +16,27 @@ describe("Google maps", () => {
         width: 50,
         widthUnit: "percentage",
         mapStyles: "",
-        divStyles: {},
-        mapProvider: "googleMaps",
-        inPreviewMode: false
+        style: {},
+        currentLocation: undefined,
+        optionStreetView: false,
+        locations: [],
+        className: "",
+        fullScreenControl: false,
+        mapsToken: "",
+        mapTypeControl: false,
+        rotateControl: false,
+        showCurrentLocation: false,
+        validationMessage: ""
     };
 
-    beforeAll(() => {
-        window.google = mockGoogleMaps;
+    beforeEach(() => {
+        initialize();
     });
 
     const renderGoogleMap = (props: GoogleMapsProps): ShallowWrapper<GoogleMapsProps, any> =>
         shallow(createElement(GoogleMap, props));
-    const fullRenderGoogleMap = (props: GoogleMapsProps): ReactWrapper<GoogleMapsProps, any> =>
-        mount(createElement(GoogleMap, props));
 
-    it("renders structure correctly", () => {
+    it("renders a map with right structure", () => {
         const googleMaps = renderGoogleMap(defaultProps);
         googleMaps.setProps({
             heightUnit: "percentageOfWidth",
@@ -42,7 +46,7 @@ describe("Google maps", () => {
         expect(googleMaps).toMatchSnapshot();
     });
 
-    it("with pixels renders structure correctly", () => {
+    it("renders a map with pixels renders structure correctly", () => {
         const googleMaps = renderGoogleMap(defaultProps);
         googleMaps.setProps({
             heightUnit: "pixels",
@@ -52,7 +56,7 @@ describe("Google maps", () => {
         expect(googleMaps).toMatchSnapshot();
     });
 
-    it("with percentage of width and height units renders the structure correctly", () => {
+    it("renders a map with percentage of width and height units renders the structure correctly", () => {
         const googleMaps = renderGoogleMap(defaultProps);
         googleMaps.setProps({
             heightUnit: "percentageOfWidth",
@@ -62,7 +66,7 @@ describe("Google maps", () => {
         expect(googleMaps).toMatchSnapshot();
     });
 
-    it("with percentage of parent units renders the structure correctly", () => {
+    it("renders a map with percentage of parent units renders the structure correctly", () => {
         const googleMaps = renderGoogleMap(defaultProps);
         googleMaps.setProps({
             heightUnit: "percentageOfParent",
@@ -70,32 +74,6 @@ describe("Google maps", () => {
         });
 
         expect(googleMaps).toMatchSnapshot();
-    });
-
-    it("without default center Latitude and Longitude sets default center location based on the default configured location", () => {
-        const googleMaps = fullRenderGoogleMap(defaultProps);
-        googleMaps.setProps({
-            fetchingData: false
-        });
-        expect(googleMaps.state("center")).toEqual({ lat: 51.9066346, lng: 4.4861703 });
-    });
-
-    it("creates markers from given locations", () => {
-        const customProps = {
-            ...defaultProps,
-            allLocations: [
-                { latitude: 40.759011, longitude: -73.9844722, mxObject: undefined, url: "http://dummy.url" }
-            ],
-            fetchingData: false,
-            autoZoom: false
-        };
-        const googleMaps = fullRenderGoogleMap(defaultProps);
-        const googleMapsInstance = googleMaps.instance() as any;
-        const createMarkerSpy = spyOn(googleMapsInstance, "addMarkers").and.callThrough();
-
-        googleMapsInstance.componentWillReceiveProps(customProps);
-
-        expect(createMarkerSpy).toHaveBeenCalledWith(customProps.allLocations);
     });
 
     afterAll(() => {
