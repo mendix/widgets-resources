@@ -50,7 +50,7 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
             attributionControl: props.attributionControl,
             zoom: props.zoomLevel,
             minZoom: 1,
-            maxZoom: 20,
+            maxZoom: 18, // Max zoom for HERE, OSM & MapBox
             dragging: props.optionDrag,
             center: defaultCenterLocation,
             closePopupOnClick: false
