@@ -1,5 +1,4 @@
 import { shallow } from "enzyme";
-import { shallowToJson } from "enzyme-to-json";
 import { createElement, Fragment, ReactNode } from "react";
 
 import { Fieldset, FieldsetProps } from "../components/Fieldset";
@@ -24,7 +23,7 @@ describe("Fieldset", () => {
     it("renders children and legend", () => {
         const fieldset = shallow(<Fieldset {...defaultFieldsetProps}>{defaultChildren}</Fieldset>);
 
-        expect(shallowToJson(fieldset)).toMatchSnapshot();
+        expect(fieldset).toMatchSnapshot();
     });
     it("renders only children when no legend is passed", () => {
         const fieldset = shallow(
@@ -33,11 +32,11 @@ describe("Fieldset", () => {
             </Fieldset>
         );
 
-        expect(shallowToJson(fieldset)).toMatchSnapshot();
+        expect(fieldset).toMatchSnapshot();
     });
     it("renders nothing when no children are passed", () => {
         const fieldset = shallow(<Fieldset {...defaultFieldsetProps} />);
 
-        expect(shallowToJson(fieldset)).toMatchSnapshot();
+        expect(fieldset).toMatchSnapshot();
     });
 });

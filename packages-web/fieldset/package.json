@@ -38,11 +38,7 @@
     "release": "..\"/../node_modules/.bin/pluggable-widgets-tools\" release:ts --subprojectPath packages-web/fieldset",
     "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
   },
-  "devDependencies": {
-    "@types/classnames": "^2.2.9"
-  },
   "dependencies": {
-    "@widgets-resources/piw-utils": "^1.0.0",
-    "classnames": "^2.2.6"
+    "@widgets-resources/piw-utils": "^1.0.0"
   }
 }
