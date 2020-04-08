@@ -31,7 +31,6 @@
                     <caption>Pagination</caption>
                     <description>Show pagination indicator; dotted for 5 or less items, else show the number of items</description>
                 </property>
-                <!-- ???? -->
                 <property key="activeSlideAlignment" type="enumeration" defaultValue="center">
                     <caption>Card alignment</caption>
                     <description>Align current card to provide space to display next and previous card. (Only available for Layout type card)</description>
