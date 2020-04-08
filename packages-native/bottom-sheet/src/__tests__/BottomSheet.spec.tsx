@@ -10,16 +10,12 @@ jest.mock("react-native-device-info", () => ({
     getDeviceId: () => "iPhone10,6"
 }));
 
-jest.mock("Platform", () => ({
+jest.mock("react-native/Libraries/Utilities/Platform", () => ({
     OS: "ios",
     select: jest.fn(dict => dict.ios)
 }));
 
-jest.mock("react-native-reanimated", () => jest.requireActual("../../node_modules/react-native-reanimated/mock"));
-
-jest.mock("react-native-gesture-handler", () => {
-    jest.requireActual("../../node_modules/react-native-gesture-handler/__mocks__/RNGestureHandlerModule");
-});
+jest.mock("react-native-reanimated", () => jest.requireActual("react-native-reanimated/mock"));
 
 const defaultProps: BottomSheetProps<BottomSheetStyle> = {
     name: "bottom-sheet-test",

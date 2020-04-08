@@ -58,14 +58,7 @@ exports[`ProgressCircle renders 1`] = `
         }
         fill={null}
         opacity={1}
-        stroke={
-          Array [
-            0,
-            0.47843137254901963,
-            1,
-            1,
-          ]
-        }
+        stroke="#007aff"
         strokeCap={2}
         strokeDash={null}
         strokeJoin={1}
@@ -106,14 +99,7 @@ exports[`ProgressCircle renders 1`] = `
         }
         fill={null}
         opacity={1}
-        stroke={
-          Array [
-            0,
-            0.47843137254901963,
-            1,
-            1,
-          ]
-        }
+        stroke="#007aff"
         strokeCap={2}
         strokeDash={null}
         strokeJoin={1}

@@ -4,7 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import { GeolocationError, GeolocationReturnType, GeoOptions } from "react-native";
+import { GeolocationError, GeolocationOptions, GeolocationResponse } from "@react-native-community/geolocation";
 
 /**
  * This action retrieves the current geographical position of a user/device.
@@ -27,11 +27,15 @@ export async function GetCurrentLocation(
 ): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
 
+    if (navigator && navigator.product === "ReactNative" && !navigator.geolocation) {
+        (navigator.geolocation as any) = require("@react-native-community/geolocation");
+    }
+
     return new Promise((resolve, reject) => {
         const options = getOptions();
         navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 
-        function onSuccess(position: GeolocationReturnType): void {
+        function onSuccess(position: GeolocationResponse): void {
             mx.data.create({
                 entity: "NanoflowCommons.Geolocation",
                 callback: mxObject => {
@@ -47,7 +51,7 @@ export async function GetCurrentLocation(
             return reject(new Error(error.message));
         }
 
-        function getOptions(): GeoOptions {
+        function getOptions(): GeolocationOptions {
             const timeoutNumber = timeout && Number(timeout.toString());
             const maximumAgeNumber = maximumAge && Number(maximumAge.toString());
 
@@ -60,7 +64,7 @@ export async function GetCurrentLocation(
 
         function mapPositionToMxObject(
             mxObject: mendix.lib.MxObject,
-            position: GeolocationReturnType
+            position: GeolocationResponse
         ): mendix.lib.MxObject {
             mxObject.set("Timestamp", new Date(position.timestamp));
             mxObject.set("Latitude", new Big(position.coords.latitude.toFixed(8)));

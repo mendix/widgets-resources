@@ -1,21 +1,18 @@
 /**
  * This file was generated from ListViewSwipe.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
+import { Component, ReactNode } from "react";
 import { ActionValue } from "mendix";
-import { ReactNode } from "react";
-
-interface CommonProps<Style> {
-    name: string;
-    style: Style[];
-}
 
 export type LeftRenderModeEnum = "disabled" | "buttons" | "archive" | "swipeOutReset" | "toggle";
 
 export type RightRenderModeEnum = "disabled" | "buttons" | "archive" | "swipeOutReset" | "toggle";
 
-export interface ListViewSwipeProps<Style> extends CommonProps<Style> {
+export interface ListViewSwipeProps<Style> {
+    name: string;
+    style: Style[];
     content: ReactNode;
     left?: ReactNode;
     leftRenderMode: LeftRenderModeEnum;
@@ -23,4 +20,16 @@ export interface ListViewSwipeProps<Style> extends CommonProps<Style> {
     right?: ReactNode;
     rightRenderMode: RightRenderModeEnum;
     onSwipeRight?: ActionValue;
+}
+
+export interface ListViewSwipePreviewProps {
+    class: string;
+    style: string;
+    content: { widgetCount: number; renderer: Component };
+    left: { widgetCount: number; renderer: Component };
+    leftRenderMode: LeftRenderModeEnum;
+    onSwipeLeft: {} | null;
+    right: { widgetCount: number; renderer: Component };
+    rightRenderMode: RightRenderModeEnum;
+    onSwipeRight: {} | null;
 }

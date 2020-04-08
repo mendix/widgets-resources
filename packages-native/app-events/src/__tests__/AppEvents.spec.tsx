@@ -6,21 +6,24 @@ import { flushMicrotasksQueue, render } from "react-native-testing-library";
 import { AppEvents, Props } from "../AppEvents";
 
 let appStateChangeHandler: ((state: AppStateStatus) => void) | undefined;
-let connectionChangeHandler: ((result: boolean) => void) | undefined;
+let connectionChangeHandler: ((result: { isConnected: boolean }) => void) | undefined;
 
 jest.mock("react-native", () => ({
     AppState: {
         currentState: "active",
         addEventListener: jest.fn((_type, listener) => (appStateChangeHandler = listener)),
         removeEventListener: jest.fn(() => (appStateChangeHandler = undefined))
-    },
-    NetInfo: {
-        isConnected: {
-            fetch: jest.fn(() => Promise.resolve(true)),
-            addEventListener: jest.fn((_type, listener) => (connectionChangeHandler = listener)),
-            removeEventListener: jest.fn(() => (connectionChangeHandler = undefined))
-        }
     }
+}));
+
+jest.mock("@react-native-community/netinfo", () => ({
+    fetch: jest.fn(() => Promise.resolve({ isConnected: true })),
+    addEventListener: jest.fn(listener => {
+        connectionChangeHandler = listener;
+        return () => {
+            connectionChangeHandler = undefined;
+        };
+    })
 }));
 
 const defaultProps: Props = {
@@ -119,8 +122,8 @@ describe("AppEvents", () => {
             render(<AppEvents {...defaultProps} onOnlineAction={onOnlineAction} />);
             await flushMicrotasksQueue();
 
-            connectionChangeHandler!(false);
-            connectionChangeHandler!(true);
+            connectionChangeHandler!({ isConnected: false });
+            connectionChangeHandler!({ isConnected: true });
             expect(onOnlineAction.execute).toHaveBeenCalledTimes(1);
         });
 
@@ -132,13 +135,13 @@ describe("AppEvents", () => {
             await flushMicrotasksQueue();
 
             dateNowSpy.mockReturnValue(4000);
-            connectionChangeHandler!(false);
-            connectionChangeHandler!(true);
+            connectionChangeHandler!({ isConnected: false });
+            connectionChangeHandler!({ isConnected: true });
             expect(onOnlineAction.execute).toHaveBeenCalledTimes(0);
 
             dateNowSpy.mockReturnValue(6000);
-            connectionChangeHandler!(false);
-            connectionChangeHandler!(true);
+            connectionChangeHandler!({ isConnected: false });
+            connectionChangeHandler!({ isConnected: true });
             expect(onOnlineAction.execute).toHaveBeenCalledTimes(1);
 
             dateNowSpy.mockRestore();
@@ -149,9 +152,9 @@ describe("AppEvents", () => {
             render(<AppEvents {...defaultProps} onOnlineAction={onOnlineAction} />);
             await flushMicrotasksQueue();
 
-            connectionChangeHandler!(true);
-            connectionChangeHandler!(false);
-            connectionChangeHandler!(false);
+            connectionChangeHandler!({ isConnected: true });
+            connectionChangeHandler!({ isConnected: false });
+            connectionChangeHandler!({ isConnected: false });
             expect(onOnlineAction.execute).toHaveBeenCalledTimes(0);
         });
     });

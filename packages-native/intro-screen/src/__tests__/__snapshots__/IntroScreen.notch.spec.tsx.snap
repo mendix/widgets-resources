@@ -127,7 +127,9 @@ exports[`Intro Screen renders 1`] = `
         />
         <View
           accessible={true}
+          focusable={true}
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -314,7 +316,9 @@ exports[`Intro Screen renders with 1 bottom button 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -500,7 +504,9 @@ exports[`Intro Screen renders with 2 bottom button 1`] = `
           >
             <View
               accessible={true}
+              focusable={true}
               isTVSelectable={true}
+              onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
               onResponderRelease={[Function]}
@@ -671,7 +677,9 @@ exports[`Intro Screen renders with active slide attribute 1`] = `
         />
         <View
           accessible={true}
+          focusable={true}
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -843,7 +851,9 @@ exports[`Intro Screen renders with async storage identifier 1`] = `
         />
         <View
           accessible={true}
+          focusable={true}
           isTVSelectable={true}
+          onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}

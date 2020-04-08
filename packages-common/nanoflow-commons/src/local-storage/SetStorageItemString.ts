@@ -4,7 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import ReactNative from "react-native";
+import { AsyncStorageStatic } from "@react-native-community/async-storage";
 
 /**
  * Store a string value in the device storage, identified by a unique key. Can be accessed by the GetStorageItemObject action. Please note that users can clear the device storage.
@@ -27,8 +27,7 @@ export async function SetStorageItemString(key?: string, value?: string): Promis
 
     function setItem(key: string, value: string): Promise<void> {
         if (navigator && navigator.product === "ReactNative") {
-            const AsyncStorage: typeof ReactNative.AsyncStorage = require("@react-native-community/async-storage")
-                .default;
+            const AsyncStorage: AsyncStorageStatic = require("@react-native-community/async-storage").default;
             return AsyncStorage.setItem(key, value);
         }
 

@@ -1,15 +1,7 @@
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { Image } from "mendix/components/native/Image";
 import { Component, createElement, Fragment } from "react";
-import {
-    ActivityIndicator,
-    Image,
-    ImageURISource,
-    Switch,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View
-} from "react-native";
+import { ActivityIndicator, Image as RNImage, Switch, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Dialog from "react-native-dialog";
 import { captureScreen } from "react-native-view-shot";
 
@@ -77,8 +69,10 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
             <View style={floatingButtonContainer} testID={`${this.props.name}$button`}>
                 <View style={this.styles.floatingButton}>
                     <TouchableOpacity onPress={this.onFeedbackButtonPressHandler}>
-                        {this.props.logo && this.props.logo.value ? renderImage(this.props.logo.value) : null}
-                        {renderImage(commentIcon)}
+                        {this.props.logo && this.props.logo.value ? (
+                            <Image style={imageStyle} source={this.props.logo.value} />
+                        ) : null}
+                        <RNImage style={imageStyle} source={commentIcon} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -248,8 +242,4 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
             return "";
         }
     }
-}
-
-function renderImage(source: ImageURISource): JSX.Element {
-    return <Image style={imageStyle} source={source} />;
 }

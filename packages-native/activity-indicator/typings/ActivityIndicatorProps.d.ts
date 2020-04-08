@@ -1,12 +1,14 @@
 /**
  * This file was generated from ActivityIndicator.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
-
-interface CommonProps<Style> {
+export interface ActivityIndicatorProps<Style> {
     name: string;
     style: Style[];
 }
 
-export interface ActivityIndicatorProps<Style> extends CommonProps<Style> {}
+export interface ActivityIndicatorPreviewProps {
+    class: string;
+    style: string;
+}

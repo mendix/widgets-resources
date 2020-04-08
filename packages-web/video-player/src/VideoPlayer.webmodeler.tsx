@@ -1,3 +1,4 @@
+import { parseStyle } from "@widgets-resources/piw-utils";
 import { Component, createElement } from "react";
 import classNames from "classnames";
 
@@ -20,11 +21,11 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
         return (
             <SizeContainer
                 className={classNames("video-player-container", this.props.class)}
-                style={{ ...this.props.styleObject, minHeight: "400px" }}
+                style={{ ...parseStyle(this.props.style), minHeight: "400px" }}
                 widthUnit={this.props.widthUnit}
-                width={this.props.width}
+                width={this.props.width ?? 0}
                 heightUnit={this.props.heightUnit}
-                height={this.props.height}
+                height={this.props.height ?? 0}
                 tabIndex={0}
             >
                 {this.renderPlayers()}

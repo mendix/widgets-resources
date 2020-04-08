@@ -1,14 +1,9 @@
 /**
  * This file was generated from Notifications.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
 import { ActionValue, EditableValue } from "mendix";
-
-interface CommonProps<Style> {
-    name: string;
-    style: Style[];
-}
 
 export interface ActionsType {
     name: string;
@@ -16,7 +11,22 @@ export interface ActionsType {
     onOpen?: ActionValue;
 }
 
-export interface NotificationsProps<Style> extends CommonProps<Style> {
+export interface ActionsPreviewType {
+    name: string;
+    onReceive: {} | null;
+    onOpen: {} | null;
+}
+
+export interface NotificationsProps<Style> {
+    name: string;
+    style: Style[];
     actions: ActionsType[];
     guid?: EditableValue<string>;
+}
+
+export interface NotificationsPreviewProps {
+    class: string;
+    style: string;
+    actions: ActionsPreviewType[];
+    guid: string;
 }

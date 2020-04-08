@@ -1,3 +1,4 @@
+import { parseStyle } from "@widgets-resources/piw-utils";
 import { createElement, ReactElement } from "react";
 import { BadgeButton } from "./components/BadgeButton";
 import { BadgeButtonPreviewProps } from "../typings/BadgeButtonProps";
@@ -5,14 +6,14 @@ import { BadgeButtonPreviewProps } from "../typings/BadgeButtonProps";
 declare function require(name: string): string;
 
 export const preview = (props: BadgeButtonPreviewProps): ReactElement => {
-    const { bootstrapStyle, class: className, label, styleObject, value } = props;
+    const { bootstrapStyle, class: className, style, label, value } = props;
 
     return (
         <BadgeButton
             bootstrapStyle={bootstrapStyle}
             className={className}
             label={label}
-            style={styleObject}
+            style={parseStyle(style)}
             value={value}
         />
     );

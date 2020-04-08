@@ -1,15 +1,10 @@
 /**
  * This file was generated from BottomSheet.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
+import { Component, ReactNode } from "react";
 import { ActionValue, EditableValue } from "mendix";
-import { ReactNode } from "react";
-
-interface CommonProps<Style> {
-    name: string;
-    style: Style[];
-}
 
 export type TypeEnum = "modal" | "expanding";
 
@@ -23,7 +18,15 @@ export interface ItemsBasicType {
     styleClass: StyleClassEnum;
 }
 
-export interface BottomSheetProps<Style> extends CommonProps<Style> {
+export interface ItemsBasicPreviewType {
+    caption: string;
+    action: {} | null;
+    styleClass: StyleClassEnum;
+}
+
+export interface BottomSheetProps<Style> {
+    name: string;
+    style: Style[];
     type: TypeEnum;
     triggerAttribute?: EditableValue<boolean>;
     modalRendering: ModalRenderingEnum;
@@ -35,4 +38,20 @@ export interface BottomSheetProps<Style> extends CommonProps<Style> {
     fullscreenContent?: ReactNode;
     onOpen?: ActionValue;
     onClose?: ActionValue;
+}
+
+export interface BottomSheetPreviewProps {
+    class: string;
+    style: string;
+    type: TypeEnum;
+    triggerAttribute: string;
+    modalRendering: ModalRenderingEnum;
+    itemsBasic: ItemsBasicPreviewType[];
+    nativeImplementation: boolean;
+    smallContent: { widgetCount: number; renderer: Component };
+    largeContent: { widgetCount: number; renderer: Component };
+    showFullscreenContent: boolean;
+    fullscreenContent: { widgetCount: number; renderer: Component };
+    onOpen: {} | null;
+    onClose: {} | null;
 }

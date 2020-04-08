@@ -67,8 +67,10 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
                 iconSet={undefined}
                 containerStyle={containerStyle}
                 starStyle={this.iconStyle}
-                fullStar={this.props.icon ? this.props.icon.value : this.state.imageSourceCache![fullIcon]}
-                emptyStar={this.props.emptyIcon ? this.props.emptyIcon.value : this.state.imageSourceCache![emptyIcon]}
+                fullStar={this.props.icon ? (this.props.icon.value as any) : this.state.imageSourceCache![fullIcon]}
+                emptyStar={
+                    this.props.emptyIcon ? (this.props.emptyIcon.value as any) : this.state.imageSourceCache![emptyIcon]
+                }
                 {...ratingProps}
             />
         );

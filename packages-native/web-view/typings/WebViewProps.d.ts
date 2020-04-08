@@ -1,19 +1,26 @@
 /**
  * This file was generated from WebView.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
 import { ActionValue, DynamicValue } from "mendix";
 
-interface CommonProps<Style> {
+export interface WebViewProps<Style> {
     name: string;
     style: Style[];
-}
-
-export interface WebViewProps<Style> extends CommonProps<Style> {
     url?: DynamicValue<string>;
     content?: DynamicValue<string>;
     onLoad?: ActionValue;
     onError?: ActionValue;
     userAgent?: string;
+}
+
+export interface WebViewPreviewProps {
+    class: string;
+    style: string;
+    url: string;
+    content: string;
+    onLoad: {} | null;
+    onError: {} | null;
+    userAgent: string;
 }

@@ -42,6 +42,8 @@ describe("Intro Screen", () => {
             hasNotch: jest.fn(),
             getDeviceId: jest.fn().mockReturnValue("iPhone")
         }));
+
+        jest.useFakeTimers();
     });
 
     it("renders", () => {

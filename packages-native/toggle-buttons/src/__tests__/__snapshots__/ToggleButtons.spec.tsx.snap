@@ -24,7 +24,9 @@ exports[`ToggleButtons renders 1`] = `
     <View
       accessibilityLabel="Formatted a"
       accessible={true}
+      focusable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
@@ -85,7 +87,9 @@ exports[`ToggleButtons renders 1`] = `
     <View
       accessibilityLabel="Formatted b"
       accessible={true}
+      focusable={true}
       isTVSelectable={true}
+      onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}

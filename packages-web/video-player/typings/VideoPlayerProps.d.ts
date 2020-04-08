@@ -1,23 +1,20 @@
 /**
  * This file was generated from VideoPlayer.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
 import { DynamicValue } from "mendix";
-
-interface CommonProps {
-    name: string;
-    class: string;
-    style?: CSSProperties;
-    tabIndex: number;
-}
 
 export type WidthUnitEnum = "percentage" | "pixels";
 
 export type HeightUnitEnum = "aspectRatio" | "percentageOfWidth" | "pixels" | "percentageOfParent";
 
-export interface VideoPlayerContainerProps extends CommonProps {
+export interface VideoPlayerContainerProps {
+    name: string;
+    class: string;
+    style?: CSSProperties;
+    tabIndex: number;
     urlExpression: DynamicValue<string>;
     posterExpression?: DynamicValue<string>;
     autoStart: boolean;
@@ -33,28 +30,14 @@ export interface VideoPlayerContainerProps extends CommonProps {
 export interface VideoPlayerPreviewProps {
     class: string;
     style: string;
-    styleObject: CSSProperties;
     urlExpression: string;
-    posterExpression?: string;
+    posterExpression: string;
     autoStart: boolean;
     showControls: boolean;
     muted: boolean;
     loop: boolean;
     widthUnit: WidthUnitEnum;
-    width: number;
+    width: number | null;
     heightUnit: HeightUnitEnum;
-    height: number;
-}
-
-export interface VisibilityMap {
-    urlExpression: boolean;
-    posterExpression: boolean;
-    autoStart: boolean;
-    showControls: boolean;
-    muted: boolean;
-    loop: boolean;
-    widthUnit: boolean;
-    width: boolean;
-    heightUnit: boolean;
-    height: boolean;
+    height: number | null;
 }

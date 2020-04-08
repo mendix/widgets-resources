@@ -1,21 +1,27 @@
 /**
  * This file was generated from BackgroundImage.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
+import { Component, ReactNode } from "react";
 import { DynamicValue, NativeImage } from "mendix";
-import { ReactNode } from "react";
-
-interface CommonProps<Style> {
-    name: string;
-    style: Style[];
-}
 
 export type ResizeModeEnum = "cover" | "contain" | "stretch" | "center";
 
-export interface BackgroundImageProps<Style> extends CommonProps<Style> {
+export interface BackgroundImageProps<Style> {
+    name: string;
+    style: Style[];
     image: DynamicValue<NativeImage>;
     resizeMode: ResizeModeEnum;
     opacity: BigJs.Big;
     content?: ReactNode;
+}
+
+export interface BackgroundImagePreviewProps {
+    class: string;
+    style: string;
+    image: string;
+    resizeMode: ResizeModeEnum;
+    opacity: number | null;
+    content: { widgetCount: number; renderer: Component };
 }

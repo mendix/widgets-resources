@@ -21,6 +21,8 @@ exports[`Color Picker renders 1`] = `
   />
   <View
     accessible={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -903,6 +905,8 @@ exports[`Color Picker renders 1`] = `
   </View>
   <View
     accessible={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1785,6 +1789,8 @@ exports[`Color Picker renders 1`] = `
   </View>
   <View
     accessible={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -2689,6 +2695,8 @@ exports[`Color Picker renders with alpha slider 1`] = `
   />
   <View
     accessible={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -3571,6 +3579,8 @@ exports[`Color Picker renders with alpha slider 1`] = `
   </View>
   <View
     accessible={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -4453,6 +4463,8 @@ exports[`Color Picker renders with alpha slider 1`] = `
   </View>
   <View
     accessible={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -5335,6 +5347,8 @@ exports[`Color Picker renders with alpha slider 1`] = `
   </View>
   <View
     accessible={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -6240,6 +6254,8 @@ exports[`Color Picker renders with custom style 1`] = `
   />
   <View
     accessible={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -7122,6 +7138,8 @@ exports[`Color Picker renders with custom style 1`] = `
   </View>
   <View
     accessible={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -8004,6 +8022,8 @@ exports[`Color Picker renders with custom style 1`] = `
   </View>
   <View
     accessible={true}
+    focusable={false}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}

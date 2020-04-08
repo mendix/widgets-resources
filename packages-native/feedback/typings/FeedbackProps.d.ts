@@ -1,17 +1,22 @@
 /**
  * This file was generated from Feedback.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
 import { DynamicValue, NativeImage } from "mendix";
 
-interface CommonProps<Style> {
+export interface FeedbackProps<Style> {
     name: string;
     style: Style[];
-}
-
-export interface FeedbackProps<Style> extends CommonProps<Style> {
     sprintrapp: string;
     allowScreenshot: boolean;
     logo?: DynamicValue<NativeImage>;
+}
+
+export interface FeedbackPreviewProps {
+    class: string;
+    style: string;
+    sprintrapp: string;
+    allowScreenshot: boolean;
+    logo: string;
 }
