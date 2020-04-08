@@ -22,7 +22,7 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
     const defaultCenterLocation: google.maps.LatLngLiteral = { lat: 51.906688, lng: 4.48837 };
     let bounds!: google.maps.LatLngBounds;
 
-    const [markers, setMarkers] = useState<google.maps.Marker[]>([]); // Used to manage and remove markers from the map
+    const markers = useRef<google.maps.Marker[]>([]); // Used to manage and remove markers from the map
     const [validationMessage, setValidationMessage] = useState(props.validationMessage);
 
     useEffect(() => {
@@ -59,19 +59,17 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
     };
 
     const addMarkers = (): void => {
-        markers.forEach(marker => marker.setMap(null));
+        markers.current.forEach(marker => marker.setMap(null));
+        markers.current = [];
         if (props.locations && props.locations.length > 0) {
-            setMarkers([]);
             bounds = new google.maps.LatLngBounds();
-            setMarkers(
-                props.locations.reduce<google.maps.Marker[]>((markerArray, currentLocation) => {
-                    const marker = addMarker(currentLocation);
-                    if (marker) {
-                        markerArray.push(marker);
-                    }
-                    return markerArray;
-                }, [])
-            );
+            markers.current = props.locations.reduce<google.maps.Marker[]>((markerArray, currentLocation) => {
+                const marker = addMarker(currentLocation);
+                if (marker) {
+                    markerArray.push(marker);
+                }
+                return markerArray;
+            }, []);
         }
         addCurrentLocation();
         updateCamera();
@@ -81,7 +79,7 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
         if (props.currentLocation) {
             const currentLocationMarker = addMarker(props.currentLocation);
             if (currentLocationMarker) {
-                markers.push(currentLocationMarker);
+                markers.current.push(currentLocationMarker);
             }
         }
     };
@@ -156,8 +154,8 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
 
     const getCenter = (): google.maps.LatLngLiteral => {
         return {
-            lat: markers[0]?.getPosition()?.lat() ?? defaultCenterLocation.lat,
-            lng: markers[0]?.getPosition()?.lng() ?? defaultCenterLocation.lng
+            lat: markers.current?.[0]?.getPosition()?.lat() ?? defaultCenterLocation.lat,
+            lng: markers.current?.[0]?.getPosition()?.lng() ?? defaultCenterLocation.lng
         };
     };
 

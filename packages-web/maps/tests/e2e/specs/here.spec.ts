@@ -16,8 +16,6 @@ describe("OpenStree Maps", () => {
         it("check the number of locations", () => {
             mapPage.leafletMap.waitForDisplayed();
 
-            expect(mapPage.leafletMap).toBeDefined();
-
             const markers = mapPage.leafletMarkers;
 
             expect(markers.length).toBe(3);
@@ -37,8 +35,6 @@ describe("OpenStree Maps", () => {
 
         it("check the number of locations", () => {
             mapPage.leafletMap.waitForDisplayed();
-
-            expect(mapPage.leafletMap).toBeDefined();
 
             const markers = mapPage.leafletMarkers;
 
@@ -60,11 +56,27 @@ describe("OpenStree Maps", () => {
         it("check the number of locations", () => {
             mapPage.leafletMap.waitForDisplayed();
 
-            expect(mapPage.leafletMap).toBeDefined();
-
             const markers = mapPage.leafletMarkers;
 
             expect(markers.length).toBe(2);
+        });
+    });
+
+    describe("on click", () => {
+        beforeAll(() => {
+            page.open("p/here-onclick");
+        });
+
+        it("should click on first marker", () => {
+            mapPage.leafletMap.waitForDisplayed();
+            const marker = mapPage.leafletFirstMarker;
+            marker.waitForDisplayed();
+
+            browser.execute(e => e.click(), marker);
+
+            mapPage.dialog.waitForDisplayed();
+
+            expect(mapPage.dialog.getText()).toBe("Clicked on static marker");
         });
     });
 });

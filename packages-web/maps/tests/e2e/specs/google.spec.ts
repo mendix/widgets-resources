@@ -16,11 +16,9 @@ describe("Google Maps", () => {
         it("check the number of locations", () => {
             mapPage.googleMap.waitForDisplayed();
 
-            expect(mapPage.googleMap).toBeDefined();
-
             const markers = mapPage.googleMarkers;
 
-            expect(markers.length).toBe(6);
+            expect(markers.length).toBe(3);
         });
     });
 
@@ -38,11 +36,9 @@ describe("Google Maps", () => {
         it("check the number of locations", () => {
             mapPage.googleMap.waitForDisplayed();
 
-            expect(mapPage.googleMap).toBeDefined();
-
             const markers = mapPage.googleMarkers;
 
-            expect(markers.length).toBe(2);
+            expect(markers.length).toBe(1);
         });
     });
 
@@ -60,11 +56,9 @@ describe("Google Maps", () => {
         it("check the number of locations", () => {
             mapPage.googleMap.waitForDisplayed();
 
-            expect(mapPage.googleMap).toBeDefined();
-
             const markers = mapPage.googleMarkers;
 
-            expect(markers.length).toBe(4);
+            expect(markers.length).toBe(2);
         });
     });
 });
