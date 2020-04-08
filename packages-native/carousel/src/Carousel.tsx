@@ -133,7 +133,9 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement => {
                 /* library ignores width/height if its vertical/horizontal */
                 sliderDimensions.slide.width > 0 &&
                 sliderDimensions.slider.width > 0 &&
-                props.contentSource.items!.length > 0 && (
+                props.contentSource &&
+                props.contentSource.items &&
+                props.contentSource.items?.length > 0 && (
                     <Fragment>
                         <NativeCarousel
                             testID={props.name}
@@ -142,7 +144,7 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement => {
                             firstItem={0}
                             useScrollView
                             enableSnap
-                            data={props.contentSource.items!}
+                            data={props.contentSource.items}
                             renderItem={renderItem}
                             sliderWidth={sliderDimensions.slider.width}
                             sliderHeight={sliderDimensions.slider.height}
