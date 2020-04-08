@@ -112,9 +112,9 @@ export interface MapsContainerProps {
     fullScreenControl: boolean;
     rotateControl: boolean;
     widthUnit: WidthUnitEnum;
-    width: BigJs.Big;
+    width: number;
     heightUnit: HeightUnitEnum;
-    height: BigJs.Big;
+    height: number;
     advanced: boolean;
     mapProvider: MapProviderEnum;
     mapStyles?: string;

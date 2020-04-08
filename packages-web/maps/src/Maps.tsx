@@ -37,9 +37,9 @@ const Maps = (props: MapsContainerProps): ReactNode => {
             zoomLevel={translateZoom(props.zoom)}
             mapsToken={props.apiKey && props.apiKey.status === ValueStatus.Available ? props.apiKey.value : undefined}
             widthUnit={props.widthUnit}
-            width={Number(props.width)}
+            width={props.width}
             heightUnit={props.heightUnit}
-            height={Number(props.height)}
+            height={props.height}
             showCurrentLocation={props.showCurrentLocation}
             currentLocation={currentLocation}
             optionZoomControl={props.optionZoomControl}
