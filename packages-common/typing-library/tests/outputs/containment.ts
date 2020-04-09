@@ -3,7 +3,7 @@ export const containmentWebOutput = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { Component, CSSProperties, ReactNode } from "react";
+import { ComponentType, CSSProperties, ReactNode } from "react";
 import { ActionValue, EditableValue } from "mendix";
 
 export interface MyWidgetContainerProps {
@@ -19,7 +19,7 @@ export interface MyWidgetContainerProps {
 export interface MyWidgetPreviewProps {
     class: string;
     style: string;
-    content: { widgetCount: number; renderer: Component };
+    content: { widgetCount: number; renderer: ComponentType };
     description: string;
     action: {} | null;
 }

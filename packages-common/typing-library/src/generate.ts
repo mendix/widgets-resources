@@ -41,7 +41,7 @@ export function generateForWidget(widgetXml: WidgetXml, widgetName: string) {
         .join("\n\n");
 
     const imports = [
-        generateImport("react", generatedTypesCode, ["Component", "CSSProperties", "ReactNode"]),
+        generateImport("react", generatedTypesCode, ["ComponentType", "CSSProperties", "ReactNode"]),
         generateImport("mendix", generatedTypesCode, mxExports),
     ]
         .filter((line) => line)
