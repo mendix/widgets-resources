@@ -1,52 +1,52 @@
 {
-    "name": "color-picker-web",
-    "widgetName": "ColorPicker",
-    "version": "1.1.3",
-    "description": "Change a color using a color input",
-    "copyright": "Mendix BV",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/mendix/widgets-resources.git"
-    },
-    "scripts": {
-        "start": ".\"/node_modules/.bin/utils-react-widgets\" start",
-        "dev": ".\"/node_modules/.bin/utils-react-widgets\" dev",
-        "test": "npm run test:unit",
-        "test:unit": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
-        "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://colorpicker.mxapps.io ../../scripts/test/projectup.sh",
-        "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://colorpicker.mxapps.io ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
-        "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
-        "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-        "lint:fix": "npm run lint -- --fix",
-        "build": ".\"/node_modules/.bin/utils-react-widgets\" build",
-        "release": ".\"/node_modules/.bin/utils-react-widgets\" release",
-        "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
-    },
-    "config": {
-        "mendixHost": "http://localhost:8080",
-        "developmentPort": 3000,
-        "testProjectId": "1f883f9b-3d2b-4a6e-9d0e-4883978c8d83",
-        "testProjects": [
-            {
-                "revision": 238,
-                "branch": "trunk",
-                "path": "./tests/TestProjects/Mendix7/"
-            },
-            {
-                "revision": 243,
-                "branch": "MX_8",
-                "path": "./tests/TestProjects/Mendix8/"
-            }
-        ]
-    },
-    "license": "Apache-2.0",
-    "devDependencies": {
-        "@types/classnames": "^2.2.7",
-        "@types/react-color": "^2.14.1",
-        "@widgets-resources/utils-react-widgets": "0.0.1"
-    },
-    "dependencies": {
-        "classnames": "^2.2.6",
-        "react-color": "^2.17.0"
-    }
+  "name": "color-picker-web",
+  "widgetName": "ColorPicker",
+  "version": "1.1.4",
+  "description": "Change a color using a color input",
+  "copyright": "Mendix BV",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "scripts": {
+    "start": ".\"/node_modules/.bin/utils-react-widgets\" start",
+    "dev": ".\"/node_modules/.bin/utils-react-widgets\" dev",
+    "test": "npm run test:unit",
+    "test:unit": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
+    "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://colorpicker.mxapps.io ../../scripts/test/projectup.sh",
+    "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://colorpicker.mxapps.io ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint:fix": "npm run lint -- --fix",
+    "build": ".\"/node_modules/.bin/utils-react-widgets\" build",
+    "release": ".\"/node_modules/.bin/utils-react-widgets\" release",
+    "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+  },
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000,
+    "testProjectId": "1f883f9b-3d2b-4a6e-9d0e-4883978c8d83",
+    "testProjects": [
+      {
+        "revision": 238,
+        "branch": "trunk",
+        "path": "./tests/TestProjects/Mendix7/"
+      },
+      {
+        "revision": 243,
+        "branch": "MX_8",
+        "path": "./tests/TestProjects/Mendix8/"
+      }
+    ]
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/classnames": "^2.2.7",
+    "@types/react-color": "^2.14.1",
+    "@widgets-resources/utils-react-widgets": "0.0.1"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "react-color": "^2.17.0"
+  }
 }

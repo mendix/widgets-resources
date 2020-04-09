@@ -94,7 +94,7 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         });
     }
 
-    componentWillReceiveProps(newProps: RangeSliderContainerProps): void {
+    UNSAFE_componentWillReceiveProps(newProps: RangeSliderContainerProps): void {
         this.resetSubscriptions(newProps.mxObject);
         this.setState(this.updateValues(newProps.mxObject));
     }

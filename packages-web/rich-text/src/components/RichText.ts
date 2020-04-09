@@ -47,7 +47,7 @@ export class RichText extends Component<RichTextProps> {
     private textChanged = false;
     private undoDefault = "<p><br></p>"; // Text left in editor when ctrl + z clears all content
 
-    componentWillMount(): void {
+    UNSAFE_componentWillMount(): void {
         this.handleSelectionChange = this.handleSelectionChange.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
         this.setQuillNode = this.setQuillNode.bind(this);

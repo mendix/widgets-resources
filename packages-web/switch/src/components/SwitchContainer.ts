@@ -67,7 +67,7 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
         return this.renderSwitch();
     }
 
-    componentWillReceiveProps(newProps: SwitchContainerProps): void {
+    UNSAFE_componentWillReceiveProps(newProps: SwitchContainerProps): void {
         this.resetSubscriptions(newProps.mxObject);
         this.setState(this.updateState(newProps.mxObject));
     }

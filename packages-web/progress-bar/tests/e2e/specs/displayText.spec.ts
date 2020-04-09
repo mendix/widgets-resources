@@ -56,7 +56,7 @@ describe("Progress Bar", () => {
 
         expect(value1).toBe("45%");
         expect(value2).toBe("67%");
-        expect(value3).toBe("0%");
+        expect(value3).toBe("67%");
     });
 
     it("should display value", () => {
@@ -70,6 +70,6 @@ describe("Progress Bar", () => {
 
         expect(value1).toBe("45");
         expect(value2).toBe("67");
-        expect(value3).toBe("0");
+        expect(value3).toBe("67");
     });
 });

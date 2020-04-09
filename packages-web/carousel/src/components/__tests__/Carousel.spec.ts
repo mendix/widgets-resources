@@ -177,12 +177,12 @@ describe("Carousel", () => {
 
         it("removes registered events on carousel items when updated", () => {
             const carouselInstance = carousel.instance() as any;
-            carouselInstance.componentWillReceiveProps({ alertMessage: "", images: [] });
+            carouselInstance.UNSAFE_componentWillReceiveProps({ alertMessage: "", images: [] });
             spyOn(carouselItem1Mock, "removeEventListener").and.callThrough();
             spyOn(carouselInstance, "removeEvents").and.callThrough();
 
             carouselInstance.addCarouselItem(carouselItem1Mock);
-            carouselInstance.componentWillReceiveProps({ alertMessage: "", images: [] });
+            carouselInstance.UNSAFE_componentWillReceiveProps({ alertMessage: "", images: [] });
 
             expect(carouselInstance.removeEvents).toHaveBeenCalled();
             expect(carouselItem1Mock.removeEventListener).toHaveBeenCalledTimes(5);

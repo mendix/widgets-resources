@@ -84,7 +84,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         });
     }
 
-    componentWillReceiveProps(newProps: ImageViewerContainerProps): void {
+    UNSAFE_componentWillReceiveProps(newProps: ImageViewerContainerProps): void {
         this.resetSubscriptions(newProps.mxObject);
         this.setState({
             alertMessage: ImageViewerContainer.validateProps(newProps)

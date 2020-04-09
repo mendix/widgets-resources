@@ -89,7 +89,7 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         });
     }
 
-    componentWillReceiveProps(newProps: SliderContainerProps): void {
+    UNSAFE_componentWillReceiveProps(newProps: SliderContainerProps): void {
         this.resetSubscriptions(newProps.mxObject);
         this.setState(this.updateValues(newProps.mxObject));
     }

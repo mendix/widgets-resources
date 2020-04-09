@@ -52,7 +52,7 @@ export class Maps extends Component<Props, State> {
         }
     }
 
-    componentWillReceiveProps(): void {
+    UNSAFE_componentWillReceiveProps(): void {
         if (this.state.status === Status.CameraReady) {
             this.parseMarkers();
         }

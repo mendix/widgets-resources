@@ -50,7 +50,7 @@ class RichTextContainer extends Component<RichTextContainerProps, RichTextContai
         this.resetSubscriptions(props.mxObject);
     }
 
-    componentWillMount(): void {
+    UNSAFE_componentWillMount(): void {
         this.handleOnChange = this.handleOnChange.bind(this);
         this.executeOnChangeAction = this.executeOnChangeAction.bind(this);
         this.handleSubscriptions = this.handleSubscriptions.bind(this);
@@ -84,7 +84,7 @@ class RichTextContainer extends Component<RichTextContainerProps, RichTextContai
         );
     }
 
-    componentWillReceiveProps(newProps: RichTextContainerProps): void {
+    UNSAFE_componentWillReceiveProps(newProps: RichTextContainerProps): void {
         if (newProps.mxObject !== this.props.mxObject) {
             this.resetSubscriptions(newProps.mxObject);
             this.defaultValue = getValue(newProps.stringAttribute, "", newProps.mxObject) as string;

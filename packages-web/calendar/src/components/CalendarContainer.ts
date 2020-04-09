@@ -40,7 +40,7 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         this.resetSubscriptions(props.mxObject);
     }
 
-    componentWillMount(): void {
+    UNSAFE_componentWillMount(): void {
         moment.updateLocale(window.mx.session.sessionData.locale.code, {
             week: { dow: window.mx.session.sessionData.locale.firstDayOfWeek, doy: 6 }
         });
@@ -91,7 +91,7 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         this.subscriptionEventHandles.forEach(window.mx.data.unsubscribe);
     }
 
-    componentWillReceiveProps(nextProps: Container.CalendarContainerProps): void {
+    UNSAFE_componentWillReceiveProps(nextProps: Container.CalendarContainerProps): void {
         if (nextProps.mxObject) {
             if (!this.state.alertMessage) {
                 this.loadEvents(nextProps.mxObject);
