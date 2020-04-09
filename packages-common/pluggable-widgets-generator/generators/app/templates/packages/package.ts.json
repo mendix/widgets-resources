@@ -28,7 +28,7 @@
   },
   "license": "<%- license %>",
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^8.7.0",
+    "@mendix/pluggable-widgets-tools": "^8.9.0",
     "@types/big.js": "^4.0.5",
     "@types/classnames": "^2.2.4",<% if (e2eTests) { %>
     "@types/webdriverio": "^4.13.0",<% } %><% if (unitTests || e2eTests) { %>
@@ -36,9 +36,9 @@
     "@types/enzyme-adapter-react-16": "^1.0.2",<% } %><% if (e2eTests) { %>
     "@types/jasmine": "^3.4.0",<% } %>
     "@types/jest": "^24.0.0",
-    "@types/react": "^16.8.17",
-    "@types/react-dom": "^16.8.4",
-    "@types/react-test-renderer": "^16.8.1"
+    "@types/react": "~16.9.0",
+    "@types/react-dom": "~16.9.0",
+    "@types/react-test-renderer": "~16.9.0"
   },
   "dependencies": {
     "big.js": "^5.2.2",
