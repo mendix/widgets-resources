@@ -12,7 +12,7 @@ class ProgressBar {
     }
 
     get progressBar(): WebdriverIO.Element {
-        return this.element.$(".progress-bar.progress-bar-default");
+        return this.element.$(".progress-bar");
     }
 
     get value(): string {
