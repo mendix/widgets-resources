@@ -3,7 +3,7 @@ export const datasourceWebOutput = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { Component, CSSProperties, ReactNode } from "react";
+import { ComponentType, CSSProperties, ReactNode } from "react";
 import { ActionValue, EditableValue, ListValue, ObjectItem } from "mendix";
 
 export interface DatasourcePropertiesType {
@@ -13,7 +13,7 @@ export interface DatasourcePropertiesType {
 }
 
 export interface DatasourcePropertiesPreviewType {
-    contentAttribute: { widgetCount: number; renderer: Component };
+    contentAttribute: { widgetCount: number; renderer: ComponentType };
     markerAttribute: string;
     actionAttribute: {} | null;
 }
@@ -36,7 +36,7 @@ export interface MyWidgetPreviewProps {
     class: string;
     style: string;
     contentSource: {} | null;
-    content: { widgetCount: number; renderer: Component };
+    content: { widgetCount: number; renderer: ComponentType };
     markerDataAttribute: string;
     actionAttribute: {} | null;
     datasourceProperties: DatasourcePropertiesPreviewType[];
