@@ -10,6 +10,8 @@ describe("Image viewer", () => {
         imageViewer.element.waitForDisplayed();
         imageViewer.element.click();
 
+        browser.pause(1000);
+
         page.modalDialog.waitForDisplayed();
         expect(page.modalDialog.getText()).toContain("You clicked this image");
     });
@@ -21,6 +23,8 @@ describe("Image viewer", () => {
         imageViewer.element.waitForDisplayed();
         imageViewer.element.click();
 
+        browser.pause(1000);
+
         page.modalDialog.waitForDisplayed();
         expect(page.modalDialog.getText()).toContain(html.dynamicImage);
     });
@@ -31,6 +35,8 @@ describe("Image viewer", () => {
         const imageViewer = new ImageViewer("imageViewer2");
         imageViewer.element.waitForDisplayed();
         imageViewer.element.click();
+
+        browser.pause(1000);
 
         page.modalDialog.waitForDisplayed();
         expect(page.modalDialogHeader.getText()).toBe("GazaLand");
