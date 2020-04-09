@@ -196,8 +196,8 @@ class MxGenerator extends Generator {
                         "src/" + widgetName + ".tsx");
             }
             if(this.widget.isWeb) {
-                this._copyWidgetFiles(this.widget.source + "src/WidgetName.webmodeler.tsx.ejs",
-                    "src/" + widgetName + ".webmodeler.tsx");
+                this._copyWidgetFiles(this.widget.source + "src/WidgetName.editorPreview.tsx.ejs",
+                    "src/" + widgetName + ".editorPreview.tsx");
                 if (this.widget.fullTemplate) {
                     this._copyWidgetFiles(this.widget.source + `${widgetSrcFolder}Alert.tsx.ejs`,
                         `${widgetSrcFolder}Alert.tsx`
@@ -217,8 +217,8 @@ class MxGenerator extends Generator {
                         "src/" + widgetName + ".jsx");
             }
             if(this.widget.isWeb) {
-                this._copyWidgetFiles(this.widget.source + "src/WidgetName.webmodeler.jsx.ejs",
-                    "src/" + widgetName + ".webmodeler.jsx");
+                this._copyWidgetFiles(this.widget.source + "src/WidgetName.editorPreview.jsx.ejs",
+                    "src/" + widgetName + ".editorPreview.jsx");
                 if (this.widget.fullTemplate) {
                     this._copyWidgetFiles(this.widget.source + `${widgetSrcFolder}Alert.jsx.ejs`,
                         `${widgetSrcFolder}Alert.jsx`
