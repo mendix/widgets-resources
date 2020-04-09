@@ -26,10 +26,25 @@ export class preview extends Component<WidgetNamePreviewProps> {
             bootstrapStyle: props.bootstrapStyle,
             className: props.class,
             clickable: false,
-            style: props.styleObject,
+            style: this.parseStyle(props.style),
             defaultValue: props.packageNameValue ? props.packageNameValue : "",
             value: props.valueAttribute
         };
+    }
+
+    private parseStyle(style = ""): { [key: string]: string } {
+        try {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+            return styleObject;
+            }, {});
+        } catch (_) {
+            return {};
+        }
     }
 }
 
