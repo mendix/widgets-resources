@@ -1,9 +1,11 @@
-import { DynamicMarkersType, MarkersType } from "../../typings";
+import { DynamicMarkersType, MarkersType, ModeledMarker } from "../../typings";
 import { ObjectItem, ValueStatus } from "mendix";
-import { ModeledMarker } from "../../typings";
 
 export const analyzeStaticMarker = (marker: MarkersType): ModeledMarker => {
-    let address, title, latitude, longitude;
+    let address;
+    let title;
+    let latitude;
+    let longitude;
     if (marker.dataSourceType === "static") {
         title = marker.title;
         if (marker.locationType === "address") {
@@ -44,7 +46,9 @@ export const analyzeStaticMarker = (marker: MarkersType): ModeledMarker => {
 
 export const analyzeDynamicMarker = (marker: DynamicMarkersType, item: ObjectItem): ModeledMarker => {
     const { locationType, address: addr, latitude: lat, longitude: lng, onClickAttribute, title } = marker;
-    let address, latitude, longitude;
+    let address;
+    let latitude;
+    let longitude;
     if (locationType === "address") {
         address = addr ? addr(item).value : undefined;
     } else {

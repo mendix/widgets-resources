@@ -45,10 +45,12 @@ export const useLocationResolver = (
 
 const isIdenticalLocations = (previousLocations: ModeledMarker[], newLocations: ModeledMarker[]): boolean => {
     const previous = previousLocations.map(l => {
+        // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
         const { action, ...rest } = l;
         return rest;
     });
     const news = newLocations.map(l => {
+        // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
         const { action, ...rest } = l;
         return rest;
     });

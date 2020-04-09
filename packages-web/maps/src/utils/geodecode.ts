@@ -6,6 +6,7 @@ export interface LatLng {
 }
 
 export const analyzeLocations = (locations?: ModeledMarker[], mapToken?: string): Promise<Marker[]> => {
+    // eslint-disable-next-line no-async-promise-executor
     return new Promise<Marker[]>(async (resolve, reject) => {
         const unknownLatitudeLongitudes = locations?.filter(l => l.address && !l.latitude && !l.longitude) || [];
         const latitudeLongitudes = locations?.filter(l => !l.address && l.latitude && l.longitude) || [];
@@ -52,7 +53,7 @@ const geocode = (address: string, mapToken: string): Promise<LatLng> => {
     if (!window.mxGMLocationCache) {
         window.mxGMLocationCache = {};
     }
-    if (window.mxGMLocationCache.hasOwnProperty(address)) {
+    if (window.mxGMLocationCache[address]) {
         return window.mxGMLocationCache[address];
     } else {
         return (window.mxGMLocationCache[address] = queuedGeocode(address, mapToken));

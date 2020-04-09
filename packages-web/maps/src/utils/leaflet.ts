@@ -5,8 +5,8 @@ export const customUrls = {
 };
 
 export const mapAttr = {
-    openStreetMapAttr: `&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors`,
-    mapboxAttr: `Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors,
-            <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>`,
-    hereMapsAttr: `Map &copy; 1987-2014 <a href="https://developer.here.com">HERE</a>`
+    openStreetMapAttr: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap</a> contributors",
+    mapboxAttr:
+        "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery © <a href='https://www.mapbox.com/'>Mapbox</a>",
+    hereMapsAttr: "Map &copy; 1987-2014 <a href='https://developer.here.com'>HERE</a>"
 };
