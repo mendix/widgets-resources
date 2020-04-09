@@ -84,7 +84,7 @@ export default class StarRatingContainer extends Component<ContainerProps, Conta
         }
     }
 
-    componentWillReceiveProps(nextProps: ContainerProps): void {
+    UNSAFE_componentWillReceiveProps(nextProps: ContainerProps): void {
         this.subscribe(nextProps.mxObject);
         this.updateRating(nextProps.mxObject);
     }

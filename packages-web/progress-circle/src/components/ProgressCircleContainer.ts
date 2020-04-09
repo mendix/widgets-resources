@@ -95,7 +95,7 @@ export default class ProgressCircleContainer extends Component<ContainerProps, C
         });
     }
 
-    componentWillReceiveProps(newProps: ContainerProps): void {
+    UNSAFE_componentWillReceiveProps(newProps: ContainerProps): void {
         this.resetSubscription(newProps.mxObject);
         this.updateAttributeValues(newProps.mxObject);
     }

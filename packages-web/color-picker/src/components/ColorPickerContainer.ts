@@ -104,7 +104,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         });
     }
 
-    componentWillReceiveProps(newProps: ColorPickerContainerProps): void {
+    UNSAFE_componentWillReceiveProps(newProps: ColorPickerContainerProps): void {
         this.resetSubscriptions(newProps.mxObject);
         this.setState(this.validateColor(this.getValue(newProps.mxObject)));
     }

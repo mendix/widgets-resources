@@ -57,7 +57,7 @@ class SignatureContainer extends Component<SignatureContainerProps, SignatureCon
         });
     }
 
-    componentWillReceiveProps(newProps: SignatureContainerProps): void {
+    UNSAFE_componentWillReceiveProps(newProps: SignatureContainerProps): void {
         if (newProps.mxObject) {
             const alertMessage = this.validateProps(newProps.mxObject);
 

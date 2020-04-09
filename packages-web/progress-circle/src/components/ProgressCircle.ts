@@ -56,7 +56,7 @@ export class ProgressCircle extends Component<ProgressCircleProps, { alertMessag
         );
     }
 
-    componentWillReceiveProps(newProps: ProgressCircleProps): void {
+    UNSAFE_componentWillReceiveProps(newProps: ProgressCircleProps): void {
         if (newProps.alertMessage !== this.props.alertMessage) {
             this.setState({ alertMessage: newProps.alertMessage });
         }

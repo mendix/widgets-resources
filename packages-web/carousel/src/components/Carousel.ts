@@ -116,7 +116,7 @@ class Carousel extends Component<CarouselProps, CarouselState> {
         );
     }
 
-    componentWillReceiveProps(newProps: CarouselProps): void {
+    UNSAFE_componentWillReceiveProps(newProps: CarouselProps): void {
         if (this.carouselItems.length) {
             this.removeEvents();
             this.carouselItems = [];

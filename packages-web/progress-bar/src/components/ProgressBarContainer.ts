@@ -91,7 +91,7 @@ class ProgressBarContainer extends Component<ProgressBarContainerProps, Progress
         });
     }
 
-    componentWillReceiveProps(newProps: ProgressBarContainerProps): void {
+    UNSAFE_componentWillReceiveProps(newProps: ProgressBarContainerProps): void {
         this.resetSubscription(newProps.mxObject);
         this.setState(this.updateValues(newProps.mxObject));
     }

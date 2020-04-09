@@ -85,7 +85,7 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
         });
     }
 
-    componentWillReceiveProps(nextProps: CarouselContainerProps): void {
+    UNSAFE_componentWillReceiveProps(nextProps: CarouselContainerProps): void {
         if (!this.widgetId) {
             const domNode: any = findDOMNode(this);
             this.widgetId = domNode.getAttribute("widgetId") || undefined;

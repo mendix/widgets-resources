@@ -68,7 +68,7 @@ export class Signature extends PureComponent<SignatureProps> {
         }
     }
 
-    componentWillReceiveProps(nextProps: SignatureProps): void {
+    UNSAFE_componentWillReceiveProps(nextProps: SignatureProps): void {
         if (this.signaturePad) {
             const { clearSignature, readOnly } = this.props;
             if (nextProps.clearSignature !== clearSignature && clearSignature) {

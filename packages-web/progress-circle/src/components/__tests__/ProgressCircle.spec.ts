@@ -78,7 +78,7 @@ describe("ProgressCircle", () => {
         const progress = renderProgressCircle({ value: 80, circleThickness: 50 });
         const progressInstance = progress.instance() as ProgressCircle;
         progressInstance.componentDidMount();
-        progressInstance.componentWillReceiveProps({ circleThickness: 10 });
+        progressInstance.UNSAFE_componentWillReceiveProps({ circleThickness: 10 });
 
         expect(destroy).toHaveBeenCalled();
         expect(progressbar.Circle).toHaveBeenCalledTimes(2);
@@ -94,7 +94,7 @@ describe("ProgressCircle", () => {
         });
         const progressInstance = progress.instance() as ProgressCircle;
         progressInstance.componentDidMount();
-        progressInstance.componentWillReceiveProps({ value: 60, alertMessage: "" });
+        progressInstance.UNSAFE_componentWillReceiveProps({ value: 60, alertMessage: "" });
 
         expect(progress.props().alertMessage).toEqual("");
     });
