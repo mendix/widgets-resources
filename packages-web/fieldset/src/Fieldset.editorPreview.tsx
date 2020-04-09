@@ -4,8 +4,6 @@ import { parseStyle } from "@widgets-resources/piw-utils";
 import { Fieldset } from "./components/Fieldset";
 import { FieldsetPreviewProps } from "../typings/FieldsetProps";
 
-declare function require(name: string): string;
-
 export const preview = (props: FieldsetPreviewProps): ReactElement => {
     const { class: className, legend } = props;
     const style = parseStyle(props.style);
@@ -19,7 +17,3 @@ export const preview = (props: FieldsetPreviewProps): ReactElement => {
         </Fieldset>
     );
 };
-
-export function getPreviewCss(): string {
-    return require("./ui/Fieldset.editorPreview.css");
-}
