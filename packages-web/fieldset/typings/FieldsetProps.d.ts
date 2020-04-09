@@ -1,20 +1,16 @@
 /**
  * This file was generated from Fieldset.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
-import { CSSProperties } from "react";
+import { ComponentType, CSSProperties, ReactNode } from "react";
 import { DynamicValue } from "mendix";
-import { ReactNode } from "react";
 
-interface CommonProps {
+export interface FieldsetContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex: number;
-}
-
-export interface FieldsetContainerProps extends CommonProps {
     legend?: DynamicValue<string>;
     content: ReactNode;
 }
@@ -22,12 +18,6 @@ export interface FieldsetContainerProps extends CommonProps {
 export interface FieldsetPreviewProps {
     class: string;
     style: string;
-    styleObject: CSSProperties;
-    legend?: string;
-    content: ReactNode;
-}
-
-export interface VisibilityMap {
-    legend: boolean;
-    content: boolean;
+    legend: string;
+    content: { widgetCount: number; renderer: ComponentType };
 }

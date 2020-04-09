@@ -1,25 +1,18 @@
-import { createElement, ReactElement, ComponentType } from "react";
+import { createElement, ReactElement } from "react";
+import { parseStyle } from "@widgets-resources/piw-utils";
 
 import { Fieldset } from "./components/Fieldset";
 import { FieldsetPreviewProps } from "../typings/FieldsetProps";
 
 declare function require(name: string): string;
 
-// Temporary interface to fix incorrect widgets property typing for preview ("renderer: ReactNode" should be "renderer: ComponentType")
-interface PreviewProps extends FieldsetPreviewProps {
-    content: {
-        widgetCount: number;
-        renderer: ComponentType;
-    };
-}
-
-export const preview = (props: PreviewProps): ReactElement => {
-    const { class: className, styleObject, legend, content } = props;
-
-    const ContentRenderer = content.renderer;
+export const preview = (props: FieldsetPreviewProps): ReactElement => {
+    const { class: className, legend } = props;
+    const style = parseStyle(props.style);
+    const ContentRenderer = props.content.renderer;
 
     return (
-        <Fieldset className={className} style={styleObject} legend={legend}>
+        <Fieldset className={className} style={style} legend={legend}>
             <ContentRenderer>
                 <div />
             </ContentRenderer>
