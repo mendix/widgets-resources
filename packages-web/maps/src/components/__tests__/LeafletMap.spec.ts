@@ -20,8 +20,7 @@ describe("Leaflet maps", () => {
         mapsToken: "",
         showCurrentLocation: false,
         attributionControl: false,
-        mapProvider: "openStreet",
-        validationMessage: ""
+        mapProvider: "openStreet"
     };
 
     const renderGoogleMap = (props: LeafletProps): ShallowWrapper<LeafletProps, any> =>

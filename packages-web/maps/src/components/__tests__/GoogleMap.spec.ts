@@ -25,8 +25,7 @@ describe("Google maps", () => {
         mapsToken: "",
         mapTypeControl: false,
         rotateControl: false,
-        showCurrentLocation: false,
-        validationMessage: ""
+        showCurrentLocation: false
     };
 
     beforeEach(() => {
