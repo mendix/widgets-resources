@@ -6,30 +6,16 @@
 import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue, ListValue, ObjectItem, WebImage } from "mendix";
 
-export type DataSourceTypeEnum = "static" | "dynamic";
-
 export type LocationTypeEnum = "address" | "latlng";
-
-export type PropertyContextEnum = "attribute" | "expression";
 
 export type MarkerStyleEnum = "default" | "image";
 
 export interface MarkersType {
-    dataSourceType: DataSourceTypeEnum;
     locationType: LocationTypeEnum;
-    propertyContext: PropertyContextEnum;
-    address?: string;
-    addressAttribute?: EditableValue<string>;
-    addressExpression?: DynamicValue<string>;
-    latitude: BigJs.Big;
-    latitudeAttribute?: EditableValue<BigJs.Big>;
-    latitudeExpression?: DynamicValue<BigJs.Big>;
-    longitude: BigJs.Big;
-    longitudeAttribute?: EditableValue<BigJs.Big>;
-    longitudeExpression?: DynamicValue<BigJs.Big>;
-    title?: string;
-    titleAttribute?: EditableValue<string>;
-    titleExpression?: DynamicValue<string>;
+    address?: DynamicValue<string>;
+    latitude?: DynamicValue<string>;
+    longitude?: DynamicValue<string>;
+    title?: DynamicValue<string>;
     onClick?: ActionValue;
     markerStyle: MarkerStyleEnum;
     customMarker?: DynamicValue<WebImage>;
@@ -60,21 +46,11 @@ export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParen
 export type MapProviderEnum = "googleMaps" | "openStreet" | "mapBox" | "hereMaps";
 
 export interface MarkersPreviewType {
-    dataSourceType: DataSourceTypeEnum;
     locationType: LocationTypeEnum;
-    propertyContext: PropertyContextEnum;
     address: string;
-    addressAttribute: string;
-    addressExpression: string;
-    latitude: number | null;
-    latitudeAttribute: string;
-    latitudeExpression: string;
-    longitude: number | null;
-    longitudeAttribute: string;
-    longitudeExpression: string;
+    latitude: string;
+    longitude: string;
     title: string;
-    titleAttribute: string;
-    titleExpression: string;
     onClick: {} | null;
     markerStyle: MarkerStyleEnum;
     customMarker: string;

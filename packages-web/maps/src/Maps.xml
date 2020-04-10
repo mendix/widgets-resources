@@ -17,14 +17,6 @@
                     <description/>
                     <properties>
                         <propertyGroup caption="Locations">
-                            <property key="dataSourceType" type="enumeration" defaultValue="static">
-                                <caption>Data source</caption>
-                                <description/>
-                                <enumerationValues>
-                                    <enumerationValue key="static">Static</enumerationValue>
-                                    <enumerationValue key="dynamic">Dynamic</enumerationValue>
-                                </enumerationValues>
-                            </property>
                             <property key="locationType" type="enumeration" defaultValue="address">
                                 <caption>Location</caption>
                                 <description/>
@@ -33,81 +25,25 @@
                                     <enumerationValue key="latlng">Based on latitude and longitude</enumerationValue>
                                 </enumerationValues>
                             </property>
-                            <property key="propertyContext" type="enumeration" defaultValue="attribute">
-                                <caption>Context</caption>
-                                <description/>
-                                <enumerationValues>
-                                    <enumerationValue key="attribute">Attribute</enumerationValue>
-                                    <enumerationValue key="expression">Expression</enumerationValue>
-                                </enumerationValues>
-                            </property>
-                            <property key="address" type="string" required="false">
+                            <property key="address" type="textTemplate" required="false">
                                 <caption>Address</caption>
                                 <description/>
                             </property>
-                            <property key="addressAttribute" type="attribute" required="false">
-                                <caption>Address</caption>
-                                <description/>
-                                <attributeTypes>
-                                    <attributeType name="String"/>
-                                </attributeTypes>
-                            </property>
-                            <property key="addressExpression" type="expression" required="false">
-                                <caption>Address</caption>
-                                <description/>
-                                <returnType type="String"/>
-                            </property>
-                            <property key="latitude" type="decimal" defaultValue="0">
+                            <property key="latitude" type="textTemplate" required="false">
                                 <caption>Latitude</caption>
                                 <description/>
                             </property>
-                            <property key="latitudeAttribute" type="attribute" required="false">
-                                <caption>Latitude</caption>
-                                <description/>
-                                <attributeTypes>
-                                    <attributeType name="Decimal"/>
-                                </attributeTypes>
-                            </property>
-                            <property key="latitudeExpression" type="expression" required="false">
-                                <caption>Latitude</caption>
-                                <description/>
-                                <returnType type="Decimal"/>
-                            </property>
-                            <property key="longitude" type="decimal" defaultValue="0">
+                            <property key="longitude" type="textTemplate" required="false">
                                 <caption>Longitude</caption>
                                 <description/>
                             </property>
-                            <property key="longitudeAttribute" type="attribute" required="false">
-                                <caption>Longitude</caption>
-                                <description/>
-                                <attributeTypes>
-                                    <attributeType name="Decimal"/>
-                                </attributeTypes>
-                            </property>
-                            <property key="longitudeExpression" type="expression" required="false">
-                                <caption>Longitude</caption>
-                                <description/>
-                                <returnType type="Decimal"/>
-                            </property>
-                            <property key="title" type="string" required="false">
+                            <property key="title" type="textTemplate" required="false">
                                 <caption>Title</caption>
                                 <description/>
-                            </property>
-                            <property key="titleAttribute" type="attribute" required="false">
-                                <caption>Title</caption>
-                                <description/>
-                                <attributeTypes>
-                                    <attributeType name="String"/>
-                                </attributeTypes>
-                            </property>
-                            <property key="titleExpression" type="expression" required="false">
-                                <caption>Title</caption>
-                                <description/>
-                                <returnType type="String"/>
                             </property>
                             <property key="onClick" type="action" required="false">
                                 <caption>On click</caption>
-                                <description>Action on click</description>
+                                <description />
                             </property>
                             <property key="markerStyle" type="enumeration" defaultValue="default">
                                 <caption>Marker style</caption>
@@ -173,7 +109,7 @@
                             </property>
                             <property key="onClickAttribute" type="action" dataSource="markersDS" required="false">
                                 <caption>On click</caption>
-                                <description>Action on click</description>
+                                <description />
                             </property>
                             <property key="markerStyleDynamic" type="enumeration" defaultValue="default">
                                 <caption>Marker style</caption>
