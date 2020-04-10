@@ -33,8 +33,7 @@ export interface SharedProps extends Dimensions {
     optionScroll: boolean;
     showCurrentLocation: boolean;
     currentLocation?: Marker;
-    locations?: Marker[];
-    validationMessage?: string;
+    locations: Marker[];
     mapsToken?: string;
     className?: string;
     style?: CSSProperties;

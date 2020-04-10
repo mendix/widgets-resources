@@ -1,8 +1,7 @@
-import { createElement, ReactElement, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, useEffect, useRef } from "react";
 import classNames from "classnames";
 
 import googleApiWrapper from "./GoogleApi";
-import { Alert } from "@widgets-resources/piw-utils";
 import { getDimensions } from "../utils";
 import { Marker, SharedProps } from "../../typings";
 
@@ -23,13 +22,12 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
     let bounds!: google.maps.LatLngBounds;
 
     const markers = useRef<google.maps.Marker[]>([]); // Used to manage and remove markers from the map
-    const [validationMessage, setValidationMessage] = useState(props.validationMessage);
 
     useEffect(() => {
         if (props.scriptsLoaded) {
             createMap();
         }
-    }, []);
+    }, [props.scriptsLoaded]);
 
     useEffect(() => {
         addMarkers();
@@ -76,62 +74,59 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
     };
 
     const addCurrentLocation = (): void => {
-        if (props.currentLocation) {
-            const currentLocationMarker = addMarker(props.currentLocation);
-            if (currentLocationMarker) {
-                markers.current.push(currentLocationMarker);
-            }
+        if (map.current && props.currentLocation) {
+            markers.current = props.locations
+                .concat(props.currentLocation ? [props.currentLocation] : [])
+                .map(addMarker)
+                .filter(m => m);
         }
     };
 
-    const addMarker = (marker: Marker): google.maps.Marker | undefined => {
-        if (map.current) {
-            if (!bounds) {
-                bounds = bounds = new google.maps.LatLngBounds();
-            }
-            bounds.extend({
+    const addMarker = (marker: Marker): google.maps.Marker => {
+        if (!bounds) {
+            bounds = bounds = new google.maps.LatLngBounds();
+        }
+        bounds.extend({
+            lat: marker.latitude,
+            lng: marker.longitude
+        });
+        const mapMarker = new google.maps.Marker({
+            position: {
                 lat: marker.latitude,
                 lng: marker.longitude
+            },
+            icon: marker.url
+                ? {
+                      url: marker.url,
+                      scaledSize: new google.maps.Size(32, 32)
+                  }
+                : "",
+            title: marker.title
+        });
+        if (marker.title) {
+            const infoContent = document.createElement("span");
+            infoContent.innerHTML = marker.title || "";
+            if (marker.onClick) {
+                infoContent.style.cursor = "pointer";
+                infoContent.onclick = marker.onClick;
+            }
+            const infoWindow = new google.maps.InfoWindow({
+                content: infoContent
             });
-            const mapMarker = new google.maps.Marker({
-                position: {
-                    lat: marker.latitude,
-                    lng: marker.longitude
-                },
-                icon: marker.url
-                    ? {
-                          url: marker.url,
-                          scaledSize: new google.maps.Size(32, 32)
-                      }
-                    : "",
-                title: marker.title
+            mapMarker.addListener("click", () => {
+                infoWindow.open(map.current, mapMarker);
             });
-            if (marker.title) {
-                const infoContent = document.createElement("span");
-                infoContent.innerHTML = marker.title || "";
-                if (marker.onClick) {
-                    infoContent.style.cursor = "pointer";
-                    infoContent.onclick = marker.onClick;
-                }
-                const infoWindow = new google.maps.InfoWindow({
-                    content: infoContent
-                });
+        } else {
+            if (marker.onClick) {
                 mapMarker.addListener("click", () => {
-                    infoWindow.open(map.current, mapMarker);
+                    marker.onClick!();
                 });
             } else {
-                if (marker.onClick) {
-                    mapMarker.addListener("click", () => {
-                        marker.onClick!();
-                    });
-                } else {
-                    mapMarker.setClickable(false);
-                }
+                mapMarker.setClickable(false);
             }
-            mapMarker.setMap(map.current);
-            return mapMarker;
         }
-        return undefined;
+        mapMarker.setMap(map.current!);
+        return mapMarker;
     };
 
     const updateCamera = (): void => {
@@ -145,7 +140,7 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
                     map.current.fitBounds(bounds);
                 }
             } catch (error) {
-                setValidationMessage(`Invalid map bounds ${error.message}`);
+                console.error(`Invalid map bounds ${error.message}`);
             }
         }
     };
@@ -160,7 +155,7 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
             try {
                 return JSON.parse(props.mapStyles);
             } catch (error) {
-                setValidationMessage(`Invalid Map styles, ${error.message}`);
+                console.error(`Invalid Map styles, ${error.message}`);
             }
         }
 
@@ -175,11 +170,6 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
 
     return (
         <div className={classNames("widget-maps", props.className)} style={{ ...props.style, ...getDimensions(props) }}>
-            {validationMessage && (
-                <Alert bootstrapStyle="danger" className="widget-google-maps-alert">
-                    {validationMessage}
-                </Alert>
-            )}
             <div className="widget-google-maps-wrapper">
                 <div className="widget-google-maps" ref={googleMapsRef} />
             </div>

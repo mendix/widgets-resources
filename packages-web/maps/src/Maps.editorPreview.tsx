@@ -19,28 +19,28 @@ export const preview = (props: MapsPreviewProps): ReactNode => {
     ];
     return (
         <MapSwitcher
-            mapProvider={props.mapProvider}
-            locations={locations}
-            autoZoom={false}
-            zoomLevel={props.zoom === "automatic" ? translateZoom("street") : translateZoom(props.zoom)}
-            mapsToken={props.apiKey}
-            widthUnit={props.widthUnit}
-            width={Number(props.width)}
-            heightUnit={props.heightUnit}
-            height={Number(props.height)}
-            showCurrentLocation={props.showCurrentLocation}
-            currentLocation={locations[0]}
-            optionZoomControl={props.optionZoomControl}
-            optionScroll={false}
-            optionDrag={false}
-            optionStreetView={props.optionStreetView}
-            mapTypeControl={props.mapTypeControl}
-            fullScreenControl={props.fullScreenControl}
-            rotateControl={props.rotateControl}
-            className={props.class}
-            mapStyles={props.mapStyles}
-            style={parseStyle(props.style)}
             attributionControl={props.attributionControl}
+            autoZoom={false}
+            className={props.class}
+            currentLocation={locations[0]}
+            fullScreenControl={props.fullScreenControl}
+            height={Number(props.height)}
+            heightUnit={props.heightUnit}
+            locations={locations}
+            mapsToken={props.apiKey}
+            mapProvider={props.mapProvider}
+            mapStyles={props.mapStyles}
+            mapTypeControl={props.mapTypeControl}
+            optionDrag={false}
+            optionScroll={false}
+            optionStreetView={props.optionStreetView}
+            optionZoomControl={props.optionZoomControl}
+            rotateControl={props.rotateControl}
+            showCurrentLocation={props.showCurrentLocation}
+            style={parseStyle(props.style)}
+            width={Number(props.width)}
+            widthUnit={props.widthUnit}
+            zoomLevel={props.zoom === "automatic" ? translateZoom("street") : translateZoom(props.zoom)}
         />
     );
 };

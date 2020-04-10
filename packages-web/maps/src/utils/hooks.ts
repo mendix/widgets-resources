@@ -40,11 +40,11 @@ export const useLocationResolver = (
 };
 
 const isIdenticalMarkers = (previousMarkers: ModeledMarker[], newMarkers: ModeledMarker[]): boolean => {
-    const previousProps = previousMarkers.map(marker => {
+    const previousProps = previousMarkers.map(({ ...marker }) => {
         delete marker.action;
         return marker;
     });
-    const newProps = newMarkers.map(marker => {
+    const newProps = newMarkers.map(({ ...marker }) => {
         delete marker.action;
         return marker;
     });

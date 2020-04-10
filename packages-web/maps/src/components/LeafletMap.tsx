@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, useEffect, useRef } from "react";
 import {
     FeatureGroup,
     LatLngLiteral,
@@ -11,7 +11,6 @@ import {
     TileLayer
 } from "leaflet";
 import { MapProviderEnum, Marker, SharedProps } from "../../typings";
-import { Alert } from "@widgets-resources/piw-utils";
 import classNames from "classnames";
 import { customUrls, getDimensions, mapAttr } from "../utils";
 
@@ -25,8 +24,6 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
     const leafletRef = useRef<HTMLDivElement>(null);
     const defaultCenterLocation: LatLngLiteral = { lat: 51.906688, lng: 4.48837 };
     const markerGroup = useRef<FeatureGroup>(new FeatureGroup());
-
-    const [validationMessage, setValidationMessage] = useState(props.validationMessage);
 
     useEffect(() => {
         createMap();
@@ -122,7 +119,7 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
                     map.current.setZoom(zoomLevel);
                 }
             } catch (error) {
-                setValidationMessage(`Invalid map bounds ${error.message}`);
+                console.error(`Invalid map bounds ${error.message}`);
             }
         }
     };
@@ -167,11 +164,6 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
 
     return (
         <div className={classNames("widget-maps", props.className)} style={{ ...props.style, ...getDimensions(props) }}>
-            {validationMessage && (
-                <Alert bootstrapStyle="danger" className="widget-leaflet-maps-alert leaflet-control">
-                    {validationMessage}
-                </Alert>
-            )}
             <div className="widget-leaflet-maps-wrapper">
                 <div className="widget-leaflet-maps" ref={leafletRef} />
             </div>

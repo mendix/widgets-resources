@@ -28,7 +28,7 @@ const googleApiWrapper = (script: string) => <P extends GoogleMapsProps>(wrapped
             }
         }
 
-        private addScript: Function = (googleScript: string): void => {
+        private addScript = (googleScript: string): Promise<void> => {
             const googleApiID = "_com.mendix.widget.custom.Maps.Maps";
             if (!(window as any)[googleApiID]) {
                 (window as any)[googleApiID] = new Promise((resolve, reject) => {

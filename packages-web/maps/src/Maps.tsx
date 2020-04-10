@@ -21,38 +21,34 @@ const Maps = (props: MapsContainerProps): ReactNode => {
 
     useEffect(() => {
         if (props.showCurrentLocation) {
-            getCurrentUserLocation()
-                .then(marker => {
-                    setCurrentLocation(marker);
-                })
-                .catch(error => console.error(error.message));
+            getCurrentUserLocation(setCurrentLocation);
         }
     }, []);
 
     return (
         <MapSwitcher
-            mapProvider={props.mapProvider}
-            locations={locations}
-            autoZoom={props.zoom === "automatic"}
-            zoomLevel={translateZoom(props.zoom)}
-            mapsToken={props.apiKey && props.apiKey.status === ValueStatus.Available ? props.apiKey.value : undefined}
-            widthUnit={props.widthUnit}
-            width={props.width}
-            heightUnit={props.heightUnit}
-            height={props.height}
-            showCurrentLocation={props.showCurrentLocation}
-            currentLocation={currentLocation}
-            optionZoomControl={props.optionZoomControl}
-            optionScroll={props.optionScroll}
-            optionDrag={props.optionDrag}
-            optionStreetView={props.optionStreetView}
-            mapTypeControl={props.mapTypeControl}
-            fullScreenControl={props.fullScreenControl}
-            rotateControl={props.rotateControl}
-            className={props.class}
-            mapStyles={props.mapStyles}
-            style={props.style}
             attributionControl={props.attributionControl}
+            autoZoom={props.zoom === "automatic"}
+            className={props.class}
+            currentLocation={currentLocation}
+            fullScreenControl={props.fullScreenControl}
+            height={props.height}
+            heightUnit={props.heightUnit}
+            locations={locations}
+            mapsToken={props.apiKey && props.apiKey.status === ValueStatus.Available ? props.apiKey.value : undefined}
+            mapProvider={props.mapProvider}
+            mapStyles={props.mapStyles}
+            mapTypeControl={props.mapTypeControl}
+            optionDrag={props.optionDrag}
+            optionScroll={props.optionScroll}
+            optionStreetView={props.optionStreetView}
+            optionZoomControl={props.optionZoomControl}
+            rotateControl={props.rotateControl}
+            showCurrentLocation={props.showCurrentLocation}
+            style={props.style}
+            width={props.width}
+            widthUnit={props.widthUnit}
+            zoomLevel={translateZoom(props.zoom)}
         />
     );
 };

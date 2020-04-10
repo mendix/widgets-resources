@@ -1,24 +1,23 @@
 import { Marker } from "../../typings";
+import { Dispatch, SetStateAction } from "react";
 
-export const getCurrentUserLocation = (): Promise<Marker> => {
-    return new Promise<Marker>((resolve, reject) => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                position => {
-                    resolve({
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude,
-                        url: defaultMarkerImage
-                    });
-                },
-                () => {
-                    reject(new Error("Current user location is not available"));
-                }
-            );
-        } else {
-            reject(new Error("Current user location is not available"));
-        }
-    });
+export const getCurrentUserLocation = (setCurrentLocation: Dispatch<SetStateAction<Marker>>): void => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                setCurrentLocation({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    url: defaultMarkerImage
+                });
+            },
+            () => {
+                console.error("Current user location is not available");
+            }
+        );
+    } else {
+        console.error("Current user location is not available");
+    }
 };
 
 const defaultMarkerImage =
