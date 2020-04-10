@@ -2,7 +2,7 @@ import { createElement, ReactElement, useEffect, useRef } from "react";
 import classNames from "classnames";
 
 import googleApiWrapper from "./GoogleApi";
-import { getDimensions } from "../utils";
+import { getDimensions, getGoogleMapsStyles } from "../utils";
 import { Marker, SharedProps } from "../../typings";
 
 export interface GoogleMapsProps extends SharedProps {
@@ -45,7 +45,7 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
             rotateControl: props.rotateControl,
             minZoom: 1,
             maxZoom: 20,
-            styles: getMapStyles()
+            styles: getGoogleMapsStyles(props.mapStyles)
         };
         if (googleMapsRef.current && !map.current) {
             map.current = new google.maps.Map(googleMapsRef.current, mapOptions);
@@ -149,24 +149,6 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
         lat: markers.current?.[0]?.getPosition()?.lat() ?? defaultCenterLocation.lat,
         lng: markers.current?.[0]?.getPosition()?.lng() ?? defaultCenterLocation.lng
     });
-
-    const getMapStyles = (): google.maps.MapTypeStyle[] => {
-        if (props.mapStyles && props.mapStyles.trim()) {
-            try {
-                return JSON.parse(props.mapStyles);
-            } catch (error) {
-                console.error(`Invalid Map styles, ${error.message}`);
-            }
-        }
-
-        return [
-            {
-                featureType: "poi",
-                elementType: "labels",
-                stylers: [{ visibility: "off" }]
-            }
-        ];
-    };
 
     return (
         <div className={classNames("widget-maps", props.className)} style={{ ...props.style, ...getDimensions(props) }}>
