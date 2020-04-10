@@ -24,7 +24,7 @@ export const useLocationResolver = (
         return markers;
     }, [staticMarkers, dynamicMarkers]);
 
-    if (!isIdenticalLocations(requestedMarkers.current, markers)) {
+    if (!isIdenticalMarkers(requestedMarkers.current, markers)) {
         requestedMarkers.current = markers;
         setLoadingCount(x => x + 1);
         analyzeLocations(markers, googleApiKey)
@@ -43,16 +43,14 @@ export const useLocationResolver = (
     return [loadingCount > 0, locations];
 };
 
-const isIdenticalLocations = (previousLocations: ModeledMarker[], newLocations: ModeledMarker[]): boolean => {
-    const previous = previousLocations.map(l => {
-        // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-        const { action, ...rest } = l;
-        return rest;
+const isIdenticalMarkers = (previousMarkers: ModeledMarker[], newMarkers: ModeledMarker[]): boolean => {
+    const previousProps = previousMarkers.map(marker => {
+        delete marker.action;
+        return marker;
     });
-    const news = newLocations.map(l => {
-        // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-        const { action, ...rest } = l;
-        return rest;
+    const newProps = newMarkers.map(marker => {
+        delete marker.action;
+        return marker;
     });
-    return deepEqual(previous, news, { strict: true });
+    return deepEqual(previousProps, newProps, { strict: true });
 };
