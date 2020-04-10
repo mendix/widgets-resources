@@ -21,7 +21,9 @@ const Maps = (props: MapsContainerProps): ReactNode => {
 
     useEffect(() => {
         if (props.showCurrentLocation) {
-            getCurrentUserLocation(setCurrentLocation);
+            getCurrentUserLocation()
+                .then(setCurrentLocation)
+                .catch(e => console.error(e));
         }
     }, []);
 
