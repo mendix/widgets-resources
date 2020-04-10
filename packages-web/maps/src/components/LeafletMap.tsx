@@ -84,10 +84,8 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
             if (marker.onClick) {
                 const infoContent = document.createElement("span");
                 infoContent.innerHTML = marker.title || "";
-                if (marker.onClick) {
-                    infoContent.style.cursor = "pointer";
-                    infoContent.onclick = marker.onClick;
-                }
+                infoContent.style.cursor = "pointer";
+                infoContent.onclick = marker.onClick;
                 mapMarker.bindPopup(infoContent).openPopup();
             } else {
                 mapMarker.bindPopup(marker.title).openPopup();
@@ -113,30 +111,26 @@ export const LeafletMap = (props: LeafletProps): ReactElement => {
 
     const updateCamera = (): void => {
         const { zoomLevel, autoZoom } = props;
-        setTimeout(() => {
-            if (map.current) {
-                const bounds = markerGroup.current.getBounds();
-                try {
-                    if (bounds.isValid()) {
-                        map.current.fitBounds(bounds, { animate: false }).invalidateSize();
-                    }
-                    if (!autoZoom) {
-                        map.current.panTo(getCenter(), { animate: false });
-                        map.current.setZoom(zoomLevel);
-                    }
-                } catch (error) {
-                    setValidationMessage(`Invalid map bounds ${error.message}`);
+        if (map.current) {
+            const bounds = markerGroup.current.getBounds();
+            try {
+                if (bounds.isValid()) {
+                    map.current.fitBounds(bounds, { animate: false }).invalidateSize();
                 }
+                if (!autoZoom) {
+                    map.current.panTo(getCenter(), { animate: false });
+                    map.current.setZoom(zoomLevel);
+                }
+            } catch (error) {
+                setValidationMessage(`Invalid map bounds ${error.message}`);
             }
-        }, 0);
+        }
     };
 
-    const getCenter = (): LatLngLiteral => {
-        return {
-            lat: props.locations?.[0]?.latitude ?? defaultCenterLocation.lat,
-            lng: props.locations?.[0]?.longitude ?? defaultCenterLocation.lng
-        };
-    };
+    const getCenter = (): LatLngLiteral => ({
+        lat: props.locations?.[0]?.latitude ?? defaultCenterLocation.lat,
+        lng: props.locations?.[0]?.longitude ?? defaultCenterLocation.lng
+    });
 
     const addCurrentLocation = (): void => {
         if (map.current && props.currentLocation) {

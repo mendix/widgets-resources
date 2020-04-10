@@ -136,35 +136,31 @@ export const GoogleMap = (props: GoogleMapsProps): ReactElement => {
 
     const updateCamera = (): void => {
         const { zoomLevel, autoZoom } = props;
-        setTimeout(() => {
-            if (bounds && map.current) {
-                try {
-                    if (!autoZoom) {
-                        map.current.setCenter(getCenter());
-                        map.current.setZoom(zoomLevel);
-                    } else {
-                        map.current.fitBounds(bounds);
-                    }
-                } catch (error) {
-                    setValidationMessage(`Invalid map bounds ${error.message}`);
+        if (bounds && map.current) {
+            try {
+                if (!autoZoom) {
+                    map.current.setCenter(getCenter());
+                    map.current.setZoom(zoomLevel);
+                } else {
+                    map.current.fitBounds(bounds);
                 }
+            } catch (error) {
+                setValidationMessage(`Invalid map bounds ${error.message}`);
             }
-        }, 0);
+        }
     };
 
-    const getCenter = (): google.maps.LatLngLiteral => {
-        return {
-            lat: markers.current?.[0]?.getPosition()?.lat() ?? defaultCenterLocation.lat,
-            lng: markers.current?.[0]?.getPosition()?.lng() ?? defaultCenterLocation.lng
-        };
-    };
+    const getCenter = (): google.maps.LatLngLiteral => ({
+        lat: markers.current?.[0]?.getPosition()?.lat() ?? defaultCenterLocation.lat,
+        lng: markers.current?.[0]?.getPosition()?.lng() ?? defaultCenterLocation.lng
+    });
 
     const getMapStyles = (): google.maps.MapTypeStyle[] => {
         if (props.mapStyles && props.mapStyles.trim()) {
             try {
                 return JSON.parse(props.mapStyles);
             } catch (error) {
-                setValidationMessage(`invalid Map styles, ${error.message}`);
+                setValidationMessage(`Invalid Map styles, ${error.message}`);
             }
         }
 

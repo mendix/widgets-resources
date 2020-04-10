@@ -8,10 +8,9 @@ export const useLocationResolver = (
     staticMarkers: MarkersType[],
     dynamicMarkers: DynamicMarkersType[],
     googleApiKey?: string
-): [boolean, Marker[]] => {
+): [Marker[]] => {
     const [locations, setLocations] = useState<Marker[]>([]);
     const requestedMarkers = useRef<ModeledMarker[]>([]);
-    const [loadingCount, setLoadingCount] = useState(0);
 
     const markers = useMemo(() => {
         const markers: ModeledMarker[] = [];
@@ -26,21 +25,18 @@ export const useLocationResolver = (
 
     if (!isIdenticalMarkers(requestedMarkers.current, markers)) {
         requestedMarkers.current = markers;
-        setLoadingCount(x => x + 1);
         analyzeLocations(markers, googleApiKey)
             .then(newLocations => {
                 if (requestedMarkers.current === markers) {
                     setLocations(newLocations);
-                    setLoadingCount(x => x - 1);
                 }
             })
             .catch(e => {
                 console.error(e);
-                setLoadingCount(x => x - 1);
             });
     }
 
-    return [loadingCount > 0, locations];
+    return [locations];
 };
 
 const isIdenticalMarkers = (previousMarkers: ModeledMarker[], newMarkers: ModeledMarker[]): boolean => {

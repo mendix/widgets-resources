@@ -12,7 +12,7 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 
 const Maps = (props: MapsContainerProps): ReactNode => {
-    const [, locations] = useLocationResolver(
+    const [locations] = useLocationResolver(
         props.markers,
         props.dynamicMarkers,
         !props.advanced ? props.apiKey?.value : props.geodecodeApiKey?.value
