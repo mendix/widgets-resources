@@ -1,16 +1,28 @@
-import { DynamicMarkersType, MarkersType, ModeledMarker } from "../../typings";
 import { ObjectItem, ValueStatus } from "mendix";
+import { DynamicMarkersType, MarkersType } from "../../typings/MapsProps";
+import { ModeledMarker } from "../../typings/shared";
 
-export const analyzeStaticMarker = (marker: MarkersType): ModeledMarker => ({
-    address: marker.address?.value,
-    latitude: Number(marker.latitude?.value),
-    longitude: Number(marker.longitude?.value),
-    title: marker.title?.value,
-    action: marker.onClick?.execute,
-    customMarker: marker.customMarker?.value?.uri
-});
+export declare type Option<T> = T | undefined;
 
-export const analyzeDynamicMarker = (marker: DynamicMarkersType, item: ObjectItem): ModeledMarker => {
+export function convertStaticModeledMarker(marker: MarkersType): ModeledMarker {
+    return {
+        address: marker.address?.value,
+        latitude: Number(marker.latitude?.value),
+        longitude: Number(marker.longitude?.value),
+        title: marker.title?.value,
+        action: marker.onClick?.execute,
+        customMarker: marker.customMarker?.value?.uri
+    };
+}
+
+export function convertDynamicModeledMarker(marker: DynamicMarkersType): ModeledMarker[] {
+    if (marker.markersDS && marker.markersDS.status === ValueStatus.Available) {
+        return marker.markersDS.items?.map(item => analyzeDynamicMarker(marker, item)) ?? [];
+    }
+    return [];
+}
+
+function analyzeDynamicMarker(marker: DynamicMarkersType, item: ObjectItem): ModeledMarker {
     const { locationType, address: addr, latitude: lat, longitude: lng, onClickAttribute, title } = marker;
     let address;
     let latitude;
@@ -29,11 +41,4 @@ export const analyzeDynamicMarker = (marker: DynamicMarkersType, item: ObjectIte
         action: onClickAttribute ? onClickAttribute(item).execute : undefined,
         customMarker: marker.customMarkerDynamic?.value?.uri
     };
-};
-
-export const analyzeDataSource = (marker: DynamicMarkersType): ModeledMarker[] => {
-    if (marker.markersDS && marker.markersDS.status === ValueStatus.Available) {
-        return marker.markersDS.items?.map(item => analyzeDynamicMarker(marker, item)) ?? [];
-    }
-    return [];
-};
+}

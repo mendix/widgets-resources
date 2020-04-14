@@ -60,6 +60,46 @@ exports[`Leaflet maps renders a map with attribution 1`] = `
 </div>
 `;
 
+exports[`Leaflet maps renders a map with current location 1`] = `
+<div
+  className="widget-maps"
+  style={
+    Object {
+      "height": "75px",
+      "width": "50%",
+    }
+  }
+>
+  <div
+    className="widget-leaflet-maps-wrapper"
+  >
+    <div
+      className="widget-leaflet-maps"
+    />
+  </div>
+</div>
+`;
+
+exports[`Leaflet maps renders a map with markers 1`] = `
+<div
+  className="widget-maps"
+  style={
+    Object {
+      "height": "75px",
+      "width": "50%",
+    }
+  }
+>
+  <div
+    className="widget-leaflet-maps-wrapper"
+  >
+    <div
+      className="widget-leaflet-maps"
+    />
+  </div>
+</div>
+`;
+
 exports[`Leaflet maps renders a map with percentage of parent units renders the structure correctly 1`] = `
 <div
   className="widget-maps"

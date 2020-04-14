@@ -2,8 +2,10 @@ import { createElement, ReactElement, useEffect, useRef, useState } from "react"
 import classNames from "classnames";
 
 import { LoadScript } from "@react-google-maps/api";
-import { getDimensions, getGoogleMapsStyles, Option } from "../utils";
-import { Marker, SharedProps } from "../../typings";
+import { Marker, SharedProps } from "../../typings/shared";
+import { getGoogleMapsStyles } from "../utils/google";
+import { getDimensions } from "../utils/dimension";
+import { Option } from "../utils/data";
 
 export interface GoogleMapsProps extends SharedProps {
     mapStyles?: string;

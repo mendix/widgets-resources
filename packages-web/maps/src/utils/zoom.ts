@@ -1,4 +1,4 @@
-export const translateZoom = (level: string): number => {
+export function translateZoom(level: string): number {
     switch (level) {
         case "world":
             return 1;
@@ -12,4 +12,4 @@ export const translateZoom = (level: string): number => {
             return 20;
     }
     return 1;
-};
+}

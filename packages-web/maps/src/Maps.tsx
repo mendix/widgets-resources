@@ -1,15 +1,18 @@
 import { hot } from "react-hot-loader/root";
 import { createElement, ReactNode, useEffect, useState } from "react";
-import { MapsContainerProps, Marker } from "../typings";
 import { ValueStatus } from "mendix";
 
-import { getCurrentUserLocation, translateZoom, useLocationResolver } from "./utils";
 import { MapSwitcher } from "./components/MapSwitcher";
 
 import "leaflet/dist/leaflet.css";
 import "./ui/Maps.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import "leaflet-defaulticon-compatibility";
+import { MapsContainerProps } from "../typings/MapsProps";
+import { useLocationResolver } from "./utils/geodecode";
+import { getCurrentUserLocation } from "./utils/location";
+import { Marker } from "../typings/shared";
+import { translateZoom } from "./utils/zoom";
 
 const Maps = (props: MapsContainerProps): ReactNode => {
     const [locations] = useLocationResolver(

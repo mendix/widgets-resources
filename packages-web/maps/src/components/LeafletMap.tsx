@@ -10,9 +10,12 @@ import {
     TileLayerOptions,
     TileLayer
 } from "leaflet";
-import { MapProviderEnum, Marker, SharedProps } from "../../typings";
 import classNames from "classnames";
-import { customUrls, getDimensions, mapAttr, Option } from "../utils";
+import { Marker, SharedProps } from "../../typings/shared";
+import { MapProviderEnum } from "../../typings/MapsProps";
+import { getDimensions } from "../utils/dimension";
+import { Option } from "../utils/data";
+import { customUrls, mapAttr } from "../utils/leaflet";
 
 export interface LeafletProps extends SharedProps {
     mapProvider: MapProviderEnum;

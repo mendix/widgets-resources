@@ -1,4 +1,4 @@
-export const getGoogleMapsStyles = (styles?: string): google.maps.MapTypeStyle[] => {
+export function getGoogleMapsStyles(styles?: string): google.maps.MapTypeStyle[] {
     if (styles && styles.trim()) {
         try {
             return JSON.parse(styles);
@@ -14,4 +14,4 @@ export const getGoogleMapsStyles = (styles?: string): google.maps.MapTypeStyle[]
             stylers: [{ visibility: "off" }]
         }
     ];
-};
+}

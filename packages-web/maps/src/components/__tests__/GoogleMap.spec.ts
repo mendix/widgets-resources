@@ -74,6 +74,42 @@ describe("Google maps", () => {
         expect(googleMaps).toMatchSnapshot();
     });
 
+    it("renders a map with markers", () => {
+        const googleMaps = renderGoogleMap(defaultProps);
+        googleMaps.setProps({
+            locations: [
+                {
+                    title: "Mendix HQ",
+                    latitude: 51.906688,
+                    longitude: 4.48837,
+                    url: "image:url"
+                },
+                {
+                    title: "Gementee Rotterdam",
+                    latitude: 51.922823,
+                    longitude: 4.479632,
+                    url: "image:url"
+                }
+            ]
+        });
+
+        expect(googleMaps).toMatchSnapshot();
+    });
+
+    it("renders a map with current location", () => {
+        const googleMaps = renderGoogleMap(defaultProps);
+        googleMaps.setProps({
+            showCurrentLocation: true,
+            currentLocation: {
+                latitude: 51.906688,
+                longitude: 4.48837,
+                url: "image:url"
+            }
+        });
+
+        expect(googleMaps).toMatchSnapshot();
+    });
+
     afterAll(() => {
         window.google = undefined;
     });

@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
-import { Dimensions } from "../../typings";
+import { Dimensions } from "../../typings/shared";
 
-export const getDimensions = <T extends Dimensions>(props: T): CSSProperties => {
+export function getDimensions<T extends Dimensions>(props: T): CSSProperties {
     const style: CSSProperties = {
         width: props.widthUnit === "percentage" ? `${props.width}%` : `${props.width}px`
     };
@@ -20,4 +20,4 @@ export const getDimensions = <T extends Dimensions>(props: T): CSSProperties => 
     }
 
     return style;
-};
+}
