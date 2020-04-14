@@ -29,7 +29,7 @@ export async function convertAddressToLatLng(locations?: ModeledMarker[], mapTok
 
     if (unknownLatitudeLongitudes.length > 0) {
         if (!mapToken) {
-            return Promise.reject(new Error("API key required in order to use markers containing address"));
+            throw new Error("API key required in order to use markers containing address");
         }
 
         const resolvedMarkers = await Promise.all(
@@ -51,7 +51,7 @@ export async function convertAddressToLatLng(locations?: ModeledMarker[], mapTok
         );
         markerLocations.push(...(resolvedMarkers.filter(r => !!r) as Marker[]));
     }
-    return Promise.resolve(markerLocations);
+    return markerLocations;
 }
 
 function geocode(address: string, mapToken: string): Promise<LatLng> {

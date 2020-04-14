@@ -17,12 +17,12 @@ export function convertStaticModeledMarker(marker: MarkersType): ModeledMarker {
 
 export function convertDynamicModeledMarker(marker: DynamicMarkersType): ModeledMarker[] {
     if (marker.markersDS && marker.markersDS.status === ValueStatus.Available) {
-        return marker.markersDS.items?.map(item => analyzeDynamicMarker(marker, item)) ?? [];
+        return marker.markersDS.items?.map(item => fromDatasource(marker, item)) ?? [];
     }
     return [];
 }
 
-function analyzeDynamicMarker(marker: DynamicMarkersType, item: ObjectItem): ModeledMarker {
+function fromDatasource(marker: DynamicMarkersType, item: ObjectItem): ModeledMarker {
     const { locationType, address: addr, latitude: lat, longitude: lng, onClickAttribute, title } = marker;
     let address;
     let latitude;

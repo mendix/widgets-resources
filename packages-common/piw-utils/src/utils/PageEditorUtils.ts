@@ -28,42 +28,28 @@ export function hidePropertyIn<T>(
     );
 }
 
-export function hidePropertiesIn<T>(propertyGroups: PropertyGroup[], keys: Array<keyof T>): void;
-export function hidePropertiesIn<T>(
-    propertyGroups: PropertyGroup[],
-    keys: Array<keyof T>,
-    nestedPropIndex: number,
-    nestedPropKey: string
-): void;
-export function hidePropertiesIn<T>(
-    propertyGroups: PropertyGroup[],
-    keys: Array<keyof T>,
-    nestedPropIndex?: number,
-    nestedPropKey?: string
-): void {
+export function hidePropertiesIn<T>(propertyGroups: PropertyGroup[], keys: Array<keyof T>): void {
     keys.forEach(key =>
-        modifyProperty(
-            (_, index, container) => container.splice(index, 1),
-            propertyGroups,
-            key,
-            nestedPropIndex,
-            nestedPropKey
-        )
+        modifyProperty((_, index, container) => container.splice(index, 1), propertyGroups, key, undefined, undefined)
     );
 }
 
-export function changePropertyIn(propertyGroups: PropertyGroup[], modify: (prop: Property) => void, key: string): void;
-export function changePropertyIn(
+export function changePropertyIn<T>(
     propertyGroups: PropertyGroup[],
     modify: (prop: Property) => void,
-    key: string,
+    key: keyof T
+): void;
+export function changePropertyIn<T>(
+    propertyGroups: PropertyGroup[],
+    modify: (prop: Property) => void,
+    key: keyof T,
     nestedPropIndex: number,
     nestedPropKey: string
 ): void;
-export function changePropertyIn(
+export function changePropertyIn<T>(
     propertyGroups: PropertyGroup[],
     modify: (prop: Property) => void,
-    key: string,
+    key: keyof T,
     nestedPropIndex?: number,
     nestedPropKey?: string
 ): void {

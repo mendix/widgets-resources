@@ -1,11 +1,12 @@
 import { createElement, ReactNode } from "react";
 import { MapSwitcher } from "./components/MapSwitcher";
-import { parseStyle } from "@widgets-resources/piw-utils";
 
-import "leaflet-defaulticon-compatibility";
 import { MapsPreviewProps } from "../typings/MapsProps";
 import { Marker } from "../typings/shared";
+import { parseStyle } from "@widgets-resources/piw-utils";
 import { translateZoom } from "./utils/zoom";
+
+import "leaflet-defaulticon-compatibility";
 
 declare function require(name: string): string;
 
