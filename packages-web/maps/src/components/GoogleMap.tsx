@@ -17,7 +17,7 @@ export interface GoogleMapsProps extends SharedProps {
 
 export function GoogleMap(props: GoogleMapsProps): ReactElement {
     const map = useRef<google.maps.Map>();
-    const googleMapsRef = useRef<HTMLDivElement>(null);
+    const googleMapsDivNode = useRef<HTMLDivElement>(null);
     const markers = useRef<google.maps.Marker[]>([]); // Used to manage and remove markers from the map
 
     useEffect(() => {
@@ -35,19 +35,11 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
                 maxZoom: 20,
                 styles: getGoogleMapsStyles(props.mapStyles)
             };
-            if (googleMapsRef.current && !map.current) {
-                map.current = new google.maps.Map(googleMapsRef.current, mapOptions);
+            if (googleMapsDivNode.current && !map.current) {
+                map.current = new google.maps.Map(googleMapsDivNode.current, mapOptions);
             } else if (map.current) {
                 map.current.setOptions(mapOptions);
             }
-            addMarkers(
-                map.current!,
-                markers.current,
-                props.locations,
-                props.currentLocation,
-                props.zoomLevel,
-                props.autoZoom
-            );
         }
     }, [props.scriptsLoaded]);
 
@@ -62,12 +54,12 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
                 props.autoZoom
             );
         }
-    }, [props.locations, props.currentLocation, props.zoomLevel, props.autoZoom]);
+    }, [map.current, props.locations, props.currentLocation, props.zoomLevel, props.autoZoom]);
 
     return (
         <div className={classNames("widget-maps", props.className)} style={{ ...props.style, ...getDimensions(props) }}>
             <div className="widget-google-maps-wrapper">
-                <div className="widget-google-maps" ref={googleMapsRef} />
+                <div className="widget-google-maps" ref={googleMapsDivNode} />
             </div>
         </div>
     );
