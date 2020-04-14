@@ -1,23 +1,27 @@
 ## PopupMenu
 
-[My widget description]
-
-## Features
-
-[feature highlights]
+Use pop up menu to create a menus which anchored to an element. Pop up menu will be opened after pressing to the anchor element and close when one of the items are clicked.
 
 ## Usage
 
-[step by step instructions]
+### Adding triggerer
 
-## Demo project
+Simply fill the content of the triggerer. This is a free modeling content and will be wrapped by touchable. **Any touchable items (buttons, dropdowns etc..) in this field will steal the touch event and it will prevent popup menu to open.**
 
-[link to sandbox]
+### Adding menu items
 
-## Issues, suggestions and feature requests
+For the sake of simplicity, there are two modes available to add new items to popup menu:
 
-[link to GitHub issues]
+#### Simple mode
 
-## Development and contribution
+Simply add new item with Caption and Action to quickly create a dropdown item. Selecting divider will add a divider with straight line.
 
-[specify contribute]
+#### Advanced mode
+
+Every item which has the advanced mode selected, adds free modeling area. Every item will be wrapped by a Touchable. **Any touchable items (buttons, dropdowns etc..) in this field will steal the touch event and it will prevent popup menu to close**.
+
+If you wish to achieve tooltip like behaviour this can be best achieved by this mode.
+
+## Styling
+
+Subject to change

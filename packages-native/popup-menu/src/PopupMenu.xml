@@ -9,7 +9,7 @@
     <properties>
         <propertyGroup caption="General">
             <property key="menuTriggerer" type="widgets" required="false">
-                <caption>Clickable area</caption>
+                <caption>Menu Triggerer</caption>
                 <description>Wrapped with touchable area. Responsible for toggling the popupMenu</description>
             </property>
             <property key="renderMode" type="enumeration" defaultValue="basic">
