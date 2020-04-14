@@ -1,9 +1,10 @@
-import { ComponentType, createElement, ReactElement, useCallback, useMemo, useRef } from "react";
+import { ComponentType, createElement, ReactElement, useCallback, useRef } from "react";
 import { PopupMenuProps } from "../typings/PopupMenuProps";
-import { defaultPopupMenuStyles, PopupMenuStyle } from "./ui/Styles";
+import { PopupMenuStyle } from "./ui/Styles";
 import { executeAction } from "@widgets-resources/piw-utils";
 import {
     Platform,
+    StyleSheet,
     TouchableHighlight,
     TouchableHighlightProps,
     TouchableNativeFeedback,
@@ -12,13 +13,10 @@ import {
 } from "react-native";
 import { ActionValue } from "mendix";
 import Menu, { MenuDivider, MenuItem } from "react-native-material-menu";
-import deepmerge from "deepmerge";
+import flatten = StyleSheet.flatten;
 
 export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
-    const styles = useMemo(
-        () => deepmerge.all<PopupMenuStyle>([defaultPopupMenuStyles, ...props.style]),
-        [props.style]
-    );
+    const styles = flatten(props.style) as PopupMenuStyle;
 
     const menuRef = useRef<any>(null);
     const showMenu = useCallback(() => {

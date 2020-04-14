@@ -23,25 +23,4 @@ interface ComplexItemStyle {
     underlayColor?: string;
 }
 
-export const defaultPopupMenuStyles: PopupMenuStyle = {
-    basicItem: {
-        underlayColor: "#e0e0e0",
-        dividerColor: "green",
-        textStyle: {
-            color: "red"
-        }
-    },
-    complexItem: {
-        underlayColor: "#e0e0e0",
-        container: {
-            backgroundColor: "yellow",
-            height: 48,
-            justifyContent: "center",
-            maxWidth: 248,
-            minWidth: 124
-        }
-    },
-    buttonUnderlayColor: "#e0e0e0"
-};
-
 // TODO: request default,primary,danger
