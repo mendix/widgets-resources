@@ -1,52 +1,50 @@
 import { DynamicMarkersType, MapsPreviewProps, MarkersType } from "../typings";
-import { hideProperties, hideProperty, Problem, Properties } from "@widgets-resources/piw-utils";
+import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-utils";
 
 export function getProperties(values: MapsPreviewProps, defaultProperties: Properties): Properties {
-    const defaultPropertiesForMarkers = defaultProperties?.[0].propertyGroups?.[0].properties?.[0].properties; // First config, first group, first property
-    const defaultPropertiesForDynamicMarkers = defaultProperties?.[0].propertyGroups?.[0].properties?.[1].properties; // First config, first group, second property
     if (!values.advanced) {
-        hideProperties<MarkersType>(["markerStyle", "customMarker"], defaultProperties);
-        hideProperties<MapsPreviewProps>(["mapProvider", "mapStyles", "geodecodeApiKey"], defaultProperties);
-        hideProperty<DynamicMarkersType>("markerStyleDynamic", defaultProperties);
+        hidePropertiesIn<MarkersType>(defaultProperties, ["markerStyle", "customMarker"]);
+        hidePropertiesIn<MapsPreviewProps>(defaultProperties, ["mapProvider", "mapStyles", "geodecodeApiKey"]);
+        hidePropertyIn<DynamicMarkersType>(defaultProperties, "markerStyleDynamic");
     }
 
     values.markers.forEach((f, index) => {
-        const properties = defaultPropertiesForMarkers?.[index];
         if (f.locationType === "address") {
-            hideProperties<MarkersType>(["latitude", "longitude"], properties);
+            hidePropertyIn<MapsPreviewProps>(defaultProperties, "markers", index, "latitude");
+            hidePropertyIn<MapsPreviewProps>(defaultProperties, "markers", index, "longitude");
         } else {
-            hideProperty<MarkersType>("address", properties);
+            hidePropertyIn<MapsPreviewProps>(defaultProperties, "markers", index, "address");
         }
         if (f.markerStyle === "default") {
-            hideProperty<MarkersType>(
-                "customMarker",
-                properties // First config, first group, first property
-            );
+            hidePropertyIn<MapsPreviewProps>(defaultProperties, "markers", index, "customMarker");
         }
     });
 
     values.dynamicMarkers.forEach((f, index) => {
-        const properties = defaultPropertiesForDynamicMarkers?.[index];
         if (f.locationType === "address") {
-            hideProperties<DynamicMarkersType>(["latitude", "longitude"], properties);
+            hidePropertyIn<MapsPreviewProps>(defaultProperties, "dynamicMarkers", index, "latitude");
+            hidePropertyIn<MapsPreviewProps>(defaultProperties, "dynamicMarkers", index, "longitude");
         } else {
-            hideProperty<DynamicMarkersType>("address", properties);
+            hidePropertyIn<MapsPreviewProps>(defaultProperties, "dynamicMarkers", index, "address");
         }
         if (f.markerStyleDynamic === "default") {
-            hideProperty<DynamicMarkersType>("customMarkerDynamic", properties);
+            hidePropertyIn<MapsPreviewProps>(defaultProperties, "dynamicMarkers", index, "customMarkerDynamic");
         }
     });
 
     if (values.mapProvider !== "googleMaps") {
-        hideProperties<MapsPreviewProps>(
-            ["optionStreetView", "mapTypeControl", "fullScreenControl", "rotateControl", "mapStyles"],
-            defaultProperties
-        );
+        hidePropertiesIn<MapsPreviewProps>(defaultProperties, [
+            "optionStreetView",
+            "mapTypeControl",
+            "fullScreenControl",
+            "rotateControl",
+            "mapStyles"
+        ]);
         if (values.mapProvider === "openStreet") {
-            hideProperty<MapsPreviewProps>("apiKey", defaultProperties);
+            hidePropertyIn<MapsPreviewProps>(defaultProperties, "apiKey");
         }
     } else {
-        hideProperty<MapsPreviewProps>("attributionControl", defaultProperties);
+        hidePropertyIn<MapsPreviewProps>(defaultProperties, "attributionControl");
     }
 
     return defaultProperties;
@@ -54,14 +52,7 @@ export function getProperties(values: MapsPreviewProps, defaultProperties: Prope
 
 export function check(values: MapsPreviewProps): Problem[] {
     const errors: Problem[] = [];
-    values.markers
-        .filter(marker => values.advanced && marker.markerStyle === "image" && !marker.customMarker)
-        .forEach(marker => {
-            errors.push({
-                property: "customMarker",
-                message: `Custom marker image is required when shape is 'image' for address ${marker.address}`
-            });
-        });
+
     if (values.mapProvider !== "openStreet" && !values.apiKey) {
         errors.push({
             property: "apiKey",
@@ -98,6 +89,12 @@ export function check(values: MapsPreviewProps): Problem[] {
                     message: "A static marker requires longitude"
                 });
             }
+        }
+        if (values.advanced && marker.markerStyle === "image" && !marker.customMarker) {
+            errors.push({
+                property: "customMarker",
+                message: `Custom marker image is required when shape is 'image' for address ${marker.address}`
+            });
         }
     });
 

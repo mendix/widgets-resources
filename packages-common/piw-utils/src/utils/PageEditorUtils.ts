@@ -6,16 +6,16 @@ import { Property, PropertyGroup } from "../typings";
 
 declare type Option<T> = T | undefined;
 
-export function hidePropertyIn(propertyGroups: PropertyGroup[], key: string): void;
-export function hidePropertyIn(
+export function hidePropertyIn<T>(propertyGroups: PropertyGroup[], key: keyof T): void;
+export function hidePropertyIn<T>(
     propertyGroups: PropertyGroup[],
-    key: string,
+    key: keyof T,
     nestedPropIndex: number,
     nestedPropKey: string
 ): void;
-export function hidePropertyIn(
+export function hidePropertyIn<T>(
     propertyGroups: PropertyGroup[],
-    key: string,
+    key: keyof T,
     nestedPropIndex?: number,
     nestedPropKey?: string
 ): void {
@@ -25,6 +25,30 @@ export function hidePropertyIn(
         key,
         nestedPropIndex,
         nestedPropKey
+    );
+}
+
+export function hidePropertiesIn<T>(propertyGroups: PropertyGroup[], keys: Array<keyof T>): void;
+export function hidePropertiesIn<T>(
+    propertyGroups: PropertyGroup[],
+    keys: Array<keyof T>,
+    nestedPropIndex: number,
+    nestedPropKey: string
+): void;
+export function hidePropertiesIn<T>(
+    propertyGroups: PropertyGroup[],
+    keys: Array<keyof T>,
+    nestedPropIndex?: number,
+    nestedPropKey?: string
+): void {
+    keys.forEach(key =>
+        modifyProperty(
+            (_, index, container) => container.splice(index, 1),
+            propertyGroups,
+            key,
+            nestedPropIndex,
+            nestedPropKey
+        )
     );
 }
 
@@ -46,10 +70,10 @@ export function changePropertyIn(
     modifyProperty(modify, propertyGroups, key, nestedPropIndex, nestedPropKey);
 }
 
-function modifyProperty(
+function modifyProperty<T>(
     modify: (prop: Property, index: number, container: Property[]) => void,
     propertyGroups: PropertyGroup[],
-    key: string,
+    key: keyof T,
     nestedPropIndex?: number,
     nestedPropKey?: string
 ) {
