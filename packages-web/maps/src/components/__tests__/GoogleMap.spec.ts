@@ -8,7 +8,6 @@ describe("Google maps", () => {
         autoZoom: true,
         height: 75,
         heightUnit: "pixels",
-        scriptsLoaded: true,
         optionDrag: true,
         optionScroll: true,
         optionZoomControl: true,

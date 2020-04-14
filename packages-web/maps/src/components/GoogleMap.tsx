@@ -1,12 +1,11 @@
-import { createElement, ReactElement, useEffect, useRef } from "react";
+import { createElement, ReactElement, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 
-import googleApiWrapper from "./GoogleApi";
+import { LoadScript } from "@react-google-maps/api";
 import { getDimensions, getGoogleMapsStyles, Option } from "../utils";
 import { Marker, SharedProps } from "../../typings";
 
 export interface GoogleMapsProps extends SharedProps {
-    scriptsLoaded?: boolean;
     mapStyles?: string;
 
     optionStreetView: boolean;
@@ -19,9 +18,10 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
     const map = useRef<google.maps.Map>();
     const googleMapsDivNode = useRef<HTMLDivElement>(null);
     const markers = useRef<google.maps.Marker[]>([]); // Used to manage and remove markers from the map
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        if (props.scriptsLoaded) {
+        if (loaded && googleMapsDivNode.current) {
             const mapOptions: google.maps.MapOptions = {
                 zoom: props.zoomLevel,
                 zoomControl: props.optionZoomControl,
@@ -35,13 +35,13 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
                 maxZoom: 20,
                 styles: getGoogleMapsStyles(props.mapStyles)
             };
-            if (googleMapsDivNode.current && !map.current) {
+            if (!map.current) {
                 map.current = new google.maps.Map(googleMapsDivNode.current, mapOptions);
-            } else if (map.current) {
+            } else {
                 map.current.setOptions(mapOptions);
             }
         }
-    }, [props.scriptsLoaded]);
+    }, [loaded, googleMapsDivNode.current]);
 
     useEffect(() => {
         if (map.current) {
@@ -57,11 +57,20 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
     }, [map.current, props.locations, props.currentLocation, props.zoomLevel, props.autoZoom]);
 
     return (
-        <div className={classNames("widget-maps", props.className)} style={{ ...props.style, ...getDimensions(props) }}>
-            <div className="widget-google-maps-wrapper">
-                <div className="widget-google-maps" ref={googleMapsDivNode} />
+        <LoadScript
+            id="_com.mendix.widget.custom.Maps.Maps"
+            googleMapsApiKey={props.mapsToken}
+            onLoad={() => setLoaded(true)}
+        >
+            <div
+                className={classNames("widget-maps", props.className)}
+                style={{ ...props.style, ...getDimensions(props) }}
+            >
+                <div className="widget-google-maps-wrapper">
+                    <div className="widget-google-maps" ref={googleMapsDivNode} />
+                </div>
             </div>
-        </div>
+        </LoadScript>
     );
 }
 
@@ -141,5 +150,3 @@ function addMarker(map: google.maps.Map, bounds: google.maps.LatLngBounds, marke
     mapMarker.setMap(map);
     return mapMarker;
 }
-
-export default googleApiWrapper("https://maps.googleapis.com/maps/api/js?key=")(GoogleMap);

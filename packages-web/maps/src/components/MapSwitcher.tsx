@@ -1,5 +1,5 @@
 import { createElement, ReactElement } from "react";
-import GoogleMap, { GoogleMapsProps } from "./GoogleMap";
+import { GoogleMap, GoogleMapsProps } from "./GoogleMap";
 import { LeafletMap, LeafletProps } from "./LeafletMap";
 
 interface SwitcherProps extends GoogleMapsProps, LeafletProps {}
