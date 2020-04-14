@@ -82,8 +82,35 @@ describe("Slider widget", () => {
     });
 
     describe("Slider", () => {
-        it("renders with a range that goes from negative to positive");
-        it("renders multiple markers");
+        it("renders with a range that goes from negative to positive", () => {
+            page.open("p/negative-and-positive-range");
+
+            const sliderWidget = new SliderWidget("slider");
+            const textValueWidget = page.getWidget("textValue");
+
+            expect(textValueWidget.getText()).toContain("5");
+
+            sliderWidget.dragSliderHandleToMinimum();
+            expect(textValueWidget.getText()).toContain("-20");
+            sliderWidget.dragSliderHandleToMaximum();
+            expect(textValueWidget.getText()).toContain("20");
+        });
+
+        it("renders multiple markers", () => {
+            page.open("p/multiple-markers");
+
+            const sliderWidget = new SliderWidget("slider");
+
+            const markers = sliderWidget.getMarkers();
+            expect(markers.length).toBe(10);
+            expect(markers[0].dot.getAttribute("style")).toBe("left: 0%;");
+            expect(markers[0].label.getText()).toBe("0");
+            expect(markers[markers.length - 1].dot.getAttribute("style")).toBe("left: 100%;");
+            expect(markers[markers.length - 1].label.getText()).toBe("20");
+            expect(markers[3].dot.getAttribute("style")).toBe("left: 33.5%;");
+            expect(markers[3].label.getText()).toBe("6.7");
+        });
+
         it("renders decimal values");
         it("renders long values");
         // const textBoxValueWidget = page.getWidget("textBoxValue");

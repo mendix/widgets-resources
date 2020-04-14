@@ -11,6 +11,10 @@ class Page {
         return parent ? parent.$(selector) : $(selector);
     }
 
+    getElements(selector: string, parent?: WebdriverIO.Element): WebdriverIO.ElementArray {
+        return parent ? parent.$$(selector) : $$(selector);
+    }
+
     existing(selector: string): boolean {
         return this.getElement(selector).isExisting();
     }
@@ -21,10 +25,9 @@ class Page {
         return element;
     }
 
-    waitForElements(selector: string): WebdriverIO.Element[] {
-        this.getElement(selector).waitForDisplayed();
-        const elements = $$(selector);
-        return elements;
+    waitForElements(selector: string, parent?: WebdriverIO.Element): WebdriverIO.Element[] {
+        this.getElement(selector, parent).waitForDisplayed();
+        return this.getElements(selector, parent);
     }
 
     getWidget(widgetName: string): WebdriverIO.Element {

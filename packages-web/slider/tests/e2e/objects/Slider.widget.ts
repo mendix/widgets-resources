@@ -13,6 +13,23 @@ export default class SliderWidget {
         return page.waitForElement(".rc-slider", this.element);
     }
 
+    getMarkers(): Array<{ dot: WebdriverIO.Element; label: WebdriverIO.Element }> {
+        const dots = page.waitForElements(".rc-slider-step > span", this.element);
+        const labels = page.waitForElements(".rc-slider-mark > span", this.element);
+
+        const result: Array<{ dot: WebdriverIO.Element; label: WebdriverIO.Element }> = [];
+
+        if (dots.length !== labels.length) {
+            throw Error("The amount of slider dots and labels aren't equal");
+        }
+
+        for (let i = 0; i < dots.length; i++) {
+            result.push({ dot: dots[i], label: labels[i] });
+        }
+
+        return result;
+    }
+
     getMinimumSliderMark(): WebdriverIO.Element {
         return page.waitForElement(".rc-slider-mark > span:first-child", this.element);
     }
@@ -41,5 +58,9 @@ export default class SliderWidget {
 
     dragSliderHandleToMinimum(): void {
         this.getSliderHandle().dragAndDrop(this.getMinimumSliderMark());
+    }
+
+    dragSliderHandleToMaximum(): void {
+        this.getSliderHandle().dragAndDrop(this.getMaximumSliderMark());
     }
 }
