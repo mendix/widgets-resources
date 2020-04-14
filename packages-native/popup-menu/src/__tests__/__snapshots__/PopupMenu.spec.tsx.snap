@@ -123,9 +123,7 @@ exports[`Popup menu renders menu triggerer 1`] = `
                       "textAlign": "left",
                     },
                     false,
-                    Object {
-                      "color": "red",
-                    },
+                    undefined,
                   ]
                 }
               >
@@ -141,7 +139,7 @@ exports[`Popup menu renders menu triggerer 1`] = `
                   "flex": 1,
                 },
                 Object {
-                  "borderBottomColor": "green",
+                  "borderBottomColor": "rgba(0,0,0,0.12)",
                 },
               ]
             }
@@ -272,9 +270,7 @@ exports[`Popup menu with basic items renders 1`] = `
                       "textAlign": "left",
                     },
                     false,
-                    Object {
-                      "color": "red",
-                    },
+                    undefined,
                   ]
                 }
               >
@@ -290,7 +286,7 @@ exports[`Popup menu with basic items renders 1`] = `
                   "flex": 1,
                 },
                 Object {
-                  "borderBottomColor": "green",
+                  "borderBottomColor": "rgba(0,0,0,0.12)",
                 },
               ]
             }
@@ -439,7 +435,7 @@ exports[`Popup menu with basic items renders with custom styles 1`] = `
                   "flex": 1,
                 },
                 Object {
-                  "borderBottomColor": "green",
+                  "borderBottomColor": "rgba(0,0,0,0.12)",
                 },
               ]
             }
@@ -546,15 +542,7 @@ exports[`Popup menu with complex items renders 1`] = `
             style={null}
           >
             <View
-              style={
-                Object {
-                  "backgroundColor": "yellow",
-                  "height": 48,
-                  "justifyContent": "center",
-                  "maxWidth": 248,
-                  "minWidth": 124,
-                }
-              }
+              style={null}
             >
               <Text>
                 Yolo
@@ -666,10 +654,6 @@ exports[`Popup menu with complex items renders with custom styles 1`] = `
               style={
                 Object {
                   "backgroundColor": "yellow",
-                  "height": 48,
-                  "justifyContent": "center",
-                  "maxWidth": 248,
-                  "minWidth": 124,
                 }
               }
             >

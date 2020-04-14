@@ -48,7 +48,7 @@ describe("Popup menu", () => {
         it("renders with custom styles", () => {
             const customStyle = [
                 {
-                    menuItem: {
+                    basicItem: {
                         underlayColor: "green",
                         textStyle: {
                             color: "green"
@@ -82,8 +82,8 @@ describe("Popup menu", () => {
         it("renders with custom styles", () => {
             const customStyle = [
                 {
-                    menuItem: {
-                        complexItemContainer: {
+                    complexItem: {
+                        container: {
                             backgroundColor: "yellow"
                         }
                     }
