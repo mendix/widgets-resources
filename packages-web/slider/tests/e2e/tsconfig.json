@@ -1,5 +1,5 @@
 {
-    "extends": "../../../../configs/e2e/tsconfig.json",
+    "extends": "../../../utils-react-widgets/test-configs/e2e/tsconfig",
     "compilerOptions": {
         "baseUrl": ".",
         "rootDir": "./"

@@ -7,16 +7,16 @@ class Page {
         browser.url("/" + url);
     }
 
-    getElement(selector: string): WebdriverIO.Element {
-        return $(selector);
+    getElement(selector: string, parent?: WebdriverIO.Element): WebdriverIO.Element {
+        return parent ? parent.$(selector) : $(selector);
     }
 
     existing(selector: string): boolean {
         return this.getElement(selector).isExisting();
     }
 
-    waitForElement(selector: string): WebdriverIO.Element {
-        const element = this.getElement(selector);
+    waitForElement(selector: string, parent?: WebdriverIO.Element): WebdriverIO.Element {
+        const element = this.getElement(selector, parent);
         element.waitForDisplayed();
         return element;
     }

@@ -1,10 +1,32 @@
 import page from "../../../../../configs/e2e/src/pages/page";
-import FieldsetWidget from "../objects/Fieldset.widget";
+import SliderWidget from "../objects/Slider.widget";
 
 describe("Slider widget", () => {
     it("renders with context", () => {
-        page.open("/");
+        page.open();
+        const sliderWidget = new SliderWidget("sliderContext");
+
+        const minimumValue = page
+            .getWidget("textBoxMinimumValue")
+            .$("input")
+            .getValue();
+        expect(sliderWidget.getMinimumSliderMark().getText()).toBe(minimumValue);
+
+        const maximumValue = page
+            .getWidget("textBoxMaximumValue")
+            .$("input")
+            .getValue();
+        expect(sliderWidget.getMaximumSliderMark().getText()).toBe(maximumValue);
+
+        expect(
+            page
+                .getWidget("textBoxValue")
+                .$("input")
+                .getValue()
+        ).toBe("10");
+        expect(sliderWidget.getSliderHandle().getAttribute("style")).toBe("left: 50%;");
     });
+
     it("renders without context");
     it("listens to a grid");
     // it("renders in a list view");
