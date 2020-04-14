@@ -9,6 +9,10 @@ export default class SliderWidget {
         this.element = page.getWidget(this.name);
     }
 
+    getSliderRoot(): WebdriverIO.Element {
+        return page.waitForElement(".rc-slider", this.element);
+    }
+
     getMinimumSliderMark(): WebdriverIO.Element {
         return page.waitForElement(".rc-slider-mark > span:first-child", this.element);
     }
@@ -19,5 +23,23 @@ export default class SliderWidget {
 
     getSliderHandle(): WebdriverIO.Element {
         return page.waitForElement(".rc-slider-handle", this.element);
+    }
+
+    // getSliderTrack(): WebdriverIO.Element {
+    //     return page.waitForElement(".rc-slider-track", this.element);
+    // }
+
+    isDisabled(): boolean {
+        return this.getSliderRoot()
+            .getAttribute("class")
+            .includes("rc-slider-disabled");
+    }
+
+    isSliderTrackDisplayed(): boolean {
+        return this.element.$(".rc-slider-track").isDisplayed();
+    }
+
+    dragSliderHandleToMinimum(): void {
+        this.getSliderHandle().dragAndDrop(this.getMinimumSliderMark());
     }
 }
