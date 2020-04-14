@@ -1,11 +1,10 @@
 import { hidePropertyIn, Properties } from "@widgets-resources/piw-utils";
-import { BasicItemsType, PopupMenuProps } from "../typings/PopupMenuProps";
-import { PopupMenuStyle } from "./ui/Styles";
+import { BasicItemsPreviewType, PopupMenuPreviewProps } from "../typings/PopupMenuProps";
 
-export function getProperties(values: PopupMenuProps<PopupMenuStyle>, defaultProperties: Properties): Properties {
+export function getProperties(values: PopupMenuPreviewProps, defaultProperties: Properties): Properties {
     if (values.renderMode === "basic") {
         hidePropertyIn(defaultProperties, "complexItems");
-        values.basicItems.forEach((item: BasicItemsType, index: number) => {
+        values.basicItems.forEach((item: BasicItemsPreviewType, index: number) => {
             if (item.itemType === "divider") {
                 hidePropertyIn(defaultProperties, "basicItems", index, "caption");
                 hidePropertyIn(defaultProperties, "basicItems", index, "action");
