@@ -8,8 +8,8 @@
     "url": "https://github.com/mendix/widgets-resources.git"
   },
   "config": {
-    "widgetPath": "/Users/mehmet/Documents/Mendix/popup/widgets",
-    "projectPath": "/Users/mehmet/Documents/Mendix/popup"
+    "widgetPath": "../test-project/mxproject/widgets",
+    "projectPath": "../test-project/mxproject"
   },
   "packagePath": "com.mendix.widget.native",
   "scripts": {
