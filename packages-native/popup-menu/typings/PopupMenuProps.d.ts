@@ -1,15 +1,10 @@
 /**
  * This file was generated from PopupMenu.xml
  * WARNING: All changes made to this file will be overwritten
- * @author Mendix Widgets Team
+ * @author Mendix UI Content Team
  */
+import { ComponentType, ReactNode } from "react";
 import { ActionValue } from "mendix";
-import { ReactNode } from "react";
-
-interface CommonProps<Style> {
-    name: string;
-    style: Style[];
-}
 
 export type RenderModeEnum = "basic" | "custom";
 
@@ -29,9 +24,32 @@ export interface ComplexItemsType {
     action?: ActionValue;
 }
 
-export interface PopupMenuProps<Style> extends CommonProps<Style> {
+export interface BasicItemsPreviewType {
+    itemType: ItemTypeEnum;
+    caption: string;
+    action: {} | null;
+    styleClass: StyleClassEnum;
+}
+
+export interface ComplexItemsPreviewType {
+    content: { widgetCount: number; renderer: ComponentType };
+    action: {} | null;
+}
+
+export interface PopupMenuProps<Style> {
+    name: string;
+    style: Style[];
     menuTriggerer?: ReactNode;
     renderMode: RenderModeEnum;
     basicItems: BasicItemsType[];
     complexItems: ComplexItemsType[];
+}
+
+export interface PopupMenuPreviewProps {
+    class: string;
+    style: string;
+    menuTriggerer: { widgetCount: number; renderer: ComponentType };
+    renderMode: RenderModeEnum;
+    basicItems: BasicItemsPreviewType[];
+    complexItems: ComplexItemsPreviewType[];
 }
