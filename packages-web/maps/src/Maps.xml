@@ -151,7 +151,7 @@
                 </property>
                 <property key="showCurrentLocation" type="boolean" defaultValue="false">
                     <caption>Show current location</caption>
-                    <description/>
+                    <description>Shows the user current location marker</description>
                 </property>
             </propertyGroup>
         </propertyGroup>
@@ -195,7 +195,7 @@
             <propertyGroup caption="General">
                 <property key="widthUnit" type="enumeration" defaultValue="percentage">
                     <caption>Width unit</caption>
-                    <description/>
+                    <description>Percentage: portion of parent size. Pixels: absolute amount of pixels.</description>
                     <enumerationValues>
                         <enumerationValue key="percentage">Percentage</enumerationValue>
                         <enumerationValue key="pixels">Pixels</enumerationValue>
@@ -207,7 +207,7 @@
                 </property>
                 <property key="heightUnit" type="enumeration" defaultValue="percentageOfWidth">
                     <caption>Height unit</caption>
-                    <description>'Percentage of width' is the aspect ratio, 'Pixels' is absolute. Warning: the 'Percentage of parent' only works when the parent has an absolute height, else it will not display</description>
+                    <description>Percentage of width: is the aspect ratio based on width size. Pixels: absolute amount of pixels. Percentage of parent: portion of parent size, it only works when the parent has an absolute height, else it will not display.</description>
                     <enumerationValues>
                         <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
                         <enumerationValue key="pixels">Pixels</enumerationValue>
