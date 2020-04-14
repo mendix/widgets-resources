@@ -16,7 +16,7 @@ import Menu, { MenuDivider, MenuItem } from "react-native-material-menu";
 import flatten = StyleSheet.flatten;
 
 export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
-    const styles = flatten(props.style) as PopupMenuStyle;
+    const styles = flatten(props.style);
 
     const menuRef = useRef<any>(null);
     const showMenu = useCallback(() => {
