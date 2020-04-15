@@ -17,16 +17,16 @@ import Menu, { MenuDivider, MenuItem } from "react-native-material-menu";
 export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
     const styles = StyleSheet.flatten(props.style);
 
-    const menuRef = useRef<any>(null);
+    const menuRef = useRef<Menu>(null);
     const showMenu = useCallback(() => {
         menuRef.current?.show();
-    }, [menuRef]);
+    }, [menuRef.current]);
     const handlePress = useCallback(
         (action?: ActionValue) => {
             menuRef.current?.hide();
             executeAction(action);
         },
-        [menuRef]
+        [menuRef.current]
     );
 
     const Touchable: ComponentType<TouchableNativeFeedbackProps | TouchableHighlightProps> =
