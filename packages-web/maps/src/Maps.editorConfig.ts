@@ -1,11 +1,9 @@
 import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-utils";
-import { DynamicMarkersType, MapsPreviewProps, MarkersType } from "../typings/MapsProps";
+import { MapsPreviewProps } from "../typings/MapsProps";
 
 export function getProperties(values: MapsPreviewProps, defaultProperties: Properties): Properties {
     if (!values.advanced) {
-        hidePropertiesIn<MarkersType>(defaultProperties, ["markerStyle", "customMarker"]);
         hidePropertiesIn<MapsPreviewProps>(defaultProperties, ["mapProvider", "mapStyles", "geodecodeApiKey"]);
-        hidePropertyIn<DynamicMarkersType>(defaultProperties, "markerStyleDynamic");
     }
 
     values.markers.forEach((f, index) => {
@@ -15,7 +13,10 @@ export function getProperties(values: MapsPreviewProps, defaultProperties: Prope
         } else {
             hidePropertyIn<MapsPreviewProps>(defaultProperties, "markers", index, "address");
         }
-        if (f.markerStyle === "default") {
+        if (!values.advanced) {
+            hidePropertyIn<MapsPreviewProps>(defaultProperties, "markers", index, "markerStyle");
+            hidePropertyIn<MapsPreviewProps>(defaultProperties, "markers", index, "customMarker");
+        } else if (f.markerStyle === "default") {
             hidePropertyIn<MapsPreviewProps>(defaultProperties, "markers", index, "customMarker");
         }
     });
@@ -27,7 +28,9 @@ export function getProperties(values: MapsPreviewProps, defaultProperties: Prope
         } else {
             hidePropertyIn<MapsPreviewProps>(defaultProperties, "dynamicMarkers", index, "address");
         }
-        if (f.markerStyleDynamic === "default") {
+        if (!values.advanced) {
+            hidePropertyIn<MapsPreviewProps>(defaultProperties, "dynamicMarkers", index, "markerStyleDynamic");
+        } else if (f.markerStyleDynamic === "default") {
             hidePropertyIn<MapsPreviewProps>(defaultProperties, "dynamicMarkers", index, "customMarkerDynamic");
         }
     });
