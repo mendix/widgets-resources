@@ -1,4 +1,4 @@
-import { Component, ReactChild, createElement, ReactNode } from "react";
+import { Component, createElement, ReactChild, ReactNode } from "react";
 import { hot } from "react-hot-loader/root";
 
 import { Calendar, CalendarEvent } from "./Calendar";
@@ -172,16 +172,16 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
                     this.props.viewStartAttribute,
                     dateMath.startOf(startPosition, "week", [window.mx.session.sessionData.locale.firstDayOfWeek])
                 );
-                // eslint-disable-next-line no-unused-expressions
-                this.props.defaultView === "week"
-                    ? mxObject.set(
-                          this.props.viewEndAttribute,
-                          dateMath.endOf(new Date(startPosition.setDate(startPosition.getDate() + 6)), "day")
-                      )
-                    : mxObject.set(
-                          this.props.viewEndAttribute,
-                          dateMath.endOf(new Date(startPosition.setDate(startPosition.getDate() + 4)), "day")
-                      );
+
+                mxObject.set(
+                    this.props.viewEndAttribute,
+                    dateMath.endOf(
+                        new Date(
+                            startPosition.setDate(startPosition.getDate() + (this.props.defaultView === "week" ? 6 : 4))
+                        ),
+                        "day"
+                    )
+                );
             } else {
                 mxObject.set(this.props.viewStartAttribute, dateMath.startOf(viewStart, "month"));
                 mxObject.set(this.props.viewEndAttribute, dateMath.endOf(viewEnd, "month"));
@@ -509,8 +509,7 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
     }
 
     static logError(message: string, style?: string, error?: any): void {
-        // eslint-disable-next-line no-unused-expressions,no-console
-        window.logger ? window.logger.error(message) : console.log(message, style, error);
+        console.error(message, style, error);
     }
 }
 
