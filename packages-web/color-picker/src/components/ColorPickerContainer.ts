@@ -387,7 +387,6 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
     }
 
     static logError(message: string, style?: string, error?: any): void {
-        // eslint-disable-next-line no-unused-expressions,no-console
-        window.logger ? window.logger.error(message) : console.log(message, style, error);
+        console.error(message, style, error);
     }
 }
