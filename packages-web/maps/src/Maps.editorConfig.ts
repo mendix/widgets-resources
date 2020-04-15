@@ -3,40 +3,40 @@ import { MapsPreviewProps } from "../typings/MapsProps";
 
 export function getProperties(values: MapsPreviewProps, defaultProperties: Properties): Properties {
     if (!values.advanced) {
-        hidePropertiesIn<MapsPreviewProps>(defaultProperties, ["mapProvider", "mapStyles", "geodecodeApiKey"]);
+        hidePropertiesIn(defaultProperties, values, ["mapProvider", "mapStyles", "geodecodeApiKey"]);
     }
 
     values.markers.forEach((f, index) => {
         if (f.locationType === "address") {
-            hidePropertyIn<MapsPreviewProps>(defaultProperties, "markers", index, "latitude");
-            hidePropertyIn<MapsPreviewProps>(defaultProperties, "markers", index, "longitude");
+            hidePropertyIn(defaultProperties, values, "markers", index, "latitude");
+            hidePropertyIn(defaultProperties, values, "markers", index, "longitude");
         } else {
-            hidePropertyIn<MapsPreviewProps>(defaultProperties, "markers", index, "address");
+            hidePropertyIn(defaultProperties, values, "markers", index, "address");
         }
         if (!values.advanced) {
-            hidePropertyIn<MapsPreviewProps>(defaultProperties, "markers", index, "markerStyle");
-            hidePropertyIn<MapsPreviewProps>(defaultProperties, "markers", index, "customMarker");
+            hidePropertyIn(defaultProperties, values, "markers", index, "markerStyle");
+            hidePropertyIn(defaultProperties, values, "markers", index, "customMarker");
         } else if (f.markerStyle === "default") {
-            hidePropertyIn<MapsPreviewProps>(defaultProperties, "markers", index, "customMarker");
+            hidePropertyIn(defaultProperties, values, "markers", index, "customMarker");
         }
     });
 
     values.dynamicMarkers.forEach((f, index) => {
         if (f.locationType === "address") {
-            hidePropertyIn<MapsPreviewProps>(defaultProperties, "dynamicMarkers", index, "latitude");
-            hidePropertyIn<MapsPreviewProps>(defaultProperties, "dynamicMarkers", index, "longitude");
+            hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "latitude");
+            hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "longitude");
         } else {
-            hidePropertyIn<MapsPreviewProps>(defaultProperties, "dynamicMarkers", index, "address");
+            hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "address");
         }
         if (!values.advanced) {
-            hidePropertyIn<MapsPreviewProps>(defaultProperties, "dynamicMarkers", index, "markerStyleDynamic");
+            hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "markerStyleDynamic");
         } else if (f.markerStyleDynamic === "default") {
-            hidePropertyIn<MapsPreviewProps>(defaultProperties, "dynamicMarkers", index, "customMarkerDynamic");
+            hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "customMarkerDynamic");
         }
     });
 
     if (values.mapProvider !== "googleMaps") {
-        hidePropertiesIn<MapsPreviewProps>(defaultProperties, [
+        hidePropertiesIn(defaultProperties, values, [
             "optionStreetView",
             "mapTypeControl",
             "fullScreenControl",
@@ -44,10 +44,10 @@ export function getProperties(values: MapsPreviewProps, defaultProperties: Prope
             "mapStyles"
         ]);
         if (values.mapProvider === "openStreet") {
-            hidePropertyIn<MapsPreviewProps>(defaultProperties, "apiKey");
+            hidePropertyIn(defaultProperties, values, "apiKey");
         }
     } else {
-        hidePropertyIn<MapsPreviewProps>(defaultProperties, "attributionControl");
+        hidePropertyIn(defaultProperties, values, "attributionControl");
     }
 
     return defaultProperties;

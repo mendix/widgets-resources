@@ -1,154 +1,151 @@
-import { createElement, ReactElement, useEffect, useRef, useState } from "react";
+import { createElement, Dispatch, ReactElement, SetStateAction, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
-
-import { LoadScript } from "@react-google-maps/api";
+import {
+    GoogleMap as GoogleMapComponent,
+    Marker as MarkerComponent,
+    InfoWindow,
+    LoadScript
+} from "@react-google-maps/api";
 import { Marker, SharedProps } from "../../typings/shared";
 import { getGoogleMapsStyles } from "../utils/google";
 import { getDimensions } from "../utils/dimension";
+import { translateZoom } from "../utils/zoom";
 import { Option } from "../utils/data";
 
 export interface GoogleMapsProps extends SharedProps {
     mapStyles?: string;
-
-    optionStreetView: boolean;
+    streetViewControl: boolean;
     mapTypeControl: boolean;
-    fullScreenControl: boolean;
+    fullscreenControl: boolean;
     rotateControl: boolean;
 }
 
 export function GoogleMap(props: GoogleMapsProps): ReactElement {
     const map = useRef<google.maps.Map>();
-    const googleMapsDivNode = useRef<HTMLDivElement>(null);
-    const markers = useRef<google.maps.Marker[]>([]); // Used to manage and remove markers from the map
-    const [loaded, setLoaded] = useState(false);
-
-    useEffect(() => {
-        if (loaded && googleMapsDivNode.current) {
-            const mapOptions: google.maps.MapOptions = {
-                zoom: props.zoomLevel,
-                zoomControl: props.optionZoomControl,
-                scrollwheel: props.optionScroll,
-                draggable: props.optionDrag,
-                streetViewControl: props.optionStreetView,
-                mapTypeControl: props.mapTypeControl,
-                fullscreenControl: props.fullScreenControl,
-                rotateControl: props.rotateControl,
-                minZoom: 1,
-                maxZoom: 20,
-                styles: getGoogleMapsStyles(props.mapStyles)
-            };
-            if (!map.current) {
-                map.current = new google.maps.Map(googleMapsDivNode.current, mapOptions);
-            } else {
-                map.current.setOptions(mapOptions);
-            }
-        }
-    }, [loaded, googleMapsDivNode.current]);
+    const center = useRef<google.maps.LatLngLiteral>({
+        lat: 51.906688,
+        lng: 4.48837
+    });
+    const [selectedMarker, setSelectedMarker] = useState<Option<Marker>>();
+    const {
+        optionZoomControl: zoomControl,
+        optionScroll: scrollwheel,
+        optionDrag: draggable,
+        streetViewControl,
+        mapTypeControl,
+        fullscreenControl,
+        rotateControl
+    } = props;
 
     useEffect(() => {
         if (map.current) {
-            addMarkers(
-                map.current,
-                markers.current,
-                props.locations,
-                props.currentLocation,
-                props.zoomLevel,
-                props.autoZoom
-            );
+            const bounds = new google.maps.LatLngBounds();
+            props.locations
+                .concat(props.currentLocation ? [props.currentLocation] : [])
+                .filter(m => !!m)
+                .forEach(marker => {
+                    bounds.extend({
+                        lat: marker.latitude,
+                        lng: marker.longitude
+                    });
+                });
+            if (bounds.isEmpty()) {
+                bounds.extend(center.current);
+            }
+            if (props.autoZoom) {
+                map.current.fitBounds(bounds);
+            } else {
+                map.current.setCenter(bounds.getCenter());
+            }
         }
-    }, [map.current, props.locations, props.currentLocation, props.zoomLevel, props.autoZoom]);
+    }, [map.current, props.locations, props.currentLocation]);
 
     return (
-        <LoadScript
-            id="_com.mendix.widget.custom.Maps.Maps"
-            googleMapsApiKey={props.mapsToken}
-            onLoad={() => setLoaded(true)}
-        >
-            <div
-                className={classNames("widget-maps", props.className)}
-                style={{ ...props.style, ...getDimensions(props) }}
-            >
-                <div className="widget-google-maps-wrapper">
-                    <div className="widget-google-maps" ref={googleMapsDivNode} />
-                </div>
+        <div className={classNames("widget-maps", props.className)} style={{ ...props.style, ...getDimensions(props) }}>
+            <div className="widget-google-maps-wrapper">
+                <LoadScript
+                    googleMapsApiKey={props.mapsToken}
+                    id="_com.mendix.widget.custom.Maps.Maps"
+                    loadingElement={<div className="spinner" />}
+                >
+                    <GoogleMapComponent
+                        mapContainerClassName="widget-google-maps"
+                        options={{
+                            zoomControl,
+                            scrollwheel,
+                            draggable,
+                            streetViewControl,
+                            mapTypeControl,
+                            fullscreenControl,
+                            rotateControl,
+                            minZoom: 1,
+                            maxZoom: 20,
+                            styles: getGoogleMapsStyles(props.mapStyles)
+                        }}
+                        onLoad={googleMapRef => {
+                            map.current = googleMapRef;
+                        }}
+                        onCenterChanged={() => {
+                            if (map.current) {
+                                center.current = map.current.getCenter().toJSON();
+                            }
+                        }}
+                        zoom={props.autoZoom ? translateZoom("city") : props.zoomLevel}
+                        center={center.current}
+                    >
+                        {props.locations
+                            .concat(props.currentLocation ? [props.currentLocation] : [])
+                            .filter(m => !!m)
+                            .map((marker, index) => (
+                                <GoogleMapsMarker
+                                    key={`marker_${index}`}
+                                    marker={marker}
+                                    selectedMarker={selectedMarker}
+                                    setSelectedMarker={setSelectedMarker}
+                                />
+                            ))}
+                    </GoogleMapComponent>
+                </LoadScript>
             </div>
-        </LoadScript>
+        </div>
     );
 }
 
-function addMarkers(
-    map: google.maps.Map,
-    markers: google.maps.Marker[],
-    locations: Marker[],
-    currentLocation: Option<Marker>,
-    zoomLevel: number,
-    autoZoom: boolean
-): void {
-    markers.forEach(marker => marker.setMap(null));
-    markers.splice(0, markers.length);
-
-    const bounds = new google.maps.LatLngBounds();
-    const defaultCenterLocation = { lat: 51.906688, lng: 4.48837 };
-    markers.push(
-        ...locations
-            .concat(currentLocation ? [currentLocation] : [])
-            .map(location => addMarker(map, bounds, location))
-            .filter(m => m)
+function GoogleMapsMarker({
+    marker,
+    selectedMarker,
+    setSelectedMarker
+}: {
+    marker: Marker;
+    selectedMarker: Option<Marker>;
+    setSelectedMarker: Dispatch<SetStateAction<Option<Marker>>>;
+}): ReactElement {
+    const markerRef = useRef<google.maps.MVCObject>();
+    return (
+        <MarkerComponent
+            position={{
+                lat: marker.latitude,
+                lng: marker.longitude
+            }}
+            title={marker.title}
+            clickable={!!marker.title || !!marker.onClick}
+            onLoad={ref => {
+                markerRef.current = ref;
+            }}
+            onClick={
+                marker.title ? () => setSelectedMarker(prev => (prev !== marker ? marker : undefined)) : marker.onClick
+            }
+        >
+            {selectedMarker === marker && markerRef.current && (
+                <InfoWindow
+                    anchor={markerRef.current}
+                    onCloseClick={() => setSelectedMarker(prev => (prev === marker ? undefined : prev))}
+                >
+                    <span style={{ cursor: marker.onClick ? "pointer" : "none" }} onClick={marker.onClick}>
+                        {marker.title}
+                    </span>
+                </InfoWindow>
+            )}
+        </MarkerComponent>
     );
-    if (!markers.length) {
-        bounds.extend(defaultCenterLocation);
-    }
-    if (!autoZoom) {
-        map.setCenter({
-            lat: markers?.[0]?.getPosition()?.lat() ?? defaultCenterLocation.lat,
-            lng: markers?.[0]?.getPosition()?.lng() ?? defaultCenterLocation.lng
-        });
-        map.setZoom(zoomLevel);
-    } else {
-        map.fitBounds(bounds);
-    }
-}
-
-function addMarker(map: google.maps.Map, bounds: google.maps.LatLngBounds, marker: Marker): google.maps.Marker {
-    bounds.extend({
-        lat: marker.latitude,
-        lng: marker.longitude
-    });
-    const mapMarker = new google.maps.Marker({
-        position: {
-            lat: marker.latitude,
-            lng: marker.longitude
-        },
-        icon: marker.url
-            ? {
-                  url: marker.url,
-                  scaledSize: new google.maps.Size(32, 32)
-              }
-            : "",
-        title: marker.title
-    });
-    if (marker.title) {
-        const infoContent = document.createElement("span");
-        infoContent.innerHTML = marker.title || "";
-        if (marker.onClick) {
-            infoContent.style.cursor = "pointer";
-            infoContent.onclick = marker.onClick;
-        }
-        const infoWindow = new google.maps.InfoWindow({
-            content: infoContent
-        });
-        mapMarker.addListener("click", () => {
-            infoWindow.open(map, mapMarker);
-        });
-    } else {
-        if (marker.onClick) {
-            mapMarker.addListener("click", () => {
-                marker.onClick!();
-            });
-        } else {
-            mapMarker.setClickable(false);
-        }
-    }
-    mapMarker.setMap(map);
-    return mapMarker;
 }

@@ -25,7 +25,7 @@ export const preview = (props: MapsPreviewProps): ReactNode => {
             autoZoom={false}
             className={props.class}
             currentLocation={locations[0]}
-            fullScreenControl={props.fullScreenControl}
+            fullscreenControl={props.fullScreenControl}
             height={Number(props.height)}
             heightUnit={props.heightUnit}
             locations={locations}
@@ -35,10 +35,10 @@ export const preview = (props: MapsPreviewProps): ReactNode => {
             mapTypeControl={props.mapTypeControl}
             optionDrag={false}
             optionScroll={false}
-            optionStreetView={props.optionStreetView}
             optionZoomControl={props.optionZoomControl}
             rotateControl={props.rotateControl}
             showCurrentLocation={props.showCurrentLocation}
+            streetViewControl={props.optionStreetView}
             style={parseStyle(props.style)}
             width={Number(props.width)}
             widthUnit={props.widthUnit}

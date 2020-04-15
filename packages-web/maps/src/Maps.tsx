@@ -1,4 +1,3 @@
-import { hot } from "react-hot-loader/root";
 import { createElement, ReactNode, useEffect, useState } from "react";
 import { MapSwitcher } from "./components/MapSwitcher";
 
@@ -14,7 +13,7 @@ import "./ui/Maps.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import "leaflet-defaulticon-compatibility";
 
-const Maps = (props: MapsContainerProps): ReactNode => {
+export default function Maps(props: MapsContainerProps): ReactNode {
     const [locations] = useLocationResolver(
         props.markers,
         props.dynamicMarkers,
@@ -36,7 +35,7 @@ const Maps = (props: MapsContainerProps): ReactNode => {
             autoZoom={props.zoom === "automatic"}
             className={props.class}
             currentLocation={currentLocation}
-            fullScreenControl={props.fullScreenControl}
+            fullscreenControl={props.fullScreenControl}
             height={props.height}
             heightUnit={props.heightUnit}
             locations={locations}
@@ -46,16 +45,14 @@ const Maps = (props: MapsContainerProps): ReactNode => {
             mapTypeControl={props.mapTypeControl}
             optionDrag={props.optionDrag}
             optionScroll={props.optionScroll}
-            optionStreetView={props.optionStreetView}
             optionZoomControl={props.optionZoomControl}
             rotateControl={props.rotateControl}
             showCurrentLocation={props.showCurrentLocation}
+            streetViewControl={props.optionStreetView}
             style={props.style}
             width={props.width}
             widthUnit={props.widthUnit}
             zoomLevel={translateZoom(props.zoom)}
         />
     );
-};
-
-export default hot(Maps);
+}
