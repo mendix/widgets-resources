@@ -57,7 +57,7 @@
                 </properties>
             </property>
             <property key="customItems" type="object" isList="true" required="false">
-                <caption>Items </caption>
+                <caption> Items</caption>
                 <description />
                 <properties>
                     <property key="content" type="widgets">
