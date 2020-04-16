@@ -3,14 +3,14 @@
         supportedPlatform="Native"
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
-    <name>Popup Menu</name>
+    <name>Popup menu</name>
     <description>My widget description</description>
     <icon/>
     <properties>
         <propertyGroup caption="General">
             <property key="menuTriggerer" type="widgets" required="false">
-                <caption>Menu Triggerer</caption>
-                <description>Wrapped with touchable area. Responsible for toggling the popupMenu</description>
+                <caption>Clickable area to show menu</caption>
+                <description>Wrapped with touchable area. Responsible for toggling the Popup menu</description>
             </property>
             <property key="renderMode" type="enumeration" defaultValue="basic">
                 <caption>Render</caption>
@@ -43,20 +43,21 @@
                         <category>General</category>
                         <description />
                     </property>
-                    <property key="styleClass" type="enumeration" defaultValue="default">
+                    <property key="styleClass" type="enumeration" defaultValue="defaultStyle">
                         <caption>Style</caption>
                         <category>General</category>
                         <description />
                         <enumerationValues>
-                            <enumerationValue key="default">Default</enumerationValue>
-                            <enumerationValue key="primary">Primary</enumerationValue>
-                            <enumerationValue key="danger">Danger</enumerationValue>
+                            <enumerationValue key="defaultStyle">Default</enumerationValue>
+                            <enumerationValue key="primaryStyle">Primary</enumerationValue>
+                            <enumerationValue key="dangerStyle">Danger</enumerationValue>
+                            <enumerationValue key="customStyle">Custom</enumerationValue>
                         </enumerationValues>
                     </property>
                 </properties>
             </property>
-            <property key="complexItems" type="object" isList="true" required="false">
-                <caption>Items Complex</caption>
+            <property key="customItems" type="object" isList="true" required="false">
+                <caption>Items </caption>
                 <description />
                 <properties>
                     <property key="content" type="widgets">

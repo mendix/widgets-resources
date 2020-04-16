@@ -3,14 +3,14 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ComponentType, ReactNode } from "react";
+import { Component, ReactNode } from "react";
 import { ActionValue } from "mendix";
 
 export type RenderModeEnum = "basic" | "custom";
 
 export type ItemTypeEnum = "item" | "divider";
 
-export type StyleClassEnum = "default" | "primary" | "danger";
+export type StyleClassEnum = "defaultStyle" | "primaryStyle" | "dangerStyle" | "customStyle";
 
 export interface BasicItemsType {
     itemType: ItemTypeEnum;
@@ -19,7 +19,7 @@ export interface BasicItemsType {
     styleClass: StyleClassEnum;
 }
 
-export interface ComplexItemsType {
+export interface CustomItemsType {
     content: ReactNode;
     action?: ActionValue;
 }
@@ -31,8 +31,8 @@ export interface BasicItemsPreviewType {
     styleClass: StyleClassEnum;
 }
 
-export interface ComplexItemsPreviewType {
-    content: { widgetCount: number; renderer: ComponentType };
+export interface CustomItemsPreviewType {
+    content: { widgetCount: number; renderer: Component };
     action: {} | null;
 }
 
@@ -42,14 +42,14 @@ export interface PopupMenuProps<Style> {
     menuTriggerer?: ReactNode;
     renderMode: RenderModeEnum;
     basicItems: BasicItemsType[];
-    complexItems: ComplexItemsType[];
+    customItems: CustomItemsType[];
 }
 
 export interface PopupMenuPreviewProps {
     class: string;
     style: string;
-    menuTriggerer: { widgetCount: number; renderer: ComponentType };
+    menuTriggerer: { widgetCount: number; renderer: Component };
     renderMode: RenderModeEnum;
     basicItems: BasicItemsPreviewType[];
-    complexItems: ComplexItemsPreviewType[];
+    customItems: CustomItemsPreviewType[];
 }

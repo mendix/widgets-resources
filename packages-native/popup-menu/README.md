@@ -12,7 +12,7 @@ Simply fill the content of the triggerer. This is a free modeling content and wi
 
 For the sake of simplicity, there are two modes available to add new items to popup menu:
 
-#### Simple mode
+#### Basic mode
 
 Simply add new item with Caption and Action to quickly create a dropdown item. Selecting divider will add a divider with straight line.
 
@@ -24,45 +24,51 @@ If you wish to achieve tooltip like behaviour this can be best achieved by this 
 
 ## Styling
 
-Main object have four objects.
+Main object have four objects. Objects with ?, means they are optional and doesn't need to be provided in the main object.
 
-| Style Key                       | Description                                                                                                      |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| basicItem?: BasicItemStyle;     | Styles basic items\.                                                                                             |
-| complexItem?: ComplexItemStyle; | Styles custom item types\.                                                                                       |
-| buttonContainer?: ViewStyle;    | Styles the wrapper view of triggerer since there could be multiple elements and it has to be wrapped in a view\. |
-| buttonUnderlayColor?: string;   | \(Only in IOS\)\. Styles the background color of the triggerer which will be revealed when user taps on it \.    |
+| Style Key                      | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| basicItem?: MenuItemsStyle;    | Styles basic items\.                                                                                             |
+| customItem?: ComplexItemStyle; | Styles custom item types\.                                                                                       |
+| buttonContainer?: ViewStyle;   | Styles the wrapper view of triggerer since there could be multiple elements and it has to be wrapped in a view\. |
+
+#### MenuItemStyle
+
+| Style Key                      | Description                                                      |
+| ------------------------------ | ---------------------------------------------------------------- |
+| defaultStyle?: BasicItemStyle; | Styles all basic menu items which has "default" style selected\. |
+| primaryStyle?: BasicItemStyle; | Styles all basic menu items which has "primary" style selected\. |
+| dangerStyle?: BasicItemStyle;  | Styles all basic menu items which has "danger" style selected\.  |
+| customStyle?: BasicItemStyle;  | Styles all basic menu items which has "custom" style selected\.  |
 
 #### BasicItemStyle
 
-| Style Key                                     | Description                                                                                                   |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| container?: ViewStyle;                        | Styles the wrapper container\.                                                                                |
-| textStyle?: TextStyle;                        | Styles the caption\.                                                                                          |
-| ellipsizeMode?: TextProps\["ellipsizeMode"\]; | Styles how the text will be clipped if its too long\. Can be 'head', 'middle', 'tail' and 'clip'              |
-| dividerColor?: string;                        | Styles the divider color                                                                                      |
-| underlayColor?: string;                       | \(Only in IOS\)\. Styles the background color of the menu item which will be revealed when user taps on it \. |
+| Style Key                                     | Description                                                                                      |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| container?: ViewStyle;                        | Styles the wrapper container\.                                                                   |
+| textStyle?: TextStyle;                        | Styles the caption\.                                                                             |
+| ellipsizeMode?: TextProps\["ellipsizeMode"\]; | Styles how the text will be clipped if its too long\. Can be 'head', 'middle', 'tail' and 'clip' |
+| dividerColor?: string;                        | Styles the divider color                                                                         |
 
 #### ComplexItemStyle
 
-| Style Key               | Description                                                                                                  |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------ |
-| container?: ViewStyle;  | Styles the wrapper container\.                                                                               |
-| underlayColor?: string; | \(Only in IOS\)\. Styles the background color of the menu item which will be reveled when user taps on it \. |
+| Style Key              | Description                    |
+| ---------------------- | ------------------------------ |
+| container?: ViewStyle; | Styles the wrapper container\. |
 
 Example:
 
 ```
-    export const stle = {
+    export const style = {
        basicItem: {
-           underlayColor: "#e0e0e0",
-           dividerColor: "green",
-           textStyle: {
-               color: "red"
-           }
+          defaultStyle: {
+             dividerColor: "green",
+             textStyle: {
+                 color: "red"
+             }
+          }
        },
-       complexItem: {
-           underlayColor: "#e0e0e0",
+       customItem: {
            container: {
                backgroundColor: "yellow",
                height: 48,
@@ -70,7 +76,6 @@ Example:
                maxWidth: 248,
                minWidth: 124
            }
-       },
-       buttonUnderlayColor: "#e0e0e0"
+       }
    };
 ```

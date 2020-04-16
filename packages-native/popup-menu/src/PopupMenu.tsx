@@ -1,14 +1,13 @@
 import { ComponentType, createElement, ReactElement, useCallback, useRef } from "react";
 import { PopupMenuProps } from "../typings/PopupMenuProps";
-import { PopupMenuStyle } from "./ui/Styles";
+import { BasicItemStyle, PopupMenuStyle } from "./ui/Styles";
 import { executeAction } from "@widgets-resources/piw-utils";
 import {
     Platform,
     StyleSheet,
-    TouchableHighlight,
-    TouchableHighlightProps,
     TouchableNativeFeedback,
     TouchableNativeFeedbackProps,
+    TouchableOpacity,
     View
 } from "react-native";
 import { ActionValue } from "mendix";
@@ -29,40 +28,39 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
         [menuRef.current]
     );
 
-    const Touchable: ComponentType<TouchableNativeFeedbackProps | TouchableHighlightProps> =
-        Platform.OS === "android" ? TouchableNativeFeedback : TouchableHighlight;
+    const Touchable: ComponentType<TouchableNativeFeedbackProps | TouchableOpacity> =
+        Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
 
     let menuOptions: ReactElement[];
     if (props.renderMode === "basic") {
-        menuOptions = props.basicItems.map((item, index) =>
-            item.itemType === "divider" ? (
-                <MenuDivider key={index} color={styles.basicItem?.dividerColor} />
+        menuOptions = props.basicItems.map((item, index) => {
+            const menuStyle: BasicItemStyle | undefined = styles.basicItem?.[item.styleClass];
+            return item.itemType === "divider" ? (
+                <MenuDivider key={index} color={menuStyle?.dividerColor} />
             ) : (
                 <MenuItem
                     key={index}
                     onPress={() => handlePress(item.action)}
-                    underlayColor={styles.basicItem?.underlayColor}
-                    textStyle={styles.basicItem?.textStyle}
-                    ellipsizeMode={styles.basicItem?.ellipsizeMode as any}
-                    style={styles.basicItem?.container as any}
+                    textStyle={menuStyle?.textStyle}
+                    ellipsizeMode={menuStyle?.ellipsizeMode as any}
+                    style={menuStyle?.container as any}
                 >
                     {item.caption}
                 </MenuItem>
-            )
-        );
+            );
+        });
     } else {
-        menuOptions = props.complexItems.map((item, index) => (
+        menuOptions = props.customItems.map((item, index) => (
             <Touchable
                 key={index}
                 onPress={() => handlePress(item.action)}
-                underlayColor={styles.complexItem?.underlayColor}
                 {...(Platform.OS === "android"
                     ? {
                           background: TouchableNativeFeedback.SelectableBackground()
                       }
                     : {})}
             >
-                <View style={styles.complexItem?.container}>{item.content}</View>
+                <View style={styles.customItem?.container}>{item.content}</View>
             </Touchable>
         ));
     }
@@ -71,7 +69,7 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
         <Menu
             ref={menuRef}
             button={
-                <Touchable onPress={showMenu} underlayColor={styles.buttonUnderlayColor}>
+                <Touchable onPress={showMenu}>
                     <View style={styles.buttonContainer}>{props.menuTriggerer}</View>
                 </Touchable>
             }
