@@ -148,13 +148,13 @@ exports[`Leaflet maps renders a map with current location 1`] = `
         attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap</a> contributors"
         url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
       />
-      <LeafletMarker
+      <ForwardRef(Leaflet(Marker))
+        interactive={false}
         key="marker_0"
-        marker={
+        position={
           Object {
-            "latitude": 51.906688,
-            "longitude": 4.48837,
-            "url": "image:url",
+            "lat": 51.906688,
+            "lng": 4.48837,
           }
         }
       />
@@ -196,28 +196,52 @@ exports[`Leaflet maps renders a map with markers 1`] = `
         attribution="&copy; <a href='https://osm.org/copyright'>OpenStreetMap</a> contributors"
         url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
       />
-      <LeafletMarker
+      <ForwardRef(Leaflet(Marker))
+        interactive={true}
         key="marker_0"
-        marker={
+        position={
           Object {
-            "latitude": 51.906688,
-            "longitude": 4.48837,
-            "title": "Mendix HQ",
-            "url": "image:url",
+            "lat": 51.906688,
+            "lng": 4.48837,
           }
         }
-      />
-      <LeafletMarker
+        title="Mendix HQ"
+      >
+        <ForwardRef(Leaflet(Popup))>
+          <span
+            style={
+              Object {
+                "cursor": "none",
+              }
+            }
+          >
+            Mendix HQ
+          </span>
+        </ForwardRef(Leaflet(Popup))>
+      </ForwardRef(Leaflet(Marker))>
+      <ForwardRef(Leaflet(Marker))
+        interactive={true}
         key="marker_1"
-        marker={
+        position={
           Object {
-            "latitude": 51.922823,
-            "longitude": 4.479632,
-            "title": "Gementee Rotterdam",
-            "url": "image:url",
+            "lat": 51.922823,
+            "lng": 4.479632,
           }
         }
-      />
+        title="Gementee Rotterdam"
+      >
+        <ForwardRef(Leaflet(Popup))>
+          <span
+            style={
+              Object {
+                "cursor": "none",
+              }
+            }
+          >
+            Gementee Rotterdam
+          </span>
+        </ForwardRef(Leaflet(Popup))>
+      </ForwardRef(Leaflet(Marker))>
     </Map>
   </div>
 </div>

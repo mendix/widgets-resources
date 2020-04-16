@@ -1,7 +1,7 @@
 import { createElement, ReactElement, useEffect, useRef } from "react";
 import { Map, Marker as MarkerComponent, Popup, TileLayer } from "react-leaflet";
 import classNames from "classnames";
-import { Marker, SharedProps } from "../../typings/shared";
+import { SharedProps } from "../../typings/shared";
 import { MapProviderEnum } from "../../typings/MapsProps";
 import { getDimensions } from "../utils/dimension";
 import { translateZoom } from "../utils/zoom";
@@ -77,29 +77,27 @@ export function LeafletMap(props: LeafletProps): ReactElement {
                         .concat(currentLocation ? [currentLocation] : [])
                         .filter(m => !!m)
                         .map((marker, index) => (
-                            <LeafletMarker marker={marker} key={`marker_${index}`} />
+                            <MarkerComponent
+                                key={`marker_${index}`}
+                                position={{ lat: marker.latitude, lng: marker.longitude }}
+                                onclick={marker.title ? undefined : marker.onClick}
+                                interactive={!!marker.title || !!marker.onClick}
+                                title={marker.title}
+                            >
+                                {marker.title && (
+                                    <Popup>
+                                        <span
+                                            style={{ cursor: marker.onClick ? "pointer" : "none" }}
+                                            onClick={marker.onClick}
+                                        >
+                                            {marker.title}
+                                        </span>
+                                    </Popup>
+                                )}
+                            </MarkerComponent>
                         ))}
                 </Map>
             </div>
         </div>
-    );
-}
-
-function LeafletMarker({ marker }: { marker: Marker }): ReactElement {
-    return (
-        <MarkerComponent
-            position={{ lat: marker.latitude, lng: marker.longitude }}
-            onclick={marker.title ? undefined : marker.onClick}
-            interactive={!!marker.title || !!marker.onClick}
-            title={marker.title}
-        >
-            {marker.title && (
-                <Popup>
-                    <span style={{ cursor: marker.onClick ? "pointer" : "none" }} onClick={marker.onClick}>
-                        {marker.title}
-                    </span>
-                </Popup>
-            )}
-        </MarkerComponent>
     );
 }
