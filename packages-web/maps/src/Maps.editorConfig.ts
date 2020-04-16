@@ -89,21 +89,6 @@ export function getProperties(
 export function check(values: MapsPreviewProps): Problem[] {
     const errors: Problem[] = [];
 
-    if (values.apiKey && values.apiKeyExp) {
-        errors.push({
-            property: "apiKey",
-            message: "Api key was previously configured using Studio or Studio Pro, please leave this field empty"
-        });
-    }
-
-    if (values.geodecodeApiKey && values.geodecodeApiKeyExp) {
-        errors.push({
-            property: "geodecodeApiKey",
-            message:
-                "Google maps API Key was previously configured using Studio or Studio Pro, please leave this field empty"
-        });
-    }
-
     if (values.mapProvider !== "openStreet" && !values.apiKey && !values.apiKeyExp) {
         errors.push({
             property: "apiKey",
