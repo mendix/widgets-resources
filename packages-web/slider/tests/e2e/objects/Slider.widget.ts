@@ -24,7 +24,10 @@ export default class SliderWidget {
         }
 
         for (let i = 0; i < dots.length; i++) {
-            result.push({ dot: dots[i], label: labels[i] });
+            result.push({
+                dot: page.waitForElement(`.rc-slider-step > span:nth-child(${i + 1})`),
+                label: page.waitForElement(`.rc-slider-mark > span:nth-child(${i + 1})`)
+            });
         }
 
         return result;
@@ -58,10 +61,15 @@ export default class SliderWidget {
     }
 
     dragHandleToMinimum(): void {
-        this.getHandle().dragAndDrop(page.waitForElement(".rc-slider-step > span:first-child", this.element));
+        this.getHandle().dragAndDrop(this.getMarkers()[0].dot);
     }
 
     dragHandleToMaximum(): void {
-        this.getHandle().dragAndDrop(page.waitForElement(".rc-slider-step > span:last-child", this.element));
+        const markers = this.getMarkers();
+        this.getHandle().dragAndDrop(markers[markers.length - 1].dot);
+    }
+
+    dragHandleTo(marker: { dot: WebdriverIO.Element; label: WebdriverIO.Element }): void {
+        this.getHandle().dragAndDrop(marker.dot);
     }
 }
