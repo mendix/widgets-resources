@@ -89,6 +89,7 @@ function LeafletMarker({ marker }: { marker: Marker }): ReactElement {
             position={{ lat: marker.latitude, lng: marker.longitude }}
             onclick={marker.title ? undefined : marker.onClick}
             interactive={!!marker.title || !!marker.onClick}
+            title={marker.title}
         >
             {marker.title && (
                 <Popup>
