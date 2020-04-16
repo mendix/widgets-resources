@@ -1,60 +1,55 @@
 {
-    "name": "maps-web",
-    "widgetName": "Maps",
-    "version": "1.0.9",
-    "description": "Show locations on Google Maps",
-    "copyright": "Mendix BV",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/mendix/widgets-resources.git"
-    },
-    "scripts": {
-        "start": ".\"/node_modules/.bin/utils-react-widgets\" start",
-        "dev": ".\"/node_modules/.bin/utils-react-widgets\" dev",
-        "format": "../../node_modules/.bin/prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-        "test": "npm run test:unit",
-        "test:unit": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
-        "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://leafletmaps.mxapps.io ../../scripts/test/projectup.sh",
-        "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://leafletmaps.mxapps.io ..\"/../node_modules/.bin/wdio\" ../../configs/e2e/wdio.conf.js",
-        "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ..\"/../node_modules/.bin/wdio\" ../../configs/e2e/wdio.conf.js",
-        "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-        "lint:fix": "npm run lint -- --fix",
-        "build": ".\"/node_modules/.bin/utils-react-widgets\" build",
-        "release": ".\"/node_modules/.bin/utils-react-widgets\" release",
-        "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
-    },
-    "config": {
-        "mendixHost": "http://localhost:8080",
-        "developmentPort": 3000,
-        "testProjectId": "b16057e9-012a-4d19-8484-34caebdc3eb2",
-        "testProjects": [
-            {
-                "revision": 514,
-                "branch": "trunk",
-                "path": "./tests/TestProjects/Mendix7/"
-            },
-            {
-                "revision": 528,
-                "branch": "MX_8",
-                "path": "./tests/TestProjects/Mendix8/"
-            }
-        ]
-    },
-    "license": "Apache-2.0",
-    "devDependencies": {
-        "@types/classnames": "^2.2.7",
-        "@types/googlemaps": "3.30.19",
-        "@types/faker": "^4.1.5",
-        "@types/leaflet": "^1.4.4",
-        "@types/react": "~16.8.13",
-        "@types/react-resize-detector": "^4.0.1",
-        "@widgets-resources/utils-react-widgets": "0.0.1",
-        "faker": "^4.1.0"
-    },
-    "dependencies": {
-        "classnames": "^2.2.6",
-        "leaflet": "^1.4.0",
-        "leaflet-defaulticon-compatibility": "^0.1.1",
-        "react-resize-detector": "^4.1.3"
-    }
+  "name": "maps-web",
+  "widgetName": "Maps",
+  "version": "2.0.0",
+  "description": "Show locations on Maps",
+  "copyright": "Mendix Technology B.V.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "config": {
+    "widgetPath": "./tests/TestProjects/Mendix8/widgets",
+    "projectPath": "./tests/TestProjects/Mendix8",
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000,
+    "testProjectId": "3c9356a0-e646-434a-be37-52ab7d402d4e",
+    "testProjects": [
+      {
+        "revision": 10,
+        "branch": "trunk",
+        "path": "./tests/TestProjects/Mendix8/"
+      }
+    ]
+  },
+  "packagePath": "com.mendix.widget.custom.Maps",
+  "scripts": {
+    "start": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:server --open --subprojectPath packages-web/maps",
+    "dev": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:ts -- --subprojectPath packages-web/maps",
+    "build": "..\"/../node_modules/.bin/pluggable-widgets-tools\" build:ts --subprojectPath packages-web/maps",
+    "format": "..\"/../node_modules/.bin/pluggable-widgets-tools\" format --subprojectPath packages-web/maps",
+    "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
+    "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "release": "..\"/../node_modules/.bin/pluggable-widgets-tools\" release:ts --subprojectPath packages-web/maps",
+    "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+  },
+  "devDependencies": {
+    "@googlemaps/jest-mocks": "^0.0.3",
+    "@types/googlemaps": "^3.39.2",
+    "@types/deep-equal": "^1.0.1",
+    "@types/faker": "^4.1.5",
+    "@types/react-leaflet": "^2.5.1",
+    "faker": "^4.1.0"
+  },
+  "dependencies": {
+    "@react-google-maps/api": "^1.8.6",
+    "@widgets-resources/piw-utils": "^1.0.0",
+    "classnames": "^2.2.6",
+    "deep-equal": "^2.0.2",
+    "leaflet": "^1.6.0",
+    "react-leaflet": "^2.6.3",
+    "leaflet-defaulticon-compatibility": "^0.1.1"
+  }
 }

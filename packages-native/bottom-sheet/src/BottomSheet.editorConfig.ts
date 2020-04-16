@@ -1,28 +1,28 @@
-import { changePropertyIn, hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-utils";
+import { changePropertyIn, hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-utils";
 
 export function getProperties(values: any, defaultProperties: Properties): Properties {
     if (values.type === "modal") {
         if (values.modalRendering === "basic") {
-            hidePropertyIn(defaultProperties, "smallContent");
-            hidePropertyIn(defaultProperties, "largeContent");
-            hidePropertyIn(defaultProperties, "fullscreenContent");
+            hidePropertiesIn(defaultProperties, values, ["smallContent", "largeContent", "fullscreenContent"]);
         } else {
-            hidePropertyIn(defaultProperties, "smallContent");
-            hidePropertyIn(defaultProperties, "nativeImplementation");
-            hidePropertyIn(defaultProperties, "fullscreenContent");
-            hidePropertyIn(defaultProperties, "itemsBasic");
-            changePropertyIn(defaultProperties, x => (x.caption = "Content"), "largeContent");
+            hidePropertiesIn(defaultProperties, values, [
+                "smallContent",
+                "nativeImplementation",
+                "fullscreenContent",
+                "itemsBasic"
+            ]);
+            changePropertyIn(defaultProperties, values, x => (x.caption = "Content"), "largeContent");
         }
-        hidePropertyIn(defaultProperties, "showFullscreenContent");
-        hidePropertyIn(defaultProperties, "onOpen");
-        hidePropertyIn(defaultProperties, "onClose");
+        hidePropertiesIn(defaultProperties, values, ["showFullscreenContent", "onOpen", "onClose"]);
     } else {
-        hidePropertyIn(defaultProperties, "nativeImplementation");
-        hidePropertyIn(defaultProperties, "itemsBasic");
-        hidePropertyIn(defaultProperties, "triggerAttribute");
-        hidePropertyIn(defaultProperties, "modalRendering");
+        hidePropertiesIn(defaultProperties, values, [
+            "nativeImplementation",
+            "itemsBasic",
+            "triggerAttribute",
+            "modalRendering"
+        ]);
         if (!values.showFullscreenContent) {
-            hidePropertyIn(defaultProperties, "fullscreenContent");
+            hidePropertyIn(defaultProperties, values, "fullscreenContent");
         }
     }
     return defaultProperties;

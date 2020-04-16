@@ -6,18 +6,20 @@ import { Property, PropertyGroup } from "../typings";
 
 declare type Option<T> = T | undefined;
 
-export function hidePropertyIn(propertyGroups: PropertyGroup[], key: string): void;
-export function hidePropertyIn(
+export function hidePropertyIn<T, TKey extends keyof T>(propertyGroups: PropertyGroup[], _value: T, key: TKey): void;
+export function hidePropertyIn<T, TKey extends keyof T>(
     propertyGroups: PropertyGroup[],
-    key: string,
+    _value: T,
+    key: TKey,
     nestedPropIndex: number,
-    nestedPropKey: string
+    nestedPropKey: T[TKey] extends Array<infer TChild> ? keyof TChild : never
 ): void;
-export function hidePropertyIn(
+export function hidePropertyIn<T, TKey extends keyof T>(
     propertyGroups: PropertyGroup[],
-    key: string,
+    _value: T,
+    key: TKey,
     nestedPropIndex?: number,
-    nestedPropKey?: string
+    nestedPropKey?: T[TKey] extends Array<infer TChild> ? keyof TChild : never
 ): void {
     modifyProperty(
         (_, index, container) => container.splice(index, 1),
@@ -28,18 +30,31 @@ export function hidePropertyIn(
     );
 }
 
-export function changePropertyIn(propertyGroups: PropertyGroup[], modify: (prop: Property) => void, key: string): void;
-export function changePropertyIn(
+export function hidePropertiesIn<T>(propertyGroups: PropertyGroup[], _value: T, keys: Array<keyof T>): void {
+    keys.forEach(key =>
+        modifyProperty((_, index, container) => container.splice(index, 1), propertyGroups, key, undefined, undefined)
+    );
+}
+
+export function changePropertyIn<T, TKey extends keyof T>(
     propertyGroups: PropertyGroup[],
+    _value: T,
     modify: (prop: Property) => void,
-    key: string,
+    key: TKey
+): void;
+export function changePropertyIn<T, TKey extends keyof T>(
+    propertyGroups: PropertyGroup[],
+    _value: T,
+    modify: (prop: Property) => void,
+    key: TKey,
     nestedPropIndex: number,
     nestedPropKey: string
 ): void;
-export function changePropertyIn(
+export function changePropertyIn<T, TKey extends keyof T>(
     propertyGroups: PropertyGroup[],
+    _value: T,
     modify: (prop: Property) => void,
-    key: string,
+    key: TKey,
     nestedPropIndex?: number,
     nestedPropKey?: string
 ): void {
@@ -49,9 +64,9 @@ export function changePropertyIn(
 function modifyProperty(
     modify: (prop: Property, index: number, container: Property[]) => void,
     propertyGroups: PropertyGroup[],
-    key: string,
+    key: string | number | symbol,
     nestedPropIndex?: number,
-    nestedPropKey?: string
+    nestedPropKey?: string | number | symbol
 ) {
     propertyGroups.forEach(propGroup => {
         if (propGroup.propertyGroups) {

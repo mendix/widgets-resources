@@ -1,10 +1,9 @@
 {
-    "extends": "../utils-react-widgets/configs/tsconfig.json",
+    "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
+    "baseUrl": "./",
+    "include": ["./src", "./typings"],
+    "exclude": ["./dist/", "./node_modules/", "./src/**/__tests__"],
     "compilerOptions": {
-        "baseUrl": ".",
-        "rootDir": "./",
-        "outDir": "dist/tsc/",
         "types": ["mendix-client", "googlemaps"]
-    },
-    "exclude": ["dist/", "tests/", "**/*.spec.ts", "node_modules/"]
+    }
 }
