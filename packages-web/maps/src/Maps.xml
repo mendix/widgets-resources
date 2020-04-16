@@ -128,13 +128,23 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Configurations">
-                <property key="apiKey" type="textTemplate" required="false">
+                <property key="apiKeyTT" type="textTemplate" required="false">
                     <caption>API Key</caption>
                     <description>Please insert your API Key</description>
                 </property>
-                <property key="geodecodeApiKey" type="textTemplate" required="false">
+                <property key="apiKeyExp" type="expression" required="false">
+                    <caption>API Key</caption>
+                    <description>Please insert your API Key</description>
+                    <returnType type="String" />
+                </property>
+                <property key="geodecodeApiKeyTT" type="textTemplate" required="false">
                     <caption>Google maps API Key</caption>
                     <description>Please insert your Google API Key for address translation (Geodecoding)</description>
+                </property>
+                <property key="geodecodeApiKeyExp" type="expression" required="false">
+                    <caption>Google maps API Key</caption>
+                    <description>Please insert your Google API Key for address translation (Geodecoding)</description>
+                    <returnType type="String" />
                 </property>
                 <property key="zoom" type="enumeration" defaultValue="automatic">
                     <caption>Zoom</caption>

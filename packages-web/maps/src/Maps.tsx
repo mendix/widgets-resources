@@ -1,7 +1,6 @@
 import { createElement, ReactNode, useEffect, useState } from "react";
 import { MapSwitcher } from "./components/MapSwitcher";
 
-import { ValueStatus } from "mendix";
 import { MapsContainerProps } from "../typings/MapsProps";
 import { useLocationResolver } from "./utils/geodecode";
 import { getCurrentUserLocation } from "./utils/location";
@@ -17,7 +16,9 @@ export default function Maps(props: MapsContainerProps): ReactNode {
     const [locations] = useLocationResolver(
         props.markers,
         props.dynamicMarkers,
-        !props.advanced ? props.apiKey?.value : props.geodecodeApiKey?.value
+        !props.advanced
+            ? props.apiKeyExp?.value ?? props.apiKeyTT?.value
+            : props.geodecodeApiKeyExp?.value ?? props.geodecodeApiKeyTT?.value
     );
     const [currentLocation, setCurrentLocation] = useState<Marker>();
 
@@ -39,7 +40,7 @@ export default function Maps(props: MapsContainerProps): ReactNode {
             height={props.height}
             heightUnit={props.heightUnit}
             locations={locations}
-            mapsToken={props.apiKey && props.apiKey.status === ValueStatus.Available ? props.apiKey.value : undefined}
+            mapsToken={props.apiKeyExp?.value ?? props.apiKeyTT?.value}
             mapProvider={props.mapProvider}
             mapStyles={props.mapStyles}
             mapTypeControl={props.mapTypeControl}

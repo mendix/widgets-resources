@@ -29,7 +29,7 @@ export const preview = (props: MapsPreviewProps): ReactNode => {
             height={Number(props.height)}
             heightUnit={props.heightUnit}
             locations={locations}
-            mapsToken={props.apiKey}
+            mapsToken={props.apiKeyExp ?? props.apiKeyTT}
             mapProvider={props.mapProvider}
             mapStyles={props.mapStyles}
             mapTypeControl={props.mapTypeControl}
