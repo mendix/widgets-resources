@@ -22,7 +22,7 @@ export const preview = (props: MapsPreviewProps): ReactNode => {
 
     return (
         <Fragment>
-            {(props.mapProvider === "mapBox" || props.mapProvider === "hereMaps") && !props.apiKey && (
+            {(props.mapProvider === "mapBox" || props.mapProvider === "hereMaps") && (
                 <Alert bootstrapStyle="warning">
                     Provider unavailable without API Key, preview is not possible at the moment
                 </Alert>
@@ -36,7 +36,6 @@ export const preview = (props: MapsPreviewProps): ReactNode => {
                 height={Number(props.height)}
                 heightUnit={props.heightUnit}
                 locations={locations}
-                mapsToken={props.apiKey}
                 mapProvider={props.mapProvider}
                 mapStyles={props.mapStyles}
                 mapTypeControl={props.mapTypeControl}
