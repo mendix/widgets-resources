@@ -10,13 +10,13 @@ describe("Slider widget", () => {
             .getWidget("textBoxMinimumValue")
             .$("input")
             .getValue();
-        expect(sliderWidget.getMinimumSliderMark().getText()).toBe(minimumValue);
+        expect(sliderWidget.getMinimumMarker().label.getText()).toBe(minimumValue);
 
         const maximumValue = page
             .getWidget("textBoxMaximumValue")
             .$("input")
             .getValue();
-        expect(sliderWidget.getMaximumSliderMark().getText()).toBe(maximumValue);
+        expect(sliderWidget.getMaximumMarker().label.getText()).toBe(maximumValue);
 
         expect(
             page
@@ -24,7 +24,7 @@ describe("Slider widget", () => {
                 .$("input")
                 .getValue()
         ).toBe("10");
-        expect(sliderWidget.getSliderHandle().getAttribute("style")).toBe("left: 50%;");
+        expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 50%;");
     });
 
     it("renders without context", () => {
@@ -32,11 +32,11 @@ describe("Slider widget", () => {
 
         const sliderWidget = new SliderWidget("sliderNoContext");
 
-        expect(sliderWidget.getSliderRoot().getAttribute("class")).toContain("rc-slider-disabled");
-        expect(sliderWidget.getMinimumSliderMark().getText()).toBe("0");
-        expect(sliderWidget.getMaximumSliderMark().getText()).toBe("100");
-        expect(sliderWidget.getSliderHandle().getAttribute("style")).toBe("left: 50%;");
-        expect(sliderWidget.isSliderTrackDisplayed()).toBe(false);
+        expect(sliderWidget.getRoot().getAttribute("class")).toContain("rc-slider-disabled");
+        expect(sliderWidget.getMinimumMarker().label.getText()).toBe("0");
+        expect(sliderWidget.getMaximumMarker().label.getText()).toBe("100");
+        expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 50%;");
+        expect(sliderWidget.isTrackDisplayed()).toBe(false);
     });
 
     it("listens to a grid", () => {
@@ -50,11 +50,11 @@ describe("Slider widget", () => {
 
         dataGridRows[0].click();
         expect(sliderWidget.isDisabled()).toBe(false);
-        expect(sliderWidget.getSliderHandle().getAttribute("style")).toBe("left: 50%;");
+        expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 50%;");
 
         dataGridRows[1].click();
         expect(sliderWidget.isDisabled()).toBe(false);
-        expect(sliderWidget.getSliderHandle().getAttribute("style")).toBe("left: 80%;");
+        expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 80%;");
     });
 
     it("triggers a microflow after slide", () => {
@@ -62,7 +62,7 @@ describe("Slider widget", () => {
 
         const sliderWidget = new SliderWidget("sliderMicroflow");
 
-        sliderWidget.dragSliderHandleToMinimum();
+        sliderWidget.dragHandleToMinimum();
 
         const modalDialogText = $(".modal-dialog .mx-dialog-body > p");
         modalDialogText.waitForDisplayed();
@@ -74,7 +74,7 @@ describe("Slider widget", () => {
 
         const sliderWidget = new SliderWidget("sliderNanoflow");
 
-        sliderWidget.dragSliderHandleToMinimum();
+        sliderWidget.dragHandleToMinimum();
 
         const modalDialogText = $(".modal-dialog .mx-name-text1");
         modalDialogText.waitForDisplayed();
@@ -90,9 +90,9 @@ describe("Slider widget", () => {
 
             expect(textValueWidget.getText()).toContain("5");
 
-            sliderWidget.dragSliderHandleToMinimum();
+            sliderWidget.dragHandleToMinimum();
             expect(textValueWidget.getText()).toContain("-20");
-            sliderWidget.dragSliderHandleToMaximum();
+            sliderWidget.dragHandleToMaximum();
             expect(textValueWidget.getText()).toContain("20");
         });
 

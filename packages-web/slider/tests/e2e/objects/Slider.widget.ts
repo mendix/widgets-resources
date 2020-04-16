@@ -9,7 +9,7 @@ export default class SliderWidget {
         this.element = page.getWidget(this.name);
     }
 
-    getSliderRoot(): WebdriverIO.Element {
+    getRoot(): WebdriverIO.Element {
         return page.waitForElement(".rc-slider", this.element);
     }
 
@@ -30,15 +30,16 @@ export default class SliderWidget {
         return result;
     }
 
-    getMinimumSliderMark(): WebdriverIO.Element {
-        return page.waitForElement(".rc-slider-mark > span:first-child", this.element);
+    getMinimumMarker(): { dot: WebdriverIO.Element; label: WebdriverIO.Element } {
+        return this.getMarkers()[0];
     }
 
-    getMaximumSliderMark(): WebdriverIO.Element {
-        return page.waitForElement(".rc-slider-mark > span:last-child", this.element);
+    getMaximumMarker(): { dot: WebdriverIO.Element; label: WebdriverIO.Element } {
+        const markers = this.getMarkers();
+        return markers[markers.length - 1];
     }
 
-    getSliderHandle(): WebdriverIO.Element {
+    getHandle(): WebdriverIO.Element {
         return page.waitForElement(".rc-slider-handle", this.element);
     }
 
@@ -47,20 +48,20 @@ export default class SliderWidget {
     // }
 
     isDisabled(): boolean {
-        return this.getSliderRoot()
+        return this.getRoot()
             .getAttribute("class")
             .includes("rc-slider-disabled");
     }
 
-    isSliderTrackDisplayed(): boolean {
+    isTrackDisplayed(): boolean {
         return this.element.$(".rc-slider-track").isDisplayed();
     }
 
-    dragSliderHandleToMinimum(): void {
-        this.getSliderHandle().dragAndDrop(this.getMinimumSliderMark());
+    dragHandleToMinimum(): void {
+        this.getHandle().dragAndDrop(page.waitForElement(".rc-slider-step > span:first-child", this.element));
     }
 
-    dragSliderHandleToMaximum(): void {
-        this.getSliderHandle().dragAndDrop(this.getMaximumSliderMark());
+    dragHandleToMaximum(): void {
+        this.getHandle().dragAndDrop(page.waitForElement(".rc-slider-step > span:last-child", this.element));
     }
 }
