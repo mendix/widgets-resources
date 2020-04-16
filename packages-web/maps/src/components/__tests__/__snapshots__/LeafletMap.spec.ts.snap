@@ -26,7 +26,6 @@ exports[`Leaflet maps renders a map with HERE maps as provider 1`] = `
       maxZoom={18}
       minZoom={1}
       scrollWheelZoom={true}
-      whenReady={[Function]}
       zoom={10}
       zoomControl={true}
     >
@@ -65,7 +64,6 @@ exports[`Leaflet maps renders a map with MapBox maps as provider 1`] = `
       maxZoom={18}
       minZoom={1}
       scrollWheelZoom={true}
-      whenReady={[Function]}
       zoom={10}
       zoomControl={true}
     >
@@ -105,7 +103,6 @@ exports[`Leaflet maps renders a map with attribution 1`] = `
       maxZoom={18}
       minZoom={1}
       scrollWheelZoom={true}
-      whenReady={[Function]}
       zoom={10}
       zoomControl={true}
     >
@@ -144,7 +141,6 @@ exports[`Leaflet maps renders a map with current location 1`] = `
       maxZoom={18}
       minZoom={1}
       scrollWheelZoom={true}
-      whenReady={[Function]}
       zoom={10}
       zoomControl={true}
     >
@@ -193,7 +189,6 @@ exports[`Leaflet maps renders a map with markers 1`] = `
       maxZoom={18}
       minZoom={1}
       scrollWheelZoom={true}
-      whenReady={[Function]}
       zoom={10}
       zoomControl={true}
     >
@@ -254,7 +249,6 @@ exports[`Leaflet maps renders a map with percentage of parent units renders the 
       maxZoom={18}
       minZoom={1}
       scrollWheelZoom={true}
-      whenReady={[Function]}
       zoom={10}
       zoomControl={true}
     >
@@ -294,7 +288,6 @@ exports[`Leaflet maps renders a map with percentage of width and height units re
       maxZoom={18}
       minZoom={1}
       scrollWheelZoom={true}
-      whenReady={[Function]}
       zoom={10}
       zoomControl={true}
     >
@@ -333,7 +326,6 @@ exports[`Leaflet maps renders a map with pixels renders structure correctly 1`] 
       maxZoom={18}
       minZoom={1}
       scrollWheelZoom={true}
-      whenReady={[Function]}
       zoom={10}
       zoomControl={true}
     >
@@ -372,7 +364,6 @@ exports[`Leaflet maps renders a map with right structure 1`] = `
       maxZoom={18}
       minZoom={1}
       scrollWheelZoom={true}
-      whenReady={[Function]}
       zoom={10}
       zoomControl={true}
     >
