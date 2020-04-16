@@ -3,16 +3,16 @@ import { BasicItemsPreviewType, PopupMenuPreviewProps } from "../typings/PopupMe
 
 export function getProperties(values: PopupMenuPreviewProps, defaultProperties: Properties): Properties {
     if (values.renderMode === "basic") {
-        hidePropertyIn(defaultProperties, "complexItems");
+        hidePropertyIn(defaultProperties, values, "complexItems");
         values.basicItems.forEach((item: BasicItemsPreviewType, index: number) => {
             if (item.itemType === "divider") {
-                hidePropertyIn(defaultProperties, "basicItems", index, "caption");
-                hidePropertyIn(defaultProperties, "basicItems", index, "action");
-                hidePropertyIn(defaultProperties, "basicItems", index, "styleClass");
+                hidePropertyIn(defaultProperties, values, "basicItems", index, "caption");
+                hidePropertyIn(defaultProperties, values, "basicItems", index, "action");
+                hidePropertyIn(defaultProperties, values, "basicItems", index, "styleClass");
             }
         });
     } else {
-        hidePropertyIn(defaultProperties, "basicItems");
+        hidePropertyIn(defaultProperties, values, "basicItems");
     }
     return defaultProperties;
 }
