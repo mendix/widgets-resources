@@ -33,6 +33,7 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
         autoZoom,
         fullscreenControl,
         mapTypeControl,
+        mapStyles,
         optionZoomControl: zoomControl,
         optionScroll: scrollwheel,
         optionDrag: draggable,
@@ -85,7 +86,7 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
                             rotateControl,
                             scrollwheel,
                             streetViewControl,
-                            styles: getGoogleMapsStyles(props.mapStyles),
+                            styles: getGoogleMapsStyles(mapStyles),
                             zoomControl
                         }}
                         onLoad={googleMapRef => {
