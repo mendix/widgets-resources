@@ -421,9 +421,12 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         const context = new mendix.lib.MxContext();
         context.setContext(mxObject.getEntity(), mxObject.getGuid());
         if (action === "callMicroflow" && microflow && mxObject.getGuid()) {
-            window.mx.ui.action(microflow, {
+            window.mx.data.action({
                 context,
                 origin: mxform,
+                params: {
+                    actionname: microflow
+                },
                 error: error => window.mx.ui.error(`Error while executing microflow: ${microflow}: ${error.message}`)
             });
         } else if (action === "callNanoflow" && nanoflow.nanoflow) {

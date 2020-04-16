@@ -45,8 +45,9 @@ const fetchByXPath = (options: Data.FetchByXPathOptions): Promise<MxObject[]> =>
 
 export const fetchByMicroflow = (actionname: string, guid: string): Promise<MxObject[]> =>
     new Promise((resolve: (objects: MxObject[]) => void, reject) => {
-        window.mx.ui.action(actionname, {
+        window.mx.data.action({
             params: {
+                actionname,
                 applyto: "selection",
                 guids: [guid]
             },
