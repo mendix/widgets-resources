@@ -1,5 +1,15 @@
 import page from "../../../../../configs/e2e/src/pages/page";
 
+export enum SliderStyleColor {
+    Default = "rgba(171,226,251,1)",
+    Primary = "rgba(5,149,219,1)",
+    Success = "rgba(118,202,2,1)",
+    Info = "rgba(72,176,247,1)",
+    Warning = "rgba(249,155,29,1)",
+    Danger = "rgba(237,28,36,1)",
+    Inverse = "rgba(37,44,54,1)"
+}
+
 export default class SliderWidget {
     name: string;
     element: WebdriverIO.Element;
@@ -46,9 +56,9 @@ export default class SliderWidget {
         return page.waitForElement(".rc-slider-handle", this.element);
     }
 
-    // getSliderTrack(): WebdriverIO.Element {
-    //     return page.waitForElement(".rc-slider-track", this.element);
-    // }
+    getTrack(): WebdriverIO.Element {
+        return page.waitForElement(".rc-slider-track", this.element);
+    }
 
     isDisabled(): boolean {
         return this.getRoot()

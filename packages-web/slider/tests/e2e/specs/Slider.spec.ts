@@ -1,5 +1,5 @@
 import page from "../../../../../configs/e2e/src/pages/page";
-import SliderWidget from "../objects/Slider.widget";
+import SliderWidget, { SliderStyleColor } from "../objects/Slider.widget";
 
 describe("Slider widget", () => {
     it("renders with context", () => {
@@ -162,13 +162,38 @@ describe("Slider widget", () => {
         });
 
         describe("Style", () => {
-            it("renders with default style");
-            it("renders with primary style");
-            it("renders with info style");
-            it("renders with inverse style");
-            it("renders with success style");
-            it("renders with warning style");
-            it("renders with danger style");
+            beforeAll(() => {
+                page.open("p/different-slider-styles");
+            });
+
+            it("renders with default style", () => {
+                const sliderWidget = new SliderWidget("sliderDefault");
+                expect(sliderWidget.getTrack().getCSSProperty("background-color").value).toBe(SliderStyleColor.Default);
+            });
+            it("renders with primary style", () => {
+                const sliderWidget = new SliderWidget("sliderPrimary");
+                expect(sliderWidget.getTrack().getCSSProperty("background-color").value).toBe(SliderStyleColor.Primary);
+            });
+            it("renders with info style", () => {
+                const sliderWidget = new SliderWidget("sliderInfo");
+                expect(sliderWidget.getTrack().getCSSProperty("background-color").value).toBe(SliderStyleColor.Info);
+            });
+            it("renders with inverse style", () => {
+                const sliderWidget = new SliderWidget("sliderInverse");
+                expect(sliderWidget.getTrack().getCSSProperty("background-color").value).toBe(SliderStyleColor.Inverse);
+            });
+            it("renders with success style", () => {
+                const sliderWidget = new SliderWidget("sliderSuccess");
+                expect(sliderWidget.getTrack().getCSSProperty("background-color").value).toBe(SliderStyleColor.Success);
+            });
+            it("renders with warning style", () => {
+                const sliderWidget = new SliderWidget("sliderWarning");
+                expect(sliderWidget.getTrack().getCSSProperty("background-color").value).toBe(SliderStyleColor.Warning);
+            });
+            it("renders with danger style", () => {
+                const sliderWidget = new SliderWidget("sliderDanger");
+                expect(sliderWidget.getTrack().getCSSProperty("background-color").value).toBe(SliderStyleColor.Danger);
+            });
         });
     });
 
