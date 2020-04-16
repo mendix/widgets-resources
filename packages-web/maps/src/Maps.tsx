@@ -17,8 +17,8 @@ export default function Maps(props: MapsContainerProps): ReactNode {
         props.markers,
         props.dynamicMarkers,
         !props.advanced
-            ? props.apiKeyExp?.value ?? props.apiKeyTT?.value
-            : props.geodecodeApiKeyExp?.value ?? props.geodecodeApiKeyTT?.value
+            ? props.apiKeyExp?.value ?? props.apiKey
+            : props.geodecodeApiKeyExp?.value ?? props.geodecodeApiKey
     );
     const [currentLocation, setCurrentLocation] = useState<Marker>();
 
@@ -40,7 +40,7 @@ export default function Maps(props: MapsContainerProps): ReactNode {
             height={props.height}
             heightUnit={props.heightUnit}
             locations={locations}
-            mapsToken={props.apiKeyExp?.value ?? props.apiKeyTT?.value}
+            mapsToken={props.apiKeyExp?.value ?? props.apiKey}
             mapProvider={props.mapProvider}
             mapStyles={props.mapStyles}
             mapTypeControl={props.mapTypeControl}

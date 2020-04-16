@@ -87,3 +87,7 @@
     font: 400 11px Roboto, Arial, sans-serif;
     text-decoration: none;
 }
+
+.widget-google-maps > div:nth-child(2) {
+    display: none !important;
+}

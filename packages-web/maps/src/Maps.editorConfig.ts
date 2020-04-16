@@ -7,24 +7,24 @@ export function getProperties(
     target: "web" | "desktop"
 ): Properties {
     if (target === "desktop") {
-        if (values.apiKeyTT) {
+        if (values.apiKey) {
             hidePropertyIn(defaultProperties, values, "apiKeyExp");
         } else {
-            hidePropertyIn(defaultProperties, values, "apiKeyTT");
+            hidePropertyIn(defaultProperties, values, "apiKey");
         }
-        if (values.geodecodeApiKeyTT) {
+        if (values.geodecodeApiKey) {
             hidePropertyIn(defaultProperties, values, "geodecodeApiKeyExp");
         } else {
-            hidePropertyIn(defaultProperties, values, "geodecodeApiKeyTT");
+            hidePropertyIn(defaultProperties, values, "geodecodeApiKey");
         }
     } else {
         if (values.apiKeyExp) {
-            hidePropertyIn(defaultProperties, values, "apiKeyTT");
+            hidePropertyIn(defaultProperties, values, "apiKey");
         } else {
             hidePropertyIn(defaultProperties, values, "apiKeyExp");
         }
         if (values.geodecodeApiKeyExp) {
-            hidePropertyIn(defaultProperties, values, "geodecodeApiKeyTT");
+            hidePropertyIn(defaultProperties, values, "geodecodeApiKey");
         } else {
             hidePropertyIn(defaultProperties, values, "geodecodeApiKeyExp");
         }
@@ -35,7 +35,7 @@ export function getProperties(
             "mapProvider",
             "mapStyles",
             "geodecodeApiKeyExp",
-            "geodecodeApiKeyTT"
+            "geodecodeApiKey"
         ]);
     }
 
@@ -77,7 +77,7 @@ export function getProperties(
             "mapStyles"
         ]);
         if (values.mapProvider === "openStreet") {
-            hidePropertiesIn(defaultProperties, values, ["apiKeyExp", "apiKeyTT"]);
+            hidePropertiesIn(defaultProperties, values, ["apiKeyExp", "apiKey"]);
         }
     } else {
         hidePropertyIn(defaultProperties, values, "attributionControl");
@@ -89,7 +89,7 @@ export function getProperties(
 export function check(values: MapsPreviewProps): Problem[] {
     const errors: Problem[] = [];
 
-    if (values.apiKeyTT && values.apiKeyExp) {
+    if (values.apiKey && values.apiKeyExp) {
         errors.push({
             property: "apiKey",
             message: "Api key was previously configured using Studio or Studio Pro, please leave this field empty",
@@ -97,13 +97,13 @@ export function check(values: MapsPreviewProps): Problem[] {
         });
     }
 
-    if (values.mapProvider !== "openStreet" && !values.apiKeyTT && !values.apiKeyExp) {
+    if (values.mapProvider !== "openStreet" && !values.apiKey && !values.apiKeyExp) {
         errors.push({
             property: "apiKey",
             message: "To avoid errors during map rendering it's necessary to include an Api Key",
             url: "https://github.com/mendix/widgets-resources/blob/master/packages-web/maps/README.md#limitations"
         });
-    } else if (values.advanced && !values.geodecodeApiKeyExp && !values.geodecodeApiKeyTT) {
+    } else if (values.advanced && !values.geodecodeApiKeyExp && !values.geodecodeApiKey) {
         errors.push({
             property: "geodecodeApiKey",
             severity: "warning",

@@ -128,7 +128,7 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Configurations">
-                <property key="apiKeyTT" type="textTemplate" required="false">
+                <property key="apiKey" type="string" required="false">
                     <caption>API Key</caption>
                     <description>Please insert your API Key</description>
                 </property>
@@ -137,7 +137,7 @@
                     <description>Please insert your API Key</description>
                     <returnType type="String" />
                 </property>
-                <property key="geodecodeApiKeyTT" type="textTemplate" required="false">
+                <property key="geodecodeApiKey" type="string" required="false">
                     <caption>Google maps API Key</caption>
                     <description>Please insert your Google API Key for address translation (Geodecoding)</description>
                 </property>

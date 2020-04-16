@@ -1,9 +1,9 @@
-import { createElement, ReactNode } from "react";
+import { createElement, ReactNode, Fragment } from "react";
 import { MapSwitcher } from "./components/MapSwitcher";
 
 import { MapsPreviewProps } from "../typings/MapsProps";
 import { Marker } from "../typings/shared";
-import { parseStyle } from "@widgets-resources/piw-utils";
+import { Alert, parseStyle } from "@widgets-resources/piw-utils";
 import { translateZoom } from "./utils/zoom";
 
 import "leaflet-defaulticon-compatibility";
@@ -19,31 +19,39 @@ export const preview = (props: MapsPreviewProps): ReactNode => {
             url: ""
         }
     ];
+
     return (
-        <MapSwitcher
-            attributionControl={props.attributionControl}
-            autoZoom={false}
-            className={props.class}
-            currentLocation={locations[0]}
-            fullscreenControl={props.fullScreenControl}
-            height={Number(props.height)}
-            heightUnit={props.heightUnit}
-            locations={locations}
-            mapsToken={props.apiKeyExp ?? props.apiKeyTT}
-            mapProvider={props.mapProvider}
-            mapStyles={props.mapStyles}
-            mapTypeControl={props.mapTypeControl}
-            optionDrag={false}
-            optionScroll={false}
-            optionZoomControl={props.optionZoomControl}
-            rotateControl={props.rotateControl}
-            showCurrentLocation={props.showCurrentLocation}
-            streetViewControl={props.optionStreetView}
-            style={parseStyle(props.style)}
-            width={Number(props.width)}
-            widthUnit={props.widthUnit}
-            zoomLevel={props.zoom === "automatic" ? translateZoom("street") : translateZoom(props.zoom)}
-        />
+        <Fragment>
+            {(props.mapProvider === "mapBox" || props.mapProvider === "hereMaps") && !props.apiKey && (
+                <Alert bootstrapStyle="warning">
+                    Provider unavailable without API Key, preview is not possible at the moment
+                </Alert>
+            )}
+            <MapSwitcher
+                attributionControl={props.attributionControl}
+                autoZoom={false}
+                className={props.class}
+                currentLocation={locations[0]}
+                fullscreenControl={props.fullScreenControl}
+                height={Number(props.height)}
+                heightUnit={props.heightUnit}
+                locations={locations}
+                mapsToken={props.apiKey}
+                mapProvider={props.mapProvider}
+                mapStyles={props.mapStyles}
+                mapTypeControl={props.mapTypeControl}
+                optionDrag={false}
+                optionScroll={false}
+                optionZoomControl={props.optionZoomControl}
+                rotateControl={props.rotateControl}
+                showCurrentLocation={props.showCurrentLocation}
+                streetViewControl={props.optionStreetView}
+                style={parseStyle(props.style)}
+                width={Number(props.width)}
+                widthUnit={props.widthUnit}
+                zoomLevel={props.zoom === "automatic" ? translateZoom("street") : translateZoom(props.zoom)}
+            />
+        </Fragment>
     );
 };
 
