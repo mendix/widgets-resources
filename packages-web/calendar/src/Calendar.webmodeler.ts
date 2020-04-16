@@ -1,9 +1,9 @@
 import { Component, createElement, ReactNode } from "react";
 
 import { Calendar, CalendarProps } from "./components/Calendar";
-import { parseStyle } from "./components/CalendarContainer";
 import { Container } from "./utils/namespaces";
 import { validateProps } from "./utils/validation";
+import { parseStyle } from "./utils/style";
 
 declare function require(name: string): string;
 

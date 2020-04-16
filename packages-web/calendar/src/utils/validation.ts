@@ -44,3 +44,31 @@ export function validateProps(props: Container.CalendarContainerProps): ReactChi
 
     return "";
 }
+
+export function validateCustomFormats(props: Container.CalendarContainerProps): ReactChild {
+    const errorMessages: string[] = [];
+
+    try {
+        if (props.view === "custom") {
+            const date = new Date();
+            props.customViews.forEach(customView => {
+                window.mx.parser.formatValue(date, "datetime", { datePattern: customView.cellDateFormat });
+                window.mx.parser.formatValue(date, "datetime", { datePattern: customView.gutterDateFormat });
+                window.mx.parser.formatValue(date, "datetime", { datePattern: customView.headerFormat });
+                window.mx.parser.formatValue(date, "datetime", { datePattern: customView.gutterTimeFormat });
+            });
+        }
+    } catch (error) {
+        errorMessages.push(`${props.friendlyId}: Invalid format value`);
+    }
+    if (errorMessages.length) {
+        return createElement(
+            "div",
+            {},
+            "Error in calendar configuration:",
+            errorMessages.map((message, key) => createElement("p", { key }, message))
+        );
+    }
+
+    return "";
+}

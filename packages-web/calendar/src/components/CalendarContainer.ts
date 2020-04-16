@@ -6,7 +6,8 @@ import { fetchData } from "../utils/data";
 import { Container } from "../utils/namespaces";
 import dateMath from "date-arithmetic";
 import moment from "moment";
-import { validateProps } from "../utils/validation";
+import { validateCustomFormats, validateProps } from "../utils/validation";
+import { parseStyle } from "../utils/style";
 
 export interface CalendarContainerState {
     alertMessage: ReactChild;
@@ -49,8 +50,7 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
 
     render(): ReactNode {
         const readOnly = this.isReadOnly();
-        const alertMessage =
-            this.state.alertMessage || validateProps(this.props) || CalendarContainer.validateCustomFormats(this.props);
+        const alertMessage = this.state.alertMessage || validateProps(this.props) || validateCustomFormats(this.props);
 
         return createElement(
             "div",
@@ -444,56 +444,6 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
             });
         }
     }
-
-    static validateCustomFormats(props: Container.CalendarContainerProps): ReactChild {
-        const errorMessages: string[] = [];
-
-        try {
-            if (props.view === "custom") {
-                const date = new Date();
-                props.customViews.forEach(customView => {
-                    window.mx.parser.formatValue(date, "datetime", { datePattern: customView.cellDateFormat });
-                    window.mx.parser.formatValue(date, "datetime", { datePattern: customView.gutterDateFormat });
-                    window.mx.parser.formatValue(date, "datetime", { datePattern: customView.headerFormat });
-                    window.mx.parser.formatValue(date, "datetime", { datePattern: customView.gutterTimeFormat });
-                });
-            }
-        } catch (error) {
-            errorMessages.push(`${props.friendlyId}: Invalid format value`);
-        }
-        if (errorMessages.length) {
-            return createElement(
-                "div",
-                {},
-                "Error in calendar configuration:",
-                errorMessages.map((message, key) => createElement("p", { key }, message))
-            );
-        }
-
-        return "";
-    }
-
-    static logError(message: string, style?: string, error?: any): void {
-        console.error(message, style, error);
-    }
 }
-
-export const parseStyle = (style = ""): { [key: string]: string } => {
-    try {
-        return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
-            const pair = line.split(":");
-            if (pair.length === 2) {
-                const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
-                styleObject[name] = pair[1].trim();
-            }
-
-            return styleObject;
-        }, {});
-    } catch (error) {
-        CalendarContainer.logError("Failed to parse style", style, error);
-    }
-
-    return {};
-};
 
 export default hot(CalendarContainer);
