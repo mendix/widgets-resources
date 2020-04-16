@@ -111,13 +111,54 @@ describe("Slider widget", () => {
             expect(markers[3].label.getText()).toBe("6.7");
         });
 
-        it("renders decimal values");
-        it("renders long values");
-        // const textBoxValueWidget = page.getWidget("textBoxValue");
-        // textBoxValueWidget.$("input").setValue("75.0"); // setValue isn't working correctly with inputs in the Mendix Client, therefore, "s" gets appended to existing value
-        // browser.keys("\uE007");
-        // expect(sliderWidget.getSliderHandle().getAttribute("style")).toBe("left: 75%;");
-        it("slides with a step size");
+        it("updates decimal values", () => {
+            page.open("p/decimal-values");
+
+            const sliderWidget = new SliderWidget("slider");
+            const textValueWidget = page.getWidget("textValue");
+
+            expect(textValueWidget.getText()).toContain("5.5");
+
+            sliderWidget.dragHandleToMaximum();
+            expect(textValueWidget.getText()).toContain("20.5");
+        });
+
+        it("updates long values", () => {
+            page.open("p/long-values");
+
+            const sliderWidget = new SliderWidget("slider");
+            const textValueWidget = page.getWidget("textValue");
+
+            expect(textValueWidget.getText()).toContain("180000");
+
+            sliderWidget.dragHandleToMinimum();
+            expect(textValueWidget.getText()).toContain("60000");
+        });
+
+        it("slides with a step size", () => {
+            page.open("p/long-values");
+
+            const sliderWidget = new SliderWidget("slider");
+            const textValueWidget = page.getWidget("textValue");
+
+            expect(textValueWidget.getText()).toContain("180000");
+
+            sliderWidget.dragHandleToMinimum();
+            expect(textValueWidget.getText()).toContain("60000");
+
+            const handle = sliderWidget.getHandle();
+
+            handle.click({ x: 58 });
+            expect(textValueWidget.getText()).toContain("60000");
+            expect(handle.getAttribute("style")).toBe("left: 0%;");
+            handle.click({ x: 59 });
+            expect(textValueWidget.getText()).toContain("120000");
+            expect(handle.getAttribute("style")).toBe("left: 25%;");
+
+            handle.dragAndDrop($(".rc-slider-step > span:nth-child(2)"));
+            expect(textValueWidget.getText()).toContain("140000");
+            expect(handle.getAttribute("style")).toBe("left: 33.3333%;");
+        });
 
         describe("Style", () => {
             it("renders with default style");
