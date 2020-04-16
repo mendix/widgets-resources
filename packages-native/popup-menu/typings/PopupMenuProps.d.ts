@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { Component, ReactNode } from "react";
+import { ComponentType, ReactNode } from "react";
 import { ActionValue } from "mendix";
 
 export type RenderModeEnum = "basic" | "custom";
@@ -32,7 +32,7 @@ export interface BasicItemsPreviewType {
 }
 
 export interface CustomItemsPreviewType {
-    content: { widgetCount: number; renderer: Component };
+    content: { widgetCount: number; renderer: ComponentType };
     action: {} | null;
 }
 
@@ -48,7 +48,7 @@ export interface PopupMenuProps<Style> {
 export interface PopupMenuPreviewProps {
     class: string;
     style: string;
-    menuTriggerer: { widgetCount: number; renderer: Component };
+    menuTriggerer: { widgetCount: number; renderer: ComponentType };
     renderMode: RenderModeEnum;
     basicItems: BasicItemsPreviewType[];
     customItems: CustomItemsPreviewType[];
