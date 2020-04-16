@@ -1,26 +1,27 @@
 import { TextProps, TextStyle, ViewStyle } from "react-native";
 
 export interface PopupMenuStyle {
-    basicItem?: BasicItemStyle;
-    complexItem?: ComplexItemStyle;
+    basicItem?: MenuItemsStyle;
+    customItem?: CustomItemStyle;
     buttonContainer?: ViewStyle;
-    // Only for ios
-    buttonUnderlayColor?: string;
 }
 
-interface BasicItemStyle {
+interface MenuItemsStyle {
+    defaultStyle?: BasicItemStyle;
+    primaryStyle?: BasicItemStyle;
+    dangerStyle?: BasicItemStyle;
+    customStyle?: BasicItemStyle;
+}
+
+export interface BasicItemStyle {
     container?: ViewStyle;
     textStyle?: TextStyle;
-    // Only for ios
-    underlayColor?: string;
     ellipsizeMode?: TextProps["ellipsizeMode"];
     dividerColor?: string;
 }
 
-interface ComplexItemStyle {
+interface CustomItemStyle {
     container?: ViewStyle;
-    // Only for ios
-    underlayColor?: string;
 }
 
 // TODO: request default,primary,danger

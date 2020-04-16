@@ -1,6 +1,6 @@
 import { PopupMenuProps } from "../../typings/PopupMenuProps";
 import { PopupMenuStyle } from "../ui/Styles";
-import { Text, TouchableHighlight } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { createElement } from "react";
 import { actionValue } from "@native-mobile-resources/util-widgets";
 import { fireEvent, render } from "react-native-testing-library";
@@ -19,10 +19,10 @@ describe("Popup menu", () => {
             style: [],
             menuTriggerer: undefined,
             basicItems: [
-                { itemType: "item", action: dummyActionValue, caption: "yolo", styleClass: "default" },
-                { itemType: "divider", styleClass: "default" }
+                { itemType: "item", action: dummyActionValue, caption: "yolo", styleClass: "defaultStyle" },
+                { itemType: "divider", styleClass: "defaultStyle" }
             ],
-            complexItems: [{ content: <Text>Yolo</Text>, action: dummyActionValue }]
+            customItems: [{ content: <Text>Yolo</Text>, action: dummyActionValue }]
         };
     });
     it("renders menu triggerer", () => {
@@ -49,9 +49,10 @@ describe("Popup menu", () => {
             const customStyle = [
                 {
                     basicItem: {
-                        underlayColor: "green",
-                        textStyle: {
-                            color: "green"
+                        defaultStyle: {
+                            textStyle: {
+                                color: "green"
+                            }
                         }
                     }
                 }
@@ -62,7 +63,7 @@ describe("Popup menu", () => {
         });
     });
 
-    describe("with complex items", () => {
+    describe("with custom items", () => {
         beforeEach(() => {
             defaultProps.renderMode = "custom";
         });
@@ -75,14 +76,14 @@ describe("Popup menu", () => {
 
         it("triggers action", () => {
             const component = render(<PopupMenu {...defaultProps} />);
-            fireEvent.press(component.getAllByType(TouchableHighlight).pop()!);
+            fireEvent.press(component.getAllByType(TouchableOpacity).pop()!);
             expect(dummyActionValue.execute).toHaveBeenCalled();
         });
 
         it("renders with custom styles", () => {
             const customStyle = [
                 {
-                    complexItem: {
+                    customItem: {
                         container: {
                             backgroundColor: "yellow"
                         }
