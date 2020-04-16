@@ -33,8 +33,7 @@ const overridingConfig = {
                         ],
                         plugins: [
                             ["@babel/plugin-proposal-class-properties", { loose: true }],
-                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }],
-                            "react-hot-loader/babel"
+                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]
                         ]
                     }
                 }
@@ -43,4 +42,4 @@ const overridingConfig = {
     }
 };
 
-module.exports = [baseConfig[0], merge(baseConfig[1], overridingConfig)];
+module.exports = [merge(baseConfig[0], overridingConfig), merge(baseConfig[1], overridingConfig)];

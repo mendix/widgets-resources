@@ -12,6 +12,7 @@ export namespace Container {
         event: Info;
         start: Date;
         guid: string;
+        slots: Date[];
     }
 
     interface Info {
