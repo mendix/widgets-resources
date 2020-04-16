@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, useEffect, useRef } from "react";
 import { Map, Marker as MarkerComponent, Popup, TileLayer } from "react-leaflet";
 import classNames from "classnames";
 import { Marker, SharedProps } from "../../typings/shared";
@@ -14,39 +14,44 @@ export interface LeafletProps extends SharedProps {
 }
 
 export function LeafletMap(props: LeafletProps): ReactElement {
-    const [isLoaded, setIsLoaded] = useState(false);
-    const center = { lat: 51.906688, lng: 4.48837 };
     const map = useRef<Map>();
+    const center = { lat: 51.906688, lng: 4.48837 };
     const {
         autoZoom,
         attributionControl,
+        className,
+        currentLocation,
+        locations,
+        mapProvider,
+        mapsToken,
         optionScroll: scrollWheelZoom,
         optionZoomControl: zoomControl,
+        style,
         zoomLevel: zoom,
         optionDrag: dragging
     } = props;
 
     useEffect(() => {
-        if (map.current && isLoaded) {
+        if (map.current) {
             const { leafletElement: mapRef } = map.current;
             const bounds = latLngBounds(
-                props.locations
-                    .concat(props.currentLocation ? [props.currentLocation] : [])
+                locations
+                    .concat(currentLocation ? [currentLocation] : [])
                     .filter(m => !!m)
                     .map(m => [m.latitude, m.longitude])
             );
             if (bounds.isValid()) {
-                if (props.autoZoom) {
+                if (autoZoom) {
                     mapRef.fitBounds(bounds, { padding: [0.5, 0.5] }).invalidateSize();
                 } else {
                     mapRef.panTo(bounds.getCenter(), { animate: false });
                 }
             }
         }
-    }, [map.current, isLoaded, props.locations, props.currentLocation, props.autoZoom]);
+    }, [map.current, locations, currentLocation, autoZoom]);
 
     return (
-        <div className={classNames("widget-maps", props.className)} style={{ ...props.style, ...getDimensions(props) }}>
+        <div className={classNames("widget-maps", className)} style={{ ...style, ...getDimensions(props) }}>
             <div className="widget-leaflet-maps-wrapper">
                 <Map
                     attributionControl={attributionControl}
@@ -63,16 +68,13 @@ export function LeafletMap(props: LeafletProps): ReactElement {
                     scrollWheelZoom={scrollWheelZoom}
                     zoom={autoZoom ? translateZoom("city") : zoom}
                     zoomControl={zoomControl}
-                    whenReady={() => {
-                        setIsLoaded(true);
-                    }}
                 >
                     <TileLayer
-                        {...baseMapLayer(props.mapProvider, props.mapsToken)}
-                        id={props.mapProvider === "mapBox" ? "mapbox.streets" : undefined}
+                        {...baseMapLayer(mapProvider, mapsToken)}
+                        id={mapProvider === "mapBox" ? "mapbox.streets" : undefined}
                     />
-                    {props.locations
-                        .concat(props.currentLocation ? [props.currentLocation] : [])
+                    {locations
+                        .concat(currentLocation ? [currentLocation] : [])
                         .filter(m => !!m)
                         .map((marker, index) => (
                             <LeafletMarker marker={marker} key={`marker_${index}`} />

@@ -31,22 +31,27 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
     const [error, setError] = useState("");
     const {
         autoZoom,
+        className,
+        currentLocation,
         fullscreenControl,
+        locations,
         mapTypeControl,
+        mapsToken,
         mapStyles,
         optionZoomControl: zoomControl,
         optionScroll: scrollwheel,
         optionDrag: draggable,
-        streetViewControl,
         rotateControl,
+        streetViewControl,
+        style,
         zoomLevel
     } = props;
 
     useEffect(() => {
         if (map.current) {
             const bounds = new google.maps.LatLngBounds();
-            props.locations
-                .concat(props.currentLocation ? [props.currentLocation] : [])
+            locations
+                .concat(currentLocation ? [currentLocation] : [])
                 .filter(m => !!m)
                 .forEach(marker => {
                     bounds.extend({
@@ -57,20 +62,20 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
             if (bounds.isEmpty()) {
                 bounds.extend(center.current);
             }
-            if (props.autoZoom) {
+            if (autoZoom) {
                 map.current.fitBounds(bounds);
             } else {
                 map.current.setCenter(bounds.getCenter());
             }
         }
-    }, [map.current, props.locations, props.currentLocation, props.autoZoom]);
+    }, [map.current, locations, currentLocation, autoZoom]);
 
     return (
-        <div className={classNames("widget-maps", props.className)} style={{ ...props.style, ...getDimensions(props) }}>
+        <div className={classNames("widget-maps", className)} style={{ ...style, ...getDimensions(props) }}>
             {error && <Alert bootstrapStyle="danger">{error}</Alert>}
             <div className="widget-google-maps-wrapper">
                 <LoadScript
-                    googleMapsApiKey={props.mapsToken}
+                    googleMapsApiKey={mapsToken}
                     id="_com.mendix.widget.custom.Maps.Maps"
                     loadingElement={<div className="spinner" />}
                     onError={error => setError(error.message)}
@@ -100,8 +105,8 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
                         zoom={autoZoom ? translateZoom("city") : zoomLevel}
                         center={center.current}
                     >
-                        {props.locations
-                            .concat(props.currentLocation ? [props.currentLocation] : [])
+                        {locations
+                            .concat(currentLocation ? [currentLocation] : [])
                             .filter(m => !!m)
                             .map((marker, index) => (
                                 <GoogleMapsMarker
