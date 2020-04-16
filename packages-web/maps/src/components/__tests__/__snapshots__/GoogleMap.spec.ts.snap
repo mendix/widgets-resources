@@ -21,6 +21,7 @@ exports[`Google maps renders a map with current location 1`] = `
           className="spinner"
         />
       }
+      onError={[Function]}
       version="weekly"
     >
       <GoogleMap
@@ -36,13 +37,13 @@ exports[`Google maps renders a map with current location 1`] = `
         options={
           Object {
             "draggable": true,
-            "fullscreenControl": undefined,
+            "fullscreenControl": false,
             "mapTypeControl": false,
             "maxZoom": 20,
             "minZoom": 1,
             "rotateControl": false,
             "scrollwheel": true,
-            "streetViewControl": undefined,
+            "streetViewControl": false,
             "styles": Array [
               Object {
                 "elementType": "labels",
@@ -97,6 +98,7 @@ exports[`Google maps renders a map with markers 1`] = `
           className="spinner"
         />
       }
+      onError={[Function]}
       version="weekly"
     >
       <GoogleMap
@@ -112,13 +114,13 @@ exports[`Google maps renders a map with markers 1`] = `
         options={
           Object {
             "draggable": true,
-            "fullscreenControl": undefined,
+            "fullscreenControl": false,
             "mapTypeControl": false,
             "maxZoom": 20,
             "minZoom": 1,
             "rotateControl": false,
             "scrollwheel": true,
-            "streetViewControl": undefined,
+            "streetViewControl": false,
             "styles": Array [
               Object {
                 "elementType": "labels",
@@ -186,6 +188,7 @@ exports[`Google maps renders a map with percentage of parent units renders the s
           className="spinner"
         />
       }
+      onError={[Function]}
       version="weekly"
     >
       <GoogleMap
@@ -201,13 +204,13 @@ exports[`Google maps renders a map with percentage of parent units renders the s
         options={
           Object {
             "draggable": true,
-            "fullscreenControl": undefined,
+            "fullscreenControl": false,
             "mapTypeControl": false,
             "maxZoom": 20,
             "minZoom": 1,
             "rotateControl": false,
             "scrollwheel": true,
-            "streetViewControl": undefined,
+            "streetViewControl": false,
             "styles": Array [
               Object {
                 "elementType": "labels",
@@ -251,6 +254,7 @@ exports[`Google maps renders a map with percentage of width and height units ren
           className="spinner"
         />
       }
+      onError={[Function]}
       version="weekly"
     >
       <GoogleMap
@@ -266,13 +270,13 @@ exports[`Google maps renders a map with percentage of width and height units ren
         options={
           Object {
             "draggable": true,
-            "fullscreenControl": undefined,
+            "fullscreenControl": false,
             "mapTypeControl": false,
             "maxZoom": 20,
             "minZoom": 1,
             "rotateControl": false,
             "scrollwheel": true,
-            "streetViewControl": undefined,
+            "streetViewControl": false,
             "styles": Array [
               Object {
                 "elementType": "labels",
@@ -315,6 +319,7 @@ exports[`Google maps renders a map with pixels renders structure correctly 1`] =
           className="spinner"
         />
       }
+      onError={[Function]}
       version="weekly"
     >
       <GoogleMap
@@ -330,13 +335,13 @@ exports[`Google maps renders a map with pixels renders structure correctly 1`] =
         options={
           Object {
             "draggable": true,
-            "fullscreenControl": undefined,
+            "fullscreenControl": false,
             "mapTypeControl": false,
             "maxZoom": 20,
             "minZoom": 1,
             "rotateControl": false,
             "scrollwheel": true,
-            "streetViewControl": undefined,
+            "streetViewControl": false,
             "styles": Array [
               Object {
                 "elementType": "labels",
@@ -379,6 +384,7 @@ exports[`Google maps renders a map with right structure 1`] = `
           className="spinner"
         />
       }
+      onError={[Function]}
       version="weekly"
     >
       <GoogleMap
@@ -394,13 +400,13 @@ exports[`Google maps renders a map with right structure 1`] = `
         options={
           Object {
             "draggable": true,
-            "fullscreenControl": undefined,
+            "fullscreenControl": false,
             "mapTypeControl": false,
             "maxZoom": 20,
             "minZoom": 1,
             "rotateControl": false,
             "scrollwheel": true,
-            "streetViewControl": undefined,
+            "streetViewControl": false,
             "styles": Array [
               Object {
                 "elementType": "labels",

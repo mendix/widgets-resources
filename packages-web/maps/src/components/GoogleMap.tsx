@@ -11,6 +11,7 @@ import { getGoogleMapsStyles } from "../utils/google";
 import { getDimensions } from "../utils/dimension";
 import { translateZoom } from "../utils/zoom";
 import { Option } from "../utils/data";
+import { Alert } from "@widgets-resources/piw-utils";
 
 export interface GoogleMapsProps extends SharedProps {
     mapStyles?: string;
@@ -27,14 +28,17 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
         lng: 4.48837
     });
     const [selectedMarker, setSelectedMarker] = useState<Option<Marker>>();
+    const [error, setError] = useState("");
     const {
+        autoZoom,
+        fullscreenControl,
+        mapTypeControl,
         optionZoomControl: zoomControl,
         optionScroll: scrollwheel,
         optionDrag: draggable,
         streetViewControl,
-        mapTypeControl,
-        fullscreenControl,
-        rotateControl
+        rotateControl,
+        zoomLevel
     } = props;
 
     useEffect(() => {
@@ -58,29 +62,31 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
                 map.current.setCenter(bounds.getCenter());
             }
         }
-    }, [map.current, props.locations, props.currentLocation]);
+    }, [map.current, props.locations, props.currentLocation, props.autoZoom]);
 
     return (
         <div className={classNames("widget-maps", props.className)} style={{ ...props.style, ...getDimensions(props) }}>
+            {error && <Alert bootstrapStyle="danger">{error}</Alert>}
             <div className="widget-google-maps-wrapper">
                 <LoadScript
                     googleMapsApiKey={props.mapsToken}
                     id="_com.mendix.widget.custom.Maps.Maps"
                     loadingElement={<div className="spinner" />}
+                    onError={error => setError(error.message)}
                 >
                     <GoogleMapComponent
                         mapContainerClassName="widget-google-maps"
                         options={{
-                            zoomControl,
-                            scrollwheel,
                             draggable,
-                            streetViewControl,
-                            mapTypeControl,
                             fullscreenControl,
-                            rotateControl,
-                            minZoom: 1,
+                            mapTypeControl,
                             maxZoom: 20,
-                            styles: getGoogleMapsStyles(props.mapStyles)
+                            minZoom: 1,
+                            rotateControl,
+                            scrollwheel,
+                            streetViewControl,
+                            styles: getGoogleMapsStyles(props.mapStyles),
+                            zoomControl
                         }}
                         onLoad={googleMapRef => {
                             map.current = googleMapRef;
@@ -90,7 +96,7 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
                                 center.current = map.current.getCenter().toJSON();
                             }
                         }}
-                        zoom={props.autoZoom ? translateZoom("city") : props.zoomLevel}
+                        zoom={autoZoom ? translateZoom("city") : zoomLevel}
                         center={center.current}
                     >
                         {props.locations

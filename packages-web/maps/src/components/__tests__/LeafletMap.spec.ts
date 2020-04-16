@@ -4,23 +4,23 @@ import { LeafletMap, LeafletProps } from "../LeafletMap";
 
 describe("Leaflet maps", () => {
     const defaultProps: LeafletProps = {
+        attributionControl: false,
         autoZoom: true,
+        className: "",
+        currentLocation: undefined,
         height: 75,
         heightUnit: "pixels",
+        locations: [],
+        mapProvider: "openStreet",
+        mapsToken: "",
         optionDrag: true,
         optionScroll: true,
         optionZoomControl: true,
-        zoomLevel: 10,
+        showCurrentLocation: false,
+        style: {},
         width: 50,
         widthUnit: "percentage",
-        style: {},
-        currentLocation: undefined,
-        locations: [],
-        className: "",
-        mapsToken: "",
-        showCurrentLocation: false,
-        attributionControl: false,
-        mapProvider: "openStreet"
+        zoomLevel: 10
     };
 
     const renderLeafletMap = (props: LeafletProps): ShallowWrapper<LeafletProps, any> =>

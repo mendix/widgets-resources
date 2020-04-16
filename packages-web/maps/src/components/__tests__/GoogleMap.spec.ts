@@ -6,25 +6,25 @@ import { initialize } from "@googlemaps/jest-mocks";
 describe("Google maps", () => {
     const defaultProps: GoogleMapsProps = {
         autoZoom: true,
+        className: "",
+        currentLocation: undefined,
+        fullscreenControl: false,
         height: 75,
         heightUnit: "pixels",
+        locations: [],
+        mapStyles: "",
+        mapsToken: "",
+        mapTypeControl: false,
         optionDrag: true,
         optionScroll: true,
         optionZoomControl: true,
-        zoomLevel: 10,
+        rotateControl: false,
+        showCurrentLocation: false,
+        streetViewControl: false,
+        style: {},
         width: 50,
         widthUnit: "percentage",
-        mapStyles: "",
-        style: {},
-        currentLocation: undefined,
-        optionStreetView: false,
-        locations: [],
-        className: "",
-        fullScreenControl: false,
-        mapsToken: "",
-        mapTypeControl: false,
-        rotateControl: false,
-        showCurrentLocation: false
+        zoomLevel: 10
     };
 
     beforeEach(() => {
@@ -108,9 +108,5 @@ describe("Google maps", () => {
         });
 
         expect(googleMaps).toMatchSnapshot();
-    });
-
-    afterAll(() => {
-        window.google = undefined;
     });
 });
