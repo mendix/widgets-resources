@@ -26,11 +26,11 @@ If you wish to achieve tooltip like behaviour this can be best achieved by this 
 
 Main object have four objects. Objects with ?, means they are optional and doesn't need to be provided in the main object.
 
-| Style Key                      | Description                                                                                                      |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| basicItem?: MenuItemsStyle;    | Styles basic items\.                                                                                             |
-| customItem?: ComplexItemStyle; | Styles custom item types\.                                                                                       |
-| buttonContainer?: ViewStyle;   | Styles the wrapper view of triggerer since there could be multiple elements and it has to be wrapped in a view\. |
+| Style Key                     | Description                                                                                                      |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| basicItem?: MenuItemsStyle;   | Styles basic items\.                                                                                             |
+| customItem?: CustomItemStyle; | Styles custom item types\.                                                                                       |
+| buttonContainer?: ViewStyle;  | Styles the wrapper view of triggerer since there could be multiple elements and it has to be wrapped in a view\. |
 
 #### MenuItemStyle
 
@@ -50,7 +50,7 @@ Main object have four objects. Objects with ?, means they are optional and doesn
 | ellipsizeMode?: TextProps\["ellipsizeMode"\]; | Styles how the text will be clipped if its too long\. Can be 'head', 'middle', 'tail' and 'clip' |
 | dividerColor?: string;                        | Styles the divider color                                                                         |
 
-#### ComplexItemStyle
+#### CustomItemStyle
 
 | Style Key              | Description                    |
 | ---------------------- | ------------------------------ |
