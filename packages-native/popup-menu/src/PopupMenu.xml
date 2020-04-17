@@ -21,7 +21,7 @@
                 </enumerationValues>
             </property>
             <property key="basicItems" type="object" isList="true" required="false">
-                <caption>Items</caption>
+                <caption>Items </caption>
                 <description />
                 <properties>
                     <property key="itemType" type="enumeration" defaultValue="item">
@@ -57,7 +57,7 @@
                 </properties>
             </property>
             <property key="customItems" type="object" isList="true" required="false">
-                <caption> Items</caption>
+                <caption>Items</caption>
                 <description />
                 <properties>
                     <property key="content" type="widgets">
