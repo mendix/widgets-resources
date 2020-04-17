@@ -22,9 +22,11 @@
     "postversion": "ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
   },
   "dependencies": {
-    "@native-mobile-resources/util-widgets": "^1.0.0"
+    "@native-mobile-resources/util-widgets": "^1.0.0",
+    "react-native-video": "5.0.2"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "8.9.0"
+    "@mendix/pluggable-widgets-tools": "8.9.0",
+    "@types/react-native-video": "^5.0.1"
   }
 }

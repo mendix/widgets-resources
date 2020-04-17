@@ -25,6 +25,7 @@
     "@native-mobile-resources/util-widgets": "^1.0.0",
     "@widgets-resources/piw-utils": "^1.0.0",
     "react-native-actionsheet": "^2.4.2",
+    "react-native-device-info": "5.5.3",
     "react-native-modal": "^11.5.4",
     "reanimated-bottom-sheet": "^1.0.0-alpha.19"
   },

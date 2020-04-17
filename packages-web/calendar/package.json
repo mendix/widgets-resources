@@ -49,7 +49,7 @@
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "@types/classnames": "^2.2.4",
+    "@types/classnames": "^2.2.6",
     "@types/date-arithmetic": "^3.1.2",
     "@types/react-big-calendar": "0.20.20",
     "@types/react-dnd": "^3.0.2",
@@ -58,7 +58,7 @@
     "babel-loader": "^8.0.6"
   },
   "dependencies": {
-    "classnames": "2.2.6",
+    "classnames": "^2.2.6",
     "date-arithmetic": "^3.1.0",
     "moment": "^2.24.0",
     "react-big-calendar": "0.19.2",

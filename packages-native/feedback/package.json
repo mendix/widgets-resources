@@ -28,6 +28,7 @@
   "dependencies": {
     "@native-mobile-resources/util-widgets": "^1.0.0",
     "querystringify": "^2.1.1",
-    "react-native-dialog": "^5.6.0"
+    "react-native-dialog": "^5.6.0",
+    "react-native-view-shot": "3.1.2"
   }
 }

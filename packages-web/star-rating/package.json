@@ -40,11 +40,11 @@
     ]
   },
   "devDependencies": {
-    "@types/classnames": "^2.2.0",
+    "@types/classnames": "^2.2.6",
     "@widgets-resources/utils-react-widgets": "0.0.1"
   },
   "dependencies": {
-    "classnames": "^2.2.5",
+    "classnames": "^2.2.6",
     "react-rating": "^0.8.1"
   }
 }

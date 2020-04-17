@@ -47,7 +47,7 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "@types/classnames": "^2.2.7",
+    "@types/classnames": "^2.2.6",
     "@widgets-resources/utils-react-widgets": "0.0.1"
   },
   "dependencies": {
