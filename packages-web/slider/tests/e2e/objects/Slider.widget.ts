@@ -10,6 +10,11 @@ export enum SliderStyleColor {
     Inverse = "rgba(37,44,54,1)"
 }
 
+interface Marker {
+    dot: WebdriverIO.Element;
+    label: WebdriverIO.Element;
+}
+
 export default class SliderWidget {
     name: string;
     element: WebdriverIO.Element;
@@ -23,11 +28,11 @@ export default class SliderWidget {
         return page.waitForElement(".rc-slider", this.element);
     }
 
-    getMarkers(): Array<{ dot: WebdriverIO.Element; label: WebdriverIO.Element }> {
+    getMarkers(): Marker[] {
         const dots = page.waitForElements(".rc-slider-step > span", this.element);
         const labels = page.waitForElements(".rc-slider-mark > span", this.element);
 
-        const result: Array<{ dot: WebdriverIO.Element; label: WebdriverIO.Element }> = [];
+        const result: Marker[] = [];
 
         if (dots.length !== labels.length) {
             throw Error("The amount of slider dots and labels aren't equal");
@@ -43,11 +48,11 @@ export default class SliderWidget {
         return result;
     }
 
-    getMinimumMarker(): { dot: WebdriverIO.Element; label: WebdriverIO.Element } {
+    getMinimumMarker(): Marker {
         return this.getMarkers()[0];
     }
 
-    getMaximumMarker(): { dot: WebdriverIO.Element; label: WebdriverIO.Element } {
+    getMaximumMarker(): Marker {
         const markers = this.getMarkers();
         return markers[markers.length - 1];
     }
@@ -64,16 +69,16 @@ export default class SliderWidget {
         return page.waitForElement(".alert", this.element);
     }
 
-    isTrackDisplayed(): boolean {
-        return this.element.$(".rc-slider-track").isDisplayed();
+    waitForTrackDisplayed(reverse?: boolean): boolean {
+        return this.element.$(".rc-slider-track").waitForDisplayed(undefined, reverse);
     }
 
-    istooltipExisting(): boolean {
-        return $(".rc-slider-tooltip").isExisting();
+    waitForTooltipExist(reverse?: boolean): boolean {
+        return $(".rc-slider-tooltip").waitForExist(undefined, reverse);
     }
 
-    isTooltipDisplayed(): boolean {
-        return $(".rc-slider-tooltip").isDisplayed();
+    waitForTooltipDisplayed(reverse?: boolean): boolean {
+        return $(".rc-slider-tooltip").waitForDisplayed(undefined, reverse);
     }
 
     getTooltipValue(): string {
@@ -89,7 +94,7 @@ export default class SliderWidget {
         this.getHandle().dragAndDrop(markers[markers.length - 1].dot);
     }
 
-    dragHandleTo(marker: { dot: WebdriverIO.Element; label: WebdriverIO.Element }): void {
+    dragHandleTo(marker: Marker): void {
         this.getHandle().dragAndDrop(marker.dot);
     }
 }

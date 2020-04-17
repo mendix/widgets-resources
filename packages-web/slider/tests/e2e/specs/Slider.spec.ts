@@ -37,7 +37,7 @@ describe("Slider widget", () => {
         expect(sliderWidget.getMaximumMarker().label.getText()).toBe("100");
         expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 50%;");
         expect(sliderWidget.getHandle().getCSSProperty("cursor").value).toBe("not-allowed");
-        expect(sliderWidget.isTrackDisplayed()).toBe(false);
+        sliderWidget.waitForTrackDisplayed(true);
     });
 
     it("listens to a grid", () => {
@@ -50,11 +50,15 @@ describe("Slider widget", () => {
         expect(sliderWidget.getHandle().getCSSProperty("cursor").value).toBe("not-allowed");
 
         dataGridRows[0].click();
-        expect(sliderWidget.getHandle().getCSSProperty("cursor").value).toBe("grab");
+        browser.waitUntil(() => {
+            return sliderWidget.getHandle().getCSSProperty("cursor").value === "grab";
+        });
         expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 50%;");
 
         dataGridRows[1].click();
-        expect(sliderWidget.getHandle().getCSSProperty("cursor").value).toBe("grab");
+        browser.waitUntil(() => {
+            return sliderWidget.getHandle().getCSSProperty("cursor").value === "grab";
+        });
         expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 80%;");
     });
 
@@ -206,10 +210,10 @@ describe("Slider widget", () => {
 
             const sliderWidget = new SliderWidget("slider");
 
-            expect(sliderWidget.istooltipExisting()).toBe(false);
+            sliderWidget.waitForTooltipExist(true);
 
             sliderWidget.getHandle().moveTo();
-            expect(sliderWidget.istooltipExisting()).toBe(false);
+            sliderWidget.waitForTooltipExist(true);
         });
 
         it("renders a static title", () => {
@@ -217,14 +221,14 @@ describe("Slider widget", () => {
 
             const sliderWidget = new SliderWidget("slider");
 
-            expect(sliderWidget.istooltipExisting()).toBe(false);
+            sliderWidget.waitForTooltipExist(true);
 
             sliderWidget.getHandle().moveTo();
-            expect(sliderWidget.istooltipExisting()).toBe(true);
+            sliderWidget.waitForTooltipExist();
             expect(sliderWidget.getTooltipValue()).toBe("Slider");
 
             page.getWidget("textTitle").moveTo();
-            expect(sliderWidget.isTooltipDisplayed()).toBe(false);
+            sliderWidget.waitForTooltipDisplayed(true);
 
             sliderWidget.dragHandleToMaximum();
             sliderWidget.getHandle().moveTo();
@@ -236,14 +240,14 @@ describe("Slider widget", () => {
 
             const sliderWidget = new SliderWidget("slider");
 
-            expect(sliderWidget.istooltipExisting()).toBe(false);
+            sliderWidget.waitForTooltipExist(true);
 
             sliderWidget.getHandle().moveTo();
-            expect(sliderWidget.istooltipExisting()).toBe(true);
+            sliderWidget.waitForTooltipExist();
             expect(sliderWidget.getTooltipValue()).toBe("10");
 
             page.getWidget("textTitle").moveTo();
-            expect(sliderWidget.isTooltipDisplayed()).toBe(false);
+            sliderWidget.waitForTooltipDisplayed(true);
 
             sliderWidget.dragHandleToMaximum();
             sliderWidget.getHandle().moveTo();
@@ -255,14 +259,14 @@ describe("Slider widget", () => {
 
             const sliderWidget = new SliderWidget("slider");
 
-            expect(sliderWidget.istooltipExisting()).toBe(false);
+            sliderWidget.waitForTooltipExist(true);
 
             sliderWidget.getHandle().moveTo();
-            expect(sliderWidget.istooltipExisting()).toBe(true);
+            sliderWidget.waitForTooltipExist();
             expect(sliderWidget.getTooltipValue()).toBe("--");
 
             page.getWidget("textTitle").moveTo();
-            expect(sliderWidget.isTooltipDisplayed()).toBe(false);
+            sliderWidget.waitForTooltipDisplayed(true);
 
             sliderWidget.dragHandleToMaximum();
             sliderWidget.getHandle().moveTo();
