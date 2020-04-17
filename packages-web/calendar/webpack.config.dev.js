@@ -43,4 +43,4 @@ const overridingConfig = {
     }
 };
 
-module.exports = [baseConfig[0], merge(baseConfig[1], overridingConfig)];
+module.exports = [merge(baseConfig[0], overridingConfig), merge(baseConfig[1], overridingConfig)];

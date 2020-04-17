@@ -1,8 +1,9 @@
 import { Component, createElement, ReactNode } from "react";
 
 import { Calendar, CalendarProps } from "./components/Calendar";
-import CalendarContainer, { parseStyle } from "./components/CalendarContainer";
 import { Container } from "./utils/namespaces";
+import { validateProps } from "./utils/validation";
+import { parseStyle } from "./utils/style";
 
 declare function require(name: string): string;
 
@@ -62,7 +63,7 @@ export class preview extends Component<Container.CalendarContainerProps> {
                 color: ""
             }
         ];
-        const alertMessage = CalendarContainer.validateProps(this.props);
+        const alertMessage = validateProps(this.props);
 
         return {
             alertMessage,

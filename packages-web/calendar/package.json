@@ -1,7 +1,7 @@
 {
   "name": "calendar",
   "widgetName": "Calendar",
-  "version": "1.0.6",
+  "version": "1.0.3",
   "description": "Display and manage calendar events",
   "copyright": "Mendix BV",
   "repository": {
@@ -29,17 +29,17 @@
     "testProjectId": "efe7ce5d-5c1f-4f4a-9fe9-beebe2a16bb0",
     "testProjects": [
       {
-        "revision": 482,
+        "revision": 493,
         "branch": "trunk",
         "path": "./tests/TestProjects/Mendix7/"
       },
       {
-        "revision": 488,
+        "revision": 494,
         "branch": "MX_8",
         "path": "./tests/TestProjects/Mendix8/"
       },
       {
-        "revision": 491,
+        "revision": 495,
         "branch": "nightly",
         "path": "./tests/TestProjects/Nightly/"
       }
