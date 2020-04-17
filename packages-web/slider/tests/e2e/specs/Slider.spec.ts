@@ -2,91 +2,91 @@ import page from "../../../../../configs/e2e/src/pages/page";
 import SliderWidget, { SliderStyleColor } from "../objects/Slider.widget";
 
 describe("Slider widget", () => {
-    it("renders with context", () => {
-        page.open();
-        const sliderWidget = new SliderWidget("sliderContext");
-
-        const minimumValue = page
-            .getWidget("textBoxMinimumValue")
-            .$("input")
-            .getValue();
-        expect(sliderWidget.getMinimumMarker().label.getText()).toBe(minimumValue);
-
-        const maximumValue = page
-            .getWidget("textBoxMaximumValue")
-            .$("input")
-            .getValue();
-        expect(sliderWidget.getMaximumMarker().label.getText()).toBe(maximumValue);
-
-        expect(
-            page
-                .getWidget("textBoxValue")
-                .$("input")
-                .getValue()
-        ).toBe("10");
-        expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 50%;");
-    });
-
-    it("renders without context", () => {
-        page.open("p/no-context");
-
-        const sliderWidget = new SliderWidget("sliderNoContext");
-
-        expect(sliderWidget.getRoot().getAttribute("class")).toContain("rc-slider-disabled");
-        expect(sliderWidget.getMinimumMarker().label.getText()).toBe("0");
-        expect(sliderWidget.getMaximumMarker().label.getText()).toBe("100");
-        expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 50%;");
-        expect(sliderWidget.getHandle().getCSSProperty("cursor").value).toBe("not-allowed");
-        sliderWidget.waitForTrackDisplayed(true);
-    });
-
-    it("listens to a grid", () => {
-        page.open("p/listen-to-grid");
-
-        const sliderWidget = new SliderWidget("slider");
-        const dataGrid = page.getWidget("grid");
-        const dataGridRows = dataGrid.$$("td");
-
-        expect(sliderWidget.getHandle().getCSSProperty("cursor").value).toBe("not-allowed");
-
-        dataGridRows[0].click();
-        browser.waitUntil(() => {
-            return sliderWidget.getHandle().getCSSProperty("cursor").value === "grab";
-        });
-        expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 50%;");
-
-        dataGridRows[1].click();
-        browser.waitUntil(() => {
-            return sliderWidget.getHandle().getCSSProperty("cursor").value === "grab";
-        });
-        expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 80%;");
-    });
-
-    it("triggers a microflow after slide", () => {
-        page.open("p/after-slide");
-
-        const sliderWidget = new SliderWidget("sliderMicroflow");
-
-        sliderWidget.dragHandleToMinimum();
-
-        const modalDialogText = $(".modal-dialog .mx-dialog-body > p");
-        modalDialogText.waitForDisplayed();
-        expect(modalDialogText.getText()).toContain("0");
-    });
-
-    it("triggers a nanoflow after slide", () => {
-        page.open("p/after-slide");
-
-        const sliderWidget = new SliderWidget("sliderNanoflow");
-
-        sliderWidget.dragHandleToMinimum();
-
-        const modalDialogText = $(".modal-dialog .mx-name-text1");
-        modalDialogText.waitForDisplayed();
-        expect(modalDialogText.getText()).toContain("0");
-    });
-
     describe("Slider", () => {
+        it("renders with context", () => {
+            page.open();
+            const sliderWidget = new SliderWidget("sliderContext");
+
+            const minimumValue = page
+                .getWidget("textBoxMinimumValue")
+                .$("input")
+                .getValue();
+            expect(sliderWidget.getMinimumMarker().label.getText()).toBe(minimumValue);
+
+            const maximumValue = page
+                .getWidget("textBoxMaximumValue")
+                .$("input")
+                .getValue();
+            expect(sliderWidget.getMaximumMarker().label.getText()).toBe(maximumValue);
+
+            expect(
+                page
+                    .getWidget("textBoxValue")
+                    .$("input")
+                    .getValue()
+            ).toBe("10");
+            expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 50%;");
+        });
+
+        it("renders without context", () => {
+            page.open("p/no-context");
+
+            const sliderWidget = new SliderWidget("sliderNoContext");
+
+            expect(sliderWidget.getRoot().getAttribute("class")).toContain("rc-slider-disabled");
+            expect(sliderWidget.getMinimumMarker().label.getText()).toBe("0");
+            expect(sliderWidget.getMaximumMarker().label.getText()).toBe("100");
+            expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 50%;");
+            expect(sliderWidget.getHandle().getCSSProperty("cursor").value).toBe("not-allowed");
+            sliderWidget.waitForTrackDisplayed(true);
+        });
+
+        it("listens to a grid", () => {
+            page.open("p/listen-to-grid");
+
+            const sliderWidget = new SliderWidget("slider");
+            const dataGrid = page.getWidget("grid");
+            const dataGridRows = dataGrid.$$("td");
+
+            expect(sliderWidget.getHandle().getCSSProperty("cursor").value).toBe("not-allowed");
+
+            dataGridRows[0].click();
+            browser.waitUntil(() => {
+                return sliderWidget.getHandle().getCSSProperty("cursor").value === "grab";
+            });
+            expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 50%;");
+
+            dataGridRows[1].click();
+            browser.waitUntil(() => {
+                return sliderWidget.getHandle().getCSSProperty("cursor").value === "grab";
+            });
+            expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 80%;");
+        });
+
+        it("triggers a microflow after slide", () => {
+            page.open("p/after-slide");
+
+            const sliderWidget = new SliderWidget("sliderMicroflow");
+
+            sliderWidget.dragHandleToMinimum();
+
+            const modalDialogText = $(".modal-dialog .mx-dialog-body > p");
+            modalDialogText.waitForDisplayed();
+            expect(modalDialogText.getText()).toContain("0");
+        });
+
+        it("triggers a nanoflow after slide", () => {
+            page.open("p/after-slide");
+
+            const sliderWidget = new SliderWidget("sliderNanoflow");
+
+            sliderWidget.dragHandleToMinimum();
+
+            const modalDialogText = $(".modal-dialog .mx-name-text1");
+            modalDialogText.waitForDisplayed();
+            expect(modalDialogText.getText()).toContain("0");
+        });
+
         it("renders with a range that goes from negative to positive", () => {
             page.open("p/negative-and-positive-range");
 
