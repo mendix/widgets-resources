@@ -58,7 +58,7 @@
             </property>
             <property key="customItems" type="object" isList="true" required="false">
                 <caption>Items</caption>
-                <description>To make sure the popup closes correctly after a click, do not configure click actions inside the placeholders, but use the action property of this widget.</description>
+                <description>To make sure the popup closes correctly after a click, do not configure clickable widgets inside the placeholders, but use the action property of this widget.</description>
                 <properties>
                     <property key="content" type="widgets">
                         <caption>Content</caption>
