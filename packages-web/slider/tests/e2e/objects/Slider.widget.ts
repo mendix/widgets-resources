@@ -60,14 +60,24 @@ export default class SliderWidget {
         return page.waitForElement(".rc-slider-track", this.element);
     }
 
-    isDisabled(): boolean {
-        return this.getRoot()
-            .getAttribute("class")
-            .includes("rc-slider-disabled");
+    getAlertMessage(): WebdriverIO.Element {
+        return page.waitForElement(".alert", this.element);
     }
 
     isTrackDisplayed(): boolean {
         return this.element.$(".rc-slider-track").isDisplayed();
+    }
+
+    istooltipExisting(): boolean {
+        return $(".rc-slider-tooltip").isExisting();
+    }
+
+    isTooltipDisplayed(): boolean {
+        return $(".rc-slider-tooltip").isDisplayed();
+    }
+
+    getTooltipValue(): string {
+        return page.waitForElement(".rc-slider-tooltip-inner > div").getText();
     }
 
     dragHandleToMinimum(): void {
