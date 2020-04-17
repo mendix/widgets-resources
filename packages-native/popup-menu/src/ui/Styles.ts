@@ -1,12 +1,12 @@
 import { TextProps, TextStyle, ViewStyle } from "react-native";
 
 export interface PopupMenuStyle {
-    basicItem?: MenuItemsStyle;
-    customItem?: CustomItemStyle;
+    itemStyle?: MenuItemsStyle;
     buttonContainer?: ViewStyle;
 }
 
 interface MenuItemsStyle {
+    container?: ViewStyle;
     defaultStyle?: BasicItemStyle;
     primaryStyle?: BasicItemStyle;
     dangerStyle?: BasicItemStyle;
@@ -14,14 +14,9 @@ interface MenuItemsStyle {
 }
 
 export interface BasicItemStyle {
-    container?: ViewStyle;
     textStyle?: TextStyle;
     ellipsizeMode?: TextProps["ellipsizeMode"];
     dividerColor?: string;
-}
-
-interface CustomItemStyle {
-    container?: ViewStyle;
 }
 
 // TODO: request default,primary,danger

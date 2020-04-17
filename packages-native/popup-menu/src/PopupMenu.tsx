@@ -34,7 +34,7 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
     let menuOptions: ReactElement[];
     if (props.renderMode === "basic") {
         menuOptions = props.basicItems.map((item, index) => {
-            const menuStyle: BasicItemStyle | undefined = styles.basicItem?.[item.styleClass];
+            const menuStyle: BasicItemStyle | undefined = styles.itemStyle?.[item.styleClass];
             return item.itemType === "divider" ? (
                 <MenuDivider key={index} color={menuStyle?.dividerColor} />
             ) : (
@@ -43,7 +43,7 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
                     onPress={() => handlePress(item.action)}
                     textStyle={menuStyle?.textStyle}
                     ellipsizeMode={menuStyle?.ellipsizeMode as any}
-                    style={menuStyle?.container as any}
+                    style={styles.itemStyle?.container as any}
                 >
                     {item.caption}
                 </MenuItem>
@@ -60,7 +60,7 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
                       }
                     : {})}
             >
-                <View style={styles.customItem?.container}>{item.content}</View>
+                <View style={styles.itemStyle?.container}>{item.content}</View>
             </Touchable>
         ));
     }
