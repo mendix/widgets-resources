@@ -10,7 +10,7 @@
         <propertyGroup caption="General">
             <property key="menuTriggerer" type="widgets" required="false">
                 <caption>Clickable area to show menu</caption>
-                <description>Wrapped with touchable area. Responsible for toggling the Popup menu</description>
+                <description>Responsible for toggling the Popup menu</description>
             </property>
             <property key="renderMode" type="enumeration" defaultValue="basic">
                 <caption>Render</caption>
@@ -58,7 +58,7 @@
             </property>
             <property key="customItems" type="object" isList="true" required="false">
                 <caption>Items</caption>
-                <description />
+                <description>Important: Any touchable items (buttons, dropdowns etc..) in this field will steal the touch event and it will prevent popup menu to close.</description>
                 <properties>
                     <property key="content" type="widgets">
                         <caption>Content</caption>
