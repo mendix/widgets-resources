@@ -23,5 +23,8 @@
     },
     "dependencies": {
         "@native-mobile-resources/util-widgets": "^1.0.0"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "8.9.0"
     }
 }

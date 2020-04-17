@@ -28,6 +28,7 @@
         "prop-types": "^15.7.2"
     },
     "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "8.9.0",
         "@types/ptomasroos__react-native-multi-slider": "^0.0.1"
     }
 }

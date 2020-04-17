@@ -26,6 +26,7 @@
         "react-native-star-rating": "^1.1.0"
     },
     "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "8.9.0",
         "@types/react-native-star-rating": "^1.0.1"
     }
 }

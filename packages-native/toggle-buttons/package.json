@@ -22,7 +22,8 @@
         "postversion": "..\"/../node_modules/.bin/ts-node\" ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
     },
     "devDependencies": {
-        "@babel/plugin-transform-flow-strip-types": "^7.4.4"
+    "@babel/plugin-transform-flow-strip-types": "^7.4.4",
+    "@mendix/pluggable-widgets-tools": "8.9.0"
     },
     "dependencies": {
         "@native-mobile-resources/util-widgets": "^1.0.0",

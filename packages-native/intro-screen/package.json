@@ -25,5 +25,8 @@
     "@react-native-community/async-storage": "^1.6.2",
     "@native-mobile-resources/util-widgets": "^1.0.0",
     "@widgets-resources/piw-utils": "^1.0.0"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "8.9.0"
   }
 }

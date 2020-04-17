@@ -21,6 +21,7 @@
     "postversion": "..\"/../node_modules/.bin/ts-node\" ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
   },
   "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "8.9.0",
     "@types/querystringify": "^2.0.0",
     "@types/react-native-dialog": "^5.5.0"
   },

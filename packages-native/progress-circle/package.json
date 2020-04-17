@@ -24,5 +24,8 @@
   "dependencies": {
     "@native-mobile-resources/util-widgets": "^1.0.0",
     "react-native-progress": "^4.0.3"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "8.9.0"
   }
 }

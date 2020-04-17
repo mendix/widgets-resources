@@ -29,7 +29,6 @@
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-conventional": "^7.5.0",
     "@commitlint/config-lerna-scopes": "^7.5.1",
-    "@mendix/pluggable-widgets-tools": "^8.9.0",
     "@react-native-community/async-storage": "1.8.1",
     "@react-native-community/cameraroll": "1.4.1",
     "@react-native-community/geolocation": "2.0.2",
