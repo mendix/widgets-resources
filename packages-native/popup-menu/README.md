@@ -4,9 +4,9 @@ Use pop up menu to create a menus which anchored to an element. Pop up menu will
 
 ## Usage
 
-### Adding triggerer
+### Adding clickable area to show menu
 
-Simply fill the content of the triggerer. This is a free modeling content and will be wrapped by touchable. **Any touchable items (buttons, dropdowns etc..) in this field will steal the touch event and it will prevent popup menu to open.**
+Simply fill the content of the clickable area. This is a free modeling content and will be wrapped by touchable. **Any touchable items (buttons, dropdowns etc..) in this field will steal the touch event and it will prevent popup menu to open.**
 
 ### Adding menu items
 
@@ -26,20 +26,20 @@ If you wish to achieve tooltip like behaviour this can be best achieved by this 
 
 Main object have four objects. Objects with ?, means they are optional and doesn't need to be provided in the main object.
 
-| Style Key                     | Description                                                                                                      |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| basicItem?: MenuItemsStyle;   | Styles basic items\.                                                                                             |
-| customItem?: CustomItemStyle; | Styles custom item types\.                                                                                       |
-| buttonContainer?: ViewStyle;  | Styles the wrapper view of triggerer since there could be multiple elements and it has to be wrapped in a view\. |
+| Style Key                    | Description                                                                                                      |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| itemStyle?: MenuItemsStyle;  | Styles items\.                                                                                                   |
+| buttonContainer?: ViewStyle; | Styles the wrapper view of triggerer since there could be multiple elements and it has to be wrapped in a view\. |
 
 #### MenuItemStyle
 
-| Style Key                      | Description                                                      |
-| ------------------------------ | ---------------------------------------------------------------- |
-| defaultStyle?: BasicItemStyle; | Styles all basic menu items which has "default" style selected\. |
-| primaryStyle?: BasicItemStyle; | Styles all basic menu items which has "primary" style selected\. |
-| dangerStyle?: BasicItemStyle;  | Styles all basic menu items which has "danger" style selected\.  |
-| customStyle?: BasicItemStyle;  | Styles all basic menu items which has "custom" style selected\.  |
+| Style Key                      | Description                                                           |
+| ------------------------------ | --------------------------------------------------------------------- |
+| container?: ViewStyle;         | Styles the wrapping view around items. Including the custom mode ones |
+| defaultStyle?: BasicItemStyle; | Styles all basic menu items which has "default" style selected\.      |
+| primaryStyle?: BasicItemStyle; | Styles all basic menu items which has "primary" style selected\.      |
+| dangerStyle?: BasicItemStyle;  | Styles all basic menu items which has "danger" style selected\.       |
+| customStyle?: BasicItemStyle;  | Styles all basic menu items which has "custom" style selected\.       |
 
 #### BasicItemStyle
 
@@ -49,12 +49,6 @@ Main object have four objects. Objects with ?, means they are optional and doesn
 | textStyle?: TextStyle;                        | Styles the caption\.                                                                             |
 | ellipsizeMode?: TextProps\["ellipsizeMode"\]; | Styles how the text will be clipped if its too long\. Can be 'head', 'middle', 'tail' and 'clip' |
 | dividerColor?: string;                        | Styles the divider color                                                                         |
-
-#### CustomItemStyle
-
-| Style Key              | Description                    |
-| ---------------------- | ------------------------------ |
-| container?: ViewStyle; | Styles the wrapper container\. |
 
 Example:
 
