@@ -47,7 +47,7 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "@babel/core": "^7.5.5",
+    "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.5.5",
     "@types/classnames": "^2.2.6",
     "@types/date-arithmetic": "^3.1.2",
