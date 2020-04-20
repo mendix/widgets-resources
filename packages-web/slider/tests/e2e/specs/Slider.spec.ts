@@ -52,15 +52,19 @@ describe("Slider widget", () => {
 
             dataGridRows[0].click();
             browser.waitUntil(() => {
-                return sliderWidget.getHandle().getCSSProperty("cursor").value === "grab";
+                return (
+                    sliderWidget.getHandle().getCSSProperty("cursor").value === "grab" &&
+                    sliderWidget.getHandle().getAttribute("style") === "left: 50%;"
+                );
             });
-            expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 50%;");
 
             dataGridRows[1].click();
             browser.waitUntil(() => {
-                return sliderWidget.getHandle().getCSSProperty("cursor").value === "grab";
+                return (
+                    sliderWidget.getHandle().getCSSProperty("cursor").value === "grab" &&
+                    sliderWidget.getHandle().getAttribute("style") === "left: 80%;"
+                );
             });
-            expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 80%;");
         });
 
         it("triggers a microflow after slide", () => {
