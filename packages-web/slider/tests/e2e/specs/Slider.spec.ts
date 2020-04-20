@@ -235,6 +235,7 @@ describe("Slider widget", () => {
             sliderWidget.waitForTooltipDisplayed(true);
 
             sliderWidget.dragHandleToMaximum();
+            page.getWidget("textTitle").moveTo();
             sliderWidget.getHandle().moveTo();
             expect(sliderWidget.getTooltipValue()).toBe("Slider");
         });
@@ -254,6 +255,7 @@ describe("Slider widget", () => {
             sliderWidget.waitForTooltipDisplayed(true);
 
             sliderWidget.dragHandleToMaximum();
+            page.getWidget("textTitle").moveTo();
             sliderWidget.getHandle().moveTo();
             expect(sliderWidget.getTooltipValue()).toBe("20");
         });
@@ -273,6 +275,7 @@ describe("Slider widget", () => {
             sliderWidget.waitForTooltipDisplayed(true);
 
             sliderWidget.dragHandleToMaximum();
+            page.getWidget("textTitle").moveTo();
             sliderWidget.getHandle().moveTo();
             expect(sliderWidget.getTooltipValue()).toBe("20");
         });
@@ -309,17 +312,15 @@ describe("Slider widget", () => {
             );
         });
 
-        // === Enable when bug is fixed ===
+        it("warns about an invalid step size value", () => {
+            page.open("p/invalid-step-value");
 
-        // it("warns about an invalid step size value", () => {
-        //     page.open("p/invalid-step-value");
+            const sliderWidget = new SliderWidget("slider");
 
-        //     const sliderWidget = new SliderWidget("slider");
-
-        //     expect(sliderWidget.getAlertMessage().getText()).toBe(
-        //         "Step value is invalid: max - min (20 - 2) should be evenly divisible by the step value 5"
-        //     );
-        // });
+            expect(sliderWidget.getAlertMessage().getText()).toBe(
+                "Step value is invalid: max - min (20 - 2) should be evenly divisible by the step value 5"
+            );
+        });
 
         it("warns about an invalid step size value of 0", () => {
             page.open("p/step-value-less-than-zero");

@@ -110,8 +110,9 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
             const remainder = maximumValue - minimumValue - product;
 
             if (validMax && validMin && remainder > 0) {
-                message.push(`Step value is invalid: max - min (${maximumValue} - ${minimumValue})
-             should be evenly divisible by the step value ${stepValue}`);
+                message.push(
+                    `Step value is invalid: max - min (${maximumValue} - ${minimumValue}) should be evenly divisible by the step value ${stepValue}`
+                );
             }
         }
         if (!validMax) {
