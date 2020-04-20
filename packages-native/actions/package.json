@@ -25,6 +25,7 @@
     "react-native-touch-id": "4.4.1"
   },
   "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "8.9.0",
     "@types/querystringify": "^2.0.0",
     "@types/url-parse": "^1.4.3"
   }

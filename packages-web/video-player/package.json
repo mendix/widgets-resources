@@ -39,8 +39,8 @@
     "svncheckout": "ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
   },
   "devDependencies": {
-    "@types/classnames": "^2.2.6",
     "@mendix/pluggable-widgets-tools": "8.9.0",
+    "@types/classnames": "^2.2.6",
     "@types/react-resize-detector": "^4.0.1"
   },
   "dependencies": {

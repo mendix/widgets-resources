@@ -36,6 +36,7 @@
     "url": "https://github.com/mendix/widgets-resources.git"
   },
   "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "8.9.0",
     "@types/big.js": "^4.0.5",
     "@types/cordova": "^0.0.34",
     "@types/cordova-plugin-app-version": "^0.1.35",
