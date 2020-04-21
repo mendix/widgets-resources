@@ -40,6 +40,7 @@
     ]
   },
   "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "8.9.0",
     "@types/classnames": "^2.2.6",
     "@widgets-resources/utils-react-widgets": "0.0.1"
   },

@@ -49,6 +49,7 @@
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.5.5",
+    "@mendix/pluggable-widgets-tools": "8.9.0",
     "@types/classnames": "^2.2.6",
     "@types/date-arithmetic": "^3.1.2",
     "@types/react-big-calendar": "0.20.20",

@@ -50,9 +50,10 @@ exports[`Signature renders the structure correctly 1`] = `
     handleWidth={true}
     nodeType="div"
     onResize={[Function]}
+    querySelector={null}
     refreshRate={1000}
-    resizableElementId=""
     skipOnMount={false}
+    targetDomEl={null}
   />
 </SizeContainer>
 `;
