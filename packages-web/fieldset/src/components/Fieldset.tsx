@@ -11,10 +11,6 @@ export interface FieldsetProps {
 export function Fieldset(props: PropsWithChildren<FieldsetProps>): ReactElement | null {
     const { legend, name, tabIndex, style, className, children } = props;
 
-    if (!children) {
-        return null;
-    }
-
     return (
         <fieldset name={name} tabIndex={tabIndex} style={style} className={className}>
             {legend && <legend>{legend}</legend>}

@@ -33,9 +33,4 @@ describe("Fieldset", () => {
 
         expect(fieldset).toMatchSnapshot();
     });
-    it("renders nothing when no children are passed", () => {
-        const fieldset = shallow(<Fieldset {...defaultFieldsetProps} />);
-
-        expect(fieldset).toMatchSnapshot();
-    });
 });

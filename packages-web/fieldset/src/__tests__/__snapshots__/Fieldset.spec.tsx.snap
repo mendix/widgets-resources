@@ -21,8 +21,6 @@ exports[`Fieldset renders children and legend 1`] = `
 </fieldset>
 `;
 
-exports[`Fieldset renders nothing when no children are passed 1`] = `""`;
-
 exports[`Fieldset renders only children when no legend is passed 1`] = `
 <fieldset
   className="className"
