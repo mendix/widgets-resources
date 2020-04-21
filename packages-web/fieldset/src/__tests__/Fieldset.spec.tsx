@@ -15,7 +15,6 @@ describe("Fieldset", () => {
     const defaultChildren: ReactNode = (
         <Fragment>
             <label>Name:</label>
-            <br />
             <input type="text" name="employee_name" id="employee_name" />
         </Fragment>
     );

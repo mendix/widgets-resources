@@ -4,7 +4,7 @@ import { parseStyle } from "@widgets-resources/piw-utils";
 import { Fieldset } from "./components/Fieldset";
 import { FieldsetPreviewProps } from "../typings/FieldsetProps";
 
-export const preview = (props: FieldsetPreviewProps): ReactElement => {
+export function preview(props: FieldsetPreviewProps): ReactElement {
     const { class: className, legend } = props;
     const style = parseStyle(props.style);
     const ContentRenderer = props.content.renderer;
@@ -16,4 +16,4 @@ export const preview = (props: FieldsetPreviewProps): ReactElement => {
             </ContentRenderer>
         </Fieldset>
     );
-};
+}

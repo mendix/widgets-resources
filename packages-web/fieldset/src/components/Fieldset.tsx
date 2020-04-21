@@ -1,4 +1,4 @@
-import { createElement, CSSProperties, FunctionComponent } from "react";
+import { createElement, CSSProperties, PropsWithChildren, ReactElement } from "react";
 
 export interface FieldsetProps {
     name?: string;
@@ -8,7 +8,7 @@ export interface FieldsetProps {
     legend?: string;
 }
 
-export const Fieldset: FunctionComponent<FieldsetProps> = (props): JSX.Element | null => {
+export function Fieldset(props: PropsWithChildren<FieldsetProps>): ReactElement | null {
     const { legend, name, tabIndex, style, className, children } = props;
 
     if (!children) {
@@ -21,4 +21,4 @@ export const Fieldset: FunctionComponent<FieldsetProps> = (props): JSX.Element |
             {children}
         </fieldset>
     );
-};
+}

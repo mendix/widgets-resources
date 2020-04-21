@@ -13,7 +13,6 @@ exports[`Fieldset renders children and legend 1`] = `
   <label>
     Name:
   </label>
-  <br />
   <input
     id="employee_name"
     name="employee_name"
@@ -34,7 +33,6 @@ exports[`Fieldset renders only children when no legend is passed 1`] = `
   <label>
     Name:
   </label>
-  <br />
   <input
     id="employee_name"
     name="employee_name"

@@ -1,10 +1,10 @@
-import { createElement, ReactNode } from "react";
+import { createElement, ReactElement } from "react";
 import { hot } from "react-hot-loader/root";
 
 import { Fieldset as FieldsetComponent } from "./components/Fieldset";
 import { FieldsetContainerProps } from "../typings/FieldsetProps";
 
-export const Fieldset = (props: FieldsetContainerProps): ReactNode => {
+function Fieldset(props: FieldsetContainerProps): ReactElement {
     const { legend, content, name, tabIndex, style, class: className } = props;
 
     return (
@@ -12,6 +12,6 @@ export const Fieldset = (props: FieldsetContainerProps): ReactNode => {
             {content}
         </FieldsetComponent>
     );
-};
+}
 
 export default hot(Fieldset);
