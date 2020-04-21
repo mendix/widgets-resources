@@ -8,7 +8,7 @@ export interface FieldsetProps {
     legend?: string;
 }
 
-export function Fieldset(props: PropsWithChildren<FieldsetProps>): ReactElement | null {
+export function Fieldset(props: PropsWithChildren<FieldsetProps>): ReactElement {
     const { legend, name, tabIndex, style, className, children } = props;
 
     return (
