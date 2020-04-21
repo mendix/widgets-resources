@@ -1,9 +1,9 @@
 {
-    "extends": "../../../utils-react-widgets/test-configs/e2e/tsconfig",
+    "extends": "../../../../configs/e2e/tsconfig",
     "compilerOptions": {
         "baseUrl": ".",
         "rootDir": "./"
     },
-    "include": ["*.spec.ts"],
+    "include": ["*.spec.ts", "specs/Switch.spec.ts"],
     "exclude": ["../../node_modules", "../../../../node_modules"]
 }
