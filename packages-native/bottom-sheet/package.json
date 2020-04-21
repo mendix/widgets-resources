@@ -32,6 +32,7 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": "8.9.0",
     "@types/react-native-actionsheet": "^2.4.1",
-    "@types/react-native-modal": "^4.1.1"
+    "@types/react-native-modal": "^4.1.1",
+    "react-native-reanimated": "^1.0.1"
   }
 }
