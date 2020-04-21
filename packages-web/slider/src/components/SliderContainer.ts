@@ -182,13 +182,14 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
     private handleChange(): void {
         const { mxform, mxObject, onChangeMicroflow, onChangeNanoflow } = this.props;
         if (onChangeMicroflow && mxObject) {
-            window.mx.ui.action(onChangeMicroflow, {
+            window.mx.data.action({
                 error: error =>
                     window.mx.ui.error(
                         `An error occurred while executing microflow: ${onChangeMicroflow}: ${error.message}`
                     ),
                 origin: mxform,
                 params: {
+                    actionname: onChangeMicroflow,
                     applyto: "selection",
                     guids: [mxObject.getGuid()]
                 }
