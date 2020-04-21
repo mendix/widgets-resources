@@ -47,7 +47,6 @@
     "@types/react-test-renderer": "~16.9.0",
     "@types/readline-sync": "^1.4.3",
     "@types/xml2js": "^0.4.4",
-    "check-dependencies": "^1.1.0",
     "cross-env": "^5.2.0",
     "deepmerge": "^4.1.1",
     "dotenv": "^8.2.0",
