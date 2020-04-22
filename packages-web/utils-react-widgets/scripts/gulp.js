@@ -153,23 +153,14 @@ function productionBundle(cb) {
     runWebpack(config, cb);
 }
 
-function checkDependencies(cb) {
-    require("check-dependencies").sync({
-        packageDir: path.join(variables.path, "package.json"),
-        scopeList: ["devDependencies"],
-        install: true
-    });
-    cb();
-}
-
 function handleError(err) {
     console.log(`${COLOR.RED}${err.toString()}${END}`);
     process.exit(-1);
 }
 
-const build = gulp.series(clean, checkDependencies, bundle, createMpkFile, copyToDeployment);
+const build = gulp.series(clean, bundle, createMpkFile, copyToDeployment);
 
-const productionBuild = gulp.series(clean, checkDependencies, productionBundle, createMpkFile);
+const productionBuild = gulp.series(clean, productionBundle, createMpkFile);
 const lint = gulp.series(runLint);
 
 function watch() {
