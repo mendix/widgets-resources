@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.web.fieldset.Fieldset" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>Fieldset</name>
+    <description />
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABGUUKwAAADJklEQVR4Ae1bS27bMBAlgzp2t9kFSM/QK3RZZdF22wPUvUHhIxg9Qi6QbZBF3GWu0DPUaHbZ1k2AqjOKKIeiIOmNTIWSqI35GQ7nPc0MScFUKj6RgcjAlBnQVeCTm/Qsfdx9V6l6R/2nLEOCW3Wkl5sPiw3XzZNc7xL1L71IlTozbW1+D62vZs47Mv5WzxbfNud6W5Y7Kjdk4B92Pwn8Z+rLwLNMBpCAluUl4H3oc+zaN5wylpQwMbZ981PJISB780qdlAVHUD/JsVlQHAJyt7eEuGJc1umgsMj6nI76hkPrq58t730KaUuU7LCf91d/yNv3j1b6ZqbnX64/6t/71vBLmbs//r1I0zR5bu2PT68tzK4HPJfm8vH869DAs9lZwpvNl1yuexoJqMqcdQpD6mtjeyMBIQHyYcsrVOl6vU601hxbzpJSp4vGbGnMcrVaWfuIujF99MEeIAHPQJgwHtsHKGQOmABE+RBkYQLYjdmdUXAmBNBxvuXhHJDH8BvfhvWlH/aAvgzrax7YA6SrgG9AJsTQVQb2AM7k6BLoGzzrl64yMAEhgjcES2yDCTCTjeUXzgFl4BRz1umq3O+7TjnJOr2i803eAyIBqMuMTb5zDugagy9NaAwB9A1IDkLoHFJ5iW2wB9BmQ3QalIJqO85shdvKGzk4B8TToKFuJL9wCIwEdwFj8gTAOUD6PcAkKfS8XrwqTwXYAwiI6HuA9LzuCXehFiagGDmSAkyAdB9gQiA03uAcEPcBob3CjvbAHiBdBTra2TjchBi6ysA5QLoKNCLoKCBdZWACeKKOtnobLrENJsCb9S+kGM4BZTsp5uJX4TIpQ6pPPgQmT0DnHBC/Cg8p4CtshUOAd1wVeoJoktgGEyA9DfpmyGyF0XngHBBPgyjFgcs3hkDVJYPAMRXmtbG9kQBFfzlvo6iYNZCC+bt8kzlVOeCOBu2vyvD/7R92v+geQZOuoPrpikyVPYzNelwPoAtGlsSYKhXYHAL4dhVhvh8T7hzLfY7NguYQwJcM9PHiLV0SuiRJx2Ws0cOo8LW5S8bU5gLFMCBFKyMDkYFDMfAfwB8dnL5LL44AAAAASUVORK5CYII=</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="legend" type="textTemplate" required="false">
+                    <caption>Legend</caption>
+                    <description/>
+                </property>
+                <property key="content" type="widgets">
+                    <caption>Content</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+
+            <propertyGroup caption="Visibility">
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name" />
+                <systemProperty key="TabIndex"/>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

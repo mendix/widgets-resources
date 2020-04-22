@@ -1,0 +1,44 @@
+{
+  "name": "fieldset",
+  "widgetName": "Fieldset",
+  "version": "1.0.0",
+  "description": "A container to group several controls within a web form",
+  "copyright": "Mendix B.V.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "license": "Apache-2.0",
+  "config": {
+    "widgetPath": "./tests/TestProjects/Mendix8/widgets",
+    "projectPath": "./tests/TestProjects/Mendix8",
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000,
+    "testProjectId": "e06d749b-4848-4006-a390-39ae58be4aa7",
+    "testProjects": [
+      {
+        "revision": 22,
+        "branch": "trunk",
+        "path": "./tests/TestProjects/Mendix8/"
+      }
+    ]
+  },
+  "packagePath": "com.mendix.widget.web",
+  "scripts": {
+    "start": "..\"/../node_modules/.bin/concurrently\" \"npm:start:server\"  \"npm:dev\"",
+    "start:server": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:server --open --subprojectPath packages-web/fieldset",
+    "dev": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:ts -- --subprojectPath packages-web/fieldset",
+    "build": "..\"/../node_modules/.bin/pluggable-widgets-tools\" build:ts --subprojectPath packages-web/fieldset",
+    "format": "..\"/../node_modules/.bin/pluggable-widgets-tools\" format --subprojectPath packages-web/fieldset",
+    "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
+    "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://fieldset-sandbox.mxapps.io ../../scripts/test/projectup.sh",
+    "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://fieldset-sandbox.mxapps.io/ ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true node ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "release": "..\"/../node_modules/.bin/pluggable-widgets-tools\" release:ts --subprojectPath packages-web/fieldset",
+    "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+  },
+  "dependencies": {
+    "@widgets-resources/piw-utils": "^1.0.0"
+  }
+}

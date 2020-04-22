@@ -40,6 +40,7 @@ A bundle of R&D Platform supported widgets & nanoflow actions for building nativ
 | :------------------------------------------------------------------------------------------------ | :---------------------------------- |
 | [Badge](https://github.com/mendix/widgets-resources/blob/master/packages-web/badge)               | Display text or a value as a badge. |
 | [Badge Button](https://github.com/mendix/widgets-resources/blob/master/packages-web/badge-button) | Display a button with a badge.      |
+| [Fieldset](https://github.com/mendix/widgets-resources/blob/master/packages-web/fieldset)         | Group form widgets.                 |
 | [Range Slider](https://github.com/mendix/widgets-resources/blob/master/packages-web/range-slider) | Displays a slider with min and max. |
 | [Rich Text](https://github.com/mendix/widgets-resources/blob/master/packages-web/rich-text)       | Display a full text editor.         |
 | [Signature](https://github.com/mendix/widgets-resources/blob/master/packages-web/signature)       | Displays a signature pad.           |
