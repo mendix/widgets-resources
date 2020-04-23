@@ -1,6 +1,6 @@
-import { ComponentType, createElement, ReactElement, useCallback, useRef } from "react";
+import { ComponentType, createElement, Fragment, ReactElement, useCallback, useRef } from "react";
 import { PopupMenuProps } from "../typings/PopupMenuProps";
-import { BasicItemStyle, PopupMenuStyle } from "./ui/Styles";
+import { PopupMenuStyle } from "./ui/Styles";
 import { executeAction } from "@widgets-resources/piw-utils";
 import {
     Platform,
@@ -34,16 +34,16 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
     let menuOptions: ReactElement[];
     if (props.renderMode === "basic") {
         menuOptions = props.basicItems.map((item, index) => {
-            const menuStyle: BasicItemStyle | undefined = styles.itemStyle?.[item.styleClass];
+            const itemStyle = styles.basic?.itemStyle && styles.basic?.itemStyle[item.styleClass];
             return item.itemType === "divider" ? (
-                <MenuDivider key={index} color={menuStyle?.dividerColor} />
+                <MenuDivider key={index} color={styles.basic?.dividerColor} />
             ) : (
                 <MenuItem
                     key={index}
                     onPress={() => handlePress(item.action)}
-                    textStyle={menuStyle?.textStyle}
-                    ellipsizeMode={menuStyle?.ellipsizeMode as any}
-                    style={styles.itemStyle?.container as any}
+                    textStyle={itemStyle}
+                    ellipsizeMode={styles.basic?.itemStyle?.ellipsizeMode as any}
+                    style={styles.basic?.containerStyle as any}
                 >
                     {item.caption}
                 </MenuItem>
@@ -60,7 +60,7 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
                       }
                     : {})}
             >
-                <View style={styles.itemStyle?.container}>{item.content}</View>
+                <Fragment>{item.content}</Fragment>
             </Touchable>
         ));
     }
@@ -68,6 +68,7 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
     return (
         <Menu
             ref={menuRef}
+            style={styles?.container as any}
             button={
                 <Touchable onPress={showMenu}>
                     <View style={styles.buttonContainer}>{props.menuTriggerer}</View>
