@@ -8,6 +8,7 @@
 
     @media (min-width: $screen-md) {
         .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
+            visibility: hidden;
             width: $sidebar-width !important;
 
             .mx-scrollcontainer-wrapper > .mx-navigationtree ul li {
@@ -42,12 +43,10 @@
 
     .mx-scrollcontainer-slide {
         &:not(.mx-scrollcontainer-open) > .region-sidebar {
-            visibility: hidden;
             overflow: hidden;
         }
 
         &.mx-scrollcontainer-open > .region-sidebar {
-            visibility: visible;
             width: $sidebar-width !important;
 
             & > .mx-scrollcontainer-wrapper {
