@@ -12,27 +12,23 @@ To customize any core styling, copy the part you want to customize to styles/nat
 //## Helper classes to change the look and feel of the widget
 ========================================================================== */
 // Text Box Color
-export const textBoxCapitalizeNone = {
+export const textInputCapitalizeNone = {
     input: {
-        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         autoCapitalize: "none",
     },
 };
-export const textBoxCapitalizeCharacters = {
+export const textInputCapitalizeCharacters = {
     input: {
-        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         autoCapitalize: "characters",
     },
 };
-export const textBoxCapitalizeWords = {
+export const textInputCapitalizeWords = {
     input: {
-        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         autoCapitalize: "words",
     },
 };
-export const textBoxCapitalizeSentences = {
+export const textInputCapitalizeSentences = {
     input: {
-        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         autoCapitalize: "sentences",
     },
 };

@@ -30,4 +30,29 @@ export const com_mendix_widget_native_bottomsheet_BottomSheet = {
         alignSelf: "stretch",
         backgroundColor: background.primary,
     },
+    modal: {
+    // All ViewStyle properties are allowed
+    },
+    modalItems: {
+        defaultStyle: {
+            // All TextStyle properties are allowed
+            fontSize: 16,
+            color: "black",
+        },
+        primaryStyle: {
+            // All TextStyle properties are allowed
+            fontSize: 16,
+            color: "#0595DB",
+        },
+        dangerStyle: {
+            // All TextStyle properties are allowed
+            fontSize: 16,
+            color: "#ed1c24",
+        },
+        customStyle: {
+            // All TextStyle properties are allowed
+            fontSize: 16,
+            color: "#76CA02",
+        },
+    },
 };

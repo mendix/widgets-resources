@@ -17,7 +17,7 @@ export const TextArea = {
     label: Object.assign(Object.assign({}, TextBox.label), { height: "100%", textAlignVertical: "top", paddingVertical: (_a = TextBox.input) === null || _a === void 0 ? void 0 : _a.paddingVertical }),
     input: Object.assign(Object.assign({}, TextBox.input), { textAlignVertical: "top", paddingTop: (_b = TextBox.input) === null || _b === void 0 ? void 0 : _b.paddingVertical }),
     inputDisabled: {
-        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
+        // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         backgroundColor: (_c = TextBox.inputDisabled) === null || _c === void 0 ? void 0 : _c.backgroundColor,
     },
     inputError: Object.assign({}, TextBox.inputError),

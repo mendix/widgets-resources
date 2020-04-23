@@ -44,7 +44,14 @@ export interface BadgeType {
 // Bottom Sheet
 export interface BottomSheetType {
     container?: ViewStyle,
-    containerWhenExpandedFullscreen?: ViewStyle
+    containerWhenExpandedFullscreen?: ViewStyle,
+    modal?: ViewStyle,
+    modalItems?: {
+        defaultStyle?: TextStyle;
+        primaryStyle?: TextStyle;
+        dangerStyle?: TextStyle;
+        customStyle?: TextStyle;
+    }
 }
 
 // Action Button
