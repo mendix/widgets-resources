@@ -1,75 +1,92 @@
-## PopupMenu
+## Pop-Up Menu
 
-Use pop up menu to create a menus which anchored to an element. Pop up menu will be opened after pressing to the anchor element and close when one of the items are clicked.
+​
+Use Pop-Up Menu to create a menu which is anchored to an element. The pop-up menu will be opened after clicking on the anchor element, and will close when one of the items are clicked.
+​
 
 ## Usage
 
-### Adding clickable area to show menu
+​
 
-Simply fill the content of the clickable area. **Any touchable items (buttons, dropdowns etc..) in this field will steal the touch event and it will prevent popup menu to open.**
+### Adding Triggerer
 
-### Adding menu items
+​
+Simply fill the content of the triggerer. This is a free modeling content area and will be wrapped by `touchable`. Any `touchable` items (for example buttons or drop-down menus) in this field will steal the touch event which will prevent the Pop-Up Menu from opening.
+​
 
+### Adding Menu Items
+
+​
 For the sake of simplicity, there are two modes available to add new items to popup menu:
+​
 
-#### Basic mode
+#### Basic Mode
 
-Simply add new item with Caption and Action to quickly create a dropdown item. Selecting divider will add a divider with straight line.
+​
+Simply add new items with `Caption` and `Action` to quickly create a drop-down item. Selecting `divider` will add a divider with straight line.
+​
 
-#### Custom mode
+#### Custom Mode
 
-For every item which has the custom mode selected, will add a free modeling area. **Any touchable items (buttons, dropdowns etc..) in this field will steal the touch event and it will prevent popup menu to close**.
-
-If you wish to achieve tooltip like behaviour this can be best achieved by this mode.
+​
+Every item which has the **custom** mode selected will add a free modeling area. Every item will be wrapped by a `Touchable`. Any `touchable` items (for example buttons or drop-down menus) in this field will steal the touch event which will prevent the Pop-Up Menu from closing.
+​
+You can use this mode to achieve a tooltip-like behavior.
+​
 
 ## Styling
 
-Main object have four objects. Objects with ?, means they are optional and doesn't need to be provided.
+​
+A main object has four objects. Objects with **?** are optional and do not need to be provided in the main object.
 
 | Style Key                    | Description                                                                                                      |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| itemStyle?: MenuItemsStyle;  | Styles items\.                                                                                                   |
+| basic?: BasicItemStyle;      | Styles items\.                                                                                                   |
 | buttonContainer?: ViewStyle; | Styles the wrapper view of triggerer since there could be multiple elements and it has to be wrapped in a view\. |
-
-#### MenuItemStyle
-
-| Style Key                      | Description                                                           |
-| ------------------------------ | --------------------------------------------------------------------- |
-| container?: ViewStyle;         | Styles the wrapping view around items. Including the custom mode ones |
-| defaultStyle?: BasicItemStyle; | Styles all basic menu items which has "default" style selected\.      |
-| primaryStyle?: BasicItemStyle; | Styles all basic menu items which has "primary" style selected\.      |
-| dangerStyle?: BasicItemStyle;  | Styles all basic menu items which has "danger" style selected\.       |
-| customStyle?: BasicItemStyle;  | Styles all basic menu items which has "custom" style selected\.       |
+| container?: ViewStlye;       | Styles the wrapper view around the whole menu\.                                                                  |
 
 #### BasicItemStyle
 
+| Style Key                   | Description                                      |
+| --------------------------- | ------------------------------------------------ |
+| containerStyle?: ViewStyle; | Styles the wrapper container around basic item\. |
+| itemStyle?: ItemStyle;      | Styles the basic items\.                         |
+| dividerColor?: string;      | Styles the divider color                         |
+
+#### ItemStyle
+
 | Style Key                                     | Description                                                                                      |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| container?: ViewStyle;                        | Styles the wrapper container\.                                                                   |
-| textStyle?: TextStyle;                        | Styles the caption\.                                                                             |
 | ellipsizeMode?: TextProps\["ellipsizeMode"\]; | Styles how the text will be clipped if its too long\. Can be 'head', 'middle', 'tail' and 'clip' |
-| dividerColor?: string;                        | Styles the divider color                                                                         |
+| defaultStyle?: BasicItemStyle;                | Styles all basic menu items which has "default" style selected\.                                 |
+| primaryStyle?: BasicItemStyle;                | Styles all basic menu items which has "primary" style selected\.                                 |
+| dangerStyle?: BasicItemStyle;                 | Styles all basic menu items which has "danger" style selected\.                                  |
+| customStyle?: BasicItemStyle;                 | Styles all basic menu items which has "custom" style selected\.                                  |
 
 Example:
 
 ```
     export const style = {
-       basicItem: {
-          defaultStyle: {
-             dividerColor: "green",
-             textStyle: {
-                 color: "red"
-             }
-          }
+       container: {
+       		borderRadius: 10,
+       		marginTop: 20,
        },
-       customItem: {
-           container: {
-               backgroundColor: "yellow",
-               height: 48,
-               justifyContent: "center",
-               maxWidth: 248,
-               minWidth: 124
+       basic: {
+           itemStyle: {
+               defaultStyle: {
+                   paddingHorizontal: 20,
+               },
+               dangerStyle: {
+                   color: "#ed1c24"
+               }
+           },
+           containerStyle: {
+               height: 40,
            }
+       },
+       butonContainer: {
+          width: 25,
+          padding: 5,
        }
    };
 ```
