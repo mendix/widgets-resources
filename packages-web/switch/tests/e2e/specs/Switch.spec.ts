@@ -1,4 +1,4 @@
-import page from "./pages/home.page";
+import page from "../pages/home.page";
 
 const switchBackgroundColor = "rgba(100,189,99,1)";
 const switchBorderColor = "rgb(100,189,99)";
