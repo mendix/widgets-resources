@@ -8,7 +8,6 @@
 
     @media (min-width: $screen-md) {
         .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
-            visibility: hidden;
             width: $sidebar-width !important;
 
             .mx-scrollcontainer-wrapper > .mx-navigationtree ul li {
@@ -69,6 +68,13 @@
 
         .mx-scrollcontainer-slide .toggle-btn {
             display: inline-block !important;
+        }
+    }
+   
+    .mx-scrollcontainer-slide,
+    .mx-scrollcontainer-push {
+        &:not(.mx-scrollcontainer-open) > .region-sidebar {
+            visibility: hidden;
         }
     }
 
