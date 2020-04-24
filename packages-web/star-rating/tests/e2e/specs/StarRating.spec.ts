@@ -1,4 +1,4 @@
-import page from "./pages/home.page";
+import page from "../pages/home.page";
 
 describe("Star rating", () => {
     beforeAll(() => {
