@@ -14,7 +14,7 @@
     "test": "npm run test:unit",
     "test:unit": "jest --config ../../scripts/test/jest.web.config.js",
     "pretest:e2e": "cross-env URL=https://rating100.mxapps.io ../../scripts/test/projectup.sh",
-    "test:e2e": cross-env URL=https://rating100.mxapps.io wdio ../../configs/e2e/wdio.conf.js",
+    "test:e2e": "cross-env URL=https://rating100.mxapps.io wdio ../../configs/e2e/wdio.conf.js",
     "test:e2e:dev": "cross-env DEBUG=true wdio ../../configs/e2e/wdio.conf.js",
     "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "lint:fix": "npm run lint -- --fix",

@@ -35,18 +35,18 @@
     "type": "git",
     "url": "https://github.com/mendix/widgets-resources.git"
   },
-  "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "8.9.0",
-    "@types/big.js": "^4.0.5",
-    "@types/cordova": "^0.0.34",
-    "@types/cordova-plugin-app-version": "^0.1.35",
+  "dependencies": {
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-contacts": "^3.0.1",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-media": "^5.0.3",
     "cordova-plugin-network-information": "^2.0.2",
-    "cordova-plugin-statusbar": "^2.4.3",
-    "npm-watch": "^0.6.0"
+    "cordova-plugin-statusbar": "^2.4.3"
   },
-  "dependencies": {}
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "8.9.0",
+    "@types/cordova": "^0.0.34",
+    "@types/cordova-plugin-app-version": "^0.1.35",
+    "npm-watch": "^0.6.0"
+  }
 }

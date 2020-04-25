@@ -9,13 +9,11 @@
     "postbuild": "ts-node --project scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
     "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/"
   },
-  "devDependencies": {
-    "@babel/cli": "^7.6.0",
-    "@babel/core": "^7.6.0",
-    "@mendix/pluggable-widgets-tools": "8.9.0"
-  },
   "dependencies": {
     "@react-native-community/async-storage": "1.8.1",
     "@react-native-community/geolocation": "2.0.2"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "8.9.0"
   }
 }
