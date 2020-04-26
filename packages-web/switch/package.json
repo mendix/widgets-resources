@@ -12,15 +12,15 @@
     "start": "utils-react-widgets start",
     "dev": "utils-react-widgets dev",
     "test:dev": "utils-react-widgets test:dev",
-    "test:unit": "../../node_modules/.bin/jest --config ../../scripts/test/jest.web.config.js",
-    "pretest:e2e": "../../node_modules/.bin/cross-env URL=https://booleansliderwidge.mxapps.io ../../scripts/test/projectup.sh",
-    "test:e2e": "../../node_modules/.bin/cross-env URL=https://booleansliderwidge.mxapps.io ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
-    "test:e2e:dev": "../../node_modules/.bin/cross-env DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
-    "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test:unit": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
+    "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://booleansliderwidge.mxapps.io ../../scripts/test/projectup.sh",
+    "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://booleansliderwidge.mxapps.io ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "lint:fix": "npm run lint -- --fix",
     "build": "utils-react-widgets build",
     "release": "utils-react-widgets release",
-    "svncheckout": "../../node_modules/.bin/ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+    "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
   },
   "license": "Apache-2.0",
   "config": {

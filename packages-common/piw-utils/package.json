@@ -6,10 +6,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "start": "../../node_modules/.bin/tsc --watch",
+    "start": "..\"/../node_modules/.bin/tsc\" --watch",
     "prebuild": "rm -rf ./dist",
-    "build": "../../node_modules/.bin/tsc",
-    "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "build": "..\"/../node_modules/.bin/tsc\"",
+    "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "prepare": "npm run build"
   },
   "devDependencies": {

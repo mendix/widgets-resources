@@ -5,9 +5,9 @@
   "scripts": {
     "build": "npm run build:tsc",
     "prebuild:tsc": "rm -rf dist/tsc",
-    "build:tsc": "../../node_modules/.bin/tsc --project src/tsconfig.json",
-    "postbuild": "../../node_modules/.bin/ts-node --project scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
-    "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/"
+    "build:tsc": "..\"/../node_modules/.bin/tsc\" --project src/tsconfig.json",
+    "postbuild": "..\"/../node_modules/.bin/ts-node\" --project scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
+    "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/"
   },
   "dependencies": {
     "@react-native-community/async-storage": "1.8.1",

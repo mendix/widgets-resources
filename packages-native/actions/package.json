@@ -9,10 +9,10 @@
   "scripts": {
     "prebuild": "rm -rf ./dist/tsc",
     "build": "npm run build:tsc",
-    "build:tsc": "../../node_modules/.bin/tsc --project src/tsconfig.json",
-    "postbuild": "../../node_modules/.bin/ts-node --project ./scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
+    "build:tsc": "..\"/../node_modules/.bin/tsc\" --project src/tsconfig.json",
+    "postbuild": "..\"/../node_modules/.bin/ts-node\" --project ./scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
     "version": "npm run build",
-    "postversion": "../../node_modules/.bin/ts-node ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
+    "postversion": "..\"/../node_modules/.bin/ts-node\" ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
   },
   "dependencies": {
     "@react-native-community/cameraroll": "1.4.1",
