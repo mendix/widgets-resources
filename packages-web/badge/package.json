@@ -30,18 +30,18 @@
   },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
-    "start": "concurrently \"npm:start:server\"  \"npm:dev\"",
+    "start": "../../node_modules/.bin/concurrently \"npm:start:server\"  \"npm:dev\"",
     "start:server": "pluggable-widgets-tools start:server --open --subprojectPath packages-web/badge",
     "dev": "pluggable-widgets-tools start:ts -- --subprojectPath packages-web/badge",
     "build": "pluggable-widgets-tools build:ts --subprojectPath packages-web/badge",
     "format": "pluggable-widgets-tools format --subprojectPath packages-web/badge",
-    "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "test": "jest --config ../../scripts/test/jest.web.config.js",
-    "pretest:e2e": "cross-env URL=https://badge.mxapps.io ../../scripts/test/projectup.sh",
-    "test:e2e": "cross-env URL=https://badge.mxapps.io wdio ../../configs/e2e/wdio.conf.js",
-    "test:e2e:dev": "cross-env DEBUG=true wdio ../../configs/e2e/wdio.conf.js",
+    "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "../../node_modules/.bin/jest --config ../../scripts/test/jest.web.config.js",
+    "pretest:e2e": "../../node_modules/.bin/cross-env URL=https://badge.mxapps.io ../../scripts/test/projectup.sh",
+    "test:e2e": "../../node_modules/.bin/cross-env URL=https://badge.mxapps.io ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "test:e2e:dev": "../../node_modules/.bin/cross-env DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
     "release": "pluggable-widgets-tools release:ts --subprojectPath packages-web/badge",
-    "svncheckout": "ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+    "svncheckout": "../../node_modules/.bin/ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": "8.9.0",

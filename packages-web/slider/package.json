@@ -12,12 +12,12 @@
     "start": "utils-react-widgets start",
     "dev": "utils-react-widgets dev",
     "test": "npm run test:unit",
-    "test:unit": "jest --config ../../scripts/test/jest.web.config.js",
-    "lint": "eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test:unit": "../../node_modules/.bin/jest --config ../../scripts/test/jest.web.config.js",
+    "lint": "../../node_modules/.bin/eslint --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "lint:fix": "npm run lint -- --fix",
     "build": "utils-react-widgets build",
     "release": "utils-react-widgets release",
-    "svncheckout": "ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+    "svncheckout": "../../node_modules/.bin/ts-node --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
   },
   "config": {
     "mendixHost": "http://localhost:8080",
