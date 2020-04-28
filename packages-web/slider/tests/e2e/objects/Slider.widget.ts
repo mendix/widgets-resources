@@ -32,20 +32,16 @@ export default class SliderWidget {
         const dots = page.waitForElements(".rc-slider-step > span", this.element);
         const labels = page.waitForElements(".rc-slider-mark > span", this.element);
 
-        const result: Marker[] = [];
-
         if (dots.length !== labels.length) {
             throw Error("The amount of slider dots and labels aren't equal");
         }
 
-        for (let i = 0; i < dots.length; i++) {
-            result.push({
-                dot: page.waitForElement(`.rc-slider-step > span:nth-child(${i + 1})`),
-                label: page.waitForElement(`.rc-slider-mark > span:nth-child(${i + 1})`)
-            });
-        }
-
-        return result;
+        return dots.map((dot, index) => {
+            return {
+                dot: page.waitForElement(`.rc-slider-step > span:nth-child(${index + 1})`),
+                label: page.waitForElement(`.rc-slider-mark > span:nth-child(${index + 1})`)
+            };
+        });
     }
 
     getMinimumMarker(): Marker {
@@ -86,12 +82,11 @@ export default class SliderWidget {
     }
 
     dragHandleToMinimum(): void {
-        this.getHandle().dragAndDrop(this.getMarkers()[0].dot);
+        this.getHandle().dragAndDrop(this.getMinimumMarker().dot);
     }
 
     dragHandleToMaximum(): void {
-        const markers = this.getMarkers();
-        this.getHandle().dragAndDrop(markers[markers.length - 1].dot);
+        this.getHandle().dragAndDrop(this.getMaximumMarker().dot);
     }
 
     dragHandleTo(marker: Marker): void {

@@ -51,20 +51,20 @@ describe("Slider widget", () => {
             expect(sliderWidget.getHandle().getCSSProperty("cursor").value).toBe("not-allowed");
 
             dataGridRows[0].click();
-            browser.waitUntil(() => {
-                return (
+            browser.waitUntil(
+                () =>
                     sliderWidget.getHandle().getCSSProperty("cursor").value === "grab" &&
-                    sliderWidget.getHandle().getAttribute("style") === "left: 50%;"
-                );
-            });
+                    sliderWidget.getHandle().getAttribute("style") === "left: 50%;",
+                5000
+            );
 
             dataGridRows[1].click();
-            browser.waitUntil(() => {
-                return (
+            browser.waitUntil(
+                () =>
                     sliderWidget.getHandle().getCSSProperty("cursor").value === "grab" &&
-                    sliderWidget.getHandle().getAttribute("style") === "left: 80%;"
-                );
-            });
+                    sliderWidget.getHandle().getAttribute("style") === "left: 80%;",
+                5000
+            );
         });
 
         it("triggers a microflow after slide", () => {
@@ -120,7 +120,7 @@ describe("Slider widget", () => {
             expect(markers[3].label.getText()).toBe("6.7");
         });
 
-        // === Enable when bug is fixed ===
+        // === Enable when bug is fixed (WT-2439) ===
 
         // it("updates decimal values", () => {
         //     page.open("p/decimal-values");
