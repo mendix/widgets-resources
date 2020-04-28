@@ -48,9 +48,9 @@ describe("Popup menu", () => {
         it("renders with custom styles", () => {
             const customStyle = [
                 {
-                    itemStyle: {
-                        defaultStyle: {
-                            textStyle: {
+                    basic: {
+                        itemStyle: {
+                            defaultStyle: {
                                 color: "green"
                             }
                         }
@@ -83,10 +83,8 @@ describe("Popup menu", () => {
         it("renders with custom styles", () => {
             const customStyle = [
                 {
-                    itemStyle: {
-                        container: {
-                            backgroundColor: "yellow"
-                        }
+                    container: {
+                        backgroundColor: "yellow"
                     }
                 }
             ];

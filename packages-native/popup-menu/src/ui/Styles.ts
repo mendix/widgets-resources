@@ -2,7 +2,7 @@ import { TextProps, TextStyle, ViewStyle } from "react-native";
 
 export interface PopupMenuStyle {
     container?: ViewStyle;
-    basic: BasicItemStyle;
+    basic?: BasicItemStyle;
     buttonContainer?: ViewStyle;
 }
 
