@@ -7,9 +7,9 @@ export interface PopupMenuStyle {
 }
 
 interface BasicItemStyle {
-    itemStyle: ItemStyle;
-    containerStyle: ViewStyle;
-    dividerColor: string;
+    itemStyle?: ItemStyle;
+    containerStyle?: ViewStyle;
+    dividerColor?: string;
 }
 interface ItemStyle {
     ellipsizeMode?: TextProps["ellipsizeMode"];
