@@ -22,7 +22,9 @@ exports[`Popup menu renders menu triggerer 1`] = `
         }
       }
     >
-      <View>
+      <View
+        pointerEvents="box-only"
+      >
         <Text>
           Menu Triggerer
         </Text>
@@ -181,7 +183,9 @@ exports[`Popup menu with basic items renders 1`] = `
         }
       }
     >
-      <View />
+      <View
+        pointerEvents="box-only"
+      />
     </View>
   </View>
   <Modal
@@ -336,7 +340,9 @@ exports[`Popup menu with basic items renders with custom styles 1`] = `
         }
       }
     >
-      <View />
+      <View
+        pointerEvents="box-only"
+      />
     </View>
   </View>
   <Modal
@@ -493,7 +499,9 @@ exports[`Popup menu with custom items renders 1`] = `
         }
       }
     >
-      <View />
+      <View
+        pointerEvents="box-only"
+      />
     </View>
   </View>
   <Modal
@@ -577,11 +585,9 @@ exports[`Popup menu with custom items renders 1`] = `
               }
             }
           >
-            <View>
-              <Text>
-                Yolo
-              </Text>
-            </View>
+            <Text>
+              Yolo
+            </Text>
           </View>
         </View>
       </View>
@@ -612,7 +618,9 @@ exports[`Popup menu with custom items renders with custom styles 1`] = `
         }
       }
     >
-      <View />
+      <View
+        pointerEvents="box-only"
+      />
     </View>
   </View>
   <Modal
@@ -655,7 +663,7 @@ exports[`Popup menu with custom items renders with custom styles 1`] = `
         onLayout={[Function]}
         style={
           Object {
-            "backgroundColor": "white",
+            "backgroundColor": "yellow",
             "borderRadius": 4,
             "left": 8,
             "opacity": 0,
@@ -696,17 +704,9 @@ exports[`Popup menu with custom items renders with custom styles 1`] = `
               }
             }
           >
-            <View
-              style={
-                Object {
-                  "backgroundColor": "yellow",
-                }
-              }
-            >
-              <Text>
-                Yolo
-              </Text>
-            </View>
+            <Text>
+              Yolo
+            </Text>
           </View>
         </View>
       </View>
