@@ -11,7 +11,7 @@ Use Pop-Up Menu to create a menu which is anchored to an element. The pop-up men
 ### Adding Triggerer
 
 ​
-Simply fill the content of the triggerer. This is a free modeling content area and will be wrapped by `touchable`. Any `touchable` items (for example buttons or drop-down menus) in this field will steal the touch event which will prevent the Pop-Up Menu from opening.
+Simply fill the content of the triggerer. This is a free modeling content area.
 ​
 
 ### Adding Menu Items
