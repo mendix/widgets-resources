@@ -4,44 +4,31 @@ cache: npm
 branches:
     only:
         - master
+        - /^pluggable-widgets-tools-v*/
 env:
     global:
-        # List of all touched files, excluding paths starting with 'packages'
-        - CHANGED_GLOBAL_FILES=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep -v "^packages")
-        - CHANGED_WEB_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "packages-web")
-        # - CHANGED_NATIVE_PROJECTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "packages-native")
-        # - CHANGED_DETOX_TESTS=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep "detox")
-        # - NATIVE_PROJECTS=$(if [ "$CHANGED_NATIVE_PROJECTS" != "" ]; then echo "true"; else echo "false"; fi)
-        # - DETOX_PROJECT=$(if [ "$CHANGED_DETOX_TESTS" != "" ]; then echo "true"; else echo "false"; fi)
-        - WEB_PROJECTS=$(if [ "$CHANGED_WEB_PROJECTS" != "" ]; then echo "true"; else echo "false"; fi)
         # Build only touched packages for pull requests when no shared files were touched
+        - CHANGED_GLOBAL_FILES=$(git diff --name-only $TRAVIS_COMMIT_RANGE | grep -v "^packages")
         - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
         # Set arguments so lerna only runs scripts in changed packages
-        - SCRIPT_ARGS=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
-        - ADB_INSTALL_TIMEOUT=8
-stages:
-    - pre-build
-    - build
-    - tests
+        - SINCE_ARG=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
 jobs:
     include:
-        - stage: pre-build
-          name: "Lint"
+        - name: "Lint"
           script:
-              - npm run lint -- $SCRIPT_ARGS
-        - stage: build
-          name: "Build on Linux"
+              - npm run lint -- $SINCE_ARG
+        - name: "Build on Linux"
           script:
-              - npm run build -- $SCRIPT_ARGS
+              - npm run build -- $SINCE_ARG
         - name: "Build on Windows"
           os: windows
           script:
-              - npm run build -- $SCRIPT_ARGS
-        - stage: tests
-          name: "Jest unit tests"
+              - npm run build -- $SINCE_ARG
+        - name: "Run unit tests"
           script:
-              - npm run test -- $SCRIPT_ARGS
-        - name: "Web Automated Tests"
+              - npm run test -- $SINCE_ARG
+        - name: "Run end-to-end tests"
+          if: tag IS blank
           fast_finish: true
           dist: trusty
           addons:
@@ -54,29 +41,17 @@ jobs:
               - sh -e /etc/init.d/xvfb start
               - sleep 3
           script:
-              - if [ "$WEB_PROJECTS" = "true" ]; then travis_wait 30 npm run test:e2e -- --since $TRAVIS_BRANCH; else echo "No individuals web package changed. Skipping tests"; fi
-        # - name: "iOS Automated tests"
-        # fast_finish: true
-        # language: objective-c
-        # os: osx
-        # osx_image: xcode11.2
-        # env:
-        # - REACT_NATIVE_VERSION=0.59.9
-        # - PATH=$PATH:~/Library/Python/2.7/bin
-        # - CODE_SIGNING_REQUIRED=NO
-        # before_install:
-        # - nvm install node
-        # - brew tap wix/brew
-        # - brew install applesimutils
-        # - cd detox
-        # install:
-        # - npm ci
-        # before_script:
-        # - echo $DETOX_PROJECT
-        # - echo $NATIVE_PROJECTS
-        # script:
-        # - if [ "$NATIVE_PROJECTS" = "true" ] || [ "$DETOX_PROJECT" = "true" ]; then npm run test:ios:debug; else echo "No native package changed. Skipping ios tests"; fi
-        # - if [ "$DETOX_PROJECT" = "true" ]; then npm run test:ios:debug; else echo "No native package changed. Skipping ios tests"; fi
+              - travis_wait 30 npm run test:e2e -- $SINCE_ARG
+        - stage: deploy
+          name: "Release tools npm package"
+          if: tag IS present
+          before_deploy:
+              - cd packages-common/pluggable-widgets-tools
+          deploy:
+              skip_cleanup: true
+              provider: npm
+              email: $NPM_EMAIL
+              api_key: $NPM_KEY
 notifications:
     slack:
         on_cancel: never
