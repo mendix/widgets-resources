@@ -1,4 +1,4 @@
-import { ImageStyle, TextStyle, ViewStyle } from "react-native";
+import { ImageStyle, TextStyle, ViewStyle, TextProps } from "react-native";
 
 declare type ActivityIndicatorSizeType = "small" | "large";
 
@@ -312,6 +312,27 @@ export interface ProgressCircleType {
     text?: TextStyle
     validationMessage?: TextStyle
 }
+
+// Popup Menu
+export interface PopupMenuType {
+    container?: ViewStyle;
+    basic: BasicItemStyle;
+    buttonContainer?: ViewStyle;
+}
+
+interface BasicItemStyle {
+    itemStyle?: ItemStyle;
+    containerStyle?: ViewStyle;
+    dividerColor?: string;
+}
+interface ItemStyle {
+    ellipsizeMode?: TextProps["ellipsizeMode"];
+    defaultStyle?: TextStyle;
+    primaryStyle?: TextStyle;
+    dangerStyle?: TextStyle;
+    customStyle?: TextStyle;
+}
+
 
 // QR Code
 export interface QRCodeType {
