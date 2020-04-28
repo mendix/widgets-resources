@@ -13,6 +13,7 @@ env:
         # Set arguments so lerna only runs scripts in changed packages
         - SINCE_ARG=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
 jobs:
+    fast_finish: true
     include:
         - name: "Lint"
           script:
@@ -29,7 +30,6 @@ jobs:
               - npm run test -- $SINCE_ARG
         - name: "Run end-to-end tests"
           if: tag IS blank
-          fast_finish: true
           dist: trusty
           addons:
               chrome: stable
