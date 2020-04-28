@@ -85,7 +85,7 @@ describe("Carousel", () => {
                 .getWidget("textBox2")
                 .$(".form-control")
                 .getValue()
-        ).toContain("..\\..\\..\\resources\\images\\its_beautiful.jpg");
+        ).toContain("landscape-17.jpg");
     });
 
     it("should trigger microflow on click XPath datasource carousel", () => {
