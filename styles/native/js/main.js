@@ -41,6 +41,7 @@ export * from "./core/widgets/progressbar";
 export * from "./core/helpers/progressbar";
 export * from "./core/widgets/progresscircle";
 export * from "./core/helpers/progresscircle";
+export * from "./core/widgets/popupmenu";
 export * from "./core/widgets/qrcode";
 export * from "./core/widgets/rangeslider";
 export * from "./core/helpers/rangeslider";
