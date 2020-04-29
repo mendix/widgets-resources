@@ -1,7 +1,7 @@
 ## Pop-Up Menu
 
 ​
-Use Pop-Up Menu to create a menu which is anchored to an element. The pop-up menu will be opened after clicking on the anchor element, and will close when one of the items are clicked.
+Use pop-up menu to create a menu which is anchored to an element. The pop-up menu will be opened after clicking on the anchor element, and will close when one of the items are clicked.
 ​
 
 ## Usage
@@ -17,7 +17,7 @@ Simply fill the content of the triggerer. This is a free modeling content area.
 ### Adding Menu Items
 
 ​
-For the sake of simplicity, there are two modes available to add new items to popup menu:
+For the sake of simplicity, there are two modes available to add new items to pop-up menu:
 ​
 
 #### Basic Mode
@@ -29,7 +29,7 @@ Simply add new items with `Caption` and `Action` to quickly create a drop-down i
 #### Custom Mode
 
 ​
-Every item which has the **custom** mode selected will add a free modeling area. Every item will be wrapped by a `Touchable`. Any `touchable` items (for example buttons or drop-down menus) in this field will steal the touch event which will prevent the Pop-Up Menu from closing.
+Every item which has the **custom** mode selected will add a free modeling area. Every item will be wrapped by a `Touchable`. Any `touchable` items (for example buttons or drop-down menus) in this field will steal the touch event which will prevent the pop-up Menu from closing.
 ​
 You can use this mode to achieve a tooltip-like behavior.
 ​
