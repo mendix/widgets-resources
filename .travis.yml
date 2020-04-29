@@ -57,6 +57,8 @@ jobs:
               provider: npm
               email: $NPM_EMAIL
               api_key: $NPM_KEY
+              on:
+                  tags: true
 notifications:
     slack:
         on_cancel: never
