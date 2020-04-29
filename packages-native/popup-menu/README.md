@@ -29,7 +29,7 @@ Simply add new items with `Caption` and `Action` to quickly create a drop-down i
 #### Custom Mode
 
 ​
-Every item which has the **custom** mode selected will add a free modeling area. Every item will be wrapped by a `Touchable`. Any `touchable` items (for example buttons or drop-down menus) in this field will steal the touch event which will prevent the Popup Menu from closing.
+Every item which has the **custom** mode selected will add a free modeling area. Every item will be wrapped by a `Touchable`. Any `Touchable` items (for example buttons or drop-down menus) in this field will steal the touch event which will prevent the Popup Menu from closing.
 ​
 You can use this mode to achieve a tooltip-like behavior.
 ​
