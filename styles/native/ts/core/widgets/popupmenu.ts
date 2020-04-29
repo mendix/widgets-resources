@@ -1,6 +1,6 @@
 import { font }        from "../variables";
 import { PopupMenuType } from "../../types/widgets";
-import { brand } from "../../app/custom-variables";
+import { brand } from "../variables";
 /*
 
 DISCLAIMER:
@@ -25,6 +25,7 @@ export const com_mendix_widget_native_popupmenu_PopupMenu: PopupMenuType = {
 	basic: {
         dividerColor: font.color,
 		itemStyle: {
+			ellipsizeMode: "tail", // 'head' | 'middle' | 'tail' | 'clip';
 			defaultStyle: {
                 // All TextStyle properties are allowed
                 color: font.color
