@@ -17,7 +17,7 @@ export const Text: TextType = {
         // All ViewStyle properties are allowed
     },
     text: {
-        // All TextStyle properties are allowed
+        // numberOfLines & All TextStyle properties are allowed
         color: font.color,
         fontSize: font.size,
         fontFamily: font.family,
