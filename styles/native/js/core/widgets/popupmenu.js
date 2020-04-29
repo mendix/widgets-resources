@@ -1,5 +1,4 @@
-import { font } from "../variables";
-import { brand } from "../variables";
+import { brand, font } from "../variables";
 /*
 
 DISCLAIMER:
@@ -27,15 +26,15 @@ export const com_mendix_widget_native_popupmenu_PopupMenu = {
             ellipsizeMode: "tail",
             defaultStyle: {
                 // All TextStyle properties are allowed
-                color: font.color
+                color: font.color,
             },
             primaryStyle: {
                 // All TextStyle properties are allowed
-                color: brand.primary
+                color: brand.primary,
             },
             dangerStyle: {
                 // All TextStyle properties are allowed
-                color: brand.danger
+                color: brand.danger,
             },
             customStyle: {
             // All TextStyle properties are allowed
