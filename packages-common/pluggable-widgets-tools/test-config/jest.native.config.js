@@ -15,7 +15,8 @@ const nativeConfig = {
     haste: {
         defaultPlatform: "android",
         platforms: ["android", "ios", "native"],
-        providesModuleNodeModules: ["react-native"]
+        providesModuleNodeModules: ["react-native"],
+        hasteImplModulePath: "<rootDir>/node_modules/react-native/jest/hasteImpl.js"
     },
     moduleDirectories: ["<rootDir>/node_modules", "<rootDir>/src"],
     moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
