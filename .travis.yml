@@ -12,6 +12,11 @@ env:
         - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
         # Set arguments so lerna only runs scripts in changed packages
         - SINCE_ARG=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
+stages:
+    - name: test
+      if: tag IS blank
+    - name: deploy
+      if: tag IS present
 jobs:
     fast_finish: true
     include:
@@ -29,7 +34,6 @@ jobs:
           script:
               - npm run test -- $SINCE_ARG
         - name: "Run end-to-end tests"
-          if: tag IS blank
           dist: trusty
           addons:
               chrome: stable
@@ -44,7 +48,8 @@ jobs:
               - travis_wait 30 npm run test:e2e -- $SINCE_ARG
         - stage: deploy
           name: "Release tools npm package"
-          if: tag IS present
+          script:
+              - echo "Ready to deploy!"
           before_deploy:
               - cd packages-common/pluggable-widgets-tools
           deploy:
@@ -52,6 +57,8 @@ jobs:
               provider: npm
               email: $NPM_EMAIL
               api_key: $NPM_KEY
+              on:
+                  tags: true
 notifications:
     slack:
         on_cancel: never
