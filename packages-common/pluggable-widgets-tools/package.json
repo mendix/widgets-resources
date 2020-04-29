@@ -1,6 +1,6 @@
 {
   "name": "@mendix/pluggable-widgets-tools",
-  "version": "8.9.0",
+  "version": "8.9.1",
   "description": "Mendix Pluggable Widgets Tools",
   "license": "Apache-2.0",
   "copyright": "2020 Mendix Technology BV",
@@ -8,9 +8,10 @@
     "name": "Diego Antonelli",
     "email": "diego.antonelli@mendix.com"
   },
+  "homepage": "https://github.com/mendix/widgets-resources/tree/master/packages-common/pluggable-widgets-tools",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mendix/widgets-resources"
+    "url": "https://github.com/mendix/widgets-resources/"
   },
   "keywords": [
     "typings",
