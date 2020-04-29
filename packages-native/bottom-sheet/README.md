@@ -1,6 +1,6 @@
-## Bottom sheet
+## Bottom Sheet
 
-The bottom sheet widget creates a set of options while blocking interaction with the rest of the screen or a draggable surface anchored to the bottom of the screen. There are two variations: Modal bottom sheet and Expanding bottom sheet.
+The bottom sheet widget creates a set of options while blocking interaction with the rest of the screen or a draggable surface anchored to the bottom of the screen. There are two variations of bottom sheet widget: a modal bottom sheet and an expanding bottom sheet.
 
 ## Usage
 
@@ -8,12 +8,12 @@ The bottom sheet widget creates a set of options while blocking interaction with
 
 ### Adding Triggerer for Modal
 
-​The triggerer is only used for modal bottom sheet and you need to select a boolean attribute. When it turns the value to true, the modal will be triggered.
+The triggerer is only used for the modal bottom sheet variation, and requires that you select a Boolean attribute. When it turns the value to **true**, the modal will be triggered.
 ​
 
 ### Adding Items
 
-For the sake of simplicity, there are two modes available to add new items to the bottom sheet:
+There are two modes which let you add new items to the bottom sheet: basic mode and custom mode.
 ​
 
 #### Basic Mode
@@ -21,14 +21,13 @@ For the sake of simplicity, there are two modes available to add new items to th
 ​
 Simply add new items with `Caption` and `Action` to quickly create a menu item. You can also select the desired style for each item.
 
-**You can use the Native IOS variant in this mode.**
+**You can use the Native iOS variant in this mode.**
 ​
 
 #### Custom Mode
 
 ​
-When selecting **custom** mode it will add a free modeling area. This area will be wrapped by a `Touchable`. Any `touchable` items (for example buttons or drop-down menus) in this field will steal the touch event which will prevent the bottom sheet to close.
-​​
+Selecting **custom** mode will add a free modeling area. This area will be wrapped with `Touchable`. Any `Touchable` items (for example buttons or drop-down menus) in this field will steal the touch event which will prevent the bottom sheet from closing.​​
 
 ## Styling
 
