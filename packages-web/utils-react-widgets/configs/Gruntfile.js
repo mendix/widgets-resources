@@ -88,15 +88,12 @@ module.exports = function(grunt) {
                 testFolder + "deployment/web/widgets/" + widgetName + "/*",
                 testFolder + "widgets/" + widgetName + ".mpk"
             ]
-        },
-
-        checkDependencies: { this: {} }
+        }
     });
     const cwd = process.cwd();
     // console.log("cwd", cwd);
     grunt.file.setBase("../utils-react-widgets");
     grunt.loadNpmTasks("grunt-contrib-clean");
-    grunt.loadNpmTasks("grunt-check-dependencies");
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-compress");
     grunt.loadNpmTasks("grunt-contrib-copy");
@@ -107,7 +104,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask("default", ["clean build", "watch"]);
     grunt.registerTask("clean build", "Compiles all the assets and copies the files to the dist directory.", [
-        "checkDependencies",
         "clean:build",
         "webpack:develop",
         "compress:dist",
@@ -116,7 +112,7 @@ module.exports = function(grunt) {
     grunt.registerTask(
         "release",
         "Compiles all the assets and copies the files to the dist directory. Minified without source mapping",
-        ["checkDependencies", "clean:build", "webpack:release", "compress:dist", "copy"]
+        ["clean:build", "webpack:release", "compress:dist", "copy"]
     );
     grunt.registerTask("build", ["clean build"]);
 };

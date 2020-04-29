@@ -1,6 +1,6 @@
 const deepmerge = require("deepmerge");
 
-const base = require("@mendix/pluggable-widgets-tools/configs/eslint.ts.base.json");
+const base = require("./packages-common/pluggable-widgets-tools/configs/eslint.ts.base.json");
 
 delete base.parserOptions.project;
 

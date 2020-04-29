@@ -1,4 +1,4 @@
-import { CSSProperties, Component, createElement, createRef } from "react";
+import { Component, createElement, createRef } from "react";
 import ReactResizeDetector from "react-resize-detector";
 
 export interface Html5PlayerProps {
@@ -20,9 +20,6 @@ export class Html5 extends Component<Html5PlayerProps> {
     private readonly handleOnError = this.handleError.bind(this);
 
     render(): JSX.Element {
-        const sizeProps: CSSProperties = {
-            height: !this.props.aspectRatio ? "100%" : undefined
-        };
         return (
             <div className="widget-video-player-html5-container">
                 <div className="video-error-label-html5" ref={this.errorElement}>
@@ -36,7 +33,7 @@ export class Html5 extends Component<Html5PlayerProps> {
                     loop={this.props.loop}
                     poster={this.props.poster}
                     ref={this.videoElement}
-                    {...sizeProps}
+                    height={!this.props.aspectRatio ? "100%" : undefined}
                 >
                     <source
                         src={this.props.url}

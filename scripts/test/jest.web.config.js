@@ -1,6 +1,6 @@
 const cwd = process.cwd();
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const configs = require("@mendix/pluggable-widgets-tools/test-config/jest.config");
+const configs = require("../../packages-common/pluggable-widgets-tools/test-config/jest.config");
 
 module.exports = {
     ...configs,
@@ -12,7 +12,7 @@ module.exports = {
             tsConfig: `${cwd}/tsconfig.spec.json`
         }
     },
-    moduleDirectories: ["<rootDir>/node_modules", `${cwd}/node_modules`, `${cwd}/src`],
+    moduleDirectories: undefined,
     moduleNameMapper: {
         "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
             "<rootDir>/__mocks__/fileMock.js",

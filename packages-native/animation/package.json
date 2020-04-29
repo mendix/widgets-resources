@@ -11,9 +11,9 @@
     },
     "packagePath": "com.mendix.widget.native",
     "scripts": {
-        "start": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:ts:native -- --subprojectPath packages-native/animation",
-        "build": "..\"/../node_modules/.bin/pluggable-widgets-tools\" build:ts:native --subprojectPath packages-native/animation",
-        "release": "..\"/../node_modules/.bin/pluggable-widgets-tools\" release:ts:native --subprojectPath packages-native/animation",
+        "start": "pluggable-widgets-tools start:ts:native -- --subprojectPath packages-native/animation",
+        "build": "pluggable-widgets-tools build:ts:native --subprojectPath packages-native/animation",
+        "release": "pluggable-widgets-tools release:ts:native --subprojectPath packages-native/animation",
         "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.native.config.js",
         "version": "npm run release",
@@ -27,19 +27,12 @@
         "url": "https://github.com/mendix/widgets-resources.git"
     },
     "license": "Apache-2.0",
-    "devDependencies": {
-        "@types/big.js": "^4.0.5",
-        "@types/classnames": "^2.2.6",
-        "@types/enzyme": "^3.1.14",
-        "@types/jest": "^24.0.0",
-        "@types/react": "^16.8.17",
-        "@types/react-dom": "^16.8.4",
-        "@types/react-native": "^0.57.56"
-    },
     "dependencies": {
-        "big.js": "^5.2.2",
         "react-native-animatable": "^1.3.2",
         "@native-mobile-resources/util-widgets": "^1.0.0",
         "@widgets-resources/piw-utils": "^1.0.0"
+    },
+    "devDependencies": {
+        "@mendix/pluggable-widgets-tools": "8.9.0"
     }
 }

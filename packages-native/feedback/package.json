@@ -13,20 +13,22 @@
   },
   "packagePath": "com.mendix.widget.native",
   "scripts": {
-    "start": "..\"/../node_modules/.bin/pluggable-widgets-tools\" start:ts:native -- --subprojectPath packages-native/feedback",
-    "build": "..\"/../node_modules/.bin/pluggable-widgets-tools\" build:ts:native --subprojectPath packages-native/feedback",
-    "release": "..\"/../node_modules/.bin/pluggable-widgets-tools\" release:ts:native --subprojectPath packages-native/feedback",
+    "start": "pluggable-widgets-tools start:ts:native -- --subprojectPath packages-native/feedback",
+    "build": "pluggable-widgets-tools build:ts:native --subprojectPath packages-native/feedback",
+    "release": "pluggable-widgets-tools release:ts:native --subprojectPath packages-native/feedback",
     "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "version": "npm run release",
     "postversion": "..\"/../node_modules/.bin/ts-node\" ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
   },
-  "devDependencies": {
-    "@types/querystringify": "^2.0.0",
-    "@types/react-native-dialog": "^5.5.0"
-  },
   "dependencies": {
     "@native-mobile-resources/util-widgets": "^1.0.0",
     "querystringify": "^2.1.1",
-    "react-native-dialog": "^5.6.0"
+    "react-native-dialog": "^5.6.0",
+    "react-native-view-shot": "3.1.2"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "8.9.0",
+    "@types/querystringify": "^2.0.0",
+    "@types/react-native-dialog": "^5.5.0"
   }
 }
