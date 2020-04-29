@@ -1,6 +1,6 @@
 import { font }        from "../variables";
 import { PopupMenuType } from "../../types/widgets";
-import { brand } from "../../app/custom-variables";
+import { brand } from "../variables";
 /*
 
 DISCLAIMER:
@@ -16,34 +16,35 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const com_mendix_widget_native_popupmenu_PopupMenu: PopupMenuType = {
     container: {
         // All ViewStyle properties are allowed
-		borderRadius: 10,
-		shadowColor: "#000",
+        borderRadius: 10,
+        shadowColor: "#000",
         shadowOpacity: 0.2,
         shadowRadius: 10,
         elevation: 16,
-	},
-	basic: {
+    },
+    basic: {
         dividerColor: font.color,
-		itemStyle: {
-			defaultStyle: {
+        itemStyle: {
+            ellipsizeMode: "tail", // 'head' | 'middle' | 'tail' | 'clip';
+            defaultStyle: {
                 // All TextStyle properties are allowed
                 color: font.color
-			},
-			primaryStyle: {
+            },
+            primaryStyle: {
                 // All TextStyle properties are allowed
                 color: brand.primary
-			},
-			dangerStyle: {
+            },
+            dangerStyle: {
                 // All TextStyle properties are allowed
-				color: brand.danger
-			},
-			customStyle: {
+                color: brand.danger
+            },
+            customStyle: {
                 // All TextStyle properties are allowed
-			},	
-		},
-		containerStyle: {
-            // All ViewStyle properties are allowed
-			height: 40,
+            },
         },
-	},
+        containerStyle: {
+            // All ViewStyle properties are allowed
+            height: 40,
+        },
+    },
 };
