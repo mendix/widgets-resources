@@ -70,6 +70,13 @@
             display: inline-block !important;
         }
     }
+   
+    .mx-scrollcontainer-slide,
+    .mx-scrollcontainer-push {
+        &:not(.mx-scrollcontainer-open) > .region-sidebar {
+            visibility: hidden;
+        }
+    }
 
     // Sidebar
     .region-sidebar {

@@ -3,7 +3,7 @@ const path = require("path");
 module.exports.getVersionFilePaths = () => ({
     pkg: path.join(process.cwd(), "package.json"),
     manifest: {
-        js: path.join(process.cwd(), "styles", "native", "core", "manifest.json"),
+        js: path.join(process.cwd(), "styles", "native", "ts", "core", "manifest.json"),
         sass: path.join(process.cwd(), "styles", "web", "sass", "core", "manifest.json"),
     },
 });
