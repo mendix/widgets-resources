@@ -1,5 +1,5 @@
 import { font } from "../variables";
-import { brand } from "../../app/custom-variables";
+import { brand } from "../variables";
 /*
 
 DISCLAIMER:
@@ -24,6 +24,7 @@ export const com_mendix_widget_native_popupmenu_PopupMenu = {
     basic: {
         dividerColor: font.color,
         itemStyle: {
+            ellipsizeMode: "tail",
             defaultStyle: {
                 // All TextStyle properties are allowed
                 color: font.color
