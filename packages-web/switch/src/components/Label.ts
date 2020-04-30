@@ -4,7 +4,7 @@ import classNames from "classnames";
 interface LabelProps {
     className?: string;
     label: string;
-    labelId: string;
+    labelId?: string;
     style?: object;
     weight: number;
 }
