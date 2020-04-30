@@ -27,6 +27,6 @@
     "react-native-progress": "^4.0.3"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "8.9.0"
+    "@mendix/pluggable-widgets-tools": "8.9.1"
   }
 }

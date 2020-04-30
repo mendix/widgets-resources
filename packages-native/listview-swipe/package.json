@@ -27,6 +27,6 @@
     "react-native-gesture-handler": "1.6.0"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "8.9.0"
+    "@mendix/pluggable-widgets-tools": "8.9.1"
   }
 }
