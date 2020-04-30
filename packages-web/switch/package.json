@@ -29,7 +29,7 @@
     "testProjectId": "2688fc41-0877-43cf-b442-f9da53412483",
     "testProjects": [
       {
-        "revision": 137,
+        "revision": 138,
         "branch": "trunk",
         "path": "./tests/TestProjects/Mendix7/"
       },
