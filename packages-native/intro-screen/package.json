@@ -28,6 +28,6 @@
     "react-native-device-info": "5.5.3"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "8.9.0"
+    "@mendix/pluggable-widgets-tools": "8.9.1"
   }
 }

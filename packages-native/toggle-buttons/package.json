@@ -28,6 +28,6 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-flow-strip-types": "^7.4.4",
-    "@mendix/pluggable-widgets-tools": "8.9.0"
+    "@mendix/pluggable-widgets-tools": "8.9.1"
   }
 }

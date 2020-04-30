@@ -26,7 +26,7 @@
     "react-native-video": "5.0.2"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "8.9.0",
+    "@mendix/pluggable-widgets-tools": "8.9.1",
     "@types/react-native-video": "^5.0.1"
   }
 }
