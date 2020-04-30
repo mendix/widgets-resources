@@ -9,6 +9,7 @@ interface WrapperProps {
     mxObject?: mendix.lib.MxObject;
     style?: string;
     readOnly?: boolean;
+    uniqueid: string;
 }
 
 interface SwitchContainerProps extends WrapperProps {
@@ -57,6 +58,7 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
                 {
                     className: `${this.props.deviceStyle} ${this.props.class}`,
                     label: this.props.label,
+                    labelId: `${this.props.uniqueid}_label`,
                     style: SwitchContainer.parseStyle(this.props.style),
                     weight: this.props.labelWidth > maxLabelWidth ? maxLabelWidth : this.props.labelWidth
                 },
@@ -77,7 +79,7 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
     }
 
     private renderSwitch(hasLabel = false): SFCElement<SwitchProps> {
-        const { class: className, colorStyle, deviceStyle, style } = this.props;
+        const { class: className, colorStyle, deviceStyle, style, uniqueid } = this.props;
 
         return createElement(Switch, {
             alertMessage: this.state.alertMessage,
@@ -87,7 +89,8 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
             isChecked: this.state.isChecked,
             onClick: this.handleToggle,
             status: this.getSwitchStatus(!this.isReadOnly()),
-            style: !hasLabel ? SwitchContainer.parseStyle(style) : undefined
+            style: !hasLabel ? SwitchContainer.parseStyle(style) : undefined,
+            labelId: hasLabel ? `${uniqueid}_label` : undefined
         } as SwitchProps);
     }
 

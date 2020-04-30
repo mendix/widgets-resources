@@ -18,6 +18,7 @@ export class preview extends Component<SwitchContainerProps, {}> {
                 {
                     className: classNames(this.props.class, this.props.deviceStyle),
                     label: this.props.label,
+                    labelId: `${this.props.uniqueid}_label`,
                     style: SwitchContainer.parseStyle(this.props.style),
                     weight: this.props.labelWidth > maxLabelWidth ? maxLabelWidth : this.props.labelWidth
                 },
@@ -36,7 +37,8 @@ export class preview extends Component<SwitchContainerProps, {}> {
             isChecked: true,
             onClick: undefined as any,
             status: this.props.editable === "default" ? "enabled" : "disabled",
-            style: !hasLabel ? SwitchContainer.parseStyle(this.props.style) : undefined
+            style: !hasLabel ? SwitchContainer.parseStyle(this.props.style) : undefined,
+            labelId: hasLabel ? `${this.props.uniqueid}_label` : undefined
         });
     }
 }

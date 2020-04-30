@@ -4,11 +4,12 @@ import classNames from "classnames";
 interface LabelProps {
     className?: string;
     label: string;
+    labelId: string;
     style?: object;
     weight: number;
 }
 
-const Label: SFC<LabelProps> = ({ children, className, label, style, weight }) =>
+const Label: SFC<LabelProps> = ({ children, className, label, labelId, style, weight }) =>
     createElement(
         "div",
         { className: classNames("widget-switch-label", className), style },
@@ -18,7 +19,7 @@ const Label: SFC<LabelProps> = ({ children, className, label, style, weight }) =
             createElement(
                 "div",
                 { className: `col-sm-${weight} col-xs-${weight}` },
-                createElement("label", { className: "control-label" }, label)
+                createElement("label", { id: labelId, className: "control-label" }, label)
             ),
             createElement(
                 "div",

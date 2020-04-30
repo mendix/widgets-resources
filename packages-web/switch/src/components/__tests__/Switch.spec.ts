@@ -39,8 +39,12 @@ describe("Switch", () => {
                 createElement(
                     "div",
                     {
+                        "aria-checked": true,
                         className: "widget-switch-btn-wrapper widget-switch-btn-wrapper-default checked",
-                        onClick: expect.any(Function)
+                        onClick: expect.any(Function),
+                        onKeyDown: expect.any(Function),
+                        role: "checkbox",
+                        tabIndex: 0
                     },
                     createElement("small", { className: "widget-switch-btn right" })
                 ),
