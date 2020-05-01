@@ -36,12 +36,10 @@ export default class SliderWidget {
             throw Error("The amount of slider dots and labels aren't equal");
         }
 
-        return dots.map((dot, index) => {
-            return {
-                dot: page.waitForElement(`.rc-slider-step > span:nth-child(${index + 1})`),
-                label: page.waitForElement(`.rc-slider-mark > span:nth-child(${index + 1})`)
-            };
-        });
+        return dots.map((dot, index) => ({
+            dot: page.waitForElement(`.rc-slider-step > span:nth-child(${index + 1})`),
+            label: page.waitForElement(`.rc-slider-mark > span:nth-child(${index + 1})`)
+        }));
     }
 
     getMinimumMarker(): Marker {

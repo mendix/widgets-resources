@@ -140,36 +140,50 @@ describe("Slider widget", () => {
             const sliderWidget = new SliderWidget("slider");
             const textValueWidget = page.getWidget("textValue");
 
-            expect(textValueWidget.getText()).toContain("180000");
-
-            sliderWidget.dragHandleToMinimum();
             expect(textValueWidget.getText()).toContain("60000");
+
+            sliderWidget.dragHandleToMaximum();
+            expect(textValueWidget.getText()).toContain("300000");
         });
 
-        it("slides with a step size", () => {
-            page.open("p/long-values");
+        describe("Step size sliding", () => {
+            let sliderWidget: SliderWidget;
+            let handle: WebdriverIO.Element;
+            let textValueWidget: WebdriverIO.Element;
 
-            const sliderWidget = new SliderWidget("slider");
-            const textValueWidget = page.getWidget("textValue");
+            beforeAll(() => {
+                page.open("p/long-values");
 
-            expect(textValueWidget.getText()).toContain("180000");
+                sliderWidget = new SliderWidget("slider");
+                textValueWidget = page.getWidget("textValue");
+                handle = sliderWidget.getHandle();
+            });
 
-            sliderWidget.dragHandleToMinimum();
-            expect(textValueWidget.getText()).toContain("60000");
+            it("slides with step size", () => {
+                handle.click({ x: 58 });
+                expect(textValueWidget.getText()).toContain("60000");
+                expect(handle.getAttribute("style")).toBe("left: 0%;");
+                handle.click({ x: 59 });
+                expect(textValueWidget.getText()).toContain("120000");
+                expect(handle.getAttribute("style")).toBe("left: 25%;");
+            });
 
-            const handle = sliderWidget.getHandle();
+            it("snaps to intermediate markers", () => {
+                const markers = sliderWidget.getMarkers();
 
-            handle.click({ x: 58 });
-            expect(textValueWidget.getText()).toContain("60000");
-            expect(handle.getAttribute("style")).toBe("left: 0%;");
-            handle.click({ x: 59 });
-            expect(textValueWidget.getText()).toContain("120000");
-            expect(handle.getAttribute("style")).toBe("left: 25%;");
+                sliderWidget.dragHandleTo(markers[1]);
+                expect(textValueWidget.getText()).toContain("140000");
+                expect(handle.getAttribute("style")).toBe("left: 33.3333%;");
+            });
 
-            const markers = sliderWidget.getMarkers();
-            sliderWidget.dragHandleTo(markers[1]);
-            expect(textValueWidget.getText()).toContain("140000");
-            expect(handle.getAttribute("style")).toBe("left: 33.3333%;");
+            it("slides without using intermediate marker as base", () => {
+                handle.click({ x: 39 });
+                expect(textValueWidget.getText()).toContain("140000");
+                expect(handle.getAttribute("style")).toBe("left: 33.3333%;");
+                handle.click({ x: 40 });
+                expect(textValueWidget.getText()).toContain("180000");
+                expect(handle.getAttribute("style")).toBe("left: 50%;");
+            });
         });
 
         describe("Style", () => {
