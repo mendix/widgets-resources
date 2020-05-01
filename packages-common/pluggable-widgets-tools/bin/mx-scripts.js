@@ -1,6 +1,7 @@
 #! /usr/bin/env node
-const { dirname, join } = require("path");
 const { spawnSync } = require("child_process");
+const { existsSync } = require("fs");
+const { delimiter, dirname, join, parse } = require("path");
 
 const [, currentScriptPath, cmd, ...args] = process.argv;
 const toolsRoot = currentScriptPath.endsWith("pluggable-widgets-tools")
@@ -13,6 +14,7 @@ console.log(`Running MX Widgets Tools script ${cmd}...`);
 for (const subCommand of realCommand.split(/&&/g)) {
     const result = spawnSync(subCommand.trim(), [], {
         cwd: process.cwd(),
+        env: { ...process.env, PATH: `${process.env.PATH}${delimiter}${findNodeModulesBin()}` },
         shell: true,
         stdio: "inherit"
     });
@@ -76,4 +78,16 @@ function getRealCommand(cmd, toolsRoot) {
             console.error(`Unknown command passed to MX Widgets Tools script: '${cmd}'`);
             process.exit(1);
     }
+}
+
+function findNodeModulesBin() {
+    let parentDir = join(__dirname, "../..");
+    while (parse(parentDir).root !== parentDir) {
+        const candidate = join(parentDir, "node_modules/.bin");
+        if (existsSync(candidate)) {
+            return candidate;
+        }
+        parentDir = join(parentDir, "..");
+    }
+    throw new Error("Cannot find bin folder");
 }
