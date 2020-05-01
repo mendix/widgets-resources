@@ -31,15 +31,11 @@
 
         -webkit-background-clip: content-box;
         background-clip: content-box;
-
-        &.checked {
-            transition: border 0.4s, box-shadow 0.4s, background-color 1.2s;
-        }
+        transition: border 0.4s, box-shadow 0.4s, transform 0.4s, background-color 1.2s;
 
         &.un-checked {
             border-color: rgb(223, 223, 223);
             box-shadow: rgb(223, 223, 223) 0 0 0 0 inset;
-            transition: border 0.4s, box-shadow 0.4s;
         }
 
         .widget-switch-btn {
@@ -149,6 +145,10 @@
 
 .widget-switch-btn-wrapper {
     margin-bottom: 8px;
+
+    &:focus {
+        outline: 1px solid #0595db;
+    }
 
     &.disabled {
         cursor: default;

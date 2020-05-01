@@ -15,6 +15,7 @@ export interface SwitchProps {
     onClick: () => void;
     status: SwitchStatus;
     style?: object;
+    labelId?: string;
 }
 
 export type SwitchStatus = "enabled" | "disabled" | "no-context";
@@ -41,7 +42,17 @@ export const Switch: SFC<SwitchProps> = props =>
                     "no-switch": props.status === "no-context",
                     "un-checked": !props.isChecked
                 }),
-                onClick: props.status === "enabled" ? props.onClick : undefined
+                onClick: props.status === "enabled" ? props.onClick : undefined,
+                onKeyDown: (e: KeyboardEvent) => {
+                    if (props.status === "enabled" && e.key === " ") {
+                        e.preventDefault();
+                        props.onClick();
+                    }
+                },
+                tabIndex: 0,
+                role: "checkbox",
+                "aria-checked": props.isChecked,
+                "aria-labelledby": props.labelId
             },
             createElement("small", {
                 className: classNames("widget-switch-btn", {
