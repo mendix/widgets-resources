@@ -14,7 +14,8 @@ $default-ios-color: rgb(100, 189, 99);
 @mixin ios {
     .widget-switch-btn-wrapper {
         &:focus {
-            box-shadow: 0 0 1px $default-ios-color;
+            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+            transform: scale(1.1);
         }
         &.checked {
             &.widget-switch-btn-wrapper-default {
@@ -51,7 +52,8 @@ $default-ios-color: rgb(100, 189, 99);
 @mixin android {
     .widget-switch-btn-wrapper {
         &:focus {
-            box-shadow: 0 0 1px $default-android-color;
+            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+            transform: scale(1.1);
         }
         &.checked {
             &.widget-switch-btn-wrapper-default {
