@@ -126,10 +126,9 @@ div {
 
         &.auto {
             @include ios;
-            
-            &:focus {
-                border: 1px solid $brand-primary;
-            }
+        }
+        &:focus {
+            border: 1px solid $brand-primary;
         }
     }
 }
