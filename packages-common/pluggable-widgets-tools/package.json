@@ -111,34 +111,5 @@
   "jest-junit": {
     "output": "../../../dist/testresults/TESTS-Jest.xml"
   },
-  "scripts": {
-    "prepublishOnly": "npm install",
-    "start:server": "webpack-dev-server --config configs/webpack.config.js --env=dev --quiet",
-    "start:js": "npm run dev:js",
-    "start:ts": "npm run dev:ts",
-    "start:js:native": "npm run dev:js:native",
-    "start:ts:native": "npm run dev:ts:native",
-    "test": "jest --projects ./jest.config.js --no-cache --ci",
-    "build:js": "gulp build --gulpfile scripts/gulp.js",
-    "build:ts": "gulp buildTs --gulpfile scripts/gulp.js",
-    "build:js:native": "gulp build --gulpfile scripts/gulp.native.js",
-    "build:ts:native": "gulp buildTs --gulpfile scripts/gulp.native.js",
-    "dev:js": "gulp watch --gulpfile scripts/gulp.js",
-    "dev:ts": "gulp watchTs --gulpfile scripts/gulp.js",
-    "dev:js:native": "gulp watch --gulpfile scripts/gulp.native.js",
-    "dev:ts:native": "gulp watchTs --gulpfile scripts/gulp.native.js",
-    "release:js": "gulp release --gulpfile scripts/gulp.js --silent",
-    "release:ts": "gulp releaseTs --gulpfile scripts/gulp.js --silent",
-    "release:js:native": "gulp release --gulpfile scripts/gulp.native.js --silent",
-    "release:ts:native": "gulp releaseTs --gulpfile scripts/gulp.native.js --silent",
-    "prelint": "npm run format",
-    "lint": "eslint --config \"../../../.eslintrc.js\" --ext .jsx,.js,.ts,.tsx \"../../../src/\"",
-    "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --config \"../../../prettier.config.js\" --write \"../../../{src,test}/**/*.{js,jsx,ts,tsx}\"",
-    "test:unit": "jest --projects ./test-config/jest.config.js",
-    "test:unit:native": "jest --projects ./test-config/jest.native.config.js",
-    "test:e2e:js": "npm run test:e2e",
-    "test:e2e:ts": "npm run test:e2e",
-    "test:e2e": "wdio ./test-config/wdio.conf.js"
-  }
+  "scripts": {}
 }

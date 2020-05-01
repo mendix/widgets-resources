@@ -1,94 +1,79 @@
 #! /usr/bin/env node
-"use strict";
+const { dirname, join } = require("path");
+const { spawnSync } = require("child_process");
 
-// Makes the script crash on unhandled rejections instead of silently
-// ignoring them. In the future, promise rejections that are not handled will
-// terminate the Node.js process with a non-zero exit code.
-process.on("unhandledRejection", err => {
-    throw err;
-});
+const [, currentScriptPath, cmd, ...args] = process.argv;
+const toolsRoot = currentScriptPath.endsWith("pluggable-widgets-tools")
+    ? join(dirname(currentScriptPath), "../@mendix/pluggable-widgets-tools")
+    : join(dirname(currentScriptPath), "..");
 
-const spawn = require("child_process").spawnSync;
-const path = require("path");
-const args = process.argv.slice(2);
-const script = args[0];
-const argsFiltered = args.length > 1 ? args.slice(1) : [];
-const gulpSlash = require("gulp-slash");
+const realCommand = getRealCommand(cmd, toolsRoot) + " " + args.join(" ");
+console.log(`Running MX Widgets Tools script ${cmd}...`);
 
-switch (script) {
-    case "build:js":
-    case "build:ts":
-    case "build:js:native":
-    case "build:ts:native":
-    case "dev:js":
-    case "dev:ts":
-    case "dev:js:native":
-    case "dev:ts:native":
-    case "format":
-    case "lint":
-    case "lint:fix":
-    case "start:server":
-    case "start:js":
-    case "start:ts":
-    case "start:js:native":
-    case "start:ts:native":
-    case "test:unit":
-    case "test:unit:native":
-    case "test:e2e:js":
-    case "test:e2e:ts":
-    case "release:js":
-    case "release:ts":
-    case "release:js:native":
-    case "release:ts:native": {
-        console.log(
-            `Running MX Widget Tools script: "${script}" ${
-                argsFiltered.length > 0 ? `with options "${argsFiltered.join(" ")}"` : ""
-            }`
-        );
-        executeScript(script);
-        break;
-    }
-    default:
-        console.log('Unknown script "' + script + '".');
-        break;
-}
-
-function executeScript(script) {
-    const libraryPath = getLibraryPath();
-    let args = ["run", script];
-    if (argsFiltered.length > 0) {
-        args.push("--");
-        args = args.concat(argsFiltered);
-    }
-    const result = spawn(/^win/.test(process.platform) ? "npm.cmd" : "npm", args, {
-        stdio: "inherit",
-        cwd: libraryPath
+for (const subCommand of realCommand.split(/&&/g)) {
+    const result = spawnSync(subCommand.trim(), [], {
+        cwd: process.cwd(),
+        shell: true,
+        stdio: "inherit"
     });
-    if (result.signal) {
-        if (result.signal === "SIGKILL") {
-            console.log(
-                "The build failed because the process exited too early. " +
-                    "This probably means the system ran out of memory or someone called " +
-                    "`kill -9` on the process."
-            );
-        } else if (result.signal === "SIGTERM") {
-            console.log(
-                "The build failed because the process exited too early. " +
-                    "Someone might have called `kill` or `killall`, or the system could " +
-                    "be shutting down."
-            );
-        }
-        process.exit(1);
+    if (result.status !== 0) {
+        process.exit(result.status);
     }
-    process.exit(result.status);
 }
 
-function getLibraryPath() {
-    const currentPath = process.argv[1];
+function getRealCommand(cmd, toolsRoot) {
+    const eslintCommand = "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx src";
+    const prrettierCommand = 'prettier --config prettier.config.js "{src,test}/**/*.{js,jsx,ts,tsx}"';
 
-    if (currentPath.endsWith("mx-scripts.js")) {
-        return gulpSlash(path.join(currentPath, "../../"));
+    switch (cmd) {
+        case "start:server":
+            return `webpack-dev-server --config ${join(toolsRoot, "configs/webpack.config.js")} --env=dev --quiet`;
+        case "start:js":
+        case "dev:js":
+            return `gulp watch --gulpfile ${join(toolsRoot, "scripts/gulp.js")}`;
+        case "start:ts":
+        case "dev:ts":
+            return `gulp watchTs --gulpfile ${join(toolsRoot, "scripts/gulp.js")}`;
+        case "start:js:native":
+        case "dev:js:native":
+            return `gulp watch --gulpfile ${join(toolsRoot, "scripts/gulp.native.js")}`;
+        case "start:ts:native":
+        case "dev:ts:native":
+            return `gulp watchTs --gulpfile ${join(toolsRoot, "scripts/gulp.native.js")}`;
+        case "test":
+            return `jest --projects ${join(toolsRoot, "jest.config.js")} --no-cache --ci`;
+        case "build:js":
+            return `gulp build --gulpfile ${join(toolsRoot, "scripts/gulp.js")}`;
+        case "build:ts":
+            return `gulp buildTs --gulpfile ${join(toolsRoot, "scripts/gulp.js")}`;
+        case "build:js:native":
+            return `gulp build --gulpfile ${join(toolsRoot, "scripts/gulp.native.js")}`;
+        case "build:ts:native":
+            return `gulp buildTs --gulpfile ${join(toolsRoot, "scripts/gulp.native.js")}`;
+        case "release:js":
+            return `gulp release --gulpfile ${join(toolsRoot, "scripts/gulp.js")} --silent`;
+        case "release:ts":
+            return `gulp releaseTs --gulpfile ${join(toolsRoot, "scripts/gulp.js")} --silent`;
+        case "release:js:native":
+            return `gulp release --gulpfile ${join(toolsRoot, "scripts/gulp.native.js")} --silent`;
+        case "release:ts:native":
+            return `gulp releaseTs --gulpfile ${join(toolsRoot, "scripts/gulp.native.js")} --silent`;
+        case "lint":
+            return `${prrettierCommand} --check && ${eslintCommand}`;
+        case "lint:fix":
+            return `${prrettierCommand} --write && ${eslintCommand} --fix`;
+        case "format":
+            return `${prrettierCommand} --write`;
+        case "test:unit":
+            return `jest --projects ${join(toolsRoot, "test-config/jest.config.js")}`;
+        case "test:unit:native":
+            return `jest --projects ${join(toolsRoot, "test-config/jest.native.config.js")}`;
+        case "test:e2e":
+        case "test:e2e:ts":
+        case "test:e2e:js":
+            return `wdio ${join(toolsRoot, "test-config/wdio.conf.js")}`;
+        default:
+            console.error(`Unknown command passed to MX Widgets Tools script: '${cmd}'`);
+            process.exit(1);
     }
-    const isBinFolder = currentPath.indexOf(gulpSlash("/node_modules/.bin")) !== -1;
-    return gulpSlash(isBinFolder ? path.join(currentPath, "../../@mendix/pluggable-widgets-tools") : currentPath);
 }
