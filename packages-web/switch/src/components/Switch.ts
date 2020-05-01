@@ -45,6 +45,7 @@ export const Switch: SFC<SwitchProps> = props =>
                 onClick: props.status === "enabled" ? props.onClick : undefined,
                 onKeyDown: (e: KeyboardEvent) => {
                     if (props.status === "enabled" && e.key === " ") {
+                        e.preventDefault();
                         props.onClick();
                     }
                 },
