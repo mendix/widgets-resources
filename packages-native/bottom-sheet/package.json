@@ -31,7 +31,7 @@
     "reanimated-bottom-sheet": "^1.0.0-alpha.19"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "8.9.1",
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/react-native-actionsheet": "^2.4.1",
     "@types/react-native-modal": "^4.1.1"
   }

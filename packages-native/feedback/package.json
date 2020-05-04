@@ -27,7 +27,7 @@
     "react-native-view-shot": "3.1.2"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "8.9.1",
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/querystringify": "^2.0.0",
     "@types/react-native-dialog": "^5.5.0"
   }

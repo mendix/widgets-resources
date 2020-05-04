@@ -44,7 +44,7 @@
     "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "8.9.1",
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/classnames": "^2.2.6"
   },
   "dependencies": {
