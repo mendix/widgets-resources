@@ -1,5 +1,3 @@
-"use strict";
-
 const fs = require("fs");
 const path = require("path");
 const zip = require("gulp-zip");
@@ -130,7 +128,7 @@ function productionBundle(cb) {
 
 function generateTypings() {
     return gulp
-        .src(fixSlashes(path.join(variables.path, `/src/package.xml`)))
+        .src(fixSlashes(path.join(variables.path, "/src/package.xml")))
         .pipe(typingGenerator())
         .on("error", handleError);
 }

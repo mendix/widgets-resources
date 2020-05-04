@@ -14,7 +14,11 @@ console.log(`Running MX Widgets Tools script ${cmd}...`);
 for (const subCommand of realCommand.split(/&&/g)) {
     const result = spawnSync(subCommand.trim(), [], {
         cwd: process.cwd(),
-        env: { ...process.env, PATH: `${process.env.PATH}${delimiter}${findNodeModulesBin()}` },
+        env: {
+            ...process.env,
+            PATH: `${process.env.PATH}${delimiter}${findNodeModulesBin()}`,
+            PROJECT_PATH: process.cwd()
+        },
         shell: true,
         stdio: "inherit"
     });

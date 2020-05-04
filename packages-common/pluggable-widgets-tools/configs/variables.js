@@ -1,53 +1,27 @@
-const fs = require("fs");
-const path = require("path");
+const { readdirSync } = require("fs");
+const { join } = require("path");
 
-const args = process.argv.slice(2);
-const indexOf = args.indexOf("--subprojectPath");
-let pathToJoin = "";
-if (indexOf > -1 && args.length > indexOf + 1) {
-    pathToJoin = args[indexOf + 1];
+const projectPath = process.env.PROJECT_PATH;
+if (!projectPath) {
+    throw new Error("You must start this script as pluggable-widgets-tools SCRIPT");
 }
 
-const rootOfProject = /node_modules[\/\\]@mendix[\/\\]pluggable-widgets-tools/.test(__dirname)
-    ? path.join(__dirname, "../../../../")
-    : path.join(__dirname, "../../../");
-const newPath = path.join(rootOfProject, pathToJoin);
-const pkg = require(path.join(newPath, "package.json"));
-
-let extension = "tsx";
-let preview = "editorPreview";
-let editorConfig = true;
-
-try {
-    if (!fs.existsSync(path.join(newPath, `/src/${pkg.widgetName}.${extension}`))) {
-        extension = "jsx";
-    }
-} catch (err) {
-    extension = "jsx";
+const package = require(join(projectPath, "package.json"));
+if (!package.widgetName) {
+    throw new Error("Widget does not define widgetName in its package.json");
 }
 
-try {
-    if (!fs.existsSync(path.join(newPath, `/src/${pkg.widgetName}.${preview}.${extension}`))) {
-        preview = "webmodeler";
-    }
-} catch (err) {
-    preview = "webmodeler";
+const widgetSrcFiles = readdirSync(join(projectPath, "src")).map(file => join(projectPath, "src", file));
+const widgetEntry = widgetSrcFiles.filter(file => file.match(`/${package.widgetName}\\.[jt]sx?$`))[0];
+if (!widgetEntry) {
+    throw new Error("Cannot find a widget entry file");
 }
 
-try {
-    if (
-        !fs.existsSync(path.join(newPath, `/src/${pkg.widgetName}.editorConfig.${extension === "jsx" ? "js" : "ts"}`))
-    ) {
-        editorConfig = false;
-    }
-} catch (err) {
-    editorConfig = false;
-}
+const editorConfigEntry = widgetSrcFiles.filter(file =>
+    file.match(`/${package.widgetName}\\.editorConfig\\.[jt]s$`)
+)[0];
+const previewEntry = widgetSrcFiles.filter(file =>
+    file.match(`/${package.widgetName}\\.(webmodeler|editorPreview)\\.[jt]sx?$`)
+)[0];
 
-module.exports = {
-    path: newPath,
-    package: pkg,
-    extension,
-    preview,
-    editorConfig
-};
+module.exports = { projectPath, package, widgetEntry, previewEntry, editorConfigEntry };

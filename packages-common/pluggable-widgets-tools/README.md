@@ -58,7 +58,7 @@ In your `package.json` scripts, use the following command with the desired task:
 -   `src/`
     -   `MyWidget.xml` - widget [definition](https://docs.mendix.com/apidocs-mxsdk/apidocs/property-types-pluggable-widgets)
     -   `MyWidget.[tj]sx` - widget [client componet](https://docs.mendix.com/apidocs-mxsdk/apidocs/client-apis-for-pluggable-widgets)
-    -   `MyWidget.webmodeler.[tj]sx` - (optional) widget [preview](https://docs.mendix.com/apidocs-mxsdk/apidocs/studio-apis-for-pluggable-widgets)
+    -   `MyWidget.editorPreview.[tj]sx` - (optional) widget [preview](https://docs.mendix.com/apidocs-mxsdk/apidocs/studio-apis-for-pluggable-widgets)
     -   `MyWidget.editorConfig.[tj]sx` - (optional) widget editor configuration
     -   `comopnents/`
         -   `MyComponent.[tj]s` - code of widget's components
