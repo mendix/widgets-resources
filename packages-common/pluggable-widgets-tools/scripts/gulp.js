@@ -15,8 +15,8 @@ const projectPath = normalize(
         variables.package.config.projectPath ||
         join(variables.projectPath, "dist/MxTestProject")
 );
-
 const widgetsFolder = join(projectPath, "widgets");
+const isNative = process.argv.indexOf("--native") !== -1;
 
 function clean() {
     return del(
@@ -57,7 +57,7 @@ function copyToDeployment() {
 }
 
 function runWebpack(env, cb) {
-    let config = require(join(__dirname, `../configs/webpack.config.${env}`));
+    let config = require(isNative ? "../configs/webpack.native.config" : `../configs/webpack.config.${env}`);
     try {
         const customWebpackConfigPath = join(variables.projectPath, `webpack.config.${env}.js`);
         if (existsSync(customWebpackConfigPath)) {
@@ -69,17 +69,19 @@ function runWebpack(env, cb) {
     }
 
     if (!variables.editorConfigEntry) {
-        config.splice(2, 1);
+        config.splice(-1, 1);
     }
-    if (!variables.previewEntry) {
-        config.splice(1, 1);
-        console.log(colors.yellow(`Preview file ${file} was not found. No preview will be available`));
-    } else if (variables.previewEntry.indexOf(".webmodeler.") !== -1) {
-        console.log(
-            colors.yellow(
-                `Preview file ${variables.previewEntry} uses old name 'webmodeler', it should be renamed to 'editorPreview' to keep compatibility with future versions of Studio/Studio Pro$`
-            )
-        );
+    if (!isNative) {
+        if (!variables.previewEntry) {
+            config.splice(1, 1);
+            console.log(colors.yellow(`Preview file ${file} was not found. No preview will be available`));
+        } else if (variables.previewEntry.indexOf(".webmodeler.") !== -1) {
+            console.log(
+                colors.yellow(
+                    `Preview file ${variables.previewEntry} uses old name 'webmodeler', it should be renamed to 'editorPreview' to keep compatibility with future versions of Studio/Studio Pro$`
+                )
+            );
+        }
     }
 
     webpack(config, (err, stats) => {

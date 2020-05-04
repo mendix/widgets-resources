@@ -30,40 +30,41 @@ for (const subCommand of realCommand.split(/&&/g)) {
 function getRealCommand(cmd, toolsRoot) {
     const eslintCommand = "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx src";
     const prrettierCommand = 'prettier --config prettier.config.js "{src,test}/**/*.{js,jsx,ts,tsx}"';
+    const gulpCommand = `gulp --gulpfile ${join(toolsRoot, "scripts/gulp.js")}`;
 
     switch (cmd) {
         case "start:server":
             return `webpack-dev-server --config ${join(toolsRoot, "configs/webpack.config.js")} --env=dev --quiet`;
         case "start:js":
         case "dev:js":
-            return `gulp watch --gulpfile ${join(toolsRoot, "scripts/gulp.js")}`;
+            return `${gulpCommand} watch`;
         case "start:ts":
         case "dev:ts":
-            return `gulp watchTs --gulpfile ${join(toolsRoot, "scripts/gulp.js")}`;
+            return `${gulpCommand} watchTs`;
         case "start:js:native":
         case "dev:js:native":
-            return `gulp watch --gulpfile ${join(toolsRoot, "scripts/gulp.native.js")}`;
+            return `${gulpCommand} watch --native`;
         case "start:ts:native":
         case "dev:ts:native":
-            return `gulp watchTs --gulpfile ${join(toolsRoot, "scripts/gulp.native.js")}`;
+            return `${gulpCommand} watchTs --native`;
         case "test":
             return `jest --projects ${join(toolsRoot, "jest.config.js")} --no-cache --ci`;
         case "build:js":
-            return `gulp build --gulpfile ${join(toolsRoot, "scripts/gulp.js")}`;
+            return `${gulpCommand} build`;
         case "build:ts":
-            return `gulp buildTs --gulpfile ${join(toolsRoot, "scripts/gulp.js")}`;
+            return `${gulpCommand} buildTs`;
         case "build:js:native":
-            return `gulp build --gulpfile ${join(toolsRoot, "scripts/gulp.native.js")}`;
+            return `${gulpCommand} build --native`;
         case "build:ts:native":
-            return `gulp buildTs --gulpfile ${join(toolsRoot, "scripts/gulp.native.js")}`;
+            return `${gulpCommand} buildTs --native`;
         case "release:js":
-            return `gulp release --gulpfile ${join(toolsRoot, "scripts/gulp.js")} --silent`;
+            return `${gulpCommand} release --silent`;
         case "release:ts":
-            return `gulp releaseTs --gulpfile ${join(toolsRoot, "scripts/gulp.js")} --silent`;
+            return `${gulpCommand} releaseTs --silent`;
         case "release:js:native":
-            return `gulp release --gulpfile ${join(toolsRoot, "scripts/gulp.native.js")} --silent`;
+            return `${gulpCommand} release --silent --native`;
         case "release:ts:native":
-            return `gulp releaseTs --gulpfile ${join(toolsRoot, "scripts/gulp.native.js")} --silent`;
+            return `${gulpCommand} releaseTs --silent --native`;
         case "lint":
             return `${prrettierCommand} --check && ${eslintCommand}`;
         case "lint:fix":
