@@ -1,23 +1,12 @@
 const { existsSync, readdirSync } = require("fs");
 const { join, normalize } = require("path");
 const typingGenerator = require("@mendix/pluggable-widgets-typing-generator");
+const colors = require("colors/safe");
 const del = require("del");
 const gulp = require("gulp");
 const zip = require("gulp-zip");
 const webpack = require("webpack");
-
 const variables = require("../configs/variables");
-const COLOR = {
-    BLACK: "\x1b[30m",
-    RED: "\x1b[31m",
-    GREEN: "\x1b[32m",
-    YELLOW: "\x1b[33m",
-    BLUE: "\x1b[34m",
-    MAGENTA: "\x1b[35m",
-    CYAN: "\x1b[36m",
-    WHITE: "\x1b[37m"
-};
-const END = "\x1b[0m";
 
 require("dotenv").config({ path: join(variables.projectPath, ".env") });
 
@@ -50,7 +39,7 @@ function createMpkFile() {
 
 function copyToDeployment() {
     if (existsSync(projectPath) && readdirSync(projectPath).length > 0) {
-        console.log(`${COLOR.GREEN}Files generated in dist and ${projectPath} folder${END}`);
+        console.log(colors.green(`Files generated in dist and ${projectPath} folder`));
         return gulp
             .src([
                 join(variables.projectPath, "dist/tmp/widgets/**/*"),
@@ -60,7 +49,9 @@ function copyToDeployment() {
             .on("error", handleError);
     } else {
         console.log(
-            `${COLOR.YELLOW}Widget is not copied into project because no Mendix Test Project available in ${projectPath}${END}`
+            colors.yellow(
+                `Widget is not copied into project because no Mendix Test Project available in ${projectPath}`
+            )
         );
     }
 }
@@ -71,7 +62,7 @@ function runWebpack(env, cb) {
         const customWebpackConfigPath = join(variables.projectPath, `webpack.config.${env}.js`);
         if (existsSync(customWebpackConfigPath)) {
             config = require(customWebpackConfigPath);
-            console.log(`${COLOR.MAGENTA}Using custom webpack configuration from ${customWebpackConfigPath}${END}`);
+            console.log(colors.magenta(`Using custom webpack configuration from ${customWebpackConfigPath}`));
         }
     } catch (err) {
         handleError(`Wrong configuration found at webpack.config.${env}.js. Technical error: ${err.toString()}`);
@@ -82,10 +73,12 @@ function runWebpack(env, cb) {
     }
     if (!variables.previewEntry) {
         config.splice(1, 1);
-        console.log(`${COLOR.YELLOW}Preview file ${file} was not found. No preview will be available${END}`);
+        console.log(colors.yellow(`Preview file ${file} was not found. No preview will be available`));
     } else if (variables.previewEntry.indexOf(".webmodeler.") !== -1) {
         console.log(
-            `${COLOR.YELLOW}Preview file ${variables.previewEntry} uses old name 'webmodeler', it should be renamed to 'editorPreview' to keep compatibility with future versions of Studio/Studio Pro${END}`
+            colors.yellow(
+                `Preview file ${variables.previewEntry} uses old name 'webmodeler', it should be renamed to 'editorPreview' to keep compatibility with future versions of Studio/Studio Pro$`
+            )
         );
     }
 
@@ -108,7 +101,7 @@ function generateTypings() {
 }
 
 function handleError(err) {
-    console.log(`${COLOR.RED}${err.toString()}${END}`);
+    console.log(colors.red(err.toString()));
     process.exit(1);
 }
 
@@ -122,7 +115,7 @@ const productionBuildTs = gulp.series(clean, generateTypings, runWebpack.bind(nu
 
 function watch(buildFn) {
     const watchPath = join(variables.projectPath, "src/**/*");
-    console.log(`${COLOR.GREEN}Watching files in: ${watchPath}${END}`);
+    console.log(colors.green(`Watching files in: ${watchPath}`));
     return gulp.watch(watchPath, { ignoreInitial: false }, buildFn);
 }
 
