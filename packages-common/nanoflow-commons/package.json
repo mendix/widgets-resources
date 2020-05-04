@@ -14,6 +14,6 @@
     "@react-native-community/geolocation": "2.0.2"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "8.9.1"
+    "@mendix/pluggable-widgets-tools": ">=8.9.2"
   }
 }

@@ -27,6 +27,6 @@
     "react-native-action-button": "^2.8.5"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "8.9.1"
+    "@mendix/pluggable-widgets-tools": ">=8.9.2"
   }
 }

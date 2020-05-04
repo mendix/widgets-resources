@@ -29,7 +29,7 @@
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "8.9.1",
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/tinycolor2": "^1.4.1"
   }
 }
