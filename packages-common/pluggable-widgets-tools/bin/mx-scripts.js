@@ -17,11 +17,7 @@ console.log(`Running MX Widgets Tools script ${cmd}...`);
 for (const subCommand of realCommand.split(/&&/g)) {
     const result = spawnSync(subCommand.trim(), [], {
         cwd: process.cwd(),
-        env: {
-            ...process.env,
-            PATH: `${process.env.PATH}${delimiter}${findNodeModulesBin()}`,
-            PROJECT_PATH: process.cwd()
-        },
+        env: { ...process.env, PATH: `${process.env.PATH}${delimiter}${findNodeModulesBin()}` },
         shell: true,
         stdio: "inherit"
     });
@@ -33,7 +29,7 @@ for (const subCommand of realCommand.split(/&&/g)) {
 function getRealCommand(cmd, toolsRoot) {
     const eslintCommand = "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx src";
     const prrettierCommand = 'prettier --config prettier.config.js "{src,test}/**/*.{js,jsx,ts,tsx}"';
-    const gulpCommand = `gulp --gulpfile ${join(toolsRoot, "scripts/gulp.js")}`;
+    const gulpCommand = `gulp --gulpfile ${join(toolsRoot, "scripts/gulp.js")} --cwd ${process.cwd()}`;
 
     switch (cmd) {
         case "start:server":

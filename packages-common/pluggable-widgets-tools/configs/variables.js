@@ -1,10 +1,7 @@
 const { readdirSync } = require("fs");
 const { join } = require("path");
 
-const projectPath = process.env.PROJECT_PATH;
-if (!projectPath) {
-    throw new Error("You must start this script as pluggable-widgets-tools SCRIPT");
-}
+const projectPath = process.cwd();
 
 const package = require(join(projectPath, "package.json"));
 if (!package.widgetName) {
