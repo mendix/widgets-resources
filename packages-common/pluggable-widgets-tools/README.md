@@ -21,32 +21,25 @@ In your `package.json` scripts, use the following command with the desired task:
 
 ### Available tasks
 
--   `start:server` Run your WEB project. Accepts --open option to auto open your browser
--   `start:js` Build and watch the changes of your JavaScript Web project
--   `start:ts` Build and watch the changes of your TypeScript Web project
--   `start:js:native` Build and watch the changes of your JavaScript Native project
--   `start:ts:native` Build and watch the changes of your Typescript Native project
--   `build:js` Build your JavaScript Web project
--   `build:ts` Build your TypeScript Web project
--   `build:js:native` Build your JavaScript Native project
--   `build:ts:native` Build your TypeScript Web project
--   `release:js` Build your JavaScript Web project for production
--   `release:ts` Build your TypeScript Web project for production
--   `release:js:native` Build your JavaScript Native project for production
--   `release:ts:native` Build your TypeScript Web project for production
+-   `start:web` Build and watch the changes of your Web widget
+-   `start:server` Build and watch the changes of your Web widget. Start a web server, that reloads the widget code without the need to re-run the Mendix project. Accepts option `--open` to automatically open your browser.
+-   `start:native` Build and watch the changes of your Native widget
+-   `build:web` Build your Web widget
+-   `build:native` Build your Native widget
+-   `release:web` Create a release build of your Web widget
+-   `release:native` Create a release build of your Native widget
 -   `lint` Lint your project using ESLint and Prettier
 -   `lint:fix` Fix lint problems/warning of ESLint and Prettier
 -   `format` Format your code using Prettier
--   `test:unit` Run unit tests for your Web Project. Accepts option `--u` to update snapshots, `--no-cache` to remove existing caches, `--ci` assumes use of a CI environment, `--coverage` to support coverage test.
--   `test:unit:native` Run unit tests for your Native Project. Accepts option `--u` to update snapshots, `--no-cache` to remove existing caches, `--ci` assumes use of a CI environment, `--coverage` to support coverage test.
--   `test:e2e:js` Execute end-to-end tests in your JavaScript Web Project
--   `test:e2e:ts` Execute End-to-end tests in your TypeScript Web Project
+-   `test:unit` Run unit tests for your Web widget. Accepts option `--u` to update snapshots, `--no-cache` to remove existing caches, `--ci` assumes use of a CI environment, `--coverage` to support coverage test.
+-   `test:unit:native` Run unit tests for your Native widget. Accepts option `--u` to update snapshots, `--no-cache` to remove existing caches, `--ci` assumes use of a CI environment, `--coverage` to support coverage test.
+-   `test:e2e` Execute end-to-end tests in your Web widget
 
 #### Example
 
 ```json
 "scripts": {
-    "build": "pluggable-widgets-tools build:js",
+    "build": "pluggable-widgets-tools build:web",
     "lint": "pluggable-widgets-tools lint",
     "lint:fix": "pluggable-widgets-tools lint:fix",
     "test:unit": "pluggable-widgets-tools test:unit --coverage"
@@ -59,7 +52,7 @@ In your `package.json` scripts, use the following command with the desired task:
     -   `MyWidget.xml` - widget [definition](https://docs.mendix.com/apidocs-mxsdk/apidocs/property-types-pluggable-widgets)
     -   `MyWidget.[tj]sx` - widget [client componet](https://docs.mendix.com/apidocs-mxsdk/apidocs/client-apis-for-pluggable-widgets)
     -   `MyWidget.editorPreview.[tj]sx` - (optional) widget [preview](https://docs.mendix.com/apidocs-mxsdk/apidocs/studio-apis-for-pluggable-widgets)
-    -   `MyWidget.editorConfig.[tj]sx` - (optional) widget editor configuration
+    -   `MyWidget.editorConfig.[tj]s` - (optional) widget editor configuration
     -   `comopnents/`
         -   `MyComponent.[tj]s` - code of widget's components
         -   `__tests__/`

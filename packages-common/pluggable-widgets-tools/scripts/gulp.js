@@ -96,6 +96,9 @@ function runWebpack(env, cb) {
 }
 
 function generateTypings() {
+    if (!variables.isTypescript) {
+        return gulp.src([], { allowEmpty: true });
+    }
     return gulp
         .src(join(variables.projectPath, "/src/package.xml"))
         .pipe(typingGenerator())
@@ -107,23 +110,10 @@ function handleError(err) {
     process.exit(1);
 }
 
-const build = gulp.series(clean, runWebpack.bind(null, "dev"), createMpkFile, copyToDeployment);
-
-const productionBuild = gulp.series(clean, runWebpack.bind(null, "prod"), createMpkFile);
-
-const buildTs = gulp.series(clean, generateTypings, runWebpack.bind(null, "dev"), createMpkFile, copyToDeployment);
-
-const productionBuildTs = gulp.series(clean, generateTypings, runWebpack.bind(null, "prod"), createMpkFile);
-
-function watch(buildFn) {
+exports.build = gulp.series(clean, generateTypings, runWebpack.bind(null, "dev"), createMpkFile, copyToDeployment);
+exports.release = gulp.series(clean, generateTypings, runWebpack.bind(null, "prod"), createMpkFile);
+exports.watch = function() {
     const watchPath = join(variables.projectPath, "src/**/*");
     console.log(colors.green(`Watching files in: ${watchPath}`));
-    return gulp.watch(watchPath, { ignoreInitial: false }, buildFn);
-}
-
-exports.watch = watch.bind(null, build);
-exports.watchTs = watch.bind(null, buildTs);
-exports.build = build;
-exports.release = productionBuild;
-exports.buildTs = buildTs;
-exports.releaseTs = productionBuildTs;
+    return gulp.watch(watchPath, { ignoreInitial: false }, exports.build);
+};

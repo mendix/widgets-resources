@@ -34,42 +34,38 @@ function getRealCommand(cmd, toolsRoot) {
     switch (cmd) {
         case "start:server":
             return `webpack-dev-server --config ${join(toolsRoot, "configs/webpack.config.js")} --env=dev --quiet`;
+        case "start:web":
         case "start:js":
-        case "dev:js":
-            return `${gulpCommand} watch`;
         case "start:ts":
+        case "dev:js":
         case "dev:ts":
-            return `${gulpCommand} watchTs`;
+            return `${gulpCommand} watch`;
+        case "start:native":
         case "start:js:native":
-        case "dev:js:native":
-            return `${gulpCommand} watch --native`;
         case "start:ts:native":
+        case "dev:js:native":
         case "dev:ts:native":
-            return `${gulpCommand} watchTs --native`;
-        case "test":
-            return `jest --projects ${join(toolsRoot, "jest.config.js")} --no-cache --ci`;
+            return `${gulpCommand} watch --native`;
+        case "build:web":
         case "build:js":
-            return `${gulpCommand} build`;
         case "build:ts":
-            return `${gulpCommand} buildTs`;
+            return `${gulpCommand} build`;
+        case "build:native":
         case "build:js:native":
-            return `${gulpCommand} build --native`;
         case "build:ts:native":
-            return `${gulpCommand} buildTs --native`;
-        case "release:js":
-            return `${gulpCommand} release --silent`;
-        case "release:ts":
-            return `${gulpCommand} releaseTs --silent`;
+            return `${gulpCommand} build --native`;
+        case "release:web":
         case "release:js:native":
-            return `${gulpCommand} release --silent --native`;
         case "release:ts:native":
-            return `${gulpCommand} releaseTs --silent --native`;
+            return `${gulpCommand} release --silent`;
         case "lint":
             return `${prrettierCommand} --check && ${eslintCommand}`;
         case "lint:fix":
             return `${prrettierCommand} --write && ${eslintCommand} --fix`;
         case "format":
             return `${prrettierCommand} --write`;
+        case "test":
+            return `jest --projects ${join(toolsRoot, "jest.config.js")} --no-cache --ci`;
         case "test:unit":
             return `jest --projects ${join(toolsRoot, "test-config/jest.config.js")}`;
         case "test:unit:native":

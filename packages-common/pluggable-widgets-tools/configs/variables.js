@@ -21,4 +21,6 @@ const previewEntry = widgetSrcFiles.filter(file =>
     file.match(`/${package.widgetName}\\.(webmodeler|editorPreview)\\.[jt]sx?$`)
 )[0];
 
-module.exports = { projectPath, package, widgetEntry, previewEntry, editorConfigEntry };
+const isTypescript = [widgetEntry, editorConfigEntry, previewEntry].some(file => file && /\.tsx?$/.test(file));
+
+module.exports = { projectPath, package, widgetEntry, previewEntry, editorConfigEntry, isTypescript };
