@@ -8,6 +8,9 @@ const toolsRoot = currentScriptPath.endsWith("pluggable-widgets-tools")
     ? join(dirname(currentScriptPath), "../@mendix/pluggable-widgets-tools")
     : join(dirname(currentScriptPath), "..");
 
+if (args.indexOf("--subprojectPath") > -1) {
+    args.splice(args.indexOf("--subprojectPath"), 2);
+}
 const realCommand = getRealCommand(cmd, toolsRoot) + " " + args.join(" ");
 console.log(`Running MX Widgets Tools script ${cmd}...`);
 
