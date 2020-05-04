@@ -9,18 +9,24 @@ if (!package.widgetName) {
 }
 
 const widgetSrcFiles = readdirSync(join(projectPath, "src")).map(file => join(projectPath, "src", file));
-const widgetEntry = widgetSrcFiles.filter(file => file.match(`/${package.widgetName}\\.[jt]sx?$`))[0];
+const widgetEntry = widgetSrcFiles.filter(file =>
+    file.match(new RegExp(`[/\\\\]${escape(package.widgetName)}\\.[jt]sx?$`, "i"))
+)[0];
 if (!widgetEntry) {
     throw new Error("Cannot find a widget entry file");
 }
 
 const editorConfigEntry = widgetSrcFiles.filter(file =>
-    file.match(`/${package.widgetName}\\.editorConfig\\.[jt]s$`)
+    file.match(new RegExp(`[/\\\\]${escape(package.widgetName)}\\.editorConfig\\.[jt]s$`, "i"))
 )[0];
 const previewEntry = widgetSrcFiles.filter(file =>
-    file.match(`/${package.widgetName}\\.(webmodeler|editorPreview)\\.[jt]sx?$`)
+    file.match(new RegExp(`[/\\\\]${escape(package.widgetName)}\\.(webmodeler|editorPreview)\\.[jt]sx?$`, "i"))
 )[0];
 
 const isTypescript = [widgetEntry, editorConfigEntry, previewEntry].some(file => file && /\.tsx?$/.test(file));
 
 module.exports = { projectPath, package, widgetEntry, previewEntry, editorConfigEntry, isTypescript };
+
+function escape(str) {
+    return str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
+}
