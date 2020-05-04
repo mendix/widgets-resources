@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { Component, ReactNode } from "react";
+import { ComponentType, ReactNode } from "react";
 import { ActionValue, DynamicValue } from "mendix";
 
 export type AnimationTypeEnum = "in" | "attention" | "out";
@@ -125,7 +125,7 @@ export interface AnimationProps<Style> {
 export interface AnimationPreviewProps {
     class: string;
     style: string;
-    content: { widgetCount: number; renderer: Component };
+    content: { widgetCount: number; renderer: ComponentType };
     animationType: AnimationTypeEnum;
     animationIn: AnimationInEnum;
     animationAttention: AnimationAttentionEnum;

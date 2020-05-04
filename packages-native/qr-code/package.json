@@ -27,6 +27,6 @@
     "react-native-svg": "^9.6.4"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "8.9.1"
+    "@mendix/pluggable-widgets-tools": ">=8.9.2"
   }
 }
