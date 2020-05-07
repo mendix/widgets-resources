@@ -4,10 +4,6 @@
   "description": "Mendix Pluggable Widgets Tools",
   "license": "Apache-2.0",
   "copyright": "2020 Mendix Technology BV",
-  "author": {
-    "name": "Diego Antonelli",
-    "email": "diego.antonelli@mendix.com"
-  },
   "homepage": "https://github.com/mendix/widgets-resources/tree/master/packages-common/pluggable-widgets-tools",
   "repository": {
     "type": "git",
@@ -17,7 +13,6 @@
     "typings",
     "typescript",
     "build",
-    "gulp",
     "automation",
     "test",
     "jest",
@@ -107,9 +102,11 @@
     "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2"
   },
-  "devDependencies": {},
-  "jest-junit": {
-    "output": "../../../dist/testresults/TESTS-Jest.xml"
+  "devDependencies": {
+    "fs-extra": "9.0.0",
+    "shelljs": "^0.8.4"
   },
-  "scripts": {}
+  "scripts": {
+    "test": "jest --ci --testPathIgnorePatterns /tests/projects/"
+  }
 }

@@ -64,8 +64,6 @@ function getRealCommand(cmd, toolsRoot) {
             return `${prrettierCommand} --write && ${eslintCommand} --fix`;
         case "format":
             return `${prrettierCommand} --write`;
-        case "test":
-            return `jest --projects ${join(toolsRoot, "jest.config.js")} --no-cache --ci`;
         case "test:unit":
             return `jest --projects ${join(toolsRoot, "test-config/jest.config.js")}`;
         case "test:unit:native":
