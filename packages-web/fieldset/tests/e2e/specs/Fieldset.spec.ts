@@ -48,7 +48,8 @@ describe("Fieldset", () => {
         const fieldsetContent = fieldset.getContent();
         const lastNameTextBox = fieldsetContent[1];
 
-        lastNameTextBox.$("input").setValue("s"); // setValue isn't working correctly with inputs in the Mendix Client, therefore, "s" gets appended to existing value
+        lastNameTextBox.$("input").setValue("\uE003\uE003\uE003\uE003\uE003"); // Chrome is not clearing value before set new value (https://github.com/webdriverio/webdriverio/issues/3024)
+        lastNameTextBox.$("input").setValue("Smiths");
         browser.keys("\uE007");
 
         expect(fieldset.getLegendText()).toBe("Smiths's personal info");

@@ -193,31 +193,45 @@ describe("Slider widget", () => {
 
             it("renders with default style", () => {
                 const sliderWidget = new SliderWidget("sliderDefault");
-                expect(sliderWidget.getTrack().getCSSProperty("background-color").value).toBe(SliderStyleColor.Default);
+                expect(sliderWidget.getTrack().getCSSProperty("background-color").parsed.hex).toBe(
+                    SliderStyleColor.Default
+                );
             });
             it("renders with primary style", () => {
                 const sliderWidget = new SliderWidget("sliderPrimary");
-                expect(sliderWidget.getTrack().getCSSProperty("background-color").value).toBe(SliderStyleColor.Primary);
+                expect(sliderWidget.getTrack().getCSSProperty("background-color").parsed.hex).toBe(
+                    SliderStyleColor.Primary
+                );
             });
             it("renders with info style", () => {
                 const sliderWidget = new SliderWidget("sliderInfo");
-                expect(sliderWidget.getTrack().getCSSProperty("background-color").value).toBe(SliderStyleColor.Info);
+                expect(sliderWidget.getTrack().getCSSProperty("background-color").parsed.hex).toBe(
+                    SliderStyleColor.Info
+                );
             });
             it("renders with inverse style", () => {
                 const sliderWidget = new SliderWidget("sliderInverse");
-                expect(sliderWidget.getTrack().getCSSProperty("background-color").value).toBe(SliderStyleColor.Inverse);
+                expect(sliderWidget.getTrack().getCSSProperty("background-color").parsed.hex).toBe(
+                    SliderStyleColor.Inverse
+                );
             });
             it("renders with success style", () => {
                 const sliderWidget = new SliderWidget("sliderSuccess");
-                expect(sliderWidget.getTrack().getCSSProperty("background-color").value).toBe(SliderStyleColor.Success);
+                expect(sliderWidget.getTrack().getCSSProperty("background-color").parsed.hex).toBe(
+                    SliderStyleColor.Success
+                );
             });
             it("renders with warning style", () => {
                 const sliderWidget = new SliderWidget("sliderWarning");
-                expect(sliderWidget.getTrack().getCSSProperty("background-color").value).toBe(SliderStyleColor.Warning);
+                expect(sliderWidget.getTrack().getCSSProperty("background-color").parsed.hex).toBe(
+                    SliderStyleColor.Warning
+                );
             });
             it("renders with danger style", () => {
                 const sliderWidget = new SliderWidget("sliderDanger");
-                expect(sliderWidget.getTrack().getCSSProperty("background-color").value).toBe(SliderStyleColor.Danger);
+                expect(sliderWidget.getTrack().getCSSProperty("background-color").parsed.hex).toBe(
+                    SliderStyleColor.Danger
+                );
             });
         });
     });
