@@ -97,7 +97,7 @@ function runWebpack(env, cb) {
 
 function generateTypings() {
     if (!variables.isTypescript) {
-        return gulp.src([], { allowEmpty: true });
+        return gulp.src(".", { allowEmpty: true });
     }
     return gulp
         .src(join(variables.projectPath, "/src/package.xml"))
