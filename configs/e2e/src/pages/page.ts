@@ -39,6 +39,7 @@ class Page {
     }
 
     headerElement(pageTitle = "pageTitle1"): WebdriverIO.Element {
+        this.getWidget(pageTitle).waitForDisplayed();
         return this.getWidget(pageTitle);
     }
 
