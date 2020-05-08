@@ -42,13 +42,26 @@ describe.each([
         expect(result.code).toBe(0);
     });
 
-    it.each(["build", "test", "test:unit", "lint", "lint:fix", "release"])("'%s' command works", cmd => {
-        process.stderr.write(`Starting ${cmd} for ${widgetName}...\n`);
-        const result = exec(`npm run ${cmd}`, { silent: true });
-        if (result.code !== 0) {
-            fail(`Command exited with ${result.code}:\n${result.stdout}\n\n${result.stderr}`);
-        }
+    it("lint:fix actually fixes lint errors", () => {
+        const r0 = exec("npm run lint", { silent: true });
+        expect(r0.code).not.toBe(0, "link command should fail initially");
+        const r1 = exec("npm run lint:fix", { silent: true });
+        expectSuccess(r1);
+        const r2 = exec("npm run lint", { silent: true });
+        expectSuccess(r2);
     });
 
-    // todo: test linting and unit tests fails
+    it.each(["build", "test", "test:unit", "release"])("'%s' command works", cmd => {
+        process.stderr.write(`Starting ${cmd} for ${widgetName}...\n`);
+        const result = exec(`npm run ${cmd}`, { silent: true });
+        expectSuccess(result);
+    });
+
+    // todo: test unit tests fail?; test start/dev commands; test current generator
 });
+
+function expectSuccess(result) {
+    if (result.code !== 0 || /\berror\b/i.test(result.stdout + result.stderr)) {
+        fail(`Command exited with ${result.code}:\n${result.stdout}\n\n${result.stderr}`);
+    }
+}
