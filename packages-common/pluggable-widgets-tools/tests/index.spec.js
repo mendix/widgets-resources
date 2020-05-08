@@ -51,13 +51,22 @@ describe.each([
         expectSuccess(r2);
     });
 
+    if (platform === "native") {
+        it("tests that are originally failing and are fixed with '-u'", () => {
+            const r0 = exec("npm test", { silent: true });
+            expect(r0.code).not.toBe(0, "test command should fail initially");
+            const r1 = exec("npm test -- -u", { silent: true });
+            expectSuccess(r1);
+        });
+    }
+
     it.each(["build", "test", "test:unit", "release"])("'%s' command works", cmd => {
         process.stderr.write(`Starting ${cmd} for ${widgetName}...\n`);
         const result = exec(`npm run ${cmd}`, { silent: true });
         expectSuccess(result);
     });
 
-    // todo: test unit tests fail?; test start/dev commands; test current generator
+    // todo: test start/dev commands; test current generator
 });
 
 function expectSuccess(result) {
