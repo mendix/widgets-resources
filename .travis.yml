@@ -36,7 +36,7 @@ jobs:
         - name: "Run end-to-end tests"
           dist: trusty
           addons:
-              chrome: stable
+              firefox: latest
           services:
               - xvfb
           before_install:
