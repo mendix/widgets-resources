@@ -74,7 +74,7 @@ function runWebpack(env, cb) {
     if (!isNative) {
         if (!variables.previewEntry) {
             config.splice(1, 1);
-            console.log(colors.yellow(`Preview file ${file} was not found. No preview will be available`));
+            console.log(colors.yellow("Preview file was not found. No preview will be available"));
         } else if (variables.previewEntry.indexOf(".webmodeler.") !== -1) {
             console.log(
                 colors.yellow(

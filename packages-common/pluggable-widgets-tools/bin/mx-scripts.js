@@ -55,9 +55,12 @@ function getRealCommand(cmd, toolsRoot) {
         case "build:ts:native":
             return `${gulpCommand} build --native`;
         case "release:web":
+        case "release:js":
+        case "release:ts":
+            return `${gulpCommand} release --silent`;
         case "release:js:native":
         case "release:ts:native":
-            return `${gulpCommand} release --silent`;
+            return `${gulpCommand} release --native --silent`;
         case "lint":
             return `${prrettierCommand} --check && ${eslintCommand}`;
         case "lint:fix":
