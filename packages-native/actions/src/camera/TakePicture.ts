@@ -60,7 +60,7 @@ export async function TakePicture(
 
     return takePicture()
         .then(response => {
-            if (!response) {
+            if (!response || response.didCancel || !response.uri) {
                 return false;
             }
             if (widthAttributeName) {
