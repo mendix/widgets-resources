@@ -8,12 +8,14 @@ import ReactNative from "react-native";
 
 /**
  * Shows a confirmation dialog during the execution of a nanoflow, to make perform actions based on the user input.
+ * @param {string} titleCaption - Set to empty to use default text 'Confirmation'. (Only for native)
  * @param {string} question - This field is required.
  * @param {string} cancelButtonCaption - Set to empty to use default text 'Cancel'.
  * @param {string} proceedButtonCaption - Set to empty to use default text 'OK'.
  * @returns {Promise.<boolean>}
  */
 export async function ShowConfirmation(
+    titleCaption?: string,
     question?: string,
     cancelButtonCaption?: string,
     proceedButtonCaption?: string
@@ -26,13 +28,14 @@ export async function ShowConfirmation(
 
     const cancel = cancelButtonCaption || "Cancel";
     const proceed = proceedButtonCaption || "OK";
+    const title = titleCaption || "Confirmation";
 
     // Native platform
     if (navigator && navigator.product === "ReactNative") {
         const Alert: typeof ReactNative.Alert = require("react-native").Alert;
 
         return new Promise(resolve => {
-            Alert.alert("Confirmation", question, [
+            Alert.alert(title, question, [
                 { text: cancel, onPress: () => resolve(false), style: "cancel" },
                 { text: proceed, onPress: () => resolve(true) }
             ]);
