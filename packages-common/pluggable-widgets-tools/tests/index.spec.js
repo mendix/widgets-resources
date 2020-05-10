@@ -3,6 +3,7 @@ const { copySync, readJsonSync, writeJsonSync } = require("fs-extra");
 const { join } = require("path");
 const { cd, exec, mkdir, rm, tempdir } = require("shelljs");
 const kill = require("tree-kill");
+const { run: runYeoman } = require("yeoman-test");
 
 const workDir = join(tempdir(), `pwt_test_${Math.round(Math.random() * 10000)}`);
 let toolsPackagePath;
@@ -26,16 +27,33 @@ describe.each([
     ["web", "js", "8.3"],
     ["native", "ts", "8.6"],
     ["web", "ts", "8.6"],
-    ["web", "js", "8.7"]
-])("For %s %s widget created with generator v%s", (platform, lang, version) => {
+    ["web", "js", "8.7"],
+    ["native", "js", "latest"],
+    ["web", "ts", "latest"]
+])("For %s %s widget created with generator %s", (platform, lang, version) => {
     const widgetName = `generated_${version.replace(".", "_")}_${lang}_${platform}`;
 
-    beforeAll(() => {
+    beforeAll(async () => {
         process.stderr.write(`Preparing widget ${widgetName}...\n`);
-        readdirSync(".")
-            .filter(f => f !== "node_modules")
-            .forEach(f => rm("-rf", f));
-        copySync(join(__dirname, "projects", widgetName), workDir);
+
+        if (version === "latest") {
+            const generatedWidget = await runYeoman(require.resolve("@mendix/generator-widget/generators/app"))
+                .inTmpDir()
+                .withPrompts({
+                    widgetName: "Generated",
+                    programmingLanguage: lang === "ts" ? "typescript" : "javascript",
+                    platform,
+                    e2eTests: false
+                })
+                .withArguments("Generated")
+                .toPromise();
+            copySync(join(generatedWidget, "generated"), workDir);
+        } else {
+            readdirSync(".")
+                .filter(f => f !== "node_modules")
+                .forEach(f => rm("-rf", f));
+            copySync(join(__dirname, "projects", widgetName), workDir);
+        }
 
         const widgetPackageJson = readJsonSync("package.json");
         widgetPackageJson.devDependencies["@mendix/pluggable-widgets-tools"] = toolsPackagePath;
@@ -100,8 +118,6 @@ describe.each([
             done();
         });
     }, 20000);
-
-    // todo: test current generator
 });
 
 function expectSuccess(result) {
