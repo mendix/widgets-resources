@@ -1,7 +1,8 @@
 const { readdirSync } = require("fs");
 const { copySync, readJsonSync, writeJsonSync } = require("fs-extra");
 const { join } = require("path");
-const { cd, tempdir, exec, mkdir, rm } = require("shelljs");
+const { cd, exec, mkdir, rm, tempdir } = require("shelljs");
+const kill = require("tree-kill");
 
 const workDir = join(tempdir(), `pwt_test_${Math.round(Math.random() * 10000)}`);
 let toolsPackagePath;
@@ -14,7 +15,8 @@ beforeAll(() => {
     mkdir(workDir);
     cd(workDir);
 });
-afterAll(() => {
+afterAll(async () => {
+    await new Promise(resolve => setTimeout(resolve, 1000));
     rm("-rf", [workDir, toolsPackagePath]);
 });
 
@@ -60,13 +62,45 @@ describe.each([
         });
     }
 
-    it.each(["build", "test", "test:unit", "release"])("'%s' command works", cmd => {
+    it.each(["build", "test", "test:unit", "release"])("'%s' command succeeds", cmd => {
         process.stderr.write(`Starting ${cmd} for ${widgetName}...\n`);
         const result = exec(`npm run ${cmd}`, { silent: true });
         expectSuccess(result);
     });
 
-    // todo: test start/dev commands; test current generator
+    it("start command doesn't produce errors", done => {
+        process.stderr.write(`Starting ${widgetName}...\n`);
+        const startProcess = exec("npm start", { async: true, silent: true });
+        let finished = false;
+
+        startProcess.stdout.on("data", data => {
+            if (finished) {
+                return;
+            }
+            if (/\berror\b/i.test(data)) {
+                finished = true;
+                kill(startProcess.pid);
+                fail(`Received error ${data}`);
+                done();
+            } else if (data.includes("Finished 'copyToDeployment'")) {
+                process.stderr.write("Done!\n");
+                finished = true;
+                kill(startProcess.pid);
+                done();
+            }
+        });
+        startProcess.stderr.on("data", data => {
+            if (finished) {
+                return;
+            }
+            finished = true;
+            kill(startProcess.pid);
+            fail(`Received error output: ${data}`);
+            done();
+        });
+    }, 15000);
+
+    // todo: test current generator
 });
 
 function expectSuccess(result) {

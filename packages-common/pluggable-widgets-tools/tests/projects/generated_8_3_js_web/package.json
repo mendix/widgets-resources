@@ -13,7 +13,7 @@
   },
   "packagePath": "mendix",
   "scripts": {
-    "start": "concurrently \"pluggable-widgets-tools start:server --open\" \"npm:dev\"",
+    "start": "concurrently \"pluggable-widgets-tools start:server\" \"npm:dev\"",
     "dev": "pluggable-widgets-tools start:js",
     "build": "pluggable-widgets-tools build:js",
     "lint": "pluggable-widgets-tools lint",
