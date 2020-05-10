@@ -25,7 +25,8 @@ describe.each([
     ["native", "js", "8.1"],
     ["web", "js", "8.3"],
     ["native", "ts", "8.6"],
-    ["web", "ts", "8.6"]
+    ["web", "ts", "8.6"],
+    ["web", "js", "8.7"]
 ])("For %s %s widget created with generator v%s", (platform, lang, version) => {
     const widgetName = `generated_${version.replace(".", "_")}_${lang}_${platform}`;
 
@@ -98,7 +99,7 @@ describe.each([
             fail(`Received error output: ${data}`);
             done();
         });
-    }, 15000);
+    }, 20000);
 
     // todo: test current generator
 });
