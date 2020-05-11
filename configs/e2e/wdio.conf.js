@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const debug = process.env.DEBUG;
-const browser = process.env.BROWSER;
+const browser = process.env.BROWSER || "chrome";
 const basePath = process.cwd();
 
 const e2ePath = path.join(basePath, "/dist/e2e/");
@@ -13,16 +13,26 @@ const chromeArgs = debug ? ["--no-sandbox"] : ["--no-sandbox", "--headless", "--
 
 exports.config = {
     before() {
-        require("ts-node").register({ files: true, project: path.join(basePath, "tests/e2e/tsconfig.json") });
+        require("ts-node").register({
+            files: true,
+            project: path.join(basePath, "tests/e2e/tsconfig.json")
+        });
     },
     host: "127.0.0.1",
     port: 4444,
     specs: [basePath + "/tests/e2e/specs/*.spec.ts"],
     maxInstances: 1,
     capabilities: [
-        browser && browser === "ie11"
+        browser === "ie11"
             ? {
                   browserName: "internet explorer"
+              }
+            : browser === "firefox"
+            ? {
+                  browserName: "firefox",
+                  "moz:firefoxOptions": {
+                      args: debug ? [] : ["-headless"]
+                  }
               }
             : {
                   browserName: "chrome",

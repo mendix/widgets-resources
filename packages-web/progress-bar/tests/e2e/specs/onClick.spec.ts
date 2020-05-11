@@ -9,7 +9,7 @@ describe("Progress Bar on click", () => {
     it("should call Microflow", () => {
         const progressBar = new ProgressBar("onClickMicroflow");
         const value = progressBar.value;
-        progressBar.progressBar.click();
+        progressBar.clickableArea.click();
 
         const dialog = page.modalDialog;
         dialog.waitForDisplayed();
@@ -19,7 +19,7 @@ describe("Progress Bar on click", () => {
     it("should call Nanoflow", () => {
         const progressBar = new ProgressBar("onClickNanoflow");
         const value = progressBar.value;
-        progressBar.progressBar.click();
+        progressBar.clickableArea.click();
 
         const dialog = page.modalDialog;
         dialog.waitForDisplayed();
@@ -33,7 +33,7 @@ describe("Progress Bar on click", () => {
     it("should Open Full Page", () => {
         const progressBar = new ProgressBar("onClickOpenFullPage");
         const value = progressBar.value;
-        progressBar.progressBar.click();
+        progressBar.clickableArea.click();
 
         const progressBarOpened = new ProgressBar("onClickOpened");
         progressBarOpened.element.waitForDisplayed();
@@ -43,7 +43,7 @@ describe("Progress Bar on click", () => {
     it("should Open Popup Page", () => {
         const progressBar = new ProgressBar("onClickOpenPopupPage");
         const value = progressBar.value;
-        progressBar.progressBar.click();
+        progressBar.clickableArea.click();
 
         const progressBarOpened = new ProgressBar("onClickOpened");
         progressBarOpened.element.waitForDisplayed();
@@ -53,7 +53,7 @@ describe("Progress Bar on click", () => {
     it("should Open Blocking Popup Page", () => {
         const progressBar = new ProgressBar("onClickOpenBlockingPopupPage");
         const value = progressBar.value;
-        progressBar.progressBar.click();
+        progressBar.clickableArea.click();
 
         const progressBarOpened = new ProgressBar("onClickOpened");
         progressBarOpened.element.waitForDisplayed();

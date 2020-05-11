@@ -39,7 +39,9 @@ class Page {
     }
 
     headerElement(pageTitle = "pageTitle1"): WebdriverIO.Element {
-        return this.getWidget(pageTitle);
+        const title = this.getWidget(pageTitle);
+        title.waitForDisplayed();
+        return title;
     }
 
     header(pageTitle = "pageTitle1"): string {

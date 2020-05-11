@@ -28,9 +28,9 @@ describe("Color picker", () => {
             modePage.buttonColor.waitForDisplayed();
 
             const buttonBackgroundColor = $(".mx-name-colorPicker3 .widget-color-picker-inner").getCSSProperty(
-                "background"
-            ).value;
-            expect(buttonBackgroundColor).toContain("rgb(76,175,80)");
+                "background-color"
+            ).parsed.hex;
+            expect(buttonBackgroundColor).toContain("#4caf50");
         });
 
         it("input box", () => {

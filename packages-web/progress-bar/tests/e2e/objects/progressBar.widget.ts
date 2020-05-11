@@ -11,6 +11,10 @@ class ProgressBar {
         return page.getElement(`.widget-progress-bar.mx-name-${this.name}`);
     }
 
+    get clickableArea(): WebdriverIO.Element {
+        return this.element.$(".widget-progress-bar-clickable");
+    }
+
     get progressBar(): WebdriverIO.Element {
         return this.element.$(".progress-bar");
     }

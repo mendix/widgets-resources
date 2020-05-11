@@ -11,13 +11,13 @@ interface DefaultStyle {
 }
 
 const DefaultStyles: DefaultStyle = {
-    DefaultBackground: "rgba(255,255,255,1)",
-    PrimaryBackground: "rgba(5,149,219,1)",
-    SuccessBackground: "rgba(118,202,2,1)",
-    InfoBackground: "rgba(72,176,247,1)",
-    WarningBackground: "rgba(249,155,29,1)",
-    DangerBackground: "rgba(237,28,36,1)",
-    InverseBackground: "rgba(37,44,54,1)"
+    DefaultBackground: "#ffffff",
+    PrimaryBackground: "#0595db",
+    SuccessBackground: "#76ca02",
+    InfoBackground: "#48b0f7",
+    WarningBackground: "#f99b1d",
+    DangerBackground: "#ed1c24",
+    InverseBackground: "#252c36"
 };
 
 class BadgeButtonWidget {
@@ -45,7 +45,7 @@ class BadgeButtonWidget {
     }
 
     getColors(): any {
-        return this.element.getCSSProperty("background-color").value;
+        return this.element.getCSSProperty("background-color").parsed.hex;
     }
 }
 

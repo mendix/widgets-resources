@@ -24,7 +24,8 @@ describe("BadgeButton rendering", () => {
 
     it("should update text value", () => {
         const textInput = page.getWidget("textBox1");
-        textInput.$(".form-control").setValue("er");
+        textInput.$(".form-control").setValue("\uE003\uE003\uE003"); // Chrome is not clearing value before set new value (https://github.com/webdriverio/webdriverio/issues/3024)
+        textInput.$(".form-control").setValue("Newer");
         textInput.$(".control-label").click();
 
         const badgeButton = new badgeButtonWidget("badgeButtonDynamic");
