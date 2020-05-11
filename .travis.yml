@@ -26,13 +26,22 @@ jobs:
         - name: "Build on Linux"
           script:
               - npm run build -- $SINCE_ARG
-        - name: "Build on Windows"
-          os: windows
-          script:
-              - npm run build -- $SINCE_ARG
         - name: "Run unit tests"
           script:
               - npm run test -- $SINCE_ARG
+        - name: "Cross-platform tests (Node 10, windows)"
+          node_js: 10
+          os: windows
+          script:
+              - npm run test:cross-platform -- $SINCE_ARG
+        - name: "Cross-platform tests (Node 10, linux)"
+          node_js: 10
+          script:
+              - npm run test:cross-platform -- $SINCE_ARG
+        - name: "Cross-platform tests (Node latest, windows)"
+          os: windows
+          script:
+              - npm run test:cross-platform -- $SINCE_ARG
         - name: "Run end-to-end tests"
           dist: trusty
           addons:

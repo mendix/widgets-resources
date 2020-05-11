@@ -19,7 +19,7 @@
     "mendix"
   ],
   "engines": {
-    "node": ">=8.10"
+    "node": ">=10.15"
   },
   "files": [
     "bin",
@@ -110,6 +110,7 @@
     "yeoman-test": "^2.6.0"
   },
   "scripts": {
-    "test": "jest --ci --testPathIgnorePatterns /tests/projects/"
+    "test": "jest --ci --testPathIgnorePatterns /tests/projects/",
+    "test:cross-platform": "npm test"
   }
 }
