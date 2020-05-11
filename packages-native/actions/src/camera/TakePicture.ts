@@ -49,12 +49,26 @@ export async function TakePicture(
     }
     if (widthAttributeName) {
         if (!picture.isNumeric(widthAttributeName)) {
-            return Promise.reject(new Error("Attribute " + widthAttributeName + " is no integer attribute or does not exist on entity " + picture.getEntity()));
+            return Promise.reject(
+                new Error(
+                    "Attribute " +
+                        widthAttributeName +
+                        " is no integer attribute or does not exist on entity " +
+                        picture.getEntity()
+                )
+            );
         }
     }
     if (heightAttributeName) {
         if (!picture.isNumeric(heightAttributeName)) {
-            return Promise.reject(new Error("Attribute " + heightAttributeName + " is no integer attribute or does not exist on entity " + picture.getEntity()));
+            return Promise.reject(
+                new Error(
+                    "Attribute " +
+                        heightAttributeName +
+                        " is no integer attribute or does not exist on entity " +
+                        picture.getEntity()
+                )
+            );
         }
     }
 
