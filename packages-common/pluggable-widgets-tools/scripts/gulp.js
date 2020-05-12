@@ -113,7 +113,6 @@ function handleError(err) {
 exports.build = gulp.series(clean, generateTypings, runWebpack.bind(null, "dev"), createMpkFile, copyToDeployment);
 exports.release = gulp.series(clean, generateTypings, runWebpack.bind(null, "prod"), createMpkFile);
 exports.watch = function() {
-    const watchPath = join(variables.projectPath, "src/**/*");
-    console.log(colors.green(`Watching files in: ${watchPath}`));
-    return gulp.watch(watchPath, { ignoreInitial: false }, exports.build);
+    console.log(colors.green(`Watching files in: ${variables.projectPath}`));
+    return gulp.watch("src/**/*", { ignoreInitial: false, cwd: variables.projectPath }, exports.build);
 };
