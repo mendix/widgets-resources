@@ -156,7 +156,16 @@ export interface DropDownType {
     pickerTopIOS?: ViewStyle,
     value?: TextStyle,
     valueDisabled?: TextStyle,
-    validationMessage?: TextStyle
+    validationMessage?: TextStyle,
+    useNew?: boolean;
+    // Uniform dropdown styles start
+    touchable?: {
+        rippleColor: string
+    } & ViewStyle;
+    menuWrapper?: ViewStyle
+    item?: TextStyle;
+    itemContainer?: ViewStyle;
+    // Uniform dropdown styles end
 }
 
 // Feedback

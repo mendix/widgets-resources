@@ -1,4 +1,4 @@
-import { input }                    from "../variables";
+import { input, border }                    from "../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
 import { DropDownType }             from "../../types/widgets";
 /*
@@ -58,6 +58,31 @@ export const DropDown: DropDownType = {
         // All TextStyle properties are allowed
         ...TextBox.validationMessage,
     },
+    useNew: true,
+    // Uniform dropdown styles start
+    menuWrapper: {
+        // All ViewStyle properties are allowed
+        borderRadius: border.radius,
+        shadowColor: "#000",
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
+        elevation: 16,
+        maxWidth: 500,
+	},
+	itemContainer: {
+        // All ViewStyle properties are allowed
+		maxWidth:500,
+		paddingVertical: input.paddingVertical,
+        paddingHorizontal: input.paddingHorizontal,
+	},
+    touchable: {
+        // All ViewStyle properties are allowed
+        // Only for android rippleColor: string
+    },
+    item: {
+        // All TextStyke properties are allowed
+    },
+    // Uniform dropdown styles end
 };
 export const DropDownVertical: DropDownType = {
     container: TextBoxVertical.container,
