@@ -22,7 +22,6 @@ const nativeConfig = {
     modulePathIgnorePatterns: ["<rootDir>/node_modules/react-native/Libraries/react-native/"],
     setupFilesAfterEnv: [__dirname + "/test-index-native.js"],
     snapshotSerializers: ["enzyme-to-json/serializer"],
-    testMatch: ["<rootDir>/src/**/?(*.)(spec|test).[jt]s?(x)"],
     testPathIgnorePatterns: ["<rootDir>/dist", "<rootDir>/node_modules"],
     reporters: ["default"],
     transformIgnorePatterns: ["/node_modules/(?!react-native)/.+"],
