@@ -157,7 +157,7 @@ export interface DropDownType {
     value?: TextStyle,
     valueDisabled?: TextStyle,
     validationMessage?: TextStyle,
-    useNew?: boolean;
+    useNew?: boolean; // Flag for using same dropdown for IOS and Native 
     // Uniform dropdown styles start
     touchable?: {
         rippleColor: string
