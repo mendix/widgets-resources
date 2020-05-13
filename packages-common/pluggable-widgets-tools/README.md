@@ -38,12 +38,21 @@ In your `package.json` scripts, use the following command with the desired task:
 #### Example
 
 ```json
-"scripts": {
+  "name": "MyWidget",
+  "widgetName": "com.company.widgets.MyWidget",
+  "version": "1.0.0",
+  "config": {
+    "widgetPath": "../MxTestProject/widgets",
+    "projectPath": "../MxTestProject/",
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": "3000"
+  },
+  "scripts": {
     "build": "pluggable-widgets-tools build:web",
     "lint": "pluggable-widgets-tools lint",
     "lint:fix": "pluggable-widgets-tools lint:fix",
     "test:unit": "pluggable-widgets-tools test:unit --coverage"
-}
+  }
 ```
 
 ## Project layout
