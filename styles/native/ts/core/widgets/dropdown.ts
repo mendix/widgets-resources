@@ -44,11 +44,9 @@ export const DropDown: DropDownType = {
         // All TextStyle properties are allowed
         ...TextBox.validationMessage,
     },
-
     /*  New dropdown styles start */
     touchable: {
-        // All ViewStyle properties are allowed
-        // Only for android rippleColor: string
+        // All ViewStyle & rippleColor properties are allowed
     },
     menuWrapper: {
         // All ViewStyle properties are allowed
@@ -69,9 +67,7 @@ export const DropDown: DropDownType = {
         // All TextStyke properties are allowed
     },
     /*  New dropdown styles end */
-    
-    useOld: false,
-
+    useUniformDesign: true,
     /*  Old dropdown styles start */
     pickerIOS: {
         // All ViewStyle properties are allowed
@@ -92,10 +88,15 @@ export const DropDown: DropDownType = {
 export const DropDownVertical: DropDownType = {
     container: TextBoxVertical.container,
     label: TextBoxVertical.label,
+    value: DropDown.value,
+    validationMessage: TextBoxVertical.validationMessage,
+    touchable: DropDown.touchable,
+    menuWrapper: DropDown.menuWrapper,
+    itemContainer: DropDown.itemContainer,
+    item: DropDown.item,
+    useUniformDesign: DropDown.value,
     pickerIOS: DropDown.pickerIOS,
     pickerItemIOS: DropDown.pickerItemIOS,
     pickerBackdropIOS: DropDown.pickerBackdropIOS,
     pickerTopIOS: DropDown.pickerTopIOS,
-    value: DropDown.value,
-    validationMessage: TextBoxVertical.validationMessage,
 };

@@ -161,7 +161,7 @@ export interface DropDownType {
     item?: TextStyle;
     itemContainer?: ViewStyle;
     /*  New dropdown styles end */
-    useOld?: boolean; // Flag for using old dropdown design with PickerWheel in IOS
+    useUniformDesign?: boolean; // Flag for using old dropdown design with PickerWheel in IOS
     // Old dropdown styles start
     pickerIOS?: ViewStyle,
     pickerItemIOS?: ViewStyle,
