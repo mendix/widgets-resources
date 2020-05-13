@@ -50,7 +50,7 @@ function copyToDeployment() {
     } else {
         console.log(
             colors.yellow(
-                `Widget is not copied into project because no Mendix Test Project available in ${projectPath}`
+                `Widget is not copied into project because no Mendix Test Project is available in ${projectPath}`
             )
         );
     }
@@ -78,7 +78,7 @@ function runWebpack(env, cb) {
         } else if (variables.previewEntry.indexOf(".webmodeler.") !== -1) {
             console.log(
                 colors.yellow(
-                    `Preview file ${variables.previewEntry} uses old name 'webmodeler', it should be renamed to 'editorPreview' to keep compatibility with future versions of Studio/Studio Pro$`
+                    `Preview file ${variables.previewEntry} uses old name 'webmodeler', it should be renamed to 'editorPreview' to keep compatibility with future versions of Studio/Studio Pro`
                 )
             );
         }
