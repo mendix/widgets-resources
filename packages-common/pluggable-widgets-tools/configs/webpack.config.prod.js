@@ -1,11 +1,9 @@
-"use strict";
-
 const commonConfig = require("./webpack.config.common");
 const merge = require("webpack-merge");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const variables = require("./variables");
 
-const packagePath = variables.package.packagePath.replace(/\./g, "\/");
+const packagePath = variables.package.packagePath.replace(/\./g, "/");
 const widgetName = variables.package.widgetName;
 const name = widgetName.toLowerCase();
 
@@ -20,7 +18,8 @@ const prodConfig = {
     module: {
         rules: [
             {
-                test: /\.s?css$/, loader: ExtractTextPlugin.extract({
+                test: /\.s?css$/,
+                loader: ExtractTextPlugin.extract({
                     fallback: "style-loader",
                     use: ["css-loader", "sass-loader"]
                 })
@@ -42,9 +41,7 @@ const prodConfig = {
             }
         ]
     },
-    externals: [
-        "react-dom"
-    ]
+    externals: ["react-dom"]
 };
 
 const previewProdConfig = {
@@ -53,18 +50,11 @@ const previewProdConfig = {
     module: {
         rules: [
             {
-                test: /\.(sa|sc|c)ss$/, use: [
-                    "to-string-loader", "css-loader", "sass-loader"
-                ]
+                test: /\.(sa|sc|c)ss$/,
+                use: ["to-string-loader", "css-loader", "sass-loader"]
             }
         ]
     }
 };
 
-const configurations = [merge(commonConfig[0], prodConfig), merge(commonConfig[1], previewProdConfig)];
-
-if (commonConfig.length === 3) {
-    configurations.push(commonConfig[2])
-}
-
-module.exports = configurations;
+module.exports = [merge(commonConfig[0], prodConfig), merge(commonConfig[1], previewProdConfig), commonConfig[2]];

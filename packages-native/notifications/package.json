@@ -13,9 +13,9 @@
   },
   "packagePath": "com.mendix.widget.native",
   "scripts": {
-    "start": "pluggable-widgets-tools start:ts:native -- --subprojectPath packages-native/notifications",
-    "build": "pluggable-widgets-tools build:ts:native --subprojectPath packages-native/notifications",
-    "release": "pluggable-widgets-tools release:ts:native --subprojectPath packages-native/notifications",
+    "start": "pluggable-widgets-tools start:native",
+    "build": "pluggable-widgets-tools build:native",
+    "release": "pluggable-widgets-tools release:native",
     "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "version": "npm run release",
     "postversion": "..\"/../node_modules/.bin/ts-node\" ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"

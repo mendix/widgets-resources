@@ -1,13 +1,9 @@
 {
   "name": "@mendix/pluggable-widgets-tools",
-  "version": "8.9.2",
+  "version": "8.9.3",
   "description": "Mendix Pluggable Widgets Tools",
   "license": "Apache-2.0",
   "copyright": "2020 Mendix Technology BV",
-  "author": {
-    "name": "Diego Antonelli",
-    "email": "diego.antonelli@mendix.com"
-  },
   "homepage": "https://github.com/mendix/widgets-resources/tree/master/packages-common/pluggable-widgets-tools",
   "repository": {
     "type": "git",
@@ -17,14 +13,13 @@
     "typings",
     "typescript",
     "build",
-    "gulp",
     "automation",
     "test",
     "jest",
     "mendix"
   ],
   "engines": {
-    "node": ">=8.10"
+    "node": ">=10.15"
   },
   "files": [
     "bin",
@@ -56,6 +51,7 @@
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
     "big.js": "^5.2.2",
+    "colors": "^1.4.0",
     "concurrently": "^4.1.1",
     "copy-webpack-plugin": "^5.1.1",
     "core-js": "^3.6.4",
@@ -74,7 +70,6 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^4.0.0",
     "gulp": "^4.0.2",
-    "gulp-slash": "^1.1.3",
     "gulp-zip": "^5.0.0",
     "jasmine": "^3.4.0",
     "jasmine-core": "^3.4.0",
@@ -107,38 +102,15 @@
     "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2"
   },
-  "devDependencies": {},
-  "jest-junit": {
-    "output": "../../../dist/testresults/TESTS-Jest.xml"
+  "devDependencies": {
+    "@mendix/generator-widget": "^8.9.0",
+    "fs-extra": "9.0.0",
+    "shelljs": "^0.8.4",
+    "tree-kill": "^1.2.2",
+    "yeoman-test": "^2.6.0"
   },
   "scripts": {
-    "prepublishOnly": "npm install",
-    "start:server": "webpack-dev-server --config configs/webpack.config.js --env=dev --quiet",
-    "start:js": "npm run dev:js",
-    "start:ts": "npm run dev:ts",
-    "start:js:native": "npm run dev:js:native",
-    "start:ts:native": "npm run dev:ts:native",
-    "test": "jest --projects ./jest.config.js --no-cache --ci",
-    "build:js": "gulp build --gulpfile scripts/gulp.js",
-    "build:ts": "gulp buildTs --gulpfile scripts/gulp.js",
-    "build:js:native": "gulp build --gulpfile scripts/gulp.native.js",
-    "build:ts:native": "gulp buildTs --gulpfile scripts/gulp.native.js",
-    "dev:js": "gulp watch --gulpfile scripts/gulp.js",
-    "dev:ts": "gulp watchTs --gulpfile scripts/gulp.js",
-    "dev:js:native": "gulp watch --gulpfile scripts/gulp.native.js",
-    "dev:ts:native": "gulp watchTs --gulpfile scripts/gulp.native.js",
-    "release:js": "gulp release --gulpfile scripts/gulp.js --silent",
-    "release:ts": "gulp releaseTs --gulpfile scripts/gulp.js --silent",
-    "release:js:native": "gulp release --gulpfile scripts/gulp.native.js --silent",
-    "release:ts:native": "gulp releaseTs --gulpfile scripts/gulp.native.js --silent",
-    "prelint": "npm run format",
-    "lint": "eslint --config \"../../../.eslintrc.js\" --ext .jsx,.js,.ts,.tsx \"../../../src/\"",
-    "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --config \"../../../prettier.config.js\" --write \"../../../{src,test}/**/*.{js,jsx,ts,tsx}\"",
-    "test:unit": "jest --projects ./test-config/jest.config.js",
-    "test:unit:native": "jest --projects ./test-config/jest.native.config.js",
-    "test:e2e:js": "npm run test:e2e",
-    "test:e2e:ts": "npm run test:e2e",
-    "test:e2e": "wdio ./test-config/wdio.conf.js"
+    "test": "jest --ci --testPathIgnorePatterns /tests/projects/",
+    "test:cross-platform": "npm test"
   }
 }

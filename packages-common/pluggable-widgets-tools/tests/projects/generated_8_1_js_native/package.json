@@ -1,0 +1,38 @@
+{
+  "name": "generated_8_1_js_nat",
+  "widgetName": "Generated",
+  "version": "1.0.0",
+  "description": "My widget description",
+  "copyright": "Mendix 2019",
+  "author": "John",
+  "config": {
+    "widgetPath": "./dist/MxTestProject/widgets",
+    "projectPath": "./dist/MxTestProject/"
+  },
+  "packagePath": "mendix",
+  "scripts": {
+    "start": "npm run dev",
+    "build": "pluggable-widgets-tools build:js:native",
+    "dev": "pluggable-widgets-tools start:js:native",
+    "lint": "pluggable-widgets-tools lint",
+    "lint:fix": "pluggable-widgets-tools lint:fix",
+    "pretest": "npm run lint && npm run build",
+    "test": "pluggable-widgets-tools test:unit:native --no-cache --ci",
+    "test:unit": "pluggable-widgets-tools test:unit:native --coverage",
+    "prerelease": "npm run lint",
+    "release": "pluggable-widgets-tools release:js:native"
+  },
+  "jest-junit": {
+    "output": "./dist/testresults/TESTS-Jest.xml"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/John/generated_8_1_js_nat/issues"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "^8.1.0"
+  },
+  "dependencies": {
+    "big.js": "^5.2.2"
+  }
+}
