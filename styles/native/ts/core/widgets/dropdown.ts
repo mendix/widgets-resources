@@ -64,7 +64,7 @@ export const DropDown: DropDownType = {
         paddingHorizontal: input.paddingHorizontal,
 	},
     item: {
-        // All TextStyke properties are allowed
+        // All TextStlye properties are allowed
     },
     /*  New dropdown styles end */
     useUniformDesign: true,
