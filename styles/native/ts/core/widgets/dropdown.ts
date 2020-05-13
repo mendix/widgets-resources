@@ -22,20 +22,6 @@ export const DropDown: DropDownType = {
         // numberOfLines and all TextStyle properties are allowed
         ...TextBox.label,
     },
-    pickerIOS: {
-        // All ViewStyle properties are allowed
-        backgroundColor: input.backgroundColor,
-    },
-    pickerItemIOS: {
-        // All TextStyle properties are allowed
-    },
-    pickerBackdropIOS: {
-        // All ViewStyle properties are allowed
-    },
-    pickerTopIOS: {
-        // All ViewStyle properties are allowed
-        backgroundColor: input.backgroundColor,
-    },
     value: {
         // All TextStyle properties are allowed
         color: input.color,
@@ -58,8 +44,12 @@ export const DropDown: DropDownType = {
         // All TextStyle properties are allowed
         ...TextBox.validationMessage,
     },
-    useNew: true,
-    // Uniform dropdown styles start
+
+    /*  New dropdown styles start */
+    touchable: {
+        // All ViewStyle properties are allowed
+        // Only for android rippleColor: string
+    },
     menuWrapper: {
         // All ViewStyle properties are allowed
         borderRadius: border.radius,
@@ -75,14 +65,29 @@ export const DropDown: DropDownType = {
 		paddingVertical: input.paddingVertical,
         paddingHorizontal: input.paddingHorizontal,
 	},
-    touchable: {
-        // All ViewStyle properties are allowed
-        // Only for android rippleColor: string
-    },
     item: {
         // All TextStyke properties are allowed
     },
-    // Uniform dropdown styles end
+    /*  New dropdown styles end */
+    
+    useOld: false,
+
+    /*  Old dropdown styles start */
+    pickerIOS: {
+        // All ViewStyle properties are allowed
+        backgroundColor: input.backgroundColor,
+    },
+    pickerItemIOS: {
+        // All TextStyle properties are allowed
+    },
+    pickerBackdropIOS: {
+        // All ViewStyle properties are allowed
+    },
+    pickerTopIOS: {
+        // All ViewStyle properties are allowed
+        backgroundColor: input.backgroundColor,
+    },
+    /*  Old dropdown styles start */
 };
 export const DropDownVertical: DropDownType = {
     container: TextBoxVertical.container,

@@ -150,22 +150,24 @@ export interface DatePickerType {
 export interface DropDownType {
     container?: ViewStyle,
     label?: InputLabelType,
-    pickerIOS?: ViewStyle,
-    pickerItemIOS?: ViewStyle,
-    pickerBackdropIOS?: ViewStyle,
-    pickerTopIOS?: ViewStyle,
     value?: TextStyle,
     valueDisabled?: TextStyle,
     validationMessage?: TextStyle,
-    useNew?: boolean; // Flag for using same dropdown for IOS and Native 
-    // Uniform dropdown styles start
+    /*  New dropdown styles start */
     touchable?: {
         rippleColor: string
     } & ViewStyle;
     menuWrapper?: ViewStyle
     item?: TextStyle;
     itemContainer?: ViewStyle;
-    // Uniform dropdown styles end
+    /*  New dropdown styles end */
+    useOld?: boolean; // Flag for using old dropdown design with PickerWheel in IOS
+    // Old dropdown styles start
+    pickerIOS?: ViewStyle,
+    pickerItemIOS?: ViewStyle,
+    pickerBackdropIOS?: ViewStyle,
+    pickerTopIOS?: ViewStyle,
+    // Old dropdown styles end
 }
 
 // Feedback
