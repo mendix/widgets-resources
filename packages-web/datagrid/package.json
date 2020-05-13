@@ -43,6 +43,7 @@
     "react-table": "^7.0.4"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": ">=8.9.2"
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@types/react-table": "^7.0.17"
   }
 }

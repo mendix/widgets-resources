@@ -12,7 +12,7 @@ export interface ColumnsType {
     attribute: (item: ObjectItem) => EditableValue<string | BigJs.Big | boolean | Date>;
     header: DynamicValue<string>;
     hasWidgets: boolean;
-    content: ReactNode;
+    content?: (item: ObjectItem) => ReactNode;
     sortable: boolean;
     resizable: boolean;
     draggable: boolean;
@@ -46,7 +46,7 @@ export interface DatagridContainerProps {
     affixFooter: boolean;
     footerWidgets?: ReactNode;
     pagingEnabled: boolean;
-    pageSize?: number;
+    pageSize: number;
     pagingPosition: PagingPositionEnum;
     columnsSortable: boolean;
     columnsResizable: boolean;
