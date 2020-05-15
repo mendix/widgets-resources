@@ -1,4 +1,3 @@
-const { readdirSync } = require("fs");
 const { copySync, readJsonSync, writeJsonSync } = require("fs-extra");
 const { join } = require("path");
 const { cd, exec, mkdir, rm, tempdir } = require("shelljs");
@@ -17,12 +16,6 @@ describe("pluggable-widgets-tools commands", () => {
         expectSuccess(rm(toolsPackagePath));
     });
 
-    let workDir;
-    if (process.platform !== "win32") {
-        // Optimize build for linux/mac by reusing the same folder (and hence node_modules)
-        beforeAll(initialize);
-    }
-
     describe.each([
         ["web", "ts", "8.0"],
         ["native", "js", "8.1"],
@@ -34,13 +27,12 @@ describe("pluggable-widgets-tools commands", () => {
         ["web", "ts", "latest"]
     ])("For %s %s widget created with generator %s", (platform, lang, version) => {
         const widgetName = `generated_${version.replace(".", "_")}_${lang}_${platform}`;
+        const workDir = join(tempdir(), `pwt_test_${Math.round(Math.random() * 10000)}`);
 
         beforeAll(async () => {
             process.stderr.write(`Preparing widget ${widgetName}...\n`);
-
-            if (process.platform === "win32") {
-                initialize();
-            }
+            mkdir(workDir);
+            cd(workDir);
 
             if (version === "latest") {
                 const generatedWidget = await runYeoman(require.resolve("@mendix/generator-widget/generators/app"))
@@ -55,9 +47,6 @@ describe("pluggable-widgets-tools commands", () => {
                     .toPromise();
                 copySync(join(generatedWidget, "generated"), workDir);
             } else {
-                readdirSync(".")
-                    .filter(f => f !== "node_modules")
-                    .forEach(f => expectSuccess(rm("-rf", f)));
                 copySync(join(__dirname, "projects", widgetName), workDir);
             }
 
@@ -67,6 +56,10 @@ describe("pluggable-widgets-tools commands", () => {
 
             const result = exec("npm install --loglevel=error", { silent: true });
             expect(result.code).toBe(0);
+        });
+
+        afterAll(() => {
+            rm("-rf", workDir);
         });
 
         it("lint:fix actually fixes lint errors", () => {
@@ -130,11 +123,5 @@ describe("pluggable-widgets-tools commands", () => {
         if (result.code !== 0 || /\berror\b/i.test(result.stdout + result.stderr)) {
             fail(`Command exited with ${result.code}:\n${result.stdout}\n\n${result.stderr}`);
         }
-    }
-
-    function initialize() {
-        workDir = join(tempdir(), `pwt_test_${Math.round(Math.random() * 10000)}`);
-        mkdir(workDir);
-        cd(workDir);
     }
 });
