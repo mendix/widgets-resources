@@ -110,7 +110,6 @@
     "yeoman-test": "^2.6.0"
   },
   "scripts": {
-    "test": "jest --ci --testPathIgnorePatterns /tests/projects/",
-    "test:cross-platform": "npm test"
+    "test:cross-platform": "jest --ci tests/commands.spec.js"
   }
 }

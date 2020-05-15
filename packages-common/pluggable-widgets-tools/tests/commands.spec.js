@@ -5,7 +5,7 @@ const { cd, exec, mkdir, rm, tempdir } = require("shelljs");
 const kill = require("tree-kill");
 const { run: runYeoman } = require("yeoman-test");
 
-describe("pluggable-widgets-tools scripts", () => {
+describe("pluggable-widgets-tools commands", () => {
     let toolsPackagePath;
     beforeAll(() => {
         cd(join(__dirname, ".."));
