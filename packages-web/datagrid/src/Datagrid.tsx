@@ -1,10 +1,14 @@
-import { createElement, ReactElement, useMemo, Fragment } from "react";
+import { Children, createElement, ReactElement, useCallback, useMemo, useState } from "react";
 import { DatagridContainerProps } from "../typings/DatagridProps";
-import { useBlockLayout, usePagination, useResizeColumns, useSortBy, useTable } from "react-table";
+import { useBlockLayout, useResizeColumns, useSortBy, useTable } from "react-table";
 import { Pagination } from "./components/Pagination";
 import { ColumnSelector } from "./components/ColumnSelector";
+import classNames from "classnames";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
+    const [page, setPage] = useState(0);
+    const [hasMoreItems, setHasMoreItems] = useState(true);
+    const [items, setItems] = useState<any[]>([]);
     const columns = useMemo(
         () =>
             props.columns.map((column, index) => ({
@@ -14,7 +18,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         [props.columns]
     ) as any;
 
-    const data = useMemo(
+    const datasourceData = useMemo(
         () =>
             props.datasource.items?.map(item =>
                 props.columns
@@ -24,8 +28,21 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                     }))
                     .reduce((acc, current) => ({ ...acc, ...current }), {})
             ) || [],
-        [props.datasource, props.columns]
+        [props.datasource]
     );
+
+    const data = useMemo(() => {
+        if (!props.pagingEnabled) {
+            // Carregar itens anteriores
+            setItems(items => Array.from(new Set([...(items || []), ...datasourceData])));
+        }
+        props.datasource.setLimit(props.pageSize);
+        props.datasource.setOffset(page * props.pageSize);
+        setHasMoreItems(props.datasource.hasMoreItems || false);
+        console.warn("Loading items from", page * props.pageSize);
+
+        return props.pagingEnabled ? datasourceData : Array.from(new Set([...items, ...datasourceData]));
+    }, [props.datasource, props.columns, props.pageSize, page, datasourceData]);
 
     const defaultColumn = {
         Cell: ({
@@ -40,27 +57,14 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             column: { id: string };
         }) => {
             const content = data[index][`content_${id}`];
-            return content ? content : value;
-        }
+            return Children.count(content.children) > 0 ? content : value;
+        },
+        minWidth: 30,
+        width: 150,
+        maxWidth: 400
     };
 
-    const {
-        getTableProps,
-        headerGroups,
-        rows,
-        prepareRow,
-        getTableBodyProps,
-        allColumns,
-        page, // used instead of rows when we have pagination
-        pageOptions,
-        pageCount,
-        state: { pageIndex },
-        gotoPage,
-        previousPage,
-        nextPage,
-        canPreviousPage,
-        canNextPage
-    } = useTable(
+    const { getTableProps, headerGroups, rows, prepareRow, getTableBodyProps, allColumns } = useTable(
         {
             columns,
             data,
@@ -70,80 +74,89 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             initialState: { pageSize: props.pageSize }
         } as any,
         useSortBy,
-        usePagination,
+        // usePagination,
         useBlockLayout,
         useResizeColumns
-    ) as any;
+    );
 
-    const rowSelector = props.pagingEnabled ? page : rows;
+    const trackScrolling = useCallback(
+        e => {
+            const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+            if (bottom) {
+                if (hasMoreItems) {
+                    setPage(prev => prev + 1);
+                }
+            }
+        },
+        [hasMoreItems]
+    );
+
+    // const rowSelector = props.pagingEnabled ? page : rows;
 
     return (
-        <Fragment>
-            <div className="table" {...getTableProps()}>
-                <div className="header">
-                    <span>Header</span>
-                    {props.columnsHidable && <ColumnSelector allColumns={allColumns} />}
-                </div>
-                <div className="thead" role="rowgroup">
-                    {headerGroups.map((headerGroup: any, index: number) => (
-                        <div className="tr" {...headerGroup.getHeaderGroupProps()} key={`row_${index}`}>
-                            {headerGroup.headers.map((column: any, index: number) => (
-                                <div
-                                    className="th"
-                                    {...column.getHeaderProps()}
-                                    {...(props.columnsSortable ? column.getSortByToggleProps() : {})}
-                                    key={`column_${index}`}
-                                >
-                                    {column.render("Header")}
-                                    <span>{column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}</span>
+        <div className={classNames(props.class, "table")} {...getTableProps()}>
+            <div className="header">
+                <span>Header</span>
+                {props.columnsHidable && <ColumnSelector allColumns={allColumns} />}
+            </div>
+            <div className="thead" role="rowgroup">
+                {headerGroups.map((headerGroup: any, index: number) => (
+                    <div {...headerGroup.getHeaderGroupProps()} className="tr" key={`headers_row_${index}`}>
+                        {headerGroup.headers.map((column: any, index: number) => (
+                            <div
+                                className={classNames("th", props.columnsSortable ? "clickable" : "")}
+                                {...column.getHeaderProps()}
+                                {...(props.columnsSortable ? column.getSortByToggleProps() : {})}
+                                key={`headers_column_${index}`}
+                                style={{
+                                    width:
+                                        column.width > column.maxWidth
+                                            ? column.maxWidth
+                                            : column.width < column.minWidth
+                                            ? column.minWidth
+                                            : column.width
+                                }}
+                            >
+                                {column.render("Header")}
+                                <div className="column-options">
+                                    {props.columnsSortable && (
+                                        <span className="sort-text">
+                                            {column.isSorted ? (column.isSortedDesc ? "▼" : "▲") : ""}
+                                        </span>
+                                    )}
                                     {props.columnsResizable && (
-                                        <div
-                                            {...column.getResizerProps()}
-                                            className={`resizer ${column.isResizing ? "isResizing" : ""}`}
-                                        />
+                                        <div {...column.getResizerProps()} className="column-resizer" />
                                     )}
-                                    {props.columnsHidable && (
-                                        <input
-                                            type="checkbox"
-                                            onClick={() => column.toggleHidden()}
-                                            checked={column.isVisible}
-                                            {...column.getToggleHiddenProps()}
-                                        />
-                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
+            <div className="tbody" {...getTableBodyProps()} onScroll={trackScrolling}>
+                {rows.map((row: any, index: number) => {
+                    prepareRow(row);
+                    return (
+                        <div className="tr" {...row.getRowProps()} key={`row_${index}`}>
+                            {row.cells.map((cell: any, index: number) => (
+                                <div className="td" {...cell.getCellProps()} key={`column_${index}`}>
+                                    {cell.render("Cell")}
                                 </div>
                             ))}
                         </div>
-                    ))}
-                </div>
-                <div className="tbody" {...getTableBodyProps()}>
-                    {rowSelector.map((row: any, index: number) => {
-                        prepareRow(row);
-                        return (
-                            <div className="tr" {...row.getRowProps()} key={`row_${index}`}>
-                                {row.cells.map((cell: any, index: number) => (
-                                    <div className="td" {...cell.getCellProps()} key={`column_${index}`}>
-                                        {cell.render("Cell")}
-                                    </div>
-                                ))}
-                            </div>
-                        );
-                    })}
-                </div>
-                <div className="footer">
-                    {props.pagingEnabled && (
-                        <Pagination
-                            gotoPage={gotoPage}
-                            canPreviousPage={canPreviousPage}
-                            previousPage={previousPage}
-                            canNextPage={canNextPage}
-                            nextPage={nextPage}
-                            pageCount={pageCount}
-                            pageIndex={pageIndex}
-                            pageOptions={pageOptions}
-                        />
-                    )}
+                    );
+                })}
+            </div>
+            <div className="tfoot">
+                <div className="tr">
+                    <div className="td">
+                        {props.pagingEnabled && (
+                            <Pagination page={page} setPage={setPage} hasMoreItems={hasMoreItems} />
+                        )}
+                        Showing from items till {(page + 1) * props.pageSize}
+                    </div>
                 </div>
             </div>
-        </Fragment>
+        </div>
     );
 }

@@ -1,61 +1,24 @@
-import { createElement, ReactElement } from "react";
+import { createElement, ReactElement, Dispatch, SetStateAction } from "react";
 
 interface PaginationProps {
-    gotoPage: (page: number) => void;
-    canPreviousPage: boolean;
-    previousPage: () => void;
-    canNextPage: boolean;
-    nextPage: () => void;
-    pageCount: number;
-    pageIndex: number;
-    pageOptions: number[];
+    page: number;
+    setPage: Dispatch<SetStateAction<number>>;
+    hasMoreItems: boolean;
 }
 
-export function Pagination({
-    gotoPage,
-    canPreviousPage,
-    previousPage,
-    canNextPage,
-    nextPage,
-    pageCount,
-    pageIndex,
-    pageOptions
-}: PaginationProps): ReactElement {
+export function Pagination({ page, setPage, hasMoreItems }: PaginationProps): ReactElement {
     return (
         <div className="pagination">
-            <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-                {"<<"}
-            </button>{" "}
-            <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-                {"<"}
-            </button>{" "}
-            <button onClick={() => nextPage()} disabled={!canNextPage}>
-                {">"}
-            </button>{" "}
-            <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-                {">>"}
-            </button>{" "}
-            <span>
-                Page{" "}
-                <strong>
-                    {pageIndex + 1} of {pageOptions.length}
-                </strong>{" "}
-            </span>
-            <span>
-                | Go to:{" "}
-                <select
-                    value={pageIndex}
-                    onChange={e => {
-                        gotoPage(Number(e.target.value));
-                    }}
-                >
-                    {pageOptions.map((pageSize: any) => (
-                        <option key={pageSize} value={pageSize}>
-                            Page {pageSize + 1}
-                        </option>
-                    ))}
-                </select>
-            </span>
+            <button className="btn" onClick={() => setPage(0)} disabled={page === 0}>
+                <span className="glyphicon glyphicon-step-backward" />
+            </button>
+            <button className="btn" onClick={() => setPage(prev => prev - 1)} disabled={page === 0}>
+                <span className="glyphicon glyphicon-backward" />
+            </button>
+            <div className="paging-status">Page {page + 1}</div>
+            <button className="btn" onClick={() => setPage(prev => prev + 1)} disabled={!hasMoreItems}>
+                <span className="glyphicon glyphicon-forward" />
+            </button>
         </div>
     );
 }
