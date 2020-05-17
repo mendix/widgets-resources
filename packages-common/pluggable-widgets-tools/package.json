@@ -110,6 +110,6 @@
     "yeoman-test": "^2.6.0"
   },
   "scripts": {
-    "test:cross-platform": "jest --ci tests/commands.spec.js"
+    "test:cross-platform": "node tests/commands.js"
   }
 }
