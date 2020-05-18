@@ -151,7 +151,7 @@ async function main() {
                     });
                 });
             } finally {
-                await promisify(kill)(startProcess.pid);
+                kill(startProcess.pid); // don't wait for kill to succeed
             }
         }
     }
