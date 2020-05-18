@@ -6,6 +6,8 @@ const kill = require("tree-kill");
 const { promisify } = require("util");
 const { run: runYeoman } = require("yeoman-test");
 
+const LIMIT_TESTS = process.argv.includes("--limited");
+
 const CONFIGS = [
     ["web", "ts", "8.0"],
     ["native", "js", "8.1"],
@@ -13,9 +15,13 @@ const CONFIGS = [
     ["native", "ts", "8.6"],
     ["web", "ts", "8.6"],
     ["web", "js", "8.7"],
-    ["native", "js", "latest"],
-    ["web", "ts", "latest"]
+    ["web", "ts", "latest"],
+    ["native", "js", "latest"]
 ];
+
+if (LIMIT_TESTS) {
+    CONFIGS.splice(1, CONFIGS.length - 2); // Remove all configs except the first and the last
+}
 
 main().catch(e => {
     console.error(e);
@@ -55,13 +61,22 @@ async function main() {
             console.log(`[${widgetName}] Preparing widget...`);
             await prepareWidget();
             console.log(`[${widgetName}] Ready to test!`);
+
             console.log(`[${widgetName}] Testing linting...`);
             await testLint();
+            console.log(`[${widgetName}] Testing unit tests....`);
             if (platform === "native") {
-                console.log(`[${widgetName}] Fixing unit tests....`);
                 await testTest();
+            } else {
+                await execAsync("npm run test", workDir);
             }
-            for (const cmd of ["build", "test", "test:unit", "release"]) {
+
+            if (LIMIT_TESTS) {
+                console.log(`[${widgetName}] Quick tested!`);
+                return;
+            }
+
+            for (const cmd of ["build", "test:unit", "release"]) {
                 console.log(`[${widgetName}] Testing '${cmd}' command...`);
                 await execAsync(`npm run ${cmd}`, workDir);
             }

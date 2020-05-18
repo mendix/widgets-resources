@@ -110,6 +110,7 @@
     "yeoman-test": "^2.6.0"
   },
   "scripts": {
+    "test": "npm run test:cross-platform -- --limited",
     "test:cross-platform": "node tests/commands.js"
   }
 }
