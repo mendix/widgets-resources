@@ -1,9 +1,9 @@
 const { Mutex } = require("async-mutex");
 const { exec } = require("child_process");
-const fkill = require("fkill");
 const { copy, readJson, writeJson } = require("fs-extra");
 const { join } = require("path");
 const { mkdir, rm, tempdir } = require("shelljs");
+const kill = require("tree-kill");
 const { promisify } = require("util");
 const { run: runYeoman } = require("yeoman-test");
 
@@ -151,7 +151,7 @@ async function main() {
                     });
                 });
             } finally {
-                await fkill(startProcess.pid, { force: true, tree: true });
+                await promisify(kill)(startProcess.pid);
             }
         }
     }
