@@ -1,3 +1,4 @@
+const { Mutex } = require("async-mutex");
 const { exec } = require("child_process");
 const { copy, readJson, writeJson } = require("fs-extra");
 const { join } = require("path");
@@ -22,6 +23,8 @@ const CONFIGS = [
 if (LIMIT_TESTS) {
     CONFIGS.splice(1, CONFIGS.length - 2); // Remove all configs except the first and the last
 }
+
+const mutex = new Mutex();
 
 main().catch(e => {
     console.error(e);
@@ -92,16 +95,22 @@ async function main() {
             mkdir(workDir);
 
             if (version === "latest") {
-                const generatedWidget = await runYeoman(require.resolve("@mendix/generator-widget/generators/app"))
-                    .inTmpDir()
-                    .withPrompts({
-                        widgetName: "Generated",
-                        programmingLanguage: lang === "ts" ? "typescript" : "javascript",
-                        platform,
-                        e2eTests: false
-                    })
-                    .withArguments("Generated")
-                    .toPromise();
+                let generatedWidget;
+                const release = await mutex.acquire(); // yeoman generator is no re-entrable :(
+                try {
+                    generatedWidget = await runYeoman(require.resolve("@mendix/generator-widget/generators/app"))
+                        .inTmpDir()
+                        .withPrompts({
+                            widgetName: "Generated",
+                            programmingLanguage: lang === "ts" ? "typescript" : "javascript",
+                            platform,
+                            e2eTests: false
+                        })
+                        .withArguments("Generated")
+                        .toPromise();
+                } finally {
+                    release();
+                }
                 await copy(join(generatedWidget, "generated"), workDir);
             } else {
                 await copy(join(__dirname, "projects", widgetName), workDir);
