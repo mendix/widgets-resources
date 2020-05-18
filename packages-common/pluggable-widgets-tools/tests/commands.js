@@ -37,22 +37,23 @@ async function main() {
     const { stdout: packOutput } = await execAsync("npm pack --loglevel=error", join(__dirname, ".."));
     const toolsPackagePath = join(__dirname, "..", packOutput.trim());
 
-    const results = await Promise.all(
-        CONFIGS.map(config =>
-            runTest(...config).then(
-                () => ["success"],
-                e => ["failed", e]
-            )
+    const failures = (
+        await Promise.all(
+            CONFIGS.map(async config => {
+                try {
+                    await runTest(...config);
+                    return undefined;
+                } catch (e) {
+                    return [config, e];
+                }
+            })
         )
-    );
+    ).filter(f => f);
 
     rm(toolsPackagePath);
 
-    const failedConfigs = results
-        .map((result, index) => (result[0] === "failed" ? [CONFIGS[index], result[1]] : undefined))
-        .filter(c => c);
-    if (failedConfigs.length) {
-        failedConfigs.forEach(c => console.error(`Test for configuration ${c[0]} failed: ${c[1]}`));
+    if (failures.length) {
+        failures.forEach(f => console.error(`Test for configuration ${f[0]} failed: ${f[1]}`));
         process.exit(2);
     }
 
