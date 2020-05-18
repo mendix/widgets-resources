@@ -61,36 +61,31 @@ async function main() {
         const widgetName = `generated_${version.replace(".", "_")}_${lang}_${platform}`;
         const workDir = join(tempdir(), `pwt_test_${Math.round(Math.random() * 10000)}`);
 
-        try {
-            console.log(`[${widgetName}] Preparing widget...`);
-            await prepareWidget();
-            console.log(`[${widgetName}] Ready to test!`);
+        console.log(`[${widgetName}] Preparing widget...`);
+        await prepareWidget();
+        console.log(`[${widgetName}] Ready to test!`);
 
-            console.log(`[${widgetName}] Testing linting...`);
-            await testLint();
-            console.log(`[${widgetName}] Testing unit tests....`);
-            if (platform === "native") {
-                await testTest();
-            } else {
-                await execAsync("npm run test", workDir);
-            }
-
-            if (LIMIT_TESTS) {
-                console.log(`[${widgetName}] Quick tested!`);
-                return;
-            }
-
-            for (const cmd of ["build", "test:unit", "release"]) {
-                console.log(`[${widgetName}] Testing '${cmd}' command...`);
-                await execAsync(`npm run ${cmd}`, workDir);
-            }
-            console.log(`[${widgetName}] Testing npm start...`);
-            await testStart();
-            console.log(`[${widgetName}] Tested!`);
-        } finally {
-            await new Promise(resolve => setTimeout(resolve, 5000)); // time for all processes to die and unlock the folder
-            rm("-rf", workDir);
+        console.log(`[${widgetName}] Testing linting...`);
+        await testLint();
+        console.log(`[${widgetName}] Testing unit tests....`);
+        if (platform === "native") {
+            await testTest();
+        } else {
+            await execAsync("npm run test", workDir);
         }
+
+        if (LIMIT_TESTS) {
+            console.log(`[${widgetName}] Quick tested!`);
+            return;
+        }
+
+        for (const cmd of ["build", "test:unit", "release"]) {
+            console.log(`[${widgetName}] Testing '${cmd}' command...`);
+            await execAsync(`npm run ${cmd}`, workDir);
+        }
+        console.log(`[${widgetName}] Testing npm start...`);
+        await testStart();
+        console.log(`[${widgetName}] Tested!`);
 
         async function prepareWidget() {
             mkdir(workDir);
