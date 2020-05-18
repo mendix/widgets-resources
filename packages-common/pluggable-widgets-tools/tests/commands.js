@@ -133,25 +133,29 @@ async function main() {
         async function testStart() {
             const startProcess = exec("npm start", { cwd: workDir });
 
-            return Promise.race([
-                new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout!")), 100000)),
-                new Promise((resolve, reject) => {
-                    startProcess.stdout.on("data", data => {
-                        if (/\berror\b/i.test(data)) {
-                            reject(new Error(`Received error ${data}`));
-                        } else if (data.includes("Finished 'copyToDeployment'")) {
-                            console.log(`[${widgetName}] Done!`);
-                            resolve();
-                        }
-                    });
-                    startProcess.stderr.on("data", data => {
-                        reject(new Error(`Received error output: ${data}`));
-                    });
-                    startProcess.on("exit", code => {
-                        reject(new Error(`Exited with status ${code}`));
-                    });
-                })
-            ]).finally(() => fkill(startProcess.pid, { force: true, tree: true, silent: true }));
+            try {
+                await Promise.race([
+                    new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout!")), 100000)),
+                    new Promise((resolve, reject) => {
+                        startProcess.stdout.on("data", data => {
+                            if (/\berror\b/i.test(data)) {
+                                reject(new Error(`Received error ${data}`));
+                            } else if (data.includes("Finished 'copyToDeployment'")) {
+                                console.log(`[${widgetName}] Done!`);
+                                resolve();
+                            }
+                        });
+                        startProcess.stderr.on("data", data => {
+                            reject(new Error(`Received error output: ${data}`));
+                        });
+                        startProcess.on("exit", code => {
+                            reject(new Error(`Exited with status ${code}`));
+                        });
+                    })
+                ]);
+            } finally {
+                await fkill(startProcess.pid, { force: true, tree: true });
+            }
         }
     }
 }
