@@ -1,7 +1,7 @@
 const { exec } = require("child_process");
 const { copy, readJson, writeJson } = require("fs-extra");
 const { join } = require("path");
-const { cd, mkdir, rm, tempdir } = require("shelljs");
+const { mkdir, rm, tempdir } = require("shelljs");
 const kill = require("tree-kill");
 const { promisify } = require("util");
 const { run: runYeoman } = require("yeoman-test");
@@ -25,8 +25,7 @@ main().catch(e => {
 async function main() {
     console.log("Preparing...");
 
-    cd(join(__dirname, ".."));
-    const { stdout: packOutput } = await execAsync("npm pack --loglevel=error");
+    const { stdout: packOutput } = await execAsync("npm pack --loglevel=error", join(__dirname, ".."));
     const toolsPackagePath = join(__dirname, "..", packOutput.trim());
 
     const results = await Promise.all(
@@ -59,12 +58,12 @@ async function main() {
             console.log(`[${widgetName}] Testing linting...`);
             await testLint();
             if (platform === "native") {
-                console.log(`[${widgetName}] Testing unit tests....`);
+                console.log(`[${widgetName}] Fixing unit tests....`);
                 await testTest();
             }
             for (const cmd of ["build", "test", "test:unit", "release"]) {
                 console.log(`[${widgetName}] Testing '${cmd}' command...`);
-                await execAsync(`npm run ${cmd}`);
+                await execAsync(`npm run ${cmd}`, workDir);
             }
             console.log(`[${widgetName}] Testing npm start...`);
             await testStart();
@@ -76,7 +75,6 @@ async function main() {
 
         async function prepareWidget() {
             mkdir(workDir);
-            cd(workDir);
 
             if (version === "latest") {
                 const generatedWidget = await runYeoman(require.resolve("@mendix/generator-widget/generators/app"))
@@ -94,29 +92,29 @@ async function main() {
                 await copy(join(__dirname, "projects", widgetName), workDir);
             }
 
-            const widgetPackageJson = await readJson("package.json");
+            const widgetPackageJson = await readJson(join(workDir, "package.json"));
             widgetPackageJson.devDependencies["@mendix/pluggable-widgets-tools"] = toolsPackagePath;
-            await writeJson("package.json", widgetPackageJson);
+            await writeJson(join(workDir, "package.json"), widgetPackageJson);
 
-            await execAsync("npm install --loglevel=error");
+            await execAsync("npm install --loglevel=error", workDir);
         }
 
         async function testLint() {
-            await execAsync("npm run lint", { expectFailure: true });
-            await execAsync("npm run lint:fix");
-            await execAsync("npm run lint");
+            await execFailedAsync("npm run lint", workDir);
+            await execAsync("npm run lint:fix", workDir);
+            await execAsync("npm run lint", workDir);
         }
 
         async function testTest() {
-            await execAsync("npm test", { expectFailure: true });
-            await execAsync("npm test -- -u");
+            await execFailedAsync("npm test", workDir);
+            await execAsync("npm test -- -u", workDir);
         }
 
         async function testStart() {
-            const startProcess = exec("npm start", { cwd: process.cwd() });
+            const startProcess = exec("npm start", { cwd: workDir });
 
             return Promise.race([
-                new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout!")), 20000)),
+                new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout!")), 100000)),
                 new Promise((resolve, reject) => {
                     startProcess.stdout.on("data", data => {
                         if (/\berror\b/i.test(data)) {
@@ -138,21 +136,15 @@ async function main() {
     }
 }
 
-async function execAsync(command, options = {}) {
-    let result;
+async function execAsync(command, workDir) {
+    return promisify(exec)(command, { cwd: workDir });
+}
 
+async function execFailedAsync(command, workDir) {
     try {
-        result = await promisify(exec)(command, { cwd: process.cwd() });
+        await promisify(exec)(command, { cwd: workDir });
     } catch (e) {
-        if (!options.expectFailure) {
-            throw e;
-        } else {
-            return undefined;
-        }
+        return;
     }
-    if (options.expectFailure) {
-        throw new Error(`Expected '${command}' to fail, but it didn't!`);
-    }
-
-    return result;
+    throw new Error(`Expected '${command}' to fail, but it didn't!`);
 }
