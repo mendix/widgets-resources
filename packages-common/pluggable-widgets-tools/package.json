@@ -102,7 +102,7 @@
     "webpack-merge": "^4.2.2"
   },
   "devDependencies": {
-    "@mendix/generator-widget": "^8.9.0",
+    "@mendix/generator-widget": ">=8.9.0",
     "cross-env": "^5.2.0",
     "fs-extra": "9.0.0",
     "shelljs": "^0.8.4",
