@@ -104,6 +104,7 @@
   },
   "devDependencies": {
     "@mendix/generator-widget": "^8.9.0",
+    "async": "^3.2.0",
     "async-mutex": "^0.2.2",
     "fs-extra": "9.0.0",
     "shelljs": "^0.8.4",

@@ -1,3 +1,4 @@
+const mapLimit = require("async/mapLimit");
 const { Mutex } = require("async-mutex");
 const { exec } = require("child_process");
 const { copy, readJson, writeJson } = require("fs-extra");
@@ -38,16 +39,14 @@ async function main() {
     const toolsPackagePath = join(__dirname, "..", packOutput.trim());
 
     const failures = (
-        await Promise.all(
-            CONFIGS.map(async config => {
-                try {
-                    await runTest(...config);
-                    return undefined;
-                } catch (e) {
-                    return [config, e];
-                }
-            })
-        )
+        await mapLimit(CONFIGS, 4, async config => {
+            try {
+                await runTest(...config);
+                return undefined;
+            } catch (e) {
+                return [config, e];
+            }
+        })
     ).filter(f => f);
 
     rm(toolsPackagePath);
