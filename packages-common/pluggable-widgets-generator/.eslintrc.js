@@ -1,33 +1,13 @@
-module.exports = {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es6": true,
-        "jest/globals": true
+const deepmerge = require("deepmerge");
+
+const base = require("../pluggable-widgets-tools/configs/eslint.js.base.json");
+
+const config = deepmerge(base, {
+    root: true,
+    env: {
+        node: true
     },
-    "extends": [
-        "eslint:recommended"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "rules": {
-        "indent": [
-            "error",
-            4
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
-    }
-};
+    ignorePatterns: ["generators/app/templates"]
+});
+
+module.exports = config;
