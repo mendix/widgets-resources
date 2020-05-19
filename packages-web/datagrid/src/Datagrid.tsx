@@ -1,8 +1,9 @@
 import { Children, createElement, ReactElement, useCallback, useMemo, useState } from "react";
 import { DatagridContainerProps } from "../typings/DatagridProps";
-import { useSortBy, useTable } from "react-table";
+import { TableInstance, useColumnOrder, useSortBy, useTable } from "react-table";
 import { Pagination } from "./components/Pagination";
 import { ColumnSelector } from "./components/ColumnSelector";
+import classNames from "classnames";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const [page, setPage] = useState(0);
@@ -15,7 +16,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 accessor: `col_${index}`
             })) || [],
         [props.columns]
-    ) as any;
+    ) as any[];
     const [bodySize, setBodySize] = useState(0);
     const isInfinite = useMemo(() => !props.pagingEnabled, [props.pagingEnabled]);
 
@@ -61,7 +62,16 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         }
     };
 
-    const { getTableProps, headerGroups, rows, prepareRow, getTableBodyProps, allColumns } = useTable(
+    const {
+        getTableProps,
+        headerGroups,
+        rows,
+        prepareRow,
+        getTableBodyProps,
+        allColumns,
+        setColumnOrder,
+        visibleColumns
+    } = useTable(
         {
             columns,
             data,
@@ -70,8 +80,11 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             disableSortBy: !props.columnsSortable,
             initialState: { pageSize: props.pageSize }
         } as any,
-        useSortBy
-    );
+        useSortBy,
+        useColumnOrder
+    ) as TableInstance<object> & {
+        setColumnOrder: (order: any[]) => void;
+    };
 
     const trackScrolling = useCallback(
         e => {
@@ -87,9 +100,50 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
 
     function calculateBodyHeight(ref: HTMLTableSectionElement): void {
         if (ref && isInfinite && bodySize <= 0 && hasMoreItems) {
-            setBodySize(ref.clientHeight - 20);
+            setBodySize(ref.clientHeight - 30);
         }
     }
+
+    /* DRAG EVENTS */
+    const [dragOver, setDragOver] = useState("");
+    const handleDragStart = (e: any): void => {
+        const { id } = e.target;
+        e.dataTransfer.setData("colDestination", id);
+    };
+
+    const handleDragOver = (e: any): void => {
+        e.preventDefault();
+    };
+
+    const handleDragEnter = (e: any): void => {
+        const { id } = e.target;
+        setDragOver(id);
+    };
+
+    const handleOnDrop = (e: any): void => {
+        const { id: colOrigin } = e.target;
+        const colDestination = e.dataTransfer.getData("colDestination");
+
+        const colOriginIndex = visibleColumns.findIndex((col: any) => col.id === colOrigin);
+        const colDestinationIndex = visibleColumns.findIndex((col: any) => col.id === colDestination);
+
+        const newOrder = [...visibleColumns];
+        newOrder[colOriginIndex] = colDestination;
+        newOrder[colDestinationIndex] = colOrigin;
+        setColumnOrder(newOrder);
+        setDragOver("");
+    };
+
+    const draggableProps = props.columnsDraggable
+        ? {
+              draggable: true,
+              onDragStart: handleDragStart,
+              onDragOver: handleDragOver,
+              onDrop: handleOnDrop,
+              onDragEnter: handleDragEnter
+          }
+        : {};
+    /* END DRAG EVENTS */
 
     return (
         <div className={props.class}>
@@ -103,10 +157,15 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                         <tr {...headerGroup.getHeaderGroupProps()} key={`headers_row_${index}`}>
                             {headerGroup.headers.map((column: any, index: number) => (
                                 <th
-                                    className={props.columnsSortable ? "clickable" : ""}
+                                    id={column.id}
+                                    className={classNames(
+                                        props.columnsSortable ? "clickable" : "",
+                                        column.id === dragOver ? "dragging" : ""
+                                    )}
                                     {...column.getHeaderProps()}
                                     {...(props.columnsSortable ? column.getSortByToggleProps() : {})}
                                     key={`headers_column_${index}`}
+                                    {...draggableProps}
                                 >
                                     {column.render("Header")}
                                     <div className="column-options">
