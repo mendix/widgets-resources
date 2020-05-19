@@ -1,9 +1,8 @@
 import { Children, createElement, ReactElement, useCallback, useMemo, useState } from "react";
 import { DatagridContainerProps } from "../typings/DatagridProps";
-import { useBlockLayout, useResizeColumns, useSortBy, useTable } from "react-table";
+import { useSortBy, useTable } from "react-table";
 import { Pagination } from "./components/Pagination";
 import { ColumnSelector } from "./components/ColumnSelector";
-import classNames from "classnames";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const [page, setPage] = useState(0);
@@ -17,6 +16,8 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             })) || [],
         [props.columns]
     ) as any;
+    const [bodySize, setBodySize] = useState(0);
+    const isInfinite = useMemo(() => !props.pagingEnabled, [props.pagingEnabled]);
 
     const datasourceData = useMemo(
         () =>
@@ -33,7 +34,6 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
 
     const data = useMemo(() => {
         if (!props.pagingEnabled) {
-            // Carregar itens anteriores
             setItems(items => Array.from(new Set([...(items || []), ...datasourceData])));
         }
         props.datasource.setLimit(props.pageSize);
@@ -57,11 +57,8 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             column: { id: string };
         }) => {
             const content = data[index][`content_${id}`];
-            return Children.count(content.children) > 0 ? content : value;
-        },
-        minWidth: 30,
-        width: 150,
-        maxWidth: 400
+            return Children.count(content.props.children) > 0 ? content : value;
+        }
     };
 
     const { getTableProps, headerGroups, rows, prepareRow, getTableBodyProps, allColumns } = useTable(
@@ -73,10 +70,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             disableSortBy: !props.columnsSortable,
             initialState: { pageSize: props.pageSize }
         } as any,
-        useSortBy,
-        // usePagination,
-        useBlockLayout,
-        useResizeColumns
+        useSortBy
     );
 
     const trackScrolling = useCallback(
@@ -91,72 +85,74 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         [hasMoreItems]
     );
 
-    // const rowSelector = props.pagingEnabled ? page : rows;
+    function calculateBodyHeight(ref: HTMLTableSectionElement): void {
+        if (ref && isInfinite && bodySize <= 0 && hasMoreItems) {
+            setBodySize(ref.clientHeight - 20);
+        }
+    }
 
     return (
-        <div className={classNames(props.class, "table")} {...getTableProps()}>
+        <div className={props.class}>
             <div className="header">
                 <span>Header</span>
                 {props.columnsHidable && <ColumnSelector allColumns={allColumns} />}
             </div>
-            <div className="thead" role="rowgroup">
-                {headerGroups.map((headerGroup: any, index: number) => (
-                    <div {...headerGroup.getHeaderGroupProps()} className="tr" key={`headers_row_${index}`}>
-                        {headerGroup.headers.map((column: any, index: number) => (
-                            <div
-                                className={classNames("th", props.columnsSortable ? "clickable" : "")}
-                                {...column.getHeaderProps()}
-                                {...(props.columnsSortable ? column.getSortByToggleProps() : {})}
-                                key={`headers_column_${index}`}
-                                style={{
-                                    width:
-                                        column.width > column.maxWidth
-                                            ? column.maxWidth
-                                            : column.width < column.minWidth
-                                            ? column.minWidth
-                                            : column.width
-                                }}
-                            >
-                                {column.render("Header")}
-                                <div className="column-options">
-                                    {props.columnsSortable && (
-                                        <span className="sort-text">
-                                            {column.isSorted ? (column.isSortedDesc ? "▼" : "▲") : ""}
-                                        </span>
-                                    )}
-                                    {props.columnsResizable && (
-                                        <div {...column.getResizerProps()} className="column-resizer" />
-                                    )}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                ))}
-            </div>
-            <div className="tbody" {...getTableBodyProps()} onScroll={trackScrolling}>
-                {rows.map((row: any, index: number) => {
-                    prepareRow(row);
-                    return (
-                        <div className="tr" {...row.getRowProps()} key={`row_${index}`}>
-                            {row.cells.map((cell: any, index: number) => (
-                                <div className="td" {...cell.getCellProps()} key={`column_${index}`}>
-                                    {cell.render("Cell")}
-                                </div>
+            <table {...getTableProps()} className="table">
+                <thead role="rowgroup">
+                    {headerGroups.map((headerGroup: any, index: number) => (
+                        <tr {...headerGroup.getHeaderGroupProps()} key={`headers_row_${index}`}>
+                            {headerGroup.headers.map((column: any, index: number) => (
+                                <th
+                                    className={props.columnsSortable ? "clickable" : ""}
+                                    {...column.getHeaderProps()}
+                                    {...(props.columnsSortable ? column.getSortByToggleProps() : {})}
+                                    key={`headers_column_${index}`}
+                                >
+                                    {column.render("Header")}
+                                    <div className="column-options">
+                                        {props.columnsSortable && (
+                                            <span className="sort-text">
+                                                {column.isSorted ? (column.isSortedDesc ? "▼" : "▲") : ""}
+                                            </span>
+                                        )}
+                                        {/* {props.columnsResizable && (*/}
+                                        {/*    <div {...column.getResizerProps()} className="column-resizer" />*/}
+                                        {/* )}*/}
+                                    </div>
+                                </th>
                             ))}
-                        </div>
-                    );
-                })}
-            </div>
-            <div className="tfoot">
-                <div className="tr">
-                    <div className="td">
-                        {props.pagingEnabled && (
-                            <Pagination page={page} setPage={setPage} hasMoreItems={hasMoreItems} />
-                        )}
-                        Showing from items till {(page + 1) * props.pageSize}
-                    </div>
-                </div>
-            </div>
+                        </tr>
+                    ))}
+                </thead>
+                <tbody
+                    {...getTableBodyProps()}
+                    className={isInfinite ? "infinite-loading" : ""}
+                    ref={calculateBodyHeight}
+                    onScroll={isInfinite ? trackScrolling : undefined}
+                    style={isInfinite && bodySize > 0 ? { maxHeight: bodySize } : { backgroundColor: "red" }}
+                >
+                    {rows.map((row, index) => {
+                        prepareRow(row);
+                        return (
+                            <tr {...row.getRowProps()} key={`row_${index}`}>
+                                {row.cells.map((cell, index) => (
+                                    <td {...cell.getCellProps()} key={`column_${index}`}>
+                                        {cell.render("Cell")}
+                                    </td>
+                                ))}
+                            </tr>
+                        );
+                    })}
+                </tbody>
+                <tfoot className="tfoot">
+                    <tr className="tr">
+                        <td className="td">
+                            {!isInfinite && <Pagination page={page} setPage={setPage} hasMoreItems={hasMoreItems} />}
+                            {isInfinite && <strong>Showing items till {(page + 1) * props.pageSize}</strong>}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     );
 }
