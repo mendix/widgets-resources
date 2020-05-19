@@ -1,13 +1,12 @@
-/*jshint -W108,-W069*/
-"use strict";
-var semver = require("semver");
+const semver = require("semver");
 
 function _promptWidgetProperties(dir, widgetName) {
     return [
         {
             type: "input",
             name: "widgetName",
-            validate: function (input) {
+            validate: function(input) {
+                // eslint-disable-next-line wrap-regex
                 if (/^([a-zA-Z]*)$/.test(input)) {
                     return true;
                 }
@@ -46,7 +45,7 @@ function _promptWidgetProperties(dir, widgetName) {
         {
             type: "input",
             name: "version",
-            validate: function (input) {
+            validate(input) {
                 if (semver.valid(input) && semver.satisfies(input, ">=0.0.1")) {
                     return true;
                 }
@@ -66,7 +65,7 @@ function _promptWidgetProperties(dir, widgetName) {
             type: "input",
             name: "projectPath",
             message: "Mendix Project path",
-            default: dir ? dir : "./dist/MxTestProject",
+            default: dir ? dir : "./dist/MxTestProject"
         },
         {
             type: "list",
@@ -118,7 +117,8 @@ function _promptWidgetProperties(dir, widgetName) {
             ],
             default: "full",
             store: true
-        }];
+        }
+    ];
 }
 
 function _promptTestsInfo(props) {
@@ -128,7 +128,7 @@ function _promptTestsInfo(props) {
                 type: "confirm",
                 name: "unitTests",
                 message: "Add unit tests for the widget ? (recommended for Full Boilerplate)",
-                default: props.boilerplate && props.boilerplate === "full" ? true : false
+                default: !!(props.boilerplate && props.boilerplate === "full")
             }
         ];
         if (props.platform && props.platform === "web") {
@@ -136,7 +136,7 @@ function _promptTestsInfo(props) {
                 type: "confirm",
                 name: "e2eTests",
                 message: "Add End-to-end tests for the widget ? (recommended for Full Boilerplate)",
-                default: props.boilerplate && props.boilerplate === "full" ? true : false
+                default: !!(props.boilerplate && props.boilerplate === "full")
             });
         }
 

@@ -10,7 +10,7 @@ module.exports = {
             chalk.bold.bgBlueBright(" | |\\/| | > <   ") + " \\ \\ /\\ / / |/ _  |/ _  |/ _ \\ __| ",
             chalk.bold.bgBlueBright(" | |  | |/ . \\  ") + "  \\ V  V /| | (_| | (_| |  __/ |_  ",
             chalk.bold.bgBlueBright(" |_|  |_/_/ \\_\\ ") + "   \\_/\\_/ |_|\\__._|\\__. |\\___|\\__| ",
-            chalk.bold.bgBlueBright("                ")+"                   __/ |          ",
+            chalk.bold.bgBlueBright("                ") + "                   __/ |          ",
             "                                  |___/           ",
             " Generator, version: " + pkg.version,
             " Issues? Please report them at : " + chalk.italic.blueBright(pkg.bugs.url),

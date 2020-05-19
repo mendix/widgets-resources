@@ -1,11 +1,11 @@
 # Pluggable Widgets Generator
- 
- ![npm version](https://badge.fury.io/js/%40mendix%2Fgenerator-widget.svg) 
- ![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
- ![Build Status](https://travis-ci.org/mendix/pluggable-widgets-generator.svg?branch=master)
- ![npm](https://img.shields.io/npm/dm/@mendix/generator-widget)
- ![GitHub release](https://img.shields.io/github/release/mendix/pluggable-widgets-generator)
- ![GitHub issues](https://img.shields.io/github/issues/mendix/pluggable-widgets-generator)
+
+![npm version](https://badge.fury.io/js/%40mendix%2Fgenerator-widget.svg)
+![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
+![Build Status](https://travis-ci.org/mendix/pluggable-widgets-generator.svg?branch=master)
+![npm](https://img.shields.io/npm/dm/@mendix/generator-widget)
+![GitHub release](https://img.shields.io/github/release/mendix/pluggable-widgets-generator)
+![GitHub issues](https://img.shields.io/github/issues/mendix/pluggable-widgets-generator)
 
 > [Yeoman](http://yeoman.io) generator for Mendix Pluggable Widgets.
 
@@ -33,6 +33,7 @@ yo @mendix/widget
 ```
 
 or automatically create the folder using:
+
 ```bash
 yo @mendix/widget widget name
 ```
@@ -43,16 +44,16 @@ yo @mendix/widget widget name
 
 The following information needs to be provided about your widget:
 
-* name
-* description
-* organization
-* copyright
-* license
-* version
-* author
-* Mendix Project path
-* programming language
-* platform
+-   name
+-   description
+-   organization
+-   copyright
+-   license
+-   version
+-   author
+-   Mendix Project path
+-   programming language
+-   platform
 
 Press <Enter> if you want to skip and use default values.
 
@@ -73,7 +74,9 @@ npm run build
 ```bash
 npm run release
 ```
+
 ---
+
 For more informations, visit our [Mendix Pluggable Widget Tools repository](https://github.com/mendix/pluggable-widgets-tools)
 
 ### 2.2. Which template do you want to use for the widget?
@@ -83,9 +86,9 @@ For more informations, visit our [Mendix Pluggable Widget Tools repository](http
 The full widget boiler plate is a React fully developed and tested Mendix widget that shows a value as a badge or a color label (just available for web/responsive platform).
 It has the following features:-
 
-* Display as a badge or a color label
-* Attach actions to onClick event
-* Set static data text when the dynamic data is not specified
+-   Display as a badge or a color label
+-   Attach actions to onClick event
+-   Set static data text when the dynamic data is not specified
 
 #### Empty widget
 
@@ -105,14 +108,15 @@ The tool will then create Copied files, and run `npm install` to install develop
 
 ### NOTE
 
-To use the webpack-dev-server while in your development; 
-* start the Mendix Studio Pro from your Mendix project path or by default `/dist/MxTestProject`. then run:
+To use the webpack-dev-server while in your development;
+
+-   start the Mendix Studio Pro from your Mendix project path or by default `/dist/MxTestProject`. then run:
 
 ```bash
 npm start
 ```
 
-* If you are running the generator through many OS (Using parallels or any other virtualization software), make sure you have the right privileges and use the same OS for generation and files manipulation.
+-   If you are running the generator through many OS (Using parallels or any other virtualization software), make sure you have the right privileges and use the same OS for generation and files manipulation.
 
 ## Issues
 
