@@ -35,9 +35,7 @@ export class AppEvents extends Component<Props> {
             this.isConnected = (await NetInfo.fetch()).isConnected;
             this.unsubscribeNetworkEventListener = NetInfo.addEventListener(this.onConnectionChangeHandler);
         }
-    }
 
-    componentDidUpdate(): void {
         if (!this.onLoadTriggered && this.props.onLoadAction?.canExecute) {
             this.onLoadTriggered = true;
             executeAction(this.props.onLoadAction);
