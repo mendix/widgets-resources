@@ -1,4 +1,4 @@
-import { input, border }                    from "../variables";
+import { input }                    from "../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
 import { DropDownType }             from "../../types/widgets";
 /*
@@ -50,7 +50,7 @@ export const DropDown: DropDownType = {
     },
     menuWrapper: {
         // All ViewStyle properties are allowed
-        borderRadius: border.radius,
+        borderRadius: 12,
         shadowColor: "#000",
         shadowOpacity: 0.2,
         shadowRadius: 10,
@@ -59,9 +59,9 @@ export const DropDown: DropDownType = {
 	},
 	itemContainer: {
         // All ViewStyle properties are allowed
-		maxWidth:500,
-		paddingVertical: input.paddingVertical,
-        paddingHorizontal: input.paddingHorizontal,
+        maxWidth:500,
+        paddingVertical: 6,
+        paddingHorizontal: 16,
 	},
     item: {
         // All TextStlye properties are allowed
