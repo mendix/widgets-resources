@@ -104,13 +104,14 @@
   },
   "devDependencies": {
     "@mendix/generator-widget": "^8.9.0",
+    "cross-env": "^5.2.0",
     "fs-extra": "9.0.0",
     "shelljs": "^0.8.4",
     "tree-kill": "^1.2.2",
     "yeoman-test": "^2.6.0"
   },
   "scripts": {
-    "test": "jest --ci --testPathIgnorePatterns /tests/projects/",
-    "test:cross-platform": "npm test"
+    "test": "cross-env LIMIT_TESTS=true npm run test:cross-platform",
+    "test:cross-platform": "jest --testTimeout=500000 tests/commands.spec.js"
   }
 }
