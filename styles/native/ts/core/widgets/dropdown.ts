@@ -1,6 +1,6 @@
-import { input }                    from "../variables";
+import { border, contrast, font, input } from "../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
-import { DropDownType }             from "../../types/widgets";
+import { DropDownType } from "../../types/widgets";
 /*
 
 DISCLAIMER:
@@ -23,7 +23,7 @@ export const DropDown: DropDownType = {
         ...TextBox.label,
     },
     value: {
-        // All TextStyle properties are allowed
+        // All TextStyle properties & placeholderTextColor are allowed
         color: input.color,
         borderColor: input.borderColor,
         backgroundColor: input.backgroundColor,
@@ -35,6 +35,8 @@ export const DropDown: DropDownType = {
 
         paddingHorizontal: input.paddingHorizontal,
         paddingVertical: input.paddingVertical,
+
+        placeholderTextColor: input.placeholderTextColor, // Only applied when useUniformDesign is true
     },
     valueDisabled: {
         // All TextStyle properties are allowed
@@ -45,12 +47,12 @@ export const DropDown: DropDownType = {
         ...TextBox.validationMessage,
     },
     /*  New dropdown styles start */
-    touchable: {
-        // All ViewStyle & rippleColor properties are allowed
+    valueContainer: {
+        // All ViewStyle properties & rippleColor are allowed
     },
     menuWrapper: {
         // All ViewStyle properties are allowed
-        borderRadius: 12,
+        borderRadius: border.radius,
         shadowColor: "#000",
         shadowOpacity: 0.2,
         shadowRadius: 10,
@@ -65,6 +67,14 @@ export const DropDown: DropDownType = {
 	},
     item: {
         // All TextStlye properties are allowed
+    },
+    selectedItem: {
+        // All TextStlye properties are allowed
+        fontWeight: font.weightBold
+    },
+    selectedItemContainer: {
+        // All ViewStyle properties are allowed
+        backgroundColor: contrast.lowest
     },
     /*  New dropdown styles end */
     useUniformDesign: true,
@@ -90,7 +100,7 @@ export const DropDownVertical: DropDownType = {
     label: TextBoxVertical.label,
     value: DropDown.value,
     validationMessage: TextBoxVertical.validationMessage,
-    touchable: DropDown.touchable,
+    valueContainer: DropDown.valueContainer,
     menuWrapper: DropDown.menuWrapper,
     itemContainer: DropDown.itemContainer,
     item: DropDown.item,
