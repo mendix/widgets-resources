@@ -3,7 +3,7 @@ import { basename, join } from "path";
 
 const cwd = process.cwd();
 const actionsDir = join(cwd, "dist/tsc/");
-const testProjectDir = join(cwd, "../test-project/mxproject/javascriptsource/nativemobileactions/actions/");
+const testProjectDir = join(cwd, "../test-project/mxproject/javascriptsource/nativemobileresources/actions/");
 
 // eslint-disable-next-line no-console
 main().catch(console.error);

@@ -17,8 +17,6 @@ type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
  * @param {"NativeMobileActions.PictureQuality.original"|"NativeMobileActions.PictureQuality.low"|"NativeMobileActions.PictureQuality.medium"|"NativeMobileActions.PictureQuality.high"|"NativeMobileActions.PictureQuality.custom"} pictureQuality - The default picture quality is 'Medium'.
  * @param {Big} maximumWidth - The picture will be scaled to this maximum pixel width, while maintaing the aspect ratio.
  * @param {Big} maximumHeight - The picture will be scaled to this maximum pixel height, while maintaing the aspect ratio.
- * @param {string} widthAttributeName - Integer attribute of the image entity. If set, will receive the width of the captured picture.
- * @param {string} heightAttributeName - Integer attribute of the image entity. If set, will receive the height of the captured picture.
  * @returns {Promise.<boolean>}
  */
 export async function TakePicture(
@@ -26,9 +24,7 @@ export async function TakePicture(
     pictureSource?: PictureSource,
     pictureQuality?: PictureQuality,
     maximumWidth?: BigJs.Big,
-    maximumHeight?: BigJs.Big,
-    widthAttributeName?: string,
-    heightAttributeName?: string
+    maximumHeight?: BigJs.Big
 ): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/react-native-community/react-native-image-picker/blob/master/docs/Reference.md
@@ -47,43 +43,13 @@ export async function TakePicture(
             new Error("Picture quality is set to 'Custom', but no maximum width or height was provided")
         );
     }
-    if (widthAttributeName) {
-        if (!picture.isNumeric(widthAttributeName)) {
-            return Promise.reject(
-                new Error(
-                    "Attribute " +
-                        widthAttributeName +
-                        " is no integer attribute or does not exist on entity " +
-                        picture.getEntity()
-                )
-            );
-        }
-    }
-    if (heightAttributeName) {
-        if (!picture.isNumeric(heightAttributeName)) {
-            return Promise.reject(
-                new Error(
-                    "Attribute " +
-                        heightAttributeName +
-                        " is no integer attribute or does not exist on entity " +
-                        picture.getEntity()
-                )
-            );
-        }
-    }
 
     return takePicture()
-        .then(response => {
-            if (!response || response.didCancel || !response.uri) {
+        .then(uri => {
+            if (!uri) {
                 return false;
             }
-            if (widthAttributeName) {
-                picture.set(widthAttributeName, response.width);
-            }
-            if (heightAttributeName) {
-                picture.set(heightAttributeName, response.height);
-            }
-            return storeFile(picture, response.uri);
+            return storeFile(picture, uri);
         })
         .catch(error => {
             if (error === "canceled") {
@@ -92,7 +58,7 @@ export async function TakePicture(
             throw new Error(error);
         });
 
-    function takePicture(): Promise<any | undefined> {
+    function takePicture(): Promise<string | undefined> {
         return new Promise((resolve, reject) => {
             const options = getOptions();
             const method = getPictureMethod();
@@ -110,7 +76,7 @@ export async function TakePicture(
                     return reject(new Error(response.error));
                 }
 
-                return resolve(response);
+                return resolve(response.uri);
             });
         });
     }
