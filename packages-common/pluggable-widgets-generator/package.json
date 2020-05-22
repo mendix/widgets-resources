@@ -4,6 +4,7 @@
   "description": "Mendix Pluggable Widgets Generator",
   "license": "Apache-2.0",
   "copyright": "2020 Mendix Technology B.V.",
+  "homepage": "https://github.com/mendix/widgets-resources/tree/master/packages-common/pluggable-widgets-generator",
   "main": "app/index.js",
   "repository": {
     "type": "git",
@@ -23,6 +24,9 @@
     "widget",
     "scaffold"
   ],
+  "engines": {
+    "node": ">=10.15"
+  },
   "bugs": {
     "url": "https://github.com/mendix/widgets-resources/issues"
   },
