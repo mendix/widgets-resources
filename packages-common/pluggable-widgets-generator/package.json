@@ -1,6 +1,6 @@
 {
   "name": "@mendix/generator-widget",
-  "version": "8.9.0",
+  "version": "8.9.1",
   "description": "Mendix Pluggable Widgets Generator",
   "license": "Apache-2.0",
   "copyright": "2020 Mendix Technology B.V.",
@@ -8,10 +8,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/mendix/widgets-resources"
-  },
-  "author": {
-    "name": "Diego Antonelli",
-    "email": "diego.antonelli@mendix.com"
   },
   "scripts": {
     "lint": "..\"/../node_modules/.bin/eslint\" --config .eslintrc.js --ext .jsx,.js,.ts,.tsx generators/",
@@ -28,7 +24,7 @@
     "scaffold"
   ],
   "bugs": {
-    "url": "https://github.com/mendix/pluggable-widgets-generator/issues"
+    "url": "https://github.com/mendix/widgets-resources/issues"
   },
   "dependencies": {
     "chalk": "^4.0.0",
