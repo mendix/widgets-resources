@@ -14,7 +14,7 @@ export async function GetDeviceInfo(): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
 
     return Promise.all([
-        createMxObject("NativeMobileActions.DeviceInfo"),
+        createMxObject("NativeMobileResources.DeviceInfo"),
         DeviceInfo.getBatteryLevel(),
         DeviceInfo.getFontScale(),
         DeviceInfo.getFreeDiskStorage(),
