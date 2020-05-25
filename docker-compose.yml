@@ -1,5 +1,27 @@
 version: "2.2"
 services:
+    svn:
+        image: jgsqware/svn-client
+        entrypoint: |
+            sh -c 'set -e
+
+            echo "Checking out sprinter project..."
+            rm -rf /source/mendixProject
+            mkdir /source/mendixProject
+            cd /source/mendixProject
+            svn checkout --quiet --username widgets@mendix.com --password yourpassword! https://teamserver.sprintr.com/1403e444-c23e-41c7-ad7f-33ba234fccee/branches/nightly
+            echo "Checking out sprinter project done!"
+
+            touch /tmp/deploy.pid
+            while :; do sleep 15; done'
+        working_dir: /source
+        volumes:
+            - .:/source
+        healthcheck:
+            test: bash -c "[[ -f /tmp/deploy.pid ]]"
+            interval: 10s
+            timeout: 2s
+            retries: 30
     mxbuild:
         image: mono:latest
         entrypoint: |
@@ -8,9 +30,9 @@ services:
             echo "Installing dependencies..."
             apt-get -qq update
             apt-get -qq install -y wget subversion
-            wget -q https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz -O /tmp/openjdk-11.0.2_linux-x64_bin.tar.gz
+            wget -q https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz -O /tmp/openjdk.tar.gz
             mkdir /usr/lib/jvm
-            tar xfz /tmp/openjdk-11.0.2_linux-x64_bin.tar.gz --directory /usr/lib/jvm
+            tar xfz /tmp/openjdk.tar.gz --directory /usr/lib/jvm
             echo "Installing dependencies done!"
 
             echo "Downloading and unzipping MX build..."
@@ -19,15 +41,9 @@ services:
             tar xfz /tmp/mxbuild.tar.gz --directory /usr/lib/mxbuild
             echo "Downloading and unzipping MX build done!"
 
-            echo "Checking out sprinter project..."
-            mkdir /usr/lib/mendixProject
-            cd /usr/lib/mendixProject
-            svn checkout --quiet --username widgets@mendix.com --password yourPassword https://teamserver.sprintr.com/1403e444-c23e-41c7-ad7f-33ba234fccee/branches/nightly
-            echo "Checking out sprinter project done!"
-
             # copy latest widget mpk to the mendix project
             echo "Spinning up mxbuild..."
-            mono /usr/lib/mxbuild/modeler/mxbuild.exe  --java-home="/usr/lib/jvm/jdk-11.0.2" --java-exe-path="/usr/lib/jvm/jdk-11.0.2/bin/java" --loose-version-check "/usr/lib/mendixProject/nightly/Badge.mpr"
+            mono /usr/lib/mxbuild/modeler/mxbuild.exe  --java-home="/usr/lib/jvm/jdk-11.0.2" --java-exe-path="/usr/lib/jvm/jdk-11.0.2/bin/java" --loose-version-check "/source/mendixProject/nightly/Badge.mpr"
             echo "Spinning up mxbuild done!"
 
             echo Done!
@@ -41,3 +57,22 @@ services:
             interval: 10s
             timeout: 2s
             retries: 30
+        depends_on:
+            svn:
+                condition: service_healthy
+    runtime:
+        image: mendix/runtime-base:8.9.0.5487-bionic
+        user: root
+        entrypoint: |
+            sh -c 'set -e
+                apt-get -qq update
+                apt-get -qq install -y wget gnupg
+                wget -q -O - https://packages.mendix.com/mendix-debian-archive-key.asc | apt-key add -
+                echo "deb http://packages.mendix.com/platform/debian/ buster main contrib non-free" | tee /etc/apt/sources.list.d/m2ee.list
+
+                apt-get -qq update
+                apt-get -qq install -y m2ee-tools
+            '
+        depends_on:
+            mxbuild:
+                condition: service_healthy
