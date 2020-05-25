@@ -12,13 +12,13 @@ services:
             svn checkout --quiet --username widgets@mendix.com --password yourpassword! https://teamserver.sprintr.com/1403e444-c23e-41c7-ad7f-33ba234fccee/branches/nightly
             echo "Checking out sprinter project done!"
 
-            touch /tmp/deploy.pid
+            touch /tmp/done.pid
             while :; do sleep 15; done'
         working_dir: /source
         volumes:
             - .:/source
         healthcheck:
-            test: bash -c "[[ -f /tmp/deploy.pid ]]"
+            test: /bin/sh -c "[[ -f /tmp/done.pid ]]"
             interval: 10s
             timeout: 2s
             retries: 30
@@ -29,7 +29,7 @@ services:
 
             echo "Installing dependencies..."
             apt-get -qq update
-            apt-get -qq install -y wget subversion
+            apt-get -qq install -y wget
             wget -q https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz -O /tmp/openjdk.tar.gz
             mkdir /usr/lib/jvm
             tar xfz /tmp/openjdk.tar.gz --directory /usr/lib/jvm
