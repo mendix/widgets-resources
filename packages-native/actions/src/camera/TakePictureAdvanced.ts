@@ -56,6 +56,7 @@ export async function TakePictureAdvanced(
                 pictureData.set("IsVertical", response.isVertical);
                 pictureData.set("Width", response.width);
                 pictureData.set("Height", response.height);
+                pictureData.set("FileName", response.fileName);
                 pictureData.set("FileSize", response.fileSize);
                 pictureData.set("FileType", response.type);
             }
