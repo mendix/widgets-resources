@@ -20,7 +20,7 @@ type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
  * @param {MxObject} pictureData - Additional info about the picture will be stored in this object. Create it before calling this action.
  * @returns {Promise.<boolean>}
  */
-export async function TakePicture(
+export async function TakePictureAdvanced(
     picture?: mendix.lib.MxObject,
     pictureSource?: PictureSource,
     pictureQuality?: PictureQuality,
