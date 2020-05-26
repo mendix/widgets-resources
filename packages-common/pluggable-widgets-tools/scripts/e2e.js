@@ -1,9 +1,11 @@
-const { cd, exec, mkdir, rm, tempdir } = require("shelljs");
+const { exec } = require("child_process");
+const findFreePort = require("find-free-port");
 const { readFile } = require("fs").promises;
-const path = require("path");
-const { promisify } = require("util");
 const fetch = require("node-fetch");
+const { join } = require("path");
 const semverCompare = require("semver/functions/rcompare");
+const { rm } = require("shelljs");
+const { promisify } = require("util");
 
 main().catch(e => {
     console.error(e);
@@ -20,7 +22,7 @@ async function main() {
     }
 
     rm("-rf", "mendixProject");
-    const sprintrProject = JSON.parse(await readFile("package.json")).config.testProjectId;
+    const sprintrProject = JSON.parse(await readFile("package.json"))?.config?.testProjectId;
     if (!sprintrProject) {
         throw new Error("duck you");
     }
@@ -33,6 +35,15 @@ async function main() {
     await execAsync(
         `${dockerStartCommand} -e MENDIX_VERSION=${latestRuntimeVersion} mono:latest /bin/bash /shared/mxbuild.sh`
     );
+    const freePort = await findFreePort(3000);
+    const runtimeContainerId = await execAsync(
+        `${dockerStartCommand} -d -u root -e MENDIX_VERSION=${latestRuntimeVersion} -p ${freePort}:8080 mendix/runtime-base:${latestRuntimeVersion}-bionic /bin/bash /shared/runtime.sh`
+    );
+    try {
+        exec(`wdio ${join(__dirname, "../test-configs/wdio.config.js")}`);
+    } finally {
+        await execAsync(`docker kill ${runtimeContainerId.trim()}`);
+    }
 }
 
 async function getLatestRuntimeVersion() {
