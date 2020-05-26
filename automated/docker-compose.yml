@@ -1,0 +1,47 @@
+version: "2.2"
+services:
+    svn:
+        image: jgsqware/svn-client
+        entrypoint: /bin/sh scripts/svn.sh
+        working_dir: /source
+        volumes:
+            - .:/source
+        environment:
+            - SPRINTR_USERNAME
+            - SPRINTR_PASSWORD
+        healthcheck:
+            test: /bin/sh -c "[[ -f /tmp/done.pid ]]"
+            interval: 10s
+            timeout: 2s
+            retries: 30
+    mxbuild:
+        image: mono:latest
+        entrypoint: /bin/bash scripts/mxbuild.sh
+        working_dir: /source
+        volumes:
+            - .:/source
+        healthcheck:
+            test: /bin/bash -c "[[ -f /tmp/deploy.pid ]]"
+            interval: 10s
+            timeout: 2s
+            retries: 30
+        depends_on:
+            svn:
+                condition: service_healthy
+    runtime:
+        image: mendix/runtime-base:8.9.0.5487-bionic
+        user: root
+        entrypoint: /bin/sh scripts/runtime.sh
+        working_dir: /source
+        volumes:
+            - .:/source
+        depends_on:
+            mxbuild:
+                condition: service_healthy
+        expose:
+            - 8080
+        healthcheck:
+            test: curl -f http://runtime:8080/
+            interval: 10s
+            timeout: 2s
+            retries: 20
