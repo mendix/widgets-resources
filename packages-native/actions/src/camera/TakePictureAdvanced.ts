@@ -18,56 +18,56 @@ type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
  * @param {Big} maximumWidth - The picture will be scaled to this maximum pixel width, while maintaing the aspect ratio.
  * @param {Big} maximumHeight - The picture will be scaled to this maximum pixel height, while maintaing the aspect ratio.
  * @param {MxObject} pictureData - Additional info about the picture will be stored in this object. Create it before calling this action.
- * @returns {Promise.<boolean>}
+ * @returns {Promise.<mendix.lib.MxObject>}
  */
 export async function TakePictureAdvanced(
     picture?: mendix.lib.MxObject,
     pictureSource?: PictureSource,
     pictureQuality?: PictureQuality,
     maximumWidth?: BigJs.Big,
-    maximumHeight?: BigJs.Big,
-    pictureData?: mendix.lib.MxObject
+    maximumHeight?: BigJs.Big
 ): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/react-native-community/react-native-image-picker/blob/master/docs/Reference.md
 
-    if (!picture) {
-        return Promise.reject(new Error("Input parameter 'Picture' is required"));
-    }
-
-    if (!picture.inheritsFrom("System.FileDocument")) {
-        const entity = picture.getEntity();
-        return Promise.reject(new Error(`Entity ${entity} does not inherit from 'System.FileDocument'`));
-    }
-
-    if (pictureQuality === "custom" && !maximumHeight && !maximumWidth) {
-        return Promise.reject(
-            new Error("Picture quality is set to 'Custom', but no maximum width or height was provided")
-        );
-    }
-
-    return takePicture()
-        .then((response: any) => {
-            if (!response || !response.uri) {
-                return false;
-            }
-            if (pictureData) {
-                pictureData.set("URI", response.uri);
-                pictureData.set("IsVertical", response.isVertical);
-                pictureData.set("Width", response.width);
-                pictureData.set("Height", response.height);
-                pictureData.set("FileName", response.fileName);
-                pictureData.set("FileSize", response.fileSize);
-                pictureData.set("FileType", response.type);
-            }
-            return storeFile(picture, response.uri);
-        })
-        .catch(error => {
-            if (error === "canceled") {
-                return false;
-            }
-            throw new Error(error);
+    return new Promise((resolve, reject) => {
+        if (!picture) {
+            return reject(new Error("Input parameter 'Picture' is required"));
+        }
+        if (!picture.inheritsFrom("System.FileDocument")) {
+            const entity = picture.getEntity();
+            return reject(new Error(`Entity ${entity} does not inherit from 'System.FileDocument'`));
+        }
+        if (pictureQuality === "custom" && !maximumHeight && !maximumWidth) {
+            return reject(new Error("Picture quality is set to 'Custom', but no maximum width or height was provided"));
+        }
+        createMxObject("NativeMobileResources.TakePictureData").then((resultObject: any) => {
+            takePicture()
+                .then((response: any) => {
+                    if (!response || !response.uri) {
+                        return resolve(resultObject);
+                    }
+                    storeFile(picture, response.uri).then(pictureTaken => {
+                        resultObject.set("PictureTaken", pictureTaken);
+                        resultObject.set("URI", response.uri);
+                        resultObject.set("IsVertical", response.isVertical);
+                        resultObject.set("Width", response.width);
+                        resultObject.set("Height", response.height);
+                        resultObject.set("FileName", response.fileName);
+                        resultObject.set("FileSize", response.fileSize);
+                        resultObject.set("FileType", response.type);
+                        resolve(resultObject);
+                    });
+                })
+                .catch(error => {
+                    if (error === "canceled") {
+                        resolve(resultObject);
+                    } else {
+                        throw new Error(error);
+                    }
+                });
         });
+    });
 
     function takePicture(): Promise<string | undefined> {
         return new Promise((resolve, reject) => {
@@ -208,6 +208,17 @@ export async function TakePictureAdvanced(
             ],
             { cancelable: false }
         );
+    }
+
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    function createMxObject(entity: string) {
+        return new Promise((resolve, reject) => {
+            mx.data.create({
+                entity,
+                callback: mxObject => resolve(mxObject),
+                error: () => reject(new Error(`Could not create '${entity}' object to store device info`))
+            });
+        });
     }
 
     // END USER CODE
