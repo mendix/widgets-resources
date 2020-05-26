@@ -15,3 +15,4 @@ detox/ios/nativeTemplate.app
 detox/*.log
 **/results
 **/screenshot
+mendixProject
