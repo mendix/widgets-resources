@@ -1,4 +1,4 @@
-import { input } from "../variables";
+import { border, contrast, font, input } from "../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
 /*
 
@@ -15,6 +15,56 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const DropDown = {
     container: Object.assign({}, TextBox.container),
     label: Object.assign({}, TextBox.label),
+    value: {
+        // All TextStyle properties & placeholderTextColor are allowed
+        color: input.color,
+        borderColor: input.borderColor,
+        backgroundColor: input.backgroundColor,
+        fontSize: input.fontSize,
+        fontFamily: input.fontFamily,
+        borderWidth: input.borderWidth,
+        borderRadius: input.borderRadius,
+        paddingHorizontal: input.paddingHorizontal,
+        paddingVertical: input.paddingVertical,
+        placeholderTextColor: input.placeholderTextColor,
+    },
+    valueDisabled: {
+        // All TextStyle properties are allowed
+        backgroundColor: input.disabledBackgroundColor,
+    },
+    validationMessage: Object.assign({}, TextBox.validationMessage),
+    /*  New dropdown styles start */
+    valueContainer: {
+    // All ViewStyle properties & rippleColor are allowed
+    },
+    menuWrapper: {
+        // All ViewStyle properties are allowed
+        borderRadius: border.radius,
+        shadowColor: "#000",
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
+        elevation: 16,
+    },
+    itemContainer: {
+        // All ViewStyle properties are allowed
+        maxWidth: 500,
+        paddingVertical: 6,
+        paddingHorizontal: 16,
+    },
+    item: {
+    // All TextStlye properties are allowed
+    },
+    selectedItem: {
+        // All TextStlye properties are allowed
+        fontWeight: font.weightBold,
+    },
+    selectedItemContainer: {
+        // All ViewStyle properties are allowed
+        backgroundColor: contrast.lowest,
+    },
+    /*  New dropdown styles end */
+    useUniformDesign: true,
+    /*  Old dropdown styles start */
     pickerIOS: {
         // All ViewStyle properties are allowed
         backgroundColor: input.backgroundColor,
@@ -29,31 +79,19 @@ export const DropDown = {
         // All ViewStyle properties are allowed
         backgroundColor: input.backgroundColor,
     },
-    value: {
-        // All TextStyle properties are allowed
-        color: input.color,
-        borderColor: input.borderColor,
-        backgroundColor: input.backgroundColor,
-        fontSize: input.fontSize,
-        fontFamily: input.fontFamily,
-        borderWidth: input.borderWidth,
-        borderRadius: input.borderRadius,
-        paddingHorizontal: input.paddingHorizontal,
-        paddingVertical: input.paddingVertical,
-    },
-    valueDisabled: {
-        // All TextStyle properties are allowed
-        backgroundColor: input.disabledBackgroundColor,
-    },
-    validationMessage: Object.assign({}, TextBox.validationMessage),
 };
 export const DropDownVertical = {
     container: TextBoxVertical.container,
     label: TextBoxVertical.label,
+    value: DropDown.value,
+    validationMessage: TextBoxVertical.validationMessage,
+    valueContainer: DropDown.valueContainer,
+    menuWrapper: DropDown.menuWrapper,
+    itemContainer: DropDown.itemContainer,
+    item: DropDown.item,
+    useUniformDesign: DropDown.useUniformDesign,
     pickerIOS: DropDown.pickerIOS,
     pickerItemIOS: DropDown.pickerItemIOS,
     pickerBackdropIOS: DropDown.pickerBackdropIOS,
     pickerTopIOS: DropDown.pickerTopIOS,
-    value: DropDown.value,
-    validationMessage: TextBoxVertical.validationMessage,
 };
