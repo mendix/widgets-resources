@@ -1,6 +1,6 @@
 import { border, contrast, font, input } from "../variables";
-import { TextBox, TextBoxVertical } from "./textbox";
-import { DropDownType } from "../../types/widgets";
+import { TextBox, TextBoxVertical }      from "./textbox";
+import { DropDownType }                  from "../../types/widgets";
 /*
 
 DISCLAIMER:
@@ -57,23 +57,23 @@ export const DropDown: DropDownType = {
         shadowOpacity: 0.2,
         shadowRadius: 10,
         elevation: 16,
-	},
-	itemContainer: {
+    },
+    itemContainer: {
         // All ViewStyle properties are allowed
-        maxWidth:500,
+        maxWidth: 500,
         paddingVertical: 6,
         paddingHorizontal: 16,
-	},
+    },
     item: {
         // All TextStlye properties are allowed
     },
     selectedItem: {
         // All TextStlye properties are allowed
-        fontWeight: font.weightBold
+        fontWeight: font.weightBold,
     },
     selectedItemContainer: {
         // All ViewStyle properties are allowed
-        backgroundColor: contrast.lowest
+        backgroundColor: contrast.lowest,
     },
     /*  New dropdown styles end */
     useUniformDesign: true,
@@ -103,7 +103,7 @@ export const DropDownVertical: DropDownType = {
     menuWrapper: DropDown.menuWrapper,
     itemContainer: DropDown.itemContainer,
     item: DropDown.item,
-    useUniformDesign: DropDown.value,
+    useUniformDesign: DropDown.useUniformDesign,
     pickerIOS: DropDown.pickerIOS,
     pickerItemIOS: DropDown.pickerItemIOS,
     pickerBackdropIOS: DropDown.pickerBackdropIOS,
