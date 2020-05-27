@@ -150,13 +150,28 @@ export interface DatePickerType {
 export interface DropDownType {
     container?: ViewStyle,
     label?: InputLabelType,
+    value?: {
+        placeholderTextColor?: string
+    } & TextStyle,
+    valueDisabled?: TextStyle,
+    validationMessage?: TextStyle,
+    /*  New dropdown styles start */
+    valueContainer?: {
+        rippleColor?: string
+    } & ViewStyle;
+    menuWrapper?: ViewStyle
+    item?: TextStyle;
+    itemContainer?: ViewStyle;
+    selectedItem?: TextStyle;
+    selectedItemContainer?: ViewStyle;
+    /*  New dropdown styles end */
+    useUniformDesign?: boolean; // Flag for using old dropdown design with PickerWheel in IOS
+    // Old dropdown styles start
     pickerIOS?: ViewStyle,
     pickerItemIOS?: ViewStyle,
     pickerBackdropIOS?: ViewStyle,
     pickerTopIOS?: ViewStyle,
-    value?: TextStyle,
-    valueDisabled?: TextStyle,
-    validationMessage?: TextStyle
+    // Old dropdown styles end
 }
 
 // Feedback
