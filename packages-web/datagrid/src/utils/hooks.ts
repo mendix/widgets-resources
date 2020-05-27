@@ -17,8 +17,7 @@ export function useData(
             datasource.items?.map(item =>
                 columns
                     .map((column, index) => ({
-                        [`col_${index}`]: column.attribute ? column.attribute(item).value : "",
-                        [`content_col_${index}`]: column.content ? column.content(item) : null
+                        [`col_${index}`]: column.hasWidgets ? column.content?.(item) : column.attribute?.(item).value
                     }))
                     .reduce((acc, current) => ({ ...acc, ...current }), {})
             ) || [],

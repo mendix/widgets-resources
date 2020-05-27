@@ -75,8 +75,8 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Header">
-                <property key="affixHeader" type="boolean" defaultValue="false">
-                    <caption>Affix Header</caption>
+                <property key="showHeader" type="boolean" defaultValue="false">
+                    <caption>Show header</caption>
                     <description/>
                 </property>
                 <property key="headerWidgets" type="widgets" required="false">
@@ -85,8 +85,8 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Footer">
-                <property key="affixFooter" type="boolean" defaultValue="false">
-                    <caption>Affix Footer</caption>
+                <property key="showFooter" type="boolean" defaultValue="false">
+                    <caption>Show footer</caption>
                     <description/>
                 </property>
                 <property key="footerWidgets" type="widgets" required="false">
@@ -95,12 +95,12 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Paging">
-                <property key="pagingEnabled" type="boolean" defaultValue="true">
-                    <caption>Page data</caption>
-                    <description/>
-                </property>
                 <property key="pageSize" type="integer" defaultValue="20">
                     <caption>Page size</caption>
+                    <description/>
+                </property>
+                <property key="pagingEnabled" type="boolean" defaultValue="true">
+                    <caption>Page data</caption>
                     <description/>
                 </property>
                 <property key="pagingPosition" type="enumeration" defaultValue="bottom">
