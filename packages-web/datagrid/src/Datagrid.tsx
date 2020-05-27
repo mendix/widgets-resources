@@ -1,6 +1,6 @@
 import { Children, createElement, ReactElement, useCallback, useMemo, useState } from "react";
 import { DatagridContainerProps } from "../typings/DatagridProps";
-import { TableInstance, useColumnOrder, useSortBy, useTable } from "react-table";
+import { TableInstance, useColumnOrder, useFlexLayout, useResizeColumns, useSortBy, useTable } from "react-table";
 import { Pagination } from "./components/Pagination";
 import { ColumnSelector } from "./components/ColumnSelector";
 import classNames from "classnames";
@@ -81,7 +81,9 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             initialState: { pageSize: props.pageSize }
         } as any,
         useSortBy,
-        useColumnOrder
+        useColumnOrder,
+        useFlexLayout,
+        useResizeColumns
     ) as TableInstance<object> & {
         setColumnOrder: (order: any[]) => void;
     };
@@ -151,41 +153,49 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 <span>Header</span>
                 {props.columnsHidable && <ColumnSelector allColumns={allColumns} />}
             </div>
-            <table {...getTableProps()} className="table">
-                <thead role="rowgroup">
+            <div {...getTableProps()} className="table">
+                <div role="rowgroup" className="thead">
                     {headerGroups.map((headerGroup: any, index: number) => (
-                        <tr {...headerGroup.getHeaderGroupProps()} key={`headers_row_${index}`}>
-                            {headerGroup.headers.map((column: any, index: number) => (
-                                <th
-                                    id={column.id}
-                                    className={classNames(
-                                        props.columnsSortable ? "clickable" : "",
-                                        column.id === dragOver ? "dragging" : ""
-                                    )}
-                                    {...column.getHeaderProps()}
-                                    {...(props.columnsSortable ? column.getSortByToggleProps() : {})}
-                                    key={`headers_column_${index}`}
-                                    {...draggableProps}
-                                >
-                                    {column.render("Header")}
-                                    <div className="column-options">
-                                        {props.columnsSortable && (
-                                            <span className="sort-text">
-                                                {column.isSorted ? (column.isSortedDesc ? "▼" : "▲") : ""}
-                                            </span>
+                        <div {...headerGroup.getHeaderGroupProps()} key={`headers_row_${index}`} className="tr">
+                            {headerGroup.headers.map((column: any, index: number) => {
+                                const extraClass = column.isSorted ? (column.isSortedDesc ? "desc" : "asc") : "";
+                                const { onClick, ...rest } = column.getHeaderProps(
+                                    props.columnsSortable ? column.getSortByToggleProps() : undefined
+                                );
+                                return (
+                                    <div
+                                        className={classNames(
+                                            "th",
+                                            extraClass,
+                                            props.columnsSortable ? "clickable" : "",
+                                            column.id === dragOver ? "dragging" : ""
                                         )}
-                                        {/* {props.columnsResizable && (*/}
-                                        {/*    <div {...column.getResizerProps()} className="column-resizer" />*/}
-                                        {/* )}*/}
+                                        {...rest}
+                                        key={`headers_column_${index}`}
+                                    >
+                                        <div
+                                            id={column.id}
+                                            className="column-header"
+                                            onClick={onClick}
+                                            {...draggableProps}
+                                        >
+                                            {column.render("Header")}
+                                        </div>
+                                        {props.columnsResizable && (
+                                            <div
+                                                {...column.getResizerProps()}
+                                                className={`column-resizer ${column.isResizing ? "isResizing" : ""}`}
+                                            />
+                                        )}
                                     </div>
-                                </th>
-                            ))}
-                        </tr>
+                                );
+                            })}
+                        </div>
                     ))}
-                </thead>
-                <tbody
+                </div>
+                <div
                     {...getTableBodyProps()}
-                    className={isInfinite ? "infinite-loading" : ""}
+                    className={classNames("tbody", isInfinite ? "infinite-loading" : "")}
                     ref={calculateBodyHeight}
                     onScroll={isInfinite ? trackScrolling : undefined}
                     style={isInfinite && bodySize > 0 ? { maxHeight: bodySize } : { backgroundColor: "red" }}
@@ -193,25 +203,25 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                     {rows.map((row, index) => {
                         prepareRow(row);
                         return (
-                            <tr {...row.getRowProps()} key={`row_${index}`}>
+                            <div {...row.getRowProps()} key={`row_${index}`} className="tr">
                                 {row.cells.map((cell, index) => (
-                                    <td {...cell.getCellProps()} key={`column_${index}`}>
+                                    <div {...cell.getCellProps()} key={`column_${index}`} className="td">
                                         {cell.render("Cell")}
-                                    </td>
+                                    </div>
                                 ))}
-                            </tr>
+                            </div>
                         );
                     })}
-                </tbody>
-                <tfoot className="tfoot">
-                    <tr className="tr">
-                        <td className="td">
+                </div>
+                <div className="tfoot">
+                    <div className="tr">
+                        <div className="td">
                             {!isInfinite && <Pagination page={page} setPage={setPage} hasMoreItems={hasMoreItems} />}
                             {isInfinite && <strong>Showing items till {(page + 1) * props.pageSize}</strong>}
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
