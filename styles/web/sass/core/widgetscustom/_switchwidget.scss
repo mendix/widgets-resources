@@ -114,6 +114,12 @@ $default-ios-color: rgb(100, 189, 99);
     }
 }
 
+.widget-switch-btn-wrapper {
+    &:focus {
+        outline: 1px solid $brand-primary;
+    }
+}
+
 div {
     &.widget-switch {
         &.iOS {
