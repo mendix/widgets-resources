@@ -99,6 +99,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                                             column.id === dragOver ? "dragging" : ""
                                         )}
                                         {...rest}
+                                        {...(!props.columnsResizable ? { style: { flex: "1 1 0px" } } : {})}
                                         key={`headers_column_${index}`}
                                     >
                                         <div
@@ -135,7 +136,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                                 {row.cells.map((cell, index) => (
                                     <div
                                         {...cell.getCellProps()}
-                                        {...(!props.columnsResizable ? { style: undefined } : {})}
+                                        {...(!props.columnsResizable ? { style: { flex: "1 1 0px" } } : {})}
                                         key={`column_${index}`}
                                         className="td"
                                     >
