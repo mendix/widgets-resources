@@ -1,5 +1,5 @@
 const { exec } = require("child_process");
-const { copy, readJson, writeJson } = require("fs-extra");
+const { copy, readJson, writeJson, existsSync } = require("fs-extra");
 const { join } = require("path");
 const { mkdir, rm, tempdir } = require("shelljs");
 const kill = require("tree-kill");
@@ -9,14 +9,18 @@ const { run: runYeoman } = require("yeoman-test");
 const LIMIT_TESTS = !!process.env.LIMIT_TESTS;
 
 const CONFIGS = [
-    ["web", "ts", "8.0"],
-    ["native", "js", "8.1"],
-    ["web", "js", "8.3"],
-    ["native", "ts", "8.6"],
-    ["web", "ts", "8.6"],
-    ["web", "js", "8.7"],
-    ["web", "ts", "latest"],
-    ["native", "js", "latest"]
+    ["web", "full", "ts", "8.0"],
+    ["native", "full", "js", "8.1"],
+    ["web", "full", "js", "8.3"],
+    ["native", "full", "ts", "8.6"],
+    ["web", "full", "ts", "8.6"],
+    ["web", "full", "js", "8.7"],
+    ["web", "full", "js", "latest"],
+    ["web", "full", "ts", "latest"],
+    ["native", "full", "js", "latest"],
+    ["native", "full", "ts", "latest"],
+    ["web", "empty", "ts", "latest"],
+    ["native", "empty", "ts", "latest"]
 ];
 
 if (LIMIT_TESTS) {
@@ -33,9 +37,24 @@ describe("pluggable-widgets-tools commands", () => {
         rm(toolsPackagePath);
     });
 
-    describe.each(CONFIGS)("for %s %s widget created with generator %s", (platform, lang, version) => {
+    describe.each(CONFIGS)("for %s %s widget created with generator %s", (platform, boilerplate, lang, version) => {
         const widgetName = `generated_${version.replace(".", "_")}_${lang}_${platform}`;
         const workDir = join(tempdir(), `pwt_test_${Math.round(Math.random() * 10000)}`);
+        const promptAnswers = {
+            widgetName,
+            description: "My widget description",
+            organization: "com.mendix",
+            copyright: "Mendix 2020",
+            license: "Apache-2.0",
+            version: "1.0.0",
+            author: "Widget Generator",
+            projectPath: "./dist/MxTestProject",
+            programmingLanguage: lang === "ts" ? "typescript" : "javascript",
+            platform,
+            boilerplate,
+            unitTests: true,
+            e2eTests: false
+        };
 
         beforeAll(async () => {
             process.stderr.write(`[${widgetName}] Preparing widget...\n`);
@@ -44,12 +63,7 @@ describe("pluggable-widgets-tools commands", () => {
             if (version === "latest") {
                 const generatedWidget = await runYeoman(require.resolve("@mendix/generator-widget/generators/app"))
                     .inTmpDir()
-                    .withPrompts({
-                        widgetName: "Generated",
-                        programmingLanguage: lang === "ts" ? "typescript" : "javascript",
-                        platform,
-                        e2eTests: false
-                    })
+                    .withPrompts(promptAnswers)
                     .withArguments("Generated")
                     .toPromise();
                 await copy(join(generatedWidget, "generated"), workDir);
@@ -81,11 +95,13 @@ describe("pluggable-widgets-tools commands", () => {
                 process.stderr.write(`[${widgetName}] Testing unit tests...\n`);
                 await execFailedAsync("npm test", workDir);
                 await execAsync("npm test -- -u", workDir);
+                expect(existsSync(join(workDir, `/dist/coverage/clover.xml`))).toBe(true);
             });
         } else {
             it("tests succeed", async () => {
                 process.stderr.write(`[${widgetName}] Testing unit tests...\n`);
                 await execAsync("npm test", workDir);
+                expect(existsSync(join(workDir, `/dist/coverage/clover.xml`))).toBe(true);
             });
         }
 
@@ -93,6 +109,18 @@ describe("pluggable-widgets-tools commands", () => {
             it.each(["build", "test:unit", "release"])("'%s' command succeeds", async cmd => {
                 process.stderr.write(`[${widgetName}] Testing '${cmd}' command...\n`);
                 await execAsync(`npm run ${cmd}`, workDir);
+                if (cmd === "build") {
+                    expect(
+                        existsSync(
+                            join(
+                                workDir,
+                                `/dist/${
+                                    promptAnswers.version
+                                }/${promptAnswers.organization.trim().toLowerCase()}.${widgetName}.mpk`
+                            )
+                        )
+                    ).toBe(true);
+                }
             });
 
             it("start command doesn't produce errors", async () => {
