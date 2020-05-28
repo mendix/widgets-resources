@@ -15,12 +15,19 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const [columns] = useColumns(props.columns);
     const [data] = useData(props.datasource, props.columns, props.pagingEnabled, props.pageSize, page, setHasMoreItems);
 
-    // const defaultColumn = {
-    //     Cell: ({ value, data, row: { index }, column: { id } }: CellProperties) => {
-    //         const content = data[index][`content_${id}`];
-    //         return Children.count(content.props.children) > 0 ? content : value;
-    //     }
-    // };
+    const defaultColumn = useMemo(() => {
+        return props.columnsResizable
+            ? {
+                  width: 150, // width is used for both the flex-basis and flex-grow
+                  maxWidth: 200, // maxWidth is only used as a limit for resizing
+                  minWidth: 15
+                  // Cell: ({ value, data, row: { index }, column: { id } }: CellProperties) => {
+                  //     const content = data[index][`content_${id}`];
+                  //     return Children.count(content.props.children) > 0 ? content : value;
+                  // }
+              }
+            : {};
+    }, []);
 
     const {
         getTableProps,
@@ -35,6 +42,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         {
             columns,
             data,
+            defaultColumn,
             disableResizing: !props.columnsResizable,
             disableSortBy: !props.columnsSortable,
             initialState: { pageSize: props.pageSize }
@@ -84,22 +92,24 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                         </div>
                     )}
                     {headerGroups.map((headerGroup, index: number) => (
-                        <div {...headerGroup.getHeaderGroupProps()} key={`headers_row_${index}`} className="tr">
+                        <div {...headerGroup.getHeaderGroupProps({})} key={`headers_row_${index}`} className="tr">
                             {headerGroup.headers.map((column: ExtendedColumnInstance, index: number) => {
                                 const extraClass = column.isSorted ? (column.isSortedDesc ? "desc" : "asc") : "";
                                 const { onClick, ...rest } = column.getHeaderProps(
-                                    props.columnsSortable ? column.getSortByToggleProps() : undefined
+                                    props.columnsSortable && column.canSort ? column.getSortByToggleProps() : undefined
                                 ) as TableHeaderProps & { onClick: () => void };
                                 return (
                                     <div
                                         className={classNames(
                                             "th",
                                             extraClass,
-                                            props.columnsSortable ? "clickable" : "",
+                                            props.columnsSortable && column.canSort ? "clickable" : "",
                                             column.id === dragOver ? "dragging" : ""
                                         )}
                                         {...rest}
-                                        {...(!props.columnsResizable ? { style: { flex: "1 1 0px" } } : {})}
+                                        {...(!props.columnsResizable || !column.canResize
+                                            ? { style: { flex: "1 1 0px" } }
+                                            : {})}
                                         key={`headers_column_${index}`}
                                     >
                                         <div
@@ -110,7 +120,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                                         >
                                             {column.render("Header")}
                                         </div>
-                                        {props.columnsResizable && (
+                                        {props.columnsResizable && column.canResize && (
                                             <div
                                                 {...column.getResizerProps()}
                                                 className={`column-resizer ${column.isResizing ? "isResizing" : ""}`}
