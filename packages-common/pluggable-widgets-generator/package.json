@@ -11,8 +11,7 @@
     "url": "https://github.com/mendix/widgets-resources"
   },
   "scripts": {
-    "lint": "..\"/../node_modules/.bin/eslint\" --config .eslintrc.js --ext .jsx,.js,.ts,.tsx generators/",
-    "test": "mocha ./tests/*"
+    "lint": "..\"/../node_modules/.bin/eslint\" --config .eslintrc.js --ext .jsx,.js,.ts,.tsx generators/"
   },
   "files": [
     "generators"
@@ -32,19 +31,11 @@
   },
   "dependencies": {
     "chalk": "^4.0.0",
-    "each-async": "^1.1.1",
-    "indent-string": "^4.0.0",
     "semver": "^7.2.1",
-    "xml2js": "^0.4.23",
     "yeoman-generator": "^4.8.0"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
-    "eslint": "^6.8.0",
-    "lodash": "^4.17.15",
-    "mocha": "^7.1.1",
-    "string-template": "^1.0.0",
-    "yeoman-assert": "^3.1.1",
-    "yeoman-test": "^2.6.0"
+    "eslint": "^6.8.0"
   }
 }
