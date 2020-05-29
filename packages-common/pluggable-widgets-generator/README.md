@@ -2,10 +2,10 @@
 
 ![npm version](https://badge.fury.io/js/%40mendix%2Fgenerator-widget.svg)
 ![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
-![Build Status](https://travis-ci.org/mendix/pluggable-widgets-generator.svg?branch=master)
+![Build Status](https://travis-ci.org/mendix/widgets-resources.svg?branch=master)
 ![npm](https://img.shields.io/npm/dm/@mendix/generator-widget)
-![GitHub release](https://img.shields.io/github/release/mendix/pluggable-widgets-generator)
-![GitHub issues](https://img.shields.io/github/issues/mendix/pluggable-widgets-generator)
+![GitHub release](https://img.shields.io/github/release/mendix/widgets-resources)
+![GitHub issues](https://img.shields.io/github/issues/mendix/widgets-resources)
 
 > [Yeoman](http://yeoman.io) generator for Mendix Pluggable Widgets.
 
@@ -77,14 +77,14 @@ npm run release
 
 ---
 
-For more informations, visit our [Mendix Pluggable Widget Tools repository](https://github.com/mendix/pluggable-widgets-tools)
+For more information, visit our [Mendix Pluggable Widget Tools repository](https://github.com/mendix/widgets-resources/tree/master/packages-common/pluggable-widgets-tools).
 
 ### 2.2. Which template do you want to use for the widget?
 
-#### Full Boilerplate
+#### Full boilerplate
 
-The full widget boiler plate is a React fully developed and tested Mendix widget that shows a value as a badge or a color label (just available for web/responsive platform).
-It has the following features:-
+The full widget boilerplate is a fully developed and tested Mendix React widget that shows a value as a badge or a color label (just available for web/responsive platform).
+It has the following features:
 
 -   Display as a badge or a color label
 -   Attach actions to onClick event
@@ -104,20 +104,20 @@ If Yes is selected, end to end tests are included to ensure that the integrated 
 
 Note: Both `Unit` and `End to end` tests apply only to the Full Boilerplate. `End to End` is exclusive for web and hybrid mobile apps.
 
-The tool will then create Copied files, and run `npm install` to install development dependencies.
+The tool will then create copied files, and run `npm install` to install development dependencies.
 
 ### NOTE
 
-To use the webpack-dev-server while in your development;
+To use the webpack-dev-server while developing:
 
--   start the Mendix Studio Pro from your Mendix project path or by default `/dist/MxTestProject`. then run:
+-   Start Mendix Studio Pro from your Mendix project path or by default `/dist/MxTestProject` and run:
 
 ```bash
 npm start
 ```
 
--   If you are running the generator through many OS (Using parallels or any other virtualization software), make sure you have the right privileges and use the same OS for generation and files manipulation.
+-   If you are running the generator through multiple operating systems (e.g. running a virtualized OS with Parallels on MacOS or any other virtualization software), make sure you have the right privileges and use the same OS for generation and file manipulation.
 
 ## Issues
 
-Issues can be reported on [Github](https://github.com/mendix/pluggable-widgets-generator/issues).
+Issues can be reported on [Github](https://github.com/mendix/widgets-resources/issues).
