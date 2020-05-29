@@ -18,6 +18,8 @@ import classNames from "classnames";
 import { useColumns, useData, useDraggable } from "./utils/hooks";
 import { CellProperties, ExtendedColumnInstance, ExtendedTableInstance, FilterProperties } from "../typings/ReactTable";
 
+import "./ui/Datagrid.scss";
+
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const [page, setPage] = useState(0);
     const [hasMoreItems, setHasMoreItems] = useState(true);
