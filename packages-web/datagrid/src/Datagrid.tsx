@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useCallback, useMemo, useState } from "react";
+import { createElement, ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import { DatagridContainerProps } from "../typings/DatagridProps";
 import {
     FilterValue,
@@ -119,11 +119,20 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const [draggableProps] = useDraggable(props.columnsDraggable, visibleColumns, setColumnOrder, setDragOver);
     /* END DRAG EVENTS */
 
+    useEffect(() => {
+        allColumns.forEach(h => {
+            const columnConfig = columnsConfig[h.id];
+            if (columnConfig.hidable === "hidden" && h.isVisible) {
+                h.toggleHidden();
+            }
+        });
+    }, [columnsConfig]);
+
     return (
         <div className={props.class}>
             <div className="header">
                 {props.headerWidgets}
-                {props.columnsHidable && <ColumnSelector allColumns={allColumns} />}
+                {props.columnsHidable && <ColumnSelector allColumns={allColumns} columnsConfig={columnsConfig} />}
             </div>
             <div {...getTableProps()} className="table">
                 <div role="rowgroup" className="thead">
