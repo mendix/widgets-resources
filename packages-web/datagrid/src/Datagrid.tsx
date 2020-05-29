@@ -147,7 +147,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                         <div {...headerGroup.getHeaderGroupProps({})} key={`headers_row_${index}`} className="tr">
                             {headerGroup.headers.map((column: ExtendedColumnInstance, index: number) => {
                                 const sortClass = column.isSorted ? (column.isSortedDesc ? "desc" : "asc") : "";
-                                const { onClick, ...rest } = column.getHeaderProps(
+                                const { onClick, style, ...rest } = column.getHeaderProps(
                                     props.columnsSortable && column.canSort ? column.getSortByToggleProps() : undefined
                                 ) as TableHeaderProps & { onClick: () => void };
                                 const { filterable, sortable, resizable, draggable } = columnsConfig[column.id];
@@ -155,9 +155,11 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                                     <div
                                         className="th"
                                         {...rest}
-                                        {...(!props.columnsResizable || !resizable
-                                            ? { style: { flex: "1 1 0px" } }
-                                            : {})}
+                                        style={{
+                                            ...style,
+                                            ...(!props.columnsResizable ? { flex: "1 1 0px" } : {}),
+                                            ...(!props.columnsSortable || !sortable ? { cursor: "unset" } : {})
+                                        }}
                                         key={`headers_column_${index}`}
                                     >
                                         <div
@@ -174,7 +176,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                                                     "column-header",
                                                     props.columnsSortable && sortable ? "clickable" : ""
                                                 )}
-                                                onClick={onClick}
+                                                onClick={sortable ? onClick : undefined}
                                             >
                                                 {column.render("Header")}
                                             </div>
