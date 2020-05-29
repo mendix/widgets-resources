@@ -14,10 +14,10 @@ export interface ColumnsType {
     hasWidgets: boolean;
     content?: (item: ObjectItem) => ReactNode;
     sortable: boolean;
+    filterable: boolean;
     resizable: boolean;
     draggable: boolean;
     hidable: HidableEnum;
-    affixColumn: boolean;
 }
 
 export type PagingPositionEnum = "bottom" | "top";
@@ -28,10 +28,10 @@ export interface ColumnsPreviewType {
     hasWidgets: boolean;
     content: { widgetCount: number; renderer: ComponentType };
     sortable: boolean;
+    filterable: boolean;
     resizable: boolean;
     draggable: boolean;
     hidable: HidableEnum;
-    affixColumn: boolean;
 }
 
 export interface DatagridContainerProps {
@@ -49,10 +49,10 @@ export interface DatagridContainerProps {
     pagingEnabled: boolean;
     pagingPosition: PagingPositionEnum;
     columnsSortable: boolean;
+    columnsFilterable: boolean;
     columnsResizable: boolean;
     columnsDraggable: boolean;
     columnsHidable: boolean;
-    userConfigStorage?: EditableValue<string>;
 }
 
 export interface DatagridPreviewProps {
@@ -68,8 +68,8 @@ export interface DatagridPreviewProps {
     pagingEnabled: boolean;
     pagingPosition: PagingPositionEnum;
     columnsSortable: boolean;
+    columnsFilterable: boolean;
     columnsResizable: boolean;
     columnsDraggable: boolean;
     columnsHidable: boolean;
-    userConfigStorage: string;
 }

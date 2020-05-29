@@ -6,6 +6,21 @@ export function getProperties(values: DatagridPreviewProps, defaultProperties: P
         if (!c.hasWidgets) {
             hidePropertyIn(defaultProperties, values, "columns", index, "content");
         }
+        if (!values.columnsSortable) {
+            hidePropertyIn(defaultProperties, values, "columns", index, "sortable");
+        }
+        if (!values.columnsFilterable) {
+            hidePropertyIn(defaultProperties, values, "columns", index, "filterable");
+        }
+        if (!values.columnsResizable) {
+            hidePropertyIn(defaultProperties, values, "columns", index, "resizable");
+        }
+        if (!values.columnsDraggable) {
+            hidePropertyIn(defaultProperties, values, "columns", index, "draggable");
+        }
+        if (!values.columnsHidable) {
+            hidePropertyIn(defaultProperties, values, "columns", index, "hidable");
+        }
     });
     if (!values.pagingEnabled) {
         hidePropertyIn(defaultProperties, values, "pagingPosition");

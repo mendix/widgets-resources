@@ -1,33 +1,73 @@
 import { createElement, ReactElement, useCallback, useMemo, useState } from "react";
 import { DatagridContainerProps } from "../typings/DatagridProps";
-import { TableHeaderProps, useColumnOrder, useFlexLayout, useResizeColumns, useSortBy, useTable } from "react-table";
+import {
+    FilterValue,
+    IdType,
+    Row,
+    TableHeaderProps,
+    useColumnOrder,
+    useFilters,
+    useFlexLayout,
+    useResizeColumns,
+    useSortBy,
+    useTable
+} from "react-table";
 import { Pagination } from "./components/Pagination";
 import { ColumnSelector } from "./components/ColumnSelector";
 import classNames from "classnames";
 import { useColumns, useData, useDraggable } from "./utils/hooks";
-import { ExtendedColumnInstance, ExtendedTableInstance } from "../typings/ReactTable";
+import { CellProperties, ExtendedColumnInstance, ExtendedTableInstance, FilterProperties } from "../typings/ReactTable";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const [page, setPage] = useState(0);
     const [hasMoreItems, setHasMoreItems] = useState(true);
     const [bodySize, setBodySize] = useState(0);
     const isInfinite = useMemo(() => !props.pagingEnabled, [props.pagingEnabled]);
-    const [columns] = useColumns(props.columns);
+    const [columns, columnsConfig] = useColumns(props.columns);
     const [data] = useData(props.datasource, props.columns, props.pagingEnabled, props.pageSize, page, setHasMoreItems);
 
-    const defaultColumn = useMemo(() => {
-        return props.columnsResizable
-            ? {
-                  width: 150, // width is used for both the flex-basis and flex-grow
-                  maxWidth: 200, // maxWidth is only used as a limit for resizing
-                  minWidth: 15
-                  // Cell: ({ value, data, row: { index }, column: { id } }: CellProperties) => {
-                  //     const content = data[index][`content_${id}`];
-                  //     return Children.count(content.props.children) > 0 ? content : value;
-                  // }
-              }
-            : {};
-    }, []);
+    const ColumnFilter = ({ column: { filterValue, setFilter, filter } }: FilterProperties): ReactElement => {
+        return (
+            <input
+                value={filterValue || ""}
+                onChange={e => {
+                    setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+                }}
+                placeholder={`Search ${filter ? filter : ""}...`}
+            />
+        );
+    };
+
+    const defaultColumn = useMemo(
+        () => ({
+            Cell: ({ value, data, row: { index }, column: { id } }: CellProperties) => {
+                const content = data[index][`content_${id}`];
+                return columnsConfig[id].hasWidgets ? content : value;
+            },
+            Filter: ColumnFilter,
+            ...(props.columnsResizable
+                ? {
+                      width: 150, // width is used for both the flex-basis and flex-grow
+                      maxWidth: 200, // maxWidth is only used as a limit for resizing
+                      minWidth: 15 // minWidth is only used as a limit for resizing
+                  }
+                : {})
+        }),
+        [columnsConfig]
+    );
+
+    const filterTypes = {
+        text: (rows: Array<Row<object>>, id: IdType<object>, filterValue: FilterValue) => {
+            return rows.filter(row => {
+                const rowValue = row.values[id];
+                return rowValue !== undefined
+                    ? String(rowValue)
+                          .toLowerCase()
+                          .startsWith(String(filterValue).toLowerCase())
+                    : true;
+            });
+        }
+    };
 
     const {
         getTableProps,
@@ -43,10 +83,13 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             columns,
             data,
             defaultColumn,
+            filterTypes,
             disableResizing: !props.columnsResizable,
             disableSortBy: !props.columnsSortable,
+            disableFilters: !props.columnsFilterable,
             initialState: { pageSize: props.pageSize }
         } as any,
+        useFilters,
         useSortBy,
         useColumnOrder,
         useFlexLayout,
@@ -94,33 +137,44 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                     {headerGroups.map((headerGroup, index: number) => (
                         <div {...headerGroup.getHeaderGroupProps({})} key={`headers_row_${index}`} className="tr">
                             {headerGroup.headers.map((column: ExtendedColumnInstance, index: number) => {
-                                const extraClass = column.isSorted ? (column.isSortedDesc ? "desc" : "asc") : "";
+                                const sortClass = column.isSorted ? (column.isSortedDesc ? "desc" : "asc") : "";
                                 const { onClick, ...rest } = column.getHeaderProps(
                                     props.columnsSortable && column.canSort ? column.getSortByToggleProps() : undefined
                                 ) as TableHeaderProps & { onClick: () => void };
+                                const { filterable, sortable, resizable, draggable } = columnsConfig[column.id];
                                 return (
                                     <div
-                                        className={classNames(
-                                            "th",
-                                            extraClass,
-                                            props.columnsSortable && column.canSort ? "clickable" : "",
-                                            column.id === dragOver ? "dragging" : ""
-                                        )}
+                                        className="th"
                                         {...rest}
-                                        {...(!props.columnsResizable || !column.canResize
+                                        {...(!props.columnsResizable || !resizable
                                             ? { style: { flex: "1 1 0px" } }
                                             : {})}
                                         key={`headers_column_${index}`}
                                     >
                                         <div
                                             id={column.id}
-                                            className="column-header"
-                                            onClick={onClick}
-                                            {...draggableProps}
+                                            className={classNames(
+                                                "column-container",
+                                                draggable && column.id === dragOver ? "dragging" : ""
+                                            )}
+                                            {...(draggable ? draggableProps : {})}
                                         >
-                                            {column.render("Header")}
+                                            <div
+                                                id={column.id}
+                                                className={classNames(
+                                                    "column-header",
+                                                    props.columnsSortable && sortable ? "clickable" : ""
+                                                )}
+                                                onClick={onClick}
+                                            >
+                                                {column.render("Header")}
+                                            </div>
+                                            {props.columnsFilterable && filterable && (
+                                                <div className="filter">{column.render("Filter")}</div>
+                                            )}
                                         </div>
-                                        {props.columnsResizable && column.canResize && (
+                                        {sortClass && <div className={sortClass} />}
+                                        {props.columnsResizable && resizable && (
                                             <div
                                                 {...column.getResizerProps()}
                                                 className={`column-resizer ${column.isResizing ? "isResizing" : ""}`}

@@ -2,6 +2,7 @@ import {
     ColumnInstance,
     TableInstance,
     UseColumnOrderInstanceProps,
+    UseFiltersColumnProps,
     UseResizeColumnsColumnProps,
     UseSortByColumnProps
 } from "react-table";
@@ -9,7 +10,8 @@ import {
 export interface ExtendedColumnInstance
     extends ColumnInstance<any>,
         UseSortByColumnProps<any>,
-        UseResizeColumnsColumnProps<any> {}
+        UseResizeColumnsColumnProps<any>,
+        UseFiltersColumnProps<any> {}
 
 export interface ExtendedTableInstance extends TableInstance<object>, UseColumnOrderInstanceProps<object> {}
 
@@ -18,4 +20,8 @@ export interface CellProperties {
     data: any[];
     row: { index: number };
     column: { id: string };
+}
+
+export interface FilterProperties {
+    column: { filterValue: any; setFilter: (e: any) => void; filter: string };
 }

@@ -17,7 +17,9 @@ export function useData(
             datasource.items?.map(item =>
                 columns
                     .map((column, index) => ({
-                        [`col_${index}`]: column.hasWidgets ? column.content?.(item) : column.attribute?.(item).value
+                        [`col_${index}`]: column.attribute ? column.attribute(item).value : "",
+                        [`col_${index}_hasWidgets`]: column.hasWidgets,
+                        [`content_col_${index}`]: column.content ? column.content(item) : null
                     }))
                     .reduce((acc, current) => ({ ...acc, ...current }), {})
             ) || [],
@@ -31,7 +33,6 @@ export function useData(
         datasource.setLimit(pageSize);
         datasource.setOffset(currentPage * pageSize);
         setHasMoreItems(datasource.hasMoreItems || false);
-        console.warn("Loading items from", currentPage * pageSize);
 
         return pagingEnabled ? datasourceData : Array.from(new Set([...items, ...datasourceData]));
     }, [datasource, columns, pageSize, currentPage, datasourceData]);
@@ -39,16 +40,30 @@ export function useData(
     return [data];
 }
 
-export function useColumns(columns: ColumnsType[]) {
+export function useColumns(columns: ColumnsType[]): [any, any] {
     const columnsData = useMemo(
         () =>
             columns.map((column, index) => ({
                 Header: column.header.value,
-                accessor: `col_${index}`
+                accessor: `col_${index}`,
+                filter: "text"
             })) || [],
         [columns]
     ) as any[];
-    return [columnsData];
+    const columnsConfig = useMemo(
+        () =>
+            columns
+                .map((column, index) => {
+                    const { content, attribute, ...rest } = column;
+                    console.log(content, attribute);
+                    return {
+                        [`col_${index}`]: rest
+                    };
+                })
+                .reduce((acc, current) => ({ ...acc, ...current }), {}),
+        [columns]
+    );
+    return [columnsData, columnsConfig];
 }
 
 export function useDraggable(
