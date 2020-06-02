@@ -52,8 +52,8 @@
     "babel-loader": "^8.0.6",
     "big.js": "^5.2.2",
     "colors": "^1.4.0",
-    "concurrently": "^4.1.1",
-    "copy-webpack-plugin": "^5.1.1",
+    "concurrently": "^5.0.1",
+    "copy-webpack-plugin": "^6.0.0",
     "core-js": "^3.6.4",
     "css-loader": "^3.1.0",
     "del": "^4.1.1",
@@ -85,13 +85,13 @@
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-hot-loader": "^4.12.19",
-    "react-native": "0.61.5",
+    "react-native": "0.62.0",
     "react-test-renderer": "~16.9.0",
     "sass-loader": "^8.0.2",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.1",
     "to-string-loader": "^1.1.6",
-    "ts-jest": "^24.3.0",
+    "ts-jest": "^25.3.0",
     "ts-loader": "^6.2.1",
     "ts-node": "^8.6.2",
     "typescript": "^3.8.3",
@@ -100,7 +100,8 @@
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "snyk": "^1.334.0"
   },
   "devDependencies": {
     "@mendix/generator-widget": "^8.9.0",
@@ -112,6 +113,9 @@
   },
   "scripts": {
     "test": "cross-env LIMIT_TESTS=true npm run test:cross-platform",
-    "test:cross-platform": "jest --testTimeout=500000 tests/commands.spec.js"
-  }
+    "test:cross-platform": "jest --testTimeout=500000 tests/commands.spec.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
