@@ -179,6 +179,23 @@
                 ]
             }
         ],
+        "Page": [
+            {
+                "name": "Header bottom border",
+                "type": "Dropdown",
+                "description": "The bottom border (iOS) and elevation (Android) of the header.",
+                "options": [
+                    {
+                        "name": "None",
+                        "class": "pageHeaderBorderNone"
+                    },
+                    {
+                        "name": "Shown",
+                        "class": ""
+                    }
+                ]
+            }
+        ],
         "Widget": [
             {
                 "name": "Spacing top",
