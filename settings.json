@@ -292,7 +292,7 @@
             {
                 "name": "Align icon",
                 "type": "Dropdown",
-                "description": "Place the icon to the left or on top of the button.",
+                "description": "Place the icon to the right or on top of the button.",
                 "options": [
                     {
                         "name": "Right",
