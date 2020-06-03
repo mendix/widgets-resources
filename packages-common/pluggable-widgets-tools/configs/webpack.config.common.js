@@ -15,41 +15,9 @@ const widgetConfig = {
         publicPath: "/"
     },
     resolve: {
-        extensions: [".ts", ".js", ".tsx", ".jsx"],
-        alias: {
-            tests: `${variables.projectPath}/tests`
-        }
+        extensions: [".ts", ".js", ".tsx", ".jsx"]
     },
-    module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                exclude: /node_modules/,
-                use: [
-                    {
-                        loader: "ts-loader"
-                    }
-                ]
-            },
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        cacheDirectory: true,
-                        presets: ["@babel/preset-env", "@babel/preset-react"],
-                        plugins: [
-                            ["@babel/plugin-proposal-class-properties", { loose: true }],
-                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }],
-                            "react-hot-loader/babel"
-                        ]
-                    }
-                }
-            }
-        ]
-    },
-    externals: [/^mendix\//, "react", "big.js"],
+    externals: [/^mendix\//, "react", "react-dom", "big.js"],
     plugins: [
         new CopyWebpackPlugin(
             [
@@ -95,8 +63,7 @@ const previewConfig = {
                         presets: ["@babel/preset-env", "@babel/preset-react"],
                         plugins: [
                             ["@babel/plugin-proposal-class-properties", { loose: true }],
-                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }],
-                            "react-hot-loader/babel"
+                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]
                         ]
                     }
                 }

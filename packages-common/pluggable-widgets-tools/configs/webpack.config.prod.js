@@ -18,6 +18,30 @@ const prodConfig = {
     module: {
         rules: [
             {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: "ts-loader"
+                    }
+                ]
+            },
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        cacheDirectory: true,
+                        presets: ["@babel/preset-env", "@babel/preset-react"],
+                        plugins: [
+                            ["@babel/plugin-proposal-class-properties", { loose: true }],
+                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]
+                        ]
+                    }
+                }
+            },
+            {
                 test: /\.s?css$/,
                 loader: ExtractTextPlugin.extract({
                     fallback: "style-loader",
@@ -40,8 +64,7 @@ const prodConfig = {
                 loader: "url-loader?limit=10000&mimetype=image/svg+xml"
             }
         ]
-    },
-    externals: ["react-dom"]
+    }
 };
 
 const previewProdConfig = {
