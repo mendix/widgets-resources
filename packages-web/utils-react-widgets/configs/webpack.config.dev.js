@@ -1,7 +1,8 @@
-const path = require("path");
 const webpack = require("webpack");
+const { join, resolve } = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const fetch = require("node-fetch");
 const variables = require("./variables");
 
 const widgetName = variables.package.widgetName;
@@ -12,11 +13,13 @@ const mxHost = variables.package.config.mendixHost || "http://localhost:8080";
 const developmentPort = variables.package.config.developmentPort || "3000";
 const cwd = variables.path;
 
+const isHotRefresh = process.argv.indexOf("--hot") !== -1;
+
 const widgetConfig = {
     context: cwd,
-    entry: path.join(cwd, `src/components/${widgetName}Container.ts`),
+    entry: join(cwd, `src/components/${widgetName}Container.ts`),
     output: {
-        path: path.resolve(cwd, "dist/tmp"),
+        path: resolve(cwd, "dist/tmp"),
         filename: chunkData => {
             const fileName = chunkData.chunk.name === "main" ? widgetName : "[name]";
             return `widgets/com/mendix/widget/custom/${name}/${fileName}.js`;
@@ -25,12 +28,28 @@ const widgetConfig = {
         publicPath: "/"
     },
     devServer: {
+        compress: true,
         port: developmentPort,
         hot: true,
+        before(app) {
+            app.get("/mxclientsystem/mxui/mxui.js", async (req, res) => {
+                const request = await fetch(`${mxHost}/mxclientsystem/mxui/mxui.js`);
+                const mxui = await request.text();
+                const { injectIntoGlobalHook } = require("react-refresh/runtime");
+                const fileReturn = `${injectIntoGlobalHook}
+if (typeof window !== 'undefined') {
+  injectIntoGlobalHook(window);
+  window.$RefreshReg$ = () => {};
+  window.$RefreshSig$ = () => type => type;
+}
+${mxui}`;
+                res.send(fileReturn);
+            });
+        },
         proxy: [
             {
                 target: mxHost,
-                context: ["**", `!/widgets/com/mendix/widget/custom/${name}/${widgetName}.${variables.extension}`],
+                context: [`!/widgets/com/mendix/widget/custom/${name}/${widgetName}.${variables.extension}`],
                 onError(err, req, res) {
                     if (res && res.writeHead) {
                         res.writeHead(500, {
@@ -57,7 +76,7 @@ const widgetConfig = {
     resolve: {
         extensions: [".ts", ".js", ".tsx", ".jsx"],
         alias: {
-            tests: path.resolve(cwd, "./tests")
+            tests: resolve(cwd, "./tests")
         }
     },
     module: {
@@ -66,6 +85,17 @@ const widgetConfig = {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: [
+                    ...(isHotRefresh
+                        ? [
+                              {
+                                  loader: "babel-loader",
+                                  options: {
+                                      cacheDirectory: true,
+                                      plugins: [require("react-refresh/babel")]
+                                  }
+                              }
+                          ]
+                        : []),
                     {
                         loader: "ts-loader",
                         options: {
@@ -85,7 +115,7 @@ const widgetConfig = {
                         plugins: [
                             ["@babel/plugin-proposal-class-properties", { loose: true }],
                             ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }],
-                            "react-hot-loader/babel"
+                            ...(isHotRefresh ? [require("react-refresh/babel")] : [])
                         ]
                     }
                 }
@@ -100,7 +130,7 @@ const widgetConfig = {
     devtool: "source-map",
     externals: ["react", "react-dom"],
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
+        ...(isHotRefresh ? [new webpack.HotModuleReplacementPlugin()] : []),
         new ForkTsCheckerWebpackPlugin(),
         new CopyWebpackPlugin(
             [
@@ -116,9 +146,9 @@ const widgetConfig = {
 };
 
 const previewConfig = {
-    entry: path.resolve(cwd, `./src/${widgetName}.webmodeler.${variables.extension}`),
+    entry: resolve(cwd, `./src/${widgetName}.webmodeler.${variables.extension}`),
     output: {
-        path: path.resolve(cwd, "dist/tmp"),
+        path: resolve(cwd, "dist/tmp"),
         filename: `widgets/${widgetName}.webmodeler.js`,
         libraryTarget: "commonjs"
     },
@@ -146,8 +176,7 @@ const previewConfig = {
                         presets: ["@babel/preset-env", "@babel/preset-react"],
                         plugins: [
                             ["@babel/plugin-proposal-class-properties", { loose: true }],
-                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }],
-                            "react-hot-loader/babel"
+                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]
                         ]
                     }
                 }
