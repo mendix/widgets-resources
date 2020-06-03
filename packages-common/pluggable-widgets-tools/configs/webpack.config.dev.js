@@ -34,7 +34,6 @@ if (!isHotRefresh) {
 const devConfig = {
     mode: "development",
     devtool: "source-map",
-    entry: variables.widgetEntry,
     devServer: {
         contentBase: join(process.cwd(), "dist/tmp"),
         compress: true,
