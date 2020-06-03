@@ -1,5 +1,4 @@
 const commonConfig = require("./webpack.config.common");
-const { join } = require("path");
 const merge = require("webpack-merge");
 const variables = require("./variables");
 const webpack = require("webpack");
@@ -14,28 +13,10 @@ const developmentPort = variables.package.config.developmentPort || "3000";
 
 const isHotRefresh = process.argv.indexOf("--hot") !== -1;
 
-const tsLoaders = [
-    {
-        loader: "babel-loader",
-        options: {
-            cacheDirectory: true,
-            plugins: [require("react-refresh/babel")]
-        }
-    },
-    {
-        loader: "ts-loader"
-    }
-];
-
-if (!isHotRefresh) {
-    tsLoaders.shift();
-}
-
 const devConfig = {
     mode: "development",
     devtool: "source-map",
     devServer: {
-        contentBase: join(process.cwd(), "dist/tmp"),
         compress: true,
         port: developmentPort,
         overlay: {
@@ -83,7 +64,22 @@ ${mxui}`;
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
-                use: tsLoaders
+                use: [
+                    ...(isHotRefresh
+                        ? [
+                              {
+                                  loader: "babel-loader",
+                                  options: {
+                                      cacheDirectory: true,
+                                      plugins: [require("react-refresh/babel")]
+                                  }
+                              }
+                          ]
+                        : []),
+                    {
+                        loader: "ts-loader"
+                    }
+                ]
             },
             {
                 test: /\.jsx?$/,
@@ -96,7 +92,7 @@ ${mxui}`;
                         plugins: [
                             ["@babel/plugin-proposal-class-properties", { loose: true }],
                             ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }],
-                            isHotRefresh ? require("react-refresh/babel") : ""
+                            ...(isHotRefresh ? [require("react-refresh/babel")] : [])
                         ]
                     }
                 }
