@@ -165,109 +165,70 @@ class MxGenerator extends Generator {
 
     _writeWidgetFiles() {
         const widgetName = this.widget.widgetName;
+        const fileExtension = this.widget.isTs ? "tsx" : "jsx";
 
-        this._copyWidgetFiles(this.widget.source + "README.md", "README.md");
+        this._copyWidgetFiles(`${this.widget.source}README.md`, "README.md");
 
-        if (this.widget.isTs) {
-            if (this.widget.emptyTemplate) {
-                this._copyWidgetFiles(
-                    this.widget.source + `${widgetSrcFolder}HelloWorldSample.tsx.ejs`,
-                    `${widgetSrcFolder}HelloWorldSample.tsx`
-                );
-                this._copyWidgetFiles(this.widget.source + "src/WidgetName.tsx.ejs", "src/" + widgetName + ".tsx");
-            } else {
-                this._copyWidgetFiles(
-                    this.widget.source + `${widgetSrcFolder}BadgeSample.tsx.ejs`,
-                    `${widgetSrcFolder}BadgeSample.tsx`
-                );
-                this._copyWidgetFiles(this.widget.source + "src/WidgetName.tsx.ejs", "src/" + widgetName + ".tsx");
-            }
-            if (this.widget.isWeb) {
-                this._copyWidgetFiles(
-                    this.widget.source + "src/WidgetName.editorPreview.tsx.ejs",
-                    "src/" + widgetName + ".editorPreview.tsx"
-                );
-                if (this.widget.fullTemplate) {
-                    this._copyWidgetFiles(
-                        this.widget.source + `${widgetSrcFolder}Alert.tsx.ejs`,
-                        `${widgetSrcFolder}Alert.tsx`
-                    );
-                }
-            }
-        } else if (this.widget.isJs) {
-            if (this.widget.emptyTemplate) {
-                this._copyWidgetFiles(
-                    this.widget.source + `${widgetSrcFolder}HelloWorldSample.jsx.ejs`,
-                    `${widgetSrcFolder}HelloWorldSample.jsx`
-                );
-                this._copyWidgetFiles(this.widget.source + "src/WidgetName.jsx.ejs", "src/" + widgetName + ".jsx");
-            } else {
-                this._copyWidgetFiles(
-                    this.widget.source + `${widgetSrcFolder}BadgeSample.jsx.ejs`,
-                    `${widgetSrcFolder}BadgeSample.jsx`
-                );
-                this._copyWidgetFiles(this.widget.source + "src/WidgetName.jsx.ejs", "src/" + widgetName + ".jsx");
-            }
-            if (this.widget.isWeb) {
-                this._copyWidgetFiles(
-                    this.widget.source + "src/WidgetName.editorPreview.jsx.ejs",
-                    "src/" + widgetName + ".editorPreview.jsx"
-                );
-                if (this.widget.fullTemplate) {
-                    this._copyWidgetFiles(
-                        this.widget.source + `${widgetSrcFolder}Alert.jsx.ejs`,
-                        `${widgetSrcFolder}Alert.jsx`
-                    );
-                }
-            }
-        }
-        if (this.widget.isWeb) {
-            this._copyWidgetFiles(this.widget.source + "src/ui/WidgetName.css", "src/ui/" + widgetName + ".css");
+        // web & native
+        if (this.widget.emptyTemplate) {
+            this._copyWidgetFiles(
+                `${this.widget.source}${widgetSrcFolder}HelloWorldSample.${fileExtension}.ejs`,
+                `${widgetSrcFolder}HelloWorldSample.${fileExtension}`
+            );
+            this._copyWidgetFiles(
+                `${this.widget.source}src/WidgetName.${fileExtension}.ejs`,
+                `src/${widgetName}.${fileExtension}`
+            );
         } else {
-            if (this.widget.isTs) {
-                if (this.widget.fullTemplate) {
-                    this._copyWidgetFiles(this.widget.source + "src/ui/styles.ts", "src/ui/styles.ts");
-                }
-                this._copyWidgetFiles(this.widget.source + "src/utils/common.ts", "src/utils/common.ts");
-            } else {
-                if (this.widget.fullTemplate) {
-                    this._copyWidgetFiles(this.widget.source + "src/ui/styles.js", "src/ui/styles.js");
-                }
-                this._copyWidgetFiles(this.widget.source + "src/utils/common.js", "src/utils/common.js");
+            this._copyWidgetFiles(
+                `${this.widget.source}${widgetSrcFolder}BadgeSample.${fileExtension}.ejs`,
+                `${widgetSrcFolder}BadgeSample.${fileExtension}`
+            );
+            this._copyWidgetFiles(
+                `${this.widget.source}src/WidgetName.${fileExtension}.ejs`,
+                `src/${widgetName}.${fileExtension}`
+            );
+        }
+
+        if (this.widget.isWeb) {
+            this._copyWidgetFiles(
+                `${this.widget.source}src/WidgetName.editorPreview.${fileExtension}.ejs`,
+                `src/${widgetName}.editorPreview.${fileExtension}`
+            );
+            this._copyWidgetFiles(`${this.widget.source}src/ui/WidgetName.css`, `src/ui/${widgetName}.css`);
+
+            if (this.widget.fullTemplate) {
+                this._copyWidgetFiles(
+                    `${this.widget.source}${widgetSrcFolder}Alert.${fileExtension}.ejs`,
+                    `${widgetSrcFolder}Alert.${fileExtension}`
+                );
             }
+        } else {
+            const fileExtension = this.widget.isTs ? "ts" : "js";
+
+            if (this.widget.fullTemplate) {
+                this._copyWidgetFiles(
+                    `${this.widget.source}src/ui/styles.${fileExtension}`,
+                    `src/ui/styles.${fileExtension}`
+                );
+            }
+            this._copyWidgetFiles(
+                `${this.widget.source}src/utils/common.${fileExtension}`,
+                `src/utils/common.${fileExtension}`
+            );
         }
     }
 
     _writePackage() {
+        const templatePath = undefined;
+
         if (this.widget.isWeb) {
-            if (this.widget.isTs) {
-                this._copyTemplate(
-                    this.templatePath("packages/package.ts.json"),
-                    this.destinationPath("package.json"),
-                    this.widget
-                );
-            } else if (this.widget.isJs) {
-                this._copyTemplate(
-                    this.templatePath("packages/package.js.json"),
-                    this.destinationPath("package.json"),
-                    this.widget
-                );
-            }
+            templatePath = `packages/package.${this.widget.isTs ? "ts" : "js"}.json`;
         } else {
-            if (this.widget.isTs) {
-                this._copyTemplate(
-                    this.templatePath("packages/package_native_ts.json"),
-                    this.destinationPath("package.json"),
-                    this.widget
-                );
-            } else if (this.widget.isJs) {
-                this._copyTemplate(
-                    this.templatePath("packages/package_native_js.json"),
-                    this.destinationPath("package.json"),
-                    this.widget
-                );
-            }
+            templatePath = `packages/package_native_${this.widget.isTs ? "ts" : "js"}.json`;
         }
+
+        this._copyTemplate(this.templatePath(templatePath), this.destinationPath("package.json"), this.widget);
     }
 
     _writeCompilerOptions() {
@@ -281,8 +242,6 @@ class MxGenerator extends Generator {
     }
 
     _writeWidgetXML() {
-        const { version } = this.props;
-
         this._copyFile(
             this.templatePath(this.widget.source + "src/package.xml"),
             this.destinationPath("src/package.xml"),
@@ -293,7 +252,7 @@ class MxGenerator extends Generator {
                         .replace(/WidgetName/g, this.widget.widgetName)
                         .replace(/packageName/g, this.widget.widgetName.toLowerCase())
                         .replace(/packagePath/g, this.widget.packagePath.replace(/\./g, "/"))
-                        .replace(/\{\{version\}\}/g, version);
+                        .replace(/\{\{version\}\}/g, this.widget.version);
                     return fileText;
                 }.bind(this)
             }
@@ -324,35 +283,37 @@ class MxGenerator extends Generator {
             if (this.widget.isWeb) {
                 if (this.widget.fullTemplate) {
                     this._copyFile(
-                        this.templatePath(`${this.widget.source}src/components/__tests__/Alert.spec.${extension}.ejs`),
-                        this.destinationPath(`src/components/__tests__/Alert.spec.${extension}`)
+                        this.templatePath(
+                            `${this.widget.source}${widgetSrcFolder}/__tests__/Alert.spec.${extension}.ejs`
+                        ),
+                        this.destinationPath(`${widgetSrcFolder}/__tests__/Alert.spec.${extension}`)
                     );
                     this._copyWidgetFiles(
-                        this.widget.source + `${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}.ejs`,
+                        `${this.widget.source}${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}.ejs`,
                         `${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}`
                     );
                 } else {
                     this._copyFile(
                         this.templatePath(
-                            `${this.widget.source}src/components/__tests__/HelloWorldSample.spec.${extension}.ejs`
+                            `${this.widget.source}${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${extension}.ejs`
                         ),
-                        this.destinationPath(`src/components/__tests__/HelloWorldSample.spec.${extension}`)
+                        this.destinationPath(`${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${extension}`)
                     );
                 }
             } else {
                 if (this.widget.fullTemplate) {
                     this._copyFile(
                         this.templatePath(
-                            `${this.widget.source}src/components/__tests__/BadgeSample.spec.${extension}.ejs`
+                            `${this.widget.source}${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}.ejs`
                         ),
-                        this.destinationPath(`src/components/__tests__/BadgeSample.spec.${extension}`)
+                        this.destinationPath(`${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}`)
                     );
                 } else {
                     this._copyFile(
                         this.templatePath(
-                            `${this.widget.source}src/components/__tests__/HelloWorldSample.spec.${extension}.ejs`
+                            `${this.widget.source}${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${extension}.ejs`
                         ),
-                        this.destinationPath(`src/components/__tests__/HelloWorldSample.spec.${extension}`)
+                        this.destinationPath(`${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${extension}`)
                     );
                 }
             }
