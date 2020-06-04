@@ -1,6 +1,6 @@
 {
   "name": "@mendix/pluggable-widgets-tools",
-  "version": "8.9.3",
+  "version": "8.10.0",
   "description": "Mendix Pluggable Widgets Tools",
   "license": "Apache-2.0",
   "copyright": "2020 Mendix Technology BV",
@@ -37,6 +37,7 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "@mendix/pluggable-widgets-typing-generator": "^8.9.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.3.3",
     "@typescript-eslint/eslint-plugin": "^2.19.2",
     "@typescript-eslint/parser": "^2.19.2",
     "@wdio/cli": "^5.11.13",

@@ -47,16 +47,13 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "@babel/core": "^7.6.0",
-    "@babel/preset-env": "^7.5.5",
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/classnames": "^2.2.6",
     "@types/date-arithmetic": "^3.1.2",
     "@types/react-big-calendar": "0.20.20",
     "@types/react-dnd": "^3.0.2",
     "@types/react-dnd-html5-backend": "^3.0.2",
-    "@widgets-resources/utils-react-widgets": "0.0.1",
-    "babel-loader": "^8.0.6"
+    "@widgets-resources/utils-react-widgets": "0.0.1"
   },
   "dependencies": {
     "classnames": "^2.2.6",

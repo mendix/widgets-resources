@@ -33,16 +33,13 @@ function getRealCommand(cmd, toolsRoot) {
 
     switch (cmd) {
         case "start:server":
-            return `webpack-dev-server --config ${join(
-                toolsRoot,
-                "configs/webpack.config.js"
-            )} --env=dev --quiet --hot`;
+            return `webpack-dev-server --config ${join(toolsRoot, "configs/webpack.config.js")} --env=dev --quiet`;
         case "start:web":
         case "start:js":
         case "start:ts":
         case "dev:js":
         case "dev:ts":
-            return `${gulpCommand} watch --hot`;
+            return `${gulpCommand} watch`;
         case "start:native":
         case "start:js:native":
         case "start:ts:native":

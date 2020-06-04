@@ -10,5 +10,7 @@ module.exports = env => {
         console.log(`Using custom webpack configuration from ${pathWebpack}`);
         return require(pathWebpack);
     }
-    return require(`./webpack.config.${env}.js`);
+    const config = require(`./webpack.config.${env}.js`);
+    console.log(config[0]);
+    return config[0];
 };
