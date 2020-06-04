@@ -1,5 +1,5 @@
-const path = require("path");
 const webpack = require("webpack");
+const { join, resolve } = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const variables = require("./variables");
@@ -14,9 +14,9 @@ const cwd = variables.path;
 
 const widgetConfig = {
     context: cwd,
-    entry: path.join(cwd, `src/components/${widgetName}Container.ts`),
+    entry: join(cwd, `src/components/${widgetName}Container.ts`),
     output: {
-        path: path.resolve(cwd, "dist/tmp"),
+        path: resolve(cwd, "dist/tmp"),
         filename: chunkData => {
             const fileName = chunkData.chunk.name === "main" ? widgetName : "[name]";
             return `widgets/com/mendix/widget/custom/${name}/${fileName}.js`;
@@ -25,12 +25,13 @@ const widgetConfig = {
         publicPath: "/"
     },
     devServer: {
+        compress: true,
         port: developmentPort,
         hot: true,
         proxy: [
             {
                 target: mxHost,
-                context: ["**", `!/widgets/com/mendix/widget/custom/${name}/${widgetName}.${variables.extension}`],
+                context: [`!/widgets/com/mendix/widget/custom/${name}/${widgetName}.${variables.extension}`],
                 onError(err, req, res) {
                     if (res && res.writeHead) {
                         res.writeHead(500, {
@@ -57,7 +58,7 @@ const widgetConfig = {
     resolve: {
         extensions: [".ts", ".js", ".tsx", ".jsx"],
         alias: {
-            tests: path.resolve(cwd, "./tests")
+            tests: resolve(cwd, "./tests")
         }
     },
     module: {
@@ -84,8 +85,7 @@ const widgetConfig = {
                         presets: ["@babel/preset-env", "@babel/preset-react"],
                         plugins: [
                             ["@babel/plugin-proposal-class-properties", { loose: true }],
-                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }],
-                            "react-hot-loader/babel"
+                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]
                         ]
                     }
                 }
@@ -116,9 +116,9 @@ const widgetConfig = {
 };
 
 const previewConfig = {
-    entry: path.resolve(cwd, `./src/${widgetName}.webmodeler.${variables.extension}`),
+    entry: resolve(cwd, `./src/${widgetName}.webmodeler.${variables.extension}`),
     output: {
-        path: path.resolve(cwd, "dist/tmp"),
+        path: resolve(cwd, "dist/tmp"),
         filename: `widgets/${widgetName}.webmodeler.js`,
         libraryTarget: "commonjs"
     },
@@ -146,8 +146,7 @@ const previewConfig = {
                         presets: ["@babel/preset-env", "@babel/preset-react"],
                         plugins: [
                             ["@babel/plugin-proposal-class-properties", { loose: true }],
-                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }],
-                            "react-hot-loader/babel"
+                            ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]
                         ]
                     }
                 }
