@@ -160,42 +160,42 @@ class MxGenerator extends Generator {
 
     _writeWidgetFiles() {
         const widgetName = this.widget.widgetName;
-        const fileExtension = this.widget.isTs ? "tsx" : "jsx";
+        const jsxFileExtension = this.widget.isTs ? "tsx" : "jsx";
 
         this._copyWidgetFile(`${this.widget.source}README.md`, "README.md");
 
         // web & native
         if (this.widget.emptyTemplate) {
             this._copyWidgetFile(
-                `${this.widget.source}${widgetSrcFolder}HelloWorldSample.${fileExtension}.ejs`,
-                `${widgetSrcFolder}HelloWorldSample.${fileExtension}`
+                `${this.widget.source}${widgetSrcFolder}HelloWorldSample.${jsxFileExtension}.ejs`,
+                `${widgetSrcFolder}HelloWorldSample.${jsxFileExtension}`
             );
             this._copyWidgetFile(
-                `${this.widget.source}src/WidgetName.${fileExtension}.ejs`,
-                `src/${widgetName}.${fileExtension}`
+                `${this.widget.source}src/WidgetName.${jsxFileExtension}.ejs`,
+                `src/${widgetName}.${jsxFileExtension}`
             );
         } else {
             this._copyWidgetFile(
-                `${this.widget.source}${widgetSrcFolder}BadgeSample.${fileExtension}.ejs`,
-                `${widgetSrcFolder}BadgeSample.${fileExtension}`
+                `${this.widget.source}${widgetSrcFolder}BadgeSample.${jsxFileExtension}.ejs`,
+                `${widgetSrcFolder}BadgeSample.${jsxFileExtension}`
             );
             this._copyWidgetFile(
-                `${this.widget.source}src/WidgetName.${fileExtension}.ejs`,
-                `src/${widgetName}.${fileExtension}`
+                `${this.widget.source}src/WidgetName.${jsxFileExtension}.ejs`,
+                `src/${widgetName}.${jsxFileExtension}`
             );
         }
 
         if (this.widget.isWeb) {
             this._copyWidgetFile(
-                `${this.widget.source}src/WidgetName.editorPreview.${fileExtension}.ejs`,
-                `src/${widgetName}.editorPreview.${fileExtension}`
+                `${this.widget.source}src/WidgetName.editorPreview.${jsxFileExtension}.ejs`,
+                `src/${widgetName}.editorPreview.${jsxFileExtension}`
             );
             this._copyWidgetFile(`${this.widget.source}src/ui/WidgetName.css`, `src/ui/${widgetName}.css`);
 
             if (this.widget.fullTemplate) {
                 this._copyWidgetFile(
-                    `${this.widget.source}${widgetSrcFolder}Alert.${fileExtension}.ejs`,
-                    `${widgetSrcFolder}Alert.${fileExtension}`
+                    `${this.widget.source}${widgetSrcFolder}Alert.${jsxFileExtension}.ejs`,
+                    `${widgetSrcFolder}Alert.${jsxFileExtension}`
                 );
             }
         } else {
@@ -215,7 +215,7 @@ class MxGenerator extends Generator {
     }
 
     _writePackage() {
-        const templatePath = undefined;
+        let templatePath;
 
         if (this.widget.isWeb) {
             templatePath = `packages/package.${this.widget.isTs ? "ts" : "js"}.json`;
@@ -234,7 +234,7 @@ class MxGenerator extends Generator {
 
     _writeWidgetXML() {
         this._copyFile(
-            this.templatePath(`${sthis.widget.source}src/package.xml`),
+            this.templatePath(`${this.widget.source}src/package.xml`),
             this.destinationPath("src/package.xml"),
             {
                 process: function(file) {
