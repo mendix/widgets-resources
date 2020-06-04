@@ -86,5 +86,8 @@
       "@commitlint/config-lerna-scopes",
       "@commitlint/config-conventional"
     ]
+  },
+  "dependencies": {
+    "ccnetviz": "^1.0.19"
   }
 }
