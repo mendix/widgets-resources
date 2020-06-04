@@ -1,4 +1,3 @@
-import { hot } from "react-hot-loader/root";
 import { ReactNode, useCallback, createElement } from "react";
 import { executeAction } from "@widgets-resources/piw-utils";
 import { ValueStatus } from "mendix";
@@ -8,7 +7,7 @@ import { Badge as DisplayBadge } from "./components/Badge";
 
 import "./ui/BadgeContainer.css";
 
-const Badge = (props: BadgeContainerProps): ReactNode => {
+export default function Badge(props: BadgeContainerProps): ReactNode {
     const onClick = useCallback(() => {
         executeAction(props.onClick);
     }, [props.onClick]);
@@ -24,6 +23,4 @@ const Badge = (props: BadgeContainerProps): ReactNode => {
             style={props.style}
         />
     );
-};
-
-export default hot(Badge);
+}

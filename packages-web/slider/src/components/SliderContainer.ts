@@ -1,5 +1,4 @@
 import { Component, createElement, ReactNode } from "react";
-import { hot } from "react-hot-loader/root";
 
 import { BootstrapStyle, Slider } from "./Slider";
 
@@ -41,7 +40,7 @@ interface SliderContainerState {
     value: number | null;
 }
 
-class SliderContainer extends Component<SliderContainerProps, SliderContainerState> {
+export default class SliderContainer extends Component<SliderContainerProps, SliderContainerState> {
     private subscriptionHandles: number[];
     private attributeCallback: (mxObject: mendix.lib.MxObject) => () => void;
     private selfUpdate = false;
@@ -279,5 +278,3 @@ class SliderContainer extends Component<SliderContainerProps, SliderContainerSta
         return {};
     }
 }
-
-export default hot(SliderContainer);
