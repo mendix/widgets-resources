@@ -1,6 +1,6 @@
-const path = require("path");
-const pkg = require(path.join(__dirname, "/../../package.json"));
-const fs = require("fs").promises;
+const { join } = require("path");
+const pkg = require(join(__dirname, "/../../package.json"));
+const { access, constants, mkdir, readdir } = require("fs").promises;
 const Generator = require("yeoman-generator");
 
 const promptTexts = require("./lib/prompttexts.js");
@@ -69,9 +69,9 @@ class MxGenerator extends Generator {
         let dir = null;
         let currentDir = "../";
         let i = 0;
-        const currentPath = (this.dir ? path.join(process.cwd() + "/" + this.dir) : process.cwd()) + "/";
+        const currentPath = (this.dir ? join(process.cwd() + "/" + this.dir) : process.cwd()) + "/";
         while (i < 5 && dir === null) {
-            const items = await fs.readdir(path.join(currentPath, currentDir));
+            const items = await readdir(join(currentPath, currentDir));
             if (items.find(item => item.endsWith(".mpr"))) {
                 dir = currentDir;
                 break;
@@ -343,7 +343,7 @@ class MxGenerator extends Generator {
         if (this.props) {
             if (this.dir) {
                 if (!this._dirExists(this.dir)) {
-                    await fs.mkdir(this.dir);
+                    await mkdir(this.dir);
                 }
                 this.destinationRoot(this.dir);
             }
@@ -408,12 +408,12 @@ class MxGenerator extends Generator {
             return true;
         }
 
-        return (await fs.readdir(dirname)).length === 0;
+        return (await readdir(dirname)).length === 0;
     }
 
     async _dirExists(dirname) {
         try {
-            await fs.access(dirname, fs.constants.F_OK);
+            await access(dirname, constants.F_OK);
             return true;
         } catch {
             return false;
