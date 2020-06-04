@@ -31,7 +31,7 @@ In your `package.json` scripts, use the following command with the desired task:
 -   `lint` Lint your project using ESLint and Prettier
 -   `lint:fix` Fix lint problems/warning of ESLint and Prettier
 -   `format` Format your code using Prettier
--   `test:unit` Run unit tests for your Web widget. Accepts option `--u` to update snapshots, `--no-cache` to remove existing caches, `--ci` assumes use of a CI environment, `--coverage` to support coverage test.
+-   `test:unit:web` Run unit tests for your Web widget. Accepts option `--u` to update snapshots, `--no-cache` to remove existing caches, `--ci` assumes use of a CI environment, `--coverage` to support coverage test.
 -   `test:unit:native` Run unit tests for your Native widget. Accepts option `--u` to update snapshots, `--no-cache` to remove existing caches, `--ci` assumes use of a CI environment, `--coverage` to support coverage test.
 -   `test:e2e` Execute end-to-end tests in your Web widget
 

@@ -13,18 +13,18 @@
   },
   "packagePath": "<%- packagePath %>",
   "scripts": {
-    "start": "concurrently \"pluggable-widgets-tools start:server --open\" \"npm:dev\"",
-    "dev": "pluggable-widgets-tools start:ts",
-    "build": "pluggable-widgets-tools build:ts",
+    "start": "pluggable-widgets-tools start:server --open",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:web",
     "lint": "pluggable-widgets-tools lint",
     "lint:fix": "pluggable-widgets-tools lint:fix",<% if (unitTests || e2eTests) { %>
     "pretest": "npm run lint && npm run build",<% } %><% if (unitTests) { %>
-    "test": "pluggable-widgets-tools test:unit --no-cache --ci<% if (e2eTests) { %> && npm run test:e2e<% } %>",
-    "test:unit": "pluggable-widgets-tools test:unit --coverage",<% } %><% if (e2eTests) { %>
-    "test:e2e": "export URL=https://badge.mxapps.io || set URL=https://badge.mxapps.io && pluggable-widgets-tools test:e2e:ts",
-    "test:e2e:dev": "export DEBUG=true || set DEBUG=true && pluggable-widgets-tools test:e2e:ts",<% } %>
+    "test": "pluggable-widgets-tools test:unit:web --no-cache --ci<% if (e2eTests) { %> && npm run test:e2e<% } %>",
+    "test:unit": "pluggable-widgets-tools test:unit:web --coverage",<% } %><% if (e2eTests) { %>
+    "test:e2e": "export URL=https://badge.mxapps.io || set URL=https://badge.mxapps.io && pluggable-widgets-tools test:e2e",
+    "test:e2e:dev": "export DEBUG=true || set DEBUG=true && pluggable-widgets-tools test:e2e",<% } %>
     "prerelease": "npm run lint",
-    "release": "pluggable-widgets-tools release:ts"
+    "release": "pluggable-widgets-tools release:web"
   },
   "license": "<%- license %>",
   "devDependencies": {

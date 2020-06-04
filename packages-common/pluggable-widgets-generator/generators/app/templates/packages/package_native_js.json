@@ -12,15 +12,15 @@
   "packagePath": "<%- packagePath %>",
   "scripts": {
     "start": "npm run dev",
-    "build": "pluggable-widgets-tools build:js:native",
-    "dev": "pluggable-widgets-tools start:js:native",
+    "build": "pluggable-widgets-tools build:native",
+    "dev": "pluggable-widgets-tools start:native",
     "lint": "pluggable-widgets-tools lint",
     "lint:fix": "pluggable-widgets-tools lint:fix",<% if (unitTests) { %>
     "pretest": "npm run lint && npm run build",
     "test": "pluggable-widgets-tools test:unit:native --no-cache --ci",
     "test:unit": "pluggable-widgets-tools test:unit:native --coverage",<% } %>
     "prerelease": "npm run lint",
-    "release": "pluggable-widgets-tools release:js:native"
+    "release": "pluggable-widgets-tools release:native"
   },<% if (unitTests) { %>
   "jest-junit": {
     "output": "./dist/testresults/TESTS-Jest.xml"
