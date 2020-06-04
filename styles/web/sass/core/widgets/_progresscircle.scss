@@ -6,26 +6,19 @@
 //
 
 /* ==========================================================================
-   Labels
+   Progress Circle
 
-   Default labels combined with Bootstrap labels
+   Default Mendix Progress Circle Widget.
 ========================================================================== */
 
-label,
-.label {
-    display: inline-block;
-    margin: 0;
-    padding: 0.2em 0.6em 0.3em;
-    text-align: center;
-    vertical-align: baseline;
-    white-space: nowrap;
-    color: #FFFFFF;
-    border-radius: 0.25em;
-    font-size: 100%;
-    line-height: 1;
+.widget-progress-circle {
+    width: 100%;
+}
 
-    .form-control-static {
-        font-weight: $font-weight-normal;
-        all: unset;
-    }
+.widget-progress-circle-trail-path {
+    stroke: #EEEEEE;
+}
+
+.widget-progress-circle-default .widget-progress-circle-path {
+    stroke: #DDDDDD;
 }

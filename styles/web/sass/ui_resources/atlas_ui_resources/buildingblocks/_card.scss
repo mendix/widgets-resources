@@ -4,15 +4,22 @@
 ========================================================================== */
 .card {
     padding: 30px;
-    border: 1px solid $border-color-default;
+    border: 0;
     border-radius: $border-radius-default;
     background-color: #FFFFFF;
+    box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05);
 }
 
 //== Elements
 //-------------------------------------------------------------------------------------------------------------------//
 .card-title {
     margin-top: 0;
+    color: #212B36;
+    font-size: 16px;
+}
+
+.card-section {
+    padding: 30px;
 }
 
 //== Variations
@@ -120,11 +127,11 @@
     ul.mx-tabcontainer-tabs {
         display: flex;
         margin: 0;
-        background-color: mix($tabs-border-color, #FFFFFF, 20%);
+        padding-right: $spacing-medium;
+        padding-left: $spacing-medium;
 
         li {
-            flex: 1 1 auto;
-            text-align: center;
+            margin-right: $spacing-large;
 
             a,
             a:hover,

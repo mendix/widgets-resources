@@ -1,0 +1,37 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+/* ==========================================================================
+   Rating
+
+//== Design Properties
+//## Helper classes to change the look and feel of the component
+========================================================================== */
+
+.widget-star-rating-full-primary {
+    color: $brand-primary;
+}
+
+.widget-star-rating-full-success {
+    color: $brand-success;
+}
+
+.widget-star-rating-full-info {
+    color: $brand-info;
+}
+
+.widget-star-rating-full-warning {
+    color: $brand-warning;
+}
+
+.widget-star-rating-full-danger {
+    color: $brand-danger;
+}
+
+.widget-star-rating-full-inverse {
+    color: $brand-inverse;
+}

@@ -6,26 +6,28 @@
 //
 
 /* ==========================================================================
-   Labels
+   Slider
 
-   Default labels combined with Bootstrap labels
+   Default Mendix Slider Widget.
 ========================================================================== */
 
-label,
-.label {
-    display: inline-block;
-    margin: 0;
-    padding: 0.2em 0.6em 0.3em;
-    text-align: center;
-    vertical-align: baseline;
-    white-space: nowrap;
-    color: #FFFFFF;
-    border-radius: 0.25em;
-    font-size: 100%;
-    line-height: 1;
+.widget-slider {
+    margin-bottom: 15px;
+    padding: 5px 10px;
 
-    .form-control-static {
-        font-weight: $font-weight-normal;
-        all: unset;
+    .rc-slider-handle,
+    .rc-slider-dot-active {
+        border-color: #DDDDDD;
+    }
+
+    .rc-slider.rc-slider-with-marks {
+        padding-bottom: 25px;
+    }
+
+    &.has-error {
+        .rc-slider-track,
+        .rc-slider-rail {
+            background-color: $brand-danger;
+        }
     }
 }

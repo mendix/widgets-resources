@@ -1,37 +1,57 @@
 // Timeline
-.timeline {
-    .timeline-header {
-        display: inline-block;
-        width: 110px;
-        padding: 8px;
-        text-align: center;
-        border: 1px solid $border-color-default;
-        border-radius: 30px;
+
+.timeline-header {
+    display: inline-block;
+    width: 110px;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid $border-color-default;
+    border-radius: 30px;
+}
+
+.timeline-header ~ .timeline-itemwrapper.mx-listview {
+    margin-left: 55px;
+
+    & > ul > li:first-child {
+        padding-top: $spacing-large;
+
+        &:last-child {
+            border-left: 1px solid $border-color-default;
+        }
     }
 }
+
 .timeline-itemwrapper.mx-listview {
     margin-bottom: 0;
-    margin-left: 55px;
-    padding: $spacing-large 0;
-    border-left: 1px solid $border-color-default;
+    //margin-left: 55px;
+    //padding: $spacing-large 0;
+    margin-left: 9px;
+
+
     & > ul > li {
         position: relative;
         padding-left: ($gutter-size * 2);
 
         &::before {
             position: absolute;
-            top: 5px;
-            left: -5px;
+            //top: 5px;
+            left: -9px;
             display: block;
-            width: 10px;
-            height: 10px;
+            width: 18px;
+            height: 18px;
             content: '';
             border-radius: 50%;
-            background-color: $brand-primary;
+            background-color: $border-color-default;
+        }
+
+        &:not(:last-child) {
+            border-left: 1px solid $border-color-default;
         }
     }
+
+    li:first-child,
     li + li {
-        margin-top: $spacing-large;
+        padding-bottom: $spacing-large;
     }
 }
 

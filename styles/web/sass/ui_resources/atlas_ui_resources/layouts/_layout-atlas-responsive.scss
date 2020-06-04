@@ -4,7 +4,7 @@
    Extra styling for responsive layouts
 ========================================================================== */
 .layout-atlas-responsive-default {
-    $sidebar-width: 60px;
+    $sidebar-width: 40px;
 
     @media (min-width: $screen-md) {
         .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
@@ -70,7 +70,7 @@
             display: inline-block !important;
         }
     }
-   
+
     .mx-scrollcontainer-slide,
     .mx-scrollcontainer-push {
         &:not(.mx-scrollcontainer-open) > .region-sidebar {
@@ -92,6 +92,7 @@
             .navbar-inner > ul > li {
                 & > a {
                     height: $sidebar-width;
+                    padding: $spacing-small;
                     // Glyph icon
                     .glyphicon {
                         display: flex;
@@ -102,12 +103,6 @@
                         margin-left: -5px;
                         padding: 10px;
                         border-radius: 3px;
-                    }
-
-                    &.active {
-                        .glyphicon {
-                            background: $brand-primary;
-                        }
                     }
                 }
             }

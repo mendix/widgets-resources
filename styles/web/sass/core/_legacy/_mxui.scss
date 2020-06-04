@@ -2740,12 +2740,12 @@ input[type="checkbox"] {
 .mx-navigationtree ul {
     list-style: none;
 }
-.mx-navigationtree ul li {
-    border-bottom: 1px solid #dfe6ea;
-}
-.mx-navigationtree li:last-child {
-    border-style: none;
-}
+//.mx-navigationtree ul li {
+//    border-bottom: 1px solid #dfe6ea;
+//}
+//.mx-navigationtree li:last-child {
+//    border-style: none;
+//}
 .mx-navigationtree a {
     display: block;
     padding: 5px 10px;
@@ -2766,9 +2766,9 @@ input[type="checkbox"] {
     margin: 0;
     padding: 0;
 }
-.mx-navigationtree ul li {
-    padding: 5px 0;
-}
+//.mx-navigationtree ul li {
+//    padding: 5px 0;
+//}
 .mx-navigationtree ul li ul {
     padding: 0;
     margin-left: 10px;

@@ -15,16 +15,19 @@
 .tab-pills.mx-tabcontainer {
     & > .mx-tabcontainer-tabs {
         border: 0;
+
         & > li > a {
             margin-right: 2px;
             color: $tabs-color;
             border: 1px solid $tabs-border-color;
             border-radius: 4px;
+
             &:hover,
             &:focus {
                 background-color: $tabs-bg-hover;
             }
         }
+
         & > li.active > a,
         & > li.active > a:hover,
         & > li.active > a:focus {
@@ -38,18 +41,21 @@
 // Style with lines
 .tab-lined.mx-tabcontainer {
     & > .mx-tabcontainer-tabs {
-        border-width: 3px;
+        border-width: 1px;
+
         li {
             margin-right: 30px;
-            margin-bottom: -3px;
+            //margin-bottom: 1px;
+
             & > a {
-                padding: 10px 0;
+                padding: 15px 0;
                 color: $tabs-color;
                 border: 0;
                 border-style: solid;
                 border-color: transparent;
                 border-bottom-width: 3px;
                 border-radius: 0;
+
                 &:hover,
                 &:focus {
                     color: $tabs-color;
@@ -58,6 +64,7 @@
                     background: transparent;
                 }
             }
+
             &.active > a,
             &.active > a:hover,
             &.active > a:focus {
@@ -76,6 +83,7 @@
     & > .mx-tabcontainer-tabs {
         width: 100%;
         border-bottom: 0;
+
         & > li {
             display: table-cell;
             float: none;
@@ -85,11 +93,13 @@
                 display: block;
                 width: 100%;
             }
+
             & > a {
                 text-align: center;
                 border-bottom: 1px solid $tabs-border-color;
             }
         }
+
         & > li.active > a {
             border-bottom-color: transparent;
             border-radius: 4px;
@@ -105,12 +115,13 @@
     & > .mx-tabcontainer-tabs {
         margin: 0;
     }
+
     & > .mx-tabcontainer-content {
         padding: 10px;
         border-width: 0 1px 1px 1px;
         border-style: solid;
         border-color: $tabs-border-color;
-        background-color: #FFFFFF;
+        background-color: transparent;
     }
 }
 
@@ -131,25 +142,28 @@
             content: "";
             background-color: $tabs-border-color;
         }
+
         & > li {
             position: relative;
             float: none;
             width: 100%;
             text-align: center;
+
             & > a {
                 width: 33px;
                 height: 33px;
                 margin: auto;
                 padding: 0;
                 text-align: center;
-                color: $brand-default;
+                color: $brand-primary;
                 border: 1px solid $tabs-border-color;
                 border-radius: 100%;
-                background-color: #FFFFFF;
+                background-color: $bg-color;
                 font-size: 18px;
                 font-weight: bold;
                 line-height: 33px;
             }
+
             &.active {
                 & > a,
                 & > a:hover,

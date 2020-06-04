@@ -38,8 +38,7 @@
 .listview-seperated.mx-listview {
     & > ul > li {
         margin-bottom: $gutter-size;
-        border-width: 1px;
-        border-style: solid;
+        border: 1px solid $grid-border-color;
         border-radius: $border-radius-default;
     }
 }

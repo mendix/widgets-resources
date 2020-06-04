@@ -1,6 +1,6 @@
 /* ==========================================================================
    Atlas layout
-   
+
    The core stucture of all atlas layouts
 ========================================================================== */
 .layout-atlas {
@@ -14,10 +14,10 @@
         background-color: $navsidebar-bg;
 
         .mx-navigationtree .navbar-inner > ul > li > a {
-            padding: 0 15px;
+            padding: 10px 16px;
 
             .glyphicon {
-                margin-right: 10px;
+                margin-right: 16px;
             }
         }
         .toggle-btn {

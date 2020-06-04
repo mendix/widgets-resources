@@ -1,13 +1,19 @@
 import { NativeModules }                from "react-native";
-import { darkMode }                     from "../../../app/custom-variables.js";
-import { background, font, navigation } from "../../../core/variables";
+import { darkMode }                     from "../../app/custom-variables";
+import { background, font, navigation } from "../variables";
 /*
-==========================================================================
-    TopBar / BottomBar / ProgressOverlay
 
-    Default Class For Mendix TopBar, BottomBar and ProgressOverlay
+DISCLAIMER:
+Do not change this file because it is core styling.
+Customizing core files will make updating Atlas much more difficult in the future.
+To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
+
 ==========================================================================
-*/
+    Sidebar / Statusbar / Header
+
+    Default Class For Mendix Sidebar, Statusbar and Header
+========================================================================== */
+
 // backgroundColor of the native iOS statusbar can not be changed.
 // To fix this we change the barStyle of the statusbar if OS theme is dark and app theme is light (And the other way around).
 const isOSDarkMode = NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode && NativeModules.RNDarkMode.initialMode === "dark";
@@ -52,5 +58,3 @@ export const Layout = {
         backgroundColor: background.primary,
     },
 };
-//
-export const Page = Layout;
