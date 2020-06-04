@@ -118,19 +118,14 @@ class MxGenerator extends Generator {
         }
     }
 
-    _copyFiles(source, dest) {
-        this._copyTemplate(this.templatePath(source), this.destinationPath(dest), this.widget);
-    }
-
     _writeUtilityFiles() {
-        this._copyFiles("commons/_gitignore", ".gitignore");
-        if (this.widget.isTs) {
-            this._copyFiles("commons/eslintrc.ts.js", ".eslintrc.js");
-        } else {
-            this._copyFiles("commons/eslintrc.js.js", ".eslintrc.js");
-        }
-        this._copyFiles("commons/prettier.config.js", "prettier.config.js");
-        this._copyFiles("commons/.gitattributes", ".gitattributes");
+        this._copyFile(this.templatePath("commons/_gitignore"), this.destinationPath(".gitignore"));
+        this._copyFile(
+            this.templatePath(`commons/eslintrc.${this.widget.isTs ? "ts" : "js"}.js`),
+            this.destinationPath(".eslintrc.js")
+        );
+        this._copyFile(this.templatePath("commons/prettier.config.js"), this.destinationPath("prettier.config.js"));
+        this._copyFile(this.templatePath("commons/.gitattributes"), this.destinationPath(".gitattributes"));
 
         if (this.widget.license) {
             switch (this.widget.license.toLowerCase()) {
@@ -150,7 +145,7 @@ class MxGenerator extends Generator {
         }
     }
 
-    _copyWidgetFiles(src, dest) {
+    _copyWidgetFile(src, dest) {
         this._copyFile(this.templatePath(src), this.destinationPath(dest), {
             process: function(file) {
                 let fileText = file.toString();
@@ -167,38 +162,38 @@ class MxGenerator extends Generator {
         const widgetName = this.widget.widgetName;
         const fileExtension = this.widget.isTs ? "tsx" : "jsx";
 
-        this._copyWidgetFiles(`${this.widget.source}README.md`, "README.md");
+        this._copyWidgetFile(`${this.widget.source}README.md`, "README.md");
 
         // web & native
         if (this.widget.emptyTemplate) {
-            this._copyWidgetFiles(
+            this._copyWidgetFile(
                 `${this.widget.source}${widgetSrcFolder}HelloWorldSample.${fileExtension}.ejs`,
                 `${widgetSrcFolder}HelloWorldSample.${fileExtension}`
             );
-            this._copyWidgetFiles(
+            this._copyWidgetFile(
                 `${this.widget.source}src/WidgetName.${fileExtension}.ejs`,
                 `src/${widgetName}.${fileExtension}`
             );
         } else {
-            this._copyWidgetFiles(
+            this._copyWidgetFile(
                 `${this.widget.source}${widgetSrcFolder}BadgeSample.${fileExtension}.ejs`,
                 `${widgetSrcFolder}BadgeSample.${fileExtension}`
             );
-            this._copyWidgetFiles(
+            this._copyWidgetFile(
                 `${this.widget.source}src/WidgetName.${fileExtension}.ejs`,
                 `src/${widgetName}.${fileExtension}`
             );
         }
 
         if (this.widget.isWeb) {
-            this._copyWidgetFiles(
+            this._copyWidgetFile(
                 `${this.widget.source}src/WidgetName.editorPreview.${fileExtension}.ejs`,
                 `src/${widgetName}.editorPreview.${fileExtension}`
             );
-            this._copyWidgetFiles(`${this.widget.source}src/ui/WidgetName.css`, `src/ui/${widgetName}.css`);
+            this._copyWidgetFile(`${this.widget.source}src/ui/WidgetName.css`, `src/ui/${widgetName}.css`);
 
             if (this.widget.fullTemplate) {
-                this._copyWidgetFiles(
+                this._copyWidgetFile(
                     `${this.widget.source}${widgetSrcFolder}Alert.${fileExtension}.ejs`,
                     `${widgetSrcFolder}Alert.${fileExtension}`
                 );
@@ -207,12 +202,12 @@ class MxGenerator extends Generator {
             const fileExtension = this.widget.isTs ? "ts" : "js";
 
             if (this.widget.fullTemplate) {
-                this._copyWidgetFiles(
+                this._copyWidgetFile(
                     `${this.widget.source}src/ui/styles.${fileExtension}`,
                     `src/ui/styles.${fileExtension}`
                 );
             }
-            this._copyWidgetFiles(
+            this._copyWidgetFile(
                 `${this.widget.source}src/utils/common.${fileExtension}`,
                 `src/utils/common.${fileExtension}`
             );
@@ -233,17 +228,13 @@ class MxGenerator extends Generator {
 
     _writeCompilerOptions() {
         if (this.widget.isTs) {
-            this._copyTemplate(
-                this.templatePath("commons/tsconfig.json"),
-                this.destinationPath("tsconfig.json"),
-                this.widget
-            );
+            this._copyFile(this.templatePath("commons/tsconfig.json"), this.destinationPath("tsconfig.json"));
         }
     }
 
     _writeWidgetXML() {
         this._copyFile(
-            this.templatePath(this.widget.source + "src/package.xml"),
+            this.templatePath(`${sthis.widget.source}src/package.xml`),
             this.destinationPath("src/package.xml"),
             {
                 process: function(file) {
@@ -259,8 +250,8 @@ class MxGenerator extends Generator {
         );
 
         this._copyFile(
-            this.templatePath(this.widget.source + "src/WidgetName.xml"),
-            this.destinationPath("src/" + this.widget.widgetName + ".xml"),
+            this.templatePath(`${this.widget.source}src/WidgetName.xml`),
+            this.destinationPath(`src/${this.widget.widgetName}.xml`),
             {
                 process: function(file) {
                     let fileText = file.toString();
@@ -288,7 +279,7 @@ class MxGenerator extends Generator {
                         ),
                         this.destinationPath(`${widgetSrcFolder}/__tests__/Alert.spec.${extension}`)
                     );
-                    this._copyWidgetFiles(
+                    this._copyWidgetFile(
                         `${this.widget.source}${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}.ejs`,
                         `${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}`
                     );
@@ -336,32 +327,14 @@ class MxGenerator extends Generator {
                 );
             }
 
-            this._copyFile(
-                this.templatePath(`${this.widget.source}tests/e2e/WidgetName.spec.${extension}.ejs`),
-                this.destinationPath(`tests/e2e/${widgetName}.spec.${extension}`),
-                {
-                    process: function(file) {
-                        let fileText = file.toString();
-                        fileText = fileText
-                            .replace(/WidgetName/g, widgetName)
-                            .replace(/packageName/g, this.widget.widgetName.toLowerCase());
-                        return fileText;
-                    }.bind(this)
-                }
+            this._copyWidgetFile(
+                `${this.widget.source}tests/e2e/WidgetName.spec.${extension}.ejs`,
+                `tests/e2e/${widgetName}.spec.${extension}`
             );
 
             this._copyFile(
                 this.templatePath(`${this.widget.source}tests/e2e/pages/home.page.${extension}.ejs`),
-                this.destinationPath(`tests/e2e/pages/home.page.${extension}`),
-                {
-                    process: function(file) {
-                        let fileText = file.toString();
-                        fileText = fileText
-                            .replace(/WidgetName/g, widgetName)
-                            .replace(/packageName/g, this.widget.widgetName.toLowerCase());
-                        return fileText;
-                    }.bind(this)
-                }
+                this.destinationPath(`tests/e2e/pages/home.page.${extension}`)
             );
         }
     }
