@@ -14,13 +14,15 @@ const devConfig = {
     mode: "development",
     devtool: "source-map",
     devServer: {
+        inline: true,
+        compress: true,
         port: developmentPort,
         overlay: {
             errors: true
         },
         proxy: [
             {
-                context: ["**", `!/widgets/${packagePath}/${name}/${widgetName}.js`],
+                context: [`!widgets/${packagePath}/${name}/${widgetName}.js`],
                 target: mxHost,
                 onError(err, req, res) {
                     if (res && res.writeHead) {
@@ -40,9 +42,6 @@ const devConfig = {
         ]
     },
     plugins: [new webpack.HotModuleReplacementPlugin()],
-    resolve: {
-        alias: { "react-dom": "@hot-loader/react-dom" }
-    },
     module: {
         rules: [
             {

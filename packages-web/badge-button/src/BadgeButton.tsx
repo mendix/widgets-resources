@@ -1,11 +1,10 @@
 import { createElement, useCallback, ReactNode } from "react";
-import { hot } from "react-hot-loader/root";
 
 import { BadgeButton as BadgeButtonComponent } from "./components/BadgeButton";
 import { BadgeButtonContainerProps } from "../typings/BadgeButtonProps";
 import { executeAction } from "@widgets-resources/piw-utils";
 
-const BadgeButton = (props: BadgeButtonContainerProps): ReactNode => {
+export default function BadgeButton(props: BadgeButtonContainerProps): ReactNode {
     const onClick = useCallback(() => {
         executeAction(props.onClickEvent);
     }, [props.onClickEvent]);
@@ -20,6 +19,4 @@ const BadgeButton = (props: BadgeButtonContainerProps): ReactNode => {
             value={props.value && props.value.status === "available" ? props.value.value : ""}
         />
     );
-};
-
-export default hot(BadgeButton);
+}

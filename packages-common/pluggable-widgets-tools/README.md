@@ -72,3 +72,8 @@ In your `package.json` scripts, use the following command with the desired task:
     -   `webpack.config.dev.js` - (optional) custom configurations for webpack bundler (both for client and preview components) when running in development mode. The standard confiugration can be imported from `@mendix/pluggable-widgets-tools/configs/webpack.config.dev.js` for web and from `@mendix/pluggable-widgets-tools/configs/webpack.native.config.js` for native apps.
     -   `webpack.config.prod.js` - (optional) custom configuration for webpack bundler in release mode.
     -   `package.json` - widget package definitions, inluding its dependencies, scripts, and basic configuration (`widgetName` and `config.projectPath` in particular)
+
+## Migrating from 8.9 to 8.10
+
+As we removed React-Hot-Loader from the dependencies (due to MXUI do not allow React in dev mode) you dont need anymore to export your main entrypoint using `export default hot(MyWidget);` anymore, you can simply export (`export default MyWidget;`) your main class as default.
+The functionality of auto refresh will still work using the `start` and `dev` scripts.
