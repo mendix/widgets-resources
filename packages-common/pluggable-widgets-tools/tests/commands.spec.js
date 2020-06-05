@@ -14,9 +14,8 @@ const CONFIGS = [
     ["web", "js", "8.3"],
     ["native", "ts", "8.6"],
     ["web", "ts", "8.6"],
-    ["web", "js", "8.7"]
-    // ["web", "ts", "latest"], //Disabling temporally while generator is not imported
-    // ["native", "js", "latest"], //Disabling temporally while generator is not imported
+    ["web", "js", "8.7"][("web", "ts", "latest")],
+    ["native", "js", "latest"]
 ];
 
 if (LIMIT_TESTS) {

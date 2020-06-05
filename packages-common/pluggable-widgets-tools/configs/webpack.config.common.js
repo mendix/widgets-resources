@@ -1,4 +1,5 @@
-const path = require("path");
+const { join } = require("path");
+const { NormalModuleReplacementPlugin } = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const variables = require("./variables");
 
@@ -9,7 +10,7 @@ const name = widgetName.toLowerCase();
 const widgetConfig = {
     entry: variables.widgetEntry,
     output: {
-        path: path.join(variables.projectPath, "/dist/tmp"),
+        path: join(variables.projectPath, "/dist/tmp"),
         filename: `widgets/${packagePath}/${name}/${widgetName}.js`,
         libraryTarget: "umd",
         publicPath: "/"
@@ -47,6 +48,7 @@ const widgetConfig = {
     },
     externals: [/^mendix\//, "react", "react-dom", "big.js"],
     plugins: [
+        new NormalModuleReplacementPlugin(/react-hot-loader\/root/, join(__dirname, "hot.js")),
         new CopyWebpackPlugin(
             [
                 {
@@ -63,7 +65,7 @@ const widgetConfig = {
 const previewConfig = {
     entry: variables.previewEntry,
     output: {
-        path: path.join(variables.projectPath, "/dist/tmp"),
+        path: join(variables.projectPath, "/dist/tmp"),
         filename: `widgets/${widgetName}.editorPreview.js`,
         libraryTarget: "commonjs"
     },
@@ -106,7 +108,7 @@ const editorConfigConfig = {
     devtool: false,
     entry: variables.editorConfigEntry,
     output: {
-        path: path.join(variables.projectPath, "/dist/tmp"),
+        path: join(variables.projectPath, "/dist/tmp"),
         filename: `widgets/${widgetName}.editorConfig.js`,
         libraryTarget: "commonjs"
     },
