@@ -75,5 +75,4 @@ In your `package.json` scripts, use the following command with the desired task:
 
 ## Migrating from 8.9 to 8.10
 
-As we removed React-Hot-Loader from the dependencies (due to MXUI do not allow React in dev mode) you dont need anymore to export your main entrypoint using `export default hot(MyWidget);` anymore, you can simply export (`export default MyWidget;`) your main class as default.
-The functionality of auto refresh will still work using the `start` and `dev` scripts.
+React-hot-loader is not anymore needed to provide auto refresh functionality. That is, you can remove its usage from the code: your main entry point can simply be `export default MyWidget;` instead of `export default hot(MyWidget);`.
