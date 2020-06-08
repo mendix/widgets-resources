@@ -1,6 +1,6 @@
 {
   "name": "@mendix/generator-widget",
-  "version": "8.9.1",
+  "version": "8.10.0",
   "description": "Mendix Pluggable Widgets Generator",
   "license": "Apache-2.0",
   "copyright": "2020 Mendix Technology B.V.",
@@ -37,6 +37,7 @@
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-prettier": "^3.1.2"
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1"
   }
 }
