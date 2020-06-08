@@ -20,8 +20,8 @@
     "lint:fix": "pluggable-widgets-tools lint:fix",<% if (unitTests) { %>
     "test": "pluggable-widgets-tools test:unit:web --no-cache --ci<% if (e2eTests) { %> && npm run test:e2e<% } %>",
     "test:unit": "pluggable-widgets-tools test:unit:web --coverage",<% } %><% if (e2eTests) { %>
-    "test:e2e": "export URL=https://badge.mxapps.io || set URL=https://badge.mxapps.io && pluggable-widgets-tools test:e2e",
-    "test:e2e:dev": "export DEBUG=true || set DEBUG=true && pluggable-widgets-tools test:e2e",<% } %>
+    "test:e2e": "pluggable-widgets-tools test:e2e --url \"https://badge.mxapps.io\"",
+    "test:e2e:dev": "pluggable-widgets-tools test:e2e --debug",<% } %>
     "prerelease": "npm run lint",
     "release": "pluggable-widgets-tools release:web"
   },
