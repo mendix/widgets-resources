@@ -1,5 +1,5 @@
 import {
-    ColumnInstance,
+    HeaderGroup,
     TableInstance,
     UseColumnOrderInstanceProps,
     UseFiltersColumnProps,
@@ -8,7 +8,7 @@ import {
 } from "react-table";
 
 export interface ExtendedColumnInstance
-    extends ColumnInstance<any>,
+    extends HeaderGroup<any>,
         UseSortByColumnProps<any>,
         UseResizeColumnsColumnProps<any>,
         UseFiltersColumnProps<any> {}

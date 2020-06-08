@@ -37,12 +37,16 @@
             background-color: #fff;
             padding: 15px;
 
+            .sortable:after {
+                content: "⇅";
+            }
+
             .asc:after {
-                content: "▲";
+                content: "↑";
             }
 
             .desc:after {
-                content: "▼";
+                content: "↓";
             }
 
             .clickable {

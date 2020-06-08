@@ -148,11 +148,18 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                     {headerGroups.map((headerGroup, index: number) => (
                         <div {...headerGroup.getHeaderGroupProps({})} key={`headers_row_${index}`} className="tr">
                             {headerGroup.headers.map((column: ExtendedColumnInstance, index: number) => {
-                                const sortClass = column.isSorted ? (column.isSortedDesc ? "desc" : "asc") : "";
                                 const { onClick, style, ...rest } = column.getHeaderProps(
                                     props.columnsSortable && column.canSort ? column.getSortByToggleProps() : undefined
                                 ) as TableHeaderProps & { onClick: () => void };
                                 const { filterable, sortable, resizable, draggable } = columnsConfig[column.id];
+                                const sortClass =
+                                    props.columnsSortable && sortable
+                                        ? column.isSorted
+                                            ? column.isSortedDesc
+                                                ? "desc"
+                                                : "asc"
+                                            : "sortable"
+                                        : "";
                                 return (
                                     <div
                                         className="th"
