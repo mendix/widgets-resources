@@ -4,7 +4,6 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const variables = require("./variables");
-// console.log("variables", variables);
 
 const widgetName = variables.package.widgetName;
 const name = widgetName.toLowerCase();

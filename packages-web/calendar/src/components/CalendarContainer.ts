@@ -1,4 +1,3 @@
-import { hot } from "react-hot-loader/root";
 import { Component, createElement, ReactChild, ReactNode } from "react";
 
 import { Calendar, CalendarEvent } from "./Calendar";
@@ -23,7 +22,7 @@ interface ViewDate {
     end: Date;
 }
 
-class CalendarContainer extends Component<Container.CalendarContainerProps, CalendarContainerState> {
+export default class CalendarContainer extends Component<Container.CalendarContainerProps, CalendarContainerState> {
     private subscriptionContextHandles: number[] = [];
     private subscriptionEventHandles: number[] = [];
     private progressHandle?: number;
@@ -445,5 +444,3 @@ class CalendarContainer extends Component<Container.CalendarContainerProps, Cale
         }
     }
 }
-
-export default hot(CalendarContainer);

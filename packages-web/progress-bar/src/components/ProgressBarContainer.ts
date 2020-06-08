@@ -1,5 +1,4 @@
 import { Component, createElement, ReactNode } from "react";
-import { hot } from "react-hot-loader/root";
 import { BarStyle, BarType, ProgressBar } from "./ProgressBar";
 import { Alert } from "./Alert";
 
@@ -47,7 +46,7 @@ export type DisplayText = "none" | "value" | "percentage" | "static" | "attribut
 type OnClickOptions = "doNothing" | "showPage" | "callMicroflow" | "callNanoflow";
 type PageLocation = "content" | "popup" | "modal";
 
-class ProgressBarContainer extends Component<ProgressBarContainerProps, ProgressBarContainerState> {
+export default class ProgressBarContainer extends Component<ProgressBarContainerProps, ProgressBarContainerState> {
     private subscriptionHandles: number[];
     private subscriptionCallback: (mxObject: mendix.lib.MxObject) => () => void;
     private defaultMaximumValue = 100;
@@ -235,5 +234,3 @@ class ProgressBarContainer extends Component<ProgressBarContainerProps, Progress
         return errorMessage && `Error in progress bar configuration: ${errorMessage}`;
     }
 }
-
-export default hot(ProgressBarContainer);

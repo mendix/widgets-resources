@@ -72,3 +72,9 @@ In your `package.json` scripts, use the following command with the desired task:
     -   `webpack.config.dev.js` - (optional) custom configurations for webpack bundler (both for client and preview components) when running in development mode. The standard confiugration can be imported from `@mendix/pluggable-widgets-tools/configs/webpack.config.dev.js` for web and from `@mendix/pluggable-widgets-tools/configs/webpack.native.config.js` for native apps.
     -   `webpack.config.prod.js` - (optional) custom configuration for webpack bundler in release mode.
     -   `package.json` - widget package definitions, inluding its dependencies, scripts, and basic configuration (`widgetName` and `config.projectPath` in particular)
+
+## Migrating from 8.9 to 8.10
+
+React-hot-loader is not anymore needed to provide auto refresh functionality. That is, you can remove its usage from the code: your main entry point can simply be `export default MyWidget;` instead of `export default hot(MyWidget);`.
+
+**If you do not change your widget, hot will be replaced with a noop function that has no effect.**

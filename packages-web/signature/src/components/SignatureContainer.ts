@@ -1,5 +1,4 @@
 import { Component, createElement, ReactNode } from "react";
-import { hot } from "react-hot-loader/root";
 
 import { Dimensions } from "./SizeContainer";
 import Utils from "../utils/Utils";
@@ -30,7 +29,7 @@ interface SignatureContainerState {
     hasSignature: boolean;
 }
 
-class SignatureContainer extends Component<SignatureContainerProps, SignatureContainerState> {
+export default class SignatureContainer extends Component<SignatureContainerProps, SignatureContainerState> {
     private subscriptionHandles: number[] = [];
     private base64Uri: string;
     private formHandle?: number;
@@ -164,5 +163,3 @@ class SignatureContainer extends Component<SignatureContainerProps, SignatureCon
         }
     };
 }
-
-export default hot(SignatureContainer);
