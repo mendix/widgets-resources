@@ -93,15 +93,13 @@ describe("pluggable-widgets-tools commands", () => {
         if (platform === "native") {
             it("tests originally fail due to snapshots and are fixed with '-u'", async () => {
                 process.stderr.write(`[${widgetName}] Testing unit tests...\n`);
-                await execFailedAsync("npm test:unit", workDir);
-                await execAsync("npm test:unit -- -u", workDir);
-                expect(existsSync(join(workDir, `/dist/coverage/clover.xml`))).toBe(true);
+                await execFailedAsync("npm test", workDir);
+                await execAsync("npm test -- -u", workDir);
             });
         } else {
             it("tests succeed", async () => {
                 process.stderr.write(`[${widgetName}] Testing unit tests...\n`);
-                await execAsync("npm test:unit", workDir);
-                expect(existsSync(join(workDir, `/dist/coverage/clover.xml`))).toBe(true);
+                await execAsync("npm test", workDir);
             });
         }
 
@@ -120,6 +118,8 @@ describe("pluggable-widgets-tools commands", () => {
                             )
                         )
                     ).toBe(true);
+                } else if (cmd === "test:unit") {
+                    expect(existsSync(join(workDir, `/dist/coverage/clover.xml`))).toBe(true);
                 }
             });
 
