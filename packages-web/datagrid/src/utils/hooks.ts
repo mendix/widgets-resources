@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useMemo, useState } from "react";
 import { ListValue } from "mendix";
 import { ColumnsType } from "../../typings/DatagridProps";
 import { ColumnInstance } from "react-table";
+import { ColumnsConfig } from "../../typings/ReactTable";
 
 export function useData(
     datasource: ListValue,
@@ -47,7 +48,7 @@ export function useData(
     return [data];
 }
 
-export function useColumns(columns: ColumnsType[]): [any, { [key: string]: Partial<ColumnsType> }] {
+export function useColumns(columns: ColumnsType[]): [any, ColumnsConfig] {
     const columnsData = useMemo(
         () =>
             columns.map((column, index) => ({

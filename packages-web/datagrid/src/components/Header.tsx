@@ -1,7 +1,7 @@
 import { createElement, ReactElement, useState } from "react";
 import { ColumnInstance, TableHeaderProps } from "react-table";
 import classNames from "classnames";
-import { ExtendedColumnInstance } from "../../typings/ReactTable";
+import { ColumnConfig, ExtendedColumnInstance } from "../../typings/ReactTable";
 import { useDraggable } from "../utils/hooks";
 
 export interface HeaderProps {
@@ -11,7 +11,7 @@ export interface HeaderProps {
     filterable: boolean;
     draggable: boolean;
     visibleColumns: Array<ColumnInstance<object>>;
-    columnsConfig: any;
+    columnsConfig: ColumnConfig;
     setColumnOrder: (order: any[]) => void;
 }
 

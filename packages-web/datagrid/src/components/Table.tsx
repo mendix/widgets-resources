@@ -3,6 +3,7 @@ import { ColumnSelector } from "./ColumnSelector";
 import { ClientSidePagination, Pagination } from "./Pagination";
 import {
     CellProperties,
+    ColumnsConfig,
     ExtendedColumnInstance,
     ExtendedTableInstance,
     FilterProperties
@@ -22,12 +23,12 @@ import {
     useSortBy,
     useTable
 } from "react-table";
-import { useColumns } from "../utils/hooks";
 
 export interface TableProps {
     className: string;
     data: any;
-    columnsProp: any;
+    columns: any;
+    columnsConfig: ColumnsConfig;
     headerWidgets?: ReactNode;
     footerWidgets?: ReactNode;
     columnsFilterable: boolean;
@@ -45,7 +46,8 @@ export interface TableProps {
 
 export function Table({
     className,
-    columnsProp,
+    columns,
+    columnsConfig,
     data,
     headerWidgets,
     footerWidgets,
@@ -66,7 +68,6 @@ export function Table({
         columnsSortable
     ]);
     const isInfinite = useMemo(() => !paging && !isSortingOrFiltering, [paging, isSortingOrFiltering]);
-    const [columns, columnsConfig] = useColumns(columnsProp);
 
     const ColumnFilter = ({ column: { filterValue, setFilter, filter } }: FilterProperties): ReactElement => {
         return (

@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { dynamicValue } from "@widgets-resources/piw-utils";
+import { ColumnsConfig } from "../../../typings/ReactTable";
 
 /* eslint-disable @typescript-eslint/camelcase */
 export function mockData(amount: number, value = "test", hasWidget = false): any {
@@ -11,12 +11,23 @@ export function mockData(amount: number, value = "test", hasWidget = false): any
 }
 
 export function mockColumns(amount: number, value = "test"): any {
-    return Array(amount).map(() => ({
-        header: dynamicValue(value),
-        sortable: false,
-        filterable: false,
-        resizable: false,
-        draggable: false,
-        hidable: "no"
+    return Array(amount).map(index => ({
+        Header: value,
+        accessor: `col_${index}`
     }));
+}
+
+export function mockColumnsConfig(amount: number): ColumnsConfig {
+    return Array(amount)
+        .map(index => ({
+            [`col_${index}`]: {
+                hasWidgets: false,
+                sortable: false,
+                filterable: false,
+                resizable: false,
+                draggable: false,
+                hidable: "no" as const
+            }
+        }))
+        .reduce((acc, current) => ({ ...acc, ...current }), {});
 }

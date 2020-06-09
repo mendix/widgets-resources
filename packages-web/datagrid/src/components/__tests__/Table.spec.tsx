@@ -1,7 +1,7 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
 import { Table, TableProps } from "../Table";
-import { mockColumns, mockData } from "./mock";
+import { mockColumns, mockColumnsConfig, mockData } from "./mock";
 
 describe("Table", () => {
     it("renders the structure correctly", () => {
@@ -63,7 +63,8 @@ function mockTableProps(): TableProps {
         className: "test",
         columnsFilterable: false,
         columnsSortable: false,
-        columnsProp: mockColumns(5),
+        columns: mockColumns(5),
+        columnsConfig: mockColumnsConfig(5),
         data: mockData(5)
     };
 }

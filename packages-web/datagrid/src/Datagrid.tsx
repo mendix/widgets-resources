@@ -1,6 +1,6 @@
 import { createElement, ReactElement, useMemo, useState } from "react";
 import { DatagridContainerProps } from "../typings/DatagridProps";
-import { useData } from "./utils/hooks";
+import { useColumns, useData } from "./utils/hooks";
 
 import "./ui/Datagrid.scss";
 import { Table } from "./components/Table";
@@ -17,7 +17,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         columnsDraggable,
         columnsHidable,
         datasource,
-        columns,
+        columns: columnsProps,
         pagingEnabled,
         pageSize
     } = props;
@@ -28,13 +28,22 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     ]);
     const [page, setPage] = useState(0);
     const [hasMoreItems, setHasMoreItems] = useState(true);
-
-    const [data] = useData(datasource, columns, pagingEnabled, pageSize, page, isSortingOrFiltering, setHasMoreItems);
+    const [data] = useData(
+        datasource,
+        columnsProps,
+        pagingEnabled,
+        pageSize,
+        page,
+        isSortingOrFiltering,
+        setHasMoreItems
+    );
+    const [columns, columnsConfig] = useColumns(columnsProps);
 
     return (
         <Table
             className={className}
-            columnsProp={columns}
+            columns={columns}
+            columnsConfig={columnsConfig}
             data={data}
             setPage={setPage}
             hasMoreItems={hasMoreItems}

@@ -1,8 +1,9 @@
 import { createElement, ReactElement, Fragment, useState } from "react";
+import { ColumnsConfig } from "../../typings/ReactTable";
 
 export interface ColumnSelectorProps {
     allColumns: any[];
-    columnsConfig: any;
+    columnsConfig: ColumnsConfig;
 }
 
 export function ColumnSelector({ allColumns, columnsConfig }: ColumnSelectorProps): ReactElement {

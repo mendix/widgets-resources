@@ -7,6 +7,7 @@ import {
     UseResizeColumnsColumnProps,
     UseSortByColumnProps
 } from "react-table";
+import { HidableEnum } from "./DatagridProps";
 
 export interface ExtendedColumnInstance
     extends HeaderGroup<any>,
@@ -28,4 +29,17 @@ export interface CellProperties {
 
 export interface FilterProperties {
     column: { filterValue: any; setFilter: (e: any) => void; filter: string };
+}
+
+export interface ColumnConfig {
+    hasWidgets: boolean;
+    sortable: boolean;
+    filterable: boolean;
+    resizable: boolean;
+    draggable: boolean;
+    hidable: HidableEnum;
+}
+
+export interface ColumnsConfig {
+    [key: string]: ColumnConfig;
 }
