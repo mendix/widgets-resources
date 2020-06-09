@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Column Selector renders the structure correctly 1`] = `
+<Fragment>
+  <button
+    className="btn btn-default"
+    onClick={[Function]}
+  >
+    Columns
+  </button>
+</Fragment>
+`;

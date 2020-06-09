@@ -1,0 +1,251 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table renders the structure correctly 1`] = `
+<div
+  className="test"
+>
+  <div
+    className="header"
+  />
+  <div
+    className="table"
+    role="table"
+    style={
+      Object {
+        "minWidth": "0px",
+      }
+    }
+  >
+    <div
+      className="thead"
+      role="rowgroup"
+    />
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={true}
+      role="rowgroup"
+      setPage={[MockFunction]}
+    />
+    <div
+      className="tfoot"
+    />
+  </div>
+</div>
+`;
+
+exports[`Table renders the structure correctly with dragging 1`] = `
+<div
+  className="test"
+>
+  <div
+    className="header"
+  />
+  <div
+    className="table"
+    role="table"
+    style={
+      Object {
+        "minWidth": "0px",
+      }
+    }
+  >
+    <div
+      className="thead"
+      role="rowgroup"
+    />
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={true}
+      role="rowgroup"
+      setPage={[MockFunction]}
+    />
+    <div
+      className="tfoot"
+    />
+  </div>
+</div>
+`;
+
+exports[`Table renders the structure correctly with filtering 1`] = `
+<div
+  className="test"
+>
+  <div
+    className="header"
+  />
+  <div
+    className="table"
+    role="table"
+    style={
+      Object {
+        "minWidth": "0px",
+      }
+    }
+  >
+    <div
+      className="thead"
+      role="rowgroup"
+    />
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={false}
+      role="rowgroup"
+      setPage={[MockFunction]}
+    />
+    <div
+      className="tfoot"
+    />
+  </div>
+</div>
+`;
+
+exports[`Table renders the structure correctly with hiding 1`] = `
+<div
+  className="test"
+>
+  <div
+    className="header"
+  >
+    <ColumnSelector
+      allColumns={Array []}
+      columnsConfig={Object {}}
+    />
+  </div>
+  <div
+    className="table"
+    role="table"
+    style={
+      Object {
+        "minWidth": "0px",
+      }
+    }
+  >
+    <div
+      className="thead"
+      role="rowgroup"
+    />
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={true}
+      role="rowgroup"
+      setPage={[MockFunction]}
+    />
+    <div
+      className="tfoot"
+    />
+  </div>
+</div>
+`;
+
+exports[`Table renders the structure correctly with paging 1`] = `
+<div
+  className="test"
+>
+  <div
+    className="header"
+  />
+  <div
+    className="table"
+    role="table"
+    style={
+      Object {
+        "minWidth": "0px",
+      }
+    }
+  >
+    <div
+      className="thead"
+      role="rowgroup"
+    />
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={false}
+      role="rowgroup"
+      setPage={[MockFunction]}
+    />
+    <div
+      className="tfoot"
+    >
+      <div
+        className="tr"
+      >
+        <div
+          className="td"
+        >
+          <Pagination
+            hasMoreItems={false}
+            page={1}
+            setPage={[MockFunction]}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Table renders the structure correctly with resizing 1`] = `
+<div
+  className="test"
+>
+  <div
+    className="header"
+  />
+  <div
+    className="table"
+    role="table"
+    style={
+      Object {
+        "minWidth": "0px",
+      }
+    }
+  >
+    <div
+      className="thead"
+      role="rowgroup"
+    />
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={true}
+      role="rowgroup"
+      setPage={[MockFunction]}
+    />
+    <div
+      className="tfoot"
+    />
+  </div>
+</div>
+`;
+
+exports[`Table renders the structure correctly with sorting 1`] = `
+<div
+  className="test"
+>
+  <div
+    className="header"
+  />
+  <div
+    className="table"
+    role="table"
+    style={
+      Object {
+        "minWidth": "0px",
+      }
+    }
+  >
+    <div
+      className="thead"
+      role="rowgroup"
+    />
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={false}
+      role="rowgroup"
+      setPage={[MockFunction]}
+    />
+    <div
+      className="tfoot"
+    />
+  </div>
+</div>
+`;
