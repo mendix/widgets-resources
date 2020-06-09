@@ -9,6 +9,7 @@ export function useData(
     pagingEnabled: boolean,
     pageSize: number,
     currentPage: number,
+    hasSortingOrFiltering: boolean,
     setHasMoreItems: Dispatch<SetStateAction<boolean>>
 ) {
     const [items, setItems] = useState<any[]>([]);
@@ -26,6 +27,12 @@ export function useData(
         [datasource]
     );
 
+    // Force to use client side sorting & paging
+    if (hasSortingOrFiltering) {
+        return [datasourceData];
+    }
+
+    // Backend lazy loading for "Auto load more"
     const data = useMemo(() => {
         if (!pagingEnabled) {
             setItems(items => Array.from(new Set([...(items || []), ...datasourceData])));
@@ -40,7 +47,7 @@ export function useData(
     return [data];
 }
 
-export function useColumns(columns: ColumnsType[]): [any, any] {
+export function useColumns(columns: ColumnsType[]): [any, { [key: string]: Partial<ColumnsType> }] {
     const columnsData = useMemo(
         () =>
             columns.map((column, index) => ({
@@ -54,10 +61,11 @@ export function useColumns(columns: ColumnsType[]): [any, any] {
         () =>
             columns
                 .map((column, index) => {
-                    const { content, attribute, ...rest } = column;
-                    console.log(content, attribute);
+                    const { ...data } = column;
+                    delete data.content;
+                    delete data.attribute;
                     return {
-                        [`col_${index}`]: rest
+                        [`col_${index}`]: data
                     };
                 })
                 .reduce((acc, current) => ({ ...acc, ...current }), {}),

@@ -1,6 +1,6 @@
 import { createElement, ReactElement, Fragment, useState } from "react";
 
-interface ColumnSelectorProps {
+export interface ColumnSelectorProps {
     allColumns: any[];
     columnsConfig: any;
 }

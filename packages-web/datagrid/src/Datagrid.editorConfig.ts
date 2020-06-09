@@ -2,8 +2,8 @@ import { hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-util
 import { DatagridPreviewProps } from "../typings/DatagridProps";
 
 export function getProperties(values: DatagridPreviewProps, defaultProperties: Properties): Properties {
-    values.columns.forEach((c, index) => {
-        if (!c.hasWidgets) {
+    values.columns.forEach((column, index) => {
+        if (!column.hasWidgets) {
             hidePropertyIn(defaultProperties, values, "columns", index, "content");
         }
         if (!values.columnsSortable) {

@@ -3,6 +3,7 @@ import {
     TableInstance,
     UseColumnOrderInstanceProps,
     UseFiltersColumnProps,
+    UsePaginationInstanceProps,
     UseResizeColumnsColumnProps,
     UseSortByColumnProps
 } from "react-table";
@@ -13,7 +14,10 @@ export interface ExtendedColumnInstance
         UseResizeColumnsColumnProps<any>,
         UseFiltersColumnProps<any> {}
 
-export interface ExtendedTableInstance extends TableInstance<object>, UseColumnOrderInstanceProps<object> {}
+export interface ExtendedTableInstance
+    extends TableInstance<object>,
+        UseColumnOrderInstanceProps<object>,
+        UsePaginationInstanceProps<object> {}
 
 export interface CellProperties {
     value: any;
