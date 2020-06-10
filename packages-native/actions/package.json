@@ -7,7 +7,7 @@
     "url": "https://github.com/mendix/widgets-resources.git"
   },
   "scripts": {
-    "prebuild": "rm -rf ./dist/tsc",
+    "prebuild": "..\"/../node_modules/.bin/rimraf\" ./dist/tsc",
     "build": "npm run build:tsc",
     "build:tsc": "..\"/../node_modules/.bin/tsc\" --project src/tsconfig.json",
     "postbuild": "..\"/../node_modules/.bin/ts-node\" --project ./scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
