@@ -7,7 +7,7 @@
     "watch-ts": "..\"/../node_modules/.bin/tsc\" --project src/tsconfig.json --watch ",
     "watch-copy": "npm-watch",
     "build": "npm run build:tsc",
-    "prebuild:tsc": "rm -rf dist/tsc",
+    "prebuild:tsc": "..\"/../node_modules/.bin/rimraf\" dist/tsc",
     "build:tsc": "..\"/../node_modules/.bin/tsc\" --project src/tsconfig.json",
     "postbuild": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/modules/tsconfig.json ../../scripts/modules/copyActionsToTestProject.ts",
     "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --parser-options=project:src/tsconfig.json --ext .ts src/",

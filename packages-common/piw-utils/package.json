@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "start": "..\"/../node_modules/.bin/tsc\" --watch",
-    "prebuild": "rm -rf ./dist",
+    "prebuild": "..\"/../node_modules/.bin/rimraf\" ./dist",
     "build": "..\"/../node_modules/.bin/tsc\"",
     "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "prepare": "npm run build"
