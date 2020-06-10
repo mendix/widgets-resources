@@ -13,7 +13,7 @@
   "scripts": {
     "start": "pluggable-widgets-tools start:native",
     "build": "pluggable-widgets-tools build:native",
-    "release": "pluggable-widgets-tools release:native",
+    "release": "pluggable-widgets-tools release:ts:native",
     "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.native.config.js",
     "version": "npm run release",

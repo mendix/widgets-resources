@@ -16,7 +16,7 @@
     "start": "pluggable-widgets-tools start:native",
     "build": "pluggable-widgets-tools build:native",
     "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.native.config.js",
-    "release": "pluggable-widgets-tools release:native",
+    "release": "pluggable-widgets-tools release:ts:native",
     "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "version": "npm run release",
     "postversion": "..\"/../node_modules/.bin/ts-node\" ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
