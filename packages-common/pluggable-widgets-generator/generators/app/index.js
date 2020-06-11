@@ -85,7 +85,7 @@ class MxGenerator extends Generator {
     _defineProperties() {
         this.widget = {};
         this.widget.widgetName = this.props.widgetName.replace(/(^|\s)\S/g, l => l.toUpperCase()); // Capitalise first letter if its not.
-        this.widget.packageName = this.dir ? this.dir.toLowerCase() : this.props.widgetName.toLowerCase();
+        this.widget.packageName = this.props.widgetName.toLowerCase();
         this.widget.description = this.props.description;
         this.widget.version = this.props.version;
         this.widget.author = this.props.author;
@@ -233,36 +233,26 @@ class MxGenerator extends Generator {
     }
 
     _writeWidgetXML() {
-        this._copyFile(
+        this._copyTemplate(
             this.templatePath(`${this.widget.source}src/package.xml`),
             this.destinationPath("src/package.xml"),
             {
-                process: function(file) {
-                    let fileText = file.toString();
-                    fileText = fileText
-                        .replace(/WidgetName/g, this.widget.widgetName)
-                        .replace(/packageName/g, this.widget.widgetName.toLowerCase())
-                        .replace(/packagePath/g, this.widget.packagePath.replace(/\./g, "/"))
-                        .replace(/\{\{version\}\}/g, this.widget.version);
-                    return fileText;
-                }.bind(this)
+                widgetName: this.widget.widgetName,
+                packageName: this.widget.packageName,
+                packagePath: this.widget.packagePath.replace(/\./g, "/"),
+                version: this.widget.version
             }
         );
 
-        this._copyFile(
+        this._copyTemplate(
             this.templatePath(`${this.widget.source}src/WidgetName.xml`),
             this.destinationPath(`src/${this.widget.widgetName}.xml`),
             {
-                process: function(file) {
-                    let fileText = file.toString();
-                    fileText = fileText
-                        .replace(/WidgetNameCamelCase/g, this.widget.widgetName.replace(/([a-z0-9])([A-Z])/g, "$1 $2"))
-                        .replace(/WidgetName/g, this.widget.widgetName)
-                        .replace(/packageName/g, this.widget.widgetName.toLowerCase())
-                        .replace(/packagePath/g, this.widget.packagePath.replace(/\//g, "."))
-                        .replace(/WidgetDescription/g, this.widget.description);
-                    return fileText;
-                }.bind(this)
+                widgetNameCamelCase: this.widget.widgetName.replace(/([a-z0-9])([A-Z])/g, "$1 $2"),
+                widgetName: this.widget.widgetName,
+                packageName: this.widget.packageName,
+                packagePath: this.widget.packagePath.replace(/\//g, "."),
+                widgetDescription: this.widget.description
             }
         );
     }
