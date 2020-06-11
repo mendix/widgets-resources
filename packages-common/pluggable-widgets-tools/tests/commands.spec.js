@@ -38,29 +38,30 @@ describe("pluggable-widgets-tools commands", () => {
     });
 
     describe.each(CONFIGS)("for %s %s widget created with generator %s", (platform, boilerplate, lang, version) => {
-        const widgetName = `generated_${version.replace(".", "_")}_${lang}_${platform}`;
+        const widgetConfigDescription = `generated_${version.replace(".", "_")}_${lang}_${platform}`;
         const workDir = join(tempdir(), `pwt_test_${Math.round(Math.random() * 10000)}`);
-        const promptAnswers = {
-            widgetName,
-            description: "My widget description",
-            organization: "com.mendix",
-            copyright: "Mendix 2020",
-            license: "Apache-2.0",
-            version: "1.0.0",
-            author: "Widget Generator",
-            projectPath: "./dist/MxTestProject",
-            programmingLanguage: lang === "ts" ? "typescript" : "javascript",
-            platform,
-            boilerplate,
-            unitTests: true,
-            e2eTests: false
-        };
+        let widgetPackageJson;
 
         beforeAll(async () => {
-            process.stderr.write(`[${widgetName}] Preparing widget...\n`);
+            process.stderr.write(`[${widgetConfigDescription}] Preparing widget...\n`);
             mkdir(workDir);
 
             if (version === "latest") {
+                const promptAnswers = {
+                    widgetName: "Generated",
+                    description: "My widget description",
+                    organization: "com.mendix",
+                    copyright: "Mendix 2020",
+                    license: "Apache-2.0",
+                    version: "1.0.0",
+                    author: "Widget Generator",
+                    projectPath: "./dist/MxTestProject",
+                    programmingLanguage: lang === "ts" ? "typescript" : "javascript",
+                    platform,
+                    boilerplate,
+                    unitTests: true,
+                    e2eTests: false
+                };
                 const generatedWidget = await runYeoman(require.resolve("@mendix/generator-widget/generators/app"))
                     .inTmpDir()
                     .withPrompts(promptAnswers)
@@ -68,23 +69,23 @@ describe("pluggable-widgets-tools commands", () => {
                     .toPromise();
                 await copy(join(generatedWidget, "generated"), workDir);
             } else {
-                await copy(join(__dirname, "projects", widgetName), workDir);
+                await copy(join(__dirname, "projects", widgetConfigDescription), workDir);
             }
 
-            const widgetPackageJson = await readJson(join(workDir, "package.json"));
+            widgetPackageJson = await readJson(join(workDir, "package.json"));
             widgetPackageJson.devDependencies["@mendix/pluggable-widgets-tools"] = toolsPackagePath;
             await writeJson(join(workDir, "package.json"), widgetPackageJson);
 
             await execAsync("npm install --loglevel=error", workDir);
-            process.stderr.write(`[${widgetName}] Ready to test!\n`);
+            process.stderr.write(`[${widgetConfigDescription}] Ready to test!\n`);
         });
         afterAll(() => {
-            process.stderr.write(`[${widgetName}] Tested!\n`);
+            process.stderr.write(`[${widgetConfigDescription}] Tested!\n`);
             rm("-rf", workDir); // ignore errors
         });
 
         it("lint initially fails (due to prettier) but is fixed by lint:fix", async () => {
-            process.stderr.write(`[${widgetName}] Testing linting...\n`);
+            process.stderr.write(`[${widgetConfigDescription}] Testing linting...\n`);
             await execFailedAsync("npm run lint", workDir);
             await execAsync("npm run lint:fix", workDir);
             await execAsync("npm run lint", workDir);
@@ -92,29 +93,27 @@ describe("pluggable-widgets-tools commands", () => {
 
         if (platform === "native") {
             it("tests originally fail due to snapshots and are fixed with '-u'", async () => {
-                process.stderr.write(`[${widgetName}] Testing unit tests...\n`);
+                process.stderr.write(`[${widgetConfigDescription}] Testing unit tests...\n`);
                 await execFailedAsync("npm test", workDir);
                 await execAsync("npm test -- -u", workDir);
             });
         } else {
             it("tests succeed", async () => {
-                process.stderr.write(`[${widgetName}] Testing unit tests...\n`);
+                process.stderr.write(`[${widgetConfigDescription}] Testing unit tests...\n`);
                 await execAsync("npm test", workDir);
             });
         }
 
         if (!LIMIT_TESTS) {
             it.each(["build", "test:unit", "release"])("'%s' command succeeds", async cmd => {
-                process.stderr.write(`[${widgetName}] Testing '${cmd}' command...\n`);
+                process.stderr.write(`[${widgetConfigDescription}] Testing '${cmd}' command...\n`);
                 await execAsync(`npm run ${cmd}`, workDir);
                 if (cmd === "build") {
                     expect(
                         existsSync(
                             join(
                                 workDir,
-                                `/dist/${
-                                    promptAnswers.version
-                                }/${promptAnswers.organization.trim().toLowerCase()}.${widgetName}.mpk`
+                                `/dist/${widgetPackageJson.version}/${widgetPackageJson.packagePath}.${widgetPackageJson.widgetName}.mpk`
                             )
                         )
                     ).toBe(true);
@@ -124,7 +123,7 @@ describe("pluggable-widgets-tools commands", () => {
             });
 
             it("start command doesn't produce errors", async () => {
-                process.stderr.write(`[${widgetName}] Testing npm start...\n`);
+                process.stderr.write(`[${widgetConfigDescription}] Testing npm start...\n`);
                 const startProcess = exec("npm start", { cwd: workDir });
 
                 try {
@@ -133,7 +132,7 @@ describe("pluggable-widgets-tools commands", () => {
                             if (/\berror\b/i.test(data)) {
                                 reject(new Error(`Received error ${data}`));
                             } else if (data.includes("Finished 'copyToDeployment'")) {
-                                process.stderr.write(`[${widgetName}] Start succeeded!\n`);
+                                process.stderr.write(`[${widgetConfigDescription}] Start succeeded!\n`);
                                 resolve();
                             }
                         });
