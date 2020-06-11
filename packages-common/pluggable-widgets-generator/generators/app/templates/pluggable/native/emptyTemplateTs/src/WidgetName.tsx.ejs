@@ -1,7 +1,7 @@
 import { Component, ReactNode, createElement } from "react";
 import { TextStyle, ViewStyle } from "react-native";
 import { HelloWorldSample } from "./components/HelloWorldSample";
-import { WidgetNameProps } from "../typings/WidgetNameProps";
+import { <%= widgetName %>Props } from "../typings/<%= widgetName %>Props";
 import { Style } from "./utils/common";
 
 export interface CustomStyle extends Style {
@@ -9,7 +9,7 @@ export interface CustomStyle extends Style {
     label: TextStyle;
 }
 
-export class WidgetName extends Component<WidgetNameProps<CustomStyle>> {
+export class <%= widgetName %> extends Component<%= widgetName %>Props<CustomStyle>> {
     render(): ReactNode {
         return <HelloWorldSample sampleText={this.props.sampleText ? this.props.sampleText : "World"} style={this.props.style} />;
     }

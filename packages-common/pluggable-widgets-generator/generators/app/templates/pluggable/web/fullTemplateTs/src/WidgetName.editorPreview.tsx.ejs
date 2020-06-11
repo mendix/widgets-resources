@@ -1,10 +1,10 @@
 import { Component, ReactNode, createElement } from "react";
 import { BadgeSample, BadgeSampleProps } from "./components/BadgeSample";
-import { WidgetNamePreviewProps } from "../typings/WidgetNameProps";
+import { <%= widgetName %>PreviewProps } from "../typings/<%= widgetName %>Props";
 
 declare function require(name: string): string;
 
-export class preview extends Component<WidgetNamePreviewProps> {
+export class preview extends Component<<%= widgetName %>PreviewProps> {
     render(): ReactNode {
         return (
             <div ref={this.parentInline}>
@@ -20,14 +20,14 @@ export class preview extends Component<WidgetNamePreviewProps> {
         }
     }
 
-    private transformProps(props: WidgetNamePreviewProps): BadgeSampleProps {
+    private transformProps(props: <%= widgetName %>PreviewProps): BadgeSampleProps {
         return {
-            type: props.packageNameType,
+            type: props.<%= packageName %>Type,
             bootstrapStyle: props.bootstrapStyle,
             className: props.class,
             clickable: false,
             style: this.parseStyle(props.style),
-            defaultValue: props.packageNameValue ? props.packageNameValue : "",
+            defaultValue: props.<%= packageName %>Value ? props.<%= packageName %>Value : "",
             value: props.valueAttribute
         };
     }
@@ -49,5 +49,5 @@ export class preview extends Component<WidgetNamePreviewProps> {
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/WidgetName.css");
+    return require("./ui/<%= widgetName %>.css");
 }

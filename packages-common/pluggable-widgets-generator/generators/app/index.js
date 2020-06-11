@@ -146,15 +146,10 @@ class MxGenerator extends Generator {
     }
 
     _copyWidgetFile(src, dest) {
-        this._copyFile(this.templatePath(src), this.destinationPath(dest), {
-            process: function(file) {
-                let fileText = file.toString();
-                fileText = fileText
-                    .replace(/WidgetName/g, this.widget.widgetName)
-                    .replace(/packageName/g, this.widget.widgetName.toLowerCase())
-                    .replace(/WidgetDescription/g, this.widget.description);
-                return fileText;
-            }.bind(this)
+        this._copyTemplate(this.templatePath(src), this.destinationPath(dest), {
+            widgetName: this.widget.widgetName,
+            packageName: this.widget.packageName,
+            widgetDescription: this.widget.description
         });
     }
 
@@ -162,7 +157,7 @@ class MxGenerator extends Generator {
         const widgetName = this.widget.widgetName;
         const jsxFileExtension = this.widget.isTs ? "tsx" : "jsx";
 
-        this._copyWidgetFile(`${this.widget.source}README.md`, "README.md");
+        this._copyWidgetFile("commons/README.md", "README.md");
 
         // web & native
         if (this.widget.emptyTemplate) {
@@ -193,7 +188,7 @@ class MxGenerator extends Generator {
             this._copyWidgetFile(`${this.widget.source}src/ui/WidgetName.css`, `src/ui/${widgetName}.css`);
 
             if (this.widget.fullTemplate) {
-                this._copyWidgetFile(
+                this._copyFile(
                     `${this.widget.source}${widgetSrcFolder}Alert.${jsxFileExtension}.ejs`,
                     `${widgetSrcFolder}Alert.${jsxFileExtension}`
                 );
@@ -202,12 +197,9 @@ class MxGenerator extends Generator {
             const fileExtension = this.widget.isTs ? "ts" : "js";
 
             if (this.widget.fullTemplate) {
-                this._copyWidgetFile(
-                    `${this.widget.source}src/ui/styles.${fileExtension}`,
-                    `src/ui/styles.${fileExtension}`
-                );
+                this._copyFile(`${this.widget.source}src/ui/styles.${fileExtension}`, `src/ui/styles.${fileExtension}`);
             }
-            this._copyWidgetFile(
+            this._copyFile(
                 `${this.widget.source}src/utils/common.${fileExtension}`,
                 `src/utils/common.${fileExtension}`
             );
