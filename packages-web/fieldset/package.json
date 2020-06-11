@@ -25,8 +25,7 @@
   },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
-    "start": "..\"/../node_modules/.bin/concurrently\" \"npm:start:server\"  \"npm:dev\"",
-    "start:server": "pluggable-widgets-tools start:server --open",
+    "start": "pluggable-widgets-tools start:server --open",
     "dev": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
     "format": "pluggable-widgets-tools format",

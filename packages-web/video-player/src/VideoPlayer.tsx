@@ -1,14 +1,13 @@
 import { Component, createElement } from "react";
 import classNames from "classnames";
 
-import { hot } from "react-hot-loader/root";
 import { SizeContainer } from "./components/SizeContainer";
 import { Video } from "./components/Video";
 import { VideoPlayerContainerProps } from "../typings/VideoPlayerProps";
 
 import "./ui/VideoPlayer.css";
 
-class VideoPlayer extends Component<VideoPlayerContainerProps> {
+export default class VideoPlayer extends Component<VideoPlayerContainerProps> {
     render(): JSX.Element {
         return (
             <SizeContainer
@@ -34,5 +33,3 @@ class VideoPlayer extends Component<VideoPlayerContainerProps> {
         );
     }
 }
-
-export default hot(VideoPlayer);

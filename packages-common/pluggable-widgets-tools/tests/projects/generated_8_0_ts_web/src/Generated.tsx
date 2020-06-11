@@ -1,11 +1,10 @@
 import { Component, ReactNode, createElement } from "react";
-import { hot } from "react-hot-loader/root";
 
 import { GeneratedContainerProps } from "../typings/GeneratedProps";
 import { BadgeSample } from "./components/BadgeSample";
 import "./ui/Generated.css";
 
-class Generated extends Component<GeneratedContainerProps> {
+export default class Generated extends Component<GeneratedContainerProps> {
     private readonly onClickHandler = this.onClick.bind(this);
 
     render(): ReactNode {
@@ -29,5 +28,3 @@ class Generated extends Component<GeneratedContainerProps> {
         }
     }
 }
-
-export default hot(Generated);

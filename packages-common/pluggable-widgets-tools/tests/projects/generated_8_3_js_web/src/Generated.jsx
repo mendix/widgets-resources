@@ -1,10 +1,9 @@
 import { Component, createElement } from "react";
-import { hot } from "react-hot-loader/root";
 
 import { BadgeSample } from "./components/BadgeSample";
 import "./ui/Generated.css";
 
-class Generated extends Component {
+export default class Generated extends Component {
 
     constructor(props) {
         super(props);
@@ -32,5 +31,3 @@ class Generated extends Component {
         }
     }
 }
-
-export default hot(Generated);
