@@ -1,15 +1,15 @@
 import { Component, ReactNode, createElement } from "react";
 import { HelloWorldSample } from "./components/HelloWorldSample";
-import { WidgetNamePreviewProps } from "../typings/WidgetNameProps";
+import { <%= widgetName %>PreviewProps } from "../typings/<%= widgetName %>Props";
 
 declare function require(name: string): string;
 
-export class preview extends Component<WidgetNamePreviewProps> {
+export class preview extends Component<<%= widgetName %>PreviewProps> {
     render(): ReactNode {
         return <HelloWorldSample sampleText={this.props.sampleText} />;
     }
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/WidgetName.css");
+    return require("./ui/<%= widgetName %>.css");
 }

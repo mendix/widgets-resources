@@ -1,21 +1,21 @@
 import { Component, ReactNode, createElement } from "react";
 import { hot } from "react-hot-loader/root";
 
-import { WidgetNameContainerProps } from "../typings/WidgetNameProps";
+import { <%= widgetName %>ContainerProps } from "../typings/<%= widgetName %>Props";
 import { BadgeSample } from "./components/BadgeSample";
-import "./ui/WidgetName.css";
+import "./ui/<%= widgetName %>.css";
 
-class WidgetName extends Component<WidgetNameContainerProps> {
+class <%= widgetName %> extends Component<<%= widgetName %>ContainerProps> {
     private readonly onClickHandler = this.onClick.bind(this);
 
     render(): ReactNode {
         return (
             <BadgeSample
-                type={this.props.packageNameType}
+                type={this.props.<%= packageName %>Type}
                 bootstrapStyle={this.props.bootstrapStyle}
                 className={this.props.class}
                 clickable={!!this.props.onClickAction}
-                defaultValue={this.props.packageNameValue ? this.props.packageNameValue : ""}
+                defaultValue={this.props.<%= packageName %>Value ? this.props.<%= packageName %>Value : ""}
                 onClickAction={this.onClickHandler}
                 style={this.props.style}
                 value={this.props.valueAttribute ? this.props.valueAttribute.displayValue : ""}>
@@ -30,4 +30,4 @@ class WidgetName extends Component<WidgetNameContainerProps> {
     }
 }
 
-export default hot(WidgetName);
+export default hot(<%= widgetName %>);

@@ -1,24 +1,24 @@
-.widget-packageName-clickable {
+.widget-<%= packageName %>-clickable {
     cursor: pointer;
 }
 
-.widget-packageName {
+.widget-<%= packageName %> {
     display: inline-block;
 }
 
-.widget-packageName.badge:empty {
+.widget-<%= packageName %>.badge:empty {
     display: initial;
     /* Fix padding to stay round */
     padding: 3px 10px;
 }
 
-.widget-packageName.label:empty {
+.widget-<%= packageName %>.label:empty {
     display: initial;
     /* Fix padding to stay square */
     padding: .2em .8em .3em;
 }
 
-.widget-packageName.badge {
+.widget-<%= packageName %>.badge {
     min-width: 18px;
     min-height: 18px;
 }

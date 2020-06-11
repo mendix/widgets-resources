@@ -19,12 +19,12 @@ export class preview extends Component {
 
     transformProps(props) {
         return {
-            type: props.packageNameType,
+            type: props.<%= packageName %>Type,
             bootstrapStyle: props.bootstrapStyle,
             className: props.class,
             clickable: false,
             style: this.parseStyle(props.style),
-            defaultValue: props.packageNameValue ? props.packageNameValue : "",
+            defaultValue: props.<%= packageName %>Value ? props.<%= packageName %>Value : "",
             value: props.valueAttribute
         };
     }
@@ -46,6 +46,6 @@ export class preview extends Component {
 }
 
 export function getPreviewCss() {
-    return require("./ui/WidgetName.css");
+    return require("./ui/<%= widgetName %>.css");
 }
 
