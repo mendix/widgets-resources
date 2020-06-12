@@ -189,19 +189,22 @@ class MxGenerator extends Generator {
 
             if (this.widget.fullTemplate) {
                 this._copyFile(
-                    `${this.widget.source}${widgetSrcFolder}Alert.${jsxFileExtension}.ejs`,
-                    `${widgetSrcFolder}Alert.${jsxFileExtension}`
+                    this.templatePath(`${this.widget.source}${widgetSrcFolder}Alert.${jsxFileExtension}.ejs`),
+                    this.destinationPath(`${widgetSrcFolder}Alert.${jsxFileExtension}`)
                 );
             }
         } else {
             const fileExtension = this.widget.isTs ? "ts" : "js";
 
             if (this.widget.fullTemplate) {
-                this._copyFile(`${this.widget.source}src/ui/styles.${fileExtension}`, `src/ui/styles.${fileExtension}`);
+                this._copyFile(
+                    this.templatePath(`${this.widget.source}src/ui/styles.${fileExtension}`),
+                    this.destinationPath(`src/ui/styles.${fileExtension}`)
+                );
             }
             this._copyFile(
-                `${this.widget.source}src/utils/common.${fileExtension}`,
-                `src/utils/common.${fileExtension}`
+                this.templatePath(`${this.widget.source}src/utils/common.${fileExtension}`),
+                this.destinationPath(`src/utils/common.${fileExtension}`)
             );
         }
     }
