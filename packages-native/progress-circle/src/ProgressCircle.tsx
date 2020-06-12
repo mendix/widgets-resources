@@ -30,6 +30,7 @@ export class ProgressCircle extends Component<Props> {
                     showsText={showsText}
                     {...(showsText ? { formatText: () => this.formatText(progress) } : {})}
                     strokeCap={this.styles.fill.lineCapRounded ? "round" : "square"}
+                    unfilledColor={this.styles.circle.unfilledColor}
                 />
                 {validationMessages.length > 0 && (
                     <Text style={this.styles.validationMessage}>{validationMessages.join("\n")}</Text>
