@@ -131,7 +131,10 @@ describe("pluggable-widgets-tools commands", () => {
                         startProcess.stdout.on("data", data => {
                             if (/\berror\b/i.test(data)) {
                                 reject(new Error(`Received error ${data}`));
-                            } else if (data.includes("Finished 'copyToDeployment'")) {
+                            } else if (
+                                data.includes("Finished 'copyToDeployment'") ||
+                                data.includes("Project is running at http://localhost:3000/")
+                            ) {
                                 process.stderr.write(`[${widgetConfigDescription}] Start succeeded!\n`);
                                 resolve();
                             }
