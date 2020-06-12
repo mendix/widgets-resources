@@ -9,7 +9,7 @@ export interface CustomStyle extends Style {
     label: TextStyle;
 }
 
-export class <%= widgetName %> extends Component<%= widgetName %>Props<CustomStyle> {
+export class <%= widgetName %> extends Component<<%= widgetName %>Props<CustomStyle>> {
     render(): ReactNode {
         return <HelloWorldSample sampleText={this.props.sampleText ? this.props.sampleText : "World"} style={this.props.style} />;
     }
