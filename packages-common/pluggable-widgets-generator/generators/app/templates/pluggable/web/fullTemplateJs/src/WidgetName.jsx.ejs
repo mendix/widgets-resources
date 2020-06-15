@@ -2,9 +2,9 @@ import { Component, createElement } from "react";
 import { hot } from "react-hot-loader/root";
 
 import { BadgeSample } from "./components/BadgeSample";
-import "./ui/<%= widgetName %>.css";
+import "./ui/<%= name %>.css";
 
-class <%= widgetName %> extends Component {
+class <%= name %> extends Component {
 
     constructor(props) {
         super(props);
@@ -33,4 +33,4 @@ class <%= widgetName %> extends Component {
     }
 }
 
-export default hot(<%= widgetName %>);
+export default hot(<%= name %>);

@@ -4,7 +4,7 @@ function _promptWidgetProperties(dir, widgetName) {
     return [
         {
             type: "input",
-            name: "widgetName",
+            name: "name",
             validate: function(input) {
                 // eslint-disable-next-line wrap-regex
                 if (/^([a-zA-Z]*)$/.test(input)) {
@@ -64,7 +64,7 @@ function _promptWidgetProperties(dir, widgetName) {
         {
             type: "input",
             name: "projectPath",
-            message: "Mendix Project path",
+            message: "Mendix project path",
             default: dir ? dir : "./dist/MxTestProject"
         },
         {
@@ -126,7 +126,7 @@ function _promptTestsInfo(props) {
         const prompts = [
             {
                 type: "confirm",
-                name: "unitTests",
+                name: "hasUnitTests",
                 message: "Add unit tests for the widget ? (recommended for Full Boilerplate)",
                 default: !!(props.boilerplate && props.boilerplate === "full")
             }
@@ -134,7 +134,7 @@ function _promptTestsInfo(props) {
         if (props.platform && props.platform === "web") {
             prompts.push({
                 type: "confirm",
-                name: "e2eTests",
+                name: "hasE2eTests",
                 message: "Add End-to-end tests for the widget ? (recommended for Full Boilerplate)",
                 default: !!(props.boilerplate && props.boilerplate === "full")
             });

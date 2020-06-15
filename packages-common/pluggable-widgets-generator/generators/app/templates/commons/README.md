@@ -1,5 +1,5 @@
-## <%= widgetName %>
-[<%= widgetDescription %>]
+## <%= name %>
+[<%= description %>]
 
 ## Features
 [feature highlights]
