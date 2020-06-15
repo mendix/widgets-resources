@@ -8,16 +8,6 @@ const text = require("./lib/text.js");
 const utils = require("./lib/utils.js");
 
 const widgetSrcFolder = "src/components/";
-const templateSourcePaths = {
-    webEmptyJs: "pluggable/web/emptyTemplateJs/",
-    webFullJs: "pluggable/web/fullTemplateJs/",
-    webEmptyTs: "pluggable/web/emptyTemplateTs/",
-    webFullTs: "pluggable/web/fullTemplateTs/",
-    nativeEmptyJs: "pluggable/native/emptyTemplateJs/",
-    nativeFullJs: "pluggable/native/fullTemplateJs/",
-    nativeEmptyTs: "pluggable/native/emptyTemplateTs/",
-    nativeFullTs: "pluggable/native/fullTemplateTs/"
-};
 
 const banner = text.getBanner(pkg);
 
@@ -83,30 +73,6 @@ class MxGenerator extends Generator {
             i++;
         }
         return dir;
-    }
-
-    _setTemplateSourcePath() {
-        if (this.widget.isPlatformWeb) {
-            if (this.widget.isLanguageJS) {
-                this.widget.templateSourcePath = this.widget.usesFullTemplate
-                    ? templateSourcePaths.webFullJs
-                    : templateSourcePaths.webEmptyJs;
-            } else {
-                this.widget.templateSourcePath = this.widget.usesFullTemplate
-                    ? templateSourcePaths.webFullTs
-                    : templateSourcePaths.webEmptyTs;
-            }
-        } else if (this.widget.isPlatformNative) {
-            if (this.widget.isLanguageTS) {
-                this.widget.templateSourcePath = this.widget.usesFullTemplate
-                    ? templateSourcePaths.nativeFullTs
-                    : templateSourcePaths.nativeEmptyTs;
-            } else {
-                this.widget.templateSourcePath = this.widget.usesFullTemplate
-                    ? templateSourcePaths.nativeFullJs
-                    : templateSourcePaths.nativeEmptyJs;
-            }
-        }
     }
 
     _writeUtilityFiles() {
@@ -313,7 +279,6 @@ class MxGenerator extends Generator {
                 }
                 this.destinationRoot(this.dir);
             }
-            this._setTemplateSourcePath();
             this._writeWidgetXML();
             this._copyUnitTests();
             this._writePackage();

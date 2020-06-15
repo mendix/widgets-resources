@@ -51,6 +51,13 @@ function getWidgetDetails(answers) {
             get() {
                 return answers.programmingLanguage === "typescript";
             }
+        },
+        templateSourcePath: {
+            get() {
+                return `pluggable/${answers.platform}/${answers.boilerplate}Template${
+                    this.isLanguageJS ? "Js" : "Ts"
+                }/`;
+            }
         }
     });
 
