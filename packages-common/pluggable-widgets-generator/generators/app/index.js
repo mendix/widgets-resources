@@ -165,15 +165,11 @@ class MxGenerator extends Generator {
     }
 
     _writePackage() {
-        let templatePath;
-
-        if (this.widget.isPlatformWeb) {
-            templatePath = `packages/package.${this.widget.isLanguageTS ? "ts" : "js"}.json`;
-        } else {
-            templatePath = `packages/package_native_${this.widget.isLanguageTS ? "ts" : "js"}.json`;
-        }
-
-        this._copyTemplate(this.templatePath(templatePath), this.destinationPath("package.json"), this.widget);
+        this._copyTemplate(
+            this.templatePath(`packages/package_${this.widget.platform}.json`),
+            this.destinationPath("package.json"),
+            this.widget
+        );
     }
 
     _writeCompilerOptions() {
