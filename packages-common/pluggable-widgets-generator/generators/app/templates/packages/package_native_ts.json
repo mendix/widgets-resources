@@ -1,6 +1,6 @@
 {
   "name": "<%- packageName %>",
-  "widgetName": "<%- widgetName %>",
+  "widgetName": "<%- name %>",
   "version": "<%- version %>",
   "description": "<%- description %>",
   "copyright": "<%- copyright %>",
@@ -15,12 +15,12 @@
     "build": "pluggable-widgets-tools build:native",
     "dev": "pluggable-widgets-tools start:native",
     "lint": "pluggable-widgets-tools lint",
-    "lint:fix": "pluggable-widgets-tools lint:fix",<% if (unitTests) { %>
+    "lint:fix": "pluggable-widgets-tools lint:fix",<% if (hasUnitTests) { %>
     "test": "pluggable-widgets-tools test:unit:native --no-cache --ci",
     "test:unit": "pluggable-widgets-tools test:unit:native --coverage",<% } %>
     "prerelease": "npm run lint",
     "release": "pluggable-widgets-tools release:native"
-  },<% if (unitTests) { %>
+  },<% if (hasUnitTests) { %>
   "jest-junit": {
     "output": "./dist/testresults/TESTS-Jest.xml"
   },<% } %>
@@ -29,9 +29,9 @@
     "url": "https://github.com/<%- author %>/<%- packageName %>/issues"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^8.9.2",
+    "@mendix/pluggable-widgets-tools": "/Users/Isa.Isaku/Workspace/widgets-resources/packages-common/pluggable-widgets-tools/mendix-pluggable-widgets-tools-8.10.1.tgz",
     "@types/big.js": "^4.0.5",
-    "@types/classnames": "^2.2.6",<% if (unitTests) { %>
+    "@types/classnames": "^2.2.6",<% if (hasUnitTests) { %>
     "@types/enzyme": "^3.1.14", <% } %>
     "@types/jest": "^24.0.0",
     "@types/react": "~16.9.0",

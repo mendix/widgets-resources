@@ -1,11 +1,11 @@
 import { Component, ReactNode, createElement } from "react";
 import { hot } from "react-hot-loader/root";
 
-import { <%= widgetName %>ContainerProps } from "../typings/<%= widgetName %>Props";
+import { <%= name %>ContainerProps } from "../typings/<%= name %>Props";
 import { BadgeSample } from "./components/BadgeSample";
-import "./ui/<%= widgetName %>.css";
+import "./ui/<%= name %>.css";
 
-class <%= widgetName %> extends Component<<%= widgetName %>ContainerProps> {
+class <%= name %> extends Component<<%= name %>ContainerProps> {
     private readonly onClickHandler = this.onClick.bind(this);
 
     render(): ReactNode {
@@ -30,4 +30,4 @@ class <%= widgetName %> extends Component<<%= widgetName %>ContainerProps> {
     }
 }
 
-export default hot(<%= widgetName %>);
+export default hot(<%= name %>);

@@ -5,9 +5,10 @@ const Generator = require("yeoman-generator");
 
 const promptTexts = require("./lib/prompttexts.js");
 const text = require("./lib/text.js");
+const utils = require("./lib/utils.js");
 
 const widgetSrcFolder = "src/components/";
-const templates = {
+const templateSourcePaths = {
     webEmptyJs: "pluggable/web/emptyTemplateJs/",
     webFullJs: "pluggable/web/fullTemplateJs/",
     webEmptyTs: "pluggable/web/emptyTemplateTs/",
@@ -60,9 +61,11 @@ class MxGenerator extends Generator {
 
         const dir = await this._findMprFolder();
 
-        const answers = await this.prompt(promptTexts.promptWidgetProperties(dir, this.widgetParamName));
-        const testAnswers = await this.prompt(promptTexts.promptTestsInfo(answers));
-        this.props = answers ? Object.assign(answers, testAnswers) : testAnswers;
+        const widgetAnswers = await this.prompt(promptTexts.promptWidgetProperties(dir, this.widgetParamName));
+        const testAnswers = await this.prompt(promptTexts.promptTestsInfo(widgetAnswers));
+        const combinedAnswers = Object.assign(widgetAnswers, testAnswers);
+
+        this.widget = utils.getWidgetDetails(combinedAnswers);
     }
 
     async _findMprFolder() {
@@ -82,38 +85,26 @@ class MxGenerator extends Generator {
         return dir;
     }
 
-    _defineProperties() {
-        this.widget = {};
-        this.widget.widgetName = this.props.widgetName.replace(/(^|\s)\S/g, l => l.toUpperCase()); // Capitalise first letter if its not.
-        this.widget.packageName = this.props.widgetName.toLowerCase();
-        this.widget.description = this.props.description;
-        this.widget.version = this.props.version;
-        this.widget.author = this.props.author;
-        this.widget.copyright = this.props.copyright;
-        this.widget.license = this.props.license;
-        this.widget.e2eTests = this.props.e2eTests;
-        this.widget.unitTests = this.props.unitTests;
-        this.widget.generatorVersion = pkg.version;
-        this.widget.emptyTemplate = this.props.boilerplate === "empty";
-        this.widget.fullTemplate = this.props.boilerplate === "full";
-        this.widget.projectPath = this.props.projectPath.replace(/\\/g, "\\\\");
-        this.widget.packagePath = this.props.organization.trim().toLowerCase();
-        this.widget.isJs = this.props.programmingLanguage === "javascript";
-        this.widget.isTs = this.props.programmingLanguage === "typescript";
-        this.widget.isNative = this.props.platform === "native";
-        this.widget.isWeb = this.props.platform === "web";
-
-        if (this.widget.isWeb) {
-            if (this.widget.isJs) {
-                this.widget.source = this.widget.fullTemplate ? templates.webFullJs : templates.webEmptyJs;
+    _setTemplateSourcePath() {
+        if (this.widget.isPlatformWeb) {
+            if (this.widget.isLanguageJS) {
+                this.widget.templateSourcePath = this.widget.usesFullTemplate
+                    ? templateSourcePaths.webFullJs
+                    : templateSourcePaths.webEmptyJs;
             } else {
-                this.widget.source = this.widget.fullTemplate ? templates.webFullTs : templates.webEmptyTs;
+                this.widget.templateSourcePath = this.widget.usesFullTemplate
+                    ? templateSourcePaths.webFullTs
+                    : templateSourcePaths.webEmptyTs;
             }
-        } else if (this.widget.isNative) {
-            if (this.widget.isTs) {
-                this.widget.source = this.widget.fullTemplate ? templates.nativeFullTs : templates.nativeEmptyTs;
+        } else if (this.widget.isPlatformNative) {
+            if (this.widget.isLanguageTS) {
+                this.widget.templateSourcePath = this.widget.usesFullTemplate
+                    ? templateSourcePaths.nativeFullTs
+                    : templateSourcePaths.nativeEmptyTs;
             } else {
-                this.widget.source = this.widget.fullTemplate ? templates.nativeFullJs : templates.nativeEmptyJs;
+                this.widget.templateSourcePath = this.widget.usesFullTemplate
+                    ? templateSourcePaths.nativeFullJs
+                    : templateSourcePaths.nativeEmptyJs;
             }
         }
     }
@@ -121,7 +112,7 @@ class MxGenerator extends Generator {
     _writeUtilityFiles() {
         this._copyFile(this.templatePath("commons/_gitignore"), this.destinationPath(".gitignore"));
         this._copyFile(
-            this.templatePath(`commons/eslintrc.${this.widget.isTs ? "ts" : "js"}.js`),
+            this.templatePath(`commons/eslintrc.${this.widget.isLanguageTS ? "ts" : "js"}.js`),
             this.destinationPath(".eslintrc.js")
         );
         this._copyFile(this.templatePath("commons/prettier.config.js"), this.destinationPath("prettier.config.js"));
@@ -146,64 +137,62 @@ class MxGenerator extends Generator {
     }
 
     _copyWidgetFile(src, dest) {
-        this._copyTemplate(this.templatePath(src), this.destinationPath(dest), {
-            widgetName: this.widget.widgetName,
-            packageName: this.widget.packageName,
-            widgetDescription: this.widget.description
-        });
+        this._copyTemplate(this.templatePath(src), this.destinationPath(dest), this.widget);
     }
 
     _writeWidgetFiles() {
-        const widgetName = this.widget.widgetName;
-        const jsxFileExtension = this.widget.isTs ? "tsx" : "jsx";
+        const widgetName = this.widget.name;
+        const jsxFileExtension = this.widget.isLanguageTS ? "tsx" : "jsx";
 
         this._copyWidgetFile("commons/README.md", "README.md");
 
         // web & native
-        if (this.widget.emptyTemplate) {
+        if (this.widget.usesEmptyTemplate) {
             this._copyWidgetFile(
-                `${this.widget.source}${widgetSrcFolder}HelloWorldSample.${jsxFileExtension}.ejs`,
+                `${this.widget.templateSourcePath}${widgetSrcFolder}HelloWorldSample.${jsxFileExtension}.ejs`,
                 `${widgetSrcFolder}HelloWorldSample.${jsxFileExtension}`
             );
             this._copyWidgetFile(
-                `${this.widget.source}src/WidgetName.${jsxFileExtension}.ejs`,
+                `${this.widget.templateSourcePath}src/WidgetName.${jsxFileExtension}.ejs`,
                 `src/${widgetName}.${jsxFileExtension}`
             );
         } else {
             this._copyWidgetFile(
-                `${this.widget.source}${widgetSrcFolder}BadgeSample.${jsxFileExtension}.ejs`,
+                `${this.widget.templateSourcePath}${widgetSrcFolder}BadgeSample.${jsxFileExtension}.ejs`,
                 `${widgetSrcFolder}BadgeSample.${jsxFileExtension}`
             );
             this._copyWidgetFile(
-                `${this.widget.source}src/WidgetName.${jsxFileExtension}.ejs`,
+                `${this.widget.templateSourcePath}src/WidgetName.${jsxFileExtension}.ejs`,
                 `src/${widgetName}.${jsxFileExtension}`
             );
         }
 
-        if (this.widget.isWeb) {
+        if (this.widget.isPlatformWeb) {
             this._copyWidgetFile(
-                `${this.widget.source}src/WidgetName.editorPreview.${jsxFileExtension}.ejs`,
+                `${this.widget.templateSourcePath}src/WidgetName.editorPreview.${jsxFileExtension}.ejs`,
                 `src/${widgetName}.editorPreview.${jsxFileExtension}`
             );
-            this._copyWidgetFile(`${this.widget.source}src/ui/WidgetName.css`, `src/ui/${widgetName}.css`);
+            this._copyWidgetFile(`${this.widget.templateSourcePath}src/ui/WidgetName.css`, `src/ui/${widgetName}.css`);
 
-            if (this.widget.fullTemplate) {
+            if (this.widget.usesFullTemplate) {
                 this._copyFile(
-                    this.templatePath(`${this.widget.source}${widgetSrcFolder}Alert.${jsxFileExtension}.ejs`),
+                    this.templatePath(
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}Alert.${jsxFileExtension}.ejs`
+                    ),
                     this.destinationPath(`${widgetSrcFolder}Alert.${jsxFileExtension}`)
                 );
             }
         } else {
-            const fileExtension = this.widget.isTs ? "ts" : "js";
+            const fileExtension = this.widget.isLanguageTS ? "ts" : "js";
 
-            if (this.widget.fullTemplate) {
+            if (this.widget.usesFullTemplate) {
                 this._copyFile(
-                    this.templatePath(`${this.widget.source}src/ui/styles.${fileExtension}`),
+                    this.templatePath(`${this.widget.templateSourcePath}src/ui/styles.${fileExtension}`),
                     this.destinationPath(`src/ui/styles.${fileExtension}`)
                 );
             }
             this._copyFile(
-                this.templatePath(`${this.widget.source}src/utils/common.${fileExtension}`),
+                this.templatePath(`${this.widget.templateSourcePath}src/utils/common.${fileExtension}`),
                 this.destinationPath(`src/utils/common.${fileExtension}`)
             );
         }
@@ -212,82 +201,74 @@ class MxGenerator extends Generator {
     _writePackage() {
         let templatePath;
 
-        if (this.widget.isWeb) {
-            templatePath = `packages/package.${this.widget.isTs ? "ts" : "js"}.json`;
+        if (this.widget.isPlatformWeb) {
+            templatePath = `packages/package.${this.widget.isLanguageTS ? "ts" : "js"}.json`;
         } else {
-            templatePath = `packages/package_native_${this.widget.isTs ? "ts" : "js"}.json`;
+            templatePath = `packages/package_native_${this.widget.isLanguageTS ? "ts" : "js"}.json`;
         }
 
         this._copyTemplate(this.templatePath(templatePath), this.destinationPath("package.json"), this.widget);
     }
 
     _writeCompilerOptions() {
-        if (this.widget.isTs) {
+        if (this.widget.isLanguageTS) {
             this._copyFile(this.templatePath("commons/tsconfig.json"), this.destinationPath("tsconfig.json"));
         }
     }
 
     _writeWidgetXML() {
         this._copyTemplate(
-            this.templatePath(`${this.widget.source}src/package.xml`),
+            this.templatePath(`${this.widget.templateSourcePath}src/package.xml`),
             this.destinationPath("src/package.xml"),
-            {
-                widgetName: this.widget.widgetName,
-                packageName: this.widget.packageName,
-                packagePath: this.widget.packagePath.replace(/\./g, "/"),
-                version: this.widget.version
-            }
+            Object.assign(this.widget, { packagePathXml: this.widget.packagePath.replace(/\./g, "/") })
         );
 
         this._copyTemplate(
-            this.templatePath(`${this.widget.source}src/WidgetName.xml`),
-            this.destinationPath(`src/${this.widget.widgetName}.xml`),
-            {
-                widgetNameCamelCase: this.widget.widgetName.replace(/([a-z0-9])([A-Z])/g, "$1 $2"),
-                widgetName: this.widget.widgetName,
-                packageName: this.widget.packageName,
-                packagePath: this.widget.packagePath.replace(/\//g, "."),
-                widgetDescription: this.widget.description
-            }
+            this.templatePath(`${this.widget.templateSourcePath}src/WidgetName.xml`),
+            this.destinationPath(`src/${this.widget.name}.xml`),
+            Object.assign(this.widget, {
+                nameCamelCase: this.widget.name.replace(/([a-z0-9])([A-Z])/g, "$1 $2"),
+                packagePathXml: this.widget.packagePath.replace(/\//g, ".")
+            })
         );
     }
 
     _copyUnitTests() {
-        const extension = this.widget.isTs ? "tsx" : "jsx";
+        const extension = this.widget.isLanguageTS ? "tsx" : "jsx";
 
-        if (this.widget.unitTests) {
-            if (this.widget.isWeb) {
-                if (this.widget.fullTemplate) {
+        if (this.widget.hasUnitTests) {
+            if (this.widget.isPlatformWeb) {
+                if (this.widget.usesFullTemplate) {
                     this._copyFile(
                         this.templatePath(
-                            `${this.widget.source}${widgetSrcFolder}/__tests__/Alert.spec.${extension}.ejs`
+                            `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/Alert.spec.${extension}.ejs`
                         ),
                         this.destinationPath(`${widgetSrcFolder}/__tests__/Alert.spec.${extension}`)
                     );
                     this._copyWidgetFile(
-                        `${this.widget.source}${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}.ejs`,
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}.ejs`,
                         `${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}`
                     );
                 } else {
                     this._copyFile(
                         this.templatePath(
-                            `${this.widget.source}${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${extension}.ejs`
+                            `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${extension}.ejs`
                         ),
                         this.destinationPath(`${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${extension}`)
                     );
                 }
             } else {
-                if (this.widget.fullTemplate) {
+                if (this.widget.usesFullTemplate) {
                     this._copyFile(
                         this.templatePath(
-                            `${this.widget.source}${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}.ejs`
+                            `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}.ejs`
                         ),
                         this.destinationPath(`${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}`)
                     );
                 } else {
                     this._copyFile(
                         this.templatePath(
-                            `${this.widget.source}${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${extension}.ejs`
+                            `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${extension}.ejs`
                         ),
                         this.destinationPath(`${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${extension}`)
                     );
@@ -297,42 +278,42 @@ class MxGenerator extends Generator {
     }
 
     _copyEndToEndTests() {
-        const widgetName = this.widget.widgetName;
-        const extension = this.widget.isTs ? "ts" : "js";
+        const widgetName = this.widget.name;
+        const extension = this.widget.isLanguageTS ? "ts" : "js";
 
-        if (this.widget.e2eTests && this.widget.isWeb) {
-            if (this.widget.isTs) {
+        if (this.widget.hasE2eTests && this.widget.isPlatformWeb) {
+            if (this.widget.isLanguageTS) {
                 this._copyFile(
                     this.templatePath("typings/WebdriverIO.d.ts"),
                     this.destinationPath("tests/e2e/typings/WebdriverIO.d.ts")
                 );
                 this._copyFile(
-                    this.templatePath(this.widget.source + "tests/e2e/tsconfig.json"),
+                    this.templatePath(this.widget.templateSourcePath + "tests/e2e/tsconfig.json"),
                     this.destinationPath("tests/e2e/tsconfig.json")
                 );
             }
 
             this._copyWidgetFile(
-                `${this.widget.source}tests/e2e/WidgetName.spec.${extension}.ejs`,
+                `${this.widget.templateSourcePath}tests/e2e/WidgetName.spec.${extension}.ejs`,
                 `tests/e2e/${widgetName}.spec.${extension}`
             );
 
             this._copyFile(
-                this.templatePath(`${this.widget.source}tests/e2e/pages/home.page.${extension}.ejs`),
+                this.templatePath(`${this.widget.templateSourcePath}tests/e2e/pages/home.page.${extension}.ejs`),
                 this.destinationPath(`tests/e2e/pages/home.page.${extension}`)
             );
         }
     }
 
     async writing() {
-        if (this.props) {
+        if (this.widget) {
             if (this.dir) {
                 if (!this._dirExists(this.dir)) {
                     await mkdir(this.dir);
                 }
                 this.destinationRoot(this.dir);
             }
-            this._defineProperties();
+            this._setTemplateSourcePath();
             this._writeWidgetXML();
             this._copyUnitTests();
             this._writePackage();

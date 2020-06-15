@@ -1,14 +1,14 @@
 import { Component, ReactNode, createElement } from "react";
 import { HelloWorldSample } from "./components/HelloWorldSample";
 import { hot } from "react-hot-loader/root";
-import { <%= widgetName %>ContainerProps } from "../typings/<%= widgetName %>Props";
+import { <%= name %>ContainerProps } from "../typings/<%= name %>Props";
 
-import "./ui/<%= widgetName %>.css";
+import "./ui/<%= name %>.css";
 
-class <%= widgetName %> extends Component<<%= widgetName %>ContainerProps> {
+class <%= name %> extends Component<<%= name %>ContainerProps> {
     render(): ReactNode {
         return <HelloWorldSample sampleText={this.props.sampleText ? this.props.sampleText : "World"} />;
     }
 }
 
-export default hot(<%= widgetName %>);
+export default hot(<%= name %>);

@@ -1,6 +1,6 @@
 {
   "name": "<%- packageName %>",
-  "widgetName": "<%- widgetName %>",
+  "widgetName": "<%- name %>",
   "version": "<%- version %>",
   "description": "<%- description %>",
   "copyright": "<%- copyright %>",
@@ -17,9 +17,9 @@
     "dev": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
     "lint": "pluggable-widgets-tools lint",
-    "lint:fix": "pluggable-widgets-tools lint:fix",<% if (unitTests) { %>
-    "test": "pluggable-widgets-tools test:unit --no-cache --ci<% if (e2eTests) { %> && npm run test:e2e<% } %>",
-    "test:unit": "pluggable-widgets-tools test:unit --coverage",<% } %><% if (e2eTests) { %>
+    "lint:fix": "pluggable-widgets-tools lint:fix",<% if (hasUnitTests) { %>
+    "test": "pluggable-widgets-tools test:unit --no-cache --ci<% if (hasE2eTests) { %> && npm run test:e2e<% } %>",
+    "test:unit": "pluggable-widgets-tools test:unit --coverage",<% } %><% if (hasE2eTests) { %>
     "test:e2e": "pluggable-widgets-tools test:e2e --url \"https://badge.mxapps.io\"",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e --debug",<% } %>
     "prerelease": "npm run lint",
