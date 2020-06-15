@@ -1,3 +1,6 @@
+const { join } = require("path");
+const { access, constants, readdir } = require("fs").promises;
+
 function getWidgetDetails(answers) {
     const widget = Object.create(answers);
 
@@ -64,4 +67,38 @@ function getWidgetDetails(answers) {
     return widget;
 }
 
-module.exports = { getWidgetDetails };
+async function dirExists(dirname) {
+    try {
+        await access(dirname, constants.F_OK);
+        return true;
+    } catch {
+        return false;
+    }
+}
+
+async function isDirEmpty(dirname) {
+    if (!(await dirExists(dirname))) {
+        return true;
+    }
+
+    return (await readdir(dirname)).length === 0;
+}
+
+async function findMprDir(widgetProjectDir) {
+    let mprDir = null;
+    let currentDir = "../";
+    let i = 0;
+    const currentPath = (widgetProjectDir ? join(process.cwd() + "/" + widgetProjectDir) : process.cwd()) + "/";
+    while (i < 5 && mprDir === null) {
+        const items = await readdir(join(currentPath, currentDir));
+        if (items.find(item => item.endsWith(".mpr"))) {
+            mprDir = currentDir;
+            break;
+        }
+        currentDir += "../";
+        i++;
+    }
+    return mprDir;
+}
+
+module.exports = { getWidgetDetails, dirExists, isDirEmpty, findMprDir };
