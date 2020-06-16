@@ -106,18 +106,18 @@ class MxGenerator extends Generator {
     }
 
     _writePackage() {
-        this._copyTemplate(`packages/package_${this.widget.platform}.json`, "package.json");
+        this._copyTemplate(`packages/package_${this.widget.platform}.json.ejs`, "package.json");
     }
 
     _writeWidgetXML() {
         this._copyTemplate(
-            `${this.widget.templateSourcePath}src/package.xml`,
+            `${this.widget.templateSourcePath}src/package.xml.ejs`,
             "src/package.xml",
             Object.assign(this.widget, { packagePathXml: this.widget.packagePath.replace(/\./g, "/") })
         );
 
         this._copyTemplate(
-            `${this.widget.templateSourcePath}src/WidgetName.xml`,
+            `${this.widget.templateSourcePath}src/WidgetName.xml.ejs`,
             `src/${this.widget.name}.xml`,
             Object.assign(this.widget, {
                 nameCamelCase: this.widget.name.replace(/([a-z0-9])([A-Z])/g, "$1 $2"),
@@ -130,7 +130,7 @@ class MxGenerator extends Generator {
         const widgetName = this.widget.name;
         const jsxFileExtension = this.widget.isLanguageTS ? "tsx" : "jsx";
 
-        this._copyTemplate("commons/README.md", "README.md");
+        this._copyTemplate("commons/README.md.ejs", "README.md");
 
         // web & native
         if (this.widget.usesEmptyTemplate) {
@@ -158,7 +158,10 @@ class MxGenerator extends Generator {
                 `${this.widget.templateSourcePath}src/WidgetName.editorPreview.${jsxFileExtension}.ejs`,
                 `src/${widgetName}.editorPreview.${jsxFileExtension}`
             );
-            this._copyTemplate(`${this.widget.templateSourcePath}src/ui/WidgetName.css`, `src/ui/${widgetName}.css`);
+            this._copyTemplate(
+                `${this.widget.templateSourcePath}src/ui/WidgetName.css${this.widget.usesFullTemplate ? ".ejs" : ""}`,
+                `src/ui/${widgetName}.css`
+            );
 
             if (this.widget.usesFullTemplate) {
                 this._copyFile(
@@ -193,10 +196,10 @@ class MxGenerator extends Generator {
         if (this.widget.license) {
             switch (this.widget.license.toLowerCase()) {
                 case "apache-2.0":
-                    this._copyTemplate("licenses/APACHE2", "LICENSE");
+                    this._copyTemplate("licenses/APACHE2.ejs", "LICENSE");
                     break;
                 case "mit":
-                    this._copyTemplate("licenses/MIT", "LICENSE");
+                    this._copyTemplate("licenses/MIT.ejs", "LICENSE");
                     break;
                 default:
                     break;
@@ -247,7 +250,7 @@ class MxGenerator extends Generator {
         if (this.widget.hasE2eTests && this.widget.isPlatformWeb) {
             if (this.widget.isLanguageTS) {
                 this._copyFile("typings/WebdriverIO.d.ts", "tests/e2e/typings/WebdriverIO.d.ts");
-                this._copyFile(this.widget.templateSourcePath + "tests/e2e/tsconfig.json", "tests/e2e/tsconfig.json");
+                this._copyFile(`${this.widget.templateSourcePath}tests/e2e/tsconfig.json`, "tests/e2e/tsconfig.json");
             }
 
             this._copyTemplate(
@@ -262,18 +265,18 @@ class MxGenerator extends Generator {
         }
     }
 
-    _copyFile(source, destination, options = { globOptions: { noext: true } }) {
-        if (!options.globOptions) {
-            options.globOptions = { noext: true };
-        }
-        this.fs.copy(this.templatePath(source), this.destinationPath(destination), options);
+    _copyFile(source, destination) {
+        this.fs.copy(this.templatePath(source), this.destinationPath(destination), { globOptions: { noext: true } });
     }
 
     _copyTemplate(source, destination, replaceVariable = this.widget) {
-        const options = {
-            globOptions: { noext: true }
-        };
-        this.fs.copyTpl(this.templatePath(source), this.destinationPath(destination), replaceVariable, {}, options);
+        this.fs.copyTpl(
+            this.templatePath(source),
+            this.destinationPath(destination),
+            replaceVariable,
+            {},
+            { globOptions: { noext: true } }
+        );
     }
 }
 
