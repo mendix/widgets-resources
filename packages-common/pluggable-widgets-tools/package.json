@@ -113,7 +113,7 @@
     "yeoman-test": "^2.6.0"
   },
   "scripts": {
-    "prepare": "tsc --project utils",
+    "prepare": "rm -rf utils/dist && tsc --project utils",
     "test": "cross-env LIMIT_TESTS=true npm run test:cross-platform",
     "test:cross-platform": "jest --testTimeout=720000 tests/commands.spec.js"
   }
