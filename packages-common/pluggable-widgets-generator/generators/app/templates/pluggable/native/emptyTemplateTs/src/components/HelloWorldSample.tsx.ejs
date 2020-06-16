@@ -1,8 +1,9 @@
 import { Component, ReactNode, createElement } from "react";
 import { Text, View } from "react-native";
 
+import { flattenStyles } from "@mendix/pluggable-widgets-tools";
+
 import { CustomStyle } from "../<%= name %>";
-import { flattenStyles } from "../utils/common";
 
 export interface HelloWorldSampleProps {
     sampleText?: string;

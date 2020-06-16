@@ -175,10 +175,6 @@ class MxGenerator extends Generator {
                     `src/ui/styles.${fileExtension}`
                 );
             }
-            this._copyFile(
-                `${this.widget.templateSourcePath}src/utils/common.${fileExtension}`,
-                `src/utils/common.${fileExtension}`
-            );
         }
     }
 

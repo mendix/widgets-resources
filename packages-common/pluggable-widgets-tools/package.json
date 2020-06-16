@@ -25,8 +25,11 @@
     "bin",
     "scripts",
     "configs",
-    "test-config"
+    "test-config",
+    "utils/dist"
   ],
+  "main": "utils/dist/index.js",
+  "types": "utils/dist/index.d.ts",
   "bin": {
     "pluggable-widgets-tools": "bin/mx-scripts.js"
   },
@@ -110,6 +113,7 @@
     "yeoman-test": "^2.6.0"
   },
   "scripts": {
+    "prepare": "tsc --project utils",
     "test": "cross-env LIMIT_TESTS=true npm run test:cross-platform",
     "test:cross-platform": "jest --testTimeout=720000 tests/commands.spec.js"
   }
