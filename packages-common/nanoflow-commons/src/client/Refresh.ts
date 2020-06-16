@@ -10,30 +10,24 @@
 // END EXTRA CODE
 
 /**
- * @param {string} objectGuid - Pass guid in order to trigger object subscriptions
- * @param {string} attributeName - Pass attribute along with GUID in order to trigger attribute subscriptions
+ * @param {string} entityObject - Pass guid in order to trigger object subscriptions
  * @param {string} entityName - Pass entityName in order to trigger entity subscriptions
  * @returns {Promise.<void>}
  */
 export async function Refresh(entityObject?: mendix.lib.MxObject, entityName?: string) {
     // BEGIN USER CODE
-    let obj = {};
 
-    if (entityName) {
-        obj = {
-            entity: entityName
-        };
-    } else if (entityObject) {
-        obj = {
-            guid: entityObject.getGuid()
-        };
+    if (!entityObject && !entityName) {
+        return Promise.reject(new Error("One of the input parameters are required"));
     }
 
     return new Promise(resolve => {
         mx.data.update({
-            ...obj,
+            ...(entityObject && { guid: entityObject.getGuid() }),
+            ...(entityName && { entity: entityName }),
+            // eslint-disable-next-line no-unused-vars
             ...{ callback: () => resolve(true) }
-        } as any);
+        });
     });
     // END USER CODE
 }
