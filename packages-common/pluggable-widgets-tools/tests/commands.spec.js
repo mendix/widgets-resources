@@ -30,8 +30,15 @@ if (LIMIT_TESTS) {
 describe("pluggable-widgets-tools commands", () => {
     let toolsPackagePath;
     beforeAll(async () => {
-        const { stdout: packOutput } = await execAsync("npm pack --loglevel=error", join(__dirname, ".."));
-        toolsPackagePath = join(__dirname, "..", packOutput.trim());
+        const { stdout: packOutput } = await execAsync("npm pack", join(__dirname, ".."));
+        toolsPackagePath = join(
+            __dirname,
+            "..",
+            packOutput
+                .trim()
+                .split(/\n/g)
+                .pop()
+        );
     });
     afterAll(() => {
         rm(toolsPackagePath);
