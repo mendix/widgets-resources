@@ -27,7 +27,7 @@
   },
   "license": "<%- license %>",
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "/Users/Isa.Isaku/Workspace/widgets-resources/packages-common/pluggable-widgets-tools/mendix-pluggable-widgets-tools-8.10.1.tgz"<% if (isLanguageTS) { %>,
+    "@mendix/pluggable-widgets-tools": "^8.9.2"<% if (isLanguageTS) { %>,
     "@types/big.js": "^4.0.5",
     "@types/classnames": "^2.2.4",<% if (hasE2eTests) { %>
     "@types/webdriverio": "^4.13.0",<% } %><% if (hasUnitTests || hasE2eTests) { %>
