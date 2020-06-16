@@ -107,13 +107,14 @@
   "devDependencies": {
     "@mendix/generator-widget": ">=8.9.0",
     "cross-env": "^7.0.2",
-    "fs-extra": "9.0.0",
+    "fs-extra": "^9.0.0",
+    "rimraf": "^3.0.2",
     "shelljs": "^0.8.4",
     "tree-kill": "^1.2.2",
     "yeoman-test": "^2.6.0"
   },
   "scripts": {
-    "prepare": "rm -rf utils/dist && tsc --project utils",
+    "prepublish": "rimraf utils/dist && tsc --project utils",
     "test": "cross-env LIMIT_TESTS=true npm run test:cross-platform",
     "test:cross-platform": "jest --testTimeout=720000 tests/commands.spec.js"
   }
