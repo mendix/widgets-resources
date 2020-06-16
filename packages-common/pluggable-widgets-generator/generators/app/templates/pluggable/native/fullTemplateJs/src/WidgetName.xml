@@ -12,7 +12,7 @@
         <propertyGroup caption="General">
             <property key="valueAttribute" type="attribute" required="false">
                 <caption>Value attribute</caption>
-                <description>The attribute that contains the packageName value</description>
+                <description>The attribute that contains the <%= packageName %> value</description>
                 <attributeTypes>
                     <attributeType name="String"/>
                     <attributeType name="Enum"/>

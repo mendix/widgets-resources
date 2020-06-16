@@ -1,8 +1,9 @@
 import { Component, createElement } from "react";
 import { Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
 
+import { flattenStyles } from "@mendix/pluggable-widgets-tools";
+
 import { styles } from "../ui/styles";
-import { flattenStyles } from "../utils/common";
 
 const defaultBadgeStyle = {
     container: styles.flex,

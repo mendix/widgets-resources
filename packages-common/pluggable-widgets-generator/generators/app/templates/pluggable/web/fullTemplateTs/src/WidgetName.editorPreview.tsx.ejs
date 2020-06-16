@@ -1,4 +1,7 @@
 import { Component, ReactNode, createElement } from "react";
+
+import { parseStyle } from "@mendix/pluggable-widgets-tools";
+
 import { BadgeSample, BadgeSampleProps } from "./components/BadgeSample";
 import { <%= name %>PreviewProps } from "../typings/<%= name %>Props";
 
@@ -26,25 +29,10 @@ export class preview extends Component<<%= name %>PreviewProps> {
             bootstrapStyle: props.bootstrapStyle,
             className: props.class,
             clickable: false,
-            style: this.parseStyle(props.style),
+            style: parseStyle(props.style),
             defaultValue: props.<%= packageName %>Value ? props.<%= packageName %>Value : "",
             value: props.valueAttribute
         };
-    }
-
-    private parseStyle(style = ""): { [key: string]: string } {
-        try {
-            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
-                const pair = line.split(":");
-                if (pair.length === 2) {
-                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
-                    styleObject[name] = pair[1].trim();
-                }
-            return styleObject;
-            }, {});
-        } catch (_) {
-            return {};
-        }
     }
 }
 

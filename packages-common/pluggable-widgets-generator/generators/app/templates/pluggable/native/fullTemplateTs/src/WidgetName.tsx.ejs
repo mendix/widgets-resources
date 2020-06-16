@@ -1,8 +1,10 @@
 import { Component, ReactNode, createElement } from "react";
 import { TextStyle, ViewStyle } from "react-native";
+
+import { Style } from "@mendix/pluggable-widgets-tools";
+
 import { BadgeSample } from "./components/BadgeSample";
 import { <%= name %>Props } from "../typings/<%= name %>Props";
-import { Style } from "./utils/common";
 
 export interface BadgeStyle extends Style {
     container: ViewStyle;

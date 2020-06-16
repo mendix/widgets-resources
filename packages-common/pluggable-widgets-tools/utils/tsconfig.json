@@ -1,0 +1,29 @@
+{
+    "extends": "../configs/tsconfig.base",
+    "baseUrl": "./",
+    "include": ["./"],
+    "compilerOptions": {
+        "target": "es2015",
+        "lib": ["es2015"],
+        "moduleResolution": "node",
+        "module": "es2015",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "strict": true,
+        "noEmitOnError": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true,
+        "jsx": "react",
+        "jsxFactory": "createElement",
+        "baseUrl": "./",
+        "outDir": "./dist",
+        "declaration": true,
+        "sourceMap": false
+    }
+}
