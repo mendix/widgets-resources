@@ -48,7 +48,7 @@ describe("pluggable-widgets-tools commands", () => {
 
             if (version === "latest") {
                 const promptAnswers = {
-                    widgetName: "Generated",
+                    name: "Generated",
                     description: "My widget description",
                     organization: "com.mendix",
                     copyright: "Mendix 2020",
@@ -59,8 +59,8 @@ describe("pluggable-widgets-tools commands", () => {
                     programmingLanguage: lang === "ts" ? "typescript" : "javascript",
                     platform,
                     boilerplate,
-                    unitTests: true,
-                    e2eTests: false
+                    hasUnitTests: true,
+                    hasE2eTests: false
                 };
                 const generatedWidget = await runYeoman(require.resolve("@mendix/generator-widget/generators/app"))
                     .inTmpDir()
