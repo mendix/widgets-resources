@@ -10,7 +10,7 @@
 // END EXTRA CODE
 
 /**
- * @param {string} entityObject - Pass guid in order to trigger object subscriptions
+ * @param {string} entityObject - Pass mxObject in order to trigger object subscriptions
  * @param {string} entityName - Pass entityName in order to trigger entity subscriptions
  * @returns {Promise.<void>}
  */
@@ -25,7 +25,6 @@ export async function Refresh(entityObject?: mendix.lib.MxObject, entityName?: s
         mx.data.update({
             ...(entityObject && { guid: entityObject.getGuid() }),
             ...(entityName && { entity: entityName }),
-            // eslint-disable-next-line no-unused-vars
             ...{ callback: () => resolve(true) }
         });
     });
