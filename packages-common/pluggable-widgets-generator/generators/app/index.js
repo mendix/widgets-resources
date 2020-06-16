@@ -1,6 +1,6 @@
 const { join } = require("path");
 const pkg = require(join(__dirname, "/../../package.json"));
-const { access, constants, mkdir, readdir } = require("fs").promises;
+const { mkdir } = require("fs").promises;
 const Generator = require("yeoman-generator");
 
 const promptTexts = require("./lib/prompttexts.js");
@@ -58,24 +58,72 @@ class MxGenerator extends Generator {
         this.widget = utils.getWidgetDetails(combinedAnswers);
     }
 
-    _writeUtilityFiles() {
-        this._copyFile("commons/_gitignore", ".gitignore");
-        this._copyFile(`commons/eslintrc.${this.widget.isLanguageTS ? "ts" : "js"}.js`, ".eslintrc.js");
-        this._copyFile("commons/prettier.config.js", "prettier.config.js");
-        this._copyFile("commons/.gitattributes", ".gitattributes");
-
-        if (this.widget.license) {
-            switch (this.widget.license.toLowerCase()) {
-                case "apache-2.0":
-                    this._copyTemplate("licenses/APACHE2", "LICENSE");
-                    break;
-                case "mit":
-                    this._copyTemplate("licenses/MIT", "LICENSE");
-                    break;
-                default:
-                    break;
+    async writing() {
+        if (this.dir) {
+            if (!utils.dirExists(this.dir)) {
+                await mkdir(this.dir);
             }
+            this.destinationRoot(this.dir);
         }
+        this._writePackage();
+        this._writeWidgetXML();
+        this._writeWidgetFiles();
+        this._writeCompilerOptions();
+        this._writeUtilityFiles();
+        this._writeUnitTests();
+        this._writeEndToEndTests();
+    }
+
+    install() {
+        if (this.FINISHED) {
+            return;
+        }
+        this.log(text.INSTALL_FINISH_MSG);
+        this.npmInstall();
+    }
+
+    end() {
+        if (this.FINISHED) {
+            return;
+        }
+
+        if (utils.isDirEmpty(this.destinationPath("node_modules"))) {
+            this.log(text.END_NPM_NEED_INSTALL_MSG);
+        } else {
+            this.log(text.END_RUN_BUILD_MSG);
+            this.spawnCommandSync("npm", ["run", "lint"]); // eslint-disable-line no-sync
+            this.spawnCommandSync("npm", ["run", "build"]); // eslint-disable-line no-sync
+        }
+
+        // Remove .yo-rc.json
+        try {
+            this.fs.delete(this.destinationPath(".yo-rc.json"));
+        } catch (e) {
+            console.error(e);
+        }
+
+        this.log(text.END_SUCCESS);
+    }
+
+    _writePackage() {
+        this._copyTemplate(`packages/package_${this.widget.platform}.json`, "package.json");
+    }
+
+    _writeWidgetXML() {
+        this._copyTemplate(
+            `${this.widget.templateSourcePath}src/package.xml`,
+            "src/package.xml",
+            Object.assign(this.widget, { packagePathXml: this.widget.packagePath.replace(/\./g, "/") })
+        );
+
+        this._copyTemplate(
+            `${this.widget.templateSourcePath}src/WidgetName.xml`,
+            `src/${this.widget.name}.xml`,
+            Object.assign(this.widget, {
+                nameCamelCase: this.widget.name.replace(/([a-z0-9])([A-Z])/g, "$1 $2"),
+                packagePathXml: this.widget.packagePath.replace(/\//g, ".")
+            })
+        );
     }
 
     _writeWidgetFiles() {
@@ -134,34 +182,33 @@ class MxGenerator extends Generator {
         }
     }
 
-    _writePackage() {
-        this._copyTemplate(`packages/package_${this.widget.platform}.json`, "package.json");
-    }
-
     _writeCompilerOptions() {
         if (this.widget.isLanguageTS) {
             this._copyFile("commons/tsconfig.json", "tsconfig.json");
         }
     }
 
-    _writeWidgetXML() {
-        this._copyTemplate(
-            `${this.widget.templateSourcePath}src/package.xml`,
-            "src/package.xml",
-            Object.assign(this.widget, { packagePathXml: this.widget.packagePath.replace(/\./g, "/") })
-        );
+    _writeUtilityFiles() {
+        this._copyFile("commons/_gitignore", ".gitignore");
+        this._copyFile(`commons/eslintrc.${this.widget.isLanguageTS ? "ts" : "js"}.js`, ".eslintrc.js");
+        this._copyFile("commons/prettier.config.js", "prettier.config.js");
+        this._copyFile("commons/.gitattributes", ".gitattributes");
 
-        this._copyTemplate(
-            `${this.widget.templateSourcePath}src/WidgetName.xml`,
-            `src/${this.widget.name}.xml`,
-            Object.assign(this.widget, {
-                nameCamelCase: this.widget.name.replace(/([a-z0-9])([A-Z])/g, "$1 $2"),
-                packagePathXml: this.widget.packagePath.replace(/\//g, ".")
-            })
-        );
+        if (this.widget.license) {
+            switch (this.widget.license.toLowerCase()) {
+                case "apache-2.0":
+                    this._copyTemplate("licenses/APACHE2", "LICENSE");
+                    break;
+                case "mit":
+                    this._copyTemplate("licenses/MIT", "LICENSE");
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
-    _copyUnitTests() {
+    _writeUnitTests() {
         const extension = this.widget.isLanguageTS ? "tsx" : "jsx";
 
         if (this.widget.hasUnitTests) {
@@ -197,7 +244,7 @@ class MxGenerator extends Generator {
         }
     }
 
-    _copyEndToEndTests() {
+    _writeEndToEndTests() {
         const widgetName = this.widget.name;
         const extension = this.widget.isLanguageTS ? "ts" : "js";
 
@@ -217,55 +264,6 @@ class MxGenerator extends Generator {
                 `tests/e2e/pages/home.page.${extension}`
             );
         }
-    }
-
-    async writing() {
-        if (this.widget) {
-            if (this.dir) {
-                if (!utils.dirExists(this.dir)) {
-                    await mkdir(this.dir);
-                }
-                this.destinationRoot(this.dir);
-            }
-            this._writeWidgetXML();
-            this._copyUnitTests();
-            this._writePackage();
-            this._writeCompilerOptions();
-            this._writeWidgetFiles();
-            this._writeUtilityFiles();
-            this._copyEndToEndTests();
-        }
-    }
-
-    install() {
-        if (this.FINISHED) {
-            return;
-        }
-        this.log(text.INSTALL_FINISH_MSG);
-        this.npmInstall();
-    }
-
-    end() {
-        if (this.FINISHED) {
-            return;
-        }
-
-        if (utils.isDirEmpty(this.destinationPath("node_modules"))) {
-            this.log(text.END_NPM_NEED_INSTALL_MSG);
-        } else {
-            this.log(text.END_RUN_BUILD_MSG);
-            this.spawnCommandSync("npm", ["run", "lint"]); // eslint-disable-line no-sync
-            this.spawnCommandSync("npm", ["run", "build"]); // eslint-disable-line no-sync
-        }
-
-        // Remove .yo-rc.json
-        try {
-            this.fs.delete(this.destinationPath(".yo-rc.json"));
-        } catch (e) {
-            console.error(e);
-        }
-
-        this.log(text.END_SUCCESS);
     }
 
     _copyFile(source, destination, options = { globOptions: { noext: true } }) {
