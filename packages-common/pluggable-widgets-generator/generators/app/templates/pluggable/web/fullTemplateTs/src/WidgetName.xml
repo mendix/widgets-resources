@@ -28,7 +28,7 @@
         </propertyGroup>
         <propertyGroup caption="Display">
             <property key="bootstrapStyle" type="enumeration" defaultValue="default">
-                <caption>WidgetName style</caption>
+                <caption><%= name %> style</caption>
                 <description>The appearance of the packageName</description>
                 <enumerationValues>
                     <enumerationValue key="default">Default</enumerationValue>
