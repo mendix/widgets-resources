@@ -6,6 +6,7 @@ branches:
     only:
         - master
         - /^pluggable-widgets-tools-v*/
+        - /^pluggable-widgets-generator-v*/
 env:
     global:
         # Build only touched packages for pull requests when no shared files were touched
@@ -59,11 +60,11 @@ jobs:
           script:
               - npm run test:e2e -- $SINCE_ARG
         - stage: deploy
-          name: "Release tools npm package"
+          name: "Release npm package"
           script:
               - echo "Ready to deploy!"
           before_deploy:
-              - cd packages-common/pluggable-widgets-tools
+              - if [[ "$TRAVIS_TAG" =~ "^pluggable-widgets-tools-v*" ]]; then cd packages-common/pluggable-widgets-tools; else cd packages-common/pluggable-widgets-generator; fi
           deploy:
               skip_cleanup: true
               provider: npm
