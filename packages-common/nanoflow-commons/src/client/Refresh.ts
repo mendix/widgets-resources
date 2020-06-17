@@ -11,7 +11,7 @@
 
 /**
  * @param {string} entityObject - Pass mxObject in order to trigger object subscriptions
- * @param {string} entityName - Pass entityName in order to trigger entity subscriptions
+ * @param {string} entityName - Pass modulename.entityName in order to trigger entity subscriptions. Ex: MyModule.FavoriteEntity
  * @returns {Promise.<void>}
  */
 export async function Refresh(entityObject?: mendix.lib.MxObject, entityName?: string) {
@@ -19,6 +19,9 @@ export async function Refresh(entityObject?: mendix.lib.MxObject, entityName?: s
 
     if (!entityObject && !entityName) {
         return Promise.reject(new Error("One of the input parameters are required"));
+    }
+    if (entityName && !/\w+\.\w+/i.test(entityName)) {
+        return Promise.reject(new Error("EntityName should consists ModuleName.EntityName"));
     }
 
     return new Promise(resolve => {
