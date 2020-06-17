@@ -53,6 +53,8 @@ jobs:
               - xvfb
           script:
               - npm run test:e2e -- $SINCE_ARG
+          after_script:
+              - if [[ $TRAVIS_TEST_RESULT -gt 0 ]]; then echo "Not works"; else echo "Works"; fi
         - stage: deploy
           name: "Release npm package"
           script:
