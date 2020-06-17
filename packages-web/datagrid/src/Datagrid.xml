@@ -70,10 +70,6 @@
                                     <enumerationValue key="no">No</enumerationValue>
                                 </enumerationValues>
                             </property>
-<!--                            <property key="affixColumn" type="boolean" defaultValue="false">-->
-<!--                                <caption>Affix Column</caption>-->
-<!--                                <description/>-->
-<!--                            </property>-->
                         </propertyGroup>
                     </properties>
                 </property>
@@ -137,13 +133,6 @@
                     <caption>Can hide columns</caption>
                     <description />
                 </property>
-<!--                <property key="userConfigStorage" type="attribute" required="false">-->
-<!--                    <caption>User settings storage</caption>-->
-<!--                    <description/>-->
-<!--                    <attributeTypes>-->
-<!--                        <attributeType name="String"/>-->
-<!--                    </attributeTypes>-->
-<!--                </property>-->
             </propertyGroup>
             <propertyGroup caption="Visibility">
                 <systemProperty key="Visibility"/>

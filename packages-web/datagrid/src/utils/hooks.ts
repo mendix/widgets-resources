@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useMemo, useState } from "react";
 import { ListValue } from "mendix";
 import { ColumnsType } from "../../typings/DatagridProps";
 import { ColumnInstance } from "react-table";
-import { ColumnsConfig } from "../../typings/ReactTable";
+import { ColumnsConfig, TableColumn, TableData } from "../../typings/ReactTable";
 
 export function useData(
     datasource: ListValue,
@@ -12,7 +12,7 @@ export function useData(
     currentPage: number,
     hasSortingOrFiltering: boolean,
     setHasMoreItems: Dispatch<SetStateAction<boolean>>
-) {
+): [TableData[]] {
     const [items, setItems] = useState<any[]>([]);
     const datasourceData = useMemo(
         () =>
@@ -48,7 +48,7 @@ export function useData(
     return [data];
 }
 
-export function useColumns(columns: ColumnsType[]): [any, ColumnsConfig] {
+export function useColumns(columns: ColumnsType[]): [TableColumn[], ColumnsConfig] {
     const columnsData = useMemo(
         () =>
             columns.map((column, index) => ({

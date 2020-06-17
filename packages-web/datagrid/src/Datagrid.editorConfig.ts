@@ -36,7 +36,14 @@ export function getProperties(values: DatagridPreviewProps, defaultProperties: P
 
 export function check(values: DatagridPreviewProps): Problem[] {
     const errors: Problem[] = [];
-    console.log(values);
+    values.columns
+        .filter(c => c.attribute === undefined)
+        .forEach((column, index) => {
+            errors.push({
+                property: "columns.attribute",
+                message: `Attribute is required for column ${column.header ?? index + 1}`
+            });
+        });
 
     return errors;
 }

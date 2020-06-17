@@ -1,6 +1,7 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
 import { Header, HeaderProps } from "../Header";
+import { ColumnConfig } from "../../../typings/ReactTable";
 
 describe("Header", () => {
     it("renders the structure correctly", () => {
@@ -16,7 +17,7 @@ function mockHeaderProps(): HeaderProps {
             render: () => <span>Test</span>,
             getHeaderProps: () => ({ role: "Test" } as any)
         } as any,
-        columnsConfig: [],
+        columnsConfig: {} as ColumnConfig,
         setColumnOrder: jest.fn(),
         visibleColumns: [],
         draggable: false,

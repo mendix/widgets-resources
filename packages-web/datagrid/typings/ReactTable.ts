@@ -8,6 +8,7 @@ import {
     UseSortByColumnProps
 } from "react-table";
 import { HidableEnum } from "./DatagridProps";
+import { ReactNode } from "react";
 
 export interface ExtendedColumnInstance
     extends HeaderGroup<any>,
@@ -42,4 +43,14 @@ export interface ColumnConfig {
 
 export interface ColumnsConfig {
     [key: string]: ColumnConfig;
+}
+
+export interface TableData {
+    [key: string]: string | Date | number | boolean | ReactNode | undefined;
+}
+
+export interface TableColumn {
+    Header: string;
+    accessor: string;
+    filter: string;
 }

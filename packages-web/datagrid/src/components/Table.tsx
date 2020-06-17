@@ -6,7 +6,9 @@ import {
     ColumnsConfig,
     ExtendedColumnInstance,
     ExtendedTableInstance,
-    FilterProperties
+    FilterProperties,
+    TableColumn,
+    TableData
 } from "../../typings/ReactTable";
 import { Header } from "./Header";
 import { InfiniteBody } from "./InfiniteBody";
@@ -26,8 +28,8 @@ import {
 
 export interface TableProps {
     className: string;
-    data: any;
-    columns: any;
+    data: TableData[];
+    columns: TableColumn[];
     columnsConfig: ColumnsConfig;
     headerWidgets?: ReactNode;
     footerWidgets?: ReactNode;

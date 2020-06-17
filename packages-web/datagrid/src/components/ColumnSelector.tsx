@@ -1,27 +1,30 @@
 import { createElement, ReactElement, Fragment, useState } from "react";
 import { ColumnsConfig } from "../../typings/ReactTable";
+import { ColumnInstance } from "react-table";
 
 export interface ColumnSelectorProps {
-    allColumns: any[];
+    allColumns: Array<ColumnInstance<object>>;
     columnsConfig: ColumnsConfig;
 }
 
 export function ColumnSelector({ allColumns, columnsConfig }: ColumnSelectorProps): ReactElement {
     const [show, setShow] = useState(false);
-    const toggleColumnSelector = (): void => {
-        setShow(s => !s);
-    };
     return (
         <Fragment>
-            <button className="btn btn-default" onClick={toggleColumnSelector}>
+            <button
+                className="btn btn-default"
+                onClick={() => {
+                    setShow(s => !s);
+                }}
+            >
                 Columns
             </button>
             {show && (
                 <ul className="column-selectors">
-                    {allColumns.map((column: any, index: number) => {
+                    {allColumns.map((column, index) => {
                         const { hidable } = columnsConfig[column.id];
                         return hidable !== "no" ? (
-                            <li key={`fragment_${index}`}>
+                            <li key={index}>
                                 <input
                                     id={`checkbox_toggle_${index}`}
                                     type="checkbox"
