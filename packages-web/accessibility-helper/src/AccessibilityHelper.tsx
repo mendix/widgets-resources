@@ -1,101 +1,90 @@
-import { ReactNode, MutableRefObject, createElement, useRef, useEffect, useCallback } from "react";
+import { createElement, MutableRefObject, ReactNode, useCallback, useEffect, useRef } from "react";
 
-import { DynamicValue, ValueStatus } from "mendix";
+import { ValueStatus } from "mendix";
 
-import { AccessibilityHelperContainerProps } from "../typings/AccessibilityHelperProps";
+import { AccessibilityHelperContainerProps, AttributesListType } from "../typings/AccessibilityHelperProps";
 
 const PROHIBITED_ATTRIBUTES = ["class", "style", "widgetid", "data-mendix-id"];
 
-const isValid = function isValid(selector: string): boolean {
+function isValid(selector: string): boolean {
     if (PROHIBITED_ATTRIBUTES.indexOf(selector) !== -1) {
         console.error(`Widget tries to change ${selector} attribute, this is prohibited`);
         return false;
     }
     return true;
-};
+}
 
 const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactNode => {
-    // console.log("render accessibility-helper", props.valueExpression.status, props.valueExpression.value);
     const contentRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
-
-    const attributeValue: MutableRefObject<string | null> = useRef(null);
-    const attributeCondition: MutableRefObject<boolean | null> = useRef(null);
-
-    const value: MutableRefObject<DynamicValue<string> | undefined> = useRef(undefined);
-    const condition: MutableRefObject<DynamicValue<boolean> | undefined> = useRef(undefined);
-    condition.current = props.attributeCondition;
-    value.current = props.valueSource === "expression" ? props.valueExpression : props.valueText;
-
-    // console.log("render accessibility-helper", value.current.status, value.current.value);
+    const attributeValuesRef: MutableRefObject<string[]> = useRef([]);
+    const attributeConditionsRef: MutableRefObject<boolean[]> = useRef([]);
 
     const update = useCallback(() => {
-        // console.log("check updateContent", value.current.status, value.current.value);
-        const containerElement = contentRef.current;
-        if (containerElement) {
-            // console.log("has current ref");
-            let target = null;
+        if (contentRef.current) {
+            let target: Element | null = null;
             try {
-                target = containerElement.querySelector(props.targetSelector);
+                target = contentRef.current.querySelector(props.targetSelector);
+                if (target) {
+                    props.attributesList.forEach((attrEntry, index: number) => {
+                        const valueToBeSet =
+                            attrEntry.valueSourceType === "expression"
+                                ? attrEntry.valueExpression
+                                : attrEntry.valueText;
+                        if (
+                            attrEntry.attributeCondition.status === ValueStatus.Available &&
+                            valueToBeSet?.status === ValueStatus.Available
+                        ) {
+                            if (
+                                attrEntry.attributeCondition.value &&
+                                valueToBeSet?.value !== target!.getAttribute(props.attribute)
+                            ) {
+                                attributeValuesRef.current?.splice(index, 0, valueToBeSet?.value);
+                                attributeConditionsRef.current?.splice(index, 0, true);
+                                target!.setAttribute(attrEntry.attribute, valueToBeSet?.value);
+                            } else {
+                                attributeValuesRef.current?.splice(index, 1);
+                                attributeConditionsRef.current?.splice(index, 1);
+                                target!.removeAttribute(attrEntry.attribute);
+                            }
+                        }
+                    });
+                }
             } catch (error) {
                 console.error(`Set Attribute Target sector ${props.targetSelector} is not valid`, error);
             }
-            if (!target) {
-                console.debug(`Set Attribute Target ${props.targetSelector} does not exist or is not visible`);
-                return;
-            }
-            // if (
-            //     value.current.status === ValueStatus.Available &&
-            //     target.getAttribute(props.attribute) === value.current.value
-            // ) {
-            //     console.log("not changed");
-            // }
-            if (condition.current?.status === ValueStatus.Available && condition.current?.value) {
-                if (
-                    value.current?.status === ValueStatus.Available &&
-                    target.getAttribute(props.attribute) !== value.current?.value
-                ) {
-                    // console.log(`set attribute value: ${props.attribute}="${value.current?.value}"`);
-                    attributeValue.current = value.current?.value;
-                    attributeCondition.current = true;
-                    target.setAttribute(props.attribute, value.current?.value);
-                }
-            } else if (condition.current?.status === ValueStatus.Available && !condition.current?.value) {
-                // console.log("remove attribute", props.attribute);
-                attributeValue.current = null;
-                attributeCondition.current = false;
-                target.removeAttribute(props.attribute);
-            }
-            // else {
-            //     console.log("condition loading");
-            // }
         }
-    }, [props.targetSelector, props.attribute]);
+    }, [
+        props.targetSelector,
+        props.attributesList,
+        attributeValuesRef.current,
+        attributeConditionsRef.current,
+        contentRef.current
+    ]);
 
     useEffect(() => {
-        // console.log("useEffect, initial, no dep");
         if (!isValid(props.targetSelector)) {
             return;
         }
-        if (
-            (attributeValue.current !== value.current?.value &&
-                value.current?.status === ValueStatus.Available &&
-                condition.current?.value) ||
-            (attributeCondition.current !== condition.current?.value &&
-                condition.current?.status === ValueStatus.Available)
-        ) {
-            // console.log("value Changed");
+        const isAnythingChanged = props.attributesList.every(attrEntry => {
+            const valueToBeSet =
+                attrEntry.valueSourceType === "expression" ? attrEntry.valueExpression : attrEntry.valueText;
+            return (
+                (valueToBeSet && !attributeValuesRef.current?.some(value => value === valueToBeSet.value)) ||
+                (attrEntry.attributeCondition.value &&
+                    !attributeConditionsRef.current?.some(
+                        condition => condition === attrEntry.attributeCondition.value
+                    ))
+            );
+        });
+        if (isAnythingChanged) {
             update();
         }
-        // else {
-        //     console.log("no change");
-        // }
-    }, [value.current, condition.current]);
+    }, [props.attributesList, attributeValuesRef.current, attributeConditionsRef.current]);
 
     useEffect(() => {
-        // console.log("useEffect, with dep");
-
         const contentWrapperNode = contentRef.current;
-        if (contentWrapperNode && isValid(props.targetSelector)) {
+
+        if (contentWrapperNode) {
             const config: MutationObserverInit = {
                 attributes: true,
                 childList: true,
@@ -103,35 +92,31 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactNod
                 attributeFilter: [props.attribute]
             };
             const observer = new MutationObserver(mutationList => {
-                const doUpdate = mutationList.some(
-                    mutation =>
-                        !(
-                            mutation.type === "attributes" &&
-                            mutation.attributeName === props.attribute &&
-                            (mutation.target as Element).getAttribute(mutation.attributeName) === attributeValue.current
-                        )
+                const doUpdate = props.attributesList.some((attrEntries: AttributesListType, index: number) =>
+                    mutationList.some(
+                        mutation =>
+                            !(
+                                mutation.type === "attributes" &&
+                                mutation.attributeName === attrEntries.attribute &&
+                                (mutation.target as Element).getAttribute(mutation.attributeName) ===
+                                    attributeValuesRef.current[index]
+                            )
+                    )
                 );
+
                 if (doUpdate) {
                     update();
                 }
-                // else {
-                //     console.log("self update");
-                // }
             });
             observer.observe(contentWrapperNode, config);
-            console.log("observe changes");
 
             return () => {
-                // console.log("disconnect");
-                attributeValue.current = null;
-                attributeCondition.current = null;
+                attributeValuesRef.current = [];
+                attributeConditionsRef.current = [];
                 observer.disconnect();
             };
         }
-        // else {
-        //     console.log("no ref found");
-        // }
-    }, [props.content, props.targetSelector, props.attribute]);
+    }, [props.attributesList, attributeValuesRef.current, attributeConditionsRef.current, contentRef.current]);
 
     return <div ref={contentRef}>{props.content}</div>;
 };
