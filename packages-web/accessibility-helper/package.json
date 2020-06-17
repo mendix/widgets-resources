@@ -1,0 +1,31 @@
+{
+  "name": "accessibility-helper",
+  "widgetName": "AccessibilityHelper",
+  "version": "0.0.2",
+  "description": "Set an attribute to a DOM element",
+  "copyright": "Mendix 2020",
+  "author": "Widget Team",
+  "config": {
+    "widgetPath": "./tests/TestProjects/Mendix8/widgets",
+    "projectPath": "./tests/TestProjects/Mendix8",
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
+  },
+  "packagePath": "com.mendix.widget.web",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server --open",
+    "dev": "pluggable-widgets-tools start:ts",
+    "build": "pluggable-widgets-tools build:ts",
+    "format": "pluggable-widgets-tools format",
+    "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
+    "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "release": "pluggable-widgets-tools release:web",
+    "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@widgets-resources/piw-utils": "^1.0.0",
+    "@mendix/pluggable-widgets-tools": ">=8.9.2"
+  }
+}
