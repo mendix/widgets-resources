@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.accessibilityhelper.AccessibilityHelper" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Web"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Accessibility Helper</name>
+    <description/>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <property key="targetSelector" type="string">
+                <caption>Target selector</caption>
+                <description/>
+            </property>
+            <property key="content" type="widgets">
+                <caption>Content</caption>
+                <description/>
+            </property>
+
+            <property key="attribute" type="string">
+                <caption>Attribute</caption>
+                <description/>
+            </property>
+            <property key="valueSource" type="enumeration" defaultValue="text">
+                <caption>Source1</caption>
+                <description/>
+                <enumerationValues>
+                    <enumerationValue key="text">Text</enumerationValue>
+                    <enumerationValue key="expression">Expression</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="valueExpression" type="expression" required="false">
+                <caption>Value expression</caption>
+                <description/>
+                <returnType type="String" />
+            </property>
+            <property key="valueText" type="textTemplate" required="false">
+                <caption>Value text</caption>
+                <description/>
+            </property>
+            <property key="attributeCondition" type="expression" defaultValue="true">
+                <caption>Condition</caption>
+                <description/>
+                <returnType type="Boolean" />
+            </property>
+
+
+            <property key="attributesList" type="object" isList="true" required="false">
+                <caption>Attributes</caption>
+                <description />
+                <properties>
+                    <property key="attribute" type="string">
+                        <caption>Attribute</caption>
+                        <category>General</category>
+                        <description/>
+                    </property>
+                    <property key="valueSourceType" type="enumeration" defaultValue="text">
+                        <caption>Source</caption>
+                        <category>General</category>
+                        <description/>
+                        <enumerationValues>
+                            <enumerationValue key="text">Text</enumerationValue>
+                            <enumerationValue key="expression">Expression</enumerationValue>
+                        </enumerationValues>
+                    </property>
+                    <property key="attributeCondition" type="expression" defaultValue="true">
+                        <caption>Condition</caption>
+                        <category>General</category>
+                        <description/>
+                        <returnType type="Boolean" />
+                    </property>
+                    <property key="valueExpression" type="expression" required="false">
+                        <caption>Value expression</caption>
+                        <category>General</category>
+                        <description/>
+                        <returnType type="String" />
+                    </property>
+                    <property key="valueText" type="textTemplate" required="false">
+                        <caption>Value text</caption>
+                        <category>General</category>
+                        <description/>
+                    </property>
+
+                </properties>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
