@@ -74,6 +74,7 @@ export function Table({
     const ColumnFilter = ({ column: { filterValue, setFilter, filter } }: FilterProperties): ReactElement => {
         return (
             <input
+                className="form-control"
                 value={filterValue || ""}
                 onChange={e => {
                     setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
@@ -138,7 +139,8 @@ export function Table({
             disableResizing: !columnsResizable,
             disableSortBy: !columnsSortable,
             disableFilters: !columnsFilterable,
-            initialState: { pageSize }
+            initialState: { pageSize },
+            disableMultiSort: true
         } as any,
         useFilters,
         useSortBy,

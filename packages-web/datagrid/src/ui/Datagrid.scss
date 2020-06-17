@@ -73,8 +73,9 @@
 
             .filter {
                 display: flex;
-
+                margin-top: 5px;
                 input {
+                    font-weight: normal;
                     flex-grow: 1;
                 }
             }
