@@ -13,7 +13,9 @@ const widgetEntry = widgetSrcFiles.filter(file =>
     file.match(new RegExp(`[/\\\\]${escape(package.widgetName)}\\.[jt]sx?$`, "i"))
 )[0];
 if (!widgetEntry) {
-    throw new Error("Cannot find a widget entry file");
+    throw new Error(
+        "Cannot find a widget entry file. Make sure your widgetName in package.json matches with your main [jt]sx ? file"
+    );
 }
 
 const editorConfigEntry = widgetSrcFiles.filter(file =>
