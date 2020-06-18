@@ -1,6 +1,6 @@
-const semver = require("semver");
+const { valid, satisfies } = require("semver");
 
-function _promptWidgetProperties(dir, widgetName) {
+function promptWidgetProperties(dir, widgetName) {
     return [
         {
             type: "input",
@@ -45,7 +45,7 @@ function _promptWidgetProperties(dir, widgetName) {
             type: "input",
             name: "version",
             validate(input) {
-                if (semver.valid(input) && semver.satisfies(input, ">=0.0.1")) {
+                if (valid(input) && satisfies(input, ">=0.0.1")) {
                     return true;
                 }
                 return "Your version needs to be formatted as x.x.x and starts at 0.0.1";
@@ -120,7 +120,7 @@ function _promptWidgetProperties(dir, widgetName) {
     ];
 }
 
-function _promptTestsInfo(props) {
+function promptTestsInfo(props) {
     if (props) {
         const prompts = [
             {
@@ -145,6 +145,6 @@ function _promptTestsInfo(props) {
 }
 
 module.exports = {
-    promptWidgetProperties: _promptWidgetProperties,
-    promptTestsInfo: _promptTestsInfo
+    promptWidgetProperties,
+    promptTestsInfo
 };
