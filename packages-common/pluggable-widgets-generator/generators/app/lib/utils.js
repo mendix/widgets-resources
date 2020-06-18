@@ -2,7 +2,7 @@ const { join } = require("path");
 const { access, constants, readdir } = require("fs").promises;
 
 function getWidgetDetails(answers) {
-    const widget = Object.create(ansewrs);
+    const widget = Object.create(answers);
 
     Object.defineProperties(widget, {
         name: {
