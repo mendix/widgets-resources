@@ -1,11 +1,11 @@
-const { join } = require("path");
-const pkg = require(join(__dirname, "/../../package.json"));
-const { mkdir } = require("fs").promises;
 const Generator = require("yeoman-generator");
+const { join } = require("path");
+const { mkdir } = require("fs").promises;
 
-const promptTexts = require("./lib/prompttexts.js");
+const { promptWidgetProperties, promptTestsInfo } = require("./lib/prompttexts.js");
+const { getWidgetDetails, dirExists, isDirEmpty, findMprDir } = require("./lib/utils.js");
 const text = require("./lib/text.js");
-const utils = require("./lib/utils.js");
+const pkg = require(join(__dirname, "/../../package.json"));
 
 const widgetSrcFolder = "src/components/";
 
@@ -31,11 +31,11 @@ class MxGenerator extends Generator {
     async initializing() {
         this.FINISHED = false;
 
-        if (!this.dir && !(await utils.isDirEmpty(this.destinationRoot()))) {
+        if (!this.dir && !(await isDirEmpty(this.destinationRoot()))) {
             this.log(banner);
             this.log(text.DIR_NOT_EMPTY_ERROR);
             this.FINISHED = true;
-        } else if (this.dir && utils.dirExists(this.dir) && !(await utils.isDirEmpty(this.dir))) {
+        } else if (this.dir && dirExists(this.dir) && !(await isDirEmpty(this.dir))) {
             this.log(banner);
             this.log(text.DIR_NOT_EMPTY_ERROR);
             this.FINISHED = true;
@@ -49,18 +49,18 @@ class MxGenerator extends Generator {
 
         this.log(banner);
 
-        const dir = await utils.findMprDir(this.dir);
+        const dir = await findMprDir(this.dir);
 
-        const widgetAnswers = await this.prompt(promptTexts.promptWidgetProperties(dir, this.widgetParamName));
-        const testAnswers = await this.prompt(promptTexts.promptTestsInfo(widgetAnswers));
+        const widgetAnswers = await this.prompt(promptWidgetProperties(dir, this.widgetParamName));
+        const testAnswers = await this.prompt(promptTestsInfo(widgetAnswers));
         const combinedAnswers = Object.assign(widgetAnswers, testAnswers);
 
-        this.widget = utils.getWidgetDetails(combinedAnswers);
+        this.widget = getWidgetDetails(combinedAnswers);
     }
 
     async writing() {
         if (this.dir) {
-            if (!utils.dirExists(this.dir)) {
+            if (!dirExists(this.dir)) {
                 await mkdir(this.dir);
             }
             this.destinationRoot(this.dir);
@@ -87,7 +87,7 @@ class MxGenerator extends Generator {
             return;
         }
 
-        if (utils.isDirEmpty(this.destinationPath("node_modules"))) {
+        if (isDirEmpty(this.destinationPath("node_modules"))) {
             this.log(text.END_NPM_NEED_INSTALL_MSG);
         } else {
             this.log(text.END_RUN_BUILD_MSG);
