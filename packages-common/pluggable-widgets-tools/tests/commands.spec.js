@@ -19,7 +19,9 @@ const CONFIGS = [
     ["web", "full", "ts", "latest"],
     ["native", "full", "js", "latest"],
     ["native", "full", "ts", "latest"],
+    ["web", "empty", "js", "latest"],
     ["web", "empty", "ts", "latest"],
+    ["native", "empty", "js", "latest"],
     ["native", "empty", "ts", "latest"]
 ];
 

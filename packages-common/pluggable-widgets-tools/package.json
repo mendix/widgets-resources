@@ -26,10 +26,10 @@
     "scripts",
     "configs",
     "test-config",
-    "utils/dist"
+    "dist"
   ],
-  "main": "utils/dist/index.js",
-  "types": "utils/dist/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "bin": {
     "pluggable-widgets-tools": "bin/mx-scripts.js"
   },
@@ -114,7 +114,7 @@
     "yeoman-test": "^2.6.0"
   },
   "scripts": {
-    "prepublish": "rimraf utils/dist && tsc --project utils",
+    "prepublish": "rimraf dist && tsc",
     "test": "cross-env LIMIT_TESTS=true npm run test:cross-platform",
     "test:cross-platform": "jest --testTimeout=720000 tests/commands.spec.js"
   }
