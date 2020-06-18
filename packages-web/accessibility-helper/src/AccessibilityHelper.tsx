@@ -1,18 +1,10 @@
 import { createElement, MutableRefObject, ReactNode, useCallback, useEffect, useRef } from "react";
 
-import { ValueStatus } from "mendix";
+import { ValueStatus, DynamicValue } from "mendix";
 
 import { AccessibilityHelperContainerProps, AttributesListType } from "../typings/AccessibilityHelperProps";
 
 const PROHIBITED_ATTRIBUTES = ["class", "style", "widgetid", "data-mendix-id"];
-
-function isValid(selector: string): boolean {
-    if (PROHIBITED_ATTRIBUTES.indexOf(selector) !== -1) {
-        console.error(`Widget tries to change ${selector} attribute, this is prohibited`);
-        return false;
-    }
-    return true;
-}
 
 const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactNode => {
     const contentRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
@@ -26,17 +18,14 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactNod
                 target = contentRef.current.querySelector(props.targetSelector);
                 if (target) {
                     props.attributesList.forEach((attrEntry, index: number) => {
-                        const valueToBeSet =
-                            attrEntry.valueSourceType === "expression"
-                                ? attrEntry.valueExpression
-                                : attrEntry.valueText;
+                        const valueToBeSet = getValueBySourceType(attrEntry);
                         if (
                             attrEntry.attributeCondition.status === ValueStatus.Available &&
                             valueToBeSet?.status === ValueStatus.Available
                         ) {
                             if (
                                 attrEntry.attributeCondition.value &&
-                                valueToBeSet?.value !== target!.getAttribute(props.attribute)
+                                valueToBeSet?.value !== target!.getAttribute(attrEntry.attribute)
                             ) {
                                 attributeValuesRef.current?.splice(index, 0, valueToBeSet?.value);
                                 attributeConditionsRef.current?.splice(index, 0, true);
@@ -65,15 +54,12 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactNod
         if (!isValid(props.targetSelector)) {
             return;
         }
-        const isAnythingChanged = props.attributesList.every(attrEntry => {
-            const valueToBeSet =
-                attrEntry.valueSourceType === "expression" ? attrEntry.valueExpression : attrEntry.valueText;
+        const isAnythingChanged = props.attributesList.some(attrEntry => {
+            const valueToBeSet = getValueBySourceType(attrEntry);
             return (
-                (valueToBeSet && !attributeValuesRef.current?.some(value => value === valueToBeSet.value)) ||
+                (valueToBeSet && attributeValuesRef.current?.some(value => value === valueToBeSet.value)) ||
                 (attrEntry.attributeCondition.value &&
-                    !attributeConditionsRef.current?.some(
-                        condition => condition === attrEntry.attributeCondition.value
-                    ))
+                    attributeConditionsRef.current?.some(condition => condition === attrEntry.attributeCondition.value))
             );
         });
         if (isAnythingChanged) {
@@ -89,7 +75,7 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactNod
                 attributes: true,
                 childList: true,
                 subtree: true,
-                attributeFilter: [props.attribute]
+                attributeFilter: props.attributesList.map(entry => entry.attribute)
             };
             const observer = new MutationObserver(mutationList => {
                 const doUpdate = props.attributesList.some((attrEntries: AttributesListType, index: number) =>
@@ -120,5 +106,17 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactNod
 
     return <div ref={contentRef}>{props.content}</div>;
 };
+
+function isValid(selector: string): boolean {
+    if (PROHIBITED_ATTRIBUTES.some(value => value === selector)) {
+        console.error(`Widget tries to change ${selector} attribute, this is prohibited`);
+        return false;
+    }
+    return true;
+}
+
+function getValueBySourceType(attrEntry: AttributesListType): DynamicValue<string> | undefined {
+    return attrEntry.valueSourceType === "expression" ? attrEntry.valueExpression : attrEntry.valueText;
+}
 
 export default AccessibilityHelper;

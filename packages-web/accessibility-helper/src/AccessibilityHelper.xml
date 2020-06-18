@@ -16,35 +16,6 @@
                 <caption>Content</caption>
                 <description/>
             </property>
-
-            <property key="attribute" type="string">
-                <caption>Attribute</caption>
-                <description/>
-            </property>
-            <property key="valueSource" type="enumeration" defaultValue="text">
-                <caption>Source1</caption>
-                <description/>
-                <enumerationValues>
-                    <enumerationValue key="text">Text</enumerationValue>
-                    <enumerationValue key="expression">Expression</enumerationValue>
-                </enumerationValues>
-            </property>
-            <property key="valueExpression" type="expression" required="false">
-                <caption>Value expression</caption>
-                <description/>
-                <returnType type="String" />
-            </property>
-            <property key="valueText" type="textTemplate" required="false">
-                <caption>Value text</caption>
-                <description/>
-            </property>
-            <property key="attributeCondition" type="expression" defaultValue="true">
-                <caption>Condition</caption>
-                <description/>
-                <returnType type="Boolean" />
-            </property>
-
-
             <property key="attributesList" type="object" isList="true" required="false">
                 <caption>Attributes</caption>
                 <description />
@@ -80,7 +51,6 @@
                         <category>General</category>
                         <description/>
                     </property>
-
                 </properties>
             </property>
         </propertyGroup>
