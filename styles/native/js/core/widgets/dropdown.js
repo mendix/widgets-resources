@@ -30,6 +30,7 @@ export const DropDown = {
         fontFamily: input.fontFamily,
         borderWidth: input.borderWidth,
         borderRadius: input.borderRadius,
+        overflow: "hidden",
         paddingHorizontal: input.paddingHorizontal,
         paddingVertical: input.paddingVertical,
         placeholderTextColor: input.placeholderTextColor,
@@ -59,9 +60,11 @@ export const DropDown = {
         maxWidth: 500,
         paddingVertical: 6,
         paddingHorizontal: 16,
+        backgroundColor: input.backgroundColor,
     },
     item: {
-    // All TextStlye properties are allowed
+        // All TextStlye properties are allowed
+        color: input.color,
     },
     selectedItem: {
         // All TextStlye properties are allowed

@@ -1,6 +1,7 @@
 import { NativeModules }                from "react-native";
 import { darkMode }                     from "../../app/custom-variables";
 import { background, font, navigation } from "../variables";
+import { LayoutType }                   from "../../types/widgets";
 /*
 
 DISCLAIMER:
@@ -21,7 +22,7 @@ const statusBarStyle = !darkMode && isOSDarkMode ?
                        "dark-content" :
                        darkMode && !isOSDarkMode ? "light-content" : navigation.statusBar.barStyle;
 //
-export const Layout = {
+export const Layout: LayoutType = {
     sidebar: {
         // All ViewStyle properties are allowed
     },

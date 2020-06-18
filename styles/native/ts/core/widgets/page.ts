@@ -1,4 +1,5 @@
 import { background, font, navigation } from "../variables";
+import { LayoutType }                   from "../../types/widgets";
 /*
 
 DISCLAIMER:
@@ -12,14 +13,14 @@ To customize any core styling, copy the part you want to customize to styles/nat
     Default Class For Mendix Page
 ========================================================================== */
 
-export const Page = {
+export const Page: LayoutType = {
     sidebar: {
         // All ViewStyle properties are allowed
     },
     statusBar: {
         // Only backgroundColor and barStyle are allowed
         backgroundColor: navigation.statusBar.backgroundColor, // Android only
-        barStyle: statusBarStyle,
+        barStyle: navigation.statusBar.barStyle,
     },
     header: {
         container: {

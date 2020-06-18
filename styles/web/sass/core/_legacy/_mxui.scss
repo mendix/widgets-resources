@@ -2365,18 +2365,18 @@ input[type="checkbox"] {
     white-space: pre-line;
 }
 
-.mx-compound-control {
-    display: flex;
-}
+//.mx-compound-control {
+//    display: flex;
+//}
 
-.mx-compound-control button {
-    margin-left: 5px;
-}
-
-[dir="rtl"] .mx-compound-control button {
-    margin-left: 0;
-    margin-right: 5px;
-}
+//.mx-compound-control button {
+//    margin-left: 5px;
+//}
+//
+//[dir="rtl"] .mx-compound-control button {
+//    margin-left: 0;
+//    margin-right: 5px;
+//}
 
 .mx-tooltip {
     margin: 10px;

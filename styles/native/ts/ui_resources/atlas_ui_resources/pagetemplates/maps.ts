@@ -1,4 +1,4 @@
-import { background, border, contrast, spacing } from "../../../core/variables.js";
+import { background, border, contrast, spacing } from "../../../core/variables";
 /*
 ==========================================================================
     Maps
@@ -69,4 +69,3 @@ export const mapsListItemImage = {
 //== Variations
 //-------------------------------------------------------------------------------------------------------------------//
 //
-

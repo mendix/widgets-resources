@@ -48,12 +48,10 @@
             //margin-bottom: 1px;
 
             & > a {
-                padding: 15px 0;
+                padding: 15px 0 12px 0; // border is 3px
                 color: $tabs-color;
                 border: 0;
-                border-style: solid;
-                border-color: transparent;
-                border-bottom-width: 3px;
+                border-bottom: 3px solid transparent;
                 border-radius: 0;
 
                 &:hover,

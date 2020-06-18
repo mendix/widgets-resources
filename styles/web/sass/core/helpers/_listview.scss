@@ -46,9 +46,9 @@
 // Remove all styling
 .listview-stylingless.mx-listview {
     & > ul > li {
-        padding: 0;
+        padding: unset;
         cursor: default;
-        border: 0;
+        border: unset;
         background-color: transparent;
 
         &:hover,
@@ -72,6 +72,8 @@
 // Hover style activated
 .listview-hover.mx-listview {
     & > ul > li {
+        cursor: pointer;
+
         &:hover,
         &:focus,
         &:active {

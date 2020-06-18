@@ -12,10 +12,12 @@
 .timeline-header ~ .timeline-itemwrapper.mx-listview {
     margin-left: 55px;
 
-    & > ul > li:first-child {
-        padding-top: $spacing-large;
+    & > ul > li {
+        &:first-child .timeline-item {
+            padding-top: $spacing-large;
+        }
 
-        &:last-child {
+        &:last-child .timeline-item {
             border-left: 1px solid $border-color-default;
         }
     }
@@ -29,38 +31,56 @@
 
 
     & > ul > li {
-        position: relative;
-        padding-left: ($gutter-size * 2);
+        .timeline-item {
+            position: relative;
+            padding-left: ($gutter-size * 2);
 
-        &::before {
-            position: absolute;
-            //top: 5px;
-            left: -9px;
-            display: block;
-            width: 18px;
-            height: 18px;
-            content: '';
-            border-radius: 50%;
-            background-color: $border-color-default;
+            &::before {
+                position: absolute;
+                left: -9px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 18px;
+                height: 18px;
+                content: '';
+                color: #FFFFFF;
+                border-radius: 50%;
+                background-color: $border-color-default;
+                font-size: $font-size-small;
+
+            }
         }
 
-        &:not(:last-child) {
+        &:first-child,
+        & + li {
+            .timeline-item,
+            .timeline-item-complete {
+                padding-bottom: $spacing-large;
+            }
+        }
+
+        &:not(:last-child) .timeline-item {
             border-left: 1px solid $border-color-default;
         }
-    }
 
-    li:first-child,
-    li + li {
-        padding-bottom: $spacing-large;
+        .timeline-item-complete {
+            @extend .timeline-item;
+
+            &::before {
+                content: '✓';
+                background-color: $brand-success;
+            }
+        }
     }
 }
 
 //== Variations
 //-------------------------------------------------------------------------------------------------------------------//
-.timeline2 {
-    .timeline-itemwrapper.mx-listview {
-        & > ul > li {
-            padding-left: $gutter-size;
-        }
-    }
-}
+//.timeline2 {
+//    .timeline-itemwrapper.mx-listview {
+//        .timeline-item {
+//            padding-left: $gutter-size;
+//        }
+//    }
+//}

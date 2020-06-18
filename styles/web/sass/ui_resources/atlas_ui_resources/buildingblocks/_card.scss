@@ -15,11 +15,7 @@
 .card-title {
     margin-top: 0;
     color: #212B36;
-    font-size: 16px;
-}
-
-.card-section {
-    padding: 30px;
+    font-size: $font-size-h4;
 }
 
 //== Variations
@@ -303,13 +299,13 @@
 }
 
 .cardprogress-state {
-    width: 80px;
-    height: 80px;
+    width: 40px;
+    height: 40px;
     padding: 0;
     cursor: default;
     pointer-events: none;
     border-radius: 100%;
-    font-size: 28px;
+    font-size: 24px;
 }
 
 .cardhighlight {

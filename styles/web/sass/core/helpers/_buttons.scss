@@ -106,6 +106,7 @@
 .btn-icon-only {
     @extend .btn-icon;
     padding: 0;
+    color: $btn-default-icon-color;
     border: none;
 }
 

@@ -28,6 +28,7 @@ export * from "./core/helpers/floatingactionbutton";
 export * from "./core/widgets/images";
 export * from "./core/helpers/images";
 export * from "./core/widgets/introscreen";
+export * from "./core/widgets/layout";
 export * from "./core/widgets/layoutgrid";
 export * from "./core/widgets/listviews";
 export * from "./core/helpers/listviews";
@@ -36,6 +37,8 @@ export * from "./core/helpers/listviewswipe";
 export * from "./core/widgets/maps";
 export * from "./core/helpers/maps";
 export * from "./core/widgets/navigation";
+export * from "./core/widgets/page";
+export * from "./core/helpers/page";
 export * from "./core/widgets/pagetitle";
 export * from "./core/widgets/progressbar";
 export * from "./core/helpers/progressbar";
@@ -65,12 +68,8 @@ export * from "./core/helpers/helperclasses";
 //
 //================================= CUSTOM =================================\\
 //
-// Layouts
-export * from "./ui_resources/atlas_ui_resources/layouts/layout";
-//
 //
 // Page Templates
-export * from "./ui_resources/atlas_ui_resources/pagetemplates/page";
 export * from "./ui_resources/atlas_ui_resources/pagetemplates/maps";
 export * from "./ui_resources/atlas_ui_resources/pagetemplates/inspectiondetails";
 //

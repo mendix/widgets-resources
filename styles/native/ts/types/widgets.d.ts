@@ -243,6 +243,23 @@ export interface IntroScreenType {
     paginationBetween?: IntroScreenPaginationType
 }
 
+// Layout
+export interface LayoutType {
+    sidebar: ViewStyle,
+    statusBar: {
+        // Only backgroundColor and barStyle are allowed
+        backgroundColor: string
+        barStyle: string,
+    },
+    header: {
+        container: ViewStyle,
+        title: TextStyle,
+        backButtonText: TextStyle,
+        backButtonIcon: ImageStyle,
+    },
+    container: ViewStyle,
+}
+
 // Layout grid
 export interface LayoutGridType {
     container?: ViewStyle

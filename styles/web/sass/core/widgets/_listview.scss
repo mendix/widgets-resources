@@ -39,18 +39,11 @@
         & > li {
             @include transition();
             padding: $listview-padding-top $listview-padding-right $listview-padding-bottom $listview-padding-left;
-            border-width: 1px 0 0 0;
-            border-style: solid;
-            border-color: $grid-border-color;
+            border-top: 1px solid $grid-border-color;
             background-color: $grid-bg;
-
-            &:first-child {
-                border-radius: 0; // Reset mxui listview style
-            }
 
             &:last-child {
                 border-bottom: 1px solid $grid-border-color;
-                border-radius: 0; // Reset mxui listview style
             }
 
             &:focus,

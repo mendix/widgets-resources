@@ -50,20 +50,20 @@
 }
 
 .groupbox-transparent {
-    border-bottom: 1px solid $border-color-default;
     > .mx-groupbox-header {
         padding: 15px 0;
         color: $gray-darker;
         border-style: none;
         background: transparent;
-        font-size: 16px;
         font-weight: $font-weight-semibold;
     }
+
     .mx-groupbox-body {
         padding: 15px 0;
         border-style: none;
         background-color: transparent;
     }
+
     .mx-groupbox-collapse-icon {
         color: $brand-primary;
     }
@@ -101,6 +101,7 @@
         border: 0;
         background-color: $callout-info-bg;
     }
+
     .mx-groupbox-header + .mx-groupbox-body {
         padding-top: 0;
     }
@@ -111,6 +112,7 @@
     > .mx-groupbox-body {
         background-color: $callout-info-bg;
     }
+
     > .mx-groupbox-header {
         color: $callout-info-color;
     }
@@ -121,6 +123,7 @@
     > .mx-groupbox-body {
         background-color: $callout-success-bg;
     }
+
     > .mx-groupbox-header {
         color: $callout-success-color;
     }
@@ -131,6 +134,7 @@
     > .mx-groupbox-body {
         background-color: $callout-warning-bg;
     }
+
     > .mx-groupbox-header {
         color: $callout-warning-color;
     }
@@ -141,6 +145,7 @@
     > .mx-groupbox-body {
         background-color: $callout-danger-bg;
     }
+
     > .mx-groupbox-header {
         color: $callout-danger-color;
     }
