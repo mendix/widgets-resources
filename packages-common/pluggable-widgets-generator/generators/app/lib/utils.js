@@ -2,9 +2,7 @@ const { join } = require("path");
 const { access, constants, readdir } = require("fs").promises;
 
 function getWidgetDetails(answers) {
-    const widget = Object.create(answers);
-
-    Object.defineProperties(widget, {
+    return Object.defineProperties(answers, {
         name: {
             get() {
                 return answers.name.replace(/(^|\s)\S/g, l => l.toUpperCase()); // Capitalize first letter if it's not
@@ -55,6 +53,11 @@ function getWidgetDetails(answers) {
                 return answers.programmingLanguage === "typescript";
             }
         },
+        fileExtension: {
+            get() {
+                return this.isLanguageJS ? "js" : "ts";
+            }
+        },
         templateSourcePath: {
             get() {
                 return `pluggable/${answers.platform}/${answers.boilerplate}Template${
@@ -63,8 +66,6 @@ function getWidgetDetails(answers) {
             }
         }
     });
-
-    return widget;
 }
 
 async function dirExists(dirname) {
