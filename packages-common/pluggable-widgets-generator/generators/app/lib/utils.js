@@ -2,55 +2,57 @@ const { join } = require("path");
 const { access, constants, readdir } = require("fs").promises;
 
 function getWidgetDetails(answers) {
-    return Object.defineProperties(answers, {
+    const widget = Object.create(ansewrs);
+
+    Object.defineProperties(widget, {
         name: {
             get() {
-                return this.name.replace(/(^|\s)\S/g, l => l.toUpperCase()); // Capitalize first letter if it's not
+                return answers.name.replace(/(^|\s)\S/g, l => l.toUpperCase()); // Capitalize first letter if it's not
             }
         },
         packageName: {
             get() {
-                return this.name.toLowerCase();
+                return answers.name.toLowerCase();
             }
         },
         packagePath: {
             get() {
-                return this.organization.trim().toLowerCase();
+                return answers.organization.trim().toLowerCase();
             }
         },
         projectPath: {
             get() {
-                return this.projectPath.replace(/\\/g, "\\\\");
+                return answers.projectPath.replace(/\\/g, "\\\\");
             }
         },
         isPlatformWeb: {
             get() {
-                return this.platform === "web";
+                return answers.platform === "web";
             }
         },
         isPlatformNative: {
             get() {
-                return this.platform === "native";
+                return answers.platform === "native";
             }
         },
         usesEmptyTemplate: {
             get() {
-                return this.boilerplate === "empty";
+                return answers.boilerplate === "empty";
             }
         },
         usesFullTemplate: {
             get() {
-                return this.boilerplate === "full";
+                return answers.boilerplate === "full";
             }
         },
         isLanguageJS: {
             get() {
-                return this.programmingLanguage === "javascript";
+                return answers.programmingLanguage === "javascript";
             }
         },
         isLanguageTS: {
             get() {
-                return this.programmingLanguage === "typescript";
+                return answers.programmingLanguage === "typescript";
             }
         },
         fileExtension: {
@@ -60,10 +62,14 @@ function getWidgetDetails(answers) {
         },
         templateSourcePath: {
             get() {
-                return `pluggable/${this.platform}/${this.boilerplate}Template${this.isLanguageJS ? "Js" : "Ts"}/`;
+                return `pluggable/${answers.platform}/${answers.boilerplate}Template${
+                    this.isLanguageJS ? "Js" : "Ts"
+                }/`;
             }
         }
     });
+
+    return widget;
 }
 
 async function dirExists(dirname) {
