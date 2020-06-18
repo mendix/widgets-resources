@@ -6,8 +6,6 @@
 import { ComponentType, CSSProperties, ReactNode } from "react";
 import { DynamicValue } from "mendix";
 
-export type ValueSourceEnum = "text" | "expression";
-
 export type ValueSourceTypeEnum = "text" | "expression";
 
 export interface AttributesListType {
@@ -33,11 +31,6 @@ export interface AccessibilityHelperContainerProps {
     tabIndex: number;
     targetSelector: string;
     content: ReactNode;
-    attribute: string;
-    valueSource: ValueSourceEnum;
-    valueExpression?: DynamicValue<string>;
-    valueText?: DynamicValue<string>;
-    attributeCondition: DynamicValue<boolean>;
     attributesList: AttributesListType[];
 }
 
@@ -46,10 +39,5 @@ export interface AccessibilityHelperPreviewProps {
     style: string;
     targetSelector: string;
     content: { widgetCount: number; renderer: ComponentType };
-    attribute: string;
-    valueSource: ValueSourceEnum;
-    valueExpression: string;
-    valueText: string;
-    attributeCondition: string;
     attributesList: AttributesListPreviewType[];
 }
