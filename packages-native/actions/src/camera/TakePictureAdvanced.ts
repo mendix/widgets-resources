@@ -41,7 +41,7 @@ export async function TakePictureAdvanced(
         if (pictureQuality === "custom" && !maximumHeight && !maximumWidth) {
             return reject(new Error("Picture quality is set to 'Custom', but no maximum width or height was provided"));
         }
-        createMxObject("NativeMobileResources.TakePictureData").then((resultObject: any) => {
+        createMxObject("NativeMobileResources.ImageMetaData").then((resultObject: any) => {
             takePicture()
                 .then((response: any) => {
                     if (!response || !response.uri) {
