@@ -6,7 +6,6 @@ function _promptWidgetProperties(dir, widgetName) {
             type: "input",
             name: "name",
             validate: function(input) {
-                // eslint-disable-next-line wrap-regex
                 if (/^([a-zA-Z]*)$/.test(input)) {
                     return true;
                 }
