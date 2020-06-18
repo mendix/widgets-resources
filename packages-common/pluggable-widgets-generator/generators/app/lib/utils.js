@@ -5,52 +5,52 @@ function getWidgetDetails(answers) {
     return Object.defineProperties(answers, {
         name: {
             get() {
-                return answers.name.replace(/(^|\s)\S/g, l => l.toUpperCase()); // Capitalize first letter if it's not
+                return this.name.replace(/(^|\s)\S/g, l => l.toUpperCase()); // Capitalize first letter if it's not
             }
         },
         packageName: {
             get() {
-                return answers.name.toLowerCase();
+                return this.name.toLowerCase();
             }
         },
         packagePath: {
             get() {
-                return answers.organization.trim().toLowerCase();
+                return this.organization.trim().toLowerCase();
             }
         },
         projectPath: {
             get() {
-                return answers.projectPath.replace(/\\/g, "\\\\");
+                return this.projectPath.replace(/\\/g, "\\\\");
             }
         },
         isPlatformWeb: {
             get() {
-                return answers.platform === "web";
+                return this.platform === "web";
             }
         },
         isPlatformNative: {
             get() {
-                return answers.platform === "native";
+                return this.platform === "native";
             }
         },
         usesEmptyTemplate: {
             get() {
-                return answers.boilerplate === "empty";
+                return this.boilerplate === "empty";
             }
         },
         usesFullTemplate: {
             get() {
-                return answers.boilerplate === "full";
+                return this.boilerplate === "full";
             }
         },
         isLanguageJS: {
             get() {
-                return answers.programmingLanguage === "javascript";
+                return this.programmingLanguage === "javascript";
             }
         },
         isLanguageTS: {
             get() {
-                return answers.programmingLanguage === "typescript";
+                return this.programmingLanguage === "typescript";
             }
         },
         fileExtension: {
@@ -60,9 +60,7 @@ function getWidgetDetails(answers) {
         },
         templateSourcePath: {
             get() {
-                return `pluggable/${answers.platform}/${answers.boilerplate}Template${
-                    this.isLanguageJS ? "Js" : "Ts"
-                }/`;
+                return `pluggable/${this.platform}/${this.boilerplate}Template${this.isLanguageJS ? "Js" : "Ts"}/`;
             }
         }
     });
