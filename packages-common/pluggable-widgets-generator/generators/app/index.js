@@ -127,57 +127,52 @@ class MxGenerator extends Generator {
     }
 
     _writeWidgetFiles() {
-        const widgetName = this.widget.name;
-        const jsxFileExtension = this.widget.isLanguageTS ? "tsx" : "jsx";
+        const fileExtension = `${this.widget.fileExtension}x`;
 
         this._copyTemplate("commons/README.md.ejs", "README.md");
 
         // web & native
         if (this.widget.usesEmptyTemplate) {
             this._copyTemplate(
-                `${this.widget.templateSourcePath}${widgetSrcFolder}HelloWorldSample.${jsxFileExtension}.ejs`,
-                `${widgetSrcFolder}HelloWorldSample.${jsxFileExtension}`
+                `${this.widget.templateSourcePath}${widgetSrcFolder}HelloWorldSample.${fileExtension}.ejs`,
+                `${widgetSrcFolder}HelloWorldSample.${fileExtension}`
             );
             this._copyTemplate(
-                `${this.widget.templateSourcePath}src/WidgetName.${jsxFileExtension}.ejs`,
-                `src/${widgetName}.${jsxFileExtension}`
+                `${this.widget.templateSourcePath}src/WidgetName.${fileExtension}.ejs`,
+                `src/${this.widget.name}.${fileExtension}`
             );
         } else {
             this._copyTemplate(
-                `${this.widget.templateSourcePath}${widgetSrcFolder}BadgeSample.${jsxFileExtension}.ejs`,
-                `${widgetSrcFolder}BadgeSample.${jsxFileExtension}`
+                `${this.widget.templateSourcePath}${widgetSrcFolder}BadgeSample.${fileExtension}.ejs`,
+                `${widgetSrcFolder}BadgeSample.${fileExtension}`
             );
             this._copyTemplate(
-                `${this.widget.templateSourcePath}src/WidgetName.${jsxFileExtension}.ejs`,
-                `src/${widgetName}.${jsxFileExtension}`
+                `${this.widget.templateSourcePath}src/WidgetName.${fileExtension}.ejs`,
+                `src/${this.widget.name}.${fileExtension}`
             );
         }
 
         if (this.widget.isPlatformWeb) {
             this._copyTemplate(
-                `${this.widget.templateSourcePath}src/WidgetName.editorPreview.${jsxFileExtension}.ejs`,
-                `src/${widgetName}.editorPreview.${jsxFileExtension}`
+                `${this.widget.templateSourcePath}src/WidgetName.editorPreview.${fileExtension}.ejs`,
+                `src/${this.widget.name}.editorPreview.${fileExtension}`
             );
             this._copyTemplate(
                 `${this.widget.templateSourcePath}src/ui/WidgetName.css${this.widget.usesFullTemplate ? ".ejs" : ""}`,
-                `src/ui/${widgetName}.css`
+                `src/ui/${this.widget.name}.css`
             );
 
             if (this.widget.usesFullTemplate) {
                 this._copyFile(
-                    `${this.widget.templateSourcePath}${widgetSrcFolder}Alert.${jsxFileExtension}.ejs`,
-                    `${widgetSrcFolder}Alert.${jsxFileExtension}`
+                    `${this.widget.templateSourcePath}${widgetSrcFolder}Alert.${fileExtension}.ejs`,
+                    `${widgetSrcFolder}Alert.${fileExtension}`
                 );
             }
-        } else {
-            const fileExtension = this.widget.isLanguageTS ? "ts" : "js";
-
-            if (this.widget.usesFullTemplate) {
-                this._copyFile(
-                    `${this.widget.templateSourcePath}src/ui/styles.${fileExtension}`,
-                    `src/ui/styles.${fileExtension}`
-                );
-            }
+        } else if (this.widget.usesFullTemplate) {
+            this._copyFile(
+                `${this.widget.templateSourcePath}src/ui/styles.${this.widget.fileExtension}`,
+                `src/ui/styles.${this.widget.fileExtension}`
+            );
         }
     }
 
@@ -208,35 +203,35 @@ class MxGenerator extends Generator {
     }
 
     _writeUnitTests() {
-        const extension = this.widget.isLanguageTS ? "tsx" : "jsx";
+        const fileExtension = `${this.widget.fileExtension}x`;
 
         if (this.widget.hasUnitTests) {
             if (this.widget.isPlatformWeb) {
                 if (this.widget.usesFullTemplate) {
                     this._copyFile(
-                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/Alert.spec.${extension}.ejs`,
-                        `${widgetSrcFolder}/__tests__/Alert.spec.${extension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/Alert.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/Alert.spec.${fileExtension}`
                     );
                     this._copyTemplate(
-                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}.ejs`,
-                        `${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/BadgeSample.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/BadgeSample.spec.${fileExtension}`
                     );
                 } else {
                     this._copyFile(
-                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${extension}.ejs`,
-                        `${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${extension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${fileExtension}`
                     );
                 }
             } else {
                 if (this.widget.usesFullTemplate) {
                     this._copyFile(
-                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}.ejs`,
-                        `${widgetSrcFolder}/__tests__/BadgeSample.spec.${extension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/BadgeSample.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/BadgeSample.spec.${fileExtension}`
                     );
                 } else {
                     this._copyFile(
-                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${extension}.ejs`,
-                        `${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${extension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${fileExtension}`
                     );
                 }
             }
@@ -244,9 +239,6 @@ class MxGenerator extends Generator {
     }
 
     _writeEndToEndTests() {
-        const widgetName = this.widget.name;
-        const extension = this.widget.isLanguageTS ? "ts" : "js";
-
         if (this.widget.hasE2eTests && this.widget.isPlatformWeb) {
             if (this.widget.isLanguageTS) {
                 this._copyFile("typings/WebdriverIO.d.ts", "tests/e2e/typings/WebdriverIO.d.ts");
@@ -254,13 +246,13 @@ class MxGenerator extends Generator {
             }
 
             this._copyTemplate(
-                `${this.widget.templateSourcePath}tests/e2e/WidgetName.spec.${extension}.ejs`,
-                `tests/e2e/${widgetName}.spec.${extension}`
+                `${this.widget.templateSourcePath}tests/e2e/WidgetName.spec.${this.widget.fileExtension}.ejs`,
+                `tests/e2e/${this.widget.name}.spec.${this.widget.fileExtension}`
             );
 
             this._copyFile(
-                `${this.widget.templateSourcePath}tests/e2e/pages/home.page.${extension}.ejs`,
-                `tests/e2e/pages/home.page.${extension}`
+                `${this.widget.templateSourcePath}tests/e2e/pages/home.page.${this.widget.fileExtension}.ejs`,
+                `tests/e2e/pages/home.page.${this.widget.fileExtension}`
             );
         }
     }
