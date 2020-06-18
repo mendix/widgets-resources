@@ -10,8 +10,8 @@ if (!fs.existsSync(e2ePath)) {
 }
 
 const chromeArgs = debug
-    ? ["--no-sandbox", "--disable-gpu", "--disable-extensions", "window-size=1920,1080"]
-    : ["--no-sandbox", "--headless", "--disable-gpu", "--disable-extensions", "window-size=1920,1080"];
+    ? ["--no-sandbox", "--disable-gpu", "--disable-extensions", "window-size=1366,768"]
+    : ["--no-sandbox", "--headless", "--disable-gpu", "--disable-extensions", "window-size=1366,768"];
 
 exports.config = {
     before() {
@@ -59,7 +59,7 @@ exports.config = {
             // The options for image-comparison
             {
                 baselineFolder: basePath + "/tests/e2e/screenshot-baseline/",
-                formatImageName: "{tag}-{logName}-{width}x{height}",
+                formatImageName: "{tag}-{logName}-{width}x{height}--{browserName}",
                 screenshotPath: basePath + "/tests/screenshot/",
                 savePerInstance: false,
                 autoSaveBaseline: true,
@@ -67,7 +67,8 @@ exports.config = {
                 ignoreAntialiasing: true,
                 ignoreAlpha: true,
                 blockOutStatusBar: true,
-                blockOutToolBar: true
+                blockOutToolBar: true,
+                hideScrollBars: true
             }
         ]
     ],
