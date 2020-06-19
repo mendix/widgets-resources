@@ -1,12 +1,13 @@
 import { createElement } from "react";
 import { shallow } from "enzyme";
 import { Platform } from "react-native";
+
 import { HelloWorldSample, HelloWorldSampleProps } from "../HelloWorldSample";
 
 describe("HelloWorldSample", () => {
-    const render = (props: HelloWorldSampleProps): any => shallow(<HelloWorldSample {...props} />);
+    const render = (props: HelloWorldSampleProps): ShallowWrapper => shallow(<HelloWorldSample {...props} />);
 
-    it("it renders the structure correctly", () => {
+    it("renders the structure correctly", () => {
         const helloWorldProps: HelloWorldSampleProps = {
             sampleText: "World",
             style: [{ container: { borderColor: "white" }, label: { color: "black" } }]
@@ -22,7 +23,7 @@ describe("HelloWorldSample", () => {
             Platform.select = jest.fn((dict: any) => dict[Platform.OS]);
         });
 
-        it("it renders the structure correctly", () => {
+        it("renders the structure correctly", () => {
             const helloWorldProps: HelloWorldSampleProps = {
                 sampleText: "World",
                 style: []
