@@ -19,7 +19,7 @@ export interface ClientSidePaginationProps {
 export function Pagination({ page, setPage, hasMoreItems }: PaginationProps): ReactElement {
     return (
         <div className="pagination">
-            <button className="btn" onClick={() => setPage(0)} disabled={page === 0}>
+            <button className="btn" onClick={() => setPage(() => 0)} disabled={page === 0}>
                 <span className="glyphicon glyphicon-step-backward" />
             </button>
             <button className="btn" onClick={() => setPage(prev => prev - 1)} disabled={page === 0}>

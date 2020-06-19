@@ -40,7 +40,7 @@ export function check(values: DatagridPreviewProps): Problem[] {
         .filter(c => c.attribute === undefined)
         .forEach((column, index) => {
             errors.push({
-                property: "columns.attribute",
+                property: "columnDefinitions.attribute",
                 message: `Attribute is required for column ${column.header ?? index + 1}`
             });
         });

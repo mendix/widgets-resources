@@ -1,13 +1,11 @@
 import { createElement, ReactElement, Fragment, useState } from "react";
-import { ColumnsConfig } from "../../typings/ReactTable";
 import { ColumnInstance } from "react-table";
 
-export interface ColumnSelectorProps {
-    allColumns: Array<ColumnInstance<object>>;
-    columnsConfig: ColumnsConfig;
+export interface ColumnSelectorProps<D extends object> {
+    allColumns: Array<ColumnInstance<D>>;
 }
 
-export function ColumnSelector({ allColumns, columnsConfig }: ColumnSelectorProps): ReactElement {
+export function ColumnSelector<D extends object>({ allColumns }: ColumnSelectorProps<D>): ReactElement {
     const [show, setShow] = useState(false);
     return (
         <Fragment>
@@ -22,8 +20,7 @@ export function ColumnSelector({ allColumns, columnsConfig }: ColumnSelectorProp
             {show && (
                 <ul className="column-selectors">
                     {allColumns.map((column, index) => {
-                        const { hidable } = columnsConfig[column.id];
-                        return hidable !== "no" ? (
+                        return column.canHide ? (
                             <li key={index}>
                                 <input
                                     id={`checkbox_toggle_${index}`}

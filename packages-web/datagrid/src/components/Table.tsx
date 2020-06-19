@@ -1,18 +1,12 @@
-import { createElement, Dispatch, ReactElement, ReactNode, SetStateAction, useEffect, useMemo } from "react";
+import { createElement, Dispatch, ReactElement, ReactNode, SetStateAction, useMemo } from "react";
+import { ObjectItem } from "mendix";
 import { ColumnSelector } from "./ColumnSelector";
 import { ClientSidePagination, Pagination } from "./Pagination";
-import {
-    CellProperties,
-    ColumnsConfig,
-    ExtendedColumnInstance,
-    ExtendedTableInstance,
-    FilterProperties,
-    TableColumn,
-    TableData
-} from "../../typings/ReactTable";
 import { Header } from "./Header";
 import { InfiniteBody } from "./InfiniteBody";
 import {
+    ColumnInterface,
+    ColumnWithStrictAccessor,
     FilterValue,
     IdType,
     Row,
@@ -20,17 +14,16 @@ import {
     useFilters,
     useFlexLayout,
     usePagination,
-    UsePaginationState,
     useResizeColumns,
     useSortBy,
     useTable
 } from "react-table";
+import { ColumnsPreviewType, ColumnsType } from "../../typings/DatagridProps";
 
 export interface TableProps {
     className: string;
-    data: TableData[];
-    columns: TableColumn[];
-    columnsConfig: ColumnsConfig;
+    data: ObjectItem[];
+    columns: Array<ColumnsType | ColumnsPreviewType>;
     headerWidgets?: ReactNode;
     footerWidgets?: ReactNode;
     columnsFilterable: boolean;
@@ -46,10 +39,14 @@ export interface TableProps {
     hasMoreItems: boolean;
 }
 
+interface TableRowData {
+    item: ObjectItem;
+}
+
 export function Table({
+    // todo: remove decomposition
     className,
     columns,
-    columnsConfig,
     data,
     headerWidgets,
     footerWidgets,
@@ -65,24 +62,8 @@ export function Table({
     page,
     setPage
 }: TableProps): ReactElement {
-    const isSortingOrFiltering = useMemo(() => columnsFilterable || columnsSortable, [
-        columnsFilterable,
-        columnsSortable
-    ]);
-    const isInfinite = useMemo(() => !paging && !isSortingOrFiltering, [paging, isSortingOrFiltering]);
-
-    const ColumnFilter = ({ column: { filterValue, setFilter, filter } }: FilterProperties): ReactElement => {
-        return (
-            <input
-                className="form-control"
-                value={filterValue || ""}
-                onChange={e => {
-                    setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
-                }}
-                placeholder={`Search ${filter ? filter : ""}...`}
-            />
-        );
-    };
+    const isSortingOrFiltering = columnsFilterable || columnsSortable;
+    const isInfinite = !paging && !isSortingOrFiltering;
 
     const filterTypes = {
         text: (rows: Array<Row<object>>, id: IdType<object>, filterValue: FilterValue) => {
@@ -96,13 +77,50 @@ export function Table({
             });
         }
     };
-    const defaultColumn = useMemo(
+    const tableColumns: Array<ColumnWithStrictAccessor<TableRowData>> = useMemo(
+        () =>
+            columns.map((column, index) => ({
+                id: index.toString(),
+                accessor: "item",
+                Header: typeof column.header === "object" ? column.header.value : column.header,
+                filter: "text",
+                isVisible: column.hidable === "hidden",
+                canHide: column.hidable !== "no",
+                canDrag: column.draggable,
+                canSort: column.sortable, // TODO: Not working
+                canResize: column.resizable, // TODO: Not working
+                canFilter: column.filterable, // TODO: Not working
+                Cell: ({ value }) => {
+                    if (column.hasWidgets && column.content) {
+                        return "renderer" in column.content ? (
+                            <column.content.renderer>
+                                <div />
+                                {/* TODO: Not just a div */}
+                            </column.content.renderer>
+                        ) : (
+                            <div>{column.content(value)}</div>
+                        );
+                    }
+                    return column.attribute instanceof Function
+                        ? column.attribute(value).displayValue
+                        : column.attribute;
+                }
+            })),
+        [columns]
+    );
+
+    const defaultColumn: ColumnInterface<TableRowData> = useMemo(
         () => ({
-            Cell: ({ value, data, row: { index }, column: { id } }: CellProperties) => {
-                const content = data[index][`content_${id}`];
-                return columnsConfig[id].hasWidgets ? content : value;
-            },
-            Filter: ColumnFilter,
+            Filter: ({ column: { filterValue, setFilter, filter } }): ReactElement => (
+                <input
+                    className="form-control"
+                    value={filterValue || ""}
+                    onChange={e => {
+                        setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+                    }}
+                    placeholder={`Search ${filter ? filter : ""}...`}
+                />
+            ),
             ...(columnsResizable
                 ? {
                       width: 150, // width is used for both the flex-basis and flex-grow
@@ -111,8 +129,9 @@ export function Table({
                   }
                 : {})
         }),
-        [columnsConfig]
+        [columns]
     );
+
     const {
         getTableProps,
         headerGroups,
@@ -130,10 +149,10 @@ export function Table({
         nextPage,
         canPreviousPage,
         canNextPage
-    } = useTable(
+    } = useTable<TableRowData>(
         {
-            columns,
-            data,
+            columns: tableColumns,
+            data: useMemo(() => data.map(item => ({ item })), [data]),
             defaultColumn,
             filterTypes,
             disableResizing: !columnsResizable,
@@ -141,29 +160,20 @@ export function Table({
             disableFilters: !columnsFilterable,
             initialState: { pageSize },
             disableMultiSort: true
-        } as any,
+        },
         useFilters,
         useSortBy,
         usePagination, // Used for client side pagination
         useColumnOrder,
         useFlexLayout,
         useResizeColumns
-    ) as ExtendedTableInstance & { state: UsePaginationState<any> };
-
-    useEffect(() => {
-        allColumns.forEach(h => {
-            const columnConfig = columnsConfig[h.id];
-            if (columnConfig.hidable === "hidden" && h.isVisible) {
-                h.toggleHidden();
-            }
-        });
-    }, [columnsConfig]);
+    );
 
     return (
         <div className={className}>
-            <div className="header">
+            <div className="thead">
                 {headerWidgets}
-                {columnsHidable && <ColumnSelector allColumns={allColumns} columnsConfig={columnsConfig} />}
+                {columnsHidable && <ColumnSelector allColumns={allColumns} />}
             </div>
             <div {...getTableProps()} className="table">
                 <div role="rowgroup" className="thead">
@@ -191,7 +201,7 @@ export function Table({
                     )}
                     {headerGroups.map((headerGroup, index: number) => (
                         <div {...headerGroup.getHeaderGroupProps({})} key={`headers_row_${index}`} className="tr">
-                            {headerGroup.headers.map((column: ExtendedColumnInstance, index: number) => (
+                            {headerGroup.headers.map((column, index) => (
                                 <Header
                                     column={column}
                                     key={`headers_column_${index}`}
@@ -200,7 +210,6 @@ export function Table({
                                     filterable={columnsFilterable}
                                     draggable={columnsDraggable}
                                     visibleColumns={visibleColumns}
-                                    columnsConfig={columnsConfig[column.id]}
                                     setColumnOrder={setColumnOrder}
                                 />
                             ))}

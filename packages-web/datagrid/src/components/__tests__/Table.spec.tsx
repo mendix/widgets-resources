@@ -63,7 +63,7 @@ function mockTableProps(): TableProps {
         className: "test",
         columnsFilterable: false,
         columnsSortable: false,
-        columns: mockColumns(5),
+        columnDefinitions: mockColumns(5),
         columnsConfig: mockColumnsConfig(5),
         data: mockData(5)
     };

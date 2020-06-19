@@ -1,34 +1,41 @@
-import { createElement, ReactElement, useState } from "react";
+import { createElement, ReactElement, useCallback, useState } from "react";
 import { DatagridContainerProps } from "../typings/DatagridProps";
-import { useColumns, useData } from "./utils/hooks";
 
 import "./ui/Datagrid.scss";
 import { Table } from "./components/Table";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
-    const isSortingOrFiltering = props.columnsFilterable || props.columnsSortable;
-    const [page, setPage] = useState(0);
-    const [hasMoreItems, setHasMoreItems] = useState(true);
-    const [data] = useData(
-        props.datasource,
-        props.columns,
-        props.pagingEnabled,
-        props.pageSize,
-        page,
-        isSortingOrFiltering,
-        setHasMoreItems
-    );
-    const [columns, columnsConfig] = useColumns(props.columns);
+    const isServerSide = !(props.columnsFilterable || props.columnsSortable);
 
+    // TODO: Autoload more/Infinite loading needs to keep offset as zero
+
+    // ComponentWillMount
+    useState(() => {
+        if (isServerSide) {
+            if (props.datasource.limit === Number.POSITIVE_INFINITY) {
+                props.datasource.setLimit(props.pageSize);
+            }
+        } else {
+            props.datasource.setLimit(undefined);
+            props.datasource.setOffset(0);
+        }
+    });
+
+    const setPage = useCallback(
+        computePage => {
+            const currentPage = props.datasource.offset / props.pageSize;
+            props.datasource.setOffset(computePage(currentPage) * props.pageSize);
+        },
+        [props.datasource, props.pageSize]
+    );
     return (
         <Table
             className={props.class}
-            columns={columns}
-            columnsConfig={columnsConfig}
-            data={data}
+            columns={props.columns}
+            data={props.datasource.items ?? []}
             setPage={setPage}
-            hasMoreItems={hasMoreItems}
-            page={page}
+            hasMoreItems={props.datasource.hasMoreItems ?? false}
+            page={isServerSide ? props.datasource.offset / props.pageSize : 0}
             columnsDraggable={props.columnsDraggable}
             columnsFilterable={props.columnsFilterable}
             columnsResizable={props.columnsResizable}
@@ -37,8 +44,8 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             pageSize={props.pageSize}
             paging={props.pagingEnabled}
             pagingPosition={props.pagingPosition}
-            footerWidgets={props.footerWidgets}
-            headerWidgets={props.headerWidgets}
+            footerWidgets={<div className="header">{props.footerWidgets}</div>}
+            headerWidgets={<div className="footer">{props.headerWidgets}</div>}
         />
     );
 }

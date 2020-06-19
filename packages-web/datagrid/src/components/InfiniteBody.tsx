@@ -26,7 +26,7 @@ export function InfiniteBody({
                 }
             }
         },
-        [hasMoreItems]
+        [hasMoreItems, setPage]
     );
 
     const calculateBodyHeight = (ref: HTMLTableSectionElement): void => {

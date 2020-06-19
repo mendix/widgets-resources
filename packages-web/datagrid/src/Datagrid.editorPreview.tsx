@@ -5,42 +5,14 @@ import "./ui/Datagrid.scss";
 import { Table } from "./components/Table";
 
 export function preview(props: DatagridPreviewProps): ReactElement {
-    const columns = props.columns.map((column, index) => ({
-        Header: column.header,
-        accessor: `col_${index}`,
-        filter: "text"
+    const data = Array.from({ length: props.pageSize ?? 5 }).map(() => ({
+        id: "" as any
     }));
-
-    const columnsConfig = props.columns
-        .map((column, index) => {
-            const { ...data } = column;
-            delete data.content;
-            delete data.attribute;
-            return {
-                [`col_${index}`]: data
-            };
-        })
-        .reduce((acc, current) => ({ ...acc, ...current }), {});
-
-    const data = Array.from({ length: props.pageSize ?? 5 }).map(() =>
-        props.columns
-            .map((column, index) => ({
-                [`col_${index}`]: column.attribute,
-                [`col_${index}_hasWidgets`]: false,
-                [`content_col_${index}`]: (
-                    <column.content.renderer>
-                        <div />
-                    </column.content.renderer>
-                )
-            }))
-            .reduce((acc, current) => ({ ...acc, ...current }), {})
-    );
 
     return (
         <Table
             className={props.class}
-            columns={columns}
-            columnsConfig={columnsConfig}
+            columns={props.columns}
             data={data}
             hasMoreItems={false}
             page={0}
@@ -54,12 +26,12 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             pagingPosition={props.pagingPosition}
             footerWidgets={
                 <props.footerWidgets.renderer>
-                    <div />
+                    <div className="header" />
                 </props.footerWidgets.renderer>
             }
             headerWidgets={
                 <props.headerWidgets.renderer>
-                    <div />
+                    <div className="footer" />
                 </props.headerWidgets.renderer>
             }
         />
