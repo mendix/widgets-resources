@@ -8,11 +8,8 @@ describe("badge-web", () => {
     });
     describe("type: badge", () => {
         it("compares successfully with a screenshot baseline", () => {
-            // Change the window size
             browser.setWindowRect(0, 0, 1366, 768);
-            // Save a full page screenshot
             browser.saveFullPageScreen("badgeHomePage", {});
-            // Check a full page screens and do a visual regression testing
             expect(browser.checkFullPageScreen("badgeHomePage", {})).toEqual(0);
         });
         it("changes caption when attribute value is changed", () => {

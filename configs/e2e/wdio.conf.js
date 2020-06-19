@@ -33,7 +33,7 @@ exports.config = {
             ? {
                   browserName: "firefox",
                   "moz:firefoxOptions": {
-                      args: debug ? [] : ["-headless"]
+                      args: debug ? [] : []
                   }
               }
             : {
@@ -63,9 +63,6 @@ exports.config = {
                 screenshotPath: basePath + "/tests/screenshot/",
                 savePerInstance: false,
                 autoSaveBaseline: true,
-                scaleImagesToSameSize: true,
-                ignoreAntialiasing: true,
-                ignoreAlpha: true,
                 blockOutStatusBar: true,
                 blockOutToolBar: true,
                 hideScrollBars: true
