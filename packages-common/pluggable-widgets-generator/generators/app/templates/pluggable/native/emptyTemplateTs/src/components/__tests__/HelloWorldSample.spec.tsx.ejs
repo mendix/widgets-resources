@@ -4,7 +4,6 @@ import { Platform } from "react-native";
 import { HelloWorldSample, HelloWorldSampleProps } from "../HelloWorldSample";
 
 describe("HelloWorldSample", () => {
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     const render = (props: HelloWorldSampleProps): any => shallow(<HelloWorldSample {...props} />);
 
     it("it renders the structure correctly", () => {

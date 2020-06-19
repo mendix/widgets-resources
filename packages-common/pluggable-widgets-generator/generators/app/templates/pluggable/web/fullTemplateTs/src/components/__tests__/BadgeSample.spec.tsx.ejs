@@ -4,7 +4,6 @@ import { shallow } from "enzyme";
 import { BadgeSample, BadgeSampleProps } from "../BadgeSample";
 
 describe("Badge", () => {
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     const createBadge = (props: BadgeSampleProps) => shallow(<BadgeSample {...props} />);
 
     it("should render the structure", () => {
