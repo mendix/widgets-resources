@@ -13,6 +13,6 @@ export interface CustomStyle extends Style {
 
 export class <%= name %> extends Component<<%= name %>Props<CustomStyle>> {
     render(): ReactNode {
-        return <HelloWorldSample sampleText={this.props.sampleText ? this.props.sampleText : "World"} style={this.props.style} />;
+        return <HelloWorldSample sampleText={this.props.sampleText ?? "World"} style={this.props.style} />;
     }
 }
