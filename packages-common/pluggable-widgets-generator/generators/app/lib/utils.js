@@ -1,5 +1,5 @@
 const { join } = require("path");
-const { access, constants, readdir } = require("fs").promises;
+const { access, readdir } = require("fs").promises;
 
 function getWidgetDetails(answers) {
     const widget = Object.create(answers);
@@ -74,7 +74,7 @@ function getWidgetDetails(answers) {
 
 async function dirExists(dirname) {
     try {
-        await access(dirname, constants.F_OK);
+        await access(dirname);
         return true;
     } catch {
         return false;
@@ -82,10 +82,6 @@ async function dirExists(dirname) {
 }
 
 async function isDirEmpty(dirname) {
-    if (!(await dirExists(dirname))) {
-        return true;
-    }
-
     return (await readdir(dirname)).length === 0;
 }
 

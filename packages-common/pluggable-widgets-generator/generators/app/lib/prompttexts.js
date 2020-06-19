@@ -1,6 +1,6 @@
 const { valid, satisfies } = require("semver");
 
-function promptWidgetProperties(dir, widgetName) {
+function promptWidgetProperties(mxProjectDir, widgetName) {
     return [
         {
             type: "input",
@@ -64,7 +64,7 @@ function promptWidgetProperties(dir, widgetName) {
             type: "input",
             name: "projectPath",
             message: "Mendix project path",
-            default: dir ? dir : "./dist/MxTestProject"
+            default: mxProjectDir ? mxProjectDir : "./dist/MxTestProject"
         },
         {
             type: "list",
