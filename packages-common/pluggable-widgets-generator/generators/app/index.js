@@ -1,6 +1,5 @@
 const Generator = require("yeoman-generator");
 const { join } = require("path");
-const { mkdir } = require("fs").promises;
 
 const { promptWidgetProperties, promptTestsInfo } = require("./lib/prompttexts.js");
 const { getWidgetDetails, dirExists, isDirEmpty, findMprDir } = require("./lib/utils.js");
@@ -29,29 +28,20 @@ class MxGenerator extends Generator {
     }
 
     async initializing() {
-        this.FINISHED = false;
+        const fullDestinationPath = this.dir ? join(this.destinationPath(), this.dir) : this.destinationPath();
 
-        if (!this.dir && !(await isDirEmpty(this.destinationRoot()))) {
+        if ((await dirExists(fullDestinationPath)) && !(await isDirEmpty(fullDestinationPath))) {
             this.log(banner);
-            this.log(text.DIR_NOT_EMPTY_ERROR);
-            this.FINISHED = true;
-        } else if (this.dir && dirExists(this.dir) && !(await isDirEmpty(this.dir))) {
-            this.log(banner);
-            this.log(text.DIR_NOT_EMPTY_ERROR);
-            this.FINISHED = true;
+            this.env.error(Error(text.DIR_NOT_EMPTY_ERROR));
         }
     }
 
     async prompting() {
-        if (this.FINISHED) {
-            return;
-        }
-
         this.log(banner);
 
-        const dir = await findMprDir(this.dir);
+        const mprDir = await findMprDir(this.dir);
 
-        const widgetAnswers = await this.prompt(promptWidgetProperties(dir, this.widgetParamName));
+        const widgetAnswers = await this.prompt(promptWidgetProperties(mprDir, this.widgetParamName));
         const testAnswers = await this.prompt(promptTestsInfo(widgetAnswers));
         const combinedAnswers = Object.assign(widgetAnswers, testAnswers);
 
@@ -60,11 +50,9 @@ class MxGenerator extends Generator {
 
     async writing() {
         if (this.dir) {
-            if (!dirExists(this.dir)) {
-                await mkdir(this.dir);
-            }
             this.destinationRoot(this.dir);
         }
+
         this._writePackage();
         this._writeWidgetXML();
         this._writeWidgetFiles();
@@ -75,18 +63,11 @@ class MxGenerator extends Generator {
     }
 
     install() {
-        if (this.FINISHED) {
-            return;
-        }
         this.log(text.INSTALL_FINISH_MSG);
         this.npmInstall();
     }
 
     end() {
-        if (this.FINISHED) {
-            return;
-        }
-
         if (isDirEmpty(this.destinationPath("node_modules"))) {
             this.log(text.END_NPM_NEED_INSTALL_MSG);
         } else {
