@@ -4,7 +4,6 @@ import { Platform, TouchableNativeFeedback, TouchableOpacity } from "react-nativ
 import { BadgeSample, BadgeSampleProps } from "../BadgeSample";
 
 describe("Badge", () => {
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     const createBadge = (props: BadgeSampleProps): any => shallow(<BadgeSample {...props} />);
 
     it("it renders the structure correctly", () => {
