@@ -33,7 +33,7 @@ exports.config = {
             ? {
                   browserName: "firefox",
                   "moz:firefoxOptions": {
-                      args: debug ? [] : []
+                      args: debug ? [] : ["-headless"]
                   }
               }
             : {
