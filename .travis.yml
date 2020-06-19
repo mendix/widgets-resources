@@ -50,19 +50,13 @@ jobs:
           script:
               - npm run test:scripts -- $SINCE_ARG
         - name: "Run end-to-end tests"
-          dist: trusty
+          dist: xenial
           addons:
               firefox: latest
           services:
               - xvfb
-          before_install:
-              - export DISPLAY=:99.0
-              - sh -e /etc/init.d/xvfb start
-              - sleep 3
           script:
               - npm run test:e2e -- $SINCE_ARG
-          after_script:
-              - if [[ "$TRAVIS_TEST_RESULT" -gt 0 ]]; then echo "Not works"; else echo "Works"; fi
         - stage: deploy
           name: "Release npm package"
           script:
