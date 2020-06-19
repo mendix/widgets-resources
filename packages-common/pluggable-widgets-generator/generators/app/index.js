@@ -48,7 +48,7 @@ class MxGenerator extends Generator {
         this.widget = getWidgetDetails(combinedAnswers);
     }
 
-    async writing() {
+    writing() {
         if (this.dir) {
             this.destinationRoot(this.dir);
         }
