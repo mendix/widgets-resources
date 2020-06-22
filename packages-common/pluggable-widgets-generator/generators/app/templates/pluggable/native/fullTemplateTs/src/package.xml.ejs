@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <package xmlns="http://www.mendix.com/package/1.0/">
-    <clientModule name="<%= name %>" version="<%= version %>" xmlns="http://www.mendix.com/clientModule/1.0/">
+    <clientModule name="<%- name %>" version="<%- version %>" xmlns="http://www.mendix.com/clientModule/1.0/">
         <widgetFiles>
-            <widgetFile path="<%= name %>.xml"/>
+            <widgetFile path="<%- name %>.xml"/>
         </widgetFiles>
         <files>
-            <file path="<%= packagePathXml %>/<%= packageName %>"/>
+            <file path="<%- packagePathXml %>/<%- packageName %>"/>
         </files>
     </clientModule>
 </package>

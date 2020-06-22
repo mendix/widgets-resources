@@ -2,7 +2,7 @@ const homepage = require("./pages/home.page");
 
 const badgeValue = "Badge";
 
-describe("<%= name %>", () => {
+describe("<%- name %>", () => {
     it("should render a badge with a caption", () => {
         homepage.open();
 

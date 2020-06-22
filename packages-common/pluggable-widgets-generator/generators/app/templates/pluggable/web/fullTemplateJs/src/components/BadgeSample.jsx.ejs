@@ -5,9 +5,9 @@ export class BadgeSample extends Component {
     render() {
         return (
             <span
-                className={classNames("widget-<%= packageName %>", this.props.type, this.props.className, {
+                className={classNames("widget-<%- packageName %>", this.props.type, this.props.className, {
                     [`label-${this.props.bootstrapStyle}`]: !!this.props.bootstrapStyle,
-                    "widget-<%= packageName %>-clickable": this.props.clickable
+                    "widget-<%- packageName %>-clickable": this.props.clickable
                 })}
                 onClick={this.props.onClickAction}
                 ref={this.props.getRef}
