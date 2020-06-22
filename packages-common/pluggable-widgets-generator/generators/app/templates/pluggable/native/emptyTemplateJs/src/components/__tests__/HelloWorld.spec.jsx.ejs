@@ -1,14 +1,15 @@
 import { createElement } from "react";
 import { shallow } from "enzyme";
 import { Platform } from "react-native";
-import { HelloWorldSample } from "../HelloWorldSample";
 
-describe("HelloWorldSample", () => {
-    const render = (props) => shallow(<HelloWorldSample {...props} />);
+import { HelloWorld } from "../HelloWorld";
+
+describe("HelloWorld", () => {
+    const render = (props) => shallow(<HelloWorld {...props} />);
 
     it("it renders the structure correctly", () => {
         const helloWorldProps = {
-            sampleText: "World",
+            name: "Mendix",
             style: [{ container: { borderColor: "white" }, label: { color: "black" } }]
         };
         const helloWorld = render(helloWorldProps);
@@ -24,7 +25,7 @@ describe("HelloWorldSample", () => {
 
         it("it renders the structure correctly", () => {
             const helloWorldProps = {
-                sampleText: "World",
+                name: "Mendix",
                 style: []
             };
             const helloWorld = render(helloWorldProps);

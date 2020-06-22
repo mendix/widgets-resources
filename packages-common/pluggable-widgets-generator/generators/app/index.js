@@ -115,8 +115,8 @@ class MxGenerator extends Generator {
         // web & native
         if (this.widget.usesEmptyTemplate) {
             this._copyTemplate(
-                `${this.widget.templateSourcePath}${widgetSrcFolder}HelloWorldSample.${fileExtension}.ejs`,
-                `${widgetSrcFolder}HelloWorldSample.${fileExtension}`
+                `${this.widget.templateSourcePath}${widgetSrcFolder}HelloWorld.${fileExtension}.ejs`,
+                `${widgetSrcFolder}HelloWorld.${fileExtension}`
             );
             this._copyTemplate(
                 `${this.widget.templateSourcePath}src/WidgetName.${fileExtension}.ejs`,
@@ -199,8 +199,8 @@ class MxGenerator extends Generator {
                     );
                 } else {
                     this._copyFile(
-                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${fileExtension}.ejs`,
-                        `${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${fileExtension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/HelloWorld.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/HelloWorld.spec.${fileExtension}`
                     );
                 }
             } else {
@@ -211,8 +211,8 @@ class MxGenerator extends Generator {
                     );
                 } else {
                     this._copyFile(
-                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${fileExtension}.ejs`,
-                        `${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${fileExtension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/HelloWorld.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/HelloWorld.spec.${fileExtension}`
                     );
                 }
             }

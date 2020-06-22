@@ -1,9 +1,9 @@
 import { Component, createElement } from "react";
 
-import { HelloWorldSample } from "./components/HelloWorldSample";
+import { HelloWorld } from "./components/HelloWorld";
 
 export class <%- name %> extends Component {
     render() {
-        return <HelloWorldSample sampleText={this.props.sampleText} style={this.props.style} />;
+        return <HelloWorld name={this.props.yourName} style={this.props.style} />;
     }
 }
