@@ -2,12 +2,12 @@ import { Component, createElement } from "react";
 import { hot } from "react-hot-loader/root";
 
 import { HelloWorldSample } from "./components/HelloWorldSample";
-import "./ui/<%= name %>.css";
+import "./ui/<%- name %>.css";
 
-class <%= name %> extends Component {
+class <%- name %> extends Component {
     render() {
         return <HelloWorldSample sampleText={this.props.sampleText} />;
     }
 }
 
-export default hot(<%= name %>);
+export default hot(<%- name %>);
