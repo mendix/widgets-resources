@@ -10,13 +10,13 @@ const defaultStyle = {
     }
 };
 
-export class HelloWorldSample extends Component {
+export class HelloWorld extends Component {
     styles = flattenStyles(defaultStyle, this.props.style);
 
     render() {
         return (
             <View style={this.styles.container}>
-                <Text style={this.styles.label}>Hello {this.props.sampleText}</Text>
+                <Text style={this.styles.label}>Hello {this.props.name || "World"}</Text>
             </View>
         );
     }

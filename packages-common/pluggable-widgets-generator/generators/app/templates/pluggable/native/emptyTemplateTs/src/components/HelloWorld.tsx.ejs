@@ -5,8 +5,8 @@ import { flattenStyles } from "@mendix/pluggable-widgets-tools";
 
 import { CustomStyle } from "../<%- name %>";
 
-export interface HelloWorldSampleProps {
-    sampleText?: string;
+export interface HelloWorldProps {
+    name?: string;
     style: CustomStyle[];
 }
 
@@ -17,13 +17,13 @@ const defaultStyle: CustomStyle = {
     }
 };
 
-export class HelloWorldSample extends Component<HelloWorldSampleProps> {
+export class HelloWorld extends Component<HelloWorldProps> {
     private readonly styles = flattenStyles(defaultStyle, this.props.style);
 
     render(): ReactNode {
         return (
             <View style={this.styles.container}>
-                <Text style={this.styles.label}>Hello {this.props.sampleText}</Text>
+                <Text style={this.styles.label}>Hello {this.props.name || "World"}</Text>
             </View>
         );
     }
