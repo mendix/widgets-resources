@@ -1,7 +1,6 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
 import { Table, TableProps } from "../Table";
-import { mockColumns, mockColumnsConfig, mockData } from "./mock";
 
 describe("Table", () => {
     it("renders the structure correctly", () => {
@@ -63,8 +62,19 @@ function mockTableProps(): TableProps {
         className: "test",
         columnsFilterable: false,
         columnsSortable: false,
-        columnDefinitions: mockColumns(5),
-        columnsConfig: mockColumnsConfig(5),
-        data: mockData(5)
+        columns: [
+            {
+                attribute: "column",
+                header: "Test",
+                hasWidgets: false,
+                content: { widgetCount: 0, renderer: jest.fn() },
+                sortable: false,
+                filterable: false,
+                resizable: false,
+                draggable: false,
+                hidable: "no"
+            }
+        ],
+        data: [{ id: "id" as any }]
     };
 }

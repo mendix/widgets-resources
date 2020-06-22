@@ -1,6 +1,7 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
 import { ColumnSelector, ColumnSelectorProps } from "../ColumnSelector";
+import { ColumnInstance } from "react-table";
 
 describe("Column Selector", () => {
     it("renders the structure correctly", () => {
@@ -10,9 +11,20 @@ describe("Column Selector", () => {
     });
 });
 
-function mockColumnSelectorProps(): ColumnSelectorProps {
+function mockColumnSelectorProps(): ColumnSelectorProps<object> {
     return {
-        columnsConfig: {},
-        allColumns: []
+        allColumns: [
+            {
+                id: "id",
+                Header: "Test",
+                filter: "text",
+                isVisible: false,
+                canHide: false,
+                canDrag: false,
+                disableSortBy: false,
+                disableResizing: false,
+                disableFilters: false
+            }
+        ] as Array<ColumnInstance<object>>
     };
 }
