@@ -19,7 +19,7 @@ export class Badge extends Component<BadgeProps> {
 
         return (
             <View style={this.styles.container}>
-                <Touchable style={this.styles.badge} onPress={this.props.onClick}>
+                <Touchable style={this.styles.badge} onPress={this.props.onClick} useForeground={true}>
                     {this.renderContent()}
                 </Touchable>
             </View>
