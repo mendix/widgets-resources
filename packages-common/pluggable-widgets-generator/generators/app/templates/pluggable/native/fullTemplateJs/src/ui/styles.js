@@ -1,10 +1,10 @@
-import { StyleSheet } from "react-native";
-
-export const styles = StyleSheet.create({
-    "flex": {
-        flexDirection: "row"
+export const defaultBadgeStyle = {
+    container: {
+        flexDirection: "row",
+        borderRadius: 30,
+        overflow: "hidden"
     },
-    "badge": {
+    badge: {
         borderRadius: 30,
         paddingLeft: 10,
         paddingRight: 10,
@@ -12,10 +12,10 @@ export const styles = StyleSheet.create({
         paddingBottom: 5,
         backgroundColor: "#D9534F"
     },
-    "label": {
+    label: {
         textAlign: "center",
         fontSize: 15,
         fontWeight: "bold",
         color: "#FFFFFF"
     }
-});
+};

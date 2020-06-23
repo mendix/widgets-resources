@@ -1,8 +1,18 @@
-import { StyleSheet } from "react-native";
+import { TextStyle, ViewStyle } from "react-native";
 
-export const styles: any = StyleSheet.create({
-    flex: {
-        flexDirection: "row"
+import { Style } from "@mendix/pluggable-widgets-tools";
+
+export interface BadgeStyle extends Style {
+    container: ViewStyle;
+    badge: ViewStyle;
+    label: TextStyle;
+}
+
+export const defaultBadgeStyle: BadgeStyle = {
+    container: {
+        flexDirection: "row",
+        borderRadius: 30,
+        overflow: "hidden"
     },
     badge: {
         borderRadius: 30,
@@ -18,4 +28,4 @@ export const styles: any = StyleSheet.create({
         fontWeight: "bold",
         color: "#FFFFFF"
     }
-});
+};

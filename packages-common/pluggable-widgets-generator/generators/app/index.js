@@ -124,8 +124,8 @@ class MxGenerator extends Generator {
             );
         } else {
             this._copyTemplate(
-                `${this.widget.templateSourcePath}${widgetSrcFolder}BadgeSample.${fileExtension}.ejs`,
-                `${widgetSrcFolder}BadgeSample.${fileExtension}`
+                `${this.widget.templateSourcePath}${widgetSrcFolder}Badge.${fileExtension}.ejs`,
+                `${widgetSrcFolder}Badge.${fileExtension}`
             );
             this._copyTemplate(
                 `${this.widget.templateSourcePath}src/WidgetName.${fileExtension}.ejs`,
@@ -194,8 +194,8 @@ class MxGenerator extends Generator {
                         `${widgetSrcFolder}/__tests__/Alert.spec.${fileExtension}`
                     );
                     this._copyTemplate(
-                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/BadgeSample.spec.${fileExtension}.ejs`,
-                        `${widgetSrcFolder}/__tests__/BadgeSample.spec.${fileExtension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/Badge.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/Badge.spec.${fileExtension}`
                     );
                 } else {
                     this._copyFile(
@@ -206,8 +206,8 @@ class MxGenerator extends Generator {
             } else {
                 if (this.widget.usesFullTemplate) {
                     this._copyFile(
-                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/BadgeSample.spec.${fileExtension}.ejs`,
-                        `${widgetSrcFolder}/__tests__/BadgeSample.spec.${fileExtension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/Badge.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/Badge.spec.${fileExtension}`
                     );
                 } else {
                     this._copyFile(
