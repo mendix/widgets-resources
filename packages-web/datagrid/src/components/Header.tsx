@@ -58,7 +58,7 @@ export function Header<D extends object>({
                 <div
                     id={column.id}
                     className={classNames("column-header", canSort ? "clickable" : "")}
-                    onClick={column.canSort ? onClick : undefined}
+                    onClick={canSort ? onClick : undefined}
                 >
                     {column.render("Header")}
                 </div>
