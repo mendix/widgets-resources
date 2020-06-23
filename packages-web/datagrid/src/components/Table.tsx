@@ -48,18 +48,24 @@ export function Table(props: TableProps): ReactElement {
     const isSortingOrFiltering = props.columnsFilterable || props.columnsSortable;
     const isInfinite = !props.paging && !isSortingOrFiltering;
 
-    const filterTypes = {
-        text: (rows: Array<Row<object>>, id: IdType<object>, filterValue: FilterValue) => {
-            return rows.filter(row => {
-                const rowValue = row.values[id];
-                return rowValue !== undefined
-                    ? String(rowValue)
-                          .toLowerCase()
-                          .startsWith(String(filterValue).toLowerCase())
-                    : true;
-            });
-        }
-    };
+    const filterTypes = useMemo(
+        () => ({
+            text: (rows: Array<Row<object>>, id: IdType<object>, filterValue: FilterValue) => {
+                return rows.filter(row => {
+                    const objectItem = row.values[id] as ObjectItem;
+                    const column = props.columns[Number(id)];
+                    const value =
+                        column.attribute instanceof Function ? column.attribute(objectItem).displayValue : column;
+                    return value !== undefined
+                        ? String(value)
+                              .toLowerCase()
+                              .startsWith(String(filterValue).toLowerCase())
+                        : true;
+                });
+            }
+        }),
+        [props.columns]
+    );
     const tableColumns: Array<ColumnWithStrictAccessor<TableRowData>> = useMemo(
         () =>
             props.columns.map((column, index) => ({
