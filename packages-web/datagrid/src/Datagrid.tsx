@@ -46,6 +46,9 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             footerWidgets={<div className="header">{props.footerWidgets}</div>}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
             headerWidgets={<div className="footer">{props.headerWidgets}</div>}
+            numberOfPages={
+                props.datasource.totalCount ? Math.ceil(props.datasource.totalCount / props.pageSize) : undefined
+            }
             page={currentPage}
             pageSize={props.pageSize}
             paging={props.pagingEnabled}

@@ -31,6 +31,7 @@ export interface TableProps {
     columnsResizable: boolean;
     columnsDraggable: boolean;
     columnsHidable: boolean;
+    numberOfPages?: number;
     paging: boolean;
     page: number;
     pageSize: number;
@@ -166,7 +167,7 @@ export function Table(props: TableProps): ReactElement {
                 gotoPage={(page: number) => props.setPage && props.setPage(() => page)}
                 nextPage={() => props.setPage && props.setPage(prev => prev + 1)}
                 page={props.page}
-                numberOfPages={undefined}
+                numberOfPages={props.numberOfPages}
                 previousPage={() => props.setPage && props.setPage(prev => prev - 1)}
             />
         ) : (
