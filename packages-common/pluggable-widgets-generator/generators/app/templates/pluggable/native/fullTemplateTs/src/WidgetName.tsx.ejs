@@ -12,7 +12,8 @@ export class <%- name %> extends Component<<%- name %>Props<BadgeStyle>> {
             <Badge
                 style={this.props.style}
                 onClick={this.onClickHandler}
-                value={this.props.value ? this.props.value.displayValue : "Default"} />
+                value={this.props.value?.displayValue || "Default"}
+            />
         );
     }
 
