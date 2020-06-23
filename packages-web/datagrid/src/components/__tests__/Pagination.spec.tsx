@@ -18,6 +18,8 @@ describe("Pagination", () => {
                 .at(1)
                 .prop("disabled")
         ).toBeTruthy();
+
+        expect(component).toMatchSnapshot();
     });
 
     it("disables first page button if is first page", () => {
@@ -29,6 +31,8 @@ describe("Pagination", () => {
                 .first()
                 .prop("disabled")
         ).toBeTruthy();
+
+        expect(component).toMatchSnapshot();
     });
 
     it("disables next button if is last page", () => {
@@ -40,6 +44,8 @@ describe("Pagination", () => {
                 .at(2)
                 .prop("disabled")
         ).toBeTruthy();
+
+        expect(component).toMatchSnapshot();
     });
 
     it("renders the current page correctly", () => {
@@ -47,6 +53,14 @@ describe("Pagination", () => {
         expect(component.find(".paging-status").text()).toBe("Page 1 of 5");
         component.setProps({ page: 4 });
         expect(component.find(".paging-status").text()).toBe("Page 5 of 5");
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it("renders the current page correctly with server side paging", () => {
+        const component = shallow(<Pagination {...mockPaginationProps()} numberOfPages={undefined} />);
+
+        expect(component).toMatchSnapshot();
     });
 });
 

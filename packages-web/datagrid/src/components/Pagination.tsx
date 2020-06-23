@@ -5,7 +5,7 @@ export interface PaginationProps {
     previousPage: () => void;
     nextPage: () => void;
     page: number;
-    numberOfPages: number;
+    numberOfPages?: number;
     canPreviousPage: boolean;
     canNextPage: boolean;
 }
@@ -19,8 +19,8 @@ export function Pagination({
     canNextPage,
     canPreviousPage
 }: PaginationProps): ReactElement {
-    const lastPage = numberOfPages - 1;
-    const hasLastPage = numberOfPages > 0;
+    const lastPage = (numberOfPages ?? 0) - 1;
+    const hasLastPage = lastPage > -1;
     return (
         <div className="pagination">
             <button className="btn" onClick={() => gotoPage(0)} disabled={page === 0}>

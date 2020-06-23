@@ -166,7 +166,7 @@ export function Table(props: TableProps): ReactElement {
                 gotoPage={(page: number) => props.setPage && props.setPage(() => page)}
                 nextPage={() => props.setPage && props.setPage(prev => prev + 1)}
                 page={props.page}
-                numberOfPages={0}
+                numberOfPages={undefined}
                 previousPage={() => props.setPage && props.setPage(prev => prev - 1)}
             />
         ) : (

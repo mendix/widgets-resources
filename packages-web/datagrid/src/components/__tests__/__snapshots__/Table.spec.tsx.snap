@@ -19215,7 +19215,6 @@ exports[`Table renders the structure correctly with paging 1`] = `
         canPreviousPage={true}
         gotoPage={[Function]}
         nextPage={[Function]}
-        numberOfPages={0}
         page={1}
         previousPage={[Function]}
       />
