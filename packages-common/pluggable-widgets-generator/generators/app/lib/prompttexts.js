@@ -6,10 +6,10 @@ function promptWidgetProperties(mxProjectDir, widgetName) {
             type: "input",
             name: "name",
             validate: function(input) {
-                if (/^([a-zA-Z]*)$/.test(input)) {
+                if (/^([a-zA-Z]+)$/.test(input)) {
                     return true;
                 }
-                return "Your widget can only contain letters (a-z & A-Z). Please provide a valid name";
+                return "Your widget name can only contain one or more letters (a-z & A-Z). Please provide a valid name";
             },
             message: "What is the name of your widget?",
             default: widgetName ? widgetName : "MyWidget"
