@@ -194,13 +194,13 @@ class MxGenerator extends Generator {
                         `${widgetSrcFolder}/__tests__/Alert.spec.${fileExtension}`
                     );
                     this._copyTemplate(
-                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/Badge.spec.${fileExtension}.ejs`,
-                        `${widgetSrcFolder}/__tests__/Badge.spec.${fileExtension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/BadgeSample.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/BadgeSample.spec.${fileExtension}`
                     );
                 } else {
                     this._copyFile(
-                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/HelloWorld.spec.${fileExtension}.ejs`,
-                        `${widgetSrcFolder}/__tests__/HelloWorld.spec.${fileExtension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${fileExtension}`
                     );
                 }
             } else {
