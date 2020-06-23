@@ -27,7 +27,7 @@ export class Badge extends Component<BadgeProps> {
     }
 
     private renderContent(): ReactNode {
-        const text = <Text style={this.styles.label}>bla</Text>;
+        const text = <Text style={this.styles.label}>{this.props.value}</Text>;
 
         if (Platform.OS === "android") {
             return <View style={this.styles.badge}>{text}</View>;
