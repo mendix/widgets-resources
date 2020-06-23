@@ -1,5 +1,14 @@
-import { createElement, Dispatch, ReactElement, SetStateAction, useState } from "react";
-import { ColumnInstance, HeaderGroup, TableHeaderProps } from "react-table";
+import {
+    createElement,
+    Dispatch,
+    ReactElement,
+    SetStateAction,
+    useState,
+    DragEvent,
+    DragEventHandler,
+    useCallback
+} from "react";
+import { ColumnInstance, HeaderGroup, IdType, TableHeaderProps } from "react-table";
 import classNames from "classnames";
 
 export interface HeaderProps<D extends object> {
@@ -9,7 +18,7 @@ export interface HeaderProps<D extends object> {
     filterable: boolean;
     draggable: boolean;
     visibleColumns: Array<ColumnInstance<D>>;
-    setColumnOrder: (order: any[]) => void;
+    setColumnOrder: (updater: ((columnOrder: Array<IdType<D>>) => Array<IdType<D>>) | Array<IdType<D>>) => void;
 }
 
 export function Header<D extends object>({
@@ -21,15 +30,16 @@ export function Header<D extends object>({
     visibleColumns,
     setColumnOrder
 }: HeaderProps<D>): ReactElement {
+    const canSort = sortable && column.canSort;
+    const canDrag = draggable && (column.canDrag ?? false);
     const [dragOver, setDragOver] = useState("");
-    const [draggableProps] = useDraggable(draggable, visibleColumns, setColumnOrder, setDragOver);
+    const draggableProps = useDraggable(canDrag, visibleColumns, setColumnOrder, setDragOver);
 
     const { onClick, style, ...rest } = column.getHeaderProps(
-        sortable && column.canSort ? column.getSortByToggleProps() : undefined
+        canSort ? column.getSortByToggleProps() : undefined
     ) as TableHeaderProps & { onClick: () => void };
 
-    const sortClass =
-        sortable && column.canSort ? (column.isSorted ? (column.isSortedDesc ? "desc" : "asc") : "sortable") : "";
+    const sortClass = canSort ? (column.isSorted ? (column.isSortedDesc ? "desc" : "asc") : "sortable") : "";
     return (
         <div
             className="th"
@@ -42,12 +52,12 @@ export function Header<D extends object>({
         >
             <div
                 id={column.id}
-                className={classNames("column-container", column.canDrag && column.id === dragOver ? "dragging" : "")}
-                {...(column.canDrag ? draggableProps : {})}
+                className={classNames("column-container", canDrag && column.id === dragOver ? "dragging" : "")}
+                {...draggableProps}
             >
                 <div
                     id={column.id}
-                    className={classNames("column-header", sortable && column.canSort ? "clickable" : "")}
+                    className={classNames("column-header", canSort ? "clickable" : "")}
                     onClick={column.canSort ? onClick : undefined}
                 >
                     {column.render("Header")}
@@ -68,48 +78,58 @@ export function Header<D extends object>({
 function useDraggable<D extends object>(
     columnsDraggable: boolean,
     visibleColumns: Array<ColumnInstance<D>>,
-    setColumnOrder: (order: any[]) => void,
+    setColumnOrder: (updater: ((columnOrder: Array<IdType<D>>) => Array<IdType<D>>) | Array<IdType<D>>) => void,
     setDragOver: Dispatch<SetStateAction<string>>
-) {
-    const handleDragStart = (e: any): void => {
-        const { id } = e.target;
+): {
+    draggable?: boolean;
+    onDragStart?: DragEventHandler;
+    onDragOver?: DragEventHandler;
+    onDrop?: DragEventHandler;
+    onDragEnter?: DragEventHandler;
+} {
+    const handleDragStart = useCallback((e: DragEvent<HTMLDivElement>): void => {
+        const { id } = e.target as HTMLDivElement;
         e.dataTransfer.setData("colDestination", id);
-    };
+    }, []);
 
-    const handleDragOver = (e: any): void => {
+    const handleDragOver = useCallback((e: DragEvent<HTMLDivElement>): void => {
         e.preventDefault();
-    };
+    }, []);
 
-    const handleDragEnter = (e: any): void => {
-        const { id } = e.target;
-        setDragOver(id);
-    };
-
-    const handleOnDrop = (e: any): void => {
-        setDragOver("");
-        const { id: colOrigin } = e.target;
+    const handleDragEnter = useCallback((e: DragEvent<HTMLDivElement>): void => {
+        const { id } = e.target as HTMLDivElement;
         const colDestination = e.dataTransfer.getData("colDestination");
-
-        const colOriginIndex = visibleColumns.findIndex((col: any) => col.id === colOrigin);
-        const colDestinationIndex = visibleColumns.findIndex((col: any) => col.id === colDestination);
-
-        if (colOriginIndex !== colDestinationIndex) {
-            const newOrder = [...visibleColumns];
-            newOrder[colOriginIndex] = colDestination;
-            newOrder[colDestinationIndex] = colOrigin;
-            setColumnOrder(newOrder);
+        if (id !== colDestination) {
+            setDragOver(id);
         }
-    };
+    }, []);
 
-    return [
-        columnsDraggable
-            ? {
-                  draggable: true,
-                  onDragStart: handleDragStart,
-                  onDragOver: handleDragOver,
-                  onDrop: handleOnDrop,
-                  onDragEnter: handleDragEnter
-              }
-            : {}
-    ];
+    const handleOnDrop = useCallback(
+        (e: DragEvent<HTMLDivElement>): void => {
+            setDragOver("");
+            const { id: colOrigin } = e.target as HTMLDivElement;
+            const colDestination = e.dataTransfer.getData("colDestination");
+
+            const colOriginIndex = visibleColumns.findIndex((col: ColumnInstance<D>) => col.id === colOrigin);
+            const colDestinationIndex = visibleColumns.findIndex((col: ColumnInstance<D>) => col.id === colDestination);
+
+            if (colOriginIndex !== colDestinationIndex) {
+                const newOrder = [...visibleColumns.map(column => column.id)];
+                newOrder[colOriginIndex] = colDestination;
+                newOrder[colDestinationIndex] = colOrigin;
+                setColumnOrder(newOrder);
+            }
+        },
+        [visibleColumns]
+    );
+
+    return columnsDraggable
+        ? {
+              draggable: true,
+              onDragStart: handleDragStart,
+              onDragOver: handleDragOver,
+              onDrop: handleOnDrop,
+              onDragEnter: handleDragEnter
+          }
+        : {};
 }

@@ -1,4 +1,4 @@
-import { hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-utils";
+import { hidePropertyIn, Properties } from "@widgets-resources/piw-utils";
 import { DatagridPreviewProps } from "../typings/DatagridProps";
 
 export function getProperties(values: DatagridPreviewProps, defaultProperties: Properties): Properties {
@@ -32,18 +32,4 @@ export function getProperties(values: DatagridPreviewProps, defaultProperties: P
         hidePropertyIn(defaultProperties, values, "footerWidgets");
     }
     return defaultProperties;
-}
-
-export function check(values: DatagridPreviewProps): Problem[] {
-    const errors: Problem[] = [];
-    values.columns
-        .filter(c => c.attribute === undefined)
-        .forEach((column, index) => {
-            errors.push({
-                property: "columnDefinitions.attribute",
-                message: `Attribute is required for column ${column.header ?? index + 1}`
-            });
-        });
-
-    return errors;
 }

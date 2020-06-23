@@ -1,7 +1,7 @@
-import { createElement, Dispatch, ReactElement, ReactNode, SetStateAction, useMemo } from "react";
+import { createElement, CSSProperties, ReactElement, ReactNode, useMemo } from "react";
 import { ObjectItem } from "mendix";
 import { ColumnSelector } from "./ColumnSelector";
-import { ClientSidePagination, Pagination } from "./Pagination";
+import { Pagination } from "./Pagination";
 import { Header } from "./Header";
 import { InfiniteBody } from "./InfiniteBody";
 import {
@@ -35,7 +35,8 @@ export interface TableProps {
     page: number;
     pageSize: number;
     pagingPosition: string;
-    setPage?: Dispatch<SetStateAction<number>>;
+    setPage?: (computePage: (prevPage: number) => number) => void;
+    styles?: CSSProperties;
     hasMoreItems: boolean;
 }
 
@@ -43,27 +44,9 @@ interface TableRowData {
     item: ObjectItem;
 }
 
-export function Table({
-    // todo: remove decomposition
-    className,
-    columns,
-    data,
-    headerWidgets,
-    footerWidgets,
-    columnsFilterable,
-    columnsSortable,
-    columnsResizable,
-    columnsDraggable,
-    columnsHidable,
-    paging,
-    pageSize,
-    pagingPosition,
-    hasMoreItems,
-    page,
-    setPage
-}: TableProps): ReactElement {
-    const isSortingOrFiltering = columnsFilterable || columnsSortable;
-    const isInfinite = !paging && !isSortingOrFiltering;
+export function Table(props: TableProps): ReactElement {
+    const isSortingOrFiltering = props.columnsFilterable || props.columnsSortable;
+    const isInfinite = !props.paging && !isSortingOrFiltering;
 
     const filterTypes = {
         text: (rows: Array<Row<object>>, id: IdType<object>, filterValue: FilterValue) => {
@@ -79,7 +62,7 @@ export function Table({
     };
     const tableColumns: Array<ColumnWithStrictAccessor<TableRowData>> = useMemo(
         () =>
-            columns.map((column, index) => ({
+            props.columns.map((column, index) => ({
                 id: index.toString(),
                 accessor: "item",
                 Header: typeof column.header === "object" ? column.header.value : column.header,
@@ -106,7 +89,7 @@ export function Table({
                         : column.attribute;
                 }
             })),
-        [columns]
+        [props.columns]
     );
 
     const defaultColumn: ColumnInterface<TableRowData> = useMemo(
@@ -121,7 +104,7 @@ export function Table({
                     placeholder={`Search ${filter ? filter : ""}...`}
                 />
             ),
-            ...(columnsResizable
+            ...(props.columnsResizable
                 ? {
                       width: 150, // width is used for both the flex-basis and flex-grow
                       maxWidth: 200, // maxWidth is only used as a limit for resizing
@@ -129,7 +112,7 @@ export function Table({
                   }
                 : {})
         }),
-        [columns]
+        [props.columns]
     );
 
     const {
@@ -152,63 +135,66 @@ export function Table({
     } = useTable<TableRowData>(
         {
             columns: tableColumns,
-            data: useMemo(() => data.map(item => ({ item })), [data]),
+            data: useMemo(() => props.data.map(item => ({ item })), [props.data]),
             defaultColumn,
             filterTypes,
-            disableResizing: !columnsResizable,
-            disableSortBy: !columnsSortable,
-            disableFilters: !columnsFilterable,
-            initialState: { pageSize },
+            disableResizing: !props.columnsResizable,
+            disableSortBy: !props.columnsSortable,
+            disableFilters: !props.columnsFilterable,
+            initialState: { pageSize: props.pageSize },
             disableMultiSort: true
         },
         useFilters,
         useSortBy,
-        usePagination, // Used for client side pagination
+        usePagination,
         useColumnOrder,
         useFlexLayout,
         useResizeColumns
     );
 
+    const pagination = props.paging ? (
+        !isInfinite && !isSortingOrFiltering ? (
+            <Pagination
+                canNextPage={props.hasMoreItems}
+                canPreviousPage={props.page !== 0}
+                gotoPage={(page: number) => props.setPage && props.setPage(() => page)}
+                nextPage={() => props.setPage && props.setPage(prev => prev + 1)}
+                page={props.page}
+                numberOfPages={0}
+                previousPage={() => props.setPage && props.setPage(prev => prev - 1)}
+            />
+        ) : (
+            <Pagination
+                canNextPage={canNextPage}
+                canPreviousPage={canPreviousPage}
+                gotoPage={gotoPage}
+                nextPage={nextPage}
+                page={pageIndex}
+                numberOfPages={pageOptions.length}
+                previousPage={previousPage}
+            />
+        )
+    ) : null;
+
     return (
-        <div className={className}>
+        <div className={props.className} style={props.styles}>
             <div className="thead">
-                {headerWidgets}
-                {columnsHidable && <ColumnSelector allColumns={allColumns} />}
+                {props.headerWidgets}
+                {props.columnsHidable && <ColumnSelector allColumns={allColumns} />}
             </div>
             <div {...getTableProps()} className="table">
                 <div role="rowgroup" className="thead">
-                    {!isInfinite && !isSortingOrFiltering && paging && pagingPosition === "top" && setPage && (
-                        <div className="tr">
-                            <div className="td">
-                                <Pagination page={page} setPage={setPage} hasMoreItems={hasMoreItems} />
-                            </div>
-                        </div>
-                    )}
-                    {isSortingOrFiltering && paging && pagingPosition === "top" && (
-                        <div className="tr">
-                            <div className="td">
-                                <ClientSidePagination
-                                    canNextPage={canNextPage}
-                                    canPreviousPage={canPreviousPage}
-                                    gotoPage={gotoPage}
-                                    nextPage={nextPage}
-                                    page={pageIndex}
-                                    pageOptions={pageOptions}
-                                    previousPage={previousPage}
-                                />
-                            </div>
-                        </div>
-                    )}
+                    {props.pagingPosition === "top" && pagination}
                     {headerGroups.map((headerGroup, index: number) => (
                         <div {...headerGroup.getHeaderGroupProps({})} key={`headers_row_${index}`} className="tr">
                             {headerGroup.headers.map((column, index) => (
                                 <Header
                                     column={column}
                                     key={`headers_column_${index}`}
-                                    sortable={columnsSortable}
-                                    resizable={columnsResizable}
-                                    filterable={columnsFilterable}
-                                    draggable={columnsDraggable}
+                                    sortable={props.columnsSortable}
+                                    resizable={props.columnsResizable}
+                                    filterable={props.columnsFilterable}
+                                    draggable={props.columnsDraggable}
                                     visibleColumns={visibleColumns}
                                     setColumnOrder={setColumnOrder}
                                 />
@@ -218,18 +204,18 @@ export function Table({
                 </div>
                 <InfiniteBody
                     isInfinite={isInfinite}
-                    hasMoreItems={hasMoreItems}
-                    setPage={setPage}
+                    hasMoreItems={props.hasMoreItems}
+                    setPage={props.setPage}
                     {...getTableBodyProps()}
                 >
-                    {(isSortingOrFiltering && paging ? rowsPagination : rows).map((row, index) => {
+                    {(isSortingOrFiltering && props.paging ? rowsPagination : rows).map((row, index) => {
                         prepareRow(row);
                         return (
                             <div {...row.getRowProps()} key={`row_${index}`} className="tr">
                                 {row.cells.map((cell, index) => (
                                     <div
                                         {...cell.getCellProps()}
-                                        {...(!columnsResizable ? { style: { flex: "1 1 0px" } } : {})}
+                                        {...(!props.columnsResizable ? { style: { flex: "1 1 0px" } } : {})}
                                         key={`column_${index}`}
                                         className="td"
                                     >
@@ -241,29 +227,8 @@ export function Table({
                     })}
                 </InfiniteBody>
                 <div className="tfoot">
-                    {!isInfinite && !isSortingOrFiltering && paging && pagingPosition === "bottom" && setPage && (
-                        <div className="tr">
-                            <div className="td">
-                                <Pagination page={page} setPage={setPage} hasMoreItems={hasMoreItems} />
-                            </div>
-                        </div>
-                    )}
-                    {isSortingOrFiltering && paging && pagingPosition === "bottom" && (
-                        <div className="tr">
-                            <div className="td">
-                                <ClientSidePagination
-                                    canNextPage={canNextPage}
-                                    canPreviousPage={canPreviousPage}
-                                    gotoPage={gotoPage}
-                                    nextPage={nextPage}
-                                    page={pageIndex}
-                                    pageOptions={pageOptions}
-                                    previousPage={previousPage}
-                                />
-                            </div>
-                        </div>
-                    )}
-                    {footerWidgets}
+                    {props.pagingPosition === "bottom" && pagination}
+                    {props.footerWidgets}
                 </div>
             </div>
         </div>

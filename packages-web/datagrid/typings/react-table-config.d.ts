@@ -6,15 +6,15 @@ import {
     UseResizeColumnsOptions,
     UseSortByColumnOptions,
     UseSortByOptions,
+    UseSortByColumnProps,
     UseSortByInstanceProps,
     UseColumnOrderInstanceProps,
+    UseResizeColumnsColumnProps,
     UsePaginationInstanceProps,
     UseFiltersColumnProps
 } from "react-table";
 
 declare module "react-table" {
-    import { UseResizeColumnsColumnProps, UseSortByColumnProps } from "react-table";
-
     export interface TableOptions<D extends object>
         extends UseFiltersOptions<D>,
             UsePaginationOptions<D>,

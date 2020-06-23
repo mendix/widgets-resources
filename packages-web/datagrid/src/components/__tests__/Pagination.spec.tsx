@@ -1,6 +1,6 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
-import { ClientSidePagination, ClientSidePaginationProps, Pagination, PaginationProps } from "../Pagination";
+import { Pagination, PaginationProps } from "../Pagination";
 
 describe("Pagination", () => {
     it("renders the structure correctly", () => {
@@ -8,29 +8,53 @@ describe("Pagination", () => {
 
         expect(component).toMatchSnapshot();
     });
-});
 
-describe("Client Side Pagination", () => {
-    it("renders the structure correctly", () => {
-        const component = shallow(<ClientSidePagination {...mockClientSideProps()} />);
+    it("disables previous button if is first page", () => {
+        const component = shallow(<Pagination {...mockPaginationProps()} canPreviousPage={false} />);
 
-        expect(component).toMatchSnapshot();
+        expect(
+            component
+                .find(".btn")
+                .at(1)
+                .prop("disabled")
+        ).toBeTruthy();
+    });
+
+    it("disables first page button if is first page", () => {
+        const component = shallow(<Pagination {...mockPaginationProps()} page={0} />);
+
+        expect(
+            component
+                .find(".btn")
+                .first()
+                .prop("disabled")
+        ).toBeTruthy();
+    });
+
+    it("disables next button if is last page", () => {
+        const component = shallow(<Pagination {...mockPaginationProps()} canNextPage={false} />);
+
+        expect(
+            component
+                .find(".btn")
+                .at(2)
+                .prop("disabled")
+        ).toBeTruthy();
+    });
+
+    it("renders the current page correctly", () => {
+        const component = shallow(<Pagination {...mockPaginationProps()} />);
+        expect(component.find(".paging-status").text()).toBe("Page 1 of 5");
+        component.setProps({ page: 4 });
+        expect(component.find(".paging-status").text()).toBe("Page 5 of 5");
     });
 });
 
 function mockPaginationProps(): PaginationProps {
     return {
-        hasMoreItems: false,
-        setPage: jest.fn(),
-        page: 0
-    };
-}
-
-function mockClientSideProps(): ClientSidePaginationProps {
-    return {
         canPreviousPage: true,
         canNextPage: true,
-        pageOptions: [1, 2, 3, 4, 5],
+        numberOfPages: 5,
         nextPage: jest.fn(),
         previousPage: jest.fn(),
         gotoPage: jest.fn(),

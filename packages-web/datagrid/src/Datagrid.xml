@@ -137,10 +137,6 @@
             <propertyGroup caption="Visibility">
                 <systemProperty key="Visibility"/>
             </propertyGroup>
-            <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
-                <systemProperty key="TabIndex"/>
-            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>

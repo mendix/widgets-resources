@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Client Side Pagination renders the structure correctly 1`] = `
+exports[`Pagination renders the structure correctly 1`] = `
 <div
   className="pagination"
 >
@@ -27,8 +27,8 @@ exports[`Client Side Pagination renders the structure correctly 1`] = `
   >
     Page 
     1
-     of 
-    5
+     
+    of 5
   </div>
   <button
     className="btn"
@@ -46,46 +46,6 @@ exports[`Client Side Pagination renders the structure correctly 1`] = `
   >
     <span
       className="glyphicon glyphicon-step-forward"
-    />
-  </button>
-</div>
-`;
-
-exports[`Pagination renders the structure correctly 1`] = `
-<div
-  className="pagination"
->
-  <button
-    className="btn"
-    disabled={true}
-    onClick={[Function]}
-  >
-    <span
-      className="glyphicon glyphicon-step-backward"
-    />
-  </button>
-  <button
-    className="btn"
-    disabled={true}
-    onClick={[Function]}
-  >
-    <span
-      className="glyphicon glyphicon-backward"
-    />
-  </button>
-  <div
-    className="paging-status"
-  >
-    Page 
-    1
-  </div>
-  <button
-    className="btn"
-    disabled={true}
-    onClick={[Function]}
-  >
-    <span
-      className="glyphicon glyphicon-forward"
     />
   </button>
 </div>

@@ -1,10 +1,10 @@
-import { createElement, Dispatch, ReactElement, ReactNode, SetStateAction, useCallback, useState } from "react";
+import { createElement, ReactElement, ReactNode, useCallback, useState } from "react";
 import classNames from "classnames";
 
 interface InfiniteBodyProps {
     children: ReactNode;
     hasMoreItems: boolean;
-    setPage?: Dispatch<SetStateAction<number>>;
+    setPage?: (computePage: (prevPage: number) => number) => void;
     isInfinite: boolean;
 }
 
@@ -29,11 +29,14 @@ export function InfiniteBody({
         [hasMoreItems, setPage]
     );
 
-    const calculateBodyHeight = (ref: HTMLTableSectionElement): void => {
-        if (ref && isInfinite && bodySize <= 0 && hasMoreItems) {
-            setBodySize(ref.clientHeight - 30);
-        }
-    };
+    const calculateBodyHeight = useCallback(
+        (ref: HTMLTableSectionElement): void => {
+            if (ref && isInfinite && bodySize <= 0 && hasMoreItems) {
+                setBodySize(ref.clientHeight - 30);
+            }
+        },
+        [bodySize, isInfinite, hasMoreItems]
+    );
 
     return (
         <div

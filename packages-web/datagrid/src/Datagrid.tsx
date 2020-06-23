@@ -37,20 +37,21 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         <Table
             className={props.class}
             columns={props.columns}
-            data={props.datasource.items ?? []}
-            setPage={setPage}
-            hasMoreItems={props.datasource.hasMoreItems ?? false}
-            page={currentPage}
             columnsDraggable={props.columnsDraggable}
             columnsFilterable={props.columnsFilterable}
+            columnsHidable={props.columnsHidable}
             columnsResizable={props.columnsResizable}
             columnsSortable={props.columnsSortable}
-            columnsHidable={props.columnsHidable}
+            data={props.datasource.items ?? []}
+            footerWidgets={<div className="header">{props.footerWidgets}</div>}
+            hasMoreItems={props.datasource.hasMoreItems ?? false}
+            headerWidgets={<div className="footer">{props.headerWidgets}</div>}
+            page={currentPage}
             pageSize={props.pageSize}
             paging={props.pagingEnabled}
             pagingPosition={props.pagingPosition}
-            footerWidgets={<div className="header">{props.footerWidgets}</div>}
-            headerWidgets={<div className="footer">{props.headerWidgets}</div>}
+            setPage={setPage}
+            styles={props.style}
         />
     );
 }

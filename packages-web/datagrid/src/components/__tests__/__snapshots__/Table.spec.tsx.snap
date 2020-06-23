@@ -19210,19 +19210,15 @@ exports[`Table renders the structure correctly with paging 1`] = `
     <div
       className="tfoot"
     >
-      <div
-        className="tr"
-      >
-        <div
-          className="td"
-        >
-          <Pagination
-            hasMoreItems={false}
-            page={1}
-            setPage={[MockFunction]}
-          />
-        </div>
-      </div>
+      <Pagination
+        canNextPage={false}
+        canPreviousPage={true}
+        gotoPage={[Function]}
+        nextPage={[Function]}
+        numberOfPages={0}
+        page={1}
+        previousPage={[Function]}
+      />
     </div>
   </div>
 </div>
