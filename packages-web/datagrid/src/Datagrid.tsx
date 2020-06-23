@@ -6,10 +6,11 @@ import { Table } from "./components/Table";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const isServerSide = !(props.columnsFilterable || props.columnsSortable);
+    const isInfiniteLoad = !props.pagingEnabled && isServerSide;
+    const currentPage = isInfiniteLoad
+        ? props.datasource.limit / props.pageSize
+        : props.datasource.offset / props.pageSize;
 
-    // TODO: Autoload more/Infinite loading needs to keep offset as zero
-
-    // ComponentWillMount
     useState(() => {
         if (isServerSide) {
             if (props.datasource.limit === Number.POSITIVE_INFINITY) {
@@ -23,10 +24,14 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
 
     const setPage = useCallback(
         computePage => {
-            const currentPage = props.datasource.offset / props.pageSize;
-            props.datasource.setOffset(computePage(currentPage) * props.pageSize);
+            const newPage = computePage(currentPage);
+            if (isInfiniteLoad) {
+                props.datasource.setLimit((newPage + 1) * props.pageSize);
+            } else {
+                props.datasource.setOffset(newPage * props.pageSize);
+            }
         },
-        [props.datasource, props.pageSize]
+        [props.datasource, props.pageSize, isInfiniteLoad, currentPage]
     );
     return (
         <Table
@@ -35,7 +40,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             data={props.datasource.items ?? []}
             setPage={setPage}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
-            page={isServerSide ? props.datasource.offset / props.pageSize : 0}
+            page={currentPage}
             columnsDraggable={props.columnsDraggable}
             columnsFilterable={props.columnsFilterable}
             columnsResizable={props.columnsResizable}

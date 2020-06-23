@@ -84,12 +84,12 @@ export function Table({
                 accessor: "item",
                 Header: typeof column.header === "object" ? column.header.value : column.header,
                 filter: "text",
-                isVisible: column.hidable === "hidden",
+                isVisible: column.hidable !== "hidden",
                 canHide: column.hidable !== "no",
                 canDrag: column.draggable,
-                canSort: column.sortable, // TODO: Not working
-                canResize: column.resizable, // TODO: Not working
-                canFilter: column.filterable, // TODO: Not working
+                disableSortBy: !column.sortable,
+                disableResizing: !column.resizable,
+                disableFilters: !column.filterable,
                 Cell: ({ value }) => {
                     if (column.hasWidgets && column.content) {
                         return "renderer" in column.content ? (
