@@ -10,9 +10,9 @@
     </icon>
     <properties>
         <propertyGroup caption="General">
-            <property key="valueAttribute" type="attribute" required="false">
-                <caption>Value attribute</caption>
-                <description>The attribute that contains the <%- packageName %> value</description>
+            <property key="value" type="attribute" required="false">
+                <caption>Value</caption>
+                <description>The attribute that contains the value for the badge</description>
                 <attributeTypes>
                     <attributeType name="String"/>
                     <attributeType name="Enum"/>
@@ -23,9 +23,9 @@
             </property>
         </propertyGroup>
         <propertyGroup caption="Events">
-            <property key="onClickAction" type="action" required="false">
-                <caption>On click action</caption>
-                <description>Action to trigger when button / label is clicked</description>
+            <property key="onClick" type="action" required="false">
+                <caption>On click</caption>
+                <description>Action to trigger when the badge is clicked</description>
             </property>
         </propertyGroup>
     </properties>

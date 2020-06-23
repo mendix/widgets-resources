@@ -1,27 +1,24 @@
 import { Component, createElement } from "react";
 
-import { BadgeSample } from "./components/BadgeSample";
+import { Badge } from "./components/Badge";
 
 export class <%- name %> extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.onClickHandler = this.onClick.bind(this);
-    }
+    private readonly onClickHandler = this.onClick.bind(this);
 
     render() {
         return (
-            <BadgeSample
+            <Badge
                 style={this.props.style}
-                onClickAction={this.onClickHandler}
-                value={this.props.valueAttribute ? this.props.valueAttribute.displayValue : "Default"} />
+                onClick={this.onClickHandler}
+                value={this.props.value ? this.props.value.displayValue : "Default"} />
         );
     }
 
-    onClick() {
-        if (this.props.onClickAction) {
-            this.props.onClickAction.execute();
+    private onClick() {
+        const { onClick } = this.props;
+
+        if (onClick && onClick.canExecute && !onClick.isExecuting) {
+            onClick.execute();
         }
     }
 }
