@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useCallback, useState } from "react";
+import { createElement, ReactElement, useCallback, useMemo, useState } from "react";
 import { DatagridContainerProps } from "../typings/DatagridProps";
 
 import "./ui/Datagrid.scss";
@@ -7,9 +7,10 @@ import { Table } from "./components/Table";
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const isServerSide = !(props.columnsFilterable || props.columnsSortable);
     const isInfiniteLoad = !props.pagingEnabled && isServerSide;
-    const currentPage = isInfiniteLoad
-        ? props.datasource.limit / props.pageSize
-        : props.datasource.offset / props.pageSize;
+    const currentPage = useMemo(
+        () => (isInfiniteLoad ? props.datasource.limit / props.pageSize : props.datasource.offset / props.pageSize),
+        [props.datasource, props.pageSize, isInfiniteLoad]
+    );
 
     useState(() => {
         if (isServerSide) {
