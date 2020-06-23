@@ -10,7 +10,8 @@ export const defaultBadgeStyle = {
         paddingRight: 10,
         paddingTop: 5,
         paddingBottom: 5,
-        backgroundColor: "#D9534F"
+        backgroundColor: "#D9534F",
+        overflow: "hidden"
     },
     label: {
         textAlign: "center",
