@@ -15,6 +15,8 @@ const CONFIGS = [
     ["native", "full", "ts", "8.6"],
     ["web", "full", "ts", "8.6"],
     ["web", "full", "js", "8.7"],
+    ["web", "full", "ts", "8.9"],
+    ["native", "full", "ts", "8.9"],
     ["web", "full", "js", "latest"],
     ["web", "full", "ts", "latest"],
     ["native", "full", "js", "latest"],
