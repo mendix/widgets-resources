@@ -19,8 +19,8 @@ export function Pagination({
     canNextPage,
     canPreviousPage
 }: PaginationProps): ReactElement {
-    const lastPage = (numberOfPages ?? 0) - 1;
-    const hasLastPage = lastPage > -1;
+    const lastPage = numberOfPages !== undefined ? numberOfPages - 1 : 0;
+    const hasLastPage = numberOfPages !== undefined;
     return (
         <div className="pagination">
             <button className="btn" onClick={() => gotoPage(0)} disabled={page === 0}>
