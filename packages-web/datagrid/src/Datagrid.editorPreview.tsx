@@ -1,4 +1,4 @@
-import { createElement, ReactElement } from "react";
+import { createElement, ReactElement, useCallback } from "react";
 import { DatagridPreviewProps } from "../typings/DatagridProps";
 
 import "./ui/Datagrid.scss";
@@ -6,9 +6,7 @@ import { Table } from "./components/Table";
 import { parseStyle } from "@widgets-resources/piw-utils";
 
 export function preview(props: DatagridPreviewProps): ReactElement {
-    const data = Array.from({ length: props.pageSize ?? 5 }).map(() => ({
-        id: "" as any
-    }));
+    const data = Array.from({ length: props.pageSize ?? 5 }).map(() => ({}));
 
     return (
         <Table
@@ -37,6 +35,20 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             paging={props.pagingEnabled}
             pagingPosition={props.pagingPosition}
             styles={parseStyle(props.style)}
+            cellRenderer={useCallback(
+                (Wrapper, _, columnIndex) => {
+                    const column = props.columns[columnIndex];
+                    return column.hasWidgets ? (
+                        <column.content.renderer>
+                            <Wrapper />
+                        </column.content.renderer>
+                    ) : (
+                        <Wrapper>{column.attribute}</Wrapper>
+                    );
+                },
+                [props.columns]
+            )}
+            valueForFilter={useCallback(() => undefined, [])}
         />
     );
 }

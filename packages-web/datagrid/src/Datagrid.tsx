@@ -33,6 +33,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         },
         [props.datasource, props.pageSize, isInfiniteLoad, currentPage]
     );
+
     return (
         <Table
             className={props.class}
@@ -57,6 +58,26 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             pagingPosition={props.pagingPosition}
             setPage={setPage}
             styles={props.style}
+            cellRenderer={useCallback(
+                (Wrapper, value, columnIndex) => {
+                    const column = props.columns[columnIndex];
+                    return (
+                        <Wrapper>
+                            {column.hasWidgets && column.content
+                                ? column.content(value)
+                                : column.attribute(value).displayValue}
+                        </Wrapper>
+                    );
+                },
+                [props.columns]
+            )}
+            valueForFilter={useCallback(
+                (value, columnIndex) => {
+                    const column = props.columns[columnIndex];
+                    return column.attribute(value).displayValue;
+                },
+                [props.columns]
+            )}
         />
     );
 }

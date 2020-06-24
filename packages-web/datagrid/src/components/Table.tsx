@@ -1,5 +1,12 @@
-import { createElement, CSSProperties, ReactElement, ReactNode, useMemo } from "react";
-import { ObjectItem } from "mendix";
+import {
+    ComponentType,
+    createElement,
+    CSSProperties,
+    PropsWithChildren,
+    ReactElement,
+    ReactNode,
+    useMemo
+} from "react";
 import { ColumnSelector } from "./ColumnSelector";
 import { Pagination } from "./Pagination";
 import { Header } from "./Header";
@@ -20,10 +27,12 @@ import {
 } from "react-table";
 import { ColumnsPreviewType, ColumnsType } from "../../typings/DatagridProps";
 
-export interface TableProps {
+export type TableColumn = Omit<ColumnsType | ColumnsPreviewType, "content" | "attribute">;
+
+export interface TableProps<T> {
     className: string;
-    data: ObjectItem[];
-    columns: Array<ColumnsType | ColumnsPreviewType>;
+    data: T[];
+    columns: TableColumn[];
     headerWidgets?: ReactNode;
     footerWidgets?: ReactNode;
     columnsFilterable: boolean;
@@ -39,13 +48,11 @@ export interface TableProps {
     setPage?: (computePage: (prevPage: number) => number) => void;
     styles?: CSSProperties;
     hasMoreItems: boolean;
+    cellRenderer: (Wrapper: ComponentType, value: T, columnIndex: number) => ReactElement;
+    valueForFilter: (value: T, columnIndex: number) => string | undefined;
 }
 
-interface TableRowData {
-    item: ObjectItem;
-}
-
-export function Table(props: TableProps): ReactElement {
+export function Table<T>(props: TableProps<T>): ReactElement {
     const isSortingOrFiltering = props.columnsFilterable || props.columnsSortable;
     const isInfinite = !props.paging && !isSortingOrFiltering;
 
@@ -53,21 +60,16 @@ export function Table(props: TableProps): ReactElement {
         () => ({
             text: (rows: Array<Row<object>>, id: IdType<object>, filterValue: FilterValue) => {
                 return rows.filter(row => {
-                    const objectItem = row.values[id] as ObjectItem;
-                    const column = props.columns[Number(id)];
-                    const value =
-                        column.attribute instanceof Function ? column.attribute(objectItem).displayValue : column;
+                    const value = props.valueForFilter(row.values[id], Number(id));
                     return value !== undefined
-                        ? String(value)
-                              .toLowerCase()
-                              .startsWith(String(filterValue).toLowerCase())
+                        ? value.toLowerCase().startsWith(String(filterValue).toLowerCase())
                         : true;
                 });
             }
         }),
         [props.columns]
     );
-    const tableColumns: Array<ColumnWithStrictAccessor<TableRowData>> = useMemo(
+    const tableColumns: Array<ColumnWithStrictAccessor<{ item: T }>> = useMemo(
         () =>
             props.columns.map((column, index) => ({
                 id: index.toString(),
@@ -80,26 +82,25 @@ export function Table(props: TableProps): ReactElement {
                 disableSortBy: !column.sortable,
                 disableResizing: !column.resizable,
                 disableFilters: !column.filterable,
-                Cell: ({ value }) => {
-                    if (column.hasWidgets && column.content) {
-                        return "renderer" in column.content ? (
-                            <column.content.renderer>
-                                <div />
-                                {/* TODO: Not just a div */}
-                            </column.content.renderer>
-                        ) : (
-                            <div>{column.content(value)}</div>
-                        );
-                    }
-                    return column.attribute instanceof Function
-                        ? column.attribute(value).displayValue
-                        : column.attribute;
-                }
+                Cell: ({ cell, value }) =>
+                    props.cellRenderer(
+                        (nestedProps: PropsWithChildren<{}>) => (
+                            <div
+                                {...cell.getCellProps()}
+                                {...(!props.columnsResizable ? { style: { flex: "1 1 0px" } } : {})}
+                                className="td"
+                            >
+                                {nestedProps.children}
+                            </div>
+                        ),
+                        value,
+                        index
+                    )
             })),
         [props.columns]
     );
 
-    const defaultColumn: ColumnInterface<TableRowData> = useMemo(
+    const defaultColumn: ColumnInterface<{ item: T }> = useMemo(
         () => ({
             Filter: ({ column: { filterValue, setFilter, filter } }): ReactElement => (
                 <input
@@ -139,7 +140,7 @@ export function Table(props: TableProps): ReactElement {
         nextPage,
         canPreviousPage,
         canNextPage
-    } = useTable<TableRowData>(
+    } = useTable<{ item: T }>(
         {
             columns: tableColumns,
             data: useMemo(() => props.data.map(item => ({ item })), [props.data]),
@@ -219,16 +220,7 @@ export function Table(props: TableProps): ReactElement {
                         prepareRow(row);
                         return (
                             <div {...row.getRowProps()} key={`row_${index}`} className="tr">
-                                {row.cells.map((cell, index) => (
-                                    <div
-                                        {...cell.getCellProps()}
-                                        {...(!props.columnsResizable ? { style: { flex: "1 1 0px" } } : {})}
-                                        key={`column_${index}`}
-                                        className="td"
-                                    >
-                                        {cell.render("Cell")}
-                                    </div>
-                                ))}
+                                {row.cells.map(cell => cell.render("Cell"))}
                             </div>
                         );
                     })}

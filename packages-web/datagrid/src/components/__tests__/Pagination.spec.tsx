@@ -62,6 +62,12 @@ describe("Pagination", () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it("renders the current page correctly with without pages", () => {
+        const component = shallow(<Pagination {...mockPaginationProps()} numberOfPages={0} />);
+
+        expect(component).toMatchSnapshot();
+    });
 });
 
 function mockPaginationProps(): PaginationProps {
