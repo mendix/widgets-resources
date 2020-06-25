@@ -1,21 +1,23 @@
 const chalk = require("chalk");
+const { join } = require("path");
+
+const pkg = require(join(__dirname, "../../../package.json"));
 
 module.exports = {
-    getBanner: pkg =>
-        [
-            "",
-            chalk.bold.bgBlueBright("  __  ____   __ ") + "           _     _            _    ",
-            chalk.bold.bgBlueBright(" |  \\/  \\ \\ / / ") + "          (_)   | |          | |   ",
-            chalk.bold.bgBlueBright(" | \\  / |\\ V /  ") + " __      ___  __| | ____  ___| |_  ",
-            chalk.bold.bgBlueBright(" | |\\/| | > <   ") + " \\ \\ /\\ / / |/ _  |/ _  |/ _ \\ __| ",
-            chalk.bold.bgBlueBright(" | |  | |/ . \\  ") + "  \\ V  V /| | (_| | (_| |  __/ |_  ",
-            chalk.bold.bgBlueBright(" |_|  |_/_/ \\_\\ ") + "   \\_/\\_/ |_|\\__._|\\__. |\\___|\\__| ",
-            chalk.bold.bgBlueBright("                ") + "                   __/ |          ",
-            "                                  |___/           ",
-            " Generator, version: " + pkg.version,
-            " Issues? Please report them at : " + chalk.italic.blueBright(pkg.bugs.url),
-            ""
-        ].join("\n"),
+    BANNER: `
+
+    ${chalk.bold.bgBlueBright("  __  ____   __ ")}           _     _            _    
+    ${chalk.bold.bgBlueBright(" |  \\/  \\ \\ / / ")}          (_)   | |          | |   
+    ${chalk.bold.bgBlueBright(" | \\  / |\\ V /  ")} __      ___  __| | ____  ___| |_  
+    ${chalk.bold.bgBlueBright(" | |\\/| | > <   ")} \\ \\ /\\ / / |/ _  |/ _  |/ _ \\ __| 
+    ${chalk.bold.bgBlueBright(" | |  | |/ . \\  ")}  \\ V  V /| | (_| | (_| |  __/ |_  
+    ${chalk.bold.bgBlueBright(" |_|  |_/_/ \\_\\ ")}   \\_/\\_/ |_|\\__._|\\__. |\\___|\\__| 
+    ${chalk.bold.bgBlueBright("                ")}                    __/ |          
+                                       |___/           
+     Generator, version: ${pkg.version}
+     Issues? Please report them at : ${chalk.italic.blueBright(pkg.bugs.url)}
+                
+    `,
 
     PACKAGE_READ_ERROR:
         "Error reading package.json. Please check the file or remove it before you run the generator again. Error: ",
