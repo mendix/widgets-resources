@@ -4,9 +4,9 @@ import { Platform, TouchableNativeFeedback, TouchableOpacity } from "react-nativ
 
 import { Badge, BadgeProps } from "../Badge";
 
-describe.each(["ios", "android"])("Badge for %s", (OS: "ios" | "android") => {
+describe.each(["ios", "android"])("Badge for %s", (os: "ios" | "android") => {
     beforeEach(() => {
-        Platform.OS = OS;
+        Platform.OS = os;
         Platform.select = jest.fn((dict: any) => dict[Platform.OS]);
     });
 
