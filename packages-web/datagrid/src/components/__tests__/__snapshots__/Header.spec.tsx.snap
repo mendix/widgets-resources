@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header renders the structure correctly 1`] = `
+<div
+  className="th"
+  role="Test"
+  style={
+    Object {
+      "cursor": "unset",
+      "flex": "1 1 0px",
+    }
+  }
+>
+  <div
+    className="column-container"
+  >
+    <div
+      className="column-header"
+    >
+      <span>
+        Test
+      </span>
+    </div>
+  </div>
+</div>
+`;

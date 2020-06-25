@@ -27,7 +27,7 @@ describe("Label", () => {
         expect(labelComponent.getElement()).toEqual(
             createElement(
                 "div",
-                { className: "form-group no-columns" },
+                { className: "form-group no-columnDefinitions" },
                 createElement("label", { className: "control-label" }, label),
                 createElement("div", { className: "" })
             )
