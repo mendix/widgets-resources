@@ -14,6 +14,7 @@ const webConfig = {
     moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
     setupFilesAfterEnv: [__dirname + "/test-index.js"],
     snapshotSerializers: ["enzyme-to-json/serializer"],
+    testMatch: ["<rootDir>/src/**/?(*.)(spec|test).[jt]s?(x)"],
     testPathIgnorePatterns: ["<rootDir>/dist", "<rootDir>/node_modules"],
     reporters: ["default"],
     transform: {
