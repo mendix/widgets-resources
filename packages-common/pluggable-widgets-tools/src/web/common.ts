@@ -1,4 +1,4 @@
-export function parseStyle(style = ""): { [key: string]: string } {
+export function parseInlineStyle(style = ""): { [key: string]: string } {
     try {
         return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
             const pair = line.split(":");
