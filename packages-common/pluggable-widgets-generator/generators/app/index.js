@@ -224,7 +224,6 @@ class MxGenerator extends Generator {
     _writeEndToEndTests() {
         if (this.widget.hasE2eTests && this.widget.isPlatformWeb) {
             if (this.widget.isLanguageTS) {
-                this._copyFile("typings/WebdriverIO.d.ts", "tests/e2e/typings/WebdriverIO.d.ts");
                 this._copyFile(`${this.widget.templateSourcePath}tests/e2e/tsconfig.json`, "tests/e2e/tsconfig.json");
             }
 
