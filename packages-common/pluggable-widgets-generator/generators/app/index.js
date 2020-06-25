@@ -67,8 +67,11 @@ class MxGenerator extends Generator {
         this.npmInstall();
     }
 
-    end() {
-        if (isDirEmpty(this.destinationPath("node_modules"))) {
+    async end() {
+        if (
+            !(await dirExists(this.destinationPath("node_modules"))) ||
+            (await isDirEmpty(this.destinationPath("node_modules")))
+        ) {
             this.log(text.END_NPM_NEED_INSTALL_MSG);
         } else {
             this.log(text.END_RUN_BUILD_MSG);
