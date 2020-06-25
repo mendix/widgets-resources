@@ -116,6 +116,6 @@
   "scripts": {
     "prepublish": "rimraf dist && tsc",
     "test": "cross-env LIMIT_TESTS=true npm run test:cross-platform",
-    "test:cross-platform": "jest --testTimeout=720000 tests/commands.spec.js"
+    "test:cross-platform": "jest --testTimeout=960000 tests/commands.spec.js"
   }
 }
