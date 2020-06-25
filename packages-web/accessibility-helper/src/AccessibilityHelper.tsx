@@ -42,7 +42,7 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactEle
             return;
         }
         update();
-    }, [props.attributesList]);
+    }, [props.targetSelector, props.attributesList]);
 
     useEffect(() => {
         const contentWrapper = contentRef.current;
@@ -71,7 +71,7 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactEle
             });
             observer.observe(contentWrapper, mutationConfig);
         }
-    }, [props.content, props.targetSelector, props.attributesList]);
+    }, [contentRef.current, props.targetSelector, props.attributesList]);
 
     return <div ref={contentRef}>{props.content}</div>;
 };
