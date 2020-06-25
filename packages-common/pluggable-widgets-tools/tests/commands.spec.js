@@ -116,24 +116,42 @@ describe("pluggable-widgets-tools commands", () => {
         }
 
         if (!LIMIT_TESTS) {
-            it.each(["build", "test:unit", "release"])("'%s' command succeeds", async cmd => {
-                process.stderr.write(`[${widgetConfigDescription}] Testing '${cmd}' command...\n`);
-                await execAsync(`npm run ${cmd}`, workDir);
-                if (cmd === "build") {
-                    expect(
-                        existsSync(
-                            join(
-                                workDir,
-                                `/dist/${widgetPackageJson.version}/${widgetPackageJson.packagePath}.${widgetPackageJson.widgetName}.mpk`
-                            )
+            it("'build' command succeeds", async () => {
+                process.stderr.write(`[${widgetConfigDescription}] Testing 'build' command...\n`);
+                await execAsync("npm run build", workDir);
+
+                expect(
+                    existsSync(
+                        join(
+                            workDir,
+                            `/dist/${widgetPackageJson.version}/${widgetPackageJson.packagePath}.${widgetPackageJson.widgetName}.mpk`
                         )
-                    ).toBe(true);
-                } else if (cmd === "test:unit") {
-                    expect(existsSync(join(workDir, `/dist/coverage/clover.xml`))).toBe(true);
-                }
+                    )
+                ).toBe(true);
             });
 
-            it("start command doesn't produce errors", async () => {
+            it("'test:unit' command succeeds", async () => {
+                process.stderr.write(`[${widgetConfigDescription}] Testing 'test:unit' command...\n`);
+                await execAsync("npm run test:unit", workDir);
+
+                expect(existsSync(join(workDir, `/dist/coverage/clover.xml`))).toBe(true);
+            });
+
+            it("'release' command succeeds", async () => {
+                process.stderr.write(`[${widgetConfigDescription}] Testing 'release' command...\n`);
+                await execAsync("npm run release", workDir);
+
+                expect(
+                    existsSync(
+                        join(
+                            workDir,
+                            `/dist/${widgetPackageJson.version}/${widgetPackageJson.packagePath}.${widgetPackageJson.widgetName}.mpk`
+                        )
+                    )
+                ).toBe(true);
+            });
+
+            it("'start' command doesn't produce errors", async () => {
                 process.stderr.write(`[${widgetConfigDescription}] Testing npm start...\n`);
                 const startProcess = exec("npm start", { cwd: workDir });
 
