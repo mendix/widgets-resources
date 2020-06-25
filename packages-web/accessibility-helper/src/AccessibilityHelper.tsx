@@ -12,9 +12,8 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactEle
 
     const update = useCallback(() => {
         if (contentRef.current) {
-            let target: Element | null = null;
             try {
-                target = contentRef.current.querySelector(props.targetSelector);
+                const target = contentRef.current.querySelector(props.targetSelector);
                 if (target) {
                     props.attributesList.forEach(attrEntry => {
                         const valueToBeSet = getValueBySourceType(attrEntry);
@@ -23,12 +22,12 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactEle
                         if (condition.status === ValueStatus.Available && condition.value) {
                             if (
                                 valueToBeSet?.status === ValueStatus.Available &&
-                                valueToBeSet?.value !== target!.getAttribute(attrEntry.attribute)
+                                valueToBeSet?.value !== target.getAttribute(attrEntry.attribute)
                             ) {
-                                target!.setAttribute(attrEntry.attribute, valueToBeSet?.value);
+                                target.setAttribute(attrEntry.attribute, valueToBeSet?.value);
                             }
                         } else if (condition.status === ValueStatus.Available && !condition.value) {
-                            target!.removeAttribute(attrEntry.attribute);
+                            target.removeAttribute(attrEntry.attribute);
                         }
                     });
                 }
