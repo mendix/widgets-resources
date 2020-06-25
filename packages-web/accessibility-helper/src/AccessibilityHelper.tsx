@@ -1,4 +1,4 @@
-import { createElement, MutableRefObject, ReactNode, useCallback, useEffect, useRef } from "react";
+import { createElement, MutableRefObject, ReactElement, useCallback, useEffect, useRef } from "react";
 
 import { ValueStatus, DynamicValue } from "mendix";
 
@@ -6,10 +6,9 @@ import { AccessibilityHelperContainerProps, AttributesListType } from "../typing
 
 const PROHIBITED_ATTRIBUTES = ["class", "style", "widgetid", "data-mendix-id"];
 
-const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactNode => {
+const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactElement => {
     const contentRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
-    const attributeValuesRef: MutableRefObject<string[]> = useRef([]);
-    const attributeConditionsRef: MutableRefObject<boolean[]> = useRef([]);
+    let observer;
 
     const update = useCallback(() => {
         if (contentRef.current) {
@@ -17,76 +16,53 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactNod
             try {
                 target = contentRef.current.querySelector(props.targetSelector);
                 if (target) {
-                    props.attributesList.forEach((attrEntry, index: number) => {
+                    props.attributesList.forEach(attrEntry => {
                         const valueToBeSet = getValueBySourceType(attrEntry);
-                        if (
-                            attrEntry.attributeCondition.status === ValueStatus.Available &&
-                            valueToBeSet?.status === ValueStatus.Available
-                        ) {
+                        const condition = attrEntry.attributeCondition;
+
+                        if (condition.status === ValueStatus.Available && condition.value) {
                             if (
-                                attrEntry.attributeCondition.value &&
+                                valueToBeSet?.status === ValueStatus.Available &&
                                 valueToBeSet?.value !== target!.getAttribute(attrEntry.attribute)
                             ) {
-                                attributeValuesRef.current?.splice(index, 0, valueToBeSet?.value);
-                                attributeConditionsRef.current?.splice(index, 0, true);
                                 target!.setAttribute(attrEntry.attribute, valueToBeSet?.value);
-                            } else {
-                                attributeValuesRef.current?.splice(index, 1);
-                                attributeConditionsRef.current?.splice(index, 1);
-                                target!.removeAttribute(attrEntry.attribute);
                             }
+                        } else if (condition.status === ValueStatus.Available && !condition.value) {
+                            target!.removeAttribute(attrEntry.attribute);
                         }
                     });
                 }
             } catch (error) {
-                console.error(`Set Attribute Target sector ${props.targetSelector} is not valid`, error);
+                console.error(`Accessibility Helper selector ${props.targetSelector} is not valid`, error);
             }
         }
-    }, [
-        props.targetSelector,
-        props.attributesList,
-        attributeValuesRef.current,
-        attributeConditionsRef.current,
-        contentRef.current
-    ]);
+    }, [props.targetSelector, props.attributesList]);
 
     useEffect(() => {
         if (!isValid(props.targetSelector)) {
             return;
         }
-        const isAnythingChanged = props.attributesList.some(attrEntry => {
-            const valueToBeSet = getValueBySourceType(attrEntry);
-            return (
-                (valueToBeSet && attributeValuesRef.current?.some(value => value === valueToBeSet.value)) ||
-                (attrEntry.attributeCondition.value &&
-                    attributeConditionsRef.current?.some(condition => condition === attrEntry.attributeCondition.value))
-            );
-        });
-        if (isAnythingChanged) {
-            update();
-        }
-    }, [props.attributesList, attributeValuesRef.current, attributeConditionsRef.current]);
+        update();
+    }, [props.attributesList]);
 
     useEffect(() => {
-        const contentWrapperNode = contentRef.current;
-
-        if (contentWrapperNode) {
-            const config: MutationObserverInit = {
+        const contentWrapper = contentRef.current;
+        if (contentWrapper && isValid(props.targetSelector)) {
+            const mutationConfig: MutationObserverInit = {
                 attributes: true,
                 childList: true,
                 subtree: true,
-                attributeFilter: props.attributesList.map(entry => entry.attribute)
+                attributeFilter: props.attributesList.map(attr => attr.attribute)
             };
-            const observer = new MutationObserver(mutationList => {
-                const doUpdate = props.attributesList.some((attrEntries: AttributesListType, index: number) =>
+
+            // Mutation observer is needed because if props.content is shown/hidden via conditional visibility
+            // we don't get re-renders in the widget itself, thus we need to observe the dom, to see if any attributes
+            // are changed
+            observer = new MutationObserver(mutationList => {
+                const doUpdate = props.attributesList.some((attrEntries: AttributesListType) =>
                     mutationList.some(
                         mutation =>
-                            !(
-                                mutation.type === "attributes" &&
-                                mutation.attributeName === attrEntries.attribute &&
-                                (mutation.target as Element).getAttribute(mutation.attributeName) ===
-                                    attributeValuesRef.current[index]
-                            )
+                            !(mutation.type === "attributes" && mutation.attributeName === attrEntries.attribute)
                     )
                 );
 
@@ -94,15 +70,9 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactNod
                     update();
                 }
             });
-            observer.observe(contentWrapperNode, config);
-
-            return () => {
-                attributeValuesRef.current = [];
-                attributeConditionsRef.current = [];
-                observer.disconnect();
-            };
+            observer.observe(contentWrapper, mutationConfig);
         }
-    }, [props.attributesList, attributeValuesRef.current, attributeConditionsRef.current, contentRef.current]);
+    }, [props.content, props.targetSelector, props.attributesList]);
 
     return <div ref={contentRef}>{props.content}</div>;
 };
