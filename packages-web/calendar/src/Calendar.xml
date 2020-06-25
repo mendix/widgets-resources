@@ -162,7 +162,7 @@
                 <property key="customCaption" type="translatableString" required="false">
                     <caption>Caption</caption>
                     <category>Appearance</category>
-                    <description>The text for the button or title. For type 'Title' the from and to date are substituted with '{Mendix date format}'. e.g. 'Events from {M/d/yyyy} to {M/d/yyyy}'</description>
+                    <description>The text for the button or title. For type 'Title date text' this field will be replaced by defaults according to the language and view.</description>
                 </property>
                 <property key="renderMode" type="enumeration" defaultValue="button">
                     <caption>Render mode</caption>
