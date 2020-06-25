@@ -115,13 +115,13 @@ class MxGenerator extends Generator {
 
         this._copyTemplate("commons/README.md.ejs", "README.md");
 
+        const tempSampleSuffix = this.widget.isPlatformWeb ? "Sample" : "";
+
         // web & native
         if (this.widget.usesEmptyTemplate) {
             this._copyTemplate(
-                `${this.widget.templateSourcePath}${widgetSrcFolder}HelloWorld${
-                    this.widget.isPlatformWeb ? "Sample" : undefined
-                }.${fileExtension}.ejs`,
-                `${widgetSrcFolder}HelloWorld${this.widget.isPlatformWeb ? "Sample" : undefined}.${fileExtension}`
+                `${this.widget.templateSourcePath}${widgetSrcFolder}HelloWorld${tempSampleSuffix}.${fileExtension}.ejs`,
+                `${widgetSrcFolder}HelloWorld${tempSampleSuffix}.${fileExtension}`
             );
             this._copyTemplate(
                 `${this.widget.templateSourcePath}src/WidgetName.${fileExtension}.ejs`,
@@ -129,10 +129,8 @@ class MxGenerator extends Generator {
             );
         } else {
             this._copyTemplate(
-                `${this.widget.templateSourcePath}${widgetSrcFolder}Badge${
-                    this.widget.isPlatformWeb ? "Sample" : undefined
-                }.${fileExtension}.ejs`,
-                `${widgetSrcFolder}Badge${this.widget.isPlatformWeb ? "Sample" : undefined}.${fileExtension}`
+                `${this.widget.templateSourcePath}${widgetSrcFolder}Badge${tempSampleSuffix}.${fileExtension}.ejs`,
+                `${widgetSrcFolder}Badge${tempSampleSuffix}.${fileExtension}`
             );
             this._copyTemplate(
                 `${this.widget.templateSourcePath}src/WidgetName.${fileExtension}.ejs`,
