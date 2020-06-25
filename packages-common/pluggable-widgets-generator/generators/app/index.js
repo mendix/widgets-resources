@@ -118,8 +118,10 @@ class MxGenerator extends Generator {
         // web & native
         if (this.widget.usesEmptyTemplate) {
             this._copyTemplate(
-                `${this.widget.templateSourcePath}${widgetSrcFolder}HelloWorld.${fileExtension}.ejs`,
-                `${widgetSrcFolder}HelloWorld.${fileExtension}`
+                `${this.widget.templateSourcePath}${widgetSrcFolder}HelloWorld${
+                    this.widget.isPlatformWeb ? "Sample" : undefined
+                }.${fileExtension}.ejs`,
+                `${widgetSrcFolder}HelloWorld${this.widget.isPlatformWeb ? "Sample" : undefined}.${fileExtension}`
             );
             this._copyTemplate(
                 `${this.widget.templateSourcePath}src/WidgetName.${fileExtension}.ejs`,
@@ -127,8 +129,10 @@ class MxGenerator extends Generator {
             );
         } else {
             this._copyTemplate(
-                `${this.widget.templateSourcePath}${widgetSrcFolder}Badge.${fileExtension}.ejs`,
-                `${widgetSrcFolder}Badge.${fileExtension}`
+                `${this.widget.templateSourcePath}${widgetSrcFolder}Badge${
+                    this.widget.isPlatformWeb ? "Sample" : undefined
+                }.${fileExtension}.ejs`,
+                `${widgetSrcFolder}Badge${this.widget.isPlatformWeb ? "Sample" : undefined}.${fileExtension}`
             );
             this._copyTemplate(
                 `${this.widget.templateSourcePath}src/WidgetName.${fileExtension}.ejs`,
