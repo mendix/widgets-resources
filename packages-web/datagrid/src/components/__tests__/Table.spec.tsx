@@ -1,6 +1,7 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
 import { Table, TableProps } from "../Table";
+import { ObjectItem } from "mendix";
 
 describe("Table", () => {
     it("renders the structure correctly", () => {
@@ -46,7 +47,18 @@ describe("Table", () => {
     });
 });
 
-function mockTableProps(): TableProps {
+function mockTableProps(): TableProps<ObjectItem> {
+    const columns = [
+        {
+            header: "Test",
+            hasWidgets: false,
+            sortable: false,
+            filterable: false,
+            resizable: false,
+            draggable: false,
+            hidable: "no" as const
+        }
+    ];
     return {
         setPage: jest.fn(),
         page: 1,
@@ -62,19 +74,9 @@ function mockTableProps(): TableProps {
         className: "test",
         columnsFilterable: false,
         columnsSortable: false,
-        columns: [
-            {
-                attribute: "column",
-                header: "Test",
-                hasWidgets: false,
-                content: { widgetCount: 0, renderer: jest.fn() },
-                sortable: false,
-                filterable: false,
-                resizable: false,
-                draggable: false,
-                hidable: "no"
-            }
-        ],
-        data: [{ id: "id" as any }]
+        columns,
+        valueForFilter: () => undefined,
+        cellRenderer: (Wrapper, _, columnIndex) => <Wrapper>{columns[columnIndex].header}</Wrapper>,
+        data: [{ id: "123456" as any }]
     };
 }
