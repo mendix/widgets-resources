@@ -11,17 +11,17 @@ export type ValueSourceTypeEnum = "text" | "expression";
 export interface AttributesListType {
     attribute: string;
     valueSourceType: ValueSourceTypeEnum;
-    attributeCondition: DynamicValue<boolean>;
     valueExpression?: DynamicValue<string>;
     valueText?: DynamicValue<string>;
+    attributeCondition: DynamicValue<boolean>;
 }
 
 export interface AttributesListPreviewType {
     attribute: string;
     valueSourceType: ValueSourceTypeEnum;
-    attributeCondition: string;
     valueExpression: string;
     valueText: string;
+    attributeCondition: string;
 }
 
 export interface AccessibilityHelperContainerProps {
