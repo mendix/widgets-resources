@@ -1,32 +1,42 @@
-import { createElement, MutableRefObject, ReactElement, useCallback, useEffect, useRef } from "react";
+import { createElement, MutableRefObject, ReactElement, useCallback, useEffect, useRef, useMemo } from "react";
 
 import { ValueStatus, DynamicValue } from "mendix";
 
-import { AccessibilityHelperContainerProps, AttributesListType } from "../typings/AccessibilityHelperProps";
+import { AccessibilityHelperContainerProps } from "../typings/AccessibilityHelperProps";
 
 const PROHIBITED_ATTRIBUTES = ["class", "style", "widgetid", "data-mendix-id"];
 
 const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactElement => {
     const contentRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
-    let observer;
+    const conditions = useMemo(
+        () => props.attributesList.map(attr => ({ attribute: attr.attribute, condition: attr.attributeCondition })),
+        [props.attributesList]
+    );
+
+    const getValueBySourceType = useCallback(
+        (attribute: string): DynamicValue<string> | undefined => {
+            const attrEntry = props.attributesList.find(entry => entry.attribute === attribute);
+            return attrEntry?.valueSourceType === "expression" ? attrEntry?.valueExpression : attrEntry?.valueText;
+        },
+        [props.attributesList]
+    );
 
     const update = useCallback(() => {
         if (contentRef.current) {
             try {
                 const target = contentRef.current.querySelector(props.targetSelector);
                 if (target) {
-                    props.attributesList.forEach(attrEntry => {
-                        const valueToBeSet = getValueBySourceType(attrEntry);
-                        const condition = attrEntry.attributeCondition;
+                    conditions.forEach(attrEntry => {
+                        const valueToBeSet = getValueBySourceType(attrEntry.attribute);
 
-                        if (condition.status === ValueStatus.Available && condition.value) {
+                        if (attrEntry.condition.status === ValueStatus.Available && attrEntry.condition.value) {
                             if (
                                 valueToBeSet?.status === ValueStatus.Available &&
                                 valueToBeSet?.value !== target.getAttribute(attrEntry.attribute)
                             ) {
                                 target.setAttribute(attrEntry.attribute, valueToBeSet?.value);
                             }
-                        } else if (condition.status === ValueStatus.Available && !condition.value) {
+                        } else if (attrEntry.condition.status === ValueStatus.Available && !attrEntry.condition.value) {
                             target.removeAttribute(attrEntry.attribute);
                         }
                     });
@@ -35,7 +45,7 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactEle
                 console.error(`Accessibility Helper selector ${props.targetSelector} is not valid`, error);
             }
         }
-    }, [props.targetSelector, props.attributesList]);
+    }, [props.targetSelector, conditions, contentRef.current]);
 
     useEffect(() => {
         if (!isValid(props.targetSelector)) {
@@ -51,27 +61,42 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactEle
                 attributes: true,
                 childList: true,
                 subtree: true,
-                attributeFilter: props.attributesList.map(attr => attr.attribute)
+                attributeFilter: conditions.map(condition => condition.attribute)
             };
 
             // Mutation observer is needed because if props.content is shown/hidden via conditional visibility
             // we don't get re-renders in the widget itself, thus we need to observe the dom, to see if any attributes
             // are changed
-            observer = new MutationObserver(mutationList => {
-                const doUpdate = props.attributesList.some((attrEntries: AttributesListType) =>
-                    mutationList.some(
-                        mutation =>
-                            !(mutation.type === "attributes" && mutation.attributeName === attrEntries.attribute)
-                    )
-                );
 
-                if (doUpdate) {
-                    update();
-                }
-            });
-            observer.observe(contentWrapper, mutationConfig);
+            const isAnyLoading = conditions.some(condition => condition.condition.status === ValueStatus.Loading);
+
+            if (!isAnyLoading) {
+                const observer = new MutationObserver(mutationList => {
+                    const doUpdate = conditions.some(condition =>
+                        mutationList.some(
+                            mutation =>
+                                !(
+                                    mutation.type === "attributes" &&
+                                    mutation.attributeName === condition.attribute &&
+                                    (mutation.target as Element).getAttribute(mutation.attributeName) ===
+                                        getValueBySourceType(condition.attribute)?.value
+                                )
+                        )
+                    );
+
+                    if (doUpdate) {
+                        update();
+                    }
+                });
+
+                observer.observe(contentWrapper, mutationConfig);
+
+                return () => {
+                    observer.disconnect();
+                };
+            }
         }
-    }, [contentRef.current, props.targetSelector, props.attributesList]);
+    }, [contentRef.current, props.targetSelector, conditions]);
 
     return <div ref={contentRef}>{props.content}</div>;
 };
@@ -82,10 +107,6 @@ function isValid(selector: string): boolean {
         return false;
     }
     return true;
-}
-
-function getValueBySourceType(attrEntry: AttributesListType): DynamicValue<string> | undefined {
-    return attrEntry.valueSourceType === "expression" ? attrEntry.valueExpression : attrEntry.valueText;
 }
 
 export default AccessibilityHelper;
