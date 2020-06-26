@@ -1,12 +1,12 @@
 import { Component, createElement } from "react";
 import { Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
 
-import { flattenStyles } from "@mendix/pluggable-widgets-tools";
+import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
 
 import { defaultBadgeStyle } from "../ui/styles";
 
 export class Badge extends Component {
-    private readonly styles = flattenStyles(defaultBadgeStyle, this.props.style);
+    private readonly styles = mergeNativeStyles(defaultBadgeStyle, this.props.style);
 
     render() {
         const Touchable = Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;

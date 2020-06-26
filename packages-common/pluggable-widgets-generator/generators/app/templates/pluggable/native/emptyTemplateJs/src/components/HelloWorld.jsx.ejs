@@ -1,7 +1,7 @@
 import { Component, createElement } from "react";
 import { Text, View } from "react-native";
 
-import { flattenStyles } from "@mendix/pluggable-widgets-tools";
+import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
 
 const defaultStyle = {
     container: { },
@@ -11,7 +11,7 @@ const defaultStyle = {
 };
 
 export class HelloWorld extends Component {
-    styles = flattenStyles(defaultStyle, this.props.style);
+    styles = mergeNativeStyles(defaultStyle, this.props.style);
 
     render() {
         return (
