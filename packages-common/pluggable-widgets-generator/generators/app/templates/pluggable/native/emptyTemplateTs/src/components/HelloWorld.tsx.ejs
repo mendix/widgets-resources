@@ -1,7 +1,7 @@
 import { Component, ReactNode, createElement } from "react";
 import { Text, View } from "react-native";
 
-import { flattenStyles } from "@mendix/pluggable-widgets-tools";
+import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
 
 import { CustomStyle } from "../<%- name %>";
 
@@ -18,7 +18,7 @@ const defaultStyle: CustomStyle = {
 };
 
 export class HelloWorld extends Component<HelloWorldProps> {
-    private readonly styles = flattenStyles(defaultStyle, this.props.style);
+    private readonly styles = mergeNativeStyles(defaultStyle, this.props.style);
 
     render(): ReactNode {
         return (
