@@ -6,7 +6,7 @@ import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
 import { defaultBadgeStyle } from "../ui/styles";
 
 export class Badge extends Component {
-    private readonly styles = mergeNativeStyles(defaultBadgeStyle, this.props.style);
+    private styles = mergeNativeStyles(defaultBadgeStyle, this.props.style);
 
     render() {
         const Touchable = Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
