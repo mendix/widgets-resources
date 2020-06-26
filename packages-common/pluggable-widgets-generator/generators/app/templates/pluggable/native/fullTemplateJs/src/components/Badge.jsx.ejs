@@ -20,7 +20,7 @@ export class Badge extends Component {
         );
     }
 
-    private renderContent() {
+    renderContent() {
         const text = <Text style={this.styles.label}>{this.props.value}</Text>;
 
         if (Platform.OS === "android") {

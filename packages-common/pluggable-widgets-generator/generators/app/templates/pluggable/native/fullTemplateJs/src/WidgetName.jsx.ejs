@@ -15,7 +15,7 @@ export class <%- name %> extends Component {
         );
     }
 
-    private onClick() {
+    onClick() {
         const { onClick } = this.props;
 
         if (onClick && onClick.canExecute && !onClick.isExecuting) {
