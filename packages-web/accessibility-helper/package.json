@@ -1,7 +1,7 @@
 {
   "name": "accessibility-helper",
   "widgetName": "AccessibilityHelper",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Set an attribute to a DOM element",
   "copyright": "Mendix 2020",
   "author": "Widget Team",
