@@ -137,7 +137,7 @@ class Calendar extends Component<CalendarProps> {
                 toolbar: wrapToolbar({ customViews: this.getToolbarProps(), onClickToolbarButton: this.onRangeChange })
             },
             eventPropGetter: this.eventColor,
-            defaultDate: this.props.startPosition,
+            date: this.props.startPosition,
             defaultView: this.defaultView(),
             formats: this.props.viewOption === "custom" ? this.props.formats : "",
             messages: this.props.viewOption === "custom" ? this.props.messages : "",
