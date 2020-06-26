@@ -42,7 +42,8 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     }
 
     UNSAFE_componentWillMount(): void {
-        moment.updateLocale(window.mx.session.sessionData.locale.code, {
+        const [locale] = window.mx.session.sessionData.locale.code.split("_");
+        moment.updateLocale(locale, {
             week: { dow: window.mx.session.sessionData.locale.firstDayOfWeek, doy: 6 }
         });
     }
