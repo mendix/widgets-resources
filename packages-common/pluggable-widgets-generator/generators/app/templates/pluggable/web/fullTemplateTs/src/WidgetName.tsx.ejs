@@ -1,11 +1,10 @@
 import { Component, ReactNode, createElement } from "react";
-import { hot } from "react-hot-loader/root";
 
 import { <%- name %>ContainerProps } from "../typings/<%- name %>Props";
 import { BadgeSample } from "./components/BadgeSample";
 import "./ui/<%- name %>.css";
 
-class <%- name %> extends Component<<%- name %>ContainerProps> {
+export default class <%- name %> extends Component<<%- name %>ContainerProps> {
     private readonly onClickHandler = this.onClick.bind(this);
 
     render(): ReactNode {
@@ -29,5 +28,3 @@ class <%- name %> extends Component<<%- name %>ContainerProps> {
         }
     }
 }
-
-export default hot(<%- name %>);
