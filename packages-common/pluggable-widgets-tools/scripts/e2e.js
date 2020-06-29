@@ -46,12 +46,27 @@ async function main() {
 
     // Spin up the runtime and run testProject
     const freePort = await findFreePort(3000);
-    const runtimeContainerId = execSync(
-        `${dockerStartCommand} -d -u root -e MENDIX_VERSION=${latestRuntimeVersion} -p ${freePort}:8080 mendix/runtime-base:${latestRuntimeVersion}-bionic /bin/bash /shared/runtime.sh`,
-        { stdio: "inherit" }
+    const runtimeContainerId = await execAsync(
+        `${dockerStartCommand} -d -u root -e MENDIX_VERSION=${latestRuntimeVersion} -p ${freePort}:8080 mendix/runtime-base:${latestRuntimeVersion}-bionic /bin/bash /shared/runtime.sh`
     );
 
+    let attempts = 600;
+    for (; attempts > 0; --attempts) {
+        try {
+            const response = await fetch(`http://localhost:${freePort}`);
+            if (response.ok) {
+                break;
+            }
+        } catch (e) {
+            // we need this
+        }
+        await new Promise(resolve => setTimeout(resolve, 100));
+    }
+
     try {
+        if (attempts === 0) {
+            throw new Error("Max attempts reached");
+        }
         execSync(`wdio ${join(__dirname, "../test-config/wdio.conf.js")}`, {
             stdio: "inherit",
             env: { ...process.env, URL: `http://localhost:${freePort}` }
