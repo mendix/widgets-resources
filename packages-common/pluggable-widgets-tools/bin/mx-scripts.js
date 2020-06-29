@@ -60,6 +60,7 @@ function getRealCommand(cmd, toolsRoot) {
             return `${gulpCommand} release --silent`;
         case "release:native":
         case "release:js:native":
+        case "release:native":
         case "release:ts:native":
             return `${gulpCommand} release --native --silent`;
         case "lint":
