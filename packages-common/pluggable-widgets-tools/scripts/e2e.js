@@ -28,6 +28,7 @@ async function main() {
     const packageConf = JSON.parse(await readFile("package.json"));
     const sprintrProject = packageConf?.config?.testProjectId;
     const widgetVersion = packageConf?.version;
+    const branch = packageConf?.config.e2eBranch || "trunk";
 
     if (!sprintrProject) {
         throw new Error(
@@ -44,7 +45,7 @@ async function main() {
 
     // Clone the project
     execSync(
-        `${dockerStartCommand} jgsqware/svn-client checkout --no-auth-cache -q --username "${process.env.SPRINTR_USERNAME}" --password "${process.env.SPRINTR_PASSWORD}" https://teamserver.sprintr.com/${sprintrProject}/branches/nightly /source/mendixProject`,
+        `${dockerStartCommand} jgsqware/svn-client checkout --no-auth-cache -q --username "${process.env.SPRINTR_USERNAME}" --password "${process.env.SPRINTR_PASSWORD}" https://teamserver.sprintr.com/${sprintrProject}/branches/${branch}/source/mendixProject`,
         { stdio: "inherit" }
     );
 
