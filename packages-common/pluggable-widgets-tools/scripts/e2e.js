@@ -45,7 +45,7 @@ async function main() {
 
     // Clone the project
     execSync(
-        `${dockerStartCommand} jgsqware/svn-client checkout --no-auth-cache -q --username "${process.env.SPRINTR_USERNAME}" --password "${process.env.SPRINTR_PASSWORD}" https://teamserver.sprintr.com/${sprintrProject}/branches/${branch}/source/mendixProject`,
+        `${dockerStartCommand} jgsqware/svn-client checkout --no-auth-cache -q --username "${process.env.SPRINTR_USERNAME}" --password "${process.env.SPRINTR_PASSWORD}" https://teamserver.sprintr.com/${sprintrProject}/branches/${branch} /source/mendixProject`,
         { stdio: "inherit" }
     );
 
