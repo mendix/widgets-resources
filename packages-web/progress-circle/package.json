@@ -13,7 +13,7 @@
     "dev": "utils-react-widgets dev",
     "format": "prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://progresscircle.mxapps.io ../../scripts/test/projectup.sh",
-    "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://progresscircle.mxapps.io/ ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
     "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "lint:fix": "npm run lint -- --fix",
@@ -41,7 +41,8 @@
         "branch": "nightly",
         "path": "./tests/TestProjects/Nightly/"
       }
-    ]
+    ],
+    "e2eBranch": "nightly"
   },
   "license": "Apache-2.0",
   "devDependencies": {

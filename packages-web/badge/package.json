@@ -26,7 +26,8 @@
         "branch": "nightly",
         "path": "./tests/TestProjects/Nightly/"
       }
-    ]
+    ],
+    "e2eBranch": "nightly"
   },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
