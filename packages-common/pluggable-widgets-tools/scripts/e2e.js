@@ -31,21 +31,24 @@ async function main() {
     const dockerStartCommand = `docker run -t --rm -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source`;
 
     // Clone the project
-    await execAsync(
-        `${dockerStartCommand} jgsqware/svn-client checkout --no-auth-cache -q --username "${process.env.SPRINTR_USERNAME}" --password "${process.env.SPRINTR_PASSWORD}" https://teamserver.sprintr.com/${sprintrProject}/branches/nightly /source/mendixProject`
+    execSync(
+        `${dockerStartCommand} jgsqware/svn-client checkout --no-auth-cache -q --username "${process.env.SPRINTR_USERNAME}" --password "${process.env.SPRINTR_PASSWORD}" https://teamserver.sprintr.com/${sprintrProject}/branches/nightly /source/mendixProject`,
+        { stdio: "inherit" }
     );
     // Copy the built widget to test project
     cp("-rf", `dist/${widgetVersion}/*.mpk`, "mendixProject/widgets/");
 
     // Build testProject via mxbuild
-    await execAsync(
-        `${dockerStartCommand} -e MENDIX_VERSION=${latestRuntimeVersion} mono:latest /bin/bash /shared/mxbuild.sh`
+    execSync(
+        `${dockerStartCommand} -e MENDIX_VERSION=${latestRuntimeVersion} mono:latest /bin/bash /shared/mxbuild.sh`,
+        { stdio: "inherit" }
     );
 
     // Spin up the runtime and run testProject
     const freePort = await findFreePort(3000);
-    const runtimeContainerId = await execAsync(
-        `${dockerStartCommand} -d -u root -e MENDIX_VERSION=${latestRuntimeVersion} -p ${freePort}:8080 mendix/runtime-base:${latestRuntimeVersion}-bionic /bin/bash /shared/runtime.sh`
+    const runtimeContainerId = execSync(
+        `${dockerStartCommand} -d -u root -e MENDIX_VERSION=${latestRuntimeVersion} -p ${freePort}:8080 mendix/runtime-base:${latestRuntimeVersion}-bionic /bin/bash /shared/runtime.sh`,
+        { stdio: "inherit" }
     );
 
     try {
