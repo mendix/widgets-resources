@@ -14,18 +14,30 @@ main().catch(e => {
 
 async function main() {
     // verify that docker exists and complain otherwise
-    // verify sprint password and username
+    try {
+        await execAsync("docker info");
+    } catch (e) {
+        throw new Error("To run e2e test locally, make sure docker is running. Exiting now...");
+    }
 
     const latestRuntimeVersion = await getLatestRuntimeVersion();
     if (!latestRuntimeVersion) {
-        throw new Error("duck you");
+        throw new Error("Couldn't reach hub.docker.com. Make sure you are connected to internet.");
     }
 
     const packageConf = JSON.parse(await readFile("package.json"));
     const sprintrProject = packageConf?.config?.testProjectId;
     const widgetVersion = packageConf?.version;
+
     if (!sprintrProject) {
-        throw new Error("duck you");
+        throw new Error(
+            "Currently e2e tests only can run with sprintr project. Please make sure there is a testProjectId field in package.json for respective projects."
+        );
+    }
+    if (!process.env.SPRINTR_USERNAME || process.env.SPRINTR_PASSWORD) {
+        throw new Error(
+            "Currently e2e tests only can run with sprintr project. Please make sure there is a SPRINTR_USERNAME and SPRINTR_PASSWORD set in environment vars."
+        );
     }
 
     const dockerStartCommand = `docker run -t --rm -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source`;
@@ -35,6 +47,7 @@ async function main() {
         `${dockerStartCommand} jgsqware/svn-client checkout --no-auth-cache -q --username "${process.env.SPRINTR_USERNAME}" --password "${process.env.SPRINTR_PASSWORD}" https://teamserver.sprintr.com/${sprintrProject}/branches/nightly /source/mendixProject`,
         { stdio: "inherit" }
     );
+
     // Copy the built widget to test project
     cp("-rf", `dist/${widgetVersion}/*.mpk`, "mendixProject/widgets/");
 
@@ -65,7 +78,7 @@ async function main() {
 
     try {
         if (attempts === 0) {
-            throw new Error("Max attempts reached");
+            throw new Error("Maximum attempt to spin up runtime reached. Exiting now...");
         }
         execSync(`wdio ${join(__dirname, "../test-config/wdio.conf.js")}`, {
             stdio: "inherit",
