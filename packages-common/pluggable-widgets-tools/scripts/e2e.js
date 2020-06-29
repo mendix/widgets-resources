@@ -35,7 +35,7 @@ async function main() {
             "Currently e2e tests only can run with sprintr project. Please make sure there is a testProjectId field in package.json for respective projects."
         );
     }
-    if (!process.env.SPRINTR_USERNAME || process.env.SPRINTR_PASSWORD) {
+    if (!process.env.SPRINTR_USERNAME || !process.env.SPRINTR_PASSWORD) {
         throw new Error(
             "Currently e2e tests only can run with sprintr project. Please make sure there is a SPRINTR_USERNAME and SPRINTR_PASSWORD set in environment vars."
         );
