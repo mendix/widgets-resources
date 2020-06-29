@@ -77,7 +77,7 @@ function getRealCommand(cmd, toolsRoot) {
         case "test:e2e:ts":
         case "test:e2e:js":
             return `wdio ${join(toolsRoot, "test-config/wdio.conf.js")}`;
-        case "test:e2e:container":
+        case "test:e2e:web":
             return `node ${join(toolsRoot, "scripts/e2e.js")}`;
         default:
             console.error(`Unknown command passed to MX Widgets Tools script: '${cmd}'`);

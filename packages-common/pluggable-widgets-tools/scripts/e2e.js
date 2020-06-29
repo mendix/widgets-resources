@@ -1,10 +1,10 @@
-const { exec } = require("child_process");
+const { exec, execSync, spawnSync } = require("child_process");
 const findFreePort = require("find-free-port");
 const { readFile } = require("fs").promises;
 const fetch = require("node-fetch");
 const { join } = require("path");
 const semverCompare = require("semver/functions/rcompare");
-const { rm } = require("shelljs");
+const { cp } = require("shelljs");
 const { promisify } = require("util");
 
 main().catch(e => {
@@ -21,26 +21,38 @@ async function main() {
         throw new Error("duck you");
     }
 
-    rm("-rf", "mendixProject");
-    const sprintrProject = JSON.parse(await readFile("package.json"))?.config?.testProjectId;
+    const packageConf = JSON.parse(await readFile("package.json"));
+    const sprintrProject = packageConf?.config?.testProjectId;
+    const widgetVersion = packageConf?.version;
     if (!sprintrProject) {
         throw new Error("duck you");
     }
 
     const dockerStartCommand = `docker run -t --rm -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source`;
 
+    // Clone the project
     await execAsync(
         `${dockerStartCommand} jgsqware/svn-client checkout --no-auth-cache -q --username "${process.env.SPRINTR_USERNAME}" --password "${process.env.SPRINTR_PASSWORD}" https://teamserver.sprintr.com/${sprintrProject}/branches/nightly /source/mendixProject`
     );
+    // Copy the built widget to test project
+    cp("-rf", `dist/${widgetVersion}/*.mpk`, "mendixProject/widgets/");
+
+    // Build testProject via mxbuild
     await execAsync(
         `${dockerStartCommand} -e MENDIX_VERSION=${latestRuntimeVersion} mono:latest /bin/bash /shared/mxbuild.sh`
     );
+
+    // Spin up the runtime and run testProject
     const freePort = await findFreePort(3000);
     const runtimeContainerId = await execAsync(
         `${dockerStartCommand} -d -u root -e MENDIX_VERSION=${latestRuntimeVersion} -p ${freePort}:8080 mendix/runtime-base:${latestRuntimeVersion}-bionic /bin/bash /shared/runtime.sh`
     );
+
     try {
-        exec(`wdio ${join(__dirname, "../test-configs/wdio.config.js")}`);
+        execSync(`wdio ${join(__dirname, "../test-config/wdio.conf.js")}`, {
+            stdio: "inherit",
+            env: { ...process.env, URL: `http://localhost:${freePort}` }
+        });
     } finally {
         await execAsync(`docker kill ${runtimeContainerId.trim()}`);
     }
@@ -56,5 +68,5 @@ async function getLatestRuntimeVersion() {
 }
 
 async function execAsync(command) {
-    return promisify(exec)(command, { cwd: process.cwd() });
+    return (await promisify(exec)(command, { cwd: process.cwd() })).stdout;
 }
