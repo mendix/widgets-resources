@@ -113,10 +113,10 @@ function unzip(src: string, dest: string, ignore: string): Promise<void> {
                 src,
                 dest,
                 tar: {
-                    ignore: name => name.startsWith(ignore)
+                    ignore: (name: string) => name.startsWith(ignore)
                 }
             },
-            error => {
+            (error: Error) => {
                 if (error) {
                     return reject(error);
                 }
