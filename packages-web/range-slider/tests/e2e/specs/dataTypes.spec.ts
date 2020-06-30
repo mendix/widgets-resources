@@ -2,7 +2,7 @@ import page from "../../../../../configs/e2e/src/pages/page";
 import RangeSlider from "../objects/rangeSlider.widget";
 
 describe("Range Slider", () => {
-    const rangeSlider = new RangeSlider("rangeSliderContext");
+    const rangeSlider = new RangeSlider("rangeSlider1");
 
     beforeAll(() => {
         page.open();
