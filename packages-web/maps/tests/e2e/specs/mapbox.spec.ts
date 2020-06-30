@@ -13,7 +13,7 @@ describe("Mapbox Maps", () => {
             expect(mapPage.leafletMap).toBeDefined();
         });
 
-        it("check the number of locations", () => {
+        xit("check the number of locations", () => {
             mapPage.leafletMap.waitForDisplayed();
 
             const markers = mapPage.leafletMarkers;
