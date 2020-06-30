@@ -13,7 +13,6 @@
     "dev": "utils-react-widgets dev",
     "test": "npm run test:unit",
     "test:unit": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
-    "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://carouselwidget.mxapps.io ../../scripts/test/projectup.sh",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
     "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
@@ -28,8 +27,13 @@
     "testProjectId": "741ba687-b2e1-4f6e-85aa-25687e217331",
     "testProjects": [
       {
-        "revision": 238,
+        "revision": 271,
         "branch": "trunk",
+        "path": "./tests/TestProjects/Mendix/"
+      },
+      {
+        "revision": 270,
+        "branch": "MX_7.23",
         "path": "./tests/TestProjects/Mendix7/"
       },
       {
