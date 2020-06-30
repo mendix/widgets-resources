@@ -12,7 +12,6 @@
     "start": "utils-react-widgets start",
     "dev": "utils-react-widgets dev",
     "format": "prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-    "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://progresscircle.mxapps.io ../../scripts/test/projectup.sh",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
     "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
@@ -27,8 +26,13 @@
     "testProjectId": "33371c03-3e6f-4d65-9f95-22bfe6a0c724",
     "testProjects": [
       {
-        "revision": 458,
+        "revision": 484,
         "branch": "trunk",
+        "path": "./tests/TestProjects/Mendix/"
+      },
+      {
+        "revision": 480,
+        "branch": "MX_7.23",
         "path": "./tests/TestProjects/Mendix7/"
       },
       {
@@ -41,8 +45,7 @@
         "branch": "nightly",
         "path": "./tests/TestProjects/Nightly/"
       }
-    ],
-    "e2eBranch": "nightly"
+    ]
   },
   "license": "Apache-2.0",
   "devDependencies": {

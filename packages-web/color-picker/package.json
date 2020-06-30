@@ -13,7 +13,6 @@
     "dev": "utils-react-widgets dev",
     "test": "npm run test:unit",
     "test:unit": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
-    "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://colorpicker.mxapps.io ../../scripts/test/projectup.sh",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
     "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
@@ -28,17 +27,21 @@
     "testProjectId": "1f883f9b-3d2b-4a6e-9d0e-4883978c8d83",
     "testProjects": [
       {
-        "revision": 238,
+        "revision": 253,
         "branch": "trunk",
+        "path": "./tests/TestProjects/Mendix/"
+      },
+      {
+        "revision": 247,
+        "branch": "MX_7.23",
         "path": "./tests/TestProjects/Mendix7/"
       },
       {
-        "revision": 243,
-        "branch": "MX_8",
+        "revision": 248,
+        "branch": "MX_8.10",
         "path": "./tests/TestProjects/Mendix8/"
       }
-    ],
-    "e2eBranch": "MX_8"
+    ]
   },
   "license": "Apache-2.0",
   "devDependencies": {
