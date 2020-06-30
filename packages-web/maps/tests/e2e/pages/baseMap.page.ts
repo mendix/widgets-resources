@@ -14,10 +14,12 @@ export class BaseMapPage extends Page {
     }
 
     get leafletMarkers(): WebdriverIO.Element[] {
+        browser.pause(1000);
         return this.getElements(".leaflet-marker-icon");
     }
 
     get leafletFirstMarker(): WebdriverIO.Element {
+        browser.pause(1000);
         return this.getElement(".leaflet-marker-icon");
     }
 
