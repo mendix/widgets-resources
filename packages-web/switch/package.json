@@ -29,7 +29,12 @@
     "testProjectId": "2688fc41-0877-43cf-b442-f9da53412483",
     "testProjects": [
       {
-        "revision": 150,
+        "revision": 156,
+        "branch": "trunk",
+        "path": "./tests/TestProjects/Mendix/"
+      },
+      {
+        "revision": 152,
         "branch": "trunk",
         "path": "./tests/TestProjects/Mendix7/"
       },
@@ -38,8 +43,7 @@
         "branch": "MX_8",
         "path": "./tests/TestProjects/Mendix8/"
       }
-    ],
-    "e2eBranch": "MX_8"
+    ]
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
