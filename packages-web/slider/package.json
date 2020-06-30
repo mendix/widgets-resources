@@ -28,8 +28,13 @@
     "testProjectId": "445a9d66-a2d6-4813-a1dd-62e47410ff57",
     "testProjects": [
       {
-        "revision": 71,
+        "revision": 97,
         "branch": "trunk",
+        "path": "./tests/TestProjects/Mendix/"
+      },
+      {
+        "revision": 92,
+        "branch": "MX7.23",
         "path": "./tests/TestProjects/Mendix7/"
       },
       {
@@ -37,8 +42,7 @@
         "branch": "MX_8",
         "path": "./tests/TestProjects/Mendix8/"
       }
-    ],
-    "e2eBranch": "MX_8"
+    ]
   },
   "license": "Apache-2.0",
   "devDependencies": {
