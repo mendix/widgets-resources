@@ -10,7 +10,7 @@ export default function ShrinkingHeader(props: ShrinkingHeaderContainerProps): R
         style,
         class: className,
         headerContent,
-        mainContent,
+        scrollableContent,
         shrinkThreshold,
         shrinkClass: shrinkClassName
     } = props;
@@ -22,7 +22,7 @@ export default function ShrinkingHeader(props: ShrinkingHeaderContainerProps): R
             style={style}
             className={className}
             headerContent={headerContent}
-            mainContent={mainContent}
+            scrollableContent={scrollableContent}
             shrinkThreshold={shrinkThreshold}
             shrinkClassName={shrinkClassName}
         />

@@ -16,19 +16,28 @@ export interface ShrinkingHeaderProps {
     style?: CSSProperties;
     tabIndex?: number;
     headerContent: ReactNode;
-    mainContent: ReactNode;
+    scrollableContent: ReactNode;
     shrinkClassName: string;
     shrinkThreshold: number;
 }
 
 export function ShrinkingHeader(props: PropsWithChildren<ShrinkingHeaderProps>): ReactElement {
-    const { name, className, style, tabIndex, headerContent, mainContent, shrinkClassName, shrinkThreshold } = props;
+    const {
+        name,
+        className,
+        style,
+        tabIndex,
+        headerContent,
+        scrollableContent,
+        shrinkClassName,
+        shrinkThreshold
+    } = props;
 
     const [resClassName, setResClassName] = useState(className);
-    const mainRef = useRef<HTMLElement>(null);
+    const scrollableDivRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        function getClassNames(this: HTMLElement) {
+        function applyClassNames(this: HTMLElement) {
             if (this.scrollTop >= shrinkThreshold) {
                 setResClassName(classNames(className, shrinkClassName));
             } else {
@@ -36,19 +45,19 @@ export function ShrinkingHeader(props: PropsWithChildren<ShrinkingHeaderProps>):
             }
         }
 
-        if (mainRef.current) {
-            mainRef.current.addEventListener("scroll", getClassNames);
+        if (scrollableDivRef.current) {
+            scrollableDivRef.current.addEventListener("scroll", applyClassNames);
 
             return () => {
-                mainRef.current?.removeEventListener("scroll", getClassNames);
+                scrollableDivRef.current?.removeEventListener("scroll", applyClassNames);
             };
         }
-    }, [className, mainRef.current, shrinkClassName, shrinkThreshold]);
+    }, [className, scrollableDivRef.current, shrinkClassName, shrinkThreshold]);
 
     return (
         <div id={name} className={resClassName} style={style} tabIndex={tabIndex}>
             <header>{headerContent}</header>
-            <main ref={mainRef}>{mainContent}</main>
+            <div ref={scrollableDivRef}>{scrollableContent}</div>
         </div>
     );
 }

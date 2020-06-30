@@ -12,8 +12,8 @@
                     <caption>Header content</caption>
                     <description />
                 </property>
-                <property key="mainContent" type="widgets">
-                    <caption>Main content</caption>
+                <property key="scrollableContent" type="widgets">
+                    <caption>Scrollable content</caption>
                     <description />
                 </property>
                 <property key="shrinkThreshold" type="integer" defaultValue="100" required="true">

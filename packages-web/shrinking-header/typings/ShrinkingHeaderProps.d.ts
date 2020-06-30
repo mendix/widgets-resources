@@ -11,7 +11,7 @@ export interface ShrinkingHeaderContainerProps {
     style?: CSSProperties;
     tabIndex: number;
     headerContent: ReactNode;
-    mainContent: ReactNode;
+    scrollableContent: ReactNode;
     shrinkThreshold: number;
     shrinkClass: string;
 }
@@ -20,7 +20,7 @@ export interface ShrinkingHeaderPreviewProps {
     class: string;
     style: string;
     headerContent: { widgetCount: number; renderer: ComponentType };
-    mainContent: { widgetCount: number; renderer: ComponentType };
+    scrollableContent: { widgetCount: number; renderer: ComponentType };
     shrinkThreshold: number | null;
     shrinkClass: string;
 }
