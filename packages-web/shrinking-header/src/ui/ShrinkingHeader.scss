@@ -8,3 +8,17 @@
         overflow: scroll;
     }
 }
+
+.widget-wrapper-min-max {
+    max-height: 100vh;
+    overflow: scroll;
+
+    & > header {
+        position: fixed;
+        width: 100%;
+    }
+
+    & > div {
+        margin-top: 100px;
+    }
+}

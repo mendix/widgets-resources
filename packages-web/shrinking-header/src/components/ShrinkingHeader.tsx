@@ -21,6 +21,9 @@ export interface ShrinkingHeaderProps {
     scrollableContent: ReactNode;
     shrinkClassName: string;
     shrinkThreshold: number;
+    shrinkAtThreshold: boolean;
+    minHeight: number;
+    maxHeight: number;
 }
 
 export function ShrinkingHeader(props: PropsWithChildren<ShrinkingHeaderProps>): ReactElement {
@@ -32,22 +35,44 @@ export function ShrinkingHeader(props: PropsWithChildren<ShrinkingHeaderProps>):
         headerContent,
         scrollableContent,
         shrinkClassName,
-        shrinkThreshold
+        shrinkThreshold,
+        shrinkAtThreshold,
+        minHeight,
+        maxHeight
     } = props;
 
-    const [resClassName, setResClassName] = useState(classNames("widget-wrapper", className));
+    const [resClassName, setResClassName] = useState(
+        classNames(`widget-wrapper${!shrinkAtThreshold ? "-min-max" : ""}`, className)
+    );
+    const wrapperRef = useRef<HTMLDivElement>(null);
     const scrollableDivRef = useRef<HTMLDivElement>(null);
+    const headerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         function applyClassNames(this: HTMLElement) {
-            if (this.scrollTop >= shrinkThreshold) {
-                setResClassName(classNames("widget-wrapper", className, shrinkClassName));
+            if (shrinkAtThreshold) {
+                if (this.scrollTop >= shrinkThreshold) {
+                    setResClassName(
+                        classNames(`widget-wrapper${!shrinkAtThreshold ? "-min-max" : ""}`, className, shrinkClassName)
+                    );
+                } else {
+                    setResClassName(classNames(`widget-wrapper${!shrinkAtThreshold ? "-min-max" : ""}`, className));
+                }
             } else {
-                setResClassName(classNames("widget-wrapper", className));
+                if (headerRef.current) {
+                    headerRef.current.style.height = `${maxHeight -
+                        (this.scrollTop > maxHeight - minHeight ? maxHeight - minHeight : this.scrollTop)}px`;
+                }
             }
         }
 
-        if (scrollableDivRef.current) {
+        if (!shrinkAtThreshold && wrapperRef.current) {
+            wrapperRef.current.addEventListener("scroll", applyClassNames);
+
+            return () => {
+                wrapperRef.current?.removeEventListener("scroll", applyClassNames);
+            };
+        } else if (shrinkAtThreshold && scrollableDivRef.current) {
             scrollableDivRef.current.addEventListener("scroll", applyClassNames);
 
             return () => {
@@ -57,8 +82,8 @@ export function ShrinkingHeader(props: PropsWithChildren<ShrinkingHeaderProps>):
     }, [className, scrollableDivRef.current, shrinkClassName, shrinkThreshold]);
 
     return (
-        <div id={name} className={resClassName} style={style} tabIndex={tabIndex}>
-            <header>{headerContent}</header>
+        <div ref={wrapperRef} id={name} className={resClassName} style={style} tabIndex={tabIndex}>
+            <header ref={headerRef}>{headerContent}</header>
             <div ref={scrollableDivRef}>{scrollableContent}</div>
         </div>
     );

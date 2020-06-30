@@ -24,6 +24,18 @@
                     <caption>Shrink class</caption>
                     <description></description>
                 </property>
+                <property key="shrinkAtThreshold" type="boolean" defaultValue="true">
+                    <caption>Shrink on threshold</caption>
+                    <description></description>
+                </property>
+                <property key="minHeight" type="integer" defaultValue="50" required="true">
+                    <caption>Minimum height (px)</caption>
+                    <description></description>
+                </property>
+                <property key="maxHeight" type="integer" defaultValue="50" required="true">
+                    <caption>Maximum height (px)</caption>
+                    <description></description>
+                </property>
             </propertyGroup>
 
             <propertyGroup caption="Visibility">

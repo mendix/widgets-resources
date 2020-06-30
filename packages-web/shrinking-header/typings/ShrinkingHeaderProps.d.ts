@@ -14,6 +14,9 @@ export interface ShrinkingHeaderContainerProps {
     scrollableContent: ReactNode;
     shrinkThreshold: number;
     shrinkClass: string;
+    shrinkAtThreshold: boolean;
+    minHeight: number;
+    maxHeight: number;
 }
 
 export interface ShrinkingHeaderPreviewProps {
@@ -23,4 +26,7 @@ export interface ShrinkingHeaderPreviewProps {
     scrollableContent: { widgetCount: number; renderer: ComponentType };
     shrinkThreshold: number | null;
     shrinkClass: string;
+    shrinkAtThreshold: boolean;
+    minHeight: number | null;
+    maxHeight: number | null;
 }
