@@ -18,7 +18,7 @@ describe("Google Maps", () => {
 
             const markers = mapPage.googleMarkers;
 
-            expect(markers.length).toBe(3);
+            browser.waitUntil(() => markers.length === 3, 5000);
         });
     });
 
@@ -38,7 +38,7 @@ describe("Google Maps", () => {
 
             const markers = mapPage.googleMarkers;
 
-            expect(markers.length).toBe(1);
+            browser.waitUntil(() => markers.length === 1, 5000);
         });
     });
 
@@ -58,7 +58,7 @@ describe("Google Maps", () => {
 
             const markers = mapPage.googleMarkers;
 
-            expect(markers.length).toBe(2);
+            browser.waitUntil(() => markers.length === 2, 5000);
         });
     });
 });
