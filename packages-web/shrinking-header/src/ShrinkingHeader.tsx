@@ -5,14 +5,14 @@ import { ShrinkingHeaderContainerProps } from "../typings/ShrinkingHeaderProps";
 
 export default function ShrinkingHeader(props: ShrinkingHeaderContainerProps): ReactElement {
     const {
-        content,
         name,
         tabIndex,
         style,
         class: className,
+        headerContent,
+        mainContent,
         shrinkThreshold,
-        shrinkClass: shrinkClassName,
-        scrollElementXPath
+        shrinkClass: shrinkClassName
     } = props;
 
     return (
@@ -21,11 +21,10 @@ export default function ShrinkingHeader(props: ShrinkingHeaderContainerProps): R
             tabIndex={tabIndex}
             style={style}
             className={className}
+            headerContent={headerContent}
+            mainContent={mainContent}
             shrinkThreshold={shrinkThreshold}
             shrinkClassName={shrinkClassName}
-            scrollElementXPath={scrollElementXPath}
-        >
-            {content}
-        </ShrinkingHeaderComponent>
+        />
     );
 }

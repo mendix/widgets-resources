@@ -1,4 +1,13 @@
-import { createElement, CSSProperties, PropsWithChildren, ReactElement, useState, useEffect, useMemo } from "react";
+import {
+    createElement,
+    CSSProperties,
+    PropsWithChildren,
+    ReactElement,
+    useState,
+    useEffect,
+    ReactNode,
+    useRef
+} from "react";
 import classNames from "classnames";
 
 export interface ShrinkingHeaderProps {
@@ -6,47 +15,40 @@ export interface ShrinkingHeaderProps {
     className: string;
     style?: CSSProperties;
     tabIndex?: number;
-    scrollElementXPath: string;
+    headerContent: ReactNode;
+    mainContent: ReactNode;
     shrinkClassName: string;
     shrinkThreshold: number;
 }
 
 export function ShrinkingHeader(props: PropsWithChildren<ShrinkingHeaderProps>): ReactElement {
-    const { name, className, style, tabIndex, scrollElementXPath, shrinkClassName, shrinkThreshold, children } = props;
+    const { name, className, style, tabIndex, headerContent, mainContent, shrinkClassName, shrinkThreshold } = props;
 
     const [resClassName, setResClassName] = useState(className);
-    const scrollElement = useMemo(
-        () =>
-            document.evaluate(scrollElementXPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
-                .singleNodeValue as HTMLElement,
-        [scrollElementXPath]
-    );
+    const mainRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
-        if (scrollElement) {
-            const getClassNames = () => {
-                if (scrollElement.scrollTop >= shrinkThreshold) {
-                    setResClassName(classNames(className, shrinkClassName));
-                } else {
-                    setResClassName(className);
-                }
-            };
+        function getClassNames(this: HTMLElement) {
+            if (this.scrollTop >= shrinkThreshold) {
+                setResClassName(classNames(className, shrinkClassName));
+            } else {
+                setResClassName(className);
+            }
+        }
 
-            scrollElement.addEventListener("scroll", getClassNames);
+        if (mainRef.current) {
+            mainRef.current.addEventListener("scroll", getClassNames);
 
             return () => {
-                scrollElement.removeEventListener("scroll", getClassNames);
+                mainRef.current?.removeEventListener("scroll", getClassNames);
             };
         }
-    }, [className, scrollElement, shrinkClassName, shrinkThreshold]);
-
-    if (!scrollElement) {
-        return <span>The scrollable element could not be found!</span>;
-    }
+    }, [className, mainRef.current, shrinkClassName, shrinkThreshold]);
 
     return (
-        <header id={name} className={resClassName} style={style} tabIndex={tabIndex}>
-            {children}
-        </header>
+        <div id={name} className={resClassName} style={style} tabIndex={tabIndex}>
+            <header>{headerContent}</header>
+            <main ref={mainRef}>{mainContent}</main>
+        </div>
     );
 }
