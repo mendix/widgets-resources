@@ -1,7 +1,7 @@
 import page from "../pages/page";
 import mapPage from "../pages/baseMap.page";
 
-describe("OpenStree Maps", () => {
+describe("OpenStreet Maps", () => {
     describe("mixed rendering", () => {
         beforeAll(() => {
             page.open("p/osm");
@@ -18,7 +18,7 @@ describe("OpenStree Maps", () => {
 
             const markers = mapPage.leafletMarkers;
 
-            expect(markers.length).toBe(3);
+            browser.waitUntil(() => markers.length === 3, 5000);
         });
     });
 
@@ -38,7 +38,7 @@ describe("OpenStree Maps", () => {
 
             const markers = mapPage.leafletMarkers;
 
-            expect(markers.length).toBe(1);
+            browser.waitUntil(() => markers.length === 1, 5000);
         });
     });
 
@@ -58,7 +58,7 @@ describe("OpenStree Maps", () => {
 
             const markers = mapPage.leafletMarkers;
 
-            expect(markers.length).toBe(2);
+            browser.waitUntil(() => markers.length === 2, 5000);
         });
     });
 
