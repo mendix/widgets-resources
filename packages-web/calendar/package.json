@@ -14,7 +14,6 @@
     "format": "prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "test": "npm run test:unit",
     "test:unit": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
-    "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://reactcalendar.mxapps.io ../../scripts/test/projectup.sh",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
     "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
@@ -29,8 +28,13 @@
     "testProjectId": "efe7ce5d-5c1f-4f4a-9fe9-beebe2a16bb0",
     "testProjects": [
       {
-        "revision": 493,
+        "revision": 502,
         "branch": "trunk",
+        "path": "./tests/TestProjects/Mendix/"
+      },
+      {
+        "revision": 500,
+        "branch": "MX_7.23",
         "path": "./tests/TestProjects/Mendix7/"
       },
       {
@@ -43,8 +47,7 @@
         "branch": "nightly",
         "path": "./tests/TestProjects/Nightly/"
       }
-    ],
-    "e2eBranch": "nightly"
+    ]
   },
   "license": "Apache-2.0",
   "devDependencies": {
