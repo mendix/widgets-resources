@@ -10,6 +10,8 @@ import {
 } from "react";
 import classNames from "classnames";
 
+import "../ui/ShrinkingHeader.scss";
+
 export interface ShrinkingHeaderProps {
     name?: string;
     className: string;
@@ -33,15 +35,15 @@ export function ShrinkingHeader(props: PropsWithChildren<ShrinkingHeaderProps>):
         shrinkThreshold
     } = props;
 
-    const [resClassName, setResClassName] = useState(className);
+    const [resClassName, setResClassName] = useState(classNames("widget-wrapper", className));
     const scrollableDivRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         function applyClassNames(this: HTMLElement) {
             if (this.scrollTop >= shrinkThreshold) {
-                setResClassName(classNames(className, shrinkClassName));
+                setResClassName(classNames("widget-wrapper", className, shrinkClassName));
             } else {
-                setResClassName(className);
+                setResClassName(classNames("widget-wrapper", className));
             }
         }
 
