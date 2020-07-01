@@ -10,11 +10,9 @@ const webConfig = {
             }
         }
     },
-    moduleDirectories: ["<rootDir>/node_modules", "<rootDir>/src"],
-    moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
     setupFilesAfterEnv: [__dirname + "/test-index.js"],
     snapshotSerializers: ["enzyme-to-json/serializer"],
-    testMatch: ["<rootDir>/src/**/?(*.)(spec|test).[jt]s?(x)"],
+    testMatch: ["<rootDir>/src/**/*.spec.{js,jsx,ts,tsx}"],
     testPathIgnorePatterns: ["<rootDir>/dist", "<rootDir>/node_modules"],
     reporters: ["default"],
     transform: {
