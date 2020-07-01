@@ -11,7 +11,7 @@
         <propertyGroup caption="General">
             <property key="targetSelector" type="string">
                 <caption>Target selector</caption>
-                <description>Selector to find the HTML element you want to target which must be a valid CSS selector like '.mx-name-texbox1 input'</description>
+                <description>Selector to find the first HTML element you want to target which must be a valid CSS selector like '.mx-name-texbox1 input'</description>
             </property>
             <property key="content" type="widgets">
                 <caption>Content</caption>
