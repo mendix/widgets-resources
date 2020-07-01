@@ -2,74 +2,37 @@ const { join } = require("path");
 const { access, readdir } = require("fs").promises;
 
 function getWidgetDetails(answers) {
-    const widget = Object.create(answers);
-
-    Object.defineProperties(widget, {
-        name: {
-            get() {
-                return answers.name.replace(/(^|\s)\S/g, l => l.toUpperCase()); // Capitalize first letter if it's not
-            }
+    return {
+        ...answers,
+        name: answers.name.replace(/(^|\s)\S/g, l => l.toUpperCase()), // Capitalize first letter if it's not
+        packageName: answers.name.toLowerCase(),
+        packagePath: answers.organization.trim().toLowerCase(),
+        projectPath: answers.projectPath.replace(/\\/g, "\\\\"),
+        get isPlatformWeb() {
+            return this.platform === "web";
         },
-        packageName: {
-            get() {
-                return answers.name.toLowerCase();
-            }
+        get isPlatformNative() {
+            return this.platform === "native";
         },
-        packagePath: {
-            get() {
-                return answers.organization.trim().toLowerCase();
-            }
+        get usesEmptyTemplate() {
+            return this.boilerplate === "empty";
         },
-        projectPath: {
-            get() {
-                return answers.projectPath.replace(/\\/g, "\\\\");
-            }
+        get usesFullTemplate() {
+            return this.boilerplate === "full";
         },
-        isPlatformWeb: {
-            get() {
-                return answers.platform === "web";
-            }
+        get isLanguageJS() {
+            return this.programmingLanguage === "javascript";
         },
-        isPlatformNative: {
-            get() {
-                return answers.platform === "native";
-            }
+        get isLanguageTS() {
+            return this.programmingLanguage === "typescript";
         },
-        usesEmptyTemplate: {
-            get() {
-                return answers.boilerplate === "empty";
-            }
+        get fileExtension() {
+            return this.isLanguageJS ? "js" : "ts";
         },
-        usesFullTemplate: {
-            get() {
-                return answers.boilerplate === "full";
-            }
-        },
-        isLanguageJS: {
-            get() {
-                return answers.programmingLanguage === "javascript";
-            }
-        },
-        isLanguageTS: {
-            get() {
-                return answers.programmingLanguage === "typescript";
-            }
-        },
-        fileExtension: {
-            get() {
-                return this.isLanguageJS ? "js" : "ts";
-            }
-        },
-        templateSourcePath: {
-            get() {
-                return `pluggable/${answers.platform}/${answers.boilerplate}Template${
-                    this.isLanguageJS ? "Js" : "Ts"
-                }/`;
-            }
+        get templateSourcePath() {
+            return `pluggable/${this.platform}/${this.boilerplate}Template${this.isLanguageJS ? "Js" : "Ts"}/`;
         }
-    });
-
-    return widget;
+    };
 }
 
 async function dirExists(dirname) {
