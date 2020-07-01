@@ -14,8 +14,16 @@ To customize any core styling, copy the part you want to customize to styles/nat
     Default Class For Mendix CheckBox Widget
 ========================================================================== */
 export const CheckBox = {
-    container: Object.assign(Object.assign({}, TextBox.container), { paddingVertical: spacing.smallest, justifyContent: "center" }),
-    label: Object.assign({}, TextBox.label),
+    container: {
+        // All ViewStyle properties are allowed
+        ...TextBox.container,
+        paddingVertical: spacing.smallest,
+        justifyContent: "center",
+    },
+    label: {
+        // numberOfLines and all TextStyle properties are allowed
+        ...TextBox.label,
+    },
     input: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
         backgroundColor: "transparent",
@@ -29,14 +37,39 @@ export const CheckBox = {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
         opacity: Platform.select({ android: 0.5 }),
     },
-    inputError: Object.assign(Object.assign({}, TextBox.inputError), { thumbColorOn: background.primary, trackColorOn: brand.danger, thumbColorOff: contrast.regular, trackColorOff: brand.danger }),
-    validationMessage: Object.assign(Object.assign({}, TextBox.validationMessage), { alignSelf: "stretch" }),
+    inputError: {
+        // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
+        ...TextBox.inputError,
+        thumbColorOn: background.primary,
+        trackColorOn: brand.danger,
+        thumbColorOff: contrast.regular,
+        trackColorOff: brand.danger,
+    },
+    validationMessage: {
+        // All TextStyle properties are allowed
+        ...TextBox.validationMessage,
+        alignSelf: "stretch",
+    },
 };
 export const CheckBoxVertical = {
     container: TextBoxVertical.container,
-    label: Object.assign({}, TextBoxVertical.label),
-    input: Object.assign(Object.assign({}, CheckBox.input), { alignSelf: "flex-start" }),
+    label: {
+        ...TextBoxVertical.label,
+    },
+    input: {
+        ...CheckBox.input,
+        alignSelf: "flex-start",
+    },
     inputDisabled: CheckBox.inputDisabled,
-    inputError: Object.assign(Object.assign({}, TextBoxVertical.inputError), { thumbColorOn: background.primary, trackColorOn: brand.danger, thumbColorOff: contrast.regular, trackColorOff: brand.danger }),
-    validationMessage: Object.assign(Object.assign({}, TextBoxVertical.validationMessage), { alignSelf: "stretch" }),
+    inputError: {
+        ...TextBoxVertical.inputError,
+        thumbColorOn: background.primary,
+        trackColorOn: brand.danger,
+        thumbColorOff: contrast.regular,
+        trackColorOff: brand.danger,
+    },
+    validationMessage: {
+        ...TextBoxVertical.validationMessage,
+        alignSelf: "stretch",
+    },
 };

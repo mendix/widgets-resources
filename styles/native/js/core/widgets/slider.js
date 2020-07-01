@@ -34,51 +34,59 @@ export const com_mendix_widget_native_slider_Slider = {
         // All ViewStyle properties are allowed
         backgroundColor: Platform.select({ ios: brand.primary, android: contrast.low }),
     },
-    marker: Object.assign({ 
+    marker: {
         // All ViewStyle properties are allowed
-        backgroundColor: background.secondary }, Platform.select({
-        ios: {
-            width: 30,
-            height: 30,
-            shadowColor: "#000",
-            shadowOpacity: 0.2,
-            borderColor: contrast.lowest,
-            shadowOffset: { width: 0, height: 1 },
-        },
-        android: {
-            width: 20,
-            height: 20,
-            borderRadius: 10,
-            elevation: 3,
-            borderColor: border.color,
-        },
-    })),
-    markerActive: Object.assign({}, Platform.select({
-        android: {
-            borderWidth: 0,
-            width: 34,
-            height: 34,
-            borderRadius: 17,
-        },
-    })),
-    markerDisabled: Object.assign({}, Platform.select({
-        ios: {
-            borderColor: contrast.lowest,
-            backgroundColor: background.secondary,
-            shadowColor: "#000",
-            shadowOpacity: 0.2,
-            shadowOffset: { width: 0, height: 1 },
-        },
-        android: {
-            marginTop: 1,
-            borderColor: background.primary,
-            backgroundColor: contrast.low,
-            borderWidth: 3,
-            width: 14,
-            height: 14,
-            borderRadius: 7,
-        },
-    })),
+        backgroundColor: background.secondary,
+        ...Platform.select({
+            ios: {
+                width: 30,
+                height: 30,
+                shadowColor: "#000",
+                shadowOpacity: 0.2,
+                borderColor: contrast.lowest,
+                shadowOffset: { width: 0, height: 1 },
+            },
+            android: {
+                width: 20,
+                height: 20,
+                borderRadius: 10,
+                elevation: 3,
+                borderColor: border.color,
+            },
+        }),
+    },
+    markerActive: {
+        // All ViewStyle properties are allowed
+        ...Platform.select({
+            android: {
+                borderWidth: 0,
+                width: 34,
+                height: 34,
+                borderRadius: 17,
+            },
+        }),
+    },
+    markerDisabled: {
+        // All ViewStyle properties are allowed
+        ...Platform.select({
+            ios: {
+                borderColor: contrast.lowest,
+                backgroundColor: background.secondary,
+                shadowColor: "#000",
+                shadowOpacity: 0.2,
+                shadowOffset: { width: 0, height: 1 },
+            },
+            android: {
+                marginTop: 1,
+                borderColor: background.primary,
+                backgroundColor: contrast.low,
+                borderWidth: 3,
+                width: 14,
+                height: 14,
+                borderRadius: 7,
+            },
+        }),
+    },
     validationMessage: {
         // All TextStyle properties are allowed
         color: input.errorColor,

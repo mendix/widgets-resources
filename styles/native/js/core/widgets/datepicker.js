@@ -22,8 +22,14 @@ const pickerBackgroundColor = !darkMode && isOSDarkMode ?
     darkMode && !isOSDarkMode ? "rgba(255, 255, 255, 1)" : input.backgroundColor;
 //
 export const DatePicker = {
-    container: Object.assign({}, TextBox.container),
-    label: Object.assign({}, TextBox.label),
+    container: {
+        // All ViewStyle properties are allowed
+        ...TextBox.container,
+    },
+    label: {
+        // numberOfLines and all TextStyle properties are allowed
+        ...TextBox.label,
+    },
     pickerIOS: {
         // All ViewStyle properties are allowed
         backgroundColor: pickerBackgroundColor,
@@ -58,7 +64,10 @@ export const DatePicker = {
     placeholderDisabled: {
     // All TextStyle properties are allowed
     },
-    validationMessage: Object.assign({}, TextBox.validationMessage),
+    validationMessage: {
+        // All TextStyle properties are allowed
+        ...TextBox.validationMessage,
+    },
 };
 export const DatePickerVertical = {
     container: TextBoxVertical.container,

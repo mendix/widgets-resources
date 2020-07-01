@@ -124,7 +124,10 @@ export const alignChildrenBaseline = {
     },
 };
 export const childrenCenter = {
-    container: Object.assign(Object.assign({}, justifyContentCenter.container), alignChildrenCenter.container),
+    container: {
+        ...justifyContentCenter.container,
+        ...alignChildrenCenter.container,
+    },
 };
 export const alignContentStart = {
     container: {

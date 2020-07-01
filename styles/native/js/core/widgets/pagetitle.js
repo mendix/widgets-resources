@@ -16,5 +16,9 @@ export const PageTitle = {
     container: {
     // All ViewStyle properties are allowed
     },
-    text: Object.assign(Object.assign({}, TextHeading1.text), { color: font.color }),
+    text: {
+        // All TextStyle properties are allowed
+        ...TextHeading1.text,
+        color: font.color,
+    },
 };

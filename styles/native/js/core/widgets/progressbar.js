@@ -18,16 +18,19 @@ export const com_mendix_widget_native_progressbar_ProgressBar = {
         // All ViewStyle properties are allowed
         alignSelf: "stretch",
     },
-    bar: Object.assign({}, Platform.select({
-        ios: {
-            borderColor: brand.primary,
-        },
-        android: {
-            borderRadius: 0,
-            borderWidth: 0,
-            backgroundColor: `rgba(${anyColorToRgbString(brand.primary)},0.2)`,
-        },
-    })),
+    bar: {
+        // All ViewStyle properties are allowed
+        ...Platform.select({
+            ios: {
+                borderColor: brand.primary,
+            },
+            android: {
+                borderRadius: 0,
+                borderWidth: 0,
+                backgroundColor: `rgba(${anyColorToRgbString(brand.primary)},0.2)`,
+            },
+        }),
+    },
     fill: {
         //Only the backgroundColor property is allowed
         backgroundColor: brand.primary,

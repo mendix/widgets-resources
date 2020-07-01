@@ -1,5 +1,5 @@
-import { brand, font }   from "../variables";
-import { PopupMenuType } from "../../types/widgets";
+import { background, brand, font } from "../variables";
+import { PopupMenuType }           from "../../types/widgets";
 /*
 
 DISCLAIMER:
@@ -20,6 +20,7 @@ export const com_mendix_widget_native_popupmenu_PopupMenu: PopupMenuType = {
         shadowOpacity: 0.2,
         shadowRadius: 10,
         elevation: 16,
+        backgroundColor: background.primary,
     },
     basic: {
         dividerColor: font.color,
