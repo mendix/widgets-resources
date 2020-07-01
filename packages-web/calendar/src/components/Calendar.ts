@@ -65,7 +65,17 @@ export interface CalendarEvent {
     title: string;
 }
 
-class Calendar extends Component<CalendarProps> {
+interface State {
+    date?: Date;
+}
+
+class Calendar extends Component<CalendarProps, State> {
+    readonly state: State = {
+        date: undefined
+    };
+
+    private readonly onNavigateHandler = this.onNavigate.bind(this);
+
     render(): ReactNode {
         return createElement(
             SizeContainer,
@@ -125,6 +135,10 @@ class Calendar extends Component<CalendarProps> {
         return createElement(Alert, { className: "widget-calendar-alert" }, this.props.alertMessage);
     }
 
+    private onNavigate(date: Date): void {
+        this.setState({ date });
+    }
+
     private renderCalendar(): ReactNode {
         const wrapToolbar = (injectedProps: HOCToolbarProps): Function => (toolbarProps: Container.ToolbarProps) =>
             createElement(CustomToolbar as any, { ...injectedProps, ...toolbarProps });
@@ -136,8 +150,9 @@ class Calendar extends Component<CalendarProps> {
             components: {
                 toolbar: wrapToolbar({ customViews: this.getToolbarProps(), onClickToolbarButton: this.onRangeChange })
             },
+            onNavigate: this.onNavigateHandler,
             eventPropGetter: this.eventColor,
-            date: this.props.startPosition,
+            date: this.state.date ?? this.props.startPosition,
             defaultView: this.defaultView(),
             formats: this.props.viewOption === "custom" ? this.props.formats : "",
             messages: this.props.viewOption === "custom" ? this.props.messages : "",
