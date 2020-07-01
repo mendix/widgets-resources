@@ -38,10 +38,6 @@
             }
         }
 
-        .modal-body {
-            padding: unset;
-        }
-
         .modal-footer {
             display: flex;
             justify-content: flex-end;
@@ -83,6 +79,10 @@
         padding-right: 0;
         padding-left: 0;
     }
+}
+
+.mx-dialog .modal-body {
+    padding: 20px;
 }
 
 // Login modal
