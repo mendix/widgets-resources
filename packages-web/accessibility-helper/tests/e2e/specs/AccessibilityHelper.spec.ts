@@ -16,7 +16,7 @@ describe("accessibility-helper", () => {
         expect(true).toBe(true);
     });
 
-    it("updates target attributes when attributes are dynamic", () => {
+    it("updates target attributes when attributes are expression", () => {
         expect(true).toBe(true);
     });
 
@@ -25,6 +25,9 @@ describe("accessibility-helper", () => {
     });
 
     it("sets target attributes even though target's props changed eg: textinput", () => {
+        // set attribute
+        // someone changes the target outside
+        // check if attribute is still there
         expect(true).toBe(true);
     });
 

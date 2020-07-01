@@ -4,8 +4,6 @@ import { ValueStatus, DynamicValue } from "mendix";
 
 import { AccessibilityHelperContainerProps } from "../typings/AccessibilityHelperProps";
 
-const PROHIBITED_ATTRIBUTES = ["class", "style", "widgetid", "data-mendix-id"];
-
 const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactElement => {
     const contentRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
     const conditions = useMemo(
@@ -22,41 +20,32 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactEle
     );
 
     const update = useCallback(() => {
-        if (contentRef.current) {
-            try {
-                const target = contentRef.current.querySelector(props.targetSelector);
-                if (target) {
-                    conditions.forEach(attrEntry => {
-                        const valueToBeSet = getValueBySourceType(attrEntry.attribute);
+        try {
+            const target = contentRef.current?.querySelector(props.targetSelector);
+            if (target) {
+                conditions.forEach(attrEntry => {
+                    const valueToBeSet = getValueBySourceType(attrEntry.attribute);
 
-                        if (attrEntry.condition.status === ValueStatus.Available && attrEntry.condition.value) {
-                            if (
-                                valueToBeSet?.status === ValueStatus.Available &&
-                                valueToBeSet?.value !== target.getAttribute(attrEntry.attribute)
-                            ) {
-                                target.setAttribute(attrEntry.attribute, valueToBeSet?.value);
-                            }
-                        } else if (attrEntry.condition.status === ValueStatus.Available && !attrEntry.condition.value) {
-                            target.removeAttribute(attrEntry.attribute);
+                    if (attrEntry.condition.status === ValueStatus.Available && attrEntry.condition.value) {
+                        if (
+                            valueToBeSet?.status === ValueStatus.Available &&
+                            valueToBeSet?.value !== target.getAttribute(attrEntry.attribute)
+                        ) {
+                            target.setAttribute(attrEntry.attribute, valueToBeSet?.value);
                         }
-                    });
-                }
-            } catch (error) {
-                console.error(`Accessibility Helper selector ${props.targetSelector} is not valid`, error);
+                    } else if (attrEntry.condition.status === ValueStatus.Available && !attrEntry.condition.value) {
+                        target.removeAttribute(attrEntry.attribute);
+                    }
+                });
             }
+        } catch (error) {
+            console.error(`Accessibility Helper selector ${props.targetSelector} is not valid`, error);
         }
     }, [props.targetSelector, conditions, contentRef.current]);
 
     useEffect(() => {
-        if (!isValid(props.targetSelector)) {
-            return;
-        }
-        update();
-    }, [props.targetSelector, props.attributesList]);
-
-    useEffect(() => {
         const contentWrapper = contentRef.current;
-        if (contentWrapper && isValid(props.targetSelector)) {
+        if (contentWrapper) {
             const mutationConfig: MutationObserverInit = {
                 attributes: true,
                 childList: true,
@@ -71,6 +60,8 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactEle
             const isAnyLoading = conditions.some(condition => condition.condition.status === ValueStatus.Loading);
 
             if (!isAnyLoading) {
+                update();
+
                 const observer = new MutationObserver(mutationList => {
                     const doUpdate = conditions.some(condition =>
                         mutationList.some(
@@ -100,13 +91,5 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactEle
 
     return <div ref={contentRef}>{props.content}</div>;
 };
-
-function isValid(selector: string): boolean {
-    if (PROHIBITED_ATTRIBUTES.some(value => value === selector)) {
-        console.error(`Widget tries to change ${selector} attribute, this is prohibited`);
-        return false;
-    }
-    return true;
-}
 
 export default AccessibilityHelper;
