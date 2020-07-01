@@ -8,30 +8,16 @@ function getWidgetDetails(answers) {
         packageName: answers.name.toLowerCase(),
         packagePath: answers.organization.trim().toLowerCase(),
         projectPath: answers.projectPath.replace(/\\/g, "\\\\"),
-        get isPlatformWeb() {
-            return this.platform === "web";
-        },
-        get isPlatformNative() {
-            return this.platform === "native";
-        },
-        get usesEmptyTemplate() {
-            return this.boilerplate === "empty";
-        },
-        get usesFullTemplate() {
-            return this.boilerplate === "full";
-        },
-        get isLanguageJS() {
-            return this.programmingLanguage === "javascript";
-        },
-        get isLanguageTS() {
-            return this.programmingLanguage === "typescript";
-        },
-        get fileExtension() {
-            return this.isLanguageJS ? "js" : "ts";
-        },
-        get templateSourcePath() {
-            return `pluggable/${this.platform}/${this.boilerplate}Template${this.isLanguageJS ? "Js" : "Ts"}/`;
-        }
+        isPlatformWeb: answers.platform === "web",
+        isPlatformNative: answers.platform === "native",
+        usesEmptyTemplate: answers.boilerplate === "empty",
+        usesFullTemplate: answers.boilerplate === "full",
+        isLanguageJS: anwers.programmingLanguage === "javascript",
+        isLanguageTS: answers.programmingLanguage === "typescript",
+        fileExtension: anwers.programmingLanguage === "javascript" ? "js" : "ts",
+        templateSourcePath: `pluggable/${answers.platform}/${answers.boilerplate}Template${
+            anwers.programmingLanguage === "javascript" ? "Js" : "Ts"
+        }/`
     };
 }
 
