@@ -17,13 +17,12 @@ const nativeConfig = {
         platforms: ["android", "ios", "native"],
         providesModuleNodeModules: ["react-native"]
     },
-    moduleDirectories: ["<rootDir>/node_modules", "<rootDir>/src"],
-    moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
     modulePathIgnorePatterns: ["<rootDir>/node_modules/react-native/Libraries/react-native/"],
+    reporters: ["default"],
     setupFilesAfterEnv: [__dirname + "/test-index-native.js"],
     snapshotSerializers: ["enzyme-to-json/serializer"],
+    testMatch: ["<rootDir>/src/**/*.spec.{js,jsx,ts,tsx}"],
     testPathIgnorePatterns: ["<rootDir>/dist", "<rootDir>/node_modules"],
-    reporters: ["default"],
     transformIgnorePatterns: ["/node_modules/(?!react-native)/.+"],
     transform: {
         "^.+\\.tsx?$": "ts-jest",
