@@ -137,15 +137,9 @@ describe("pluggable-widgets-tools commands", () => {
                 expect(existsSync(join(workDir, `/dist/coverage/clover.xml`))).toBe(true);
             });
 
-            fit("'release' command succeeds", async () => {
+            it("'release' command succeeds", async () => {
                 process.stderr.write(`[${widgetConfigDescription}] Testing 'release' command...\n`);
-                rm(
-                    "-f",
-                    join(
-                        workDir,
-                        `/dist/${widgetPackageJson.version}/${widgetPackageJson.packagePath}.${widgetPackageJson.widgetName}.mpk`
-                    )
-                );
+                rm("-rf", join(workDir, "dist"));
 
                 await execAsync("npm run release", workDir);
 
