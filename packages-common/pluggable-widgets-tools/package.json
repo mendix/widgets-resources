@@ -115,10 +115,8 @@
   },
   "scripts": {
     "prepublish": "rimraf dist && tsc",
-    "test": "npm run test:src:web && npm run test:src:native",
-    "test:src:web": "jest --config jest.web.config.js",
-    "test:src:native": "jest --config jest.native.config.js",
-    "test:scripts": "cross-env LIMIT_TESTS=true npm run test:scripts:cross-platform",
-    "test:scripts:cross-platform": "jest --testTimeout=1800000 tests/commands.spec.js"
+    "test": "npm run test:src && cross-env LIMIT_TESTS=true npm run test:scripts",
+    "test:src": "jest",
+    "test:scripts": "jest --testTimeout=1800000 tests/commands.spec.js"
   }
 }
