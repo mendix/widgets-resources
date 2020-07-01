@@ -5,6 +5,8 @@ const { promptWidgetProperties, promptTestsInfo } = require("./lib/prompttexts.j
 const { getWidgetDetails, dirExists, isDirEmpty, findMprDir } = require("./lib/utils.js");
 const text = require("./lib/text.js");
 
+const widgetSrcFolder = "src/components/";
+
 class MxGenerator extends Generator {
     constructor(args, opts) {
         super(args, opts);
@@ -20,8 +22,6 @@ class MxGenerator extends Generator {
                 this.widgetParamName = name;
             }
         }
-
-        this.widgetSrcFolder = "src/components/";
     }
 
     async initializing() {
@@ -117,8 +117,8 @@ class MxGenerator extends Generator {
         // web & native
         if (this.widget.usesEmptyTemplate) {
             this._copyTemplate(
-                `${this.widget.templateSourcePath}${this.widgetSrcFolder}HelloWorld${tempSampleSuffix}.${fileExtension}.ejs`,
-                `${this.widgetSrcFolder}HelloWorld${tempSampleSuffix}.${fileExtension}`
+                `${this.widget.templateSourcePath}${widgetSrcFolder}HelloWorld${tempSampleSuffix}.${fileExtension}.ejs`,
+                `${widgetSrcFolder}HelloWorld${tempSampleSuffix}.${fileExtension}`
             );
             this._copyTemplate(
                 `${this.widget.templateSourcePath}src/WidgetName.${fileExtension}.ejs`,
@@ -126,8 +126,8 @@ class MxGenerator extends Generator {
             );
         } else {
             this._copyTemplate(
-                `${this.widget.templateSourcePath}${this.widgetSrcFolder}Badge${tempSampleSuffix}.${fileExtension}.ejs`,
-                `${this.widgetSrcFolder}Badge${tempSampleSuffix}.${fileExtension}`
+                `${this.widget.templateSourcePath}${widgetSrcFolder}Badge${tempSampleSuffix}.${fileExtension}.ejs`,
+                `${widgetSrcFolder}Badge${tempSampleSuffix}.${fileExtension}`
             );
             this._copyTemplate(
                 `${this.widget.templateSourcePath}src/WidgetName.${fileExtension}.ejs`,
@@ -147,8 +147,8 @@ class MxGenerator extends Generator {
 
             if (this.widget.usesFullTemplate) {
                 this._copyFile(
-                    `${this.widget.templateSourcePath}${this.widgetSrcFolder}Alert.${fileExtension}.ejs`,
-                    `${this.widgetSrcFolder}Alert.${fileExtension}`
+                    `${this.widget.templateSourcePath}${widgetSrcFolder}Alert.${fileExtension}.ejs`,
+                    `${widgetSrcFolder}Alert.${fileExtension}`
                 );
             }
         } else if (this.widget.usesFullTemplate) {
@@ -192,29 +192,29 @@ class MxGenerator extends Generator {
             if (this.widget.isPlatformWeb) {
                 if (this.widget.usesFullTemplate) {
                     this._copyFile(
-                        `${this.widget.templateSourcePath}${this.widgetSrcFolder}/__tests__/Alert.spec.${fileExtension}.ejs`,
-                        `${this.widgetSrcFolder}/__tests__/Alert.spec.${fileExtension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/Alert.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/Alert.spec.${fileExtension}`
                     );
                     this._copyTemplate(
-                        `${this.widget.templateSourcePath}${this.widgetSrcFolder}/__tests__/BadgeSample.spec.${fileExtension}.ejs`,
-                        `${this.widgetSrcFolder}/__tests__/BadgeSample.spec.${fileExtension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/BadgeSample.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/BadgeSample.spec.${fileExtension}`
                     );
                 } else {
                     this._copyFile(
-                        `${this.widget.templateSourcePath}${this.widgetSrcFolder}/__tests__/HelloWorldSample.spec.${fileExtension}.ejs`,
-                        `${this.widgetSrcFolder}/__tests__/HelloWorldSample.spec.${fileExtension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/HelloWorldSample.spec.${fileExtension}`
                     );
                 }
             } else {
                 if (this.widget.usesFullTemplate) {
                     this._copyFile(
-                        `${this.widget.templateSourcePath}${this.widgetSrcFolder}/__tests__/Badge.spec.${fileExtension}.ejs`,
-                        `${this.widgetSrcFolder}/__tests__/Badge.spec.${fileExtension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/Badge.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/Badge.spec.${fileExtension}`
                     );
                 } else {
                     this._copyFile(
-                        `${this.widget.templateSourcePath}${this.widgetSrcFolder}/__tests__/HelloWorld.spec.${fileExtension}.ejs`,
-                        `${this.widgetSrcFolder}/__tests__/HelloWorld.spec.${fileExtension}`
+                        `${this.widget.templateSourcePath}${widgetSrcFolder}/__tests__/HelloWorld.spec.${fileExtension}.ejs`,
+                        `${widgetSrcFolder}/__tests__/HelloWorld.spec.${fileExtension}`
                     );
                 }
             }
