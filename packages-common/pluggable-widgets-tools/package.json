@@ -106,6 +106,8 @@
   },
   "devDependencies": {
     "@mendix/generator-widget": ">=8.9.0",
+    "async": "^3.2.0",
+    "async-mutex": "^0.2.2",
     "cross-env": "^7.0.2",
     "fs-extra": "^9.0.0",
     "rimraf": "^3.0.2",
@@ -117,6 +119,6 @@
     "prepublish": "rimraf dist && tsc",
     "test": "npm run test:src && cross-env LIMIT_TESTS=true npm run test:scripts",
     "test:src": "jest",
-    "test:scripts": "jest --testTimeout=1800000 tests/commands.spec.js"
+    "test:scripts": "node tests/commands.js"
   }
 }
