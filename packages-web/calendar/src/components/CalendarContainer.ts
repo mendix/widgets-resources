@@ -228,7 +228,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 window.mx.data.subscribe({
                     guid: mxObject.getGuid(),
                     attr: this.props.startDateAttribute,
-                    callback: () => this.getStartPosition(mxObject)
+                    callback: () => this.loadEvents(mxObject)
                 })
             );
             this.subscriptionContextHandles.push(
