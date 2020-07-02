@@ -12,8 +12,6 @@ const LIMIT_TESTS = !!process.env.LIMIT_TESTS;
 
 const CONFIGS = [
     ["web", "full", "ts", "8.0"],
-    ["native", "full", "js", "8.1"],
-    ["web", "full", "js", "8.3"],
     ["native", "full", "ts", "8.6"],
     ["web", "full", "ts", "8.6"],
     ["web", "full", "js", "8.7"],
