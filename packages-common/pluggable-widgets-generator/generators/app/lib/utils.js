@@ -12,11 +12,11 @@ function getWidgetDetails(answers) {
         isPlatformNative: answers.platform === "native",
         usesEmptyTemplate: answers.boilerplate === "empty",
         usesFullTemplate: answers.boilerplate === "full",
-        isLanguageJS: anwers.programmingLanguage === "javascript",
+        isLanguageJS: answers.programmingLanguage === "javascript",
         isLanguageTS: answers.programmingLanguage === "typescript",
-        fileExtension: anwers.programmingLanguage === "javascript" ? "js" : "ts",
+        fileExtension: answers.programmingLanguage === "javascript" ? "js" : "ts",
         templateSourcePath: `pluggable/${answers.platform}/${answers.boilerplate}Template${
-            anwers.programmingLanguage === "javascript" ? "Js" : "Ts"
+            answers.programmingLanguage === "javascript" ? "Js" : "Ts"
         }/`
     };
 }
