@@ -21,20 +21,12 @@ exports.config = {
     specs: [join(process.cwd(), "./tests/e2e/**/*.spec.js"), join(process.cwd(), "./tests/e2e/**/*.spec.ts")],
     maxInstances: debug ? 1 : 5,
     capabilities: [
-        browser === "ie11"
-            ? {
-                  browserName: "internet explorer"
-              }
-            : browser === "firefox"
-            ? {
-                  browserName: "firefox"
-              }
-            : {
-                  browserName: "chrome",
-                  "goog:chromeOptions": {
-                      args: debug ? ["--no-sandbox"] : ["--no-sandbox", "--disable-gpu", "--disable-extensions"]
-                  }
-              }
+        {
+            browserName: browser,
+            "goog:chromeOptions": {
+                args: debug ? ["--no-sandbox"] : ["--no-sandbox", "--disable-gpu", "--disable-extensions"]
+            }
+        }
     ],
     sync: true,
     logLevel: "silent",
@@ -49,7 +41,6 @@ exports.config = {
     framework: "jasmine",
     reporters: ["spec"],
     execArgv: debug ? ["--inspect"] : undefined,
-    // Options to be passed to Jasmine.
     jasmineNodeOpts: {
         defaultTimeoutInterval: debug ? 60 * 60 * 1000 : 30 * 1000
     },
