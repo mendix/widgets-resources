@@ -66,7 +66,10 @@ jobs:
           script:
               - echo "Ready to deploy!"
           before_deploy:
+              - echo "'$TRAVIS_TAG'"
               - if [[ "$TRAVIS_TAG" =~ "^pluggable-widgets-tools-v*" ]]; then cd packages-common/pluggable-widgets-tools; else cd packages-common/pluggable-widgets-generator; fi
+              - pwd
+              - exit 1
           deploy:
               skip_cleanup: true
               provider: npm
