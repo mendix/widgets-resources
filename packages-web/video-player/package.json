@@ -17,7 +17,6 @@
     "testProjectId": "25c71ec6-4eb0-4324-8299-4e1948f0c165",
     "testProjects": [
       {
-        "revision": 140,
         "branch": "trunk",
         "path": "./tests/TestProjects/Mendix/"
       }

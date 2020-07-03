@@ -26,22 +26,18 @@
     "testProjectId": "33371c03-3e6f-4d65-9f95-22bfe6a0c724",
     "testProjects": [
       {
-        "revision": 484,
         "branch": "trunk",
         "path": "./tests/TestProjects/Mendix/"
       },
       {
-        "revision": 480,
         "branch": "MX_7.23",
         "path": "./tests/TestProjects/Mendix7/"
       },
       {
-        "revision": 472,
         "branch": "MX_8",
         "path": "./tests/TestProjects/Mendix8/"
       },
       {
-        "revision": 475,
         "branch": "nightly",
         "path": "./tests/TestProjects/Nightly/"
       }
