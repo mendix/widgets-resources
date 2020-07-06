@@ -23,7 +23,7 @@ export const com_mendix_widget_native_popupmenu_PopupMenu: PopupMenuType = {
         elevation: 16,
         backgroundColor: background.primary,
     },
-    itemRippleColor: contrast.regular,
+    itemRippleColor: contrast.lower,
     basic: {
         dividerColor: font.color,
         itemStyle: {
