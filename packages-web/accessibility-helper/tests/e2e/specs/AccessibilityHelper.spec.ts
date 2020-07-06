@@ -1,37 +1,59 @@
 import page from "../../../../../configs/e2e/src/pages/page";
 
 describe("accessibility-helper", () => {
-    beforeAll(() => {
+    beforeEach(() => {
         page.open("");
     });
 
     it("sets attributes when condition is true", () => {
-        const elementToBeChanged = page.getWidget("elementToBeChanged");
-        expect(elementToBeChanged.getAttribute("yolo1")).toEqual(null);
-        $(".mx-name-radiButtons1 input").click();
-        expect(elementToBeChanged.getAttribute("yolo1")).toEqual("yolo1");
+        $(".mx-name-radioButtons2 input").click();
+        const elementToBeChanged = page.getWidget("text3");
+        expect(elementToBeChanged.getAttribute("trueCondition")).toEqual("true");
     });
 
     it("hides attributes when condition is false", () => {
-        expect(true).toBe(true);
+        $(".mx-name-radioButtons2 input").click();
+        const elementToBeChanged = page.getWidget("text3");
+        expect(elementToBeChanged.getAttribute("a11yhelper")).not.toBe("a11yhelper");
     });
 
     it("updates target attributes when attributes are expression", () => {
-        expect(true).toBe(true);
+        $(".mx-name-radioButtons2 input").click();
+        const elementToBeChanged = page.getWidget("text3");
+        const textBox = page.getWidget("textBox1");
+        textBox.$("input").setValue("test");
+        $(".mx-name-radioButtons1 input").click();
+        expect(elementToBeChanged.getAttribute("expressionValue")).toEqual("test");
     });
-
-    it("doesnt change forbidden attributes", () => {
-        expect(true).toBe(true);
+    it("updates target attributes using a NF", () => {
+        $(".mx-name-radioButtons2 input").click();
+        $(".mx-name-radioButtons1 input").click();
+        const elementToBeChanged = page.getWidget("text3");
+        $(".mx-name-actionButton1").click();
+        browser.pause(1000);
+        expect(elementToBeChanged.getAttribute("expressionValue")).toEqual("NF changes");
     });
 
     it("sets target attributes even though target's props changed eg: textinput", () => {
-        // set attribute
-        // someone changes the target outside
-        // check if attribute is still there
-        expect(true).toBe(true);
+        $(".mx-name-radioButtons2 input").click();
+        $(".mx-name-radioButtons1 input").click();
+        const elementToBeChanged = page.getWidget("text3");
+        expect(elementToBeChanged.getAttribute("a11yhelper")).toContain("a11yhelper");
+        const textBox = page.getWidget("textBox1");
+        textBox.$("input").setValue("test");
+        expect(elementToBeChanged.getAttribute("a11yhelper")).toContain("a11yhelper");
     });
 
     it("sets target attributes even though target is conditionally shown after being hidden", () => {
-        expect(true).toBe(true);
+        const radioVisibility = $(".mx-name-radioButtons2 input");
+        const radioAtt = $(".mx-name-radioButtons1 input");
+        radioVisibility.click();
+        radioAtt.click();
+        const elementToBeChanged = page.getWidget("text3");
+        expect(elementToBeChanged.getAttribute("a11yhelper")).toContain("a11yhelper");
+        const radioNo = $(".mx-name-radioButtons1").$("label*=No");
+        radioNo.click();
+        radioAtt.click();
+        expect(elementToBeChanged.getAttribute("a11yhelper")).toContain("a11yhelper");
     });
 });
