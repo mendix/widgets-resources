@@ -1,10 +1,12 @@
-import { ComponentType, createElement, Fragment, ReactElement, useCallback, useRef } from "react";
+import { ComponentType, createElement, ReactElement, useCallback, useRef } from "react";
 import { PopupMenuProps } from "../typings/PopupMenuProps";
 import { PopupMenuStyle } from "./ui/Styles";
 import { executeAction } from "@widgets-resources/piw-utils";
 import {
     Platform,
     StyleSheet,
+    TouchableHighlight,
+    TouchableHighlightProps,
     TouchableNativeFeedback,
     TouchableNativeFeedbackProps,
     TouchableOpacity,
@@ -16,20 +18,31 @@ import Menu, { MenuDivider, MenuItem } from "react-native-material-menu";
 export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
     const styles = StyleSheet.flatten(props.style);
 
-    const menuRef = useRef<Menu>(null);
+    const menuRef = useRef<Menu | null>(null);
     const showMenu = useCallback(() => {
         menuRef.current?.show();
     }, [menuRef.current]);
     const handlePress = useCallback(
         (action?: ActionValue) => {
             menuRef.current?.hide();
-            executeAction(action);
+            // Set timeout needed since modal closes the alerts which might be shown in action
+            setTimeout(() => {
+                executeAction(action);
+            }, 500);
         },
         [menuRef.current]
     );
 
-    const Touchable: ComponentType<TouchableNativeFeedbackProps | TouchableOpacity> =
+    const TouchableItem: ComponentType<TouchableNativeFeedbackProps | TouchableHighlightProps> =
+        Platform.OS === "android" ? TouchableNativeFeedback : TouchableHighlight;
+
+    const TouchableButton: ComponentType<TouchableNativeFeedbackProps | TouchableOpacity> =
         Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
+
+    const rippleColorProp =
+        Platform.OS === "android"
+            ? styles.itemRippleColor && { background: TouchableNativeFeedback.Ripple(styles.itemRippleColor, false) }
+            : { underlayColor: styles.itemRippleColor };
 
     let menuOptions: ReactElement[];
     if (props.renderMode === "basic") {
@@ -44,6 +57,7 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
                     textStyle={itemStyle}
                     ellipsizeMode={styles.basic?.itemStyle?.ellipsizeMode as any}
                     style={styles.basic?.containerStyle as any}
+                    {...rippleColorProp}
                 >
                     {item.caption}
                 </MenuItem>
@@ -51,17 +65,9 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
         });
     } else {
         menuOptions = props.customItems.map((item, index) => (
-            <Touchable
-                key={index}
-                onPress={() => handlePress(item.action)}
-                {...(Platform.OS === "android"
-                    ? {
-                          background: TouchableNativeFeedback.SelectableBackground()
-                      }
-                    : {})}
-            >
-                <Fragment>{item.content}</Fragment>
-            </Touchable>
+            <TouchableItem key={index} onPress={() => handlePress(item.action)} {...rippleColorProp}>
+                <View>{item.content}</View>
+            </TouchableItem>
         ));
     }
 
@@ -70,11 +76,11 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
             ref={menuRef}
             style={styles?.container as any}
             button={
-                <Touchable onPress={showMenu}>
+                <TouchableButton onPress={showMenu}>
                     <View pointerEvents="box-only" style={styles.buttonContainer}>
                         {props.menuTriggerer}
                     </View>
-                </Touchable>
+                </TouchableButton>
             }
         >
             {menuOptions}
