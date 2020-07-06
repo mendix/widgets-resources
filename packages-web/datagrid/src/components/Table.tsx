@@ -5,7 +5,8 @@ import {
     PropsWithChildren,
     ReactElement,
     ReactNode,
-    useMemo
+    useMemo,
+    useState
 } from "react";
 import { ColumnSelector } from "./ColumnSelector";
 import { Pagination } from "./Pagination";
@@ -55,6 +56,7 @@ export interface TableProps<T> {
 export function Table<T>(props: TableProps<T>): ReactElement {
     const isSortingOrFiltering = props.columnsFilterable || props.columnsSortable;
     const isInfinite = !props.paging && !isSortingOrFiltering;
+    const [dragOver, setDragOver] = useState("");
 
     const filterTypes = useMemo(
         () => ({
@@ -202,12 +204,14 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                 <Header
                                     column={column}
                                     key={`headers_column_${index}`}
-                                    sortable={props.columnsSortable}
-                                    resizable={props.columnsResizable}
-                                    filterable={props.columnsFilterable}
                                     draggable={props.columnsDraggable}
-                                    visibleColumns={visibleColumns}
+                                    dragOver={dragOver}
+                                    filterable={props.columnsFilterable}
+                                    resizable={props.columnsResizable}
                                     setColumnOrder={setColumnOrder}
+                                    setDragOver={setDragOver}
+                                    sortable={props.columnsSortable}
+                                    visibleColumns={visibleColumns}
                                 />
                             ))}
                             {props.columnsHidable && <ColumnSelector allColumns={allColumns} />}
