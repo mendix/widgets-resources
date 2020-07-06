@@ -333,6 +333,7 @@ export interface PopupMenuType {
     container?: ViewStyle;
     basic: BasicItemStyle;
     buttonContainer?: ViewStyle;
+    itemRippleColor: string;
 }
 
 interface BasicItemStyle {
