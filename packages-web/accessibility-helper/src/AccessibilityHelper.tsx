@@ -21,21 +21,23 @@ const AccessibilityHelper = (props: AccessibilityHelperContainerProps): ReactEle
 
     const update = useCallback(() => {
         try {
-            const target = contentRef.current?.querySelector(props.targetSelector);
-            if (target) {
-                conditions.forEach(attrEntry => {
-                    const valueToBeSet = getValueBySourceType(attrEntry.attribute);
+            const targets = contentRef.current?.querySelectorAll(props.targetSelector);
+            if (targets && targets.length > 0) {
+                targets.forEach(target => {
+                    conditions.forEach(attrEntry => {
+                        const valueToBeSet = getValueBySourceType(attrEntry.attribute);
 
-                    if (attrEntry.condition.status === ValueStatus.Available && attrEntry.condition.value) {
-                        if (
-                            valueToBeSet?.status === ValueStatus.Available &&
-                            valueToBeSet?.value !== target.getAttribute(attrEntry.attribute)
-                        ) {
-                            target.setAttribute(attrEntry.attribute, valueToBeSet?.value);
+                        if (attrEntry.condition.status === ValueStatus.Available && attrEntry.condition.value) {
+                            if (
+                                valueToBeSet?.status === ValueStatus.Available &&
+                                valueToBeSet?.value !== target.getAttribute(attrEntry.attribute)
+                            ) {
+                                target.setAttribute(attrEntry.attribute, valueToBeSet?.value);
+                            }
+                        } else if (attrEntry.condition.status === ValueStatus.Available && !attrEntry.condition.value) {
+                            target.removeAttribute(attrEntry.attribute);
                         }
-                    } else if (attrEntry.condition.status === ValueStatus.Available && !attrEntry.condition.value) {
-                        target.removeAttribute(attrEntry.attribute);
-                    }
+                    });
                 });
             }
         } catch (error) {
