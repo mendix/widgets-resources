@@ -579,15 +579,15 @@ exports[`Popup menu with custom items renders 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "opacity": 1,
-              }
-            }
+            style={null}
           >
-            <Text>
-              Yolo
-            </Text>
+            <View
+              style={null}
+            >
+              <Text>
+                Yolo
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -698,15 +698,15 @@ exports[`Popup menu with custom items renders with custom styles 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={
-              Object {
-                "opacity": 1,
-              }
-            }
+            style={null}
           >
-            <Text>
-              Yolo
-            </Text>
+            <View
+              style={null}
+            >
+              <Text>
+                Yolo
+              </Text>
+            </View>
           </View>
         </View>
       </View>
