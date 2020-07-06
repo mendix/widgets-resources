@@ -1,13 +1,4 @@
-import {
-    createElement,
-    Dispatch,
-    ReactElement,
-    SetStateAction,
-    useState,
-    DragEvent,
-    DragEventHandler,
-    useCallback
-} from "react";
+import { createElement, Dispatch, ReactElement, SetStateAction, DragEvent, DragEventHandler, useCallback } from "react";
 import { ColumnInstance, HeaderGroup, IdType, TableHeaderProps } from "react-table";
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,8 +10,10 @@ export interface HeaderProps<D extends object> {
     resizable: boolean;
     filterable: boolean;
     draggable: boolean;
+    dragOver: string;
     visibleColumns: Array<ColumnInstance<D>>;
     setColumnOrder: (updater: ((columnOrder: Array<IdType<D>>) => Array<IdType<D>>) | Array<IdType<D>>) => void;
+    setDragOver: Dispatch<SetStateAction<string>>;
 }
 
 export function Header<D extends object>({
@@ -29,12 +22,13 @@ export function Header<D extends object>({
     resizable,
     filterable,
     draggable,
+    dragOver,
     visibleColumns,
-    setColumnOrder
+    setColumnOrder,
+    setDragOver
 }: HeaderProps<D>): ReactElement {
     const canSort = sortable && column.canSort;
     const canDrag = draggable && (column.canDrag ?? false);
-    const [dragOver, setDragOver] = useState("");
     const draggableProps = useDraggable(canDrag, visibleColumns, setColumnOrder, setDragOver);
 
     const { onClick, style, ...rest } = column.getHeaderProps(
