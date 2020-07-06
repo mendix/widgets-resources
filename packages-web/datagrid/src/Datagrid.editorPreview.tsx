@@ -29,7 +29,7 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                     <div className="footer" />
                 </props.headerWidgets.renderer>
             }
-            numberOfPages={1}
+            numberOfItems={5}
             page={0}
             pageSize={props.pageSize ?? 5}
             paging={props.pagingEnabled}

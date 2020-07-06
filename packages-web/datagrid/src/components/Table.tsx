@@ -40,7 +40,7 @@ export interface TableProps<T> {
     columnsResizable: boolean;
     columnsDraggable: boolean;
     columnsHidable: boolean;
-    numberOfPages?: number;
+    numberOfItems?: number;
     paging: boolean;
     page: number;
     pageSize: number;
@@ -167,8 +167,12 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 canPreviousPage={props.page !== 0}
                 gotoPage={(page: number) => props.setPage && props.setPage(() => page)}
                 nextPage={() => props.setPage && props.setPage(prev => prev + 1)}
+                numberOfItems={props.numberOfItems}
+                numberOfPages={
+                    props.numberOfItems !== undefined ? Math.ceil(props.numberOfItems / props.pageSize) : undefined
+                }
                 page={props.page}
-                numberOfPages={props.numberOfPages}
+                pageSize={props.pageSize}
                 previousPage={() => props.setPage && props.setPage(prev => prev - 1)}
             />
         ) : (
@@ -177,8 +181,10 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 canPreviousPage={canPreviousPage}
                 gotoPage={gotoPage}
                 nextPage={nextPage}
-                page={pageIndex}
+                numberOfItems={props.data.length}
                 numberOfPages={pageOptions.length}
+                page={pageIndex}
+                pageSize={props.pageSize}
                 previousPage={previousPage}
             />
         )
@@ -186,10 +192,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
 
     return (
         <div className={props.className} style={props.styles}>
-            <div className="thead">
-                {props.headerWidgets}
-                {props.columnsHidable && <ColumnSelector allColumns={allColumns} />}
-            </div>
+            <div className="thead">{props.headerWidgets}</div>
             <div {...getTableProps()} className="table">
                 <div role="rowgroup" className="thead">
                     {props.pagingPosition === "top" && pagination}
@@ -207,6 +210,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                     setColumnOrder={setColumnOrder}
                                 />
                             ))}
+                            {props.columnsHidable && <ColumnSelector allColumns={allColumns} />}
                         </div>
                     ))}
                 </div>
@@ -221,6 +225,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                         return (
                             <div {...row.getRowProps()} key={`row_${index}`} className="tr">
                                 {row.cells.map(cell => cell.render("Cell"))}
+                                {props.columnsHidable && <div className="td column-selector" />}
                             </div>
                         );
                     })}

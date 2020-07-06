@@ -1,5 +1,7 @@
-import { createElement, ReactElement, Fragment, useState } from "react";
+import { createElement, ReactElement, useState } from "react";
 import { ColumnInstance } from "react-table";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-regular-svg-icons";
 
 export interface ColumnSelectorProps<D extends object> {
     allColumns: Array<ColumnInstance<D>>;
@@ -8,14 +10,17 @@ export interface ColumnSelectorProps<D extends object> {
 export function ColumnSelector<D extends object>({ allColumns }: ColumnSelectorProps<D>): ReactElement {
     const [show, setShow] = useState(false);
     return (
-        <Fragment>
+        <div className="th column-selector">
             <button
                 className="btn btn-default"
                 onClick={() => {
                     setShow(s => !s);
                 }}
+                onLoad={event => {
+                    console.warn(event);
+                }}
             >
-                Columns
+                <FontAwesomeIcon icon={faEye} />
             </button>
             {show && (
                 <ul className="column-selectors">
@@ -35,6 +40,6 @@ export function ColumnSelector<D extends object>({ allColumns }: ColumnSelectorP
                     })}
                 </ul>
             )}
-        </Fragment>
+        </div>
     );
 }

@@ -50,9 +50,9 @@ describe("Pagination", () => {
 
     it("renders the current page correctly", () => {
         const component = shallow(<Pagination {...mockPaginationProps()} />);
-        expect(component.find(".paging-status").text()).toBe("Page 1 of 5");
+        expect(component.find(".paging-status").text()).toBe("1 to 5 of 25");
         component.setProps({ page: 4 });
-        expect(component.find(".paging-status").text()).toBe("Page 5 of 5");
+        expect(component.find(".paging-status").text()).toBe("21 to 25 of 25");
 
         expect(component).toMatchSnapshot();
     });
@@ -74,10 +74,12 @@ function mockPaginationProps(): PaginationProps {
     return {
         canPreviousPage: true,
         canNextPage: true,
+        gotoPage: jest.fn(),
+        numberOfItems: 25,
         numberOfPages: 5,
         nextPage: jest.fn(),
-        previousPage: jest.fn(),
-        gotoPage: jest.fn(),
-        page: 0
+        page: 0,
+        pageSize: 5,
+        previousPage: jest.fn()
     };
 }
