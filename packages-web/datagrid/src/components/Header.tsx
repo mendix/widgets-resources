@@ -10,6 +10,8 @@ import {
 } from "react";
 import { ColumnInstance, HeaderGroup, IdType, TableHeaderProps } from "react-table";
 import classNames from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLongArrowAltDown, faLongArrowAltUp, faArrowsAltV } from "@fortawesome/free-solid-svg-icons";
 
 export interface HeaderProps<D extends object> {
     column: HeaderGroup<D>;
@@ -39,7 +41,13 @@ export function Header<D extends object>({
         canSort ? column.getSortByToggleProps() : undefined
     ) as TableHeaderProps & { onClick: () => void };
 
-    const sortClass = canSort ? (column.isSorted ? (column.isSortedDesc ? "desc" : "asc") : "sortable") : "";
+    const sortIcon = canSort
+        ? column.isSorted
+            ? column.isSortedDesc
+                ? faLongArrowAltDown
+                : faLongArrowAltUp
+            : faArrowsAltV
+        : undefined;
     return (
         <div
             className="th"
@@ -61,10 +69,10 @@ export function Header<D extends object>({
                     onClick={canSort ? onClick : undefined}
                 >
                     {column.render("Header")}
+                    {sortIcon && <FontAwesomeIcon icon={sortIcon} color="#606671" />}
                 </div>
                 {filterable && column.canFilter && <div className="filter">{column.render("Filter")}</div>}
             </div>
-            {sortClass && <div className={sortClass} />}
             {resizable && column.canResize && (
                 <div
                     {...column.getResizerProps()}
