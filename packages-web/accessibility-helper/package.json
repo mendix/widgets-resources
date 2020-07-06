@@ -9,7 +9,20 @@
     "widgetPath": "./tests/TestProjects/Mendix8/widgets",
     "projectPath": "./tests/TestProjects/Mendix8",
     "mendixHost": "http://localhost:8080",
-    "developmentPort": 3000
+    "developmentPort": 3000,
+    "testProjectId": "c8bda497-ac0a-42a6-9301-f0848d6b2ca8",
+    "testProjects": [
+      {
+        "revision": 3,
+        "branch": "MX_8",
+        "path": "./tests/TestProjects/Mendix8/"
+      },
+      {
+        "revision": 4,
+        "branch": "nightly",
+        "path": "./tests/TestProjects/Nightly/"
+      }
+    ]
   },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
