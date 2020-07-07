@@ -13,12 +13,12 @@
     "testProjectId": "c8bda497-ac0a-42a6-9301-f0848d6b2ca8",
     "testProjects": [
       {
-        "revision": 3,
+        "revision": 8,
         "branch": "MX_8",
         "path": "./tests/TestProjects/Mendix8/"
       },
       {
-        "revision": 4,
+        "revision": 9,
         "branch": "nightly",
         "path": "./tests/TestProjects/Nightly/"
       }

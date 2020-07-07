@@ -46,8 +46,9 @@ describe("accessibility-helper", () => {
             expect(elementToBeChanged.getAttribute("a11yhelper")).toContain("a11yhelper");
             const textBox = page.getWidget("textBox1");
             textBox.$("input").setValue("test");
+            $(".mx-name-radioButtons2 input").click();
 
-            expect(elementToBeChanged.getAttribute("a11yhelper")).toContain("a11yhelper");
+            expect(elementToBeChanged.getAttribute("expressionvalue")).toContain("test");
         });
 
         it("sets target attributes even though target is conditionally shown after being hidden", () => {
@@ -69,6 +70,7 @@ describe("accessibility-helper", () => {
 
     describe("with multiple targets", () => {
         it("sets attributes when condition is true", () => {
+            $(".mx-name-actionButton2").click();
             $(".mx-name-radioButtons2 input").click();
             const elementToBeChanged = page.getWidget("text3");
             const elementToBeChanged2 = page.getWidget("text4");
@@ -78,6 +80,7 @@ describe("accessibility-helper", () => {
         });
 
         it("hides attributes when condition is false", () => {
+            $(".mx-name-actionButton2").click();
             $(".mx-name-radioButtons2 input").click();
             const elementToBeChanged = page.getWidget("text3");
             const elementToBeChanged2 = page.getWidget("text4");
@@ -87,6 +90,7 @@ describe("accessibility-helper", () => {
         });
 
         it("updates target attributes when attributes are expression", () => {
+            $(".mx-name-actionButton2").click();
             $(".mx-name-radioButtons2 input").click();
             const elementToBeChanged = page.getWidget("text3");
             const elementToBeChanged2 = page.getWidget("text4");
@@ -98,6 +102,7 @@ describe("accessibility-helper", () => {
             expect(elementToBeChanged2.getAttribute("expressionValue")).toEqual("test");
         });
         it("updates target attributes using a NF", () => {
+            $(".mx-name-actionButton2").click();
             $(".mx-name-radioButtons2 input").click();
             $(".mx-name-radioButtons1 input").click();
             const elementToBeChanged = page.getWidget("text3");
@@ -110,23 +115,23 @@ describe("accessibility-helper", () => {
         });
 
         it("sets target attributes even though target's props changed eg: textinput", () => {
+            $(".mx-name-actionButton2").click();
             $(".mx-name-radioButtons2 input").click();
             $(".mx-name-radioButtons1 input").click();
             const elementToBeChanged = page.getWidget("text3");
             const elementToBeChanged2 = page.getWidget("text4");
+            const textBox = page.getWidget("textBox1");
+            textBox.$("input").setValue("test");
+            $(".mx-name-radioButtons2 input").click();
 
             expect(elementToBeChanged.getAttribute("a11yhelper")).toContain("a11yhelper");
             expect(elementToBeChanged2.getAttribute("a11yhelper")).toContain("a11yhelper");
-
-            const textBox = page.getWidget("textBox1");
-            textBox.$("input").setValue("test");
-
-            // TODO: we should check the changed attribute, not the static one
-            expect(elementToBeChanged.getAttribute("a11yhelper")).toContain("a11yhelper");
-            expect(elementToBeChanged.getAttribute("a11yhelper")).toContain("a11yhelper");
+            expect(elementToBeChanged.getAttribute("expressionvalue")).toContain("test");
+            expect(elementToBeChanged2.getAttribute("expressionvalue")).toContain("test");
         });
 
         it("sets target attributes even though target is conditionally shown after being hidden", () => {
+            $(".mx-name-actionButton2").click();
             const radioVisibility = $(".mx-name-radioButtons2 input");
             const radioAtt = $(".mx-name-radioButtons1 input");
             radioVisibility.click();
