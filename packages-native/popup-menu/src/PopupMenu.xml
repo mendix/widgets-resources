@@ -10,7 +10,7 @@
         <propertyGroup caption="General">
             <property key="menuTriggerer" type="widgets" required="false">
                 <caption>Clickable area to show menu</caption>
-                <description>Responsible for toggling the Popup menu</description>
+                <description>Responsible for toggling the Pop-up menu</description>
             </property>
             <property key="renderMode" type="enumeration" defaultValue="basic">
                 <caption>Render</caption>
