@@ -7,12 +7,17 @@ import { background, border, contrast, spacing } from "../../../core/variables";
 ==========================================================================
 */
 export const header = {
-    container: Object.assign({ borderRadius: border.radius, backgroundColor: background.primary, marginBottom: spacing.regular }, Platform.select({
-        android: {
-            borderWidth: 1,
-            borderColor: contrast.lowest,
-        },
-    })),
+    container: {
+        borderRadius: border.radius,
+        backgroundColor: background.primary,
+        marginBottom: spacing.regular,
+        ...Platform.select({
+            android: {
+                borderWidth: 1,
+                borderColor: contrast.lowest,
+            },
+        }),
+    },
 };
 //
 //== Elements

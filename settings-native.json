@@ -179,6 +179,14 @@
                 ]
             }
         ],
+        "Page": [
+            {
+                "name": "Hide header bottom border",
+                "type": "Toggle",
+                "description": "Hide the bottom border (iOS) and elevation (Android) of the header.",
+                "class": "pageHeaderBorderNone"
+            }
+        ],
         "Widget": [
             {
                 "name": "Spacing top",

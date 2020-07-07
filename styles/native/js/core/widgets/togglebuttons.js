@@ -32,16 +32,19 @@ export const com_mendix_widget_native_togglebuttons_ToggleButtons = {
         fontSize: font.size,
         fontFamily: font.family,
     },
-    activeButton: Object.assign({}, Platform.select({
-        ios: {
-            backgroundColor: brand.primary,
-            borderColor: brand.primary,
-        },
-        android: {
-            backgroundColor: brand.primary,
-            borderColor: brand.primary,
-        },
-    })),
+    activeButton: {
+        // All ViewStyle properties are allowed
+        ...Platform.select({
+            ios: {
+                backgroundColor: brand.primary,
+                borderColor: brand.primary,
+            },
+            android: {
+                backgroundColor: brand.primary,
+                borderColor: brand.primary,
+            },
+        }),
+    },
     activeButtonText: {
         // All TextStyle properties are allowed
         fontSize: font.size,

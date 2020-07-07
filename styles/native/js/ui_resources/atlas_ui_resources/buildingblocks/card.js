@@ -7,15 +7,25 @@ import { background, border, contrast, spacing } from "../../../core/variables";
 ==========================================================================
 */
 export const card = {
-    container: Object.assign(Object.assign({ borderRadius: border.radius, backgroundColor: background.primary, marginBottom: spacing.regular }, Platform.select({
-        android: {
-            borderWidth: 1,
-            borderColor: contrast.lowest,
-        },
-    })), { elevation: 1.5, shadowColor: "#000", shadowOpacity: 0.1, shadowRadius: 10, shadowOffset: {
+    container: {
+        borderRadius: border.radius,
+        backgroundColor: background.primary,
+        marginBottom: spacing.regular,
+        ...Platform.select({
+            android: {
+                borderWidth: 1,
+                borderColor: contrast.lowest,
+            },
+        }),
+        elevation: 1.5,
+        shadowColor: "#000",
+        shadowOpacity: 0.1,
+        shadowRadius: 10,
+        shadowOffset: {
             width: 0,
             height: 2,
-        } }),
+        },
+    },
 };
 //
 //== Elements
@@ -33,7 +43,11 @@ export const cardImage = {
     },
 };
 export const cardImageFull = {
-    container: Object.assign(Object.assign({}, cardImage.container), { borderBottomLeftRadius: border.radius, borderBottomRightRadius: border.radius }),
+    container: {
+        ...cardImage.container,
+        borderBottomLeftRadius: border.radius,
+        borderBottomRightRadius: border.radius,
+    },
     image: {
         width: "100%",
         height: 300,
