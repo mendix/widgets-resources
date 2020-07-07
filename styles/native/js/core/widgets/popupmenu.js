@@ -1,4 +1,4 @@
-import { background, brand, font } from "../variables";
+import { background, brand, contrast, font } from "../variables";
 /*
 
 DISCLAIMER:
@@ -16,11 +16,13 @@ export const com_mendix_widget_native_popupmenu_PopupMenu = {
         // All ViewStyle properties are allowed
         borderRadius: 10,
         shadowColor: "#000",
+        overflow: "hidden",
         shadowOpacity: 0.2,
         shadowRadius: 10,
         elevation: 16,
         backgroundColor: background.primary,
     },
+    itemRippleColor: contrast.lower,
     basic: {
         dividerColor: font.color,
         itemStyle: {
