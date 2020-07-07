@@ -581,13 +581,9 @@ exports[`Popup menu with custom items renders 1`] = `
             onStartShouldSetResponder={[Function]}
             style={null}
           >
-            <View
-              style={null}
-            >
-              <Text>
-                Yolo
-              </Text>
-            </View>
+            <Text>
+              Yolo
+            </Text>
           </View>
         </View>
       </View>
@@ -700,13 +696,9 @@ exports[`Popup menu with custom items renders with custom styles 1`] = `
             onStartShouldSetResponder={[Function]}
             style={null}
           >
-            <View
-              style={null}
-            >
-              <Text>
-                Yolo
-              </Text>
-            </View>
+            <Text>
+              Yolo
+            </Text>
           </View>
         </View>
       </View>
