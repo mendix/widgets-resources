@@ -332,8 +332,14 @@ export interface ProgressCircleType {
 export interface PopupMenuType {
     container?: ViewStyle;
     basic: BasicItemStyle;
+    custom: CustomItemStyle
     buttonContainer?: ViewStyle;
     itemRippleColor: string;
+}
+
+interface CustomItemStyle extends ViewStyle {
+    containerStyle?: ViewStyle;
+    itemStyle: { rippleColor?: string };
 }
 
 interface BasicItemStyle {

@@ -23,11 +23,19 @@ export const com_mendix_widget_native_popupmenu_PopupMenu: PopupMenuType = {
         elevation: 16,
         backgroundColor: background.primary,
     },
-    itemRippleColor: contrast.lower,
+    custom: {
+        itemStyle: {
+            rippleColor: contrast.lower,
+        },
+        containerStyle: {
+            // All ViewStyle properties are allowed
+        },
+    },
     basic: {
         dividerColor: font.color,
         itemStyle: {
             ellipsizeMode: "tail", // 'head' | 'middle' | 'tail' | 'clip';
+            rippleColor: contrast.lower,
             defaultStyle: {
                 // All TextStyle properties are allowed
                 color: font.color,
