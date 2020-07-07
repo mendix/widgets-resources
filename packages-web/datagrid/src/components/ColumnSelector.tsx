@@ -1,13 +1,19 @@
-import { createElement, ReactElement, useState } from "react";
+import { createElement, Dispatch, ReactElement, SetStateAction, useState } from "react";
 import { ColumnInstance } from "react-table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 
 export interface ColumnSelectorProps<D extends object> {
     allColumns: Array<ColumnInstance<D>>;
+    width: number;
+    setWidth: Dispatch<SetStateAction<number>>;
 }
 
-export function ColumnSelector<D extends object>({ allColumns }: ColumnSelectorProps<D>): ReactElement {
+export function ColumnSelector<D extends object>({
+    allColumns,
+    width,
+    setWidth
+}: ColumnSelectorProps<D>): ReactElement {
     const [show, setShow] = useState(false);
     return (
         <div className="th column-selector">
@@ -16,8 +22,10 @@ export function ColumnSelector<D extends object>({ allColumns }: ColumnSelectorP
                 onClick={() => {
                     setShow(s => !s);
                 }}
-                onLoad={event => {
-                    console.warn(event);
+                ref={ref => {
+                    if (ref && ref.clientWidth && width !== ref.clientWidth) {
+                        setWidth(ref.clientWidth);
+                    }
                 }}
             >
                 <FontAwesomeIcon icon={faEye} />

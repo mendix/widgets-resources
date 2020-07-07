@@ -57,6 +57,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     const isSortingOrFiltering = props.columnsFilterable || props.columnsSortable;
     const isInfinite = !props.paging && !isSortingOrFiltering;
     const [dragOver, setDragOver] = useState("");
+    const [columnSelectorWidth, setColumnSelectorWidth] = useState(0);
 
     const filterTypes = useMemo(
         () => ({
@@ -214,7 +215,13 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                     visibleColumns={visibleColumns}
                                 />
                             ))}
-                            {props.columnsHidable && <ColumnSelector allColumns={allColumns} />}
+                            {props.columnsHidable && (
+                                <ColumnSelector
+                                    allColumns={allColumns}
+                                    width={columnSelectorWidth}
+                                    setWidth={setColumnSelectorWidth}
+                                />
+                            )}
                         </div>
                     ))}
                 </div>
@@ -229,7 +236,9 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                         return (
                             <div {...row.getRowProps()} key={`row_${index}`} className="tr">
                                 {row.cells.map(cell => cell.render("Cell"))}
-                                {props.columnsHidable && <div className="td column-selector" />}
+                                {props.columnsHidable && (
+                                    <div className="td column-selector" style={{ width: columnSelectorWidth }} />
+                                )}
                             </div>
                         );
                     })}
