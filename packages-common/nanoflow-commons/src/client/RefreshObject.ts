@@ -7,7 +7,7 @@
 // Other code you write will be lost the next time you deploy the project.
 
 /**
- * @param {MxObject} objectToRefresh
+ * @param {MxObject} objectToRefresh - Object which will be refreshed.
  * @returns {Promise.<void>}
  */
 export async function RefreshObject(objectToRefresh: mendix.lib.MxObject) {

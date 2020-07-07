@@ -7,7 +7,7 @@
 // Other code you write will be lost the next time you deploy the project.
 
 /**
- * @param {string} entityToRefresh
+ * @param {string} entityToRefresh - Entity which will be refreshed.
  * @returns {Promise.<void>}
  */
 export async function RefreshEntity(entityToRefresh: string) {
