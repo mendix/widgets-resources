@@ -1,10 +1,10 @@
 const { execSync } = require("child_process");
 const findFreePort = require("find-free-port");
-const { readFile, readdir } = require("fs").promises;
+const { readFile } = require("fs").promises;
 const fetch = require("node-fetch");
 const { join } = require("path");
 const semverCompare = require("semver/functions/rcompare");
-const { cp, rm } = require("shelljs");
+const { cp, ls, rm } = require("shelljs");
 
 main().catch(e => {
     console.error(e);
@@ -35,12 +35,8 @@ async function main() {
             "Currently e2e tests can only run against a teamserver project. Please provide the credentials to access TeamServer through TS_USERNAME and TS_PASSWORD environment variables."
         );
     }
-    try {
-        const widgetMpk = (await readdir(`dist/${widgetVersion}`)).filter(el => /\.mpk$/.test(el)).length;
-        if (!widgetMpk) {
-            throw new Error();
-        }
-    } catch (e) {
+    const widgetMpk = ls(`dist/${widgetVersion}/*.mpk`).length;
+    if (!widgetMpk) {
         throw new Error("No widgets founds in dist folder. Please execute `npm run release` before start e2e tests.");
     }
 
