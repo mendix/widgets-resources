@@ -1,6 +1,9 @@
 $primary-color: #264ae5;
 $border-color: #ced0d3;
 $background-color: #fff;
+$icon-color: #606671;
+$pagination-button-color: #3b4251;
+$pagination-caption-color: #0a1325;
 $dragging-color-effect: rgba(10, 19, 37, 0.8);
 
 .table {
@@ -55,6 +58,10 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
                 flex-grow: 1;
                 justify-content: space-between;
                 align-items: center;
+
+                svg {
+                    color: $icon-color;
+                }
             }
 
             .filter {
@@ -83,9 +90,9 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
                 border-radius: 3px;
                 border: 1px solid transparent;
                 list-style-type: none;
-                -webkit-box-shadow: 0px 2px 20px 1px rgba(32, 43, 54, 0.08);
-                -moz-box-shadow: 0px 2px 20px 1px rgba(32, 43, 54, 0.08);
-                box-shadow: 0px 2px 20px 1px rgba(32, 43, 54, 0.08);
+                -webkit-box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
+                -moz-box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
+                box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
 
                 li {
                     display: flex;
@@ -110,7 +117,7 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
             position: relative;
             .td {
                 display: flex;
-                flex: 1 1 0px;
+                flex: 1 1 0;
                 justify-content: space-between;
                 align-items: center;
                 padding: 16px;
@@ -160,7 +167,7 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
         white-space: nowrap;
         align-items: baseline;
         margin: 16px;
-        color: #0a1325;
+        color: $pagination-caption-color;
 
         .paging-status {
             padding: 0 8px 8px;
@@ -168,7 +175,7 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
 
         button {
             padding: 6px;
-            color: #3b4251;
+            color: $pagination-button-color;
             border-color: transparent;
             background-color: transparent;
 

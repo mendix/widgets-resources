@@ -55,14 +55,12 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             setPage={setPage}
             styles={props.style}
             cellRenderer={useCallback(
-                (Wrapper, value, columnIndex) => {
+                (renderWrapper, value, columnIndex) => {
                     const column = props.columns[columnIndex];
-                    return (
-                        <Wrapper>
-                            {column.hasWidgets && column.content
-                                ? column.content(value)
-                                : column.attribute(value).displayValue}
-                        </Wrapper>
+                    return renderWrapper(
+                        column.hasWidgets && column.content
+                            ? column.content(value)
+                            : column.attribute(value).displayValue
                     );
                 },
                 [props.columns]
