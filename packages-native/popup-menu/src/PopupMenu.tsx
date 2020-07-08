@@ -88,7 +88,8 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
                 </TouchableButton>
             }
         >
-            {menuOptions}
+            {/* Fixes the issue where touchable overflows. Requires extra view otherwise shadow's disappear on Menu*/}
+            <View style={{ overflow: "hidden", borderRadius: styles.container?.borderRadius }}>{menuOptions}</View>
         </Menu>
     );
 }

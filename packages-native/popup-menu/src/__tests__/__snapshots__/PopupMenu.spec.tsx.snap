@@ -96,64 +96,73 @@ exports[`Popup menu renders menu triggerer 1`] = `
           }
         >
           <View
-            accessible={true}
-            focusable={true}
-            isTVSelectable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={null}
+            style={
+              Object {
+                "borderRadius": undefined,
+                "overflow": "hidden",
+              }
+            }
           >
             <View
-              style={
-                Array [
-                  Object {
-                    "height": 48,
-                    "justifyContent": "center",
-                    "maxWidth": 248,
-                    "minWidth": 124,
-                  },
-                  undefined,
-                ]
-              }
+              accessible={true}
+              focusable={true}
+              isTVSelectable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={null}
             >
-              <Text
-                ellipsizeMode="clip"
-                numberOfLines={1}
+              <View
                 style={
                   Array [
                     Object {
-                      "fontSize": 14,
-                      "fontWeight": "400",
-                      "paddingHorizontal": 16,
-                      "textAlign": "left",
+                      "height": 48,
+                      "justifyContent": "center",
+                      "maxWidth": 248,
+                      "minWidth": 124,
                     },
-                    false,
                     undefined,
                   ]
                 }
               >
-                yolo
-              </Text>
+                <Text
+                  ellipsizeMode="clip"
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "fontSize": 14,
+                        "fontWeight": "400",
+                        "paddingHorizontal": 16,
+                        "textAlign": "left",
+                      },
+                      false,
+                      undefined,
+                    ]
+                  }
+                >
+                  yolo
+                </Text>
+              </View>
             </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "borderBottomWidth": 0.5,
+                    "flex": 1,
+                  },
+                  Object {
+                    "borderBottomColor": "rgba(0,0,0,0.12)",
+                  },
+                ]
+              }
+            />
           </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderBottomWidth": 0.5,
-                  "flex": 1,
-                },
-                Object {
-                  "borderBottomColor": "rgba(0,0,0,0.12)",
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -253,64 +262,73 @@ exports[`Popup menu with basic items renders 1`] = `
           }
         >
           <View
-            accessible={true}
-            focusable={true}
-            isTVSelectable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={null}
+            style={
+              Object {
+                "borderRadius": undefined,
+                "overflow": "hidden",
+              }
+            }
           >
             <View
-              style={
-                Array [
-                  Object {
-                    "height": 48,
-                    "justifyContent": "center",
-                    "maxWidth": 248,
-                    "minWidth": 124,
-                  },
-                  undefined,
-                ]
-              }
+              accessible={true}
+              focusable={true}
+              isTVSelectable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={null}
             >
-              <Text
-                ellipsizeMode="clip"
-                numberOfLines={1}
+              <View
                 style={
                   Array [
                     Object {
-                      "fontSize": 14,
-                      "fontWeight": "400",
-                      "paddingHorizontal": 16,
-                      "textAlign": "left",
+                      "height": 48,
+                      "justifyContent": "center",
+                      "maxWidth": 248,
+                      "minWidth": 124,
                     },
-                    false,
                     undefined,
                   ]
                 }
               >
-                yolo
-              </Text>
+                <Text
+                  ellipsizeMode="clip"
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "fontSize": 14,
+                        "fontWeight": "400",
+                        "paddingHorizontal": 16,
+                        "textAlign": "left",
+                      },
+                      false,
+                      undefined,
+                    ]
+                  }
+                >
+                  yolo
+                </Text>
+              </View>
             </View>
+            <View
+              style={
+                Array [
+                  Object {
+                    "borderBottomWidth": 0.5,
+                    "flex": 1,
+                  },
+                  Object {
+                    "borderBottomColor": "rgba(0,0,0,0.12)",
+                  },
+                ]
+              }
+            />
           </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderBottomWidth": 0.5,
-                  "flex": 1,
-                },
-                Object {
-                  "borderBottomColor": "rgba(0,0,0,0.12)",
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -410,66 +428,75 @@ exports[`Popup menu with basic items renders with custom styles 1`] = `
           }
         >
           <View
-            accessible={true}
-            focusable={true}
-            isTVSelectable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={null}
+            style={
+              Object {
+                "borderRadius": undefined,
+                "overflow": "hidden",
+              }
+            }
           >
+            <View
+              accessible={true}
+              focusable={true}
+              isTVSelectable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={null}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "height": 48,
+                      "justifyContent": "center",
+                      "maxWidth": 248,
+                      "minWidth": 124,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  ellipsizeMode="clip"
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "fontSize": 14,
+                        "fontWeight": "400",
+                        "paddingHorizontal": 16,
+                        "textAlign": "left",
+                      },
+                      false,
+                      Object {
+                        "color": "green",
+                      },
+                    ]
+                  }
+                >
+                  yolo
+                </Text>
+              </View>
+            </View>
             <View
               style={
                 Array [
                   Object {
-                    "height": 48,
-                    "justifyContent": "center",
-                    "maxWidth": 248,
-                    "minWidth": 124,
+                    "borderBottomWidth": 0.5,
+                    "flex": 1,
                   },
-                  undefined,
+                  Object {
+                    "borderBottomColor": "rgba(0,0,0,0.12)",
+                  },
                 ]
               }
-            >
-              <Text
-                ellipsizeMode="clip"
-                numberOfLines={1}
-                style={
-                  Array [
-                    Object {
-                      "fontSize": 14,
-                      "fontWeight": "400",
-                      "paddingHorizontal": 16,
-                      "textAlign": "left",
-                    },
-                    false,
-                    Object {
-                      "color": "green",
-                    },
-                  ]
-                }
-              >
-                yolo
-              </Text>
-            </View>
+            />
           </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "borderBottomWidth": 0.5,
-                  "flex": 1,
-                },
-                Object {
-                  "borderBottomColor": "rgba(0,0,0,0.12)",
-                },
-              ]
-            }
-          />
         </View>
       </View>
     </View>
@@ -569,21 +596,30 @@ exports[`Popup menu with custom items renders 1`] = `
           }
         >
           <View
-            accessible={true}
-            focusable={true}
-            isTVSelectable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={null}
+            style={
+              Object {
+                "borderRadius": undefined,
+                "overflow": "hidden",
+              }
+            }
           >
-            <Text>
-              Yolo
-            </Text>
+            <View
+              accessible={true}
+              focusable={true}
+              isTVSelectable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={null}
+            >
+              <Text>
+                Yolo
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -684,21 +720,30 @@ exports[`Popup menu with custom items renders with custom styles 1`] = `
           }
         >
           <View
-            accessible={true}
-            focusable={true}
-            isTVSelectable={true}
-            onClick={[Function]}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
-            style={null}
+            style={
+              Object {
+                "borderRadius": undefined,
+                "overflow": "hidden",
+              }
+            }
           >
-            <Text>
-              Yolo
-            </Text>
+            <View
+              accessible={true}
+              focusable={true}
+              isTVSelectable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={null}
+            >
+              <Text>
+                Yolo
+              </Text>
+            </View>
           </View>
         </View>
       </View>
