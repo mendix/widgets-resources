@@ -6,7 +6,6 @@ export interface PaginationProps {
     gotoPage: (page: number) => void;
     nextPage: () => void;
     numberOfItems?: number;
-    numberOfPages?: number;
     page: number;
     pageSize: number;
     previousPage: () => void;
@@ -17,12 +16,12 @@ export function Pagination({
     previousPage,
     page,
     nextPage,
-    numberOfPages,
     canNextPage,
     canPreviousPage,
     pageSize,
     numberOfItems
 }: PaginationProps): ReactElement {
+    const numberOfPages = numberOfItems !== undefined ? Math.ceil(numberOfItems / pageSize) : undefined;
     const lastPage = numberOfPages !== undefined ? numberOfPages - 1 : 0;
     const hasLastPage = numberOfPages !== undefined;
     const initialItem = page * pageSize + 1;

@@ -36,14 +36,12 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             pagingPosition={props.pagingPosition}
             styles={parseStyle(props.style)}
             cellRenderer={useCallback(
-                (Wrapper, _, columnIndex) => {
+                (renderWrapper, _, columnIndex) => {
                     const column = props.columns[columnIndex];
                     return column.hasWidgets ? (
-                        <column.content.renderer>
-                            <Wrapper />
-                        </column.content.renderer>
+                        <column.content.renderer>{renderWrapper(null)}</column.content.renderer>
                     ) : (
-                        <Wrapper>{column.attribute}</Wrapper>
+                        renderWrapper(column.attribute)
                     );
                 },
                 [props.columns]

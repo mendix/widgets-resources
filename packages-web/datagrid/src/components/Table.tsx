@@ -1,13 +1,4 @@
-import {
-    ComponentType,
-    createElement,
-    CSSProperties,
-    PropsWithChildren,
-    ReactElement,
-    ReactNode,
-    useMemo,
-    useState
-} from "react";
+import { createElement, CSSProperties, ReactElement, ReactNode, useMemo, useState } from "react";
 import { ColumnSelector } from "./ColumnSelector";
 import { Pagination } from "./Pagination";
 import { Header } from "./Header";
@@ -49,7 +40,7 @@ export interface TableProps<T> {
     setPage?: (computePage: (prevPage: number) => number) => void;
     styles?: CSSProperties;
     hasMoreItems: boolean;
-    cellRenderer: (Wrapper: ComponentType, value: T, columnIndex: number) => ReactElement;
+    cellRenderer: (renderWrapper: (children: ReactNode) => ReactElement, value: T, columnIndex: number) => ReactElement;
     valueForFilter: (value: T, columnIndex: number) => string | undefined;
 }
 
@@ -87,13 +78,13 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 disableFilters: !column.filterable,
                 Cell: ({ cell, value }) =>
                     props.cellRenderer(
-                        (nestedProps: PropsWithChildren<{}>) => (
+                        (children: ReactNode) => (
                             <div
                                 {...cell.getCellProps()}
                                 {...(!props.columnsResizable ? { style: { flex: "1 1 0px" } } : {})}
                                 className="td"
                             >
-                                {nestedProps.children}
+                                {children}
                             </div>
                         ),
                         value,
@@ -136,7 +127,6 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         allColumns,
         setColumnOrder,
         visibleColumns,
-        pageOptions,
         state: { pageIndex },
         gotoPage,
         previousPage,
@@ -171,9 +161,6 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 gotoPage={(page: number) => props.setPage && props.setPage(() => page)}
                 nextPage={() => props.setPage && props.setPage(prev => prev + 1)}
                 numberOfItems={props.numberOfItems}
-                numberOfPages={
-                    props.numberOfItems !== undefined ? Math.ceil(props.numberOfItems / props.pageSize) : undefined
-                }
                 page={props.page}
                 pageSize={props.pageSize}
                 previousPage={() => props.setPage && props.setPage(prev => prev - 1)}
@@ -185,7 +172,6 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 gotoPage={gotoPage}
                 nextPage={nextPage}
                 numberOfItems={props.data.length}
-                numberOfPages={pageOptions.length}
                 page={pageIndex}
                 pageSize={props.pageSize}
                 previousPage={previousPage}
@@ -195,9 +181,9 @@ export function Table<T>(props: TableProps<T>): ReactElement {
 
     return (
         <div className={props.className} style={props.styles}>
-            <div className="thead">{props.headerWidgets}</div>
             <div {...getTableProps()} className="table">
                 <div role="rowgroup" className="thead">
+                    {props.headerWidgets}
                     {props.pagingPosition === "top" && pagination}
                     {headerGroups.map((headerGroup, index: number) => (
                         <div {...headerGroup.getHeaderGroupProps({})} key={`headers_row_${index}`} className="tr">

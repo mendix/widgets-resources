@@ -63,7 +63,7 @@ export function Header<D extends object>({
                     onClick={canSort ? onClick : undefined}
                 >
                     {column.render("Header")}
-                    {sortIcon && <FontAwesomeIcon icon={sortIcon} color="#606671" />}
+                    {sortIcon && <FontAwesomeIcon icon={sortIcon} />}
                 </div>
                 {filterable && column.canFilter && <div className="filter">{column.render("Filter")}</div>}
             </div>
