@@ -25,10 +25,11 @@ exports[`Pagination disables first page button if is first page 1`] = `
   <div
     className="paging-status"
   >
-    Page 
     1
+     to 
+    5
      
-    of 5
+    of 25
   </div>
   <button
     className="btn"
@@ -76,10 +77,11 @@ exports[`Pagination disables next button if is last page 1`] = `
   <div
     className="paging-status"
   >
-    Page 
     1
+     to 
+    25
      
-    of 5
+    of 25
   </div>
   <button
     className="btn"
@@ -127,10 +129,11 @@ exports[`Pagination disables previous button if is first page 1`] = `
   <div
     className="paging-status"
   >
-    Page 
     1
+     to 
+    5
      
-    of 5
+    of 25
   </div>
   <button
     className="btn"
@@ -178,10 +181,11 @@ exports[`Pagination renders the current page correctly 1`] = `
   <div
     className="paging-status"
   >
-    Page 
-    5
+    21
+     to 
+    25
      
-    of 5
+    of 25
   </div>
   <button
     className="btn"
@@ -229,8 +233,9 @@ exports[`Pagination renders the current page correctly with server side paging 1
   <div
     className="paging-status"
   >
-    Page 
     1
+     to 
+    5
      
   </div>
   <button
@@ -270,8 +275,9 @@ exports[`Pagination renders the current page correctly with without pages 1`] = 
   <div
     className="paging-status"
   >
-    Page 
     1
+     to 
+    5
      
     of 0
   </div>
@@ -321,10 +327,11 @@ exports[`Pagination renders the structure correctly 1`] = `
   <div
     className="paging-status"
   >
-    Page 
     1
+     to 
+    5
      
-    of 5
+    of 25
   </div>
   <button
     className="btn"

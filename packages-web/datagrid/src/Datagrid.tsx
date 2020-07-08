@@ -47,11 +47,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             footerWidgets={<div className="header">{props.footerWidgets}</div>}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
             headerWidgets={<div className="footer">{props.headerWidgets}</div>}
-            numberOfPages={
-                props.datasource.totalCount !== undefined
-                    ? Math.ceil(props.datasource.totalCount / props.pageSize)
-                    : undefined
-            }
+            numberOfItems={props.datasource.totalCount}
             page={currentPage}
             pageSize={props.pageSize}
             paging={props.pagingEnabled}
@@ -59,14 +55,12 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             setPage={setPage}
             styles={props.style}
             cellRenderer={useCallback(
-                (Wrapper, value, columnIndex) => {
+                (renderWrapper, value, columnIndex) => {
                     const column = props.columns[columnIndex];
-                    return (
-                        <Wrapper>
-                            {column.hasWidgets && column.content
-                                ? column.content(value)
-                                : column.attribute(value).displayValue}
-                        </Wrapper>
+                    return renderWrapper(
+                        column.hasWidgets && column.content
+                            ? column.content(value)
+                            : column.attribute(value).displayValue
                     );
                 },
                 [props.columns]

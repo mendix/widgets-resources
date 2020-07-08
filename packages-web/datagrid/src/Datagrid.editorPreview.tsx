@@ -29,21 +29,19 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                     <div className="footer" />
                 </props.headerWidgets.renderer>
             }
-            numberOfPages={1}
+            numberOfItems={5}
             page={0}
             pageSize={props.pageSize ?? 5}
             paging={props.pagingEnabled}
             pagingPosition={props.pagingPosition}
             styles={parseStyle(props.style)}
             cellRenderer={useCallback(
-                (Wrapper, _, columnIndex) => {
+                (renderWrapper, _, columnIndex) => {
                     const column = props.columns[columnIndex];
                     return column.hasWidgets ? (
-                        <column.content.renderer>
-                            <Wrapper />
-                        </column.content.renderer>
+                        <column.content.renderer>{renderWrapper(null)}</column.content.renderer>
                     ) : (
-                        <Wrapper>{column.attribute}</Wrapper>
+                        renderWrapper(column.attribute)
                     );
                 },
                 [props.columns]
@@ -54,5 +52,5 @@ export function preview(props: DatagridPreviewProps): ReactElement {
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/Datagrid.scss");
+    return require("./ui/Datagrid.scss") + require("./ui/DatagridPreview.scss");
 }

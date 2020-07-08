@@ -76,7 +76,7 @@ function mockTableProps(): TableProps<ObjectItem> {
         columnsSortable: false,
         columns,
         valueForFilter: () => undefined,
-        cellRenderer: (Wrapper, _, columnIndex) => <Wrapper>{columns[columnIndex].header}</Wrapper>,
+        cellRenderer: (renderWrapper, _, columnIndex) => renderWrapper(columns[columnIndex].header),
         data: [{ id: "123456" as any }]
     };
 }

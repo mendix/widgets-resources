@@ -16,11 +16,13 @@ function mockHeaderProps(): HeaderProps<object> {
             render: () => <span>Test</span>,
             getHeaderProps: () => ({ role: "Test" } as any)
         } as any,
-        setColumnOrder: jest.fn(),
-        visibleColumns: [],
         draggable: false,
+        dragOver: "",
         filterable: false,
         resizable: false,
-        sortable: false
+        sortable: false,
+        setColumnOrder: jest.fn(),
+        setDragOver: jest.fn(),
+        visibleColumns: []
     };
 }
