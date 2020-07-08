@@ -279,7 +279,7 @@ exports[`Pagination renders the current page correctly with without pages 1`] = 
      to 
     5
      
-    of 25
+    of 0
   </div>
   <button
     className="btn"

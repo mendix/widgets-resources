@@ -5,9 +5,6 @@ exports[`Table renders the structure correctly 1`] = `
   className="test"
 >
   <div
-    className="thead"
-  />
-  <div
     className="table"
     role="table"
     style={
@@ -162,11 +159,13 @@ exports[`Table renders the structure correctly 1`] = `
               "width": 150,
             }
           }
+          dragOver=""
           draggable={false}
           filterable={false}
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
+          setDragOver={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -3810,9 +3809,6 @@ exports[`Table renders the structure correctly with dragging 1`] = `
   className="test"
 >
   <div
-    className="thead"
-  />
-  <div
     className="table"
     role="table"
     style={
@@ -3967,11 +3963,13 @@ exports[`Table renders the structure correctly with dragging 1`] = `
               "width": 150,
             }
           }
+          dragOver=""
           draggable={true}
           filterable={false}
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
+          setDragOver={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -7615,9 +7613,6 @@ exports[`Table renders the structure correctly with filtering 1`] = `
   className="test"
 >
   <div
-    className="thead"
-  />
-  <div
     className="table"
     role="table"
     style={
@@ -7772,11 +7767,13 @@ exports[`Table renders the structure correctly with filtering 1`] = `
               "width": 150,
             }
           }
+          dragOver=""
           draggable={false}
           filterable={true}
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
+          setDragOver={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -11420,9 +11417,6 @@ exports[`Table renders the structure correctly with hiding 1`] = `
   className="test"
 >
   <div
-    className="thead"
-  />
-  <div
     className="table"
     role="table"
     style={
@@ -11577,11 +11571,13 @@ exports[`Table renders the structure correctly with hiding 1`] = `
               "width": 150,
             }
           }
+          dragOver=""
           draggable={false}
           filterable={false}
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
+          setDragOver={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -11847,6 +11843,8 @@ exports[`Table renders the structure correctly with hiding 1`] = `
               },
             ]
           }
+          setWidth={[Function]}
+          width={0}
         />
       </div>
     </div>
@@ -15346,6 +15344,11 @@ exports[`Table renders the structure correctly with hiding 1`] = `
         />
         <div
           className="td column-selector"
+          style={
+            Object {
+              "width": 0,
+            }
+          }
         />
       </div>
     </InfiniteBody>
@@ -15360,9 +15363,6 @@ exports[`Table renders the structure correctly with paging 1`] = `
 <div
   className="test"
 >
-  <div
-    className="thead"
-  />
   <div
     className="table"
     role="table"
@@ -15518,11 +15518,13 @@ exports[`Table renders the structure correctly with paging 1`] = `
               "width": 150,
             }
           }
+          dragOver=""
           draggable={false}
           filterable={false}
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
+          setDragOver={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -19176,9 +19178,6 @@ exports[`Table renders the structure correctly with resizing 1`] = `
   className="test"
 >
   <div
-    className="thead"
-  />
-  <div
     className="table"
     role="table"
     style={
@@ -19333,11 +19332,13 @@ exports[`Table renders the structure correctly with resizing 1`] = `
               "width": 150,
             }
           }
+          dragOver=""
           draggable={false}
           filterable={false}
           key="headers_column_0"
           resizable={true}
           setColumnOrder={[Function]}
+          setDragOver={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -22984,9 +22985,6 @@ exports[`Table renders the structure correctly with sorting 1`] = `
   className="test"
 >
   <div
-    className="thead"
-  />
-  <div
     className="table"
     role="table"
     style={
@@ -23141,11 +23139,13 @@ exports[`Table renders the structure correctly with sorting 1`] = `
               "width": 150,
             }
           }
+          dragOver=""
           draggable={false}
           filterable={false}
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
+          setDragOver={[Function]}
           sortable={true}
           visibleColumns={
             Array [
