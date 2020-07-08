@@ -18,7 +18,7 @@ describe("Mapbox Maps", () => {
 
             const markers = mapPage.leafletMarkers;
 
-            browser.waitUntil(() => markers.length === 3, 5000);
+            expect(markers.length).toBe(3);
         });
     });
 
@@ -38,7 +38,7 @@ describe("Mapbox Maps", () => {
 
             const markers = mapPage.leafletMarkers;
 
-            browser.waitUntil(() => markers.length === 1, 5000);
+            expect(markers.length).toBe(1);
         });
     });
 
@@ -58,7 +58,7 @@ describe("Mapbox Maps", () => {
 
             const markers = mapPage.leafletMarkers;
 
-            browser.waitUntil(() => markers.length === 2, 5000);
+            expect(markers.length).toBe(2);
         });
     });
 

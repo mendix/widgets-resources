@@ -20,10 +20,6 @@ async function main() {
     }
 
     const latestMendixVersion = await getLatestMendixVersion();
-    if (!latestMendixVersion) {
-        throw new Error("Couldn't reach hub.docker.com. Make sure you are connected to internet.");
-    }
-
     const packageConf = JSON.parse(await readFile("package.json"));
     const teamServerProject = packageConf?.config?.testProjectId;
     const widgetVersion = packageConf?.version;
@@ -71,7 +67,7 @@ async function main() {
         false
     );
 
-    let attempts = 100;
+    let attempts = 60;
     for (; attempts > 0; --attempts) {
         try {
             const response = await fetch(`http://localhost:${freePort}`);
@@ -79,9 +75,9 @@ async function main() {
                 break;
             }
         } catch (e) {
-            // do nothing
+            console.log(`Could not reach http://localhost:${freePort}, trying again...`);
         }
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise(resolve => setTimeout(resolve, 1000));
     }
 
     try {
@@ -106,10 +102,22 @@ function dockerRun(command, appendOutput = true) {
 }
 
 async function getLatestMendixVersion() {
-    const dockerTagsResponse = await fetch("https://registry.hub.docker.com/v1/repositories/mendix/runtime-base/tags");
-    const runtimeVersions = (await dockerTagsResponse.json()).map(r => r.name.split("-")[0]);
-    runtimeVersions.sort((a, b) =>
-        semverCompare(a.replace(/^(\d+\.\d+\.\d+).*/, "$1"), b.replace(/^(\d+\.\d+\.\d+).*/, "$1"))
-    );
-    return runtimeVersions[0];
+    let latestMendixVersion;
+    try {
+        const dockerTagsResponse = await fetch(
+            "https://registry.hub.docker.com/v1/repositories/mendix/runtime-base/tags"
+        );
+        const runtimeVersions = (await dockerTagsResponse.json()).map(r => r.name.split("-")[0]);
+        runtimeVersions.sort((a, b) =>
+            semverCompare(a.replace(/^(\d+\.\d+\.\d+).*/, "$1"), b.replace(/^(\d+\.\d+\.\d+).*/, "$1"))
+        );
+        latestMendixVersion = runtimeVersions[0];
+    } catch (e) {
+        throw new Error("Couldn't reach hub.docker.com. Make sure you are connected to internet.");
+    }
+    if (!latestMendixVersion) {
+        throw new Error("Couldn't retrieve latest Mendix version from hub.docker.com. Try again later.");
+    }
+
+    return latestMendixVersion;
 }
