@@ -7,7 +7,6 @@ exports[`Column Selector renders the structure correctly 1`] = `
   <button
     className="btn btn-default"
     onClick={[Function]}
-    onLoad={[Function]}
   >
     <FontAwesomeIcon
       border={false}
