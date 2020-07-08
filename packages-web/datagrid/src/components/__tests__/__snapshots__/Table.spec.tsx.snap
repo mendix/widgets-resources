@@ -5,9 +5,6 @@ exports[`Table renders the structure correctly 1`] = `
   className="test"
 >
   <div
-    className="thead"
-  />
-  <div
     className="table"
     role="table"
     style={
@@ -162,11 +159,13 @@ exports[`Table renders the structure correctly 1`] = `
               "width": 150,
             }
           }
+          dragOver=""
           draggable={false}
           filterable={false}
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
+          setDragOver={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -3810,9 +3809,6 @@ exports[`Table renders the structure correctly with dragging 1`] = `
   className="test"
 >
   <div
-    className="thead"
-  />
-  <div
     className="table"
     role="table"
     style={
@@ -3967,11 +3963,13 @@ exports[`Table renders the structure correctly with dragging 1`] = `
               "width": 150,
             }
           }
+          dragOver=""
           draggable={true}
           filterable={false}
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
+          setDragOver={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -7615,9 +7613,6 @@ exports[`Table renders the structure correctly with filtering 1`] = `
   className="test"
 >
   <div
-    className="thead"
-  />
-  <div
     className="table"
     role="table"
     style={
@@ -7772,11 +7767,13 @@ exports[`Table renders the structure correctly with filtering 1`] = `
               "width": 150,
             }
           }
+          dragOver=""
           draggable={false}
           filterable={true}
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
+          setDragOver={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -11420,143 +11417,6 @@ exports[`Table renders the structure correctly with hiding 1`] = `
   className="test"
 >
   <div
-    className="thead"
-  >
-    <ColumnSelector
-      allColumns={
-        Array [
-          Object {
-            "Cell": [Function],
-            "Filter": [Function],
-            "Footer": [Function],
-            "Header": "Test",
-            "accessor": [Function],
-            "canDrag": false,
-            "canFilter": false,
-            "canHide": false,
-            "canResize": false,
-            "canSort": false,
-            "depth": 0,
-            "disableFilters": true,
-            "disableResizing": true,
-            "disableSortBy": true,
-            "filter": "text",
-            "filterValue": undefined,
-            "filteredRows": Array [
-              Object {
-                "allCells": Array [
-                  Object {
-                    "column": [Circular],
-                    "getCellProps": [Function],
-                    "render": [Function],
-                    "row": [Circular],
-                    "value": Object {
-                      "id": "123456",
-                    },
-                  },
-                ],
-                "cells": Array [
-                  Object {
-                    "column": [Circular],
-                    "getCellProps": [Function],
-                    "render": [Function],
-                    "row": [Circular],
-                    "value": Object {
-                      "id": "123456",
-                    },
-                  },
-                ],
-                "depth": 0,
-                "getRowProps": [Function],
-                "id": "0",
-                "index": 0,
-                "original": Object {
-                  "item": Object {
-                    "id": "123456",
-                  },
-                },
-                "originalSubRows": Array [],
-                "subRows": Array [],
-                "values": Object {
-                  "0": Object {
-                    "id": "123456",
-                  },
-                },
-              },
-            ],
-            "getFooterProps": [Function],
-            "getHeaderProps": [Function],
-            "getSortByToggleProps": [Function],
-            "getToggleHiddenProps": [Function],
-            "id": "0",
-            "isResizing": false,
-            "isSorted": false,
-            "isSortedDesc": undefined,
-            "isVisible": true,
-            "maxWidth": 9007199254740991,
-            "minWidth": 0,
-            "parent": undefined,
-            "preFilteredRows": Array [
-              Object {
-                "allCells": Array [
-                  Object {
-                    "column": [Circular],
-                    "getCellProps": [Function],
-                    "render": [Function],
-                    "row": [Circular],
-                    "value": Object {
-                      "id": "123456",
-                    },
-                  },
-                ],
-                "cells": Array [
-                  Object {
-                    "column": [Circular],
-                    "getCellProps": [Function],
-                    "render": [Function],
-                    "row": [Circular],
-                    "value": Object {
-                      "id": "123456",
-                    },
-                  },
-                ],
-                "depth": 0,
-                "getRowProps": [Function],
-                "id": "0",
-                "index": 0,
-                "original": Object {
-                  "item": Object {
-                    "id": "123456",
-                  },
-                },
-                "originalSubRows": Array [],
-                "subRows": Array [],
-                "values": Object {
-                  "0": Object {
-                    "id": "123456",
-                  },
-                },
-              },
-            ],
-            "render": [Function],
-            "setFilter": [Function],
-            "sortDescFirst": false,
-            "sortType": "alphanumeric",
-            "sortedIndex": -1,
-            "toggleHidden": [Function],
-            "totalFlexWidth": 0,
-            "totalLeft": 0,
-            "totalMaxWidth": 9007199254740991,
-            "totalMinWidth": 0,
-            "totalVisibleHeaderCount": 1,
-            "totalWidth": 150,
-            "width": 150,
-          },
-        ]
-      }
-    />
-  </div>
-  <div
     className="table"
     role="table"
     style={
@@ -11711,11 +11571,13 @@ exports[`Table renders the structure correctly with hiding 1`] = `
               "width": 150,
             }
           }
+          dragOver=""
           draggable={false}
           filterable={false}
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
+          setDragOver={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -11848,6 +11710,141 @@ exports[`Table renders the structure correctly with hiding 1`] = `
               },
             ]
           }
+        />
+        <ColumnSelector
+          allColumns={
+            Array [
+              Object {
+                "Cell": [Function],
+                "Filter": [Function],
+                "Footer": [Function],
+                "Header": "Test",
+                "accessor": [Function],
+                "canDrag": false,
+                "canFilter": false,
+                "canHide": false,
+                "canResize": false,
+                "canSort": false,
+                "depth": 0,
+                "disableFilters": true,
+                "disableResizing": true,
+                "disableSortBy": true,
+                "filter": "text",
+                "filterValue": undefined,
+                "filteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "cells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "getFooterProps": [Function],
+                "getHeaderProps": [Function],
+                "getSortByToggleProps": [Function],
+                "getToggleHiddenProps": [Function],
+                "id": "0",
+                "isResizing": false,
+                "isSorted": false,
+                "isSortedDesc": undefined,
+                "isVisible": true,
+                "maxWidth": 9007199254740991,
+                "minWidth": 0,
+                "parent": undefined,
+                "preFilteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "cells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "render": [Function],
+                "setFilter": [Function],
+                "sortDescFirst": false,
+                "sortType": "alphanumeric",
+                "sortedIndex": -1,
+                "toggleHidden": [Function],
+                "totalFlexWidth": 0,
+                "totalLeft": 0,
+                "totalMaxWidth": 9007199254740991,
+                "totalMinWidth": 0,
+                "totalVisibleHeaderCount": 1,
+                "totalWidth": 150,
+                "width": 150,
+              },
+            ]
+          }
+          setWidth={[Function]}
+          width={0}
         />
       </div>
     </div>
@@ -15345,6 +15342,14 @@ exports[`Table renders the structure correctly with hiding 1`] = `
             ]
           }
         />
+        <div
+          className="td column-selector"
+          style={
+            Object {
+              "width": 0,
+            }
+          }
+        />
       </div>
     </InfiniteBody>
     <div
@@ -15358,9 +15363,6 @@ exports[`Table renders the structure correctly with paging 1`] = `
 <div
   className="test"
 >
-  <div
-    className="thead"
-  />
   <div
     className="table"
     role="table"
@@ -15516,11 +15518,13 @@ exports[`Table renders the structure correctly with paging 1`] = `
               "width": 150,
             }
           }
+          dragOver=""
           draggable={false}
           filterable={false}
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
+          setDragOver={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -19161,6 +19165,7 @@ exports[`Table renders the structure correctly with paging 1`] = `
         gotoPage={[Function]}
         nextPage={[Function]}
         page={1}
+        pageSize={10}
         previousPage={[Function]}
       />
     </div>
@@ -19172,9 +19177,6 @@ exports[`Table renders the structure correctly with resizing 1`] = `
 <div
   className="test"
 >
-  <div
-    className="thead"
-  />
   <div
     className="table"
     role="table"
@@ -19330,11 +19332,13 @@ exports[`Table renders the structure correctly with resizing 1`] = `
               "width": 150,
             }
           }
+          dragOver=""
           draggable={false}
           filterable={false}
           key="headers_column_0"
           resizable={true}
           setColumnOrder={[Function]}
+          setDragOver={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -22981,9 +22985,6 @@ exports[`Table renders the structure correctly with sorting 1`] = `
   className="test"
 >
   <div
-    className="thead"
-  />
-  <div
     className="table"
     role="table"
     style={
@@ -23138,11 +23139,13 @@ exports[`Table renders the structure correctly with sorting 1`] = `
               "width": 150,
             }
           }
+          dragOver=""
           draggable={false}
           filterable={false}
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
+          setDragOver={[Function]}
           sortable={true}
           visibleColumns={
             Array [
