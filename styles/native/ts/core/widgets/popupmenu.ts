@@ -17,7 +17,6 @@ export const com_mendix_widget_native_popupmenu_PopupMenu: PopupMenuType = {
         // All ViewStyle properties are allowed
         borderRadius: 10,
         shadowColor: "#000",
-        overflow: "hidden",
         shadowOpacity: 0.2,
         shadowRadius: 10,
         elevation: 16,
