@@ -27,7 +27,7 @@ export interface MyWidgetProps<Style> {
     name: string;
     style: Style[];
     valueAttribute?: EditableValue<string | BigJs.Big>;
-    mywidgetValue?: string;
+    mywidgetValue: string;
     valueExpression?: DynamicValue<string>;
     valueExpressionDecimal?: DynamicValue<BigJs.Big>;
     file: DynamicValue<FileValue>;
@@ -92,7 +92,7 @@ export interface MyWidgetContainerProps {
     style?: CSSProperties;
     tabIndex: number;
     valueAttribute?: EditableValue<string | BigJs.Big>;
-    mywidgetValue?: string;
+    mywidgetValue: string;
     valueExpression?: DynamicValue<string>;
     valueExpressionDecimal?: DynamicValue<BigJs.Big>;
     file: DynamicValue<FileValue>;

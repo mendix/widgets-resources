@@ -14,7 +14,7 @@ export interface MarkersType {
     onClick?: ActionValue;
     icon?: DynamicValue<NativeIcon>;
     iconSize: number;
-    color?: string;
+    color: string;
 }
 
 export type DefaultZoomLevelEnum = "world" | "continent" | "country" | "city" | "town" | "streets" | "building";

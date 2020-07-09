@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { Component, ReactNode } from "react";
+import { ComponentType, ReactNode } from "react";
 import { ActionValue, DynamicValue, EditableValue, NativeIcon } from "mendix";
 
 export interface SlidesType {
@@ -19,7 +19,7 @@ export type SlideIndicatorsEnum = "between" | "above" | "never";
 
 export interface SlidesPreviewType {
     name: string;
-    content: { widgetCount: number; renderer: Component };
+    content: { widgetCount: number; renderer: ComponentType };
 }
 
 export interface IntroScreenProps<Style> {
@@ -30,7 +30,7 @@ export interface IntroScreenProps<Style> {
     buttonPattern: ButtonPatternEnum;
     slideIndicators: SlideIndicatorsEnum;
     hideIndicatorLastSlide: boolean;
-    identifier?: string;
+    identifier: string;
     skipCaption?: DynamicValue<string>;
     skipIcon?: DynamicValue<NativeIcon>;
     previousCaption?: DynamicValue<string>;

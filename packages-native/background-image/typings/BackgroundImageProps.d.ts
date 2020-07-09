@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { Component, ReactNode } from "react";
+import { ComponentType, ReactNode } from "react";
 import { DynamicValue, NativeImage } from "mendix";
 
 export type ResizeModeEnum = "cover" | "contain" | "stretch" | "center";
@@ -23,5 +23,5 @@ export interface BackgroundImagePreviewProps {
     image: string;
     resizeMode: ResizeModeEnum;
     opacity: number | null;
-    content: { widgetCount: number; renderer: Component };
+    content: { widgetCount: number; renderer: ComponentType };
 }
