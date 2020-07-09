@@ -1,6 +1,6 @@
 {
   "name": "@mendix/pluggable-widgets-tools",
-  "version": "8.10.1",
+  "version": "8.10.2",
   "description": "Mendix Pluggable Widgets Tools",
   "license": "Apache-2.0",
   "copyright": "2020 Mendix Technology BV",
@@ -39,7 +39,6 @@
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "@mendix/pluggable-widgets-typing-generator": "^8.9.0",
     "@typescript-eslint/eslint-plugin": "^2.19.2",
     "@typescript-eslint/parser": "^2.19.2",
     "@wdio/cli": "^5.11.13",
@@ -79,6 +78,7 @@
     "jest-junit": "^6.4.0",
     "json-loader": "^0.5.7",
     "json-source-map": "^0.6.1",
+    "map-stream": "^0.0.7",
     "mendix": "^8.7.0",
     "node-sass": "^4.14.1",
     "plugin-error": "^1.0.1",
@@ -102,9 +102,13 @@
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
+    "@types/plugin-error": "^0.1.1",
+    "@types/vinyl": "^2.0.4",
+    "@types/xml2js": "^0.4.5",
     "@mendix/generator-widget": ">=8.9.0",
     "async": "^3.2.0",
     "async-mutex": "^0.2.2",
@@ -119,6 +123,6 @@
     "prepare": "shx rm -rf dist && tsc",
     "test": "npm run test:src && cross-env LIMIT_TESTS=true npm run test:scripts",
     "test:src": "jest",
-    "test:scripts": "node tests/commands.js"
+    "test:scripts": "npm run prepare && node tests/commands.js"
   }
 }

@@ -23,7 +23,7 @@ ${generateClientTypeBody(properties, false, results)}
 
 function generateClientTypeBody(properties: Property[], isNative: boolean, generatedTypes: string[]) {
     return properties
-        .map((prop) => {
+        .map(prop => {
             const isOptional = (prop.$.required === "false" && prop.$.type !== "object") || prop.$.type === "action";
             return `    ${prop.$.key}${isOptional ? "?" : ""}: ${toClientPropType(prop, isNative, generatedTypes)};`;
         })
@@ -57,9 +57,9 @@ function toClientPropType(prop: Property, isNative: boolean, generatedTypes: str
                 throw new Error("[XML] Attribute property requires attributeTypes element");
             }
             const types = prop.attributeTypes
-                .map((ats) => ats.attributeType)
+                .map(ats => ats.attributeType)
                 .reduce((a, i) => a.concat(i), [])
-                .map((at) => toClientType(at.$.name));
+                .map(at => toClientType(at.$.name));
             const uniqueTypes = Array.from(new Set(types));
             return !!prop.$.dataSource
                 ? `(item: ObjectItem) => EditableValue<${uniqueTypes.join(" | ")}>`
@@ -95,7 +95,7 @@ function generateEnum(typeName: string, prop: Property) {
     if (!prop.enumerationValues?.length || !prop.enumerationValues[0].enumerationValue?.length) {
         throw new Error("[XML] Enumeration property requires enumerations element");
     }
-    const members = prop.enumerationValues[0].enumerationValue.map((type) => `"${type.$.key}"`);
+    const members = prop.enumerationValues[0].enumerationValue.map(type => `"${type.$.key}"`);
     return `export type ${typeName} = ${members.join(" | ")};`;
 }
 

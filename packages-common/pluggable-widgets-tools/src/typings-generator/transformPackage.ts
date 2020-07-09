@@ -2,7 +2,6 @@ import { promises } from "fs";
 import { join } from "path";
 import { promisify } from "util";
 import { parseString } from "xml2js";
-import replaceExt from "replace-ext";
 import { PackageXml } from "./PackageXml";
 import { WidgetXml } from "./WidgetXml";
 import { generateForWidget } from "./generate";
@@ -24,9 +23,9 @@ export async function transformPackage(content: string, basePath: string) {
     }
 
     const widgetFileXmls = contentXml.package.clientModule[0].widgetFiles
-        .map((wf) => wf.widgetFile)
+        .map(wf => wf.widgetFile)
         .reduce((a, e) => a.concat(e), [])
-        .filter((wfXml) => wfXml.$.path);
+        .filter(wfXml => wfXml.$.path);
 
     for (const widgetFileXml of widgetFileXmls) {
         const sourcePath = widgetFileXml.$.path;
@@ -42,7 +41,7 @@ export async function transformPackage(content: string, basePath: string) {
             );
         }
 
-        const resultPath = replaceExt(sourcePath, "Props.d.ts");
+        const resultPath = sourcePath.replace(/(\.xml)?$/, "Props.d.ts");
         await writeFile(join(resultBasePath, resultPath), generatedContent);
     }
 }

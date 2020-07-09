@@ -1,5 +1,4 @@
 import { parseString } from "xml2js";
-import { generateForWidget } from "../src/generate";
 import { content, contentGroup, contentGroupNative, contentNative } from "./inputs";
 import { nativeResult, webResult } from "./outputs";
 import { listActionInput, listActionInputNative } from "./inputs/list-action";
@@ -8,7 +7,6 @@ import { listImageInput, listImageInputNative } from "./inputs/list-image";
 import { listImageNativeOutput, listImageWebOutput } from "./outputs/list-image";
 import { iconInput, iconInputNative } from "./inputs/icon";
 import { iconNativeOutput, iconWebOutput } from "./outputs/icon";
-import { WidgetXml } from "../src/WidgetXml";
 import { containmentInput, containmentInputNative } from "./inputs/containment";
 import { containmentNativeOutput, containmentWebOutput } from "./outputs/containment";
 import { fileInput, fileInputNative } from "./inputs/file";
@@ -17,96 +15,98 @@ import { listFileInput, listFileInputNative } from "./inputs/list-files";
 import { listFileNativeOutput, listFileWebOutput } from "./outputs/list-files";
 import { datasourceInput, datasourceInputNative } from "./inputs/datasource";
 import { datasourceNativeOutput, datasourceWebOutput } from "./outputs/datasource";
-import { generateClientTypes } from "../src/generateClientTypes";
-import { extractProperties } from "../src/helpers";
+import { generateForWidget } from "../generate";
+import { generateClientTypes } from "../generateClientTypes";
+import { extractProperties } from "../helpers";
+import { WidgetXml } from "../WidgetXml";
 
-describe("Generating tests", function () {
-    it(`Generates a parsed typing from XML for native`, function () {
+describe("Generating tests", () => {
+    it("Generates a parsed typing from XML for native", () => {
         const newContent = generateFullTypesFor(contentNative);
         expect(newContent).toBe(nativeResult);
     });
 
-    it(`Generates a parsed typing from XML for web`, function () {
+    it("Generates a parsed typing from XML for web", () => {
         const newContent = generateFullTypesFor(content);
         expect(newContent).toBe(webResult);
     });
 
-    it(`Generates a parsed typing from XML for native with groups`, function () {
+    it("Generates a parsed typing from XML for native with groups", () => {
         const newContent = generateFullTypesFor(contentGroupNative);
         expect(newContent).toBe(nativeResult);
     });
 
-    it(`Generates a parsed typing from XML for web with groups`, function () {
+    it("Generates a parsed typing from XML for web with groups", () => {
         const newContent = generateFullTypesFor(contentGroup);
         expect(newContent).toBe(webResult);
     });
 
-    it(`Generates a parsed typing from XML for native using list of actions`, function () {
+    it("Generates a parsed typing from XML for native using list of actions", () => {
         const newContent = generateNativeTypesFor(listActionInputNative);
         expect(newContent).toBe(listActionNativeOutput);
     });
 
-    it(`Generates a parsed typing from XML for web using list of actions`, function () {
+    it("Generates a parsed typing from XML for web using list of actions", () => {
         const newContent = generateFullTypesFor(listActionInput);
         expect(newContent).toBe(listActionWebOutput);
     });
 
-    it(`Generates a parsed typing from XML for native using list of images`, function () {
+    it("Generates a parsed typing from XML for native using list of images", () => {
         const newContent = generateNativeTypesFor(listImageInputNative);
         expect(newContent).toBe(listImageNativeOutput);
     });
 
-    it(`Generates a parsed typing from XML for web using list of images`, function () {
+    it("Generates a parsed typing from XML for web using list of images", () => {
         const newContent = generateFullTypesFor(listImageInput);
         expect(newContent).toBe(listImageWebOutput);
     });
 
-    it(`Generates a parsed typing from XML for native using icons`, function () {
+    it("Generates a parsed typing from XML for native using icons", () => {
         const newContent = generateNativeTypesFor(iconInputNative);
         expect(newContent).toBe(iconNativeOutput);
     });
 
-    it(`Generates a parsed typing from XML for web using icons`, function () {
+    it("Generates a parsed typing from XML for web using icons", () => {
         const newContent = generateFullTypesFor(iconInput);
         expect(newContent).toBe(iconWebOutput);
     });
 
-    it(`Generates a parsed typing from XML for web using containment`, function () {
+    it("Generates a parsed typing from XML for web using containment", () => {
         const newContent = generateFullTypesFor(containmentInput);
         expect(newContent).toBe(containmentWebOutput);
     });
 
-    it(`Generates a parsed typing from XML for native using containment`, function () {
+    it("Generates a parsed typing from XML for native using containment", () => {
         const newContent = generateNativeTypesFor(containmentInputNative);
         expect(newContent).toBe(containmentNativeOutput);
     });
 
-    it(`Generates a parsed typing from XML for web using file`, function () {
+    it("Generates a parsed typing from XML for web using file", () => {
         const newContent = generateFullTypesFor(fileInput);
         expect(newContent).toBe(fileWebOutput);
     });
 
-    it(`Generates a parsed typing from XML for native using file`, function () {
+    it("Generates a parsed typing from XML for native using file", () => {
         const newContent = generateNativeTypesFor(fileInputNative);
         expect(newContent).toBe(fileNativeOutput);
     });
 
-    it(`Generates a parsed typing from XML for web using a list of file`, function () {
+    it("Generates a parsed typing from XML for web using a list of file", () => {
         const newContent = generateFullTypesFor(listFileInput);
         expect(newContent).toBe(listFileWebOutput);
     });
 
-    it(`Generates a parsed typing from XML for native using a list of file`, function () {
+    it("Generates a parsed typing from XML for native using a list of file", () => {
         const newContent = generateNativeTypesFor(listFileInputNative);
         expect(newContent).toBe(listFileNativeOutput);
     });
 
-    it(`Generates a parsed typing from XML for web using datasource`, function () {
+    it("Generates a parsed typing from XML for web using datasource", () => {
         const newContent = generateFullTypesFor(datasourceInput);
         expect(newContent).toBe(datasourceWebOutput);
     });
 
-    it(`Generates a parsed typing from XML for native using datasource`, function () {
+    it("Generates a parsed typing from XML for native using datasource", () => {
         const newContent = generateNativeTypesFor(datasourceInputNative);
         expect(newContent).toBe(datasourceNativeOutput);
     });
@@ -124,8 +124,10 @@ function generateNativeTypesFor(xml: string) {
 function convertXmltoJson(xml: string): WidgetXml {
     let content: WidgetXml = {};
     if (xml) {
-        parseString(xml, {}, function (err: Error, result: any) {
-            if (err) throw err;
+        parseString(xml, {}, (err: Error, result: any) => {
+            if (err) {
+                throw err;
+            }
             content = result as WidgetXml;
         });
     }
