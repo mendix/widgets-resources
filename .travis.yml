@@ -53,6 +53,7 @@ jobs:
               - docker
           env:
               - BROWSER=firefox
+              - MOZ_HEADLESS=1
           script:
               - set -e
               - npm run release -- $SINCE_ARG
