@@ -19,7 +19,7 @@ exports.config = {
     host: "127.0.0.1",
     port: 4444,
     specs: [join(process.cwd(), "./tests/e2e/**/*.spec.js"), join(process.cwd(), "./tests/e2e/**/*.spec.ts")],
-    maxInstances: debug ? 1 : 5,
+    maxInstances: 1,
     capabilities: [
         {
             browserName: browser,
