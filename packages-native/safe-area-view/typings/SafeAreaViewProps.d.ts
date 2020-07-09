@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { Component, ReactNode } from "react";
+import { ComponentType, ReactNode } from "react";
 
 export interface SafeAreaViewProps<Style> {
     name: string;
@@ -14,5 +14,5 @@ export interface SafeAreaViewProps<Style> {
 export interface SafeAreaViewPreviewProps {
     class: string;
     style: string;
-    content: { widgetCount: number; renderer: Component };
+    content: { widgetCount: number; renderer: ComponentType };
 }
