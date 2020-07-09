@@ -12,7 +12,8 @@ describe("WebView", () => {
         defaultProps = {
             name: "webview-test",
             style: [],
-            url: dynamicValue("https://mendix.com")
+            url: dynamicValue("https://mendix.com"),
+            userAgent: ""
         };
     });
 
