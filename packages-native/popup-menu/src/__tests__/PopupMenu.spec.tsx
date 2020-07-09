@@ -21,7 +21,7 @@ describe("Popup menu", () => {
             menuTriggerer: undefined,
             basicItems: [
                 { itemType: "item", action: dummyActionValue, caption: "yolo", styleClass: "defaultStyle" },
-                { itemType: "divider", styleClass: "defaultStyle" }
+                { itemType: "divider", styleClass: "defaultStyle", caption: "" }
             ],
             customItems: [{ content: <Text>Yolo</Text>, action: dummyActionValue }]
         };

@@ -35,7 +35,8 @@ describe("Intro Screen", () => {
             showMode: "fullscreen",
             slideIndicators: "between",
             style: [],
-            hideIndicatorLastSlide: false
+            hideIndicatorLastSlide: false,
+            identifier: ""
         };
 
         jest.useFakeTimers();

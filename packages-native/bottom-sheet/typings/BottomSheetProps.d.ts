@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { Component, ReactNode } from "react";
+import { ComponentType, ReactNode } from "react";
 import { ActionValue, EditableValue } from "mendix";
 
 export type TypeEnum = "modal" | "expanding";
@@ -48,10 +48,10 @@ export interface BottomSheetPreviewProps {
     modalRendering: ModalRenderingEnum;
     itemsBasic: ItemsBasicPreviewType[];
     nativeImplementation: boolean;
-    smallContent: { widgetCount: number; renderer: Component };
-    largeContent: { widgetCount: number; renderer: Component };
+    smallContent: { widgetCount: number; renderer: ComponentType };
+    largeContent: { widgetCount: number; renderer: ComponentType };
     showFullscreenContent: boolean;
-    fullscreenContent: { widgetCount: number; renderer: Component };
+    fullscreenContent: { widgetCount: number; renderer: ComponentType };
     onOpen: {} | null;
     onClose: {} | null;
 }
