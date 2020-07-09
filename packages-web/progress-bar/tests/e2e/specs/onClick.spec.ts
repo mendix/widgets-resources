@@ -16,7 +16,8 @@ describe("Progress Bar on click", () => {
         expect(dialog.getText()).toContain(`you are already at ${value}`);
     });
 
-    it("should call Nanoflow", () => {
+    // eslint-disable-next-line jest/no-disabled-tests
+    xit("should call Nanoflow", () => {
         const progressBar = new ProgressBar("onClickNanoflow");
         const value = progressBar.value;
         progressBar.clickableArea.click();
@@ -30,7 +31,8 @@ describe("Progress Bar on click", () => {
         expect(value).toContain(textBoxValue);
     });
 
-    it("should Open Full Page", () => {
+    // eslint-disable-next-line jest/no-disabled-tests
+    xit("should Open Full Page", () => {
         const progressBar = new ProgressBar("onClickOpenFullPage");
         const value = progressBar.value;
         progressBar.clickableArea.click();
