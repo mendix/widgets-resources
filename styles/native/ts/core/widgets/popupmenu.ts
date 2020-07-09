@@ -17,17 +17,24 @@ export const com_mendix_widget_native_popupmenu_PopupMenu: PopupMenuType = {
         // All ViewStyle properties are allowed
         borderRadius: 10,
         shadowColor: "#000",
-        overflow: "hidden",
         shadowOpacity: 0.2,
         shadowRadius: 10,
         elevation: 16,
         backgroundColor: background.primary,
     },
-    itemRippleColor: contrast.lower,
+    custom: {
+        itemStyle: {
+            rippleColor: contrast.lower,
+        },
+        containerStyle: {
+            // All ViewStyle properties are allowed
+        },
+    },
     basic: {
         dividerColor: font.color,
         itemStyle: {
             ellipsizeMode: "tail", // 'head' | 'middle' | 'tail' | 'clip';
+            rippleColor: contrast.lower,
             defaultStyle: {
                 // All TextStyle properties are allowed
                 color: font.color,
