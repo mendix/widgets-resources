@@ -1,6 +1,4 @@
 import { parseString } from "xml2js";
-import { content, contentGroup, contentGroupNative, contentNative } from "./inputs";
-import { nativeResult, webResult } from "./outputs";
 import { listActionInput, listActionInputNative } from "./inputs/list-action";
 import { listActionNativeOutput, listActionWebOutput } from "./outputs/list-action";
 import { listImageInput, listImageInputNative } from "./inputs/list-image";
@@ -19,6 +17,8 @@ import { generateForWidget } from "../generate";
 import { generateClientTypes } from "../generateClientTypes";
 import { extractProperties } from "../helpers";
 import { WidgetXml } from "../WidgetXml";
+import { content, contentGroup, contentGroupNative, contentNative } from "./inputs";
+import { nativeResult, webResult } from "./outputs";
 
 describe("Generating tests", () => {
     it("Generates a parsed typing from XML for native", () => {
