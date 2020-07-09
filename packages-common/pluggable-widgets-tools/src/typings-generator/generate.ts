@@ -13,7 +13,7 @@ const mxExports = [
     "NativeImage",
     "ObjectItem",
     "WebIcon",
-    "WebImage",
+    "WebImage"
 ];
 
 export function generateForWidget(widgetXml: WidgetXml, widgetName: string) {
@@ -29,7 +29,7 @@ export function generateForWidget(widgetXml: WidgetXml, widgetName: string) {
     const properties = (widgetXml.widget.properties.length > 0
         ? extractProperties(widgetXml.widget.properties[0])
         : []
-    ).filter((prop) => prop && prop.$ && prop.$.key);
+    ).filter(prop => prop && prop.$ && prop.$.key);
 
     const clientTypes = generateClientTypes(widgetName, properties, isNative);
     const modelerTypes = generatePreviewTypes(widgetName, properties);
@@ -42,9 +42,9 @@ export function generateForWidget(widgetXml: WidgetXml, widgetName: string) {
 
     const imports = [
         generateImport("react", generatedTypesCode, ["ComponentType", "CSSProperties", "ReactNode"]),
-        generateImport("mendix", generatedTypesCode, mxExports),
+        generateImport("mendix", generatedTypesCode, mxExports)
     ]
-        .filter((line) => line)
+        .filter(line => line)
         .join("\n");
 
     return `/**
@@ -57,6 +57,6 @@ ${imports.length ? imports + "\n\n" : ""}${generatedTypesCode}
 }
 
 function generateImport(from: string, code: string, availableNames: string[]) {
-    const usedNames = availableNames.filter((type) => new RegExp(`\\W${type}\\W`).test(code));
+    const usedNames = availableNames.filter(type => new RegExp(`\\W${type}\\W`).test(code));
     return usedNames.length ? `import { ${usedNames.join(", ")} } from "${from}";` : "";
 }

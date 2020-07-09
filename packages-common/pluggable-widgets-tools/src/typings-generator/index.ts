@@ -8,7 +8,7 @@ function generateTypings(file: File, cb: (error: Error | null) => void): void {
         return cb(
             new PluginError(
                 "pluggable-widgets-typing-generator",
-                `Empty XML, please check your src folder for file package.xml`
+                "Empty XML, please check your src folder for file package.xml"
             )
         );
     }
@@ -18,7 +18,7 @@ function generateTypings(file: File, cb: (error: Error | null) => void): void {
 
     transformPackage(file.contents!.toString("utf8"), file.base).then(
         () => cb(null),
-        (err) => cb(new PluginError("pluggable-widgets-typing-generator", err))
+        err => cb(new PluginError("pluggable-widgets-typing-generator", err))
     );
 }
 

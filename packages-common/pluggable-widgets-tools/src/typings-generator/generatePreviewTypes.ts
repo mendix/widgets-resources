@@ -12,7 +12,7 @@ ${generatePreviewTypeBody(properties, results)}
 }
 
 function generatePreviewTypeBody(properties: Property[], generatedTypes: string[]) {
-    return properties.map((prop) => `    ${prop.$.key}: ${toPreviewPropType(prop, generatedTypes)};`).join("\n");
+    return properties.map(prop => `    ${prop.$.key}: ${toPreviewPropType(prop, generatedTypes)};`).join("\n");
 }
 
 function toPreviewPropType(prop: Property, generatedTypes: string[]): string {

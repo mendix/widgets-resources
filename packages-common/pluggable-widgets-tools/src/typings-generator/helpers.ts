@@ -5,7 +5,7 @@ export function extractProperties(propElements: Properties): Property[] {
         return propElements.property ?? [];
     }
 
-    return (propElements.propertyGroup ?? []).map((pg) => extractProperties(pg)).reduce((a, e) => a.concat(e), []);
+    return (propElements.propertyGroup ?? []).map(pg => extractProperties(pg)).reduce((a, e) => a.concat(e), []);
 }
 
 export function capitalizeFirstLetter(text: string): string {
