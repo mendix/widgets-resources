@@ -241,12 +241,10 @@
         "prefer-spread": "off",
         "prefer-template": "off",
         "quote-props": "off",
-        "quotes": ["error", "double"],
         "radix": "error",
         "require-await": "error",
         "require-jsdoc": "off",
         "rest-spread-spacing": "error",
-        "semi": "error",
         "semi-spacing": [
             "error",
             {

@@ -1,4 +1,4 @@
-export const contentGroup: string = `<?xml version="1.0" encoding="utf-8"?>
+export const contentGroup = `<?xml version="1.0" encoding="utf-8"?>
 <widget id="mendix.mywidget.MyWidget" needsEntityContext="true" offlineCapable="true" pluginWidget="true" supportedPlatform="Web"
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
@@ -119,7 +119,7 @@ export const contentGroup: string = `<?xml version="1.0" encoding="utf-8"?>
     </properties>
 </widget>`;
 
-export const content: string = `<?xml version="1.0" encoding="utf-8"?>
+export const content = `<?xml version="1.0" encoding="utf-8"?>
 <widget id="mendix.mywidget.MyWidget" needsEntityContext="true" offlineCapable="true" pluginWidget="true" supportedPlatform="Web"
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
@@ -238,7 +238,7 @@ export const content: string = `<?xml version="1.0" encoding="utf-8"?>
         </property>
     </properties>
 </widget>`;
-export const contentGroupNative: string = `<?xml version="1.0" encoding="utf-8"?>
+export const contentGroupNative = `<?xml version="1.0" encoding="utf-8"?>
 <widget id="mendix.mywidget.MyWidget" needsEntityContext="true" offlineCapable="true" pluginWidget="true" supportedPlatform="Native"
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
@@ -359,7 +359,7 @@ export const contentGroupNative: string = `<?xml version="1.0" encoding="utf-8"?
     </properties>
 </widget>`;
 
-export const contentNative: string = `<?xml version="1.0" encoding="utf-8"?>
+export const contentNative = `<?xml version="1.0" encoding="utf-8"?>
 <widget id="mendix.mywidget.MyWidget" needsEntityContext="true" offlineCapable="true" pluginWidget="true" supportedPlatform="Native"
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
