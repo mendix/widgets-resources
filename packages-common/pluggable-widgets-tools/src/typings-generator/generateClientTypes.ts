@@ -24,7 +24,9 @@ ${generateClientTypeBody(properties, false, results)}
 function generateClientTypeBody(properties: Property[], isNative: boolean, generatedTypes: string[]) {
     return properties
         .map(prop => {
-            const isOptional = (prop.$.required === "false" && prop.$.type !== "object") || prop.$.type === "action";
+            const isOptional =
+                prop.$.type !== "string" &&
+                ((prop.$.required === "false" && prop.$.type !== "object") || prop.$.type === "action");
             return `    ${prop.$.key}${isOptional ? "?" : ""}: ${toClientPropType(prop, isNative, generatedTypes)};`;
         })
         .join("\n");

@@ -75,9 +75,9 @@ export interface MapsContainerProps {
     tabIndex: number;
     markers: MarkersType[];
     dynamicMarkers: DynamicMarkersType[];
-    apiKey?: string;
+    apiKey: string;
     apiKeyExp?: DynamicValue<string>;
-    geodecodeApiKey?: string;
+    geodecodeApiKey: string;
     geodecodeApiKeyExp?: DynamicValue<string>;
     zoom: ZoomEnum;
     showCurrentLocation: boolean;
@@ -95,7 +95,7 @@ export interface MapsContainerProps {
     height: number;
     advanced: boolean;
     mapProvider: MapProviderEnum;
-    mapStyles?: string;
+    mapStyles: string;
 }
 
 export interface MapsPreviewProps {

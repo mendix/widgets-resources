@@ -12,7 +12,7 @@ export interface WebViewProps<Style> {
     content?: DynamicValue<string>;
     onLoad?: ActionValue;
     onError?: ActionValue;
-    userAgent?: string;
+    userAgent: string;
 }
 
 export interface WebViewPreviewProps {
