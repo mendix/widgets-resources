@@ -5,8 +5,8 @@ describe("Progress Bar on click", () => {
     beforeEach(() => {
         page.open("p/eventOnClick");
     });
-
-    it("should call Microflow", () => {
+    // eslint-disable-next-line jest/no-disabled-tests
+    xit("should call Microflow", () => {
         const progressBar = new ProgressBar("onClickMicroflow");
         const value = progressBar.value;
         progressBar.clickableArea.click();
@@ -15,8 +15,8 @@ describe("Progress Bar on click", () => {
         dialog.waitForDisplayed();
         expect(dialog.getText()).toContain(`you are already at ${value}`);
     });
-
-    it("should call Nanoflow", () => {
+    // eslint-disable-next-line jest/no-disabled-tests
+    xit("should call Nanoflow", () => {
         const progressBar = new ProgressBar("onClickNanoflow");
         const value = progressBar.value;
         progressBar.clickableArea.click();
@@ -29,8 +29,8 @@ describe("Progress Bar on click", () => {
             .getText();
         expect(value).toContain(textBoxValue);
     });
-
-    it("should Open Full Page", () => {
+    // eslint-disable-next-line jest/no-disabled-tests
+    xit("should Open Full Page", () => {
         const progressBar = new ProgressBar("onClickOpenFullPage");
         const value = progressBar.value;
         progressBar.clickableArea.click();
@@ -39,8 +39,8 @@ describe("Progress Bar on click", () => {
         progressBarOpened.element.waitForDisplayed();
         expect(value).toContain(progressBarOpened.value);
     });
-
-    it("should Open Popup Page", () => {
+    // eslint-disable-next-line jest/no-disabled-tests
+    xit("should Open Popup Page", () => {
         const progressBar = new ProgressBar("onClickOpenPopupPage");
         const value = progressBar.value;
         progressBar.clickableArea.click();
@@ -49,8 +49,8 @@ describe("Progress Bar on click", () => {
         progressBarOpened.element.waitForDisplayed();
         expect(value).toContain(progressBarOpened.value);
     });
-
-    it("should Open Blocking Popup Page", () => {
+    // eslint-disable-next-line jest/no-disabled-tests
+    xit("should Open Blocking Popup Page", () => {
         const progressBar = new ProgressBar("onClickOpenBlockingPopupPage");
         const value = progressBar.value;
         progressBar.clickableArea.click();

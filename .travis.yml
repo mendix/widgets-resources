@@ -22,14 +22,10 @@ stages:
 jobs:
     fast_finish: true
     include:
-        - name: "Lint"
-          script:
-              - npm run lint -- $SINCE_ARG
-        - name: "Build on Linux"
-          script:
-              - npm run build -- $SINCE_ARG
         - name: "Run unit tests"
           script:
+              - set -e
+              - npm run lint -- $SINCE_ARG
               - npm run test -- $SINCE_ARG
         - name: "Script tests (Node 10, windows)"
           node_js: 10

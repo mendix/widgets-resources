@@ -10,7 +10,7 @@ export class SvnService {
 
     constructor(private username: string, private password: string) {}
 
-    checkOutBranch(projectId: string, branch: string, destination: string, revision: number): Promise<void> {
+    checkOutBranch(projectId: string, branch: string, destination: string): Promise<void> {
         const branchUrl = this.getBranchUrl(projectId, branch);
         this.log(`Checking out ${branchUrl} to ${destination}`);
         return new Promise<void>(resolve => {
@@ -19,8 +19,7 @@ export class SvnService {
                 destination,
                 {
                     username: this.username,
-                    password: this.password,
-                    revision
+                    password: this.password
                 },
                 (error: any) => {
                     if (!error) {

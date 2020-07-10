@@ -22,7 +22,7 @@
     "test:e2e:android": "cd ./detox && npm install && npm run test:android",
     "build": "lerna run build --ignore @widgets-resources/utils-react-widgets",
     "publish": "ts-node --project ./scripts/tsconfig.json ./scripts/release/Release.ts",
-    "release": "lerna run release",
+    "release": "lerna run release --ignore @widgets-resources/utils-react-widgets",
     "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
     "presvncheckout": "ts-node --project ./scripts/tsconfig.json ./scripts/svn/Authentication.ts",
     "svncheckout": "lerna run svncheckout --stream --concurrency 1"

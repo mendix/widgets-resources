@@ -1,7 +1,7 @@
 import page from "../pages/page";
 import mapPage from "../pages/baseMap.page";
 
-describe("OpenStree Maps", () => {
+describe("OpenStreet Maps", () => {
     describe("mixed rendering", () => {
         beforeAll(() => {
             page.open("p/osm");
@@ -13,7 +13,7 @@ describe("OpenStree Maps", () => {
             expect(mapPage.leafletMap).toBeDefined();
         });
 
-        it("check the number of locations", () => {
+        xit("check the number of locations", () => {
             mapPage.leafletMap.waitForDisplayed();
 
             const markers = mapPage.leafletMarkers;
