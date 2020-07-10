@@ -39,7 +39,7 @@ function toClientPropType(prop: Property, isNative: boolean, generatedTypes: str
         case "string":
             return "string";
         case "action":
-            return prop.$.dataSource ? "(item: ObjectItem) => ActionValue" : "ActionValue";
+            return prop.$.dataSource ? "ListActionValue" : "ActionValue";
         case "textTemplate":
             return "DynamicValue<string>";
         case "integer":
@@ -64,7 +64,7 @@ function toClientPropType(prop: Property, isNative: boolean, generatedTypes: str
                 .map(at => toClientType(at.$.name));
             const uniqueTypes = Array.from(new Set(types));
             return prop.$.dataSource
-                ? `(item: ObjectItem) => EditableValue<${uniqueTypes.join(" | ")}>`
+                ? `ListAttributeValue<${uniqueTypes.join(" | ")}>`
                 : `EditableValue<${uniqueTypes.join(" | ")}>`;
         case "expression":
             if (!prop.returnType || prop.returnType.length === 0) {
@@ -87,7 +87,7 @@ ${generateClientTypeBody(extractProperties(prop.properties[0]), isNative, genera
             );
             return prop.$.isList === "true" ? `${childType}[]` : childType;
         case "widgets":
-            return prop.$.dataSource ? "(item: ObjectItem) => ReactNode" : "ReactNode";
+            return prop.$.dataSource ? "ListWidgetValue" : "ReactNode";
         default:
             return "any";
     }
