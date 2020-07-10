@@ -8,7 +8,7 @@ describe("badge-web", () => {
     });
     describe("type: badge", () => {
         it("compares successfully with a screenshot baseline", () => {
-            browser.setWindowRect(0, 0, 1366, 768);
+            browser.setWindowRect(0, 0, 1360, 1020);
             browser.saveFullPageScreen("badgeHomePage", {});
             expect(browser.checkFullPageScreen("badgeHomePage", {})).toEqual(0);
         });

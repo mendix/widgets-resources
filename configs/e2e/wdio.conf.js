@@ -9,9 +9,7 @@ if (!fs.existsSync(e2ePath)) {
     fs.mkdirSync(e2ePath, { recursive: true });
 }
 
-const chromeArgs = debug
-    ? ["--no-sandbox", "--disable-gpu", "--disable-extensions", "window-size=1366,768"]
-    : ["--no-sandbox", "--headless", "--disable-gpu", "--disable-extensions", "window-size=1366,768"];
+const chromeArgs = debug ? ["--no-sandbox"] : ["--no-sandbox", "--headless", "--disable-gpu", "--disable-extensions"];
 
 exports.config = {
     before() {
