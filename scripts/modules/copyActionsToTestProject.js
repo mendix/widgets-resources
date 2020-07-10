@@ -1,10 +1,10 @@
-import { promises as fs } from "fs";
-import { basename, join } from "path";
+const fs = require("fs").promises;
+const { basename, join } = require("path");
 
 const cwd = process.cwd();
 const actionsDir = join(cwd, "dist/tsc/");
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const packageContent: any = require(join(cwd, "package.json"));
+
+const packageContent = require(join(cwd, "package.json"));
 
 const testProjectDir = join(
     cwd,
@@ -14,10 +14,12 @@ const testProjectDir = join(
     "actions/"
 );
 
-// eslint-disable-next-line no-console
-main().catch(console.error);
+main().catch(e => {
+    console.error(e);
+    process.exit(1);
+});
 
-async function main(): Promise<void> {
+async function main() {
     await fs.mkdir(testProjectDir, { recursive: true });
 
     const files = await walk(actionsDir);
@@ -28,7 +30,7 @@ async function main(): Promise<void> {
     }
 }
 
-async function walk(dirPath: string, fileList: string[] = []): Promise<string[]> {
+async function walk(dirPath, fileList = []) {
     const files = await fs.readdir(dirPath);
 
     for (const file of files) {

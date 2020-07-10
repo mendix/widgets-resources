@@ -28,13 +28,7 @@ describe("BadgeButton on click", () => {
             badgeButton.element.waitForDisplayed();
             badgeButton.element.click();
 
-            const dialog = page.waitForElement(".modal-body");
-
-            expect(dialog.isDisplayed()).toBeTruthy();
-
-            // Verify it passes a parameter
-            const data = page.waitForElement(".form-control-static").getText();
-            expect(data).toBe("New");
+            browser.waitUntil(() => page.getWidget("text1").getText() === "Nanoflow called", 3000);
         });
     });
 
@@ -98,8 +92,7 @@ describe("BadgeButton on click", () => {
             badgeButton.element.waitForDisplayed();
             badgeButton.element.click();
 
-            const header = page.header();
-            expect(header).toBe("OnClickClosePage");
+            browser.waitUntil(() => page.header() === "OnClickClosePage", 3000);
         });
 
         it("should close a popup page", () => {
@@ -109,8 +102,7 @@ describe("BadgeButton on click", () => {
             badgeButton.element.waitForDisplayed();
             badgeButton.element.click();
 
-            const header = page.header();
-            expect(header).toBe("OnClickClosePage");
+            browser.waitUntil(() => page.header() === "OnClickClosePage", 3000);
         });
     });
 

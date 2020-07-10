@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "chalk": "^4.0.0",
-    "semver": "^7.2.1",
+    "semver": "^7.3.2",
     "yeoman-generator": "^4.8.0"
   },
   "devDependencies": {
