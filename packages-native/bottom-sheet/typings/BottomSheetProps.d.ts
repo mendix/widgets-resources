@@ -44,7 +44,7 @@ export interface BottomSheetPreviewProps {
     class: string;
     style: string;
     type: TypeEnum;
-    triggerAttribute: string;
+    triggerAttribute: { displayValue: string } | null;
     modalRendering: ModalRenderingEnum;
     itemsBasic: ItemsBasicPreviewType[];
     nativeImplementation: boolean;

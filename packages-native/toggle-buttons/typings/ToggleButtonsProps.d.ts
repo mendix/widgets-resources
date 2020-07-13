@@ -18,7 +18,7 @@ export interface ToggleButtonsProps<Style> {
 export interface ToggleButtonsPreviewProps {
     class: string;
     style: string;
-    enum: string;
+    enum: { displayValue: string } | null;
     editable: EditableEnum;
     onChange: {} | null;
 }

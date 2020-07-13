@@ -15,6 +15,6 @@ export interface BarcodeScannerProps<Style> {
 export interface BarcodeScannerPreviewProps {
     class: string;
     style: string;
-    barcode: string;
+    barcode: { displayValue: string } | null;
     onDetect: {} | null;
 }

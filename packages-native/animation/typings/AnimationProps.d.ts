@@ -132,7 +132,7 @@ export interface AnimationPreviewProps {
     animationOut: AnimationOutEnum;
     duration: number | null;
     delay: number | null;
-    condition: string;
+    condition: { displayValue: string } | null;
     easing: EasingEnum;
     count: number | null;
     direction: DirectionEnum;

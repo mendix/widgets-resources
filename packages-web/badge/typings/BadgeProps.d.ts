@@ -25,7 +25,7 @@ export interface BadgePreviewProps {
     class: string;
     style: string;
     type: TypeEnum;
-    value: string;
+    value: { displayValue: string } | null;
     brandStyle: BrandStyleEnum;
     onClick: {} | null;
 }

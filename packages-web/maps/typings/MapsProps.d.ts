@@ -47,25 +47,25 @@ export type MapProviderEnum = "googleMaps" | "openStreet" | "mapBox" | "hereMaps
 
 export interface MarkersPreviewType {
     locationType: LocationTypeEnum;
-    address: string;
-    latitude: string;
-    longitude: string;
-    title: string;
+    address: { displayValue: string } | null;
+    latitude: { displayValue: string } | null;
+    longitude: { displayValue: string } | null;
+    title: { displayValue: string } | null;
     onClick: {} | null;
     markerStyle: MarkerStyleEnum;
-    customMarker: string;
+    customMarker: { displayValue: string } | null;
 }
 
 export interface DynamicMarkersPreviewType {
     markersDS: {} | null;
     locationType: LocationTypeEnum;
-    address: string;
-    latitude: string;
-    longitude: string;
-    title: string;
+    address: { displayValue: string } | null;
+    latitude: { displayValue: string } | null;
+    longitude: { displayValue: string } | null;
+    title: { displayValue: string } | null;
     onClickAttribute: {} | null;
     markerStyleDynamic: MarkerStyleDynamicEnum;
-    customMarkerDynamic: string;
+    customMarkerDynamic: { displayValue: string } | null;
 }
 
 export interface MapsContainerProps {
@@ -104,9 +104,9 @@ export interface MapsPreviewProps {
     markers: MarkersPreviewType[];
     dynamicMarkers: DynamicMarkersPreviewType[];
     apiKey: string;
-    apiKeyExp: string;
+    apiKeyExp: { displayValue: string } | null;
     geodecodeApiKey: string;
-    geodecodeApiKeyExp: string;
+    geodecodeApiKeyExp: { displayValue: string } | null;
     zoom: ZoomEnum;
     showCurrentLocation: boolean;
     optionDrag: boolean;

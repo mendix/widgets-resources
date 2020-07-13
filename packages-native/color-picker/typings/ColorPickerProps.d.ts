@@ -22,7 +22,7 @@ export interface ColorPickerProps<Style> {
 export interface ColorPickerPreviewProps {
     class: string;
     style: string;
-    color: string;
+    color: { displayValue: string } | null;
     format: FormatEnum;
     showPreview: boolean;
     showSaturation: boolean;

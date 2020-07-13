@@ -28,5 +28,5 @@ export interface NotificationsPreviewProps {
     class: string;
     style: string;
     actions: ActionsPreviewType[];
-    guid: string;
+    guid: { displayValue: string } | null;
 }

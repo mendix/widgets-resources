@@ -14,5 +14,5 @@ export interface QRCodeProps<Style> {
 export interface QRCodePreviewProps {
     class: string;
     style: string;
-    value: string;
+    value: { displayValue: string } | null;
 }

@@ -28,11 +28,11 @@ export type MapTypeEnum = "standard" | "satellite";
 export type ProviderEnum = "default" | "google";
 
 export interface MarkersPreviewType {
-    address: string;
-    latitude: string;
-    longitude: string;
-    title: string;
-    description: string;
+    address: { displayValue: string } | null;
+    latitude: { displayValue: string } | null;
+    longitude: { displayValue: string } | null;
+    title: { displayValue: string } | null;
+    description: { displayValue: string } | null;
     onClick: {} | null;
     icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     iconSize: number | null;
@@ -61,9 +61,9 @@ export interface MapsPreviewProps {
     style: string;
     markers: MarkersPreviewType[];
     fitToMarkers: boolean;
-    centerAddress: string;
-    centerLatitude: string;
-    centerLongitude: string;
+    centerAddress: { displayValue: string } | null;
+    centerLatitude: { displayValue: string } | null;
+    centerLongitude: { displayValue: string } | null;
     defaultZoomLevel: DefaultZoomLevelEnum;
     minZoomLevel: MinZoomLevelEnum;
     maxZoomLevel: MaxZoomLevelEnum;

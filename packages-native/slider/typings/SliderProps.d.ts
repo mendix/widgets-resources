@@ -21,10 +21,10 @@ export interface SliderProps<Style> {
 export interface SliderPreviewProps {
     class: string;
     style: string;
-    valueAttribute: string;
+    valueAttribute: { displayValue: string } | null;
     editable: EditableEnum;
-    minimumValue: string;
-    maximumValue: string;
-    stepSize: string;
+    minimumValue: { displayValue: string } | null;
+    maximumValue: { displayValue: string } | null;
+    stepSize: { displayValue: string } | null;
     onChange: {} | null;
 }

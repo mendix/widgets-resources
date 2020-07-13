@@ -30,8 +30,8 @@ export interface VideoPlayerContainerProps {
 export interface VideoPlayerPreviewProps {
     class: string;
     style: string;
-    urlExpression: string;
-    posterExpression: string;
+    urlExpression: { displayValue: string } | null;
+    posterExpression: { displayValue: string } | null;
     autoStart: boolean;
     showControls: boolean;
     muted: boolean;

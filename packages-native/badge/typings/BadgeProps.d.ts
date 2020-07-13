@@ -15,6 +15,6 @@ export interface BadgeProps<Style> {
 export interface BadgePreviewProps {
     class: string;
     style: string;
-    caption: string;
+    caption: { displayValue: string } | null;
     onClick: {} | null;
 }

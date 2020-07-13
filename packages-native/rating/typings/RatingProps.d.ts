@@ -35,9 +35,9 @@ export interface RatingProps<Style> {
 export interface RatingPreviewProps {
     class: string;
     style: string;
-    ratingAttribute: string;
-    emptyIcon: string;
-    icon: string;
+    ratingAttribute: { displayValue: string } | null;
+    emptyIcon: { displayValue: string } | null;
+    icon: { displayValue: string } | null;
     maximumValue: number | null;
     animation: AnimationEnum;
     editable: EditableEnum;

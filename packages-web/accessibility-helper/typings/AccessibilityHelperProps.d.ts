@@ -19,9 +19,9 @@ export interface AttributesListType {
 export interface AttributesListPreviewType {
     attribute: string;
     valueSourceType: ValueSourceTypeEnum;
-    valueExpression: string;
-    valueText: string;
-    attributeCondition: string;
+    valueExpression: { displayValue: string } | null;
+    valueText: { displayValue: string } | null;
+    attributeCondition: { displayValue: string } | null;
 }
 
 export interface AccessibilityHelperContainerProps {

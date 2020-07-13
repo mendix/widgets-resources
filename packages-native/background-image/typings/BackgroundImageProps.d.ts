@@ -20,7 +20,7 @@ export interface BackgroundImageProps<Style> {
 export interface BackgroundImagePreviewProps {
     class: string;
     style: string;
-    image: string;
+    image: { displayValue: string } | null;
     resizeMode: ResizeModeEnum;
     opacity: number | null;
     content: { widgetCount: number; renderer: ComponentType };

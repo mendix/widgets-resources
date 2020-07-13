@@ -20,9 +20,9 @@ export interface ProgressCircleProps<Style> {
 export interface ProgressCirclePreviewProps {
     class: string;
     style: string;
-    progressValue: string;
-    minimumValue: string;
-    maximumValue: string;
+    progressValue: { displayValue: string } | null;
+    minimumValue: { displayValue: string } | null;
+    maximumValue: { displayValue: string } | null;
     circleText: CircleTextEnum;
-    customText: string;
+    customText: { displayValue: string } | null;
 }

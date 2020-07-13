@@ -22,8 +22,8 @@ export interface BadgeButtonContainerProps {
 export interface BadgeButtonPreviewProps {
     class: string;
     style: string;
-    label: string;
+    label: { displayValue: string } | null;
     bootstrapStyle: BootstrapStyleEnum;
-    value: string;
+    value: { displayValue: string } | null;
     onClickEvent: {} | null;
 }

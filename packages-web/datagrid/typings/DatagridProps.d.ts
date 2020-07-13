@@ -23,8 +23,8 @@ export interface ColumnsType {
 export type PagingPositionEnum = "bottom" | "top";
 
 export interface ColumnsPreviewType {
-    attribute: string;
-    header: string;
+    attribute: { displayValue: string } | null;
+    header: { displayValue: string } | null;
     hasWidgets: boolean;
     content: { widgetCount: number; renderer: ComponentType };
     sortable: boolean;

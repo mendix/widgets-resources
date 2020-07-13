@@ -18,8 +18,8 @@ export interface WebViewProps<Style> {
 export interface WebViewPreviewProps {
     class: string;
     style: string;
-    url: string;
-    content: string;
+    url: { displayValue: string } | null;
+    content: { displayValue: string } | null;
     onLoad: {} | null;
     onError: {} | null;
     userAgent: string;

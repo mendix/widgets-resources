@@ -19,7 +19,7 @@ export interface VideoPlayerProps<Style> {
 export interface VideoPlayerPreviewProps {
     class: string;
     style: string;
-    videoUrl: string;
+    videoUrl: { displayValue: string } | null;
     autoStart: boolean;
     muted: boolean;
     loop: boolean;

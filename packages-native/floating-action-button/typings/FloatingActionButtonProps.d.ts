@@ -17,7 +17,7 @@ export interface SecondaryButtonsType {
 
 export interface SecondaryButtonsPreviewType {
     icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
-    caption: string;
+    caption: { displayValue: string } | null;
     onClick: {} | null;
 }
 

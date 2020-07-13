@@ -18,6 +18,6 @@ export interface FieldsetContainerProps {
 export interface FieldsetPreviewProps {
     class: string;
     style: string;
-    legend: string;
+    legend: { displayValue: string } | null;
     content: { widgetCount: number; renderer: ComponentType };
 }

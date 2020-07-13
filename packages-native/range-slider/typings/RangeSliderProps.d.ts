@@ -22,11 +22,11 @@ export interface RangeSliderProps<Style> {
 export interface RangeSliderPreviewProps {
     class: string;
     style: string;
-    lowerValueAttribute: string;
-    upperValueAttribute: string;
+    lowerValueAttribute: { displayValue: string } | null;
+    upperValueAttribute: { displayValue: string } | null;
     editable: EditableEnum;
-    minimumValue: string;
-    maximumValue: string;
-    stepSize: string;
+    minimumValue: { displayValue: string } | null;
+    maximumValue: { displayValue: string } | null;
+    stepSize: { displayValue: string } | null;
     onChange: {} | null;
 }
