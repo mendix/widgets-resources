@@ -20,7 +20,7 @@ export interface ActionsPreviewType {
     name: string;
     enabled: boolean;
     action: {} | null;
-    image: string;
+    image: { displayValue: string } | null;
 }
 
 export interface MyWidgetProps<Style> {
@@ -44,16 +44,16 @@ export interface MyWidgetProps<Style> {
 export interface MyWidgetPreviewProps {
     class: string;
     style: string;
-    valueAttribute: string;
+    valueAttribute: { displayValue: string } | null;
     mywidgetValue: string;
-    valueExpression: string;
-    valueExpressionDecimal: string;
-    file: string;
+    valueExpression: { displayValue: string } | null;
+    valueExpressionDecimal: { displayValue: string } | null;
+    file: { displayValue: string } | null;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
     tries: number | null;
     amount: number | null;
-    image: string;
+    image: { displayValue: string } | null;
     onClickAction: {} | null;
     onChange: {} | null;
     actions: ActionsPreviewType[];
@@ -83,7 +83,7 @@ export interface ActionsPreviewType {
     name: string;
     enabled: boolean;
     action: {} | null;
-    image: string;
+    image: { displayValue: string } | null;
 }
 
 export interface MyWidgetContainerProps {
@@ -109,16 +109,16 @@ export interface MyWidgetContainerProps {
 export interface MyWidgetPreviewProps {
     class: string;
     style: string;
-    valueAttribute: string;
+    valueAttribute: { displayValue: string } | null;
     mywidgetValue: string;
-    valueExpression: string;
-    valueExpressionDecimal: string;
-    file: string;
+    valueExpression: { displayValue: string } | null;
+    valueExpressionDecimal: { displayValue: string } | null;
+    file: { displayValue: string } | null;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
     tries: number | null;
     amount: number | null;
-    image: string;
+    image: { displayValue: string } | null;
     onClickAction: {} | null;
     onChange: {} | null;
     actions: ActionsPreviewType[];

@@ -11,7 +11,7 @@ export interface ActionsType {
 }
 
 export interface ActionsPreviewType {
-    image: string;
+    image: { displayValue: string } | null;
 }
 
 export interface MyWidgetContainerProps {

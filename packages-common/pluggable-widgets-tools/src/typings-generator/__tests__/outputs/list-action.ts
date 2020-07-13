@@ -12,7 +12,7 @@ export interface ActionsType {
 }
 
 export interface ActionsPreviewType {
-    description: string;
+    description: { displayValue: string } | null;
     action: {} | null;
 }
 

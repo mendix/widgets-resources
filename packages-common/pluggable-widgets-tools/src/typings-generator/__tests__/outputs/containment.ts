@@ -20,7 +20,7 @@ export interface MyWidgetPreviewProps {
     class: string;
     style: string;
     content: { widgetCount: number; renderer: ComponentType };
-    description: string;
+    description: { displayValue: string } | null;
     action: {} | null;
 }
 `;

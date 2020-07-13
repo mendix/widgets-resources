@@ -20,9 +20,9 @@ export interface MyWidgetContainerProps {
 export interface MyWidgetPreviewProps {
     class: string;
     style: string;
-    file: string;
-    file2: string;
-    description: string;
+    file: { displayValue: string } | null;
+    file2: { displayValue: string } | null;
+    description: { displayValue: string } | null;
     action: {} | null;
 }
 `;
