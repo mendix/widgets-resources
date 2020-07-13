@@ -23,22 +23,19 @@ function toPreviewPropType(prop: Property, generatedTypes: string[]): string {
             return "string";
         case "action":
             return "{} | null";
-        case "textTemplate":
-            return "string";
         case "integer":
         case "decimal":
             return "number | null";
         case "icon":
             return '{ type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null';
+        case "textTemplate":
         case "image":
-            return "string";
         case "file":
-            return "string";
-        case "datasource":
-            return "{} | null";
         case "attribute":
         case "expression":
-            return "string";
+            return "{ displayValue: string } | null";
+        case "datasource":
+            return "{} | null";
         case "enumeration":
             return capitalizeFirstLetter(prop.$.key) + "Enum";
         case "object":
