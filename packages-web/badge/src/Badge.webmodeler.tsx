@@ -12,7 +12,7 @@ export const preview = (props: BadgePreviewProps): ReactElement => {
     return (
         <Badge
             type={type}
-            value={value ? value : ""}
+            value={value?.displayValue ?? ""}
             clickable={onClick != null}
             brandStyle={brandStyle}
             className={classname}

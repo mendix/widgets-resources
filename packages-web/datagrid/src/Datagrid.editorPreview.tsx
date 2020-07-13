@@ -41,7 +41,7 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                     return column.hasWidgets ? (
                         <column.content.renderer>{renderWrapper(null)}</column.content.renderer>
                     ) : (
-                        renderWrapper(column.attribute)
+                        renderWrapper(column.attribute?.displayValue ?? "")
                     );
                 },
                 [props.columns]

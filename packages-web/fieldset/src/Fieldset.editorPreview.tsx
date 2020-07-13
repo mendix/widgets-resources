@@ -10,7 +10,7 @@ export function preview(props: FieldsetPreviewProps): ReactElement {
     const ContentRenderer = props.content.renderer;
 
     return (
-        <Fieldset className={className} style={style} legend={legend}>
+        <Fieldset className={className} style={style} legend={legend?.displayValue ?? ""}>
             <ContentRenderer>
                 <div />
             </ContentRenderer>

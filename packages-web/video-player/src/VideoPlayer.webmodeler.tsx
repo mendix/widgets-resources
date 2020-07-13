@@ -34,7 +34,7 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
     }
 
     private renderPlayers(): JSX.Element {
-        if (!validateUrl(this.props.urlExpression || "")) {
+        if (!validateUrl(this.props.urlExpression?.displayValue || "")) {
             return <Error preview />;
         }
         return <Video {...this.transformProps(this.props)} />;
@@ -42,8 +42,8 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
 
     private transformProps(props: VideoPlayerPreviewProps): VideoPlayerProps {
         return {
-            url: props.urlExpression,
-            poster: props.posterExpression,
+            url: props.urlExpression?.displayValue ?? "",
+            poster: props.posterExpression?.displayValue ?? "",
             autoStart: false,
             showControls: props.showControls,
             loop: false,

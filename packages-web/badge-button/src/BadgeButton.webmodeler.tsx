@@ -12,9 +12,9 @@ export const preview = (props: BadgeButtonPreviewProps): ReactElement => {
         <BadgeButton
             bootstrapStyle={bootstrapStyle}
             className={className}
-            label={label}
+            label={label?.displayValue ?? ""}
             style={parseStyle(style)}
-            value={value}
+            value={value?.displayValue ?? ""}
         />
     );
 };

@@ -68,7 +68,8 @@ export function Table<T>(props: TableProps<T>): ReactElement {
             props.columns.map((column, index) => ({
                 id: index.toString(),
                 accessor: "item",
-                Header: typeof column.header === "object" ? column.header.value : column.header,
+                Header:
+                    column.header && "value" in column.header ? column.header.value : column.header?.displayValue ?? "",
                 filter: "text",
                 isVisible: column.hidable !== "hidden",
                 canHide: column.hidable !== "no",
