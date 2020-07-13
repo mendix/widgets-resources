@@ -2,7 +2,8 @@ const { join } = require("path");
 const { existsSync, mkdirSync } = require("fs");
 const debug = process.env.DEBUG;
 const browser = process.env.BROWSER || "chrome";
-const url = process.env.URL || "https://localhost:8080/";
+const url = process.env.URL || "http://localhost:8080/";
+const basePath = process.cwd();
 
 const e2ePath = join(process.cwd(), "dist/e2e/");
 if (!existsSync(e2ePath)) {
@@ -40,7 +41,23 @@ exports.config = {
     waitforTimeout: 30000,
     connectionRetryTimeout: 90000,
     connectionRetryCount: 0,
-    services: ["selenium-standalone"],
+    services: [
+        ["selenium-standalone"],
+        [
+            "image-comparison",
+            // The options for image-comparison
+            {
+                baselineFolder: basePath + "/tests/e2e/screenshot-baseline/",
+                formatImageName: "{tag}-{logName}-{width}x{height}--{browserName}",
+                screenshotPath: basePath + "/tests/screenshot/",
+                savePerInstance: false,
+                autoSaveBaseline: true,
+                blockOutStatusBar: true,
+                blockOutToolBar: true,
+                hideScrollBars: true
+            }
+        ]
+    ],
     framework: "jasmine",
     reporters: ["spec"],
     execArgv: debug ? ["--inspect"] : undefined,
