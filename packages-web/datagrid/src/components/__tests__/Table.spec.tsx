@@ -50,7 +50,7 @@ describe("Table", () => {
 function mockTableProps(): TableProps<ObjectItem> {
     const columns = [
         {
-            header: "Test",
+            header: { displayValue: "Test" },
             hasWidgets: false,
             sortable: false,
             filterable: false,
