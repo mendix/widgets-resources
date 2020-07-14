@@ -28,7 +28,7 @@ export class preview extends Component {
             clickable: false,
             style: parseInlineStyle(props.style),
             defaultValue: props.<%- packageName %>Value ? props.<%- packageName %>Value : "",
-            value: props.valueAttribute
+            value: props.valueAttribute?.displayValue ?? ""
         };
     }
 }
