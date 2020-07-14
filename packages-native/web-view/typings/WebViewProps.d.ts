@@ -13,6 +13,7 @@ export interface WebViewProps<Style> {
     onLoad?: ActionValue;
     onError?: ActionValue;
     userAgent: string;
+    openLinksExternally: boolean;
 }
 
 export interface WebViewPreviewProps {
