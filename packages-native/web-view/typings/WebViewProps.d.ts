@@ -24,4 +24,5 @@ export interface WebViewPreviewProps {
     onLoad: {} | null;
     onError: {} | null;
     userAgent: string;
+    openLinksExternally: boolean;
 }
