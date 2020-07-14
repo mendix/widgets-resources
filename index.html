@@ -29,7 +29,7 @@
         </script>
         <script>
             if (!document.cookie || !document.cookie.match(/(^|;)originURI=/gi))
-                document.cookie = "originURI=/login.html";
+                document.cookie = "originURI=/login.html;SameSite=None" + (window.location.protocol === "https:" ? ";Secure" : "");
         </script>
         <script src="mxclientsystem/mxui/mxui.js?{{cachebust}}"></script>
     </body>
