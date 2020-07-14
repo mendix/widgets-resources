@@ -63,6 +63,7 @@ export function getProperties(
         }
         if (!values.advanced) {
             hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "markerStyleDynamic");
+            hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "customMarkerDynamic");
         } else if (f.markerStyleDynamic === "default") {
             hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "customMarkerDynamic");
         }
