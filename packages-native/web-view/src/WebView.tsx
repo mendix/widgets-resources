@@ -38,12 +38,11 @@ export class WebView extends Component<Props> {
                     onLoad={this.onLoadHandler}
                     onError={this.onErrorHandler}
                     userAgent={this.props.userAgent}
-                    onShouldStartLoadWithRequest={event => {
+                    onShouldStartLoadWithRequest={({ url }) => {
                         const openExternally =
-                            this.props.openLinksExternally &&
-                            (html ? event.url.slice(0, 4) === "http" : event.url !== uri);
+                            this.props.openLinksExternally && (html ? url.slice(0, 4) === "http" : url !== uri);
                         if (openExternally) {
-                            Linking.openURL(event.url);
+                            Linking.openURL(url);
                             return false;
                         }
                         return true;
