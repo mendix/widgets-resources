@@ -28,6 +28,7 @@ export class WebView extends Component<Props> {
 
         return (
             <View style={this.styles.container}>
+                <Text style={this.styles.errorText}>ohoho</Text>
                 <RNWebView
                     testID={this.props.name}
                     source={html ? { html } : { uri: uri! }}
@@ -39,7 +40,7 @@ export class WebView extends Component<Props> {
                     onError={this.onErrorHandler}
                     userAgent={this.props.userAgent}
                     onShouldStartLoadWithRequest={event => {
-                        let openExternally =
+                        const openExternally =
                             this.props.openLinksExternally &&
                             (html ? event.url.slice(0, 4) === "http" : event.url !== uri);
                         if (openExternally) {
