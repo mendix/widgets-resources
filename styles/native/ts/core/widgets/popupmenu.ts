@@ -26,7 +26,7 @@ export const com_mendix_widget_native_popupmenu_PopupMenu: PopupMenuType = {
         itemStyle: {
             rippleColor: contrast.lower,
         },
-        containerStyle: {
+        container: {
             // All ViewStyle properties are allowed
         },
     },
@@ -51,7 +51,7 @@ export const com_mendix_widget_native_popupmenu_PopupMenu: PopupMenuType = {
                 // All TextStyle properties are allowed
             },
         },
-        containerStyle: {
+        container: {
             // All ViewStyle properties are allowed
             height: 40,
         },

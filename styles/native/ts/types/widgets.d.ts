@@ -338,23 +338,24 @@ export interface PopupMenuType {
 }
 
 interface CustomItemStyle extends ViewStyle {
-    containerStyle?: ViewStyle;
+    container?: ViewStyle;
     itemStyle: { rippleColor?: string };
 }
 
 interface BasicItemStyle {
     itemStyle?: ItemStyle;
-    containerStyle?: ViewStyle;
+    container?: ViewStyle;
     dividerColor?: string;
 }
+
 interface ItemStyle {
+    rippleColor?: string;
     ellipsizeMode?: TextProps["ellipsizeMode"];
     defaultStyle?: TextStyle;
     primaryStyle?: TextStyle;
     dangerStyle?: TextStyle;
     customStyle?: TextStyle;
 }
-
 
 // QR Code
 export interface QRCodeType {
