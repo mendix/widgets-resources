@@ -45,6 +45,11 @@ export interface BadgeType {
 export interface BottomSheetType {
     container?: ViewStyle,
     containerWhenExpandedFullscreen?: ViewStyle,
+    basicModal?: {
+        backdrop?: ViewStyle;
+        container?: ViewStyle;
+        item?: ViewStyle & { rippleColor?: string };
+    },
     modal?: ViewStyle,
     modalItems?: {
         defaultStyle?: TextStyle;

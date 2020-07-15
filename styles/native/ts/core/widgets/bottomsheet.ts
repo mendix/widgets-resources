@@ -1,4 +1,5 @@
-import { background, border } from "../variables";
+import { background, border, contrast } from "../variables";
+import { isIphoneWithNotch } from "../helpers/_functions/device";
 import { BottomSheetType }    from "../../types/widgets";
 
 //
@@ -37,6 +38,29 @@ export const com_mendix_widget_native_bottomsheet_BottomSheet: BottomSheetType =
     },
     modal: {
         // All ViewStyle properties are allowed
+        margin: 0,
+        justifyContent: "flex-end"
+    },
+    basicModal: {
+        backdrop: {
+            // All ViewStyle properties are allowed
+            paddingBottom: isIphoneWithNotch ? 24 : 0,
+            flex: 1,
+            flexDirection: "row",
+        },
+        container: {
+            // All ViewStyle properties are allowed
+            flex: 1,
+            alignSelf: "flex-end",
+            backgroundColor: "#e5e5e5"
+        },
+        item: {
+            // All ViewStyle properties + rippleColor: string
+            height: 50,
+            alignItems: "center",
+            justifyContent: "center",
+            rippleColor: contrast.lower,
+        },
     },
     modalItems: {
         defaultStyle: {
