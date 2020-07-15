@@ -3,7 +3,8 @@ import ActionSheet, { ActionSheetCustom } from "react-native-actionsheet";
 import { Platform, Text } from "react-native";
 import { EditableValue, ValueStatus } from "mendix";
 import { ItemsBasicType } from "../../typings/BottomSheetProps";
-import { BottomSheetStyle, defaultPaddings } from "../ui/Styles";
+import { BasicItemStyle, BottomSheetStyle } from "../ui/Styles";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 interface NativeBottomSheetProps {
     name: string;
@@ -32,10 +33,10 @@ export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement =
 
     const actionHandler = useCallback(
         (index: number) => {
-            const action = props.itemsBasic[index].action;
-            if (action && action.canExecute) {
-                action.execute();
-            }
+            setTimeout(() => {
+                executeAction(props.itemsBasic[index].action);
+            }, 500);
+
             if (props.triggerAttribute && !props.triggerAttribute.readOnly) {
                 props.triggerAttribute.setValue(false);
                 setCurrentStatus(false);
@@ -50,12 +51,27 @@ export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement =
                 {item.caption}
             </Text>
         ));
+
+        const itemStyle = { ...props.styles.basicModal?.item } as BasicItemStyle | undefined;
+        if (itemStyle?.rippleColor) {
+            delete itemStyle.rippleColor;
+        }
+
         return (
             <ActionSheetCustom
                 ref={bottomSheetRef}
                 options={options}
                 onPress={actionHandler}
-                styles={{ wrapper: defaultPaddings }}
+                buttonUnderlayColor={props.styles.basicModal?.item?.rippleColor}
+                styles={{
+                    wrapper: props.styles.basicModal?.backdrop,
+                    body: props.styles.basicModal?.container,
+                    buttonBox: itemStyle,
+                    cancelButtonBox: {
+                        height: itemStyle?.height,
+                        borderBottomWidth: 0
+                    }
+                }}
             />
         );
     }
