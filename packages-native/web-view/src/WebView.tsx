@@ -1,6 +1,6 @@
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { Component, createElement } from "react";
-import { Text, View } from "react-native";
+import { Text, View, Linking } from "react-native";
 import { WebView as RNWebView } from "react-native-webview";
 
 import { WebViewProps } from "../typings/WebViewProps";
@@ -38,6 +38,15 @@ export class WebView extends Component<Props> {
                     onLoad={this.onLoadHandler}
                     onError={this.onErrorHandler}
                     userAgent={this.props.userAgent}
+                    onShouldStartLoadWithRequest={({ url }) => {
+                        const openExternally =
+                            this.props.openLinksExternally && (html ? url.slice(0, 4) === "http" : url !== uri);
+                        if (openExternally) {
+                            Linking.openURL(url);
+                            return false;
+                        }
+                        return true;
+                    }}
                 />
             </View>
         );

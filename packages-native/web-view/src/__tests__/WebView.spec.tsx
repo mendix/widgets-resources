@@ -13,7 +13,8 @@ describe("WebView", () => {
             name: "webview-test",
             style: [],
             url: dynamicValue("https://mendix.com"),
-            userAgent: ""
+            userAgent: "",
+            openLinksExternally: false
         };
     });
 

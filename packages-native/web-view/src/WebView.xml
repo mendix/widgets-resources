@@ -29,6 +29,10 @@
                 <caption>User agent</caption>
                 <description>A custom user agent string will be included with the request.</description>
             </property>
+            <property key="openLinksExternally" type="boolean" defaultValue="false">
+                <caption>Open links externally</caption>
+                <description>If true, links embedded in source document will be opened in external browser instead of inside this widget.</description>
+            </property>
         </propertyGroup>
     </properties>
 </widget>
