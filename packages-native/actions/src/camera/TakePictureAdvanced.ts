@@ -69,7 +69,7 @@ export async function TakePictureAdvanced(
         });
     });
 
-    function takePicture(): Promise<string | undefined> {
+    function takePicture(): Promise<object> {
         return new Promise((resolve, reject) => {
             const options = getOptions();
             const method = getPictureMethod();
@@ -86,8 +86,7 @@ export async function TakePictureAdvanced(
                     }
                     return reject(new Error(response.error));
                 }
-
-                return resolve(response.uri);
+                return resolve(response);
             });
         });
     }
