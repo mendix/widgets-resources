@@ -1,6 +1,6 @@
 const { existsSync, readdirSync } = require("fs");
 const { join, normalize } = require("path");
-const typingGenerator = require("@mendix/pluggable-widgets-typing-generator");
+const typingGenerator = require("../dist/typings-generator");
 const colors = require("colors/safe");
 const del = require("del");
 const gulp = require("gulp");

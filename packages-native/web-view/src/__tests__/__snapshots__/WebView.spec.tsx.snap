@@ -57,6 +57,7 @@ exports[`WebView renders a web view when a url is provided 1`] = `
       }
       testID="webview-test"
       useSharedProcessPool={true}
+      userAgent=""
     />
   </View>
 </View>
@@ -119,6 +120,7 @@ exports[`WebView renders a web view when html content is provided 1`] = `
       }
       testID="webview-test"
       useSharedProcessPool={true}
+      userAgent=""
     />
   </View>
 </View>

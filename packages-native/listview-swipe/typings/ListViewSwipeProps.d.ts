@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { Component, ReactNode } from "react";
+import { ComponentType, ReactNode } from "react";
 import { ActionValue } from "mendix";
 
 export type LeftRenderModeEnum = "disabled" | "buttons" | "archive" | "swipeOutReset" | "toggle";
@@ -25,11 +25,11 @@ export interface ListViewSwipeProps<Style> {
 export interface ListViewSwipePreviewProps {
     class: string;
     style: string;
-    content: { widgetCount: number; renderer: Component };
-    left: { widgetCount: number; renderer: Component };
+    content: { widgetCount: number; renderer: ComponentType };
+    left: { widgetCount: number; renderer: ComponentType };
     leftRenderMode: LeftRenderModeEnum;
     onSwipeLeft: {} | null;
-    right: { widgetCount: number; renderer: Component };
+    right: { widgetCount: number; renderer: ComponentType };
     rightRenderMode: RightRenderModeEnum;
     onSwipeRight: {} | null;
 }

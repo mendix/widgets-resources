@@ -9,6 +9,7 @@ import { MenuItem } from "react-native-material-menu";
 
 let dummyActionValue: any;
 let defaultProps: PopupMenuProps<PopupMenuStyle>;
+jest.useFakeTimers();
 
 describe("Popup menu", () => {
     beforeEach(() => {
@@ -20,7 +21,7 @@ describe("Popup menu", () => {
             menuTriggerer: undefined,
             basicItems: [
                 { itemType: "item", action: dummyActionValue, caption: "yolo", styleClass: "defaultStyle" },
-                { itemType: "divider", styleClass: "defaultStyle" }
+                { itemType: "divider", styleClass: "defaultStyle", caption: "" }
             ],
             customItems: [{ content: <Text>Yolo</Text>, action: dummyActionValue }]
         };
@@ -42,7 +43,8 @@ describe("Popup menu", () => {
         it("triggers action", () => {
             const component = render(<PopupMenu {...defaultProps} />);
             fireEvent.press(component.getByType(MenuItem));
-            expect(dummyActionValue.execute).toHaveBeenCalled();
+
+            expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 500);
         });
 
         it("renders with custom styles", () => {
@@ -77,7 +79,8 @@ describe("Popup menu", () => {
         it("triggers action", () => {
             const component = render(<PopupMenu {...defaultProps} />);
             fireEvent.press(component.getAllByType(TouchableOpacity).pop()!);
-            expect(dummyActionValue.execute).toHaveBeenCalled();
+
+            expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 500);
         });
 
         it("renders with custom styles", () => {

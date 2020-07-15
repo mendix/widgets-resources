@@ -1,26 +1,36 @@
-const path = require("path");
-const fs = require("fs");
+const { join } = require("path");
+const { existsSync, mkdirSync } = require("fs");
 const debug = process.env.DEBUG;
+const browser = process.env.BROWSER || "chrome";
 const url = process.env.URL || "https://localhost:8080/";
 
-const e2ePath = "../../../dist/e2e/";
-if (!fs.existsSync(e2ePath)) {
-    fs.mkdirSync(e2ePath, { recursive: true });
+const e2ePath = join(process.cwd(), "dist/e2e/");
+if (!existsSync(e2ePath)) {
+    mkdirSync(e2ePath, { recursive: true });
 }
+
+console.warn("Starting wdio with ", url, browser);
 
 exports.config = {
     before() {
-        require('@babel/register');
-        require("ts-node").register({ files: true, project: "../../../tests/e2e/tsconfig.json" });
+        require("@babel/register");
+        require("ts-node").register({ files: true, project: join(process.cwd(), "./tests/e2e/tsconfig.json") });
     },
     host: "127.0.0.1",
     port: 4444,
-    specs: [ "../../../tests/e2e/**/*.spec.js","../../../tests/e2e/**/*.spec.ts" ],
-    maxInstances: debug ? 1 : 5,
-    capabilities: [ {
-        maxInstances: debug ? 1 : 5,
-        browserName: "chrome"
-    } ],
+    specs: [join(process.cwd(), "./tests/e2e/**/*.spec.js"), join(process.cwd(), "./tests/e2e/**/*.spec.ts")],
+    maxInstances: 1,
+    capabilities: [
+        {
+            browserName: browser,
+            "goog:chromeOptions": {
+                args: debug ? ["--no-sandbox"] : ["--no-sandbox", "--headless", "--disable-gpu", "--disable-extensions"]
+            },
+            "moz:firefoxOptions": {
+                args: debug ? [] : ["-headless"]
+            }
+        }
+    ],
     sync: true,
     logLevel: "silent",
     coloredLogs: true,
@@ -30,11 +40,10 @@ exports.config = {
     waitforTimeout: 30000,
     connectionRetryTimeout: 90000,
     connectionRetryCount: 0,
-    services: [ "selenium-standalone" ],
+    services: ["selenium-standalone"],
     framework: "jasmine",
-    reporters: [ "spec" ],
-    execArgv: debug ? [ "--inspect" ] : undefined,
-    // Options to be passed to Jasmine.
+    reporters: ["spec"],
+    execArgv: debug ? ["--inspect"] : undefined,
     jasmineNodeOpts: {
         defaultTimeoutInterval: debug ? 60 * 60 * 1000 : 30 * 1000
     },
@@ -46,7 +55,7 @@ exports.config = {
         const timestamp = new Date().toJSON().replace(/:/g, "-");
         const testName = test.fullName.replace(/ /g, "_");
         const filename = `TESTFAIL_${browserName}_${testName}_${timestamp}.png`;
-        const filePath = path.join(e2ePath, filename);
+        const filePath = join(e2ePath, filename);
         browser.saveScreenshot(filePath);
         console.log("Saved screenshot: ", filePath);
     }

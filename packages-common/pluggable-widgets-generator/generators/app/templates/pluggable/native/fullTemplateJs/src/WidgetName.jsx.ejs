@@ -1,0 +1,25 @@
+import { Component, createElement } from "react";
+
+import { Badge } from "./components/Badge";
+
+export class <%- name %> extends Component {
+    onClickHandler = this.onClick.bind(this);
+
+    render() {
+        return (
+            <Badge
+                style={this.props.style}
+                onClick={this.onClickHandler}
+                value={this.props.value?.displayValue || "Default"}
+            />
+        );
+    }
+
+    onClick() {
+        const { onClick } = this.props;
+
+        if (onClick && onClick.canExecute && !onClick.isExecuting) {
+            onClick.execute();
+        }
+    }
+}

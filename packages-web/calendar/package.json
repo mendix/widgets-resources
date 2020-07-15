@@ -1,7 +1,7 @@
 {
   "name": "calendar",
   "widgetName": "Calendar",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "description": "Display and manage calendar events",
   "copyright": "Mendix BV",
   "repository": {
@@ -14,8 +14,7 @@
     "format": "prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "test": "npm run test:unit",
     "test:unit": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
-    "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://reactcalendar.mxapps.io ../../scripts/test/projectup.sh",
-    "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://reactcalendar.mxapps.io/ ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
     "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "lint:fix": "npm run lint -- --fix",
@@ -29,17 +28,18 @@
     "testProjectId": "efe7ce5d-5c1f-4f4a-9fe9-beebe2a16bb0",
     "testProjects": [
       {
-        "revision": 493,
         "branch": "trunk",
+        "path": "./tests/TestProjects/Mendix/"
+      },
+      {
+        "branch": "MX_7.23",
         "path": "./tests/TestProjects/Mendix7/"
       },
       {
-        "revision": 494,
         "branch": "MX_8",
         "path": "./tests/TestProjects/Mendix8/"
       },
       {
-        "revision": 495,
         "branch": "nightly",
         "path": "./tests/TestProjects/Nightly/"
       }

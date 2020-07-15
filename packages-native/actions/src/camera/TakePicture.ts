@@ -4,7 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import { Alert, Linking } from "react-native";
+import { Alert, Linking, NativeModules } from "react-native";
 import ImagePicker from "react-native-image-picker";
 
 type PictureSource = "camera" | "imageLibrary" | "either";
@@ -13,8 +13,8 @@ type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
 
 /**
  * @param {MxObject} picture - This field is required.
- * @param {"NativeMobileActions.PictureSource.camera"|"NativeMobileActions.PictureSource.imageLibrary"|"NativeMobileActions.PictureSource.either"} pictureSource - Select a picture from the library or the camera. The default is to let the user decide.
- * @param {"NativeMobileActions.PictureQuality.original"|"NativeMobileActions.PictureQuality.low"|"NativeMobileActions.PictureQuality.medium"|"NativeMobileActions.PictureQuality.high"|"NativeMobileActions.PictureQuality.custom"} pictureQuality - The default picture quality is 'Medium'.
+ * @param {"NativeMobileResources.PictureSource.camera"|"NativeMobileResources.PictureSource.imageLibrary"|"NativeMobileResources.PictureSource.either"} pictureSource - Select a picture from the library or the camera. The default is to let the user decide.
+ * @param {"NativeMobileResources.PictureQuality.original"|"NativeMobileResources.PictureQuality.low"|"NativeMobileResources.PictureQuality.medium"|"NativeMobileResources.PictureQuality.high"|"NativeMobileResources.PictureQuality.custom"} pictureQuality - The default picture quality is 'Medium'.
  * @param {Big} maximumWidth - The picture will be scaled to this maximum pixel width, while maintaing the aspect ratio.
  * @param {Big} maximumHeight - The picture will be scaled to this maximum pixel height, while maintaing the aspect ratio.
  * @returns {Promise.<boolean>}
@@ -89,8 +89,11 @@ export async function TakePicture(
                     const guid = imageObject.getGuid();
                     // eslint-disable-next-line no-useless-escape
                     const filename = /[^\/]*$/.exec(uri)![0];
-                    const onSuccess = (): void => resolve(true);
-                    const onError = (error: Error): void => reject(error);
+                    const onSuccess = (): void => NativeModules.NativeFsModule.remove(uri).then(() => resolve(true));
+                    const onError = (error: Error): void => {
+                        NativeModules.NativeFsModule.remove(uri).then(undefined);
+                        reject(error);
+                    };
 
                     mx.data.saveDocument(guid, filename, {}, blob, onSuccess, onError);
                 });
@@ -126,6 +129,11 @@ export async function TakePicture(
                 text: "To enable access, tap Settings > Permissions and turn on Camera and Storage.",
                 reTryTitle: "Settings",
                 okTitle: "Cancel"
+            },
+            storageOptions: {
+                skipBackup: true,
+                cameraRoll: false,
+                privateDirectory: true
             }
         };
     }

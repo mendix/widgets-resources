@@ -42,7 +42,8 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     }
 
     UNSAFE_componentWillMount(): void {
-        moment.updateLocale(window.mx.session.sessionData.locale.code, {
+        const [locale] = window.mx.session.sessionData.locale.code.split("_");
+        moment.updateLocale(locale, {
             week: { dow: window.mx.session.sessionData.locale.firstDayOfWeek, doy: 6 }
         });
     }
@@ -105,12 +106,12 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     }
 
     private getStartPosition = (mxObject: mendix.lib.MxObject): Date => {
-        if (mxObject && mxObject.get(this.props.startDateAttribute) !== "") {
-            const startPosition = this.props.startDateAttribute
-                ? new Date(mxObject.get(this.props.startDateAttribute) as number)
-                : new Date();
+        if (mxObject) {
+            const startDateAttributeValue = mxObject.get(this.props.startDateAttribute);
 
-            return startPosition;
+            if (startDateAttributeValue) {
+                return new Date(startDateAttributeValue as number);
+            }
         }
 
         return new Date();
@@ -227,7 +228,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 window.mx.data.subscribe({
                     guid: mxObject.getGuid(),
                     attr: this.props.startDateAttribute,
-                    callback: () => this.getStartPosition(mxObject)
+                    callback: () => this.loadEvents(mxObject)
                 })
             );
             this.subscriptionContextHandles.push(

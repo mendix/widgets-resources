@@ -17,9 +17,8 @@
     "testProjectId": "25c71ec6-4eb0-4324-8299-4e1948f0c165",
     "testProjects": [
       {
-        "revision": 138,
         "branch": "trunk",
-        "path": "./tests/TestProjects/Mendix8/"
+        "path": "./tests/TestProjects/Mendix/"
       }
     ]
   },
@@ -31,8 +30,7 @@
     "format": "pluggable-widgets-tools format",
     "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
-    "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://videoplayer-sandbox.mxapps.io ../../scripts/test/projectup.sh",
-    "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://videoplayer-sandbox.mxapps.io/ ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
     "release": "pluggable-widgets-tools release:web",
     "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"

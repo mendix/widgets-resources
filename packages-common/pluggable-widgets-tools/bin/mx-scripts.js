@@ -58,6 +58,7 @@ function getRealCommand(cmd, toolsRoot) {
         case "release:js":
         case "release:ts":
             return `${gulpCommand} release --silent`;
+        case "release:native":
         case "release:js:native":
         case "release:ts:native":
             return `${gulpCommand} release --native --silent`;
@@ -68,6 +69,7 @@ function getRealCommand(cmd, toolsRoot) {
         case "format":
             return `${prrettierCommand} --write`;
         case "test:unit":
+        case "test:unit:web":
             return `jest --projects ${join(toolsRoot, "test-config/jest.config.js")}`;
         case "test:unit:native":
             return `jest --projects ${join(toolsRoot, "test-config/jest.native.config.js")}`;
@@ -75,6 +77,8 @@ function getRealCommand(cmd, toolsRoot) {
         case "test:e2e:ts":
         case "test:e2e:js":
             return `wdio ${join(toolsRoot, "test-config/wdio.conf.js")}`;
+        case "test:e2e:web":
+            return `node ${join(toolsRoot, "scripts/e2e.js")}`;
         default:
             console.error(`Unknown command passed to MX Widgets Tools script: '${cmd}'`);
             process.exit(1);
