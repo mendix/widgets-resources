@@ -334,7 +334,7 @@ export interface PopupMenuType {
     basic: BasicItemStyle;
     custom: CustomItemStyle
     buttonContainer?: ViewStyle;
-    itemRippleColor: string;
+    itemRippleColor?: string;
 }
 
 interface CustomItemStyle extends ViewStyle {
