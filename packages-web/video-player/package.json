@@ -1,7 +1,7 @@
 {
   "name": "videoplayer",
   "widgetName": "VideoPlayer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Player for YouTube, Dailymotion, Vimeo and Mp4 videos",
   "copyright": "Mendix BV",
   "repository": {
@@ -10,8 +10,8 @@
   },
   "license": "Apache-2.0",
   "config": {
-    "widgetPath": "./tests/TestProjects/Mendix8/widgets",
-    "projectPath": "./tests/TestProjects/Mendix8",
+    "widgetPath": "./tests/TestProjects/Mendix/widgets",
+    "projectPath": "./tests/TestProjects/Mendix",
     "mendixHost": "http://localhost:8080/",
     "developmentPort": "3000",
     "testProjectId": "25c71ec6-4eb0-4324-8299-4e1948f0c165",

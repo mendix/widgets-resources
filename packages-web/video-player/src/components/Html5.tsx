@@ -34,6 +34,7 @@ export class Html5 extends Component<Html5PlayerProps> {
                     poster={this.props.poster}
                     ref={this.videoElement}
                     height={!this.props.aspectRatio ? "100%" : undefined}
+                    preload={this.props.poster ? "metadata" : "auto"}
                 >
                     <source
                         src={this.props.url}
