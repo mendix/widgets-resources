@@ -29,6 +29,7 @@ exports[`Video Player Renders the structure of html5 player tags 1`] = `
     loop={false}
     muted={false}
     poster=""
+    preload="auto"
   >
     <source
       onError={[Function]}
