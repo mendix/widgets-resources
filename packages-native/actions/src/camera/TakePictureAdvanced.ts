@@ -12,6 +12,14 @@ type PictureSource = "camera" | "imageLibrary" | "either";
 type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
 
 /**
+ * Take a picture using the camera or import one from the image library on the device.
+ *
+ * The result is an ImageMetaData object. Most items are self-explanatory.
+ *
+ * The FileName value will be empty for pictures taken on an iOS device. To get the right extension you can get that from the URI:
+ * substring($ImageMetaData/URI, findLast($ImageMetaData/URI, '.'))
+ * Please note that the temporary file the URI refers to has already been deleted. It is still included to get the extension or the entire file name from it.
+ *
  * @param {MxObject} picture - This field is required.
  * @param {"NativeMobileResources.PictureSource.camera"|"NativeMobileResources.PictureSource.imageLibrary"|"NativeMobileResources.PictureSource.either"} pictureSource - Select a picture from the library or the camera. The default is to let the user decide.
  * @param {"NativeMobileResources.PictureQuality.original"|"NativeMobileResources.PictureQuality.low"|"NativeMobileResources.PictureQuality.medium"|"NativeMobileResources.PictureQuality.high"|"NativeMobileResources.PictureQuality.custom"} pictureQuality - The default picture quality is 'Medium'.
