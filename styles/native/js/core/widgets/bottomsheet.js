@@ -17,7 +17,7 @@ export const com_mendix_widget_native_bottomsheet_BottomSheet = {
         borderRadius: border.radius,
         elevation: 20,
         shadowColor: "#000",
-        shadowOpacity: 0.05,
+        shadowOpacity: 0.1,
         shadowRadius: 6,
         shadowOffset: {
             width: 0,
