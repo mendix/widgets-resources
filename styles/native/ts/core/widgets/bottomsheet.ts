@@ -1,6 +1,5 @@
-import { background, border, contrast } from "../variables";
-import { isIphoneWithNotch } from "../helpers/_functions/device";
-import { BottomSheetType }    from "../../types/widgets";
+import { background, border, brand, contrast, font } from "../variables";
+import { BottomSheetType }                           from "../../types/widgets";
 
 //
 // DISCLAIMER:
@@ -23,7 +22,7 @@ export const com_mendix_widget_native_bottomsheet_BottomSheet: BottomSheetType =
         borderRadius: border.radius,
         elevation: 20,
         shadowColor: "#000",
-        shadowOpacity: 0.1,
+        shadowOpacity: 0.05,
         shadowRadius: 6,
         shadowOffset: {
             width: 0,
@@ -39,49 +38,35 @@ export const com_mendix_widget_native_bottomsheet_BottomSheet: BottomSheetType =
     modal: {
         // All ViewStyle properties are allowed
         margin: 0,
-        justifyContent: "flex-end"
-    },
-    basicModal: {
-        backdrop: {
-            // All ViewStyle properties are allowed
-            paddingBottom: isIphoneWithNotch ? 24 : 0,
-            flex: 1,
-            flexDirection: "row",
-        },
-        container: {
-            // All ViewStyle properties are allowed
-            flex: 1,
-            alignSelf: "flex-end",
-            backgroundColor: "#e5e5e5"
-        },
-        item: {
-            // All ViewStyle properties + rippleColor: string
-            height: 50,
-            alignItems: "center",
-            justifyContent: "center",
-            rippleColor: contrast.lower,
-        },
+        justifyContent: "flex-end",
     },
     modalItems: {
+        container: {
+            // rippleColor & All TextStyle properties are allowed
+            height: 50,
+            marginTop: 0,
+            rippleColor: contrast.lower,
+            backgroundColor: background.primary,
+        },
         defaultStyle: {
             // All TextStyle properties are allowed
             fontSize: 16,
-            color: "black",
+            color: font.color,
         },
         primaryStyle: {
             // All TextStyle properties are allowed
             fontSize: 16,
-            color: "#0595DB",
+            color: brand.primary,
         },
         dangerStyle: {
             // All TextStyle properties are allowed
             fontSize: 16,
-            color: "#ed1c24",
+            color: brand.danger,
         },
         customStyle: {
             // All TextStyle properties are allowed
             fontSize: 16,
-            color: "#76CA02",
+            color: font.color,
         },
     },
 };

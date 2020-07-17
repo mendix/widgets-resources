@@ -1,4 +1,4 @@
-import { ImageStyle, TextStyle, ViewStyle, TextProps } from "react-native";
+import { ImageStyle, TextProps, TextStyle, ViewStyle } from "react-native";
 
 declare type ActivityIndicatorSizeType = "small" | "large";
 
@@ -45,13 +45,11 @@ export interface BadgeType {
 export interface BottomSheetType {
     container?: ViewStyle,
     containerWhenExpandedFullscreen?: ViewStyle,
-    basicModal?: {
-        backdrop?: ViewStyle;
-        container?: ViewStyle;
-        item?: ViewStyle & { rippleColor?: string };
-    },
     modal?: ViewStyle,
     modalItems?: {
+        container?: ViewStyle & {
+            rippleColor?: string;
+        }
         defaultStyle?: TextStyle;
         primaryStyle?: TextStyle;
         dangerStyle?: TextStyle;
@@ -156,14 +154,14 @@ export interface DropDownType {
     container?: ViewStyle,
     label?: InputLabelType,
     value?: {
-        placeholderTextColor?: string
-    } & TextStyle,
+                placeholderTextColor?: string
+            } & TextStyle,
     valueDisabled?: TextStyle,
     validationMessage?: TextStyle,
     /*  New dropdown styles start */
     valueContainer?: {
-        rippleColor?: string
-    } & ViewStyle;
+                         rippleColor?: string
+                     } & ViewStyle;
     menuWrapper?: ViewStyle
     item?: TextStyle;
     itemContainer?: ViewStyle;

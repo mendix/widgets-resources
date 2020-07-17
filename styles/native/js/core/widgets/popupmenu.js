@@ -16,17 +16,28 @@ export const com_mendix_widget_native_popupmenu_PopupMenu = {
         // All ViewStyle properties are allowed
         borderRadius: 10,
         shadowColor: "#000",
-        overflow: "hidden",
         shadowOpacity: 0.2,
         shadowRadius: 10,
         elevation: 16,
         backgroundColor: background.primary,
     },
-    itemRippleColor: contrast.lower,
+    custom: {
+        container: {
+        // All ViewStyle properties are allowed
+        },
+        itemStyle: {
+            rippleColor: contrast.lower,
+        },
+    },
     basic: {
         dividerColor: font.color,
+        container: {
+            // All ViewStyle properties are allowed
+            height: 40,
+        },
         itemStyle: {
             ellipsizeMode: "tail",
+            rippleColor: contrast.lower,
             defaultStyle: {
                 // All TextStyle properties are allowed
                 color: font.color,
@@ -42,10 +53,6 @@ export const com_mendix_widget_native_popupmenu_PopupMenu = {
             customStyle: {
             // All TextStyle properties are allowed
             },
-        },
-        containerStyle: {
-            // All ViewStyle properties are allowed
-            height: 40,
         },
     },
 };
