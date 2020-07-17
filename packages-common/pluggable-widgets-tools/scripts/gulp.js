@@ -96,7 +96,7 @@ function runWebpack(env, cb) {
 }
 
 function generateTypings() {
-    if (!variables.isTypescript) {
+    if (!variables.isTypescript || process.env.MX_SKIP_TYPEGENERATOR) {
         return gulp.src(".", { allowEmpty: true });
     }
     return gulp
