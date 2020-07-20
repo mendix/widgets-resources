@@ -2,13 +2,14 @@ import { TextStyle, ViewStyle } from "react-native";
 import DeviceInfo from "react-native-device-info";
 
 export interface ModalItemsStyle {
+    container?: ModalItemContainerStyle;
     defaultStyle?: TextStyle;
     primaryStyle?: TextStyle;
     dangerStyle?: TextStyle;
     customStyle?: TextStyle;
 }
 
-export interface BasicItemStyle extends ViewStyle {
+export interface ModalItemContainerStyle extends ViewStyle {
     rippleColor?: string;
 }
 
@@ -16,11 +17,6 @@ export interface BottomSheetStyle {
     container: ViewStyle;
     containerWhenExpandedFullscreen: ViewStyle;
     modal: ViewStyle;
-    basicModal?: {
-        backdrop?: ViewStyle;
-        container?: ViewStyle;
-        item?: BasicItemStyle;
-    };
     modalItems: ModalItemsStyle;
 }
 
@@ -45,3 +41,4 @@ const isiPhoneModelWithNotch = (): boolean => {
 };
 
 export const defaultPaddings = { paddingBottom: isiPhoneModelWithNotch() ? 24 : 0 };
+export const defaultMargins = { marginBottom: isiPhoneModelWithNotch() ? 24 : 0 };

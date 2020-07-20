@@ -16,6 +16,9 @@ exports[`Bottom sheet renders a custom bottom action sheet for ios (Basic modal)
             "flex": 1,
             "flexDirection": "row",
           },
+          Object {
+            "marginBottom": 24,
+          },
         ],
       ]
     }
