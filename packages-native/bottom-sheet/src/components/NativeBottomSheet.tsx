@@ -52,7 +52,7 @@ export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement =
             </Text>
         ));
 
-        const buttonContainerStyle = { ...props.styles.modalItems?.container } as ModalItemContainerStyle | undefined;
+        const buttonContainerStyle = { ...props.styles.modalItems?.container } as ModalItemContainerStyle;
         delete buttonContainerStyle?.rippleColor;
 
         return (
