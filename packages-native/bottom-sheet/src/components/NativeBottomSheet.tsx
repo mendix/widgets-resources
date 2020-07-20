@@ -3,7 +3,7 @@ import ActionSheet, { ActionSheetCustom } from "react-native-actionsheet";
 import { Platform, Text } from "react-native";
 import { EditableValue, ValueStatus } from "mendix";
 import { ItemsBasicType } from "../../typings/BottomSheetProps";
-import { BasicItemStyle, BottomSheetStyle } from "../ui/Styles";
+import { ModalItemContainerStyle, BottomSheetStyle, defaultMargins } from "../ui/Styles";
 import { executeAction } from "@widgets-resources/piw-utils";
 
 interface NativeBottomSheetProps {
@@ -52,24 +52,22 @@ export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement =
             </Text>
         ));
 
-        const itemStyle = { ...props.styles.basicModal?.item } as BasicItemStyle | undefined;
-        if (itemStyle?.rippleColor) {
-            delete itemStyle.rippleColor;
-        }
+        const buttonContainerStyle = { ...props.styles.modalItems?.container } as ModalItemContainerStyle | undefined;
+        delete buttonContainerStyle?.rippleColor;
 
         return (
             <ActionSheetCustom
                 ref={bottomSheetRef}
                 options={options}
                 onPress={actionHandler}
-                buttonUnderlayColor={props.styles.basicModal?.item?.rippleColor}
+                buttonUnderlayColor={props.styles?.modalItems?.container?.rippleColor}
                 styles={{
-                    wrapper: props.styles.basicModal?.backdrop,
-                    body: props.styles.basicModal?.container,
-                    buttonBox: itemStyle,
+                    wrapper: defaultMargins,
+                    buttonBox: buttonContainerStyle,
                     cancelButtonBox: {
-                        height: itemStyle?.height,
-                        borderBottomWidth: 0
+                        height: buttonContainerStyle?.height,
+                        borderBottomWidth: 0,
+                        marginTop: 0
                     }
                 }}
             />
