@@ -49,12 +49,12 @@ export const introScreenButtonPaginationBetween: IntroScreenButtonType = {
     },
     icon: {
         // Size and color are allowed
-        color: font.color,
+        color: font.colorTitle,
         size: button.fontSizeIcon,
     },
     caption: {
         // All TextStyle properties are allowed
-        color: font.color,
+        color: font.colorTitle,
         fontSize: button.fontSize,
         fontFamily: font.family,
         fontWeight: font.weightBold,
@@ -87,7 +87,7 @@ export const com_mendix_widget_native_introscreen_IntroScreen: IntroScreenType =
     },
     paginationText: {
         // All TextStyle properties are allowed
-        color: font.color,
+        color: font.colorTitle,
         fontSize: font.size,
         fontFamily: font.family,
     },

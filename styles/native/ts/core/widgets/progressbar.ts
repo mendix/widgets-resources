@@ -1,7 +1,8 @@
 import { Platform }            from "react-native";
 import { anyColorToRgbString } from "../helpers/_functions/convertcolors";
-import { brand, font, input } from "../variables";
-import { ProgressBarType }    from "../../types/widgets";
+import { brand }  from "../variables";
+import { ProgressBarType }     from "../../types/widgets";
+import { TextBox }             from "./textbox";
 /*
 
 DISCLAIMER:
@@ -38,8 +39,6 @@ export const com_mendix_widget_native_progressbar_ProgressBar: ProgressBarType =
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        color: input.errorColor,
-        fontSize: font.size,
-        fontFamily: font.family,
+        ...TextBox.validationMessage
     },
 };

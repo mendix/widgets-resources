@@ -1,4 +1,5 @@
-import { brand, contrast, font, input } from "../variables";
+import { brand, contrast, font } from "../variables";
+import { TextBox } from "./textbox";
 /*
 
 DISCLAIMER:
@@ -35,8 +36,6 @@ export const com_mendix_widget_native_progresscircle_ProgressCircle = {
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        color: input.errorColor,
-        fontSize: font.size,
-        fontFamily: font.family,
+        ...TextBox.validationMessage
     },
 };

@@ -1,6 +1,7 @@
 import { Platform }                                 from "react-native";
-import { background, brand, contrast, font, input } from "../variables";
+import { background, brand, contrast, font } from "../variables";
 import { ToggleButtonsType }                        from "../../types/widgets";
+import { TextBox }                                  from "./textbox";
 /*
 
 DISCLAIMER:
@@ -53,8 +54,6 @@ export const com_mendix_widget_native_togglebuttons_ToggleButtons: ToggleButtons
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        color: input.errorColor,
-        fontSize: font.size,
-        fontFamily: font.family,
+        ...TextBox.validationMessage
     },
 };

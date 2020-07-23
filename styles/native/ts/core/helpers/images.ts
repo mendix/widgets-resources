@@ -1,4 +1,4 @@
-import { border } from "../variables";
+import { border, image } from "../variables";
 /*
 
 DISCLAIMER:
@@ -28,28 +28,35 @@ export const thumbnail = {
 };
 export const avatarSmall = {
     image: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
+        width: image.avatar.small,
+        height: image.avatar.small,
+        borderRadius: image.avatar.small / 2,
     },
 };
 export const avatarMedium = {
     image: {
-        width: 80,
-        height: 80,
-        borderRadius: 40,
+        width: image.avatar.medium,
+        height: image.avatar.medium,
+        borderRadius: image.avatar.medium / 2,
     },
 };
 export const avatarLarge = {
     image: {
-        width: 120,
-        height: 120,
-        borderRadius: 60,
+        width: image.avatar.large,
+        height: image.avatar.large,
+        borderRadius: image.avatar.large / 2,
+    },
+};
+export const avatarLarger = {
+    image: {
+        width: image.avatar.larger,
+        height: image.avatar.larger,
+        borderRadius: image.avatar.larger / 2,
     },
 };
 export const inputIcon = {
     image: {
-        width: 30,
-        height: 30,
+        width: image.icon,
+        height: image.icon,
     },
 };

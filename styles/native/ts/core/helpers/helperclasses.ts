@@ -30,7 +30,7 @@ export const backgroundPrimary: Helperclass = {
 };
 export const backgroundSecondary: Helperclass = {
     container: {
-        backgroundColor: background.secondary,
+        backgroundColor: background.surface,
     },
 };
 export const backgroundBrandPrimary: Helperclass = {

@@ -19,7 +19,7 @@ To customize any core styling, copy the part you want to customize to styles/nat
 const isOSDarkMode = NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode && NativeModules.RNDarkMode.initialMode === "dark";
 const pickerBackgroundColor = !darkMode && isOSDarkMode ?
     "rgba(0, 0, 0, 1)" :
-    darkMode && !isOSDarkMode ? "rgba(255, 255, 255, 1)" : input.backgroundColor;
+    darkMode && !isOSDarkMode ? "rgba(255, 255, 255, 1)" : input.input.backgroundColor;
 //
 export const DatePicker = {
     container: {
@@ -43,23 +43,27 @@ export const DatePicker = {
     },
     value: {
         // All TextStyle properties are allowed
-        color: input.color,
-        borderColor: input.borderColor,
-        backgroundColor: input.backgroundColor,
-        fontSize: input.fontSize,
+        color: input.input.color,
+        borderColor: input.input.borderColor,
+        backgroundColor: input.input.backgroundColor,
+        fontSize: input.input.fontSize,
+        lineHeight: input.input.lineHeight,
         fontFamily: font.family,
-        borderWidth: input.borderWidth,
-        borderRadius: input.borderRadius,
-        paddingHorizontal: input.paddingHorizontal,
-        paddingVertical: input.paddingVertical,
+        borderWidth: input.input.borderWidth,
+        borderRadius: input.input.borderRadius,
+        textAlignVertical: "center",
+        minWidth: input.input.minWidth,
+        minHeight: input.input.minHeight,
+        paddingHorizontal: input.input.paddingHorizontal,
+        paddingVertical: input.input.paddingVertical,
     },
     valueDisabled: {
         // All TextStyle properties are allowed
-        backgroundColor: input.disabledBackgroundColor,
+        backgroundColor: input.inputDisabled.backgroundColor,
     },
     placeholder: {
         // All TextStyle properties are allowed
-        color: input.placeholderTextColor,
+        color: input.input.placeholderTextColor,
     },
     placeholderDisabled: {
     // All TextStyle properties are allowed
@@ -72,19 +76,7 @@ export const DatePicker = {
 export const DatePickerVertical = {
     container: TextBoxVertical.container,
     label: TextBoxVertical.label,
-    value: {
-        color: input.color,
-        borderColor: input.borderColor,
-        backgroundColor: input.backgroundColor,
-        fontSize: input.fontSize,
-        fontFamily: font.family,
-        borderRadius: input.borderRadius,
-        borderWidth: input.borderWidth,
-        paddingHorizontal: input.paddingHorizontal,
-        paddingVertical: input.paddingVertical,
-    },
-    placeholder: {
-        color: input.placeholderTextColor,
-    },
+    value: DatePicker.value,
+    placeholder: DatePicker.placeholder,
     validationMessage: TextBoxVertical.validationMessage,
 };

@@ -16,7 +16,7 @@ export const com_mendix_widget_native_feedback_Feedback = {
     floatingButton: {
         // All ViewStyle properties are allowed
         borderRadius: 0,
-        backgroundColor: background.secondary,
+        backgroundColor: background.surface,
         borderTopLeftRadius: button.borderRadius,
         borderBottomLeftRadius: button.borderRadius,
         elevation: 1.5,
@@ -34,33 +34,33 @@ export const com_mendix_widget_native_feedback_Feedback = {
     },
     title: {
         // All TextStyle properties are allowed
-        color: font.color,
+        color: font.colorTitle,
         fontFamily: font.family,
     },
     textAreaInput: {
-        // All TextStyle properties are allowed
-        color: input.color,
-        borderColor: input.borderColor,
-        backgroundColor: input.backgroundColor,
-        selectionColor: input.selectionColor,
-        placeholderTextColor: input.placeholderTextColor,
-        underlineColorAndroid: input.underlineColorAndroid,
+        // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
+        color: input.input.color,
+        borderColor: input.input.borderColor,
+        backgroundColor: input.input.backgroundColor,
+        selectionColor: input.input.selectionColor,
+        placeholderTextColor: input.input.placeholderTextColor,
+        underlineColorAndroid: "transparent",
         height: 100,
-        fontSize: input.fontSize,
-        fontFamily: input.fontFamily,
-        borderRadius: input.borderRadius,
-        borderTopWidth: input.borderWidth,
-        borderBottomWidth: input.borderWidth,
+        fontSize: input.input.fontSize,
+        fontFamily: font.family,
+        borderRadius: input.input.borderRadius,
+        borderTopWidth: input.input.borderWidth,
+        borderBottomWidth: input.input.borderWidth,
         borderWidth: Platform.select({ android: border.width }),
         textAlignVertical: "top",
-        paddingVertical: input.paddingVertical,
-        paddingHorizontal: input.paddingHorizontal,
+        paddingVertical: input.input.paddingVertical,
+        paddingHorizontal: input.input.paddingHorizontal,
     },
     switchLabel: {
         // All TextStyle properties are allowed
-        color: input.color,
-        fontSize: input.fontSize,
-        fontFamily: input.fontFamily,
+        color: input.label.color,
+        fontSize: input.label.fontSize,
+        fontFamily: font.family,
     },
     switchInput: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
@@ -80,6 +80,6 @@ export const com_mendix_widget_native_feedback_Feedback = {
     },
     activityIndicator: {
         // Only color is allowed
-        color: font.color,
+        color: font.colorTitle,
     },
 };

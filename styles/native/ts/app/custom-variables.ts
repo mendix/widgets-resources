@@ -1,10 +1,6 @@
-import { NativeModules, Platform } from "react-native";
-import adjustFont                  from "../core/helpers/_functions/adjustfont";
-import {
-    anyColorToRgbString,
-    setColorBasedOnBackground,
-    setContrastScale,
-}                                  from "../core/helpers/_functions/convertcolors";
+import { NativeModules, Platform }               from "react-native";
+import adjustFont                                from "../core/helpers/_functions/adjustfont";
+import { anyColorToRgbString, setContrastScale } from "../core/helpers/_functions/convertcolors";
 import {
     VariablesBackground,
     VariablesBadge,
@@ -13,12 +9,13 @@ import {
     VariablesButton,
     VariablesContrast,
     VariablesFont,
+    VariablesImage,
     VariablesInput,
     VariablesListView,
     VariablesNavigation,
     VariablesSpacing,
     VariablesTabContainer,
-}                                  from "../types/variables";
+}                                                from "../types/variables";
 /*
 
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)
@@ -31,14 +28,16 @@ import {
 //-------------------------------------------------------------------------------------------------------------------//
 // Brand Style
 export const brand: VariablesBrand = {
-    primary: "#0595DB",
-    success: "#76CA02",
-    warning: "#f99b1d",
-    danger: "#ed1c24",
-    primaryLight: `rgba(${anyColorToRgbString("#0595DB")}, 0.14)`,
-    successLight: `rgba(${anyColorToRgbString("#76CA02")}, 0.14)`,
-    warningLight: `rgba(${anyColorToRgbString("#f99b1d")}, 0.14)`,
-    dangerLight: `rgba(${anyColorToRgbString("#ed1c24")}, 0.14)`,
+    primary: "#264AE5",
+    success: "#77DD77",
+    warning: "#FFD355",
+    danger: "#FF6161",
+    info: "#0086D9",
+    primaryLight: `rgba(${anyColorToRgbString("#264AE5")}, 0.14)`,
+    successLight: `rgba(${anyColorToRgbString("#77DD77")}, 0.14)`,
+    warningLight: `rgba(${anyColorToRgbString("#FFD355")}, 0.14)`,
+    dangerLight: `rgba(${anyColorToRgbString("#FF6161")}, 0.14)`,
+    infoLight: `rgba(${anyColorToRgbString("#0086D9")}, 0.14)`,
 };
 //
 // Dark Mode - Inherits OS theme if possible
@@ -47,13 +46,15 @@ export const darkMode = NativeModules && NativeModules.RNDarkMode && NativeModul
                         : false;
 //
 // Background Colors
-const backgroundColor = darkMode ? "#000" : "#FFF";
-const backgroundSecondaryContrast = darkMode ? 0.11 : 0.03;
+//
+// const backgroundColor = darkMode ? "#000" : "#FFF";
+// const backgroundColorInversed = darkMode ? "#FFF" : "#000";
 //
 export const background: VariablesBackground = {
-    primary: backgroundColor,
-    secondary: setContrastScale(backgroundSecondaryContrast, backgroundColor),
-    gray: "#c6c6cc",
+    primary: "#FFF",
+    // semantic: setContrastScale(0.08, backgroundColor),
+    surface: "#F8F8F8",
+    gray: "#F8F8F8",
     brandPrimary: brand.primary,
     brandSuccess: brand.success,
     brandWarning: brand.warning,
@@ -73,23 +74,34 @@ export const contrast: VariablesContrast = {
 //
 // Border Style
 export const border: VariablesBorder = {
-    color: setContrastScale(0.17, background.primary),
+    color: "#CED0D3",
     width: 1,
-    radius: 5,
+    radius: 4,
 };
 //
 // Font Styles
 export const font: VariablesFont = {
     size: adjustFont(14),
     sizeSmall: adjustFont(12),
-    sizeLarge: adjustFont(18),
-    sizeH1: adjustFont(31),
-    sizeH2: adjustFont(26),
-    sizeH3: adjustFont(24),
-    sizeH4: adjustFont(18),
-    sizeH5: adjustFont(14),
-    sizeH6: adjustFont(12),
-    color: setColorBasedOnBackground(background.primary),
+    sizeLarge: adjustFont(16),
+    sizeH1: adjustFont(40),
+    sizeH2: adjustFont(34),
+    sizeH3: adjustFont(28),
+    sizeH4: adjustFont(24),
+    sizeH5: adjustFont(20),
+    sizeH6: adjustFont(16),
+    lineHeight: adjustFont(14) * 1.5,
+    lineHeightSmall: adjustFont(12) * 1.5,
+    lineHeightLarge: adjustFont(16) * 1.5,
+    lineHeightH1: adjustFont(40) * 1.5,
+    lineHeightH2: adjustFont(34) * 1.5,
+    lineHeightH3: adjustFont(28) * 1.5,
+    lineHeightH4: adjustFont(24) * 1.5,
+    lineHeightH5: adjustFont(20) * 1.5,
+    lineHeightH6: adjustFont(16) * 1.5,
+    colorTitle: "#0A1325",
+    colorParagraph: "#6C717C",
+    colorDisabled: "#9DA1A8",
     weightLight: "100",  // Only supported on iOS, will be 'Normal' on Android
     weightNormal: "normal",
     weightSemiBold: "600", // Only supported on iOS, will be 'Bold' on Android
@@ -99,12 +111,12 @@ export const font: VariablesFont = {
 //
 // Spacing
 export const spacing: VariablesSpacing = {
-    smallest: 5,
-    smaller: 10,
-    small: 15,
-    regular: 20,
-    large: 25,
-    larger: 30,
+    smallest: 2,
+    smaller: 4,
+    small: 8,
+    regular: 16,
+    large: 24,
+    larger: 32,
     largest: 40,
 };
 //
@@ -116,8 +128,11 @@ export const button: VariablesButton = {
     fontSizeIcon: font.sizeSmall,
     fontSizeIconLarge: font.size,
     borderRadius: border.radius,
-    paddingVertical: spacing.smaller,
-    paddingHorizontal: spacing.regular,
+
+    minWidth: 48,
+    minHeight: 48,
+    paddingVertical: spacing.small,
+    paddingHorizontal: spacing.small,
 
     header: {
         color: contrast.highest,
@@ -158,27 +173,50 @@ export const button: VariablesButton = {
 //
 // Input Styles
 export const input: VariablesInput = {
-    // Colors
-    color: font.color,
-    errorColor: brand.danger,
-    labelColor: font.color,
-    borderColor: contrast.lower,
-    backgroundColor: background.primary,
-    disabledBackgroundColor: contrast.lowest,
-    selectionColor: contrast.lower,
-    placeholderTextColor: contrast.regular,
-    underlineColorAndroid: "transparent",
+    label: {
+        numberOfLines: 1,
+        color: font.colorTitle,
+        fontSize: font.size,
+        textAlign: "left",
+    },
+    input: {
+        color: font.colorTitle,
+        borderColor: contrast.lower,
+        backgroundColor: background.primary,
+        selectionColor: contrast.lower,
+        placeholderTextColor: contrast.regular,
 
-    // Sizes
-    fontSize: font.size,
-    fontFamily: font.family,
-    borderWidth: border.width,
-    borderRadius: border.radius,
+        fontSize: font.size,
+        lineHeight: font.lineHeight,
+        borderWidth: border.width,
+        borderRadius: border.radius,
 
-    // Alignment
-    textAlign: "left",
-    paddingHorizontal: spacing.smaller,
-    paddingVertical: spacing.small,
+        minWidth: 48,
+        minHeight: 48,
+        paddingVertical: spacing.small,
+        paddingHorizontal: spacing.small,
+    },
+    inputDisabled: {
+        backgroundColor: contrast.lowest,
+    },
+    inputError: {
+        color: brand.danger,
+        borderColor: brand.danger,
+        placeholderTextColor: brand.danger,
+    },
+    validationMessage: {
+        color: brand.danger,
+        fontSize: font.size,
+    },
+};
+export const image: VariablesImage = {
+    avatar: {
+        small: 24,
+        medium: 40,
+        large: 56,
+        larger: 72,
+    },
+    icon: 24,
 };
 //
 // Navigation Styles
@@ -202,10 +240,10 @@ export const navigation: VariablesNavigation = {
         iconSize: font.sizeSmall,
     },
     progressOverlay: {
-        color: font.color,
-        activityIndicatorColor: font.color,
+        color: font.colorTitle,
+        activityIndicatorColor: font.colorTitle,
         backgroundColor: `rgba(0, 0, 0, 0.5)`,
-        containerBackgroundColor: background.secondary,
+        containerBackgroundColor: background.surface,
         shadowColor: "#000", // Only for iOS
         fontSize: font.size,
     },
@@ -217,18 +255,22 @@ export const tabContainer: VariablesTabContainer = {
         pressColor: contrast.lower,
         backgroundColor: background.primary,
     },
+    tab: {
+        paddingVertical: spacing.small,
+    },
     indicator: {
         backgroundColor: brand.primary,
         height: Platform.select({ios: 2, android: 2}) as number,
     },
     label: {
         color: contrast.highest,
+        fontSize: font.size,
         fontWeight: font.weightBold,
         textTransform: "uppercase",
-
     },
     activeLabel: {
         color: brand.primary,
+        fontSize: font.size,
         fontWeight: font.weightBold,
         textTransform: "uppercase",
 

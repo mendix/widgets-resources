@@ -29,7 +29,7 @@ export const backgroundPrimary = {
 };
 export const backgroundSecondary = {
     container: {
-        backgroundColor: background.secondary,
+        backgroundColor: background.surface,
     },
 };
 export const backgroundBrandPrimary = {

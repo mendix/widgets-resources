@@ -32,11 +32,12 @@ export const TabContainer = {
     },
     tab: {
         // All ViewStyle properties are allowed
-        paddingVertical: spacing.smaller,
+        paddingVertical: tabContainer.tab.paddingVertical,
     },
     label: {
         // All TextStyle properties are allowed
         color: tabContainer.label.color,
+        fontSize: tabContainer.label.fontSize,
         fontFamily: font.family,
         fontWeight: tabContainer.label.fontWeight,
         textTransform: tabContainer.label.textTransform,
@@ -44,6 +45,7 @@ export const TabContainer = {
     activeLabel: {
         // All TextStyle properties are allowed
         color: tabContainer.activeLabel.color,
+        fontSize: tabContainer.activeLabel.fontSize,
         fontFamily: font.family,
         fontWeight: tabContainer.activeLabel.fontWeight,
         textTransform: tabContainer.activeLabel.textTransform,

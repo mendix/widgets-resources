@@ -86,7 +86,7 @@ const carouselCardLayout = {
         },
         text: {
             // All TextStyle properties are allowed
-            color: font.color,
+            color: font.colorTitle,
             fontSize: font.size,
             fontFamily: font.family,
             textAlign: "center",
@@ -114,6 +114,6 @@ export const com_mendix_widget_native_carousel_Carousel = {
     cardLayout: carouselCardLayout,
     activityIndicator: {
         // Only color is allowed
-        color: font.color,
+        color: font.colorTitle,
     },
 };

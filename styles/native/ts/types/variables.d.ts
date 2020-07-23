@@ -11,15 +11,18 @@ export interface VariablesBrand {
     success: string,
     warning: string,
     danger: string,
+    info: string,
     primaryLight: string,
     successLight: string,
     warningLight: string,
     dangerLight: string,
+    infoLight: string,
 }
 
 export interface VariablesBackground {
     primary: string,
-    secondary: string,
+    // semantic: string,
+    surface: string,
     gray: string,
     brandPrimary: string,
     brandSuccess: string,
@@ -53,7 +56,18 @@ export interface VariablesFont {
     sizeH4: number,
     sizeH5: number,
     sizeH6: number,
-    color: string,
+    lineHeight: number,
+    lineHeightSmall: number,
+    lineHeightLarge: number,
+    lineHeightH1: number,
+    lineHeightH2: number,
+    lineHeightH3: number,
+    lineHeightH4: number,
+    lineHeightH5: number,
+    lineHeightH6: number,
+    colorTitle: string,
+    colorParagraph: string,
+    colorDisabled: string,
     weightLight: FontWeight,
     weightNormal: FontWeight,
     weightSemiBold: FontWeight,
@@ -85,6 +99,9 @@ export interface VariablesButton {
     fontSizeIcon: number,
     fontSizeIconLarge: number,
     borderRadius: number,
+
+    minWidth: number,
+    minHeight: number,
     paddingVertical: number,
     paddingHorizontal: number,
 
@@ -106,24 +123,51 @@ export interface VariablesButton {
 }
 
 export interface VariablesInput {
-    color: string,
-    errorColor: string,
-    labelColor: string,
-    borderColor: string,
-    backgroundColor: string,
-    disabledBackgroundColor: string,
-    selectionColor: string,
-    placeholderTextColor: string,
-    underlineColorAndroid: string,
+    label: {
+        numberOfLines: number,
+        color: string,
+        fontSize: number,
+        textAlign: TextAlign,
+    },
+    input: {
+        color: string,
+        borderColor: string,
+        backgroundColor: string,
+        selectionColor: string,
+        placeholderTextColor: string,
 
-    fontSize: number,
-    fontFamily: string,
-    borderWidth: number,
-    borderRadius: number,
+        fontSize: number,
+        lineHeight: number,
+        borderWidth: number,
+        borderRadius: number,
 
-    textAlign: TextAlign,
-    paddingVertical: number,
-    paddingHorizontal: number,
+        minWidth: number,
+        minHeight: number,
+        paddingVertical: number,
+        paddingHorizontal: number,
+    },
+    inputDisabled: {
+        backgroundColor: string,
+    },
+    inputError: {
+        color: string,
+        borderColor: string,
+        placeholderTextColor: string
+    },
+    validationMessage: {
+        color: string,
+        fontSize: number
+    },
+}
+
+export interface VariablesImage {
+    avatar: {
+        small: number,
+        medium: number,
+        large: number,
+        larger: number,
+    },
+    icon: number
 }
 
 export interface VariablesNavigation {
@@ -160,17 +204,22 @@ export interface VariablesTabContainer {
         pressColor: string,
         backgroundColor: string,
     },
+    tab: {
+        paddingVertical: number,
+    }
     indicator: {
         backgroundColor: string,
         height: number
     },
     label: {
         color: string,
+        fontSize: number,
         fontWeight: FontWeight,
         textTransform: TextTransform
     }
     activeLabel: {
         color: string,
+        fontSize: number,
         fontWeight: FontWeight,
         textTransform: TextTransform
     },

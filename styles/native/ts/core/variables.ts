@@ -1,8 +1,8 @@
-import { Platform }                                                         from "react-native";
-import * as custom                                                          from "../app/custom-variables";
-import adjustFont, { height, width }                                        from "./helpers/_functions/adjustfont";
-import { anyColorToRgbString, setColorBasedOnBackground, setContrastScale } from "./helpers/_functions/convertcolors";
-import merge                                                                from "./helpers/_functions/mergeobjects";
+import { Platform }                              from "react-native";
+import * as custom                               from "../app/custom-variables";
+import adjustFont, { height, width }             from "./helpers/_functions/adjustfont";
+import { anyColorToRgbString, setContrastScale } from "./helpers/_functions/convertcolors";
+import merge                                     from "./helpers/_functions/mergeobjects";
 import {
     VariablesBackground,
     VariablesBadge,
@@ -11,13 +11,14 @@ import {
     VariablesButton,
     VariablesContrast,
     VariablesFont,
+    VariablesImage,
     VariablesInput,
     VariablesLayoutgrid,
     VariablesListView,
     VariablesNavigation,
     VariablesSpacing,
     VariablesTabContainer,
-}                                                                           from "../types/variables";
+}                                                from "../types/variables";
 //
 //
 //== Global variables
@@ -33,24 +34,27 @@ let brand: VariablesBrand = {
     success: "#76CA02",
     warning: "#f99b1d",
     danger: "#ed1c24",
+    info: "",
     primaryLight: `rgba(${anyColorToRgbString("#0595DB")}, 0.14)`,
     successLight: `rgba(${anyColorToRgbString("#76CA02")}, 0.14)`,
     warningLight: `rgba(${anyColorToRgbString("#f99b1d")}, 0.14)`,
     dangerLight: `rgba(${anyColorToRgbString("#ed1c24")}, 0.14)`,
+    infoLight: "",
 };
-brand = merge(brand, custom.brand || {});
+brand = merge(brand, custom.brand || {} as any);
 //
 // Background colors
 let background: VariablesBackground = {
     primary: "#FFF",
-    secondary: setContrastScale(0.03, "#FFF"),
+    // semantic: setContrastScale(0.03, "#FFF"),
+    surface: "",
     gray: "#c6c6cc",
     brandPrimary: brand.primary,
     brandSuccess: brand.success,
     brandWarning: brand.warning,
     brandDanger: brand.danger,
 };
-background = merge(background, custom.background || {});
+background = merge(background, custom.background || {} as any);
 //
 // Contrast (Gray) colors based on background.primary
 let contrast: VariablesContrast = {
@@ -62,7 +66,7 @@ let contrast: VariablesContrast = {
     lower: setContrastScale(0.2, background.primary),
     lowest: setContrastScale(0.05, background.primary),
 };
-contrast = merge(contrast, custom.contrast || {});
+contrast = merge(contrast, custom.contrast || {} as any);
 //
 // Border Style
 let border: VariablesBorder = {
@@ -70,7 +74,7 @@ let border: VariablesBorder = {
     width: 1,
     radius: 5,
 };
-border = merge(border, custom.border || {});
+border = merge(border, custom.border || {} as any);
 //
 // Font Styles
 let font: VariablesFont = {
@@ -83,14 +87,25 @@ let font: VariablesFont = {
     sizeH4: adjustFont(18),
     sizeH5: adjustFont(14),
     sizeH6: adjustFont(12),
-    color: setColorBasedOnBackground(background.primary),
+    lineHeight: adjustFont(14) * 1.5,
+    lineHeightSmall: adjustFont(12) * 1.5,
+    lineHeightLarge: adjustFont(16) * 1.5,
+    lineHeightH1: adjustFont(40) * 1.5,
+    lineHeightH2: adjustFont(34) * 1.5,
+    lineHeightH3: adjustFont(28) * 1.5,
+    lineHeightH4: adjustFont(24) * 1.5,
+    lineHeightH5: adjustFont(20) * 1.5,
+    lineHeightH6: adjustFont(16) * 1.5,
+    colorTitle: "",
+    colorParagraph: "",
+    colorDisabled: "",
     weightLight: "100",  // Only supported on iOS, will be 'Normal' on Android
     weightNormal: "normal",
     weightSemiBold: "600", // Only supported on iOS, will be 'Bold' on Android
     weightBold: "bold",
     family: Platform.select({ios: "System", android: "normal"}) as string,
 };
-font = merge(font, custom.font || {});
+font = merge(font, custom.font || {} as any);
 //
 // Spacing
 let spacing: VariablesSpacing = {
@@ -102,7 +117,7 @@ let spacing: VariablesSpacing = {
     larger: 30,
     largest: 40,
 };
-spacing = merge(spacing, custom.spacing || {});
+spacing = merge(spacing, custom.spacing || {} as any);
 //
 // Button Styles
 let button: VariablesButton = {
@@ -112,6 +127,9 @@ let button: VariablesButton = {
     fontSizeIcon: font.sizeSmall,
     fontSizeIconLarge: font.size,
     borderRadius: border.radius,
+
+    minWidth: 48,
+    minHeight: 48,
     paddingVertical: spacing.smaller,
     paddingHorizontal: spacing.regular,
 
@@ -151,33 +169,59 @@ let button: VariablesButton = {
         backgroundColor: brand.danger,
     },
 };
-button = merge(button, custom.button || {});
+button = merge(button, custom.button || {} as any);
 //
 //Input Styles
 let input: VariablesInput = {
-    // Colors
-    color: font.color,
-    errorColor: brand.danger,
-    labelColor: font.color,
-    borderColor: contrast.lower,
-    backgroundColor: background.primary,
-    disabledBackgroundColor: contrast.lowest,
-    selectionColor: contrast.lower,
-    placeholderTextColor: contrast.regular,
-    underlineColorAndroid: "transparent",
+    label: {
+        numberOfLines: 1,
+        color: font.colorTitle,
+        fontSize: font.size,
+        textAlign: "left",
+    },
+    input: {
+        color: font.colorTitle,
+        borderColor: contrast.lower,
+        backgroundColor: background.primary,
+        selectionColor: contrast.lower,
+        placeholderTextColor: contrast.regular,
 
-    // Sizes
-    fontSize: font.size,
-    fontFamily: font.family,
-    borderWidth: border.width,
-    borderRadius: border.radius,
+        fontSize: font.size,
+        lineHeight: font.lineHeight,
+        borderWidth: border.width,
+        borderRadius: border.radius,
 
-    // Alignment
-    textAlign: "left",
-    paddingHorizontal: spacing.smaller,
-    paddingVertical: spacing.small,
+        minWidth: 48,
+        minHeight: 48,
+        paddingVertical: spacing.small,
+        paddingHorizontal: spacing.small,
+    },
+    inputDisabled: {
+        backgroundColor: contrast.lowest,
+    },
+    inputError: {
+        color: brand.danger,
+        borderColor: brand.danger,
+        placeholderTextColor: brand.danger,
+    },
+    validationMessage: {
+        color: brand.danger,
+        fontSize: font.size,
+    },
 };
-input = merge(input, custom.input || {});
+input = merge(input, custom.input || {} as any);
+//
+// Image Styles
+let image: VariablesImage = {
+    avatar: {
+        small: 24,
+        medium: 40,
+        large: 56,
+        larger: 72,
+    },
+    icon: 24,
+};
+image = merge(image, custom.image || {} as any);
 //
 // Navigation Styles
 let navigation: VariablesNavigation = {
@@ -200,15 +244,15 @@ let navigation: VariablesNavigation = {
         iconSize: font.sizeSmall,
     },
     progressOverlay: {
-        color: font.color,
-        activityIndicatorColor: font.color,
+        color: font.colorTitle,
+        activityIndicatorColor: font.colorTitle,
         backgroundColor: `rgba(0, 0, 0, 0.5)`,
-        containerBackgroundColor: background.secondary,
+        containerBackgroundColor: background.surface,
         shadowColor: "#000", // Only for iOS
         fontSize: font.size,
     },
 };
-navigation = merge(navigation, custom.navigation || {});
+navigation = merge(navigation, custom.navigation || {} as any);
 //
 // Tabcontainer Styles
 let tabContainer: VariablesTabContainer = {
@@ -216,22 +260,27 @@ let tabContainer: VariablesTabContainer = {
         pressColor: contrast.lower,
         backgroundColor: background.primary,
     },
+    tab: {
+        paddingVertical: spacing.smaller,
+    },
     indicator: {
         backgroundColor: brand.primary,
         height: Platform.select({ios: 2, android: 2}) as number,
     },
     label: {
         color: contrast.highest,
+        fontSize: font.size,
         fontWeight: font.weightBold,
         textTransform: "uppercase",
     },
     activeLabel: {
         color: brand.primary,
+        fontSize: font.size,
         fontWeight: font.weightBold,
         textTransform: "uppercase",
     },
 };
-tabContainer = merge(tabContainer, custom.tabContainer || {});
+tabContainer = merge(tabContainer, custom.tabContainer || {} as any);
 //
 // Listview Styles
 let listView: VariablesListView = {
@@ -240,13 +289,13 @@ let listView: VariablesListView = {
         width: border.width,
     },
 };
-listView = merge(listView, custom.listView || {});
+listView = merge(listView, custom.listView || {} as any);
 //
 // Layoutgrid Styles
 let layoutGrid: VariablesLayoutgrid = {
     gutterSize: 15,
 };
-layoutGrid = merge(layoutGrid, custom.layoutGrid || {});
+layoutGrid = merge(layoutGrid, custom.layoutGrid || {} as any);
 //
 //## Pluggable Widgets
 //-------------------------------------------------------------------------------------------------------------------//
@@ -278,7 +327,7 @@ let badge: VariablesBadge = {
         backgroundColor: brand.dangerLight,
     },
 };
-badge = merge(badge, custom.badge || {});
+badge = merge(badge, custom.badge || {} as any);
 //
 export {
     brand,
@@ -289,6 +338,7 @@ export {
     spacing,
     button,
     input,
+    image,
     navigation,
     tabContainer,
     listView,

@@ -100,7 +100,7 @@ export const btnIcon = {
         paddingHorizontal: 0,
     },
     icon: {
-        color: font.color,
+        color: font.colorTitle,
     },
     caption: {
         fontSize: 0,

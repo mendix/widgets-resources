@@ -24,24 +24,28 @@ export const DropDown: DropDownType = {
     },
     value: {
         // All TextStyle properties & placeholderTextColor are allowed
-        color: input.color,
-        borderColor: input.borderColor,
-        backgroundColor: input.backgroundColor,
+        color: input.input.color,
+        borderColor: input.input.borderColor,
+        backgroundColor: input.input.backgroundColor,
+        placeholderTextColor: input.input.placeholderTextColor, // Only applied when useUniformDesign is true
 
-        fontSize: input.fontSize,
-        fontFamily: input.fontFamily,
-        borderWidth: input.borderWidth,
-        borderRadius: input.borderRadius,
+        fontSize: input.input.fontSize,
+        lineHeight: input.input.lineHeight,
+        fontFamily: font.family,
+        borderWidth: input.input.borderWidth,
+        borderRadius: input.input.borderRadius,
 
         overflow: "hidden",
-        paddingHorizontal: input.paddingHorizontal,
-        paddingVertical: input.paddingVertical,
+        textAlignVertical: "center",
+        minWidth: input.input.minWidth,
+        minHeight: input.input.minHeight,
+        paddingHorizontal: input.input.paddingHorizontal,
+        paddingVertical: input.input.paddingVertical,
 
-        placeholderTextColor: input.placeholderTextColor, // Only applied when useUniformDesign is true
     },
     valueDisabled: {
         // All TextStyle properties are allowed
-        backgroundColor: input.disabledBackgroundColor,
+        backgroundColor: input.inputDisabled.backgroundColor,
     },
     validationMessage: {
         // All TextStyle properties are allowed
@@ -64,11 +68,11 @@ export const DropDown: DropDownType = {
         maxWidth: 500,
         paddingVertical: 6,
         paddingHorizontal: 16,
-        backgroundColor: input.backgroundColor,
+        backgroundColor: input.input.backgroundColor,
     },
     item: {
         // All TextStlye properties are allowed
-        color: input.color,
+        color: input.input.color,
     },
     selectedItem: {
         // All TextStlye properties are allowed
@@ -83,7 +87,7 @@ export const DropDown: DropDownType = {
     /*  Old dropdown styles start */
     pickerIOS: {
         // All ViewStyle properties are allowed
-        backgroundColor: input.backgroundColor,
+        backgroundColor: input.input.backgroundColor,
     },
     pickerItemIOS: {
         // All TextStyle properties are allowed
@@ -93,7 +97,7 @@ export const DropDown: DropDownType = {
     },
     pickerTopIOS: {
         // All ViewStyle properties are allowed
-        backgroundColor: input.backgroundColor,
+        backgroundColor: input.input.backgroundColor,
     },
     /*  Old dropdown styles start */
 };

@@ -118,13 +118,13 @@ export const textBold = {
 export const textSmall = {
     text: {
         fontSize: font.sizeSmall,
-        lineHeight: font.sizeSmall + 2,
+        lineHeight: font.lineHeightSmall,
     },
 };
 export const textLarge = {
     text: {
         fontSize: font.sizeLarge,
-        lineHeight: font.sizeLarge + 2,
+        lineHeight: font.lineHeightLarge,
     },
 };
 //

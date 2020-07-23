@@ -39,7 +39,7 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton:
     secondaryButton: {
         // Size and all ViewStyle properties are allowed
         size: 30,
-        backgroundColor: background.secondary,
+        backgroundColor: background.surface,
         elevation: 2,
         shadowColor: "#000",
         shadowOpacity: 0.3,

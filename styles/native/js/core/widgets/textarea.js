@@ -1,4 +1,5 @@
 import { TextBox, TextBoxVertical } from "./textbox";
+import { input } from "../variables";
 /*
 
 DISCLAIMER:
@@ -19,6 +20,7 @@ export const TextArea = {
     label: {
         // numberOfLines and all TextStyle properties are allowed
         ...TextBox.label,
+        lineHeight: input.input.lineHeight,
         height: "100%",
         textAlignVertical: "top",
         paddingVertical: TextBox.input?.paddingVertical,
@@ -50,7 +52,10 @@ export const TextAreaVertical = {
         paddingVertical: undefined,
         textAlignVertical: undefined,
     },
-    input: TextBoxVertical.input,
+    input: {
+        ...TextBoxVertical.input,
+        lineHeight: input.input.lineHeight,
+    },
     inputError: TextBoxVertical.inputError,
     validationMessage: TextBoxVertical.validationMessage,
 };

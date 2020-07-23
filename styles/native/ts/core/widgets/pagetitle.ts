@@ -20,6 +20,6 @@ export const PageTitle: PageTitleType = {
     text: {
         // All TextStyle properties are allowed
         ...TextHeading1.text,
-        color: font.color,
+        color: font.colorTitle,
     },
 };

@@ -40,7 +40,7 @@ export const com_mendix_widget_native_popupmenu_PopupMenu = {
             rippleColor: contrast.lower,
             defaultStyle: {
                 // All TextStyle properties are allowed
-                color: font.color,
+                color: font.colorTitle,
             },
             primaryStyle: {
                 // All TextStyle properties are allowed

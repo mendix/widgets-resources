@@ -23,6 +23,9 @@ export const ActionButton: ActionButtonType = {
         alignItems: "center",
         justifyContent: "center",
         borderRadius: button.borderRadius,
+
+        minWidth: button.minWidth,
+        minHeight: button.minHeight,
         paddingVertical: button.paddingVertical,
         paddingHorizontal: button.paddingHorizontal,
     },
@@ -37,6 +40,7 @@ export const ActionButton: ActionButtonType = {
         fontSize: button.fontSize,
         fontFamily: font.family,
         fontWeight: button.fontWeight,
+        lineHeight: font.lineHeight,
     },
 };
 //

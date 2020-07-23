@@ -1,6 +1,7 @@
 import { Platform }                                         from "react-native";
-import { background, border, brand, contrast, font, input } from "../variables";
+import { background, border, brand, contrast } from "../variables";
 import { SliderType }                                       from "../../types/widgets";
+import { TextBox }                                          from "./textbox";
 /*
 
 DISCLAIMER:
@@ -37,7 +38,7 @@ export const com_mendix_widget_native_slider_Slider: SliderType = {
     },
     marker: {
         // All ViewStyle properties are allowed
-        backgroundColor: background.secondary,
+        backgroundColor: background.surface,
         ...Platform.select({
             ios: {
                 width: 30,
@@ -72,7 +73,7 @@ export const com_mendix_widget_native_slider_Slider: SliderType = {
         ...Platform.select({
             ios: {
                 borderColor: contrast.lowest,
-                backgroundColor: background.secondary,
+                backgroundColor: background.surface,
                 shadowColor: "#000",
                 shadowOpacity: 0.2,
                 shadowOffset: {width: 0, height: 1},
@@ -90,8 +91,6 @@ export const com_mendix_widget_native_slider_Slider: SliderType = {
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        color: input.errorColor,
-        fontSize: font.size,
-        fontFamily: font.family,
+        ...TextBox.validationMessage
     },
 };

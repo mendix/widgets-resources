@@ -23,21 +23,25 @@ export const DropDown = {
     },
     value: {
         // All TextStyle properties & placeholderTextColor are allowed
-        color: input.color,
-        borderColor: input.borderColor,
-        backgroundColor: input.backgroundColor,
-        fontSize: input.fontSize,
-        fontFamily: input.fontFamily,
-        borderWidth: input.borderWidth,
-        borderRadius: input.borderRadius,
+        color: input.input.color,
+        borderColor: input.input.borderColor,
+        backgroundColor: input.input.backgroundColor,
+        placeholderTextColor: input.input.placeholderTextColor,
+        fontSize: input.input.fontSize,
+        lineHeight: input.input.lineHeight,
+        fontFamily: font.family,
+        borderWidth: input.input.borderWidth,
+        borderRadius: input.input.borderRadius,
         overflow: "hidden",
-        paddingHorizontal: input.paddingHorizontal,
-        paddingVertical: input.paddingVertical,
-        placeholderTextColor: input.placeholderTextColor,
+        textAlignVertical: "center",
+        minWidth: input.input.minWidth,
+        minHeight: input.input.minHeight,
+        paddingHorizontal: input.input.paddingHorizontal,
+        paddingVertical: input.input.paddingVertical,
     },
     valueDisabled: {
         // All TextStyle properties are allowed
-        backgroundColor: input.disabledBackgroundColor,
+        backgroundColor: input.inputDisabled.backgroundColor,
     },
     validationMessage: {
         // All TextStyle properties are allowed
@@ -60,11 +64,11 @@ export const DropDown = {
         maxWidth: 500,
         paddingVertical: 6,
         paddingHorizontal: 16,
-        backgroundColor: input.backgroundColor,
+        backgroundColor: input.input.backgroundColor,
     },
     item: {
         // All TextStlye properties are allowed
-        color: input.color,
+        color: input.input.color,
     },
     selectedItem: {
         // All TextStlye properties are allowed
@@ -79,7 +83,7 @@ export const DropDown = {
     /*  Old dropdown styles start */
     pickerIOS: {
         // All ViewStyle properties are allowed
-        backgroundColor: input.backgroundColor,
+        backgroundColor: input.input.backgroundColor,
     },
     pickerItemIOS: {
     // All TextStyle properties are allowed
@@ -89,7 +93,7 @@ export const DropDown = {
     },
     pickerTopIOS: {
         // All ViewStyle properties are allowed
-        backgroundColor: input.backgroundColor,
+        backgroundColor: input.input.backgroundColor,
     },
 };
 export const DropDownVertical = {
