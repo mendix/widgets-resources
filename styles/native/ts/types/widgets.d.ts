@@ -1,4 +1,4 @@
-import { ImageStyle, TextStyle, ViewStyle, TextProps } from "react-native";
+import { ImageStyle, TextProps, TextStyle, ViewStyle } from "react-native";
 
 declare type ActivityIndicatorSizeType = "small" | "large";
 
@@ -47,6 +47,9 @@ export interface BottomSheetType {
     containerWhenExpandedFullscreen?: ViewStyle,
     modal?: ViewStyle,
     modalItems?: {
+        container?: ViewStyle & {
+            rippleColor?: string;
+        }
         defaultStyle?: TextStyle;
         primaryStyle?: TextStyle;
         dangerStyle?: TextStyle;
@@ -151,14 +154,14 @@ export interface DropDownType {
     container?: ViewStyle,
     label?: InputLabelType,
     value?: {
-        placeholderTextColor?: string
-    } & TextStyle,
+                placeholderTextColor?: string
+            } & TextStyle,
     valueDisabled?: TextStyle,
     validationMessage?: TextStyle,
     /*  New dropdown styles start */
     valueContainer?: {
-        rippleColor?: string
-    } & ViewStyle;
+                         rippleColor?: string
+                     } & ViewStyle;
     menuWrapper?: ViewStyle
     item?: TextStyle;
     itemContainer?: ViewStyle;
@@ -332,23 +335,29 @@ export interface ProgressCircleType {
 export interface PopupMenuType {
     container?: ViewStyle;
     basic: BasicItemStyle;
+    custom: CustomItemStyle
     buttonContainer?: ViewStyle;
-    itemRippleColor: string;
+}
+
+interface CustomItemStyle extends ViewStyle {
+    container?: ViewStyle;
+    itemStyle: { rippleColor?: string };
 }
 
 interface BasicItemStyle {
     itemStyle?: ItemStyle;
-    containerStyle?: ViewStyle;
+    container?: ViewStyle;
     dividerColor?: string;
 }
+
 interface ItemStyle {
+    rippleColor?: string;
     ellipsizeMode?: TextProps["ellipsizeMode"];
     defaultStyle?: TextStyle;
     primaryStyle?: TextStyle;
     dangerStyle?: TextStyle;
     customStyle?: TextStyle;
 }
-
 
 // QR Code
 export interface QRCodeType {

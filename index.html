@@ -8,11 +8,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
 
         {{themecss}}
-
-        <!-- ICONS EXAMPLE -->
-
-        <!-- iPhone retina icon (iOS < 7) -->
-        <!-- <link href="resources/ios/icons/apple-touch-icon-precomposed-114x114.png" sizes="114x114" rel="apple-touch-icon-precomposed"> -->
+        {{appicons}}
 
         <!-- STARTUP IMAGES -->
         <!-- <link href="resources/ios/startup/apple-touch-startup-image-1496x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"> -->
@@ -29,7 +25,7 @@
         </script>
         <script>
             if (!document.cookie || !document.cookie.match(/(^|;)originURI=/gi))
-                document.cookie = "originURI=/login.html";
+                document.cookie = "originURI=/login.html" + (window.location.protocol === "https:" ? ";SameSite=None;Secure" : "");
         </script>
         <script src="mxclientsystem/mxui/mxui.js?{{cachebust}}"></script>
     </body>
