@@ -37,12 +37,10 @@ jobs:
           script:
               - npm run test:scripts -- $SINCE_ARG
         - name: "Script tests (Node latest, windows)"
-          node_js: 14.4
           os: windows
           script:
               - npm run test:scripts -- $SINCE_ARG
         - name: "Script tests (Node latest, linux)"
-          node_js: 14.4
           script:
               - npm run test:scripts -- $SINCE_ARG
         - name: "Run end-to-end tests"

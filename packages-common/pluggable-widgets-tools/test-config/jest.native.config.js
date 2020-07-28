@@ -14,8 +14,7 @@ const nativeConfig = {
     },
     haste: {
         defaultPlatform: "android",
-        platforms: ["android", "ios", "native"],
-        providesModuleNodeModules: ["react-native"]
+        platforms: ["android", "ios", "native"]
     },
     modulePathIgnorePatterns: ["<rootDir>/node_modules/react-native/Libraries/react-native/"],
     reporters: ["default"],
