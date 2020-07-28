@@ -10,7 +10,8 @@ export type Property = {
     key: string;
     caption: string;
     description?: string;
-    properties?: Properties[];
+    objectHeaders?: string[]; // used for customizing object grids
+    objects?: ObjectProperties[];
 };
 
 export type Problem = {
@@ -20,4 +21,9 @@ export type Problem = {
     studioMessage?: string; // studio-specific message, defaults to message
     url?: string; // link with more information about the problem
     studioUrl?: string; // studio-specific link
+};
+
+export type ObjectProperties = {
+    properties: PropertyGroup[];
+    captions?: string[]; // used for customizing object grids
 };

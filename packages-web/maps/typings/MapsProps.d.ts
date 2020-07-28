@@ -37,11 +37,11 @@ export interface DynamicMarkersType {
     customMarkerDynamic?: DynamicValue<WebImage>;
 }
 
-export type ZoomEnum = "automatic" | "world" | "continent" | "city" | "street" | "buildings";
-
 export type WidthUnitEnum = "percentage" | "pixels";
 
 export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
+
+export type ZoomEnum = "automatic" | "world" | "continent" | "city" | "street" | "buildings";
 
 export type MapProviderEnum = "googleMaps" | "openStreet" | "mapBox" | "hereMaps";
 
@@ -73,13 +73,13 @@ export interface MapsContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex: number;
+    advanced: boolean;
     markers: MarkersType[];
     dynamicMarkers: DynamicMarkersType[];
     apiKey: string;
     apiKeyExp?: DynamicValue<string>;
     geodecodeApiKey: string;
     geodecodeApiKeyExp?: DynamicValue<string>;
-    zoom: ZoomEnum;
     showCurrentLocation: boolean;
     optionDrag: boolean;
     optionScroll: boolean;
@@ -93,7 +93,7 @@ export interface MapsContainerProps {
     width: number;
     heightUnit: HeightUnitEnum;
     height: number;
-    advanced: boolean;
+    zoom: ZoomEnum;
     mapProvider: MapProviderEnum;
     mapStyles: string;
 }
@@ -101,13 +101,13 @@ export interface MapsContainerProps {
 export interface MapsPreviewProps {
     class: string;
     style: string;
+    advanced: boolean;
     markers: MarkersPreviewType[];
     dynamicMarkers: DynamicMarkersPreviewType[];
     apiKey: string;
     apiKeyExp: string;
     geodecodeApiKey: string;
     geodecodeApiKeyExp: string;
-    zoom: ZoomEnum;
     showCurrentLocation: boolean;
     optionDrag: boolean;
     optionScroll: boolean;
@@ -121,7 +121,7 @@ export interface MapsPreviewProps {
     width: number | null;
     heightUnit: HeightUnitEnum;
     height: number | null;
-    advanced: boolean;
+    zoom: ZoomEnum;
     mapProvider: MapProviderEnum;
     mapStyles: string;
 }

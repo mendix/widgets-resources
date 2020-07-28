@@ -77,11 +77,8 @@ function modifyProperty(
             if (prop.key === key) {
                 if (nestedPropIndex === undefined || nestedPropKey === undefined) {
                     modify(prop, index, array);
-                } else {
-                    if (!prop.properties) {
-                        throw new Error("Wrong parameters");
-                    }
-                    modifyProperty(modify, prop.properties[nestedPropIndex], nestedPropKey);
+                } else if (prop.objects) {
+                    modifyProperty(modify, prop.objects[nestedPropIndex].properties, nestedPropKey);
                 }
             }
         });
