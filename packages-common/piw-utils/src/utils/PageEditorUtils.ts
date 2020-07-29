@@ -79,6 +79,8 @@ function modifyProperty(
                     modify(prop, index, array);
                 } else if (prop.objects) {
                     modifyProperty(modify, prop.objects[nestedPropIndex].properties, nestedPropKey);
+                } else if (prop.properties) {
+                    modifyProperty(modify, prop.properties[nestedPropIndex], nestedPropKey);
                 }
             }
         });

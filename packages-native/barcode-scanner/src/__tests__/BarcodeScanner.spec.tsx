@@ -5,7 +5,7 @@ import { fireEvent, render, RenderAPI } from "react-native-testing-library";
 import { BarcodeScanner, Props } from "../BarcodeScanner";
 import { RNCamera } from "./__mocks__/RNCamera";
 
-jest.mock("react-native-camera", () => require.requireActual("./__mocks__/RNCamera"));
+jest.mock("react-native-camera", () => jest.requireActual("./__mocks__/RNCamera"));
 
 describe("BarcodeScanner", () => {
     let defaultProps: Props;

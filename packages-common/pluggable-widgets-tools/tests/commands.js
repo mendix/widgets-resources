@@ -1,14 +1,14 @@
-const mapLimit = require("async/mapLimit");
-const { Mutex } = require("async-mutex");
+const { Mutex, Semaphore } = require("async-mutex");
 const { exec } = require("child_process");
 const { copy, existsSync, readJson, writeJson } = require("fs-extra");
 const { join } = require("path");
-const { mkdir, rm, tempdir } = require("shelljs");
+const { ls, mkdir, rm, tempdir } = require("shelljs");
 const kill = require("tree-kill");
 const { promisify } = require("util");
 const { run: runYeoman } = require("yeoman-test");
 
 const LIMIT_TESTS = !!process.env.LIMIT_TESTS;
+const PARALLELISM = 4;
 
 const CONFIGS = [
     ["web", "full", "ts", "8.0"],
@@ -31,7 +31,7 @@ if (LIMIT_TESTS) {
     CONFIGS.splice(1, CONFIGS.length - 2); // Remove all configs except the first and the last
 }
 
-const mutex = new Mutex();
+const yeomanMutex = new Mutex();
 
 main().catch(e => {
     console.error(e);
@@ -51,27 +51,40 @@ async function main() {
             .pop()
     );
 
+    const workDirs = [];
+    const workDirSemaphore = new Semaphore(PARALLELISM);
     const failures = (
-        await mapLimit(CONFIGS, 4, async config => {
-            try {
-                await runTest(...config);
-                return undefined;
-            } catch (e) {
-                return [config, e];
-            }
-        })
+        await Promise.all(
+            CONFIGS.map(async config => {
+                const [, release] = await workDirSemaphore.acquire();
+                let workDir;
+                try {
+                    workDir = workDirs.pop();
+                    if (!workDir) {
+                        workDir = join(tempdir(), `pwt_test_${Math.round(Math.random() * 10000)}`);
+                        mkdir(workDir);
+                    }
+                    await runTest(workDir, ...config);
+                    return undefined;
+                } catch (e) {
+                    return [config, e];
+                } finally {
+                    workDirs.push(workDir);
+                    release();
+                }
+            })
+        )
     ).filter(f => f);
 
-    rm(toolsPackagePath);
+    rm("-r", toolsPackagePath, ...workDirs);
 
     if (failures.length) {
         failures.forEach(f => console.error(`Test for configuration ${f[0]} failed: ${f[1]}`));
         process.exit(2);
     }
 
-    async function runTest(platform, boilerplate, lang, version) {
+    async function runTest(workDir, platform, boilerplate, lang, version) {
         const widgetName = `generated_${version.replace(".", "_")}_${lang}_${platform}_${boilerplate}`;
-        const workDir = join(tempdir(), `pwt_test_${Math.round(Math.random() * 10000)}`);
         let widgetPackageJson;
 
         console.log(`[${widgetName}] Preparing widget...`);
@@ -101,10 +114,14 @@ async function main() {
         await testStart();
 
         console.log(`[${widgetName}] Tested!`);
-        rm("-rf", workDir); // ignore errors
 
         async function prepareWidget() {
-            mkdir(workDir);
+            const filesToRemove = ls(workDir)
+                .filter(file => file !== "node_modules")
+                .map(file => join(workDir, file));
+            if (filesToRemove.length) {
+                rm("-r", ...filesToRemove);
+            }
 
             if (version === "latest") {
                 const promptAnswers = {
@@ -123,7 +140,7 @@ async function main() {
                     hasE2eTests: false
                 };
                 let generatedWidget;
-                const release = await mutex.acquire(); // yeoman generator is no re-entrable :(
+                const release = await yeomanMutex.acquire(); // yeoman generator is no re-entrable :(
                 try {
                     generatedWidget = await runYeoman(require.resolve("@mendix/generator-widget/generators/app"))
                         .inTmpDir()

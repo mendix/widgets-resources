@@ -49,16 +49,15 @@ const widgetConfig = {
     externals: [/^mendix\//, "react", "react-dom", "big.js"],
     plugins: [
         new NormalModuleReplacementPlugin(/react-hot-loader\/root/, join(__dirname, "hot.js")),
-        new CopyWebpackPlugin(
-            [
+        new CopyWebpackPlugin({
+            patterns: [
                 {
                     from: `${variables.projectPath}/src/**/*.xml`,
                     toType: "template",
                     to: "widgets/[name].[ext]"
                 }
-            ],
-            { copyUnmodified: true }
-        )
+            ]
+        })
     ]
 };
 

@@ -70,16 +70,15 @@ const widgetConfig = {
             ignoreOrder: false
         }),
         new ForkTsCheckerWebpackPlugin(),
-        new CopyWebpackPlugin(
-            [
+        new CopyWebpackPlugin({
+            patterns: [
                 {
                     from: "src/**/*.xml",
                     toType: "template",
                     to: "widgets/[name].[ext]"
                 }
-            ],
-            { copyUnmodified: true }
-        ),
+            ]
+        }),
         new webpack.ContextReplacementPlugin(/^testSourcePath$/, path.resolve(cwd, "src"))
     ]
 };

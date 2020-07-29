@@ -9,7 +9,7 @@ import { BackgroundImageStyle } from "../ui/Styles";
 import { NativeImage } from "mendix";
 import Big from "big.js";
 
-jest.mock("mendix/components/native/Image", () => require.requireActual("./__mocks__/mendix/components/native/Image"));
+jest.mock("mendix/components/native/Image", () => jest.requireActual("./__mocks__/mendix/components/native/Image"));
 
 const defaultProps: BackgroundImageProps<BackgroundImageStyle> = {
     name: "backgroundImageTest",

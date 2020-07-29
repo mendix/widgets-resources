@@ -12,6 +12,7 @@ export type Property = {
     description?: string;
     objectHeaders?: string[]; // used for customizing object grids
     objects?: ObjectProperties[];
+    properties?: Properties[]; // Property needs to remain here for compatibility with Studio Pro < 8.12
 };
 
 export type Problem = {
