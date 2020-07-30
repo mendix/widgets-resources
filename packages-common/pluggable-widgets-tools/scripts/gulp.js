@@ -21,7 +21,8 @@ const isNative = process.argv.indexOf("--native") !== -1;
 function clean() {
     return del(
         [
-            join(variables.projectPath, "dist"),
+            join(variables.projectPath, "dist", variables.package.version),
+            join(variables.projectPath, "dist/tmp"),
             join(widgetsFolder, `${variables.package.packagePath}.${variables.package.widgetName}.mpk`)
         ],
         { force: true }
