@@ -16,16 +16,15 @@ type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
  *
  * The result is an ImageMetaData object. Most items are self-explanatory.
  *
- * The FileName value will be empty for pictures taken on an iOS device. To get the right extension you can get that from the URI:
- * substring($ImageMetaData/URI, findLast($ImageMetaData/URI, '.'))
- * Please note that the temporary file the URI refers to has already been deleted. It is still included to get the extension or the entire file name from it.
+ * The FileType is not the extension but the mime type, for example image/jpeg when the image is a jpg file
+ * You can get the right extension from the FileName:
+ * substring($ImageMetaData/FileName, findLast($ImageMetaData/FileName, '.'))
  *
  * @param {MxObject} picture - This field is required.
  * @param {"NativeMobileResources.PictureSource.camera"|"NativeMobileResources.PictureSource.imageLibrary"|"NativeMobileResources.PictureSource.either"} pictureSource - Select a picture from the library or the camera. The default is to let the user decide.
  * @param {"NativeMobileResources.PictureQuality.original"|"NativeMobileResources.PictureQuality.low"|"NativeMobileResources.PictureQuality.medium"|"NativeMobileResources.PictureQuality.high"|"NativeMobileResources.PictureQuality.custom"} pictureQuality - The default picture quality is 'Medium'.
  * @param {Big} maximumWidth - The picture will be scaled to this maximum pixel width, while maintaining the aspect ratio.
  * @param {Big} maximumHeight - The picture will be scaled to this maximum pixel height, while maintaining the aspect ratio.
- * @param {MxObject} pictureData - Additional info about the picture will be stored in this object. Create it before calling this action.
  * @returns {Promise.<mendix.lib.MxObject>}
  */
 export async function TakePictureAdvanced(
@@ -59,7 +58,6 @@ export async function TakePictureAdvanced(
                     const fileName = response.fileName ? response.fileName : /[^\/]*$/.exec(response.uri)![0];
                     storeFile(picture, response.uri).then(pictureTaken => {
                         resultObject.set("PictureTaken", pictureTaken);
-                        resultObject.set("URI", response.uri);
                         resultObject.set("IsVertical", response.isVertical);
                         resultObject.set("Width", response.width);
                         resultObject.set("Height", response.height);
