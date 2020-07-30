@@ -51,7 +51,7 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
                     onPress={() => handlePress(item.action)}
                     textStyle={itemStyle}
                     ellipsizeMode={styles.basic?.itemStyle?.ellipsizeMode as any}
-                    style={styles.basic?.containerStyle as any}
+                    style={styles.basic?.container as any}
                     {...getRippleColor(styles.basic?.itemStyle?.rippleColor)}
                 >
                     {item.caption}
@@ -62,12 +62,12 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
         menuOptions = props.customItems.map((item, index) => (
             <TouchableItem
                 key={index}
-                style={styles.custom?.containerStyle}
+                style={styles.custom?.container}
                 onPress={() => handlePress(item.action)}
                 {...getRippleColor(styles.custom?.itemStyle?.rippleColor)}
             >
                 {Platform.OS === "android" ? (
-                    <View style={styles.custom?.containerStyle}>{item.content}</View>
+                    <View style={styles.custom?.container}>{item.content}</View>
                 ) : (
                     <Fragment>{item.content}</Fragment>
                 )}

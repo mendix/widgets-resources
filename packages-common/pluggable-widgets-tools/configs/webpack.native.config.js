@@ -92,18 +92,15 @@ const widgetConfig = {
         "react-navigation"
     ],
     plugins: [
-        new CopyWebpackPlugin(
-            [
+        new CopyWebpackPlugin({
+            patterns: [
                 {
                     from: `${variables.projectPath}/src/**/*.xml`,
                     toType: "template",
                     to: `widgets/[name].[ext]`
                 }
-            ],
-            {
-                copyUnmodified: true
-            }
-        ),
+            ]
+        }),
         new webpack.LoaderOptionsPlugin({ debug: true })
     ]
 };

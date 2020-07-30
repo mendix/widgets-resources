@@ -1,13 +1,13 @@
 import { createElement, Fragment, ReactElement } from "react";
-import { BottomSheetStyle, defaultBottomDrawerStyle } from "./ui/Styles";
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { BottomSheetStyle } from "./ui/Styles";
 import { CustomModalSheet } from "./components/CustomModalSheet";
 import { ExpandingDrawer } from "./components/ExpandingDrawer";
 import { NativeBottomSheet } from "./components/NativeBottomSheet";
 import { BottomSheetProps } from "../typings/BottomSheetProps";
+import { StyleSheet } from "react-native";
 
 export function BottomSheet(props: BottomSheetProps<BottomSheetStyle>): ReactElement {
-    const styles = flattenStyles(defaultBottomDrawerStyle, props.style);
+    const styles = StyleSheet.flatten(props.style);
 
     if (props.type === "modal" && props.modalRendering === "custom") {
         return (

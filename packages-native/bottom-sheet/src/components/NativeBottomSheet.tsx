@@ -3,7 +3,8 @@ import ActionSheet, { ActionSheetCustom } from "react-native-actionsheet";
 import { Platform, Text } from "react-native";
 import { EditableValue, ValueStatus } from "mendix";
 import { ItemsBasicType } from "../../typings/BottomSheetProps";
-import { BottomSheetStyle, defaultPaddings } from "../ui/Styles";
+import { ModalItemContainerStyle, BottomSheetStyle, defaultMargins } from "../ui/Styles";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 interface NativeBottomSheetProps {
     name: string;
@@ -32,10 +33,10 @@ export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement =
 
     const actionHandler = useCallback(
         (index: number) => {
-            const action = props.itemsBasic[index].action;
-            if (action && action.canExecute) {
-                action.execute();
-            }
+            setTimeout(() => {
+                executeAction(props.itemsBasic[index].action);
+            }, 500);
+
             if (props.triggerAttribute && !props.triggerAttribute.readOnly) {
                 props.triggerAttribute.setValue(false);
                 setCurrentStatus(false);
@@ -50,12 +51,25 @@ export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement =
                 {item.caption}
             </Text>
         ));
+
+        const buttonContainerStyle = { ...props.styles.modalItems?.container } as ModalItemContainerStyle;
+        delete buttonContainerStyle?.rippleColor;
+
         return (
             <ActionSheetCustom
                 ref={bottomSheetRef}
                 options={options}
                 onPress={actionHandler}
-                styles={{ wrapper: defaultPaddings }}
+                buttonUnderlayColor={props.styles?.modalItems?.container?.rippleColor}
+                styles={{
+                    wrapper: defaultMargins,
+                    buttonBox: buttonContainerStyle,
+                    cancelButtonBox: {
+                        height: buttonContainerStyle?.height,
+                        borderBottomWidth: 0,
+                        marginTop: 0
+                    }
+                }}
             />
         );
     }

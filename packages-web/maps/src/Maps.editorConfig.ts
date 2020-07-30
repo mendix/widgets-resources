@@ -63,6 +63,7 @@ export function getProperties(
         }
         if (!values.advanced) {
             hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "markerStyleDynamic");
+            hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "customMarkerDynamic");
         } else if (f.markerStyleDynamic === "default") {
             hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "customMarkerDynamic");
         }
@@ -134,11 +135,38 @@ export function check(values: MapsPreviewProps): Problem[] {
         }
     });
 
-    values.dynamicMarkers.forEach(marker => {
+    values.dynamicMarkers.forEach((marker, index) => {
         if (!marker.markersDS) {
             errors.push({
                 property: "dynamicMarkers.markersDS",
                 message: "A data source should be selected in order to retrieve a list of markers"
+            });
+        }
+        if (marker.locationType === "address") {
+            if (!marker.address) {
+                errors.push({
+                    property: "dynamicMarkers.address",
+                    message: "A dynamic marker requires an address"
+                });
+            }
+        } else {
+            if (!marker.latitude) {
+                errors.push({
+                    property: "dynamicMarkers.latitude",
+                    message: "A dynamic marker requires latitude"
+                });
+            }
+            if (!marker.longitude) {
+                errors.push({
+                    property: "dynamicMarkers.longitude",
+                    message: "A dynamic marker requires longitude"
+                });
+            }
+        }
+        if (values.advanced && marker.markerStyleDynamic === "image" && !marker.customMarkerDynamic) {
+            errors.push({
+                property: "dynamicMarkers.customMarkerDynamic",
+                message: `Custom marker image is required when shape is 'image' for list at position ${index + 1}`
             });
         }
     });

@@ -17,7 +17,7 @@ exports[`Bottom sheet renders a custom bottom action sheet for ios (Basic modal)
             "flexDirection": "row",
           },
           Object {
-            "paddingBottom": 24,
+            "marginBottom": 24,
           },
         ],
       ]
@@ -47,10 +47,10 @@ exports[`Bottom sheet renders a custom bottom action sheet for ios (Basic modal)
           "alignSelf": "flex-end",
           "backgroundColor": "#e5e5e5",
           "flex": 1,
-          "height": 101,
+          "height": 0,
           "transform": Array [
             Object {
-              "translateY": 101,
+              "translateY": 0,
             },
           ],
         }
@@ -80,6 +80,7 @@ exports[`Bottom sheet renders a custom bottom action sheet for ios (Basic modal)
                   "justifyContent": "center",
                   "marginTop": 0.5,
                 },
+                Object {},
               ]
             }
           >
@@ -114,6 +115,7 @@ exports[`Bottom sheet renders a custom bottom action sheet for ios (Basic modal)
                   "justifyContent": "center",
                   "marginTop": 0.5,
                 },
+                Object {},
               ]
             }
           >
@@ -172,7 +174,6 @@ exports[`Bottom sheet renders a expanding 1`] = `
   <View
     onLayout={[Function]}
     pointerEvents="box-none"
-    style={Object {}}
   >
     <View
       onLayout={[Function]}

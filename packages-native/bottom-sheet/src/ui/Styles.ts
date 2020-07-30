@@ -1,15 +1,19 @@
-import { Style } from "@native-mobile-resources/util-widgets";
 import { TextStyle, ViewStyle } from "react-native";
 import DeviceInfo from "react-native-device-info";
 
 export interface ModalItemsStyle {
+    container?: ModalItemContainerStyle;
     defaultStyle?: TextStyle;
     primaryStyle?: TextStyle;
     dangerStyle?: TextStyle;
     customStyle?: TextStyle;
 }
 
-export interface BottomSheetStyle extends Style {
+export interface ModalItemContainerStyle extends ViewStyle {
+    rippleColor?: string;
+}
+
+export interface BottomSheetStyle {
     container: ViewStyle;
     containerWhenExpandedFullscreen: ViewStyle;
     modal: ViewStyle;
@@ -37,30 +41,4 @@ const isiPhoneModelWithNotch = (): boolean => {
 };
 
 export const defaultPaddings = { paddingBottom: isiPhoneModelWithNotch() ? 24 : 0 };
-
-export const defaultBottomDrawerStyle: BottomSheetStyle = {
-    container: {},
-    containerWhenExpandedFullscreen: {},
-    modal: {
-        margin: 0,
-        justifyContent: "flex-end"
-    },
-    modalItems: {
-        defaultStyle: {
-            fontSize: 16,
-            color: "black"
-        },
-        primaryStyle: {
-            fontSize: 16,
-            color: "#0595DB"
-        },
-        dangerStyle: {
-            fontSize: 16,
-            color: "#ed1c24"
-        },
-        customStyle: {
-            fontSize: 16,
-            color: "#76CA02"
-        }
-    }
-};
+export const defaultMargins = { marginBottom: isiPhoneModelWithNotch() ? 24 : 0 };

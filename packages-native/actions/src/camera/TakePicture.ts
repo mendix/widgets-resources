@@ -19,8 +19,8 @@ type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
  * @param {MxObject} picture - This field is required.
  * @param {"NativeMobileResources.PictureSource.camera"|"NativeMobileResources.PictureSource.imageLibrary"|"NativeMobileResources.PictureSource.either"} pictureSource - Select a picture from the library or the camera. The default is to let the user decide.
  * @param {"NativeMobileResources.PictureQuality.original"|"NativeMobileResources.PictureQuality.low"|"NativeMobileResources.PictureQuality.medium"|"NativeMobileResources.PictureQuality.high"|"NativeMobileResources.PictureQuality.custom"} pictureQuality - The default picture quality is 'Medium'.
- * @param {Big} maximumWidth - The picture will be scaled to this maximum pixel width, while maintaing the aspect ratio.
- * @param {Big} maximumHeight - The picture will be scaled to this maximum pixel height, while maintaing the aspect ratio.
+ * @param {Big} maximumWidth - The picture will be scaled to this maximum pixel width, while maintaining the aspect ratio.
+ * @param {Big} maximumHeight - The picture will be scaled to this maximum pixel height, while maintaining the aspect ratio.
  * @returns {Promise.<boolean>}
  */
 export async function TakePicture(
@@ -93,7 +93,16 @@ export async function TakePicture(
                     const guid = imageObject.getGuid();
                     // eslint-disable-next-line no-useless-escape
                     const filename = /[^\/]*$/.exec(uri)![0];
-                    const onSuccess = (): void => NativeModules.NativeFsModule.remove(uri).then(() => resolve(true));
+                    const onSuccess = (): void => {
+                        NativeModules.NativeFsModule.remove(uri).then(() => {
+                            imageObject.set("Name", filename);
+                            mx.data.commit({
+                                mxobj: imageObject,
+                                callback: () => resolve(true),
+                                error: (error: Error) => reject(error)
+                            });
+                        });
+                    };
                     const onError = (error: Error): void => {
                         NativeModules.NativeFsModule.remove(uri).then(undefined);
                         reject(error);

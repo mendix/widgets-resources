@@ -7,7 +7,7 @@ import { View } from "react-native";
 import { EditableValueBuilder } from "@native-mobile-resources/util-widgets";
 import { Big } from "big.js";
 
-jest.mock("mendix/components/native/Icon", () => require.requireActual("./__mocks__/mendix/components/native/Icon"));
+jest.mock("mendix/components/native/Icon", () => jest.requireActual("./__mocks__/mendix/components/native/Icon"));
 
 jest.mock("react-native-device-info", () => ({
     hasNotch: jest.fn().mockReturnValue(true),
