@@ -17,6 +17,10 @@ env:
 stages:
     - name: test
       if: tag IS blank
+    - name: build
+      if: fork IS true
+    - name: automated
+      if: fork IS false
     - name: deploy
       if: tag IS present
 jobs:
@@ -43,7 +47,8 @@ jobs:
         - name: "Script tests (Node latest, linux)"
           script:
               - npm run test:scripts -- $SINCE_ARG
-        - name: "Run end-to-end tests"
+        - stage: automated
+          name: "Run automated end-to-end tests"
           dist: trusty
           addons:
               firefox: latest
@@ -56,6 +61,10 @@ jobs:
               - set -e
               - npm run release -- $SINCE_ARG
               - npm run test:e2e -- $SINCE_ARG
+        - stage: build
+          name: "Run build scripts"
+          script:
+              - npm run release -- $SINCE_ARG
         - stage: deploy
           name: "Release npm package"
           script:
