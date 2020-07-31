@@ -52,6 +52,8 @@ jobs:
           env:
               - BROWSER=firefox
               - MOZ_HEADLESS=1
+              - TS_USERNAME=widgets@mendix.com
+              - secure: B5SXvHqIzUKeKcLRCXJDYeVbIT3laUXGQM9HpU86Opo/gyVMUgne1w4K1M6Xh5WAK36foK8hEUh+D5UD4vgObP3+CF0o4PfYmv6b8nkJ4ZKWMROnVrFIVNXeHaBF+ZJ0bPIMOdpFerTMH48zVcqxk3CQfI5ojhD7cETtj+PALpwlx9iNVTr4hUJMAxkyiHXgYjgAv5xXqn+zY9k4KqaLH7iMsAQFKxBj2vm2WCgAasmpPCZfRptmodIHyhio8hySyXK7Z2qIK7NMZVfyVvXVEXvWAEERpwWJtjCXG9KL0X4a4f82um445b7OcKfE9BqOUjgxv/aQIrphQjxapq91iHxtt4rwRtsV6d+wrdiPQSyaqd8KcMrtdgDLEaAUKytGgHw7oYBDt7QOZmoLIkcKRoHJwJaV/ln3kIrGthcrAj2BiAL/i4qe3MsYONRVpywNHxB0EBVKt6YS+IUsLr4Z7JFk69xkos5aFjhTFsCwWkW4rZIjtMyUeiObfr1JyOB4cA2Tj5YmUUp6y//29KEQAlGDOZ1zX5GycdJUne8ps4QzkomtXOdmD0GnxJdD8Z4eAecyNAXsbDlesm2XvdMrDFmxzzfe7EY2JlZLABHHqABnZiCUterS4QxaPx0B9HCs2ZedlEH0FJk/jfAXoz1mrgAHnS661ph8K86ZLHzX7do=
           script:
               - set -e
               - npm run release -- $SINCE_ARG
