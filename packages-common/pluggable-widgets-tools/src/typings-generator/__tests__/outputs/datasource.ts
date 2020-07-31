@@ -3,13 +3,13 @@ export const datasourceWebOutput = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ComponentType, CSSProperties, ReactNode } from "react";
-import { ActionValue, EditableValue, ListValue, ObjectItem } from "mendix";
+import { ComponentType, CSSProperties } from "react";
+import { ActionValue, EditableValue, ListValue, ListActionValue, ListAttributeValue, ListWidgetValue } from "mendix";
 
 export interface DatasourcePropertiesType {
-    contentAttribute: (item: ObjectItem) => ReactNode;
-    markerAttribute: (item: ObjectItem) => EditableValue<string | boolean | BigJs.Big>;
-    actionAttribute?: (item: ObjectItem) => ActionValue;
+    contentAttribute: ListWidgetValue;
+    markerAttribute: ListAttributeValue<string | boolean | BigJs.Big>;
+    actionAttribute?: ListActionValue;
 }
 
 export interface DatasourcePropertiesPreviewType {
@@ -24,9 +24,9 @@ export interface MyWidgetContainerProps {
     style?: CSSProperties;
     tabIndex: number;
     contentSource: ListValue;
-    content: (item: ObjectItem) => ReactNode;
-    markerDataAttribute: (item: ObjectItem) => EditableValue<string | boolean | BigJs.Big>;
-    actionAttribute?: (item: ObjectItem) => ActionValue;
+    content: ListWidgetValue;
+    markerDataAttribute: ListAttributeValue<string | boolean | BigJs.Big>;
+    actionAttribute?: ListActionValue;
     datasourceProperties: DatasourcePropertiesType[];
     description: EditableValue<string>;
     action?: ActionValue;
@@ -46,18 +46,18 @@ export interface MyWidgetPreviewProps {
 `;
 
 export const datasourceNativeOutput = `export interface DatasourcePropertiesType {
-    contentAttribute: (item: ObjectItem) => ReactNode;
-    markerAttribute: (item: ObjectItem) => EditableValue<string | boolean | BigJs.Big>;
-    actionAttribute?: (item: ObjectItem) => ActionValue;
+    contentAttribute: ListWidgetValue;
+    markerAttribute: ListAttributeValue<string | boolean | BigJs.Big>;
+    actionAttribute?: ListActionValue;
 }
 
 export interface MyWidgetProps<Style> {
     name: string;
     style: Style[];
     contentSource: ListValue;
-    content: (item: ObjectItem) => ReactNode;
-    markerDataAttribute: (item: ObjectItem) => EditableValue<string | boolean | BigJs.Big>;
-    actionAttribute?: (item: ObjectItem) => ActionValue;
+    content: ListWidgetValue;
+    markerDataAttribute: ListAttributeValue<string | boolean | BigJs.Big>;
+    actionAttribute?: ListActionValue;
     datasourceProperties: DatasourcePropertiesType[];
     description: EditableValue<string>;
     action?: ActionValue;
