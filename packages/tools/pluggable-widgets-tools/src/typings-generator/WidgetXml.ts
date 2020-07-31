@@ -78,6 +78,7 @@ export interface PropertyGroup {
     };
     propertyGroup?: PropertyGroup[];
     property?: Property[];
+    systemProperty?: SystemProperty[];
 }
 
 export interface SystemProperty {

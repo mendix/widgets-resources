@@ -19,16 +19,18 @@ export const fileInput = `<?xml version="1.0" encoding="utf-8"?>
                 <description />
                 <attributeTypes>
                     <attributeType name="String"/>
-                </attributeTypes>    
+                </attributeTypes>
             </property>
             <property key="action" type="action">
                 <caption>Action</caption>
                 <description />
             </property>
         </propertyGroup>
-        <propertyGroup caption="System Properties">
-            <systemProperty key="Label"></systemProperty>
-            <systemProperty key="TabIndex"></systemProperty>
+        <propertyGroup caption="Tab group">
+            <propertyGroup caption="Sub group ">
+                <systemProperty key="Label"></systemProperty>
+                <systemProperty key="TabIndex"></systemProperty>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>`;
@@ -54,7 +56,7 @@ export const fileInputNative = `<?xml version="1.0" encoding="utf-8"?>
                 <description />
                 <attributeTypes>
                     <attributeType name="String"/>
-                </attributeTypes>    
+                </attributeTypes>
             </property>
             <property key="action" type="action">
                 <caption>Action</caption>

@@ -1,7 +1,12 @@
 import { Property } from "./WidgetXml";
 import { capitalizeFirstLetter, extractProperties } from "./helpers";
 
-export function generateClientTypes(widgetName: string, properties: Property[], isNative: boolean): string[] {
+export function generateClientTypes(
+    widgetName: string,
+    properties: Property[],
+    isNative: boolean,
+    isLabeled: boolean
+): string[] {
     const results = Array.of<string>();
     results.push(
         isNative
@@ -13,7 +18,7 @@ ${generateClientTypeBody(properties, true, results)}
             : `export interface ${widgetName}ContainerProps {
     name: string;
     class: string;
-    style?: CSSProperties;
+    ${isLabeled ? `id: string;` : `style?: CSSProperties;`}
     tabIndex?: number;
 ${generateClientTypeBody(properties, false, results)}
 }`

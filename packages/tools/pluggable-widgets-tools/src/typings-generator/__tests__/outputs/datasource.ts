@@ -3,7 +3,7 @@ export const datasourceWebOutput = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ComponentType, CSSProperties } from "react";
+import { ComponentType } from "react";
 import { ActionValue, EditableValue, ListValue, ListActionValue, ListAttributeValue, ListWidgetValue } from "mendix";
 
 export interface DatasourcePropertiesType {
@@ -21,7 +21,7 @@ export interface DatasourcePropertiesPreviewType {
 export interface MyWidgetContainerProps {
     name: string;
     class: string;
-    style?: CSSProperties;
+    id: string;
     tabIndex?: number;
     contentSource: ListValue;
     content: ListWidgetValue;

@@ -3,13 +3,13 @@ export const containmentWebOutput = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ComponentType, CSSProperties, ReactNode } from "react";
+import { ComponentType, ReactNode } from "react";
 import { ActionValue, EditableValue } from "mendix";
 
 export interface MyWidgetContainerProps {
     name: string;
     class: string;
-    style?: CSSProperties;
+    id: string;
     tabIndex?: number;
     content: ReactNode;
     description: EditableValue<string>;
