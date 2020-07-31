@@ -10,7 +10,7 @@ export interface MyWidgetContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
     file: DynamicValue<FileValue>;
     file2?: DynamicValue<FileValue>;
     description: EditableValue<string>;

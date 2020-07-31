@@ -22,7 +22,7 @@ export interface MyWidgetContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
     contentSource: ListValue;
     content: ListWidgetValue;
     markerDataAttribute: ListAttributeValue<string | boolean | BigJs.Big>;

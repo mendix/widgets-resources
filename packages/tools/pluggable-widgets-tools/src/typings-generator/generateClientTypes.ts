@@ -14,7 +14,7 @@ ${generateClientTypeBody(properties, true, results)}
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
 ${generateClientTypeBody(properties, false, results)}
 }`
     );

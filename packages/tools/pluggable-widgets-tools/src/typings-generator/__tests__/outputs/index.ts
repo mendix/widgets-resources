@@ -90,7 +90,7 @@ export interface MyWidgetContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
     valueAttribute?: EditableValue<string | BigJs.Big>;
     mywidgetValue: string;
     valueExpression?: DynamicValue<string>;
