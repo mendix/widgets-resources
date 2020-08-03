@@ -184,19 +184,34 @@ export const btnAsText: ActionButtonType = {
         borderRadius: 0,
         rippleColor: contrast.lowest,
         backgroundColor: "transparent",
-        paddingVertical: 0,
-        paddingHorizontal: 0,
+        // paddingVertical: 0,
+        // paddingHorizontal: 0,
     },
     icon: {
-        color: brand.primary,
         size: button.fontSizeIcon,
     },
     caption: {
-        color: brand.primary,
         fontWeight: font.weightSemiBold,
         fontSize: button.fontSize,
     },
 };
+export const btnAsTextPrimary: ActionButtonType = merge(btnAsText, {
+    icon: {
+        color: brand.primary,
+    },
+    caption: {
+        color: brand.primary,
+    },
+});
+export const btnAsTextSecondary: ActionButtonType = merge(btnAsText, {
+    icon: {
+        color: font.colorTitle,
+
+    },
+    caption: {
+        color: font.colorTitle,
+    },
+});
 //
 // Button sizes
 export const btnLarge: ActionButtonType = {

@@ -8,7 +8,7 @@ import { background, border, contrast, spacing } from "../../../core/variables";
 */
 export const header = {
     container: {
-        borderRadius: border.radius,
+        borderRadius: border.radiusSmall,
         backgroundColor: background.primary,
         marginBottom: spacing.regular,
         ...Platform.select({

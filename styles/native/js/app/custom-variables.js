@@ -61,7 +61,8 @@ export const contrast = {
 export const border = {
     color: "#CED0D3",
     width: 1,
-    radius: 4,
+    radiusSmall: 4,
+    radiusLarge: 8,
 };
 //
 // Font Styles
@@ -112,7 +113,7 @@ export const button = {
     fontWeight: font.weightBold,
     fontSizeIcon: font.sizeSmall,
     fontSizeIconLarge: font.size,
-    borderRadius: border.radius,
+    borderRadius: border.radiusLarge,
     minWidth: 48,
     minHeight: 48,
     paddingVertical: spacing.small,
@@ -159,7 +160,7 @@ export const input = {
     label: {
         numberOfLines: 1,
         color: font.colorTitle,
-        fontSize: font.size,
+        fontSize: font.sizeSmall,
         textAlign: "left",
     },
     input: {
@@ -167,18 +168,18 @@ export const input = {
         borderColor: contrast.lower,
         backgroundColor: background.primary,
         selectionColor: contrast.lower,
-        placeholderTextColor: contrast.regular,
+        placeholderTextColor: contrast.low,
         fontSize: font.size,
         lineHeight: font.lineHeight,
         borderWidth: border.width,
-        borderRadius: border.radius,
+        borderRadius: border.radiusLarge,
         minWidth: 48,
         minHeight: 48,
         paddingVertical: spacing.small,
         paddingHorizontal: spacing.small,
     },
     inputDisabled: {
-        backgroundColor: contrast.lowest,
+        backgroundColor: background.gray,
     },
     inputError: {
         color: brand.danger,
@@ -187,6 +188,30 @@ export const input = {
     },
     validationMessage: {
         color: brand.danger,
+        fontSize: font.size,
+    },
+    // Only used for the DropDown & ReferenceSelector
+    valueContainer: {
+        rippleColor: contrast.lowest,
+    },
+    itemContainer: {
+        maxWidth: 500,
+        paddingVertical: 12,
+        paddingHorizontal: spacing.regular,
+        backgroundColor: background.primary,
+    },
+    item: {
+        color: font.colorTitle,
+        fontSize: font.size,
+    },
+    selectedItemContainer: {
+        borderWidth: border.width,
+        borderRadius: border.radiusLarge,
+        borderColor: brand.primary,
+        backgroundColor: "transparent",
+    },
+    selectedItem: {
+        color: font.colorTitle,
         fontSize: font.size,
     },
 };
@@ -234,23 +259,23 @@ export const navigation = {
 export const tabContainer = {
     tabBar: {
         pressColor: contrast.lower,
-        backgroundColor: background.primary,
+        backgroundColor: brand.primary,
     },
     tab: {
-        paddingVertical: spacing.small,
+        paddingVertical: 12,
     },
     indicator: {
-        backgroundColor: brand.primary,
+        backgroundColor: background.primary,
         height: Platform.select({ ios: 2, android: 2 }),
     },
     label: {
-        color: contrast.highest,
+        color: background.primary,
         fontSize: font.size,
         fontWeight: font.weightBold,
         textTransform: "uppercase",
     },
     activeLabel: {
-        color: brand.primary,
+        color: background.surface,
         fontSize: font.size,
         fontWeight: font.weightBold,
         textTransform: "uppercase",
@@ -298,5 +323,122 @@ export const badge = {
     danger: {
         color: brand.danger,
         backgroundColor: brand.dangerLight,
+    },
+};
+//
+// Floating Action Button Styles
+export const floatingActionButton = {
+    container: {
+        margin: 30,
+    },
+    button: {
+        size: 50,
+        rippleColor: contrast.lowest,
+        borderColor: brand.primary,
+        backgroundColor: brand.primary,
+    },
+    buttonIcon: {
+        size: font.sizeLarge,
+        color: contrast.lowest,
+    },
+    secondaryButton: {
+        size: 30,
+        backgroundColor: background.surface,
+    },
+    secondaryButtonIcon: {
+        size: font.sizeSmall,
+        color: contrast.high,
+    },
+    secondaryButtonCaption: {
+        color: contrast.high,
+        fontSize: font.sizeSmall,
+    },
+    secondaryButtonCaptionContainer: {
+        backgroundColor: background.primary,
+    },
+};
+//
+// List View Swipe Styles
+export const listViewSwipe = {
+    leftAction: {
+        panelSize: 144,
+        backgroundColor: background.primary,
+    },
+    rightAction: {
+        panelSize: 144,
+        backgroundColor: background.primary,
+    },
+};
+//
+// Progress Bar Styles
+export const progressBar = {
+    bar: {
+        height: 8,
+        heightSmall: 4,
+        heightLarge: 12,
+        backgroundColor: contrast.lowest,
+    },
+    fill: {
+        backgroundColor: brand.primary,
+    },
+};
+//
+// Progress Circle Styles
+export const progressCircle = {
+    circle: {
+        size: 64,
+    },
+    fill: {
+        width: 4,
+        lineCapRounded: true,
+        backgroundColor: brand.primary,
+    },
+    text: {
+        color: contrast.regular,
+        fontSize: font.size,
+        fontWeight: font.weightSemiBold,
+    },
+};
+//
+// Rating Styles
+export const rating = {
+    containerDisabled: {
+        opacity: 0.5,
+    },
+    icon: {
+        size: 24,
+        color: contrast.lower,
+        selectedColor: brand.warning,
+    },
+};
+//
+// (Range)Slider styles
+export const slider = {
+    track: {
+        height: 4,
+        backgroundColor: contrast.lowest,
+    },
+    trackDisabled: {
+        backgroundColor: contrast.lower,
+        opacity: 0.4,
+    },
+    highlight: {
+        backgroundColor: brand.primary,
+    },
+    highlightDisabled: {
+        backgroundColor: brand.primary,
+    },
+    marker: {
+        size: 24,
+        borderColor: contrast.lowest,
+        backgroundColor: background.surface,
+    },
+    markerActive: {
+        size: 32,
+    },
+    markerDisabled: {
+        size: 24,
+        borderColor: contrast.lowest,
+        backgroundColor: background.surface,
     },
 };

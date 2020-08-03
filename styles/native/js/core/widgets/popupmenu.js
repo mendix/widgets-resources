@@ -30,7 +30,7 @@ export const com_mendix_widget_native_popupmenu_PopupMenu = {
         },
     },
     basic: {
-        dividerColor: font.color,
+        dividerColor: font.colorTitle,
         container: {
             // All ViewStyle properties are allowed
             height: 40,

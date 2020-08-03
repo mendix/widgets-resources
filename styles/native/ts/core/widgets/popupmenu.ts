@@ -1,5 +1,5 @@
-import { background, brand, contrast, font }   from "../variables";
-import { PopupMenuType } from "../../types/widgets";
+import { background, brand, contrast, font } from "../variables";
+import { PopupMenuType }                     from "../../types/widgets";
 /*
 
 DISCLAIMER:
@@ -31,7 +31,7 @@ export const com_mendix_widget_native_popupmenu_PopupMenu: PopupMenuType = {
         },
     },
     basic: {
-        dividerColor: font.color,
+        dividerColor: font.colorTitle,
         container: {
             // All ViewStyle properties are allowed
             height: 40,

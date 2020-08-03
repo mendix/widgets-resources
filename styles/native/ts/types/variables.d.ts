@@ -43,7 +43,8 @@ export interface VariablesContrast {
 export interface VariablesBorder {
     color: string,
     width: number,
-    radius: number,
+    radiusSmall: number,
+    radiusLarge: number,
 }
 
 export interface VariablesFont {
@@ -158,6 +159,31 @@ export interface VariablesInput {
         color: string,
         fontSize: number
     },
+
+    // Dropdown & Reference selector only
+    valueContainer: {
+        rippleColor: string
+    },
+    itemContainer: {
+        maxWidth: number,
+        paddingVertical: number,
+        paddingHorizontal: number,
+        backgroundColor: string,
+    },
+    item: {
+        color: string,
+        fontSize: number,
+    },
+    selectedItemContainer: {
+        borderWidth: number,
+        borderRadius: number,
+        borderColor: string,
+        backgroundColor: string,
+    },
+    selectedItem: {
+        color: string,
+        fontSize: number,
+    },
 }
 
 export interface VariablesImage {
@@ -256,4 +282,115 @@ export interface VariablesBadge {
     success: VariablesBadgeStyles,
     warning: VariablesBadgeStyles,
     danger: VariablesBadgeStyles,
+}
+
+export interface VariablesFloatingActionButton {
+    container: {
+        margin: number,
+    },
+    button: {
+        size: number,
+        rippleColor: string,
+        borderColor: string,
+        backgroundColor: string,
+    },
+    buttonIcon: {
+        size: number,
+        color: string
+    },
+    secondaryButton: {
+        size: number,
+        backgroundColor: string,
+    },
+    secondaryButtonIcon: {
+        size: number,
+        color: string,
+    },
+    secondaryButtonCaption: {
+        color: string,
+        fontSize: number,
+    },
+    secondaryButtonCaptionContainer: {
+        backgroundColor: string
+    }
+}
+
+export interface VariablesListViewSwipe {
+    leftAction: {
+        panelSize: number,
+        backgroundColor: string
+    },
+    rightAction: {
+        panelSize: number,
+        backgroundColor: string
+    },
+}
+
+export interface VariablesProgressBar {
+    bar: {
+        height: number,
+        heightSmall: number,
+        heightLarge: number,
+        backgroundColor: string
+    },
+    fill: {
+        backgroundColor: string
+    }
+}
+
+export interface VariablesProgressCircle {
+    circle: {
+        size: number,
+    },
+    fill: {
+        width: number,
+        lineCapRounded: true,
+        backgroundColor: string,
+    },
+    text: {
+        color: string,
+        fontSize: number,
+        fontWeight: FontWeight
+    }
+}
+
+export interface VariablesRating {
+    containerDisabled: {
+        opacity: number,
+    },
+    icon: {
+        size: number,
+        color: string,
+        selectedColor: string
+    }
+}
+
+export interface VariablesSlider {
+    track: {
+        height: number,
+        backgroundColor: string
+    },
+    trackDisabled: {
+        backgroundColor: string,
+        opacity: number,
+    },
+    highlight: {
+        backgroundColor: string,
+    },
+    highlightDisabled: {
+        backgroundColor: string
+    },
+    marker: {
+        size: number,
+        borderColor: string,
+        backgroundColor: string,
+    },
+    markerActive: {
+        size: number,
+    },
+    markerDisabled: {
+        size: number,
+        borderColor: string,
+        backgroundColor: string,
+    }
 }

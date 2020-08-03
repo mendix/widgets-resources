@@ -29,7 +29,7 @@ export const mapsFooterSendLocation = {
         backgroundColor: background.primary,
         padding: spacing.regular,
         margin: spacing.regular,
-        borderRadius: border.radius,
+        borderRadius: border.radiusSmall,
         elevation: 4,
         shadowColor: contrast.lower,
         shadowOpacity: 0.8,
@@ -48,7 +48,7 @@ export const mapsList = {
 export const mapsListItemImage = {
     container: {
         backgroundColor: background.primary,
-        borderRadius: border.radius,
+        borderRadius: border.radiusSmall,
         marginVertical: spacing.regular,
         marginLeft: spacing.smallest,
         marginRight: spacing.regular,
@@ -62,7 +62,7 @@ export const mapsListItemImage = {
         },
     },
     image: {
-        borderRadius: border.radius,
+        borderRadius: border.radiusSmall,
     },
 };
 //

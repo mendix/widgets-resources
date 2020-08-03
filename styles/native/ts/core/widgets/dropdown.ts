@@ -1,6 +1,6 @@
-import { border, contrast, font, input } from "../variables";
-import { TextBox, TextBoxVertical }      from "./textbox";
-import { DropDownType }                  from "../../types/widgets";
+import { font, input }              from "../variables";
+import { TextBox, TextBoxVertical } from "./textbox";
+import { DropDownType }             from "../../types/widgets";
 /*
 
 DISCLAIMER:
@@ -54,10 +54,12 @@ export const DropDown: DropDownType = {
     /*  New dropdown styles start */
     valueContainer: {
         // All ViewStyle properties & rippleColor are allowed
+        rippleColor: input.valueContainer.rippleColor,
     },
     menuWrapper: {
         // All ViewStyle properties are allowed
-        borderRadius: border.radius,
+        overflow: "hidden",
+        borderRadius: input.input.borderRadius,
         shadowColor: "#000",
         shadowOpacity: 0.2,
         shadowRadius: 10,
@@ -65,22 +67,28 @@ export const DropDown: DropDownType = {
     },
     itemContainer: {
         // All ViewStyle properties are allowed
-        maxWidth: 500,
-        paddingVertical: 6,
-        paddingHorizontal: 16,
-        backgroundColor: input.input.backgroundColor,
+        maxWidth: input.itemContainer.maxWidth,
+        paddingVertical: input.itemContainer.paddingVertical,
+        paddingHorizontal: input.itemContainer.paddingHorizontal,
+        backgroundColor: input.itemContainer.backgroundColor,
     },
     item: {
-        // All TextStlye properties are allowed
-        color: input.input.color,
+        // All TextStyle properties are allowed
+        color: input.item.color,
+        fontSize: input.item.fontSize,
     },
     selectedItem: {
-        // All TextStlye properties are allowed
-        fontWeight: font.weightBold,
+        // All TextStyle properties are allowed
+        color: input.selectedItem.color,
+        fontSize: input.selectedItem.fontSize,
+        backgroundColor: "transparent",
     },
     selectedItemContainer: {
         // All ViewStyle properties are allowed
-        backgroundColor: contrast.lowest,
+        borderWidth: input.selectedItemContainer.borderWidth,
+        borderRadius: input.selectedItemContainer.borderRadius,
+        borderColor: input.selectedItemContainer.borderColor,
+        backgroundColor: input.selectedItemContainer.backgroundColor,
     },
     /*  New dropdown styles end */
     useUniformDesign: true,

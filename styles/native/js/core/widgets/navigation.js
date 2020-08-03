@@ -50,7 +50,7 @@ export const navigationStyle = {
             backgroundColor: navigation.progressOverlay.containerBackgroundColor,
             paddingHorizontal: spacing.largest,
             paddingVertical: spacing.large,
-            borderRadius: border.radius,
+            borderRadius: border.radiusSmall,
             elevation: 1.5,
             shadowColor: navigation.progressOverlay.shadowColor,
             shadowOpacity: 0.1,

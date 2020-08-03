@@ -1,4 +1,4 @@
-import { font, spacing, tabContainer } from "../variables";
+import { font, tabContainer } from "../variables";
 /*
 
 DISCLAIMER:
@@ -19,11 +19,12 @@ export const TabContainer = {
     tabBar: {
         // bounces, pressColor, pressOpacity, scrollEnabled and all ViewStyle properties are allowed
         bounces: true,
-        pressColor: tabContainer.tabBar.pressColor,
-        pressOpacity: 0.8,
-        backgroundColor: tabContainer.tabBar.backgroundColor,
         scrollEnabled: false,
-        paddingVertical: spacing.smaller,
+        pressOpacity: 0.8,
+        pressColor: tabContainer.tabBar.pressColor,
+        backgroundColor: tabContainer.tabBar.backgroundColor,
+        height: 48,
+        justifyContent: "center",
     },
     indicator: {
         // All ViewStyle properties are allowed
@@ -32,6 +33,8 @@ export const TabContainer = {
     },
     tab: {
         // All ViewStyle properties are allowed
+        padding: undefined,
+        minHeight: undefined,
         paddingVertical: tabContainer.tab.paddingVertical,
     },
     label: {

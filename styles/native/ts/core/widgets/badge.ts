@@ -16,6 +16,7 @@ export const com_mendix_widget_native_badge_Badge: BadgeType = {
     container: {
         // All ViewStyle properties are allowed
         backgroundColor: badge.default.backgroundColor,
+        borderRadius: badge.borderRadius,
         paddingVertical: badge.paddingVertical,
         paddingHorizontal: badge.paddingHorizontal,
     },

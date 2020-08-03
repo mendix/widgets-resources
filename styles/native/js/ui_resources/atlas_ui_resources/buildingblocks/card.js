@@ -8,7 +8,7 @@ import { background, border, contrast, spacing } from "../../../core/variables";
 */
 export const card = {
     container: {
-        borderRadius: border.radius,
+        borderRadius: border.radiusSmall,
         backgroundColor: background.primary,
         marginBottom: spacing.regular,
         ...Platform.select({
@@ -33,8 +33,8 @@ export const card = {
 export const cardImage = {
     container: {
         overflow: "hidden",
-        borderTopLeftRadius: border.radius,
-        borderTopRightRadius: border.radius,
+        borderTopLeftRadius: border.radiusSmall,
+        borderTopRightRadius: border.radiusSmall,
     },
     image: {
         width: "100%",
@@ -45,8 +45,8 @@ export const cardImage = {
 export const cardImageFull = {
     container: {
         ...cardImage.container,
-        borderBottomLeftRadius: border.radius,
-        borderBottomRightRadius: border.radius,
+        borderBottomLeftRadius: border.radiusSmall,
+        borderBottomRightRadius: border.radiusSmall,
     },
     image: {
         width: "100%",
@@ -73,7 +73,7 @@ export const cardAction = {
         aspectRatio: 1,
         borderWidth: 1,
         borderColor: border.color,
-        borderRadius: border.radius,
+        borderRadius: border.radiusSmall,
         padding: spacing.regular,
         alignItems: "center",
     },

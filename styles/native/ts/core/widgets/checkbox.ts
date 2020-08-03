@@ -1,7 +1,7 @@
 import { Platform }                             from "react-native";
 import { background, brand, contrast, spacing } from "../variables";
-import { TextBox, TextBoxVertical } from "./textbox";
-import { CheckBoxType }             from "../../types/widgets";
+import { TextBox, TextBoxVertical }             from "./textbox";
+import { CheckBoxType }                         from "../../types/widgets";
 /*
 
 DISCLAIMER:
@@ -30,8 +30,8 @@ export const CheckBox: CheckBoxType = {
         backgroundColor: "transparent",
         marginRight: Platform.select({android: -3}),
         thumbColorOn: background.primary,
-        trackColorOn: brand.success,
-        thumbColorOff: contrast.regular,
+        trackColorOn: brand.primary,
+        thumbColorOff: contrast.low,
         trackColorOff: contrast.lower,
     },
     inputDisabled: {
@@ -43,7 +43,7 @@ export const CheckBox: CheckBoxType = {
         ...TextBox.inputError,
         thumbColorOn: background.primary,
         trackColorOn: brand.danger,
-        thumbColorOff: contrast.regular,
+        thumbColorOff: contrast.low,
         trackColorOff: brand.danger,
     },
     validationMessage: {
@@ -66,7 +66,7 @@ export const CheckBoxVertical: CheckBoxType = {
         ...TextBoxVertical.inputError,
         thumbColorOn: background.primary,
         trackColorOn: brand.danger,
-        thumbColorOff: contrast.regular,
+        thumbColorOff: contrast.low,
         trackColorOff: brand.danger,
     },
     validationMessage: {

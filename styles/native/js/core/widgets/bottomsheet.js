@@ -14,7 +14,7 @@ export const com_mendix_widget_native_bottomsheet_BottomSheet = {
     container: {
         // All ViewStyle properties are allowed
         backgroundColor: background.primary,
-        borderRadius: border.radius,
+        borderRadius: border.radiusSmall,
         elevation: 20,
         shadowColor: "#000",
         shadowOpacity: 0.1,
@@ -46,7 +46,7 @@ export const com_mendix_widget_native_bottomsheet_BottomSheet = {
         defaultStyle: {
             // All TextStyle properties are allowed
             fontSize: 16,
-            color: font.color,
+            color: font.colorTitle,
         },
         primaryStyle: {
             // All TextStyle properties are allowed
@@ -61,7 +61,7 @@ export const com_mendix_widget_native_bottomsheet_BottomSheet = {
         customStyle: {
             // All TextStyle properties are allowed
             fontSize: 16,
-            color: font.color,
+            color: font.colorTitle,
         },
     },
 };

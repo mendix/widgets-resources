@@ -48,7 +48,7 @@ export const mapsMaxSpace = {
 // Maps Shape
 export const mapsRounded = {
     container: {
-        borderRadius: border.radius,
+        borderRadius: border.radiusSmall,
         overflow: "hidden",
     },
 };

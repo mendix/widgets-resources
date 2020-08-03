@@ -10,12 +10,18 @@ import {
     VariablesBrand,
     VariablesButton,
     VariablesContrast,
+    VariablesFloatingActionButton,
     VariablesFont,
     VariablesImage,
     VariablesInput,
     VariablesLayoutgrid,
     VariablesListView,
+    VariablesListViewSwipe,
     VariablesNavigation,
+    VariablesProgressBar,
+    VariablesProgressCircle,
+    VariablesRating,
+    VariablesSlider,
     VariablesSpacing,
     VariablesTabContainer,
 }                                                from "../types/variables";
@@ -72,7 +78,8 @@ contrast = merge(contrast, custom.contrast || {} as any);
 let border: VariablesBorder = {
     color: setContrastScale(0.17, background.primary),
     width: 1,
-    radius: 5,
+    radiusSmall: 5,
+    radiusLarge: 5,
 };
 border = merge(border, custom.border || {} as any);
 //
@@ -126,7 +133,7 @@ let button: VariablesButton = {
     fontWeight: font.weightBold,
     fontSizeIcon: font.sizeSmall,
     fontSizeIconLarge: font.size,
-    borderRadius: border.radius,
+    borderRadius: border.radiusSmall,
 
     minWidth: 48,
     minHeight: 48,
@@ -189,7 +196,7 @@ let input: VariablesInput = {
         fontSize: font.size,
         lineHeight: font.lineHeight,
         borderWidth: border.width,
-        borderRadius: border.radius,
+        borderRadius: border.radiusSmall,
 
         minWidth: 48,
         minHeight: 48,
@@ -206,6 +213,31 @@ let input: VariablesInput = {
     },
     validationMessage: {
         color: brand.danger,
+        fontSize: font.size,
+    },
+
+    // Dropdown & Reference selector only
+    valueContainer: {
+        rippleColor: contrast.lowest,
+    },
+    itemContainer: {
+        maxWidth: 500,
+        paddingVertical: 12,
+        paddingHorizontal: spacing.regular,
+        backgroundColor: background.primary,
+    },
+    item: {
+        color: font.colorTitle,
+        fontSize: font.size,
+    },
+    selectedItemContainer: {
+        borderWidth: border.width,
+        borderRadius: border.radiusLarge,
+        borderColor: brand.primary,
+        backgroundColor: "transparent",
+    },
+    selectedItem: {
+        color: font.colorTitle,
         fontSize: font.size,
     },
 };
@@ -329,6 +361,129 @@ let badge: VariablesBadge = {
 };
 badge = merge(badge, custom.badge || {} as any);
 //
+// Floating Action Button Styles
+let floatingActionButton: VariablesFloatingActionButton = {
+    container: {
+        margin: 30,
+    },
+    button: {
+        size: 50,
+        rippleColor: contrast.lowest,
+        borderColor: brand.primary,
+        backgroundColor: brand.primary,
+    },
+    buttonIcon: {
+        size: font.sizeLarge,
+        color: contrast.lowest,
+    },
+    secondaryButton: {
+        size: 30,
+        backgroundColor: background.surface,
+    },
+    secondaryButtonIcon: {
+        size: font.sizeSmall,
+        color: contrast.high,
+    },
+    secondaryButtonCaption: {
+        color: font.colorTitle,
+        fontSize: font.size,
+    },
+    secondaryButtonCaptionContainer: {
+        backgroundColor: background.primary,
+    },
+};
+floatingActionButton = merge(floatingActionButton, custom.floatingActionButton || {} as any);
+//
+// List View Swipe Styles
+let listViewSwipe: VariablesListViewSwipe = {
+    leftAction: {
+        panelSize: 144,
+        backgroundColor: background.primary,
+    },
+    rightAction: {
+        panelSize: 144,
+        backgroundColor: background.primary,
+    },
+};
+listViewSwipe = merge(listViewSwipe, custom.listViewSwipe || {} as any);
+//
+// Progress Bar Styles
+let progressBar: VariablesProgressBar = {
+    bar: {
+        height: 8,
+        heightSmall: 4,
+        heightLarge: 12,
+        backgroundColor: contrast.lowest,
+    },
+    fill: {
+        backgroundColor: brand.primary,
+    },
+};
+progressBar = merge(progressBar, custom.progressBar || {} as any);
+//
+// Progress Circle Styles
+let progressCircle: VariablesProgressCircle = {
+    circle: {
+        size: 64,
+    },
+    fill: {
+        width: 4,
+        lineCapRounded: true,
+        backgroundColor: brand.primary,
+    },
+    text: {
+        color: contrast.regular,
+        fontSize: font.size,
+        fontWeight: font.weightSemiBold,
+    },
+};
+progressCircle = merge(progressCircle, custom.progressCircle || {} as any);
+//
+// Rating Styles
+let rating: VariablesRating = {
+    containerDisabled: {
+        opacity: 0.5,
+    },
+    icon: {
+        size: 24,
+        color: contrast.lower,
+        selectedColor: brand.warning,
+    },
+};
+rating = merge(rating, custom.rating || {} as any);
+//
+// (Range)Slider Styles
+let slider: VariablesSlider = {
+    track: {
+        height: 4,
+        backgroundColor: contrast.lowest,
+    },
+    trackDisabled: {
+        backgroundColor: contrast.lower,
+        opacity: 0.4,
+    },
+    highlight: {
+        backgroundColor: brand.primary,
+    },
+    highlightDisabled: {
+        backgroundColor: brand.primary,
+    },
+    marker: {
+        size: 24,
+        borderColor: contrast.lowest,
+        backgroundColor: background.surface,
+    },
+    markerActive: {
+        size: 32,
+    },
+    markerDisabled: {
+        size: 24,
+        borderColor: contrast.lowest,
+        backgroundColor: background.surface,
+    },
+};
+slider = merge(slider, custom.slider || {} as any);
+//
 export {
     brand,
     background,
@@ -344,4 +499,8 @@ export {
     listView,
     layoutGrid,
     badge,
+    floatingActionButton,
+    slider,
+    progressBar,
+    progressCircle,
 };

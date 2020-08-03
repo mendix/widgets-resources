@@ -1,7 +1,6 @@
-import { Platform }                                 from "react-native";
 import { background, brand, contrast, font } from "../variables";
-import { ToggleButtonsType }                        from "../../types/widgets";
-import { TextBox }                                  from "./textbox";
+import { ToggleButtonsType }                 from "../../types/widgets";
+import { TextBox }                           from "./textbox";
 /*
 
 DISCLAIMER:
@@ -17,6 +16,8 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const com_mendix_widget_native_togglebuttons_ToggleButtons: ToggleButtonsType = {
     container: {
         // All ViewStyle properties are allowed
+        backgroundColor: background.surface,
+        borderRadius: 16,
         alignSelf: "stretch",
     },
     containerDisabled: {
@@ -25,35 +26,30 @@ export const com_mendix_widget_native_togglebuttons_ToggleButtons: ToggleButtons
     },
     button: {
         // All ViewStyle properties are allowed
-        backgroundColor: background.primary,
-        borderColor: Platform.select({ios: brand.primary, android: contrast.lower}),
+        backgroundColor: "transparent",
+        borderColor: "transparent",
+        borderRadius: 16,
     },
     text: {
         // All TextStyle properties are allowed
-        color: Platform.select({ios: brand.primary, android: contrast.high}),
+        color: contrast.low,
         fontSize: font.size,
         fontFamily: font.family,
     },
     activeButton: {
         // All ViewStyle properties are allowed
-        ...Platform.select({
-            ios: {
-                backgroundColor: brand.primary,
-                borderColor: brand.primary,
-            },
-            android: {
-                backgroundColor: brand.primary,
-                borderColor: brand.primary,
-            },
-        }),
+        backgroundColor: brand.primary,
+        borderColor: brand.primary,
+        borderRadius: 16,
     },
     activeButtonText: {
         // All TextStyle properties are allowed
+        color: "#FFF",
         fontSize: font.size,
         fontFamily: font.family,
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        ...TextBox.validationMessage
+        ...TextBox.validationMessage,
     },
 };

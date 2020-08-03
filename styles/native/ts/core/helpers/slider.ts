@@ -1,5 +1,4 @@
-import { Platform }        from "react-native";
-import { brand, contrast } from "../variables";
+import { brand } from "../variables";
 /*
 
 DISCLAIMER:
@@ -19,7 +18,7 @@ export const sliderSuccess = {
         backgroundColor: brand.success,
     },
     highlightDisabled: {
-        backgroundColor: Platform.select({ ios: brand.success, android: contrast.low }),
+        backgroundColor: brand.success,
     },
 };
 export const sliderWarning = {
@@ -27,7 +26,7 @@ export const sliderWarning = {
         backgroundColor: brand.warning,
     },
     highlightDisabled: {
-        backgroundColor: Platform.select({ ios: brand.warning, android: contrast.low }),
+        backgroundColor: brand.warning,
     },
 };
 export const sliderDanger = {
@@ -35,6 +34,6 @@ export const sliderDanger = {
         backgroundColor: brand.danger,
     },
     highlightDisabled: {
-        backgroundColor: Platform.select({ ios: brand.danger, android: contrast.low }),
+        backgroundColor: brand.danger,
     },
 };

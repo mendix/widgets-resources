@@ -183,19 +183,31 @@ export const btnAsText = {
         borderRadius: 0,
         rippleColor: contrast.lowest,
         backgroundColor: "transparent",
-        paddingVertical: 0,
-        paddingHorizontal: 0,
     },
     icon: {
-        color: brand.primary,
         size: button.fontSizeIcon,
     },
     caption: {
-        color: brand.primary,
         fontWeight: font.weightSemiBold,
         fontSize: button.fontSize,
     },
 };
+export const btnAsTextPrimary = merge(btnAsText, {
+    icon: {
+        color: brand.primary,
+    },
+    caption: {
+        color: brand.primary,
+    },
+});
+export const btnAsTextSecondary = merge(btnAsText, {
+    icon: {
+        color: font.colorTitle,
+    },
+    caption: {
+        color: font.colorTitle,
+    },
+});
 //
 // Button sizes
 export const btnLarge = {

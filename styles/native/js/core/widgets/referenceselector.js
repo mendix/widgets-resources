@@ -1,6 +1,4 @@
-import { border, contrast, font, input } from "../variables";
-import { DropDown } from "./dropdown";
-import { TextBox, TextBoxVertical } from "./textbox";
+import { DropDown, DropDownVertical } from "./dropdown";
 /*
 
 DISCLAIMER:
@@ -16,99 +14,81 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const ReferenceSelector = {
     container: {
         // All ViewStyle properties are allowed
-        ...TextBox.container,
+        ...DropDown.container,
     },
     label: {
         // numberOfLines and all TextStyle properties are allowed
-        ...TextBox.label,
+        ...DropDown.label,
     },
     value: {
         // All TextStyle properties & placeholderTextColor are allowed
-        color: input.input.color,
-        borderColor: input.input.borderColor,
-        backgroundColor: input.input.backgroundColor,
-        placeholderTextColor: input.input.placeholderTextColor,
-        fontSize: input.input.fontSize,
-        lineHeight: input.input.lineHeight,
-        fontFamily: font.family,
-        borderWidth: input.input.borderWidth,
-        borderRadius: input.input.borderRadius,
-        overflow: "hidden",
-        textAlignVertical: "center",
-        minWidth: input.input.minWidth,
-        minHeight: input.input.minHeight,
-        paddingHorizontal: input.input.paddingHorizontal,
-        paddingVertical: input.input.paddingVertical,
+        ...DropDown.value,
     },
     valueDisabled: {
         // All TextStyle properties are allowed
-        backgroundColor: input.inputDisabled.backgroundColor,
+        ...DropDown.valueDisabled,
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        ...TextBox.validationMessage,
+        ...DropDown.validationMessage,
     },
     /*  New dropdown styles start */
     valueContainer: {
-    // All ViewStyle properties & rippleColor are allowed
+        // All ViewStyle properties & rippleColor are allowed
+        ...DropDown.valueContainer,
     },
     menuWrapper: {
         // All ViewStyle properties are allowed
-        borderRadius: border.radius,
-        shadowColor: "#000",
-        shadowOpacity: 0.2,
-        shadowRadius: 10,
-        elevation: 16,
+        ...DropDown.menuWrapper,
     },
     itemContainer: {
         // All ViewStyle properties are allowed
-        maxWidth: 500,
-        paddingVertical: 6,
-        paddingHorizontal: 16,
-        backgroundColor: input.input.backgroundColor,
+        ...DropDown.itemContainer,
     },
     item: {
-        // All TextStlye properties are allowed
-        color: input.input.color,
+        // All TextStyle properties are allowed
+        ...DropDown.item,
     },
     selectedItem: {
-        // All TextStlye properties are allowed
-        fontWeight: font.weightBold,
+        // All TextStyle properties are allowed
+        ...DropDown.selectedItem,
     },
     selectedItemContainer: {
         // All ViewStyle properties are allowed
-        backgroundColor: contrast.lowest,
+        ...DropDown.selectedItemContainer,
     },
     /*  New dropdown styles end */
-    useUniformDesign: true,
+    useUniformDesign: DropDown.useUniformDesign,
     /*  Old dropdown styles start */
     pickerIOS: {
         // All ViewStyle properties are allowed
-        backgroundColor: input.input.backgroundColor,
+        ...DropDown.pickerIOS,
     },
     pickerItemIOS: {
-    // All TextStyle properties are allowed
+        // All TextStyle properties are allowed
+        ...DropDown.pickerItemIOS,
     },
     pickerBackdropIOS: {
-    // All ViewStyle properties are allowed
+        // All ViewStyle properties are allowed
+        ...DropDown.pickerBackdropIOS,
     },
     pickerTopIOS: {
         // All ViewStyle properties are allowed
-        backgroundColor: input.input.backgroundColor,
+        ...DropDown.pickerTopIOS,
     },
 };
 export const ReferenceSelectorVertical = {
-    container: TextBoxVertical.container,
-    label: TextBoxVertical.label,
-    value: DropDown.value,
-    validationMessage: TextBoxVertical.validationMessage,
-    valueContainer: DropDown.valueContainer,
-    menuWrapper: DropDown.menuWrapper,
-    itemContainer: DropDown.itemContainer,
-    item: DropDown.item,
-    useUniformDesign: DropDown.useUniformDesign,
-    pickerIOS: DropDown.pickerIOS,
-    pickerItemIOS: DropDown.pickerItemIOS,
-    pickerBackdropIOS: DropDown.pickerBackdropIOS,
-    pickerTopIOS: DropDown.pickerTopIOS,
+    container: DropDownVertical.container,
+    label: DropDownVertical.label,
+    value: DropDownVertical.value,
+    validationMessage: DropDownVertical.validationMessage,
+    valueContainer: DropDownVertical.valueContainer,
+    menuWrapper: DropDownVertical.menuWrapper,
+    itemContainer: DropDownVertical.itemContainer,
+    item: DropDownVertical.item,
+    useUniformDesign: DropDownVertical.useUniformDesign,
+    pickerIOS: DropDownVertical.pickerIOS,
+    pickerItemIOS: DropDownVertical.pickerItemIOS,
+    pickerBackdropIOS: DropDownVertical.pickerBackdropIOS,
+    pickerTopIOS: DropDownVertical.pickerTopIOS,
 };
