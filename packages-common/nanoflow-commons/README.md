@@ -29,7 +29,8 @@ mobile.
 |                     | Set storage item object list |
 |                     | Set storage item string      |
 |                     | Storage item exists          |
-| Other activities    | Get guid                     |
+| Other activities    | Generate unique ID           |
+|                     | Get guid                     |
 |                     | Get object by guid           |
 |                     | Get platform                 |
 |                     | Wait                         |
