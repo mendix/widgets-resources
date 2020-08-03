@@ -6,7 +6,7 @@ branches:
     only:
         - master
         - /^pluggable-widgets-tools-v*/
-        - /^pluggable-widgets-generator-v*/
+        - /^generator-widget-v*/
 env:
     global:
         # Build only touched packages for pull requests when no shared files were touched
@@ -70,7 +70,7 @@ jobs:
           script:
               - echo "Ready to deploy!"
           before_deploy:
-              - if [[ "$TRAVIS_TAG" =~ ^pluggable-widgets-tools-v* ]]; then cd packages-common/pluggable-widgets-tools; else cd packages-common/pluggable-widgets-generator; fi
+              - if [[ "$TRAVIS_TAG" =~ ^pluggable-widgets-tools-v* ]]; then cd packages/tools/pluggable-widgets-tools; else cd packages/tools/generator-widget; fi
           deploy:
               skip_cleanup: true
               provider: npm
