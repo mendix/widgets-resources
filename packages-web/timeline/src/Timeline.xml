@@ -1,17 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="mendix.timeline.Timeline" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+<widget id="com.mendix.widget.web.timeline.Timeline" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
         supportedPlatform="Web"
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Timeline</name>
     <description>My widget description</description>
     <icon/>
     <properties>
         <propertyGroup caption="General">
-            <property key="sampleText" type="string" required="false">
-                <caption>Default value</caption>
-                <description>Sample text input</description>
-            </property>
+            <propertyGroup caption="General">
+                <property key="renderMode" type="enumeration" defaultValue="basic">
+                    <caption>Render</caption>
+                    <description>Basic: creates the Timeline based on the configured items. Custom: free to model timeline.</description>
+                    <enumerationValues>
+                        <enumerationValue key="basic">Basic</enumerationValue>
+                        <enumerationValue key="custom">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="data" type="datasource" isList="true">
+                    <caption>Data Source</caption>
+                    <description/>
+                </property>
+                <property key="eventTime" type="attribute" dataSource="data">
+                    <caption>Event date time attribute</caption>
+                    <description>Will be used for grouping. Its required</description>
+                    <attributeTypes>
+                        <attributeType name="DateTime"/>
+                    </attributeTypes>
+                </property>
+                <property key="showDayDivider" type="boolean" defaultValue="false">
+                    <caption>Show Day Divider</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Basic">
+                <property key="title" type="attribute" dataSource="data" required="false">
+                    <caption>Title</caption>
+                    <description/>
+                    <attributeTypes>
+                        <attributeType name="String"/>
+                    </attributeTypes>
+                </property>
+                <property key="description" type="attribute" dataSource="data" required="false">
+                    <caption>Description</caption>
+                    <description/>
+                    <attributeTypes>
+                        <attributeType name="String"/>
+                    </attributeTypes>
+                </property>
+                <property key="icon" type="image" required="false">
+                    <caption>Left icon</caption>
+                    <description>Will be round background color if its not specified</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Custom">
+                <property key="customIcon" type="widgets" required="false">
+                    <caption>Icon</caption>
+                    <description>Content of the icon</description>
+                </property>
+                <property key="customDayDivider" type="widgets" dataSource="data" required="false">
+                    <caption>Day Divider</caption>
+                    <description>Content of the day divider</description>
+                </property>
+                <property key="customTitle" type="widgets" dataSource="data" required="false">
+                    <caption>Title</caption>
+                    <description>Content of the title</description>
+                </property>
+                <property key="customEventDateTime" type="widgets" dataSource="data" required="false">
+                    <caption>Event Time</caption>
+                    <description>Content of the event time</description>
+                </property>
+                <property key="customDescription" type="widgets" dataSource="data" required="false">
+                    <caption>Content</caption>
+                    <description>Content of the description</description>
+                </property>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>

@@ -1,15 +1,14 @@
-import { Component, ReactNode, createElement } from "react";
-import { HelloWorldSample } from "./components/HelloWorldSample";
+import { Component, ReactNode } from "react";
 import { TimelinePreviewProps } from "../typings/TimelineProps";
 
 declare function require(name: string): string;
 
 export class preview extends Component<TimelinePreviewProps> {
     render(): ReactNode {
-        return <HelloWorldSample sampleText={this.props.sampleText} />;
+        return null;
     }
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/Timeline.css");
+    return require("./ui/Timeline.scss");
 }

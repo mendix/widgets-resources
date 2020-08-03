@@ -5,7 +5,7 @@
             <widgetFile path="Timeline.xml"/>
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/web/timeline/"/>
+            <file path="com/mendix/widget/web/timeline"/>
         </files>
     </clientModule>
 </package>

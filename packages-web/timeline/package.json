@@ -9,7 +9,7 @@
     "widgetPath": "./tests/TestProjects/Mendix8/widgets",
     "projectPath": "./tests/TestProjects/Mendix8",
     "mendixHost": "http://localhost:8080",
-    "developmentPort": "3000"
+    "developmentPort": 3000
   },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
