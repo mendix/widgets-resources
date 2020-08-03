@@ -1,8 +1,8 @@
 {
-  "name": "calendar",
-  "widgetName": "Calendar",
-  "version": "1.0.6",
-  "description": "Display and manage calendar events",
+  "name": "carousel-web",
+  "widgetName": "Carousel",
+  "version": "1.4.3",
+  "description": "Displays images in a carousel",
   "copyright": "Mendix BV",
   "repository": {
     "type": "git",
@@ -11,7 +11,6 @@
   "scripts": {
     "start": "utils-react-widgets start",
     "dev": "utils-react-widgets dev",
-    "format": "prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "test": "npm run test:unit",
     "test:unit": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
@@ -25,7 +24,7 @@
   "config": {
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000,
-    "testProjectId": "efe7ce5d-5c1f-4f4a-9fe9-beebe2a16bb0",
+    "testProjectId": "741ba687-b2e1-4f6e-85aa-25687e217331",
     "testProjects": [
       {
         "branch": "trunk",
@@ -43,24 +42,18 @@
         "branch": "nightly",
         "path": "./tests/TestProjects/Nightly/"
       }
-    ]
+    ],
+    "e2eBranch": "nightly"
   },
   "license": "Apache-2.0",
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/classnames": "^2.2.6",
-    "@types/date-arithmetic": "^3.1.2",
-    "@types/react-big-calendar": "0.20.20",
-    "@types/react-dnd": "^3.0.2",
-    "@types/react-dnd-html5-backend": "^3.0.2",
-    "@widgets-resources/utils-react-widgets": "0.0.1"
+    "@types/faker": "^4.1.0",
+    "@widgets-resources/utils-react-widgets": "0.0.1",
+    "faker": "^4.1.0"
   },
   "dependencies": {
-    "classnames": "^2.2.6",
-    "date-arithmetic": "^3.1.0",
-    "moment": "^2.24.0",
-    "react-big-calendar": "0.19.2",
-    "react-dnd": "2.6.0",
-    "react-dnd-html5-backend": "^5.0.1"
+    "classnames": "^2.2.6"
   }
 }
