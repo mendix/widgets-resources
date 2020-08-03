@@ -1,5 +1,5 @@
 {
-  "name": "videoplayer",
+  "name": "video-player-web",
   "widgetName": "VideoPlayer",
   "version": "1.0.1",
   "description": "Player for YouTube, Dailymotion, Vimeo and Mp4 videos",

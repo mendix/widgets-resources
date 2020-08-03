@@ -1,9 +1,9 @@
 {
-  "name": "fieldset",
-  "widgetName": "Fieldset",
-  "version": "1.0.0",
-  "description": "A container to group several controls within a web form",
-  "copyright": "Mendix B.V.",
+  "name": "badge-button-web",
+  "widgetName": "BadgeButton",
+  "version": "2.0.0",
+  "description": "A special distinctive mark or token put on any display as a button",
+  "copyright": "Mendix BV",
   "repository": {
     "type": "git",
     "url": "https://github.com/mendix/widgets-resources.git"
@@ -14,19 +14,31 @@
     "projectPath": "./tests/TestProjects/Mendix8",
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000,
-    "testProjectId": "e06d749b-4848-4006-a390-39ae58be4aa7",
+    "testProjectId": "52d48d8a-38ba-44c6-b297-1a0216c10d28",
     "testProjects": [
       {
         "branch": "trunk",
         "path": "./tests/TestProjects/Mendix/"
+      },
+      {
+        "branch": "MX_7.23",
+        "path": "./tests/TestProjects/Mendix7/"
+      },
+      {
+        "branch": "MX_8",
+        "path": "./tests/TestProjects/Mendix8/"
+      },
+      {
+        "branch": "nightly",
+        "path": "./tests/TestProjects/Nightly/"
       }
     ]
   },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
     "start": "pluggable-widgets-tools start:server --open",
-    "dev": "pluggable-widgets-tools start:web",
-    "build": "pluggable-widgets-tools build:web",
+    "dev": "pluggable-widgets-tools start:ts",
+    "build": "pluggable-widgets-tools build:ts",
     "format": "pluggable-widgets-tools format",
     "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
@@ -35,10 +47,12 @@
     "release": "pluggable-widgets-tools release:web",
     "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
   },
-  "dependencies": {
-    "@widgets-resources/piw-utils": "^1.0.0"
-  },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": ">=8.9.2"
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@types/classnames": "^2.2.6"
+  },
+  "dependencies": {
+    "@widgets-resources/piw-utils": "^1.0.0",
+    "classnames": "^2.2.6"
   }
 }

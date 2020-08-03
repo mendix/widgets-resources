@@ -1,5 +1,5 @@
 {
-  "name": "accessibility-helper",
+  "name": "accessibility-helper-web",
   "widgetName": "AccessibilityHelper",
   "version": "1.0.0",
   "description": "Set an attribute to a DOM element",
