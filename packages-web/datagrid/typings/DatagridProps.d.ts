@@ -13,6 +13,7 @@ export interface ColumnsType {
     header: DynamicValue<string>;
     hasWidgets: boolean;
     content?: (item: ObjectItem) => ReactNode;
+    columnClass?: DynamicValue<string>;
     sortable: boolean;
     filterable: boolean;
     resizable: boolean;
@@ -27,6 +28,7 @@ export interface ColumnsPreviewType {
     header: string;
     hasWidgets: boolean;
     content: { widgetCount: number; renderer: ComponentType };
+    columnClass: string;
     sortable: boolean;
     filterable: boolean;
     resizable: boolean;
@@ -41,6 +43,7 @@ export interface DatagridContainerProps {
     tabIndex: number;
     datasource: ListValue;
     columns: ColumnsType[];
+    rowClass?: DynamicValue<string>;
     showHeader: boolean;
     headerWidgets?: ReactNode;
     showFooter: boolean;
@@ -60,6 +63,7 @@ export interface DatagridPreviewProps {
     style: string;
     datasource: {} | null;
     columns: ColumnsPreviewType[];
+    rowClass: string;
     showHeader: boolean;
     headerWidgets: { widgetCount: number; renderer: ComponentType };
     showFooter: boolean;

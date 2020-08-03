@@ -115,6 +115,7 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
 
         .tr {
             position: relative;
+            background-color: $background-color;
             .td {
                 display: flex;
                 flex: 1 1 0;
@@ -125,7 +126,6 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
                 border-color: $border-color;
                 border-bottom-width: 1px;
                 border-bottom-style: solid;
-                background-color: $background-color;
 
                 &:focus {
                     outline: none;

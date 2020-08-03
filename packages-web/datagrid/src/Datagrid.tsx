@@ -52,6 +52,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             pageSize={props.pageSize}
             paging={props.pagingEnabled}
             pagingPosition={props.pagingPosition}
+            rowClass={props.rowClass?.value}
             setPage={setPage}
             styles={props.style}
             cellRenderer={useCallback(
@@ -60,7 +61,8 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                     return renderWrapper(
                         column.hasWidgets && column.content
                             ? column.content(value)
-                            : column.attribute(value).displayValue
+                            : column.attribute(value).displayValue,
+                        column.columnClass?.value
                     );
                 },
                 [props.columns]

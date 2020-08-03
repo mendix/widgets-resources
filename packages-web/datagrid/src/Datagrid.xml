@@ -43,6 +43,11 @@
                                 <caption>Content</caption>
                                 <description/>
                             </property>
+                            <property key="columnClass" type="expression" required="false">
+                                <caption>Dynamic cell class</caption>
+                                <description />
+                                <returnType type="String"/>
+                            </property>
                         </propertyGroup>
                         <propertyGroup caption="Interactions">
                             <property key="sortable" type="boolean" defaultValue="true">
@@ -72,6 +77,11 @@
                             </property>
                         </propertyGroup>
                     </properties>
+                </property>
+                <property key="rowClass" type="expression" required="false">
+                    <caption>Dynamic row class</caption>
+                    <description />
+                    <returnType type="String"/>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Header">

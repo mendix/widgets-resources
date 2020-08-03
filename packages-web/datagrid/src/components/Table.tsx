@@ -17,6 +17,7 @@ import {
     useSortBy,
     useTable
 } from "react-table";
+import classNames from "classnames";
 import { ColumnsPreviewType, ColumnsType } from "../../typings/DatagridProps";
 
 export type TableColumn = Omit<ColumnsType | ColumnsPreviewType, "content" | "attribute">;
@@ -37,10 +38,15 @@ export interface TableProps<T> {
     page: number;
     pageSize: number;
     pagingPosition: string;
+    rowClass?: string;
     setPage?: (computePage: (prevPage: number) => number) => void;
     styles?: CSSProperties;
     hasMoreItems: boolean;
-    cellRenderer: (renderWrapper: (children: ReactNode) => ReactElement, value: T, columnIndex: number) => ReactElement;
+    cellRenderer: (
+        renderWrapper: (children: ReactNode, customClass?: string) => ReactElement,
+        value: T,
+        columnIndex: number
+    ) => ReactElement;
     valueForFilter: (value: T, columnIndex: number) => string | undefined;
 }
 
@@ -78,11 +84,11 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 disableFilters: !column.filterable,
                 Cell: ({ cell, value }) =>
                     props.cellRenderer(
-                        (children: ReactNode) => (
+                        (children: ReactNode, customClass) => (
                             <div
                                 {...cell.getCellProps()}
                                 {...(!props.columnsResizable ? { style: { flex: "1 1 0px" } } : {})}
-                                className="td"
+                                className={classNames("td", customClass)}
                             >
                                 {children}
                             </div>
@@ -220,7 +226,11 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                     {(isSortingOrFiltering && props.paging ? rowsPagination : rows).map((row, index) => {
                         prepareRow(row);
                         return (
-                            <div {...row.getRowProps()} key={`row_${index}`} className="tr">
+                            <div
+                                {...row.getRowProps()}
+                                key={`row_${index}`}
+                                className={classNames("tr", props.rowClass)}
+                            >
                                 {row.cells.map(cell => cell.render("Cell"))}
                                 {props.columnsHidable && (
                                     <div className="td column-selector" style={{ width: columnSelectorWidth }} />
