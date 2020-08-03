@@ -1,5 +1,5 @@
 const merge = require("webpack-merge");
-const baseConfig = require("../../configs/webpack.dev.js");
+const baseConfig = require("../../../configs/webpack.dev.js");
 
 const customConfig = {
     output: {

@@ -1,6 +1,6 @@
 const cwd = process.cwd();
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const configs = require("../../packages-common/pluggable-widgets-tools/test-config/jest.config");
+const configs = require("@mendix/pluggable-widgets-tools/test-config/jest.config");
 
 module.exports = {
     ...configs,

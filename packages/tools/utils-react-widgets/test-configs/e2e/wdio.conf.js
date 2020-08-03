@@ -4,7 +4,7 @@ const fs = require("fs");
 const debug = process.env.DEBUG;
 // const url = "https://badge.mxapps.io/"; // process.env.URL || "https://localhost:8080/";
 const url = process.env.URL || "https://localhost:8080/";
-const variables = require("../../configs/variables");
+const variables = require("../../../configs/variables");
 // console.log(process.env.URL);
 // console.log(path.resolve(variables.path, "test/e2e/tsconfig.json"));
 

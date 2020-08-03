@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "license": "Apache-2.0",
   "scripts": {
-    "start": "..\"/../node_modules/.bin/concurrently\" \"npm:watch-*\"",
-    "watch-ts": "..\"/../node_modules/.bin/tsc\" --project src/tsconfig.json --watch ",
+    "start": "..\"/../../node_modules/.bin/concurrently\" \"npm:watch-*\"",
+    "watch-ts": "..\"/../../node_modules/.bin/tsc\" --project src/tsconfig.json --watch ",
     "watch-copy": "npm-watch",
     "build": "npm run build:tsc",
-    "prebuild:tsc": "..\"/../node_modules/.bin/rimraf\" dist/tsc",
-    "build:tsc": "..\"/../node_modules/.bin/tsc\" --project src/tsconfig.json",
-    "postbuild": "node ../../scripts/modules/copyActionsToTestProject.js",
-    "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --parser-options=project:src/tsconfig.json --ext .ts src/",
-    "lint:scripts": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --parser-options=project:scripts/tsconfig.json --ext .ts scripts/",
+    "prebuild:tsc": "..\"/../../node_modules/.bin/rimraf\" dist/tsc",
+    "build:tsc": "..\"/../../node_modules/.bin/tsc\" --project src/tsconfig.json",
+    "postbuild": "node ../../../scripts/modules/copyActionsToTestProject.js",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --parser-options=project:src/tsconfig.json --ext .ts src/",
+    "lint:scripts": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --parser-options=project:scripts/tsconfig.json --ext .ts scripts/",
     "lint:fix": "npm run lint -- --fix"
   },
   "config": {

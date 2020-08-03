@@ -106,11 +106,11 @@ See [CONTRIBUTING.md](https://github.com/mendix/widgets-resources/blob/master/CO
     each Mendix project's correct widget folder.
 -   Open and run the project in `packages-native/test-project` with Mendix Studio
 
-### For developing in `packages-common/nanoflow-commons`:
+### For developing in `nanoflow-commons`:
 
 -   Create a simple Mendix project in Studio.
--   Copy all of it's contents to `packages-common/nanoflow-commons/dist/mxproject`.
--   Run `npm run build` on `packages-common/nanoflow-commons`. This will build and copy the mpk to dist/mxproject's
+-   Copy all of it's contents to `nanoflow-commons/dist/mxproject`.
+-   Run `npm run build` on `nanoflow-commons`. This will build and copy the mpk to dist/mxproject's
     correct folder.
 
 Please bear in mind that when you develop JSActions, creation process is not automatically picked up by Modeler. Which

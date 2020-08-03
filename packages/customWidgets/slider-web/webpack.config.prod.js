@@ -1,5 +1,5 @@
 const merge = require("webpack-merge");
-const baseConfig = require("../utils-react-widgets/configs/webpack.config.prod");
+const baseConfig = require("@widgets-resources/utils-react-widgets/configs/webpack.config.prod");
 
 const overridingConfig = {
     module: {

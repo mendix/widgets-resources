@@ -1,1 +1,2 @@
-packages-common/pluggable-widgets-generator/generators/app/templates
+packages/tools/generator-widget/generators/app/templates
+packages/tools/pluggable-widgets-tools/tests/projects

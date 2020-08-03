@@ -77,7 +77,7 @@ npm run release
 
 ---
 
-For more information, visit our [Mendix Pluggable Widget Tools repository](https://github.com/mendix/widgets-resources/tree/master/packages-common/pluggable-widgets-tools).
+For more information, visit our [Mendix Pluggable Widget Tools repository](https://github.com/mendix/widgets-resources/tree/master/packages/tools/pluggable-widgets-tools).
 
 ### 2.2. Which template do you want to use for the widget?
 

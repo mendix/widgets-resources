@@ -1,5 +1,5 @@
 {
-    "extends": "../utils-react-widgets/configs/tsconfig.json",
+    "extends": "@widgets-resources/utils-react-widgets/configs/tsconfig.json",
     "compilerOptions": {
         "baseUrl": ".",
         "rootDir": "./",
