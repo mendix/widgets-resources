@@ -1,0 +1,35 @@
+{
+  "name": "color-picker-native",
+  "widgetName": "ColorPicker",
+  "version": "0.1.4",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "config": {
+    "widgetPath": "../test-project/mxproject/widgets",
+    "projectPath": "../test-project/mxproject"
+  },
+  "packagePath": "com.mendix.widget.native",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:native",
+    "build": "pluggable-widgets-tools build:native",
+    "release": "pluggable-widgets-tools release:native",
+    "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.native.config.js",
+    "version": "npm run release",
+    "postversion": "..\"/../node_modules/.bin/ts-node\" ../../scripts/release/UpdateGithubRelease.ts --project ../../scripts/tsconfig.json"
+  },
+  "dependencies": {
+    "@native-mobile-resources/util-widgets": "^1.0.0",
+    "@widgets-resources/piw-utils": "^1.0.0",
+    "react-native-color": "^0.0.10",
+    "react-native-slider": "^0.11.0",
+    "tinycolor2": "^1.4.1"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@types/tinycolor2": "^1.4.1"
+  }
+}
