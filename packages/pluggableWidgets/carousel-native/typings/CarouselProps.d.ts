@@ -3,8 +3,8 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ComponentType, ReactNode } from "react";
-import { ListValue, ObjectItem } from "mendix";
+import { ComponentType } from "react";
+import { ListValue, ListWidgetValue } from "mendix";
 
 export type LayoutEnum = "card" | "fullWidth";
 
@@ -14,7 +14,7 @@ export interface CarouselProps<Style> {
     name: string;
     style: Style[];
     contentSource: ListValue;
-    content: (item: ObjectItem) => ReactNode;
+    content: ListWidgetValue;
     layout: LayoutEnum;
     showPagination: boolean;
     activeSlideAlignment: ActiveSlideAlignmentEnum;

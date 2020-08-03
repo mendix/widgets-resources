@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { ActionValue, DynamicValue, EditableValue, ListValue, ObjectItem, WebImage } from "mendix";
+import { ActionValue, DynamicValue, ListValue, ListActionValue, ListAttributeValue, WebImage } from "mendix";
 
 export type LocationTypeEnum = "address" | "latlng";
 
@@ -28,11 +28,11 @@ export type MarkerStyleDynamicEnum = "default" | "image";
 export interface DynamicMarkersType {
     markersDS?: ListValue;
     locationType: LocationTypeEnum;
-    address?: (item: ObjectItem) => EditableValue<string>;
-    latitude?: (item: ObjectItem) => EditableValue<BigJs.Big>;
-    longitude?: (item: ObjectItem) => EditableValue<BigJs.Big>;
-    title?: (item: ObjectItem) => EditableValue<string>;
-    onClickAttribute?: (item: ObjectItem) => ActionValue;
+    address?: ListAttributeValue<string>;
+    latitude?: ListAttributeValue<BigJs.Big>;
+    longitude?: ListAttributeValue<BigJs.Big>;
+    title?: ListAttributeValue<string>;
+    onClickAttribute?: ListActionValue;
     markerStyleDynamic: MarkerStyleDynamicEnum;
     customMarkerDynamic?: DynamicValue<WebImage>;
 }

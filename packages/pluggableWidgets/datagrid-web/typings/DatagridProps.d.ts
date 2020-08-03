@@ -4,15 +4,15 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { DynamicValue, EditableValue, ListValue, ObjectItem } from "mendix";
+import { DynamicValue, ListValue, ListAttributeValue, ListWidgetValue } from "mendix";
 
 export type HidableEnum = "yes" | "hidden" | "no";
 
 export interface ColumnsType {
-    attribute: (item: ObjectItem) => EditableValue<string | BigJs.Big | boolean | Date>;
+    attribute: ListAttributeValue<string | BigJs.Big | boolean | Date>;
     header: DynamicValue<string>;
     hasWidgets: boolean;
-    content?: (item: ObjectItem) => ReactNode;
+    content?: ListWidgetValue;
     sortable: boolean;
     filterable: boolean;
     resizable: boolean;
