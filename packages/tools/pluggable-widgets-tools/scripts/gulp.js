@@ -49,7 +49,7 @@ function copyToDeployment() {
                 join(variables.projectPath, "dist/tmp/widgets/**/*"),
                 "!" + join(variables.projectPath, "dist/tmp/widgets/**/package.xml")
             ])
-            .pipe(gulp.dest(join(projectPath, "deployment/web/widgets")))
+            .pipe(gulp.dest(join(projectPath, `deployment/${isNative ? "native" : "web"}/widgets`)))
             .on("error", handleError);
     } else {
         console.log(
