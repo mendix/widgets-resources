@@ -4,7 +4,7 @@
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Timeline</name>
-    <description>My widget description</description>
+    <description>Shows vertical timeline with events</description>
     <icon/>
     <properties>
         <propertyGroup caption="General">
@@ -23,17 +23,17 @@
                 </property>
                 <property key="eventTime" type="attribute" dataSource="data">
                     <caption>Event date time attribute</caption>
-                    <description>Will be used for grouping. Its required</description>
+                    <description>Will be used for grouping by date.</description>
                     <attributeTypes>
                         <attributeType name="DateTime"/>
                     </attributeTypes>
                 </property>
                 <property key="showDayDivider" type="boolean" defaultValue="false">
-                    <caption>Show Day Divider</caption>
+                    <caption>Show day divider</caption>
                     <description/>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Basic">
+            <propertyGroup caption="Event">
                 <property key="title" type="attribute" dataSource="data" required="false">
                     <caption>Title</caption>
                     <description/>
@@ -49,8 +49,8 @@
                     </attributeTypes>
                 </property>
                 <property key="icon" type="icon" required="false">
-                    <caption>Left icon</caption>
-                    <description>Will be round background color if its not specified</description>
+                    <caption>Icon</caption>
+                    <description>Will be circle if its not selected.</description>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Custom">
