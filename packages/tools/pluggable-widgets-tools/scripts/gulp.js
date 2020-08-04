@@ -43,14 +43,14 @@ function createMpkFile() {
 
 function copyToDeployment() {
     if (existsSync(projectPath) && readdirSync(projectPath).length > 0) {
-        console.log(colors.green(`Files generated in dist and ${projectPath} folder`));
         return gulp
             .src([
                 join(variables.projectPath, "dist/tmp/widgets/**/*"),
                 "!" + join(variables.projectPath, "dist/tmp/widgets/**/package.xml")
             ])
             .pipe(gulp.dest(join(projectPath, `deployment/${isNative ? "native" : "web"}/widgets`)))
-            .on("error", handleError);
+            .on("error", handleError)
+            .on("end", () => console.log(colors.green(`Files generated in dist and ${projectPath} folder`)));
     } else {
         console.log(
             colors.yellow(
@@ -121,6 +121,6 @@ function handleError(err) {
 exports.build = gulp.series(clean, generateTypings, runWebpack.bind(null, "dev"), createMpkFile, copyToDeployment);
 exports.release = gulp.series(clean, generateTypings, runWebpack.bind(null, "prod"), createMpkFile);
 exports.watch = function() {
-    console.log(colors.green(`Watching files in: ${variables.projectPath}`));
+    console.log(colors.green(`Watching files in: ${variables.projectPath}/src`));
     return gulp.watch("src/**/*", { ignoreInitial: false, cwd: variables.projectPath }, exports.build);
 };
