@@ -3404,6 +3404,7 @@ exports[`Table renders the structure correctly 1`] = `
           setFilter={[Function]}
           setHiddenColumns={[Function]}
           setPageSize={[Function]}
+          setSortBy={[Function]}
           sortedFlatRows={
             Array [
               Object {
@@ -7252,6 +7253,7 @@ exports[`Table renders the structure correctly with dragging 1`] = `
           setFilter={[Function]}
           setHiddenColumns={[Function]}
           setPageSize={[Function]}
+          setSortBy={[Function]}
           sortedFlatRows={
             Array [
               Object {
@@ -11100,6 +11102,7 @@ exports[`Table renders the structure correctly with filtering 1`] = `
           setFilter={[Function]}
           setHiddenColumns={[Function]}
           setPageSize={[Function]}
+          setSortBy={[Function]}
           sortedFlatRows={
             Array [
               Object {
@@ -15084,6 +15087,7 @@ exports[`Table renders the structure correctly with hiding 1`] = `
           setFilter={[Function]}
           setHiddenColumns={[Function]}
           setPageSize={[Function]}
+          setSortBy={[Function]}
           sortedFlatRows={
             Array [
               Object {
@@ -18940,6 +18944,7 @@ exports[`Table renders the structure correctly with paging 1`] = `
           setFilter={[Function]}
           setHiddenColumns={[Function]}
           setPageSize={[Function]}
+          setSortBy={[Function]}
           sortedFlatRows={
             Array [
               Object {
@@ -22801,6 +22806,7 @@ exports[`Table renders the structure correctly with resizing 1`] = `
           setFilter={[Function]}
           setHiddenColumns={[Function]}
           setPageSize={[Function]}
+          setSortBy={[Function]}
           sortedFlatRows={
             Array [
               Object {
@@ -26649,6 +26655,7 @@ exports[`Table renders the structure correctly with sorting 1`] = `
           setFilter={[Function]}
           setHiddenColumns={[Function]}
           setPageSize={[Function]}
+          setSortBy={[Function]}
           sortedFlatRows={
             Array [
               Object {
