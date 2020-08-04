@@ -48,7 +48,7 @@
                         <attributeType name="String"/>
                     </attributeTypes>
                 </property>
-                <property key="icon" type="image" required="false">
+                <property key="icon" type="icon" required="false">
                     <caption>Left icon</caption>
                     <description>Will be round background color if its not specified</description>
                 </property>

@@ -1,18 +1,18 @@
-import { Children, createElement, ReactElement, ReactNode, useMemo } from "react";
+import { createElement, ReactElement, ReactNode, useMemo } from "react";
 import { TimelineContainerProps } from "../typings/TimelineProps";
 import "./ui/Timeline.scss";
-import { DynamicValue, WebImage } from "mendix";
-import classNames from "classnames";
+import { DynamicValue, WebIcon } from "mendix";
+import TimelineComponent from "./components/TimelineComponent";
 
-interface BasicItemType {
-    icon?: DynamicValue<WebImage>;
+export interface BasicItemType {
+    icon?: DynamicValue<WebIcon>;
     title?: string;
     date?: string;
     time?: string;
     description?: string;
 }
 
-interface CustomItemType {
+export interface CustomItemType {
     icon?: ReactNode;
     dayDivider?: ReactNode;
     title?: ReactNode;
@@ -20,10 +20,10 @@ interface CustomItemType {
     description?: ReactNode;
 }
 
-type ItemType = BasicItemType | CustomItemType;
+export type ItemType = BasicItemType | CustomItemType;
 
-export default function Timeline(props: TimelineContainerProps): ReactNode {
-    const getStructuredEvents = useMemo(() => {
+export default function Timeline(props: TimelineContainerProps): ReactElement {
+    const structuredEvents = useMemo((): Map<string | ReactNode, ItemType[]> => {
         const eventsMap = new Map<string | ReactNode, ItemType[]>();
 
         props.data.items?.forEach(item => {
@@ -70,81 +70,11 @@ export default function Timeline(props: TimelineContainerProps): ReactNode {
         return eventsMap;
     }, [props.data]);
 
-    function getBasicEventsFromDay(eventsOfDay: BasicItemType[]): ReactNode[] {
-        return eventsOfDay.map((event, index) => (
-            <li className="timeline-event" key={index}>
-                <div className="icon-wrapper">
-                    {event.icon?.value?.uri ? (
-                        <img alt={event.icon.value.altText} src={event.icon?.value?.uri} className="timeline-icon" />
-                    ) : (
-                        <div className="timeline-icon circle" />
-                    )}
-                </div>
-                <div className="flex-container content-wrapper">
-                    <div className="date-time-wrapper">
-                        <p>{event.time}</p>
-                    </div>
-                    <div className="flex-container info-wrapper">
-                        <p className="title">{event.title}</p>
-                        <p className="description">{event.description}</p>
-                    </div>
-                </div>
-            </li>
-        ));
-    }
-
-    function getCustomEventsFromDay(
-        eventsOfDay: CustomItemType[]
-    ): { eventDayDivider: ReactNode; events: ReactNode[] } {
-        let eventDayDivider: ReactNode = null;
-        const events = eventsOfDay.map((event, index) => {
-            if (index === 0) {
-                eventDayDivider = event.dayDivider;
-            }
-            return (
-                <li className="timeline-event" key={index}>
-                    <div className="icon-wrapper">{event.icon ?? <div className="timeline-icon circle" />}</div>
-                    <div className="flexcontainer content-wrapper">
-                        {Children.count((event.eventDateTime as ReactElement).props.children) > 0 && (
-                            <div className="date-time-wrapper">{event.eventDateTime}</div>
-                        )}
-                        <div className="flexcontainer info-wrapper">
-                            {event.title}
-                            {event.description}
-                        </div>
-                    </div>
-                </li>
-            );
-        });
-        return { eventDayDivider, events };
-    }
-
-    function getItems(): ReactNode[] {
-        const days: ReactNode[] = [];
-        getStructuredEvents.forEach((eventsOfDay: ItemType[], day: string) => {
-            let events;
-            let dayDivider;
-            if (props.renderMode === "basic") {
-                events = getBasicEventsFromDay(eventsOfDay as BasicItemType[]);
-                dayDivider = <span>{day}</span>;
-            } else {
-                events = getCustomEventsFromDay(eventsOfDay).events;
-                dayDivider = getCustomEventsFromDay(eventsOfDay).eventDayDivider;
-            }
-
-            const constructedDiv = (
-                <div className="timeline-date">
-                    {props.showDayDivider && Children.count((dayDivider as ReactElement).props.children) > 0 && (
-                        <div className="timeline-date-header">{dayDivider}</div>
-                    )}
-                    <div className={classNames("timeline-events", !props.showDayDivider ? "no-divider" : undefined)}>
-                        <ul>{events}</ul>
-                    </div>
-                </div>
-            );
-            days.push(constructedDiv);
-        });
-        return days;
-    }
-    return <div className="timeline-wrapper">{getItems()}</div>;
+    return (
+        <TimelineComponent
+            data={structuredEvents}
+            showDayDivider={props.showDayDivider}
+            renderMode={props.renderMode}
+        />
+    );
 }

@@ -4,6 +4,8 @@ $title-color: #0a1325;
 $description-color: #6c717c;
 $spacing-large: 30px;
 $gutter-size: 15px;
+$icon-size: 18px;
+$icon-position-left: -($icon-size / 2);
 
 .timeline-date {
     .timeline-date-header {
@@ -28,18 +30,29 @@ $gutter-size: 15px;
             position: relative;
             padding-left: ($gutter-size * 2);
             padding-bottom: 20px;
+
             .icon-wrapper {
                 position: absolute;
                 top: 3px;
-                left: -9px;
-                display: block;
-            }
-            .timeline-icon {
-                width: 18px;
-                height: 18px;
+                left: $icon-position-left;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: $icon-size;
+                height: $icon-size;
+
+                .glyphicon {
+                    font-size: $icon-size;
+                }
+                img {
+                    max-width: $icon-size;
+                    max-height: $icon-size;
+                }
             }
 
-            .circle {
+            .timeline-icon-circle {
+                width: $icon-size;
+                height: $icon-size;
                 border-radius: 50%;
                 background-color: $primary-color;
             }

@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties } from "react";
-import { DynamicValue, ListValue, ListAttributeValue, ListWidgetValue, WebImage } from "mendix";
+import { DynamicValue, ListValue, ListAttributeValue, ListWidgetValue, WebIcon } from "mendix";
 
 export type RenderModeEnum = "basic" | "custom";
 
@@ -19,7 +19,7 @@ export interface TimelineContainerProps {
     showDayDivider: boolean;
     title?: ListAttributeValue<string>;
     description?: ListAttributeValue<string>;
-    icon?: DynamicValue<WebImage>;
+    icon?: DynamicValue<WebIcon>;
     customIcon?: ListWidgetValue;
     customDayDivider?: ListWidgetValue;
     customTitle?: ListWidgetValue;
@@ -36,7 +36,7 @@ export interface TimelinePreviewProps {
     showDayDivider: boolean;
     title: string;
     description: string;
-    icon: string;
+    icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     customIcon: { widgetCount: number; renderer: ComponentType };
     customDayDivider: { widgetCount: number; renderer: ComponentType };
     customTitle: { widgetCount: number; renderer: ComponentType };
