@@ -1,4 +1,4 @@
-import page from "../../../../../configs/e2e/src/pages/page";
+import page from "../../../../../../configs/e2e/src/pages/page";
 import ProgressCircle from "../objects/progressCircle.widget";
 
 describe("Progress Circle", () => {

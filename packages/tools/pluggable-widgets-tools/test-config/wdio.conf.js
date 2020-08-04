@@ -1,7 +1,7 @@
 const { join } = require("path");
 const { existsSync, mkdirSync } = require("fs");
 const debug = process.env.DEBUG;
-const browser = process.env.BROWSER || "chrome";
+const browserName = process.env.BROWSER || "chrome";
 const url = process.env.URL || "https://localhost:8080/";
 
 const e2ePath = join(process.cwd(), "dist/e2e/");
@@ -9,7 +9,7 @@ if (!existsSync(e2ePath)) {
     mkdirSync(e2ePath, { recursive: true });
 }
 
-console.warn("Starting wdio with ", url, browser);
+console.warn("Starting wdio with ", url, browserName);
 
 exports.config = {
     before() {
@@ -22,7 +22,7 @@ exports.config = {
     maxInstances: 1,
     capabilities: [
         {
-            browserName: browser,
+            browserName,
             "goog:chromeOptions": {
                 args: debug ? ["--no-sandbox"] : ["--no-sandbox", "--headless", "--disable-gpu", "--disable-extensions"]
             },
@@ -51,7 +51,6 @@ exports.config = {
         if (test.passed) {
             return;
         }
-        const browserName = browser.capabilities.browserName;
         const timestamp = new Date().toJSON().replace(/:/g, "-");
         const testName = test.fullName.replace(/ /g, "_");
         const filename = `TESTFAIL_${browserName}_${testName}_${timestamp}.png`;

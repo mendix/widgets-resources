@@ -1,4 +1,4 @@
-import page from "../../../../../configs/e2e/src/pages/page";
+import page from "../../../../../../configs/e2e/src/pages/page";
 import ProgressBar from "../objects/progressBar.widget";
 
 describe("Progress Bar", () => {

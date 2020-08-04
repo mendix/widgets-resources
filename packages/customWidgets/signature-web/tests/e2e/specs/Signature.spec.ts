@@ -1,4 +1,4 @@
-import page from "../../../../../configs/e2e/src/pages/page";
+import page from "../../../../../../configs/e2e/src/pages/page";
 import Signature from "../objects/signature.widget";
 
 describe("SignatureCanvas", () => {

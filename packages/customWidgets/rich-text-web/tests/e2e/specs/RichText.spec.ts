@@ -1,4 +1,4 @@
-import page from "../../../../../configs/e2e/src/pages/page";
+import page from "../../../../../../configs/e2e/src/pages/page";
 import RichText from "../objects/richText.widget";
 
 const testValue = "<strong>Hello World!</strong>";
