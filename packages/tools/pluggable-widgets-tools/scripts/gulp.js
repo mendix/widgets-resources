@@ -6,6 +6,9 @@ const del = require("del");
 const gulp = require("gulp");
 const zip = require("gulp-zip");
 const webpack = require("webpack");
+
+let webpackCompiler;
+
 const variables = require("../configs/variables");
 
 require("dotenv").config({ path: join(variables.projectPath, ".env") });
@@ -85,7 +88,11 @@ function runWebpack(env, cb) {
         }
     }
 
-    webpack(config, (err, stats) => {
+    if (!webpackCompiler) {
+        webpackCompiler = webpack(config);
+    }
+
+    webpackCompiler.run((err, stats) => {
         if (err) {
             handleError(err);
             cb(new Error(`Webpack: ${err}`));
