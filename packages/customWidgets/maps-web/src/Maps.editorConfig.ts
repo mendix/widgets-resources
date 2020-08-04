@@ -94,14 +94,14 @@ export function check(values: MapsPreviewProps): Problem[] {
         errors.push({
             property: "apiKey",
             message: "To avoid errors during map rendering it's necessary to include an Api Key",
-            url: "https://github.com/mendix/widgets-resources/blob/master/packages-web/maps/README.md#limitations"
+            url: "https://docs.mendix.com/appstore/widgets/maps#1-2-limitations"
         });
     } else if (values.advanced && !values.geodecodeApiKeyExp && !values.geodecodeApiKey) {
         errors.push({
             property: "geodecodeApiKey",
             severity: "warning",
             message: "To translate addresses to latitude and longitude a Google API Key is required",
-            url: "https://github.com/mendix/widgets-resources/blob/master/packages-web/maps/README.md#limitations"
+            url: "https://docs.mendix.com/appstore/widgets/maps#1-2-limitations"
         });
     }
 
