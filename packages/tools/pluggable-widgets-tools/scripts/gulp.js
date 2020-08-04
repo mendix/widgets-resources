@@ -50,7 +50,7 @@ function copyToDeployment() {
             ])
             .pipe(gulp.dest(join(projectPath, `deployment/${isNative ? "native" : "web"}/widgets`)))
             .on("error", handleError)
-            .on("end", () => console.log(colors.green(`Files generated in dist and ${projectPath} folder`)));
+            .on("finish", () => console.log(colors.green(`Files generated in dist and ${projectPath} folder`)));
     } else {
         console.log(
             colors.yellow(
