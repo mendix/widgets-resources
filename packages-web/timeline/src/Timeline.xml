@@ -54,7 +54,7 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Custom">
-                <property key="customIcon" type="widgets" required="false">
+                <property key="customIcon" type="widgets" dataSource="data" required="false">
                     <caption>Icon</caption>
                     <description>Content of the icon</description>
                 </property>

@@ -20,7 +20,7 @@ export interface TimelineContainerProps {
     title?: (item: ObjectItem) => EditableValue<string>;
     description?: (item: ObjectItem) => EditableValue<string>;
     icon?: DynamicValue<WebImage>;
-    customIcon?: ReactNode;
+    customIcon?: (item: ObjectItem) => ReactNode;
     customDayDivider?: (item: ObjectItem) => ReactNode;
     customTitle?: (item: ObjectItem) => ReactNode;
     customEventDateTime?: (item: ObjectItem) => ReactNode;

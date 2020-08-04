@@ -1,4 +1,4 @@
-import { createElement, ReactNode, useMemo } from "react";
+import { Children, createElement, ReactElement, ReactNode, useMemo } from "react";
 import { TimelineContainerProps } from "../typings/TimelineProps";
 import "./ui/Timeline.scss";
 import { DynamicValue, WebImage } from "mendix";
@@ -51,7 +51,7 @@ export default function Timeline(props: TimelineContainerProps): ReactNode {
                 };
             } else {
                 constructedItem = {
-                    icon: props.customIcon,
+                    icon: props.customIcon?.(item),
                     dayDivider: props.customDayDivider?.(item),
                     title: props.customTitle?.(item),
                     eventDateTime: props.customEventDateTime?.(item),
@@ -104,9 +104,10 @@ export default function Timeline(props: TimelineContainerProps): ReactNode {
             return (
                 <li className="timeline-event" key={index}>
                     <div className="icon-wrapper">{event.icon ?? <div className="timeline-icon circle" />}</div>
-
                     <div className="flexcontainer content-wrapper">
-                        {event.eventDateTime && <div className="date-time-wrapper">{event.eventDateTime}</div>}
+                        {Children.count((event.eventDateTime as ReactElement).props.children) > 0 && (
+                            <div className="date-time-wrapper">{event.eventDateTime}</div>
+                        )}
                         <div className="flexcontainer info-wrapper">
                             {event.title}
                             {event.description}
@@ -133,7 +134,9 @@ export default function Timeline(props: TimelineContainerProps): ReactNode {
 
             const constructedDiv = (
                 <div className="timeline-date">
-                    {props.showDayDivider && <div className="timeline-date-header">{dayDivider}</div>}
+                    {props.showDayDivider && Children.count((dayDivider as ReactElement).props.children) > 0 && (
+                        <div className="timeline-date-header">{dayDivider}</div>
+                    )}
                     <div className={classNames("timeline-events", !props.showDayDivider ? "no-divider" : undefined)}>
                         <ul>{events}</ul>
                     </div>
