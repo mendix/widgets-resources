@@ -6,7 +6,7 @@ branches:
     only:
         - master
         - /^pluggable-widgets-tools-v*/
-        - /^pluggable-widgets-generator-v*/
+        - /^generator-widget-v*/
 env:
     global:
         # Build only touched packages for pull requests when no shared files were touched
@@ -17,10 +17,6 @@ env:
 stages:
     - name: test
       if: tag IS blank
-    - name: build
-      if: fork IS true
-    - name: automated
-      if: fork IS false
     - name: deploy
       if: tag IS present
 jobs:
@@ -47,8 +43,8 @@ jobs:
         - name: "Script tests (Node latest, linux)"
           script:
               - npm run test:scripts -- $SINCE_ARG
-        - stage: automated
-          name: "Run automated end-to-end tests"
+        - name: "Run automated end-to-end tests"
+          if: fork IS false
           dist: trusty
           addons:
               firefox: latest
@@ -61,8 +57,8 @@ jobs:
               - set -e
               - npm run release -- $SINCE_ARG
               - npm run test:e2e -- $SINCE_ARG
-        - stage: build
-          name: "Run build scripts"
+        - name: "Run build scripts"
+          if: fork IS true
           script:
               - npm run release -- $SINCE_ARG
         - stage: deploy
@@ -70,7 +66,7 @@ jobs:
           script:
               - echo "Ready to deploy!"
           before_deploy:
-              - if [[ "$TRAVIS_TAG" =~ ^pluggable-widgets-tools-v* ]]; then cd packages-common/pluggable-widgets-tools; else cd packages-common/pluggable-widgets-generator; fi
+              - if [[ "$TRAVIS_TAG" =~ ^pluggable-widgets-tools-v* ]]; then cd packages/tools/pluggable-widgets-tools; else cd packages/tools/generator-widget; fi
           deploy:
               skip_cleanup: true
               provider: npm

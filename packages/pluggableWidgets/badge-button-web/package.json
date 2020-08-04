@@ -1,0 +1,58 @@
+{
+  "name": "badge-button-web",
+  "widgetName": "BadgeButton",
+  "version": "2.0.0",
+  "description": "A special distinctive mark or token put on any display as a button",
+  "copyright": "Mendix BV",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "license": "Apache-2.0",
+  "config": {
+    "widgetPath": "./tests/TestProjects/Mendix8/widgets",
+    "projectPath": "./tests/TestProjects/Mendix8",
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000,
+    "testProjectId": "52d48d8a-38ba-44c6-b297-1a0216c10d28",
+    "testProjects": [
+      {
+        "branch": "trunk",
+        "path": "./tests/TestProjects/Mendix/"
+      },
+      {
+        "branch": "MX_7.23",
+        "path": "./tests/TestProjects/Mendix7/"
+      },
+      {
+        "branch": "MX_8",
+        "path": "./tests/TestProjects/Mendix8/"
+      },
+      {
+        "branch": "nightly",
+        "path": "./tests/TestProjects/Nightly/"
+      }
+    ]
+  },
+  "packagePath": "com.mendix.widget.web",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server --open",
+    "dev": "pluggable-widgets-tools start:ts",
+    "build": "pluggable-widgets-tools build:ts",
+    "format": "pluggable-widgets-tools format",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web",
+    "test:e2e:dev": "..\"/../../node_modules/.bin/cross-env\" DEBUG=true node ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "release": "pluggable-widgets-tools release:web",
+    "svncheckout": "..\"/../../node_modules/.bin/ts-node\" --project ../../../scripts/tsconfig.json ../../../scripts/svn/CheckoutProject.ts"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@types/classnames": "^2.2.6"
+  },
+  "dependencies": {
+    "@widgets-resources/piw-utils": "^1.0.0",
+    "classnames": "^2.2.6"
+  }
+}

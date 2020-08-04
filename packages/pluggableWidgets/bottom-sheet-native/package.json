@@ -1,0 +1,38 @@
+{
+  "name": "bottom-sheet-native",
+  "widgetName": "BottomSheet",
+  "version": "1.0.2",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "config": {
+    "widgetPath": "../test-project/mxproject/widgets",
+    "projectPath": "../test-project/mxproject"
+  },
+  "packagePath": "com.mendix.widget.native",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:native",
+    "build": "pluggable-widgets-tools build:native",
+    "release": "pluggable-widgets-tools release:native",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.native.config.js",
+    "version": "npm run release",
+    "postversion": "..\"/../../node_modules/.bin/ts-node\" ../../../scripts/release/UpdateGithubRelease.ts --project ../../../scripts/tsconfig.json"
+  },
+  "dependencies": {
+    "@native-mobile-resources/util-widgets": "^1.0.0",
+    "@widgets-resources/piw-utils": "^1.0.0",
+    "react-native-actionsheet": "^2.4.2",
+    "react-native-device-info": "5.5.3",
+    "react-native-modal": "^11.5.4",
+    "react-native-reanimated": "^1.0.1",
+    "reanimated-bottom-sheet": "^1.0.0-alpha.19"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@types/react-native-actionsheet": "^2.4.1",
+    "@types/react-native-modal": "^4.1.1"
+  }
+}
