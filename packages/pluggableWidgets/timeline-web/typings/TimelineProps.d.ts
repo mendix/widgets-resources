@@ -3,8 +3,8 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ComponentType, CSSProperties, ReactNode } from "react";
-import { DynamicValue, EditableValue, ListValue, ObjectItem, WebImage } from "mendix";
+import { ComponentType, CSSProperties } from "react";
+import { DynamicValue, ListValue, ListAttributeValue, ListWidgetValue, WebImage } from "mendix";
 
 export type RenderModeEnum = "basic" | "custom";
 
@@ -15,16 +15,16 @@ export interface TimelineContainerProps {
     tabIndex: number;
     renderMode: RenderModeEnum;
     data: ListValue;
-    eventTime: (item: ObjectItem) => EditableValue<Date>;
+    eventTime: ListAttributeValue<Date>;
     showDayDivider: boolean;
-    title?: (item: ObjectItem) => EditableValue<string>;
-    description?: (item: ObjectItem) => EditableValue<string>;
+    title?: ListAttributeValue<string>;
+    description?: ListAttributeValue<string>;
     icon?: DynamicValue<WebImage>;
-    customIcon?: (item: ObjectItem) => ReactNode;
-    customDayDivider?: (item: ObjectItem) => ReactNode;
-    customTitle?: (item: ObjectItem) => ReactNode;
-    customEventDateTime?: (item: ObjectItem) => ReactNode;
-    customDescription?: (item: ObjectItem) => ReactNode;
+    customIcon?: ListWidgetValue;
+    customDayDivider?: ListWidgetValue;
+    customTitle?: ListWidgetValue;
+    customEventDateTime?: ListWidgetValue;
+    customDescription?: ListWidgetValue;
 }
 
 export interface TimelinePreviewProps {
