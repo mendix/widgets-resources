@@ -64,7 +64,7 @@ function promptWidgetProperties(mxProjectDir, widgetName) {
             type: "input",
             name: "projectPath",
             message: "Mendix project path",
-            default: mxProjectDir ? mxProjectDir : "./test/TestProject"
+            default: mxProjectDir ? mxProjectDir : "./tests/TestProject"
         },
         {
             type: "list",
