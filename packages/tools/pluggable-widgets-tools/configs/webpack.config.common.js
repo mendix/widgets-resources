@@ -52,7 +52,7 @@ const widgetConfig = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: `${variables.projectPath}/src/**/*.xml`,
+                    from: join(variables.projectPath, "src/**/*.xml").replace(/\\/g, "/"),
                     toType: "template",
                     to: "widgets/[name].[ext]"
                 }

@@ -1,4 +1,4 @@
-const path = require("path");
+const { join, resolve } = require("path");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
@@ -11,9 +11,9 @@ const cwd = variables.path;
 
 const widgetConfig = {
     context: cwd,
-    entry: path.resolve(cwd, `./src/components/${widgetName}Container.ts`),
+    entry: resolve(cwd, `./src/components/${widgetName}Container.ts`),
     output: {
-        path: path.resolve(cwd, "dist/tmp"),
+        path: resolve(cwd, "dist/tmp"),
         filename: chunkData => {
             const fileName = chunkData.chunk.name === "main" ? widgetName : "[name]";
             return `widgets/com/mendix/widget/custom/${name}/${fileName}.js`;
@@ -24,7 +24,7 @@ const widgetConfig = {
     resolve: {
         extensions: [".ts", ".js", ".tsx", ".jsx"],
         alias: {
-            tests: path.resolve(cwd, "./tests")
+            tests: resolve(cwd, "./tests")
         }
     },
     module: {
@@ -73,20 +73,20 @@ const widgetConfig = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: "src/**/*.xml",
+                    from: join(cwd, "src/**/*.xml").replace(/\\/g, "/"),
                     toType: "template",
                     to: "widgets/[name].[ext]"
                 }
             ]
         }),
-        new webpack.ContextReplacementPlugin(/^testSourcePath$/, path.resolve(cwd, "src"))
+        new webpack.ContextReplacementPlugin(/^testSourcePath$/, resolve(cwd, "src"))
     ]
 };
 
 const previewConfig = {
-    entry: path.resolve(cwd, `./src/${widgetName}.webmodeler.ts`),
+    entry: resolve(cwd, `./src/${widgetName}.webmodeler.ts`),
     output: {
-        path: path.resolve(cwd, "dist/tmp"),
+        path: resolve(cwd, "dist/tmp"),
         filename: `widgets/${widgetName}.webmodeler.js`,
         libraryTarget: "commonjs"
     },

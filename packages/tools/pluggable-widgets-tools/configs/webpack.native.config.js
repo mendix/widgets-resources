@@ -1,5 +1,5 @@
 const webpack = require("webpack");
-const path = require("path");
+const { join } = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const variables = require("./variables");
 
@@ -10,7 +10,7 @@ const name = widgetName.toLowerCase();
 const widgetConfig = {
     entry: variables.widgetEntry,
     output: {
-        path: path.join(variables.projectPath, "/dist/tmp"),
+        path: join(variables.projectPath, "/dist/tmp"),
         filename: `widgets/${packagePath}/${name}/${widgetName}.js`,
         libraryTarget: "commonjs2"
     },
@@ -95,9 +95,9 @@ const widgetConfig = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: `${variables.projectPath}/src/**/*.xml`,
+                    from: join(variables.projectPath, "src/**/*.xml").replace(/\\/g, "/"),
                     toType: "template",
-                    to: `widgets/[name].[ext]`
+                    to: "widgets/[name].[ext]"
                 }
             ]
         }),
@@ -110,7 +110,7 @@ const editorConfigConfig = {
     devtool: false,
     entry: variables.editorConfigEntry,
     output: {
-        path: path.join(variables.projectPath, "/dist/tmp"),
+        path: join(variables.projectPath, "/dist/tmp"),
         filename: `widgets/${widgetName}.editorConfig.js`,
         libraryTarget: "commonjs"
     },
