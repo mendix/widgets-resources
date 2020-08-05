@@ -116,35 +116,34 @@
                     <caption>Position of paging bar</caption>
                     <description/>
                     <enumerationValues>
-                        <enumerationValue key="bottom">On the bottom</enumerationValue>
-                        <enumerationValue key="top">On top of grid</enumerationValue>
+                        <enumerationValue key="bottom">Below grid</enumerationValue>
+                        <enumerationValue key="top">Above grid</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Interactions">
+        </propertyGroup>
+        <propertyGroup caption="Capabilities">
+            <propertyGroup caption="Capabilities">
                 <property key="columnsSortable" type="boolean" defaultValue="true">
-                    <caption>Can sort columns</caption>
+                    <caption>Sorting</caption>
                     <description/>
                 </property>
                 <property key="columnsFilterable" type="boolean" defaultValue="false">
-                    <caption>Can filter columns</caption>
+                    <caption>Filtering</caption>
                     <description/>
                 </property>
                 <property key="columnsResizable" type="boolean" defaultValue="false">
-                    <caption>Can resize columns</caption>
+                    <caption>Resizing</caption>
                     <description/>
                 </property>
                 <property key="columnsDraggable" type="boolean" defaultValue="false">
-                    <caption>Can reorder columns</caption>
+                    <caption>Reordering</caption>
                     <description/>
                 </property>
                 <property key="columnsHidable" type="boolean" defaultValue="false">
-                    <caption>Can hide columns</caption>
+                    <caption>Hiding</caption>
                     <description />
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Visibility">
-                <systemProperty key="Visibility"/>
             </propertyGroup>
         </propertyGroup>
     </properties>

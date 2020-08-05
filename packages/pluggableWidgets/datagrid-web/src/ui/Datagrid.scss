@@ -72,6 +72,9 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
                     flex-grow: 1;
                     width: 100%;
                 }
+                > .form-group{
+                    margin-bottom: 0;
+                }
             }
         }
         .column-selector {
@@ -80,6 +83,7 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
             padding-right: 0;
             button {
                 padding: 8px;
+                align-self: self-end;
             }
             .column-selectors {
                 position: absolute;
