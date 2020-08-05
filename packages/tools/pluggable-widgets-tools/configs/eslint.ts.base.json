@@ -1,0 +1,158 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "jest/globals": true
+    },
+    "settings": {
+        "react": {
+            "createClass": "createReactClass",
+            "pragma": "createElement",
+            "version": "detect"
+        }
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "project": "tsconfig.json",
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": ["@typescript-eslint", "react", "jest"],
+    "rules": {
+        "linebreak-style": ["error", "unix"],
+        "no-unused-vars": [
+            "error",
+            {
+                "varsIgnorePattern": "createElement"
+            }
+        ],
+
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "varsIgnorePattern": "createElement"
+            }
+        ],
+        "@typescript-eslint/indent": "off",
+        "@typescript-eslint/no-object-literal-type-assertion": "off",
+        "@typescript-eslint/no-use-before-define": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-function-return-type": [
+            "warn",
+            {
+                "allowExpressions": true,
+                "allowTypedFunctionExpressions": true
+            }
+        ],
+        "@typescript-eslint/array-type": ["error", { "default": "array-simple" }],
+        "@typescript-eslint/explicit-member-accessibility": [
+            "error",
+            { "accessibility": "no-public", "overrides": { "parameterProperties": "explicit" } }
+        ],
+        "@typescript-eslint/member-ordering": [
+            "error",
+            {
+                "default": ["static-field", "instance-field", "constructor", "instance-method", "static-method"]
+            }
+        ],
+        "@typescript-eslint/no-empty-interface": ["error", { "allowSingleExtends": true }],
+        "@typescript-eslint/no-extraneous-class": "error",
+        "@typescript-eslint/no-for-in-array": "error",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-parameter-properties": "off",
+        "@typescript-eslint/no-this-alias": "error",
+        "@typescript-eslint/no-useless-constructor": "error",
+        "@typescript-eslint/prefer-for-of": "error",
+        "@typescript-eslint/prefer-function-type": "error",
+        "@typescript-eslint/unified-signatures": "error",
+
+        "react/display-name": "off",
+        "react/prop-types": "off",
+        "react/no-access-state-in-setstate": "error",
+        "react/no-did-mount-set-state": "error",
+        "react/no-find-dom-node": "off",
+        "react/no-will-update-set-state": "error",
+        "react/jsx-boolean-value": ["error", "never"],
+        "react/no-deprecated": "warn",
+        "react/jsx-uses-vars": "error",
+        "react/jsx-uses-react": "off",
+
+        "array-callback-return": "error",
+        "curly": "error",
+        "dot-notation": "error",
+        "eqeqeq": ["error", "allow-null"],
+        "guard-for-in": "error",
+        "new-parens": "error",
+        "no-async-promise-executor": "error",
+        "no-bitwise": "error",
+        "no-caller": "error",
+        "no-case-declarations": "off",
+        "no-dupe-class-members": "off",
+        "no-duplicate-imports": "error",
+        "no-extra-bind": "error",
+        "no-implied-eval": "error",
+        "no-loop-func": "error",
+        "no-new-func": "error",
+        "no-new-wrappers": "error",
+        "no-return-await": "error",
+        "no-sequences": "error",
+        "no-template-curly-in-string": "error",
+        "no-throw-literal": "error",
+        "no-unmodified-loop-condition": "error",
+        "no-unneeded-ternary": "error",
+        "no-unused-expressions": "error",
+        "no-useless-call": "error",
+        "no-useless-catch": "error",
+        "no-useless-computed-key": "error",
+        "no-useless-return": "error",
+        "no-undef": "off",
+        "no-undef-init": "error",
+        "no-var": "error",
+        "no-void": "error",
+        "object-shorthand": "error",
+        "one-var": ["error", "never"],
+        "prefer-arrow-callback": "error",
+        "prefer-const": "error",
+        "prefer-object-spread": "error",
+        "prefer-promise-reject-errors": "error",
+        "prefer-rest-params": "error",
+        "prefer-spread": "error",
+        "radix": "error",
+        "spaced-comment": "error",
+
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error"
+    },
+    "overrides": [
+        {
+            "files": [
+                "webpack.config.dev.js",
+                "webpack.config.prod.js",
+                "prettier.config.js",
+                "*.webmodeler.*",
+                "*.editorPreview.*",
+                ".eslintrc.js",
+                "wdio.conf.js"
+            ],
+            "rules": {
+                "@typescript-eslint/no-var-requires": "off",
+                "@typescript-eslint/class-name-casing": "off"
+            }
+        }
+    ]
+}

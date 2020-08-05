@@ -13,41 +13,41 @@ widgets on Native Mobile Resources module.
 
 ## Web & Hybrid widgets
 
-| Widget                                                                                            | Description                         |
-| :------------------------------------------------------------------------------------------------ | :---------------------------------- |
-| [Badge](https://github.com/mendix/widgets-resources/blob/master/packages-web/badge)               | Display text or a value as a badge. |
-| [Badge Button](https://github.com/mendix/widgets-resources/blob/master/packages-web/badge-button) | Display a button with a badge.      |
-| [Fieldset](https://github.com/mendix/widgets-resources/blob/master/packages-web/fieldset)         | Group form widgets.                 |
-| [Range Slider](https://github.com/mendix/widgets-resources/blob/master/packages-web/range-slider) | Displays a slider with min and max. |
-| [Rich Text](https://github.com/mendix/widgets-resources/blob/master/packages-web/rich-text)       | Display a full text editor.         |
-| [Signature](https://github.com/mendix/widgets-resources/blob/master/packages-web/signature)       | Displays a signature pad.           |
-| [Slider](https://github.com/mendix/widgets-resources/blob/master/packages-web/slider)             | Display a slider.                   |
-| [Switch](https://github.com/mendix/widgets-resources/blob/master/packages-web/switch)             | Displays a switch.                  |
-| [Video player](https://github.com/mendix/widgets-resources/blob/master/packages-web/video-player) | Play a video loaded from a URL.     |
+| Widget                                                                                                             | Description                         |
+| :----------------------------------------------------------------------------------------------------------------- | :---------------------------------- |
+| [Badge](https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/badge-web)               | Display text or a value as a badge. |
+| [Badge Button](https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/badge-button-web) | Display a button with a badge.      |
+| [Fieldset](https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/fieldset-web)         | Group form widgets.                 |
+| [Range Slider](https://github.com/mendix/widgets-resources/blob/master/packages/customWidgets/range-slider-web)    | Displays a slider with min and max. |
+| [Rich Text](https://github.com/mendix/widgets-resources/blob/master/packages/customWidgets/rich-text-web)          | Display a full text editor.         |
+| [Signature](https://github.com/mendix/widgets-resources/blob/master/packages/customWidgets/signature-web)          | Displays a signature pad.           |
+| [Slider](https://github.com/mendix/widgets-resources/blob/master/packages/customWidgets/slider-web)                | Display a slider.                   |
+| [Switch](https://github.com/mendix/widgets-resources/blob/master/packages/customWidgets/switch-web)                | Displays a switch.                  |
+| [Video player](https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/video-player-web) | Play a video loaded from a URL.     |
 
-[activity indicator]: https://github.com/mendix/widgets-resources/blob/master/packages-native/activity-indicator
-[app events]: https://github.com/mendix/widgets-resources/blob/master/packages-native/app-events
-[background image]: https://github.com/mendix/widgets-resources/blob/master/packages-native/background-image
-[badge]: https://github.com/mendix/widgets-resources/blob/master/packages-native/badge
-[barcode scanner]: https://github.com/mendix/widgets-resources/blob/master/packages-native/barcode-scanner
-[color picker]: https://github.com/mendix/widgets-resources/blob/master/packages-native/color-picker
-[feedback]: https://github.com/mendix/widgets-resources/blob/master/packages-native/feedback
-[floating action button]: https://github.com/mendix/widgets-resources/blob/master/packages-native/floating-action-button
-[maps]: https://github.com/mendix/widgets-resources/blob/master/packages-native/maps
-[notifications]: https://github.com/mendix/widgets-resources/blob/master/packages-native/notifications
-[progress bar]: https://github.com/mendix/widgets-resources/blob/master/packages-native/progress-bar
-[progress circle]: https://github.com/mendix/widgets-resources/blob/master/packages-native/progress-circle
-[qr code]: https://github.com/mendix/widgets-resources/blob/master/packages-native/qr-code
-[range slider]: https://github.com/mendix/widgets-resources/blob/master/packages-native/range-slider
-[rating]: https://github.com/mendix/widgets-resources/blob/master/packages-native/rating
-[slider]: https://github.com/mendix/widgets-resources/blob/master/packages-native/slider
-[toggle buttons]: https://github.com/mendix/widgets-resources/blob/master/packages-native/toggle-buttons
-[video player]: https://github.com/mendix/widgets-resources/blob/master/packages-native/video-player
-[web view]: https://github.com/mendix/widgets-resources/blob/master/packages-native/web-view
-[animation]: https://github.com/mendix/widgets-resources/blob/master/packages-native/animation
-[list view swipe]: https://github.com/mendix/widgets-resources/blob/master/packages-native/listview-swipe
-[intro screen]: https://github.com/mendix/widgets-resources/blob/master/packages-native/intro-screen
-[safe area view]: https://github.com/mendix/widgets-resources/blob/master/packages-native/safe-area-view
+[activity indicator]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/activity-indicator-native
+[app events]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/app-events-native
+[background image]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/background-image-native
+[badge]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/badge-native
+[barcode scanner]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/barcode-scanner-native
+[color picker]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/color-picker-native
+[feedback]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/feedback-native
+[floating action button]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/floating-action-button-native
+[maps]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/maps-native
+[notifications]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/notifications-native
+[progress bar]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/progress-bar-native
+[progress circle]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/progress-circle-native
+[qr code]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/qr-code-native
+[range slider]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/range-slider-native
+[rating]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/rating-native
+[slider]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/slider-native
+[toggle buttons]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/toggle-buttons-native
+[video player]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/video-player-native
+[web view]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/web-view-native
+[animation]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/animation-native
+[list view swipe]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/listview-swipe-native
+[intro screen]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/intro-screen-native
+[safe area view]: https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/safe-area-view-native
 
 ## Included nanoflow actions
 
@@ -90,27 +90,27 @@ See [CONTRIBUTING.md](https://github.com/mendix/widgets-resources/blob/master/CO
 
 -   `npm install` on root
 
-### For developing in `packages-native`:
+### For developing native widgets in `packages/pluggableWidgets`:
 
 -   Create a simple Mendix project in Studio
 -   Copy all of it's contents to `packages-native/test-project`.
--   Run `npm run build` on a desired widget folder. For ex: `packages-native/badge/`. This will build and copy the mpk
+-   Run `npm run build` on a desired widget folder. For ex: `packages/pluggableWidgets/badge-native/`. This will build and copy the mpk
     to the test-project's correct widget folder.
 -   Open and run the project in `packages-native/test-project` with Mendix Studio
 
-### For developing in `packages-web`:
+### For developing web widgets in `packages/pluggableWidgets`:
 
 -   Mendix projects for each widget already comes with repo with folder called
-    `packages-web/**WIDGETNAME**/tests/TestProjects/Mendix*`
--   Run `npm run build` on a desired widget folder. For ex: `packages-web/badge`. This will build and copy the mpk to
+    `packages/pluggableWidgets/**WIDGETNAME**/tests/TestProjects/Mendix*`
+-   Run `npm run build` on a desired widget folder. For ex: `packages/pluggableWidgets/badge-web`. This will build and copy the mpk to
     each Mendix project's correct widget folder.
 -   Open and run the project in `packages-native/test-project` with Mendix Studio
 
-### For developing in `packages-common/nanoflow-commons`:
+### For developing in `packages/jsActions`:
 
 -   Create a simple Mendix project in Studio.
--   Copy all of it's contents to `packages-common/nanoflow-commons/dist/mxproject`.
--   Run `npm run build` on `packages-common/nanoflow-commons`. This will build and copy the mpk to dist/mxproject's
+-   Copy all of it's contents to `packages/jsActions/nanoflow-commons/dist/mxproject`.
+-   Run `npm run build` on `nanoflow-commons`. This will build and copy the mpk to dist/mxproject's
     correct folder.
 
 Please bear in mind that when you develop JSActions, creation process is not automatically picked up by Modeler. Which

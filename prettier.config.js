@@ -1,4 +1,4 @@
-const base = require("./packages-common/pluggable-widgets-tools/configs/prettier.base.json");
+const base = require("./packages/tools/pluggable-widgets-tools/configs/prettier.base.json");
 
 module.exports = {
     ...base,

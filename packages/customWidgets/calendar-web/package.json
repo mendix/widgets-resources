@@ -1,0 +1,66 @@
+{
+  "name": "calendar-web",
+  "widgetName": "Calendar",
+  "version": "1.0.6",
+  "description": "Display and manage calendar events",
+  "copyright": "Mendix BV",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "scripts": {
+    "start": "utils-react-widgets start",
+    "dev": "utils-react-widgets dev",
+    "format": "prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+    "test": "npm run test:unit",
+    "test:unit": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web",
+    "test:e2e:dev": "..\"/../../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint:fix": "npm run lint -- --fix",
+    "build": "utils-react-widgets build",
+    "release": "utils-react-widgets release",
+    "svncheckout": "..\"/../../node_modules/.bin/ts-node\" --project ../../../scripts/tsconfig.json ../../../scripts/svn/CheckoutProject.ts"
+  },
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000,
+    "testProjectId": "efe7ce5d-5c1f-4f4a-9fe9-beebe2a16bb0",
+    "testProjects": [
+      {
+        "branch": "trunk",
+        "path": "./tests/TestProjects/Mendix/"
+      },
+      {
+        "branch": "MX_7.23",
+        "path": "./tests/TestProjects/Mendix7/"
+      },
+      {
+        "branch": "MX_8",
+        "path": "./tests/TestProjects/Mendix8/"
+      },
+      {
+        "branch": "nightly",
+        "path": "./tests/TestProjects/Nightly/"
+      }
+    ]
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@types/classnames": "^2.2.6",
+    "@types/date-arithmetic": "^3.1.2",
+    "@types/react-big-calendar": "0.20.20",
+    "@types/react-dnd": "^3.0.2",
+    "@types/react-dnd-html5-backend": "^3.0.2",
+    "@widgets-resources/utils-react-widgets": "0.0.1"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "date-arithmetic": "^3.1.0",
+    "moment": "^2.24.0",
+    "react-big-calendar": "0.19.2",
+    "react-dnd": "2.6.0",
+    "react-dnd-html5-backend": "^5.0.1"
+  }
+}

@@ -19,13 +19,3 @@
 *.png binary
 *.jpg binary
 *.gif binary
-
-# Test Mendix should use CRLF
-**/TestProjects/**/*.ts text eol=crlf
-**/TestProjects/**/*.tsx text eol=crlf
-**/TestProjects/**/*.js text eol=crlf
-**/TestProjects/**/*.jsx text eol=crlf
-**/TestProjects/**/*.css text eol=crlf
-**/TestProjects/**/*.scss text eol=crlf
-**/TestProjects/**/*.json text eol=crlf
-**/TestProjects/**/*.java text eol=crlf

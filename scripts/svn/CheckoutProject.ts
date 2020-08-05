@@ -44,15 +44,10 @@ async function main(): Promise<void> {
             const testPath = join(cwd, testProject.path);
             // eslint-disable-next-line no-console
             console.log(
-                `Checking testProject ${packageContent.config.testProjectId}, branch ${testProject.branch}, revision ${testProject.revision} to ${testPath}`
+                `Checking testProject ${packageContent.config.testProjectId}, branch ${testProject.branch} to ${testPath}`
             );
 
-            svnService.checkOutBranch(
-                packageContent.config.testProjectId,
-                testProject.branch,
-                testPath,
-                testProject.revision
-            );
+            svnService.checkOutBranch(packageContent.config.testProjectId, testProject.branch, testPath);
         });
     }
 }

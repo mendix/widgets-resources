@@ -1,0 +1,42 @@
+{
+  "name": "web-nanoflow-actions",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "..\"/../../node_modules/.bin/concurrently\" \"npm:watch-*\"",
+    "watch-ts": "..\"/../../node_modules/.bin/tsc\" --project src/tsconfig.json --watch ",
+    "watch-copy": "npm-watch",
+    "build": "npm run build:tsc",
+    "prebuild:tsc": "..\"/../../node_modules/.bin/rimraf\" dist/tsc",
+    "build:tsc": "..\"/../../node_modules/.bin/tsc\" --project src/tsconfig.json",
+    "postbuild": "node ../../../scripts/modules/copyActionsToTestProject.js",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --parser-options=project:src/tsconfig.json --ext .ts src/",
+    "lint:scripts": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --parser-options=project:scripts/tsconfig.json --ext .ts scripts/",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "config": {
+    "moduleName": "WebNanoflowActions",
+    "testProjectId": "7e5f29da-6253-45d6-af2b-ac949c926d08",
+    "projectName": "WebNanoflowActions.mpr",
+    "testProjects": [
+      {
+        "branch": "trunk",
+        "path": "./tests/TestProjects/Mendix8",
+        "mendixVersion": "8.4.4.5"
+      }
+    ]
+  },
+  "watch": {
+    "postbuild": "dist/tsc/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@types/big.js": "^4.0.5",
+    "npm-watch": "^0.6.0"
+  }
+}
