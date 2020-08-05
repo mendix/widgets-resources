@@ -12,10 +12,8 @@ export function getProperties(values: DatagridPreviewProps, defaultProperties: P
         if (!values.columnsFilterable) {
             hidePropertyIn(defaultProperties, values, "columns", index, "filterable");
             hidePropertyIn(defaultProperties, values, "columns", index, "customFilter");
-        } else {
-            if (column.filterable !== "custom") {
-                hidePropertyIn(defaultProperties, values, "columns", index, "customFilter");
-            }
+        } else if (column.filterable !== "custom") {
+            hidePropertyIn(defaultProperties, values, "columns", index, "customFilter");
         }
         if (!values.columnsResizable) {
             hidePropertyIn(defaultProperties, values, "columns", index, "resizable");

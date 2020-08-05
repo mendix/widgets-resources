@@ -42,7 +42,7 @@ export interface TableProps<T> {
     hasMoreItems: boolean;
     cellRenderer: (renderWrapper: (children: ReactNode) => ReactElement, value: T, columnIndex: number) => ReactElement;
     valueForFilter: (value: T, columnIndex: number) => string | undefined;
-    filterRenderer: (columnIndex: number) => ReactNode;
+    filterRenderer: (renderWrapper: (children: ReactNode) => ReactElement, columnIndex: number) => ReactElement;
 }
 
 export function Table<T>(props: TableProps<T>): ReactElement {
@@ -74,7 +74,10 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 isVisible: column.hidable !== "hidden",
                 canHide: column.hidable !== "no",
                 canDrag: column.draggable,
-                customFilter: column.filterable === "custom" ? props.filterRenderer(index) : null,
+                customFilter:
+                    column.filterable === "custom"
+                        ? props.filterRenderer((children: ReactNode) => <div className="filter">{children}</div>, index)
+                        : null,
                 disableSortBy: !column.sortable,
                 disableResizing: !column.resizable,
                 disableFilters: column.filterable === "no",
@@ -99,13 +102,15 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     const defaultColumn: ColumnInterface<{ item: T }> = useMemo(
         () => ({
             Filter: ({ column: { filterValue, setFilter } }): ReactElement => (
-                <input
-                    className="form-control"
-                    value={filterValue || ""}
-                    onChange={e => {
-                        setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
-                    }}
-                />
+                <div className="filter">
+                    <input
+                        className="form-control"
+                        value={filterValue || ""}
+                        onChange={e => {
+                            setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+                        }}
+                    />
+                </div>
             ),
             ...(props.columnsResizable
                 ? {

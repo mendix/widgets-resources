@@ -73,9 +73,9 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 [props.columns]
             )}
             filterRenderer={useCallback(
-                columnIndex => {
+                (renderWrapper, columnIndex) => {
                     const column = props.columns[columnIndex];
-                    return column.customFilter;
+                    return renderWrapper(column.customFilter);
                 },
                 [props.columns]
             )}
