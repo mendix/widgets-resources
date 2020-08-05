@@ -25,7 +25,7 @@ describe("Slider widget", () => {
                     .$("input")
                     .getValue()
             ).toBe("10");
-            expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 50%;");
+            expect(sliderWidget.getHandle().getAttribute("style")).toContain("left: 50%;");
         });
 
         it("renders without context", () => {
@@ -36,7 +36,7 @@ describe("Slider widget", () => {
             expect(sliderWidget.getRoot().getAttribute("class")).toContain("rc-slider-disabled");
             expect(sliderWidget.getMinimumMarker().label.getText()).toBe("0");
             expect(sliderWidget.getMaximumMarker().label.getText()).toBe("100");
-            expect(sliderWidget.getHandle().getAttribute("style")).toBe("left: 50%;");
+            expect(sliderWidget.getHandle().getAttribute("style")).toContain("left: 50%;");
             expect(sliderWidget.getHandle().getCSSProperty("cursor").value).toBe("not-allowed");
             sliderWidget.waitForTrackDisplayed(true);
         });
@@ -47,24 +47,11 @@ describe("Slider widget", () => {
             const sliderWidget = new SliderWidget("slider");
             const dataGrid = page.getWidget("grid");
             const dataGridRows = dataGrid.$$("td");
-
             expect(sliderWidget.getHandle().getCSSProperty("cursor").value).toBe("not-allowed");
-
             dataGridRows[0].click();
-            browser.waitUntil(
-                () =>
-                    sliderWidget.getHandle().getCSSProperty("cursor").value === "grab" &&
-                    sliderWidget.getHandle().getAttribute("style") === "left: 50%;",
-                5000
-            );
-
+            expect(sliderWidget.getHandle().getAttribute("style")).toContain("left: 50%;");
             dataGridRows[1].click();
-            browser.waitUntil(
-                () =>
-                    sliderWidget.getHandle().getCSSProperty("cursor").value === "grab" &&
-                    sliderWidget.getHandle().getAttribute("style") === "left: 80%;",
-                5000
-            );
+            expect(sliderWidget.getHandle().getAttribute("style")).toContain("left: 80%;");
         });
 
         it("triggers a microflow after slide", () => {
@@ -112,11 +99,11 @@ describe("Slider widget", () => {
 
             const markers = sliderWidget.getMarkers();
             expect(markers.length).toBe(10);
-            expect(markers[0].dot.getAttribute("style")).toBe("left: 0%;");
+            expect(markers[0].dot.getCSSProperty("left").value).toBe("0px");
             expect(markers[0].label.getText()).toBe("0");
-            expect(markers[markers.length - 1].dot.getAttribute("style")).toBe("left: 100%;");
+            expect(markers[markers.length - 1].dot.getAttribute("style")).toContain("left: 100%;");
             expect(markers[markers.length - 1].label.getText()).toBe("20");
-            expect(markers[3].dot.getAttribute("style")).toBe("left: 33.5%;");
+            expect(markers[3].dot.getAttribute("style")).toContain("left: 33.5%;");
             expect(markers[3].label.getText()).toBe("6.7");
         });
 
@@ -162,10 +149,10 @@ describe("Slider widget", () => {
             it("slides with step size", () => {
                 handle.click({ x: 58 });
                 expect(textValueWidget.getText()).toContain("60000");
-                expect(handle.getAttribute("style")).toBe("left: 0%;");
+                expect(handle.getAttribute("style")).toContain("left: 0%;");
                 handle.click({ x: 59 });
                 expect(textValueWidget.getText()).toContain("120000");
-                expect(handle.getAttribute("style")).toBe("left: 25%;");
+                expect(handle.getAttribute("style")).toContain("left: 25%;");
             });
 
             it("snaps to intermediate markers", () => {
@@ -173,16 +160,16 @@ describe("Slider widget", () => {
 
                 sliderWidget.dragHandleTo(markers[1]);
                 expect(textValueWidget.getText()).toContain("140000");
-                expect(handle.getAttribute("style")).toBe("left: 33.3333%;");
+                expect(handle.getAttribute("style")).toContain("left: 33.3333%;");
             });
 
             it("slides without using intermediate marker as base", () => {
                 handle.click({ x: 39 });
                 expect(textValueWidget.getText()).toContain("140000");
-                expect(handle.getAttribute("style")).toBe("left: 33.3333%;");
+                expect(handle.getAttribute("style")).toContain("left: 33.3333%;");
                 handle.click({ x: 40 });
                 expect(textValueWidget.getText()).toContain("180000");
-                expect(handle.getAttribute("style")).toBe("left: 50%;");
+                expect(handle.getAttribute("style")).toContain("left: 50%;");
             });
         });
 
