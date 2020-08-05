@@ -3892,6 +3892,4027 @@ exports[`Table renders the structure correctly 1`] = `
 </div>
 `;
 
+exports[`Table renders the structure correctly with custom filtering 1`] = `
+<div
+  className="test"
+>
+  <div
+    className="table"
+    role="table"
+    style={
+      Object {
+        "minWidth": "150px",
+      }
+    }
+  >
+    <div
+      className="thead"
+      role="rowgroup"
+    >
+      <div
+        className="tr"
+        key="headers_row_0"
+        role="row"
+        style={
+          Object {
+            "display": "flex",
+            "flex": "1 0 auto",
+            "minWidth": "0px",
+          }
+        }
+      >
+        <Header
+          column={
+            Object {
+              "Cell": [Function],
+              "Filter": [Function],
+              "Footer": [Function],
+              "Header": "Test",
+              "accessor": [Function],
+              "canDrag": false,
+              "canFilter": true,
+              "canHide": false,
+              "canResize": false,
+              "canSort": false,
+              "customFilter": <input
+                type="text"
+                value="dummy"
+              />,
+              "depth": 0,
+              "disableFilters": false,
+              "disableResizing": true,
+              "disableSortBy": true,
+              "filter": "text",
+              "filterValue": undefined,
+              "filteredRows": Array [
+                Object {
+                  "allCells": Array [
+                    Object {
+                      "column": [Circular],
+                      "getCellProps": [Function],
+                      "render": [Function],
+                      "row": [Circular],
+                      "value": Object {
+                        "id": "123456",
+                      },
+                    },
+                  ],
+                  "cells": Array [
+                    Object {
+                      "column": [Circular],
+                      "getCellProps": [Function],
+                      "render": [Function],
+                      "row": [Circular],
+                      "value": Object {
+                        "id": "123456",
+                      },
+                    },
+                  ],
+                  "depth": 0,
+                  "getRowProps": [Function],
+                  "id": "0",
+                  "index": 0,
+                  "original": Object {
+                    "item": Object {
+                      "id": "123456",
+                    },
+                  },
+                  "originalSubRows": Array [],
+                  "subRows": Array [],
+                  "values": Object {
+                    "0": Object {
+                      "id": "123456",
+                    },
+                  },
+                },
+              ],
+              "getFooterProps": [Function],
+              "getHeaderProps": [Function],
+              "getSortByToggleProps": [Function],
+              "getToggleHiddenProps": [Function],
+              "id": "0",
+              "isResizing": false,
+              "isSorted": false,
+              "isSortedDesc": undefined,
+              "isVisible": true,
+              "maxWidth": 9007199254740991,
+              "minWidth": 0,
+              "originalWidth": 150,
+              "parent": undefined,
+              "preFilteredRows": Array [
+                Object {
+                  "allCells": Array [
+                    Object {
+                      "column": [Circular],
+                      "getCellProps": [Function],
+                      "render": [Function],
+                      "row": [Circular],
+                      "value": Object {
+                        "id": "123456",
+                      },
+                    },
+                  ],
+                  "cells": Array [
+                    Object {
+                      "column": [Circular],
+                      "getCellProps": [Function],
+                      "render": [Function],
+                      "row": [Circular],
+                      "value": Object {
+                        "id": "123456",
+                      },
+                    },
+                  ],
+                  "depth": 0,
+                  "getRowProps": [Function],
+                  "id": "0",
+                  "index": 0,
+                  "original": Object {
+                    "item": Object {
+                      "id": "123456",
+                    },
+                  },
+                  "originalSubRows": Array [],
+                  "subRows": Array [],
+                  "values": Object {
+                    "0": Object {
+                      "id": "123456",
+                    },
+                  },
+                },
+              ],
+              "render": [Function],
+              "setFilter": [Function],
+              "sortDescFirst": false,
+              "sortType": "alphanumeric",
+              "sortedIndex": -1,
+              "toggleHidden": [Function],
+              "totalFlexWidth": 0,
+              "totalLeft": 0,
+              "totalMaxWidth": 9007199254740991,
+              "totalMinWidth": 0,
+              "totalVisibleHeaderCount": 1,
+              "totalWidth": 150,
+              "width": 150,
+            }
+          }
+          dragOver=""
+          draggable={false}
+          filterable={true}
+          key="headers_column_0"
+          resizable={false}
+          setColumnOrder={[Function]}
+          setDragOver={[Function]}
+          sortable={false}
+          visibleColumns={
+            Array [
+              Object {
+                "Cell": [Function],
+                "Filter": [Function],
+                "Footer": [Function],
+                "Header": "Test",
+                "accessor": [Function],
+                "canDrag": false,
+                "canFilter": true,
+                "canHide": false,
+                "canResize": false,
+                "canSort": false,
+                "customFilter": <input
+                  type="text"
+                  value="dummy"
+                />,
+                "depth": 0,
+                "disableFilters": false,
+                "disableResizing": true,
+                "disableSortBy": true,
+                "filter": "text",
+                "filterValue": undefined,
+                "filteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "cells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "getFooterProps": [Function],
+                "getHeaderProps": [Function],
+                "getSortByToggleProps": [Function],
+                "getToggleHiddenProps": [Function],
+                "id": "0",
+                "isResizing": false,
+                "isSorted": false,
+                "isSortedDesc": undefined,
+                "isVisible": true,
+                "maxWidth": 9007199254740991,
+                "minWidth": 0,
+                "originalWidth": 150,
+                "parent": undefined,
+                "preFilteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "cells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "render": [Function],
+                "setFilter": [Function],
+                "sortDescFirst": false,
+                "sortType": "alphanumeric",
+                "sortedIndex": -1,
+                "toggleHidden": [Function],
+                "totalFlexWidth": 0,
+                "totalLeft": 0,
+                "totalMaxWidth": 9007199254740991,
+                "totalMinWidth": 0,
+                "totalVisibleHeaderCount": 1,
+                "totalWidth": 150,
+                "width": 150,
+              },
+            ]
+          }
+        />
+      </div>
+    </div>
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={false}
+      role="rowgroup"
+      setPage={[MockFunction]}
+    >
+      <div
+        className="tr"
+        key="row_0"
+        role="row"
+        style={
+          Object {
+            "display": "flex",
+            "flex": "1 0 auto",
+            "minWidth": "0px",
+          }
+        }
+      >
+        <Cell
+          allColumns={
+            Array [
+              Object {
+                "Cell": [Function],
+                "Filter": [Function],
+                "Footer": [Function],
+                "Header": "Test",
+                "accessor": [Function],
+                "canDrag": false,
+                "canFilter": true,
+                "canHide": false,
+                "canResize": false,
+                "canSort": false,
+                "customFilter": <input
+                  type="text"
+                  value="dummy"
+                />,
+                "depth": 0,
+                "disableFilters": false,
+                "disableResizing": true,
+                "disableSortBy": true,
+                "filter": "text",
+                "filterValue": undefined,
+                "filteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "cells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "getFooterProps": [Function],
+                "getHeaderProps": [Function],
+                "getSortByToggleProps": [Function],
+                "getToggleHiddenProps": [Function],
+                "id": "0",
+                "isResizing": false,
+                "isSorted": false,
+                "isSortedDesc": undefined,
+                "isVisible": true,
+                "maxWidth": 9007199254740991,
+                "minWidth": 0,
+                "originalWidth": 150,
+                "parent": undefined,
+                "preFilteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "cells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "render": [Function],
+                "setFilter": [Function],
+                "sortDescFirst": false,
+                "sortType": "alphanumeric",
+                "sortedIndex": -1,
+                "toggleHidden": [Function],
+                "totalFlexWidth": 0,
+                "totalLeft": 0,
+                "totalMaxWidth": 9007199254740991,
+                "totalMinWidth": 0,
+                "totalVisibleHeaderCount": 1,
+                "totalWidth": 150,
+                "width": 150,
+              },
+            ]
+          }
+          allColumnsHidden={false}
+          canNextPage={false}
+          canPreviousPage={false}
+          cell={
+            Object {
+              "column": Object {
+                "Cell": [Function],
+                "Filter": [Function],
+                "Footer": [Function],
+                "Header": "Test",
+                "accessor": [Function],
+                "canDrag": false,
+                "canFilter": true,
+                "canHide": false,
+                "canResize": false,
+                "canSort": false,
+                "customFilter": <input
+                  type="text"
+                  value="dummy"
+                />,
+                "depth": 0,
+                "disableFilters": false,
+                "disableResizing": true,
+                "disableSortBy": true,
+                "filter": "text",
+                "filterValue": undefined,
+                "filteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      [Circular],
+                    ],
+                    "cells": Array [
+                      [Circular],
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "getFooterProps": [Function],
+                "getHeaderProps": [Function],
+                "getSortByToggleProps": [Function],
+                "getToggleHiddenProps": [Function],
+                "id": "0",
+                "isResizing": false,
+                "isSorted": false,
+                "isSortedDesc": undefined,
+                "isVisible": true,
+                "maxWidth": 9007199254740991,
+                "minWidth": 0,
+                "originalWidth": 150,
+                "parent": undefined,
+                "preFilteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      [Circular],
+                    ],
+                    "cells": Array [
+                      [Circular],
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "render": [Function],
+                "setFilter": [Function],
+                "sortDescFirst": false,
+                "sortType": "alphanumeric",
+                "sortedIndex": -1,
+                "toggleHidden": [Function],
+                "totalFlexWidth": 0,
+                "totalLeft": 0,
+                "totalMaxWidth": 9007199254740991,
+                "totalMinWidth": 0,
+                "totalVisibleHeaderCount": 1,
+                "totalWidth": 150,
+                "width": 150,
+              },
+              "getCellProps": [Function],
+              "render": [Function],
+              "row": Object {
+                "allCells": Array [
+                  [Circular],
+                ],
+                "cells": Array [
+                  [Circular],
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+              "value": Object {
+                "id": "123456",
+              },
+            }
+          }
+          column={
+            Object {
+              "Cell": [Function],
+              "Filter": [Function],
+              "Footer": [Function],
+              "Header": "Test",
+              "accessor": [Function],
+              "canDrag": false,
+              "canFilter": true,
+              "canHide": false,
+              "canResize": false,
+              "canSort": false,
+              "customFilter": <input
+                type="text"
+                value="dummy"
+              />,
+              "depth": 0,
+              "disableFilters": false,
+              "disableResizing": true,
+              "disableSortBy": true,
+              "filter": "text",
+              "filterValue": undefined,
+              "filteredRows": Array [
+                Object {
+                  "allCells": Array [
+                    Object {
+                      "column": [Circular],
+                      "getCellProps": [Function],
+                      "render": [Function],
+                      "row": [Circular],
+                      "value": Object {
+                        "id": "123456",
+                      },
+                    },
+                  ],
+                  "cells": Array [
+                    Object {
+                      "column": [Circular],
+                      "getCellProps": [Function],
+                      "render": [Function],
+                      "row": [Circular],
+                      "value": Object {
+                        "id": "123456",
+                      },
+                    },
+                  ],
+                  "depth": 0,
+                  "getRowProps": [Function],
+                  "id": "0",
+                  "index": 0,
+                  "original": Object {
+                    "item": Object {
+                      "id": "123456",
+                    },
+                  },
+                  "originalSubRows": Array [],
+                  "subRows": Array [],
+                  "values": Object {
+                    "0": Object {
+                      "id": "123456",
+                    },
+                  },
+                },
+              ],
+              "getFooterProps": [Function],
+              "getHeaderProps": [Function],
+              "getSortByToggleProps": [Function],
+              "getToggleHiddenProps": [Function],
+              "id": "0",
+              "isResizing": false,
+              "isSorted": false,
+              "isSortedDesc": undefined,
+              "isVisible": true,
+              "maxWidth": 9007199254740991,
+              "minWidth": 0,
+              "originalWidth": 150,
+              "parent": undefined,
+              "preFilteredRows": Array [
+                Object {
+                  "allCells": Array [
+                    Object {
+                      "column": [Circular],
+                      "getCellProps": [Function],
+                      "render": [Function],
+                      "row": [Circular],
+                      "value": Object {
+                        "id": "123456",
+                      },
+                    },
+                  ],
+                  "cells": Array [
+                    Object {
+                      "column": [Circular],
+                      "getCellProps": [Function],
+                      "render": [Function],
+                      "row": [Circular],
+                      "value": Object {
+                        "id": "123456",
+                      },
+                    },
+                  ],
+                  "depth": 0,
+                  "getRowProps": [Function],
+                  "id": "0",
+                  "index": 0,
+                  "original": Object {
+                    "item": Object {
+                      "id": "123456",
+                    },
+                  },
+                  "originalSubRows": Array [],
+                  "subRows": Array [],
+                  "values": Object {
+                    "0": Object {
+                      "id": "123456",
+                    },
+                  },
+                },
+              ],
+              "render": [Function],
+              "setFilter": [Function],
+              "sortDescFirst": false,
+              "sortType": "alphanumeric",
+              "sortedIndex": -1,
+              "toggleHidden": [Function],
+              "totalFlexWidth": 0,
+              "totalLeft": 0,
+              "totalMaxWidth": 9007199254740991,
+              "totalMinWidth": 0,
+              "totalVisibleHeaderCount": 1,
+              "totalWidth": 150,
+              "width": 150,
+            }
+          }
+          columns={
+            Array [
+              Object {
+                "Cell": [Function],
+                "Filter": [Function],
+                "Footer": [Function],
+                "Header": "Test",
+                "accessor": [Function],
+                "canDrag": false,
+                "canFilter": true,
+                "canHide": false,
+                "canResize": false,
+                "canSort": false,
+                "customFilter": <input
+                  type="text"
+                  value="dummy"
+                />,
+                "depth": 0,
+                "disableFilters": false,
+                "disableResizing": true,
+                "disableSortBy": true,
+                "filter": "text",
+                "filterValue": undefined,
+                "filteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "cells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "getFooterProps": [Function],
+                "getHeaderProps": [Function],
+                "getSortByToggleProps": [Function],
+                "getToggleHiddenProps": [Function],
+                "id": "0",
+                "isResizing": false,
+                "isSorted": false,
+                "isSortedDesc": undefined,
+                "isVisible": true,
+                "maxWidth": 9007199254740991,
+                "minWidth": 0,
+                "originalWidth": 150,
+                "parent": undefined,
+                "preFilteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "cells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "render": [Function],
+                "setFilter": [Function],
+                "sortDescFirst": false,
+                "sortType": "alphanumeric",
+                "sortedIndex": -1,
+                "toggleHidden": [Function],
+                "totalFlexWidth": 0,
+                "totalLeft": 0,
+                "totalMaxWidth": 9007199254740991,
+                "totalMinWidth": 0,
+                "totalVisibleHeaderCount": 1,
+                "totalWidth": 150,
+                "width": 150,
+              },
+            ]
+          }
+          data={
+            Array [
+              Object {
+                "item": Object {
+                  "id": "123456",
+                },
+              },
+            ]
+          }
+          defaultColumn={
+            Object {
+              "Filter": [Function],
+            }
+          }
+          disableFilters={false}
+          disableMultiSort={true}
+          disableResizing={true}
+          disableSortBy={true}
+          dispatch={[Function]}
+          filterTypes={
+            Object {
+              "text": [Function],
+            }
+          }
+          filteredFlatRows={
+            Array [
+              Object {
+                "allCells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "cells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+            ]
+          }
+          filteredRows={
+            Array [
+              Object {
+                "allCells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": [Circular],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": [Circular],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "cells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": [Circular],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": [Circular],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+            ]
+          }
+          filteredRowsById={
+            Object {
+              "0": Object {
+                "allCells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "cells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+            }
+          }
+          flatHeaders={
+            Array [
+              Object {
+                "Cell": [Function],
+                "Filter": [Function],
+                "Footer": [Function],
+                "Header": "Test",
+                "accessor": [Function],
+                "canDrag": false,
+                "canFilter": true,
+                "canHide": false,
+                "canResize": false,
+                "canSort": false,
+                "customFilter": <input
+                  type="text"
+                  value="dummy"
+                />,
+                "depth": 0,
+                "disableFilters": false,
+                "disableResizing": true,
+                "disableSortBy": true,
+                "filter": "text",
+                "filterValue": undefined,
+                "filteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "cells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "getFooterProps": [Function],
+                "getHeaderProps": [Function],
+                "getSortByToggleProps": [Function],
+                "getToggleHiddenProps": [Function],
+                "id": "0",
+                "isResizing": false,
+                "isSorted": false,
+                "isSortedDesc": undefined,
+                "isVisible": true,
+                "maxWidth": 9007199254740991,
+                "minWidth": 0,
+                "originalWidth": 150,
+                "parent": undefined,
+                "preFilteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "cells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "render": [Function],
+                "setFilter": [Function],
+                "sortDescFirst": false,
+                "sortType": "alphanumeric",
+                "sortedIndex": -1,
+                "toggleHidden": [Function],
+                "totalFlexWidth": 0,
+                "totalLeft": 0,
+                "totalMaxWidth": 9007199254740991,
+                "totalMinWidth": 0,
+                "totalVisibleHeaderCount": 1,
+                "totalWidth": 150,
+                "width": 150,
+              },
+            ]
+          }
+          flatRows={
+            Array [
+              Object {
+                "allCells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "cells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+            ]
+          }
+          footerGroups={
+            Array [
+              Object {
+                "getFooterGroupProps": [Function],
+                "getHeaderGroupProps": [Function],
+                "headers": Array [
+                  Object {
+                    "Cell": [Function],
+                    "Filter": [Function],
+                    "Footer": [Function],
+                    "Header": "Test",
+                    "accessor": [Function],
+                    "canDrag": false,
+                    "canFilter": true,
+                    "canHide": false,
+                    "canResize": false,
+                    "canSort": false,
+                    "customFilter": <input
+                      type="text"
+                      value="dummy"
+                    />,
+                    "depth": 0,
+                    "disableFilters": false,
+                    "disableResizing": true,
+                    "disableSortBy": true,
+                    "filter": "text",
+                    "filterValue": undefined,
+                    "filteredRows": Array [
+                      Object {
+                        "allCells": Array [
+                          Object {
+                            "column": [Circular],
+                            "getCellProps": [Function],
+                            "render": [Function],
+                            "row": [Circular],
+                            "value": Object {
+                              "id": "123456",
+                            },
+                          },
+                        ],
+                        "cells": Array [
+                          Object {
+                            "column": [Circular],
+                            "getCellProps": [Function],
+                            "render": [Function],
+                            "row": [Circular],
+                            "value": Object {
+                              "id": "123456",
+                            },
+                          },
+                        ],
+                        "depth": 0,
+                        "getRowProps": [Function],
+                        "id": "0",
+                        "index": 0,
+                        "original": Object {
+                          "item": Object {
+                            "id": "123456",
+                          },
+                        },
+                        "originalSubRows": Array [],
+                        "subRows": Array [],
+                        "values": Object {
+                          "0": Object {
+                            "id": "123456",
+                          },
+                        },
+                      },
+                    ],
+                    "getFooterProps": [Function],
+                    "getHeaderProps": [Function],
+                    "getSortByToggleProps": [Function],
+                    "getToggleHiddenProps": [Function],
+                    "id": "0",
+                    "isResizing": false,
+                    "isSorted": false,
+                    "isSortedDesc": undefined,
+                    "isVisible": true,
+                    "maxWidth": 9007199254740991,
+                    "minWidth": 0,
+                    "originalWidth": 150,
+                    "parent": undefined,
+                    "preFilteredRows": Array [
+                      Object {
+                        "allCells": Array [
+                          Object {
+                            "column": [Circular],
+                            "getCellProps": [Function],
+                            "render": [Function],
+                            "row": [Circular],
+                            "value": Object {
+                              "id": "123456",
+                            },
+                          },
+                        ],
+                        "cells": Array [
+                          Object {
+                            "column": [Circular],
+                            "getCellProps": [Function],
+                            "render": [Function],
+                            "row": [Circular],
+                            "value": Object {
+                              "id": "123456",
+                            },
+                          },
+                        ],
+                        "depth": 0,
+                        "getRowProps": [Function],
+                        "id": "0",
+                        "index": 0,
+                        "original": Object {
+                          "item": Object {
+                            "id": "123456",
+                          },
+                        },
+                        "originalSubRows": Array [],
+                        "subRows": Array [],
+                        "values": Object {
+                          "0": Object {
+                            "id": "123456",
+                          },
+                        },
+                      },
+                    ],
+                    "render": [Function],
+                    "setFilter": [Function],
+                    "sortDescFirst": false,
+                    "sortType": "alphanumeric",
+                    "sortedIndex": -1,
+                    "toggleHidden": [Function],
+                    "totalFlexWidth": 0,
+                    "totalLeft": 0,
+                    "totalMaxWidth": 9007199254740991,
+                    "totalMinWidth": 0,
+                    "totalVisibleHeaderCount": 1,
+                    "totalWidth": 150,
+                    "width": 150,
+                  },
+                ],
+              },
+            ]
+          }
+          getHooks={[Function]}
+          getRowId={[Function]}
+          getSubRows={[Function]}
+          getTableBodyProps={[Function]}
+          getTableProps={[Function]}
+          getToggleHideAllColumnsProps={[Function]}
+          gotoPage={[Function]}
+          headerGroups={
+            Array [
+              Object {
+                "getFooterGroupProps": [Function],
+                "getHeaderGroupProps": [Function],
+                "headers": Array [
+                  Object {
+                    "Cell": [Function],
+                    "Filter": [Function],
+                    "Footer": [Function],
+                    "Header": "Test",
+                    "accessor": [Function],
+                    "canDrag": false,
+                    "canFilter": true,
+                    "canHide": false,
+                    "canResize": false,
+                    "canSort": false,
+                    "customFilter": <input
+                      type="text"
+                      value="dummy"
+                    />,
+                    "depth": 0,
+                    "disableFilters": false,
+                    "disableResizing": true,
+                    "disableSortBy": true,
+                    "filter": "text",
+                    "filterValue": undefined,
+                    "filteredRows": Array [
+                      Object {
+                        "allCells": Array [
+                          Object {
+                            "column": [Circular],
+                            "getCellProps": [Function],
+                            "render": [Function],
+                            "row": [Circular],
+                            "value": Object {
+                              "id": "123456",
+                            },
+                          },
+                        ],
+                        "cells": Array [
+                          Object {
+                            "column": [Circular],
+                            "getCellProps": [Function],
+                            "render": [Function],
+                            "row": [Circular],
+                            "value": Object {
+                              "id": "123456",
+                            },
+                          },
+                        ],
+                        "depth": 0,
+                        "getRowProps": [Function],
+                        "id": "0",
+                        "index": 0,
+                        "original": Object {
+                          "item": Object {
+                            "id": "123456",
+                          },
+                        },
+                        "originalSubRows": Array [],
+                        "subRows": Array [],
+                        "values": Object {
+                          "0": Object {
+                            "id": "123456",
+                          },
+                        },
+                      },
+                    ],
+                    "getFooterProps": [Function],
+                    "getHeaderProps": [Function],
+                    "getSortByToggleProps": [Function],
+                    "getToggleHiddenProps": [Function],
+                    "id": "0",
+                    "isResizing": false,
+                    "isSorted": false,
+                    "isSortedDesc": undefined,
+                    "isVisible": true,
+                    "maxWidth": 9007199254740991,
+                    "minWidth": 0,
+                    "originalWidth": 150,
+                    "parent": undefined,
+                    "preFilteredRows": Array [
+                      Object {
+                        "allCells": Array [
+                          Object {
+                            "column": [Circular],
+                            "getCellProps": [Function],
+                            "render": [Function],
+                            "row": [Circular],
+                            "value": Object {
+                              "id": "123456",
+                            },
+                          },
+                        ],
+                        "cells": Array [
+                          Object {
+                            "column": [Circular],
+                            "getCellProps": [Function],
+                            "render": [Function],
+                            "row": [Circular],
+                            "value": Object {
+                              "id": "123456",
+                            },
+                          },
+                        ],
+                        "depth": 0,
+                        "getRowProps": [Function],
+                        "id": "0",
+                        "index": 0,
+                        "original": Object {
+                          "item": Object {
+                            "id": "123456",
+                          },
+                        },
+                        "originalSubRows": Array [],
+                        "subRows": Array [],
+                        "values": Object {
+                          "0": Object {
+                            "id": "123456",
+                          },
+                        },
+                      },
+                    ],
+                    "render": [Function],
+                    "setFilter": [Function],
+                    "sortDescFirst": false,
+                    "sortType": "alphanumeric",
+                    "sortedIndex": -1,
+                    "toggleHidden": [Function],
+                    "totalFlexWidth": 0,
+                    "totalLeft": 0,
+                    "totalMaxWidth": 9007199254740991,
+                    "totalMinWidth": 0,
+                    "totalVisibleHeaderCount": 1,
+                    "totalWidth": 150,
+                    "width": 150,
+                  },
+                ],
+              },
+            ]
+          }
+          headers={
+            Array [
+              Object {
+                "Cell": [Function],
+                "Filter": [Function],
+                "Footer": [Function],
+                "Header": "Test",
+                "accessor": [Function],
+                "canDrag": false,
+                "canFilter": true,
+                "canHide": false,
+                "canResize": false,
+                "canSort": false,
+                "customFilter": <input
+                  type="text"
+                  value="dummy"
+                />,
+                "depth": 0,
+                "disableFilters": false,
+                "disableResizing": true,
+                "disableSortBy": true,
+                "filter": "text",
+                "filterValue": undefined,
+                "filteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "cells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "getFooterProps": [Function],
+                "getHeaderProps": [Function],
+                "getSortByToggleProps": [Function],
+                "getToggleHiddenProps": [Function],
+                "id": "0",
+                "isResizing": false,
+                "isSorted": false,
+                "isSortedDesc": undefined,
+                "isVisible": true,
+                "maxWidth": 9007199254740991,
+                "minWidth": 0,
+                "originalWidth": 150,
+                "parent": undefined,
+                "preFilteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "cells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "render": [Function],
+                "setFilter": [Function],
+                "sortDescFirst": false,
+                "sortType": "alphanumeric",
+                "sortedIndex": -1,
+                "toggleHidden": [Function],
+                "totalFlexWidth": 0,
+                "totalLeft": 0,
+                "totalMaxWidth": 9007199254740991,
+                "totalMinWidth": 0,
+                "totalVisibleHeaderCount": 1,
+                "totalWidth": 150,
+                "width": 150,
+              },
+            ]
+          }
+          initialRows={
+            Array [
+              Object {
+                "allCells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "cells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+            ]
+          }
+          initialState={
+            Object {
+              "pageSize": 10,
+            }
+          }
+          nextPage={[Function]}
+          page={
+            Array [
+              Object {
+                "allCells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "cells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+            ]
+          }
+          pageCount={1}
+          pageOptions={
+            Array [
+              0,
+            ]
+          }
+          plugins={
+            Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ]
+          }
+          preFilteredFlatRows={
+            Array [
+              Object {
+                "allCells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "cells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+            ]
+          }
+          preFilteredRows={
+            Array [
+              Object {
+                "allCells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": [Circular],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": [Circular],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "cells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": [Circular],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": [Circular],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+            ]
+          }
+          preFilteredRowsById={
+            Object {
+              "0": Object {
+                "allCells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "cells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+            }
+          }
+          preSortedFlatRows={
+            Array [
+              Object {
+                "allCells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "cells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+            ]
+          }
+          preSortedRows={
+            Array [
+              Object {
+                "allCells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": [Circular],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": [Circular],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "cells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": [Circular],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": [Circular],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+            ]
+          }
+          prepareRow={[Function]}
+          previousPage={[Function]}
+          resetResizing={[Function]}
+          row={
+            Object {
+              "allCells": Array [
+                Object {
+                  "column": Object {
+                    "Cell": [Function],
+                    "Filter": [Function],
+                    "Footer": [Function],
+                    "Header": "Test",
+                    "accessor": [Function],
+                    "canDrag": false,
+                    "canFilter": true,
+                    "canHide": false,
+                    "canResize": false,
+                    "canSort": false,
+                    "customFilter": <input
+                      type="text"
+                      value="dummy"
+                    />,
+                    "depth": 0,
+                    "disableFilters": false,
+                    "disableResizing": true,
+                    "disableSortBy": true,
+                    "filter": "text",
+                    "filterValue": undefined,
+                    "filteredRows": Array [
+                      [Circular],
+                    ],
+                    "getFooterProps": [Function],
+                    "getHeaderProps": [Function],
+                    "getSortByToggleProps": [Function],
+                    "getToggleHiddenProps": [Function],
+                    "id": "0",
+                    "isResizing": false,
+                    "isSorted": false,
+                    "isSortedDesc": undefined,
+                    "isVisible": true,
+                    "maxWidth": 9007199254740991,
+                    "minWidth": 0,
+                    "originalWidth": 150,
+                    "parent": undefined,
+                    "preFilteredRows": Array [
+                      [Circular],
+                    ],
+                    "render": [Function],
+                    "setFilter": [Function],
+                    "sortDescFirst": false,
+                    "sortType": "alphanumeric",
+                    "sortedIndex": -1,
+                    "toggleHidden": [Function],
+                    "totalFlexWidth": 0,
+                    "totalLeft": 0,
+                    "totalMaxWidth": 9007199254740991,
+                    "totalMinWidth": 0,
+                    "totalVisibleHeaderCount": 1,
+                    "totalWidth": 150,
+                    "width": 150,
+                  },
+                  "getCellProps": [Function],
+                  "render": [Function],
+                  "row": [Circular],
+                  "value": Object {
+                    "id": "123456",
+                  },
+                },
+              ],
+              "cells": Array [
+                Object {
+                  "column": Object {
+                    "Cell": [Function],
+                    "Filter": [Function],
+                    "Footer": [Function],
+                    "Header": "Test",
+                    "accessor": [Function],
+                    "canDrag": false,
+                    "canFilter": true,
+                    "canHide": false,
+                    "canResize": false,
+                    "canSort": false,
+                    "customFilter": <input
+                      type="text"
+                      value="dummy"
+                    />,
+                    "depth": 0,
+                    "disableFilters": false,
+                    "disableResizing": true,
+                    "disableSortBy": true,
+                    "filter": "text",
+                    "filterValue": undefined,
+                    "filteredRows": Array [
+                      [Circular],
+                    ],
+                    "getFooterProps": [Function],
+                    "getHeaderProps": [Function],
+                    "getSortByToggleProps": [Function],
+                    "getToggleHiddenProps": [Function],
+                    "id": "0",
+                    "isResizing": false,
+                    "isSorted": false,
+                    "isSortedDesc": undefined,
+                    "isVisible": true,
+                    "maxWidth": 9007199254740991,
+                    "minWidth": 0,
+                    "originalWidth": 150,
+                    "parent": undefined,
+                    "preFilteredRows": Array [
+                      [Circular],
+                    ],
+                    "render": [Function],
+                    "setFilter": [Function],
+                    "sortDescFirst": false,
+                    "sortType": "alphanumeric",
+                    "sortedIndex": -1,
+                    "toggleHidden": [Function],
+                    "totalFlexWidth": 0,
+                    "totalLeft": 0,
+                    "totalMaxWidth": 9007199254740991,
+                    "totalMinWidth": 0,
+                    "totalVisibleHeaderCount": 1,
+                    "totalWidth": 150,
+                    "width": 150,
+                  },
+                  "getCellProps": [Function],
+                  "render": [Function],
+                  "row": [Circular],
+                  "value": Object {
+                    "id": "123456",
+                  },
+                },
+              ],
+              "depth": 0,
+              "getRowProps": [Function],
+              "id": "0",
+              "index": 0,
+              "original": Object {
+                "item": Object {
+                  "id": "123456",
+                },
+              },
+              "originalSubRows": Array [],
+              "subRows": Array [],
+              "values": Object {
+                "0": Object {
+                  "id": "123456",
+                },
+              },
+            }
+          }
+          rows={
+            Array [
+              Object {
+                "allCells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": [Circular],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": [Circular],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "cells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": [Circular],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": [Circular],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+            ]
+          }
+          rowsById={
+            Object {
+              "0": Object {
+                "allCells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "cells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+            }
+          }
+          setAllFilters={[Function]}
+          setColumnOrder={[Function]}
+          setFilter={[Function]}
+          setHiddenColumns={[Function]}
+          setPageSize={[Function]}
+          setSortBy={[Function]}
+          sortedFlatRows={
+            Array [
+              Object {
+                "allCells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "cells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": Array [
+                        [Circular],
+                      ],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": Array [
+                        [Circular],
+                      ],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+            ]
+          }
+          sortedRows={
+            Array [
+              Object {
+                "allCells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": [Circular],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": [Circular],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "cells": Array [
+                  Object {
+                    "column": Object {
+                      "Cell": [Function],
+                      "Filter": [Function],
+                      "Footer": [Function],
+                      "Header": "Test",
+                      "accessor": [Function],
+                      "canDrag": false,
+                      "canFilter": true,
+                      "canHide": false,
+                      "canResize": false,
+                      "canSort": false,
+                      "customFilter": <input
+                        type="text"
+                        value="dummy"
+                      />,
+                      "depth": 0,
+                      "disableFilters": false,
+                      "disableResizing": true,
+                      "disableSortBy": true,
+                      "filter": "text",
+                      "filterValue": undefined,
+                      "filteredRows": [Circular],
+                      "getFooterProps": [Function],
+                      "getHeaderProps": [Function],
+                      "getSortByToggleProps": [Function],
+                      "getToggleHiddenProps": [Function],
+                      "id": "0",
+                      "isResizing": false,
+                      "isSorted": false,
+                      "isSortedDesc": undefined,
+                      "isVisible": true,
+                      "maxWidth": 9007199254740991,
+                      "minWidth": 0,
+                      "originalWidth": 150,
+                      "parent": undefined,
+                      "preFilteredRows": [Circular],
+                      "render": [Function],
+                      "setFilter": [Function],
+                      "sortDescFirst": false,
+                      "sortType": "alphanumeric",
+                      "sortedIndex": -1,
+                      "toggleHidden": [Function],
+                      "totalFlexWidth": 0,
+                      "totalLeft": 0,
+                      "totalMaxWidth": 9007199254740991,
+                      "totalMinWidth": 0,
+                      "totalVisibleHeaderCount": 1,
+                      "totalWidth": 150,
+                      "width": 150,
+                    },
+                    "getCellProps": [Function],
+                    "render": [Function],
+                    "row": [Circular],
+                    "value": Object {
+                      "id": "123456",
+                    },
+                  },
+                ],
+                "depth": 0,
+                "getRowProps": [Function],
+                "id": "0",
+                "index": 0,
+                "original": Object {
+                  "item": Object {
+                    "id": "123456",
+                  },
+                },
+                "originalSubRows": Array [],
+                "subRows": Array [],
+                "values": Object {
+                  "0": Object {
+                    "id": "123456",
+                  },
+                },
+              },
+            ]
+          }
+          state={
+            Object {
+              "columnOrder": Array [],
+              "columnResizing": Object {
+                "columnWidths": Object {},
+              },
+              "filters": Array [],
+              "hiddenColumns": Array [],
+              "pageIndex": 0,
+              "pageSize": 10,
+              "sortBy": Array [],
+            }
+          }
+          stateReducer={[Function]}
+          toggleHideAllColumns={[Function]}
+          toggleHideColumn={[Function]}
+          toggleSortBy={[Function]}
+          totalColumnsMaxWidth={9007199254740991}
+          totalColumnsMinWidth={0}
+          totalColumnsWidth={150}
+          useControlledState={[Function]}
+          value={
+            Object {
+              "id": "123456",
+            }
+          }
+          visibleColumns={
+            Array [
+              Object {
+                "Cell": [Function],
+                "Filter": [Function],
+                "Footer": [Function],
+                "Header": "Test",
+                "accessor": [Function],
+                "canDrag": false,
+                "canFilter": true,
+                "canHide": false,
+                "canResize": false,
+                "canSort": false,
+                "customFilter": <input
+                  type="text"
+                  value="dummy"
+                />,
+                "depth": 0,
+                "disableFilters": false,
+                "disableResizing": true,
+                "disableSortBy": true,
+                "filter": "text",
+                "filterValue": undefined,
+                "filteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "cells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "getFooterProps": [Function],
+                "getHeaderProps": [Function],
+                "getSortByToggleProps": [Function],
+                "getToggleHiddenProps": [Function],
+                "id": "0",
+                "isResizing": false,
+                "isSorted": false,
+                "isSortedDesc": undefined,
+                "isVisible": true,
+                "maxWidth": 9007199254740991,
+                "minWidth": 0,
+                "originalWidth": 150,
+                "parent": undefined,
+                "preFilteredRows": Array [
+                  Object {
+                    "allCells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "cells": Array [
+                      Object {
+                        "column": [Circular],
+                        "getCellProps": [Function],
+                        "render": [Function],
+                        "row": [Circular],
+                        "value": Object {
+                          "id": "123456",
+                        },
+                      },
+                    ],
+                    "depth": 0,
+                    "getRowProps": [Function],
+                    "id": "0",
+                    "index": 0,
+                    "original": Object {
+                      "item": Object {
+                        "id": "123456",
+                      },
+                    },
+                    "originalSubRows": Array [],
+                    "subRows": Array [],
+                    "values": Object {
+                      "0": Object {
+                        "id": "123456",
+                      },
+                    },
+                  },
+                ],
+                "render": [Function],
+                "setFilter": [Function],
+                "sortDescFirst": false,
+                "sortType": "alphanumeric",
+                "sortedIndex": -1,
+                "toggleHidden": [Function],
+                "totalFlexWidth": 0,
+                "totalLeft": 0,
+                "totalMaxWidth": 9007199254740991,
+                "totalMinWidth": 0,
+                "totalVisibleHeaderCount": 1,
+                "totalWidth": 150,
+                "width": 150,
+              },
+            ]
+          }
+        />
+      </div>
+    </InfiniteBody>
+    <div
+      className="tfoot"
+    />
+  </div>
+</div>
+`;
+
 exports[`Table renders the structure correctly with dragging 1`] = `
 <div
   className="test"

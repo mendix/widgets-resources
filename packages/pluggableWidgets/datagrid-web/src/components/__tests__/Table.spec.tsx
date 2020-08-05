@@ -45,6 +45,23 @@ describe("Table", () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it("renders the structure correctly with custom filtering", () => {
+        const columns = [
+            {
+                header: "Test",
+                hasWidgets: false,
+                sortable: false,
+                filterable: "custom" as const,
+                resizable: false,
+                draggable: false,
+                hidable: "no" as const
+            }
+        ];
+        const component = shallow(<Table {...mockTableProps()} columns={columns} columnsFilterable />);
+
+        expect(component).toMatchSnapshot();
+    });
 });
 
 function mockTableProps(): TableProps<ObjectItem> {
@@ -76,7 +93,7 @@ function mockTableProps(): TableProps<ObjectItem> {
         columnsSortable: false,
         columns,
         valueForFilter: () => undefined,
-        filterRenderer: () => <div />,
+        filterRenderer: () => <input type="text" value="dummy" />,
         cellRenderer: (renderWrapper, _, columnIndex) => renderWrapper(columns[columnIndex].header),
         data: [{ id: "123456" as any }]
     };
