@@ -53,7 +53,7 @@ function mockTableProps(): TableProps<ObjectItem> {
             header: "Test",
             hasWidgets: false,
             sortable: false,
-            filterable: false,
+            filterable: "no" as const,
             resizable: false,
             draggable: false,
             hidable: "no" as const
@@ -76,6 +76,7 @@ function mockTableProps(): TableProps<ObjectItem> {
         columnsSortable: false,
         columns,
         valueForFilter: () => undefined,
+        filterRenderer: () => <div />,
         cellRenderer: (renderWrapper, _, columnIndex) => renderWrapper(columns[columnIndex].header),
         data: [{ id: "123456" as any }]
     };
