@@ -98,14 +98,13 @@ export function Table<T>(props: TableProps<T>): ReactElement {
 
     const defaultColumn: ColumnInterface<{ item: T }> = useMemo(
         () => ({
-            Filter: ({ column: { filterValue, setFilter, filter } }): ReactElement => (
+            Filter: ({ column: { filterValue, setFilter } }): ReactElement => (
                 <input
                     className="form-control"
                     value={filterValue || ""}
                     onChange={e => {
                         setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
                     }}
-                    placeholder={`Search ${filter ? filter : ""}...`}
                 />
             ),
             ...(props.columnsResizable
