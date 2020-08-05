@@ -6,6 +6,8 @@
 import { ComponentType, CSSProperties, ReactNode } from "react";
 import { DynamicValue, ListValue, ListAttributeValue, ListWidgetValue } from "mendix";
 
+export type FilterableEnum = "yes" | "no" | "custom";
+
 export type HidableEnum = "yes" | "hidden" | "no";
 
 export interface ColumnsType {
@@ -14,7 +16,8 @@ export interface ColumnsType {
     hasWidgets: boolean;
     content?: ListWidgetValue;
     sortable: boolean;
-    filterable: boolean;
+    filterable: FilterableEnum;
+    customFilter?: ReactNode;
     resizable: boolean;
     draggable: boolean;
     hidable: HidableEnum;
@@ -28,7 +31,8 @@ export interface ColumnsPreviewType {
     hasWidgets: boolean;
     content: { widgetCount: number; renderer: ComponentType };
     sortable: boolean;
-    filterable: boolean;
+    filterable: FilterableEnum;
+    customFilter: { widgetCount: number; renderer: ComponentType };
     resizable: boolean;
     draggable: boolean;
     hidable: HidableEnum;

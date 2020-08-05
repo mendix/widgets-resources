@@ -47,6 +47,17 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                 [props.columns]
             )}
             valueForFilter={useCallback(() => undefined, [])}
+            filterRenderer={useCallback(
+                columnIndex => {
+                    const column = props.columns[columnIndex];
+                    return (
+                        <column.customFilter.renderer>
+                            <div />
+                        </column.customFilter.renderer>
+                    );
+                },
+                [props.columns]
+            )}
         />
     );
 }

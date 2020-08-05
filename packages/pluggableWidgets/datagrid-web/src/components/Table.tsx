@@ -42,6 +42,7 @@ export interface TableProps<T> {
     hasMoreItems: boolean;
     cellRenderer: (renderWrapper: (children: ReactNode) => ReactElement, value: T, columnIndex: number) => ReactElement;
     valueForFilter: (value: T, columnIndex: number) => string | undefined;
+    filterRenderer: (columnIndex: number) => ReactNode;
 }
 
 export function Table<T>(props: TableProps<T>): ReactElement {
@@ -73,9 +74,10 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 isVisible: column.hidable !== "hidden",
                 canHide: column.hidable !== "no",
                 canDrag: column.draggable,
+                customFilter: column.filterable === "custom" ? props.filterRenderer(index) : null,
                 disableSortBy: !column.sortable,
                 disableResizing: !column.resizable,
-                disableFilters: !column.filterable,
+                disableFilters: column.filterable === "no",
                 Cell: ({ cell, value }) =>
                     props.cellRenderer(
                         (children: ReactNode) => (

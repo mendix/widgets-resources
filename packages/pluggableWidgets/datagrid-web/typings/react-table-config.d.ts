@@ -13,6 +13,7 @@ import {
     UsePaginationInstanceProps,
     UseFiltersColumnProps
 } from "react-table";
+import { ReactNode } from "react";
 
 declare module "react-table" {
     export interface TableOptions<D extends object>
@@ -28,6 +29,7 @@ declare module "react-table" {
             UseResizeColumnsOptions<D> {
         canHide?: boolean;
         canDrag?: boolean;
+        customFilter?: ReactNode;
     }
 
     export interface TableState<D extends object = {}> extends UsePaginationState<D> {}

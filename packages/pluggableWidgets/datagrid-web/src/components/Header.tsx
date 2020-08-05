@@ -42,6 +42,7 @@ export function Header<D extends object>({
                 : faLongArrowAltUp
             : faArrowsAltV
         : undefined;
+    console.warn(column.customFilter);
     return (
         <div
             className="th"
@@ -65,7 +66,9 @@ export function Header<D extends object>({
                     {column.render("Header")}
                     {sortIcon && <FontAwesomeIcon icon={sortIcon} />}
                 </div>
-                {filterable && column.canFilter && <div className="filter">{column.render("Filter")}</div>}
+                {filterable && column.canFilter && (
+                    <div className="filter">{column.customFilter ? column.customFilter : column.render("Filter")}</div>
+                )}
             </div>
             {resizable && column.canResize && (
                 <div

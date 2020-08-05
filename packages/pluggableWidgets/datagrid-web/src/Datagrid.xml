@@ -2,7 +2,7 @@
 <widget id="com.mendix.widget.web.datagrid.Datagrid" pluginWidget="true" offlineCapable="true"
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
-    <name>Datagrid</name>
+    <name>Data grid 2</name>
     <description/>
     <icon/>
     <properties>
@@ -49,8 +49,17 @@
                                 <caption>Can sort</caption>
                                 <description/>
                             </property>
-                            <property key="filterable" type="boolean" defaultValue="true">
+                            <property key="filterable" type="enumeration" defaultValue="yes">
                                 <caption>Can filter</caption>
+                                <description/>
+                                <enumerationValues>
+                                    <enumerationValue key="yes">Yes</enumerationValue>
+                                    <enumerationValue key="no">No</enumerationValue>
+                                    <enumerationValue key="custom">Custom filter</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="customFilter" type="widgets" required="false">
+                                <caption>Custom filter</caption>
                                 <description/>
                             </property>
                             <property key="resizable" type="boolean" defaultValue="true">
