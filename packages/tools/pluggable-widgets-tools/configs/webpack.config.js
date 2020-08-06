@@ -5,7 +5,7 @@ const variables = require("./variables");
 module.exports = env => {
     env = env ? env : "prod";
 
-    const pathWebpack = join(variables.projectPath, `webpack.config.${env}.js`);
+    const pathWebpack = join(variables.sourcePath, `webpack.config.${env}.js`);
     if (existsSync(pathWebpack)) {
         console.log(`Using custom webpack configuration from ${pathWebpack}`);
         return require(pathWebpack);

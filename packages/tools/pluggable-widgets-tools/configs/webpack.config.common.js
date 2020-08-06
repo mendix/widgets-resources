@@ -10,7 +10,7 @@ const name = widgetName.toLowerCase();
 const widgetConfig = {
     entry: variables.widgetEntry,
     output: {
-        path: join(variables.projectPath, "/dist/tmp"),
+        path: join(variables.sourcePath, "/dist/tmp"),
         filename: `widgets/${packagePath}/${name}/${widgetName}.js`,
         libraryTarget: "umd",
         publicPath: "/"
@@ -52,7 +52,7 @@ const widgetConfig = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: join(variables.projectPath, "src/**/*.xml").replace(/\\/g, "/"),
+                    from: `${variables.sourcePath}/src/**/*.xml`.replace(/\\/g, "/"),
                     toType: "template",
                     to: "widgets/[name].[ext]"
                 }
@@ -64,7 +64,7 @@ const widgetConfig = {
 const previewConfig = {
     entry: variables.previewEntry,
     output: {
-        path: join(variables.projectPath, "/dist/tmp"),
+        path: join(variables.sourcePath, "/dist/tmp"),
         filename: `widgets/${widgetName}.editorPreview.js`,
         libraryTarget: "commonjs"
     },
@@ -107,7 +107,7 @@ const editorConfigConfig = {
     devtool: false,
     entry: variables.editorConfigEntry,
     output: {
-        path: join(variables.projectPath, "/dist/tmp"),
+        path: join(variables.sourcePath, "/dist/tmp"),
         filename: `widgets/${widgetName}.editorConfig.js`,
         libraryTarget: "commonjs"
     },
