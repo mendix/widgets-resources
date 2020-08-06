@@ -16,7 +16,7 @@ require("dotenv").config({ path: join(variables.sourcePath, ".env") });
 const projectPath = normalize(
     process.env.MX_PROJECT_PATH ||
         variables.package.config.projectPath ||
-        join(variables.sourcePath, "dist/MxTestProject")
+        join(variables.sourcePath, "tests/testProject")
 );
 const widgetsFolder = join(projectPath, "widgets");
 const isNative = process.argv.indexOf("--native") !== -1;
