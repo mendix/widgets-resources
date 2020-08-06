@@ -13,7 +13,7 @@
     "dev": "utils-react-widgets dev",
     "test": "npm run test:unit",
     "test:unit": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
-    "pretest:e2e": "node ../../../scripts/test/updateTheme.js",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",

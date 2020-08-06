@@ -12,7 +12,7 @@
     "start": "utils-react-widgets start",
     "dev": "utils-react-widgets dev",
     "format": "prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-    "pretest:e2e": "node ../../../scripts/test/updateTheme.js",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
