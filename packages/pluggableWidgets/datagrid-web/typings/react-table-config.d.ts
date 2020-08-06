@@ -29,6 +29,7 @@ declare module "react-table" {
             UseResizeColumnsOptions<D> {
         canHide?: boolean;
         canDrag?: boolean;
+        hidden?: boolean;
         customFilter?: ReactNode;
     }
 

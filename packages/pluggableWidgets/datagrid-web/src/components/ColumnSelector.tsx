@@ -1,4 +1,4 @@
-import { createElement, Dispatch, ReactElement, SetStateAction, useState } from "react";
+import { createElement, Dispatch, ReactElement, SetStateAction, useEffect, useState } from "react";
 import { ColumnInstance } from "react-table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
@@ -15,6 +15,9 @@ export function ColumnSelector<D extends object>({
     setWidth
 }: ColumnSelectorProps<D>): ReactElement {
     const [show, setShow] = useState(false);
+    useEffect(() => {
+        allColumns.filter(column => column.hidden).forEach(column => column.toggleHidden(true));
+    }, [allColumns]);
     return (
         <div className="th column-selector">
             <button

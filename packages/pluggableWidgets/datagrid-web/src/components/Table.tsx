@@ -71,7 +71,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 accessor: "item",
                 Header: typeof column.header === "object" ? column.header.value : column.header,
                 filter: "text",
-                isVisible: column.hidable !== "hidden",
+                hidden: column.hidable === "hidden",
                 canHide: column.hidable !== "no",
                 canDrag: column.draggable,
                 customFilter:
