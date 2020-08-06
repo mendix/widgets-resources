@@ -115,13 +115,13 @@ function useDraggable<D extends object>(
             const { id: colOrigin } = e.target as HTMLDivElement;
             const colDestination = e.dataTransfer.getData("colDestination");
 
-            const colOriginIndex = visibleColumns.findIndex((col: ColumnInstance<D>) => col.id === colOrigin);
-            const colDestinationIndex = visibleColumns.findIndex((col: ColumnInstance<D>) => col.id === colDestination);
+            const toIndex = visibleColumns.findIndex((col: ColumnInstance<D>) => col.id === colOrigin);
+            const fromIndex = visibleColumns.findIndex((col: ColumnInstance<D>) => col.id === colDestination);
 
-            if (colOriginIndex !== colDestinationIndex) {
+            if (toIndex !== fromIndex) {
                 const newOrder = [...visibleColumns.map(column => column.id)];
-                newOrder[colOriginIndex] = colDestination;
-                newOrder[colDestinationIndex] = colOrigin;
+                newOrder.splice(fromIndex, 1);
+                newOrder.splice(toIndex, 0, colDestination);
                 setColumnOrder(newOrder);
             }
         },
