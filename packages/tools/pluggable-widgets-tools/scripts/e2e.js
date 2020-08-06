@@ -1,10 +1,10 @@
 const { execSync } = require("child_process");
 const findFreePort = require("find-free-port");
-const { readFile } = require("fs").promises;
+const { access, readFile } = require("fs").promises;
 const fetch = require("node-fetch");
 const { join } = require("path");
 const semverCompare = require("semver/functions/rcompare");
-const { cp, ls, rm } = require("shelljs");
+const { cp, ls, mkdir } = require("shelljs");
 
 main().catch(e => {
     console.error(e);
@@ -12,46 +12,28 @@ main().catch(e => {
 });
 
 async function main() {
-    // verify that docker exists and complain otherwise
+    const latestMendixVersion = await getLatestMendixVersion();
+
+    if (!(await exists("tests/testProject"))) {
+        throw new Error("No e2e test project found locally in tests/testProject!");
+    }
     try {
         execSync("docker info");
     } catch (e) {
         throw new Error("To run e2e test locally, make sure docker is running. Exiting now...");
     }
 
-    const latestMendixVersion = await getLatestMendixVersion();
     const packageConf = JSON.parse(await readFile("package.json"));
-    const teamServerProject = packageConf?.config?.testProjectId;
     const widgetVersion = packageConf?.version;
-    const branch = packageConf?.config.e2eBranch || "trunk";
-
-    if (!teamServerProject) {
-        throw new Error(
-            "Currently e2e tests can only run against a teamserver project. Please provide the id of such project through config.testPorjectId in you package.json"
-        );
-    }
-    if (!process.env.TS_USERNAME || !process.env.TS_PASSWORD) {
-        throw new Error(
-            "Currently e2e tests can only run against a teamserver project. Please provide the credentials to access TeamServer through TS_USERNAME and TS_PASSWORD environment variables."
-        );
-    }
     const widgetMpk = ls(`dist/${widgetVersion}/*.mpk`).length;
+
     if (!widgetMpk) {
         throw new Error("No widgets founds in dist folder. Please execute `npm run release` before start e2e tests.");
     }
 
-    // Clone the project
-    rm("-rf", "mendixProject");
-    dockerRun(
-        `jgsqware/svn-client checkout --no-auth-cache -q --username "${process.env.TS_USERNAME}" --password "${
-            process.env.TS_PASSWORD
-        }" https://teamserver.sprintr.com/${teamServerProject}/${
-            branch === "trunk" ? branch : `branches/${branch}`
-        } /source/mendixProject`
-    );
-
     // Copy the built widget to test project
-    cp("-rf", `dist/${widgetVersion}/*.mpk`, "mendixProject/widgets/");
+    mkdir("-p", "tests/testProject/widgets");
+    cp("-rf", `dist/${widgetVersion}/*.mpk`, "tests/testProject/widgets/");
 
     // Build testProject via mxbuild
     dockerRun(`-e MENDIX_VERSION=${latestMendixVersion} mono:latest /bin/bash /shared/mxbuild.sh`);
@@ -86,6 +68,15 @@ async function main() {
         });
     } finally {
         execSync(`docker kill ${runtimeContainerId.trim()}`);
+    }
+}
+
+async function exists(filePath) {
+    try {
+        await access(filePath);
+        return true;
+    } catch (e) {
+        return false;
     }
 }
 

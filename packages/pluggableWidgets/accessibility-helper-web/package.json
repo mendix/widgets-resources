@@ -9,20 +9,7 @@
     "widgetPath": "./tests/TestProjects/Mendix8/widgets",
     "projectPath": "./tests/TestProjects/Mendix8",
     "mendixHost": "http://localhost:8080",
-    "developmentPort": 3000,
-    "testProjectId": "c8bda497-ac0a-42a6-9301-f0848d6b2ca8",
-    "testProjects": [
-      {
-        "revision": 8,
-        "branch": "MX_8",
-        "path": "./tests/TestProjects/Mendix8/"
-      },
-      {
-        "revision": 9,
-        "branch": "nightly",
-        "path": "./tests/TestProjects/Nightly/"
-      }
-    ]
+    "developmentPort": 3000
   },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
@@ -32,8 +19,7 @@
     "format": "pluggable-widgets-tools format",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "release": "pluggable-widgets-tools release:web",
-    "svncheckout": "..\"/../../node_modules/.bin/ts-node\" --project ../../../scripts/tsconfig.json ../../../scripts/svn/CheckoutProject.ts"
+    "release": "pluggable-widgets-tools release:web"
   },
   "license": "Apache-2.0",
   "dependencies": {

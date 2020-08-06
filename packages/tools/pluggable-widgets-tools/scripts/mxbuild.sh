@@ -17,5 +17,5 @@ echo "Downloading and unzipping MX build done!"
 
 # copy latest widget mpk to the mendix project
 echo "Spinning up mxbuild..."
-mono /tmp/mxbuild/modeler/mxbuild.exe -o /tmp/automation.mda --java-home="/usr/lib/jvm/jdk-11.0.2" --java-exe-path="/usr/lib/jvm/jdk-11.0.2/bin/java" --loose-version-check /source/mendixProject/*.mpr
+mono /tmp/mxbuild/modeler/mxbuild.exe -o /tmp/automation.mda --java-home="/usr/lib/jvm/jdk-11.0.2" --java-exe-path="/usr/lib/jvm/jdk-11.0.2/bin/java" --loose-version-check /source/tests/testProject/*.mpr
 echo "Spinning up mxbuild done!"

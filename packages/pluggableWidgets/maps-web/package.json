@@ -13,14 +13,7 @@
     "widgetPath": "./tests/TestProjects/Mendix/widgets",
     "projectPath": "./tests/TestProjects/Mendix",
     "mendixHost": "http://localhost:8080",
-    "developmentPort": 3000,
-    "testProjectId": "3c9356a0-e646-434a-be37-52ab7d402d4e",
-    "testProjects": [
-      {
-        "branch": "trunk",
-        "path": "./tests/TestProjects/Mendix/"
-      }
-    ]
+    "developmentPort": 3000
   },
   "packagePath": "com.mendix.widget.custom.Maps",
   "scripts": {
@@ -32,8 +25,7 @@
     "test": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "release": "pluggable-widgets-tools release:web",
-    "svncheckout": "..\"/../../node_modules/.bin/ts-node\" --project ../../../scripts/tsconfig.json ../../../scripts/svn/CheckoutProject.ts"
+    "release": "pluggable-widgets-tools release:web"
   },
   "devDependencies": {
     "@googlemaps/jest-mocks": "^0.0.3",

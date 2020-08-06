@@ -1,7 +1,7 @@
 m2ee:
     app_name: Test App
-    app_base: /source/mendixProject/deployment
-    model_upload_path: /source/mendixProject
+    app_base: /source/tests/testProject/deployment
+    model_upload_path: /source/tests/testProject
     admin_port: 8090
     admin_pass: Password1!
     runtime_port: 8080
@@ -12,7 +12,7 @@ m2ee:
             "-XX:MaxPermSize=128M",
             "-Xmx512M",
             "-Xms512M",
-            "-Djava.io.tmpdir=/source/mendixProject/deployment/data/tmp",
+            "-Djava.io.tmpdir=/source/tests/testProject/deployment/data/tmp",
         ]
     javabin: /opt/java/openjdk/bin/java
     pidfile: /var/run/m2ee.pid
@@ -22,7 +22,7 @@ mxruntime:
     DatabaseType: HSQLDB
     DatabaseName: default
     DatabasePassword: ""
-    BuiltInDatabasePath: /source/mendixProject/deployment/data/database
+    BuiltInDatabasePath: /source/tests/testProject/deployment/data/database
 logging:
     - type: file
       name: FileSubscriber
