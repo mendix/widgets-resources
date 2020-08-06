@@ -24,7 +24,7 @@ export const defaultProgressCircleStyle: ProgressCircleStyle = {
         size: 100,
         borderWidth: 1,
         borderColor: Platform.select({ ios: "rgb(0, 122, 255)", default: "rgb(98,0,238)" }),
-        unfilledColor: 'transparent'
+        unfilledColor: "#fafafa"
     },
     fill: {
         width: 3,
