@@ -29,10 +29,10 @@
     "@fortawesome/free-regular-svg-icons": "^5.13.1",
     "@fortawesome/react-fontawesome": "^0.1.11",
     "@widgets-resources/piw-utils": "^1.0.0",
-    "react-table": "^7.0.4"
+    "react-table": "^7.5.0"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
-    "@types/react-table": "^7.0.17"
+    "@types/react-table": "^7.0.20"
   }
 }

@@ -41,7 +41,7 @@ export interface TableProps<T> {
     styles?: CSSProperties;
     hasMoreItems: boolean;
     cellRenderer: (renderWrapper: (children: ReactNode) => ReactElement, value: T, columnIndex: number) => ReactElement;
-    valueForFilter: (value: T, columnIndex: number) => string | undefined;
+    valueForFilterSort: (value: T, columnIndex: number) => string | undefined;
     filterRenderer: (renderWrapper: (children: ReactNode) => ReactElement, columnIndex: number) => ReactElement;
 }
 
@@ -55,7 +55,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         () => ({
             text: (rows: Array<Row<object>>, id: IdType<object>, filterValue: FilterValue) => {
                 return rows.filter(row => {
-                    const value = props.valueForFilter(row.values[id], Number(id));
+                    const value = props.valueForFilterSort(row.values[id], Number(id));
                     return value !== undefined
                         ? value.toLowerCase().startsWith(String(filterValue).toLowerCase())
                         : true;
@@ -81,6 +81,12 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 disableSortBy: !column.sortable,
                 disableResizing: !column.resizable,
                 disableFilters: column.filterable === "no",
+                sortType: (rowA: Row<{ item: T }>, rowB: Row<{ item: T }>, columnId: IdType<object>): number => {
+                    const valueA = props.valueForFilterSort(rowA.values[columnId], Number(columnId)) || "";
+                    const valueB = props.valueForFilterSort(rowB.values[columnId], Number(columnId)) || "";
+                    // Values should always be sorted in ASC mode https://github.com/tannerlinsley/react-table/pull/2504
+                    return valueA.localeCompare(valueB);
+                },
                 Cell: ({ cell, value }) =>
                     props.cellRenderer(
                         (children: ReactNode) => (
