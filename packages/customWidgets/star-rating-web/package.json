@@ -18,27 +18,11 @@
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "lint:fix": "npm run lint -- --fix",
     "build": "utils-react-widgets build",
-    "release": "utils-react-widgets release",
-    "svncheckout": "..\"/../../node_modules/.bin/ts-node\" --project ../../../scripts/tsconfig.json ../../../scripts/svn/CheckoutProject.ts"
+    "release": "utils-react-widgets release"
   },
   "config": {
     "mendixHost": "http://localhost:8080",
-    "developmentPort": 3000,
-    "testProjectId": "609089fc-64db-474c-b994-f682e21291c2",
-    "testProjects": [
-      {
-        "branch": "trunk",
-        "path": "./tests/TestProjects/Mendix/"
-      },
-      {
-        "branch": "MX7.23",
-        "path": "./tests/TestProjects/Mendix7/"
-      },
-      {
-        "branch": "MX_8",
-        "path": "./tests/TestProjects/Mendix8/"
-      }
-    ]
+    "developmentPort": 3000
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",

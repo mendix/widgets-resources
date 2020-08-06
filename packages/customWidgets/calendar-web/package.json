@@ -19,31 +19,11 @@
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "lint:fix": "npm run lint -- --fix",
     "build": "utils-react-widgets build",
-    "release": "utils-react-widgets release",
-    "svncheckout": "..\"/../../node_modules/.bin/ts-node\" --project ../../../scripts/tsconfig.json ../../../scripts/svn/CheckoutProject.ts"
+    "release": "utils-react-widgets release"
   },
   "config": {
     "mendixHost": "http://localhost:8080",
-    "developmentPort": 3000,
-    "testProjectId": "efe7ce5d-5c1f-4f4a-9fe9-beebe2a16bb0",
-    "testProjects": [
-      {
-        "branch": "trunk",
-        "path": "./tests/TestProjects/Mendix/"
-      },
-      {
-        "branch": "MX_7.23",
-        "path": "./tests/TestProjects/Mendix7/"
-      },
-      {
-        "branch": "MX_8",
-        "path": "./tests/TestProjects/Mendix8/"
-      },
-      {
-        "branch": "nightly",
-        "path": "./tests/TestProjects/Nightly/"
-      }
-    ]
+    "developmentPort": 3000
   },
   "license": "Apache-2.0",
   "devDependencies": {
