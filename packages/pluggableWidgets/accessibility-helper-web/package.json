@@ -31,7 +31,7 @@
     "build": "pluggable-widgets-tools build:ts",
     "format": "pluggable-widgets-tools format",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "test:e2e:dev": "DEBUG=true URL=http://localhost:8080 pluggable-widgets-tools test:e2e:dev",
+    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "pluggable-widgets-tools release:web",
     "svncheckout": "..\"/../../node_modules/.bin/ts-node\" --project ../../../scripts/tsconfig.json ../../../scripts/svn/CheckoutProject.ts"
   },
