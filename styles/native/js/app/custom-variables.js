@@ -1,6 +1,6 @@
 import { NativeModules, Platform } from "react-native";
 import adjustFont from "../core/helpers/_functions/adjustfont";
-import { anyColorToRgbString, setContrastScale } from "../core/helpers/_functions/convertcolors";
+import { setContrastScale } from "../core/helpers/_functions/convertcolors";
 /*
 
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)
@@ -18,11 +18,11 @@ export const brand = {
     warning: "#FFD355",
     danger: "#FF6161",
     info: "#0086D9",
-    primaryLight: `rgba(${anyColorToRgbString("#264AE5")}, 0.14)`,
-    successLight: `rgba(${anyColorToRgbString("#77DD77")}, 0.14)`,
-    warningLight: `rgba(${anyColorToRgbString("#FFD355")}, 0.14)`,
-    dangerLight: `rgba(${anyColorToRgbString("#FF6161")}, 0.14)`,
-    infoLight: `rgba(${anyColorToRgbString("#0086D9")}, 0.14)`,
+    primaryLight: `#F3F5FF`,
+    successLight: `#F1FCF1`,
+    warningLight: `#FFF9E6`,
+    dangerLight: `#FFEEF0`,
+    infoLight: `#ECF9FF`,
 };
 //
 // Dark Mode - Inherits OS theme if possible
@@ -37,8 +37,6 @@ export const darkMode = NativeModules && NativeModules.RNDarkMode && NativeModul
 //
 export const background = {
     primary: "#FFF",
-    // semantic: setContrastScale(0.08, backgroundColor),
-    surface: "#F8F8F8",
     gray: "#F8F8F8",
     brandPrimary: brand.primary,
     brandSuccess: brand.success,
@@ -185,6 +183,7 @@ export const input = {
         color: brand.danger,
         borderColor: brand.danger,
         placeholderTextColor: brand.danger,
+        backgroundColor: brand.dangerLight,
     },
     validationMessage: {
         color: brand.danger,
@@ -222,7 +221,7 @@ export const image = {
         large: 56,
         larger: 72,
     },
-    icon: 24,
+    icon: 16,
 };
 //
 // Navigation Styles
@@ -249,7 +248,7 @@ export const navigation = {
         color: font.colorTitle,
         activityIndicatorColor: font.colorTitle,
         backgroundColor: `rgba(0, 0, 0, 0.5)`,
-        containerBackgroundColor: background.surface,
+        containerBackgroundColor: background.gray,
         shadowColor: "#000",
         fontSize: font.size,
     },
@@ -275,7 +274,7 @@ export const tabContainer = {
         textTransform: "uppercase",
     },
     activeLabel: {
-        color: background.surface,
+        color: background.gray,
         fontSize: font.size,
         fontWeight: font.weightBold,
         textTransform: "uppercase",
@@ -301,12 +300,12 @@ export const layoutGrid = {
 // Badge Styles
 export const badge = {
     fontWeight: font.weightBold,
-    borderRadius: 30,
-    paddingVertical: 3,
-    paddingHorizontal: spacing.smaller,
+    borderRadius: border.radiusLarge,
+    paddingVertical: 2,
+    paddingHorizontal: spacing.small,
     default: {
-        color: contrast.higher,
-        backgroundColor: contrast.lower,
+        color: contrast.high,
+        backgroundColor: contrast.lowest,
     },
     primary: {
         color: brand.primary,
@@ -343,7 +342,7 @@ export const floatingActionButton = {
     },
     secondaryButton: {
         size: 30,
-        backgroundColor: background.surface,
+        backgroundColor: background.gray,
     },
     secondaryButtonIcon: {
         size: font.sizeSmall,
@@ -431,7 +430,7 @@ export const slider = {
     marker: {
         size: 24,
         borderColor: contrast.lowest,
-        backgroundColor: background.surface,
+        backgroundColor: background.gray,
     },
     markerActive: {
         size: 32,
@@ -439,6 +438,6 @@ export const slider = {
     markerDisabled: {
         size: 24,
         borderColor: contrast.lowest,
-        backgroundColor: background.surface,
+        backgroundColor: background.gray,
     },
 };

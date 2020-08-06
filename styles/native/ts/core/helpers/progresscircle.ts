@@ -18,7 +18,7 @@ export const progressCircleSuccess = {
         backgroundColor: brand.success,
     },
     text: {
-        color: contrast.regular,
+        color: brand.success,
     },
 };
 export const progressCircleWarning = {
@@ -26,7 +26,7 @@ export const progressCircleWarning = {
         backgroundColor: brand.warning,
     },
     text: {
-        color: contrast.regular,
+        color: brand.warning,
     },
 };
 export const progressCircleDanger = {
@@ -34,7 +34,7 @@ export const progressCircleDanger = {
         backgroundColor: brand.danger,
     },
     text: {
-        color: contrast.regular,
+        color: brand.danger,
     },
 };
 export const progressCircleGray = {

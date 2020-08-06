@@ -8,7 +8,7 @@ import { background, border, contrast, spacing } from "../../../core/variables";
 */
 export const card = {
     container: {
-        borderRadius: border.radiusSmall,
+        borderRadius: border.radiusLarge,
         backgroundColor: background.primary,
         marginBottom: spacing.regular,
         ...Platform.select({
@@ -38,11 +38,11 @@ export const cardImage = {
     },
     image: {
         width: "100%",
-        height: 200,
+        height: 128,
         resizeMode: "cover",
     },
 };
-export const cardImageFull = {
+export const cardImageBackground = {
     container: {
         ...cardImage.container,
         borderBottomLeftRadius: border.radiusSmall,
@@ -54,7 +54,7 @@ export const cardImageFull = {
         resizeMode: "cover",
     },
 };
-export const cardBody = {
+export const cardBodyAbsolute = {
     container: {
         position: "absolute",
         end: 0,

@@ -87,8 +87,8 @@
                         "class": "backgroundPrimary"
                     },
                     {
-                        "name": "Secondary",
-                        "class": "backgroundSecondary"
+                        "name": "Gray",
+                        "class": "backgroundGray"
                     },
                     {
                         "name": "Brand Primary",
@@ -198,8 +198,12 @@
                         "class": "spacingOuterTopSmallest"
                     },
                     {
-                        "name": "Small",
+                        "name": "Smaller",
                         "class": "spacingOuterTopSmaller"
+                    },
+                    {
+                        "name": "Small",
+                        "class": "spacingOuterTopSmall"
                     },
                     {
                         "name": "Medium",
@@ -207,6 +211,10 @@
                     },
                     {
                         "name": "Large",
+                        "class": "spacingOuterTopLarge"
+                    },
+                    {
+                        "name": "Larger",
                         "class": "spacingOuterTopLarger"
                     },
                     {
@@ -225,8 +233,12 @@
                         "class": "spacingOuterBottomSmallest"
                     },
                     {
-                        "name": "Small",
+                        "name": "Smaller",
                         "class": "spacingOuterBottomSmaller"
+                    },
+                    {
+                        "name": "Small",
+                        "class": "spacingOuterBottomSmall"
                     },
                     {
                         "name": "Medium",
@@ -234,6 +246,10 @@
                     },
                     {
                         "name": "Large",
+                        "class": "spacingOuterBottomLarg"
+                    },
+                    {
+                        "name": "Larger",
                         "class": "spacingOuterBottomLarger"
                     },
                     {
@@ -252,8 +268,12 @@
                         "class": "spacingOuterLeftSmallest"
                     },
                     {
-                        "name": "Small",
+                        "name": "Smaller",
                         "class": "spacingOuterLeftSmaller"
+                    },
+                    {
+                        "name": "Small",
+                        "class": "spacingOuterLeftSmall"
                     },
                     {
                         "name": "Medium",
@@ -261,6 +281,10 @@
                     },
                     {
                         "name": "Large",
+                        "class": "spacingOuterLeftLarge"
+                    },
+                    {
+                        "name": "Larger",
                         "class": "spacingOuterLeftLarger"
                     },
                     {
@@ -279,8 +303,12 @@
                         "class": "spacingOuterRightSmallest"
                     },
                     {
-                        "name": "Small",
+                        "name": "Smaller",
                         "class": "spacingOuterRightSmaller"
+                    },
+                    {
+                        "name": "Small",
+                        "class": "spacingOuterRightSmall"
                     },
                     {
                         "name": "Medium",
@@ -288,6 +316,10 @@
                     },
                     {
                         "name": "Large",
+                        "class": "spacingOuterRightLarge"
+                    },
+                    {
+                        "name": "Larger",
                         "class": "spacingOuterRightLarger"
                     },
                     {
@@ -447,8 +479,8 @@
                         "class": "backgroundPrimary"
                     },
                     {
-                        "name": "Secondary",
-                        "class": "backgroundSecondary"
+                        "name": "Gray",
+                        "class": "backgroundGray"
                     },
                     {
                         "name": "Brand Primary",
@@ -716,8 +748,8 @@
                         "class": "backgroundPrimary"
                     },
                     {
-                        "name": "Secondary",
-                        "class": "backgroundSecondary"
+                        "name": "Gray",
+                        "class": "backgroundGray"
                     },
                     {
                         "name": "Brand Primary",
@@ -910,6 +942,18 @@
                 "description": "Change the color of text.",
                 "options": [
                     {
+                        "name": "Paragraph",
+                        "class": "textParagraph"
+                    },
+                    {
+                        "name": "Disabled",
+                        "class": "textDisabled"
+                    },
+                    {
+                        "name": "White",
+                        "class": "textWhite"
+                    },
+                    {
                         "name": "Brand primary",
                         "class": "textPrimary"
                     },
@@ -924,38 +968,6 @@
                     {
                         "name": "Brand danger",
                         "class": "textDanger"
-                    },
-                    {
-                        "name": "White",
-                        "class": "textWhite"
-                    },
-                    {
-                        "name": "Contrast lowest",
-                        "class": "textContrastLowest"
-                    },
-                    {
-                        "name": "Contrast lower",
-                        "class": "textContrastLower"
-                    },
-                    {
-                        "name": "Contrast low",
-                        "class": "textContrastLow"
-                    },
-                    {
-                        "name": "Contrast default",
-                        "class": "textContrastDefault"
-                    },
-                    {
-                        "name": "Contrast high",
-                        "class": "textContrastHigh"
-                    },
-                    {
-                        "name": "Contrast higher",
-                        "class": "textContrastHigher"
-                    },
-                    {
-                        "name": "Contrast highest",
-                        "class": "textContrastHighest"
                     }
                 ]
             },
@@ -1263,8 +1275,8 @@
                         "class": "backgroundPrimary"
                     },
                     {
-                        "name": "Secondary",
-                        "class": "backgroundSecondary"
+                        "name": "Gray",
+                        "class": "backgroundGray"
                     },
                     {
                         "name": "Brand Primary",
@@ -1630,8 +1642,8 @@
                         "class": "backgroundPrimary"
                     },
                     {
-                        "name": "Secondary",
-                        "class": "backgroundSecondary"
+                        "name": "Gray",
+                        "class": "backgroundGray"
                     },
                     {
                         "name": "Brand Primary",

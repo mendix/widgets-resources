@@ -18,7 +18,7 @@ To customize any core styling, copy the part you want to customize to styles/nat
 //## Helper classes to change the look and feel of the widget
 //-------------------------------------------------------------------------------------------------------------------//
 // Image Sizes
-export const thumbnailSquare = {
+export const imageSquare = {
     image: {
         width: "100%",
         height: "auto",
@@ -26,35 +26,35 @@ export const thumbnailSquare = {
         borderRadius: border.radiusSmall,
     },
 };
-export const thumbnailCircleSmall = {
+export const imageCircleSmall = {
     image: {
         width: image.avatar.small,
         height: image.avatar.small,
         borderRadius: image.avatar.small / 2,
     },
 };
-export const thumbnailCircleMedium = {
+export const imageCircleMedium = {
     image: {
         width: image.avatar.medium,
         height: image.avatar.medium,
         borderRadius: image.avatar.medium / 2,
     },
 };
-export const thumbnailCircleLarge = {
+export const imageCircleLarge = {
     image: {
         width: image.avatar.large,
         height: image.avatar.large,
         borderRadius: image.avatar.large / 2,
     },
 };
-export const thumbnailCircleLarger = {
+export const imageCircleLarger = {
     image: {
         width: image.avatar.larger,
         height: image.avatar.larger,
         borderRadius: image.avatar.larger / 2,
     },
 };
-export const inputIcon = {
+export const imageIcon = {
     image: {
         width: image.icon,
         height: image.icon,

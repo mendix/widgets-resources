@@ -27,9 +27,9 @@ export const backgroundPrimary = {
         backgroundColor: background.primary,
     },
 };
-export const backgroundSecondary = {
+export const backgroundGray = {
     container: {
-        backgroundColor: background.surface,
+        backgroundColor: background.gray,
     },
 };
 export const backgroundBrandPrimary = {
@@ -50,11 +50,6 @@ export const backgroundBrandWarning = {
 export const backgroundBrandDanger = {
     container: {
         backgroundColor: background.brandDanger,
-    },
-};
-export const backgroundGray = {
-    container: {
-        backgroundColor: background.gray,
     },
 };
 //

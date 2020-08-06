@@ -21,8 +21,6 @@ export interface VariablesBrand {
 
 export interface VariablesBackground {
     primary: string,
-    // semantic: string,
-    surface: string,
     gray: string,
     brandPrimary: string,
     brandSuccess: string,
@@ -154,6 +152,7 @@ export interface VariablesInput {
         color: string,
         borderColor: string,
         placeholderTextColor: string
+        backgroundColor: string
     },
     validationMessage: {
         color: string,

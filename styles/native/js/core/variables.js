@@ -30,8 +30,6 @@ brand = merge(brand, custom.brand || {});
 // Background colors
 let background = {
     primary: "#FFF",
-    // semantic: setContrastScale(0.03, "#FFF"),
-    surface: "",
     gray: "#c6c6cc",
     brandPrimary: brand.primary,
     brandSuccess: brand.success,
@@ -184,6 +182,7 @@ let input = {
         color: brand.danger,
         borderColor: brand.danger,
         placeholderTextColor: brand.danger,
+        backgroundColor: brand.dangerLight
     },
     validationMessage: {
         color: brand.danger,
@@ -252,7 +251,7 @@ let navigation = {
         color: font.colorTitle,
         activityIndicatorColor: font.colorTitle,
         backgroundColor: `rgba(0, 0, 0, 0.5)`,
-        containerBackgroundColor: background.surface,
+        containerBackgroundColor: background.gray,
         shadowColor: "#000",
         fontSize: font.size,
     },
@@ -350,7 +349,7 @@ let floatingActionButton = {
     },
     secondaryButton: {
         size: 30,
-        backgroundColor: background.surface,
+        backgroundColor: background.gray,
     },
     secondaryButtonIcon: {
         size: font.sizeSmall,
@@ -443,7 +442,7 @@ let slider = {
     marker: {
         size: 24,
         borderColor: contrast.lowest,
-        backgroundColor: background.surface,
+        backgroundColor: background.gray,
     },
     markerActive: {
         size: 32,
@@ -451,7 +450,7 @@ let slider = {
     markerDisabled: {
         size: 24,
         borderColor: contrast.lowest,
-        backgroundColor: background.surface,
+        backgroundColor: background.gray,
     },
 };
 slider = merge(slider, custom.slider || {});

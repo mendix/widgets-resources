@@ -19,6 +19,7 @@ export const com_mendix_widget_native_progresscircle_ProgressCircle = {
     circle: {
         // Only the size & borderWidth & borderColor properties are allowed
         size: progressCircle.circle.size,
+        borderWidth: 0,
     },
     fill: {
         // Only the width & backgroundColor & lineCapRounded properties are allowed

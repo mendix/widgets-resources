@@ -28,9 +28,9 @@ export const backgroundPrimary: Helperclass = {
         backgroundColor: background.primary,
     },
 };
-export const backgroundSecondary: Helperclass = {
+export const backgroundGray: Helperclass = {
     container: {
-        backgroundColor: background.surface,
+        backgroundColor: background.gray,
     },
 };
 export const backgroundBrandPrimary: Helperclass = {
@@ -51,11 +51,6 @@ export const backgroundBrandWarning: Helperclass = {
 export const backgroundBrandDanger: Helperclass = {
     container: {
         backgroundColor: background.brandDanger,
-    },
-};
-export const backgroundGray: Helperclass = {
-    container: {
-        backgroundColor: background.gray,
     },
 };
 //

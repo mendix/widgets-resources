@@ -1,4 +1,4 @@
-import { brand, contrast, font } from "../variables";
+import { brand, font } from "../variables";
 /*
 
 DISCLAIMER:
@@ -13,6 +13,26 @@ To customize any core styling, copy the part you want to customize to styles/nat
 //## Helper classes to change the look and feel of the widget
 ========================================================================== */
 // Text Colors
+export const textTitle = {
+    text: {
+        color: font.colorTitle,
+    },
+};
+export const textParagraph = {
+    text: {
+        color: font.colorParagraph,
+    },
+};
+export const textDisabled = {
+    text: {
+        color: font.colorDisabled,
+    },
+};
+export const textWhite = {
+    text: {
+        color: "#FFF",
+    },
+};
 export const textPrimary = {
     text: {
         color: brand.primary,
@@ -31,47 +51,6 @@ export const textWarning = {
 export const textDanger = {
     text: {
         color: brand.danger,
-    },
-};
-export const textWhite = {
-    text: {
-        color: "#FFF",
-    },
-};
-//
-export const textContrastLowest = {
-    text: {
-        color: contrast.lowest,
-    },
-};
-export const textContrastLower = {
-    text: {
-        color: contrast.lower,
-    },
-};
-export const textContrastLow = {
-    text: {
-        color: contrast.low,
-    },
-};
-export const textContrastDefault = {
-    text: {
-        color: contrast.regular,
-    },
-};
-export const textContrastHigh = {
-    text: {
-        color: contrast.high,
-    },
-};
-export const textContrastHigher = {
-    text: {
-        color: contrast.higher,
-    },
-};
-export const textContrastHighest = {
-    text: {
-        color: contrast.highest,
     },
 };
 //

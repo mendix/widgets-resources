@@ -16,7 +16,7 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const com_mendix_widget_native_togglebuttons_ToggleButtons: ToggleButtonsType = {
     container: {
         // All ViewStyle properties are allowed
-        backgroundColor: background.surface,
+        backgroundColor: background.gray,
         borderRadius: 16,
         alignSelf: "stretch",
     },
