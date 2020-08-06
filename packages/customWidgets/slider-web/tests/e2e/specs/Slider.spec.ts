@@ -60,9 +60,14 @@ describe("Slider widget", () => {
             const sliderWidget = new SliderWidget("sliderMicroflow");
 
             sliderWidget.dragHandleToMinimum();
-
             const modalDialogText = $(".modal-dialog .mx-dialog-body > p");
-            modalDialogText.waitForDisplayed();
+            browser.waitUntil(
+                () => {
+                    return modalDialogText.getText() === "Slider Value is 0";
+                },
+                1000,
+                "expected text to be different after 1s"
+            );
             expect(modalDialogText.getText()).toContain("0");
         });
 
@@ -74,7 +79,13 @@ describe("Slider widget", () => {
             sliderWidget.dragHandleToMinimum();
 
             const modalDialogText = $(".modal-dialog .mx-name-text1");
-            modalDialogText.waitForDisplayed();
+            browser.waitUntil(
+                () => {
+                    return modalDialogText.getText() === "Slider Value is 0";
+                },
+                1000,
+                "expected text to be different after 1s"
+            );
             expect(modalDialogText.getText()).toContain("0");
         });
 
