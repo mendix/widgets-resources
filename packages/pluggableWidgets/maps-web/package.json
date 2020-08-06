@@ -10,7 +10,6 @@
     "url": "https://github.com/mendix/widgets-resources.git"
   },
   "config": {
-    "widgetPath": "./tests/TestProjects/Mendix/widgets",
     "projectPath": "./tests/TestProjects/Mendix",
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000

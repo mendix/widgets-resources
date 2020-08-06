@@ -6,7 +6,6 @@
   "copyright": "Mendix 2020",
   "author": "Widget Team",
   "config": {
-    "widgetPath": "./tests/TestProjects/Mendix8/widgets",
     "projectPath": "./tests/TestProjects/Mendix8",
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
