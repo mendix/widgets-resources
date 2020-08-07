@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const variables = require("./variables");
 
 const widgetName = variables.package.widgetName;
-const name = widgetName.toLowerCase();
+const name = widgetName !== "RangeSlider" ? widgetName.toLowerCase() : widgetName;
 const cwd = variables.path;
 
 const widgetConfig = {
