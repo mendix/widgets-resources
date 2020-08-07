@@ -4,7 +4,7 @@ const { access, readFile } = require("fs").promises;
 const fetch = require("node-fetch");
 const { join } = require("path");
 const semverCompare = require("semver/functions/rcompare");
-const { cp, ls, mkdir } = require("shelljs");
+const { cat, cp, ls, mkdir } = require("shelljs");
 
 main().catch(e => {
     console.error(e);
@@ -52,7 +52,9 @@ async function main() {
 
     // Build testProject via mxbuild
     const projectFile = ls("tests/testProject/*.mpr").toString();
-    dockerRun(`mxbuild:${latestMendixVersion} -o /tmp/automation.mda --loose-version-check /source/${projectFile}`);
+    dockerRun(
+        `--rm mxbuild:${latestMendixVersion} -o /tmp/automation.mda --loose-version-check /source/${projectFile}`
+    );
 
     // Spin up the runtime and run testProject
     const freePort = await findFreePort(3000);
@@ -82,8 +84,14 @@ async function main() {
             stdio: "inherit",
             env: { ...process.env, URL: `http://localhost:${freePort}` }
         });
+    } catch (e) {
+        try {
+            execSync(`docker logs ${runtimeContainerId.trim()}`, { stdio: "inherit" });
+        } catch (_) {}
+        console.log(cat("results/runtime.log").toString());
+        throw e;
     } finally {
-        execSync(`docker kill ${runtimeContainerId.trim()}`);
+        execSync(`docker rm -f ${runtimeContainerId.trim()}`);
     }
 }
 
@@ -97,7 +105,7 @@ async function exists(filePath) {
 }
 
 function dockerRun(command, appendOutput = true) {
-    const dockerStartCommand = `docker run -t --rm -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source`;
+    const dockerStartCommand = `docker run -t -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source`;
     const output = execSync(`${dockerStartCommand} ${command}`, appendOutput ? { stdio: "inherit" } : {});
     if (!appendOutput) {
         return output.toString();
