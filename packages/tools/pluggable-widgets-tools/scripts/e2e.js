@@ -35,8 +35,24 @@ async function main() {
     mkdir("-p", "tests/testProject/widgets");
     cp("-rf", `dist/${widgetVersion}/*.mpk`, "tests/testProject/widgets/");
 
+    // Create reusable mxbuild image
+    const existingImages = execSync(`docker image ls -q mxbuild:${latestMendixVersion}`)
+        .toString()
+        .trim();
+    if (!existingImages) {
+        console.log(`Creating new mxbuild docker image...`);
+        execSync(
+            `docker build -f ${join(
+                __dirname,
+                "mxbuild.Dockerfile"
+            )} --build-arg MENDIX_VERSION=${latestMendixVersion} -t mxbuild:${latestMendixVersion} ${__dirname}`,
+            { stdio: "inherit" }
+        );
+    }
+
     // Build testProject via mxbuild
-    dockerRun(`-e MENDIX_VERSION=${latestMendixVersion} mono:latest /bin/bash /shared/mxbuild.sh`);
+    const projectFile = ls("tests/testProject/*.mpr").toString();
+    dockerRun(`mxbuild:${latestMendixVersion} -o /tmp/automation.mda --loose-version-check /source/${projectFile}`);
 
     // Spin up the runtime and run testProject
     const freePort = await findFreePort(3000);
