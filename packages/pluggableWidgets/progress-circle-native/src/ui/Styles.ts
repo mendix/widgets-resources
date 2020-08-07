@@ -7,7 +7,7 @@ export interface ProgressCircleStyle extends Style {
         size: number;
         borderWidth: number;
         borderColor: string;
-        unfilledColor: string;
+        unfilledColor: string | null;
     };
     fill: {
         backgroundColor: string;
