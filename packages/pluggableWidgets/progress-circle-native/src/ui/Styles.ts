@@ -7,7 +7,7 @@ export interface ProgressCircleStyle extends Style {
         size: number;
         borderWidth: number;
         borderColor: string;
-        unfilledColor: string | null;
+        unfilledColor: string;
     };
     fill: {
         backgroundColor: string;
@@ -24,7 +24,7 @@ export const defaultProgressCircleStyle: ProgressCircleStyle = {
         size: 100,
         borderWidth: 1,
         borderColor: Platform.select({ ios: "rgb(0, 122, 255)", default: "rgb(98,0,238)" }),
-        unfilledColor: null
+        unfilledColor: "#ffffff"
     },
     fill: {
         width: 3,
