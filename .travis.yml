@@ -2,6 +2,8 @@ dist: xenial
 language: node_js
 node_js: 14
 cache: npm
+git:
+    submodules: false
 branches:
     only:
         - master
@@ -47,6 +49,8 @@ jobs:
           dist: trusty
           addons:
               firefox: latest
+          git:
+              submodules: true
           services:
               - docker
           env:
