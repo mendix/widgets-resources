@@ -44,7 +44,6 @@ jobs:
           script:
               - npm run test:scripts -- $SINCE_ARG
         - name: "Run automated end-to-end tests"
-          if: fork IS false
           dist: trusty
           addons:
               firefox: latest
@@ -57,10 +56,6 @@ jobs:
               - set -e
               - npm run release -- $SINCE_ARG
               - npm run test:e2e -- $SINCE_ARG
-        - name: "Run build scripts"
-          if: fork IS true
-          script:
-              - npm run release -- $SINCE_ARG
         - stage: deploy
           name: "Release npm package"
           script:
