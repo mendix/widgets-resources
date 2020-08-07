@@ -63,6 +63,7 @@ exports[`ProgressCircle renders 1`] = `
         strokeDash={null}
         strokeJoin={1}
         strokeWidth={3}
+        unfilledColor: null
         transform={
           Array [
             1,
@@ -104,6 +105,7 @@ exports[`ProgressCircle renders 1`] = `
         strokeDash={null}
         strokeJoin={1}
         strokeWidth={1}
+        unfilledColor: null
         transform={
           Array [
             1,
