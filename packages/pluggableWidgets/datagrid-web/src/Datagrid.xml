@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Data grid 2</name>
     <description/>
-    <icon/>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABGUUKwAAAB4UlEQVR4Ae1bQbKCMAzFzl/8Q+iB2Pwdww08lDdg2LnxQhzCFf62A5p2hHmOWaRN2FBKjXmvr0ks0jR2GAOqGThQ9H3ft/M8X3zfkfZX1J6cc+dhGG4rJrc2wrly8AHiccEY2vFICPA9tc78AjeeEow5AXSgivbPHspxHJMYsTeW3uu67kGvpdmhvqlXgBFA5aCxbQrQOOsUsymAsqGxrV4BSaGTFzC1KoIWZuoVYATUKnMUl/0YQpmqdZzFgFpnFsWlXgG7QZCy2F7vbTM/Ln6rJ9lT85XU1LjD+fb3+9xppZ/L29Ls4Ap4Az6Ai4T4eznQzWthdnACNhGVfQMnwMs8yj3Duy6BrHv7UpgdOAYsa/y0jQy7I80OrgAMX3GjjIDipozZYTgGSMvfXP7gS0BY/n5XlAVxfFqX4AQwS0+KOZwAYfk7lN8cdQkcA6Tlby5/cAVI0SyzH0YAM6HFmYNjAFfelWYHXwJWBxSnbshhXAFMeZcrf3PZgWMAV96VZgdXACSo8gYZAeXNGa/HcAyQlr+5/MGXgNUBvNKTYg1XgNUB8dmfPReQIl0uP/AlwPWNwuyoJ8DvK74O+6Pkiws1rXwJTAqQJxgTAsJLhZ6AZEBlhMQXJyvDZHCMgW8Y+AcyvTAhCdTFagAAAABJRU5ErkJggg==</icon>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
