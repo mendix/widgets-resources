@@ -5,6 +5,7 @@ import { ExpandingDrawer } from "./components/ExpandingDrawer";
 import { NativeBottomSheet } from "./components/NativeBottomSheet";
 import { BottomSheetProps } from "../typings/BottomSheetProps";
 import { StyleSheet } from "react-native";
+import { executeAction } from "@widgets-resources/piw-utils";
 
 export function BottomSheet(props: BottomSheetProps<BottomSheetStyle>): ReactElement {
     const styles = StyleSheet.flatten(props.style);
@@ -31,6 +32,8 @@ export function BottomSheet(props: BottomSheetProps<BottomSheetStyle>): ReactEle
                 smallContent={props.smallContent}
                 largeContent={props.largeContent}
                 fullscreenContent={props.showFullscreenContent ? props.fullscreenContent : null}
+                onOpen={() => executeAction(props.onOpen)}
+                onClose={() => executeAction(props.onClose)}
                 styles={styles}
             />
         );
