@@ -2,7 +2,7 @@ const { join } = require("path");
 const { existsSync, mkdirSync } = require("fs");
 const debug = process.env.DEBUG;
 const browserName = process.env.BROWSER || "chrome";
-const url = process.env.URL || "https://localhost:8080/";
+const url = process.env.URL || "http://localhost:8080/";
 
 const e2ePath = join(process.cwd(), "dist/e2e/");
 if (!existsSync(e2ePath)) {

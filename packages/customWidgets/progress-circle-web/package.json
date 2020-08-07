@@ -13,7 +13,7 @@
     "dev": "utils-react-widgets dev",
     "format": "prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
-    "test:e2e:dev": "..\"/../../node_modules/.bin/cross-env\" DEBUG=true ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "lint:fix": "npm run lint -- --fix",
     "build": "utils-react-widgets build",
