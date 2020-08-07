@@ -25,7 +25,7 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
             border-bottom-width: 1px;
             border-left: 0;
             background-color: $background-color;
-            padding: 16px;
+            padding: 16px 8px;
 
             .clickable {
                 cursor: pointer;
@@ -33,6 +33,7 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
 
             .column-resizer {
                 width: 4px;
+                min-width: 4px;
                 margin: 0 4px;
                 height: 100%;
                 cursor: col-resize;
@@ -47,6 +48,10 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
 
             .column-container {
                 flex-grow: 1;
+                align-self: stretch;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
 
                 &.dragging {
                     border-left: 4px solid $dragging-color-effect;
@@ -74,6 +79,10 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
                 }
                 > .form-group{
                     margin-bottom: 0;
+                }
+                > .form-control {
+                    flex: unset;
+                    min-width: unset;
                 }
             }
         }
@@ -125,7 +134,7 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
                 flex: 1 1 0;
                 justify-content: space-between;
                 align-items: center;
-                padding: 16px;
+                padding: 16px 8px;
                 border-width: 0;
                 border-color: $border-color;
                 border-bottom-width: 1px;
