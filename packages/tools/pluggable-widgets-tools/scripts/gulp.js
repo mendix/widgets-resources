@@ -6,6 +6,9 @@ const del = require("del");
 const gulp = require("gulp");
 const zip = require("gulp-zip");
 const webpack = require("webpack");
+
+let webpackCompiler;
+
 const variables = require("../configs/variables");
 
 require("dotenv").config({ path: join(variables.projectPath, ".env") });
@@ -40,14 +43,14 @@ function createMpkFile() {
 
 function copyToDeployment() {
     if (existsSync(projectPath) && readdirSync(projectPath).length > 0) {
-        console.log(colors.green(`Files generated in dist and ${projectPath} folder`));
         return gulp
             .src([
                 join(variables.projectPath, "dist/tmp/widgets/**/*"),
                 "!" + join(variables.projectPath, "dist/tmp/widgets/**/package.xml")
             ])
-            .pipe(gulp.dest(join(projectPath, "deployment/web/widgets")))
-            .on("error", handleError);
+            .pipe(gulp.dest(join(projectPath, `deployment/${isNative ? "native" : "web"}/widgets`)))
+            .on("error", handleError)
+            .on("finish", () => console.log(colors.green(`Files generated in dist and ${projectPath} folder`)));
     } else {
         console.log(
             colors.yellow(
@@ -85,7 +88,11 @@ function runWebpack(env, cb) {
         }
     }
 
-    webpack(config, (err, stats) => {
+    if (!webpackCompiler) {
+        webpackCompiler = webpack(config);
+    }
+
+    webpackCompiler.run((err, stats) => {
         if (err) {
             handleError(err);
             cb(new Error(`Webpack: ${err}`));
@@ -114,6 +121,6 @@ function handleError(err) {
 exports.build = gulp.series(clean, generateTypings, runWebpack.bind(null, "dev"), createMpkFile, copyToDeployment);
 exports.release = gulp.series(clean, generateTypings, runWebpack.bind(null, "prod"), createMpkFile);
 exports.watch = function() {
-    console.log(colors.green(`Watching files in: ${variables.projectPath}`));
+    console.log(colors.green(`Watching files in: ${variables.projectPath}/src`));
     return gulp.watch("src/**/*", { ignoreInitial: false, cwd: variables.projectPath }, exports.build);
 };
