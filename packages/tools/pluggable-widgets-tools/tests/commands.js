@@ -248,7 +248,16 @@ async function main() {
 }
 
 async function execAsync(command, workDir) {
-    return promisify(exec)(command, { cwd: workDir });
+    const resultPromise = promisify(exec)(command, { cwd: workDir });
+    while (true) {
+        const waitPromise = new Promise(resolve => setTimeout(resolve, 60 * 1000));
+
+        const haveCompleted = await Promise.race([resultPromise.then(() => true), waitPromise.then(() => false)]);
+        if (haveCompleted) {
+            return resultPromise;
+        }
+        console.log("Waiting...");
+    }
 }
 
 async function execFailedAsync(command, workDir) {
