@@ -42,26 +42,28 @@ async function main() {
     if (!existingImages) {
         console.log(`Creating new mxbuild docker image...`);
         execSync(
-            `docker build -f ${join(
-                __dirname,
-                "mxbuild.Dockerfile"
-            )} --build-arg MENDIX_VERSION=${latestMendixVersion} -t mxbuild:${latestMendixVersion} ${__dirname}`,
+            `docker build -f ${join(__dirname, "mxbuild.Dockerfile")} ` +
+                `--build-arg MENDIX_VERSION=${latestMendixVersion} ` +
+                `-t mxbuild:${latestMendixVersion} ${__dirname}`,
             { stdio: "inherit" }
         );
     }
 
     // Build testProject via mxbuild
     const projectFile = ls("tests/testProject/*.mpr").toString();
-    dockerRun(
-        `--rm mxbuild:${latestMendixVersion} -o /tmp/automation.mda --loose-version-check /source/${projectFile}`
+    execSync(
+        `docker run -t -v ${process.cwd()}:/source ` +
+            `--rm mxbuild:${latestMendixVersion} -o /tmp/automation.mda --loose-version-check /source/${projectFile}`,
+        { stdio: "inherit" }
     );
 
     // Spin up the runtime and run testProject
     const freePort = await findFreePort(3000);
-    const runtimeContainerId = dockerRun(
-        `-d -u root -e MENDIX_VERSION=${latestMendixVersion} -p ${freePort}:8080 mendix/runtime-base:${latestMendixVersion}-bionic /bin/bash /shared/runtime.sh`,
-        false
-    );
+    const runtimeContainerId = execSync(
+        `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source -p ${freePort}:8080 ` +
+            `-u root -e MENDIX_VERSION=${latestMendixVersion} --entrypoint /bin/bash ` +
+            `mendix/runtime-base:${latestMendixVersion}-bionic /shared/runtime.sh`
+    ).toString();
 
     let attempts = 60;
     for (; attempts > 0; --attempts) {
@@ -101,14 +103,6 @@ async function exists(filePath) {
         return true;
     } catch (e) {
         return false;
-    }
-}
-
-function dockerRun(command, appendOutput = true) {
-    const dockerStartCommand = `docker run -t -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source`;
-    const output = execSync(`${dockerStartCommand} ${command}`, appendOutput ? { stdio: "inherit" } : {});
-    if (!appendOutput) {
-        return output.toString();
     }
 }
 
