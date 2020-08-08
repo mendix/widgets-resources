@@ -60,7 +60,7 @@ async function getLatestAtlasArchive() {
         if (await exists(downloadedArchivePath)) {
             return downloadedArchivePath;
         }
-        const appstoreUrl = `https://files.appstore.mendix.com/5/104730/2.6.0/Atlas_UI_Resources_${latestAtlasVersion}.mpk`;
+        const appstoreUrl = `https://files.appstore.mendix.com/5/104730/${latestAtlasVersion}/Atlas_UI_Resources_${latestAtlasVersion}.mpk`;
         console.log(`Trying to download Atlas from ${appstoreUrl}...`);
         try {
             await promisify(pipeline)((await fetch(appstoreUrl)).body, createWriteStream(downloadedArchivePath));
