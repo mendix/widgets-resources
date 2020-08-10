@@ -7,6 +7,8 @@ interface ExpandingDrawerProps {
     smallContent?: ReactNode;
     largeContent?: ReactNode;
     fullscreenContent?: ReactNode;
+    onOpen?: () => void;
+    onClose?: () => void;
     styles: BottomSheetStyle;
 }
 
@@ -113,8 +115,12 @@ export const ExpandingDrawer = (props: ExpandingDrawerProps): ReactElement => {
                     initialSnap={snapPoints.length - 1}
                     renderContent={renderContent}
                     enabledInnerScrolling={false}
+                    onOpenStart={props.onOpen}
                     onOpenEnd={() => setIsOpen(true)}
-                    onCloseStart={() => setIsOpen(false)}
+                    onCloseStart={() => {
+                        setIsOpen(false);
+                        props.onClose?.();
+                    }}
                 />
             )}
         </View>
