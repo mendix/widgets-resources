@@ -1,6 +1,6 @@
 ## Timeline
 
-Use Timeline to create vertical list of with events with icons next to it.
+Use Timeline to create vertical list of events with icons next to it.
 
 ## Usage
 
@@ -8,9 +8,9 @@ Use Timeline to create vertical list of with events with icons next to it.
 
 For the sake of simplicity, there are two modes available to create timeline: Basic and Custom.
 
-With basic mode you can quickly select title, description and an icon to have the fastest results. With
+With basic mode you can quickly select title, description and an icon to have the fastest results.
 
-With custom mode you can freely modal everything which will be shown in the timeline. Including Icon, Day divider, Title, Event Date/Time or Content.
+With custom mode you can freely model everything which will be shown in the timeline. Including Icon, Day divider, Title, Event Date/Time or Content.
 
 #### Selecting a data source
 

@@ -17,7 +17,7 @@ export default function TimelineComponent(props: TimelineProps): ReactElement {
 function getBasicEventsFromDay(eventsOfDay: BasicItemType[]): ReactNode[] {
     return eventsOfDay.map((event, index) => (
         <li className="timeline-event" key={index}>
-            <div className={"icon-wrapper"}>
+            <div className="icon-wrapper">
                 {event.icon?.value ? <Icon icon={event.icon.value} /> : <div className="timeline-icon-circle" />}
             </div>
             <div className="flex-container content-wrapper">
