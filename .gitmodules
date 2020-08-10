@@ -18,6 +18,10 @@
 	path = packages/pluggableWidgets/accessibility-helper-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = accessibility-helper-web
+[submodule "packages/pluggableWidgets/timeline-web/tests/testProject"]
+	path = packages/pluggableWidgets/timeline-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = timeline-web
 [submodule "packages/pluggableWidgets/badge-button-web/tests/testProject"]
 	path = packages/pluggableWidgets/badge-button-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
