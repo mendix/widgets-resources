@@ -1,4 +1,4 @@
-import { dynamicValue } from "@native-mobile-resources/util-widgets";
+import { dynamicValue } from "@widgets-resources/piw-utils";
 import { Big } from "big.js";
 import { createElement } from "react";
 import { Text } from "react-native";

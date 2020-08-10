@@ -1,4 +1,4 @@
-import { dynamicValue } from "@native-mobile-resources/util-widgets";
+import { dynamicValue } from "@widgets-resources/piw-utils";
 import { createElement } from "react";
 import { Text, View } from "react-native";
 import { fireEvent, render } from "react-native-testing-library";

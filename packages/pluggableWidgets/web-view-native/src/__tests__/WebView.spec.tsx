@@ -1,4 +1,4 @@
-import { actionValue, dynamicValue } from "@native-mobile-resources/util-widgets";
+import { actionValue, dynamicValue } from "@widgets-resources/piw-utils";
 import { createElement } from "react";
 import { fireEvent, render } from "react-native-testing-library";
 import { WebView as RNWebView } from "react-native-webview";

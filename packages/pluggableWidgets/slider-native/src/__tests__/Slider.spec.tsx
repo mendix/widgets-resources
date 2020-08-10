@@ -1,4 +1,4 @@
-import { actionValue, dynamicValue, EditableValueBuilder } from "@native-mobile-resources/util-widgets";
+import { actionValue, dynamicValue, EditableValueBuilder } from "@widgets-resources/piw-utils";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Big } from "big.js";
 import { createElement } from "react";
