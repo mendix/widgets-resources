@@ -74,7 +74,11 @@
 	path = packages/customWidgets/slider-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = slider-web
-[submodule "packages/pluggableWidgets/popup-menu-web/tests/testProject"]
-	path = packages/pluggableWidgets/popup-menu-web/tests/testProject
+[submodule "packages/pluggableWidgets/timeline-web/tests/testProject"]
+	path = packages/pluggableWidgets/timeline-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
+	branch = timeline-web
+[submodule "packages/pluggableWidgets/popup-menu-web/tests/testProject"]
 	branch = popupmenu-web
+	url = https://github.com/mendix/testProjects.git
+	path = packages/pluggableWidgets/popup-menu-web/tests/testProject
