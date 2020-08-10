@@ -2,6 +2,8 @@ dist: xenial
 language: node_js
 node_js: 14
 cache: npm
+git:
+    submodules: false
 branches:
     only:
         - master
@@ -32,10 +34,6 @@ jobs:
           os: windows
           script:
               - npm run test:scripts -- $SINCE_ARG
-        - name: "Script tests (Node 10, linux)"
-          node_js: 10
-          script:
-              - npm run test:scripts -- $SINCE_ARG
         - name: "Script tests (Node latest, windows)"
           os: windows
           script:
@@ -44,10 +42,11 @@ jobs:
           script:
               - npm run test:scripts -- $SINCE_ARG
         - name: "Run automated end-to-end tests"
-          if: fork IS false
           dist: trusty
           addons:
               firefox: latest
+          git:
+              submodules: true
           services:
               - docker
           env:
@@ -57,10 +56,6 @@ jobs:
               - set -e
               - npm run release -- $SINCE_ARG
               - npm run test:e2e -- $SINCE_ARG
-        - name: "Run build scripts"
-          if: fork IS true
-          script:
-              - npm run release -- $SINCE_ARG
         - stage: deploy
           name: "Release npm package"
           script:

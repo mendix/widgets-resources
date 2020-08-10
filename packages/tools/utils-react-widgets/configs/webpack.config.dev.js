@@ -5,7 +5,7 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const variables = require("./variables");
 
 const widgetName = variables.package.widgetName;
-const name = widgetName.toLowerCase();
+const name = widgetName !== "RangeSlider" ? widgetName.toLowerCase() : widgetName;
 
 const packageName = name;
 const mxHost = variables.package.config.mendixHost || "http://localhost:8080";

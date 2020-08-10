@@ -13,32 +13,17 @@
     "dev": "utils-react-widgets dev",
     "test": "npm run test:unit",
     "test:unit": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "lint:fix": "npm run lint -- --fix",
     "build": "utils-react-widgets build",
-    "release": "utils-react-widgets release",
-    "svncheckout": "..\"/../../node_modules/.bin/ts-node\" --project ../../../scripts/tsconfig.json ../../../scripts/svn/CheckoutProject.ts"
+    "release": "utils-react-widgets release"
   },
   "config": {
     "mendixHost": "http://localhost:8080",
-    "developmentPort": 3000,
-    "testProjectId": "445a9d66-a2d6-4813-a1dd-62e47410ff57",
-    "testProjects": [
-      {
-        "branch": "trunk",
-        "path": "./tests/TestProjects/Mendix/"
-      },
-      {
-        "branch": "MX7.23",
-        "path": "./tests/TestProjects/Mendix7/"
-      },
-      {
-        "branch": "MX_8",
-        "path": "./tests/TestProjects/Mendix8/"
-      }
-    ]
+    "developmentPort": 3000
   },
   "license": "Apache-2.0",
   "devDependencies": {

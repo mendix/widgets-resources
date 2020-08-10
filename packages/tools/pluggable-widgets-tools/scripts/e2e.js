@@ -1,10 +1,10 @@
 const { execSync } = require("child_process");
 const findFreePort = require("find-free-port");
-const { readFile } = require("fs").promises;
+const { access, readFile } = require("fs").promises;
 const fetch = require("node-fetch");
 const { join } = require("path");
 const semverCompare = require("semver/functions/rcompare");
-const { cp, ls, rm } = require("shelljs");
+const { cat, cp, ls, mkdir } = require("shelljs");
 
 main().catch(e => {
     console.error(e);
@@ -12,56 +12,58 @@ main().catch(e => {
 });
 
 async function main() {
-    // verify that docker exists and complain otherwise
+    const latestMendixVersion = await getLatestMendixVersion();
+
+    if (!(await exists("tests/testProject"))) {
+        throw new Error("No e2e test project found locally in tests/testProject!");
+    }
     try {
         execSync("docker info");
     } catch (e) {
         throw new Error("To run e2e test locally, make sure docker is running. Exiting now...");
     }
 
-    const latestMendixVersion = await getLatestMendixVersion();
     const packageConf = JSON.parse(await readFile("package.json"));
-    const teamServerProject = packageConf?.config?.testProjectId;
     const widgetVersion = packageConf?.version;
-    const branch = packageConf?.config.e2eBranch || "trunk";
-
-    if (!teamServerProject) {
-        throw new Error(
-            "Currently e2e tests can only run against a teamserver project. Please provide the id of such project through config.testPorjectId in you package.json"
-        );
-    }
-    if (!process.env.TS_USERNAME || !process.env.TS_PASSWORD) {
-        throw new Error(
-            "Currently e2e tests can only run against a teamserver project. Please provide the credentials to access TeamServer through TS_USERNAME and TS_PASSWORD environment variables."
-        );
-    }
     const widgetMpk = ls(`dist/${widgetVersion}/*.mpk`).length;
+
     if (!widgetMpk) {
         throw new Error("No widgets founds in dist folder. Please execute `npm run release` before start e2e tests.");
     }
 
-    // Clone the project
-    rm("-rf", "mendixProject");
-    dockerRun(
-        `jgsqware/svn-client checkout --no-auth-cache -q --username "${process.env.TS_USERNAME}" --password "${
-            process.env.TS_PASSWORD
-        }" https://teamserver.sprintr.com/${teamServerProject}/${
-            branch === "trunk" ? branch : `branches/${branch}`
-        } /source/mendixProject`
-    );
-
     // Copy the built widget to test project
-    cp("-rf", `dist/${widgetVersion}/*.mpk`, "mendixProject/widgets/");
+    mkdir("-p", "tests/testProject/widgets");
+    cp("-rf", `dist/${widgetVersion}/*.mpk`, "tests/testProject/widgets/");
+
+    // Create reusable mxbuild image
+    const existingImages = execSync(`docker image ls -q mxbuild:${latestMendixVersion}`)
+        .toString()
+        .trim();
+    if (!existingImages) {
+        console.log(`Creating new mxbuild docker image...`);
+        execSync(
+            `docker build -f ${join(__dirname, "mxbuild.Dockerfile")} ` +
+                `--build-arg MENDIX_VERSION=${latestMendixVersion} ` +
+                `-t mxbuild:${latestMendixVersion} ${__dirname}`,
+            { stdio: "inherit" }
+        );
+    }
 
     // Build testProject via mxbuild
-    dockerRun(`-e MENDIX_VERSION=${latestMendixVersion} mono:latest /bin/bash /shared/mxbuild.sh`);
+    const projectFile = ls("tests/testProject/*.mpr").toString();
+    execSync(
+        `docker run -t -v ${process.cwd()}:/source ` +
+            `--rm mxbuild:${latestMendixVersion} -o /tmp/automation.mda --loose-version-check /source/${projectFile}`,
+        { stdio: "inherit" }
+    );
 
     // Spin up the runtime and run testProject
     const freePort = await findFreePort(3000);
-    const runtimeContainerId = dockerRun(
-        `-d -u root -e MENDIX_VERSION=${latestMendixVersion} -p ${freePort}:8080 mendix/runtime-base:${latestMendixVersion}-bionic /bin/bash /shared/runtime.sh`,
-        false
-    );
+    const runtimeContainerId = execSync(
+        `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source -p ${freePort}:8080 ` +
+            `-u root -e MENDIX_VERSION=${latestMendixVersion} --entrypoint /bin/bash ` +
+            `mendix/runtime-base:${latestMendixVersion}-bionic /shared/runtime.sh`
+    ).toString();
 
     let attempts = 60;
     for (; attempts > 0; --attempts) {
@@ -73,7 +75,7 @@ async function main() {
         } catch (e) {
             console.log(`Could not reach http://localhost:${freePort}, trying again...`);
         }
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 3000));
     }
 
     try {
@@ -84,16 +86,23 @@ async function main() {
             stdio: "inherit",
             env: { ...process.env, URL: `http://localhost:${freePort}` }
         });
+    } catch (e) {
+        try {
+            execSync(`docker logs ${runtimeContainerId.trim()}`, { stdio: "inherit" });
+        } catch (_) {}
+        console.log(cat("results/runtime.log").toString());
+        throw e;
     } finally {
-        execSync(`docker kill ${runtimeContainerId.trim()}`);
+        execSync(`docker rm -f ${runtimeContainerId.trim()}`);
     }
 }
 
-function dockerRun(command, appendOutput = true) {
-    const dockerStartCommand = `docker run -t --rm -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source`;
-    const output = execSync(`${dockerStartCommand} ${command}`, appendOutput ? { stdio: "inherit" } : {});
-    if (!appendOutput) {
-        return output.toString();
+async function exists(filePath) {
+    try {
+        await access(filePath);
+        return true;
+    } catch (e) {
+        return false;
     }
 }
 

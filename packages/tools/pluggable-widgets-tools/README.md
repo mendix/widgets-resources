@@ -42,7 +42,6 @@ In your `package.json` scripts, use the following command with the desired task:
   "widgetName": "com.company.widgets.MyWidget",
   "version": "1.0.0",
   "config": {
-    "widgetPath": "../MxTestProject/widgets",
     "projectPath": "../MxTestProject/",
     "mendixHost": "http://localhost:8080",
     "developmentPort": "3000"

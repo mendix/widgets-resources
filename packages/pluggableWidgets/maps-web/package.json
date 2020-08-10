@@ -10,17 +10,8 @@
     "url": "https://github.com/mendix/widgets-resources.git"
   },
   "config": {
-    "widgetPath": "./tests/TestProjects/Mendix/widgets",
-    "projectPath": "./tests/TestProjects/Mendix",
     "mendixHost": "http://localhost:8080",
-    "developmentPort": 3000,
-    "testProjectId": "3c9356a0-e646-434a-be37-52ab7d402d4e",
-    "testProjects": [
-      {
-        "branch": "trunk",
-        "path": "./tests/TestProjects/Mendix/"
-      }
-    ]
+    "developmentPort": 3000
   },
   "packagePath": "com.mendix.widget.custom.Maps",
   "scripts": {
@@ -30,10 +21,10 @@
     "format": "pluggable-widgets-tools format",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js && rm tests/testProject/widgets/Maps.mpk",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "release": "pluggable-widgets-tools release:web",
-    "svncheckout": "..\"/../../node_modules/.bin/ts-node\" --project ../../../scripts/tsconfig.json ../../../scripts/svn/CheckoutProject.ts"
+    "release": "pluggable-widgets-tools release:web"
   },
   "devDependencies": {
     "@googlemaps/jest-mocks": "^0.0.3",

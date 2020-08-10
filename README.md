@@ -101,10 +101,12 @@ See [CONTRIBUTING.md](https://github.com/mendix/widgets-resources/blob/master/CO
 ### For developing web widgets in `packages/pluggableWidgets`:
 
 -   Mendix projects for each widget already comes with repo with folder called
-    `packages/pluggableWidgets/**WIDGETNAME**/tests/TestProjects/Mendix*`
+    `packages/pluggableWidgets/<widgetName>/tests/testProject`. If you do not see the corresponding folder, run
+    `git submodules init && git submodule update`.
+-   Run `npm run pretest:e2e` to initialize Mendix project.
 -   Run `npm run build` on a desired widget folder. For ex: `packages/pluggableWidgets/badge-web`. This will build and copy the mpk to
     each Mendix project's correct widget folder.
--   Open and run the project in `packages-native/test-project` with Mendix Studio
+-   Open and run the project in `<widgetName>/tests/testProject` with Mendix Studio
 
 ### For developing in `packages/jsActions`:
 

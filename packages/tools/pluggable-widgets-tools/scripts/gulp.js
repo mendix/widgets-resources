@@ -11,12 +11,12 @@ let webpackCompiler;
 
 const variables = require("../configs/variables");
 
-require("dotenv").config({ path: join(variables.projectPath, ".env") });
+require("dotenv").config({ path: join(variables.sourcePath, ".env") });
 
 const projectPath = normalize(
     process.env.MX_PROJECT_PATH ||
         variables.package.config.projectPath ||
-        join(variables.projectPath, "dist/MxTestProject")
+        join(variables.sourcePath, "tests/testProject")
 );
 const widgetsFolder = join(projectPath, "widgets");
 const isNative = process.argv.indexOf("--native") !== -1;
@@ -24,8 +24,8 @@ const isNative = process.argv.indexOf("--native") !== -1;
 function clean() {
     return del(
         [
-            join(variables.projectPath, "dist", variables.package.version),
-            join(variables.projectPath, "dist/tmp"),
+            join(variables.sourcePath, "dist", variables.package.version),
+            join(variables.sourcePath, "dist/tmp"),
             join(widgetsFolder, `${variables.package.packagePath}.${variables.package.widgetName}.mpk`)
         ],
         { force: true }
@@ -34,10 +34,10 @@ function clean() {
 
 function createMpkFile() {
     return gulp
-        .src(join(variables.projectPath, "dist/tmp/widgets/**/*"))
+        .src(join(variables.sourcePath, "dist/tmp/widgets/**/*"))
         .pipe(zip(`${variables.package.packagePath}.${variables.package.widgetName}.mpk`))
         .pipe(gulp.dest(widgetsFolder))
-        .pipe(gulp.dest(join(variables.projectPath, `dist/${variables.package.version}`)))
+        .pipe(gulp.dest(join(variables.sourcePath, `dist/${variables.package.version}`)))
         .on("error", handleError);
 }
 
@@ -45,8 +45,8 @@ function copyToDeployment() {
     if (existsSync(projectPath) && readdirSync(projectPath).length > 0) {
         return gulp
             .src([
-                join(variables.projectPath, "dist/tmp/widgets/**/*"),
-                "!" + join(variables.projectPath, "dist/tmp/widgets/**/package.xml")
+                join(variables.sourcePath, "dist/tmp/widgets/**/*"),
+                "!" + join(variables.sourcePath, "dist/tmp/widgets/**/package.xml")
             ])
             .pipe(gulp.dest(join(projectPath, `deployment/${isNative ? "native" : "web"}/widgets`)))
             .on("error", handleError)
@@ -63,7 +63,7 @@ function copyToDeployment() {
 function runWebpack(env, cb) {
     let config = require(isNative ? "../configs/webpack.native.config" : `../configs/webpack.config.${env}`);
     try {
-        const customWebpackConfigPath = join(variables.projectPath, `webpack.config.${env}.js`);
+        const customWebpackConfigPath = join(variables.sourcePath, `webpack.config.${env}.js`);
         if (existsSync(customWebpackConfigPath)) {
             config = require(customWebpackConfigPath);
             console.log(colors.magenta(`Using custom webpack configuration from ${customWebpackConfigPath}`));
@@ -108,7 +108,7 @@ function generateTypings() {
         return gulp.src(".", { allowEmpty: true });
     }
     return gulp
-        .src(join(variables.projectPath, "/src/package.xml"))
+        .src(join(variables.sourcePath, "/src/package.xml"))
         .pipe(typingGenerator())
         .on("error", handleError);
 }
@@ -121,6 +121,6 @@ function handleError(err) {
 exports.build = gulp.series(clean, generateTypings, runWebpack.bind(null, "dev"), createMpkFile, copyToDeployment);
 exports.release = gulp.series(clean, generateTypings, runWebpack.bind(null, "prod"), createMpkFile);
 exports.watch = function() {
-    console.log(colors.green(`Watching files in: ${variables.projectPath}/src`));
-    return gulp.watch("src/**/*", { ignoreInitial: false, cwd: variables.projectPath }, exports.build);
+    console.log(colors.green(`Watching files in: ${variables.sourcePath}/src`));
+    return gulp.watch("src/**/*", { ignoreInitial: false, cwd: variables.sourcePath }, exports.build);
 };

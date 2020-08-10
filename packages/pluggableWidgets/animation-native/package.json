@@ -5,10 +5,7 @@
   "description": "Container for animations",
   "copyright": "Mendix 2019",
   "author": "Widget Team",
-  "config": {
-    "widgetPath": "../test-project/mxproject/widgets",
-    "projectPath": "../test-project/mxproject"
-  },
+  "config": {},
   "packagePath": "com.mendix.widget.native",
   "scripts": {
     "start": "pluggable-widgets-tools start:native",

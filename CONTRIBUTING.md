@@ -9,7 +9,7 @@
 1. Clone this repository
 
 ```sh
-$ git clone git@github.com:mendix/widgets-resources.git
+$ git clone --recursive https://github.com/mendix/widgets-resources.git
 $ cd widgets-resources
 ```
 
@@ -18,11 +18,6 @@ $ cd widgets-resources
 ```sh
 $ npm install
 ```
-
-3. Add a test project (optional)
-
-Use Mendix Studio Pro to create a test project in `packages/test-project/mxproject`. The packages in this repository
-will copy their bundles to the test project during their build process.
 
 1. Go make it!
 
