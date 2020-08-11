@@ -3,7 +3,7 @@ import { createElement, ReactNode } from "react";
 import { dynamicValue } from "@widgets-resources/piw-utils";
 import TimelineComponent, { TimelineComponentProps } from "../TimelineComponent";
 import { BasicItemType, CustomItemType } from "../../Timeline";
-import { Icon as WebIcon } from "../../__tests__/__mocks__/mendix/components/web/Icon";
+import { WebIcon } from "mendix";
 
 jest.mock("mendix/components/web/Icon", () =>
     jest.requireActual("../../__tests__/__mocks__/mendix/components/web/Icon")
@@ -21,8 +21,7 @@ describe("Timeline", () => {
 
     const basicItemWithIcon: BasicItemType = {
         ...basicItem,
-        // @ts-ignore
-        icon: dynamicValue<typeof WebIcon>(WebIcon, false)
+        icon: dynamicValue<WebIcon>({ type: "image", iconUrl: "iconUrl" }, false)
     };
 
     const customItem: CustomItemType = {

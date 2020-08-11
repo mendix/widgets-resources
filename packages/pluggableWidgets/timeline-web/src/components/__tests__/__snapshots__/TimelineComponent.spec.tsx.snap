@@ -57,7 +57,12 @@ exports[`Timeline hides the timeline header 1`] = `
             className="icon-wrapper"
           >
             <Component
-              icon={[Function]}
+              icon={
+                Object {
+                  "iconUrl": "iconUrl",
+                  "type": "image",
+                }
+              }
             />
           </div>
           <div
@@ -156,7 +161,12 @@ exports[`Timeline renders timeline with basic configuration 1`] = `
             className="icon-wrapper"
           >
             <Component
-              icon={[Function]}
+              icon={
+                Object {
+                  "iconUrl": "iconUrl",
+                  "type": "image",
+                }
+              }
             />
           </div>
           <div

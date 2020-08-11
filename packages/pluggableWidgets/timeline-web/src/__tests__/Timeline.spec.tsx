@@ -18,14 +18,13 @@ describe("Timeline", () => {
         showDayDivider: true,
         title: () => new EditableValueBuilder<string>().withValue("title").build(),
         description: () => new EditableValueBuilder<string>().withValue("description").build(),
-        // icon: dynamicValue<WebIcon>(undefined, false),
         customIcon: () => <img src={"test"} />,
         customDayDivider: () => <p>Custom Divider</p>,
         customTitle: () => <p>Custom Title</p>,
         customEventDateTime: () => <p>Custom Event Date Time</p>,
         customDescription: () => <p>Custom Description</p>
     };
-    it("converts the data in expected map", () => {
+    it("renders correctly with default props", () => {
         const component = shallow(<Timeline {...defaultProps} />);
         expect(component).toMatchSnapshot();
     });

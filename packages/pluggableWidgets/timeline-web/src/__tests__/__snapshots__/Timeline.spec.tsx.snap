@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Timeline converts the data in expected map 1`] = `
+exports[`Timeline renders correctly with default props 1`] = `
 <TimelineComponent
   data={
     Map {

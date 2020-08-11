@@ -41,9 +41,7 @@ function getCustomEventsFromDay(eventsOfDay: CustomItemType[]): { eventDayDivide
             <li className="timeline-event" key={index}>
                 <div className="icon-wrapper">{event.icon ?? <div className="timeline-icon-circle" />}</div>
                 <div className="flexcontainer content-wrapper">
-                    {Children.count((event.eventDateTime as ReactElement).props.children) > 0 && (
-                        <div className="date-time-wrapper">{event.eventDateTime}</div>
-                    )}
+                    {hasChildren(event.eventDateTime) && <div className="date-time-wrapper">{event.eventDateTime}</div>}
                     <div className="flexcontainer info-wrapper">
                         {event.title}
                         {event.description}
@@ -74,9 +72,7 @@ export function getItems(
 
         const constructedDiv = (
             <div className="timeline-date" key={day}>
-                {showDayDivider && Children.count((dayDivider as ReactElement).props.children) > 0 && (
-                    <div className="timeline-date-header">{dayDivider}</div>
-                )}
+                {showDayDivider && hasChildren(dayDivider) && <div className="timeline-date-header">{dayDivider}</div>}
                 <div className={classNames("timeline-events", !showDayDivider ? "no-divider" : undefined)}>
                     <ul>{events}</ul>
                 </div>
@@ -85,4 +81,8 @@ export function getItems(
         days.push(constructedDiv);
     });
     return days;
+}
+
+function hasChildren(element: any): boolean {
+    return Children.count((element as ReactElement).props.children) > 0;
 }
