@@ -11,8 +11,8 @@ export function preview(props: TimelinePreviewProps) {
 
         Array.from({ length: 5 }).forEach(() => {
             let constructedItem: ItemType;
-            const eventTime = props.eventTime;
-            const date = eventTime;
+            const date = props.eventTime;
+
             if (!date) {
                 return;
             }
@@ -21,8 +21,7 @@ export function preview(props: TimelinePreviewProps) {
                 constructedItem = {
                     icon: props.icon,
                     title: props.title,
-                    date: eventTime,
-                    time: eventTime,
+                    time: date,
                     description: props.description
                 };
             } else {
@@ -55,11 +54,11 @@ export function preview(props: TimelinePreviewProps) {
                 };
             }
 
-            const currentDates = eventsMap.get(eventTime);
+            const currentDates = eventsMap.get(date);
             if (currentDates) {
                 currentDates.push(constructedItem);
             } else {
-                eventsMap.set(eventTime, [constructedItem]);
+                eventsMap.set(date, [constructedItem]);
             }
         });
 
