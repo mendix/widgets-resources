@@ -28,7 +28,7 @@ for (const subCommand of realCommand.split(/&&/g)) {
 
 function getRealCommand(cmd, toolsRoot) {
     const eslintCommand = "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx src";
-    const prrettierCommand = 'prettier --config prettier.config.js "{src,test}/**/*.{js,jsx,ts,tsx}"';
+    const prettierCommand = 'prettier --config prettier.config.js "{src,tests}/**/*.{js,jsx,ts,tsx}"';
     const gulpCommand = `gulp --gulpfile ${join(toolsRoot, "scripts/gulp.js")} --cwd ${process.cwd()}`;
 
     switch (cmd) {
@@ -63,11 +63,11 @@ function getRealCommand(cmd, toolsRoot) {
         case "release:ts:native":
             return `${gulpCommand} release --native --silent`;
         case "lint":
-            return `${prrettierCommand} --check && ${eslintCommand}`;
+            return `${prettierCommand} --check && ${eslintCommand}`;
         case "lint:fix":
-            return `${prrettierCommand} --write && ${eslintCommand} --fix`;
+            return `${prettierCommand} --write && ${eslintCommand} --fix`;
         case "format":
-            return `${prrettierCommand} --write`;
+            return `${prettierCommand} --write`;
         case "test:unit":
         case "test:unit:web":
             return `jest --projects ${join(toolsRoot, "test-config/jest.config.js")}`;

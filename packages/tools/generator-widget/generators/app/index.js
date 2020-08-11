@@ -72,7 +72,7 @@ class MxGenerator extends Generator {
             this.log(text.END_NPM_NEED_INSTALL_MSG);
         } else {
             this.log(text.END_RUN_BUILD_MSG);
-            this.spawnCommandSync("npm", ["run", "lint"]); // eslint-disable-line no-sync
+            this.spawnCommandSync("npm", ["run", "lint:fix"]); // eslint-disable-line no-sync
             this.spawnCommandSync("npm", ["run", "build"]); // eslint-disable-line no-sync
         }
 
@@ -166,9 +166,10 @@ class MxGenerator extends Generator {
     }
 
     _writeUtilityFiles() {
-        this._copyFile("commons/_gitignore", ".gitignore");
+        this._copyTemplate("commons/.gitignore", ".gitignore");
         this._copyFile(`commons/eslintrc.${this.widget.isLanguageTS ? "ts" : "js"}.js`, ".eslintrc.js");
         this._copyFile("commons/prettier.config.js", "prettier.config.js");
+        this._copyTemplate("commons/.prettierignore", ".prettierignore");
         this._copyFile("commons/.gitattributes", ".gitattributes");
 
         if (this.widget.license) {

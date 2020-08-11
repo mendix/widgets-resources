@@ -1,10 +1,10 @@
 import { createElement } from "react";
-import { shallow } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 
 import { HelloWorldSample, HelloWorldSampleProps } from "../HelloWorldSample";
 
 describe("HelloWorldSample", () => {
-    const createHelloWorld = (props: HelloWorldSampleProps) => shallow(<HelloWorldSample {...props} />);
+    const createHelloWorld = (props: HelloWorldSampleProps): ShallowWrapper => shallow(<HelloWorldSample {...props} />);
 
     it("should render the structure correctly", () => {
         const helloWorldProps: HelloWorldSampleProps = {

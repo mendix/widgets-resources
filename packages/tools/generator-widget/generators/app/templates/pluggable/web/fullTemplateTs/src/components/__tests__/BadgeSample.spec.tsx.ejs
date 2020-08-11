@@ -1,10 +1,10 @@
 import { createElement } from "react";
-import { shallow } from "enzyme";
+import { shallow, ShallowWrapper } from "enzyme";
 
 import { BadgeSample, BadgeSampleProps } from "../BadgeSample";
 
 describe("Badge", () => {
-    const createBadge = (props: BadgeSampleProps) => shallow(<BadgeSample {...props} />);
+    const createBadge = (props: BadgeSampleProps): ShallowWrapper => shallow(<BadgeSample {...props} />);
 
     it("should render the structure", () => {
         const badgeProps: BadgeSampleProps = {
