@@ -58,17 +58,26 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 (renderWrapper, value, columnIndex) => {
                     const column = props.columns[columnIndex];
                     return renderWrapper(
-                        column.hasWidgets && column.content
-                            ? column.content(value)
-                            : column.attribute(value).displayValue
+                        column.hasWidgets && column.content ? (
+                            column.content(value)
+                        ) : (
+                            <span className="td-text">{column.attribute(value).displayValue}</span>
+                        )
                     );
                 },
                 [props.columns]
             )}
-            valueForFilter={useCallback(
+            valueForFilterSort={useCallback(
                 (value, columnIndex) => {
                     const column = props.columns[columnIndex];
                     return column.attribute(value).displayValue;
+                },
+                [props.columns]
+            )}
+            filterRenderer={useCallback(
+                (renderWrapper, columnIndex) => {
+                    const column = props.columns[columnIndex];
+                    return renderWrapper(column.customFilter);
                 },
                 [props.columns]
             )}

@@ -41,12 +41,19 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                     return column.hasWidgets ? (
                         <column.content.renderer>{renderWrapper(null)}</column.content.renderer>
                     ) : (
-                        renderWrapper(column.attribute)
+                        renderWrapper(<span className="td-text">{column.attribute}</span>)
                     );
                 },
                 [props.columns]
             )}
-            valueForFilter={useCallback(() => undefined, [])}
+            valueForFilterSort={useCallback(() => undefined, [])}
+            filterRenderer={useCallback(
+                (renderWrapper, columnIndex) => {
+                    const column = props.columns[columnIndex];
+                    return <column.customFilter.renderer>{renderWrapper(null)}</column.customFilter.renderer>;
+                },
+                [props.columns]
+            )}
         />
     );
 }
