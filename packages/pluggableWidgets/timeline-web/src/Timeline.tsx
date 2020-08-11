@@ -7,7 +7,6 @@ import TimelineComponent from "./components/TimelineComponent";
 export interface BasicItemType {
     icon?: DynamicValue<WebIcon>;
     title?: string;
-    date?: string;
     time?: string;
     description?: string;
 }
@@ -45,7 +44,6 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
                 constructedItem = {
                     icon: props.icon,
                     title: props.title?.(item).displayValue,
-                    date: dateFormatter?.format(eventTime.value),
                     time: timeFormatter?.format(eventTime.value),
                     description: props.description?.(item).displayValue
                 };

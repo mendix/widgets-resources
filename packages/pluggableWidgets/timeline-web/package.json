@@ -16,7 +16,7 @@
     "build": "pluggable-widgets-tools build:web",
     "format": "pluggable-widgets-tools format",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js && rm tests/testProject/widgets/Timeline.mpk",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js && rm tests/testProject/widgets/com.mendix.widget.web.Timeline.mpk",
     "test": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "..\"/../../node_modules/.bin/cross-env\" DEBUG=true node ../../../node_modules/.bin/wdio ../../../configs/e2e/wdio.conf.js",

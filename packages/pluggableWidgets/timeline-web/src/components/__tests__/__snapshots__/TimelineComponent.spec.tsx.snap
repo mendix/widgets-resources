@@ -1,0 +1,283 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Timeline hides the timeline header 1`] = `
+<div
+  className="timeline-wrapper"
+>
+  <div
+    className="timeline-date"
+    key="Sun May 29 1453"
+  >
+    <div
+      className="timeline-events no-divider"
+    >
+      <ul>
+        <li
+          className="timeline-event"
+          key="0"
+        >
+          <div
+            className="icon-wrapper"
+          >
+            <div
+              className="timeline-icon-circle"
+            />
+          </div>
+          <div
+            className="flex-container content-wrapper"
+          >
+            <div
+              className="date-time-wrapper"
+            >
+              <p>
+                Sun May 29 1453
+              </p>
+            </div>
+            <div
+              className="flex-container info-wrapper"
+            >
+              <p
+                className="title"
+              >
+                Basic title
+              </p>
+              <p
+                className="description"
+              >
+                Basic description
+              </p>
+            </div>
+          </div>
+        </li>
+        <li
+          className="timeline-event"
+          key="1"
+        >
+          <div
+            className="icon-wrapper"
+          >
+            <Component
+              icon={[Function]}
+            />
+          </div>
+          <div
+            className="flex-container content-wrapper"
+          >
+            <div
+              className="date-time-wrapper"
+            >
+              <p>
+                Sun May 29 1453
+              </p>
+            </div>
+            <div
+              className="flex-container info-wrapper"
+            >
+              <p
+                className="title"
+              >
+                Basic title
+              </p>
+              <p
+                className="description"
+              >
+                Basic description
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Timeline renders timeline with basic configuration 1`] = `
+<div
+  className="timeline-wrapper"
+>
+  <div
+    className="timeline-date"
+    key="Sun May 29 1453"
+  >
+    <div
+      className="timeline-date-header"
+    >
+      <span>
+        Sun May 29 1453
+      </span>
+    </div>
+    <div
+      className="timeline-events"
+    >
+      <ul>
+        <li
+          className="timeline-event"
+          key="0"
+        >
+          <div
+            className="icon-wrapper"
+          >
+            <div
+              className="timeline-icon-circle"
+            />
+          </div>
+          <div
+            className="flex-container content-wrapper"
+          >
+            <div
+              className="date-time-wrapper"
+            >
+              <p>
+                Sun May 29 1453
+              </p>
+            </div>
+            <div
+              className="flex-container info-wrapper"
+            >
+              <p
+                className="title"
+              >
+                Basic title
+              </p>
+              <p
+                className="description"
+              >
+                Basic description
+              </p>
+            </div>
+          </div>
+        </li>
+        <li
+          className="timeline-event"
+          key="1"
+        >
+          <div
+            className="icon-wrapper"
+          >
+            <Component
+              icon={[Function]}
+            />
+          </div>
+          <div
+            className="flex-container content-wrapper"
+          >
+            <div
+              className="date-time-wrapper"
+            >
+              <p>
+                Sun May 29 1453
+              </p>
+            </div>
+            <div
+              className="flex-container info-wrapper"
+            >
+              <p
+                className="title"
+              >
+                Basic title
+              </p>
+              <p
+                className="description"
+              >
+                Basic description
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Timeline renders timeline with custom configuration  1`] = `
+<div
+  className="timeline-wrapper"
+>
+  <div
+    className="timeline-date"
+    key="Sun May 29 1453"
+  >
+    <div
+      className="timeline-date-header"
+    >
+      <p>
+        Day Divider
+      </p>
+    </div>
+    <div
+      className="timeline-events"
+    >
+      <ul>
+        <li
+          className="timeline-event"
+          key="0"
+        >
+          <div
+            className="icon-wrapper"
+          >
+            <div
+              className="timeline-icon-circle"
+            />
+          </div>
+          <div
+            className="flexcontainer content-wrapper"
+          >
+            <div
+              className="date-time-wrapper"
+            >
+              <p>
+                Date Time
+              </p>
+            </div>
+            <div
+              className="flexcontainer info-wrapper"
+            >
+              <p>
+                Title
+              </p>
+              <p>
+                Description
+              </p>
+            </div>
+          </div>
+        </li>
+        <li
+          className="timeline-event"
+          key="1"
+        >
+          <div
+            className="icon-wrapper"
+          >
+            <img
+              src="customIcon"
+            />
+          </div>
+          <div
+            className="flexcontainer content-wrapper"
+          >
+            <div
+              className="date-time-wrapper"
+            >
+              <p>
+                Date Time
+              </p>
+            </div>
+            <div
+              className="flexcontainer info-wrapper"
+            >
+              <p>
+                Title
+              </p>
+              <p>
+                Description
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;

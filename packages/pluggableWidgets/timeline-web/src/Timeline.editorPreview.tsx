@@ -27,11 +27,31 @@ export function preview(props: TimelinePreviewProps) {
                 };
             } else {
                 constructedItem = {
-                    icon: props.customIcon,
-                    dayDivider: props.customDayDivider,
-                    title: props.customTitle,
-                    eventDateTime: props.customEventDateTime,
-                    description: props.customDescription
+                    icon: (
+                        <props.customIcon.renderer>
+                            <div />
+                        </props.customIcon.renderer>
+                    ),
+                    dayDivider: (
+                        <props.customDayDivider.renderer>
+                            <div />
+                        </props.customDayDivider.renderer>
+                    ),
+                    title: (
+                        <props.customTitle.renderer>
+                            <div />
+                        </props.customTitle.renderer>
+                    ),
+                    eventDateTime: (
+                        <props.customEventDateTime.renderer>
+                            <div />
+                        </props.customEventDateTime.renderer>
+                    ),
+                    description: (
+                        <props.customDescription.renderer>
+                            <div />
+                        </props.customDescription.renderer>
+                    )
                 };
             }
 

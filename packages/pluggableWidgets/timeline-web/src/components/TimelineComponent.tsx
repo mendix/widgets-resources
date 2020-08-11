@@ -4,13 +4,13 @@ import classNames from "classnames";
 import { BasicItemType, CustomItemType, ItemType } from "../Timeline";
 import { Icon } from "mendix/components/web/Icon";
 
-interface TimelineProps {
+export interface TimelineComponentProps {
     data: Map<string | ReactNode, ItemType[]>;
     renderMode: RenderModeEnum;
     showDayDivider: boolean;
 }
 
-export default function TimelineComponent(props: TimelineProps): ReactElement {
+export default function TimelineComponent(props: TimelineComponentProps): ReactElement {
     return <div className="timeline-wrapper">{getItems(props.data, props.renderMode, props.showDayDivider)}</div>;
 }
 
@@ -73,7 +73,7 @@ export function getItems(
         }
 
         const constructedDiv = (
-            <div className="timeline-date">
+            <div className="timeline-date" key={day}>
                 {showDayDivider && Children.count((dayDivider as ReactElement).props.children) > 0 && (
                     <div className="timeline-date-header">{dayDivider}</div>
                 )}

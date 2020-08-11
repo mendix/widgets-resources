@@ -23,7 +23,7 @@
                 </property>
                 <property key="eventTime" type="attribute" dataSource="data">
                     <caption>Event date time attribute</caption>
-                    <description>Will be used for grouping by date.</description>
+                    <description>Will be used for grouping events based on date.</description>
                     <attributeTypes>
                         <attributeType name="DateTime"/>
                     </attributeTypes>

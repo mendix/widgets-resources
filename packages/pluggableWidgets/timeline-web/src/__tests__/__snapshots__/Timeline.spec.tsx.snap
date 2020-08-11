@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Timeline converts the data in expected map 1`] = `
+<TimelineComponent
+  data={
+    Map {
+      "Formatted Sun May 29 1453 00:00:00 GMT+0019 (Central European Summer Time)" => Array [
+        Object {
+          "description": "Formatted description",
+          "icon": undefined,
+          "time": "Formatted Sun May 29 1453 00:00:00 GMT+0019 (Central European Summer Time)",
+          "title": "Formatted title",
+        },
+        Object {
+          "description": "Formatted description",
+          "icon": undefined,
+          "time": "Formatted Sun May 29 1453 00:00:00 GMT+0019 (Central European Summer Time)",
+          "title": "Formatted title",
+        },
+      ],
+    }
+  }
+  renderMode="basic"
+  showDayDivider={true}
+/>
+`;
