@@ -32,7 +32,6 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
             }
 
             .column-resizer {
-                width: 4px;
                 min-width: 4px;
                 margin: 0 4px;
                 height: 100%;
@@ -143,6 +142,11 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
 
                 &:focus {
                     outline: none;
+                }
+
+                > .td-text {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
                 }
             }
 
