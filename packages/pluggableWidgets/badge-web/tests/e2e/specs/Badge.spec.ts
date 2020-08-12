@@ -10,8 +10,15 @@ describe("badge-web", () => {
     describe("type: badge", () => {
         it("compares successfully with a screenshot baseline", () => {
             browser.setWindowRect(0, 0, 1200, 900);
-            browser.saveFullPageScreen("badgeHomePage", {});
-            expect(browser.checkFullPageScreen("badgeHomePage", {})).toEqual(0);
+            browser.pause(3000);
+            browser.saveElement($(".mx-dataview-content"), "badgePageContent", {
+                /* some options */
+            });
+            expect(
+                browser.checkElement($(".mx-dataview-content"), "badgePageContent", {
+                    /* some options */
+                })
+            ).toEqual(0);
         });
         it("changes caption when attribute value is changed", () => {
             const newAttributeValue = "Test";
