@@ -22,6 +22,10 @@ export interface NotificationsProps<Style> {
     style: Style[];
     actions: ActionsType[];
     guid?: EditableValue<string>;
+    title?: EditableValue<string>;
+    subtitle?: EditableValue<string>;
+    body?: EditableValue<string>;
+    action?: EditableValue<string>;
 }
 
 export interface NotificationsPreviewProps {
@@ -29,4 +33,8 @@ export interface NotificationsPreviewProps {
     style: string;
     actions: ActionsPreviewType[];
     guid: string;
+    title: string;
+    subtitle: string;
+    body: string;
+    action: string;
 }

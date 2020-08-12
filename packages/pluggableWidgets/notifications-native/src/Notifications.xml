@@ -33,6 +33,34 @@
                     <attributeType name="String"/>
                 </attributeTypes>
             </property>
+            <property key="title" type="attribute" required="false">
+                <caption>Title</caption>
+                <description>If the notification has a title, this attribute will get that value.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="subtitle" type="attribute" required="false">
+                <caption>Subtitle</caption>
+                <description>If the notification has a subtitle, this attribute will get that value.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="body" type="attribute" required="false">
+                <caption>Body</caption>
+                <description>If the notification has a body, this attribute will get that value.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="action" type="attribute" required="false">
+                <caption>Subtitle</caption>
+                <description>If the notification has actions, this attribute will get the name of all actions joined by spaces.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
         </propertyGroup>
     </properties>
 </widget>
