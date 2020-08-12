@@ -50,7 +50,23 @@ exports.config = {
     waitforTimeout: 30000,
     connectionRetryTimeout: 90000,
     connectionRetryCount: 0,
-    services: ["selenium-standalone"],
+    services: [
+        ["selenium-standalone"],
+        [
+            "image-comparison",
+            // The options for image-comparison
+            {
+                baselineFolder: basePath + "/tests/e2e/screenshot-baseline/",
+                formatImageName: "{tag}-{logName}-{width}x{height}--{browserName}",
+                screenshotPath: basePath + "/tests/screenshot/",
+                savePerInstance: false,
+                autoSaveBaseline: true,
+                blockOutStatusBar: true,
+                blockOutToolBar: true,
+                hideScrollBars: true
+            }
+        ]
+    ],
     framework: "jasmine",
     reporters: ["spec"],
     execArgv: debug ? ["--inspect"] : undefined,
