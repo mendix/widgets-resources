@@ -1,0 +1,48 @@
+{
+  "name": "maps-web",
+  "widgetName": "Maps",
+  "version": "2.0.0",
+  "description": "Show locations on Maps",
+  "copyright": "Mendix Technology B.V.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
+  },
+  "packagePath": "com.mendix.widget.custom.Maps",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server --open",
+    "dev": "pluggable-widgets-tools start:ts",
+    "build": "pluggable-widgets-tools build:ts",
+    "format": "pluggable-widgets-tools format",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js && rm tests/testProject/widgets/Maps.mpk",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web",
+    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
+    "release": "pluggable-widgets-tools release:web"
+  },
+  "devDependencies": {
+    "@googlemaps/jest-mocks": "^0.0.3",
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@types/classnames": "^2.2.6",
+    "@types/deep-equal": "^1.0.1",
+    "@types/googlemaps": "^3.39.2",
+    "@types/faker": "^4.1.0",
+    "@types/react-leaflet": "^2.5.1",
+    "faker": "^4.1.0"
+  },
+  "dependencies": {
+    "@react-google-maps/api": "^1.8.6",
+    "@widgets-resources/piw-utils": "^1.0.0",
+    "classnames": "^2.2.6",
+    "deep-equal": "^2.0.2",
+    "leaflet": "^1.6.0",
+    "react-leaflet": "^2.6.3",
+    "leaflet-defaulticon-compatibility": "^0.1.1"
+  }
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.backgroundimage.BackgroundImage" supportedPlatform="Native" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>Background image</name>
+    <description />
+    <helpUrl>https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/background-image-native/README.md</helpUrl>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAAHdbkFIAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABlmWCKAAAHdUlEQVR4Ae0bW2wUVfTso6xgrUjTYJHUUoyo1BeiRSXGVGwwkQ+RthobftQiMfHDR4iJGkI0hkT4kJgKiPGjDWlrDMYPEwONGqJUefigRVIEUh5VDE2BSrPuy3Nm9s7emblz587sLN2Uvcn2Ps77zH2eewugmpqbmzPst28kqZWJNsozeO3DnXxVK4f5lvX9Cb4qQGgo0xp5RBMHRr4+i0h1IQJDpNyk5KZXnuVhHsvMdvLF7iPnMow8xAqEwMqUL6mOajCTkrx5DNmMgOZZkQwRy3dNZJpqIvBQtU7DRBgITjoYfnDygcGBKZXJZEItLS1pVrfk4729vdfxbYYE1kjEom6RhZdjnkEmhmCTFxgTyj8/loSL//Et4rJNA4a26hZHEEPRckcs/nuw7kdtJgcgC2cGXJ9lIonRpi5W03NHH5jRirlmfE+mJI6XfVhuYHU+D4VC7T09Pdv5NpMPiHjeHfc0iDoStWEv3cYTU9n6FRpWvrROwxExsRJT3aSBCMGtzZHBBwfts6CImZABEY+r0dt8oAl5fZE+xYokWtusTrTC4b39CUikAKahrjEb1P4VNJQNPyUgjZNkGHsJ5TQGth5OwriAgc0HNOJmoF5EFIvoOdGtqRcra2ttnBuBR27S+a67z90XNg0YsUBbYZONgRBL0mgygQYLTt+2/i6hnwIg23zC2+SySPGosnIfrkOPOSGYvoEVia2Q/NSy9Z2XYXxs1Ipq1Hnc7HLcaAAFBakCAnxYs+EjUbPvtry7sW/JWUJPHqDtwuHzuZ0YW7DzUcKTB5pqcvpOzxXzkS+ez504VkzLTY5WnPdx2o7jtL0Ud5DLcCepmjzbsflQQtu1rb0rCrOnh+DdnxOQzO4mafLdeCABe0f0Bus+SqSUkgIkgARRoonjYbSy47ekVqdvyPcFVv7zQhp2aRjyP0oKkPC6ijCsvj3n2sdd3Dz/erXupaQAs0puiz+ompr+eCtRuSmgbSNkU6+SFAmSdDEiOtyv7sGsUcJDCorFYnM6OztHpEgl4GR6wLUP4J7gRdyYbEYl6ZDrJfXjYehB3OflVi8BtVSBfDsgyUMlwjIl3CYirffTJqR85ixNf6egAzOO7Yi++HgjnBj8BdCDPyJsCYNbc7d5QMNnwq3E1jqPx06KiCM8rzJaNw8wPCNnFhoNeRaUPJCnDCl5SQFPHqD4FZ3faXMaVPLUCWk7RknfGSdBNSYmU9aTB3hGJy9KJzgeVVr2pAC/FW+vdz/9SyVngZ4+gUrIQUUoj+NJAZ6QLw9fysCng0ltx/z2A2VadIaHy8qePoGI0XHcfpNwStQrKER06B+nsLOGZvrjyQN/T2S088C1SPUGHkKOjqVh51E8DmGiuPrp8QwMjqbhy+Mp+PaM3m6SJqgoK3DgXBq+OqEz/RcNZkcx4vlkbQQWz9adeX4iDFvw0HIhDrYIs0C+WriydyhpCF9+s344oXMgpafqooZwqlficY3OEeWKg0SpDwyM6mO+fWEUltwY1gREkfKZWyNwd5V4T6MasFT+BG8u1kOHZCWlt+5XNFFHd/yrpMBVfTRzdF1QAKVOGJQwEZ+pqwB3ohYF6g1nKI0Ct7OAwU1QwEPJq4Jmo0n6CehobWD6K/RZ76r8sSlRlTwwdT0gXsoV7W1ra6uOx+OdiN6oSBI0Wh9OFG35xOB8OyAbOCqKCz66bPQ72ymtA6LPlo2aGSA+hmQ0YiGfNYT4iKIxtMjRzR1LWV22s7qXXLoOuTAyhQz52BRPR3EqJxiPZy0TDRfjMoEF/Ey6mJBdKr57gAtfA4xvQgK/5jSYB1DIpwcEIH7yWZQcMPnfYHI1KNgcQLHUjt8TMGEJpVKAb+2dZUDX38WQCjYEth22G08Gk0MIViypYA6orXDeY8lgV9oxBRsCFL1vqgH4ZjgJLJhOhtPTk2Lp/uTsgjmAmJOhXq8x/rqcge/OpGECR8mjc0NQi281CpkK6gAvip+8lIauP1KQ4CLrnx0hDimYUx6Cp+dHoPIa52HlRRaPW3AH0IvYvWdT2tuipXPCMDNmNmIIQ/zdQzqcV4xWC7aCnMWw/5Zf9eVk4awQrMCAeFApOE4WjejdUg8axqL4BN6PVwxk2OrbojAWz0DvsZT2zpYnfQKvGhqyVw3UfhAvW74+mesZFKgfGLU/bud5eCkH7oDdwynj5ZhIEfqq9KiYT9QnVtRFYFGVfbxTG/1SeEGx51QKfsi+SuPp8ykH5oAdA0k4hV2VT2V4lbMKx+6CG3TD+k6n4Huc4Fiil9Yr50ehvtI8LBiczyOIQrdg9LuMw6qji4f6LwfmAN74Krykem5BFMe7WTF65E0/el4eQoPczTbTs9qMYG6GNHaBOYC43YtddcW8iOstLX35YkmBOaCQd2iFdJZ91imktCLkXXJAEX6UK6pSqQfk4e5+npaeSXJ3sjwo0DLJIFmWZNLFApNWfS9I2X/z2Y3cG6USCg+kK+BlssexMhV8O4AxJUe0tra+gPnz2LYQf75j9IynS043/gNo8I7u7u5P/BruIqMEvmo88D82wx1NJv+rXQAAAABJRU5ErkJggg==</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="image" type="image">
+                    <caption>Image</caption>
+                    <description />
+                </property>
+                <property key="resizeMode" type="enumeration" defaultValue="cover">
+                    <caption>Resize mode</caption>
+                    <description>Cover: scale to  cover space. Contain: scale to fit in space. Stretch: stretched to fit space. Center: centered and fit in space. For more information see the help page.</description>
+                    <enumerationValues>
+                        <enumerationValue key="cover">Cover</enumerationValue>
+                        <enumerationValue key="contain">Contain</enumerationValue>
+                        <enumerationValue key="stretch">Stretch</enumerationValue>
+                        <enumerationValue key="center">Center</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="opacity" type="decimal" defaultValue="1.0">
+                    <caption>Opacity</caption>
+                    <description>Takes a value from 0.0 - 1.0. The lower the value, the more transparent.</description>
+                </property>
+                <property key="content" type="widgets" required="false">
+                    <caption>Content</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name" />
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

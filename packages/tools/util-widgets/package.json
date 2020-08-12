@@ -1,0 +1,17 @@
+{
+  "name": "@native-mobile-resources/util-widgets",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "..\"/../../node_modules/.bin/tsc\" --watch",
+    "prebuild": "..\"/../../node_modules/.bin/rimraf\" ./dist",
+    "build": "..\"/../../node_modules/.bin/tsc\"",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2"
+  }
+}

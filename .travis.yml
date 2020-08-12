@@ -2,11 +2,13 @@ dist: xenial
 language: node_js
 node_js: 14
 cache: npm
+git:
+    submodules: false
 branches:
     only:
         - master
         - /^pluggable-widgets-tools-v*/
-        - /^pluggable-widgets-generator-v*/
+        - /^generator-widget-v*/
 env:
     global:
         # Build only touched packages for pull requests when no shared files were touched
@@ -32,10 +34,6 @@ jobs:
           os: windows
           script:
               - npm run test:scripts -- $SINCE_ARG
-        - name: "Script tests (Node 10, linux)"
-          node_js: 10
-          script:
-              - npm run test:scripts -- $SINCE_ARG
         - name: "Script tests (Node latest, windows)"
           os: windows
           script:
@@ -43,10 +41,12 @@ jobs:
         - name: "Script tests (Node latest, linux)"
           script:
               - npm run test:scripts -- $SINCE_ARG
-        - name: "Run end-to-end tests"
+        - name: "Run automated end-to-end tests"
           dist: trusty
           addons:
               firefox: latest
+          git:
+              submodules: true
           services:
               - docker
           env:
@@ -61,7 +61,7 @@ jobs:
           script:
               - echo "Ready to deploy!"
           before_deploy:
-              - if [[ "$TRAVIS_TAG" =~ ^pluggable-widgets-tools-v* ]]; then cd packages-common/pluggable-widgets-tools; else cd packages-common/pluggable-widgets-generator; fi
+              - if [[ "$TRAVIS_TAG" =~ ^pluggable-widgets-tools-v* ]]; then cd packages/tools/pluggable-widgets-tools; else cd packages/tools/generator-widget; fi
           deploy:
               skip_cleanup: true
               provider: npm

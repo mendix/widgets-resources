@@ -1,0 +1,11 @@
+{
+    "extends": "@widgets-resources/utils-react-widgets/configs/tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "rootDir": "./",
+        "outDir": "dist/tsc/",
+        "types": ["mendix-client"],
+        "esModuleInterop": true
+    },
+    "exclude": ["dist/", "tests/", "**/*.spec.ts", "node_modules/"]
+}
