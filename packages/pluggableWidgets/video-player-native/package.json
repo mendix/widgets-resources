@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@widgets-resources/piw-utils": "1.0.0",
     "@types/react-native-video": "^5.0.1"
   }
 }
