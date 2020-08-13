@@ -9,7 +9,7 @@ describe("badge-web", () => {
 
     describe("type: badge", () => {
         it("compares successfully with a screenshot baseline", () => {
-            browser.setWindowRect(0, 0, 1200, 900);
+            browser.setWindowRect(0, 0, 1024, 768);
             browser.pause(3000);
             browser.saveElement($(".mx-dataview-content"), "badgePageContent", {
                 /* some options */
