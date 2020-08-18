@@ -11,9 +11,14 @@ describe("badge-web", () => {
         it("compares successfully with a screenshot baseline", () => {
             browser.setWindowRect(0, 0, 1024, 768);
             browser.pause(3000);
+            browser.saveElement($(".mx-dataview-content"), "badgePageContent", {
+                removeElements: [$(".sprintrFeedback__sidebar")],
+                disableCSSAnimation: true
+            });
             expect(
                 browser.checkElement($(".mx-dataview-content"), "badgePageContent", {
-                    removeElements: [$(".sprintrFeedback__sidebar")]
+                    removeElements: [$(".sprintrFeedback__sidebar")],
+                    disableCSSAnimation: true
                 })
             ).toEqual(0);
         });
