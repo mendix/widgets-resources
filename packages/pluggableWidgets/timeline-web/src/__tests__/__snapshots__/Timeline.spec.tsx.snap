@@ -21,6 +21,6 @@ exports[`Timeline renders correctly with default props 1`] = `
     }
   }
   renderMode="basic"
-  showDayDivider={true}
+  showGroupDivider={true}
 />
 `;

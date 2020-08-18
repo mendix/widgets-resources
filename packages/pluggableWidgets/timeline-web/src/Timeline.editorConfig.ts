@@ -1,4 +1,4 @@
-import { hidePropertiesIn, Properties } from "@widgets-resources/piw-utils";
+import { hidePropertiesIn, hidePropertyIn, Properties } from "@widgets-resources/piw-utils";
 import { TimelinePreviewProps } from "../typings/TimelineProps";
 
 export function getProperties(values: TimelinePreviewProps, defaultProperties: Properties): Properties {
@@ -10,8 +10,11 @@ export function getProperties(values: TimelinePreviewProps, defaultProperties: P
             "customTitle",
             "customEventDateTime",
             "customDescription",
-            "customDayDivider"
+            "customGroupDivider"
         ]);
+    }
+    if (!values.showGroupDivider) {
+        hidePropertyIn(defaultProperties, values, "groupByKey");
     }
     return defaultProperties;
 }

@@ -31,10 +31,10 @@ export function preview(props: TimelinePreviewProps) {
                             <div />
                         </props.customIcon.renderer>
                     ),
-                    dayDivider: (
-                        <props.customDayDivider.renderer>
+                    groupDivider: (
+                        <props.customGroupDivider.renderer>
                             <div />
-                        </props.customDayDivider.renderer>
+                        </props.customGroupDivider.renderer>
                     ),
                     title: (
                         <props.customTitle.renderer>
@@ -68,7 +68,7 @@ export function preview(props: TimelinePreviewProps) {
         <TimelineComponent
             data={structuredEvents()}
             renderMode={props.renderMode}
-            showDayDivider={props.showDayDivider}
+            showGroupDivider={props.showGroupDivider}
         />
     );
 }

@@ -7,82 +7,79 @@ $gutter-size: 15px;
 $icon-size: 18px;
 $icon-position-left: -($icon-size / 2);
 
-.timeline-date {
-    .timeline-date-header {
-        display: inline-block;
-        width: 110px;
-        padding: 8px;
-        text-align: center;
-        border: 1px solid $border-color;
-        border-radius: 30px;
-    }
-    .timeline-events {
+.timeline-date-header {
+    display: inline-block;
+    width: 110px;
+    overflow-wrap: break-word;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid $border-color;
+    border-radius: 30px;
+}
+
+.timeline-events {
+    margin-bottom: 0;
+    margin-left: 55px;
+    padding: 35px 0;
+    border-left: 1px solid $border-color;
+    ul {
+        padding: 0;
+        list-style: none;
         margin-bottom: 0;
-        margin-left: 55px;
-        padding: 35px 0;
-        border-left: 1px solid $border-color;
-        ul {
-            padding: 0;
-            list-style: none;
-            margin-bottom: 0;
+    }
+}
+
+.timeline-event {
+    position: relative;
+    padding-left: ($gutter-size * 2);
+    padding-bottom: 20px;
+}
+
+.icon-wrapper {
+    position: absolute;
+    top: 3px;
+    left: $icon-position-left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $icon-size;
+    height: $icon-size;
+
+    .glyphicon {
+        font-size: $icon-size;
+    }
+    img {
+        max-width: $icon-size;
+        max-height: $icon-size;
+    }
+}
+
+.content-wrapper {
+    .date-time-wrapper {
+        margin-right: 15px;
+    }
+    .info-wrapper {
+        flex-direction: column;
+
+        .title {
+            color: $title-color;
         }
-        .timeline-event {
-            position: relative;
-            padding-left: ($gutter-size * 2);
-            padding-bottom: 20px;
-
-            .icon-wrapper {
-                position: absolute;
-                top: 3px;
-                left: $icon-position-left;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: $icon-size;
-                height: $icon-size;
-
-                .glyphicon {
-                    font-size: $icon-size;
-                }
-                img {
-                    max-width: $icon-size;
-                    max-height: $icon-size;
-                }
-            }
-
-            .timeline-icon-circle {
-                width: $icon-size;
-                height: $icon-size;
-                border-radius: 50%;
-                background-color: $primary-color;
-            }
-
-            .content-wrapper {
-                .date-time-wrapper {
-                    margin-right: 15px;
-                    p {
-                    }
-                }
-                .info-wrapper {
-                    flex-direction: column;
-
-                    .title {
-                        line-height: 20px;
-                        color: $title-color;
-                    }
-                    .description {
-                        line-height: 20px;
-                        color: $description-color;
-                    }
-                }
-            }
+        .description {
+            color: $description-color;
         }
     }
+}
 
-    .no-divider {
-        padding-bottom: 0;
-        padding-top: 0;
-    }
+.timeline-icon-circle {
+    width: $icon-size;
+    height: $icon-size;
+    border-radius: 50%;
+    background-color: $primary-color;
+}
+
+.no-divider {
+    padding-bottom: 0;
+    padding-top: 0;
 }
 
 .flex-container {

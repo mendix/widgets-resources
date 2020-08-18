@@ -7,11 +7,11 @@ import { Icon } from "mendix/components/web/Icon";
 export interface TimelineComponentProps {
     data: Map<string | ReactNode, ItemType[]>;
     renderMode: RenderModeEnum;
-    showDayDivider: boolean;
+    showGroupDivider: boolean;
 }
 
 export default function TimelineComponent(props: TimelineComponentProps): ReactElement {
-    return <div className="timeline-wrapper">{getItems(props.data, props.renderMode, props.showDayDivider)}</div>;
+    return <div className="timeline-wrapper">{getItems(props.data, props.renderMode, props.showGroupDivider)}</div>;
 }
 
 function getBasicEventsFromDay(eventsOfDay: BasicItemType[]): ReactNode[] {
@@ -33,13 +33,15 @@ function getBasicEventsFromDay(eventsOfDay: BasicItemType[]): ReactNode[] {
     ));
 }
 
-function getCustomEventsFromDay(eventsOfDay: CustomItemType[]): { eventDayDivider: ReactNode; events: ReactNode[] } {
-    let eventDayDivider: ReactNode = null;
+function getCustomEventsFromDay(eventsOfDay: CustomItemType[]): { groupDivider: ReactNode; events: ReactNode[] } {
+    let groupDivider: ReactNode = null;
     const events = eventsOfDay.map((event, index) => {
-        eventDayDivider = event.dayDivider;
+        groupDivider = event.groupDivider;
         return (
             <li className="timeline-event" key={index}>
-                <div className="icon-wrapper">{event.icon ?? <div className="timeline-icon-circle" />}</div>
+                <div className="icon-wrapper">
+                    {hasChildren(event.icon) ? event.icon : <div className="timeline-icon-circle" />}
+                </div>
                 <div className="flexcontainer content-wrapper">
                     {hasChildren(event.eventDateTime) && <div className="date-time-wrapper">{event.eventDateTime}</div>}
                     <div className="flexcontainer info-wrapper">
@@ -50,30 +52,32 @@ function getCustomEventsFromDay(eventsOfDay: CustomItemType[]): { eventDayDivide
             </li>
         );
     });
-    return { eventDayDivider, events };
+    return { groupDivider, events };
 }
 
 export function getItems(
     structuredEvents: Map<string | ReactNode, ItemType[]>,
     renderMode: RenderModeEnum,
-    showDayDivider: boolean
+    showGroupDivider: boolean
 ): ReactNode[] {
     const days: ReactNode[] = [];
-    structuredEvents.forEach((eventsOfDay: ItemType[], day: string) => {
+    structuredEvents.forEach((eventsOfDay: ItemType[], groupKey: string) => {
         let events;
-        let dayDivider;
+        let groupDivider;
         if (renderMode === "basic") {
             events = getBasicEventsFromDay(eventsOfDay as BasicItemType[]);
-            dayDivider = <span>{day}</span>;
+            groupDivider = <span>{groupKey}</span>;
         } else {
             events = getCustomEventsFromDay(eventsOfDay).events;
-            dayDivider = getCustomEventsFromDay(eventsOfDay).eventDayDivider;
+            groupDivider = getCustomEventsFromDay(eventsOfDay).groupDivider;
         }
 
         const constructedDiv = (
-            <div className="timeline-date" key={day}>
-                {showDayDivider && hasChildren(dayDivider) && <div className="timeline-date-header">{dayDivider}</div>}
-                <div className={classNames("timeline-events", !showDayDivider ? "no-divider" : undefined)}>
+            <div className="timeline-date" key={groupKey}>
+                {showGroupDivider && hasChildren(groupDivider) && (
+                    <div className="timeline-date-header">{groupDivider}</div>
+                )}
+                <div className={classNames("timeline-events", !showGroupDivider ? "no-divider" : undefined)}>
                     <ul>{events}</ul>
                 </div>
             </div>
@@ -84,5 +88,5 @@ export function getItems(
 }
 
 function hasChildren(element: any): boolean {
-    return Children.count((element as ReactElement).props.children) > 0;
+    return Children.count((element as ReactElement)?.props.children) > 0;
 }

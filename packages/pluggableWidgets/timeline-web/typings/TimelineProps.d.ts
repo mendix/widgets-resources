@@ -8,6 +8,8 @@ import { DynamicValue, ListValue, ListAttributeValue, ListWidgetValue, WebIcon }
 
 export type RenderModeEnum = "basic" | "custom";
 
+export type GroupByKeyEnum = "day" | "month" | "year";
+
 export interface TimelineContainerProps {
     name: string;
     class: string;
@@ -16,12 +18,13 @@ export interface TimelineContainerProps {
     renderMode: RenderModeEnum;
     data: ListValue;
     eventTime: ListAttributeValue<Date>;
-    showDayDivider: boolean;
+    showGroupDivider: boolean;
+    groupByKey: GroupByKeyEnum;
     title?: ListAttributeValue<string>;
     description?: ListAttributeValue<string>;
     icon?: DynamicValue<WebIcon>;
     customIcon?: ListWidgetValue;
-    customDayDivider?: ListWidgetValue;
+    customGroupDivider?: ListWidgetValue;
     customTitle?: ListWidgetValue;
     customEventDateTime?: ListWidgetValue;
     customDescription?: ListWidgetValue;
@@ -33,12 +36,13 @@ export interface TimelinePreviewProps {
     renderMode: RenderModeEnum;
     data: {} | null;
     eventTime: string;
-    showDayDivider: boolean;
+    showGroupDivider: boolean;
+    groupByKey: GroupByKeyEnum;
     title: string;
     description: string;
     icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     customIcon: { widgetCount: number; renderer: ComponentType };
-    customDayDivider: { widgetCount: number; renderer: ComponentType };
+    customGroupDivider: { widgetCount: number; renderer: ComponentType };
     customTitle: { widgetCount: number; renderer: ComponentType };
     customEventDateTime: { widgetCount: number; renderer: ComponentType };
     customDescription: { widgetCount: number; renderer: ComponentType };

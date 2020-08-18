@@ -260,8 +260,8 @@ exports[`Timeline renders timeline with custom configuration  1`] = `
           <div
             className="icon-wrapper"
           >
-            <img
-              src="customIcon"
+            <div
+              className="timeline-icon-circle"
             />
           </div>
           <div

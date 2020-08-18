@@ -13,7 +13,7 @@ export interface BasicItemType {
 
 export interface CustomItemType {
     icon?: ReactNode;
-    dayDivider?: ReactNode;
+    groupDivider?: ReactNode;
     title?: ReactNode;
     eventDateTime?: ReactNode;
     description?: ReactNode;
@@ -33,10 +33,14 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
                 return;
             }
             let dateFormatter = eventTime.formatter;
+            let monthFormatter = eventTime.formatter;
+            let yearFormatter = eventTime.formatter;
             let timeFormatter = eventTime.formatter;
 
             if (dateFormatter?.type === "datetime") {
                 dateFormatter = dateFormatter.withConfig({ type: "date" });
+                monthFormatter = dateFormatter.withConfig({ type: "custom", pattern: "MMM" });
+                yearFormatter = dateFormatter.withConfig({ type: "custom", pattern: "YYYY" });
                 timeFormatter = dateFormatter.withConfig({ type: "time" });
             }
 
@@ -50,18 +54,31 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
             } else {
                 constructedItem = {
                     icon: props.customIcon?.(item),
-                    dayDivider: props.customDayDivider?.(item),
+                    groupDivider: props.customGroupDivider?.(item),
                     title: props.customTitle?.(item),
                     eventDateTime: props.customEventDateTime?.(item),
                     description: props.customDescription?.(item)
                 };
             }
 
-            const currentDates = eventsMap.get(dateFormatter?.format(eventTime.value));
+            let groupKey: string;
+            switch (props.groupByKey) {
+                case "month":
+                    groupKey = `${monthFormatter.format(eventTime.value)} / ${yearFormatter.format(eventTime.value)}`;
+                    break;
+                case "year":
+                    groupKey = yearFormatter.format(eventTime.value);
+                    break;
+                default:
+                    groupKey = dateFormatter?.format(eventTime.value);
+                    break;
+            }
+
+            const currentDates = eventsMap.get(groupKey);
             if (currentDates) {
                 currentDates.push(constructedItem);
             } else {
-                eventsMap.set(dateFormatter?.format(eventTime.value), [constructedItem]);
+                eventsMap.set(groupKey, [constructedItem]);
             }
         });
 
@@ -71,7 +88,7 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
     return (
         <TimelineComponent
             data={structuredEvents}
-            showDayDivider={props.showDayDivider}
+            showGroupDivider={props.showGroupDivider}
             renderMode={props.renderMode}
         />
     );

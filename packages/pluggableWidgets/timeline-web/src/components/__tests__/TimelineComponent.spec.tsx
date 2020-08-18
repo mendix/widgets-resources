@@ -25,7 +25,7 @@ describe("Timeline", () => {
     };
 
     const customItem: CustomItemType = {
-        dayDivider: <p>Day Divider</p>,
+        groupDivider: <p>Day Divider</p>,
         title: <p>Title</p>,
         eventDateTime: <p>Date Time</p>,
         description: <p>Description</p>
@@ -42,12 +42,12 @@ describe("Timeline", () => {
     const basicRenderProps: TimelineComponentProps = {
         data: basicData,
         renderMode: "basic",
-        showDayDivider: true
+        showGroupDivider: true
     };
     const customRenderProps: TimelineComponentProps = {
         data: customData,
         renderMode: "custom",
-        showDayDivider: true
+        showGroupDivider: true
     };
 
     it("renders timeline with basic configuration", () => {
@@ -59,7 +59,7 @@ describe("Timeline", () => {
         expect(component).toMatchSnapshot();
     });
     it("hides the timeline header", () => {
-        const component = shallow(<TimelineComponent {...basicRenderProps} showDayDivider={false} />);
+        const component = shallow(<TimelineComponent {...basicRenderProps} showGroupDivider={false} />);
         expect(component).toMatchSnapshot();
     });
 });
