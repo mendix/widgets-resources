@@ -9,16 +9,15 @@ describe("badge-web", () => {
 
     describe("type: badge", () => {
         it("compares successfully with a screenshot baseline", () => {
+            const elem = $(".sprintrFeedback__sidebar");
             browser.setWindowRect(0, 0, 1024, 768);
-            browser.pause(3000);
+            elem.waitForDisplayed(5000);
             browser.saveElement($(".mx-dataview-content"), "badgePageContent", {
-                removeElements: [$(".sprintrFeedback__sidebar")],
-                disableCSSAnimation: true
+                removeElements: [$(".sprintrFeedback__sidebar")]
             });
             expect(
                 browser.checkElement($(".mx-dataview-content"), "badgePageContent", {
-                    removeElements: [$(".sprintrFeedback__sidebar")],
-                    disableCSSAnimation: true
+                    removeElements: [$(".sprintrFeedback__sidebar")]
                 })
             ).toEqual(0);
         });
