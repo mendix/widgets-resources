@@ -51,8 +51,6 @@ exports.config = {
                 screenshotPath: e2ePath + "/tests/screenshot/",
                 savePerInstance: false,
                 autoSaveBaseline: true,
-                ignoreAntialiasing: true,
-                ignoreAlpha: true,
                 blockOutStatusBar: true,
                 blockOutToolBar: true,
                 hideScrollBars: true

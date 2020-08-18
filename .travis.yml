@@ -42,7 +42,7 @@ jobs:
           script:
               - npm run test:scripts -- $SINCE_ARG
         - name: "Run automated end-to-end tests"
-          dist: xenial
+          dist: bionic
           addons:
               firefox: latest
           git:
