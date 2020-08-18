@@ -49,9 +49,10 @@ jobs:
               submodules: true
           services:
               - docker
+              - xvfb
           env:
               - BROWSER=firefox
-              - MOZ_HEADLESS=1
+              - DISPLAY=:99.0
           script:
               - set -e
               - npm run release -- $SINCE_ARG
