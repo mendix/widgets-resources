@@ -67,10 +67,17 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 },
                 [props.columns]
             )}
-            valueForFilterSort={useCallback(
+            valueForFilter={useCallback(
                 (value, columnIndex) => {
                     const column = props.columns[columnIndex];
                     return column.attribute(value).displayValue;
+                },
+                [props.columns]
+            )}
+            valueForSort={useCallback(
+                (value, columnIndex) => {
+                    const column = props.columns[columnIndex];
+                    return column.attribute(value).value;
                 },
                 [props.columns]
             )}
