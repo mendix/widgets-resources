@@ -18,9 +18,17 @@ export const DropDown: DropDownType = {
         // All ViewStyle properties are allowed
         ...TextBox.container,
     },
+    containerDisabled: {
+        // All ViewStyle properties are allowed
+      ...TextBox.containerDisabled
+    },
     label: {
         // numberOfLines and all TextStyle properties are allowed
         ...TextBox.label,
+    },
+    labelDisabled: {
+        // All TextStyle properties are allowed
+      ...TextBox.labelDisabled
     },
     value: {
         // All TextStyle properties & placeholderTextColor are allowed
@@ -46,6 +54,7 @@ export const DropDown: DropDownType = {
     valueDisabled: {
         // All TextStyle properties are allowed
         backgroundColor: input.inputDisabled.backgroundColor,
+        color: TextBox.inputDisabled?.color,
     },
     validationMessage: {
         // All TextStyle properties are allowed
@@ -55,6 +64,9 @@ export const DropDown: DropDownType = {
     valueContainer: {
         // All ViewStyle properties & rippleColor are allowed
         rippleColor: input.valueContainer.rippleColor,
+    },
+    valueContainerDisabled: {
+        // All ViewStyle properties are allowed
     },
     menuWrapper: {
         // All ViewStyle properties are allowed
@@ -108,7 +120,7 @@ export const DropDown: DropDownType = {
         // All ViewStyle properties are allowed
         backgroundColor: input.input.backgroundColor,
     },
-    /*  Old dropdown styles start */
+    /*  Old dropdown styles end */
 };
 export const DropDownVertical: DropDownType = {
     container: TextBoxVertical.container,

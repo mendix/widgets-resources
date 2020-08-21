@@ -17,9 +17,17 @@ export const ReferenceSelector: DropDownType = {
         // All ViewStyle properties are allowed
         ...DropDown.container,
     },
+    containerDisabled: {
+        // All ViewStyle properties are allowed
+      ...DropDown.containerDisabled,
+    },
     label: {
         // numberOfLines and all TextStyle properties are allowed
         ...DropDown.label,
+    },
+    labelDisabled: {
+        // All TextStyle properties are allowed
+        ...DropDown.labelDisabled,
     },
     value: {
         // All TextStyle properties & placeholderTextColor are allowed
@@ -38,6 +46,9 @@ export const ReferenceSelector: DropDownType = {
     valueContainer: {
         // All ViewStyle properties & rippleColor are allowed
         ...DropDown.valueContainer,
+    },
+    valueContainerDisabled: {
+        // All ViewStyle properties are allowed
     },
     menuWrapper: {
         // All ViewStyle properties are allowed
@@ -78,7 +89,7 @@ export const ReferenceSelector: DropDownType = {
         // All ViewStyle properties are allowed
         ...DropDown.pickerTopIOS,
     },
-    /*  Old dropdown styles start */
+    /*  Old dropdown styles end */
 };
 export const ReferenceSelectorVertical: DropDownType = {
     container: DropDownVertical.container,
