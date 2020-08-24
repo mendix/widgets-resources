@@ -46,7 +46,8 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                 },
                 [props.columns]
             )}
-            valueForFilterSort={useCallback(() => undefined, [])}
+            valueForFilter={useCallback(() => undefined, [])}
+            valueForSort={useCallback(() => undefined, [])}
             filterRenderer={useCallback(
                 (renderWrapper, columnIndex) => {
                     const column = props.columns[columnIndex];

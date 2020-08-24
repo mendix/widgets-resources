@@ -41,7 +41,8 @@ export interface TableProps<T> {
     styles?: CSSProperties;
     hasMoreItems: boolean;
     cellRenderer: (renderWrapper: (children: ReactNode) => ReactElement, value: T, columnIndex: number) => ReactElement;
-    valueForFilterSort: (value: T, columnIndex: number) => string | undefined;
+    valueForFilter: (value: T, columnIndex: number) => string | undefined;
+    valueForSort: (value: T, columnIndex: number) => string | BigJs.Big | boolean | Date | undefined;
     filterRenderer: (renderWrapper: (children: ReactNode) => ReactElement, columnIndex: number) => ReactElement;
 }
 
@@ -55,7 +56,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         () => ({
             text: (rows: Array<Row<object>>, id: IdType<object>, filterValue: FilterValue) => {
                 return rows.filter(row => {
-                    const value = props.valueForFilterSort(row.values[id], Number(id));
+                    const value = props.valueForFilter(row.values[id], Number(id));
                     return value !== undefined
                         ? value.toLowerCase().startsWith(String(filterValue).toLowerCase())
                         : true;
@@ -82,10 +83,18 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 disableResizing: !column.resizable,
                 disableFilters: column.filterable === "no",
                 sortType: (rowA: Row<{ item: T }>, rowB: Row<{ item: T }>, columnId: IdType<object>): number => {
-                    const valueA = props.valueForFilterSort(rowA.values[columnId], Number(columnId)) || "";
-                    const valueB = props.valueForFilterSort(rowB.values[columnId], Number(columnId)) || "";
+                    const valueA = props.valueForSort(rowA.values[columnId], Number(columnId)) || "";
+                    const valueB = props.valueForSort(rowB.values[columnId], Number(columnId)) || "";
                     // Values should always be sorted in ASC mode https://github.com/tannerlinsley/react-table/pull/2504
-                    return valueA.localeCompare(valueB);
+                    if (typeof valueA === "string" && typeof valueB === "string") {
+                        return valueA.localeCompare(valueB);
+                    } else if (typeof valueA === "boolean" && typeof valueB === "boolean") {
+                        // True first
+                        return valueA === valueB ? 0 : valueA ? -1 : 1;
+                    } else if (valueA instanceof Date && valueB instanceof Date) {
+                        return (valueA as Date).getTime() - (valueB as Date).getTime();
+                    }
+                    return Number(valueA) - Number(valueB);
                 },
                 Cell: ({ cell, value }) =>
                     props.cellRenderer(
@@ -183,7 +192,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 canPreviousPage={canPreviousPage}
                 gotoPage={gotoPage}
                 nextPage={nextPage}
-                numberOfItems={props.data.length}
+                numberOfItems={rows.length}
                 page={pageIndex}
                 pageSize={props.pageSize}
                 previousPage={previousPage}
