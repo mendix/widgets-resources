@@ -16,6 +16,7 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const introScreenButtonPaginationAbove = {
     container: {
         // Ripplecolor and all ViewStyle properties are allowed
+        flex: 1,
         flexDirection: "row",
         alignSelf: "stretch",
         alignItems: "center",

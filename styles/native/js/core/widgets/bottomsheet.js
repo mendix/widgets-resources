@@ -14,7 +14,7 @@ export const com_mendix_widget_native_bottomsheet_BottomSheet = {
     container: {
         // All ViewStyle properties are allowed
         backgroundColor: background.primary,
-        borderRadius: border.radiusSmall,
+        borderRadius: border.radiusLarge,
         elevation: 20,
         shadowColor: "#000",
         shadowOpacity: 0.1,

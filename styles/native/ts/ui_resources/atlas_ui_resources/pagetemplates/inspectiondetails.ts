@@ -18,7 +18,9 @@ export const carouselCardImage = {
 };
 
 export const carouselFullWidthImage = {
-    container: {},
+    container: {
+        height: 280
+    },
     image: {
         width: "100%",
         height: "100%",

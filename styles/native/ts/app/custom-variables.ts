@@ -32,7 +32,7 @@ import {
 //== Global variables
 //## Variables to be used during styling
 //-------------------------------------------------------------------------------------------------------------------//
-// Brand Style
+// Brand Styles
 export const brand: VariablesBrand = {
     primary: "#264AE5",
     success: "#77DD77",
@@ -57,8 +57,8 @@ export const darkMode = NativeModules && NativeModules.RNDarkMode && NativeModul
 // const backgroundColorInversed = darkMode ? "#FFF" : "#000";
 //
 export const background: VariablesBackground = {
-    primary: "#FFF",
-    gray: "#F8F8F8",
+    primary: darkMode ? "#0A1325" : "#FFF",
+    gray: darkMode ? "#161F30" : "#F8F8F8",
     brandPrimary: brand.primary,
     brandSuccess: brand.success,
     brandWarning: brand.warning,
@@ -78,7 +78,7 @@ export const contrast: VariablesContrast = {
 //
 // Border Style
 export const border: VariablesBorder = {
-    color: "#CED0D3",
+    color: darkMode ? "#3B4251" : "#CED0D3",
     width: 1,
     radiusSmall: 4,
     radiusLarge: 8,
@@ -104,9 +104,9 @@ export const font: VariablesFont = {
     lineHeightH4: adjustFont(24) * 1.5,
     lineHeightH5: adjustFont(20) * 1.5,
     lineHeightH6: adjustFont(16) * 1.5,
-    colorTitle: "#0A1325",
-    colorParagraph: "#6C717C",
-    colorDisabled: "#9DA1A8",
+    colorTitle: darkMode ? "#FDFDFD" : "#0A1325",
+    colorParagraph: darkMode ? "#E7E7E9" : "#6C717C",
+    colorDisabled: darkMode ? "#9DA1A8" : "#9DA1A8",
     weightLight: "100",  // Only supported on iOS, will be 'Normal' on Android
     weightNormal: "normal",
     weightSemiBold: "600", // Only supported on iOS, will be 'Bold' on Android
@@ -242,7 +242,7 @@ export const input: VariablesInput = {
 };
 
 export const image: VariablesImage = {
-    avatar: {
+    image: {
         small: 24,
         medium: 40,
         large: 56,
@@ -258,10 +258,10 @@ export const navigation: VariablesNavigation = {
         barStyle: darkMode ? "light-content" : "dark-content",
     },
     topBar: {
-        backgroundColor: background.primary,
-        backButtonColor: contrast.highest,
-        titleColor: contrast.highest,
-        titleFontSize: Platform.select({android: font.sizeH4, ios: font.sizeH5}) as number,
+        backgroundColor: brand.primary,
+        backButtonColor: "#FFF",
+        titleColor: "#FFF",
+        titleFontSize: font.sizeH6,
     },
     bottomBar: {
         color: contrast.high,
@@ -319,7 +319,7 @@ export const listView: VariablesListView = {
 //
 // Layoutgrid Styles
 export const layoutGrid = {
-    gutterSize: 15,
+    gutterSize: 16,
 };
 //
 //

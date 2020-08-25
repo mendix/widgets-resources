@@ -127,3 +127,13 @@ export const textCapitalize = {
         textTransform: "capitalize",
     },
 };
+export const textUnderline = {
+    text: {
+        textDecorationLine: "underline",
+    },
+};
+export const textLineThrough = {
+    text: {
+        textDecorationLine: "line-through",
+    },
+};

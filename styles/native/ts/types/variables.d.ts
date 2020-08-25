@@ -186,7 +186,7 @@ export interface VariablesInput {
 }
 
 export interface VariablesImage {
-    avatar: {
+    image: {
         small: number,
         medium: number,
         large: number,

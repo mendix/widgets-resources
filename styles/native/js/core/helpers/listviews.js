@@ -1,4 +1,4 @@
-import { listView } from "../variables";
+import { background, border, listView, spacing } from "../variables";
 /*
 
 DISCLAIMER:
@@ -29,13 +29,13 @@ export const listItemBorderRight = {
 //== Extra Classes
 //## Helper classes to change the look and feel of the widget
 //-------------------------------------------------------------------------------------------------------------------//
-export const listItemIconSmall = {
-    icon: {
-        size: 16,
-    },
-};
-export const listItemIconLarge = {
-    icon: {
-        size: 24,
+export const listItemImage = {
+    container: {
+        height: 88,
+        width: 128,
+        overflow: "hidden",
+        backgroundColor: background.primary,
+        borderRadius: border.radiusLarge,
+        marginRight: spacing.regular,
     },
 };

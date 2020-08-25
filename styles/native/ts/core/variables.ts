@@ -244,7 +244,7 @@ input = merge(input, custom.input || {} as any);
 //
 // Image Styles
 let image: VariablesImage = {
-    avatar: {
+    image: {
         small: 24,
         medium: 40,
         large: 56,

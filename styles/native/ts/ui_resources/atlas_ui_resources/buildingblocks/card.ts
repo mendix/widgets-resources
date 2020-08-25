@@ -6,26 +6,28 @@ import { background, border, contrast, spacing } from "../../../core/variables";
 
 ==========================================================================
 */
+export const cardShadow = {
+    elevation: 1.5,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    shadowOffset: {
+        width: 0,
+        height: 2,
+    },
+};
 export const card = {
     container: {
         borderRadius: border.radiusLarge,
         backgroundColor: background.primary,
-        marginBottom: spacing.regular,
-
+        // marginBottom: spacing.regular,
         ...Platform.select({
             android: {
                 borderWidth: 1,
                 borderColor: contrast.lowest,
             },
         }),
-        elevation: 1.5,
-        shadowColor: "#000",
-        shadowOpacity: 0.1,
-        shadowRadius: 10,
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
+        ...cardShadow,
     },
 };
 //
@@ -71,12 +73,12 @@ export const cardBodyAbsolute = {
 export const cardAction = {
     container: {
         maxWidth: "100%",
-        aspectRatio: 1,
-        borderWidth: 1,
+        borderWidth: border.width,
         borderColor: border.color,
-        borderRadius: border.radiusSmall,
+        borderRadius: border.radiusLarge,
         padding: spacing.regular,
-        alignItems: "center",
+        ...cardShadow,
+
     },
 };
 

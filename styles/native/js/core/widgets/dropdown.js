@@ -56,6 +56,7 @@ export const DropDown = {
         // All ViewStyle properties are allowed
         overflow: "hidden",
         borderRadius: input.input.borderRadius,
+        backgroundColor: input.input.backgroundColor,
         shadowColor: "#000",
         shadowOpacity: 0.2,
         shadowRadius: 10,

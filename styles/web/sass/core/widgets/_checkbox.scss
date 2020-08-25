@@ -21,7 +21,7 @@
     }
 }
 
-input[type='checkbox'] {
+input[type='checkbox']{
     position: relative !important; //Remove after mxui merge
     width: 16px;
     height: 16px;
@@ -80,7 +80,7 @@ input[type='checkbox'] {
         border-right: 0;
     }
 
-    &:not(:disabled):not(:checked):hover:after {
+        &:not(:disabled):not(:checked):hover:after {
         content: '';
         border-color: $form-input-bg-hover; // color of checkmark on hover
     }

@@ -139,7 +139,9 @@ export interface ContainerType {
 export interface DatePickerType {
     container?: ViewStyle,
     label?: InputLabelType,
-    pickerIOS?: ViewStyle,
+    pickerIOS?: {
+                    color?: string
+                } & ViewStyle,
     pickerBackdropIOS?: ViewStyle,
     pickerTopIOS?: ViewStyle,
     value?: TextStyle,
@@ -428,7 +430,9 @@ export interface TabContainerType {
     indicator?: ViewStyle,
     tab?: ViewStyle,
     label?: TextStyle,
-    activeLabel?: TextStyle
+    activeLabel?: TextStyle,
+    badgeContainer?: ViewStyle,
+    badgeCaption?: TextStyle
 }
 
 // Text Box

@@ -67,3 +67,24 @@ export const borderBottom: Helperclass = {
         borderBottomWidth: border.width,
     },
 };
+export const borderRadiusSmall: Helperclass = {
+    container: {
+        borderRadius: border.radiusSmall,
+    },
+};
+export const borderRadiusLarge: Helperclass = {
+    container: {
+        borderRadius: border.radiusLarge,
+    },
+};
+//
+// Positioning
+export const absoluteBottom: Helperclass = {
+    container: {
+        position: "absolute",
+        bottom: 0,
+        width: "100%",
+        maxWidth: "100%",
+        zIndex: 999999,
+    },
+};

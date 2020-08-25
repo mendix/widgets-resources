@@ -1010,6 +1010,21 @@
                 ]
             },
             {
+                "name": "Decoration",
+                "type": "Dropdown",
+                "description": "Decorate the text with an underline or a line through",
+                "options": [
+                    {
+                        "name": "Underline",
+                        "class": "textUnderline"
+                    },
+                    {
+                        "name": "Line Through",
+                        "class": "textLineThrough"
+                    }
+                ]
+            },
+            {
                 "name": "Alignment",
                 "type": "Dropdown",
                 "description": "Align the text.",
@@ -1029,6 +1044,265 @@
                 ]
             }
         ],
+        "LayoutGrid": [
+            {
+                "name": "Spacing top",
+                "type": "Dropdown",
+                "description": "The spacing above this element.",
+                "options": [
+                    {
+                        "name": "Inner small",
+                        "class": "spacingInnerTopSmaller"
+                    },
+                    {
+                        "name": "Inner medium",
+                        "class": "spacingInnerTopMedium"
+                    },
+                    {
+                        "name": "Inner large",
+                        "class": "spacingInnerTopLarger"
+                    },
+                    {
+                        "name": "Outer small",
+                        "class": "spacingOuterTopSmaller",
+                        "oldNames": [
+                            "Small"
+                        ]
+                    },
+                    {
+                        "name": "Outer medium",
+                        "class": "spacingOuterTopMedium",
+                        "oldNames": [
+                            "Medium"
+                        ]
+                    },
+                    {
+                        "name": "Outer large",
+                        "class": "spacingOuterTopLarger",
+                        "oldNames": [
+                            "Large"
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Spacing bottom",
+                "type": "Dropdown",
+                "description": "The spacing below this element.",
+                "options": [
+                    {
+                        "name": "Inner small",
+                        "class": "spacingInnerBottomSmaller"
+                    },
+                    {
+                        "name": "Inner medium",
+                        "class": "spacingInnerBottomMedium"
+                    },
+                    {
+                        "name": "Inner large",
+                        "class": "spacingInnerBottomLarger"
+                    },
+                    {
+                        "name": "Outer small",
+                        "class": "spacingOuterBottomSmaller",
+                        "oldNames": [
+                            "Small"
+                        ]
+                    },
+                    {
+                        "name": "Outer medium",
+                        "class": "spacingOuterBottomMedium",
+                        "oldNames": [
+                            "Medium"
+                        ]
+                    },
+                    {
+                        "name": "Outer large",
+                        "class": "spacingOuterBottomLarger",
+                        "oldNames": [
+                            "Large"
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Spacing left",
+                "type": "Dropdown",
+                "description": "The spacing to the left of this element.",
+                "options": [
+                    {
+                        "name": "Inner small",
+                        "class": "spacingInnerLeftSmaller"
+                    },
+                    {
+                        "name": "Inner medium",
+                        "class": "spacingInnerLeftMedium"
+                    },
+                    {
+                        "name": "Inner large",
+                        "class": "spacingInnerLeftLarger"
+                    },
+                    {
+                        "name": "Outer small",
+                        "class": "spacingOuterLeftSmaller",
+                        "oldNames": [
+                            "Small"
+                        ]
+                    },
+                    {
+                        "name": "Outer medium",
+                        "class": "spacingOuterLeftMedium",
+                        "oldNames": [
+                            "Medium"
+                        ]
+                    },
+                    {
+                        "name": "Outer large",
+                        "class": "spacingOuterLeftLarger",
+                        "oldNames": [
+                            "Large"
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Spacing right",
+                "type": "Dropdown",
+                "description": "The spacing to the right of this element.",
+                "options": [
+                    {
+                        "name": "Inner small",
+                        "class": "spacingInnerRightSmaller"
+                    },
+                    {
+                        "name": "Inner medium",
+                        "class": "spacingInnerRightMedium"
+                    },
+                    {
+                        "name": "Inner large",
+                        "class": "spacingInnerRightLarger"
+                    },
+                    {
+                        "name": "Outer small",
+                        "class": "spacingOuterRightSmaller",
+                        "oldNames": [
+                            "Small"
+                        ]
+                    },
+                    {
+                        "name": "Outer medium",
+                        "class": "spacingOuterRightMedium",
+                        "oldNames": [
+                            "Medium"
+                        ]
+                    },
+                    {
+                        "name": "Outer large",
+                        "class": "spacingOuterRightLarger",
+                        "oldNames": [
+                            "Large"
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Background color",
+                "type": "Dropdown",
+                "description": "Change the background color of the container.",
+                "options": [
+                    {
+                        "name": "Primary",
+                        "class": "backgroundPrimary"
+                    },
+                    {
+                        "name": "Gray",
+                        "class": "backgroundGray"
+                    },
+                    {
+                        "name": "Brand Primary",
+                        "class": "backgroundBrandPrimary"
+                    },
+                    {
+                        "name": "Brand Success",
+                        "class": "backgroundBrandSuccess"
+                    },
+                    {
+                        "name": "Brand Warning",
+                        "class": "backgroundBrandWarning"
+                    },
+                    {
+                        "name": "Brand Danger",
+                        "class": "backgroundBrandDanger"
+                    }
+                ]
+            }
+        ],
+        "LayoutGridRow": [
+            {
+                "name": "Background color",
+                "type": "Dropdown",
+                "description": "Change the background color of the container.",
+                "options": [
+                    {
+                        "name": "Primary",
+                        "class": "backgroundPrimary"
+                    },
+                    {
+                        "name": "Gray",
+                        "class": "backgroundGray"
+                    },
+                    {
+                        "name": "Brand Primary",
+                        "class": "backgroundBrandPrimary"
+                    },
+                    {
+                        "name": "Brand Success",
+                        "class": "backgroundBrandSuccess"
+                    },
+                    {
+                        "name": "Brand Warning",
+                        "class": "backgroundBrandWarning"
+                    },
+                    {
+                        "name": "Brand Danger",
+                        "class": "backgroundBrandDanger"
+                    }
+                ]
+            }
+        ],
+        "LayoutGridColumn": [
+            {
+                "name": "Background color",
+                "type": "Dropdown",
+                "description": "Change the background color of the container.",
+                "options": [
+                    {
+                        "name": "Primary",
+                        "class": "backgroundPrimary"
+                    },
+                    {
+                        "name": "Gray",
+                        "class": "backgroundGray"
+                    },
+                    {
+                        "name": "Brand Primary",
+                        "class": "backgroundBrandPrimary"
+                    },
+                    {
+                        "name": "Brand Success",
+                        "class": "backgroundBrandSuccess"
+                    },
+                    {
+                        "name": "Brand Warning",
+                        "class": "backgroundBrandWarning"
+                    },
+                    {
+                        "name": "Brand Danger",
+                        "class": "backgroundBrandDanger"
+                    }
+                ]
+            }
+        ],
         "ListView": [
             {
                 "name": "List item divider",
@@ -1042,6 +1316,37 @@
                     {
                         "name": "Horizontal",
                         "class": "listItemBorderRight"
+                    }
+                ]
+            },
+            {
+                "name": "Background color",
+                "type": "Dropdown",
+                "description": "Change the background color of the container.",
+                "options": [
+                    {
+                        "name": "Primary",
+                        "class": "backgroundPrimary"
+                    },
+                    {
+                        "name": "Gray",
+                        "class": "backgroundGray"
+                    },
+                    {
+                        "name": "Brand Primary",
+                        "class": "backgroundBrandPrimary"
+                    },
+                    {
+                        "name": "Brand Success",
+                        "class": "backgroundBrandSuccess"
+                    },
+                    {
+                        "name": "Brand Warning",
+                        "class": "backgroundBrandWarning"
+                    },
+                    {
+                        "name": "Brand Danger",
+                        "class": "backgroundBrandDanger"
                     }
                 ]
             }

@@ -1,4 +1,4 @@
-import { background, brand, contrast, font } from "../variables";
+import { brand, contrast, font } from "../variables";
 /*
 
 DISCLAIMER:
@@ -19,7 +19,6 @@ export const com_mendix_widget_native_popupmenu_PopupMenu = {
         shadowOpacity: 0.2,
         shadowRadius: 10,
         elevation: 16,
-        backgroundColor: background.primary,
     },
     custom: {
         container: {

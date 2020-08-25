@@ -40,11 +40,6 @@ export const mapsFooterSendLocation = {
         },
     },
 };
-export const mapsList = {
-    container: {
-        paddingHorizontal: spacing.regular,
-    },
-};
 export const mapsListItemImage = {
     container: {
         backgroundColor: background.primary,

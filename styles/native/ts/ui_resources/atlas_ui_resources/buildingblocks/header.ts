@@ -1,5 +1,4 @@
-import { Platform }                              from "react-native";
-import { background, border, contrast, spacing } from "../../../core/variables";
+import { background, spacing } from "../../../core/variables";
 /*
 ==========================================================================
     Cards
@@ -8,16 +7,9 @@ import { background, border, contrast, spacing } from "../../../core/variables";
 */
 export const header = {
     container: {
-        borderRadius: border.radiusSmall,
+        height: 280,
         backgroundColor: background.primary,
         marginBottom: spacing.regular,
-
-        ...Platform.select({
-            android: {
-                borderWidth: 1,
-                borderColor: contrast.lowest,
-            },
-        }),
     },
 };
 //
@@ -29,7 +21,7 @@ export const headerImageFull = {
     },
     image: {
         width: "100%",
-        height: 250,
+        height: 280,
         resizeMode: "cover",
     },
 };

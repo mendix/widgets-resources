@@ -1,4 +1,4 @@
-import { font, tabContainer } from "../variables";
+import { badge, font, tabContainer } from "../variables";
 /*
 
 DISCLAIMER:
@@ -53,4 +53,20 @@ export const TabContainer = {
         fontWeight: tabContainer.activeLabel.fontWeight,
         textTransform: tabContainer.activeLabel.textTransform,
     },
+    badgeContainer: {
+        // All ViewStyle properties are allowed
+        borderRadius: badge.borderRadius,
+        backgroundColor: badge.default.backgroundColor,
+        paddingVertical: badge.paddingVertical,
+        paddingHorizontal: badge.paddingHorizontal,
+        marginLeft: 8
+    },
+    badgeCaption: {
+        // All TextStyle properties are allowed
+        fontSize: font.size,
+        color: badge.default.color,
+        fontFamily: font.family,
+        fontWeight: badge.fontWeight,
+        marginTop: -1,
+    }
 };

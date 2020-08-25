@@ -66,3 +66,24 @@ export const borderBottom = {
         borderBottomWidth: border.width,
     },
 };
+export const borderRadiusSmall = {
+    container: {
+        borderRadius: border.radiusSmall,
+    },
+};
+export const borderRadiusLarge = {
+    container: {
+        borderRadius: border.radiusLarge,
+    },
+};
+//
+// Positioning
+export const absoluteBottom = {
+    container: {
+        position: "absolute",
+        bottom: 0,
+        width: "100%",
+        maxWidth: "100%",
+        zIndex: 999999,
+    },
+};

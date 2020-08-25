@@ -96,6 +96,8 @@ export const btnIcon = {
     container: {
         borderWidth: 0,
         backgroundColor: "transparent",
+        minWidth: undefined,
+        minHeight: undefined,
         paddingVertical: 0,
         paddingHorizontal: 0,
     },

@@ -19,3 +19,9 @@
 
 # Zips
 **/*.zip
+
+# Modules
+node_modules
+
+# Compiled TS
+styles/native/js
