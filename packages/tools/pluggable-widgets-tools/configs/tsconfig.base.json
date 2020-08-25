@@ -1,39 +1,28 @@
 {
-  "compilerOptions": {
-    "noEmitOnError": true,
-    "sourceMap": true,
-    "module": "amd",
-    "target": "es5",
-    "lib": [
-      "es2015",
-      "dom"
-    ],
-    "types": [
-      "big.js",
-      "jest"
-    ],
-    "moduleResolution": "node",
-    "declaration": false,
-    "removeComments": true,
-    "noLib": false,
-    "watch": false,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "strict": true,
-    "strictFunctionTypes": false,
-    "skipLibCheck": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "jsx": "react",
-    "jsxFactory": "createElement",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
-  },
-  "include": [
-    "../../../../src"
-  ],
-  "exclude": [
-    "../../../../dist/",
-    "../../../../node_modules/"
-  ]
+    "compilerOptions": {
+        "noEmitOnError": true,
+        "sourceMap": true,
+        "module": "es2015",
+        "target": "es5",
+        "lib": ["es2015", "dom"],
+        "types": ["big.js", "jest"],
+        "moduleResolution": "node",
+        "declaration": false,
+        "removeComments": true,
+        "noLib": false,
+        "watch": false,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "strict": true,
+        "strictFunctionTypes": false,
+        "skipLibCheck": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "jsx": "react",
+        "jsxFactory": "createElement",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true
+    },
+    "include": ["../../../../src"],
+    "exclude": ["../../../../dist/", "../../../../node_modules/"]
 }
