@@ -41,7 +41,7 @@ function toClientPropType(prop: Property, isNative: boolean, generatedTypes: str
         case "action":
             return prop.$.dataSource ? "ListActionValue" : "ActionValue";
         case "textTemplate":
-            return "DynamicValue<string>";
+            return prop.$.dataSource ? "ListExpressionValue<string>" : "DynamicValue<string>";
         case "integer":
             return "number";
         case "decimal":
@@ -70,7 +70,8 @@ function toClientPropType(prop: Property, isNative: boolean, generatedTypes: str
             if (!prop.returnType || prop.returnType.length === 0) {
                 throw new Error("[XML] Expression property requires returnType element");
             }
-            return `DynamicValue<${toClientType(prop.returnType[0].$.type)}>`;
+            const type = toClientType(prop.returnType[0].$.type);
+            return prop.$.dataSource ? `ListExpressionValue<${type}>` : `DynamicValue<${type}>`;
         case "enumeration":
             const typeName = capitalizeFirstLetter(prop.$.key) + "Enum";
             generatedTypes.push(generateEnum(typeName, prop));
