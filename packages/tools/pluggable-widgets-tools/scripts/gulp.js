@@ -61,7 +61,17 @@ function copyToDeployment() {
 }
 
 function runWebpack(env, cb) {
-    let config = require(isNative ? "../configs/webpack.native.config" : `../configs/webpack.config.${env}`);
+    let config;
+
+    if (isNative) {
+        config = require("../configs/webpack.native.config");
+        if (env === "prod") {
+            config = config.map(c => ({ ...c, mode: "production", devtool: false }));
+        }
+    } else {
+        config = require(`../configs/webpack.config.${env}`);
+    }
+
     try {
         const customWebpackConfigPath = join(variables.sourcePath, `webpack.config.${env}.js`);
         if (existsSync(customWebpackConfigPath)) {
