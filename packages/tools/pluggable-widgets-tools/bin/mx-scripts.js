@@ -29,7 +29,7 @@ for (const subCommand of realCommand.split(/&&/g)) {
 function getRealCommand(cmd, toolsRoot) {
     const eslintCommand = "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx src";
     const prettierCommand = 'prettier --config prettier.config.js "{src,tests}/**/*.{js,jsx,ts,tsx}"';
-    const gulpCommand = `gulp --gulpfile ${join(toolsRoot, "scripts/gulp.js")} --cwd ${process.cwd()}`;
+    const gulpCommand = `gulp --gulpfile "${join(toolsRoot, "scripts/gulp.js")}" --cwd "${process.cwd()}"`;
 
     switch (cmd) {
         case "start:server":
