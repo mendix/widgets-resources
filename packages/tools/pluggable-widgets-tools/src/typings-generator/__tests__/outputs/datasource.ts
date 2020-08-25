@@ -4,7 +4,7 @@ export const datasourceWebOutput = `/**
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties } from "react";
-import { ActionValue, EditableValue, ListValue, ListActionValue, ListAttributeValue, ListWidgetValue } from "mendix";
+import { ActionValue, EditableValue, ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
 
 export interface DatasourcePropertiesType {
     contentAttribute: ListWidgetValue;
@@ -27,6 +27,8 @@ export interface MyWidgetContainerProps {
     content: ListWidgetValue;
     markerDataAttribute: ListAttributeValue<string | boolean | BigJs.Big>;
     actionAttribute?: ListActionValue;
+    textTemplateAttribute: ListExpressionValue<string>;
+    expressionAttribute: ListExpressionValue<BigJs.Big>;
     datasourceProperties: DatasourcePropertiesType[];
     description: EditableValue<string>;
     action?: ActionValue;
@@ -39,6 +41,8 @@ export interface MyWidgetPreviewProps {
     content: { widgetCount: number; renderer: ComponentType };
     markerDataAttribute: string;
     actionAttribute: {} | null;
+    textTemplateAttribute: string;
+    expressionAttribute: string;
     datasourceProperties: DatasourcePropertiesPreviewType[];
     description: string;
     action: {} | null;
@@ -58,6 +62,8 @@ export interface MyWidgetProps<Style> {
     content: ListWidgetValue;
     markerDataAttribute: ListAttributeValue<string | boolean | BigJs.Big>;
     actionAttribute?: ListActionValue;
+    textTemplateAttribute: ListExpressionValue<string>;
+    expressionAttribute: ListExpressionValue<BigJs.Big>;
     datasourceProperties: DatasourcePropertiesType[];
     description: EditableValue<string>;
     action?: ActionValue;
