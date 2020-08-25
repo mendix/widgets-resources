@@ -3,7 +3,6 @@ const baseConfig = require("../packages/tools/pluggable-widgets-tools/configs/we
 
 const customConfig = {
     // Custom configuration goes here
-    devtool: false,
     externals: [
         "@react-native-community/art",
         "@react-native-community/async-storage",
