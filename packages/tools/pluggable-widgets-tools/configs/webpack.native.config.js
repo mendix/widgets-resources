@@ -24,7 +24,12 @@ const widgetConfig = {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: "ts-loader"
+                loader: "ts-loader",
+                options: {
+                    compilerOptions: {
+                        target: "esnext"
+                    }
+                }
             },
             {
                 test: /\.jsx?$/,
@@ -33,7 +38,7 @@ const widgetConfig = {
                     loader: "babel-loader",
                     options: {
                         cacheDirectory: true,
-                        presets: ["@babel/preset-env", "@babel/preset-react"],
+                        presets: ["@babel/preset-react"],
                         plugins: [
                             ["@babel/plugin-proposal-class-properties", { loose: true }],
                             ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]
@@ -48,7 +53,7 @@ const widgetConfig = {
                     loader: "babel-loader",
                     options: {
                         cacheDirectory: true,
-                        presets: ["@babel/preset-env", "@babel/preset-react"],
+                        presets: ["@babel/preset-react"],
                         plugins: [
                             ["@babel/plugin-proposal-class-properties", { loose: true }],
                             "@babel/plugin-transform-react-jsx"
