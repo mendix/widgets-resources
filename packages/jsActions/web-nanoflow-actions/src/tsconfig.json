@@ -5,7 +5,6 @@
         "target": "es2017",
         "lib": ["es2017", "dom"],
         "moduleResolution": "node",
-        "module": "es2015",
         "sourceMap": false,
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
