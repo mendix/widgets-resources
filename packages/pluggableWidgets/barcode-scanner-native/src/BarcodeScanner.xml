@@ -14,6 +14,16 @@
                     </attributeTypes>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Mask">
+                <property key="showMask" type="boolean" required="true" defaultValue="false">
+                    <caption>Show barcode mask</caption>
+                    <description />
+                </property>
+                <property key="showAnimatedLine" type="boolean" required="true" defaultValue="false">
+                    <caption>Show animated line</caption>
+                    <description />
+                </property>
+            </propertyGroup>
             <propertyGroup caption="Events">
                 <property key="onDetect" type="action" required="false">
                     <caption>On detect</caption>
