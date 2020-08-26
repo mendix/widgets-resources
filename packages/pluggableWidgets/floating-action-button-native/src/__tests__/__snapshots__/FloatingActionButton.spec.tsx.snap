@@ -15,7 +15,7 @@ exports[`FloatingActionButton renders floating action button 1`] = `
           "top": 0,
         },
         Object {
-          "elevation": undefined,
+          "elevation": 5,
           "justifyContent": "flex-end",
           "zIndex": 999,
         },
@@ -32,7 +32,7 @@ exports[`FloatingActionButton renders floating action button 1`] = `
       Object {
         "backgroundColor": "transparent",
         "bottom": 0,
-        "elevation": undefined,
+        "elevation": 5,
         "justifyContent": "flex-end",
         "left": 0,
         "opacity": 0,
@@ -57,7 +57,7 @@ exports[`FloatingActionButton renders floating action button 1`] = `
             "top": 0,
           },
           Object {
-            "elevation": undefined,
+            "elevation": 5,
             "justifyContent": "flex-end",
             "zIndex": 999,
           },
@@ -89,7 +89,7 @@ exports[`FloatingActionButton renders floating action button 1`] = `
             "shadowRadius": 3,
           },
           Object {
-            "backgroundColor": "transparent",
+            "backgroundColor": "#e74c3c",
             "elevation": 5,
             "shadowColor": "#000",
             "shadowOffset": Object {
@@ -124,7 +124,7 @@ exports[`FloatingActionButton renders floating action button 1`] = `
         <View
           style={
             Object {
-              "backgroundColor": "rgba(231, 76, 60, 1)",
+              "backgroundColor": "rgba(0, 0, 0, 0)",
               "borderRadius": 27,
               "height": 54,
               "width": 54,
@@ -151,7 +151,16 @@ exports[`FloatingActionButton renders floating action button 1`] = `
             }
           >
             <View
-              style={Object {}}
+              style={
+                Array [
+                  Object {},
+                  Object {
+                    "alignItems": "center",
+                    "flexShrink": 1,
+                    "justifyContent": "center",
+                  },
+                ]
+              }
             />
           </View>
         </View>
@@ -176,7 +185,7 @@ exports[`FloatingActionButton renders with secondary buttons 1`] = `
           "top": 0,
         },
         Object {
-          "elevation": undefined,
+          "elevation": 5,
           "justifyContent": "flex-end",
           "zIndex": 999,
         },
@@ -193,7 +202,7 @@ exports[`FloatingActionButton renders with secondary buttons 1`] = `
       Object {
         "backgroundColor": "transparent",
         "bottom": 0,
-        "elevation": undefined,
+        "elevation": 5,
         "justifyContent": "flex-end",
         "left": 0,
         "opacity": 0,
@@ -218,7 +227,7 @@ exports[`FloatingActionButton renders with secondary buttons 1`] = `
             "top": 0,
           },
           Object {
-            "elevation": undefined,
+            "elevation": 5,
             "justifyContent": "flex-end",
             "zIndex": 999,
           },
@@ -250,7 +259,7 @@ exports[`FloatingActionButton renders with secondary buttons 1`] = `
             "shadowRadius": 3,
           },
           Object {
-            "backgroundColor": "transparent",
+            "backgroundColor": "#e74c3c",
             "elevation": 5,
             "shadowColor": "#000",
             "shadowOffset": Object {
@@ -285,7 +294,7 @@ exports[`FloatingActionButton renders with secondary buttons 1`] = `
         <View
           style={
             Object {
-              "backgroundColor": "rgba(231, 76, 60, 1)",
+              "backgroundColor": "rgba(0, 0, 0, 0)",
               "borderRadius": 27,
               "height": 54,
               "width": 54,
@@ -312,7 +321,16 @@ exports[`FloatingActionButton renders with secondary buttons 1`] = `
             }
           >
             <View
-              style={Object {}}
+              style={
+                Array [
+                  Object {},
+                  Object {
+                    "alignItems": "center",
+                    "flexShrink": 1,
+                    "justifyContent": "center",
+                  },
+                ]
+              }
             />
           </View>
         </View>
