@@ -4,6 +4,7 @@ import { TextStyle, ViewStyle } from "react-native";
 export interface FloatingActionButtonStyle extends Style {
     container: ViewStyle;
     button: PrimaryButtonStyle;
+    buttonIconContainer: ViewStyle;
     buttonIcon: IconStyle;
     secondaryButton: ButtonStyle;
     secondaryButtonIcon: IconStyle;
@@ -40,6 +41,11 @@ export const defaultFloatingActionButtonStyle: FloatingActionButtonStyle = {
         shadowColor: "#000",
         shadowRadius: 3,
         elevation: 5
+    },
+    buttonIconContainer: {
+        justifyContent: "center",
+        alignItems: "center",
+        flexShrink: 1
     },
     buttonIcon: {
         size: 18,

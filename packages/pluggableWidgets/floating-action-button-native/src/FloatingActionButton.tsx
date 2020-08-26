@@ -25,7 +25,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
     private readonly renderIconHandler = this.renderIcon.bind(this);
 
     render(): JSX.Element {
-        const buttonStyle = { ...this.styles.button, backgroundColor: "transparent" };
+        const buttonStyle = { ...this.styles.button };
         delete buttonStyle.rippleColor;
 
         return (
@@ -33,7 +33,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
                 size={this.styles.button.size}
                 style={this.styles.container}
                 shadowStyle={buttonStyle}
-                buttonColor={this.styles.button.backgroundColor}
+                buttonColor={"transparent"}
                 nativeFeedbackRippleColor={this.styles.button.rippleColor}
                 position={this.props.horizontalPosition}
                 verticalOrientation={this.verticalOrientation}
@@ -43,6 +43,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
                 fixNativeFeedbackRadius
                 backgroundTappable
                 activeOpacity={0.2}
+                elevation={buttonStyle.elevation}
                 offsetX={0}
                 offsetY={0}
                 zIndex={999}
@@ -63,7 +64,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
         const style = isActive ? { transform: [{ rotate: "-180deg" }] } : {};
 
         return (
-            <View style={style}>
+            <View style={[style, this.styles.buttonIconContainer]}>
                 <Icon icon={source} size={this.styles.buttonIcon.size} color={this.styles.buttonIcon.color} />
             </View>
         );
@@ -84,7 +85,6 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
                         nativeFeedbackRippleColor={"transparent"}
                         textStyle={this.styles.secondaryButtonCaption}
                         textContainerStyle={this.styles.secondaryButtonCaptionContainer}
-                        // tslint:disable-next-line:jsx-no-lambda
                         onPress={() => {
                             this.setState({ active: false });
                             executeAction(button.onClick);
@@ -105,12 +105,13 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
         );
     }
 
-    // eslint-disable-next-line getter-return
     private get verticalOrientation(): "up" | "down" {
         switch (this.props.verticalPosition) {
             case "bottom":
                 return "up";
             case "top":
+                return "down";
+            default:
                 return "down";
         }
     }
