@@ -16,7 +16,6 @@
             "cordova-plugin-file"
         ],
         "moduleResolution": "node",
-        "module": "es2015",
         "sourceMap": false,
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
