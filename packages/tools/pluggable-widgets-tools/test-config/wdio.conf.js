@@ -47,7 +47,7 @@ exports.config = {
             // The options for image-comparison
             {
                 baselineFolder: e2ePath + "/tests/screenshot-baseline/",
-                formatImageName: "{tag}-{logName}-{width}x{height}--{browserName}",
+                formatImageName: "{logName}-{width}x{height}--{browserName}",
                 screenshotPath: e2ePath + "/tests/screenshot/",
                 savePerInstance: false,
                 autoSaveBaseline: true,
