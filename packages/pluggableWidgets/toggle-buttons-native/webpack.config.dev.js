@@ -1,6 +1,10 @@
-const merge = require("webpack-merge");
-const baseConfig = require("@mendix/pluggable-widgets-tools/configs/webpack.native.config.js");
+const [
+    baseWidgetConfig,
+    baseEditorConfigConfig
+] = require("@mendix/pluggable-widgets-tools/configs/webpack.native.config.js");
 
-baseConfig[0].module.rules[2].use.options.plugins.push("@babel/plugin-transform-flow-strip-types");
+baseWidgetConfig.module.rules
+    .find(rule => String(rule.test) === String(/\.jsx?$/) && String(rule.include) === String(/node_modules/))
+    .use.options.plugins.push("@babel/plugin-transform-flow-strip-types");
 
-module.exports = baseConfig;
+module.exports = [baseWidgetConfig, baseEditorConfigConfig];
