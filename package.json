@@ -82,6 +82,5 @@
       "@commitlint/config-lerna-scopes",
       "@commitlint/config-conventional"
     ]
-  },
-  "dependencies": {}
+  }
 }

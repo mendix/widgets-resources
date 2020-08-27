@@ -8,16 +8,16 @@ describe("badge-web", () => {
     });
 
     describe("type: badge", () => {
-        it("compares successfully with a screenshot baseline", () => {
+        it("compares with a screenshot baseline and checks if all badges elements are rendered as expected", () => {
             const elem = $(".sprintrFeedback__sidebar");
             browser.setWindowRect(0, 0, 1024, 768);
             elem.waitForDisplayed(5000);
             browser.saveElement($(".mx-dataview-content"), "badgePageContent", {
-                removeElements: [$(".sprintrFeedback__sidebar")]
+                removeElements: [elem]
             });
             expect(
                 browser.checkElement($(".mx-dataview-content"), "badgePageContent", {
-                    removeElements: [$(".sprintrFeedback__sidebar")]
+                    removeElements: [elem]
                 })
             ).toEqual(0);
         });
