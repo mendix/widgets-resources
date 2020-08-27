@@ -27,7 +27,7 @@ const widgetConfig = {
                 loader: "ts-loader",
                 options: {
                     compilerOptions: {
-                        target: "esnext"
+                        target: "es2019"
                     }
                 }
             },
