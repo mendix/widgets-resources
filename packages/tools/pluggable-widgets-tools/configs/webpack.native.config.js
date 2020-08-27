@@ -81,6 +81,7 @@ const widgetConfig = {
         "react-native-device-info",
         "react-native-firebase",
         "react-native-geocoder",
+        /react-native-gesture-handler\/*/,
         "react-native-image-picker",
         "react-native-inappbrowser-reborn",
         "react-native-localize",
@@ -93,7 +94,6 @@ const widgetConfig = {
         "react-native-video",
         "react-native-view-shot",
         "react-native-webview",
-        /react-native-gesture-handler\/*/,
         "react-navigation"
     ],
     plugins: [
