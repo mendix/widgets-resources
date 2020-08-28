@@ -166,10 +166,14 @@ class MxGenerator extends Generator {
     }
 
     _writeUtilityFiles() {
-        this._copyTemplate("commons/_gitignore", ".gitignore");
+        this._copyTemplate("commons/_gitignore", ".gitignore", {
+            projectIgnorePath: this.widget.projectPath.replace(/\.\//g, "")
+        });
         this._copyFile(`commons/eslintrc.${this.widget.isLanguageTS ? "ts" : "js"}.js`, ".eslintrc.js");
         this._copyFile("commons/prettier.config.js", "prettier.config.js");
-        this._copyTemplate("commons/.prettierignore", ".prettierignore");
+        this._copyTemplate("commons/.prettierignore", ".prettierignore", {
+            projectIgnorePath: this.widget.projectPath.replace(/\.\//g, "")
+        });
         this._copyFile("commons/.gitattributes", ".gitattributes");
 
         if (this.widget.license) {
