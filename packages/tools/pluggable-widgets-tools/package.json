@@ -119,6 +119,7 @@
     "shelljs": "^0.8.4",
     "shx": "^0.3.2",
     "tree-kill": "^1.2.2",
+    "wdio-image-comparison-service": "^1.13.6",
     "yeoman-test": "^2.6.0"
   },
   "scripts": {

@@ -68,7 +68,6 @@
     "react-test-renderer": "~16.9.0",
     "scheduler": "^0.19.1",
     "ts-node": "^8.10.2",
-    "wdio-image-comparison-service": "^1.13.6",
     "zip-folder": "^1.0.0"
   },
   "husky": {
