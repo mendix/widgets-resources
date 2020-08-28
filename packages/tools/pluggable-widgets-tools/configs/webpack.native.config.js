@@ -38,7 +38,7 @@ const widgetConfig = {
                     loader: "babel-loader",
                     options: {
                         cacheDirectory: true,
-                        presets: ["@babel/preset-react"],
+                        presets: ["module:metro-react-native-babel-preset", "@babel/preset-react"],
                         plugins: [
                             ["@babel/plugin-proposal-class-properties", { loose: true }],
                             ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]
@@ -53,7 +53,7 @@ const widgetConfig = {
                     loader: "babel-loader",
                     options: {
                         cacheDirectory: true,
-                        presets: ["@babel/preset-react"],
+                        presets: ["module:metro-react-native-babel-preset", "@babel/preset-react"],
                         plugins: [
                             ["@babel/plugin-proposal-class-properties", { loose: true }],
                             "@babel/plugin-transform-react-jsx"
