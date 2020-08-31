@@ -247,7 +247,7 @@ export interface VariablesNavigation {
     }
 }
 
-export interface VairablesContainer {
+export interface VariablesContainer {
     containerDisabled: {
         opacity: numnber
     }

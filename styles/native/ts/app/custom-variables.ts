@@ -7,7 +7,7 @@ import {
     VariablesBadge,
     VariablesBorder,
     VariablesBrand,
-    VariablesButton,
+    VariablesButton, VariablesContainer,
     VariablesContrast,
     VariablesFloatingActionButton,
     VariablesFont,
@@ -23,7 +23,7 @@ import {
     VariablesSlider,
     VariablesSpacing,
     VariablesTabContainer,
-}                                  from "../types/variables";
+} from "../types/variables";
 /*
 
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)
@@ -309,7 +309,7 @@ export const navigation: VariablesNavigation = {
 };
 //
 // Container Styles
-export const container: VairablesContainer = {
+export const container: VariablesContainer = {
     containerDisabled: {
         opacity: 0.6,
     },

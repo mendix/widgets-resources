@@ -9,7 +9,7 @@ import {
     VariablesBadge,
     VariablesBorder,
     VariablesBrand,
-    VariablesButton,
+    VariablesButton, VariablesContainer,
     VariablesContrast,
     VariablesFloatingActionButton,
     VariablesFont,
@@ -26,7 +26,7 @@ import {
     VariablesSlider,
     VariablesSpacing,
     VariablesTabContainer,
-}                                                from "../types/variables";
+} from "../types/variables";
 //
 //
 //== Global variables
@@ -311,7 +311,7 @@ let navigation: VariablesNavigation = {
 navigation = merge(navigation, custom.navigation || {} as any);
 //
 // Container Styles
-let container: VairablesContainer = {
+let container: VariablesContainer = {
     containerDisabled: {
         opacity: 0.6,
     },
