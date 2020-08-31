@@ -20,7 +20,7 @@ export const DropDown: DropDownType = {
     },
     containerDisabled: {
         // All ViewStyle properties are allowed
-      ...TextBox.containerDisabled
+        ...TextBox.containerDisabled,
     },
     label: {
         // numberOfLines and all TextStyle properties are allowed
@@ -28,7 +28,7 @@ export const DropDown: DropDownType = {
     },
     labelDisabled: {
         // All TextStyle properties are allowed
-      ...TextBox.labelDisabled
+        ...TextBox.labelDisabled,
     },
     value: {
         // All TextStyle properties & placeholderTextColor are allowed
@@ -53,8 +53,9 @@ export const DropDown: DropDownType = {
     },
     valueDisabled: {
         // All TextStyle properties are allowed
-        backgroundColor: input.inputDisabled.backgroundColor,
         color: TextBox.inputDisabled?.color,
+        borderColor: TextBox.inputDisabled?.borderColor,
+        backgroundColor: TextBox.inputDisabled?.backgroundColor,
     },
     validationMessage: {
         // All TextStyle properties are allowed
@@ -72,7 +73,6 @@ export const DropDown: DropDownType = {
         // All ViewStyle properties are allowed
         overflow: "hidden",
         borderRadius: input.input.borderRadius,
-        backgroundColor: input.input.backgroundColor,
         shadowColor: "#000",
         shadowOpacity: 0.2,
         shadowRadius: 10,

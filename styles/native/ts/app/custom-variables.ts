@@ -129,17 +129,31 @@ export const spacing: VariablesSpacing = {
 //
 // Button Styles
 export const button: VariablesButton = {
-    fontSize: font.sizeSmall,
-    fontSizeLarge: font.size,
-    fontWeight: font.weightBold,
-    fontSizeIcon: font.sizeSmall,
-    fontSizeIconLarge: font.size,
-    borderRadius: border.radiusLarge,
-
-    minWidth: 48,
-    minHeight: 48,
-    paddingVertical: spacing.small,
-    paddingHorizontal: spacing.small,
+    container: {
+        rippleColor: contrast.lowest,
+        borderRadius: border.radiusLarge,
+        minWidth: 48,
+        minHeight: 48,
+        paddingVertical: spacing.small,
+        paddingHorizontal: spacing.small,
+    },
+    containerDisabled: {
+        borderColor: border.color,
+        backgroundColor: border.color,
+    },
+    icon: {
+        size: font.sizeSmall,
+    },
+    iconDisabled: {
+        color: font.colorDisabled,
+    },
+    caption: {
+        fontSize: font.sizeSmall,
+        fontWeight: font.weightBold,
+    },
+    captionDisabled: {
+        color: font.colorDisabled,
+    },
 
     header: {
         color: contrast.highest,
@@ -186,6 +200,9 @@ export const input: VariablesInput = {
         fontSize: font.sizeSmall,
         textAlign: "left",
     },
+    labelDisabled: {
+        color: font.colorTitle,
+    },
     input: {
         color: font.colorTitle,
         borderColor: contrast.lower,
@@ -204,6 +221,8 @@ export const input: VariablesInput = {
         paddingHorizontal: spacing.small,
     },
     inputDisabled: {
+        color: font.colorDisabled,
+        borderColor: border.color,
         backgroundColor: background.gray,
     },
     inputError: {
@@ -415,11 +434,11 @@ export const introScreen: VariablesIntroScreen = {
     button: {
         icon: {
             color: font.colorTitle,
-            size: button.fontSizeIcon,
+            size: button.icon.size,
         },
         caption: {
             color: font.colorTitle,
-            fontSize: button.fontSize,
+            fontSize: button.caption.fontSize,
             fontWeight: font.weightBold,
             textTransform: "uppercase",
             paddingHorizontal: spacing.smallest,

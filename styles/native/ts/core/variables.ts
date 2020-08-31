@@ -128,17 +128,31 @@ spacing = merge(spacing, custom.spacing || {} as any);
 //
 // Button Styles
 let button: VariablesButton = {
-    fontSize: font.sizeSmall,
-    fontSizeLarge: font.size,
-    fontWeight: font.weightBold,
-    fontSizeIcon: font.sizeSmall,
-    fontSizeIconLarge: font.size,
-    borderRadius: border.radiusSmall,
-
-    minWidth: 48,
-    minHeight: 48,
-    paddingVertical: spacing.smaller,
-    paddingHorizontal: spacing.regular,
+    container: {
+        rippleColor: contrast.lowest,
+        borderRadius: border.radiusLarge,
+        minWidth: 48,
+        minHeight: 48,
+        paddingVertical: spacing.small,
+        paddingHorizontal: spacing.small,
+    },
+    containerDisabled: {
+        borderColor: border.color,
+        backgroundColor: border.color,
+    },
+    icon: {
+        size: font.sizeSmall,
+    },
+    iconDisabled: {
+        color: font.colorDisabled,
+    },
+    caption: {
+        fontSize: font.sizeSmall,
+        fontWeight: font.weightBold,
+    },
+    captionDisabled: {
+        color: font.colorDisabled,
+    },
 
     header: {
         color: contrast.highest,
@@ -186,6 +200,9 @@ let input: VariablesInput = {
         fontSize: font.size,
         textAlign: "left",
     },
+    labelDisabled: {
+        color: font.colorTitle,
+    },
     input: {
         color: font.colorTitle,
         borderColor: contrast.lower,
@@ -204,7 +221,9 @@ let input: VariablesInput = {
         paddingHorizontal: spacing.small,
     },
     inputDisabled: {
-        backgroundColor: contrast.lowest,
+        color: font.colorDisabled,
+        borderColor: border.color,
+        backgroundColor: background.gray,
     },
     inputError: {
         color: brand.danger,
@@ -422,11 +441,11 @@ let introScreen: VariablesIntroScreen = {
     button: {
         icon: {
             color: font.colorTitle,
-            size: button.fontSizeIcon,
+            size: button.icon.size,
         },
         caption: {
             color: font.colorTitle,
-            fontSize: button.fontSize,
+            fontSize: button.caption.fontSize,
             fontWeight: font.weightBold,
             textTransform: "uppercase",
             paddingHorizontal: spacing.smallest,

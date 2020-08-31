@@ -93,17 +93,31 @@ interface VariablesButtonStyles {
 }
 
 export interface VariablesButton {
-    fontSize: number,
-    fontSizeLarge: number,
-    fontWeight: FontWeight,
-    fontSizeIcon: number,
-    fontSizeIconLarge: number,
-    borderRadius: number,
-
-    minWidth: number,
-    minHeight: number,
-    paddingVertical: number,
-    paddingHorizontal: number,
+    container: {
+        rippleColor: string,
+        borderRadius: number,
+        minWidth: number,
+        minHeight: number,
+        paddingVertical: number,
+        paddingHorizontal: number,
+    },
+    containerDisabled: {
+        borderColor: string,
+        backgroundColor: string,
+    },
+    icon: {
+        size: number,
+    },
+    iconDisabled: {
+        color: string,
+    },
+    caption: {
+        fontSize: number,
+        fontWeight: FontWeight,
+    },
+    captionDisabled: {
+        color: string,
+    },
 
     header: {
         color: string,
@@ -129,6 +143,9 @@ export interface VariablesInput {
         fontSize: number,
         textAlign: TextAlign,
     },
+    labelDisabled: {
+        color: string
+    }
     input: {
         color: string,
         borderColor: string,
@@ -147,6 +164,8 @@ export interface VariablesInput {
         paddingHorizontal: number,
     },
     inputDisabled: {
+        color: string,
+        borderColor: string,
         backgroundColor: string,
     },
     inputError: {
