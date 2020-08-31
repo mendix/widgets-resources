@@ -27,7 +27,7 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton:
         borderColor: floatingActionButton.button.borderColor,
         borderRadius: floatingActionButton.button.size / 2,
         borderWidth: 1,
-        elevation: 2,
+        elevation: 3,
         shadowColor: "#000",
         shadowOpacity: 0.3,
         shadowRadius: 4,

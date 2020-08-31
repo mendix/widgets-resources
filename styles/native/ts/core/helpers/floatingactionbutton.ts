@@ -13,7 +13,7 @@ To customize any core styling, copy the part you want to customize to styles/nat
 //## Helper classes to change the look and feel of the widget
 ========================================================================== */
 // Floating Action Button Colors
-export const floatingActionButtonSucondary = {
+export const floatingActionButtonSecondary = {
     button: {
         backgroundColor: background.primary,
     },
