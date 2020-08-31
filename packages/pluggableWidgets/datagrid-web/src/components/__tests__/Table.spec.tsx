@@ -86,6 +86,7 @@ function mockTableProps(): TableProps<ObjectItem> {
         pagingPosition: "bottom",
         columnsHidable: false,
         columnsDraggable: false,
+        filterMethod: "startsWith",
         footerWidgets: undefined,
         headerWidgets: undefined,
         className: "test",

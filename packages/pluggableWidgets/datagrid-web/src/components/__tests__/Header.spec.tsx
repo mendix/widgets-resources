@@ -23,6 +23,7 @@ function mockHeaderProps(): HeaderProps<object> {
         sortable: false,
         setColumnOrder: jest.fn(),
         setDragOver: jest.fn(),
-        visibleColumns: []
+        visibleColumns: [],
+        setSortBy: jest.fn()
     };
 }

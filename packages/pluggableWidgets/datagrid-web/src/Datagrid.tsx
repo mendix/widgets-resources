@@ -44,6 +44,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             columnsResizable={props.columnsResizable}
             columnsSortable={props.columnsSortable}
             data={props.datasource.items ?? []}
+            filterMethod={props.filterMethod}
             footerWidgets={<div className="header">{props.footerWidgets}</div>}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
             headerWidgets={<div className="footer">{props.headerWidgets}</div>}

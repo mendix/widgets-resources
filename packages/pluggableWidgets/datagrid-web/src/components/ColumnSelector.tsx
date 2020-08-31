@@ -1,17 +1,19 @@
 import { createElement, Dispatch, ReactElement, RefObject, SetStateAction, useEffect, useRef, useState } from "react";
-import { ColumnInstance } from "react-table";
+import { ColumnInstance, IdType } from "react-table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 
 export interface ColumnSelectorProps<D extends object> {
     allColumns: Array<ColumnInstance<D>>;
     width: number;
+    setHiddenColumns: Dispatch<SetStateAction<Array<IdType<object>>>>;
     setWidth: Dispatch<SetStateAction<number>>;
 }
 
 export function ColumnSelector<D extends object>({
     allColumns,
     width,
+    setHiddenColumns,
     setWidth
 }: ColumnSelectorProps<D>): ReactElement {
     const [show, setShow] = useState(false);
@@ -45,7 +47,20 @@ export function ColumnSelector<D extends object>({
                                     id={`checkbox_toggle_${index}`}
                                     type="checkbox"
                                     checked={column.isVisible}
-                                    onClick={() => column.toggleHidden()}
+                                    onClick={() => {
+                                        setHiddenColumns(prev => {
+                                            if (!column.isVisible) {
+                                                prev.splice(
+                                                    prev.findIndex(v => v === column.id),
+                                                    1
+                                                );
+                                                return [...prev];
+                                            } else {
+                                                return [...prev, column.id];
+                                            }
+                                        });
+                                        column.toggleHidden();
+                                    }}
                                     disabled={column.isVisible && visibleColumns === 1}
                                     {...column.getToggleHiddenProps()}
                                 />

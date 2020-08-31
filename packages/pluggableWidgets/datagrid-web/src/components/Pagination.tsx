@@ -1,4 +1,4 @@
-import { createElement, ReactElement } from "react";
+import { createElement, Dispatch, ReactElement, SetStateAction } from "react";
 
 export interface PaginationProps {
     canNextPage: boolean;
@@ -9,6 +9,7 @@ export interface PaginationProps {
     page: number;
     pageSize: number;
     previousPage: () => void;
+    setPaginationIndex?: Dispatch<SetStateAction<number>>;
 }
 
 export function Pagination({
@@ -19,30 +20,64 @@ export function Pagination({
     canNextPage,
     canPreviousPage,
     pageSize,
-    numberOfItems
+    numberOfItems,
+    setPaginationIndex
 }: PaginationProps): ReactElement {
     const numberOfPages = numberOfItems !== undefined ? Math.ceil(numberOfItems / pageSize) : undefined;
     const lastPage = numberOfPages !== undefined ? numberOfPages - 1 : 0;
     const hasLastPage = numberOfPages !== undefined;
     const initialItem = page * pageSize + 1;
     const lastItem = canNextPage || !numberOfItems ? (page + 1) * pageSize : numberOfItems;
+    const setPageIndex = (page: number): void => {
+        if (setPaginationIndex) {
+            setPaginationIndex(page);
+        }
+    };
     return (
         <div className="pagination">
-            <button className="btn" onClick={() => gotoPage(0)} disabled={page === 0}>
+            <button
+                className="btn"
+                onClick={() => {
+                    gotoPage(0);
+                    setPageIndex(0);
+                }}
+                disabled={page === 0}
+            >
                 <span className="glyphicon glyphicon-step-backward" />
             </button>
-            <button className="btn" onClick={() => previousPage()} disabled={!canPreviousPage}>
+            <button
+                className="btn"
+                onClick={() => {
+                    previousPage();
+                    setPageIndex(page - 1);
+                }}
+                disabled={!canPreviousPage}
+            >
                 <span className="glyphicon glyphicon-backward" />
             </button>
             <div className="paging-status">
                 {initialItem} to {lastItem}{" "}
                 {hasLastPage ? `of ${numberOfItems ?? (numberOfPages ?? 1) * pageSize}` : ""}
             </div>
-            <button className="btn" onClick={() => nextPage()} disabled={!canNextPage}>
+            <button
+                className="btn"
+                onClick={() => {
+                    nextPage();
+                    setPageIndex(page + 1);
+                }}
+                disabled={!canNextPage}
+            >
                 <span className="glyphicon glyphicon-forward" />
             </button>
             {hasLastPage && (
-                <button className="btn" onClick={() => gotoPage(lastPage)} disabled={page === lastPage}>
+                <button
+                    className="btn"
+                    onClick={() => {
+                        gotoPage(lastPage);
+                        setPageIndex(lastPage);
+                    }}
+                    disabled={page === lastPage}
+                >
                     <span className="glyphicon glyphicon-step-forward" />
                 </button>
             )}

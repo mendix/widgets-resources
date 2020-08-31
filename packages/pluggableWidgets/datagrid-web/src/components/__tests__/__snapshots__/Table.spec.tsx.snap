@@ -169,6 +169,7 @@ exports[`Table renders the structure correctly 1`] = `
           resizable={false}
           setColumnOrder={[Function]}
           setDragOver={[Function]}
+          setSortBy={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -461,6 +462,7 @@ exports[`Table renders the structure correctly 1`] = `
             ]
           }
           allColumnsHidden={false}
+          autoResetSortBy={false}
           canNextPage={false}
           canPreviousPage={false}
           cell={
@@ -2163,7 +2165,12 @@ exports[`Table renders the structure correctly 1`] = `
           }
           initialState={
             Object {
+              "columnOrder": Array [],
+              "filters": Array [],
+              "hiddenColumns": Array [],
+              "pageIndex": 0,
               "pageSize": 10,
+              "sortBy": Array [],
             }
           }
           nextPage={[Function]}
@@ -4107,6 +4114,7 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
           resizable={false}
           setColumnOrder={[Function]}
           setDragOver={[Function]}
+          setSortBy={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -4405,6 +4413,7 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
             ]
           }
           allColumnsHidden={false}
+          autoResetSortBy={false}
           canNextPage={false}
           canPreviousPage={false}
           cell={
@@ -6158,7 +6167,12 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
           }
           initialState={
             Object {
+              "columnOrder": Array [],
+              "filters": Array [],
+              "hiddenColumns": Array [],
+              "pageIndex": 0,
               "pageSize": 10,
+              "sortBy": Array [],
             }
           }
           nextPage={[Function]}
@@ -8168,6 +8182,7 @@ exports[`Table renders the structure correctly with dragging 1`] = `
           resizable={false}
           setColumnOrder={[Function]}
           setDragOver={[Function]}
+          setSortBy={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -8460,6 +8475,7 @@ exports[`Table renders the structure correctly with dragging 1`] = `
             ]
           }
           allColumnsHidden={false}
+          autoResetSortBy={false}
           canNextPage={false}
           canPreviousPage={false}
           cell={
@@ -10162,7 +10178,12 @@ exports[`Table renders the structure correctly with dragging 1`] = `
           }
           initialState={
             Object {
+              "columnOrder": Array [],
+              "filters": Array [],
+              "hiddenColumns": Array [],
+              "pageIndex": 0,
               "pageSize": 10,
+              "sortBy": Array [],
             }
           }
           nextPage={[Function]}
@@ -12103,6 +12124,7 @@ exports[`Table renders the structure correctly with filtering 1`] = `
           resizable={false}
           setColumnOrder={[Function]}
           setDragOver={[Function]}
+          setSortBy={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -12395,6 +12417,7 @@ exports[`Table renders the structure correctly with filtering 1`] = `
             ]
           }
           allColumnsHidden={false}
+          autoResetSortBy={false}
           canNextPage={false}
           canPreviousPage={false}
           cell={
@@ -14097,7 +14120,12 @@ exports[`Table renders the structure correctly with filtering 1`] = `
           }
           initialState={
             Object {
+              "columnOrder": Array [],
+              "filters": Array [],
+              "hiddenColumns": Array [],
+              "pageIndex": 0,
               "pageSize": 10,
+              "sortBy": Array [],
             }
           }
           nextPage={[Function]}
@@ -16038,6 +16066,7 @@ exports[`Table renders the structure correctly with hiding 1`] = `
           resizable={false}
           setColumnOrder={[Function]}
           setDragOver={[Function]}
+          setSortBy={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -16309,6 +16338,7 @@ exports[`Table renders the structure correctly with hiding 1`] = `
               },
             ]
           }
+          setHiddenColumns={[Function]}
           setWidth={[Function]}
           width={0}
         />
@@ -16468,6 +16498,7 @@ exports[`Table renders the structure correctly with hiding 1`] = `
             ]
           }
           allColumnsHidden={false}
+          autoResetSortBy={false}
           canNextPage={false}
           canPreviousPage={false}
           cell={
@@ -18170,7 +18201,12 @@ exports[`Table renders the structure correctly with hiding 1`] = `
           }
           initialState={
             Object {
+              "columnOrder": Array [],
+              "filters": Array [],
+              "hiddenColumns": Array [],
+              "pageIndex": 0,
               "pageSize": 10,
+              "sortBy": Array [],
             }
           }
           nextPage={[Function]}
@@ -20119,6 +20155,7 @@ exports[`Table renders the structure correctly with paging 1`] = `
           resizable={false}
           setColumnOrder={[Function]}
           setDragOver={[Function]}
+          setSortBy={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -20411,6 +20448,7 @@ exports[`Table renders the structure correctly with paging 1`] = `
             ]
           }
           allColumnsHidden={false}
+          autoResetSortBy={false}
           canNextPage={false}
           canPreviousPage={false}
           cell={
@@ -22113,7 +22151,12 @@ exports[`Table renders the structure correctly with paging 1`] = `
           }
           initialState={
             Object {
+              "columnOrder": Array [],
+              "filters": Array [],
+              "hiddenColumns": Array [],
+              "pageIndex": 0,
               "pageSize": 10,
+              "sortBy": Array [],
             }
           }
           nextPage={[Function]}
@@ -24064,6 +24107,7 @@ exports[`Table renders the structure correctly with resizing 1`] = `
           resizable={true}
           setColumnOrder={[Function]}
           setDragOver={[Function]}
+          setSortBy={[Function]}
           sortable={false}
           visibleColumns={
             Array [
@@ -24356,6 +24400,7 @@ exports[`Table renders the structure correctly with resizing 1`] = `
             ]
           }
           allColumnsHidden={false}
+          autoResetSortBy={false}
           canNextPage={false}
           canPreviousPage={false}
           cell={
@@ -26061,7 +26106,12 @@ exports[`Table renders the structure correctly with resizing 1`] = `
           }
           initialState={
             Object {
+              "columnOrder": Array [],
+              "filters": Array [],
+              "hiddenColumns": Array [],
+              "pageIndex": 0,
               "pageSize": 10,
+              "sortBy": Array [],
             }
           }
           nextPage={[Function]}
@@ -28002,6 +28052,7 @@ exports[`Table renders the structure correctly with sorting 1`] = `
           resizable={false}
           setColumnOrder={[Function]}
           setDragOver={[Function]}
+          setSortBy={[Function]}
           sortable={true}
           visibleColumns={
             Array [
@@ -28294,6 +28345,7 @@ exports[`Table renders the structure correctly with sorting 1`] = `
             ]
           }
           allColumnsHidden={false}
+          autoResetSortBy={false}
           canNextPage={false}
           canPreviousPage={false}
           cell={
@@ -29996,7 +30048,12 @@ exports[`Table renders the structure correctly with sorting 1`] = `
           }
           initialState={
             Object {
+              "columnOrder": Array [],
+              "filters": Array [],
+              "hiddenColumns": Array [],
+              "pageIndex": 0,
               "pageSize": 10,
+              "sortBy": Array [],
             }
           }
           nextPage={[Function]}

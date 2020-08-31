@@ -10,6 +10,11 @@ exports[`Header renders the structure correctly 1`] = `
       "flex": "1 1 0px",
     }
   }
+  title={
+    <span>
+      Test
+    </span>
+  }
 >
   <div
     className="column-container"
