@@ -4,6 +4,7 @@ import adjustFont, { height, width }             from "./helpers/_functions/adju
 import { anyColorToRgbString, setContrastScale } from "./helpers/_functions/convertcolors";
 import merge                                     from "./helpers/_functions/mergeobjects";
 import {
+    VairablesContainer,
     VariablesBackground,
     VariablesBadge,
     VariablesBorder,
@@ -271,6 +272,9 @@ let image: VariablesImage = {
         large: 56,
         larger: 72,
     },
+    imageDisabled: {
+        opacity: 0.6,
+    },
     icon: 24,
 };
 image = merge(image, custom.image || {} as any);
@@ -306,6 +310,14 @@ let navigation: VariablesNavigation = {
 };
 navigation = merge(navigation, custom.navigation || {} as any);
 //
+// Container Styles
+let container: VairablesContainer = {
+    containerDisabled: {
+        opacity: 0.6,
+    },
+};
+container = merge(container, custom.container || {} as any);
+//
 // Tabcontainer Styles
 let tabContainer: VariablesTabContainer = {
     tabBar: {
@@ -336,6 +348,9 @@ tabContainer = merge(tabContainer, custom.tabContainer || {} as any);
 //
 // Listview Styles
 let listView: VariablesListView = {
+    listItemDisabled: {
+        opacity: 0.6,
+    },
     border: {
         color: border.color,
         width: border.width,
@@ -567,6 +582,7 @@ export {
     listView,
     navigation,
     spacing,
+    container,
     tabContainer,
 
     badge,

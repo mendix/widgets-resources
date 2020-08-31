@@ -1,5 +1,5 @@
-import { contrast }  from "../variables";
-import { ImageType } from "../../types/widgets";
+import { contrast, image } from "../variables";
+import { ImageType }       from "../../types/widgets";
 /*
 
 DISCLAIMER:
@@ -28,8 +28,8 @@ export const Image: ImageType = {
     },
     imageDisabled: {
         // All ImageStyle properties are allowed
-        opacity: 0.6
-    }
+        opacity: image.imageDisabled.opacity,
+    },
 };
 export const ImageViewer: ImageType = {
     container: {
@@ -47,6 +47,6 @@ export const ImageViewer: ImageType = {
     },
     imageDisabled: {
         // All ImageStyle properties are allowed
-        opacity: 0.6
-    }
+        opacity: image.imageDisabled.opacity,
+    },
 };

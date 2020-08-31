@@ -212,6 +212,9 @@ export interface VariablesImage {
         large: number,
         larger: number,
     },
+    imageDisabled: {
+        opacity: number
+    }
     icon: number
 }
 
@@ -244,6 +247,12 @@ export interface VariablesNavigation {
     }
 }
 
+export interface VairablesContainer {
+    containerDisabled: {
+        opacity: numnber
+    }
+}
+
 export interface VariablesTabContainer {
     tabBar: {
         pressColor: string,
@@ -271,6 +280,9 @@ export interface VariablesTabContainer {
 }
 
 export interface VariablesListView {
+    listItemDisabled: {
+        opacity: number,
+    },
     border: {
         color: string,
         width: number

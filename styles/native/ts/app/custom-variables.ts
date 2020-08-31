@@ -2,6 +2,7 @@ import { NativeModules, Platform } from "react-native";
 import adjustFont                  from "../core/helpers/_functions/adjustfont";
 import { setContrastScale }        from "../core/helpers/_functions/convertcolors";
 import {
+    VairablesContainer,
     VariablesBackground,
     VariablesBadge,
     VariablesBorder,
@@ -129,6 +130,7 @@ export const spacing: VariablesSpacing = {
 //
 // Button Styles
 export const button: VariablesButton = {
+    // Start default styles
     container: {
         rippleColor: contrast.lowest,
         borderRadius: border.radiusLarge,
@@ -154,6 +156,7 @@ export const button: VariablesButton = {
     captionDisabled: {
         color: font.colorDisabled,
     },
+    // End default styles
 
     header: {
         color: contrast.highest,
@@ -269,6 +272,9 @@ export const image: VariablesImage = {
         large: 56,
         larger: 72,
     },
+    imageDisabled: {
+        opacity: 0.6,
+    },
     icon: 16,
 };
 //
@@ -302,6 +308,13 @@ export const navigation: VariablesNavigation = {
     },
 };
 //
+// Container Styles
+export const container: VairablesContainer = {
+    containerDisabled: {
+        opacity: 0.6,
+    },
+};
+//
 // Tabcontainer Styles
 export const tabContainer: VariablesTabContainer = {
     tabBar: {
@@ -332,6 +345,9 @@ export const tabContainer: VariablesTabContainer = {
 //
 // ListView Styles
 export const listView: VariablesListView = {
+    listItemDisabled: {
+        opacity: 0.6,
+    },
     border: {
         color: border.color,
         width: border.width,
