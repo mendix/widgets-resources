@@ -35,6 +35,9 @@ export const Layout: LayoutType = {
         container: {
             // All ViewStyle properties are allowed
             backgroundColor: navigation.topBar.backgroundColor,
+            elevation: 0,
+            shadowOpacity: 0,
+            shadowOffset: undefined,
             borderBottomWidth: undefined,
         },
         title: {

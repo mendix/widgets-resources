@@ -35,6 +35,7 @@ let background = {
     brandSuccess: brand.success,
     brandWarning: brand.warning,
     brandDanger: brand.danger,
+    brandInfo: brand.info,
 };
 background = merge(background, custom.background || {});
 //
@@ -182,7 +183,7 @@ let input = {
         color: brand.danger,
         borderColor: brand.danger,
         placeholderTextColor: brand.danger,
-        backgroundColor: brand.dangerLight
+        backgroundColor: brand.dangerLight,
     },
     validationMessage: {
         color: brand.danger,
@@ -365,14 +366,64 @@ let floatingActionButton = {
 };
 floatingActionButton = merge(floatingActionButton, custom.floatingActionButton || {});
 //
+// Intro Screen Styles
+let introScreen = {
+    fullscreenContainer: {
+        backgroundColor: background.primary,
+    },
+    popupContainer: {
+        paddingVertical: 150,
+        paddingHorizontal: 50,
+        backgroundColor: `rgba(0, 0, 0, 0.5)`,
+    },
+    pagination: {
+        text: {
+            color: font.colorTitle,
+            fontSize: font.size,
+        },
+        dotStyle: {
+            size: spacing.small,
+            backgroundColor: contrast.lower,
+        },
+        activeDotStyle: {
+            size: spacing.small,
+            backgroundColor: font.colorTitle,
+        },
+    },
+    button: {
+        icon: {
+            color: font.colorTitle,
+            size: button.fontSizeIcon,
+        },
+        caption: {
+            color: font.colorTitle,
+            fontSize: button.fontSize,
+            fontWeight: font.weightBold,
+            textTransform: "uppercase",
+            paddingHorizontal: spacing.smallest,
+        },
+    },
+    buttonPaginationAbove: {
+        container: {
+            paddingVertical: spacing.regular,
+            backgroundColor: button.primary.backgroundColor,
+        },
+    },
+};
+introScreen = merge(introScreen, custom.introScreen || {});
+//
 // List View Swipe Styles
 let listViewSwipe = {
     leftAction: {
         panelSize: 144,
+        panelSizeSmall: 108,
+        panelSizeLarge: 216,
         backgroundColor: background.primary,
     },
     rightAction: {
         panelSize: 144,
+        panelSizeSmall: 108,
+        panelSizeLarge: 216,
         backgroundColor: background.primary,
     },
 };
@@ -455,4 +506,4 @@ let slider = {
 };
 slider = merge(slider, custom.slider || {});
 //
-export { brand, background, border, contrast, font, spacing, button, input, image, navigation, tabContainer, listView, layoutGrid, badge, floatingActionButton, slider, progressBar, progressCircle, };
+export { brand, background, border, button, contrast, font, input, image, layoutGrid, listView, navigation, spacing, tabContainer, badge, floatingActionButton, introScreen, listViewSwipe, progressBar, progressCircle, slider, };

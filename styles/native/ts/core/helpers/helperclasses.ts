@@ -53,6 +53,11 @@ export const backgroundBrandDanger: Helperclass = {
         backgroundColor: background.brandDanger,
     },
 };
+export const backgroundBrandInfo: Helperclass = {
+    container: {
+        backgroundColor: background.brandInfo,
+    },
+};
 //
 // borders
 export const borderTop: Helperclass = {

@@ -39,3 +39,9 @@ export const listItemImage = {
         marginRight: spacing.regular,
     },
 };
+
+export const horizontalListItemCard = {
+    container: {
+        width: 280,
+    },
+};

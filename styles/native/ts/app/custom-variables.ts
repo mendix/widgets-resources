@@ -12,6 +12,7 @@ import {
     VariablesFont,
     VariablesImage,
     VariablesInput,
+    VariablesIntroScreen,
     VariablesListView,
     VariablesListViewSwipe,
     VariablesNavigation,
@@ -63,6 +64,7 @@ export const background: VariablesBackground = {
     brandSuccess: brand.success,
     brandWarning: brand.warning,
     brandDanger: brand.danger,
+    brandInfo: brand.info,
 };
 //
 // Contrast (Gray) colors based on background.primary
@@ -297,14 +299,14 @@ export const tabContainer: VariablesTabContainer = {
     label: {
         color: background.primary,
         fontSize: font.size,
-        fontWeight: font.weightBold,
-        textTransform: "uppercase",
+        fontWeight: font.weightSemiBold,
+        textTransform: "capitalize",
     },
     activeLabel: {
         color: background.gray,
         fontSize: font.size,
-        fontWeight: font.weightBold,
-        textTransform: "uppercase",
+        fontWeight: font.weightSemiBold,
+        textTransform: "capitalize",
 
     },
 };
@@ -327,9 +329,9 @@ export const layoutGrid = {
 //-------------------------------------------------------------------------------------------------------------------//
 // Badge Styles
 export const badge: VariablesBadge = {
-    fontWeight: font.weightBold,
+    fontWeight: font.weightNormal,
     borderRadius: border.radiusLarge,
-    paddingVertical: 2,
+    paddingVertical: spacing.small,
     paddingHorizontal: spacing.small,
 
     default: {
@@ -386,14 +388,63 @@ export const floatingActionButton: VariablesFloatingActionButton = {
     },
 };
 //
+// Intro Screen Styles
+export const introScreen: VariablesIntroScreen = {
+    fullscreenContainer: {
+        backgroundColor: background.primary,
+    },
+    popupContainer: {
+        paddingVertical: 150,
+        paddingHorizontal: 50,
+        backgroundColor: `rgba(0, 0, 0, 0.5)`,
+    },
+    pagination: {
+        text: {
+            color: font.colorTitle,
+            fontSize: font.size,
+        },
+        dotStyle: {
+            size: spacing.small,
+            backgroundColor: contrast.lower,
+        },
+        activeDotStyle: {
+            size: spacing.small,
+            backgroundColor: font.colorTitle,
+        },
+    },
+    button: {
+        icon: {
+            color: font.colorTitle,
+            size: button.fontSizeIcon,
+        },
+        caption: {
+            color: font.colorTitle,
+            fontSize: button.fontSize,
+            fontWeight: font.weightBold,
+            textTransform: "uppercase",
+            paddingHorizontal: spacing.smallest,
+        },
+    },
+    buttonPaginationAbove: {
+        container: {
+            paddingVertical: spacing.regular,
+            backgroundColor: button.primary.backgroundColor,
+        },
+    },
+};
+//
 // List View Swipe Styles
 export const listViewSwipe: VariablesListViewSwipe = {
     leftAction: {
-        panelSize: 144,
+        panelSize: 160,
+        panelSizeSmall: 80,
+        panelSizeLarge: 240,
         backgroundColor: background.primary,
     },
     rightAction: {
-        panelSize: 144,
+        panelSize: 160,
+        panelSizeSmall: 80,
+        panelSizeLarge: 240,
         backgroundColor: background.primary,
     },
 };

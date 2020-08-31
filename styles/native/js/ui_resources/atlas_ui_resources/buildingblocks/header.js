@@ -25,15 +25,6 @@ export const headerImageFull = {
         resizeMode: "cover",
     },
 };
-export const headerImageOverlay = {
-    container: {
-        zIndex: 10,
-        width: "100%",
-        height: "100%",
-        position: "absolute",
-        backgroundColor: "rgba(0,0,0,0.4)",
-    },
-};
 export const headerBody = {
     container: {
         bottom: 0,

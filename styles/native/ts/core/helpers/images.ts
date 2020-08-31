@@ -1,4 +1,4 @@
-import { background, border, image } from "../variables";
+import { border, brand, contrast, image } from "../variables";
 /*
 
 DISCLAIMER:
@@ -17,6 +17,17 @@ To customize any core styling, copy the part you want to customize to styles/nat
 //== Extra Classes
 //## Helper classes to change the look and feel of the widget
 //-------------------------------------------------------------------------------------------------------------------//
+// Image Overlay
+export const imageOverlay = {
+    container: {
+        zIndex: 10,
+        width: "100%",
+        height: "100%",
+        position: "absolute",
+        backgroundColor: "rgba(0,0,0,0.4)",
+    },
+};
+//
 // Image Sizes
 export const imageSquare = {
     image: {
@@ -93,13 +104,41 @@ export const imageIcon = {
         tintColor: "blue",
     },
 };
+//
+// Image / SVG Styles
 export const imageIconPrimary = {
     image: {
-        color: background.primary,
+        fill: brand.primary,
+        color: brand.primary,
     },
 };
-export const imageIconGray = {
+export const imageIconSecondary = {
     image: {
-        color: background.gray,
+        fill: contrast.low,
+        color: contrast.low,
+    },
+};
+export const imageIconSuccess = {
+    image: {
+        fill: brand.success,
+        color: brand.success,
+    },
+};
+export const imageIconWarning = {
+    image: {
+        fill: brand.warning,
+        color: brand.warning,
+    },
+};
+export const imageIconDanger = {
+    image: {
+        fill: brand.danger,
+        color: brand.danger,
+    },
+};
+export const imageIconInfo = {
+    image: {
+        fill: brand.info,
+        color: brand.info,
     },
 };

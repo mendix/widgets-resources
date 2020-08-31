@@ -79,18 +79,6 @@ export const btnPrimaryInversed: ActionButtonType = {
 //== Extra Classes
 //## Helper classes to change the look and feel of the widget
 //-------------------------------------------------------------------------------------------------------------------//
-export const btnSecondaryInversed: ActionButtonType = {
-    container: {
-        borderColor: button.secondary.inversedColor,
-        backgroundColor: button.secondary.backgroundColor,
-    },
-    icon: {
-        color: button.secondary.inversedColor,
-    },
-    caption: {
-        color: button.secondary.inversedColor,
-    },
-};
 //
 // Button Icon Only
 export const btnIcon: ActionButtonType = {

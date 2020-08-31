@@ -38,7 +38,6 @@ export * from "./core/widgets/maps";
 export * from "./core/helpers/maps";
 export * from "./core/widgets/navigation";
 export * from "./core/widgets/page";
-export * from "./core/helpers/page";
 export * from "./core/widgets/pagetitle";
 export * from "./core/widgets/progressbar";
 export * from "./core/helpers/progressbar";

@@ -26,6 +26,7 @@ export interface VariablesBackground {
     brandSuccess: string,
     brandWarning: string,
     brandDanger: string,
+    brandInfo: string,
 }
 
 export interface VariablesContrast {
@@ -314,13 +315,61 @@ export interface VariablesFloatingActionButton {
     }
 }
 
+export interface VariablesIntroScreen {
+    fullscreenContainer: {
+        backgroundColor: string,
+    },
+    popupContainer: {
+        paddingVertical: number,
+        paddingHorizontal: number,
+        backgroundColor: string,
+    },
+    pagination: {
+        text: {
+            color: string,
+            fontSize: number,
+        },
+        dotStyle: {
+            size: number
+            backgroundColor: string,
+        },
+        activeDotStyle: {
+            size: number
+            backgroundColor: string
+        }
+    },
+    button: {
+        icon: {
+            color: string,
+            size: number,
+        },
+        caption: {
+            color: string,
+            fontSize: number,
+            fontWeight: FontWeight,
+            textTransform: TextTransform,
+            paddingHorizontal: number,
+        },
+    },
+    buttonPaginationAbove: {
+        container: {
+            paddingVertical: number,
+            backgroundColor: string
+        },
+    }
+}
+
 export interface VariablesListViewSwipe {
     leftAction: {
         panelSize: number,
+        panelSizeSmall: number,
+        panelSizeLarge: number,
         backgroundColor: string
     },
     rightAction: {
         panelSize: number,
+        panelSizeSmall: number,
+        panelSizeLarge: number,
         backgroundColor: string
     },
 }

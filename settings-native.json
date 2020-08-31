@@ -105,6 +105,10 @@
                     {
                         "name": "Brand Danger",
                         "class": "backgroundBrandDanger"
+                    },
+                    {
+                        "name": "Brand Info",
+                        "class": "backgroundBrandInfo"
                     }
                 ]
             },
@@ -246,7 +250,7 @@
                     },
                     {
                         "name": "Large",
-                        "class": "spacingOuterBottomLarg"
+                        "class": "spacingOuterBottomLarge"
                     },
                     {
                         "name": "Larger",
@@ -497,6 +501,10 @@
                     {
                         "name": "Brand Danger",
                         "class": "backgroundBrandDanger"
+                    },
+                    {
+                        "name": "Brand Info",
+                        "class": "backgroundBrandInfo"
                     }
                 ]
             },
@@ -766,6 +774,10 @@
                     {
                         "name": "Brand Danger",
                         "class": "backgroundBrandDanger"
+                    },
+                    {
+                        "name": "Brand Info",
+                        "class": "backgroundBrandInfo"
                     }
                 ]
             },
@@ -1233,6 +1245,10 @@
                     {
                         "name": "Brand Danger",
                         "class": "backgroundBrandDanger"
+                    },
+                    {
+                        "name": "Brand Info",
+                        "class": "backgroundBrandInfo"
                     }
                 ]
             }
@@ -1266,6 +1282,10 @@
                     {
                         "name": "Brand Danger",
                         "class": "backgroundBrandDanger"
+                    },
+                    {
+                        "name": "Brand Info",
+                        "class": "backgroundBrandInfo"
                     }
                 ]
             }
@@ -1299,6 +1319,10 @@
                     {
                         "name": "Brand Danger",
                         "class": "backgroundBrandDanger"
+                    },
+                    {
+                        "name": "Brand Info",
+                        "class": "backgroundBrandInfo"
                     }
                 ]
             }
@@ -1347,6 +1371,10 @@
                     {
                         "name": "Brand Danger",
                         "class": "backgroundBrandDanger"
+                    },
+                    {
+                        "name": "Brand Info",
+                        "class": "backgroundBrandInfo"
                     }
                 ]
             }
@@ -1598,6 +1626,10 @@
                     {
                         "name": "Brand Danger",
                         "class": "backgroundBrandDanger"
+                    },
+                    {
+                        "name": "Brand Info",
+                        "class": "backgroundBrandInfo"
                     }
                 ]
             },
@@ -1965,6 +1997,10 @@
                     {
                         "name": "Brand Danger",
                         "class": "backgroundBrandDanger"
+                    },
+                    {
+                        "name": "Brand Info",
+                        "class": "backgroundBrandInfo"
                     }
                 ]
             },

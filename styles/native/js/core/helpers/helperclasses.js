@@ -52,6 +52,11 @@ export const backgroundBrandDanger = {
         backgroundColor: background.brandDanger,
     },
 };
+export const backgroundBrandInfo = {
+    container: {
+        backgroundColor: background.brandInfo,
+    },
+};
 //
 // borders
 export const borderTop = {

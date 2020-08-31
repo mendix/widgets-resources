@@ -73,6 +73,7 @@ export const cardBodyAbsolute = {
 export const cardAction = {
     container: {
         maxWidth: "100%",
+        height: 104,
         borderWidth: border.width,
         borderColor: border.color,
         borderRadius: border.radiusLarge,
