@@ -54,15 +54,15 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     const isInfinite = !props.paging && !isSortingOrFiltering;
     const [dragOver, setDragOver] = useState("");
     const [columnSelectorWidth, setColumnSelectorWidth] = useState(0);
-    const [columnOrder, setColumnOrder] = useState<Array<IdType<object>>>([]); // TODO: Load config from user
+    const [columnOrder, setColumnOrder] = useState<Array<IdType<object>>>([]);
     const [hiddenColumns, setHiddenColumns] = useState<Array<IdType<object>>>(
         (props.columns
             .map((c, i) => (c.hidable === "hidden" ? i.toString() : undefined))
             .filter(Boolean) as string[]) ?? []
-    ); // TODO: Load config from user
-    const [paginationIndex, setPaginationIndex] = useState<number>(0); // TODO: Load config from user
-    const [sortBy, setSortBy] = useState<Array<SortingRule<object>>>([]); // TODO: Load config from user
-    const [filters, setFilters] = useState<Filters<object>>([]); // TODO: Load config from user
+    );
+    const [paginationIndex, setPaginationIndex] = useState<number>(0);
+    const [sortBy, setSortBy] = useState<Array<SortingRule<object>>>([]);
+    const [filters, setFilters] = useState<Filters<object>>([]);
 
     const filterTypes = useMemo(
         () => ({
