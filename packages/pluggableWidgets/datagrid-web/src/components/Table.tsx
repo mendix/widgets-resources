@@ -55,7 +55,11 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     const [dragOver, setDragOver] = useState("");
     const [columnSelectorWidth, setColumnSelectorWidth] = useState(0);
     const [columnOrder, setColumnOrder] = useState<Array<IdType<object>>>([]); // TODO: Load config from user
-    const [hiddenColumns, setHiddenColumns] = useState<Array<IdType<object>>>([]); // TODO: Load config from user
+    const [hiddenColumns, setHiddenColumns] = useState<Array<IdType<object>>>(
+        (props.columns
+            .map((c, i) => (c.hidable === "hidden" ? i.toString() : undefined))
+            .filter(Boolean) as string[]) ?? []
+    ); // TODO: Load config from user
     const [paginationIndex, setPaginationIndex] = useState<number>(0); // TODO: Load config from user
     const [sortBy, setSortBy] = useState<Array<SortingRule<object>>>([]); // TODO: Load config from user
     const [filters, setFilters] = useState<Filters<object>>([]); // TODO: Load config from user
@@ -65,8 +69,12 @@ export function Table<T>(props: TableProps<T>): ReactElement {
             text: (rows: Array<Row<object>>, id: IdType<object>, filterValue: FilterValue) => {
                 return rows.filter(row => {
                     const value = props.valueForFilter(row.values[id], Number(id));
-                    if (!value) {
+                    if (!filterValue) {
                         return true;
+                    }
+
+                    if (!value) {
+                        return false;
                     }
 
                     switch (props.filterMethod) {

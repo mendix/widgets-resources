@@ -19,9 +19,6 @@ export function ColumnSelector<D extends object>({
     const [show, setShow] = useState(false);
     const listRef = useRef<HTMLUListElement>(null);
     useOnClickOutside(listRef, () => setShow(false));
-    useEffect(() => {
-        allColumns.filter(column => column.hidden).forEach(column => column.toggleHidden(true));
-    }, [allColumns]);
     const visibleColumns = allColumns.filter(column => column.isVisible).length;
     return (
         <div className="th column-selector">
