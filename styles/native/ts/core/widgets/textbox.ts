@@ -16,6 +16,9 @@ export const TextBox: TextBoxType = {
     container: {
         // All ViewStyle properties are allowed
     },
+    containerDisabled: {
+        // All ViewStyle properties are allowed
+    },
     label: {
         // numberOfLines and all TextStyle properties are allowed
         numberOfLines: input.label.numberOfLines,
@@ -24,6 +27,10 @@ export const TextBox: TextBoxType = {
         fontFamily: font.family,
         textAlign: input.label.textAlign,
         marginRight: spacing.small,
+    },
+    labelDisabled: {
+        // TextStyle properties are allowed
+        color: input.labelDisabled.color,
     },
     input: {
         // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
@@ -46,6 +53,8 @@ export const TextBox: TextBoxType = {
     },
     inputDisabled: {
         // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
+        color: input.inputDisabled.color,
+        borderColor: input.inputDisabled.borderColor,
         backgroundColor: input.inputDisabled.backgroundColor,
     },
     inputError: {
@@ -72,6 +81,9 @@ export const TextBoxVertical: TextBoxType = {
         textAlign: input.label.textAlign,
         marginBottom: spacing.smallest,
     },
+    labelDisabled: {
+        color: input.labelDisabled.color,
+    },
     input: {
         color: input.input.color,
         borderColor: input.input.borderColor,
@@ -89,6 +101,11 @@ export const TextBoxVertical: TextBoxType = {
         minHeight: input.input.minHeight,
         paddingHorizontal: input.input.paddingHorizontal,
         paddingVertical: input.input.paddingVertical,
+    },
+    inputDisabled: {
+        color: input.inputDisabled.color,
+        borderColor: input.inputDisabled.borderColor,
+        backgroundColor: input.inputDisabled.backgroundColor,
     },
     inputError: TextBox.inputError,
     validationMessage: TextBox.validationMessage,

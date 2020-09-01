@@ -18,8 +18,8 @@ export const com_mendix_widget_native_feedback_Feedback: FeedbackType = {
         // All ViewStyle properties are allowed
         borderRadius: 0,
         backgroundColor: background.gray,
-        borderTopLeftRadius: button.borderRadius,
-        borderBottomLeftRadius: button.borderRadius,
+        borderTopLeftRadius: button.container.borderRadius,
+        borderBottomLeftRadius: button.container.borderRadius,
         elevation: 1.5,
         shadowColor: "#000",
         shadowOpacity: 0.2,

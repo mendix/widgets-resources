@@ -2,11 +2,12 @@ import { NativeModules, Platform } from "react-native";
 import adjustFont                  from "../core/helpers/_functions/adjustfont";
 import { setContrastScale }        from "../core/helpers/_functions/convertcolors";
 import {
+    VairablesContainer,
     VariablesBackground,
     VariablesBadge,
     VariablesBorder,
     VariablesBrand,
-    VariablesButton,
+    VariablesButton, VariablesContainer,
     VariablesContrast,
     VariablesFloatingActionButton,
     VariablesFont,
@@ -22,7 +23,7 @@ import {
     VariablesSlider,
     VariablesSpacing,
     VariablesTabContainer,
-}                                  from "../types/variables";
+} from "../types/variables";
 /*
 
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)
@@ -129,17 +130,33 @@ export const spacing: VariablesSpacing = {
 //
 // Button Styles
 export const button: VariablesButton = {
-    fontSize: font.sizeSmall,
-    fontSizeLarge: font.size,
-    fontWeight: font.weightBold,
-    fontSizeIcon: font.sizeSmall,
-    fontSizeIconLarge: font.size,
-    borderRadius: border.radiusLarge,
-
-    minWidth: 48,
-    minHeight: 48,
-    paddingVertical: spacing.small,
-    paddingHorizontal: spacing.small,
+    // Start default styles
+    container: {
+        rippleColor: contrast.lowest,
+        borderRadius: border.radiusLarge,
+        minWidth: 48,
+        minHeight: 48,
+        paddingVertical: spacing.small,
+        paddingHorizontal: spacing.small,
+    },
+    containerDisabled: {
+        borderColor: border.color,
+        backgroundColor: border.color,
+    },
+    icon: {
+        size: font.sizeSmall,
+    },
+    iconDisabled: {
+        color: font.colorDisabled,
+    },
+    caption: {
+        fontSize: font.sizeSmall,
+        fontWeight: font.weightBold,
+    },
+    captionDisabled: {
+        color: font.colorDisabled,
+    },
+    // End default styles
 
     header: {
         color: contrast.highest,
@@ -186,6 +203,9 @@ export const input: VariablesInput = {
         fontSize: font.sizeSmall,
         textAlign: "left",
     },
+    labelDisabled: {
+        color: font.colorTitle,
+    },
     input: {
         color: font.colorTitle,
         borderColor: contrast.lower,
@@ -204,6 +224,8 @@ export const input: VariablesInput = {
         paddingHorizontal: spacing.small,
     },
     inputDisabled: {
+        color: font.colorDisabled,
+        borderColor: border.color,
         backgroundColor: background.gray,
     },
     inputError: {
@@ -250,6 +272,9 @@ export const image: VariablesImage = {
         large: 56,
         larger: 72,
     },
+    imageDisabled: {
+        opacity: 0.6,
+    },
     icon: 16,
 };
 //
@@ -283,6 +308,13 @@ export const navigation: VariablesNavigation = {
     },
 };
 //
+// Container Styles
+export const container: VariablesContainer = {
+    containerDisabled: {
+        opacity: 0.6,
+    },
+};
+//
 // Tabcontainer Styles
 export const tabContainer: VariablesTabContainer = {
     tabBar: {
@@ -313,6 +345,9 @@ export const tabContainer: VariablesTabContainer = {
 //
 // ListView Styles
 export const listView: VariablesListView = {
+    listItemDisabled: {
+        opacity: 0.6,
+    },
     border: {
         color: border.color,
         width: border.width,
@@ -415,11 +450,11 @@ export const introScreen: VariablesIntroScreen = {
     button: {
         icon: {
             color: font.colorTitle,
-            size: button.fontSizeIcon,
+            size: button.icon.size,
         },
         caption: {
             color: font.colorTitle,
-            fontSize: button.fontSize,
+            fontSize: button.caption.fontSize,
             fontWeight: font.weightBold,
             textTransform: "uppercase",
             paddingHorizontal: spacing.smallest,

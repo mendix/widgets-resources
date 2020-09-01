@@ -1,7 +1,7 @@
-import { Platform }                             from "react-native";
-import { background, brand, contrast, spacing } from "../variables";
-import { TextBox, TextBoxVertical }             from "./textbox";
-import { CheckBoxType }                         from "../../types/widgets";
+import { Platform }                                           from "react-native";
+import { background, border, brand, contrast, font, spacing } from "../variables";
+import { TextBox, TextBoxVertical }                           from "./textbox";
+import { CheckBoxType }                                       from "../../types/widgets";
 /*
 
 DISCLAIMER:
@@ -21,9 +21,17 @@ export const CheckBox: CheckBoxType = {
         paddingVertical: spacing.smallest,
         justifyContent: "center",
     },
+    containerDisabled: {
+        // All ViewStyle properties are allowed
+        ...TextBox.containerDisabled,
+    },
     label: {
         // numberOfLines and all TextStyle properties are allowed
         ...TextBox.label,
+    },
+    labelDisabled: {
+        // All TextStyle properties are allowed
+        ...TextBox.labelDisabled,
     },
     input: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
@@ -31,12 +39,15 @@ export const CheckBox: CheckBoxType = {
         marginRight: Platform.select({android: -3}),
         thumbColorOn: background.primary,
         trackColorOn: brand.primary,
-        thumbColorOff: contrast.low,
-        trackColorOff: contrast.lower,
+        thumbColorOff: "#FFF",
+        trackColorOff: border.color,
     },
     inputDisabled: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
-        opacity: Platform.select({android: 0.5}),
+        thumbColorOn: background.gray,
+        trackColorOn: font.colorDisabled,
+        thumbColorOff: background.gray,
+        trackColorOff: border.color,
     },
     inputError: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed

@@ -1,5 +1,5 @@
-import { contrast }  from "../variables";
-import { ImageType } from "../../types/widgets";
+import { contrast, image } from "../variables";
+import { ImageType }       from "../../types/widgets";
 /*
 
 DISCLAIMER:
@@ -14,14 +14,21 @@ To customize any core styling, copy the part you want to customize to styles/nat
 ========================================================================== */
 export const Image: ImageType = {
     container: {
-        // RippleColor & All ViewStyle properties are allowed
+        // rippleColor & all ViewStyle properties are allowed
         rippleColor: contrast.lowest,
+    },
+    containerDisabled: {
+        // All ViewStyle properties are allowed
     },
     image: {
         // All ImageStyle properties are allowed
         maxWidth: "100%",
         maxHeight: "100%",
         resizeMode: "cover",
+    },
+    imageDisabled: {
+        // All ImageStyle properties are allowed
+        opacity: image.imageDisabled.opacity,
     },
 };
 export const ImageViewer: ImageType = {
@@ -29,10 +36,17 @@ export const ImageViewer: ImageType = {
         // RippleColor & All ViewStyle properties are allowed
         rippleColor: contrast.lowest,
     },
+    containerDisabled: {
+        // All ViewStyle properties are allowed
+    },
     image: {
         // All ImageStyle properties are allowed
         maxWidth: "100%",
         maxHeight: "100%",
         resizeMode: "cover",
+    },
+    imageDisabled: {
+        // All ImageStyle properties are allowed
+        opacity: image.imageDisabled.opacity,
     },
 };

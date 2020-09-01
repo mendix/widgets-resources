@@ -4,11 +4,12 @@ import adjustFont, { height, width }             from "./helpers/_functions/adju
 import { anyColorToRgbString, setContrastScale } from "./helpers/_functions/convertcolors";
 import merge                                     from "./helpers/_functions/mergeobjects";
 import {
+    VairablesContainer,
     VariablesBackground,
     VariablesBadge,
     VariablesBorder,
     VariablesBrand,
-    VariablesButton,
+    VariablesButton, VariablesContainer,
     VariablesContrast,
     VariablesFloatingActionButton,
     VariablesFont,
@@ -25,7 +26,7 @@ import {
     VariablesSlider,
     VariablesSpacing,
     VariablesTabContainer,
-}                                                from "../types/variables";
+} from "../types/variables";
 //
 //
 //== Global variables
@@ -128,17 +129,31 @@ spacing = merge(spacing, custom.spacing || {} as any);
 //
 // Button Styles
 let button: VariablesButton = {
-    fontSize: font.sizeSmall,
-    fontSizeLarge: font.size,
-    fontWeight: font.weightBold,
-    fontSizeIcon: font.sizeSmall,
-    fontSizeIconLarge: font.size,
-    borderRadius: border.radiusSmall,
-
-    minWidth: 48,
-    minHeight: 48,
-    paddingVertical: spacing.smaller,
-    paddingHorizontal: spacing.regular,
+    container: {
+        rippleColor: contrast.lowest,
+        borderRadius: border.radiusLarge,
+        minWidth: 48,
+        minHeight: 48,
+        paddingVertical: spacing.small,
+        paddingHorizontal: spacing.small,
+    },
+    containerDisabled: {
+        borderColor: border.color,
+        backgroundColor: border.color,
+    },
+    icon: {
+        size: font.sizeSmall,
+    },
+    iconDisabled: {
+        color: font.colorDisabled,
+    },
+    caption: {
+        fontSize: font.sizeSmall,
+        fontWeight: font.weightBold,
+    },
+    captionDisabled: {
+        color: font.colorDisabled,
+    },
 
     header: {
         color: contrast.highest,
@@ -186,6 +201,9 @@ let input: VariablesInput = {
         fontSize: font.size,
         textAlign: "left",
     },
+    labelDisabled: {
+        color: font.colorTitle,
+    },
     input: {
         color: font.colorTitle,
         borderColor: contrast.lower,
@@ -204,7 +222,9 @@ let input: VariablesInput = {
         paddingHorizontal: spacing.small,
     },
     inputDisabled: {
-        backgroundColor: contrast.lowest,
+        color: font.colorDisabled,
+        borderColor: border.color,
+        backgroundColor: background.gray,
     },
     inputError: {
         color: brand.danger,
@@ -252,6 +272,9 @@ let image: VariablesImage = {
         large: 56,
         larger: 72,
     },
+    imageDisabled: {
+        opacity: 0.6,
+    },
     icon: 24,
 };
 image = merge(image, custom.image || {} as any);
@@ -287,6 +310,14 @@ let navigation: VariablesNavigation = {
 };
 navigation = merge(navigation, custom.navigation || {} as any);
 //
+// Container Styles
+let container: VariablesContainer = {
+    containerDisabled: {
+        opacity: 0.6,
+    },
+};
+container = merge(container, custom.container || {} as any);
+//
 // Tabcontainer Styles
 let tabContainer: VariablesTabContainer = {
     tabBar: {
@@ -317,6 +348,9 @@ tabContainer = merge(tabContainer, custom.tabContainer || {} as any);
 //
 // Listview Styles
 let listView: VariablesListView = {
+    listItemDisabled: {
+        opacity: 0.6,
+    },
     border: {
         color: border.color,
         width: border.width,
@@ -422,11 +456,11 @@ let introScreen: VariablesIntroScreen = {
     button: {
         icon: {
             color: font.colorTitle,
-            size: button.fontSizeIcon,
+            size: button.icon.size,
         },
         caption: {
             color: font.colorTitle,
-            fontSize: button.fontSize,
+            fontSize: button.caption.fontSize,
             fontWeight: font.weightBold,
             textTransform: "uppercase",
             paddingHorizontal: spacing.smallest,
@@ -548,6 +582,7 @@ export {
     listView,
     navigation,
     spacing,
+    container,
     tabContainer,
 
     badge,

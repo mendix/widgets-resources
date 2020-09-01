@@ -160,7 +160,7 @@ export const btnIconPrimaryBackground: ActionButtonType = {
         height: "100%",
         alignItems: "center",
         justifyContent: "center",
-        size: button.fontSizeIconLarge,
+        size: font.sizeLarge,
         color: button.primary.color,
     },
 };
@@ -178,11 +178,11 @@ export const btnAsText: ActionButtonType = {
         // paddingHorizontal: 0,
     },
     icon: {
-        size: button.fontSizeIcon,
+        size: button.icon.size,
     },
     caption: {
         fontWeight: font.weightSemiBold,
-        fontSize: button.fontSize,
+        fontSize: button.caption.fontSize,
     },
 };
 export const btnAsTextPrimary: ActionButtonType = merge(btnAsText, {
@@ -206,9 +206,9 @@ export const btnAsTextSecondary: ActionButtonType = merge(btnAsText, {
 // Button sizes
 export const btnLarge: ActionButtonType = {
     icon: {
-        size: button.fontSizeIconLarge,
+        size: font.size,
     },
     caption: {
-        fontSize: button.fontSizeLarge,
+        fontSize: font.size,
     },
 };
