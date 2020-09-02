@@ -12,25 +12,17 @@ export interface PaginationProps {
     setPaginationIndex?: Dispatch<SetStateAction<number>>;
 }
 
-export function Pagination({
-    gotoPage,
-    previousPage,
-    page,
-    nextPage,
-    canNextPage,
-    canPreviousPage,
-    pageSize,
-    numberOfItems,
-    setPaginationIndex
-}: PaginationProps): ReactElement {
-    const numberOfPages = numberOfItems !== undefined ? Math.ceil(numberOfItems / pageSize) : undefined;
+export function Pagination(props: PaginationProps): ReactElement {
+    const numberOfPages =
+        props.numberOfItems !== undefined ? Math.ceil(props.numberOfItems / props.pageSize) : undefined;
     const lastPage = numberOfPages !== undefined ? numberOfPages - 1 : 0;
     const hasLastPage = numberOfPages !== undefined;
-    const initialItem = page * pageSize + 1;
-    const lastItem = canNextPage || !numberOfItems ? (page + 1) * pageSize : numberOfItems;
+    const initialItem = props.page * props.pageSize + 1;
+    const lastItem =
+        props.canNextPage || !props.numberOfItems ? (props.page + 1) * props.pageSize : props.numberOfItems;
     const setPageIndex = (page: number): void => {
-        if (setPaginationIndex) {
-            setPaginationIndex(page);
+        if (props.setPaginationIndex) {
+            props.setPaginationIndex(page);
         }
     };
     return (
@@ -38,34 +30,34 @@ export function Pagination({
             <button
                 className="btn"
                 onClick={() => {
-                    gotoPage(0);
+                    props.gotoPage(0);
                     setPageIndex(0);
                 }}
-                disabled={page === 0}
+                disabled={props.page === 0}
             >
                 <span className="glyphicon glyphicon-step-backward" />
             </button>
             <button
                 className="btn"
                 onClick={() => {
-                    previousPage();
-                    setPageIndex(page - 1);
+                    props.previousPage();
+                    setPageIndex(props.page - 1);
                 }}
-                disabled={!canPreviousPage}
+                disabled={!props.canPreviousPage}
             >
                 <span className="glyphicon glyphicon-backward" />
             </button>
             <div className="paging-status">
                 {initialItem} to {lastItem}{" "}
-                {hasLastPage ? `of ${numberOfItems ?? (numberOfPages ?? 1) * pageSize}` : ""}
+                {hasLastPage ? `of ${props.numberOfItems ?? (numberOfPages ?? 1) * props.pageSize}` : ""}
             </div>
             <button
                 className="btn"
                 onClick={() => {
-                    nextPage();
-                    setPageIndex(page + 1);
+                    props.nextPage();
+                    setPageIndex(props.page + 1);
                 }}
-                disabled={!canNextPage}
+                disabled={!props.canNextPage}
             >
                 <span className="glyphicon glyphicon-forward" />
             </button>
@@ -73,10 +65,10 @@ export function Pagination({
                 <button
                     className="btn"
                     onClick={() => {
-                        gotoPage(lastPage);
+                        props.gotoPage(lastPage);
                         setPageIndex(lastPage);
                     }}
-                    disabled={page === lastPage}
+                    disabled={props.page === lastPage}
                 >
                     <span className="glyphicon glyphicon-step-forward" />
                 </button>
