@@ -70,12 +70,12 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
                             ? e => {
                                   /**
                                    * Always analyse previous values to predict the next
-                                   * 1 - isSortedDesc === undefined && !props.column.isSorted turns to asc
+                                   * 1 - !props.column.isSorted turns to asc
                                    * 2 - isSortedDesc === false && props.column.isSorted turns to desc
                                    * 3 - isSortedDesc === true && props.column.isSorted turns to unsorted
                                    * If multisort is allowed in the future this should be changed to append instead of just return a new array
                                    */
-                                  if (!props.column.isSorted && props.column.isSortedDesc === undefined) {
+                                  if (!props.column.isSorted) {
                                       props.setSortBy([{ id: props.column.id, desc: false }]);
                                   } else if (props.column.isSorted && props.column.isSortedDesc === false) {
                                       props.setSortBy([{ id: props.column.id, desc: true }]);
