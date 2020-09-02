@@ -10,11 +10,7 @@ exports[`Header renders the structure correctly 1`] = `
       "flex": "1 1 0px",
     }
   }
-  title={
-    <span>
-      Test
-    </span>
-  }
+  title="Test"
 >
   <div
     className="column-container"
@@ -22,9 +18,175 @@ exports[`Header renders the structure correctly 1`] = `
     <div
       className="column-header"
     >
-      <span>
-        Test
-      </span>
+      Test
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Header renders the structure correctly when draggable 1`] = `
+<div
+  className="th"
+  role="Test"
+  style={
+    Object {
+      "cursor": "unset",
+      "flex": "1 1 0px",
+    }
+  }
+  title="Test"
+>
+  <div
+    className="column-container"
+    draggable={true}
+    onDragEnter={[Function]}
+    onDragOver={[Function]}
+    onDragStart={[Function]}
+    onDrop={[Function]}
+  >
+    <div
+      className="column-header"
+    >
+      Test
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Header renders the structure correctly when filterable 1`] = `
+<div
+  className="th"
+  role="Test"
+  style={
+    Object {
+      "cursor": "unset",
+      "flex": "1 1 0px",
+    }
+  }
+  title="Test"
+>
+  <div
+    className="column-container"
+  >
+    <div
+      className="column-header"
+    >
+      Test
+    </div>
+    Test
+  </div>
+</div>
+`;
+
+exports[`Header renders the structure correctly when filterable and with custom filter 1`] = `
+<div
+  className="th"
+  role="Test"
+  style={
+    Object {
+      "cursor": "unset",
+      "flex": "1 1 0px",
+    }
+  }
+  title="Test"
+>
+  <div
+    className="column-container"
+  >
+    <div
+      className="column-header"
+    >
+      Test
+    </div>
+    <div>
+      <label>
+        Date picker filter
+      </label>
+      <input
+        type="date"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Header renders the structure correctly when resizable 1`] = `
+<div
+  className="th"
+  role="Test"
+  style={
+    Object {
+      "cursor": "unset",
+    }
+  }
+  title="Test"
+>
+  <div
+    className="column-container"
+  >
+    <div
+      className="column-header"
+    >
+      Test
+    </div>
+  </div>
+  <div
+    className="column-resizer "
+    resizableProps=""
+  />
+</div>
+`;
+
+exports[`Header renders the structure correctly when sortable 1`] = `
+<div
+  className="th"
+  role="Test"
+  style={
+    Object {
+      "flex": "1 1 0px",
+    }
+  }
+  title="Test"
+>
+  <div
+    className="column-container"
+  >
+    <div
+      className="column-header clickable"
+      onClick={[Function]}
+    >
+      Test
+      <FontAwesomeIcon
+        border={false}
+        className=""
+        fixedWidth={false}
+        flip={null}
+        icon={
+          Object {
+            "icon": Array [
+              256,
+              512,
+              Array [],
+              "f338",
+              "M214.059 377.941H168V134.059h46.059c21.382 0 32.09-25.851 16.971-40.971L144.971 7.029c-9.373-9.373-24.568-9.373-33.941 0L24.971 93.088c-15.119 15.119-4.411 40.971 16.971 40.971H88v243.882H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.568 9.373 33.941 0l86.059-86.059c15.12-15.119 4.412-40.971-16.97-40.971z",
+            ],
+            "iconName": "arrows-alt-v",
+            "prefix": "fas",
+          }
+        }
+        inverse={false}
+        listItem={false}
+        mask={null}
+        pull={null}
+        pulse={false}
+        rotation={null}
+        size={null}
+        spin={false}
+        swapOpacity={false}
+        symbol={false}
+        title=""
+        transform={null}
+      />
     </div>
   </div>
 </div>

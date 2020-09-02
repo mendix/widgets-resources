@@ -77,7 +77,7 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
                                    */
                                   if (!props.column.isSorted) {
                                       props.setSortBy([{ id: props.column.id, desc: false }]);
-                                  } else if (props.column.isSorted && props.column.isSortedDesc === false) {
+                                  } else if (props.column.isSorted && !props.column.isSortedDesc) {
                                       props.setSortBy([{ id: props.column.id, desc: true }]);
                                   } else {
                                       props.setSortBy([]);
