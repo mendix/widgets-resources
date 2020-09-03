@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.linechart.LineChart" supportedPlatform="Native" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>Line chart</name>
+    <description />
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Data source">
+                <property key="series" type="object" isList="true" required="false">
+                    <caption>Series</caption>
+                    <description></description>
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="seriesType" type="enumeration" defaultValue="static" required="true">
+                                <caption>Type</caption>
+                                <description/>
+                                <enumerationValues>
+                                    <enumerationValue key="static">Static</enumerationValue>
+                                    <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                        </propertyGroup>
+
+                    </properties>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
