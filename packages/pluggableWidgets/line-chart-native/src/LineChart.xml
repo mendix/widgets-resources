@@ -6,12 +6,12 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
-                <property key="series" type="object" isList="true" required="false">
+                <property key="series" type="object" isList="true" required="true">
                     <caption>Series</caption>
                     <description></description>
                     <properties>
                         <propertyGroup caption="General">
-                            <property key="seriesType" type="enumeration" defaultValue="static" required="true">
+                            <property key="type" type="enumeration" defaultValue="static" required="true">
                                 <caption>Type</caption>
                                 <description/>
                                 <enumerationValues>
@@ -19,6 +19,40 @@
                                     <enumerationValue key="dynamic">Dynamic</enumerationValue>
                                 </enumerationValues>
                             </property>
+                            <property key="dataSource" type="datasource" required="true" isList="true">
+                                <caption>Data source</caption>
+                                <description>Data points for static series and series for dynamic series</description>
+                            </property>
+                            <property key="name" type="textTemplate" required="true" multiline="false">
+                                <caption>Series name</caption>
+                                <description />
+                            </property>
+                            <property key="xValue" type="attribute" required="true" dataSource="dataSource">
+                                <caption>X value</caption>
+                                <description />
+                                <attributeTypes>
+                                    <!-- <attributeType name="DateTime" /> -->
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <!-- <attributeType name="AutoNumber" /> -->
+                                </attributeTypes>
+                            </property>
+                            <property key="yValue" type="attribute" required="true" dataSource="dataSource">
+                                <caption>Y value</caption>
+                                <description></description>
+                                <attributeTypes>
+                                    <!-- <attributeType name="Boolean" />
+                                    <attributeType name="DateTime" /> -->
+                                    <attributeType name="Decimal" />
+                                    <!-- <attributeType name="Enum" /> -->
+                                    <!-- <attributeType name="HashString" /> -->
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <!-- <attributeType name="AutoNumber" /> -->
+                                </attributeTypes>
+                            </property>
+
                         </propertyGroup>
 
                     </properties>

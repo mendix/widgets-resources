@@ -3,14 +3,24 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-export type SeriesTypeEnum = "static" | "dynamic";
+import { DynamicValue, ListValue, ListAttributeValue } from "mendix";
+
+export type TypeEnum = "static" | "dynamic";
 
 export interface SeriesType {
-    seriesType: SeriesTypeEnum;
+    type: TypeEnum;
+    dataSource: ListValue;
+    name: DynamicValue<string>;
+    xValue: ListAttributeValue<BigJs.Big>;
+    yValue: ListAttributeValue<BigJs.Big>;
 }
 
 export interface SeriesPreviewType {
-    seriesType: SeriesTypeEnum;
+    type: TypeEnum;
+    dataSource: {} | null;
+    name: string;
+    xValue: string;
+    yValue: string;
 }
 
 export interface LineChartProps<Style> {
